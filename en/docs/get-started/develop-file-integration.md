@@ -1,0 +1,70 @@
+---
+title: "Develop File Integration"
+description: "Guide to creating integrations that process files from local or remote folders automatically."
+---
+
+# Develop File Integration
+
+This section shows you how to create a file integration using WSO2 Integrator: BI.
+The integration listens to events in a directory and triggers when file-related events occur.
+
+## Step 1: Create a new integration project
+
+1. Click the **BI** icon on the sidebar.
+2. Click the **Create New Integration** button.
+3. Enter the project name as `LocalFilesIntegration`.
+4. Select Project Directory and click the **Select Location** button.
+5. Click the **Create New Integration** button to create the integration project.
+
+    <a href="{{base_path}}/assets/img/get-started/develop-file-integration/1-create-integration.gif">
+    <img src="{{base_path}}/assets/img/get-started/develop-file-integration/1-create-integration.gif" alt="Create Integration Project" width="70%"></a>
+
+
+## Step 2: Create a Local Files Integration
+
+1. In the design view, click the **Add Artifact** button.
+2. Select **Local Files** under the **File Integration** category.
+3. Enter the path to the directory you want to monitor. For example, `/user/home/Downloads`.
+
+    ???+ Tip "Use configurable variables"
+        Use a configurable variable for the path (e.g., `monitorPath`) so it can be changed at deployment time without code changes. See [Managing Configurations](../deploy/managing-configurations.md) for more details.
+
+4. Click the **Create** button to create the Local Files Integration.
+
+    <a href="{{base_path}}/assets/img/get-started/develop-file-integration/2-add-local-files-integration.gif">
+    <img src="{{base_path}}/assets/img/get-started/develop-file-integration/2-add-local-files-integration.gif" alt="Local Files Integration" width="70%"></a>
+
+## Step 3: Configure file event resources
+
+1. Click the **Add Handler** button and select the **onCreate** handler.
+
+    <a href="{{base_path}}/assets/img/get-started/develop-file-integration/3-add-handler.gif">
+    <img src="{{base_path}}/assets/img/get-started/develop-file-integration/3-add-handler.gif" alt="onCreate Function" width="70%"></a>
+
+2. Click the **onCreate** function to navigate to the function implementation designer view.
+3. Click **+** and select **Log Info** from the node panel under the **Logging** category.
+4. In the **Msg** field, type `File created ` and use the **Helper Panel** to select **Inputs** -> **event** -> **name**.
+5. Click the **Save** button to add the log action to the function.
+
+    <a href="{{base_path}}/assets/img/get-started/develop-file-integration/4-implement-service.gif">
+    <img src="{{base_path}}/assets/img/get-started/develop-file-integration/4-implement-service.gif" alt="onCreate Function" width="70%"></a>
+
+6. Repeat the above steps to add the **onDelete** and **onModify** functions to the service.
+7. For the **onDelete** function, type `File deleted ` in the **Msg** field and use the **Helper Panel** to select **Inputs** -> **event** -> **name**.
+8. For the **onModify** function, type `File modified ` in the **Msg** field and use the **Helper Panel** to select **Inputs** -> **event** -> **name**.
+9. The final service will look like this:
+
+    <a href="{{base_path}}/assets/img/get-started/develop-file-integration/5-add-resource.png">
+    <img src="{{base_path}}/assets/img/get-started/develop-file-integration/5-add-resource.png" alt="Final Service" width="70%"></a>
+
+## Step 4: Run the integration
+
+1. Click the **Run** button in the top-right corner to run the integration.
+2. The integration will start listening to the events in the directory specified in step 2.
+3. Create a new file in the directory to trigger the **onCreate** event.
+4. Modify the file to trigger the **onModify** event.
+5. Delete the file to trigger the **onDelete** event.
+6. The log messages will be displayed in the console.
+
+    <a href="{{base_path}}/assets/img/get-started/develop-file-integration/6-run.png">
+    <img src="{{base_path}}/assets/img/get-started/develop-file-integration/6-run.png" alt="Run Integration" width="70%"></a>
