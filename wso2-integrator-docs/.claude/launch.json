@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "docs-dev",
+      "runtimeExecutable": "/Users/rosens/.nvm/versions/node/v20.20.1/bin/npx",
+      "runtimeArgs": ["docusaurus", "start", "--port", "3333"],
+      "port": 3333
+    }
+  ]
+}
