@@ -4,6 +4,11 @@ title: "Quick Start: Build a Data Service"
 description: Create a CRUD data service using bal persist in under 10 minutes.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Build a data service
 
 In this quick start, you'll create a data service that exposes CRUD operations over a database using `bal persist` — Ballerina's built-in data persistence layer.
@@ -15,19 +20,13 @@ In this quick start, you'll create a data service that exposes CRUD operations o
 
 ## Architecture
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Service as Employee Service/employees:8080
-    participant DB as Database Database
-
-    Client->>Service: GET /employees/1
-    activate Service
-    Service->>DB: Query Employee (ID: 1)
-    DB-->>Service: Employee Record
-    Service-->>Client: JSON Response
-    deactivate Service
-```
+<ThemedImage
+  alt="Architecture Diagram"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-data-service/data-service-light.svg'),
+    dark: useBaseUrl('/img/get-started/quick-start-data-service/data-service-dark.svg'),
+  }}
+/>
 
 ## Step 1: Create a new project
 
@@ -73,6 +72,9 @@ This generates type-safe client code for CRUD operations against your database.
 
 Edit `main.bal`:
 
+<Tabs>
+<TabItem value="code" label="Source View" default>
+
 ```ballerina
 import ballerina/http;
 import ballerina/persist;
@@ -109,6 +111,20 @@ service /employees on new http:Listener(port) {
     }
 }
 ```
+
+</TabItem>
+<TabItem value="ui" label="Design View">
+
+<ThemedImage
+  alt="Design View"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-data-service/design-view-light.png'),
+    dark: useBaseUrl('/img/get-started/quick-start-data-service/design-view-dark.png'),
+  }}
+/>
+
+</TabItem>
+</Tabs>
 
 ## Step 6: Configure the database
 

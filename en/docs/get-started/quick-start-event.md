@@ -4,6 +4,11 @@ title: "Quick Start: Event Integration"
 description: Build an event-driven integration that reacts to messages from a message broker.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Quick start: Event integration
 
 **Time:** Under 10 minutes | **What you'll build:** An event-driven integration that consumes messages from RabbitMQ and processes them.
@@ -17,17 +22,13 @@ Event integrations are ideal for reactive workflows triggered by messages from K
 
 ## Architecture
 
-```mermaid
-sequenceDiagram
-    participant RMQ as RabbitMQ (Queue: Orders)
-    participant Service as orderListener Service
-    participant Output as Logger
-
-    RMQ->>Service: onMessage(rabbitmq:AnydataMessage)
-    activate Service
-    Service->>Output: printInfo("Received order")
-    deactivate Service
-```
+<ThemedImage
+  alt="Architecture Diagram"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-event/event-light.svg'),
+    dark: useBaseUrl('/img/get-started/quick-start-event/event-dark.svg'),
+  }}
+/>
 
 ## Step 1: Create the project
 
@@ -49,6 +50,9 @@ sequenceDiagram
 
 Add an `onMessage` handler to process incoming messages:
 
+<Tabs>
+<TabItem value="code" label="Source View" default>
+
 ```ballerina
 import ballerinax/rabbitmq;
 import ballerina/log;
@@ -65,6 +69,20 @@ service on orderListener {
     }
 }
 ```
+
+</TabItem>
+<TabItem value="ui" label="Design View">
+
+<ThemedImage
+  alt="Design View"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-event/design-view-light.png'),
+    dark: useBaseUrl('/img/get-started/quick-start-event/design-view-dark.png'),
+  }}
+/>
+
+</TabItem>
+</Tabs>
 
 ## Step 4: Run and test
 

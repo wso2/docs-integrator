@@ -4,6 +4,11 @@ title: "Quick Start: Build an AI Agent"
 description: Create an intelligent AI agent powered by LLMs with tool calling.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Quick start: Build an AI agent
 
 **Time:** Under 15 minutes | **What you'll build:** An AI agent that connects to an LLM, uses tools, and responds to queries through a GraphQL endpoint.
@@ -15,17 +20,13 @@ description: Create an intelligent AI agent powered by LLMs with tool calling.
 
 ## Architecture
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Service as GraphQL Service/localhost:8080
-    participant LLM as LLM OpenAI
-
-    Client->>Service: mutation Task(query)
-    Service->>LLM: prompt + tools
-    LLM-->>Service: response
-    Service-->>Client: { data: { task: "..." } }
-```
+<ThemedImage
+  alt="Architecture Diagram"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-ai-agent/ai-agent-light.svg'),
+    dark: useBaseUrl('/img/get-started/quick-start-ai-agent/ai-agent-dark.svg'),
+  }}
+/>
 
 ## Step 1: Create the project
 
@@ -44,7 +45,8 @@ sequenceDiagram
 2. Configure the model provider (WSO2 default or OpenAI).
 3. Set up agent memory and tools.
 
-In code:
+<Tabs>
+<TabItem value="code" label="Source View" default>
 
 ```ballerina
 import ballerina/graphql;
@@ -70,6 +72,20 @@ service /graphql on new graphql:Listener(8080) {
     }
 }
 ```
+
+</TabItem>
+<TabItem value="ui" label="Design View">
+
+<ThemedImage
+  alt="Design View"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-ai-agent/design-view-light.png'),
+    dark: useBaseUrl('/img/get-started/quick-start-ai-agent/design-view-dark.png'),
+  }}
+/>
+
+</TabItem>
+</Tabs>
 
 ## Step 4: Configure the API key
 

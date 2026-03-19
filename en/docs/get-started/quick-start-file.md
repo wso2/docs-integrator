@@ -4,6 +4,11 @@ title: "Quick Start: File Integration"
 description: Process files from FTP, SFTP, or local directories.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Quick start: File integration
 
 **Time:** Under 10 minutes | **What you'll build:** A file integration that watches a directory for new files, processes them, and writes the output.
@@ -16,19 +21,13 @@ File integrations are ideal for batch uploads, scheduled file processing, and ET
 
 ## Architecture
 
-```mermaid
-sequenceDiagram
-    participant Source as Input Directory (/data/inbox)
-    participant Service as dirListener Service
-    participant Target as Output Directory (/data/processed/)
-
-    Source->>Service: onCreate(file:FileEvent)
-    activate Service
-    Service->>Source: io:fileReadString()
-    Source-->>Service: CSV content
-    Service->>Target: io:fileWriteString(content)
-    deactivate Service
-```
+<ThemedImage
+  alt="Architecture Diagram"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-file/file-light.svg'),
+    dark: useBaseUrl('/img/get-started/quick-start-file/file-dark.svg'),
+  }}
+/>
 
 ## Step 1: Create the project
 
@@ -44,6 +43,9 @@ sequenceDiagram
 ## Step 3: Process incoming files
 
 Add logic to read and process files when they arrive:
+
+<Tabs>
+<TabItem value="code" label="Source View" default>
 
 ```ballerina
 import ballerina/file;
@@ -69,6 +71,20 @@ service on dirListener {
     }
 }
 ```
+
+</TabItem>
+<TabItem value="ui" label="Design View">
+
+<ThemedImage
+  alt="Design View"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-file/design-view-light.png'),
+    dark: useBaseUrl('/img/get-started/quick-start-file/design-view-dark.png'),
+  }}
+/>
+
+</TabItem>
+</Tabs>
 
 ## Step 4: Run and test
 

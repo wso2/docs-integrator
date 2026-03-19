@@ -4,6 +4,11 @@ title: "Quick Start: Build an Automation"
 description: Create a scheduled automation that runs tasks on a timer.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Quick start: Build an automation
 
 **Time:** Under 10 minutes | **What you'll build:** A scheduled automation that runs tasks on a timer or manual trigger.
@@ -16,17 +21,13 @@ Automations are ideal for data synchronization, report generation, and routine m
 
 ## Architecture
 
-```mermaid
-sequenceDiagram
-    participant Timer as Timer (task:Listener)
-    participant Service as Automation Service
-    participant Output as Terminal (io)
-
-    Timer->>Service: onTrigger()
-    activate Service
-    Service->>Output: println("Hello World")
-    deactivate Service
-```
+<ThemedImage
+  alt="Architecture Diagram"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-automation/automation-light.svg'),
+    dark: useBaseUrl('/img/get-started/quick-start-automation/automation-dark.svg'),
+  }}
+/>
 
 ## Step 1: Create the project
 
@@ -62,6 +63,9 @@ public function main() {
 
 For production use, configure a cron schedule to trigger the automation periodically:
 
+<Tabs>
+<TabItem value="code" label="Source View" default>
+
 ```ballerina
 import ballerina/task;
 
@@ -75,6 +79,20 @@ service on timer {
     }
 }
 ```
+
+</TabItem>
+<TabItem value="ui" label="Design View">
+
+<ThemedImage
+  alt="Design View"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-automation/design-view-light.png'),
+    dark: useBaseUrl('/img/get-started/quick-start-automation/design-view-dark.png'),
+  }}
+/>
+
+</TabItem>
+</Tabs>
 
 ## What's next
 

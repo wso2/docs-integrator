@@ -4,6 +4,11 @@ title: "Quick Start: Integration as API"
 description: Build an HTTP service that calls an external API and returns a greeting.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Quick start: Integration as API
 
 **Time:** Under 10 minutes | **What you'll build:** An HTTP service that receives requests, calls an external API, and returns the response.
@@ -14,17 +19,13 @@ description: Build an HTTP service that calls an external API and returns a gree
 
 ## Architecture
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Service as Your Service/hello:9090
-    participant API as External API/apis.wso2.com
-
-    Client->>Service: GET /greeting
-    Service->>API: GET /mi-qsg/v1.0
-    API-->>Service: {"message":"Hello"}
-    Service-->>Client: {"message":"Hello!!!"}
-```
+<ThemedImage
+  alt="Architecture Diagram"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-api/api-light.svg'),
+    dark: useBaseUrl('/img/get-started/quick-start-api/api-dark.svg'),
+  }}
+/>
 
 ## Step 1: Create the project
 
@@ -44,7 +45,8 @@ sequenceDiagram
 1. Add an HTTP connection to `https://apis.wso2.com/zvdz/mi-qsg/v1.0`.
 2. In the GET resource, invoke the external API and return its response.
 
-In code, this looks like:
+<Tabs>
+<TabItem value="code" label="Source View" default>
 
 ```ballerina
 import ballerina/http;
@@ -58,6 +60,20 @@ service /hello on new http:Listener(9090) {
     }
 }
 ```
+
+</TabItem>
+<TabItem value="ui" label="Design View">
+
+<ThemedImage
+  alt="Design View"
+  sources={{
+    light: useBaseUrl('/img/get-started/quick-start-api/design-view-light.png'),
+    dark: useBaseUrl('/img/get-started/quick-start-api/design-view-dark.png'),
+  }}
+/>
+
+</TabItem>
+</Tabs>
 
 ## Step 4: Run and test
 
