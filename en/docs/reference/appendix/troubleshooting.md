@@ -364,6 +364,6 @@ bal clean && bal build
 ## See Also
 
 - [System Requirements](system-requirements.md) -- Platform and version requirements
-- [Installation Guide](/get-started/install.md) -- Installation instructions
-- [Error Codes Reference](/reference/error-codes.md) -- All error codes with resolution steps
-- [FAQ](/reference/faq.md) -- Frequently asked questions
+- [Installation Guide](/docs/get-started/install) -- Installation instructions
+- [Error Codes Reference](/docs/reference/error-codes) -- All error codes with resolution steps
+- [FAQ](/docs/reference/faq) -- Frequently asked questions

@@ -336,8 +336,8 @@ Common format-to-format transformation patterns supported in WSO2 Integrator:
 
 ## See Also
 
-- [Data Transformation - JSON](/develop/transform/json.md) -- JSON transformation guide
-- [Data Transformation - XML](/develop/transform/xml.md) -- XML transformation guide
-- [Data Transformation - CSV](/develop/transform/csv-flat-file.md) -- CSV processing guide
-- [Data Transformation - EDI](/develop/transform/edi.md) -- EDI processing guide
+- [Data Transformation - JSON](/docs/develop/transform/json) -- JSON transformation guide
+- [Data Transformation - XML](/docs/develop/transform/xml) -- XML transformation guide
+- [Data Transformation - CSV](/docs/develop/transform/csv-flat-file) -- CSV processing guide
+- [Data Transformation - EDI](/docs/develop/transform/edi) -- EDI processing guide
 - [Ballerina API Documentation](api/ballerina-api-docs.md) -- Full API docs for all modules
