@@ -14,11 +14,11 @@ A workspace that contains your integration code, dependencies, configuration, an
 
 ## Integration
 
-A reusable piece of business logic that connects systems, transforms data, or orchestrates workflows. Integrations are the core building blocks in WSO2 Integrator—you compose them from [Services](#services), [Automations](#automations), [Event handlers](#event-handlers), and more.
+A reusable piece of business logic that connects systems, transforms data, or orchestrates workflows. Integrations are the core building blocks in WSO2 Integrator—you compose them from [Services](#services-and-listeners), [Automations](#automations), [Event integrations](#event-integrations), and more.
 
 ## Library
 
-A shareable collection of reusable components, functions, and connectors packaged for distribution. Libraries let you build once and use across multiple projects or share with your team. For more information, see [Organize code](/docs/develop/organize-code/).
+A shareable collection of reusable components, functions, and connectors packaged for distribution. Libraries let you build once and use across multiple projects or share with your team. For more information, see [Organize code](/docs/develop/organize-code/overview).
 
 ## Services and listeners
 

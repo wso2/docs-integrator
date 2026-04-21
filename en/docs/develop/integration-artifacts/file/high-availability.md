@@ -185,4 +185,4 @@ If the coordination database is temporarily unavailable:
 
 - [FTP / SFTP](ftp-sftp.md) — service configuration, authentication, and file handlers
 - [Resiliency](resiliency.md) — automatic retry and circuit breaker for FTP client operations
-- [Scaling and high availability](../../../../deploy-operate/deploy/scaling-ha.md) — deployment-level scaling and HA strategies
+- [Scaling and high availability](../../../deploy-operate/deploy/scaling-ha.md) — deployment-level scaling and HA strategies
