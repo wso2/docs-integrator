@@ -49,4 +49,4 @@ Check the issue tracker for open issues that interest you. We look forward to re
 
 - [Setup guide](setup-guide.md) — Create an Intercom app and obtain your access token
 - [Action reference](action-reference.md) — Browse all available operations and sample code
-- [Connectors overview](../../overview.md) — Explore other available connectors
+- [Connectors overview](../../../overview.md) — Explore other available connectors

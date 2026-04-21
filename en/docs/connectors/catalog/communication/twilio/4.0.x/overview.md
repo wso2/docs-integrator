@@ -31,7 +31,7 @@ See the **[Action Reference](action-reference.md)** for the full list of operati
 
 ## Documentation
 
-* **[Setup Guide](setup-guide.md)**: This guide walks you through obtaining the Twilio credentials required to use the Ballerina Twilio connector.
+* **[Setup Guide](../setup-guide.md)**: This guide walks you through obtaining the Twilio credentials required to use the Ballerina Twilio connector.
 
 * **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
 

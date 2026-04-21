@@ -211,4 +211,4 @@ The `onMessage` handler receives an `asb:Message` parameter with the message con
 - [RabbitMQ](rabbitmq.md) — consume messages from RabbitMQ queues
 - [Kafka](kafka.md) — consume messages from Apache Kafka topics
 - [Connections](../supporting/connections.md) — reuse Azure Service Bus connection strings across services
-- [Azure Service Bus connector reference](../../../connectors/catalog/messaging/azure-service-bus/overview.md) — full connector API reference
+- [Azure Service Bus connector reference](../../../connectors/catalog/messaging/asb/overview.md) — full connector API reference
