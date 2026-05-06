@@ -11,9 +11,24 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
 :::info Prerequisites
 
 - [WSO2 Integrator installed](install.md)
-- A project to work in. If you do not have one, select **Create New Integration** when WSO2 Integrator opens.
 
-## Step 1: Add an HTTP service
+## Step 1: Create the integration
+
+1. Open WSO2 Integrator.
+2. Select the **Create New Integration** card.
+3. Set **Integration Name** to `HelloWorldAPI`.
+4. Set **Project Name** to `integration-as-api`.
+5. Select **Create**.
+
+<ThemedImage
+    alt="Create new integration form with Integration Name set to HelloWorldAPI and Project Name set to integration-as-api"
+    sources={{
+        light: useBaseUrl('/img/get-started/build-api-integration/create-project.png'),
+        dark: useBaseUrl('/img/get-started/build-api-integration/create-project.png'),
+    }}
+/>
+
+## Step 2: Add an HTTP service
 
 1. Select your integration from the project panel.
 2. In the design view, select **Add Artifact**.
@@ -30,7 +45,7 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
     }}
 />
 
-## Step 2: Add a resource
+## Step 3: Add a resource
 
 1. In the HTTP service design view, select **+ Add Resource**.
 2. Select **GET**.
@@ -45,7 +60,7 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
     }}
 />
 
-## Step 3: Connect to an external API
+## Step 4: Connect to an external API
 
 1. Select **+** inside the resource flow.
 2. Select **Add Connection**.
@@ -62,7 +77,7 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
     }}
 />
 
-## Step 4: Call the external API
+## Step 5: Call the external API
 
 1. Select **+** inside the resource flow.
 2. Select **externalApi**.
@@ -80,7 +95,7 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
     }}
 />
 
-## Step 5: Return the response
+## Step 6: Return the response
 
 1. Select **+** inside the resource flow.
 2. Select **Return**.
@@ -95,7 +110,7 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
     }}
 />
 
-## Step 6: Run and test
+## Step 7: Run and test
 
 1. Select **Run**.
 2. Select **Test** in the confirmation dialog.
