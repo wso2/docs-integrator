@@ -20,7 +20,7 @@ Combine multiple input fields into a single output field. Connect each input to 
 
 ## Expression editor
 
-For outputs that need custom logic, click the output field to open the expression editor. The editor provides completion support. Start typing a field reference or function name, and use the suggestions to compose the expression. To insert an input value, click the corresponding input field while the editor is active.
+For outputs that need custom logic, select the output field to open the expression editor. The editor provides completion support. Start typing a field reference or function name, and use the suggestions to compose the expression. To insert an input value, select the corresponding input field while the editor is active.
 
 ![Expression editor opened on an output field with completion suggestions](/img/develop/integration-artifacts/supporting/data-mapper/expression-editor.gif)
 
@@ -44,7 +44,7 @@ When you need a focused, visual sub-mapping rather than a free-form function, us
 
 ## Map with AI
 
-Inside any data mapper view, click **Auto Map** in the top-right corner of the canvas to generate mappings automatically using the WSO2 Integrator Copilot.
+Inside any data mapper view, select **Auto Map** in the top-right corner of the canvas to generate mappings automatically using the WSO2 Integrator Copilot.
 
 ![Data mapper toolbar with the Auto Map button in the top-right corner](/img/develop/integration-artifacts/supporting/data-mapper/ai-map-option.png)
 

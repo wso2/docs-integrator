@@ -8,7 +8,7 @@ When the same logic is needed in multiple output locations, define a submapping.
 
 ## Create a submapping
 
-1. In the data mapper canvas, click **+ Add Sub Mapping**.
+1. In the data mapper canvas, select **+ Add Sub Mapping**.
 2. Configure the submapping name, type, and the inputs to use.
 3. Map the fields inside the submapping view as you would in any data mapper.
 

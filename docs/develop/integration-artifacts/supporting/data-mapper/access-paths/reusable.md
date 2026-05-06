@@ -6,7 +6,7 @@ title: Reusable data mapper
 
 Create a reusable data mapper from the **Artifacts** page or the left sidebar. Configure the inputs and the output type, then open the data mapper view.
 
-1. Open the **Artifacts** page and select **Data Mapper** under **Other Artifacts**, or click **+** next to **Data Mappers** in the left sidebar.
+1. Open the **Artifacts** page and select **Data Mapper** under **Other Artifacts**, or select **+** next to **Data Mappers** in the left sidebar.
 
    ![Artifacts page with the Data Mapper option highlighted under Other Artifacts](/img/develop/integration-artifacts/supporting/data-mapper/reusable-datamapper-selection.png)
 
@@ -18,10 +18,10 @@ Create a reusable data mapper from the **Artifacts** page or the left sidebar. C
    |---|---|
    | **Data Mapper Name** | A unique name for the mapping function (for example, `transform`). |
    | **Public** | Select **Make visible across the project** to use this mapper from other integrations. |
-   | **Inputs** | Click **+ Add Input** to define one or more source variables. Each input has a name and a type. |
+   | **Inputs** | Select **+ Add Input** to define one or more source variables. Each input has a name and a type. |
    | **Output** | The target type that the mapper produces. |
 
-3. Click **Create**. The data mapper canvas opens with input fields on the left and output fields on the right.
+3. Select **Create**. The data mapper canvas opens with input fields on the left and output fields on the right.
 
    ![Data mapper canvas with input record on the left and output record on the right](/img/develop/integration-artifacts/supporting/data-mapper/datamapper-view.png)
 
