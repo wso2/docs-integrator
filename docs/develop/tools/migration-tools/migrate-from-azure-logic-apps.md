@@ -6,20 +6,52 @@ title: Migrate from Azure Logic Apps
 
 ## Overview
 
-The Azure Logic Apps migration tool converts Logic Apps workflow definitions (ARM templates and workflow JSON) to Ballerina code. It handles triggers, actions, connectors, control flow, and error handling patterns.
+The Azure Logic Apps migration tool converts Logic Apps workflow definitions (ARM templates and workflow JSON) to Ballerina code. It handles triggers, actions, connectors, control flow, error handling patterns and more.
 
 ## Run the Azure Logic Apps migration tool
 
-```bash
-# Migrate an Azure Logic Apps project
-bal migrate azure -i /path/to/logic-apps-project/ -o migrated/
+Currently, wizard-based migration is not available for Azure Logic Apps. Please use the CLI instructions in the next tab.
 
-# Migrate from an exported ARM template
-bal migrate azure -i /path/to/template.json -o migrated/
+You can migrate Azure Logic Apps projects using the Ballerina CLI tool. Follow these steps:
 
-# Generate report only
-bal migrate azure -i /path/to/logic-apps-project/ --report-only
-```
+### CLI prerequisite
+- Ensure Ballerina is installed, and the `bal` command is available in your environment.
+
+### Steps
+1. **Install the migration tool:**
+   Install the migration tool by running:
+   ```bash
+   bal tool pull migrate-logicapps
+   ```
+2. **Run the migration command:**
+   Use the following command syntax to migrate your projects:
+   ```bash
+   bal migrate-logicapps <source-project-directory-or-file> [-o|--out <output-directory>] [-v|--verbose] [-m|--multi-root]
+   ```
+
+#### Key parameters
+- `<source-project-directory-or-file>`: Path to the directory containing multiple Logic App JSON files or a single Logic App JSON file to be migrated.
+- `-o, --out <output-directory>`: (Optional) Directory where the new Ballerina package will be created.
+  - For a project directory input, the new Ballerina package is created inside the source project directory.
+  - For a single JSON file, the new Ballerina package is created in the same directory as the source file.
+- `-v, --verbose`: (Optional) Enable verbose output during conversion.
+- `-m, --multi-root`: (Optional) Treat each child directory as a separate project and convert all of them. The source must be a directory containing multiple Logic App JSON files.
+
+### Examples
+
+Here are some example commands you can use:
+
+- Migrate a Logic Apps JSON file to a specific output directory:
+  ```bash
+  bal migrate-logicapps /path/to/logic-app-control-flow.json --out /path/to/output-dir
+  ```
+
+- Migrate all Logic Apps JSON files in a directory (multi-root mode):
+  ```bash
+  bal migrate-logicapps /path/to/logic-apps-file-directory --out /path/to/output-dir --multi-root
+  ```
+
+> **NOTE:** In multi-root mode, ensure that only Logic Apps JSON files are present in the directory. Do not include any unrelated JSON files.
 
 ## Component mapping
 
