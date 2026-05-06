@@ -34,7 +34,7 @@ Build AI-powered integrations with WSO2 Integrator — direct LLM calls, natural
 
 - **[Email Generator with Direct LLM](tutorials/email-generator-direct-llm.md)**
 - **[Review Summarizer with Natural Function](tutorials/review-summarizer-natural-function.md)**
-- **[HR Knowledge Base Agent with RAG](tutorials/hr-knowledge-base-rag.md)**
+- **[Building an HR Knowledge Base with RAG](tutorials/building-hr-knowledge-base-rag.md)**
 - **[Customer Care Agent with MCP](tutorials/customer-care-mcp.md)**
 - **[IT Helpdesk Chatbot with Persistent Memory](tutorials/it-helpdesk-chatbot.md)**
 - **[Legal Document Q&A with MCP and RAG](tutorials/legal-doc-qa.md)**
