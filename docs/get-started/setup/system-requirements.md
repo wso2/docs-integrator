@@ -1,5 +1,5 @@
 ---
-title: System Requirements and Prerequisites
+title: System Requirements
 ---
 
 # System Requirements and Prerequisites
