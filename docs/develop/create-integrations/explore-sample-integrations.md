@@ -12,9 +12,11 @@ On the WSO2 Integrator home screen, click **Explore** on the **Explore Pre-built
 
 ![WSO2 Integrator home screen](/img/explore-samples/home-screen.png)
 
+The home screen also shows the **Create New Integration** and **Open Integration** cards, along with a **Recent Integrations and Projects** list for projects you've opened recently.
+
 ## Browse samples
 
-The **Browse Samples** view displays all available samples as cards. Each card shows the sample name, a brief description, and its type.
+The **Browse Samples** view opens with the prompt *Start quickly by downloading a curated integration sample for your selected profile.* Each card shows the sample name, a type tag (for example, **ai agent**, **service**, **scheduled task**, **file integration**, **webhook**), a brief description, and a **Use** action.
 
 ![Browse Samples gallery](/img/explore-samples/browse-samples.png)
 
@@ -22,11 +24,14 @@ Use the controls at the top of the view to find samples:
 
 - **Search bar** — Search by name, description, application, or category.
 - **Type filter** — Filter by **All**, **Sample**, or **Pre-built Integrations**.
-- **Category filter** — Narrow results by category (e.g., AI Agent, File Integration, Integration as API).
+- **Category filter** — Narrow results by category (for example, **AI Agent**, **File Integration**, **Integration as API**).
+- **Clear all filters** — Reset every filter and search term.
+
+The result count appears below the controls (for example, `23 results`).
 
 ## Use a sample
 
-Click **Use** on a sample card. A file browser dialog appears prompting you to select the directory where the sample project will be created.
+Click **Use** on a sample card. A native file browser appears so you can choose the directory where the sample project will be created.
 
 ![Select folder dialog](/img/explore-samples/select-folder.png)
 
@@ -34,6 +39,6 @@ Select a folder and click **Select Folder**. WSO2 Integrator downloads the sampl
 
 ## What's next
 
-- [Project View](../project-views/project-view.md) -- Run, edit, and debug your sample project
-- [Create a New Integration](create-a-new-integration.md) -- Start a new project from scratch
-- [Integration Artifacts](/docs/develop/integration-artifacts/overview) -- Understand the artifact types used in samples
+- [Project view](../project-views/project-view.md) — Run, edit, and debug your sample project
+- [Create a new integration](create-a-new-integration.md) — Start a new project from scratch
+- [Integration artifacts](../integration-artifacts/integration-artifacts.md) — Understand the artifact types used in samples

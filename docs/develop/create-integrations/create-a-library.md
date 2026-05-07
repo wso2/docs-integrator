@@ -8,24 +8,31 @@ A library is a reusable package of shared logic — utility functions, type defi
 
 ## Open the creation wizard
 
-On the WSO2 Integrator home screen, click **More Actions** to reveal additional options.
+On the WSO2 Integrator home screen, click **More Actions** below the three primary cards to reveal additional options.
 
-![Home screen with More Actions expanded](/img/create-library/home-screen-more-actions.png)
+![Home screen with More Actions expanded](/img/create-library/home-screen-more-actions.gif)
+
+The expanded panel shows four entries (and the trigger relabels itself **Show less**):
+
+- **Create Library** — Create reusable components and utilities to share across integrations and projects.
+- **Create Project** — Create a project to organize and manage multiple integrations.
+- **Open Project** — Open an existing project to view and manage its integrations.
+- **Migrate Integrations from Other Vendors** — Import integrations from other vendors and convert them to WSO2 Integrator format.
 
 Click **Create Library** to open the library creation wizard.
 
 ## Configure the library
 
-The creation wizard prompts you to provide the basic details for your library.
+The creation wizard opens with the prompt *Build reusable components and utilities to share across projects.*
 
 ![Create Library form](/img/create-library/create-library-form.png)
 
 | Field | Description |
 |---|---|
-| **Library Name** | A descriptive name for your library (e.g., `common-utils`). |
-| **Project Name** | The name of the project that contains this library. |
-| **Create within a project** | Enabled by default. Creates a project workspace that can hold multiple integrations and libraries in a single repository. Uncheck this to create a standalone library. |
-| **Select Path** | The directory where the library files are created. Click **Browse** to choose a folder. The full path preview appears below the field. |
+| **Library Name** | A descriptive name for your library (for example, `common-utils`). Defaults to `Untitled`. |
+| **Project Name** | The name of the project that contains this library. Defaults to `Default`. |
+| **Create within a project** | Enabled by default. Enables project mode so the workspace can hold multiple integrations and libraries in a single repository. Clear this checkbox to create a standalone library. |
+| **Select Path** | The directory where the library files are created. Click **Browse** to choose a folder. The full path preview appears below the field as `Will be created at: <path>`. |
 
 Fill in the required fields and click **Create Library**.
 
@@ -64,19 +71,19 @@ Expand the **Advanced Configurations** section to customize the project and Ball
 | Field | Description |
 |---|---|
 | **Organization Name** | The organization that owns this project. Click **Sign In** to pick from your registered organizations. |
-| **Project ID** | A unique identifier for your project used in various contexts. |
+| **Project ID** | A unique identifier for your project used in various contexts. Defaults to `default`. |
 
 ### Ballerina package
 
-The library is generated as a Ballerina package. Use these fields to configure the package metadata.
+The library is generated as a Ballerina package. Use these fields to specify the package name and version to be assigned.
 
 | Field | Description |
 |---|---|
-| **Package Name** | The Ballerina package name. Defaults to the library name. |
+| **Package Name** | The Ballerina package name. Defaults to the library name (for example, `untitled`). |
 | **Package Version** | The initial version of the package. Defaults to `0.1.0`. |
 
 ## What's next
 
-- [Library View](../project-views/library-view.md) -- Learn how to manage and configure your library project
-- [Create a New Integration](create-a-new-integration.md) -- Create an integration that uses your library
-- [Manage Dependencies](/docs/develop/organize-code/manage-dependencies) -- Add libraries as dependencies to your integrations
+- [Library view](../project-views/library-view.md) — Learn how to manage and configure your library project
+- [Create a new integration](create-a-new-integration.md) — Create an integration that uses your library
+- [Manage dependencies](../organize-code/dependencies.md) — Add libraries as dependencies to your integrations

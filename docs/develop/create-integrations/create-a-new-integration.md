@@ -8,7 +8,13 @@ WSO2 Integrator provides a creation wizard to set up new integration projects. L
 
 ## Open the creation wizard
 
-When you open WSO2 Integrator, the home screen displays three options for getting started.
+When you open WSO2 Integrator, the home screen offers three ways to get started:
+
+- **Create New Integration** — Start building a new integration from scratch.
+- **Open Integration** — Continue working on an existing integration on your machine.
+- **Explore Pre-built Integrations and Samples** — Browse ready-to-use samples to accelerate your development.
+
+A **Recent Integrations and Projects** list at the bottom links to projects you've opened recently.
 
 ![WSO2 Integrator home screen](/img/create-new-integration/home-screen.png)
 
@@ -22,10 +28,10 @@ The creation wizard prompts you to provide the basic details for your integratio
 
 | Field | Description |
 |---|---|
-| **Integration Name** | A descriptive name for your integration (e.g., `order-sync-service`). |
-| **Project Name** | The name of the project that contains this integration. |
-| **Create within a project** | Enabled by default. Creates a project workspace that can hold multiple integrations and libraries in a single repository. Uncheck this to create a standalone integration. |
-| **Select Path** | The directory where the integration files are created. Click **Browse** to choose a folder. The full path preview appears below the field. |
+| **Integration Name** | A descriptive name for your integration (for example, `order-sync-service`). Defaults to `Untitled`. |
+| **Project Name** | The name of the project that contains this integration. Defaults to `Default`. |
+| **Create within a project** | Enabled by default. Enables project mode so the workspace can hold multiple integrations and libraries in a single repository. Clear this checkbox to create a standalone integration. |
+| **Select Path** | The directory where the integration files are created. Click **Browse** to choose a folder. The full path preview appears below the field as `Will be created at: <path>`. |
 
 ### Create within a project
 
@@ -91,29 +97,29 @@ You can convert a standalone integration into a project at any time by clicking 
 
 ## Advanced configurations
 
-Expand the **Advanced Configurations** section to customize the module ID and Ballerina package settings.
+Expand **Advanced Configurations** to customize the project ownership and the generated Ballerina package metadata.
 
 ![Advanced Configurations](/img/create-new-integration/advanced-configurations.png)
 
-### Module ID
+### Project
 
 | Field | Description |
 |---|---|
-| **Project ID** | A unique identifier for your project used in various contexts. This value cannot be changed after creation. |
+| **Organization Name** | The organization that owns this project. Click **Sign In** to pick from your registered Ballerina Central organizations. |
+| **Project ID** | A unique identifier for your project used in various contexts. Defaults to `default`. |
 
 ### Ballerina package
 
-The integration is generated as a Ballerina package. Use these fields to configure the package metadata.
+The integration is generated as a Ballerina package. Use these fields to specify the package name and version to be assigned.
 
 | Field | Description |
 |---|---|
-| **Package Name** | The Ballerina package name. Defaults to the integration name. |
-| **Organization Name** | Your Ballerina Central organization name. Click **Sign In** to pick from your registered organizations. |
+| **Package Name** | The Ballerina package name. Defaults to the integration name (for example, `untitled`). |
 | **Package Version** | The initial version of the package. Defaults to `0.1.0`. |
 
 ## What's next
 
-- [Open an Existing Integration](open-existing-integration.md) -- Work with projects already on disk
-- [Explore Sample Integrations](explore-sample-integrations.md) -- Browse and learn from built-in examples
-- [Project View](../project-views/project-view.md) -- Manage multi-package workspaces
-- [Integration Artifacts](/docs/develop/integration-artifacts/overview) -- Understand the artifact types you can create
+- [Open an existing integration](open-existing-integration.md) — Work with projects already on disk
+- [Explore sample integrations](explore-sample-integrations.md) — Browse and learn from built-in examples
+- [Project view](../project-views/project-view.md) — Manage multi-package workspaces
+- [Integration artifacts](../integration-artifacts/integration-artifacts.md) — Understand the artifact types you can create
