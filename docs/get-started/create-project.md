@@ -59,5 +59,4 @@ FirstProject/
 
 ## What's next
 
-- [Understand the IDE](understand-ide.md) — Learn the visual designer layout
 - [Build an API integration](build-api-integration.md) — Your first real integration
