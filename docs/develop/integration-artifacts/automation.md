@@ -32,7 +32,7 @@ Only one automation can be configured per integration.
 
    ![Automation flow designer](/img/develop/integration-artifacts/automation/flow-designer.png)
 
-6. Click **+** to open the node panel and add integration steps — function calls, connections, and control flow.
+6. Click **+** to open the node panel and add integration steps such as function calls, connections, and control flow.
 
 WSO2 Integrator generates an `automation.bal` file with the following starter structure:
 
@@ -52,19 +52,12 @@ Add your integration logic inside the `do` block. The `on fail` block handles an
 
 ## Automation configuration
 
-Automation configuration controls visibility and startup parameters for the automation function.
+ Automation configuration controls the startup parameters for the automation function and whether execution failures are returned as errors.
+
 
 In the flow designer, click **Configure** in the header to open the **Edit Automation** panel.
 
 ![Edit Automation panel opened via the Configure button](/img/develop/integration-artifacts/automation/configure-form.png)
-
-| Field | Description |
-|---|---|
-| **Public** | Makes the automation function visible across the workspace when selected. |
-| **Startup Parameters** | Parameters passed to the automation at startup. Click **+ Add Parameter** to add each parameter. |
-| **Return Error** | When selected, the automation exits with an error if execution fails. |
-
-Click **Save** to apply changes.
 
 Configuration maps to the `main` function signature. Add parameters directly to the function signature to define startup parameters:
 
@@ -83,6 +76,5 @@ public function main(string param1 = "", int param2 = 0) returns error? {
 
 ## What's next
 
-- [Integration artifacts overview](integration-artifacts.md) — understand all available artifact types
 - [HTTP service](service/http.md) — expose your integration as a REST API
 - [Error handling](../design-logic/error-handling.md) — handle automation failures

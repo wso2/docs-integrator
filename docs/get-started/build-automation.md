@@ -1,87 +1,79 @@
 ---
-title: Build an automation
+title: Build an Automation
 ---
 
-# Build an automation
+# Build an Automation
 
-**Time:** Under 10 minutes | **What you'll build:** An automation that can run on demand or be configured for periodic invocation from external systems.
+**Time:** Under 10 minutes | **What you'll build:** An automation that prints `Hello World` to the terminal when it runs.
 
-Automations are ideal for data synchronization, report generation, and routine maintenance jobs.
+An automation runs your integration logic without an external request, on demand or on a schedule. Automations are ideal for data synchronization, report generation, and routine maintenance jobs. This quick start shows the full cycle: add an automation artifact, build the logic in the visual designer, run it, and review the scheduling options for production.
 
-<ThemedImage
-    alt="Automation diagram"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-automation/automation-diagram-light.svg'),
-        dark: useBaseUrl('/img/get-started/build-automation/automation-diagram-dark.svg'),
-    }}
-/>
+:::info Prerequisites
 
-## Prerequisites
+- [WSO2 Integrator installed](install.md)
+- A project to work in. If you do not have one, select **Create New Integration** when WSO2 Integrator opens.
 
-- Install WSO2 Integrator and complete the required setup by following the [installation guide](install.md).
+## Step 1: Add an automation artifact
 
-## Step 1: Create the project
-
-1. Open WSO2 Integrator.
-2. Select **Create New Integration**.
-3. Set **Integration Name** to `HelloWorld`.
-4. Set **Project Name** to `QuickStart`.
-5. Select **Browse**.
-6. Select the project location and select **Open**.
-7. Select **Create Integration**.
-
-<ThemedImage
-    alt="Create the project"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-automation/create-the-project-light.gif'),
-        dark: useBaseUrl('/img/get-started/build-automation/create-the-project-dark.gif'),
-    }}
-/>
-
-## Step 2: Add an automation artifact
-
-1. Select **HelloWorld**.
+1. Select your integration from the project panel.
 2. In the design view, select **Add Artifact**.
-3. Select **Automation** artifact.
+3. Select **Automation** under **Automation**.
 4. Select **Create**.
 
 <ThemedImage
-    alt="Add an automation artifact"
+    alt="Create New Automation form opened after selecting Automation under Automation"
     sources={{
-        light: useBaseUrl('/img/get-started/build-automation/add-an-automation-artifact-light.gif'),
-        dark: useBaseUrl('/img/get-started/build-automation/add-an-automation-artifact-dark.gif'),
+        light: useBaseUrl('/img/get-started/build-automation/add-an-automation-artifact.png'),
+        dark: useBaseUrl('/img/get-started/build-automation/add-an-automation-artifact.png'),
     }}
 />
 
-## Step 3: Add logic
+## Step 2: Add logic
 
 1. Select **+** after the **Start** node to open the node panel.
-2. Select **Call Function** node to the flow.
-3. Select **Print** from the node panel.
-4. Select **Initialize Array** from the node panel.
+2. Select **Call Function**.
+3. Select **Print** from the function list.
+4. Select **Initialize Array** for the **Values** parameter.
 5. Set **Values** to `"Hello World"` and select **Save**.
 
 <ThemedImage
-    alt="Add logic"
+    alt="io:print configuration panel with the Values parameter set to Hello World, ready to be saved"
     sources={{
-        light: useBaseUrl('/img/get-started/build-automation/add-logic-light.gif'),
-        dark: useBaseUrl('/img/get-started/build-automation/add-logic-dark.gif'),
+        light: useBaseUrl('/img/get-started/build-automation/add-logic.png'),
+        dark: useBaseUrl('/img/get-started/build-automation/add-logic.png'),
     }}
 />
 
-## Step 4: Run and test
+## Step 3: Run and test
 
 1. Select **Run**.
-2. The automation executes immediately and prints output to the terminal.
-3. Check the terminal output for `Hello World`.
+2. Confirm the terminal output contains `Hello World`.
 
 <ThemedImage
-    alt="Run and test"
+    alt="Running the automation and seeing the Hello World output in the terminal"
     sources={{
         light: useBaseUrl('/img/get-started/build-automation/run-and-test-light.gif'),
         dark: useBaseUrl('/img/get-started/build-automation/run-and-test-dark.gif'),
     }}
 />
+
+The following complete, runnable Ballerina program produces the same automation shown in the visual designer steps.
+
+```ballerina
+import ballerina/io;
+import ballerina/log;
+
+public function main() returns error? {
+    do {
+        io:print("Hello World");
+    } on fail error e {
+        log:printError("Error occurred", 'error = e);
+        return e;
+    }
+}
+```
+
+Save this as `automation.bal`, then run `bal run` from the project directory. The terminal output contains `Hello World`.
 
 ## Scheduling automations
 
@@ -94,7 +86,9 @@ Periodic invocation is configured in an external system once the automation is d
 
 ## What's next
 
-- [AI agent](build-ai-agent.md) — Build an intelligent agent
-- [Integration as API](build-api-integration.md) — Build an HTTP service
-- [Event-driven integration](build-event-driven-integration.md) — React to messages from brokers
-- [File-driven integration](build-file-driven-integration.md) — Process files from FTP or local directories
+- [Build an API integration](build-api-integration.md) — Build an HTTP service
+- [Build an AI agent](build-ai-agent.md) — Build an intelligent agent
+- [Build an event-driven integration](build-event-driven-integration.md) — React to messages from brokers
+- [Build a file-driven integration](build-file-driven-integration.md) — Process files from FTP or local directories
+- [Automation](../develop/integration-artifacts/automation/automation.md) — Configure scheduling, manual execution, and integration logic
+- [Tutorials](../tutorials/rest-api-aggregation-service.md) — End-to-end walkthroughs and patterns
