@@ -38,36 +38,36 @@ import ballerina/log;
 
 configurable string username = ?;
 configurable string password = ?;
-configurable string baseUrl = ?;
 
 listener salesforce:Listener salesforceListener = new ({
-    username: username,
-    password: password,
-    baseUrl: baseUrl
+    auth: {
+        username: username,
+        password: password, // password concatenated with security token
+    }
 });
 
-service salesforce:Service on salesforceListener {
+service salesforce:CdcService on salesforceListener {
 
     remote function onCreate(salesforce:EventData event) returns error? {
         log:printInfo("Record created",
-                      entity = event.changeEventMetadata.entityName,
-                      ids = event.changeEventMetadata.recordIds);
+                      entity = event.metadata?.entityName,
+                      id = event.metadata?.recordId);
     }
 
     remote function onUpdate(salesforce:EventData event) returns error? {
         log:printInfo("Record updated",
-                      ids = event.changeEventMetadata.recordIds,
+                      id = event.metadata?.recordId,
                       fields = event.changedData.keys());
     }
 
     remote function onDelete(salesforce:EventData event) returns error? {
         log:printInfo("Record deleted",
-                      ids = event.changeEventMetadata.recordIds);
+                      id = event.metadata?.recordId);
     }
 
     remote function onRestore(salesforce:EventData event) returns error? {
         log:printInfo("Record restored",
-                      ids = event.changeEventMetadata.recordIds);
+                      id = event.metadata?.recordId);
     }
 }
 ```
@@ -91,9 +91,10 @@ The listener supports two authentication modes.
 
 ```ballerina
 listener salesforce:Listener salesforceListener = new ({
-    username: username,
-    password: password,    // password concatenated with security token
-    baseUrl: baseUrl
+    auth: {
+        username: username,
+        password: password,    // password concatenated with security token
+    }
 });
 ```
 
@@ -101,10 +102,8 @@ listener salesforce:Listener salesforceListener = new ({
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `username` | `string` | Required | Salesforce username (email address) |
-| `password` | `string` | Required | Salesforce password concatenated with the security token |
-| `baseUrl` | `string` | Required | Salesforce instance URL (e.g., `https://myorg.my.salesforce.com`) |
-| `port` | `int` | `443` | Port for the streaming connection |
+| `auth` | `CredentialsConfig` | Required | Authentication credentials. Contains `username` (Salesforce username / email) and `password` (password concatenated with the security token). |
+| `isSandBox` | `boolean` | `false` | Set to `true` if connecting to a Salesforce sandbox environment. |
 
 **REST-based authentication** (OAuth 2.0 refresh token):
 
@@ -125,8 +124,10 @@ listener salesforce:Listener salesforceListener = new ({
 | Field | Type | Default | Description |
 |---|---|---|---|
 | `baseUrl` | `string` | Required | Salesforce instance URL |
-| `auth` | `OAuth2RefreshTokenGrantConfig` | Required | OAuth 2.0 refresh token configuration |
-| `port` | `int` | `443` | Port for the streaming connection |
+| `auth` | `OAuth2Config` | Required | OAuth 2.0 configuration. Accepts `OAuth2RefreshTokenGrantConfig`, `OAuth2PasswordGrantConfig`, `OAuth2ClientCredentialsGrantConfig`, or `BearerTokenConfig`. |
+| `tokenStore` | `TokenStore` | `InMemoryTokenStore` | Token store for coordinating refresh token rotation across replicas. Use a distributed implementation (e.g., Redis-backed) for multi-replica deployments. |
+
+⚠️ `tokenStore` and Refresh Token Rotation (RTR) only apply when using `OAuth2RefreshTokenGrantConfig`. The other grant types bypass the `TokenManager` entirely.
 
 ## Event handlers
 
@@ -151,8 +152,8 @@ Each handler receives a `salesforce:EventData` parameter with the change payload
 
 | Field | Type | Description |
 |---|---|---|
-| `changedData` | `map<anydata>` | Map of changed field names to their new values. |
-| `changeEventMetadata` | `salesforce:ChangeEventMetadata` | Metadata about the change event. |
+| `changedData` | `map<json>` | Map of changed field names to their new values. |
+| `metadata` | `salesforce:ChangeEventMetadata?` | Metadata about the change event. |
 
 `salesforce:ChangeEventMetadata` fields:
 
@@ -166,7 +167,7 @@ Each handler receives a `salesforce:EventData` parameter with the change payload
 | `commitTimestamp` | `int?` | Unix timestamp in milliseconds when the change was committed. |
 | `commitNumber` | `int?` | Transaction commit number. |
 | `commitUser` | `string?` | ID of the user who initiated the change. |
-| `recordIds` | `string[]?` | IDs of the records affected by the change. |
+| `recordId` | `string?` | The record ID affected by the change. |
 
 ## Supported event channels
 
