@@ -1,469 +1,235 @@
 ---
-title: Building a Customer Care Agent with MCP
+title: Build a customer care agent with MCP
 ---
 
-# Building a Customer Care Agent with MCP
+# Build a customer care agent with MCP
 
-**Time:** 45 minutes | **Level:** Intermediate | **What you'll build:** A customer care AI Agent that connects to CRM and order management systems through MCP (Model Context Protocol) servers, enabling natural language access to customer and order data.
-
-In this tutorial, you build a customer care AI Agent that uses MCP to bridge the gap between an LLM and your enterprise systems. Instead of writing tool functions directly inside the agent, you expose your CRM and order management APIs as MCP servers using the built-in `ballerina/mcp` module. The agent then connects to those servers with a single `ai:McpToolKit` and uses their remote functions as tools.
-
-Both `ballerina/ai` and `ballerina/mcp` ship with the WSO2 Integrator distribution, so there is no separate dependency to pull.
-
-## Prerequisites
-
-- [WSO2 Integrator VS Code extension installed](/docs/get-started/install)
-- A default model provider configured via **"Configure default WSO2 Model Provider"** in VS Code, or an OpenAI API key
-- Familiarity with the [MCP overview](/docs/genai/mcp/overview)
-
-## Architecture
+## What you'll build
 
 ```mermaid
-flowchart TD
-    Customer([Customer])
+flowchart LR
+    Agent["Customer Care Agent"]
+    MCP["ShopEasy MCP server"]
 
-    subgraph Agent["Customer Care AI Agent"]
-        AIAgent["ai:Agent<br/>+ ai:McpToolKit x2"]
-    end
-
-    subgraph OrderServer["Order MCP Server<br/>(ballerina/mcp)"]
-        OrderTools["getOrder<br/>listOrders<br/>trackShipment<br/>cancelOrder"]
-    end
-
-    subgraph CRMServer["CRM MCP Server<br/>(ballerina/mcp)"]
-        CRMTools["getCustomer<br/>listCases<br/>createCase<br/>updateCase"]
-    end
-
-    OrderDB[("Order Database")]
-    CRMDB[("CRM Database")]
-
-    Customer ----> AIAgent
-    AIAgent <==> |MCP| OrderServer
-    AIAgent <==> |MCP| CRMServer
-    OrderServer ----> OrderDB
-    CRMServer ----> CRMDB
+    Agent -- MCP protocol --> MCP
 ```
 
-## Step 1: Create the project
+A customer care agent that connects to a ShopEasy MCP server and answers product availability, order status, and return questions over a chat API.
 
-```toml
-# Ballerina.toml
-[package]
-org = "myorg"
-name = "customer_care_mcp"
-version = "0.1.0"
-distribution = "2201.13.0"
+This tutorial shows how to build an agent that consumes an external MCP server using `ai:McpToolKit`. You do not build the MCP server here. It is provided as a running service. Your job is to wire the agent to it, write the system prompt, and expose a chat endpoint.
+
+The agent receives customer messages over HTTP, reasons about which tool to call, invokes the MCP server, and returns a natural language answer.
+
+:::info Prerequisites
+- [WSO2 Integrator set up for AI](../getting-started/setting-up-ai.md)
+- The **ShopEasy MCP server** running locally. Clone the repo and follow its README to start it: [github.com/wso2/integration-samples](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/samples/customer-care-agent/mcp).
+
+## Step 1: Create the agent
+
+1. Open WSO2 Integrator and create or select your project.
+2. Select **Add Artifact**.
+3. Under **AI Integration**, select **AI Chat Agent**.
+4. Set the **Name** to `Customer Care Agent` and select **Create**.
+
+<ThemedImage
+    alt="The Add Artifact panel with AI Chat Agent selected under the AI Integration section"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/create-agent-1.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/create-agent-1.png'),
+    }}
+/>
+
+The visual designer opens with the agent flow: a **Start** node, an **AI Agent** node, and a **Return** node.
+
+## Step 2: Configure the agent
+
+### 2.1 Open the agent configuration
+
+Select the **AI Agent** node to open the configuration panel on the right.
+
+<ThemedImage
+    alt="The AI Chat Agent visual designer showing the agent flow with Start, AI Agent, and Return nodes"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-1.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-1.png'),
+    }}
+/>
+
+### 2.2 Write the system prompt
+
+1. Set the **Role** to `Customer Support Agent`.
+2. Paste the following into **Instructions**:
+
+```
+You are a helpful customer support agent for ShopEasy, an online retailer.
+Help customers with product availability, order tracking, and return requests.
+Always use the available tools to look up accurate information — never guess.
+Keep responses friendly and concise. Include relevant IDs (order ID, return ID) in your responses.
 ```
 
-Both `ballerina/ai` and `ballerina/mcp` are bundled, so no extra dependency blocks are needed. You will still import `ballerinax/mysql` for the databases when you add it to your source files.
+<ThemedImage
+    alt="The agent configuration panel showing the Role and Instructions fields filled in"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-2.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-2.png'),
+    }}
+/>
 
-```toml
-# Config.toml
-orderDbHost = "localhost"
-orderDbPort = 3306
-orderDbUser = "root"
-orderDbPassword = "password"
-orderDbName = "orders_db"
-crmDbHost = "localhost"
-crmDbPort = 3306
-crmDbUser = "root"
-crmDbPassword = "password"
-crmDbName = "crm_db"
-orderMcpUrl = "http://localhost:9091/mcp"
-crmMcpUrl = "http://localhost:9092/mcp"
-```
+### 2.3 Set advanced configurations
 
-## Step 2: Define data types
+1. Expand **Advanced Configurations**.
+2. Set **Maximum Iterations** to `10`.
+3. Select **Save**.
+
+<ThemedImage
+    alt="The advanced configuration panel showing Maximum Iterations set to 10"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-3.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-3.png'),
+    }}
+/>
+
+:::info Why set Maximum Iterations to 10?
+The default is based on the number of toolkit objects, not individual tools. With one MCP toolkit wrapping three tools, the default is 2, which is too low for multi-step queries. Setting it to 10 gives the agent enough room to reason, call a tool, and respond.
+
+## Step 3: Add the MCP server as a tool
+
+### 3.1 Select the tool type
+
+1. Select **+** on the **AI Agent** node.
+2. Select **Use MCP Server**.
+
+<ThemedImage
+    alt="The Add Tool panel with Use MCP Server highlighted"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-1.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-1.png'),
+    }}
+/>
+
+### 3.2 Configure the server URL
+
+1. Set **Server URL** to `http://localhost:8080/mcp`.
+2. Leave **Requires Authentication** off.
+3. Select **Save**.
+
+<ThemedImage
+    alt="The Add MCP Server panel with the server URL set to http://localhost:8080/mcp"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-2.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-2.png'),
+    }}
+/>
+
+The MCP toolkit appears as `aiMcpbasetoolkit` attached to the agent node in the visual designer. The agent will discover the available tools from the server at startup.
+
+<ThemedImage
+    alt="The completed agent flow showing the AI Agent node connected to the aiMcpbasetoolkit"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-3.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-3.png'),
+    }}
+/>
+
+## Step 4: Run and test
+
+Make sure the ShopEasy MCP server is running, then click the **Play** button in the top-right corner of the WSO2 Integrator IDE to start the agent.
+
+Once the agent is running, click **Chat** in the toolbar (next to **Tracing: Off**) to open the built-in chat panel. Type your message in the input field and press **Enter** to send it.
+
+Try the following messages to exercise all three tools:
+
+- *"Do you have any wireless headphones in stock?"*
+- *"What is the status of my order ORD-042?"*
+- *"I want to return ORD-001. The item arrived damaged."*
+
+<ThemedImage
+    alt="The agent running in the WSO2 Integrator IDE with the MCP toolkit connected and the Ballerina Debug indicator active"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/run-and-test.gif'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/run-and-test.gif'),
+    }}
+/>
+
+For more detail on using the chat panel, see [Testing chat agents](../../develop/test/built-in-try-it-tool#testing-chat-agents).
+
+**`connections.bal`**: model provider and MCP toolkit connection:
 
 ```ballerina
-// types.bal
-type Customer record {|
-    string customerId;
-    string name;
-    string email;
-    string phone;
-    string tier;           // "standard", "premium", "enterprise"
-    string accountStatus;  // "active", "suspended", "closed"
-|};
-
-type Order record {|
-    string orderId;
-    string customerId;
-    string status;
-    string orderDate;
-    decimal total;
-    string? trackingNumber;
-    string? estimatedDelivery;
-    OrderItem[] items;
-|};
-
-type OrderItem record {|
-    string productId;
-    string productName;
-    int quantity;
-    decimal unitPrice;
-|};
-
-type SupportCase record {|
-    string caseId;
-    string customerId;
-    string subject;
-    string description;
-    string priority;       // "low", "medium", "high", "critical"
-    string status;         // "open", "in_progress", "resolved", "closed"
-    string? assignedTo;
-    string createdAt;
-|};
-
-type ShipmentTracking record {|
-    string trackingNumber;
-    string carrier;
-    string status;
-    string lastLocation;
-    string? estimatedDelivery;
-    TrackingEvent[] events;
-|};
-
-type TrackingEvent record {|
-    string timestamp;
-    string location;
-    string description;
-|};
-
-type CancelResult record {|
-    boolean success;
-    string message;
-|};
-```
-
-## Step 3: Create the order MCP server
-
-The order MCP server exposes order management capabilities as MCP remote functions. Each remote function is automatically turned into an MCP tool; the doc comment becomes the tool description and parameter doc comments become the parameter descriptions.
-
-```ballerina
-// order_mcp_server.bal
-import ballerina/mcp;
-import ballerinax/mysql;
-import ballerina/http;
-
-configurable string orderDbHost = ?;
-configurable int orderDbPort = ?;
-configurable string orderDbUser = ?;
-configurable string orderDbPassword = ?;
-configurable string orderDbName = ?;
-
-final mysql:Client orderDb = check new (
-    host = orderDbHost,
-    port = orderDbPort,
-    user = orderDbUser,
-    password = orderDbPassword,
-    database = orderDbName
-);
-
-final http:Client shippingApi = check new ("https://api.shipping-provider.com");
-
-listener mcp:Listener orderMcpListener = new (9091);
-
-service mcp:Service /mcp on orderMcpListener {
-
-    # Retrieve order details by order ID.
-    # Returns status, items, total, and tracking information.
-    #
-    # + orderId - The order identifier
-    # + return - The matching order
-    remote function getOrder(string orderId) returns Order|error {
-        Order orderRecord = check orderDb->queryRow(
-            `SELECT * FROM orders WHERE order_id = ${orderId}`
-        );
-        OrderItem[] items = check from OrderItem item in orderDb->query(
-            `SELECT * FROM order_items WHERE order_id = ${orderId}`
-        ) select item;
-        orderRecord.items = items;
-        return orderRecord;
-    }
-
-    # List recent orders for a customer, newest first.
-    #
-    # + customerId - The customer identifier
-    # + status - Optional status filter (for example, "shipped")
-    # + return - Up to ten matching orders
-    remote function listOrders(string customerId, string? status = ())
-            returns Order[]|error {
-        if status is string {
-            return from Order orderRecord in orderDb->query(
-                `SELECT * FROM orders WHERE customer_id = ${customerId}
-                   AND status = ${status}
-                 ORDER BY order_date DESC LIMIT 10`
-            ) select orderRecord;
-        }
-        return from Order orderRecord in orderDb->query(
-            `SELECT * FROM orders WHERE customer_id = ${customerId}
-             ORDER BY order_date DESC LIMIT 10`
-        ) select orderRecord;
-    }
-
-    # Track a shipment using the carrier tracking number.
-    #
-    # + trackingNumber - The carrier tracking number
-    # + return - Shipment tracking details
-    remote function trackShipment(string trackingNumber)
-            returns ShipmentTracking|error {
-        return shippingApi->get(string `/track/${trackingNumber}`);
-    }
-
-    # Cancel an order if it has not already been shipped or delivered.
-    #
-    # + orderId - The order to cancel
-    # + reason - The cancellation reason
-    # + return - Whether the cancellation succeeded
-    remote function cancelOrder(string orderId, string reason)
-            returns CancelResult|error {
-        Order existing = check self.getOrder(orderId);
-        if existing.status == "shipped" || existing.status == "delivered" {
-            return {
-                success: false,
-                message: string `Cannot cancel order '${orderId}' because it has already been ${existing.status}.`
-            };
-        }
-        _ = check orderDb->execute(
-            `UPDATE orders SET status = 'cancelled', cancel_reason = ${reason}
-             WHERE order_id = ${orderId}`
-        );
-        return {success: true, message: string `Order '${orderId}' has been cancelled.`};
-    }
-}
-```
-
-## Step 4: Create the CRM MCP server
-
-```ballerina
-// crm_mcp_server.bal
-import ballerina/mcp;
-import ballerinax/mysql;
-import ballerina/uuid;
-import ballerina/time;
-
-configurable string crmDbHost = ?;
-configurable int crmDbPort = ?;
-configurable string crmDbUser = ?;
-configurable string crmDbPassword = ?;
-configurable string crmDbName = ?;
-
-final mysql:Client crmDb = check new (
-    host = crmDbHost,
-    port = crmDbPort,
-    user = crmDbUser,
-    password = crmDbPassword,
-    database = crmDbName
-);
-
-listener mcp:Listener crmMcpListener = new (9092);
-
-service mcp:Service /mcp on crmMcpListener {
-
-    # Look up a customer by customer ID, email, or phone number.
-    #
-    # + query - Customer ID, email, or phone
-    # + return - The matching customer record
-    remote function getCustomer(string query) returns Customer|error {
-        return crmDb->queryRow(
-            `SELECT * FROM customers
-             WHERE customer_id = ${query} OR email = ${query} OR phone = ${query}`
-        );
-    }
-
-    # List support cases for a customer, newest first.
-    #
-    # + customerId - Customer identifier
-    # + status - Optional status filter
-    # + return - Up to ten matching cases
-    remote function listCases(string customerId, string? status = ())
-            returns SupportCase[]|error {
-        if status is string {
-            return from SupportCase c in crmDb->query(
-                `SELECT * FROM support_cases
-                 WHERE customer_id = ${customerId} AND status = ${status}
-                 ORDER BY created_at DESC LIMIT 10`
-            ) select c;
-        }
-        return from SupportCase c in crmDb->query(
-            `SELECT * FROM support_cases
-             WHERE customer_id = ${customerId}
-             ORDER BY created_at DESC LIMIT 10`
-        ) select c;
-    }
-
-    # Create a new support case for a customer.
-    # Use when an issue needs to be tracked or escalated.
-    #
-    # + customerId - Customer identifier
-    # + subject - Short subject line
-    # + description - Detailed description of the issue
-    # + priority - One of `low`, `medium`, `high`, `critical`
-    # + return - The newly created support case
-    remote function createCase(string customerId, string subject,
-            string description, string priority = "medium")
-            returns SupportCase|error {
-        string caseId = string `CASE-${uuid:createType1AsString().substring(0, 8)}`;
-        string now = time:utcToString(time:utcNow());
-
-        _ = check crmDb->execute(
-            `INSERT INTO support_cases
-                (case_id, customer_id, subject, description, priority, status, created_at)
-             VALUES (${caseId}, ${customerId}, ${subject}, ${description},
-                     ${priority}, 'open', ${now})`
-        );
-        return {
-            caseId,
-            customerId,
-            subject,
-            description,
-            priority,
-            status: "open",
-            assignedTo: (),
-            createdAt: now
-        };
-    }
-
-    # Update the status or assignee of an existing support case.
-    #
-    # + caseId - Case identifier to update
-    # + status - Optional new status
-    # + assignedTo - Optional assignee
-    # + return - `()` on success
-    remote function updateCase(string caseId, string? status = (),
-            string? assignedTo = ()) returns error? {
-        if status is string {
-            _ = check crmDb->execute(
-                `UPDATE support_cases SET status = ${status}
-                 WHERE case_id = ${caseId}`
-            );
-        }
-        if assignedTo is string {
-            _ = check crmDb->execute(
-                `UPDATE support_cases SET assigned_to = ${assignedTo}
-                 WHERE case_id = ${caseId}`
-            );
-        }
-    }
-}
-```
-
-## Step 5: Build the AI Agent with MCP Tool Kits
-
-On the agent side, `ai:McpToolKit` discovers the tools exposed by each MCP server and turns them into agent tools automatically. You can pass one or more tool kits to the agent in the `tools` array.
-
-```ballerina
-// agent.bal
 import ballerina/ai;
 
-configurable string orderMcpUrl = ?;
-configurable string crmMcpUrl = ?;
+final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
 
-final ai:McpToolKit orderMcp = check new (orderMcpUrl);
-final ai:McpToolKit crmMcp = check new (crmMcpUrl);
+final AiMcpbasetoolkit aiMcpbasetoolkit = check new ("http://localhost:8080/mcp");
+```
+
+**`agents.bal`**: agent definition:
+
+```ballerina
+import ballerina/ai;
+import ballerina/mcp;
 
 final ai:Agent customerCareAgent = check new (
     systemPrompt = {
-        role: "Customer Care Agent",
-        instructions: string `You are a Customer Care Agent for Acme Commerce.
-
-Role:
-- Help customers with order inquiries, shipment tracking, account questions, and issue resolution.
-- Provide professional, empathetic, and efficient support.
-
-Available capabilities (via MCP tool kits):
-- Order Management: Look up orders, track shipments, list order history, cancel orders.
-- CRM: Look up customer profiles, view and create support cases, update case statuses.
-
-Guidelines:
-- Always verify the customer's identity before sharing account details.
-- Use the order tools to check order status — never guess or assume.
-- Create a support case for any issue that cannot be resolved immediately.
-- For premium and enterprise customers, acknowledge their tier and provide priority service.
-- Escalate critical issues (data breach, fraud) by creating a high-priority case.
-- Keep responses concise but thorough. Always include relevant IDs (order, case, tracking).
-- If you cannot resolve an issue, clearly explain the next steps and expected timeline.`
-    },
-    tools = [orderMcp, crmMcp],
-    model = check ai:getDefaultModelProvider()
+        role: string `Customer Care Agent`,
+        instructions: string `You are a helpful customer support agent for ShopEasy, an online retailer.
+Help customers with product availability, order tracking, and return requests.
+Always use the available tools to look up accurate information. Never guess.
+Keep responses friendly and concise. Include relevant IDs (order ID, return ID) in your responses.`
+    }, maxIter = 10, model = wso2ModelProvider, tools = [aiMcpbasetoolkit]
 );
-```
 
-:::info One toolkit, many tools
-`ai:McpToolKit` is passed directly in the `tools` array — you do not need to enumerate individual tools. Every remote function on the MCP service becomes a tool the agent can invoke.
+isolated class AiMcpbasetoolkit {
+    *ai:McpBaseToolKit;
+    private final mcp:StreamableHttpClient mcpClient;
+    private final readonly & ai:ToolConfig[] tools;
 
-## Step 6: Expose the Agent as a Chat Service
+    public isolated function init(string serverUrl, mcp:Implementation info = {name: "MCP", version: "1.0.0"},
+            *mcp:StreamableHttpClientTransportConfig config) returns ai:Error? {
+        do {
+            self.mcpClient = check new mcp:StreamableHttpClient(serverUrl, config);
+            self.tools = check ai:getPermittedMcpToolConfigs(self.mcpClient, info, self.callTool).cloneReadOnly();
+        } on fail error e {
+            return error ai:Error("Failed to initialize MCP toolkit", e);
+        }
+    }
 
-```ballerina
-// service.bal
-import ballerina/ai;
+    public isolated function getTools() returns ai:ToolConfig[] => self.tools;
 
-service /care on new ai:Listener(8090) {
-
-    # Chat endpoint for customer inquiries.
-    #
-    # + request - Chat request containing the session ID and user message
-    # + return - The agent's response
-    resource function post chat(ai:ChatReqMessage request)
-            returns ai:ChatRespMessage|error {
-        string response = check customerCareAgent.run(request.message, request.sessionId);
-        return {message: response};
+    @ai:AgentTool
+    public isolated function callTool(mcp:CallToolParams params) returns mcp:CallToolResult|error {
+        return self.mcpClient->callTool(params);
     }
 }
 ```
 
-## Step 7: Run and test
+**`main.bal`**: HTTP chat service:
 
-1. Start the MCP servers and the agent service. Because each file contains a listener, you can run them all from the same package:
+```ballerina
+import ballerina/ai;
+import ballerina/http;
 
-   ```bash
-   bal run
-   ```
+listener ai:Listener chatAgentListener = new (listenOn = check http:getDefaultListener());
 
-   Ballerina will start all three listeners: the order MCP server on 9091, the CRM MCP server on 9092, and the agent chat service on 8090.
+service /customerCareAgent on chatAgentListener {
+    resource function post chat(@http:Payload ai:ChatReqMessage request) returns ai:ChatRespMessage|error {
+        string stringResult = check customerCareAgent.run(request.message, request.sessionId);
+        return {message: stringResult};
+    }
+}
+```
 
-2. Look up an order:
-   ```bash
-   curl -X POST http://localhost:8090/care/chat \
-     -H "Content-Type: application/json" \
-     -d '{"sessionId": "cust-001", "message": "What is the status of order ORD-98765?"}'
-   ```
-
-3. Track a shipment in the same session:
-   ```bash
-   curl -X POST http://localhost:8090/care/chat \
-     -H "Content-Type: application/json" \
-     -d '{"sessionId": "cust-001", "message": "Can you track my shipment? The tracking number is TRK-123456."}'
-   ```
-
-4. Report an issue and let the agent create a case:
-   ```bash
-   curl -X POST http://localhost:8090/care/chat \
-     -H "Content-Type: application/json" \
-     -d '{"sessionId": "cust-001", "message": "I received the wrong item in order ORD-98765 — red jacket instead of blue."}'
-   ```
-
-5. Cancel an order:
-   ```bash
-   curl -X POST http://localhost:8090/care/chat \
-     -H "Content-Type: application/json" \
-     -d '{"sessionId": "cust-001", "message": "Please cancel order ORD-11111. I found a better price."}'
-   ```
+To run and test the agent, follow the same steps in the **Visual Designer** tab under [Step 4: Run and test](#step-4-run-and-test).
 
 ## What you built
 
-You now have a customer care AI Agent that:
-- Exposes order and CRM data through two MCP servers built with `ballerina/mcp`
-- Consumes both servers from an `ai:Agent` using `ai:McpToolKit`
-- Looks up orders, tracks shipments, and cancels orders
-- Retrieves customer profiles and creates and updates support cases
-- Maintains conversation context across turns via `ai:Listener`
-- Uses the standardized MCP protocol for clean separation between the agent and the backend systems
+- Connected an agent to a live MCP server using `ai:McpToolKit`
+- The agent dynamically discovered three tools (`searchProducts`, `getOrderStatus`, `submitReturnRequest`) at startup with no hardcoded tool definitions
+- Exposed the agent as an HTTP chat service with session-scoped memory
 
 ## What's next
 
-- [MCP Overview](/docs/genai/mcp/overview) — Learn more about the Model Context Protocol
-- [Exposing MCP Servers](/docs/genai/mcp/exposing-mcp-servers) — Build more MCP servers for other systems
-- [MCP Security](/docs/genai/mcp/mcp-security) — Secure your MCP server connections
-- [Agent Tracing](/docs/genai/agent-observability/agent-tracing) — Add observability to your agent
+- [Exposing a service as an MCP server](../../develop/mcp/exposing-as-mcp) — Build your own MCP server like the one used in this tutorial
+- [Consuming MCP from an agent](../../develop/mcp/consuming-mcp-from-agent) — Deeper reference for `ai:McpToolKit` options
+- [Adding memory to an agent](../../develop/agents/memory) — Persist conversation history across sessions
+- [AI agent observability](../../develop/agents/observability) — Trace tool calls and monitor agent performance
