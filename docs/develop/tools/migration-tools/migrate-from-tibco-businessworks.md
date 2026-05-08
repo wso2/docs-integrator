@@ -6,7 +6,7 @@ title: Migrate from TIBCO BusinessWorks
 
 ## Overview
 
-The TIBCO migration tool converts TIBCO BusinessWorks process definitions to Ballerina code. It handles process flows, activities, transitions, shared resources, error handling configurations and more.
+The TIBCO migration tool converts TIBCO BusinessWorks process definitions to Ballerina code. It handles process flows, activities, transitions, shared resources, error handling configurations, and more.
 
 ## Run the TIBCO migration tool
 

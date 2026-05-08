@@ -6,11 +6,11 @@ title: Migrate from Azure Logic Apps
 
 ## Overview
 
-The Azure Logic Apps migration tool converts Logic Apps workflow definitions (ARM templates and workflow JSON) to Ballerina code. It handles triggers, actions, connectors, control flow, error handling patterns and more.
+The Azure Logic Apps migration tool converts Logic Apps workflow definitions (ARM templates and workflow JSON) to Ballerina code. It handles triggers, actions, connectors, control flow, error handling patterns, and more.
 
 ## Run the Azure Logic Apps migration tool
 
-Currently, wizard-based migration is not available for Azure Logic Apps. Please use the CLI instructions in the next tab.
+Currently, WSO2 Integrator wizard-based migration is not available for Azure Logic Apps. Please use the CLI instructions in the next tab.
 
 You can migrate Azure Logic Apps projects using the Ballerina CLI tool. Follow these steps:
 

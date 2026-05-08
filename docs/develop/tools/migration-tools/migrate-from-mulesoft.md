@@ -6,7 +6,7 @@ title: Migrate from MuleSoft
 
 ## Overview
 
-The MuleSoft migration tool converts MuleSoft Anypoint flows (XML configurations) to Ballerina code. It handles HTTP listeners, request connectors, DataWeave transformations, routers, error handling patterns and more.
+The MuleSoft migration tool converts MuleSoft Anypoint flows (XML configurations) to Ballerina code. It handles HTTP listeners, request connectors, DataWeave transformations, routers, error handling patterns, and more.
 
 ## Run the MuleSoft migration tool
 
