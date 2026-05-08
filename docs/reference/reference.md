@@ -34,17 +34,16 @@ Project and deployment configuration files:
 
 Command-line tools reference:
 
-| Command                                 | Purpose                                      |
-| --------------------------------------- | -------------------------------------------- |
+| Command                                    | Purpose                                      |
+| ------------------------------------------ | -------------------------------------------- |
 | **[bal commands](cli/bal-command-reference.md)** | Core build, run, test, and package commands  |
-| **[bal persist](cli/bal-persist.md)**   | Data persistence code generation             |
-| **[bal openapi](cli/bal-openapi.md)**   | Generate services/clients from OpenAPI specs |
-| **[bal graphql](cli/bal-graphql.md)**   | GraphQL schema generation                    |
-| **[bal grpc](cli/bal-grpc.md)**         | Generate code from .proto files              |
-| **[bal edi](cli/bal-edi.md)**           | EDI schema processing                        |
-| **[bal health](cli/bal-health.md)**     | FHIR/HL7 health tool                         |
-| **[Update Tool](cli/ballerina-update-tool.md)**   | Manage Ballerina distributions               |
-| **[Scan Tool](cli/bal-scan.md)**       | Static analysis rules                        |
+| **[bal persist](cli/bal-persist.md)**      | Data persistence code generation             |
+| **[bal openapi](cli/bal-openapi.md)**      | Generate services/clients from OpenAPI specs |
+| **[bal graphql](cli/bal-graphql.md)**      | GraphQL schema generation                    |
+| **[bal grpc](cli/bal-grpc.md)**            | Generate code from .proto files              |
+| **[bal edi](cli/bal-edi.md)**              | EDI schema processing                        |
+| **[bal health](cli/bal-health.md)**        | FHIR/HL7 health tool                         |
+| **[Scan Tool](cli/bal-scan.md)**           | Static analysis rules                        |
 
 ## APIs
 
