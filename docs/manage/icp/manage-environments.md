@@ -31,7 +31,7 @@ The Environments page shows a table with columns:
 A search bar and **+ Create** button appear at the top. Pagination controls sit
 at the bottom.
 
-URL pattern: `https://<host>:9445/organizations/default/environments`
+URL pattern: `https://<host>:9446/organizations/default/environments`
 
 ## Create an Environment
 

@@ -47,13 +47,14 @@ evaluation and development only.
 
 All configuration lives in `conf/deployment.toml`. The defaults work
 out of the box for local evaluation — ICP will start with the embedded H2
-database, listen on `https://localhost:9445`, and create an `admin` user.
+database, listen on `https://localhost:9446`, and create an `admin` user.
 
 ### Essential Settings
 
 | Setting                  | Default                  | Description                              |
 | ------------------------ | ------------------------ | ---------------------------------------- |
-| `serverPort`             | `9445`                   | HTTPS port for the console and API       |
+| `serverPort`             | `9446`                   | HTTPS port for the console and API       |
+| `runtimeListenerPort`    | `9445`                   | HTTPS port for runtime heartbeat connections |
 | `serverHost`             | `0.0.0.0`                | Bind address                             |
 | `logLevel`               | `INFO`                   | `DEBUG`, `INFO`, `WARN`, or `ERROR`      |
 | `frontendJwtHMACSecret`  | (default key)            | JWT signing secret — change in production |
@@ -112,10 +113,9 @@ The ICP config file ships with `opensearchUrl`, `opensearchUsername`, and `opens
 
 ### Reverse Proxy
 
-ICP serves the console, API, and runtime listener on a single HTTPS port
-(`9445` by default). To expose ICP through a reverse proxy:
+ICP serves the console and API on port `9446` by default. To expose ICP through a reverse proxy:
 
-1. Point the proxy at `https://<icp-host>:9445` (the backend is HTTPS with a
+1. Point the proxy at `https://<icp-host>:9446` (the backend is HTTPS with a
    self-signed certificate, so configure the proxy to trust it or skip
    verification for the upstream).
 
@@ -154,18 +154,18 @@ bin\icp.bat
 ```
 
 The server logs its startup to the console. Once you see the listener ready
-message, ICP is available at `https://localhost:9445`.
+message, ICP is available at `https://localhost:9446`.
 
 **Note:** ICP ships with a self-signed certificate. Your browser will show a
 security warning on first visit — accept it to proceed.
 
 ## Sign In
 
-Navigate to `https://<host>:9445/login`. Enter username `admin` and password
+Navigate to `https://<host>:9446/login`. Enter username `admin` and password
 `admin`, then click **Sign In**.
 
 After login the browser redirects to the organization home at
-`https://<host>:9445/organizations/default`.
+`https://<host>:9446/organizations/default`.
 
 **Warning:** Change the default admin password immediately via **Access-control**
 > **Users** > **Reset Password**. See [Access Control](access-control.md) for

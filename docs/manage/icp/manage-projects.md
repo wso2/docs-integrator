@@ -18,7 +18,7 @@ Each card shows:
 
 A search bar filters projects by name. A **+ Create** button sits at top-right.
 
-URL pattern: `https://<host>:9445/organizations/default`
+URL pattern: `https://<host>:9446/organizations/default`
 
 ## Create a Project
 

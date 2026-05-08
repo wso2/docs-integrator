@@ -403,7 +403,7 @@ For plain HTTP OpenSearch (no TLS), use `http://` and drop `-k`.
 
 ### Check ICP Console
 
-1. Log into the ICP Console at `https://<icp-host>:9445`.
+1. Log into the ICP Console at `https://<icp-host>:9446`.
 2. Navigate to **Projects → \<project\> → Components → \<component\>**.
 3. The component overview shows the service endpoints and environment cards with runtime status.
 4. Click the **Logs** icon in the sidebar (📋) — you should see runtime log entries with timestamps, log levels, and messages. Use the environment, level, and time range filters to narrow results.
