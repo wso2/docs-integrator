@@ -110,4 +110,3 @@ Click **Edit** to modify the README directly. If the project does not have a REA
 
 - [Integrator view](integration-view.md): the primary development interface for individual integrations.
 - [Library view](library-view.md): build and manage reusable libraries.
-- [Packages & Modules](/docs/develop/organize-code/packages-modules): understand package structure.

@@ -16,7 +16,7 @@ A reusable piece of business logic that connects systems, transforms data, or or
 
 ## Library
 
-A shareable collection of reusable components, functions, and connectors packaged for distribution. Libraries let you build once and use across multiple projects or share with your team. For more information, see [Organize code](/docs/develop/organize-code/).
+A shareable collection of reusable components, functions, and connectors packaged for distribution. Libraries let you build once and use across multiple projects or share with your team.
 
 ## Services and listeners
 

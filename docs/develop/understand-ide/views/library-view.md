@@ -63,5 +63,4 @@ The README section at the bottom of the Library view displays the contents of yo
 ## What's next
 
 - [Integration artifacts](/docs/develop/integration-artifacts): learn about the artifact types you can define in a library.
-- [Packages & Modules](/docs/develop/organize-code/packages-modules): understand package structure.
 - [Publish to Ballerina Central](/docs/connectors/build-your-own/custom-development): share your libraries.

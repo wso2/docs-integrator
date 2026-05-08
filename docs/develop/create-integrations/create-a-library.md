@@ -86,4 +86,3 @@ The library is generated as a Ballerina package. Use these fields to specify the
 
 - [Library view](../understand-ide/views/library-view.md) — Learn how to manage and configure your library project
 - [Create a new integration](create-a-new-integration.md) — Create an integration that uses your library
-- [Manage dependencies](../organize-code/dependencies.md) — Add libraries as dependencies to your integrations
