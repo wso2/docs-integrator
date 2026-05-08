@@ -6,13 +6,7 @@ title: Project View
 
 The Project View is the top-level view in WSO2 Integrator. It appears when you open a project that contains multiple integrations or libraries, giving you an overview of everything in the project, deployment options, and project-level actions in one place.
 
-<ThemedImage
-    alt="Project View overview"
-    sources={{
-        light: useBaseUrl('/img/develop/project-views/project-view/overview.png'),
-        dark: useBaseUrl('/img/develop/project-views/project-view/overview-dark.png'),
-    }}
-/>
+![Project View overview](/img/develop/project-views/project-view/overview.png)
 
 The Project View, [Integration View](integration-view.md), and [Library View](library-view.md) share the same UI chrome: activity bar, project explorer, editor toolbar, and deployment options panel. These elements are described once here and behave the same across all three views.
 
@@ -30,13 +24,7 @@ The activity bar is the narrow vertical strip on the far-left edge of the WSO2 I
 
 Click the **WSO2 Integrator** icon to return to the Project View at any time.
 
-<ThemedImage
-    alt="Activity bar"
-    sources={{
-        light: useBaseUrl('/img/develop/project-views/project-view/activity-bar.png'),
-        dark: useBaseUrl('/img/develop/project-views/project-view/activity-bar-dark.png'),
-    }}
-/>
+![Activity bar](/img/develop/project-views/project-view/activity-bar.png)
 
 ## Project explorer
 
@@ -45,13 +33,7 @@ The project explorer is the left sidebar that organizes the contents of your pro
 - At the **project level**, the project explorer lists all integrations and libraries in the project, grouped by name. Each entry is expandable to reveal its own artifact tree.
 - Inside an **integration or library**, the project explorer organizes its components into sections by artifact type, making it easy to locate and manage the building blocks of your integration.
 
-<ThemedImage
-    alt="Project explorer"
-    sources={{
-        light: useBaseUrl('/img/develop/project-views/project-view/project-explorer.png'),
-        dark: useBaseUrl('/img/develop/project-views/project-view/project-explorer-dark.png'),
-    }}
-/>
+![Project explorer](/img/develop/project-views/project-view/project-explorer.png)
 
 When an integration or library is open, the project explorer groups its artifacts into the following sections. Click an artifact name to open it in its dedicated view, or click the **+** icon next to a section to add a new one.
 
@@ -92,13 +74,7 @@ Click the **+ Add** button at the top of the canvas to add a new integration or 
 
 The editor toolbar appears on the right side of the editor tab bar. It provides quick actions for the active integration.
 
-<ThemedImage
-    alt="Editor toolbar"
-    sources={{
-        light: useBaseUrl('/img/develop/project-views/project-view/editor-toolbar.png'),
-        dark: useBaseUrl('/img/develop/project-views/project-view/editor-toolbar-dark.png'),
-    }}
-/>
+![Editor toolbar](/img/develop/project-views/project-view/editor-toolbar.png)
 
 | Action | Description |
 |---|---|
@@ -111,13 +87,7 @@ The editor toolbar appears on the right side of the editor tab bar. It provides 
 
 The deployment options panel appears on the right sidebar and provides shortcuts to deploy your integrations to different environments.
 
-<ThemedImage
-    alt="Deployment options"
-    sources={{
-        light: useBaseUrl('/img/develop/project-views/project-view/deployment-options.png'),
-        dark: useBaseUrl('/img/develop/project-views/project-view/deployment-options-dark.png'),
-    }}
-/>
+![Deployment options](/img/develop/project-views/project-view/deployment-options.png)
 
 | Option | Target |
 |---|---|
@@ -132,13 +102,7 @@ At the project level, click **Enable ICP for all integrations** to activate ICP 
 
 The README section at the bottom of the Project View displays the contents of your project's `README.md` file. Use it to document the purpose, setup instructions, and usage notes for your project, integrations, and libraries.
 
-<ThemedImage
-    alt="README"
-    sources={{
-        light: useBaseUrl('/img/develop/project-views/project-view/readme.png'),
-        dark: useBaseUrl('/img/develop/project-views/project-view/readme-dark.png'),
-    }}
-/>
+![README](/img/develop/project-views/project-view/readme.png)
 
 Click **Edit** to modify the README directly. If the project does not have a README yet, click **Add a README** to create one.
 
