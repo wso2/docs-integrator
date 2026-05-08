@@ -96,3 +96,13 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/websub_connector_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/websub_connector_sample)
+
+## More code examples
+
+The `WebSub Hub` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-websubhub/tree/main/examples), covering WebSub hub implementations and publish-subscribe delivery patterns.
+
+1. [In-memory hub](https://github.com/ballerina-platform/module-ballerina-websubhub/tree/main/examples/in-memory-hub) - Implement a WebSub hub that stores subscription state in memory.
+
+2. [JMS WebSub hub](https://github.com/ballerina-platform/module-ballerina-websubhub/tree/main/examples/jms-websubhub) - Build a WebSub hub backed by JMS-based message delivery.
+
+3. [Kafka hub](https://github.com/ballerina-platform/module-ballerina-websubhub/tree/main/examples/kafka-hub) - Implement a WebSub hub backed by Kafka-based event distribution.

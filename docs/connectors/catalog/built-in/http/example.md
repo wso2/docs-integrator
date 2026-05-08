@@ -197,3 +197,15 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/http_trigger_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/http_trigger_sample)
+
+## More code examples
+
+The `HTTP` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples), covering HTTP services, clients, security, REST API design, and streaming use cases.
+
+1. [Ballerina Secure Token Service (STS)](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/ballerina-sts) - Implement a secure token service that demonstrates HTTP service security and token-based access flows.
+
+2. [Pet Clinic REST API](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/petclinic) - Build a REST API for a pet clinic application using HTTP services, resources, and data persistence.
+
+3. [Server-sent events](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/server-sent-events) - Explore server-sent event examples for streaming updates from an HTTP service to clients.
+
+4. [Snowpeak REST API](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/snowpeak) - Learn REST API design patterns using an HTTP service and client implementation.

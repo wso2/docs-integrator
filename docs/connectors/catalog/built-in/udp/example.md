@@ -81,3 +81,9 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/udp_connector_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/udp_connector_sample)
+
+## More code examples
+
+The `UDP` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-udp/tree/main/examples), covering UDP datagram communication and lightweight network services.
+
+1. [Simple file server](https://github.com/ballerina-platform/module-ballerina-udp/tree/main/examples/simple-file-server) - Implement a simple file server using UDP datagram-based communication.

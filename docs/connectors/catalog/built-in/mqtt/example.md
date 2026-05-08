@@ -209,3 +209,9 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/mqtt_trigger_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/mqtt_trigger_sample)
+
+## More code examples
+
+The `MQTT` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-mqtt/tree/main/examples), covering MQTT publish-subscribe messaging and IoT-style event flows.
+
+1. [Temperature sensor](https://github.com/ballerina-platform/module-ballerina-mqtt/tree/main/examples/temperature-sensor) - Implement a temperature sensor scenario using MQTT topics and message publishing.

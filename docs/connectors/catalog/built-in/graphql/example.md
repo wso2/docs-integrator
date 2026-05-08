@@ -228,3 +228,15 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/graphql_trigger_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/graphql_trigger_sample)
+
+## More code examples
+
+The `GraphQL` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples), covering GraphQL APIs, queries, mutations, subscriptions, and integration use cases.
+
+1. [Snowtooth](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/snowtooth) - Implement the popular Snowtooth GraphQL API using Ballerina GraphQL services.
+
+2. [Star Wars](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/starwars) - Build a GraphQL API based on the Star Wars domain model with queryable resources.
+
+3. [News Alerts](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/news_alerts) - Create a news alert GraphQL API with real-time updates using GraphQL subscriptions.
+
+4. [GitHub Issue Tracker](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/simple_github_issue_tracker) - Implement a custom GitHub issue tracker GraphQL API with integration scenarios and subscriptions.

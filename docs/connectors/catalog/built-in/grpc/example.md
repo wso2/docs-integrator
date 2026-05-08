@@ -96,3 +96,15 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/grpc_connector_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/grpc_connector_sample)
+
+## More code examples
+
+The `gRPC` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples), covering gRPC services, clients, streaming, compression, and microservice use cases.
+
+1. [Asynchronous streaming](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/async-streaming) - Implement asynchronous gRPC streaming with separate client and server components.
+
+2. [Online boutique microservice](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/online-boutique-microservice) - Build a microservice-based online boutique sample using gRPC services and generated protobuf contracts.
+
+3. [Program analyzer](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/program-analyzer) - Explore gRPC client and server communication with compression enabled.
+
+4. [Route guide](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/route-guide) - Learn common gRPC patterns using a route guide service with unary and streaming RPC interactions.

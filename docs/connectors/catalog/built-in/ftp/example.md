@@ -235,3 +235,9 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/ftp_trigger_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/ftp_trigger_sample)
+
+## More code examples
+
+The `FTP` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-ftp/tree/master/examples), covering FTP file transfer and file-processing use cases.
+
+1. [COVID-19 stat publisher](https://github.com/ballerina-platform/module-ballerina-ftp/tree/master/examples/covid19-stat-publisher) - Process files from an FTP location and publish extracted COVID-19 statistics.

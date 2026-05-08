@@ -91,3 +91,13 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/websocket_connector_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/websocket_connector_sample)
+
+## More code examples
+
+The `WebSocket` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-websocket/tree/main/examples), covering WebSocket services, clients, and real-time messaging use cases.
+
+1. [Chat application](https://github.com/ballerina-platform/module-ballerina-websocket/tree/main/examples/chat-application) - Build a real-time chat application using WebSocket client and service interactions.
+
+2. [Taxi service management](https://github.com/ballerina-platform/module-ballerina-websocket/tree/main/examples/taxi-service-management) - Implement a taxi-service management scenario with real-time WebSocket communication.
+
+3. [Tic-tac-toe](https://github.com/ballerina-platform/module-ballerina-websocket/tree/main/examples/tic-tac-toe) - Create an interactive tic-tac-toe game using bidirectional WebSocket messaging.
