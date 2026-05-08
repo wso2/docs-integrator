@@ -36,7 +36,7 @@ The creation wizard opens with the prompt *Build reusable components and utiliti
 
 Fill in the required fields and click **Create Library**.
 
-WSO2 Integrator generates the library project and opens the [library view](../project-views/library-view.md). The file structure for a library within a project contains a root `Ballerina.toml` and a subdirectory for the library package:
+WSO2 Integrator generates the library project and opens the [library view](../understand-ide/views/library-view.md). The file structure for a library within a project contains a root `Ballerina.toml` and a subdirectory for the library package:
 
 ```
 project-name/
@@ -84,6 +84,6 @@ The library is generated as a Ballerina package. Use these fields to specify the
 
 ## What's next
 
-- [Library view](../project-views/library-view.md) — Learn how to manage and configure your library project
+- [Library view](../understand-ide/views/library-view.md) — Learn how to manage and configure your library project
 - [Create a new integration](create-a-new-integration.md) — Create an integration that uses your library
 - [Manage dependencies](../organize-code/dependencies.md) — Add libraries as dependencies to your integrations

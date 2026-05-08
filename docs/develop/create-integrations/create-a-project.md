@@ -45,7 +45,7 @@ The **Advanced Configurations** section is expanded by default and contains the 
 
 ## Add integrations and libraries
 
-After creation, WSO2 Integrator opens the [project view](../project-views/project-view.md). The project starts empty with the message *Your project is empty. Start by adding integrations and libraries to your project.*
+After creation, WSO2 Integrator opens the [project view](../understand-ide/views/project-view.md). The project starts empty with the message *Your project is empty. Start by adding integrations and libraries to your project.*
 
 ![Empty project view](/img/create-project/project-view-empty.png)
 
@@ -84,6 +84,6 @@ The empty project also includes a **README** card that links to **Add a README**
 
 ## What's next
 
-- [Project view](../project-views/project-view.md) — Manage, run, and debug your project
+- [Project view](../understand-ide/views/project-view.md) — Manage, run, and debug your project
 - [Create a new integration](create-a-new-integration.md) — Create a standalone integration
 - [Create a library](create-a-library.md) — Create a standalone library

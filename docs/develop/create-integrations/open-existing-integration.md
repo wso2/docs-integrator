@@ -28,11 +28,11 @@ A native file browser appears. Navigate to the directory that contains your inte
 
 You can select either:
 
-- **A project folder** — A directory that contains a root `Ballerina.toml` and one or more integration or library subdirectories. WSO2 Integrator opens the [project view](../project-views/project-view.md).
-- **An integration or library folder** — A single package directory that contains a `Ballerina.toml` and `.bal` source files. WSO2 Integrator opens the [integration view](../project-views/integration-view.md) or [library view](../project-views/library-view.md) depending on the package type.
+- **A project folder** — A directory that contains a root `Ballerina.toml` and one or more integration or library subdirectories. WSO2 Integrator opens the [project view](../understand-ide/views/project-view.md).
+- **An integration or library folder** — A single package directory that contains a `Ballerina.toml` and `.bal` source files. WSO2 Integrator opens the [integration view](../understand-ide/views/integration-view.md) or [library view](../understand-ide/views/library-view.md) depending on the package type.
 
 ## What's next
 
 - [Create a new integration](create-a-new-integration.md) — Start a new project from scratch
 - [Explore sample integrations](explore-sample-integrations.md) — Browse and learn from built-in examples
-- [Project view](../project-views/project-view.md) — Manage multi-package workspaces
+- [Project view](../understand-ide/views/project-view.md) — Manage multi-package workspaces

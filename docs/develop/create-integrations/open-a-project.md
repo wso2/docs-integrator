@@ -36,7 +36,7 @@ The wizard opens with the prompt *Choose how you'd like to open a project.* and 
 2. A native file browser appears. Navigate to the directory that contains your project.
 3. Select the project folder and click **Open**.
 
-WSO2 Integrator detects the project structure and opens the [project view](../project-views/project-view.md).
+WSO2 Integrator detects the project structure and opens the [project view](../understand-ide/views/project-view.md).
 
 ### Open a cloud project
 
@@ -53,6 +53,6 @@ WSO2 Integrator detects the project structure and opens the [project view](../pr
 
 ## What's next
 
-- [Project view](../project-views/project-view.md) — Manage, run, and debug your project
+- [Project view](../understand-ide/views/project-view.md) — Manage, run, and debug your project
 - [Create a project](create-a-project.md) — Create a new project from scratch
 - [Create a new integration](create-a-new-integration.md) — Create a standalone integration

@@ -155,5 +155,5 @@ Click **Save Reports** to download the report for future reference, then click *
 
 ## What's next
 
-- [Project View](../project-views/project-view.md) -- Run, edit, and debug your migrated project
+- [Project View](../understand-ide/views/project-view.md) -- Run, edit, and debug your migrated project
 - [Integration Artifacts](/docs/develop/integration-artifacts/overview) -- Understand the artifact types in your migrated project

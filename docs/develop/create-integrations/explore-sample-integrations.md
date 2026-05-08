@@ -35,10 +35,10 @@ Click **Use** on a sample card. A native file browser appears so you can choose 
 
 ![Select folder dialog](/img/explore-samples/select-folder.png)
 
-Select a folder and click **Select Folder**. WSO2 Integrator downloads the sample and opens it as a project. From there, you can explore the code, run, edit, and debug the integration using the [project views](../project-views/project-view.md).
+Select a folder and click **Select Folder**. WSO2 Integrator downloads the sample and opens it as a project. From there, you can explore the code, run, edit, and debug the integration using the [project views](../understand-ide/views/project-view.md).
 
 ## What's next
 
-- [Project view](../project-views/project-view.md) — Run, edit, and debug your sample project
+- [Project view](../understand-ide/views/project-view.md) — Run, edit, and debug your sample project
 - [Create a new integration](create-a-new-integration.md) — Start a new project from scratch
 - [Integration artifacts](../integration-artifacts/integration-artifacts.md) — Understand the artifact types used in samples

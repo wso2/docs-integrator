@@ -8,7 +8,7 @@ This page introduces every major product component in 2–3 sentences. Think of 
 
 ## Project
 
-A workspace that contains your integration code, dependencies, configuration, and deployment artifacts. Each project is self-contained with its own `Ballerina.toml` file. For more information, see [Project structure](/docs/develop/project-views/overview).
+A workspace that contains your integration code, dependencies, configuration, and deployment artifacts. Each project is self-contained with its own `Ballerina.toml` file. For more information, see [Project structure](/docs/develop/understand-ide/views/project-view).
 
 ## Integration
 
