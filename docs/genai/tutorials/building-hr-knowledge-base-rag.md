@@ -4,9 +4,7 @@ title: Building an HR knowledge base with RAG
 
 # Building an HR knowledge base with RAG
 
-**Time:** 30 minutes | **Level:** Intermediate | **What you'll build:** Two artifacts in a single integration. An Automation that ingests HR policy documents, and an HTTP Service that answers employee questions with retrieval-augmented generation.
-
-Build a complete HR retrieval-augmented generation pipeline visually in the WSO2 Integrator visual designer. The Automation ingests an HR policy document into a vector knowledge base. The HTTP Service answers employee questions over HTTP, grounded in the ingested chunks.
+Build a complete HR retrieval-augmented generation pipeline in the WSO2 Integrator visual designer. You'll create two artifacts in one integration: an Automation that ingests HR policy documents into a vector knowledge base, and an HTTP Service that answers employee questions over HTTP, grounded in the ingested chunks.
 
 **What you'll learn:**
 
@@ -15,18 +13,12 @@ Build a complete HR retrieval-augmented generation pipeline visually in the WSO2
 - How to retrieve relevant chunks and ground an LLM response with them.
 - How to expose the result over HTTP as a reusable service.
 
-## Prerequisites
+**Time:** 30 minutes
 
+:::info Prerequisites
 - An HR policy document in plain-text form (for example, a leave policy or code of conduct). A short `.md` file is enough to follow the tutorial.
 
-:::info Default model and embedding providers
-The default WSO2 model provider and embedding provider share the same access token. WSO2 Integrator prompts you to run **Ballerina: Configure default WSO2 model provider** from the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) the first time you create either provider in a flow. Sign in with your WSO2 account when prompted, and WSO2 Integrator wires the configuration into your project automatically.
-
-![Command Palette filtered to "Configure default WSO2 model provider".](/img/genai/tutorials/hr-knowledge-base-rag/27-configure-model-provider.png)
-
-The access token expires after a few hours. If a request to the default model provider or embedding provider starts failing, rerun **Ballerina: Configure default WSO2 model provider** from the Command Palette to refresh the token.
-
-## Architecture
+## What you'll build
 
 ```mermaid
 flowchart TD
@@ -206,7 +198,16 @@ Back on the Vector Knowledge Base form, click **+ Create New Embedding Model**. 
 
 ![Select Embedding Provider](/img/genai/tutorials/hr-knowledge-base-rag/12a-embedding-provider-picker.png)
 
-Pick **Default Embedding Provider (WSO2)**. It is provisioned through your Copilot login, so no API key is required. The **Create Embedding Provider** form opens. Fill in:
+Pick **Default Embedding Provider (WSO2)**. It is provisioned through your Copilot login, so no API key is required.
+
+:::info Default model and embedding providers
+The default WSO2 model provider and embedding provider share the same access token. WSO2 Integrator prompts you to run **Ballerina: Configure default WSO2 model provider** from the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) the first time you create either provider in a flow. Sign in with your WSO2 account when prompted, and WSO2 Integrator wires the configuration into your project automatically.
+
+![Command Palette filtered to "Configure default WSO2 model provider".](/img/genai/tutorials/hr-knowledge-base-rag/27-configure-model-provider.png)
+
+The access token expires after a few hours. If a request to the default model provider or embedding provider starts failing, rerun **Ballerina: Configure default WSO2 model provider** from the Command Palette to refresh the token.
+
+The **Create Embedding Provider** form opens. Fill in:
 
 - **Embedding Provider Name**: `aiWso2embeddingprovider`
 - **Result Type**: `ai:Wso2EmbeddingProvider`
@@ -255,19 +256,7 @@ The **ai : ingest** form opens. The **Documents** field defaults to **Record** m
 
 ![ai:ingest form in Record mode](/img/genai/tutorials/hr-knowledge-base-rag/15c-ingest-action-picker.png)
 
-Switch the **Documents** field to **Expression** mode so you can reference the `hrDocuments` array loaded earlier.
-
-![Documents field in Expression mode](/img/genai/tutorials/hr-knowledge-base-rag/15d-ingest-action-picker.png)
-
-Click into the **Documents** field. The helper pane opens with **Inputs**, **Variables**, **Configurables**, and **Functions**.
-
-![Documents helper pane](/img/genai/tutorials/hr-knowledge-base-rag/15e-ingest-action-picker.png)
-
-Select **Variables**, then pick `hrDocuments`.
-
-![Variables list with hrDocuments](/img/genai/tutorials/hr-knowledge-base-rag/15f-ingest-action-picker.png)
-
-The **Documents** field is now set to `hrDocuments`.
+Switch the **Documents** field to **Expression** mode, then click into it and pick **Variables** > `hrDocuments` from the helper pane.
 
 ![Documents set to hrDocuments](/img/genai/tutorials/hr-knowledge-base-rag/15g-ingest-action-picker.png)
 
@@ -290,12 +279,6 @@ The **log : printInfo** form opens. Set **Msg** to `Ingestion Completed!` so you
 ![log:printInfo form with message](/img/genai/tutorials/hr-knowledge-base-rag/16c-add-log-node.png)
 
 ### 2.7 Review the completed ingestion flow
-
-Your ingestion automation now contains:
-
-```bash
-Start -> ai:load (hrDocuments) -> ai:ingest -> log:printInfo -> Error Handler
-```
 
 ![Completed automation flow](/img/genai/tutorials/hr-knowledge-base-rag/17-automation-flow-complete.png)
 
@@ -369,19 +352,9 @@ Click `aiVectorknowledgebase` to expand it and reveal its actions. Click **Retri
 
 ![Retrieve action expanded](/img/genai/tutorials/hr-knowledge-base-rag/22c-retrieve-action-picker.png)
 
-The **ai : retrieve** form opens. Click into the **Query** field and the helper pane should open with **Inputs**, **Variables**, and **Configurables**.
+The **ai : retrieve** form opens. Click into the **Query** field, then pick **Inputs** > `payload` > `userQuery` from the helper pane.
 
-![ai:retrieve form with helper pane](/img/genai/tutorials/hr-knowledge-base-rag/22d-retrieve-action-picker.png)
-
-Select **Inputs**. The `payload` input is listed (typed as `QueryPayload`).
-
-![Inputs list showing payload](/img/genai/tutorials/hr-knowledge-base-rag/22e-retrieve-action-picker.png)
-
-Drill into `payload` and pick `userQuery`.
-
-![payload fields with userQuery](/img/genai/tutorials/hr-knowledge-base-rag/22f-retrieve-action-picker.png)
-
-The **Query** field is now set to `payload.userQuery`. Set **Result** to `queryMatch`. **Result Type** stays at the auto-filled `ai:QueryMatch[]`.
+Set **Result** to `queryMatch`. **Result Type** stays at the auto-filled `ai:QueryMatch[]`.
 
 ![ai:retrieve filled](/img/genai/tutorials/hr-knowledge-base-rag/22g-retrieve-action-picker.png)
 
@@ -403,35 +376,11 @@ The **ai : augmentUserQuery** form opens. **Result** is pre-filled with `aiChatu
 
 ![ai:augmentUserQuery form initial state](/img/genai/tutorials/hr-knowledge-base-rag/23c-augment-query-node.png)
 
-Switch the **Context** field to **Expression** mode so you can reference the array variable directly.
-
-![Context switched to Expression mode](/img/genai/tutorials/hr-knowledge-base-rag/23d-augment-query-node.png)
-
-Click into the **Context** expression. The helper pane opens with **Inputs**, **Variables**, **Configurables**, and **Functions**.
-
-![Context helper pane](/img/genai/tutorials/hr-knowledge-base-rag/23e-augment-query-node.png)
-
-Select **Variables** and pick `queryMatch`.
-
-![Variables list with queryMatch](/img/genai/tutorials/hr-knowledge-base-rag/23f-augment-query-node.png)
-
-The **Context** field is now set to `queryMatch`.
+Switch the **Context** field to **Expression** mode, then click into it and pick **Variables** > `queryMatch` from the helper pane.
 
 ![Context set to queryMatch](/img/genai/tutorials/hr-knowledge-base-rag/23g-augment-query-node.png)
 
-Click into the **Query** field. The helper pane opens.
-
-![Query helper pane](/img/genai/tutorials/hr-knowledge-base-rag/23h-augment-query-node.png)
-
-Select **Inputs**. The `payload` input is listed.
-
-![Inputs list showing payload](/img/genai/tutorials/hr-knowledge-base-rag/23i-augment-query-node.png)
-
-Drill into `payload` and pick `userQuery`.
-
-![payload fields with userQuery](/img/genai/tutorials/hr-knowledge-base-rag/23j-augment-query-node.png)
-
-The **Query** field is now set to `payload.userQuery`. Both fields are populated.
+Click into the **Query** field and pick **Inputs** > `payload` > `userQuery` from the helper pane. Both fields are now populated.
 
 ![ai:augmentUserQuery filled](/img/genai/tutorials/hr-knowledge-base-rag/23k-augment-query-node.png)
 
@@ -499,15 +448,7 @@ Click the **+** below the `ai:generate` node. The node palette opens. Under **Co
 
 ![Return option in the Control section](/img/genai/tutorials/hr-knowledge-base-rag/25a-return-node.png)
 
-The **Return** form opens. Click into the **Expression** field. The helper pane opens with **Inputs**, **Variables**, **Configurables**, and **Functions**.
-
-![Return form with helper pane](/img/genai/tutorials/hr-knowledge-base-rag/25b-return-node.png)
-
-Select **Variables** and pick `result`.
-
-![Variables list with result](/img/genai/tutorials/hr-knowledge-base-rag/25c-return-node.png)
-
-The **Expression** field is now set to `result`.
+The **Return** form opens. Click into the **Expression** field and pick **Variables** > `result` from the helper pane.
 
 ![Return Expression set to result](/img/genai/tutorials/hr-knowledge-base-rag/25d-return-node.png)
 
@@ -582,8 +523,6 @@ You now have a fully visual HR RAG pipeline that grounds an LLM in your actual p
 
 ## What's next
 
-- [AI Connections and Stores → Vector Stores](/docs/genai/develop/components/vector-stores) — Swap the in-memory store for a persistent backend (Pinecone, Milvus, Pgvector, Weaviate).
-- [AI Connections and Stores → Chunkers](/docs/genai/develop/components/chunkers) — Tune chunk size and overlap, or plug in a custom chunker.
-- [RAG → The Query Flow](/docs/genai/develop/rag/overview#the-query-flow) — Customize retrieval (top-K, filters, hybrid search).
-- [AI Customer Support Agent](ai-customer-support-agent.md) — Reuse `aiVectorknowledgebase` from a chat agent as a tool.
-- [Multi-Agent Workflow](multi-agent-workflow.md) — Combine RAG with other agents in a larger workflow.
+- [Vector stores](../develop/components/vector-stores.md) — Swap the in-memory store for a persistent backend (Pinecone, Milvus, Pgvector, Weaviate).
+- [Chunkers](../develop/components/chunkers.md) — Tune chunk size and overlap, or plug in a custom chunker.
+- [The query flow](../develop/rag/overview.md#the-query-flow) — Customize retrieval (top-K, filters, hybrid search).
