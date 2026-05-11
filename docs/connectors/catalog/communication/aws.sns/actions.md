@@ -8,13 +8,13 @@ The `ballerinax/aws.sns` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Provides operations to interact with AWS SNS — topic management, publishing, subscriptions, platform applications, SMS, and more. |
+| [`Client`](#client) | Provides operations to interact with AWS SNS: topic management, publishing, subscriptions, platform applications, SMS, and more. |
 
 ---
 
 ## Client
 
-Provides operations to interact with AWS SNS — topic management, publishing, subscriptions, platform applications, SMS, and more.
+Provides operations to interact with AWS SNS: topic management, publishing, subscriptions, platform applications, SMS, and more.
 
 ### Configuration
 
@@ -196,7 +196,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `target` | `string` | Yes | The topic ARN, target ARN, or phone number to publish to. |
-| `message` | `Message` | Yes | The message to send — either a plain string or a `MessageRecord` with protocol-specific bodies. |
+| `message` | `Message` | Yes | The message to send: either a plain string or a `MessageRecord` with protocol-specific bodies. |
 | `targetType` | `TargetType` | No | Type of the target: `TOPIC` (default), `ARN`, or `PHONE_NUMBER`. |
 | `attributes` | `map` | No | Optional message attributes for filtering. |
 | `deduplicationId` | `string` | No | Deduplication ID for FIFO topics. |

@@ -189,7 +189,7 @@ service "FileProcessor" on sftpListener {
 }
 ```
 
-Use the `@ftp:ServiceConfig` annotation to specify the `path` to monitor and an optional `fileNamePattern` regex to filter files. You can also use `@ftp:FunctionConfig` on individual callbacks to set per-function file patterns and post-processing actions (`afterProcess` and `afterError` — `MOVE` or `DELETE`).
+Use the `@ftp:ServiceConfig` annotation to specify the `path` to monitor and an optional `fileNamePattern` regex to filter files. You can also use `@ftp:FunctionConfig` on individual callbacks to set per-function file patterns and post-processing actions (`afterProcess` and `afterError`, which can be `MOVE` or `DELETE`).
 
 ### Post-processing for `onError`
 

@@ -6,7 +6,7 @@ HubSpot CRM Commerce Quotes API enables you to create, manage, and track sales q
 
 ## Key features
 
-- Full CRUD operations on HubSpot quote objects — create, read, update, and archive
+- Full CRUD operations on HubSpot quote objects: create, read, update, and archive
 - Batch operations for creating, reading, updating, upserting, and archiving multiple quotes in a single request
 - Flexible search with filter groups, sorting, and property selection
 - Association support for linking quotes to other HubSpot CRM objects (deals, contacts, line items)
@@ -15,7 +15,7 @@ HubSpot CRM Commerce Quotes API enables you to create, manage, and track sales q
 
 ## Actions
 
-Actions are operations you invoke on HubSpot to manage quote objects — creating quotes, retrieving quote details, updating properties, running batch operations, and searching. The connector exposes actions through a single client:
+Actions are operations you invoke on HubSpot to manage quote objects: creating quotes, retrieving quote details, updating properties, running batch operations, and searching. The connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -27,7 +27,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot developer account and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Commerce Quotes connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot CRM Commerce Quotes** connector, including connection setup, operation configuration, and execution flow.
 

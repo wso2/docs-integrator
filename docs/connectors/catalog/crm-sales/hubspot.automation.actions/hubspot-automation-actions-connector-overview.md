@@ -17,7 +17,7 @@ HubSpot Automation Actions is part of the HubSpot CRM platform, enabling develop
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — managing custom workflow extension definitions, their functions, revisions, and completing callbacks. The connector exposes all actions through a single client:
+Actions are operations you invoke on HubSpot from your integration: managing custom workflow extension definitions, their functions, revisions, and completing callbacks. The connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -29,7 +29,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up a HubSpot developer account and obtaining the credentials required to use the HubSpot Automation Actions connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot Automation Actions** connector, including connection setup, operation configuration, and execution flow.
 

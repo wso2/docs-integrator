@@ -12,7 +12,7 @@ This guide walks you through setting up a Milvus instance and obtaining the conn
 
 ## Step 1: Start a Milvus instance
 
-**Option A — Local with Docker:**
+**Option A: Local with Docker:**
 
 1. Download the Milvus standalone Docker Compose file:
 
@@ -28,7 +28,7 @@ This guide walks you through setting up a Milvus instance and obtaining the conn
 
 3. The Milvus service will be available at `localhost:19530`.
 
-**Option B — Zilliz Cloud (managed):**
+**Option B: Zilliz Cloud (managed):**
 
 1. Sign up at [Zilliz Cloud](https://cloud.zilliz.com/).
 2. Create a new cluster and select your preferred cloud provider and region.

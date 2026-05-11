@@ -38,8 +38,8 @@ Select **+ Add Connection** in the Connections section of the canvas to open the
 
 Enter the following parameters in the **Configure Contacts** form, binding each to a configurable variable to keep secrets out of source code:
 
-- **Config** : Authentication configuration — set to an expression that references the `hubspotToken` configurable variable
-- **Service Url** : The HubSpot API base URL — bound to the `hubspotServiceUrl` configurable variable
+- **Config**: Authentication configuration: set to an expression that references the `hubspotToken` configurable variable
+- **Service Url**: The HubSpot API base URL: bound to the `hubspotServiceUrl` configurable variable
 - **Connection Name** : A unique name for this connection instance
 
 ![HubSpot Contacts connection form fully filled with all parameters before saving](/img/connectors/catalog/crm-sales/hubspot.crm.obj.contacts/hubspot_crm_obj_contacts_screenshot_02_connection_form.png)
@@ -78,7 +78,7 @@ The flow canvas now shows: **Start → (empty slot) → Error Handler**.
 3. Select **Create** (the `postCrmV3ObjectsContacts` operation).
 4. In the operation form, configure the following parameters:
 
-- **Payload** : Contact properties to create — enter an expression with `email`, `firstname`, `lastname`, and `phone` fields
+- **Payload**: Contact properties to create: enter an expression with `email`, `firstname`, `lastname`, and `phone` fields
 - **Result** : The variable name to store the returned `SimplePublicObject`
 
 ![HubSpot Contacts Create operation configuration filled with all values](/img/connectors/catalog/crm-sales/hubspot.crm.obj.contacts/hubspot_crm_obj_contacts_screenshot_05_operation_filled.png)
@@ -99,5 +99,5 @@ Try this sample in WSO2 Integration Platform.
 
 The `Ballerina HubSpot CRM Contacts Connector` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.contacts/tree/main/examples/), covering the following use cases:
 
-1. [Email-Advertising](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.contacts/tree/main/examples/Email-Advertising) - Unsubscribe and remove customers based on email addresses of CSV-imported data.
-2. [Event-Registration](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.contacts/tree/main/examples/Event-Registration) - Event registration and follow-up using CSV-imported data.
+1. [Email-Advertising](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.contacts/tree/main/examples/Email-Advertising): Unsubscribe and remove customers based on email addresses of CSV-imported data.
+2. [Event-Registration](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.contacts/tree/main/examples/Event-Registration): Event registration and follow-up using CSV-imported data.

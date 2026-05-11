@@ -42,8 +42,8 @@ Enter `engagements.tasks` in the search box, then select **ballerinax / hubspot.
 
 Configure the connection form by binding each field to a configurable variable:
 
-- **config** : A `tasks:ConnectionConfig` record containing the bearer token — set to expression `{auth: {token: hubspotAuthToken}}`
-- **serviceUrl** : The HubSpot Tasks API base URL — bind to configurable variable `hubspotServiceUrl`
+- **config**: A `tasks:ConnectionConfig` record containing the bearer token: set to expression `{auth: {token: hubspotAuthToken}}`
+- **serviceUrl**: The HubSpot Tasks API base URL: bind to configurable variable `hubspotServiceUrl`
 
 ![HubSpot Tasks connection form fully filled with all parameters before saving](/img/connectors/catalog/crm-sales/hubspot.crm.engagements.tasks/hubspot_crm_engagements_tasks_screenshot_02_connection_config.png)
 
@@ -59,7 +59,7 @@ Select **Save Connection** to persist the connection. Confirm that the `tasksCli
 2. Set a value for each configurable listed below.
 
 - **hubspotAuthToken** (string) : Your HubSpot Private App bearer token (e.g., `pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`)
-- **hubspotServiceUrl** (string) : HubSpot Tasks API base URL override — leave blank to use the default
+- **hubspotServiceUrl** (string) : HubSpot Tasks API base URL override: leave blank to use the default
 
 ## Configuring the HubSpot CRM engagements tasks post operation
 
@@ -78,7 +78,7 @@ Select **Save Connection** to persist the connection. Confirm that the `tasksCli
 
 3. Select **Create a task** to open the configuration form, then fill in the following parameters:
 
-- **payload** : The task record containing `associations` and `properties` — set to an expression with `hs_task_subject`, `hs_task_body`, `hs_task_priority`, `hs_task_type`, and `hs_timestamp` fields
+- **payload**: The task record containing `associations` and `properties`: set to an expression with `hs_task_subject`, `hs_task_body`, `hs_task_priority`, `hs_task_type`, and `hs_timestamp` fields
 - **resultVariable** : Set to `result` to store the returned `tasks:SimplePublicObject`
 
 ![HubSpot Tasks post operation configuration filled with all values](/img/connectors/catalog/crm-sales/hubspot.crm.engagements.tasks/hubspot_crm_engagements_tasks_screenshot_05_operation_values.png)
@@ -99,6 +99,6 @@ Try this sample in WSO2 Integration Platform.
 
 The `HubSpot CRM Tasks` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.engagements.tasks/tree/main/examples), covering the following use cases:
 
-1. [Task management in HubSpot CRM](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.engagements.tasks/tree/main/examples/assign-or-extend-a-task) - This example searches for a task in HubSpot CRM by its subject, creating a new one if none exists or updating details like the due date and priority if found.
+1. [Task management in HubSpot CRM](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.engagements.tasks/tree/main/examples/assign-or-extend-a-task): This example searches for a task in HubSpot CRM by its subject, creating a new one if none exists or updating details like the due date and priority if found.
 
-2. [Task completion and status change in HubSpot CRM](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.engagements.tasks/tree/main/examples/mark-a-task-as-completed) - This example checks a task's status in HubSpot CRM and updates it to "Completed" if necessary, ensuring efficient task management.
+2. [Task completion and status change in HubSpot CRM](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.engagements.tasks/tree/main/examples/mark-a-task-as-completed): This example checks a task's status in HubSpot CRM and updates it to "Completed" if necessary, ensuring efficient task management.

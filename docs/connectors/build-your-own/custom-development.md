@@ -4,7 +4,7 @@ title: Custom development
 
 # Custom development
 
-Ballerina connectors are packages containing one or more clients that communicate with external services via REST APIs. Build one from scratch when you need full control over authentication, error handling, or data transformation logic — or when you want to publish a reusable connector to [Ballerina Central](https://central.ballerina.io/) for your team or the broader community. This guide walks through generating a connector from an OpenAPI specification, which is the fastest and most reliable approach.
+Ballerina connectors are packages containing one or more clients that communicate with external services via REST APIs. Build one from scratch when you need full control over authentication, error handling, or data transformation logic, or when you want to publish a reusable connector to [Ballerina Central](https://central.ballerina.io/) for your team or the broader community. This guide walks through generating a connector from an OpenAPI specification, which is the fastest and most reliable approach.
 
 ## Prerequisites
 
@@ -118,11 +118,11 @@ See the [Ballerina testing guide](https://ballerina.io/learn/test-ballerina-code
 
 This is displayed on the Ballerina Central package landing page. Include:
 
-- Overview — Concise introduction, purpose, and key features
-- Key features — Bullet list of the connector's main capabilities
-- Setup — Step-by-step configuration instructions and prerequisites (API keys, environment setup)
-- Quickstart — A basic, clear example for immediate use
-- Examples — Links to additional use cases and scenarios
+- Overview: Concise introduction, purpose, and key features
+- Key features: Bullet list of the connector's main capabilities
+- Setup: Step-by-step configuration instructions and prerequisites (API keys, environment setup)
+- Quickstart: A basic, clear example for immediate use
+- Examples: Links to additional use cases and scenarios
 
 ### Repository README (root `README.md`)
 
@@ -163,12 +163,12 @@ The `Vendor/`, `Area/`, and `Type/` keywords classify your connector in the WSO2
 | `Type/Connector` | Marks the package as a connector (use this fixed value) | `Type/Connector` |
 | `Name/<display name>` | Optional. Use when the display name should differ from the package name | `Name/Salesforce CRM` |
 
-The WSO2 Integration Platform connector catalog currently lists pre-built WSO2 connectors. Support for community-published connectors is planned — adding these keywords now ensures your connector is ready when that support rolls out.
+The WSO2 Integration Platform connector catalog currently lists pre-built WSO2 connectors. Support for community-published connectors is planned, and adding these keywords now ensures your connector is ready when that support rolls out.
 
 Then follow the [package publishing guide](https://ballerina.io/learn/publish-packages-to-ballerina-central/) to publish to Ballerina Central.
 
 ## What's next
 
-- [Create from OpenAPI spec](create-from-openapi-spec.md) — Generate a connector directly in the WSO2 Integrator IDE without writing code
-- [Build your own connector](build-own.md) — Compare approaches for creating custom connectors
-- [Connector catalog](../catalog/index.mdx) — Browse all available pre-built connectors
+- [Create from OpenAPI spec](create-from-openapi-spec.md): Generate a connector directly in the WSO2 Integrator IDE without writing code
+- [Build your own connector](build-own.md): Compare approaches for creating custom connectors
+- [Connector catalog](../catalog/index.mdx): Browse all available pre-built connectors

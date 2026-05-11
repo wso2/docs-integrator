@@ -92,7 +92,7 @@ Try this sample in WSO2 Integration Platform.
 ## HTTP Trigger Example
 ### What you'll build
 
-An HTTP Service integration listens for incoming HTTP requests on a configurable port using the `ballerina/http` trigger from the **Integration as API** category. When an HTTP client sends a `GET /messages` request to the listener, the trigger routes it to the resource handler, which builds a JSON payload and logs it as a JSON string using `log:printInfo`. The complete flow—HTTP listener → resource handler → log:printInfo → response—is assembled visually on the WSO2 Integrator low-code canvas.
+An HTTP Service integration listens for incoming HTTP requests on a configurable port using the `ballerina/http` trigger from the **Integration as API** category. When an HTTP client sends a `GET /messages` request to the listener, the trigger routes it to the resource handler, which builds a JSON payload and logs it as a JSON string using `log:printInfo`. The complete flow: HTTP listener → resource handler → log:printInfo → response is assembled visually on the WSO2 Integrator low-code canvas.
 
 ### Architecture
 
@@ -125,7 +125,7 @@ flowchart LR
 
 #### Step 2: Bind HTTP listener parameters to configuration variables
 
-In the **Create HTTP Service** form, expand **Advanced Configurations** and select **Custom Listener** to expose the listener parameters. For the listener port, switch the field to **Expression** mode, open the Helper Panel, select the **Configurables** tab, select **+ New Configurable**, enter a camelCase variable name and `int` as the type, leave the default value blank, and select **Save**—the variable is automatically injected into the port field. Enum/dropdown options such as the **Service Contract** radio group and boolean-style toggles are set directly from the UI and don't need configurable bindings.
+In the **Create HTTP Service** form, expand **Advanced Configurations** and select **Custom Listener** to expose the listener parameters. For the listener port, switch the field to **Expression** mode, open the Helper Panel, select the **Configurables** tab, select **+ New Configurable**, enter a camelCase variable name and `int` as the type, leave the default value blank, and select **Save**. The variable is automatically injected into the port field. Enum/dropdown options such as the **Service Contract** radio group and boolean-style toggles are set directly from the UI and don't need configurable bindings.
 
 - **Port** : The TCP port the HTTP listener binds to; bound to a `configurable int` variable so the port can be set at runtime without modifying the integration source.
 - **Listener Name** : The identifier used for the `http:Listener` variable in the generated source; kept as `httpListener`.
@@ -150,15 +150,15 @@ Select **Create** at the bottom of the trigger configuration form. WSO2 Integrat
 #### Step 5: Open the Add Handler side panel
 
 1. In the HTTP Service view, locate the **Resources** section.
-2. Select **+ Add Resource** on the right of the section header—the **Select HTTP Method to Add** side panel opens, listing the available HTTP methods (GET, POST, PUT, DELETE, PATCH, DEFAULT).
+2. Select **+ Add Resource** on the right of the section header. The **Select HTTP Method to Add** side panel opens, listing the available HTTP methods (GET, POST, PUT, DELETE, PATCH, DEFAULT).
 
 ![HTTP Service view with the Select HTTP Method to Add side panel open listing available resource handler options](/img/connectors/catalog/built-in/http/http_trigger_screenshots_04_add_handler_panel.png)
 
 #### Step 6: Select the primary resource handler and define the message payload type
 
-1. In the **Select HTTP Method to Add** side panel, select **GET**—the **New Resource Configuration** panel replaces the method list.
+1. In the **Select HTTP Method to Add** side panel, select **GET**. The **New Resource Configuration** panel replaces the method list.
 2. In the **Resource Path** field, enter `messages` to expose the handler at `GET /messages`.
-3. Review the default **Responses** rows—`200` returns a `json` body and `500` returns an `error`—and leave both as-is for this sample.
+3. Review the default **Responses** rows: `200` returns a `json` body and `500` returns an `error`. Leave both as-is for this sample.
 4. Optionally add path params, query parameters, or headers using the **+ Path Param**, **+ Query Parameter**, and **+ Header** links if your handler needs them.
 5. Select **Save** to register the resource.
 
@@ -185,10 +185,10 @@ Select the back arrow in the canvas header (or re-select the **HTTP Service** en
 
 1. In the WSO2 Integrator panel, select **Run** to start the integration. Wait for the listener to bind to the configured port (watch the output for a "started HTTP/WS listener" message).
 2. Send a test HTTP request using one of the following options:
-   - A separate WSO2 Integrator **HTTP Client** integration assembled from the same low-code canvas (recommended—no external tooling required).
+   - A separate WSO2 Integrator **HTTP Client** integration assembled from the same low-code canvas (recommended, no external tooling required).
    - The `curl` command-line tool: send a GET request to the configured endpoint using `curl -X GET http://<host>:<httpListenerPort>/messages`, replacing `<host>` and `<httpListenerPort>` with the values you set in the **Configurations** panel.
-   - A GUI HTTP client such as **Postman** or **Insomnia**—send a GET request to the configured endpoint.
-3. Observe the integration's log output—the payload JSON string (for example, `{"message":"Hello from HTTP listener","path":"/messages"}`) should appear printed by `log:printInfo`, confirming the handler received and processed the incoming HTTP request.
+   - A GUI HTTP client such as **Postman** or **Insomnia**: send a GET request to the configured endpoint.
+3. Observe the integration's log output. The payload JSON string (for example, `{"message":"Hello from HTTP listener","path":"/messages"}`) should appear printed by `log:printInfo`, confirming the handler received and processed the incoming HTTP request.
 
 ### Try it yourself
 
@@ -202,10 +202,10 @@ Try this sample in WSO2 Integration Platform.
 
 The `HTTP` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples), covering HTTP services, clients, security, REST API design, and streaming use cases.
 
-1. [Ballerina Secure Token Service (STS)](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/ballerina-sts) - Implement a secure token service that demonstrates HTTP service security and token-based access flows.
+1. [Ballerina Secure Token Service (STS)](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/ballerina-sts): Implement a secure token service that demonstrates HTTP service security and token-based access flows.
 
-2. [Pet Clinic REST API](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/petclinic) - Build a REST API for a pet clinic application using HTTP services, resources, and data persistence.
+2. [Pet Clinic REST API](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/petclinic): Build a REST API for a pet clinic application using HTTP services, resources, and data persistence.
 
-3. [Server-sent events](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/server-sent-events) - Explore server-sent event examples for streaming updates from an HTTP service to clients.
+3. [Server-sent events](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/server-sent-events): Explore server-sent event examples for streaming updates from an HTTP service to clients.
 
-4. [Snowpeak REST API](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/snowpeak) - Learn REST API design patterns using an HTTP service and client implementation.
+4. [Snowpeak REST API](https://github.com/ballerina-platform/module-ballerina-http/tree/master/examples/snowpeak): Learn REST API design patterns using an HTTP service and client implementation.

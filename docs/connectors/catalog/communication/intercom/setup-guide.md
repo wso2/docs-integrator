@@ -82,5 +82,5 @@ ticketTypeId = "YOUR_TICKET_TYPE_ID"
 
 ## What's next
 
-- [Action reference](action-reference.md) — Browse all available operations and sample code
-- [Intercom connector overview](connector-overview.md) — Learn about all supported features
+- [Action reference](action-reference.md): Browse all available operations and sample code
+- [Intercom connector overview](connector-overview.md): Learn about all supported features

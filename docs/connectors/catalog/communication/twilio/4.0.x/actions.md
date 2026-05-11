@@ -235,7 +235,7 @@ Sample code:
 <details>
 <summary>updateMessage</summary>
 
-Updates a message — primarily used to cancel a scheduled message by setting `status` to `canceled`.
+Updates a message: primarily used to cancel a scheduled message by setting `status` to `canceled`.
 
 Parameters:
 
@@ -440,7 +440,7 @@ Sample code:
 <details>
 <summary>updateCall</summary>
 
-Modifies a live call in progress — for example, redirecting it to a new TwiML URL or hanging it up.
+Modifies a live call in progress: for example, redirecting it to a new TwiML URL or hanging it up.
 
 Parameters:
 
@@ -774,7 +774,7 @@ Sample response:
 <details>
 <summary>updateAccount</summary>
 
-Modifies the properties of an account — for example, changing its friendly name or suspending it.
+Modifies the properties of an account: for example, changing its friendly name or suspending it.
 
 Parameters:
 

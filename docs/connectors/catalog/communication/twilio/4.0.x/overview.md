@@ -11,14 +11,14 @@ Twilio is a cloud communications platform that enables developers to programmati
 - Send SMS and MMS messages programmatically to any phone number using the Messages API
 - Send WhatsApp messages via Twilio's WhatsApp channel using the same Messages API
 - Make and manage outbound voice calls with TwiML instructions or a URL-based response handler
-- Manage incoming Twilio phone numbers — purchase, configure webhooks, and release numbers
+- Manage incoming Twilio phone numbers: purchase, configure webhooks, and release numbers
 - Retrieve account balance, manage sub-accounts, and update account settings
 - List, fetch, and delete message and call logs for auditing and analytics
 - Supports both Auth Token and API Key authentication methods
 
 ## Actions
 
-Actions are operations you invoke on Twilio from your integration — sending messages, making calls, managing phone numbers, and inspecting account state. All actions are exposed through a single `twilio:Client`:
+Actions are operations you invoke on Twilio from your integration: sending messages, making calls, managing phone numbers, and inspecting account state. All actions are exposed through a single `twilio:Client`:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](../setup-guide.md)**: This guide walks you through obtaining the Twilio credentials required to use the Ballerina Twilio connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 ## How to contribute
 

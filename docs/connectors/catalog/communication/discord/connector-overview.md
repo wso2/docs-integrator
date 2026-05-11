@@ -9,7 +9,7 @@ Discord is a communication platform for communities, teams, and gamers, offering
 ## Key features
 
 - Send, retrieve, edit, and delete messages in any channel
-- Full guild (server) management — create, update, and configure guilds
+- Full guild (server) management: create, update, and configure guilds
 - Member and role management including role assignment and banning
 - Channel CRUD operations with permission overwrites and thread support
 - Webhook creation and execution for external integrations
@@ -19,7 +19,7 @@ Discord is a communication platform for communities, teams, and gamers, offering
 
 ## Actions
 
-Actions are operations you invoke on Discord from your integration — sending messages, managing guilds, assigning roles, and more. The Discord connector exposes actions through a single client that covers the entire Discord REST API v10:
+Actions are operations you invoke on Discord from your integration: sending messages, managing guilds, assigning roles, and more. The Discord connector exposes actions through a single client that covers the entire Discord REST API v10:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Discord application and obtaining the credentials required to use the Discord connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Discord** connector, including connection setup, operation configuration, and execution flow.
 

@@ -55,7 +55,7 @@ If you plan to manage contact list memberships, you may also need the `crm.objec
 
 Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange in step 4.
 
-## Alternative — use a private app (API key)
+## Alternative: use a private app (API key)
 
 If you prefer API key authentication instead of OAuth 2.0:
 
@@ -71,4 +71,4 @@ Store credentials securely. Use Ballerina's `configurable` feature and a `Config
 
 ## Next steps
 
-- [Actions Reference](actions.md) - Available operations
+- [Actions Reference](actions.md): Available operations

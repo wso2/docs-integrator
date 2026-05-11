@@ -8,19 +8,19 @@ The `ballerinax/hubspot.crm.obj.contacts` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Provides all HubSpot CRM Contacts API operations — CRUD, batch, search, merge, and GDPR deletion. |
+| [`Client`](#client) | Provides all HubSpot CRM Contacts API operations: CRUD, batch, search, merge, and GDPR deletion. |
 
 ---
 
 ## Client
 
-Provides all HubSpot CRM Contacts API operations — CRUD, batch, search, merge, and GDPR deletion.
+Provides all HubSpot CRM Contacts API operations: CRUD, batch, search, merge, and GDPR deletion.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|ApiKeysConfig` | Required | Authentication configuration — bearer token, OAuth 2.0 refresh token, or private app API key. |
+| `auth` | `BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|ApiKeysConfig` | Required | Authentication configuration: bearer token, OAuth 2.0 refresh token, or private app API key. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
 | `retryConfig` | `http:RetryConfig?` | `()` | Retry configuration for failed requests. |

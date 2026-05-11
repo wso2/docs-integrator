@@ -8,19 +8,19 @@ The `ballerinax/zoom.meetings` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Provides access to all Zoom Meetings REST API v2 operations — meeting management, webinars, registrants, polls, recordings, and reports. |
+| [`Client`](#client) | Provides access to all Zoom Meetings REST API v2 operations: meeting management, webinars, registrants, polls, recordings, and reports. |
 
 ---
 
 ## Client
 
-Provides access to all Zoom Meetings REST API v2 operations — meeting management, webinars, registrants, polls, recordings, and reports.
+Provides access to all Zoom Meetings REST API v2 operations: meeting management, webinars, registrants, polls, recordings, and reports.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `ApiKeysConfig\|http:BearerTokenConfig\|http:OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration — API key authorization header, static bearer token, or OAuth 2.0 refresh token grant. |
+| `auth` | `ApiKeysConfig\|http:BearerTokenConfig\|http:OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration: API key authorization header, static bearer token, or OAuth 2.0 refresh token grant. |
 | `httpVersion` | `http:HttpVersion` | `"2_0"` | HTTP protocol version to use for requests. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
 | `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
@@ -154,7 +154,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `meetingId` | `int` | Yes | The unique numeric meeting ID. |
-| `payload` | `MeetingsmeetingIdBody` | Yes | Meeting fields to update — topic, startTime, duration, agenda, settings, etc. |
+| `payload` | `MeetingsmeetingIdBody` | Yes | Meeting fields to update: topic, startTime, duration, agenda, settings, etc. |
 | `queries` | `*MeetingUpdateQueries` | No | Optional query parameter: `occurrenceId` for recurring meeting occurrences. |
 
 Returns: `error?`
@@ -195,14 +195,14 @@ check zoomClient->/meetings/[meetingId].delete();
 <details>
 <summary>Update meeting status</summary>
 
-Updates the status of a meeting — for example, ends a live meeting.
+Updates the status of a meeting: for example, ends a live meeting.
 
 Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `meetingId` | `int` | Yes | The unique numeric meeting ID. |
-| `payload` | `MeetingIdStatusBody` | Yes | Status payload with `action` field — use `end` to end a live meeting. |
+| `payload` | `MeetingIdStatusBody` | Yes | Status payload with `action` field: use `end` to end a live meeting. |
 
 Returns: `error?`
 
@@ -263,7 +263,7 @@ meetings:InlineResponse20018 summary = check zoomClient->/meetings/[meetingId]/m
 Sample response:
 
 ```ballerina
-{"meeting_host_id": "usr123", "meeting_host_email": "host@example.com", "meeting_id": "123456789", "meeting_topic": "Team Sync", "meeting_start_time": "2025-07-10T10:00:00Z", "meeting_end_time": "2025-07-10T10:28:00Z", "summary_start_time": "2025-07-10T10:00:05Z", "summary_end_time": "2025-07-10T10:27:50Z", "summary_created_time": "2025-07-10T10:30:00Z", "summary_last_modified_time": "2025-07-10T10:30:00Z", "audio_transcript_file_id": "file123", "summary_title": "Team Sync - July 10", "summary_overview": "The team discussed Q3 goals and aligned on sprint priorities.", "summary_details": [{"summary_title": "Q3 Goals", "summary_detail": "Reviewed key objectives for the quarter."}], "next_steps": ["Finalize project roadmap by July 15.", "Schedule follow-up with design team."], "edited_summary": {}}
+{"meeting_host_id": "usr123", "meeting_host_email": "host@example.com", "meeting_id": "123456789", "meeting_topic": "Team Sync", "meeting_start_time": "2025-07-10T10:00:00Z", "meeting_end_time": "2025-07-10T10:28:00Z", "summary_start_time": "2025-07-10T10:00:05Z", "summary_end_time": "2025-07-10T10:27:50Z", "summary_created_time": "2025-07-10T10:30:00Z", "summary_last_modified_time": "2025-07-10T10:30:00Z", "audio_transcript_file_id": "file123", "summary_title": "Team Sync: July 10", "summary_overview": "The team discussed Q3 goals and aligned on sprint priorities.", "summary_details": [{"summary_title": "Q3 Goals", "summary_detail": "Reviewed key objectives for the quarter."}], "next_steps": ["Finalize project roadmap by July 15.", "Schedule follow-up with design team."], "edited_summary": {}}
 ```
 
 </details>
@@ -280,7 +280,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `meetingId` | `int` | Yes | The unique numeric meeting ID. |
-| `queries` | `*MeetingPollsQueries` | No | Optional query parameter: `anonymous` — filter by anonymous poll setting. |
+| `queries` | `*MeetingPollsQueries` | No | Optional query parameter: `anonymous`: filter by anonymous poll setting. |
 
 Returns: `PollList|error`
 
@@ -376,7 +376,7 @@ Parameters:
 |------|------|----------|-------------|
 | `meetingId` | `int` | Yes | The unique numeric meeting ID. |
 | `pollId` | `string` | Yes | The poll's unique identifier. |
-| `payload` | `PollsPollIdBody` | Yes | Updated poll details — title, questions, and answer options. |
+| `payload` | `PollsPollIdBody` | Yes | Updated poll details: title, questions, and answer options. |
 
 Returns: `error?`
 
@@ -600,7 +600,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `meetingId` | `string` | Yes | The meeting ID or UUID. |
-| `queries` | `*RecordingsDeleteQueries` | No | Optional query parameter: `action` — `trash` (move to trash, default) or `delete` (permanently remove). |
+| `queries` | `*RecordingsDeleteQueries` | No | Optional query parameter: `action`: `trash` (move to trash, default) or `delete` (permanently remove). |
 
 Returns: `error?`
 
@@ -854,7 +854,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `webinarId` | `int` | Yes | The webinar's unique numeric ID. |
-| `payload` | `WebinarsWebinarIdBody` | Yes | Webinar fields to update — topic, startTime, duration, settings, etc. |
+| `payload` | `WebinarsWebinarIdBody` | Yes | Webinar fields to update: topic, startTime, duration, settings, etc. |
 
 Returns: `error?`
 

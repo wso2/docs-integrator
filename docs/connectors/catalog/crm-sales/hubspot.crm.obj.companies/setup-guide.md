@@ -59,7 +59,7 @@ grant_type=authorization_code
 ```
 
 The response contains `access_token`, `refresh_token`, and `expires_in`. Copy the
-`refresh_token` — this is required to authenticate the Ballerina connector.
+`refresh_token`: this is required to authenticate the Ballerina connector.
 
 Use a tool like Postman or curl to perform this token exchange.
 

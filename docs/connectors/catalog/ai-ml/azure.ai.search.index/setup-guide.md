@@ -35,7 +35,7 @@ The Free tier allows one search service per subscription with limited storage an
 5. Optionally configure **Scoring profiles** for custom relevance tuning.
 6. Click **Create** to finalize the index.
 
-Note the index name — you will need it when constructing the service URL for the connector (e.g., `https://<service-name>.search.windows.net/indexes/<index-name>`).
+Note the index name: you will need it when constructing the service URL for the connector (e.g., `https://<service-name>.search.windows.net/indexes/<index-name>`).
 
 ## Step 3: Get the API key and service URL
 

@@ -35,7 +35,7 @@ Store the access key ID and secret access key securely. The secret access key is
 ## Step 3: Verify your AWS marketplace product
 
 1. Ensure your SaaS product is listed and active on AWS Marketplace.
-2. Note your **Product Code** — you will need it when calling `batchMeterUsage`.
+2. Note your **Product Code**; you will need it when calling `batchMeterUsage`.
 3. Confirm the metering dimensions configured for your product match the dimension
    strings you plan to submit in usage records.
 

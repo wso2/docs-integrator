@@ -16,7 +16,7 @@ Model Context Protocol (MCP) is an open standard that enables seamless integrati
 
 ## Actions
 
-Actions are operations you invoke from your integration to interact with MCP servers — initializing connections, discovering available tools, and calling tools with parameters. The MCP connector exposes actions through a single client:
+Actions are operations you invoke from your integration to interact with MCP servers: initializing connections, discovering available tools, and calling tools with parameters. The MCP connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -39,7 +39,7 @@ See the **[Trigger Reference](trigger-reference.md)** for listener configuration
 
 ## Documentation
 
-* **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](action-reference.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](trigger-reference.md)**: Reference for event-driven integration using the listener and service model.
 

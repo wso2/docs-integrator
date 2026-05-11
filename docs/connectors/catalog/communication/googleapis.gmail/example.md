@@ -56,7 +56,7 @@ Select **Save** to persist the connection. The **Connections** section in the si
 
 ![Canvas showing the gmailClient connection node](/img/connectors/catalog/communication/googleapis.gmail/gmail_screenshot_03_connections_list.png)
 
-> **Note:** The status bar may show "Errors: 1" at this stage. This is expected—the four configurable variables (`gmailClientId`, `gmailClientSecret`, `gmailRefreshToken`, `gmailRefreshUrl`) are referenced but not yet declared. They're resolved after you add them in the next step.
+> **Note:** The status bar may show "Errors: 1" at this stage. This is expected: the four configurable variables (`gmailClientId`, `gmailClientSecret`, `gmailRefreshToken`, `gmailRefreshUrl`) are referenced but not yet declared. They're resolved after you add them in the next step.
 
 ### Step 4: Set actual values for your configurables
 
@@ -85,7 +85,7 @@ The sidebar now shows `main` (Automation) under **Entry Points**, and the flow e
 
 ![gmailClient connection node expanded showing all available operations before selection](/img/connectors/catalog/communication/googleapis.gmail/gmail_screenshot_04_operations_panel.png)
 
-3. Select the **sendMessage** operation—described as "Sends the specified message to the recipients in the `To`, `Cc`, and `Bcc` headers."
+3. Select the **sendMessage** operation-described as "Sends the specified message to the recipients in the `To`, `Cc`, and `Bcc` headers."
 4. Fill in the operation fields as listed below:
 
 - **userId** : Set to `me` to use the authenticated user's Gmail account
@@ -110,11 +110,11 @@ Try this sample in WSO2 Integration Platform.
 
 The `gmail` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-googleapis.gmail/tree/master/examples), covering use cases like sending emails, retrieving messages, and managing labels.
 
-1. [Process customer feedback emails](https://github.com/ballerina-platform/module-ballerinax-googleapis.gmail/tree/master/examples/process-mails) - Manage customer feedback emails by processing unread emails in the inbox, extracting details, and marking them as read.
+1. [Process customer feedback emails](https://github.com/ballerina-platform/module-ballerinax-googleapis.gmail/tree/master/examples/process-mails): Manage customer feedback emails by processing unread emails in the inbox, extracting details, and marking them as read.
 
-2. [Send maintenance break emails](https://github.com/ballerina-platform/module-ballerinax-googleapis.gmail/tree/master/examples/send-mails) - Send emails for scheduled maintenance breaks
+2. [Send maintenance break emails](https://github.com/ballerina-platform/module-ballerinax-googleapis.gmail/tree/master/examples/send-mails): Send emails for scheduled maintenance breaks
 
-3. [Automated Email Responses](https://github.com/ballerina-platform/module-ballerinax-googleapis.gmail/tree/master/examples/reply-mails) - Retrieve unread emails from the Inbox and subsequently send personalized responses.
+3. [Automated Email Responses](https://github.com/ballerina-platform/module-ballerinax-googleapis.gmail/tree/master/examples/reply-mails): Retrieve unread emails from the Inbox and subsequently send personalized responses.
 
 4. [Email Thread Search](https://github.com/ballerina-platform/module-ballerinax-googleapis.gmail/tree/master/examples/search-threads)
     Search for email threads based on a specified query.

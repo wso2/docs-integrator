@@ -54,7 +54,7 @@ Add only the scopes required for the CRM object types you intend to work with. T
 ## Get the client ID and client secret
 
 1. In the **Auth** tab of your app, locate the **Client ID** and **Client Secret**.
-2. Copy both values — you will need them to configure the connector.
+2. Copy both values: you will need them to configure the connector.
 
 Store the Client ID and Client Secret securely. Do not commit them to source control.
 Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
@@ -91,4 +91,4 @@ Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the tok
 
 ## Next steps
 
-- [Actions Reference](actions.md) - Available operations
+- [Actions Reference](actions.md): Available operations

@@ -18,7 +18,7 @@ HubSpot CRM Associations is the HubSpot API for creating, reading, and managing 
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — reading associations, creating labeled relationships, performing bulk operations, and generating usage reports. The HubSpot CRM Associations connector exposes all actions through a single client:
+Actions are operations you invoke on HubSpot from your integration: reading associations, creating labeled relationships, performing bulk operations, and generating usage reports. The HubSpot CRM Associations connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 credentials required to authenticate with the HubSpot CRM Associations API.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot CRM Associations** connector, including connection setup, operation configuration, and execution flow.
 

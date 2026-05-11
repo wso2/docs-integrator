@@ -32,16 +32,16 @@ The redirect URI must match exactly when performing the OAuth authorization flow
 
 1. Navigate to the **Scopes** section of your app settings.
 2. Click **Add Scopes** and search for and add the following scopes:
-    - `scheduler:read` — Read access to schedules and availability
-    - `scheduler:write` — Write access to create and modify schedules
-    - `user:read` — Read access to user profile information
+    - `scheduler:read`: Read access to schedules and availability
+    - `scheduler:write`: Write access to create and modify schedules
+    - `user:read`: Read access to user profile information
 3. Click **Done** and then **Continue**.
 
 ## Step 4: Get your client ID and client secret
 
 1. Navigate to the **App Credentials** section of your app.
-2. Copy the **Client ID** — you will use this as `clientId`.
-3. Copy the **Client Secret** — you will use this as `clientSecret`.
+2. Copy the **Client ID**; you will use this as `clientId`.
+3. Copy the **Client Secret**; you will use this as `clientSecret`.
 
 Store your Client ID and Client Secret securely. Do not commit them to source control.
 Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
@@ -85,6 +85,6 @@ GET https://api.zoom.us/v2/users/me
 Authorization: Bearer <ACCESS_TOKEN>
 ```
 
-The response contains your `id` field — this is your `userId`.
+The response contains your `id` field: this is your `userId`.
 
 You can also use the string `"me"` as the userId value in most Zoom API calls to refer to the authenticated user.

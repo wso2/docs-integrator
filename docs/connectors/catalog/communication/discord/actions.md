@@ -8,13 +8,13 @@ The `ballerinax/discord` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Discord REST API v10 — messages, channels, guilds, members, roles, webhooks, commands, events. |
+| [`Client`](#client) | Discord REST API v10: messages, channels, guilds, members, roles, webhooks, commands, events. |
 
 ---
 
 ## Client
 
-Discord REST API v10 — messages, channels, guilds, members, roles, webhooks, commands, events.
+Discord REST API v10: messages, channels, guilds, members, roles, webhooks, commands, events.
 
 ### Configuration
 

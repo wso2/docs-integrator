@@ -696,6 +696,6 @@ HTTP errors (4xx/5xx) are returned as `http:ApplicationResponseError` and includ
 
 ## What's next
 
-- [Setup guide](setup-guide.md) — Create an Intercom app and configure authentication
-- [Intercom connector overview](connector-overview.md) — Learn about all supported features
-- [Connector error handling](../../../error-handling-per.md) — General error handling patterns for connectors
+- [Setup guide](setup-guide.md): Create an Intercom app and configure authentication
+- [Intercom connector overview](connector-overview.md): Learn about all supported features
+- [Connector error handling](../../../error-handling-per.md): General error handling patterns for connectors

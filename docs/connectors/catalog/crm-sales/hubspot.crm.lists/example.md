@@ -46,8 +46,8 @@ The automation flow opens showing a **Start** → **Error Handler** skeleton.
 
 The **Configure Lists** form opens. Use configurable variables to bind the connection parameters securely.
 
-- **auth** : Bearer token configuration referencing the `hubspotToken` configurable variable — enter `{auth: {token: hubspotToken}}` in the **Config** expression field
-- **connectionName** : Name for this connection — keep the default `listsClient`
+- **auth**: Bearer token configuration referencing the `hubspotToken` configurable variable: enter `{auth: {token: hubspotToken}}` in the **Config** expression field
+- **connectionName**: Name for this connection: keep the default `listsClient`
 
 ![HubSpot CRM Lists connection form fully filled with all parameters before saving](/img/connectors/catalog/crm-sales/hubspot.crm.lists/hubspot_crm_lists_screenshot_02_connection_form.png)
 
@@ -74,9 +74,9 @@ Select the **+** button between **Start** and **Error Handler** to open the step
 
 In the **Connections** section of the panel, expand **listsClient** and select **Get Get All** (corresponding to `getAllLists`). Configure the operation fields:
 
-- **Description** : A label for this step — enter `Fetch Multiple Lists`
-- **Result** : The variable to store the response — enter `result`
-- **Result Type** : The type of the response — set to `lists:ListsByIdResponse`
+- **Description**: A label for this step: enter `Fetch Multiple Lists`
+- **Result**: The variable to store the response: enter `result`
+- **Result Type**: The type of the response: set to `lists:ListsByIdResponse`
 
 ![HubSpot CRM Lists getAllLists operation configuration filled with all values](/img/connectors/catalog/crm-sales/hubspot.crm.lists/hubspot_crm_lists_screenshot_05_operation_filled.png)
 
@@ -96,5 +96,5 @@ Try this sample in WSO2 Integration Platform.
 
 The `HubSpot CRM Lists` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.lists/tree/main/examples/), covering the following use cases:
 
-1. [Customer Support Ticket Manager](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.lists/tree/main/examples/customer_support_tickets_manager) - Integrates with HubSpot CRM Lists to create filtered lists of customer support tickets based on the priority level of the ticket.
-2. [Leads Tracker](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.lists/tree/main/examples/leads_tracker) - Integrates with HubSpot CRM Lists to create Manual Lists and add leads(contacts) to the lists.
+1. [Customer Support Ticket Manager](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.lists/tree/main/examples/customer_support_tickets_manager): Integrates with HubSpot CRM Lists to create filtered lists of customer support tickets based on the priority level of the ticket.
+2. [Leads Tracker](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.lists/tree/main/examples/leads_tracker): Integrates with HubSpot CRM Lists to create Manual Lists and add leads(contacts) to the lists.

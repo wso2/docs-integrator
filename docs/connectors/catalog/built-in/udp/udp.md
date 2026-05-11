@@ -26,7 +26,7 @@ See the **[Action Reference](action-reference.md)** for the full list of operati
 
 ## Triggers
 
-Triggers allow your integration to react to incoming UDP data in real time. The `udp:Listener` binds to a local port and invokes your service callbacks whenever datagrams or raw bytes arrive — no polling required.
+Triggers allow your integration to react to incoming UDP data in real time. The `udp:Listener` binds to a local port and invokes your service callbacks whenever datagrams or raw bytes arrive: no polling required.
 
 Supported trigger events:
 
@@ -40,7 +40,7 @@ See the **[Trigger Reference](trigger-reference.md)** for listener configuration
 
 ## Documentation
 
-* **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](action-reference.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](trigger-reference.md)**: Reference for event-driven integration using the listener and service model.
 

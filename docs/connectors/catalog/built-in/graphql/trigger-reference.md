@@ -84,7 +84,7 @@ A GraphQL service is a standard Ballerina service attached to a `graphql:Listene
 |----------|-----------|-------------|
 | `Query resolver` | <code>resource function get fieldName(args...) returns ReturnType</code> | Defines a Query field. The function name becomes the field name, parameters become field arguments, and the return type maps to the GraphQL output type. |
 | `Mutation resolver` | <code>remote function mutationName(args...) returns ReturnType</code> | Defines a Mutation field. Remote functions are exposed as mutation operations in the schema. |
-| `Subscription resolver` | <code>resource function subscribe fieldName(args...) returns stream&lt;ReturnType, error?&gt;</code> | Defines a Subscription field. Must return a `stream` — each value emitted by the stream is pushed to the subscribed client over WebSocket. |
+| `Subscription resolver` | <code>resource function subscribe fieldName(args...) returns stream&lt;ReturnType, error?&gt;</code> | Defines a Subscription field. Must return a `stream`: each value emitted by the stream is pushed to the subscribed client over WebSocket. |
 
 You do not need to write a GraphQL schema file. The module generates the schema automatically from your service definition, including all types, fields, arguments, and documentation.
 

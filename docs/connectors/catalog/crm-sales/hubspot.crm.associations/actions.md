@@ -8,19 +8,19 @@ The `ballerinax/hubspot.crm.associations` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages HubSpot CRM associations — reading, creating, labeling, and archiving relationships between CRM object pairs, plus usage reporting. |
+| [`Client`](#client) | Manages HubSpot CRM associations: reading, creating, labeling, and archiving relationships between CRM object pairs, plus usage reporting. |
 
 ---
 
 ## Client
 
-Manages HubSpot CRM associations — reading, creating, labeling, and archiving relationships between CRM object pairs, plus usage reporting.
+Manages HubSpot CRM associations: reading, creating, labeling, and archiving relationships between CRM object pairs, plus usage reporting.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig` | Required | Authentication configuration — OAuth 2.0 refresh token grant, a bearer token, or API key headers (`privateApp` or `privateAppLegacy`). |
+| `auth` | `http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig` | Required | Authentication configuration: OAuth 2.0 refresh token grant, a bearer token, or API key headers (`privateApp` or `privateAppLegacy`). |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use for requests. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
 | `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |

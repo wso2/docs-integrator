@@ -32,7 +32,7 @@ See the **[Action reference](action-reference.md)** for the full list of operati
 ## Documentation
 
 - **[Setup guide](setup-guide.md)**: How to create an Intercom app and obtain the access token required to authenticate with the connector.
-- **[Action reference](action-reference.md)**: Full reference for all operations — parameters, return types, and sample code.
+- **[Action reference](action-reference.md)**: Full reference for all operations: parameters, return types, and sample code.
 - **[Example](example.md)**: Learn how to build and configure an integration using the **Intercom** connector, including connection setup, operation configuration, and execution flow.
 
 ## How to contribute
@@ -47,6 +47,6 @@ Check the issue tracker for open issues that interest you. We look forward to re
 
 ## What's next
 
-- [Setup guide](setup-guide.md) — Create an Intercom app and obtain your access token
-- [Action reference](action-reference.md) — Browse all available operations and sample code
-- [Connectors overview](../../../overview.md) — Explore other available connectors
+- [Setup guide](setup-guide.md): Create an Intercom app and obtain your access token
+- [Action reference](action-reference.md): Browse all available operations and sample code
+- [Connectors overview](../../../overview.md): Explore other available connectors

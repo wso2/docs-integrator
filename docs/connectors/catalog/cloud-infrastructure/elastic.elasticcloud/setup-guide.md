@@ -40,6 +40,6 @@ You can also create deployments programmatically using the connector after obtai
 3. Set an expiration period (3 months, 6 months, or 1 year).
 4. Assign the appropriate roles for your use case.
 5. Click **Create API key** to generate the credentials.
-6. Copy the generated API key immediately — it will not be shown again.
+6. Copy the generated API key immediately: it will not be shown again.
 
 Store the API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.

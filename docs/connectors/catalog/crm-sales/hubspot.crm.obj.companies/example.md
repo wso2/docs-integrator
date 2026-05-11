@@ -38,7 +38,7 @@ Select **+ Add Connection** to open the connector palette. Search for `hubspot.c
 
 Select the **Companies** connector card to open the **Configure Companies** form. Set the connection parameters using configurable variables:
 
-- **Config** : Authentication configuration that references the `hubspotToken` configurable variable — enter `{auth: {token: hubspotToken}}` in Expression mode
+- **Config**: Authentication configuration that references the `hubspotToken` configurable variable: enter `{auth: {token: hubspotToken}}` in Expression mode
 - **Connection Name** : Name used to identify this connection on the canvas
 
 ![HubSpot CRM Companies connection form fully filled with all parameters before saving](/img/connectors/catalog/crm-sales/hubspot.crm.obj.companies/hubspot_crm_obj_companies_screenshot_02_connection_form.png)
@@ -95,5 +95,5 @@ Try this sample in WSO2 Integration Platform.
 
 The `Ballerina HubSpot CRM Companies Connector` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/), covering the following use cases:
 
-1. [Create Count Delete Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_create_count_delete) - see how the HubSpot API can be used to create, count and delete companies.
-2. [Update and Merge Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_update_merge) - see how the HubSpot API can be used to merge and update companies.
+1. [Create Count Delete Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_create_count_delete): see how the HubSpot API can be used to create, count and delete companies.
+2. [Update and Merge Companies](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.companies/tree/main/examples/Company_update_merge): see how the HubSpot API can be used to merge and update companies.

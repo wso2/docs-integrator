@@ -6,7 +6,7 @@ title: Connectors overview
 
 Send a Slack notification when an order ships. Read customer records from Salesforce. Write results to a Google Sheet. Query a database and return the data in an API response.
 
-Connectors make these integrations possible—without writing low-level HTTP or protocol code. WSO2 Integrator includes 400+ pre-built connectors for the services your business already uses.
+Connectors make these integrations possible without writing low-level HTTP or protocol code. WSO2 Integrator includes 400+ pre-built connectors for the services your business already uses.
 
 ## How connectors fit into your integration
 
@@ -53,33 +53,33 @@ A connector is a pre-built integration component that exposes an external servic
 
 ### Connection
 
-A connection is a named, reusable configuration that holds the credentials and endpoint settings for an external service—API keys, OAuth tokens, hostnames. You define it once; every action in your integration uses it by name.
+A connection is a named, reusable configuration that holds the credentials and endpoint settings for an external service, such as API keys, OAuth tokens, and hostnames. You define it once; every action in your integration uses it by name.
 
 For details on creating and managing connections, see [Connections](../develop/integration-artifacts/supporting/connections.md).
 
 ### Action
 
-An action is a specific operation you invoke through a connection—"send SMS", "create contact", "execute query". Each connector exposes a list of available actions. Actions are outbound: your integration calls the external service.
+An action is a specific operation you invoke through a connection, such as "send SMS", "create contact", or "execute query". Each connector exposes a list of available actions. Actions are outbound: your integration calls the external service.
 
 ### Trigger
 
-Some connectors also support triggers—inbound events the external service pushes into your integration. A database trigger fires when a row changes. A messaging trigger fires when a new message arrives.
+Some connectors also support triggers, which are inbound events the external service pushes into your integration. A database trigger fires when a row changes. A messaging trigger fires when a new message arrives.
 
 | | Actions | Triggers |
 |---|---|---|
 | Direction | Your integration calls the service | The service calls your integration |
 | Example | Send an SMS, create a Salesforce record | New database row, incoming webhook |
 
-Most connectors are action-only. Trigger support is available for select connectors—primarily databases (MySQL, PostgreSQL, MSSQL), messaging systems (Kafka, RabbitMQ), and file storage. See each connector's documentation for what's available.
+Most connectors are action-only. Trigger support is available for select connectors, primarily databases (MySQL, PostgreSQL, MSSQL), messaging systems (Kafka, RabbitMQ), and file storage. See each connector's documentation for what's available.
 
 ## Libraries without client connectors
 
-Not everything in the connector catalog is a client connector. Some packages are libraries that provide integration capabilities without a client — PDF generation, string manipulation, I/O, and cloud function invocation (AWS Lambda, Azure Functions) fall into this category. Use them inside your integration logic the same way you would any other Ballerina library.
+Not everything in the connector catalog is a client connector. Some packages are libraries that provide integration capabilities without a client, such as PDF generation, string manipulation, I/O, and cloud function invocation (AWS Lambda and Azure Functions). Use them inside your integration logic the same way you would any other Ballerina library.
 
 ## What's next
 
-- [Connector catalog](catalog/index.mdx) — Browse all available connectors
-- [Connection configuration](connection-configuration.md) — Configure credentials and endpoint settings
-- [Connections](../develop/integration-artifacts/supporting/connections.md) — Create and manage connections in your integration
-- [Error handling](error-handling-per.md) — Handle failures and retries in connector calls
-- [Build your own connector](build-your-own/build-own.md) — Create a custom connector for a service not in the catalog
+- [Connector catalog](catalog/index.mdx): Browse all available connectors
+- [Connection configuration](connection-configuration.md): Configure credentials and endpoint settings
+- [Connections](../develop/integration-artifacts/supporting/connections.md): Create and manage connections in your integration
+- [Error handling](error-handling-per.md): Handle failures and retries in connector calls
+- [Build your own connector](build-your-own/build-own.md): Create a custom connector for a service not in the catalog

@@ -64,7 +64,7 @@ For instructions on generating certificates using `keytool`, see [Keystores and 
 
 ## Service
 
-A `tcp:Service` is attached to a `tcp:Listener` and handles the initial `onConnect` event. It returns a `tcp:ConnectionService` that handles the per-connection lifecycle — receiving bytes, handling errors, and reacting to connection closure.
+A `tcp:Service` is attached to a `tcp:Listener` and handles the initial `onConnect` event. It returns a `tcp:ConnectionService` that handles the per-connection lifecycle: receiving bytes, handling errors, and reacting to connection closure.
 
 ### Callback signatures
 
@@ -75,7 +75,7 @@ A `tcp:Service` is attached to a `tcp:Listener` and handles the initial `onConne
 | `onError` | <code>remote function onError(tcp:Error err) returns tcp:Error?</code> | Invoked when an error occurs on the connection. |
 | `onClose` | <code>remote function onClose() returns tcp:Error?</code> | Invoked when the client closes the connection. |
 
-The `onBytes` callback is required on every `ConnectionService`. The `onError` and `onClose` callbacks are optional — implement only the events you need.
+The `onBytes` callback is required on every `ConnectionService`. The `onError` and `onClose` callbacks are optional: implement only the events you need.
 
 ### Full usage example
 

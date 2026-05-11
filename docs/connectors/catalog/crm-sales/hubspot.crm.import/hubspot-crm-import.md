@@ -15,7 +15,7 @@ HubSpot CRM Import allows you to bulk-import contacts, companies, deals, and oth
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — starting imports, checking their status, retrieving errors, and canceling active imports. The HubSpot CRM Import connector exposes actions through a single client:
+Actions are operations you invoke on HubSpot from your integration: starting imports, checking their status, retrieving errors, and canceling active imports. The HubSpot CRM Import connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -27,7 +27,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Import connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 ## How to contribute
 

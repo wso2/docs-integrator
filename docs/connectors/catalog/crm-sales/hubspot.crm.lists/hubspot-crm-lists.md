@@ -16,7 +16,7 @@ HubSpot CRM Lists allows you to create, manage, and segment lists of CRM records
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — creating lists, managing memberships, organizing folders, and more. The HubSpot CRM Lists connector exposes all actions through a single client:
+Actions are operations you invoke on HubSpot from your integration: creating lists, managing memberships, organizing folders, and more. The HubSpot CRM Lists connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -28,7 +28,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Lists connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot CRM Lists** connector, including connection setup, operation configuration, and execution flow.
 

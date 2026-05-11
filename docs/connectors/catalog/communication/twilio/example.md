@@ -106,22 +106,22 @@ Try this sample in WSO2 Integration Platform.
 The Twilio connector comes equipped with examples that demonstrate its usage across various scenarios. These examples are conveniently organized into three distinct groups based on the functionalities they showcase. For a more hands-on experience and a deeper understanding of these capabilities, we encourage you to experiment with the provided examples in your development environment.
 
 1. Account management
-    - [Create a sub-account](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/accounts/create-sub-account) - Create a subaccount under a Twilio account
-    - [Fetch an account](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/accounts/fetch-account) - Get details of a Twilio account
-    - [Fetch balance](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/accounts/fetch-balance) - Get the balance of a Twilio account
-    - [List accounts](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/accounts/list-accounts) - List all subaccounts under a Twilio account
-    - [Update an account](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/accounts/update-account) - Update the name of a Twilio account
+    - [Create a sub-account](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/accounts/create-sub-account): Create a subaccount under a Twilio account
+    - [Fetch an account](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/accounts/fetch-account): Get details of a Twilio account
+    - [Fetch balance](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/accounts/fetch-balance): Get the balance of a Twilio account
+    - [List accounts](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/accounts/list-accounts): List all subaccounts under a Twilio account
+    - [Update an account](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/accounts/update-account): Update the name of a Twilio account
 2. Call management
-    - [Make a call](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/calls/create-call) - Make a call to a phone number via a Twilio
-    - [Fetch call log](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/calls/fetch-call-log) - Get details of a call made via a Twilio
-    - [List call logs](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/calls/list-call-logs) - Get details of all calls made via a Twilio
-    - [Delete a call log](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/calls/delete-call-log) - Delete the log of a call made via Twilio
+    - [Make a call](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/calls/create-call): Make a call to a phone number via Twilio
+    - [Fetch call log](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/calls/fetch-call-log): Get details of a call made via Twilio
+    - [List call logs](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/calls/list-call-logs): Get details of all calls made via Twilio
+    - [Delete a call log](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/calls/delete-call-log): Delete the log of a call made via Twilio
 3. Message management
-    - [Send an SMS message](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/create-sms-message) - Send an SMS to a phone number via a Twilio
-    - [Send a Whatsapp message](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/create-whatsapp-message) - Send a Whatsapp message to a phone number via a Twilio
-    - [List message logs](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/list-message-logs) - Get details of all messages sent via a Twilio
-    - [Fetch a message log](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/fetch-message-log) - Get details of a message sent via a Twilio
-    - [Delete a message log](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/delete-message-log) - Delete a message log via a Twilio
+    - [Send an SMS message](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/create-sms-message): Send an SMS to a phone number via Twilio
+    - [Send a WhatsApp message](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/create-whatsapp-message): Send a WhatsApp message to a phone number via Twilio
+    - [List message logs](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/list-message-logs): Get details of all messages sent via Twilio
+    - [Fetch a message log](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/fetch-message-log): Get details of a message sent via Twilio
+    - [Delete a message log](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/delete-message-log): Delete a message log via Twilio
 
 ---
 ## Twilio Trigger Example
@@ -162,8 +162,8 @@ Select **Add Artifact** in the WSO2 Integrator panel to open the Artifacts palet
 
 Select the **Twilio** card to open the trigger configuration form, then configure the listener parameters:
 
-- **Service Type** : The service type for this trigger — `SmsStatusService` is pre-selected
-- **Webhook Listener Port** : The port on which the Twilio webhook listener accepts incoming HTTP status callbacks from Twilio — bind this field to a `configurable int` variable named `listenerPort`
+- **Service Type**: The service type for this trigger: `SmsStatusService` is pre-selected
+- **Webhook Listener Port**: The port on which the Twilio webhook listener accepts incoming HTTP status callbacks from Twilio: bind this field to a `configurable int` variable named `listenerPort`
 
 ![Twilio trigger configuration form fully filled with all listener parameters before clicking Create](/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_02_trigger_config_form.png)
 
@@ -185,7 +185,7 @@ Select **Create** to generate the integration.
 
 Select **twilio:SmsStatusService** in the left project tree to open the Twilio Event Integration service view.
 
-> **Note:** Unlike Kafka or RabbitMQ, the Twilio `SmsStatusService` pre-registers all nine SMS status handlers at service creation time. There's no **+ Add Handler** side panel for this trigger—all handlers are automatically wired.
+> **Note:** Unlike Kafka or RabbitMQ, the Twilio `SmsStatusService` pre-registers all nine SMS status handlers at service creation time. There's no **+ Add Handler** side panel for this trigger; all handlers are automatically wired.
 
 The service view shows the full set of pre-registered handlers bound to the `twilioListener`:
 
@@ -199,13 +199,13 @@ The service view shows the full set of pre-registered handlers bound to the `twi
 - **onReceiving** : Inbound message being received
 - **onReceived** : Inbound message fully received
 
-![Auto-registered SmsStatusService event handlers — no Add Handler side panel for this trigger (Twilio SmsStatusService pre-registers all handlers at creation time)](/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_04_add_handler_panel.png)
+![Auto-registered SmsStatusService event handlers: no Add Handler side panel for this trigger (Twilio SmsStatusService pre-registers all handlers at creation time)](/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_04_add_handler_panel.png)
 
 #### Step 6: Open the onReceived handler flow
 
 Select the **onReceived** row to navigate to its flow canvas.
 
-> **Note:** The `onReceived` handler uses the library-defined `twilio:SmsStatusChangeEventWrapper` payload type. There's no **Define Value** modal for this trigger—the payload type is provided by the `ballerinax/trigger.twilio` package and can't be customised via the UI.
+> **Note:** The `onReceived` handler uses the library-defined `twilio:SmsStatusChangeEventWrapper` payload type. There's no **Define Value** modal for this trigger; the payload type is provided by the `ballerinax/trigger.twilio` package and can't be customised via the UI.
 
 The initial flow canvas shows a minimal handler skeleton: **Start → + → Error Handler → End**.
 
@@ -219,9 +219,9 @@ Select the **+** icon in the flow chart, and in the side panel that opens, choos
 
 Run the integration from WSO2 Integrator and then fire a test SMS status event to confirm the log output. Use any of the following methods:
 
-- **Twilio web console** — Navigate to your Twilio phone number settings, set the status callback URL to your listener endpoint, and send a test SMS from the Twilio console. Twilio posts a status webhook for each delivery stage (`queued`, `sent`, `delivered`, and so on).
-- **Twilio CLI** — Use the Twilio CLI (`twilio api:core:messages:create`) to send an SMS from your active Twilio number with `--status-callback` pointing to your listener endpoint. Each status transition triggers a separate webhook POST.
-- **Direct HTTP POST** — Use a tool such as `curl` or Postman to send a POST request that mimics a Twilio status callback to your listener endpoint, with form-encoded fields such as `MessageSid`, `MessageStatus`, `From`, and `To`.
+- **Twilio web console**: Navigate to your Twilio phone number settings, set the status callback URL to your listener endpoint, and send a test SMS from the Twilio console. Twilio posts a status webhook for each delivery stage (`queued`, `sent`, `delivered`, and so on).
+- **Twilio CLI**: Use the Twilio CLI (`twilio api:core:messages:create`) to send an SMS from your active Twilio number with `--status-callback` pointing to your listener endpoint. Each status transition triggers a separate webhook POST.
+- **Direct HTTP POST**: Use a tool such as `curl` or Postman to send a POST request that mimics a Twilio status callback to your listener endpoint, with form-encoded fields such as `MessageSid`, `MessageStatus`, `From`, and `To`.
 
 When the integration receives a webhook, the `onReceived` handler logs the full `twilio:SmsStatusChangeEventWrapper` payload as JSON. Verify that the log entry appears in the WSO2 Integrator console output.
 

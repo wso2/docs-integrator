@@ -19,7 +19,7 @@ Amazon Simple Notification Service (SNS) is a fully managed pub/sub messaging an
 
 ## Actions
 
-Actions are operations you invoke on AWS SNS from your integration — creating topics, publishing messages, managing subscriptions, and more. The AWS SNS connector exposes actions through a single client:
+Actions are operations you invoke on AWS SNS from your integration: creating topics, publishing messages, managing subscriptions, and more. The AWS SNS connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up an AWS account and obtaining the credentials required to use the AWS SNS connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **AWS SNS** connector, including connection setup, operation configuration, and execution flow.
 

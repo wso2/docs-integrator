@@ -38,8 +38,8 @@ Select **+ Add Artifact** on the canvas toolbar, then select **Connection** to o
 
 Enter `elastic` in the search box and select the **Elasticcloud** connector card to open the configuration form. Bind each field to a configurable variable as described below:
 
-- **apiKeyConfig** : The `ApiKeysConfig` record holding the Elastic Cloud API key used for authentication — bind to a new configurable variable of type `string`
-- **serviceUrl** : The base URL for the Elastic Cloud API — bind to a new configurable variable of type `string`
+- **apiKeyConfig**: The `ApiKeysConfig` record holding the Elastic Cloud API key used for authentication: bind to a new configurable variable of type `string`
+- **serviceUrl**: The base URL for the Elastic Cloud API: bind to a new configurable variable of type `string`
 
 ![Elastic Cloud connection form fully filled with all parameters before saving](/img/connectors/catalog/cloud-infrastructure/elastic.elasticcloud/elastic_elasticcloud_screenshot_02_connection_form.png)
 
@@ -86,6 +86,6 @@ Try this sample in WSO2 Integration Platform.
 
 The `Elasticcloud` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-elastic.elasticcloud/tree/main/examples/), covering the following use cases:
 
-1. [**Manage Deployment**](https://github.com/ballerina-platform/module-ballerinax-elastic.elasticcloud/tree/main/examples/deployment-management) - Create, list, and manage Elasticsearch deployments in your organization.
+1. [**Manage Deployment**](https://github.com/ballerina-platform/module-ballerinax-elastic.elasticcloud/tree/main/examples/deployment-management): Create, list, and manage Elasticsearch deployments in your organization.
 
-2. [**API key Management**](https://github.com/ballerina-platform/module-ballerinax-elastic.elasticcloud/tree/main/examples/api-key-management/) - Create, list, and delete API keys for secure access to Elastic Cloud resources.
+2. [**API key Management**](https://github.com/ballerina-platform/module-ballerinax-elastic.elasticcloud/tree/main/examples/api-key-management/): Create, list, and delete API keys for secure access to Elastic Cloud resources.

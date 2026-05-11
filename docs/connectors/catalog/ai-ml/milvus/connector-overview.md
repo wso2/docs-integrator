@@ -8,7 +8,7 @@ Milvus is an open-source, high-performance vector database designed for scalable
 
 ## Key features
 
-- Collection management — list, create, and load collections
+- Collection management: list, create, and load collections
 - Automatic index creation on vector fields for efficient similarity search
 - Upsert operations for inserting or updating vector data with associated properties
 - Batch and filtered deletion of vectors by IDs or filter expressions
@@ -19,7 +19,7 @@ Milvus is an open-source, high-performance vector database designed for scalable
 
 ## Actions
 
-Actions are operations you invoke on Milvus from your integration — managing collections, upserting vectors, and performing similarity searches. The Milvus connector exposes actions through a single client:
+Actions are operations you invoke on Milvus from your integration: managing collections, upserting vectors, and performing similarity searches. The Milvus connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up a Milvus instance and obtaining the connection details required to use the Milvus connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Milvus** connector, including connection setup, operation configuration, and execution flow.
 

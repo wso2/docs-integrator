@@ -17,7 +17,7 @@ WebSocket is a communication protocol that provides full-duplex communication ch
 
 ## Actions
 
-Actions are operations you invoke using the WebSocket client to communicate with a WebSocket server — sending messages, reading responses, and managing the connection lifecycle.
+Actions are operations you invoke using the WebSocket client to communicate with a WebSocket server: sending messages, reading responses, and managing the connection lifecycle.
 
 | Client | Actions |
 |--------|---------|
@@ -45,7 +45,7 @@ See the **[Trigger Reference](trigger-reference.md)** for listener configuration
 
 ## Documentation
 
-* **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](action-reference.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](trigger-reference.md)**: Reference for event-driven integration using the listener and service model.
 

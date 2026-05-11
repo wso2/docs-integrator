@@ -4,7 +4,7 @@ title: Overview
 
 # Overview
 
-Azure AI Search (formerly Azure Cognitive Search) is a cloud search service from Microsoft that provides AI-powered indexing and querying over your content. The Ballerina `ballerinax/azure.ai.search.index` connector (v1.0.1) enables programmatic access to Azure AI Search index operations — searching, retrieving, indexing, autocompleting, and suggesting documents — allowing you to integrate intelligent search into your Ballerina integration flows.
+Azure AI Search (formerly Azure Cognitive Search) is a cloud search service from Microsoft that provides AI-powered indexing and querying over your content. The Ballerina `ballerinax/azure.ai.search.index` connector (v1.0.1) enables programmatic access to Azure AI Search index operations: searching, retrieving, indexing, autocompleting, and suggesting documents: allowing you to integrate intelligent search into your Ballerina integration flows.
 
 ## Key features
 
@@ -18,7 +18,7 @@ Azure AI Search (formerly Azure Cognitive Search) is a cloud search service from
 
 ## Actions
 
-Actions are operations you invoke on Azure AI Search from your integration — searching documents, indexing content, retrieving suggestions, and more. The connector exposes actions through a single client:
+Actions are operations you invoke on Azure AI Search from your integration: searching documents, indexing content, retrieving suggestions, and more. The connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating an Azure AI Search service and obtaining the API key and endpoint URL required to use the connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Azure AI Search Index** connector, including connection setup, operation configuration, and execution flow.
 

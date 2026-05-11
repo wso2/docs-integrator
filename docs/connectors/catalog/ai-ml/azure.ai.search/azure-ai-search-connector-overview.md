@@ -8,7 +8,7 @@ Azure AI Search (formerly Azure Cognitive Search) is a cloud-based search platfo
 
 ## Key features
 
-- Full index lifecycle management — create, update, retrieve, delete, and analyze search indexes with rich field types
+- Full index lifecycle management: create, update, retrieve, delete, and analyze search indexes with rich field types
 - Indexer management with scheduling, on-demand execution, reset, and detailed status monitoring
 - Data source connectivity for Azure Blob Storage, Azure SQL, Cosmos DB, and other supported sources
 - AI enrichment pipeline management via skillsets that apply cognitive skills (OCR, language detection, entity recognition, key phrase extraction) during indexing
@@ -18,7 +18,7 @@ Azure AI Search (formerly Azure Cognitive Search) is a cloud-based search platfo
 
 ## Actions
 
-Actions are operations you invoke on Azure AI Search from your integration — creating indexes, running indexers, managing data sources, and more. All actions are exposed through a single `Client`:
+Actions are operations you invoke on Azure AI Search from your integration: creating indexes, running indexers, managing data sources, and more. All actions are exposed through a single `Client`:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating an Azure AI Search service and obtaining the service URL and admin API key required to use the connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Azure AI Search** connector, including connection setup, operation configuration, and execution flow.
 

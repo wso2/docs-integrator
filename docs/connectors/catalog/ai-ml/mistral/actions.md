@@ -8,13 +8,13 @@ The `ballerinax/mistral` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Full Mistral REST API — chat, FIM, embeddings, OCR, moderation, agents, models, files, fine-tuning, and batch jobs. |
+| [`Client`](#client) | Full Mistral REST API: chat, FIM, embeddings, OCR, moderation, agents, models, files, fine-tuning, and batch jobs. |
 
 ---
 
 ## Client
 
-Full Mistral REST API — chat, FIM, embeddings, OCR, moderation, agents, models, files, fine-tuning, and batch jobs.
+Full Mistral REST API: chat, FIM, embeddings, OCR, moderation, agents, models, files, fine-tuning, and batch jobs.
 
 ### Configuration
 

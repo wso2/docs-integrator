@@ -30,7 +30,7 @@ The Free tier allows one service per subscription and has limited storage and sc
 
 1. Navigate to your newly created Azure AI Search resource in the Azure portal.
 2. In the left menu, select Overview.
-3. Copy the **URL** field value — it looks like `https://my-search-service.search.windows.net`.
+3. Copy the **URL** field value: it looks like `https://my-search-service.search.windows.net`.
    This is the `serviceUrl` you will use when initializing the connector.
 
 ## Step 3: Retrieve the admin API key

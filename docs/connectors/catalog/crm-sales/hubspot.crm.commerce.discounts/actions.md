@@ -8,19 +8,19 @@ The `ballerinax/hubspot.crm.commerce.discounts` package exposes the following cl
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages HubSpot CRM discount objects — CRUD, batch operations, and search. |
+| [`Client`](#client) | Manages HubSpot CRM discount objects: CRUD, batch operations, and search. |
 
 ---
 
 ## Client
 
-Manages HubSpot CRM discount objects — CRUD, batch operations, and search.
+Manages HubSpot CRM discount objects: CRUD, batch operations, and search.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or API keys. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or API keys. |
 | `httpVersion` | <code>http:HttpVersion</code> | `http:HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
 | `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |

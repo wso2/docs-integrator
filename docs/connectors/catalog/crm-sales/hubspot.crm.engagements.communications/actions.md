@@ -8,19 +8,19 @@ The `ballerinax/hubspot.crm.engagements.communications` package exposes the foll
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manage HubSpot communication records — CRUD, batch operations, and search. |
+| [`Client`](#client) | Manage HubSpot communication records: CRUD, batch operations, and search. |
 
 ---
 
 ## Client
 
-Manage HubSpot communication records — CRUD, batch operations, and search.
+Manage HubSpot communication records: CRUD, batch operations, and search.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or API keys. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or API keys. |
 | `httpVersion` | <code>HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
 | `retryConfig` | <code>RetryConfig</code> | `()` | Retry configuration for failed requests. |

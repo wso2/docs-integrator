@@ -44,7 +44,7 @@ See the **[Trigger Reference](trigger-reference.md)** for listener configuration
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through configuring your email server credentials and settings required to use the Email connector.
 
-* **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](action-reference.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](trigger-reference.md)**: Reference for event-driven integration using the listener and service model.
 

@@ -22,7 +22,7 @@ This guide walks you through creating a HubSpot private app or OAuth app and obt
 2. Click **Create app**.
 3. Fill in the **App info** tab with a name and description.
 4. Go to the **Auth** tab.
-5. Note the **Client ID** and **Client Secret** — you will need these for authentication.
+5. Note the **Client ID** and **Client Secret**; you will need these for authentication.
 6. Under **Redirect URLs**, add your callback URL (e.g., `https://localhost/callback`).
 7. Under **Scopes**, add the following scopes:
     - `crm.objects.commercepayments.read`
@@ -59,7 +59,7 @@ If you only need basic access, you can use a Private App instead of OAuth. Priva
 
 The refresh token does not expire unless the app is uninstalled. Store it securely and use Ballerina's `configurable` feature with a `Config.toml` file to supply credentials at runtime.
 
-## Alternative — create a private app
+## Alternative: create a private app
 
 1. In your HubSpot account, click the gear icon and go to **Settings**.
 2. In the left sidebar, navigate to **Integrations > Private Apps**.
@@ -70,10 +70,10 @@ The refresh token does not expire unless the app is uninstalled. Store it secure
     - `crm.objects.commercepayments.write`
     - `e-commerce`
 6. Click **Create app** and confirm.
-7. Copy the **Access token** displayed — this is your bearer token.
+7. Copy the **Access token** displayed: this is your bearer token.
 
-Private app tokens provide full access to the scopes you configure. Treat them like passwords — never commit them to source control.
+Private app tokens provide full access to the scopes you configure. Treat them like passwords: never commit them to source control.
 
 ## Next steps
 
-- [Actions Reference](actions.md) - Available operations
+- [Actions Reference](actions.md): Available operations

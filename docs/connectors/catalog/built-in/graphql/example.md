@@ -131,7 +131,7 @@ No external service accounts or API keys are required for this trigger type.
 
 #### Step 1: Open the Artifacts palette
 
-Select **Add Artifact** (the **+** icon next to the project name) in the WSO2 Integrator panel. The **Artifacts** palette opens — locate the **Integration as API** category and find the **GraphQL Service (Beta)** card.
+Select **Add Artifact** (the **+** icon next to the project name) in the WSO2 Integrator panel. The **Artifacts** palette opens: locate the **Integration as API** category and find the **GraphQL Service (Beta)** card.
 
 ![Artifacts palette open showing the Integration as API category with GraphQL Service card visible](/img/connectors/catalog/built-in/graphql/graphql_trigger_screenshots_01_artifact_palette.png)
 
@@ -173,7 +173,7 @@ Select **Create** to generate the GraphQL service.
 
 Select **+ Create Operations** on the `/graphql` service node in the GraphQL diagram canvas. The **GraphQL Operations** side panel opens, listing three empty sections: **Query**, **Mutation**, and **Subscription**.
 
-![GraphQL Operations panel showing empty Query, Mutation, and Subscription sections — HTTP equivalent of Add Handler](/img/connectors/catalog/built-in/graphql/graphql_trigger_screenshots_04_add_handler_panel.png)
+![GraphQL Operations panel showing empty Query, Mutation, and Subscription sections: HTTP equivalent of Add Handler](/img/connectors/catalog/built-in/graphql/graphql_trigger_screenshots_04_add_handler_panel.png)
 
 #### Step 6: Define the return type for the getBookInfo handler
 
@@ -207,19 +207,19 @@ Navigate back to **GraphQL Service - /graphql** in the left tree. The GraphQL di
 1. Select **Run Integration** (▶) in the editor toolbar. The integration starts and logs appear in the output panel.
 2. Send a GraphQL query to the running service using one of the following methods:
 
-   **Option 1 — WSO2 Integrator built-in HTTP client:** Use the built-in HTTP client or **Try It** panel in WSO2 Integrator to POST a GraphQL query to `/graphql`.
+   **Option 1: WSO2 Integrator built-in HTTP client:** Use the built-in HTTP client or **Try It** panel in WSO2 Integrator to POST a GraphQL query to `/graphql`.
 
-   **Option 2 — curl:** Run the following command in a terminal, replacing the port with the value you set for `graphqlPort`:
+   **Option 2: curl:** Run the following command in a terminal, replacing the port with the value you set for `graphqlPort`:
 
-   ```
+   ```bash
    curl -X POST http://<host>:<graphqlPort>/graphql \
      -H "Content-Type: application/json" \
      -d '{"query": "{ getBookInfo { title author } }"}'
    ```
 
-   **Option 3 — GraphQL client (for example, Postman or Insomnia):** Send a POST request to `http://<host>:<graphqlPort>/graphql` with the body `{ "query": "{ getBookInfo { title author } }" }`.
+   **Option 3: GraphQL client (for example, Postman or Insomnia):** Send a POST request to `http://<host>:<graphqlPort>/graphql` with the body `{ "query": "{ getBookInfo { title author } }" }`.
 
-3. Observe the log output — the serialised GraphQL context (`ctx.toJsonString()`) is printed for each request.
+3. Observe the log output: the serialised GraphQL context (`ctx.toJsonString()`) is printed for each request.
 
 ### Try it yourself
 
@@ -233,10 +233,10 @@ Try this sample in WSO2 Integration Platform.
 
 The `GraphQL` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples), covering GraphQL APIs, queries, mutations, subscriptions, and integration use cases.
 
-1. [Snowtooth](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/snowtooth) - Implement the popular Snowtooth GraphQL API using Ballerina GraphQL services.
+1. [Snowtooth](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/snowtooth): Implement the popular Snowtooth GraphQL API using Ballerina GraphQL services.
 
-2. [Star Wars](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/starwars) - Build a GraphQL API based on the Star Wars domain model with queryable resources.
+2. [Star Wars](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/starwars): Build a GraphQL API based on the Star Wars domain model with queryable resources.
 
-3. [News Alerts](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/news_alerts) - Create a news alert GraphQL API with real-time updates using GraphQL subscriptions.
+3. [News Alerts](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/news_alerts): Create a news alert GraphQL API with real-time updates using GraphQL subscriptions.
 
-4. [GitHub Issue Tracker](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/simple_github_issue_tracker) - Implement a custom GitHub issue tracker GraphQL API with integration scenarios and subscriptions.
+4. [GitHub Issue Tracker](https://github.com/ballerina-platform/module-ballerina-graphql/tree/master/examples/simple_github_issue_tracker): Implement a custom GitHub issue tracker GraphQL API with integration scenarios and subscriptions.

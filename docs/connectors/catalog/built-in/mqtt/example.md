@@ -44,7 +44,7 @@ Select **Add Connection** (the **+** button in the **Connections** section) on t
 #### Step 2: Select the MQTT connector
 
 1. In the **Search connectors...** box, enter `mqtt`.
-2. Select **MQTT Client** (the `ballerinax/mqtt` connector — choose **Client**, not **Caller**) to open the connection form.
+2. Select **MQTT Client** (the `ballerinax/mqtt` connector: choose **Client**, not **Caller**) to open the connection form.
 
 ### Configuring the MQTT connection
 
@@ -154,7 +154,7 @@ For each field, select the helper panel icon, go to the **Configurables** tab, s
 
 #### Step 3: Set actual values for your configurations
 
-In the left panel, select **Configurations** to open the Configurations panel. You'll see the three newly created configurations—`mqttBrokerUrl`, `mqttClientId`, and `mqttTopic`—all marked **Required** with empty value fields. Supply the actual runtime values for each configuration before running the integration:
+In the left panel, select **Configurations** to open the Configurations panel. You'll see the three newly created configurations (`mqttBrokerUrl`, `mqttClientId`, and `mqttTopic`) all marked **Required** with empty value fields. Supply the actual runtime values for each configuration before running the integration:
 
 - **mqttBrokerUrl** (string) : The full URI of your MQTT broker
 - **mqttClientId** (string) : A unique client identifier for this integration
@@ -172,7 +172,7 @@ Select **Create** to register the listener and generate the service scaffold.
 
 Navigate back to the **MQTT Event Integration** service view by selecting the entry in the left panel. Under **Event Handlers**, select **+ Add Handler**.
 
-> **Note:** The `onMessage` handler uses the library-defined `mqtt:Message` type as its payload parameter. The MQTT trigger provides the message structure directly through the `ballerina/mqtt` module—no custom type schema is required.
+> **Note:** The `onMessage` handler uses the library-defined `mqtt:Message` type as its payload parameter. The MQTT trigger provides the message structure directly through the `ballerina/mqtt` module; no custom type schema is required.
 
 #### Step 6: Add a log statement to the handler
 
@@ -192,9 +192,9 @@ Select **Run Integration** in the toolbar to start the integration.
 
 To fire a test event, use one of the following approaches:
 
-- **WSO2 Integrator MQTT producer template** — Use a built-in MQTT producer integration in WSO2 Integrator to publish a test message to the same topic and broker.
-- **Mosquitto CLI** — Run `mosquitto_pub -h <broker-host> -t sensors/temperature -m '{"temp":22.5}'` from a terminal with the Mosquitto client installed.
-- **Broker web console** — If your broker provides a management UI (for example, HiveMQ's web client), use it to publish a message directly to the subscribed topic.
+- **WSO2 Integrator MQTT producer template**: Use a built-in MQTT producer integration in WSO2 Integrator to publish a test message to the same topic and broker.
+- **Mosquitto CLI**: Run `mosquitto_pub -h <broker-host> -t sensors/temperature -m '{"temp":22.5}'` from a terminal with the Mosquitto client installed.
+- **Broker web console**: If your broker provides a management UI (for example, HiveMQ's web client), use it to publish a message directly to the subscribed topic.
 
 Once a message is published, the console prints a JSON representation of the `mqtt:Message` record, for example:
 
@@ -214,4 +214,4 @@ Try this sample in WSO2 Integration Platform.
 
 The `MQTT` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-mqtt/tree/main/examples), covering MQTT publish-subscribe messaging and IoT-style event flows.
 
-1. [Temperature sensor](https://github.com/ballerina-platform/module-ballerina-mqtt/tree/main/examples/temperature-sensor) - Implement a temperature sensor scenario using MQTT topics and message publishing.
+1. [Temperature sensor](https://github.com/ballerina-platform/module-ballerina-mqtt/tree/main/examples/temperature-sensor): Implement a temperature sensor scenario using MQTT topics and message publishing.

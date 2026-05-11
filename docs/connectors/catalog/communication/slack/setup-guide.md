@@ -23,16 +23,16 @@ This guide walks you through creating a Slack App and obtaining the Bot User OAu
 1. In your app settings, navigate to **OAuth & Permissions** in the left sidebar.
 2. Scroll to the **Scopes** section.
 3. Under **Bot Token Scopes**, click **Add an OAuth Scope** and add the scopes required by your integration. Common scopes include:
-    - `channels:read` — View basic information about public channels.
-    - `channels:history` — View messages and content in public channels.
-    - `channels:write` — Manage public channels the app belongs to.
-    - `chat:write` — Send messages as the bot.
-    - `files:read` — View files shared in channels the app belongs to.
-    - `files:write` — Upload, edit, and delete files.
-    - `users:read` — View basic user information.
-    - `search:read` — Search a workspace's content.
-    - `reactions:write` — Add and remove emoji reactions.
-    - `pins:write` — Add and remove pinned messages and files.
+    - `channels:read`: View basic information about public channels.
+    - `channels:history`: View messages and content in public channels.
+    - `channels:write`: Manage public channels the app belongs to.
+    - `chat:write`: Send messages as the bot.
+    - `files:read`: View files shared in channels the app belongs to.
+    - `files:write`: Upload, edit, and delete files.
+    - `users:read`: View basic user information.
+    - `search:read`: Search a workspace's content.
+    - `reactions:write`: Add and remove emoji reactions.
+    - `pins:write`: Add and remove pinned messages and files.
 4. Add any additional scopes required by the specific Slack API methods you plan to use.
 
 Each Slack API method requires specific OAuth scopes. Refer to the [Slack API method reference](https://api.slack.com/methods) to find the exact scopes needed for each operation.
@@ -42,7 +42,7 @@ Each Slack API method requires specific OAuth scopes. Refer to the [Slack API me
 1. In **OAuth & Permissions**, scroll up to the **OAuth Tokens** section.
 2. Click **Install to Workspace**.
 3. Review the requested permissions and click **Allow**.
-4. After installation, copy the **Bot User OAuth Token** — it begins with `xoxb-`.
+4. After installation, copy the **Bot User OAuth Token**; it begins with `xoxb-`.
 
 Store the Bot User OAuth Token securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 

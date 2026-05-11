@@ -6,7 +6,7 @@ GraphQL is a query language and server-side runtime for APIs that lets clients r
 
 ## Key features
 
-- Automatic GraphQL schema generation from Ballerina service definitions — no separate SDL required
+- Automatic GraphQL schema generation from Ballerina service definitions: no separate SDL required
 - Support for all three GraphQL operation types: queries, mutations, and subscriptions (over WebSocket)
 - GraphQL client with type-safe response binding, circuit breaker, retry, and caching support
 - Built-in authentication and authorization: Basic Auth (file/LDAP), JWT, and OAuth2 for both server and client
@@ -41,7 +41,7 @@ See the **[Trigger Reference](trigger-reference.md)** for listener configuration
 
 ## Documentation
 
-* **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](action-reference.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](trigger-reference.md)**: Reference for event-driven integration using the listener and service model.
 

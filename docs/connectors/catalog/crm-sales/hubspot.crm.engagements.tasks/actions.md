@@ -8,19 +8,19 @@ The `ballerinax/hubspot.crm.engagements.tasks` package exposes the following cli
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manage HubSpot task engagement records — CRUD, batch operations, and search. |
+| [`Client`](#client) | Manage HubSpot task engagement records: CRUD, batch operations, and search. |
 
 ---
 
 ## Client
 
-Manage HubSpot task engagement records — CRUD, batch operations, and search.
+Manage HubSpot task engagement records: CRUD, batch operations, and search.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or API keys. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or API keys. |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
 | `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
@@ -245,7 +245,7 @@ Sample code:
 tasks:SimplePublicObject response = check tasksClient->/["78901234567"].patch({
     properties: {
         "hs_task_status": "COMPLETED",
-        "hs_task_subject": "Follow up with client - Done"
+        "hs_task_subject": "Follow up with client: Done"
     }
 });
 ```
@@ -256,7 +256,7 @@ Sample response:
 {
   "id": "78901234567",
   "properties": {
-    "hs_task_subject": "Follow up with client - Done",
+    "hs_task_subject": "Follow up with client: Done",
     "hs_task_status": "COMPLETED",
     "hs_createdate": "2025-01-15T10:30:00.000Z",
     "hs_lastmodifieddate": "2025-01-15T11:00:00.000Z",
@@ -475,14 +475,14 @@ tasks:BatchResponseSimplePublicObject|tasks:BatchResponseSimplePublicObjectWithE
                 id: "78901234567",
                 properties: {
                     "hs_task_status": "COMPLETED",
-                    "hs_task_subject": "Send proposal - Done"
+                    "hs_task_subject": "Send proposal: Done"
                 }
             },
             {
                 id: "78901234568",
                 properties: {
                     "hs_task_status": "IN_PROGRESS",
-                    "hs_task_subject": "Schedule demo - In Progress"
+                    "hs_task_subject": "Schedule demo: In Progress"
                 }
             }
         ]
@@ -498,7 +498,7 @@ Sample response:
     {
       "id": "78901234567",
       "properties": {
-        "hs_task_subject": "Send proposal - Done",
+        "hs_task_subject": "Send proposal: Done",
         "hs_task_status": "COMPLETED",
         "hs_lastmodifieddate": "2025-01-15T11:00:00.000Z"
       },
@@ -509,7 +509,7 @@ Sample response:
     {
       "id": "78901234568",
       "properties": {
-        "hs_task_subject": "Schedule demo - In Progress",
+        "hs_task_subject": "Schedule demo: In Progress",
         "hs_task_status": "IN_PROGRESS",
         "hs_lastmodifieddate": "2025-01-15T11:00:00.000Z"
       },

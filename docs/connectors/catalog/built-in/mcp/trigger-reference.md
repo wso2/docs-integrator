@@ -7,8 +7,8 @@ Three components work together:
 | Component | Role |
 |-----------|------|
 | `mcp:Listener` | Accepts HTTP connections and handles JSON-RPC 2.0 message routing for MCP protocol communication. |
-| `mcp:Service` | Basic service type — remote functions annotated with `@mcp:Tool` are automatically discovered and exposed as MCP tools. |
-| `mcp:AdvancedService` | Advanced service type — implements `onListTools` and `onCallTool` callbacks for manual control over tool listing and invocation. |
+| `mcp:Service` | Basic service type: remote functions annotated with `@mcp:Tool` are automatically discovered and exposed as MCP tools. |
+| `mcp:AdvancedService` | Advanced service type: implements `onListTools` and `onCallTool` callbacks for manual control over tool listing and invocation. |
 | `mcp:Session` | Session state container available in stateful mode, allowing tools to persist data across multiple calls from the same client. |
 
 For action-based operations, see the [Action Reference](action-reference.md).

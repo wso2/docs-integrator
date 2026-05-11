@@ -8,18 +8,18 @@ Zoom Meetings is a widely used cloud-based video conferencing platform for virtu
 
 ## Key features
 
-- Full meeting lifecycle management — create, retrieve, update, and delete scheduled and recurring meetings
-- Webinar management — create and manage webinars, panelists, polls, registrants, and Q&A
-- Meeting registration — add, list, approve, deny, and cancel meeting and webinar registrants
-- Poll and survey management — create, update, retrieve, and delete meeting and webinar polls
-- Cloud recording management — access, configure, and delete meeting and webinar recordings
-- Past meeting reporting — retrieve completed meeting details, participants, polls, and Q&A
-- Report generation — access activity, billing, cloud recording, and user meeting usage reports
-- Live meeting control — manage live streaming, end live meetings, and control real-time meeting events
+- Full meeting lifecycle management: create, retrieve, update, and delete scheduled and recurring meetings
+- Webinar management: create and manage webinars, panelists, polls, registrants, and Q&A
+- Meeting registration: add, list, approve, deny, and cancel meeting and webinar registrants
+- Poll and survey management: create, update, retrieve, and delete meeting and webinar polls
+- Cloud recording management: access, configure, and delete meeting and webinar recordings
+- Past meeting reporting: retrieve completed meeting details, participants, polls, and Q&A
+- Report generation: access activity, billing, cloud recording, and user meeting usage reports
+- Live meeting control: manage live streaming, end live meetings, and control real-time meeting events
 
 ## Actions
 
-Actions are operations you invoke on Zoom from your integration — creating meetings, managing registrations, accessing recordings, and generating reports. The Zoom Meetings connector exposes all operations through a single client:
+Actions are operations you invoke on Zoom from your integration: creating meetings, managing registrations, accessing recordings, and generating reports. The Zoom Meetings connector exposes all operations through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Zoom OAuth app on the Zoom App Marketplace and obtaining the credentials required to authenticate the Zoom Meetings connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Zoom Meetings** connector, including connection setup, operation configuration, and execution flow.
 

@@ -8,13 +8,13 @@ The `ballerinax/openai` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Comprehensive client for the full OpenAI REST API — chat, images, audio, embeddings, assistants, files, fine-tuning, and more. |
+| [`Client`](#client) | Comprehensive client for the full OpenAI REST API: chat, images, audio, embeddings, assistants, files, fine-tuning, and more. |
 
 ---
 
 ## Client
 
-Comprehensive client for the full OpenAI REST API — chat, images, audio, embeddings, assistants, files, fine-tuning, and more.
+Comprehensive client for the full OpenAI REST API: chat, images, audio, embeddings, assistants, files, fine-tuning, and more.
 
 ### Configuration
 

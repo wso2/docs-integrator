@@ -16,7 +16,7 @@ TCP (Transmission Control Protocol) is a foundational transport-layer protocol t
 
 ## Actions
 
-Actions are operations you invoke from your integration to communicate over TCP — connecting to a remote host, sending bytes, reading responses, and closing connections.
+Actions are operations you invoke from your integration to communicate over TCP: connecting to a remote host, sending bytes, reading responses, and closing connections.
 
 | Client | Actions |
 |--------|---------|
@@ -41,7 +41,7 @@ See the **[Trigger Reference](trigger-reference.md)** for listener configuration
 
 ## Documentation
 
-* **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](action-reference.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](trigger-reference.md)**: Reference for event-driven integration using the listener and service model.
 

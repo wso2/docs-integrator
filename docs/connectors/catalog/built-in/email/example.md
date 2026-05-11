@@ -45,7 +45,7 @@ Bind each field to a configurable variable using the helper panel. For each fiel
 - **host** : SMTP server hostname (bind to a `string` configurable variable)
 - **username** : Email account username (bind to a `string` configurable variable)
 - **password** : Email account password or App Password (bind to a `string` configurable variable)
-- **port** : SMTP port — switch to **Expression** mode first, then bind to an `int` configurable variable
+- **port**: SMTP port: switch to **Expression** mode first, then bind to an `int` configurable variable
 - **security** : Set to `SSL` from the dropdown
 
 ![Email SMTP connection form fully filled with all parameters before saving](/img/connectors/catalog/built-in/email/email_screenshot_02_connection_form.png)
@@ -103,4 +103,4 @@ Try this sample in WSO2 Integration Platform.
 
 The `Email` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-email/tree/master/examples), covering SMTP email sending and message configuration use cases.
 
-1. [Gmail SMTP client](https://github.com/ballerina-platform/module-ballerina-email/tree/master/examples/gmail-smtp-client) - Send email through Gmail SMTP using the Ballerina Email connector.
+1. [Gmail SMTP client](https://github.com/ballerina-platform/module-ballerina-email/tree/master/examples/gmail-smtp-client): Send email through Gmail SMTP using the Ballerina Email connector.

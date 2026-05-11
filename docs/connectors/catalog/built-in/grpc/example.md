@@ -33,7 +33,7 @@ Select **Connections** in the WSO2 Integrator sidebar, then select the **+** but
 ### Step 1: Search for and select the gRPC connector
 
 1. Enter `grpc` in the search box.
-2. Select the **gRPC** card (`ballerina/grpc`)—the generic gRPC client connector for unary and streaming calls.
+2. Select the **gRPC** card (`ballerina/grpc`)-the generic gRPC client connector for unary and streaming calls.
 
 > **Note:** Don't select "gRPC Caller" or streaming-only variants. Choose the card labelled simply **gRPC**.
 
@@ -101,10 +101,10 @@ Try this sample in WSO2 Integration Platform.
 
 The `gRPC` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples), covering gRPC services, clients, streaming, compression, and microservice use cases.
 
-1. [Asynchronous streaming](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/async-streaming) - Implement asynchronous gRPC streaming with separate client and server components.
+1. [Asynchronous streaming](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/async-streaming): Implement asynchronous gRPC streaming with separate client and server components.
 
-2. [Online boutique microservice](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/online-boutique-microservice) - Build a microservice-based online boutique sample using gRPC services and generated protobuf contracts.
+2. [Online boutique microservice](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/online-boutique-microservice): Build a microservice-based online boutique sample using gRPC services and generated protobuf contracts.
 
-3. [Program analyzer](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/program-analyzer) - Explore gRPC client and server communication with compression enabled.
+3. [Program analyzer](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/program-analyzer): Explore gRPC client and server communication with compression enabled.
 
-4. [Route guide](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/route-guide) - Learn common gRPC patterns using a route guide service with unary and streaming RPC interactions.
+4. [Route guide](https://github.com/ballerina-platform/module-ballerina-grpc/tree/master/examples/route-guide): Learn common gRPC patterns using a route guide service with unary and streaming RPC interactions.

@@ -8,19 +8,19 @@ The `ballerinax/hubspot.crm.engagement.notes` package exposes the following clie
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | HubSpot Notes API — note CRUD, batch operations, and search. |
+| [`Client`](#client) | HubSpot Notes API: note CRUD, batch operations, and search. |
 
 ---
 
 ## Client
 
-HubSpot Notes API — note CRUD, batch operations, and search.
+HubSpot Notes API: note CRUD, batch operations, and search.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or API key. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or API key. |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
 | `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |

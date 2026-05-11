@@ -8,19 +8,19 @@ The `ballerinax/hubspot.crm.commerce.orders` package exposes the following clien
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manage HubSpot order objects — CRUD, batch operations, and search. |
+| [`Client`](#client) | Manage HubSpot order objects: CRUD, batch operations, and search. |
 
 ---
 
 ## Client
 
-Manage HubSpot order objects — CRUD, batch operations, and search.
+Manage HubSpot order objects: CRUD, batch operations, and search.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or API keys. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or API keys. |
 | `httpVersion` | <code>HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
 | `retryConfig` | <code>RetryConfig</code> | `()` | Retry configuration for failed requests. |
@@ -145,7 +145,7 @@ Sample response:
     "hs_order_name": "Camping supplies",
     "hs_currency_code": "USD",
     "hs_fulfillment_status": "Packing",
-    "hs_source_store": "REI - Portland",
+    "hs_source_store": "REI: Portland",
     "hs_shipping_address_city": "Portland",
     "hs_shipping_address_state": "Maine",
     "hs_createdate": "2025-01-15T10:30:00.000Z",
@@ -193,7 +193,7 @@ orders:SimplePublicObject response = check ordersClient->/.post({
     properties: {
         "hs_order_name": "Camping supplies",
         "hs_currency_code": "USD",
-        "hs_source_store": "REI - Portland",
+        "hs_source_store": "REI: Portland",
         "hs_fulfillment_status": "Packing",
         "hs_shipping_address_city": "Portland",
         "hs_shipping_address_state": "Maine",
@@ -210,7 +210,7 @@ Sample response:
   "properties": {
     "hs_order_name": "Camping supplies",
     "hs_currency_code": "USD",
-    "hs_source_store": "REI - Portland",
+    "hs_source_store": "REI: Portland",
     "hs_fulfillment_status": "Packing",
     "hs_shipping_address_city": "Portland",
     "hs_shipping_address_state": "Maine",

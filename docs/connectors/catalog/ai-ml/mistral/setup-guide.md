@@ -25,7 +25,7 @@ This guide walks you through creating a Mistral AI account and obtaining the API
 1. Click the **Create new key** button.
 2. Give the key a descriptive name (e.g., `Ballerina Mistral Connector`).
 3. Click **Create key**.
-4. Copy the generated API key immediately — it will not be shown again.
+4. Copy the generated API key immediately: it will not be shown again.
 
 Store the API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 

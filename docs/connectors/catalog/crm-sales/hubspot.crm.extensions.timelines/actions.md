@@ -20,7 +20,7 @@ Manages timeline event templates, tokens, and events on HubSpot CRM records.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or API keys. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or API keys. |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
 | `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
@@ -85,7 +85,7 @@ Sample response:
       "name": "Pet Activity",
       "objectType": "CONTACT",
       "headerTemplate": "# Pet activity for {{petName}}",
-      "detailTemplate": "Pet **{{petName}}** (age {{petAge}}) - color: {{petColor}}",
+      "detailTemplate": "Pet **{{petName}}** (age {{petAge}}), color: {{petColor}}",
       "tokens": [
         {"name": "petName", "label": "Pet Name", "type": "string"},
         {"name": "petAge", "label": "Pet Age", "type": "number"},
@@ -136,7 +136,7 @@ TimelineEventTemplateCreateRequest eventTemplate = {
         }
     ],
     headerTemplate: "# Pet activity for {{petName}}",
-    detailTemplate: "Pet **{{petName}}** (age {{petAge}}) - color: {{petColor}}"
+    detailTemplate: "Pet **{{petName}}** (age {{petAge}}), color: {{petColor}}"
 };
 TimelineEventTemplate result =
     check timelinesClient->/[appId]/event\-templates.post(eventTemplate);
@@ -150,7 +150,7 @@ Sample response:
   "name": "Pet Activity",
   "objectType": "CONTACT",
   "headerTemplate": "# Pet activity for {{petName}}",
-  "detailTemplate": "Pet **{{petName}}** (age {{petAge}}) - color: {{petColor}}",
+  "detailTemplate": "Pet **{{petName}}** (age {{petAge}}), color: {{petColor}}",
   "tokens": [
     {"name": "petName", "label": "Pet Name", "type": "string"},
     {"name": "petAge", "label": "Pet Age", "type": "number"},
@@ -194,7 +194,7 @@ Sample response:
   "name": "Pet Activity",
   "objectType": "CONTACT",
   "headerTemplate": "# Pet activity for {{petName}}",
-  "detailTemplate": "Pet **{{petName}}** (age {{petAge}}) - color: {{petColor}}",
+  "detailTemplate": "Pet **{{petName}}** (age {{petAge}}), color: {{petColor}}",
   "tokens": [
     {"name": "petName", "label": "Pet Name", "type": "string"},
     {"name": "petAge", "label": "Pet Age", "type": "number"}
@@ -569,7 +569,7 @@ Sample response:
 
 ```ballerina
 {
-  "details": "Pet **Buddy** (age 3) - color: blue"
+  "details": "Pet **Buddy** (age 3), color: blue"
 }
 ```
 

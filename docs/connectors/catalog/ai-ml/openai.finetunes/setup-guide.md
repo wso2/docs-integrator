@@ -22,7 +22,7 @@ This guide walks you through creating an OpenAI account and obtaining the API ke
 2. Click **+ Create new secret key**.
 3. Optionally give the key a name (e.g., `Ballerina Fine-Tunes Connector`).
 4. Click **Create secret key**.
-5. Copy the displayed key immediately — it will not be shown again.
+5. Copy the displayed key immediately: it will not be shown again.
 
 Store your API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 

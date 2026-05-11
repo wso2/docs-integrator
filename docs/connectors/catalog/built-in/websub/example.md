@@ -67,7 +67,7 @@ Select **Save** to create the connection. The new connection appears in the **Co
 1. In the WSO2 Integrator sidebar, select **+ Add Artifact**.
 2. Select **Automation** as the artifact type.
 3. Set the function name to `main` (default).
-4. Select **Create** — the Automation flow canvas opens.
+4. Select **Create**; the Automation flow canvas opens.
 
 ### Step 6: Select the publishUpdate operation and configure its parameters
 
@@ -85,7 +85,7 @@ Fill in the operation fields:
 
 ![Websubhub Publisher publishUpdate operation configuration filled with all values](/img/connectors/catalog/built-in/websub/websub_screenshot_05_operation_filled.png)
 
-Select **Save** — the `publishUpdate` node appears on the flow canvas.
+Select **Save**; the `publishUpdate` node appears on the flow canvas.
 
 ![Completed Websubhub Publisher automation flow](/img/connectors/catalog/built-in/websub/websub_screenshot_06_completed_flow.png)
 
@@ -101,8 +101,8 @@ Try this sample in WSO2 Integration Platform.
 
 The `WebSub Hub` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-websubhub/tree/main/examples), covering WebSub hub implementations and publish-subscribe delivery patterns.
 
-1. [In-memory hub](https://github.com/ballerina-platform/module-ballerina-websubhub/tree/main/examples/in-memory-hub) - Implement a WebSub hub that stores subscription state in memory.
+1. [In-memory hub](https://github.com/ballerina-platform/module-ballerina-websubhub/tree/main/examples/in-memory-hub): Implement a WebSub hub that stores subscription state in memory.
 
-2. [JMS WebSub hub](https://github.com/ballerina-platform/module-ballerina-websubhub/tree/main/examples/jms-websubhub) - Build a WebSub hub backed by JMS-based message delivery.
+2. [JMS WebSub hub](https://github.com/ballerina-platform/module-ballerina-websubhub/tree/main/examples/jms-websubhub): Build a WebSub hub backed by JMS-based message delivery.
 
-3. [Kafka hub](https://github.com/ballerina-platform/module-ballerina-websubhub/tree/main/examples/kafka-hub) - Implement a WebSub hub backed by Kafka-based event distribution.
+3. [Kafka hub](https://github.com/ballerina-platform/module-ballerina-websubhub/tree/main/examples/kafka-hub): Implement a WebSub hub backed by Kafka-based event distribution.

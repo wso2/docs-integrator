@@ -35,7 +35,7 @@ In the WSO2 Integrator explorer panel, expand your project and select the **+** 
 ### Step 2: Select the WebSocket connector
 
 1. In the search box, enter `websocket`.
-2. Select the **Websocket** card (`ballerinax/websocket`)—the WebSocket client connector.
+2. Select the **Websocket** card (`ballerinax/websocket`), the WebSocket client connector.
 
 ## Configuring the WebSocket connection
 
@@ -96,8 +96,8 @@ Try this sample in WSO2 Integration Platform.
 
 The `WebSocket` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerina-websocket/tree/main/examples), covering WebSocket services, clients, and real-time messaging use cases.
 
-1. [Chat application](https://github.com/ballerina-platform/module-ballerina-websocket/tree/main/examples/chat-application) - Build a real-time chat application using WebSocket client and service interactions.
+1. [Chat application](https://github.com/ballerina-platform/module-ballerina-websocket/tree/main/examples/chat-application): Build a real-time chat application using WebSocket client and service interactions.
 
-2. [Taxi service management](https://github.com/ballerina-platform/module-ballerina-websocket/tree/main/examples/taxi-service-management) - Implement a taxi-service management scenario with real-time WebSocket communication.
+2. [Taxi service management](https://github.com/ballerina-platform/module-ballerina-websocket/tree/main/examples/taxi-service-management): Implement a taxi-service management scenario with real-time WebSocket communication.
 
-3. [Tic-tac-toe](https://github.com/ballerina-platform/module-ballerina-websocket/tree/main/examples/tic-tac-toe) - Create an interactive tic-tac-toe game using bidirectional WebSocket messaging.
+3. [Tic-tac-toe](https://github.com/ballerina-platform/module-ballerina-websocket/tree/main/examples/tic-tac-toe): Create an interactive tic-tac-toe game using bidirectional WebSocket messaging.

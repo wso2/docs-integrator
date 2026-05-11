@@ -17,7 +17,7 @@ AWS Marketplace Metering Service enables SaaS providers to report customer usage
 
 ## Actions
 
-Actions are operations you invoke on the AWS Marketplace Metering Service from your integration — resolving customers and submitting metering usage records. The connector exposes a single client:
+Actions are operations you invoke on the AWS Marketplace Metering Service from your integration: resolving customers and submitting metering usage records. The connector exposes a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -29,7 +29,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up AWS IAM credentials and permissions required to use the AWS Marketplace Metering connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **AWS Marketplace MPM** connector, including connection setup, operation configuration, and execution flow.
 

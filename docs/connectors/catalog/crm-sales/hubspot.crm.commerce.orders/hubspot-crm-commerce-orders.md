@@ -6,7 +6,7 @@ HubSpot CRM Commerce Orders is part of HubSpot's CRM platform, enabling manageme
 
 ## Key features
 
-- Full CRUD operations on HubSpot order objects — create, read, update, and archive
+- Full CRUD operations on HubSpot order objects: create, read, update, and archive
 - Batch operations for creating, reading, updating, upserting, and archiving orders in bulk
 - Search orders using filters, query text, sorting, and property selection
 - Association support for linking orders to other HubSpot CRM objects (e.g., contacts)
@@ -15,7 +15,7 @@ HubSpot CRM Commerce Orders is part of HubSpot's CRM platform, enabling manageme
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — creating orders, reading order details, performing batch operations, and searching. The connector exposes all actions through a single client:
+Actions are operations you invoke on HubSpot from your integration: creating orders, reading order details, performing batch operations, and searching. The connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -27,7 +27,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot developer app or private app and obtaining the credentials required to use the HubSpot CRM Commerce Orders connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot CRM Commerce Orders** connector, including connection setup, operation configuration, and execution flow.
 

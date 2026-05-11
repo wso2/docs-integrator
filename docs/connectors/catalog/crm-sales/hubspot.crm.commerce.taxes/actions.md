@@ -8,19 +8,19 @@ The `ballerinax/hubspot.crm.commerce.taxes` package exposes the following client
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manage HubSpot commerce tax objects — CRUD, search, and batch operations. |
+| [`Client`](#client) | Manage HubSpot commerce tax objects: CRUD, search, and batch operations. |
 
 ---
 
 ## Client
 
-Manage HubSpot commerce tax objects — CRUD, search, and batch operations.
+Manage HubSpot commerce tax objects: CRUD, search, and batch operations.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or API keys. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or API keys. |
 | `httpVersion` | <code>HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
 | `retryConfig` | <code>RetryConfig</code> | `()` | Retry configuration for failed requests. |

@@ -54,7 +54,7 @@ Select **Update Connection** to save the connection. The `discordClient` connect
 1. In the left panel, select **Configurations**.
 2. Set a value for each configurable listed below.
 
-- **discordToken** : `string` — your Discord bot token used by the ApiKeysConfig authentication config (e.g., `YOUR_DISCORD_BOT_TOKEN_HERE`)
+- **discordToken** : `string`: your Discord bot token used by the ApiKeysConfig authentication config (e.g., `YOUR_DISCORD_BOT_TOKEN_HERE`)
 
 ## Configuring the Discord createMessage operation
 

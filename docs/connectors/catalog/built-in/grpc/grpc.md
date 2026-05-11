@@ -2,7 +2,7 @@
 title: gRPC
 ---
 
-gRPC is an inter-process communication technology built on HTTP/2 and Protocol Buffers for efficient, strongly-typed remote procedure calls. The Ballerina `ballerina/grpc` connector (v1.14.4) provides a complete framework for building gRPC servers and clients, supporting all four communication patterns — unary, server streaming, client streaming, and bidirectional streaming — with built-in authentication, TLS, deadline propagation, compression, and retry capabilities.
+gRPC is an inter-process communication technology built on HTTP/2 and Protocol Buffers for efficient, strongly-typed remote procedure calls. The Ballerina `ballerina/grpc` connector (v1.14.4) provides a complete framework for building gRPC servers and clients, supporting all four communication patterns: unary, server streaming, client streaming, and bidirectional streaming, with built-in authentication, TLS, deadline propagation, compression, and retry capabilities.
 
 ## Key features
 
@@ -17,7 +17,7 @@ gRPC is an inter-process communication technology built on HTTP/2 and Protocol B
 
 ## Actions
 
-Actions are operations you invoke as a gRPC client to communicate with a remote gRPC server. The connector provides two base client types — `grpc:Client` for initiating RPCs across all four patterns, and `grpc:StreamingClient` for sending messages and receiving responses in streaming scenarios (client streaming and bidirectional streaming).
+Actions are operations you invoke as a gRPC client to communicate with a remote gRPC server. The connector provides two base client types: `grpc:Client` for initiating RPCs across all four patterns, and `grpc:StreamingClient` for sending messages and receiving responses in streaming scenarios (client streaming and bidirectional streaming).
 
 | Client | Actions |
 |--------|---------|
@@ -28,7 +28,7 @@ See the **[Action Reference](action-reference.md)** for the full list of operati
 
 ## Triggers
 
-Triggers let your Ballerina program act as a gRPC server. A `grpc:Listener` listens for incoming gRPC requests on a specified port, and a `grpc:Service` defines the remote functions that handle each RPC method — covering unary, server streaming, client streaming, and bidirectional streaming patterns.
+Triggers let your Ballerina program act as a gRPC server. A `grpc:Listener` listens for incoming gRPC requests on a specified port, and a `grpc:Service` defines the remote functions that handle each RPC method, covering unary, server streaming, client streaming, and bidirectional streaming patterns.
 
 Supported trigger events:
 
@@ -43,7 +43,7 @@ See the **[Trigger Reference](trigger-reference.md)** for listener configuration
 
 ## Documentation
 
-* **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](action-reference.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](trigger-reference.md)**: Reference for event-driven integration using the listener and service model.
 

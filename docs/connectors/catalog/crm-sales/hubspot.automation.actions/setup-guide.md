@@ -22,7 +22,7 @@ This guide walks you through setting up a HubSpot developer account and obtainin
 ## Step 2: Configure OAuth settings
 
 1. In your app settings, go to the **Auth** tab.
-2. Note down the **Client ID** and **Client Secret** — you will need these for OAuth 2.0 authentication.
+2. Note down the **Client ID** and **Client Secret**; you will need these for OAuth 2.0 authentication.
 3. Under **Redirect URLs**, add your redirect URI (e.g., `https://localhost:9090/callback`).
 4. Under **Scopes**, add the `automation` scope.
 5. Click **Save**.
@@ -72,4 +72,4 @@ Developer API keys provide broad access to your developer account. Keep them con
 
 1. In your HubSpot developer account, navigate to **Apps** and select your app.
 2. The **App ID** is displayed in the app settings page or in the URL (e.g., `https://developers.hubspot.com/.../<appId>`).
-3. Copy the App ID — it is required as a path parameter for most API operations.
+3. Copy the App ID: it is required as a path parameter for most API operations.

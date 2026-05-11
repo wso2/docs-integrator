@@ -18,7 +18,7 @@ OpenAI Fine-Tunes provides APIs for customizing OpenAI models with your own trai
 
 ## Actions
 
-Actions are operations you invoke on OpenAI from your integration — uploading training files, creating fine-tuning jobs, monitoring training progress, and managing models. The connector exposes all actions through a single client:
+Actions are operations you invoke on OpenAI from your integration: uploading training files, creating fine-tuning jobs, monitoring training progress, and managing models. The connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating an OpenAI account and obtaining the API key required to use the OpenAI Fine-Tunes connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **OpenAI Fine-Tunes** connector, including connection setup, operation configuration, and execution flow.
 

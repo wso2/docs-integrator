@@ -8,19 +8,19 @@ The `ballerinax/hubspot.crm.commerce.quotes` package exposes the following clien
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manage HubSpot CRM quote objects — CRUD, batch operations, and search. |
+| [`Client`](#client) | Manage HubSpot CRM quote objects: CRUD, batch operations, and search. |
 
 ---
 
 ## Client
 
-Manage HubSpot CRM quote objects — CRUD, batch operations, and search.
+Manage HubSpot CRM quote objects: CRUD, batch operations, and search.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or API keys. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or API keys. |
 | `httpVersion` | <code>http:HttpVersion</code> | `http:HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Maximum time to wait for a response in seconds. |
 | `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |

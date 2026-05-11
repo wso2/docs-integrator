@@ -17,7 +17,7 @@ This guide walks you through creating a HubSpot developer app and obtaining the 
 2. Navigate to **Apps** in the top navigation bar.
 3. Click **Create app**.
 4. Under **App Info**, provide a name for your app (e.g., `Ballerina Timelines Connector`).
-5. Note the **App ID** displayed on the app settings page — you will need it for template operations.
+5. Note the **App ID** displayed on the app settings page: you will need it for template operations.
 
 ## Configure OAuth 2.0 scopes
 
@@ -72,4 +72,4 @@ Private app tokens are used with the Bearer Token or API Keys authentication met
 
 ## Next steps
 
-- [Actions Reference](actions.md) - Available operations
+- [Actions Reference](actions.md): Available operations

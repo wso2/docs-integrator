@@ -13,13 +13,13 @@ Mistral AI is a generative AI platform offering large language models for chat c
 - Text embedding generation for semantic search and similarity applications
 - OCR (optical character recognition) for extracting text from documents and images
 - Content moderation and classification for text and chat inputs
-- Fine-tuning job management — create, monitor, cancel, and start training jobs
+- Fine-tuning job management: create, monitor, cancel, and start training jobs
 - Batch job processing for large-scale asynchronous API requests
-- Model and file management — list, retrieve, upload, download, and delete resources
+- Model and file management: list, retrieve, upload, download, and delete resources
 
 ## Actions
 
-Actions are operations you invoke on Mistral AI from your integration — generating chat completions, creating embeddings, managing models, running fine-tuning jobs, and more. The Mistral connector exposes all actions through a single client:
+Actions are operations you invoke on Mistral AI from your integration: generating chat completions, creating embeddings, managing models, running fine-tuning jobs, and more. The Mistral connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Mistral AI account and obtaining the API key required to use the Mistral connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Mistral** connector, including connection setup, operation configuration, and execution flow.
 

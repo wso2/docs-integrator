@@ -30,26 +30,26 @@ See the **[Action Reference](action-reference.md)** for the full list of operati
 
 ## Listeners and services
 
-The HTTP module provides a listener for accepting inbound HTTP requests. The `http:Listener` binds to a network port and dispatches incoming requests to service resources that you define — no polling required.
+The HTTP module provides a listener for accepting inbound HTTP requests. The `http:Listener` binds to a network port and dispatches incoming requests to service resources that you define: no polling required.
 
 Supported service resource methods:
 
 | HTTP Method | Resource Accessor | Description |
 |-------------|-------------------|-------------|
-| GET | `resource function get` | Handle GET requests — retrieve data. |
-| POST | `resource function post` | Handle POST requests — create resources. |
-| PUT | `resource function put` | Handle PUT requests — replace resources. |
-| PATCH | `resource function patch` | Handle PATCH requests — partial updates. |
-| DELETE | `resource function delete` | Handle DELETE requests — remove resources. |
-| HEAD | `resource function head` | Handle HEAD requests — headers only. |
-| OPTIONS | `resource function options` | Handle OPTIONS requests — discover methods. |
+| GET | `resource function get` | Handle GET requests: retrieve data. |
+| POST | `resource function post` | Handle POST requests: create resources. |
+| PUT | `resource function put` | Handle PUT requests: replace resources. |
+| PATCH | `resource function patch` | Handle PATCH requests: partial updates. |
+| DELETE | `resource function delete` | Handle DELETE requests: remove resources. |
+| HEAD | `resource function head` | Handle HEAD requests: headers only. |
+| OPTIONS | `resource function options` | Handle OPTIONS requests: discover methods. |
 | Any | `resource function default` | Catch-all for any HTTP method not explicitly handled. |
 
 See the **[Trigger Reference](trigger-reference.md)** for listener configuration, service resource methods, parameter binding, and interceptors.
 
 ## Documentation
 
-* **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](action-reference.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](trigger-reference.md)**: Listener configuration, service resource methods, parameter binding, and interceptors.
 

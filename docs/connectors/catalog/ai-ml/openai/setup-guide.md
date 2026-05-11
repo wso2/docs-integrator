@@ -20,9 +20,9 @@ This guide walks you through creating an OpenAI account and obtaining the API ke
 
 1. Click **+ Create new secret key**.
 2. Optionally give the key a name (e.g., `Ballerina OpenAI Connector`).
-3. Select the appropriate permissions — **All** for full access, or restrict to specific endpoints.
+3. Select the appropriate permissions, selecting **All** for full access, or restrict to specific endpoints.
 4. Click **Create secret key**.
-5. Copy the generated key immediately — it will not be shown again.
+5. Copy the generated key immediately: it will not be shown again.
 
 Store your API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 

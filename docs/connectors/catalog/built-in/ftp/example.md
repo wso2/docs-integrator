@@ -188,9 +188,9 @@ Select **Create** to generate the integration service and listener.
 
 Return to the FTP Integration service view. The service shows a **File Handlers** section with no handlers registered yet. Select **+ Add File Handler**. A **Select Handler to Add** side panel opens on the right, listing the available handler types:
 
-- `onCreate` — triggered when a new file is created or detected
-- `onDelete` — triggered when a file is deleted
-- `onError` — invoked by the runtime as a fall-through when content cannot be bound to the typed parameter of a format-specific handler (for example, malformed JSON). Unlike `onCreate` and `onDelete`, this is not a server-side event. It is a binding-failure callback.
+- `onCreate`: triggered when a new file is created or detected
+- `onDelete`: triggered when a file is deleted
+- `onError`: invoked by the runtime as a fall-through when content cannot be bound to the typed parameter of a format-specific handler (for example, malformed JSON). Unlike `onCreate` and `onDelete`, this is not a server-side event. It is a binding-failure callback.
 
 The Visual Designer groups handlers by event category. `onCreate` generates one of `onFile` / `onFileText` / `onFileJson` / `onFileXml` / `onFileCsv` based on the File Format you choose; `onDelete` generates `onFileDelete`. `onError` is independent of file format and complements any of the above.
 

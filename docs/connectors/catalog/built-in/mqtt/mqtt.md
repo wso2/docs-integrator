@@ -17,7 +17,7 @@ MQTT is a lightweight messaging protocol designed for constrained devices and lo
 
 ## Actions
 
-Actions are operations you invoke on an MQTT broker from your integration — publishing messages, subscribing to topics, and receiving messages. The MQTT connector exposes actions through a single client:
+Actions are operations you invoke on an MQTT broker from your integration: publishing messages, subscribing to topics, and receiving messages. The MQTT connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -27,7 +27,7 @@ See the **[Action Reference](action-reference.md)** for the full list of operati
 
 ## Triggers
 
-Triggers allow your integration to react to messages arriving on MQTT topics in real time. The connector uses an `mqtt:Listener` that subscribes to specified topics and invokes your service callbacks automatically whenever messages are received — no polling required.
+Triggers allow your integration to react to messages arriving on MQTT topics in real time. The connector uses an `mqtt:Listener` that subscribes to specified topics and invokes your service callbacks automatically whenever messages are received: no polling required.
 
 Supported trigger events:
 
@@ -43,7 +43,7 @@ See the **[Trigger Reference](trigger-reference.md)** for listener configuration
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up an MQTT broker that the Ballerina MQTT connector will connect to.
 
-* **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](action-reference.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](trigger-reference.md)**: Reference for event-driven integration using the listener and service model.
 

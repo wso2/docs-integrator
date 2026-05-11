@@ -20,7 +20,7 @@ Provides access to all Slack Web API methods for messaging, conversations, users
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration — a bearer token record `{token: "xoxb-..."}` or an OAuth 2.0 refresh token grant config. |
+| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration: a bearer token record `{token: "xoxb-..."}` or an OAuth 2.0 refresh token grant config. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
 | `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
@@ -202,7 +202,7 @@ Sample response:
 <details>
 <summary>Post an ephemeral message</summary>
 
-Sends an ephemeral message to a user in a channel — visible only to that user.
+Sends an ephemeral message to a user in a channel: visible only to that user.
 
 Parameters:
 
@@ -618,7 +618,7 @@ Sample code:
 ```ballerina
 slack:ConversationsSetTopicResponse response = check slackClient->/conversations\.setTopic.post({
     channel: "C1234567890",
-    topic: "Q3 sprint — focus on performance improvements"
+    topic: "Q3 sprint: focus on performance improvements"
 });
 ```
 
@@ -630,7 +630,7 @@ Sample response:
   "channel": {
     "id": "C1234567890",
     "topic": {
-      "value": "Q3 sprint — focus on performance improvements",
+      "value": "Q3 sprint: focus on performance improvements",
       "creator": "U0000BOT",
       "last_set": 1720000000
     }
@@ -1022,7 +1022,7 @@ Sample response:
     "matches": [
       {
         "type": "message",
-        "text": "deployment failed on prod — rolling back now",
+        "text": "deployment failed on prod: rolling back now",
         "channel": {"id": "C1234567890", "name": "alerts"},
         "ts": "1720000000.000100",
         "username": "alice"
@@ -1247,7 +1247,7 @@ Sample response:
     {
       "type": "message",
       "message": {
-        "text": "Team processes and guidelines — see wiki link in description",
+        "text": "Team processes and guidelines: see wiki link in description",
         "ts": "1720000000.123456",
         "user": "U0000001"
       },
@@ -1333,7 +1333,7 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `test` | `boolean` | No | Set to `true` for a dry run — the token is not actually revoked. |
+| `test` | `boolean` | No | Set to `true` for a dry run: the token is not actually revoked. |
 
 Returns: `AuthRevokeResponse|error`
 

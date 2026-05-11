@@ -56,7 +56,7 @@ The `sales-email-read` scope is required for reading email engagement data.
 
 Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange.
 
-## Alternative — use a private app token
+## Alternative: use a private app token
 
 1. In your HubSpot account, click the gear icon and go to **Settings**.
 2. Navigate to **Integrations** > **Private Apps**.
@@ -71,4 +71,4 @@ Private app tokens are simpler to set up than OAuth and work well for server-to-
 
 ## Next steps
 
-- [Actions Reference](actions.md) - Available operations
+- [Actions Reference](actions.md): Available operations

@@ -40,10 +40,10 @@ Store the access key ID and secret access key securely. Do not commit them to so
 Identify the AWS region where you want to use SNS. The region determines the endpoint
 for API calls and where your topics are created. Common regions include:
 
-- `us-east-1` (US East - N. Virginia) — the default region
-- `us-west-2` (US West - Oregon)
-- `eu-west-1` (Europe - Ireland)
-- `ap-southeast-1` (Asia Pacific - Singapore)
+- `us-east-1` (US East: N. Virginia): the default region
+- `us-west-2` (US West: Oregon)
+- `eu-west-1` (Europe: Ireland)
+- `ap-southeast-1` (Asia Pacific: Singapore)
 
 You can find the full list of supported regions in the
 [AWS SNS documentation](https://docs.aws.amazon.com/general/latest/gr/sns.html).

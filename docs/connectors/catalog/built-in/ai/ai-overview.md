@@ -7,7 +7,7 @@ The Ballerina AI module provides APIs for building AI-powered applications and a
 ## Key features
 
 - AI Agent framework with configurable system prompts, tool use, memory, and iterative reasoning (function-call agent pattern)
-- Direct LLM interaction via `ModelProvider` abstraction — multi-turn `chat` and single-turn `generate` with structured output mapping to Ballerina types
+- Direct LLM interaction via `ModelProvider` abstraction: multi-turn `chat` and single-turn `generate` with structured output mapping to Ballerina types
 - RAG pipeline with `VectorKnowledgeBase` for document ingestion, chunking, embedding, retrieval, and query augmentation
 - Built-in document chunkers for plain text, Markdown, and HTML with recursive splitting strategies and configurable overlap
 - Data loaders for PDF, DOCX, PPTX, Markdown, and HTML file formats via `TextDataLoader`
@@ -41,7 +41,7 @@ See the **[Trigger Reference](trigger-reference.md)** for listener configuration
 
 ## Documentation
 
-* **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](action-reference.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](trigger-reference.md)**: Reference for event-driven integration using the listener and service model.
 

@@ -21,7 +21,7 @@ This guide walks you through creating a HubSpot developer app and obtaining the 
 ## Get your app ID
 
 1. After creating the app, you will be taken to the app settings page.
-2. Copy the **App ID** shown on the page — you will use this as the `appId` parameter in API calls.
+2. Copy the **App ID** shown on the page: you will use this as the `appId` parameter in API calls.
 
 The App ID is an integer that uniquely identifies your HubSpot app. It is used as a path parameter in all videoconferencing settings API calls.
 
@@ -50,4 +50,4 @@ All webhook URLs must use HTTPS. HTTP URLs are not accepted by the HubSpot API.
 
 ## Next steps
 
-- [Actions Reference](actions.md) - Available operations
+- [Actions Reference](actions.md): Available operations

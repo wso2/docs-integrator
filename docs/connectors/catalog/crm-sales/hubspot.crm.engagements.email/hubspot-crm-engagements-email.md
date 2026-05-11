@@ -2,7 +2,7 @@
 title: HubSpot CRM Engagements Email
 ---
 
-HubSpot CRM Engagements Email is part of HubSpot's CRM platform, providing programmatic access to email engagement records — tracking sent, received, scheduled, and failed emails associated with CRM contacts. The Ballerina `ballerinax/hubspot.crm.engagements.email` connector (v2.0.0) enables you to create, read, update, delete, search, and batch-manage email engagement objects through the HubSpot CRM v3 API.
+HubSpot CRM Engagements Email is part of HubSpot's CRM platform, providing programmatic access to email engagement records: tracking sent, received, scheduled, and failed emails associated with CRM contacts. The Ballerina `ballerinax/hubspot.crm.engagements.email` connector (v2.0.0) enables you to create, read, update, delete, search, and batch-manage email engagement objects through the HubSpot CRM v3 API.
 
 ## Key features
 
@@ -15,7 +15,7 @@ HubSpot CRM Engagements Email is part of HubSpot's CRM platform, providing progr
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — creating email records, listing engagements, running batch operations, and searching. The connector exposes actions through a single client:
+Actions are operations you invoke on HubSpot from your integration: creating email records, listing engagements, running batch operations, and searching. The connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -27,7 +27,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot private app or OAuth app and obtaining the credentials required to use the HubSpot CRM Engagements Email connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot CRM Engagements Email** connector, including connection setup, operation configuration, and execution flow.
 

@@ -8,13 +8,13 @@ The `ballerinax/hubspot.crm.import` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manage CRM imports — start, monitor, list, retrieve errors, and cancel imports. |
+| [`Client`](#client) | Manage CRM imports: start, monitor, list, retrieve errors, and cancel imports. |
 
 ---
 
 ## Client
 
-Manage CRM imports — start, monitor, list, retrieve errors, and cancel imports.
+Manage CRM imports: start, monitor, list, retrieve errors, and cancel imports.
 
 ### Configuration
 

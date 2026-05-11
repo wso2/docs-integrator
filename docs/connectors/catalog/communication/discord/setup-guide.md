@@ -16,14 +16,14 @@ This guide walks you through creating a Discord application and obtaining the cr
 1. Go to the [Discord Developer Portal](https://discord.com/developers/applications).
 2. Click **New Application** in the top-right corner.
 3. Enter a name for your application (e.g., `Ballerina Integration`) and click **Create**.
-4. On the **General Information** page, note down the **Application ID** — you will need this for application command endpoints.
+4. On the **General Information** page, note down the **Application ID**; you will need this for application command endpoints.
 
 ## Step 2: Create a bot and get the bot token
 
 1. In your application's settings, navigate to the **Bot** section in the left sidebar.
 2. Click **Add Bot** and confirm by clicking **Yes, do it!**.
 3. Under the **Token** section, click **Reset Token** to generate a new bot token.
-4. Copy the token — this is your `Bot Token` used for authentication.
+4. Copy the token: this is your `Bot Token` used for authentication.
 
 The bot token is shown only once. Store it securely and never commit it to source control. If compromised, reset it immediately in the Developer Portal.
 
@@ -31,8 +31,8 @@ The bot token is shown only once. Store it securely and never commit it to sourc
 
 1. Still in the **Bot** section, scroll down to **Privileged Gateway Intents**.
 2. Enable the intents your integration requires:
-    - **Server Members Intent** — required for member-related operations.
-    - **Message Content Intent** — required to read message content.
+    - **Server Members Intent**: required for member-related operations.
+    - **Message Content Intent**: required to read message content.
 3. Under **Bot Permissions**, select the permissions your bot needs (e.g., Send Messages, Manage Roles, Manage Channels).
 
 Only enable the intents and permissions your integration actually needs. Bots in 100+ servers require Discord verification to use privileged intents.

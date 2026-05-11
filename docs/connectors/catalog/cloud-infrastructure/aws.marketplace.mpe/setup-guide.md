@@ -38,9 +38,9 @@ The secret access key is shown only once at creation time. Store it securely. Do
 
 Determine the AWS region where your Marketplace product is registered. Common regions include:
 
-- `us-east-1` (US East — N. Virginia)
-- `us-west-2` (US West — Oregon)
-- `eu-west-1` (Europe — Ireland)
+- `us-east-1` (US East: N. Virginia)
+- `us-west-2` (US West: Oregon)
+- `eu-west-1` (Europe: Ireland)
 
 You will need this region value when initializing the connector client.
 
@@ -50,4 +50,4 @@ AWS Marketplace Entitlement Service is available in most AWS regions. Ensure you
 
 1. Log in to the [AWS Marketplace Management Portal](https://aws.amazon.com/marketplace/management/).
 2. Navigate to **Products** and select your product.
-3. Locate the **Product Code** in the product details — this is the identifier you will pass to the `getEntitlements` operation.
+3. Locate the **Product Code** in the product details: this is the identifier you will pass to the `getEntitlements` operation.

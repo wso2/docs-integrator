@@ -44,7 +44,7 @@ Search for **zoom** in the palette, then select **Scheduler** to open the **Conf
 - **auth.clientSecret** : OAuth2 client secret from the Zoom app
 - **connectionName** : Set to `zoomSchedulerClient`
 
-> **Note:** The **Config** field must be in **Expression** mode—not Record mode—when entering the `{auth: {...}}` record constructor. Record mode wraps the value in string quotes, causing a type mismatch error.
+> **Note:** The **Config** field must be in **Expression** mode-not Record mode-when entering the `{auth: {...}}` record constructor. Record mode wraps the value in string quotes, causing a type mismatch error.
 
 ![Zoom Scheduler connection form fully filled with all parameters before saving](/img/connectors/catalog/communication/zoom.scheduler/zoom_scheduler_screenshot_02_connection_form.png)
 

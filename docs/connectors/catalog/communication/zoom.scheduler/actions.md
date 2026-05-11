@@ -20,7 +20,7 @@ Provides access to all Zoom Scheduler API operations including schedules, availa
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:BearerTokenConfig\|http:OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration — OAuth 2.0 refresh token config or a bearer token. |
+| `auth` | `http:BearerTokenConfig\|http:OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration: OAuth 2.0 refresh token config or a bearer token. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
 | `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
@@ -652,7 +652,7 @@ Sample response:
 <details>
 <summary>Update scheduled event</summary>
 
-Updates a scheduled event — for example, to change its status (confirm or cancel) or add meeting notes.
+Updates a scheduled event: for example, to change its status (confirm or cancel) or add meeting notes.
 
 Parameters:
 

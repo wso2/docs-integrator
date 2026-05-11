@@ -22,14 +22,14 @@ This guide walks you through creating a Zoom OAuth app on the Zoom App Marketpla
 
 ## Step 2: Configure OAuth redirect URI and scopes
 
-1. In your app's **App Credentials** tab, locate your **Client ID** and **Client Secret** — you will need these later.
+1. In your app's **App Credentials** tab, locate your **Client ID** and **Client Secret**; you will need these later.
 2. Under **Redirect URL for OAuth**, add your callback URL (e.g., `https://your-app.example.com/callback`). For local testing you may use `https://zoom.us/oauth/token`.
 3. Navigate to the **Scopes** section and add the following scopes based on the operations you need:
-    - `meeting:read:admin` and `meeting:write:admin` — read and manage meetings
-    - `recording:read:admin` — access cloud recordings
-    - `report:read:admin` — read meeting reports
-    - `user:read:admin` — read user information
-    - `webinar:read:admin` and `webinar:write:admin` — manage webinars (if needed)
+    - `meeting:read:admin` and `meeting:write:admin`: read and manage meetings
+    - `recording:read:admin`: access cloud recordings
+    - `report:read:admin`: read meeting reports
+    - `user:read:admin`: read user information
+    - `webinar:read:admin` and `webinar:write:admin`: manage webinars (if needed)
 4. Click **Save** after adding scopes.
 
 Add only the scopes required for your use case following the principle of least privilege. The exact scopes needed depend on which API operations your integration calls.
@@ -65,9 +65,9 @@ Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the tok
 Many API operations require a `userId` parameter identifying the Zoom user to act on behalf of.
 You can use any of the following forms:
 
-- Your Zoom user ID — a 22-character alphanumeric string found in your profile settings
+- Your Zoom user ID: a 22-character alphanumeric string found in your profile settings
 - Your Zoom account email address
-- The special value `me` — refers to the authenticated OAuth user (simplest for single-user integrations)
+- The special value `me`: refers to the authenticated OAuth user (simplest for single-user integrations)
 
 To look up your user ID, navigate to **Profile** in the Zoom web portal and copy the value shown under your profile picture.
 

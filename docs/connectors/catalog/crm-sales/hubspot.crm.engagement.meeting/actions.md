@@ -8,19 +8,19 @@ The `ballerinax/hubspot.crm.engagement.meeting` package exposes the following cl
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | HubSpot Meetings API v3 — meeting CRUD, batch operations, and search. |
+| [`Client`](#client) | HubSpot Meetings API v3: meeting CRUD, batch operations, and search. |
 
 ---
 
 ## Client
 
-HubSpot Meetings API v3 — meeting CRUD, batch operations, and search.
+HubSpot Meetings API v3: meeting CRUD, batch operations, and search.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|ApiKeysConfig` | Required | Authentication configuration — OAuth 2.0 refresh token grant, bearer token, or API key. |
+| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|ApiKeysConfig` | Required | Authentication configuration: OAuth 2.0 refresh token grant, bearer token, or API key. |
 | `httpVersion` | `http:HttpVersion` | `http:HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
 | `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
@@ -236,7 +236,7 @@ Sample code:
 hsmeetings:SimplePublicObject updated = check meetingsClient->/[meetingId].patch({
     properties: {
         "hs_meeting_title": "Updated Project Kickoff",
-        "hs_meeting_location": "Virtual - Zoom"
+        "hs_meeting_location": "Virtual: Zoom"
     }
 });
 ```
@@ -248,7 +248,7 @@ Sample response:
   "id": "12345678902",
   "properties": {
     "hs_meeting_title": "Updated Project Kickoff",
-    "hs_meeting_location": "Virtual - Zoom",
+    "hs_meeting_location": "Virtual: Zoom",
     "hs_createdate": "2026-03-15T08:00:00.000Z",
     "hs_lastmodifieddate": "2026-03-16T09:30:00.000Z",
     "hs_object_id": "12345678902"
