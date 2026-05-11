@@ -174,10 +174,7 @@ check sender->cancel(sequenceNumber);
 
 Closes the sender connection and releases resources.
 
-Parameters:
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
+No parameters.
 
 Returns: `error?`
 
@@ -234,14 +231,21 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `serverWaitTime` | `int?` | No | Maximum wait time in seconds for a message to arrive. |
+| `serverWaitTime` | `int?` | No | Maximum wait time in seconds for a message to arrive. Defaults to `60`. |
+| `deadLettered` | `boolean` | No | When `true`, receives from the dead-letter sub-queue instead of the main queue or subscription. Defaults to `false`. |
 
-Returns: `asb:Message|error`
+Returns: `asb:Message|error?`
+
+Returns `()` if no message arrives within `serverWaitTime`. Always assign to a nilable type.
 
 Sample code:
 
 ```ballerina
-asb:Message message = check receiver->receive(serverWaitTime = 60);
+asb:Message? message = check receiver->receive(serverWaitTime = 60);
+if message is () {
+    // No message available
+    return;
+}
 ```
 
 </details>
@@ -255,8 +259,9 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `serverWaitTime` | `int?` | No | Maximum wait time in seconds for a message to arrive. |
+| `serverWaitTime` | `int?` | No | Maximum wait time in seconds for a message to arrive. Defaults to `60`. |
 | `T` | `typedesc<anydata>` | No | The expected payload type. |
+| `deadLettered` | `boolean` | No | When `true`, receives from the dead-letter sub-queue instead of the main queue or subscription. Defaults to `false`. |
 
 Returns: `T|error`
 
@@ -278,14 +283,21 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `maxMessageCount` | `int` | Yes | Maximum number of messages to receive in the batch. |
-| `serverWaitTime` | `int?` | No | Maximum wait time in seconds. |
+| `serverWaitTime` | `int?` | No | Maximum wait time in seconds. Defaults to `()` (no wait). |
+| `deadLettered` | `boolean` | No | When `true`, receives from the dead-letter sub-queue instead of the main queue or subscription. Defaults to `false`. |
 
-Returns: `asb:MessageBatch|error`
+Returns: `asb:MessageBatch|error?`
+
+Returns `()` if no messages are available. Always assign to a nilable type.
 
 Sample code:
 
 ```ballerina
-asb:MessageBatch batch = check receiver->receiveBatch(maxMessageCount = 10);
+asb:MessageBatch? batch = check receiver->receiveBatch(maxMessageCount = 10);
+if batch is () {
+    // No messages available
+    return;
+}
 ```
 
 </details>
@@ -308,7 +320,10 @@ Returns: `error?`
 Sample code:
 
 ```ballerina
-asb:Message message = check receiver->receive();
+asb:Message? message = check receiver->receive(serverWaitTime = 60);
+if message is () {
+    return;
+}
 check receiver->complete(message);
 ```
 
@@ -372,12 +387,16 @@ Parameters:
 |------|------|----------|-------------|
 | `message` | `asb:Message` | Yes | The message to defer. |
 
-Returns: `error?`
+Returns: `int|error`
+
+The returned `int` is the sequence number of the deferred message. Pass it to `receiveDeferred` to retrieve the message later.
 
 Sample code:
 
 ```ballerina
-check receiver->defer(message);
+int sequenceNumber = check receiver->defer(message);
+// Later, retrieve the deferred message:
+asb:Message? deferred = check receiver->receiveDeferred(sequenceNumber);
 ```
 
 </details>
@@ -393,12 +412,12 @@ Parameters:
 |------|------|----------|-------------|
 | `sequenceNumber` | `int` | Yes | The sequence number of the deferred message. |
 
-Returns: `asb:Message|error`
+Returns: `asb:Message|error?`
 
 Sample code:
 
 ```ballerina
-asb:Message deferredMsg = check receiver->receiveDeferred(sequenceNumber);
+asb:Message? deferredMsg = check receiver->receiveDeferred(sequenceNumber);
 ```
 
 </details>
@@ -433,17 +452,14 @@ check receiver->renewLock(message);
 
 Closes the receiver connection and releases resources.
 
-Parameters:
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
+No parameters.
 
 Returns: `error?`
 
 Sample code:
 
 ```ballerina
-check receiver->close();
+check receiver->closeReceiver();
 ```
 
 </details>
@@ -1011,3 +1027,9 @@ asb:RuleProperties[] rules = check admin->listRules("my-topic", "my-sub");
 ```
 
 </details>
+
+## What's next
+
+- [Trigger Reference](triggers.md) — event-driven integration using `asb:Listener`
+- [Setup Guide](setup-guide.md) — obtain the connection string required for all clients
+- [Example](example.md) — complete worked examples for sender, receiver, and trigger

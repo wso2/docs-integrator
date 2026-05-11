@@ -46,7 +46,7 @@ listener asb:Listener asbListener = new ({
     }
 });
 
-service on asbListener {
+service asb:Service on asbListener {
 
     remote function onMessage(asb:Message message) returns error? {
         log:printInfo("Message received", messageId = message.messageId);
@@ -75,9 +75,9 @@ In the **Service Designer**, click the **Configure** icon in the header to open 
 | **Max Auto Lock Renew Duration** | Maximum lock renewal duration in seconds under `PEEK_LOCK` mode. Set to `0` to disable auto-renewal. Auto-renewal is disabled for `RECEIVE_AND_DELETE` mode. | `300` |
 | **Amqp Retry Options** | Retry configuration for the underlying AMQP message receiver. | `{}` |
 | **Additional Values** | Key-value pairs for additional connection or entity configuration. | `{}` |
-| **Auto Complete** | When enabled, messages are automatically completed on successful handler execution and abandoned on failure. | — |
+| **Auto Complete** | When enabled, messages are automatically completed on successful handler execution and abandoned on failure. | `true` |
 | **Prefetch Count** | Number of messages to prefetch from the broker. | `0` |
-| **Max Concurrency** | Maximum number of concurrent messages this listener processes at one time. | `0` |
+| **Max Concurrency** | Maximum number of concurrent messages this listener processes at one time. | `1` |
 
 Click **+ Attach Listener** to attach an additional listener to the same service.
 
@@ -107,9 +107,9 @@ listener asb:Listener asbListener = new ({
 | `maxAutoLockRenewDuration` | `int` | `300` | Lock renewal timeout in seconds under `PEEK_LOCK` |
 | `amqpRetryOptions` | `asb:AmqpRetryOptions?` | — | AMQP retry configuration |
 | `additionalValues` | `map<string>?` | — | Additional key-value configuration |
-| `autoComplete` | `boolean?` | — | Auto-complete messages on success |
+| `autoComplete` | `boolean` | `true` | Auto-complete messages on success |
 | `prefetchCount` | `int` | `0` | Number of messages to prefetch |
-| `maxConcurrency` | `int` | `0` | Maximum concurrent message processing |
+| `maxConcurrency` | `int` | `1` | Maximum concurrent message processing |
 
 ## Event handlers
 
@@ -134,7 +134,7 @@ type InvoiceMessage record {|
     string currency;
 |};
 
-service on asbListener {
+service asb:Service on asbListener {
 
     remote function onMessage(asb:Message message,
                               asb:Caller caller) returns error? {
@@ -143,7 +143,7 @@ service on asbListener {
 
         check processInvoice(invoice);
         // Complete the message to remove it from the queue
-        check caller->complete(message);
+        check caller->complete();
     }
 }
 ```
@@ -151,7 +151,7 @@ service on asbListener {
 **onError handler** — called when message retrieval fails:
 
 ```ballerina
-service on asbListener {
+service asb:Service on asbListener {
 
     remote function onError(asb:MessageRetrievalError err) returns error? {
         log:printError("Azure Service Bus error", 'error = err);
@@ -166,16 +166,30 @@ The `onMessage` handler receives an `asb:Message` parameter with the message con
 | Field | Type | Description |
 |---|---|---|
 | `body` | `anydata` | Message payload. Use `message.body.ensureType()` to cast to a typed record. |
+| `contentType` | `string?` | MIME content type of the message body. Use `asb:TEXT`, `asb:JSON`, `asb:XML`, or `asb:BYTE_ARRAY`. |
 | `messageId` | `string?` | Unique message identifier set by the sender. |
-| `contentType` | `string?` | MIME content type of the message body (e.g., `application/json`). |
 | `correlationId` | `string?` | Correlation identifier for request/reply patterns. |
-| `subject` | `string?` | Application-specific message subject. |
-| `enqueuedTime` | `string?` | Time the message was added to the queue. |
-| `properties` | `map<anydata>?` | Custom application properties attached to the message. |
+| `label` | `string?` | Application-specific label. Corresponds to the Azure Service Bus "Subject" property. |
+| `to` | `string?` | Destination address of the message. |
+| `replyTo` | `string?` | Address to send replies to. |
+| `replyToSessionId` | `string?` | Session ID for the reply destination. |
+| `sessionId` | `string?` | Session identifier for session-aware entities. |
+| `partitionKey` | `string?` | Partition key for partitioned queues and topics. |
+| `timeToLive` | `int?` | Message expiry duration in seconds. |
+| `applicationProperties` | `ApplicationProperties?` | Custom application properties. Access values via `message.applicationProperties?.properties`. |
+| `sequenceNumber` | `int?` | Unique sequence number assigned by the broker. Read-only. |
+| `lockToken` | `string?` | Lock token used for settlement in `PEEK_LOCK` mode. Read-only. |
+| `deliveryCount` | `int?` | Number of times delivery has been attempted. |
+| `enqueuedTime` | `string?` | UTC time when the message was added to the queue. |
+| `enqueuedSequenceNumber` | `int?` | Sequence number assigned when the message was first enqueued. |
+| `deadLetterReason` | `string?` | Reason the message was moved to the dead-letter sub-queue. |
+| `deadLetterErrorDescription` | `string?` | Description of the error that caused dead-lettering. |
+| `deadLetterSource` | `string?` | Name of the entity where the message was dead-lettered. |
+| `state` | `string?` | Current message state: `Active`, `Deferred`, or `Scheduled`. |
 
 ## What's next
 
 - [RabbitMQ](rabbitmq.md) — consume messages from RabbitMQ queues
 - [Kafka](kafka.md) — consume messages from Apache Kafka topics
 - [Connections](../supporting/connections.md) — reuse Azure Service Bus connection strings across services
-- [Azure Service Bus connector reference](../../../connectors/catalog/messaging/azure-service-bus/overview.md) — full connector API reference
+- [Azure Service Bus connector reference](../../../connectors/catalog/messaging/asb/azure-service-bus-connector-overview.md) — full connector API reference

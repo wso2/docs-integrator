@@ -59,3 +59,9 @@ Endpoint=sb://<namespace>.servicebus.windows.net/;SharedAccessKeyName=RootManage
 
 Store the connection string securely. Do not commit it to source control.
 Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
+
+## What's next
+
+- [Action Reference](actions.md) — start sending and receiving messages
+- [Trigger Reference](triggers.md) — set up event-driven message consumption
+- [Example](example.md) — complete worked examples for sender, receiver, and trigger

@@ -1,6 +1,10 @@
+---
+title: Azure Service Bus Connector Overview
+---
+
 # Azure Service Bus Connector Overview
 
-Azure Service Bus is a fully managed enterprise message broker with message queues and publish-subscribe topics. The Ballerina `ballerinax/asb` connector (v3.8.3) provides programmatic access to Azure Service Bus for sending, receiving, and administering messages across queues, topics, and subscriptions, enabling reliable cloud messaging in your Ballerina integration flows.
+Azure Service Bus is a fully managed enterprise message broker with message queues and publish-subscribe topics. The Ballerina `ballerinax/asb` connector (v3.9.1) provides programmatic access to Azure Service Bus for sending, receiving, and administering messages across queues, topics, and subscriptions, enabling reliable cloud messaging in your Ballerina integration flows.
 
 ## Key features
 
@@ -37,7 +41,7 @@ Supported trigger events:
 | Message received | `onMessage` | Fired when a message is received from the configured queue or subscription. |
 | Message retrieval error | `onError` | Fired when an error occurs during message retrieval. |
 
-See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the `EventData` payload structure.
+See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the `asb:Message` payload structure.
 
 ## Documentation
 
@@ -48,6 +52,13 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the listener and service model.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Azure Service Bus** connector, including connection setup, operation configuration, execution flow, and event-driven trigger setup.
+
+## What's next
+
+- [Setup Guide](setup-guide.md) — create a namespace, queue or topic, and obtain your connection string
+- [Action Reference](actions.md) — send, receive, and administer messages
+- [Trigger Reference](triggers.md) — event-driven message consumption with `asb:Listener`
+- [Azure Service Bus event integration](../../../../develop/integration-artifacts/event/azure-service-bus.md) — configure the listener in WSO2 Integrator
 
 ## How to contribute
 
