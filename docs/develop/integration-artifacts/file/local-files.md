@@ -1,8 +1,8 @@
 ---
-title: Local Files
+title: Local files
 ---
 
-# Local Files
+# Local files
 
 Local file services monitor a directory on the local file system and trigger event handlers when files are created, modified, or deleted. Use them for on-premises batch processing, development workflows, and integrations that consume files dropped into a watched directory.
 

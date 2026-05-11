@@ -1,8 +1,8 @@
 ---
-title: CSV Fault Tolerance
+title: CSV fault tolerance
 ---
 
-# CSV Fault Tolerance
+# CSV fault tolerance
 
 Real-world CSV files rarely arrive perfectly clean. A single bad row (a stray comma, a wrong data type, a trailing blank) would normally fail the whole file. With **CSV fault tolerance** enabled, the listener treats malformed rows as a per-row issue instead of a per-file one. It skips rows that don't fit your schema and hands the rest to the handler as if nothing happened.
 

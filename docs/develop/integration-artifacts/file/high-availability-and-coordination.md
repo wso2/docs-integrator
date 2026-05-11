@@ -1,8 +1,8 @@
 ---
-title: High Availability and Coordination
+title: High availability and coordination
 ---
 
-# High Availability and Coordination
+# High availability and coordination
 
 When you deploy several instances of the same FTP/SFTP integration, for example, one per pod in a Kubernetes cluster, every instance would normally connect to the same remote directory and pick up every file. That causes duplicate processing, race conditions, and inconsistent downstream state.
 

@@ -229,7 +229,7 @@ To run and test the agent, follow the same steps in the **Visual Designer** tab 
 
 ## What's next
 
-- [Exposing a service as an MCP server](../../develop/mcp/exposing-as-mcp) — Build your own MCP server like the one used in this tutorial
-- [Consuming MCP from an agent](../../develop/mcp/consuming-mcp-from-agent) — Deeper reference for `ai:McpToolKit` options
-- [Adding memory to an agent](../../develop/agents/memory) — Persist conversation history across sessions
-- [AI agent observability](../../develop/agents/observability) — Trace tool calls and monitor agent performance
+- [Exposing a service as an MCP server](../develop/mcp/exposing-as-mcp) — Build your own MCP server like the one used in this tutorial
+- [Consuming MCP from an agent](../develop/mcp/consuming-mcp-from-agent) — Deeper reference for `ai:McpToolKit` options
+- [Adding memory to an agent](../develop/agents/memory) — Persist conversation history across sessions
+- [AI agent observability](../develop/agents/observability) — Trace tool calls and monitor agent performance
