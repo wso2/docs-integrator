@@ -4,49 +4,7 @@ title: AI Agents
 
 # AI Agents
 
-An AI Agent is an integration component that combines an LLM, a system prompt, tools, memory, and orchestration logic into a single artifact. Once configured, you can interact with the agent using user messages, allowing it to reason about requests, invoke tools, and generate responses.
-
-WSO2 Integrator also provides built-in support for observability, tracing, and evaluation to help monitor, test, and improve agent behavior.
-
-## How an AI agent works
-
-An AI agent operates as a goal-driven loop that continuously interprets input, plans and executes actions, and updates its context based on the results until the desired outcome is achieved. This loop can interact with functions, APIs, connectors, and backend services.
-
-```mermaid
-flowchart LR
-    User([User Input])
-
-    subgraph AgentLoop["AI Agent Execution Flow"]
-        direction LR
-
-        Reason["Reason<br/>Analyzes the request and determines the next action"]
-
-        Act["Act<br/>Invokes a tool, API, or external service"]
-
-        Observe["Observe<br/>Processes the tool or service response"]
-
-        Decision{"More information needed?"}
-
-        Response["Generate Final Response"]
-
-        Reason --> Act
-        Act --> Observe
-        Observe --> Decision
-        Decision -- Yes --> Reason
-        Decision -- No --> Response
-    end
-
-    User --> Reason
-```
-
-In this flow:
-
-- **Reason** — The LLM evaluates the user input, conversation context, and available tools to determine the next action.
-- **Act** — If additional information or an external action is required, the agent invokes a tool, connector, API, or backend service.
-- **Observe** — The result of the tool execution is returned to the LLM as additional context.
-- **Repeat or Respond** — The agent either continues the reasoning loop or generates the final response once sufficient information is available.
-
-This iterative execution model enables agents to handle dynamic, multi-step workflows grounded in real-world systems and data.
+AI agents are software components that use large language models (LLMs) to understand requests, make decisions, and perform actions autonomously. They can interact with users, invoke tools, access external systems, and maintain conversation context to complete tasks.
 
 ## Components of an AI agent
 
@@ -61,25 +19,9 @@ An AI agent is composed of four core components that enable reasoning, action ex
 
 Without tools, the agent is limited to generating responses without interacting with external systems. Without memory, the agent cannot maintain context across multi-turn conversations.
 
-## Multi-artifact project view
-
-A real project usually has more than one artifact: an agent for chat, plus an HTTP service for batch operations or RAG queries, plus an MCP service for assistants. The project Overview canvas visualizes all of them at once with the connections each one uses:
-
-![Project Overview showing multiple services and AI components connected together.](/img/genai/develop/shared/14-multi-artifact-project-canvas.png)
-
-Each artifact operates independently. The overview canvas helps visualize how services, providers, and integrations are connected within the project.
-
-The top-right toolbar provides the following actions:
-
-| Action | Description |
-|---|---|
-| **Configure** | Opens the `Config.toml` editor for updating configurable values such as API keys and endpoints |
-| **Run** | Builds and runs the integration |
-| **Debug** | Runs the integration with debugger support enabled |
+In WSO2 Integrator, AI agents can be visually designed, configured with tools and memory, connected to model providers, and exposed through APIs or listeners.
 
 ## What an agent looks like in the canvas
-
-Once an agent is created, click on the **AI Agent Service** (see [Multi-Artifact Project View](#multi-artifact-project-view) above) to open the agent canvas.
 
 The agent is represented as a simple integration flow consisting of the following blocks:
 
@@ -100,43 +42,9 @@ The **AI Agent** block allows you to configure the following components of the a
 
 The **Chat** button opens an in-IDE chat window that allows you to interact with the agent immediately. The **Tracing** toggle enables execution tracing so you can inspect reasoning steps, tool invocations, and execution flow after each interaction.
 
-## Generated Ballerina code
+## Try it and run
 
-For an agent named `blogReviewer` using the default WSO2 model provider, the generated source code is similar to the following:
-
-```ballerina
-import ballerina/ai;
-import ballerina/http;
-
-final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
-
-// Agent declaration — configure role, instructions, tools, and model here.
-final ai:Agent blogReviewerAgent = check new (
-    systemPrompt = {
-       role: string `BlogReviewer`,
-       instructions: string ``
-    },
-    model = wso2ModelProvider,
-    tools = []
-);
-
-// Listener — handles the AI chat protocol (session IDs, request/response shapes).
-listener ai:Listener chatAgentListener = new (listenOn = check http:getDefaultListener());
-
-// Service — one resource function wires the listener to the agent.
-service /blogReviewer on chatAgentListener {
-    resource function post chat(@http:Payload ai:ChatReqMessage request) returns ai:ChatRespMessage|error {
-        string stringResult = check blogReviewerAgent.run(request.message, request.sessionId);
-        return {message: stringResult};
-    }
-}
-```
-
-The generated source is intentionally minimal and readable, allowing developers to switch between visual and source views seamlessly.
-
-## Try-It and run experience
-
-The top-right controls in the agent canvas allow you to interact with and test the agent directly within BI.
+The top-right controls in the agent canvas allow you to interact with and test the agent directly within WSO2 Integrator.
 
 | Button | Description |
 |---|---|
@@ -157,8 +65,8 @@ The chat interface reuses the same session across interactions, enabling memory-
 
 ## What's next
 
-- **[Creating an Agent](creating-an-agent.md)** — Learn how to create and configure agents using the AI Chat Agent Wizard.
-- **[Tools](tools.md)** — Add functions, connectors, and integrations to your agents.
-- **[Memory](memory.md)** — Configure conversational and persistent memory.
-- **[Observability](observability.md)** — Monitor traces, logs, and execution details.
-- **[Evaluations](evaluations.md)** — Test and evaluate agent behavior and response quality.
+- **[Creating an Agent](creating-an-agent.md)** - Learn how to create and configure agents using the AI Chat Agent Wizard.
+- **[Tools](tools.md)** - Add functions, connectors, and integrations to your agents.
+- **[Memory](memory.md)** - Configure conversational and persistent memory.
+- **[Observability](observability.md)** - Monitor traces, logs, and execution details.
+- **[Evaluations](evaluations.md)** - Test and evaluate agent behavior and response quality.

@@ -66,9 +66,9 @@ In this section, you will create the integration project and configure the AI ag
 
 Create a new integration project by following the instructions in [Create a project](develop/create-integrations/create-a-project.md).
 
-### Step 2: Define the data types
+### Step 2: Define the data type
 
-Define the following data types.
+Define the following data type.
 
 ```ballerina
 # types.bal
@@ -82,13 +82,28 @@ type KbArticle record {|
 |};
 ```
 
+Initialize the `kbArticles`.
+
+```ballerina
+final KbArticle[] & readonly kbArticles = [
+    {
+        articleId: "KB-101",
+        title: "VPN Troubleshooting",
+        content: "Restart the VPN client and reconnect.",
+        category: "network",
+        tags: ["vpn"],
+        relevanceScore: 0.95
+    }
+];
+```
+
 ### Step 3: Create the AI agent
 
-Create the AI agent named `itHelpDeskAgent` by following the instructions in [Create an Agent](genai/develop/agents/creating-an-agent.md).
+Create the AI agent named `itHelpDeskAgent` by following the instructions in [Creating an Agent](genai/develop/agents/creating-an-agent.md).
 
 ### Step 4: Update the system prompt
 
-- Click the created agent and add the following instructions.
+- Click the created agent and add the instructions.
 
 ![Add instruction](/img/genai/tutorials/hr-knowledge-base-rag/28-add-instruction.png)
 
@@ -137,7 +152,9 @@ isolated function searchKnowledgeBase(string query) returns string {
 
 ### Step 6: Add persistent memory to the agent
 
-Add persistent memory by following the instructions in [Memory](genai/develop/agents/memory).
+Add persistent memory by following the instructions in [Memory](genai/develop/agents/memory.md).
+
+    ![Agent with inmemory](/img/genai/develop/agents/29-agent-with-inmemory.png)
 
 ```ballerina
 # agents.bal
@@ -190,8 +207,8 @@ final ai:Agent itHelpDeskAgent = check new (
 curl -X POST http://localhost:9090/hthr/chat \
   -H "Content-Type: application/json" \
   -d '{
-        "sessionId":"EMP-1001",
-        "message":"My VPN is not working"
+        "sessionId": "EMP-1001",
+        "message": "My VPN is not working"
       }'
 ```
 
@@ -274,11 +291,8 @@ Example response:
 }
 ```
 
-The AI agent remembers previous conversations because the conversation history is stored in persistent MSSQL-backed memory and retrieved using the same `sessionId`.
+The AI agent remembers previous conversations because the conversation history is stored in persistent MSSQL backed memory and retrieved using the same `sessionId`.
 
 ## What's next
 
-- [Memory Configuration](/docs/genai/agents/memory-configuration) — Explore memory options in depth
-- [Chat Agents](/docs/genai/agents/chat-agents) — Learn more about chat agent patterns
-- [Agent Tracing](/docs/genai/agent-observability/agent-tracing) — Add observability and debugging
-- [Troubleshooting](/docs/genai/reference/troubleshooting) — Common issues and solutions
+[Building a Legal Document Q&A System with MCP and RAG](genai/tutorials/building-a-legal-document-qa-system-mcp-and-rag.md) - Explore memory options in depth
