@@ -67,4 +67,4 @@ Coming from another platform? Start here:
 
 - **[From WSO2 MI](migration/coming-from-mi.md)** — Migrate from WSO2 Micro Integrator
 - **[From MuleSoft](migration/coming-from-mulesoft.md)** — Migrate from MuleSoft Anypoint
-- **[From TIBCO](migration/coming-from-tibco.md)** — Migrate from TIBCO BusinessWorks
+- **[From TIBCO BusinessWorks](migration/coming-from-tibco.md)** — Migrate from TIBCO BusinessWorks
