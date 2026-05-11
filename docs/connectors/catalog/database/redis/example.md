@@ -23,7 +23,7 @@ flowchart LR
 
 ## Setting up the Redis integration
 
-> **New to WSO2 Integrator?** Follow the [Create a New Integration](../getting-started/create-integration.md) guide to set up your project first, then return here to add the connector.
+> **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your project first, then return here to add the connector.
 
 ## Adding the Redis connector
 

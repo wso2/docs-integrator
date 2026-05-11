@@ -20,7 +20,7 @@ Full Twilio REST API access — messaging, voice calls, phone numbers, recording
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `AuthTokenConfig|ApiKeyConfig` | Required | Authentication configuration — either Auth Token or API Key based. |
+| `auth` | <code>AuthTokenConfig&#124;ApiKeyConfig</code> | Required | Authentication configuration — either Auth Token or API Key based. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
 | `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |

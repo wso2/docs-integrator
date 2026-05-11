@@ -21,13 +21,13 @@ Actions are operations you invoke on Twilio from your integration — sending me
 |--------|---------|
 | `Client` | Messaging (SMS/MMS/WhatsApp), voice calls, phone numbers, recordings, conferences, accounts, usage |
 
-See the **[Action Reference](action-reference.md)** for the full list of operations, parameters, and sample code for each client.
+See the **[Action Reference](actions.md)** for the full list of operations, parameters, and sample code for each client.
 
 ## Documentation
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Twilio account and obtaining the credentials required to use the Twilio connector.
 
-* **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Twilio** connector, including connection setup, operation configuration, execution flow, and event-driven trigger setup.
 
