@@ -180,6 +180,7 @@ The defaults (`200` / `40`) are tuned for prose. Code-heavy or table-heavy conte
 
 ## What's next
 
-- [Direct LLM Calls](/docs/genai/develop/direct-llm/overview) - One-shot generate calls without an agent loop.
-- [Natural Functions](/docs/genai/develop/natural-functions/overview) - Ballerina functions whose body is plain English, evaluated at runtime by an LLM.
-- [RAG](/docs/genai/develop/rag/overview) - The visual designer walkthrough for the full ingestion and query flows.
+- [Embedding Providers](/docs/genai/develop/components/embedding-providers) - Configure the model that converts chunks into vectors.
+- [Vector Stores](/docs/genai/develop/components/vector-stores) - Set up the store that indexes and retrieves those vectors.
+- [Knowledge Bases](/docs/genai/develop/components/knowledge-bases) - Combine a chunker, embedding provider, and vector store into a single ingest-and-retrieve component.
+- [RAG](/docs/genai/develop/rag/overview) - End-to-end walkthrough of the ingestion and query flows.
