@@ -61,31 +61,6 @@ ERROR: incompatible types: expected 'string', found 'string?'
 | Insufficient memory | Increase JVM heap: `export BAL_JAVA_OPTS="-Xmx2g"` |
 | Cold cache | First build is slower; subsequent builds reuse cached artifacts |
 
-### Version conflicts
-
-**Symptom:** Build fails due to incompatible transitive dependency versions.
-
-```
-ERROR: version conflict for 'ballerina/io': required '1.6.0' by 'ballerinax/kafka' but '1.5.0' by 'ballerinax/rabbitmq'
-```
-
-**Solutions:**
-
-| Approach | Steps |
-|----------|-------|
-| Update all dependencies | Delete `Dependencies.toml`; run `bal build --sticky=false` |
-| Pin a specific version | Add explicit dependency in `Ballerina.toml` with the required version |
-| Check compatibility | Ensure all dependencies target the same Ballerina distribution version |
-| Use dependency override | Add `[[dependency]]` section in `Ballerina.toml` to force a version |
-
-```toml
-# Ballerina.toml - Force a specific dependency version
-[[dependency]]
-org = "ballerina"
-name = "io"
-version = "1.6.0"
-```
-
 ## Runtime errors
 
 ### Port conflicts
@@ -170,31 +145,13 @@ http:Client client = check new ("https://api.example.com", {
 });
 ```
 
-### Missing platform dependencies
-
-**Symptom:** Runtime error about missing Java classes or native libraries.
-
-```
-ERROR: java.lang.ClassNotFoundException: com.mysql.cj.jdbc.Driver
-```
-
-**Solutions:**
-
-```toml
-# Add platform-specific Java dependencies in Ballerina.toml
-[[platform.java17.dependency]]
-groupId = "mysql"
-artifactId = "mysql-connector-java"
-version = "8.0.33"
-```
-
 ## Diagnostic tools
 
 ### Strand dump tool
 
 The strand dump tool captures the state of all active strands in a running Ballerina application, similar to a thread dump in Java. It is useful for diagnosing deadlocks, stuck operations, and concurrency issues.
 
-To generate a strand dump, find the process ID and signal the running JVM:
+#### Generating a strand dump
 
 ```bash
 # Find the PID of the running Ballerina process
@@ -206,6 +163,8 @@ kill -SIGTRAP
 # Alternative: Use bal command
 bal strand-dump
 ```
+
+#### Strand dump output
 
 The dump shows each strand's status, current function, and call stack:
 
@@ -233,7 +192,7 @@ Waiting: 1
 Blocked: 1
 ```
 
-Strand states reported in the dump:
+#### Strand states
 
 | State | Description |
 |-------|-------------|
@@ -247,7 +206,7 @@ Strand states reported in the dump:
 
 The Ballerina profiler identifies performance bottlenecks by recording CPU and memory usage during execution.
 
-Run the profiler against a Ballerina file or package:
+#### Running with profiler
 
 ```bash
 # Profile a Ballerina program
@@ -256,6 +215,8 @@ bal profile <ballerina-file-or-package>
 # Profile with specific options
 bal profile --cpu --memory myservice.bal
 ```
+
+#### Profiler output
 
 The profiler generates an HTML report at `target/profiler/index.html` containing:
 
@@ -279,7 +240,7 @@ bal run -- -Cballerina.log.level=DEBUG
 bal run -- -Cballerina.http.log.level=DEBUG
 ```
 
-Available log levels:
+#### Log levels
 
 | Level | Description | Use Case |
 |-------|-------------|----------|
@@ -290,7 +251,52 @@ Available log levels:
 | `DEBUG` | Detailed debug information | Development troubleshooting |
 | `TRACE` | Very detailed trace output | Deep debugging (high overhead) |
 
-## VS Code extension issues
+## Dependency issues
+
+### Version conflicts
+
+**Symptom:** Build fails due to incompatible transitive dependency versions.
+
+```
+ERROR: version conflict for 'ballerina/io': required '1.6.0' by 'ballerinax/kafka' but '1.5.0' by 'ballerinax/rabbitmq'
+```
+
+**Solutions:**
+
+| Approach | Steps |
+|----------|-------|
+| Update all dependencies | Delete `Dependencies.toml`; run `bal build --sticky=false` |
+| Pin a specific version | Add explicit dependency in `Ballerina.toml` with the required version |
+| Check compatibility | Ensure all dependencies target the same Ballerina distribution version |
+| Use dependency override | Add `[[dependency]]` section in `Ballerina.toml` to force a version |
+
+```toml
+# Ballerina.toml - Force a specific dependency version
+[[dependency]]
+org = "ballerina"
+name = "io"
+version = "1.6.0"
+```
+
+### Missing platform dependencies
+
+**Symptom:** Runtime error about missing Java classes or native libraries.
+
+```
+ERROR: java.lang.ClassNotFoundException: com.mysql.cj.jdbc.Driver
+```
+
+**Solutions:**
+
+```toml
+# Add platform-specific Java dependencies in Ballerina.toml
+[[platform.java17.dependency]]
+groupId = "mysql"
+artifactId = "mysql-connector-java"
+version = "8.0.33"
+```
+
+## VS code extension issues
 
 ### Language server not starting
 
@@ -347,14 +353,15 @@ bal clean && bal build
 
 | Resource | URL |
 |----------|-----|
+| WSO2 Integrator Documentation | This documentation site |
 | Ballerina Discord | [discord.gg/ballerinalang](https://discord.gg/ballerinalang) |
 | Ballerina GitHub Issues | [github.com/ballerina-platform/ballerina-lang/issues](https://github.com/ballerina-platform/ballerina-lang/issues) |
 | Stack Overflow | [stackoverflow.com/questions/tagged/ballerina](https://stackoverflow.com/questions/tagged/ballerina) |
 | WSO2 Support | [wso2.com/support/](https://wso2.com/support/) |
 
-## What's next
+## See also
 
-- [System Requirements](system-requirements.md) — Platform and version requirements
-- [Installation Guide](/docs/get-started/install) — Installation instructions
-- [Error Codes Reference](/docs/reference/error-codes) — All error codes with resolution steps
-- [FAQ](/docs/reference/faq) — Frequently asked questions
+- [System Requirements](system-requirements.md) -- Platform and version requirements
+- [Installation Guide](/docs/get-started/install) -- Installation instructions
+- [Error Codes Reference](/docs/reference/error-codes) -- All error codes with resolution steps
+- [FAQ](/docs/reference/faq) -- Frequently asked questions
