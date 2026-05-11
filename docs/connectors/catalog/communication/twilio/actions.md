@@ -10,8 +10,6 @@ The `ballerinax/twilio` package exposes the following clients:
 |--------|---------|
 | [`Client`](#client) | Full Twilio REST API access: messaging, voice calls, phone numbers, recordings, conferences, and account management. |
 
----
-
 ## Client
 
 Full Twilio REST API access: messaging, voice calls, phone numbers, recordings, conferences, and account management.
@@ -22,8 +20,12 @@ Full Twilio REST API access: messaging, voice calls, phone numbers, recordings, 
 |-------|------|---------|-------------|
 | `auth` | <code>AuthTokenConfig&#124;ApiKeyConfig</code> | Required | Authentication configuration: either Auth Token or API Key based. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
+| `http1Settings` | `ClientHttp1Settings` | `()` | Configurations for HTTP/1.x protocol. |
+| `http2Settings` | `ClientHttp2Settings` | `()` | Configurations for HTTP/2 protocol. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
+| `forwarded` | `string` | `"disable"` | The choice of setting `forwarded`/`x-forwarded` header. |
 | `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
+| `responseLimits` | `ResponseLimitConfigs` | `()` | Configurations associated with inbound response size limits. |
 | `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
 | `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
 | `compression` | `Compression` | `COMPRESSION_AUTO` | HTTP compression configuration. |
@@ -33,6 +35,8 @@ Full Twilio REST API access: messaging, voice calls, phone numbers, recordings, 
 | `validation` | `boolean` | `true` | Enable/disable payload validation. |
 
 ### Initializing the client
+
+**Using Auth Token authentication:**
 
 ```ballerina
 import ballerinax/twilio;
@@ -44,6 +48,24 @@ twilio:Client twilioClient = check new ({
     auth: {
         accountSid: accountSid,
         authToken: authToken
+    }
+});
+```
+
+**Using API Key authentication:**
+
+```ballerina
+import ballerinax/twilio;
+
+configurable string accountSid = ?;
+configurable string apiKey = ?;
+configurable string apiSecret = ?;
+
+twilio:Client twilioClient = check new ({
+    auth: {
+        accountSid: accountSid,
+        apiKey: apiKey,
+        apiSecret: apiSecret
     }
 });
 ```
@@ -80,7 +102,7 @@ twilio:Message response = check twilioClient->createMessage(messageRequest);
 
 Sample response:
 
-```ballerina
+```json
 {"sid": "SMxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "status": "queued", "to": "+1234567890", "from": "+0987654321", "body": "Hello from Ballerina", "num_segments": "1", "direction": "outbound-api"}
 ```
 
@@ -108,7 +130,7 @@ twilio:Message message = check twilioClient->fetchMessage("SMxxxxxxxxxxxxxxxxxxx
 
 Sample response:
 
-```ballerina
+```json
 {"sid": "SMxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "status": "delivered", "to": "+1234567890", "from": "+0987654321", "body": "Hello from Ballerina", "date_sent": "Mon, 10 Mar 2026 14:30:00 +0000"}
 ```
 
@@ -139,7 +161,7 @@ twilio:ListMessageResponse messages = check twilioClient->listMessage(to = "+123
 
 Sample response:
 
-```ballerina
+```json
 {"messages": [{"sid": "SMxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "status": "delivered", "to": "+1234567890", "body": "Hello"}], "page_size": 10, "page": 0}
 ```
 
@@ -178,8 +200,22 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `payload` | `CreateCallRequest` | Yes | Call details including `To`, `From`, and `Url` (TwiML application URL). |
+| `payload` | `CreateCallRequest` | Yes | Call details — see required and optional fields below. |
 | `accountSid` | `string` | No | Account SID override. |
+
+`CreateCallRequest` required fields:
+
+| Name | Type | Description |
+|------|------|-------------|
+| `To` | `string` | The phone number to call, in E.164 format. |
+| `From` | `string` | Your Twilio number to use as the caller ID, in E.164 format. |
+
+Provide exactly one of `Url`, `Twiml`, or `ApplicationSid` to specify the call instructions:
+- `Url` — URL of a TwiML document or Twilio Application to fetch call instructions from.
+- `Twiml` — Inline TwiML string for simple call flows that do not require a separate server.
+- `ApplicationSid` — SID of a Twilio Application with configured voice URLs.
+
+Optional fields include `StatusCallback`, `StatusCallbackMethod`, `StatusCallbackEvent`, `Record`, `Timeout`, and others — see the [Twilio REST API reference](https://www.twilio.com/docs/voice/api/call-resource) for the full list.
 
 Returns: `Call|error`
 
@@ -189,7 +225,9 @@ Sample code:
 twilio:CreateCallRequest callRequest = {
     To: "+1234567890",
     From: "+0987654321",
-    Url: "http://demo.twilio.com/docs/voice.xml"
+    Url: "http://demo.twilio.com/docs/voice.xml",
+    StatusCallback: "https://your-app.example.com/status",
+    StatusCallbackMethod: "POST"
 };
 
 twilio:Call response = check twilioClient->createCall(callRequest);
@@ -197,7 +235,7 @@ twilio:Call response = check twilioClient->createCall(callRequest);
 
 Sample response:
 
-```ballerina
+```json
 {"sid": "CAxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "status": "queued", "to": "+1234567890", "from": "+0987654321", "direction": "outbound-api"}
 ```
 
@@ -225,7 +263,7 @@ twilio:Call call = check twilioClient->fetchCall("CAxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Sample response:
 
-```ballerina
+```json
 {"sid": "CAxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "status": "completed", "to": "+1234567890", "from": "+0987654321", "duration": "45", "price": "-0.0085", "price_unit": "USD"}
 ```
 
@@ -256,7 +294,7 @@ twilio:ListCallResponse calls = check twilioClient->listCall(status = "completed
 
 Sample response:
 
-```ballerina
+```json
 {"calls": [{"sid": "CAxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "status": "completed", "duration": "45"}], "page_size": 20, "page": 0}
 ```
 
@@ -311,7 +349,7 @@ twilio:Account subAccount = check twilioClient->createAccount(accountRequest);
 
 Sample response:
 
-```ballerina
+```json
 {"sid": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "friendly_name": "My Sub Account", "status": "active", "type": "Full"}
 ```
 
@@ -338,7 +376,7 @@ twilio:Account account = check twilioClient->fetchAccount("ACxxxxxxxxxxxxxxxxxxx
 
 Sample response:
 
-```ballerina
+```json
 {"sid": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "friendly_name": "My Account", "status": "active", "type": "Full"}
 ```
 
@@ -365,7 +403,7 @@ twilio:Balance balance = check twilioClient->fetchBalance();
 
 Sample response:
 
-```ballerina
+```json
 {"account_sid": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "balance": "25.50", "currency": "USD"}
 ```
 
@@ -394,8 +432,39 @@ twilio:ListAccountResponse accounts = check twilioClient->listAccount(status = "
 
 Sample response:
 
-```ballerina
+```json
 {"accounts": [{"sid": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "friendly_name": "My Account", "status": "active"}], "page_size": 50, "page": 0}
+```
+
+</details>
+
+<details>
+<summary>updateAccount</summary>
+
+Updates properties of an account.
+
+Parameters:
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `sid` | `string` | Yes | The Account SID of the account to update. |
+| `payload` | `UpdateAccountRequest` | Yes | Update parameters. |
+
+`UpdateAccountRequest` fields:
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `FriendlyName` | `string` | No | A human-readable name for the account. |
+| `Status` | `Account_enum_status` | No | The new status for the account: `active`, `suspended`, or `closed`. |
+
+Returns: `Account|error`
+
+Sample code:
+
+```ballerina
+twilio:Account updated = check twilioClient->updateAccount("ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", {
+    FriendlyName: "Updated Account Name"
+});
 ```
 
 </details>
@@ -426,7 +495,7 @@ twilio:Incoming_phone_number number = check twilioClient->createIncomingPhoneNum
 
 Sample response:
 
-```ballerina
+```json
 {"sid": "PNxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "phone_number": "+1234567890", "friendly_name": "(123) 456-7890", "capabilities": {"voice": true, "sms": true, "mms": true}}
 ```
 
@@ -456,7 +525,7 @@ twilio:ListIncomingPhoneNumberResponse numbers = check twilioClient->listIncomin
 
 Sample response:
 
-```ballerina
+```json
 {"incoming_phone_numbers": [{"sid": "PNxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "phone_number": "+1234567890", "friendly_name": "(123) 456-7890"}], "page_size": 20}
 ```
 
@@ -489,7 +558,7 @@ twilio:ListAvailablePhoneNumberLocalResponse available = check twilioClient->lis
 
 Sample response:
 
-```ballerina
+```json
 {"available_phone_numbers": [{"phone_number": "+14155551234", "friendly_name": "(415) 555-1234", "capabilities": {"voice": true, "SMS": true, "MMS": true}}]}
 ```
 
@@ -520,7 +589,7 @@ twilio:ListRecordingResponse recordings = check twilioClient->listRecording(page
 
 Sample response:
 
-```ballerina
+```json
 {"recordings": [{"sid": "RExxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "duration": "30", "status": "completed", "call_sid": "CAxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}], "page_size": 10}
 ```
 
@@ -548,7 +617,7 @@ twilio:Recording recording = check twilioClient->fetchRecording("RExxxxxxxxxxxxx
 
 Sample response:
 
-```ballerina
+```json
 {"sid": "RExxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "duration": "30", "status": "completed", "call_sid": "CAxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "price": "-0.0025", "price_unit": "USD"}
 ```
 
@@ -602,7 +671,7 @@ twilio:ListConferenceResponse conferences = check twilioClient->listConference(s
 
 Sample response:
 
-```ballerina
+```json
 {"conferences": [{"sid": "CFxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "friendly_name": "MyConference", "status": "completed"}], "page_size": 10}
 ```
 
@@ -630,7 +699,7 @@ twilio:Conference conference = check twilioClient->fetchConference("CFxxxxxxxxxx
 
 Sample response:
 
-```ballerina
+```json
 {"sid": "CFxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "friendly_name": "MyConference", "status": "completed", "region": "us1"}
 ```
 
@@ -662,7 +731,7 @@ twilio:Queue queue = check twilioClient->createQueue({
 
 Sample response:
 
-```ballerina
+```json
 {"sid": "QUxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "friendly_name": "Support Queue", "current_size": 0, "max_size": 1000}
 ```
 
@@ -690,7 +759,7 @@ twilio:ListQueueResponse queues = check twilioClient->listQueue(pageSize = 10);
 
 Sample response:
 
-```ballerina
+```json
 {"queues": [{"sid": "QUxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "friendly_name": "Support Queue", "current_size": 0}], "page_size": 10}
 ```
 
@@ -723,8 +792,14 @@ twilio:ListUsageRecordResponse usage = check twilioClient->listUsageRecord(pageS
 
 Sample response:
 
-```ballerina
+```json
 {"usage_records": [{"category": "sms", "description": "SMS Messages", "count": "150", "price": "1.125", "price_unit": "USD"}], "page_size": 10}
 ```
 
 </details>
+
+## What's next
+
+- [Trigger Reference](triggers.md) — Event-driven webhook integration using the Twilio listener.
+- [Example](example.md) — Complete example integrations for the Twilio connector and trigger.
+- [Setup Guide](setup-guide.md) — Create a Twilio account and obtain credentials.

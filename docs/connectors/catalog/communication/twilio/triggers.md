@@ -4,6 +4,8 @@ title: Triggers
 
 # Triggers
 
+Trigger functionality uses the **`ballerinax/trigger.twilio`** package — a separate package from the `ballerinax/twilio` REST API client. Use `import ballerinax/trigger.twilio;` for all listener, service, and event type references.
+
 The `ballerinax/trigger.twilio` package supports event-driven integration through Twilio webhooks. When SMS status changes or call status changes occur in Twilio, the listener receives the webhook request and dispatches it to the matching service callback automatically.
 
 Three components work together:
@@ -18,7 +20,9 @@ Three components work together:
 
 For action-based operations, see the [Action Reference](actions.md).
 
----
+## Error handling
+
+Each service callback returns `error?`. If a callback returns an `error`, the listener logs the failure and returns an HTTP `500` response to Twilio. Twilio treats non-`2xx` responses as delivery failures and will retry the webhook according to its retry policy (up to 3 retries with exponential backoff). To prevent unintended retries, handle expected failure cases within the callback and return `()` (nil) to acknowledge the event without triggering a retry.
 
 ## Listener
 
@@ -51,8 +55,6 @@ import ballerinax/trigger.twilio;
 
 listener twilio:Listener twilioListener = new (8090);
 ```
-
----
 
 ## Service
 
@@ -110,7 +112,7 @@ service twilio:SmsStatusService on twilioListener {
 }
 ```
 
-## Supporting types
+## Event payload types
 
 ### `SmsStatusChangeEventWrapper`
 
@@ -145,3 +147,9 @@ service twilio:SmsStatusService on twilioListener {
 | `RecordingUrl` | `string?` | URL of the recorded call audio, when available. |
 | `RecordingSid` | `string?` | Recording identifier, when available. |
 | `ApiVersion` | `string?` | Twilio API version used to handle the call. |
+
+## What's next
+
+- [Action Reference](actions.md) — REST API client operations for sending messages and making calls.
+- [Example](example.md) — Complete example integrations for the Twilio connector and trigger.
+- [Setup Guide](setup-guide.md) — Create a Twilio account and obtain credentials.

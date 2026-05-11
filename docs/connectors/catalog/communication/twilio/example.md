@@ -1,9 +1,8 @@
+---
+title: Examples
+---
+
 # Example
-
-## Table of Contents
-
-- [Twilio Example](#twilio-example)
-- [Twilio Trigger Example](#twilio-trigger-example)
 
 ## Twilio Example
 
@@ -33,11 +32,17 @@ flowchart LR
 
 ### Adding the Twilio connector
 
-### Step 1: Open the add connection panel
+#### Step 1: Open the add connection panel
 
 Select **Add Connection** (the `+` icon next to **Connections**) in the WSO2 Integrator panel to open the connector palette.
 
-![Twilio connector palette open with search field before any selection](/img/connectors/catalog/communication/twilio/twilio_screenshot_01_palette.png)
+<ThemedImage
+    alt="Twilio connector palette open with search field before any selection"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_01_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_01_palette.png'),
+    }}
+/>
 
 #### Step 2: Select the Twilio connector
 
@@ -53,13 +58,25 @@ Enter the connection parameters, binding each to a configurable variable to keep
 - **authToken** : Twilio Auth Token, bound to a `string` configurable variable
 - **connectionName** : Name for this connection instance (for example, `twilioClient`)
 
-![Twilio connection form fully filled with all parameters before saving](/img/connectors/catalog/communication/twilio/twilio_screenshot_02_connection_form.png)
+<ThemedImage
+    alt="Twilio connection form fully filled with all parameters before saving"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_02_connection_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_02_connection_form.png'),
+    }}
+/>
 
 #### Step 4: Save the connection
 
 Select **Save Connection** to persist the connection. The `twilioClient` connection appears in the **Connections** panel and on the design canvas.
 
-![Twilio Connections panel showing twilioClient entry after saving](/img/connectors/catalog/communication/twilio/twilio_screenshot_03_connections_list.png)
+<ThemedImage
+    alt="Twilio Connections panel showing twilioClient entry after saving"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_03_connections_list.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_03_connections_list.png'),
+    }}
+/>
 
 #### Step 5: Set actual values for your configurables
 
@@ -70,7 +87,7 @@ In the left panel, select **Configurations** to open the Configurations panel. S
 
 ### Configuring the Twilio createMessage operation
 
-### Step 6: Add an automation entry point
+#### Step 6: Add an automation entry point
 
 In the integration overview, select **+ Add Artifact**, then select **Automation** from the artifact type list, and select **Create**. A new automation named `main` is added under **Entry Points** and the flow editor opens.
 
@@ -78,7 +95,13 @@ In the integration overview, select **+ Add Artifact**, then select **Automation
 
 In the Automation flow editor, select the **+** button between **Start** and **Error Handler** to open the node panel. Expand **twilioClient** under **Connections** to reveal available operations.
 
-![Twilio connection node expanded showing all available operations before selection](/img/connectors/catalog/communication/twilio/twilio_screenshot_04_operations_panel.png)
+<ThemedImage
+    alt="Twilio connection node expanded showing all available operations before selection"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_04_operations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_04_operations_panel.png'),
+    }}
+/>
 
 Select **Create Message** from the **Message** group to open the **twilioClient → createMessage** configuration form. Enter the following values in the **Payload** field:
 
@@ -87,11 +110,23 @@ Select **Create Message** from the **Message** group to open the **twilioClient 
 - **Body** : The SMS message text
 - **Result** : Auto-named result variable (`twilioMessage`) of type `twilio:Message`
 
-![createMessage operation form filled with To, From, and Body payload](/img/connectors/catalog/communication/twilio/twilio_screenshot_05_operation_filled.png)
+<ThemedImage
+    alt="createMessage operation form filled with To, From, and Body payload"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_05_operation_filled.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_05_operation_filled.png'),
+    }}
+/>
 
 Select **Save**. The `twilio : createMessage` node appears in the automation flow.
 
-![Completed automation flow showing createMessage node connected to twilioClient](/img/connectors/catalog/communication/twilio/twilio_screenshot_06_completed_flow.png)
+<ThemedImage
+    alt="Completed automation flow showing createMessage node connected to twilioClient"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_06_completed_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_screenshot_06_completed_flow.png'),
+    }}
+/>
 
 ### Try it yourself
 
@@ -123,7 +158,6 @@ The Twilio connector comes equipped with examples that demonstrate its usage acr
     - [Fetch a message log](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/fetch-message-log): Get details of a message sent via Twilio
     - [Delete a message log](https://github.com/ballerina-platform/module-ballerinax-twilio/tree/master/examples/messages/delete-message-log): Delete a message log via Twilio
 
----
 ## Twilio Trigger Example
 ### What you'll build
 
@@ -154,7 +188,13 @@ flowchart LR
 
 Select **Add Artifact** in the WSO2 Integrator panel to open the Artifacts palette. Scroll to the **Event Integration** category and locate the **Twilio** card.
 
-![Artifacts palette open showing the Twilio card under the Event Integration category, before selecting the card](/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_01_artifact_palette.png)
+<ThemedImage
+    alt="Artifacts palette open showing the Twilio card under the Event Integration category, before selecting the card"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_01_artifact_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_01_artifact_palette.png'),
+    }}
+/>
 
 ### Configuring the Twilio listener
 
@@ -165,7 +205,13 @@ Select the **Twilio** card to open the trigger configuration form, then configur
 - **Service Type**: The service type for this trigger: `SmsStatusService` is pre-selected
 - **Webhook Listener Port**: The port on which the Twilio webhook listener accepts incoming HTTP status callbacks from Twilio: bind this field to a `configurable int` variable named `listenerPort`
 
-![Twilio trigger configuration form fully filled with all listener parameters before clicking Create](/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_02_trigger_config_form.png)
+<ThemedImage
+    alt="Twilio trigger configuration form fully filled with all listener parameters before clicking Create"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_02_trigger_config_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_02_trigger_config_form.png'),
+    }}
+/>
 
 #### Step 3: Set actual values for your configurations
 
@@ -173,7 +219,13 @@ Select **Configurations** in the left panel of WSO2 Integrator. Set a value for 
 
 - **listenerPort** (int) : The port on which the Twilio webhook listener will accept incoming HTTP status callbacks from Twilio
 
-![Configurations panel open showing the configurable variables listed with empty value fields](/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_03_configurations_panel.png)
+<ThemedImage
+    alt="Configurations panel open showing the configurable variables listed with empty value fields"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_03_configurations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_03_configurations_panel.png'),
+    }}
+/>
 
 #### Step 4: Create the trigger
 
@@ -199,7 +251,13 @@ The service view shows the full set of pre-registered handlers bound to the `twi
 - **onReceiving** : Inbound message being received
 - **onReceived** : Inbound message fully received
 
-![Auto-registered SmsStatusService event handlers: no Add Handler side panel for this trigger (Twilio SmsStatusService pre-registers all handlers at creation time)](/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_04_add_handler_panel.png)
+<ThemedImage
+    alt="Auto-registered SmsStatusService event handlers showing all nine callbacks pre-wired at service creation time"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_04_add_handler_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_04_add_handler_panel.png'),
+    }}
+/>
 
 #### Step 6: Open the onReceived handler flow
 
@@ -213,7 +271,13 @@ The initial flow canvas shows a minimal handler skeleton: **Start → + → Erro
 
 Select the **+** icon in the flow chart, and in the side panel that opens, choose **Log Info** from the **Logging** section, then enter `event.toJsonString()` as the message.
 
-![onReceived flow canvas with the log:printInfo node visible after the pro-code edit, showing event.toJsonString() as the argument](/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_06_handler_flow.png)
+<ThemedImage
+    alt="onReceived flow canvas with the log:printInfo node showing event.toJsonString() as the message argument"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_06_handler_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_06_handler_flow.png'),
+    }}
+/>
 
 ### Running the integration
 
