@@ -84,17 +84,17 @@ import ballerina/log;
 
 configurable string brokerUrl = "smf://localhost:55554";
 configurable string msgVpn = "default";
-configurable string username = ?;
-configurable string password = ?;
+configurable string username = "admin";
+configurable string password = "admin";
 
-listener solace:Listener solaceListener = new ({
-    url: brokerUrl,
-    msgVpn: msgVpn,
-    auth: {
+listener solace:Listener solaceListener = check new (
+    url = brokerUrl,
+    messageVpn = msgVpn,
+    auth = {
         username: username,
         password: password
     }
-});
+);
 
 @solace:ServiceConfig {
     queueName: "test-queue",
@@ -103,7 +103,7 @@ listener solace:Listener solaceListener = new ({
 service on solaceListener {
 
     remote function onMessage(solace:Message message) returns error? {
-        log:printInfo("Message received", content = message.content.toString());
+        log:printInfo("Message received", content = message.toString());
     }
 
     remote function onError(solace:Error err) returns error? {
@@ -124,17 +124,17 @@ The **Service Configuration** field accepts a record expression that sets the de
 
 | Field | Description | Default |
 |---|---|---|
-| `queueName` | Name of the queue to consume from. | Required |
-| `sessionAckMode` | Message acknowledgment mode. | `AUTO_ACKNOWLEDGE` |
+| **queueName** | Name of the queue to consume from. | Required |
+| **sessionAckMode** | Message acknowledgment mode. | `AUTO_ACKNOWLEDGE` |
 
 **Topic service configuration fields:**
 
 | Field | Description | Default |
 |---|---|---|
-| `topicName` | Name of the topic to subscribe to. | Required |
-| `subscriberName` | Name to use for the subscription. | `default` |
-| `consumerType` | Consumer type for the subscription (e.g., `DEFAULT`, `DURABLE_EXCLUSIVE`). | `DEFAULT` |
-| `sessionAckMode` | Message acknowledgment mode. | `AUTO_ACKNOWLEDGE` |
+| **topicName** | Name of the topic to subscribe to. | Required |
+| **subscriberName** | Name to use for the subscription. | `default` |
+| **consumerType** | Consumer type for the subscription (`DEFAULT` or `DURABLE`). | `DEFAULT` |
+| **sessionAckMode** | Message acknowledgment mode. | `AUTO_ACKNOWLEDGE` |
 
 ```ballerina
 // Queue subscription
@@ -148,7 +148,7 @@ service on solaceListener { }
 @solace:ServiceConfig {
     topicName: "trades/>",
     subscriberName: "trade-subscriber",
-    consumerType: "DURABLE_EXCLUSIVE",
+    consumerType: "DURABLE",
     sessionAckMode: "AUTO_ACKNOWLEDGE"
 }
 service on solaceListener { }
@@ -184,43 +184,40 @@ Click **+ Attach Listener** to attach an additional listener to the same service
 Click **Save Changes** to apply updates.
 
 ```ballerina
-listener solace:Listener solaceListener = new ({
-    url: "smf://localhost:55554",
-    msgVpn: "default",
-    auth: {
+listener solace:Listener solaceListener = check new (
+    url = "smf://localhost:55554",
+    messageVpn = "default",
+    auth = {
         username: username,
         password: password
     },
-    secureSocket: {},
-    clientId: "my-client",
-    transacted: false,
-    directTransport: false,
-    compressionLevel: 0,
-    retryConfig: {}
-});
+    clientId = "my-client",
+    transacted = false,
+    directTransport = false,
+    compressionLevel = 0
+);
 ```
 
 `solace:ListenerConfiguration` fields:
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `url` | `string` | Required | Solace broker URL |
-| `msgVpn` | `string` | `"default"` | Message VPN name |
-| `auth` | `solace:BasicAuthConfig\|solace:KerberosAuthConfig\|solace:OAuth2Config` | — | Authentication configuration |
-| `secureSocket` | `solace:SecureSocket?` | — | SSL/TLS configuration |
-| `transacted` | `boolean?` | — | Enable transacted messaging |
-| `clientId` | `string?` | — | Client identifier |
-| `clientDescription` | `string?` | — | Client description |
-| `allowDuplicateClientId` | `boolean?` | — | Allow duplicate client IDs |
-| `enableDynamicDurables` | `boolean?` | — | Auto-create durable endpoints |
-| `directTransport` | `boolean?` | — | Use direct (at-most-once) delivery |
-| `directOptimized` | `boolean?` | — | Optimize direct transport delivery |
-| `localhost` | `string?` | — | Local interface IP address |
-| `connectTimeout` | `decimal` | `0.0` | Connection timeout in seconds |
-| `readTimeout` | `decimal` | `0.0` | Read timeout in seconds |
-| `compressionLevel` | `int` | `0` | ZLIB compression level (0–9) |
-| `retryConfig` | `solace:RetryConfig?` | — | Retry configuration |
-| `additionalValues` | `map<anydata>?` | — | Additional connection properties |
+| **url** | `string` | Required | Solace broker URL |
+| **messageVpn** | `string` | `"default"` | Message VPN name |
+| **auth** | `solace:BasicAuthConfig\|solace:KerberosConfig\|solace:OAuth2Config` | — | Authentication configuration |
+| **secureSocket** | `solace:SecureSocket?` | — | SSL/TLS configuration |
+| **transacted** | `boolean?` | — | Enable transacted messaging |
+| **clientId** | `string?` | — | Client identifier |
+| **clientDescription** | `string?` | — | Client description |
+| **allowDuplicateClientId** | `boolean?` | — | Allow duplicate client IDs |
+| **enableDynamicDurables** | `boolean?` | — | Auto-create durable endpoints |
+| **directTransport** | `boolean?` | — | Use direct (at-most-once) delivery |
+| **directOptimized** | `boolean?` | — | Optimize direct transport delivery |
+| **localhost** | `string?` | — | Local interface IP address |
+| **connectTimeout** | `decimal` | `30.0` | Connection timeout in seconds |
+| **readTimeout** | `decimal` | `10.0` | Read timeout in seconds |
+| **compressionLevel** | `int` | `0` | ZLIB compression level (0–9) |
+| **retryConfig** | `solace:RetryConfig?` | — | Retry configuration |
 
 ## Event handlers
 
@@ -257,7 +254,7 @@ type TradeEvent record {|
 service on solaceListener {
 
     remote function onMessage(solace:Message message) returns error? {
-        TradeEvent trade = check message.content.ensureType();
+        TradeEvent trade = check message.payload.ensureType();
         log:printInfo("Trade received",
                       tradeId = trade.tradeId,
                       symbol = trade.symbol);

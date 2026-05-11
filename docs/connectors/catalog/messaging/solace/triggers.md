@@ -36,13 +36,19 @@ The listener supports the following connection strategies:
 |-------|------|---------|-------------|
 | `messageVpn` | `string` | `"default"` | Solace Message VPN name. |
 | `auth` | `BasicAuthConfig\|KerberosConfig\|OAuth2Config` | `()` | Authentication configuration. |
-| `transacted` | `boolean` | `false` | Enable transacted session for commit/rollback in service callbacks. |
+| `transacted` | `boolean` | `false` | Enable transacted session for commit/rollback in service callbacks. When `true`, `directTransport` must also be set to `false`. |
 | `secureSocket` | `SecureSocket` | `()` | TLS/SSL configuration. |
 | `clientId` | `string` | `()` | Optional client identifier. |
 | `enableDynamicDurables` | `boolean` | `false` | Allow dynamic creation of durable endpoints. |
 | `connectTimeout` | `decimal` | `30.0` | Connection timeout in seconds. |
 | `readTimeout` | `decimal` | `10.0` | Read timeout in seconds. |
 | `retryConfig` | `RetryConfig` | `()` | Reconnection retry configuration. |
+| `compressionLevel` | `int` | `0` | ZLIB compression level (0–9, where 0 is no compression). |
+| `directTransport` | `boolean` | `true` | Use direct (at-most-once) delivery when `true`. Set to `false` for guaranteed (persistent) delivery and when using transacted sessions. |
+| `directOptimized` | `boolean` | `true` | Optimize message delivery in direct transport mode. Only effective when `directTransport` is `true`. |
+| `clientDescription` | `string` | `"JNDI"` | A description for the application client. |
+| `allowDuplicateClientId` | `boolean` | `false` | Allow the same client ID to be used across multiple connections simultaneously. |
+| `localhost` | `string` | `()` | Local interface IP address to bind for outbound connections. |
 
 ### Initializing the listener
 
@@ -55,7 +61,7 @@ configurable string solaceUrl = ?;
 configurable string username = ?;
 configurable string password = ?;
 
-listener solace:Listener solaceListener = new (
+listener solace:Listener solaceListener = check new (
     url = solaceUrl,
     messageVpn = "default",
     auth = {username: username, password: password}
@@ -71,7 +77,7 @@ configurable string solaceUrl = ?;
 configurable string issuer = ?;
 configurable string accessToken = ?;
 
-listener solace:Listener solaceListener = new (
+listener solace:Listener solaceListener = check new (
     url = solaceUrl,
     messageVpn = "default",
     auth = {issuer: issuer, accessToken: accessToken}
@@ -119,13 +125,13 @@ service on solaceListener {
         log:printInfo("Received message", payload = message.payload.toString());
     }
 
-    remote function onError(solace:Error err) {
+    remote function onError(solace:Error err) returns error? {
         log:printError("Error receiving message", 'error = err);
     }
 }
 ```
 
-The `@solace:ServiceConfig` annotation accepts either queue-based (`queueName`) or topic-based (`topicName`, `consumerType`, `subscriberName`, `noLocal`) subscription configurations, along with `pollingInterval`, `receiveTimeout`, `sessionAckMode`, and `messageSelector` fields.
+The `@solace:ServiceConfig` annotation accepts either queue-based (`queueName`) or topic-based (`topicName`, `consumerType`, `subscriberName`) subscription configurations, along with `pollingInterval`, `receiveTimeout`, `sessionAckMode`, `messageSelector`, and `noLocal` fields.
 
 ---
 
