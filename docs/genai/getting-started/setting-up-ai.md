@@ -36,4 +36,3 @@ By signing in, you agree to the WSO2 Integrator Copilot Terms of Use shown on th
 
 - [Build a Smart Calculator Assistant](smart-calculator.md) — Your first AI integration using tool calling.
 - [Build a Sample Hotel Booking Agent](hotel-booking-agent.md) — An agent with memory and multiple tools.
-- [Key Concepts: What is an LLM?](/docs/genai/key-concepts/what-is-llm) — Understand the foundational technology.

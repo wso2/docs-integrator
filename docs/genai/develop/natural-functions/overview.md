@@ -198,4 +198,3 @@ A natural function can also be wired up as an [agent tool](/docs/genai/develop/a
 - **[AI Connections and Stores: Model Providers](/docs/genai/develop/components/model-providers)** — switch providers, tune temperature, max tokens, and retries for the Prompt node's connection.
 - **[Direct LLM Calls](/docs/genai/develop/direct-llm/overview)** — when you only need a single in-flow call without packaging it as a function.
 - **[AI Agents](/docs/genai/develop/agents/overview)** — when natural functions become tools an agent can choose to call.
-- **[What is a Natural Function?](/docs/genai/key-concepts/what-is-natural-function)** — conceptual background.

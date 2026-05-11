@@ -91,10 +91,7 @@ The **Insert** menu is the bridge between the prompt and the rest of your projec
 ## What's next
 
 - **[Email Generator with Direct LLM (Tutorial)](/docs/genai/tutorials/email-generator-direct-llm)** — build a complete `POST /emails/generate` service from scratch using everything on this page.
-- **[Writing Effective Prompts](/docs/genai/key-concepts/writing-effective-prompts)** — interpolation, structuring long prompts, and what to leave out.
-- **[Typed Responses](/docs/genai/key-concepts/typed-responses)** — the full reference for the Expected Type field.
 - **[Model Providers](/docs/genai/develop/components/model-providers)** — switch the LLM provider for production; tune temperature, max tokens, retries.
 - **[Natural Functions](/docs/genai/develop/natural-functions/overview)** — when the same prompt is used in many places, package it as a typed function.
 - **[RAG](/docs/genai/develop/rag/overview)** — ground the model's answers in your own documents.
 - **[AI Agents](/docs/genai/develop/agents/overview)** — if the task needs tools or multi-turn reasoning.
-- **[What is an LLM?](/docs/genai/key-concepts/what-is-llm)** — conceptual background.

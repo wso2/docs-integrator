@@ -203,4 +203,3 @@ This example demonstrates three patterns you will reuse in every production agen
 - [Creating an AI Agent](/docs/genai/develop/agents/creating-an-agent) — Full reference for agent configuration
 - [Tools](/docs/genai/develop/agents/tools) — Advanced tool patterns
 - [Memory](/docs/genai/develop/agents/memory) — Custom memory strategies
-- [What is AI Agent Memory?](/docs/genai/key-concepts/what-is-agent-memory) — Understand memory concepts

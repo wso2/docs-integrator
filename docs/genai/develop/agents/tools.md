@@ -152,4 +152,3 @@ Run through this before shipping an agent:
 
 - **[Memory](memory.md)** — make the agent's tool calls remember earlier turns.
 - **[Observability](observability.md)** — see which tools the agent actually picks.
-- **[What are Tools?](/docs/genai/key-concepts/what-are-tools)** — conceptual background.
