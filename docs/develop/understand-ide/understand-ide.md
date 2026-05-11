@@ -22,7 +22,7 @@ Views are the top-level shells that frame your work in the IDE. Switch between t
 
 Editors are the focused surfaces inside a view where you design and edit specific artifact types.
 
-- [Flow Diagram Editor](editors/flow-diagram-editor.md)
+- [Flow Diagram Editor](editors/flow-diagram-editor/flow-diagram-editor.md)
 - [Service Design Editor](editors/service-design-editor.md)
 - [Expression Editor](editors/expression-editor.md)
 - [Type Editor](editors/type-editor.md)
