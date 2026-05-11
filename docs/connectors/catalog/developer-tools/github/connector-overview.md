@@ -11,6 +11,7 @@ GitHub is a widely used platform for version control and collaboration, allowing
 - Organization and team management — list orgs, teams, and members
 - Gist management — create, update, list, star, fork, and comment on gists
 - Security advisory access — query global and repository-specific security advisories
+- Event-driven webhook handling for GitHub issues, pull requests, releases, pushes, and repository activity
 - Resource-based API design using Ballerina resource functions for intuitive path-based access to GitHub REST endpoints
 
 ## Actions
@@ -23,11 +24,31 @@ Actions are operations you invoke on GitHub from your integration — managing r
 
 See the **[Action Reference](actions.md)** for the full list of operations, parameters, and sample code for each client.
 
+## Triggers
+
+Triggers allow your integration to react to GitHub repository activity in real time. The connector provides a webhook listener that receives GitHub events and invokes your service callbacks automatically when issues, pull requests, releases, pushes, and other repository events occur.
+
+Supported trigger events:
+
+| Event | Callback | Description |
+|-------|----------|-------------|
+| Issue opened | `onOpened` | Fired when a GitHub issue is opened. |
+| Issue closed | `onClosed` | Fired when a GitHub issue is closed. |
+| Issue comment created | `onCreated` | Fired when a comment is added to an issue or pull request. |
+| Pull request opened | `onOpened` | Fired when a pull request is opened. |
+| Pull request review submitted | `onSubmitted` | Fired when a pull request review is submitted. |
+| Release published | `onPublished` | Fired when a repository release is published. |
+| Push received | `onPush` | Fired when commits are pushed to a repository. |
+
+See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the event payload structure.
+
 ## Documentation
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a GitHub Personal Access Token (PAT) required to authenticate with the GitHub connector.
 
 * **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+
+* **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the GitHub webhook listener and service model.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **GitHub** connector, including connection setup, operation configuration, execution flow, and event-driven trigger setup.
 
