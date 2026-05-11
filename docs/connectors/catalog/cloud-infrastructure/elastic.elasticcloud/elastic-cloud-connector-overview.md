@@ -1,4 +1,8 @@
-# Elastic Cloud Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Elastic Cloud is a cloud-hosted Elasticsearch service provided by Elastic, offering scalable search and analytics capabilities with enterprise-grade security and management features. The Ballerina `ballerinax/elastic.elasticcloud` connector (v1.0.0) provides programmatic access to the Elastic Cloud REST API, enabling you to manage deployments, extensions, traffic filters, organizations, API keys, and stack versions from your Ballerina integration flows.
 

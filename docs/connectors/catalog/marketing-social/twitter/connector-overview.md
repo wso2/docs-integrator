@@ -1,4 +1,8 @@
-# Twitter Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Twitter (X) is a widely-used social networking service provided by X Corp., enabling users to post and interact with messages known as "tweets." The Ballerina `ballerinax/twitter` connector (v5.0.0) provides programmatic access to the Twitter (X) API v2 endpoints, allowing you to manage tweets, users, direct messages, bookmarks, likes, and more from your Ballerina integration flows.
 

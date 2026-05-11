@@ -1,4 +1,8 @@
-# SAP Sales Organization Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 SAP Sales Organization is an SAP S/4HANA OData v2 service that provides read access to sales organization master data, including organizational units, company code assignments, intercompany billing settings, and multilingual name texts. The Ballerina `ballerinax/sap.s4hana.api_salesorganization_srv` connector (v1.0.0) enables Ballerina integration flows to query and retrieve this reference data from SAP S/4HANA systems using Basic authentication over HTTPS.
 

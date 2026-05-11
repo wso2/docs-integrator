@@ -1,4 +1,8 @@
-# HubSpot CRM Companies Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 HubSpot CRM Companies is a cloud-based CRM platform that enables you to manage company records, properties, and associations at scale. The Ballerina `ballerinax/hubspot.crm.obj.companies` connector (v2.0.0) provides programmatic access to the HubSpot CRM Companies API, letting you create, read, update, archive, merge, batch-process, and search company records directly from your Ballerina integration flows.
 

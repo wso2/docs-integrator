@@ -1,4 +1,8 @@
-# Solace Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Solace PubSub+ is an advanced event broker that supports publish/subscribe, queueing, request/reply, and streaming patterns. The Ballerina `ballerinax/solace` connector (v0.3.1) provides programmatic access to Solace PubSub+ through its JMS-based API, enabling you to produce and consume messages on queues and topics, with support for durable subscriptions, transacted sessions, and event-driven listener services.
 

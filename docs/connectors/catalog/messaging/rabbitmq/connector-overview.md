@@ -1,4 +1,8 @@
-# RabbitMQ Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 RabbitMQ is an open-source message broker that supports multiple messaging protocols including AMQP 0-9-1. The Ballerina `ballerinax/rabbitmq` connector (v3.3.2) provides programmatic access to RabbitMQ, enabling you to publish messages, consume messages synchronously or asynchronously via listener services, declare and manage queues and exchanges, and build event-driven integration flows.
 

@@ -1,4 +1,8 @@
-# CDC Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 The Ballerina `ballerinax/cdc` connector provides a spec-compliant, production-grade Change Data Capture (CDC) framework built on top of Debezium, enabling real-time streaming of database row changes (inserts, updates, deletes, and snapshot reads) into your Ballerina integration flows. It supports MySQL, Microsoft SQL Server, PostgreSQL, and Oracle databases through dedicated database-specific listener implementations.
 

@@ -1,4 +1,8 @@
-# JMS Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 JMS (Java Message Service) is a Java API standard for message-oriented middleware. The Ballerina `ballerinax/java.jms` connector (v1.2.0) provides programmatic access to JMS 2.0 and 1.0 compliant brokers such as ActiveMQ, allowing you to send and receive messages through queues and topics in your Ballerina integration flows.
 

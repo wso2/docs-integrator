@@ -1,4 +1,8 @@
-# Mailchimp Marketing Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Mailchimp is a leading email marketing and automation platform that helps businesses manage audiences, create campaigns, and track engagement. The Ballerina `ballerinax/mailchimp.marketing` connector (v1.0.1) provides programmatic access to the Mailchimp Marketing API v3.0, enabling you to manage audiences, subscribers, campaigns, automations, templates, and more from your Ballerina integration flows.
 

@@ -1,4 +1,8 @@
-# SAP SD Incoterms Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 SAP SD Incoterms is part of the SAP S/4HANA Sales and Distribution module and manages master data for Incoterms classifications and versions used in trade, logistics, and procurement documents. The Ballerina `ballerinax/sap.s4hana.api_sd_incoterms_srv` connector (v1.0.0) provides read access to Incoterms data via the SAP OData API `API_SD_INCOTERMS_SRV`, enabling integration workflows to look up standardized trade terms and retrieve their multilingual descriptions from an SAP S/4HANA Cloud system.
 

@@ -1,4 +1,8 @@
-# SAP Sales Area Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 SAP Sales Area is a core organizational unit in SAP S/4HANA Sales and Distribution that defines the combination of Sales Organization, Distribution Channel, and Division used for sales transactions. The Ballerina `ballerinax/sap.s4hana.salesarea_0001` connector provides programmatic access to the SAP S/4HANA Sales Area OData API (srvd_a2x/sap/salesarea/0001), enabling you to retrieve and query sales area master data within your integration flows.
 

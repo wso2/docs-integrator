@@ -1,4 +1,8 @@
-# SAP Sales District Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 The SAP S/4HANA Sales District connector provides programmatic access to the SAP Sales District Read API (OData v2), enabling Ballerina applications to query and retrieve sales district master data and their multilingual text descriptions from an SAP S/4HANA system. This connector supports listing, filtering, and navigating between sales district entities and their associated text translations, facilitating seamless integration with SAP sales organization structures.
 

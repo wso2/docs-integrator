@@ -1,4 +1,8 @@
-# MySQL Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 MySQL is one of the world's most popular open-source relational database management systems. The Ballerina `ballerinax/mysql` connector (v1.18.0) provides programmatic access to MySQL databases through the standard SQL interface, supporting queries, inserts, updates, deletes, batch operations, stored procedure calls, and real-time Change Data Capture (CDC) via a Debezium-based listener.
 

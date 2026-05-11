@@ -1,4 +1,8 @@
-# Salesforce Marketing Cloud Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Salesforce Marketing Cloud is a digital marketing platform that enables businesses to manage customer journeys, campaigns, email messaging, content assets, contacts, and data extensions. The Ballerina `ballerinax/salesforce.marketingcloud` connector (v1.0.1) provides programmatic access to the Marketing Cloud REST APIs, enabling you to automate journey orchestration, contact management, campaign operations, and transactional messaging within your Ballerina integration flows.
 

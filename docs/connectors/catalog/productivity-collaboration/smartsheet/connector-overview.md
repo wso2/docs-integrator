@@ -1,4 +1,8 @@
-# Smartsheet Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Smartsheet is a cloud-based work management platform for project tracking, task automation, and collaborative spreadsheets. The Ballerina `ballerinax/smartsheet` connector (v1.0.1) provides programmatic access to the Smartsheet API v2.0, enabling you to manage sheets, rows, columns, folders, workspaces, users, reports, and more from your Ballerina integration flows.
 

@@ -1,4 +1,8 @@
-# AWS Secrets Manager Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 AWS Secrets Manager is a managed service that helps you protect access to your applications, services, and IT resources by enabling you to easily rotate, manage, and retrieve database credentials, API keys, and other secrets. The Ballerina `ballerinax/aws.secretmanager` connector (v0.4.0) provides programmatic access to the AWS Secrets Manager API, allowing you to describe, retrieve, and batch-retrieve secrets from your Ballerina integration flows.
 

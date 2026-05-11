@@ -1,4 +1,8 @@
-# OpenAI Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 OpenAI is an AI research and deployment company providing powerful language models, image generation, audio processing, and more through its REST API. The Ballerina `ballerinax/openai` connector (v1.0.1) provides comprehensive programmatic access to the OpenAI API, covering chat completions, image generation, audio, embeddings, assistants, fine-tuning, vector stores, file management, and more — enabling you to integrate AI capabilities into your Ballerina integration flows.
 

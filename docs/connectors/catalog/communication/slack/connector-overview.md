@@ -1,4 +1,8 @@
-# Slack Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Slack is a cloud-based team communication platform that enables real-time messaging, file sharing, and collaboration across channels and workspaces. The Ballerina `ballerinax/slack` connector (v5.0.0) provides programmatic access to the Slack Web API, allowing you to send messages, manage conversations, upload files, search content, and administer workspaces from your Ballerina integration flows.
 

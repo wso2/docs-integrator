@@ -1,4 +1,8 @@
-# HubSpot CRM Leads Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 HubSpot CRM is a cloud-based customer relationship management platform that helps businesses capture, track, and manage sales leads through structured pipelines. The Ballerina `ballerinax/hubspot.crm.obj.leads` connector (v2.0.0) provides programmatic access to the HubSpot CRM Leads API, enabling full CRUD operations, batch processing, upserts, and search capabilities for lead records within your Ballerina integration flows.
 

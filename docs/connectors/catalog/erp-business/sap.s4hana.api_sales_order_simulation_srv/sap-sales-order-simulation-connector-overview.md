@@ -1,4 +1,8 @@
-# SAP Sales Order Simulation Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 SAP S/4HANA is an enterprise resource planning suite covering sales, finance, procurement, and logistics. The Ballerina `ballerinax/sap.s4hana.api_sales_order_simulation_srv` connector provides programmatic access to the SAP S/4HANA Sales Order Simulation API, enabling you to retrieve pricing details, material availability, and customer credit limit information for a proposed sales order synchronously — without persisting the order to the SAP system.
 

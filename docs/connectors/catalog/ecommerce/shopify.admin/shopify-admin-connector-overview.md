@@ -1,4 +1,8 @@
-# Shopify Admin Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Shopify is a leading e-commerce platform that enables users to create, manage, and grow their online stores. The Ballerina `ballerinax/shopify.admin` connector (v2.5.0) provides programmatic access to the Shopify Admin REST API (v2021-10), enabling you to manage products, orders, customers, fulfillments, webhooks, and other essential e-commerce resources from your Ballerina integration flows.
 

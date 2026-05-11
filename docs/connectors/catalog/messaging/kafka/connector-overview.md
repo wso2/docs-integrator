@@ -1,8 +1,8 @@
 ---
-title: Kafka Connector Overview
+title: Overview
 ---
 
-# Kafka Connector Overview
+# Overview
 
 Apache Kafka is a distributed event streaming platform used for building real-time data pipelines and streaming applications. The Ballerina `ballerinax/kafka` connector (v4.6.5) provides a Producer client for publishing messages, a Consumer client for polling messages, and a Listener for event-driven consumption — enabling seamless Kafka integration in Ballerina workflows.
 

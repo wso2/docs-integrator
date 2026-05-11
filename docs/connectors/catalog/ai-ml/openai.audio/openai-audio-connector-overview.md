@@ -1,4 +1,8 @@
-# OpenAI Audio Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 OpenAI Audio provides text-to-speech, speech-to-text transcription, and audio translation capabilities powered by OpenAI's TTS and Whisper models. The Ballerina `ballerinax/openai.audio` connector (v2.0.0) lets you generate spoken audio from text, transcribe audio files into text, and translate audio from any supported language into English, all through the OpenAI REST API.
 

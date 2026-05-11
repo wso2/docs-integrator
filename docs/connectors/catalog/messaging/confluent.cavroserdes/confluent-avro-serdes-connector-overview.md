@@ -1,4 +1,8 @@
-# Confluent Avro SerDes Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 The Confluent Avro SerDes connector for Ballerina provides Avro serialization and deserialization using the Confluent Schema Registry wire format. It integrates with the `ballerinax/confluent.cregistry` client to automatically register schemas during serialization and retrieve them by ID during deserialization, enabling seamless Avro-encoded data exchange over Apache Kafka and other messaging systems.
 

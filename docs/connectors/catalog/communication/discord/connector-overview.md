@@ -1,4 +1,8 @@
-# Discord Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Discord is a communication platform for communities, teams, and gamers, offering text channels, voice chat, and rich integrations. The Ballerina `ballerinax/discord` connector (v2.0.0) provides programmatic access to the Discord REST API v10, enabling you to manage guilds, channels, messages, members, roles, webhooks, application commands, and more from your Ballerina integration flows.
 

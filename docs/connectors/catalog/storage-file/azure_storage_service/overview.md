@@ -1,6 +1,8 @@
 ---
-title: Azure Storage Service Overview
+title: Overview
 ---
+
+# Overview
 
 Azure Storage Service provides scalable cloud storage for blobs (binary large objects) and file shares on Microsoft Azure. The Ballerina `ballerinax/azure_storage_service` connector (v4.3.3) exposes two sub-modules — `blobs` for working with Azure Blob Storage containers and blob objects, and `files` for managing Azure File Shares — enabling seamless integration of Azure storage into Ballerina-based applications.
 

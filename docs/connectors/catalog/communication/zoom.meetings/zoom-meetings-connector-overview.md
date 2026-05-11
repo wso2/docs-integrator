@@ -1,4 +1,8 @@
-# Zoom Meetings Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Zoom Meetings is a widely used cloud-based video conferencing platform for virtual meetings, webinars, and online collaboration. The Ballerina `ballerinax/zoom.meetings` connector (v1.0.1) provides programmatic access to the Zoom Meetings REST API v2, enabling you to automate meeting lifecycle management, handle registrations, manage cloud recordings, and access reporting data directly from your Ballerina integration flows.
 

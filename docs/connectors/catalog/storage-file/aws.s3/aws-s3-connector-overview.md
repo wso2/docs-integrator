@@ -1,4 +1,8 @@
-# AWS S3 Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Amazon Simple Storage Service (Amazon S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance. The Ballerina `ballerinax/aws.s3` connector (v4.0.0) provides programmatic access to the Amazon S3 REST API (2006-03-01), enabling you to manage buckets and objects directly from your Ballerina integration flows.
 

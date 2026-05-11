@@ -1,4 +1,8 @@
-# Stripe Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Stripe is a leading online payment processing platform that simplifies the handling of financial transactions over the Internet. The Ballerina `ballerinax/stripe` connector (v2.0.1) provides programmatic access to the Stripe REST API V1, enabling seamless integration of Stripe's extensive payment processing capabilities — including customer management, payment intents, invoicing, subscriptions, products, and payouts — into your Ballerina integration flows.
 

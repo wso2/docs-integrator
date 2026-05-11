@@ -1,4 +1,8 @@
-# Jira Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Jira is Atlassian's project tracking and issue management platform used by software teams worldwide. The Ballerina `ballerinax/jira` connector (v2.0.1) provides programmatic access to the Jira Cloud REST API v3, enabling you to manage projects, issues, comments, workflows, and more from your Ballerina integration flows.
 

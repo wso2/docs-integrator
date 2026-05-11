@@ -1,4 +1,8 @@
-# NATS Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 NATS is a high-performance, cloud-native messaging system that supports publish/subscribe, request/reply, and queue group patterns, as well as persistent messaging through JetStream. The Ballerina `ballerinax/nats` connector (v3.3.0) provides programmatic access to a NATS server for publishing messages, subscribing to subjects, performing request-reply exchanges, and managing JetStream streams and consumers within your Ballerina integration flows.
 

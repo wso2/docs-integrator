@@ -1,4 +1,8 @@
-# People HR Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 People HR is a cloud-based human resource management system that provides tools for managing employee records, holidays, salaries, vacancies, applicants, appraisals, and custom screens. The Ballerina `ballerinax/peoplehr` connector (v2.2.1) provides programmatic access to the People HR REST API (v3.1), enabling you to integrate People HR data into your Ballerina integration flows.
 

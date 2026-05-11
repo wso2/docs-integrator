@@ -1,4 +1,8 @@
-# Zoom Scheduler Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Zoom Scheduler is a scheduling service that lets users create availability windows, publish booking pages, and manage scheduled meetings across teams. The Ballerina `ballerinax/zoom.scheduler` connector (v1.0.1) provides programmatic access to the Zoom Scheduler REST API, enabling you to manage schedules, availability, events, and analytics directly from your Ballerina integration flows.
 

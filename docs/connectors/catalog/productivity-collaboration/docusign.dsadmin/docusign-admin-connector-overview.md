@@ -1,4 +1,8 @@
-# DocuSign Admin Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 DocuSign is a digital transaction management platform that enables users to securely sign, send, and manage documents electronically. The Ballerina `ballerinax/docusign.dsadmin` connector (v2.0.0) integrates with the DocuSign Admin API, providing programmatic access to manage organizations, users, permissions, groups, identity providers, bulk imports/exports, and account settings across your DocuSign environment.
 

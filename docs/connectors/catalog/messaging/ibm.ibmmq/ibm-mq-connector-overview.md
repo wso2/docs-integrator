@@ -1,4 +1,8 @@
-# IBM MQ Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 IBM MQ is an enterprise messaging middleware that enables applications to communicate reliably across distributed systems using message queues and publish/subscribe topics. The Ballerina `ballerinax/ibm.ibmmq` connector (v1.4.2) provides programmatic access to IBM MQ queue managers, queues, and topics, enabling you to produce and consume messages within your Ballerina integration flows.
 

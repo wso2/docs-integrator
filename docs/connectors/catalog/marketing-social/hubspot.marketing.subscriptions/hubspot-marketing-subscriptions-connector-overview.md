@@ -1,4 +1,8 @@
-# HubSpot Marketing Subscriptions Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 HubSpot Communication Preferences is a subscription management service that lets you control how contacts receive communications across email, SMS, and WhatsApp channels. The Ballerina `ballerinax/hubspot.marketing.subscriptions` connector (v2.0.0) provides programmatic access to the HubSpot Communication Preferences Subscriptions API (v4), enabling you to read and update subscription statuses, manage opt-outs, and retrieve subscription definitions from your Ballerina integration flows.
 

@@ -1,4 +1,8 @@
-# Google Calendar Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Google Calendar is a time-management and scheduling service developed by Google that lets users organize their schedule and share events with others. The Ballerina `ballerinax/googleapis.calendar` connector (v3.2.1) provides programmatic access to Google Calendar API V3, enabling you to manage calendars, create and update events, query event lists, and perform quick event additions from your Ballerina integration flows. It also supports service account authorization for delegated domain-wide access in Google Workspace environments.
 

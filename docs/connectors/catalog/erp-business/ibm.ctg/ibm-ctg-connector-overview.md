@@ -1,4 +1,8 @@
-# IBM CTG Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 IBM CICS Transaction Gateway (CTG) is enterprise middleware that connects distributed applications to IBM CICS Transaction Servers running on mainframe systems. The Ballerina `ballerinax/ibm.ctg` connector (v0.1.1) enables integration with IBM CICS programs using the External Call Interface (ECI) protocol, allowing you to invoke CICS programs and exchange COMMAREA data directly from Ballerina integration flows. The connector wraps the IBM CTG Java client libraries (v9.3) via Ballerina-Java interop and is GraalVM native image compatible.
 

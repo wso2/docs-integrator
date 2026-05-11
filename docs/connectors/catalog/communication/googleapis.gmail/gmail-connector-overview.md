@@ -1,4 +1,8 @@
-# Gmail Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Gmail is Google's email service, offering sending, receiving, and organizing email at scale. The Ballerina `ballerinax/googleapis.gmail` connector (v4.2.0) provides programmatic access to the Gmail REST API, enabling you to manage messages, drafts, threads, labels, and mailbox history within your Ballerina integration flows.
 

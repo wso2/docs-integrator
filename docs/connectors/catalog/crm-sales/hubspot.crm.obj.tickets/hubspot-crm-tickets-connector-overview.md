@@ -1,4 +1,8 @@
-# HubSpot CRM Tickets Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 HubSpot is an AI-powered CRM platform that centralizes customer interactions, sales pipelines, and support workflows. The Ballerina `ballerinax/hubspot.crm.obj.tickets` connector (v2.0.0) provides programmatic access to HubSpot's Tickets API, enabling you to create, read, update, delete, search, merge, and batch-manage support ticket records from your Ballerina integration flows.
 

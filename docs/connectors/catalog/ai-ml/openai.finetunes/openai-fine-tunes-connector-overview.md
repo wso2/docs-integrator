@@ -1,4 +1,8 @@
-# OpenAI Fine-Tunes Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 OpenAI Fine-Tunes provides APIs for customizing OpenAI models with your own training data. The Ballerina `ballerinax/openai.finetunes` connector (v2.0.0) offers programmatic access to OpenAI's fine-tuning, files, and models endpoints, enabling you to upload training datasets, create and manage fine-tuning jobs, and work with models from your Ballerina integration flows.
 

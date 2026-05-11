@@ -1,4 +1,8 @@
-# Snowflake Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Snowflake is a cloud-based data warehousing platform that enables scalable storage, processing, and analytics of structured and semi-structured data. The Ballerina `ballerinax/snowflake` connector (v2.2.1) provides programmatic access to Snowflake through JDBC, enabling you to execute SQL queries, perform DML/DDL operations, call stored procedures, and run batch operations from your Ballerina integration flows.
 

@@ -1,4 +1,8 @@
-# HubSpot CRM Line Items Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 HubSpot CRM Line Items represent individual products or services attached to deals in HubSpot, enabling detailed tracking of what is being sold and at what price. The Ballerina `ballerinax/hubspot.crm.obj.lineitems` connector (v2.0.0) provides programmatic access to the HubSpot CRM Line Items API v3, supporting full CRUD operations, batch processing, and advanced search capabilities for line item records within your HubSpot CRM.
 

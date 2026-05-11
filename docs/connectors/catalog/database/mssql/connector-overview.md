@@ -1,4 +1,8 @@
-# MSSQL Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Microsoft SQL Server is a relational database management system used for enterprise data storage and processing. The Ballerina `ballerinax/mssql` connector (v1.16.4) provides programmatic access to MSSQL databases through SQL queries, parameterized statements, stored procedures, batch operations, and Change Data Capture (CDC) event streaming, enabling you to integrate MSSQL data into your Ballerina integration flows.
 

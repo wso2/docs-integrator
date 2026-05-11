@@ -1,4 +1,8 @@
-# PayPal Subscriptions Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 PayPal Subscriptions is a recurring billing platform that enables merchants to create billing plans, enroll customers into subscriptions, and manage the full subscription lifecycle including suspension, revision, and cancellation. The Ballerina `ballerinax/paypal.subscriptions` connector (v1.0.1) provides programmatic access to the PayPal Subscriptions API, allowing you to automate subscription management, capture outstanding payments, and retrieve transaction history within your Ballerina integration flows.
 

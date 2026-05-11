@@ -1,4 +1,8 @@
-# Candid Connector Overview
+---
+title: Overview
+---
+
+# Overview
 
 Candid (formerly GuideStar) is a nonprofit data platform that provides comprehensive information on U.S. nonprofits, including financials, people, DEI data, and IRS compliance validation. The Ballerina `ballerinax/candid` connector (v0.2.0) provides programmatic access to Candid's Essentials search API, Premier profile API, and Charity Check PDF API, enabling you to integrate nonprofit data into your Ballerina integration flows.
 
