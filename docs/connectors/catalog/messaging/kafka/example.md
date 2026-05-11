@@ -1,3 +1,7 @@
+---
+title: Example
+---
+
 # Example
 
 ## Table of contents

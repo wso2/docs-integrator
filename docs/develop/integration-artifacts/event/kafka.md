@@ -11,11 +11,23 @@ Consume messages from Apache Kafka topics with consumer group management, offset
 1. Click the **+** **Add Artifacts** button in the canvas or click **+** next to **Entry Points** in the sidebar.
 2. In the **Artifacts** panel, select **Kafka** under **Event Integration**.
 
-   ![Artifacts panel showing Kafka under Event Integration](/img/develop/integration-artifacts/event/kafka/step-2.png)
+   <ThemedImage
+       alt="Artifacts panel showing Kafka under Event Integration"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/kafka/step-2.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/kafka/step-2.png'),
+       }}
+   />
 
 3. In the creation form, fill in the following fields:
 
-   ![Kafka consumer creation form](/img/develop/integration-artifacts/event/kafka/step-creation-form.png)
+   <ThemedImage
+       alt="Kafka consumer creation form"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/kafka/step-creation-form.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/kafka/step-creation-form.png'),
+       }}
+   />
 
    | Field | Description |
    |---|---|
@@ -28,48 +40,64 @@ Consume messages from Apache Kafka topics with consumer group management, offset
 
 5. WSO2 Integrator opens the **Kafka Consumer Designer**. The header shows the listener configuration pill and the list of event handlers.
 
-   ![Kafka Consumer Designer showing the listener configuration](/img/develop/integration-artifacts/event/kafka/step-3.png)
+   <ThemedImage
+       alt="Kafka Consumer Designer showing the listener configuration"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/kafka/step-3.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/kafka/step-3.png'),
+       }}
+   />
 
 6. Click the `onConsumerRecord` handler row to open it in the **flow designer**.
 
-   ![Flow designer showing the onConsumerRecord handler canvas](/img/develop/integration-artifacts/event/kafka/step-4.png)
+   <ThemedImage
+       alt="Flow designer showing the onConsumerRecord handler canvas"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/kafka/step-4.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/kafka/step-4.png'),
+       }}
+   />
 
 7. Use the flow canvas to add integration steps — database writes, HTTP calls, and transformations.
 
 ```ballerina
+import ballerina/log;
 import ballerinax/kafka;
 
-configurable string bootstrapServers = "localhost:9092";
-configurable string groupId = "order-processor";
-
+// should add under types.bal file
 type OrderEvent record {|
     string orderId;
     string customerId;
     decimal amount;
-    string timestamp;
 |};
 
-listener kafka:Listener orderListener = new ({
-    bootstrapServers: bootstrapServers,
+configurable string bootstrapServers = "localhost:9092";
+configurable string groupId = "order-processor";
+configurable string kafkaTopic = "orders";
+
+listener kafka:Listener kafkaListener = new (bootstrapServers, {
     groupId: groupId,
-    topics: ["orders"],
+    topics: [kafkaTopic],
+    offsetReset: kafka:OFFSET_RESET_LATEST, // skip old messages, only consume new ones
     pollingInterval: 1,
-    autoCommit: false
+    autoCommit: false // required when using caller->commit()
 });
 
-service on orderListener {
+service kafka:Service on kafkaListener {
 
-    remote function onConsumerRecord(kafka:Caller caller, OrderEvent[] orders) returns error? {
-        foreach OrderEvent order in orders {
-            log:printInfo("Processing order", orderId = order.orderId, amount = order.amount);
-            check processOrder(order);
+    remote function onConsumerRecord(kafka:AnydataConsumerRecord[] messages, kafka:Caller caller) returns error? {
+        foreach kafka:AnydataConsumerRecord msg in messages {
+            do {
+                byte[] msgBytes = check msg.value.ensureType();
+                string jsonStr = check string:fromBytes(msgBytes);
+                OrderEvent orderEvent = check jsonStr.fromJsonStringWithType();
+                processOrder(orderEvent); // Implement a processing logic under processOrder() method in functions.bal file
+                log:printInfo("onConsumerRecord triggered", orderId = orderEvent.orderId);
+            } on fail error e {
+                log:printError("Failed to process message, skipping", 'error = e, offset = msg.offset.offset, partition = msg.offset.partition.partition);
+            }
         }
-        // Manual commit after successful processing
         check caller->commit();
-    }
-
-    remote function onError(kafka:Error err) {
-        log:printError("Kafka consumer error", 'error = err);
     }
 }
 ```
@@ -91,14 +119,13 @@ The left panel shows the service name and its **Attached Listeners**. Click **Ka
 
 Click **+ Attach Listener** at the bottom of the panel to attach a different or existing named listener.
 
-Service configuration maps to the `kafka:ListenerConfiguration` record passed when constructing the listener:
+Service configuration maps to the `ConsumerConfiguration` record passed when constructing the listener:
 
 ```ballerina
-listener kafka:Listener orderListener = new ({
-    bootstrapServers: "localhost:9092",
+listener kafka:Listener orderListener = new ("localhost:9092", {
     groupId: "order-processor",
     topics: ["orders"],
-    autoOffsetReset: "earliest"
+    offsetReset: kafka:OFFSET_RESET_EARLIEST
 });
 
 service on orderListener {
@@ -112,7 +139,13 @@ The listener connects to Kafka brokers and manages topic subscriptions and consu
 
 In the sidebar, expand **Listeners** and click the listener name (for example, `kafkaListener`) to open the **Kafka Listener Configuration** form.
 
-![Kafka Listener Configuration panel](/img/develop/integration-artifacts/event/kafka/listener-config-1.png)
+<ThemedImage
+    alt="Kafka Listener Configuration panel"
+    sources={{
+        light: useBaseUrl('/img/develop/integration-artifacts/event/kafka/listener-config-1.png'),
+        dark: useBaseUrl('/img/develop/integration-artifacts/event/kafka/listener-config-1.png'),
+    }}
+/>
 
 | Field | Description |
 |---|---|
@@ -127,13 +160,12 @@ In the sidebar, expand **Listeners** and click the listener name (for example, `
 **Named listener** — declare the listener at module level and attach services to it:
 
 ```ballerina
-listener kafka:Listener kafkaListener = new ({
-    bootstrapServers: "localhost:9092",
+listener kafka:Listener kafkaListener = new ("localhost:9092", {
     groupId: "order-processor",
     topics: ["orders"],
     pollingInterval: 1,
     autoCommit: false,
-    autoOffsetReset: "earliest"
+    offsetReset: kafka:OFFSET_RESET_EARLIEST
 });
 
 service on kafkaListener {
@@ -143,30 +175,30 @@ service on kafkaListener {
 }
 ```
 
-Key `kafka:ListenerConfiguration` fields:
+`bootstrapServers` is passed as the first positional argument to the `kafka:Listener` constructor, not as part of the configuration record: `new ("localhost:9092", { ... })`.
+
+Key `kafka:ConsumerConfiguration` fields:
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `bootstrapServers` | `string` | — | Kafka broker address list. Required. |
-| `groupId` | `string` | — | Consumer group identifier. |
-| `topics` | `string[]` | — | Topics to subscribe to. |
-| `pollingInterval` | `decimal` | `1` | Seconds between polling cycles. |
+| `groupId` | `string?` | `()` | Consumer group identifier. |
+| `topics` | `string\|string[]?` | `()` | Topics to subscribe to. |
+| `pollingInterval` | `decimal?` | `()` | Seconds between polling cycles. |
 | `autoCommit` | `boolean` | `true` | Automatically commit offsets after each poll. |
-| `autoCommitInterval` | `decimal` | `5` | Auto-commit interval in seconds when `autoCommit: true`. |
-| `autoOffsetReset` | `string` | `"latest"` | Offset reset strategy: `"earliest"`, `"latest"`, or `"none"`. |
-| `concurrentConsumers` | `int` | `1` | Number of concurrent consumer threads. |
-| `isolationLevel` | `string` | `"read_uncommitted"` | Transactional read isolation: `"read_committed"` or `"read_uncommitted"`. |
+| `autoCommitInterval` | `decimal?` | `()` | Auto-commit interval in seconds when `autoCommit: true`. |
+| `offsetReset` | `OffsetResetMethod?` | `()` | Offset reset strategy when no committed offset exists. Use `kafka:OFFSET_RESET_EARLIEST`, `kafka:OFFSET_RESET_LATEST`, or `kafka:OFFSET_RESET_NONE`. |
+| `concurrentConsumers` | `int?` | `()` | Number of concurrent consumer threads. |
+| `isolationLevel` | `IsolationLevel?` | `()` | Transactional read isolation. Use `kafka:ISOLATION_COMMITTED` or `kafka:ISOLATION_UNCOMMITTED`. |
 
 ## Event handler configuration
 
-A Kafka service defines remote functions that the runtime calls when records arrive or errors occur. Add handlers from the **Kafka Consumer Designer** using the **+ Handler** button.
+A Kafka service defines remote functions that the runtime calls when records arrive. Add handlers from the **Kafka Consumer Designer** using the **+ Handler** button.
 
 In the **Kafka Consumer Designer**, the **Event Handlers** section lists all handlers. Click **+ Handler** to add a new handler. Each row shows an **Event** badge and the handler name. Click the settings icon (⚙) on a handler row to configure its parameters.
 
 | Handler | Trigger | Required |
 |---|---|---|
 | **onConsumerRecord** | Called for each batch of records received from subscribed topics. | Yes |
-| **onError** | Called when the Kafka consumer encounters an error. | No |
 
 **`onConsumerRecord`** — receives a batch of messages. The message type can be `string`, `json`, `xml`, `byte[]`, or a custom record:
 
@@ -184,15 +216,7 @@ The `kafka:Caller` parameter provides offset management methods:
 | Method | Description |
 |---|---|
 | `caller->commit()` | Commit offsets for the current batch. Use when `autoCommit: false`. |
-| `caller->seek(partition, offset)` | Seek to a specific offset on a given partition. |
-
-**`onError`** — handles consumer-level errors such as deserialization failures or connection issues:
-
-```ballerina
-remote function onError(kafka:Error err) {
-    log:printError("Consumer error", 'error = err);
-}
-```
+| `caller->seek({partition: {topic: "my-topic", partition: 0}, offset: 100})` | Seek to a specific offset on a given partition. Accepts a single `PartitionOffset` record. |
 
 **Typed message payloads** — Ballerina deserializes JSON automatically when the parameter type is a record:
 
@@ -216,8 +240,8 @@ remote function onConsumerRecord(kafka:Caller caller, OrderEvent[] orders) retur
 |---|---|---|
 | **Auto-commit** | `autoCommit: true` | Offsets committed automatically at the polling interval |
 | **Manual commit** | `autoCommit: false` | Call `caller->commit()` after processing |
-| **Seek to beginning** | `autoOffsetReset: "earliest"` | Reprocess from the beginning of the topic |
-| **Seek to end** | `autoOffsetReset: "latest"` | Skip to the latest messages only |
+| **Seek to beginning** | `offsetReset: kafka:OFFSET_RESET_EARLIEST` | Reprocess from the beginning of the topic |
+| **Seek to end** | `offsetReset: kafka:OFFSET_RESET_LATEST` | Skip to the latest messages only |
 
 ### Acknowledgment strategies
 
@@ -226,3 +250,42 @@ remote function onConsumerRecord(kafka:Caller caller, OrderEvent[] orders) retur
 | Auto-acknowledge | At most once | Low-value events, metrics |
 | Manual acknowledge | At least once | Business-critical events |
 | Transactional | Exactly once | Financial transactions |
+
+Set the offset strategy in the listener configuration:
+
+```ballerina
+// Auto-commit (default) — offsets committed automatically
+listener kafka:Listener autoListener = new (bootstrapServers, {
+    groupId: "my-group",
+    topics: ["my-topic"],
+    autoCommit: true
+});
+
+// Manual commit — call caller->commit() after processing each batch
+listener kafka:Listener manualListener = new (bootstrapServers, {
+    groupId: "my-group",
+    topics: ["my-topic"],
+    autoCommit: false
+});
+
+// Seek to beginning — reprocess all messages from the start of the topic
+listener kafka:Listener earliestListener = new (bootstrapServers, {
+    groupId: "my-group",
+    topics: ["my-topic"],
+    offsetReset: kafka:OFFSET_RESET_EARLIEST
+});
+
+// Seek to end — consume only new messages published after the consumer starts
+listener kafka:Listener latestListener = new (bootstrapServers, {
+    groupId: "my-group",
+    topics: ["my-topic"],
+    offsetReset: kafka:OFFSET_RESET_LATEST
+});
+```
+
+## What's next
+
+- [Kafka Connector Overview](../../../connectors/catalog/messaging/kafka/connector-overview.md) — full connector reference for producer and consumer clients
+- [Action Reference](../../../connectors/catalog/messaging/kafka/actions.md) — all producer and consumer operations, parameters, and sample code
+- [Trigger Reference](../../../connectors/catalog/messaging/kafka/triggers.md) — event-driven listener and service callback reference
+- [Setup Guide](../../../connectors/catalog/messaging/kafka/setup-guide.md) — set up a local or managed Kafka cluster

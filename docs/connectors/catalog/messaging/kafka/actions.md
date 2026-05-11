@@ -109,6 +109,8 @@ Sample response:
 {"topic": "test-kafka-topic", "partition": 0, "offset": 42, "timestamp": 1700000000000, "serializedKeySize": -1, "serializedValueSize": 11}
 ```
 
+`offset` and `timestamp` can be `()` (null) depending on the delivery configuration. Always handle them as nullable (`int?`) in your code.
+
 </details>
 
 <details>
@@ -212,6 +214,7 @@ Subscribes to Kafka topics and polls for messages with manual offset management.
 | `additionalProperties` | `map&lt;string&gt;?` | `()` | Additional Kafka consumer properties not covered by named fields. |
 | `validation` | `boolean` | `true` | Enable constraint validation on deserialized records. |
 | `decoupleProcessing` | `boolean` | `false` | Decouple record processing from polling for improved throughput. |
+| `autoSeekOnValidationFailure` | `boolean` | `true` | Automatically seek past records that fail data-binding or constraint validation. Set to `false` to stop and surface the error instead. |
 
 ### Initializing the client
 
@@ -241,6 +244,8 @@ Parameters:
 | `topics` | `string|string[]` | Yes | Topic name(s) to subscribe to. |
 
 Returns: `error?`
+
+`groupId` must be set in the consumer configuration before calling `subscribe()`. Calling this method without a `groupId` causes a **panic** — not a returned error — and cannot be caught with `check`.
 
 Sample code:
 
@@ -405,7 +410,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `offsets` | `PartitionOffset[]` | Yes | Array of partition-offset pairs to commit. |
-| `duration` | `decimal` | Yes | Timeout in seconds for the commit operation. |
+| `duration` | `decimal` | No | Timeout in seconds for the commit operation. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
 Returns: `error?`
 
@@ -496,7 +501,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `partition` | `TopicPartition` | Yes | The topic-partition to query. |
-| `duration` | `decimal` | Yes | Timeout in seconds. |
+| `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
 Returns: `kafka:PartitionOffset|error?`
 
@@ -526,7 +531,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `partition` | `TopicPartition` | Yes | The topic-partition to query. |
-| `duration` | `decimal` | Yes | Timeout in seconds. |
+| `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
 Returns: `int|error`
 
@@ -610,7 +615,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `topic` | `string` | Yes | The Kafka topic name. |
-| `duration` | `decimal` | Yes | Timeout in seconds. |
+| `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
 Returns: `kafka:TopicPartition[]|error`
 
@@ -705,7 +710,7 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `duration` | `decimal` | Yes | Timeout in seconds. |
+| `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
 Returns: `string[]|error`
 
@@ -733,7 +738,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `partitions` | `TopicPartition[]` | Yes | Partitions to query. |
-| `duration` | `decimal` | Yes | Timeout in seconds. |
+| `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
 Returns: `kafka:PartitionOffset[]|error`
 
@@ -763,7 +768,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `partitions` | `TopicPartition[]` | Yes | Partitions to query. |
-| `duration` | `decimal` | Yes | Timeout in seconds. |
+| `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
 Returns: `kafka:PartitionOffset[]|error`
 
@@ -783,6 +788,38 @@ Sample response:
 
 </details>
 
+<details>
+<summary>offsetsForTimes</summary>
+
+Returns the offsets for the given partitions whose timestamps are greater than or equal to the provided timestamps. Useful for replaying messages from a specific point in time.
+
+Parameters:
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `topicPartitionTimestamps` | `TopicPartitionTimestamp[]` | Yes | Array of `[TopicPartition, int]` tuples where `int` is the target timestamp in milliseconds since epoch. |
+| `duration` | `decimal?` | No | Timeout in seconds. Defaults to `()` (uses the consumer's configured default API timeout). |
+
+Returns: `kafka:TopicPartitionOffset[]|error`
+
+Each element of the returned array is a `[TopicPartition, OffsetAndTimestamp?]` tuple. The `OffsetAndTimestamp` value contains `offset` (int), `timestamp` (int), and `leaderEpoch` (int?). The second element can be `()` if no offset was found for the given timestamp.
+
+Sample code:
+
+```ballerina
+kafka:TopicPartitionOffset[] offsets = check consumer->offsetsForTimes(
+    [[{topic: "test-topic", partition: 0}, 1700000000000]]
+);
+```
+
+Sample response:
+
+```ballerina
+[[{"topic": "test-topic", "partition": 0}, {"offset": 42, "timestamp": 1700000000005, "leaderEpoch": ()}]]
+```
+
+</details>
+
 #### Lifecycle
 
 <details>
@@ -794,7 +831,7 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `duration` | `decimal` | Yes | Timeout in seconds to wait for graceful shutdown. |
+| `duration` | `decimal` | No | Timeout in seconds to wait for graceful shutdown. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
 Returns: `error?`
 
