@@ -1,10 +1,10 @@
 ---
-title: Build Your Own
+title: Build your own connector
 ---
 
-# Build Your Own
+# Build your own connector
 
-Build your own connector when a pre-built one isn't available for your target system.
+When no pre-built connector exists for your target service, you can build one yourself. WSO2 Integrator supports two approaches: generating a connector automatically from an OpenAPI specification, or writing one from scratch in Ballerina for full control over authentication, error handling, and data transformation.
 
 ## When to build a custom connector
 
@@ -30,7 +30,7 @@ The fastest way to connect to a new API. Simply import an OpenAPI specification 
 
 **Best for:** Rapid prototyping, standard REST APIs, internal APIs with OpenAPI specs.
 
-[Get started with OpenAPI Spec &rarr;](create-from-openapi-spec.md)
+[Create a connector from an OpenAPI spec](create-from-openapi-spec.md)
 
 ### Custom development
 
@@ -38,4 +38,10 @@ Build a connector from scratch using Ballerina. This approach gives you full con
 
 **Best for:** Complex integrations, reusable organizational connectors, community contributions.
 
-[Get started with Custom Development &rarr;](custom-development.md)
+[Build a connector with custom development](custom-development.md)
+
+## What's next
+
+- [Create from OpenAPI spec](create-from-openapi-spec.md) — Generate a connector automatically from an OpenAPI definition
+- [Custom development](custom-development.md) — Write a connector from scratch and optionally publish it to Ballerina Central
+- [Connector catalog](../catalog/index.mdx) — Browse all available pre-built connectors

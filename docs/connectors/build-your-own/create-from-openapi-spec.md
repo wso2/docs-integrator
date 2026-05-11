@@ -1,14 +1,10 @@
 ---
-title: Create from OpenAPI Spec
+title: Create from OpenAPI spec
 ---
 
-# Create from OpenAPI Spec
+# Create from OpenAPI spec
 
-WSO2 Integrator enables you to automatically generate custom connectors from OpenAPI specifications. This allows you to integrate any API-driven service — even when a pre-built connector isn't available — without writing manual client logic.
-
-## Overview
-
-APIs power many of the digital services we use daily, such as notifications, SMS alerts, reminders, and transactions. Rather than manually writing client code for each API you need to integrate with, WSO2 Integrator can generate a fully functional connector from a standard OpenAPI definition file.
+WSO2 Integrator can generate a fully functional connector from any OpenAPI specification file, letting you integrate any REST API without writing manual client logic. Import the spec in the WSO2 Integrator IDE and the connector is ready to use in your integration flow.
 
 ## Prerequisites
 
@@ -23,13 +19,19 @@ Follow these steps to generate a custom connector from an OpenAPI spec:
 
 Open your integration project in the Automation diagram view.
 
+![Open the Automation diagram view](/img/connectors/build-your-own/openapi_spec_1_create_automation.png)
+
 ### Step 2: Add a new connection
 
 Click the **+** icon positioned between the **Start** and **Error Handler** nodes on your flow line. From the right-side palette, choose **Add Connection**.
 
+![Add a new connection](/img/connectors/build-your-own/openapi_spec_2_create_connection.png)
+
 ### Step 3: Select OpenAPI
 
 In the **Add Connection** overlay, select **OpenAPI** under the **Connect via API Specification** section.
+
+![Configure the connector](/img/connectors/build-your-own/openapi_spec_3_import_spec.png)
 
 ### Step 4: Configure the connector
 
@@ -39,6 +41,8 @@ In the **Connector Configuration** form, fill in the following:
 |---|---|---|
 | **Connector Name** | A descriptive name for your connector | `stackOverflow` |
 | **Import Specification File** | Browse and upload your OpenAPI definition file | `stack-overflow-api.yaml` |
+
+![Save the connection](/img/connectors/build-your-own/openapi_spec_4_save_connection.png)
 
 ### Step 5: Save and review
 
@@ -50,8 +54,10 @@ Click **Save Connection** to complete the setup. Your custom connector is now re
 
 Make sure your OpenAPI specification is valid and well-structured before importing. You can validate your spec using tools like [Swagger Editor](https://editor.swagger.io/).
 
-## What's next
-
 Once your connector is generated, you can use it just like any pre-built connector — drag it into your integration flow, configure its operations, and map data between services.
 
-- [Custom Development](custom-development.md) — Build a connector from scratch using Ballerina
+## What's next
+
+- [Custom development](custom-development.md) — Build a connector from scratch using Ballerina for full control over implementation
+- [Build your own connector](build-own.md) — Compare approaches for creating custom connectors
+- [Connector catalog](../catalog/index.mdx) — Browse all available pre-built connectors

@@ -23,15 +23,16 @@ Connects to FTP/FTPS/SFTP servers for file read/write, directory management, and
 | `port` | <code>int</code> | `21` | Port number of the FTP server. |
 | `auth` | <code>AuthConfiguration</code> | `()` | Authentication configuration including credentials, private key, and secure socket settings. |
 | `userDirIsRoot` | <code>boolean</code> | `false` | Whether to treat the user's home directory as the root directory. |
-| `laxDataBinding` | <code>boolean</code> | `false` | When `true`, data binding errors return `()` instead of an error. |
+| `laxDataBinding` | <code>boolean</code> | `false` | If true, enables relaxed data binding: null values in JSON/XML map to optional fields, and missing fields map to null values. |
 | `connectTimeout` | <code>decimal</code> | `30.0` | Connection timeout in seconds. |
 | `socketConfig` | <code>SocketConfig</code> | `()` | Socket timeout configuration for FTP data, FTP socket, and SFTP session timeouts. |
-| `proxy` | <code>ProxyConfiguration</code> | `()` | Proxy server configuration for the connection. |
-| `fileTransferMode` | <code>FileTransferMode</code> | `BINARY` | File transfer mode (`BINARY` or `ASCII`). |
+| `proxy` | <code>ProxyConfiguration</code> | `()` | Proxy server configuration for the connection (SFTP only). |
+| `fileTransferMode` | <code>FileTransferMode</code> | `BINARY` | File transfer mode (`BINARY` or `ASCII`) (FTP only). |
 | `sftpCompression` | <code>TransferCompression[]</code> | `[NO]` | Compression algorithms for SFTP transfers (`ZLIB`, `ZLIBOPENSSH`, or `NO`). |
 | `sftpSshKnownHosts` | <code>string</code> | `()` | Path to the SSH known hosts file for SFTP host key verification. |
-| `retryConfig` | <code>RetryConfig</code> | `()` | Retry configuration for failed operations (count, interval, back-off factor, max wait). |
-| `circuitBreaker` | <code>CircuitBreakerConfig</code> | `()` | Circuit breaker configuration for fault tolerance. |
+| `csvFailSafe` | <code>FailSafeOptions</code> | `()` | Fail-safe CSV content processing. When set, malformed CSV records are skipped and written to a separate file in the current directory instead of failing the operation. |
+| `retryConfig` | <code>RetryConfig</code> | `()` | Retry configuration for transient failures on non-streaming read operations (getBytes, getText, getJson, getXml, getCsv). If not specified, no retry is attempted. |
+| `circuitBreaker` | <code>CircuitBreakerConfig</code> | `()` | Circuit breaker for client operations. When the failure ratio exceeds the configured threshold, the client fails fast without contacting the server until the breaker resets. |
 
 ### Initializing the client
 
@@ -254,7 +255,7 @@ Writes byte content to a remote file. Supports overwrite and append modes.
 |------|------|----------|-------------|
 | `path` | <code>string</code> | Yes | The destination file path on the remote server. |
 | `content` | <code>byte[]</code> | Yes | The byte content to write. |
-| `option` | <code>FileWriteOption</code> | No | Write mode — `OVERWRITE` (default) or `APPEND`. |
+| `option` | <code>FileWriteOption</code> | No | Write mode with `OVERWRITE` (default) or `APPEND`. |
 
 **Returns:** `Error?`
 
@@ -277,7 +278,7 @@ Writes string content to a remote file. Supports overwrite and append modes.
 |------|------|----------|-------------|
 | `path` | <code>string</code> | Yes | The destination file path on the remote server. |
 | `content` | <code>string</code> | Yes | The text content to write. |
-| `option` | <code>FileWriteOption</code> | No | Write mode — `OVERWRITE` (default) or `APPEND`. |
+| `option` | <code>FileWriteOption</code> | No | Write mode with `OVERWRITE` (default) or `APPEND`. |
 
 **Returns:** `Error?`
 
@@ -294,13 +295,15 @@ check ftpClient->putText("/home/user/files/readme.txt", "Hello, World!");
 
 Writes JSON content to a remote file. Supports overwrite and append modes.
 
+Note that APPEND performs raw text concatenation, which can produce invalid JSON/XML. Use OVERWRITE unless you specifically intend to concatenate text fragments.
+
 **Parameters:**
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `path` | <code>string</code> | Yes | The destination file path on the remote server. |
 | `content` | <code>json&#124;record &#123;&#125;</code> | Yes | The JSON content to write. |
-| `option` | <code>FileWriteOption</code> | No | Write mode — `OVERWRITE` (default) or `APPEND`. |
+| `option` | <code>FileWriteOption</code> | No | Write mode with `OVERWRITE` (default) or `APPEND`. |
 
 **Returns:** `Error?`
 
@@ -317,13 +320,15 @@ check ftpClient->putJson("/home/user/files/config.json", {"name": "App", "versio
 
 Writes XML content to a remote file. Supports overwrite and append modes.
 
+Note that APPEND performs raw text concatenation, which can produce invalid JSON/XML. Use OVERWRITE unless you specifically intend to concatenate text fragments.
+
 **Parameters:**
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `path` | <code>string</code> | Yes | The destination file path on the remote server. |
 | `content` | <code>xml&#124;record &#123;&#125;</code> | Yes | The XML content to write. |
-| `option` | <code>FileWriteOption</code> | No | Write mode — `OVERWRITE` (default) or `APPEND`. |
+| `option` | <code>FileWriteOption</code> | No | Write mode with `OVERWRITE` (default) or `APPEND`. |
 
 **Returns:** `Error?`
 
@@ -346,7 +351,7 @@ Writes CSV content to a remote file. Supports overwrite and append modes.
 |------|------|----------|-------------|
 | `path` | <code>string</code> | Yes | The destination file path on the remote server. |
 | `content` | <code>string[][]&#124;record &#123;&#125;[]</code> | Yes | The CSV content as a 2D string array or record array. |
-| `option` | <code>FileWriteOption</code> | No | Write mode — `OVERWRITE` (default) or `APPEND`. |
+| `option` | <code>FileWriteOption</code> | No | Write mode with `OVERWRITE` (default) or `APPEND`. |
 
 **Returns:** `Error?`
 
@@ -373,7 +378,7 @@ Writes a byte stream to a remote file, suitable for large files.
 |------|------|----------|-------------|
 | `path` | <code>string</code> | Yes | The destination file path on the remote server. |
 | `content` | <code>stream&lt;byte[], error?&gt;</code> | Yes | The byte stream to write. |
-| `option` | <code>FileWriteOption</code> | No | Write mode — `OVERWRITE` (default) or `APPEND`. |
+| `option` | <code>FileWriteOption</code> | No | Write mode with `OVERWRITE` (default) or `APPEND`. |
 
 **Returns:** `Error?`
 
@@ -397,7 +402,7 @@ Writes a CSV stream to a remote file, suitable for large datasets.
 |------|------|----------|-------------|
 | `path` | <code>string</code> | Yes | The destination file path on the remote server. |
 | `content` | <code>stream&lt;string[]&#124;record &#123;&#125;, error?&gt;</code> | Yes | The CSV row stream to write. |
-| `option` | <code>FileWriteOption</code> | No | Write mode — `OVERWRITE` (default) or `APPEND`. |
+| `option` | <code>FileWriteOption</code> | No | Write mode with `OVERWRITE` (default) or `APPEND`. |
 
 **Returns:** `Error?`
 
@@ -434,7 +439,7 @@ ftp:FileInfo[] files = check ftpClient->list("/home/user/files");
 **Sample response:**
 
 ```ballerina
-[{"path": "/home/user/files/readme.txt", "size": 1024, "lastModifiedTimestamp": 1711324800, "name": "readme.txt", "isFolder": false, "isFile": true}, {"path": "/home/user/files/data", "size": 0, "lastModifiedTimestamp": 1711238400, "name": "data", "isFolder": true, "isFile": false}]
+[{"path": "/home/user/files/readme.txt", "size": 1024, "lastModifiedTimestamp": 1711324800000, "name": "readme.txt", "isFolder": false, "isFile": true}, {"path": "/home/user/files/data", "size": 0, "lastModifiedTimestamp": 1711238400000, "name": "data", "isFolder": true, "isFile": false, ...}]
 ```
 
 </details>
@@ -656,7 +661,7 @@ int fileSize = check ftpClient->size("/home/user/files/report.csv");
 <details>
 <summary>close</summary>
 
-Closes the connection to the remote FTP/SFTP server and releases resources.
+Closes the connection to the remote FTP/FTPS/SFTP server and releases resources.
 
 **Returns:** `Error?`
 

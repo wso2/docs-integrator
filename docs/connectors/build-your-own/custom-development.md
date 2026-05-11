@@ -1,23 +1,17 @@
 ---
-title: Custom Development
+title: Custom development
 ---
 
-# Custom Development
+# Custom development
 
-Build a custom Ballerina connector when you need full control over the connector implementation — including custom logic, advanced authentication, or publishing to Ballerina Central.
-
-## Overview
-
-Ballerina connectors are special packages containing one or more Ballerina clients that allow communication with external services, typically via REST APIs. You can create, share, and manage connectors for public distribution on [Ballerina Central](https://central.ballerina.io/) or for private organizational use.
-
-This guide walks through generating a Ballerina connector from an OpenAPI specification — one of the fastest and most reliable ways to build connectors.
+Ballerina connectors are packages containing one or more clients that communicate with external services via REST APIs. Build one from scratch when you need full control over authentication, error handling, or data transformation logic — or when you want to publish a reusable connector to [Ballerina Central](https://central.ballerina.io/) for your team or the broader community. This guide walks through generating a connector from an OpenAPI specification, which is the fastest and most reliable approach.
 
 ## Prerequisites
 
 - Basic knowledge of [Ballerina Swan Lake](https://ballerina.io/) with the latest version installed
 - An OpenAPI specification for the target API, plus any relevant API credentials
-- A GitHub account with Git installed locally
-- VS Code with the [Ballerina extension](https://marketplace.visualstudio.com/items?itemName=WSO2.ballerina)
+- WSO2 Integrator IDE installed and configured
+- A GitHub account with Git installed locally (required only if you plan to publish to Ballerina Central)
 
 ## Step 1: Set up the project structure
 
@@ -125,6 +119,7 @@ See the [Ballerina testing guide](https://ballerina.io/learn/test-ballerina-code
 This is displayed on the Ballerina Central package landing page. Include:
 
 - Overview — Concise introduction, purpose, and key features
+- Key features — Bullet list of the connector's main capabilities
 - Setup — Step-by-step configuration instructions and prerequisites (API keys, environment setup)
 - Quickstart — A basic, clear example for immediate use
 - Examples — Links to additional use cases and scenarios
@@ -152,13 +147,28 @@ name = "myconnector"
 version = "1.0.0"
 license = ["Apache-2.0"]
 authors = ["Your Name"]
-keywords = ["integration", "myservice"]
+keywords = ["integration", "myservice", "Vendor/MyService", "Area/Communication", "Type/Connector"]
 repository = "https://github.com/your-username/module-ballerinax-myconnector"
 icon = "icon.png"
 ```
+
+#### Keywords for the WSO2 Integration Platform
+
+The `Vendor/`, `Area/`, and `Type/` keywords classify your connector in the WSO2 Integration Platform connector catalog. Use the following format:
+
+| Keyword | Purpose | Example |
+|---|---|---|
+| `Vendor/<name>` | The service or company the connector targets | `Vendor/Salesforce` |
+| `Area/<category>` | The functional category of the connector | `Area/CRM & Sales` |
+| `Type/Connector` | Marks the package as a connector (use this fixed value) | `Type/Connector` |
+| `Name/<display name>` | Optional. Use when the display name should differ from the package name | `Name/Salesforce CRM` |
+
+The WSO2 Integration Platform connector catalog currently lists pre-built WSO2 connectors. Support for community-published connectors is planned — adding these keywords now ensures your connector is ready when that support rolls out.
 
 Then follow the [package publishing guide](https://ballerina.io/learn/publish-packages-to-ballerina-central/) to publish to Ballerina Central.
 
 ## What's next
 
-- [Create from OpenAPI Spec](create-from-openapi-spec.md) — Quickly generate a connector directly in the WSO2 Integrator IDE
+- [Create from OpenAPI spec](create-from-openapi-spec.md) — Generate a connector directly in the WSO2 Integrator IDE without writing code
+- [Build your own connector](build-own.md) — Compare approaches for creating custom connectors
+- [Connector catalog](../catalog/index.mdx) — Browse all available pre-built connectors
