@@ -282,7 +282,7 @@ bal run
 
 Alternatively, use the "Run" button on each example page at [ballerina.io/learn/by-example](https://ballerina.io/learn/by-example/).
 
-## What's next
+## See also
 
 - [Ballerina Syntax Quick Reference](language/ballerina-syntax-quick-reference.md) — Language cheat sheet
 - [Ballerina API Documentation](api/ballerina-documentation.md) — Full API docs

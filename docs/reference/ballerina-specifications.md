@@ -48,45 +48,45 @@ Each standard library module has its own specification defining the module's API
 
 ### Core library specifications
 
-| Module | Specification | Description |
-|--------|--------------|-------------|
-| `ballerina/lang.value` | [Spec](https://ballerina.io/spec/lang/master/#lang.value) | Operations on all Ballerina values |
-| `ballerina/lang.array` | [Spec](https://ballerina.io/spec/lang/master/#lang.array) | Array operations (push, pop, sort, filter) |
-| `ballerina/lang.map` | [Spec](https://ballerina.io/spec/lang/master/#lang.map) | Map operations (get, entries, keys, values) |
-| `ballerina/lang.string` | [Spec](https://ballerina.io/spec/lang/master/#lang.string) | String operations (substring, trim, split) |
-| `ballerina/lang.int` | [Spec](https://ballerina.io/spec/lang/master/#lang.int) | Integer operations and limits |
-| `ballerina/lang.float` | [Spec](https://ballerina.io/spec/lang/master/#lang.float) | Floating-point operations |
-| `ballerina/lang.decimal` | [Spec](https://ballerina.io/spec/lang/master/#lang.decimal) | Decimal operations |
-| `ballerina/lang.boolean` | [Spec](https://ballerina.io/spec/lang/master/#lang.boolean) | Boolean operations |
-| `ballerina/lang.error` | [Spec](https://ballerina.io/spec/lang/master/#lang.error) | Error type operations |
-| `ballerina/lang.xml` | [Spec](https://ballerina.io/spec/lang/master/#lang.xml) | XML type operations |
-| `ballerina/lang.table` | [Spec](https://ballerina.io/spec/lang/master/#lang.table) | Table operations |
-| `ballerina/lang.regexp` | [Spec](https://ballerina.io/spec/lang/master/#lang.regexp) | Regular expression operations |
-| `ballerina/lang.runtime` | [Spec](https://ballerina.io/spec/lang/master/#lang.runtime) | Runtime management operations |
-| `ballerina/lang.transaction` | [Spec](https://ballerina.io/spec/lang/master/#lang.transaction) | Transaction management |
+| Module | Description |
+|--------|-------------|
+| **[`ballerina/lang.value`](https://ballerina.io/spec/lang/master/#lang.value)** | Operations on all Ballerina values |
+| **[`ballerina/lang.array`](https://ballerina.io/spec/lang/master/#lang.array)** | Array/Tuple operations (push, pop, sort, filter) |
+| **[`ballerina/lang.map`](https://ballerina.io/spec/lang/master/#lang.map)** | Map/Record operations (get, entries, keys, values) |
+| **[`ballerina/lang.string`](https://ballerina.io/spec/lang/master/#lang.string)** | String operations (substring, trim, split) |
+| **[`ballerina/lang.int`](https://ballerina.io/spec/lang/master/#lang.int)** | Integer operations and limits |
+| **[`ballerina/lang.float`](https://ballerina.io/spec/lang/master/#lang.float)** | Floating-point operations |
+| **[`ballerina/lang.decimal`](https://ballerina.io/spec/lang/master/#lang.decimal)** | Decimal operations |
+| **[`ballerina/lang.boolean`](https://ballerina.io/spec/lang/master/#lang.boolean)** | Boolean operations |
+| **[`ballerina/lang.error`](https://ballerina.io/spec/lang/master/#lang.error)** | Error type operations |
+| **[`ballerina/lang.xml`](https://ballerina.io/spec/lang/master/#lang.xml)** | XML type operations |
+| **[`ballerina/lang.table`](https://ballerina.io/spec/lang/master/#lang.table)** | Table operations |
+| **[`ballerina/lang.regexp`](https://ballerina.io/spec/lang/master/#lang.regexp)** | Regular expression operations |
+| **[`ballerina/lang.runtime`](https://ballerina.io/spec/lang/master/#lang.runtime)** | Runtime management operations |
+| **[`ballerina/lang.transaction`](https://ballerina.io/spec/lang/master/#lang.transaction)** | Transaction management |
 
 ### Network library specifications
 
-| Module | Specification | Key Topics |
-|--------|--------------|------------|
-| `ballerina/http` | [Spec](https://github.com/ballerina-platform/module-ballerina-http/blob/master/docs/spec/spec.md) | HTTP service, client, request/response, security, interceptors |
-| `ballerina/grpc` | [Spec](https://github.com/ballerina-platform/module-ballerina-grpc/blob/master/docs/spec/spec.md) | gRPC service, client, streaming patterns |
-| `ballerina/graphql` | [Spec](https://github.com/ballerina-platform/module-ballerina-graphql/blob/master/docs/spec/spec.md) | GraphQL service, schema generation, subscriptions |
-| `ballerina/websocket` | [Spec](https://github.com/ballerina-platform/module-ballerina-websocket/blob/master/docs/spec/spec.md) | WebSocket service, client, lifecycle |
-| `ballerina/websub` | [Spec](https://github.com/ballerina-platform/module-ballerina-websub/blob/master/docs/spec/spec.md) | WebSub subscriber, hub integration |
-| `ballerina/tcp` | [Spec](https://github.com/ballerina-platform/module-ballerina-tcp/blob/master/docs/spec/spec.md) | TCP listener, client, byte stream handling |
-| `ballerina/udp` | [Spec](https://github.com/ballerina-platform/module-ballerina-udp/blob/master/docs/spec/spec.md) | UDP datagram communication |
-| `ballerina/email` | [Spec](https://github.com/ballerina-platform/module-ballerina-email/blob/master/docs/spec/spec.md) | SMTP, POP3, IMAP protocols |
-| `ballerina/ftp` | [Spec](https://github.com/ballerina-platform/module-ballerina-ftp/blob/master/docs/spec/spec.md) | FTP/SFTP client and listener |
+| Module | Key Topics |
+|--------|------------|
+| **[`ballerina/http`](https://github.com/ballerina-platform/module-ballerina-http/blob/master/docs/spec/spec.md)** | HTTP service, client, request/response, security, interceptors |
+| **[`ballerina/grpc`](https://github.com/ballerina-platform/module-ballerina-grpc/blob/master/docs/spec/spec.md)** | gRPC service, client, streaming patterns |
+| **[`ballerina/graphql`](https://github.com/ballerina-platform/module-ballerina-graphql/blob/master/docs/spec/spec.md)** | GraphQL service, schema generation, subscriptions |
+| **[`ballerina/websocket`](https://github.com/ballerina-platform/module-ballerina-websocket/blob/master/docs/spec/spec.md)** | WebSocket service, client, lifecycle |
+| **[`ballerina/websub`](https://github.com/ballerina-platform/module-ballerina-websub/blob/master/docs/spec/spec.md)** | WebSub subscriber, hub integration |
+| **[`ballerina/tcp`](https://github.com/ballerina-platform/module-ballerina-tcp/blob/master/docs/spec/spec.md)** | TCP listener, client, byte stream handling |
+| **[`ballerina/udp`](https://github.com/ballerina-platform/module-ballerina-udp/blob/master/docs/spec/spec.md)** | UDP datagram communication |
+| **[`ballerina/email`](https://github.com/ballerina-platform/module-ballerina-email/blob/master/docs/spec/spec.md)** | SMTP, POP3, IMAP protocols |
+| **[`ballerina/ftp`](https://github.com/ballerina-platform/module-ballerina-ftp/blob/master/docs/spec/spec.md)** | FTP/SFTP client and listener |
 
 ### Data library specifications
 
-| Module | Specification | Key Topics |
-|--------|--------------|------------|
-| `ballerina/io` | [Spec](https://github.com/ballerina-platform/module-ballerina-io/blob/master/docs/spec/spec.md) | File I/O, stream I/O, console I/O |
-| `ballerina/sql` | [Spec](https://github.com/ballerina-platform/module-ballerina-sql/blob/master/docs/spec/spec.md) | Generic SQL client, parameterized queries, transactions |
-| `ballerina/persist` | [Spec](https://github.com/ballerina-platform/module-ballerina-persist/blob/master/docs/spec/spec.md) | Data persistence layer, entity modeling |
-| `ballerina/constraint` | [Spec](https://github.com/ballerina-platform/module-ballerina-constraint/blob/master/docs/spec/spec.md) | Data validation constraints |
+| Module | Key Topics |
+|--------|------------|
+| **[`ballerina/io`](https://github.com/ballerina-platform/module-ballerina-io/blob/master/docs/spec/spec.md)** | File I/O, stream I/O, console I/O |
+| **[`ballerina/sql`](https://github.com/ballerina-platform/module-ballerina-sql/blob/master/docs/spec/spec.md)** | Generic SQL client, parameterized queries, transactions |
+| **[`ballerina/persist`](https://github.com/ballerina-platform/module-ballerina-persist/blob/master/docs/spec/spec.md)** | Data persistence layer, entity modeling |
+| **[`ballerina/constraint`](https://github.com/ballerina-platform/module-ballerina-constraint/blob/master/docs/spec/spec.md)** | Data validation constraints |
 
 ## Platform specification
 
@@ -133,6 +133,6 @@ Ballerina specifications follow a versioning scheme tied to Swan Lake releases.
 
 ## See also
 
-- [Ballerina by Example](ballerina-by-example.md) -- Runnable code examples
-- [Ballerina API Documentation](api/ballerina-documentation.md) -- Module API docs
-- [Release Notes](release-notes.md) -- Version history and migration notes
+- [Ballerina by Example](ballerina-by-example.md) — Runnable code examples
+- [Ballerina API Documentation](api/ballerina-documentation.md) — Module API docs
+- [Release Notes](release-notes.md) — Version history and migration notes

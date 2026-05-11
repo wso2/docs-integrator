@@ -184,7 +184,7 @@ spec:
 | Rotate certificates before expiry | Required |
 | Encrypt secrets in Config.toml | Required |
 
-## What's next
+## See also
 
 - [Keystores and Truststores](keystore-truststore.md) — Create and configure TLS certificates, keystores, and truststores
 - [Authentication](authentication.md) — Configure authentication for services
