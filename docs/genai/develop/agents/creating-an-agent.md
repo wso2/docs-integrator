@@ -97,4 +97,4 @@ After generation, you are directed to the integration canvas where you can confi
 - **[Tools](tools.md)** - Add tools and integrations to the agent.
 - **[Memory](memory.md)** - Configure conversational and persistent memory.
 - **[Observability](observability.md)** - Monitor traces, logs, and execution details.
-- **[Evaluations](evaluations.md)** - Test and evaluate agent behavior and response quality.
+- **[Evaluations](evaluations/overview.md)** - Test and evaluate agent behavior and response quality.

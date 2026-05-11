@@ -69,4 +69,4 @@ The chat interface reuses the same session across interactions, enabling memory-
 - **[Tools](tools.md)** - Add functions, connectors, and integrations to your agents.
 - **[Memory](memory.md)** - Configure conversational and persistent memory.
 - **[Observability](observability.md)** - Monitor traces, logs, and execution details.
-- **[Evaluations](evaluations.md)** - Test and evaluate agent behavior and response quality.
+- **[Evaluations](evaluations/overview.md)** - Test and evaluate agent behavior and response quality.
