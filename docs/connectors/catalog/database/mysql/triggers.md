@@ -4,7 +4,7 @@ title: Triggers
 
 # Triggers
 
-The `ballerinax/mysql` connector supports event-driven integration through Change Data Capture (CDC) powered by Debezium. When rows are inserted, updated, or deleted in monitored MySQL tables, the `mysql:CdcListener` receives change events in real time and invokes your service callbacks automatically.
+The `ballerinax/mysql` connector supports event-driven integration through Change Data Capture (CDC) powered by Debezium. When rows are inserted, updated, deleted, or read during the initial snapshot in monitored MySQL tables, the `mysql:CdcListener` receives change events in real time and invokes your service callbacks automatically.
 
 Three components work together:
 
@@ -20,7 +20,7 @@ For action-based record operations, see the [Action Reference](actions.md).
 
 ## Listener
 
-The `mysql:Listener` establishes the connection and manages event subscriptions.
+The `mysql:CdcListener` establishes the connection and manages event subscriptions.
 
 ### Configuration
 
@@ -40,18 +40,30 @@ The listener supports the following connection strategies:
 | `port` | `int` | `3306` | The port number of the MySQL server. |
 | `username` | `string` | Required | MySQL username with replication privileges. |
 | `password` | `string` | Required | MySQL password for the specified user. |
-| `databaseServerId` | `string` | (auto-generated random int) | Unique identifier for this MySQL server instance in the replication topology. |
+| `connectTimeout` | `decimal?` | `()` | Connection timeout in seconds. Inherited from `cdc:DatabaseConnection`. |
+| `secure` | `cdc:SecureDatabaseConnection?` | `()` | SSL/TLS configuration for the database connection. Inherited from `cdc:DatabaseConnection`. |
+| `databaseServerId` | `string` | auto-generated random integer (as a string) | Unique identifier for this MySQL server instance in the replication topology. |
 | `includedDatabases` | `string\|string[]?` | `()` | Regex patterns of databases to capture changes from. Do not use alongside `excludedDatabases`. |
 | `excludedDatabases` | `string\|string[]?` | `()` | Regex patterns of databases to exclude from capture. Do not use alongside `includedDatabases`. |
-| `includedTables` | `string\|string[]?` | `()` | Fully-qualified table names or regex patterns to capture (e.g., `"mydb.orders"`). |
-| `tasksMax` | `int` | `1` | Maximum number of tasks for the connector. The MySQL connector always uses a single task. |
+| `includedTables` | `string\|string[]?` | `()` | Fully-qualified table names or regex patterns to capture (e.g., `"mydb.orders"`). Mutually exclusive with `excludedTables`. |
+| `excludedTables` | `string\|string[]?` | `()` | Regex patterns of tables to exclude. Mutually exclusive with `includedTables`. |
+| `includedColumns` | `string\|string[]?` | `()` | Regex patterns of columns to capture. Mutually exclusive with `excludedColumns`. |
+| `excludedColumns` | `string\|string[]?` | `()` | Regex patterns of columns to exclude. Mutually exclusive with `includedColumns`. |
+| `messageKeyColumns` | `cdc:MessageKeyColumns[]?` | `()` | Composite message key columns for change events. |
+| `tasksMax` | `int` | `1` | Maximum number of tasks for the connector. The MySQL connector always uses a single task, so changing this has no effect. |
+| `replicationConfig` | `ReplicationConfiguration?` | `()` | MySQL GTID-based replication configuration (`gtidSourceIncludes`/`gtidSourceExcludes`). |
+| `binlogConfig` | `BinlogConfiguration?` | `()` | MySQL binlog configuration (e.g., `bufferSize`). |
 
 `MySqlListenerConfiguration` fields:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `database` | `MySqlDatabaseConnection` | Required | The MySQL CDC database connection configuration. |
-| `options` | `cdc:Options?` | `()` | Advanced CDC options such as snapshot mode, skipped operations, and offset storage. |
+| `options` | `MySqlOptions` | `{}` | Advanced CDC options including `snapshotMode`, `skippedOperations`, MySQL-specific extended snapshot, data type handling, and heartbeat configs. |
+| `engineName` | `string` | `"ballerina-cdc-connector"` | Debezium engine instance name. Inherited from `cdc:ListenerConfiguration`. |
+| `internalSchemaStorage` | `cdc:InternalSchemaStorage` | `{fileName: "tmp/dbhistory.dat"}` | Schema-history storage configuration (file, Kafka, JDBC, Redis, S3, Azure Blob, RocketMQ, or in-memory). Inherited from `cdc:ListenerConfiguration`. |
+| `offsetStorage` | `cdc:OffsetStorage` | `{fileName: "tmp/debezium-offsets.dat"}` | Offset storage configuration (file, Kafka, JDBC, Redis, or in-memory). Inherited from `cdc:ListenerConfiguration`. |
+| `livenessInterval` | `decimal` | `60.0` | Interval in seconds for checking CDC listener liveness. Inherited from `cdc:ListenerConfiguration`. |
 
 ### Initializing the listener
 
@@ -107,9 +119,10 @@ A `cdc:Service` is a Ballerina service attached to a `mysql:CdcListener`. It lis
 | `onRead` | `remote function onRead(record {} after) returns cdc:Error?` | Invoked during the initial snapshot for each existing row read from the database. |
 | `onCreate` | `remote function onCreate(record {} after) returns cdc:Error?` | Invoked when a new row is inserted into a monitored table. |
 | `onUpdate` | `remote function onUpdate(record {} before, record {} after) returns cdc:Error?` | Invoked when a row is updated, providing both the before and after state. |
-| `onDelete` | `remote function onDelete(record {} before) returns error?` | Invoked when a row is deleted, providing the row state before deletion. |
+| `onDelete` | `remote function onDelete(record {} before) returns cdc:Error?` | Invoked when a row is deleted, providing the row state before deletion. |
+| `onError` | `remote function onError(cdc:Error err) returns cdc:Error?` | Invoked when the listener encounters an error during change-event delivery (e.g., deserialization failures or connector errors). |
 
-You do not need to implement all four callbacks. Only implement the event types relevant to your use case.
+You do not need to implement all of these callbacks. Only implement the event types relevant to your use case.
 
 ### Full usage example
 
@@ -162,7 +175,7 @@ service cdc:Service on cdcListener {
         );
     }
 
-    isolated remote function onDelete(Order before) returns error? {
+    isolated remote function onDelete(Order before) returns cdc:Error? {
         log:printInfo("Order deleted", orderId = before.order_id);
     }
 }
@@ -174,37 +187,51 @@ For CDC to work, MySQL must have binary logging enabled with `binlog-format=ROW`
 
 ## Supporting types
 
-### `MySqlDatabaseConnection`
+For the `MySqlDatabaseConnection` field reference, see the [Listener > Configuration](#configuration) section above.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `connectorClass` | `string` | The Debezium connector class (defaults to MySQL connector). |
-| `hostname` | `string` | The MySQL server hostname (default `"localhost"`). |
-| `port` | `int` | The MySQL server port (default `3306`). |
-| `username` | `string` | MySQL username with replication privileges. |
-| `password` | `string` | Password for the specified user. |
-| `databaseServerId` | `string` | Unique server identifier for the replication topology. |
-| `includedDatabases` | `string\|string[]?` | Regex patterns of databases to capture changes from. |
-| `excludedDatabases` | `string\|string[]?` | Regex patterns of databases to exclude from change capture. |
-| `includedTables` | `string\|string[]?` | Fully-qualified table names or regex patterns to monitor. |
-| `tasksMax` | `int` | Maximum number of connector tasks (always 1 for MySQL). |
+### `MySqlOptions`
 
-### `Options`
+CDC options for the listener. Extends `cdc:Options` with MySQL-specific fields.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `ssl` | `SecureSocket?` | SSL/TLS configuration for the database connection. |
-| `connectTimeout` | `decimal` | Connection timeout in seconds (default `30`). |
-| `socketTimeout` | `decimal` | Socket read/write timeout in seconds (default `0` — no timeout). |
-| `serverTimezone` | `string?` | Server timezone for date/time conversions. |
-| `noAccessToProcedureBodies` | `boolean` | Allow procedure calls when metadata access is limited (default `false`). |
-| `failoverConfig` | `FailoverConfig?` | Configuration for server failover with secondary servers. |
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `snapshotMode` | `cdc:SnapshotMode` | `INITIAL` | Initial snapshot behavior (`INITIAL`, `ALWAYS`, `NO_DATA`, `WHEN_NEEDED`, `SCHEMA_ONLY`, `RECOVERY`, etc.). |
+| `eventProcessingFailureHandlingMode` | `cdc:EventProcessingFailureHandlingMode` | `WARN` | How to handle event-processing failures (`FAIL`, `WARN`, `SKIP`). |
+| `skippedOperations` | `cdc:Operation[]` | `[TRUNCATE]` | Operations to skip publishing. |
+| `skipMessagesWithoutChange` | `boolean` | `false` | Discard events that contain no row-data changes. |
+| `decimalHandlingMode` | `cdc:DecimalHandlingMode` | `DOUBLE` | Representation mode for decimal values. |
+| `maxQueueSize` | `int` | `8192` | Maximum number of events in the internal queue. |
+| `maxBatchSize` | `int` | `2048` | Maximum number of events per processing batch. |
+| `queryTimeout` | `decimal` | `60.0` | Database query timeout in seconds. |
+| `heartbeatConfig` | `cdc:RelationalHeartbeatConfiguration?` | `()` | Heartbeat for keeping the MySQL replication connection alive. |
+| `signalConfig` | `cdc:SignalConfiguration?` | `()` | Signal-channel configuration for ad-hoc control. |
+| `transactionMetadataConfig` | `cdc:TransactionMetadataConfiguration?` | `()` | Transaction-boundary event configuration. |
+| `columnTransformConfig` | `cdc:ColumnTransformConfiguration?` | `()` | Column masking/transformation configuration. |
+| `topicConfig` | `cdc:TopicConfiguration?` | `()` | Topic naming and routing configuration. |
+| `connectionRetryConfig` | `cdc:ConnectionRetryConfiguration?` | `()` | Error handling and retry configuration. |
+| `performanceConfig` | `cdc:PerformanceConfiguration?` | `()` | Performance-tuning configuration. |
+| `extendedSnapshot` | `ExtendedSnapshotConfiguration?` | `()` | MySQL extended snapshot configuration (e.g., `lockTimeout`). Narrows the parent `cdc:Options.extendedSnapshot`. |
+| `dataTypeConfig` | `DataTypeConfiguration?` | `()` | MySQL-specific type handling: `bigIntUnsignedHandlingMode`, `enableTimeAdjuster`, `includeSchemaChanges`. |
 
-### `SecureSocket`
+### `cdc:SecureDatabaseConnection`
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `mode` | `SSLMode` | SSL mode: `SSL_DISABLED`, `SSL_PREFERRED` (default), `SSL_REQUIRED`, `SSL_VERIFY_CA`, or `SSL_VERIFY_IDENTITY`. |
-| `key` | `KeyStore?` | Client certificate keystore configuration (`.p12` format). |
-| `cert` | `TrustStore?` | Trust certificate store configuration (`.p12` format). |
-| `allowPublicKeyRetrieval` | `boolean` | Allow retrieval of the server's RSA public key (default `false`). |
+SSL/TLS configuration for the CDC database connection. Set on `MySqlDatabaseConnection.secure`.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `sslMode` | `cdc:SslMode` | `PREFERRED` | Connection security level (`DISABLED`, `PREFERRED`, `REQUIRED`, `VERIFY_CA`, `VERIFY_IDENTITY`). |
+| `keyStore` | `crypto:KeyStore?` | `()` | Client keystore for mutual TLS authentication. |
+| `trustStore` | `crypto:TrustStore?` | `()` | Truststore for verifying the server certificate. |
+
+### `ReplicationConfiguration`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `gtidSourceIncludes` | `string\|string[]?` | `()` | Comma-separated list of GTID source UUIDs to include. |
+| `gtidSourceExcludes` | `string\|string[]?` | `()` | Comma-separated list of GTID source UUIDs to exclude. |
+
+### `BinlogConfiguration`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `bufferSize` | `int` | `8192` | Size of the binlog buffer in bytes. |

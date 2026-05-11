@@ -181,6 +181,8 @@ Parameters:
 
 Returns: `sql:ExecutionResult[]|sql:Error`
 
+> Note: passing an empty array returns an `sql:ApplicationError`. Filter or guard upstream if your input may be empty.
+
 Sample code:
 
 ```ballerina
@@ -249,7 +251,7 @@ if resultStream is stream<record {}, error?> {
 
 Closes the client and releases the associated connection pool (if not shared by other clients). Should be called only at the end of the application lifetime.
 
-Returns: `error?`
+Returns: `sql:Error?`
 
 Sample code:
 
@@ -258,3 +260,62 @@ check dbClient.close();
 ```
 
 </details>
+
+---
+
+## Supporting types
+
+### `Options`
+
+Advanced MySQL connection options. Passed to `Client.init` via the `options` parameter.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `ssl` | `SecureSocket?` | `()` | SSL/TLS security settings. |
+| `failoverConfig` | `FailoverConfig?` | `()` | Server failover configuration. |
+| `useXADatasource` | `boolean` | `false` | Enable XA transactions (uses `MysqlXADataSource`). |
+| `connectTimeout` | `decimal` | `30.0` | Connection timeout in seconds. |
+| `socketTimeout` | `decimal` | `0.0` | Socket read/write timeout in seconds (`0.0` means no timeout). |
+| `serverTimezone` | `string?` | `()` | Server timezone for handling temporal values. |
+| `noAccessToProcedureBodies` | `boolean` | `false` | Allow procedure calls when the user lacks privileges to read procedure metadata. |
+
+### `FailoverConfig`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `failoverServers` | `FailoverServer[]` | Required | Array of secondary server configurations. |
+| `timeBeforeRetry` | `int?` | `()` | Seconds to wait before attempting to reconnect to the primary server. |
+| `queriesBeforeRetry` | `int?` | `()` | Number of queries to execute before attempting to reconnect to the primary server. |
+| `failoverReadOnly` | `boolean` | `true` | Open connections to secondary hosts in `READ ONLY` mode. |
+
+### `FailoverServer`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `host` | `string` | Required | Secondary server hostname. |
+| `port` | `int` | Required | Secondary server port. |
+
+### `SecureSocket`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `mode` | `SSLMode` | `SSL_PREFERRED` | SSL mode (see below). |
+| `key` | `crypto:KeyStore?` | `()` | Keystore configuration for client certificates. |
+| `cert` | `crypto:TrustStore?` | `()` | Truststore configuration for trusted CA certificates. |
+| `allowPublicKeyRetrieval` | `boolean` | `false` | Allow the special handshake round-trip to fetch the server's RSA public key directly. |
+
+### `SSLMode`
+
+A union of the supported SSL connection modes:
+
+| Constant | Value | Description |
+|----------|-------|-------------|
+| `SSL_DISABLED` | `"DISABLED"` | Establish an unencrypted connection; fail if the server requires encryption. |
+| `SSL_PREFERRED` | `"PREFERRED"` | Use encryption if supported; otherwise fall back to unencrypted. |
+| `SSL_REQUIRED` | `"REQUIRED"` | Require encryption; fail if the server does not support it. |
+| `SSL_VERIFY_CA` | `"VERIFY_CA"` | Require encryption and verify the server CA certificate. |
+| `SSL_VERIFY_IDENTITY` | `"VERIFY_IDENTITY"` | Require encryption, verify the CA, and verify the server hostname. |
+
+### `sql:ConnectionPool`
+
+Connection pool configuration is provided by the parent `ballerina/sql` module. See the [`sql:ConnectionPool` API reference](https://docs.central.ballerina.io/ballerina/sql/latest#ConnectionPool) for the full field list and pool-handling semantics.

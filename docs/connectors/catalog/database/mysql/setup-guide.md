@@ -8,7 +8,7 @@ This guide walks you through setting up a MySQL database and obtaining the conne
 
 ## Prerequisites
 
-- A running MySQL server (v8.0.13 or later). You can [install MySQL locally](https://dev.mysql.com/downloads/), use Docker (`docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:8`), or use a managed service (AWS RDS, Google Cloud SQL, Azure Database for MySQL).
+- A running MySQL server. The connector requires the MySQL JDBC driver 8.0.13 or later (bundled in `ballerinax/mysql.driver`). You can [install MySQL locally](https://dev.mysql.com/downloads/), use Docker (`docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:8`), or use a managed service (AWS RDS, Google Cloud SQL, Azure Database for MySQL).
 - A database user with appropriate privileges for the operations you intend to perform.
 - For CDC: MySQL binary logging must be enabled with `ROW` format (see the CDC setup step below).
 
@@ -78,13 +78,19 @@ The Ballerina MySQL connector requires the MySQL JDBC driver. The simplest appro
 import ballerinax/mysql.driver as _;
 ```
 
+If you are using the CDC listener instead of (or in addition to) the action client, import the CDC driver bundle, which packages the JDBC driver alongside the Debezium engine:
+
+```ballerina
+import ballerinax/mysql.cdc.driver as _;
+```
+
 Alternatively, you can specify a particular driver version in your `Ballerina.toml`:
 
 ```toml
-[[platform.java17.dependency]]
-groupId = "mysql"
-artifactId = "mysql-connector-java"
-version = "8.0.33"
+[[platform.java21.dependency]]
+groupId = "com.mysql"
+artifactId = "mysql-connector-j"
+version = "8.4.0"
 ```
 
-The `ballerinax/mysql.driver` package bundles the latest compatible MySQL JDBC driver. You only need to configure `Ballerina.toml` if you require a specific driver version.
+The `ballerinax/mysql.driver` and `ballerinax/mysql.cdc.driver` packages bundle the latest compatible MySQL JDBC driver. You only need to configure `Ballerina.toml` if you require a specific driver version. For MySQL Connector/J 8.0.30 and earlier, use the legacy coordinates `groupId = "mysql"` and `artifactId = "mysql-connector-java"`.
