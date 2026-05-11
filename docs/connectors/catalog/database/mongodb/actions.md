@@ -9,8 +9,10 @@ The `ballerinax/mongodb` package exposes the following clients:
 | Client | Purpose |
 |--------|---------|
 | [`Client`](#client) | Top-level client for connecting to MongoDB, listing databases, and obtaining Database references. |
-| [`Database`](#database) | Represents a MongoDB database — manage collections and drop the database. |
+| [`Database`](#database) | Represents a MongoDB database. Manage collections and drop the database. |
 | [`Collection`](#collection) | Document CRUD, queries, aggregation pipelines, distinct values, and index management. |
+
+> **Note on error types**: All operations return errors as `mongodb:Error`, a union of `mongodb:DatabaseError`, `mongodb:ApplicationError`, and Ballerina's built-in `error`. `mongodb:DatabaseError` carries an additional `mongoDBExceptionType` detail field for command-level failures.
 
 ---
 
@@ -46,7 +48,7 @@ mongodb:Client mongoClient = check new ({
 
 Lists all database names in the MongoDB server.
 
-Returns: `string[]|error`
+Returns: `string[]|mongodb:Error`
 
 Sample code:
 
@@ -73,7 +75,7 @@ Parameters:
 |------|------|----------|-------------|
 | `databaseName` | `string` | Yes | Name of the database to retrieve. |
 
-Returns: `mongodb:Database|error`
+Returns: `mongodb:Database|mongodb:Error`
 
 Sample code:
 
@@ -88,7 +90,7 @@ mongodb:Database moviesDb = check mongoClient->getDatabase("movies");
 
 Closes the MongoDB client connection. Use a single client instance for the application lifetime.
 
-Returns: `error?`
+Returns: `mongodb:Error?`
 
 Sample code:
 
@@ -102,12 +104,11 @@ check mongoClient->close();
 
 ## Database
 
-Represents a MongoDB database — manage collections and drop the database.
+Represents a MongoDB database. Manage collections and drop the database.
 
 ### Configuration
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
+> `Database` has no direct configuration. Instances are obtained via `Client->getDatabase()`.
 
 ### Initializing the client
 
@@ -130,7 +131,7 @@ mongodb:Database moviesDb = check mongoClient->getDatabase("movies");
 
 Lists all collection names in the database.
 
-Returns: `string[]|error`
+Returns: `string[]|mongodb:Error`
 
 Sample code:
 
@@ -157,7 +158,7 @@ Parameters:
 |------|------|----------|-------------|
 | `collectionName` | `string` | Yes | Name of the collection to create. |
 
-Returns: `error?`
+Returns: `mongodb:Error?`
 
 Sample code:
 
@@ -178,7 +179,7 @@ Parameters:
 |------|------|----------|-------------|
 | `collectionName` | `string` | Yes | Name of the collection to retrieve. |
 
-Returns: `mongodb:Collection|error`
+Returns: `mongodb:Collection|mongodb:Error`
 
 Sample code:
 
@@ -195,7 +196,7 @@ mongodb:Collection moviesCollection = check moviesDb->getCollection("movies");
 
 Drops the entire database and all its collections.
 
-Returns: `error?`
+Returns: `mongodb:Error?`
 
 Sample code:
 
@@ -213,8 +214,7 @@ Document CRUD, queries, aggregation pipelines, distinct values, and index manage
 
 ### Configuration
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
+> `Collection` has no direct configuration. Instances are obtained via `Database->getCollection()`.
 
 ### Initializing the client
 
@@ -245,7 +245,7 @@ Parameters:
 | `document` | `record {\|anydata...;\|}` | Yes | The document to insert. |
 | `options` | `InsertOneOptions` | No | Insert options (comment, bypassDocumentValidation). |
 
-Returns: `error?`
+Returns: `mongodb:Error?`
 
 Sample code:
 
@@ -271,7 +271,7 @@ Parameters:
 | `documents` | `record {\|anydata...;\|}[]` | Yes | Array of documents to insert. |
 | `options` | `InsertManyOptions` | No | Insert options (comment, bypassDocumentValidation, ordered). |
 
-Returns: `error?`
+Returns: `mongodb:Error?`
 
 Sample code:
 
@@ -301,7 +301,7 @@ Parameters:
 | `projection` | `map<json>?` | No | Projection document to include/exclude fields. |
 | `targetType` | `typedesc<record {\|anydata...;\|}>` | No | Expected record type for results (inferred from context). |
 
-Returns: `stream<targetType, error?>|error`
+Returns: `stream<targetType, error?>|mongodb:Error`
 
 Sample code:
 
@@ -338,7 +338,7 @@ Parameters:
 | `projection` | `map<json>?` | No | Projection document to include/exclude fields. |
 | `targetType` | `typedesc<record {\|anydata...;\|}>` | No | Expected record type (inferred from context). |
 
-Returns: `targetType|error?`
+Returns: `targetType|mongodb:Error?`
 
 Sample code:
 
@@ -366,7 +366,7 @@ Parameters:
 | `filter` | `map<json>` | No | Query filter document. Defaults to `{}` (count all). |
 | `options` | `CountOptions` | No | Options for limit, skip, maxTimeMS, and hint. |
 
-Returns: `int|error`
+Returns: `int|mongodb:Error`
 
 Sample code:
 
@@ -395,7 +395,7 @@ Parameters:
 | `filter` | `map<json>` | No | Query filter document. Defaults to `{}` (all documents). |
 | `targetType` | `typedesc<anydata>` | No | Type for distinct values (inferred from context). |
 
-Returns: `stream<targetType, error?>|error`
+Returns: `stream<targetType, error?>|mongodb:Error`
 
 Sample code:
 
@@ -425,9 +425,9 @@ Parameters:
 |------|------|----------|-------------|
 | `filter` | `map<json>` | Yes | Filter to match the document to update. |
 | `update` | `Update` | Yes | Update operators record (`set`, `unset`, `inc`, `mul`, `rename`, etc.). |
-| `options` | `UpdateOptions` | No | Options for upsert, bypassDocumentValidation, comment, and hint. |
+| `options` | `UpdateOptions` | No | Options for upsert, bypassDocumentValidation, comment, hint, and hintString. |
 
-Returns: `UpdateResult|error`
+Returns: `UpdateResult|mongodb:Error`
 
 Sample code:
 
@@ -441,8 +441,10 @@ mongodb:UpdateResult result = check moviesCollection->updateOne(
 Sample response:
 
 ```ballerina
-{"matchedCount": 1, "modifiedCount": 1, "upsertedId": null}
+{"matchedCount": 1, "modifiedCount": 1}
 ```
+
+**Note:** The `upsertedId` field appears in the response only when the operation performs an upsert (`upsert: true` is set in `UpdateOptions` and a new document is inserted as a result). For non-upsert calls like the sample above, the field is omitted from the result entirely.
 
 </details>
 
@@ -457,9 +459,9 @@ Parameters:
 |------|------|----------|-------------|
 | `filter` | `map<json>` | Yes | Filter to match documents to update. |
 | `update` | `Update` | Yes | Update operators record. |
-| `options` | `UpdateOptions` | No | Options for upsert, bypassDocumentValidation, comment, and hint. |
+| `options` | `UpdateOptions` | No | Options for upsert, bypassDocumentValidation, comment, hint, and hintString. |
 
-Returns: `UpdateResult|error`
+Returns: `UpdateResult|mongodb:Error`
 
 Sample code:
 
@@ -473,8 +475,10 @@ mongodb:UpdateResult result = check moviesCollection->updateMany(
 Sample response:
 
 ```ballerina
-{"matchedCount": 3, "modifiedCount": 3, "upsertedId": null}
+{"matchedCount": 3, "modifiedCount": 3}
 ```
+
+**Note:** The `upsertedId` field appears in the response only when the operation performs an upsert. For non-upsert calls like the sample above, the field is omitted from the result entirely.
 
 </details>
 
@@ -491,7 +495,7 @@ Parameters:
 |------|------|----------|-------------|
 | `filter` | `map<json>` | Yes | Filter to match the document to delete. |
 
-Returns: `DeleteResult|error`
+Returns: `DeleteResult|mongodb:Error`
 
 Sample code:
 
@@ -518,7 +522,7 @@ Parameters:
 |------|------|----------|-------------|
 | `filter` | `string\|map<json>` | Yes | Filter for documents to delete. |
 
-Returns: `DeleteResult|error`
+Returns: `DeleteResult|mongodb:Error`
 
 Sample code:
 
@@ -548,7 +552,7 @@ Parameters:
 | `pipeline` | `map<json>[]` | Yes | Array of aggregation pipeline stage documents. |
 | `targetType` | `typedesc<anydata>` | No | Expected result type (inferred from context). |
 
-Returns: `stream<targetType, error?>|error`
+Returns: `stream<targetType, error?>|mongodb:Error`
 
 Sample code:
 
@@ -587,7 +591,7 @@ Parameters:
 | `keys` | `map<json>` | Yes | Index key specification (field name to direction, e.g. `{"title": 1}` for ascending). |
 | `options` | `CreateIndexOptions` | No | Index options (unique, sparse, name, expireAfterSeconds, etc.). |
 
-Returns: `error?`
+Returns: `mongodb:Error?`
 
 Sample code:
 
@@ -602,7 +606,7 @@ check moviesCollection->createIndex({"title": 1}, {unique: true, name: "title_un
 
 Lists all indexes on the collection.
 
-Returns: `stream<Index, error?>|error`
+Returns: `stream<Index, error?>|mongodb:Error`
 
 Sample code:
 
@@ -630,7 +634,7 @@ Parameters:
 |------|------|----------|-------------|
 | `indexName` | `string` | Yes | Name of the index to drop. |
 
-Returns: `error?`
+Returns: `mongodb:Error?`
 
 Sample code:
 
@@ -645,7 +649,7 @@ check moviesCollection->dropIndex("title_unique_idx");
 
 Drops all indexes on the collection except the default `_id` index.
 
-Returns: `error?`
+Returns: `mongodb:Error?`
 
 Sample code:
 
@@ -658,11 +662,26 @@ check moviesCollection->dropIndexes();
 #### Collection operations
 
 <details>
+<summary>name</summary>
+
+Returns the name of the collection. This is not a remote method, it does not invoke a network call.
+
+Returns: `string`
+
+Sample code:
+
+```ballerina
+string collectionName = moviesCollection.name();
+```
+
+</details>
+
+<details>
 <summary>drop</summary>
 
 Drops the entire collection from the database.
 
-Returns: `error?`
+Returns: `mongodb:Error?`
 
 Sample code:
 
@@ -671,3 +690,208 @@ check moviesCollection->drop();
 ```
 
 </details>
+
+---
+
+## Supporting types
+
+### `ConnectionParameters`
+
+Structured connection parameters used in `ConnectionConfig.connection`.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `serverAddress` | `ServerAddress\|ServerAddress[]` | `{}` | A single server address, or an array for replica sets / sharded clusters. |
+| `auth` | `BasicAuthCredential \| ScramSha1AuthCredential \| ScramSha256AuthCredential \| X509Credential \| GssApiCredential` | `()` | Optional. Authentication credentials — pick the record that matches your server's configured auth mechanism. See [Authentication credentials](#authentication-credentials) below. |
+
+### `ServerAddress`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `host` | `string` | `"localhost"` | MongoDB server hostname or IP. |
+| `port` | `int` | `27017` | MongoDB server port. |
+
+### Authentication credentials
+
+The `auth` field of `ConnectionParameters` accepts one of five records, each tagged with a fixed `authMechanism` constant. Pick the record that matches the auth mechanism configured on your MongoDB server.
+
+#### `BasicAuthCredential` — PLAIN
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `authMechanism` | `AUTH_PLAIN` | `AUTH_PLAIN` | Always `"PLAIN"`. Read-only. |
+| `username` | `string` | Required | Username. |
+| `password` | `string` | Required | Password. |
+| `database` | `string` | Required | Authentication source database (typically `"admin"`). |
+
+#### `ScramSha1AuthCredential` — SCRAM-SHA-1
+
+Same field shape as `BasicAuthCredential`. The `authMechanism` is the constant `AUTH_SCRAM_SHA_1` (`"SCRAM_SHA_1"`).
+
+#### `ScramSha256AuthCredential` — SCRAM-SHA-256
+
+Same field shape as `BasicAuthCredential`. The `authMechanism` is the constant `AUTH_SCRAM_SHA_256` (`"SCRAM_SHA_256"`). This is the default mechanism on modern MongoDB servers.
+
+#### `X509Credential` — MongoDB X.509
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `authMechanism` | `AUTH_MONGODB_X509` | `AUTH_MONGODB_X509` | Always `"MONGODB_X509"`. Read-only. |
+| `username` | `string?` | `()` | Optional username for client-certificate authentication. Omit to use the certificate subject. |
+
+#### `GssApiCredential` — GSSAPI / Kerberos
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `authMechanism` | `AUTH_GSSAPI` | `AUTH_GSSAPI` | Always `"GSSAPI"`. Read-only. |
+| `username` | `string` | Required | Kerberos principal username. |
+| `serviceName` | `string?` | `()` | Override the default service name (`"mongodb"`). |
+
+### `ConnectionProperties`
+
+Optional connection-level settings passed via `ConnectionConfig.options`.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `readConcern` | `ReadConcern?` | `()` | Read concern level (see below). |
+| `writeConcern` | `string?` | `()` | Write concern level (e.g. `"majority"`). |
+| `readPreference` | `string?` | `()` | Read preference for replica sets (e.g. `"secondaryPreferred"`). |
+| `replicaSet` | `string?` | `()` | Replica-set name. The driver uses it to validate that the cluster matches. |
+| `sslEnabled` | `boolean` | `false` | Enable SSL/TLS. Set `secureSocket` together with this when a custom trust chain is needed. |
+| `invalidHostNameAllowed` | `boolean` | `false` | Allow invalid hostnames in TLS handshakes. |
+| `secureSocket` | `SecureSocket?` | `()` | TLS keystore/truststore configuration. Required when `sslEnabled` is `true` and you provide custom certificates. |
+| `retryWrites` | `boolean?` | `()` | Retry writes on transient errors. |
+| `socketTimeout` | `int?` | `()` | Socket timeout in milliseconds. |
+| `connectionTimeout` | `int?` | `()` | Connection timeout in milliseconds. |
+| `maxPoolSize` | `int?` | `()` | Maximum connections in the pool. |
+| `maxIdleTime` | `int?` | `()` | Maximum idle time of a pooled connection (milliseconds). |
+| `maxLifeTime` | `int?` | `()` | Maximum lifetime of a pooled connection (milliseconds). |
+| `minPoolSize` | `int?` | `()` | Minimum pool size. |
+| `localThreshold` | `int?` | `()` | Local-threshold latency for server selection (milliseconds). |
+| `heartbeatFrequency` | `int?` | `()` | Frequency of cluster heartbeats (milliseconds). |
+
+### `SecureSocket`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `trustStore` | `crypto:TrustStore` | Required | Truststore (JKS / PKCS12) holding the CA certificates the client trusts. |
+| `keyStore` | `crypto:KeyStore` | Required | Keystore holding the client certificate (used for X.509 auth or mutual TLS). |
+| `protocol` | `string` | Required | TLS protocol name (e.g. `"TLS"`, `"TLSv1.2"`, `"TLSv1.3"`). |
+
+### `ReadConcern`
+
+A union of the supported read-concern levels:
+
+| Constant | Value | Description |
+|----------|-------|-------------|
+| `LOCAL` | `"local"` | Default. Returns data from the queried node without durability guarantees. |
+| `AVAILABLE` | `"available"` | Like `LOCAL` but more permissive on sharded clusters. |
+| `MAJORITY` | `"majority"` | Returns data acknowledged by a majority of replica-set members. |
+| `LINEARIZABLE` | `"linearizable"` | Returns data reflecting all majority-acknowledged writes that completed before the read. |
+| `SNAPSHOT` | `"snapshot"` | For use within multi-document transactions. |
+
+### `InsertOneOptions`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `comment` | `string?` | `()` | Comment included with the operation in MongoDB logs. |
+| `bypassDocumentValidation` | `boolean` | `false` | Skip server-side schema validation. |
+
+### `InsertManyOptions`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `comment` | `string?` | `()` | Comment included with the operation. |
+| `bypassDocumentValidation` | `boolean` | `false` | Skip server-side schema validation. |
+| `ordered` | `boolean` | `true` | When `true`, insertion stops at the first error; when `false`, attempts every document and reports per-document failures. |
+
+### `FindOptions`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `sort` | `map<json>` | `{}` | Sort specification (e.g. `{"year": -1}`). |
+| `limit` | `int?` | `()` | Maximum number of documents to return. |
+| `batchSize` | `int?` | `()` | Cursor batch size. |
+| `skip` | `int?` | `()` | Number of documents to skip. |
+
+### `CountOptions`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `limit` | `int?` | `()` | Maximum number of documents to count. |
+| `skip` | `int?` | `()` | Number of documents to skip before counting. |
+| `maxTimeMS` | `int?` | `()` | Maximum time the operation can run, in milliseconds. |
+| `hint` | `string?` | `()` | Hint as a JSON string indicating which index to use. |
+
+### `CreateIndexOptions`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `background` | `boolean?` | `()` | Build the index in the background (legacy MongoDB). |
+| `unique` | `boolean?` | `()` | Enforce uniqueness on the indexed fields. |
+| `name` | `string?` | `()` | Custom index name. |
+| `sparse` | `boolean?` | `()` | Index only documents where the indexed field exists. |
+| `expireAfterSeconds` | `int?` | `()` | TTL on documents in the collection, creates a TTL index. |
+| `version` | `int?` | `()` | Index version number. |
+| `weights` | `map<json>?` | `()` | Per-field weights for text indexes. |
+| `defaultLanguage` | `string?` | `()` | Default language for text indexes. |
+| `languageOverride` | `string?` | `()` | Field name that overrides the default language per document. |
+| `textVersion` | `int?` | `()` | Text-index version. |
+| `sphereVersion` | `int?` | `()` | 2dsphere-index version. |
+| `bits` | `int?` | `()` | 2d-index geohash precision. |
+| `min` | `float?` | `()` | 2d-index minimum boundary. |
+| `max` | `float?` | `()` | 2d-index maximum boundary. |
+| `partialFilterExpression` | `map<json>` | `{}` | Filter expression for partial indexes. |
+| `hidden` | `boolean?` | `()` | Hide the index from the query planner. |
+
+### `UpdateOptions`
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `upsert` | `boolean` | `false` | Insert a new document if no match is found. |
+| `bypassDocumentValidation` | `boolean` | `false` | Skip server-side schema validation. |
+| `comment` | `string?` | `()` | Comment included with the operation. |
+| `hint` | `map<json>?` | `()` | Hint as a document indicating which index to use. |
+| `hintString` | `string?` | `()` | Hint as a string indicating which index to use. |
+
+### `Update`
+
+A record where each field corresponds to a MongoDB update operator. The connector adds the leading `$` to each operator name automatically. Write `set`, the wire payload contains `$set`. All fields are optional; the record is **open**, so any additional MongoDB update operator can be passed and will likewise receive the `$` prefix.
+
+| Field | MongoDB operator | Description |
+|-------|------------------|-------------|
+| `set` | `$set` | Set field values. |
+| `unset` | `$unset` | Remove fields. |
+| `inc` | `$inc` | Increment numeric values. |
+| `mul` | `$mul` | Multiply numeric values. |
+| `min` | `$min` | Update only if the new value is less than the existing value. |
+| `max` | `$max` | Update only if the new value is greater than the existing value. |
+| `rename` | `$rename` | Rename a field. |
+| `currentDate` | `$currentDate` | Set a field to the current date or timestamp. |
+| `setOnInsert` | `$setOnInsert` | Set a field only when the operation results in an insert (used with `upsert: true`). |
+
+### `UpdateResult`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `matchedCount` | `int` | Number of documents matched by the filter. |
+| `modifiedCount` | `int` | Number of documents whose contents actually changed. |
+| `upsertedId` | `string?` | _Optional._ Set only when an upsert occurred and a new `_id` was assigned. Absent from the result otherwise. |
+
+### `DeleteResult`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `deletedCount` | `int` | Number of documents deleted. |
+| `acknowledged` | `boolean` | Whether the operation was acknowledged by the server. |
+
+### `Index`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ns` | `string` | Index namespace (`<database>.<collection>`). |
+| `v` | `int` | Index version. |
+| `name` | `string` | Index name. |
+| `key` | `map<json>` | Index key specification. |
+
+`Index` is an open record. Servers may include additional fields (`unique`, `sparse`, `weights`, etc.) depending on the index type.

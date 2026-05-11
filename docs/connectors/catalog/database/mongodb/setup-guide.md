@@ -41,7 +41,7 @@ This guide walks you through setting up a MongoDB instance and obtaining the con
 1. Connect to MongoDB using `mongosh`.
 2. Switch to the `admin` database and create a user:
 
-    ```
+    ```javascript
     use admin
     db.createUser({
       user: "myUser",
@@ -73,7 +73,7 @@ Allowing access from all IP addresses (0.0.0.0/0) is suitable for development on
 2. Select **Drivers** as the connection method.
 3. Copy the connection string. It looks like:
 
-    ```
+    ```text
     mongodb+srv://<username>:<password>@<cluster-host>/?retryWrites=true&w=majority
     ```
 
@@ -83,13 +83,13 @@ Allowing access from all IP addresses (0.0.0.0/0) is suitable for development on
 
 The default connection string is:
 
-```
+```text
 mongodb://localhost:27017
 ```
 
 If authentication is enabled:
 
-```
+```text
 mongodb://myUser:myPassword@localhost:27017/?authSource=admin
 ```
 
