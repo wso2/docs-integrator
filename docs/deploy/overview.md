@@ -26,7 +26,7 @@ WSO2 Integrator supports multiple deployment targets. Choose the one that fits y
 - **[Environments](./environments.md)** — Manage dev, staging, and production environment configurations.
 - **[Managing configurations](./managing-configurations.md)** — Externalize and manage runtime configuration values.
 - **[Scaling and high availability](./scaling-high-availability.md)** — Design your deployment for resilience and scale.
-- **[Capacity planning](./capacity-planning/index.md)** — Estimate resource requirements and review performance reports.
+- **[Capacity planning](../deploy-operate/capacity-planning/overview.md)** — Estimate resource requirements and plan deployment sizing.
 
 ## CI/CD
 

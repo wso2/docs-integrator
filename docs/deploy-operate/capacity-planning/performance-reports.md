@@ -59,7 +59,7 @@ service /api on new http:Listener(9090) {
 | 200 | 8,800 | 23 | 40 | 55 | 0.00% |
 | 500 | 10,500 | 48 | 80 | 115 | 0.02% |
 
-## Scenario 2: Content-Based routing
+## Scenario 2: Content-based routing
 
 Route requests to different backends based on payload content.
 
@@ -185,6 +185,6 @@ All benchmarks follow this methodology:
 
 ## What's next
 
-- [Capacity Planning](capacity-planning.md) -- Use these results for sizing your deployments
-- [Scaling & High Availability](../deploy/scaling-high-availability.md) -- Scale based on throughput requirements
-- [GraalVM Native Images](../deploy/graalvm-native-images.md) -- Build native images for lower resource usage
+- [Overview and sizing guidelines](overview.md) — Use these results for sizing your deployments
+- [Scaling and high availability](../deploy/scaling-high-availability.md) — Scale based on throughput requirements
+- [GraalVM native images](../deploy/graalvm-native-images.md) — Build native images for lower resource usage

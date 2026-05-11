@@ -63,5 +63,5 @@ Harden your integrations for production:
 
 ## Capacity planning
 
-- **[Overview and sizing guidelines](capacity-planning/capacity-planning.md)** — Right-size your deployment
-- **[Performance Reports](capacity-planning/performance-reports.md)** — Benchmarks per scenario
+- **[Overview and sizing guidelines](capacity-planning/overview.md)** — Right-size your deployment
+- **[Performance reports](capacity-planning/performance-reports.md)** — Benchmarks per scenario
