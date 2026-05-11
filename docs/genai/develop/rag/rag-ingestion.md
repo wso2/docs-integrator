@@ -8,7 +8,7 @@ The ingestion pipeline converts raw documents into vectors that the RAG query pi
 
 This page covers building the ingestion pipeline in the WSO2 Integrator: creating an automation, wiring up a data loader, a knowledge base, and running the integration.
 
-> For retrieval and query, see RAG Query.
+> For retrieval and query, see [RAG Query](rag-query.md).
 
 ---
 
@@ -186,7 +186,7 @@ See [Knowledge Bases — Delete By Filter](/docs/genai/develop/components/knowle
 
 ## What's next
 
-- **RAG Query** — retrieve chunks at runtime and generate grounded responses.
+- **[RAG Query](rag-query.md)** — retrieve chunks at runtime and generate grounded responses.
 - **[Knowledge Bases](/docs/genai/develop/components/knowledge-bases)** — ingest, retrieve, and delete-by-filter reference.
 - **[Vector Stores](/docs/genai/develop/components/vector-stores)** — picking and configuring a production store.
 - **[Embedding Providers](/docs/genai/develop/components/embedding-providers)** — available providers and dimension requirements.
