@@ -20,9 +20,9 @@ Discord REST API v10 — messages, channels, guilds, members, roles, webhooks, c
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `ApiKeysConfig\|OAuth2ClientCredentialsGrantConfig\|http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration. Use `ApiKeysConfig` for bot token, or an OAuth2 config for OAuth2 flows. |
+| `auth` | `ApiKeysConfig\|OAuth2ClientCredentialsGrantConfig\|BearerTokenConfig\|OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration. Use `ApiKeysConfig` for bot token, or an OAuth2 config for OAuth2 flows. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
-| `timeout` | `decimal` | `60` | Request timeout in seconds. |
+| `timeout` | `decimal` | `30` | Request timeout in seconds. |
 | `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
 | `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
 | `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
@@ -32,11 +32,11 @@ Discord REST API v10 — messages, channels, guilds, members, roles, webhooks, c
 ```ballerina
 import ballerinax/discord;
 
-configurable string token = ?;
+configurable string botToken = ?;
 
 discord:Client discord = check new ({
     auth: {
-        token: token
+        authorization: string `Bot ${botToken}`
     }
 });
 ```
@@ -55,7 +55,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `channelId` | `string` | Yes | The ID of the channel to send the message to. |
-| `payload` | `channel_id_messages_body` | Yes | Message content, embeds, attachments, and other message fields. |
+| `payload` | `ChannelIdMessagesBody` | Yes | Message content, embeds, attachments, and other message fields. |
 
 Returns: `MessageResponse|error`
 
@@ -63,7 +63,7 @@ Sample code:
 
 ```ballerina
 discord:MessageResponse message = check discord->/channels/["1234567890"]/messages.post(
-    {Content-Type: "application/x-www-form-urlencoded"},
+    {contentType: "application/x-www-form-urlencoded"},
     {content: "Hello from Ballerina!"}
 );
 ```
@@ -71,7 +71,7 @@ discord:MessageResponse message = check discord->/channels/["1234567890"]/messag
 Sample response:
 
 ```ballerina
-{"id": "1199876543210", "channel_id": "1234567890", "content": "Hello from Ballerina!", "author": {"id": "9876543210", "username": "BallerinaBot", "discriminator": "0001"}, "timestamp": "2024-12-01T10:30:00.000000+00:00", "edited_timestamp": null, "tts": false, "mention_everyone": false, "pinned": false, "type": 0}
+{"id": "1199876543210", "channelId": "1234567890", "content": "Hello from Ballerina!", "author": {"id": "9876543210", "username": "BallerinaBot", "discriminator": "0001"}, "timestamp": "2024-12-01T10:30:00.000000+00:00", "editedTimestamp": null, "tts": false, "mentionEveryone": false, "pinned": false, "type": 0}
 ```
 
 </details>
@@ -99,7 +99,7 @@ discord:MessageResponse[] messages = check discord->/channels/["1234567890"]/mes
 Sample response:
 
 ```ballerina
-[{"id": "1199876543210", "channel_id": "1234567890", "content": "Hello!", "author": {"id": "9876543210", "username": "BallerinaBot", "discriminator": "0001"}, "timestamp": "2024-12-01T10:30:00.000000+00:00", "type": 0}]
+[{"id": "1199876543210", "channelId": "1234567890", "content": "Hello!", "author": {"id": "9876543210", "username": "BallerinaBot", "discriminator": "0001"}, "timestamp": "2024-12-01T10:30:00.000000+00:00", "type": 0}]
 ```
 
 </details>
@@ -127,7 +127,7 @@ discord:MessageResponse message = check discord->/channels/["1234567890"]/messag
 Sample response:
 
 ```ballerina
-{"id": "1199876543210", "channel_id": "1234567890", "content": "Hello!", "author": {"id": "9876543210", "username": "BallerinaBot", "discriminator": "0001"}, "timestamp": "2024-12-01T10:30:00.000000+00:00", "type": 0}
+{"id": "1199876543210", "channelId": "1234567890", "content": "Hello!", "author": {"id": "9876543210", "username": "BallerinaBot", "discriminator": "0001"}, "timestamp": "2024-12-01T10:30:00.000000+00:00", "type": 0}
 ```
 
 </details>
@@ -143,7 +143,7 @@ Parameters:
 |------|------|----------|-------------|
 | `channelId` | `string` | Yes | The ID of the channel. |
 | `messageId` | `string` | Yes | The ID of the message to edit. |
-| `payload` | `messages_message_id_body` | Yes | Updated message content and fields. |
+| `payload` | `MessagesmessageIdBody` | Yes | Updated message content and fields. |
 
 Returns: `MessageResponse|error`
 
@@ -151,7 +151,7 @@ Sample code:
 
 ```ballerina
 discord:MessageResponse updated = check discord->/channels/["1234567890"]/messages/["1199876543210"].patch(
-    {},
+    {contentType: "application/x-www-form-urlencoded"},
     {content: "Updated message content"}
 );
 ```
@@ -159,7 +159,7 @@ discord:MessageResponse updated = check discord->/channels/["1234567890"]/messag
 Sample response:
 
 ```ballerina
-{"id": "1199876543210", "channel_id": "1234567890", "content": "Updated message content", "edited_timestamp": "2024-12-01T10:35:00.000000+00:00", "type": 0}
+{"id": "1199876543210", "channelId": "1234567890", "content": "Updated message content", "editedTimestamp": "2024-12-01T10:35:00.000000+00:00", "type": 0}
 ```
 
 </details>
@@ -209,7 +209,7 @@ discord:MessageResponse crossposted = check discord->/channels/["1234567890"]/me
 Sample response:
 
 ```ballerina
-{"id": "1199876543210", "channel_id": "1234567890", "content": "Announcement!", "flags": 1, "type": 0}
+{"id": "1199876543210", "channelId": "1234567890", "content": "Announcement!", "flags": 1, "type": 0}
 ```
 
 </details>
@@ -224,7 +224,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `channelId` | `string` | Yes | The ID of the channel. |
-| `payload` | `messages_bulk_delete_body` | Yes | Object containing an array of message IDs to delete. |
+| `payload` | `ChannelsMessagesBulkDeleteRequest` | Yes | Object containing an array of message IDs to delete. |
 
 Returns: `error?`
 
@@ -251,18 +251,18 @@ Parameters:
 |------|------|----------|-------------|
 | `channelId` | `string` | Yes | The ID of the channel. |
 
-Returns: `ChannelResponse|error`
+Returns: `InlineResponse2006|error`
 
 Sample code:
 
 ```ballerina
-discord:ChannelResponse channel = check discord->/channels/["1234567890"];
+discord:InlineResponse2006 channel = check discord->/channels/["1234567890"];
 ```
 
 Sample response:
 
 ```ballerina
-{"id": "1234567890", "type": 0, "guild_id": "9876543210", "name": "general", "position": 0, "permission_overwrites": [], "topic": "General discussion", "nsfw": false}
+{"id": "1234567890", "type": 0, "guildId": "9876543210", "name": "general", "position": 0, "permissionOverwrites": [], "topic": "General discussion", "nsfw": false}
 ```
 
 </details>
@@ -277,14 +277,14 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `channelId` | `string` | Yes | The ID of the channel to modify. |
-| `payload` | `channels_channel_id_body` | Yes | Updated channel fields. |
+| `payload` | `ChannelschannelIdBody` | Yes | Updated channel fields. |
 
-Returns: `ChannelResponse|error`
+Returns: `InlineResponse2006|error`
 
 Sample code:
 
 ```ballerina
-discord:ChannelResponse updated = check discord->/channels/["1234567890"].patch({
+discord:InlineResponse2006 updated = check discord->/channels/["1234567890"].patch({
     name: "announcements",
     topic: "Important announcements only"
 });
@@ -293,7 +293,7 @@ discord:ChannelResponse updated = check discord->/channels/["1234567890"].patch(
 Sample response:
 
 ```ballerina
-{"id": "1234567890", "type": 0, "guild_id": "9876543210", "name": "announcements", "topic": "Important announcements only", "position": 0}
+{"id": "1234567890", "type": 0, "guildId": "9876543210", "name": "announcements", "topic": "Important announcements only", "position": 0}
 ```
 
 </details>
@@ -309,18 +309,18 @@ Parameters:
 |------|------|----------|-------------|
 | `channelId` | `string` | Yes | The ID of the channel to delete. |
 
-Returns: `ChannelResponse|error`
+Returns: `InlineResponse2006|error`
 
 Sample code:
 
 ```ballerina
-discord:ChannelResponse deleted = check discord->/channels/["1234567890"].delete();
+discord:InlineResponse2006 deleted = check discord->/channels/["1234567890"].delete();
 ```
 
 Sample response:
 
 ```ballerina
-{"id": "1234567890", "type": 0, "guild_id": "9876543210", "name": "old-channel"}
+{"id": "1234567890", "type": 0, "guildId": "9876543210", "name": "old-channel"}
 ```
 
 </details>
@@ -336,18 +336,18 @@ Parameters:
 |------|------|----------|-------------|
 | `guildId` | `string` | Yes | The ID of the guild. |
 
-Returns: `GuildChannelResponse[]|error`
+Returns: `InlineResponseItems2007[]|error`
 
 Sample code:
 
 ```ballerina
-discord:GuildChannelResponse[] channels = check discord->/guilds/["9876543210"]/channels();
+discord:InlineResponseItems2007[] channels = check discord->/guilds/["9876543210"]/channels();
 ```
 
 Sample response:
 
 ```ballerina
-[{"id": "1234567890", "type": 0, "guild_id": "9876543210", "name": "general", "position": 0}, {"id": "1234567891", "type": 2, "guild_id": "9876543210", "name": "Voice Chat", "position": 1}]
+[{"id": "1234567890", "type": 0, "guildId": "9876543210", "name": "general", "position": 0}, {"id": "1234567891", "type": 2, "guildId": "9876543210", "name": "Voice Chat", "position": 1}]
 ```
 
 </details>
@@ -362,7 +362,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `guildId` | `string` | Yes | The ID of the guild. |
-| `payload` | `guild_id_channels_body` | Yes | Channel creation payload with name, type, topic, and other settings. |
+| `payload` | `CreateGuildChannelRequest` | Yes | Channel creation payload with name, type, topic, and other settings. |
 
 Returns: `GuildChannelResponse|error`
 
@@ -379,7 +379,7 @@ discord:GuildChannelResponse newChannel = check discord->/guilds/["9876543210"]/
 Sample response:
 
 ```ballerina
-{"id": "1234567892", "type": 0, "guild_id": "9876543210", "name": "project-updates", "topic": "Updates on the current project", "position": 5}
+{"id": "1234567892", "type": 0, "guildId": "9876543210", "name": "project-updates", "topic": "Updates on the current project", "position": 5}
 ```
 
 </details>
@@ -410,7 +410,7 @@ discord:GuildResponse guild = check discord->/guilds.post({
 Sample response:
 
 ```ballerina
-{"id": "9876543210", "name": "My New Server", "owner_id": "1111111111", "region": "us-west", "verification_level": 0, "default_message_notifications": 0, "explicit_content_filter": 0}
+{"id": "9876543210", "name": "My New Server", "ownerId": "1111111111", "region": "us-west", "verificationLevel": 0, "defaultMessageNotifications": 0, "explicitContentFilter": 0}
 ```
 
 </details>
@@ -426,18 +426,18 @@ Parameters:
 |------|------|----------|-------------|
 | `guildId` | `string` | Yes | The ID of the guild. |
 
-Returns: `GuildResponse|error`
+Returns: `GuildWithCountsResponse|error`
 
 Sample code:
 
 ```ballerina
-discord:GuildResponse guild = check discord->/guilds/["9876543210"];
+discord:GuildWithCountsResponse guild = check discord->/guilds/["9876543210"];
 ```
 
 Sample response:
 
 ```ballerina
-{"id": "9876543210", "name": "My Server", "owner_id": "1111111111", "member_count": 150, "verification_level": 2, "premium_tier": 1}
+{"id": "9876543210", "name": "My Server", "ownerId": "1111111111", "memberCount": 150, "verificationLevel": 2, "premiumTier": 1}
 ```
 
 </details>
@@ -452,7 +452,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `guildId` | `string` | Yes | The ID of the guild. |
-| `payload` | `guilds_guild_id_body` | Yes | Updated guild fields. |
+| `payload` | `GuildPatchRequestPartial` | Yes | Updated guild fields. |
 
 Returns: `GuildResponse|error`
 
@@ -461,14 +461,14 @@ Sample code:
 ```ballerina
 discord:GuildResponse updated = check discord->/guilds/["9876543210"].patch({
     name: "Renamed Server",
-    verification_level: 2
+    verificationLevel: 2
 });
 ```
 
 Sample response:
 
 ```ballerina
-{"id": "9876543210", "name": "Renamed Server", "verification_level": 2, "owner_id": "1111111111"}
+{"id": "9876543210", "name": "Renamed Server", "verificationLevel": 2, "ownerId": "1111111111"}
 ```
 
 </details>
@@ -516,7 +516,7 @@ discord:GuildPreviewResponse preview = check discord->/guilds/["9876543210"]/pre
 Sample response:
 
 ```ballerina
-{"id": "9876543210", "name": "My Server", "description": "A cool server", "approximate_member_count": 150, "approximate_presence_count": 42, "emojis": [], "stickers": []}
+{"id": "9876543210", "name": "My Server", "description": "A cool server", "approximateMemberCount": 150, "approximatePresenceCount": 42, "emojis": [], "stickers": []}
 ```
 
 </details>
@@ -546,7 +546,7 @@ discord:GuildMemberResponse[] members = check discord->/guilds/["9876543210"]/me
 Sample response:
 
 ```ballerina
-[{"user": {"id": "1111111111", "username": "Alice", "discriminator": "0001"}, "roles": ["2222222222"], "joined_at": "2024-01-15T08:00:00.000000+00:00", "deaf": false, "mute": false}]
+[{"user": {"id": "1111111111", "username": "Alice", "discriminator": "0001"}, "roles": ["2222222222"], "joinedAt": "2024-01-15T08:00:00.000000+00:00", "deaf": false, "mute": false}]
 ```
 
 </details>
@@ -574,7 +574,7 @@ discord:GuildMemberResponse member = check discord->/guilds/["9876543210"]/membe
 Sample response:
 
 ```ballerina
-{"user": {"id": "1111111111", "username": "Alice", "discriminator": "0001"}, "nick": "Ali", "roles": ["2222222222"], "joined_at": "2024-01-15T08:00:00.000000+00:00", "deaf": false, "mute": false}
+{"user": {"id": "1111111111", "username": "Alice", "discriminator": "0001"}, "nick": "Ali", "roles": ["2222222222"], "joinedAt": "2024-01-15T08:00:00.000000+00:00", "deaf": false, "mute": false}
 ```
 
 </details>
@@ -670,7 +670,7 @@ discord:GuildMemberResponse[] results = check discord->/guilds/["9876543210"]/me
 Sample response:
 
 ```ballerina
-[{"user": {"id": "1111111111", "username": "Alice", "discriminator": "0001"}, "nick": "Ali", "roles": ["2222222222"], "joined_at": "2024-01-15T08:00:00.000000+00:00"}]
+[{"user": {"id": "1111111111", "username": "Alice", "discriminator": "0001"}, "nick": "Ali", "roles": ["2222222222"], "joinedAt": "2024-01-15T08:00:00.000000+00:00"}]
 ```
 
 </details>
@@ -714,7 +714,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `guildId` | `string` | Yes | The ID of the guild. |
-| `payload` | `guild_id_roles_body` | Yes | Role creation payload with name, color, permissions, and other settings. |
+| `payload` | `GuildsRolesRequest` | Yes | Role creation payload with name, color, permissions, and other settings. |
 
 Returns: `GuildRoleResponse|error`
 
@@ -748,7 +748,7 @@ Parameters:
 |------|------|----------|-------------|
 | `guildId` | `string` | Yes | The ID of the guild. |
 | `roleId` | `string` | Yes | The ID of the role to modify. |
-| `payload` | `roles_role_id_body` | Yes | Updated role fields. |
+| `payload` | `GuildsRolesRequest` | Yes | Updated role fields. |
 
 Returns: `GuildRoleResponse|error`
 
@@ -840,7 +840,7 @@ discord:UserResponse[] users = check discord->/channels/["1234567890"]/messages/
 Sample response:
 
 ```ballerina
-[{"id": "1111111111", "username": "Alice", "discriminator": "0001", "avatar": "abc123", "bot": false, "flags": 0, "public_flags": 0}]
+[{"id": "1111111111", "username": "Alice", "discriminator": "0001", "avatar": "abc123", "bot": false, "flags": 0, "publicFlags": 0}]
 ```
 
 </details>
@@ -879,7 +879,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `channelId` | `string` | Yes | The ID of the channel. |
-| `payload` | `channel_id_webhooks_body` | Yes | Webhook creation payload with name and optional avatar. |
+| `payload` | `ChannelsWebhooksRequest` | Yes | Webhook creation payload with name and optional avatar. |
 
 Returns: `GuildIncomingWebhookResponse|error`
 
@@ -894,7 +894,7 @@ discord:GuildIncomingWebhookResponse webhook = check discord->/channels/["123456
 Sample response:
 
 ```ballerina
-{"id": "5555555555", "type": 1, "guild_id": "9876543210", "channel_id": "1234567890", "name": "Build Notifications", "token": "webhook-token-here"}
+{"id": "5555555555", "type": 1, "guildId": "9876543210", "channelId": "1234567890", "name": "Build Notifications", "token": "webhook-token-here"}
 ```
 
 </details>
@@ -910,18 +910,18 @@ Parameters:
 |------|------|----------|-------------|
 | `webhookId` | `string` | Yes | The ID of the webhook. |
 
-Returns: `WebhookResponse|error`
+Returns: `InlineResponse2004|error`
 
 Sample code:
 
 ```ballerina
-discord:WebhookResponse webhook = check discord->/webhooks/["5555555555"];
+discord:InlineResponse2004 webhook = check discord->/webhooks/["5555555555"];
 ```
 
 Sample response:
 
 ```ballerina
-{"id": "5555555555", "type": 1, "guild_id": "9876543210", "channel_id": "1234567890", "name": "Build Notifications", "token": "webhook-token-here"}
+{"id": "5555555555", "type": 1, "guildId": "9876543210", "channelId": "1234567890", "name": "Build Notifications", "token": "webhook-token-here"}
 ```
 
 </details>
@@ -937,22 +937,22 @@ Parameters:
 |------|------|----------|-------------|
 | `webhookId` | `string` | Yes | The ID of the webhook. |
 | `webhookToken` | `string` | Yes | The webhook's token. |
-| `payload` | `webhook_id_webhook_token_body` | Yes | Message content, embeds, and other webhook execution fields. |
+| `payload` | `WebhookIdwebhookTokenBody` | Yes | Message content, embeds, and other webhook execution fields. |
 
-Returns: `WebhookResponse|error`
+Returns: `MessageResponse|error?`
 
 Sample code:
 
 ```ballerina
-discord:WebhookResponse res = check discord->/webhooks/["5555555555"]/["webhook-token-here"].post({
-    content: "Build #142 succeeded ✅"
+discord:MessageResponse? res = check discord->/webhooks/["5555555555"]/["webhook-token-here"].post({
+    content: "Build #142 succeeded"
 });
 ```
 
 Sample response:
 
 ```ballerina
-{"id": "5555555555", "type": 1, "guild_id": "9876543210", "channel_id": "1234567890", "name": "Build Notifications"}
+{"id": "5555555555", "type": 1, "guildId": "9876543210", "channelId": "1234567890", "name": "Build Notifications"}
 ```
 
 </details>
@@ -1063,7 +1063,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `guildId` | `string` | Yes | The ID of the guild. |
-| `payload` | `guild_id_scheduledevents_body` | Yes | Scheduled event details including name, start time, privacy level, and entity type. |
+| `payload` | `GuildIdScheduledEventsBody` | Yes | Scheduled event details including name, start time, privacy level, and entity type. |
 
 Returns: `InlineResponse2003|error`
 
@@ -1073,20 +1073,18 @@ Sample code:
 var event = check discord->/guilds/["9876543210"]/scheduled-events.post({
     name: "Community Meeting",
     description: "Join us for our monthly community meeting!",
-    scheduled_start_time: "2024-12-31T23:59:59Z",
-    scheduled_end_time: "2025-01-01T01:00:00Z",
-    privacy_level: 2,
-    entity_type: 3,
-    entity_metadata: {
-        location: "Virtual"
-    }
+    scheduledStartTime: "2024-12-31T23:59:59Z",
+    scheduledEndTime: "2025-01-01T01:00:00Z",
+    privacyLevel: 2,
+    entityType: 3,
+    entityMetadata: { location: "Virtual" }
 });
 ```
 
 Sample response:
 
 ```ballerina
-{"id": "6666666666", "guild_id": "9876543210", "name": "Community Meeting", "description": "Join us for our monthly community meeting!", "scheduled_start_time": "2024-12-31T23:59:59+00:00", "privacy_level": 2, "status": 1, "entity_type": 3}
+{"id": "6666666666", "guildId": "9876543210", "name": "Community Meeting", "description": "Join us for our monthly community meeting!", "scheduledStartTime": "2024-12-31T23:59:59+00:00", "privacyLevel": 2, "status": 1, "entityType": 3}
 ```
 
 </details>
@@ -1113,7 +1111,7 @@ var events = check discord->/guilds/["9876543210"]/scheduled-events;
 Sample response:
 
 ```ballerina
-[{"id": "6666666666", "guild_id": "9876543210", "name": "Community Meeting", "scheduled_start_time": "2024-12-31T23:59:59+00:00", "privacy_level": 2, "status": 1, "entity_type": 3}]
+[{"id": "6666666666", "guildId": "9876543210", "name": "Community Meeting", "scheduledStartTime": "2024-12-31T23:59:59+00:00", "privacyLevel": 2, "status": 1, "entityType": 3}]
 ```
 
 </details>
@@ -1153,7 +1151,7 @@ Parameters:
 |------|------|----------|-------------|
 | `channelId` | `string` | Yes | The ID of the channel. |
 | `messageId` | `string` | Yes | The ID of the message to start the thread from. |
-| `payload` | `message_id_threads_body` | Yes | Thread creation payload with name and optional auto-archive duration. |
+| `payload` | `CreateTextThreadWithMessageRequest` | Yes | Thread creation payload with name and optional auto-archive duration. |
 
 Returns: `ThreadResponse|error`
 
@@ -1168,7 +1166,7 @@ discord:ThreadResponse thread = check discord->/channels/["1234567890"]/messages
 Sample response:
 
 ```ballerina
-{"id": "7777777777", "type": 11, "guild_id": "9876543210", "name": "Discussion Thread", "parent_id": "1234567890", "message_count": 0, "member_count": 1}
+{"id": "7777777777", "type": 11, "guildId": "9876543210", "name": "Discussion Thread", "parentId": "1234567890", "messageCount": 0, "memberCount": 1}
 ```
 
 </details>
@@ -1183,7 +1181,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `channelId` | `string` | Yes | The ID of the channel. |
-| `payload` | `channel_id_threads_body` | Yes | Thread creation payload with name, type, and optional settings. |
+| `payload` | `ChannelIdThreadsBody` | Yes | Thread creation payload with name, type, and optional settings. |
 
 Returns: `CreatedThreadResponse|error`
 
@@ -1199,7 +1197,7 @@ discord:CreatedThreadResponse thread = check discord->/channels/["1234567890"]/t
 Sample response:
 
 ```ballerina
-{"id": "7777777778", "type": 11, "guild_id": "9876543210", "name": "New Discussion", "parent_id": "1234567890", "message_count": 0, "member_count": 1}
+{"id": "7777777778", "type": 11, "guildId": "9876543210", "name": "New Discussion", "parentId": "1234567890", "messageCount": 0, "memberCount": 1}
 ```
 
 </details>
@@ -1226,7 +1224,7 @@ discord:ThreadsResponse activeThreads = check discord->/guilds/["9876543210"]/th
 Sample response:
 
 ```ballerina
-{"threads": [{"id": "7777777777", "type": 11, "name": "Discussion Thread", "parent_id": "1234567890"}], "members": [{"id": "7777777777", "user_id": "1111111111"}], "has_more": false}
+{"threads": [{"id": "7777777777", "type": 11, "name": "Discussion Thread", "parentId": "1234567890"}], "members": [{"id": "7777777777", "userId": "1111111111"}], "hasMore": false}
 ```
 
 </details>
@@ -1255,7 +1253,7 @@ discord:ApplicationCommandResponse[] commands = check discord->/applications/["8
 Sample response:
 
 ```ballerina
-[{"id": "9999999999", "application_id": "8888888888", "name": "ping", "description": "Replies with Pong!", "type": 1, "version": "1"}]
+[{"id": "9999999999", "applicationId": "8888888888", "name": "ping", "description": "Replies with Pong!", "type": 1, "version": "1"}]
 ```
 
 </details>
@@ -1270,7 +1268,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `applicationId` | `string` | Yes | The ID of the application. |
-| `payload` | `application_id_commands_body` | Yes | Command definition with name, description, type, and options. |
+| `payload` | `ApplicationCommandCreateRequest` | Yes | Command definition with name, description, type, and options. |
 
 Returns: `ApplicationCommandResponse|error`
 
@@ -1287,7 +1285,7 @@ discord:ApplicationCommandResponse command = check discord->/applications/["8888
 Sample response:
 
 ```ballerina
-{"id": "9999999998", "application_id": "8888888888", "name": "greet", "description": "Sends a greeting message", "type": 1, "version": "1"}
+{"id": "9999999998", "applicationId": "8888888888", "name": "greet", "description": "Sends a greeting message", "type": 1, "version": "1"}
 ```
 
 </details>
@@ -1332,7 +1330,7 @@ discord:UserPIIResponse me = check discord->/users/'@me;
 Sample response:
 
 ```ballerina
-{"id": "1111111111", "username": "BallerinaBot", "discriminator": "0001", "email": "bot@example.com", "verified": true, "flags": 0, "public_flags": 0}
+{"id": "1111111111", "username": "BallerinaBot", "discriminator": "0001", "email": "bot@example.com", "verified": true, "flags": 0, "publicFlags": 0}
 ```
 
 </details>
@@ -1359,7 +1357,7 @@ discord:UserResponse user = check discord->/users/["1111111111"];
 Sample response:
 
 ```ballerina
-{"id": "1111111111", "username": "Alice", "discriminator": "0001", "avatar": "abc123", "bot": false, "flags": 0, "public_flags": 0}
+{"id": "1111111111", "username": "Alice", "discriminator": "0001", "avatar": "abc123", "bot": false, "flags": 0, "publicFlags": 0}
 ```
 
 </details>
@@ -1398,12 +1396,12 @@ Parameters:
 |------|------|----------|-------------|
 | `code` | `string` | Yes | The invite code. |
 
-Returns: `InviteResponse|error`
+Returns: `InlineResponse2002|error`
 
 Sample code:
 
 ```ballerina
-discord:InviteResponse invite = check discord->/invites/["abc123"];
+discord:InlineResponse2002 invite = check discord->/invites/["abc123"];
 ```
 
 Sample response:
@@ -1425,12 +1423,12 @@ Parameters:
 |------|------|----------|-------------|
 | `code` | `string` | Yes | The invite code to revoke. |
 
-Returns: `error?`
+Returns: `InlineResponse2002|error`
 
 Sample code:
 
 ```ballerina
-check discord->/invites/["abc123"].delete();
+discord:InlineResponse2002 invite = check discord->/invites/["abc123"].delete();
 ```
 
 </details>
@@ -1459,7 +1457,7 @@ discord:MessageResponse[] pinned = check discord->/channels/["1234567890"]/pins;
 Sample response:
 
 ```ballerina
-[{"id": "1199876543210", "channel_id": "1234567890", "content": "Important announcement", "pinned": true, "type": 0}]
+[{"id": "1199876543210", "channelId": "1234567890", "content": "Important announcement", "pinned": true, "type": 0}]
 ```
 
 </details>
