@@ -8,24 +8,33 @@ The `ballerinax/github` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Provides access to the GitHub REST API (241 resource functions) for managing repositories, issues, pull requests, organizations, users, and more. |
+| [`Client`](#client) | Provides access to the GitHub REST API (903 resource functions) for managing repositories, issues, pull requests, organizations, users, and more. |
 
 ---
 
 ## Client
 
-Provides access to the GitHub REST API (241 resource functions) for managing repositories, issues, pull requests, organizations, users, and more.
+Provides access to the GitHub REST API (903 resource functions) for managing repositories, issues, pull requests, organizations, users, and more.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:BearerTokenConfig\|http:OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration. Typically a Personal Access Token supplied as a bearer token (e.g., `{token: ""}`). |
-| `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
-| `timeout` | `decimal` | `60` | Request timeout in seconds. |
+| `auth` | `http:BearerTokenConfig` | Required | Authentication configuration. Supply a Personal Access Token (PAT) as a bearer token: `{token: ""}`. |
+| `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version used by the client. |
+| `http1Settings` | `http:ClientHttp1Settings` | `()` | HTTP/1.x protocol settings including keep-alive and chunking behavior. |
+| `http2Settings` | `http:ClientHttp2Settings` | `()` | HTTP/2 protocol settings. |
+| `timeout` | `decimal` | `60` | Request timeout in seconds before the connection is closed. |
+| `forwarded` | `string` | `"disable"` | Controls whether to set `forwarded` or `x-forwarded` headers. |
+| `poolConfig` | `http:PoolConfiguration` | `()` | Connection pool configuration for request pooling. |
+| `cache` | `http:CacheConfig` | `()` | HTTP caching configuration. |
+| `compression` | `http:Compression` | `COMPRESSION_AUTO` | Compression handling for `accept-encoding` headers. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker configuration for fault tolerance. |
 | `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
+| `responseLimits` | `http:ResponseLimitConfigs` | `()` | Inbound response size limits. |
 | `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
 | `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `validation` | `boolean` | `true` | When enabled, validates response payloads against declared schemas using the `constraint` package. |
 
 ### Initializing the client
 

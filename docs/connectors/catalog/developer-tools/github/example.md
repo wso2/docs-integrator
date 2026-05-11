@@ -1,9 +1,8 @@
+---
+title: Examples
+---
+
 # Example
-
-## Table of Contents
-
-- [GitHub Example](#github-example)
-- [GitHub Trigger Example](#github-trigger-example)
 
 ## GitHub Example
 
@@ -37,26 +36,44 @@ flowchart LR
 
 Select **+ Add Artifact** on the Integration Design canvas. In the **Artifacts** panel, scroll to **Other Artifacts** and select **Connection**. The connector search palette appears with a search box and a grid of pre-built connectors.
 
-![GitHub connector palette open with search field before any selection](/img/connectors/catalog/developer-tools/github/github_screenshot_01_palette.png)
+<ThemedImage
+    alt="GitHub connector palette open with search field before any selection"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_01_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_01_palette.png'),
+    }}
+/>
 
 ### Configuring the GitHub connection
 
-#### Step 2: Fill in the connection parameters
+### Step 2: Fill in the connection parameters
 
 Enter `github` in the search box to filter results, then select the **GitHub** connector card. In the connection configuration form, bind the connection fields to configurable variables:
 
 - **auth.token** : Personal access token used to authenticate GitHub API requests
 - **Connection Name** : Logical name for this connection (`githubClient`)
 
-![GitHub connection form fully filled with all parameters before saving](/img/connectors/catalog/developer-tools/github/github_screenshot_02_connection_form.png)
+<ThemedImage
+    alt="GitHub connection form fully filled with all parameters before saving"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_02_connection_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_02_connection_form.png'),
+    }}
+/>
 
-#### Step 3: Save the connection
+### Step 3: Save the connection
 
 Select **Save Connection**. The form closes and the canvas reloads, showing the `githubClient` node.
 
-![GitHub Connections panel showing githubClient entry after saving](/img/connectors/catalog/developer-tools/github/github_screenshot_03_connections_list.png)
+<ThemedImage
+    alt="GitHub Connections panel showing githubClient entry after saving"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_03_connections_list.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_03_connections_list.png'),
+    }}
+/>
 
-#### Step 4: Set actual values for your configurables
+### Step 4: Set actual values for your configurables
 
 1. In the left panel, select **Configurations**.
 2. Set a value for each configurable listed below.
@@ -64,6 +81,7 @@ Select **Save Connection**. The form closes and the canvas reloads, showing the 
 - **githubAuthToken** (string) : Your GitHub personal access token with `repo` scope
 
 ## Configuring the GitHub create an issue operation
+
 ### Step 5: Add an automation entry point
 
 1. Select **+ Add Artifact** on the Integration Design canvas.
@@ -76,7 +94,13 @@ WSO2 Integrator creates a `main` automation under **Entry Points** and opens the
 
 On the Automation canvas, select the **+** between **Start** and **Error Handler** to open the node panel. Under the **Connections** section, expand `githubClient` to reveal all available operations.
 
-![GitHub connection node expanded showing all available operations before selection](/img/connectors/catalog/developer-tools/github/github_screenshot_04_operations_panel.png)
+<ThemedImage
+    alt="GitHub connection node expanded showing all available operations before selection"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_04_operations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_04_operations_panel.png'),
+    }}
+/>
 
 ### Step 7: Configure the create an issue operation
 
@@ -91,9 +115,21 @@ Select **Create an issue** from the operations list and fill in all required fie
 
 Select **Save** to apply the configuration.
 
-![GitHub Create an issue operation configuration filled with all values](/img/connectors/catalog/developer-tools/github/github_screenshot_05_operation_values.png)
+<ThemedImage
+    alt="GitHub Create an issue operation configuration filled with all values"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_05_operation_values.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_05_operation_values.png'),
+    }}
+/>
 
-![Completed GitHub automation flow](/img/connectors/catalog/developer-tools/github/github_screenshot_06_completed_flow.png)
+<ThemedImage
+    alt="Completed GitHub automation flow"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_06_completed_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_screenshot_06_completed_flow.png'),
+    }}
+/>
 
 ### Try it yourself
 
@@ -115,11 +151,13 @@ The `GitHub` connector provides practical examples illustrating usage in various
 
 4. [Star Ballerina-Platform Repositories](https://github.com/ballerina-platform/module-ballerinax-github/tree/master/examples/star-ballerina-repositories) - Fetch all repositories under the `ballerina-platform` organization on GitHub and star each of them
 
----
 ## GitHub Trigger Example
+
 ### What you'll build
 
 This integration listens for GitHub issue events using the `ballerinax/trigger.github` package and the `IssuesService` event channel. When a GitHub user opens, closes, or modifies an issue, GitHub sends a webhook POST request to the listener, which routes the event to the appropriate handler. The `onOpened` handler receives the `github:IssuesEvent` payload and logs it as a JSON string using `log:printInfo`.
+
+This example uses the `ballerinax/trigger.github` package, which is separate from the `ballerinax/github` REST API connector. Use `ballerinax/github` for calling GitHub APIs; use `ballerinax/trigger.github` for receiving GitHub webhook events.
 
 ### Architecture
 
@@ -141,60 +179,90 @@ flowchart LR
 
 ### Adding the GitHub trigger
 
-#### Step 1: Open the artifacts palette
+### Step 1: Open the artifacts palette
 
 Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **GitHub** trigger card.
 
-![Artifacts palette open showing the Event Integration category with the GitHub trigger card highlighted, before clicking the card](/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_01_artifact_palette.png)
+<ThemedImage
+    alt="Artifacts palette open showing the Event Integration category with the GitHub trigger card highlighted, before clicking the card"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_01_artifact_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_01_artifact_palette.png'),
+    }}
+/>
 
 ### Configuring the GitHub listener
 
-#### Step 2: Bind listener parameters to configurable variables
+### Step 2: Bind listener parameters to configurable variables
 
 Select the **GitHub** card to open the **Create GitHub Event Integration** form. The **Event Channel** dropdown is pre-set to `IssuesService`. Bind the two required fields to configurable variables:
 
 - **webhookSecret** : Secret token used to validate incoming GitHub webhook requests
 - **listenerPort** : Port on which the webhook listener accepts incoming HTTP requests from GitHub
 
-![GitHub trigger configuration form fully filled with Event Channel set to IssuesService, Webhook Secret bound to webhookSecret configurable variable, and Webhook Listener Port bound to listenerPort configurable variable, with Create enabled](/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_02_trigger_config_form.png)
+<ThemedImage
+    alt="GitHub trigger configuration form fully filled with Event Channel set to IssuesService, Webhook Secret bound to webhookSecret configurable variable, and Webhook Listener Port bound to listenerPort configurable variable, with Create enabled"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_02_trigger_config_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_02_trigger_config_form.png'),
+    }}
+/>
 
-#### Step 3: Set actual values for your configurations
+### Step 3: Set actual values for your configurations
 
 In the left panel, select **Configurations** to open the Configurations panel. Set a value for each configuration listed below:
 
 - **webhookSecret** (string) : Secret token matching the value configured in your GitHub repository's webhook settings
 - **listenerPort** (int) : Port number on which the webhook listener will accept incoming requests from GitHub
 
-![Configurations panel open showing webhookSecret (string, Required) and listenerPort (int, Required) with empty value fields](/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_03_configurations_panel.png)
+<ThemedImage
+    alt="Configurations panel open showing webhookSecret (string, Required) and listenerPort (int, Required) with empty value fields"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_03_configurations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_03_configurations_panel.png'),
+    }}
+/>
 
-#### Step 4: Create the trigger
+### Step 4: Create the trigger
 
 Select **Create** to submit the trigger configuration and generate the `IssuesService` listener.
 
 ### Handling GitHub events
 
-#### Step 5: Review auto-registered event handlers
+### Step 5: Review auto-registered event handlers
 
-Navigate to the **github:IssuesService** service view. GitHub's `IssuesService` auto-registers all handlers when the event channel is selected—there's no separate **Add Handler** side panel for this trigger. The **Event Handlers** list includes:
+Navigate to the **github:IssuesService** service view. GitHub's `IssuesService` auto-registers all handlers when the event channel is selected — there's no separate **Add Handler** side panel for this trigger. The **Event Handlers** list includes:
 
 - `onOpened` — triggered when an issue is opened
 - `onClosed` — triggered when an issue is closed
 - `onReopened` — triggered when an issue is reopened
 - `onAssigned`, `onUnassigned`, `onLabeled`, `onUnlabeled`
 
-![GitHub IssuesService view showing all auto-registered event handlers (onOpened, onClosed, onReopened, onAssigned, onUnassigned, onLabeled, onUnlabeled) with the Listener and Event Channel badges visible (Auto-registered IssuesService handlers — no Add Handler side panel for this trigger)](/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_04_add_handler_panel.png)
+<ThemedImage
+    alt="GitHub IssuesService view showing all auto-registered event handlers with the Listener and Event Channel badges visible"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_04_add_handler_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_04_add_handler_panel.png'),
+    }}
+/>
 
-#### Step 6: Inspect the onOpened handler flow
+### Step 6: Inspect the onOpened handler flow
 
 Select the **onOpened** row to open its flow canvas. At this stage the handler body contains only the **Start** node and the **Error Handler** wrapper.
 
-> **Note:** GitHub `IssuesService` handler parameter types (`github:IssuesEvent`) are fixed by the service interface—there's no Define Value / Create Type Schema modal for this trigger. The payload type is provided by the package.
+The `github:IssuesEvent` payload type is fixed by the `IssuesService` interface — you cannot change it. The type is provided by the `ballerinax/trigger.github` package and does not have a Define Value or Create Type Schema modal.
 
-#### Step 7: Add the log statement
+### Step 7: Add the log statement
 
 Select the **+** icon in the flow chart, and in the side panel that opens, choose **Log Info** from the **Logging** section, then enter `payload.toJsonString()` as the message.
 
-![onOpened handler flow canvas showing the inserted log:printInfo node (payload.toJsonString()) between Start and Error Handler after the pro-code edit](/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_06_handler_flow.png)
+<ThemedImage
+    alt="onOpened handler flow canvas showing the inserted log:printInfo node between Start and Error Handler"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_06_handler_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_06_handler_flow.png'),
+    }}
+/>
 
 ### Running the integration
 
@@ -217,3 +285,9 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/github_trigger_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/github_trigger_sample)
+
+## What's next
+
+- [GitHub Webhooks](../../../../develop/integration-artifacts/event/github-webhooks.md) — full reference for all event channels and handlers
+- [Setup Guide](setup-guide.md) — create a GitHub Personal Access Token and configure a repository webhook
+- [Action Reference](actions.md) — full list of REST API operations and sample code

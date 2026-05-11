@@ -1,4 +1,8 @@
-# Github Connector Overview
+---
+title: GitHub Connector Overview
+---
+
+# GitHub Connector Overview
 
 GitHub is a widely used platform for version control and collaboration, allowing developers to work together on projects from anywhere. The Ballerina `ballerinax/github` connector (v5.1.0) provides programmatic access to GitHub through its REST API (version 2022-11-28), enabling you to automate tasks, manage repositories, issues, pull requests, and more directly from Ballerina integration flows.
 
@@ -11,18 +15,26 @@ GitHub is a widely used platform for version control and collaboration, allowing
 - Organization and team management — list orgs, teams, and members
 - Gist management — create, update, list, star, fork, and comment on gists
 - Security advisory access — query global and repository-specific security advisories
+- GitHub Actions and workflow management — list and trigger workflow runs
+- Dependabot, code scanning, and secret scanning alert access
 - Event-driven webhook handling for GitHub issues, pull requests, releases, pushes, and repository activity
 - Resource-based API design using Ballerina resource functions for intuitive path-based access to GitHub REST endpoints
 
 ## Actions
 
-Actions are operations you invoke on GitHub from your integration — managing repositories, creating issues, handling pull requests, and more. The GitHub connector exposes 241 resource functions through a single client:
+Actions are operations you invoke on GitHub from your integration — managing repositories, creating issues, handling pull requests, and more. The GitHub connector exposes 903 resource functions through a single client:
 
 | Client | Actions |
 |--------|---------|
-| `Client` | Repository CRUD, issues, pull requests, branches, releases, organizations, teams, users, gists, security advisories, notifications |
+| `Client` | Repository and file management, issues, pull requests, branches, releases, organizations, teams, users, gists, security advisories, notifications, GitHub Actions and workflows, Dependabot alerts, code scanning, secret scanning, packages, deployments, and more |
 
 See the **[Action Reference](actions.md)** for the full list of operations, parameters, and sample code for each client.
+
+## Event-driven integration
+
+To receive GitHub webhook events (issues, pull requests, releases, pushes, and more), use the separate [`ballerinax/trigger.github`](https://github.com/ballerina-platform/module-ballerinax-trigger.github) package. It provides a `Listener` and service types (`IssuesService`, `PullRequestService`, and others) that route incoming GitHub webhook callbacks to typed event handlers.
+
+See the [GitHub Webhooks](../../../develop/integration-artifacts/event/github-webhooks.md) guide for configuration and usage.
 
 ## Triggers
 
@@ -58,6 +70,13 @@ As an open source project, WSO2 welcomes contributions from the community.
 
 To contribute to the code for this connector, please create a pull request in the following repository.
 
-* [Github Connector GitHub repository](https://github.com/ballerina-platform/module-ballerinax-github)
+* [GitHub Connector repository](https://github.com/ballerina-platform/module-ballerinax-github)
 
 Check the issue tracker for open issues that interest you. We look forward to receiving your contributions.
+
+## What's next
+
+- [Setup Guide](setup-guide.md) — create a GitHub Personal Access Token for authentication
+- [Action Reference](actions.md) — full list of operations, parameters, and sample code
+- [Example](example.md) — step-by-step integration walkthroughs
+- [GitHub Webhooks](../../../develop/integration-artifacts/event/github-webhooks.md) — listen for GitHub events using webhooks
