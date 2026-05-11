@@ -44,5 +44,3 @@ Identify the AWS Region you want to use for S3 operations (e.g., `us-east-1`, `e
 This value is passed as the `region` configuration parameter when initializing the connector.
 
 If you do not specify a region, the connector defaults to **US East (N. Virginia)** (`us-east-1`).
-
-If your Ballerina application runs on an EC2 instance, you can use IAM role-based authentication instead of static access keys. Attach an IAM role with the appropriate S3 permissions to the EC2 instance and set `authType` to `EC2_IAM_ROLE` in the connector configuration.

@@ -4,9 +4,9 @@ title: Compliance Considerations
 
 # Compliance Considerations
 
-Design your integrations with regulatory compliance in mind — audit logging, data protection, and governance patterns.
+Design your integrations with regulatory compliance in mind, covering audit logging, data protection, and governance patterns.
 
-## Audit Logging
+## Audit logging
 
 Log all sensitive operations for compliance audits:
 
@@ -33,7 +33,7 @@ resource function post orders(http:Request req, OrderRequest order) returns http
 }
 ```
 
-### Structured Audit Log Format
+### Structured audit log format
 
 Enable JSON logging for machine-parseable audit trails:
 
@@ -45,9 +45,9 @@ level = "INFO"
 
 Ship audit logs to a dedicated, immutable log store (S3, Azure Blob, or a SIEM) for retention compliance.
 
-## Data Protection
+## Data protection
 
-### PII Masking
+### PII masking
 
 Mask personally identifiable information in logs and responses:
 
@@ -65,7 +65,7 @@ function maskCreditCard(string cc) returns string {
 }
 ```
 
-### Data Minimization
+### Data minimization
 
 Only process and store the minimum data needed:
 
@@ -75,9 +75,9 @@ log:printInfo("Processing customer", customerId = customer.id);
 // NOT: log:printInfo("Processing", customer = customer.toJson());
 ```
 
-## Data Residency
+## Data residency
 
-### Region-Specific Configuration
+### Region-specific configuration
 
 Use environment-specific `Config.toml` files to route data to region-appropriate services:
 
@@ -93,7 +93,7 @@ storageRegion = "us-east-1"
 apiEndpoint = "https://us.api.example.com"
 ```
 
-### Cross-Border Data Transfer
+### Cross-border data transfer
 
 When integrations span regions, implement data classification:
 
@@ -105,7 +105,7 @@ function canTransferCrossBorder(DataClassification classification) returns boole
 }
 ```
 
-## SOC 2 / GDPR / HIPAA Considerations
+## SOC 2 / GDPR / HIPAA considerations
 
 | Requirement | Implementation |
 |------------|----------------|
@@ -117,8 +117,8 @@ function canTransferCrossBorder(DataClassification classification) returns boole
 | **Breach notification** | Alert on authentication failures and anomalies |
 | **Data retention** | Configure log and data lifecycle policies |
 
-## What's Next
+## What's next
 
-- [Secrets & Encryption](secrets-encryption.md) — Encrypt data at rest and in transit
+- [Secrets and encryption](secrets-encryption.md) — Encrypt data at rest and in transit
 - [Authentication](authentication.md) — Enforce access control
 - [Logging](../observe/logging-structured-logs.md) — Set up audit log shipping

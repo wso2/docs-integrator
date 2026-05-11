@@ -1,12 +1,12 @@
 ---
-title: API Security & Rate Limiting
+title: API Security and Rate Limiting
 ---
 
-# API Security & Rate Limiting
+# API Security and Rate Limiting
 
 Protect your integration APIs from abuse, overload, and malicious input with rate limiting, request validation, and CORS configuration.
 
-## Rate Limiting
+## Rate limiting
 
 Implement rate limiting using a middleware pattern with Ballerina's HTTP interceptors:
 
@@ -39,7 +39,7 @@ service class RateLimitInterceptor {
 }
 ```
 
-## Request Size Limits
+## Request size limits
 
 Configure maximum request payload size on the HTTP listener:
 
@@ -51,7 +51,7 @@ listener http:Listener apiListener = new (9090, {
 });
 ```
 
-## Input Validation
+## Input validation
 
 Validate incoming data using Ballerina's type system and constraint annotations:
 
@@ -76,7 +76,7 @@ resource function post orders(OrderRequest req) returns http:Created|http:BadReq
 }
 ```
 
-## CORS Configuration
+## CORS configuration
 
 ```ballerina
 @http:ServiceConfig {
@@ -92,7 +92,7 @@ service /api on apiListener {
 }
 ```
 
-## Security Headers
+## Security headers
 
 Add security headers to all responses:
 
@@ -111,8 +111,8 @@ service class SecurityHeaderInterceptor {
 }
 ```
 
-## What's Next
+## What's next
 
 - [Authentication](authentication.md) — OAuth 2.0, JWT, and mTLS for your APIs
-- [IP Whitelisting](ip-whitelisting.md) — Restrict access by IP address
-- [Secrets & Encryption](secrets-encryption.md) — Protect sensitive configuration
+- [IP whitelisting](ip-whitelisting.md) — Restrict access by IP address
+- [Secrets and encryption](secrets-encryption.md) — Protect sensitive configuration

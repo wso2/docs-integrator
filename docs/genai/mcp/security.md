@@ -319,4 +319,4 @@ isolated function getPatientRecord(string patientId) returns json|error {
 - [Exposing MCP Servers](exposing-servers.md) -- Build MCP servers with WSO2 Integrator
 - [Consuming MCP Tools](consuming-tools.md) -- Connect to external MCP servers
 - [Input/Output Guardrails](/docs/genai/guardrails/input-output-guardrails) -- Validate AI inputs and outputs
-- [API Security](/docs/deploy-operate/secure/api-security) -- Broader API security practices
+- [API Security](/docs/deploy-operate/secure/api-security-rate-limiting) -- Broader API security practices

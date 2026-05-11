@@ -11,25 +11,15 @@ Keystores and truststores are foundational to securing communication in producti
 | **Keystore** | Private key + the service's own certificate | Proves the identity of your service to clients |
 | **Truststore** | Trusted CA or peer certificates (public certs only) | Decides which remote parties your service trusts |
 
----
-
-## Prerequisites
-
-The examples below use the **Java `keytool`** utility, which is bundled with every JDK. Verify it is available:
-
-```bash
-keytool -version
-```
-
-For production deployments you will also need access to a **Certificate Authority (CA)** or a **PKCS12 certificate bundle** (`.p12`) already issued by your CA.
-
----
+:::info Prerequisites
+- The **Java `keytool`** utility (bundled with every JDK). Run `keytool -version` to verify it is available. For the full command reference, see the [Java keytool documentation](https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html).
+- For production deployments: access to a **Certificate Authority (CA)** or a **PKCS12 certificate bundle** (`.p12`) issued by your CA.
 
 ## Create a keystore
 
 A keystore stores your service's private key and its certificate. Use the following steps to create a new keystore.
 
-### Step 1 — Generate a new key pair and self-signed certificate
+### Step 1: Generate a new key pair and self-signed certificate
 
 Use a self-signed certificate during development and testing only. **Always replace it with a CA-signed certificate in production.**
 
@@ -57,7 +47,7 @@ keytool -genkeypair \
 | `-storepass` | Password to protect the keystore file |
 | `-dname` | Distinguished name embedded in the certificate |
 
-### Step 2 — Generate a Certificate Signing Request (CSR)
+### Step 2: Generate a Certificate Signing Request (CSR)
 
 This step is required for production environments. Skip it if you are using a self-signed certificate.
 
@@ -72,7 +62,7 @@ keytool -certreq \
 
 Submit `integration.csr` to your CA. The CA returns a signed certificate file (e.g., `integration.crt`) together with any intermediate CA certificates.
 
-### Step 3 — Import the CA-signed certificate into the keystore
+### Step 3: Import the CA-signed certificate into the keystore
 
 Skip this step if you are using a self-signed certificate. Otherwise, import the CA certificate chain (root and any intermediates) so that `keytool` can verify the chain of trust.
 
@@ -115,15 +105,13 @@ keytool -list -keystore keystore.p12 -storetype PKCS12 -storepass <keystore-pass
 
 The output lists all entries. Confirm the `integration` entry shows type **PrivateKeyEntry** and that the certificate chain is complete.
 
----
-
 ## Create a truststore
 
 A truststore holds the public certificates of CAs (or specific peers) that your service should trust. How you populate it depends on whether you are using CA-signed or self-signed certificates.
 
 ### CA-signed certificates
 
-Import the root CA certificate (and any intermediates) from your CA into the truststore. You do not need to import individual service certificates — any certificate signed by a trusted CA is automatically trusted.
+Import the root CA certificate (and any intermediates) from your CA into the truststore. You do not need to import individual service certificates. Certificates signed by a trusted CA are accepted only if normal TLS validation also succeeds (for example, hostname/SAN checks).
 
 ```bash
 keytool -importcert \
@@ -173,11 +161,9 @@ Repeat this for every peer that uses a self-signed certificate, using a unique `
 keytool -list -keystore truststore.p12 -storetype PKCS12 -storepass <truststore-password>
 ```
 
----
-
 ## Configure Ballerina services
 
-The examples below show how to use the keystore and truststore files in Ballerina services.
+The examples below show how to use the keystore and truststore files in Ballerina services. For the complete `secureSocket` API, see the [Ballerina HTTP module](https://lib.ballerina.io/ballerina/http/latest) documentation.
 
 ### HTTP client with TLS
 
@@ -203,7 +189,7 @@ http:Client secureClient = check new ("https://api.example.com", {
 
 Mutual TLS requires both sides to authenticate. The server presents its certificate (from its keystore) and validates the client certificate against its truststore, and the client does the same in reverse.
 
-#### HTTP listener — server side
+#### Server configuration
 
 ```ballerina
 import ballerina/http;
@@ -230,7 +216,7 @@ listener http:Listener secureListener = new (9443, {
 });
 ```
 
-#### HTTP client — client side
+#### Client configuration
 
 ```ballerina
 import ballerina/http;
@@ -256,7 +242,7 @@ http:Client mtlsClient = check new ("https://api.example.com", {
 
 #### gRPC with mutual TLS
 
-gRPC uses the same `secureSocket` structure. The example below shows a secured gRPC listener with mutual TLS enabled.
+gRPC uses the same `secureSocket` structure. The example below shows a secured gRPC listener with mutual TLS enabled. For the full API, see the [Ballerina gRPC module](https://lib.ballerina.io/ballerina/grpc/latest) documentation.
 
 ```ballerina
 import ballerina/grpc;
@@ -285,7 +271,7 @@ listener grpc:Listener secureGrpcListener = new (9090, {
 
 ### Externalizing passwords
 
-All keystore and truststore paths and passwords are declared as `configurable` variables in the examples above. Supply their values through `Config.toml` or environment variables — never hardcode them in source code.
+All keystore and truststore paths and passwords are declared as `configurable` variables in the examples above. Supply their values through `Config.toml` or environment variables. Never hardcode them in source code.
 
 **Config.toml:**
 
@@ -296,10 +282,8 @@ truststorePath = "/opt/integration/security/truststore.p12"
 truststorePassword = "<truststore-password>"
 ```
 
-## References
+## What's next
 
-- [Ballerina HTTP Module — SSL/TLS](https://lib.ballerina.io/ballerina/http/latest)
-- [Ballerina gRPC Module — Secured Communication](https://lib.ballerina.io/ballerina/grpc/latest)
-- [Ballerina Crypto Module](https://central.ballerina.io/ballerina/crypto/latest)
-- [Secrets and encryption](secrets-encryption.md)
-- [Java keytool documentation](https://docs.oracle.com/en/java/javase/17/docs/specs/man/keytool.html)
+- [Runtime security](runtime-security.md) — Apply additional runtime security settings
+- [Authentication](authentication.md) — Secure service endpoints with OAuth 2.0, JWT, and mTLS
+- [Secrets and encryption](secrets-encryption.md) — Manage secrets and configure encryption in your integration

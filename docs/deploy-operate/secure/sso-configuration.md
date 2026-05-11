@@ -2,12 +2,11 @@
 title: SSO Configuration
 ---
 
-# Single Sign-On (SSO) Configuration
+# SSO Configuration
 
-ICP supports Single Sign-On via OpenID Connect (OIDC), allowing users to authenticate through your organization's identity provider. SSO coexists with local username/password authentication — users can use either method.
+ICP supports Single Sign-On via OpenID Connect (OIDC), allowing users to authenticate through your organization's identity provider. SSO coexists with local username/password authentication. Users can use either method.
 
-## Prerequisites
-
+:::info Prerequisites
 Before configuring SSO in ICP, complete the following in your identity provider:
 
 1. Register a new OIDC application (also called a "client" or "app registration").
@@ -16,13 +15,13 @@ Before configuring SSO in ICP, complete the following in your identity provider:
    - Local/on-prem (distribution pack): `http://localhost:9446/auth/callback`
    - Production: `https://<your-icp-domain>/auth/callback`
 4. Ensure the identity provider includes the following claims in the ID token:
-   - `sub` — required
-   - `email` or `preferred_username` — at least one is required
-   - `name` — recommended (used for display names)
+   - `sub` (required)
+   - `email` or `preferred_username` (at least one required)
+   - `name` (recommended, used for display names)
 
 ## Configuration
 
-### Step 1: Collect OIDC Endpoints
+### Step 1: Collect OIDC endpoints
 
 Gather the following endpoint URLs from your identity provider. Most providers publish these under the [OpenID Provider Metadata](https://openid.net/specs/openid-connect-discovery-1_0.html) document at `/.well-known/openid-configuration`.
 
@@ -81,9 +80,9 @@ Restart the ICP server after saving changes.
 | `ssoClientSecret` | Client secret from your identity provider |
 | `ssoRedirectUri` | Redirect URI registered with your identity provider |
 | `ssoUsernameClaim` | Claim to use as the ICP username: `email` or `preferred_username` |
-| `ssoScopes` | OIDC scopes to request — `openid` is required |
+| `ssoScopes` | OIDC scopes to request. `openid` is required. |
 
-## Provider-Specific Examples
+## Provider-specific examples
 
 ### Asgardeo
 
@@ -160,7 +159,7 @@ ssoUsernameClaim = "preferred_username"
 ssoScopes = ["openid", "email", "profile"]
 ```
 
-## User Provisioning
+## User provisioning
 
 When a user authenticates via SSO for the first time, ICP automatically creates a local account. The account username is taken from the claim specified in `ssoUsernameClaim`. The display name is resolved in the following order:
 
@@ -170,13 +169,13 @@ When a user authenticates via SSO for the first time, ICP automatically creates 
 
 After the account is created, an administrator must assign the appropriate roles and permissions before the user can access ICP resources.
 
-## Security Considerations
+## Security considerations
 
-**Protect the client secret** — do not commit it to version control. Use environment variables or a secrets manager and inject the value at deployment time.
+**Protect the client secret.** Do not commit it to version control. Use environment variables or a secrets manager and inject the value at deployment time.
 
-**Use HTTPS in production** — `ssoRedirectUri` must use `https://` for production deployments. `http://localhost` is an accepted exception in OIDC for local testing, but plain HTTP should never be used with a public hostname.
+**Use HTTPS in production.** The `ssoRedirectUri` must use `https://` for production deployments. `http://localhost` is an accepted exception in OIDC for local testing, but plain HTTP must never be used with a public hostname.
 
-**Redirect URI must match exactly** — the URI in `conf/Deployment.toml` must match the one registered with your identity provider character for character, including protocol, hostname, port (if non-standard), and path.
+**Redirect URI must match exactly.** The URI in `conf/Deployment.toml` must match the one registered with your identity provider character for character, including protocol, hostname, port (if non-standard), and path.
 
 ## Troubleshooting
 
@@ -200,7 +199,7 @@ The identity provider is not including `sub` and either `email` or `preferred_us
 
 The user account was created but has no assigned roles. An administrator must grant roles to the account in ICP before the user can access any resources.
 
-## Frequently Asked Questions
+## Frequently asked questions
 
 **Can a user authenticate with both SSO and a local password?**
 SSO and local password authentication are independent. If the same email address is used for both, they are treated as separate accounts. Users should use one method consistently.
@@ -216,3 +215,9 @@ ICP currently supports one OIDC provider per deployment.
 
 **How do I rotate the client secret?**
 Generate a new secret in your identity provider, update `ssoClientSecret` in `conf/Deployment.toml`, and restart the ICP server. Active user sessions are not affected.
+
+## What's next
+
+- [Authentication](authentication.md) — Configure OAuth 2.0 and JWT for your services
+- [API security and rate limiting](api-security-rate-limiting.md) — Protect your API endpoints with rate limiting and input validation
+- [Secrets and encryption](secrets-encryption.md) — Store and rotate identity provider credentials securely

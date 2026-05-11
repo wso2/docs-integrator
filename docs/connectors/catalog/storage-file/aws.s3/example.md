@@ -43,7 +43,7 @@ Select **Add Connection** (or the **+** icon next to the **Connections** heading
 
 ### Step 3: Bind the aws.s3 connection parameters to configurable variables
 
-Use the helper panel to create and bind a dedicated configurable variable for each of the three required fields—**Access Key Id**, **Secret Access Key**, and **Region**:
+Use the helper panel to create and bind a dedicated configurable variable for each of the three connection fields—**Access Key Id**, **Secret Access Key**, and **Region**:
 
 1. Select the **Config** field, switch to **Expression** mode, then select **Open Helper Panel**, go to the **Configurables** tab, select **+ New Configurable**, set the variable name to `accessKeyId` with type `string`, and select **Save**.
 2. Repeat for `secretAccessKey`: select **+ New Configurable**, set the variable name to `secretAccessKey` with type `string`, and select **Save**.
@@ -52,7 +52,7 @@ Use the helper panel to create and bind a dedicated configurable variable for ea
 
 - **Access Key Id** : the AWS IAM access key ID used to authenticate requests to Amazon S3
 - **Secret Access Key** : the AWS IAM secret access key paired with the access key ID for request signing
-- **Region** : the AWS region where S3 operations will be performed (e.g., `us-east-1`, `eu-west-1`)
+- **Region** : the AWS region where S3 operations will be performed (e.g., `us-east-1`, `eu-west-1`). Optional — defaults to `us-east-1` if omitted.
 
 ![Connection form showing all three parameters bound to configurable variables before saving](/img/connectors/catalog/storage-file/aws.s3/aws_s3_screenshot_02_connection_form.png)
 
@@ -67,7 +67,7 @@ In the left panel of WSO2 Integrator, select **Configurations** (listed at the b
 
 - **accessKeyId** (string) : your AWS IAM access key ID
 - **secretAccessKey** (string) : your AWS IAM secret access key
-- **region** (string) : the target AWS region for S3 operations (e.g., `us-east-1`)
+- **region** (string) : the target AWS region for S3 operations (e.g., `us-east-1`). Defaults to `us-east-1` if not set.
 
 ## Configuring the aws.s3 createBucket operation
 

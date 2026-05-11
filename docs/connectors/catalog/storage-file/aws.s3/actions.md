@@ -20,15 +20,25 @@ Provides operations to manage S3 buckets and objects via the Amazon S3 REST API.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `accessKeyId` | `string` | Required | The access key ID of the AWS account. Not required when using EC2 IAM role authentication. |
-| `secretAccessKey` | `string` | Required | The secret access key of the AWS account. Not required when using EC2 IAM role authentication. |
-| `region` | `string` | `us-east-1` | The AWS region for S3 operations (e.g., `us-east-1`, `eu-west-1`). |
-| `authType` | `AWS_STATIC_AUTH|EC2_IAM_ROLE` | `AWS_STATIC_AUTH` | Authentication type. Use `EC2_IAM_ROLE` for IAM role-based auth on EC2 instances. |
-| `sessionToken` | `string` | `()` | Session token for temporary security credentials (e.g., from AWS STS). |
-| `httpVersion` | `HttpVersion` | `HTTP_1_1` | HTTP protocol version used by the client. |
-| `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
+| `accessKeyId` | `string` | Required | Access key ID of the AWS account. |
+| `secretAccessKey` | `string` | Required | Secret access key of the AWS account. |
+| `region` | `string` | `"us-east-1"` | AWS region for S3 operations (e.g., `us-east-1`, `eu-west-1`). |
+| `httpVersion` | `http:HttpVersion` | `HTTP_1_1` | HTTP protocol version. |
+| `http1Settings` | `ClientHttp1Settings` | `()` | HTTP/1.x protocol settings (keep-alive, chunking, proxy). |
+| `http2Settings` | `http:ClientHttp2Settings` | `()` | HTTP/2 protocol settings. |
+| `timeout` | `decimal` | `60` | Connection timeout in seconds. |
+| `forwarded` | `string` | `"disable"` | `forwarded` / `x-forwarded` header behaviour. |
+| `poolConfig` | `http:PoolConfiguration` | `()` | Connection-pool settings. |
+| `cache` | `http:CacheConfig` | `()` | Response caching settings. |
+| `compression` | `http:Compression` | `COMPRESSION_AUTO` | `accept-encoding` handling. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit-breaker settings. |
+| `retryConfig` | `http:RetryConfig` | `()` | Retry settings for failed requests. |
+| `responseLimits` | `http:ResponseLimitConfigs` | `()` | Inbound response size limits. |
+| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | `()` | Proxy server settings. |
+| `validation` | `boolean` | `true` | Enables inbound payload validation (constraint package). |
+
+> `http:*` types come from `ballerina/http`; `ClientHttp1Settings` comes from `ballerinax/client.config`.
 
 ### Initializing the client
 
@@ -161,7 +171,7 @@ Parameters:
 |------|------|----------|-------------|
 | `bucketName` | `string` | Yes | The name of the bucket. |
 | `objectName` | `string` | Yes | The key (name) for the new object. |
-| `payload` | `string|xml|json|byte[]|stream&lt;Block, Error?&gt;` | Yes | The content to upload. |
+| `payload` | `string\|xml\|json\|byte[]\|stream&lt;io:Block, io:Error?&gt;` | Yes | The content to upload. |
 | `cannedACL` | `CannedACL?` | No | Canned ACL for the object. |
 | `objectCreationHeaders` | `ObjectCreationHeaders?` | No | Optional headers such as `contentType`, `cacheControl`, `contentEncoding`. |
 | `userMetadataHeaders` | `map&lt;string&gt;` | No | User-defined metadata key-value pairs to attach to the object. |
@@ -190,12 +200,12 @@ Parameters:
 | `objectRetrievalHeaders` | `ObjectRetrievalHeaders?` | No | Optional conditional headers (e.g., `modifiedSince`, `ifMatch`, `range`). |
 | `byteArraySize` | `int?` | No | Size of each byte array chunk in the stream. Default is 8KB. |
 
-Returns: `stream<byte[], Error?>|error`
+Returns: `stream<byte[], io:Error?>|error`
 
 Sample code:
 
 ```ballerina
-stream<byte[], error?> objectStream = check s3Client->getObject("my-bucket", "documents/greeting.txt");
+stream<byte[], io:Error?> objectStream = check s3Client->getObject("my-bucket", "documents/greeting.txt");
 byte[] content = [];
 check from byte[] chunk in objectStream
     do {
@@ -203,7 +213,7 @@ check from byte[] chunk in objectStream
     };
 ```
 
-Sample response:
+Resulting `content` after consuming the stream:
 
 ```ballerina
 [72, 101, 108, 108, 111, 44, 32, 87, 111, 114, 108, 100, 33]
@@ -247,7 +257,7 @@ Parameters:
 |------|------|----------|-------------|
 | `bucketName` | `string` | Yes | The name of the bucket. |
 | `objectName` | `string` | Yes | The key of the object. |
-| `action` | `ObjectAction|ObjectCreationHeaders|ObjectRetrievalHeaders` | Yes | The action — `RETRIEVE` for download, `CREATE` for upload, or the relevant headers record. |
+| `action` | `ObjectAction\|ObjectCreationHeaders\|ObjectRetrievalHeaders` | Yes | The action — `RETRIEVE` for download, `CREATE` for upload, or the relevant headers record. |
 | `expires` | `int` | No | Validity period in seconds. Default is `1800` (30 minutes). |
 | `partNo` | `int?` | No | Part number for multipart uploads. |
 | `uploadId` | `string?` | No | Upload ID for multipart uploads. |
@@ -263,8 +273,10 @@ string presignedUrl = check s3Client->createPresignedUrl("my-bucket", "documents
 Sample response:
 
 ```ballerina
-"https://my-bucket.s3.us-east-1.amazonaws.com/documents/report.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA...&X-Amz-Date=20240601T120000Z&X-Amz-Expires=3600&X-Amz-Signature=abc123..."
+"https://s3.amazonaws.com/my-bucket/documents/report.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA.../20240601/us-east-1/s3/aws4_request&X-Amz-Date=20240601T120000Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=abc123..."
 ```
+
+> Note: `us-east-1` uses the global endpoint `s3.amazonaws.com`. For other regions, the host is `s3.<region>.amazonaws.com`.
 
 </details>
 
@@ -311,7 +323,7 @@ Parameters:
 |------|------|----------|-------------|
 | `objectName` | `string` | Yes | The key of the object. |
 | `bucketName` | `string` | Yes | The name of the bucket. |
-| `payload` | `string|xml|json|byte[]|stream&lt;Block, Error?&gt;` | Yes | The part content. |
+| `payload` | `string\|xml\|json\|byte[]\|stream&lt;io:Block, io:Error?&gt;` | Yes | The part content. |
 | `uploadId` | `string` | Yes | The upload ID from `createMultipartUpload`. |
 | `partNumber` | `int` | Yes | The sequential part number (starting from 1). |
 | `uploadPartHeaders` | `UploadPartHeaders?` | No | Optional headers such as `contentLength`, `contentMD5`. |
