@@ -19,9 +19,7 @@ Before configuring SSO in ICP, complete the following in your identity provider:
    - `email` or `preferred_username` (at least one required)
    - `name` (recommended, used for display names)
 
-## Configuration
-
-### Step 1: Collect OIDC endpoints
+## Step 1: Collect OIDC Endpoints
 
 Gather the following endpoint URLs from your identity provider. Most providers publish these under the [OpenID Provider Metadata](https://openid.net/specs/openid-connect-discovery-1_0.html) document at `/.well-known/openid-configuration`.
 
@@ -32,23 +30,17 @@ Gather the following endpoint URLs from your identity provider. Most providers p
 | Token endpoint | Where ICP exchanges the authorization code for tokens |
 | End-session endpoint | Where ICP sends users to log out |
 
-### Step 2: Update `Deployment.toml`
+## Step 2: Update `deployment.toml`
 
-Locate `conf/Deployment.toml` under your WSO2 Integrator installation and add the following block, replacing the placeholder values with your identity provider's details.
+Locate `conf/deployment.toml` under your WSO2 Integrator installation:
 
-The file is located at `<wso2_integrator_installation_path>/Contents/components/icp/conf/deployment.toml`
+| OS | Default path |
+|----|-------------|
+| macOS | `/Applications/WSO2 Integrator.app/Contents/components/icp/conf/deployment.toml` |
+| Windows | `%USERPROFILE%\AppData\Local\Programs\WSO2\Integrator\components\icp\conf\deployment.toml` |
+| Linux | `/usr/share/wso2-integrator/components/icp/conf/deployment.toml` |
 
-Default: `/Applications/WSO2 Integrator.app/Contents/components/icp/conf/deployment.toml`
-
-The file is located at `<wso2_integrator_installation_path>\components\icp\conf\deployment.toml`
-
-Default: `%USERPROFILE%\AppData\Wso2\Integrator\components\icp\conf\deployment.toml`
-
-The file is located at `<wso2_integrator_installation_path>/components/icp/conf/deployment.toml`
-
-Default: `/usr/share/wso2-integrator/components/icp/conf/deployment.toml`
-
-Add the following SSO configuration to the file:
+Add the following SSO configuration to the file, replacing the placeholder values with your identity provider's details:
 
 ```toml
 ssoEnabled = true
@@ -167,37 +159,23 @@ When a user authenticates via SSO for the first time, ICP automatically creates 
 2. Local part of the `email` claim (before `@`)
 3. `preferred_username` claim
 
-After the account is created, an administrator must assign the appropriate roles and permissions before the user can access ICP resources.
+After the account is created, an administrator must assign the appropriate roles and permissions before the user can access ICP resources. See [Access Control](access-control.md).
 
-## Security considerations
+## Security Notes
 
-**Protect the client secret.** Do not commit it to version control. Use environment variables or a secrets manager and inject the value at deployment time.
-
-**Use HTTPS in production.** The `ssoRedirectUri` must use `https://` for production deployments. `http://localhost` is an accepted exception in OIDC for local testing, but plain HTTP must never be used with a public hostname.
-
-**Redirect URI must match exactly.** The URI in `conf/Deployment.toml` must match the one registered with your identity provider character for character, including protocol, hostname, port (if non-standard), and path.
+- **Protect the client secret** — do not commit it to version control. Use environment variables or a secrets manager and inject the value at deployment time.
+- **Use HTTPS in production** — `ssoRedirectUri` must use `https://` for production deployments. `http://localhost` is an accepted exception in OIDC for local testing, but plain HTTP should never be used with a public hostname.
+- **Redirect URI must match exactly** — the URI in `conf/deployment.toml` must match the one registered with your identity provider character for character, including protocol, hostname, port (if non-standard), and path.
 
 ## Troubleshooting
 
-### SSO button does not appear on the login page
-
-Verify `ssoEnabled = true` in `conf/Deployment.toml` and that the server was restarted after the change. Check startup logs for configuration validation errors.
-
-### `invalid_client` or `invalid_grant` error
-
-The client ID or client secret is incorrect, or the identity provider application is inactive. Verify both values and confirm the application is enabled.
-
-### Redirect URI mismatch error
-
-The `ssoRedirectUri` in `conf/Deployment.toml` does not exactly match the redirect URI registered in your identity provider. Check for differences in protocol, hostname, port, and trailing slashes.
-
-### User is missing required claims
-
-The identity provider is not including `sub` and either `email` or `preferred_username` in the ID token. Configure your identity provider's application to include these claims, and verify `ssoUsernameClaim` matches a claim your provider returns.
-
-### User authenticated successfully but has no access
-
-The user account was created but has no assigned roles. An administrator must grant roles to the account in ICP before the user can access any resources.
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| SSO button does not appear on the login page | `ssoEnabled` is not `true`, or the server was not restarted | Set `ssoEnabled = true` in `conf/deployment.toml` and restart ICP. Check startup logs for configuration errors. |
+| `invalid_client` or `invalid_grant` error | Incorrect client ID or secret, or the IdP application is inactive | Verify both values and confirm the application is enabled in your identity provider. |
+| Redirect URI mismatch error | `ssoRedirectUri` does not exactly match the URI registered in the identity provider | Check for differences in protocol, hostname, port, and trailing slashes. |
+| User is missing required claims | The identity provider is not including `sub` and `email` or `preferred_username` in the ID token | Configure your identity provider to include these claims. Verify `ssoUsernameClaim` matches a claim your provider returns. |
+| User authenticated successfully but has no access | User account was created but has no assigned roles | An administrator must grant roles to the account in ICP. See [Access Control](access-control.md). |
 
 ## Frequently asked questions
 
@@ -214,10 +192,4 @@ Yes. Disable the local authentication backend to require all users to authentica
 ICP currently supports one OIDC provider per deployment.
 
 **How do I rotate the client secret?**
-Generate a new secret in your identity provider, update `ssoClientSecret` in `conf/Deployment.toml`, and restart the ICP server. Active user sessions are not affected.
-
-## What's next
-
-- [Authentication](authentication.md) — Configure OAuth 2.0 and JWT for your services
-- [API security and rate limiting](api-security-rate-limiting.md) — Protect your API endpoints with rate limiting and input validation
-- [Secrets and encryption](secrets-encryption.md) — Store and rotate identity provider credentials securely
+Generate a new secret in your identity provider, update `ssoClientSecret` in `conf/deployment.toml`, and restart the ICP server. Active user sessions are not affected.
