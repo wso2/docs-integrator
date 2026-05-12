@@ -18,10 +18,6 @@ If you have an existing project created with the WSO2 Integrator IDE in a Git re
 3. Click **Import** to import an existing WSO2 Integrator project.
 4. Select your Git provider and complete the authorization flow in the browser, then return to WSO2 Cloud.
 
-    :::warning
-    One-click OAuth2 authorization is only available for GitHub. To use Bitbucket, GitLab, or Azure DevOps, you must first add your credentials at the organization level. See [Connect a Git repository](../../manage/cloud/cicd/connect-git-repository.md) for instructions.
-    :::
-
 ## Configure and import the project
 
 1. Select the organization that owns the repository.
