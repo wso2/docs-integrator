@@ -1,85 +1,136 @@
 ---
-title: Data-Driven Tests
+title: Data-driven tests
 ---
 
-Run the same test logic against multiple inputs by attaching a data provider function to a test. The framework calls the test function once per data entry, reporting each case individually so failures are easy to pinpoint.
+# Data-driven tests
 
-## Configuring a data provider
+A data-driven test decouples the test logic from the test data. Instead of writing a separate test function for each input combination, you write one function and point it at a data provider — a function that returns a collection of input sets. The framework calls the test function once per set, passing each row as arguments.
 
-1. Create a test function as described in [Unit Testing](unit-testing.md). In the **Create New Test** form, expand **Advanced Configurations**.
+Set the `dataProvider` field in `@test:Config` to the name of the provider function.
 
-   ![Advanced Configurations form showing the Data Provider field at the bottom](/img/develop/test/data-driven-tests/data-provider-field.png)
+## Map data provider
 
-2. In the **Data Provider** field, click the function selector (**fx**) to open the function picker.
-
-   ![Data Provider function selector dropdown showing Inputs, Variables, Configurables, and Functions options](/img/develop/test/data-driven-tests/data-provider-function-select.png)
-
-3. From the dropdown, select **Functions** to pick an existing data provider function from your test file. To create a new one, click **+ New Function**, fill in the function name and return type, then click **Create**.
-
-4. Click **Save**. The selected function is set as the data provider for this test.
-
-Use the `dataProvider` field in the `@test:Config` annotation to attach a data provider function to a test.
-
-**Array-based data provider** — the framework runs the test once per row. Use this for simple, ordered cases.
+Use a map when you want each case to have a meaningful name that appears in the test output and can be targeted individually on the command line. The map key is the case identifier and the map value is a tuple of the parameters the test function expects. The data provider can return an `error` to signal a problem with the data set.
 
 ```ballerina
 import ballerina/test;
 
-function dataGen() returns string[][] {
+@test:Config {
+    dataProvider: discountDataProvider
+}
+function testDiscountCalculation(decimal originalPrice, decimal discountPct, decimal expectedFinal) returns error? {
+    decimal discounted = originalPrice * (1 - discountPct / 100);
+    test:assertEquals(discounted, expectedFinal, msg = "Discount calculation is incorrect");
+}
+
+function discountDataProvider() returns map<[decimal, decimal, decimal]>|error {
+    return {
+        "ten-percent":    [100.0d, 10.0d, 90.0d],
+        "half-price":     [200.0d, 50.0d, 100.0d],
+        "no-discount":    [50.0d,  0.0d,  50.0d]
+    };
+}
+```
+
+Output:
+
+```
+Running Tests
+
+    dataproviders
+
+        3 passing
+        0 failing
+        0 skipped
+```
+
+Each case name appears in the output, so failures are immediately traceable to a specific scenario rather than an opaque index.
+
+## List data provider
+
+Use a list when the cases are a series of equivalent inputs and names would add little value. Cases are identified by their zero-based index.
+
+```ballerina
+import ballerina/test;
+
+@test:Config {
+    dataProvider: additionDataProvider
+}
+function testAddition(string a, string b, string expected) returns error? {
+    int x = check int:fromString(a);
+    int y = check int:fromString(b);
+    int result = check int:fromString(expected);
+    test:assertEquals(x + y, result, msg = "Addition result is wrong");
+}
+
+function additionDataProvider() returns string[][] {
     return [
-        ["1", "2", "3"],
+        ["1",  "2",  "3"],
         ["10", "20", "30"],
-        ["5", "6", "11"]
+        ["5",  "6",  "11"]
     ];
 }
-
-@test:Config {
-    dataProvider: dataGen
-}
-function stringDataProviderTest(string fValue, string sValue, string result) {
-    int a = checkpanic int:fromString(fValue);
-    int b = checkpanic int:fromString(sValue);
-    test:assertEquals(a + b, checkpanic int:fromString(result));
-}
 ```
 
-**Map-based data provider** — each entry has a string key. When a case fails, the report shows the key (e.g., `fruitsDataProviderTest["banana"]`), making it clear which scenario failed.
+Output:
 
-```ballerina
-import ballerina/test;
+```
+Running Tests
 
-function dataGen() returns map<[int, int, string]>|error {
-    map<[int, int, string]> dataSet = {
-        "banana": [10, 10, "banana"],
-        "cherry": [5, 5, "cherry"]
-    };
-    return dataSet;
-}
+    dataproviders
 
-@test:Config {
-    dataProvider: dataGen
-}
-function fruitsDataProviderTest(int a, int b, string fruit) {
-    test:assertEquals(a + b, 20, msg = fruit);
-}
+        3 passing
+        0 failing
+        0 skipped
 ```
 
-## Running specific cases
+## Run a specific case
 
-To run a single case from a data-driven test, reference the test name and the case identifier:
+Running the entire data set during development is slow when you only care about one failing case. Target a specific case by appending `#` and the identifier to the test function name.
 
-```bash
-# Map-based: use the key name in double quotes
-bal test --tests fruitsDataProviderTest#"banana"
+For map data sets, use the key in double quotes:
 
-# Array-based: use the row index (zero-based)
-bal test --tests stringDataProviderTest#1
+```
+bal test --tests testDiscountCalculation#"half-price"
 ```
 
-Wildcard patterns also work — `fruitsDataProviderTest#"b*"` runs all cases whose key starts with `b`.
+Output:
+
+```
+Running Tests
+
+    dataproviders
+
+        1 passing
+        0 failing
+        0 skipped
+```
+
+For list data sets, use the zero-based index:
+
+```
+bal test --tests testAddition#1
+```
+
+Output:
+
+```
+Running Tests
+
+    dataproviders
+
+        1 passing
+        0 failing
+        0 skipped
+```
+
+Use the `*` wildcard to run all cases whose key matches a pattern:
+
+```
+bal test --tests testDiscountCalculation#"*-percent"
+```
 
 ## What's next
 
-- [Test Groups](groups.md) — run subsets of tests by group tag
-- [Execute Tests](execute-tests.md) — all options for running tests and viewing results
-- [Ballerina — Data-Driven Tests](https://ballerina.io/learn/test-ballerina-code/define-data-driven-tests/) — Ballerina language reference for data providers
+- [Test groups](groups.md) — partition tests into named groups and run or skip subsets
+- [Execute tests](execute-tests.md) — full CLI reference for filtering, rerunning, and parallel execution

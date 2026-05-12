@@ -1,183 +1,68 @@
 ---
-title: AI-Generated Test Cases
+title: Generate tests with AI
 ---
 
-Let AI analyze your integration code and generate test cases automatically. WSO2 Integrator uses AI to produce Ballerina test functions based on your service definitions, resource functions, and data transformation logic.
+# Generate tests with AI
 
-## How AI test generation works
+Writing test cases with WSO2 Integrator Copilot works the same way as writing them manually through the visual designer or in Ballerina code. Instead of building each test yourself, you describe what you want in the Copilot chat and it generates the code for you. Copilot generates `@test:Config` functions, data providers, mocks, and lifecycle hooks that slot directly into your existing `tests/` directory and run with `bal test`.
 
-The AI test generation feature reads your Ballerina source code and performs the following analysis:
+## Generate tests with WSO2 Integrator Copilot
 
-1. **Identifies testable units** -- resource functions, helper functions, data transformations, and connectors.
-2. **Infers input/output types** -- reads function signatures, record types, and payload structures.
-3. **Generates test scenarios** -- produces test functions covering the happy path, edge cases, and error conditions.
-4. **Creates mock stubs** -- generates mocking boilerplate for external service calls so generated tests are self-contained.
+Open the Copilot panel and describe the test you want. You can ask for a specific function, a whole service, or a particular scenario. Copilot reads your source code and generates matching Ballerina test code.
 
-The generated tests use the standard `ballerina/test` framework, so they integrate directly with the existing test runner and CLI.
+Example prompts to get started:
 
-## Generating tests for a service
+- "Write tests for the `GET /orders/{id}` resource covering both a valid ID and a missing ID."
+- "Generate a data-driven test for the `calculateDiscount` function with at least five input combinations."
+- "Add mock stubs for the payment gateway client and write a test for a failed charge."
 
-### Step 1: Open your service
-
-Open the service you want to test in the visual designer or the code editor.
-
-### Step 2: Trigger AI test generation
-
-Use one of these methods:
-
-1. **Visual designer** -- In the Service Designer, click **Generate Tests** in the toolbar or from the resource action menu.
-2. **Code editor** -- Click the **Generate Tests** CodeLens link that appears above a service or function definition.
-
-:::tip Other ways to trigger generation
-You can also press `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) and search for **WSO2 Integrator: Generate Tests**, or right-click inside a function body and select **Generate Tests** from the context menu.
-
-### Step 3: Review the generated output
-
-The AI creates a new test file (or appends to an existing one) in the `tests/` directory. For a service like:
-
-In the Service Designer, the service shows its Listener (`http:Listener` on port `9090`), Base Path (`/api`), and a list of resources — `GET /orders` and `POST /orders`. Each resource function appears as a selectable item in the designer.
-
-```ballerina
-import ballerina/http;
-
-service /api on new http:Listener(9090) {
-
-    resource function get orders() returns json[] {
-        return [{orderId: "ORD-001", status: "pending"}];
-    }
-
-    resource function post orders(json payload) returns json|error {
-        // Order creation logic
-        return {orderId: "ORD-002", status: "created"};
-    }
-}
-```
-
-The AI might generate:
-
-```ballerina
-import ballerina/http;
-import ballerina/test;
-
-http:Client testClient = check new ("http://localhost:9090");
-
-@test:Config {
-    groups: ["api", "orders"]
-}
-function testGetOrders() returns error? {
-    json[] response = check testClient->/api/orders;
-    test:assertTrue(response.length() > 0, msg = "Expected at least one order");
-}
-
-@test:Config {
-    groups: ["api", "orders"]
-}
-function testCreateOrder() returns error? {
-    json payload = {item: "Widget", quantity: 3, unitPrice: 12.50};
-    json response = check testClient->/api/orders.post(payload);
-    test:assertEquals(response.status, "created");
-}
-
-@test:Config {
-    groups: ["api", "orders", "negative"]
-}
-function testCreateOrderEmptyPayload() returns error? {
-    json payload = {};
-    json|error response = testClient->/api/orders.post(payload);
-    test:assertTrue(response is error, msg = "Empty payload should return an error");
-}
-```
-
-## Reviewing and customizing generated tests
-
-AI-generated tests are a starting point, not a finished product. Review each generated test for the following:
-
-### Verify assertions
-
-Check that assertions match your actual business logic. The AI infers expected values from your code, but it may not capture all domain-specific rules.
-
-```ballerina
-// AI generated this assertion based on the return type
-test:assertEquals(response.status, "created");
-
-// You might need to add additional assertions
-test:assertTrue(response.orderId.toString().startsWith("ORD-"));
-test:assertEquals(response.item, "Widget");
-```
-
-### Add edge cases
-
-The AI covers common patterns, but you should add tests for edge cases specific to your integration:
-
-- Boundary values (zero quantities, maximum payload sizes).
-- Invalid authentication or expired tokens.
-- Timeout scenarios for external service calls.
-- Concurrent request handling.
-
-### Adjust mock behavior
-
-If the AI generated mock stubs, verify they return realistic data. Update mock return values to match your actual backend responses.
-
-```ballerina
-// AI-generated mock -- update with realistic response data
-test:prepare(backendClient).when("get")
-    .thenReturn({customerId: "C-100", name: "Jane Doe", tier: "premium"});
-```
-
-### Rename test functions
-
-The AI generates functional but sometimes generic names. Rename them to describe the specific scenario being tested.
-
-```ballerina
-// Before: generic AI name
-function testPostOrders() returns error? { ... }
-
-// After: describes the specific scenario
-function testCreateOrderWithValidPayloadReturnsCreated() returns error? { ... }
-```
-
-## Generating tests for data transformations
-
-AI test generation is particularly effective for data transformation functions, where input and output types are clearly defined.
-
-```ballerina
-// Your transformation function
-function transformOrder(json input) returns xml|error {
-    string orderId = check input.orderId;
-    string status = check input.status;
-    xml output = xml `${orderId}${status}`;
-    return output;
-}
-```
-
-The AI generates test cases covering valid inputs, missing fields, and type mismatches -- ensuring your transformation handles diverse payloads.
-
-## Coverage analysis
-
-After generating tests, run them with code coverage enabled to see what percentage of your source code the AI tests cover.
-
-```bash
-bal test --code-coverage
-```
-
-Review the coverage report at `target/report/test_results.html` to identify gaps. Common areas that may need additional manual tests:
-
-- **Error handling branches** -- catch blocks and error-return paths.
-- **Conditional logic** -- all branches of `if/else` and `match` statements.
-- **Configuration variations** -- code paths triggered by different configurable values.
-
-Use the coverage report to guide where you write additional manual tests to complement the AI-generated suite.
+Copilot places the generated code in the `tests/` folder of your module. Review each function before running it. Generated tests are a starting point, not a finished product.
 
 ## Best practices
 
-- **Generate first, then refine** -- use AI tests as scaffolding and add domain-specific assertions.
-- **Do not commit generated tests without review** -- always verify that assertions are correct and meaningful.
-- **Regenerate after major changes** -- when your service API changes significantly, regenerate tests and merge relevant updates.
-- **Combine with manual tests** -- AI covers breadth; manually written tests cover depth for critical business logic.
-- **Tag generated tests** -- use test groups like `"ai-generated"` to distinguish them from hand-written tests.
+### Plan your test scenarios first
+
+Before prompting Copilot, decide what you want to verify. A vague prompt produces generic tests. A specific prompt produces useful ones.
+
+Instead of asking "generate tests for my service," describe the scenarios:
+
+- Which resources or functions need coverage?
+- What is the expected behavior on the happy path?
+- What should happen when inputs are invalid or missing?
+
+Sharing this context in your prompt gives Copilot enough information to generate assertions that reflect your actual business logic rather than inferred defaults.
+
+### Ask about edge cases
+
+Copilot can help you discover edge cases you might not have considered. After generating a first set of tests, follow up with prompts like:
+
+- "What edge cases am I missing for this endpoint?"
+- "Are there boundary conditions in the `calculateShipping` function I should test?"
+- "What would cause this data transformation to fail?"
+
+Use the answers to add targeted tests for the gaps Copilot identifies.
+
+### Ask Copilot to improve existing tests
+
+If you already have tests, Copilot can review them and suggest improvements. Share your test file and ask:
+
+- "Are the assertions in these tests strong enough to catch real bugs?"
+- "Can you add negative test cases to the existing suite?"
+- "Refactor these tests to use a data provider instead of duplicating the function body."
+
+This is particularly useful for tests written quickly under time pressure that could benefit from better coverage or cleaner structure.
+
+### Review before committing
+
+Generated tests reflect what Copilot inferred from your code. Always check that:
+
+- Assertions match your actual expected values, not just plausible-looking ones.
+- Mock return values use realistic data that represents what the real dependency returns.
+- Test function names describe the specific scenario, not just the function being called.
 
 ## What's next
 
-- [Debugging](/docs/develop/debugging/editor-debugging) -- Debug failing tests step-by-step
-- [Code Coverage](code-coverage-and-reports.md) -- Measure and improve test coverage
-- [Unit Testing](unit-testing.md) -- Test framework fundamentals and assertions
+- [Write unit tests](unit-testing.md) — test function structure, assertions, and `@test:Config` reference
+- [Mocking](mocking.md) — review and adjust the mock stubs Copilot generates
+- [Code coverage and reports](code-coverage-and-reports.md) — measure how much of your code the generated tests exercise
+- [Test Explorer](test-explorer.md) — run and review test results from the IDE

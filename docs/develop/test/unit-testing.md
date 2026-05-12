@@ -1,192 +1,237 @@
 ---
-title: Unit Testing
+title: Write unit tests
 ---
 
-Write automated tests for your integrations using Ballerina's built-in test framework. The framework provides annotations, assertions, and lifecycle hooks to structure reliable, repeatable tests. Test functions are never included in production builds.
+# Write unit tests
 
-## Test file structure
+WSO2 Integrator uses the Ballerina test framework for automated testing. Test functions are placed in a dedicated `tests/` folder inside your module and discovered automatically when you run `bal test`. This page covers how to structure the test directory, how to use assertions to verify behavior, and how to supply test-only configuration values.
 
-Ballerina test files live in a `tests/` directory within your package. Any `.bal` file inside this directory is treated as a test source file and has access to all symbols in the parent module.
+## Test directory structure
+
+Create a `tests/` subfolder inside the module you want to test. Every `.bal` file in that folder belongs to the same test suite for that module.
 
 ```
-my-integration/
-  Ballerina.toml
-  main.bal
-  tests/
-    main_test.bal
-    Config.toml         # test-specific configuration
-    resources/          # test data files
+HelloWorldAPI/
+    Ballerina.toml
+    main.bal
+    tests/
+        main_test.bal       ← test functions live here
+        Config.toml         ← test-only configurable values (optional)
+        resources/          ← test data files (optional)
 ```
 
-## Creating a test
+Two scoping rules apply:
 
-1. Open the integration in WSO2 Integrator.
-2. Click the **Testing** icon (flask) in the left sidebar. The **Test Explorer** panel opens, listing existing tests grouped by integration.
-3. Click **+** next to the integration name to create a new test. The **Create New Test Case** form opens.
-
-   ![Create New Test Case form showing Name, Groups, and Enabled fields](/img/develop/test/unit-testing/create-test-case-form.png)
-
-4. Fill in the following fields:
-
-   | Field | Description |
-   |---|---|
-   | **Name** | Name of the test function. Required. |
-   | **Groups** | Groups this test belongs to. Use **+ Add Item** to add group names for selective execution. |
-   | **Enabled** | Check to include this test in test runs. Uncheck to skip it. |
-
-5. Expand **Advanced Configurations** to set additional options:
-
-   | Field | Description |
-   |---|---|
-   | **Minimum Pass Rate (%)** | Minimum percentage of assertions that must pass for the test to succeed. Default is 100%. |
-   | **Depends On** | List of test function names that must pass before this test runs. |
-   | **Before Function** | Function to execute before this test runs. |
-   | **After Function** | Function to execute after this test completes. |
-   | **Runs** | Number of times to execute this test. |
-   | **Data Provider** | Function that supplies multiple data sets to the test function. See [Data-Driven Tests](data-driven-tests.md). |
-
-6. Click **Save**. The test opens in the flow diagram view.
-
-   ![Test flow diagram showing the Start node and node panel with Test assertion nodes on the right](/img/develop/test/unit-testing/test-flow-diagram.png)
-
-7. Add test logic by selecting nodes from the panel on the right. The **Test** category provides assertion nodes: `assertTrue`, `assertFalse`, `assertEquals`, `assertNotEquals`, `assertExactEquals`, `assertNotExactEquals`, `assertFail`, and `mock`.
-
-Import the `ballerina/test` module and annotate each test function with `@test:Config`.
-
-```ballerina
-import ballerina/test;
-
-// Function under test
-function add(int a, int b) returns int {
-    return a + b;
-}
-
-@test:Config {}
-function testAdd() {
-    test:assertEquals(add(2, 3), 5, msg = "Addition failed");
-}
-
-@test:Config {}
-function testAddNegative() {
-    test:assertEquals(add(-1, -4), -5);
-}
-```
-
-The `@test:Config` annotation accepts these optional fields:
-
-| Field | Type | Description |
-|---|---|---|
-| `enable` | `boolean` | Set to `false` to skip the test. Default `true`. |
-| `groups` | `string[]` | Tag the test for selective execution. |
-| `dataProvider` | `function` | Supply multiple data sets to the test function. |
-| `before` | `function` | Run a setup function before this test. |
-| `after` | `function` | Run a teardown function after this test. |
-| `dependsOn` | `function[]` | Run this test only after the listed tests pass. |
+- Everything defined in the module (`main.bal` and any helper files) is visible inside the test files. You do not need to re-import or duplicate production code.
+- Symbols defined inside `tests/` are invisible to the module itself, so test helpers stay isolated and do not affect the production build.
 
 ## Assertions
 
-In the test flow diagram, select assertion nodes from the **Test** category in the node panel. Each node exposes its parameters as fields in the configuration panel — for example, `assertEquals` accepts an **actual value**, an **expected value**, and an optional **message**.
+Assertions compare what your code produced against what you expected. When they do not match, the test fails with a descriptive message pointing to the exact difference. The optional `message` parameter appears in the failure output — use it to explain the intent of the assertion so failures are easy to diagnose.
 
-The available assertion nodes map directly to the Ballerina assertion functions described in the **Ballerina Code** tab.
+| Function | What it checks |
+|---|---|
+| `test:assertTrue(expr, message?)` | The expression evaluates to `true`. |
+| `test:assertFalse(expr, message?)` | The expression evaluates to `false`. |
+| `test:assertEquals(actual, expected, message?)` | The two values are equal by value. |
+| `test:assertNotEquals(actual, expected, message?)` | The two values are not equal by value. |
+| `test:assertExactEquals(actual, expected, message?)` | The two references point to the same object in memory. |
+| `test:assertNotExactEquals(actual, expected, message?)` | The two references do not point to the same object in memory. |
+| `test:assertFail(message)` | Immediately fails the test. Use it inside a conditional block when reaching that point is itself the error. |
 
-Every assertion function accepts an optional `msg` parameter for custom failure messages.
+### Usage examples
 
 ```ballerina
+import ballerina/http;
 import ballerina/test;
 
-@test:Config {}
-function testAssertions() {
-    test:assertEquals(getStatus(200), "OK");
+http:Client testClient = check new ("http://localhost:9090/orders");
 
-    test:assertTrue(isValid("user@example.com"), msg = "Email should be valid");
-    test:assertFalse(isValid(""), msg = "Empty string should be invalid");
+type Order record {
+    int orderId;
+    string status;
+};
 
-    test:assertNotEquals(generateId(), "", msg = "ID must not be empty");
+@test:Config
+function testGetOrderReturnsOk() returns error? {
+    http:Response response = check testClient->/[42].get();
+    test:assertEquals(response.statusCode, 200, msg = "Expected 200 OK for a valid order ID");
 }
 
-@test:Config {}
-function testExpectedFailure() returns error? {
-    var result = parsePayload("<<<invalid>>>");
-    if result is error {
-        test:assertEquals(result.message(), "Invalid payload format");
-    } else {
-        test:assertFail(msg = "Expected an error for invalid payload");
+@test:Config
+function testOrderStatusIsPending() returns error? {
+    Order order = check (check testClient->/[42].get()).getJsonPayload().cloneWithType();
+    test:assertEquals(order.status, "pending", msg = "Newly created order should have pending status");
+    test:assertTrue(order.orderId > 0, msg = "Order ID must be positive");
+}
+
+@test:Config
+function testInvalidOrderIdReturns404() returns error? {
+    http:Response response = check testClient->/[-1].get();
+    test:assertEquals(response.statusCode, 404, msg = "Negative order ID should return 404");
+    test:assertNotEquals(response.statusCode, 200);
+}
+
+@test:Config
+function testOrderCreationFails() returns error? {
+    json|error result = testClient->/[0].get();
+    if result is json {
+        test:assertFail(msg = "Expected an error for order ID zero, but got a successful response");
     }
 }
 ```
 
-| Assertion | Purpose |
-|---|---|
-| `test:assertEquals` | Values are equal |
-| `test:assertNotEquals` | Values are not equal |
-| `test:assertTrue` | Condition is `true` |
-| `test:assertFalse` | Condition is `false` |
-| `test:assertFail` | Unconditionally fail with a message |
-| `test:assertExactEquals` | Reference equality (same object) |
-| `test:assertNotExactEquals` | References are not the same object |
+### Assertion failure output
 
-## Lifecycle hooks
+The framework formats failure output based on the types being compared. Understanding the format makes it faster to locate exactly what went wrong without reading through the full test output.
 
-Use the **Before Function** and **After Function** fields in the **Create New Test Case** form to run setup and teardown logic around individual tests. These fields accept the name of any function defined in your test file.
+#### Type mismatch
 
-For suite-level setup and teardown that runs once before or after all tests in the module, use the `@test:BeforeSuite` and `@test:AfterSuite` annotations in Ballerina code (see the **Ballerina Code** tab).
+When the actual and expected values have different types, both the value and its type are shown. This makes it immediately clear when a string-versus-integer confusion is the cause of the failure.
 
 ```ballerina
 import ballerina/test;
-import ballerina/log;
 
-@test:BeforeSuite
-function setupSuite() {
-    log:printInfo("Starting test suite -- initializing resources");
-}
-
-@test:AfterSuite
-function teardownSuite() {
-    log:printInfo("Test suite complete -- cleaning up resources");
-}
-
-@test:BeforeEach
-function beforeEachTest() {
-    log:printInfo("Resetting state for next test");
-}
-
-@test:AfterEach
-function afterEachTest() {
-    log:printInfo("Post-test cleanup");
+@test:Config
+function testAssertStringAndInt() {
+    test:assertEquals(1, "1");
 }
 ```
 
-| Annotation | Scope |
-|---|---|
-| `@test:BeforeSuite` | Once before any test in the module runs |
-| `@test:AfterSuite` | Once after all tests in the module run |
-| `@test:BeforeGroups` | Before the first test in specified groups |
-| `@test:AfterGroups` | After the last test in specified groups |
-| `@test:BeforeEach` | Before every test function |
-| `@test:AfterEach` | After every test function |
+Output:
 
-## Running tests
+```
+[fail] testAssertStringAndInt:
 
-In the **Test Explorer** panel, click the run (▷) icon next to a test function or integration name to execute it. Results appear inline — the counter next to each test shows how many passed out of the total (for example, `0/1` means zero of one tests passed).
+    Assertion Failed!
 
-Use the filter input at the top of the Test Explorer to narrow results by test name, tag, or group.
-
-```bash
-# Run all tests
-bal test
-
-# Run a specific test by name
-bal test --tests testAdd
-
-# Run tests in a specific group
-bal test --groups unit
+        expected: <string> '1'
+        actual  : <int> '1'
 ```
 
-For more options — parallel execution, code coverage, and report formats — see [Execute Tests](execute-tests.md).
+#### String mismatch
+
+For multiline strings, a unified diff highlights exactly which lines differ using `+` and `-`.
+
+```ballerina
+import ballerina/test;
+
+@test:Config
+function testAssertString() {
+    test:assertEquals("hello Ballerina user\nWelcome to Ballerina",
+        "hello user\nWelcome to Ballerina");
+}
+```
+
+Output:
+
+```
+[fail] testAssertString:
+
+    Assertion Failed!
+
+        Diff    :
+
+        --- actual
+        +++ expected
+
+        @@ -1,2 +1,2 @@
+
+        -hello Ballerina user
+        +hello user
+         Welcome to Ballerina
+```
+
+#### Record, map, or JSON mismatch
+
+Key mismatches are listed under `expected keys` and `actual keys`. Value mismatches are then reported per key, so you do not have to parse the entire structure to find the problem.
+
+```ballerina
+import ballerina/test;
+
+@test:Config
+function testAssertJson() {
+    json j1 = {
+        name: "Anne",
+        age: "21",
+        marks: {maths: 99, english: 90}
+    };
+    json j2 = {
+        name2: "Amie",
+        age: 21,
+        marks: {maths: 35, english: 90}
+    };
+    test:assertEquals(j1, j2);
+}
+```
+
+Output:
+
+```
+[fail] testAssertJson:
+
+    Assertion Failed!
+
+        expected keys   : name2
+        actual keys     : name
+
+        key: age
+        expected value  : <int> 21
+        actual value    : <string> 21
+
+        key: marks.maths
+        expected value  : 35
+        actual value    : 99
+```
+
+#### Tuple or other anydata mismatch
+
+For tuples and other `anydata` types, the expected and actual values are shown directly.
+
+```ballerina
+import ballerina/test;
+
+@test:Config
+function testAssertTuples() {
+    [int, string] a = [10, "John"];
+    [int, string] b = [12, "John"];
+    test:assertEquals(a, b);
+}
+```
+
+Output:
+
+```
+[fail] testAssertTuples:
+
+    Assertion Failed!
+
+        expected: '[12,"John"]'
+        actual  : '[10,"John"]'
+```
+
+## Configuration values
+
+If your integration uses configurable variables, the tests need values for those variables to run. Create a `Config.toml` file inside the `tests/` directory and add the values there. The framework loads this file automatically when you run `bal test`, and it does not affect the module's production configuration.
+
+```toml
+# tests/Config.toml
+dbHost = "localhost"
+dbPort = 5432
+serviceUrl = "http://localhost:9090"
+```
+
+The `Config.toml` inside `tests/` takes precedence over the module-level `Config.toml` during test execution, so you can safely override production values such as database hosts, ports, or external service URLs with test-safe alternatives.
+
+You can also pass configuration values directly from the command line when running tests in different environments:
+
+```
+bal test -CdbHost=ci-db.internal -CdbPort=5432
+```
 
 ## What's next
 
-- [Data-Driven Tests](data-driven-tests.md) — parameterize tests with data providers to run the same logic against multiple inputs
-- [Test Groups](groups.md) — organize and selectively run tests using group tags
-- [Mocking](mocking.md) — isolate your tests from external dependencies
-- [Execute Tests](execute-tests.md) — all options for running tests and viewing results
+- [Configure test lifecycle](configure-tests.md) — set up and tear down state at the suite, group, and per-test level
+- [Data-driven tests](data-driven-tests.md) — run one test function across many input combinations
+- [Mocking](mocking.md) — replace external dependencies with controlled stubs
+- [Execute tests](execute-tests.md) — CLI options for filtering, rerunning, and parallelizing tests
