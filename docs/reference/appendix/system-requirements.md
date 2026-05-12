@@ -149,4 +149,4 @@ For ahead-of-time compilation to native executables:
 
 - [Installation Guide](/docs/get-started/install) -- Step-by-step installation instructions
 - [Docker and Kubernetes Deployment](/docs/deploy-operate/deploy/docker-kubernetes) -- Container deployment guide
-- [Troubleshooting](troubleshooting.md) -- Common issues and solutions
+- [Troubleshooting](../../develop/debugging/troubleshooting.md) -- Common issues and solutions

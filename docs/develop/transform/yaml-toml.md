@@ -8,13 +8,21 @@ Work with YAML and TOML configuration formats commonly used in cloud-native depl
 
 ## YAML processing
 
-YAML is widely used for Kubernetes manifests, CI/CD configurations, and application settings. Ballerina's `ballerina/yaml` module handles parsing and serialization.
+YAML is widely used for Kubernetes manifests, CI/CD configurations, and application settings. Ballerina's `ballerina/data.yaml` module handles parsing and serialization. File I/O is composed with `ballerina/io` (`fileReadBytes` / `fileWriteString`) because `data.yaml` operates on strings, byte arrays, and streams rather than on file paths directly.
 
 ### Parsing YAML
 
 Read YAML content and convert it into Ballerina values with type safety.
 
-1. **Define the record types** — Navigate to **Types** in the sidebar and click **+** to add a new type. Select **Create from scratch**, set **Kind** to **Record**, and name it `ServerConfig`. Add fields using the **+** button:
+1. **Define the record types**: Navigate to **Types** in the sidebar and click **+** to add a new type. Select **Create from scratch**, set **Kind** to **Record**, and name it `DatabaseConfig`. Add fields using the **+** button:
+
+   | Field | Type |
+   |---|---|
+   | `url` | `string` |
+   | `username` | `string` |
+   | `poolSize` | `int` |
+
+   Then add a second record type named `ServerConfig` with fields:
 
    | Field | Type |
    |---|---|
@@ -23,15 +31,27 @@ Read YAML content and convert it into Ballerina values with type safety.
    | `allowedOrigins` | `string[]` |
    | `database` | `DatabaseConfig` |
 
-   Then create a second record type `DatabaseConfig` with fields: `url` (string), `username` (string), `poolSize` (int). For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
+   For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
 
-2. **Add a Variable step** — In the flow designer, click **+** and select **Variable**. Set the type to `ServerConfig` and the expression to `check yaml:readFile("config.yaml").fromJsonWithType()`.
+2. **Add a Function Call step to read the file as bytes**: In the flow designer, click **+** and select **Function Call**. Search for `io:fileReadBytes` in the library picker and select it (this adds the `ballerina/io` import). Pass `"config.yaml"` as the path argument and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly` by the function's return signature.
 
-   ![Flow designer showing YAML file read and type conversion variable step](/img/develop/transform/yaml-toml/yaml-parsing-flow.png)
+3. **Add a Function Call step to parse into the typed record**: Click **+** and select **Function Call**. Search for `yaml:parseBytes` in the library picker and select it (this adds the `ballerina/data.yaml` import). Pass `fileContent` as the argument and assign the return value to a variable named `config` of type `ServerConfig`. The target type is inferred from the variable, so no separate type-conversion step is needed.
+
+4. **Add a Function Call step to print the server info**: Click **+** and select **Function Call**. Search for `io:println`. The function accepts a list of values — add two arguments. Set the first argument to `"Server: " + config.host + ":"` (string concatenation works between strings) and the second argument to `config.port` (kept separate because `+` cannot mix a string with an `int`).
+
+5. **Add a Function Call step to print the database pool size**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"DB Pool Size: "` and `config.database.poolSize`.
+
+   ![Flow designer showing YAML file read, typed conversion, and console output steps](/img/develop/transform/yaml-toml/yaml-parsing-flow.png)
 
 ```ballerina
-import ballerina/yaml;
 import ballerina/io;
+import ballerina/data.yaml;
+
+type DatabaseConfig record {|
+    string url;
+    string username;
+    int poolSize;
+|};
 
 type ServerConfig record {|
     string host;
@@ -40,17 +60,14 @@ type ServerConfig record {|
     DatabaseConfig database;
 |};
 
-type DatabaseConfig record {|
-    string url;
-    string username;
-    int poolSize;
-|};
-
 public function main() returns error? {
-    // Parse a YAML file into a typed record
-    ServerConfig config = check yaml:readFile("config.yaml").fromJsonWithType();
+    // Read the YAML file as bytes
+    byte[] & readonly fileContent = check io:fileReadBytes("config.yaml");
 
-    io:println("Server: ", config.host, ":", config.port);
+    // Parse directly into the typed record (target type is inferred)
+    ServerConfig config = check yaml:parseBytes(fileContent);
+
+    io:println("Server: " + config.host + ":", config.port);
     io:println("DB Pool Size: ", config.database.poolSize);
 }
 ```
@@ -59,16 +76,30 @@ public function main() returns error? {
 
 Parse YAML content directly from a string value.
 
-1. **Add a Variable step for the YAML content** — In the flow designer, click **+** and select **Variable**. Set the type to `string` and enter the YAML string template as the expression.
+1. **Add a Variable step for the YAML content**: In the flow designer, click **+** and select **Declare Variable**. Set the name to `yamlContent`, the type to `string`, and enter the following YAML as a multi-line string template in the expression field:
 
-2. **Add a Variable step for parsing** — Click **+** and select **Variable**. Set the type to `json` and the expression to `check yaml:readString(yamlContent)`.
+   ```yaml
+   name: order-service
+   version: 1.2.0
+   replicas: 3
+   env:
+     - name: DB_HOST
+       value: postgres.svc.local
+     - name: LOG_LEVEL
+       value: INFO
+   ```
 
-3. **Add a Variable step for nested access** — Set the type to `json` and the expression to `check yamlValue.env` to access nested values.
+2. **Add a Function Call step for parsing**: Click **+** and select **Function Call**. Search for `yaml:parseString` in the library picker and select it (this adds the `ballerina/data.yaml` import). Pass `yamlContent` as the argument and assign the return value to a variable named `yamlValue` of type `json`.
 
-   ![Flow designer showing YAML string parsing and nested value access steps](/img/develop/transform/yaml-toml/yaml-parsing-strings-flow.png)
+3. **Add a Variable step for nested access**: Click **+** and select **Declare Variable**. Set the name to `envVars`, the type to `json`, and the expression to `check yamlValue.env`.
+
+4. **Add a Function Call step to print the env vars**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"Env vars: "` and `envVars` (kept separate because `+` cannot mix a string with a `json` value).
+
+   ![Flow designer showing YAML string parsing, nested value access, and console output steps](/img/develop/transform/yaml-toml/yaml-parsing-strings-flow.png)
 
 ```ballerina
-import ballerina/yaml;
+import ballerina/io;
+import ballerina/data.yaml;
 
 public function main() returns error? {
     string yamlContent = string `
@@ -82,9 +113,11 @@ public function main() returns error? {
             value: INFO
     `;
 
-    json yamlValue = check yaml:readString(yamlContent);
+    json yamlValue = check yaml:parseString(yamlContent);
     // Access nested values
     json envVars = check yamlValue.env;
+
+    io:println("Env vars: ", envVars);
 }
 ```
 
@@ -92,17 +125,35 @@ public function main() returns error? {
 
 Serialize Ballerina values back to YAML format.
 
-1. **Add a Variable step** — In the flow designer, click **+** and select **Variable**. Set the type to `map<json>` and initialize it with the deployment object.
+1. **Add a Variable step for the deployment object**: In the flow designer, click **+** and select **Declare Variable**. Set the name to `deployment`, the type to `map<json>`, and enter the following as the expression:
 
-2. **Add a Function Call step** — Click **+** and select **Function Call**. Call `yaml:writeFile("deployment.yaml", deployment)` to write the YAML file.
+   ```json
+   {
+       "apiVersion": "apps/v1",
+       "kind": "Deployment",
+       "metadata": {
+           "name": "integration-service",
+           "labels": {
+               "app": "integrator"
+           }
+       },
+       "spec": {
+           "replicas": 3
+       }
+   }
+   ```
 
-3. **Add a Variable step** — Click **+** and select **Variable**. Set the type to `string` and the expression to `check yaml:writeString(deployment)` to convert to a YAML string.
+2. **Add a Function Call step to serialize to a YAML string**: Click **+** and select **Function Call**. Search for `yaml:toYamlString` in the library picker and select it (this adds the `ballerina/data.yaml` import). Pass `deployment` as the argument and assign the return value to a variable named `yamlString` of type `string`.
 
-   ![Flow designer showing YAML write file and write string steps](/img/develop/transform/yaml-toml/yaml-writing-flow.png)
+3. **Add a Function Call step to write to a file**: Click **+** and select **Function Call**. Search for `io:fileWriteString` in the library picker and select it (this adds the `ballerina/io` import). Pass `"deployment.yaml"` as the path argument and `yamlString` as the content argument.
+
+4. **Add a Function Call step to print the YAML**: Click **+** and select **Function Call**. Search for `io:println` and pass `yamlString` as the argument.
+
+   ![Flow designer showing YAML serialization, file write, and console output steps](/img/develop/transform/yaml-toml/yaml-writing-flow.png)
 
 ```ballerina
-import ballerina/yaml;
 import ballerina/io;
+import ballerina/data.yaml;
 
 public function main() returns error? {
     map<json> deployment = {
@@ -119,11 +170,12 @@ public function main() returns error? {
         }
     };
 
-    // Write to a YAML file
-    check yaml:writeFile("deployment.yaml", deployment);
+    // Serialize the map to a YAML string
+    string yamlString = check yaml:toYamlString(deployment);
 
-    // Convert to YAML string
-    string yamlString = check yaml:writeString(deployment);
+    // Write the YAML string to a file
+    check io:fileWriteString("deployment.yaml", yamlString);
+
     io:println(yamlString);
 }
 ```
@@ -132,23 +184,35 @@ public function main() returns error? {
 
 Handle YAML files with multiple documents separated by `---`.
 
-1. **Add a Variable step** — In the flow designer, click **+** and select **Variable**. Set the type to `json[]` and the expression to `check yaml:readFile("k8s-manifests.yaml", multiDocument = true).fromJsonWithType()`.
+1. **Add a Function Call step to read the file as bytes**: In the flow designer, click **+** and select **Function Call**. Search for `io:fileReadBytes` in the library picker and select it (this adds the `ballerina/io` import). Pass an appropriate YAML file path (such as `"k8s-manifests.yaml"`) as the path argument and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly` by the function's return signature.
 
-2. **Add a Foreach step** — Click **+** and select **Foreach** under **Control**. Set the **Collection** to `documents` and the **Variable** to `doc`. Inside the loop, add steps to process each document.
+2. **Add a Function Call step to parse the documents**: Click **+** and select **Function Call**. Search for `yaml:parseBytes` in the library picker and select it (this adds the `ballerina/data.yaml` import). In the **S** (Source byte[] value) field, switch the input to **expression** mode and pick `fileContent` from the variable picker. Set **Result\*** (the result variable name) to `documents` and **T\*** (the target type) to `json[]`. The function parses all `---`-separated documents into the array automatically.
+
+3. **Add a Foreach step**: Click **+** and select **Foreach** under **Control**. Set the **Collection** to `documents`, the **Variable** name to `document`, and the **Variable** type to `json`.
+
+4. **Add a Variable step inside the loop for the document map**: Click **+** inside the loop body and select **Declare Variable**. Set the name to `documentMap`, the type to `map<json>`, and the expression to `check document.ensureType()`.
+
+5. **Add a Variable step inside the loop for the kind value**: Click **+** and select **Declare Variable**. Set the name to `kindJson`, the type to `json`, and the expression to `documentMap["kind"]`.
+
+6. **Add a Variable step inside the loop to convert the kind to a string**: Click **+** and select **Declare Variable**. Set the name to `kind`, the type to `string`, and the expression to `kindJson.toString()`.
+
+7. **Add a Function Call step inside the loop to print the kind**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"Processing: "` and `kind`.
 
    ![Flow designer showing multi-document YAML parsing with foreach iteration](/img/develop/transform/yaml-toml/yaml-multi-doc-flow.png)
 
 ```ballerina
-import ballerina/yaml;
 import ballerina/io;
+import ballerina/data.yaml;
 
 public function main() returns error? {
-    // Read all documents from a multi-document YAML file
-    json[] documents = check yaml:readFile("k8s-manifests.yaml",
-        multiDocument = true).fromJsonWithType();
+    // Read the file as bytes and parse all --- separated documents into a json array
+    byte[] & readonly fileContent = check io:fileReadBytes("k8s-manifests.yaml");
+    json[] documents = check yaml:parseBytes(fileContent);
 
-    foreach json doc in documents {
-        string kind = check doc.kind;
+    foreach json document in documents {
+        map<json> documentMap = check document.ensureType();
+        json kindJson = documentMap["kind"];
+        string kind = kindJson.toString();
         io:println("Processing: ", kind);
     }
 }
@@ -162,7 +226,14 @@ TOML is the standard configuration format for Ballerina projects (`Ballerina.tom
 
 Read TOML files into Ballerina maps and records.
 
-1. **Define the record types** — Navigate to **Types** in the sidebar and click **+** to add a new type. Select **Create from scratch**, set **Kind** to **Record**, and name it `ProjectConfig`. Add fields using the **+** button:
+1. **Define the record types**: Navigate to **Types** in the sidebar and click **+** to add a new type. Select **Create from scratch**, set **Kind** to **Record**, and name it `BuildConfig`. Add fields using the **+** button:
+
+   | Field | Type |
+   |---|---|
+   | `observability` | `boolean` |
+   | `target` | `string` |
+
+   Then add a second record type named `ProjectConfig` with fields:
 
    | Field | Type |
    |---|---|
@@ -171,28 +242,32 @@ Read TOML files into Ballerina maps and records.
    | `dependencies` | `map<string>` |
    | `build` | `BuildConfig` |
 
-   Then create a second record type `BuildConfig` with fields: `observability` (boolean), `target` (string). For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
+   For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
 
-2. **Add a Variable step** — In the flow designer, click **+** and select **Variable**. Set the type to `map<json>` and the expression to `check toml:readFile("project.toml")`.
+2. **Add a Function Call step to read the file**: In the flow designer, click **+** and select **Function Call**. Search for `toml:readFile` in the library picker and select it (this adds the `ballerina/toml` import). Pass `"project.toml"` as the path argument and assign the return value to a variable named `tomlData` of type `map<json>`.
 
-3. **Add a Variable step for typed conversion** — Click **+** and select **Variable**. Set the type to `ProjectConfig` and the expression to `check tomlData.fromJsonWithType()`.
+3. **Add a Function Call step to print the project name**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"Project: "` and `tomlData["name"]`.
 
-   ![Flow designer showing TOML file read and type-safe conversion steps](/img/develop/transform/yaml-toml/toml-parsing-flow.png)
+4. **Add a Variable step for typed conversion**: Click **+** and select **Declare Variable**. Set the name to `config`, the type to `ProjectConfig`, and the expression to `check tomlData.ensureType()`.
+
+5. **Add a Function Call step to print the project version**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"Version: "` and `config.version`.
+
+   ![Flow designer showing TOML file read, raw print, typed conversion, and version print steps](/img/develop/transform/yaml-toml/toml-parsing-flow.png)
 
 ```ballerina
-import ballerina/toml;
 import ballerina/io;
+import ballerina/toml;
+
+type BuildConfig record {|
+    boolean observability;
+    string target;
+|};
 
 type ProjectConfig record {|
     string name;
     string version;
     map<string> dependencies;
     BuildConfig build;
-|};
-
-type BuildConfig record {|
-    boolean observability;
-    string target;
 |};
 
 public function main() returns error? {
@@ -202,7 +277,7 @@ public function main() returns error? {
     io:println("Project: ", tomlData["name"]);
 
     // Type-safe parsing
-    ProjectConfig config = check tomlData.fromJsonWithType();
+    ProjectConfig config = check tomlData.ensureType();
     io:println("Version: ", config.version);
 }
 ```
@@ -211,11 +286,26 @@ public function main() returns error? {
 
 Generate TOML content from Ballerina data structures.
 
-1. **Add a Variable step** — In the flow designer, click **+** and select **Variable**. Set the type to `map<json>` and initialize it with the configuration object.
+1. **Add a Variable step for the configuration object**: In the flow designer, click **+** and select **Declare Variable**. Set the name to `config`, the type to `map<json>`, and enter your content (for example, the following) as an expression:
 
-2. **Add a Function Call step** — Click **+** and select **Function Call**. Call `toml:writeFile("pipeline.toml", config)` to write the TOML file.
+   ```json
+   {
+       "name": "data-pipeline",
+       "version": "2.0.0",
+       "dependencies": {
+           "ballerinax/kafka": "4.2.0",
+           "ballerinax/postgresql": "1.14.0"
+       },
+       "build": {
+           "observability": true,
+           "target": "cloud"
+       }
+   }
+   ```
 
-   ![Flow designer showing TOML write step](/img/develop/transform/yaml-toml/toml-writing-flow.png)
+2. **Add a Function Call step to write the file**: Click **+** and select **Function Call**. Search for `toml:writeFile` in the library picker and select it (this adds the `ballerina/toml` import). Pass `"pipeline.toml"` as the path argument. For the **TOML structure** field, switch the input to **expression** mode and pick `config` from the variable picker.
+
+   ![Flow designer showing the config map declaration and TOML write step](/img/develop/transform/yaml-toml/toml-writing-flow.png)
 
 ```ballerina
 import ballerina/toml;
@@ -242,27 +332,39 @@ public function main() returns error? {
 
 Convert between configuration formats for systems that expect different inputs.
 
-1. **Add a Variable step for reading** — In the `yamlToJson` function flow, click **+** and select **Variable**. Set the type to `json` and the expression to `check yaml:readFile(yamlFilePath)`. Since YAML is parsed as `json`, the value is returned directly.
+Create both functions first via **+** on the **Functions** entry in the left sidebar: `yamlToJson(string yamlFilePath) returns json|error` and `jsonToYaml(json data, string outputPath) returns error?`. Then open each flow to add the steps below.
 
-2. **Add a Function Call step for writing** — In the `jsonToYaml` function flow, click **+** and select **Function Call**. Call `yaml:writeFile(outputPath, data)` to convert JSON back to YAML.
+In the `yamlToJson` function flow:
+
+1. **Add a Function Call step to read the file as bytes**: Click **+** and select **Function Call**. Search for `io:fileReadBytes` in the library picker and select it (this adds the `ballerina/io` import). Pass `yamlFilePath` as the path argument and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly`.
+
+2. **Add a Function Call step to parse**: Click **+** and select **Function Call**. Search for `yaml:parseBytes` in the library picker and select it (this adds the `ballerina/data.yaml` import). In the **S** (Source byte[] value) field, switch the input to **expression** mode and pick `fileContent`. Set **Result\*** to `yamlData` and **T\*** to `json`.
+
+3. **Add a Return step**: Click **+** and select **Return**. Set the expression to `yamlData`.
+
+In the `jsonToYaml` function flow:
+
+4. **Add a Function Call step to serialize**: Click **+** and select **Function Call**. Search for `yaml:toYamlString` in the library picker and select it. Pass `data` as the argument and assign the return value to a variable named `yamlString` of type `string`.
+
+5. **Add a Function Call step to write to the file**: Click **+** and select **Function Call**. Search for `io:fileWriteString` in the library picker and select it. Pass `outputPath` as the path argument and `yamlString` as the content argument.
 
    ![Flow designer showing YAML-to-JSON conversion function flows](/img/develop/transform/yaml-toml/yaml-json-conversion-flow.png)
 
 ```ballerina
-import ballerina/yaml;
 import ballerina/io;
+import ballerina/data.yaml;
 
 // Convert YAML configuration to JSON for API consumption
 public function yamlToJson(string yamlFilePath) returns json|error {
-    json yamlData = check yaml:readFile(yamlFilePath);
-    // YAML is already parsed as json — return directly
-    // or transform as needed
+    byte[] & readonly fileContent = check io:fileReadBytes(yamlFilePath);
+    json yamlData = check yaml:parseBytes(fileContent);
     return yamlData;
 }
 
 // Convert JSON API response to YAML for config files
 public function jsonToYaml(json data, string outputPath) returns error? {
-    check yaml:writeFile(outputPath, data);
+    string yamlString = check yaml:toYamlString(data);
+    check io:fileWriteString(outputPath, yamlString);
 }
 ```
 
@@ -270,7 +372,7 @@ public function jsonToYaml(json data, string outputPath) returns error? {
 
 Build a configuration loader that reads from YAML or TOML based on file extension.
 
-1. **Define the record type** — Navigate to **Types** in the sidebar and click **+** to add a new type. Select **Create from scratch**, set **Kind** to **Record**, and name it `AppConfig`. Add fields using the **+** button:
+1. **Define the record type**: Navigate to **Types** in the sidebar and click **+** to add a new type. Select **Create from scratch**, set **Kind** to **Record**, and name it `AppConfig`. Add fields using the **+** button:
 
    | Field | Type |
    |---|---|
@@ -281,17 +383,36 @@ Build a configuration loader that reads from YAML or TOML based on file extensio
 
    For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
 
-2. **View the `loadConfig` function flow** — The `loadConfig` function appears as a separate entry point in the designer. It contains an **If/Else** step that branches based on file extension, with **Variable** steps for `yaml:readFile(...)` and `toml:readFile(...)` in each branch.
+2. **Create the `loadConfig` function**: Click **+** on the **Functions** entry in the left sidebar and create `loadConfig(string filePath) returns AppConfig|error`.
 
-3. **View the `main` function flow** — The main function calls `loadConfig` via a **Function Call** step.
+3. **Find the position of the file extension**: In the `loadConfig` flow, click **+** and select **Declare Variable**. Set the name to `dotIndex`, the type to `int?`, and the expression to `filePath.lastIndexOf(".")`.
+
+4. **Add an If step for paths without an extension**: Click **+** and select **If** under **Control**. Set the condition to `dotIndex is ()`. Inside the branch, add a Return step with expression `error("Unsupported config format: " + filePath)`.
+
+5. **Extract the extension**: Click **+** and select **Declare Variable**. Set the name to `ext`, the type to `string`, and the expression to `filePath.substring(dotIndex + 1)`.
+
+6. **Add an If step for the YAML branch**: Click **+** and select **If** under **Control**. Set the condition to `ext == "yaml" || ext == "yml"`. Inside the branch:
+   - Add a Function Call for `io:fileReadBytes`. Pass `filePath` and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly`.
+   - Add a Function Call for `yaml:parseBytes` (adds the `ballerina/data.yaml` import). In **S**, switch the input to **expression** mode and pick `fileContent`. Set **Result\*** to `appConfig` and **T\*** to `AppConfig`.
+   - Add a Return step with expression `appConfig`.
+
+7. **Add an Else If branch for TOML**: From the If step, add an **else if** branch with condition `ext == "toml"`. Inside:
+   - Add a Function Call for `toml:readFile` (adds the `ballerina/toml` import). Pass `filePath` and assign the return value to `tomlData` of type `map<json>`.
+   - Add a Declare Variable step. Set the name to `appConfig`, type to `AppConfig`, and expression to `check tomlData.ensureType()`.
+   - Add a Return step with expression `appConfig`.
+
+8. **Add an Else branch for unsupported formats**: Add a Return step with expression `error("Unsupported config format: " + ext)`.
+
+9. **In the `main` function flow, call `loadConfig`**: Add a Function Call step, search for `loadConfig` (it appears as a user-defined function), pass `"app-config.yaml"` as the file path, and assign the result value to a variable named `config` of type `AppConfig`.
+
+10. **Add a Function Call to print the startup message**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"Starting " + config.appName + " on port "` (string concatenation between strings) and `config.port`.
 
    ![Flow designer showing the dynamic configuration loader with If/Else branching for YAML and TOML formats](/img/develop/transform/yaml-toml/yaml-toml-config-loader-flow.png)
 
 ```ballerina
-import ballerina/yaml;
-import ballerina/toml;
-import ballerina/file;
 import ballerina/io;
+import ballerina/toml;
+import ballerina/data.yaml;
 
 type AppConfig record {|
     string appName;
@@ -301,35 +422,38 @@ type AppConfig record {|
 |};
 
 public function loadConfig(string filePath) returns AppConfig|error {
-    string ext = check file:extension(filePath);
+    int? dotIndex = filePath.lastIndexOf(".");
+    if dotIndex is () {
+        return error("Unsupported config format: " + filePath);
+    }
+    string ext = filePath.substring(dotIndex + 1);
 
-    json rawConfig;
     if ext == "yaml" || ext == "yml" {
-        rawConfig = check yaml:readFile(filePath);
+        byte[] & readonly fileContent = check io:fileReadBytes(filePath);
+        AppConfig appConfig = check yaml:parseBytes(fileContent);
+        return appConfig;
     } else if ext == "toml" {
         map<json> tomlData = check toml:readFile(filePath);
-        rawConfig = tomlData;
-    } else {
-        return error("Unsupported config format: " + ext);
+        AppConfig appConfig = check tomlData.ensureType();
+        return appConfig;
     }
-
-    return rawConfig.fromJsonWithType();
+    return error("Unsupported config format: " + ext);
 }
 
 public function main() returns error? {
     AppConfig config = check loadConfig("app-config.yaml");
-    io:println("Starting ", config.appName, " on port ", config.port);
+    io:println("Starting " + config.appName + " on port ", config.port);
 }
 ```
 
 ## Best practices
 
-- **Use typed records** for parsing -- define Ballerina record types that match your YAML/TOML structure for compile-time safety
-- **Validate early** -- parse configuration at startup and fail fast on missing or invalid values
-- **Handle multi-document YAML carefully** -- Kubernetes manifests often contain multiple documents in a single file
-- **Prefer TOML for Ballerina configs** -- TOML aligns with Ballerina's native configuration format (`Ballerina.toml`)
+- **Use typed records** for parsing: define Ballerina record types that match your YAML/TOML structure for compile-time safety
+- **Validate early**: parse configuration at startup and fail fast on missing or invalid values
+- **Handle multi-document YAML carefully**: Kubernetes manifests often contain multiple documents in a single file
+- **Prefer TOML for Ballerina configs**: TOML aligns with Ballerina's native configuration format (`Ballerina.toml`)
 
 ## What's next
 
-- [JSON Processing](json-processing.md) -- Work with JSON data
-- [CSV & Flat File Processing](csv-flat-file-processing.md) -- Handle tabular data formats
+- [JSON Processing](json.md) - Work with JSON data
+- [CSV & Flat File Processing](csv-flat-file.md) - Handle tabular data formats

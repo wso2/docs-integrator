@@ -114,4 +114,4 @@ function callApi() returns json|error {
 ## What's next
 
 - [Error Handling Guide](/docs/develop/design-logic/error-handling) -- Error handling patterns and best practices
-- [Troubleshooting](/docs/reference/appendix/troubleshooting) -- Resolve common development issues
+- [Troubleshooting](/docs/develop/debugging/troubleshooting) -- Resolve common development issues
