@@ -4,151 +4,196 @@ title: Tools
 
 # Tools
 
-Tools are the buttons your AI Agent can press. WSO2 Integrator gives you four ways to add a tool, all from the same dialog. This page is the reference for that dialog and what each option does.
+Tools enable AI agents to interact with external systems and perform actions during execution. WSO2 Integrator provides multiple ways to add and configure tools for an AI agent through a unified tool configuration experience.
 
-## The Add Tool Dialog
+This page describes the supported tool types, how to add them to an agent, and how each tool integration option works.
 
-On the agent canvas, with the AI Agent node selected, click **+ Add Tool** (or use the right-side **Tools** panel). The **Add Tool** dialog lists the four kinds of tool you can add:
+## Add a tool
+
+To add a tool to an agent, select the **AI Agent** node in the agent canvas and click the **+** button.
+
+![Add tool](/img/genai/develop/agents/29-tool.png)
+
+This opens the **Add Tool** panel, where you can choose how to add capabilities to the agent.
 
 ![The Add Tool dialog with four options: Use Connection, Use Function, Use MCP Server, Create Custom Tool. Each option has a one-line description.](/img/genai/develop/agents/05-add-tool-dialog.png)
 
-| Option | Use when… |
+The following tool integration options are available:
+
+| Option | Description |
 |---|---|
-| **Use Connection** | You want the agent to use one of WSO2 Integrator's connectors (Salesforce, Gmail, MySQL, GitHub, …). Each operation of the connector becomes a tool. |
-| **Use Function** | You already have a function in your project, or in the standard library, that the agent should be able to call. |
-| **Use MCP Server** | The tools live on a remote MCP server (your own, a community server, or a SaaS MCP endpoint). |
-| **Create Custom Tool** | You want to define a new tool from scratch — name, description, parameters, return — without writing code first. |
+| **Use Connection** | Use an existing WSO2 Integrator connector such as Salesforce, Gmail, MySQL, or GitHub. Each connector operation becomes available as an agent tool. |
+| **Use Function** | Expose an existing project function or standard library function as an agent tool. |
+| **Use MCP Server** | Connect to tools hosted on a remote MCP server, including custom, community, or SaaS MCP endpoints. |
+| **Create Custom Tool** | Define a new tool by specifying its name, description, parameters, and return type directly from the UI. |
 
-Each option opens a different second-step panel. The four sections below describe them.
+Each option opens a dedicated configuration panel for setting up the selected tool type.
 
-## 1. Use Connection — Connector-Backed Tools
+## 1. Use connection
 
-Picking **Use Connection** opens the **Add Connection** dialog. The dialog has two halves:
+Selecting **Use Connection** opens the **Add Connection** dialog.
 
-![The Add Connection dialog with explanation 'To establish your connection, first define a connector. You may create a custom connector using an API specification or by introspecting a database. Alternatively, you can select one of the pre-built connectors below. You will then be guided to provide the required details to complete the connection setup.' Section 'Create New Connector' showing two options: 'Connect via API Specification' (OpenAPI, WSDL — 'Import an OpenAPI or WSDL file to create a connector') and 'Connect to a Database' (MySQL, MSSQL, PostgreSQL — 'Enter credentials to introspect and discover database tables'). Below: 'Pre-built Connectors' section with All / Standard / Organization tabs.](/img/genai/develop/shared/08-add-connection-dialog.png)
+![The Add Connection dialog with options for creating a new connector or selecting a pre-built connector.](/img/genai/develop/shared/08-add-connection-dialog.png)
 
-| Path | When to use |
+The dialog provides the following options for creating or selecting a connector:
+
+| Option | Description |
 |---|---|
-| **Create New Connector → Connect via API Specification** | You have an OpenAPI or WSDL file and want a typed connector generated. |
-| **Create New Connector → Connect to a Database** | You want BI to introspect a database (MySQL, MSSQL, PostgreSQL) and generate a connector for the discovered tables. |
-| **Pre-built Connectors** | A pre-built connector exists for your service (HTTP, Salesforce, Gmail, GitHub, …). |
+| **Create New Connector → Connect via API Specification** | Generate a connector using an OpenAPI or WSDL specification. |
+| **Create New Connector → Connect to a Database** | Generate a connector by introspecting a database such as MySQL, MSSQL, or PostgreSQL. |
+| **Pre-built Connectors** | Use an existing connector provided by WSO2 Integrator, such as HTTP, Salesforce, Gmail, or GitHub. |
 
-The Pre-built Connectors section is filtered by the **All / Standard / Organization** tabs and includes the rich AI-related catalogue:
+The **Pre-built Connectors** section can be filtered using the **All**, **Standard**, and **Organization** tabs and includes AI-related connectors and integrations.
 
-![The Add Connection dialog showing the AI connector catalogue: Chat (ballerinax/openai.chat), Chat (ballerinax/azure.chat), Openai EmbeddingProvider (ballerinax/ai.openai), Azure EmbeddingProvider (ballerinax/ai.azure), Text (ballerinax/openai.text), Text (ballerinax/azure.text), Embeddings (ballerinax/ai.embeddings), Agent MistralAIModel (ballerinax/ai.agent), Agent AnthropicModel (ballerinax/ai.agent), Agent AzureOpenAIModel (ballerinax/ai.agent), Agent OpenAIModel (ballerinax/ai.agent), Agent ReActAgent (ballerinax/ai.agent), Agent OllamaModel (ballerinax/ai.agent), Agent Chat (ballerinax/ai.agent), Agent FunctionCallAgent (ballerinax/ai.agent), Embeddings (ballerinax/openai.text), Index (ballerinax/azure.ai.search), Search (ballerinax/azure.ai.search), Openrouter OpenAIModel (ballerinax/ai.openrouter), Vertex EmbeddingProvider (ballerinax/googleapis.ai), Audio (ballerinax/openai.audio), Images (ballerinax/openai.images), Finetunes (ballerinax/openai.finetunes).](/img/genai/develop/shared/09-add-connection-ai-catalogue.png)
+### 1.1 Connect via API specification
 
-After selecting the connection, BI lists its operations. Tick the operations you want the agent to be able to call. Each ticked operation becomes a tool — its description and parameter shapes come from the connector's metadata.
+Select the specification type and import the API specification file.
 
-Use this when an off-the-shelf connector already does what you need; you save writing wrapper code.
+![Specification](/img/genai/develop/shared/17-specification.png)
 
-## 2. Use Function — Project or Library Functions
+### 1.2 Connect to a database
 
-Picking **Use Function** opens the **Create Tool from Function** panel. The panel groups available functions into three sections, each separately searchable from the search box at the top:
+Select the database type and provide the required connection details.
+
+![Database Connection](/img/genai/develop/shared/16-database-connection.png)
+
+### 1.3 Use Pre-built connectors
+
+Select the connector.
+
+![The Add Connection dialog showing the AI-related connector catalogue.](/img/genai/develop/shared/09-add-connection-ai-catalogue.png)
+
+After selecting a connector, WSO2 Integrator displays the available operations. Select the operations that the agent should be allowed to invoke. Each selected operation becomes available as an agent tool.
+
+The tool metadata, including descriptions, parameters, and input/output schemas, is automatically derived from the connector definition. You only need to provide the tool name.
+
+![Tool metadata configuration](/img/genai/develop/shared/15-tool-metadata.png)
+
+Use this option when a suitable pre-built or generated connector already exists, allowing the agent to interact with external systems without requiring additional wrapper code.
+
+## 2. Use function
+
+Selecting **Use Function** opens the **Create Tool from Function** panel. The panel groups available functions into three sections, each with separate search support using the search box at the top.
 
 ![The Create Tool from Function panel with a search box at the top. Sections: Within Project (functions defined in the current project, currently empty since no function has been authored). Standard Library expanded with three subgroups — io (fileReadJson, fileReadString, fileWriteJson, fileWriteString, print, println), log (printDebug, printError, printInfo, printWarn), time (utcFromString, utcNow). Imported Functions section collapsed at the bottom.](/img/genai/develop/agents/06-tool-from-function.png)
 
-| Group | Notes |
+The dialog provides the following options for selecting a function:
+
+| Group | Description |
 |---|---|
-| **Within Project** | Any function in your own code, including [natural functions](/docs/genai/develop/natural-functions/overview), can become a tool with one click. |
-| **Standard Library** | Curated common Ballerina utilities organised by module. The visible defaults: |
+| **Within Project** | Functions defined within your own project, including [natural functions](/docs/genai/develop/natural-functions/overview), can be added as tools with a single click. |
+| **Standard Library** | A curated set of commonly used Ballerina utility functions organized by module. |
 | ↳ **`io`** | `fileReadJson`, `fileReadString`, `fileWriteJson`, `fileWriteString`, `print`, `println` |
 | ↳ **`log`** | `printDebug`, `printError`, `printInfo`, `printWarn` |
 | ↳ **`time`** | `utcFromString`, `utcNow` |
-| **Imported Functions** | Functions from any module already imported in your project (e.g. `googleapis.gmail`, `salesforce`). |
+| **Imported Functions** | Functions from modules already imported into your project, such as `googleapis.gmail` or `salesforce`. |
 
-Pick a function and BI:
+Select the functions that the agent should be allowed to invoke. Each selected function becomes available as an agent tool.
 
-- Reads its **doc comment** as the tool description.
-- Reads each **parameter description** (the `# + name - description` lines) as parameter metadata for the LLM.
-- Reads the **return type** as the tool's output schema.
-- Adds the `@ai:AgentTool` annotation if the function doesn't have one yet.
+The tool metadata — including descriptions, parameters, and input/output schemas — is automatically derived from the function definition. You only need to provide a tool name.
 
-If a function lacks a doc comment, BI prompts you to add one — the LLM cannot use a tool with no description. The first sentence of the doc comment is what the LLM sees, so make it specific.
+![Add function](/img/genai/develop/shared/18-add-function.png)
 
-> **Tip:** Natural functions make excellent tools. The agent's main LLM handles routing; the natural function uses (potentially) a different model with a tighter prompt and stricter return type for the actual subtask.
->
-> **Security note:** Standard Library functions like `io:fileWriteString` give the agent the power to *write to the local filesystem*. Only attach utilities the agent genuinely needs.
+## 3. Use MCP server
 
-## 3. Use MCP Server — Tools Over the Standard Protocol
-
-Picking **Use MCP Server** opens the **Add MCP Server** panel:
+Selecting **Use MCP Server** opens the **Add MCP Server** panel.
 
 ![The Add MCP Server panel — Tools to Include set to All, then Advanced Configurations including Info (name, version), HTTP Version with a Select / Expression toggle, HTTP1 Settings, HTTP2 Settings, Timeout (default 30 seconds), Forwarded.](/img/genai/develop/agents/08-add-mcp-server.png)
 
-Configuration:
+The dialog provides the following configuration for selecting a tool:
 
-| Field | What it does |
+| Field | Description |
 |---|---|
-| **Server URL** (top of the panel, scrolled out of frame) | The MCP endpoint, for example `http://localhost:9090/mcp` or `https://mcp.example.com`. |
-| **Tools to Include** | `All` exposes every tool the server advertises; or pick a subset by name. |
-| **Info → name / version** | Identification of the MCP client your agent presents. Defaults are usually fine. |
-| **HTTP Version** | `HTTP/2_0` for modern Streamable HTTP; `HTTP/1_1` for older servers. |
-| **HTTP1 / HTTP2 Settings** | Protocol-specific tuning — keep-alive, header sizes, frame sizes. |
-| **Timeout** | Per-call timeout. The default is 30 seconds. Increase for slow tools. |
-| **Forwarded** | Whether to set the `Forwarded` / `X-Forwarded-For` header when this MCP client sits behind a proxy. |
+| **Server URL** | The MCP endpoint URL, for example `http://localhost:9090/mcp` or `https://mcp.example.com`. |
+| **Requires Authentication** | Enable this option if the server requires authentication, then configure the required authentication settings. |
+| **Tools to Include** | Select `All` to expose every tool advertised by the server, or choose a specific subset of tools by name. |
+| **Advanced Configurations** | Additional [HTTP client configurations](/docs/connectors/catalog/built-in/http/action-reference#client). |
+| **Result** | The name of the variable used to store the result returned by the MCP tool invocation. |
 
-After saving, every tool the MCP server advertises (or every tool in your **Tools to Include** list) is now available to the agent. They appear in the agent's tool list alongside any local function tools, indistinguishable from the agent's perspective.
+After saving, every tool exposed by the MCP server — or every tool selected in **Tools to Include** — becomes available to the agent. These tools appear alongside local function tools and are used transparently from the agent’s perspective.
 
-Common uses:
+> **Tip:** A WSO2 Integrator project can also consume its own MCP service. See [Exposing a Service as MCP](/docs/genai/develop/mcp/exposing-as-mcp).
 
-- A WSO2 Integrator project consuming **its own** MCP service (see [Exposing a Service as MCP](/docs/genai/develop/mcp/exposing-as-mcp)).
-- A community MCP server for Slack, GitHub, file systems, or your CRM.
-- A SaaS MCP endpoint your vendor provides.
+## 4. Create custom tool
 
-> **Tip:** Filter to the specific tools you need. LLMs choose better when the tool list is short and specific.
+Use this option when you want to define a tool before implementing its logic, or when the tool requires a fully custom structure.
 
-## 4. Create Custom Tool — Hand-Crafted Definitions
-
-Picking **Create Custom Tool** opens the **Create New Agent Tool** dialog. This is a full-page dialog with a clear header and structured sections:
+Selecting **Create Custom Tool** opens the **Create New Agent Tool** dialog. This full-page dialog provides a structured interface for defining a custom tool.
 
 ![The Create New Agent Tool dialog (initial empty state). Header: 'Create New Agent Tool — Create a new agent tool that can be invoked by AI agents.' Section: 'Create New Agent Tool — Define the inputs and outputs of the tool'. Field 1: Name* (with 'missing identifier' validation warning). Field 2: Description (description text area: 'Description of the agent tool. This will help AI agents understand when to use this tool and how to use it.'). Field 3: Parameters with explanation 'Define the inputs for the agent tool. These are the parameters that AI agents will use when calling this tool.' and + Add Parameter link. Field 4: Return Type (with type icon). Field 5: Description (for the return value). Advanced Configurations Expand at the bottom.](/img/genai/develop/agents/23-create-custom-tool-blank.png)
 
-Use this when you want to define a tool *before* you write its implementation, or when the tool's shape is genuinely custom.
+The dialog provides the following options for creating a function:
 
-| Field | Required | What it does |
+| Field | Required | Description |
 |---|---|---|
-| **Name*** | Yes | The tool's name. The LLM uses this to refer to it. Camel-case, descriptive: `lookupCustomer`, `bookAppointment`. Must be a valid Ballerina identifier — letters, digits, underscores; cannot start with a digit. Empty value triggers the "missing identifier" warning. |
-| **Description** | No | What the tool does **and** when the agent should use it. The single most important field for tool quality — even though it's optional, the agent will rarely pick a tool without one. |
-| **Parameters** | No | Each parameter has a name, type, and description. The description tells the LLM what to put in. **+ Add Parameter** opens a row with name / type / description fields. |
-| **Return Type*** | Yes | The Ballerina type of the return value. Drives the schema the LLM sees. The picker shows Primitive Types (`string`, `int`, `float`, `decimal`, `boolean`, `()`) plus **+ Create New Type** and **Open Type Browser** for project-defined records. |
-| **Description** (return) | No | One-line description of the return value, included in the schema. |
-| **Advanced Configurations** | No | Visibility, isolation requirements, retries. Defaults are usually fine. |
-| **Create** | — | Generates the tool definition and a stub function in your project. |
+| **Name*** | Yes | The name of the tool used by the LLM to identify and invoke it. |
+| **Description** | No | Explains what the tool does and when the agent should use it. Although optional, providing a clear description significantly improves tool selection accuracy by the LLM. |
+| **Parameters** | No | Defines the input parameters for the tool. Each parameter includes a name, type, and description. The descriptions help the LLM understand what values to provide. Selecting **+ Add Parameter** adds a new parameter definition row. |
+| **Return Type*** | Yes | Defines the Ballerina type returned by the tool. This determines the schema exposed to the LLM. Supported primitive types include `string`, `int`, `float`, `decimal`, `boolean`, and `()`. You can also select **+ Create New Type** or **Open Type Browser** to use project-defined record types. |
+| **Description** (return) | No | A short description of the return value. |
+| **Advanced Configurations** | No | Additional settings such as visibility and Agent Identity client configuration. |
 
-After you click **Create**, BI generates a stub function annotated `@ai:AgentTool`. You fill in the implementation — call an API, run a query, do whatever the tool is supposed to do — and the agent can already select it.
+After clicking **Create**, WSO2 Integrator generates a stub function annotated with `@ai:AgentTool`. You can then implement the tool logic inside the generated function.
 
-A typical filled-in form before clicking Create:
+## After adding a tool
 
-![The Create New Agent Tool dialog with values filled in. Name* set to 'CustomTool'. Description empty. Parameters empty (just the + Add Parameter link). Return Type empty (just the type input). Advanced Configurations Expand link. Create button now active (blue) at the bottom.](/img/genai/develop/agents/07-create-custom-tool.png)
+The new tool appears in the agent’s right-side **Tools** panel and is included in every reasoning step from that point onward.
 
-## After Adding a Tool
-
-The new tool shows up in the agent's right-side **Tools** panel and is included in every reasoning step from then on. Two things to keep in mind:
-
-- **Mention the tool in Instructions.** A line in the system prompt that says *"Use `lookupCustomer` whenever the user mentions a customer ID"* significantly improves tool-selection accuracy.
-- **Watch the count.** Above ~10 tools, models start picking less reliably. Group related tools into a [toolkit](#toolkits) instead, or split the agent into a router agent plus specialists.
+![Database Connection](/img/genai/develop/shared/19-agent-with-tools.png)
 
 ## Toolkits
 
-A **toolkit** is a class that bundles related tools — for example, a `BillingToolkit` that exposes `getInvoice`, `processRefund`, and `getPaymentHistory`. Toolkits are written in source view today (no separate UI yet); you create one Ballerina class with the tool methods and register the toolkit in the agent's tool list. The agent treats the toolkit's methods exactly like individual tools.
+A **toolkit** is a class that bundles related tools. For example, a `TaskManagerToolkit` can expose `addTask` and `listTasks`. Toolkits are currently written in source view only (there is no dedicated UI yet). You create a single Ballerina class with tool methods and register the toolkit in the agent’s tool list. The agent treats toolkit methods exactly like individual tools.
 
 Use toolkits when:
 
-- A group of tools shares state (a connector, a database client, a configuration value).
-- You want to enable / disable a set of related tools as a unit (read-only mode vs full access).
+- A group of tools shares state, such as a connector, database client, or configuration value.
+- You want to enable or disable a set of related tools as a unit.
 
-## Tool Quality Checklist
+```ballerina
+type Task record {|
+    string description;
+    time:Date dueBy?;
+    time:Date createdAt = time:utcToCivil(time:utcNow());
+    time:Date completedAt?;
+    boolean completed = false;
+|};
 
-Run through this before shipping an agent:
+// A toolkit to manage a set of tasks.
+public isolated class TaskManagerToolkit {
+    *ai:BaseToolKit;
 
-- [ ] Each tool has a one-sentence description that names *what* and *when*.
-- [ ] Each parameter has a description.
-- [ ] The return type is the smallest one that contains what the agent needs (no kitchen-sink JSON).
-- [ ] Destructive tools mention the confirmation requirement in their description.
-- [ ] The agent's Instructions reference each tool at least once.
-- [ ] You've tried the agent with edge cases — empty inputs, ambiguous questions, off-topic requests.
+    private final map tasks = {};
 
-## What's Next
+    // The `getTools` method describes the tools provided by this toolkit.
+    public isolated function getTools() returns ai:ToolConfig[] =>
+        // The `ai:getToolConfigs` function generates tool configurations
+        // for the specified tools.
+        ai:getToolConfigs([self.addTask, self.listTasks]);
 
-- **[Memory](memory.md)** — make the agent's tool calls remember earlier turns.
-- **[Observability](observability.md)** — see which tools the agent actually picks.
+    // Tool to add a new task.
+    @ai:AgentTool
+    isolated function addTask(string description, time:Date? dueBy = ()) {
+        lock {
+            self.tasks[uuid:createRandomUuid()] = {
+                description: description,
+                dueBy: dueBy.clone()
+            };
+        }
+    }
+
+    // Tool to list all current tasks.
+    @ai:AgentTool
+    isolated function listTasks() returns map {
+        lock {
+            return self.tasks.clone();
+        }
+    }
+}
+```
+
+## What's next
+
+- **[Memory](memory.md)** — Make the agent’s tool calls remember earlier turns.
+- **[Observability](observability.md)** — See which tools the agent actually selects.
+- **[Evaluations](evaluations.md)** — Learn how to prevent regressions in AI agent quality.
