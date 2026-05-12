@@ -126,7 +126,7 @@ After processing the heartbeat, the ICP runs reconciliation and returns any pend
 | `platformName` | string | Platform identifier (default: `"wso2-mi"`) |
 | `platformVersion` | string | Platform/product version |
 | `platformHome` | string | Installation directory |
-| `ballerinaHome` | string | Ballerina home directory (BI runtimes) |
+| `ballerinaHome` | string | Ballerina home directory (default profile runtimes) |
 | `osName` | string | Operating system name |
 | `osVersion` | string | OS version |
 | `osArch` | string | CPU architecture |
@@ -142,9 +142,9 @@ After processing the heartbeat, the ICP runs reconciliation and returns any pend
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `listeners` | array | Active HTTP/HTTPS listeners (BI) |
-| `services` | array | Deployed Ballerina services (BI) |
-| `main` | object | Main Ballerina package info: `packageOrg`, `packageName`, `packageVersion` (BI) |
+| `listeners` | array | Active HTTP/HTTPS listeners (default profile) |
+| `services` | array | Deployed Ballerina services (default profile) |
+| `main` | object | Main Ballerina package info: `packageOrg`, `packageName`, `packageVersion` (default profile) |
 | `apis` | array | REST APIs (MI) |
 | `proxyServices` | array | Proxy services (MI) |
 | `sequences` | array | Sequences (MI) |

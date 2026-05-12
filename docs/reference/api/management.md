@@ -478,7 +478,7 @@ dataServiceOverviewByComponent(
 
 #### `loggersByRuntime`
 
-Returns loggers for a specific runtime. For MI runtimes, fetches live from the MI Management API. For BI runtimes, reads from the database with reconcile state overlaid.
+Returns loggers for a specific runtime. For MI runtimes, fetches live from the MI Management API. For default profile runtimes, reads from the database with reconcile state overlaid.
 
 ```graphql
 loggersByRuntime(runtimeId: String!): [Logger!]!
@@ -933,7 +933,7 @@ mutation {
 
 #### `updateLogLevel`
 
-Updates the log level for MI loggers (applied immediately via the MI Management API) or BI component loggers (applied via the reconcile engine).
+Updates the log level for MI loggers (applied immediately via the MI Management API) or default profile component loggers (applied via the reconcile engine).
 
 ```graphql
 updateLogLevel(input: UpdateLogLevelInput!): UpdateLogLevelResponse!

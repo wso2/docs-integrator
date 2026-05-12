@@ -4,7 +4,7 @@ title: Manage Runtimes
 
 # Manage Runtimes
 
-Runtimes are BI (or MI) processes that connect to ICP via heartbeats. The
+Runtimes are default profile (or MI) processes that connect to ICP via heartbeats. The
 Runtimes page is available at every level — organization, project, and
 integration — each scoped accordingly.
 
@@ -24,7 +24,7 @@ Runtimes are grouped by environment. Each environment section shows:
 | ----------------- | ----------------------------------------------------- |
 | Runtime Name      | Display name (`-` if not configured)                  |
 | Runtime ID        | UUID assigned on first heartbeat                      |
-| Type              | BI or MI                                              |
+| Type              | default profile or MI                                 |
 | Component         | Integration name this runtime belongs to              |
 | Status            | **RUNNING** (green badge), OFFLINE, etc.              |
 | Version           | Runtime version (or `—` if not reported)              |

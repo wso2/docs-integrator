@@ -55,7 +55,7 @@ Command-line tools reference:
 - **[Access Control](../manage/icp/access-control.md)** — Control who can do what across organizations, projects, and integrations
 - **[Manage Projects](../manage/icp/manage-projects.md)** — Create, edit, and delete projects
 - **[Manage Environments](../manage/icp/manage-environments.md)** — Create, edit, and delete environments
-- **[Manage Integrations](../manage/icp/manage-integrations.md)** — Create and manage BI integrations
+- **[Manage Integrations](../manage/icp/manage-integrations.md)** — Create and manage default profile integrations
 - **[Manage Runtimes](../manage/icp/manage-runtimes.md)** — View runtimes, generate secrets, and manage connections
 - **[Server Configuration](icp/server-configuration.md)** — Server settings and authentication token keys
 - **[Database Configuration](icp/database-configuration.md)** — Main database and credentials database setup

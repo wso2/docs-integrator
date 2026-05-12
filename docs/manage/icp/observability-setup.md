@@ -4,7 +4,7 @@ title: Observability Setup
 
 # Observability Setup
 
-ICP provides centralized observability for BI runtimes. Logs and metrics are collected via Fluent Bit, stored in OpenSearch, and displayed in the ICP Console.
+ICP provides centralized observability for default profile runtimes. Logs and metrics are collected via Fluent Bit, stored in OpenSearch, and displayed in the ICP Console.
 
 For MI runtimes, see [MI Observability Setup](mi-profile/observability-setup-mi.md).
 
@@ -12,15 +12,15 @@ For MI runtimes, see [MI Observability Setup](mi-profile/observability-setup-mi.
 
 ```mermaid
 flowchart LR
-    BI["BI Runtime"] -- "app.log" --> FB["Fluent Bit"]
-    BI -- "metrics.log" --> FB
+    Runtime["default profile Runtime"] -- "app.log" --> FB["Fluent Bit"]
+    Runtime -- "metrics.log" --> FB
     FB -- "HTTP" --> OS["OpenSearch"]
-    BI -- "heartbeat" --> ICP["ICP Server"]
+    Runtime -- "heartbeat" --> ICP["ICP Server"]
     OS -- "query" --> ICP
     Console["ICP Console\n(Browser)"] -- "GraphQL / REST" --> ICP
 ```
 
-1. The BI runtime writes structured logs to two separate files: application logs and metrics logs.
+1. The default profile runtime writes structured logs to two separate files: application logs and metrics logs.
 2. Fluent Bit tails both files and ships each to its own OpenSearch index.
 3. ICP Server queries OpenSearch when a user opens the Logs or Metrics page in the Console.
 
@@ -31,7 +31,7 @@ flowchart LR
 | ICP Server | Running, with OpenSearch connection configured in `deployment.toml` (see [Install ICP — OpenSearch](install-icp.md#opensearch-observability)) |
 | Integration | Connected to ICP with heartbeats working (see [Connect an Integration to ICP](connect-runtime.md)) |
 | OpenSearch | Deployed and reachable from ICP Server and Fluent Bit |
-| Fluent Bit | Installed on the machine running the BI runtime |
+| Fluent Bit | Installed on the machine running the default profile runtime |
 
 ## Step 1: Deploy OpenSearch
 
@@ -197,7 +197,7 @@ The log file paths must match the Fluent Bit input `Path` patterns. Adjust both 
 
 ## Step 4: Configure Fluent Bit
 
-Fluent Bit tails the BI log files and ships them to OpenSearch.
+Fluent Bit tails the default profile log files and ships them to OpenSearch.
 
 You need three config files side by side:
 
@@ -211,8 +211,8 @@ Since the integration writes app logs and metrics to separate files, Fluent Bit 
 
 | Input `Path` | Tag | Parser | Output index prefix | Content |
 |-------------|-----|--------|---------------------|---------|
-| `<bi-logs>/app.log` | `ballerina_app_logs` | `bal_logfmt_parser` | `ballerina-application-logs-` | Application logs |
-| `<bi-logs>/metrics.log` | `ballerina_metrics` | `bal_logfmt_parser` | `ballerina-metrics-logs-` | Per-request metrics |
+| `<default-profile-logs>/app.log` | `ballerina_app_logs` | `bal_logfmt_parser` | `ballerina-application-logs-` | Application logs |
+| `<default-profile-logs>/metrics.log` | `ballerina_metrics` | `bal_logfmt_parser` | `ballerina-metrics-logs-` | Per-request metrics |
 
 ### Parser definition
 
@@ -257,7 +257,7 @@ The Lua enrichment is **required** for the ICP Metrics page to display data. Wit
 
 ### fluent-bit.conf
 
-Replace `<bi-logs>` with the actual path to your BI application's `logs/` directory. Use forward slashes on all platforms.
+Replace `<default-profile-logs>` with the actual path to your default profile application's `logs/` directory. Use forward slashes on all platforms.
 
 ```ini
 [SERVICE]
@@ -268,7 +268,7 @@ Replace `<bi-logs>` with the actual path to your BI application's `logs/` direct
 # ── App logs ──
 [INPUT]
     Name         tail
-    Path         <bi-logs>/app.log
+    Path         <default-profile-logs>/app.log
     Parser       bal_logfmt_parser
     Tag          ballerina_app_logs
     Read_from_Head On
@@ -277,7 +277,7 @@ Replace `<bi-logs>` with the actual path to your BI application's `logs/` direct
 # ── Metrics logs ──
 [INPUT]
     Name         tail
-    Path         <bi-logs>/metrics.log
+    Path         <default-profile-logs>/metrics.log
     Parser       bal_logfmt_parser
     Tag          ballerina_metrics
     Read_from_Head On
@@ -386,7 +386,7 @@ Replace `<bi-logs>` with the actual path to your BI application's `logs/` direct
 
 ### Check OpenSearch indices
 
-After the BI runtime has been running for a minute or two:
+After the default profile runtime has been running for a minute or two:
 
 ```bash
 curl -sk -u admin:<password> https://localhost:9200/_cat/indices/ballerina-*?v
@@ -422,7 +422,7 @@ curl http://localhost:8090/<your-endpoint>
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
-| Metrics page shows "No metrics data" | BI runtime has no inbound HTTP requests | Metrics are generated per-request — send traffic first |
+| Metrics page shows "No metrics data" | default profile runtime has no inbound HTTP requests | Metrics are generated per-request — send traffic first |
 | Metrics page shows "No metrics data" | `metricsLogsEnabled` not set | Add `metricsLogsEnabled = true` to `[ballerina.observe]` in `Config.toml` |
 | Metrics page shows "No metrics data" | Metrics log file not configured | Set `logFilePath` in `[ballerinax.metrics.logs]` |
 | Metrics page shows "No metrics data" | Lua enrichment scripts missing from Fluent Bit config | Add the Lua `[FILTER]` blocks (especially `extract_bal_metrics_data`) — see Step 4 |

@@ -128,7 +128,7 @@ ICP serves the console and API on port `9446` by default. To expose ICP through 
    backendObservabilityEndpoint = "https://icp.example.com/icp/observability"
    ```
 
-3. BI runtimes connect to ICP for heartbeats. If they also go through the
+3. default profile runtimes connect to ICP for heartbeats. If they also go through the
    proxy, set `serverUrl` in the runtime's `Config.toml` to the proxy URL:
 
    ```toml
@@ -191,5 +191,5 @@ When a project is created, ICP also auto-creates a
 ## Next Steps
 
 1. **[ICP Console Overview](icp-console-overview.md)** — Learn the console layout and navigation.
-2. **[Connect an Integration to ICP](connect-runtime.md)** — Register a BI runtime with heartbeats.
+2. **[Connect an Integration to ICP](connect-runtime.md)** — Register a default profile runtime with heartbeats.
 3. **[Observability Setup](observability-setup.md)** — Add centralized logs and metrics.

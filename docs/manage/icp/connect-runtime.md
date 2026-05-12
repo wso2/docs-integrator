@@ -29,7 +29,7 @@ or when the component does not exist in ICP yet.
 1. Navigate to **Runtimes** in the sidebar.
 2. Find the target environment card (e.g. *dev*) and click **Add Runtime**.
 3. Click **Generate Secret**.
-4. The **BI** tab is selected by default. Copy the `Config.toml` snippet shown.
+4. The **default profile** tab is selected by default. Copy the `Config.toml` snippet shown.
 
 > The secret is displayed only once. Copy it before closing the dialog.
 
@@ -110,20 +110,20 @@ Full heartbeat acknowledged by ICP server
 
 The runtime now appears under **Runtimes** in the ICP console with status **RUNNING**.
 
-## Multiple BI Nodes
+## Multiple default profile Nodes
 
-Each BI node needs a unique `runtime` value but can share the same `project`,
+Each default profile node needs a unique `runtime` value but can share the same `project`,
 `integration`, `environment`, and `secret`. All nodes appear as separate runtimes
 under the same component in ICP.
 
 ```toml
 # Node 1
 [wso2.icp.runtime.bridge]
-runtime = "bi-node-1"
+runtime = "default-profile-node-1"
 
 # Node 2
 [wso2.icp.runtime.bridge]
-runtime = "bi-node-2"
+runtime = "default-profile-node-2"
 ```
 
 ## Troubleshooting
@@ -131,7 +131,7 @@ runtime = "bi-node-2"
 | Symptom | Cause | Fix |
 |---------|-------|-----|
 | `Full heartbeat rejected` | Wrong or revoked secret | Generate a new secret in the console |
-| Runtime shows but status is not RUNNING | Heartbeats stopped | Check the BI process is alive and network is reachable |
+| Runtime shows but status is not RUNNING | Heartbeats stopped | Check the default profile process is alive and network is reachable |
 | `PKIX path building failed` | Self-signed ICP certificate | Set `enableSSL = false` (non-production) or provide the CA via `cert` |
 
 ## Next Step

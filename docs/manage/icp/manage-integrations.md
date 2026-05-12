@@ -5,7 +5,7 @@ title: Manage Integrations
 # Manage Integrations
 
 Integrations (also called *components*) represent a deployable unit — a Ballerina
-application in the case of BI. Each integration belongs to a project and runs in
+application in the case of default profile. Each integration belongs to a project and runs in
 one or more environments.
 
 ## Create an Integration
@@ -19,7 +19,7 @@ one or more environments.
 | Project          | Auto     | Pre-filled with the current project. Can be changed via dropdown.            |
 | Display Name     | Yes      | Human-readable name (placeholder: *Enter display name here*).               |
 | Name             | Auto     | Slug from Display Name. Click the edit icon to override.                                |
-| Integration Type | Yes      | Dropdown: **BI** (Ballerina Integrator) or **MI** (Micro Integrator). Defaults to BI. |
+| Integration Type | Yes      | Dropdown: **default profile** or **MI** (Micro Integrator). Defaults to default profile. |
 | Description      | No       | Multi-line text area (placeholder: *Enter description here*).               |
 
 3. Click **Create**.
@@ -35,7 +35,7 @@ displays:
 
 - Environment name and runtime count badge (e.g. *"0 runtimes"* or *"1/1 Online"*).
 - Refresh icon.
-- For BI integrations: **Entry Points** tab listing services/APIs, and a
+- For default profile integrations: **Entry Points** tab listing services/APIs, and a
   **Supporting Artifacts** tab (when artifacts are present).
 - **+ Add Runtime** link when no runtimes are registered.
 
@@ -68,7 +68,7 @@ When runtimes are present, a table shows:
 | ----------------- | ----------------------------------- |
 | Runtime Name      | Display name (or `-` if unset)      |
 | Runtime ID        | UUID                                |
-| Type              | BI                                  |
+| Type              | default profile                     |
 | Status            | RUNNING, OFFLINE, etc.              |
 | Version           | Runtime version                     |
 | Platform          | e.g. *Ballerina 2201.13.2 (Swan Lake Update 13)* |

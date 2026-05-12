@@ -60,17 +60,17 @@ To add another (e.g. *staging*), see
 
 Full details: [Manage Projects](manage-projects.md).
 
-### 3. Create a BI Integration
+### 3. Create a default profile Integration
 
 1. Inside the project, click **+ Create**.
-2. Enter a **Display Name**. Integration Type defaults to **BI**.
+2. Enter a **Display Name**. Integration Type defaults to **default profile**.
 3. Click **Create**.
 
 Full details: [Manage Integrations](manage-integrations.md).
 
 ### 4. Connect a Runtime
 
-1. Generate a secret and configure your BI runtime — see [Connect an Integration to ICP](connect-runtime.md).
+1. Generate a secret and configure your default profile runtime — see [Connect an Integration to ICP](connect-runtime.md).
 2. Start the runtime. It appears in the Runtimes table with status **RUNNING**.
 
 Full details: [Manage Runtimes](manage-runtimes.md).

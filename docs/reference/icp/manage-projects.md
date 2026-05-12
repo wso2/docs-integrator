@@ -27,8 +27,8 @@ URL pattern: `https://<host>:9445/organizations/default`
 
 | Field            | Required | Description                                                                 |
 | ---------------- | -------- | --------------------------------------------------------------------------- |
-| Display Name     | Yes      | Human-readable name (e.g. `My BI Project`)                                  |
-| Name             | Auto     | URL-safe slug derived from the display name (e.g. `my-bi-project`). Click the edit icon to override. |
+| Display Name     | Yes      | Human-readable name (e.g. `My default profile Project`)                     |
+| Name             | Auto     | URL-safe slug derived from the display name (e.g. `my-default-profile-project`). Click the edit icon to override. |
 | Description      | No       | Free-text description (placeholder: *Enter Description here*)               |
 
 3. The **Create** button enables once Display Name is filled.
@@ -59,7 +59,7 @@ Clicking a project card navigates to the project home. The page shows:
 
 - Project avatar, display name, and description at the top.
 - An **Integrations** section with a searchable table and a **+ Create** button.
-- An **Integration Types** summary card on the right showing the count of integrations (Total, BI, MI).
+- An **Integration Types** summary card on the right showing the count of integrations (Total, default profile, MI).
 - If no integrations exist: *"No integrations found — Create your first integration to get started."*
 
 ### Project Sidebar
