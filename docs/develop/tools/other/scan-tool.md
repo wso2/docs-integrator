@@ -4,244 +4,230 @@ title: Scan Tool
 
 # Scan Tool
 
-The `bal scan` tool performs static code analysis on your Ballerina integration projects. It detects security vulnerabilities, code quality issues, performance anti-patterns, and violations of best practices. Results are reported with severity levels and actionable recommendations, helping you maintain high-quality integration code.
+The scan tool performs static code analysis on Ballerina projects. It identifies code quality issues, potential bugs, security vulnerabilities, and integration anti-patterns using a configurable set of rules. Scan results can be output to the console or exported as structured reports.
 
 ## Prerequisites
 
-The Scan tool is included with the Ballerina distribution:
+- Ensure the `bal` command is available in your environment.
+
+## Install the tool
+
+Follow these steps to install and verify the scan tool:
+
+1. Pull the scan tool from [Ballerina Central](https://central.ballerina.io/ballerina/tool_scan/latest):
+
+  ```bash
+  bal tool pull scan
+  ```
+
+2. Verify the installation:
+
+  ```bash
+  bal tool list
+  ```
+
+  Ensure that the output includes a row for the `scan` tool, similar to:
+
+  ```bash
+  |TOOL ID      |VERSION   |
+  |-------------|----------|
+  |scan         |x.x.x    |
+  ```
+
+## Command syntax
 
 ```bash
-bal scan --help
+bal scan [OPTIONS] [<package>|<source-file>]
 ```
 
-## Running a scan
+### Arguments
 
-### Basic usage
+- `<package>` — Analyzes all Ballerina files in the specified package (optional, defaults to the current directory).
+- `<source-file>` — Analyzes a specific standalone Ballerina file (`.bal` extension required).
+
+Analyzing individual Ballerina files that are part of a package is not allowed. You must analyze the entire package or work with standalone files.
+
+### Options
+
+| Option | Required | Default | Description |
+|--------|----------|---------|-------------|
+| `--target-dir=<path>` | No | `target/report` | Specify a custom target directory for analysis reports |
+| `--scan-report` | No | `false` | Generate an HTML report alongside the JSON result in `target/report` |
+| `--format=<ballerina\|sarif>` | No | `ballerina` | Specify the report format (default: `ballerina`) |
+| `--list-rules` | No | `false` | Display all available analysis rules and exit |
+| `--include-rules=<rule1,...>` | No | All rules | Run analysis for specific rules only (comma-separated list) |
+| `--exclude-rules=<rule1,...>` | No | None | Exclude specific rules from analysis (comma-separated list) |
+| `--custom-rules-path=<path>` | No | — | Path to a directory containing custom rule packages |
+| `--platforms=<platform1,...>` | No | None | Define platforms for result reporting (e.g., `sonarqube`) |
+| `--platform-triggered` | No | `false` | Indicate that the scan was triggered by a platform (e.g., CI/CD) |
+
+## Running analysis
+
+Analyze all Ballerina files in the current package by running the following command inside the package directory:
 
 ```bash
-# Scan the current project
 bal scan
-
-# Scan a specific directory
-bal scan --path ./my-integration/
-
-# Scan with JSON output
-bal scan --format json
-
-# Scan and fail on warnings (useful in CI/CD)
-bal scan --fail-on-warnings
 ```
 
-### Example output
+This command will:
 
-![Terminal output of bal scan command](/img/develop/tools/scan-tool/terminal-output.png)
+- Compile and analyze all `.bal` files in the current package
+- Print results to the console
+- Save results in JSON format in the `target/report` directory
+
+To analyze a specific package:
+
+```bash
+bal scan mypackage
+```
+
+To analyze a specific standalone Ballerina file:
+
+```bash
+bal scan myfile.bal
+```
+
+To store results in a specific location, use `--target-dir`:
+
+```bash
+bal scan --target-dir="path/to/your/target/directory"
+```
+
+## Console output
+
+Issues are printed to the console in the following format:
 
 ```
-Scanning project: my-integration
+service.bal:15:5  WARNING  ballerina:101  Missing error handling for remote call
+service.bal:23:9  ERROR    ballerina:201  Potential SQL injection vulnerability
+service.bal:45:1  INFO     ballerina:302  Missing connection pool configuration
 
-  main.bal
-    [WARNING] Line 12: Hardcoded credentials detected. Use configurable variables.     (SEC001)
-    [WARNING] Line 35: HTTP client created without timeout configuration.               (PERF003)
-    [INFO]    Line 48: Consider using query expressions instead of foreach + push.      (STYLE002)
-
-  utils.bal
-    [ERROR]   Line 7: SQL query constructed with string concatenation. Use parameterized queries. (SEC002)
-
-Summary:
+Scan Summary:
   Errors:   1
-  Warnings: 2
+  Warnings: 1
   Info:     1
-
-Scan completed with 1 error(s). Fix errors before deploying.
+  Total:    3
 ```
 
-Scan results also appear in the VS Code **Problems** panel, where you can click each issue to navigate directly to the affected line.
+## HTML report generation
 
-![VS Code Problems panel showing scan results](/img/develop/tools/scan-tool/vscode-problems-panel.png)
+To generate a detailed HTML report of the analysis results, use the `--scan-report` option:
+
+```bash
+bal scan --scan-report
+```
+
+The HTML report and scan results in JSON format are saved in the `target/report` directory. The HTML report includes a summary of the number of code smells, bugs, and vulnerabilities found in each file.
+
+![HTML report summary view](/img/develop/tools/scan-tool/html-report-summary-view.png)
+
+You can click on a file name to view a detailed breakdown of the issues. This view highlights the exact lines where problems were detected, along with a description and severity level.
+
+![HTML report file detail view](/img/develop/tools/scan-tool/html-report-file-view.png)
+
+## Report formats
+
+By default, the scan tool generates reports in `ballerina` (JSON) format. To generate a report in [SARIF](https://sarifweb.azurewebsites.net/) format (a standardized format for static analysis results):
+
+```bash
+bal scan --format=sarif
+```
+
+## List available rules
+
+To view all available rules for your project:
+
+```bash
+bal scan --list-rules
+```
+
+This displays a project-specific list of rules determined by your project's dependencies.
+
+![Output of bal scan --list-rules](/img/develop/tools/scan-tool/list-rules.png)
+
+The displayed rules are project-specific and determined by your project's dependencies.
+
+## Include specific rules
+
+Run the analysis for specific rules only using `--include-rules`:
+
+```bash
+bal scan --include-rules="ballerina:1"
+```
+
+Include multiple rules as a comma-separated string:
+
+```bash
+bal scan --include-rules="ballerina:1, ballerina/io:2"
+```
+
+## Exclude specific rules
+
+Exclude specific rules from the analysis using `--exclude-rules`:
+
+```bash
+bal scan --exclude-rules="ballerina:1"
+```
+
+Exclude multiple rules:
+
+```bash
+bal scan --exclude-rules="ballerina:1, ballerina/io:2"
+```
+
+## Platform integration
+
+The scan tool can publish analysis results directly to external code quality platforms such as SonarQube. Use the `--platforms` option to specify the target platform:
+
+```bash
+bal scan --platforms="sonarqube"
+```
+
+Specify more than one platform as a comma-separated list:
+
+```bash
+bal scan --platforms="sonarqube, semgrep, codeql"
+```
+
+Each platform requires additional configuration, such as authentication credentials and the report destination. For the full configuration reference, see [Configuration for Platform Plugins](https://github.com/ballerina-platform/static-code-analysis-tool/blob/main/docs/static-code-analysis-tool/ScanFileConfigurations.md).
 
 ## Rule categories
 
-### Security rules
+| Category | Rule ID Range | Description |
+|----------|--------------|-------------|
+| Code Quality | `ballerina:1` - `ballerina:99` | Unused variables, imports, parameters, dead code |
+| Best Practice | `ballerina:100` - `ballerina:199` | Error handling, documentation, naming conventions |
+| Security | `ballerina:200` - `ballerina:299` | Injection vulnerabilities, credential exposure, data leaks |
+| Performance | `ballerina:300` - `ballerina:399` | Synchronous bottlenecks, resource management, connection pooling |
 
-| Rule ID | Description |
-|---|---|
-| `SEC001` | Hardcoded credentials or secrets in source code |
-| `SEC002` | SQL injection vulnerability (string concatenation in queries) |
-| `SEC003` | Insecure HTTP connection (no TLS) |
-| `SEC004` | Missing input validation on service endpoints |
-| `SEC005` | Sensitive data logged without masking |
-| `SEC006` | Overly permissive CORS configuration |
+## Rule severity levels
 
-### Performance rules
-
-| Rule ID | Description |
-|---|---|
-| `PERF001` | Database client created inside a loop or request handler |
-| `PERF002` | Missing connection pool configuration for database clients |
-| `PERF003` | HTTP client without timeout configuration |
-| `PERF004` | Large payload processed without streaming |
-| `PERF005` | Blocking operation in isolated function |
-
-### Code quality rules
-
-| Rule ID | Description |
-|---|---|
-| `QUAL001` | Unused variable or import |
-| `QUAL002` | Empty catch block (error swallowed silently) |
-| `QUAL003` | Function exceeds recommended line count |
-| `QUAL004` | Missing error handling on remote call |
-| `QUAL005` | Deprecated API usage |
-
-### Style and best practice rules
-
-| Rule ID | Description |
-|---|---|
-| `STYLE001` | Non-descriptive variable name |
-| `STYLE002` | Foreach + push pattern replaceable with query expression |
-| `STYLE003` | Missing documentation on public function |
-| `STYLE004` | Inconsistent naming convention |
-
-## Configuring rules
-
-### Scan configuration file
-
-Create a `Scan.toml` file in your project root to customize which rules are enabled and their severity:
-
-```toml
-# Scan.toml
-
-[scan]
-# Include or exclude rule categories
-include = ["SEC", "PERF", "QUAL"]
-exclude = ["STYLE"]
-
-# Override severity for specific rules
-[scan.rules.SEC001]
-severity = "error"    # Promote to error
-
-[scan.rules.PERF003]
-severity = "info"     # Demote to info
-
-[scan.rules.QUAL003]
-enabled = false       # Disable this rule
-
-[scan.rules.QUAL003]
-maxFunctionLines = 50  # Configure threshold
-```
-
-### Inline suppression
-
-Suppress specific warnings in code with annotations:
-
-```ballerina
-// Suppress a specific rule for this line
-@scan:SuppressWarnings {rules: ["PERF003"]}
-final http:Client quickClient = check new ("https://api.example.com");
-
-// Suppress with a justification
-@scan:SuppressWarnings {
-    rules: ["SEC003"],
-    reason: "Internal network communication, TLS not required"
-}
-final http:Client internalClient = check new ("http://internal-service:8080");
-```
-
-## Fixing common issues
-
-### SEC002: SQL injection
-
-```ballerina
-// Bad: String concatenation
-string query = "SELECT * FROM users WHERE name = '" + userName + "'";
-_ = check db->query(query);
-
-// Good: Parameterized query
-stream<User, error?> result = db->query(
-    `SELECT * FROM users WHERE name = ${userName}`
-);
-```
-
-### PERF003: Missing timeout
-
-```ballerina
-// Bad: No timeout
-final http:Client client = check new ("https://api.example.com");
-
-// Good: Timeout configured
-final http:Client client = check new ("https://api.example.com", {
-    timeout: 30,
-    retryConfig: {
-        count: 3,
-        interval: 2
-    }
-});
-```
-
-### QUAL002: Empty catch block
-
-```ballerina
-// Bad: Error silently swallowed
-do {
-    check riskyOperation();
-} on fail error e {
-    // Empty -- error is lost
-}
-
-// Good: Error logged or propagated
-do {
-    check riskyOperation();
-} on fail error e {
-    log:printError("Operation failed", 'error = e);
-    check sendAlert("Operation failure: " + e.message());
-}
-```
+| Severity | Description | Exit code effect |
+|----------|-------------|-----------------|
+| `ERROR` | Critical issue that should block deployment | Non-zero exit code |
+| `WARNING` | Issue that should be reviewed and addressed | Warning-only (configurable) |
+| `INFO` | Informational suggestion for improvement | No effect on exit code |
 
 ## CI/CD integration
 
-### GitHub actions
+### GitHub actions example
 
 ```yaml
 - name: Run Ballerina Scan
-  run: bal scan --format json --fail-on-warnings
+  run: bal scan --scan-report --platform-triggered
+
+- name: Upload Scan Report
+  if: always()
+  uses: actions/upload-artifact@v4
+  with:
+    name: scan-report
+    path: target/report/scan-results.html
 ```
 
-### Jenkins pipeline
+### Exit codes
 
-```groovy
-stage('Static Analysis') {
-    steps {
-        sh 'bal scan --format json > scan-results.json'
-        archiveArtifacts artifacts: 'scan-results.json'
-    }
-}
-```
-
-### Pre-commit hook
-
-```bash
-#!/bin/bash
-# .git/hooks/pre-commit
-result=$(bal scan --fail-on-warnings 2>&1)
-if [ $? -ne 0 ]; then
-    echo "Scan failed. Fix issues before committing:"
-    echo "$result"
-    exit 1
-fi
-```
-
-## Command reference
-
-| Command | Description |
-|---|---|
-| `bal scan` | Scan current project |
-| `--path <dir>` | Scan a specific directory |
-| `--format json` | Output results as JSON |
-| `--format sarif` | Output in SARIF format (for IDE integration) |
-| `--fail-on-warnings` | Return non-zero exit code on warnings |
-| `--include <categories>` | Include specific rule categories |
-| `--exclude <categories>` | Exclude specific rule categories |
-
-## What's next
-
-- [Migration Tools](../migration-tools/migration-tools.md) -- Migrate from other integration platforms
-- [Error Handling](/docs/develop/design-logic/error-handling) -- Fix error handling issues flagged by the scanner
+| Exit Code | Meaning |
+|-----------|---------|
+| `0` | No errors found (warnings and info may exist) |
+| `1` | One or more ERROR-level issues found |
+| `2` | Scan tool error (invalid configuration, file not found) |

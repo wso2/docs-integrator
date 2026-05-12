@@ -346,3 +346,11 @@ The following tools extend `bal` with integration-specific code generation. Each
 | [Persist Tool](../../develop/tools/integration-tools/persist-tool.md) | `bal persist` | Generate type-safe data persistence clients |
 | [WSDL Tool](../../develop/tools/integration-tools/wsdl-tool.md) | `bal wsdl` | Generate clients from WSDL service definitions |
 | [XSD Tool](../../develop/tools/integration-tools/xsd-tool.md) | `bal xsd` | Generate Ballerina types from XML schema definitions |
+
+## Other tools
+
+The following tools extend `bal` with additional capabilities.
+
+| Tool | Command | Description |
+|---|---|---|
+| [Scan Tool](../../develop/tools/other/scan-tool.md) | `bal scan` | Run static code analysis to identify code quality issues, bugs, and security vulnerabilities |
