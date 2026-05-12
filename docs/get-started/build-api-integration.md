@@ -157,4 +157,3 @@ Save this as `main.bal`, then run `bal run` from the project directory. Send a r
 - [Build an event-driven integration](build-event-driven-integration.md) — React to messages from brokers
 - [Build a file-driven integration](build-file-driven-integration.md) — Process files from FTP or local directories
 - [HTTP service](../develop/integration-artifacts/service/http.md) — Learn resource functions, path parameters, and error handling
-- [Tutorials](../tutorials/rest-api-aggregation-service.md) — End-to-end walkthroughs and patterns

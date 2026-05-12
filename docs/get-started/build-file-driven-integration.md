@@ -161,4 +161,3 @@ Confirm the run terminal shows the log line `File modified`.
 - [Integration as API](build-api-integration.md) — Build an HTTP service
 - [Event-driven integration](build-event-driven-integration.md) — React to messages from brokers
 - [Local files](../develop/integration-artifacts/file/local-files.md) — Full Local Files listener reference (events, recursive watching, file handlers)
-- [Watch a local directory of CSV files](../tutorials/walkthroughs/watch-a-local-directory-csv-files.md) — End-to-end tutorial

@@ -91,4 +91,3 @@ Periodic invocation is configured in an external system once the automation is d
 - [Build an event-driven integration](build-event-driven-integration.md) — React to messages from brokers
 - [Build a file-driven integration](build-file-driven-integration.md) — Process files from FTP or local directories
 - [Automation](../develop/integration-artifacts/automation/automation.md) — Configure scheduling, manual execution, and integration logic
-- [Tutorials](../tutorials/rest-api-aggregation-service.md) — End-to-end walkthroughs and patterns

@@ -154,4 +154,3 @@ service on ftpListener {
 - [FTP / SFTP](ftp-sftp.md) — service configuration, authentication, and listener setup
 - [CSV fault tolerance](csv-fault-tolerance.md) — handle malformed rows without halting processing
 - [Post-processing: moving or deleting files](ftp-sftp.md#post-processing-moving-or-deleting-files) — `@ftp:FunctionConfig` reference
-- [FTP order batch tutorial](../../../tutorials/walkthroughs/process-ftp-order-batches-age-filter-and-file-dependency.md) — end-to-end walkthrough with age filter and file dependency

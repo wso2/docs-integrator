@@ -11,7 +11,7 @@ Event integrations are designed for reactive workflows triggered by messages fro
 :::info Prerequisites
 
 - [WSO2 Integrator installed](install.md)
-- A running RabbitMQ instance (or use Docker: `docker run -d -p 5672:5672 rabbitmq:management`)
+- A running RabbitMQ instance (or use Docker: `docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:management`)
 
 ## Step 1: Create a new integration project
 
@@ -24,8 +24,8 @@ Event integrations are designed for reactive workflows triggered by messages fro
 <ThemedImage
     alt="Create a New Integration Project"
     sources={{
-        light: useBaseUrl('/img/get-started/build-event-driven-integration/create-project.png'),
-        dark: useBaseUrl('/img/get-started/build-event-driven-integration/create-project.png'),
+        light: useBaseUrl('/img/get-started/build-event-driven-integration/create-project-light.png'),
+        dark: useBaseUrl('/img/get-started/build-event-driven-integration/create-project-dark.png'),
     }}
 />
 
@@ -34,15 +34,15 @@ Event integrations are designed for reactive workflows triggered by messages fro
 1. Select your integration from the project panel.
 2. In the design view, select **Add Artifact**.
 3. Select **RabbitMQ** under **Event Integration**.
-4. Update **Host** and **Port** configuration to point to the RabbitMQ instance you are running locally.
+4. Set **Host** to `localhost` and **Port** to `5672` (update these if your RabbitMQ instance runs elsewhere).
 5. Set **Queue Name** to `Orders`.
 6. Select **Create**.
 
 <ThemedImage
     alt="Add a RabbitMQ Event Integration Artifact"
     sources={{
-        light: useBaseUrl('/img/get-started/build-event-driven-integration/add-a-rabbitmq-listener.png'),
-        dark: useBaseUrl('/img/get-started/build-event-driven-integration/add-a-rabbitmq-listener.png'),
+        light: useBaseUrl('/img/get-started/build-event-driven-integration/add-a-rabbitmq-listener-light.png'),
+        dark: useBaseUrl('/img/get-started/build-event-driven-integration/add-a-rabbitmq-listener-dark.png'),
     }}
 />
 
@@ -53,10 +53,10 @@ Event integrations are designed for reactive workflows triggered by messages fro
 3. Select **Save**.
 
 <ThemedImage
-    alt="Add Message Processing Logic"
+    alt="Add onMessage Event Handler"
     sources={{
-        light: useBaseUrl('/img/get-started/build-event-driven-integration/add-event-handler.png'),
-        dark: useBaseUrl('/img/get-started/build-event-driven-integration/add-event-handler.png'),
+        light: useBaseUrl('/img/get-started/build-event-driven-integration/add-event-handler-light.png'),
+        dark: useBaseUrl('/img/get-started/build-event-driven-integration/add-event-handler-dark.png'),
     }}
 />
 
@@ -80,7 +80,7 @@ Event integrations are designed for reactive workflows triggered by messages fro
 
 1. Select **Run**.
 2. The integration starts and listens for messages on the `Orders` queue.
-3. Publish a test message to the RabbitMQ `Orders` queue to see the log output.
+3. Open the RabbitMQ Management UI at `http://localhost:15672` (default credentials: guest/guest), navigate to **Queues → Orders → Publish message**, enter any text as the payload, and select **Publish message**. The integration log should display `Received order`.
 
 <ThemedImage
     alt="Run and Test the Integration"
@@ -96,7 +96,15 @@ The following complete, runnable Ballerina program produces the same integration
 import ballerina/log;
 import ballerinax/rabbitmq;
 
-listener rabbitmq:Listener rabbitmqListener = new ("localhost", 5672);
+configurable string rabbitmqHost = "localhost";
+configurable int rabbitmqPort = 5672;
+configurable string rabbitmqUsername = "guest";
+configurable string rabbitmqPassword = "guest";
+
+listener rabbitmq:Listener rabbitmqListener = new (rabbitmqHost, rabbitmqPort, connectionData = {
+    username: rabbitmqUsername,
+    password: rabbitmqPassword
+});
 
 service "Orders" on rabbitmqListener {
     remote function onMessage(rabbitmq:AnydataMessage message, rabbitmq:Caller caller) returns error? {
@@ -111,7 +119,7 @@ service "Orders" on rabbitmqListener {
 }
 ```
 
-Save this as `main.bal`, then run `bal run` from the project directory.
+Save this as `main.bal`, then run `bal run` from the project directory. Once running, open `http://localhost:15672` (default credentials: guest/guest), navigate to **Queues → Orders → Publish message**, and publish any message. The terminal log should display `Received order`.
 
 ## Supported event sources
 
@@ -126,7 +134,7 @@ Save this as `main.bal`, then run `bal run` from the project directory.
 
 ## What's next
 
-- [Automation](build-automation.md) -- Build a scheduled job
-- [AI agent](build-ai-agent.md) -- Build an intelligent agent
-- [Integration as API](build-api-integration.md) -- Build an HTTP service
-- [File-driven integration](build-file-driven-integration.md) -- Process files from FTP or local directories
+- [Automation](build-automation.md) — Build a scheduled job
+- [AI agent](build-ai-agent.md) — Build an intelligent agent
+- [Integration as API](build-api-integration.md) — Build an HTTP service
+- [File-driven integration](build-file-driven-integration.md) — Process files from FTP or local directories
