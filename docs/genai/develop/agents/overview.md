@@ -35,12 +35,10 @@ The **AI Agent** block provides a centralized configuration interface for defini
 
 The **AI Agent** block allows you to configure the following components of the agent:
 
-- **System prompt and agent behavior** — Click the **AI Agent** block to open the configuration panel, where you can configure the agent role, instructions, query input, and response mapping.
-- **Memory configuration** — Use the **Add Memory** option to configure conversational or persistent memory for the agent. For more information, see [Memory](genai/develop/agents/memory.md).
-- **Tools** — Use the **+** button on the AI Agent block to add tools and integrations that the agent can invoke during execution. For more information, see [Tool](genai/develop/agents/tools.md).
-- **Model Provider Configuration** — Click the attached model provider node (for example, `wso2ModelProvider`) to configure the LLM provider and model settings used by the agent. For more information, see [Model Providers](genai/develop/components/model-providers.md).
-
-The **Chat** button opens an in-IDE chat window that allows you to interact with the agent immediately. The **Tracing** toggle enables execution tracing so you can inspect reasoning steps, tool invocations, and execution flow after each interaction.
+- **System prompt and agent behavior**: Click the **AI Agent** block to open the configuration panel, where you can configure the agent role, instructions, query input, and response mapping.
+- **Memory configuration**: Use the **Add Memory** option to configure conversational or persistent memory for the agent. For more information, see [Memory](genai/develop/agents/memory.md).
+- **Tools**: Use the **+** button on the AI Agent block to add tools and integrations that the agent can invoke during execution. For more information, see [Tools](genai/develop/agents/tools.md).
+- **Model Provider Configuration**: Click the attached model provider node (for example, `wso2ModelProvider`) to configure the LLM provider and model settings used by the agent. For more information, see [Model Providers](genai/develop/components/model-providers.md).
 
 ## Try it and run
 

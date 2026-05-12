@@ -212,8 +212,6 @@ curl -X POST http://localhost:9090/hthr/chat \
       }'
 ```
 
-Example response:
-
 ```json
 {
   "message":"To address your VPN issue, please restart the VPN client and try reconnecting. If you have already done this, let me know for further assistance!"
@@ -230,8 +228,6 @@ curl -X POST http://localhost:9090/hthr/chat \
         "message":"I already restarted it"
       }'
 ```
-
-Example response:
 
 ```json
 {
@@ -257,8 +253,6 @@ curl -X POST http://localhost:9090/hthr/chat \
       }'
 ```
 
-Example response:
-
 ```json
 {
   "message":"I currently don't have any further suggestions from the knowledge base. However, you might try these:
@@ -282,8 +276,6 @@ curl -X POST http://localhost:9090/hthr/chat \
         "message":"Do you remember my issue?"
       }'
 ```
-
-Example response:
 
 ```json
 {
