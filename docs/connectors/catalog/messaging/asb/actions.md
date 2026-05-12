@@ -75,7 +75,7 @@ check sender->send({
 <details>
 <summary>sendPayload</summary>
 
-Sends a payload directly as the message body, inferring content type.
+Sends a message with just the payload content to the configured queue or topic. The payload is stored in the message as a byte stream.
 
 Parameters:
 
@@ -253,7 +253,7 @@ if message is () {
 <details>
 <summary>receivePayload</summary>
 
-Receives a single message and returns its payload directly.
+Receives the message from the configured queue or subscription directly bound to the expected payload type.
 
 Parameters:
 
