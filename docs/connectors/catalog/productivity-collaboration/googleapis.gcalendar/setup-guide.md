@@ -48,7 +48,7 @@ If your app is in **Testing** mode, only explicitly added test users can authori
     https://developers.google.com/oauthplayground
     ```
 6. Click **Create**.
-7. A dialog displays your **Client ID** and **Client Secret** — copy and save both values securely.
+7. A dialog displays your **Client ID** and **Client Secret**; copy and save both values securely.
 
 Store the Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
 

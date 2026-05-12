@@ -25,7 +25,7 @@ For a default local installation this is:
 https://localhost:9443/api/service-catalog/v1
 ```
 
-Note this URL — it is your `serviceUrl`.
+Note this URL; it is your `serviceUrl`.
 
 ## Step 2: Identify the OAuth2 token endpoint
 
@@ -41,7 +41,7 @@ For a default local installation this is:
 https://localhost:9443/oauth2/token
 ```
 
-Note this URL — it is your `tokenUrl`.
+Note this URL; it is your `tokenUrl`.
 
 ## Step 3: Register an OAuth2 application via dynamic client registration
 
@@ -73,9 +73,9 @@ If you already have an OAuth2 application in the WSO2 Developer Portal with the 
 The Service Catalog API enforces scope-based access control. Ensure your WSO2 API Manager
 user has the roles that grant the following scopes:
 
-- `service_catalog:service_view` — required for read operations (list, get, export)
-- `service_catalog:service_write` — required for write operations (create, update, delete, import)
-- `apim:api_view` — required for checking which APIs reference a given service
+- `service_catalog:service_view`: required for read operations (list, get, export)
+- `service_catalog:service_write`: required for write operations (create, update, delete, import)
+- `apim:api_view`: required for checking which APIs reference a given service
 
 By default, users with the `admin` role have access to all scopes.
 

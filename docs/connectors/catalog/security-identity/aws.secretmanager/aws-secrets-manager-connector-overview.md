@@ -18,7 +18,7 @@ AWS Secrets Manager is a managed service that helps you protect access to your a
 
 ## Actions
 
-Actions are operations you invoke on AWS Secrets Manager from your integration — describing secret metadata, retrieving secret values, and batch-fetching multiple secrets. The connector exposes a single client:
+Actions are operations you invoke on AWS Secrets Manager from your integration, including describing secret metadata, retrieving secret values, and batch-fetching multiple secrets. The connector exposes a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up AWS IAM credentials with the necessary permissions to access AWS Secrets Manager.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **AWS Secrets Manager** connector, including connection setup, operation configuration, and execution flow.
 

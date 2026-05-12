@@ -4,7 +4,7 @@ title: Triggers
 
 # Triggers
 
-The `ballerinax/salesforce` connector supports event-driven integration through Salesforce Change Data Capture (CDC) and Platform Events. When records are created, updated, deleted, or restored in Salesforce, the listener receives change events in real time, triggering your service callbacks automatically — no polling required. Platform Events enable custom event-driven messaging between Salesforce and external systems.
+The `ballerinax/salesforce` connector supports event-driven integration through Salesforce Change Data Capture (CDC) and Platform Events. When records are created, updated, deleted, or restored in Salesforce, the listener receives change events in real time, triggering your service callbacks automatically, with no polling required. Platform Events enable custom event-driven messaging between Salesforce and external systems.
 
 Three components work together:
 
@@ -311,7 +311,7 @@ An isolated object interface for managing refresh token rotation. Implement this
 
 ### Single replica
 
-For a single-replica deployment (local dev, a single server, or a single Kubernetes pod), omit `tokenStore` — the connector defaults to `InMemoryTokenStore`. Refresh Token Rotation (RTR) is handled automatically: when Salesforce issues a new refresh token on each exchange, the connector captures it in memory and uses it for subsequent refreshes.
+For a single-replica deployment (local dev, a single server, or a single Kubernetes pod), omit `tokenStore`: the connector defaults to `InMemoryTokenStore`. Refresh Token Rotation (RTR) is handled automatically: when Salesforce issues a new refresh token on each exchange, the connector captures it in memory and uses it for subsequent refreshes.
 
 Set `defaultTokenExpTime` to match your org's Session Timeout value (Setup → Security → Session Settings → Timeout Value). Salesforce does not return `expires_in` in its token response, so the connector uses this value to calculate when to proactively refresh.
 
@@ -363,7 +363,7 @@ To subscribe to a specific object's change events instead of all CDC events, cha
 
 ### Multiple replicas
 
-In a horizontally-scaled deployment (e.g., multiple Kubernetes pods sharing one Salesforce Connected App), replicas must coordinate token refresh. Without coordination, two pods responding to a 401 simultaneously will each send the same stale refresh token. Salesforce rotates and immediately revokes the old token — causing `invalid_grant` errors that crash all replicas and require manual re-authentication.
+In a horizontally-scaled deployment (e.g., multiple Kubernetes pods sharing one Salesforce Connected App), replicas must coordinate token refresh. Without coordination, two pods responding to a 401 simultaneously will each send the same stale refresh token. Salesforce rotates and immediately revokes the old token, causing `invalid_grant` errors that crash all replicas and require manual re-authentication.
 
 The solution is to provide a shared `TokenStore` implementation backed by a distributed store such as Redis or a database. All replicas point to the same store. The connector's token manager uses double-checked locking: the first replica to acquire the distributed lock performs the token refresh and writes the result; all other replicas adopt the new tokens without making an additional HTTP call.
 

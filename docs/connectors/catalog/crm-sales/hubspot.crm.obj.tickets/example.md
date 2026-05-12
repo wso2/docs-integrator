@@ -40,7 +40,7 @@ From the integration overview canvas, select **+ Add Artifact**, then select **C
 The **New Connection** form opens. Fill in the connection parameters, binding each field to a configurable variable:
 
 - **Connection Name** : Enter `ticketsClient` as the connection name
-- **Config** : Switch to **Expression** mode and enter `{auth: {token: hubspotAuthToken}}` — this wires the `BearerTokenConfig` authentication using a configurable variable named `hubspotAuthToken`
+- **Config** : Switch to **Expression** mode and enter `{auth: {token: hubspotAuthToken}}`: this wires the `BearerTokenConfig` authentication using a configurable variable named `hubspotAuthToken`
 
 ![HubSpot CRM Tickets connection form fully filled with all parameters before saving](/img/connectors/catalog/crm-sales/hubspot.crm.obj.tickets/hubspot_crm_obj_tickets_screenshot_02_connection_form.png)
 

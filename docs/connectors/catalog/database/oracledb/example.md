@@ -5,7 +5,7 @@
 Build an Oracle Database integration using the OracleDB connector in WSO2 Integrator's low-code canvas. The integration establishes an Oracle DB connection with configurable variables and executes a SQL INSERT statement to add a record to a database table.
 
 **Operations used:**
-- **execute** — Runs a SQL INSERT statement against the Oracle Database and returns an execution result.
+- **execute**: Runs a SQL INSERT statement against the Oracle Database and returns an execution result.
 
 ## Architecture
 
@@ -54,7 +54,7 @@ In the **Configure OracleDB** dialog, scroll down to the **Advanced Configuratio
 ### Step 4: Save the connection
 
 1. Scroll to the top of the dialog and verify the **Connection Name** is set to `oracledbClient`.
-2. Click **Save** — the dialog closes and the `oracledbClient` connection node appears on the canvas.
+2. Click **Save**: the dialog closes and the `oracledbClient` connection node appears on the canvas.
 
 ![OracleDB Connections panel showing oracledbClient entry after saving](/img/connectors/catalog/database/oracledb/oracledb_screenshot_03_connections_list.png)
 
@@ -74,7 +74,7 @@ In the **Configure OracleDB** dialog, scroll down to the **Advanced Configuratio
 ### Step 6: Add an automation entry point and expand the connection node
 
 1. On the canvas, click **+ Add Entry Point** (or the **+** button in the Entry Points panel).
-2. Select **Automation** from the entry point types — an Automation flow is added with **Start** and **End** nodes.
+2. Select **Automation** from the entry point types: an Automation flow is added with **Start** and **End** nodes.
 3. Click the **+** button between **Start** and **End** to open the step panel.
 4. Expand **oracledbClient** in the connections list to see all available operations.
 

@@ -261,7 +261,7 @@ Executes SQL operations with support for both basic and key-pair authentication.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `accountIdentifier` | `string` | Required | Snowflake account identifier (e.g., `"myorg-myaccount"`). |
-| `authConfig` | `AuthConfig` | Required | Authentication configuration — either `BasicAuth` (user/password) or `KeyBasedAuth` (user/private key). |
+| `authConfig` | `AuthConfig` | Required | Authentication configuration: either `BasicAuth` (user/password) or `KeyBasedAuth` (user/private key). |
 | `options` | `Options?` | `()` | Additional JDBC datasource options. |
 | `connectionPool` | `sql:ConnectionPool?` | `()` | Connection pool configuration. |
 

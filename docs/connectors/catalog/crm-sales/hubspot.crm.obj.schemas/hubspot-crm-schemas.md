@@ -8,7 +8,7 @@ HubSpot CRM Schemas lets you define, retrieve, update, and delete custom object 
 
 - Retrieve all custom object schemas or fetch a specific schema by its object type ID or fully qualified name
 - Create new custom object schemas with user-defined properties, display labels, required fields, and searchable property configuration
-- Update existing schemas — modify labels, primary/secondary display properties, required fields, and searchability settings
+- Update existing schemas: modify labels, primary/secondary display properties, required fields, and searchability settings
 - Delete (archive) custom object schemas that are no longer required
 - Define associations between custom object types to model relationships across the HubSpot CRM
 - Remove individual association definitions from a custom object schema
@@ -16,7 +16,7 @@ HubSpot CRM Schemas lets you define, retrieve, update, and delete custom object 
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — listing schemas, creating custom object types, patching definitions, and managing associations. All actions are exposed through a single client:
+Actions are operations you invoke on HubSpot from your integration, including listing schemas, creating custom object types, patching definitions, and managing associations. All actions are exposed through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -28,7 +28,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot Private App and obtaining the access token required to use the HubSpot CRM Schemas connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot CRM Schemas** connector, including connection setup, operation configuration, and execution flow.
 

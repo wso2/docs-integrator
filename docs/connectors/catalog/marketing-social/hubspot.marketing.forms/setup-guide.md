@@ -30,8 +30,8 @@ The `forms` scope is required for all form operations. Without it, API calls wil
 ## Get the client ID and client secret
 
 1. In the **Auth** tab of your app, locate the **Client ID** and **Client Secret** fields.
-2. Copy the **Client ID** — this is your `clientId`.
-3. Copy the **Client Secret** — this is your `clientSecret`.
+2. Copy the **Client ID**; this is your `clientId`.
+3. Copy the **Client Secret**; this is your `clientSecret`.
 
 Store the Client ID and Client Secret securely. Do not commit them to source control.
 Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.

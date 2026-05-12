@@ -20,7 +20,7 @@ Provides full CRUD, batch, and search operations on HubSpot CRM lead objects.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|ApiKeysConfig` | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or Private App API key. |
+| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|ApiKeysConfig` | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or Private App API key. |
 | `serviceUrl` | `string` | `"https://api.hubapi.com/crm/v3/objects/leads"` | Base URL of the HubSpot CRM Leads API. |
 | `httpVersion` | `http:HttpVersion` | `http:HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |

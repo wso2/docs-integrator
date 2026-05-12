@@ -15,7 +15,7 @@ HubSpot CRM Pipelines is a feature of the HubSpot CRM platform that lets you def
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — managing pipelines, creating stages, retrieving audit logs, and more. The connector exposes all actions through a single client:
+Actions are operations you invoke on HubSpot from your integration, including managing pipelines, creating stages, retrieving audit logs, and more. The connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -27,7 +27,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot developer app and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Pipelines connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot CRM Pipelines** connector, including connection setup, operation configuration, and execution flow.
 

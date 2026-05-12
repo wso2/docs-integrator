@@ -42,7 +42,7 @@ Select **+ Add Artifact** on the canvas and select **Automation**. In the **Crea
 
 Enter the connection details by binding each field to a configurable variable. In the **Configure Lineitems** form, set the following parameters:
 
-- **Config** : A `ConnectionConfig` record containing the Bearer token for HubSpot API authentication — bind to a configurable variable (for example, `hubspotToken`)
+- **Config** : A `ConnectionConfig` record containing the Bearer token for HubSpot API authentication: bind to a configurable variable (for example, `hubspotToken`)
 - **Connection Name** : A name to identify this connection (for example, `lineitemsClient`)
 
 ![HubSpot CRM Line Items connection form fully filled with all parameters before saving](/img/connectors/catalog/crm-sales/hubspot.crm.obj.lineitems/hubspot_crm_obj_lineitems_screenshot_02_connection_form.png)
@@ -72,7 +72,7 @@ In the Automation flow view, select the **+** button between the **Start** and *
 
 Select **Create** to add the create line item operation. In the **Create** operation form, configure the following parameters:
 
-- **Payload** : A record containing the line item properties — set `associations` to an empty array and `properties` to include fields such as `hs_product_id`, `quantity`, `price`, and `name`
+- **Payload** : A record containing the line item properties; set `associations` to an empty array and `properties` to include fields such as `hs_product_id`, `quantity`, `price`, and `name`
 - **Result** : The variable name to store the response (for example, `result`)
 
 ![HubSpot CRM Line Items create operation configuration filled with all values](/img/connectors/catalog/crm-sales/hubspot.crm.obj.lineitems/hubspot_crm_obj_lineitems_screenshot_05_create_operation.png)

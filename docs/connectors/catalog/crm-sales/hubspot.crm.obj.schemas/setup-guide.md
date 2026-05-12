@@ -22,8 +22,8 @@ This guide walks you through creating a HubSpot Private App and obtaining the ac
 
 1. Click the **Scopes** tab.
 2. Search for and select the following scopes required by the Schemas API:
-    - `crm.schemas.custom.read` — read custom object schemas
-    - `crm.schemas.custom.write` — create, update, and delete custom object schemas
+    - `crm.schemas.custom.read`: read custom object schemas
+    - `crm.schemas.custom.write`: create, update, and delete custom object schemas
 3. Add any additional scopes your integration requires.
 
 Grant only the minimum scopes your integration needs. You can edit scopes later, but doing so invalidates the existing access token and requires you to generate a new one.

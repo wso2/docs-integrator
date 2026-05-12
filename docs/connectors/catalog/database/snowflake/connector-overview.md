@@ -19,7 +19,7 @@ Snowflake is a cloud-based data warehousing platform that enables scalable stora
 
 ## Actions
 
-Actions are operations you invoke on Snowflake from your integration — querying data, inserting records, executing DDL statements, and calling stored procedures. The Snowflake connector exposes actions through two clients:
+Actions are operations you invoke on Snowflake from your integration, including querying data, inserting records, executing DDL statements, and calling stored procedures. The Snowflake connector exposes actions through two clients:
 
 | Client | Actions |
 |--------|---------|
@@ -32,7 +32,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up a Snowflake account, creating a warehouse and database, and obtaining the credentials required to use the Snowflake connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Snowflake** connector, including connection setup, operation configuration, and execution flow.
 

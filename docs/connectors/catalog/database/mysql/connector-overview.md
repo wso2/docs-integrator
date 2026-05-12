@@ -8,18 +8,18 @@ MySQL is one of the world's most popular open-source relational database managem
 
 ## Key features
 
-- Full SQL operations — query, insert, update, delete — using parameterized queries for safety and convenience
+- Full SQL operations: query, insert, update, delete using parameterized queries for safety and convenience
 - Single-row retrieval via `queryRow` for lookups, aggregations, and existence checks
 - Batch execution support for inserting or modifying multiple rows in a single operation
 - Stored procedure invocation with `IN`, `OUT`, and `INOUT` parameter support and multiple result sets
 - Change Data Capture (CDC) listener powered by Debezium for real-time `onRead`, `onCreate`, `onUpdate`, `onDelete`, and `onError` events
-- Flexible connection pooling — global shared, client-owned, or local shared pools
+- Flexible connection pooling: global shared, client-owned, or local shared pools
 - SSL/TLS support with configurable modes: Disabled, Preferred, Required, Verify CA, and Verify Identity
 - GraalVM native image support when used with `ballerinax/mysql.driver`
 
 ## Actions
 
-Actions are operations you invoke on a MySQL database from your integration — executing SQL queries, inserting records, running batch updates, calling stored procedures, and more. The MySQL connector exposes actions through a single client:
+Actions are operations you invoke on a MySQL database from your integration, including executing SQL queries, inserting records, running batch updates, calling stored procedures, and more. The MySQL connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -47,7 +47,7 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up a MySQL database and obtaining the connection credentials required to use the Ballerina MySQL connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the listener and service model.
 

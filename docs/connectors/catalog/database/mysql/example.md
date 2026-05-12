@@ -5,7 +5,7 @@
 Build a WSO2 Integrator automation that connects to a MySQL database using configurable connection parameters and executes an INSERT SQL statement. The integration uses the MySQL connector to insert a record into a database table safely, without hardcoding credentials in source code.
 
 **Operations used:**
-- **Execute** — runs a parameterized SQL INSERT statement against the connected MySQL database and returns an execution result
+- **Execute**: runs a parameterized SQL INSERT statement against the connected MySQL database and returns an execution result
 
 ## Architecture
 
@@ -90,8 +90,8 @@ Select the empty step placeholder in the flow to open the step addition panel. I
 
 Fill in the operation fields, then select **Save** to add the step to the automation flow.
 
-- **sqlQuery** — a parameterized SQL INSERT statement to execute. Use backtick-templated parameters so values are bound safely (no string concatenation). For example: `` `INSERT INTO users (name, email) VALUES (${name}, ${email})` ``, where `name` and `email` are Ballerina variables (e.g., bound to inputs of the automation).
-- **result** — variable that holds the returned `sql:ExecutionResult`; pre-filled as `sqlExecutionresult`
+- **sqlQuery**: a parameterized SQL INSERT statement to execute. Use backtick-templated parameters so values are bound safely (no string concatenation). For example: `` `INSERT INTO users (name, email) VALUES (${name}, ${email})` ``, where `name` and `email` are Ballerina variables (e.g., bound to inputs of the automation).
+- **result**: variable that holds the returned `sql:ExecutionResult`; pre-filled as `sqlExecutionresult`
 
 ![MySQL Execute operation configuration filled with all values](/img/connectors/catalog/database/mysql/mysql_screenshot_05_operation_filled.png)
 

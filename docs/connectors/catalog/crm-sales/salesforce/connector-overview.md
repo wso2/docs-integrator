@@ -19,21 +19,21 @@ Salesforce is a cloud-based CRM platform that provides tools for sales, service,
 
 ## Actions
 
-Actions are operations you invoke on Salesforce from your integration — querying records, creating opportunities, running bulk jobs, and more. The Salesforce connector exposes actions across five clients:
+Actions are operations you invoke on Salesforce from your integration, including querying records, creating opportunities, running bulk jobs, and more. The Salesforce connector exposes actions across five clients:
 
 | Client | Actions |
 |--------|---------|
 | `Client` | Record CRUD, SOQL/SOSL, metadata, reports, password management, batch, invocable actions |
 | `Apex Client` | Execute custom Apex REST endpoints |
-| `Bulk Client` | Bulk API v1 — job and batch lifecycle for CSV/JSON/XML data |
-| `Bulk V2 Client` | Bulk API v2 — simplified ingest and query jobs for large-scale data |
+| `Bulk Client` | Bulk API v1: job and batch lifecycle for CSV/JSON/XML data |
+| `Bulk V2 Client` | Bulk API v2: simplified ingest and query jobs for large-scale data |
 | `Soap Client` | Lead conversion via SOAP API |
 
 See the **[Action Reference](actions.md)** for the full list of operations, parameters, and sample code for each client.
 
 ## Triggers
 
-Triggers allow your integration to react to events happening in Salesforce in real time. The connector uses Salesforce Change Data Capture (CDC) and Platform Events to stream events to a `salesforce:Listener`, which invokes your service callbacks automatically — no polling required.
+Triggers allow your integration to react to events happening in Salesforce in real time. The connector uses Salesforce Change Data Capture (CDC) and Platform Events to stream events to a `salesforce:Listener`, which invokes your service callbacks automatically, with no polling required.
 
 Supported trigger events:
 
@@ -51,7 +51,7 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Salesforce Connected App and obtaining the OAuth 2.0 credentials required to use the Salesforce connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the listener and service model.
 

@@ -41,9 +41,9 @@ The connector supports common COBOL data constructs including nested group items
 
 Identify the encoding used by your mainframe data source:
 
-- **ASCII** — Used by most modern systems and PC-based COBOL environments.
+- **ASCII**: Used by most modern systems and PC-based COBOL environments.
   This is the default encoding for the connector.
-- **EBCDIC** — Used by IBM mainframes (z/OS, MVS). If your byte streams originate
+- **EBCDIC**: Used by IBM mainframes (z/OS, MVS). If your byte streams originate
   from an IBM mainframe, you must specify `EBCDIC` encoding when calling `toBytes`
   or `fromBytes`.
 

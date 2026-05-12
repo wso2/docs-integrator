@@ -8,19 +8,19 @@ The `ballerinax/hubspot.marketing.emails` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manage HubSpot marketing emails — CRUD, publish, clone, A/B test, drafts, revisions, and statistics. |
+| [`Client`](#client) | Manage HubSpot marketing emails: CRUD, publish, clone, A/B test, drafts, revisions, and statistics. |
 
 ---
 
 ## Client
 
-Manage HubSpot marketing emails — CRUD, publish, clone, A/B test, drafts, revisions, and statistics.
+Manage HubSpot marketing emails: CRUD, publish, clone, A/B test, drafts, revisions, and statistics.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token grant (recommended), bearer token, or legacy API key. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token grant (recommended), bearer token, or legacy API key. |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `60` | Request timeout in seconds. |
 | `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
@@ -208,7 +208,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `emailId` | <code>string</code> | Yes | The ID of the marketing email to update. |
-| `payload` | <code>EmailUpdateRequest</code> | Yes | Fields to update — `name`, `subject`, `from`, `to`, `content`, etc. |
+| `payload` | <code>EmailUpdateRequest</code> | Yes | Fields to update: `name`, `subject`, `from`, `to`, `content`, etc. |
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional HTTP headers. |
 | `queries` | <code>PatchEmailIdQueries</code> | No | Query parameters including `archived`. |
 

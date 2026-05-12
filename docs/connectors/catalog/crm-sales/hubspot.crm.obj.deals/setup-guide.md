@@ -22,12 +22,12 @@ This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 
 
 1. In your app settings, navigate to the **Auth** tab.
 2. Under **Scopes**, add the following required scopes:
-    - `crm.objects.deals.read` — to read deal records
-    - `crm.objects.deals.write` — to create, update, and archive deals
+    - `crm.objects.deals.read`: to read deal records
+    - `crm.objects.deals.write`: to create, update, and archive deals
 3. Set the **Redirect URL** to a URL you control (e.g., `https://localhost:9090/callback`).
 4. Click **Save**.
 
-Copy the **Client ID** and **Client Secret** from the Auth tab — you will need them in subsequent steps.
+Copy the **Client ID** and **Client Secret** from the Auth tab; you will need them in subsequent steps.
 
 ## Step 3: Authorize the app and get an authorization code
 
@@ -56,11 +56,11 @@ grant_type=authorization_code
 &redirect_uri=<YOUR_REDIRECT_URI>
 ```
 
-The response contains `access_token`, `refresh_token`, and `expires_in`. Save the `refresh_token` — it is long-lived and used to obtain new access tokens automatically.
+The response contains `access_token`, `refresh_token`, and `expires_in`. Save the `refresh_token`; it is long-lived and used to obtain new access tokens automatically.
 
 Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange.
 
-## Step 5: Alternative — use a private app token
+## Step 5: Alternative: use a private app token
 
 If you prefer not to use OAuth 2.0, HubSpot Private Apps provide a simpler API key approach:
 
@@ -69,6 +69,6 @@ If you prefer not to use OAuth 2.0, HubSpot Private Apps provide a simpler API k
 3. Click **Create a private app**.
 4. Give it a name, then under **Scopes** add `crm.objects.deals.read` and `crm.objects.deals.write`.
 5. Click **Create app**, then **Continue creating**.
-6. Copy the generated **Access token** — this is your `privateApp` key.
+6. Copy the generated **Access token**; this is your `privateApp` key.
 
 Private app tokens do not expire but should be stored securely and rotated if compromised.

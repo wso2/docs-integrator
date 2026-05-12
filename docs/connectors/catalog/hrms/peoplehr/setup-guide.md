@@ -28,7 +28,7 @@ If you do not see the API option, contact People HR support to request API acces
 ## Step 3: Copy and store the API key
 
 1. After saving, copy the generated **API Key** from the API Key Management page.
-2. Store the API key securely — this is the `apiKey` value you will use to configure the connector.
+2. Store the API key securely; this is the `apiKey` value you will use to configure the connector.
 
 Store the API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 

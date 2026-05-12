@@ -59,7 +59,7 @@ You will need the Client ID, Client Secret, and a Refresh Token to configure the
 
 Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange in step 4.
 
-## Alternative — create a private app
+## Alternative: create a private app
 
 If you prefer using a Private App access token instead of OAuth 2.0:
 

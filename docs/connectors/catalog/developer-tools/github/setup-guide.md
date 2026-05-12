@@ -26,7 +26,7 @@ This guide walks you through creating a GitHub Personal Access Token (PAT) requi
 1. In the Developer settings page, click **Personal access tokens**.
 2. Select **Tokens (classic)** or **Fine-grained tokens** depending on your preference.
 
-Fine-grained tokens offer more granular permissions and are recommended for production use. Classic tokens provide broader scope-based access. Both token types work identically with the GitHub connector — the choice affects only the permission scope, not connector configuration.
+Fine-grained tokens offer more granular permissions and are recommended for production use. Classic tokens provide broader scope-based access. Both token types work identically with the GitHub connector: the choice affects only the permission scope, not connector configuration.
 
 ## Step 4: Generate a new token
 
@@ -34,15 +34,15 @@ Fine-grained tokens offer more granular permissions and are recommended for prod
 2. Provide a descriptive **Note** for the token (e.g., `Ballerina GitHub Connector`).
 3. Set an **Expiration** period appropriate for your use case.
 4. Select the required **Scopes** based on the operations you intend to use:
-    - **repo** — Full control of private repositories (required for most repository operations).
-    - **read:org** — Read organization and team membership.
-    - **read:user** — Read user profile data.
-    - **admin:org** — Full control of orgs and teams (if managing organization resources).
-    - **delete_repo** — Delete repositories (if needed).
-    - **gist** — Create and manage gists.
-    - **notifications** — Access notifications.
+    - **repo**: Full control of private repositories (required for most repository operations).
+    - **read:org**: Read organization and team membership.
+    - **read:user**: Read user profile data.
+    - **admin:org**: Full control of orgs and teams (if managing organization resources).
+    - **delete_repo**: Delete repositories (if needed).
+    - **gist**: Create and manage gists.
+    - **notifications**: Access notifications.
 5. Click **Generate token** at the bottom of the page.
-6. Copy the generated token immediately — it will not be shown again.
+6. Copy the generated token immediately: it will not be shown again.
 
 Store the token securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 
@@ -54,7 +54,7 @@ If you are using the [GitHub Webhooks](../../../develop/integration-artifacts/ev
 
 - Admin access to the GitHub repository
 - Your WSO2 Integrator listener URL (for example, `https://your-host:8090`)
-- A webhook secret value — a random string you choose that must match the `webhookSecret` value in your integration
+- A webhook secret value: a random string you choose that must match the `webhookSecret` value in your integration
 
 ### Step 1: Open webhook settings
 
@@ -93,4 +93,4 @@ Choose **Let me select individual events** and enable only the events that match
 
 Click **Add webhook**. GitHub will send a ping event to your endpoint to verify connectivity.
 
-Always set a webhook secret. Without it, your listener accepts requests from any source — not just GitHub. The secret is used to verify the `X-Hub-Signature-256` header on every incoming request.
+Always set a webhook secret. Without it, your listener accepts requests from any source: not just GitHub. The secret is used to verify the `X-Hub-Signature-256` header on every incoming request.

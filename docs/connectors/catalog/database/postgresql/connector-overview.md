@@ -18,7 +18,7 @@ PostgreSQL is a powerful, open-source object-relational database system known fo
 
 ## Actions
 
-Actions are operations you invoke on PostgreSQL from your integration — querying tables, inserting records, calling stored procedures, and more. The PostgreSQL connector exposes actions through a single client:
+Actions are operations you invoke on PostgreSQL from your integration, including querying tables, inserting records, calling stored procedures, and more. The PostgreSQL connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -28,7 +28,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 ## Triggers
 
-Triggers allow your integration to react to data changes happening in PostgreSQL in real time. The connector uses Debezium-based Change Data Capture (CDC) to stream row-level change events to a `postgresql:CdcListener`, which invokes your service callbacks automatically — no polling required.
+Triggers allow your integration to react to data changes happening in PostgreSQL in real time. The connector uses Debezium-based Change Data Capture (CDC) to stream row-level change events to a `postgresql:CdcListener`, which invokes your service callbacks automatically, with no polling required.
 
 Supported trigger events:
 
@@ -45,7 +45,7 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up a PostgreSQL server and configuring it for use with the Ballerina PostgreSQL connector, including optional CDC configuration.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the listener and service model.
 

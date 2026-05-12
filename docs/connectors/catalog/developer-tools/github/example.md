@@ -231,11 +231,11 @@ Select **Create** to submit the trigger configuration and generate the `IssuesSe
 
 ### Step 5: Review auto-registered event handlers
 
-Navigate to the **github:IssuesService** service view. GitHub's `IssuesService` auto-registers all handlers when the event channel is selected — there's no separate **Add Handler** side panel for this trigger. The **Event Handlers** list includes:
+Navigate to the **github:IssuesService** service view. GitHub's `IssuesService` auto-registers all handlers when the event channel is selected: there's no separate **Add Handler** side panel for this trigger. The **Event Handlers** list includes:
 
-- `onOpened` — triggered when an issue is opened
-- `onClosed` — triggered when an issue is closed
-- `onReopened` — triggered when an issue is reopened
+- `onOpened`: triggered when an issue is opened
+- `onClosed`: triggered when an issue is closed
+- `onReopened`: triggered when an issue is reopened
 - `onAssigned`, `onUnassigned`, `onLabeled`, `onUnlabeled`
 
 <ThemedImage
@@ -250,7 +250,7 @@ Navigate to the **github:IssuesService** service view. GitHub's `IssuesService` 
 
 Select the **onOpened** row to open its flow canvas. At this stage the handler body contains only the **Start** node and the **Error Handler** wrapper.
 
-The `github:IssuesEvent` payload type is fixed by the `IssuesService` interface — you cannot change it. The type is provided by the `ballerinax/trigger.github` package and does not have a Define Value or Create Type Schema modal.
+The `github:IssuesEvent` payload type is fixed by the `IssuesService` interface; you cannot change it. The type is provided by the `ballerinax/trigger.github` package and does not have a Define Value or Create Type Schema modal.
 
 ### Step 7: Add the log statement
 
@@ -288,6 +288,6 @@ Try this sample in WSO2 Integration Platform.
 
 ## What's next
 
-- [GitHub Webhooks](../../../../develop/integration-artifacts/event/github-webhooks.md) — full reference for all event channels and handlers
-- [Setup Guide](setup-guide.md) — create a GitHub Personal Access Token and configure a repository webhook
-- [Action Reference](actions.md) — full list of REST API operations and sample code
+- [GitHub Webhooks](../../../../develop/integration-artifacts/event/github-webhooks.md): full reference for all event channels and handlers
+- [Setup Guide](setup-guide.md): create a GitHub Personal Access Token and configure a repository webhook
+- [Action Reference](actions.md): full list of REST API operations and sample code

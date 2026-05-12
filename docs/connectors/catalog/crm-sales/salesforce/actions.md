@@ -15,11 +15,11 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | REST API — record CRUD, SOQL/SOSL, metadata, reports, password management, batch, invocable actions. |
+| [`Client`](#client) | REST API: record CRUD, SOQL/SOSL, metadata, reports, password management, batch, invocable actions. |
 | [`Apex Client`](#apex-client) | Execute custom Apex REST endpoints exposed by your Salesforce org. |
-| [`Bulk Client`](#bulk-client) | Bulk API v1 — manage jobs and batches for large-scale CSV/JSON/XML data operations. |
-| [`Bulk V2 Client`](#bulk-v2-client) | Bulk API v2 — simplified ingest and query jobs for large-scale data loads. |
-| [`Soap Client`](#soap-client) | SOAP API — lead conversion using the Salesforce SOAP protocol. |
+| [`Bulk Client`](#bulk-client) | Bulk API v1: manage jobs and batches for large-scale CSV/JSON/XML data operations. |
+| [`Bulk V2 Client`](#bulk-v2-client) | Bulk API v2: simplified ingest and query jobs for large-scale data loads. |
+| [`Soap Client`](#soap-client) | SOAP API: lead conversion using the Salesforce SOAP protocol. |
 
 For event-driven integration, see the [Trigger Reference](triggers.md).
 
@@ -27,7 +27,7 @@ For event-driven integration, see the [Trigger Reference](triggers.md).
 
 ## Client
 
-REST API — record CRUD, SOQL/SOSL, metadata, reports, password management, batch, and invocable actions.
+REST API: record CRUD, SOQL/SOSL, metadata, reports, password management, batch, and invocable actions.
 
 ### Configuration
 
@@ -1019,7 +1019,7 @@ record {} postResult = check apexClient->apexRestExecute("/MyApexEndpoint/", htt
 
 ## Bulk Client
 
-Bulk API v1 — manage jobs and batches for large-scale CSV/JSON/XML data operations.
+Bulk API v1: manage jobs and batches for large-scale CSV/JSON/XML data operations.
 
 ### Configuration
 
@@ -1312,7 +1312,7 @@ json|xml|string|bulk:Result[] results = check bulkClient->getBatchResult(job, ba
 
 ## Bulk v2 client
 
-Bulk API v2 — simplified ingest and query jobs for large-scale data loads.
+Bulk API v2: simplified ingest and query jobs for large-scale data loads.
 
 ### Configuration
 
@@ -1712,7 +1712,7 @@ bulkv2:AllJobs allQueryJobs = check bulkV2Client->getAllQueryJobs();
 
 ## Soap Client
 
-SOAP API — lead conversion using the Salesforce SOAP protocol.
+SOAP API: lead conversion using the Salesforce SOAP protocol.
 
 ### Configuration
 

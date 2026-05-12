@@ -18,7 +18,7 @@ HubSpot CRM Feedback provides access to HubSpot's Feedback Submissions API, allo
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — listing submissions, searching by filter, reading records by ID, and performing bulk operations. The HubSpot CRM Feedback connector exposes all actions through a single client:
+Actions are operations you invoke on HubSpot from your integration, including listing submissions, searching by filter, reading records by ID, and performing bulk operations. The HubSpot CRM Feedback connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot Private App and obtaining the access token required to authenticate with the HubSpot Feedback Submissions API.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot CRM Feedback** connector, including connection setup, operation configuration, and execution flow.
 

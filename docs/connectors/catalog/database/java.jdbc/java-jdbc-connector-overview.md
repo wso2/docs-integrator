@@ -4,7 +4,7 @@ title: Overview
 
 # Overview
 
-Java JDBC is a standard API for connecting to relational databases from Java-based platforms. The Ballerina `ballerinax/java.jdbc` connector (v1.14.1) provides a lightweight, generic interface to any JDBC-compatible database — including MySQL, PostgreSQL, Oracle, SQL Server, Snowflake, and more — enabling you to execute queries, perform CRUD operations, and call stored procedures within your Ballerina integration flows.
+Java JDBC is a standard API for connecting to relational databases from Java-based platforms. The Ballerina `ballerinax/java.jdbc` connector (v1.14.1) provides a lightweight, generic interface to any JDBC-compatible database, including MySQL, PostgreSQL, Oracle, SQL Server, Snowflake, and more, enabling you to execute queries, perform CRUD operations, and call stored procedures within your Ballerina integration flows.
 
 ## Key features
 
@@ -18,7 +18,7 @@ Java JDBC is a standard API for connecting to relational databases from Java-bas
 
 ## Actions
 
-Actions are operations you invoke on a JDBC database from your integration — querying records, inserting data, running batch updates, and calling stored procedures. The Java JDBC connector exposes actions through a single client:
+Actions are operations you invoke on a JDBC database from your integration, including querying records, inserting data, running batch updates, and calling stored procedures. The Java JDBC connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up your database and obtaining the JDBC connection details required to use the Java JDBC connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Java JDBC** connector, including connection setup, operation configuration, and execution flow.
 

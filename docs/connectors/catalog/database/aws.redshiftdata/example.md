@@ -62,9 +62,9 @@ Select **Save** to persist the connection. The canvas updates to show the new `r
 1. In the left panel, select **Configurations**.
 2. Set a value for each configurable listed below:
 
-- **awsAccessKeyId** : `string` — your AWS access key ID
-- **awsSecretAccessKey** : `string` — your AWS secret access key
-- **awsSessionToken** : `string` — your AWS session token (leave blank if not required)
+- **awsAccessKeyId** : `string`: your AWS access key ID
+- **awsSecretAccessKey** : `string`: your AWS secret access key
+- **awsSessionToken** : `string`: your AWS session token (leave blank if not required)
 
 ## Configuring the AWS Redshift data executeStatement operation
 
@@ -83,7 +83,7 @@ Select the empty placeholder node on the canvas to open the node panel, then loc
 - **statement** : The SQL query to run (for example, `SELECT * FROM public.users LIMIT 10`)
 - **dbAccessConfig** : Override the connection-level database access config for this call (for example, `{id: "", database: "dev"}`)
 - **statementName** : A logical name for the SQL statement to aid traceability (for example, `"executeRedshiftQuery"`)
-- **withEvent** : Whether to send an event to Amazon EventBridge after execution — set to `false`
+- **withEvent** : Whether to send an event to Amazon EventBridge after execution; set to `false`
 
 ![Execute operation form with all fields filled](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_05_execute_form_filled.png)
 

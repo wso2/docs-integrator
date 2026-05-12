@@ -66,7 +66,7 @@ In the left panel of WSO2 Integrator, select **Configurations** (listed at the b
 - **sapCommerceServiceUrl** (string) : the full base URL of your SAP Commerce OCC REST API
 - **sapCommerceTokenUrl** (string) : the OAuth2 token endpoint for your SAP Commerce Cloud instance
 - **sapCommerceClientId** (string) : your OAuth2 client ID registered in SAP Commerce Cloud
-- **sapCommerceClientSecret** (string) : your OAuth2 client secret — keep this value secure
+- **sapCommerceClientSecret** (string) : your OAuth2 client secret; keep this value secure
 
 ## Configuring the SAP commerce web services getBaseSites operation
 

@@ -129,7 +129,7 @@ The `salesforce` connector provides practical examples illustrating usage in var
 ## Salesforce Trigger Example
 ### What you'll build
 
-This integration listens for Salesforce platform events—record creates, updates, deletes, and restores—using the Salesforce event listener in WSO2 Integrator. When a Salesforce user triggers a change, the listener receives the `salesforce:EventData` payload and passes it to the appropriate handler. Each handler logs the event payload as a JSON string using `log:printInfo`.
+This integration listens for Salesforce platform events, including record creates, updates, deletes, and restores, using the Salesforce event listener in WSO2 Integrator. When a Salesforce user triggers a change, the listener receives the `salesforce:EventData` payload and passes it to the appropriate handler; each handler logs the event payload as a JSON string using `log:printInfo`.
 
 ### Architecture
 
@@ -195,14 +195,14 @@ Select **Create** to submit the trigger configuration. WSO2 Integrator generates
 
 #### Step 5: Review auto-registered event handlers
 
-Navigate to the **Salesforce Event Integration** service view in the left panel. Salesforce registers four event handlers automatically—no manual **+ Add Handler** step is needed for this trigger:
+Navigate to the **Salesforce Event Integration** service view in the left panel. Salesforce registers four event handlers automatically: no manual **+ Add Handler** step is needed for this trigger:
 
 - **onCreate** : Salesforce record created
 - **onUpdate** : Salesforce record updated
 - **onDelete** : Salesforce record deleted
 - **onRestore** : Salesforce record restored
 
-![Auto-registered Salesforce event handlers — no Add Handler side panel for this trigger. Service view showing onCreate, onUpdate, onDelete, and onRestore handler rows with salesforceListener attached.](/img/connectors/catalog/crm-sales/salesforce/salesforce_trigger_screenshots_04_add_handler_panel.png)
+![Auto-registered Salesforce event handlers, with no Add Handler side panel for this trigger. Service view showing onCreate, onUpdate, onDelete, and onRestore handler rows with salesforceListener attached.](/img/connectors/catalog/crm-sales/salesforce/salesforce_trigger_screenshots_04_add_handler_panel.png)
 
 #### Step 6: Open the onCreate handler canvas
 
@@ -218,7 +218,7 @@ Select the **+** icon in the flow chart, and in the side panel that opens, choos
 
 Navigate back to **Salesforce Event Integration** in the left panel to confirm the complete service with all four registered handlers.
 
-![Final service view showing all four Salesforce event handler rows — onCreate, onUpdate, onDelete, onRestore — with the salesforceListener attached](/img/connectors/catalog/crm-sales/salesforce/salesforce_trigger_screenshots_07_service_view_final.png)
+![Final service view showing all four Salesforce event handler rows: onCreate, onUpdate, onDelete, onRestore: with the salesforceListener attached](/img/connectors/catalog/crm-sales/salesforce/salesforce_trigger_screenshots_07_service_view_final.png)
 
 ### Running the integration
 

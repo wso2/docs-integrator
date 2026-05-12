@@ -99,8 +99,8 @@ The automation flow canvas opens, showing a **Start** node and an **Error Handle
 
 3. Click **Get Database** to open its configuration form, then fill in the following parameters:
 
-- **Database Name** — name of the MongoDB database to retrieve (for example, `"hrdb"`)
-- **Result** — variable name for the returned `mongodb:Database` handle (for example, `mongodbDatabase`)
+- **Database Name**: name of the MongoDB database to retrieve (for example, `"hrdb"`)
+- **Result**: variable name for the returned `mongodb:Database` handle (for example, `mongodbDatabase`)
 
 ![MongoDB Get Database operation configuration filled with all values](/img/connectors/catalog/database/mongodb/mongodb_screenshot_05_operation_config.png)
 

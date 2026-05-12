@@ -93,9 +93,9 @@ Client certificate and private key (used for mutual TLS).
 
 Enum of TLS verification modes:
 
-- `NONE` — No verification.
-- `CA` — Verify the server's certificate against the provided CA certificates.
-- `FULL` — Verify the server's certificate against the provided CA certificates and also verify the server's hostname.
+- `NONE`: No verification.
+- `CA`: Verify the server's certificate against the provided CA certificates.
+- `FULL`: Verify the server's certificate against the provided CA certificates and also verify the server's hostname.
 
 ### Initializing the client
 

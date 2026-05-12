@@ -5,7 +5,7 @@
 This integration demonstrates how to connect to a Redis data store using the `ballerinax/redis` connector and perform a `set` operation to write a key-value pair. The workflow uses an Automation trigger to execute the Redis write on a scheduled basis, making it suitable for scenarios such as cache warming, periodic state updates, or scheduled data seeding. The complete flow runs from the Automation trigger through the Redis connector's `set` operation to the Redis data store.
 
 **Operations used:**
-- **`set`** — writes a string value at the specified key in the Redis data store, creating or overwriting the entry
+- **`set`**: writes a string value at the specified key in the Redis data store, creating or overwriting the entry
 
 ## Architecture
 

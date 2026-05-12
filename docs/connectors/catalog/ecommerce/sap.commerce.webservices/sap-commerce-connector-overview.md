@@ -8,18 +8,18 @@ SAP Commerce Cloud is an enterprise e-commerce platform that provides tools for 
 
 ## Key features
 
-- Product catalog browsing — list catalogs, catalog versions, categories, and product details
+- Product catalog browsing: list catalogs, catalog versions, categories, and product details
 - Product search and filtering with pagination, sorting, and full-text query support
-- Cart lifecycle management — create, retrieve, update carts and manage cart entries, delivery, and payment
+- Cart lifecycle management: create, retrieve, update carts and manage cart entries, delivery, and payment
 - Order placement and order history retrieval for B2C and B2B customers
 - Customer registration, profile management, and address book operations
-- B2B procurement — cost centers, budgets, organizational units, and quote management
+- B2B procurement: cost centers, budgets, organizational units, and quote management
 - Store locator with geo-search for finding physical points of service
 - Support ticket creation, event logging, and ticket lifecycle tracking
 
 ## Actions
 
-Actions are operations you invoke on SAP Commerce Cloud from your integration — browsing product catalogs, managing carts, placing orders, handling customer data, and more. The connector exposes all operations through a single client:
+Actions are operations you invoke on SAP Commerce Cloud from your integration, including browsing product catalogs, managing carts, placing orders, handling customer data, and more. The connector exposes all operations through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through configuring your SAP Commerce Cloud instance and obtaining the OAuth 2.0 credentials required to use the connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **SAP Commerce** connector, including connection setup, operation configuration, and execution flow.
 

@@ -8,19 +8,19 @@ Shopify is a leading e-commerce platform that enables users to create, manage, a
 
 ## Key features
 
-- Full CRUD operations on customers — list, create, retrieve, update, and search
-- Product and product variant management — create, list, update, and retrieve products and their variants
-- Order lifecycle management — create, retrieve, update, and list orders with rich filtering options
+- Full CRUD operations on customers: list, create, retrieve, update, and search
+- Product and product variant management: create, list, update, and retrieve products and their variants
+- Order lifecycle management: create, retrieve, update, and list orders with rich filtering options
 - Draft order creation for manual or deferred order workflows
 - Fulfillment creation and retrieval for order line items
 - Transaction and refund creation for order payment processing
-- Order risk assessment — create, retrieve, update, and list fraud risk evaluations
-- Webhook subscription management — create, list, update, retrieve, and count webhook subscriptions
+- Order risk assessment: create, retrieve, update, and list fraud risk evaluations
+- Webhook subscription management: create, list, update, retrieve, and count webhook subscriptions
 - Event-driven webhook handling for order, customer, product, and fulfillment events
 
 ## Actions
 
-Actions are operations you invoke on Shopify from your integration — managing customers, creating products, processing orders, and more. The Shopify Admin connector exposes all actions through a single client:
+Actions are operations you invoke on Shopify from your integration, including managing customers, creating products, processing orders, and more. The Shopify Admin connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -50,7 +50,7 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Shopify development store and obtaining the Admin API access token required to use the Shopify Admin connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the Shopify webhook listener and service model.
 

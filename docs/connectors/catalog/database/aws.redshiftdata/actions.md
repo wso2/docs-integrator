@@ -21,7 +21,7 @@ Executes SQL statements, retrieves results, and monitors execution status via th
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `region` | `Region` | Required | AWS region where the Redshift cluster or workgroup is deployed (e.g., `US_EAST_1`). |
-| `auth` | `StaticAuthConfig\|EC2IAMRoleConfig` | Required | AWS authentication — static access key credentials or EC2 IAM role configuration. |
+| `auth` | `StaticAuthConfig\|EC2IAMRoleConfig` | Required | AWS authentication: static access key credentials or EC2 IAM role configuration. |
 | `dbAccessConfig` | `Cluster\|WorkGroup` | `()` | Default database access configuration. Can be overridden per-statement via `ExecutionConfig`. |
 
 ### Initializing the client

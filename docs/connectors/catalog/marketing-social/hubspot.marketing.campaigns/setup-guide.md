@@ -22,7 +22,7 @@ This guide walks you through creating a HubSpot developer app and obtaining the 
 ## Configure OAuth settings
 
 1. Go to the **Auth** tab of your app.
-2. Note the **Client ID** and **Client Secret** — you will need these.
+2. Note the **Client ID** and **Client Secret**; you will need these.
 3. Set the **Redirect URL** to `https://localhost` (or your own callback URL).
 4. Under **Scopes**, add the following scopes:
     - `content`
@@ -60,7 +60,7 @@ The required scopes may vary depending on which operations you plan to use. The 
 
 Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange in step 5.
 
-## Alternative — use a private app API key
+## Alternative: use a private app API key
 
 If you prefer API key authentication instead of OAuth 2.0:
 
@@ -69,7 +69,7 @@ If you prefer API key authentication instead of OAuth 2.0:
 3. Enter a name and description for the app.
 4. Under **Scopes**, add `content`, `crm.objects.campaigns.read`, and `crm.objects.campaigns.write`.
 5. Click **Create app** and confirm.
-6. Copy the generated **Access token** — this is your private app API key.
+6. Copy the generated **Access token**; this is your private app API key.
 
 Store your API key and OAuth credentials securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
 

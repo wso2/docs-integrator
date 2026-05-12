@@ -5,7 +5,7 @@
 Build a low-code integration using the `ballerinax/java.jdbc` connector in WSO2 Integrator that connects to a relational database and executes a SQL INSERT statement. You'll configure a JDBC connection with Configurable variables and run the `execute` operation from an Automation entry point.
 
 **Operations used:**
-- **Execute** — executes an INSERT, UPDATE, or DELETE SQL statement and returns an execution result
+- **Execute**: executes an INSERT, UPDATE, or DELETE SQL statement and returns an execution result
 
 ## Architecture
 
@@ -82,9 +82,9 @@ The Automation flow opens in the canvas editor with a **Start** node and an **Er
 ![Java JDBC connection node expanded showing all available operations before selection](/img/connectors/catalog/database/java.jdbc/java_jdbc_screenshot_04_operations_panel.png)
 
 3. Click **Execute** to open the configuration panel, then fill in the following parameters:
-   - **SQL query** — the parameterized SQL statement to execute (for example, an INSERT targeting your target table)
-   - **Result** — the variable name for the execution result (default: `sqlExecutionresult`)
-   - **Result type** — `sql:ExecutionResult` (auto-filled)
+   - **SQL query**: the parameterized SQL statement to execute (for example, an INSERT targeting your target table)
+   - **Result**: the variable name for the execution result (default: `sqlExecutionresult`)
+   - **Result type**: `sql:ExecutionResult` (auto-filled)
 
 ![Java JDBC execute operation configuration filled with all values](/img/connectors/catalog/database/java.jdbc/java_jdbc_screenshot_05_operation_filled.png)
 

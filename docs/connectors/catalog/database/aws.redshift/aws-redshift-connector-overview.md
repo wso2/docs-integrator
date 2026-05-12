@@ -18,7 +18,7 @@ Amazon Redshift is a fully managed, petabyte-scale cloud data warehouse service.
 
 ## Actions
 
-Actions are operations you invoke on your Redshift data warehouse from your integration — querying tables, inserting records, running batch operations, and calling stored procedures. The AWS Redshift connector exposes actions through a single client:
+Actions are operations you invoke on your Redshift data warehouse from your integration, including querying tables, inserting records, running batch operations, and calling stored procedures. The AWS Redshift connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up an Amazon Redshift cluster and obtaining the JDBC connection details required to use the AWS Redshift connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **AWS Redshift** connector, including connection setup, operation configuration, and execution flow.
 

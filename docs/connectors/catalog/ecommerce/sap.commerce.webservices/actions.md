@@ -8,13 +8,13 @@ The `ballerinax/sap.commerce.webservices` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | OCC v2 REST API — product catalog, carts, orders, customers, B2B procurement, stores, and tickets. |
+| [`Client`](#client) | OCC v2 REST API: product catalog, carts, orders, customers, B2B procurement, stores, and tickets. |
 
 ---
 
 ## Client
 
-OCC v2 REST API — product catalog, carts, orders, customers, B2B procurement, stores, and tickets.
+OCC v2 REST API: product catalog, carts, orders, customers, B2B procurement, stores, and tickets.
 
 ### Configuration
 

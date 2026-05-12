@@ -22,15 +22,15 @@ This guide walks you through setting up an Asgardeo Machine-to-Machine (M2M) app
 
 1. Navigate to the **API Authorization** tab of the newly registered application.
 2. Authorize the SCIM2 API resources and select the required scopes (permissions), such as:
-    - `internal_user_mgt_list` — List and filter users
-    - `internal_user_mgt_view` — View user details
-    - `internal_user_mgt_create` — Create users
-    - `internal_user_mgt_update` — Update users
-    - `internal_user_mgt_delete` — Delete users
-    - `internal_group_mgt_view` — View group details
-    - `internal_group_mgt_create` — Create groups
-    - `internal_group_mgt_update` — Update groups
-    - `internal_group_mgt_delete` — Delete groups
+    - `internal_user_mgt_list`: List and filter users
+    - `internal_user_mgt_view`: View user details
+    - `internal_user_mgt_create`: Create users
+    - `internal_user_mgt_update`: Update users
+    - `internal_user_mgt_delete`: Delete users
+    - `internal_group_mgt_view`: View group details
+    - `internal_group_mgt_create`: Create groups
+    - `internal_group_mgt_update`: Update groups
+    - `internal_group_mgt_delete`: Delete groups
 3. Click **Update** to save the authorization settings.
 
 Only authorize the scopes your integration needs. Following the principle of least privilege improves security.
@@ -38,8 +38,8 @@ Only authorize the scopes your integration needs. Following the principle of lea
 ## Step 3: Get the client ID and client secret
 
 1. Navigate to the **Protocol** tab of the M2M application.
-2. Copy the **Client ID** — this is your `clientId`.
-3. Copy the **Client Secret** — this is your `clientSecret`.
+2. Copy the **Client ID**; this is your `clientId`.
+3. Copy the **Client Secret**; this is your `clientSecret`.
 
 Store the Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
 

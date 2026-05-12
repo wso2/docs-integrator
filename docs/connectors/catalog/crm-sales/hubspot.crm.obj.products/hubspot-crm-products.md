@@ -10,12 +10,12 @@ HubSpot CRM Products is a core object in HubSpot that represents the goods and s
 - Batch operations for creating, reading, updating, upserting, and archiving multiple products in a single request
 - Search and filter products using flexible filter groups, property filters, and sort criteria
 - Retrieve product property history and associated object data alongside product records
-- Upsert support — create or update products by unique property values without requiring internal IDs
+- Upsert support: create or update products by unique property values without requiring internal IDs
 - OAuth 2.0 and Private App (API key) authentication support for both developer and production scenarios
 
 ## Actions
 
-Actions are operations you invoke on HubSpot CRM Products from your integration — listing products, creating records, running batch updates, searching by property filters, and more. The connector exposes all actions through a single client:
+Actions are operations you invoke on HubSpot CRM Products from your integration, including listing products, creating records, running batch updates, searching by property filters, and more. The connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -27,7 +27,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot Private App and obtaining the access token required to authenticate the HubSpot CRM Products connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot CRM Products** connector, including connection setup, operation configuration, and execution flow.
 

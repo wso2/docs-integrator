@@ -20,7 +20,7 @@ account to create a public app:
    your existing HubSpot credentials.
 3. Once logged in, navigate to **Apps** in the top navigation bar.
 
-## Step 2: Create a private app (API key — quickest setup)
+## Step 2: Create a private app (API key: quickest setup)
 
 For a simpler setup (ideal for development or internal integrations), create a Private App
 to obtain a token directly:
@@ -34,7 +34,7 @@ to obtain a token directly:
     - `crm.objects.leads.read`
     - `crm.objects.leads.write`
 7. Click **Create app**, then confirm by clicking **Continue creating**.
-8. Copy the generated **Access Token** — this is your `privateApp` token.
+8. Copy the generated **Access Token**; this is your `privateApp` token.
 
 The Private App access token is shown only once at creation time. Copy and store it securely before closing the dialog.
 
@@ -45,7 +45,7 @@ For OAuth 2.0 (recommended for apps used by multiple HubSpot accounts):
 1. In the HubSpot Developer Portal, go to **Apps** and click **Create app**.
 2. Under **App Info**, provide an **App name** and (optionally) a description and logo.
 3. Navigate to the **Auth** tab.
-4. Note the **Client ID** and **Client secret** — you will need these later.
+4. Note the **Client ID** and **Client secret**; you will need these later.
 5. Under **Redirect URLs**, add a redirect URI
    (e.g., `https://your-app.com/oauth/callback`).
 6. Under **Scopes**, add the following required scopes:
@@ -53,7 +53,7 @@ For OAuth 2.0 (recommended for apps used by multiple HubSpot accounts):
     - `crm.objects.leads.write`
 7. Click **Save changes**.
 
-Store the Client ID and Client Secret securely. Do not commit them to source control — use environment variables or Ballerina's `configurable` feature with a `Config.toml` file.
+Store the Client ID and Client Secret securely. Do not commit them to source control: use environment variables or Ballerina's `configurable` feature with a `Config.toml` file.
 
 ## Step 4: Generate an OAuth 2.0 authorization code and refresh token
 
@@ -81,6 +81,6 @@ To obtain a refresh token using the Authorization Code flow:
     ```
 
 5. The response includes an `access_token`, `refresh_token`, and `expires_in`. Save the
-   `refresh_token` — it is used to obtain new access tokens automatically.
+   `refresh_token`; it is used to obtain new access tokens automatically.
 
 Use a tool like Postman or `curl` to perform the token exchange in step 4.

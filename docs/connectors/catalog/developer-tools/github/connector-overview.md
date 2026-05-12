@@ -8,21 +8,21 @@ GitHub is a widely used platform for version control and collaboration, allowing
 
 ## Key features
 
-- Full repository management — create, update, delete, list, and fork repositories
-- Issue tracking — create, update, list, and comment on issues with label and assignee management
-- Pull request management — create, update, list, merge, and review pull requests
-- Branch and release management — list branches, create releases, manage tags
-- Organization and team management — list orgs, teams, and members
-- Gist management — create, update, list, star, fork, and comment on gists
-- Security advisory access — query global and repository-specific security advisories
-- GitHub Actions and workflow management — list and trigger workflow runs
+- Full repository management: create, update, delete, list, and fork repositories
+- Issue tracking: create, update, list, and comment on issues with label and assignee management
+- Pull request management: create, update, list, merge, and review pull requests
+- Branch and release management: list branches, create releases, manage tags
+- Organization and team management: list orgs, teams, and members
+- Gist management: create, update, list, star, fork, and comment on gists
+- Security advisory access: query global and repository-specific security advisories
+- GitHub Actions and workflow management: list and trigger workflow runs
 - Dependabot, code scanning, and secret scanning alert access
 - Event-driven webhook handling for GitHub issues, pull requests, releases, pushes, and repository activity
 - Resource-based API design using Ballerina resource functions for intuitive path-based access to GitHub REST endpoints
 
 ## Actions
 
-Actions are operations you invoke on GitHub from your integration — managing repositories, creating issues, handling pull requests, and more. The GitHub connector exposes 903 resource functions through a single client:
+Actions are operations you invoke on GitHub from your integration, including managing repositories, creating issues, handling pull requests, and more. The GitHub connector exposes 903 resource functions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -58,7 +58,7 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a GitHub Personal Access Token (PAT) required to authenticate with the GitHub connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the GitHub webhook listener and service model.
 
@@ -76,7 +76,7 @@ Check the issue tracker for open issues that interest you. We look forward to re
 
 ## What's next
 
-- [Setup Guide](setup-guide.md) — create a GitHub Personal Access Token for authentication
-- [Action Reference](actions.md) — full list of operations, parameters, and sample code
-- [Example](example.md) — step-by-step integration walkthroughs
-- [GitHub Webhooks](../../../develop/integration-artifacts/event/github-webhooks.md) — listen for GitHub events using webhooks
+- [Setup Guide](setup-guide.md): create a GitHub Personal Access Token for authentication
+- [Action Reference](actions.md): full list of operations, parameters, and sample code
+- [Example](example.md): step-by-step integration walkthroughs
+- [GitHub Webhooks](../../../develop/integration-artifacts/event/github-webhooks.md): listen for GitHub events using webhooks

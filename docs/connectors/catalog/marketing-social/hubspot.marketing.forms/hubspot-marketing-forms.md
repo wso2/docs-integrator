@@ -17,11 +17,11 @@ HubSpot Marketing Forms allows you to create and manage forms used to capture le
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — creating forms, retrieving form definitions, updating field configurations, and archiving forms. The connector exposes actions through a single client:
+Actions are operations you invoke on HubSpot from your integration, including creating forms, retrieving form definitions, updating field configurations, and archiving forms. The connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
-| `Client` | Form CRUD — create, list, get, update, partial update, and archive marketing forms |
+| `Client` | Form CRUD: create, list, get, update, partial update, and archive marketing forms |
 
 See the **[Action Reference](actions.md)** for the full list of operations, parameters, and sample code for each client.
 
@@ -29,7 +29,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 credentials required to use the HubSpot Marketing Forms connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot Marketing Forms** connector, including connection setup, operation configuration, and execution flow.
 

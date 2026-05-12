@@ -26,7 +26,7 @@ For example, for a MySQL database:
 ## Step 2: Create a database user
 
 1. Create a dedicated user for your integration (recommended over using the root/admin account).
-2. Grant the user the minimum privileges required — typically `SELECT`, `INSERT`, `UPDATE`, `DELETE` on the target tables, and `EXECUTE` if calling stored procedures.
+2. Grant the user the minimum privileges required: typically `SELECT`, `INSERT`, `UPDATE`, `DELETE` on the target tables, and `EXECUTE` if calling stored procedures.
 
 For example, in MySQL:
 
@@ -36,7 +36,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON myappdb.* TO 'ballerina_user'@'%';
 FLUSH PRIVILEGES;
 ```
 
-Follow the principle of least privilege — only grant the permissions your integration actually needs.
+Follow the principle of least privilege: only grant the permissions your integration actually needs.
 
 ## Step 3: Determine your JDBC URL
 

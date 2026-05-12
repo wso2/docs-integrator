@@ -20,7 +20,7 @@ Access the HubSpot Owners API to list and retrieve owner information.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or API keys. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or API keys. |
 | `httpVersion` | <code>http:HttpVersion</code> | `http:HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
 | `retryConfig` | <code>http:RetryConfig?</code> | `()` | Retry configuration for failed requests. |
@@ -129,7 +129,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `ownerId` | <code>int:Signed32</code> | Yes | The numeric ID of the owner (path parameter). |
-| `idProperty` | <code>"id"&#124;"userId"</code> | No | Which property to use for lookup — `"id"` (default) or `"userId"`. |
+| `idProperty` | <code>"id"&#124;"userId"</code> | No | Which property to use for lookup: `"id"` (default) or `"userId"`. |
 | `archived` | <code>boolean</code> | No | Whether to return only archived owners (default `false`). |
 
 Returns: `PublicOwner|error`

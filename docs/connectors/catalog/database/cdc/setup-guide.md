@@ -35,7 +35,7 @@ The CDC connector uses MySQL's binary log (binlog) to capture row-level changes.
 
     The result should show `ON`.
 
-MySQL 5.7+ and MySQL 8.x are supported. The `binlog_format` must be set to `ROW` — `STATEMENT` and `MIXED` formats are not supported by Debezium.
+MySQL 5.7+ and MySQL 8.x are supported. The `binlog_format` must be set to `ROW`: `STATEMENT` and `MIXED` formats are not supported by Debezium.
 
 ## Step 2: Create a CDC database user (MySQL)
 

@@ -702,7 +702,7 @@ Structured connection parameters used in `ConnectionConfig.connection`.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `serverAddress` | `ServerAddress\|ServerAddress[]` | `{}` | A single server address, or an array for replica sets / sharded clusters. |
-| `auth` | `BasicAuthCredential \| ScramSha1AuthCredential \| ScramSha256AuthCredential \| X509Credential \| GssApiCredential` | `()` | Optional. Authentication credentials — pick the record that matches your server's configured auth mechanism. See [Authentication credentials](#authentication-credentials) below. |
+| `auth` | `BasicAuthCredential \| ScramSha1AuthCredential \| ScramSha256AuthCredential \| X509Credential \| GssApiCredential` | `()` | Optional. Authentication credentials: pick the record that matches your server's configured auth mechanism. See [Authentication credentials](#authentication-credentials) below. |
 
 ### `ServerAddress`
 
@@ -715,7 +715,7 @@ Structured connection parameters used in `ConnectionConfig.connection`.
 
 The `auth` field of `ConnectionParameters` accepts one of five records, each tagged with a fixed `authMechanism` constant. Pick the record that matches the auth mechanism configured on your MongoDB server.
 
-#### `BasicAuthCredential` — PLAIN
+#### `BasicAuthCredential`: PLAIN
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
@@ -724,22 +724,22 @@ The `auth` field of `ConnectionParameters` accepts one of five records, each tag
 | `password` | `string` | Required | Password. |
 | `database` | `string` | Required | Authentication source database (typically `"admin"`). |
 
-#### `ScramSha1AuthCredential` — SCRAM-SHA-1
+#### `ScramSha1AuthCredential`: SCRAM-SHA-1
 
 Same field shape as `BasicAuthCredential`. The `authMechanism` is the constant `AUTH_SCRAM_SHA_1` (`"SCRAM_SHA_1"`).
 
-#### `ScramSha256AuthCredential` — SCRAM-SHA-256
+#### `ScramSha256AuthCredential`: SCRAM-SHA-256
 
 Same field shape as `BasicAuthCredential`. The `authMechanism` is the constant `AUTH_SCRAM_SHA_256` (`"SCRAM_SHA_256"`). This is the default mechanism on modern MongoDB servers.
 
-#### `X509Credential` — MongoDB X.509
+#### `X509Credential`: MongoDB X.509
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `authMechanism` | `AUTH_MONGODB_X509` | `AUTH_MONGODB_X509` | Always `"MONGODB_X509"`. Read-only. |
 | `username` | `string?` | `()` | Optional username for client-certificate authentication. Omit to use the certificate subject. |
 
-#### `GssApiCredential` — GSSAPI / Kerberos
+#### `GssApiCredential`: GSSAPI / Kerberos
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|

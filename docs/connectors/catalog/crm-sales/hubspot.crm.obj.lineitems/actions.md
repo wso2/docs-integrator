@@ -20,7 +20,7 @@ Provides full CRUD, batch operations, and search for HubSpot CRM Line Item recor
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `OAuth2RefreshTokenGrantConfig\|http:BearerTokenConfig\|ApiKeysConfig` | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token (Private App), or API key headers. |
+| `auth` | `OAuth2RefreshTokenGrantConfig\|http:BearerTokenConfig\|ApiKeysConfig` | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token (Private App), or API key headers. |
 | `serviceUrl` | `string` | `"https://api.hubapi.com/crm/v3/objects/line_items"` | Base URL of the HubSpot CRM Line Items API. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
@@ -389,7 +389,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `payload` | `BatchReadInputSimplePublicObjectId` | Yes | Object IDs to fetch plus the list of `properties` and `propertiesWithHistory` to include in each result. |
-| `queries` | `PostCrmV3ObjectsLineItemsBatchReadReadQueries` | No | Optional query params — `archived` (default `false`) to include archived records. |
+| `queries` | `PostCrmV3ObjectsLineItemsBatchReadReadQueries` | No | Optional query params: `archived` (default `false`) to include archived records. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP headers. |
 
 Returns: `BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error`
@@ -538,7 +538,7 @@ check hsLineItems->/batch/archive.post(
 <details>
 <summary>Upsert a batch of line items</summary>
 
-Creates or updates line items in bulk using a unique identifier property — creates a new record if no match is found, updates the existing record if a match is found.
+Creates or updates line items in bulk using a unique identifier property: creates a new record if no match is found, updates the existing record if a match is found.
 
 Parameters:
 

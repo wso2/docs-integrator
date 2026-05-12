@@ -6,18 +6,18 @@ HubSpot Marketing Emails is a tool within the HubSpot marketing platform that le
 
 ## Key features
 
-- Full CRUD operations on marketing emails — create, retrieve, update, and delete
+- Full CRUD operations on marketing emails: create, retrieve, update, and delete
 - List all marketing emails with filtering by publish status, date range, and type
 - Publish and unpublish (or cancel) marketing emails programmatically
 - Clone existing marketing emails for rapid campaign duplication
 - A/B test creation and variation retrieval for data-driven email optimization
-- Draft management — get, update, and reset email drafts independently of the live version
-- Revision history — list, inspect, and restore previous versions of a marketing email
+- Draft management: get, update, and reset email drafts independently of the live version
+- Revision history: list, inspect, and restore previous versions of a marketing email
 - Aggregated and histogram-based email statistics for performance tracking
 
 ## Actions
 
-Actions are operations you invoke on HubSpot Marketing Emails from your integration — listing emails, creating campaigns, publishing, cloning, managing drafts, and retrieving statistics. The connector exposes actions through a single client:
+Actions are operations you invoke on HubSpot Marketing Emails from your integration, including listing emails, creating campaigns, publishing, cloning, managing drafts, and retrieving statistics. The connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -29,7 +29,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 credentials required to use the HubSpot Marketing Emails connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot Marketing Emails** connector, including connection setup, operation configuration, and execution flow.
 

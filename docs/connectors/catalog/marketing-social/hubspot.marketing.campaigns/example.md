@@ -43,8 +43,8 @@ Select the **+** button next to the **Connections** section in the WSO2 Integrat
 
 Bind each connection parameter to a configurable variable, then select **Save** to persist the connection.
 
-- **Config** : The `ConnectionConfig` record containing authentication details — expand `ConnectionConfig → auth → BearerTokenConfig`, select the `token` field, navigate to the **Configurables** tab, and create a new configurable named `hubspotBearerToken` of type `string`
-- **Connection Name** : The variable name for this connector client instance — enter `campaignsClient`
+- **Config** : The `ConnectionConfig` record containing authentication details: expand `ConnectionConfig → auth → BearerTokenConfig`, select the `token` field, navigate to the **Configurables** tab, and create a new configurable named `hubspotBearerToken` of type `string`
+- **Connection Name** : The variable name for this connector client instance; enter `campaignsClient`
 
 ![HubSpot Marketing Campaigns connection form fully filled with all parameters before saving](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/hubspot_marketing_campaigns_screenshot_02_connection_form.png)
 
@@ -75,8 +75,8 @@ Select **Add Artifact** in the WSO2 Integrator side panel and choose **Automatio
 3. Select **Create a campaign** (`campaignsClient → post`) to open the operation form.
 4. Configure the following fields:
 
-- **Payload** : The campaign input payload — select the **Expression** tab and enter `{properties: {"hs_name": "Summer Sale Campaign"}}`
-- **Result** : Name of the variable that holds the API response — enter `campaignResult`
+- **Payload** : The campaign input payload; select the **Expression** tab and enter `{properties: {"hs_name": "Summer Sale Campaign"}}`
+- **Result** : Name of the variable that holds the API response; enter `campaignResult`
 
 Select **Save** to add the step to the canvas.
 

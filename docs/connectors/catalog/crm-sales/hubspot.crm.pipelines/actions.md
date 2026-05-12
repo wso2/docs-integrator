@@ -20,7 +20,7 @@ Manage HubSpot CRM pipelines and pipeline stages via the Pipelines REST API.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 bearer token, refresh token grant, or API key. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 bearer token, refresh token grant, or API key. |
 | `httpVersion` | <code>HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
 | `retryConfig` | <code>RetryConfig</code> | `()` | Retry configuration for failed requests. |

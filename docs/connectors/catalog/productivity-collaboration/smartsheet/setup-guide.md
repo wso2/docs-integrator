@@ -17,13 +17,13 @@ This guide walks you through obtaining the API access token or OAuth 2.0 credent
 3. Select **Personal Settings** (or **Apps & Integrations** depending on your plan).
 4. Under **API Access**, click **Generate new access token**.
 5. Give the token a descriptive name (e.g., `Ballerina Integration`) and click **OK**.
-6. Copy the generated token immediately — it will not be shown again.
+6. Copy the generated token immediately: it will not be shown again.
 
 Store your API access token securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 
 API access tokens inherit the permissions of the user who generates them. Ensure the user has appropriate access to the sheets and workspaces you intend to manage.
 
-## Step 2: Set up OAuth 2.0 (optional — for third-party apps)
+## Step 2: Set up OAuth 2.0 (optional: for third-party apps)
 
 If you are building an application that accesses Smartsheet on behalf of other users, use OAuth 2.0 instead of a personal access token:
 
@@ -36,7 +36,7 @@ If you are building an application that accesses Smartsheet on behalf of other u
     - **App contact/support**: Contact email.
     - **Redirect URL**: The callback URL for OAuth (e.g., `https://localhost/callback`).
 4. Click **Save** to register the app.
-5. Copy the **App client id** and **App secret** — these are your OAuth credentials.
+5. Copy the **App client id** and **App secret**; these are your OAuth credentials.
 
 For server-to-server integrations where you only access your own data, the API access token (Step 1) is simpler. Use OAuth 2.0 only when your application needs to act on behalf of other Smartsheet users.
 

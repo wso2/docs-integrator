@@ -20,7 +20,7 @@ Manage CRM object properties and property groups via the HubSpot Properties API.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token grant, bearer token, or API keys. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token grant, bearer token, or API keys. |
 | `httpVersion` | <code>http:HttpVersion</code> | `http:HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | The maximum time to wait (in seconds) for a response before closing the connection. |
 | `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
@@ -65,7 +65,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `objectType` | <code>string</code> | Yes | The CRM object type (e.g., `"Contact"`, `"Company"`, `"Deal"`). |
-| `queries` | <code>GetCrmV3PropertiesObjectTypeGetAllQueries</code> | No | Query parameters — `archived` (default `false`) and `properties` (comma-separated field list). |
+| `queries` | <code>GetCrmV3PropertiesObjectTypeGetAllQueries</code> | No | Query parameters: `archived` (default `false`) and `properties` (comma-separated field list). |
 
 Returns: `CollectionResponsePropertyNoPaging|error`
 
@@ -174,7 +174,7 @@ Parameters:
 |------|------|----------|-------------|
 | `objectType` | <code>string</code> | Yes | The CRM object type (e.g., `"Contact"`). |
 | `propertyName` | <code>string</code> | Yes | The internal name of the property to read. |
-| `queries` | <code>GetCrmV3PropertiesObjectTypePropertyNameGetByNameQueries</code> | No | Query parameters — `archived` (default `false`) and `properties` (comma-separated field list). |
+| `queries` | <code>GetCrmV3PropertiesObjectTypePropertyNameGetByNameQueries</code> | No | Query parameters: `archived` (default `false`) and `properties` (comma-separated field list). |
 
 Returns: `Property|error`
 
@@ -222,7 +222,7 @@ Parameters:
 |------|------|----------|-------------|
 | `objectType` | <code>string</code> | Yes | The CRM object type (e.g., `"Contact"`). |
 | `propertyName` | <code>string</code> | Yes | The internal name of the property to update. |
-| `payload` | <code>PropertyUpdate</code> | Yes | Fields to update — label, type, fieldType, groupName, description, options, etc. |
+| `payload` | <code>PropertyUpdate</code> | Yes | Fields to update: label, type, fieldType, groupName, description, options, etc. |
 
 Returns: `Property|error`
 
@@ -572,7 +572,7 @@ Parameters:
 |------|------|----------|-------------|
 | `objectType` | <code>string</code> | Yes | The CRM object type (e.g., `"Contact"`). |
 | `groupName` | <code>string</code> | Yes | The internal name of the property group to update. |
-| `payload` | <code>PropertyGroupUpdate</code> | Yes | Fields to update — `label` and/or `displayOrder`. |
+| `payload` | <code>PropertyGroupUpdate</code> | Yes | Fields to update: `label` and/or `displayOrder`. |
 
 Returns: `PropertyGroup|error`
 

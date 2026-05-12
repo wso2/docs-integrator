@@ -12,7 +12,7 @@ This guide walks you through setting up a MongoDB instance and obtaining the con
 
 ## Step 1: Set up a MongoDB instance
 
-**Option A — MongoDB Atlas (Cloud)**
+**Option A: MongoDB Atlas (Cloud)**
 
 1. Go to [MongoDB Atlas](https://www.mongodb.com/atlas) and sign up or log in.
 2. Create a new project (or use an existing one).
@@ -20,7 +20,7 @@ This guide walks you through setting up a MongoDB instance and obtaining the con
 4. Choose a cloud provider and region, then click **Create Cluster**.
 5. Wait for the cluster to provision (typically 1–3 minutes).
 
-**Option B — Local MongoDB**
+**Option B: Local MongoDB**
 
 1. Download and install MongoDB Community Edition from the [official download page](https://www.mongodb.com/try/download/community).
 2. Start the `mongod` service using the default settings (localhost:27017).

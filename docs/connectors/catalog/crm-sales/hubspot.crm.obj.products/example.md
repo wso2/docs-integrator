@@ -42,8 +42,8 @@ flowchart LR
 
 Bind the connection parameters to configurable variables. Select the **Config** field to open the **Record Configuration** modal, then configure the following:
 
-- **Config** : Bearer token authentication configuration using `hubspotAuthToken` as the configurable variable — set the full expression to `{auth: {token: hubspotAuthToken}}`
-- **Connection Name** : Defaults to `productsClient` — keep this value
+- **Config** : Bearer token authentication configuration using `hubspotAuthToken` as the configurable variable; set the full expression to `{auth: {token: hubspotAuthToken}}`
+- **Connection Name** : Defaults to `productsClient`; keep this value
 
 ![HubSpot Products connection form fully filled with all parameters before saving](/img/connectors/catalog/crm-sales/hubspot.crm.obj.products/hubspot_crm_obj_products_screenshot_02_connection_form.png)
 
@@ -67,7 +67,7 @@ Select **Save Connection** to persist the connection. The canvas returns to the 
 1. In the left sidebar, select **Entry Points**.
 2. Select the **+** button that appears.
 3. In the artifact picker, select **Automation**.
-4. The **Create New Automation** form appears — select **Create**.
+4. The **Create New Automation** form appears; select **Create**.
 
 An Automation entry point named `main` is created. The canvas switches to the Automation flow view showing a **Start** node and an empty step placeholder.
 

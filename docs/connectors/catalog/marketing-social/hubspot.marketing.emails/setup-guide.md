@@ -22,7 +22,7 @@ This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 
 
 1. Go to the **Auth** tab of your app.
 2. Under **Scopes**, add the following required scopes:
-    - **content** — read and write access to marketing emails
+    - **content**; read and write access to marketing emails
 3. Note down the **Client ID** and **Client Secret** displayed at the top of the Auth tab.
 
 For publish and send operations, you may need additional scopes such as `marketing-email` depending on your HubSpot subscription tier.

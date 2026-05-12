@@ -8,7 +8,7 @@ HubSpot is an AI-powered CRM platform that centralizes customer interactions, sa
 
 ## Key features
 
-- Full CRUD operations on HubSpot ticket records — create, read, update, and archive individual tickets
+- Full CRUD operations on HubSpot ticket records: create, read, update, and archive individual tickets
 - List all tickets with optional filtering by properties, associations, and archive status
 - Search tickets using HubSpot filter groups, property projections, and sorting options
 - Merge two duplicate tickets into a single primary record
@@ -18,7 +18,7 @@ HubSpot is an AI-powered CRM platform that centralizes customer interactions, sa
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — listing tickets, creating support cases, running batch updates, and more. The HubSpot CRM Tickets connector exposes all actions through a single client:
+Actions are operations you invoke on HubSpot from your integration, including listing tickets, creating support cases, running batch updates, and more. The HubSpot CRM Tickets connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Tickets connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot CRM Tickets** connector, including connection setup, operation configuration, and execution flow.
 

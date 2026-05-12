@@ -8,10 +8,10 @@ Google Calendar is a time-management and scheduling service that allows users to
 
 ## Key features
 
-- Full CRUD operations on Google Calendar calendars — create, retrieve, update, patch, and delete
+- Full CRUD operations on Google Calendar calendars: create, retrieve, update, patch, and delete
 - Full CRUD operations on calendar events including recurring events, quick-add by text, and event import
-- Access Control List (ACL) management — grant and revoke reader, writer, and owner access to calendars
-- Calendar List management — add, list, update, and remove calendars from a user's calendar list
+- Access Control List (ACL) management: grant and revoke reader, writer, and owner access to calendars
+- Calendar List management: add, list, update, and remove calendars from a user's calendar list
 - Free/busy availability queries across multiple calendars and groups
 - Color definitions retrieval for calendar and event color coding
 - Recurring event instance listing and individual instance management
@@ -19,7 +19,7 @@ Google Calendar is a time-management and scheduling service that allows users to
 
 ## Actions
 
-Actions are operations you invoke on Google Calendar from your integration — creating events, managing calendars, querying free/busy slots, and controlling access permissions. The Google Calendar connector exposes all actions through a single client:
+Actions are operations you invoke on Google Calendar from your integration, including creating events, managing calendars, querying free/busy slots, and controlling access permissions. The Google Calendar connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Google Cloud project, enabling the Google Calendar API, and obtaining the OAuth 2.0 credentials required to use the connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 ## How to contribute
 

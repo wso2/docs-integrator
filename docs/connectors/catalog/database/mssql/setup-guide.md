@@ -40,7 +40,7 @@ For production environments, grant only the minimum required permissions instead
 
 If you are using a named instance, the port may differ from 1433. Check your instance configuration or use the instance name when connecting.
 
-## Step 3: Enable change data capture (optional — for CDC triggers)
+## Step 3: Enable change data capture (optional: for CDC triggers)
 
 If you plan to use the CDC listener for real-time event streaming, enable CDC on the database and the specific tables you want to monitor:
 

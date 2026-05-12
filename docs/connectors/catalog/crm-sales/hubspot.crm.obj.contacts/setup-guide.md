@@ -22,8 +22,8 @@ This guide walks you through creating a HubSpot private app and obtaining the ac
 
 1. Click the **Scopes** tab.
 2. Under **CRM**, find and select the following scopes:
-    - `crm.objects.contacts.read` — required to read contact records
-    - `crm.objects.contacts.write` — required to create, update, and delete contacts
+    - `crm.objects.contacts.read`: required to read contact records
+    - `crm.objects.contacts.write`: required to create, update, and delete contacts
 3. Add any additional scopes needed by your integration (e.g., `crm.objects.companies.read` for association lookups).
 
 Grant only the minimum scopes required by your integration. Avoid enabling broad scopes unless necessary.
@@ -33,7 +33,7 @@ Grant only the minimum scopes required by your integration. Avoid enabling broad
 1. Click **Create app** in the top-right corner.
 2. Review the permissions summary in the confirmation dialog and click **Continue creating**.
 3. After the app is created, HubSpot displays a **Token** dialog with your access token.
-4. Copy the access token — this is your `token` value for the connector's `BearerTokenConfig`.
+4. Copy the access token; this is your `token` value for the connector's `BearerTokenConfig`.
 
 Store the access token securely. It is shown only once at creation time. If you lose it,
 you can regenerate it from the private app's detail page under **Auth**. Do not commit

@@ -8,19 +8,19 @@ The `ballerinax/hubspot.marketing.forms` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manage HubSpot marketing forms — create, list, retrieve, update, and archive form definitions. |
+| [`Client`](#client) | Manage HubSpot marketing forms: create, list, retrieve, update, and archive form definitions. |
 
 ---
 
 ## Client
 
-Manage HubSpot marketing forms — create, list, retrieve, update, and archive form definitions.
+Manage HubSpot marketing forms: create, list, retrieve, update, and archive form definitions.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>OAuth2RefreshTokenGrantConfig&#124;http:BearerTokenConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or private app API key. |
+| `auth` | <code>OAuth2RefreshTokenGrantConfig&#124;http:BearerTokenConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or private app API key. |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
 | `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
@@ -224,7 +224,7 @@ Parameters:
 |------|------|----------|-------------|
 | `formId` | <code>string</code> | Yes | The unique identifier of the form. |
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional HTTP headers. |
-| `queries` | <code>GetMarketingV3FormsFormIdGetByIdQueries</code> | No | Query parameters — `archived` (boolean) to include archived forms. |
+| `queries` | <code>GetMarketingV3FormsFormIdGetByIdQueries</code> | No | Query parameters: `archived` (boolean) to include archived forms. |
 
 Returns: `FormDefinitionBase|error`
 
@@ -319,7 +319,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional HTTP headers. |
-| `queries` | <code>GetMarketingV3FormsGetPageQueries</code> | No | Query parameters — `formTypes` (array of `hubspot`, `captured`, `flow`, `blog_comment`, `all`), `archived` (boolean), `limit` (int), `after` (string cursor). |
+| `queries` | <code>GetMarketingV3FormsGetPageQueries</code> | No | Query parameters: `formTypes` (array of `hubspot`, `captured`, `flow`, `blog_comment`, `all`), `archived` (boolean), `limit` (int), `after` (string cursor). |
 
 Returns: `CollectionResponseFormDefinitionBaseForwardPaging|error`
 
@@ -533,7 +533,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `formId` | <code>string</code> | Yes | The unique identifier of the form to update. |
-| `payload` | <code>HubSpotFormDefinitionPatchRequest</code> | Yes | The fields to update — `name`, `fieldGroups`, `configuration`, `displayOptions`, `legalConsentOptions`, `archived`. |
+| `payload` | <code>HubSpotFormDefinitionPatchRequest</code> | Yes | The fields to update: `name`, `fieldGroups`, `configuration`, `displayOptions`, `legalConsentOptions`, `archived`. |
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional HTTP headers. |
 
 Returns: `FormDefinitionBase|error`

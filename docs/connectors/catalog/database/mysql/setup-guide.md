@@ -29,7 +29,7 @@ This guide walks you through setting up a MySQL database and obtaining the conne
     FLUSH PRIVILEGES;
     ```
 
-For production environments, follow the principle of least privilege — grant only the specific permissions your application requires (e.g., SELECT, INSERT, UPDATE, DELETE).
+For production environments, follow the principle of least privilege: grant only the specific permissions your application requires (e.g., SELECT, INSERT, UPDATE, DELETE).
 
 ## Step 2: Note your connection details
 

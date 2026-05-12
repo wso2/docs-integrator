@@ -8,13 +8,13 @@ The `ballerinax/twitter` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Provides access to Twitter API v2 endpoints — tweets, users, DMs, bookmarks, likes, lists, and more. |
+| [`Client`](#client) | Provides access to Twitter API v2 endpoints: tweets, users, DMs, bookmarks, likes, lists, and more. |
 
 ---
 
 ## Client
 
-Provides access to Twitter API v2 endpoints — tweets, users, DMs, bookmarks, likes, lists, and more.
+Provides access to Twitter API v2 endpoints: tweets, users, DMs, bookmarks, likes, lists, and more.
 
 ### Configuration
 

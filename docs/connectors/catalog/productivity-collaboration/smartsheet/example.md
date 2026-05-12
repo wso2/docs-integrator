@@ -43,7 +43,7 @@ In the left-hand sidebar tree, expand **Connections**, then select the **+** (Ad
 
 Bind the connection parameters to configurable variables in the connection form:
 
-- **Config** : Holds the authentication settings for the connector — enter the expression `{ auth: { token: smartsheetAccessToken } }`, referencing a configurable variable named `smartsheetAccessToken`
+- **Config** : Holds the authentication settings for the connector; enter the expression `{ auth: { token: smartsheetAccessToken } }`, referencing a configurable variable named `smartsheetAccessToken`
 - **Connection Name** : Leave as `smartsheetClient`
 
 To create the `smartsheetAccessToken` configurable variable:

@@ -26,8 +26,8 @@ This guide walks you through creating a HubSpot Private App and obtaining the ac
 
 Under the **Scopes** tab, search for and enable the following CRM object scopes:
 
-- `crm.objects.line_items.read` — Required to read and list line item records.
-- `crm.objects.line_items.write` — Required to create, update, and archive line items.
+- `crm.objects.line_items.read`: Required to read and list line item records.
+- `crm.objects.line_items.write`: Required to create, update, and archive line items.
 
 Add any additional scopes your integration requires (e.g., deal or product scopes for associations).
 
@@ -38,11 +38,11 @@ Grant only the scopes your integration actually needs. Overly broad permissions 
 1. Click **Create app** in the top-right corner.
 2. Review the access token warning dialog and click **Continue creating**.
 3. On the app detail page, click **Show token** under **Access token**.
-4. Copy the token — this is your Private App access token (Bearer token) for the connector.
+4. Copy the token; this is your Private App access token (Bearer token) for the connector.
 
 The access token is shown only once. Store it securely (e.g., in a secrets manager or Ballerina `Config.toml`). Do not commit it to source control. If lost, you can regenerate the token from the Private App settings page.
 
-## Step 5: Set up OAuth 2.0 (optional — for production apps)
+## Step 5: Set up OAuth 2.0 (optional: for production apps)
 
 For production integrations or apps distributed to multiple HubSpot portals, use OAuth 2.0
 instead of a Private App token:

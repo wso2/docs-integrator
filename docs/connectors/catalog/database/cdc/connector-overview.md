@@ -9,11 +9,11 @@ The Ballerina `ballerinax/cdc` connector provides a spec-compliant, production-g
 ## Key features
 
 - Real-time CDC for MySQL, PostgreSQL, Microsoft SQL Server, and Oracle via Debezium
-- Typed payload binding — replace `record {}` callback parameters with user-defined record types for automatic deserialization and type safety
+- Typed payload binding: replace `record {}` callback parameters with user-defined record types for automatic deserialization and type safety
 - Configurable snapshot modes (initial, no-data, schema-only, always, recovery, and more) to control startup behavior
-- Multi-service per listener — attach multiple `cdc:Service` instances to one listener, each filtered to specific tables via `@cdc:ServiceConfig`
-- Table and column filtering — include or exclude specific tables and columns from the change event stream
-- Flexible offset and schema history storage — file-based (default) or Kafka-based for production deployments
+- Multi-service per listener: attach multiple `cdc:Service` instances to one listener, each filtered to specific tables via `@cdc:ServiceConfig`
+- Table and column filtering: include or exclude specific tables and columns from the change event stream
+- Flexible offset and schema history storage: file-based (default) or Kafka-based for production deployments
 - SSL/TLS support for secure database connections with configurable SSL modes and key/trust stores
 - Built-in liveness probe utility (`cdc:isLive()`) for Kubernetes health check integration
 
@@ -21,7 +21,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 ## Triggers
 
-The CDC connector enables event-driven integration by streaming real-time database change events to your Ballerina service. Attach one or more `cdc:Service` instances to a database-specific CDC listener (e.g., `mysql:CdcListener`) and implement callbacks for inserts, updates, deletes, and snapshot reads — no polling required.
+The CDC connector enables event-driven integration by streaming real-time database change events to your Ballerina service. Attach one or more `cdc:Service` instances to a database-specific CDC listener (e.g., `mysql:CdcListener`) and implement callbacks for inserts, updates, deletes, and snapshot reads, with no polling required.
 
 Supported trigger events:
 

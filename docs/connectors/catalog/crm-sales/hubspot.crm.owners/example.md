@@ -93,4 +93,4 @@ Try this sample in WSO2 Integration Platform.
 
 The `HubSpot CRM Owners` connector provides practical examples illustrating usage in various scenarios.
 
-1. [Retrieve the owner IDs for all users in the account to later assign CRM records across the team.](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.owners/tree/main/examples/retrieve-owner-ids) - This example demonstrates how to use the HubSpot CRM Owners connector to retrieve a page of owners from your HubSpot account. It shows how to fetch owner details—such as owner ID, first name, and last name—which can then be used to assign CRM records to team members.
+1. [Retrieve the owner IDs for all users in the account to later assign CRM records across the team.](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.owners/tree/main/examples/retrieve-owner-ids) - This example demonstrates how to use the HubSpot CRM Owners connector to retrieve a page of owners from your HubSpot account. It shows how to fetch owner details such as owner ID, first name, and last name, which can then be used to assign CRM records to team members.

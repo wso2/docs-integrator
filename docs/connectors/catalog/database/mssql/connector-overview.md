@@ -19,7 +19,7 @@ Microsoft SQL Server is a relational database management system used for enterpr
 
 ## Actions
 
-Actions are operations you invoke on MSSQL from your integration — querying tables, inserting records, running batch operations, calling stored procedures, and more. The MSSQL connector exposes actions through a single client:
+Actions are operations you invoke on MSSQL from your integration, including querying tables, inserting records, running batch operations, calling stored procedures, and more. The MSSQL connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -29,7 +29,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 ## Triggers
 
-Triggers allow your integration to react to data changes happening in MSSQL in real time. The connector uses Debezium-based Change Data Capture (CDC) to stream change events to a `mssql:CdcListener`, which invokes your service callbacks automatically — no polling required.
+Triggers allow your integration to react to data changes happening in MSSQL in real time. The connector uses Debezium-based Change Data Capture (CDC) to stream change events to a `mssql:CdcListener`, which invokes your service callbacks automatically, with no polling required.
 
 Supported trigger events:
 
@@ -46,7 +46,7 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up a Microsoft SQL Server instance and enabling CDC so that the MSSQL connector can connect and capture data changes.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the listener and service model.
 

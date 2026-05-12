@@ -36,8 +36,8 @@ It may take 2–10 minutes for the Connected App to become active after saving.
 ## Step 3: Get the consumer key and consumer secret
 
 1. After saving, click **Manage Consumer Details** (you may need to verify your identity).
-2. Copy the **Consumer Key** — this is your `clientId`.
-3. Copy the **Consumer Secret** — this is your `clientSecret`.
+2. Copy the **Consumer Key**; this is your `clientId`.
+3. Copy the **Consumer Secret**; this is your `clientSecret`.
 
 Store the Consumer Key and Consumer Secret securely. Do not commit them to source control.
 Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.

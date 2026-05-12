@@ -21,7 +21,7 @@ Interact with AWS Secrets Manager to describe and retrieve secrets.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `region` | `Region` | Required | The AWS region where your secrets are stored (e.g., `US_EAST_1`, `EU_WEST_1`). |
-| `auth` | `StaticAuthConfig\|EC2_IAM_ROLE\|DEFAULT_CREDENTIALS` | Required | Authentication configuration — static access key credentials, EC2 IAM role, or default AWS credential chain. |
+| `auth` | `StaticAuthConfig\|EC2_IAM_ROLE\|DEFAULT_CREDENTIALS` | Required | Authentication configuration: static access key credentials, EC2 IAM role, or default AWS credential chain. |
 
 ### Initializing the client
 

@@ -27,7 +27,7 @@ This guide walks you through creating a HubSpot Private App and obtaining the ac
 1. Click the **Scopes** tab.
 2. In the search box, type `feedback` to filter relevant scopes.
 3. Under **CRM**, locate and enable the following scope:
-    - `crm.objects.feedback_submissions.read` — required to read feedback submissions.
+    - `crm.objects.feedback_submissions.read`: required to read feedback submissions.
 4. If your integration also needs to create or modify submissions, enable:
     - `crm.objects.feedback_submissions.write`
 
@@ -38,12 +38,12 @@ HubSpot's Feedback Submissions endpoints are primarily read-only. Write operatio
 1. Click **Create app** in the top-right corner.
 2. Review the scope summary in the confirmation dialog and click **Continue creating**.
 3. On the app detail page, click **Show token** to reveal your private app access token.
-4. Copy the token — this is the value you will use as the `privateApp` credential in your connector configuration.
+4. Copy the token; this is the value you will use as the `privateApp` credential in your connector configuration.
 
 Store your private app token securely. Do not commit it to source control.
 Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 
-## Step 5: Set up OAuth 2.0 (optional — for third-party integrations)
+## Step 5: Set up OAuth 2.0 (optional: for third-party integrations)
 
 If you are building a third-party integration that acts on behalf of HubSpot customers,
 use OAuth 2.0 instead of a private app token:

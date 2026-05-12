@@ -12,7 +12,7 @@
 Build a PostgreSQL database integration using the WSO2 Integrator low-code canvas. The integration connects to a running PostgreSQL instance and executes a SQL INSERT operation to add records into a database table.
 
 **Operations used:**
-- **Execute** — runs a SQL INSERT statement and returns an execution result containing affected row count and last insert ID
+- **Execute**: runs a SQL INSERT statement and returns an execution result containing affected row count and last insert ID
 
 ### Architecture
 
@@ -185,7 +185,7 @@ In the Service view, select **+ Add Handler** to open the handler selection pane
 
 #### Step 6: Define the entry type schema
 
-Select the **onCreate** handler, then open **Message Configuration → Define Value** on the `afterEntry` parameter. On the **Create Type Schema** tab, enter `PostgreSQLInsertEntry` as the **Name**. Select the **+** icon next to **Fields** to add each field—for example, `id` of type `string` and `name` of type `string`—that mirrors the columns in your target table. Select **Save** when done.
+Select the **onCreate** handler, then open **Message Configuration → Define Value** on the `afterEntry` parameter. On the **Create Type Schema** tab, enter `PostgreSQLInsertEntry` as the **Name**. Select the **+** icon next to **Fields** to add each field: for example, `id` of type `string` and `name` of type `string`: that mirrors the columns in your target table. Select **Save** when done.
 
 ![Define Value modal on the Create Type Schema tab showing the PostgreSQLInsertEntry name and fields filled in before Save](/img/connectors/catalog/database/postgresql/postgresql_trigger_screenshots_05_message_define_value.png)
 
@@ -207,9 +207,9 @@ Select **Run** in WSO2 Integrator to start the integration. The PostgreSQL CDC l
 
 To fire a test event, use one of the following approaches:
 
-- **WSO2 Integrator database client** — if your project includes a database connection, use the built-in query runner to execute an `INSERT` statement against the monitored table directly from the IDE.
-- **psql CLI** — connect to your PostgreSQL instance with `psql` and run an `INSERT` statement against the target table (for example, `INSERT INTO public.orders (id, name) VALUES (1, 'test')`).
-- **PostgreSQL web console** — use pgAdmin or another GUI client to insert a row into the monitored table through the table data editor.
+- **WSO2 Integrator database client**: if your project includes a database connection, use the built-in query runner to execute an `INSERT` statement against the monitored table directly from the IDE.
+- **psql CLI**: connect to your PostgreSQL instance with `psql` and run an `INSERT` statement against the target table (for example, `INSERT INTO public.orders (id, name) VALUES (1, 'test')`).
+- **PostgreSQL web console**: use pgAdmin or another GUI client to insert a row into the monitored table through the table data editor.
 
 When an insert is detected, the `onCreate` handler fires and the serialized `PostgreSQLInsertEntry` record appears in the WSO2 Integrator console log, confirming end-to-end event capture.
 

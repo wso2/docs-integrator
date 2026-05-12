@@ -8,13 +8,13 @@ The `ballerinax/shopify.admin` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Shopify Admin REST API — manage customers, products, orders, fulfillments, webhooks, and more. |
+| [`Client`](#client) | Shopify Admin REST API: manage customers, products, orders, fulfillments, webhooks, and more. |
 
 ---
 
 ## Client
 
-Shopify Admin REST API — manage customers, products, orders, fulfillments, webhooks, and more.
+Shopify Admin REST API: manage customers, products, orders, fulfillments, webhooks, and more.
 
 ### Configuration
 

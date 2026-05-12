@@ -55,13 +55,13 @@ Common regions include:
 - `EU_WEST_1` (Ireland)
 - `AP_SOUTHEAST_1` (Singapore)
 
-## Step 5: Alternative — use EC2 IAM role or default credentials
+## Step 5: Alternative: use EC2 IAM role or default credentials
 
 If your Ballerina application runs on an EC2 instance or another AWS compute service, you
 can use IAM role-based authentication instead of static access keys:
 
 1. Create an IAM role with the required Secrets Manager permissions.
 2. Attach the role to your EC2 instance (or ECS task, Lambda function, etc.).
-3. Use `EC2_IAM_ROLE` or `DEFAULT_CREDENTIALS` as the `auth` value when initializing the connector — no access keys needed.
+3. Use `EC2_IAM_ROLE` or `DEFAULT_CREDENTIALS` as the `auth` value when initializing the connector, with no access keys needed.
 
 IAM role-based auth and default credentials are recommended for production workloads running on AWS, as they eliminate the need to manage static credentials.

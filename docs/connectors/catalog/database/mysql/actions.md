@@ -13,7 +13,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Provides standard SQL operations — query, execute, batch execute, and stored procedure calls — against a MySQL database. |
+| [`Client`](#client) | Provides standard SQL operations: query, execute, batch execute, and stored procedure calls against a MySQL database. |
 
 For event-driven integration, see the [Trigger Reference](triggers.md).
 
@@ -21,7 +21,7 @@ For event-driven integration, see the [Trigger Reference](triggers.md).
 
 ## Client
 
-Provides standard SQL operations — query, execute, batch execute, and stored procedure calls — against a MySQL database.
+Provides standard SQL operations: query, execute, batch execute, and stored procedure calls against a MySQL database.
 
 ### Configuration
 
@@ -107,7 +107,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `sqlQuery` | `sql:ParameterizedQuery` | Yes | SQL query expected to return one row or value. |
-| `returnType` | `typedesc<anydata>` | No | Expected return type — a record for a full row, or a primitive type for a scalar value. |
+| `returnType` | `typedesc<anydata>` | No | Expected return type: a record for a full row, or a primitive type for a scalar value. |
 
 Returns: `returnType|sql:Error`
 

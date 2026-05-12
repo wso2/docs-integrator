@@ -37,7 +37,7 @@ Developer test accounts are for development and testing only. Do not use them in
 ## Step 4: Obtain the client ID and client secret
 
 1. Navigate to the **Auth** tab of your app.
-2. Copy the **Client ID** and **Client Secret** — you will need these to generate tokens.
+2. Copy the **Client ID** and **Client Secret**; you will need these to generate tokens.
 
 Store the Client ID and Client Secret securely. Do not commit them to source control.
 
@@ -64,6 +64,6 @@ Store the Client ID and Client Secret securely. Do not commit them to source con
     &client_secret=<YOUR_CLIENT_SECRET>
     ```
 
-5. The response includes an `access_token` and a `refresh_token`. Save the `refresh_token` — it is used to obtain new access tokens automatically.
+5. The response includes an `access_token` and a `refresh_token`. Save the `refresh_token`; it is used to obtain new access tokens automatically.
 
 Use a tool like Postman or curl to perform the token exchange in step 4.

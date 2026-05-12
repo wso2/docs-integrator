@@ -12,7 +12,7 @@
 Build a WSO2 Integrator integration that connects to a Microsoft SQL Server database using the MSSQL connector and inserts a record into a `customers` table via an Automation entry point. All credentials are secured through configurable variables.
 
 **Operations used:**
-- **execute** — Runs a SQL INSERT statement against the MSSQL database and returns an execution result
+- **execute**: Runs a SQL INSERT statement against the MSSQL database and returns an execution result
 
 ### Architecture
 
@@ -46,7 +46,7 @@ flowchart LR
 
 #### Step 2: Bind all connection parameters to configurable variables
 
-The **Configure MS SQL** form opens. All connection parameters are under **Advanced Configurations** — click **Expand** if collapsed. For each field, use the **Open Helper Panel** → **Configurables** tab → **+ New Configurable** workflow to create a Configurable variable and bind it to the field:
+The **Configure MS SQL** form opens. All connection parameters are under **Advanced Configurations**; click **Expand** if collapsed. For each field, use the **Open Helper Panel** → **Configurables** tab → **+ New Configurable** workflow to create a Configurable variable and bind it to the field:
 
 - **host**: The MSSQL server hostname
 - **user**: The database username
@@ -95,8 +95,8 @@ The automation flow editor opens showing a **Start** node and an **Error Handler
 
 3. Click **Execute** to add it to the flow and configure the following parameters:
 
-- **sqlQuery** — The SQL INSERT statement to run against the database
-- **result** — The variable that stores the execution result (auto-generated as `sqlExecutionresult`)
+- **sqlQuery**: The SQL INSERT statement to run against the database
+- **result**: The variable that stores the execution result (auto-generated as `sqlExecutionresult`)
 
 ![MSSQL execute operation configuration filled with all values](/img/connectors/catalog/database/mssql/mssql_screenshot_05_operation_filled.png)
 
@@ -152,7 +152,7 @@ flowchart LR
 
 #### Step 2: Bind CDC listener parameters to configuration variables
 
-For each connection parameter in the trigger configuration form, open the **Helper Panel**, select the **Configurables** tab, select **+ New Configurable**, enter the variable name and type, and select **Save**—the value is automatically injected into the field. Repeat for every non-enum, non-boolean parameter. Each bound field will display the configurable variable name instead of a literal value.
+For each connection parameter in the trigger configuration form, open the **Helper Panel**, select the **Configurables** tab, select **+ New Configurable**, enter the variable name and type, and select **Save**. The value is automatically injected into the field. Repeat for every non-enum, non-boolean parameter. Each bound field will display the configurable variable name instead of a literal value.
 
 - **Host** : The hostname of the Microsoft SQL Server, bound to a `configurable string` variable.
 - **Port** : The TCP port number the SQL Server listens on, bound to a `configurable int` variable.
@@ -178,7 +178,7 @@ In the left panel of WSO2 Integrator, select **Configurations** (at the bottom o
 
 #### Step 4: Select Create to register the listener and open the Service view
 
-Select **Create** at the bottom of the trigger configuration form—WSO2 Integrator automatically creates the CDC listener and opens the Service view showing the listener chip.
+Select **Create** at the bottom of the trigger configuration form: WSO2 Integrator automatically creates the CDC listener and opens the Service view showing the listener chip.
 
 ### Handling CDC for Microsoft SQL Server events
 
@@ -194,14 +194,14 @@ Select **Create** at the bottom of the trigger configuration form—WSO2 Integra
 1. In the side panel, select **onCreate** to open the **Message Handler Configuration** panel.
 2. In the **Message Configuration** field, select **Define Value** to open the type definition modal.
 3. Select the **Create Type Schema** tab and enter `MssqlInsertRecord` in the **Name** field.
-4. Select the **+** icon next to **Fields** to add each payload field, entering a field name and a Ballerina type for every field—for example: `id` (`int`), `tableName` (`string`).
+4. Select the **+** icon next to **Fields** to add each payload field, entering a field name and a Ballerina type for every field, for example, `id` (`int`) and `tableName` (`string`).
 5. Select **Save** to create the record type and bind it to the handler.
 
 ![Define Value modal on the Create Type Schema tab showing the MssqlInsertRecord name and fields filled in before Save](/img/connectors/catalog/database/mssql/mssql_trigger_screenshots_05_message_define_value.png)
 
 #### Step 7: Save the handler and add a log statement to the flow
 
-1. Select **Save** on the **Message Handler Configuration** panel—the flow canvas for the `onCreate` handler opens.
+1. Select **Save** on the **Message Handler Configuration** panel. The flow canvas for the `onCreate` handler opens.
 2. In the handler flow canvas, add a **log:printInfo** step with `after.toJsonString()` as the message.
 3. Verify the `log:printInfo` node appears between Start and Error Handler on the canvas.
 
@@ -209,7 +209,7 @@ Select **Create** at the bottom of the trigger configuration form—WSO2 Integra
 
 #### Step 8: Confirm the handler is registered in the Service view
 
-Select the back arrow in the canvas header to return to the Service view—the Event Handlers list now shows the registered **Event onCreate** handler row.
+Select the back arrow in the canvas header to return to the Service view. The Event Handlers list now shows the registered **Event onCreate** handler row.
 
 ![Trigger Service view showing the registered Event onCreate handler row](/img/connectors/catalog/database/mssql/mssql_trigger_screenshots_07_service_view_final.png)
 
@@ -217,9 +217,9 @@ Select the back arrow in the canvas header to return to the Service view—the E
 
 #### Step 9: Run the integration and trigger a test INSERT event
 
-1. In the WSO2 Integrator panel, select **Run** to start the integration—the CDC listener connects to your SQL Server instance and begins polling the CDC change tables for the configured database and table.
+1. In the WSO2 Integrator panel, select **Run** to start the integration. The CDC listener connects to your SQL Server instance and begins polling the CDC change tables for the configured database and table.
 2. Trigger a test INSERT event using one of the following approaches:
-   - A separate WSO2 Integrator **MSSQL Producer** integration template—recommended, as it stays within the WSO2 Integrator environment.
+   - A separate WSO2 Integrator **MSSQL Producer** integration template, which is recommended because it stays within the WSO2 Integrator environment.
    - A native SQL client such as **sqlcmd**, **Azure Data Studio**, or **SQL Server Management Studio** to run an `INSERT INTO <tableName> (<columns>) VALUES (<values>);` statement against the CDC-enabled table.
    - The **Azure Portal Query Editor** or any SQL web client connected to your SQL Server instance, if the server is hosted in Azure SQL Database.
-3. Observe the integration log output—the inserted row's data should appear as a JSON string printed by `log:printInfo`, confirming the `onCreate` handler received and processed the CDC event.
+3. Observe the integration log output: the inserted row's data should appear as a JSON string printed by `log:printInfo`, confirming the `onCreate` handler received and processed the CDC event.

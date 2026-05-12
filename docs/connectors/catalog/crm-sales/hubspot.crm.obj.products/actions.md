@@ -8,19 +8,19 @@ The `ballerinax/hubspot.crm.obj.products` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manage HubSpot CRM product records — individual and batch CRUD, upsert, and search. |
+| [`Client`](#client) | Manage HubSpot CRM product records: individual and batch CRUD, upsert, and search. |
 
 ---
 
 ## Client
 
-Manage HubSpot CRM product records — individual and batch CRUD, upsert, and search.
+Manage HubSpot CRM product records: individual and batch CRUD, upsert, and search.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — bearer token (Private App), OAuth 2.0 refresh token, or legacy API key. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: bearer token (Private App), OAuth 2.0 refresh token, or legacy API key. |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | <code>decimal</code> | `30` | Maximum time in seconds to wait for a response. |
 | `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |

@@ -44,7 +44,7 @@ Select the **Config** field, switch to **Expression** mode, then use the **Confi
 
 - **Access Key Id** (string) : the AWS IAM access key ID used to authenticate requests to Amazon S3
 - **Secret Access Key** (string) : the AWS IAM secret access key paired with the access key ID for request signing
-- **Region** (string) : the AWS region where S3 operations will be performed (e.g., `us-east-1`, `eu-west-1`). Optional — defaults to `us-east-1` if omitted.
+- **Region** (string) : the AWS region where S3 operations will be performed (e.g., `us-east-1`, `eu-west-1`). Optional: defaults to `us-east-1` if omitted.
 
 After creating all three configurables, bind each connection field to its configurable variable and set **Connection Name** to `s3Client`.
 

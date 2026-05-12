@@ -8,18 +8,18 @@ People HR is a cloud-based human resource management system that provides tools 
 
 ## Key features
 
-- Full employee lifecycle management — create, retrieve, update, and mark employees as leavers
-- Holiday management — add, retrieve, and delete employee holiday records
+- Full employee lifecycle management: create, retrieve, update, and mark employees as leavers
+- Holiday management: add, retrieve, and delete employee holiday records
 - Salary detail retrieval with optional history
-- Vacancy and applicant management — create vacancies, list all vacancies, create applicants, upload documents, and check for duplicates
-- Custom screen transaction support — add, update, delete, and retrieve employee custom screen details
+- Vacancy and applicant management: create vacancies, list all vacancies, create applicants, upload documents, and check for duplicates
+- Custom screen transaction support: add, update, delete, and retrieve employee custom screen details
 - Appraisal detail retrieval by employee ID or appraisal ID
 - Saved query execution by query name for flexible data retrieval
 - Authentication verification for validating user credentials
 
 ## Actions
 
-Actions are operations you invoke on People HR from your integration — managing employees, holidays, salaries, vacancies, applicants, custom screens, and more. The People HR connector exposes actions through a single client:
+Actions are operations you invoke on People HR from your integration, including managing employees, holidays, salaries, vacancies, applicants, custom screens, and more. The People HR connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a People HR account and obtaining the API key required to use the People HR connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **People HR** connector, including connection setup, operation configuration, and execution flow.
 
