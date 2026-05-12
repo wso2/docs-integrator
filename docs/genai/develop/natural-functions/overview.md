@@ -195,6 +195,6 @@ A natural function can also be wired up as an [agent tool](/docs/genai/develop/a
 ## What's Next
 
 - **[Customer Review Analyzer with Natural Function (Tutorial)](/docs/genai/tutorials/review-summarizer-natural-function)** — end-to-end tutorial that builds a `POST /api/v1/analyze` service using everything on this page.
-- **[AI Connections and Stores: Model Providers](/docs/genai/develop/components/model-providers)** — switch providers, tune temperature, max tokens, and retries for the Prompt node's connection.
+- **[Model Providers](/docs/genai/develop/components/model-providers)** — switch providers, tune temperature, max tokens, and retries for the Prompt node's connection.
 - **[Direct LLM Calls](/docs/genai/develop/direct-llm/overview)** — when you only need a single in-flow call without packaging it as a function.
 - **[AI Agents](/docs/genai/develop/agents/overview)** — when natural functions become tools an agent can choose to call.
