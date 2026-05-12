@@ -27,9 +27,11 @@ flowchart LR
 
 ## Adding the MySQL connector
 
-### Step 1: Open the add connection palette
+### Step 1: Open the connector palette and select the MySQL connector
 
-Select the **+ Add Connection** button on the WSO2 Integrator canvas to open the connector palette. The palette displays a search field at the top and a list of pre-built connectors including MySQL, MongoDB, PostgreSQL, and others.
+1. On the canvas, click **+ Add Connection** to open the connector palette.
+2. In the palette search box, enter **MySQL**.
+3. Select the **MySQL** card to open the **Configure MySQL** form.
 
 ![MySQL connector palette open with search field before any selection](/img/connectors/catalog/database/mysql/mysql_screenshot_01_palette.png)
 
@@ -37,9 +39,11 @@ Select the **+ Add Connection** button on the WSO2 Integrator canvas to open the
 
 ### Step 2: Fill in the MySQL connection parameters
 
-After selecting **MySQL** from the palette, the **Configure MySQL** form opens. Expand **Advanced Configurations** to reveal all connection fields. For each field, bind the value to a **Configurable variable** rather than hardcoding a literal — this keeps secrets out of your source code and makes the integration portable across environments.
+In the **Configure MySQL** form, expand **Advanced Configurations** to reveal all connection fields. Use the **Configurables** tab in the helper panel to bind each field to a configurable variable, keeping credentials out of source code. For each parameter listed below:
 
-Configure the following parameters:
+1. Open the helper panel beside the field and go to the **Configurables** tab.
+2. Select an existing configurable or click **+ New Configurable**.
+3. Supply a camelCase name and the appropriate type, then click **Save**. The configurable is injected into the field.
 
 - **host**: MySQL server hostname, bound to a `string` configurable named `mysqlHost`
 - **user**: Database username, bound to a `string?` configurable named `mysqlUser`
@@ -47,7 +51,7 @@ Configure the following parameters:
 - **database**: Database name to connect to, bound to a `string?` configurable named `mysqlDatabase`
 - **port**: MySQL server port, bound to an `int` configurable named `mysqlPort`
 
-Set the **Connection Name** to `mysqlClient`.
+After creating all five configurables, set **Connection Name** to `mysqlClient`.
 
 ![MySQL connection form fully filled with all parameters before saving](/img/connectors/catalog/database/mysql/mysql_screenshot_02_connection_form.png)
 
@@ -59,8 +63,8 @@ Select **Save Connection** to save the connector. The canvas returns to the inte
 
 ### Step 4: Set actual values for your configurables
 
-1. In the left panel, select **Configurations** (at the bottom of the project tree, under Data Mappers).
-2. Set a value for each configurable listed below:
+1. In the left panel, click **Configurations**.
+2. Set a value for each configurable listed below.
 
 - **mysqlHost**: hostname or IP address of your MySQL server (`string`)
 - **mysqlUser**: database username (`string?`)
@@ -72,15 +76,17 @@ Select **Save Connection** to save the connector. The canvas returns to the inte
 
 ### Step 5: Add an automation entry point
 
-Select **+ Add Artifact** on the canvas, then select **Automation**. In the Automation creation form, select **Create** to create a new automation with the default settings. The automation flow canvas opens, showing a **Start** node and an **Error Handler** node with an empty step slot between them.
+1. Click **+ Add Artifact** on the canvas toolbar.
+2. Under **Automation**, select the **Automation** tile.
+3. Click **Create**. No additional configuration is needed.
 
-### Step 6: Expand the MySQL connection node and select the execute operation
+The automation flow canvas opens, showing a **Start** node and an **Error Handler** node with an empty step slot between them.
 
 Select the empty step placeholder in the flow to open the step addition panel. In the right-hand panel, locate the **Connections** section, select **mysqlClient** to expand its available operations, and then select **Execute**.
 
 ![MySQL connection node expanded showing all available operations before selection](/img/connectors/catalog/database/mysql/mysql_screenshot_04_operations_panel.png)
 
-### Step 7: Configure the execute operation parameters and save
+### Step 6: Configure the execute operation parameters and save
 
 Fill in the operation fields, then select **Save** to add the step to the automation flow.
 

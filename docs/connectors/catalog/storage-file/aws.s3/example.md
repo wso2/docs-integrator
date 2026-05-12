@@ -28,42 +28,38 @@ flowchart LR
 
 ## Adding the aws.s3 connector
 
-### Step 1: Open the connector palette
+### Step 1: Open the connector palette and select the aws.s3 connector
 
-Select **Add Connection** (or the **+** icon next to the **Connections** heading in the sidebar) to open the connector search palette.
-![Connector palette open showing the search field and connector list before any search is entered](/img/connectors/catalog/storage-file/aws.s3/aws_s3_screenshot_01_palette.png)
-
-### Step 2: Search for and select the aws.s3 connector
-
-1. In the palette search box, enter **aws.s3**.
-2. Wait for the search results to display the `ballerinax/aws.s3` connector card.
+1. Select **Add Connection** (or the **+** icon next to the **Connections** heading in the sidebar) to open the connector palette.
+2. In the palette search box, enter **aws.s3**.
 3. Select the **ballerinax/aws.s3** connector card to open the connection configuration form.
+
+![Connector palette open showing the search field and connector list before any search is entered](/img/connectors/catalog/storage-file/aws.s3/aws_s3_screenshot_01_palette.png)
 
 ## Configuring the aws.s3 connection
 
-### Step 3: Bind the aws.s3 connection parameters to configurable variables
+### Step 2: Bind the aws.s3 connection parameters to configurable variables
 
-Use the helper panel to create and bind a dedicated configurable variable for each of the three connection fields—**Access Key Id**, **Secret Access Key**, and **Region**:
+Select the **Config** field, switch to **Expression** mode, then use the **Configurables** tab in the helper panel to create one variable for each connection field:
 
-1. Select the **Config** field, switch to **Expression** mode, then select **Open Helper Panel**, go to the **Configurables** tab, select **+ New Configurable**, set the variable name to `accessKeyId` with type `string`, and select **Save**.
-2. Repeat for `secretAccessKey`: select **+ New Configurable**, set the variable name to `secretAccessKey` with type `string`, and select **Save**.
-3. Repeat for `region`: select **+ New Configurable**, set the variable name to `region` with type `string`, and select **Save**.
-4. Set the **Config** expression to bind each field to its configurable variable.
+- **Access Key Id** (string) : the AWS IAM access key ID used to authenticate requests to Amazon S3
+- **Secret Access Key** (string) : the AWS IAM secret access key paired with the access key ID for request signing
+- **Region** (string) : the AWS region where S3 operations will be performed (e.g., `us-east-1`, `eu-west-1`). Optional — defaults to `us-east-1` if omitted.
 
-- **Access Key Id** : the AWS IAM access key ID used to authenticate requests to Amazon S3
-- **Secret Access Key** : the AWS IAM secret access key paired with the access key ID for request signing
-- **Region** : the AWS region where S3 operations will be performed (e.g., `us-east-1`, `eu-west-1`). Optional — defaults to `us-east-1` if omitted.
+After creating all three configurables, bind each connection field to its configurable variable and set **Connection Name** to `s3Client`.
 
 ![Connection form showing all three parameters bound to configurable variables before saving](/img/connectors/catalog/storage-file/aws.s3/aws_s3_screenshot_02_connection_form.png)
 
-### Step 4: Save the aws.s3 connection
+### Step 3: Save the aws.s3 connection
 
-Select **Save Connection** to persist the connection. The S3 connector entry (`s3Client`) appears on the low-code canvas.
+Select **Save Connection** to persist the connection. The S3 connector entry (`s3Client`) appears on the canvas.
+
 ![Integration design canvas showing the S3 connector node in the Connections panel after saving](/img/connectors/catalog/storage-file/aws.s3/aws_s3_screenshot_03_connections_list.png)
 
-### Step 5: Set actual values for your configurables
+### Step 4: Set actual values for your configurables
 
-In the left panel of WSO2 Integrator, select **Configurations** (listed at the bottom of the project tree, under Data Mappers) to open the Configurations panel. Set a value for each configurable:
+1. In the left panel, select **Configurations**.
+2. Set a value for each configurable listed below.
 
 - **accessKeyId** (string) : your AWS IAM access key ID
 - **secretAccessKey** (string) : your AWS IAM secret access key
@@ -71,12 +67,15 @@ In the left panel of WSO2 Integrator, select **Configurations** (listed at the b
 
 ## Configuring the aws.s3 createBucket operation
 
-### Step 6: Add an automation entry point
+### Step 5: Add an automation entry point
 
-1. On the low-code canvas, select **+ Add Artifact** and select **Automation** from the artifact list.
-2. If a configuration dialog appears, accept the default trigger settings and select **Create** to add the automation block to the canvas.
+1. Select **+ Add Artifact** on the canvas toolbar.
+2. Under **Automation**, select the **Automation** tile.
+3. Select **Create**. No additional configuration is needed.
 
-### Step 7: Select the createBucket operation and configure its parameters
+The automation entry point appears in the sidebar under **Entry Points**, and the canvas switches to the Automation flow editor showing a **Start** node.
+
+### Step 6: Select the createBucket operation and configure its parameters
 
 1. Inside the automation flow body, select the **+** (Add Step) button between the **Start** and **End/Error Handler** nodes to open the step-addition panel.
 2. In the step-addition panel, locate the **Connections** section and select the S3 connection entry (**s3Client**) to expand it and reveal all available operations.
@@ -84,11 +83,12 @@ In the left panel of WSO2 Integrator, select **Configurations** (listed at the b
 ![S3 connection node expanded in the step-addition panel showing all available operations before selection](/img/connectors/catalog/storage-file/aws.s3/aws_s3_screenshot_04_operations_panel.png)
 
 3. Select **Create Bucket** from the list of operations to open its configuration form, then fill in the operation fields.
-4. Select **Save** to add the `createBucket` step to the automation flow.
 
 - **Bucket Name** : the name of the new Amazon S3 bucket to create
 
 ![createBucket operation configuration form with all input fields filled before saving](/img/connectors/catalog/storage-file/aws.s3/aws_s3_screenshot_05_operation_filled.png)
+
+4. Select **Save** to add the `createBucket` step to the automation flow.
 
 ![Completed automation canvas flow showing Start, s3:createBucket connected to s3Client, Error Handler, and End nodes](/img/connectors/catalog/storage-file/aws.s3/aws_s3_screenshot_06_completed_flow.png)
 

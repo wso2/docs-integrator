@@ -39,7 +39,11 @@ flowchart LR
 
 ### Step 2: Fill in the connection parameters
 
-In the **Configure MongoDB** panel, bind each field to a configurable variable using Expression mode in the **Connection** textbox. Configure the following parameters:
+In the **Configure MongoDB** panel, bind each field to a configurable variable using Expression mode in the **Connection** textbox. For each parameter listed below:
+
+1. Open the helper panel beside the field and go to the **Configurables** tab.
+2. Select an existing configurable or click **+ New Configurable**.
+3. Supply a camelCase name and the appropriate type, then click **Save**. The configurable is injected into the field.
 
 - **serverAddress.host**: MongoDB server hostname or IP address, bound to a `string` configurable named `mongoHost`
 - **serverAddress.port**: MongoDB server port number, bound to an `int` configurable named `mongoPort`
@@ -47,7 +51,7 @@ In the **Configure MongoDB** panel, bind each field to a configurable variable u
 - **auth.password**: Database password, bound to a `string` configurable named `mongoPassword`
 - **auth.database**: Authentication database name (typically `admin`), bound to a `string` configurable named `mongoDatabase`
 
-Set **Connection Name** to `mongodbClient`.
+After creating all five configurables, set **Connection Name** to `mongodbClient`.
 
 > **Alternative connection URI**: If you already have a complete MongoDB connection URI (`mongodb://...` or `mongodb+srv://...`), you can paste it directly into the **Connection** field as a single string instead of binding the individual sub-fields. See the [setup guide](setup-guide.md) for how to obtain that URI.
 
@@ -68,7 +72,7 @@ Click **Save Connection** to persist the connection. The `mongodbClient` node ap
 ### Step 4: Set actual values for your configurables
 
 1. In the left panel, click **Configurations**.
-2. Set a value for each configurable listed below:
+2. Set a value for each configurable listed below.
 
 - **mongoHost**: hostname or IP of your MongoDB server (`string`)
 - **mongoPort**: port your MongoDB server listens on (`int`)
@@ -83,6 +87,8 @@ Click **Save Connection** to persist the connection. The `mongodbClient` node ap
 1. On the main canvas, click **+ Add Artifact**.
 2. Choose **Automation** under the Automation heading.
 3. Leave all defaults and click **Create**.
+
+The automation flow canvas opens, showing a **Start** node and an **Error Handler** node with an empty step slot between them.
 
 ### Step 6: Select and configure the get database operation
 

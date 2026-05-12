@@ -7,7 +7,7 @@
 Build a WSO2 Integrator automation that connects to a remote FTP server, retrieves a JSON file using the `getJson` operation, and logs its contents. The workflow uses configurable variables to manage FTP credentials securely.
 
 **Operations used:**
-- **getJson** : Retrieves a JSON file from a specified path on the FTP server and returns its contents as a `json` value
+- **getJson** : Retrieves a JSON file from a specified path on the FTP server and returns its contents as a `json` value.
 
 ### Architecture
 
@@ -46,10 +46,10 @@ Select **Add Connection** in the WSO2 Integrator sidebar to open the connector p
 
 Set the **Client Config** field using four configurable variables. Use the **Configurables** tab in the helper panel to create each variable:
 
-- **ftpHost** (string) : Hostname or IP address of the FTP server
-- **ftpPort** (int) : Port number used by the FTP server (default `21`)
-- **ftpUsername** (string) : Username for FTP authentication
-- **ftpPassword** (string) : Password for FTP authentication
+- **host** (string) : Hostname or IP address of the FTP server
+- **port** (int) : Port number used by the FTP server (default `21`)
+- **auth.credentials.username** (string) : Username for FTP authentication
+- **auth.credentials.password** (string) : Password for FTP authentication
 
 After creating all four configurables, enter the following record literal in the **Client Config** expression field and set **Connection Name** to `ftpClient`.
 
@@ -66,7 +66,7 @@ Select **Save Connection** to persist the connection. The form closes and the ca
 1. In the left panel, select **Configurations**.
 2. Set a value for each configurable listed below.
 
-- **ftpHost** (string) : The hostname or IP address of your FTP server (for example, `ftp.example.com`)
+- **ftpHost** (string) : The hostname or IP address of your FTP server (for example, `"ftp.example.com"`)
 - **ftpPort** (int) : The port your FTP server listens on
 - **ftpUsername** (string) : Your FTP account username
 - **ftpPassword** (string) : Your FTP account password
@@ -100,9 +100,9 @@ The `main` automation entry point appears in the sidebar under **Entry Points**,
 
 #### Step 7: Add a log statement to inspect the result
 
-To log the retrieved JSON, select the **+** below the **Get Json** node and choose **Log Info** from the **Logging** section in the side panel. Enter the log statement using the result variable name you set in Step 6:
+1. To log the retrieved JSON, select the **+** below the **Get Json** node and choose **Log Info** from the **Logging** section in the side panel.
 
-`log:printInfo(data.toJsonString())`
+2. Select expression and enter the log statement using the result variable name you set in Step 6: `data.toJsonString()`.
 
 WSO2 Integrator renders the `log:printInfo` node in the flow canvas.
 
@@ -117,6 +117,7 @@ Try this sample in WSO2 Integration Platform.
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/ftp_connector_sample)
 
 ---
+
 ## FTP Trigger Example
 ### What you'll build
 
@@ -140,35 +141,11 @@ flowchart LR
 
 > **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the trigger.
 
-### Adding the FTP trigger
-
-#### Step 1: Open the Artifacts palette and select the FTP trigger
-
-Select **Add Artifact** to open the Artifacts palette. Navigate to the **File Integration** category and locate the **FTP/SFTP** trigger card.
-
-![Artifacts palette open with File Integration category showing the FTP/SFTP trigger card](/img/connectors/catalog/built-in/ftp/ftp_trigger_screenshots_01_artifact_palette.png)
-
 ### Configuring the FTP listener
 
-#### Step 2: Bind listener parameters to configurable variables
+#### Step 1: Create configurable variables
 
-Select the FTP/SFTP trigger card to open the trigger configuration form. Bind each listener parameter to a new configurable variable using the Helper Panel:
-
-- **Host** : Hostname or IP address of the FTP/SFTP server
-- **Port Number** : Port used to connect to the FTP/SFTP server
-- **Username** : Authentication username for the FTP/SFTP server
-- **Password** : Authentication password for the FTP/SFTP server
-- **Monitoring Path** : Directory path on the server to monitor for new files
-
-For string fields, select **Open Helper Panel** → **Configurables** tab → **+ New Configurable**, enter the name and default value, then select **Save**. The configurable chip appears in the field. For the **Port Number** field (integer type), first switch from **Number** to **Expression** mode, then select **Open Helper Panel** to access the Configurables tab and create the `ftpPort` configurable. Leave **Authentication** set to **Basic Authentication** and **Protocol** set to **ftp**.
-
-For SFTP, set Protocol to sftp, change the port to `22`, and use the SFTP authentication form (private key or password) in place of Basic Authentication.
-
-![FTP trigger configuration form with all five listener parameters bound to configurable chips before selecting Create](/img/connectors/catalog/built-in/ftp/ftp_trigger_screenshots_02_trigger_config_form.png)
-
-#### Step 3: Set actual values for your configurations
-
-In the left panel, select **Configurations**. Set a value for each configuration listed below:
+In the left panel, select **Configurations**. In the Configurable Variables panel, select **+ Add Config** and create each configuration listed below.
 
 - **ftpHost** (string) : Hostname or IP address of the FTP/SFTP server
 - **ftpPort** (int) : Port number used to connect to the server
@@ -176,15 +153,55 @@ In the left panel, select **Configurations**. Set a value for each configuration
 - **ftpPassword** (string) : Authentication password
 - **ftpPath** (string) : Directory path on the server to monitor for new files
 
+For string fields, enter the **Variable Name** and **Default Value**, then select **Save**. The configurable chip appears in the field.
+
+For the **Port Number**, create the `ftpPort` configurable variable and use integer type.
+
 ![Configurations panel open showing the configurable variables listed with empty value fields](/img/connectors/catalog/built-in/ftp/ftp_trigger_screenshots_03_configurations_panel.png)
+
+### Adding the FTP trigger
+
+#### Step 2: Open the Artifacts palette and select the FTP trigger
+
+Select **Add Artifact** to open the Artifacts palette. Navigate to the **File Integration** category and locate the **FTP/SFTP** trigger card.
+
+![Artifacts palette open with File Integration category showing the FTP/SFTP trigger card](/img/connectors/catalog/built-in/ftp/ftp_trigger_screenshots_01_artifact_palette.png)
+
+#### Step 3: Bind listener parameters to configurable variables
+
+Select the FTP/SFTP trigger card to open the trigger configuration form. Bind each listener parameter to the created configurable variables using the Helper Panel:
+
+- **Host** : Hostname or IP address of the FTP/SFTP server (for example, `ftpHost`)
+- **Port Number** : Port used to connect to the FTP/SFTP server (for example, `ftpPort`)
+- **Username** : Authentication username for the FTP/SFTP server (for example, `ftpUsername`)
+- **Password** : Authentication password for the FTP/SFTP server (for example, `ftpPassword`)
+- **Monitoring Path** : Directory path on the server to monitor for new files (for example, `ftpPath`)
+
+Leave **Authentication** set to **Basic Authentication** and **Protocol** set to **ftp**.
+
+For SFTP, set Protocol to sftp, change the port to `22`, and use the SFTP authentication form (private key or password) in place of Basic Authentication.
+
+![FTP trigger configuration form with all five listener parameters bound to configurable chips before selecting Create](/img/connectors/catalog/built-in/ftp/ftp_trigger_screenshots_02_trigger_config_form.png)
 
 #### Step 4: Create the trigger
 
 Select **Create** to generate the integration service and listener.
 
+### Setting configuration values
+
+#### Step 5: Set actual values for your configurations
+
+In the left panel, select **Configurations** again, and in the Configurable Variables panel, set a value for each configuration created above:
+
+- **ftpHost** (string) : Hostname or IP address of the FTP/SFTP server
+- **ftpPort** (int) : Port number used to connect to the server
+- **ftpUsername** (string) : Authentication username
+- **ftpPassword** (string) : Authentication password
+- **ftpPath** (string) : Directory path on the server to monitor for new files
+
 ### Handling FTP events
 
-#### Step 5: Add a file handler
+#### Step 6: Add a file handler
 
 Return to the FTP Integration service view. The service shows a **File Handlers** section with no handlers registered yet. Select **+ Add File Handler**. A **Select Handler to Add** side panel opens on the right, listing the available handler types:
 
@@ -196,7 +213,7 @@ The Visual Designer groups handlers by event category. `onCreate` generates one 
 
 ![Service view with Select Handler to Add side panel open listing FTP handler options](/img/connectors/catalog/built-in/ftp/ftp_trigger_screenshots_04_add_handler_panel.png)
 
-#### Step 6: Configure the onCreate handler
+#### Step 7: Configure the onCreate handler
 
 Select **onCreate** to open the **New On Create Handler Configuration** panel. Set the handler options:
 
@@ -210,19 +227,19 @@ These paths drive the `@ftp:FunctionConfig` annotation's `afterProcess` (Success
 
 Select **Save** to register the `onFileCsv` handler on the service.
 
-#### Step 7: Add a log statement to the handler
+#### Step 8: Add a log statement to the handler
 
-After the handler is saved, WSO2 Integrator opens the **onFileCsv** flow canvas. The generated handler receives the parsed CSV content alongside an `ftp:FileInfo` record (`fileInfo`) describing the source file (path, name, size, timestamps, and attributes). We will log this metadata on each invocation.
+After the handler is saved, WSO2 Integrator opens the **onFileCsv** flow canvas. The handler receives the parsed CSV content alongside an `ftp:FileInfo` record named `fileInfo` describing the source file (path, name, size, timestamps, and attributes).
 
-To observe incoming file metadata at runtime, add a `log:printInfo` call to the handler body by selecting the **+** icon in the flow chart and choosing **Log Info** from the **Logging** section in the side panel. Enter the log statement:
+1. To log the file metadata, select the **+** inside the handler flow and choose **Log Info** from the **Logging** section in the side panel.
 
-`log:printInfo(fileInfo.toJsonString())`
+2. Select expression and enter the log statement using the `fileInfo` record: `fileInfo.toJsonString()`.
 
 WSO2 Integrator renders the `log:printInfo` node in the flow canvas.
 
 ![onFileCsv handler flow canvas showing the log:printInfo step added with fileInfo.toJsonString() as the argument](/img/connectors/catalog/built-in/ftp/ftp_trigger_screenshots_06_handler_flow.png)
 
-#### Step 8: Verify the final service view
+#### Step 9: Verify the final service view
 
 Navigate back to the **FTP Integration** service view. The **File Handlers** section now displays the registered `onFileCsv` handler row, showing the handler type tag (`onCreate`) alongside the function name.
 
