@@ -10,6 +10,12 @@ For end-to-end usage, including how to create a GraphQL service from scratch or 
 
 ![GraphQL editor showing a GraphQL service with its queries, subscription, and referenced types](/img/develop/understand-ide/editors/graphql-editor/overview.png)
 
+## Open the editor
+
+Select a GraphQL service under **Entry points** in the project explorer, or select the service node on the [Integrator view](../views/integration-view.md) design canvas. The editor opens with the service node and the types it references on the canvas.
+
+To create a new GraphQL service before opening the editor, see [GraphQL Service](/docs/develop/integration-artifacts/service/graphql).
+
 ## Header
 
 The header runs along the top of the editor and combines the breadcrumb, the service title, and the high-level actions.

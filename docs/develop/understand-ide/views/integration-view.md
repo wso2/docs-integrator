@@ -8,8 +8,6 @@ The Integrator view is the primary development interface in WSO2 Integrator. Use
 
 ![Integrator view overview](/img/develop/understand-ide/views/integration-view/overview.png)
 
-The activity bar, project explorer, editor toolbar, and deployment options panel work the same as in the [Project view](project-view.md). See that page for details. This page covers what's specific to a single integration: the design canvas and toolbar.
-
 ## Design canvas
 
 The design canvas is the central area of the Integrator view. It displays a visual overview of your integration, showing how entry points, listeners, connections, and services relate to each other.
@@ -66,6 +64,21 @@ The toolbar sits at the top of the Integrator view and provides quick access to 
 | **Configure** | Opens the configuration panel, equivalent to adding a configuration from the project explorer. |
 | **Run** | Builds and runs your integration locally. WSO2 Integrator compiles the Ballerina code, starts the services, and displays the output in the terminal panel. |
 | **Debug** | Starts a debug session with the debugger attached. Set breakpoints, step through execution, inspect variables and payloads, and evaluate expressions at runtime. |
+
+## Deployment options panel
+
+The deployment options panel appears on the right sidebar and provides shortcuts to deploy the integration to different environments.
+
+![Deployment options](/img/develop/understand-ide/views/integration-view/deployment-options.png)
+
+| Option | Target |
+|---|---|
+| [**Deploy to WSO2 Integration Platform**](/docs/deploy-operate/deploy/devant) | Fully managed cloud platform. |
+| [**Deploy with Docker**](/docs/deploy-operate/deploy/docker-kubernetes) | Container orchestration platforms such as Kubernetes and OpenShift. |
+| [**Deploy on a VM**](/docs/deploy-operate/deploy/vm-based) | Virtual machines or bare-metal servers. |
+| [**Integration Control Plane (ICP)**](/docs/deploy-operate/observe/icp) | Centralized observability and management for deployed integrations. |
+
+Select **Enable ICP monitoring** to activate ICP for this integration, or expand **Publish to local ICP** to push the integration to a local Integration Control Plane instance.
 
 ## README section
 

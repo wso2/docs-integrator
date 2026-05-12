@@ -8,8 +8,6 @@ The Library view is a dedicated view in WSO2 Integrator for creating utilities a
 
 ![Library view overview](/img/develop/understand-ide/views/library-view/overview.png)
 
-The activity bar, project explorer, editor toolbar, and deployment options panel work the same as in the [Project view](project-view.md). See that page for details. This page covers what's specific to a single library: the library overview canvas and toolbar.
-
 ## Library overview canvas
 
 The library overview canvas is the central area of the Library view. It provides a dashboard for the library, showing the library name as a heading and an **Artifacts summary** with cards for the total number of defined types, functions, data mappers, and connections.

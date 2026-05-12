@@ -10,6 +10,12 @@ For end-to-end usage, including how to create a data mapper, work with arrays an
 
 ![Data Mapper editor for the transform data mapper](/img/develop/understand-ide/editors/datamapper-editor/overview.png)
 
+## Open the editor
+
+Select a data mapper under **Data Mappers** in the project explorer, or select the data mapper node from a flow in the [Flow Diagram editor](flow-diagram-editor.md). The editor opens with the data mapper's inputs on the left, the output on the right, and the mapping canvas between them.
+
+To create a new data mapper before opening the editor, see [Data mapper](/docs/develop/integration-artifacts/supporting/data-mapper/data-mapper).
+
 ## Header
 
 The header runs along the top of the editor and combines the breadcrumb, the data mapper title, and the high-level actions.

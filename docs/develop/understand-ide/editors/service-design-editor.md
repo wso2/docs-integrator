@@ -8,6 +8,12 @@ The Service Design editor, also known as the **service designer**, is the editor
 
 ![Service Design editor for an HTTP service](/img/develop/understand-ide/editors/service-design-editor/overview.png)
 
+## Open the editor
+
+Select a service entry point under **Entry points** in the project explorer, or select the service node on the [Integrator view](../views/integration-view.md) design canvas. The editor opens with the resources or handlers the service exposes.
+
+To create a new service before opening the editor, see [Service artifacts](/docs/develop/integration-artifacts/service) and choose the service type ([HTTP](/docs/develop/integration-artifacts/service/http), [gRPC](/docs/develop/integration-artifacts/service/grpc), [TCP](/docs/develop/integration-artifacts/service/tcp), [WebSocket](/docs/develop/integration-artifacts/service/websocket), [WebSub Hub](/docs/develop/integration-artifacts/service/websub-hub)).
+
 ## Header
 
 The header shows the service type and a short tagline, together with the high-level actions for the service.
