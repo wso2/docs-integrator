@@ -67,10 +67,6 @@ The WSO2 Integrator IDE includes:
 
 WSO2 Integrator supports standard breakpoint-based debugging. Set breakpoints in either the visual designer or the code editor, then launch the debugger from the IDE. You can also use remote debugging by running `bal run --debug <port>` and attaching the IDE's debugger to the specified port.
 
-### Where can I find troubleshooting help for common issues?
-
-See [Debugging & Troubleshooting](/docs/develop/debugging/troubleshooting) for symptom-to-fix recipes covering IDE issues, build errors, runtime errors, and diagnostic tools. Focused pages cover [library and connector errors](/docs/develop/debugging/library-troubleshooting), [deployment issues](/docs/develop/debugging/deployment-troubleshooting), and [performance tuning](/docs/develop/debugging/performance-profiling).
-
 ### Can I write tests for my integrations?
 
 Yes. Ballerina has a built-in test framework (`ballerina/test`) that supports:
@@ -161,9 +157,8 @@ Yes. WSO2 provides migration guides and tooling to help transition from other in
 
 Yes. The two products use different runtimes and can coexist in the same environment. This allows you to adopt WSO2 Integrator for new projects while continuing to run your existing MI deployments. You can also migrate MI integrations incrementally using [Migrate third-party integrations](/docs/develop/create-integrations/migrate-third-party-integrations). For MI-specific guidance, refer to the [MI documentation](https://mi.docs.wso2.com).
 
-## See also
+## What's next
 
 - [Get Started](/docs/get-started/install) — Install and set up WSO2 Integrator
 - [Build an API Integration](/docs/get-started/build-api-integration) — Build your first integration
-- [Debugging & Troubleshooting](/docs/develop/debugging/troubleshooting) — Diagnose and fix common build, runtime, IDE, and deployment issues
 - [Glossary](/docs/reference/glossary) — Definitions of key terms

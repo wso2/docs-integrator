@@ -59,6 +59,5 @@ Server and deployment configuration for WSO2 Integration Control Plane:
 - **[Error Codes](error-code.md)** — Error code reference
 - **[Glossary](glossary.md)** — Terminology definitions
 - **[FAQ](faq.md)** — Frequently asked questions
+- **[Troubleshooting](appendix/troubleshooting.md)** — Common issues and solutions
 - **[Release Notes](release-notes.md)** — What's new in each release
-
-For troubleshooting and debugging, see [Debugging & Troubleshooting](../develop/debugging/troubleshooting.md).
