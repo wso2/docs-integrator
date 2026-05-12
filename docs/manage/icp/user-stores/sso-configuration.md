@@ -159,7 +159,7 @@ When a user authenticates via SSO for the first time, ICP automatically creates 
 2. Local part of the `email` claim (before `@`)
 3. `preferred_username` claim
 
-After the account is created, an administrator must assign the appropriate roles and permissions before the user can access ICP resources. See [Access Control](access-control.md).
+After the account is created, an administrator must assign the appropriate roles and permissions before the user can access ICP resources. See [Access Control](../access-control.md).
 
 ## Security Notes
 
@@ -175,7 +175,7 @@ After the account is created, an administrator must assign the appropriate roles
 | `invalid_client` or `invalid_grant` error | Incorrect client ID or secret, or the IdP application is inactive | Verify both values and confirm the application is enabled in your identity provider. |
 | Redirect URI mismatch error | `ssoRedirectUri` does not exactly match the URI registered in the identity provider | Check for differences in protocol, hostname, port, and trailing slashes. |
 | User is missing required claims | The identity provider is not including `sub` and `email` or `preferred_username` in the ID token | Configure your identity provider to include these claims. Verify `ssoUsernameClaim` matches a claim your provider returns. |
-| User authenticated successfully but has no access | User account was created but has no assigned roles | An administrator must grant roles to the account in ICP. See [Access Control](access-control.md). |
+| User authenticated successfully but has no access | User account was created but has no assigned roles | An administrator must grant roles to the account in ICP. See [Access Control](../access-control.md). |
 
 ## Frequently asked questions
 

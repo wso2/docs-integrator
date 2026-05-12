@@ -52,7 +52,7 @@ By default, Redis does not require authentication. To enable it:
 
 Always enable authentication for production deployments. An unprotected Redis server exposed to the internet is a serious security risk.
 
-## Step 3: Enable tLS/SSL (optional)
+## Step 3: Enable TLS/SSL (optional)
 
 For encrypted connections:
 
@@ -68,9 +68,17 @@ For encrypted connections:
 
 3. Restart the Redis server.
 
-When using TLS, connect to the `tls-port` (default 6380) instead of the standard port (6379).
+When using TLS, connect to the configured `tls-port` (commonly `6380`) instead of the standard port (6379).
 
-## Step 4: Note your connection details
+If your Redis deployment requires StartTLS rather than a dedicated TLS port, set `secureSocket.startTls: true` in the Ballerina client configuration.
+
+## Step 4: (Optional) Set up a Redis cluster
+
+To use the connector with a Redis cluster, run Redis in cluster mode. When configuring the Ballerina client, set `isClusterConnection: true` in `ConnectionConfig` and provide a single seed node. The connector will resolve the rest of the cluster topology from that node.
+
+For a local cluster setup, see the in-repo docker compose file at [`tests/resources/docker/compose-cluster.yml`](https://github.com/ballerina-platform/module-ballerinax-redis/blob/master/ballerina/tests/resources/docker/compose-cluster.yml).
+
+## Step 5: Note your connection details
 
 Collect the following details for configuring the Ballerina client:
 
@@ -80,3 +88,5 @@ Collect the following details for configuring the Ballerina client:
 - **Username**: The ACL username, if using Redis ACLs (Redis 6.0+).
 
 For managed Redis services, find these details in your cloud provider's console.
+
+Many managed Redis services provide a single connection URI such as `redis://user:password@host:port` (or `rediss://...` for TLS) instead of separate fields. The connector accepts either form. See the [Action Reference](actions.md) for both initialization patterns.

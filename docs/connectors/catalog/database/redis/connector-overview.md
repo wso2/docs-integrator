@@ -4,7 +4,7 @@ title: Overview
 
 # Overview
 
-Redis is an open-source, in-memory data structure store used as a database, cache, message broker, and streaming engine. The Ballerina `ballerinax/redis` connector (v3.2.0) provides programmatic access to Redis servers and clusters, enabling you to perform string, list, set, sorted set, hash, and key management operations from your Ballerina integration flows.
+Redis is an open-source, in-memory data structure store used as a database, cache, message broker, and streaming engine. The Ballerina `ballerinax/redis` connector (v3.2.1) provides programmatic access to Redis servers and clusters, enabling you to perform string, list, set, sorted set, hash, and key management operations from your Ballerina integration flows.
 
 ## Key features
 
@@ -18,7 +18,7 @@ Redis is an open-source, in-memory data structure store used as a database, cach
 
 ## Actions
 
-Actions are operations you invoke on a Redis server from your integration — reading and writing strings, managing lists, working with sets and sorted sets, and more. The Redis connector exposes actions through a single client:
+Actions are operations you invoke on a Redis server from your integration; reading and writing strings, managing lists, working with sets and sorted sets, and more. The Redis connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up a Redis server and obtaining the connection details required to use the Redis connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients; operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Redis** connector, including connection setup, operation configuration, and execution flow.
 
