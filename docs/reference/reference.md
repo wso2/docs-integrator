@@ -26,12 +26,6 @@ Project and deployment configuration files:
 | **[Cloud.toml](config/cloudtoml-reference.md)**                       | Cloud deployment settings         |
 | **[Environment Variables](config/environment-variables.md)** | Runtime environment configuration |
 
-## CLI
-
-Command-line tools reference:
-
-- **[bal commands](cli/bal-command-reference.md)** — Core build, run, test, and package commands
-
 ## APIs
 
 - **[Management API](api/management.md)** — Runtime management endpoints
