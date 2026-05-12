@@ -192,80 +192,15 @@ version = "8.0.33"
 
 ### Strand dump tool
 
-The strand dump tool captures the state of all active strands in a running Ballerina application, similar to a thread dump in Java. It is useful for diagnosing deadlocks, stuck operations, and concurrency issues.
+A strand dump captures the state of all active strands in a running Ballerina application, similar to a thread dump in Java. It is useful for diagnosing deadlocks, stuck operations, and concurrency issues. The strand dump tool uses the `SIGTRAP` POSIX signal and is not available on Windows.
 
-To generate a strand dump, find the process ID and signal the running JVM:
-
-```bash
-# Find the PID of the running Ballerina process
-ps aux | grep ballerina
-
-# Send SIGTRAP signal to trigger strand dump (macOS/Linux)
-kill -SIGTRAP
-
-# Alternative: Use bal command
-bal strand-dump
-```
-
-The dump shows each strand's status, current function, and call stack:
-
-```
-=== Strand Dump ===
-Timestamp: 2024-01-15T10:30:00.000Z
-
-Strand [1] "main" [RUNNABLE]
-    at mypackage:mainFunction(main.bal:25)
-    at mypackage:init(main.bal:10)
-
-Strand [2] "worker-1" [WAITING]
-    at ballerina/http:Client.get(client.bal:150)
-    at mypackage:fetchData(service.bal:45)
-    Waiting for: HTTP response from https://api.example.com/data
-
-Strand [3] "worker-2" [BLOCKED]
-    at mypackage:processRecords(processor.bal:30)
-    Blocked on: lock at processor.bal:28
-
-=== Summary ===
-Total strands: 3
-Runnable: 1
-Waiting: 1
-Blocked: 1
-```
-
-Strand states reported in the dump:
-
-| State | Description |
-|-------|-------------|
-| `RUNNABLE` | Strand is actively executing or ready to execute |
-| `WAITING` | Strand is waiting for an I/O operation or external event |
-| `BLOCKED` | Strand is blocked on a lock or another strand |
-| `COMPLETED` | Strand has finished execution |
-| `FAILED` | Strand terminated with an error |
+For the full capture and analysis workflow, see [Strand Dump Analysis](../../develop/debugging/strand-dump-analysis.md).
 
 ### Ballerina profiler
 
-The Ballerina profiler identifies performance bottlenecks by recording CPU and memory usage during execution.
+The Ballerina profiler identifies performance bottlenecks by recording function call timings during execution and generating an interactive flame graph.
 
-Run the profiler against a Ballerina file or package:
-
-```bash
-# Profile a Ballerina program
-bal profile <ballerina-file-or-package>
-
-# Profile with specific options
-bal profile --cpu --memory myservice.bal
-```
-
-The profiler generates an HTML report at `target/profiler/index.html` containing:
-
-| Section | Information |
-|---------|-------------|
-| CPU Hotspots | Functions consuming the most CPU time |
-| Memory Allocation | Objects and records with highest allocation rates |
-| Call Graph | Visual representation of call relationships and timing |
-| Strand Activity | Timeline of strand creation, execution, and completion |
-| I/O Wait Times | Time spent waiting for network and file I/O |
+To run the profiler against your project, see [Performance Profiling](../../develop/debugging/performance-profiling.md).
 
 ### Debug logging
 
@@ -290,19 +225,19 @@ Available log levels:
 | `DEBUG` | Detailed debug information | Development troubleshooting |
 | `TRACE` | Very detailed trace output | Deep debugging (high overhead) |
 
-## VS Code extension issues
+## WSO2 Integrator IDE issues
 
 ### Language server not starting
 
-**Symptom:** VS Code shows "Ballerina Language Server: Not Running" in the status bar.
+**Symptom:** The IDE shows "Ballerina Language Server: Not Running" in the status bar.
 
 | Cause | Solution |
 |-------|----------|
 | Ballerina not installed | Install Ballerina or verify `bal` is in `PATH` |
-| Wrong Ballerina path | Set `ballerina.home` in VS Code settings |
+| Wrong Ballerina path | Set `ballerina.home` in the IDE settings |
 | Java not found | Ensure JDK 17+ is installed and `JAVA_HOME` is set |
 | Extension conflict | Disable other Ballerina-related extensions |
-| Corrupted cache | Delete `~/.ballerina/` and restart VS Code |
+| Corrupted cache | Delete `~/.ballerina/` and restart the IDE |
 
 ### IntelliSense not working
 
@@ -310,7 +245,7 @@ Available log levels:
 
 ```bash
 # Restart the language server
-# VS Code: Ctrl+Shift+P > "Ballerina: Restart Language Server"
+# In the IDE: Ctrl+Shift+P > "Ballerina: Restart Language Server"
 
 # Clear the language server cache
 rm -rf ~/.ballerina/ballerina-language-server/
@@ -352,9 +287,9 @@ bal clean && bal build
 | Stack Overflow | [stackoverflow.com/questions/tagged/ballerina](https://stackoverflow.com/questions/tagged/ballerina) |
 | WSO2 Support | [wso2.com/support/](https://wso2.com/support/) |
 
-## What's next
+## See also
 
-- [System Requirements](system-requirements.md) — Platform and version requirements
-- [Installation Guide](/docs/get-started/install) — Installation instructions
-- [Error Codes Reference](/docs/reference/error-codes) — All error codes with resolution steps
-- [FAQ](/docs/reference/faq) — Frequently asked questions
+- [System Requirements](system-requirements.md) -- Platform and version requirements
+- [Installation Guide](/docs/get-started/install) -- Installation instructions
+- [Error Codes Reference](/docs/reference/error-codes) -- All error codes with resolution steps
+- [FAQ](/docs/reference/faq) -- Frequently asked questions
