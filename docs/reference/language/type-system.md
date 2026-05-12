@@ -305,7 +305,7 @@ readonly & record {| string name; int age; |} person = {name: "Alice", age: 30};
 The `never` type has no values. It is used for functions that never return (e.g., infinite loops or guaranteed panics) and in type narrowing for impossible cases.
 
 ```ballerina
-function fail() returns never {
+function failed() returns never {
     panic error("fatal error");
 }
 ```

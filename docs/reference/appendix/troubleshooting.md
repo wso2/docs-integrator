@@ -300,7 +300,7 @@ version = "8.0.33"
 | Port not exposed | Add port mapping: `docker run -p 8080:8080 myservice` |
 | Health check failing | Configure `Cloud.toml` health check settings |
 | Environment variables missing | Pass variables: `docker run -e DB_HOST=localhost myservice` |
-| Config.toml not found | Mount config: `docker run -v ./Config.toml:/home/ballerina/Config.toml myservice` |
+| `Config.toml` not found | Mount config: `docker run -v ./Config.toml:/home/ballerina/Config.toml myservice` |
 
 ## Diagnostic tools
 
