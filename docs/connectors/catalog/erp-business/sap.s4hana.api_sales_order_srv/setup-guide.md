@@ -17,9 +17,9 @@ This guide walks you through configuring SAP S/4HANA Communication Management to
 2. Navigate to **Communication Management** → **Maintain Communication Users**.
 3. Click **New** to create a new communication user.
 4. Fill in the following fields:
-    - **User Name**: Enter a name (e.g., `BALLERINA_SLS_USR`).
-    - **Description**: Enter a meaningful description.
-    - **Password**: Set a strong password and confirm it.
+   - **User Name**: Enter a name (e.g., `BALLERINA_SLS_USR`).
+   - **Description**: Enter a meaningful description.
+   - **Password**: Set a strong password and confirm it.
 5. Click **Create**.
 
 ## Step 2: Create a communication system
@@ -27,9 +27,9 @@ This guide walks you through configuring SAP S/4HANA Communication Management to
 1. Navigate to **Communication Management** → **Communication Systems**.
 2. Click **New**.
 3. Fill in the following fields:
-    - **System ID**: Enter a unique ID (e.g., `BALLERINA_INTEGRATION`).
-    - **System Name**: Enter a display name.
-    - **Host Name**: Enter the hostname or IP of the system that will connect (your integration host).
+   - **System ID**: Enter a unique ID (e.g., `BALLERINA_INTEGRATION`).
+   - **System Name**: Enter a display name.
+   - **Host Name**: Enter the hostname or IP of the system that will connect (your integration host).
 4. Under **Users for Inbound Communication**, add the communication user created in the previous step.
 5. Click **Save**.
 
@@ -43,7 +43,7 @@ This guide walks you through configuring SAP S/4HANA Communication Management to
 5. Under **Inbound Communication**, confirm the authentication method is set to **User ID and Password**.
 6. Click **Save**.
 
-After saving the arrangement, the system displays the Service URL (base path). Copy the hostname portion — you will use it as the `hostname` parameter when initialising the Ballerina client.
+After saving the arrangement, the system displays the Service URL (base path). Copy the hostname portion; you will use it as the `hostname` parameter when initialising the Ballerina client.
 
 ## Step 4: Retrieve the API hostname
 
@@ -51,7 +51,7 @@ After saving the arrangement, the system displays the Service URL (base path). C
 2. Under **Inbound Services**, locate the entry for **Sales Order (A2X)**.
 3. Copy the **Service URL**. The hostname segment (e.g., `my-system.s4hana.ondemand.com`) is your
    `hostname` value.
-4. Note the **User Name** of the inbound communication user — this is your `username`.
+4. Note the **User Name** of the inbound communication user; this is your `username`.
 5. Use the password set in step 1 as your `password`.
 
 Store the hostname, username, and password securely.

@@ -8,13 +8,13 @@ The `ballerinax/sap.s4hana.api_sales_inquiry_srv` package exposes the following 
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Provides typed access to all entities exposed by the SAP S/4HANA API_SALES_INQUIRY_SRV OData service — inquiry headers, line items, business partners, and pricing elements. |
+| [`Client`](#client) | Provides typed access to all entities exposed by the SAP S/4HANA API_SALES_INQUIRY_SRV OData service: inquiry headers, line items, business partners, and pricing elements. |
 
 ---
 
 ## Client
 
-Provides typed access to all entities exposed by the SAP S/4HANA API_SALES_INQUIRY_SRV OData service — inquiry headers, line items, business partners, and pricing elements.
+Provides typed access to all entities exposed by the SAP S/4HANA API_SALES_INQUIRY_SRV OData service: inquiry headers, line items, business partners, and pricing elements.
 
 ### Configuration
 

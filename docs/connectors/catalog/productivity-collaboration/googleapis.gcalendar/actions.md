@@ -8,13 +8,13 @@ The `ballerinax/googleapis.gcalendar` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Provides full access to Google Calendar API v3 — calendars, events, ACL rules, calendar list, free/busy, and colors. |
+| [`Client`](#client) | Provides full access to Google Calendar API v3: calendars, events, ACL rules, calendar list, free/busy, and colors. |
 
 ---
 
 ## Client
 
-Provides full access to Google Calendar API v3 — calendars, events, ACL rules, calendar list, free/busy, and colors.
+Provides full access to Google Calendar API v3: calendars, events, ACL rules, calendar list, free/busy, and colors.
 
 ### Configuration
 
@@ -157,7 +157,7 @@ Sample response:
 <details>
 <summary>Patch a calendar</summary>
 
-Updates selected fields of a calendar (partial update — unset fields are unchanged).
+Updates selected fields of a calendar (partial update: unset fields are unchanged).
 
 Parameters:
 
@@ -425,7 +425,7 @@ Sample response:
 <details>
 <summary>Patch an event</summary>
 
-Updates selected fields of an event (partial update — unspecified fields are unchanged).
+Updates selected fields of an event (partial update: unspecified fields are unchanged).
 
 Parameters:
 
@@ -495,7 +495,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `calendarId` | `string` | Yes | Calendar identifier. |
-| `queries` | `*CalendarEventsQuickAddQueries` | Yes | Must include `text` — a free-text string describing the event (e.g., `"Lunch with Alice tomorrow at noon"`). |
+| `queries` | `*CalendarEventsQuickAddQueries` | Yes | Must include `text`: a free-text string describing the event (e.g., `"Lunch with Alice tomorrow at noon"`). |
 
 Returns: `gcalendar:Event|error`
 
@@ -616,7 +616,7 @@ Sample response:
 <details>
 <summary>Move an event to another calendar</summary>
 
-Moves an event to a different calendar — the event is removed from the source calendar and added to the destination.
+Moves an event to a different calendar: the event is removed from the source calendar and added to the destination.
 
 Parameters:
 
@@ -624,7 +624,7 @@ Parameters:
 |------|------|----------|-------------|
 | `calendarId` | `string` | Yes | Source calendar identifier. |
 | `eventId` | `string` | Yes | Event identifier. |
-| `queries` | `*CalendarEventsMoveQueries` | Yes | Must include `destination` — the calendar ID to move the event to. Optionally include `sendUpdates`. |
+| `queries` | `*CalendarEventsMoveQueries` | Yes | Must include `destination`: the calendar ID to move the event to. Optionally include `sendUpdates`. |
 
 Returns: `gcalendar:Event|error`
 

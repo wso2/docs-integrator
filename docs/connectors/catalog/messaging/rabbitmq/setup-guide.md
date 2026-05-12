@@ -14,7 +14,7 @@ This guide walks you through installing and configuring a RabbitMQ server so you
 
 1. Open the RabbitMQ Management UI at `http://localhost:15672` (default credentials: `guest` / `guest`).
 2. Confirm the server is running and accessible on the Overview tab.
-3. Note the **host** (e.g., `localhost`) and **AMQP port** (default `5672`) — you will need these to configure the connector.
+3. Note the **host** (e.g., `localhost`) and **AMQP port** (default `5672`); you will need these to configure the connector.
 
 The default `guest` user can only connect from `localhost`. For remote connections, create a dedicated user.
 

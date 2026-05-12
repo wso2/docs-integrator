@@ -10,7 +10,7 @@ The `ballerinax/asb` package exposes the following clients:
 |--------|---------|
 | [`Message Sender`](#message-sender) | Send individual, batch, and scheduled messages to Azure Service Bus queues and topics. |
 | [`Message Receiver`](#message-receiver) | Receive messages from queues and subscriptions, settle messages, and manage locks. |
-| [`Administrator`](#administrator) | Manage Azure Service Bus entities — create, get, update, delete, and list queues, topics, subscriptions, and rules. |
+| [`Administrator`](#administrator) | Manage Azure Service Bus entities: create, get, update, delete, and list queues, topics, subscriptions, and rules. |
 
 For event-driven integration, see the [Trigger Reference](triggers.md).
 
@@ -197,7 +197,7 @@ Receive messages from queues and subscriptions, settle messages, and manage lock
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `connectionString` | `string` | Required | The Azure Service Bus connection string. |
-| `entityConfig` | `QueueConfig|TopicSubsConfig` | Required | Entity configuration — either `{queueName: "..."}` for queues or `{topicName: "...", subscriptionName: "..."}` for topic subscriptions. |
+| `entityConfig` | `QueueConfig\|TopicSubsConfig` | Required | Entity configuration: either `{queueName: "..."}` for queues or `{topicName: "...", subscriptionName: "..."}` for topic subscriptions. |
 | `receiveMode` | `PEEK_LOCK|RECEIVE_AND_DELETE` | `PEEK_LOCK` | The receive mode. `PEEK_LOCK` requires explicit settlement; `RECEIVE_AND_DELETE` auto-removes on receive. |
 | `maxAutoLockRenewDuration` | `int` | `300` | Maximum duration (in seconds) to automatically renew the message lock. |
 | `amqpRetryOptions` | `AmqpRetryOptions` | `()` | Retry options for AMQP operations. |
@@ -468,7 +468,7 @@ check receiver->closeReceiver();
 
 ## Administrator
 
-Manage Azure Service Bus entities — create, get, update, delete, and list queues, topics, subscriptions, and rules.
+Manage Azure Service Bus entities: create, get, update, delete, and list queues, topics, subscriptions, and rules.
 
 ### Configuration
 
@@ -1030,6 +1030,6 @@ asb:RuleProperties[] rules = check admin->listRules("my-topic", "my-sub");
 
 ## What's next
 
-- [Trigger Reference](triggers.md) — event-driven integration using `asb:Listener`
-- [Setup Guide](setup-guide.md) — obtain the connection string required for all clients
-- [Example](example.md) — complete worked examples for sender, receiver, and trigger
+- [Trigger Reference](triggers.md): event-driven integration using `asb:Listener`
+- [Setup Guide](setup-guide.md): obtain the connection string required for all clients
+- [Example](example.md): complete worked examples for sender, receiver, and trigger

@@ -19,7 +19,7 @@ SAP SD Incoterms is part of the SAP S/4HANA Sales and Distribution module and ma
 
 ## Actions
 
-Actions are operations you invoke on the SAP S/4HANA system from your integration — listing Incoterms classifications, fetching multilingual descriptions, querying version data, and more. The SAP SD Incoterms connector exposes all actions through a single client:
+Actions are operations you invoke on the SAP S/4HANA system from your integration. Use these actions for listing Incoterms classifications, fetching multilingual descriptions, querying version data, and more. The SAP SD Incoterms connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating the required Communication User, Communication System, and Communication Arrangement in SAP S/4HANA Cloud to obtain the credentials needed for the SAP SD Incoterms connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **SAP SD Incoterms** connector, including connection setup, operation configuration, and execution flow.
 

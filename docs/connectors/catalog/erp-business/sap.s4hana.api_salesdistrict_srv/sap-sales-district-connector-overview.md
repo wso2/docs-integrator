@@ -19,7 +19,7 @@ The SAP S/4HANA Sales District connector provides programmatic access to the SAP
 
 ## Actions
 
-Actions are operations you invoke on SAP S/4HANA from your integration — listing sales districts, retrieving specific district records, and accessing multilingual text descriptions. The SAP Sales District connector exposes these actions through a single client:
+Actions are operations you invoke on SAP S/4HANA from your integration. Use these actions for listing sales districts, retrieving specific district records, and accessing multilingual text descriptions. The SAP Sales District connector exposes these actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through configuring SAP S/4HANA access and obtaining the credentials required to use the SAP Sales District connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **SAP Sales District** connector, including connection setup, operation configuration, and execution flow.
 

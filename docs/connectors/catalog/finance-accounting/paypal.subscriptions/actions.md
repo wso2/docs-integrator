@@ -37,7 +37,7 @@ import ballerinax/paypal.subscriptions as paypal;
 configurable string clientId = ?;
 configurable string clientSecret = ?;
 
-// Sandbox — default serviceUrl: https://api-m.sandbox.paypal.com/v1/billing
+// Sandbox; default serviceUrl: https://api-m.sandbox.paypal.com/v1/billing
 paypal:Client paypalClient = check new ({
     auth: {
         clientId: clientId,
@@ -46,7 +46,7 @@ paypal:Client paypalClient = check new ({
     }
 });
 
-// Production — pass the live service URL as the second argument
+// Production: pass the live service URL as the second argument
 // paypal:Client paypalClient = check new ({
 //     auth: {
 //         clientId: clientId,

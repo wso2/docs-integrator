@@ -19,7 +19,7 @@ Asana is a cloud-based project management and work tracking platform that helps 
 
 ## Actions
 
-Actions are operations you invoke on Asana from your integration — creating tasks, managing projects, organizing sections, and more. The Asana connector exposes all actions through a single client:
+Actions are operations you invoke on Asana from your integration. Use these actions for creating tasks, managing projects, organizing sections, and more. The Asana connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating an Asana Personal Access Token to authenticate with the Asana connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Asana** connector, including connection setup, operation configuration, and execution flow.
 

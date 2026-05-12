@@ -86,8 +86,8 @@ The automation flow is created with a **Start** node and an **Error Handler** no
 3. Select **Post Events Create** to open the configuration panel.
 4. Switch to the **Expression** tab for the **Payload** field and enter your event details.
 
-- **Payload** : `MarketingEventCreateRequestParams` record containing the event details — required fields include `externalAccountId`, `eventOrganizer`, `externalEventId`, and `eventName`
-- **Result** : Variable name for the returned `events:MarketingEventDefaultResponse` — defaults to `eventsMarketingeventdefaultresponse`
+- **Payload** : `MarketingEventCreateRequestParams` record containing the event details; required fields include `externalAccountId`, `eventOrganizer`, `externalEventId`, and `eventName`
+- **Result** : Variable name for the returned `events:MarketingEventDefaultResponse`; defaults to `eventsMarketingeventdefaultresponse`
 
 ![HubSpot Marketing Events postEventsCreate operation configuration filled with all values](/img/connectors/catalog/marketing-social/hubspot.marketing.events/hubspot_marketing_events_screenshot_05_operation_filled.png)
 
@@ -107,5 +107,5 @@ Try this sample in WSO2 Integration Platform.
 
 The `HubSpot Marketing Events` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.events/tree/main/examples/), covering the following use cases:
 
-1. [Event Participation Management](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.events/tree/main/examples/event_participation_management/) - Use Marketing Event API to Manage and Update Participants seamlessly.
-2. [Marketing Event Management](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.events/tree/main/examples/marketing_event_management/) - Create, update and manage multiple Marketing Events and automate event management.
+1. [Event Participation Management](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.events/tree/main/examples/event_participation_management/): Use Marketing Event API to Manage and Update Participants seamlessly.
+2. [Marketing Event Management](https://github.com/ballerina-platform/module-ballerinax-hubspot.marketing.events/tree/main/examples/marketing_event_management/): Create, update and manage multiple Marketing Events and automate event management.

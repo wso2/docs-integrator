@@ -16,11 +16,11 @@ This guide walks you through creating an Azure Service Bus namespace, a queue or
 2. In the search bar, type `Service Bus` and select **Service Bus** from the results.
 3. Click **+ Create** to create a new namespace.
 4. Fill in the required fields:
-    - **Subscription**: Select your Azure subscription.
-    - **Resource Group**: Select an existing resource group or create a new one.
-    - **Namespace Name**: Enter a globally unique name (e.g., `my-asb-namespace`).
-    - **Location**: Choose the Azure region closest to you.
-    - **Pricing Tier**: Select **Standard** or **Premium** (Standard supports topics; Basic supports queues only).
+   - **Subscription**: Select your Azure subscription.
+   - **Resource Group**: Select an existing resource group or create a new one.
+   - **Namespace Name**: Enter a globally unique name (e.g., `my-asb-namespace`).
+   - **Location**: Choose the Azure region closest to you.
+   - **Pricing Tier**: Select **Standard** or **Premium** (Standard supports topics; Basic supports queues only).
 5. Click **Review + Create**, then **Create**.
 6. Wait for the deployment to complete, then click **Go to resource**.
 
@@ -62,6 +62,6 @@ Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at 
 
 ## What's next
 
-- [Action Reference](actions.md) — start sending and receiving messages
-- [Trigger Reference](triggers.md) — set up event-driven message consumption
-- [Example](example.md) — complete worked examples for sender, receiver, and trigger
+- [Action Reference](actions.md): start sending and receiving messages
+- [Trigger Reference](triggers.md): set up event-driven message consumption
+- [Example](example.md): complete worked examples for sender, receiver, and trigger

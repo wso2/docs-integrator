@@ -12,7 +12,7 @@ The Confluent Avro SerDes connector for Ballerina provides Avro serialization an
 - Automatically register Avro schemas in the Confluent Schema Registry under a specified subject during serialization
 - Deserialize Avro-encoded byte payloads back to typed Ballerina values using schema ID lookup from the registry
 - Implements the Confluent wire format: magic byte prefix + 4-byte schema ID + Avro payload
-- Type-safe deserialization via Ballerina's `typedesc` inference — no manual casting required
+- Type-safe deserialization via Ballerina's `typedesc` inference; no manual casting required
 - GraalVM native image compatible for high-performance, low-latency deployments
 - Works seamlessly with `ballerinax/kafka` for end-to-end Avro-encoded Kafka message pipelines
 
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through enabling the Confluent Schema Registry on Confluent Cloud and obtaining the credentials required to use the Confluent Avro SerDes connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 ## How to contribute
 

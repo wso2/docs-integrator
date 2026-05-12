@@ -8,19 +8,19 @@ The `ballerinax/hubspot.marketing.events` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Marketing Events API v3 — event CRUD, attendance, analytics, list associations, and settings. |
+| [`Client`](#client) | Marketing Events API v3: event CRUD, attendance, analytics, list associations, and settings. |
 
 ---
 
 ## Client
 
-Marketing Events API v3 — event CRUD, attendance, analytics, list associations, and settings.
+Marketing Events API v3: event CRUD, attendance, analytics, list associations, and settings.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|ApiKeysConfig` | Required | Authentication configuration — OAuth 2.0 refresh token grant, bearer token, or API keys. |
+| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|ApiKeysConfig` | Required | Authentication configuration: OAuth 2.0 refresh token grant, bearer token, or API keys. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
 | `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
@@ -140,7 +140,7 @@ hsmktevents:MarketingEventPublicDefaultResponse response = check mktEventsClient
     {
         externalAccountId: "app-12345",
         externalEventId: "webinar-2026-03",
-        eventName: "Ballerina Integration Summit 2026 — Updated",
+        eventName: "Ballerina Integration Summit 2026 (Updated)",
         eventOrganizer: "WSO2"
     }
 );
@@ -149,7 +149,7 @@ hsmktevents:MarketingEventPublicDefaultResponse response = check mktEventsClient
 Sample response:
 
 ```ballerina
-{"eventName": "Ballerina Integration Summit 2026 — Updated", "eventOrganizer": "WSO2", "externalAccountId": "app-12345", "externalEventId": "webinar-2026-03"}
+{"eventName": "Ballerina Integration Summit 2026 (Updated)", "eventOrganizer": "WSO2", "externalAccountId": "app-12345", "externalEventId": "webinar-2026-03"}
 ```
 
 </details>

@@ -41,12 +41,12 @@ Use Ballerina's `configurable` feature and a `Config.toml` file to supply them a
 1. Navigate to the [Amazon SQS console](https://console.aws.amazon.com/sqs/).
 2. Click **Create queue**.
 3. Choose the queue type:
-    - **Standard** — best-effort ordering, at-least-once delivery, nearly unlimited throughput.
-    - **FIFO** — guaranteed ordering, exactly-once processing (queue name must end with `.fifo`).
+   - **Standard**: best-effort ordering, at-least-once delivery, nearly unlimited throughput.
+   - **FIFO**: guaranteed ordering, exactly-once processing (queue name must end with `.fifo`).
 4. Enter a **Queue name**.
 5. Configure optional settings such as visibility timeout, message retention period, and dead-letter queue.
 6. Click **Create queue**.
-7. Copy the **Queue URL** from the queue details page — you will need this to send and receive messages.
+7. Copy the **Queue URL** from the queue details page; you will need this to send and receive messages.
 
 The queue URL has the format `https://sqs.<region>.amazonaws.com/<account-id>/<queue-name>`. You can also retrieve it programmatically using the `getQueueUrl` operation.
 

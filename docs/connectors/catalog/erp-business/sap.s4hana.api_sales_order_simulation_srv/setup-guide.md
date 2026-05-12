@@ -34,7 +34,7 @@ Store the username and password securely. These credentials will be used as the 
 
 1. Search for and open the **Communication Arrangements** app in the SAP Fiori Launchpad.
 2. Click **New** and search for the communication scenario that includes the Sales Order Simulation API
-   (e.g., **SAP_COM_0109 — Sales Order Integration** or the applicable scenario for your release).
+   (e.g., **SAP_COM_0109: Sales Order Integration** or the applicable scenario for your release).
 3. Select the scenario and click **Create**.
 4. In the arrangement form, set the **Communication System** to the system you created in the previous step.
 5. Under **Inbound Communication**, confirm the communication user is listed and that

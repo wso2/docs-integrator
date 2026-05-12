@@ -20,7 +20,7 @@ Provides full CRUD access to SAP S/4HANA Sales Orders and all associated sub-ent
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:CredentialsConfig\|OAuth2RefreshTokenGrantConfig` | Required | Authentication credentials — use `http:CredentialsConfig` (username/password) for Basic Auth or `OAuth2RefreshTokenGrantConfig` for OAuth 2.0. |
+| `auth` | `http:CredentialsConfig\|OAuth2RefreshTokenGrantConfig` | Required | Authentication credentials; use `http:CredentialsConfig` (username/password) for Basic Auth or `OAuth2RefreshTokenGrantConfig` for OAuth 2.0. |
 | `httpVersion` | `string` | `"1.1"` | HTTP protocol version to use for outbound requests. |
 | `http1Settings` | `ClientHttp1Settings` | `{}` | HTTP/1.x client settings including keep-alive, chunking, and proxy configuration. |
 | `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration for secure connections. |

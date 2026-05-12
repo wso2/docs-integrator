@@ -77,7 +77,7 @@ Select **Save Connection** to persist the configuration. The `insnowClient` conn
 
 3. Select **Returns a list of supported countries** (`get`) as the operation.
 
-- **Result variable** : `insnowListcountry` — stores the list of countries returned by the API
+- **Result variable** : `insnowListcountry`; stores the list of countries returned by the API
 
 ![Guidewire InsuranceNow get operation configuration filled with all values](/img/connectors/catalog/erp-business/guidewire.insnow/guidewire_insnow_screenshot_05_operation_form.png)
 
@@ -95,4 +95,4 @@ Try this sample in WSO2 Integration Platform.
 
 The Guidewire InsuranceNow connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-guidewire.insnow/tree/main/examples/), covering the following use cases:
 
-1. [Online application portal](https://github.com/ballerina-platform/module-ballerinax-guidewire.insnow/tree/main/examples/online-application-portal) - Implement an online insurance application portal using Guidewire InsuranceNow cloud API.
+1. [Online application portal](https://github.com/ballerina-platform/module-ballerinax-guidewire.insnow/tree/main/examples/online-application-portal): Implement an online insurance application portal using Guidewire InsuranceNow cloud API.

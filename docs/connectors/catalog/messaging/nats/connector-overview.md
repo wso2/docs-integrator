@@ -12,14 +12,14 @@ NATS is a high-performance, cloud-native messaging system that supports publish/
 - Request-reply messaging pattern with configurable timeout for synchronous interactions
 - Subscribe to NATS subjects via service listeners with wildcard subject support (`*`, `>`)
 - Queue group subscriptions for load-balanced message distribution across multiple consumers
-- JetStream persistent messaging — create and manage streams with `nats:JetStreamClient`
+- JetStream persistent messaging; create and manage streams with `nats:JetStreamClient`
 - JetStream push and pull consumption via `nats:JetStreamListener` with auto-ack or manual acknowledgement
 - Flexible authentication support: username/password credentials, token-based auth, and mutual TLS
 - TLS/SSL secure connections with configurable certificates for encrypted transport
 
 ## Actions
 
-Actions are operations you invoke on a NATS server from your integration — publishing messages, sending requests, and managing JetStream streams. The NATS connector exposes actions across two clients:
+Actions are operations you invoke on a NATS server from your integration. Use these actions for publishing messages, sending requests, and managing JetStream streams. The NATS connector exposes actions across two clients:
 
 | Client | Actions |
 |--------|---------|
@@ -32,7 +32,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through running a NATS server and configuring the Ballerina connector to connect to it.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **NATS** connector, including connection setup, operation configuration, and execution flow.
 

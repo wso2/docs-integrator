@@ -8,19 +8,19 @@ The `ballerinax/hubspot.marketing.campaigns` package exposes the following clien
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manage HubSpot marketing campaigns — CRUD, batch operations, asset associations, metrics, revenue, contacts, and budget. |
+| [`Client`](#client) | Manage HubSpot marketing campaigns: CRUD, batch operations, asset associations, metrics, revenue, contacts, and budget. |
 
 ---
 
 ## Client
 
-Manage HubSpot marketing campaigns — CRUD, batch operations, asset associations, metrics, revenue, contacts, and budget.
+Manage HubSpot marketing campaigns: CRUD, batch operations, asset associations, metrics, revenue, contacts, and budget.
 
 ### Configuration
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration — OAuth 2.0 refresh token, bearer token, or private app API key. |
+| `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or private app API key. |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Maximum wait time for a response in seconds. |
 | `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
@@ -63,7 +63,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional request headers. |
-| `queries` | <code>GetMarketingV3CampaignsQueries</code> | No | Query parameters — `limit` (default 50), `name`, `sort` (default `hs_name`), `after`, `properties`. |
+| `queries` | <code>GetMarketingV3CampaignsQueries</code> | No | Query parameters: `limit` (default 50), `name`, `sort` (default `hs_name`), `after`, `properties`. |
 
 Returns: `CollectionResponseWithTotalPublicCampaignForwardPaging|error`
 
@@ -169,7 +169,7 @@ Parameters:
 |------|------|----------|-------------|
 | `campaignGuid` | <code>string</code> | Yes | The UUID of the campaign to retrieve. |
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional request headers. |
-| `queries` | <code>GetMarketingV3CampaignsCampaignGuidQueries</code> | No | Query parameters — `startDate`, `endDate`, `properties`. |
+| `queries` | <code>GetMarketingV3CampaignsCampaignGuidQueries</code> | No | Query parameters: `startDate`, `endDate`, `properties`. |
 
 Returns: `PublicCampaignWithAssets|error`
 
@@ -219,7 +219,7 @@ Sample code:
 ```ballerina
 campaigns:PublicCampaign updated = check campaignsClient->/["campaignGuid"].patch({
     properties: {
-        "hs_name": "Spring Product Launch 2025 — Updated"
+        "hs_name": "Spring Product Launch 2025 (Updated)"
     }
 });
 ```
@@ -230,7 +230,7 @@ Sample response:
 {
   "id": "512",
   "properties": {
-    "hs_name": "Spring Product Launch 2025 — Updated",
+    "hs_name": "Spring Product Launch 2025 (Updated)",
     "hs_goal": "Generate leads for new product line"
   },
   "createdAt": "2025-01-15T10:30:00Z",
@@ -333,7 +333,7 @@ Parameters:
 |------|------|----------|-------------|
 | `payload` | <code>BatchInputPublicCampaignReadInput</code> | Yes | Array of campaign IDs to read. |
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional request headers. |
-| `queries` | <code>PostMarketingV3CampaignsBatchReadQueries</code> | No | Query parameters — `startDate`, `endDate`, `properties`. |
+| `queries` | <code>PostMarketingV3CampaignsBatchReadQueries</code> | No | Query parameters: `startDate`, `endDate`, `properties`. |
 
 Returns: `BatchResponsePublicCampaignWithAssets|BatchResponsePublicCampaignWithAssetsWithErrors|error`
 
@@ -399,7 +399,7 @@ Sample code:
 campaigns:BatchResponsePublicCampaign|campaigns:BatchResponsePublicCampaignWithErrors result =
     check campaignsClient->/batch/update.post({
         inputs: [
-            { id: "514", properties: { "hs_name": "Campaign A — Renamed" } },
+            { id: "514", properties: { "hs_name": "Campaign A (Renamed)" } },
             { id: "515", properties: { "hs_goal": "Updated goal" } }
         ]
     });
@@ -413,7 +413,7 @@ Sample response:
   "results": [
     {
       "id": "514",
-      "properties": { "hs_name": "Campaign A — Renamed" },
+      "properties": { "hs_name": "Campaign A (Renamed)" },
       "createdAt": "2025-03-18T10:00:00Z",
       "updatedAt": "2025-03-18T11:00:00Z"
     },
@@ -476,7 +476,7 @@ Parameters:
 | `campaignGuid` | <code>string</code> | Yes | The UUID of the campaign. |
 | `assetType` | <code>string</code> | Yes | The type of asset to list (e.g., `FORM`, `OBJECT_LIST`, `EXTERNAL_WEB_URL`). |
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional request headers. |
-| `queries` | <code>GetMarketingV3CampaignsCampaignGuidAssetsAssetTypeQueries</code> | No | Query parameters — `startDate`, `endDate`, `limit` (default 10), `after`. |
+| `queries` | <code>GetMarketingV3CampaignsCampaignGuidAssetsAssetTypeQueries</code> | No | Query parameters: `startDate`, `endDate`, `limit` (default 10), `after`. |
 
 Returns: `CollectionResponsePublicCampaignAssetForwardPaging|error`
 
@@ -515,7 +515,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `campaignGuid` | <code>string</code> | Yes | The UUID of the campaign. |
-| `assetType` | <code>string</code> | Yes | The type of asset — `FORM`, `OBJECT_LIST`, or `EXTERNAL_WEB_URL`. |
+| `assetType` | <code>string</code> | Yes | The type of asset: `FORM`, `OBJECT_LIST`, or `EXTERNAL_WEB_URL`. |
 | `assetId` | <code>string</code> | Yes | The ID of the asset to associate (or a URL for `EXTERNAL_WEB_URL`). |
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional request headers. |
 
@@ -541,7 +541,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `campaignGuid` | <code>string</code> | Yes | The UUID of the campaign. |
-| `assetType` | <code>string</code> | Yes | The type of asset — `FORM`, `OBJECT_LIST`, or `EXTERNAL_WEB_URL`. |
+| `assetType` | <code>string</code> | Yes | The type of asset: `FORM`, `OBJECT_LIST`, or `EXTERNAL_WEB_URL`. |
 | `assetId` | <code>string</code> | Yes | The ID of the asset to disassociate. |
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional request headers. |
 
@@ -570,7 +570,7 @@ Parameters:
 |------|------|----------|-------------|
 | `campaignGuid` | <code>string</code> | Yes | The UUID of the campaign. |
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional request headers. |
-| `queries` | <code>GetMarketingV3CampaignsCampaignGuidReportsMetricsQueries</code> | No | Query parameters — `startDate` (default `2006-01-01`), `endDate` (default current date). |
+| `queries` | <code>GetMarketingV3CampaignsCampaignGuidReportsMetricsQueries</code> | No | Query parameters: `startDate` (default `2006-01-01`), `endDate` (default current date). |
 
 Returns: `MetricsCounters|error`
 
@@ -607,7 +607,7 @@ Parameters:
 |------|------|----------|-------------|
 | `campaignGuid` | <code>string</code> | Yes | The UUID of the campaign. |
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional request headers. |
-| `queries` | <code>GetMarketingV3CampaignsCampaignGuidReportsRevenueQueries</code> | No | Query parameters — `attributionModel` (default `LINEAR`, options: `FIRST_INTERACTION`, `LAST_INTERACTION`, `FULL_PATH`, `U_SHAPED`, `W_SHAPED`, `TIME_DECAY`, `J_SHAPED`, `INVERSE_J_SHAPED`), `startDate`, `endDate`. |
+| `queries` | <code>GetMarketingV3CampaignsCampaignGuidReportsRevenueQueries</code> | No | Query parameters: `attributionModel` (default `LINEAR`, options: `FIRST_INTERACTION`, `LAST_INTERACTION`, `FULL_PATH`, `U_SHAPED`, `W_SHAPED`, `TIME_DECAY`, `J_SHAPED`, `INVERSE_J_SHAPED`), `startDate`, `endDate`. |
 
 Returns: `RevenueAttributionAggregate|error`
 
@@ -646,9 +646,9 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `campaignGuid` | <code>string</code> | Yes | The UUID of the campaign. |
-| `contactType` | <code>string</code> | Yes | Attribution type — `contactFirstTouch`, `contactLastTouch`, or `influencedContacts`. |
+| `contactType` | <code>string</code> | Yes | Attribution type: `contactFirstTouch`, `contactLastTouch`, or `influencedContacts`. |
 | `headers` | <code>map&lt;string&#124;string[]&gt;</code> | No | Optional request headers. |
-| `queries` | <code>GetMarketingV3CampaignsCampaignGuidReportsContactsContactTypeQueries</code> | No | Query parameters — `startDate`, `endDate`, `limit` (default 100), `after`. |
+| `queries` | <code>GetMarketingV3CampaignsCampaignGuidReportsContactsContactTypeQueries</code> | No | Query parameters: `startDate`, `endDate`, `limit` (default 100), `after`. |
 
 Returns: `CollectionResponseContactReferenceForwardPaging|error`
 
@@ -730,7 +730,7 @@ Sample response:
   "spendItems": [
     {
       "id": "10",
-      "name": "Ad Spend — Google",
+      "name": "Ad Spend: Google",
       "description": "Google Ads campaign spend",
       "amount": 20000.00,
       "order": 0,
@@ -739,7 +739,7 @@ Sample response:
     },
     {
       "id": "11",
-      "name": "Ad Spend — LinkedIn",
+      "name": "Ad Spend: LinkedIn",
       "amount": 12000.00,
       "order": 1,
       "createdAt": 1706509800,

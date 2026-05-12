@@ -26,10 +26,10 @@ The exact menu path may differ between SAP S/4HANA releases (1909, 2020, 2021, 2
 
 1. Open transaction **SU01** to manage user accounts, or ask your SAP Basis administrator to create a technical (service) user for API access.
 2. Assign the following authorization objects to the user:
-    - **S_SERVICE**: authorization to call the OData service `API_SALESAREA`.
-    - **V_VKORG_VKO**: Sales Organization authorization for the relevant sales organizations.
-    - **V_VTWEG_VKO**: Distribution Channel authorization.
-    - **V_SPART_VKO**: Division authorization.
+   - **S_SERVICE**: authorization to call the OData service `API_SALESAREA`.
+   - **V_VKORG_VKO**: Sales Organization authorization for the relevant sales organizations.
+   - **V_VTWEG_VKO**: Distribution Channel authorization.
+   - **V_SPART_VKO**: Division authorization.
 3. Assign a role that includes SD display authorizations (e.g., a copy of `SAP_SD_BC_DISP_SALESAREA`) using transaction **PFCG**.
 4. Save the user and role assignments.
 
@@ -37,7 +37,7 @@ Use a dedicated service/technical user (not a named user) for API integrations. 
 
 ## Step 3: Obtain the hostname and port
 
-1. The SAP S/4HANA hostname is the server address of your SAP Gateway (ICM — Internet Communication Manager). It may look like `my-sap-system.example.com` or an IP address.
+1. The SAP S/4HANA hostname is the server address of your SAP Gateway (ICM: Internet Communication Manager). It may look like `my-sap-system.example.com` or an IP address.
 2. The default HTTPS port for SAP ICM is typically `443` or `44300` (for on-premise systems). Confirm the port with your Basis administrator by checking transaction **SMICM → Goto → Services**.
 3. Verify connectivity by opening the following URL in a browser (substituting your hostname and port):
     ```

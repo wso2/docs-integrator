@@ -911,7 +911,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `nodeId` | `string` | Yes | The identifier of the node. |
-| `payload` | `RatingBody` | Yes | The rating value — boolean for likes, integer for fiveStar. |
+| `payload` | `RatingBody` | Yes | The rating value: boolean for likes, integer for fiveStar. |
 | `headers` | `map<string\|string[]>` | No | Headers to be sent with the request. |
 | `queries` | `CreateRatingQueries` | No | Query parameters including `fields`. |
 

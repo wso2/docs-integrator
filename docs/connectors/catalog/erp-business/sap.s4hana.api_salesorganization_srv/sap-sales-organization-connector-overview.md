@@ -19,7 +19,7 @@ SAP Sales Organization is an SAP S/4HANA OData v2 service that provides read acc
 
 ## Actions
 
-Actions are operations you invoke on SAP S/4HANA from your integration — listing sales organizations, retrieving individual records by key, and navigating related text entities. All operations are read-only OData v2 GET requests exposed through a single client:
+Actions are operations you invoke on SAP S/4HANA from your integration. Use these actions for listing sales organizations, retrieving individual records by key, and navigating related text entities. All operations are read-only OData v2 GET requests exposed through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through obtaining the SAP S/4HANA connection details and credentials required to use the SAP Sales Organization connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **SAP Sales Organization** connector, including connection setup, operation configuration, and execution flow.
 

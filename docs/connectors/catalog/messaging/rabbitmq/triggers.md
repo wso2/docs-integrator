@@ -102,7 +102,7 @@ A `rabbitmq:Service` is a Ballerina service attached to a `rabbitmq:Listener`. I
 | `onMessage` | `remote function onMessage(rabbitmq:AnydataMessage message, rabbitmq:Caller caller?) returns error?` | Invoked when a message arrives on the queue. Use for one-way message consumption. |
 | `onRequest` | `remote function onRequest(rabbitmq:AnydataMessage message, rabbitmq:Caller caller?) returns anydata` | Invoked when a message arrives and a reply is expected. The return value is sent back as the response. |
 
-You can implement either `onMessage` or `onRequest` — not both in the same service. Use `onMessage` for fire-and-forget consumption and `onRequest` when the publisher expects a reply.
+You can implement either `onMessage` or `onRequest`, not both in the same service. Use `onMessage` for fire-and-forget consumption and `onRequest` when the publisher expects a reply.
 
 ### Full usage example
 

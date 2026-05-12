@@ -21,7 +21,7 @@ If you are using a self-hosted Alfresco deployment, ensure that the Alfresco RES
 ## Step 2: Obtain your credentials
 
 1. After your environment is set up, note the default **username** and **password** provided in the setup email or configured during installation.
-2. For self-hosted deployments, the default admin credentials are typically `admin` / `admin` — change these immediately in production.
+2. For self-hosted deployments, the default admin credentials are typically `admin` / `admin`: change these immediately in production.
 3. These credentials (username and password) are used for Basic Authentication with the connector.
 
 Store your credentials securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.

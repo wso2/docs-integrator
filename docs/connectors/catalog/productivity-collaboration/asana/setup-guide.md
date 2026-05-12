@@ -21,7 +21,7 @@ This guide walks you through creating an Asana Personal Access Token to authenti
 2. Enter a descriptive **Token name** (e.g., `Ballerina Asana Connector`).
 3. Read and accept the **Asana API Terms and Conditions**.
 4. Click **Create token**.
-5. Copy the generated token immediately — it will not be shown again.
+5. Copy the generated token immediately: it will not be shown again.
 
 Store the Personal Access Token securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 

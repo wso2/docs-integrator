@@ -8,13 +8,13 @@ The `ballerinax/confluent.cavroserdes` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Avro SerDes Functions`](#avro-serdes-functions) | Provides two module-level functions — `serialize` and `deserialize` — for encoding Ballerina values to Avro bytes and decoding them back, using the Confluent Schema Registry to manage schemas automatically. |
+| [`Avro SerDes Functions`](#avro-serdes-functions) | Provides two module-level functions, `serialize` and `deserialize`, for encoding Ballerina values to Avro bytes and decoding them back, using the Confluent Schema Registry to manage schemas automatically. |
 
 ---
 
 ## Avro serDes functions
 
-Provides two module-level functions — `serialize` and `deserialize` — for encoding Ballerina values to Avro bytes and decoding them back, using the Confluent Schema Registry to manage schemas automatically.
+Provides two module-level functions, `serialize` and `deserialize`, for encoding Ballerina values to Avro bytes and decoding them back, using the Confluent Schema Registry to manage schemas automatically.
 
 ### Configuration
 

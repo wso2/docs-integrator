@@ -19,7 +19,7 @@ Mailchimp is a leading email marketing and automation platform that helps busine
 
 ## Actions
 
-Actions are operations you invoke on Mailchimp from your integration — managing audiences, creating campaigns, adding subscribers, and more. The Mailchimp Marketing connector exposes actions through a single client:
+Actions are operations you invoke on Mailchimp from your integration. Use these actions for managing audiences, creating campaigns, adding subscribers, and more. The Mailchimp Marketing connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through obtaining a Mailchimp API key required to use the Mailchimp Marketing connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Mailchimp Marketing** connector, including connection setup, operation configuration, and execution flow.
 

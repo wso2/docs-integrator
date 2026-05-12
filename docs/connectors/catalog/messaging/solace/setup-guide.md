@@ -12,12 +12,12 @@ This guide walks you through setting up a Solace PubSub+ broker and obtaining th
 
 ## Step 1: Set up a Solace pubSub+ broker
 
-**Option A — Solace Cloud (managed service):**
+**Option A: Solace Cloud (managed service):**
 1. Sign up at [console.solace.cloud](https://console.solace.cloud/).
 2. Create a new messaging service (select the free plan for development).
 3. Wait for the service to be provisioned.
 
-**Option B — Docker (self-hosted):**
+**Option B: Docker (self-hosted):**
 1. Run the Solace PubSub+ Standard Edition container:
 
     ```
@@ -57,7 +57,7 @@ The default VPN named `default` is pre-configured and ready to use for developme
 4. To subscribe a queue to a topic, select the queue and add a topic subscription under **Subscriptions**.
 5. Click **Apply** to save.
 
-For topic-based publish/subscribe without queues, no queue creation is needed — topics are created dynamically when a subscriber connects.
+For topic-based publish/subscribe without queues, no queue creation is needed: topics are created dynamically when a subscriber connects.
 
 ## Step 5: Obtain connection details
 

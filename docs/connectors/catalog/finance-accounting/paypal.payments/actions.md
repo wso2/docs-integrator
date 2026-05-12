@@ -8,13 +8,13 @@ The `ballerinax/paypal.payments` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | PayPal Payments API v2 — authorize, capture, void, and refund payments. |
+| [`Client`](#client) | PayPal Payments API v2: authorize, capture, void, and refund payments. |
 
 ---
 
 ## Client
 
-PayPal Payments API v2 — authorize, capture, void, and refund payments.
+PayPal Payments API v2: authorize, capture, void, and refund payments.
 
 ### Configuration
 
@@ -345,7 +345,7 @@ paypal:RefundRequest refundPayload = {
         value: "50.00",
         currency_code: "USD"
     },
-    note_to_payer: "Partial refund - Month 1"
+    note_to_payer: "Partial refund: Month 1"
 };
 paypal:Refund refundResponse = check paypal->/captures/[captureId]/refund.post(refundPayload);
 ```

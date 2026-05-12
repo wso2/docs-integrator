@@ -14,11 +14,11 @@ Amazon Simple Storage Service (Amazon S3) is an object storage service that offe
 - List objects in a bucket with prefix filtering, delimiter grouping, pagination, max-keys limits, start-after offsets, response encoding, and owner information
 - Delete objects with optional version ID support for versioned buckets
 - Generate presigned URLs for secure, time-limited object retrieval or creation without sharing credentials
-- Multipart upload support — initiate, upload parts, complete, or abort large object uploads
+- Multipart upload support: initiate, upload parts, complete, or abort large object uploads
 
 ## Actions
 
-Actions are operations you invoke on AWS S3 from your integration — creating buckets, uploading and downloading objects, generating presigned URLs, and performing multipart uploads. The AWS S3 connector exposes all actions through a single client:
+Actions are operations you invoke on AWS S3 from your integration. Use these actions for creating buckets, uploading and downloading objects, generating presigned URLs, and performing multipart uploads. The AWS S3 connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating an AWS account and obtaining the access credentials required to use the AWS S3 connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **AWS S3** connector, including connection setup, operation configuration, and execution flow.
 

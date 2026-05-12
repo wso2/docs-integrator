@@ -35,7 +35,7 @@ In the WSO2 Integrator panel, expand your project and select the **+** button ne
 ### Step 2: Select the NATS connector
 
 1. Enter `nats` in the search box.
-2. Select the card labelled **Nats** (the standard, non-JetStream connector—not "Nats JetStream" or "Nats JetStream Listener").
+2. Select the card labelled **Nats** (the standard, non-JetStream connector, not "Nats JetStream" or "Nats JetStream Listener").
 
 ## Configuring the NATS connection
 

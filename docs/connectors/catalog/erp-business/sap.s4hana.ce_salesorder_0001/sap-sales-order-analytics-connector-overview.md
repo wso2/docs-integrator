@@ -19,7 +19,7 @@ SAP S/4HANA Sales Order Analytics is an OData v4 API connector that provides pro
 
 ## Actions
 
-Actions are operations you invoke on SAP S/4HANA from your integration — creating sales orders, retrieving order details, updating items, and managing related entities such as partners, pricing conditions, schedule lines, and texts. The connector exposes a single client for all SAP Sales Order API operations.
+Actions are operations you invoke on SAP S/4HANA from your integration. Use these actions for creating sales orders, retrieving order details, updating items, and managing related entities such as partners, pricing conditions, schedule lines, and texts. The connector exposes a single client for all SAP Sales Order API operations.
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through configuring SAP S/4HANA Cloud to expose the Sales Order Integration API and obtaining the credentials required to use the connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **SAP Sales Order Analytics** connector, including connection setup, operation configuration, and execution flow.
 

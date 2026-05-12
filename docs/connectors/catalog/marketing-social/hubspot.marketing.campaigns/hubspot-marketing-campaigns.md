@@ -6,17 +6,17 @@ HubSpot Marketing Campaigns is a tool within HubSpot's marketing platform for or
 
 ## Key features
 
-- Full CRUD operations on marketing campaigns — create, read, update, delete, and search
+- Full CRUD operations on marketing campaigns: create, read, update, delete, and search
 - Batch operations for creating, reading, updating, and archiving multiple campaigns in a single request
-- Asset association management — link and unlink forms, object lists, and external web URLs to campaigns
+- Asset association management: link and unlink forms, object lists, and external web URLs to campaigns
 - Campaign metrics reporting including sessions, new contacts (first/last touch), and influenced contacts
 - Revenue attribution reporting with configurable attribution models (linear, first/last interaction, U-shaped, W-shaped, and more)
-- Contact reporting — retrieve contact IDs by attribution type (first touch, last touch, influenced)
-- Budget tracking — read total budget, spend, and remaining budget for a campaign
+- Contact reporting: retrieve contact IDs by attribution type (first touch, last touch, influenced)
+- Budget tracking: read total budget, spend, and remaining budget for a campaign
 
 ## Actions
 
-Actions are operations you invoke on HubSpot Marketing Campaigns from your integration — creating campaigns, managing assets, retrieving metrics, and more. The connector exposes actions through a single client:
+Actions are operations you invoke on HubSpot Marketing Campaigns from your integration. Use these actions for creating campaigns, managing assets, retrieving metrics, and more. The connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -28,7 +28,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot developer app and obtaining the OAuth 2.0 credentials required to use the HubSpot Marketing Campaigns connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **HubSpot Marketing Campaigns** connector, including connection setup, operation configuration, and execution flow.
 

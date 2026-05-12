@@ -17,7 +17,7 @@ This guide walks you through creating an Atlassian API token and identifying you
 3. Under **API token**, click **Create and manage API tokens**.
 4. Click **Create API token**.
 5. Enter a **Label** for the token (e.g., `Ballerina Jira Connector`) and click **Create**.
-6. Copy the generated token — this is your `password` (API token) for authentication.
+6. Copy the generated token; this is your `password` (API token) for authentication.
 
 The API token is shown only once. Store it securely and do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 

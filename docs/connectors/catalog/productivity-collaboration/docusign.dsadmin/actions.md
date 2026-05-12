@@ -8,13 +8,13 @@ The `ballerinax/docusign.dsadmin` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | DocuSign Admin API — organization, user, permission, group, export/import, and asset group management. |
+| [`Client`](#client) | DocuSign Admin API: organization, user, permission, group, export/import, and asset group management. |
 
 ---
 
 ## Client
 
-DocuSign Admin API — organization, user, permission, group, export/import, and asset group management.
+DocuSign Admin API: organization, user, permission, group, export/import, and asset group management.
 
 ### Configuration
 
@@ -27,7 +27,7 @@ DocuSign Admin API — organization, user, permission, group, export/import, and
 | `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS-related options. |
 | `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enables inbound payload validation provided by the constraint package. |
-| `laxDataBinding` | `boolean` | `true` | Enables relaxed data binding — nil values are treated as optional and absent fields as nilable. |
+| `laxDataBinding` | `boolean` | `true` | Enables relaxed data binding: nil values are treated as optional and absent fields as nilable. |
 
 ### Initializing the client
 

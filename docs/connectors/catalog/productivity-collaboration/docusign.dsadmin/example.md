@@ -46,7 +46,7 @@ Bind each connection parameter to a configurable variable so no secrets are hard
 
 - **serviceUrl** : Enter the DocuSign Admin API base URL, bound to the `docusignServiceUrl` configurable variable
 - **auth** : Set to the bearer token expression referencing the `docusignBearerToken` configurable variable using `BearerTokenConfig`
-- **connectionName** : Pre-filled as `dsadminClient` — no change required
+- **connectionName** : Pre-filled as `dsadminClient`; no change required
 
 ![DS Admin connection form fully filled with all parameters before saving](/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_02_connection_form.png)
 

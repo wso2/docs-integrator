@@ -18,7 +18,7 @@ Confluent Schema Registry is a centralized schema management service for Apache 
 
 ## Actions
 
-Actions let you interact with Confluent Schema Registry from your Ballerina integration — registering schemas and retrieving them by ID. The connector exposes a single client:
+Actions let you interact with Confluent Schema Registry from your Ballerina integration: registering schemas and retrieving them by ID. The connector exposes a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up a Confluent Schema Registry instance and obtaining the credentials required to use the connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Confluent Schema Registry** connector, including connection setup, operation configuration, and execution flow.
 

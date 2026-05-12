@@ -257,7 +257,7 @@ Parameters:
 |------|------|----------|-------------|
 | `bucketName` | `string` | Yes | The name of the bucket. |
 | `objectName` | `string` | Yes | The key of the object. |
-| `action` | `ObjectAction\|ObjectCreationHeaders\|ObjectRetrievalHeaders` | Yes | The action — `RETRIEVE` for download, `CREATE` for upload, or the relevant headers record. |
+| `action` | `ObjectAction\|ObjectCreationHeaders\|ObjectRetrievalHeaders` | Yes | The action: `RETRIEVE` for download, `CREATE` for upload, or the relevant headers record. |
 | `expires` | `int` | No | Validity period in seconds. Default is `1800` (30 minutes). |
 | `partNo` | `int?` | No | Part number for multipart uploads. |
 | `uploadId` | `string?` | No | Upload ID for multipart uploads. |

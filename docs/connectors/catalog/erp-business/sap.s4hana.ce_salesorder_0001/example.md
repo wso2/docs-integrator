@@ -74,8 +74,8 @@ In the project overview canvas, select **Add Entry Point**, choose **Automation*
 
 3. Select the **listSalesOrders** operation from the list and configure the following fields:
 
-- **resultVariable** : `ceSalesorder0001Collectionofsalesorder` — the variable that stores the returned sales order collection
-- **resultType** : `ce_salesorder_0001:CollectionOfSalesOrder` — the expected result type for the response
+- **resultVariable** : `ceSalesorder0001Collectionofsalesorder`; the variable that stores the returned sales order collection
+- **resultType** : `ce_salesorder_0001:CollectionOfSalesOrder`; the expected result type for the response
 
 Leave the optional query parameters (filter, orderby, select, skip, top) empty. Select **Save** to add the operation to the flow.
 

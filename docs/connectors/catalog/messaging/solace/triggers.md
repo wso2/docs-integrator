@@ -4,7 +4,7 @@ title: Triggers
 
 # Triggers
 
-The `ballerinax/solace` connector supports event-driven integration through a polling-based listener. When messages arrive on a subscribed queue or topic, the listener dispatches them to your service's `onMessage` callback automatically — no manual receive loop required.
+The `ballerinax/solace` connector supports event-driven integration through a polling-based listener. When messages arrive on a subscribed queue or topic, the listener dispatches them to your service's `onMessage` callback automatically; no manual receive loop required.
 
 Three components work together:
 
@@ -141,7 +141,7 @@ The `@solace:ServiceConfig` annotation accepts either queue-based (`queueName`) 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `payload` | `anydata` | Message payload — supports string, byte[], xml, json, record, and map types. |
+| `payload` | `anydata` | Message payload; supports string, byte[], xml, json, record, and map types. |
 | `correlationId` | `string?` | Optional correlation identifier for request/reply patterns. |
 | `replyTo` | `Destination?` | Optional reply-to destination (Topic or Queue). |
 | `properties` | `map?` | Optional user-defined properties (boolean, int, byte, float, or string values). |

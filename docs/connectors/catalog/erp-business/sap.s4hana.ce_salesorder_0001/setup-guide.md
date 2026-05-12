@@ -19,7 +19,7 @@ This guide walks you through configuring SAP S/4HANA Cloud to expose the Sales O
 5. Set a secure **Password** and confirm it.
 6. Click **Create**.
 
-Record the username and password securely — you will need them when configuring the Ballerina connector. Do not reuse an existing dialog user for API communication.
+Record the username and password securely; you will need them when configuring the Ballerina connector. Do not reuse an existing dialog user for API communication.
 
 ## Step 2: Create a communication system
 
@@ -38,6 +38,6 @@ Record the username and password securely — you will need them when configurin
 5. Select the communication system you created in the previous step under **Communication System**.
 6. Confirm the inbound communication user is assigned under **Inbound Communication**.
 7. Click **Save**.
-8. After saving, the arrangement details page displays the **API URL** — this is your SAP S/4HANA hostname for the connector (format: `<unique-id>-api.s4hana.cloud.sap`).
+8. After saving, the arrangement details page displays the **API URL**; this is your SAP S/4HANA hostname for the connector (format: `<unique-id>-api.s4hana.cloud.sap`).
 
 Communication scenario SAP_COM_0109 (Sales Order Integration) activates the OData v4 Sales Order API endpoint (`/sap/opu/odata4/sap/api_salesorder/srvd_a2x/sap/salesorder/0001`) used by this connector.

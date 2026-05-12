@@ -19,7 +19,7 @@ Azure Service Bus is a fully managed enterprise message broker with message queu
 
 ## Actions
 
-Actions are operations you invoke on Azure Service Bus from your integration — sending messages, receiving from queues, managing entities, and more. The ASB connector exposes actions across four clients:
+Actions are operations you invoke on Azure Service Bus from your integration. Use these actions for sending messages, receiving from queues, managing entities, and more. The ASB connector exposes actions across four clients:
 
 | Client | Actions |
 |--------|---------|
@@ -32,7 +32,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 ## Triggers
 
-Triggers allow your integration to react to messages arriving on Azure Service Bus queues or subscriptions in real time. The connector uses an `asb:Listener` that continuously receives messages and dispatches them to your service callbacks automatically — no polling required.
+Triggers allow your integration to react to messages arriving on Azure Service Bus queues or subscriptions in real time. The connector uses an `asb:Listener` that continuously receives messages and dispatches them to your service callbacks automatically; no polling required.
 
 Supported trigger events:
 
@@ -47,7 +47,7 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating an Azure Service Bus namespace, a queue or topic, and obtaining the connection string required to use the ASB connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the listener and service model.
 
@@ -55,10 +55,10 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 ## What's next
 
-- [Setup Guide](setup-guide.md) — create a namespace, queue or topic, and obtain your connection string
-- [Action Reference](actions.md) — send, receive, and administer messages
-- [Trigger Reference](triggers.md) — event-driven message consumption with `asb:Listener`
-- [Azure Service Bus event integration](../../../../develop/integration-artifacts/event/azure-service-bus.md) — configure the listener in WSO2 Integrator
+- [Setup Guide](setup-guide.md); create a namespace, queue or topic, and obtain your connection string
+- [Action Reference](actions.md): send, receive, and administer messages
+- [Trigger Reference](triggers.md): event-driven message consumption with `asb:Listener`
+- [Azure Service Bus event integration](../../../../develop/integration-artifacts/event/azure-service-bus.md): configure the listener in WSO2 Integrator
 
 ## How to contribute
 

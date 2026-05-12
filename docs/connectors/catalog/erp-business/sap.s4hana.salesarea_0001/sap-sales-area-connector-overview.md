@@ -17,7 +17,7 @@ SAP Sales Area is a core organizational unit in SAP S/4HANA Sales and Distributi
 
 ## Actions
 
-Actions are operations you invoke on SAP S/4HANA from your integration — querying the list of Sales Areas, fetching a specific Sales Area by its key, and executing batch OData requests.
+Actions are operations you invoke on SAP S/4HANA from your integration. Use these actions to query the list of Sales Areas, fetch a specific Sales Area by its key, and execute batch OData requests.
 
 | Client | Actions |
 |--------|---------|
@@ -29,7 +29,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through enabling the SAP Sales Area OData API on your SAP S/4HANA system and obtaining the credentials needed to use the connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **SAP Sales Area** connector, including connection setup, operation configuration, and execution flow.
 

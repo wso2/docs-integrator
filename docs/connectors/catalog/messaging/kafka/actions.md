@@ -245,7 +245,7 @@ Parameters:
 
 Returns: `error?`
 
-`groupId` must be set in the consumer configuration before calling `subscribe()`. Calling this method without a `groupId` causes a **panic** — not a returned error — and cannot be caught with `check`.
+`groupId` must be set in the consumer configuration before calling `subscribe()`. Calling this method without a `groupId` causes a **panic**, not a returned error, and cannot be caught with `check`.
 
 Sample code:
 

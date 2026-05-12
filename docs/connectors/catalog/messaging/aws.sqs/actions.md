@@ -23,7 +23,7 @@ Send, receive, and manage messages and queues in Amazon SQS.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `region` | `Region` | Required | AWS region where the SQS queue is located (e.g., `US_EAST_1`). |
-| `auth` | `StaticAuthConfig\|ProfileAuthConfig\|DEFAULT_CREDENTIALS` | Required | Authentication configuration — static credentials, AWS profile, or default credential chain. |
+| `auth` | `StaticAuthConfig\|ProfileAuthConfig\|DEFAULT_CREDENTIALS` | Required | Authentication configuration: static credentials, AWS profile, or default credential chain. |
 
 ### Initializing the client
 

@@ -22,7 +22,7 @@ API access may require an existing Candid subscription or partnership. Contact C
 
 1. Once approved, log in to the Candid developer portal.
 2. Navigate to your profile or API keys section.
-3. Copy your **Subscription Key** — this is the API key used to authenticate all requests.
+3. Copy your **Subscription Key**; this is the API key used to authenticate all requests.
 
 Store the Subscription Key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 

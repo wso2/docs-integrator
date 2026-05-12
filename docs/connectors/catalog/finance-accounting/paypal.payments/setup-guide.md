@@ -15,7 +15,7 @@ This guide walks you through creating a PayPal Developer account and obtaining t
 1. Log in to the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard/).
 2. Navigate to **Testing Tools** > **Sandbox Accounts**.
 3. Create a **Business** sandbox account if you do not already have one.
-4. Note the sandbox business account email — you will use this for testing.
+4. Note the sandbox business account email; you will use this for testing.
 
 PayPal automatically creates default sandbox accounts (one Business, one Personal) when you sign up. You can use these for testing.
 
@@ -31,8 +31,8 @@ PayPal automatically creates default sandbox accounts (one Business, one Persona
 ## Step 3: Get your client ID and client secret
 
 1. After creating the app, you are taken to the app details page.
-2. Copy the **Client ID** — this is your `clientId`.
-3. Click **Show** under **Secret** and copy the value — this is your `clientSecret`.
+2. Copy the **Client ID**; this is your `clientId`.
+3. Click **Show** under **Secret** and copy the value; this is your `clientSecret`.
 
 Store the Client ID and Client Secret securely. Do not commit them to source control.
 Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.

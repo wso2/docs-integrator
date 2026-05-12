@@ -14,12 +14,12 @@ DocuSign is a digital transaction management platform that enables users to secu
 - Bulk import and export users via CSV for large-scale user management
 - Export and import account settings across organization accounts
 - Manage identity providers and reserved domains for an organization
-- DSGroup management — create, list, delete groups and manage group membership (v2.1 API)
+- DSGroup management: create, list, delete groups and manage group membership (v2.1 API)
 - Product permission profile assignment and revocation for users (v2.1 API)
 
 ## Actions
 
-Actions are operations you invoke on the DocuSign Admin API from your integration — managing organizations, users, permissions, groups, exports, and imports. The connector exposes all actions through a single client:
+Actions are operations you invoke on the DocuSign Admin API from your integration. Use these actions for managing organizations, users, permissions, groups, exports, and imports. The connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a DocuSign developer account and obtaining the OAuth 2.0 credentials required to use the DocuSign Admin connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **DocuSign Admin** connector, including connection setup, operation configuration, and execution flow.
 

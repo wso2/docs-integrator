@@ -22,7 +22,7 @@ This guide walks you through setting up a Confluent Schema Registry instance and
 1. In your environment, navigate to **Schema Registry** in the left sidebar.
 2. Select a cloud provider and region for the Schema Registry instance.
 3. Click **Enable Schema Registry**.
-4. Once enabled, copy the **Schema Registry endpoint URL** — this is your `baseUrl` (e.g., `https://psrc-xxxxx.us-east-2.aws.confluent.cloud`).
+4. Once enabled, copy the **Schema Registry endpoint URL**; this is your `baseUrl` (e.g., `https://psrc-xxxxx.us-east-2.aws.confluent.cloud`).
 
 Schema Registry is enabled at the environment level. All clusters within the environment share the same Schema Registry instance.
 

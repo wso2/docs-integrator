@@ -24,7 +24,7 @@ This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 
 1. In the **Auth** tab of your app, find the **Redirect URLs** section.
 2. Add a redirect URL (e.g., `https://localhost`).
 3. Under **Scopes**, add the following scope:
-    - **transactional-email** — Required for sending transactional emails and managing SMTP tokens.
+   - **transactional-email**: Required for sending transactional emails and managing SMTP tokens.
 4. Click **Save**.
 5. Note the **Client ID** and **Client Secret** displayed at the top of the Auth page.
 

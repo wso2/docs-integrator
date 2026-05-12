@@ -18,7 +18,7 @@ PayPal is a global payments platform that enables businesses to authorize, captu
 
 ## Actions
 
-Actions are operations you invoke on PayPal from your integration — capturing authorized payments, issuing refunds, and retrieving payment details. The PayPal Payments connector exposes actions through a single client:
+Actions are operations you invoke on PayPal from your integration. Use these actions for capturing authorized payments, issuing refunds, and retrieving payment details. The PayPal Payments connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a PayPal Developer account and obtaining the OAuth 2.0 client credentials required to use the PayPal Payments connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **PayPal Payments** connector, including connection setup, operation configuration, and execution flow.
 

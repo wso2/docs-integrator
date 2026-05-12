@@ -31,12 +31,12 @@ You must have the Administrator role or the Installed Packages | Administer perm
 2. Select **API Integration** and click **Next**.
 3. Choose **Server-to-Server** as the integration type and click **Next**.
 4. Set the required permissions for your use case. Common scopes include:
-    - **Journeys**: Read, Write, Execute
-    - **Contacts**: Read, Write
-    - **Data Extensions**: Read, Write
-    - **Email**: Read, Write, Send
-    - **Hub**: Read, Write
-    - **Assets**: Read, Write
+   - **Journeys**: Read, Write, Execute
+   - **Contacts**: Read, Write
+   - **Data Extensions**: Read, Write
+   - **Email**: Read, Write, Send
+   - **Hub**: Read, Write
+   - **Assets**: Read, Write
 5. Click **Save**.
 
 Grant only the minimum permissions your integration requires. You can update permissions later.
@@ -45,10 +45,10 @@ Grant only the minimum permissions your integration requires. You can update per
 
 After saving the component, the package summary page displays:
 
-1. **Client Id** — this is your `clientId`.
-2. **Client Secret** — this is your `clientSecret`.
-3. **Account ID** (MID) — this is your `accountId`.
-4. **Authentication Base URI** — note the subdomain (e.g., `mcdev` from `https://mcdev.auth.marketingcloudapis.com/`). This is your `subDomain`.
+1. **Client Id**; this is your `clientId`.
+2. **Client Secret**; this is your `clientSecret`.
+3. **Account ID** (MID); this is your `accountId`.
+4. **Authentication Base URI**: note the subdomain (e.g., `mcdev` from `https://mcdev.auth.marketingcloudapis.com/`). This is your `subDomain`.
 
 Store the Client Id, Client Secret, and Account ID securely. Do not commit them to source control.
 Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.

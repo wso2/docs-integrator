@@ -18,7 +18,7 @@ The SAP S/4HANA SD Sold-to-Party Determination connector provides programmatic a
 
 ## Actions
 
-Actions are operations you invoke on the SAP S/4HANA SD Sold-to-Party Determination service from your integration — retrieving sold-to party assignments for delivery scheduling agreements. The connector exposes actions through a single client:
+Actions are operations you invoke on the SAP S/4HANA SD Sold-to-Party Determination service from your integration. Use these actions for retrieving sold-to party assignments for delivery scheduling agreements. The connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through configuring the SAP S/4HANA Communication Arrangement for the Sold-to-Party Assignment of Sales Scheduling Agreement Integration API and obtaining the credentials required to use the connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **SAP SD Sold-to-Party Determination** connector, including connection setup, operation configuration, and execution flow.
 

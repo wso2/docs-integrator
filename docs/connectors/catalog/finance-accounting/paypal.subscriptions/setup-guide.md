@@ -29,8 +29,8 @@ Start with the Sandbox environment during development. The sandbox has its own s
 ## Step 3: Retrieve client ID and client secret
 
 1. After the app is created, you are taken to the app detail page.
-2. Under **Credentials**, copy the **Client ID** — this is your `clientId`.
-3. Click **Show** next to **Secret** and copy the **Client Secret** — this is your `clientSecret`.
+2. Under **Credentials**, copy the **Client ID**; this is your `clientId`.
+3. Click **Show** next to **Secret** and copy the **Client Secret**; this is your `clientSecret`.
 
 Store your Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
 

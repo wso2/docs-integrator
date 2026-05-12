@@ -30,7 +30,7 @@ Perform blob CRUD operations, block staging, page blob range writes, and append 
 |-------|------|---------|-------------|
 | `accessKeyOrSAS` | <code>string</code> | Required | Azure Storage Account access key or Shared Access Signature (SAS) token. |
 | `accountName` | <code>string</code> | Required | Name of the Azure Storage account (e.g., `"myballerinastorage"`). |
-| `authorizationMethod` | <code>AuthorizationMethod</code> | Required | Authorization method — `"accessKey"` or `"SAS"`. |
+| `authorizationMethod` | <code>AuthorizationMethod</code> | Required | Authorization method: `"accessKey"` or `"SAS"`. |
 | `httpVersion` | <code>http:HttpVersion</code> | `http:HTTP_1_1` | HTTP protocol version used by the underlying HTTP client. |
 
 ### Initializing the client
@@ -283,10 +283,10 @@ Parameters:
 |------|------|----------|-------------|
 | `containerName` | <code>string</code> | Yes | Name of the container. |
 | `blobName` | <code>string</code> | Yes | Name to assign to the uploaded blob. |
-| `blobType` | <code>BlobType</code> | Yes | Blob type — `"BlockBlob"`, `"AppendBlob"`, or `"PageBlob"`. |
+| `blobType` | <code>BlobType</code> | Yes | Blob type: `"BlockBlob"`, `"AppendBlob"`, or `"PageBlob"`. |
 | `blob` | <code>byte[]</code> | No | Blob content as a byte array. Defaults to `[]` (required for BlockBlob). |
 | `properties` | <code>Properties?</code> | No | Optional content type, encoding, MD5, and metadata. |
-| `pageBlobLength` | <code>int?</code> | No | Required for PageBlob — specifies the size in bytes. |
+| `pageBlobLength` | <code>int?</code> | No | Required for PageBlob: specifies the size in bytes. |
 
 Returns: `ResponseHeaders|Error`
 
@@ -648,7 +648,7 @@ Parameters:
 |------|------|----------|-------------|
 | `containerName` | <code>string</code> | Yes | Name of the container. |
 | `pageBlobName` | <code>string</code> | Yes | Name of the page blob. |
-| `operation` | <code>PageOperation</code> | Yes | Page operation — `"update"` to write content, `"clear"` to zero out the range. |
+| `operation` | <code>PageOperation</code> | Yes | Page operation: `"update"` to write content, `"clear"` to zero out the range. |
 | `byteRange` | <code>ByteRange</code> | Yes | Byte range to update (must be 512-byte aligned). |
 | `content` | <code>byte[]?</code> | No | Page content to write (required for `update` operation). |
 
@@ -818,7 +818,7 @@ Manage containers and query storage account-level information.
 |-------|------|---------|-------------|
 | `accessKeyOrSAS` | <code>string</code> | Required | Azure Storage Account access key or Shared Access Signature (SAS) token. |
 | `accountName` | <code>string</code> | Required | Name of the Azure Storage account. |
-| `authorizationMethod` | <code>AuthorizationMethod</code> | Required | Authorization method — `"accessKey"` or `"SAS"`. |
+| `authorizationMethod` | <code>AuthorizationMethod</code> | Required | Authorization method: `"accessKey"` or `"SAS"`. |
 | `httpVersion` | <code>http:HttpVersion</code> | `http:HTTP_1_1` | HTTP protocol version used by the underlying HTTP client. |
 
 ### Initializing the client
@@ -850,7 +850,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `containerName` | <code>string</code> | Yes | Name for the new container. |
-| `accessLevel` | <code>AccessLevel?</code> | No | Public access level — `"container"` or `"blob"`. Defaults to private. |
+| `accessLevel` | <code>AccessLevel?</code> | No | Public access level: `"container"` or `"blob"`. Defaults to private. |
 | `metadata` | <code>map&lt;string&gt;?</code> | No | Name-value pairs to associate with the container as metadata. |
 | `clientRequestId` | <code>string?</code> | No | Client-generated opaque value recorded in storage analytics logs. |
 
@@ -1127,7 +1127,7 @@ Manage files and directories within Azure File Shares.
 |-------|------|---------|-------------|
 | `accessKeyOrSAS` | <code>string</code> | Required | Azure Storage Account access key or Shared Access Signature (SAS) token. |
 | `accountName` | <code>string</code> | Required | Name of the Azure Storage account. |
-| `authorizationMethod` | <code>AuthorizationMethod</code> | Required | Authorization method — `"accessKey"` or `"SAS"`. |
+| `authorizationMethod` | <code>AuthorizationMethod</code> | Required | Authorization method: `"accessKey"` or `"SAS"`. |
 | `httpVersion` | <code>http:HttpVersion</code> | `http:HTTP_1_1` | HTTP protocol version used by the underlying HTTP client. |
 
 ### Initializing the client
@@ -1495,7 +1495,7 @@ Manage Azure File Shares and configure file service properties.
 |-------|------|---------|-------------|
 | `accessKeyOrSAS` | <code>string</code> | Required | Azure Storage Account access key or Shared Access Signature (SAS) token. |
 | `accountName` | <code>string</code> | Required | Name of the Azure Storage account. |
-| `authorizationMethod` | <code>AuthorizationMethod</code> | Required | Authorization method — `"accessKey"` or `"SAS"`. |
+| `authorizationMethod` | <code>AuthorizationMethod</code> | Required | Authorization method: `"accessKey"` or `"SAS"`. |
 | `httpVersion` | <code>http:HttpVersion</code> | `http:HTTP_1_1` | HTTP protocol version used by the underlying HTTP client. |
 
 ### Initializing the client

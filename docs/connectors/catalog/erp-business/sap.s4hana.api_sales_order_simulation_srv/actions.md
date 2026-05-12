@@ -20,7 +20,7 @@ Simulates SAP S/4HANA sales order creation and manages associated value-added se
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|http:CredentialsConfig` | Required | Authentication configuration — Basic credentials, Bearer token, or OAuth 2.0 refresh token grant. |
+| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|http:CredentialsConfig` | Required | Authentication configuration: Basic credentials, Bearer token, or OAuth 2.0 refresh token grant. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use for requests. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
 | `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for transient request failures. |
@@ -257,7 +257,7 @@ salesOrderSim:A_SlsOrdSimlnValAddedSrvcWrapper result = check simClient->createA
     SalesOrderItem: "000010",
     ValueAddedServiceProduct: "PACK_SERVICE",
     ValAddedSrvcHasToBeOrdered: true,
-    ValueAddedServiceText1: "Fragile — handle with care"
+    ValueAddedServiceText1: "Fragile, handle with care"
 });
 ```
 
@@ -272,7 +272,7 @@ Sample response:
     "SalesOrderItem": "000010",
     "ValueAddedServiceProduct": "PACK_SERVICE",
     "ValAddedSrvcHasToBeOrdered": true,
-    "ValueAddedServiceText1": "Fragile — handle with care"
+    "ValueAddedServiceText1": "Fragile, handle with care"
   }
 }
 ```
@@ -307,7 +307,7 @@ http:Response response = check simClient->patchA_SlsOrdSimlnValAddedSrvc(
     "000010",
     {
         d: {
-            ValueAddedServiceText1: "Priority packaging — expedite",
+            ValueAddedServiceText1: "Priority packaging, expedite",
             ValAddedSrvcHasToBeOrdered: true
         }
     }

@@ -37,8 +37,8 @@ The listener supports the following connection strategies:
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `connectionString` | `string` | Required | The Azure Service Bus connection string. |
-| `entityConfig` | `QueueConfig|TopicSubsConfig` | Required | Entity configuration — either `{queueName: "..."}` for queues or `{topicName: "...", subscriptionName: "..."}` for topic subscriptions. |
-| `receiveMode` | `PEEK_LOCK|RECEIVE_AND_DELETE` | `PEEK_LOCK` | The receive mode. `PEEK_LOCK` requires explicit settlement; `RECEIVE_AND_DELETE` auto-removes on receive. |
+| `entityConfig` | `QueueConfig\|TopicSubsConfig` | Required | Entity configuration: either `{queueName: "..."}` for queues or `{topicName: "...", subscriptionName: "..."}` for topic subscriptions. |
+| `receiveMode` | `PEEK_LOCK\|RECEIVE_AND_DELETE` | `PEEK_LOCK` | The receive mode. `PEEK_LOCK` requires explicit settlement; `RECEIVE_AND_DELETE` auto-removes on receive. |
 | `maxAutoLockRenewDuration` | `int` | `300` | Maximum duration (in seconds) to automatically renew the message lock. |
 | `amqpRetryOptions` | `AmqpRetryOptions` | `()` | Retry options for AMQP operations. |
 | `autoComplete` | `boolean` | `true` | Whether to automatically complete messages after the `onMessage` callback returns successfully. Set to `false` to use manual settlement via the `Caller`. |
@@ -93,8 +93,8 @@ An `asb:Service` is a Ballerina service attached to an `asb:Listener`. It implem
 
 | Function | Signature | Description |
 |----------|-----------|-------------|
-| `onMessage` | `remote function onMessage(asb:Message message) returns error?` or `remote function onMessage(asb:Message message, asb:Caller caller) returns error?` | Invoked when a message is received. Include `asb:Caller` only when using `autoComplete: false` for manual settlement. When `autoComplete: true` (default), omit `caller` — messages are completed automatically. |
-| `onError` | `remote function onError(asb:MessageRetrievalError 'error) returns error?` | Invoked when an error occurs during message retrieval. Optional — if not implemented, retrieval errors are logged but not surfaced to your code. |
+| `onMessage` | `remote function onMessage(asb:Message message) returns error?` or `remote function onMessage(asb:Message message, asb:Caller caller) returns error?` | Invoked when a message is received. Include `asb:Caller` only when using `autoComplete: false` for manual settlement. When `autoComplete: true` (default), omit `caller`: messages are completed automatically. |
+| `onError` | `remote function onError(asb:MessageRetrievalError 'error) returns error?` | Invoked when an error occurs during message retrieval. Optional: if not implemented, retrieval errors are logged but not surfaced to your code. |
 
 When `autoComplete` is `true` (the default), messages are automatically completed after `onMessage` returns successfully. Set it to `false` for manual settlement.
 
@@ -167,10 +167,10 @@ The `onError` callback is optional. If not implemented, retrieval errors are log
 
 | Method | Parameters | Returns | Description |
 |--------|------------|---------|-------------|
-| `complete` | — | `error?` | Completes the message, removing it from the queue. |
-| `abandon` | `*propertiesToModify` — optional rest-record of `anydata` key-value pairs to set on the message before releasing the lock | `error?` | Abandons the message, releasing its lock for redelivery. |
-| `deadLetter` | `*DeadLetterOptions` — optional `deadLetterReason: string`, `deadLetterErrorDescription: string`, `propertiesToModify: map<anydata>` | `error?` | Moves the message to the dead-letter sub-queue. |
-| `defer` | `*propertiesToModify` — optional rest-record of `anydata` key-value pairs | `error?` | Defers the message. Unlike `MessageReceiver.defer()`, this does not return the sequence number — read `message.sequenceNumber` before calling if you need it. Retrieve the deferred message via `receiver->receiveDeferred(sequenceNumber)`. |
+| `complete` | `-` | `error?` | Completes the message, removing it from the queue. |
+| `abandon` | `*propertiesToModify`: optional rest-record of `anydata` key-value pairs to set on the message before releasing the lock | `error?` | Abandons the message, releasing its lock for redelivery. |
+| `deadLetter` | `*DeadLetterOptions`: optional `deadLetterReason: string`, `deadLetterErrorDescription: string`, `propertiesToModify: map<anydata>` | `error?` | Moves the message to the dead-letter sub-queue. |
+| `defer` | `*propertiesToModify`: optional rest-record of `anydata` key-value pairs | `error?` | Defers the message. Unlike `MessageReceiver.defer()`, this does not return the sequence number: read `message.sequenceNumber` before calling if you need it. Retrieve the deferred message via `receiver->receiveDeferred(sequenceNumber)`. |
 
 ### `MessageRetrievalError`
 
@@ -196,6 +196,6 @@ remote function onError(asb:MessageRetrievalError err) returns error? {
 
 ## What's next
 
-- [Action Reference](actions.md) — use `MessageReceiver` for polling-based message consumption
-- [Setup Guide](setup-guide.md) — obtain the connection string required for the listener
-- [Example](example.md) — complete worked example for event-driven trigger setup
+- [Action Reference](actions.md); use `MessageReceiver` for polling-based message consumption
+- [Setup Guide](setup-guide.md): obtain the connection string required for the listener
+- [Example](example.md): complete worked example for event-driven trigger setup

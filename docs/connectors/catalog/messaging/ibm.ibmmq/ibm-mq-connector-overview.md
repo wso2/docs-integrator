@@ -19,7 +19,7 @@ IBM MQ is an enterprise messaging middleware that enables applications to commun
 
 ## Actions
 
-Actions are operations you invoke on IBM MQ from your integration — putting messages onto queues, getting messages, publishing to topics, and managing connections. The IBM MQ connector exposes actions across three types:
+Actions are operations you invoke on IBM MQ from your integration. Use these actions for putting messages onto queues, getting messages, publishing to topics, and managing connections. The IBM MQ connector exposes actions across three types:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 ## Triggers
 
-Triggers allow your integration to react to messages arriving on IBM MQ queues or topics in real time. The connector provides a `ibmmq:Listener` that polls for messages and invokes your service's `onMessage` callback automatically — no manual polling loop required.
+Triggers allow your integration to react to messages arriving on IBM MQ queues or topics in real time. The connector provides a `ibmmq:Listener` that polls for messages and invokes your service's `onMessage` callback automatically; no manual polling loop required.
 
 Supported trigger events:
 
@@ -45,7 +45,7 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up an IBM MQ queue manager and creating the queues and topics required to use the IBM MQ connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the listener and service model.
 

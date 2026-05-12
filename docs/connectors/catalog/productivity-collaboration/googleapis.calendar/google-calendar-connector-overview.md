@@ -8,7 +8,7 @@ Google Calendar is a time-management and scheduling service developed by Google 
 
 ## Key features
 
-- Full CRUD operations on calendars — create, list, and delete calendars
+- Full CRUD operations on calendars: create, list, and delete calendars
 - Create, update, retrieve, and delete calendar events with rich metadata (attendees, reminders, recurrence, conference data)
 - Quick-add events from simple text descriptions, letting Google parse date/time/title automatically
 - Stream-based retrieval of calendars and events for efficient processing of large result sets
@@ -19,7 +19,7 @@ Google Calendar is a time-management and scheduling service developed by Google 
 
 ## Actions
 
-Actions are operations you invoke on Google Calendar from your integration — creating calendars, scheduling events, querying event lists, and more. The connector exposes all actions through a single client:
+Actions are operations you invoke on Google Calendar from your integration. Use these actions for creating calendars, scheduling events, querying event lists, and more. The connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Google Cloud Platform project and obtaining the OAuth 2.0 credentials required to use the Google Calendar connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Google Calendar** connector, including connection setup, operation configuration, and execution flow.
 

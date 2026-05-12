@@ -20,7 +20,7 @@ Provides read access to SAP S/4HANA sales organization master data via the API_S
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:CredentialsConfig` | Required | SAP user credentials — provide `username` and `password`. |
+| `auth` | `http:CredentialsConfig` | Required | SAP user credentials; provide `username` and `password`. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
 | `http1Settings` | `ClientHttp1Settings` | `()` | HTTP/1.x client settings including keep-alive, chunking, and proxy. |
 | `http2Settings` | `http:ClientHttp2Settings` | `()` | HTTP/2 client settings. |

@@ -45,7 +45,7 @@ In the **WSO2 Integrator** sidebar, hover over the **Connections** tree item and
 
 In the **Configure Jira** form, bind each field to a configurable variable:
 
-- **Config** : Accepts a `jira:ConnectionConfig` record — select the **Record** toggle and set `auth.token` to a new configurable variable `jiraToken` (type `string`, no default value)
+- **Config** : Accepts a `jira:ConnectionConfig` record; select the **Record** toggle and set `auth.token` to a new configurable variable `jiraToken` (type `string`, no default value)
 - **Service Url** : Expand **Advanced Configurations**, open the helper panel for **Service Url**, and create a new configurable variable `jiraServiceUrl` (type `string`)
 - **Connection Name** : Leave the default value `jiraClient`
 
@@ -87,7 +87,7 @@ The Automation (`main`) appears under **Entry Points** in the sidebar and the fl
 
 Configure the following parameters:
 
-- **Payload** : A `jira:IssueUpdateDetails` record containing `fields` with `summary`, `project.key`, and `issuetype.name` — for example, `{fields: {"summary": "Integration test issue", "project": {"key": "PROJ"}, "issuetype": {"name": "Task"}}}`
+- **Payload** : A `jira:IssueUpdateDetails` record containing `fields` with `summary`, `project.key`, and `issuetype.name`; for example, `{fields: {"summary": "Integration test issue", "project": {"key": "PROJ"}, "issuetype": {"name": "Task"}}}`
 - **Result** : `jiraCreatedissue` (auto-generated)
 
 > **Tip:** Replace `"PROJ"` with your actual Jira project key and update `summary` for your use case.
@@ -110,5 +110,5 @@ Try this sample in WSO2 Integration Platform.
 
 The `Jira` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-jira/tree/main/examples/), covering the following use cases:
 
-1. [**Create Project and Issue**](https://github.com/ballerina-platform/module-ballerinax-jira/tree/main/examples/create_project_and_issue/) - Creates a new Jira project and adds an issue to it.
-2. [**Create Issue and Add Comment**](https://github.com/ballerina-platform/module-ballerinax-jira/tree/main/examples/create_issue_and_add_comment/) - Creates a new issue in an existing Jira project and adds a comment to it.
+1. [**Create Project and Issue**](https://github.com/ballerina-platform/module-ballerinax-jira/tree/main/examples/create_project_and_issue/): Creates a new Jira project and adds an issue to it.
+2. [**Create Issue and Add Comment**](https://github.com/ballerina-platform/module-ballerinax-jira/tree/main/examples/create_issue_and_add_comment/): Creates a new issue in an existing Jira project and adds a comment to it.

@@ -24,7 +24,7 @@ This guide walks you through setting up your SAP S/4HANA system to allow API acc
 6. Select the **Authentication Method** (e.g., User ID and Password) and choose or create a **Communication User**.
 7. Click **Save**.
 
-Record the Communication User credentials (username and password) — you will need them to configure the Ballerina client.
+Record the Communication User credentials (username and password); you will need them to configure the Ballerina client.
 
 ## Step 3: Create a communication arrangement
 
@@ -43,6 +43,6 @@ After saving the Communication Arrangement, the API hostname will be displayed i
 <unique-id>-api.s4hana.cloud.sap
 ```
 
-Copy this hostname — you will use it as the base URL when configuring your connector.
+Copy this hostname; you will use it as the base URL when configuring your connector.
 
 The full API endpoint URL is typically constructed as `https://<hostname>/sap/opu/odata/sap/<SERVICE_NAME>` for OData V2 services or the appropriate path for your target API.

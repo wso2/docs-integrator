@@ -25,8 +25,8 @@ In SAP S/4HANA Cloud (public edition), standard OData APIs are active by default
 
 1. Open transaction **SU01** (User Maintenance) and navigate to the target user.
 2. On the **Roles** or **Profiles** tab, assign one of the following depending on your landscape:
-    - SAP standard role `SAP_SD_BC_SALES_INQUIRY_READ` (read access to sales inquiry API), or
-    - A custom role containing authorization object `S_SERVICE` with the field `SRV_NAME` = `API_SALES_INQUIRY_SRV`.
+   - SAP standard role `SAP_SD_BC_SALES_INQUIRY_READ` (read access to sales inquiry API), or
+   - A custom role containing authorization object `S_SERVICE` with the field `SRV_NAME` = `API_SALES_INQUIRY_SRV`.
 3. Save the user record.
 
 Ask your SAP Basis administrator to review the required authorization objects. The API also requires general OData access authorizations such as `S_RFC` for the remote function group `SADL_GW_ODATA_SRV_CALL`.
@@ -35,13 +35,13 @@ Ask your SAP Basis administrator to review the required authorization objects. T
 
 The connector requires the hostname (or IP address) of the SAP system's HTTP/HTTPS endpoint.
 
-1. Confirm the HTTPS port with your SAP Basis team — the default is `443` for HTTPS.
+1. Confirm the HTTPS port with your SAP Basis team: the default is `443` for HTTPS.
 2. The base URL for the service will be:
-    ```
+    ```bash
     https://<hostname>:<port>/sap/opu/odata/sap/API_SALES_INQUIRY_SRV
     ```
 3. Verify connectivity from your integration host by opening the above URL in a browser or
-   using a REST client — you should receive an OData service document (XML or JSON).
+   using a REST client: you should receive an OData service document (XML or JSON).
 
 If your SAP system uses a self-signed or internal CA certificate, you will need to configure the `secureSocket` option in `ConnectionConfig` to trust that certificate, or import it into the Java trust store used by your Ballerina runtime.
 

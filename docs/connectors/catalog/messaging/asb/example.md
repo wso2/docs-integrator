@@ -159,7 +159,7 @@ Bind each connection parameter to a configurable variable so sensitive values ar
 
 - **connectionString** : The Azure Service Bus primary or secondary connection string
 - **entityConfig** : A `QueueConfig` record specifying the target queue name (`asbQueueName`)
-- **Connection Name** : A unique name for this connection — enter `asbMessagereceiver`
+- **Connection Name** : A unique name for this connection; enter `asbMessagereceiver`
 
 ![ASB MessageReceiver connection form fully filled with all parameters before saving](/img/connectors/catalog/messaging/asb/asb_screenshot_02_connection_form.png)
 
@@ -299,7 +299,7 @@ In the service view, select **+ Add Handler**. The **Select Handler to Add** sid
 
 Select **onMessage** from the side panel to register the handler.
 
-> **Note:** Azure Service Bus uses the library-defined `asb:Message` type—there's no **Define Value / Create Type Schema** modal for this trigger. The message schema is fixed by the `ballerinax/asb` package.
+> **Note:** Azure Service Bus uses the library-defined `asb:Message` type; there's no **Define Value / Create Type Schema** modal for this trigger. The message schema is fixed by the `ballerinax/asb` package.
 
 Select the **onMessage** row in the service view to open the flow canvas.
 
@@ -321,9 +321,9 @@ Select **Run Integration** (▶) in the WSO2 Integrator toolbar to start the lis
 
 To fire a test event, use one of the following approaches:
 
-1. **Azure Portal** — navigate to your Service Bus namespace, open the queue, select **Service Bus Explorer**, and use **Send messages** to publish a test message directly from the browser.
-2. **Azure CLI** — use `az rest` to call the Service Bus REST API: `az rest --method POST --uri https://<namespace>.servicebus.windows.net/<queue-name>/messages --auth-type key-auth --resource https://servicebus.azure.net --body '{"hello":"world"}'` to send a message from the command line.
-3. **Azure SDK client** — use the Azure Service Bus SDK for your preferred language (JavaScript, Python, Java, or .NET) to send a message programmatically.
+1. **Azure Portal**: navigate to your Service Bus namespace, open the queue, select **Service Bus Explorer**, and use **Send messages** to publish a test message directly from the browser.
+2. **Azure CLI**; use `az rest` to call the Service Bus REST API: `az rest --method POST --uri https://<namespace>.servicebus.windows.net/<queue-name>/messages --auth-type key-auth --resource https://servicebus.azure.net --body '{"hello":"world"}'` to send a message from the command line.
+3. **Azure SDK client**; use the Azure Service Bus SDK for your preferred language (JavaScript, Python, Java, or .NET) to send a message programmatically.
 
 After a message is sent, the console prints output similar to:
 
@@ -341,6 +341,6 @@ Try this sample in WSO2 Integration Platform.
 
 ## What's next
 
-- [Action Reference](actions.md) — full reference for all client operations
-- [Trigger Reference](triggers.md) — detailed listener and service configuration
-- [Setup Guide](setup-guide.md) — Azure Service Bus namespace and connection string setup
+- [Action Reference](actions.md): full reference for all client operations
+- [Trigger Reference](triggers.md): detailed listener and service configuration
+- [Setup Guide](setup-guide.md): Azure Service Bus namespace and connection string setup

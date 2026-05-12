@@ -8,13 +8,13 @@ The `ballerinax/wso2.apim.catalog` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manage WSO2 APIM Service Catalog entries — CRUD, definition retrieval, usage lookup, import/export, and settings. |
+| [`Client`](#client) | Manage WSO2 APIM Service Catalog entries: CRUD, definition retrieval, usage lookup, import/export, and settings. |
 
 ---
 
 ## Client
 
-Manage WSO2 APIM Service Catalog entries — CRUD, definition retrieval, usage lookup, import/export, and settings.
+Manage WSO2 APIM Service Catalog entries: CRUD, definition retrieval, usage lookup, import/export, and settings.
 
 ### Configuration
 

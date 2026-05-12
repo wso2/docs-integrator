@@ -5,7 +5,7 @@
 This integration demonstrates how to connect to the SAP S/4HANA Sales & Distribution Incoterms API using the `ballerinax/sap.s4hana.api_sd_incoterms_srv` connector. It uses an Automation entry point to periodically fetch incoterms classification records from SAP S/4HANA and logs the retrieved data for downstream processing. The complete low-code flow runs on a schedule and chains an Automation trigger → SAP Incoterms remote function call → Log output in a single canvas.
 
 **Operations used:**
-- **listA_IncotermsClassifications** — Reads the IDs and descriptions of all Incoterms classifications from the SAP S/4HANA Sales & Distribution API
+- **listA_IncotermsClassifications**: Reads the IDs and descriptions of all Incoterms classifications from the SAP S/4HANA Sales & Distribution API
 
 ## Architecture
 
@@ -82,7 +82,7 @@ In the left panel of WSO2 Integrator, select **Configurations** (listed at the b
 ![Connection node expanded in the node panel showing all available SAP Incoterms operations before selection](/img/connectors/catalog/erp-business/sap.s4hana.api_sd_incoterms_srv/sap_s4hana_apisdincotermssrv_screenshot_04_operations_panel.png)
 
 3. Select **listA_IncotermsClassifications** from the list of available operations, then fill in the operation fields:
-   - **Result** : The local variable name to store the operation's return value, set to `result`
+  - **Result** : The local variable name to store the operation's return value, set to `result`
 4. Select **Save** to add the operation step to the automation flow.
 
 ![Operation configuration form showing all input fields filled and result variable bound](/img/connectors/catalog/erp-business/sap.s4hana.api_sd_incoterms_srv/sap_s4hana_apisdincotermssrv_screenshot_05_operation_filled.png)

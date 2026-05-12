@@ -14,11 +14,11 @@ SAP is a global leader in enterprise resource planning (ERP) software, offering 
 - Automatic CSRF token fetching and injection for mutating requests (POST, PUT, PATCH, DELETE)
 - Configurable authentication including Basic Auth, OAuth 2.0, and Bearer Token
 - Compatible with SAP S/4HANA, SAP BTP, and other SAP product APIs exposed over HTTP/OData
-- Flexible target type binding — responses can be bound to `json`, `xml`, `record {}`, or `http:Response`
+- Flexible target type binding: responses can be bound to `json`, `xml`, `record {}`, or `http:Response`
 
 ## Actions
 
-Actions are HTTP operations you invoke against SAP API endpoints — reading sales orders, creating business partners, updating materials, and more. The SAP connector exposes a single client with full HTTP method support:
+Actions are HTTP operations you invoke against SAP API endpoints. Use these actions for reading sales orders, creating business partners, updating materials, and more. The SAP connector exposes a single client with full HTTP method support:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up your SAP S/4HANA system to allow API access by creating a Communication System and Communication Arrangement.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **SAP** connector, including connection setup, operation configuration, and execution flow.
 

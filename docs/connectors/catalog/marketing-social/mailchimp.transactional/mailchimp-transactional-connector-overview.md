@@ -9,7 +9,7 @@ Mailchimp Transactional (formerly Mandrill) is a powerful transactional email se
 ## Key features
 
 - Send transactional emails with full control over recipients, content, attachments, and merge variables
-- Template management — create, update, publish, render, and delete reusable email templates
+- Template management: create, update, publish, render, and delete reusable email templates
 - Send template-based emails with dynamic content substitution via merge variables
 - Message search and delivery tracking with time-series analytics
 - Webhook lifecycle management for real-time event notifications (bounces, opens, clicks)
@@ -19,7 +19,7 @@ Mailchimp Transactional (formerly Mandrill) is a powerful transactional email se
 
 ## Actions
 
-Actions are operations you invoke on Mailchimp Transactional from your integration — sending emails, managing templates, configuring webhooks, and more. The connector exposes a single client with resource functions covering all Mandrill API endpoints.
+Actions are operations you invoke on Mailchimp Transactional from your integration. Use these actions for sending emails, managing templates, configuring webhooks, and more. The connector exposes a single client with resource functions covering all Mandrill API endpoints.
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Mailchimp Transactional (Mandrill) account and obtaining the API key required to use the connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for the client: operations, parameters, return types, and sample code.
 
 ## How to contribute
 

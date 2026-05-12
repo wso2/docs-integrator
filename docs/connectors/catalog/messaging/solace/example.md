@@ -49,7 +49,7 @@ Bind all sensitive parameters to configurable variables so they can be overridde
 
 - **Host URL** : The Solace broker host URL
 - **Message VPN** : The message VPN name on the broker
-- **Auth** : Authentication configuration — enter the record literal referencing `solaceUsername` and `solacePassword` configurable variables in Expression mode
+- **Auth** : Authentication configuration; enter the record literal referencing `solaceUsername` and `solacePassword` configurable variables in Expression mode
 - **Username** (inside Auth) : Username for basic authentication
 - **Password** (inside Auth) : Password for basic authentication
 
@@ -84,7 +84,7 @@ Open the **Automation** entry point (`main`) in the WSO2 Integrator panel under 
 
 Select **Send** from the operations list. The **Send** operation form opens with the title `solaceMessageproducer → send`. Configure the following parameter:
 
-- **Message** : A `solace:Message` record — set the `payload` field to `"Hello from Solace!"`
+- **Message** : A `solace:Message` record; set the `payload` field to `"Hello from Solace!"`
 
 ![Solace MessageProducer Send operation configuration filled with all values](/img/connectors/catalog/messaging/solace/solace_producer_screenshot_05_operation_filled.png)
 
@@ -257,7 +257,7 @@ In the left panel of WSO2 Integrator, select **Configurations** (at the bottom o
 
 #### Step 4: Select Create to register the listener and open the Service view
 
-After binding all parameters and setting configuration values, select **Create** on the trigger configuration form. The Solace listener is automatically registered and the Service view opens, showing the listener chip—no separate "Add Listener" step is required.
+After binding all parameters and setting configuration values, select **Create** on the trigger configuration form. The Solace listener is automatically registered and the Service view opens, showing the listener chip; no separate "Add Listener" step is required.
 
 ### Handling Solace events
 
@@ -274,10 +274,10 @@ After binding all parameters and setting configuration values, select **Create**
 2. In the **Message Configuration** section, select **Define Value** to open the modal.
 3. Select the **Create Type Schema** tab.
 4. In the **Name** field, enter `SolaceMessagePayload`.
-5. Select the **+** icon next to **Fields** to add each payload field—enter the field name and a type for each. Add the following fields:
-   - `messageId` — `string`
-   - `content` — `string`
-   - `destination` — `string`
+5. Select the **+** icon next to **Fields** to add each payload field; enter the field name and a type for each. Add the following fields:
+  - `messageId`: `string`
+  - `content`: `string`
+  - `destination`: `string`
 6. Select **Save** to create the record type and close the modal.
 
 ![Define Value modal on the Create Type Schema tab showing the SolaceMessagePayload record name and fields filled in before Save](/img/connectors/catalog/messaging/solace/solace_trigger_screenshots_05_message_define_value.png)
@@ -302,7 +302,7 @@ Select the back arrow in the canvas header (or re-select the Solace trigger serv
 
 1. In the WSO2 Integrator panel, select **Run** to start the integration. Wait for the listener to connect to the Solace broker (watch for a "Listening on queue/topic" log line).
 2. Send a test message using one of the following approaches:
-   - **A separate WSO2 Integrator Solace Producer integration** (recommended)—assemble a Solace producer from the same low-code canvas and publish a test message to the same queue or topic.
-   - **Solace's `sdkperf` CLI tool**—run the tool targeting your broker's SMF host, client username, password, and queue name to publish a single persistent message.
-   - **The Solace PubSub+ Manager web console**—navigate to **Queues → Try Me** (for queues) or **Try Me** (for direct topics) in the broker's management UI and publish a test message body such as `{"messageId":"msg-001","content":"hello solace","destination":"test/queue"}`.
-3. Observe the integration's log output—the payload JSON string should appear printed by `log:printInfo`, confirming end-to-end message receipt and deserialization.
+  - **A separate WSO2 Integrator Solace Producer integration** (recommended): assemble a Solace producer from the same low-code canvas and publish a test message to the same queue or topic.
+  - **Solace's `sdkperf` CLI tool**: run the tool targeting your broker's SMF host, client username, password, and queue name to publish a single persistent message.
+  - **The Solace PubSub+ Manager web console**: navigate to **Queues → Try Me** (for queues) or **Try Me** (for direct topics) in the broker's management UI and publish a test message body such as `{"messageId":"msg-001","content":"hello solace","destination":"test/queue"}`.
+3. Observe the integration's log output. The payload JSON string should appear printed by `log:printInfo`, confirming end-to-end message receipt and deserialization.

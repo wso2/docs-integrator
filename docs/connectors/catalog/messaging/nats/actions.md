@@ -56,7 +56,7 @@ nats:Client natsClient = check new (natsUrl,
 <details>
 <summary>publishMessage</summary>
 
-Publishes a message to a NATS subject. This is a fire-and-forget operation — no acknowledgement is returned by the broker.
+Publishes a message to a NATS subject. This is a fire-and-forget operation; no acknowledgement is returned by the broker.
 
 Parameters:
 
@@ -402,7 +402,7 @@ Sample code:
 
 ```ballerina
 nats:JetStreamMessage msg = check jsClient->consumeMessage("orders.new", 5.0);
-// Processing failed — redeliver
+// Processing failed: redeliver
 jsClient->nak(msg);
 ```
 

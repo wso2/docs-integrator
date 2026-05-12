@@ -24,7 +24,7 @@ This guide walks you through registering an application in Microsoft Entra ID (A
 ## Step 2: Get the client ID
 
 1. After registration, you are taken to the application's Overview page.
-2. Copy the **Application (client) ID** — this is your `clientId`.
+2. Copy the **Application (client) ID**; this is your `clientId`.
 
 ## Step 3: Create a client secret
 
@@ -32,7 +32,7 @@ This guide walks you through registering an application in Microsoft Entra ID (A
 2. Under **Client secrets**, click **New client secret**.
 3. Enter a description (e.g., `Ballerina connector secret`) and select an expiration period.
 4. Click **Add**.
-5. Copy the **Value** of the newly created secret — this is your `clientSecret`.
+5. Copy the **Value** of the newly created secret; this is your `clientSecret`.
 
 The client secret value is shown only once. Copy it immediately and store it securely. You cannot retrieve it later.
 
@@ -41,11 +41,11 @@ The client secret value is shown only once. Copy it immediately and store it sec
 1. In the left menu, click **API permissions**.
 2. Click **Add a permission** > **Microsoft Graph** > **Delegated permissions**.
 3. Add the following permissions:
-    - `Files.Read`
-    - `Files.Read.All`
-    - `Files.ReadWrite`
-    - `Files.ReadWrite.All`
-    - `offline_access`
+   - `Files.Read`
+   - `Files.Read.All`
+   - `Files.ReadWrite`
+   - `Files.ReadWrite.All`
+   - `offline_access`
 4. Click **Add permissions**.
 5. If required by your organization, click **Grant admin consent** and confirm.
 

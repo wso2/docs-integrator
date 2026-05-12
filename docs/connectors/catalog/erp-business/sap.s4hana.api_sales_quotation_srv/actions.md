@@ -1339,7 +1339,7 @@ http:Response batchResponse = check quotationClient->performBatchOperation(batch
 Sample response:
 
 ```ballerina
-HTTP 200 OK — multipart/mixed body containing individual sub-response parts
+HTTP 200 OK: multipart/mixed body containing individual sub-response parts
 ```
 
 </details>

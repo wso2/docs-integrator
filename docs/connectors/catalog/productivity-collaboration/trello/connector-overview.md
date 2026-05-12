@@ -19,7 +19,7 @@ Trello is a web-based project management tool that uses boards, lists, and cards
 
 ## Actions
 
-Actions are operations you invoke on Trello from your integration — creating cards, managing boards, assigning members, and more. The Trello connector exposes all actions through a single client:
+Actions are operations you invoke on Trello from your integration. Use these actions for creating cards, managing boards, assigning members, and more. The Trello connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through obtaining a Trello API key and token required to use the Trello connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Trello** connector, including connection setup, operation configuration, and execution flow.
 

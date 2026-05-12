@@ -4,7 +4,7 @@ title: Triggers
 
 # Triggers
 
-The `ballerinax/kafka` connector supports event-driven message consumption through a `kafka:Listener` that continuously polls Kafka topics and dispatches batches of records to your `kafka:Service` callback — eliminating the need for manual poll loops.
+The `ballerinax/kafka` connector supports event-driven message consumption through a `kafka:Listener` that continuously polls Kafka topics and dispatches batches of records to your `kafka:Service` callback, eliminating the need for manual poll loops.
 
 Three components work together:
 
@@ -92,8 +92,8 @@ A `kafka:Service` is a Ballerina service attached to a `kafka:Listener`. It impl
 
 | Function | Signature | Description |
 |----------|-----------|-------------|
-| `onConsumerRecord` | `remote function onConsumerRecord(kafka:Caller caller, kafka:BytesConsumerRecord[] records) returns error?` | Standard form — caller first, records second. |
-| `onConsumerRecord` | `remote function onConsumerRecord(kafka:BytesConsumerRecord[] records, kafka:Caller caller) returns error?` | Parameter order can be reversed — records first, caller second. |
+| `onConsumerRecord` | `remote function onConsumerRecord(kafka:Caller caller, kafka:BytesConsumerRecord[] records) returns error?` | Standard form: caller first, records second. |
+| `onConsumerRecord` | `remote function onConsumerRecord(kafka:BytesConsumerRecord[] records, kafka:Caller caller) returns error?` | Parameter order can be reversed: records first, caller second. |
 | `onConsumerRecord` | `remote function onConsumerRecord(kafka:BytesConsumerRecord[] records) returns error?` | `kafka:Caller` is optional. Omit it when manual offset management is not needed. |
 
 The records array type can be replaced with any typed Ballerina record (`T[]`) for automatic payload deserialization. The `readonly` modifier can also be applied to the records parameter (e.g., `readonly & T[] records`).

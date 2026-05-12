@@ -42,10 +42,10 @@ This is the `baseUrl` you will use when initializing the `cregistry:Client`.
    or navigate to **Schema Registry** > **API Keys**.
 2. Click **Add key** (or **+ Add API key**).
 3. Select the appropriate access level:
-    - **Global access** — grants read/write access to all subjects.
-    - **Granular access** — restricts to specific subjects or operations.
+   - **Global access**: grants read/write access to all subjects.
+   - **Granular access**: restricts to specific subjects or operations.
 4. Click **Next**, then click **Download and continue** to save your API key and secret.
-   Store these securely — the secret is shown only once.
+   Store these securely: the secret is shown only once.
 
 Store the API key and secret securely. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime rather than hard-coding them in your source.
 

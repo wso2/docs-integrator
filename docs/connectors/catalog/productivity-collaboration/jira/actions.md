@@ -8,13 +8,13 @@ The `ballerinax/jira` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Jira Cloud REST API v3 — issues, projects, search, comments, workflows, users, and more. |
+| [`Client`](#client) | Jira Cloud REST API v3: issues, projects, search, comments, workflows, users, and more. |
 
 ---
 
 ## Client
 
-Jira Cloud REST API v3 — issues, projects, search, comments, workflows, users, and more.
+Jira Cloud REST API v3: issues, projects, search, comments, workflows, users, and more.
 
 ### Configuration
 
@@ -149,7 +149,7 @@ Sample code:
 ```ballerina
 json result = check jiraClient->/api/'3/issue/["PROJ-15"].put({
     fields: {
-        "summary": "Fix login page bug - updated",
+        "summary": "Fix login page bug (updated)",
         "priority": {"name": "Highest"}
     }
 });
@@ -1924,7 +1924,7 @@ jira:RemoteIssueLink links = check jiraClient->/api/'3/issue/["PROJ-15"]/remotel
 Sample response:
 
 ```ballerina
-{"id": 10000, "self": "https://your-domain.atlassian.net/rest/api/3/issue/PROJ-15/remotelink/10000", "object": {"url": "https://github.com/org/repo/pull/42", "title": "PR #42 - Fix login bug"}}
+{"id": 10000, "self": "https://your-domain.atlassian.net/rest/api/3/issue/PROJ-15/remotelink/10000", "object": {"url": "https://github.com/org/repo/pull/42", "title": "PR #42: Fix login bug"}}
 ```
 
 </details>
@@ -1949,7 +1949,7 @@ Sample code:
 jira:RemoteIssueLinkIdentifies link = check jiraClient->/api/'3/issue/["PROJ-15"]/remotelink.post({
     'object: {
         url: "https://github.com/org/repo/pull/42",
-        title: "PR #42 - Fix login bug"
+        title: "PR #42: Fix login bug"
     }
 });
 ```
@@ -4319,7 +4319,7 @@ null
 <details>
 <summary>Get JQL autocomplete data</summary>
 
-Returns the JQL autocomplete reference data — fields, functions, and operators.
+Returns the JQL autocomplete reference data: fields, functions, and operators.
 
 Returns: `JQLReferenceData|error`
 

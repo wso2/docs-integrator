@@ -153,7 +153,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `path` | `string` | Yes | Resource path (e.g., `"/A_SalesOrder"`). |
-| `message` | `RequestMessage` | Yes | The request payload — can be `json`, `xml`, `string`, `byte[]`, or `http:Request`. |
+| `message` | `RequestMessage` | Yes | The request payload; can be `json`, `xml`, `string`, `byte[]`, or `http:Request`. |
 | `headers` | `map<string\|string[]>?` | No | Optional HTTP headers. |
 | `mediaType` | `string?` | No | MIME type of the request entity. |
 | `targetType` | `typedesc` | No | Expected return type. |

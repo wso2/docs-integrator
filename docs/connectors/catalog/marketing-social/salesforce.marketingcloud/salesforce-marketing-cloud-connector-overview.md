@@ -8,7 +8,7 @@ Salesforce Marketing Cloud is a digital marketing platform that enables business
 
 ## Key features
 
-- Journey management — create, update, retrieve, and delete customer journeys (interactions)
+- Journey management: create, update, retrieve, and delete customer journeys (interactions)
 - Event definitions and entry event firing for Journey Builder automation
 - Campaign CRUD operations for organizing marketing efforts
 - Contact management including create, update, delete, search by attribute or email, and preference management
@@ -19,7 +19,7 @@ Salesforce Marketing Cloud is a digital marketing platform that enables business
 
 ## Actions
 
-Actions are operations you invoke on Salesforce Marketing Cloud from your integration — managing journeys, firing events, creating campaigns, upserting data extension rows, and more. The connector exposes all actions through a single client:
+Actions are operations you invoke on Salesforce Marketing Cloud from your integration. Use these actions for managing journeys, firing events, creating campaigns, upserting data extension rows, and more. The connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Salesforce Marketing Cloud Installed Package and obtaining the OAuth 2.0 Client Credentials required to use the connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **Salesforce Marketing Cloud** connector, including connection setup, operation configuration, and execution flow.
 

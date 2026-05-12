@@ -17,7 +17,7 @@ This guide walks you through creating the required Communication User, Communica
 2. Open the **Maintain Communication Users** app from the SAP Fiori Launchpad.
 3. Click **New** to create a new user.
 4. Enter a **User Name** (e.g., `INCOTERMS_API_USER`) and a **Description**.
-5. Set a **Password** and confirm it — record this password, as it will be used when configuring the connector.
+5. Set a **Password** and confirm it: record this password, as it will be used when configuring the connector.
 6. Click **Create**.
 
 Use a dedicated communication user for each integration to make credential rotation and audit tracking easier. Avoid reusing your personal SAP logon credentials.
@@ -37,7 +37,7 @@ Use a dedicated communication user for each integration to make credential rotat
 3. In the **Scenario** field, search for and select the communication scenario that exposes
    `API_SD_INCOTERMS_SRV`. This is typically associated with Sales and Distribution master data scenarios.
 4. In the **Communication System** field, select the system created in the previous step.
-5. After saving, note the **Service URL** shown in the arrangement details — the hostname
+5. After saving, note the **Service URL** shown in the arrangement details: the hostname
    portion of this URL (e.g., `my-tenant.s4hana.cloud.sap`) is required by the connector.
 6. Click **Save**.
 
@@ -55,4 +55,4 @@ my-tenant.s4hana.cloud.sap
 You can find it in the **Service URL** on the Communication Arrangement detail page, or by
 asking your SAP Cloud administrator. Do not include `https://` or a trailing path.
 
-Store your Communication User credentials securely. Use Ballerina's `configurable` feature with a `Config.toml` file to supply the username, password, and hostname at runtime — never hard-code credentials in source files.
+Store your Communication User credentials securely. Use Ballerina's `configurable` feature with a `Config.toml` file to supply the username, password, and hostname at runtime; never hard-code credentials in source files.

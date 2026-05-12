@@ -37,7 +37,7 @@ The listener supports the following connection strategies:
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `region` | `Region` | Required | AWS region where the SQS queue is located. |
-| `auth` | `StaticAuthConfig\|ProfileAuthConfig\|DEFAULT_CREDENTIALS` | Required | Authentication configuration — static credentials, AWS profile, or default credential chain. |
+| `auth` | `StaticAuthConfig\|ProfileAuthConfig\|DEFAULT_CREDENTIALS` | Required | Authentication configuration: static credentials, AWS profile, or default credential chain. |
 
 `PollingConfig` fields:
 

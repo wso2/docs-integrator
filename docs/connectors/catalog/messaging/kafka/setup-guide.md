@@ -25,7 +25,7 @@ This guide walks you through setting up an Apache Kafka cluster and obtaining th
     bin/kafka-server-start.sh config/server.properties
     ```
 
-4. Note the broker's **bootstrap server address** — by default this is `localhost:9092`.
+4. Note the broker's **bootstrap server address**: by default this is `localhost:9092`.
 
 For Kafka 3.3+ you can use KRaft mode instead of ZooKeeper. See the Kafka documentation for KRaft setup instructions.
 
@@ -57,7 +57,7 @@ If your Kafka cluster requires authentication, configure SASL credentials:
     ```
 
 2. Create a JAAS configuration file with your username and password.
-3. Note the **username**, **password**, and **SASL mechanism** — you will use these when configuring the Ballerina connector.
+3. Note the **username**, **password**, and **SASL mechanism**; you will use these when configuring the Ballerina connector.
 
 Managed Kafka services (Confluent Cloud, Amazon MSK, Azure Event Hubs) provide their own authentication setup. Consult your provider's documentation for connection details.
 
@@ -65,6 +65,6 @@ Managed Kafka services (Confluent Cloud, Amazon MSK, Azure Event Hubs) provide t
 
 For encrypted connections:
 
-1. Generate a CA certificate, server certificate, and key — or obtain them from your PKI. See [Keystores and Truststores](../../../../deploy-operate/secure/keystore-truststore.md) for step-by-step instructions using `keytool`.
+1. Generate a CA certificate, server certificate, and key, or obtain them from your PKI. See [Keystores and Truststores](../../../../deploy-operate/secure/keystore-truststore.md) for step-by-step instructions using `keytool`.
 2. Configure the broker's `server.properties` with the keystore and truststore paths.
-3. Note the **truststore/certificate file path** and **keystore credentials** — you will use these when configuring the Ballerina connector.
+3. Note the **truststore/certificate file path** and **keystore credentials**; you will use these when configuring the Ballerina connector.

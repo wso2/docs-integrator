@@ -8,13 +8,13 @@ The `ballerinax/mailchimp.marketing` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Mailchimp Marketing API — audiences, members, campaigns, automations, templates, reports, and more. |
+| [`Client`](#client) | Mailchimp Marketing API: audiences, members, campaigns, automations, templates, reports, and more. |
 
 ---
 
 ## Client
 
-Mailchimp Marketing API — audiences, members, campaigns, automations, templates, reports, and more.
+Mailchimp Marketing API: audiences, members, campaigns, automations, templates, reports, and more.
 
 ### Configuration
 

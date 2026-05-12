@@ -4,7 +4,7 @@ title: Overview
 
 # Overview
 
-PayPal Orders API enables you to create, update, retrieve, authorize, and capture payment orders between parties. The Ballerina `ballerinax/paypal.orders` connector (v2.0.1) provides programmatic access to the PayPal Orders v2 API, allowing you to manage the full order lifecycle — from creation through payment capture — and track shipments within your Ballerina integration flows.
+PayPal Orders API enables you to create, update, retrieve, authorize, and capture payment orders between parties. The Ballerina `ballerinax/paypal.orders` connector (v2.0.1) provides programmatic access to the PayPal Orders v2 API, allowing you to manage the full order lifecycle from creation through payment capture, and track shipments within your Ballerina integration flows.
 
 ## Key features
 
@@ -19,7 +19,7 @@ PayPal Orders API enables you to create, update, retrieve, authorize, and captur
 
 ## Actions
 
-Actions are operations you invoke on PayPal from your integration — creating orders, capturing payments, managing tracking, and more. The PayPal Orders connector exposes all actions through a single client:
+Actions are operations you invoke on PayPal from your integration. Use these actions for creating orders, capturing payments, managing tracking, and more. The PayPal Orders connector exposes all actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -31,7 +31,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a PayPal REST API application and obtaining the OAuth 2.0 client credentials required to use the PayPal Orders connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **PayPal Orders** connector, including connection setup, operation configuration, and execution flow.
 

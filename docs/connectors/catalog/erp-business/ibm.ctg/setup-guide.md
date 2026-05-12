@@ -9,7 +9,7 @@ This guide walks you through the server-side configuration required to connect t
 ## Prerequisites
 
 - Access to an IBM CICS Transaction Gateway (CTG) server (v9.3 or compatible). Contact your IBM system administrator or refer to the [IBM CTG documentation](https://www.ibm.com/docs/en/cics-tg-multi) for installation and licensing details.
-- IBM CTG Java client libraries (`ctgclient-9.3.jar`, `ccf2-9.3.jar`, `cicsjee-9.3.jar`) sourced from your IBM CTG installation — these proprietary JARs must be provided separately and are not distributed with the connector.
+- IBM CTG Java client libraries (`ctgclient-9.3.jar`, `ccf2-9.3.jar`, `cicsjee-9.3.jar`) sourced from your IBM CTG installation: these proprietary JARs must be provided separately and are not distributed with the connector.
 - A CICS user ID and password with permission to execute the target CICS programs on the CICS server.
 
 ## Step 1: Identify the CTG gateway host and port
@@ -28,7 +28,7 @@ The CICS server name is the logical name of the CICS region registered with the 
 
 1. Ask your IBM CICS administrator for the CICS server name (also referred to as the CICS region name or APPLID) that is registered in the CTG configuration.
 2. In the CTG gateway configuration file (`ctg.ini`), this value appears under the `[Server]` section as the `Name` parameter.
-3. Note this value — it is required as the `cicsServer` parameter in the connector configuration.
+3. Note this value; it is required as the `cicsServer` parameter in the connector configuration.
 
 ## Step 3: Set up CICS user credentials
 
@@ -45,8 +45,8 @@ Use a dedicated service account user ID for integration purposes rather than a p
 If your CTG gateway is configured to require SSL/TLS connections, prepare the following:
 
 1. Obtain the SSL keyring file (e.g., a `.kdb` file) from your IBM security administrator.
-2. Note the full path to the keyring file — this is the `sslKeyring` value.
-3. If the keyring is password-protected, note the password — this is the `sslkeyringPassword` value.
+2. Note the full path to the keyring file; this is the `sslKeyring` value.
+3. If the keyring is password-protected, note the password; this is the `sslkeyringPassword` value.
 4. If specific cipher suites are required by your security policy, obtain the list from your administrator.
 5. Confirm with your administrator that the CTG gateway is configured to accept SSL connections on the appropriate port.
 
@@ -57,9 +57,9 @@ SSL configuration requires the CTG gateway to be set up with matching SSL certif
 The connector requires proprietary IBM CTG Java libraries that are not redistributed with the connector package:
 
 1. Locate the following JAR files in your IBM CTG installation directory (typically under `<CTG_INSTALL>/classes/`):
-    - `ctgclient-9.3.jar`
-    - `ccf2-9.3.jar`
-    - `cicsjee-9.3.jar`
+   - `ctgclient-9.3.jar`
+   - `ccf2-9.3.jar`
+   - `cicsjee-9.3.jar`
 2. Copy these JARs to the `libs/` directory of your Ballerina project before building.
 
 These JAR files are proprietary IBM software covered by the IBM license agreement. Do not redistribute them or include them in public source code repositories.

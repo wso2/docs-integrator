@@ -8,13 +8,13 @@ The `ballerinax/smartsheet` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages all Smartsheet resources — sheets, rows, columns, folders, workspaces, users, reports, and more. |
+| [`Client`](#client) | Manages all Smartsheet resources: sheets, rows, columns, folders, workspaces, users, reports, and more. |
 
 ---
 
 ## Client
 
-Manages all Smartsheet resources — sheets, rows, columns, folders, workspaces, users, reports, and more.
+Manages all Smartsheet resources: sheets, rows, columns, folders, workspaces, users, reports, and more.
 
 ### Configuration
 

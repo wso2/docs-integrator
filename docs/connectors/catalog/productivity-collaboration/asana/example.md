@@ -5,7 +5,7 @@
 This integration connects WSO2 Integrator to the Asana project management API using the `ballerinax/asana` connector. It demonstrates how to authenticate with the Asana API using a Personal Access Token, configure the Asana connection with configurable variables, and call the getWorkspaces operation on a schedule using an Automation entry point. The complete flow on the canvas shows an Automation trigger → Asana Remote Function → End, running periodically to retrieve all Asana workspaces accessible to the authenticated user.
 
 **Operations used:**
-- **Get multiple workspaces** — Retrieves all Asana workspaces accessible to the authenticated user
+- **Get multiple workspaces**: Retrieves all Asana workspaces accessible to the authenticated user
 
 ## Architecture
 
@@ -74,7 +74,7 @@ Select **Save Connection** to persist the Asana connection configuration. The `a
 ![Asana connection node expanded showing all available operations before selection](/img/connectors/catalog/productivity-collaboration/asana/asana_screenshot_04_operations_panel.png)
 
 3. Select **Get multiple workspaces** from the list, then fill in the operation fields:
-   - **Result** : Name of the result variable that stores the response from the Get multiple workspaces operation.
+  - **Result** : Name of the result variable that stores the response from the Get multiple workspaces operation.
 4. Select **Save** to add the Asana operation step to the automation flow.
 
 ![Asana Get multiple workspaces operation configuration filled with all values](/img/connectors/catalog/productivity-collaboration/asana/asana_screenshot_05_operation_filled.png)
@@ -97,5 +97,5 @@ Try this sample in WSO2 Integration Platform.
 The `Asana` connector offers practical examples illustrating its use in various scenarios.
 Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-asana/tree/main/examples/), covering the following use cases:
 
-1. [Employee onboarding process automation](https://github.com/ballerina-platform/module-ballerinax-asana/tree/main/examples/employee-onboarding-process-automation) - Automate the onboarding process of new employees using Asana projects and tasks.
-2. [Team workload balancer](https://github.com/ballerina-platform/module-ballerinax-asana/tree/main/examples/team-workload-balancer) - Evaluate and balance the workload of a given team using Asana tasks and assignments.
+1. [Employee onboarding process automation](https://github.com/ballerina-platform/module-ballerinax-asana/tree/main/examples/employee-onboarding-process-automation): Automate the onboarding process of new employees using Asana projects and tasks.
+2. [Team workload balancer](https://github.com/ballerina-platform/module-ballerinax-asana/tree/main/examples/team-workload-balancer): Evaluate and balance the workload of a given team using Asana tasks and assignments.

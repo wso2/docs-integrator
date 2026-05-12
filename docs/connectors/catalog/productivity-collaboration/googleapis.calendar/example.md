@@ -59,7 +59,7 @@ Select **Save**. The `calendarClient` connection node appears in the Connections
 
 In the left panel, select **Configurations**. Set a value for each configurable listed below:
 
-- **calendarRefreshUrl** (string) : The OAuth2 token endpoint — use `https://oauth2.googleapis.com/token`
+- **calendarRefreshUrl** (string) : The OAuth2 token endpoint; use `https://oauth2.googleapis.com/token`
 - **calendarRefreshToken** (string) : Your OAuth2 refresh token obtained from Google Cloud Console
 - **calendarClientId** (string) : Your OAuth2 client ID from Google Cloud Console
 - **calendarClientSecret** (string) : Your OAuth2 client secret from Google Cloud Console
@@ -78,7 +78,7 @@ Expand the **calendarClient** connection node on the canvas to view available op
 
 Select **Create Event** to open the operation configuration form, then fill in the following fields:
 
-- **calendarId** : The calendar identifier — use `"primary"` for the user's default calendar
+- **calendarId** : The calendar identifier; use `"primary"` for the user's default calendar
 - **event** : A complete `InputEvent` record with `summary`, `start`, and `end` fields (each `Time` record requires `dateTime` and `timeZone`)
 - **result variable** : Leave the default name `calendarEvent`
 

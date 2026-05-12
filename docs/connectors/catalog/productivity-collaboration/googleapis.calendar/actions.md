@@ -20,7 +20,7 @@ Manages calendars and events through the Google Calendar API V3.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|JwtIssuerConfig` | Required | Authentication configuration — typically OAuth 2.0 refresh token credentials. |
+| `auth` | `BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|JwtIssuerConfig` | Required | Authentication configuration: typically OAuth 2.0 refresh token credentials. |
 | `secureSocketConfig` | `ClientSecureSocket` | `()` | SSL/TLS configuration for secure connections. |
 
 ### Initializing the client
@@ -355,7 +355,7 @@ Sample code:
 
 ```ballerina
 calendar:Event updatedEvent = check calendarClient->updateEvent("primary", "evt123abc", {
-    summary: "Project Kickoff Meeting - Updated",
+    summary: "Project Kickoff Meeting (Updated)",
     'start: {
         dateTime: "2024-03-20T10:00:00+00:00",
         timeZone: "UTC"
@@ -377,7 +377,7 @@ Sample response:
   "etag": "\"pqr678\"",
   "id": "evt123abc",
   "status": "confirmed",
-  "summary": "Project Kickoff Meeting - Updated",
+  "summary": "Project Kickoff Meeting (Updated)",
   "location": "Conference Room A",
   "description": "Updated: extended to 2 hours",
   "start": {

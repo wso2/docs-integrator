@@ -79,7 +79,7 @@ Configure the following fields:
 - **subject** : The subject name under which the schema will be registered
 - **schema** : The Avro schema definition as a JSON string
 - **result** : Name of the variable to hold the returned schema ID
-- **resultType** : Set to `int`—the registry returns the schema ID as an integer
+- **resultType** : Set to `int`: the registry returns the schema ID as an integer
 
 Select **Save** to add the operation to the flow.
 

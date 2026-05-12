@@ -20,7 +20,7 @@ Retrieves SAP Sales Area master data via the SAP S/4HANA OData API.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:CredentialsConfig` | Required | HTTP Basic Authentication credentials — provide `username` and `password` of the SAP technical user. |
+| `auth` | `http:CredentialsConfig` | Required | HTTP Basic Authentication credentials; provide `username` and `password` of the SAP technical user. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use for requests. |
 | `http1Settings` | `ClientHttp1Settings` | `()` | HTTP/1.x client settings including keep-alive and chunking. |
 | `http2Settings` | `http:ClientHttp2Settings` | `()` | HTTP/2 client settings. |

@@ -23,7 +23,7 @@ Publishes messages to Solace queues and topics with optional transacted session 
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `destination` | `Topic\|Queue` | Required | Target destination — either a queue config or a topic config. |
+| `destination` | `Topic\|Queue` | Required | Target destination: either a queue config or a topic config. |
 | `messageVpn` | `string` | `"default"` | Solace Message VPN name. |
 | `auth` | `BasicAuthConfig\|KerberosConfig\|OAuth2Config` | `()` | Authentication configuration. |
 | `transacted` | `boolean` | `false` | Enable transacted session for commit/rollback control. When `true`, `directTransport` must also be set to `false`. |
@@ -146,7 +146,7 @@ Consumes messages from Solace queues and topics with blocking/non-blocking recei
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `subscriptionConfig` | `QueueConfig\|TopicConfig` | Required | Subscription target — either a queue config or a topic config. |
+| `subscriptionConfig` | `QueueConfig\|TopicConfig` | Required | Subscription target: either a queue config or a topic config. |
 | `messageVpn` | `string` | `"default"` | Solace Message VPN name. |
 | `auth` | `BasicAuthConfig\|KerberosConfig\|OAuth2Config` | `()` | Authentication configuration. |
 | `transacted` | `boolean` | `false` | Enable transacted session for commit/rollback control. When `true`, `directTransport` must also be set to `false`. |

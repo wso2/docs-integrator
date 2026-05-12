@@ -8,13 +8,13 @@ The `ballerinax/paypal.orders` package exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages the full PayPal order lifecycle — creation, retrieval, update, authorization, capture, and shipment tracking. |
+| [`Client`](#client) | Manages the full PayPal order lifecycle: creation, retrieval, update, authorization, capture, and shipment tracking. |
 
 ---
 
 ## Client
 
-Manages the full PayPal order lifecycle — creation, retrieval, update, authorization, capture, and shipment tracking.
+Manages the full PayPal order lifecycle: creation, retrieval, update, authorization, capture, and shipment tracking.
 
 ### Configuration
 

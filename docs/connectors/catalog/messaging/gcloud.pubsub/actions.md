@@ -49,7 +49,7 @@ pubsub:Publisher publisher = check new (project, topic,
 <details>
 <summary>publish</summary>
 
-Publishes a message to the configured Pub/Sub topic. The message data can be `string`, `json`, `xml`, or `byte[]` — non-byte types are automatically serialized.
+Publishes a message to the configured Pub/Sub topic. The message data can be `string`, `json`, `xml`, or `byte[]`: non-byte types are automatically serialized.
 
 Parameters:
 

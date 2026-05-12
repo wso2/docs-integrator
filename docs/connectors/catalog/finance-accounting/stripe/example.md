@@ -76,7 +76,7 @@ Select **Save** to create the connection. The connection appears in the **Connec
 4. Search for **customers** to filter the operations list.
 5. Select **Returns a list of your customers** (`get` operation) from the filtered results, then configure the following:
 
-- **Result** : Name of the variable to store the response — set to `customerList`
+- **Result** : Name of the variable to store the response; set to `customerList`
 
 ![Stripe get operation configuration filled with all values](/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_05_operation_filled.png)
 
@@ -96,6 +96,6 @@ Try this sample in WSO2 Integration Platform.
 
 The `ballerinax/stripe` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-stripe/tree/main/examples), covering various Stripe functionalities.
 
-1. [Manage Stripe payments](https://github.com/ballerina-platform/module-ballerinax-stripe/tree/main/examples/manage-payments) - Manage business payments with Stripe.
+1. [Manage Stripe payments](https://github.com/ballerina-platform/module-ballerinax-stripe/tree/main/examples/manage-payments): Manage business payments with Stripe.
 
-2. [Manage one-time charges](https://github.com/ballerina-platform/module-ballerinax-stripe/tree/main/examples/manage-one-time-charges) - Manage one-time charges with Stripe.
+2. [Manage one-time charges](https://github.com/ballerina-platform/module-ballerinax-stripe/tree/main/examples/manage-one-time-charges): Manage one-time charges with Stripe.

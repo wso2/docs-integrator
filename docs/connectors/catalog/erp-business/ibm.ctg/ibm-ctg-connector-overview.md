@@ -18,7 +18,7 @@ IBM CICS Transaction Gateway (CTG) is enterprise middleware that connects distri
 
 ## Actions
 
-Actions are operations you invoke on IBM CICS from your Ballerina integration — executing CICS programs with COMMAREA input/output and managing the gateway connection lifecycle. The IBM CTG connector exposes actions through a single client:
+Actions are operations you invoke on IBM CICS from your Ballerina integration. Use these actions for executing CICS programs with COMMAREA input/output and managing the gateway connection lifecycle. The IBM CTG connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through the server-side configuration required to connect the IBM CTG connector to your IBM CICS Transaction Gateway and CICS server.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Example](example.md)**: Learn how to build and configure an integration using the **IBM CTG** connector, including connection setup, operation configuration, and execution flow.
 

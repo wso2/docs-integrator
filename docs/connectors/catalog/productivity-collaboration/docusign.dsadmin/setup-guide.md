@@ -37,7 +37,7 @@ Store the Integration Key and Secret Key securely. Do not commit them to source 
     https://account-d.docusign.com/oauth/auth?response_type=code&scope=signature%20organization_read%20group_read%20account_read%20permission_read%20user_read%20user_write&client_id={iKey}&redirect_uri={redirectUri}
     ```
 
-3. Log in and authorize the application. You will be redirected to your redirect URI with a `code` query parameter — this is your **authorization code**.
+3. Log in and authorize the application. You will be redirected to your redirect URI with a `code` query parameter; this is your **authorization code**.
 
 4. Exchange the authorization code for a refresh token using the following `curl` command:
 

@@ -20,7 +20,7 @@ flowchart LR
 
 - A running Alfresco Content Services instance accessible from the integration environment (Community Edition or Enterprise Edition).
 - Valid Alfresco credentials (username and password) with permission to create nodes in the target repository.
-- The target parent folder's node ID (a UUID) from the Alfresco repository—obtainable from the Alfresco Share URL or REST API.
+- The target parent folder's node ID (a UUID) from the Alfresco repository, obtainable from the Alfresco Share URL or REST API.
 
 ## Setting up the Alfresco integration
 
@@ -78,9 +78,9 @@ Select **Save** to persist the connection configuration. The Alfresco connector 
 2. Under **Connections** in the step panel, expand the **alfrescoClient** connection node to reveal all available Alfresco operations.
 ![Alfresco connection node expanded showing all available operations before selection](/img/connectors/catalog/storage-file/alfresco/alfresco_screenshot_04_operations_panel.png)
 3. Select **createNode** from the list of operations, then fill in the operation fields:
-   - **Node Id** : The configurable variable `alfrescoParentNodeId` referencing the parent folder's node UUID
-   - **Payload** : The `NodeBodyCreate` record containing `name` (set to `"IntegrationTestDocument"`) and `nodeType` (set to `"cm:content"` for a document)
-   - **Result** : The output variable that holds the created node response
+  - **Node Id** : The configurable variable `alfrescoParentNodeId` referencing the parent folder's node UUID
+  - **Payload** : The `NodeBodyCreate` record containing `name` (set to `"IntegrationTestDocument"`) and `nodeType` (set to `"cm:content"` for a document)
+  - **Result** : The output variable that holds the created node response
 4. Select **Save** to add the `createNode` step to the automation flow.
 ![createNode operation configuration form with all fields filled](/img/connectors/catalog/storage-file/alfresco/alfresco_screenshot_05_operation_filled.png)
 ![Completed Alfresco integration flow on the low-code canvas](/img/connectors/catalog/storage-file/alfresco/alfresco_screenshot_06_completed_flow.png)
@@ -97,5 +97,5 @@ Try this sample in WSO2 Integration Platform.
 
 The `ballerinax/alfresco` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-alfresco/tree/main/examples), covering the following use cases:
 
-1. [Upload a Document](https://github.com/ballerina-platform/module-ballerinax-alfresco/tree/main/examples/upload-document) - Create a new file in Alfresco and upload content to it under a specific folder or path.
-2. [Download a Document](https://github.com/ballerina-platform/module-ballerinax-alfresco/tree/main/examples/download-document) - Retrieve a document stored in Alfresco.
+1. [Upload a Document](https://github.com/ballerina-platform/module-ballerinax-alfresco/tree/main/examples/upload-document): Create a new file in Alfresco and upload content to it under a specific folder or path.
+2. [Download a Document](https://github.com/ballerina-platform/module-ballerinax-alfresco/tree/main/examples/download-document): Retrieve a document stored in Alfresco.

@@ -19,7 +19,7 @@ RabbitMQ is an open-source message broker that supports multiple messaging proto
 
 ## Actions
 
-Actions are operations you invoke on RabbitMQ from your integration — publishing messages, declaring queues, consuming messages, and managing exchanges. The RabbitMQ connector exposes actions through the following clients:
+Actions are operations you invoke on RabbitMQ from your integration. Use these actions for publishing messages, declaring queues, consuming messages, and managing exchanges. The RabbitMQ connector exposes actions through the following clients:
 
 | Client | Actions |
 |--------|---------|
@@ -29,7 +29,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 ## Triggers
 
-Triggers allow your integration to react to messages arriving on RabbitMQ queues in real time. A `rabbitmq:Listener` subscribes to a queue and dispatches incoming messages to your `rabbitmq:Service` callbacks automatically — supporting both one-way consumption and request-reply patterns.
+Triggers allow your integration to react to messages arriving on RabbitMQ queues in real time. A `rabbitmq:Listener` subscribes to a queue and dispatches incoming messages to your `rabbitmq:Service` callbacks automatically, supporting both one-way consumption and request-reply patterns.
 
 Supported trigger events:
 
@@ -44,7 +44,7 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through installing and configuring a RabbitMQ server so you can connect to it with the Ballerina RabbitMQ connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the listener and service model.
 

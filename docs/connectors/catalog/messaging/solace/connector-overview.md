@@ -13,13 +13,13 @@ Solace PubSub+ is an advanced event broker that supports publish/subscribe, queu
 - Event-driven message processing with `Listener` and service callbacks for automatic dispatch
 - Flexible acknowledgement modes: auto, client, transacted, and dups-ok
 - Durable and non-durable topic subscriptions with configurable consumer types
-- Automatic data binding for message payloads — string, JSON, XML, byte[], records, and maps
+- Automatic data binding for message payloads: string, JSON, XML, byte[], records, and maps
 - TLS/SSL, basic auth, Kerberos, and OAuth 2.0 authentication support
 - Transacted sessions with commit/rollback for reliable message delivery
 
 ## Actions
 
-Actions are operations you invoke on Solace PubSub+ from your integration — publishing messages, consuming from queues, and managing transacted sessions. The Solace connector exposes actions across two clients:
+Actions are operations you invoke on Solace PubSub+ from your integration. Use these actions for publishing messages, consuming from queues, and managing transacted sessions. The Solace connector exposes actions across two clients:
 
 | Client | Actions |
 |--------|---------|
@@ -30,7 +30,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 ## Triggers
 
-Triggers allow your integration to react to messages arriving on Solace queues or topics in real time. The connector uses a polling-based `solace:Listener` that dispatches messages to your `onMessage` callback automatically — no manual receive loop required.
+Triggers allow your integration to react to messages arriving on Solace queues or topics in real time. The connector uses a polling-based `solace:Listener` that dispatches messages to your `onMessage` callback automatically; no manual receive loop required.
 
 Supported trigger events:
 
@@ -45,7 +45,7 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through setting up a Solace PubSub+ broker and obtaining the connection details required to use the Solace connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the listener and service model.
 

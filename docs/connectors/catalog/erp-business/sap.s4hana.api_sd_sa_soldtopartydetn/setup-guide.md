@@ -34,7 +34,7 @@ The exact scenario ID may vary by S/4HANA Cloud release. Search by the descripti
 2. Provide a unique **Arrangement Name**.
 3. In the **Communication System** field, select the Communication System you created or an existing one.
 4. Under **Inbound Communication**, confirm the authentication method is set to **User Name and Password**.
-5. Note the **API URL** shown in the arrangement — it follows the pattern:
+5. Note the **API URL** shown in the arrangement: it follows the pattern:
     ```
     https://<unique-id>-api.s4hana.cloud.sap/sap/opu/odata/sap/API_SD_SA_SOLDTOPARTYDETN
     ```
@@ -47,6 +47,6 @@ The hostname portion `<unique-id>-api.s4hana.cloud.sap` is what you supply to th
 1. In the saved Communication Arrangement, expand the **Inbound Communication** section.
 2. Note the **User Name** configured for inbound communication.
 3. Retrieve the corresponding password from your Communication System's inbound user settings.
-4. Store the username and password securely — these are the credentials (`auth.username` and `auth.password`) used by the Ballerina connector.
+4. Store the username and password securely; these are the credentials (`auth.username` and `auth.password`) used by the Ballerina connector.
 
 Do not commit credentials to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply the username, password, and hostname at runtime.

@@ -20,7 +20,7 @@ Provides full CRUD access to SAP S/4HANA sales orders and all related entities v
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|http:CredentialsConfig` | Required | Authentication configuration — use basic credentials (`http:CredentialsConfig` with username/password), a bearer token, or OAuth 2.0 refresh token. |
+| `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|http:CredentialsConfig` | Required | Authentication configuration; use basic credentials (`http:CredentialsConfig` with username/password), a bearer token, or OAuth 2.0 refresh token. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
 | `http1Settings` | `ClientHttp1Settings` | `()` | HTTP/1.1 client settings (keep-alive, chunking). |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |

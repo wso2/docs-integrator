@@ -26,7 +26,7 @@ If you previously generated a key at trello.com/app-key, that flow has been repl
 ## Step 2: Generate an API token
 
 1. On the same API Key page, find the **Token** link next to your API key.
-2. Click the link — this opens an authorization page.
+2. Click the link: this opens an authorization page.
 3. Review the permissions requested and click **Allow**.
 4. Copy the generated **Token**.
 

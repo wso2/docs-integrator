@@ -17,7 +17,7 @@ HubSpot Marketing Transactional enables sending single transactional emails and 
 
 ## Actions
 
-Actions are operations you invoke on HubSpot from your integration — sending transactional emails and managing SMTP API tokens. The connector exposes actions through a single client:
+Actions are operations you invoke on HubSpot from your integration. Use these actions for sending transactional emails and managing SMTP API tokens. The connector exposes actions through a single client:
 
 | Client | Actions |
 |--------|---------|
@@ -29,7 +29,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 credentials required to use the HubSpot Marketing Transactional connector.
 
-* **[Action Reference](actions.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
+* **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 ## How to contribute
 
