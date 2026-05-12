@@ -25,7 +25,6 @@ Project and deployment configuration files:
 | **[Ballerina.toml](config/ballerinatoml-reference.md)**               | Project metadata and dependencies |
 | **[Config.toml](config/configtoml-reference.md)**                     | Runtime configuration values      |
 | **[Cloud.toml](config/cloudtoml-reference.md)**                       | Cloud deployment settings         |
-| **[Dependencies.toml](config/dependenciestoml-reference.md)**         | Locked dependency versions        |
 | **[Environment Variables](config/environment-variables.md)** | Runtime environment configuration |
 
 ## CLI

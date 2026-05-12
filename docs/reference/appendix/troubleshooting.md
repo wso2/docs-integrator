@@ -6,6 +6,96 @@ title: Troubleshooting
 
 This guide covers common issues encountered when developing, building, and running WSO2 Integrator projects powered by Ballerina, along with diagnostic tools and resolution steps.
 
+## WSO2 Integrator IDE issues
+
+### View the IDE output
+
+The Ballerina output panel shows the current Ballerina distribution and additional diagnostic information when the IDE cannot detect a distribution. It is the first place to look when something feels off but no error is visible in the editor.
+
+To open it: from the IDE menu, select **View** > **Output** (or press `Ctrl+Shift+U` on Windows/Linux, `Cmd+Shift+U` on macOS), then choose **Ballerina** from the output channel dropdown.
+
+<ThemedImage
+    alt="Open the Ballerina output panel from View > Output and select the Ballerina channel"
+    sources={{
+        light: useBaseUrl('/img/reference/appendix/troubleshooting/view-ide-output-light.gif'),
+        dark: useBaseUrl('/img/reference/appendix/troubleshooting/view-ide-output-dark.gif'),
+    }}
+/>
+
+### Set up a custom Ballerina path
+
+To use a Ballerina distribution other than the one bundled with the IDE, for example to test against a specific version, point the IDE to a custom path:
+
+1. Download the Ballerina distribution and unpack it to a known location.
+2. Open the IDE settings: click the **Manage** (gear) icon at the bottom of the activity bar and select **Settings** (or press `Ctrl+,` on Windows/Linux, `Cmd+,` on macOS).
+
+   <ThemedImage
+       alt="Open the IDE settings from the Manage menu"
+       sources={{
+           light: useBaseUrl('/img/reference/appendix/troubleshooting/open-settings-light.png'),
+           dark: useBaseUrl('/img/reference/appendix/troubleshooting/open-settings-dark.png'),
+       }}
+   />
+
+3. Search for `ballerina.home`.
+4. Enter the path to the downloaded distribution in the **Ballerina: Home** field.
+5. To activate the custom distribution, also enable **Ballerina: Plugin Dev Mode**.
+
+   <ThemedImage
+       alt="Ballerina Home and Plugin Dev Mode settings"
+       sources={{
+           light: useBaseUrl('/img/reference/appendix/troubleshooting/custom-ballerina-path-light.png'),
+           dark: useBaseUrl('/img/reference/appendix/troubleshooting/custom-ballerina-path-dark.png'),
+       }}
+   />
+
+### Enable IDE debug logs
+
+When you need detailed diagnostic output from the IDE or the language server, open the IDE settings (`Ctrl+,` on Windows/Linux, `Cmd+,` on macOS), then search for and enable one or more of the following settings:
+
+| Setting | What it enables |
+|---|---|
+| `ballerina.debugLog` | Debug-level messages on the Ballerina output channel |
+| `ballerina.traceLog` | Trace-level messages on the Ballerina output channel (more verbose than debug) |
+| `ballerina.enableLanguageServerDebug` | Language server debug mode |
+
+<ThemedImage
+    alt="Ballerina Debug Log setting in the IDE settings"
+    sources={{
+        light: useBaseUrl('/img/reference/appendix/troubleshooting/enable-debug-logs-light.png'),
+        dark: useBaseUrl('/img/reference/appendix/troubleshooting/enable-debug-logs-dark.png'),
+    }}
+/>
+
+Output appears in the Ballerina output panel. See **View the IDE output** above.
+
+### Language server not starting
+
+**Symptom:** The IDE shows "Ballerina Language Server: Not Running" in the status bar.
+
+| Cause | Solution |
+|-------|----------|
+| Ballerina not installed | Install Ballerina or verify `bal` is in `PATH` |
+| Wrong Ballerina path | Set `ballerina.home` in the IDE settings |
+| Java not found | Ensure JDK 17+ is installed and `JAVA_HOME` is set |
+| Extension conflict | Disable other Ballerina-related extensions |
+| Corrupted cache | Delete `~/.ballerina/` and restart the IDE |
+
+### IntelliSense not working
+
+**Symptom:** No code completions, hover information, or diagnostics.
+
+```bash
+# Restart the language server
+# In the IDE: Ctrl+Shift+P (Cmd+Shift+P on macOS) > "Ballerina: Restart Language Server"
+
+# Clear the language server cache
+rm -rf ~/.ballerina/ballerina-language-server/
+
+# Rebuild the project
+bal clean && bal build
+```
+
 ## Common build errors
 
 ### Package resolution failures
@@ -188,6 +278,30 @@ artifactId = "mysql-connector-java"
 version = "8.0.33"
 ```
 
+## Docker and deployment issues
+
+### Container build failures
+
+**Symptom:** `bal build --cloud=docker` fails.
+
+| Cause | Solution |
+|-------|----------|
+| Docker not running | Start Docker daemon |
+| Insufficient disk space | Clean unused Docker images: `docker system prune` |
+| Missing `Cloud.toml` | Create a `Cloud.toml` with container configuration |
+| Build context too large | Add a `.dockerignore` file to exclude unnecessary files |
+
+### Container runtime issues
+
+**Symptom:** Container starts but service is not accessible.
+
+| Issue | Solution |
+|-------|----------|
+| Port not exposed | Add port mapping: `docker run -p 8080:8080 myservice` |
+| Health check failing | Configure `Cloud.toml` health check settings |
+| Environment variables missing | Pass variables: `docker run -e DB_HOST=localhost myservice` |
+| Config.toml not found | Mount config: `docker run -v ./Config.toml:/home/ballerina/Config.toml myservice` |
+
 ## Diagnostic tools
 
 ### Strand dump tool
@@ -224,59 +338,6 @@ Available log levels:
 | `INFO` | Informational messages | General operations |
 | `DEBUG` | Detailed debug information | Development troubleshooting |
 | `TRACE` | Very detailed trace output | Deep debugging (high overhead) |
-
-## WSO2 Integrator IDE issues
-
-### Language server not starting
-
-**Symptom:** The IDE shows "Ballerina Language Server: Not Running" in the status bar.
-
-| Cause | Solution |
-|-------|----------|
-| Ballerina not installed | Install Ballerina or verify `bal` is in `PATH` |
-| Wrong Ballerina path | Set `ballerina.home` in the IDE settings |
-| Java not found | Ensure JDK 17+ is installed and `JAVA_HOME` is set |
-| Extension conflict | Disable other Ballerina-related extensions |
-| Corrupted cache | Delete `~/.ballerina/` and restart the IDE |
-
-### IntelliSense not working
-
-**Symptom:** No code completions, hover information, or diagnostics.
-
-```bash
-# Restart the language server
-# In the IDE: Ctrl+Shift+P > "Ballerina: Restart Language Server"
-
-# Clear the language server cache
-rm -rf ~/.ballerina/ballerina-language-server/
-
-# Rebuild the project
-bal clean && bal build
-```
-
-## Docker and deployment issues
-
-### Container build failures
-
-**Symptom:** `bal build --cloud=docker` fails.
-
-| Cause | Solution |
-|-------|----------|
-| Docker not running | Start Docker daemon |
-| Insufficient disk space | Clean unused Docker images: `docker system prune` |
-| Missing `Cloud.toml` | Create a `Cloud.toml` with container configuration |
-| Build context too large | Add a `.dockerignore` file to exclude unnecessary files |
-
-### Container runtime issues
-
-**Symptom:** Container starts but service is not accessible.
-
-| Issue | Solution |
-|-------|----------|
-| Port not exposed | Add port mapping: `docker run -p 8080:8080 myservice` |
-| Health check failing | Configure `Cloud.toml` health check settings |
-| Environment variables missing | Pass variables: `docker run -e DB_HOST=localhost myservice` |
-| Config.toml not found | Mount config: `docker run -v ./Config.toml:/home/ballerina/Config.toml myservice` |
 
 ## Getting help
 
