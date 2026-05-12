@@ -1,3 +1,7 @@
+---
+title: Example
+---
+
 # Example
 
 ## What you'll build

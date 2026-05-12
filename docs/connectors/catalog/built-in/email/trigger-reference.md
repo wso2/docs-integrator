@@ -63,7 +63,7 @@ configurable string imapHost = ?;
 configurable string username = ?;
 configurable string password = ?;
 
-listener email:ImapListener imapListener = new ({
+listener email:ImapListener imapListener = check new ({
     host: imapHost,
     username: username,
     password: password,
@@ -80,7 +80,7 @@ configurable string popHost = ?;
 configurable string username = ?;
 configurable string password = ?;
 
-listener email:PopListener popListener = new ({
+listener email:PopListener popListener = check new ({
     host: popHost,
     username: username,
     password: password,
@@ -114,7 +114,7 @@ configurable string imapHost = ?;
 configurable string username = ?;
 configurable string password = ?;
 
-listener email:ImapListener imapListener = new ({
+listener email:ImapListener imapListener = check new ({
     host: imapHost,
     username: username,
     password: password,
