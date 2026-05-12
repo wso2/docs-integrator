@@ -284,15 +284,15 @@ function streamOrderUpdates(OrderUpdate[] updates) returns OrderStatus[]|error {
 
 ---
 
-## Generating both service stub and client
+## Generating only the stub file
 
-Omit `--mode` to generate all three files at once:
+Omit `--mode` to generate only the stub file:
 
 ```bash
 bal grpc --input resources/order_service.proto --output .
 ```
 
-This produces `order_service_pb.bal`, `order_service_service.bal`, and `order_service_client.bal`.
+This produces `order_service_pb.bal` file.
 
 ---
 
@@ -319,35 +319,48 @@ Re-run the same command whenever the `.proto` file changes — the generated fil
 
 ## Command reference
 
-| Flag | Description |
+```bash
+bal grpc --input <proto-file> [options]
+```
+
+| Flag | Alias | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `--input` | `-i` | Yes | — | Path to the `.proto` file |
+| `--output` | `-o` | No | Current directory | Output directory for generated files |
+| `--mode` | — | No | Both | Generation mode: `client`, `service`, or omit for both |
+| `--proto-path` | — | No | — | Path to a directory containing imported `.proto` files |
+
+## Protobuf to Ballerina type mapping
+
+| Protobuf type | Ballerina type |
 |---|---|
-| `--input <file.proto>` | Path to the proto file |
-| `--mode service` | Generate service stub only |
-| `--mode client` | Generate client only |
-| `--output <dir>` | Output directory (use `.` for project root) |
-| `--proto_path <dir>` | Additional proto import path (repeatable) |
+| `double` | `float` |
+| `float` | `float` |
+| `int32`, `sint32`, `sfixed32` | `int` |
+| `int64`, `sint64`, `sfixed64` | `int` |
+| `uint32`, `fixed32` | `int` |
+| `uint64`, `fixed64` | `int` |
+| `bool` | `boolean` |
+| `string` | `string` |
+| `bytes` | `byte[]` |
+| `enum` | `enum` |
+| `message` | `record {}` |
+| `repeated T` | `T[]` |
+| `map<K, V>` | `map` |
+| `oneof` | Union type |
+| `google.protobuf.Any` | `anydata` |
+| `google.protobuf.Timestamp` | `time:Utc` |
+| `google.protobuf.Duration` | `decimal` |
+| `google.protobuf.Struct` | `map<anydata>` |
 
----
+## gRPC communication patterns
 
-## Workflow examples
-
-**Calling an external gRPC service**
-
-The API provider supplies a `.proto` file describing the service contract. Generate a type-safe client from it — no need to hand-write request/response types or manage connection details.
-
-1. Copy the `.proto` file into `resources/`.
-2. Run: `bal grpc --input resources/partner.proto --mode client --output .`
-3. Use the generated client in your integration flow.
-
-**Exposing a gRPC service**
-
-Design your service contract as a `.proto` file first, then generate the service stub and implement the methods.
-
-1. Author your `.proto` file and place it in `resources/`.
-2. Run: `bal grpc --input resources/my_service.proto --mode service --output .`
-3. Implement the generated stub methods in `my_service_service.bal`.
-
----
+| Pattern | Proto definition | Ballerina signature |
+|---|---|---|
+| Unary | `rpc Method(Req) returns (Res)` | `remote function Method(Req) returns Res\|error` |
+| Server streaming | `rpc Method(Req) returns (stream Res)` | `remote function Method(Req) returns stream<Res, error?>\|error` |
+| Client streaming | `rpc Method(stream Req) returns (Res)` | `remote function Method(stream<Req, error?>) returns Res\|error` |
+| Bidirectional | `rpc Method(stream Req) returns (stream Res)` | `remote function Method(stream<Req, error?>) returns stream<Res, error?>\|error` |
 
 ## What's next
 

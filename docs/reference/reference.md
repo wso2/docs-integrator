@@ -12,11 +12,9 @@ Ballerina language reference for integration developers:
 
 - **[Syntax Quick Reference](language/ballerina-syntax-quick-reference.md)** — Core language constructs at a glance
 - **[Type System](language/type-system.md)** — Structural types, unions, optional, any, stream, never
-- **[Standard Library](language/standard-library-overview.md)** — Built-in functions (langlib)
 - **[Query Expressions](language/query-expressions.md)** — SQL-like data processing
 - **[Concurrency](language/concurrency.md)** — Workers, strands, locks, transactions
 - **[Error Handling](language/error-handling.md)** — Error types and handling patterns
-- **[Integration Features](language/integration-specific-features.md)** — Services, clients, listeners
 
 ## Configuration
 
@@ -37,13 +35,13 @@ Command-line tools reference:
 | Command                                    | Purpose                                      |
 | ------------------------------------------ | -------------------------------------------- |
 | **[bal commands](cli/bal-command-reference.md)** | Core build, run, test, and package commands  |
-| **[bal persist](cli/bal-persist.md)**      | Data persistence code generation             |
-| **[bal openapi](cli/bal-openapi.md)**      | Generate services/clients from OpenAPI specs |
-| **[bal graphql](cli/bal-graphql.md)**      | GraphQL schema generation                    |
-| **[bal grpc](cli/bal-grpc.md)**            | Generate code from .proto files              |
-| **[bal edi](cli/bal-edi.md)**              | EDI schema processing                        |
-| **[bal health](cli/bal-health.md)**        | FHIR/HL7 health tool                         |
-| **[Scan Tool](cli/bal-scan.md)**           | Static analysis rules                        |
+| **[bal persist](../develop/tools/integration-tools/persist-tool.md)** | Data persistence code generation |
+| **[bal openapi](../develop/tools/integration-tools/openapi-tool.md)** | Generate services/clients from OpenAPI specs |
+| **[bal graphql](../develop/tools/integration-tools/graphql-tool.md)** | GraphQL schema generation |
+| **[bal grpc](../develop/tools/integration-tools/grpc-tool.md)** | Generate code from .proto files |
+| **[bal edi](../develop/tools/integration-tools/edi-tool.md)** | EDI schema processing |
+| **[bal health](../develop/tools/integration-tools/health-tool.md)** | FHIR/HL7 health tool |
+| **[Scan Tool](cli/bal-scan.md)** | Static analysis rules |
 
 ## APIs
 

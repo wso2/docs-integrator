@@ -358,5 +358,4 @@ function validateOrder(Order order) returns error? {
 
 - [Ballerina Syntax Quick Reference](ballerina-syntax-quick-reference.md) -- Core language syntax
 - [Concurrency](concurrency.md) -- Workers, transactions, and error handling in concurrent code
-- [Integration-Specific Features](integration-specific-features.md) -- Services, clients, listeners
 - [Ballerina by Example](/docs/reference/by-example) -- Runnable error handling examples

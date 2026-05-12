@@ -274,18 +274,46 @@ bal add ballerinax/edi.edifact.d96a.vORDERS
 
 ## Command reference
 
-| Command | Description |
-|---|---|
-| `bal edi -i <schema.json>` | Generate from custom EDI schema |
-| `bal edi codegen -i <dir>` | Generate from a directory of schemas |
-| `--standard x12` | Use X12 standard |
-| `--standard edifact` | Use EDIFACT standard |
-| `--version <ver>` | EDI standard version |
-| `--transaction <code>` | Transaction set identifier |
-| `-o <dir>` | Output directory |
+### bal edi codegen
+
+Generates Ballerina record types and utility functions from a single EDI schema definition file.
+
+```bash
+bal edi codegen -i <schema-path> -o <output-path> [options]
+```
+
+| Flag | Alias | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `-i`, `--input` | — | Yes | — | Path to the EDI schema file (JSON format) |
+| `-o`, `--output` | — | Yes | — | Output directory for generated Ballerina source files |
+| `-p`, `--package` | — | No | — | Package name for the generated module |
+
+### bal edi libgen
+
+Generates a complete Ballerina library package from a collection of EDI schemas.
+
+```bash
+bal edi libgen -i <schema-directory> -o <output-path> [options]
+```
+
+| Flag | Alias | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `-i`, `--input` | — | Yes | — | Path to the directory containing EDI schema files or a collection definition file |
+| `-o`, `--output` | — | Yes | — | Output directory for the generated library package |
+| `-p`, `--package` | — | No | — | Package name for the generated library |
+| `--org` | — | No | — | Organization name for the generated package |
+
+## Supported EDI standards
+
+| Standard | Description | Typical use |
+|---|---|---|
+| X12 | ANSI ASC X12 | North American B2B (orders, invoices, shipping) |
+| EDIFACT | UN/EDIFACT | International B2B commerce |
+| HL7 | Health Level 7 v2.x | Healthcare messaging |
+| Custom | User-defined schemas | Proprietary EDI formats |
 
 ## What's next
 
-- [Health Tool](health-tool.md) -- Generate healthcare integration code
-- [XSD Tool](xsd-tool.md) -- Generate types from XML schemas
-- [Data Transformation](/docs/develop/transform/edi) -- Transform EDI data in Ballerina
+- [Health Tool](health-tool.md) — Generate healthcare integration code
+- [XSD Tool](xsd-tool.md) — Generate types from XML schemas
+- [Data transformation](/docs/develop/transform/edi) — Transform EDI data in Ballerina

@@ -276,16 +276,56 @@ function mapGender(string fhirGender) returns string {
 
 ## Command reference
 
-| Command | Description |
+```bash
+bal health fhir -m <mode> [options]
+```
+
+### Shared flags
+
+| Flag | Alias | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `-m`, `--mode` | — | Yes | — | Generation mode: `package` or `template` |
+| `-o`, `--output` | — | No | Current directory | Output directory for generated files |
+| `--org-name` | — | No | `healthcare` | Organization name for the generated package |
+| `--package-name` | — | No | Derived from IG | Package name for the generated module |
+| `--dependent-package` | — | No | — | Path to a dependent FHIR package |
+| `--included-profile` | — | No | All profiles | Comma-separated profiles to include |
+| `--excluded-profile` | — | No | None | Comma-separated profiles to exclude |
+
+### Package mode flags
+
+| Flag | Alias | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `-i`, `--input` | — | Yes | — | Path to the FHIR Implementation Guide directory or ZIP |
+
+### Template mode flags
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `--dependent-package` | Yes | — | Path to the FHIR package to generate the API for |
+
+## Supported FHIR versions
+
+| FHIR version | Status | Notes |
+|---|---|---|
+| R4 (4.0.1) | Fully supported | Most widely adopted version |
+| R4B (4.3.0) | Supported | Minor update to R4 |
+| R5 (5.0.0) | Supported | Latest release |
+
+## Common implementation guides
+
+| Implementation guide | Description |
 |---|---|
-| `bal health fhir -i <ig-dir> --mode types` | Generate FHIR resource types |
-| `bal health fhir -i <ig-dir> --mode service` | Generate FHIR server stub |
-| `bal health fhir --package <name> --mode types` | Generate from FHIR package |
-| `bal health hl7 --message-types <types>` | Generate HL7v2 message types |
-| `-o <dir>` | Output directory |
+| US Core | United States core FHIR profiles |
+| International Patient Summary | Cross-border patient summary |
+| SMART on FHIR | App authorization framework |
+| CARIN Blue Button | Consumer-directed health data exchange |
+| Da Vinci | Value-based care and payer/provider exchange |
+| mCODE | Minimal Common Oncology Data Elements |
+| AU Base | Australian base FHIR profiles |
 
 ## What's next
 
-- [EDI Tool](edi-tool.md) -- Generate B2B data exchange code
-- [OpenAPI Tool](openapi-tool.md) -- Expose healthcare services as REST APIs
-- [Configuration Management](/docs/develop/design-logic/configuration-management) -- Manage healthcare endpoint configuration
+- [EDI Tool](edi-tool.md) — Generate B2B data exchange code
+- [OpenAPI Tool](openapi-tool.md) — Expose healthcare services as REST APIs
+- [Configuration management](/docs/develop/design-logic/configuration-management) — Manage healthcare endpoint configuration

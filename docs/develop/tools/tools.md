@@ -36,7 +36,7 @@ Migrate existing integrations from other platforms to WSO2 Integrator.
 ## Other tools
 
 - [Scan Tool](other/scan-tool.md) -- Run static code analysis to detect security, quality, and best practice issues
-- [Persist Tool](other/persist-tool.md) -- Generate type-safe data persistence clients for multiple data stores
+- [Persist Tool](integration-tools/persist-tool.md) -- Generate type-safe data persistence clients for multiple data stores
 
 ## Quick reference
 

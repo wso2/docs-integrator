@@ -143,6 +143,21 @@ bal pack [OPTIONS]
 | `--sticky` | Stick to dependency versions in Dependencies.toml |
 | `-o <output>`, `--output <output>` | Set the output directory |
 
+### `bal bindgen`
+
+Generates Ballerina bindings for Java classes, enabling Java interoperability.
+
+```bash
+bal bindgen [OPTIONS] <class-names...>
+```
+
+| Flag | Description |
+|------|-------------|
+| `-cp <classpath>` | Java classpath for dependency resolution |
+| `-o <output>`, `--output <output>` | Output directory for generated bindings |
+| `--public` | Make generated functions public |
+| `-m <module>`, `--modules <module>` | Target module for the bindings |
+
 ## Package management commands
 
 ### `bal push`
@@ -209,86 +224,6 @@ Validates semantic versioning compatibility of local changes against published v
 ```bash
 bal semver
 ```
-
-## Code generation commands
-
-### `bal openapi`
-
-Generates Ballerina service/client code from an OpenAPI specification, or exports an OpenAPI spec from a Ballerina service.
-
-```bash
-bal openapi [OPTIONS] <openapi-file|bal-file>
-```
-
-| Flag | Description |
-|------|-------------|
-| `--input <file>` | Path to the OpenAPI contract file |
-| `--mode <mode>` | Generation mode: `client` or `service` |
-| `--tags <tags>` | Comma-separated tags to include |
-| `--operations <ops>` | Comma-separated operation IDs to include |
-| `--nullable` | Enable nullable field generation |
-| `-o <output>`, `--output <output>` | Output directory |
-
-### `bal graphql`
-
-Generates Ballerina client code from a GraphQL schema or config, or generates a schema from a Ballerina service.
-
-```bash
-bal graphql [OPTIONS] <graphql-schema|bal-file>
-```
-
-### `bal grpc`
-
-Generates Ballerina stub/skeleton code from a Protocol Buffer definition.
-
-```bash
-bal grpc [OPTIONS] --input <proto-file>
-```
-
-| Flag | Description |
-|------|-------------|
-| `--input <file>` | Path to the `.proto` file |
-| `--mode <mode>` | Generation mode: `client` or `service` |
-| `-o <output>`, `--output <output>` | Output directory |
-
-### `bal asyncapi`
-
-Generates Ballerina code from an AsyncAPI specification.
-
-```bash
-bal asyncapi [OPTIONS] <asyncapi-file>
-```
-
-### `bal persist`
-
-Manages Ballerina data persistence. Subcommands handle model generation, client generation, and migrations.
-
-```bash
-bal persist <subcommand>
-```
-
-| Subcommand | Description |
-|------------|-------------|
-| `init` | Initialize persistence in the package |
-| `generate` | Generate the persistence client from the data model |
-| `add` | Add a new data model |
-| `migrate` | Run database migrations |
-| `push` | Push schema changes to the data store |
-
-### `bal bindgen`
-
-Generates Ballerina bindings for Java classes, enabling Java interoperability.
-
-```bash
-bal bindgen [OPTIONS] <class-names...>
-```
-
-| Flag | Description |
-|------|-------------|
-| `-cp <classpath>` | Java classpath for dependency resolution |
-| `-o <output>`, `--output <output>` | Output directory for generated bindings |
-| `--public` | Make generated functions public |
-| `-m <module>`, `--modules <module>` | Target module for the bindings |
 
 ## Formatting and quality
 
@@ -395,3 +330,19 @@ The following flags are available across most commands:
 | `--debug <port>` | Start in remote debug mode |
 | `--offline` | Proceed without accessing the network |
 | `--sticky` | Stick to the dependency versions in Dependencies.toml |
+
+## Integration tooling
+
+The following tools extend `bal` with integration-specific code generation. Each has a dedicated guide with full flag reference, examples, and visual designer instructions.
+
+| Tool | Command | Description |
+|---|---|---|
+| [OpenAPI Tool](../../develop/tools/integration-tools/openapi-tool.md) | `bal openapi` | Generate services and clients from OpenAPI specifications |
+| [GraphQL Tool](../../develop/tools/integration-tools/graphql-tool.md) | `bal graphql` | Generate services and clients from GraphQL SDL schemas |
+| [gRPC Tool](../../develop/tools/integration-tools/grpc-tool.md) | `bal grpc` | Generate service stubs and clients from Protocol Buffer definitions |
+| [AsyncAPI Tool](../../develop/tools/integration-tools/asyncapi-tool.md) | `bal asyncapi` | Generate event-driven services from AsyncAPI specifications |
+| [EDI Tool](../../develop/tools/integration-tools/edi-tool.md) | `bal edi` | Generate types and parsers from EDI schema definitions |
+| [Health Tool](../../develop/tools/integration-tools/health-tool.md) | `bal health` | Generate FHIR and HL7 healthcare integration code |
+| [Persist Tool](../../develop/tools/integration-tools/persist-tool.md) | `bal persist` | Generate type-safe data persistence clients |
+| [WSDL Tool](../../develop/tools/integration-tools/wsdl-tool.md) | `bal wsdl` | Generate clients from WSDL service definitions |
+| [XSD Tool](../../develop/tools/integration-tools/xsd-tool.md) | `bal xsd` | Generate Ballerina types from XML schema definitions |

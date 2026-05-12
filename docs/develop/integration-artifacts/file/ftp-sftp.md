@@ -635,7 +635,7 @@ service on primaryListener, backupListener {
 }
 ```
 
-For the general concept, see [Services and listeners](/docs/get-started/key-concepts#services-and-listeners). For the language-level details, see [Integration-specific features](../../../reference/language/integration-specific-features.md).
+For the general concept, see [Services and listeners](/docs/get-started/key-concepts#services-and-listeners).
 
 ## Attaching listeners to services
 

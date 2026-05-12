@@ -73,6 +73,21 @@ listener http:Listener secureListener = new (9443, {
 });
 ```
 
+**Attaching a service to multiple listeners:**
+
+```ballerina
+import ballerina/http;
+
+listener http:Listener httpListener = new (9090);
+listener http:Listener httpsListener = new (9443, {
+    secureSocket: {key: {certFile: "server.crt", keyFile: "server.key"}}
+});
+
+service /api on httpListener, httpsListener {
+    // service handles both HTTP and HTTPS traffic
+}
+```
+
 ---
 
 ## Service
@@ -100,7 +115,7 @@ Resource methods can accept the following parameter types:
 
 | Annotation | Type | Description |
 |------------|------|-------------|
-| (path segment) | `string`, `int`, `float`, `boolean`, `decimal` | Path parameters extracted from the URL. |
+| (path segment) | `string`, `int`, `float`, `boolean`, `decimal` | Path parameters extracted from the URL. Use `[string... path]` to capture remaining segments as a rest parameter. |
 | `@http:Payload` | `json`, `xml`, `string`, `byte[]`, `record` | Request body payload. If request body is a structural type then the annotation is optional. |
 | `@http:Header` | `string`, `string[]` | Specific request header values. |
 | `@http:Query` | `string`, `int`, `float`, `boolean` | Query parameter values. |

@@ -45,20 +45,23 @@ import ballerina/http;
 http:Client httpClient = check new ("https://api.example.com");
 ```
 
-With configuration:
+With retry and circuit breaker:
 
 ```ballerina
 import ballerina/http;
 
 http:Client httpClient = check new ("https://api.example.com", {
     timeout: 30,
-    auth: {
-        token: "<access-token>"
-    },
     retryConfig: {
         count: 3,
-        intervalInMillis: 1000,
-        backOffFactor: 2.0
+        interval: 1,
+        backOffFactor: 2.0,
+        maxWaitInterval: 20
+    },
+    circuitBreaker: {
+        rollingWindow: {timeWindow: 60, bucketSize: 10},
+        failureThreshold: 0.5,
+        resetTime: 30
     }
 });
 ```
