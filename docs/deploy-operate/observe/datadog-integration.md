@@ -154,6 +154,6 @@ Create Datadog monitors for critical thresholds:
 
 ## What's next
 
-- [Prometheus](prometheus-metrics.md) -- Self-managed metrics collection
+- [Metrics Overview](metrics-overview.md) -- Self-managed metrics collection with Prometheus
 - [New Relic](new-relic-integration.md) -- Alternative full-stack observability platform
 - [Observability Overview](observability-overview.md) -- Full observability architecture

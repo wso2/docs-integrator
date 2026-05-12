@@ -16,37 +16,51 @@ Jaeger is an open-source distributed tracing platform that helps you monitor and
 
 ## Step 1 -- start Jaeger
 
-Run the Jaeger all-in-one image for development:
+Run the Jaeger OpenTelemetry all-in-one image for development and testing:
 
 ```bash
 docker run -d --name jaeger \
-  -p 6831:6831/udp \
-  -p 6832:6832/udp \
+  -p 13133:13133 \
   -p 16686:16686 \
-  -p 14268:14268 \
   -p 4317:4317 \
-  -p 4318:4318 \
-  jaegertracing/all-in-one:latest
+  jaegertracing/opentelemetry-all-in-one:latest
 ```
 
 | Port | Protocol | Purpose |
 |------|----------|---------|
-| 6831 | UDP | Jaeger agent (compact Thrift) |
-| 6832 | UDP | Jaeger agent (binary Thrift) |
-| 16686 | HTTP | Jaeger UI |
-| 14268 | HTTP | Jaeger collector |
 | 4317 | gRPC | OpenTelemetry collector (OTLP) |
-| 4318 | HTTP | OpenTelemetry collector (OTLP) |
+| 13133 | HTTP | Health check endpoint |
+| 16686 | HTTP | Jaeger UI |
+
+For production deployments with higher throughput, use the dedicated Jaeger collector and agent components.
 
 ## Step 2 -- configure Ballerina for Jaeger
 
-Build with observability:
+### Import the Jaeger extension
 
-```bash
-bal build --observability-included
+Navigate to your entry point file in the file explorer (typically `main.bal` in the project root) and add the following import statement at the top:
+
+**File path:** `main.bal` (or your entry point)
+
+```ballerina
+import ballerinax/jaeger as _;
 ```
 
-Configure `Config.toml`:
+This enables Jaeger tracing capabilities in your Ballerina application.
+
+### Enable tracing in configuration
+
+Open `Ballerina.toml` by navigating file explorer and edit as follows
+
+```toml
+[build-options]
+observabilityIncluded = true
+
+```
+
+Open the `Config.toml` file in your project root and add the following sections:
+
+**File path:** `Config.toml`
 
 ```toml
 [ballerina.observe]
@@ -55,23 +69,25 @@ tracingProvider = "jaeger"
 
 [ballerinax.jaeger]
 agentHostname = "localhost"
-agentPort = 6831
+agentPort = 4317
 samplerType = "const"
 samplerParam = 1.0
-reporterFlushInterval = 1000
-reporterBufferSize = 100
+reporterFlushInterval = 2000
+reporterBufferSize = 1000
 ```
+
+If `Config.toml` doesn't exist, create it in your project root directory.
 
 ### Configuration options
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | `agentHostname` | string | `"localhost"` | Jaeger agent hostname |
-| `agentPort` | int | `6831` | Jaeger agent UDP port |
+| `agentPort` | int | `4317` | Jaeger OpenTelemetry receiver port (gRPC) |
 | `samplerType` | string | `"const"` | Sampling strategy: `const`, `probabilistic`, `ratelimiting` |
 | `samplerParam` | float | `1.0` | Sampler parameter (1.0 = sample all) |
-| `reporterFlushInterval` | int | `1000` | Flush interval in milliseconds |
-| `reporterBufferSize` | int | `100` | Maximum spans buffered |
+| `reporterFlushInterval` | int | `2000` | Flush interval in milliseconds |
+| `reporterBufferSize` | int | `1000` | Maximum spans buffered |
 
 ### Sampling strategies
 
@@ -81,7 +97,11 @@ reporterBufferSize = 100
 | `probabilistic` | `0.0` to `1.0` | Probability of sampling each trace |
 | `ratelimiting` | traces/second | Fixed rate of traces per second |
 
-For production, use `probabilistic` or `ratelimiting` to reduce overhead:
+For production, use `probabilistic` or `ratelimiting` to reduce overhead.
+
+Edit `Config.toml` to modify the sampler configuration:
+
+**File path:** `Config.toml`
 
 ```toml
 [ballerinax.jaeger]
@@ -89,101 +109,18 @@ samplerType = "probabilistic"
 samplerParam = 0.1   # Sample 10% of traces
 ```
 
+This configuration samples 10% of traces in production to reduce overhead while maintaining visibility into your system.
+
 ## Step 3 -- view traces
 
-Open the Jaeger UI at `http://localhost:16686`:
+Run the service and Open the Jaeger UI at `http://localhost:16686`:
 
 1. Select your service from the **Service** dropdown.
 2. Click **Find Traces**.
 3. Click a trace to view the span details.
 
-### Trace structure
-
-A typical integration trace includes:
-
-```
-order-service: POST /api/orders (120ms)
-  ├── inventory-service: GET /api/stock (45ms)
-  ├── payment-service: POST /api/charge (60ms)
-  └── notification-service: POST /api/notify (10ms)
-```
-
-Each span captures:
-- **Operation name** (HTTP method + resource path)
-- **Duration** (time spent in the operation)
-- **Tags** (HTTP status, error, component)
-- **Logs** (events within the span)
-
-## Adding custom spans
-
-Instrument specific operations in your Ballerina code:
-
-```ballerina
-import ballerina/observe;
-
-function processOrder(json order) returns json|error {
-    int spanId = check observe:startSpan("processOrder");
-
-    // Validate the order
-    int validateSpanId = check observe:startSpan("validateOrder");
-    check validateOrder(order);
-    check observe:finishSpan(validateSpanId);
-
-    // Process payment
-    int paymentSpanId = check observe:startSpan("processPayment");
-    json paymentResult = check processPayment(order);
-    check observe:finishSpan(paymentSpanId);
-
-    check observe:finishSpan(spanId);
-    return paymentResult;
-}
-```
-
-### Adding tags to spans
-
-```ballerina
-import ballerina/observe;
-
-function processOrder(json order) returns json|error {
-    int spanId = check observe:startSpan("processOrder");
-    check observe:addTagToSpan(spanId, "order.id", check order.orderId);
-    check observe:addTagToSpan(spanId, "order.amount", check order.totalAmount);
-
-    // Process...
-
-    check observe:finishSpan(spanId);
-    return result;
-}
-```
-
-## Kubernetes deployment
-
-Deploy Jaeger as a sidecar or a centralized collector in Kubernetes:
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: integration-with-jaeger
-spec:
-  template:
-    spec:
-      containers:
-        - name: integration
-          image: myorg/order-service:latest
-          env:
-            - name: BALLERINAX_JAEGER_AGENT_HOSTNAME
-              value: "localhost"
-        - name: jaeger-agent
-          image: jaegertracing/jaeger-agent:latest
-          args: ["--reporter.grpc.host-port=jaeger-collector:14250"]
-          ports:
-            - containerPort: 6831
-              protocol: UDP
-```
-
 ## What's next
 
 - [Zipkin](zipkin-tracing.md) -- Alternative distributed tracing with Zipkin
-- [Grafana](grafana-dashboards.md) -- Visualize trace data alongside metrics
+- [Metrics Overview](metrics-overview.md) -- Collect and monitor metrics alongside traces
 - [Observability Overview](observability-overview.md) -- Full observability architecture

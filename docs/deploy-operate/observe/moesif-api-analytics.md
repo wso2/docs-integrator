@@ -1,167 +1,332 @@
 ---
-title: Moesif API Analytics
+title: Observe metrics, traces and logs using Moesif
 ---
 
-# Moesif API Analytics
+# Observe metrics, traces and logs using Moesif
 
-Moesif provides API analytics, monitoring, and usage-based billing capabilities. Integrating your Ballerina services with Moesif gives you deep visibility into API usage patterns, customer behavior, and error trends.
+Users can observe service integrations with [Moesif](https://www.moesif.com/), which is a powerful API analytics and monetization platform that helps businesses understand, debug, and monetize their API usage. It provides comprehensive API observability with real-time monitoring, behavioral analytics, and AI-powered insights to track customer API adoption and usage patterns.
 
-## Prerequisites
+Follow the steps given below to view integration metrics, traces and logs in Moesif.
 
-| Requirement | Details |
-|-------------|---------|
-| Moesif Account | Active account with Application ID |
-| Ballerina | Integration project with HTTP services |
+## Step 1 - Create a Moesif account and get an application ID
 
-## Overview
+After you log into Moesif Portal, get your `Moesif Application ID` during the onboarding steps.
+`Application ID` can be accessed by following the below steps from Moesif Portal after logging in.
 
-Moesif captures API request and response data, providing:
+> Go to Account -> Settings -> API keys -> Collector Application ID.
 
-| Feature | Description |
-|---------|-------------|
-| API Analytics | Request volume, latency, and error breakdowns |
-| User Tracking | Per-user and per-company API usage |
-| Alerting | Anomaly detection and threshold alerts |
-| Usage Billing | Metered billing based on API consumption |
-| Debugging | Full request/response inspection |
+## Step 2 - Set up a service integration for publishing traces and metrics to Moesif
 
-## Step 1 -- add a moesif interceptor
+1. In your integration, Navigate to file explorer.
+2. Open the `main.bal` file in the Ballerina package and add the following imports.
 
-Create an HTTP interceptor that sends request/response data to Moesif:
+   ```ballerina
+   import ballerinax/moesif as _;
+   ```
 
-```ballerina
-import ballerina/http;
-import ballerina/log;
-import ballerina/time;
+3. Create the `Config.toml` file in the package directory to set the runtime configurations.
+4. To enable the extension and publish traces to Moesif, add the following to the `Config.toml`.
 
-configurable string moesifAppId = ?;
-configurable string moesifApiEndpoint = "https://api.moesif.net/v1/events";
+   ```toml
+   [ballerina.observe]
+   tracingEnabled=true
+   tracingProvider="moesif"
 
-final http:Client moesifClient = check new (moesifApiEndpoint, {
-    customHeaders: {"X-Moesif-Application-Id": moesifAppId}
-});
+   [ballerinax.moesif]
+   applicationId = "<MOESIF_APPLICATION_ID>"    # Mandatory Configuration.
+   reporterBaseUrl = "https://api.moesif.net"   # Optional Configuration. Default value is 'https://api.moesif.net'
+   tracingReporterFlushInterval = 1000          # Optional Configuration. Default value is 1000
+   tracingReporterBufferSize = 10000            # Optional Configuration. Default value is 10000
+   isTraceLoggingEnabled = false                # Optional Configuration. Default value is false
+   isPayloadLoggingEnabled = false              # Optional Configuration. Default value is false
+   ```
 
-service class MoesifInterceptor {
-    *http:RequestInterceptor;
+5. To enable metrics publishing, add the following to the `Config.toml`.
 
-    resource function 'default [string... path](
-            http:RequestContext ctx,
-            http:Request req) returns http:NextService|error? {
-        // Capture request timestamp
-        time:Utc requestTime = time:utcNow();
-        ctx.set("moesif.requestTime", requestTime.toString());
-        ctx.set("moesif.uri", req.rawPath);
-        ctx.set("moesif.method", req.method);
-        return ctx.next();
-    }
-}
+   ```toml
+   [ballerina.observe]
+   metricsEnabled=true
+   metricsReporter="moesif"
 
-service class MoesifResponseInterceptor {
-    *http:ResponseInterceptor;
+   [ballerinax.moesif]
+   applicationId = "<MOESIF_APPLICATION_ID>"     # Mandatory Configuration.
+   reporterBaseUrl = "https://api.moesif.net"   # Optional Configuration. Default value is 'https://api.moesif.net'
+   metricsReporterFlushInterval = 15000         # Optional Configuration. Default value is 15000
+   metricsReporterClientTimeout = 10000         # Optional Configuration. Default value is 10000
+   isTraceLoggingEnabled = false                # Optional Configuration. Default value is false
+   isPayloadLoggingEnabled = false              # Optional Configuration. Default value is false
+   idleTimePublishingEnabled = false            # Optional Configuration. Default value is false
 
-    remote function interceptResponse(http:RequestContext ctx,
-            http:Response res) returns http:NextService|error? {
-        // Send event to Moesif asynchronously
-        string requestTime = check ctx.get("moesif.requestTime").ensureType();
-        string uri = check ctx.get("moesif.uri").ensureType();
-        string method = check ctx.get("moesif.method").ensureType();
+   # Additional attributes for metrics
+   [ballerinax.moesif.additionalAttributes]
+   key1 = "value1"
+   key2 = "value2"
+   ```
+6. Replace `<MOESIF_APPLICATION_ID>` with the application ID obtained in **Step 1**.
 
-        json event = {
-            request: {
-                time: requestTime,
-                uri: uri,
-                verb: method
-            },
-            response: {
-                time: time:utcNow().toString(),
-                status: res.statusCode
-            }
-        };
+The table below provides the descriptions of each configuration option and possible values that can be assigned.
 
-        // Fire and forget
-        _ = start sendToMoesif(event);
-        return ctx.next();
-    }
-}
+| Configuration key                              | Description                                                                 | Default value | Possible values                      |
+|------------------------------------------------|-----------------------------------------------------------------------------|-------------------------|--------------------------------------|
+| ballerina.observe.tracingEnabled               | Enables or disables the collection of trace data.                           | `false`       | `true` or `false`                    |
+| ballerina.observe.tracingProvider              | Specifies Moesif as the tracing provider.                                   | `none`        | `"moesif"`                           |
+| ballerina.observe.metricsEnabled               | Enables or disables the collection of metrics data.                         | `false`       | `true` or `false`                    |
+| ballerina.observe.metricsReporter              | Specifies Moesif as the metrics reporter.                                   | `none`        | `"moesif"`                           |
+| ballerinax.moesif.applicationId                | Moesif application ID used for authentication. **Mandatory configuration.** | `none`        | A valid Moesif application ID string |
+| ballerinax.moesif.reporterBaseUrl              | The base URL of the Moesif API.                                             | `https://api.moesif.net` | Any valid Moesif API endpoint URL    |
+| ballerinax.moesif.tracingReporterFlushInterval | Interval (in milliseconds) for flushing trace data to Moesif.               | `1000`        | Any positive integer value           |
+| ballerinax.moesif.tracingReporterBufferSize    | Maximum buffer size for trace data before sending to Moesif.                | `10000`       | Any positive integer value           |
+| ballerinax.moesif.metricsReporterFlushInterval | Interval (in milliseconds) for flushing metrics data to Moesif.             | `15000`       | Any positive integer value           |
+| ballerinax.moesif.metricsReporterClientTimeout | Timeout (in milliseconds) for the metrics reporter client requests.         | `10000`       | Any positive integer value           |
+| ballerinax.moesif.isTraceLoggingEnabled        | Enables or disables trace logging for debugging purposes.                   | `false`       | `true` or `false`                    |
+| ballerinax.moesif.isPayloadLoggingEnabled      | Enables or disables payload logging for debugging purposes.                 | `false`       | `true` or `false`                    |
+| ballerinax.moesif.idleTimePublishingEnabled    | Enables or disables publishing metrics in idle time.                        | `false`       | `true` or `false`                    |
+| ballerinax.moesif.additionalAttributes         | Additional key-value attributes to include with metrics reporting.          | `none`        | Any valid set of key-value pairs.<br/>e.g., `key1="value1", key2="value2"` |
 
-function sendToMoesif(json event) {
-    http:Response|error resp = moesifClient->post("/", event);
-    if resp is error {
-        log:printError("Failed to send event to Moesif", resp);
-    }
-}
+These configurations enable traces and metrics publishing for the Ballerina application and configure the Moesif exporter.
+
+## Step 3 - Publish integration logs to Moesif
+
+This setup leverages `Fluent Bit` to forward logs to an `OTEL Collector`, which then sends the logs to Moesif's log endpoint.
+
+> Integration → Fluent Bit → OTEL Collector → Moesif
+
+1. Copy the following configs into a local directory to set up containerized log publishing.
+
+   ```bash
+   .
+   ├── docker-compose.yaml
+   ├── fluent-bit.conf
+   └── otelcol.yaml
+   ```
+
+   * **docker-compose.yaml** – Container setup for Fluent Bit and OTEL Collector.
+   * **fluent-bit.conf** – Reads Ballerina logs and forwards them.
+   * **otelcol.yaml** – Processes logs and sends to Moesif.
+
+   **docker-compose.yaml**
+
+   Update the `<ballerina-log-path>` with the log storage location, and `<MOESIF_APPLICATION_ID>` with the
+   application ID obtained in **Step 1**.
+
+   ```yaml
+   services:
+     otelcol:
+       image: otel/opentelemetry-collector-contrib:0.132.0
+       container_name: otelcol
+       command: ["--config", "/etc/otelcol.yaml"]
+       environment:
+         MOESIF_APP_ID: "<MOESIF_APPLICATION_ID>"
+       ports:
+         - "4317:4317"
+         - "4318:4318"
+       volumes:
+         - ./otelcol.yaml:/etc/otelcol.yaml:ro
+       networks:
+         - otelnet
+
+     fluent-bit:
+       image: fluent/fluent-bit:3.0
+       container_name: fluent-bit
+       depends_on:
+         - otelcol
+       ports:
+         - "2020:2020"
+       volumes:
+         - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf:ro
+         # Mount the local log directory into the container
+         - <ballerina-log-path>:/app/logs:ro
+       networks:
+         - otelnet
+
+   networks:
+     otelnet:
+       driver: bridge
+   ```
+
+   **fluent-bit.conf**
+
+   ```ini
+   [SERVICE]
+       Flush         1
+       Log_Level     debug
+       Daemon        off
+       HTTP_Server   On
+       HTTP_Listen   0.0.0.0
+       HTTP_Port     2020
+
+   # Read logs from local Ballerina app
+   [INPUT]
+       Name              tail
+       Path              /app/logs/app.log
+       Tag               ballerina.*
+       Read_from_Head    true
+       Skip_Long_Lines   On
+       Skip_Empty_Lines  On
+       Refresh_Interval  1
+
+   # Add metadata
+   [FILTER]
+       Name         modify
+       Match        ballerina.*
+       Add          service.name ballerina-service
+       Add          deployment.environment prod
+
+   # Convert to OTEL format and send to collector
+   [OUTPUT]
+       Name          opentelemetry
+       Match         ballerina.*
+       Host          otelcol
+       Port          4318
+       Logs_uri      /v1/logs
+       Log_response_payload True
+       Tls           Off
+       Tls.verify    Off
+
+   # Debug output to see what's being processed
+   [OUTPUT]
+       Name          stdout
+       Match         ballerina.*
+       Format        json_lines
+   ```
+
+   **otelcol.yaml**
+
+   Update the `<MOESIF_APPLICATION_ID>` with the application ID obtained in **Step 1**.
+
+   ```yaml
+   receivers:
+     otlp:
+       protocols:
+         grpc:
+           endpoint: "0.0.0.0:4317"
+         http:
+           endpoint: "0.0.0.0:4318"
+
+   processors:
+     resource:
+       attributes:
+         - key: service.name
+           value: ballerina-service
+           action: upsert
+         - key: deployment.environment
+           value: prod
+           action: upsert
+
+     transform/severity_from_message:
+       log_statements:
+         - context: log
+           statements:
+             # Set default severity to INFO for all logs first
+             - set(severity_number, 9) where body != nil
+             - set(severity_text, "INFO") where body != nil
+
+             # Try to parse JSON body, but handle parsing errors gracefully
+             - set(cache["is_json"], false)
+             - set(cache["is_json"], true) where body != nil and IsMatch(body, "^\\s*\\{")
+
+             # For JSON logs, parse and extract level
+             - set(cache["parsed_body"], ParseJSON(body)) where cache["is_json"] == true
+
+             # Override with specific levels based on JSON level field
+             - set(severity_number, 1) where cache["is_json"] == true and cache["parsed_body"]["level"] == "TRACE"
+             - set(severity_text, "TRACE") where cache["is_json"] == true and cache["parsed_body"]["level"] == "TRACE"
+             - set(severity_number, 5) where cache["is_json"] == true and cache["parsed_body"]["level"] == "DEBUG"
+             - set(severity_text, "DEBUG") where cache["is_json"] == true and cache["parsed_body"]["level"] == "DEBUG"
+             - set(severity_number, 9) where cache["is_json"] == true and cache["parsed_body"]["level"] == "INFO"
+             - set(severity_text, "INFO") where cache["is_json"] == true and cache["parsed_body"]["level"] == "INFO"
+             - set(severity_number, 13) where cache["is_json"] == true and cache["parsed_body"]["level"] == "WARN"
+             - set(severity_text, "WARN") where cache["is_json"] == true and cache["parsed_body"]["level"] == "WARN"
+             - set(severity_number, 17) where cache["is_json"] == true and cache["parsed_body"]["level"] == "ERROR"
+             - set(severity_text, "ERROR") where cache["is_json"] == true and cache["parsed_body"]["level"] == "ERROR"
+             - set(severity_number, 21) where cache["is_json"] == true and cache["parsed_body"]["level"] == "FATAL"
+             - set(severity_text, "FATAL") where cache["is_json"] == true and cache["parsed_body"]["level"] == "FATAL"
+
+     batch: {}
+
+   exporters:
+     # OTLP over HTTP to Moesif
+     otlphttp:
+       endpoint: "https://api.moesif.net"
+       logs_endpoint: "https://api.moesif.net/v1/logs"
+       headers:
+         X-Moesif-Application-Id: "<MOESIF_APPLICATION_ID>"
+       compression: none
+       timeout: 10s
+       sending_queue:
+         enabled: true
+         num_consumers: 2
+         queue_size: 512
+       retry_on_failure:
+         enabled: true
+         initial_interval: 1s
+         max_interval: 10s
+         max_elapsed_time: 0s
+
+   service:
+     telemetry:
+       logs:
+         level: debug
+     pipelines:
+       logs:
+         receivers:  [otlp]
+         processors: [resource, transform/severity_from_message, batch]
+         exporters:  [otlphttp]
+   ```
+
+2. Run the above components stack using the following command.
+   `docker compose up`
+
+3. Create the `Config.toml` file by navigating to file explorer with the following content to log to a file in `json` format.
+
+   ```toml
+   [ballerina.log]
+   format = "json"
+
+   [[ballerina.log.destinations]]
+   # Replace /path/to/your/ballerina/logs with the absolute path to the Ballerina application's log directory
+   path = "/path/to/your/ballerina/logs/app.log"
+   ```
+
+## Step 4 - Run the Integration
+
+When observability is enabled, the runtime collects metrics, logs, and traces.
+
+## Step 5 - Send requests
+
+Send requests as below to the service.
+
+Example cURL commands:
+
+```bash
+curl -X GET http://localhost:8090/shop/products
 ```
 
-## Step 2 -- attach the interceptor to your service
-
-```ballerina
-import ballerina/http;
-
-listener http:Listener ep = new (9090,
-    interceptors = [new MoesifInterceptor(), new MoesifResponseInterceptor()]
-);
-
-service /api on ep {
-    resource function get orders() returns json {
-        return {orders: []};
-    }
-
-    resource function post orders(json payload) returns json|error {
-        // Process order...
-        return {status: "created"};
-    }
-}
+```bash
+curl -X POST http://localhost:8090/shop/product \
+-H "Content-Type: application/json" \
+-d '{
+    "id": 4,
+    "name": "Laptop Charger",
+    "price": 50.00
+}'
 ```
 
-## Step 3 -- configure moesif application ID
-
-Add your Moesif Application ID to `Config.toml`:
-
-```toml
-moesifAppId = "your-moesif-application-id"
+```bash
+curl -X POST http://localhost:8090/shop/order \
+-H "Content-Type: application/json" \
+-d '{
+    "productId": 1,
+    "quantity": 1
+}'
 ```
 
-## Step 4 -- add user and company context
-
-Enrich events with user and company identifiers for per-customer analytics:
-
-```ballerina
-// In the interceptor, extract user context from the request
-string? userId = req.getHeader("X-User-Id");
-string? companyId = req.getHeader("X-Company-Id");
-
-json event = {
-    request: { ... },
-    response: { ... },
-    user_id: userId,
-    company_id: companyId
-};
+```bash
+curl -X GET http://localhost:8090/shop/order/0
 ```
 
-## Using moesif with an API gateway
+## Step 6 - Visualize the observability data in Moesif dashboards
 
-If you use an API gateway (Kong, Tyk, or AWS API Gateway), install the Moesif plugin at the gateway level instead of within the Ballerina service:
-
-| Gateway | Moesif Plugin |
-|---------|--------------|
-| Kong | `kong-plugin-moesif` |
-| Tyk | `tyk-plugin-moesif` |
-| AWS API Gateway | Moesif Lambda integration |
-| Apigee | Moesif shared flow |
-
-This approach captures all API traffic without modifying your integration code.
-
-## Viewing analytics
-
-In the Moesif dashboard:
-
-1. **Live Event Log**: View real-time API requests and responses.
-2. **Time Series**: Analyze request trends, latency, and error rates.
-3. **Users**: Track API usage per user or company.
-4. **Alerts**: Set up anomaly detection and threshold-based alerts.
-
-## What's next
-
-- [Prometheus](prometheus-metrics.md) -- Self-managed metrics collection
-- [Observability Overview](observability-overview.md) -- Full observability architecture
-- [API Security](../secure/api-security-rate-limiting.md) -- Secure your API endpoints
+Traces, metrics, and logs are published to Moesif as events and can be explored in the Live Event Log for real-time monitoring.
+Moesif provides a set of pre-built dashboards that help visualize and analyze this data effectively.
+In addition, custom dashboards can be created to gain deeper, domain-specific insights.

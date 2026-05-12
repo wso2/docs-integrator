@@ -1,138 +1,157 @@
 ---
-title: New Relic Integration
+title: Observe metrics and tracing using New Relic
 ---
 
-# New Relic Integration
+# Observe metrics and tracing using New Relic
 
-New Relic provides a full-stack observability platform for monitoring your Ballerina integrations. You can forward metrics via the Prometheus remote write integration, traces via OpenTelemetry, and logs via the New Relic infrastructure agent.
+[New Relic](https://newrelic.com/) is an observability platform designed to help organizations monitor, analyze, and
+troubleshoot their applications, infrastructure, and digital experiences in real-time. Both metrics and tracing of an integration can
+be viewed with New Relic.
 
-## Prerequisites
+The sample shop service will be used in this guide. Follow the steps given below to observe tracing and metrics in New Relic.
 
-| Requirement | Details |
-|-------------|---------|
-| New Relic Account | Active account with an Ingest License Key |
-| Ballerina | Built with `--observability-included` |
+## Step 1 - Create a New Relic account and an API key
 
-## Step 1 -- forward metrics via Prometheus remote write
+Sign up and Generate an API Key in New Relic.
 
-Configure Prometheus to forward Ballerina metrics to New Relic:
+To configure the API key in New Relic:
+> Go to **Profile → API keys → Insights Insert key → Insert keys** to create an account in New Relic.
 
-```yaml
-# prometheus.yml
-global:
-  scrape_interval: 15s
+## Step 2 - Import Ballerina New Relic extension
 
-remote_write:
-  - url: https://metric-api.newrelic.com/prometheus/v1/write
-    bearer_token: <NEW_RELIC_LICENSE_KEY>
+To include the New Relic extension into the executable, the `ballerinax/newrelic` module needs to be imported into your
+integration `main.bal` file. Navigate to File explorer view in WSO2 Integrator to do so.
 
-scrape_configs:
-  - job_name: "ballerina-integration"
-    static_configs:
-      - targets: ["localhost:9797"]
+```ballerina
+import ballerinax/newrelic as _;
 ```
 
-Alternatively, use the New Relic Prometheus Agent:
+New Relic extension has an `Opentelemetry GRPC Span Exporter` which will push tracing data as batches to the New Relic server endpoint (`https://otlp.nr-data.net:4317`) in opentelemetry format.
 
-```bash
-docker run -d \
-  -e LICENSE_KEY=<NEW_RELIC_LICENSE_KEY> \
-  -e PROMETHEUS_SERVER=http://localhost:9797 \
-  newrelic/nri-prometheus:latest
+New Relic extension pushes metrics in New Relic metric format to the New Relic server endpoint (`https://metric-api.newrelic.com/metric/v1`).
+
+## Step 3 - Configure runtime configurations
+
+Add the below to `Ballerina.toml` file.
+
+```toml
+[build-options]
+observabilityIncluded = true
 ```
 
-## Step 2 -- forward traces via OpenTelemetry
+Tracing and metrics can be enabled in your Ballerina project using configurations similar to the following in your `Config.toml` file.
 
-Configure Ballerina to export traces to New Relic via the OpenTelemetry Collector:
-
-### OpenTelemetry collector configuration
-
-```yaml
-# otel-collector-config.yaml
-receivers:
-  jaeger:
-    protocols:
-      thrift_compact:
-        endpoint: "0.0.0.0:6831"
-
-exporters:
-  otlp:
-    endpoint: "otlp.nr-data.net:4317"
-    headers:
-      api-key: <NEW_RELIC_LICENSE_KEY>
-
-service:
-  pipelines:
-    traces:
-      receivers: [jaeger]
-      exporters: [otlp]
-```
-
-### Ballerina configuration
+**File path:** `Config.toml`
 
 ```toml
 [ballerina.observe]
-tracingEnabled = true
-tracingProvider = "jaeger"
+tracingEnabled=true
+tracingProvider="newrelic"
+metricsEnabled=true
+metricsReporter="newrelic"
 
-[ballerinax.jaeger]
-agentHostname = "localhost"
-agentPort = 6831
+[ballerinax.newrelic]
+apiKey="<NEW_RELIC_LICENSE_KEY>"    # Mandatory Configuration.
+tracingSamplerType="const"          # Optional Configuration. Default value is 'const'
+tracingSamplerParam=1               # Optional Configuration. Default value is 1
+tracingReporterFlushInterval=15000  # Optional Configuration. Default value is 15000 milliseconds
+tracingReporterBufferSize=10000     # Optional Configuration. Default value is 10000
+metricReporterFlushInterval=15000   # Optional Configuration. Default value is 15000 milliseconds
+metricReporterClientTimeout=10000   # Optional Configuration. Default value is 10000 milliseconds
+isTraceLoggingEnabled=false         # Optional Configuration. Default value is false
+isPayloadLoggingEnabled=false       # Optional Configuration. Default value is false
+
+[ballerinax.newrelic.additionalAttributes]      # Optional Configuration. Add custom attributes (key & value pair) to metrics
+key1 = "<VALUE_1>"
+key2 = "<VALUE_2>"
 ```
 
-## Step 3 -- forward logs
+Users can also configure multiple API keys for different New Relic user accounts as given below.
 
-### Using the new relic infrastructure agent
-
-Install and configure the infrastructure agent to tail log files:
-
-```yaml
-# /etc/newrelic-infra/logging.d/ballerina.yml
-logs:
-  - name: ballerina-integration
-    file: /var/log/integrations/*.log
-    attributes:
-      service: order-service
-      environment: production
+```toml
+[ballerinax.newrelic]
+apiKey=["<NEW_RELIC_LICENSE_KEY_1>", "<NEW_RELIC_LICENSE_KEY_2>"]
 ```
 
-### Using fluent bit
+User can configure the environment variable `BALLERINA_NEW_RELIC_API_KEY` instead of apiKey in `Config.toml`. If both are configured, apiKey in `Config.toml` will be overwritten by the environment variable value.
 
-```ini
-[INPUT]
-    Name tail
-    Path /var/log/integrations/*.log
-    Tag ballerina.*
+Environment variable can be configured for either a single user or multiple users.
 
-[OUTPUT]
-    Name newrelic
-    Match *
-    licenseKey <NEW_RELIC_LICENSE_KEY>
-    endpoint https://log-api.newrelic.com/log/v1
+**For a single user account:**
+- Linux/Unix: `export BALLERINA_NEW_RELIC_API_KEY="<NEW_RELIC_LICENSE_KEY>"`
+- Windows: `set BALLERINA_NEW_RELIC_API_KEY="<NEW_RELIC_LICENSE_KEY>"`
+
+**For multiple user accounts:**
+- Linux/Unix: `export BALLERINA_NEW_RELIC_API_KEY="<NEW_RELIC_LICENSE_KEY_1>,<NEW_RELIC_LICENSE_KEY_2>"`
+- Windows: `set BALLERINA_NEW_RELIC_API_KEY="<NEW_RELIC_LICENSE_KEY_1>,<NEW_RELIC_LICENSE_KEY_2>"`
+
+**Note:** When specifying multiple API keys in the environment variable, separate each key with a comma (`,`) and do not include spaces between the keys. Any leading or trailing whitespace around each key will be trimmed automatically. For example:
+- `export BALLERINA_NEW_RELIC_API_KEY="key1,key2,key3"`
+- `export BALLERINA_NEW_RELIC_API_KEY="key1, key2 , key3"` (spaces will be trimmed)
+
+### Configuration options
+
+| Configuration key | Description | Default value | Possible values |
+| --- | --- | --- | --- |
+| `ballerinax.newrelic.apiKey` | API key generated by the user in the New Relic platform. **This configuration is mandatory.** | `None` | |
+| `ballerinax.newrelic.tracingSamplerType` | Type of the sampling methods used in the New Relic tracer. | `const` | `const`, `probabilistic`, or `ratelimiting` |
+| `ballerinax.newrelic.tracingSamplerParam` | It is a floating value. Based on the sampler type, the effect of the sampler param varies | `1.0` | For `const` `0` (no sampling) or `1` (sample all spans), for `probabilistic` `0.0` to `1.0`, for `ratelimiting` any positive integer (rate per second) |
+| `ballerinax.newrelic.tracingReporterFlushInterval` | The New Relic tracing client will be sending the spans to the agent at this interval. | `15000` | Any positive integer value |
+| `ballerinax.newrelic.tracingReporterBufferSize` | Queue size of the New Relic tracing client. | `10000` | Any positive integer value |
+| `ballerinax.newrelic.metricReporterFlushInterval` | The New Relic client will be sending the metrics to the agent at this interval. | `15000` | Any positive integer value |
+| `ballerinax.newrelic.metricReporterClientTimeout` | Queue size of the New Relic metric client. | `10000` | Any positive integer value |
+
+## Step 4 - Send requests
+
+Run the service and send requests.
+
+Example cURL commands:
+
+```bash
+curl -X GET http://localhost:8090/shop/products
 ```
 
-## Step 4 -- create dashboards in new relic
+```bash
+curl -X POST http://localhost:8090/shop/product \
+-H "Content-Type: application/json" \
+-d '{
+    "id": 4,
+    "name": "Laptop Charger",
+    "price": 50.00
+}'
+```
 
-Use NRQL to query your Ballerina metrics:
+```bash
+curl -X POST http://localhost:8090/shop/order \
+-H "Content-Type: application/json" \
+-d '{
+    "productId": 1,
+    "quantity": 1
+}'
+```
 
-| Panel | NRQL Query |
-|-------|------------|
-| Request Rate | `SELECT rate(sum(http_requests_total), 1 minute) FROM Metric WHERE service='order-service'` |
-| p95 Latency | `SELECT percentile(http_request_duration_seconds, 95) FROM Metric WHERE service='order-service'` |
-| Error Count | `SELECT sum(http_response_errors_total) FROM Metric WHERE service='order-service'` |
-| Active Connections | `SELECT latest(http_active_requests) FROM Metric WHERE service='order-service'` |
+```bash
+curl -X GET http://localhost:8090/shop/order/0
+```
 
-## Alerting
+## Step 5 - View metrics on the New Relic platform
 
-Create alert policies in New Relic:
+You can view the metrics that were published to the New Relic platform in the New Relic query builder. You can view the metrics query data in graphical format, as shown below.
 
-1. Navigate to **Alerts & AI** > **Alert Policies**.
-2. Create a new policy.
-3. Add an NRQL alert condition.
-4. Define the threshold and notification channels.
+![New Relic metric Query Builder](./images/newrelic-metric-query-builder.png "New Relic metric Query Builder")
+
+You can create a dashboard from the metrics provided by Ballerina in the New Relic platform.
+
+## Step 6 - View tracing on the New Relic platform
+
+You can view the traces that were published to the New Relic platform in New Relic traces.
+
+![Ballerina traces on New Relic](./images/newrelic-tracing.png "Ballerina traces on New Relic")
+
+![Span tags on New Relic](./images/newrelic-span-tags.png "Span tags on New Relic")
 
 ## What's next
 
-- [Datadog](datadog-integration.md) -- Alternative full-stack observability platform
-- [Prometheus](prometheus-metrics.md) -- Self-managed metrics collection
-- [Observability Overview](observability-overview.md) -- Full observability architecture
+- [Jaeger](jaeger-distributed-tracing.md) — Alternative distributed tracing with Jaeger
+- [Zipkin](zipkin-tracing.md) — Alternative distributed tracing with Zipkin
+- [Observability Overview](observability-overview.md) — Full observability architecture
