@@ -1,101 +1,86 @@
 ---
-title: Integration Artifacts
+title: Integration artifacts
 ---
 
-# Integration Artifacts
+# Integration artifacts
 
-Integration artifacts are the building blocks of your integrations. Each artifact type serves a specific purpose -- exposing an endpoint, reacting to events, processing files, running scheduled tasks, or powering AI agents. Understanding these types helps you choose the right approach for each integration scenario.
+Integration artifacts are the building blocks of every integration. Each type is designed for a specific trigger and communication pattern: receiving HTTP requests, reacting to messages, processing files, running on a schedule, or serving AI agent tools. Choosing the right artifact for the job keeps your integration logic focused and your project easy to navigate.
 
-## Artifact overview
+## Artifact categories
 
-WSO2 Integrator supports the following artifact types:
+### Automation
 
-| Category | Artifact | Description |
-|---|---|---|
-| **Automation** | Automation | Runs manually or on a schedule -- data sync, reports, maintenance jobs |
-| **AI Integration** | AI Chat Agent | LLM-backed agents accessible via chat or API |
-| **AI Integration** | MCP Service | Exposes capabilities via Model Context Protocol for AI assistants |
-| **Integration as API** | HTTP Service | Expose integrations as REST APIs |
-| **Integration as API** | GraphQL Service | Expose integrations as GraphQL APIs |
-| **Integration as API** | TCP Service | Raw TCP socket-based services |
-| **Event Integration** | Kafka Service | React to Apache Kafka messages |
-| **Event Integration** | RabbitMQ Service | React to RabbitMQ messages |
-| **Event Integration** | MQTT Service | React to MQTT messages |
-| **Event Integration** | Azure Service Bus | React to Azure Service Bus messages |
-| **Event Integration** | Salesforce Trigger | React to Salesforce events |
-| **Event Integration** | GitHub Trigger | React to GitHub webhook events |
-| **File Integration** | FTP Service | Process files from FTP/FTPS/SFTP servers |
-| **File Integration** | Directory Service | Watch local directories for file arrivals |
-| **Other** | Functions | Reusable code blocks |
-| **Other** | Data Mapper | Visual format transformation |
-| **Other** | Type | Custom data type definitions |
-| **Other** | Connection | Reusable configurations for external systems |
-| **Other** | Configuration | Environment-specific settings |
+Run integration logic on a schedule or manually, without a network listener.
 
-## Five primary integration types
+| Artifact | Description |
+|---|---|
+| [Automation](automation/automation.md) | Runs on a cron schedule or manually. Use for data sync, report generation, and routine maintenance jobs. |
 
-| Type | Purpose | Trigger |
-|---|---|---|
-| **Automation** | Sync data, generate reports, run routine jobs | Timer/schedule or manual |
-| **AI Agent** | Reason and act using GenAI models, respond to input, access tools | User input / dynamic |
-| **Integration as API** | Expose integration as a real-time API | Incoming HTTP/GraphQL/TCP requests |
-| **Event Integration** | Reactive workflows from message sources | Kafka, RabbitMQ, MQTT messages |
-| **File Integration** | Batch uploads, scheduled file processing | Files appearing in folder/FTP |
+### AI integrations
 
-## How artifacts relate
+Build AI-powered integrations that use large language models to reason, respond, and act.
 
-A typical integration combines multiple artifact types. For example, an order processing system might include:
+| Artifact | Description |
+|---|---|
+| AI Chat Agent | An LLM-backed agent accessible via a chat interface or API. Covered in the [AI Integrations](../../genai/overview.md) section. |
+| MCP Service | Exposes integration capabilities as tools via the Model Context Protocol for use by AI assistants. Covered in the [AI Integrations](../../genai/overview.md) section. |
 
-```mermaid
-flowchart TD
-    HTTP["HTTP Service<br/>(receive order)"]
-    Handler["Event Handler<br/>(process order)"]
-    Persistence[(Data Persistence<br/>(store order))]
-    Email["Email<br/>(confirmation)"]
-    Automation["Automation<br/>(daily report)"]
+### Integration as API
 
-    HTTP ----> Handler ----> Persistence
-    HTTP ----> Email
-    Handler ----> Automation
-```
+Expose your integration logic as a callable endpoint. Clients send a request and receive a response.
 
-## Creating artifacts
+| Artifact | Description |
+|---|---|
+| [HTTP service](service/http.md) | Exposes integrations as REST APIs. Use for CRUD operations, webhooks, and any HTTP request/response pattern. |
+| [GraphQL service](service/graphql.md) | Exposes integrations as a GraphQL API. Use when clients need to query exactly the fields they want. |
+| [gRPC service](service/grpc.md) | Contract-first service using protocol buffers. Use for high-performance communication between internal services. |
+| [WebSocket service](service/websocket.md) | Full-duplex service over a persistent connection. Use for real-time, bidirectional communication. |
+| [TCP service](service/tcp.md) | Raw TCP socket service. Use for custom binary or text-based protocol implementations. |
+| [WebSub hub](service/websub-hub.md) | Publish/subscribe hub using the WebSub protocol. Use to distribute content updates to registered subscribers. |
 
-You can create artifacts in two ways:
+### Event integration
 
-### Visual designer
+React to messages or events produced by external systems. The integration runs when something happens, not when a client calls it.
 
-1. Open the WSO2 Integrator sidebar in VS Code.
-2. Click the **+** button next to the artifact category.
-3. Select the artifact type and configure its properties.
+| Artifact | Description |
+|---|---|
+| [Kafka](event/kafka.md) | Consumes messages from Apache Kafka topics. |
+| [RabbitMQ](event/rabbitmq.md) | Consumes messages from RabbitMQ queues or exchanges. |
+| [MQTT](event/mqtt.md) | Subscribes to MQTT topics. Use for IoT devices and lightweight pub/sub messaging. |
+| [Azure Service Bus](event/azure-service-bus.md) | Consumes messages from Azure Service Bus queues or topics. |
+| [Salesforce events](event/salesforce-events.md) | Reacts to Salesforce Platform Events, Change Data Capture, and Push Topics. |
+| [GitHub webhooks](event/github-webhooks.md) | Handles GitHub push, pull request, and issue webhook events. |
+| [POP3/IMAP4](event/pop3imap4.md) | Polls a mailbox for incoming emails. |
+| [Solace](event/solace.md) | Subscribes to Solace PubSub+ topics with guaranteed messaging. |
+| [CDC — MSSQL](event/cdc-mssql.md) | Captures row-level INSERT, UPDATE, and DELETE changes from SQL Server. |
+| [CDC — PostgreSQL](event/cdc-postgresql.md) | Captures row-level changes from PostgreSQL using logical replication. |
+| [Twilio](event/twilio.md) | Handles incoming SMS, calls, and status callbacks from Twilio. |
 
-### Code
+### File integration
 
-Create a new `.bal` file and write the artifact definition directly:
+Trigger an integration when files appear on a remote server or local directory.
 
-```ballerina
-// A simple HTTP service artifact
-import ballerina/http;
+| Artifact | Description |
+|---|---|
+| [FTP/SFTP](file/ftp-sftp.md) | Watches an FTP, FTPS, or SFTP server for new or modified files. |
+| [Local files](file/local-files.md) | Watches a local directory for file arrivals and changes. |
 
-service /api on new http:Listener(8090) {
-    resource function get health() returns string {
-        return "OK";
-    }
-}
-```
+### Other artifacts
 
-## Artifact lifecycle
+Reusable building blocks shared across multiple integrations in the same project.
 
-Every artifact follows the same lifecycle:
-
-1. **Create** -- Define the artifact using the visual designer or code
-2. **Configure** -- Set connection details, parameters, and behavior
-3. **Implement** -- Add the integration logic (flow designer or pro-code)
-4. **Test** -- Validate with Try-It, unit tests, or mocks
-5. **Deploy** -- Package and deploy to a runtime environment
+| Artifact | Description |
+|---|---|
+| [Functions](supporting/functions.md) | Reusable function definitions extracted from integration logic. |
+| [Data Mapper](supporting/data-mapper/data-mapper.md) | Visual tool for field mapping and format transformation between data models. |
+| [Types](supporting/types.md) | Custom record types and type definitions shared across the project. |
+| [Connections](supporting/connections.md) | Named, reusable credential and endpoint configurations for external services. |
+| [Configurations](supporting/configurations.md) | Configurable variables and environment-specific settings managed via `Config.toml`. |
 
 ## What's next
 
-- [Services](service/http.md) -- Build HTTP, GraphQL, gRPC, WebSocket, TCP, and WebSub services
-- [Event Handlers](event/kafka.md) -- React to messages from brokers and external systems
-- [Design Logic](/docs/develop/design-logic/overview) -- Build the logic inside your artifacts
+- [Automation](automation/automation.md) — run scheduled or on-demand integration jobs
+- [HTTP service](service/http.md) — the most common starting point for integration APIs
+- [Kafka](event/kafka.md) — consume and process messages from Apache Kafka
+- [FTP/SFTP](file/ftp-sftp.md) — process files from remote file servers
+- [Connections](supporting/connections.md) — define reusable credentials for external services

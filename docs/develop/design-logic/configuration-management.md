@@ -1,48 +1,39 @@
 ---
-title: Configuration Management
+title: Configuration management
 ---
 
-# Configuration Management
+# Configuration management
 
-Integration projects typically run in multiple environments — development, staging, and production — each with different database endpoints, API keys, and feature flags.
+Integration projects typically run across multiple environments — development, staging, and production — each with different endpoints, credentials, and feature flags. WSO2 Integrator uses Ballerina's built-in configuration system to keep these settings out of source code and supply them at runtime.
 
-WSO2 Integrator uses Ballerina's built-in configuration system to separate settings from code. You declare configurable variables in your source, provide values in a `Config.toml` file (or environment variables), and the runtime resolves them at startup.
+This guide is the deeper reference for the configuration model. For the fundamentals of using configurable variables, see [Configurations](../integration-artifacts/supporting/configurations.md).
 
 ## Configurable variables
 
-Configurable variables defined in your integration project are accessible across all its flows and nodes.
+A configurable variable is a module-level binding declared with Ballerina's `configurable` keyword. The runtime resolves its value at startup from one of the [configuration value sources](#configuration-value-sources), and the resolved value is accessible across all flows and nodes in your integration project.
 
-![Config Editor UI in WSO2 Integrator showing configurable variables for the integration project and the panel for adding a new configurable variable](/img/develop/design-logic/configurations/config-editor-ui.png)
+In the Visual Designer, configurable variables appear under **Configurations** in the project sidebar. Use the **Add Configurable Variable** panel to declare a new variable — set the name and type, and either provide a default value (optional) or leave it empty (required).
 
-To declare a configurable variable:
+![Configurable Variables panel in WSO2 Integrator showing dbHost, dbPassword, dbPort, requestTimeoutSeconds, and enableCaching variables with their types and current values](/img/develop/design-logic/configurations/configurable-variables-panel.png)
 
-1. In the WSO2 Integrator explorer view (LHS), click the **Configurations** section.
-2. Click **+** to add a new configurable variable.
-3. Specify the variable name, type, and an optional default value.
-4. Click **Save** to add the variable to your integration project.
-5. To supply values for the declared configurable variables, either use the **Config Editor** UI (low-code) or directly edit the `Config.toml` file in the project root.
-
-Declare a configurable variable with the `configurable` keyword at the module level:
+Declare configurables at the module level using the `configurable` keyword. The `?` placeholder marks a variable as required; provide a literal default to make it optional.
 
 ```ballerina
-import ballerina/http;
-import ballerina/log;
-
-// Required -- no default, must be supplied via Config.toml or env var
+// Required -- must be supplied at runtime
 configurable string dbHost = ?;
-configurable string dbUser = ?;
 configurable string dbPassword = ?;
 
-// Optional -- has a default value
+// Optional -- uses the declared default if no value is supplied
 configurable int dbPort = 3306;
-configurable int maxRetries = 3;
 configurable decimal requestTimeoutSeconds = 30.0d;
 configurable boolean enableCaching = true;
 ```
 
-Config values must be provided through a supported configuration source (`Config.toml`, `BAL_CONFIG_VAR_*` env vars, `BAL_CONFIG_DATA`, or `-C` CLI args) for all variables with no default values (initialized with `?`); otherwise, the program fails with a runtime error at startup.
-
 ### Supported types
+
+A configurable variable's type must describe plain-data values that the runtime can parse from a configuration source and hold safely for the lifetime of the program.
+
+This covers Ballerina's basic types (nil, boolean, int, float, decimal, string, xml) and structured types built from them (arrays, maps, records, tables). Common examples are shown below.
 
 | Type | Example |
 |---|---|
@@ -51,14 +42,20 @@ Config values must be provided through a supported configuration source (`Config
 | `decimal` | `configurable decimal taxRate = 0.08d;` |
 | `string` | `configurable string apiKey = ?;` |
 | `boolean` | `configurable boolean debug = false;` |
-| `int[]`, `string[]` | `configurable string[] allowedOrigins = ["*"];` |
-| `map<string>` | `configurable map<string> headers = {};` |
+| Arrays | `configurable string[] allowedOrigins = ["*"];` |
+| Maps | `configurable map<string> headers = {};` |
 | Records | `configurable DatabaseConfig dbConfig = ?;` |
 | Tables | `configurable table key(id) employees = table [];` |
 
 ### Structured configuration
 
-Group related settings into a structured configuration by declaring a record type:
+When you have many related settings — for example, the host, port, credentials, and pool size for a single database — declaring each one as a separate configurable variable becomes hard to read and easy to mis-wire. Group them into a record type instead, and declare a single configurable variable of that type.
+
+Use the Visual Designer's type creator to define a new record type (or the type picker to select an existing one), then add a configurable variable of that record type the same way as any primitive.
+
+![Configurable Variables panel in WSO2 Integrator showing record-typed configurables orderDb (DatabaseConfig) and crmApi (ApiConfig) expanded into their nested fields](/img/develop/design-logic/configurations/structured-configurable-panel.png)
+
+Define the record type at the module level, then declare a configurable of that type:
 
 ```ballerina
 type DatabaseConfig record {|
@@ -81,50 +78,44 @@ configurable DatabaseConfig orderDb = ?;
 configurable ApiConfig crmApi = ?;
 ```
 
-Provide values in `Config.toml`:
+## Configuration value sources
+
+Configurable values can be supplied from several sources. When the same variable is set in more than one place, the runtime resolves it using the first source from the table below (top → bottom, highest to lowest precedence):
+
+| Source | Example | Typical use |
+|---|---|---|
+| Command-line arguments | `bal run -- -CdbHost=localhost` | One-off overrides, local testing |
+| Individual env vars (`BAL_CONFIG_VAR_*`) | `BAL_CONFIG_VAR_DBHOST=localhost` | CI/CD pipelines, containers, secrets |
+| Inline TOML (`BAL_CONFIG_DATA`) | `BAL_CONFIG_DATA='dbHost="localhost"'` | Containerized runs without a config file |
+| TOML files (`Config.toml` / `BAL_CONFIG_FILES`) | `dbHost = "localhost"` | Per-environment configuration |
+| Code defaults | `configurable string dbHost = "localhost";` | Development fallback |
+
+### Config.toml
+
+`Config.toml` is the primary configuration file. Place it in the project root directory (alongside `Ballerina.toml`). The runtime reads it automatically at startup. Values you enter through the Visual Designer's Config Editor are written to this same file.
 
 ```toml
-[orderDb]
+# Comments start with #
+dbHost = "localhost"
+dbPort = 3306
+enableCaching = true
+maxRetries = 3
+
+# Arrays use square brackets
+allowedOrigins = ["https://app.example.com", "https://admin.example.com"]
+```
+
+Record-typed configurables map to a `[section]` table, with each record field becoming a key under the section:
+
+```toml
+[dbConfig]
 host = "db.dev.internal"
 port = 3306
 username = "app"
 password = "dev-secret"
-database = "orders_dev"
-maxConnections = 5
-
-[crmApi]
-baseUrl = "https://sandbox.crm.example.com"
-apiKey = "dev-key-123"
-timeoutSeconds = 15.0
 ```
 
-## Config.toml
-
-`Config.toml` is the primary configuration file. Place it in the project root directory (alongside `Ballerina.toml`). The runtime reads it automatically at startup.
-
-### Basic structure
-
-```toml
-dbHost = "localhost"
-dbPort = 3306
-dbUser = "root"
-dbPassword = "dev-password"
-enableCaching = true
-maxRetries = 3
-
-allowedOrigins = ["https://app.example.com", "https://admin.example.com"]
-
-[orderDb]
-host = "localhost"
-port = 3306
-username = "root"
-password = "dev-password"
-database = "orders_dev"
-```
-
-### Module-qualified keys
-
-For multi-module projects, prefix keys with the module name:
+For multi-module projects, prefix keys with the fully-qualified module name (`org.package.module`):
 
 ```toml
 apiPort = 8090
@@ -138,7 +129,7 @@ smtpHost = "smtp.example.com"
 smtpPort = 587
 ```
 
-## Environment variables
+### Environment variables
 
 Override any configurable variable with an environment variable using the pattern `BAL_CONFIG_VAR_`, where `` is the variable name in uppercase:
 
@@ -148,25 +139,15 @@ export BAL_CONFIG_VAR_DBPASSWORD=prod-encrypted-password
 bal run
 ```
 
-Point to an alternative `Config.toml` file:
+`BAL_CONFIG_FILES` plays a different role: instead of supplying a value for a single variable, it tells the runtime which TOML file (or files) to load as the configuration source.
 
 ```bash
 BAL_CONFIG_FILES=/etc/myapp/config.toml bal run
 ```
 
-### Priority order
-
-When the same variable is defined in more than one place, the runtime resolves it using the first source it finds from the list below (top → bottom, highest to lowest precedence):
-
-| Source | Example | Typical use |
-|---|---|---|
-| Individual env vars (`BAL_CONFIG_VAR_*`) | `BAL_CONFIG_VAR_DBHOST=localhost` | CI/CD pipelines, containers, secrets |
-| Command-line arguments | `bal run -- -CdbHost=localhost` | One-off overrides, local testing |
-| Inline TOML (`BAL_CONFIG_DATA`) | `BAL_CONFIG_DATA='dbHost="localhost"'` | Containerized runs without a config file |
-| TOML files (`Config.toml` / `BAL_CONFIG_FILES`) | `dbHost = "localhost"` | Per-environment configuration |
-| Code defaults | `configurable string dbHost = "localhost";` | Development fallback |
-
 ## Per-environment configuration
+
+Most integration projects need different values for development, staging, and production — different hosts, credentials, and feature flags. The recommended pattern is to keep a separate TOML file per environment and select the right one at runtime with `BAL_CONFIG_FILES`. A common layout keeps a default `Config.toml` at the project root for local work, with environment-specific files under a `config/` subdirectory.
 
 ```
 my-integration/
@@ -208,89 +189,10 @@ BAL_CONFIG_FILES=config/dev.toml bal run
 BAL_CONFIG_FILES=config/prod.toml bal run
 ```
 
-## Secrets management
-
-Never store secrets in plain text in `Config.toml` files committed to version control. For detailed information on secrets handling and encryption (Kubernetes Secrets, vault integration, TLS), see [Secrets & Encryption](../../deploy-operate/secure/secrets-encryption.md).
-
-### Environment variables for secrets
-
-```ballerina
-configurable string dbPassword = ?;
-configurable string apiSecret = ?;
-```
-
-```bash
-export BAL_CONFIG_VAR_DBPASSWORD="$(vault read -field=password secret/db)"
-export BAL_CONFIG_VAR_APISECRET="$(vault read -field=key secret/api)"
-bal run
-```
-
-### Separate secrets file
-
-```
-my-integration/
-├── Config.toml          # Non-sensitive config (committed)
-├── secrets.toml         # Sensitive config (gitignored)
-└── .gitignore           # Contains: secrets.toml
-```
-
-```bash
-# macOS / Linux
-BAL_CONFIG_FILES=secrets.toml:Config.toml bal run
-
-# Windows
-set BAL_CONFIG_FILES=secrets.toml;Config.toml && bal run
-```
-
-## Complete example
-
-```ballerina
-import ballerina/http;
-import ballerina/log;
-import ballerinax/mysql;
-import ballerinax/mysql.driver as _;
-import ballerina/sql;
-
-configurable string dbHost = ?;
-configurable int dbPort = 3306;
-configurable string dbUser = ?;
-configurable string dbPassword = ?;
-configurable string dbName = ?;
-
-configurable string crmBaseUrl = ?;
-
-configurable int servicePort = 8090;
-configurable boolean enableRequestLogging = false;
-
-final mysql:Client orderDb = check new (
-    host = dbHost, port = dbPort,
-    user = dbUser, password = dbPassword,
-    database = dbName
-);
-
-final http:Client crmClient = check new (crmBaseUrl, {
-    httpVersion: http:HTTP_1_1
-});
-
-listener http:Listener httpListener = new (servicePort);
-
-service /api on httpListener {
-
-    resource function get orders() returns json|error {
-        if enableRequestLogging {
-            log:printInfo("GET /api/orders");
-        }
-        stream<record {|anydata...;|}, sql:Error?> resultStream = orderDb->query(`SELECT * FROM orders`);
-        record {|anydata...;|}[] orderList = check from record {|anydata...;|} orderRow in resultStream
-            select orderRow;
-        return orderList.toJson();
-    }
-}
-
-```
+Never commit secret-bearing configuration files to version control. For production credential handling, secret managers, and TLS configuration, see [Secrets and encryption](../../deploy-operate/secure/secrets-encryption.md).
 
 ## What's next
 
-- [Functions](functions.md) — Organize configurable logic into reusable functions
-- [Connections](managing-connections.md) — Use configurable variables to parameterize connections
-- [Error Handling](error-handling.md) — Handle missing or invalid configuration gracefully
+- [Configurations](../integration-artifacts/supporting/configurations.md) — Declare configurable variables and supply values through the visual designer.
+- [Secrets and encryption](../../deploy-operate/secure/secrets-encryption.md) — Securely supply credentials and protect data in transit and at rest.
+- [Connections](managing-connections.md) — Use configurable variables to parameterize connections.

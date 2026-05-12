@@ -20,6 +20,10 @@ If your integration is already in a Git repository, you can import it directly i
 
     ![Project Home in WSO2 Cloud](/img/deploy/cloud/import-integration/project-home.png)
 
+    :::warning
+    One-click OAuth2 authorization is only available for GitHub. To use Bitbucket, GitLab, or Azure DevOps, you must first add your credentials at the organization level. See [Connect a Git repository](../../manage/cloud/cicd/connect-git-repository.md) for instructions.
+    :::
+
 3. Complete the authorization flow in the browser and return to WSO2 Cloud.
 
 ## Import the integration
