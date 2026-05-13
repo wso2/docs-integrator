@@ -21,7 +21,7 @@ Key capabilities:
 
 ### Configuring the integration node with ICP
 
-ICP allows you to connect default profile and MI runtimes to the ICP server for centralized management and monitoring.
+ICP allows you to connect Ballerina and MI runtimes to the ICP server for centralized management and monitoring.
 This guide will walk you through the steps to connect your integration runtime to the ICP server.
 
 1. Navigate to the home view of WSO2 Integrator.
