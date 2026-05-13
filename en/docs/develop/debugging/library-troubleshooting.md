@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: Library troubleshooting
+title: Library Troubleshooting
 description: Diagnose runtime errors from Ballerina standard libraries and connectors (HTTP, SQL, GraphQL, Kafka, RabbitMQ, NATS, JMS, gRPC, WebSocket).
 keywords: [ballerina, http, sql, graphql, kafka, rabbitmq, nats, jms, grpc, websocket, troubleshooting, errors]
 ---
@@ -8,11 +8,11 @@ keywords: [ballerina, http, sql, graphql, kafka, rabbitmq, nats, jms, grpc, webs
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Library troubleshooting
+# Library Troubleshooting
 
 Runtime errors from Ballerina standard libraries and connectors. Each section covers diagnostic tools, error hierarchies, and common symptom-to-fix recipes for one library or connector family.
 
-For general error reading (the `{org/module}ErrorType message` format and core runtime errors), see [Errors and stack traces](errors-and-stack-traces.md). For connection pool tuning under load, see [Performance profiling](performance-profiling.md).
+For general error reading (the `{org/module}ErrorType message` format and core runtime errors), see [Errors and Stack Traces](errors-and-stack-traces.md). For connection pool tuning under load, see [Performance Profiling](performance-profiling.md).
 
 ## HTTP
 
@@ -141,7 +141,7 @@ if result is http:ClientRequestError {
 | `idle connection timed out` | Connection was idle longer than the server's keep-alive timeout | Check trace logs for connection reuse | Reduce `maxIdleConnections` or reduce connection pool size |
 | `SSL/TLS handshake failure` | Certificate mismatch, expired cert, missing trust store | Check cert validity: `openssl s_client -connect host:port` | Configure `secureSocket` (see [TLS/SSL](#tlsssl-and-certificates) below) |
 | `All retry attempts failed` | Retry policy configured but all attempts failed | Check why individual attempts fail | Investigate the upstream service or adjust the retry policy |
-| `Maximum wait time exceeded` | HTTP connection pool exhausted; requests queue up | Enable DEBUG logs; look for pool exhaustion messages | Increase `maxActiveConnections` in `poolConfig` (see [Performance profiling](performance-profiling.md#http-connection-pool)) |
+| `Maximum wait time exceeded` | HTTP connection pool exhausted; requests queue up | Enable DEBUG logs; look for pool exhaustion messages | Increase `maxActiveConnections` in `poolConfig` (see [Performance Profiling](performance-profiling.md#http-connection-pool)) |
 
 ### Configuring resiliency on a client
 
@@ -281,7 +281,7 @@ Checklist:
    ```
 
    Without this import, you may see `No suitable driver found for jdbc:...` or a generic initialization failure.
-4. Check if the connection pool is exhausted (see [Performance profiling](performance-profiling.md#sql-connection-pool)).
+4. Check if the connection pool is exhausted (see [Performance Profiling](performance-profiling.md#sql-connection-pool)).
 
 ### Query errors
 
@@ -539,7 +539,7 @@ Diagnosis checklist:
 
 The `ballerina/data.jsondata` and `ballerina/data.xmldata` modules handle conversion between Ballerina types and JSON/XML. They are used implicitly by HTTP payload binding and explicitly via `jsondata:parseString()`, `jsondata:parseAsType()`, etc.
 
-For common binding errors (missing fields, incompatible types, extra fields), see the data binding section in [Errors and stack traces](errors-and-stack-traces.md#data-binding-errors).
+For common binding errors (missing fields, incompatible types, extra fields), see the data binding section in [Errors and Stack Traces](errors-and-stack-traces.md#data-binding-errors).
 
 ### Controlling binding behavior
 
@@ -702,5 +702,5 @@ listener http:Listener secureListener = new (9090, {
 
 ## See also
 
-- [Errors and stack traces](errors-and-stack-traces.md): Error format, stack traces, and core runtime errors
-- [Performance profiling](performance-profiling.md): Connection pool and JVM memory tuning
+- [Errors and Stack Traces](errors-and-stack-traces.md): Error format, stack traces, and core runtime errors
+- [Performance Profiling](performance-profiling.md): Connection pool and JVM memory tuning

@@ -1,13 +1,13 @@
 ---
 sidebar_position: 5
-title: Editor debugging
+title: Editor Debugging
 description: Set breakpoints, watch variables, and step through Ballerina code in WSO2 Integrator.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Editor debugging
+# Editor Debugging
 
 Debug your integrations step-by-step in WSO2 Integrator. Set breakpoints on any line, inspect variables and payloads in real time, and step through data transformations to understand exactly how your integration processes data.
 
@@ -39,7 +39,7 @@ WSO2 Integrator includes built-in debugging support. No additional configuration
 The debugger supports three session types:
 - **Program debugging** -- standard application debugging
 - **Test debugging** -- debugging test cases
-- **Remote debugging** -- attaching to running integrations (see [Remote debugging](remote.md))
+- **Remote debugging** -- attaching to running integrations (see [Remote Debugging](remote.md))
 
 ## Setting breakpoints
 
@@ -275,6 +275,6 @@ true
 
 ## What's next
 
-- [Remote debugging](remote.md) -- Debug services running in containers or remote servers
-- [Strand dump analysis](strand-dump-analysis.md) -- Diagnose concurrency issues
-- [Performance profiling](performance-profiling.md) -- Find performance bottlenecks
+- [Remote Debugging](remote.md) -- Debug services running in containers or remote servers
+- [Strand Dump Analysis](strand-dump-analysis.md) -- Diagnose concurrency issues
+- [Performance Profiling](performance-profiling.md) -- Find performance bottlenecks

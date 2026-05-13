@@ -303,7 +303,7 @@ const sidebars: SidebarsConfig = {
         // 6.7 Debugging & Troubleshooting
         {
           type: 'category',
-          label: 'Debugging & troubleshooting',
+          label: 'Debugging & Troubleshooting',
           items: [
             'develop/debugging/troubleshooting',
             'develop/debugging/errors-and-stack-traces',

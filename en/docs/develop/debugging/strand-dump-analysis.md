@@ -1,10 +1,10 @@
 ---
 sidebar_position: 7
-title: Strand dump analysis
+title: Strand Dump Analysis
 description: Capture and analyze strand dumps to diagnose concurrency, deadlock, and blocking issues in Ballerina services.
 ---
 
-# Strand dump analysis
+# Strand Dump Analysis
 
 Diagnose concurrency issues in your integrations by capturing and analyzing strand dumps. A strand dump shows the status of all currently running strands and strand groups at a point in time, helping you troubleshoot runtime errors, find data races, race conditions, livelocks, and deadlocks, and inspect strand and strand group status.
 
@@ -288,6 +288,6 @@ If the strand dump shows strands in `BLOCKED` or `WAITING` state but no deadlock
 
 ## What's next
 
-- [Performance profiling](performance-profiling.md) — Profile execution time to find bottlenecks
-- [Editor debugging](editor.md) — Step through concurrency issues in the debugger
-- [Remote debugging](remote.md) — Attach to remote services for live diagnosis
+- [Performance Profiling](performance-profiling.md) — Profile execution time to find bottlenecks
+- [Editor Debugging](editor.md) — Step through concurrency issues in the debugger
+- [Remote Debugging](remote.md) — Attach to remote services for live diagnosis

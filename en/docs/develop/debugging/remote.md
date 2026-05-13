@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-title: Remote debugging
+title: Remote Debugging
 description: Attach the debugger to integrations running on remote environments.
 ---
 
@@ -140,6 +140,6 @@ ssh -L 5005:localhost:5005 user@remote-server
 
 ## What's next
 
-- [Editor debugging](editor.md) — Local debugging fundamentals
-- [Strand dump analysis](strand-dump-analysis.md) — Diagnose concurrency issues
-- [Performance profiling](performance-profiling.md) — Identify performance bottlenecks
+- [Editor Debugging](editor.md) — Local debugging fundamentals
+- [Strand Dump Analysis](strand-dump-analysis.md) — Diagnose concurrency issues
+- [Performance Profiling](performance-profiling.md) — Identify performance bottlenecks

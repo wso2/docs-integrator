@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Debugging & troubleshooting
+title: Debugging & Troubleshooting
 description: Diagnose and fix common build, runtime, IDE, and deployment issues in WSO2 Integrator projects.
 keywords: [wso2 integrator, troubleshooting, errors, debugging, diagnostics]
 ---
@@ -8,7 +8,7 @@ keywords: [wso2 integrator, troubleshooting, errors, debugging, diagnostics]
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Debugging & troubleshooting
+# Debugging & Troubleshooting
 
 Diagnose and fix issues in your integrations using editor debugging, remote debugging, strand dump analysis, and performance profiling. This page is the entry point for the section. Start here for triage, then follow the links to focused pages for deeper detail.
 
@@ -31,16 +31,16 @@ Collect the following before investigating. Missing even one item can significan
 |---|---|
 | IDE shows errors but `bal build` succeeds | [WSO2 Integrator IDE issues](#wso2-integrator-ide-issues) below |
 | No completions, hover, or diagnostics in the IDE | [WSO2 Integrator IDE issues](#wso2-integrator-ide-issues) below |
-| A compiler error message | [Errors and stack traces](errors-and-stack-traces.md): error format and common fixes |
+| A compiler error message | [Errors and Stack Traces](errors-and-stack-traces.md): error format and common fixes |
 | Dependency or package resolution failure | [Package resolution failures](#package-resolution-failures) below |
-| A runtime panic or unexpected crash | [Errors and stack traces](errors-and-stack-traces.md): reading panics and stack traces |
+| A runtime panic or unexpected crash | [Errors and Stack Traces](errors-and-stack-traces.md): reading panics and stack traces |
 | Configurable values not loaded; defaults used | [Top configuration mistakes](#top-configuration-mistakes) below |
-| HTTP, SQL, GraphQL, or messaging connector error | [Library troubleshooting](library-troubleshooting.md): error hierarchies and connector-specific fixes |
-| Unexpected output or wrong data | [Editor debugging](editor.md): set breakpoints and inspect variables |
-| Service hangs or doesn't respond | [Strand dump analysis](strand-dump-analysis.md): check for blocked strands |
-| Intermittent failures under load | [Strand dump analysis](strand-dump-analysis.md): look for race conditions and connection pool exhaustion |
-| Slow response times | [Performance profiling](performance-profiling.md): identify bottlenecks |
-| Works locally, fails when deployed | [Deployment troubleshooting](deployment-troubleshooting.md): Docker, Kubernetes, GraalVM, Choreo |
+| HTTP, SQL, GraphQL, or messaging connector error | [Library Troubleshooting](library-troubleshooting.md): error hierarchies and connector-specific fixes |
+| Unexpected output or wrong data | [Editor Debugging](editor.md): set breakpoints and inspect variables |
+| Service hangs or doesn't respond | [Strand Dump Analysis](strand-dump-analysis.md): check for blocked strands |
+| Intermittent failures under load | [Strand Dump Analysis](strand-dump-analysis.md): look for race conditions and connection pool exhaustion |
+| Slow response times | [Performance Profiling](performance-profiling.md): identify bottlenecks |
+| Works locally, fails when deployed | [Deployment Troubleshooting](deployment-troubleshooting.md): Docker, Kubernetes, GraalVM, Choreo |
 
 ## Top configuration mistakes
 
@@ -136,7 +136,7 @@ Output appears in the Ballerina output panel. See [View the IDE output](#view-th
 
 ### Language server problems
 
-Language server issues appear **only in the IDE**, not during `bal build`. If the error appears in both, it is a real compiler error. See [Errors and stack traces](errors-and-stack-traces.md).
+Language server issues appear **only in the IDE**, not during `bal build`. If the error appears in both, it is a real compiler error. See [Errors and Stack Traces](errors-and-stack-traces.md).
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
@@ -151,7 +151,7 @@ Language server issues appear **only in the IDE**, not during `bal build`. If th
 
 ## Common build errors
 
-For compiler error messages (`incompatible types`, `undefined symbol`, syntax errors, etc.), see [Errors and stack traces](errors-and-stack-traces.md). This section covers errors that happen around the build itself: dependency resolution, network access, and overall build behavior.
+For compiler error messages (`incompatible types`, `undefined symbol`, syntax errors, etc.), see [Errors and Stack Traces](errors-and-stack-traces.md). This section covers errors that happen around the build itself: dependency resolution, network access, and overall build behavior.
 
 ### Package resolution failures
 
@@ -264,7 +264,7 @@ Offline mode only works if all required packages are already in the local cache 
 
 ## Runtime errors
 
-For runtime error messages and stack traces, see [Errors and stack traces](errors-and-stack-traces.md). This section covers operational issues that prevent the program from running cleanly: listener startup, missing native dependencies, and memory exhaustion.
+For runtime error messages and stack traces, see [Errors and Stack Traces](errors-and-stack-traces.md). This section covers operational issues that prevent the program from running cleanly: listener startup, missing native dependencies, and memory exhaustion.
 
 ### Port conflicts
 
@@ -328,12 +328,12 @@ The most common cause of `OutOfMemoryError` is a heap size that is too small for
 
 | Tool | When to use | Detail |
 |---|---|---|
-| Editor debugging | Step through code, set breakpoints, inspect variables | [Editor debugging](editor.md) |
-| Remote debugging | Attach to a service running outside the IDE | [Remote debugging](remote.md) |
-| Strand dump | Diagnose deadlocks, hangs, blocked strands | [Strand dump analysis](strand-dump-analysis.md) |
-| Ballerina profiler | Find performance bottlenecks with flame graphs | [Performance profiling](performance-profiling.md) |
-| HTTP trace logs | Capture full HTTP request/response (headers, body) | [Library troubleshooting](library-troubleshooting.md#http-trace-logs) |
-| Log-based debugging | Add log statements to trace execution; tune verbosity per module | [Log-based debugging](logging.md) |
+| Editor debugging | Step through code, set breakpoints, inspect variables | [Editor Debugging](editor.md) |
+| Remote debugging | Attach to a service running outside the IDE | [Remote Debugging](remote.md) |
+| Strand dump | Diagnose deadlocks, hangs, blocked strands | [Strand Dump Analysis](strand-dump-analysis.md) |
+| Ballerina profiler | Find performance bottlenecks with flame graphs | [Performance Profiling](performance-profiling.md) |
+| HTTP trace logs | Capture full HTTP request/response (headers, body) | [Library Troubleshooting](library-troubleshooting.md#http-trace-logs) |
+| Log-based debugging | Add log statements to trace execution; tune verbosity per module | [Log-Based Debugging](logging.md) |
 | Debug logging (quick reference) | Configure log level in `Config.toml` | [Debug logging](#debug-logging) below |
 
 ### Debug logging

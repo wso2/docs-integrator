@@ -1,11 +1,11 @@
 ---
 sidebar_position: 4
-title: Deployment troubleshooting
+title: Deployment Troubleshooting
 description: Diagnose issues when running Ballerina services in Docker, Kubernetes, GraalVM native images, and Choreo.
 keywords: [ballerina, docker, kubernetes, graalvm, choreo, deployment, troubleshooting, cloud.toml]
 ---
 
-# Deployment troubleshooting
+# Deployment Troubleshooting
 
 Diagnose issues that appear only when a service is packaged and deployed: Docker containers, Kubernetes pods, GraalVM native images, and Choreo. Most deployment issues fall into one of three buckets: the image fails to build, the container starts but the service is unreachable, or configuration values are missing at runtime.
 
@@ -167,7 +167,7 @@ If the native image fails at runtime, **always verify the issue reproduces in JV
 
 `JAVA_OPTS` (e.g., `-Xmx`) does **not** apply to native images. Native images manage their own memory. To control native image heap size, use `-R:MaxHeapSize=512m` in `graalvmBuildOptions` or at runtime.
 
-For JVM-mode memory tuning, see [Performance profiling](performance-profiling.md#jvm-memory-tuning).
+For JVM-mode memory tuning, see [Performance Profiling](performance-profiling.md#jvm-memory-tuning).
 
 ## Choreo
 
@@ -176,7 +176,7 @@ For JVM-mode memory tuning, see [Performance profiling](performance-profiling.md
 **Does `bal build && bal run` work locally?**
 
 - **Yes**: likely a Choreo environment issue. The Ballerina code itself is correct; the issue is in the Choreo build pipeline, configuration injection, or runtime environment. Check Choreo's component logs and configuration panel.
-- **No**: this is a Ballerina issue. Use this page and [Errors and stack traces](errors-and-stack-traces.md) to diagnose and fix locally before redeploying.
+- **No**: this is a Ballerina issue. Use this page and [Errors and Stack Traces](errors-and-stack-traces.md) to diagnose and fix locally before redeploying.
 
 ### Common Choreo-specific issues
 
@@ -282,5 +282,5 @@ For local config troubleshooting (`Ballerina.toml` vs `Config.toml`, key path mi
 
 ## See also
 
-- [Library troubleshooting](library-troubleshooting.md): Connector errors that surface only after deploy
-- [Performance profiling](performance-profiling.md): Pool and JVM memory tuning (JVM mode only)
+- [Library Troubleshooting](library-troubleshooting.md): Connector errors that surface only after deploy
+- [Performance Profiling](performance-profiling.md): Pool and JVM memory tuning (JVM mode only)
