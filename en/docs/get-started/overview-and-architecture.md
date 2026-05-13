@@ -10,7 +10,7 @@ WSO2 Integrator is a 100% open-source integration solution that allows you to co
 
 ## High-level architecture
 
-![WSO2 Integrator architecture diagram](@site/src/assets/img/get-started/overview-and-architecture/integrator_diagram.webp)
+![WSO2 Integrator architecture diagram](@site/src/assets/img/get-started/overview-and-architecture/ArchitectureImage.png)
 
 The platform follows a three-layer architecture:
 
