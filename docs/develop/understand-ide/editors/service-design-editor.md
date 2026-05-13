@@ -4,7 +4,7 @@ title: Service Design editor
 
 # Service Design editor
 
-The Service Design editor, also known as the **service designer**, is the editor you open for any service entry point in WSO2 Integrator. It lists every resource or handler the service exposes and gives you one place to add, edit, remove, try out, and export them. For background on what a service is and how it relates to listeners, see [Services in the Key concepts](/docs/get-started/key-concepts#services).
+The Service Design editor, also known as the **service designer**, is the editor you open for any service entry point in WSO2 Integrator. It lists every resource or handler the service exposes and gives you one place to add, edit, remove, try out, and export them. For background on what a service is and how it relates to listeners, see [Services and listeners](/docs/get-started/concepts/core#services-and-listeners).
 
 ![Service Design editor for an HTTP service](/img/develop/understand-ide/editors/service-design-editor/overview.png)
 
@@ -72,4 +72,4 @@ The **More** menu groups actions that are specific to the service type. For HTTP
 - [Service artifacts](/docs/develop/integration-artifacts/service): configure HTTP, gRPC, and other service types in detail.
 - [Flow Diagram editor](flow-diagram-editor.md): edit the logic that runs when a resource or handler is invoked.
 - [Type editor](type-editor.md): define the request and response types used by the service.
-- [Services in the Key concepts](/docs/get-started/key-concepts#services): understand the listener and service model.
+- [Services and listeners](/docs/get-started/concepts/core#services-and-listeners): understand the listener and service model.
