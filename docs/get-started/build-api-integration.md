@@ -10,7 +10,7 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
 
 :::info Prerequisites
 
-- [WSO2 Integrator installed](install.md)
+- [WSO2 Integrator installed](setup/local-setup.md)
 
 ## Step 1: Create the integration
 

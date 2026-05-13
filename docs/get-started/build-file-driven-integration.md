@@ -18,7 +18,7 @@ File integrations are ideal for batch uploads, scheduled file processing, and ET
 
 :::info Prerequisites
 
-- [WSO2 Integrator installed](install.md)
+- [WSO2 Integrator installed](setup/local-setup.md)
 - A test file at the listener path (created with the command below).
 
 The `onModify` handler only fires when a file that already exists changes. Skip the command below if a file already exists at the listener path.
