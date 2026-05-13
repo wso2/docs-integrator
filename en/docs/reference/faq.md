@@ -71,7 +71,7 @@ WSO2 Integrator supports standard breakpoint-based debugging. Set breakpoints in
 
 ### Where can I find troubleshooting help for common issues?
 
-See [Debugging & Troubleshooting](/docs/develop/debugging/troubleshooting) for symptom-to-fix recipes covering IDE issues, build errors, runtime errors, and diagnostic tools. Focused pages cover [library and connector errors](/docs/develop/debugging/library-troubleshooting), [deployment issues](/docs/develop/debugging/deployment-troubleshooting), and [performance tuning](/docs/develop/debugging/performance-profiling).
+See [Debugging & troubleshooting](/docs/develop/debugging/troubleshooting) for symptom-to-fix recipes covering IDE issues, build errors, runtime errors, and diagnostic tools. Focused pages cover [library and connector errors](/docs/develop/debugging/library-troubleshooting), [deployment issues](/docs/develop/debugging/deployment-troubleshooting), and [performance tuning](/docs/develop/debugging/performance-profiling).
 
 ### Can I write tests for my integrations?
 
@@ -169,5 +169,5 @@ Yes. The two products use different runtimes and can coexist in the same environ
 
 - [Get Started](/docs/get-started/install) — Install and set up WSO2 Integrator
 - [Build an API Integration](/docs/get-started/build-api-integration) — Build your first integration
-- [Debugging & Troubleshooting](/docs/develop/debugging/troubleshooting) — Diagnose and fix common build, runtime, IDE, and deployment issues
+- [Debugging & troubleshooting](/docs/develop/debugging/troubleshooting) — Diagnose and fix common build, runtime, IDE, and deployment issues
 - [Glossary](/docs/reference/glossary) — Definitions of key terms

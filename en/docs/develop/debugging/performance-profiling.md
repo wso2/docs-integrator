@@ -1,10 +1,10 @@
 ---
 sidebar_position: 8
-title: Performance Profiling
+title: Performance profiling
 description: Profile integrations to identify performance bottlenecks using the Ballerina profiler.
 ---
 
-# Performance Profiling
+# Performance profiling
 
 Identify and eliminate performance bottlenecks in your integrations using the Ballerina profiler. The profiler monitors runtime operations and function calls, then generates an interactive flame graph that shows where execution time is spent — so you can optimize what actually matters.
 
@@ -153,7 +153,7 @@ bal run .
 
 ### Diagnosing thread starvation
 
-1. Take a **strand dump** (`kill -SIGTRAP <PID>`, see [Strand Dump Analysis](strand-dump-analysis.md)). If many strands are `BLOCKED` waiting on external calls, scheduler workers may be tied up.
+1. Take a **strand dump** (`kill -SIGTRAP <PID>`, see [Strand dump analysis](strand-dump-analysis.md)). If many strands are `BLOCKED` waiting on external calls, scheduler workers may be tied up.
 2. Take a **JVM thread dump** (`jstack <PID>` or `kill -3 <PID>`). Look for Ballerina scheduler threads (named `ballerina-scheduler-*`). If all of them are `BLOCKED` or `WAITING` inside a blocking call (e.g., a Java interop call or a synchronous I/O operation), the thread pool is starved.
 3. **Symptoms:** new HTTP requests stop being accepted even though the service is running; latency climbs linearly with concurrent requests; strand dump shows strands in `RUNNABLE` state but no progress.
 
@@ -238,5 +238,5 @@ Use this checklist when profiling reveals performance issues:
 
 ## What's next
 
-- [Strand Dump Analysis](strand-dump-analysis.md) — Diagnose concurrency issues
-- [Editor Debugging](editor.md) — Step through slow code paths
+- [Strand dump analysis](strand-dump-analysis.md) — Diagnose concurrency issues
+- [Editor debugging](editor.md) — Step through slow code paths

@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 Robust integrations anticipate and handle failures. Ballerina treats errors as first-class values with a dedicated `error` type, making it impossible to silently ignore failures. This page covers error handling constructs and resilience patterns for your integrations.
 
 :::tip
-This page is about **writing** error handling code. If you need to **diagnose** an error message or read a stack trace, see [Errors and Stack Traces](../debugging/errors-and-stack-traces.md).
+This page is about **writing** error handling code. If you need to **diagnose** an error message or read a stack trace, see [Errors and stack traces](../debugging/errors-and-stack-traces.md).
 :::
 
 ## The error type
