@@ -41,5 +41,6 @@ ICP is a self-hosted management server you install on your own infrastructure. I
 
 ## What's next
 
-- [WSO2 Cloud overview](./cloud/overview.md)
-- [Integration Control Plane (ICP)](./icp/integration-control-plane.md)
+- [Install ICP](./icp/install-icp.md) — set up the self-hosted Integration Control Plane
+- [WSO2 Cloud - Integration Platform](./cloud/overview.md) — fully managed SaaS control plane
+- [Integration Control Plane (ICP)](./icp/integration-control-plane.md) — self-hosted control plane setup and usage

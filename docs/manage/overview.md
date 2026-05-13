@@ -14,3 +14,9 @@ The right choice depends on whether you want a fully managed service or full con
 |---|---|
 | [WSO2 Cloud - Integration Platform](./cloud/overview.md) | A fully managed SaaS control plane. Deploy integrations, configure environments, monitor with built-in observability, and control access, without managing any infrastructure. |
 | [Integration Control Plane (ICP)](./icp/integration-control-plane.md) | A self-hosted management server for on-premises, private cloud, or air-gapped deployments. Connects to your WSO2 Integrator runtimes and provides a centralized dashboard and API. |
+
+## What's next
+
+- [Choosing a control plane](./choosing-a-control-plane.md) — compare WSO2 Cloud and ICP to find the right fit
+- [WSO2 Cloud - Integration Platform](./cloud/overview.md) — fully managed control plane overview
+- [Integration Control Plane (ICP)](./icp/integration-control-plane.md) — self-hosted control plane overview
