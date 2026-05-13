@@ -85,11 +85,11 @@ service /blogReviewer on chatAgentListener {
 
 After generation, you are directed to the integration canvas where you can configure the following aspects of the agent:
 
-- Agent behavior, including role, instructions, query, and input/output bindings
-- Model provider
-- Tool integration
-- Memory configuration
-- Observability and tracing
+- [Agent behavior, including role, instructions, query, and input/output bindings](/genai/develop/agents/creating-an-agent.md#configure-agent-behavior)
+- [Model provider](/genai/develop/components/model-providers.md)
+- [Tool integration](/genai/develop/agents/tools.md)
+- [Memory configuration](/genai/develop/agents/memory.md)
+- [Observability and tracing](/genai/develop/agents/observability.md)
 
 ## Configure agent behavior
 
