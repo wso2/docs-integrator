@@ -132,6 +132,27 @@ postgresql:Client dbClient = check new (
 | `minIdleConnections` | Same as max | Decrease for bursty traffic to free idle DB connections |
 | `connectionTimeout` | 30 seconds | Decrease to fail fast when the pool is exhausted |
 
+## Runtime thread pool
+
+Ballerina uses a fixed-size thread pool for its scheduler. The default size is `number of CPU cores × 2`. Control it with the `BALLERINA_MAX_POOL_SIZE` environment variable:
+
+```bash
+export BALLERINA_MAX_POOL_SIZE=16
+bal run .
+```
+
+**When to increase it:** if the application uses blocking operations (legacy JDBC drivers or external Java libraries that block threads), those threads tie up scheduler workers and starve other strands. Increasing the pool size can help. For standard Ballerina I/O (HTTP, SQL via Ballerina libraries), this is usually not needed since they are non-blocking.
+
+### Diagnosing thread starvation
+
+1. Take a **strand dump** (`kill -SIGTRAP `, see [Strand Dump Analysis](strand-dump-analysis.md)). If many strands are `BLOCKED` waiting on external calls, scheduler workers may be tied up.
+2. Take a **JVM thread dump** (`jstack ` or `kill -3 `). Look for Ballerina scheduler threads (named `ballerina-scheduler-*`). If all of them are `BLOCKED` or `WAITING` inside a blocking call (e.g., a Java interop call or a synchronous I/O operation), the thread pool is starved.
+3. **Symptoms:** new HTTP requests stop being accepted even though the service is running; latency climbs linearly with concurrent requests; strand dump shows strands in `RUNNABLE` state but no progress.
+
+If thread starvation is confirmed, increase `BALLERINA_MAX_POOL_SIZE`. If the blocking call comes from a specific library, consider wrapping it in a `worker` to isolate the blocking operation from the main strand.
+
+This is distinct from the SQL connection pool (`maxOpenConnections`) and the HTTP connection pool (`maxActiveConnections`), which control connections to external services rather than the Ballerina scheduler's worker threads.
+
 ## JVM memory tuning
 
 Ballerina runs on the JVM. If your integration runs out of memory (`OutOfMemoryError`), increase the JVM heap size:
@@ -149,6 +170,40 @@ bal run .
 ```
 
 Analyze the heap dump with tools like VisualVM or Eclipse MAT to identify memory leaks.
+
+## Concurrency and isolation
+
+Ballerina's `isolated` feature enforces concurrency safety entirely at **compile time**. Properly `isolated` code has no data races or shared mutable state issues that can reach runtime undetected.
+
+Key facts:
+
+- A non-`isolated` resource function **can still be invoked concurrently** by the Ballerina runtime. Different HTTP requests can hit the same resource function in parallel. The difference is that the compiler does **not** enforce concurrency-safety guarantees for non-`isolated` code. Data races on shared mutable state are possible and are the developer's responsibility to avoid.
+- The `isolated` keyword enables **compiler verification**, not runtime parallelism control. Marking a service or function as `isolated` tells the compiler to check that all shared mutable state accesses are properly guarded by `lock` blocks.
+- If the service is `isolated` and the code compiles, the compiler has verified all shared state accesses are safe. There is no race condition within the `isolated` boundary.
+
+### Using `isolated` as a diagnostic tool
+
+Add `isolated` to a service or function and observe the compiler errors. Each error points to a specific unsafe mutable state access:
+
+```ballerina
+// Before: not isolated, works but no compile-time concurrency guarantees
+service /api on new http:Listener(9090) {
+    int counter = 0;  // mutable field
+    // ...
+}
+
+// After: add isolated. Compiler errors point to all unsafe accesses.
+isolated service /api on new http:Listener(9090) {
+    // ERROR: 'counter' is mutable, must be in a lock block
+    private int counter = 0;
+    // ...
+}
+```
+
+### Symptoms that look like concurrency but usually aren't
+
+- `{ballerina}IllegalStateException` usually means a client or resource was used after `close()`, not a race condition.
+- Unexpected results under load are more likely a connection pool issue (above) or a bug in the logic itself.
 
 ## Optimization checklist
 
