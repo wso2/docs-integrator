@@ -28,7 +28,6 @@ Generate Ballerina code from API specifications, protocol definitions, and domai
 Migrate existing integrations from other platforms to WSO2 Integrator.
 
 - [Migration Tools Overview](migration-tools/migration-tools.md) -- Shared workflow and command reference
-- [Migrate from WSO2 MI](migration-tools/migrate-from-mi.md) -- Migrate WSO2 MI Synapse XML configurations
 - [Migrate from MuleSoft](migration-tools/migrate-from-mulesoft.md) -- Migrate MuleSoft Anypoint flows
 - [Migrate from TIBCO](migration-tools/migrate-from-tibco-businessworks.md) -- Migrate TIBCO BusinessWorks processes
 - [Migrate from Azure Logic Apps](migration-tools/migrate-from-azure-logic-apps.md) -- Migrate Azure Logic Apps workflows
