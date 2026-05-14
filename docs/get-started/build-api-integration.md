@@ -1,8 +1,8 @@
 ---
-title: Build an API integration
+title: Build an API Integration
 ---
 
-# Build an API integration
+# Build an API Integration
 
 **Time:** Under 10 minutes | **What you'll build:** An HTTP service that listens on `/hello/greeting`, calls an external API, and returns the response to the caller.
 
@@ -18,7 +18,7 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
 2. Select the **Create New Integration** card.
 3. Set **Integration Name** to `HelloWorldAPI`.
 4. Set **Project Name** to `integration-as-api`.
-5. Select **Create**.
+5. Select **Create Integration**.
 
 <ThemedImage
     alt="Create new integration form with Integration Name set to HelloWorldAPI and Project Name set to integration-as-api"
@@ -30,8 +30,8 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
 
 ## Step 2: Add an HTTP service
 
-1. Select your integration from the project panel.
-2. In the design view, select **Add Artifact**.
+1. Select your integration from the project overview canvas.
+2. Select **+ Add Artifact** in the design canvas.
 3. Select **HTTP Service** under **Integration as API**.
 4. Keep **Service Contract** as **Design From Scratch**.
 5. Set **Service Base Path** to `/hello`.
@@ -65,8 +65,8 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
 1. Select **+** inside the resource flow.
 2. Select **Add Connection**.
 3. Select **HTTP**.
-4. Set **URL** to `https://apis.wso2.com/zvdz/mi-qsg/v1.0`.
-5. Set **Connection name** to `externalApi`.
+4. Set **Url** to `https://apis.wso2.com/zvdz/mi-qsg/v1.0`.
+5. Set **Connection Name** to `externalApi`.
 6. Select **Save Connection**.
 
 <ThemedImage
@@ -84,7 +84,7 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
 3. Select **Get**.
 4. Set **Path** to `/`.
 5. Set **Result** to `response`.
-6. Set **Target type** to `json`.
+6. Set **Target Type** to `json`.
 7. Select **Save**.
 
 <ThemedImage
@@ -97,7 +97,7 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
 
 ## Step 6: Return the response
 
-1. Select **+** inside the resource flow.
+1. Select **+** inside the resource flow after the external API call node we just added.
 2. Select **Return**.
 3. Set **Expression** to `response`.
 4. Select **Save**.
