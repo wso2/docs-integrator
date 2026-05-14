@@ -280,4 +280,4 @@ decimal totalRevenue = from var event in revenueEvents
 
 - [Concurrency](concurrency.md) -- Workers, strands, and parallel execution
 - [Type System Reference](type-system.md) -- Ballerina types in depth
-- [Data Mapper](../../develop/transform/visual-data-mapper.md) -- Visual data transformation
+- [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) -- Visual data transformation

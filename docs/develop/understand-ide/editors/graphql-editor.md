@@ -38,7 +38,7 @@ The service node is the card on the canvas that represents the GraphQL service i
 | **Mutation** | Write operations that change server-side state. Rows follow the same name and return-type format. |
 | **Subscription** | Server-push operations that stream values to the client. Rows show the operation name and the type emitted on each event (for example, `S1: MyType`). |
 
-Select an operation row to open the [Flow Diagram editor](flow-diagram-editor.md) for that resolver and edit the logic that runs when the operation is invoked.
+Select an operation row to open the [Flow Diagram editor](flow-diagram-editor/flow-diagram-editor.md) for that resolver and edit the logic that runs when the operation is invoked.
 
 The three-dot menu (**⋮**) on the service node opens the service-level actions:
 
@@ -96,6 +96,6 @@ To pan across the canvas, hold scroll-wheel click or **Space** while dragging, o
 ## What's next
 
 - [GraphQL Service](/docs/develop/integration-artifacts/service/graphql): end-to-end guide to creating and configuring a GraphQL service.
-- [Flow Diagram editor](flow-diagram-editor.md): edit the resolver logic for a query, mutation, or subscription.
+- [Flow Diagram editor](flow-diagram-editor/flow-diagram-editor.md): edit the resolver logic for a query, mutation, or subscription.
 - [Type editor](type-editor.md): define the types the GraphQL schema exposes.
 - [Configure editor](configure-editor.md): change the service's base path, port, or listener.

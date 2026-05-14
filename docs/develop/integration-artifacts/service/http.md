@@ -615,7 +615,5 @@ service / on new http:Listener(9090) {
 
 ## What's next
 
-- [REST API aggregation](../../../tutorials/rest-api-aggregation-service.md) — combine multiple backend calls into a single HTTP response
-- [Hospital service sample](../../../tutorials/samples/hospital-service.md) — end-to-end sample showing HTTP service patterns in a real-world scenario
 - [Connections](../supporting/connections.md) — configure HTTP client connections to call external services
 - [Data Mapper](../supporting/data-mapper/data-mapper.md) — transform request/response payloads between formats

@@ -283,6 +283,5 @@ Alternatively, use the "Run" button on each example page at [ballerina.io/learn/
 
 ## See also
 
-- [Ballerina Syntax Quick Reference](language/ballerina-syntax-quick-reference.md) — Language cheat sheet
 - [Ballerina API Documentation](api/ballerina-documentation.md) — Full API docs
 - [Ballerina Specifications](ballerina-specifications.md) — Language and platform specifications

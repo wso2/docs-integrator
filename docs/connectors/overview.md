@@ -79,7 +79,5 @@ Not everything in the connector catalog is a client connector. Some packages are
 ## What's next
 
 - [Connector catalog](catalog/index.mdx): Browse all available connectors
-- [Connection configuration](connection-configuration.md): Configure credentials and endpoint settings
 - [Connections](../develop/integration-artifacts/supporting/connections.md): Create and manage connections in your integration
-- [Error handling](error-handling-per.md): Handle failures and retries in connector calls
 - [Build your own connector](build-your-own/build-own.md): Create a custom connector for a service not in the catalog

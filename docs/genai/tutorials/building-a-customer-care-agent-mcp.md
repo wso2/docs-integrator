@@ -21,7 +21,7 @@ This tutorial shows how to build an agent that consumes an external MCP server u
 The agent receives customer messages over HTTP, reasons about which tool to call, invokes the MCP server, and returns a natural language answer.
 
 :::info Prerequisites
-- [WSO2 Integrator set up for AI](../getting-started/setting-up-ai.md)
+- [Model Providers for LLMs](../develop/components/model-providers.md)
 - The **ShopEasy MCP server** running locally. Clone the repo and follow its README to start it: [github.com/wso2/integration-samples](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/samples/customer-care-agent/mcp).
 
 ## Step 1: Create the agent

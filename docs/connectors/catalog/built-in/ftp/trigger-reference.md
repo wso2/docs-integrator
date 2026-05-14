@@ -47,7 +47,7 @@ The listener supports the following connection strategy:
 | `csvFailSafe` | <code>FailSafeOptions</code> | `()` | Fail-safe CSV processing for `onFileCsv`. When set, malformed rows are skipped and logged to a separate file in the current working directory instead of failing the handler. |
 | `coordination` | <code>CoordinationConfig</code> | `()` | Distributed task coordination. When set, multiple listener members coordinate so that only one polls at a time and the others act as warm standby. |
 
-The deprecated fields `path`, `fileNamePattern`, `fileAgeFilter`, and `fileDependencyConditions` still exist on `ListenerConfiguration` but should not be used in new code. Configure these on the service via `@ftp:ServiceConfig` instead, see [File Dependency and Trigger Conditions](dependency-and-trigger-conditions.md).
+The deprecated fields `path`, `fileNamePattern`, `fileAgeFilter`, and `fileDependencyConditions` still exist on `ListenerConfiguration` but should not be used in new code. Configure these on the service via `@ftp:ServiceConfig` instead, see [File Dependency and Trigger Conditions](../../../../develop/integration-artifacts/file/dependency-and-trigger-conditions.md).
 
 ### Initializing the listener
 

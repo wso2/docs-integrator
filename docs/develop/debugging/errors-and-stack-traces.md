@@ -6,7 +6,7 @@ title: Errors and Stack Traces
 
 Learn how to read and interpret error messages in your integrations. This page covers the difference between errors and panics, how to read stack traces, and quick fixes for the most common errors you will encounter.
 
-This page is about **diagnosing** errors. For how to **handle** errors in your code (using `check`, `do/on fail`, retry, etc.), see [Error Handling](../design-logic/error-handling.md).
+This page is about **diagnosing** errors. For how to **handle** errors in your code (using `check`, `do/on fail`, retry, etc.), see [Error Handling](../understand-ide/editors/flow-diagram-editor/error-handling.md).
 
 ## Errors vs. panics
 
@@ -243,5 +243,5 @@ If you see a compiler crash, try simplifying your code to identify the minimal c
 ## What's next
 
 - [Editor Debugging](editor.md) -- Set breakpoints and step through your code to find the root cause
-- [Error Handling](../design-logic/error-handling.md) -- Learn how to handle errors gracefully in your integration code
+- [Error Handling](../understand-ide/editors/flow-diagram-editor/error-handling.md) -- Learn how to handle errors gracefully in your integration code
 - [Strand Dump Analysis](strand-dump-analysis.md) -- Diagnose concurrency issues when your service hangs

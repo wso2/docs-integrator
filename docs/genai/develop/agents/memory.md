@@ -192,4 +192,4 @@ The following table provides general recommendations for choosing a memory setup
 ## What's next
 
 - **[Observability](observability.md)** — See which tools the agent actually selects.
-- **[Evaluations](evaluations.md)** — Learn how to prevent regressions in AI agent quality.
+- **[Evaluations](evaluations/overview.md)** — Learn how to prevent regressions in AI agent quality.

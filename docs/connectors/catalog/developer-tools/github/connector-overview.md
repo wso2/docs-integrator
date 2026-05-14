@@ -34,7 +34,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 To receive GitHub webhook events (issues, pull requests, releases, pushes, and more), use the separate [`ballerinax/trigger.github`](https://github.com/ballerina-platform/module-ballerinax-trigger.github) package. It provides a `Listener` and service types (`IssuesService`, `PullRequestService`, and others) that route incoming GitHub webhook callbacks to typed event handlers.
 
-See the [GitHub Webhooks](../../../develop/integration-artifacts/event/github-webhooks.md) guide for configuration and usage.
+See the [GitHub Webhooks](../../../../develop/integration-artifacts/event/github-webhooks.md) guide for configuration and usage.
 
 ## Triggers
 
@@ -79,4 +79,4 @@ Check the issue tracker for open issues that interest you. We look forward to re
 - [Setup Guide](setup-guide.md): create a GitHub Personal Access Token for authentication
 - [Action Reference](actions.md): full list of operations, parameters, and sample code
 - [Example](example.md): step-by-step integration walkthroughs
-- [GitHub Webhooks](../../../develop/integration-artifacts/event/github-webhooks.md): listen for GitHub events using webhooks
+- [GitHub Webhooks](../../../../develop/integration-artifacts/event/github-webhooks.md): listen for GitHub events using webhooks

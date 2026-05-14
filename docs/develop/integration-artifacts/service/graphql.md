@@ -384,4 +384,4 @@ service /graphql on new graphql:Listener(9090) {
 - [GraphQL Tool](../../tools/integration-tools/graphql-tool.md) — generate services and clients from SDL schemas
 - [gRPC Service](grpc.md) — define services using Protocol Buffers
 - [Connections](../supporting/connections.md) — configure client connections to call external services
-- [Data Mapper](../supporting/data-mapper.md) — transform request and response payloads between formats
+- [Data Mapper](../supporting/data-mapper/data-mapper.md) — transform request and response payloads between formats

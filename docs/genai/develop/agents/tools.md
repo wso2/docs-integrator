@@ -243,4 +243,4 @@ To configure a tool, click **Edit** and configure the following fields.
 
 - **[Memory](memory.md)** — Make the agent’s tool calls remember earlier turns.
 - **[Observability](observability.md)** — See which tools the agent actually selects.
-- **[Evaluations](evaluations.md)** — Learn how to prevent regressions in AI agent quality.
+- **[Evaluations](evaluations/overview.md)** — Learn how to prevent regressions in AI agent quality.

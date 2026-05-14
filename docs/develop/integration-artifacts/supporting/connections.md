@@ -22,7 +22,7 @@ Connection artifacts centralize the configuration for external systems. Define c
 
    | Option | Description |
    |---|---|
-   | **Connect via API Specification** | Import an OpenAPI or WSDL file to generate a typed HTTP client connector. For more information, see the [OpenAPI tool](../../tools/openapi-tool.md) and [WSDL tool](../../tools/wsdl-tool.md). |
+   | **Connect via API Specification** | Import an OpenAPI or WSDL file to generate a typed HTTP client connector. For more information, see the [OpenAPI tool](../../tools/integration-tools/openapi-tool.md) and [WSDL tool](../../tools/integration-tools/wsdl-tool.md). |
    | **Connect to a Database** | Enter database credentials to introspect schema and create a typed database connector. Supports MySQL, MSSQL, and PostgreSQL. |
 
    **Pre-built Connectors**
@@ -90,10 +90,10 @@ The **Add Connection** panel organizes connectors into two categories:
 
 Generate a new connector locally when a pre-built connector isn't available for the system you need to integrate with:
 
-- **Connect via API Specification** — generate a typed HTTP client from an OpenAPI or WSDL file. See the [OpenAPI tool](../../tools/openapi-tool.md) and [WSDL tool](../../tools/wsdl-tool.md).
+- **Connect via API Specification** — generate a typed HTTP client from an OpenAPI or WSDL file. See the [OpenAPI tool](../../tools/integration-tools/openapi-tool.md) and [WSDL tool](../../tools/integration-tools/wsdl-tool.md).
 - **Connect to a Database** — generate a typed database client by introspecting the schema of a MySQL, MSSQL, or PostgreSQL database.
 
-Connectors created this way are added directly to your project. To make one reusable across projects, publish it to an organization registry — see [Build your own connector](../../../connectors/build-your-own/index.md) and [Publish to Central](../../../connectors/publish-to-central.md).
+Connectors created this way are added directly to your project. To make one reusable across projects, publish it to an organization registry — see [Build your own connector](../../../connectors/build-your-own/build-own.md).
 
 **Pre-built Connectors**
 
@@ -116,7 +116,7 @@ Connector modules are distributed under different organizations on [Ballerina Ce
 | **WSO2** | `wso2/*` | Connectors published by WSO2 for enterprise systems and WSO2 products. |
 | **Organization** | `<your-org>/*` | Connectors developed in-house and published to your organization's registry, or generated from an OpenAPI or WSDL spec. |
 
-For the complete list of modules and their APIs, see the [Connector Catalog](../../../connectors/catalog/index.mdx). To build and publish your own, see [Build your own connector](../../../connectors/build-your-own/index.md).
+For the complete list of modules and their APIs, see the [Connector Catalog](../../../connectors/catalog/index.mdx). To build and publish your own, see [Build your own connector](../../../connectors/build-your-own/build-own.md).
 
 ## Best practices
 

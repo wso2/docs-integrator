@@ -165,5 +165,5 @@ Configure Ballerina to send traces to Data Prepper's OpenTelemetry receiver, the
 ## What's next
 
 - [Elastic Stack](elastic-stack-elk.md) -- Alternative with Elasticsearch
-- [Logging & Structured Logs](logging-structured-logs.md) -- Configure Ballerina logging
+- [Logging overview](logging-overview.md) -- Configure Ballerina logging
 - [Observability Overview](observability-overview.md) -- Full observability architecture

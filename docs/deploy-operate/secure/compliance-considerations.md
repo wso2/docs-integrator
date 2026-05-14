@@ -121,4 +121,4 @@ function canTransferCrossBorder(DataClassification classification) returns boole
 
 - [Secrets and encryption](secrets-encryption.md) — Encrypt data at rest and in transit
 - [Authentication](authentication.md) — Enforce access control
-- [Logging](../observe/logging-structured-logs.md) — Set up audit log shipping
+- [Logging overview](../observe/logging-overview.md) — Set up audit log shipping

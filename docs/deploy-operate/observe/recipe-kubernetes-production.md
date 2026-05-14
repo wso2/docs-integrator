@@ -375,4 +375,4 @@ kubectl exec -n observability deployment/prometheus-grafana -- \
 - **[ELK Stack Recipe](recipe-elk-stack.md)** – Add advanced log aggregation
 - **[Integration Control Plane](integration-control-plane-icp.md)** – Centralized WSO2 monitoring
 - **[Metrics Overview](metrics-overview.md)** – Learn more about metrics
-- **[Distributed Tracing Overview](distributed-tracing-overview.md)** – Learn more about tracing
+- **[Jaeger distributed tracing](jaeger-distributed-tracing.md)** – Learn more about tracing

@@ -352,4 +352,4 @@ docker-compose down -v
 - **[Kubernetes Production Stack](recipe-kubernetes-production.md)** – Scale to Kubernetes
 - **[ELK Stack](recipe-elk-stack.md)** – Advanced log aggregation
 - **[Metrics Overview](metrics-overview.md)** – Learn more about metrics
-- **[Distributed Tracing Overview](distributed-tracing-overview.md)** – Learn more about tracing
+- **[Jaeger distributed tracing](jaeger-distributed-tracing.md)** – Learn more about tracing

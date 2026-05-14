@@ -195,5 +195,5 @@ volumes:
 ## What's next
 
 - [OpenSearch](opensearch-integration.md) -- Alternative open-source search and analytics
-- [Logging & Structured Logs](logging-structured-logs.md) -- Configure Ballerina logging
+- [Logging overview](logging-overview.md) -- Configure Ballerina logging
 - [Observability Overview](observability-overview.md) -- Full observability architecture

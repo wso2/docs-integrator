@@ -52,4 +52,4 @@ To give teammates access, an organization admin can invite them from the organiz
 
 - [Cloud setup](cloud-setup.md) — Provision your WSO2 Integration Platform environment
 - [Local setup](local-setup.md) — Install WSO2 Integrator on your own machine instead
-- [Key concepts](../key-concepts.md) — Learn the building blocks of WSO2 Integrator
+- [Key concepts](../concepts/core.md) — Learn the building blocks of WSO2 Integrator

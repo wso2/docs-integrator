@@ -245,6 +245,6 @@ groups:
 
 ## What's Next
 
-- [Distributed Tracing](distributed-tracing.md) -- Trace requests across services
-- [Logging](logging-structured-logs.md) -- Configure structured logging
+- [Jaeger distributed tracing](jaeger-distributed-tracing.md) -- Trace requests across services
+- [Logging overview](logging-overview.md) -- Configure structured logging
 - [Integration Control Plane](integration-control-plane-icp.md) -- Centralized monitoring dashboard

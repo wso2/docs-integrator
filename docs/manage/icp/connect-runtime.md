@@ -6,7 +6,7 @@ title: Connect an Integration to ICP
 
 An integration connects to ICP by including the `icp-runtime-bridge` module and providing a `Config.toml` with a secret generated from the ICP console. Once configured, the bridge sends periodic heartbeats so ICP can monitor and manage the runtime. This page guides you through generating a secret, configuring the integration, and starting the runtime.
 
-This guide covers manual configuration. If you are developing in the WSO2 Integrator IDE, the setup is automated. See [Integration Control Plane (ICP)](../../deploy-operate/observe/icp.md).
+This guide covers manual configuration. If you are developing in the WSO2 Integrator IDE, the setup is automated. See [Integration Control Plane (ICP)](../../deploy-operate/observe/integration-control-plane-icp.md).
 
 :::info Prerequisites
 

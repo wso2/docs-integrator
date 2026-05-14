@@ -10,7 +10,7 @@ A direct LLM call is the simplest way to use AI in an integration: you send a pr
 
 :::info Prerequisites
 
-- [WSO2 Integrator set up for AI](setting-up-ai.md)
+- [Model Providers for LLMs](../develop/components/model-providers.md)
 - A project to work in. If you do not have one, see [Create a new integration](../../develop/create-integrations/create-a-new-integration.md).
 
 ## Step 1: Add an HTTP service

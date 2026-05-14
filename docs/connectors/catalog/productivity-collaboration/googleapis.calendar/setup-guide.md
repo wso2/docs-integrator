@@ -82,4 +82,3 @@ The refresh URL for Google services is `https://oauth2.googleapis.com/token`.
 ## What's next
 
 - [Action reference](actions.md): Available operations
-- [Trigger reference](triggers.md): Event-driven integration

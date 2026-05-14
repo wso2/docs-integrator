@@ -340,6 +340,5 @@ function processMessages(kafka:Consumer consumer, int workerId) returns error? {
 
 ## See also
 
-- [Ballerina Syntax Quick Reference](ballerina-syntax-quick-reference.md) -- Core language syntax
 - [Error Handling](error-handling.md) -- Error handling patterns
 - [Ballerina by Example](/docs/reference/by-example) -- Runnable concurrency examples

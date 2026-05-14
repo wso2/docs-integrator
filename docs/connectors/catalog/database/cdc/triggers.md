@@ -14,8 +14,6 @@ Three components work together:
 | `cdc:Service` | Ballerina service type that defines event callbacks (`onRead`, `onCreate`, `onUpdate`, `onDelete`, `onTruncate`, `onError`) invoked per change event. |
 | `@cdc:ServiceConfig` | Optional annotation applied to a `cdc:Service` to restrict which tables it receives events from. |
 
-For action-based record operations, see the [Action Reference](actions.md).
-
 ---
 
 ## Listener

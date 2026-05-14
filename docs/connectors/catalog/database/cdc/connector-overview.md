@@ -17,8 +17,6 @@ The Ballerina `ballerinax/cdc` connector provides a spec-compliant, production-g
 - SSL/TLS support for secure database connections with configurable SSL modes and key/trust stores
 - Built-in liveness probe utility (`cdc:isLive()`) for Kubernetes health check integration
 
-See the **[Action Reference](actions.md)** for the full list of operations, parameters, and sample code for each client.
-
 ## Triggers
 
 The CDC connector enables event-driven integration by streaming real-time database change events to your Ballerina service. Attach one or more `cdc:Service` instances to a database-specific CDC listener (e.g., `mysql:CdcListener`) and implement callbacks for inserts, updates, deletes, and snapshot reads, with no polling required.

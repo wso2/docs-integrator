@@ -77,4 +77,4 @@ public function main(string param1 = "", int param2 = 0) returns error? {
 ## What's next
 
 - [HTTP service](service/http.md) — expose your integration as a REST API
-- [Error handling](../design-logic/error-handling.md) — handle automation failures
+- [Error handling](../understand-ide/editors/flow-diagram-editor/error-handling.md) — handle automation failures

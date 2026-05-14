@@ -14,7 +14,7 @@ Run integration logic on a schedule or manually, without a network listener.
 
 | Artifact | Description |
 |---|---|
-| [Automation](automation/automation.md) | Runs on a cron schedule or manually. Use for data sync, report generation, and routine maintenance jobs. |
+| [Automation](automation.md) | Runs on a cron schedule or manually. Use for data sync, report generation, and routine maintenance jobs. |
 
 ### AI integrations
 
@@ -79,7 +79,7 @@ Reusable building blocks shared across multiple integrations in the same project
 
 ## What's next
 
-- [Automation](automation/automation.md) — run scheduled or on-demand integration jobs
+- [Automation](automation.md) — run scheduled or on-demand integration jobs
 - [HTTP service](service/http.md) — the most common starting point for integration APIs
 - [Kafka](event/kafka.md) — consume and process messages from Apache Kafka
 - [FTP/SFTP](file/ftp-sftp.md) — process files from remote file servers
