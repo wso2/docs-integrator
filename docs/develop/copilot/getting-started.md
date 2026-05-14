@@ -25,8 +25,8 @@ If you have already [signed in to WSO2 Integrator](../../get-started/setup/local
 
    ![WSO2 Integrator Copilot signed in](/img/develop/copilot/copilot-welcome.png)
 
-:::info Terms of use
-By signing in, you agree to the WSO2 Integrator Copilot Terms of Use shown on the welcome screen.
+:::info Terms of use and data handling
+By signing in, you agree to the WSO2 Integrator Copilot Terms of Use shown on the welcome screen. See [AI usage and data handling guidelines](../../reference/ai-usage-and-data-handling-guidelines.md) for how Copilot handles your data.
 
 ## What's next
 
