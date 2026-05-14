@@ -52,8 +52,18 @@ The LLM call returns one of three values. Define an enum so Ballerina can enforc
 1. In the HTTP Service Design editor, select **+ Add Resource**.
 2. Select **POST**.
 3. Set **Resource Path** to `analyze`.
-4. Select **+ Define Payload**, set the name to `AnalyzePayload`, and add a single field `text` of type `string`.
-5. Select **Save** on the payload panel, then **Save** on the resource.
+4. Select **+ Define Payload**.
+5. In the popup, select **Create Type Schema**, set the name to `AnalyzePayload`, and add a single field `text` of type `string`.
+
+<ThemedImage
+    alt="Define Payload popup with Create Type Schema selected, name set to AnalyzePayload, and a text field of type string"
+    sources={{
+        light: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/define-payload-popup.png'),
+        dark: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/define-payload-popup.png'),
+    }}
+/>
+
+6. Select **Save** on the payload panel, then **Save** on the resource.
 
 <ThemedImage
     alt="POST analyze resource configured with the AnalyzePayload request body"
