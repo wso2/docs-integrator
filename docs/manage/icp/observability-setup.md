@@ -180,11 +180,13 @@ Without `observabilityIncluded = true`, the `ballerinax/metrics.logs` module can
 Add the metrics logger import alongside the existing bridge import:
 
 ```ballerina
-import wso2/icp.runtime.bridge as _;
 import ballerinax/metrics.logs as _;
+import wso2/icp.runtime.bridge as _;
 ```
 
 Both are blank imports (`as _`). They activate automatically at startup.
+
+Ensure to keep the import order as shown.
 
 ### Config.toml
 
