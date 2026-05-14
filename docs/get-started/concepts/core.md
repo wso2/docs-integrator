@@ -1,8 +1,8 @@
 ---
-title: Core concepts
+title: Core Concepts
 ---
 
-# Core concepts
+# Core Concepts
 
 This page introduces every major building block you work with when designing and building integrations in the WSO2 Integrator IDE. Use it as a vocabulary reference before diving into the [Develop](/docs/develop/integration-artifacts/integration-artifacts) section, where each concept is covered in full detail.
 

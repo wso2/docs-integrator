@@ -2,7 +2,7 @@
 title: RAG Ingestion Automation
 ---
 
-# RAG ingestion
+# RAG Ingestion
 
 Retrieval-augmented generation (RAG) improves LLM answers by using relevant external data. RAG has two core stages: ingestion and retrieval. This page explains how to configure scheduled ingestion in WSO2 Cloud - Integration Platform.
 

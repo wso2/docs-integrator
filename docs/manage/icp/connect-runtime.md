@@ -1,8 +1,8 @@
 ---
-title: Connect an integration to ICP
+title: Connect an Integration to ICP
 ---
 
-# Connect an integration to ICP
+# Connect an Integration to ICP
 
 An integration connects to ICP by including the `icp-runtime-bridge` module and providing a `Config.toml` with a secret generated from the ICP console. Once configured, the bridge sends periodic heartbeats so ICP can monitor and manage the runtime. This page guides you through generating a secret, configuring the integration, and starting the runtime.
 

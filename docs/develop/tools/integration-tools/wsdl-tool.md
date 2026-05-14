@@ -2,7 +2,7 @@
 title: WSDL Tool
 ---
 
-# WSDL tool
+# WSDL Tool
 
 The `bal wsdl` tool generates Ballerina client code from Web Services Description Language (WSDL) files. It creates type-safe SOAP client connectors, request/response record types, and XML serialization logic, enabling you to call legacy SOAP web services from your Ballerina integrations without manually constructing XML envelopes.
 

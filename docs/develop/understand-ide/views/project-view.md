@@ -1,8 +1,8 @@
 ---
-title: Project view
+title: Project View
 ---
 
-# Project view
+# Project View
 
 The Project view is the top-level view in WSO2 Integrator. It appears when you open a project that contains multiple integrations or libraries, giving you an overview of everything in the project, deployment options, and project-level actions in one place.
 

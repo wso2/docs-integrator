@@ -1,8 +1,8 @@
 ---
-title: Usage dashboards
+title: Usage Dashboards
 ---
 
-# Usage dashboards
+# Usage Dashboards
 
 WSO2 Cloud provides comprehensive insights into APIs created within WSO2 Cloud. Usage insights provide a range of metrics, including API traffic, error rates, and latency, allowing you to monitor and optimize API performance effectively.
 

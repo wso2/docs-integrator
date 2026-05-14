@@ -1,8 +1,8 @@
 ---
-title: Code coverage and reports
+title: Code Coverage and Reports
 ---
 
-# Code coverage and reports
+# Code Coverage and Reports
 
 Passing tests tell you that the scenarios you wrote work correctly. Code coverage tells you which parts of your integration were never reached by any test, the blind spots where bugs can hide undetected. Use reports and coverage data to share results with teammates, catch gaps before they reach production, and enforce standards automatically in CI.
 

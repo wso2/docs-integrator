@@ -1,5 +1,5 @@
 ---
-title: Persist tool
+title: Persist Tool
 ---
 
 # Persist Tool

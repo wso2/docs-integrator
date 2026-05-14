@@ -1,8 +1,8 @@
 ---
-title: Choosing a control plane
+title: Choosing a Control Plane
 ---
 
-# Choosing a control plane
+# Choosing a Control Plane
 
 WSO2 Integrator supports two control planes for managing deployed integrations: **WSO2 Cloud - Integration Platform** and the **Integration Control Plane (ICP)**. Both let you organize integrations into projects and environments, monitor runtime state, and manage access. However, they differ in where they run, how much infrastructure you manage, and what runtime types they support.
 

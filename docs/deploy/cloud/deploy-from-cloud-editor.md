@@ -1,8 +1,8 @@
 ---
-title: Deploy from the cloud editor
+title: Deploy from the Cloud Editor
 ---
 
-# Deploy from the cloud editor
+# Deploy from the Cloud Editor
 
 WSO2 Cloud includes a browser-based editor where you can create and develop integrations without installing anything locally. Once your integration is ready, you can deploy it to WSO2 Cloud directly from the editor.
 

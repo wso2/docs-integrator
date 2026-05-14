@@ -1,8 +1,8 @@
 ---
-title: Manage runtimes
+title: Manage Runtimes
 ---
 
-# Manage runtimes
+# Manage Runtimes
 
 Runtimes are default profile (Ballerina) or MI processes that connect to ICP by sending periodic heartbeats. The **Runtimes** page is available at the organization, project, and integration level, with each level scoped to show only the runtimes relevant to that context. This page guides you through viewing runtimes, generating connection secrets, and managing runtime connections.
 

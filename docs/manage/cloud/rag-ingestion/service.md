@@ -1,8 +1,8 @@
 ---
-title: RAG service
+title: RAG Service
 ---
 
-# RAG service
+# RAG Service
 
 WSO2 Cloud - Integration Platform exposes RESTful API endpoints to support RAG workflows. Use these endpoints to ingest files, parse and chunk content, and retrieve relevant chunks programmatically.
 

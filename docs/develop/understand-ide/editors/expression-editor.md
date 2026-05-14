@@ -1,8 +1,8 @@
 ---
-title: Expression editor
+title: Expression Editor
 ---
 
-# Expression editor
+# Expression Editor
 
 The Expression editor is the inline value-input surface used throughout the WSO2 Integrator IDE wherever a field accepts an expression. It provides syntax highlighting, inline validation, and a UI that adapts to the type expected at the cursor, so you can supply values without remembering the full Ballerina syntax for each context.
 

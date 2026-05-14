@@ -1,8 +1,8 @@
 ---
-title: Configure enterprise login
+title: Configure Enterprise Login
 ---
 
-# Configure enterprise login
+# Configure Enterprise Login
 
 WSO2 Cloud - Integration Platform lets you configure enterprise login so that users from an external identity provider (IdP) can sign in to WSO2 Cloud without changing their credentials.
 

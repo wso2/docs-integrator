@@ -1,8 +1,8 @@
 ---
-title: WSO2 Integration Cloud concepts
+title: WSO2 Integration Cloud Concepts
 ---
 
-# WSO2 Integration Cloud concepts
+# WSO2 Integration Cloud Concepts
 
 WSO2 Integration Cloud is the managed runtime side of the platform. It handles everything that happens after your integration leaves the IDE: building, deploying, promoting, and observing integrations across environments. This page covers the key concepts you need to understand before deploying your first integration.
 

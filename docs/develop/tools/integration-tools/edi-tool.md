@@ -2,7 +2,7 @@
 title: EDI Tool
 ---
 
-# EDI tool
+# EDI Tool
 
 The `bal edi` tool generates Ballerina code from EDI (Electronic Data Interchange) schema definitions, enabling B2B integration with trading partners using standards such as **X12** and **EDIFACT**. The generated code includes record types for EDI segments and transaction sets, along with parser and serializer functions that convert between raw EDI text and type-safe Ballerina records.
 

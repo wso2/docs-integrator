@@ -1,8 +1,8 @@
 ---
-title: Test MCP server
+title: Test MCP Server
 ---
 
-# Test MCP server
+# Test MCP Server
 
 The Try-It tool for MCP servers opens the MCP Inspector, an interactive interface for connecting to your server, listing its tools, and invoking them with input parameters. Use it during development to verify that each tool in your MCP server behaves correctly before connecting it to an AI agent.
 

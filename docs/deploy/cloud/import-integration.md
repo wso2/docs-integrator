@@ -1,8 +1,8 @@
 ---
-title: Import an integration to WSO2 Cloud
+title: Import an Integration to WSO2 Cloud
 ---
 
-# Import an integration
+# Import an Integration
 
 If your integration is already in a Git repository, you can import it directly into WSO2 Cloud without going through the WSO2 Integrator IDE. WSO2 Cloud automatically builds and deploys the integration to the Development environment once the import is complete.
 

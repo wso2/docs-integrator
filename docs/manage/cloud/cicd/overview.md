@@ -1,8 +1,8 @@
 ---
-title: CI/CD overview
+title: CI/CD Overview
 ---
 
-# CI/CD overview
+# CI/CD Overview
 
 WSO2 Cloud - Integration Platform supports a continuous deployment model built around two concepts: Git-triggered deployments and deployment pipelines. Together, these let you automate how integrations move from development to production.
 

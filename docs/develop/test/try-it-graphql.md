@@ -1,8 +1,8 @@
 ---
-title: Test GraphQL service
+title: Test GraphQL Service
 ---
 
-# Test GraphQL service
+# Test GraphQL Service
 
 The Try-It tool for GraphQL services opens a built-in GraphiQL editor where you can browse your schema, write queries and mutations, and execute them against your running service. Use it during development to verify your GraphQL operations before writing automated tests.
 

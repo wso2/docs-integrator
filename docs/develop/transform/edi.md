@@ -2,7 +2,7 @@
 title: EDI Processing
 ---
 
-# EDI processing
+# EDI Processing
 
 Work with Electronic Data Interchange (EDI) formats used in supply chain, healthcare, and financial integrations. Ballerina provides the `ballerina/edi` module for parsing and serializing EDI data, and the `bal edi` CLI tool for generating type-safe code from standard EDI specs like EDIFACT and X12.
 

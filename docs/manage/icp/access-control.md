@@ -1,8 +1,8 @@
 ---
-title: Access control
+title: Access Control
 ---
 
-# Access control
+# Access Control
 
 Access control in ICP determines who can view, edit, and manage resources across organizations, projects, and integrations. Roles define what actions are allowed, groups collect users, and mappings bind roles to groups at a specific scope. This page explains the access control model and guides you through common tasks such as granting team access, scoping permissions to environments, and creating custom roles.
 

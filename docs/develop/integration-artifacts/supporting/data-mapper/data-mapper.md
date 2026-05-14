@@ -1,8 +1,8 @@
 ---
-title: Data mapper
+title: Data Mapper
 ---
 
-# Data mapper
+# Data Mapper
 
 The data mapper transforms data between different record types using a visual canvas. Map fields, write inline expressions, iterate over arrays, aggregate values, and reuse common mappings as submappings, all without leaving the integration flow.
 

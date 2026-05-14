@@ -1,8 +1,8 @@
 ---
-title: Configure editor
+title: Configure Editor
 ---
 
-# Configure editor
+# Configure Editor
 
 The Configure editor is the side panel you open whenever you select **Configure** in the IDE. It groups the settings that apply to the current artifact (an integration, a service, or a function) into a single form, so you can review and update them without editing source code. The editor adapts its content to the level you opened it from.
 

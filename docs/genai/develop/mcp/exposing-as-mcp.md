@@ -2,7 +2,7 @@
 title: Exposing a Service as MCP
 ---
 
-# Exposing a service as MCP
+# Exposing a Service as MCP
 
 An **MCP service** is a WSO2 Integrator artifact that publishes a set of tools over the Model Context Protocol. Any MCP-compatible client (Claude Desktop, GitHub Copilot, or another AI agent) can connect, discover the tools, and call them. This page covers the configuration options for the listener, service, and tools, including how to handle sessions and dynamic tool definitions.
 

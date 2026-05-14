@@ -1,8 +1,8 @@
 ---
-title: Connectors overview
+title: Connectors Overview
 ---
 
-# Connectors overview
+# Connectors Overview
 
 Send a Slack notification when an order ships. Read customer records from Salesforce. Write results to a Google Sheet. Query a database and return the data in an API response.
 

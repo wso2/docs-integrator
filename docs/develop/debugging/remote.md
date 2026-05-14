@@ -2,7 +2,7 @@
 title: Remote Debugging
 ---
 
-# Remote debugging
+# Remote Debugging
 
 Attach the WSO2 Integrator debugger to integrations running on remote servers, containers, or other environments. Remote debugging lets you investigate issues that only occur in specific environments without adding log statements and redeploying.
 

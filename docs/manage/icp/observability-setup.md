@@ -1,8 +1,8 @@
 ---
-title: Observability setup
+title: Observability Setup
 ---
 
-# Observability setup
+# Observability Setup
 
 ICP provides centralized observability for default profile runtimes. Logs and metrics are collected via Fluent Bit, stored in OpenSearch, and displayed in the ICP console. This page guides you through deploying OpenSearch, creating index templates, configuring the integration, and setting up Fluent Bit to complete the observability stack.
 

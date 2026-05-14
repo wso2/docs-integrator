@@ -1,5 +1,5 @@
 ---
-title: Migration tools
+title: Migration Tools
 ---
 
 # Migration Tools

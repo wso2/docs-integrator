@@ -1,8 +1,8 @@
 ---
-title: Show more functions
+title: Show More Functions
 ---
 
-# Show more functions
+# Show More Functions
 
 The node panel surfaces only the most common nodes and shortcut functions for each section. **Show More Functions** is the action at the very bottom of the node panel that opens the full functions picker, so you can reach any function the project has access to even if it is not listed as a shortcut.
 

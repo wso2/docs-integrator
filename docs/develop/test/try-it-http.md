@@ -1,8 +1,8 @@
 ---
-title: Test HTTP service
+title: Test HTTP Service
 ---
 
-# Test HTTP service
+# Test HTTP Service
 
 The Try-It tool lets you test your HTTP REST API endpoints without leaving WSO2 Integrator. You can interact with the request form directly to explore and verify each endpoint, or describe what you want to test in natural language and let WSO2 Integrator Copilot handle the execution for you.
 

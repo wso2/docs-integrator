@@ -1,8 +1,8 @@
 ---
-title: Cloud.toml reference
+title: Cloud.toml Reference
 ---
 
-# Cloud.toml reference
+# Cloud.toml Reference
 
 `Cloud.toml` configures cloud deployment settings for a Ballerina package, including Docker container images, Kubernetes resource limits, autoscaling, health probes, and configuration file mounting. Place this file in the package root alongside `Ballerina.toml`. All fields are optional; the compiler applies sensible defaults for any unspecified values.
 

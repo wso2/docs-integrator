@@ -1,8 +1,8 @@
 ---
-title: Service Design editor
+title: Service Design Editor
 ---
 
-# Service Design editor
+# Service Design Editor
 
 The Service Design editor, also known as the **service designer**, is the editor you open for any service entry point in WSO2 Integrator. It lists every resource or handler the service exposes and gives you one place to add, edit, remove, try out, and export them. For background on what a service is and how it relates to listeners, see [Services and listeners](/docs/get-started/concepts/core#services-and-listeners).
 

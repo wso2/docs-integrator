@@ -1,8 +1,8 @@
 ---
-title: Integration artifacts
+title: Integration Artifacts
 ---
 
-# Integration artifacts
+# Integration Artifacts
 
 Integration artifacts are the building blocks of every integration. Each type is designed for a specific trigger and communication pattern: receiving HTTP requests, reacting to messages, processing files, running on a schedule, or serving AI agent tools. Choosing the right artifact for the job keeps your integration logic focused and your project easy to navigate.
 

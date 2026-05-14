@@ -1,8 +1,8 @@
 ---
-title: Create evaluations
+title: Create Evaluations
 ---
 
-# Create evaluations
+# Create Evaluations
 
 An **evaluation** is the function that scores agent behaviour against an evalset. You start by filling a short form, and WSO2 Integrator opens the rest of the configuration in the visual designer.
 

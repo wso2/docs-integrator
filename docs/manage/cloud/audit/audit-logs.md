@@ -1,8 +1,8 @@
 ---
-title: Audit logs
+title: Audit Logs
 ---
 
-# Audit logs
+# Audit Logs
 
 Audit logs, also called audit trails, enhance security, ensure compliance, provide operational insights, and help manage risks.
 

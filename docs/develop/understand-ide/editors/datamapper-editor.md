@@ -1,8 +1,8 @@
 ---
-title: Data Mapper editor
+title: Data Mapper Editor
 ---
 
-# Data Mapper editor
+# Data Mapper Editor
 
 The Data Mapper editor is the visual surface you open for any data mapper in WSO2 Integrator. It shows the source types on the left, the target type on the right, and the mapping canvas between them, so you can wire fields by drawing links or filling expressions instead of hand-writing the conversion function. The data mapper itself is a typed function with one or more inputs and one output, and every change you make in the editor is reflected in the underlying function source.
 

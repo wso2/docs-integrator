@@ -2,7 +2,7 @@
 title: Runtime Logs
 ---
 
-# Runtime logs
+# Runtime Logs
 
 Runtime logs provide insights into application and gateway activity for integrations deployed on WSO2 Cloud - Integration Platform. They centralize diverse log sources to streamline debugging and troubleshooting across environments.
 

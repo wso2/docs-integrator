@@ -1,8 +1,8 @@
 ---
-title: Array to single value
+title: Array to Single Value
 ---
 
-# Array to single value
+# Array to Single Value
 
 When the input is an array and the target output is a single value, the data mapper offers two options depending on whether you want one element from the array or a value computed across the array.
 

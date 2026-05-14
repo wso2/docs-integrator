@@ -1,8 +1,8 @@
 ---
-title: Build a sentiment analyzer
+title: Build a Sentiment Analyzer
 ---
 
-# Build a sentiment analyzer
+# Build a Sentiment Analyzer
 
 **Time:** Under 10 minutes | **What you'll build:** An HTTP service that listens on `POST /analyze`, sends a customer review to an LLM, and returns the sentiment (`POSITIVE`, `NEGATIVE`, or `NEUTRAL`) along with a confidence score.
 

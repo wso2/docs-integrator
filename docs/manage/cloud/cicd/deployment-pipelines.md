@@ -1,8 +1,8 @@
 ---
-title: Deployment pipelines
+title: Deployment Pipelines
 ---
 
-# Manage deployment pipelines
+# Manage Deployment Pipelines
 
 A deployment pipeline defines the ordered sequence of environments through which an integration is promoted. WSO2 Cloud - Integration Platform provides a default pipeline and lets you create additional pipelines to match different promotion strategies across your projects.
 

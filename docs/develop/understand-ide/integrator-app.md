@@ -1,8 +1,8 @@
 ---
-title: Integrator app
+title: Integrator App
 ---
 
-# Integrator app
+# Integrator App
 
 The WSO2 Integrator IDE is the application you install to build integrations. Every view you open ([Project view](views/project-view.md), [Integrator view](views/integration-view.md), [Library view](views/library-view.md), and so on) renders inside the same window chrome: a top menu bar, an activity bar on the far-left edge, an editor tab area, and the side panels for the project explorer and deployment options. This page describes the parts of that chrome that stay the same across views, so the view-specific pages do not need to repeat them.
 

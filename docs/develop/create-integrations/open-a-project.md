@@ -2,7 +2,7 @@
 title: Open a Project
 ---
 
-# Open a project
+# Open a Project
 
 If you already have a project, you can open it from the WSO2 Integrator home screen. You can open projects stored locally on your machine or clone cloud projects from your WSO2 Cloud organization.
 

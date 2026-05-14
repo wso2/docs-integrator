@@ -2,7 +2,7 @@
 title: Open an Existing Integration
 ---
 
-# Open an existing integration
+# Open an Existing Integration
 
 If you already have an integration or project on your local machine, you can open it directly from the WSO2 Integrator home screen. WSO2 Integrator detects the project structure and activates its tooling automatically.
 

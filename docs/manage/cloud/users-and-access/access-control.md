@@ -1,8 +1,8 @@
 ---
-title: Access control
+title: Access Control
 ---
 
-# Access control
+# Access Control
 
 The WSO2 Cloud - Integration Platform lets you manage access to projects and control the actions that users can perform within them. Administrators can restrict project access to specific user groups. This is useful when you need certain user groups to have access to particular projects or a set of projects.
 

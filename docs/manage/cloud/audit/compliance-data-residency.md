@@ -1,8 +1,8 @@
 ---
-title: Data residency and compliance
+title: Data Residency and Compliance
 ---
 
-# Data residency and compliance
+# Data Residency and Compliance
 
 WSO2 Cloud protects the confidentiality, integrity, and availability of the data collected through its logs and metrics solutions. This page describes how WSO2 Cloud handles data residency, security, and compliance to meet legal and organizational requirements.
 

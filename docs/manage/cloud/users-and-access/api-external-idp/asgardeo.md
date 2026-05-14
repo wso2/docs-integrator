@@ -1,8 +1,8 @@
 ---
-title: Configure Asgardeo as an external IdP
+title: Configure Asgardeo as an External IdP
 ---
 
-# Configure Asgardeo as an external IdP
+# Configure Asgardeo as an External IdP
 
 Asgardeo is an identity-as-a-service (IDaaS) solution that creates seamless login experiences for your applications. It integrates with WSO2 Cloud - Integration Platform to provide API access control through API scopes, which lets you restrict API access to designated user groups. By configuring Asgardeo as an external identity provider (IdP), you can use your Asgardeo user stores to manage API access control effectively.
 

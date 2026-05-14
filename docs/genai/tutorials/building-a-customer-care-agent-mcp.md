@@ -1,8 +1,8 @@
 ---
-title: Build a customer care agent with MCP
+title: Build a Customer Care Agent with MCP
 ---
 
-# Build a customer care agent with MCP
+# Build a Customer Care Agent with MCP
 
 ## What you'll build
 

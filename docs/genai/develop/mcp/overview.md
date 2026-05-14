@@ -2,7 +2,7 @@
 title: MCP Integration
 ---
 
-# MCP integration
+# MCP Integration
 
 The **Model Context Protocol** (MCP) is an open standard that lets AI assistants discover and call tools exposed by external servers. See the [MCP specification](https://modelcontextprotocol.io) for the protocol details.
 

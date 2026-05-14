@@ -1,8 +1,8 @@
 ---
-title: Access paths
+title: Access Paths
 ---
 
-# Access paths
+# Access Paths
 
 You can open the data mapper in two ways:
 

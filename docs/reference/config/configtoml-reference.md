@@ -1,8 +1,8 @@
 ---
-title: Config.toml reference
+title: Config.toml Reference
 ---
 
-# Config.toml reference
+# Config.toml Reference
 
 `Config.toml` provides runtime values for `configurable` variables declared in Ballerina source code. Place this file in the working directory where you run `bal run`, or specify one or more config files via the `BAL_CONFIG_FILES` environment variable. Ballerina uses a TOML v0.4-compatible syntax with module-qualified keys to map configuration values to their corresponding `configurable` declarations.
 

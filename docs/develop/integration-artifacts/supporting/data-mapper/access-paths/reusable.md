@@ -1,8 +1,8 @@
 ---
-title: Reusable data mapper
+title: Reusable Data Mapper
 ---
 
-# Reusable data mapper
+# Reusable Data Mapper
 
 Create a reusable data mapper from the **Artifacts** page or the left sidebar. Configure the inputs and the output type, then open the data mapper view.
 

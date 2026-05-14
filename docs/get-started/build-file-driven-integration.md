@@ -1,8 +1,8 @@
 ---
-title: Build a file-driven integration
+title: Build a File-Driven Integration
 ---
 
-# Build a file-driven integration
+# Build a File-Driven Integration
 
 **Time:** Under 10 minutes | **What you'll build:** A file integration that adds an `onModify` handler to track file changes and uses `printInfo` to log file modification events.
 

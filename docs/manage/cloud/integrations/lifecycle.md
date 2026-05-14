@@ -2,7 +2,7 @@
 title: Lifecycle
 ---
 
-# Integration lifecycle
+# Integration Lifecycle
 
 Lifecycle management options depend on the type of integration. You can manage each integration's lifecycle from its overview page in WSO2 Cloud.
 

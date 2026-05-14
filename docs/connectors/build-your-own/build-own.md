@@ -1,8 +1,8 @@
 ---
-title: Build your own connector
+title: Build Your Own Connector
 ---
 
-# Build your own connector
+# Build Your Own Connector
 
 When no pre-built connector exists for your target service, you can build one yourself. WSO2 Integrator supports two approaches: generating a connector automatically from an OpenAPI specification, or writing one from scratch in Ballerina for full control over authentication, error handling, and data transformation.
 

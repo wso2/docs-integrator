@@ -1,8 +1,8 @@
 ---
-title: Create from OpenAPI spec
+title: Create from OpenAPI Spec
 ---
 
-# Create from OpenAPI spec
+# Create from OpenAPI Spec
 
 WSO2 Integrator can generate a fully functional connector from any OpenAPI specification file, letting you integrate any REST API without writing manual client logic. Import the spec in the WSO2 Integrator IDE and the connector is ready to use in your integration flow.
 

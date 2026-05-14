@@ -1,8 +1,8 @@
 ---
-title: Type Diagram editor
+title: Type Diagram Editor
 ---
 
-# Type Diagram editor
+# Type Diagram Editor
 
 The Type Diagram editor, also known as the **type diagram**, is the editor you open to see every type in your integration on one canvas. It renders each record, enum, and service class as its own card, with the fields, members, or resource methods of the type listed as rows, and draws lines between cards to show which types reference which. Use it to explore the data model of an integration, jump from a field to its referenced type, and edit, delete, or add types without leaving the canvas.
 

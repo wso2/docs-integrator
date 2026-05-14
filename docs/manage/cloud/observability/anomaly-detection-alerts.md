@@ -2,7 +2,7 @@
 title: Anomaly Detection and Alerts
 ---
 
-# Anomaly detection and alerts
+# Anomaly Detection and Alerts
 
 Alerts let you proactively monitor your integrations and respond before issues affect users. You can configure rules that trigger email notifications when latency, traffic, resource usage, or log activity crosses a defined threshold.
 

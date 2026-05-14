@@ -1,8 +1,8 @@
 ---
-title: Customer review analyzer with Natural Function
+title: Customer Review Analyzer with Natural Function
 ---
 
-# Customer review analyzer with Natural Function
+# Customer Review Analyzer with Natural Function
 
 This tutorial walks through building an **HTTP service that uses a Natural Function to analyze a customer review** and return structured feedback. It is the end-to-end scenario for the [Natural Functions](/docs/genai/develop/natural-functions/overview) feature.
 

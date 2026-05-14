@@ -1,8 +1,8 @@
 ---
-title: RAG retrieval
+title: RAG Retrieval
 ---
 
-# RAG retrieval
+# RAG Retrieval
 
 Retrieval-augmented generation (RAG) retrieval searches a vector store for the most relevant information that answers a user query. Use it after ingestion to find supporting chunks for a response.
 

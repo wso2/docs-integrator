@@ -1,8 +1,8 @@
 ---
-title: Create evalsets
+title: Create Evalsets
 ---
 
-# Create evalsets
+# Create Evalsets
 
 An **evalset** is a curated set of conversation traces that act as a golden dataset. Each entry pairs a user input with the expected agent behaviour, including the tool calls the agent should make and the response it should produce. Evalsets are the input to every evaluation you run.
 

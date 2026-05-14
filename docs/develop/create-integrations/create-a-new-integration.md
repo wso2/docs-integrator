@@ -2,7 +2,7 @@
 title: Create a New Integration
 ---
 
-# Create a new integration
+# Create a New Integration
 
 WSO2 Integrator provides a creation wizard to set up new integration projects. Launch it from the home screen and configure the project details to generate a ready-to-use Ballerina project.
 

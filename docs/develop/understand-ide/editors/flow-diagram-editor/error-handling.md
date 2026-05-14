@@ -1,8 +1,8 @@
 ---
-title: Error handling
+title: Error Handling
 ---
 
-# Error handling
+# Error Handling
 
 The **Error Handling** section of the node palette covers nodes that catch errors in the flow, raise an error value to the caller, or abort the strand entirely. Use the nodes here to add error-handling logic to a flow or to raise errors yourself.
 

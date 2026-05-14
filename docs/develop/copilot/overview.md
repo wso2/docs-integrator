@@ -1,8 +1,8 @@
 ---
-title: Copilot capabilities
+title: Copilot Capabilities
 ---
 
-# Copilot capabilities
+# Copilot Capabilities
 
 WSO2 Integrator Copilot builds integrations from natural language prompts. It produces ready-to-use artifacts that drop straight into your project. Iterate through follow-up prompts to refine logic, add features, or modify behavior.
 

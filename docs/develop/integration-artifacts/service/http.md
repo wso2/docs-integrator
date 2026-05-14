@@ -1,8 +1,8 @@
 ---
-title: HTTP service
+title: HTTP Service
 ---
 
-# HTTP service
+# HTTP Service
 
 HTTP services expose your integration logic as REST endpoints that clients can call over HTTP. Use them when you need to receive requests, respond with data, or build webhooks. This page covers the configuration options for the listener, service, and resources, including how to define response schemas.
 

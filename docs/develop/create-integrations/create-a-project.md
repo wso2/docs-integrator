@@ -2,7 +2,7 @@
 title: Create a Project
 ---
 
-# Create a project
+# Create a Project
 
 A project is a workspace that organizes multiple integrations and libraries in a single repository with shared dependencies. Use projects when you need to manage related packages together.
 

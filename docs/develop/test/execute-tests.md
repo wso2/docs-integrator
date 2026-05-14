@@ -1,8 +1,8 @@
 ---
-title: Execute tests
+title: Execute Tests
 ---
 
-# Execute tests
+# Execute Tests
 
 The `bal test` command discovers and runs all tests in the current package. Filtering by group, function name, or data case lets you focus on what matters during development, while CI runs the full suite before merge.
 

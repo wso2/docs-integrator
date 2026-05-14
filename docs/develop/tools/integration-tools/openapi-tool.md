@@ -2,7 +2,7 @@
 title: OpenAPI Tool
 ---
 
-# OpenAPI tool
+# OpenAPI Tool
 
 The `bal openapi` tool bridges OpenAPI specifications and Ballerina code. It generates type-safe Ballerina service stubs and client connectors from OpenAPI (Swagger) YAML or JSON files, and can also export an OpenAPI specification from an existing Ballerina service. This ensures your integrations conform to API contracts and eliminates boilerplate.
 

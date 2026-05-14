@@ -1,8 +1,8 @@
 ---
-title: Import a project to WSO2 Cloud
+title: Import a Project to WSO2 Cloud
 ---
 
-# Import a project
+# Import a Project
 
 If you have an existing project created with the WSO2 Integrator IDE in a Git repository, you can import it directly into WSO2 Cloud. During import, you configure each integration in the project and WSO2 Cloud creates them all at once.
 

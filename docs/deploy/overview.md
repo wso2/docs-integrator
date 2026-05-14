@@ -4,7 +4,7 @@ title: Deploy Overview
 
 {/* TODO: Work in progress */}
 
-# Deploy and operate
+# Deploy and Operate
 
 Once your integration is ready, this section covers everything you need to ship it, keep it running, and operate it in production.
 

@@ -1,8 +1,8 @@
 ---
-title: Configure a reverse proxy
+title: Configure a Reverse Proxy
 ---
 
-# Configure a reverse proxy
+# Configure a Reverse Proxy
 
 ICP serves the console and API on port `9446` using HTTPS with a self-signed certificate. In production, you typically place a reverse proxy in front of ICP to handle TLS termination, expose a standard port, and integrate with your network infrastructure. This page covers the ICP-specific configuration required when a reverse proxy is in use.
 

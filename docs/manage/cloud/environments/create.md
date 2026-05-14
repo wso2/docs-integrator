@@ -1,8 +1,8 @@
 ---
-title: Create an environment
+title: Create an Environment
 ---
 
-# Create an environment
+# Create an Environment
 
 WSO2 Cloud - Integration Platform provides **Development** and **Production** environments by default. You can create additional environments, such as a staging or regional environment, to match your release pipeline.
 

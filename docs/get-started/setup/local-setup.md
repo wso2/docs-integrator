@@ -1,5 +1,5 @@
 ---
-title: Local setup
+title: Local Setup
 ---
 
 # Install WSO2 Integrator

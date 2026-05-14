@@ -1,8 +1,8 @@
 ---
-title: Get started with ICP
+title: Get Started with ICP
 ---
 
-# Get started with ICP
+# Get Started with ICP
 
 This guide walks you through connecting a running Ballerina project to ICP, enabling observability, and configuring access control. By the end, you will have a project and integration created in ICP, a Ballerina runtime connected and sending heartbeats, and optionally centralized logs, metrics, and access control configured.
 

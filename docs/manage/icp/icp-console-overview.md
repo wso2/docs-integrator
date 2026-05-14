@@ -1,8 +1,8 @@
 ---
-title: ICP console overview
+title: ICP Console Overview
 ---
 
-# ICP console overview
+# ICP Console Overview
 
 The ICP console is the web interface for monitoring and managing your integrations across environments. It organizes resources into three nested scope levels, each with its own sidebar and access-control scope. This page explains the console layout and navigation so you can get oriented quickly.
 

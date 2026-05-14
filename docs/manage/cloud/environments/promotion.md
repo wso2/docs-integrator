@@ -1,8 +1,8 @@
 ---
-title: Promote an integration
+title: Promote an Integration
 ---
 
-# Promote an integration
+# Promote an Integration
 
 Promoting an integration moves it from one environment to the next in your pipeline, for example from Development to Production. Each promotion lets you supply environment-specific configuration values so the integration runs correctly in the target environment.
 

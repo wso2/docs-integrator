@@ -1,8 +1,8 @@
 ---
-title: Array to array
+title: Array to Array
 ---
 
-# Array to array
+# Array to Array
 
 When both the input and the output are arrays, the data mapper offers four mapping styles. Pick the one that matches the relationship between the source and target arrays.
 

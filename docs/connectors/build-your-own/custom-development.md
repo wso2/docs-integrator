@@ -1,8 +1,8 @@
 ---
-title: Custom development
+title: Custom Development
 ---
 
-# Custom development
+# Custom Development
 
 Ballerina connectors are packages containing one or more clients that communicate with external services via REST APIs. Build one from scratch when you need full control over authentication, error handling, or data transformation logic, or when you want to publish a reusable connector to [Ballerina Central](https://central.ballerina.io/) for your team or the broader community. This guide walks through generating a connector from an OpenAPI specification, which is the fastest and most reliable approach.
 

@@ -1,8 +1,8 @@
 ---
-title: Flow Diagram editor
+title: Flow Diagram Editor
 ---
 
-# Flow Diagram editor
+# Flow Diagram Editor
 
 The Flow Diagram editor is the visual designer for an integration's logic. Each step in the integration is a node on the canvas, and the editor generates valid Ballerina source as you build. Switch to pro-code at any time to read or edit the generated code.
 

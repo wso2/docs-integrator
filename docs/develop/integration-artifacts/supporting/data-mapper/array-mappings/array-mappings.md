@@ -1,8 +1,8 @@
 ---
-title: Array mappings
+title: Array Mappings
 ---
 
-# Array mappings
+# Array Mappings
 
 When the source or target field is an array, the data mapper offers dedicated options for the array shape you need. The available choices depend on whether the mapping is array-to-array or array-to-single-value.
 

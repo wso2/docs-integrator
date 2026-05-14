@@ -1,8 +1,8 @@
 ---
-title: Inline data mapper
+title: Inline Data Mapper
 ---
 
-# Inline data mapper
+# Inline Data Mapper
 
 When a flow contains a **Declare Variable** or **Update Variable** node and the selected type is a record or record array, the side panel shows an **Open in Data Mapper** option. Select it to map the value inline without creating a separate artifact.
 

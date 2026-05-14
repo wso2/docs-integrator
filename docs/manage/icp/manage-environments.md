@@ -1,8 +1,8 @@
 ---
-title: Manage environments
+title: Manage Environments
 ---
 
-# Manage environments
+# Manage Environments
 
 Environments represent the deployment targets where integration runtimes run, such as development and production. They are managed at the organization level and apply globally, meaning every environment appears as a card on every integration across all projects. This page guides you through creating, editing, and deleting environments in the ICP console.
 

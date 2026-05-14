@@ -1,8 +1,8 @@
 ---
-title: Manage projects
+title: Manage Projects
 ---
 
-# Manage projects
+# Manage Projects
 
 Projects group related integrations under a shared context. Every integration belongs to exactly one project, and access control, logs, and metrics are all scoped to the project level. This page guides you through creating, editing, and navigating projects in the ICP console.
 

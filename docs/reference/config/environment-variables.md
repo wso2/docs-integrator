@@ -1,8 +1,8 @@
 ---
-title: Environment variables
+title: Environment Variables
 ---
 
-# Environment variables
+# Environment Variables
 
 Ballerina supports configuring runtime behavior through environment variables. These include variables that supply values to `configurable` declarations, variables that point to configuration files, and system-level variables used by the Ballerina runtime and build toolchain.
 

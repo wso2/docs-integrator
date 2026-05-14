@@ -2,7 +2,7 @@
 title: Endpoints
 ---
 
-# Endpoints and networking configuration
+# Endpoints and Networking Configuration
 
 When you deploy an Integration as API to the WSO2 Cloud - Integration Platform, each endpoint can be exposed at one or more visibility levels.
 

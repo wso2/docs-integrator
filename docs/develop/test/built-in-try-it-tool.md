@@ -1,8 +1,8 @@
 ---
-title: Try-It tool
+title: Try-It Tool
 ---
 
-# Try-It tool
+# Try-It Tool
 
 The Try-It tool is a built-in development-time testing interface that lets you send requests to your service and inspect responses without leaving WSO2 Integrator. Use it as you write code to verify behavior immediately, before committing to automated tests. The tool starts your service automatically when you select **Try It**, so there is no separate run step required.
 

@@ -2,7 +2,7 @@
 title: Configurations Overview
 ---
 
-# Configurations overview
+# Configurations Overview
 
 WSO2 Cloud - Integration Platform provides configuration options across several dimensions of your integration lifecycle, from how integrations are built and what values they read at runtime, to how they scale, expose endpoints, and enforce security.
 

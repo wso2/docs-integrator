@@ -1,8 +1,8 @@
 ---
-title: Library view
+title: Library View
 ---
 
-# Library view
+# Library View
 
 The Library view is a dedicated view in WSO2 Integrator for creating utilities and shared resources that you can use across multiple integrations. Rather than building executable integrations, you use the Library view to bundle shared type definitions, utility functions, custom connections, and data mapper configurations into a centralized module that other integrations can depend on.
 

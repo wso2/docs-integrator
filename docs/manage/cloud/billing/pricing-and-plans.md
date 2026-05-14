@@ -1,8 +1,8 @@
 ---
-title: Pricing and plans
+title: Pricing and Plans
 ---
 
-# Pricing and plans
+# Pricing and Plans
 
 WSO2 Cloud bills the platform services you create, such as databases, caches, or Kafka services, as part of your existing subscription. The cost depends on the service plan and the usage of each resource.
 

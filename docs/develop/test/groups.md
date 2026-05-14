@@ -1,8 +1,8 @@
 ---
-title: Test groups
+title: Test Groups
 ---
 
-# Test groups
+# Test Groups
 
 As an integration grows, so does its test suite. Running the entire suite on every change is wasteful when you only care about a specific area — for example, running payment tests after touching the billing module. Test groups let you tag tests with labels and control which labels run from the command line, without touching the test code itself.
 

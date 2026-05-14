@@ -1,8 +1,8 @@
 ---
-title: Promotion approvals
+title: Promotion Approvals
 ---
 
-# Promotion approvals
+# Promotion Approvals
 
 You can configure the **Environment Promotion** workflow to require an approval before any integration is promoted to the next environment. When the workflow is active, promotion requests are gated behind a review step, and the promotion only proceeds after an authorized reviewer approves the request.
 

@@ -1,8 +1,8 @@
 ---
-title: Getting started
+title: Getting Started
 ---
 
-# Getting started
+# Getting Started
 
 ## Sign in to WSO2 Integrator Copilot
 

@@ -1,8 +1,8 @@
 ---
-title: Ballerina.toml reference
+title: Ballerina.toml Reference
 ---
 
-# Ballerina.toml reference
+# Ballerina.toml Reference
 
 The `Ballerina.toml` file is the project manifest for a Ballerina package. It defines package metadata, build options, dependencies, platform-specific libraries, and code generation tool configurations. This file must reside in the root directory of every Ballerina package.
 

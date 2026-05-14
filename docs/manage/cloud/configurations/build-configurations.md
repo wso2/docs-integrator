@@ -2,7 +2,7 @@
 title: Build
 ---
 
-# Build configurations
+# Build Configurations
 
 You can control how your integration is built on WSO2 Cloud - Integration Platform by configuring the build settings. Both settings are enabled by default.
 

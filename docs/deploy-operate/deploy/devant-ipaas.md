@@ -1,8 +1,8 @@
 ---
-title: Deploy to Devant (WSO2 iPaaS)
+title: Deploy to Devant (WSO2 IPaaS)
 ---
 
-# Deploy to Devant (WSO2 iPaaS)
+# Deploy to Devant (WSO2 IPaaS)
 
 WSO2 Devant is a fully managed integration platform as a service (iPaaS) that hosts and runs your WSO2 Integrator projects in the cloud without requiring you to manage infrastructure.
 
