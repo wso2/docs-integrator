@@ -4,30 +4,47 @@ title: WSO2 Integration Control Plane (ICP)
 
 # WSO2 Integration Control Plane (ICP)
 
-The Integration Control Plane (ICP) is a centralized monitoring and management server for WSO2 Integrator deployments. It exposes a GraphQL API, a REST observability API, and an authentication API, and serves a web dashboard for real-time visibility into running integrations.
+The Integration Control Plane (ICP) is a centralized monitoring and management server for WSO2 Integrator deployments. It provides a web dashboard and APIs for real-time visibility into running integrations. This page describes the ICP components, integration profiles, ports, and API endpoints.
 
 ## Components
 
-| Component         | Description                                                                      |
-| ----------------- | -------------------------------------------------------------------------------- |
-| **ICP Server**    | Ballerina-based backend — GraphQL API, auth service, and observability endpoints |
-| **ICP Dashboard** | React + TypeScript web UI served at port `9446` bundled into the distribution    |
-| **Database**      | Persistent store for integration metadata — MySQL, PostgreSQL, MSSQL, or H2      |
+| Component | Description |
+|-----------|-------------|
+| **ICP Server** | Ballerina-based backend that hosts the GraphQL API, auth service, and observability endpoints |
+| **ICP Dashboard** | React and TypeScript web UI served at port `9446`, bundled into the distribution |
+| **Database** | Persistent store for integration metadata. Supports MySQL, PostgreSQL, MSSQL, and H2. |
 
-## Default Ports
+## Integration profiles
 
-| Port   | Protocol | Description                                                                                         |
-| ------ | -------- | --------------------------------------------------------------------------------------------------- |
-| `9446` | HTTPS    | All ICP Server endpoints (GraphQL, auth, observability)                                             |
-| `9445` | HTTPS    | Runtime communication — integration runtimes connect to this port to register and report heartbeats |
+ICP supports two integration profiles that determine the type of runtime that connects to an integration:
+
+| Profile | Runtime | Description |
+|---------|---------|-------------|
+| **Default profile** | Ballerina | A Ballerina-based integration. This is the default for all new integrations created in ICP. |
+| **MI profile** | Micro Integrator | A WSO2 Micro Integrator-based integration for connecting existing MI deployments. |
+
+The profile is set when the integration is created and cannot be changed later. Runtimes connect to ICP using the bridge library that corresponds to their profile type.
+
+## Default ports
+
+| Port | Protocol | Description |
+|------|----------|-------------|
+| `9446` | HTTPS | All ICP Server endpoints: GraphQL, auth, and observability |
+| `9445` | HTTPS | Runtime communication. Integration runtimes connect here to register and send heartbeats. |
 
 ## Endpoints
 
-| Path                                    | Description                               |
-| --------------------------------------- | ----------------------------------------- |
-| `https://<host>:9446/graphql`           | GraphQL API                               |
-| `https://<host>:9446/auth`              | Authentication API (login, token refresh) |
-| `https://<host>:9446/icp/observability` | Observability REST API                    |
-| `https://<host>:9446/api/v1`            | REST management API (legacy)              |
+| Path | Description |
+|------|-------------|
+| `https://<host>:9446/graphql` | GraphQL API |
+| `https://<host>:9446/auth` | Authentication API for login and token refresh |
+| `https://<host>:9446/icp/observability` | Observability REST API |
+| `https://<host>:9446/api/v1` | REST management API (legacy) |
 
 See [ICP API](../api/icp.md) for the full REST endpoint reference.
+
+## What's next
+
+- [Install ICP](install-icp.md) — download and configure ICP for your environment
+- [Get started with ICP](quick-start.md) — connect a runtime and enable observability end to end
+- [ICP console overview](icp-console-overview.md) — understand the console layout and navigation

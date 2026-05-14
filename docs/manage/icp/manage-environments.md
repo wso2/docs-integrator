@@ -1,77 +1,71 @@
 ---
-title: Manage Environments
+title: Manage environments
 ---
 
-# Manage Environments
+# Manage environments
 
-Environments are managed at the **organization level** and apply globally — every
-environment appears as a card on every integration in every project. ICP ships
-with two defaults:
+Environments represent the deployment targets where integration runtimes run, such as development and production. They are managed at the organization level and apply globally, meaning every environment appears as a card on every integration across all projects. This page guides you through creating, editing, and deleting environments in the ICP console.
 
-| Name | Handler | Type         | Description              |
-| ---- | ------- | ------------ | ------------------------ |
-| dev  | dev     | Non-Critical | Development environment  |
-| prod | prod    | Critical     | Production environment   |
+ICP ships with two default environments:
 
-## View Environments
+| Name | Handler | Type | Description |
+|------|---------|------|-------------|
+| `dev` | `dev` | Non-Critical | Development environment |
+| `prod` | `prod` | Critical | Production environment |
+
+## View environments
 
 Navigate to **Environments** in the organization sidebar.
 
-The Environments page shows a table with columns:
+The environments page shows a table with the following columns:
 
-| Column      | Description                              |
-| ----------- | ---------------------------------------- |
-| Name        | Display name with initial avatar         |
-| Handler     | URL-safe slug                            |
-| Description | Free-text description                    |
-| Type        | **Critical** or **Non-Critical**         |
-| Created     | Relative timestamp (e.g. *31 days ago*)  |
-| Action      | **Edit** (pencil) and **Delete** (trash) icons          |
+| Column | Description |
+|--------|-------------|
+| **Name** | Display name with initial avatar |
+| **Handler** | URL-safe slug used to identify the environment in configurations |
+| **Description** | Free-text description |
+| **Type** | **Critical** or **Non-Critical** |
+| **Created** | Relative timestamp (e.g. *31 days ago*) |
+| **Actions** | **Edit** (pencil) and **Delete** (trash) icons |
 
-A search bar and **+ Create** button appear at the top. Pagination controls sit
-at the bottom.
+Use the search bar to filter environments by name. Pagination controls appear at the bottom when the list exceeds one page.
 
-URL pattern: `https://<host>:9446/organizations/default/environments`
+## Create an environment
 
-## Create an Environment
+1. On the environments page, click **+ Create**.
+2. Fill in the **Create Environment** form:
 
-1. On the Environments page, click **+ Create**.
-2. The **Create Environment** form opens with:
-
-| Field                        | Required | Description                                                      |
-| ---------------------------- | -------- | ---------------------------------------------------------------- |
-| Name                         | Yes      | Display name (placeholder: *e.g., Staging Environment*).         |
-| Handler                      | Auto     | Slug derived from Name (placeholder: *e.g., staging*). Click the edit icon to override. |
-| Description                  | No       | Free text.                                                       |
-| Mark as Critical Environment | No       | Checkbox. Sets the environment type to **Critical**.              |
+   | Field | Required | Description |
+   |-------|----------|-------------|
+   | **Name** | Yes | Display name shown in the console (e.g. `Staging Environment`) |
+   | **Handler** | Auto | URL-safe slug derived from the name (e.g. `staging`). Click the edit icon to override. |
+   | **Description** | No | Optional free-text description |
+   | **Mark as critical environment** | No | When checked, sets the environment type to **Critical** |
 
 3. Click **Create**.
 
-A success toast confirms: *"Environment '\<name\>' created successfully."* ICP
-redirects to the Environments list. The new environment immediately appears on
-every integration.
+A success message confirms the environment was created. ICP returns to the environments list and the new environment immediately appears on every integration across all projects.
 
-A **← Back to Environments** link at the top returns to the list without creating.
+## Edit an environment
 
-## Edit an Environment
-
-1. On the Environments page, click the **Edit** icon on an environment row.
-2. The **Edit Environment** form opens with the same fields as Create.
-   - **Name**, **Description**, and **Mark as Critical Environment** are editable.
-   - **Handler** is read-only after creation.
+1. On the environments page, click the **Edit** icon on an environment row.
+2. Update **Name**, **Description**, or the **Mark as critical environment** setting. The **Handler** is read-only after creation.
 3. Click **Save**.
 
-## Delete an Environment
+## Delete an environment
 
-1. On the Environments page, click the **Delete** icon on an environment row.
-2. A confirmation dialog requires typing the environment name.
+1. On the environments page, click the **Delete** icon on an environment row.
+2. Type the environment name in the confirmation dialog to confirm.
 3. Click **Delete**.
 
-Deleting an environment removes it from all integrations across all projects,
-including any associated runtimes and secrets.
+Deleting an environment removes it from all integrations across all projects, including any associated runtimes and configuration. This action cannot be undone.
 
-## Environments at Other Levels
+## Environments in project scope
 
-Environments also appear in the **project sidebar** under Infrastructure →
-Environments. This is a **read-only** view scoped to the project — creation and
-editing are only available at the organization level.
+Environments also appear under **Environments** in the project sidebar. This is a read-only view scoped to the project. Creating and editing environments is only available at the organization level.
+
+## What's next
+
+- [Manage projects](manage-projects.md) — organize integrations into projects that use these environments
+- [Connect an integration to ICP](connect-runtime.md) — register a runtime against a specific environment
+- [Access control](access-control.md) — control who can create and manage environments

@@ -1,100 +1,122 @@
 ---
-title: Observability Setup
+title: Observability setup
 ---
 
-# Observability Setup
+# Observability setup
 
-ICP provides centralized observability for default profile runtimes. Logs and metrics are collected via Fluent Bit, stored in OpenSearch, and displayed in the ICP Console.
+ICP provides centralized observability for default profile runtimes. Logs and metrics are collected via Fluent Bit, stored in OpenSearch, and displayed in the ICP console. This page guides you through deploying OpenSearch, creating index templates, configuring the integration, and setting up Fluent Bit to complete the observability stack.
 
-For MI runtimes, see [MI Observability Setup](mi-profile/observability-setup-mi.md).
+For MI runtimes, see [MI observability setup](mi-profile/observability-setup-mi.md).
+
+:::info Prerequisites
+
+- ICP server running with OpenSearch connection configured in `deployment.toml`. Use `https://` if OpenSearch is running with TLS (including the demo setup). See [Install ICP](install-icp.md#opensearch-observability).
+- Integration connected to ICP with heartbeats working. See [Connect an integration to ICP](connect-runtime.md).
+- Fluent Bit installed on the machine running the default profile runtime. See the [Fluent Bit installation page](https://docs.fluentbit.io/manual/installation/downloads).
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    Runtime["default profile Runtime"] -- "app.log" --> FB["Fluent Bit"]
-    Runtime -- "metrics.log" --> FB
-    FB -- "HTTP" --> OS["OpenSearch"]
-    Runtime -- "heartbeat" --> ICP["ICP Server"]
-    OS -- "query" --> ICP
-    Console["ICP Console\n(Browser)"] -- "GraphQL / REST" --> ICP
-```
+![ICP observability architecture showing the default profile runtime sending logs to Fluent Bit, which ships them to OpenSearch, while the runtime also sends heartbeats to the ICP server. The ICP server queries OpenSearch and serves the ICP console over GraphQL and REST.](/img/manage/icp/observability-architecture-light.png)
 
-1. The default profile runtime writes structured logs to two separate files: application logs and metrics logs.
-2. Fluent Bit tails both files and ships each to its own OpenSearch index.
-3. ICP Server queries OpenSearch when a user opens the Logs or Metrics page in the Console.
+1. The default profile runtime writes structured logs to two files (`app.log` and `metrics.log`) and sends periodic heartbeats to the ICP server.
+2. Fluent Bit tails both log files and ships them to separate OpenSearch indices over HTTP(S).
+3. When a user opens the **Logs** or **Metrics** page, the ICP console sends a GraphQL or REST request to the ICP server, which queries OpenSearch and returns the results.
 
-## Prerequisites
+## 1. Deploy OpenSearch
 
-| Component | Prerequisite |
-|-----------|-------------|
-| ICP Server | Running, with OpenSearch connection configured in `deployment.toml` (see [Install ICP — OpenSearch](install-icp.md#opensearch-observability)) |
-| Integration | Connected to ICP with heartbeats working (see [Connect an Integration to ICP](connect-runtime.md)) |
-| OpenSearch | Deployed and reachable from ICP Server and Fluent Bit |
-| Fluent Bit | Installed on the machine running the default profile runtime |
+Any single-node or clustered OpenSearch deployment works. ICP requires HTTP(S) access to the OpenSearch REST API. Keep a note of the host, port, and credentials. You will need them in steps 2 and 4 when configuring Fluent Bit and the ICP server.
 
-## Step 1: Deploy OpenSearch
+If you already have an OpenSearch instance running, skip to [step 2](#2-create-index-templates).
 
-Any single-node or clustered OpenSearch deployment works. ICP needs HTTP(S) access to the OpenSearch REST API.
+Download and extract the [OpenSearch distribution](https://opensearch.org/downloads.html), then follow the steps below.
 
-Note the host, port, and credentials — you will configure them in Fluent Bit (and in ICP Server's `deployment.toml` if not already done).
+### Run the security installer
 
-### Evaluation setup
-
-For a quick single-node setup, download and extract the [OpenSearch distribution](https://opensearch.org/downloads.html). Run the **demo security configuration** installer that ships with OpenSearch:
+Set your admin password and run the demo installer. It generates self-signed TLS certificates and initializes the security index.
 
 ```bash
-# Set a strong admin password (required since OpenSearch 2.12)
-export OPENSEARCH_INITIAL_ADMIN_PASSWORD="YourStrong@Pass2026!"
+export OPENSEARCH_INITIAL_ADMIN_PASSWORD="YourStrong@Pass2026"
 export OPENSEARCH_HOME="/path/to/opensearch-2.19.1"
 
-# Linux / macOS
 cd $OPENSEARCH_HOME/plugins/opensearch-security/tools
+chmod +x install_demo_configuration.sh
 ./install_demo_configuration.sh -y
+```
 
-# Windows (PowerShell)
-$env:OPENSEARCH_INITIAL_ADMIN_PASSWORD = "YourStrong@Pass2026!"
-$env:OPENSEARCH_HOME = "C:\opensearch\opensearch-2.19.1"
+```powershell
+$env:OPENSEARCH_INITIAL_ADMIN_PASSWORD="YourStrong@Pass2026"
+$env:OPENSEARCH_HOME="C:\opensearch\opensearch-2.19.1"
+
 cd $env:OPENSEARCH_HOME\plugins\opensearch-security\tools
 cmd /c install_demo_configuration.bat -y
 ```
 
-Then add single-node discovery and auto-initialization to `config/opensearch.yml`:
+### Configure opensearch.yml
+
+Append the following to `config/opensearch.yml`. The first setting prevents OpenSearch from waiting for other cluster nodes, and the second allows the security index to initialize automatically on first start:
 
 ```yaml
-# config/opensearch.yml — append:
 discovery.type: single-node
 plugins.security.allow_default_init_securityindex: true
 ```
 
-Start OpenSearch:
+### Start OpenSearch
 
 ```bash
-# Linux / macOS
-./bin/opensearch
-
-# Windows
-.\bin\opensearch.bat
+cd $OPENSEARCH_HOME/bin
+./opensearch
 ```
 
-Verify (note HTTPS and `-k` for the self-signed demo certificate):
+```powershell
+cd $env:OPENSEARCH_HOME\bin
+.\opensearch.bat
+```
+
+### Verify OpenSearch is running
 
 ```bash
-curl -sk -u admin:YourStrong@Pass2026! https://localhost:9200
+curl -sk -u admin:YourStrong@Pass2026 https://localhost:9200
 ```
 
-The demo security configuration keeps the security plugin **enabled** with self-signed TLS certificates and basic authentication. Set `tls On` and `tls.verify Off` in Fluent Bit, and use `https://` in the ICP Server config.
+A JSON response with `"cluster_name"` confirms the node is up.
 
 The demo configuration is for evaluation only. In production, use properly signed certificates and strong credentials. See the [OpenSearch security documentation](https://opensearch.org/docs/latest/security/) for details.
 
-## Step 2: Create Index Templates
+### Configure ICP to connect to OpenSearch
 
-Index templates ensure OpenSearch maps fields with the correct types before any data arrives. Apply them once per cluster.
+Once OpenSearch is running, point the ICP server at it by adding the following keys before the first `[section]` header in `conf/deployment.toml`:
+
+```toml
+opensearchUrl      = "https://localhost:9200"
+opensearchUsername = "admin"
+opensearchPassword = "<your-opensearch-password>"
+```
+
+If OpenSearch runs without TLS, use `http://` instead.
+
+Once the configuration is saved, start the ICP server:
+
+```bash
+./bin/icp.sh
+```
+
+```bat
+.\bin\icp.bat
+```
+
+If ICP is already running, restart it for the OpenSearch connection settings to take effect.
+
+## 2. Create index templates
+
+Index templates tell OpenSearch how to map fields before any data arrives. Apply both templates once per cluster. They cover all indices created by Fluent Bit in the steps ahead.
 
 ### Application logs template
 
+Maps the `time`, `message`, and `icp_runtimeId` fields for the `ballerina-application-logs-*` index pattern:
+
 ```bash
-curl -X PUT 'http://<opensearch-host>:9200/_index_template/wso2_integration_application_log_template' \
+curl -k -X PUT 'https://<opensearch-host>:9200/_index_template/wso2_integration_application_log_template' \
+  -u 'admin:<password>' \
   -H 'Content-Type: application/json' \
   -d '{
     "index_patterns": ["ballerina-application-logs-*"],
@@ -110,14 +132,15 @@ curl -X PUT 'http://<opensearch-host>:9200/_index_template/wso2_integration_appl
   }'
 ```
 
-If your OpenSearch requires authentication, add `-u admin:<password>`. For HTTPS with self-signed certs, add `-k`.
+A `{"acknowledged":true}` response confirms the template was created.
 
 ### Metrics logs template
 
-A separate template ensures correct numeric types for latency fields:
+Maps the same base fields plus numeric types for the latency fields used by the ICP Metrics page:
 
 ```bash
-curl -X PUT 'http://<opensearch-host>:9200/_index_template/wso2_integration_metrics_log_template' \
+curl -k -X PUT 'https://<opensearch-host>:9200/_index_template/wso2_integration_metrics_log_template' \
+  -u 'admin:<password>' \
   -H 'Content-Type: application/json' \
   -d '{
     "index_patterns": ["ballerina-metrics-logs-*"],
@@ -134,13 +157,15 @@ curl -X PUT 'http://<opensearch-host>:9200/_index_template/wso2_integration_metr
   }'
 ```
 
-## Step 3: Enable Observability in the Integration
+A `{"acknowledged":true}` response confirms the template was created.
 
-These changes are additive — they build on the base configuration from [Connect an Integration to ICP](connect-runtime.md).
+## 3. Enable observability in the integration
+
+These changes are additive and build on the base configuration from [Connect an integration to ICP](connect-runtime.md). You need to update three files.
 
 ### Ballerina.toml
 
-Add `observabilityIncluded` alongside the existing `remoteManagement`:
+Add `observabilityIncluded` alongside the existing `remoteManagement` build option:
 
 ```toml
 [build-options]
@@ -148,7 +173,7 @@ remoteManagement = true
 observabilityIncluded = true
 ```
 
-`observabilityIncluded = true` is required for metrics collection. Without it, the `ballerinax/metrics.logs` module cannot emit per-request metrics.
+Without `observabilityIncluded = true`, the `ballerinax/metrics.logs` module cannot emit per-request metrics.
 
 ### main.bal
 
@@ -159,7 +184,7 @@ import wso2/icp.runtime.bridge as _;
 import ballerinax/metrics.logs as _;
 ```
 
-Both are blank imports (`as _`) — they activate automatically at startup.
+Both are blank imports (`as _`). They activate automatically at startup.
 
 ### Config.toml
 
@@ -179,7 +204,7 @@ path = "./logs/app.log"
 logFilePath = "./logs/metrics.log"
 ```
 
-This produces two separate log files:
+This produces two separate log files that Fluent Bit will tail in step 4:
 
 | File | Content | OpenSearch index |
 |------|---------|------------------|
@@ -189,51 +214,49 @@ This produces two separate log files:
 | Setting | Purpose |
 |---------|---------|
 | `metricsLogsEnabled = true` | Enables the Ballerina runtime to emit per-request metrics |
-| `format = "logfmt"` | Structured log output that Fluent Bit's `bal_logfmt_parser` can parse |
-| `path = "./logs/app.log"` | Application log destination |
-| `logFilePath = "./logs/metrics.log"` | Metrics log destination (separate file via `ballerinax/metrics.logs`) |
+| `format = "logfmt"` | Structured log format that Fluent Bit's `bal_logfmt_parser` can parse |
+| `path` | Application log destination |
+| `logFilePath` | Metrics log destination (written by `ballerinax/metrics.logs`) |
 
-The log file paths must match the Fluent Bit input `Path` patterns. Adjust both sides if you change the directory layout.
+The log file paths must match the Fluent Bit `Path` values configured in step 4. Adjust both sides if you change the directory layout.
 
-## Step 4: Configure Fluent Bit
+### Start the application
+
+Run the integration from your project directory:
+
+```bash
+bal run
+```
+
+On startup, the runtime creates the `logs/` directory and begins writing to `app.log` and `metrics.log`. These files are what Fluent Bit will tail in step 4.
+
+## 4. Configure Fluent Bit
 
 Fluent Bit tails the default profile log files and ships them to OpenSearch.
 
-You need three config files side by side:
+### Install Fluent Bit
 
-- **`fluent-bit.conf`** — pipeline (inputs, filters, outputs)
-- **`parsers.conf`** — log format parser
-- **`scripts/scripts.lua`** — Lua enrichment scripts (adds fields required by ICP's Metrics page)
+If you have not installed Fluent Bit yet, download it from the [Fluent Bit installation page](https://docs.fluentbit.io/manual/installation/downloads). Once installed, verify it is available:
 
-### Inputs and outputs
-
-Since the integration writes app logs and metrics to separate files, Fluent Bit uses two independent inputs — no tag-rewriting or filtering needed to separate them:
-
-| Input `Path` | Tag | Parser | Output index prefix | Content |
-|-------------|-----|--------|---------------------|---------|
-| `<default-profile-logs>/app.log` | `ballerina_app_logs` | `bal_logfmt_parser` | `ballerina-application-logs-` | Application logs |
-| `<default-profile-logs>/metrics.log` | `ballerina_metrics` | `bal_logfmt_parser` | `ballerina-metrics-logs-` | Per-request metrics |
-
-### Parser definition
-
-Ballerina logfmt logs use ISO 8601 timestamps (`2026-04-30T07:09:27.966Z`). Define the parser in `parsers.conf`:
-
-```ini
-# parsers.conf
-
-[PARSER]
-    Name        bal_logfmt_parser
-    Format      logfmt
-    Time_Key    time
-    Time_Format %Y-%m-%dT%H:%M:%S.%LZ
-    Time_Keep   On
+```bash
+fluent-bit --version
 ```
 
-### Lua enrichment scripts
+### Set up the working directory
 
-The Lua scripts enrich log records with fields that the ICP Metrics page requires (e.g. `response_time` in milliseconds, `status`, `integration`). They also generate hash-based document IDs for deduplication.
+Run the following commands to create the directory structure and placeholder files:
 
-Download [`scripts.lua`](https://github.com/wso2/integration-control-plane/blob/main/icp_server/resources/observability/opensearch-observability-dashboard/config/fluent-bit/scripts/scripts.lua) and place it in a `scripts/` subdirectory next to your `fluent-bit.conf`:
+```bash
+mkdir -p fluent-bit/scripts
+touch fluent-bit/fluent-bit.conf fluent-bit/parsers.conf fluent-bit/scripts/scripts.lua
+```
+
+```powershell
+New-Item -ItemType Directory -Force -Path fluent-bit\scripts
+New-Item -ItemType File -Force -Path fluent-bit\fluent-bit.conf, fluent-bit\parsers.conf, fluent-bit\scripts\scripts.lua
+```
+
+This produces the following layout:
 
 ```
 fluent-bit/
@@ -243,7 +266,24 @@ fluent-bit/
     └── scripts.lua
 ```
 
-The key Lua functions used in the pipeline:
+### parsers.conf
+
+Defines how Fluent Bit parses Ballerina's logfmt output. Both log inputs reference this parser by name. Copy the following into `parsers.conf`:
+
+```ini
+[PARSER]
+    Name        bal_logfmt_parser
+    Format      logfmt
+    Time_Key    time
+    Time_Format %Y-%m-%dT%H:%M:%S.%L%z
+    Time_Keep   On
+```
+
+### scripts.lua
+
+Enriches each log record with fields the ICP Metrics page needs, including `response_time` in milliseconds, `status`, `app`, and `integration`. It also generates a hash-based `doc_id` for deduplication in OpenSearch.
+
+Copy the content from [scripts.lua](https://github.com/wso2/integration-control-plane/blob/main/icp_server/resources/observability/opensearch-observability-dashboard/config/fluent-bit/scripts/scripts.lua) and paste it into the `scripts/scripts.lua` file created earlier.
 
 | Function | Purpose |
 |----------|---------|
@@ -253,11 +293,21 @@ The key Lua functions used in the pipeline:
 | `extract_bal_metrics_data` | Parses metrics-specific fields (response time in ms, status, method, URL) |
 | `generate_document_id` | Creates a hash-based `doc_id` for deduplication |
 
-The Lua enrichment is **required** for the ICP Metrics page to display data. Without `extract_bal_metrics_data`, the ICP server cannot categorize inbound vs. outbound metrics, and the Metrics page shows "No metrics data" even when the underlying OpenSearch index contains records.
+The Lua enrichment is required for the ICP Metrics page to display data. Without `extract_bal_metrics_data`, the ICP server cannot categorize inbound vs. outbound metrics, and the Metrics page shows "No metrics data" even when the underlying OpenSearch index contains records.
 
 ### fluent-bit.conf
 
-Replace `<default-profile-logs>` with the actual path to your default profile application's `logs/` directory. Use forward slashes on all platforms.
+The main pipeline configuration. It reads `app.log` and `metrics.log`, enriches each record through the Lua scripts, and writes to separate OpenSearch indices:
+
+| Input path | Tag | Output index prefix |
+|------------|-----|---------------------|
+| `<default-profile-logs>/app.log` | `ballerina_app_logs` | `ballerina-application-logs-` |
+| `<default-profile-logs>/metrics.log` | `ballerina_metrics` | `ballerina-metrics-logs-` |
+
+Before using this config, replace the two placeholders:
+
+- `<default-profile-logs>`: absolute path to your default profile application's `logs/` directory. Use forward slashes on all platforms.
+- `<password>`: the OpenSearch password set during step 1.
 
 ```ini
 [SERVICE]
@@ -374,13 +424,22 @@ Replace `<default-profile-logs>` with the actual path to your default profile ap
     HTTP_Passwd     <password>
 ```
 
-**TLS**: The config above assumes OpenSearch with the demo security configuration (HTTPS with self-signed certs). Set `tls Off` if OpenSearch runs plain HTTP.
+| Setting | Notes |
+|---------|-------|
+| `tls On` / `tls.verify Off` | Required when using the demo setup from step 1 (self-signed certificate). Set `tls Off` for plain HTTP. |
+| `HTTP_User` / `HTTP_Passwd` | OpenSearch credentials set during setup. |
+| `Id_Key doc_id` | Enables deduplication. If Fluent Bit restarts and re-reads the same lines, OpenSearch overwrites instead of creating duplicates. |
+| `Replace_Dots On` | Required. Ballerina logfmt fields contain dots (e.g. `src.module`, `http.method`) which OpenSearch rejects as field names. This converts them to underscores. |
 
-**Auth**: `HTTP_User` / `HTTP_Passwd` are the OpenSearch credentials configured during setup.
+### Start Fluent Bit
 
-**Id_Key**: `doc_id` enables deduplication — if Fluent Bit restarts and re-reads the same log lines, OpenSearch overwrites instead of creating duplicates.
+Run Fluent Bit from the working directory with your configuration file:
 
-`Replace_Dots On` is important — Ballerina logfmt fields contain dots (e.g. `src.module`, `http.method`) which OpenSearch rejects as field names. This setting converts them to underscores.
+```bash
+fluent-bit -c /path/to/fluent-bit/fluent-bit.conf
+```
+
+Fluent Bit will begin tailing the log files immediately. Check the console output for any connection errors to OpenSearch.
 
 ## Verification
 
@@ -401,13 +460,13 @@ ballerina-metrics-logs-2026.04.30
 
 For plain HTTP OpenSearch (no TLS), use `http://` and drop `-k`.
 
-### Check ICP Console
+### Check ICP console
 
-1. Log into the ICP Console at `https://<icp-host>:9446`.
-2. Navigate to **Projects → \<project\> → Components → \<component\>**.
-3. The component overview shows the service endpoints and environment cards with runtime status.
-4. Click the **Logs** icon in the sidebar (📋) — you should see runtime log entries with timestamps, log levels, and messages. Use the environment, level, and time range filters to narrow results.
-5. Click the **Metrics** icon in the sidebar (📊) — you should see:
+1. Log into the ICP console at `https://<icp-host>:9446`.
+2. Navigate to **Projects** > **\<project\>** > **Integrations** > **\<integration\>**.
+3. The integration overview shows the service endpoints and environment cards with runtime status.
+4. Click **Logs** in the sidebar. You should see runtime log entries with timestamps, log levels, and messages. Use the environment, level, and time range filters to narrow results.
+5. Click **Metrics** in the sidebar. You should see:
    - Summary cards: Total Requests, Error Count, Error Percentage, 95th Percentile latency
    - **Requests Per Minute** chart (success vs. failed)
    - **Request Latency** chart (average, P50, P95, P99)
@@ -422,22 +481,28 @@ curl http://localhost:8090/<your-endpoint>
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
-| Metrics page shows "No metrics data" | default profile runtime has no inbound HTTP requests | Metrics are generated per-request — send traffic first |
+| Metrics page shows "No metrics data" | No inbound HTTP requests have been made | Metrics are generated per request. Send traffic to the integration first. |
 | Metrics page shows "No metrics data" | `metricsLogsEnabled` not set | Add `metricsLogsEnabled = true` to `[ballerina.observe]` in `Config.toml` |
 | Metrics page shows "No metrics data" | Metrics log file not configured | Set `logFilePath` in `[ballerinax.metrics.logs]` |
-| Metrics page shows "No metrics data" | Lua enrichment scripts missing from Fluent Bit config | Add the Lua `[FILTER]` blocks (especially `extract_bal_metrics_data`) — see Step 4 |
+| Metrics page shows "No metrics data" | Lua enrichment scripts missing from Fluent Bit config | Add the Lua `[FILTER]` blocks (especially `extract_bal_metrics_data`). See step 4. |
 | Logs page shows "Observability service is unavailable" | ICP Server can't reach OpenSearch | Verify `opensearchUrl` in ICP Server's `deployment.toml` |
 | OpenSearch rejects documents with "total fields [1000] exceeded" | Deeply nested JSON in log messages | Increase limit: `curl -X PUT '.../_settings' -d '{"index.mapping.total_fields.limit": 2000}'` or add to the index template |
 
-## Index Lifecycle
+## Index lifecycle
 
 Indices are created daily with a date suffix (e.g. `ballerina-metrics-logs-2026-04-28`). To manage disk usage:
 
 - Use [OpenSearch Index State Management (ISM)](https://opensearch.org/docs/latest/im-plugin/ism/index/) policies to automatically delete or roll over old indices.
 - A typical retention policy keeps 30 days of logs and 90 days of metrics.
 
-## Security Notes
+## Security notes
 
 - In production, enable TLS on OpenSearch and set `tls.verify On` in Fluent Bit.
-- Use dedicated OpenSearch credentials for Fluent Bit (write-only) and ICP Server (read-only).
-- The ICP Server generates short-lived JWTs (2 min) for internal communication between its observability service and its OpenSearch adapter — no user configuration needed.
+- Use dedicated OpenSearch credentials for Fluent Bit (write-only) and ICP server (read-only).
+- The ICP server generates short-lived JWTs (2 min) for internal communication between its observability service and its OpenSearch adapter. No user configuration is needed.
+
+## What's next
+
+- [Manage integrations](manage-integrations.md) — view logs and metrics for connected integrations from the ICP console
+- [Manage runtimes](manage-runtimes.md) — monitor runtime health and status alongside observability data
+- [Access control](access-control.md) — control who can view logs and metrics in the ICP console

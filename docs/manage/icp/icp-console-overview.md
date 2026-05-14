@@ -1,76 +1,79 @@
 ---
-title: ICP Console Overview
+title: ICP console overview
 ---
 
-# ICP Console Overview
+# ICP console overview
 
-## Scope Levels
+The ICP console is the web interface for monitoring and managing your integrations across environments. It organizes resources into three nested scope levels, each with its own sidebar and access-control scope. This page explains the console layout and navigation so you can get oriented quickly.
 
-ICP organizes resources in three nested levels:
+## Scope levels
 
-**Organization > Project > Integration (Component)**
+ICP organizes all resources in three nested levels:
 
-Each level has its own sidebar, its own access-control scope, and its own
-Runtimes view. Deeper levels inherit the environments and roles defined at the
-organization level.
+**Organization > Project > Integration**
 
-## Breadcrumb Bar
+| Level | What it contains |
+|-------|-----------------|
+| **Organization** | All projects, environments, roles, groups, and users |
+| **Project** | A collection of related integrations |
+| **Integration** | A single deployable Ballerina or MI application |
 
-The bar at the top tracks the current scope:
+Environments and roles are defined at the organization level and apply across all projects and integrations.
 
-```
-Organizations > Default Organization > Projects > <project> > Integrations > <integration>
-```
+## Console layout
 
-- Click any segment to navigate directly to that level.
-- The **x** on a segment clears that scope and returns to the parent.
-- The **v** dropdown on a segment switches between items at that level (e.g.
-  switch projects without going back to the org home).
+The ICP console has two main navigation elements: the breadcrumb bar at the top and the sidebar on the left.
 
-## Organization Sidebar
+![ICP console showing the breadcrumb bar and sidebar](/img/manage/icp/icp-console-overview-light.png)
 
-The organization home doubles as the **All Projects** page. Its sidebar:
+### Breadcrumb bar
 
-| Item           | Section        | Description                        |
-| -------------- | -------------- | ---------------------------------- |
-| Overview       | —              | All Projects listing               |
-| Runtimes       | —              | All runtimes across the org        |
-| Environments   | Infrastructure | Create and manage environments     |
-| Access-control | Management     | Org-level users, roles, and groups |
+The breadcrumb bar tracks your current scope. Use it to move between levels without using the browser back button.
 
-Deeper sidebars (project, integration) are documented in
-[Manage Projects](manage-projects.md) and
-[Manage Integrations](manage-integrations.md).
+| Action | Result |
+|--------|--------|
+| Click any segment | Navigate directly to that scope level |
+| Click **×** on a segment | Clear that scope and return to the parent |
+| Click **∨** on a segment | Switch between items at the same level |
 
-## Quick Start
+### Sidebar
 
-A condensed end-to-end path from install to a connected runtime.
+The sidebar changes its items based on the active scope level.
 
-### 1. Create an Environment (optional)
+**Organization sidebar**
 
-The default **dev** and **prod** environments are usually sufficient to start.
-To add another (e.g. *staging*), see
-[Manage Environments](manage-environments.md).
+| Item | Description |
+|------|-------------|
+| **Projects** | View and manage all projects in the organization |
+| **Runtimes** | View all runtimes across every project |
+| **Environments** | Create and manage deployment environments |
+| **Access control** | Manage users, roles, and groups |
 
-### 2. Create a Project
+**Project sidebar**
 
-1. On the organization home, click **+ Create**.
-2. Enter a **Display Name** (the Name slug is auto-generated).
-3. Click **Create**.
+| Item | Description |
+|------|-------------|
+| **Overview** | Integrations list and integration type breakdown |
+| **Runtimes** | Runtimes across all integrations in the project |
+| **Logs** | Aggregated logs for all runtimes in the project |
+| **Metrics** | Project-level performance metrics |
+| **Environments** | Read-only view of environments for this project |
+| **Access control** | Role assignments scoped to this project |
 
-Full details: [Manage Projects](manage-projects.md).
+**Integration sidebar**
 
-### 3. Create an Integration
+| Item | Description |
+|------|-------------|
+| **Overview** | Integration details and runtime status by environment |
+| **Runtimes** | Runtimes connected to this integration |
+| **Logs** | Centralized logs from connected runtimes |
+| **Loggers** | Configure log levels per runtime |
+| **Metrics** | Runtime metrics and performance data |
+| **Access control** | Role assignments scoped to this integration |
 
-1. Inside the project, click **+ Create**.
-2. Enter a **Display Name**. Integration Type defaults to **default**.
-3. Click **Create**.
+## What's next
 
-Full details: [Manage Integrations](manage-integrations.md).
-
-### 4. Connect a Runtime
-
-1. Generate a secret and configure your runtime — see [Connect an Integration to ICP](connect-runtime.md).
-2. Start the runtime. It appears in the Runtimes table with status **RUNNING**.
-
-Full details: [Manage Runtimes](manage-runtimes.md).
+- [Get started with ICP](quick-start.md) — connect a runtime and enable observability end to end
+- [Manage projects](manage-projects.md) — create and organize projects in the console
+- [Manage integrations](manage-integrations.md) — create integrations and select a profile
+- [Access control](access-control.md) — set up roles, groups, and permissions

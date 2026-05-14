@@ -4,192 +4,191 @@ title: Install ICP
 
 # Install ICP
 
+The Integration Control Plane (ICP) is a self-hosted management server that connects to your WSO2 Integrator runtimes and provides centralized monitoring, lifecycle management, and access control. This page walks you through downloading, configuring, and starting ICP on your own infrastructure.
+
 This guide covers manual installation. For evaluation, run via WSO2 Integrator IDE [Integration Control Plane (ICP)](../../deploy-operate/observe/icp.md).
 
-## Prerequisites
+:::info Prerequisites
 
-- **Java 21** or later
+- Java 21 or later
 - A supported OS: Linux, macOS, or Windows
-
-For production deployments you also need one of the supported databases
-(PostgreSQL, MySQL, or MSSQL). The default embedded H2 database is suitable for
-evaluation and development only.
+- For production deployments: a supported database (PostgreSQL, MySQL, or MSSQL). The default embedded H2 database is suitable for evaluation and development only.
 
 ## Install
 
-1. Download the ICP distribution zip (e.g.
-   `wso2-integration-control-plane-2.0.0.zip`).
+1. Download `wso2-integration-control-plane-2.0.0.zip` from the [ICP releases page](https://github.com/wso2/integration-control-plane/releases/tag/v2.0.0).
 
-2. Extract it:
+2. Extract the zip and navigate into the directory.
+
+
+
 
    ```bash
    unzip wso2-integration-control-plane-2.0.0.zip
    cd wso2-integration-control-plane-2.0.0
    ```
 
+
+
+
+   ```powershell
+   Expand-Archive -Path wso2-integration-control-plane-2.0.0.zip -DestinationPath .
+   cd wso2-integration-control-plane-2.0.0
+   ```
+
+
+
+
 3. The extracted directory has this layout:
 
-   ```
+   ```bash
    wso2-integration-control-plane-2.0.0/
      bin/
-       icp.sh              # startup script (Linux / macOS)
-       icp.bat             # startup script (Windows)
-       icp-server.jar      # server binary
-       database/            # embedded H2 database files
+       icp.sh                  # startup script (Linux / macOS)
+       icp.bat                 # startup script (Windows)
+       icp-server.jar          # server binary
+       ciphertool.sh           # cipher tool (Linux / macOS)
+       ciphertool.bat          # cipher tool (Windows)
+       database/
+         icp_db.mv.db          # embedded H2 database
+         credentials_db.mv.db  # embedded H2 credentials database
      conf/
-       deployment.toml      # main configuration file
-       security/            # keystores and cipher config
-     www/                   # console frontend
-     lib/                   # runtime libraries
+       deployment.toml                   # main configuration file
+       cipher-standalone-config.properties
+       security/               # keystores and TLS certificates
+     dbscripts/                # SQL init scripts for PostgreSQL, MySQL, and MSSQL
+     ciphertool-libs/          # cipher tool dependencies
+     www/                      # console frontend
+     lib/                      # runtime libraries
    ```
 
 ## Configure
 
-All configuration lives in `conf/deployment.toml`. The defaults work
-out of the box for local evaluation — ICP will start with the embedded H2
-database, listen on `https://localhost:9446`, and create an `admin` user.
+All configuration lives in `conf/deployment.toml`. The defaults work out of the box for local evaluation. ICP starts with the embedded H2 database,
+listens on `https://localhost:9446`, and creates an `admin` user.
 
-### Essential Settings
+### Essential settings
 
-| Setting                  | Default                  | Description                              |
-| ------------------------ | ------------------------ | ---------------------------------------- |
-| `serverPort`             | `9446`                   | HTTPS port for the console and API       |
-| `runtimeListenerPort`    | `9445`                   | HTTPS port for runtime heartbeat connections |
-| `serverHost`             | `0.0.0.0`                | Bind address                             |
-| `logLevel`               | `INFO`                   | `DEBUG`, `INFO`, `WARN`, or `ERROR`      |
-| `frontendJwtHMACSecret`  | (default key)            | JWT signing secret — change in production |
+The table below covers the settings most commonly changed. All other settings are documented inline in `deployment.toml`.
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `serverPort` | `9446` | HTTPS port for the ICP console and API |
+| `serverHost` | `0.0.0.0` | IP address ICP binds to. Restrict to a specific interface in production. |
+| `logLevel` | `INFO` | Log verbosity: `DEBUG`, `INFO`, `WARN`, or `ERROR` |
+| `schedulerIntervalSeconds` | `60` | How often ICP polls connected runtimes for status, in seconds. |
+| `frontendJwtHMACSecret` | (default key) | JWT signing secret for user sessions. Change this before going to production. |
 
 Full reference: [Server Configuration](../../reference/icp/server-configuration.md).
 
 ### Database
 
-By default ICP uses an embedded H2 database stored in `bin/database/`. For
-production, switch to PostgreSQL, MySQL, or MSSQL by uncommenting and editing
-the `[icp_server.storage]` section in `deployment.toml`:
+ICP uses two embedded H2 databases by default, stored in `bin/database/`:
+
+- `icp_db.mv.db` — runtime data (artifacts, environments, projects)
+- `credentials_db.mv.db` — user credentials
+
+No configuration is needed for local evaluation or development.
+
+For production, switch to PostgreSQL, MySQL, or MSSQL using the steps below.
+
+**Step 1: Initialize the schema**
+
+The `dbscripts/` directory contains init scripts for each supported database. Run the two scripts that match your database type:
+
+| Database | Main schema | Credentials schema |
+| --- | --- | --- |
+| PostgreSQL | `postgresql_init.sql` | `credentials_postgresql_init.sql` |
+| MySQL | `mysql_init.sql` | `credentials_mysql_init.sql` |
+| MSSQL | `mssql_init.sql` | `credentials_mssql_init.sql` |
+
+**Step 2: Configure the main database**
+
+Uncomment and edit the `[icp_server.storage]` section in `deployment.toml`:
 
 ```toml
 [icp_server.storage]
-dbType   = "postgresql"
-dbHost   = "db.example.com"
-dbPort   = 5432
-dbName   = "icp_database"
-dbUser   = "icp_user"
-dbPassword = "changeme"
+dbType                = "postgresql"
+dbHost                = "localhost"
+dbPort                = 5432
+dbName                = "icp_database"
+dbUser                = "icp_user"
+dbPassword            = "changeme"
+maxOpenConnections    = 10
+minIdleConnections    = 5
+maxConnectionLifeTime = 1800.0
 ```
 
-A separate credentials database stores user passwords. Configure it with the
-`credentialsDb*` settings if you want credential storage on the same external
-database:
+```toml
+[icp_server.storage]
+dbType                = "mysql"
+dbHost                = "localhost"
+dbPort                = 3306
+dbName                = "icp_database"
+dbUser                = "icp_user"
+dbPassword            = "changeme"
+maxOpenConnections    = 10
+minIdleConnections    = 5
+maxConnectionLifeTime = 1800.0
+```
+
+```toml
+[icp_server.storage]
+dbType                = "mssql"
+dbHost                = "localhost"
+dbPort                = 1433
+dbName                = "icp_database"
+dbUser                = "icp_user"
+dbPassword            = "changeme"
+maxOpenConnections    = 10
+minIdleConnections    = 5
+maxConnectionLifeTime = 1800.0
+```
+
+**Step 3: Configure the credentials database**
+
+The credentials database is configured separately at the top level of `deployment.toml`, before any `[section]` header:
 
 ```toml
 credentialsDbType     = "postgresql"
-credentialsDbHost     = "db.example.com"
+credentialsDbHost     = "localhost"
 credentialsDbPort     = 5432
-credentialsDbName     = "credentialsdb"
+credentialsDbName     = "credentials_db"
 credentialsDbUser     = "icp_user"
 credentialsDbPassword = "changeme"
 ```
 
-When using H2 (the default), no database configuration is needed.
-
 Full reference: [Database Configuration](../../reference/icp/database-configuration.md).
 
-### OpenSearch (Observability)
-
-To enable centralized logs and metrics, point ICP at an OpenSearch instance.
-Add these keys **before the first `[section]` header** in `deployment.toml`:
-
-```toml
-opensearchUrl = "https://localhost:9200"
-opensearchUsername = "admin"
-opensearchPassword = "<your-opensearch-password>"
-```
-
-If OpenSearch runs without TLS, use `http://`. Skip this section if you don't
-need observability yet — see [Observability Setup](observability-setup.md) for
-the full stack (OpenSearch, Fluent Bit, index templates).
-
-The ICP config file ships with `opensearchUrl`, `opensearchUsername`, and `opensearchPassword` commented out near the bottom, after `[ballerina.http.traceLogAdvancedConfig]`. **Do not uncomment those lines.** Because they fall under a `[section]` header, Ballerina treats them as section-scoped values and rejects them. Always add the OpenSearch keys **before the first `[section]` header** — ideally the very first lines of the file.
-
-### Reverse Proxy
-
-ICP serves the console and API on port `9446` by default. To expose ICP through a reverse proxy:
-
-1. Point the proxy at `https://<icp-host>:9446` (the backend is HTTPS with a
-   self-signed certificate, so configure the proxy to trust it or skip
-   verification for the upstream).
-
-2. Tell ICP the external URL so the console can reach the API. Add these to
-   `deployment.toml`:
-
-   ```toml
-   backendGraphqlEndpoint      = "https://icp.example.com/graphql"
-   backendAuthBaseUrl           = "https://icp.example.com/auth"
-   backendObservabilityEndpoint = "https://icp.example.com/icp/observability"
-   ```
-
-3. default profile runtimes connect to ICP for heartbeats. If they also go through the
-   proxy, set `serverUrl` in the runtime's `Config.toml` to the proxy URL:
-
-   ```toml
-   [wso2.icp.runtime.bridge]
-   serverUrl = "https://icp.example.com"
-   ```
-
-   If runtimes connect directly (bypassing the proxy), leave `serverUrl`
-   pointing at the ICP host.
-
 ## Start
-
-Linux / macOS:
 
 ```bash
 ./bin/icp.sh
 ```
 
-Windows:
-
 ```bat
-bin\icp.bat
+.\bin\icp.bat
 ```
 
-The server logs its startup to the console. Once you see the listener ready
-message, ICP is available at `https://localhost:9446`.
+The server logs its startup to the console. Once you see the listener ready message, ICP is available at `https://localhost:9446`.
 
-**Note:** ICP ships with a self-signed certificate. Your browser will show a
-security warning on first visit — accept it to proceed.
+ICP ships with a self-signed certificate. Your browser will show a security warning on first visit. Accept the warning to proceed.
 
-## Sign In
+## Sign in
 
-Navigate to `https://<host>:9446/login`. Enter username `admin` and password
-`admin`, then click **Sign In**.
+Once ICP is running, open `https://<host>:9446/login` in your browser and sign in with the default credentials:
 
-After login the browser redirects to the organization home at
-`https://<host>:9446/organizations/default`.
+- **Username:** `admin`
+- **Password:** `admin`
 
-**Warning:** Change the default admin password immediately via **Access-control**
-> **Users** > **Reset Password**. See [Access Control](access-control.md) for
-details.
+Click **Sign In**. The browser redirects to the organization home at `https://<host>:9446/organizations/default`.
 
-To configure LDAP, SSO/OIDC, or other authentication backends, see [Authentication Configuration](../../reference/icp/authentication-config.md).
+Change the default `admin` password before using ICP in any non-evaluation environment. Go to **Access control** > **Users**, select the `admin` user, and click **Reset Password**. See [Access Control](access-control.md) for details.
 
-## Defaults
+For LDAP, SSO, or OIDC authentication, see [Authentication Configuration](../../reference/icp/authentication-config.md).
 
-ICP ships with these resources out of the box:
+## What's next
 
-| Resource     | Defaults                                                     |
-| ------------ | ------------------------------------------------------------ |
-| Organization | **Default Organization** (`default`)                         |
-| Environments | **dev** (Non-Critical), **prod** (Critical)                  |
-| Roles        | Admin, Developer, Project Admin, Super Admin, Viewer         |
-| Groups       | Super Admins, Administrators, Developers                     |
-| User         | `admin` / `admin` (member of Super Admins)                   |
-
-When a project is created, ICP also auto-creates a
-`<Project Name> Admins` group with the *Project Admin* role.
-
-## Next Steps
-
-1. **[ICP Console Overview](icp-console-overview.md)** — Learn the console layout and navigation.
-2. **[Connect an Integration to ICP](connect-runtime.md)** — Register a default profile runtime with heartbeats.
-3. **[Observability Setup](observability-setup.md)** — Add centralized logs and metrics.
+- [ICP console overview](icp-console-overview.md) — learn the console layout, scope levels, and navigation
+- [Quick start](quick-start.md) — go from a fresh installation to a connected runtime in four steps
+- [Configure a reverse proxy](reverse-proxy.md) — expose ICP through a proxy in production

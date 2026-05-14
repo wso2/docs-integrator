@@ -1,74 +1,84 @@
 ---
-title: Manage Projects
+title: Manage projects
 ---
 
-# Manage Projects
+# Manage projects
 
-Projects group related integrations. Every integration belongs to exactly one project.
+Projects group related integrations under a shared context. Every integration belongs to exactly one project, and access control, logs, and metrics are all scoped to the project level. This page guides you through creating, editing, and navigating projects in the ICP console.
 
-## View Projects
+## View projects
 
-After signing in, the **All Projects** page is the default landing view. Projects display as cards in a grid layout, toggled to a list view with the icons at top-right.
+After signing in, the **All Projects** page is the default landing view. Projects display as cards in a grid layout. Use the icons at the top right to switch between grid and list views.
 
-Each card shows:
+![All Projects page showing three project cards — Order Service, Payment Service, and Shipping Service — in a grid layout with a Create Project button at the top right.](/img/manage/icp/all-projects-light.png)
+
+Each project card shows:
 
 - Project initial and display name
 - Last-updated timestamp
 - **Edit** (pencil) and **Delete** (trash) icons
 
-A search bar filters projects by name. A **+ Create** button sits at top-right.
+Use the search bar to filter projects by name.
 
-URL pattern: `https://<host>:9446/organizations/default`
+## Create a project
 
-## Create a Project
+1. On the **All Projects** page, click **+ Create Project**.
+2. Fill in the **Create a Project** form:
 
-1. On the **All Projects** page, click **+ Create**.
-2. The **Create a Project** form appears with three fields in a single row:
+   | Field | Required | Description |
+   |-------|----------|-------------|
+   | **Display Name** | Yes | Human-readable name shown in the console (e.g. `Order Service`) |
+   | **Name** | Auto | URL-safe slug derived from the display name. Click the edit icon to override. |
+   | **Description** | No | Optional free-text description of the project |
 
-| Field            | Required | Description                                                                 |
-| ---------------- | -------- | --------------------------------------------------------------------------- |
-| Display Name     | Yes      | Human-readable name (e.g. `My default profile Project`)                     |
-| Name             | Auto     | URL-safe slug derived from the display name (e.g. `my-default-profile-project`). Click the edit icon to override. |
-| Description      | No       | Free-text description (placeholder: *Enter Description here*)               |
+3. Click **Create**.
 
-3. The **Create** button enables once Display Name is filled.
-4. Click **Create**.
+ICP redirects to the new project's home page and updates the breadcrumb to `Organizations > Default Organization > Projects > <project>`.
 
-On success, ICP redirects to the new project's home page. The breadcrumb updates to show `Organizations › Default Organization › Projects › <project>`.
-
-## Edit a Project
+## Edit a project
 
 1. On the **All Projects** page, click the **Edit** icon on a project card.
-2. The project home page loads with editable fields.
-3. Change **Display Name** or **Description**. The **Name** (slug) is read-only after creation.
-4. Save changes.
+2. Update the **Display Name** or **Description**. The **Name** slug is read-only after creation.
+3. Click **Save**.
 
-## Delete a Project
+## Delete a project
 
 1. On the **All Projects** page, click the **Delete** icon on a project card.
-2. A confirmation dialog appears:
+2. Read the confirmation dialog and type the project's display name exactly to confirm.
+3. Click **Delete Project**.
 
-   > Are you sure you want to delete the project "\<name\>"? This action cannot be undone and will remove all associated data.
+Deleting a project removes all associated integrations and their data. This action cannot be undone.
 
-3. Type the project's **Display Name** exactly to enable the **Delete Project** button.
-4. Click **Delete Project**.
+## Project home
 
-## Project Home
+Clicking a project card opens the project home. It shows all integrations belonging to the project.
 
-Clicking a project card navigates to the project home. The page shows:
+![Order Service project home showing the integrations list with Order Create and Order Process entries, a Create Integration button, and an Integration Types summary card on the right.](/img/manage/icp/project-integrations-light.png)
+
+The page includes:
 
 - Project avatar, display name, and description at the top.
-- An **Integrations** section with a searchable table and a **+ Create** button.
-- An **Integration Types** summary card on the right showing the count of integrations (Total, default profile, MI).
-- If no integrations exist: *"No integrations found — Create your first integration to get started."*
+- An **Integrations** table with **Name**, **Description**, **Type**, and **Last Updated** columns.
+- A **+ Create Integration** button to add a new integration to the project.
+- An **Integration Types** summary card on the right showing the count by type (Default, MI, and Total).
 
-### Project Sidebar
+If no integrations exist yet, the table shows a prompt to create the first integration.
 
-| Item           | Section        | Description                            |
-| -------------- | -------------- | -------------------------------------- |
-| Overview       | —              | Integrations list + type breakdown     |
-| Runtimes       | —              | Runtimes across all integrations       |
-| Logs           | Observability  | Aggregated logs for the project        |
-| Metrics        | Observability  | Project-level metrics                  |
-| Environments   | Infrastructure | Environments (read-only; managed at org level) |
-| Access-control | Management     | Project-level role assignments         |
+### Project sidebar
+
+The sidebar changes to project scope when you navigate into a project:
+
+| Item | Description |
+|------|-------------|
+| **Overview** | Integrations list and type breakdown |
+| **Runtimes** | Runtimes across all integrations in the project |
+| **Logs** | Aggregated logs for all runtimes in the project |
+| **Metrics** | Project-level performance metrics |
+| **Environments** | Environments available to the project (managed at organization level) |
+| **Access control** | Role assignments scoped to this project |
+
+## What's next
+
+- [Manage integrations](manage-integrations.md) — view and manage integrations within a project
+- [Manage runtimes](manage-runtimes.md) — monitor runtime status across the project
+- [Access control](access-control.md) — assign roles and permissions at the project level
