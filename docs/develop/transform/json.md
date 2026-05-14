@@ -10,13 +10,13 @@ WSO2 Integrator provides built-in support for JSON processing, allowing develope
 
 ## Creating JSON values
 
-Construct JSON directly using Ballerina literals. The `json` type accepts null, booleans, numbers, strings, arrays, and maps.
+Construct JSON directly using Ballerina types. The `json` type accepts null, booleans, numbers, strings, arrays, and maps.
 
-1. **Add a Variable step**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `json` and enter a JSON literal as the expression.
+1. **Add a Variable**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `json` and enter a JSON value as the expression.
 
-2. **Build nested structures**: Add additional **Variable** steps for nested JSON objects and arrays. Each variable appears as a separate **Declare Variable** step in the flow.
+2. **Build nested structures**: Add additional **Declare Variable** steps for nested JSON objects and arrays. Each variable appears as a separate **Declare Variable** step in the flow.
 
-   ![Flow designer showing Declare Variable steps for JSON literal construction including nested objects and arrays](/img/develop/transform/json/json-creating-flow.png)
+   ![Flow designer showing Declare Variable steps for JSON value construction including nested objects and arrays](/img/develop/transform/json/json-creating-flow.png)
 
 3. **Configure the expression**: Click a variable node to view and edit the JSON expression in the side panel.
 
@@ -39,7 +39,8 @@ public function main() {
     };
 
     // Nested structures
-    json orders = {
+
+    json orderItem = {
         "orderId": "ORD-5001",
         "customer": customer,
         "items": [
@@ -47,20 +48,21 @@ public function main() {
             {"sku": "GDG-02", "qty": 2, "price": 49.99}
         ]
     };
-
-    io:println(orders.toJsonString());
+    io:println(orderItem.toJsonString());
 }
 ```
 
 ## Accessing JSON values
 
-Access JSON fields with field access or index notation. Since `json` is dynamically shaped, most access operations return `json` and may require type narrowing.
+Access JSON fields with field access. Since `json` is dynamically shaped, most access operations return `json` and may require type narrowing.
 
-1. **Add Variable steps for field access**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `json` and enter a field access expression such as `check payload.order.id`.
+1. **Define the JSON input**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `json` and enter the JSON value as the expression. Name the variable `payload`. This variable is then referenced in all subsequent field access steps.
 
-2. **Use optional access**: For keys that may not exist, use `?.` syntax in the expression (for example, `check payload.order?.notes`) to return `()` instead of an error.
+2. **Add Variable steps for field access**: Click **+** and select **Declare Variable**. Set the type to `json` and enter a field access expression on `payload`, such as `check payload.orderId`.
 
-3. **Narrow to a specific type**: Set the variable type to `string`, `int`, or another concrete type and use `check` in the expression to perform type narrowing.
+3. **Use optional access**: For keys that may not exist, use `?.` syntax in the expression (for example, `check payload?.notes`) to return `()` instead of an error.
+
+4. **Narrow to a specific type**: Set the variable type to `string`, `int`, or another concrete type and use `check` in the expression to perform type narrowing.
 
    ![Flow designer showing Declare Variable steps for JSON field access, optional access, and type narrowing](/img/develop/transform/json/json-accessing-flow.png)
 
@@ -92,15 +94,21 @@ public function main() returns error? {
 }
 ```
 
-## Parsing JSON from strings
+## Parse a JSON string
 
-Parse external JSON payloads received as strings, bytes, or streams using `value:fromJsonString()` or the `ballerina/data.jsondata` module.
+Parse JSON payloads received as strings into either an untyped `json` value or a typed Ballerina record.
 
-1. **Add a Variable step**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `json` and enter `check raw.fromJsonString()` as the expression.
+### Into a JSON value
 
-2. **Extract typed values**: Add additional **Variable** steps with concrete types (for example, `string`) and use `check` expressions to extract values from the parsed JSON.
+Use `fromJsonString()` when you need a quick untyped `json` value without defining a record type.
 
-   ![Flow designer showing Declare Variable steps for parsing a JSON string and extracting typed values](/img/develop/transform/json/json-parsing-flow.png)
+1. **Add a Declare Variable step for the raw string**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `string` and enter the JSON string as the expression. Name the variable `raw`.
+
+2. **Parse the string**: Click **+** and select **Call Function**. In the right-side panel, search for `fromJsonString` and select it. Pass `raw` as the argument and set the result type to `json`.
+
+3. **Extract typed values**: Add a **Declare Variable** step with a concrete type (for example, `string`) and use a field access expression such as `check parsed.name` to extract values from the parsed JSON.
+
+   ![Flow designer showing the fromJsonString function call step and variable extraction steps](/img/develop/transform/json/json-parsing-flow.png)
 
 ```ballerina
 import ballerina/io;
@@ -115,22 +123,31 @@ public function main() returns error? {
 }
 ```
 
-## Type-Safe JSON Conversion
+### Into a typed record
 
-The `ballerina/data.jsondata` module provides type-safe conversion from JSON values to strongly typed Ballerina records. By defining a record type that matches the expected JSON structure, you can safely parse and validate JSON data while benefiting from compile-time type checking and reduced runtime errors.
+Use `jsondata:parseString()` when the JSON structure is known. Define a matching record type and parse directly into it for compile-time type safety.
 
-1. **Define the target record type**: Navigate to **Types** in the sidebar and click **+** to add a new type. Select the **Import** tab in the right-hand panel, then paste the `Product` record definition. For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
+1. **Define the target record type**: Navigate to **Types** in the sidebar and click **+** to add a new type. Define the `Product` record. For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
 
-   ![New Type panel showing the Import tab with the Product record definition](/img/develop/transform/json/json-types-panel.png)
+   ![New Type panel showing the Product record fields defined from scratch](/img/develop/transform/json/json-types-panel.png)
 
-2. **Add a Variable step**: In the flow designer, add a **Declare Variable** step, set the type to `Product`, and set the expression to `check jsondata:parseString(jsonStr)`.
+2. **Add a Declare Variable step for the JSON string**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `string` and enter the JSON string as the expression. Name the variable `jsonStr`.
 
-   ![Flow designer showing the jsondata parseString variable step for type-safe JSON parsing](/img/develop/transform/json/json-typed-parse-flow.png)
+3. **Parse into the record type**: Click **+** and select **Call Function**. In the right-side panel, search for `parseString` and select it from the `data.jsondata` module.
+
+   ![Right-side panel showing parseString search results with the data.jsondata module entry highlighted](/img/develop/transform/json/json-parsestring-search.png)
+
+   Pass `jsonStr` as the argument. The module is automatically imported into your file.
+
+   ![Right-side panel showing the parseString function form with jsonStr as the argument and Product as the return type](/img/develop/transform/json/json-parsestring-form.png)
+
+   ![Flow designer showing the parseString function call step with Product as the result type](/img/develop/transform/json/json-typed-parse-flow.png)
 
 ```ballerina
 import ballerina/data.jsondata;
 import ballerina/io;
 
+// This is in the types.bal file
 type Product record {|
     string name;
     decimal price;
@@ -153,13 +170,50 @@ public function main() returns error? {
 }
 ```
 
-### Parsing JSON arrays
+## Convert a json value to a typed record
 
-1. **Define the record type**: Navigate to **Types** in the sidebar and click **+** to add a new type. Select the **Import** tab, then paste the `OrderItem` record definition. For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
+Use `jsondata:parseAsType()` when you already have a `json` value and want to convert it into a typed record.
 
-2. **Add a Variable step**: In the flow designer, add a **Declare Variable** step, set the type to `OrderItem[]`, and set the expression to `check jsondata:parseString(itemsJson)`.
+1. **Define the record type**: Navigate to **Types** in the sidebar and click **+** to add a new type. Define the record with the fields matching your JSON structure. For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
 
-   ![Flow designer showing the jsondata parseString variable step for parsing a JSON array into typed records](/img/develop/transform/json/json-array-parse-flow.png)
+2. **Assign the json value**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `json` and enter the JSON value as the expression. Name the variable `jsonInput`.
+
+3. **Convert to the record type**: Click **+** and select **Call Function**. In the right-side panel, search for `parseAsType` and select it from the `data.jsondata` module. Pass `jsonInput` as the argument and set the result type to your defined record.
+
+   ![right-side panel showing parseAsType search results with the data.jsondata module entry highlighted](/img/develop/transform/json/json-parseastype-search.png)
+
+   ![Flow designer showing the parseAsType function call step with jsonInput as the argument and Product as the result type](/img/develop/transform/json/json-parseastype-flow.png)
+
+```ballerina
+import ballerina/data.jsondata;
+import ballerina/io;
+
+type Product record {|
+    string name;
+    decimal price;
+    boolean inStock;
+|};
+
+public function main() returns error? {
+    json jsonInput = {"name": "Widget", "price": 29.99, "inStock": true};
+
+    Product product = check jsondata:parseAsType(jsonInput);
+    io:println(product.name);  // Widget
+    io:println(product.price); // 29.99
+}
+```
+
+## Parse JSON arrays
+
+Use `jsondata:parseString()` to parse a JSON array string directly into a typed record array. If you already have a `json` value instead of a string, use `jsondata:parseAsType()` as described in [Convert a JSON value to a typed record](`#convert-a-json-value-to-a-typed-record`).
+
+1. **Define the record type**: Navigate to **Types** in the sidebar and click **+** to add a new type. Define the `OrderItem` record from scratch with the following fields: `sku` (`string`), `quantity` (`int`), and `unitPrice` (`decimal`). For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
+
+2. **Add a Variable step for the JSON string**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `string` and enter the JSON array string as the expression. Name the variable `itemsJson`.
+
+3. **Parse the array**: Click **+** and select **Call Function**. In the right-side panel, search for `parseString` and select it from the `data.jsondata` module. Pass `itemsJson` as the argument and set the result type to `OrderItem[]`.
+
+   ![Flow designer showing the jsondata parseString function call step for parsing a JSON array into typed records](/img/develop/transform/json/json-array-parse-flow.png)
 
 ```ballerina
 import ballerina/data.jsondata;
@@ -182,9 +236,34 @@ public function main() returns error? {
 }
 ```
 
-### Field name remapping
+## Merging JSON objects
 
-Use the `@jsondata:Name` annotation to map JSON field names to Ballerina record fields when the JSON keys do not match Ballerina naming conventions or identifier rules. This is useful when working with external APIs that use different naming styles such as snake_case, kebab-case, or reserved keywords.
+Combine multiple JSON objects using the `mergeJson` function.
+
+1. **Add Variable steps**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `json` and enter the JSON value as the expression. Add a second **Declare Variable** step for the merge.
+
+2. **Merge the objects**: Click **+** and select **Call Function**. In the right-side panel, search for `mergeJson` and select it from the `lang.value` module. Pass two `json` values as arguments.
+
+   ![Flow designer showing two Declare Variable steps for order1 and order2 followed by a mergeJson function call step](/img/develop/transform/json/json-merging-flow.png)
+
+```ballerina
+import ballerina/lang.value;
+import ballerina/io;
+
+public function main() returns error? {
+    json order1 = {"sku": "A1", "quantity": "3"};
+    json order2 = {"address": "Sri Lanka", "status": "pending"};
+    json orders = check value:mergeJson(order1, order2);
+    io:println(orders);
+}
+
+```
+
+## Additional scenarios
+
+### Remap field names
+
+Use the `@jsondata:Name` annotation to map JSON field names to Ballerina record fields when the JSON keys do not match Ballerina naming conventions or identifier rules. This is useful when working with external APIs that use naming styles such as snake_case or kebab-case. Add the annotation directly to the record type definition in `types.bal` after creating the record.
 
 ```ballerina
 import ballerina/data.jsondata;
@@ -197,67 +276,15 @@ type ApiResponse record {|
 |};
 ```
 
-## Common transformations
-
-Restructure JSON data by converting to records, transforming, and converting back.
-
-1. **Define source and target record types**: Navigate to **Types** in the sidebar and click **+** to add new types. Select the **Import** tab and paste the `SourceContact` and `TargetContact` record definitions. For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
-
-2. **Add a Variable step for parsing**: In the flow designer, add a **Declare Variable** step, set the type to `SourceContact`, and set the expression to `check jsondata:parseAsType(input)`.
-
-![Flow designer showing the jsondata parseAsType variable step and data mapper transformation](/img/develop/transform/json/json-transform-flow.png)
-
-```ballerina
-import ballerina/data.jsondata;
-
-type SourceContact record {|
-    string first_name;
-    string last_name;
-    string email_address;
-|};
-
-type TargetContact record {|
-    string fullName;
-    string email;
-|};
-
-public function transform(json input) returns json|error {
-    SourceContact src = check jsondata:parseAsType(input);
-    TargetContact target = {
-        fullName: src.first_name + " " + src.last_name,
-        email: src.email_address
-    };
-    return target.toJson();
-}
-```
-
-## Merging JSON objects
-
-Combine multiple JSON objects using the spread operator or map merge.
-
-1. **Add Variable steps**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `map<json>` and enter the JSON map literal as the expression. Add a second **Variable** step for the overrides map.
-
-2. **Merge with the variables**: Add another **Declare Variable** step with the type `map<json>` and use  `{defaults, overrides}` to merge the two maps. Later entries take precedence.
-
-   ![Flow designer showing Declare Variable steps for creating and merging JSON maps using the spread operator](/img/develop/transform/json/json-merging-flow.png)
-
-```ballerina
-import ballerina/io;
-
-public function main() {
-    map<json> defaults = {"timeout": 30, "retries": 3, "logLevel": "INFO"};
-    map<json> overrides = {"timeout": 60, "logLevel": "DEBUG"};
-
-    map<json> config = {defaults, overrides};
-    io:println(config);
-}
-```
-
-## Edge cases
-
 ### Null handling
 
 Use optional types (?) to represent fields that may be missing or contain null values. Combine them with the Elvis operator (?:) to provide default values when a field is absent or evaluates to null. This helps safely process incomplete or optional JSON data without additional null checks.
+
+1. **Use optional access**: Add a **Declare Variable** step with the type `json?` and use optional access syntax `check payload?.description` as the expression. This returns `()` for null or missing fields.
+
+2. **Apply the Elvis operator**: Add another **Declare Variable** step with a concrete type (for example, `string`) and use a conditional expression such as `desc is string ? desc : "No description provided"` to provide a default value.
+
+   ![Flow designer showing Declare Variable steps for optional access and Elvis operator for null handling](/img/develop/transform/json/json-null-handling-flow.png)
 
 ```ballerina
 public function main() returns error? {
@@ -275,7 +302,7 @@ public function main() returns error? {
 
 For large JSON payloads, use `jsondata:parseStream()` to process JSON data directly from a byte stream without loading the entire payload into memory. This approach improves memory efficiency and is useful when handling large API responses, files, or streaming data sources.
 
-   ![Large JSON payloads](/img/develop/transform/json/json-streaming.png)
+   ![Flow designer showing a parseStream function call step reading a byte stream into a typed Product array](/img/develop/transform/json/json-streaming.png)
 
 ```ballerina
 import ballerina/data.jsondata;
@@ -321,5 +348,5 @@ Create a `products.json` file in the project directory.
 
 ## What's next
 
-- [XML Processing](xml.md) - Learn how to read, create, query, and transform XML data for integration scenarios and structured message handling.
-- [CSV & Flat File Processing](csv-flat-file.md) - Learn how to process CSV and flat-file data for file-based integrations and data transformation workflows.
+- [XML Processing](xml.md) - Work with XML data
+- [Type System & Records](type-system.md) - Type-safe data handling
