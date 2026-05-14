@@ -1,18 +1,17 @@
+---
+title: Example
+---
+
 # Example
-
-## Table of Contents
-
-- [HTTP Example](#http-example)
-- [HTTP Trigger Example](#http-trigger-example)
 
 ## HTTP Example
 
 ### What you'll build
 
-Build an HTTP GET integration using the `ballerina/http` HTTP Client connector in WSO2 Integrator's low-code canvas. The integration sends an outbound GET request to a configurable URL and captures the HTTP response. The flow runs as an Automation entry point named `main`.
+Build an HTTP GET integration using the `ballerina/http` HTTP Client connector in WSO2 Integrator's visual designer. The integration sends an outbound GET request to a configurable URL and captures the HTTP response. The flow runs as an Automation entry point named `main`.
 
 **Operations used:**
-- **get** : Sends an HTTP GET request to a specified path and returns the HTTP response.
+- **get**: Sends an HTTP GET request to a specified path and returns the HTTP response.
 
 ### Architecture
 
@@ -39,8 +38,8 @@ Select **+ Add Connection** in the **Connections** section of the WSO2 Integrato
 
 In the **New Connection** form, bind the connection parameters to configurable variables:
 
-- **connectionName** : Set to `httpClient` as the name for this connection
-- **url** : Bind to a new configurable variable named `httpServiceUrl` (type: `string`) using the variable binding icon
+- **connectionName**: Set to `httpClient` as the name for this connection
+- **url**: Bind to a new configurable variable named `httpServiceUrl` (type: `string`) using the variable binding icon
 
 ![HTTP connection form fully filled with all parameters before saving](/img/connectors/catalog/built-in/http/http_screenshot_02_connection_form.png)
 
@@ -55,7 +54,7 @@ Select **Save** to create the connection. The connection `httpClient` now appear
 1. In the left panel, select **Configurations**.
 2. Set a value for each configurable listed below.
 
-- **httpServiceUrl** (string) : The base URL of the HTTP service to send GET requests to (for example, `https://your-target-api.com`)
+- **httpServiceUrl** (string): The base URL of the HTTP service to send GET requests to (for example, `https://your-target-api.com`)
 
 ### Configuring the HTTP get operation
 
@@ -64,7 +63,7 @@ Select **Save** to create the connection. The connection `httpClient` now appear
 1. In the WSO2 Integrator sidebar, hover over **Entry Points** and select **+**.
 2. Select **Automation** from the entry point types.
 
-An Automation entry point named `main` is created and the low-code canvas opens, showing **Start → (empty node placeholder) → Error Handler**.
+An Automation entry point named `main` is created and the visual designer opens, showing **Start → (empty node placeholder) → Error Handler**.
 
 #### Step 5: Select the get operation and configure its parameters
 
@@ -72,9 +71,9 @@ An Automation entry point named `main` is created and the low-code canvas opens,
 2. Expand the **httpClient** connection and select **get** from the list of available operations.
 3. Fill in the operation parameters:
 
-- **path** : Enter `/` as the request path
-- **result** : Set the result variable name to `result`
-- **targetType** : Enter `http:Response` as the expected response type
+- **path**: Enter `/` as the request path
+- **result**: Set the result variable name to `result`
+- **targetType**: Enter `http:Response` as the expected response type
 
 ![HTTP get operation configuration filled with all values](/img/connectors/catalog/built-in/http/http_screenshot_05_operation_filled.png)
 
@@ -92,7 +91,7 @@ Try this sample in WSO2 Integration Platform.
 ## HTTP Trigger Example
 ### What you'll build
 
-An HTTP Service integration listens for incoming HTTP requests on a configurable port using the `ballerina/http` trigger from the **Integration as API** category. When an HTTP client sends a `GET /messages` request to the listener, the trigger routes it to the resource handler, which builds a JSON payload and logs it as a JSON string using `log:printInfo`. The complete flow: HTTP listener → resource handler → log:printInfo → response is assembled visually on the WSO2 Integrator low-code canvas.
+An HTTP Service integration listens for incoming HTTP requests on a configurable port using the `ballerina/http` trigger from the **Integration as API** category. When an HTTP client sends a `GET /messages` request to the listener, the trigger routes it to the resource handler, which builds a JSON payload and logs it as a JSON string using `log:printInfo`. The complete flow: HTTP listener → resource handler → log:printInfo → response is assembled visually on the WSO2 Integrator visual designer.
 
 ### Architecture
 
@@ -127,8 +126,8 @@ flowchart LR
 
 In the **Create HTTP Service** form, expand **Advanced Configurations** and select **Custom Listener** to expose the listener parameters. For the listener port, switch the field to **Expression** mode, open the Helper Panel, select the **Configurables** tab, select **+ New Configurable**, enter a camelCase variable name and `int` as the type, leave the default value blank, and select **Save**. The variable is automatically injected into the port field. Enum/dropdown options such as the **Service Contract** radio group and boolean-style toggles are set directly from the UI and don't need configurable bindings.
 
-- **Port** : The TCP port the HTTP listener binds to; bound to a `configurable int` variable so the port can be set at runtime without modifying the integration source.
-- **Listener Name** : The identifier used for the `http:Listener` variable in the generated source; kept as `httpListener`.
+- **Port**: The TCP port the HTTP listener binds to; bound to a `configurable int` variable so the port can be set at runtime without modifying the integration source.
+- **Listener Name**: The identifier used for the `http:Listener` variable in the generated source; kept as `httpListener`.
 
 ![HTTP Service trigger configuration form with the Port field bound to the httpListenerPort configuration variable, before selecting Create](/img/connectors/catalog/built-in/http/http_trigger_screenshots_02_trigger_config_form.png)
 
@@ -137,7 +136,7 @@ In the **Create HTTP Service** form, expand **Advanced Configurations** and sele
 1. In the left panel of WSO2 Integrator, select **Configurations** (at the bottom of the project tree, under Data Mappers).
 2. Set a value for each configuration listed below.
 
-- **httpListenerPort** (int) : The actual TCP port number the HTTP listener should bind to at runtime (for example, `8090`).
+- **httpListenerPort** (int): The actual TCP port number the HTTP listener should bind to at runtime (for example, `8090`).
 
 ![Configurable Variables panel open showing the httpListenerPort variable listed with an empty Required value field](/img/connectors/catalog/built-in/http/http_trigger_screenshots_03_configurations_panel.png)
 
@@ -185,7 +184,7 @@ Select the back arrow in the canvas header (or re-select the **HTTP Service** en
 
 1. In the WSO2 Integrator panel, select **Run** to start the integration. Wait for the listener to bind to the configured port (watch the output for a "started HTTP/WS listener" message).
 2. Send a test HTTP request using one of the following options:
-   - A separate WSO2 Integrator **HTTP Client** integration assembled from the same low-code canvas (recommended, no external tooling required).
+   - A separate WSO2 Integrator **HTTP Client** integration assembled from the same visual designer (recommended, no external tooling required).
    - The `curl` command-line tool: send a GET request to the configured endpoint using `curl -X GET http://<host>:<httpListenerPort>/messages`, replacing `<host>` and `<httpListenerPort>` with the values you set in the **Configurations** panel.
    - A GUI HTTP client such as **Postman** or **Insomnia**: send a GET request to the configured endpoint.
 3. Observe the integration's log output. The payload JSON string (for example, `{"message":"Hello from HTTP listener","path":"/messages"}`) should appear printed by `log:printInfo`, confirming the handler received and processed the incoming HTTP request.

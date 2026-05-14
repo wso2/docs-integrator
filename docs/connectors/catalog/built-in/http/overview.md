@@ -1,3 +1,7 @@
+---
+title: HTTP Overview
+---
+
 # HTTP Module Overview
 
 The `ballerina/http` module (v2.16.0) provides APIs for connecting and interacting with HTTP and HTTP2 endpoints. It supports both outbound HTTP requests through clients and inbound request handling through listeners and services, making it the foundation for building REST APIs, service integrations, and HTTP-based workflows in WSO2 Integrator.
@@ -21,10 +25,10 @@ The HTTP module provides four client types for different use cases:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#) | Standard HTTP client for making outbound requests with full protocol support. |
-| [`StatusCodeClient`](#) | HTTP client with status-code-based response binding for typed responses per HTTP status. |
-| [`FailoverClient`](#) | Attempts subsequent endpoints on failure for high availability. |
-| [`LoadBalanceClient`](#) | Round-robin load balancing across multiple endpoints. |
+| [`Client`](action-reference.md#client) | Standard HTTP client for making outbound requests with full protocol support. |
+| [`StatusCodeClient`](action-reference.md#statuscodeclient) | HTTP client with status-code-based response binding for typed responses per HTTP status. |
+| [`FailoverClient`](action-reference.md#failoverclient) | Attempts subsequent endpoints on failure for high availability. |
+| [`LoadBalanceClient`](action-reference.md#loadbalanceclient) | Round-robin load balancing across multiple endpoints. |
 
 See the **[Action Reference](action-reference.md)** for the full list of operations, parameters, and sample code for each client.
 

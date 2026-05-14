@@ -1,3 +1,7 @@
+---
+title: Actions
+---
+
 # Actions
 
 The `ballerina/http` package exposes the following clients:
@@ -22,7 +26,7 @@ Standard HTTP client for making outbound requests to HTTP and HTTP2 endpoints. S
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version (`HTTP_1_0`, `HTTP_1_1`, `HTTP_2_0`). |
 | `http1Settings` | `ClientHttp1Settings` | `{}` | HTTP/1.x specific settings (keep-alive, chunking, proxy). |
 | `http2Settings` | `ClientHttp2Settings` | `{}` | HTTP/2 specific settings (prior knowledge, window size). |
-| `timeout` | `decimal` | `60` | Request timeout in seconds. |
+| `timeout` | `decimal` | `30` | Request timeout in seconds. |
 | `poolConfig` | `PoolConfiguration` | `()` | Connection pool configuration (max active/idle connections, wait time). |
 | `auth` | `ClientAuthConfig` | `()` | Authentication configuration (Basic, Bearer, JWT, OAuth2). |
 | `retryConfig` | `RetryConfig` | `()` | Retry policy (max retries, interval, backoff factor). |
@@ -80,11 +84,10 @@ Sends an HTTP GET request to the specified path.
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `path` | `string` | Yes | Request path. |
-| `message` | `RequestMessage` | No | Optional request message (headers, etc.). |
-| `headers` | `map<string\|string[]>` | No | Optional HTTP headers. |
-| `targetType` | `TargetType` | No | Response payload type for data binding. Defaults to `http:Response`. |
+| `headers` | `map<string\|string[]>?` | No | Optional HTTP headers. Defaults to `()`. |
+| `targetType` | `TargetType` | No | Expected return type for automatic data binding. Inferred from the call site when omitted. |
 
-**Returns:** `Response|anydata|ClientError`
+**Returns:** `targetType|ClientError`
 
 **Sample code:**
 
@@ -115,9 +118,9 @@ Sends an HTTP POST request with a payload.
 | `message` | `RequestMessage` | Yes | Request payload (JSON, XML, text, binary, or `Request`). |
 | `headers` | `map<string\|string[]>` | No | Optional HTTP headers. |
 | `mediaType` | `string` | No | Content type of the payload. |
-| `targetType` | `TargetType` | No | Response payload type for data binding. Defaults to `http:Response`. |
+| `targetType` | `TargetType` | No | Expected return type for automatic data binding. Inferred from the call site when omitted. |
 
-**Returns:** `Response|anydata|ClientError`
+**Returns:** `targetType|ClientError`
 
 **Sample code:**
 
@@ -141,9 +144,9 @@ Sends an HTTP PUT request with a payload.
 | `message` | `RequestMessage` | Yes | Request payload. |
 | `headers` | `map<string\|string[]>` | No | Optional HTTP headers. |
 | `mediaType` | `string` | No | Content type of the payload. |
-| `targetType` | `TargetType` | No | Response payload type for data binding. Defaults to `http:Response`. |
+| `targetType` | `TargetType` | No | Expected return type for automatic data binding. Inferred from the call site when omitted. |
 
-**Returns:** `Response|anydata|ClientError`
+**Returns:** `targetType|ClientError`
 
 **Sample code:**
 
@@ -167,9 +170,9 @@ Sends an HTTP PATCH request with a partial payload.
 | `message` | `RequestMessage` | Yes | Request payload. |
 | `headers` | `map<string\|string[]>` | No | Optional HTTP headers. |
 | `mediaType` | `string` | No | Content type of the payload. |
-| `targetType` | `TargetType` | No | Response payload type for data binding. Defaults to `http:Response`. |
+| `targetType` | `TargetType` | No | Expected return type for automatic data binding. Inferred from the call site when omitted. |
 
-**Returns:** `Response|anydata|ClientError`
+**Returns:** `targetType|ClientError`
 
 **Sample code:**
 
@@ -190,11 +193,12 @@ Sends an HTTP DELETE request.
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `path` | `string` | Yes | Request path. |
-| `message` | `RequestMessage` | No | Optional request payload. |
-| `headers` | `map<string\|string[]>` | No | Optional HTTP headers. |
-| `targetType` | `TargetType` | No | Response payload type for data binding. Defaults to `http:Response`. |
+| `message` | `RequestMessage` | No | Optional request payload. Defaults to `()`. |
+| `headers` | `map<string\|string[]>?` | No | Optional HTTP headers. Defaults to `()`. |
+| `mediaType` | `string?` | No | Content type of the payload. Defaults to `()`. |
+| `targetType` | `TargetType` | No | Expected return type for automatic data binding. Inferred from the call site when omitted. |
 
-**Returns:** `Response|anydata|ClientError`
+**Returns:** `targetType|ClientError`
 
 **Sample code:**
 
@@ -238,9 +242,9 @@ Sends an HTTP OPTIONS request to discover supported methods.
 |------|------|----------|-------------|
 | `path` | `string` | Yes | Request path. |
 | `headers` | `map<string\|string[]>` | No | Optional HTTP headers. |
-| `targetType` | `TargetType` | No | Response payload type for data binding. Defaults to `http:Response`. |
+| `targetType` | `TargetType` | No | Expected return type for automatic data binding. Inferred from the call site when omitted. |
 
-**Returns:** `Response|anydata|ClientError`
+**Returns:** `targetType|ClientError`
 
 **Sample code:**
 
@@ -260,19 +264,19 @@ Sends an HTTP request with a dynamically specified method.
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `httpMethod` | `string` | Yes | HTTP method (e.g., `"GET"`, `"POST"`). |
+| `httpVerb` | `string` | Yes | HTTP verb (e.g., `"GET"`, `"POST"`). Case-sensitive — use the `http:Method` type for the standard verbs. |
 | `path` | `string` | Yes | Request path. |
-| `message` | `RequestMessage` | No | Request payload. |
-| `headers` | `map<string\|string[]>` | No | Optional HTTP headers. |
-| `mediaType` | `string` | No | Content type of the payload. |
-| `targetType` | `TargetType` | No | Response payload type for data binding. Defaults to `http:Response`. |
+| `message` | `RequestMessage` | Yes | Request payload. |
+| `headers` | `map<string\|string[]>?` | No | Optional HTTP headers. Defaults to `()`. |
+| `mediaType` | `string?` | No | Content type of the payload. Defaults to `()`. |
+| `targetType` | `TargetType` | No | Expected return type for automatic data binding. Inferred from the call site when omitted. |
 
-**Returns:** `Response|anydata|ClientError`
+**Returns:** `targetType|ClientError`
 
 **Sample code:**
 
 ```ballerina
-http:Response response = check httpClient->execute("GET", "/api/users");
+http:Response response = check httpClient->execute("GET", "/api/users", ());
 ```
 
 </details>
@@ -288,9 +292,9 @@ Forwards an incoming HTTP request to another endpoint, preserving the original r
 |------|------|----------|-------------|
 | `path` | `string` | Yes | Target path. |
 | `request` | `Request` | Yes | The original HTTP request to forward. |
-| `targetType` | `TargetType` | No | Response payload type for data binding. Defaults to `http:Response`. |
+| `targetType` | `TargetType` | No | Expected return type for automatic data binding. Inferred from the call site when omitted. |
 
-**Returns:** `Response|anydata|ClientError`
+**Returns:** `targetType|ClientError`
 
 **Sample code:**
 
@@ -314,7 +318,7 @@ Submits an asynchronous HTTP request and returns an `HttpFuture` for later retri
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `httpMethod` | `string` | Yes | HTTP method. |
+| `httpVerb` | `string` | Yes | HTTP verb. Case-sensitive — use the `http:Method` type for the standard verbs. |
 | `path` | `string` | Yes | Request path. |
 | `message` | `RequestMessage` | Yes | Request payload. |
 
@@ -352,6 +356,91 @@ http:Response response = check httpClient->getResponse(future);
 
 </details>
 
+#### HTTP/2 server push
+
+<details>
+<summary>hasPromise</summary>
+
+Checks whether the server has sent a push promise for additional resources on this future.
+
+**Parameters:**
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `httpFuture` | `HttpFuture` | Yes | The future from a previous asynchronous invocation. |
+
+**Returns:** `boolean`
+
+**Sample code:**
+
+```ballerina
+http:HttpFuture future = check httpClient->submit("GET", "/index.html", ());
+boolean hasMore = httpClient->hasPromise(future);
+```
+
+</details>
+
+<details>
+<summary>getNextPromise</summary>
+
+Returns the next server push promise associated with the future.
+
+**Parameters:**
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `httpFuture` | `HttpFuture` | Yes | The future from a previous asynchronous invocation. |
+
+**Returns:** `PushPromise|ClientError`
+
+**Sample code:**
+
+```ballerina
+http:PushPromise promise = check httpClient->getNextPromise(future);
+```
+
+</details>
+
+<details>
+<summary>getPromisedResponse</summary>
+
+Retrieves the response data that was proactively pushed by the server for a given promise.
+
+**Parameters:**
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `promise` | `PushPromise` | Yes | The push promise returned by `getNextPromise`. |
+
+**Returns:** `Response|ClientError`
+
+**Sample code:**
+
+```ballerina
+http:Response pushed = check httpClient->getPromisedResponse(promise);
+```
+
+</details>
+
+<details>
+<summary>rejectPromise</summary>
+
+Rejects a server push promise, declining to receive the additional resource.
+
+**Parameters:**
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `promise` | `PushPromise` | Yes | The push promise to reject. |
+
+**Sample code:**
+
+```ballerina
+httpClient->rejectPromise(promise);
+```
+
+</details>
+
 #### Resource methods
 
 The HTTP client also supports resource method syntax for a cleaner API style. Path segments are provided as part of the method call:
@@ -372,14 +461,14 @@ http:Response res = check httpClient->/api/users/["123"].delete();
 <details>
 <summary>getCookieStore</summary>
 
-Returns the cookie store associated with this client.
+Returns the cookie store associated with this client, or `()` if cookie handling is disabled.
 
-**Returns:** `CookieStore`
+**Returns:** `CookieStore?`
 
 **Sample code:**
 
 ```ballerina
-http:CookieStore store = httpClient.getCookieStore();
+http:CookieStore? store = httpClient.getCookieStore();
 ```
 
 </details>
@@ -413,14 +502,14 @@ httpClient.circuitBreakerForceOpen();
 <details>
 <summary>getCircuitBreakerCurrentState</summary>
 
-Returns the current state of the circuit breaker.
+Returns the current state of the circuit breaker. Panics with an `http:ClientError` if invoked on a client that was not configured with a circuit breaker.
 
-**Returns:** `CircuitState|ClientError`
+**Returns:** `CircuitState`
 
 **Sample code:**
 
 ```ballerina
-http:CircuitState state = check httpClient.getCircuitBreakerCurrentState();
+http:CircuitState state = httpClient.getCircuitBreakerCurrentState();
 ```
 
 </details>
@@ -477,16 +566,13 @@ Attempts subsequent endpoints on failure. If a request to the first endpoint fai
 
 ### Configuration
 
+In addition to the failover-specific fields below, `FailoverClientConfiguration` includes all fields from [`Client` configuration](#configuration) (`httpVersion`, `timeout`, `auth`, `retryConfig`, `secureSocket`, `circuitBreaker`, `poolConfig`, `cache`, `compression`, `followRedirects`, `cookieConfig`, `responseLimits`, `proxy`, `validation`, `laxDataBinding`, etc.).
+
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `targets` | `TargetService[]` | Required | Array of target endpoints. |
-| `failoverCodes` | `int[]` | `[501, 502, 503]` | HTTP status codes that trigger failover. |
-| `intervalInMillis` | `int` | `0` | Failover interval in milliseconds. |
-| `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
-| `timeout` | `decimal` | `60` | Request timeout in seconds. |
-| `auth` | `ClientAuthConfig` | `()` | Authentication configuration. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration. |
-| `secureSocket` | `ClientSecureSocket` | `()` | TLS/SSL configuration. |
+| `targets` | `TargetService[]` | `[]` | Array of target endpoints. |
+| `failoverCodes` | `int[]` | `[501, 502, 503, 504]` | HTTP status codes that trigger failover. |
+| `interval` | `decimal` | `0` | Failover delay interval in **seconds**. |
 
 ### Initializing the client
 
@@ -531,16 +617,13 @@ Distributes requests across multiple endpoints using round-robin load balancing.
 
 ### Configuration
 
+In addition to the load-balance-specific fields below, `LoadBalanceClientConfiguration` includes all fields from [`Client` configuration](#configuration).
+
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `targets` | `TargetService[]` | Required | Array of target endpoints. |
-| `lbRule` | `LoadBalancerRule` | Round-robin | Load balancing strategy. |
+| `targets` | `TargetService[]` | `[]` | Array of target endpoints. |
+| `lbRule` | `LoadBalancerRule?` | `()` | Load balancing strategy. When `()`, the client falls back to built-in round-robin. |
 | `failover` | `boolean` | `true` | Enable failover when an endpoint fails. |
-| `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
-| `timeout` | `decimal` | `60` | Request timeout in seconds. |
-| `auth` | `ClientAuthConfig` | `()` | Authentication configuration. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration. |
-| `secureSocket` | `ClientSecureSocket` | `()` | TLS/SSL configuration. |
 
 ### Initializing the client
 
