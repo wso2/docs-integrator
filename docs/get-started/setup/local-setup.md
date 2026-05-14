@@ -35,6 +35,8 @@ After installation, launch the IDE:
 - **macOS**: Open the **Applications** folder and double-click **WSO2 Integrator**.
 - **Linux**: Launch **WSO2 Integrator** from your applications menu (after a `.deb` or `.rpm` install), or run the binary from the extracted directory if you used the `.tar.gz` archive.
 
+![WSO2 Integrator IDE](/img/get-started/setup/wso2-integrator-ide.png)
+
 ## Next steps
 
 - [Develop a new integration](../../develop/create-integrations/create-a-new-integration.md) — Create a new integration project and start building.
