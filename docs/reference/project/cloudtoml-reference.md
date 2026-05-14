@@ -211,6 +211,6 @@ file = "./Secret.toml"
 
 ## What's next
 
-- [Ballerina.toml reference](ballerinatoml-reference.md) — set the `cloud` build option and configure package metadata
-- [Config.toml reference](configtoml-reference.md) — supply runtime configuration values mounted via `[[cloud.config.files]]`
-- [Configuration management](configuration-management.md) — supply runtime values, override via environment variables, and target per-environment configuration
+- [Docker](/docs/deploy/self-hosted/docker) — build and run the container image produced from Cloud.toml.
+- [Kubernetes](/docs/deploy/self-hosted/kubernetes) — deploy the generated artifacts to a Kubernetes cluster.
+- [Config.toml reference](/docs/reference/config/configtoml-reference) — define the runtime values you mount via `[[cloud.config.files]]`.

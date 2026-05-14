@@ -22,9 +22,9 @@ Project and deployment configuration files:
 | File                                                         | Purpose                           |
 | ------------------------------------------------------------ | --------------------------------- |
 | **[Configuration management](config/configuration-management.md)**    | Configurable variables, value sources, and environment variables |
-| **[Ballerina.toml](config/ballerinatoml-reference.md)**               | Project metadata and dependencies |
+| **[Ballerina.toml](project/ballerinatoml-reference.md)**              | Project metadata and dependencies |
 | **[Config.toml](config/configtoml-reference.md)**                     | Runtime configuration values      |
-| **[Cloud.toml](config/cloudtoml-reference.md)**                       | Cloud deployment settings         |
+| **[Cloud.toml](project/cloudtoml-reference.md)**                      | Cloud deployment settings         |
 
 ## APIs
 

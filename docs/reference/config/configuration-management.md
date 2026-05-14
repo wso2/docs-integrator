@@ -124,7 +124,7 @@ Command-line arguments support only basic primitive types (`boolean`, `int`, `fl
 
 `Config.toml` is the primary configuration file. Place it in the project root directory (alongside `Ballerina.toml`). The runtime reads it automatically at startup. Values you enter through the Visual Designer's Config Editor are written to this same file.
 
-For TOML syntax, type-by-type encoding, and module-qualified key conventions, see the [Config.toml reference](configtoml-reference.md).
+For TOML syntax, type-by-type encoding, and module-qualified key conventions, see the [Config.toml reference](/docs/reference/config/configtoml-reference).
 
 ### Environment variables
 
@@ -237,10 +237,10 @@ BAL_CONFIG_FILES=config/dev.toml bal run
 BAL_CONFIG_FILES=config/prod.toml bal run
 ```
 
-Never commit secret-bearing configuration files to version control. For production credential handling, secret managers, and TLS configuration, see [Secrets and encryption](../../deploy-operate/secure/secrets-encryption.md).
+Never commit secret-bearing configuration files to version control. For production credential handling, secret managers, and TLS configuration, see [Secrets and encryption](/docs/deploy-operate/secure/secrets-encryption).
 
 ## What's next
 
 - [Configurations](/docs/develop/integration-artifacts/supporting/configurations) — Declare configurable variables and supply values through the visual designer.
-- [Secrets and encryption](../../deploy-operate/secure/secrets-encryption.md) — Securely supply credentials and protect data in transit and at rest.
+- [Secrets and encryption](/docs/deploy-operate/secure/secrets-encryption) — Securely supply credentials and protect data in transit and at rest.
 - [Connections](/docs/develop/integration-artifacts/supporting/connections) — Use configurable variables to parameterize connections.
