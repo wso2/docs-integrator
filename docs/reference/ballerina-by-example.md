@@ -13,14 +13,13 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 | Example | Description |
 |---------|-------------|
 | **[Hello World](https://ballerina.io/learn/by-example/hello-world/)** | Minimal Ballerina program |
-| **[Programs and Modules](https://ballerina.io/learn/by-example/programs/)** | Module structure and imports |
-| **[Variables and Types](https://ballerina.io/learn/by-example/variables/)** | Variable declarations and basic types |
+| **[Programs and Modules](https://ballerina.io/learn/by-example/programs-and-modules/)** | Module structure and imports |
+| **[Variables and Types](https://ballerina.io/learn/by-example/variables-and-types/)** | Variable declarations and basic types |
 | **[Functions](https://ballerina.io/learn/by-example/functions/)** | Function definitions and calls |
-| **[Expressions](https://ballerina.io/learn/by-example/expressions/)** | Ballerina expressions |
 | **[Strings](https://ballerina.io/learn/by-example/strings/)** | String operations and templates |
-| **[If/Else](https://ballerina.io/learn/by-example/if-else/)** | Conditional statements |
-| **[While Loop](https://ballerina.io/learn/by-example/while/)** | While loop iteration |
-| **[Foreach](https://ballerina.io/learn/by-example/foreach/)** | Foreach loop iteration |
+| **[If/Else](https://ballerina.io/learn/by-example/if-statement/)** | Conditional statements |
+| **[While Loop](https://ballerina.io/learn/by-example/while-statement/)** | While loop iteration |
+| **[Foreach](https://ballerina.io/learn/by-example/foreach-statement/)** | Foreach loop iteration |
 | **[Match Statement](https://ballerina.io/learn/by-example/match-statement/)** | Pattern matching |
 
 ### Type system
@@ -31,7 +30,7 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 | **[Floating Point](https://ballerina.io/learn/by-example/floating-point-numbers/)** | Float and decimal types |
 | **[Nil Type](https://ballerina.io/learn/by-example/nil/)** | Working with nil values |
 | **[Any Type](https://ballerina.io/learn/by-example/any-type/)** | The `any` and `anydata` types |
-| **[Union Types](https://ballerina.io/learn/by-example/union-types/)** | Union type definitions |
+| **[Union Types](https://ballerina.io/learn/by-example/unions/)** | Union type definitions |
 | **[Type Definitions](https://ballerina.io/learn/by-example/type-definitions/)** | Custom type definitions |
 | **[Type Inference](https://ballerina.io/learn/by-example/type-inference/)** | Let type inference |
 | **[Covariance](https://ballerina.io/learn/by-example/covariance/)** | Type covariance |
@@ -45,7 +44,7 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 | **[Default Values](https://ballerina.io/learn/by-example/default-values-for-record-fields/)** | Record field defaults |
 | **[Optional Fields](https://ballerina.io/learn/by-example/optional-fields/)** | Optional record fields |
 | **[Maps](https://ballerina.io/learn/by-example/maps/)** | Map type and operations |
-| **[Record to JSON](https://ballerina.io/learn/by-example/converting-to-user-defined-type/)** | Converting records to JSON |
+| **[Record to JSON](https://ballerina.io/learn/by-example/converting-from-user-defined-type-to-json/)** | Converting records to JSON |
 
 ### Arrays and tuples
 
@@ -53,18 +52,18 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 |---------|-------------|
 | **[Arrays](https://ballerina.io/learn/by-example/arrays/)** | Array type and operations |
 | **[Tuples](https://ballerina.io/learn/by-example/tuples/)** | Tuple types |
-| **[List Sub Typing](https://ballerina.io/learn/by-example/list-sub-typing/)** | List type relationships |
+| **[List Sub Typing](https://ballerina.io/learn/by-example/list-subtyping/)** | List type relationships |
 | **[Table](https://ballerina.io/learn/by-example/table/)** | Table type and operations |
 
 ### Error handling
 
 | Example | Description |
 |---------|-------------|
-| **[Error Type](https://ballerina.io/learn/by-example/error-type/)** | Error value creation |
+| **[Error Type](https://ballerina.io/learn/by-example/error-handling/)** | Error value creation |
 | **[Check Expression](https://ballerina.io/learn/by-example/check-expression/)** | Error propagation with check |
 | **[Error Subtyping](https://ballerina.io/learn/by-example/error-subtyping/)** | Custom error types |
 | **[Trap Expression](https://ballerina.io/learn/by-example/trap-expression/)** | Catching panics |
-| **[On Fail Clause](https://ballerina.io/learn/by-example/on-fail-clause/)** | Handling errors in blocks |
+| **[On Fail Clause](https://ballerina.io/learn/by-example/named-worker-with-on-fail-clause/)** | Handling errors in blocks |
 | **[Error Detail](https://ballerina.io/learn/by-example/error-detail/)** | Error detail records |
 | **[Retry](https://ballerina.io/learn/by-example/retry-transaction-statement/)** | Retry operations |
 
@@ -73,8 +72,8 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 | Example | Description |
 |---------|-------------|
 | **[Workers](https://ballerina.io/learn/by-example/named-workers/)** | Named workers |
-| **[Worker Message Passing](https://ballerina.io/learn/by-example/named-worker-message-passing/)** | Inter-worker communication |
-| **[Wait Expression](https://ballerina.io/learn/by-example/named-workers-and-futures/)** | Waiting for workers |
+| **[Worker Message Passing](https://ballerina.io/learn/by-example/inter-worker-message-passing/)** | Inter-worker communication |
+| **[Wait Expression](https://ballerina.io/learn/by-example/waiting-for-workers/)** | Waiting for workers |
 | **[Alternate Wait](https://ballerina.io/learn/by-example/alternate-wait/)** | Wait for first result |
 | **[Multiple Wait](https://ballerina.io/learn/by-example/multiple-wait/)** | Wait for all results |
 | **[Strand](https://ballerina.io/learn/by-example/strands/)** | Strand scheduling |
@@ -126,12 +125,12 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 
 | Example | Description |
 |---------|-------------|
-| **[HTTP Service](https://ballerina.io/learn/by-example/http-service-and-resource/)** | Basic HTTP service |
+| **[HTTP Service](https://ballerina.io/learn/by-example/http-basic-rest-service/)** | Basic HTTP service |
 | **[HTTP Client](https://ballerina.io/learn/by-example/http-client-send-request-receive-response/)** | Basic HTTP client |
-| **[Query Parameters](https://ballerina.io/learn/by-example/http-query-parameter/)** | Service query parameters |
+| **[Query Parameters](https://ballerina.io/learn/by-example/http-client-query-parameter/)** | Service query parameters |
 | **[Path Parameters](https://ballerina.io/learn/by-example/http-path-parameter/)** | Service path parameters |
-| **[Request/Response](https://ballerina.io/learn/by-example/http-send-response/)** | Full request/response handling |
-| **[Headers](https://ballerina.io/learn/by-example/http-headers/)** | HTTP header handling |
+| **[Request/Response](https://ballerina.io/learn/by-example/http-request-response/)** | Full request/response handling |
+| **[Headers](https://ballerina.io/learn/by-example/http-client-header-parameter/)** | HTTP header handling |
 | **[Data Binding](https://ballerina.io/learn/by-example/http-data-binding/)** | Payload data binding |
 | **[Error Handling](https://ballerina.io/learn/by-example/http-service-error-handling/)** | HTTP error handling |
 | **[Interceptors](https://ballerina.io/learn/by-example/http-interceptors/)** | HTTP interceptors |
@@ -150,10 +149,10 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 
 | Example | Description |
 |---------|-------------|
-| **[Unary RPC](https://ballerina.io/learn/by-example/grpc-unary/)** | Simple unary gRPC |
-| **[Server Streaming](https://ballerina.io/learn/by-example/grpc-server-streaming/)** | Server-side streaming |
-| **[Client Streaming](https://ballerina.io/learn/by-example/grpc-client-streaming/)** | Client-side streaming |
-| **[Bidirectional Streaming](https://ballerina.io/learn/by-example/grpc-bidirectional-streaming/)** | Bidirectional streaming |
+| **[Unary RPC](https://ballerina.io/learn/by-example/grpc-client-simple/)** | Simple unary gRPC |
+| **[Server Streaming](https://ballerina.io/learn/by-example/grpc-client-server-streaming/)** | Server-side streaming |
+| **[Client Streaming](https://ballerina.io/learn/by-example/grpc-client-client-streaming/)** | Client-side streaming |
+| **[Bidirectional Streaming](https://ballerina.io/learn/by-example/grpc-client-bidirectional-streaming/)** | Bidirectional streaming |
 
 ### GraphQL
 
@@ -242,9 +241,9 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 
 | Example | Description |
 |---------|-------------|
-| **[Crypto](https://ballerina.io/learn/by-example/crypto/)** | Cryptographic operations |
+| **[Crypto](https://ballerina.io/learn/by-example/security-crypto/)** | Cryptographic operations |
 | **[JWT Issue/Validate](https://ballerina.io/learn/by-example/jwt-issue-validate/)** | JWT token operations |
-| **[URL Encoding](https://ballerina.io/learn/by-example/url-encode-decode/)** | URL encoding/decoding |
+| **[Encoding](https://ballerina.io/learn/by-example/url-encode-decode/)** | URL encoding/decoding |
 
 ### Testing
 

@@ -25,7 +25,7 @@ In this tutorial, you will learn how to:
 
 Before getting started, ensure that the following requirements are met:
 
-- Install the [WSO2 Integrator VS Code extension](/docs/get-started/install)
+- Install the [WSO2 Integrator VS Code extension](/docs/get-started/setup/local-setup)
 - Set up an MSSQL database for agent memory persistence
 - Have a basic understanding of memory configuration concepts. For more information, refer to [Memory](/docs/genai/develop/agents/memory)
 

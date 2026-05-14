@@ -81,7 +81,7 @@ WSO2 Integrator 5.0.0 also brings enhancements to the MI profile with the releas
 - **AMQP 1.0 protocol support**, a **gRPC connector** with import support, **nested and reusable queries** in Data Services, and optimized **Ballerina-to-MI connector conversion**.
 - **Enterprise-grade security improvements** including FIPS-certified cryptography (Bouncy Castle FIPS provider), built-in OAuth 2.0 and JWT validation handlers, and post-quantum cryptography capabilities.
 
-WSO2 Integrator 5.0.0 is available now. [Install WSO2 Integrator](/docs/get-started/install) or sign up for SaaS today.
+WSO2 Integrator 5.0.0 is available now. [Install WSO2 Integrator](/docs/get-started/setup/local-setup) or sign up for SaaS today.
 
 ## Previous releases
 
@@ -89,5 +89,5 @@ See the [WSO2 documentation archive](https://docs.wso2.com) for previous product
 
 ## What's next
 
-- [Install WSO2 Integrator](/docs/get-started/install) -- Get started with the latest release
+- [Install WSO2 Integrator](/docs/get-started/setup/local-setup) -- Get started with the latest release
 - [Build an API Integration](/docs/get-started/build-api-integration) -- Build your first integration

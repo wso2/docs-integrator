@@ -147,6 +147,6 @@ For ahead-of-time compilation to native executables:
 
 ## See also
 
-- [Installation Guide](/docs/get-started/install) -- Step-by-step installation instructions
-- [Docker and Kubernetes Deployment](/docs/deploy-operate/deploy/docker-kubernetes) -- Container deployment guide
+- [Installation Guide](/docs/get-started/setup/local-setup) -- Step-by-step installation instructions
+- [Docker and Kubernetes Deployment](/docs/deploy/self-hosted/kubernetes) -- Container deployment guide
 - [Troubleshooting](../../develop/debugging/troubleshooting.md) -- Common issues and solutions

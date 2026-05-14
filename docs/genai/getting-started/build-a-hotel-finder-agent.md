@@ -8,7 +8,7 @@ title: Build a Hotel Finder Agent
 
 :::info Prerequisites
 
-- [WSO2 Integrator installed](../../get-started/install.md)
+- [WSO2 Integrator installed](../../get-started/setup/local-setup.md)
 
 ## Step 1: Create the integration
 
