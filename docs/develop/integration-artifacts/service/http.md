@@ -8,9 +8,9 @@ HTTP services expose your integration logic as REST endpoints that clients can c
 
 ## Creating an HTTP service
 
-1. In the design view, select **Add Artifact**.
+1. Select **+ Add Artifact** in the design view, or **+** next to **Entry Points** in the sidebar.
 2. Select **HTTP Service** under **Integration as API**.
-3. Fill in the creation form fields and click **Create**.
+3. Fill in the creation form fields and select **Create**.
 
 <ThemedImage
     alt="HTTP Service creation form showing Service Contract, Service Base Path, and Advanced Configurations"
@@ -42,9 +42,9 @@ Expand **Advanced Configurations** to choose the HTTP listener:
 | **Shared Listener (Port 9090)** | Attaches the service to the project's shared HTTP listener on port 9090. Use this when multiple services share the same port. |
 | **Custom Listener** | Creates a dedicated listener for this service. Enter the port in the **Listener Port** field that appears. Use this when the service needs its own port or TLS configuration. |
 
-After clicking **Create**, WSO2 Integrator opens the service in the **Service Designer**. The header shows the attached listener pill and the service base path. Click **+ Resource** to add HTTP endpoints and then click any resource row to open it in the flow designer and build the integration logic.
+After selecting **Create**, WSO2 Integrator opens the service in the **Service Designer**. The header shows the attached listener pill and the service base path. Select **+ Add Resource** to add HTTP endpoints and then select any resource row to open it in the flow designer and build the integration logic.
 
-The following complete, runnable Ballerina program.
+The following complete, runnable Ballerina program creates an HTTP service.
 
 ```ballerina
 import ballerina/http;
@@ -69,28 +69,13 @@ Save this as `main.bal`, then run `bal run` from the project directory. Send a r
 
 Service configuration controls the base path and advanced service-level settings such as CORS policy, authentication, and payload validation.
 
-In the **Service Designer**, click **Configure** in the service header to open the **HTTP Service Configuration** form. The form has two parts: the **Base Path** field at the top, and an expandable **Service Configuration** section for advanced settings.
+In the **Service Designer**, select **Configure** in the service header to open the **HTTP Service Configuration** form. The form has two parts: the **Base Path** field at the top, and an expandable **Service Configuration** section for advanced settings.
 
 | Field | Description |
 |---|---|
 | **Base Path** | URL prefix for all resources in this service (for example, `/api`). Changing this field updates the service declaration in the code. Required. |
 
-Expand **Service Configuration** and click the edit icon to open the record editor. Settings configured here apply to all resources in the service unless a resource overrides them.
-
-| Field | Description |
-|---|---|
-| **host** | Virtual host name used to identify this service when multiple services share the same listener. |
-| **compression** | Controls response compression. Configure the compression algorithm and which content types to compress. |
-| **chunking** | Chunked transfer encoding mode for responses. Options: `AUTO` (default), `ALWAYS`, `NEVER`. |
-| **cors** | CORS policy applied to all resources in this service. Configure allowed origins, methods, and headers. |
-| **auth** | Authentication handlers applied at the service level. All resources inherit this setting unless overridden. |
-| **mediaTypeSubtypePrefix** | Custom prefix added to the media type subtype in the `Content-Type` response header. |
-| **treatNilableAsOptional** | When enabled (default), nilable-typed parameters are treated as optional in the request. |
-| **openApiDefinition** | Inline OpenAPI definition attached to the service for documentation and validation purposes. |
-| **validation** | When enabled (default), validates inbound request payloads against the declared schema. |
-| **serviceType** | Overrides the default service dispatch behavior. Use for advanced routing scenarios. |
-| **basePath** | Override the base path declared on the service, useful when attaching the service to a different path at runtime. |
-| **laxDataBinding** | When enabled, allows data binding to succeed even if the payload contains extra fields not in the schema. |
+Expand **Service Configuration** and select the edit icon to open the record editor. Settings configured here apply to all resources in the service unless a resource overrides them. See [Service configuration fields](#service-configuration-fields) below for the full list.
 
 Service-level settings map to the `@http:ServiceConfig` annotation placed before the `service` declaration. Settings applied here affect all resources in the service unless overridden at the resource level.
 
@@ -110,7 +95,9 @@ service /api on new http:Listener(8090) {
 }
 ```
 
-All `@http:ServiceConfig` fields:
+See [Service configuration fields](#service-configuration-fields) below for the full list of `@http:ServiceConfig` fields.
+
+### Service configuration fields
 
 | Field | Description |
 |---|---|
@@ -148,27 +135,11 @@ When your service is attached to the shared HTTP default listener, listener sett
     }}
 />
 
-Configure the following listener settings. For standard HTTP setups, only **Port** is required. Configure **Secure Socket** to enable HTTPS.
+For standard HTTP setups, only **Port** is required. Configure **Secure Socket** to enable HTTPS. See [Listener configuration fields](#listener-configuration-fields) below for the full list.
 
-| Field | Description | Default |
-|---|---|---|
-| **Port** | Listening port of the HTTP service listener. Required. |  |
-| **Host** | Host name or IP address the listener binds to. | `0.0.0.0` |
-| **HTTP1 Settings** | HTTP/1.x protocol settings (keep-alive, max pipelined requests). | `{}` |
-| **Secure Socket** | TLS/SSL configuration. Configure this to enable HTTPS. | `()` |
-| **HTTP Version** | Highest HTTP version the endpoint supports. | HTTP/2.0 |
-| **Timeout** | Read/write timeout in seconds. Set to `0` to disable. | `60` |
-| **Server** | Value for the `Server` response header. | `()` |
-| **Request Limits** | Inbound size limits for URI, headers, and request body. | `{}` |
-| **Graceful Stop Timeout** | Grace period in seconds before the listener force-stops. | `0` |
-| **Socket Config** | Server socket settings (e.g., `soBackLog` queue length). | `{}` |
-| **HTTP2 Initial Window Size** | Initial HTTP/2 flow-control window size in bytes. | `65535` |
-| **Min Idle Time In Stale State** | Minimum seconds to hold an HTTP/2 connection open after `GOAWAY`. Set to `-1` to close after all in-flight streams finish. | `300` |
-| **Time Between Stale Eviction** | Interval in seconds between HTTP/2 stale connection eviction runs. | `30` |
+Select **+ Attach Listener** at the bottom of the panel to attach an additional listener or to select an existing named listener.
 
-Click **+ Attach Listener** at the bottom of the panel to attach an additional listener or to select an existing named listener.
-
-**Inline listener**
+### Inline listener
 
 An inline listener is created with the service declaration. Use `configurable` to allow the port to be set via `Config.toml` or an environment variable without changing source code.
 
@@ -184,7 +155,7 @@ service /api on new http:Listener(port) {
 }
 ```
 
-**Named listener**
+### Named listener
 
 Declare the listener at module level and attach multiple services to it. Use this when multiple services share the same port, or when you need a single TLS configuration for all services on that listener.
 
@@ -216,7 +187,9 @@ service /health on httpListener {
 }
 ```
 
-All `http:ListenerConfiguration` fields:
+See [Listener configuration fields](#listener-configuration-fields) below for the full list of `http:ListenerConfiguration` fields.
+
+### Listener configuration fields
 
 | Field | Description | Default |
 |---|---|---|
@@ -240,7 +213,7 @@ Resources define the HTTP endpoints of a service. Each resource maps an HTTP met
 
 ### Defining inputs
 
-Click **+ Resource** in the **Service Designer** to open the resource creation form. Set the HTTP method and path, then add the parameters the resource accepts. Click **Save** to add the resource to the service. Click the resource row to open it in the flow designer.
+Select **+ Add Resource** in the **Service Designer** to open the resource creation form. Set the HTTP method and path, then add the parameters the resource accepts. Select **Save** to add the resource to the service. Select the resource row to open it in the flow designer.
 
 | Field | Description |
 |---|---|
@@ -261,14 +234,14 @@ When you open an existing resource for editing, the **Advanced Parameters** sect
 
 ### Defining response schemas
 
-The **Responses** panel declares every HTTP response the resource can return. Defining responses explicitly gives you compiler validation on the return values and produces an accurate OpenAPI specification. Click **+ Response** to open the **Response Configuration** form for a new entry, or click the edit icon on an existing row.
+The **Responses** panel declares every HTTP response the resource can return. Defining responses explicitly gives you compiler validation on the return values and produces an accurate OpenAPI specification. Select **+ Response** to open the **Response Configuration** form for a new entry, or select the edit icon on an existing row.
 
 | Field | Description |
 |---|---|
 | **Status Code** | HTTP status code for this response (for example, `200 - Ok`, `201 - Created`, `404 - Not Found`). |
 | **Response Body Schema** | Data type of the response body. Leave empty for responses with no body (for example, `204 No Content`). |
 | **Content Type** | Value for the `Content-Type` response header. When left empty, the type is inferred from the body schema: `application/json` for records and maps, `text/plain` for strings, and `application/octet-stream` for byte arrays. |
-| **Headers** | Additional response headers to include in this response. Click **+ Add** to define each header name and type. |
+| **Headers** | Additional response headers to include in this response. Select **+ Add** to define each header name and type. |
 | **Make This Response Reusable** | When checked, this response definition is extracted as a shared type that other resources in the service can reference. |
 
 When multiple response entries are defined, the resource selects which one to return at runtime based on the integration logic.
@@ -280,7 +253,7 @@ When multiple response entries are defined, the resource selects which one to re
 
 ### Advanced configurations
 
-Click **Advanced Configurations** in the resource edit panel to configure settings specific to this resource. These settings override the service-level defaults for this resource only.
+Select **Advanced Configurations** in the resource edit panel to configure settings specific to this resource. These settings override the service-level defaults for this resource only.
 
 | Field | Description |
 |---|---|
@@ -292,7 +265,7 @@ Click **Advanced Configurations** in the resource edit panel to configure settin
 | **transactionInfectable** | When enabled, allows a client-initiated distributed transaction to propagate into this resource. |
 | **linkedTo** | Links this resource to related resources for navigation and documentation purposes. |
 
-Select **Add more resources** before clicking **Save** to add another resource without closing the form.
+Select **Add more resources** before selecting **Save** to add another resource without closing the form.
 
 The examples in this section share the following type definition and data:
 
@@ -307,7 +280,7 @@ type Album record {|
 table key(title) albums = table [];
 ```
 
-**Service paths and routing**
+### Service paths and routing
 
 The base path is defined in the service declaration and the resource path in the resource method definition. Each resource is invoked using the base path, resource path, and resource accessor (HTTP method).
 
@@ -331,7 +304,7 @@ service /info on new http:Listener(9090) {
 }
 ```
 
-**Path parameters**
+### Path parameters
 
 Path parameters are mandatory, variable parts of a resource URL. Define them in the resource path using the syntax `[type name]` (for example, `albums/[string title]`). Supported types are `string`, `int`, `float`, `boolean`, and `decimal`.
 
@@ -348,7 +321,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-**Query parameters**
+### Query parameters
 
 A resource method argument without any annotation is treated as a query parameter extracted from the request URI. The argument name becomes the query key. Supported types are `string`, `int`, `float`, `boolean`, `decimal`, and array types of these. Query parameters can be nilable (`string? artist`) to make them optional, or defaultable (`string artist = "Unknown"`) to provide a fallback value.
 
@@ -367,7 +340,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-**Header parameters**
+### Header parameters
 
 Use the `@http:Header` annotation to bind a request header value to a resource parameter. The parameter name must match the header name (case-insensitive). If the names differ, specify the actual header name in the annotation configuration. The parameter can be a simple type or an array type for multi-value headers. When the parameter is not nilable, the framework returns `400 Bad Request` if the header is absent.
 
@@ -387,7 +360,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-**Payload data binding**
+### Payload data binding
 
 Payload data binding gives direct access to the request body from the resource method signature. Parameters of type `map`, `array`, `tuple`, `table`, `record`, or `xml` are automatically bound to the payload without annotation. For all other types, use `@http:Payload` explicitly. This feature applies to the `POST`, `PUT`, `PATCH`, `DELETE`, and `DEFAULT` accessors. If binding fails, the framework returns `400 Bad Request` to the client.
 
@@ -405,7 +378,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-**Low-level request and response**
+### Low-level request and response
 
 `http:Request` and `http:Response` are low-level abstractions that underpin data binding, header mapping, and query parameter mapping. They can be used on both the client side and the service side. They are useful when implementing advanced scenarios such as gateways, proxy services, or handling multipart requests. In most cases, `http:Request` and `http:Response` are not needed. The high-level abstractions handle the same things with less code.
 
@@ -429,7 +402,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-**Sending responses**
+### Sending responses
 
 Returning an `anydata` value from a resource method sends an HTTP response where the value becomes the body. The `Content-Type` header is inferred from the return type. The status code is `201 Created` for `POST` resources and `200 OK` for all others.
 
@@ -446,7 +419,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-**Status codes without payload**
+### Status codes without payload
 
 Subtypes of `http:StatusCodeResponse` represent specific HTTP status codes. To send a response with no body or headers, return the relevant constant value (for example, `http:CONFLICT`) and declare the corresponding type (for example, `http:Conflict`) in the return signature.
 
@@ -467,7 +440,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-**Status codes with payload**
+### Status codes with payload
 
 Create a subtype of an `http:StatusCodeResponse` record to include a custom body or headers in the response. Override the `body` field with a typed record for compiler validation, better tooling support, and a more accurate OpenAPI specification.
 
@@ -496,7 +469,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-**http:Caller**
+### http:Caller
 
 `http:Caller` represents the client endpoint that sent the request. Use it to send a response imperatively from within the resource. For example, send a `100 Continue` status before processing the body, or do work after the response is already dispatched to the client. When `http:Caller` is present in the resource signature, the return type is constrained to `error?`. In most cases, returning a value from the resource method is simpler and preferred.
 
@@ -517,7 +490,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-**HTTP status code return types**
+### HTTP status code return types
 
 | Return type | HTTP status | Body sent |
 |---|---|---|
@@ -558,7 +531,9 @@ See [Defining response schemas](#defining-response-schemas) for the full configu
 
 The `http:Listener` intercepts errors returned from resource methods and sends a `500 Internal Server Error` response with the error message in the payload. It also logs the error with a stack trace. Errors originating from the listener itself, such as resource not found, data-binding failures, or authorization errors, are converted to their respective status codes (`404`, `400`, `401`, and so on). Use `do/on fail` to take control of error handling inside the resource instead of relying on the default behavior.
 
-**Default error handling**: use `check` to propagate errors; the listener converts them to `500 Internal Server Error` automatically:
+### Default error handling
+
+Use `check` to propagate errors; the listener converts them to `500 Internal Server Error` automatically:
 
 ```ballerina
 import ballerina/http;
@@ -575,7 +550,9 @@ service / on new http:Listener(9090) {
 }
 ```
 
-**Return typed error status codes**: declare status code types in the return signature to control which HTTP status each error case maps to:
+### Return typed error status codes
+
+Declare status code types in the return signature to control which HTTP status each error case maps to:
 
 ```ballerina
 import ballerina/http;
@@ -593,7 +570,9 @@ service / on new http:Listener(9090) {
 }
 ```
 
-**Use `do/on fail` for local recovery**: catch errors inline and return a structured response instead of propagating to the listener:
+### Use `do/on fail` for local recovery
+
+Catch errors inline and return a structured response instead of propagating to the listener:
 
 ```ballerina
 import ballerina/http;
@@ -617,3 +596,4 @@ service / on new http:Listener(9090) {
 
 - [Connections](../supporting/connections.md) — configure HTTP client connections to call external services
 - [Data Mapper](../supporting/data-mapper/data-mapper.md) — transform request/response payloads between formats
+- [Try It for HTTP](../../test/try-it-http.md) — send requests to your HTTP service from the built-in Try It panel
