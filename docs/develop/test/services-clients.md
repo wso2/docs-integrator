@@ -4,7 +4,7 @@ title: Test Services and Clients
 
 # Test Services and Clients
 
-Integration tests for services work differently from unit tests: instead of calling a function directly, you spin up the service and send real HTTP requests to it. The Ballerina test framework handles the service lifecycle for you — services defined in a module start automatically when its tests run and stop when they finish. You focus on writing the requests and asserting the responses.
+Integration tests for services work differently from unit tests: instead of calling a function directly, you spin up the service and send real HTTP requests to it. The Ballerina test framework handles the service lifecycle for you. Services defined in a module start automatically when its tests run and stop when they finish. You focus on writing the requests and asserting the responses.
 
 ## Test a service
 
@@ -29,11 +29,11 @@ http:Client testClient = check new ("http://localhost:9090/orders");
 
 @test:Config
 function testGetOrder() returns error? {
-    // Happy path — valid order ID returns 200.
+    // Happy path: valid order ID returns 200.
     http:Response response = check testClient->/[42].get();
     test:assertEquals(response.statusCode, http:STATUS_OK);
 
-    // Error path — invalid ID returns 404.
+    // Error path: invalid ID returns 404.
     response = check testClient->/[-1].get();
     test:assertEquals(response.statusCode, http:STATUS_NOT_FOUND);
     test:assertEquals(response.getTextPayload(), "Order not found");
@@ -44,7 +44,7 @@ The service starts automatically only when the test module is the same module wh
 
 ## Mock an external client
 
-When your integration calls an external API, you should not make real network calls during testing — the external service may be unavailable, slow, or charge per request. Object mocking lets you intercept those calls and return the exact response the test needs, making your tests fast, deterministic, and offline-capable.
+When your integration calls an external API, you should not make real network calls during testing, since the external service may be unavailable, slow, or charge per request. Object mocking lets you intercept those calls and return the exact response the test needs, making your tests fast, deterministic, and offline-capable.
 
 ```ballerina
 import ballerina/http;
@@ -77,7 +77,7 @@ function testSuccessfulCharge() {
 
 ### Return different responses per call
 
-When a test calls the same method multiple times and expects different results each time — for example, the first call succeeds and the second simulates a retry — use `thenReturnSequence`.
+When a test calls the same method multiple times and expects different results each time (for example, the first call succeeds and the second simulates a retry), use `thenReturnSequence`.
 
 ```ballerina
 import ballerina/http;
@@ -110,7 +110,7 @@ Variables declared as `final` cannot be reassigned, which makes them impossible 
 ```ballerina
 import ballerina/http;
 
-// Production code — initialize through a function so the test can intercept it.
+// Production code. Initialize through a function so the test can intercept it.
 final http:Client paymentGateway = check initPaymentClient();
 
 function initPaymentClient() returns http:Client|error {
@@ -122,7 +122,7 @@ function initPaymentClient() returns http:Client|error {
 import ballerina/http;
 import ballerina/test;
 
-// Test file — mock the initialization function so the final variable gets the mock.
+// Test file. Mock the initialization function so the final variable gets the mock.
 @test:Mock {functionName: "initPaymentClient"}
 function getMockPaymentClient() returns http:Client|error {
     return test:mock(http:Client);
@@ -162,7 +162,7 @@ function testOrdersEndpoint() returns error? {
 ```
 
 ```toml
-# tests/Config.toml — only loaded when running bal test
+# tests/Config.toml: only loaded when running bal test
 servicePort = 9091
 serviceHost = "http://localhost:9091"
 ```
@@ -171,3 +171,5 @@ serviceHost = "http://localhost:9091"
 
 - [Mocking](mocking.md) — stub resources, member variables, and module functions in detail
 - [Write unit tests](unit-testing.md) — `@test:Config` attributes and assertions reference
+- [Configure test lifecycle](configure-tests.md) — set up and tear down state at the suite, group, and per-test level
+- [Execute tests](execute-tests.md) — CLI options for filtering, rerunning, and parallelizing tests

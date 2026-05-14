@@ -4,7 +4,7 @@ title: Test Groups
 
 # Test Groups
 
-As an integration grows, so does its test suite. Running the entire suite on every change is wasteful when you only care about a specific area — for example, running payment tests after touching the billing module. Test groups let you tag tests with labels and control which labels run from the command line, without touching the test code itself.
+As an integration grows, so does its test suite. Running the entire suite on every change is wasteful when you only care about a specific area, for example, running payment tests after touching the billing module. Test groups let you tag tests with labels and control which labels run from the command line, without touching the test code itself.
 
 Assign a test to one or more groups using the `groups` attribute in `@test:Config`.
 
@@ -111,7 +111,7 @@ I'm a test belonging to group g1!
 
 ## Group-level setup and teardown
 
-Groups often share setup state — a seeded database table or a mock server — that should start once before the group and stop once after. Use `@test:BeforeGroups` and `@test:AfterGroups` to attach that logic to the group rather than duplicating it inside each test.
+Groups often share setup state, such as a seeded database table or a mock server, that should start once before the group and stop once after. Use `@test:BeforeGroups` and `@test:AfterGroups` to attach that logic to the group rather than duplicating it inside each test.
 
 ```ballerina
 import ballerina/io;

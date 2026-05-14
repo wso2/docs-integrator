@@ -34,7 +34,7 @@ The extended report adds:
 - Module-level average coverage
 - Per-source-file line coverage with highlighted covered and uncovered lines
 
-Coverage measurement only includes Ballerina source files in the package — files inside the `tests/` directory are excluded because they are test infrastructure, not production code.
+Coverage measurement only includes Ballerina source files in the package. Files inside the `tests/` directory are excluded because they are test infrastructure, not production code.
 
 ## Enforce a minimum coverage threshold
 

@@ -27,7 +27,7 @@ Two scoping rules apply:
 
 ## Assertions
 
-Assertions compare what your code produced against what you expected. When they do not match, the test fails with a descriptive message pointing to the exact difference. The optional `message` parameter appears in the failure output — use it to explain the intent of the assertion so failures are easy to diagnose.
+Assertions compare what your code produced against what you expected. When they do not match, the test fails with a descriptive message pointing to the exact difference. The optional `message` parameter appears in the failure output. Use it to explain the intent of the assertion so failures are easy to diagnose.
 
 | Function | What it checks |
 |---|---|

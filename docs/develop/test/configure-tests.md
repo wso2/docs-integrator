@@ -8,7 +8,7 @@ Most tests need some state set up before they run and cleaned up after they fini
 
 ## Suite level
 
-Suite-level functions run exactly once — before the first test in the module starts, or after the last one finishes. Use them for heavyweight resources that are too expensive to create and destroy per test, such as a database connection pool or an embedded server.
+Suite-level functions run exactly once, before the first test in the module starts or after the last one finishes. Use them for heavyweight resources that are too expensive to create and destroy per test, such as a database connection pool or an embedded server.
 
 ### `@test:BeforeSuite`
 
@@ -53,7 +53,7 @@ function stopEmbeddedServer() {
 
 ## Group level
 
-Group-level functions run once per group — before the first test in the group, or after the last one. Use them when a subset of tests shares a resource that other tests do not need, such as a seeded table in a database or a specific mock server.
+Group-level functions run once per group, before the first test in the group or after the last one. Use them when a subset of tests shares a resource that other tests do not need, such as a seeded table in a database or a specific mock server.
 
 ### `@test:BeforeGroups`
 
@@ -100,7 +100,7 @@ Set `alwaysRun: true` on `@test:AfterGroups` to guarantee the cleanup runs even 
 
 ## Every-test level
 
-Every-test functions run before or after each individual test in the module. Use them to reset shared mutable state — for example, clearing a cache, resetting a counter, or restoring a mock — so each test starts from a known baseline regardless of what the previous test did.
+Every-test functions run before or after each individual test in the module. Use them to reset shared mutable state (for example, clearing a cache, resetting a counter, or restoring a mock) so each test starts from a known baseline regardless of what the previous test did.
 
 ### `@test:BeforeEach`
 
@@ -136,7 +136,7 @@ import ballerina/test;
 
 @test:AfterEach
 function logTestCompletion() {
-    io:println("Test finished — clearing temporary files");
+    io:println("Test finished. Clearing temporary files");
 }
 
 @test:Config
@@ -178,7 +178,7 @@ function testFulfillOrder() {
 
 ## Control execution order
 
-By default, the framework does not guarantee the order in which test functions run. When one test relies on a side effect produced by another — for example, a record created in `testCreateOrder` that `testFulfillOrder` reads — use `dependsOn` to declare the dependency explicitly.
+By default, the framework does not guarantee the order in which test functions run. When one test relies on a side effect produced by another (for example, a record created in `testCreateOrder` that `testFulfillOrder` reads), use `dependsOn` to declare the dependency explicitly.
 
 ```ballerina
 import ballerina/test;
@@ -204,13 +204,13 @@ function testArchiveOrder() {
 
 The order within the `dependsOn` array has no effect. For a strict chain, declare each test dependent on the previous one, as shown above.
 
-## Failure behaviour
+## Failure behavior
 
 Understanding what happens when a lifecycle function fails helps you design resilient test suites.
 
 | Failure in | What gets skipped |
 |---|---|
-| `@test:BeforeSuite` | Everything — no tests or teardown functions run except `@test:AfterSuite` with `alwaysRun: true`. |
+| `@test:BeforeSuite` | Everything. No tests or teardown functions run except `@test:AfterSuite` with `alwaysRun: true`. |
 | `@test:BeforeGroups` | All tests in that group and their teardown. `@test:AfterGroups` is skipped unless `alwaysRun: true`. |
 | `@test:BeforeEach` | All remaining test functions. `@test:AfterSuite` still runs. |
 | `before` attribute function | The test itself and its `after` function are both skipped. |

@@ -29,7 +29,7 @@ function getStockLevel(string sku) returns StockLevel|error {
     return check inventoryClient->get("/stock/" + sku);
 }
 
-// Test double — only implements `get`, which is the only method called above.
+// Test double. Only implements `get`, which is the only method called above.
 public client class MockInventoryClient {
     remote function get(string path, map<string|string[]>? headers = (),
                         http:TargetType targetType = http:Response)
@@ -181,47 +181,47 @@ import ballerina/test;
 function testWelcomeEmployee() {
     empClient = test:mock(EmpClient);
 
-    // 1. General stub — matches any call.
+    // 1. General stub: matches any call.
     test:prepare(empClient)
         .whenResource("employee/welcome/:id")
         .onMethod("get")
-        .thenReturn("Welcome — general");
+        .thenReturn("Welcome: general");
 
-    // 2. Path-specific stub — matches calls with id "emp014".
+    // 2. Path-specific stub: matches calls with id "emp014".
     test:prepare(empClient)
         .whenResource("employee/welcome/:id")
         .onMethod("get").withPathParameters({id: "emp014"})
-        .thenReturn("Welcome — path matched");
+        .thenReturn("Welcome: path matched");
 
-    // 3. Arguments-specific stub — matches calls with firstName "Alice" and lastName "Smith".
+    // 3. Arguments-specific stub: matches calls with firstName "Alice" and lastName "Smith".
     test:prepare(empClient)
         .whenResource("employee/welcome/:id")
         .onMethod("get").withArguments("Alice", "Smith")
-        .thenReturn("Welcome — args matched");
+        .thenReturn("Welcome: args matched");
 
-    // 4. Path and arguments stub — most specific; matches only when both match.
+    // 4. Path and arguments stub: most specific. Matches only when both match.
     test:prepare(empClient)
         .whenResource("employee/welcome/:id")
         .onMethod("get")
         .withPathParameters({id: "emp014"})
         .withArguments("Alice", "Smith")
-        .thenReturn("Welcome — exact match");
+        .thenReturn("Welcome: exact match");
 
-    // Both path and args match stub 4 — most specific wins.
+    // Both path and args match stub 4. Most specific wins.
     string result = empClient->/employee/welcome/["emp014"].get(firstName = "Alice", lastName = "Smith");
-    test:assertEquals(result, "Welcome — exact match");
+    test:assertEquals(result, "Welcome: exact match");
 
     // Args match stub 3, path does not match stub 2 or 4.
     result = empClient->/employee/welcome/["emp001"].get(firstName = "Alice", lastName = "Smith");
-    test:assertEquals(result, "Welcome — args matched");
+    test:assertEquals(result, "Welcome: args matched");
 
     // Path matches stub 2, args do not match stub 3 or 4.
     result = empClient->/employee/welcome/["emp014"].get(firstName = "John", lastName = "Doe");
-    test:assertEquals(result, "Welcome — path matched");
+    test:assertEquals(result, "Welcome: path matched");
 
-    // Neither path nor args match any specific stub — falls back to stub 1.
+    // Neither path nor args match any specific stub. Falls back to stub 1.
     result = empClient->/employee/welcome/["emp001"].get(firstName = "John", lastName = "Doe");
-    test:assertEquals(result, "Welcome — general");
+    test:assertEquals(result, "Welcome: general");
 }
 ```
 
@@ -313,7 +313,7 @@ public function roundToTwoDecimals(decimal value) returns decimal {
     return <decimal>(<int>(value * 100.0d)) / 100.0d;
 }
 
-// Test file — replace `roundToTwoDecimals` with a stub that always returns a fixed value.
+// Test file. Replace `roundToTwoDecimals` with a stub that always returns a fixed value.
 @test:Mock {functionName: "roundToTwoDecimals"}
 test:MockFunction roundMockFn = new ();
 
@@ -412,3 +412,5 @@ function testStubThenRestore() {
 
 - [Test services and clients](services-clients.md) — mock HTTP clients directly in service integration tests
 - [Write unit tests](unit-testing.md) — assertions and `@test:Config` reference
+- [Execute tests](execute-tests.md) — run mocked tests in isolation or as part of the full suite
+- [Data-driven tests](data-driven-tests.md) — combine mocks with data providers for parameterized coverage

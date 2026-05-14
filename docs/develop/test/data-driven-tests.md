@@ -4,7 +4,7 @@ title: Data-Driven Tests
 
 # Data-Driven Tests
 
-A data-driven test decouples the test logic from the test data. Instead of writing a separate test function for each input combination, you write one function and point it at a data provider — a function that returns a collection of input sets. The framework calls the test function once per set, passing each row as arguments.
+A data-driven test decouples the test logic from the test data. Instead of writing a separate test function for each input combination, you write one function and point it at a data provider, a function that returns a collection of input sets. The framework calls the test function once per set, passing each row as arguments.
 
 Set the `dataProvider` field in `@test:Config` to the name of the provider function.
 
@@ -134,3 +134,5 @@ bal test --tests testDiscountCalculation#"*-percent"
 
 - [Test groups](groups.md) — partition tests into named groups and run or skip subsets
 - [Execute tests](execute-tests.md) — full CLI reference for filtering, rerunning, and parallel execution
+- [Write unit tests](unit-testing.md) — assertions and `@test:Config` reference used inside data-driven tests
+- [Mocking](mocking.md) — combine data providers with mocked dependencies
