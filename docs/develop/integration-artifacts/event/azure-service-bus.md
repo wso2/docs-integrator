@@ -113,18 +113,18 @@ listener asb:Listener asbListener = new ({
 
 ## Event handlers
 
-Azure Service Bus services support two handler types — `onMessage` and `onError` — both added directly without additional configuration.
+Azure Service Bus services support two handler types: `onMessage` and `onError`, both added directly without additional configuration.
 
 ### Adding an event handler
 
-In the **Service Designer**, click **+ Add Handler**. The **Select Handler to Add** panel lists `onMessage` and `onError`. Click either handler to add it directly — no additional configuration is required.
+In the **Service Designer**, click **+ Add Handler**. The **Select Handler to Add** panel lists `onMessage` and `onError`. Click either handler to add it directly. No additional configuration is required.
 
 | Handler | Triggered when |
 |---|---|
 | **onMessage** | A new message arrives from the queue or topic subscription |
 | **onError** | A message retrieval or processing error occurs |
 
-**onMessage handler** — called for each message received:
+**onMessage handler**: called for each message received:
 
 ```ballerina
 type InvoiceMessage record {|
@@ -148,7 +148,7 @@ service asb:Service on asbListener {
 }
 ```
 
-**onError handler** — called when message retrieval fails:
+**onError handler**: called when message retrieval fails:
 
 ```ballerina
 service asb:Service on asbListener {
@@ -189,7 +189,7 @@ The `onMessage` handler receives an `asb:Message` parameter with the message con
 
 ## What's next
 
+- [Azure Service Bus connector reference](../../../connectors/catalog/messaging/asb/azure-service-bus-connector-overview.md) — full connector API reference
 - [RabbitMQ](rabbitmq.md) — consume messages from RabbitMQ queues
 - [Kafka](kafka.md) — consume messages from Apache Kafka topics
 - [Connections](../supporting/connections.md) — reuse Azure Service Bus connection strings across services
-- [Azure Service Bus connector reference](../../../connectors/catalog/messaging/asb/azure-service-bus-connector-overview.md) — full connector API reference

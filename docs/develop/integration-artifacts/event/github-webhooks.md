@@ -180,8 +180,8 @@ When a GitHub Events service is created, WSO2 Integrator adds all handlers for t
 | `onOpened` | A pull request is opened | `github:PullRequestEvent` |
 | `onClosed` | A pull request is closed or merged | `github:PullRequestEvent` |
 | `onReopened` | A closed pull request is reopened | `github:PullRequestEvent` |
-| `onAssigned` | A reviewer is assigned | `github:PullRequestEvent` |
-| `onUnassigned` | A reviewer is unassigned | `github:PullRequestEvent` |
+| `onAssigned` | A user is assigned to a pull request | `github:PullRequestEvent` |
+| `onUnassigned` | A user is unassigned from a pull request | `github:PullRequestEvent` |
 | `onLabeled` | A label is added | `github:PullRequestEvent` |
 | `onUnlabeled` | A label is removed | `github:PullRequestEvent` |
 | `onEdited` | A pull request title, body, or base branch is edited | `github:PullRequestEvent` |
@@ -209,8 +209,8 @@ When a GitHub Events service is created, WSO2 Integrator adds all handlers for t
 | Handler | Triggered when | Payload type |
 |---|---|---|
 | `onCreated` | A comment is added to a pull request diff | `github:PullRequestReviewCommentEvent` |
-| `onEdited` | A diff comment is edited | `github:PullRequestReviewCommentEvent` |
-| `onDeleted` | A diff comment is deleted | `github:PullRequestReviewCommentEvent` |
+| `onEdited` | A comment on a pull request diff is edited | `github:PullRequestReviewCommentEvent` |
+| `onDeleted` | A comment on a pull request diff is deleted | `github:PullRequestReviewCommentEvent` |
 
 ### ReleaseService handlers
 
@@ -258,8 +258,6 @@ When a GitHub Events service is created, WSO2 Integrator adds all handlers for t
 | `onConverted` | A card note is converted to an issue | `github:ProjectCardEvent` |
 | `onDeleted` | A card is deleted from a project board | `github:ProjectCardEvent` |
 
-Payload types for services other than `IssuesService` are inferred from the trigger package naming convention. Verify all types against the `ballerinax/trigger.github` source before relying on them in production code.
-
 ## Error handling
 
 If an event handler returns an error, the GitHub listener logs the error and continues processing subsequent events. Use `do/on fail` inside each handler to catch and recover from expected failures without propagating them to the listener.
@@ -287,4 +285,4 @@ Return `error?` from a handler to allow unhandled errors to propagate to the lis
 - [Salesforce Events](salesforce-events.md) — listen to Salesforce Change Data Capture events
 - [Connections](../supporting/connections.md) — reuse GitHub credentials across services
 - [GitHub connector reference](../../../connectors/catalog/developer-tools/github/connector-overview.md) — full connector API reference
-- [Setup Guide](../../../connectors/catalog/developer-tools/github/setup-guide.md) — create a GitHub Personal Access Token and configure a repository webhook
+- [GitHub Personal Access Token Setup Guide](../../../connectors/catalog/developer-tools/github/setup-guide.md) — create a GitHub Personal Access Token and configure a repository webhook
