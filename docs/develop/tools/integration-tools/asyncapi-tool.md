@@ -6,14 +6,6 @@ title: AsyncAPI Tool
 
 The `bal asyncapi` tool generates Ballerina code from AsyncAPI specifications, enabling you to build event-driven integrations that consume and produce messages on Kafka, RabbitMQ, MQTT, WebSocket, and other messaging protocols. The generated code includes listener services, publisher clients, and message types derived from the AsyncAPI schema.
 
-## Prerequisites
-
-The AsyncAPI tool is included with the Ballerina distribution:
-
-```bash
-bal asyncapi --help
-```
-
 ## Generating a service from an AsyncAPI spec
 
 The AsyncAPI tool is currently supported only through the Ballerina CLI (pro-code). Visual Designer support for AsyncAPI service generation is not yet available.

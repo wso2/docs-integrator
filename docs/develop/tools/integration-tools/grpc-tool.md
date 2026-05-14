@@ -10,16 +10,6 @@ gRPC code generation is not available through the Visual Designer — **+ Add Ar
 
 ---
 
-## Prerequisites
-
-The gRPC tool is included with the Ballerina distribution. Verify it is available by running the following command in the terminal in the WSO2 Integrator:
-
-```bash
-bal grpc --help
-```
-
----
-
 ## Example proto file
 
 The examples throughout this page use the following proto file:

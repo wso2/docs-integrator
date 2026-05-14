@@ -8,7 +8,7 @@ Function artifacts encapsulate reusable logic that can be called from any integr
 
 ## Adding a function
 
-1. Open the **Artifacts** page and select **Function** under **Other Artifacts**, or select **+** next to **Functions** in the left sidebar.
+1. Click **+** next to **Functions** in the sidebar. Alternatively, click **+ Add Artifact** in the **Design** panel, then click **Function** under **Other Artifacts** or **Library Artifacts**.
 
    ![Artifacts page with the Function option highlighted under Other Artifacts](/img/develop/integration-artifacts/supporting/functions/functions-artifact-selection.png)
 
@@ -20,46 +20,32 @@ Function artifacts encapsulate reusable logic that can be called from any integr
    |---|---|
    | **Name** | A unique identifier for the function (for example, `validateOrder`). Required. |
    | **Description** | Optional description of the function's purpose. |
-   | **Public** | Select **Make visible across the project** to use this function from other integrations. |
-   | **Parameters** | Select **+ Add Parameter** to define each input. Each parameter has a name and a type. |
+   | **Public** | Select **Make visible across the project** to allow use from other integrations. |
+   | **Parameters** | Click **+ Add Parameter** to define each input. Each parameter requires a name and a type, and optionally a description. |
    | **Return Type** | The type of the value returned by the function. Leave empty for functions that return nothing. |
 
-3. Select **Create**. The function is added to `functions.bal` and opens in the flow designer canvas, where you add integration steps.
+3. Click **Create**. The function is added to `functions.bal` and opens in the flow designer canvas, where you add the integration steps as the function body.
 
 ```ballerina
-// functions.bal
+import ballerina/lang.regexp;
 
-function validateEmail(string email) returns boolean {
-    return email.includes("@") && email.includes(".");
-}
-
-function validateOrderRequest(OrderRequest request) returns string[] {
-    string[] errors = [];
-
-    if request.items.length() == 0 {
-        errors.push("Order must have at least one item");
+# Validates an email address
+# + email - The email address to validate
+# + return - Whether the email address is valid
+public function isValidEmailAddress(string email) returns boolean {
+    string:RegExp|error emailPattern = regexp:fromString("^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$");
+    if emailPattern is error {
+        return false;
     }
-
-    foreach LineItem item in request.items {
-        if item.quantity <= 0 {
-            errors.push("Invalid quantity for product: " + item.productId);
-        }
-        if item.unitPrice < 0d {
-            errors.push("Invalid price for product: " + item.productId);
-        }
-    }
-
-    if request.shippingAddress.zipCode.length() != 5 {
-        errors.push("ZIP code must be 5 digits");
-    }
-
-    return errors;
+    return emailPattern.isFullMatch(email);
 }
 ```
 
-## Function configuration
+## Editing a function
 
-To open a function's flow view, select its name in the sidebar under **Functions**. To change the function's name, description, parameters, or return type, select **Configure** in the top-right of the flow view.
+To open and edit a function's flow view, click its name in the sidebar under **Functions**.
+
+To change the function's name, description, parameters, or return type, click **Configure** in the top-right of the flow view.
 
 ![Function flow view with a function selected in the sidebar and the Configure button highlighted](/img/develop/integration-artifacts/supporting/functions/function-configure.png)
 
@@ -90,14 +76,14 @@ my-integration/
 
 | Practice | Description |
 |---|---|
-| **Single responsibility** | Each function should do one thing well |
-| **Typed parameters** | Use specific record types instead of `json` or `anydata` |
-| **Error returns** | Return `error?` for operations that can fail |
-| **Isolated functions** | Mark pure functions as `isolated` for thread safety |
-| **Descriptive names** | Use verb-based names like `validateOrder`, `calculateTotal` |
+| **Typed parameters** | Use specific record types instead of `json` or `anydata`. |
+| **Error returns** | Return `error?` for operations that can fail. |
+| **Isolated functions** | Mark functions as `isolated`. The compiler then verifies there is no unsafe access of shared mutable state, making them safe to call concurrently. |
+| **Descriptive names** | Start function names with a verb (for example, `validateOrder`, `calculateTotal`). |
 
 ## What's next
 
-- [Data mapper](./data-mapper/data-mapper.md) — Transform data between record types using a visual canvas.
 - [Types](./types.md) — Define record types for function parameters and return values.
+- [Data mapper](./data-mapper/data-mapper.md) — Transform data between record types using a visual canvas.
 - [Connections](./connections.md) — Reuse connection configurations across integration artifacts.
+- [Configurations](./configurations.md) — Externalize values such as endpoints and credentials.
