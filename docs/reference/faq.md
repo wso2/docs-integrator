@@ -123,7 +123,7 @@ This allows you to use the same built artifact across development, staging, and 
 
 ### How do I handle secrets and sensitive configuration?
 
-WSO2 Integrator uses `Config.toml` files for runtime configuration. For secrets, keep them in a separate `Config.toml` (or another file referenced via the `BAL_CONFIG_FILES` environment variable) that is not checked into version control. Never commit secret values to git, whether they sit in `Config.toml` or anywhere else. In Kubernetes, mount the secret file from a `Secret`, or inject individual values as environment variables using `BAL_CONFIG_VAR_*` prefixes. See the [Environment Variables](/docs/reference/config/environment-variables) reference for details.
+WSO2 Integrator uses `Config.toml` files for runtime configuration. For secrets, keep them in a separate `Config.toml` (or another file referenced via the `BAL_CONFIG_FILES` environment variable) that is not checked into version control. Never commit secret values to git, whether they sit in `Config.toml` or anywhere else. In Kubernetes, mount the secret file from a `Secret`, or inject individual values as environment variables using `BAL_CONFIG_VAR_*` prefixes. See [Secrets and encryption](/docs/deploy-operate/secure/secrets-encryption) for the full pattern and [Configuration management](/docs/reference/config/configuration-management) for the underlying environment-variable reference.
 
 ### Does WSO2 Integrator support horizontal scaling?
 

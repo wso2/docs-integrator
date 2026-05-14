@@ -213,4 +213,4 @@ file = "./Secret.toml"
 
 - [Ballerina.toml reference](ballerinatoml-reference.md) — set the `cloud` build option and configure package metadata
 - [Config.toml reference](configtoml-reference.md) — supply runtime configuration values mounted via `[[cloud.config.files]]`
-- [Environment variables](environment-variables.md) — override configuration at runtime without modifying files
+- [Configuration management](configuration-management.md) — supply runtime values, override via environment variables, and target per-environment configuration

@@ -260,4 +260,4 @@ bal wsdl -i service.wsdl --soap-version 1.2
 
 - [XSD Tool](xsd-tool.md) -- Generate record types from XML Schema definitions
 - [OpenAPI Tool](openapi-tool.md) -- Generate REST services and clients
-- [Configuration Management](/docs/develop/design-logic/configuration-management) -- Manage SOAP endpoint configuration per environment
+- [Configuration Management](/docs/reference/config/configuration-management) -- Manage SOAP endpoint configuration per environment

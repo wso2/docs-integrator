@@ -75,7 +75,7 @@ Use predicate-based content routing with [if/else statements](/docs/develop/desi
 
 1. Create or open the resource or function that contains the routing decision.
 2. Add HTTP client connections for the possible recipients. See [creating a connection](/docs/develop/design-logic/managing-connections#creating-a-connection) and the [HTTP client reference](/docs/connectors/catalog/built-in/http/action-reference#client).
-3. Add a [configurable variable](/docs/develop/design-logic/configuration-management#configurable-variables) for any route rule that should change by environment, such as `bulkThreshold`.
+3. Add a [configurable variable](/docs/reference/config/configuration-management#configurable-variables) for any route rule that should change by environment, such as `bulkThreshold`.
 4. Open the flow and add an [If node](/docs/develop/design-logic/control-flow#ifelse-statements) with a condition such as `order.quantity >= bulkThreshold`.
 5. Add the bulk recipient call inside the **True** branch.
 6. In the **False** branch, add another **If** node with a condition such as `order.priority`.

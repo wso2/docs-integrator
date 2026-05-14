@@ -19,7 +19,7 @@ Use stateful round-robin dispatch when each incoming message should be sent to t
 
 1. Create an [HTTP service](/docs/develop/integration-artifacts/service/http#creating-an-http-service) for the dispatcher entry point.
 2. Add a `GET` resource, such as `/process`, and define a query parameter that carries the message reference, such as `resourceUrl`. See [resource inputs](/docs/develop/integration-artifacts/service/http#defining-inputs).
-3. Add the outbound processor [HTTP connection](/docs/develop/design-logic/managing-connections#creating-a-connection). Configure its base URL with a [configurable variable](/docs/develop/design-logic/configuration-management#configurable-variables).
+3. Add the outbound processor [HTTP connection](/docs/develop/design-logic/managing-connections#creating-a-connection). Configure its base URL with a [configurable variable](/docs/reference/config/configuration-management#configurable-variables).
 4. Add a service-level variable named `nextProcessor` with type `int` and default value `0`.
 5. In the resource flow, add the processor selection logic as a Ballerina code block: read `nextProcessor`, advance it inside a `lock`, and store the selected processor ID.
 6. Add the HTTP connector call that includes the selected processor ID in the request path and passes the message reference as a query parameter.

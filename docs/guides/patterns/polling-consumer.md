@@ -19,7 +19,7 @@ Use loop-driven polling with [while loops](/docs/develop/design-logic/control-fl
 
 1. Create or open the [HTTP service resource](/docs/develop/integration-artifacts/service/http#creating-an-http-service) that starts the polling flow.
 2. Add an HTTP client connection for the source that the flow must poll. See [creating a connection](/docs/develop/design-logic/managing-connections#creating-a-connection) and the [HTTP client reference](/docs/connectors/catalog/built-in/http/action-reference#client).
-3. Add [configurable variables](/docs/develop/design-logic/configuration-management#configurable-variables) for values such as `maxAttempts` and `pollDelaySeconds`.
+3. Add [configurable variables](/docs/reference/config/configuration-management#configurable-variables) for values such as `maxAttempts` and `pollDelaySeconds`.
 4. Add a [While node](/docs/develop/design-logic/control-flow#while-loops) that runs while the attempt count is less than `maxAttempts`.
 5. Inside the loop, add the HTTP client operation that asks for the current message or status.
 6. Add an [If node](/docs/develop/design-logic/control-flow#ifelse-statements) that returns the message when it is ready. Otherwise, wait for the configured delay and continue the loop.

@@ -227,4 +227,4 @@ options.mode = "client"
 
 - [Config.toml reference](configtoml-reference.md) — configure runtime values, secrets, and module settings
 - [Cloud.toml reference](cloudtoml-reference.md) — configure Kubernetes and Docker deployment descriptors
-- [Environment variables](environment-variables.md) — override configuration at runtime without modifying files
+- [Configuration management](configuration-management.md) — supply runtime values, override via environment variables, and target per-environment configuration
