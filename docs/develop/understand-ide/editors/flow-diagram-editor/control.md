@@ -22,7 +22,7 @@ The form provides **Add Else IF Block** and **Add Else Block** to extend the bra
 
 ## Match
 
-Matches a value against one or more patterns and runs the steps under the first matching pattern. Use **Match** instead of a chain of **If/Else If** blocks when dispatching on a finite set of values or shapes.
+Matches a value against one or more patterns and runs the steps under the first matching pattern. Use `Match` instead of a chain of `If`/`Else If` blocks when dispatching on a finite set of values or shapes.
 
 ![Match button in the Control section](/img/develop/flow-design-elements/match-node.png)
 

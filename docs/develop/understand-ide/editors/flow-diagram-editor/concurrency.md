@@ -21,19 +21,19 @@ Each worker is configured with a name and a return type. Select **Add Worker** t
 
 ![Fork form with Worker 1 and Worker 2 entries and Add Worker action](/img/develop/flow-design-elements/fork-form.png)
 
-When the **Fork** is added to the flow, the canvas also receives a default **Wait** node that joins every worker in the fork. The generated code is equivalent to:
+When the `Fork` is added to the flow, the canvas also receives a default `Wait` node that joins every worker in the fork. The generated code is equivalent to:
 
 ```ballerina
 map<any|error> waitResult = wait {worker1, worker2};
 ```
 
-Reconfigure the **Wait** node to join only a subset of workers or to name the joined values, as described below.
+Reconfigure the `Wait` node to join only a subset of workers or to name the joined values, as described below.
 
-Use **Fork** to fan out independent calls. For example, hit two different APIs in parallel and combine their results downstream.
+Use `Fork` to fan out independent calls. For example, hit two different APIs in parallel and combine their results downstream.
 
 ## Wait
 
-Joins one or more worker strands started by **Fork** and collects their return values into a single result. The matching **Wait** node is the join point for the workers spawned by an earlier **Fork**.
+Joins one or more worker strands started by **Fork** and collects their return values into a single result. The matching `Wait` node is the join point for the workers spawned by an earlier `Fork`.
 
 ![Wait button in the Concurrency section](/img/develop/flow-design-elements/wait-node.png)
 

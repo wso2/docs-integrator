@@ -16,7 +16,7 @@ To create a new connection, select **+** next to **Connections**. For details on
 
 ## Connection actions
 
-Selecting a connection lists every action it supports. Choosing an action drops it into the flow as a step bound to that connection. The action set depends on the connection type. For a database client, the actions are **Query**, **Query Row**, **Execute**, **Batch Execute**, **Call**, and **Close**.
+Selecting a connection lists every action it supports. Choosing an action drops it into the flow as a step bound to that connection. The action set depends on the connection type. For a database client, the actions are `Query`, `Query Row`, `Execute`, `Batch Execute`, `Call`, and `Close`.
 
 ![Actions available on the mysqlClient connection: Query, Query Row, Execute, Batch Execute, Call, Close](/img/develop/flow-design-elements/connection-actions.png)
 

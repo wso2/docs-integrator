@@ -39,7 +39,7 @@ Calls a function defined in the project, an imported library, or the Ballerina s
 
 ![Call Function button in the Statement section](/img/develop/flow-design-elements/call-function-node.png)
 
-The function picker lists functions in three sections: **Within Project**, **Imported Functions** (functions from imported libraries such as `log`), and **Standard Library**. Select **Create Function** under **Within Project** to define a new function inline.
+The function picker lists functions in three sections: `Within Project`, `Imported Functions` (functions from imported libraries such as `log`), and `Standard Library`. Select **Create Function** under `Within Project` to define a new function inline.
 
 ![Function picker showing Within Project, Imported Functions, and Standard Library entries](/img/develop/flow-design-elements/call-function-options.png)
 
@@ -51,7 +51,7 @@ Adds a data mapper call that transforms data from one record shape to another. U
 
 ![Map Data button in the Statement section](/img/develop/flow-design-elements/map-data-node.png)
 
-The picker lists every data mapper in the project under **Within Project**. Select an existing mapper to invoke it from the flow, or select **Create Data Mapper** to define a new one. New and existing mappers open in the [Data Mapper editor](../datamapper-editor.md), where you draw connections between source and target fields, write inline expressions, or use **Auto Map**.
+The picker lists every data mapper in the project under `Within Project`. Select an existing mapper to invoke it from the flow, or select **Create Data Mapper** to define a new one. New and existing mappers open in the [Data Mapper editor](../datamapper-editor.md), where you draw connections between source and target fields, write inline expressions, or use **Auto Map**.
 
 ![Data Mappers picker with Create Data Mapper action and existing mappers](/img/develop/flow-design-elements/map-data-view.png)
 

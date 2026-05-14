@@ -25,7 +25,7 @@ Click any card to navigate to the [Integrator view](integration-view.md) or [Lib
 
 ### Generate with AI
 
-Click the **Generate with AI** button at the top of the canvas to create a new integration using AI. Describe what you want in natural language, and WSO2 Integrator generates the integration with the appropriate entry points, connections, and logic.
+Click the **Generate with AI** button at the top of the canvas to open the [WSO2 Integrator Copilot](/docs/develop/wso2-integrator-copilot/getting-started). Describe what you want in natural language, and WSO2 Integrator Copilot generates the integration with the appropriate entry points, connections, and logic.
 
 ### Add integration or library
 
@@ -39,10 +39,10 @@ The deployment options panel appears on the right sidebar and provides shortcuts
 
 | Option | Target |
 |---|---|
-| [**Deploy to WSO2 Integration Platform**](/docs/deploy-operate/deploy/devant) | Fully managed cloud platform. |
-| [**Deploy with Docker**](/docs/deploy-operate/deploy/docker-kubernetes) | Container orchestration platforms such as Kubernetes and OpenShift. |
-| [**Deploy on a VM**](/docs/deploy-operate/deploy/vm-based) | Virtual machines or bare-metal servers. |
-| [**Integration Control Plane (ICP)**](/docs/deploy-operate/observe/icp) | Centralized observability and management for deployed integrations. |
+| [**Deploy to WSO2 Cloud**](/docs/deploy/cloud/overview) | Fully managed cloud platform for hosting and running integrations. |
+| [**Deploy with Docker**](/docs/deploy-operate/deploy/docker-kubernetes) | Build Docker images and deploy integrations to Kubernetes clusters. |
+| [**Deploy on a VM**](/docs/deploy-operate/deploy/vm-based-deployment) | Run integrations as standalone JAR files on virtual machines. |
+| [**Integration Control Plane (ICP)**](/docs/deploy-operate/observe/integration-control-plane-icp) | Monitor and manage running integrations from a centralized dashboard. |
 
 At the project level, click **Enable ICP for all integrations** to activate ICP monitoring for every integration in the project at once.
 
@@ -56,5 +56,5 @@ Click **Edit** to modify the README directly. If the project does not have a REA
 
 ## What's next
 
-- [Integrator view](integration-view.md): the primary development interface for individual integrations.
-- [Library view](library-view.md): build and manage reusable libraries.
+- [Integrator view](integration-view.md) — The primary development interface for individual integrations.
+- [Library view](library-view.md) — Build and manage reusable libraries.

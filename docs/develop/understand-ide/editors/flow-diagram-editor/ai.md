@@ -10,13 +10,13 @@ The **AI** section of the node panel lets you build AI-powered integrations dire
 |---|---|---|
 | **Direct LLM** | Send a prompt to an LLM and bind the response to a typed variable. | [Direct LLM calls](../../../../genai/develop/direct-llm/overview.md) |
 | **RAG** | Ground LLM responses in your own documents by retrieving relevant chunks at query time. | [RAG](../../../../genai/develop/rag/overview.md) |
-| **Agent** | Run multi-turn workflows where an LLM plans the next step, calls tools, and uses memory. | [AI agents](../../../../genai/develop/agents/overview.md) |
+| **AI Agent** | Run multi-turn workflows where an LLM plans the next step, calls tools, and uses memory. | [AI agents](../../../../genai/develop/agents/overview.md) |
 
 For an end-to-end orientation to the AI building blocks in WSO2 Integrator, see the [AI Integrations overview](../../../../genai/overview.md).
 
 ## Model Provider
 
-A model provider is the connection that abstracts a specific LLM behind a consistent API. Add a Model Provider once per project and reference it from any node that needs to call an LLM, such as **Augment Query**, **Agent**, or a `generate` action.
+A model provider is the connection that abstracts a specific LLM behind a consistent API. Add a `Model Provider` once per project and reference it from any node that needs to call an LLM, such as `Augment Query`, `Agent`, or a `generate` action.
 
 ![Model Provider button under Direct LLM](/img/develop/flow-design-elements/model-provider-node.png)
 
@@ -57,7 +57,7 @@ For the full reference, see [Knowledge bases](../../../../genai/develop/componen
 
 ## Data Loader
 
-A data loader reads documents from disk into memory so the knowledge base can ingest them. Place a Data Loader at the start of an ingestion flow; the resulting documents are then handed to the knowledge base's **Ingest** action.
+A data loader reads documents from disk into memory so the knowledge base can ingest them. Place a `Data Loader` at the start of an ingestion flow; the resulting documents are then handed to the knowledge base's `Ingest` action.
 
 ![Data Loader button under RAG](/img/develop/flow-design-elements/data-loader-node.png)
 
@@ -67,7 +67,7 @@ A data loader reads documents from disk into memory so the knowledge base can in
 
 ![Data loaders list with Text Data Loader](/img/develop/flow-design-elements/data-loaders-offered.png)
 
-For the ingestion flow, supported formats, and how to point the loader at a directory of documents, see the [RAG overview](../../../../genai/develop/rag/overview.md).
+For the ingestion flow, supported formats, and how to point the loader at a directory of documents, see the [RAG ingestion](/docs/genai/develop/rag/rag-ingestion).
 
 ## Augment Query
 
@@ -84,7 +84,7 @@ For the ingestion flow, supported formats, and how to point the loader at a dire
 
 ![Augment Query form with Context, Query, Result, and Result Type fields](/img/develop/flow-design-elements/augment-query-form.png)
 
-For the full RAG query flow (retrieve, augment, generate), see [RAG](../../../../genai/develop/rag/overview.md).
+For the full RAG query flow (retrieve, augment, generate), see [RAG query](/docs/genai/develop/rag/rag-query).
 
 ## Agent
 
