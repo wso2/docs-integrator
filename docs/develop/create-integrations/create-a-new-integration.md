@@ -46,7 +46,6 @@ WSO2 Integrator generates the project structure and opens the [project view](../
 
 ```
 project-name/
-├── .choreo/
 ├── .vscode/
 ├── integration-name/
 │   ├── .vscode/

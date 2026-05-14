@@ -30,8 +30,6 @@ WSO2 Integrator generates a structured project that organizes your integration l
 
 ```
 FirstProject/
-├── .choreo/
-│   └── context.yaml
 ├── .vscode/
 │   └── settings.json
 ├── MyNewProject/
