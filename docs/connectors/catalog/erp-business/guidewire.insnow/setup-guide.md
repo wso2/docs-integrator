@@ -54,3 +54,7 @@ The authentication method available depends on your InsuranceNow deployment conf
 3. If you receive a `401 Unauthorized` or `403 Forbidden` error, contact your administrator to verify your user permissions.
 
 Store your credentials securely. Do not commit usernames, passwords, or tokens to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

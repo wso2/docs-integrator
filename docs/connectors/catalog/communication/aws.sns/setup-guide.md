@@ -6,55 +6,53 @@ title: Setup Guide
 
 This guide walks you through setting up an AWS account and obtaining the credentials required to use the AWS SNS connector.
 
-## Prerequisites
+## Step 1: Create an AWS account
 
-- An active AWS account. If you do not have one, [sign up for an AWS account](https://aws.amazon.com/free/).
+If you don't already have an AWS account, visit the [AWS Management Console](https://console.aws.amazon.com/console/home), select **Create a new AWS Account**, and complete the registration process.
 
-## Step 1: Create an IAM user
+## Step 2: Get the access key ID and the secret access key
 
-1. Log in to the [AWS Management Console](https://console.aws.amazon.com/).
-2. Navigate to **IAM** (Identity and Access Management) by searching for it in the top search bar.
-3. In the left navigation pane, click **Users**, then click **Create user**.
-4. Enter a **User name** (e.g., `ballerina-sns-user`) and click **Next**.
-5. Under **Set permissions**, select **Attach policies directly**.
-6. Search for and select the **AmazonSNSFullAccess** policy (or a custom policy with the specific SNS permissions you need).
-7. Click **Next**, review the settings, and click **Create user**.
+After logging into your AWS account, create a user group and IAM user with SNS permissions.
 
-For production environments, follow the principle of least privilege and create a custom IAM policy with only the specific SNS actions your integration requires.
+### Create an AWS user group
 
-## Step 2: Generate access keys
+1. Navigate to the **Identity and Access Management (IAM)** service.
+2. Select **Groups**, then **Create New Group**.
 
-1. In the IAM console, click on the user you just created.
-2. Go to the **Security credentials** tab.
-3. Under **Access keys**, click **Create access key**.
-4. Select **Application running outside AWS** as the use case and click **Next**.
-5. Optionally add a description tag, then click **Create access key**.
-6. Copy the **Access key ID** and **Secret access key**.
+   ![Create user group](/img/connectors/catalog/communication/aws-sns/setup/create-group.png)
 
-The secret access key is shown only once. Download the `.csv` file or copy the secret key immediately. If lost, you must create a new access key pair.
+3. Enter a group name and attach the necessary policies (for example, **AmazonSNSFullAccess** for full SNS access).
 
-Store the access key ID and secret access key securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+   ![Attach policy](/img/connectors/catalog/communication/aws-sns/setup/create-group-policies.png)
 
-## Step 3: Note your AWS region
+### Create an IAM user
 
-Identify the AWS region where you want to use SNS. The region determines the endpoint
-for API calls and where your topics are created. Common regions include:
+1. In the IAM console, navigate to **Users** and select **Add user**.
 
-- `us-east-1` (US East: N. Virginia): the default region
-- `us-west-2` (US West: Oregon)
-- `eu-west-1` (Europe: Ireland)
-- `ap-southeast-1` (Asia Pacific: Singapore)
+   ![Add user](/img/connectors/catalog/communication/aws-sns/setup/create-user.png)
 
-You can find the full list of supported regions in the
-[AWS SNS documentation](https://docs.aws.amazon.com/general/latest/gr/sns.html).
+2. Enter a username and select **Provide user access to the AWS Management Console** (optional). Then select **I want to create an IAM user** for programmatic access through access keys.
 
-## Step 4: Configure security token (optional)
+   ![Create IAM user](/img/connectors/catalog/communication/aws-sns/setup/create-user-iam-user.png)
 
-If you are using temporary security credentials (e.g., from AWS STS AssumeRole), you
-will also need a **session token** in addition to the access key ID and secret access key.
+3. Complete the permission setup and add the user to the group you created.
 
-This is common when:
-- Using federated access or cross-account roles
-- Running in environments that provide temporary credentials (e.g., AWS Lambda, ECS tasks)
+   ![Attach user group](/img/connectors/catalog/communication/aws-sns/setup/create-user-set-permission.png)
 
-For long-lived credentials (standard IAM user access keys), the security token is not required and can be omitted.
+4. Review the details and select **Create user**.
+
+   ![Review user](/img/connectors/catalog/communication/aws-sns/setup/create-user-review.png)
+
+### Generate access key ID and secret access key
+
+1. After user creation, navigate to the **Users** tab and select your new user.
+
+   ![View user](/img/connectors/catalog/communication/aws-sns/setup/view-user.png)
+
+2. Select **Create access key** to generate credentials.
+
+   ![Create access key](/img/connectors/catalog/communication/aws-sns/setup/create-access-key.png)
+
+3. Follow the steps and download the CSV file containing your credentials.
+
+   ![Download credentials](/img/connectors/catalog/communication/aws-sns/setup/download-access-key.png)

@@ -4,68 +4,93 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a HubSpot App and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Commerce Carts connector.
+This guide walks you through creating a HubSpot developer app and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Commerce Carts connector.
 
 ## Prerequisites
 
-- A HubSpot account with access to a CRM instance. If you do not have one, [sign up for a free HubSpot account](https://app.hubspot.com/signup).
-- A HubSpot Developer account. If you do not have one, [register as a HubSpot developer](https://developers.hubspot.com/get-started).
+- A HubSpot developer account. If you do not have one, [sign up for a free account](https://developers.hubspot.com/get-started).
 
-## Create a HubSpot app
+## Step 1: Log in to the HubSpot developer portal
 
-1. Log in to the [HubSpot Developer Portal](https://app.hubspot.com/developer).
-2. Click **Apps** in the top navigation bar.
-3. Click **Create app**.
-4. Fill in the **App Info** tab with a name (e.g., `Ballerina Carts Connector`) and description.
-5. Navigate to the **Auth** tab.
+Log in to your [HubSpot developer account](https://app.hubspot.com/).
 
-## Configure OAuth scopes
+## Step 2: Create a developer test account (optional)
 
-1. On the **Auth** tab, locate the **Scopes** section.
-2. Add the following scopes:
-    - `crm.objects.carts.read`
-    - `crm.objects.carts.write`
-3. Note the **Client ID** and **Client Secret** displayed at the top of the Auth tab.
+Developer test accounts let you test apps and integrations without affecting real HubSpot data.
 
-Store the Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+1. Select **Test accounts** in the left sidebar.
 
-## Set the redirect URI
+   ![Test accounts section](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.carts/setup/test-account.png)
 
-1. Under **Redirect URLs** on the Auth tab, click **Add redirect URL**.
-2. Enter your redirect URI (e.g., `https://localhost:9090/callback` for local development).
-3. Click **Save**.
+2. Select **Create developer test account**.
 
-## Obtain a refresh token
+   ![Create developer test account](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.carts/setup/create-test-account.png)
 
-Use the HubSpot OAuth 2.0 Authorization Code flow to obtain a refresh token:
+3. Provide a name and select **Create**.
 
-1. Construct the following authorization URL, replacing the placeholders:
+   ![Name the test account](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.carts/setup/create-account.png)
 
-    ```
-    https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=crm.objects.carts.read%20crm.objects.carts.write&redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+4. The new account appears in the test accounts list.
 
-2. Open the URL in a browser and select the HubSpot account to authorize.
-3. After authorization, HubSpot redirects to your redirect URI with a `code` query parameter. Copy the `code` value.
-4. Exchange the code for tokens using a POST request:
+   ![Test account portal](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.carts/setup/test-account-portal.png)
 
-    ```
-    POST https://api.hubapi.com/oauth/v1/token
-    Content-Type: application/x-www-form-urlencoded
+Developer test accounts are for development and testing only. Do not use them in production.
 
-    grant_type=authorization_code
-    &code=<AUTHORIZATION_CODE>
-    &client_id=<YOUR_CLIENT_ID>
-    &client_secret=<YOUR_CLIENT_SECRET>
-    &redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+## Step 3: Create a HubSpot app
 
-5. The response contains `access_token` and `refresh_token`. Copy the `refresh_token`.
+1. Navigate to **Apps** in the left sidebar and select **Create app**.
 
-Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange in step 4.
+   ![Create app](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.carts/setup/create-app.png)
 
-The refresh token does not expire by default, but can be revoked. Store it securely alongside your Client ID and Client Secret.
+2. Enter a public app name and an optional description.
 
-## Next steps
+   ![App name and description](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.carts/setup/app-name-desc.png)
 
-- [Actions Reference](actions.md) - Available operations
+## Step 4: Set up authentication
+
+1. Go to the **Auth** tab.
+
+   ![Configure authentication](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.carts/setup/config-auth.png)
+
+2. Under **Scopes**, select **Add new scopes** and add:
+   - `crm.objects.carts.read`
+   - `crm.objects.carts.write`
+
+   ![Add scopes](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.carts/setup/add-scopes.png)
+
+3. Under **Redirect URL**, add your redirect URL and select **Create App**.
+
+   ![Redirect URL](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.carts/setup/redirect-url.png)
+
+## Step 5: Get the client ID and client secret
+
+In the **Auth** tab, copy the **Client ID** and **Client Secret**.
+
+![Client ID and client secret](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.carts/setup/client-id-secret.png)
+
+## Step 6: Get the refresh token
+
+1. Construct the authorization URL:
+
+   ```
+   https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=<YOUR_SCOPES>&redirect_uri=<YOUR_REDIRECT_URI>
+   ```
+
+2. Open the URL in a browser and select your developer test account to install the app.
+
+   ![OAuth consent screen](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.carts/setup/hubspot-oauth-consent-screen.png)
+
+3. Copy the authorization code from the redirect URL.
+
+4. Exchange the code for tokens:
+
+   ```bash
+   curl --request POST \
+     --url https://api.hubapi.com/oauth/v1/token \
+     --header 'content-type: application/x-www-form-urlencoded' \
+     --data 'grant_type=authorization_code&code=&redirect_uri=<YOUR_REDIRECT_URI>&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>'
+   ```
+
+5. Copy the `refresh_token` from the response.
+
+Store the client ID, client secret, and refresh token securely. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.

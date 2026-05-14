@@ -15,33 +15,33 @@ This guide walks you through configuring SAP S/4HANA Communication Management to
 
 1. Log in to your SAP S/4HANA system.
 2. Navigate to **Communication Management** → **Maintain Communication Users**.
-3. Click **New** to create a new communication user.
+3. Select **New** to create a new communication user.
 4. Fill in the following fields:
    - **User Name**: Enter a name (e.g., `BALLERINA_SLS_USR`).
    - **Description**: Enter a meaningful description.
    - **Password**: Set a strong password and confirm it.
-5. Click **Create**.
+5. Select **Create**.
 
 ## Step 2: Create a communication system
 
 1. Navigate to **Communication Management** → **Communication Systems**.
-2. Click **New**.
+2. Select **New**.
 3. Fill in the following fields:
    - **System ID**: Enter a unique ID (e.g., `BALLERINA_INTEGRATION`).
    - **System Name**: Enter a display name.
    - **Host Name**: Enter the hostname or IP of the system that will connect (your integration host).
 4. Under **Users for Inbound Communication**, add the communication user created in the previous step.
-5. Click **Save**.
+5. Select **Save**.
 
 ## Step 3: Create a communication arrangement for the sales order API
 
 1. Navigate to **Communication Management** → **Communication Arrangements**.
-2. Click **New**.
+2. Select **New**.
 3. In the **Communication Scenario** field, search for and select `SAP_COM_0109`
    (Sales Order Integration).
 4. In the **Communication System** field, select the communication system created in the previous step.
 5. Under **Inbound Communication**, confirm the authentication method is set to **User ID and Password**.
-6. Click **Save**.
+6. Select **Save**.
 
 After saving the arrangement, the system displays the Service URL (base path). Copy the hostname portion; you will use it as the `hostname` parameter when initialising the Ballerina client.
 
@@ -57,3 +57,7 @@ After saving the arrangement, the system displays the Service URL (base path). C
 Store the hostname, username, and password securely.
 Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime
 rather than hardcoding them in source code.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

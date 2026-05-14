@@ -56,3 +56,7 @@ If your SAP system uses a self-signed or internal CA certificate, you will need 
     ```
 
 Store the SAP username and password as Ballerina `configurable` variables backed by a `Config.toml` file or environment variables. Never hard-code credentials in source files.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

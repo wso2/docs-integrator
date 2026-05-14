@@ -8,71 +8,94 @@ This guide walks you through creating a HubSpot developer app and obtaining the 
 
 ## Prerequisites
 
-- A HubSpot account with a Marketing Hub Professional or Enterprise subscription. If you do not have one, [sign up at HubSpot](https://www.hubspot.com/).
-- A HubSpot developer account. [Create one here](https://developers.hubspot.com/) if you do not have one.
+- A HubSpot developer account. If you do not have one, [sign up for a free account](https://developers.hubspot.com/get-started).
 
-## Create a HubSpot developer app
+## Step 1: Log in to the HubSpot developer portal
 
-1. Log in to your [HubSpot developer account](https://app.hubspot.com/signup-hubspot/developers).
-2. Navigate to **Apps** in the top navigation bar.
-3. Click **Create app**.
-4. Under **App Info**, fill in the **Public app name** (e.g., `Ballerina Campaigns Connector`).
-5. Optionally add a description and logo.
+Log in to your [HubSpot developer account](https://developers.hubspot.com/).
 
-## Configure OAuth settings
+## Step 2: Create a developer test account (optional)
 
-1. Go to the **Auth** tab of your app.
-2. Note the **Client ID** and **Client Secret**; you will need these.
-3. Set the **Redirect URL** to `https://localhost` (or your own callback URL).
-4. Under **Scopes**, add the following scopes:
-    - `content`
-    - `crm.objects.campaigns.read`
-    - `crm.objects.campaigns.write`
-5. Click **Save**.
+Developer test accounts let you test apps and integrations without affecting real HubSpot data.
 
-The required scopes may vary depending on which operations you plan to use. The scopes listed above cover all campaign operations.
+1. Select **Test accounts** in the left sidebar.
 
-## Authorize and get a refresh token
+   ![Test accounts section](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/setup/testAccount.png)
 
-1. Construct the following authorization URL, replacing `<YOUR_CLIENT_ID>` and `<YOUR_REDIRECT_URI>`:
+2. Select **Create developer test account**.
 
-    ```
-    https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&redirect_uri=<YOUR_REDIRECT_URI>&scope=content%20crm.objects.campaigns.read%20crm.objects.campaigns.write
-    ```
+   ![Create developer test account](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/setup/developmentTestAccount.png)
 
-2. Open the URL in a browser and log in with your HubSpot account credentials.
-3. Select the HubSpot account you want to connect and click **Choose Account**.
-4. After authorization, HubSpot redirects to your redirect URL with a `code` query parameter. Copy the `code` value.
-5. Exchange the code for tokens using a POST request:
+3. Provide a name and select **Create**.
 
-    ```
-    POST https://api.hubapi.com/oauth/v1/token
-    Content-Type: application/x-www-form-urlencoded
+   ![Name the test account](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/setup/createAccount.png)
 
-    grant_type=authorization_code
-    &code=<AUTHORIZATION_CODE>
-    &client_id=<YOUR_CLIENT_ID>
-    &client_secret=<YOUR_CLIENT_SECRET>
-    &redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+   The new account appears in the list.
 
-6. The response contains `access_token` and `refresh_token`. Copy the `refresh_token`.
+   ![Test account portal](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/setup/testAccountPortal.png)
 
-Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange in step 5.
+Developer test accounts are for development and testing only. Do not use them in production.
 
-## Alternative: use a private app API key
+## Step 3: Create a HubSpot app
 
-If you prefer API key authentication instead of OAuth 2.0:
+1. Navigate to **Apps** in the left sidebar and select **Create app**.
 
-1. In your HubSpot account, go to **Settings** > **Integrations** > **Private Apps**.
-2. Click **Create a private app**.
-3. Enter a name and description for the app.
-4. Under **Scopes**, add `content`, `crm.objects.campaigns.read`, and `crm.objects.campaigns.write`.
-5. Click **Create app** and confirm.
-6. Copy the generated **Access token**; this is your private app API key.
+   ![Apps section](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/setup/appSection.png)
 
-Store your API key and OAuth credentials securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+2. Enter a public app name and an optional description.
 
-## Next steps
+   ![App name and description](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/setup/namingApp.png)
 
-- [Actions Reference](actions.md) - Available operations
+## Step 4: Configure authentication
+
+1. Go to the **Auth** tab.
+
+   ![Auth tab](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/setup/auth.png)
+
+2. Under **Scopes**, select **Add new scopes** and add:
+   - `marketing.campaigns.read`
+   - `marketing.campaigns.revenue.read`
+   - `marketing.campaigns.write`
+
+   ![Marketing scopes](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/setup/marketingScopes.png)
+
+3. Under **Redirect URL**, add your redirect URL and select **Create App**.
+
+   ![Redirect URL](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/setup/redirectURL.png)
+
+## Step 5: Get the client ID and client secret
+
+In the **Auth** tab, copy the **Client ID** and **Client Secret**.
+
+![Client ID and client secret](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/setup/clientId_secretId.png)
+
+## Step 6: Get the refresh token
+
+1. Construct the authorization URL:
+
+   ```
+   https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=<YOUR_SCOPES>&redirect_uri=<YOUR_REDIRECT_URI>
+   ```
+
+2. Open the URL in a browser and select your developer test account.
+
+   ![Select account](/img/connectors/catalog/marketing-social/hubspot.marketing.campaigns/setup/accountSelect.png)
+
+3. Copy the authorization code from the redirect URL.
+
+4. Exchange the code for tokens:
+
+   ```bash
+   curl --request POST \
+     --url https://api.hubapi.com/oauth/v1/token \
+     --header 'content-type: application/x-www-form-urlencoded' \
+     --data 'grant_type=authorization_code&code=&redirect_uri=<YOUR_REDIRECT_URI>&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>'
+   ```
+
+5. Copy the `refresh_token` from the response.
+
+Store the client ID, client secret, and refresh token securely. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

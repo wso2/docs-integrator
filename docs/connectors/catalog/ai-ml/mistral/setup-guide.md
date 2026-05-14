@@ -4,29 +4,36 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a Mistral AI account and obtaining the API key required to use the Mistral AI connector.
+This guide walks you through creating a Mistral AI account and generating an API key required to use the Mistral connector.
 
 ## Prerequisites
 
-- A Mistral AI account. If you do not have one, [sign up at the Mistral AI console](https://console.mistral.ai/).
+- A Mistral AI account. If you do not have one, [sign up at mistral.ai](https://mistral.ai/).
 
-## Step 1: Sign in to the Mistral AI console
+## Step 1: Navigate to API keys
 
-1. Go to [https://console.mistral.ai/](https://console.mistral.ai/).
-2. Sign in with your Mistral AI account credentials.
+1. Log in to the [Mistral AI console](https://console.mistral.ai/).
+2. Navigate to the **API Keys** panel in the left sidebar.
+3. Select a plan based on your requirements.
 
-## Step 2: Navigate to API keys
+   ![Choose a plan](/img/connectors/catalog/ai-ml/mistral/setup/choose-plan.png)
 
-1. In the left sidebar, click **API Keys** (or navigate to **Settings > API Keys**).
-2. You will see a list of your existing API keys (if any).
+## Step 2: Create an API key
 
-## Step 3: Generate a new API key
+1. Select **Create new key**.
 
-1. Click the **Create new key** button.
-2. Give the key a descriptive name (e.g., `Ballerina Mistral Connector`).
-3. Click **Create key**.
-4. Copy the generated API key immediately: it will not be shown again.
+   ![Create key](/img/connectors/catalog/ai-ml/mistral/setup/create-key.png)
+
+2. Enter a name for the key and fill in any required details, then select **Create new key**.
+
+   ![Key details panel](/img/connectors/catalog/ai-ml/mistral/setup/details-panel.png)
+
+3. Copy the generated API key immediately — it will not be shown again.
+
+   ![Copy key](/img/connectors/catalog/ai-ml/mistral/setup/copy-key.png)
 
 Store the API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 
-Mistral AI offers both free and paid tiers. Some models may require a paid subscription. Check the [Mistral AI pricing page](https://mistral.ai/pricing/) for details.
+## What's next
+
+- [Action reference](actions.md): Available operations

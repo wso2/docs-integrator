@@ -4,99 +4,99 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 credentials required to authenticate with the HubSpot CRM Associations API.
+This guide walks you through creating a HubSpot developer app and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Associations connector.
 
 ## Prerequisites
 
-- A HubSpot account. If you do not have one, [sign up for a free account](https://app.hubspot.com/signup).
-- A HubSpot Developer account. If you do not have one, [create a developer account](https://developers.hubspot.com/).
+- A HubSpot developer account. If you do not have one, [sign up for a free account](https://developers.hubspot.com/get-started).
 
-## Create a HubSpot app
+## Step 1: Log in to the HubSpot developer portal
 
-1. Log in to your [HubSpot Developer Portal](https://app.hubspot.com/developer/).
-2. In the top navigation, click **Apps**.
-3. Click **Create app** in the top-right corner.
-4. Under **App Info**, provide:
-    - **Public app name**: Enter a name (e.g., `Ballerina CRM Associations`).
-    - **Description** (optional): Describe your integration.
-5. Click **Create app**.
+Log in to your [HubSpot developer account](https://app.hubspot.com/).
 
-## Configure OAuth scopes
+## Step 2: Create a developer test account (optional)
 
-1. Open your newly created app and navigate to the **Auth** tab.
-2. Under **Scopes**, click **Add new scope** and add the following scopes:
-    - `crm.associations.read`: required to read associations between CRM objects.
-    - `crm.associations.write`: required to create, update, and delete associations.
-3. Set the **Redirect URL** to your application's callback URL (e.g., `https://your-app.com/oauth/callback`).
-4. Click **Save**.
+Developer test accounts let you test apps and integrations without affecting real HubSpot data.
 
-Depending on the CRM object types you intend to link, you may also need object-specific scopes such as `crm.objects.contacts.read`, `crm.objects.deals.read`, and `crm.objects.companies.read`.
+1. Select **Test accounts** in the left sidebar.
 
-## Obtain the client ID and client secret
+   ![Test accounts section](/img/connectors/catalog/crm-sales/hubspot.crm.associations/setup/test_account.png)
 
-1. In your app's **Auth** tab, locate the **App credentials** section.
-2. Copy the **Client ID**; this is your `clientId`.
-3. Click **Show** next to **Client secret** and copy the value: this is your `clientSecret`.
+2. Select **Create developer test account**.
 
-Store the Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+   ![Create developer test account](/img/connectors/catalog/crm-sales/hubspot.crm.associations/setup/create_test_account.png)
 
-## Install the app on a HubSpot account
+3. Provide a name for the test account and select **Create**.
 
-1. Still on the **Auth** tab, scroll to **Install URL (OAuth)**.
-2. Click **Copy full URL** to get the OAuth authorization URL for your app.
-3. Open the URL in a browser while logged into the HubSpot account you want to connect.
-4. Review the requested permissions and click **Connect app**.
-5. After authorization, HubSpot redirects to your callback URL with a `code` query parameter. Copy this `code` value.
+   ![Name the test account](/img/connectors/catalog/crm-sales/hubspot.crm.associations/setup/create_account.png)
 
-The authorization code expires after 10 minutes. Exchange it for tokens promptly.
+   The new account appears in the test accounts list.
 
-## Exchange the authorization code for a refresh token
+   ![Test account portal](/img/connectors/catalog/crm-sales/hubspot.crm.associations/setup/test_account_portal.png)
 
-Send a POST request to HubSpot's token endpoint to exchange the authorization code for
-an access token and refresh token:
+Developer test accounts are for development and testing only. Do not use them in production.
 
-```
-POST https://api.hubapi.com/oauth/v1/token
-Content-Type: application/x-www-form-urlencoded
+## Step 3: Create a HubSpot app
 
-grant_type=authorization_code
-&code=<AUTHORIZATION_CODE>
-&client_id=<YOUR_CLIENT_ID>
-&client_secret=<YOUR_CLIENT_SECRET>
-&redirect_uri=<YOUR_REDIRECT_URI>
-```
+1. Navigate to **Apps** in the left sidebar and select **Create app**.
 
-The response contains `access_token`, `refresh_token`, and `expires_in`. Copy the
-`refresh_token`: you will use this in your connector configuration.
+   ![Create app](/img/connectors/catalog/crm-sales/hubspot.crm.associations/setup/create_app.png)
 
-Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange.
+2. Enter a public app name and an optional description.
 
-## Installation
+   ![App name and description](/img/connectors/catalog/crm-sales/hubspot.crm.associations/setup/app_name_desc.png)
 
-### Using the visual designer
+## Step 4: Set up authentication
 
-1. Open the **Visual Designer** in VS Code.
-2. Add a new **Connection** node.
-3. Search for **HubSpot CRM Associations** in the connector list.
-4. Follow the connection wizard to enter your credentials.
+1. Go to the **Auth** tab.
 
-### Using code
+   ![Configure authentication](/img/connectors/catalog/crm-sales/hubspot.crm.associations/setup/config_auth.png)
 
-Add the import to your Ballerina file:
+2. Under **Scopes**, select **Add new scopes** and add the following scopes:
+   - `crm.associations.read`
+   - `crm.associations.write`
+   - `crm.objects.contacts.read`
+   - `crm.objects.contacts.write`
+   - `crm.objects.companies.read`
+   - `crm.objects.companies.write`
+   - `crm.objects.deals.read`
+   - `crm.objects.deals.write`
 
-```ballerina
-import ballerinax/hubspot.crm.associations;
-```
+   ![Add scopes](/img/connectors/catalog/crm-sales/hubspot.crm.associations/setup/add_scopes.png)
 
-Add the dependency to `Ballerina.toml`:
+3. Under **Redirect URL**, add your redirect URL and select **Create App**.
 
-```toml
-[[dependency]]
-org = "ballerinax"
-name = "hubspot.crm.associations"
-version = "2.0.0"
-```
+   ![Redirect URL](/img/connectors/catalog/crm-sales/hubspot.crm.associations/setup/redirect_url.png)
 
-## Next steps
+## Step 5: Get the client ID and client secret
 
-- [Actions Reference](actions.md): Available operations
+In the **Auth** tab, copy the **Client ID** and **Client Secret**.
+
+![Client ID and client secret](/img/connectors/catalog/crm-sales/hubspot.crm.associations/setup/client_id_secret.png)
+
+## Step 6: Get the refresh token
+
+1. Construct the authorization URL:
+
+   ```
+   https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=<YOUR_SCOPES>&redirect_uri=<YOUR_REDIRECT_URI>
+   ```
+
+2. Open the URL in a browser and select your developer test account to install the app.
+
+   ![Select account](/img/connectors/catalog/crm-sales/hubspot.crm.associations/setup/account_select.png)
+
+3. Copy the authorization code from the redirect URL.
+
+4. Exchange the code for tokens:
+
+   ```bash
+   curl --request POST \
+     --url https://api.hubapi.com/oauth/v1/token \
+     --header 'content-type: application/x-www-form-urlencoded' \
+     --data 'grant_type=authorization_code&code=&redirect_uri=<YOUR_REDIRECT_URI>&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>'
+   ```
+
+5. Copy the `refresh_token` from the response.
+
+Store the client ID, client secret, and refresh token securely. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.

@@ -4,32 +4,36 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating an OpenAI account and obtaining the API key required to use the OpenAI Audio connector.
+This guide walks you through creating an OpenAI account and generating an API key required to use the OpenAI Audio connector.
 
 ## Prerequisites
 
-- An OpenAI account. If you do not have one, [sign up at OpenAI](https://platform.openai.com/signup).
-- A funded OpenAI account with API access enabled (the Audio API is a paid service).
+- An OpenAI account. If you do not have one, [sign up at platform.openai.com](https://platform.openai.com/signup).
+- Billing enabled on your OpenAI account with an active prepaid credit balance. Audio API calls fail with a 402 error without credits on file. Add a payment method and top up credits in the [Billing settings](https://platform.openai.com/account/billing).
 
-## Step 1: Log in to the OpenAI platform
+## Step 1: Navigate to the API keys dashboard
 
-1. Go to [https://platform.openai.com](https://platform.openai.com).
-2. Log in with your OpenAI credentials.
+1. Open the [OpenAI Platform Dashboard](https://platform.openai.com).
+2. Navigate to **Dashboard > API keys** in the left sidebar.
 
-## Step 2: Create an API key
+   ![Navigate to API keys dashboard](/img/connectors/catalog/ai-ml/openai.audio/setup/navigate-api-key-dashboard.png)
 
-1. In the left sidebar, click **API keys** (or navigate to **Settings > API keys**).
-2. Click **Create new secret key**.
-3. Optionally give the key a name (e.g., `Ballerina Audio Connector`).
-4. Click **Create secret key**.
-5. Copy the generated key immediately: it will not be shown again.
+## Step 2: Create a new secret key
 
-Store your API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
+1. Select **Create new secret key**.
 
-## Step 3: Verify API access and billing
+   ![API keys dashboard](/img/connectors/catalog/ai-ml/openai.audio/setup/api-key-dashboard.png)
 
-1. Navigate to **Settings > Billing** in the OpenAI platform.
-2. Ensure you have an active payment method and sufficient credits.
-3. The Audio API (Whisper and TTS models) requires a paid account: free-tier accounts may not have access.
+2. Fill in the required details and select **Create secret key**.
 
-OpenAI charges per character for TTS and per minute of audio for transcription and translation. Check the [OpenAI pricing page](https://openai.com/pricing) for current rates.
+   ![Create new secret key dialog](/img/connectors/catalog/ai-ml/openai.audio/setup/create-new-secret-key.png)
+
+3. Copy the generated API key immediately — it will not be shown again.
+
+   ![Copy and save the API key](/img/connectors/catalog/ai-ml/openai.audio/setup/saved-key.png)
+
+Store the API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

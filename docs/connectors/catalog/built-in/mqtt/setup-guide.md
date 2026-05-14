@@ -69,7 +69,7 @@ Test that your broker is reachable:
    :::
 2. Confirm that the message `hello` appears in the subscriber terminal.
 
-## Next steps
+## What's next
 
-- [Action Reference](action-reference.md): Available operations
-- [Trigger Reference](trigger-reference.md): Event-driven integration
+- [Action reference](action-reference.md): Available operations
+- [Trigger reference](trigger-reference.md): Event-driven integration

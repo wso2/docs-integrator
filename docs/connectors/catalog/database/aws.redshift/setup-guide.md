@@ -4,63 +4,56 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through setting up an Amazon Redshift cluster and obtaining the JDBC connection details required to use the AWS Redshift connector.
+This guide walks you through creating an Amazon Redshift cluster and obtaining the JDBC connection URL required to use the AWS Redshift connector.
 
 ## Prerequisites
 
-- An active AWS account. If you do not have one, [sign up for an AWS account](https://aws.amazon.com/).
+- An active AWS account. If you do not have one, [sign up for a free account](https://aws.amazon.com/free/).
 
-## Step 1: Create a Redshift cluster
+## Step 1: Log in to the AWS Console
 
-1. Log in to the [AWS Management Console](https://console.aws.amazon.com/).
-2. Navigate to **Amazon Redshift** from the Services menu (or search for "Redshift").
-3. Click **Create cluster**.
-4. Enter a **Cluster identifier** (e.g., `my-redshift-cluster`).
-5. Choose a **Node type** and number of nodes based on your workload requirements.
-6. Under **Database configurations**, set:
-    - **Database name**: Enter a name (e.g., `mydb`).
-    - **Admin user name**: Enter a username (e.g., `admin`).
-    - **Admin user password**: Enter a strong password.
-7. Click **Create cluster** and wait for the cluster status to become **Available**.
+Access the [AWS Management Console](https://console.aws.amazon.com/).
 
-Cluster creation may take several minutes. The cluster status must be **Available** before you can connect.
+## Step 2: Navigate to Amazon Redshift and create a cluster
 
-## Step 2: Configure network access
+1. In the AWS Management Console, search for **Redshift** in the services search bar and select it.
 
-1. In the Redshift console, select your cluster and go to the **Properties** tab.
-2. Under **Network and security**, find the **VPC security group** associated with the cluster.
-3. Click the security group link to open it in the EC2 console.
-4. Add an **Inbound rule** to allow TCP traffic on port **5439** (default Redshift port) from your application's IP address or CIDR range.
-5. Save the security group rules.
+   ![Navigate to Redshift](/img/connectors/catalog/database/aws.redshift/setup/create-cluster-1.png)
 
-Do not open port 5439 to `0.0.0.0/0` in production. Restrict access to specific IP addresses or use VPC peering.
+2. Select **Create cluster** to start creating a new cluster.
 
-## Step 3: Enable public accessibility (if needed)
+   ![Create cluster](/img/connectors/catalog/database/aws.redshift/setup/create-cluster-2.png)
 
-If your Ballerina application runs outside the cluster's VPC:
+## Step 3: Configure cluster settings
 
-1. Select your cluster in the Redshift console.
-2. Click Actions → **Modify publicly accessible setting**.
-3. Enable **Turn on Publicly accessible**.
-4. Click **Save changes**.
+1. Configure the cluster identifier, database name, and credentials.
 
-For production workloads, consider using VPC peering or AWS PrivateLink instead of public accessibility.
+   ![Basic configuration](/img/connectors/catalog/database/aws.redshift/setup/basic-configs.png)
 
-## Step 4: Obtain the JDBC URL
+2. Configure security groups to control inbound and outbound traffic to your Redshift cluster.
 
-1. In the Redshift console, select your cluster.
-2. Under the **General information** section, copy the **JDBC URL**. It follows this format:
+   ![Security configuration](/img/connectors/catalog/database/aws.redshift/setup/security-configs.png)
 
-    ```
-    jdbc:redshift://<cluster-endpoint>:5439/<database-name>
-    ```
+3. Record the username and password you set during cluster configuration — you will need them to authenticate.
 
-    For example:
+   ![Record credentials](/img/connectors/catalog/database/aws.redshift/setup/credentials.png)
 
-    ```
-    jdbc:redshift://my-redshift-cluster.abc123xyz.us-east-1.redshift.amazonaws.com:5439/mydb
-    ```
+4. Review your settings and select **Create cluster**.
 
-3. Note down the **admin username** and **password** you set during cluster creation.
+Store the admin username and password securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
 
-Store the JDBC URL, username, and password securely. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+## Step 4: Wait for cluster availability
+
+1. Monitor the cluster status in the AWS Console until it shows as **Available**.
+
+   ![Cluster availability](/img/connectors/catalog/database/aws.redshift/setup/availability.png)
+
+2. Once the cluster is available, copy the **JDBC URL** from the cluster details. It follows this format:
+
+   ```
+   jdbc:redshift://<cluster-endpoint>:5439/<database-name>
+   ```
+
+   ![Copy JDBC URL](/img/connectors/catalog/database/aws.redshift/setup/jdbc-url.png)
+
+Cluster creation may take several minutes. The JDBC URL is only available after the cluster status becomes **Available**.

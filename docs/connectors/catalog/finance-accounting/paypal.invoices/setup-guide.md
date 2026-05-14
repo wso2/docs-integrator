@@ -4,47 +4,40 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a PayPal Developer application and obtaining the OAuth 2.0 client credentials required to use the PayPal Invoices connector.
+This guide walks you through creating a PayPal sandbox business account and obtaining the API credentials required to use the PayPal Invoices connector.
 
 ## Prerequisites
 
-- A PayPal Business account. If you do not have one, [sign up at PayPal](https://www.paypal.com/bizsignup/).
-- A PayPal Developer account. If you do not have one, [sign up at the PayPal Developer Dashboard](https://developer.paypal.com/dashboard/).
+- A [PayPal Developer account](https://developer.paypal.com/). If you do not have one, sign up at [developer.paypal.com](https://developer.paypal.com/).
 
-## Step 1: Create an app in the PayPal developer dashboard
+## Step 1: Create a sandbox business account
 
-1. Log in to the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard/).
-2. Navigate to **Apps & Credentials**.
-3. Select the environment: **Sandbox** (for testing) or **Live** (for production).
-4. Click **Create App**.
-5. Enter an **App Name** (e.g., `Ballerina Invoicing`).
-6. Select **Merchant** as the app type.
-7. Click **Create App**.
+1. Open the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard).
+2. Under **Testing Tools**, select **Sandbox Accounts**.
 
-Start with the Sandbox environment for development and testing. You can create a separate Live app when you are ready for production.
+   ![Sandbox accounts](/img/connectors/catalog/finance-accounting/paypal.invoices/setup/sandbox-accounts.png)
 
-## Step 2: Get the client ID and client secret
+3. Select **Create account** and choose **Business** as the account type.
 
-1. After creating the app, you are taken to the app details page.
-2. Copy the **Client ID**; this is your `clientId`.
-3. Under **Secret**, click **Show** to reveal the secret, then copy it; this is your `clientSecret`.
+   ![Create business account](/img/connectors/catalog/finance-accounting/paypal.invoices/setup/create-account.png)
 
-Store the Client ID and Client Secret securely. Do not commit them to source control.
-Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+Some PayPal options and features may vary by region or country — check availability before creating an account.
 
-## Step 3: Enable invoicing permissions
+## Step 2: Create a REST API app
 
-1. On the app details page, scroll down to **Features**.
-2. Ensure that the **Invoicing** feature is enabled. If not, enable it.
-3. Save your changes if prompted.
+1. Navigate to the **Apps & Credentials** tab.
+2. Select **Create App**, provide a name, and select the sandbox business account you created.
 
-By default, new apps may have invoicing permissions enabled. Verify this is the case for your app.
+   ![Create app](/img/connectors/catalog/finance-accounting/paypal.invoices/setup/create-app.png)
 
-## Step 4: Note your API base URL
+## Step 3: Get the client ID and client secret
 
-The base URL depends on your environment:
+After creating the app, copy the **Client ID** and **Client Secret** displayed on the app details page.
 
-- **Sandbox**: `https://api-m.sandbox.paypal.com/v2/invoicing`
-- **Live**: `https://api-m.paypal.com/v2/invoicing`
+![Client ID and client secret](/img/connectors/catalog/finance-accounting/paypal.invoices/setup/get-credentials.png)
 
-Use the sandbox URL for testing and the live URL for production.
+Store the Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

@@ -4,47 +4,40 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a PayPal REST API application and obtaining the OAuth 2.0 client credentials required to use the PayPal Orders connector.
+This guide walks you through creating a PayPal sandbox business account and obtaining the API credentials required to use the PayPal Orders connector.
 
 ## Prerequisites
 
-- A PayPal Developer account. If you do not have one, [sign up at the PayPal Developer Dashboard](https://developer.paypal.com/).
+- A [PayPal Developer account](https://developer.paypal.com/). If you do not have one, sign up at [developer.paypal.com](https://developer.paypal.com/).
 
 ## Step 1: Create a sandbox business account
 
-1. Log in to the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard/).
-2. Navigate to **Testing Tools** > **Sandbox Accounts**.
-3. If you do not already have a Business sandbox account, click **Create Account**.
-4. Select **Business** as the account type and click **Create**.
+1. Open the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard).
+2. Under **Testing Tools**, select **Sandbox Accounts**.
 
-A default sandbox Business and Personal account are usually created automatically when you sign up for a PayPal Developer account.
+   ![Sandbox accounts](/img/connectors/catalog/finance-accounting/paypal.orders/setup/sandbox-accounts.png)
 
-## Step 2: Create a REST API application
+3. Select **Create account** and choose **Business** as the account type.
 
-1. In the Developer Dashboard, go to **Apps & Credentials**.
-2. Make sure the **Sandbox** toggle is selected.
-3. Click **Create App**.
-4. Enter an **App Name** (e.g., `Ballerina Orders Connector`).
-5. Select your sandbox Business account as the **Sandbox Business Account**.
-6. Click **Create App**.
+   ![Create business account](/img/connectors/catalog/finance-accounting/paypal.orders/setup/create-account.png)
+
+Some PayPal options and features may vary by region or country — check availability before creating an account.
+
+## Step 2: Create a REST API app
+
+1. Navigate to the **Apps & Credentials** tab.
+2. Select **Create App**, provide a name, and select the sandbox business account you created.
+
+   ![Create app](/img/connectors/catalog/finance-accounting/paypal.orders/setup/create-app.png)
 
 ## Step 3: Get the client ID and client secret
 
-1. After creating the app, you are taken to the app details page.
-2. Copy the **Client ID**; this is your `clientId`.
-3. Click **Show** under **Secret** and copy the **Client Secret**; this is your `clientSecret`.
+After creating the app, copy the **Client ID** and **Client Secret** displayed on the app details page.
 
-Store the Client ID and Client Secret securely. Do not commit them to source control.
-Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+![Client ID and client secret](/img/connectors/catalog/finance-accounting/paypal.orders/setup/get-credentials.png)
 
-## Step 4: Configure for live (production)
+Store the Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
 
-When you are ready to go live:
+## What's next
 
-1. In the Developer Dashboard, switch the toggle from **Sandbox** to **Live**.
-2. Create a new app or use the live credentials of an existing app.
-3. Copy the live **Client ID** and **Client Secret**.
-4. Update the service URL from `https://api-m.sandbox.paypal.com/v2/checkout` to `https://api-m.paypal.com/v2/checkout`.
-5. Update the token URL from `https://api-m.sandbox.paypal.com/v1/oauth2/token` to `https://api-m.paypal.com/v1/oauth2/token`.
-
-Ensure your PayPal business account is fully verified and approved before switching to live credentials.
+- [Action reference](actions.md): Available operations

@@ -4,58 +4,92 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 credentials required to use the HubSpot Marketing Subscriptions connector.
+This guide walks you through creating a HubSpot developer app and obtaining the OAuth 2.0 credentials required to use the HubSpot Marketing Subscriptions connector.
 
 ## Prerequisites
 
-- A HubSpot account with admin access. If you do not have one, [sign up for a free HubSpot account](https://app.hubspot.com/signup).
-- A HubSpot developer account for creating apps. [Create a developer account](https://developers.hubspot.com/get-started) if you don't have one.
+- A HubSpot developer account. If you do not have one, [sign up for a free account](https://developers.hubspot.com/get-started).
 
-## Step 1: Create a HubSpot app
+## Step 1: Log in to the HubSpot developer portal
 
-1. Log in to your [HubSpot developer account](https://app.hubspot.com/developer).
-2. Navigate to **Apps** in the top navigation.
-3. Click **Create app**.
-4. Under **App Info**, enter a name for your app (e.g., `Ballerina Subscriptions Connector`).
-5. Optionally add a description and logo.
+Log in to your [HubSpot developer account](https://app.hubspot.com/).
 
-## Step 2: Configure OAuth scopes
+## Step 2: Create a developer test account (optional)
 
-1. In your app settings, go to the **Auth** tab.
-2. Under **Scopes**, add the following required scopes:
-    - `communication_preferences.read_write`
-    - `communication_preferences.statuses.batch.read`
-    - `communication_preferences.statuses.batch.write`
-3. Note the **Client ID** and **Client Secret** displayed on this page.
+Developer test accounts let you test apps and integrations without affecting real HubSpot data.
 
-Store the Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+1. Select **Test accounts** in the left sidebar.
 
-## Step 3: Authorize and generate a refresh token
+   ![Test accounts section](/img/connectors/catalog/marketing-social/hubspot.marketing.subscriptions/setup/Test1.png)
 
-Use the HubSpot OAuth 2.0 Authorization Code flow to obtain a refresh token:
+2. Select **Create developer test account**.
 
-1. Construct the following authorization URL, replacing the placeholders:
+   ![Create developer test account](/img/connectors/catalog/marketing-social/hubspot.marketing.subscriptions/setup/Test2.png)
 
-    ```
-    https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&redirect_uri=<YOUR_REDIRECT_URI>&scope=communication_preferences.read_write%20communication_preferences.statuses.batch.read%20communication_preferences.statuses.batch.write
-    ```
+3. Provide a name and select **Create**.
 
-2. Open the URL in a browser and log in with your HubSpot credentials.
-3. Select the HubSpot account you want to connect and click **Choose Account**.
-4. After authorization, HubSpot redirects to your redirect URI with a `code` query parameter. Copy the `code` value.
-5. Exchange the code for tokens using a POST request:
+   ![Name the test account](/img/connectors/catalog/marketing-social/hubspot.marketing.subscriptions/setup/Test3.png)
 
-    ```
-    POST https://api.hubapi.com/oauth/v1/token
-    Content-Type: application/x-www-form-urlencoded
+Developer test accounts are for development and testing only. Do not use them in production.
 
-    grant_type=authorization_code
-    &code=<AUTHORIZATION_CODE>
-    &client_id=<YOUR_CLIENT_ID>
-    &client_secret=<YOUR_CLIENT_SECRET>
-    &redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+## Step 3: Create a HubSpot app
 
-6. The response contains `access_token` and `refresh_token`. Copy the `refresh_token`.
+1. Navigate to **Apps** and select **Create App**.
 
-HubSpot refresh tokens do not expire by default, but access tokens expire after 30 minutes. The connector handles token refresh automatically using the refresh token.
+   ![Create app](/img/connectors/catalog/marketing-social/hubspot.marketing.subscriptions/setup/Test4.png)
+
+2. Provide the app name and description.
+
+## Step 4: Configure authentication
+
+1. Go to the **Auth** tab.
+
+   ![Auth tab](/img/connectors/catalog/marketing-social/hubspot.marketing.subscriptions/setup/Test5.png)
+
+2. Under **Scopes**, select **Add new scope** and add:
+   - `communication_preferences.read_write`
+   - `communication_preferences.statuses.batch.read`
+   - `communication_preferences.statuses.batch.write`
+
+   ![Set scope](/img/connectors/catalog/marketing-social/hubspot.marketing.subscriptions/setup/Test6.png)
+
+3. Add your redirect URI and select **Create App**.
+
+   ![Redirect URL](/img/connectors/catalog/marketing-social/hubspot.marketing.subscriptions/setup/Test7.png)
+
+## Step 5: Get the client ID and client secret
+
+In the **Auth** section, copy the **Client ID** and **Client Secret**.
+
+![Client ID and client secret](/img/connectors/catalog/marketing-social/hubspot.marketing.subscriptions/setup/Test8.png)
+
+## Step 6: Get the refresh token
+
+1. Construct the authorization URL:
+
+   ```
+   https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=<YOUR_SCOPES>&redirect_uri=<YOUR_REDIRECT_URI>
+   ```
+
+2. Open the URL in a browser and select your developer test account.
+
+   ![Select account](/img/connectors/catalog/marketing-social/hubspot.marketing.subscriptions/setup/Test9.png)
+
+3. Copy the authorization code from the redirect URL.
+
+4. Exchange the code for tokens:
+
+   ```bash
+   curl --request POST \
+     --url https://api.hubapi.com/oauth/v1/token \
+     --header 'content-type: application/x-www-form-urlencoded' \
+     --data 'grant_type=authorization_code&code=&redirect_uri=<YOUR_REDIRECT_URI>&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>'
+   ```
+
+5. Copy the `refresh_token` from the response.
+
+Store the client ID, client secret, and refresh token securely. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

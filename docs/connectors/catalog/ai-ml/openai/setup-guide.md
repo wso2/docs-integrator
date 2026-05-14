@@ -4,43 +4,48 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating an OpenAI account and obtaining the API key required to use the OpenAI connector.
+This guide walks you through creating an OpenAI account and generating an API key required to use the OpenAI connector.
 
 ## Prerequisites
 
 - An OpenAI account. If you do not have one, [sign up at platform.openai.com](https://platform.openai.com/signup).
 
-## Step 1: Navigate to the API keys page
+## Step 1: Log in to the OpenAI Platform
 
-1. Log in to the [OpenAI Platform](https://platform.openai.com/).
-2. Click on your profile icon in the top-right corner.
-3. Select **View API keys** or navigate directly to the [API keys page](https://platform.openai.com/api-keys).
+1. Visit [platform.openai.com](https://platform.openai.com/).
+2. Sign in with your credentials or create a new account.
 
-## Step 2: Create a new API key
+## Step 2: Create a project
 
-1. Click **+ Create new secret key**.
-2. Optionally give the key a name (e.g., `Ballerina OpenAI Connector`).
-3. Select the appropriate permissions, selecting **All** for full access, or restrict to specific endpoints.
-4. Click **Create secret key**.
-5. Copy the generated key immediately: it will not be shown again.
+1. Select your profile icon in the top-right corner.
+2. In the dropdown menu, select **Your Profile**.
 
-Store your API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
+   ![Your profile menu](/img/connectors/catalog/ai-ml/openai/setup/your_profile.png)
 
-## Step 3: Set up billing
+3. Navigate to the **Projects** section from the sidebar.
 
-1. Navigate to **Settings** → **Billing** in the OpenAI Platform.
-2. Add a payment method if you have not already.
-3. Optionally set usage limits to control spending.
+   ![Projects portal](/img/connectors/catalog/ai-ml/openai/setup/project_portal.png)
 
-API usage is billed based on token consumption. Free trial credits may be available for new accounts, but most usage requires a paid plan.
+4. Select **Create Project** and provide a name.
 
-## Step 4: Verify API access
+   ![Create project](/img/connectors/catalog/ai-ml/openai/setup/create_project.png)
 
-Confirm your key works by listing available models. You can use `curl` or a tool like Postman:
+## Step 3: Create an API key
 
-```
-GET https://api.openai.com/v1/models
-Authorization: Bearer <YOUR_API_KEY>
-```
+1. Navigate to the **API Keys** section from the sidebar and select **+ Create new secret key**.
 
-A successful response returns a JSON list of available models.
+   ![API keys portal](/img/connectors/catalog/ai-ml/openai/setup/api_key_portal.png)
+
+2. Provide a name for the key (for example, `Connector Key`), select your project, and confirm.
+
+   ![Create new API key](/img/connectors/catalog/ai-ml/openai/setup/create_api_key.png)
+
+3. Copy the generated API key immediately — it will not be shown again.
+
+   ![Copy generated key](/img/connectors/catalog/ai-ml/openai/setup/copy_key.png)
+
+Store the API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

@@ -8,64 +8,81 @@ This guide walks you through creating a HubSpot developer app and obtaining the 
 
 ## Prerequisites
 
-- A HubSpot developer account. If you do not have one, [sign up at the HubSpot Developer Portal](https://developers.hubspot.com/get-started).
+- A HubSpot developer account. If you do not have one, [sign up for a free account](https://developers.hubspot.com/get-started).
 
-## Create a HubSpot developer account and test account
+## Step 1: Log in to the HubSpot developer portal
 
-1. Go to the [HubSpot Developer Portal](https://developers.hubspot.com/get-started) and sign up or log in.
-2. Once logged in, navigate to **Test accounts** in the left sidebar and create a developer test account if you don't already have one. This provides a sandbox environment for testing.
+Log in to your [HubSpot developer account](https://app.hubspot.com/).
 
-A developer test account lets you test API integrations without affecting production data.
+## Step 2: Create a developer test account (optional)
 
-## Create a HubSpot app
+Developer test accounts let you test apps and integrations without affecting real HubSpot data.
 
-1. In the HubSpot Developer Portal, navigate to **Apps** in the left sidebar.
-2. Click **Create app**.
-3. Enter an **App name** (e.g., `Ballerina Pipelines Connector`).
-4. Go to the **Auth** tab.
-5. Under **Redirect URLs**, add a redirect URI (e.g., `http://localhost:9090` for development).
-6. Under **Scopes**, add the required scopes for the Pipelines API. Common scopes include:
-    - `crm.objects.orders.read`
-    - `crm.schemas.orders.write`
-    - `crm.objects.deals.read`
-    - `crm.objects.deals.write`
-7. Click **Save**.
-8. Copy the **Client ID** and **Client Secret** from the Auth tab.
+1. Select **Test accounts** in the left sidebar.
 
-The exact scopes required depend on which object types (deals, tickets, orders) you plan to manage pipelines for. Add the appropriate read and write scopes for each object type.
+   ![Developer portal](/img/connectors/catalog/crm-sales/hubspot.crm.pipelines/setup/test_acc_1.png)
 
-## Generate a refresh token
+2. Select **Create developer test account**.
 
-Use the HubSpot OAuth 2.0 Authorization Code flow to obtain a refresh token:
+   ![Create test account](/img/connectors/catalog/crm-sales/hubspot.crm.pipelines/setup/test_acc_2.png)
 
-1. Construct the following authorization URL, replacing the placeholders:
+3. Provide a name and select **Create**.
 
-    ```
-    https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=&redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+   ![Name the test account](/img/connectors/catalog/crm-sales/hubspot.crm.pipelines/setup/test_acc_3.png)
 
-2. Open the URL in a browser and log in with your HubSpot credentials.
-3. Select the test account (or target account) when prompted and authorize the app.
-4. After authorization, HubSpot redirects to your redirect URI with a `code` query parameter. Copy the `code` value.
-5. Exchange the authorization code for tokens using a POST request:
+Developer test accounts are for development and testing only. Do not use them in production.
 
-    ```
-    POST https://api.hubapi.com/oauth/v1/token
-    Content-Type: application/x-www-form-urlencoded
+## Step 3: Create a HubSpot app
 
-    grant_type=authorization_code
-    &code=<AUTHORIZATION_CODE>
-    &client_id=<YOUR_CLIENT_ID>
-    &client_secret=<YOUR_CLIENT_SECRET>
-    &redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+1. Navigate to **Apps** and select **Create App**.
 
-6. The response contains `access_token` and `refresh_token`. Copy the `refresh_token`.
+   ![Create app](/img/connectors/catalog/crm-sales/hubspot.crm.pipelines/setup/create_app_1.png)
 
-Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange in step 5.
+2. Provide the app name and description.
 
-Store the Client ID, Client Secret, and Refresh Token securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+## Step 4: Configure authentication
 
-## Next steps
+1. Go to the **Auth** tab.
 
-- [Actions Reference](actions.md) - Available operations
+   ![Auth tab](/img/connectors/catalog/crm-sales/hubspot.crm.pipelines/setup/create_app_2.png)
+
+2. Under **Scopes**, select **Add new scope** and add:
+   - `crm.pipelines.orders.read`
+   - `crm.pipelines.orders.write`
+
+   ![Set scope](/img/connectors/catalog/crm-sales/hubspot.crm.pipelines/setup/scope.png)
+
+3. Add your redirect URI and select **Create App**.
+
+   ![Create app with redirect](/img/connectors/catalog/crm-sales/hubspot.crm.pipelines/setup/create_app_final.png)
+
+## Step 5: Get the client ID and client secret
+
+In the **Auth** section, copy the **Client ID** and **Client Secret**.
+
+![Get credentials](/img/connectors/catalog/crm-sales/hubspot.crm.pipelines/setup/get_credentials.png)
+
+## Step 6: Get the refresh token
+
+1. Construct the authorization URL:
+
+   ```text
+   https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=<YOUR_SCOPES>&redirect_uri=<YOUR_REDIRECT_URI>
+   ```
+
+2. Open the URL in a browser and select your developer test account.
+
+3. Copy the authorization code from the redirect URL.
+
+4. Exchange the code for tokens:
+
+   ```bash
+   curl --request POST \
+     --url https://api.hubapi.com/oauth/v1/token \
+     --header 'content-type: application/x-www-form-urlencoded' \
+     --data 'grant_type=authorization_code&code=&redirect_uri=<YOUR_REDIRECT_URI>&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>'
+   ```
+
+5. Copy the `refresh_token` from the response.
+
+Store the client ID, client secret, and refresh token securely. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.

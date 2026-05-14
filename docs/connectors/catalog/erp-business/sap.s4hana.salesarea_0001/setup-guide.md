@@ -17,8 +17,8 @@ This guide walks you through enabling the SAP Sales Area OData API on your SAP S
 2. Open transaction **SOAMANAGER** or navigate to the SAP Fiori Launchpad and search for **Manage OAuth 2.0 Client**.
 3. Alternatively, open transaction **/n/IWFND/MAINT_SERVICE** (SAP Gateway Service Maintenance) to activate OData services.
 4. In the service catalog, search for the service technical name `API_SALESAREA` or the service path `sap/opu/odata4/sap/api_salesarea/srvd_a2x/sap/salesarea/0001`.
-5. Select the service and click **Add Service** or **Activate** to make it available on the SAP Gateway.
-6. Confirm the system alias and click **Save**.
+5. Select the service and select **Add Service** or **Activate** to make it available on the SAP Gateway.
+6. Confirm the system alias and select **Save**.
 
 The exact menu path may differ between SAP S/4HANA releases (1909, 2020, 2021, 2022, 2023). Consult your SAP Basis administrator if the service is not visible in the catalog.
 
@@ -53,3 +53,7 @@ For SAP BTP-managed systems or SAP S/4HANA Cloud, the hostname is provided in th
 2. Ensure the password does not expire by setting the appropriate password policy for the service user in transaction **SU01 → Logon Data tab → Password** (set **Password Status** to **Productive** or configure no expiry).
 
 Store the username and password securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

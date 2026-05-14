@@ -13,53 +13,63 @@ This guide walks you through creating a GitHub Personal Access Token (PAT) requi
 ## Step 1: Access GitHub settings
 
 1. Log in to your GitHub account.
-2. Click on your profile picture in the top-right corner of the page.
+2. Select your profile picture in the top-right corner.
 3. Select **Settings** from the dropdown menu.
 
 ## Step 2: Navigate to developer settings
 
 1. Scroll down in the left sidebar of the Settings page.
-2. Click on **Developer settings** near the bottom.
+2. Select **Developer settings** near the bottom.
 
 ## Step 3: Go to personal access tokens
 
-1. In the Developer settings page, click **Personal access tokens**.
+1. In the Developer settings page, select **Personal access tokens**.
+
+   ![GitHub developer settings](/img/connectors/catalog/developer-tools/github/setup/1-developer-settings.png)
+
 2. Select **Tokens (classic)** or **Fine-grained tokens** depending on your preference.
 
-Fine-grained tokens offer more granular permissions and are recommended for production use. Classic tokens provide broader scope-based access. Both token types work identically with the GitHub connector: the choice affects only the permission scope, not connector configuration.
+Fine-grained tokens offer more granular permissions and are recommended for production use. Classic tokens provide broader scope-based access. Both token types work with the GitHub connector — the choice affects only the permission scope, not connector configuration.
 
 ## Step 4: Generate a new token
 
-1. Click **Generate new token**.
-2. Provide a descriptive **Note** for the token (e.g., `Ballerina GitHub Connector`).
+1. Select **Generate new token**.
+2. Provide a descriptive **Note** for the token (for example, `Ballerina GitHub Connector`).
 3. Set an **Expiration** period appropriate for your use case.
-4. Select the required **Scopes** based on the operations you intend to use:
-    - **repo**: Full control of private repositories (required for most repository operations).
-    - **read:org**: Read organization and team membership.
-    - **read:user**: Read user profile data.
-    - **admin:org**: Full control of orgs and teams (if managing organization resources).
-    - **delete_repo**: Delete repositories (if needed).
-    - **gist**: Create and manage gists.
-    - **notifications**: Access notifications.
-5. Click **Generate token** at the bottom of the page.
-6. Copy the generated token immediately: it will not be shown again.
+4. Select the required permissions based on the token type:
+
+   **Classic token scopes:**
+   - **repo**: Full control of private repositories (required for most repository operations).
+   - **read:org**: Read organization and team membership.
+   - **read:user**: Read user profile data.
+   - **admin:org**: Full control of orgs and teams (if managing organization resources).
+   - **delete_repo**: Delete repositories (if needed).
+   - **gist**: Create and manage gists.
+   - **notifications**: Access notifications.
+
+   **Fine-grained token permissions** (if you selected fine-grained tokens in the previous step): configure repository access and individual permissions (for example, **Contents**, **Issues**, **Pull requests**) instead of the scope names above.
+
+   ![Configure and generate token](/img/connectors/catalog/developer-tools/github/setup/2-generate-token.png)
+
+5. Select **Generate token** at the bottom of the page.
+6. Copy the generated token immediately — it will not be shown again.
 
 Store the token securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
 
-## Configuring a GitHub repository webhook
+## Configure a GitHub repository webhook (optional)
 
-If you are using the [GitHub Webhooks](../../../develop/integration-artifacts/event/github-webhooks.md) event integration, you must configure a webhook in your GitHub repository to send events to your listener endpoint.
+If you are using [GitHub Webhooks](../../../develop/integration-artifacts/event/github-webhooks.md) event integration, configure a webhook in your GitHub repository to send events to your listener endpoint.
 
 ### Prerequisites
 
-- Admin access to the GitHub repository
-- Your WSO2 Integrator listener URL (for example, `https://your-host:8090`)
-- A webhook secret value: a random string you choose that must match the `webhookSecret` value in your integration
+- Admin access to the GitHub repository.
+- Your WSO2 Integrator listener URL (for example, `https://your-host:8090`).
+- A webhook secret value: a random string that must match the `webhookSecret` value in your integration.
 
 ### Step 1: Open webhook settings
 
 1. Go to your GitHub repository.
-2. Click **Settings** → **Webhooks** → **Add webhook**.
+2. Select **Settings > Webhooks > Add webhook**.
 
 ### Step 2: Configure the webhook
 
@@ -74,7 +84,7 @@ Fill in the following fields:
 
 ### Step 3: Select events
 
-Choose **Let me select individual events** and enable only the events that match your service type:
+Select **Let me select individual events** and enable only the events that match your service type:
 
 | If you use | Enable GitHub event |
 |---|---|
@@ -91,6 +101,11 @@ Choose **Let me select individual events** and enable only the events that match
 
 ### Step 4: Save
 
-Click **Add webhook**. GitHub will send a ping event to your endpoint to verify connectivity.
+Select **Add webhook**. GitHub sends a ping event to your endpoint to verify connectivity.
 
-Always set a webhook secret. Without it, your listener accepts requests from any source: not just GitHub. The secret is used to verify the `X-Hub-Signature-256` header on every incoming request.
+Always set a webhook secret. Without it, your listener accepts requests from any source — not just GitHub. The secret is used to verify the `X-Hub-Signature-256` header on every incoming request.
+
+## What's next
+
+- [Action reference](actions.md): Available operations
+- [Trigger reference](triggers.md): Event-driven integration

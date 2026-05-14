@@ -4,80 +4,95 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through registering an application in Microsoft Entra ID (Azure AD) and obtaining the OAuth 2.0 credentials required to use the Microsoft OneDrive connector.
+This guide walks you through registering an application in Microsoft Entra ID and obtaining the OAuth 2.0 credentials required to use the Microsoft OneDrive connector.
 
 ## Prerequisites
 
 - A Microsoft account with OneDrive access. If you do not have one, [sign up for a free Microsoft account](https://signup.live.com/).
-- Access to the [Microsoft Entra admin center](https://entra.microsoft.com/) (Azure portal) to register an application.
+- Access to the [Microsoft Entra admin center](https://entra.microsoft.com/).
 
-## Step 1: Register an application in Microsoft entra ID
+## Step 1: Register the application
 
 1. Sign in to the [Microsoft Entra admin center](https://entra.microsoft.com/).
-2. Navigate to **Identity** > **Applications** > **App registrations**.
-3. Click **New registration**.
-4. Enter a name for your application (e.g., `Ballerina OneDrive Connector`).
-5. Under **Supported account types**, select the appropriate option for your use case (e.g., **Accounts in any organizational directory and personal Microsoft accounts**).
-6. Under **Redirect URI**, select **Web** and enter `https://login.microsoftonline.com/common/oauth2/nativeclient` (or your own redirect URI).
-7. Click **Register**.
+2. Navigate to **App registrations** and select **New registration**.
 
-## Step 2: Get the client ID
+   ![App registrations](/img/connectors/catalog/storage-file/microsoft.onedrive/setup/1-App-registrations.png)
 
-1. After registration, you are taken to the application's Overview page.
-2. Copy the **Application (client) ID**; this is your `clientId`.
+3. Enter a display name for your application.
 
-## Step 3: Create a client secret
+   ![Register application](/img/connectors/catalog/storage-file/microsoft.onedrive/setup/2-Register-application.png)
 
-1. In the left menu, click **Certificates & secrets**.
-2. Under **Client secrets**, click **New client secret**.
-3. Enter a description (e.g., `Ballerina connector secret`) and select an expiration period.
-4. Click **Add**.
-5. Copy the **Value** of the newly created secret; this is your `clientSecret`.
+4. Under **Supported account types**, select the appropriate option for your use case.
+5. Leave **Redirect URI** blank for now.
+6. Select **Register**.
+7. After registration, copy the **Application (client) ID** from the Overview pane.
 
-The client secret value is shown only once. Copy it immediately and store it securely. You cannot retrieve it later.
+   ![Application overview](/img/connectors/catalog/storage-file/microsoft.onedrive/setup/3-Application-details.png)
 
-## Step 4: Configure API permissions
+## Step 2: Configure platform settings
 
-1. In the left menu, click **API permissions**.
-2. Click **Add a permission** > **Microsoft Graph** > **Delegated permissions**.
-3. Add the following permissions:
-   - `Files.Read`
-   - `Files.Read.All`
-   - `Files.ReadWrite`
-   - `Files.ReadWrite.All`
-   - `offline_access`
-4. Click **Add permissions**.
-5. If required by your organization, click **Grant admin consent** and confirm.
+1. Under **Manage**, select **Authentication**.
+2. Under **Platform configurations**, select **Add a platform** and select the **Web** tile.
+3. Set the **Redirect URI** to `http://localhost`.
 
-The `offline_access` scope is required to obtain a refresh token for long-lived access.
+   ![Configure web platform](/img/connectors/catalog/storage-file/microsoft.onedrive/setup/4-Configure-web.png)
 
-## Step 5: Generate a refresh token
+4. Select **Configure** to save.
 
-Use the OAuth 2.0 Authorization Code flow to obtain a refresh token:
+## Step 3: Add a client secret
 
-1. Construct the following URL, replacing `<CLIENT_ID>` and `<REDIRECT_URI>`:
+1. Navigate to **Certificates & secrets > Client secrets** and select **New client secret**.
 
-    ```
-    https://login.microsoftonline.com/common/oauth2/v2.0/authorize?response_type=code&client_id=<CLIENT_ID>&redirect_uri=<REDIRECT_URI>&scope=Files.Read%20Files.Read.All%20Files.ReadWrite%20Files.ReadWrite.All%20offline_access
-    ```
+   ![Add secret](/img/connectors/catalog/storage-file/microsoft.onedrive/setup/5-Add-secret.png)
 
-2. Open the URL in a browser and sign in with your Microsoft account.
-3. Grant the requested permissions when prompted.
-4. After authorization, you are redirected to your redirect URI with a `code` query parameter. Copy the `code` value.
-5. Exchange the code for tokens using a POST request:
+2. Add a description for your client secret.
 
-    ```
-    POST https://login.microsoftonline.com/common/oauth2/v2.0/token
-    Content-Type: application/x-www-form-urlencoded
+   ![Add description](/img/connectors/catalog/storage-file/microsoft.onedrive/setup/6-Give-description.png)
 
-    grant_type=authorization_code
-    &code=<AUTHORIZATION_CODE>
-    &client_id=<CLIENT_ID>
-    &client_secret=<CLIENT_SECRET>
-    &redirect_uri=<REDIRECT_URI>
-    &scope=Files.Read Files.Read.All Files.ReadWrite Files.ReadWrite.All offline_access
-    ```
+3. Select an expiration period and select **Add**.
+4. Copy and save the **Value** of the secret immediately — it will not be shown again.
 
-6. The response contains `access_token` and `refresh_token`. Copy the `refresh_token`.
+   ![Save secret value](/img/connectors/catalog/storage-file/microsoft.onedrive/setup/7-Note-down-secret.png)
 
-Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange in step 5.
+The client secret value is shown only once. Store it securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
+
+## Step 4: Get the refresh token
+
+1. Construct the authorization URL, replacing `<client-id>` with your Application (client) ID:
+
+   ```
+   https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=<client-id>&scope=offline_access%20files.read%20files.read.all%20files.readwrite%20files.readwrite.all&response_type=code&redirect_uri=http://localhost
+   ```
+
+   | Parameter | Description |
+   |---|---|
+   | `client_id` | Your Application (client) ID |
+   | `scope` | `offline_access` (refresh token), `files.read`, `files.read.all`, `files.readwrite`, `files.readwrite.all` |
+   | `response_type` | `code` |
+   | `redirect_uri` | Must match the URI configured in Step 2 |
+
+2. Open the URL in a browser, sign in, and select **Accept** to grant access.
+
+   ![Grant access](/img/connectors/catalog/storage-file/microsoft.onedrive/setup/8-Give-access.png)
+
+3. After authorization, you are redirected to a URL like:
+
+   ```
+   http://localhost/?code=<auth-code>
+   ```
+
+   Copy the `code` value from the URL.
+
+4. Exchange the code for tokens:
+
+   ```bash
+   curl -X POST https://login.microsoftonline.com/common/oauth2/v2.0/token \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "client_id=<client-id>&client_secret=<client-secret>&redirect_uri=http://localhost&code=<auth-code>&grant_type=authorization_code"
+   ```
+
+5. Copy the `refresh_token` from the response.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

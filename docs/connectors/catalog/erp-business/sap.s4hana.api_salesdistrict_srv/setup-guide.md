@@ -17,16 +17,16 @@ This guide walks you through configuring SAP S/4HANA access and obtaining the cr
 2. Open transaction **SICF** (HTTP Service Framework).
 3. In the service tree, navigate to **default_host → sap → opu → odata → sap**.
 4. Locate the service **API_SALESDISTRICT_SRV** and verify it is active (not grayed out).
-5. If the service is inactive, right-click it and select **Activate Service**.
+5. If the service is inactive, right-select it and select **Activate Service**.
 
 You need Basis administrator privileges to activate or deactivate ICF services.
 
 ## Step 2: Register the OData service in SAP gateway (on-premise only)
 
 1. Open transaction **/IWFND/MAINT_SERVICE** (SAP Gateway: Activate and Maintain Services).
-2. Click **Add Service**.
+2. Select **Add Service**.
 3. Search for **API_SALESDISTRICT_SRV** in the service catalog.
-4. Select the service and click **Add Selected Services**.
+4. Select the service and select **Add Selected Services**.
 5. Assign the service to a system alias (e.g., **LOCAL** for the same system).
 6. Save the configuration.
 
@@ -51,7 +51,7 @@ password with permission to call OData services.
 
 Use a dedicated technical user (service account) rather than a personal dialog user to avoid disruptions when passwords are rotated or accounts are locked.
 
-## Step 4: Determine the SAP s/4HANA hostname
+## Step 4: Determine the SAP S/4HANA hostname
 
 The connector requires the hostname of your SAP S/4HANA system.
 
@@ -62,3 +62,7 @@ The connector requires the hostname of your SAP S/4HANA system.
   `s4hana.example.com`.
 
 The default HTTPS port is `443`. Note the port number if your system uses a non-standard port.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

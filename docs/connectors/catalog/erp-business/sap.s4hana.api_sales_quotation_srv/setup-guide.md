@@ -16,9 +16,9 @@ This guide walks you through enabling the SAP Sales Quotation OData service in y
 1. Log on to the SAP S/4HANA system with a basis administrator user.
 2. Open transaction **SOAMANAGER** (Service-Oriented Architecture Manager).
 3. Under **Web Service Configuration**, search for the service `API_SALES_QUOTATION_SRV`.
-4. Select the service entry and click **Activate** to expose it for external HTTP calls.
+4. Select the service entry and select **Activate** to expose it for external HTTP calls.
 5. Alternatively, open transaction **SICF** (HTTP Service Hierarchy), navigate to
-   `/sap/opu/odata/sap/API_SALES_QUOTATION_SRV`, right-click the node, and select **Activate Service**.
+   `/sap/opu/odata/sap/API_SALES_QUOTATION_SRV`, right-select the node, and select **Activate Service**.
 
 If the service node is already shown as active in SOAMANAGER or SICF, no further activation step is needed. You can confirm accessibility by opening the service document URL in a browser and verifying you receive an XML metadata response.
 
@@ -52,3 +52,7 @@ Use transaction SU53 immediately after a failed API call to display any missing 
 3. Note the **username** and **password**; these are supplied as `auth.username` and `auth.password` in the connector `ConnectionConfig`.
 
 For production environments, prefer a dedicated Communication User with only the minimum required authorizations rather than a shared dialog user. Store credentials using Ballerina's `configurable` keyword and a `Config.toml` file; never hard-code them in source.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

@@ -6,38 +6,56 @@ title: Setup Guide
 
 This guide walks you through creating a Twilio account and obtaining the credentials required to use the Twilio connector.
 
-## Prerequisites
+## Step 1: Create a Twilio account
 
-- A Twilio account. If you do not have one, [sign up for a free trial](https://www.twilio.com/try-twilio).
+Visit [Twilio](https://www.twilio.com) and select **Try Twilio for Free** to create an account.
 
-## Step 1: Get your account SID and auth token
+## Step 2: Obtain a Twilio phone number
 
-1. Log in to the [Twilio Console](https://console.twilio.com/).
-2. On the main dashboard, locate **Account Info**.
-3. Copy the **Account SID**; this is your `accountSid`.
-4. Click **Show** next to **Auth Token** and copy it: this is your `authToken`.
+Trial projects can provision a complimentary phone number for testing.
 
-Store your Account SID and Auth Token securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+Trial project phone number selection may be limited. Upgrade your Twilio project to provision more than one phone number or a number not available to trial projects.
 
-## Step 2: Get a Twilio phone number
+1. Access the **Buy a Number** page in the Console.
 
-1. In the Twilio Console, navigate to **Phone Numbers** > **Manage** > **Buy a Number** (trial accounts receive one free number).
-2. Search for a number with the desired capabilities (SMS, MMS, Voice).
-3. Click **Buy** to provision the number.
-4. Copy the phone number in E.164 format (e.g., `+1234567890`): use this as the `From` number in API calls.
+   ![Get phone number](/img/connectors/catalog/communication/twilio/setup/get-phone-number.png)
 
-Trial accounts can only send messages and make calls to verified phone numbers. Verify additional numbers under **Phone Numbers** > **Verified Caller IDs**.
+2. Enter the criteria for the phone number you need and select **Search**.
 
-## Step 3: Create an API key (optional)
+   ![Configure phone number](/img/connectors/catalog/communication/twilio/setup/phone-number-config.png)
 
-If you prefer API Key authentication instead of Auth Token authentication:
+   - **Country**: Select the desired country.
+   - **Number or Location**: Search by digits/phrases, or a specific city or region.
+   - **Capabilities**: Select your service needs.
 
-1. In the Twilio Console, go to **Account** > **API keys & tokens**.
-2. Click **Create API Key**.
-3. Enter a **Friendly Name** for the key.
-4. Select the key type (**Standard**, **Main**, or **Restricted**).
-5. Click **Create API Key**.
-6. Copy the **SID**; this is your `apiKey`.
-7. Copy the **Secret**; this is your `apiSecret`. This value is shown only once.
+3. Select **Buy** to purchase a phone number for your project or sub-account.
 
-The API Key Secret is displayed only at creation time. Store it immediately in a secure location. If lost, you must create a new API key.
+   ![Search results](/img/connectors/catalog/communication/twilio/setup/search-phone-number.png)
+
+Many countries require identity documentation for phone number compliance. See Twilio's [Phone Number Regulations](https://www.twilio.com/guidelines/regulatory) for details.
+
+## Step 3: Obtain the account SID, API key, and API secret
+
+1. Go to [API keys & tokens](https://console.twilio.com/us1/account/keys-credentials/api-keys) in the Twilio Console and select **Create API key**.
+
+   ![Twilio API key](/img/connectors/catalog/communication/twilio/setup/api-key-config.png)
+
+2. Enter the criteria for the API key and select **Create**.
+
+   ![Create API key](/img/connectors/catalog/communication/twilio/setup/create-api-key.png)
+
+   - **Friendly name**: A human-readable name to identify the key.
+   - **Region**: The geographical region where the key will be used.
+   - **Key type**: Choose **Standard**, **Main**, or **Restricted** based on the access level required.
+
+3. Save the **API key SID** and **Secret** in a secure location.
+
+   ![API key info](/img/connectors/catalog/communication/twilio/setup/api-key-info.png)
+
+   :::warning
+   The secret is shown only once. Store it immediately in a safe location.
+   :::
+
+4. To find your **Account SID**, visit the [Twilio Console](https://www.twilio.com/console).
+
+   ![Twilio credentials](/img/connectors/catalog/communication/twilio/setup/get-credentails.png)

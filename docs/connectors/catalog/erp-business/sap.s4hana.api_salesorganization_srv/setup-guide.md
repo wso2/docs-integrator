@@ -11,7 +11,7 @@ This guide walks you through obtaining the SAP S/4HANA connection details and cr
 - An active SAP S/4HANA system (on-premise or SAP BTP ABAP Environment) with the `API_SALESORGANIZATION_SRV` OData service enabled.
 - An SAP user account with authorization to access Sales and Distribution master data (typically the `S_RS_ADMWB` or equivalent authorization object).
 
-## Step 1: Locate the SAP s/4HANA hostname and port
+## Step 1: Locate the SAP S/4HANA hostname and port
 
 1. Contact your SAP Basis administrator to obtain the **hostname** (or IP address) and
    **HTTPS port** of your SAP S/4HANA system.
@@ -44,3 +44,7 @@ You can test connectivity by opening the service document URL in a browser: `htt
 Do not use your personal SAP dialog user for automated integrations. Request a dedicated technical user to avoid session conflicts and to simplify credential rotation.
 
 Store the username and password securely. Use Ballerina's `configurable` feature and a `Config.toml` file (excluded from source control) to supply them at runtime.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

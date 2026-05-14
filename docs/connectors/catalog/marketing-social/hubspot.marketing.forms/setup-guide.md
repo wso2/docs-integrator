@@ -4,68 +4,92 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a HubSpot app and obtaining the OAuth 2.0 credentials required to use the HubSpot Marketing Forms connector.
+This guide walks you through creating a HubSpot developer app and obtaining the OAuth 2.0 credentials required to use the HubSpot Marketing Forms connector.
 
 ## Prerequisites
 
-- A HubSpot account. If you do not have one, [sign up for a free account](https://app.hubspot.com/signup).
+- A HubSpot developer account. If you do not have one, [sign up for a free account](https://developers.hubspot.com/get-started).
 
-## Create a HubSpot app
+## Step 1: Log in to the HubSpot developer portal
 
-1. Log in to the [HubSpot Developer Portal](https://app.hubspot.com/).
-2. Click **Apps** in the top navigation bar.
-3. Click **Create app**.
-4. Enter an **App name** (e.g., `Ballerina Forms Connector`) and optionally a description.
-5. Click **Create app**.
+Log in to your [HubSpot developer account](https://app.hubspot.com/).
 
-## Configure OAuth scopes
+## Step 2: Create a developer test account (optional)
 
-1. In your app settings, navigate to the **Auth** tab.
-2. Under **Redirect URLs**, add your callback URL (e.g., `https://localhost/callback`).
-3. Under **Scopes**, search for and add the **forms** scope.
-4. Click **Save changes**.
+Developer test accounts let you test apps and integrations without affecting real HubSpot data.
 
-The `forms` scope is required for all form operations. Without it, API calls will return a 403 error.
+1. Select **Test accounts** in the left sidebar.
 
-## Get the client ID and client secret
+   ![Test accounts section](/img/connectors/catalog/marketing-social/hubspot.marketing.forms/setup/test-account.png)
 
-1. In the **Auth** tab of your app, locate the **Client ID** and **Client Secret** fields.
-2. Copy the **Client ID**; this is your `clientId`.
-3. Copy the **Client Secret**; this is your `clientSecret`.
+2. Select **Create developer test account**.
 
-Store the Client ID and Client Secret securely. Do not commit them to source control.
-Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+   ![Create developer test account](/img/connectors/catalog/marketing-social/hubspot.marketing.forms/setup/create-test-account.png)
 
-## Authorize and get a refresh token
+3. Provide a name and select **Create**.
 
-Use the HubSpot OAuth 2.0 Authorization Code flow to obtain a refresh token:
+   ![Name the test account](/img/connectors/catalog/marketing-social/hubspot.marketing.forms/setup/create-account.png)
 
-1. Construct the following authorization URL, replacing the placeholders:
+Developer test accounts are for development and testing only. Do not use them in production.
 
-    ```
-    https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=forms&redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+## Step 3: Create a HubSpot app
 
-2. Open the URL in a browser and select the HubSpot account to authorize.
-3. Click **Grant access** when prompted.
-4. After authorization, HubSpot redirects to your callback URL with a `code` query parameter. Copy the `code` value.
-5. Exchange the code for tokens using a POST request:
+1. Navigate to **Apps** in the left sidebar and select **Create app**.
 
-    ```
-    POST https://api.hubapi.com/oauth/v1/token
-    Content-Type: application/x-www-form-urlencoded
+   ![Create app](/img/connectors/catalog/marketing-social/hubspot.marketing.forms/setup/create-app.png)
 
-    grant_type=authorization_code
-    &code=<AUTHORIZATION_CODE>
-    &client_id=<YOUR_CLIENT_ID>
-    &client_secret=<YOUR_CLIENT_SECRET>
-    &redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+2. Enter a public app name and an optional description.
 
-6. The response contains `access_token` and `refresh_token`. Copy the `refresh_token`.
+   ![App name and description](/img/connectors/catalog/marketing-social/hubspot.marketing.forms/setup/app-name-desc.png)
 
-Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange in step 5.
+## Step 4: Configure authentication
 
-## Next steps
+1. Go to the **Auth** tab.
 
-- [Actions Reference](actions.md) - Available operations
+   ![Auth tab](/img/connectors/catalog/marketing-social/hubspot.marketing.forms/setup/config-auth.png)
+
+2. Under **Scopes**, select **Add new scopes** and add:
+   - `forms`
+
+   ![Add scopes](/img/connectors/catalog/marketing-social/hubspot.marketing.forms/setup/add-scopes.png)
+
+3. Under **Redirect URL**, add your redirect URL and select **Create App**.
+
+   ![Redirect URL](/img/connectors/catalog/marketing-social/hubspot.marketing.forms/setup/redirect-url.png)
+
+## Step 5: Get the client ID and client secret
+
+In the **Auth** tab, copy the **Client ID** and **Client Secret**.
+
+![Client ID and client secret](/img/connectors/catalog/marketing-social/hubspot.marketing.forms/setup/client-id-secret.png)
+
+## Step 6: Get the refresh token
+
+1. Construct the authorization URL:
+
+   ```
+   https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=<YOUR_SCOPES>&redirect_uri=<YOUR_REDIRECT_URI>
+   ```
+
+2. Open the URL in a browser and select your developer test account.
+
+   ![Select account](/img/connectors/catalog/marketing-social/hubspot.marketing.forms/setup/account-select.png)
+
+3. Copy the authorization code from the redirect URL.
+
+4. Exchange the code for tokens:
+
+   ```bash
+   curl --request POST \
+     --url https://api.hubapi.com/oauth/v1/token \
+     --header 'content-type: application/x-www-form-urlencoded' \
+     --data 'grant_type=authorization_code&code=&redirect_uri=<YOUR_REDIRECT_URI>&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>'
+   ```
+
+5. Copy the `refresh_token` from the response.
+
+Store the client ID, client secret, and refresh token securely. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

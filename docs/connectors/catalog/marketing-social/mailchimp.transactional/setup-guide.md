@@ -4,42 +4,51 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a Mailchimp Transactional (Mandrill) account and obtaining the API key required to use the connector.
+This guide walks you through creating a Mailchimp account, enabling the transactional email feature, and generating a Mandrill API key required to use the Mailchimp Transactional connector.
 
 ## Prerequisites
 
-- A Mailchimp account with a paid plan that includes Transactional Email. If you do not have one, [sign up at Mailchimp](https://login.mailchimp.com/signup/) and enable the Transactional Email add-on.
+- A Mailchimp account. If you do not have one, [sign up for free](https://login.mailchimp.com/signup/).
 
-## Step 1: Enable transactional email in Mailchimp
+## Step 1: Log in to your Mailchimp account
 
-1. Log in to your [Mailchimp account](https://login.mailchimp.com/).
-2. Navigate to **Automations** > **Transactional Email** in the left sidebar.
-3. If you have not enabled Transactional Email, click **Add Transactional Email** and complete the billing setup.
-4. Once enabled, click **Launch Mandrill** to open the MandrillApp dashboard.
+1. Log in to your Mailchimp account at [login.mailchimp.com](https://login.mailchimp.com/).
+2. Select your profile icon in the top-right corner to open the account menu.
 
-Transactional Email is a paid add-on. You need an active Mailchimp billing plan to access Mandrill features.
+   ![Mailchimp dashboard](/img/connectors/catalog/marketing-social/mailchimp.transactional/setup/mailchimp-dashboard.png)
 
-## Step 2: Generate a mandrill API key
+   ![Profile menu](/img/connectors/catalog/marketing-social/mailchimp.transactional/setup/mailchimp-menu.png)
 
-1. In the [MandrillApp dashboard](https://mandrillapp.com/), click **Settings** in the left sidebar.
-2. Click **+ New API Key**.
-3. Optionally provide a description for the key (e.g., `Ballerina Integration`).
-4. Click **Create API Key**.
-5. Copy the generated API key; this is the `'key` value you will pass in every API request.
+## Step 2: Enable transactional email
 
-Store the API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
+1. In the account menu, select **Billing**.
 
-## Step 3: Verify a sending domain
+   ![Billing section](/img/connectors/catalog/marketing-social/mailchimp.transactional/setup/mailchimp-billing.png)
 
-1. In the MandrillApp dashboard, go to **Sending Domains**.
-2. Enter the domain you want to send email from (e.g., `example.com`) and click **Add**.
-3. Follow the instructions to add the DKIM and SPF DNS records for your domain.
-4. Click **Test DNS Settings** to verify the records are correctly configured.
+2. Under **Monthly plans or credits**, select the **Transactional Email Plan** (you can start with the demo plan).
 
-Emails sent from unverified domains may be rejected or marked as spam. Always verify your sending domain before sending production emails.
+   ![Transactional email plan](/img/connectors/catalog/marketing-social/mailchimp.transactional/setup/mailchimp-transactional-setup.png)
 
-## Step 4: Test your API key
+## Step 3: Generate a Mandrill API key
 
-1. In the MandrillApp dashboard, go to **Settings** > **API Keys**.
-2. Click **Test** next to your API key.
-3. Confirm the test returns a successful `PONG!` response: this verifies your key is active and correctly configured.
+1. Navigate to the **Extras** section and select **API keys**.
+
+   ![Extras section](/img/connectors/catalog/marketing-social/mailchimp.transactional/setup/mailchimp-api-key-menu.png)
+
+2. Select **Create A Mandrill API Key** (not the regular API key). You are redirected to the MandrillApp dashboard.
+
+   ![Mandrill API key selection](/img/connectors/catalog/marketing-social/mailchimp.transactional/setup/mailchimp-create-api-key.png)
+
+3. In the MandrillApp dashboard, select **+ Add API Key** to generate your key.
+
+   ![MandrillApp dashboard](/img/connectors/catalog/marketing-social/mailchimp.transactional/setup/mailchimp-create-mandril-key.png)
+
+4. Copy the generated API key.
+
+   ![Copy API key](/img/connectors/catalog/marketing-social/mailchimp.transactional/setup/validate-api-key-info.png)
+
+Store your Mandrill API key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

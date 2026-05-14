@@ -4,76 +4,68 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a HubSpot private app or OAuth app and obtaining the credentials required to use the HubSpot CRM Commerce Taxes connector.
+This guide walks you through creating a HubSpot developer app and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Commerce Taxes connector.
 
 ## Prerequisites
 
-- A HubSpot account with a Commerce Hub subscription. If you do not have one, [sign up for a free HubSpot account](https://app.hubspot.com/signup).
+- A HubSpot developer account. If you do not have one, [sign up for a free account](https://developers.hubspot.com/get-started).
 
-## Create a HubSpot developer account (for OAuth)
+## Step 1: Log in to the HubSpot developer portal
 
-1. Go to the [HubSpot Developer Portal](https://developers.hubspot.com/).
-2. Click **Create a developer account** (or log in if you already have one).
-3. Complete the registration form and verify your email.
+Log in to your [HubSpot developer account](https://app.hubspot.com/).
 
-## Create an OAuth app
+## Step 2: Create a HubSpot app
 
-1. In the HubSpot Developer Portal, navigate to **Apps** in the top navigation.
-2. Click **Create app**.
-3. Fill in the **App info** tab with a name and description.
-4. Go to the **Auth** tab.
-5. Note the **Client ID** and **Client Secret**; you will need these for authentication.
-6. Under **Redirect URLs**, add your callback URL (e.g., `https://localhost/callback`).
-7. Under **Scopes**, add the following scopes:
-    - `crm.objects.commercepayments.read`
-    - `crm.objects.commercepayments.write`
-    - `e-commerce`
-8. Click **Save**.
+1. Select **Create app** from the developer portal.
 
-If you only need basic access, you can use a Private App instead of OAuth. Private apps use a simpler API key-based authentication.
+   ![Create public app](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.taxes/setup/build_public_app.png)
 
-## Generate OAuth tokens
+2. Select **Create app** on the next screen.
 
-1. Construct the authorization URL:
+   ![Create app](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.taxes/setup/create_app.png)
 
-    ```
-    https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&redirect_uri=<YOUR_REDIRECT_URI>&scope=crm.objects.commercepayments.read%20crm.objects.commercepayments.write%20e-commerce
-    ```
+3. Under **App Info**, enter a public app name and an optional logo and description.
 
-2. Open the URL in a browser and select the HubSpot account to authorize.
-3. After authorization, HubSpot redirects to your callback URL with a `code` query parameter. Copy the `code` value.
-4. Exchange the code for tokens using a POST request:
+   ![Enter app details](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.taxes/setup/enter_app_details.png)
 
-    ```
-    POST https://api.hubapi.com/oauth/v1/token
-    Content-Type: application/x-www-form-urlencoded
+4. Go to the **Auth** tab and add your redirect URLs.
 
-    grant_type=authorization_code
-    &code=<AUTHORIZATION_CODE>
-    &client_id=<YOUR_CLIENT_ID>
-    &client_secret=<YOUR_CLIENT_SECRET>
-    &redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+   ![Auth page](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.taxes/setup/auth_page.png)
 
-5. The response contains `access_token` and `refresh_token`. Copy the `refresh_token`.
+5. Select **Create app**.
 
-The refresh token does not expire unless the app is uninstalled. Store it securely and use Ballerina's `configurable` feature with a `Config.toml` file to supply credentials at runtime.
+## Step 3: Get the client ID and client secret
 
-## Alternative: create a private app
+In the **Auth** tab, copy the **Client ID** and **Client Secret**.
 
-1. In your HubSpot account, click the gear icon and go to **Settings**.
-2. In the left sidebar, navigate to **Integrations > Private Apps**.
-3. Click **Create a private app**.
-4. Enter a name and description for the app.
-5. Go to the **Scopes** tab and add the required scopes:
-    - `crm.objects.commercepayments.read`
-    - `crm.objects.commercepayments.write`
-    - `e-commerce`
-6. Click **Create app** and confirm.
-7. Copy the **Access token** displayed: this is your bearer token.
+![Client ID and client secret](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.taxes/setup/client_id_secret.png)
 
-Private app tokens provide full access to the scopes you configure. Treat them like passwords: never commit them to source control.
+## Step 4: Get the refresh token
 
-## Next steps
+1. In the **Auth** tab, add the required scopes based on the [HubSpot API reference](https://developers.hubspot.com/docs/reference/api):
+   - `crm.objects.line_items.read`
+   - `crm.objects.line_items.write`
+   - `oauth`
 
-- [Actions Reference](actions.md): Available operations
+   ![API reference for scopes](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.taxes/setup/exmaple_api_reference.png)
+
+2. Under **Sample install URL (OAuth)**, copy the full URL and open it in a browser.
+
+3. Select the account to authorize.
+
+   ![Choose account](/img/connectors/catalog/crm-sales/hubspot.crm.commerce.taxes/setup/account_chose.png)
+
+4. Copy the authorization code from the redirect URL.
+
+5. Exchange the code for tokens:
+
+   ```bash
+   curl --request POST \
+     --url https://api.hubapi.com/oauth/v1/token \
+     --header 'content-type: application/x-www-form-urlencoded' \
+     --data 'grant_type=authorization_code&code=&redirect_uri=<YOUR_REDIRECT_URI>&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>'
+   ```
+
+6. Copy the `refresh_token` from the response.
+
+Store the client ID, client secret, and refresh token securely. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.

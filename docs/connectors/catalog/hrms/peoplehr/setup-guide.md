@@ -13,17 +13,17 @@ This guide walks you through creating a People HR account and obtaining the API 
 ## Step 1: Navigate to API settings
 
 1. Log in to your People HR account.
-2. Click on **Settings** in the bottom-left sidebar menu.
+2. Select on **Settings** in the bottom-left sidebar menu.
 3. Select **API** from the Settings sidebar menu.
 
 If you do not see the API option, contact People HR support to request API access for your account.
 
 ## Step 2: Create a new API key
 
-1. On the API Key Management page, click the **+** icon to add a new API key.
+1. On the API Key Management page, select the **+** icon to add a new API key.
 2. Enter a descriptive **Key Name** (e.g., `Ballerina PeopleHR Connector`).
 3. Under **Application Actions**, select the permissions the key should have access to. For full connector functionality, select all actions for **Employee**, **Salary**, **Absence**, **Holiday**, and any other modules you need.
-4. Click **Save**.
+4. Select **Save**.
 
 ## Step 3: Copy and store the API key
 
@@ -41,3 +41,7 @@ For enhanced security, you can restrict the API key to specific IP addresses:
 3. Save your changes.
 
 IP restriction is recommended for production environments to prevent unauthorized use of the API key.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

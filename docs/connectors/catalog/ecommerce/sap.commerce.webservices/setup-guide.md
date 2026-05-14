@@ -28,7 +28,7 @@ On SAP Commerce Cloud (CCv2), the OCC API is enabled by default. These steps app
 ## Step 2: Register an OAuth client
 
 1. Open the **Backoffice Administration Cockpit** and navigate to **System > OAuth > OAuth Clients**.
-2. Click **Create** to register a new OAuth client.
+2. Select **Create** to register a new OAuth client.
 3. Fill in the following fields:
     - **Client ID**: Enter a unique identifier (e.g., `ballerina_connector`).
     - **Client Secret**: Enter a strong secret value.
@@ -62,3 +62,7 @@ Verify which URL is active by testing a token request with your client credentia
 3. This value is passed as `baseSiteId` in most API calls.
 
 You can also retrieve available base sites programmatically using the `getBaseSites` operation.
+
+## What's next
+
+- [Action reference](actions.md): Available operations

@@ -4,46 +4,40 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a PayPal Developer account and obtaining the OAuth 2.0 client credentials required to use the PayPal Payments connector.
+This guide walks you through creating a PayPal sandbox business account and obtaining the API credentials required to use the PayPal Payments connector.
 
 ## Prerequisites
 
-- A PayPal Developer account. If you do not have one, [sign up at the PayPal Developer Dashboard](https://developer.paypal.com/).
+- A [PayPal Developer account](https://developer.paypal.com/). If you do not have one, sign up at [developer.paypal.com](https://developer.paypal.com/).
 
-## Step 1: Create sandbox accounts
+## Step 1: Create a sandbox business account
 
-1. Log in to the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard/).
-2. Navigate to **Testing Tools** > **Sandbox Accounts**.
-3. Create a **Business** sandbox account if you do not already have one.
-4. Note the sandbox business account email; you will use this for testing.
+1. Open the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard).
+2. Under **Testing Tools**, select **Sandbox Accounts**.
 
-PayPal automatically creates default sandbox accounts (one Business, one Personal) when you sign up. You can use these for testing.
+   ![Sandbox accounts](/img/connectors/catalog/finance-accounting/paypal.payments/setup/sandbox-accounts.png)
+
+3. Select **Create account** and choose **Business** as the account type.
+
+   ![Create business account](/img/connectors/catalog/finance-accounting/paypal.payments/setup/create-account.png)
+
+Some PayPal options and features may vary by region or country — check availability before creating an account.
 
 ## Step 2: Create a REST API app
 
-1. In the Developer Dashboard, go to **Apps & Credentials**.
-2. Ensure **Sandbox** is selected at the top of the page.
-3. Click **Create App**.
-4. Enter an app name (e.g., `Ballerina PayPal Connector`).
-5. Select your sandbox Business account as the **Sandbox Business Account**.
-6. Click **Create App**.
+1. Navigate to the **Apps & Credentials** tab.
+2. Select **Create App**, provide a name, and select the sandbox business account you created.
 
-## Step 3: Get your client ID and client secret
+   ![Create app](/img/connectors/catalog/finance-accounting/paypal.payments/setup/create-app.png)
 
-1. After creating the app, you are taken to the app details page.
-2. Copy the **Client ID**; this is your `clientId`.
-3. Click **Show** under **Secret** and copy the value; this is your `clientSecret`.
+## Step 3: Get the client ID and client secret
 
-Store the Client ID and Client Secret securely. Do not commit them to source control.
-Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+After creating the app, copy the **Client ID** and **Client Secret** displayed on the app details page.
 
-## Step 4: Configure the service URL
+![Client ID and client secret](/img/connectors/catalog/finance-accounting/paypal.payments/setup/get-credentials.png)
 
-The connector requires a service URL that points to the PayPal Payments API:
+Store the Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
 
-- **Sandbox**: `https://api-m.sandbox.paypal.com/v2/payments`
-- **Production**: `https://api-m.paypal.com/v2/payments`
+## What's next
 
-Use the sandbox URL during development and testing, then switch to the production URL when you go live.
-
-To use the production URL, your PayPal app must be approved for live access. Go to **Apps & Credentials**, switch to **Live**, and follow PayPal's approval process.
+- [Action reference](actions.md): Available operations

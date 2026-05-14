@@ -4,60 +4,94 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through setting up your AWS account and Amazon Redshift environment to obtain the credentials and configuration required to use the AWS Redshift data connector.
+This guide walks you through creating an IAM user, obtaining access keys, and setting up an Amazon Redshift cluster for use with the AWS Redshift data connector.
 
 ## Prerequisites
 
-- An active AWS account. If you do not have one, [sign up for an AWS account](https://aws.amazon.com/).
-- An Amazon Redshift provisioned cluster or Redshift Serverless workgroup with a database created.
+- An active AWS account. If you do not have one, [sign up for a free account](https://aws.amazon.com/free/).
 
-## Step 1: Create an IAM user with Redshift data API permissions
+## Step 1: Log in to the AWS Console
 
-1. Log in to the [AWS Management Console](https://console.aws.amazon.com/).
-2. Navigate to **IAM** (Identity and Access Management).
-3. In the left sidebar, click **Users**, then **Create user**.
-4. Enter a user name (e.g., `ballerina-redshift-user`) and click **Next**.
-5. Under **Set permissions**, choose **Attach policies directly**.
-6. Search for and attach the following managed policies:
-    - **AmazonRedshiftDataFullAccess**: grants access to the Redshift data API.
-    - **AmazonRedshiftFullAccess**: grants access to Redshift cluster resources (if using provisioned clusters).
-7. Click **Next**, then **Create user**.
+Access the [AWS Management Console](https://console.aws.amazon.com/).
 
-For production environments, create a custom IAM policy with only the minimum required permissions instead of using full-access policies.
+## Step 2: Create an IAM user
 
-## Step 2: Generate access keys
+1. In the AWS Management Console, search for **IAM** in the services search bar and select it.
 
-1. In the IAM console, click on the user you just created.
-2. Go to the **Security credentials** tab.
-3. Under **Access keys**, click **Create access key**.
-4. Select **Application running outside AWS** as the use case and click **Next**.
-5. Optionally add a description tag, then click **Create access key**.
-6. Copy the **Access key ID** and **Secret access key**.
+   ![Search IAM](/img/connectors/catalog/database/aws.redshiftdata/setup/create-user-1.png)
 
-The secret access key is shown only once. Store it securely. If lost, you must create a new access key pair.
+2. Select **Users** in the left navigation pane.
 
-Store the access key ID and secret access key securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+   ![Select Users](/img/connectors/catalog/database/aws.redshiftdata/setup/create-user-2.png)
 
-## Step 3: Note your cluster or workgroup details
+3. Select **Create user**.
 
-**For a provisioned Redshift cluster:**
+   ![Create user](/img/connectors/catalog/database/aws.redshiftdata/setup/create-user-3.png)
 
-1. Navigate to **Amazon Redshift** in the AWS Console.
-2. Click **Clusters** in the left sidebar and select your cluster.
-3. Note the **Cluster identifier** (e.g., `my-redshift-cluster`).
-4. Note the **Database name** (e.g., `dev`).
-5. Note the **Database user** (e.g., `awsuser`) if you plan to use temporary credentials.
+4. Enter a suitable **User name** and select **Next**.
 
-**For Redshift Serverless:**
+   ![Specify user details](/img/connectors/catalog/database/aws.redshiftdata/setup/specify-user-details.png)
 
-1. Navigate to **Amazon Redshift Serverless** in the AWS Console.
-2. Click **Workgroups** and select your workgroup.
-3. Note the **Workgroup name**.
-4. Under the associated namespace, note the **Database name**.
+5. Add the required permissions by adding the user to a group, copying permissions, or attaching policies directly (for example, **AmazonRedshiftDataFullAccess**). Select **Next**.
 
-If you prefer to authenticate database access using AWS Secrets Manager, create a secret with your database credentials and note its ARN. You can then provide it as `secretArn` instead of `dbUser`.
+   ![Set user permissions](/img/connectors/catalog/database/aws.redshiftdata/setup/set-user-permissions.png)
 
-## Step 4: Identify your AWS region
+6. Review the details and select **Create user**.
 
-Note the AWS region where your Redshift cluster or workgroup is deployed (e.g., `us-east-1`).
-You can find this in the AWS Console URL or in the cluster/workgroup details page.
+   ![Review and create user](/img/connectors/catalog/database/aws.redshiftdata/setup/review-create-user.png)
+
+## Step 3: Get the access key ID and secret access key
+
+1. Select the user you just created from the **Users** list.
+
+   ![Select user](/img/connectors/catalog/database/aws.redshiftdata/setup/users.png)
+
+2. Go to the **Security credentials** tab and select **Create access key**.
+
+   ![Create access key](/img/connectors/catalog/database/aws.redshiftdata/setup/create-access-key-1.png)
+
+3. Select your use case and select **Next**.
+
+   ![Select use case](/img/connectors/catalog/database/aws.redshiftdata/setup/select-usecase.png)
+
+4. Copy the **Access key ID** and **Secret access key**. Use these credentials to authenticate your integration.
+
+   ![Retrieve access key](/img/connectors/catalog/database/aws.redshiftdata/setup/retrieve-access-key.png)
+
+The secret access key is shown only once. Copy both values immediately or download the CSV file. If lost, you must create a new access key pair.
+
+## Step 4: Set up a Redshift cluster
+
+### Navigate to Amazon Redshift and create a cluster
+
+1. In the AWS Management Console, search for **Redshift** and select it.
+
+   ![Navigate to Redshift](/img/connectors/catalog/database/aws.redshiftdata/setup/create-cluster-1.png)
+
+2. Select **Create cluster** to start creating a new cluster.
+
+   ![Create cluster](/img/connectors/catalog/database/aws.redshiftdata/setup/create-cluster-2.png)
+
+### Configure cluster settings
+
+1. Configure the cluster identifier, database name, credentials, and other relevant parameters.
+
+   ![Configure cluster](/img/connectors/catalog/database/aws.redshiftdata/setup/configure-cluster-1.png)
+
+2. Configure security groups to control inbound and outbound traffic to your Redshift cluster.
+
+   ![Configure security groups](/img/connectors/catalog/database/aws.redshiftdata/setup/configure-security-groups.png)
+
+3. Record the database username set during cluster configuration — it will be used to authenticate your integration.
+
+   ![Database configuration](/img/connectors/catalog/database/aws.redshiftdata/setup/database-configurations.png)
+
+4. Review your settings and select **Create cluster**.
+
+### Wait for cluster availability
+
+Monitor the cluster status in the AWS Console until it shows as **Available**.
+
+![Wait for availability](/img/connectors/catalog/database/aws.redshiftdata/setup/wait-for-availability.png)
+
+Amazon Redshift also offers a serverless option that scales automatically without managing infrastructure. To configure Redshift Serverless, see the [AWS documentation](https://docs.aws.amazon.com/redshift/latest/gsg/new-user-serverless.html).

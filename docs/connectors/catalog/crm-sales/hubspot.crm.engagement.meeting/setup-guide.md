@@ -4,64 +4,93 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a HubSpot developer app and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Engagement Meeting connector.
+This guide walks you through creating a HubSpot developer app and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Engagement Meetings connector.
 
 ## Prerequisites
 
-- A HubSpot account with CRM access. If you do not have one, [sign up for a free HubSpot account](https://app.hubspot.com/signup).
+- A HubSpot developer account. If you do not have one, [sign up for a free account](https://developers.hubspot.com/get-started).
 
-## Step 1: Create a HubSpot developer account
+## Step 1: Log in to the HubSpot developer portal
 
-1. Go to [HubSpot Developer](https://developers.hubspot.com/) and sign up or log in.
-2. Once logged in, you will land on the developer dashboard.
+Log in to your [HubSpot developer account](https://app.hubspot.com/).
 
-## Step 2: Create a developer app
+## Step 2: Create a developer test account (optional)
 
-1. In the developer dashboard, click **Apps** in the top navigation.
-2. Click **Create app**.
-3. Under **App Info**, fill in the **Public app name** (e.g., `Ballerina Meeting Connector`).
-4. Navigate to the **Auth** tab.
-5. Under **Redirect URLs**, add your callback URL (e.g., `https://localhost/callback`).
-6. Under **Scopes**, add the following required scopes:
-    - `crm.objects.contacts.read`
-    - `crm.objects.contacts.write`
-7. Click **Save**.
+Developer test accounts let you test apps and integrations without affecting real HubSpot data.
 
-The scopes you select determine what data the connector can access. Add additional scopes as needed for your use case.
+1. Select **Test accounts** in the left sidebar.
 
-## Step 3: Get the client ID and client secret
+   ![Test accounts section](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup/test-account.png)
 
-1. In the **Auth** tab of your app, locate the **Client ID** and **Client Secret** fields.
-2. Copy the **Client ID**; this is your `clientId`.
-3. Click **Show** next to Client Secret and copy it: this is your `clientSecret`.
+2. Select **Create developer test account**.
 
-Store the Client ID and Client Secret securely. Do not commit them to source control.
-Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+   ![Create developer test account](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup/create-test-account.png)
 
-## Step 4: Authorize and generate a refresh token
+3. Provide a name and select **Create**.
 
-1. Construct the authorization URL, replacing `<YOUR_CLIENT_ID>` and `<YOUR_REDIRECT_URI>`:
+   ![Name the test account](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup/create-account.png)
 
-    ```
-    https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&redirect_uri=<YOUR_REDIRECT_URI>&scope=crm.objects.contacts.read%20crm.objects.contacts.write
-    ```
+4. The new account appears in the test accounts list.
 
-2. Open the URL in a browser and select the HubSpot account to authorize.
-3. Click **Connect app** when prompted.
-4. After authorization, HubSpot redirects to your callback URL with a `code` query parameter. Copy the `code` value.
-5. Exchange the code for tokens using a POST request:
+   ![Test account portal](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup/test-account-portal.png)
 
-    ```
-    POST https://api.hubapi.com/oauth/v1/token
-    Content-Type: application/x-www-form-urlencoded
+Developer test accounts are for development and testing only. Do not use them in production.
 
-    grant_type=authorization_code
-    &code=<AUTHORIZATION_CODE>
-    &client_id=<YOUR_CLIENT_ID>
-    &client_secret=<YOUR_CLIENT_SECRET>
-    &redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+## Step 3: Create a HubSpot app
 
-6. The response contains `access_token` and `refresh_token`. Copy the `refresh_token`.
+1. Navigate to **Apps** in the left sidebar and select **Create app**.
 
-Use a tool like [Postman](https://www.postman.com/) or `curl` to perform the token exchange in step 5.
+   ![Create app](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup/create-app.png)
+
+2. Enter a public app name and an optional description.
+
+   ![App name and description](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup/app-name-desc.png)
+
+## Step 4: Set up authentication
+
+1. Go to the **Auth** tab.
+
+   ![Configure authentication](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup/config-auth.png)
+
+2. Under **Scopes**, select **Add new scopes** and add:
+   - `crm.objects.contacts.read`
+   - `crm.objects.contacts.write`
+
+   ![Add scopes](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup/add-scopes.png)
+
+3. Under **Redirect URL**, add your redirect URL and select **Create App**.
+
+   ![Redirect URL](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup/redirect-url.png)
+
+## Step 5: Get the client ID and client secret
+
+In the **Auth** tab, copy the **Client ID** and **Client Secret**.
+
+![Client ID and client secret](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup/client-id-secret.png)
+
+## Step 6: Get the refresh token
+
+1. Construct the authorization URL:
+
+   ```
+   https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=<YOUR_SCOPES>&redirect_uri=<YOUR_REDIRECT_URI>
+   ```
+
+2. Open the URL in a browser and select your developer test account.
+
+   ![OAuth consent screen](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup/hubspot-oauth-consent-screen.png)
+
+3. Copy the authorization code from the redirect URL.
+
+4. Exchange the code for tokens:
+
+   ```bash
+   curl --request POST \
+     --url https://api.hubapi.com/oauth/v1/token \
+     --header 'content-type: application/x-www-form-urlencoded' \
+     --data 'grant_type=authorization_code&code=&redirect_uri=<YOUR_REDIRECT_URI>&client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>'
+   ```
+
+5. Copy the `refresh_token` from the response.
+
+Store the client ID, client secret, and refresh token securely. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.

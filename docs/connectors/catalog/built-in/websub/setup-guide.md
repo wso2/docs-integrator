@@ -46,7 +46,7 @@ For authenticated content distribution, set up an HMAC secret:
 
 Using a subscription secret is recommended for production deployments to ensure that content distribution notifications are genuinely from the hub.
 
-## Next steps
+## What's next
 
-- [Action Reference](action-reference.md): Available operations
-- [Trigger Reference](trigger-reference.md): Event-driven integration
+- [Action reference](action-reference.md): Available operations
+- [Trigger reference](trigger-reference.md): Event-driven integration

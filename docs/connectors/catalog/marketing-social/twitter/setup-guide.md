@@ -4,75 +4,79 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a Twitter Developer App and obtaining the OAuth 2.0 credentials required to use the Twitter connector.
+This guide walks you through creating a Twitter developer project and obtaining the OAuth 2.0 credentials required to use the Twitter connector.
 
 ## Prerequisites
 
-- A Twitter (X) account. If you do not have one, [sign up at x.com](https://x.com).
-- A Twitter Developer account with an approved project. [Apply for access here](https://developer.twitter.com/en/apply-for-access).
+- A Twitter developer account. If you do not have one, [apply for access at the X Developer Portal](https://developer.x.com/).
 
 ## Step 1: Create a Twitter developer project
 
 1. Open the [Twitter Developer Portal](https://developer.twitter.com/en/portal/dashboard).
-2. Click on the **Projects & Apps** tab.
-3. Select an existing project or click **New Project** to create one.
-4. Provide a project name, select a use case, and provide a project description.
-5. Within the project, create a new App (or use an existing one).
+2. Select the **Projects & Apps** tab and select an existing project or create a new one.
 
-## Step 2: Set up user authentication settings
+   ![Twitter Developer Portal](/img/connectors/catalog/marketing-social/twitter/setup/twitter-developer-portal.png)
 
-1. In your App's settings page, scroll down to the **User authentication settings** section.
-2. Click **Set up** to configure user authentication.
-3. Select **OAuth 2.0** as the authentication type.
-4. Choose the appropriate **App permissions** for your use case (e.g., Read, Read and Write, Read and Write and Direct Messages).
-5. Set the **Type of App** to **Web App, Automated App, or Bot**.
-6. Provide a **Callback URI / Redirect URL** (e.g., `http://example.com` for development).
-7. Provide a **Website URL** for your application.
-8. Click **Save**.
+## Step 2: Set up user authentication
 
-Make sure to select the correct app permissions. If you plan to post tweets or send DMs, you need at least Read and Write permissions.
+1. In your project or app settings, select **Set up** to configure user authentication.
 
-## Step 3: Obtain client ID and client secret
+   ![Set up user authentication](/img/connectors/catalog/marketing-social/twitter/setup/set-up.png)
 
-1. After completing the user authentication setup, you will be presented with your **Client ID** and **Client Secret**.
-2. Copy and save both values securely.
+2. Complete the user authentication setup by filling in the required fields (app permissions, callback URI, website URL).
 
-Store the Client ID and Client Secret securely. Do not commit them to source control.
-Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+## Step 3: Get the client ID and client secret
 
-## Step 4: Generate an access token via OAuth 2.0 PKCE flow
+After completing authentication setup, copy the **Client ID** and **Client Secret**.
 
-Use the OAuth 2.0 Authorization Code with PKCE flow to obtain an access token:
+![Get client ID and client secret](/img/connectors/catalog/marketing-social/twitter/setup/get-keys.png)
 
-1. Generate a **code verifier** (a random string) and derive a **code challenge** from it.
-   - For the `plain` method, the code challenge is the same as the code verifier.
-   - For the `S256` method, the code challenge is the base64 URL-encoded SHA256 hash of the verifier.
+Store the Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
 
-2. Construct the authorization URL:
+## Step 4: Get an access token (OAuth 2.0 PKCE flow)
 
-    ```
-    https://twitter.com/i/oauth2/authorize?response_type=code&client_id=<YOUR_CLIENT_ID>&redirect_uri=<YOUR_REDIRECT_URI>&scope=tweet.read%20tweet.write%20users.read%20follows.read%20dm.read%20dm.write%20offline.access&state=state&code_challenge=<YOUR_CODE_CHALLENGE>&code_challenge_method=plain
-    ```
+Twitter uses OAuth 2.0 with PKCE. You need a **code verifier** (a random string) and a **code challenge** (derived from the verifier).
 
-3. Open the URL in a browser and authorize the application.
+1. Construct the authorization URL:
 
-4. After authorization, copy the `code` parameter from the redirect URL.
+   ```text
+   https://twitter.com/i/oauth2/authorize?response_type=code&client_id=<YOUR_CLIENT_ID>&redirect_uri=<YOUR_REDIRECT_URI>&scope=tweet.read%20tweet.write%20users.read%20follows.read&state=state&code_challenge=<YOUR_CODE_CHALLENGE>&code_challenge_method=S256
+   ```
 
-5. Exchange the authorization code for an access token:
+   Replace `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>`, and `<YOUR_CODE_CHALLENGE>` with your values. Adjust the `scope` parameter as needed.
 
-    ```
-    POST https://api.twitter.com/2/oauth2/token
-    Content-Type: application/x-www-form-urlencoded
+   :::note
+   Two code challenge methods are available: `S256` (SHA256 hash of the code verifier, recommended) and `plain` (the verifier string itself).
+   :::
 
-    code=<AUTHORIZATION_CODE>
-    &grant_type=authorization_code
-    &client_id=<YOUR_CLIENT_ID>
-    &redirect_uri=<YOUR_REDIRECT_URI>
-    &code_verifier=<YOUR_CODE_VERIFIER>
-    ```
+2. Open the URL in a browser and authorize the app when prompted.
 
-6. The response contains `access_token`, `refresh_token` (if `offline.access` scope was requested), and `token_type`. Copy the `access_token`.
+   ![Twitter authorization page](/img/connectors/catalog/marketing-social/twitter/setup/authorize.png)
 
-Include the `offline.access` scope in your authorization URL to receive a refresh token, which prevents the access token from expiring after 2 hours.
+3. After authorization, you are redirected to your callback URI with an authorization `code` in the URL. Copy the code.
 
-You can also use OAuth 2.0 App-Only authentication (Bearer Token) for endpoints that support it. Refer to the [Twitter API v2 authentication mapping](https://developer.twitter.com/en/docs/authentication/guides/v2-authentication-mapping) for details.
+   :::warning
+   The authorization code expires quickly — use it immediately.
+   :::
+
+4. Exchange the code for tokens:
+
+   ```bash
+   curl --location "https://api.twitter.com/2/oauth2/token" \
+     --header "Content-Type: application/x-www-form-urlencoded" \
+     --data-urlencode "code=<YOUR_AUTHORIZATION_CODE>" \
+     --data-urlencode "grant_type=authorization_code" \
+     --data-urlencode "client_id=<YOUR_CLIENT_ID>" \
+     --data-urlencode "redirect_uri=<YOUR_REDIRECT_URI>" \
+     --data-urlencode "code_verifier=<YOUR_CODE_VERIFIER>"
+   ```
+
+5. Copy the `access_token` from the response.
+
+   :::note
+   By default, access tokens obtained through this flow are valid for two hours. To obtain a long-lived token, add `offline.access` to your scopes — see the [Twitter documentation](https://developer.x.com/en/docs/authentication/oauth-2-0/user-access-token) for details.
+   :::
+
+## What's next
+
+- [Action reference](actions.md): Available operations

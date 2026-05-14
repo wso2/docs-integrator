@@ -4,87 +4,67 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a Zoom Marketplace app and obtaining the OAuth 2.0 credentials required to use the Zoom Scheduler connector.
+This guide walks you through creating a Zoom app on the Zoom Marketplace and obtaining the OAuth credentials required to use the Zoom Scheduler connector.
 
-## Prerequisites
+## Step 1: Create a new app
 
-- An active Zoom account with Zoom Scheduler enabled. If you do not have one, sign up at https://zoom.us.
+1. Open the [Zoom Marketplace](https://marketplace.zoom.us/).
+2. Select **Develop** → **Build App**.
 
-## Step 1: Create a general app in the Zoom marketplace
+   ![Zoom Marketplace](/img/connectors/catalog/communication/zoom.scheduler/setup/zoom-marketplace.png)
 
-1. Go to the [Zoom Marketplace](https://marketplace.zoom.us/) and sign in with your Zoom account.
-2. Click **Develop** in the top navigation bar and select **Build App**.
-3. Choose **General App** as the app type and click **Create**.
-4. Enter a name for your app (e.g., `Ballerina Zoom Scheduler`) and click **Create**.
+3. Choose **General App** as the app type (for user authorization with refresh tokens).
 
-## Step 2: Configure OAuth redirect URI
+   ![App type](/img/connectors/catalog/communication/zoom.scheduler/setup/app-type.png)
 
-1. In your app's settings, navigate to the **App Credentials** section.
-2. Under **Redirect URL for OAuth**, add a redirect URI. For testing you can use:
-    ```
-    https://zoom.us/oauth/callback
-    ```
-3. Click **Continue** or **Save**.
+4. Fill in the basic information.
 
-The redirect URI must match exactly when performing the OAuth authorization flow. For production, use a URI pointing to your own service.
+## Step 2: Configure OAuth settings
 
-## Step 3: Add required OAuth scopes
+1. In your app's credentials, note down the **Client ID** and **Client Secret**.
 
-1. Navigate to the **Scopes** section of your app settings.
-2. Click **Add Scopes** and search for and add the following scopes:
-    - `scheduler:read`: Read access to schedules and availability
-    - `scheduler:write`: Write access to create and modify schedules
-    - `user:read`: Read access to user profile information
-3. Click **Done** and then **Continue**.
+   ![App credentials](/img/connectors/catalog/communication/zoom.scheduler/setup/app-credentials.png)
 
-## Step 4: Get your client ID and client secret
+2. Set your **Redirect URI** (for example, `http://localhost:8080/callback`).
 
-1. Navigate to the **App Credentials** section of your app.
-2. Copy the **Client ID**; you will use this as `clientId`.
-3. Copy the **Client Secret**; you will use this as `clientSecret`.
+   ![Redirect URI](/img/connectors/catalog/communication/zoom.scheduler/setup/redirect-URI.png)
 
-Store your Client ID and Client Secret securely. Do not commit them to source control.
-Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+3. Add the following scopes for the Scheduler API: `scheduler:read`, `scheduler:write`, and `user:read`.
 
-## Step 5: Obtain an OAuth refresh token
+   ![Zoom scopes](/img/connectors/catalog/communication/zoom.scheduler/setup/zoom-scopes.png)
 
-Use the Zoom OAuth 2.0 Authorization Code flow to obtain a refresh token:
+## Step 3: Activate the app
 
-1. Construct the following authorization URL, replacing `<YOUR_CLIENT_ID>` and `<YOUR_REDIRECT_URI>`:
+1. Complete all required information fields.
+2. Select **Activate** to publish the app.
 
-    ```
-    https://zoom.us/oauth/authorize?response_type=code&client_id=<YOUR_CLIENT_ID>&redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+   ![Activate app](/img/connectors/catalog/communication/zoom.scheduler/setup/activate-app.png)
 
-2. Open the URL in a browser and log in with your Zoom credentials.
-3. Click **Allow** to authorize the app.
-4. Zoom redirects to your redirect URI with a `code` query parameter. Copy the `code` value.
-5. Exchange the authorization code for tokens by making a POST request:
+## Step 4: Get user authorization
 
-    ```
-    POST https://zoom.us/oauth/token
-    Authorization: Basic base64(<CLIENT_ID>:<CLIENT_SECRET>)
-    Content-Type: application/x-www-form-urlencoded
+1. Construct the authorization URL (replace `YOUR_CLIENT_ID` and `YOUR_REDIRECT_URI`):
 
-    grant_type=authorization_code
-    &code=<AUTHORIZATION_CODE>
-    &redirect_uri=<YOUR_REDIRECT_URI>
-    ```
+   ```
+   https://zoom.us/oauth/authorize?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&scope=scheduler:read scheduler:write user:read
+   ```
 
-6. The response contains `access_token`, `refresh_token`, and `expires_in`. Copy the `refresh_token`.
+2. Open the URL in a browser and authorize the app. Zoom redirects to your callback URL with an authorization code.
 
-Use a tool like Postman or curl to perform the token exchange in step 5. The Basic Authorization header value is the base64 encoding of `clientId:clientSecret`.
+3. Exchange the authorization code for tokens:
 
-## Step 6: Find your Zoom user ID
+   ```bash
+   curl -X POST https://zoom.us/oauth/token \
+     -H "Authorization: Basic $(echo -n 'CLIENT_ID:CLIENT_SECRET' | base64)" \
+     -d "grant_type=authorization_code&code=AUTHORIZATION_CODE&redirect_uri=YOUR_REDIRECT_URI"
+   ```
 
-Many API operations require a `userId`. You can obtain your user ID by calling the
-Zoom API `/users/me` endpoint after authenticating:
+   The response includes both `access_token` and `refresh_token`.
 
-```
-GET https://api.zoom.us/v2/users/me
-Authorization: Bearer <ACCESS_TOKEN>
+## Step 5: Verify your setup
+
+```bash
+curl -X GET "https://api.zoom.us/v2/users/me" \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
-The response contains your `id` field: this is your `userId`.
-
-You can also use the string `"me"` as the userId value in most Zoom API calls to refer to the authenticated user.
+This returns the user ID needed for API calls.

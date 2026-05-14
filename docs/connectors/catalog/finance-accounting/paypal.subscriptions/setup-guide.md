@@ -4,52 +4,40 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through creating a PayPal Developer application and obtaining the OAuth 2.0 Client ID and Client Secret required to use the PayPal Subscriptions connector.
+This guide walks you through creating a PayPal sandbox business account and obtaining the API credentials required to use the PayPal Subscriptions connector.
 
 ## Prerequisites
 
-- A PayPal account. If you do not have one, [sign up at paypal.com](https://www.paypal.com/us/webapps/mpp/account-selection).
+- A [PayPal Developer account](https://developer.paypal.com/). If you do not have one, sign up at [developer.paypal.com](https://developer.paypal.com/).
 
-## Step 1: Access the PayPal developer dashboard
+## Step 1: Create a sandbox business account
 
-1. Go to [developer.paypal.com](https://developer.paypal.com/) and log in with your PayPal credentials.
-2. Click **Dashboard** in the top navigation bar to open the developer portal.
+1. Open the [PayPal Developer Dashboard](https://developer.paypal.com/dashboard).
+2. Under **Testing Tools**, select **Sandbox Accounts**.
 
-## Step 2: Create a REST API application
+   ![Sandbox accounts](/img/connectors/catalog/finance-accounting/paypal.subscriptions/setup/sandbox-accounts.png)
 
-1. In the Dashboard, navigate to **My Apps & Credentials**.
-2. Select the environment tab: **Sandbox** (for development and testing) or **Live** (for production).
-3. Under **REST API apps**, click **Create App**.
-4. Enter an **App Name** (e.g., `Ballerina Subscriptions Integration`).
-5. For Sandbox apps, select a **Sandbox Business Account** from the dropdown to associate with the app.
-6. Click **Create App**.
+3. Select **Create account** and choose **Business** as the account type.
 
-Start with the Sandbox environment during development. The sandbox has its own set of credentials and test accounts separate from production.
+   ![Create business account](/img/connectors/catalog/finance-accounting/paypal.subscriptions/setup/create-account.png)
 
-## Step 3: Retrieve client ID and client secret
+Some PayPal options and features may vary by region or country — check availability before creating an account.
 
-1. After the app is created, you are taken to the app detail page.
-2. Under **Credentials**, copy the **Client ID**; this is your `clientId`.
-3. Click **Show** next to **Secret** and copy the **Client Secret**; this is your `clientSecret`.
+## Step 2: Create a REST API app
 
-Store your Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
+1. Navigate to the **Apps & Credentials** tab.
+2. Select **Create App**, provide a name, and select the sandbox business account you created.
 
-## Step 4: Enable subscriptions permissions for the app
+   ![Create app](/img/connectors/catalog/finance-accounting/paypal.subscriptions/setup/create-app.png)
 
-1. On the app detail page, scroll down to the **Features** section.
-2. Verify that **Subscriptions** is enabled in the app's feature list.
-3. If **Subscriptions** is listed but not enabled, check the box and click **Save Changes**.
+## Step 3: Get the client ID and client secret
 
-Enabling Subscriptions in the Live environment may require additional business verification by PayPal before the feature becomes available.
+After creating the app, copy the **Client ID** and **Client Secret** displayed on the app details page.
 
-## Step 5: Switch to live credentials for production
+![Client ID and client secret](/img/connectors/catalog/finance-accounting/paypal.subscriptions/setup/get-credentials.png)
 
-When you are ready to go live:
+Store the Client ID and Client Secret securely. Do not commit them to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
 
-1. Return to **My Apps & Credentials** and select the **Live** tab.
-2. Create a new app or use an existing Live app.
-3. Copy the Live **Client ID** and **Client Secret**.
-4. In your Ballerina config, update `tokenUrl` to `https://api-m.paypal.com/v1/oauth2/token`
-   and set the `serviceUrl` to `https://api-m.paypal.com/v1/billing`.
+## What's next
 
-Live credentials process real payments. Ensure thorough testing in the sandbox before switching to the Live environment.
+- [Action reference](actions.md): Available operations
