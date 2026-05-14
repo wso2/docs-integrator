@@ -159,159 +159,90 @@ enum OrderStatus {
 }
 ```
 
-## Generating a client from a GraphQL schema
+## Exporting a GraphQL schema from an existing GraphQL service
 
-Client generation from GraphQL schemas is currently supported only through the Ballerina CLI (pro-code). Visual Designer support for GraphQL client generation is not yet available.
-
-Client generation requires a `graphql.config.yaml` configuration file that specifies the schema and query documents:
-
-```yaml
-schema: schema.graphql
-documents:
-  - queries.graphql
-```
-
-Then run:
-
-```bash
-bal graphql -i graphql.config.yaml
-```
-
-### Defining client queries
-
-Create a `queries.graphql` file with the operations your client needs:
-
-```graphql
-query GetCustomer($id: ID!) {
-    customer(id: $id) {
-        id
-        name
-        email
-    }
-}
-
-query GetOrders($customerId: ID!, $limit: Int) {
-    orders(customerId: $customerId, limit: $limit) {
-        id
-        total
-        status
-    }
-}
-
-mutation CreateOrder($input: OrderInput!) {
-    createOrder(input: $input) {
-        id
-        total
-        status
-    }
-}
-```
-
-### Using the generated client
-
-```ballerina
-import generated_client as gql;
-
-configurable string graphqlEndpoint = ?;
-
-final gql:GraphqlClient orderApi = check new (graphqlEndpoint);
-
-function getCustomer(string id) returns gql:GetCustomerResponse|error {
-    return check orderApi->getCustomer(id);
-}
-
-function createOrder(string customerId, gql:LineItemInput[] items)
-        returns gql:CreateOrderResponse|error {
-    gql:OrderInput input = {customerId, items};
-    return check orderApi->createOrder(input);
-}
-```
-
-## Exporting a GraphQL schema from Ballerina
+Schema generation from GraphQL service is currently supported only through the Ballerina CLI (pro-code). Visual Designer support for GraphQL schema generation is not yet available.
 
 Generate a GraphQL SDL file from an existing Ballerina GraphQL service:
 
 ```bash
-# Export SDL from a Ballerina service
-bal graphql -i service.bal --mode schema
+ # Export SDL from a Ballerina service
+ bal graphql -i service.bal --mode schema
 
-# Export to a specific directory
-bal graphql -i service.bal --mode schema -o schema/
+ # Export to a specific directory
+ bal graphql -i service.bal --mode schema -o schema/
 ```
 
-## Command reference
+### Command usage for schema generation
 
 ```bash
-bal graphql -i <schema-file-or-url> [options]
+ bal graphql [-i | --input] <ballerina-graphql-service-file-path>
+              [-o | --output] <output-location>
+              [-s | --service] <service-base-path>
 ```
 
-### Generate flags
+### Command options for schema generation
 
-| Flag | Alias | Required | Default | Description |
-|------|-------|----------|---------|-------------|
-| `-i`, `--input` | — | Yes | — | Path to the GraphQL SDL file (`.graphql`) or a GraphQL endpoint URL |
-| `--mode` | — | No | `service` | Generation mode: `service`, `client`, or `schema` |
-| `-o`, `--output` | — | No | Current directory | Output directory for generated files |
-| `-s`, `--service` | — | No | — | Service base path for service generation |
-| `--use-records-for-objects` | — | No | `false` | Generate Ballerina records instead of service classes for object types |
+| Command option      | Description                                                                                                                                                                                                                                                                                                                                                                     | Mandatory/Optional |
+|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| `-i, --input`     | The `input` command option specifies the path of the Ballerina GraphQL service file (e.g., `service.bal`).                                                                                                                                                                                                    | Mandatory          |
+| `-o, --output`   | The `output` command option specifies the output location of the generated GraphQL schema files. If this command option is not specified, the schema files will be generated at the same location in which the `bal graphql` command is executed.                                                                                                                                                                                                                   | Optional           |
+| `-m, --mode`   | The `mode` parameter specifies the operation mode. It indicates the way to process the schema file. If the `mode` flag is not specified, the `graphql` tool will infer the mode from the `input` file extension. The mode should be `schema` for the schema generation.                                                                                                                                                                                                                | Optional           |
+| `-s, --service`   | The `service` command option specifies the base path of the Ballerina GraphQL service of which the schema needs to be generated. If this command option is not specified, schemas will be generated for each of the GraphQL services in the given file.                                                                                                                                                                                                                  | Optional           |
 
-## Implementing resolvers
+## Generating a client from a GraphQL schema (experimental)
 
-After generating the service skeleton, implement each resolver with your integration logic:
+Client generation from GraphQL schemas is currently supported only through the Ballerina CLI (pro-code). Visual Designer support for GraphQL client generation is not yet available.
 
-```ballerina
-import ballerina/graphql;
-import ballerinax/mysql;
+- Create a `queries.graphql` file with the operations your client needs.
 
-configurable string dbHost = ?;
-configurable string dbUser = ?;
-configurable string dbPassword = ?;
+```graphql
+ query GetCustomer($id: ID!) {
+     customer(id: $id) {
+         id
+         name
+         email
+     }
+ }
 
-final mysql:Client db = check new (host = dbHost, user = dbUser,
-    password = dbPassword, database = "orders");
+ query GetOrders($customerId: ID!, $limit: Int) {
+     orders(customerId: $customerId, limit: $limit) {
+         id
+         total
+         status
+     }
+ }
 
-service /graphql on new graphql:Listener(9090) {
-
-    resource function get customer(string id) returns Customer?|error {
-        return db->queryRow(
-            `SELECT id, name, email FROM customers WHERE id = ${id}`
-        );
-    }
-
-    resource function get orders(string customerId, int 'limit = 10)
-            returns Order[]|error {
-        stream<Order, error?> orderStream = db->query(
-            `SELECT * FROM orders WHERE customer_id = ${customerId}
-             LIMIT ${'limit}`
-        );
-        return from Order o in orderStream select o;
-    }
-
-    remote function createOrder(OrderInput input) returns Order|error {
-        // Business logic to create order
-        string orderId = check insertOrder(input);
-        return check fetchOrder(orderId);
-    }
-}
 ```
 
-## GraphQL to Ballerina type mapping
+- Create a `graphql.config.yaml` configuration file that specifies the schema and query documents as follows.
 
-| GraphQL type | Ballerina type |
-|---|---|
-| `String` | `string` |
-| `Int` | `int` |
-| `Float` | `float` |
-| `Boolean` | `boolean` |
-| `ID` | `string` |
-| `[T]` | `T[]` |
-| `T!` | `T` (non-optional) |
-| `T` (nullable) | `T?` |
-| `enum` | `enum` |
-| `input` | `record {}` |
-| `type` | `service class` or `record {}` |
-| `union` | Union type |
-| `interface` | `distinct service class` |
+```yaml
+ schema: schema.graphql
+ documents:
+   - queries.graphql
+```
+
+- Generate the client by running the following command.
+
+```bash
+ bal graphql -i graphql.config.yaml
+```
+
+### Command usage for client generation
+
+```bash
+ bal graphql [-i | --input] <graphql-configuration-file-path>
+              [-o | --output] <output-location>
+```
+
+### Command options for client generation
+
+| Command option      | Description                                                                                                                                                                                                                                                                                                                                                                     | Mandatory/Optional |
+|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| `-i, --input`     | The `input` command option specifies the path of the GraphQL config file (e.g., `graphql.config.yaml`) configured with GraphQL schemas specified by the Schema Definition Language and GraphQL documents.                                                                                                                                                                                                   | Mandatory          |
+| `-o, --output`   | The `output` command option specifies the path of the output location of the generated files. If this command option is not specified, the Ballerina files will be generated at the same location in which the `bal graphql` command is executed.                                                                                                                                                                                                                   | Optional           |
+| `-m, --mode`   | The `mode` parameter specifies the operation mode. It indicates the way to process the schema file. If the `mode` flag is not specified, the `graphql` tool will infer the mode from the `input` file extension. The mode should be `client` for the client generation.                                                                                                                                                                                                               | Optional           |
 
 ## What's next
 
