@@ -1,8 +1,8 @@
 ---
-title: Observe Metrics and Tracing Using New Relic
+title: New Relic
 ---
 
-# Observe Metrics and Tracing Using New Relic
+# New Relic
 
 [New Relic](https://newrelic.com/) is an observability platform designed to help organizations monitor, analyze, and
 troubleshoot their applications, infrastructure, and digital experiences in real-time. Both metrics and tracing of an integration can
@@ -10,14 +10,14 @@ be viewed with New Relic.
 
 The sample shop service will be used in this guide. Follow the steps given below to observe tracing and metrics in New Relic.
 
-## Step 1 - Create a New Relic account and an API key
+## Step 1: Create a New Relic Account and API Key
 
 Sign up and Generate an API Key in New Relic.
 
 To configure the API key in New Relic:
 > Go to **Profile → API keys → Insights Insert key → Insert keys** to create an account in New Relic.
 
-## Step 2 - Import Ballerina New Relic extension
+## Step 2: Import the New Relic Extension
 
 To include the New Relic extension into the executable, the `ballerinax/newrelic` module needs to be imported into your
 integration `main.bal` file. Navigate to File explorer view in WSO2 Integrator to do so.
@@ -30,7 +30,7 @@ New Relic extension has an `Opentelemetry GRPC Span Exporter` which will push tr
 
 New Relic extension pushes metrics in New Relic metric format to the New Relic server endpoint (`https://metric-api.newrelic.com/metric/v1`).
 
-## Step 3 - Configure runtime configurations
+## Step 3: Configure Runtime Configurations
 
 Add the below to `Ballerina.toml` file.
 
@@ -101,7 +101,7 @@ Environment variable can be configured for either a single user or multiple user
 | `ballerinax.newrelic.metricReporterFlushInterval` | The New Relic client will be sending the metrics to the agent at this interval. | `15000` | Any positive integer value |
 | `ballerinax.newrelic.metricReporterClientTimeout` | Queue size of the New Relic metric client. | `10000` | Any positive integer value |
 
-## Step 4 - Send requests
+## Step 4: Send Requests
 
 Run the service and send requests.
 
@@ -134,7 +134,7 @@ curl -X POST http://localhost:8090/shop/order \
 curl -X GET http://localhost:8090/shop/order/0
 ```
 
-## Step 5 - View metrics on the New Relic platform
+## Step 5: View Metrics on the New Relic Platform
 
 You can view the metrics that were published to the New Relic platform in the New Relic query builder. You can view the metrics query data in graphical format, as shown below.
 
@@ -142,7 +142,7 @@ You can view the metrics that were published to the New Relic platform in the Ne
 
 You can create a dashboard from the metrics provided by Ballerina in the New Relic platform.
 
-## Step 6 - View tracing on the New Relic platform
+## Step 6: View Tracing on the New Relic Platform
 
 You can view the traces that were published to the New Relic platform in New Relic traces.
 
@@ -152,6 +152,6 @@ You can view the traces that were published to the New Relic platform in New Rel
 
 ## What's next
 
-- [Jaeger](jaeger-distributed-tracing.md) — Alternative distributed tracing with Jaeger
-- [Zipkin](zipkin-tracing.md) — Alternative distributed tracing with Zipkin
-- [Observability Overview](observability-overview.md) — Full observability architecture
+- [Jaeger](jaeger-distributed-tracing.md) — Distributed tracing with Jaeger
+- [Zipkin](zipkin-tracing.md) — Distributed tracing with Zipkin
+- [Overview](observability-overview.md) — Full observability architecture

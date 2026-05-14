@@ -1,8 +1,8 @@
 ---
-title: Recipe - Datadog Full-Stack Observability
+title: Datadog
 ---
 
-# Recipe: Datadog Full-Stack Observability
+# Datadog
 
 Users can observe integrations with [Datadog](https://www.datadoghq.com/), which is a comprehensive observability and
 monitoring platform for cloud-scale applications. It provides developers, IT operations teams, and business users with
@@ -13,7 +13,7 @@ Create a new account in Datadog. Select a billing plan according to your needs (
 
 Then follow the steps below to set up your Datadog account to view metrics and tracing provided by Ballerina.
 
-## Step 1 - Create a Datadog account and an API key
+## Step 1: Create a Datadog Account and API Key
 
 1. Add Prometheus to the Integrations for your account
 
@@ -29,7 +29,7 @@ Then follow the steps below to set up your Datadog account to view metrics and t
 
    ![Creating an API key in Datadog](/img/deploy-operate/observe/datadog-creating-api-key.png "Creating an API key in Datadog")
 
-## Step 2 - Set up the Datadog agent
+## Step 2: Set Up the Datadog Agent
 
 After setting up your Datadog account, you need to set up a Datadog Agent in your instance.
 
@@ -94,7 +94,7 @@ Then follow the steps below to configure metrics and tracing data publishing to 
                endpoint: 0.0.0.0:4317
    ```
 
-## Step 3 - Import Ballerina Prometheus and Jaeger extensions
+## Step 3: Import Prometheus and Jaeger Extensions
 
 To include the Prometheus and Jaeger extensions into the executable, the `ballerinax/prometheus` and `ballerinax/jaeger`
 modules need to be imported into your integration. Open the the file explorer in WSO2 Integrator add the below to the `main.bal` file.
@@ -108,7 +108,7 @@ To support Prometheus as the metrics reporter, an HTTP endpoint starts with the 
 
 Jaeger extension has an `Opentelemetry GRPC Span Exporter` which will push tracing data as batches to the endpoint (default - `http://localhost:4317`) in OpenTelemetry format.
 
-## Step 4 - Configure runtime configurations
+## Step 4: Configure Runtime Configurations
 
 Add the below to `Ballerina.toml` file.
 
@@ -155,7 +155,7 @@ The table below provides the descriptions of each configuration option and possi
 | `ballerinax.jaeger.reporterFlushInterval` | The Jaeger client will be sending the spans to the agent at this interval. | `2000` | Any positive integer value. |
 | `ballerinax.jaeger.reporterBufferSize` | Queue size of the Jaeger client. | `1000` | Any positive integer value. |
 
-## Step 5 - Send requests
+## Step 5: Send Requests
 
 Run the service and send requests to `http://localhost:8090/shop/products`.
 
@@ -188,7 +188,7 @@ curl -X POST http://localhost:8090/shop/order \
 curl -X GET http://localhost:8090/shop/order/0
 ```
 
-## Step 6 - View metrics on Datadog
+## Step 6: View Metrics on Datadog
 
 You can observe the metrics in the Datadog platform under the **Metrics** tab in the left navigation.
 
@@ -207,7 +207,7 @@ The Ballerina Dashboard in the Datadog will be displayed as below.
 ![Ballerina Dashboard in Datadog](/img/deploy-operate/observe/datadog-metrics-dashboard-1.png "Ballerina Dashboard in Datadog")
 ![Ballerina Dashboard in Datadog](/img/deploy-operate/observe/datadog-metrics-dashboard-2.png "Ballerina Dashboard in Datadog")
 
-## Step 7 - View tracing on Datadog
+## Step 7: View Tracing on Datadog
 
 To view traces of the Ballerina application, go to **APM → Traces** in the Datadog.
 
@@ -223,6 +223,6 @@ Once you select a trace, you can get more information with the tags attached to 
 
 ## What's next
 
-- [Metrics Overview](metrics-overview.md) -- Self-managed metrics collection with Prometheus
-- [New Relic](new-relic-integration.md) -- Alternative full-stack observability platform
-- [Observability Overview](observability-overview.md) -- Full observability architecture
+- [Metrics](metrics-overview.md) — Self-managed metrics collection with Prometheus
+- [New Relic](new-relic-integration.md) — Alternative full-stack observability platform
+- [Overview](observability-overview.md) — Full observability architecture

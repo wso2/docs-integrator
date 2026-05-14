@@ -1,8 +1,8 @@
 ---
-title: Logging & Structured Logs
+title: Logging
 ---
 
-# Logging & Structured Logs
+# Logging
 
 Configure logging for your WSO2 Integrator services to capture operational data, debug issues, and feed log aggregation systems. Ballerina provides structured logging with full context propagation, making it easy to correlate logs with traces and metrics.
 
@@ -158,10 +158,8 @@ JSON output:
 }
 ```
 
-## What's Next
+## What's next
 
-- **[Elastic Stack (ELK)](elastic-stack-elk.md)** – Complete log aggregation with Elasticsearch and Kibana
-- **[OpenSearch Integration](opensearch-integration.md)** – Open-source alternative to ELK
-- **[Metrics](metrics-overview.md)** – Monitor service health with Prometheus and Grafana
-- **[Distributed Tracing](jaeger-distributed-tracing.md)** – Trace requests across services
-- **[Integration Control Plane](integration-control-plane-icp.md)** – Centralized monitoring dashboard
+- [Metrics](metrics-overview.md) — Monitor service health with Prometheus
+- [Distributed tracing](jaeger-distributed-tracing.md) — Trace requests across services
+- [Integration Control Plane](integration-control-plane-icp.md) — Centralized monitoring dashboard

@@ -1,8 +1,8 @@
 ---
-title: Metrics (Prometheus)
+title: Metrics
 ---
 
-# Metrics (Prometheus)
+# Metrics
 
 Monitor the health and performance of your WSO2 Integrator services using Prometheus metrics. WSO2 Integrator provides built-in support for exposing metrics in Prometheus format, enabling you to collect quantitative data on request counts, latency, error rates, and custom business metrics.
 
@@ -180,10 +180,9 @@ activeConnections.increment(amount = 1);
 activeConnections.decrement(amount = 1);
 ```
 
-## What's Next
+## What's next
 
-- **[Distributed Tracing](jaeger-distributed-tracing.md)** – Trace requests across services
-- **[Logging](logging-overview.md)** – Configure structured logging
-- **[Integration Control Plane](integration-control-plane-icp.md)** – Centralized monitoring dashboard
-- **[Datadog Integration](datadog-integration.md)** – Forward Prometheus metrics to Datadog
-- **[Observability Overview](observability-overview.md)** – Full observability architecture
+- [Distributed tracing](jaeger-distributed-tracing.md) — Trace requests across services with Jaeger or Zipkin
+- [Logging](logging-overview.md) — Configure structured logging
+- [Integration Control Plane](integration-control-plane-icp.md) — Centralized monitoring dashboard
+- [Overview](observability-overview.md) — Full observability architecture
