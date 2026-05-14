@@ -37,6 +37,26 @@ After installation, launch the IDE:
 
 ![WSO2 Integrator IDE](/img/get-started/setup/wso2-integrator-ide.png)
 
+### Step 4: Sign in to WSO2 Integrator
+
+Sign in with your WSO2 Cloud account to deploy to WSO2 Cloud, manage environments, access observability features, and use [WSO2 Integrator Copilot](../../develop/copilot/overview.md).
+
+1. On the **Get Started** page, click **Sign In** in the top-right corner.
+
+   ![WSO2 Integrator Get Started page with the Sign In button in the top-right corner](/img/get-started/setup/sign-in/integrator-get-started.png)
+
+2. The WSO2 Integration Platform sign-in page opens up in your default browser. Sign in using your preferred method.
+
+   ![WSO2 Integration Platform sign-in page](/img/get-started/setup/sign-in/sign-in-providers.png)
+
+3. When the browser prompts you, click **Open WSO2 Integrator** to return to the IDE.
+4. The IDE shows a **Successfully signed into WSO2 Integration Platform** notification, and your account avatar appears in the top-right corner.
+
+   ![WSO2 Integrator Get Started page after sign-in showing the account avatar and a success notification](/img/get-started/setup/sign-in/signed-in.png)
+
+:::info Don't have a WSO2 Cloud account?
+[Sign up for WSO2 Cloud](sign-up-sign-in.md) to create one before signing in.
+
 ## Next steps
 
 - [Develop a new integration](../../develop/create-integrations/create-a-new-integration.md) — Create a new integration project and start building.

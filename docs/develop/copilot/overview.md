@@ -4,60 +4,85 @@ title: Copilot Capabilities
 
 # Copilot Capabilities
 
-WSO2 Integrator Copilot builds integrations from natural language prompts. It produces ready-to-use artifacts that drop straight into your project. Iterate through follow-up prompts to refine logic, add features, or modify behavior.
+WSO2 Integrator Copilot builds integrations from natural language prompts. It produces ready-to-use artifacts in your project. Iterate through follow-up prompts to refine logic, add features, or modify behavior.
 
-## Planning
+![WSO2 Integrator Copilot panel open alongside an integration project in the IDE.](/img/develop/copilot/copilot-overview.png)
 
-**Edit Mode** (the default) applies changes directly to your flow for quick adjustments, bug fixes, or tweaks, while **Plan Mode** is for building new features or complex integrations from scratch. Switch between the two as needed using the toggle in the Copilot input bar.
+## Modes
 
-In **Plan Mode**, Copilot does not generate code immediately. Instead, it analyzes your request and provides a structured, step-by-step breakdown of the execution tasks. This gives you the opportunity to review the logic, add missing steps, or iterate on the plan before any artifacts are created.
+Copilot has two modes: plan and edit. Switch between them using the toggle in the Copilot input bar.
 
-![Plan mode showing a structured step-by-step breakdown of execution tasks.](/img/develop/copilot/plan-mode.png)
+- **Edit Mode**: Copilot starts generating immediately and applies the changes to your integration. Best for quick edits.
+- **Plan Mode**: Copilot first proposes a high-level plan with a step-by-step task breakdown. Review or revise the plan, then approve it to begin generation.
+
+  ![Plan mode showing a structured step-by-step breakdown of execution tasks.](/img/develop/copilot/plan-mode.png)
 
 ## Generating connectors
 
-If you need to integrate with a service that does not have a pre-built connector, provide an OpenAPI specification and Copilot generates the custom connector code required to bridge the gap.
+Copilot can generate a custom connector when a pre-built one is not available. During integration generation, if no pre-built connector exists, Copilot prompts the user for an OpenAPI specification. The user can also directly request to generate a custom connector. Once generated, the connector is available for Copilot to use in the flow.
 
-![Connector Generator generating custom connector code from an OpenAPI specification.](/img/develop/copilot/connector-generator.png)
+![Copilot generating custom connector code from an OpenAPI specification.](/img/develop/copilot/connector-generator.png)
 
-## Web tools
+## Using web tools
 
-If Copilot needs external context or up-to-date documentation, it can trigger web tools to search the internet. Copilot always asks for permission before performing a search. You can enable or disable this via the toggle in the input bar.
+Copilot can search the internet for external context or up-to-date documentation. It asks for permission before each search unless you enable the web tools toggle in the input bar.
 
 ![Web tools permission prompt in the Copilot input bar.](/img/develop/copilot/web-tool.png)
 
 ## Clarifying requirements
 
-During the planning or generation phase, Copilot may identify missing information that is critical to the integration. If a requirement is ambiguous, it pauses and asks you to provide these details in the form of a selection.
+During the planning or generation phase, Copilot may identify missing information that is critical to the integration. If a requirement is ambiguous, it pauses and presents a list of suggested options. Select one, or select **Other** to type your own answer.
 
 ![Clarifying requirements prompt showing selection options.](/img/develop/copilot/clarifying-requirements.png)
 
-## Review
+## Reviewing
 
-Once the generation process is complete, you can inspect exactly what was built before finalizing the changes. You can review the generated artifacts as a diagram or as source code with a diff view.
+After generation completes, you can inspect exactly what was built or changed before finalizing the changes. Review the generated artifacts as the flow diagram or as source code with a diff view.
 
 ![Review mode showing the generated integration diagram.](/img/develop/copilot/review-mode.png)
 
 ## Configuring
 
-When you are ready to run or test the integration, Copilot identifies configurations required to execute the flow and prompts you to enter the necessary configurables.
+When you run or test the integration, Copilot identifies the required configurables and prompts you to enter them.
 
 ![Configuration collection prompt showing required fields for the integration.](/img/develop/copilot/config-collection.png)
 
 ## Testing
 
-Copilot automates testing by generating tests for your integration and executing them using the built-in test runner, allowing you to immediately verify the functionality of the generated artifacts.
+Copilot generates tests for your integration and runs them with the built-in test runner, allowing you to verify the generated artifacts immediately.
 
 ![Test runner showing generated tests and results.](/img/develop/copilot/running-tests.png)
 
-## Try your services
+## Trying your services
 
-Once your integration is running, you can try out your services directly through Copilot. Describe what you want to test in plain language, and Copilot runs the appropriate curl commands against your service and returns the results.
+Once your integration is running, you can send test requests to your services from Copilot. Describe what you want to test in plain language, and Copilot calls your service and returns the response.
 
-![Copilot running curl commands against a running service.](/img/develop/copilot/try-it.png)
+![Copilot calling a running service and showing the response.](/img/develop/copilot/try-it.png)
 
 ## Debugging
 
 Copilot can run your integrations and read the runtime logs to debug issues as they occur.
 
-![Copilot debugging an integration by reproducing the failing request, inspecting the HTTP response and service logs, and identifying a case-sensitivity bug in the team filter.](/img/develop/copilot/debuging-using-service-logs.png)
+![Copilot debugging an integration by reproducing the failing request, inspecting the HTTP response and service logs, and identifying a case-sensitivity bug in the team filter.](/img/develop/copilot/debugging-using-service-logs.png)
+
+## Slash commands
+
+Type `/` in the Copilot input bar to invoke a command for a specific task.
+
+| Command | Description |
+|---|---|
+| `/ask` | Ask questions about Ballerina to be answered based on the documentation. |
+| `/doc` | Generate documentation for your integration. |
+| `/openapi` | Import OpenAPI specifications. |
+| `/typecreator` | Create custom types. |
+| `/datamap` | [Generate data mappings](../integration-artifacts/supporting/data-mapper/ai-data-mapper.md). |
+| `/natural-programming` | Experimental. Generate code from requirements and check for drift. |
+
+`/ask` answers only from the Ballerina documentation and does not use your codebase context. For questions about your code or any other topic, message Copilot directly without a command.
+
+## See also
+
+- [Getting started](getting-started.md) — Sign in to WSO2 Integrator Copilot.
+- [Generate tests with AI](../test/ai-generated-cases.md) — Use Copilot to generate test cases.
+- [AI data mapper](../integration-artifacts/supporting/data-mapper/ai-data-mapper.md) — Generate data mappings using AI.
+- [Try-It tool](../test/built-in-try-it-tool.md) — Test services without leaving the IDE.

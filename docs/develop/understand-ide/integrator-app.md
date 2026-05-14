@@ -80,7 +80,7 @@ The editor toolbar appears on the right side of the editor tab bar and provides 
 
 | Action | Description |
 |---|---|
-| **WSO2 Integrator Copilot** | Opens the WSO2 Integrator Copilot chat panel for AI-powered assistance with building and troubleshooting your integration. |
+| **WSO2 Integrator Copilot** | Opens the [WSO2 Integrator Copilot](../copilot/overview.md) chat panel for AI-powered assistance with building and troubleshooting your integration. |
 | **Run** | Builds and runs the integration locally, starting all services and streaming output to the terminal. |
 | **Debug** | Launches the integration with the debugger attached so you can set breakpoints and inspect variables. |
 | **Show Source** | Switches the editor from the visual designer to the Ballerina source for the current artifact. |

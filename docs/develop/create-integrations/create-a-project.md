@@ -52,7 +52,7 @@ After creation, WSO2 Integrator opens the [project view](../understand-ide/views
 You have several entry points into the **Add New Integration** or **Add New Library** dialog:
 
 - **Add Integration or Library** in the **Integrations & Libraries** card.
-- **Generate with AI** in the same card to scaffold an integration from a natural-language prompt.
+- **Generate with AI** in the same card to scaffold an integration from a natural-language prompt using [WSO2 Integrator Copilot](../copilot/overview.md).
 - **Create Integration or Library** in the sidebar.
 
 The empty project also includes a **README** card that links to **Add a README** so you can document the project, integrations, and libraries.

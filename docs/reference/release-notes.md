@@ -14,7 +14,7 @@ Rather than walk through every change, this note focuses on the five improvement
 
 Integration development has always been iterative, but tooling rarely reflected that. Developers would write a requirement, generate some code, hit a wall, and start over. With 5.0.0, that cycle changes fundamentally.
 
-The **WSO2 Integrator Copilot** now supports multi-turn, conversational development. A developer describes a business requirement in natural language. The Copilot proposes an integration plan. The developer refines it (adding rules, OpenAPI specs, or constraints) across multiple exchanges. Once the plan is ready, the Copilot generates the full end-to-end integration, opens the visual diagram, and stays in the conversation to help with configuration, testing, and validation.
+The [**WSO2 Integrator Copilot**](../develop/copilot/overview.md) now supports multi-turn, conversational development. A developer describes a business requirement in natural language. The Copilot proposes an integration plan. The developer refines it (adding rules, OpenAPI specs, or constraints) across multiple exchanges. Once the plan is ready, the Copilot generates the full end-to-end integration, opens the visual diagram, and stays in the conversation to help with configuration, testing, and validation.
 
 This isn't prompt-and-hope — it's a genuine back-and-forth where the developer stays in control and the AI handles the heavy lifting. The result: faster development cycles and integrations that more accurately reflect the original requirement.
 

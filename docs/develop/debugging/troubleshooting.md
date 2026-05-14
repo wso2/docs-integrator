@@ -61,13 +61,7 @@ Two channels are available:
 - **Ballerina**: IDE-level logs (startup, configuration)
 - **Ballerina Language Server**: language server protocol messages and errors
 
-<ThemedImage
-    alt="Open the Ballerina output panel from View > Output and select the Ballerina channel"
-    sources={{
-        light: useBaseUrl('/img/develop/debugging/troubleshooting/view-ide-output-light.gif'),
-        dark: useBaseUrl('/img/develop/debugging/troubleshooting/view-ide-output-dark.gif'),
-    }}
-/>
+![Open the Ballerina output panel from View > Output and select the Ballerina channel](/img/develop/debugging/troubleshooting/view-ide-output.gif)
 
 ### Set up a custom Ballerina path
 
@@ -76,25 +70,13 @@ To use a Ballerina distribution other than the one bundled with the IDE, for exa
 1. Download the Ballerina distribution and unpack it to a known location.
 2. Open the IDE settings: click the **Manage** (gear) icon at the bottom of the activity bar and select **Settings** (or press `Ctrl+,` on Windows/Linux, `Cmd+,` on macOS).
 
-   <ThemedImage
-       alt="Open the IDE settings from the Manage menu"
-       sources={{
-           light: useBaseUrl('/img/develop/debugging/troubleshooting/open-settings-light.png'),
-           dark: useBaseUrl('/img/develop/debugging/troubleshooting/open-settings-dark.png'),
-       }}
-   />
+   ![Open the IDE settings from the Manage menu](/img/develop/debugging/troubleshooting/open-settings.png)
 
 3. Search for `ballerina.home`.
 4. Enter the path to the downloaded distribution in the **Ballerina: Home** field.
 5. To activate the custom distribution, also enable **Ballerina: Plugin Dev Mode**.
 
-   <ThemedImage
-       alt="Ballerina Home and Plugin Dev Mode settings"
-       sources={{
-           light: useBaseUrl('/img/develop/debugging/troubleshooting/custom-ballerina-path-light.png'),
-           dark: useBaseUrl('/img/develop/debugging/troubleshooting/custom-ballerina-path-dark.png'),
-       }}
-   />
+   ![Ballerina Home and Plugin Dev Mode settings](/img/develop/debugging/troubleshooting/custom-ballerina-path.png)
 
 ### Enable IDE debug logs
 
@@ -106,13 +88,7 @@ When you need detailed diagnostic output from the IDE or the language server, op
 | `ballerina.traceLog` | Trace-level messages on the Ballerina output channel (more verbose than debug) |
 | `ballerina.enableLanguageServerDebug` | Language server debug mode |
 
-<ThemedImage
-    alt="Ballerina Debug Log setting in the IDE settings"
-    sources={{
-        light: useBaseUrl('/img/develop/debugging/troubleshooting/enable-debug-logs-light.png'),
-        dark: useBaseUrl('/img/develop/debugging/troubleshooting/enable-debug-logs-dark.png'),
-    }}
-/>
+![Ballerina Debug Log setting in the IDE settings](/img/develop/debugging/troubleshooting/enable-debug-logs.png)
 
 Output appears in the Ballerina output panel. See [View the IDE output](#view-the-ide-output) above.
 
