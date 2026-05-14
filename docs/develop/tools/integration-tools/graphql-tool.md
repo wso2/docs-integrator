@@ -248,4 +248,4 @@ Client generation from GraphQL schemas is currently supported only through the B
 
 - [AsyncAPI Tool](asyncapi-tool.md) — Generate event-driven services from AsyncAPI specs
 - [OpenAPI Tool](openapi-tool.md) — Generate REST services and clients
-- [Ballerina pro-code](/docs/develop/design-logic/ballerina-pro-code) — Write advanced GraphQL resolver logic
+- [Flow Diagram Editor](/docs/develop/understand-ide/editors/flow-diagram-editor/) — Switch to pro-code to write advanced GraphQL resolver logic

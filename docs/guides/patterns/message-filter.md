@@ -16,10 +16,10 @@ The pattern is implemented by placing a filtering construct at the point where t
 
 ## Predicate-based filtering
 
-Use predicate-based filtering with [if/else statements](/docs/develop/design-logic/control-flow#ifelse-statements) when each message carries the fields needed for a single boolean decision, such as priority, source, header, or status. The accepted path contains the forwarding or processing action. The rejected path does nothing or handles the rejection separately.
+Use predicate-based filtering with [if/else statements](/docs/develop/understand-ide/editors/flow-diagram-editor/control#if) when each message carries the fields needed for a single boolean decision, such as priority, source, header, or status. The accepted path contains the forwarding or processing action. The rejected path does nothing or handles the rejection separately.
 
-1. Open the flow and [add a step](/docs/develop/design-logic/visual-flow-designer#adding-steps-to-the-flow).
-2. Add an [If node](/docs/develop/design-logic/control-flow#ifelse-statements) at the point where the message has enough data for the decision.
+1. Open the flow and [add a step](/docs/develop/understand-ide/editors/flow-diagram-editor/#anatomy-of-the-editor).
+2. Add an [If node](/docs/develop/understand-ide/editors/flow-diagram-editor/control#if) at the point where the message has enough data for the decision.
 3. Set the condition to `message.priority == HIGH_PRIORITY`.
 4. Add the accepted action inside the matching branch.
 5. Leave the other branch empty when unmatched messages should be discarded.
@@ -59,10 +59,10 @@ service /api/v1 on new http:Listener(8080) {
 
 ## Collection-level filtering
 
-Use collection-level filtering with [query expressions](/docs/develop/design-logic/query-expressions) when the flow already has a group of messages or records and only a subset should continue. Keep the predicate in the `where` clause so the result is the accepted collection.
+Use collection-level filtering with [query expressions](/docs/reference/language/query-expressions) when the flow already has a group of messages or records and only a subset should continue. Keep the predicate in the `where` clause so the result is the accepted collection.
 
-1. Open the flow and [add a step](/docs/develop/design-logic/visual-flow-designer#adding-steps-to-the-flow).
-2. Add a [Map Data or Declare Variable step](/docs/develop/design-logic/query-expressions#using-query-expressions-in-the-visual-designer).
+1. Open the flow and [add a step](/docs/develop/understand-ide/editors/flow-diagram-editor/#anatomy-of-the-editor).
+2. Add a [Map Data or Declare Variable step](/docs/reference/language/query-expressions).
 3. Set the output type to the accepted collection type, such as `Message[]`.
 4. Enter a query expression with a `where` clause for the filter predicate.
 5. Use the resulting collection in the next processing or forwarding step.

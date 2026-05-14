@@ -19,7 +19,7 @@ Use a typed message envelope when the integration needs a stable application-lev
 
 1. Create a new integration in WSO2 Integrator.
 2. Add the header, body, and envelope records in [Types](/docs/develop/integration-artifacts/supporting/types).
-3. Open the flow and [add a step](/docs/develop/design-logic/visual-flow-designer#adding-steps-to-the-flow).
+3. Open the flow and [add a step](/docs/develop/understand-ide/editors/flow-diagram-editor/#anatomy-of-the-editor).
 4. Add a **Declare Variable** or **Map Data** step to construct the envelope.
 5. Pass the envelope to the connector call, return it from the resource function, or map it into another boundary-specific message.
 
@@ -57,7 +57,7 @@ function buildOrderMessage(OrderBody order, string correlationId) returns OrderM
 
 Use channel boundary binding when the message arrives through, or leaves through, a protocol that already provides metadata and payload locations. Keep the EIP Message shape explicit in the flow, then map HTTP headers, HTTP payloads, or broker records into that envelope at the boundary.
 
-1. Add and configure the required connector under **Connections**. For brokered messages, select the relevant connector, such as the [NATS connector](/docs/connectors/catalog/messaging/nats/connector-overview), from the [messaging connector catalog](/docs/connectors/catalog/messaging/messaging).
+1. Add and configure the required connector under **Connections**. For brokered messages, select the relevant connector, such as the [NATS connector](/docs/connectors/catalog/messaging/nats/connector-overview), from the [messaging connector catalog](/docs/connectors/catalog/).
 2. Add the listener or entry point for the inbound channel. For HTTP, start by [creating an HTTP service](/docs/develop/integration-artifacts/service/http#creating-an-http-service).
 3. Bind the request payload as the body and bind transport metadata, such as headers, as message headers.
 4. Add a **Map Data** step to create the typed message envelope from the inbound payload and metadata.

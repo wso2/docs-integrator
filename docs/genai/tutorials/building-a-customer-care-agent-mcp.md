@@ -151,7 +151,7 @@ Try the following messages to exercise all three tools:
     }}
 />
 
-For more detail on using the chat panel, see [Testing chat agents](../../develop/test/built-in-try-it-tool#testing-chat-agents).
+For more detail on using the chat panel, see [Try-It experiences](../../develop/test/built-in-try-it-tool#try-it-experiences).
 
 **`connections.bal`**: model provider and MCP toolkit connection:
 

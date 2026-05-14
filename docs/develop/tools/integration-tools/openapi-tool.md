@@ -299,4 +299,4 @@ Once your service is built, export its OpenAPI specification and share it with c
 
 - [GraphQL Tool](graphql-tool.md) — Generate GraphQL services from SDL schemas
 - [gRPC Tool](grpc-tool.md) — Generate gRPC services from Protocol Buffer definitions
-- [Visual flow designer](/docs/develop/design-logic/visual-flow-designer) — Build logic visually on top of generated stubs
+- [Flow Diagram editor](/docs/develop/understand-ide/editors/flow-diagram-editor/) — Build logic visually on top of generated stubs

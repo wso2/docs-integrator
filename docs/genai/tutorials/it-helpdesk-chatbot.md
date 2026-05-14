@@ -129,7 +129,7 @@ final ai:Agent itHelpDeskAgent = check new (
 
 ### Step 5: Add a tool to the agent
 
-Add the following tool to the agent by following the instructions in [Create custom tool — hand-crafted definitions](genai/develop/agents/tools.md#4-create-custom-tool--hand-crafted-definitions).
+Add the following tool to the agent by following the instructions in [Create custom tool](/docs/genai/develop/agents/tools#4-create-custom-tool).
 
 ```ballerina
 # agents.bal

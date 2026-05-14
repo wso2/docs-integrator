@@ -54,11 +54,11 @@ service "priority-order-consumer" on orderListener {
 
 ## Flow-level selection
 
-Use flow-level selection with [if/else statements](/docs/develop/design-logic/control-flow#ifelse-statements) when the consumer must inspect the delivered payload, call another system, or apply rules that cannot be expressed as a broker selector. The service still reads from the shared channel, but the accepted branch contains the processing logic and the unmatched branch is ignored or handled separately.
+Use flow-level selection with [if/else statements](/docs/develop/understand-ide/editors/flow-diagram-editor/control#if) when the consumer must inspect the delivered payload, call another system, or apply rules that cannot be expressed as a broker selector. The service still reads from the shared channel, but the accepted branch contains the processing logic and the unmatched branch is ignored or handled separately.
 
 1. Create or open the consumer service that receives messages from the shared channel.
-2. Open the message handler flow and [add a step](/docs/develop/design-logic/visual-flow-designer#adding-steps-to-the-flow).
-3. Add an [If node](/docs/develop/design-logic/control-flow#ifelse-statements) at the point where the flow has the payload fields needed for selection.
+2. Open the message handler flow and [add a step](/docs/develop/understand-ide/editors/flow-diagram-editor/#anatomy-of-the-editor).
+3. Add an [If node](/docs/develop/understand-ide/editors/flow-diagram-editor/control#if) at the point where the flow has the payload fields needed for selection.
 4. Set the condition to the consumer criteria, such as `order.priority == "high" && order.region == "west"`.
 5. Add the processing steps inside the **True** branch.
 6. Leave the **False** branch empty when unmatched messages should be ignored, or add separate handling for rejected messages.

@@ -294,5 +294,5 @@ A new build undergoes a health check before switching traffic from the current b
 ## What's next
 
 - [Core concepts](core.md) — projects, integrations, services, connectors, and more
-- [Deploy and operate](/docs/deploy-operate/overview) — self-hosted deployment options
+- [Deploy](/docs/deploy/overview) — self-hosted deployment options
 - [Introduction](../introduction.md) — platform overview and architecture

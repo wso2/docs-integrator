@@ -88,6 +88,6 @@ Click **Edit** to modify the README directly. You can also click **Generate with
 
 ## What's next
 
-- [Design integration logic](/docs/develop/design-logic/) — Build logic using the visual designer.
+- [Flow Diagram editor](/docs/develop/understand-ide/editors/flow-diagram-editor/) — Build logic using the visual designer.
 - [Integration artifacts](/docs/develop/integration-artifacts) — Learn about artifact types and their configuration.
 - [Deploy to WSO2 Cloud](/docs/deploy/cloud/overview) — Deploy your integration to the cloud.

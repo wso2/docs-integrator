@@ -354,6 +354,6 @@ When reporting a bug, include everything from [Before you start](#before-you-sta
 
 ## See also
 
-- [Error Codes](/docs/reference/error-codes): Reference for all error codes
+- [Error Codes](/docs/reference/error-code): Reference for all error codes
 - [System Requirements](../../reference/appendix/system-requirements.md): Supported platforms and versions
 - [FAQ](/docs/reference/faq): Frequently asked questions

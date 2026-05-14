@@ -357,4 +357,4 @@ function validateOrder(Order order) returns error? {
 ## See also
 
 - [Concurrency](concurrency.md) -- Workers, transactions, and error handling in concurrent code
-- [Ballerina by Example](/docs/reference/by-example) -- Runnable error handling examples
+- [Ballerina by Example](/docs/reference/ballerina-by-example) -- Runnable error handling examples

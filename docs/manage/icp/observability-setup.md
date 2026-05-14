@@ -10,7 +10,7 @@ For MI runtimes, see [MI observability setup](mi-profile/observability-setup-mi.
 
 :::info Prerequisites
 
-- ICP server running with OpenSearch connection configured in `deployment.toml`. Use `https://` if OpenSearch is running with TLS (including the demo setup). See [Install ICP](install-icp.md#opensearch-observability).
+- ICP server running with OpenSearch connection configured in `deployment.toml`. Use `https://` if OpenSearch is running with TLS (including the demo setup). See [Install ICP](install-icp.md).
 - Integration connected to ICP with heartbeats working. See [Connect an integration to ICP](connect-runtime.md).
 - Fluent Bit installed on the machine running the default profile runtime. See the [Fluent Bit installation page](https://docs.fluentbit.io/manual/installation/downloads).
 

@@ -181,7 +181,7 @@ The in-memory store is rebuilt on every restart, so re-running the integration r
 - Use **Delete By Filter** before re-ingesting a document to avoid duplicates. Filter by a metadata field like `source` or `version`.
 - Schedule the automation with a trigger (for example, an HTTP call, a cron, or a file-watch event) rather than running it once.
 
-See [Knowledge Bases — delete by filter](../components/knowledge-bases.md#public-actions) for details.
+See [Knowledge Bases — delete by filter](../components/knowledge-bases.md#available-actions) for details.
 
 ---
 

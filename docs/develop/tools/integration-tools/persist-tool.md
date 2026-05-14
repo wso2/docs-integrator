@@ -260,4 +260,4 @@ bal persist push --datastore <datastore> --module <module>
 
 - [Scan Tool](../other/scan-tool.md) — Analyze Ballerina code for security and quality issues
 - [Configuration management](/docs/reference/config/configuration-management) — Manage data store credentials with configurable variables
-- [Databases connector guide](/docs/connectors/catalog/database) — Database connectivity options
+- [Connector catalog](/docs/connectors/catalog/) — Browse database connectors and other connectivity options

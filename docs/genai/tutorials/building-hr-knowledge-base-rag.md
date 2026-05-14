@@ -525,4 +525,4 @@ You now have a fully visual HR RAG pipeline that grounds an LLM in your actual p
 
 - [Vector stores](../develop/components/vector-stores.md) — Swap the in-memory store for a persistent backend (Pinecone, Milvus, Pgvector, Weaviate).
 - [Chunkers](../develop/components/chunkers.md) — Tune chunk size and overlap, or plug in a custom chunker.
-- [The query flow](../develop/rag/overview.md#the-query-flow) — Customize retrieval (top-K, filters, hybrid search).
+- [How RAG works](../develop/rag/overview.md#how-it-works) — Customize retrieval (top-K, filters, hybrid search).

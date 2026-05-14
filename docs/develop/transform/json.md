@@ -205,7 +205,7 @@ public function main() returns error? {
 
 ## Parse JSON arrays
 
-Use `jsondata:parseString()` to parse a JSON array string directly into a typed record array. If you already have a `json` value instead of a string, use `jsondata:parseAsType()` as described in [Convert a JSON value to a typed record](`#convert-a-json-value-to-a-typed-record`).
+Use `jsondata:parseString()` to parse a JSON array string directly into a typed record array. If you already have a `json` value instead of a string, use `jsondata:parseAsType()` as described in [Convert a JSON value to a typed record](#convert-a-json-value-to-a-typed-record).
 
 1. **Define the record type**: Navigate to **Types** in the sidebar and click **+** to add a new type. Define the `OrderItem` record from scratch with the following fields: `sku` (`string`), `quantity` (`int`), and `unitPrice` (`decimal`). For details on creating types, see [Types](../integration-artifacts/supporting/types.md).
 
@@ -349,4 +349,4 @@ Create a `products.json` file in the project directory.
 ## What's next
 
 - [XML Processing](xml.md) - Work with XML data
-- [Type System & Records](type-system.md) - Type-safe data handling
+- [Type System & Records](/docs/reference/language/type-system) - Type-safe data handling

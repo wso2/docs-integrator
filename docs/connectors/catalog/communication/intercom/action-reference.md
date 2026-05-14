@@ -540,7 +540,7 @@ intercom:Ticket ticket = check intercomClient->/tickets.post({
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `ticketTypeId` | `string` | Yes | ID of the ticket type (see [Setup guide](setup-guide.md#step-6-optional-find-your-ticket-type-id)) |
+| `ticketTypeId` | `string` | Yes | ID of the ticket type (see [Setup guide](setup-guide.md)) |
 | `contacts` | `CreateTicketRequestContacts[]` | Yes | Contacts associated with the ticket |
 | `companyId` | `string` | No | Company to associate with the ticket |
 

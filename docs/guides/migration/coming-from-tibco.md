@@ -257,7 +257,7 @@ To build a deployable artifact:
 bal build
 ```
 
-See [Deploy & Operate](/docs/deploy-operate/overview) for Docker, Kubernetes, and cloud deployment options.
+See [Deploy](/docs/deploy/overview) for Docker, Kubernetes, and cloud deployment options.
 
 ## Concept mapping
 

@@ -6,7 +6,7 @@ title: Type Editor
 
 The Type editor is the side panel you open whenever you create or change a custom type in WSO2 Integrator. It gives you one form to define records, enums, unions, arrays, and service classes, configure each member or field, and toggle advanced options such as additional fields and read-only types. Every change you save in the editor updates the type's Ballerina source and the type card on the [Type Diagram editor](type-diagram-editor.md).
 
-For an introduction to types and how an integration uses them, see [Key concepts](/docs/get-started/key-concepts). For a canvas-level view of how all the types in your integration relate to each other, see the [Type Diagram editor](type-diagram-editor.md).
+For an introduction to types and how an integration uses them, see [Core Concepts](/docs/get-started/concepts/core). For a canvas-level view of how all the types in your integration relate to each other, see the [Type Diagram editor](type-diagram-editor.md).
 
 ## Open the editor
 
@@ -188,7 +188,7 @@ The editor generates a `Library` record with a `book` array field and a nested r
 Once the records look right, save the form. The new types are added to the integration and become available everywhere a custom type can be used.
 
 :::tip Common next steps after import
-- Use the generated record as a request or response payload in a [service](/docs/develop/integration-artifacts/service).
+- Use the generated record as a request or response payload in a [service](/docs/develop/integration-artifacts/service/http).
 - Map fields from the imported record onto another type in the [Data Mapper editor](datamapper-editor.md).
 - Expose the record from a [GraphQL service](/docs/develop/integration-artifacts/service/graphql) resolver.
 

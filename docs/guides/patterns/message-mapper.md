@@ -21,7 +21,7 @@ Use record-to-record mapping when both the domain value and the channel payload 
 2. Create a [reusable data mapper](/docs/develop/integration-artifacts/supporting/data-mapper/access-paths/reusable) with the domain record as the input and the message record as the output.
 3. Open the data mapper canvas and connect matching fields, such as `id` to `orderId`.
 4. Use the expression editor for transformed fields, such as combining names or calculating a total. See [Expression editor](/docs/develop/integration-artifacts/supporting/data-mapper/mapping-capabilities#expression-editor).
-5. Use [array mappings](/docs/develop/integration-artifacts/supporting/data-mapper/array-mappings/array-mappings) when the mapper must convert item collections.
+5. Use [array mappings](/docs/develop/integration-artifacts/supporting/data-mapper/array-mappings/) when the mapper must convert item collections.
 6. Add a **Map Data** step in the flow and pass the mapped record to the next service, resource function, or connector call.
 
 ```ballerina
@@ -78,7 +78,7 @@ function toDomain(OrderMessage message) returns Order {
 
 ## Data-format boundary mapping
 
-Use data-format boundary mapping when the channel sends or receives raw JSON, XML, CSV, or another serialized format. Keep parsing and serialization at the boundary, then call the typed mapper so the main flow works with records instead of raw payloads. For JSON payloads, use [type-safe JSON conversion](/docs/develop/transform/json#type-safe-json-with-ballerinadatajsondata). For XML and CSV payloads, use the corresponding [XML processing](/docs/develop/transform/xml) or [CSV and flat file processing](/docs/develop/transform/csv-flat-file) guide.
+Use data-format boundary mapping when the channel sends or receives raw JSON, XML, CSV, or another serialized format. Keep parsing and serialization at the boundary, then call the typed mapper so the main flow works with records instead of raw payloads. For JSON payloads, use [type-safe JSON conversion](/docs/develop/transform/json#convert-a-json-value-to-a-typed-record). For XML and CSV payloads, use the corresponding [XML processing](/docs/develop/transform/xml) or [CSV and flat file processing](/docs/develop/transform/csv-flat-file) guide.
 
 1. Define the message record type that matches the incoming raw payload.
 2. For a JSON boundary, add a **Call Function** step for `jsondata:parseAsType` and set the result type to the message record.

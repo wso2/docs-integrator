@@ -92,7 +92,7 @@ Yes. WSO2 Integrator includes first-class support for AI agents, retrieval-augme
 
 ### Which LLM and vector store providers are supported?
 
-WSO2 Integrator ships connectors for major LLM providers and vector stores. See the [Connectors catalog](/docs/connectors/catalog/ai-ml/ai-machine-learning) for the current list.
+WSO2 Integrator ships connectors for major LLM providers and vector stores. See the [Connectors catalog](/docs/connectors/catalog/) for the current list.
 
 ## Deploy and operate
 
@@ -149,13 +149,13 @@ The ICP is a monitoring and management dashboard for deployed integrations. It p
 - Artifact discovery (services, listeners, connectors)
 - Integration lifecycle management (activate, deactivate, restart)
 
-See the [ICP API Reference](/docs/reference/api/icp-api) for programmatic access.
+See the [ICP API Reference](/docs/reference/api/icp) for programmatic access.
 
 ## Migration
 
 ### Can I migrate from MuleSoft or TIBCO?
 
-Yes. WSO2 provides migration guides and tooling to help transition from other integration platforms. See [Coming from MuleSoft](/docs/tutorials/migration/coming-from-mulesoft) and [Coming from TIBCO](/docs/tutorials/migration/coming-from-tibco) for platform-specific guidance. For migrating third-party integrations programmatically, see [Migrate third-party integrations](/docs/develop/create-integrations/migrate-third-party-integrations).
+Yes. WSO2 provides migration guides and tooling to help transition from other integration platforms. See [Coming from MuleSoft](/docs/guides/migration/coming-from-mulesoft) and [Coming from TIBCO](/docs/guides/migration/coming-from-tibco) for platform-specific guidance. For migrating third-party integrations programmatically, see [Migrate third-party integrations](/docs/develop/create-integrations/migrate-third-party-integrations).
 
 ### Can I run WSO2 MI and WSO2 Integrator side by side?
 
