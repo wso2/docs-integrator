@@ -4,7 +4,7 @@ title: Create from OpenAPI Spec
 
 # Create from OpenAPI Spec
 
-WSO2 Integrator can generate a fully functional connector from any OpenAPI specification file, letting you integrate any REST API without writing manual client logic. Import the spec in the WSO2 Integrator IDE and the connector is ready to use in your integration flow.
+WSO2 Integrator can generate a fully functional connector from any OpenAPI specification file, letting you integrate any REST API without writing manual client logic. Import the spec in the WSO2 Integrator IDE and the generated connector is ready to use in your integration.
 
 ## Prerequisites
 
@@ -13,51 +13,48 @@ WSO2 Integrator can generate a fully functional connector from any OpenAPI speci
 
 ## Generate a connector
 
-Follow these steps to generate a custom connector from an OpenAPI spec:
+Follow these steps to generate a custom connector from an OpenAPI spec and create a connection from it.
 
-### Step 1: Open the flow diagram
+### Step 1: Add a connection from the Artifacts view
 
-Open your integration project in the Automation diagram view.
+Open your integration and select **Connection** from the **Artifacts** view.
 
-![Open the Automation diagram view](/img/connectors/build-your-own/openapi_spec_1_create_automation.png)
+![Add a connection from the Artifacts view](/img/connectors/build-your-own/create-from-openapi-spec/add-connection-artifacts.png)
 
-### Step 2: Add a new connection
+### Step 2: Select Connect via API Specification
 
-Click the **+** icon positioned between the **Start** and **Error Handler** nodes on your flow line. From the right-side palette, choose **Add Connection**.
+In the **Add Connection** dialog, select **Connect via API Specification**.
 
-![Add a new connection](/img/connectors/build-your-own/openapi_spec_2_create_connection.png)
+![Select Connect via API Specification in the Add Connection dialog](/img/connectors/build-your-own/create-from-openapi-spec/connect-via-open-api-spec.png)
 
-### Step 3: Select OpenAPI
+### Step 3: Configure and import the specification
 
-In the **Add Connection** overlay, select **OpenAPI** under the **Connect via API Specification** section.
-
-![Configure the connector](/img/connectors/build-your-own/openapi_spec_3_import_spec.png)
-
-### Step 4: Configure the connector
-
-In the **Connector Configuration** form, fill in the following:
+Fill in the connector configuration fields, then save to import the specification.
 
 | Field | Description | Example |
 |---|---|---|
-| **Connector Name** | A descriptive name for your connector | `stackOverflow` |
-| **Import Specification File** | Browse and upload your OpenAPI definition file | `stack-overflow-api.yaml` |
+| **Connector Name** | A descriptive name for the generated connector. | `stackOverflow` |
+| **Import Specification File** | Browse and select your OpenAPI specification file in JSON or YAML format. | `stack-overflow-api.yaml` |
 
-![Save the connection](/img/connectors/build-your-own/openapi_spec_4_save_connection.png)
-
-### Step 5: Save and review
-
-Click **Save Connector** to generate the connector from your OpenAPI spec. Review the connection details displayed on the following screen to verify everything looks correct.
-
-### Step 6: Finalize
-
-Click **Save Connection** to complete the setup. Your custom connector is now ready to use in your integration flow.
+![Configure the connector and import the OpenAPI specification](/img/connectors/build-your-own/create-from-openapi-spec/configure-and-import.png)
 
 Make sure your OpenAPI specification is valid and well-structured before importing. You can validate your spec using tools like [Swagger Editor](https://editor.swagger.io/).
 
-Once your connector is generated, you can use it just like any pre-built connector: drag it into your integration flow, configure its operations, and map data between services.
+### Step 4: Create the connection
+
+After you select **Save** in the previous step, WSO2 Integrator generates the connector from the specification and moves you to the **Create Connection** step of the **Connect via API Specification** wizard. Complete this step to create a connection with the name you provided. The connection is then available in the [Flow Diagram editor](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md) for any integration in the project.
+
+![Create the connection in the Connect via API Specification wizard](/img/connectors/build-your-own/create-from-openapi-spec/create-connection.png)
+
+## Add a connection while building a flow
+
+You don't have to start from the **Artifacts** view. While you work in the [Flow Diagram editor](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md), open the node palette with the **+** button and select **Add Connection** to start the same **Connect via API Specification** wizard without leaving your integration.
+
+![Add a connection from the node palette in the Flow Diagram editor](/img/connectors/build-your-own/create-from-openapi-spec/create-connector-while-in-visualizer.gif)
 
 ## What's next
 
-- [Custom development](custom-development.md): Build a connector from scratch using Ballerina for full control over implementation
-- [Build your own connector](build-own.md): Compare approaches for creating custom connectors
-- [Connector catalog](../catalog/index.mdx): Browse all available pre-built connectors
+- [Connections](../../develop/integration-artifacts/supporting/connections.md): Understand how connections are configured and reused across an integration.
+- [Custom development](custom-development.md): Build a connector from scratch using Ballerina for full control over the implementation.
+- [Build your own connector](build-own.md): Compare approaches for creating custom connectors.
+- [Connector catalog](../catalog/index.mdx): Browse all available pre-built connectors.
