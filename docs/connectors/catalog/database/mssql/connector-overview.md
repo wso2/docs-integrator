@@ -1,10 +1,10 @@
 ---
-title: Overview
+title: MSSQL
 ---
 
 # Overview
 
-Microsoft SQL Server is a relational database management system used for enterprise data storage and processing. The Ballerina `ballerinax/mssql` connector (v1.16.4) provides programmatic access to MSSQL databases through SQL queries, parameterized statements, stored procedures, batch operations, and Change Data Capture (CDC) event streaming, enabling you to integrate MSSQL data into your Ballerina integration flows.
+Microsoft SQL Server is a relational database management system used for enterprise data storage and processing. The `ballerinax/mssql` connector (v1.18.0) provides programmatic access to MSSQL databases through SQL queries, parameterized statements, stored procedures, batch operations, and Change Data Capture (CDC) event streaming, enabling you to integrate MSSQL data into your WSO2 Integrator integrations.
 
 ## Key features
 
@@ -44,13 +44,13 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 
 ## Documentation
 
-* **[Setup Guide](setup-guide.md)**: This guide walks you through setting up a Microsoft SQL Server instance and enabling CDC so that the MSSQL connector can connect and capture data changes.
+* **[Setup Guide](setup-guide.md)**: Set up a SQL Server instance and enable CDC for the MSSQL connector.
 
 * **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 
 * **[Trigger Reference](triggers.md)**: Reference for event-driven integration using the listener and service model.
 
-* **[Example](example.md)**: Learn how to build and configure an integration using the **MSSQL** connector, including connection setup, operation configuration, execution flow, and event-driven trigger setup.
+* **[Example](example.md)**: Build and configure an integration using the MSSQL connector, including connection setup and operation configuration. For the listener and service model, see [Trigger Reference](triggers.md).
 
 ## How to contribute
 

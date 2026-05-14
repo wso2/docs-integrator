@@ -8,9 +8,9 @@ This guide walks you through setting up a Microsoft SQL Server instance and enab
 
 ## Prerequisites
 
-- A running Microsoft SQL Server instance (2016 or later). If you do not have one, you can [download SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) for free or run it via Docker.
+- A running Microsoft SQL Server instance (2016 or later). If you do not have one, you can [download SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) for free, run it via Docker (`docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=YourStr0ngPassw0rd' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-latest`), or use a managed service such as Azure SQL Database or Amazon RDS for SQL Server.
 
-## Step 1: Create a database and user
+## Create a database and user
 
 1. Connect to your SQL Server instance using **SQL Server Management Studio (SSMS)**, **Azure Data Studio**, or `sqlcmd`.
 2. Create a new database:
@@ -30,7 +30,18 @@ This guide walks you through setting up a Microsoft SQL Server instance and enab
 
 For production environments, grant only the minimum required permissions instead of `db_owner`.
 
-## Step 2: Enable TCP/IP connectivity
+## Note your connection details
+
+Record the following information. You will need it to configure the MSSQL client:
+
+- **Hostname**: The address of your SQL Server instance (for example, `localhost` or a cloud endpoint).
+- **Port**: The SQL Server port (default `1433`).
+- **Username**: The database user (for example, `myuser`).
+- **Password**: The database user's password.
+- **Database name**: The target database (for example, `MyDatabase`).
+- **Instance name** (optional): The named instance if you are not using the default instance.
+
+## Enable TCP/IP connectivity
 
 1. Open **SQL Server Configuration Manager**.
 2. Navigate to **SQL Server Network Configuration** > **Protocols for [your instance]**.
@@ -38,9 +49,9 @@ For production environments, grant only the minimum required permissions instead
 4. Under TCP/IP Properties > **IP Addresses**, verify the port is set to **1433** (or your custom port).
 5. Restart the SQL Server service for changes to take effect.
 
-If you are using a named instance, the port may differ from 1433. Check your instance configuration or use the instance name when connecting.
+If you are using a named instance, the port may differ from `1433`. Check your instance configuration or use the instance name when connecting.
 
-## Step 3: Enable change data capture (optional: for CDC triggers)
+## Enable change data capture for CDC triggers (optional)
 
 If you plan to use the CDC listener for real-time event streaming, enable CDC on the database and the specific tables you want to monitor:
 
@@ -51,7 +62,7 @@ If you plan to use the CDC listener for real-time event streaming, enable CDC on
     EXEC sys.sp_cdc_enable_db;
     ```
 
-2. Enable CDC on the table(s) you want to track:
+2. Enable CDC on the tables you want to track:
 
     ```sql
     EXEC sys.sp_cdc_enable_table
@@ -64,9 +75,9 @@ If you plan to use the CDC listener for real-time event streaming, enable CDC on
 
 CDC requires SQL Server Enterprise, Developer, or Standard edition. It is not available in Express edition.
 
-## Step 4: Configure SSL/TLS (optional)
+## Configure SSL/TLS (optional)
 
-To encrypt connections between your Ballerina application and SQL Server:
+To encrypt connections between your WSO2 Integrator runtime and SQL Server:
 
 1. Obtain or generate an SSL certificate for the SQL Server instance.
 2. Open **SQL Server Configuration Manager** > **SQL Server Network Configuration** > **Protocols**.
@@ -74,4 +85,9 @@ To encrypt connections between your Ballerina application and SQL Server:
 4. Under the **Certificate** tab, select your SSL certificate.
 5. Restart the SQL Server service.
 
-For development/testing, you can set `trustServerCertificate: true` in the connector's `SecureSocket` configuration to skip certificate validation.
+For development and testing, you can set `trustServerCertificate: true` in the connector's `SecureSocket` configuration to skip certificate validation.
+
+## Next steps
+
+- [Action Reference](actions.md): operations, parameters, return types, and sample code.
+- [Trigger Reference](triggers.md): listener configuration and service callbacks for CDC.

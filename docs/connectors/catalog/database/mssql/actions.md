@@ -1,10 +1,7 @@
----
-title: Actions
----
-
 # Actions
 
-The MSSQL connector spans 3 packages:
+The MSSQL connector is distributed across three libraries:
+
 - `ballerinax/mssql`
 - `ballerinax/mssql.driver`
 - `ballerinax/mssql.cdc.driver`
@@ -27,14 +24,14 @@ Connects to a Microsoft SQL Server database and executes SQL queries, DML statem
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `host` | `string` | `"localhost"` | Hostname of the MSSQL server. |
-| `user` | `string?` | `"sa"` | Database username. |
-| `password` | `string?` | `()` | Database password. |
-| `database` | `string?` | `()` | Name of the database to connect to. |
-| `port` | `int` | `1433` | Port number of the MSSQL server. |
-| `instance` | `string` | `""` | Named instance of SQL Server (e.g., `"SQLEXPRESS"`). |
-| `options` | `Options?` | `()` | MSSQL-specific connection options (SSL, timeouts, XA). |
-| `connectionPool` | `sql:ConnectionPool?` | `()` | Connection pool configuration for managing database connections. |
+| `host` | <code>string</code> | `"localhost"` | Hostname of the MSSQL server. |
+| `user` | <code>string?</code> | `"sa"` | Database username. |
+| `password` | <code>string?</code> | `()` | Database password. |
+| `database` | <code>string?</code> | `()` | Name of the database to connect to. |
+| `port` | <code>int</code> | `1433` | Port number of the MSSQL server. |
+| `instance` | <code>string</code> | `""` | Named instance of SQL Server (for example, `"SQLEXPRESS"`). |
+| `options` | <code>Options?</code> | `()` | MSSQL-specific connection options (SSL, timeouts, XA). |
+| `connectionPool` | <code>sql:ConnectionPool?</code> | `()` | Connection pool configuration. If not provided, the global shared pool is used. |
 
 ### Initializing the client
 
@@ -46,7 +43,7 @@ configurable string host = ?;
 configurable string user = ?;
 configurable string password = ?;
 configurable string database = ?;
-configurable int port = ?;
+configurable int port = 1433;
 
 mssql:Client dbClient = check new (
     host = host,
@@ -70,8 +67,8 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `sqlQuery` | `sql:ParameterizedQuery` | Yes | The SQL query to execute, using Ballerina's parameterized query syntax. |
-| `rowType` | `typedesc<record {}>` | No | The expected record type for each row in the result set. |
+| `sqlQuery` | <code>sql:ParameterizedQuery</code> | Yes | The SQL query to execute, using Ballerina's parameterized query syntax. |
+| `rowType` | <code>typedesc&lt;record &#123;&#125;&gt;</code> | No | The expected record type for each row in the result set. |
 
 Returns: `stream<rowType, sql:Error?>`
 
@@ -112,8 +109,8 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `sqlQuery` | `sql:ParameterizedQuery` | Yes | The SQL query to execute. |
-| `returnType` | `typedesc<anydata>` | No | The expected return type for the single result row. |
+| `sqlQuery` | <code>sql:ParameterizedQuery</code> | Yes | The SQL query to execute. |
+| `returnType` | <code>typedesc&lt;anydata&gt;</code> | No | The expected return type for the single result row. |
 
 Returns: `returnType|sql:Error`
 
@@ -151,7 +148,7 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `sqlQuery` | `sql:ParameterizedQuery` | Yes | The SQL statement to execute. |
+| `sqlQuery` | <code>sql:ParameterizedQuery</code> | Yes | The SQL statement to execute. |
 
 Returns: `sql:ExecutionResult|sql:Error`
 
@@ -181,7 +178,7 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `sqlQueries` | `sql:ParameterizedQuery[]` | Yes | An array of parameterized SQL statements to execute as a batch. |
+| `sqlQueries` | <code>sql:ParameterizedQuery[]</code> | Yes | An array of parameterized SQL statements to execute as a batch. |
 
 Returns: `sql:ExecutionResult[]|sql:Error`
 
@@ -217,8 +214,8 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `sqlQuery` | `sql:ParameterizedCallQuery` | Yes | The stored procedure call query using `exec ProcName` syntax. |
-| `rowTypes` | `typedesc<record {}>[]` | No | Expected record types for result sets returned by the procedure. |
+| `sqlQuery` | <code>sql:ParameterizedCallQuery</code> | Yes | The stored procedure call query using `exec ProcName` syntax. |
+| `rowTypes` | <code>typedesc&lt;record &#123;&#125;&gt;[]</code> | No | Expected record types for result sets returned by the procedure. |
 
 Returns: `sql:ProcedureCallResult|sql:Error`
 
