@@ -14,15 +14,7 @@ An AI agent uses an LLM to reason about user queries and call tools to retrieve 
 
 ## Architecture
 
-<ThemedImage
-    alt="AI agent architecture showing the chat listener connected to the AI agent and the model provider"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-ai-agent/01-ai-agent-diagram-light.svg'),
-        dark: useBaseUrl('/img/get-started/build-ai-agent/02-ai-agent-diagram-dark.svg'),
-    }}
-/>
-
-## Step 1: Create the project
+## Step 1: Create the integration
 
 1. Open WSO2 Integrator.
 2. Select **Create** in the **Create New Integration** card.
@@ -40,8 +32,8 @@ An AI agent uses an LLM to reason about user queries and call tools to retrieve 
 
 ## Step 2: Add an AI chat agent
 
-1. Select the **AIAgent** integration from the project panel.
-2. Select **+ Add Artifact** in the design view, or **+** next to **Entry Points** in the sidebar.
+1. Select your integration from the project overview canvas.
+2. Select **+ Add Artifact** in the design canvas.
 3. Select **AI Chat Agent** under **AI Integration**.
 4. Set **Name** to `Wso2IntegratorAssistant`.
 5. Select **Create**.
