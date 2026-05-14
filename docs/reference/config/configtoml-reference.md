@@ -1,29 +1,22 @@
 ---
-title: Config.toml Reference
+title: Config.toml reference
 ---
 
-# Config.toml Reference
+# Config.toml reference
 
-## Overview
-
-`Config.toml` provides runtime values for `configurable` variables declared in Ballerina source code. Place this file in the working directory where you run `bal run`, or specify one or more config files via the `BAL_CONFIG_FILES` environment variable.
-
-Ballerina uses a TOML v0.4-compatible syntax with module-qualified keys to map configuration values to their corresponding `configurable` declarations.
+`Config.toml` provides runtime values for `configurable` variables declared in Ballerina source code. Place this file in the working directory where you run `bal run`, or specify one or more config files via the `BAL_CONFIG_FILES` environment variable. Ballerina uses a TOML v0.4-compatible syntax with module-qualified keys to map configuration values to their corresponding `configurable` declarations.
 
 ## How configurable variables work
 
-In Ballerina source code, declare a configurable variable with the `configurable` keyword:
+Declare a variable with the `configurable` keyword in Ballerina source code. Variables with a default value are optional; variables with `?` are required and the program will not start if no value is supplied.
 
 ```ballerina
-// In main.bal (root module)
-configurable int port = 8080;
+configurable int port = 8080;        // optional — has a default
 configurable string hostname = "localhost";
-
-// A configurable without a default value is required
-configurable string dbUrl = ?;
+configurable string dbUrl = ?;       // required — must be set in Config.toml
 ```
 
-In `Config.toml`, supply values using the variable names:
+Supply values in `Config.toml` using the same variable names:
 
 ```toml
 port = 9090
@@ -31,25 +24,33 @@ hostname = "api.example.com"
 dbUrl = "jdbc:mysql://db.example.com:3306/orders"
 ```
 
-## Module-Qualified names
+## Module-qualified names
 
 When configurable variables are in non-root modules or external packages, use TOML table headers to specify the module context.
 
-### Root module (same package)
+### Root module
 
-Variables in the root module of the current package require no qualifier:
+Variables in the root module of the current package need no qualifier. They map directly to top-level TOML keys.
+
+```ballerina
+// main.bal — root module
+configurable int port = 8080;
+configurable string hostname = "localhost";
+configurable boolean enableSSL = false;
+```
 
 ```toml
 port = 9090
 hostname = "api.example.com"
+enableSSL = true
 ```
 
-### Non-Root module (same package)
+### Non-root module (same package)
 
-Variables in a non-root module of the current package use the module name as the table header:
+Variables in a sub-module use the module name as the TOML table header.
 
 ```ballerina
-// In module: mypackage.db
+// modules/db/db.bal — module mypackage.db
 configurable string dbHost = ?;
 configurable int dbPort = 3306;
 ```
@@ -62,7 +63,7 @@ dbPort = 5432
 
 ### External package
 
-Variables in an external package require the full `org-name.package-name` or `org-name.package-name.module-name` qualifier:
+Variables declared as `configurable` in a dependency use the `org-name.package-name` (or `org-name.package-name.module-name`) qualifier.
 
 ```toml
 [ballerinax.mysql]
@@ -71,48 +72,81 @@ port = 3306
 user = "admin"
 ```
 
+For ICP runtime bridge configuration (the `wso2/icp.runtime.bridge` package used when connecting to ICP):
+
+```toml
+[wso2.icp.runtime.bridge]
+environment = "dev"
+project     = "my-project"
+integration = "my-integration"
+runtime     = "my-integration-1"
+secret      = "<generated-secret>"
+```
+
 ## Supported types
+
+Each subsection below shows the Ballerina `configurable` declaration followed by the corresponding `Config.toml` entry.
 
 ### Primitive types
 
+Ballerina primitive types map directly to TOML scalar values.
+
+```ballerina
+configurable boolean enableSSL = false;
+configurable int port = 8080;
+configurable byte maxRetries = 3;
+configurable float timeout = 30.5;
+configurable decimal taxRate = 0.08d;
+configurable string hostname = "localhost";
+configurable xml template = xml `<greeting>Hello</greeting>`;
+```
+
 ```toml
-# boolean
-enableSSL = true
-
-# int / byte
-port = 9090
-maxRetries = 3
-
-# float / decimal
-timeout = 30.5
-taxRate = 0.08
-
-# string
-hostname = "api.example.com"
-
-# xml (as a string value)
-template = "<greeting>Hello</greeting>"
+enableSSL  = true
+port       = 9090
+maxRetries = 5
+timeout    = 60.0
+taxRate    = 0.15
+hostname   = "api.example.com"
+template   = "<greeting>Hello</greeting>"
 ```
 
 ### Enum types
 
+Define the enum as a union of string literals in Ballerina. The TOML value must exactly match one of the members.
+
+```ballerina
+type LogLevel "DEBUG"|"INFO"|"WARN"|"ERROR";
+type Environment "dev"|"staging"|"prod";
+
+configurable LogLevel logLevel = "INFO";
+configurable Environment environment = "dev";
+```
+
 ```toml
-logLevel = "INFO"     # Must match one of the enum members
-environment = "PROD"
+logLevel    = "WARN"
+environment = "prod"
 ```
 
 ### Arrays
 
-```toml
-# Array of primitives
-allowedOrigins = ["https://app.example.com", "https://admin.example.com"]
-retryIntervals = [1, 2, 5, 10]
-enabledFeatures = [true, false, true]
+Configurable arrays of primitives use TOML inline arrays.
+
+```ballerina
+configurable string[] allowedOrigins = [];
+configurable int[] retryIntervals = [];
+configurable boolean[] featureFlags = [];
 ```
 
-### Records (Tables)
+```toml
+allowedOrigins = ["https://app.example.com", "https://admin.example.com"]
+retryIntervals = [1, 2, 5, 10]
+featureFlags   = [true, false, true]
+```
 
-Map configurable `record` types using TOML tables:
+### Records
+
+Configurable `record` types map to TOML tables.
 
 ```ballerina
 type DatabaseConfig record {|
@@ -128,14 +162,16 @@ configurable DatabaseConfig dbConfig = ?;
 
 ```toml
 [dbConfig]
-host = "db.example.com"
-port = 3306
-user = "admin"
+host     = "db.example.com"
+port     = 3306
+user     = "admin"
 password = "secret"
 database = "orders"
 ```
 
 ### Nested records
+
+Nested records use dot-separated TOML table headers.
 
 ```ballerina
 type SSLConfig record {|
@@ -157,12 +193,12 @@ port = 443
 
 [server.ssl]
 certPath = "/certs/server.crt"
-keyPath = "/certs/server.key"
+keyPath  = "/certs/server.key"
 ```
 
-### Array of records (Table arrays)
+### Array of records
 
-Map configurable arrays of records using TOML array-of-tables syntax (`[[...]]`):
+Configurable arrays of records use TOML array-of-tables syntax (`[[...]]`).
 
 ```ballerina
 type Endpoint record {|
@@ -176,19 +212,19 @@ configurable Endpoint[] endpoints = ?;
 
 ```toml
 [[endpoints]]
-name = "orders"
-url = "https://orders.example.com"
+name    = "orders"
+url     = "https://orders.example.com"
 timeout = 30
 
 [[endpoints]]
-name = "inventory"
-url = "https://inventory.example.com"
+name    = "inventory"
+url     = "https://inventory.example.com"
 timeout = 15
 ```
 
 ### Maps
 
-Map configurable `map` types using TOML tables:
+Configurable `map` types use TOML tables where each key-value pair becomes a map entry.
 
 ```ballerina
 configurable map<string> headers = ?;
@@ -197,13 +233,13 @@ configurable map<string> headers = ?;
 ```toml
 [headers]
 "Content-Type" = "application/json"
-"X-API-Key" = "abc123"
-Authorization = "Bearer token"
+"X-API-Key"    = "abc123"
+Authorization  = "Bearer token"
 ```
 
 ### Tables
 
-Configure `table` types with TOML array-of-tables:
+Configurable `table` types use TOML array-of-tables. Each `[[...]]` entry becomes one row, with the key field acting as the primary key.
 
 ```ballerina
 type Employee record {|
@@ -217,25 +253,28 @@ configurable table key(id) employees = ?;
 
 ```toml
 [[employees]]
-id = 1
-name = "Alice"
+id         = 1
+name       = "Alice"
 department = "Engineering"
 
 [[employees]]
-id = 2
-name = "Bob"
+id         = 2
+name       = "Bob"
 department = "Marketing"
 ```
 
 ## Precedence rules
 
-When the same configurable variable is set through multiple sources, the following precedence order applies (highest to lowest):
+When the same configurable variable is set through multiple sources, the following order applies. Priority 1 wins over priority 6.
 
-1. **Environment variables** (`BAL_CONFIG_VAR_*`) -- highest priority
-2. **Command-line arguments** (`-Ckey=value`)
-3. **TOML content via `BAL_CONFIG_DATA`**
-4. **Config files** (via `BAL_CONFIG_FILES` or default `Config.toml`)
-5. **Default values in source code** -- lowest priority
+| Priority | Source | Example |
+|----------|--------|---------|
+| 1 (highest) | `BAL_CONFIG_VAR_*` variables | `BAL_CONFIG_VAR_PORT=9090` |
+| 2 | Command-line arguments | `bal run -- -Cport=9090` |
+| 3 | `BAL_CONFIG_DATA` | `BAL_CONFIG_DATA='port=9090'` |
+| 4 | Config files via `BAL_CONFIG_FILES` | `/app/Config.toml` |
+| 5 | Default `Config.toml` in working directory | `./Config.toml` |
+| 6 (lowest) | Default values in source code | `configurable int port = 8080;` |
 
 ## Sensitive data
 
@@ -251,15 +290,15 @@ In Kubernetes, mount secrets as files and reference them through the `BAL_CONFIG
 
 ```toml
 # Root module variables
-port = 9090
-hostname = "api.example.com"
+port      = 9090
+hostname  = "api.example.com"
 enableSSL = true
 
-# Database module
+# Sub-module configuration
 [myapp.db]
-host = "db.example.com"
-port = 5432
-user = "app_user"
+host     = "db.example.com"
+port     = 5432
+user     = "app_user"
 password = "secure_password"
 database = "orders_db"
 
@@ -270,13 +309,13 @@ port = 3306
 
 # Array of endpoint records
 [[endpoints]]
-name = "orders"
-url = "https://orders.example.com"
+name    = "orders"
+url     = "https://orders.example.com"
 timeout = 30
 
 [[endpoints]]
-name = "payments"
-url = "https://payments.example.com"
+name    = "payments"
+url     = "https://payments.example.com"
 timeout = 60
 
 # Custom headers map
@@ -284,3 +323,9 @@ timeout = 60
 "Content-Type" = "application/json"
 "X-Request-ID" = "auto"
 ```
+
+## What's next
+
+- [Ballerina.toml reference](ballerinatoml-reference.md) — configure package metadata, build options, and dependencies
+- [Cloud.toml reference](cloudtoml-reference.md) — configure Kubernetes and Docker deployment descriptors
+- [Environment variables](environment-variables.md) — set configuration values and override Config.toml at runtime

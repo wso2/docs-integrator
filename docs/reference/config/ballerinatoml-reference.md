@@ -1,10 +1,8 @@
 ---
-title: Ballerina.toml Reference
+title: Ballerina.toml reference
 ---
 
-# Ballerina.toml Reference
-
-## Overview
+# Ballerina.toml reference
 
 The `Ballerina.toml` file is the project manifest for a Ballerina package. It defines package metadata, build options, dependencies, platform-specific libraries, and code generation tool configurations. This file must reside in the root directory of every Ballerina package.
 
@@ -17,7 +15,7 @@ Defines the core metadata for the package.
 org = "wso2"
 name = "healthcare_integration"
 version = "1.2.0"
-distribution = "2201.12.0"
+distribution = "2201.13.3"
 visibility = "private"
 readme = "README.md"
 icon = "icon.png"
@@ -66,7 +64,7 @@ graalvmBuildOptions = "--no-fallback -H:+ReportExceptionStackTraces"
 | `skipTests` | boolean | `false` | Skip test execution during the build. |
 | `testReport` | boolean | `false` | Generate an HTML test report after running tests. |
 | `codeCoverage` | boolean | `false` | Enable code coverage analysis and generate a coverage report. |
-| `cloud` | string | `""` | Cloud deployment target. Use `"k8s"` for Kubernetes, `"docker"` for Docker, or `"choreo"` for Choreo. |
+| `cloud` | string | `""` | Cloud deployment target. Use `"k8s"` for Kubernetes, `"docker"` for Docker, or `"choreo"` for WSO2 Integration Platform. |
 | `graalvm` | boolean | `false` | Build a GraalVM native executable instead of a JAR file. |
 | `graalvmBuildOptions` | string | `""` | Additional arguments passed to the GraalVM `native-image` tool. |
 
@@ -130,7 +128,7 @@ scope = "testOnly"
 | `scope` | string | No | Dependency scope: `"testOnly"` (tests only) or `"provided"` (compile-time only, not packaged). |
 | `graalvmCompatible` | boolean | No | Mark this JAR as compatible with GraalVM native compilation. |
 
-> **Note:** Use `platform.java17.dependency` or `platform.java21.dependency` depending on the target Java platform version.
+Use `platform.java17.dependency` or `platform.java21.dependency` depending on the target Java platform version.
 
 ## `[[platform.java21.repository]]`
 
@@ -224,3 +222,9 @@ filePath = "./openapi/inventory.yaml"
 targetModule = "inventory_client"
 options.mode = "client"
 ```
+
+## What's next
+
+- [Config.toml reference](configtoml-reference.md) — configure runtime values, secrets, and module settings
+- [Cloud.toml reference](cloudtoml-reference.md) — configure Kubernetes and Docker deployment descriptors
+- [Environment variables](environment-variables.md) — override configuration at runtime without modifying files
