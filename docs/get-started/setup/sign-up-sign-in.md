@@ -8,11 +8,11 @@ WSO2 Cloud is the identity and access layer for WSO2 Integration Platform. You n
 
 When you sign up, you create an organization and become its admin. An organization is a logical grouping of users and their associated resources. Users and resources in one organization are isolated from all others. Access across organizations is only possible when an admin explicitly invites a user as a member.
 
-## Step 1: Sign up for WSO2 Cloud
+## Step 1: Choose a sign-up option
 
 Go to [WSO2 Cloud](https://console.devant.dev/signup) and sign up using your preferred sign-up option.
 
-![Sign Up for WSO2 Cloud](/img/get-started/setup/sign-up-sign-in/sign-up.png)
+![WSO2 Cloud sign-up page with available sign-up options](/img/get-started/setup/sign-up-sign-in/sign-up.png)
 
 ## Step 2: Create an organization
 
@@ -28,13 +28,22 @@ The name must:
 
 Read and accept the [Privacy Policy](https://wso2.com/devant/privacy-policy/) and [Terms of Use](https://wso2.com/devant/terms-of-use/), then click **Create**.
 
-## Step 4: Select a region
+## Step 4: Select your persona
+
+Choose the persona that matches your role, then click **Next**:
+
+- **Developer/Architect/Product Manager**: Focus on building, testing, and deploying applications.
+- **Platform Engineer/SRE**: Focus on infrastructure, governance, service mesh, and monitoring.
+
+Your selection personalizes the views and workflows shown in the platform.
+
+## Step 5: Select a region
 
 Select the cloud region where you want to deploy your integrations and click **Confirm**.
 
 You land on the **Overview** page of the default project in your new organization.
 
-![Project Home](/img/get-started/setup/sign-up-sign-in/project-home.png)
+![Project overview page after creating an organization](/img/get-started/setup/sign-up-sign-in/project-home.png)
 
 :::info Invite others
 To give teammates access, an organization admin can invite them from the organization settings. Invited users can only see resources within that organization.
@@ -42,3 +51,5 @@ To give teammates access, an organization admin can invite them from the organiz
 ## What's next
 
 - [Cloud setup](cloud-setup.md) — Provision your WSO2 Integration Platform environment
+- [Local setup](local-setup.md) — Install WSO2 Integrator on your own machine instead
+- [Key concepts](../key-concepts.md) — Learn the building blocks of WSO2 Integrator

@@ -15,11 +15,12 @@ Choose the setup path that fits your workflow:
 
 ## In this section
 
-- **[Local setup](local-setup.md)** — Download and install WSO2 Integrator IDE on your machine.
-- **[Sign up for WSO2 Cloud](sign-up-sign-in.md)** — Create your WSO2 Cloud account and sign in from the IDE.
-- **[Cloud setup](cloud-setup.md)** — Provision your WSO2 Integration Platform environment.
+- **[Local setup](local-setup.md)**: Download and install WSO2 Integrator IDE on your machine.
+- **[Sign up for WSO2 Cloud](sign-up-sign-in.md)**: Create your WSO2 Cloud account and sign in from the IDE.
+- **[Cloud setup](cloud-setup.md)**: Provision your WSO2 Integration Platform environment.
 
 ## What's next
 
-- [Local setup](local-setup.md) — Install WSO2 Integrator IDE
-- [Cloud setup](cloud-setup.md) — Set up your cloud environment
+- [Create your first project](../create-project.md) — Start building your first integration
+- [Key concepts](../key-concepts.md) — Learn the building blocks of WSO2 Integrator
+- [Create a new integration](../../develop/create-integrations/create-a-new-integration.md) — Begin developing once your environment is ready

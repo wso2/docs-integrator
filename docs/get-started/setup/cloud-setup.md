@@ -26,4 +26,5 @@ To work on a different project, go to the organization overview page by clicking
 ## What's next
 
 - [Create your first project](../create-project.md) — Start building your first integration
+- [Key concepts](../key-concepts.md) — Learn the building blocks of WSO2 Integrator
 - [Local setup](local-setup.md) — Prefer working on your own machine instead
