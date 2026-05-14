@@ -4,15 +4,15 @@ title: Setup Guide
 
 # Setup Guide
 
-This guide walks you through setting up a MySQL database and obtaining the connection credentials required to use the Ballerina MySQL connector.
+This guide walks you through setting up a MySQL database and obtaining the connection credentials required to use the MySQL connector.
 
 ## Prerequisites
 
-- A running MySQL server. The connector requires the MySQL JDBC driver 8.0.13 or later (bundled in `ballerinax/mysql.driver`). You can [install MySQL locally](https://dev.mysql.com/downloads/), use Docker (`docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:8`), or use a managed service (AWS RDS, Google Cloud SQL, Azure Database for MySQL).
+- A running MySQL server. You can [install MySQL locally](https://dev.mysql.com/downloads/), use Docker (`docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:8`), or use a managed service such as AWS RDS, Google Cloud SQL, or Azure Database for MySQL.
 - A database user with appropriate privileges for the operations you intend to perform.
 - For CDC: MySQL binary logging must be enabled with `ROW` format (see the CDC setup step below).
 
-## Step 1: Create a MySQL database and user
+## Create a MySQL database and user
 
 1. Connect to your MySQL server using the `mysql` command-line client or a GUI tool such as MySQL Workbench.
 2. Create a new database for your application:
@@ -29,19 +29,19 @@ This guide walks you through setting up a MySQL database and obtaining the conne
     FLUSH PRIVILEGES;
     ```
 
-For production environments, follow the principle of least privilege: grant only the specific permissions your application requires (e.g., SELECT, INSERT, UPDATE, DELETE).
+For production environments, follow the principle of least privilege: grant only the specific permissions your application requires (for example, SELECT, INSERT, UPDATE, DELETE).
 
-## Step 2: Note your connection details
+## Note your connection details
 
-Record the following information; you will need it to configure the Ballerina client:
+Record the following information. You will need it to configure the MySQL client:
 
-- **Hostname**: The address of your MySQL server (e.g., `localhost` or a cloud endpoint).
+- **Hostname**: The address of your MySQL server (for example, `localhost` or a cloud endpoint).
 - **Port**: The MySQL port (default `3306`).
-- **Username**: The database user (e.g., `baluser`).
+- **Username**: The database user (for example, `baluser`).
 - **Password**: The database user's password.
-- **Database name**: The target database (e.g., `mydb`).
+- **Database name**: The target database (for example, `mydb`).
 
-## Step 3: Enable binary logging for CDC (optional)
+## Enable binary logging for CDC (optional)
 
 If you plan to use the Change Data Capture (CDC) listener, you must enable MySQL binary logging in `ROW` format.
 
@@ -70,27 +70,7 @@ If you plan to use the Change Data Capture (CDC) listener, you must enable MySQL
 
 Binary logging is required for CDC. Without it, the `mysql:CdcListener` will not receive any change events.
 
-## Step 4: Add the MySQL driver dependency
+## Next steps
 
-The Ballerina MySQL connector requires the MySQL JDBC driver. The simplest approach is to import the bundled driver package:
-
-```ballerina
-import ballerinax/mysql.driver as _;
-```
-
-If you are using the CDC listener instead of (or in addition to) the action client, import the CDC driver bundle, which packages the JDBC driver alongside the Debezium engine:
-
-```ballerina
-import ballerinax/mysql.cdc.driver as _;
-```
-
-Alternatively, you can specify a particular driver version in your `Ballerina.toml`:
-
-```toml
-[[platform.java21.dependency]]
-groupId = "com.mysql"
-artifactId = "mysql-connector-j"
-version = "8.4.0"
-```
-
-The `ballerinax/mysql.driver` and `ballerinax/mysql.cdc.driver` packages bundle the latest compatible MySQL JDBC driver. You only need to configure `Ballerina.toml` if you require a specific driver version. For MySQL Connector/J 8.0.30 and earlier, use the legacy coordinates `groupId = "mysql"` and `artifactId = "mysql-connector-java"`.
+- [Action Reference](actions.md): operations, parameters, return types, and sample code.
+- [Trigger Reference](triggers.md): listener configuration and service callbacks for CDC.
