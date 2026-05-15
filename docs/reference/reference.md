@@ -61,4 +61,4 @@ Server and deployment configuration for WSO2 Integration Control Plane:
 - **[FAQ](faq.md)** — Frequently asked questions
 - **[Release Notes](release-notes.md)** — What's new in each release
 
-For troubleshooting and debugging, see [Debugging & Troubleshooting](../develop/debugging/troubleshooting.md).
+For troubleshooting and debugging, see [Errors and Stack Traces](../develop/troubleshooting/errors-and-stack-traces.md).

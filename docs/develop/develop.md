@@ -32,7 +32,7 @@ Tools that help **you** code faster (Copilot, AI test generation, AI-assisted da
 | | |
 |---|---|
 | **[Try and test](test/built-in-try-it-tool.md)** | Built-in Try-It tool, unit testing, data-driven tests, mocking, code coverage, and AI-generated test cases |
-| **[Debugging and troubleshooting](debugging/troubleshooting.md)** | Editor debugging, remote debugging, strand dumps, and performance profiling |
+| **[Debug](debugging/editor.md)** | Editor debugging, remote debugging, strand dumps, and performance profiling |
 
 ## Tools
 

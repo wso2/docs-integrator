@@ -4,230 +4,70 @@ title: Editor Debugging
 
 # Editor Debugging
 
-Debug your integrations step-by-step in WSO2 Integrator. Set breakpoints on any line, inspect variables and payloads in real time, and step through data transformations to understand exactly how your integration processes data.
+Editor debugging lets you pause an integration mid-run and inspect the values flowing through it. This page covers the everyday quick start: set a breakpoint and launch a debug session. For the full set of features available once the session is running (stepping, inspection panels, advanced breakpoints, and test or remote debugging), see [Features](features.md).
 
-## Setting up the debugger
+## Before you start
 
-WSO2 Integrator includes built-in debugging support. No additional configuration is required for basic debugging.
+- Open the integration project in WSO2 Integrator.
+- Confirm the integration has an executable entry point, such as a service or an automation.
+- Open the **Problems** panel at the bottom of the editor and make sure the workspace is free of compile errors.
 
-1. Open your integration in the design view.
-2. Click the three dots (**...**) on any node in the flow diagram.
-3. Select **Add Breakpoint** from the context menu.
-4. Click **Debug Integration** (top-right corner of the design view).
+![Problems panel showing a clean workspace](/img/develop/debugging/editor-debugging/problems-panel.png)
 
-1. Open your integration project in WSO2 Integrator.
-2. Open any `.bal` file.
-3. Click in the gutter (left margin) next to a line number to set a breakpoint.
-4. Press `F5` or click **Run > Start Debugging**.
+## Set a breakpoint
 
-The debugger supports three session types:
-- **Program debugging** -- standard application debugging
-- **Test debugging** -- debugging test cases
-- **Remote debugging** -- attaching to running integrations (see [Remote Debugging](remote.md))
+Breakpoints tell the debugger where to pause. Set one on the line or node where you want to start inspecting state.
 
-## Setting breakpoints
+1. Open the integration in the visual designer.
+2. Click the three-dot menu on the node where you want to pause.
+3. Select **Add Breakpoint**.
 
-### Line breakpoints
+A red dot appears on the node to confirm the breakpoint is active.
 
-Set breakpoints on flow nodes to pause execution at specific steps:
+![Breakpoint set on a node in the visual designer](/img/develop/debugging/editor-debugging/flow-diagram.png)
 
-1. Open your integration in the design view.
-2. Click the three dots (**...**) on the node where you want to pause.
-3. Select **Add Breakpoint** from the context menu.
+1. Open the `.bal` file.
+2. Click in the gutter to the left of the line number where you want to pause.
 
-A red dot appears on the node to indicate the breakpoint.
+A red dot appears next to the line.
 
-![Artifacts panel showing HTTP Service under Integration as API](/img/develop/debugging/editor-debugging/flow-diagram.png)
+![Breakpoint set in the Ballerina code editor](/img/develop/debugging/editor-debugging/bal-code.png)
 
-Click the gutter next to any executable line to add a red dot breakpoint.
+## Start a debug session
 
-![Artifacts panel showing HTTP Service under Integration as API](/img/develop/debugging/editor-debugging/bal-code.png)
+Click **Debug** on the [editor toolbar](/docs/develop/understand-ide/integrator-app#editor-toolbar), or open the **Run and Debug** view from the [activity bar](/docs/develop/understand-ide/integrator-app#activity-bar) and select **Ballerina Debug**. Either path works for most integrations.
 
-```ballerina
-import ballerina/http;
+![Debug session paused at a breakpoint](/img/develop/debugging/editor-debugging/debug-session.gif)
 
-service /api on new http:Listener(9090) {
+Execution pauses at the first breakpoint it hits. Output streams to the **Debug Console**.
 
-    resource function post orders(http:Request req) returns json|error {
-        json payload = check req.getJsonPayload();   // Set breakpoint here
-        Order orderData = check payload.fromJsonWithType();
-        decimal total = calculateTotal(orderData);        // Set breakpoint here
-        return {orderId: orderData.id, total: total};
-    }
-}
+## Advanced debugging methods
+
+Most debugging happens against a program running locally from the editor. The next two methods cover the cases that do not fit that pattern: debugging tests, or attaching to an integration that is already running somewhere else.
+
+### Test debugging
+
+Set breakpoints inside the test functions first, then launch the test session in one of two ways:
+
+- Open the **Run and Debug** view from the [activity bar](/docs/develop/understand-ide/integrator-app#activity-bar), select **Ballerina Test** from the configuration dropdown, and click **Start Debugging**.
+- Click the **Debug** CodeLens that appears above each test function to launch the debugger scoped to that single test.
+
+Use test debugging when a test fails and you want to inspect the inputs and intermediate values that produced the failure, rather than the full integration.
+
+### Remote debugging
+
+Remote debugging attaches the editor to an integration that is already running on another machine, in a container, or as an executable JAR. Start the integration in debug mode with one of the following commands:
+
+```bash
+bal run --debug <port> <path>     # package or file
+bal run --debug <port> <jar>      # executable JAR
+bal test --debug <port> <path>    # tests
 ```
 
-### Conditional breakpoints
+Then add a **Ballerina Remote** configuration to `launch.json` with the `debuggeeHost` and `debuggeePort` matching the running process, and click **Start Debugging**. The same breakpoints, stepping, and inspection features work against the remote process.
 
-Right-click a breakpoint and select **Edit Breakpoint** to add a condition. The debugger only pauses when the condition evaluates to `true`.
+## Next steps
 
-![Artifacts panel showing HTTP Service under Integration as API](/img/develop/debugging/editor-debugging/condition.png)
-
-Example conditions:
-- `orderData.total > 1000` -- pause only for high-value orders
-- `customer.tier == "premium"` -- pause only for premium customers
-- `items.length() > 10` -- pause when processing large orders
-
-### Logpoint breakpoints
-
-Logpoints print a message to the debug console without stopping execution. Right-click the gutter and select **Add Logpoint**.
-
-![Artifacts panel showing HTTP Service under Integration as API](/img/develop/debugging/editor-debugging/log-points.png)
-
-Format: `Processing order {orderData.id} with {items.length()} items`
-
-## Stepping through code
-
-Once paused at a breakpoint, use the debug toolbar controls:
-
-| Action | Shortcut | Description |
-|--------|----------|-------------|
-| **Continue** | `F5` | Resume execution until the next breakpoint |
-| **Step Over** | `F10` | Execute the current line and pause on the next line |
-| **Step Into** | `F11` | Enter a function call to debug inside it |
-| **Step Out** | `Shift+F11` | Finish the current function and pause in the caller |
-| **Restart** | `Ctrl+Shift+F5` | Restart the debug session |
-| **Stop** | `Shift+F5` | End the debug session |
-
-![Artifacts panel showing HTTP Service under Integration as API](/img/develop/debugging/editor-debugging/debug-toolbar.png)
-
-### Step through example
-
-When paused at a breakpoint, the active node is highlighted in the flow diagram. Use the debug toolbar to step through the flow:
-
-1. **Step Over** (`F10`) -- execute the current node and move to the next node in the flow.
-2. **Step Into** (`F11`) -- enter a function node to debug its internal logic.
-3. **Step Out** (`Shift+F11`) -- finish the current function and return to the calling flow.
-
-The flow diagram updates in real time to show which node is currently executing.
-
-![Artifacts panel showing HTTP Service under Integration as API](/img/develop/debugging/editor-debugging/debug-session.png)
-
-```ballerina
-public function processOrder(Order order) returns OrderResult|error {
-    // Step 1: F10 - validate order
-    check validateOrder(order);
-
-    // Step 2: F11 - step INTO calculateTotal to debug the calculation
-    decimal total = calculateTotal(order);
-
-    // Step 3: F10 - step over the notification (not interested)
-    check sendNotification(order.customerId, total);
-
-    // Step 4: inspect 'total' in Variables panel
-    return {orderId: order.id, total: total, status: "confirmed"};
-}
-```
-
-## Inspecting variables
-
-When paused at a breakpoint, the **Variables** panel appears alongside the flow diagram. Click any node in the flow to see the variables in scope at that point.
-
-- **Local** -- variables in the current function scope
-- **Global** -- module-level variables and constants
-
-Expand records and maps to inspect nested fields. JSON and XML payloads display their full structure.
-
-![Artifacts panel showing HTTP Service under Integration as API](/img/develop/debugging/editor-debugging/variable-section.png)
-
-### Variables panel
-
-The Variables panel shows all in-scope variables with their current values, organized into:
-
-- **Local** -- variables in the current function scope
-- **Global** -- module-level variables and constants
-
-Expand records and maps to inspect nested fields. JSON and XML payloads display their full structure.
-
-### Hover inspection
-
-Hover over any variable in the editor to see its current value in a tooltip.
-
-### Watch expressions
-
-Add custom expressions to the Watch panel to monitor specific values.
-
-![Artifacts panel showing HTTP Service under Integration as API](/img/develop/debugging/editor-debugging/watch-panel.png)
-
-Useful watch expressions for integrations:
-- `payload.toString()` -- see the full payload as a string
-- `order.items.length()` -- count items without expanding the array
-- `total * 1.08` -- compute derived values
-- `response.statusCode` -- check HTTP response status
-
-## Debug configuration
-
-### Launch.json
-
-For advanced scenarios, create a `launch.json` configuration.
-
-```json
-{
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Ballerina Debug",
-            "type": "ballerina",
-            "request": "launch",
-            "programArgs": [],
-            "commandOptions": [],
-            "env": {
-                "BAL_LOG_LEVEL": "DEBUG"
-            }
-        },
-        {
-            "name": "Ballerina Test Debug",
-            "type": "ballerina",
-            "request": "launch",
-            "debugTests": true,
-            "commandOptions": ["--groups", "unit"]
-        }
-    ]
-}
-```
-
-### Debugging tests
-
-Debug a specific test by clicking the debug icon next to its `@test:Config` annotation, or configure a test debug launch as shown above.
-
-## Debug console
-
-Use the Debug Console to evaluate expressions while paused at a breakpoint.
-
-![Artifacts panel showing HTTP Service under Integration as API](/img/develop/debugging/editor-debugging/debug-console.png)
-
-Type any Ballerina expression to evaluate it:
-```
-> order.total
-150.00d
-
-> order.items.length()
-3
-
-> order.customer.tier == "gold"
-true
-```
-
-## Troubleshooting the debugger
-
-| Issue | Solution |
-|-------|----------|
-| Breakpoints not hit | Verify the correct file is running; check for compilation errors |
-| Debugger won't start | Ensure no other process is using the service port |
-| Variables show "unavailable" | Step to a line where the variable is in scope |
-| Slow startup | Close unused extensions during debug sessions |
-| Cannot inspect external library code | Step Into only works for your project code, not imported modules |
-
-## Best practices
-
-- **Set breakpoints strategically** -- focus on data transformation boundaries and error-prone areas
-- **Use conditional breakpoints** to avoid pausing on every iteration of a loop
-- **Use logpoints** in production-like scenarios where pausing is disruptive
-- **Watch payload shapes** to catch type mismatches early in the pipeline
-- **Debug tests first** -- it is easier to reproduce issues in a controlled test environment
-
-## What's next
-
-- [Remote Debugging](remote.md) -- Debug services running in containers or remote servers
-- [Strand Dump Analysis](strand-dump-analysis.md) -- Diagnose concurrency issues
-- [Performance Profiling](performance-profiling.md) -- Find performance bottlenecks
+- [Features](features.md) - stepping, variable inspection, advanced breakpoints, and test or remote debugging.
+- [Errors and stack traces](/docs/develop/troubleshooting/errors-and-stack-traces) - read error messages and trace failures back to source.
+- [Logging](/docs/develop/troubleshooting/logging) - when adding logs is a better fit than a live debug session.
