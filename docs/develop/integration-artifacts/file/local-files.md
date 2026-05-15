@@ -166,21 +166,17 @@ Each handler receives a `file:FileEvent` parameter with details about the file s
 
 Use the `ballerina/io` module to read the content of the file that triggered a handler. The path of the file is available as `event.name` on the `file:FileEvent` parameter.
 
-In the **Service Designer**, open the handler and build the flow with two nodes: a Variable that captures the file content and a Log that prints it.
+In the **Service Designer**, open the handler and build the flow with two nodes: a **Call Function** node that reads the file content and a **Log** node that prints it.
 
-1. Click **+** on the handler canvas to add a node, pick **Declare Variable**, and fill in:
+1. Click **+** on the handler canvas to add a node, pick **Call Function**, and select **fileReadString** under **io** functions.
 
-   | Field | Value |
-   |---|---|
-   | **Type** | `string` |
-   | **Name** | `content` (or any identifier) |
-   | **Expression** | `check io:fileReadString(event.name)` |
+2. Set `event.name` as an **Expression** in the **Path** field, `content` as the **Result**, and `string` as the **Result Type**. Save the node.
 
-   Open the helper panel and click `fileReadString()` under the **Functions** tab to insert the call. This also imports the `ballerina/io` module for you. Save the node.
+![Add fileReadString function](/img/develop/integration-artifacts/file/local-files/add-file-read-string-function.png)
 
-2. Click **+** after the Variable, pick **Log** → **Log Info**, switch the **Msg** field to **Expression** mode, and enter `content`. Save the node.
+3. Click **+** after the Call Function node, pick **Log** → **Log Info**, switch the **Msg** field to **Expression** mode, and enter `content`. Save the node.
 
-![Handler canvas showing the Declare Variable and Log Info nodes wired up to read and log file content](/img/develop/integration-artifacts/file/local-files/step-read-flow.png)
+![Handler canvas showing the Call Function and Log Info nodes wired up to read and log file content](/img/develop/integration-artifacts/file/local-files/step-read-flow.png)
 
 ```ballerina
 import ballerina/file;
@@ -211,21 +207,17 @@ service on fileListener {
 
 Use the `ballerina/io` module to write results to the local file system from within a handler.
 
-The `io` write functions return `error?`, so the same Variable-node pattern as reading works to capture the result and log a confirmation:
+Use a **Call Function** node to invoke an `io` write function, then add a **Log** node to confirm the write:
 
-1. Click **+** on the handler canvas to add a node, pick **Declare Variable**, and fill in:
+1. Click **+** on the handler canvas to add a node, pick **Call Function**, and select **fileWriteString** under `io` functions.
 
-   | Field | Value |
-   |---|---|
-   | **Type** | `error?` |
-   | **Name** | `writeResult` |
-   | **Expression** | `io:fileWriteString("/data/outgoing/report.txt", "Processing complete.")` |
+2. Set the **Path** to `/data/outgoing/report.txt` and the **Content** to `"Processing complete."`. Save the node.
 
-   Open the helper panel and click `fileWriteString()` under the **Functions** tab to insert the call and import `ballerina/io`. Save the node.
+![Add file write string function](/img/develop/integration-artifacts/file/local-files/add-file-write-function.png)
 
-2. Click **+** after the Variable, pick **Log** → **Log Info**, and enter a confirmation message such as `"Output written"`. Save the node.
+3. Click **+** after the Call Function node, pick **Log** → **Log Info**, and enter a confirmation message such as `"Output written"`. Save the node.
 
-![Handler canvas showing the Declare Variable and Log Info nodes wired up to write a file and log a confirmation](/img/develop/integration-artifacts/file/local-files/step-write-flow.png)
+![Handler canvas showing the Call Function and Log Info nodes wired up to write a file and log a confirmation](/img/develop/integration-artifacts/file/local-files/step-write-flow.png)
 
 ```ballerina
 import ballerina/file;
