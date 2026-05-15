@@ -127,7 +127,8 @@ Save this as `main.bal`, then run `bal run` from the project directory. Once run
 
 ## What's next
 
-- [Automation](build-automation.md) — Build a scheduled job
-- [AI agent](build-ai-agent.md) — Build an intelligent agent
-- [Integration as API](build-api-integration.md) — Build an HTTP service
-- [File-driven integration](build-file-driven-integration.md) — Process files from FTP or local directories
+- [Kafka](../develop/integration-artifacts/event/kafka.md) — Consume and produce Kafka messages
+- [Azure Service Bus](../develop/integration-artifacts/event/azure-service-bus.md) — Integrate with Azure Service Bus queues and topics
+- [RabbitMQ](../develop/integration-artifacts/event/rabbitmq.md) — Full RabbitMQ listener and publisher reference
+- [MQTT](../develop/integration-artifacts/event/mqtt.md) — Handle MQTT messages from IoT and messaging devices
+- [CDC for PostgreSQL](../develop/integration-artifacts/event/cdc-postgresql.md) — React to database changes with change data capture

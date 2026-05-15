@@ -18,7 +18,7 @@ An automation runs your integration logic without an external request, on demand
 2. Select the **Create New Integration** card.
 3. Set **Integration Name** to `HelloWorldAutomation`.
 4. Set **Project Name** to `automation-quickstart`.
-5. Select **Create**.
+5. **Create Integration**.
 
 <ThemedImage
     alt="Create new integration form with Integration Name set to HelloWorldAutomation and Project Name set to automation-quickstart"

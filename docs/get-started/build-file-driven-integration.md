@@ -161,8 +161,7 @@ Confirm the run terminal shows the log line `File modified`.
 
 ## What's next
 
-- [Automation](build-automation.md) — Build a scheduled job
-- [AI agent](build-ai-agent.md) — Build an intelligent agent
-- [Integration as API](build-api-integration.md) — Build an HTTP service
-- [Event-driven integration](build-event-driven-integration.md) — React to messages from brokers
 - [Local files](../develop/integration-artifacts/file/local-files.md) — Full Local Files listener reference (events, recursive watching, file handlers)
+- [FTP/SFTP](../develop/integration-artifacts/file/ftp-sftp.md) — Watch and process files on remote FTP or SFTP servers
+- [Streaming large files](../develop/integration-artifacts/file/streaming-large-files.md) — Process large files without loading them fully into memory
+- [CSV fault tolerance](../develop/integration-artifacts/file/csv-fault-tolerance.md) — Handle errors and partial failures when processing CSV files

@@ -127,3 +127,4 @@ curl -X POST http://localhost:9090/wso2IntegratorAssistant/chat \
 - [Build an API integration](build-api-integration.md) — Build an HTTP service
 - [Build an event-driven integration](build-event-driven-integration.md) — React to messages from brokers
 - [Build a file-driven integration](build-file-driven-integration.md) — Process files from FTP or local directories
+- [AI agents](../genai/develop/agents/overview.md) — Learn how to build production-grade AI agents with tools, memory, and evaluations
