@@ -68,7 +68,7 @@ An automation runs your integration logic without an external request, on demand
     alt="Running the automation and seeing the Hello World output in the terminal"
     sources={{
         light: useBaseUrl('/img/get-started/build-automation/run-and-test-light.gif'),
-        dark: useBaseUrl('/img/get-started/build-automation/run-and-test-dark.gif'),
+        dark: useBaseUrl('/img/get-started/build-automation/run-and-test-light.gif'),
     }}
 />
 
