@@ -4,18 +4,18 @@ title: Automation
 
 # Automation
 
-An automation runs without an external request. Use it for periodic data synchronization, batch processing, report generation, and other recurring tasks that execute on a timer or on demand. Periodic invocation is scheduled in an external system such as a cron job, Kubernetes, or WSO2 Cloud.
+An automation runs without an external request. Use it for periodic data synchronization, batch processing, report generation, and other recurring tasks that execute on a timer or on demand. Periodic invocation is scheduled in an external system such as a cron job, Kubernetes, or WSO2 Integration Platform.
 
 Only one automation can be configured per integration.
 
 ## Creating an automation
 
-1. Click the **+ Add Artifact** button in the canvas, or click **+** next to **Entry Points** in the sidebar.
+1. Select the **+ Add Artifact** button in the canvas, or select **+** next to **Entry Points** in the sidebar.
 2. In the **Artifacts** panel, select **Automation** under **Automation**.
 
    ![Artifacts panel showing the Automation option](/img/develop/integration-artifacts/automation/add-artifact.png)
 
-3. In the creation form, configure the following fields and click **Create**.
+3. In the creation form, configure the following fields.
 
    ![Create New Automation form](/img/develop/integration-artifacts/automation/create-form.png)
 
@@ -23,16 +23,16 @@ Only one automation can be configured per integration.
 
    | Field | Description |
    |---|---|
-   | **Startup Parameters** | Parameters passed to the automation at startup. Click **+ Add Parameter** to add each parameter. |
+   | **Startup Parameters** | Parameters passed to the automation at startup. Select **+ Add Parameter** to add each parameter. |
    | **Return Error** | When selected, the automation exits with an error if execution fails. |
 
-4. Click **Create**.
+4. Select **Create**.
 
 5. WSO2 Integrator opens the automation in the flow designer. The canvas shows a **Start** node, a **+** button to add steps, and an **Error Handler** node.
 
    ![Automation flow designer](/img/develop/integration-artifacts/automation/flow-designer.png)
 
-6. Click **+** to open the node panel and add integration steps such as function calls, connections, and control flow.
+6. Select **+** to open the node panel and add integration steps such as function calls, connections, and control flow.
 
 WSO2 Integrator generates an `automation.bal` file with the following starter structure:
 
@@ -52,10 +52,9 @@ Add your integration logic inside the `do` block. The `on fail` block handles an
 
 ## Automation configuration
 
- Automation configuration controls the startup parameters for the automation function and whether execution failures are returned as errors.
+Automation configuration controls the startup parameters for the automation function and whether execution failures are returned as errors.
 
-
-In the flow designer, click **Configure** in the header to open the **Edit Automation** panel.
+In the flow designer, select **Configure** in the header to open the **Edit Automation** panel.
 
 ![Edit Automation panel opened via the Configure button](/img/develop/integration-artifacts/automation/configure-form.png)
 
@@ -78,3 +77,4 @@ public function main(string param1 = "", int param2 = 0) returns error? {
 
 - [HTTP service](service/http.md) — expose your integration as a REST API
 - [Error handling](../understand-ide/editors/flow-diagram-editor/error-handling.md) — handle automation failures
+- [Connections](supporting/connections.md) — call external services from your automation
