@@ -55,6 +55,5 @@ The editor stages your edits until you select **Save Changes** at the top right.
 
 ## What's next
 
-- [Service Design editor](service-design-editor.md): open the service-level configuration from the service designer.
+- [Service Design editor](service-design-editor.md): return to the service designer to manage resources and handlers.
 - [Expression editor](expression-editor.md): use configurable variables in expressions.
-- [Integration artifacts](/docs/develop/integration-artifacts): see which configuration options each artifact type supports.

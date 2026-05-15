@@ -6,7 +6,7 @@ title: Type Editor
 
 The Type editor is the side panel you open whenever you create or change a custom type in WSO2 Integrator. It gives you one form to define records, enums, unions, arrays, and service classes, configure each member or field, and toggle advanced options such as additional fields and read-only types. Every change you save in the editor updates the type's Ballerina source and the type card on the [Type Diagram editor](type-diagram-editor.md).
 
-For an introduction to types and how an integration uses them, see [Core Concepts](/docs/get-started/concepts/core). For a canvas-level view of how all the types in your integration relate to each other, see the [Type Diagram editor](type-diagram-editor.md).
+For an introduction to types and how an integration uses them, see [Core concepts](/docs/get-started/concepts/core#types). For a canvas-level view of how all the types in your integration relate to each other, see the [Type Diagram editor](type-diagram-editor.md).
 
 ## Open the editor
 
@@ -14,11 +14,11 @@ You can open the Type editor from two places, depending on where you are working
 
 - **From the project explorer.** Select **+** next to **Types** to add a new type, or select an existing type name to edit it.
 
-    ![Add a type from the project explorer](/img/develop/understand-ide/editors/type-editor/add-type-project-view.png)
+    ![Add a type from the project explorer](/img/develop/understand-ide/editors/type-editor/01-add-type-integration-view.png)
 
 - **From the Type Diagram editor.** Select **+ Add Type** in the header to add a new type, or select **Edit** from the three-dot menu on a type card to edit an existing one.
 
-    ![Add a type from the Type Diagram editor](/img/develop/understand-ide/editors/type-editor/add-type-type-diagram.png)
+    ![Add a type from the Type Diagram editor](/img/develop/understand-ide/editors/type-editor/02-add-type-diagram.png)
 
 The editor opens the new-type form when you add a type, and reopens populated with the current definition when you edit one.
 
@@ -45,11 +45,11 @@ Every type form shares the same header fields:
 
 A record defines a structured value with named fields. Each field has a name, a type, and an optional flag, and the editor renders one row per field under the **Fields** section.
 
-![Create a record type](/img/develop/understand-ide/editors/type-editor/create-record.png)
+![Create a record type](/img/develop/understand-ide/editors/type-editor/03-create-record.png)
 
 Select **+** next to **Fields** to add a new field. Each field row exposes the following options.
 
-![Field options on a record](/img/develop/understand-ide/editors/type-editor/field-options-in-record.png)
+![Field options on a record](/img/develop/understand-ide/editors/type-editor/08-field-options-in-record.png)
 
 | Option | Description |
 |---|---|
@@ -63,7 +63,7 @@ To make a field reference another type in the integration, set the field type to
 
 An enum defines a fixed set of named members. Use it for closed sets of values such as status codes, channels, or roles.
 
-![Create an enum type](/img/develop/understand-ide/editors/type-editor/create-enum-type.png)
+![Create an enum type](/img/develop/understand-ide/editors/type-editor/04-create-enum.png)
 
 Select **+** under **Members** to add a member, and the **delete** icon on a row to remove it. Each member has a single name (for example, `DRAFT`, `SUBMITTED`, `APPROVED`, `REJECTED`).
 
@@ -71,7 +71,7 @@ Select **+** under **Members** to add a member, and the **delete** icon on a row
 
 A union defines a value that can be one of several types. Use it when a field or variable can legitimately hold more than one shape, for example, a response that is either a success record or an error.
 
-![Create a union type](/img/develop/understand-ide/editors/type-editor/create-union-type.png)
+![Create a union type](/img/develop/understand-ide/editors/type-editor/05-create-union.png)
 
 Select **+** under **Members** to add a member type, and the **delete** icon to remove one. Each member can be a primitive (`string`, `int`, `boolean`, and so on) or another type you have already defined in the integration.
 
@@ -79,7 +79,7 @@ Select **+** under **Members** to add a member type, and the **delete** icon to 
 
 An array defines a list of values of the same type, with an optional fixed size.
 
-![Create an array type](/img/develop/understand-ide/editors/type-editor/create-array-type.png)
+![Create an array type](/img/develop/understand-ide/editors/type-editor/06-create-array.png)
 
 | Field | Description |
 |---|---|
@@ -90,7 +90,7 @@ An array defines a list of values of the same type, with an optional fixed size.
 
 A service class defines a class with one or more resource methods. Use it as the return type of a [GraphQL service](/docs/develop/integration-artifacts/service/graphql) resolver, or anywhere you need a typed object that exposes behavior alongside data.
 
-![Create a service class type](/img/develop/understand-ide/editors/type-editor/create-service-class.png)
+![Create a service class type](/img/develop/understand-ide/editors/type-editor/07-create-service-class.png)
 
 For each resource method, configure:
 
@@ -102,13 +102,9 @@ For each resource method, configure:
 
 Select **+** under **Resource Methods** to add a new method, and the **delete** icon on a row to remove one.
 
-Once you save the service class, it appears as a card on the Type Diagram editor next to records and enums.
+Once you save the service class, it appears as a card on the Type Diagram editor next to records and enums. Select the card to open the **Service Class Designer**, where you can edit resource methods, parameters, and the implementation of each method.
 
-![Service class card on the Type Diagram editor](/img/develop/understand-ide/editors/type-editor/service-class-type-in-type-diagram.png)
-
-Select the card to open the **Service Class Designer**, where you can edit resource methods, parameters, and the implementation of each method.
-
-![Service Class Designer for the service class](/img/develop/understand-ide/editors/type-editor/service-class-designer-for-service-class-type.png)
+![Service Class Designer for the service class](/img/develop/understand-ide/editors/type-editor/09-service-class-designer-for-service-class-type.png)
 
 ## Advanced options
 
@@ -128,8 +124,6 @@ In the new-type form, open the kind picker and select **Import from Json** or **
 
 - **Paste a sample.** Paste the JSON or XML into the editor and the form previews the inferred records as you type.
 - **Import from a file.** Select **Import from file** to pick a `.json` or `.xml` file from disk. The editor reads the file and fills the sample area for you.
-
-    ![Import from file picker for a JSON sample](/img/develop/understand-ide/editors/type-editor/import-form-json-file.png)
 
 Give the root record a name in the **Name** field. Nested objects are named automatically based on the parent field, and you can rename any of them before saving.
 
@@ -158,7 +152,7 @@ For a JSON sample such as:
 
 The editor generates a root record with a `books` array field and a nested record for each book entry, with `title`, `author`, `year`, and `isbn` typed as `string` or `int` based on the sample values.
 
-![Import a type from a JSON sample](/img/develop/understand-ide/editors/type-editor/import-type-from-json.gif)
+![Import a type from a JSON sample](/img/develop/understand-ide/editors/type-editor/10-import-json.png)
 
 ### Import from XML
 
@@ -182,8 +176,6 @@ For an XML sample such as:
 ```
 
 The editor generates a `Library` record with a `book` array field and a nested record for each book element, with one field per child element.
-
-![Import a type from an XML sample](/img/develop/understand-ide/editors/type-editor/import-type-from-xml.gif)
 
 Once the records look right, save the form. The new types are added to the integration and become available everywhere a custom type can be used.
 

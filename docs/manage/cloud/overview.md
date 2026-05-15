@@ -10,7 +10,8 @@ WSO2 Cloud - Integration Platform is a managed cloud environment for running int
 
 | Area | Description |
 |---|---|
-| [Integrations](./integrations/viewing-deployed.md) | View build and deployment status, and manage the integration lifecycle, including redeployment, schedules, and stopping. |
+| [Integrations](./integrations.md) | View build and deployment status, and manage the integration lifecycle, including redeployment, schedules, and stopping. |
+| [Projects](./projects.md) | Create, view, edit, and remove projects within your organization. |
 | [CI/CD](./cicd/overview.md) | Connect a Git repository so that every commit triggers a build and deployment automatically. Configure deployment pipelines to control how integrations move from development to production. |
 | [Environments](./environments/overview.md) | Promote integrations across environments with optional approval gates. Override configuration values at each stage without changing integration code. |
 | [Configurations](./configurations/overview.md) | Set runtime values and secrets, control endpoint visibility and security, configure build behavior, and tune autoscaling per environment. |

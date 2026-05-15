@@ -41,7 +41,7 @@ WSO2 Cloud starts the build immediately. Once the build completes, the integrati
 
 ## What's next
 
-- [View integrations](/docs/manage/cloud/integrations/viewing-deployed.md) — Inspect build status, deployment status, and configuration for your deployed integrations.
+- [View and manage integrations](/docs/manage/cloud/integrations.md) — Inspect build status, deployment status, and manage the lifecycle of your deployed integrations.
 - [Runtime configurations](/docs/manage/cloud/configurations/runtime-configurations.md) — Set configurable values per environment and manage reusable configuration groups.
 - [Security configurations](/docs/manage/cloud/configurations/security-configurations.md) — Secure your integration endpoints with API Key or OAuth2 authentication.
 - [Endpoint configurations](/docs/manage/cloud/configurations/endpoint-configurations.md) — Control endpoint visibility levels for integrations deployed as Integration as APIs.

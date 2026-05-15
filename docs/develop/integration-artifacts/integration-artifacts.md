@@ -83,4 +83,4 @@ Reusable building blocks shared across multiple integrations in the same project
 - [HTTP service](service/http.md) — the most common starting point for integration APIs
 - [Kafka](event/kafka.md) — consume and process messages from Apache Kafka
 - [FTP/SFTP](file/ftp-sftp.md) — process files from remote file servers
-- [Connections](supporting/connections.md) — define reusable credentials for external services
+- [Connections](supporting/connections.md) — connect to external systems once and reuse across your integration

@@ -59,6 +59,7 @@ Sign in with your WSO2 Cloud account to deploy to WSO2 Cloud, manage environment
 
 ## Next steps
 
+- [Sign up with WSO2 Cloud](sign-up-sign-in.md) — Sign up with WSO2 Cloud to get the most out of WSO2 Integrator.
 - [Develop a new integration](../../develop/create-integrations/create-a-new-integration.md) — Create a new integration project and start building.
 - [Open an existing integration](../../develop/create-integrations/open-existing-integration.md) — Continue working on a project you already have.
 - [Explore sample integrations](../../develop/create-integrations/explore-sample-integrations.md) — Learn from ready-made examples.

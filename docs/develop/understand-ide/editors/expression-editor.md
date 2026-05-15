@@ -151,3 +151,9 @@ Appears when you author SQL queries, for example in database connector parameter
 Appears when you author natural-language prompts for AI nodes. The editor is optimized for multi-line text and supports inserting variables as chips so prompt templates remain readable. It also accepts Markdown formatting (headings, bold, italics, lists, links, tables, and quotes) through a built-in toolbar, and you can switch between the rendered **Preview** and the raw **Source** view from the same toolbar.
 
 ![Prompt variation with Markdown toolbar](/img/develop/understand-ide/editors/expression-editor/prompt.png)
+
+## What's next
+
+- [Flow Diagram editor](flow-diagram-editor/flow-diagram-editor.md): author expressions in flow nodes such as conditions, variable declarations, and function calls.
+- [Data Mapper editor](datamapper-editor.md): use expressions to transform and map individual fields.
+- [Type editor](type-editor.md): define the types that determine which expression variation appears for a field.

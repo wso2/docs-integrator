@@ -25,6 +25,6 @@ To work on a different project, go to the organization overview page by clicking
 
 ## What's next
 
-- [Create your first project](../../develop/create-integrations/create-a-project.md) — Start building your first integration
-- [Key concepts](../concepts/core.md) — Learn the building blocks of WSO2 Integrator
-- [Local setup](local-setup.md) — Prefer working on your own machine instead
+- [Deploy from cloud editor](/docs/deploy/cloud/deploy-from-cloud-editor.md) — Start building your first integration
+- [Key concepts](../concepts/overview.md) — Learn the building blocks of WSO2 Integration Platform
+- [Manage integrations](/docs/manage/cloud/overview.md) — Manage integrations on WSO2 Cloud
