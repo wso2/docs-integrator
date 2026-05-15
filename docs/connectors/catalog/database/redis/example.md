@@ -44,12 +44,14 @@ This example uses the **Connection URI** approach to configure the Redis client 
 Click **Expand** under "Advanced Configurations" to reveal all connection parameters. For each parameter listed below:
 
 1. Open the helper panel beside the field and go to the **Configurables** tab.
-2. Select an existing configurable or click **+ New Configurable**.
-3. Supply a descriptive camelCase name and the appropriate type, then click **Save**. The configurable is injected into the field.
+2. Click **+ New Configurable**.
+3. Enter the configurable name and type given below, then click **Save**. The configurable is injected into the field.
 
-- **`connection`**: the full Redis connection URI; configures the host, port, and authentication in a single URI string
-- **`connectionPooling`**: whether to enable connection pooling for the Redis client
-- **`isClusterConnection`**: whether this connection targets a Redis cluster rather than a single standalone node
+Bind these three fields to configurables. You set their actual values in Step 4.
+
+- **`connection`**: bind to a configurable named `redisConnectionUri` (type `string`), which holds the full Redis connection URI, including the host, port, and authentication.
+- **`connectionPooling`**: bind to a configurable named `redisConnectionPooling` (type `boolean`), which controls whether connection pooling is enabled for the Redis client.
+- **`isClusterConnection`**: bind to a configurable named `redisIsClusterConnection` (type `boolean`), which indicates whether the connection targets a Redis cluster rather than a single standalone node.
 
 If your Redis server requires TLS, expand the **secureSocket** field as well. See the [Action Reference](actions.md#securesocket) for its sub-fields.
 

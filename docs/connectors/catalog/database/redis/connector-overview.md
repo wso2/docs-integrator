@@ -4,7 +4,7 @@ title: Overview
 
 # Overview
 
-Redis is an open-source, in-memory data structure store used as a database, cache, message broker, and streaming engine. The Ballerina `ballerinax/redis` connector (v3.2.1) provides programmatic access to Redis servers and clusters, enabling you to perform string, list, set, sorted set, hash, and key management operations from your Ballerina integration flows.
+Redis is an open-source, in-memory data structure store used as a database, cache, message broker, and streaming engine. The Ballerina `ballerinax/redis` connector (v3.2.2) provides programmatic access to Redis servers and clusters, enabling you to perform string, list, set, sorted set, hash, and key management operations from your Ballerina integration flows.
 
 ## Key features
 
