@@ -1,14 +1,14 @@
 ---
-title: Overview
+title: MongoDB
 ---
 
 # Overview
 
-MongoDB is a document-oriented NoSQL database used for high-volume data storage and flexible schema design. The Ballerina `ballerinax/mongodb` connector (v5.2.4) provides programmatic access to MongoDB through a three-level client hierarchy (Client → Database → Collection), enabling you to perform CRUD operations, aggregation pipelines, and index management from your Ballerina integration flows.
+MongoDB is a document-oriented NoSQL database used for high-volume data storage and flexible schema design. The `ballerinax/mongodb` connector (v5.2.4) provides programmatic access to MongoDB through a three-level client hierarchy (`Client`, `Database`, and `Collection`), enabling you to perform CRUD operations, aggregation pipelines, and index management from your WSO2 Integrator integrations.
 
 ## Key features
 
-- Three-level client model (Client → Database → Collection) mirroring the MongoDB resource hierarchy
+- Three-level client model (`Client`, `Database`, and `Collection`) mirroring the MongoDB resource hierarchy
 - Full CRUD operations on documents with typed record mapping via Ballerina's data binding
 - Aggregation pipeline support including $match, $group, $lookup, $sort, $project, and more
 - Index management: create, list, and drop indexes including unique, sparse, and TTL indexes
