@@ -95,9 +95,9 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 | Example | Description |
 |---------|-------------|
 | **[Query Expressions](https://ballerina.io/learn/by-example/query-expressions/)** | Basic query syntax |
-| **[Sort](https://ballerina.io/learn/by-example/ordering/)** | Sort with order by |
-| **[Limit](https://ballerina.io/learn/by-example/limiting/)** | Limit results |
-| **[Join](https://ballerina.io/learn/by-example/join-clause/)** | Table joins |
+| **[Sort](https://ballerina.io/learn/by-example/sort-iterable-objects/)** | Sort with order by |
+| **[Limit](https://ballerina.io/learn/by-example/limit-clause/)** | Limit results |
+| **[Join](https://ballerina.io/learn/by-example/joining-iterable-objects/)** | Table joins |
 | **[Aggregation](https://ballerina.io/learn/by-example/aggregation/)** | Let clause and aggregation |
 
 ## AI integrations
@@ -128,21 +128,21 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 | **[HTTP Service](https://ballerina.io/learn/by-example/http-basic-rest-service/)** | Basic HTTP service |
 | **[HTTP Client](https://ballerina.io/learn/by-example/http-client-send-request-receive-response/)** | Basic HTTP client |
 | **[Query Parameters](https://ballerina.io/learn/by-example/http-client-query-parameter/)** | Service query parameters |
-| **[Path Parameters](https://ballerina.io/learn/by-example/http-path-parameter/)** | Service path parameters |
+| **[Path Parameters](https://ballerina.io/learn/by-example/http-path-param/)** | Service path parameters |
 | **[Request/Response](https://ballerina.io/learn/by-example/http-request-response/)** | Full request/response handling |
 | **[Headers](https://ballerina.io/learn/by-example/http-client-header-parameter/)** | HTTP header handling |
-| **[Data Binding](https://ballerina.io/learn/by-example/http-data-binding/)** | Payload data binding |
-| **[Error Handling](https://ballerina.io/learn/by-example/http-service-error-handling/)** | HTTP error handling |
-| **[Interceptors](https://ballerina.io/learn/by-example/http-interceptors/)** | HTTP interceptors |
+| **[Data Binding](https://ballerina.io/learn/by-example/http-service-data-binding/)** | Payload data binding |
+| **[Error Handling](https://ballerina.io/learn/by-example/http-default-error-handling/)** | HTTP error handling |
+| **[Interceptors](https://ballerina.io/learn/by-example/http-request-interceptor/)** | HTTP interceptors |
 | **[CORS](https://ballerina.io/learn/by-example/http-cors/)** | Cross-origin resource sharing |
 | **[Circuit Breaker](https://ballerina.io/learn/by-example/http-circuit-breaker/)** | Circuit breaker pattern |
 | **[Load Balancer](https://ballerina.io/learn/by-example/http-load-balancer/)** | Client-side load balancing |
 | **[Retry](https://ballerina.io/learn/by-example/http-retry/)** | HTTP retry |
-| **[Caching](https://ballerina.io/learn/by-example/http-caching/)** | HTTP response caching |
+| **[Caching](https://ballerina.io/learn/by-example/http-service-cache-response/)** | HTTP response caching |
 | **[SSL/TLS](https://ballerina.io/learn/by-example/http-service-ssl-tls/)** | HTTPS support |
 | **[Mutual SSL](https://ballerina.io/learn/by-example/http-service-mutual-ssl/)** | Mutual TLS authentication |
-| **[Basic Auth](https://ballerina.io/learn/by-example/http-service-basic-auth/)** | Basic authentication |
-| **[JWT Auth](https://ballerina.io/learn/by-example/http-service-jwt-auth/)** | JWT authentication |
+| **[Basic Auth](https://ballerina.io/learn/by-example/http-service-basic-authentication-file-user-store/)** | Basic authentication |
+| **[JWT Auth](https://ballerina.io/learn/by-example/http-service-jwt-authentication/)** | JWT authentication |
 | **[OAuth2](https://ballerina.io/learn/by-example/http-service-oauth2/)** | OAuth 2.0 authentication |
 
 ### gRPC
@@ -170,7 +170,7 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 
 | Example | Description |
 |---------|-------------|
-| **[WebSocket Service](https://ballerina.io/learn/by-example/websocket-service/)** | Basic WebSocket server |
+| **[WebSocket Service](https://ballerina.io/learn/by-example/websocket-basic-sample/)** | Basic WebSocket server |
 | **[WebSocket Client](https://ballerina.io/learn/by-example/websocket-client/)** | WebSocket client |
 | **[Service Send/Receive](https://ballerina.io/learn/by-example/websocket-basic-sample/)** | Send and receive messages on a WebSocket service |
 | **[Service Payload Validation](https://ballerina.io/learn/by-example/websocket-service-payload-constraint-validation/)** | Validate incoming payloads with constraints |
@@ -219,10 +219,9 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 | Example | Description |
 |---------|-------------|
 | **[MySQL Client](https://ballerina.io/learn/by-example/mysql-query-operation/)** | MySQL database operations |
-| **[PostgreSQL Client](https://ballerina.io/learn/by-example/postgresql-query-operation/)** | PostgreSQL database operations |
-| **[SQL Parameterized Query](https://ballerina.io/learn/by-example/sql-parameterized-query/)** | Safe parameterized queries |
-| **[Batch Execute](https://ballerina.io/learn/by-example/sql-batch-execute/)** | Batch SQL operations |
-| **[Call Procedure](https://ballerina.io/learn/by-example/sql-call-procedure/)** | Call stored procedures |
+| **[SQL Query](https://ballerina.io/learn/by-example/mysql-query-column-mapping/)** | Query |
+| **[Batch Execute](https://ballerina.io/learn/by-example/mysql-batch-execute-operation/)** | Batch SQL operations |
+| **[Call Procedure](https://ballerina.io/learn/by-example/mysql-call-stored-procedures/)** | Call stored procedures |
 
 ## Common libraries
 
@@ -234,15 +233,15 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 | **[Read/Write CSV](https://ballerina.io/learn/by-example/io-csv/)** | CSV file processing |
 | **[Read/Write JSON](https://ballerina.io/learn/by-example/io-json/)** | JSON file processing |
 | **[Read/Write XML](https://ballerina.io/learn/by-example/io-xml/)** | XML file processing |
-| **[FTP Client](https://ballerina.io/learn/by-example/ftp-client/)** | FTP file operations |
-| **[FTP Listener](https://ballerina.io/learn/by-example/ftp-service/)** | FTP file event listener |
+| **[FTP Client](https://ballerina.io/learn/by-example/ftp-client-receive-file/)** | FTP file operations |
+| **[FTP Listener](https://ballerina.io/learn/by-example/ftp-service-receive-file/)** | FTP file event listener |
 
 ### Security
 
 | Example | Description |
 |---------|-------------|
 | **[Crypto](https://ballerina.io/learn/by-example/security-crypto/)** | Cryptographic operations |
-| **[JWT Issue/Validate](https://ballerina.io/learn/by-example/jwt-issue-validate/)** | JWT token operations |
+| **[JWT Issue/Validate](https://ballerina.io/learn/by-example/security-jwt-issue-validate/)** | JWT token operations |
 | **[Encoding](https://ballerina.io/learn/by-example/url-encode-decode/)** | URL encoding/decoding |
 
 ### Testing
@@ -253,7 +252,6 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 | **[Before/After Functions](https://ballerina.io/learn/by-example/testerina-before-and-after-each/)** | Test lifecycle hooks |
 | **[Data-Driven Tests](https://ballerina.io/learn/by-example/testerina-data-driven-tests/)** | Parameterized tests |
 | **[Mocking](https://ballerina.io/learn/by-example/testerina-mocking-functions/)** | Mock functions and clients |
-| **[Service Testing](https://ballerina.io/learn/by-example/http-service-tests/)** | Test HTTP services |
 
 ## Observability
 
