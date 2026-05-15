@@ -28,7 +28,6 @@ const sidebars: SidebarsConfig = {
       collapsed: true,
       link: { type: 'doc', id: 'get-started/introduction' },
       items: [
-        'get-started/introduction',
         {
           type: 'category',
           label: 'Concepts',
