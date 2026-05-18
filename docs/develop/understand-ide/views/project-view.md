@@ -25,7 +25,7 @@ Click any card to navigate to the [Integrator view](integration-view.md) or [Lib
 
 ### Generate with AI
 
-Click the **Generate with AI** button at the top of the canvas to open the [WSO2 Integrator Copilot](/docs/develop/wso2-integrator-copilot/getting-started). Describe what you want in natural language, and WSO2 Integrator Copilot generates the integration with the appropriate entry points, connections, and logic.
+Click the **Generate with AI** button at the top of the canvas to open the [WSO2 Integrator Copilot](../../../wso2-integrator-copilot/getting-started). Describe what you want in natural language, and WSO2 Integrator Copilot generates the integration with the appropriate entry points, connections, and logic.
 
 ### Add integration or library
 
@@ -39,10 +39,10 @@ The deployment options panel appears on the right sidebar and provides shortcuts
 
 | Option | Target |
 |---|---|
-| [**Deploy to WSO2 Cloud**](/docs/deploy/cloud/overview) | Fully managed cloud platform for hosting and running integrations. |
-| [**Deploy with Docker**](/docs/deploy/self-hosted/kubernetes) | Build Docker images and deploy integrations to Kubernetes clusters. |
-| [**Deploy on a VM**](/docs/deploy-operate/deploy/vm-based-deployment) | Run integrations as standalone JAR files on virtual machines. |
-| [**Integration Control Plane (ICP)**](/docs/deploy-operate/observe/integration-control-plane-icp) | Monitor and manage running integrations from a centralized dashboard. |
+| [**Deploy to WSO2 Cloud**](../../../../deploy/cloud/overview) | Fully managed cloud platform for hosting and running integrations. |
+| [**Deploy with Docker**](../../../../deploy/self-hosted/docker) | Build Docker images and deploy integrations to Kubernetes clusters. |
+| [**Deploy on a VM**](../../../../deploy-operate/deploy/vm-based-deployment) | Run integrations as standalone JAR files on virtual machines. |
+| [**Integration Control Plane (ICP)**](../../../../deploy-operate/observe/integration-control-plane-icp) | Monitor and manage running integrations from a centralized dashboard. |
 
 At the project level, click **Enable ICP for all integrations** to activate ICP monitoring for every integration in the project at once.
 

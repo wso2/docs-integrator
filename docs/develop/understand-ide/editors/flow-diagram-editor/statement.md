@@ -59,7 +59,7 @@ For mapping capabilities, array handling, and submappings, see the [Data mapper]
 
 ## What's next
 
-- [Connections](./connections) — Invoke actions on configured clients.
-- [Control](./control) — Branch, loop, and return inside the flow.
-- [AI](./ai) — Call models, build RAG pipelines, and run agents.
-- [Logging](./logging) — Emit log messages at different severities.
+- [Connections](../connections) — Invoke actions on configured clients.
+- [Control](../control) — Branch, loop, and return inside the flow.
+- [AI](../ai) — Call models, build RAG pipelines, and run agents.
+- [Logging](../logging) — Emit log messages at different severities.

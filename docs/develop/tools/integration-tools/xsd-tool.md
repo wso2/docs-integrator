@@ -211,4 +211,4 @@ The tool maps XSD types to Ballerina types as follows:
 
 - [WSDL Tool](wsdl-tool.md) -- Generate SOAP clients that use these XML types
 - [OpenAPI Tool](openapi-tool.md) -- Generate REST services and clients
-- [Data Transformation](/docs/develop/transform/xml) -- Transform XML data with Ballerina
+- [Data Transformation](/develop/transform/xml) -- Transform XML data with Ballerina

@@ -44,7 +44,7 @@ Aborts the current strand and unwinds the call stack. A panic represents an abno
 
 ## What's next
 
-- [Control](./control) — Branch and loop inside an **ErrorHandler**.
-- [Logging](./logging) — Log details about a caught error.
-- [Statement](./statement) — Variables and function calls.
-- [Expression editor](../expression-editor) — Author error expressions with assistance.
+- [Control](../control) — Branch and loop inside an **ErrorHandler**.
+- [Logging](../logging) — Log details about a caught error.
+- [Statement](../statement) — Variables and function calls.
+- [Expression editor](../../expression-editor) — Author error expressions with assistance.

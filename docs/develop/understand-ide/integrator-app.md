@@ -66,7 +66,7 @@ When an integration or library is open, the project explorer groups its artifact
 | **Data Mappers** | Visual transformations between source and target types. |
 | **Configurations** | Variables sourced from `Config.toml` at runtime. |
 
-For details on each artifact type, see [Integration artifacts](/docs/develop/integration-artifacts).
+For details on each artifact type, see [Integration artifacts](../../integration-artifacts).
 
 ## Editor tab area
 
