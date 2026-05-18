@@ -8,7 +8,7 @@ A vector database stores vector embeddings and enables similarity search over th
 
 A **Vector Store** is WSO2 Integrator's abstraction over these databases, exposing a common interface for every supported backend.
 
-It is the storage half of a [Knowledge Base](/docs/genai/develop/components/knowledge-bases). The [Embedding Provider](/docs/genai/develop/components/embedding-providers) produces the vectors, and the Vector Store abstracts where and how they are persisted and retrieved at query time.
+It is the storage half of a [Knowledge Base](knowledge-bases.md). The [Embedding Provider](embedding-providers.md) produces the vectors, and the Vector Store abstracts where and how they are persisted and retrieved at query time.
 
 ## Available actions
 
@@ -123,7 +123,7 @@ Official website: [Milvus documentation](https://milvus.io/docs).
 
 | Field | Default | Available values | What it controls |
 |---|---|---|---|
-| **HTTP Configuration** | `{}` | Record | Standard HTTP knobs. Same fields as [Standard HTTP advanced configurations](/docs/genai/develop/components/model-providers#standard-http-advanced-configurations). |
+| **HTTP Configuration** | `{}` | Record | Standard HTTP knobs. Same fields as [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations). |
 
 The connector loads the collection into memory automatically before each search. Milvus converts IDs to integers for the primary key field.
 
@@ -180,7 +180,7 @@ Official website: [Pinecone documentation](https://docs.pinecone.io).
 | Field | Default | Available values | What it controls |
 |---|---|---|---|
 | **Pinecone Configuration** | `{}` | Record (`namespace`, `filters`, `sparseVector`) | Pinecone-specific settings. **Namespace** isolates vectors for multi-tenancy. **Filters** sets default metadata filters applied on every query. **Sparse Vector** is needed for hybrid search. |
-| **HTTP Configuration** | `{}` | Record | Standard HTTP knobs. Same fields as [Standard HTTP advanced configurations](/docs/genai/develop/components/model-providers#standard-http-advanced-configurations). |
+| **HTTP Configuration** | `{}` | Record | Standard HTTP knobs. Same fields as [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations). |
 | **Query Mode** | `ai:DENSE` | `ai:DENSE`, `ai:SPARSE`, `ai:HYBRID` | Search mode. |
 
 `topK` must be in the range 1–10000.
@@ -207,7 +207,7 @@ Official website: [Weaviate documentation](https://weaviate.io/developers/weavia
 
 | Field | Default | Available values | What it controls |
 |---|---|---|---|
-| **HTTP Configuration** | `{}` | Record | Standard HTTP knobs. Same fields as [Standard HTTP advanced configurations](/docs/genai/develop/components/model-providers#standard-http-advanced-configurations). |
+| **HTTP Configuration** | `{}` | Record | Standard HTTP knobs. Same fields as [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations). |
 
 This connector supports dense vectors only. Weaviate maps the `certainty` score to the `similarityScore` field in the response.
 
@@ -225,6 +225,6 @@ Selection is based on operational concerns (where your data already lives, what 
 
 ## What's next
 
-- [Knowledge Bases](/docs/genai/develop/components/knowledge-bases) — Combine a vector store with an embedding provider and a chunker.
-- [Chunkers](/docs/genai/develop/components/chunkers) — Split documents into chunks before embedding for ingestion into a vector store.
-- [RAG](/docs/genai/develop/rag/overview) — Visual designer walkthrough for RAG ingestion and query in WSO2 Integrator.
+- [Knowledge Bases](knowledge-bases.md) — Combine a vector store with an embedding provider and a chunker.
+- [Chunkers](chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.
+- [RAG](../rag/overview.md) — Visual designer walkthrough for RAG ingestion and query in WSO2 Integrator.
