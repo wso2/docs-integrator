@@ -55,7 +55,6 @@ Server and deployment configuration for WSO2 Integration Control Plane:
 
 ## Appendix
 
-- **[System Requirements](appendix/system-requirements.md)** — Supported platforms and versions
 - **[Error Codes](error-code.md)** — Error code reference
 - **[Glossary](glossary.md)** — Terminology definitions
 - **[FAQ](faq.md)** — Frequently asked questions
