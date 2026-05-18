@@ -17,13 +17,13 @@ The pattern is implemented by keeping the business operation in a reusable funct
 
 Use request-reply service activation when a message sender expects the activated service to return a result. Define typed request and response records, implement the operation as a reusable function, and call that function from both the direct resource function and the broker request handler.
 
-1. Define the request and response records in [Types](/develop/integration-artifacts/supporting/types).
-2. Add the reusable operation as a [Function](/develop/integration-artifacts/supporting/functions) and select **Make visible across the project** when the function must be called from multiple artifacts.
-3. Create an [HTTP service](/develop/integration-artifacts/service/http#creating-an-http-service) for non-messaging callers.
+1. Define the request and response records in [Types](../../develop/integration-artifacts/supporting/types.md).
+2. Add the reusable operation as a [Function](../../develop/integration-artifacts/supporting/functions.md) and select **Make visible across the project** when the function must be called from multiple artifacts.
+3. Create an [HTTP service](../../develop/integration-artifacts/service/http.md#creating-an-http-service) for non-messaging callers.
 4. Add a resource function with the typed request payload and add a **Call Function** step that invokes the reusable operation.
-5. Add a [RabbitMQ event integration](/develop/integration-artifacts/event/rabbitmq#creating-a-rabbitmq-service) for message-based callers.
-6. Configure the RabbitMQ queue and listener values with [configurable variables](/reference/config/configuration-management#configurable-variables).
-7. Add the `onRequest` handler from [RabbitMQ event handlers](/develop/integration-artifacts/event/rabbitmq#event-handlers), define the expected message content, add a **Call Function** step, and return the function result.
+5. Add a [RabbitMQ event integration](../../develop/integration-artifacts/event/rabbitmq.md#creating-a-rabbitmq-service) for message-based callers.
+6. Configure the RabbitMQ queue and listener values with [configurable variables](../../reference/config/configuration-management.md#configurable-variables).
+7. Add the `onRequest` handler from [RabbitMQ event handlers](../../develop/integration-artifacts/event/rabbitmq.md#event-handlers), define the expected message content, add a **Call Function** step, and return the function result.
 
 ```ballerina
 // docs-fold-start: Supporting definitions
@@ -77,11 +77,11 @@ service rabbitmq:Service on activatorListener {
 
 Use one-way command activation when the message channel only needs to trigger the operation and does not need a service result in the reply path. The broker handler validates the message content, calls the shared function, and lets the handler return successfully after the command is accepted.
 
-1. Reuse the request and response records from [Types](/develop/integration-artifacts/supporting/types).
-2. Reuse the same [Function](/develop/integration-artifacts/supporting/functions) that contains the application operation.
-3. Add a [RabbitMQ event integration](/develop/integration-artifacts/event/rabbitmq#creating-a-rabbitmq-service) for the command queue.
-4. Configure the listener, queue, and authentication fields with [configurable variables](/reference/config/configuration-management#configurable-variables).
-5. Add the `onMessage` handler from [RabbitMQ event handlers](/develop/integration-artifacts/event/rabbitmq#event-handlers) and define the expected message content.
+1. Reuse the request and response records from [Types](../../develop/integration-artifacts/supporting/types.md).
+2. Reuse the same [Function](../../develop/integration-artifacts/supporting/functions.md) that contains the application operation.
+3. Add a [RabbitMQ event integration](../../develop/integration-artifacts/event/rabbitmq.md#creating-a-rabbitmq-service) for the command queue.
+4. Configure the listener, queue, and authentication fields with [configurable variables](../../reference/config/configuration-management.md#configurable-variables).
+5. Add the `onMessage` handler from [RabbitMQ event handlers](../../develop/integration-artifacts/event/rabbitmq.md#event-handlers) and define the expected message content.
 6. In the handler flow, add a **Call Function** step for the shared operation and add any flow-level error handling required by the command contract.
 
 ```ballerina

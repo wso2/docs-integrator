@@ -18,6 +18,6 @@ The observability features lets you:
 
 ## What's next
 
-- [Runtime logs](./runtime-logs) — Search, filter, and analyze runtime log output.
-- [Metrics](./metrics) — Monitor request throughput, latency, and resource usage over time.
-- [Anomaly detection and alerts](./anomaly-detection-alerts) — Configure alerts to get notified when metrics exceed defined thresholds.
+- [Runtime logs](./runtime-logs.md) — Search, filter, and analyze runtime log output.
+- [Metrics](./metrics.md) — Monitor request throughput, latency, and resource usage over time.
+- [Anomaly detection and alerts](./anomaly-detection-alerts.md) — Configure alerts to get notified when metrics exceed defined thresholds.

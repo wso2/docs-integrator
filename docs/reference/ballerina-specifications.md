@@ -133,4 +133,4 @@ Ballerina specifications follow a versioning scheme tied to Swan Lake releases.
 
 - [Ballerina by Example](ballerina-by-example.md) — Runnable code examples
 - [Ballerina API Documentation](api/ballerina-documentation.md) — Module API docs
-- [Release Notes](release-notes.md) — Version history and migration notes
+- [Release Notes](appendix/release-notes.md) — Version history and migration notes

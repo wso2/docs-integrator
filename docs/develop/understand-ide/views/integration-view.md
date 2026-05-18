@@ -37,7 +37,7 @@ You can also scroll to zoom and drag to pan across the canvas.
 
 ### Generate with AI
 
-Click the **Generate with AI** button at the top of the canvas to open the [WSO2 Integrator Copilot](../../../wso2-integrator-copilot/getting-started). Describe what you want in natural language, and WSO2 Integrator Copilot generates the integration with the appropriate entry points, connections, and logic.
+Click the **Generate with AI** button at the top of the canvas to open the [WSO2 Integrator Copilot](../../copilot/getting-started.md). Describe what you want in natural language, and WSO2 Integrator Copilot generates the integration with the appropriate entry points, connections, and logic.
 
 ### Add artifact
 
@@ -71,10 +71,10 @@ The deployment options panel appears on the right sidebar and provides shortcuts
 
 | Option | Target |
 |---|---|
-| [**Deploy to WSO2 Cloud**](../../../../deploy/cloud/overview) | Fully managed cloud platform for hosting and running integrations. |
-| [**Deploy with Docker**](../../../../deploy/self-hosted/docker) | Build Docker images and deploy integrations to Kubernetes clusters. |
-| [**Deploy on a VM**](../../../../deploy-operate/deploy/vm-based-deployment) | Run integrations as standalone JAR files on virtual machines. |
-| [**Integration Control Plane (ICP)**](../../../../deploy-operate/observe/integration-control-plane-icp) | Monitor and manage running integrations from a centralized dashboard. |
+| [**Deploy to WSO2 Cloud**](../../../deploy/cloud/overview.md) | Fully managed cloud platform for hosting and running integrations. |
+| [**Deploy with Docker**](../../../deploy/self-hosted/kubernetes.md) | Build Docker images and deploy integrations to Kubernetes clusters. |
+| [**Deploy on a VM**](../../../deploy-operate/deploy/vm-based-deployment.md) | Run integrations as standalone JAR files on virtual machines. |
+| [**Integration Control Plane (ICP)**](../../../deploy-operate/observe/integration-control-plane-icp.md) | Monitor and manage running integrations from a centralized dashboard. |
 
 Select **Enable ICP monitoring** to activate ICP for this integration, or expand **Publish to local ICP** to push the integration to a local Integration Control Plane instance.
 
@@ -89,5 +89,5 @@ Click **Edit** to modify the README directly. You can also click **Generate with
 ## What's next
 
 - [Flow Diagram editor](../editors/flow-diagram-editor/flow-diagram-editor.md) — Build logic using the visual designer.
-- [Integration artifacts](../../../integration-artifacts) — Learn about artifact types and their configuration.
-- [Deploy to WSO2 Cloud](../../../../deploy/cloud/overview) — Deploy your integration to the cloud.
+- [Integration artifacts](../../integration-artifacts/integration-artifacts.md) — Learn about artifact types and their configuration.
+- [Deploy to WSO2 Cloud](../../../deploy/cloud/overview.md) — Deploy your integration to the cloud.

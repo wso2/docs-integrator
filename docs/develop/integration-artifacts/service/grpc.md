@@ -10,7 +10,7 @@ gRPC service creation is not available through **+ Add Artifact** in the Visual 
 
 ## Step 1: Place the proto file in your project
 
-Copy your `.proto` file into a `resources/` folder inside your integrator project. For a full example proto file, see the [example proto file](/docs/develop/tools/integration-tools/grpc-tool#example-proto-file) in the gRPC Tool reference.
+Copy your `.proto` file into a `resources/` folder inside your integrator project. For a full example proto file, see the [example proto file](../../tools/integration-tools/grpc-tool.md#example-proto-file) in the gRPC Tool reference.
 
 ```
 my-integration/
@@ -30,7 +30,7 @@ ls Ballerina.toml
 
 ## Step 3: Run the code generation command
 
-See [Generating a service stub from a proto file](/docs/develop/tools/integration-tools/grpc-tool#generating-a-service-stub-from-a-proto-file) in the gRPC Tool reference for the full command options. For a service stub, run:
+See [Generating a service stub from a proto file](../../tools/integration-tools/grpc-tool.md#generating-a-service-stub-from-a-proto-file) in the gRPC Tool reference for the full command options. For a service stub, run:
 
 ```bash
 bal grpc --input resources/order_service.proto --mode service --output .
@@ -134,5 +134,5 @@ bal grpc --input resources/order_service.proto --mode service --output .
 
 ## For more details
 
-- [gRPC Tool](/docs/develop/tools/integration-tools/grpc-tool) — full command reference including client generation and proto import paths.
+- [gRPC Tool](../../tools/integration-tools/grpc-tool.md) — full command reference including client generation and proto import paths.
 - [Ballerina gRPC specification](https://ballerina.io/spec/grpc/) — advanced configuration, TLS, authentication, and interceptors.

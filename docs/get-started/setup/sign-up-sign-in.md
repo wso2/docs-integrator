@@ -62,10 +62,10 @@ You land on the **Overview** page of the default project in your new organizatio
 ![Project overview page after creating an organization](/img/get-started/setup/sign-up-sign-in/project-home.png)
 
 :::info Invite others
-To give teammates access, an organization admin can invite them from the organization settings. Invited users can only see resources within that organization. See [Users and access control](/docs/manage/cloud/users-and-access/overview.md) for more information.
+To give teammates access, an organization admin can invite them from the organization settings. Invited users can only see resources within that organization. See [Users and access control](../../manage/cloud/users-and-access/overview.md) for more information.
 
 ## What's next
 
 - [Cloud setup](cloud-setup.md) — Provision your WSO2 Integration Platform environment
-- [Deploy to WSO2 Cloud](/docs/deploy/cloud/overview.md) — Deploy your integrations to WSO2 Cloud
+- [Deploy to WSO2 Cloud](../../deploy/cloud/overview.md) — Deploy your integrations to WSO2 Cloud
 - [Key concepts](../concepts/overview.md) — Learn the building blocks of WSO2 Integration Platform

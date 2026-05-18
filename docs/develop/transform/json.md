@@ -349,4 +349,4 @@ Create a `products.json` file in the project directory.
 ## What's next
 
 - [XML Processing](xml.md) - Work with XML data
-- [Type System & Records](/docs/reference/language/type-system) - Type-safe data handling
+- [Type System & Records](../../reference/language/type-system.md) - Type-safe data handling

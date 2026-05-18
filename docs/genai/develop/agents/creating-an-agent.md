@@ -85,11 +85,11 @@ service /blogReviewer on chatAgentListener {
 
 After generation, you are directed to the integration canvas where you can configure the following aspects of the agent:
 
-- [Agent behavior, including role, instructions, query, and input/output bindings](creating-an-agent.md#configure-agent-behavior)
+- [Agent behavior, including role, instructions, query, and input/output bindings](./creating-an-agent.md#configure-agent-behavior)
 - [Model provider](../components/model-providers.md)
-- [Tool integration](tools.md)
-- [Memory configuration](memory.md)
-- [Observability and tracing](observability.md)
+- [Tool integration](./tools.md)
+- [Memory configuration](./memory.md)
+- [Observability and tracing](./observability.md)
 
 ## Configure agent behavior
 

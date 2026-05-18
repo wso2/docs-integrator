@@ -10,7 +10,7 @@ This section is the handbook for building integrations on your local machine wit
 If your code still lives on your machine, you're in **Develop**. Once you push it somewhere else, move to [Deploy and operate](../deploy/overview.md).
 
 :::info AI split
-Tools that help **you** code faster (Copilot, AI test generation, AI-assisted data mapping) live here. Building **AI-powered** integrations (agents, RAG, MCP) belongs in [GenAI](../genai/overview).
+Tools that help **you** code faster (Copilot, AI test generation, AI-assisted data mapping) live here. Building **AI-powered** integrations (agents, RAG, MCP) belongs in [GenAI](../genai/overview.md).
 
 ## Create and organize
 

@@ -4,7 +4,7 @@ title: Integrations
 
 # Managing Integrations
 
-After pushing your integrations to WSO2 Cloud - Integration Platform, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on WSO2 Cloud yet, see the [Deploy](/docs/deploy/cloud/overview) section.
+After pushing your integrations to WSO2 Cloud - Integration Platform, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on WSO2 Cloud yet, see the [Deploy](../../deploy/cloud/overview.md) section.
 
 ## View integrations
 

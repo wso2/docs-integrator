@@ -6,7 +6,7 @@ title: Configuration Management
 
 Integration projects typically run across multiple environments — development, staging, and production — each with different endpoints, credentials, and feature flags. WSO2 Integrator uses Ballerina's built-in configuration system to keep these settings out of source code and supply them at runtime.
 
-This guide is the deeper reference for the configuration model. For the fundamentals of using configurable variables, see [Configurations](/docs/develop/integration-artifacts/supporting/configurations).
+This guide is the deeper reference for the configuration model. For the fundamentals of using configurable variables, see [Configurations](../../develop/integration-artifacts/supporting/configurations.md).
 
 ## Configurable variables
 
@@ -124,7 +124,7 @@ Command-line arguments support only basic primitive types (`boolean`, `int`, `fl
 
 `Config.toml` is the primary configuration file. Place it in the project root directory (alongside `Ballerina.toml`). The runtime reads it automatically at startup. Values you enter through the Visual Designer's Config Editor are written to this same file.
 
-For TOML syntax, type-by-type encoding, and module-qualified key conventions, see the [Config.toml reference](/docs/reference/config/configtoml-reference).
+For TOML syntax, type-by-type encoding, and module-qualified key conventions, see the [Config.toml reference](./configtoml-reference.md).
 
 ### Environment variables
 
@@ -237,10 +237,10 @@ BAL_CONFIG_FILES=config/dev.toml bal run
 BAL_CONFIG_FILES=config/prod.toml bal run
 ```
 
-Never commit secret-bearing configuration files to version control. For production credential handling, secret managers, and TLS configuration, see [Secrets and encryption](/docs/deploy-operate/secure/secrets-encryption).
+Never commit secret-bearing configuration files to version control. For production credential handling, secret managers, and TLS configuration, see [Secrets and encryption](../../deploy-operate/secure/secrets-encryption.md).
 
 ## What's next
 
-- [Configurations](/docs/develop/integration-artifacts/supporting/configurations) — Declare configurable variables and supply values through the visual designer.
-- [Secrets and encryption](/docs/deploy-operate/secure/secrets-encryption) — Securely supply credentials and protect data in transit and at rest.
-- [Connections](/docs/develop/integration-artifacts/supporting/connections) — Use configurable variables to parameterize connections.
+- [Configurations](../../develop/integration-artifacts/supporting/configurations.md) — Declare configurable variables and supply values through the visual designer.
+- [Secrets and encryption](../../deploy-operate/secure/secrets-encryption.md) — Securely supply credentials and protect data in transit and at rest.
+- [Connections](../../develop/integration-artifacts/supporting/connections.md) — Use configurable variables to parameterize connections.

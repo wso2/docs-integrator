@@ -75,4 +75,4 @@ If the first request to a scale-to-zero integration returns a `503` error, the r
 
 ## What's next
 
-- [Environments](../environments/overview) — Organize your integration lifecycle with multiple environments.
+- [Environments](../environments/overview.md) — Organize your integration lifecycle with multiple environments.

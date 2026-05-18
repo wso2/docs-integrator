@@ -15,12 +15,12 @@ The pattern is implemented at the decision point where the flow has enough messa
 
 ## Pattern-based content routing
 
-Use pattern-based content routing with [match expressions](/develop/understand-ide/editors/flow-diagram-editor/control#match) when each recipient maps to a known field value, such as a message type, region, product category, or event name. Keep an explicit default branch so unsupported content is handled in a dedicated fallback path for invalid recipients.
+Use pattern-based content routing with [match expressions](../../develop/understand-ide/editors/flow-diagram-editor/control.md#match) when each recipient maps to a known field value, such as a message type, region, product category, or event name. Keep an explicit default branch so unsupported content is handled in a dedicated fallback path for invalid recipients.
 
-1. Create or open the [HTTP service resource](/develop/integration-artifacts/service/http#creating-an-http-service) that receives the routed message.
-2. Add HTTP client connections for each recipient. See [adding a connection](/develop/integration-artifacts/supporting/connections#adding-a-connection) and the [HTTP client reference](/connectors/catalog/built-in/http/action-reference#client).
-3. Open the resource flow and [add a step](/develop/understand-ide/editors/flow-diagram-editor/#anatomy-of-the-editor).
-4. Add a [Match node](/develop/understand-ide/editors/flow-diagram-editor/control#match) and set the expression to the routing field, such as `order.itemType`.
+1. Create or open the [HTTP service resource](../../develop/integration-artifacts/service/http.md#creating-an-http-service) that receives the routed message.
+2. Add HTTP client connections for each recipient. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection) and the [HTTP client reference](../../connectors/catalog/built-in/http/action-reference.md#client).
+3. Open the resource flow and [add a step](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md#anatomy-of-the-editor).
+4. Add a [Match node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#match) and set the expression to the routing field, such as `order.itemType`.
 5. Add one branch for each accepted value, such as `"standard"` and `"express"`, and add `_` as the default branch.
 6. In each accepted branch, add the connector call for that recipient and return the route result.
 7. In the default branch, return an error response for unsupported content.
@@ -71,12 +71,12 @@ service /orders on new http:Listener(8080) {
 
 ## Predicate-based content routing
 
-Use predicate-based content routing with [if/else statements](/develop/understand-ide/editors/flow-diagram-editor/control#if) when the route depends on content rules instead of one stable routing key.
+Use predicate-based content routing with [if/else statements](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) when the route depends on content rules instead of one stable routing key.
 
 1. Create or open the resource or function that contains the routing decision.
-2. Add HTTP client connections for the possible recipients. See [adding a connection](/develop/integration-artifacts/supporting/connections#adding-a-connection) and the [HTTP client reference](/connectors/catalog/built-in/http/action-reference#client).
-3. Add a [configurable variable](/reference/config/configuration-management#configurable-variables) for any route rule that should change by environment, such as `bulkThreshold`.
-4. Open the flow and add an [If node](/develop/understand-ide/editors/flow-diagram-editor/control#if) with a condition such as `order.quantity >= bulkThreshold`.
+2. Add HTTP client connections for the possible recipients. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection) and the [HTTP client reference](../../connectors/catalog/built-in/http/action-reference.md#client).
+3. Add a [configurable variable](../../reference/config/configuration-management.md#configurable-variables) for any route rule that should change by environment, such as `bulkThreshold`.
+4. Open the flow and add an [If node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) with a condition such as `order.quantity >= bulkThreshold`.
 5. Add the bulk recipient call inside the **True** branch.
 6. In the **False** branch, add another **If** node with a condition such as `order.priority`.
 7. Add the priority recipient call inside the nested **True** branch and the default recipient call inside the nested **False** branch.

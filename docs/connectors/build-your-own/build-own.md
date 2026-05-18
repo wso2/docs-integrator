@@ -10,7 +10,7 @@ When no pre-built connector exists for your target service, you can build one yo
 
 Consider building a custom connector when:
 
-- No pre-built connector exists for your target service or API in the [Connector Catalog](../catalog/)
+- No pre-built connector exists for your target service or API in the [Connector Catalog](../catalog/index.mdx)
 - You need custom logic beyond what a standard connector provides, such as specialized authentication flows, data transformations, or retry strategies
 - You're integrating with an internal API that is private to your organization
 - You want to publish and share a reusable connector with your team or the broader community via [Ballerina Central](https://central.ballerina.io/)

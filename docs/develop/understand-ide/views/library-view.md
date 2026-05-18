@@ -26,7 +26,7 @@ Click the **+ Add Artifacts** button at the top right of the canvas to add a new
 
 ![Add artifacts menu](/img/develop/understand-ide/views/library-view/add-artifacts.png)
 
-For detailed information on configuring each specific artifact type, see the [Integration artifacts](../../../integration-artifacts) documentation.
+For detailed information on configuring each specific artifact type, see the [Integration artifacts](../../integration-artifacts/integration-artifacts.md) documentation.
 
 ## Artifact management
 
@@ -60,6 +60,6 @@ The README section at the bottom of the Library view displays the contents of yo
 
 ## What's next
 
-- [Create a library](../../../create-integrations/create-a-library) — Set up a new library package for sharing common logic across integrations.
-- [Integration artifacts](../../../integration-artifacts) — Learn about the artifact types you can define in a library.
-- [Functions](../../../integration-artifacts/supporting/functions) — Encapsulate reusable logic in function artifacts for validation and transformation.
+- [Create a library](../../create-integrations/create-a-library.md) — Set up a new library package for sharing common logic across integrations.
+- [Integration artifacts](../../integration-artifacts/integration-artifacts.md) — Learn about the artifact types you can define in a library.
+- [Functions](../../integration-artifacts/supporting/functions.md) — Encapsulate reusable logic in function artifacts for validation and transformation.

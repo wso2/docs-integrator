@@ -100,9 +100,6 @@ Expressions run in the scope of the selected stack frame, so switching frames in
 
 ![Evaluating a Ballerina expression in the Debug Console](/img/develop/debugging/features/expression-evaluation.png)
 
-## Related
+## What's Next
 
 - [Editor Debugging](editor.md) - quick-start setup for a debug session.
-- [Errors and stack traces](/docs/develop/troubleshooting/errors-and-stack-traces) - read error messages and trace failures back to source.
-- [Logging](/docs/develop/troubleshooting/logging) - when adding logs is a better fit than a live debug session.
-- [Strand dump analysis](/docs/develop/troubleshooting/strand-dump-analysis) - diagnose stuck or hung integrations from a captured dump.

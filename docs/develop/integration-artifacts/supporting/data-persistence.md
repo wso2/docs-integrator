@@ -22,7 +22,7 @@ The example uses an e-commerce order table. A scheduled automation picks up all 
 
 ## Prerequisites
 
-- WSO2 Integrator IDE installed. Refer to [Install WSO2 Integrator](../../../get-started/install.md) for instructions.
+- WSO2 Integrator IDE installed. Refer to [Install WSO2 Integrator](../../../get-started/setup/local-setup.md) for instructions.
 - A running MySQL instance (version 8.0 or later) accessible on `localhost:3306`.
 
 ### Set up the database
@@ -271,5 +271,5 @@ UPDATE orders SET status = 'PLACED' WHERE order_id IN ('ORD-001', 'ORD-002');
 ## What's next
 
 - [Connections](connections.md): Manage and reuse database and API connections across your project
-- [Automation](../automation/automation.md): Schedule and trigger automations
-- [Configuration management](../../../develop/design-logic/configuration-management.md): Manage database credentials per environment
+- [Automation](../automation.md): Schedule and trigger automations
+- [Configuration management](../../../reference/config/configuration-management.md): Manage database credentials per environment

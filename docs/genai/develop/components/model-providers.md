@@ -39,7 +39,7 @@ Scroll to see the remaining options:
 
 | Provider | Module | API key required? | Has embedding provider? |
 |---|---|---|---|
-| **Default WSO2** | `ballerina/ai` | No (signed-in via WSO2) | Yes. See [Default WSO2 Embedding Provider](embedding-providers.md#default-wso2-embedding-provider) |
+| **Default WSO2** | `ballerina/ai` | No (signed-in via WSO2) | Yes. See [Default WSO2 Embedding Provider](./embedding-providers.md#default-wso2-embedding-provider) |
 | **Anthropic** | [`ballerinax/ai.anthropic`](https://central.ballerina.io/ballerinax/ai.anthropic/latest) | Yes | No |
 | **Azure OpenAI** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Yes | Yes |
 | **DeepSeek** | [`ballerinax/ai.deepseek`](https://central.ballerina.io/ballerinax/ai.deepseek/latest) | Yes | No |
@@ -142,7 +142,7 @@ Official website: [Azure OpenAI Service](https://azure.microsoft.com/services/co
 
 Plus the [Standard HTTP advanced configurations](#standard-http-advanced-configurations).
 
-The Azure package also ships an **Embedding Provider** and the **Azure AI Search Knowledge Base**. See [Azure OpenAI](embedding-providers.md#azure-openai) and [Azure AI Search](knowledge-bases.md#azure-ai-search-knowledge-base).
+The Azure package also ships an **Embedding Provider** and the **Azure AI Search Knowledge Base**. See [Azure OpenAI](./embedding-providers.md#azure-openai) and [Azure AI Search](./knowledge-bases.md#azure-ai-search-knowledge-base).
 
 ## DeepSeek
 
@@ -208,7 +208,7 @@ Plus the [Standard HTTP advanced configurations](#standard-http-advanced-configu
 | **Service account config** | `clientEmail`, `privateKey`, optional `scopes` | Want explicit credentials in source. |
 | **Service account JSON path** | A file path string | Easiest - point at the downloaded service-account JSON file from the Google Cloud console. The connector reads `client_email` and `private_key` automatically and refreshes the token. |
 
-Vertex also ships an **Embedding Provider**. See [Google Vertex](embedding-providers.md#google-vertex).
+Vertex also ships an **Embedding Provider**. See [Google Vertex](./embedding-providers.md#google-vertex).
 
 ## Mistral
 
@@ -304,7 +304,7 @@ Official website: [platform.openai.com](https://platform.openai.com/).
 
 Plus the [Standard HTTP advanced configurations](#standard-http-advanced-configurations) (Timeout, Retry, Circuit Breaker, Proxy, etc.).
 
-The OpenAI package also ships an **Embedding Provider**. See [OpenAI](embedding-providers.md#openai).
+The OpenAI package also ships an **Embedding Provider**. See [OpenAI](./embedding-providers.md#openai).
 
 ## OpenRouter
 
@@ -335,7 +335,7 @@ Official website: [openrouter.ai](https://openrouter.ai/).
 
 Plus the [Standard HTTP advanced configurations](#standard-http-advanced-configurations).
 
-The OpenRouter package also ships an **Embedding Provider**. See [OpenRouter](embedding-providers.md#openrouter).
+The OpenRouter package also ships an **Embedding Provider**. See [OpenRouter](./embedding-providers.md#openrouter).
 
 ## Model provider connections
 
@@ -370,7 +370,7 @@ Editing a connection follows the same pattern for every component type. Embeddin
 
 ## What's next
 
-- [Embedding providers](embedding-providers.md) — Vector embeddings for RAG. The OpenAI, Azure, Vertex, OpenRouter, and Default WSO2 packages also ship embedding providers.
-- [Vector stores](vector-stores.md) — Persist and query embeddings using Pinecone, Weaviate, Qdrant, pgvector, and other backends.
-- [Knowledge bases](knowledge-bases.md) — Managed retrieval sources, including Azure AI Search, that plug directly into RAG flows.
-- [Chunkers](chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.
+- [Embedding providers](./embedding-providers.md) — Vector embeddings for RAG. The OpenAI, Azure, Vertex, OpenRouter, and Default WSO2 packages also ship embedding providers.
+- [Vector stores](./vector-stores.md) — Persist and query embeddings using Pinecone, Weaviate, Qdrant, pgvector, and other backends.
+- [Knowledge bases](./knowledge-bases.md) — Managed retrieval sources, including Azure AI Search, that plug directly into RAG flows.
+- [Chunkers](./chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.

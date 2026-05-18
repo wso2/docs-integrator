@@ -35,7 +35,7 @@ In the **Create Vector Knowledge Base** form, click **+ Create New Embedding Mod
 | **OpenAI** | [`ballerinax/ai.openai`](https://central.ballerina.io/ballerinax/ai.openai/latest) | Yes | None |
 | **OpenRouter** | [`ballerinax/ai.openrouter`](https://central.ballerina.io/ballerinax/ai.openrouter/latest) | Yes | None |
 
-The HTTP-level advanced configurations on every external embedding provider use the same set of fields as model providers. For the full reference, see [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations).
+The HTTP-level advanced configurations on every external embedding provider use the same set of fields as model providers. For the full reference, see [Standard HTTP advanced configurations](./model-providers.md#standard-http-advanced-configurations).
 
 ## Default WSO2 embedding provider
 
@@ -68,7 +68,7 @@ The model name is implicit in the **deployment** on Azure. There is no **Model T
 
 ![Azure OpenAI Create Embedding Provider form with Advanced Configurations expanded showing Cache Configuration, Circuit Breaker Configuration, Compression AUTO, Forwarded 'disable', HTTP1 Settings, HTTP2 Settings.](/img/genai/develop/components/embedding-providers/04-azure-advanced.png)
 
-For standard HTTP configurations, see [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations).
+For standard HTTP configurations, see [Standard HTTP advanced configurations](./model-providers.md#standard-http-advanced-configurations).
 
 ## Google Vertex
 
@@ -80,7 +80,7 @@ Official website: [Vertex AI embeddings documentation](https://cloud.google.com/
 
 | Field | Required | Default | Available values |
 |---|---|---|---|
-| **Auth** | Yes | — | OAuth2 refresh-token record, a service-account record, or a path to a service-account JSON file. See [Vertex auth options](model-providers.md#vertex-auth-options) on the Model Providers page. |
+| **Auth** | Yes | — | OAuth2 refresh-token record, a service-account record, or a path to a service-account JSON file. See [Vertex auth options](./model-providers.md#vertex-auth-options) on the Model Providers page. |
 | **Project ID** | Yes | — | Your Google Cloud project ID. |
 
 ### Advanced configurations
@@ -93,7 +93,7 @@ Official website: [Vertex AI embeddings documentation](https://cloud.google.com/
 | **Model Type** | `text-embedding-005` | `text-embedding-005`, `text-embedding-004`, `textembedding-gecko-multilingual@001`, `textembedding-gecko@001`. | Vertex embedding model. |
 | **Service URL** | `""` (auto-derived) | URL string | Override the regional endpoint. Defaults to `https://\{location\}-aiplatform.googleapis.com`. |
 
-For standard HTTP configurations, see [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations).
+For standard HTTP configurations, see [Standard HTTP advanced configurations](./model-providers.md#standard-http-advanced-configurations).
 
 ## OpenAI
 
@@ -116,7 +116,7 @@ Official website: [OpenAI Embeddings documentation](https://platform.openai.com/
 |---|---|---|---|
 | **Service URL** | `https://api.openai.com/v1` | URL string | OpenAI API base URL. |
 
-For standard HTTP configurations, see [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations).
+For standard HTTP configurations, see [Standard HTTP advanced configurations](./model-providers.md#standard-http-advanced-configurations).
 
 ## OpenRouter
 
@@ -143,7 +143,7 @@ Official website: [openrouter.ai](https://openrouter.ai/).
 | **Site URL** | `()` | URL string or empty | Optional site URL sent as `HTTP-Referer`. |
 | **Site Name** | `()` | String or empty | Optional site name sent as `X-OpenRouter-Title`. |
 
-For standard HTTP configurations, see [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations).
+For standard HTTP configurations, see [Standard HTTP advanced configurations](./model-providers.md#standard-http-advanced-configurations).
 
 OpenRouter's embedding endpoint accepts text-only chunks. Image or audio chunks raise an error.
 
@@ -161,7 +161,7 @@ The provider selected at ingest time must remain consistent for the lifetime of 
 
 ## What's next
 
-- [Vector Stores](vector-stores.md) — Where the embeddings live.
-- [Knowledge Bases](knowledge-bases.md) — The object that ties an embedding provider, a vector store, and a chunker together.
-- [Chunkers](chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.
+- [Vector Stores](./vector-stores.md) — Where the embeddings live.
+- [Knowledge Bases](./knowledge-bases.md) — The object that ties an embedding provider, a vector store, and a chunker together.
+- [Chunkers](./chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.
 - [RAG](../rag/overview.md) — WSO2 Integrator walkthrough for ingestion and query flows.
