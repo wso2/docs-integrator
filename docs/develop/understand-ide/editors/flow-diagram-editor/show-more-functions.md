@@ -28,6 +28,6 @@ This is the same picker that opens from the [Call Function](./statement.md#call-
 
 ## What's next
 
-- [Statement](./statement) — The **Call Function** node opens the same picker.
-- [Logging](./logging) — The four logging shortcuts; reach other `log:print*` variants from this picker.
-- [Functions reference](../../../integration-artifacts/supporting/functions) — Create, organize, and reuse functions across artifacts.
+- [Statement](./statement.md) — The **Call Function** node opens the same picker.
+- [Logging](./logging.md) — The four logging shortcuts; reach other `log:print*` variants from this picker.
+- [Functions](../../../integration-artifacts/supporting/functions.md) — Create, organize, and reuse functions across artifacts.

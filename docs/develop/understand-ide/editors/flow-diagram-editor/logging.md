@@ -58,8 +58,8 @@ Prints debug logs. Use **Log Debug** for verbose information you want available 
 
 ## What's next
 
-- [Show more functions](./show-more-functions) — Reach every `log:print*` variant beyond the four shortcuts.
-- [Statement](./statement) — Function calls and variable updates.
-- [Error handling](./error-handling) — Pair logging with **ErrorHandler** branches.
-- [Control](./control) — Conditional logging inside branches and loops.
-- [Expression editor](../expression-editor) — Build log messages with string templates and expressions.
+- [Show more functions](./show-more-functions.md) — Reach every `log:print*` variant beyond the four shortcuts.
+- [Statement](./statement.md) — Function calls and variable updates.
+- [Error handling](./error-handling.md) — Pair logging with **ErrorHandler** branches.
+- [Control](./control.md) — Conditional logging inside branches and loops.
+- [Expression editor](../expression-editor.md) — Build log messages with string templates and expressions.

@@ -6,7 +6,7 @@ title: Knowledge Bases
 
 A **Knowledge Base** is a managed store of documents that your integration can index and query. It provides a consistent interface for adding content, retrieving the most relevant chunks for a given query, and removing stale content — regardless of the underlying storage technology.
 
-In WSO2 Integrator, a Knowledge Base is the single object the RAG ingest, retrieve, and delete-by-filter nodes talk to. It uses three pluggable parts (a [Vector Store](/docs/genai/develop/components/vector-stores), an [Embedding Provider](/docs/genai/develop/components/embedding-providers), and a [Chunker](/docs/genai/develop/components/chunkers)) and exposes a small surface for indexing chunks and retrieving the most relevant ones.
+In WSO2 Integrator, a Knowledge Base is the single object the RAG ingest, retrieve, and delete-by-filter nodes talk to. It uses three pluggable parts (a [Vector Store](vector-stores.md), an [Embedding Provider](embedding-providers.md), and a [Chunker](chunkers.md)) and exposes a small surface for indexing chunks and retrieving the most relevant ones.
 
 ## Available actions
 
@@ -37,7 +37,7 @@ Click **+ Add Knowledge Base** and the **Select Knowledge Base** picker opens:
 
 | Knowledge Base | Module | Storage |
 |---|---|---|
-| **Vector Knowledge Base** | `ballerina/ai` | Any [Vector Store](/docs/genai/develop/components/vector-stores) |
+| **Vector Knowledge Base** | `ballerina/ai` | Any [Vector Store](vector-stores.md) |
 | **Azure AI Search Knowledge Base** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Azure AI Search index |
 
 ---
@@ -52,9 +52,9 @@ The default implementation. You combine a Vector Store, an Embedding Provider, a
 
 | Field | Required | Default | Available values |
 |---|---|---|---|
-| **Vector Store** | Yes | — | Any saved [Vector Store](/docs/genai/develop/components/vector-stores) connection. Click **+ Create New Vector Store** to make one inline. |
-| **Embedding Model** | Yes | — | Any saved [Embedding Provider](/docs/genai/develop/components/embedding-providers) connection. **Use the same provider on ingest and retrieve.** Embeddings from different providers are not interchangeable. |
-| **Chunker** | No | `ai:AUTO` | `ai:AUTO` (chunker chosen automatically based on document type), `ai:DISABLE` (no chunking; each document becomes one chunk), or any saved [Chunker](/docs/genai/develop/components/chunkers) connection. |
+| **Vector Store** | Yes | — | Any saved [Vector Store](vector-stores.md) connection. Click **+ Create New Vector Store** to make one inline. |
+| **Embedding Model** | Yes | — | Any saved [Embedding Provider](embedding-providers.md) connection. **Use the same provider on ingest and retrieve.** Embeddings from different providers are not interchangeable. |
+| **Chunker** | No | `ai:AUTO` | `ai:AUTO` (chunker chosen automatically based on document type), `ai:DISABLE` (no chunking; each document becomes one chunk), or any saved [Chunker](chunkers.md) connection. |
 
 There are no Advanced Configurations on the Vector Knowledge Base itself. Every knob lives on the underlying Vector Store, Embedding Provider, or Chunker connection.
 
@@ -77,8 +77,8 @@ Official website: [Azure AI Search](https://azure.microsoft.com/services/search/
 | **Service URL** | Yes | — | Service URL of your Azure AI Search instance. |
 | **API Key** | Yes | — | API key for authenticating with the Azure AI Search service. |
 | **Index** | Yes | — | The name of an existing search index, or a `search:SearchIndex` definition (a record describing the index schema). When creating a new index, ensure it contains one key field of type string. |
-| **Embedding Model** | No | `()` | Any saved [Embedding Provider](/docs/genai/develop/components/embedding-providers) connection. Used for query and ingest if provided. Leave empty to rely on Azure AI Search's integrated vectorization. |
-| **Chunker** | No | `ai:AUTO` | `ai:AUTO`, `ai:DISABLE`, or any saved [Chunker](/docs/genai/develop/components/chunkers) connection. |
+| **Embedding Model** | No | `()` | Any saved [Embedding Provider](embedding-providers.md) connection. Used for query and ingest if provided. Leave empty to rely on Azure AI Search's integrated vectorization. |
+| **Chunker** | No | `ai:AUTO` | `ai:AUTO`, `ai:DISABLE`, or any saved [Chunker](chunkers.md) connection. |
 
 ### Advanced configurations
 
@@ -89,8 +89,8 @@ Official website: [Azure AI Search](https://azure.microsoft.com/services/search/
 | **Verbose** | `false` | `true`, `false` | Whether to enable verbose logging during ingest and retrieve. Useful when debugging. |
 | **API Version** | `2025-09-01` | Azure AI Search API version string | The Azure AI Search REST API version to use. |
 | **Content Field Name** | `"content"` | String | The name of the field in the index that contains the main chunk content. |
-| **Search Client Connection Config** | `{}` | Record | Connection configuration for the Azure AI Search service client. Required only when `Index` is provided as a `search:SearchIndex` definition (i.e. when the connector creates the index for you). See [Standard HTTP Advanced Configurations](/docs/genai/develop/components/model-providers#standard-http-advanced-configurations) for available knobs. |
-| **Index Client Connection Config** | `{}` | Record | Connection configuration for the Azure AI Search index client. See [Standard HTTP Advanced Configurations](/docs/genai/develop/components/model-providers#standard-http-advanced-configurations) for available knobs. |
+| **Search Client Connection Config** | `{}` | Record | Connection configuration for the Azure AI Search service client. Required only when `Index` is provided as a `search:SearchIndex` definition (i.e. when the connector creates the index for you). See [Standard HTTP Advanced Configurations](model-providers.md#standard-http-advanced-configurations) for available knobs. |
+| **Index Client Connection Config** | `{}` | Record | Connection configuration for the Azure AI Search index client. See [Standard HTTP Advanced Configurations](model-providers.md#standard-http-advanced-configurations) for available knobs. |
 | **Semantic Configuration Name** | `()` | String or empty | The name of the semantic configuration to use for semantic search. Leave empty for plain vector / keyword search. |
 
 > The connector analyzes the index schema on init: it identifies the **key field**, every **vector field**, and verifies the content field exists. If you use Azure AI Search's integrated vectorization, you don't need to provide an Embedding Model.
@@ -107,6 +107,6 @@ Official website: [Azure AI Search](https://azure.microsoft.com/services/search/
 
 ## What's next
 
-- [Chunkers](/docs/genai/develop/components/chunkers) — How documents are split before ingest.
-- [Direct LLM Calls](/docs/genai/develop/direct-llm/overview) — One-shot generate calls without an agent loop.
-- [Natural Functions](/docs/genai/develop/natural-functions/overview) — Ballerina functions whose body is plain English, evaluated at runtime by an LLM.
+- [Chunkers](chunkers.md) — How documents are split before ingest.
+- [Direct LLM Calls](../direct-llm/overview.md) — One-shot generate calls without an agent loop.
+- [Natural Functions](../natural-functions/overview.md) — Ballerina functions whose body is plain English, evaluated at runtime by an LLM.

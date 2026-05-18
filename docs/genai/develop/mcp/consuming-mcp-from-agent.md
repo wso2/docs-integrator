@@ -4,7 +4,7 @@ title: Consuming MCP from an Agent
 
 # Consuming MCP from an Agent
 
-An [AI Agent](/docs/genai/develop/agents/overview) in WSO2 Integrator can use any MCP server as a tool source. Add the server once; the agent picks up every tool the server advertises (or only the ones you select) and treats them exactly like local function tools.
+An [AI Agent](../agents/overview.md) in WSO2 Integrator can use any MCP server as a tool source. Add the server once; the agent picks up every tool the server advertises (or only the ones you select) and treats them exactly like local function tools.
 
 ## Adding an MCP server to an agent
 
@@ -170,5 +170,5 @@ Local tools and MCP tools are completely interchangeable from the agent's perspe
 ## What's Next
 
 - **[Exposing a Service as MCP](exposing-as-mcp.md)** — the other side of MCP.
-- **[Tools (in AI Agents)](/docs/genai/develop/agents/tools)** — back to the Add Tool dialog.
-- **[Creating an Agent](/docs/genai/develop/agents/creating-an-agent)** — the agent that consumes the MCP tools.
+- **[Tools (in AI Agents)](../agents/tools.md)** — back to the Add Tool dialog.
+- **[Creating an Agent](../agents/creating-an-agent.md)** — the agent that consumes the MCP tools.

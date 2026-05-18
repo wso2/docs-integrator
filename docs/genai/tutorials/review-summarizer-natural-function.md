@@ -4,7 +4,7 @@ title: Customer Review Analyzer with Natural Function
 
 # Customer Review Analyzer with Natural Function
 
-This tutorial walks through building an **HTTP service that uses a Natural Function to analyze a customer review** and return structured feedback. It is the end-to-end scenario for the [Natural Functions](/docs/genai/develop/natural-functions/overview) feature.
+This tutorial walks through building an **HTTP service that uses a Natural Function to analyze a customer review** and return structured feedback. It is the end-to-end scenario for the [Natural Functions](../develop/natural-functions/overview.md) feature.
 
 By the end you will have a `POST /api/v1/analyze` endpoint that takes a single customer review and returns a typed `ReviewResponse` containing the overall sentiment, a concise summary, per-topic sentiment, a churn-risk flag, and a suggested follow-up action. All of it is produced by an LLM, using a Natural Function as the body.
 
@@ -102,7 +102,7 @@ Click **Import**. WSO2 Integrator infers and registers three types under the **T
 
 `ReviewResponse` is selected automatically as the function's return type.
 
-> Why these field names matter: the runtime turns the record (and its nested types) into a JSON schema and sends it to the LLM. Field names, types, and any descriptions you add become part of the contract the model is constrained to. See [Typed Return Inference](/docs/genai/develop/natural-functions/overview#typed-return-inference) for the details.
+> Why these field names matter: the runtime turns the record (and its nested types) into a JSON schema and sends it to the LLM. Field names, types, and any descriptions you add become part of the contract the model is constrained to. See [Typed Return Inference](../develop/natural-functions/overview.md#typed-return-inference) for the details.
 
 ### Step 1.4: Create the function
 
@@ -279,5 +279,5 @@ The LLM analyzed the review, identified the overall sentiment, extracted per-top
 
 ## What's next
 
-- **[Natural Functions reference](/docs/genai/develop/natural-functions/overview)** — the single-page reference covering the form, the Prompt node, typed return inference, and calling from a flow.
+- **[Natural Functions reference](../develop/natural-functions/overview.md)** — the single-page reference covering the form, the Prompt node, typed return inference, and calling from a flow.
 - **[Email Generator with Direct LLM](email-generator-direct-llm.md)** — a similar tutorial built around direct LLM calls.

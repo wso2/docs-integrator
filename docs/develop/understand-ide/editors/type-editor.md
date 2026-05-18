@@ -6,7 +6,7 @@ title: Type Editor
 
 The Type editor is the side panel you open whenever you create or change a custom type in WSO2 Integrator. It gives you one form to define records, enums, unions, arrays, and service classes, configure each member or field, and toggle advanced options such as additional fields and read-only types. Every change you save in the editor updates the type's Ballerina source and the type card on the [Type Diagram editor](type-diagram-editor.md).
 
-For an introduction to types and how an integration uses them, see [Core concepts](/docs/get-started/concepts/core#types). For a canvas-level view of how all the types in your integration relate to each other, see the [Type Diagram editor](type-diagram-editor.md).
+For an introduction to types and how an integration uses them, see [Core concepts](../../../get-started/concepts/core.md#types). For a canvas-level view of how all the types in your integration relate to each other, see the [Type Diagram editor](type-diagram-editor.md).
 
 ## Open the editor
 
@@ -88,7 +88,7 @@ An array defines a list of values of the same type, with an optional fixed size.
 
 ### Service class
 
-A service class defines a class with one or more resource methods. Use it as the return type of a [GraphQL service](/docs/develop/integration-artifacts/service/graphql) resolver, or anywhere you need a typed object that exposes behavior alongside data.
+A service class defines a class with one or more resource methods. Use it as the return type of a [GraphQL service](../../integration-artifacts/service/graphql.md) resolver, or anywhere you need a typed object that exposes behavior alongside data.
 
 ![Create a service class type](/img/develop/understand-ide/editors/type-editor/07-create-service-class.png)
 
@@ -180,9 +180,9 @@ The editor generates a `Library` record with a `book` array field and a nested r
 Once the records look right, save the form. The new types are added to the integration and become available everywhere a custom type can be used.
 
 :::tip Common next steps after import
-- Use the generated record as a request or response payload in a [service](/docs/develop/integration-artifacts/service/http).
+- Use the generated record as a request or response payload in a [service](../../integration-artifacts/service/http.md).
 - Map fields from the imported record onto another type in the [Data Mapper editor](datamapper-editor.md).
-- Expose the record from a [GraphQL service](/docs/develop/integration-artifacts/service/graphql) resolver.
+- Expose the record from a [GraphQL service](../../integration-artifacts/service/graphql.md) resolver.
 
 ## What's next
 

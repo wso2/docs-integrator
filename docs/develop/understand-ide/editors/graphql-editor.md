@@ -6,7 +6,7 @@ title: GraphQL Editor
 
 The GraphQL editor, also known as the **GraphQL diagram**, is the editor you open for any GraphQL service in WSO2 Integrator. It renders the service as a node on a canvas, lists every query, mutation, and subscription the service exposes, and draws lines from each operation to the types it returns or accepts. Use it to add or remove operations, edit their signatures, and navigate to the resolver implementation, all from a single view.
 
-For end-to-end usage, including how to create a GraphQL service from scratch or import an existing schema, see [GraphQL Service](/docs/develop/integration-artifacts/service/graphql).
+For end-to-end usage, including how to create a GraphQL service from scratch or import an existing schema, see [GraphQL Service](../../integration-artifacts/service/graphql.md).
 
 ![GraphQL editor showing a GraphQL service with its queries, subscription, and referenced types](/img/develop/understand-ide/editors/graphql-editor/overview.png)
 
@@ -14,7 +14,7 @@ For end-to-end usage, including how to create a GraphQL service from scratch or 
 
 Select a GraphQL service under **Entry points** in the project explorer, or select the service node on the [Integrator view](../views/integration-view.md) design canvas. The editor opens with the service node and the types it references on the canvas.
 
-To create a new GraphQL service before opening the editor, see [GraphQL Service](/docs/develop/integration-artifacts/service/graphql).
+To create a new GraphQL service before opening the editor, see [GraphQL Service](../../integration-artifacts/service/graphql.md).
 
 ## Header
 
@@ -95,7 +95,7 @@ To pan across the canvas, hold scroll-wheel click or **Space** while dragging, o
 
 ## What's next
 
-- [GraphQL Service](/docs/develop/integration-artifacts/service/graphql): end-to-end guide to creating and configuring a GraphQL service.
+- [GraphQL Service](../../integration-artifacts/service/graphql.md): end-to-end guide to creating and configuring a GraphQL service.
 - [Flow Diagram editor](flow-diagram-editor/flow-diagram-editor.md): edit the resolver logic for a query, mutation, or subscription.
 - [Type editor](type-editor.md): define the types the GraphQL schema exposes.
 - [Configure editor](configure-editor.md): change the service's base path, port, or listener.

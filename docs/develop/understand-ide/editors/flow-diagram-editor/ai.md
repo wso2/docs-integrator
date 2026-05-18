@@ -67,7 +67,7 @@ A data loader reads documents from disk into memory so the knowledge base can in
 
 ![Data loaders list with Text Data Loader](/img/develop/flow-design-elements/data-loaders-offered.png)
 
-For the ingestion flow, supported formats, and how to point the loader at a directory of documents, see the [RAG ingestion](/docs/genai/develop/rag/rag-ingestion).
+For the ingestion flow, supported formats, and how to point the loader at a directory of documents, see the [RAG ingestion](../../../../genai/develop/rag/rag-ingestion.md).
 
 ## Augment Query
 
@@ -84,7 +84,7 @@ For the ingestion flow, supported formats, and how to point the loader at a dire
 
 ![Augment Query form with Context, Query, Result, and Result Type fields](/img/develop/flow-design-elements/augment-query-form.png)
 
-For the full RAG query flow (retrieve, augment, generate), see [RAG query](/docs/genai/develop/rag/rag-query).
+For the full RAG query flow (retrieve, augment, generate), see [RAG query](../../../../genai/develop/rag/rag-query.md).
 
 ## Agent
 

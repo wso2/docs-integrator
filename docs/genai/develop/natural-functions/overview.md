@@ -8,7 +8,7 @@ A **natural function** is a function whose body is written in **English** instea
 
 This page is a single, end-to-end reference covering the form that creates the function, the Prompt node, the return type, and how to call it from a flow.
 
-> **Looking for a hands-on walkthrough?** See the **[Customer Review Analyzer with Natural Function](/docs/genai/tutorials/review-summarizer-natural-function)** tutorial. It builds the example shown on this page from an empty project to a working `POST /api/v1/analyze` endpoint.
+> **Looking for a hands-on walkthrough?** See the **[Customer Review Analyzer with Natural Function](../../tutorials/review-summarizer-natural-function.md)** tutorial. It builds the example shown on this page from an empty project to a working `POST /api/v1/analyze` endpoint.
 
 :::caution Experimental feature
 Natural functions are an experimental feature. Enable experimental features in WSO2 Integrator before using them: open **Settings**, expand **Extensions**, select the **Ballerina** extension, and tick **Experimental: Enable Experimental Feature**.
@@ -105,7 +105,7 @@ When you create a natural function, WSO2 Integrator automatically binds it to th
 
 If a provider already exists in the project, pick it from the dropdown and click **Save**. If not, click **+ Create New Model Provider** and pick from the catalogue (OpenAI, Anthropic, Azure OpenAI, Default WSO2, …).
 
-Adding a provider, the per-provider form fields, the supported models, and the advanced HTTP knobs are all documented in **[AI Connections and Stores: Model Providers](/docs/genai/develop/components/model-providers)**. Every natural function, direct LLM call, RAG `generate` node, and AI Agent in the project shares the same provider connections.
+Adding a provider, the per-provider form fields, the supported models, and the advanced HTTP knobs are all documented in **[AI Connections and Stores: Model Providers](../components/model-providers.md)**. Every natural function, direct LLM call, RAG `generate` node, and AI Agent in the project shares the same provider connections.
 
 ---
 
@@ -188,13 +188,13 @@ Once the function exists, calling it from a flow is one step.
 
 Natural functions are first-class functions, so they can call each other from inside any flow. Open a function flow, select **+ Add Node > Statement > Call Function**, and pick the natural function from the picker. Two-step prompts (extract first, then transform) are often cleaner than one giant prompt; each step has its own type and can be tested in isolation.
 
-A natural function can also be wired up as an [agent tool](/docs/genai/develop/agents/tools): the agent decides *whether* to call it, and the natural function's own model handles the call with a tighter prompt and stricter return type.
+A natural function can also be wired up as an [agent tool](../agents/tools.md): the agent decides *whether* to call it, and the natural function's own model handles the call with a tighter prompt and stricter return type.
 
 ---
 
 ## What's Next
 
-- **[Customer Review Analyzer with Natural Function (Tutorial)](/docs/genai/tutorials/review-summarizer-natural-function)** — end-to-end tutorial that builds a `POST /api/v1/analyze` service using everything on this page.
-- **[Model Providers](/docs/genai/develop/components/model-providers)** — switch providers, tune temperature, max tokens, and retries for the Prompt node's connection.
-- **[Direct LLM Calls](/docs/genai/develop/direct-llm/overview)** — when you only need a single in-flow call without packaging it as a function.
-- **[AI Agents](/docs/genai/develop/agents/overview)** — when natural functions become tools an agent can choose to call.
+- **[Customer Review Analyzer with Natural Function (Tutorial)](../../tutorials/review-summarizer-natural-function.md)** — end-to-end tutorial that builds a `POST /api/v1/analyze` service using everything on this page.
+- **[Model Providers](../components/model-providers.md)** — switch providers, tune temperature, max tokens, and retries for the Prompt node's connection.
+- **[Direct LLM Calls](../direct-llm/overview.md)** — when you only need a single in-flow call without packaging it as a function.
+- **[AI Agents](../agents/overview.md)** — when natural functions become tools an agent can choose to call.

@@ -9,16 +9,16 @@ A **direct LLM call** is the simplest way to use AI in WSO2 Integrator. You add 
 This page is a single, end-to-end reference for everything you need to make that call work in WSO2 Integrator: adding a model provider, dropping a `generate` node, writing the prompt, and binding the response to a Ballerina type.
 
 :::tip Looking for a hands-on walkthrough?
-See the **[Email Generator with Direct LLM](/docs/genai/tutorials/email-generator-direct-llm)** tutorial. It builds a `POST /emails/generate` service end-to-end using everything described on this page.
+See the **[Email Generator with Direct LLM](../../tutorials/email-generator-direct-llm.md)** tutorial. It builds a `POST /emails/generate` service end-to-end using everything described on this page.
 
 ## When to use direct LLM calls
 
 | Use direct LLM when… | Look elsewhere when… |
 |---|---|
-| You need a single-shot LLM call inside a flow. | You want a typed function with an English body. Use [Natural Functions](/docs/genai/develop/natural-functions/overview). |
-| You want full control over the prompt at the point of use. | The same prompt is reused all over the codebase. Wrap it in a [natural function](/docs/genai/develop/natural-functions/overview) instead. |
-| The LLM doesn't need to call any tools or remember earlier turns. | The task needs tool calls, multi-step reasoning, or conversation history. Use an [AI Agent](/docs/genai/develop/agents/overview). |
-| You need to ground answers in your own documents. | Add [RAG](/docs/genai/develop/rag/overview) and pass the retrieved context into the prompt. |
+| You need a single-shot LLM call inside a flow. | You want a typed function with an English body. Use [Natural Functions](../natural-functions/overview.md). |
+| You want full control over the prompt at the point of use. | The same prompt is reused all over the codebase. Wrap it in a [natural function](../natural-functions/overview.md) instead. |
+| The LLM doesn't need to call any tools or remember earlier turns. | The task needs tool calls, multi-step reasoning, or conversation history. Use an [AI Agent](../agents/overview.md). |
+| You need to ground answers in your own documents. | Add [RAG](../rag/overview.md) and pass the retrieved context into the prompt. |
 
 ## How a direct LLM call looks in a flow
 
@@ -28,13 +28,13 @@ A typical flow with a direct LLM call has a `generate` node sitting between your
 
 To build this you do three things, in order:
 
-1. **Pick a Model Provider connection.** You can use the **Default WSO2 Model Provider**, or see **[Model Providers](/docs/genai/develop/components/model-providers)** for other providers (OpenAI, Anthropic, Azure OpenAI, etc.).
+1. **Pick a Model Provider connection.** You can use the **Default WSO2 Model Provider**, or see **[Model Providers](../components/model-providers.md)** for other providers (OpenAI, Anthropic, Azure OpenAI, etc.).
 2. [**Add the Generate Node**](#the-generate-node), the call itself.
 3. [**Write the prompt**](#the-prompt-editor) and pick the expected type.
 
 The rest of this page walks each step in order.
 
-If your project does not have a model provider yet, head over to [Model Providers](/docs/genai/develop/components/model-providers) first. The fastest one is the **Default WSO2 Model Provider**. No API key required, just a one-time WSO2 sign-in.
+If your project does not have a model provider yet, head over to [Model Providers](../components/model-providers.md) first. The fastest one is the **Default WSO2 Model Provider**. No API key required, just a one-time WSO2 sign-in.
 
 ---
 
@@ -62,7 +62,7 @@ When the form opens, three fields are all you need: the **Prompt**, the **Result
 
 The **Expected Type** field is what makes the response come back as a typed value. A `string`, an `int`, a record, an array. Not a blob of text you have to parse yourself. The runtime derives a JSON schema from the type, asks the model to fill it, parses the response back, and hands the typed value to the next node. **You don't need to write any schema instructions in the prompt.** The type drives that automatically.
 
-There are no per-call overrides on the `generate` node. Anything you'd tune (temperature, max tokens, and so on) lives on the model provider connection and applies to every call that uses it. See [Model Providers](/docs/genai/develop/components/model-providers) for the full list of advanced configurations per provider.
+There are no per-call overrides on the `generate` node. Anything you'd tune (temperature, max tokens, and so on) lives on the model provider connection and applies to every call that uses it. See [Model Providers](../components/model-providers.md) for the full list of advanced configurations per provider.
 
 ### After saving
 
@@ -90,8 +90,8 @@ The **Insert** menu is the bridge between the prompt and the rest of your projec
 
 ## What's next
 
-- **[Email Generator with Direct LLM (Tutorial)](/docs/genai/tutorials/email-generator-direct-llm)** — build a complete `POST /emails/generate` service from scratch using everything on this page.
-- **[Model Providers](/docs/genai/develop/components/model-providers)** — switch the LLM provider for production; tune temperature, max tokens, retries.
-- **[Natural Functions](/docs/genai/develop/natural-functions/overview)** — when the same prompt is used in many places, package it as a typed function.
-- **[RAG](/docs/genai/develop/rag/overview)** — ground the model's answers in your own documents.
-- **[AI Agents](/docs/genai/develop/agents/overview)** — if the task needs tools or multi-turn reasoning.
+- **[Email Generator with Direct LLM (Tutorial)](../../tutorials/email-generator-direct-llm.md)** — build a complete `POST /emails/generate` service from scratch using everything on this page.
+- **[Model Providers](../components/model-providers.md)** — switch the LLM provider for production; tune temperature, max tokens, retries.
+- **[Natural Functions](../natural-functions/overview.md)** — when the same prompt is used in many places, package it as a typed function.
+- **[RAG](../rag/overview.md)** — ground the model's answers in your own documents.
+- **[AI Agents](../agents/overview.md)** — if the task needs tools or multi-turn reasoning.

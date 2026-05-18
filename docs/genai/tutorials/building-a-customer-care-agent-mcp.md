@@ -151,7 +151,7 @@ Try the following messages to exercise all three tools:
     }}
 />
 
-For more detail on using the chat panel, see [Try-It experiences](../../develop/test/built-in-try-it-tool#try-it-experiences).
+For more detail on using the chat panel, see [Try-It experiences](../../develop/test/built-in-try-it-tool.md#try-it-experiences).
 
 **`connections.bal`**: model provider and MCP toolkit connection:
 
@@ -229,7 +229,7 @@ To run and test the agent, follow the same steps in the **Visual Designer** tab 
 
 ## What's next
 
-- [Exposing a service as an MCP server](../develop/mcp/exposing-as-mcp) — Build your own MCP server like the one used in this tutorial
-- [Consuming MCP from an agent](../develop/mcp/consuming-mcp-from-agent) — Deeper reference for `ai:McpToolKit` options
-- [Adding memory to an agent](../develop/agents/memory) — Persist conversation history across sessions
-- [AI agent observability](../develop/agents/observability) — Trace tool calls and monitor agent performance
+- [Exposing a service as an MCP server](../develop/mcp/exposing-as-mcp.md) — Build your own MCP server like the one used in this tutorial
+- [Consuming MCP from an agent](../develop/mcp/consuming-mcp-from-agent.md) — Deeper reference for `ai:McpToolKit` options
+- [Adding memory to an agent](../develop/agents/memory.md) — Persist conversation history across sessions
+- [AI agent observability](../develop/agents/observability.md) — Trace tool calls and monitor agent performance

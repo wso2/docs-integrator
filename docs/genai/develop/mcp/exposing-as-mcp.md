@@ -435,5 +435,5 @@ Once your service is running, MCP clients connect by URL.
 ## What's next
 
 - **[Consuming MCP from an Agent](consuming-mcp-from-agent.md)** — the other half of the MCP picture.
-- **[Tools (in AI Agents)](/docs/genai/develop/agents/tools)** — local-tool reference; the same description-quality rules apply.
+- **[Tools (in AI Agents)](../agents/tools.md)** — local-tool reference; the same description-quality rules apply.
 - **[HTTP service](../../../develop/integration-artifacts/service/http.md)** — for the HTTP-level options exposed through `httpConfig`.
