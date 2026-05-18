@@ -25,9 +25,9 @@ In this tutorial, you will learn how to:
 
 Before getting started, ensure that the following requirements are met:
 
-- Install the [WSO2 Integrator VS Code extension](../../get-started/setup/local-setup.md)
+- Install the [WSO2 Integrator VS Code extension](/docs/get-started/setup/local-setup)
 - Set up an MSSQL database for agent memory persistence
-- Have a basic understanding of memory configuration concepts. For more information, refer to [Memory](../develop/agents/memory.md)
+- Have a basic understanding of memory configuration concepts. For more information, refer to [Memory](/docs/genai/develop/agents/memory)
 
 ## Architecture
 
@@ -64,7 +64,7 @@ In this section, you will create the integration project and configure the AI ag
 
 ### Step 1: Create the integration project
 
-Create a new integration project by following the instructions in [Create a project](../../develop/create-integrations/create-a-project.md).
+Create a new integration project by following the instructions in [Create a project](develop/create-integrations/create-a-project.md).
 
 ### Step 2: Define the data type
 
@@ -99,7 +99,7 @@ final KbArticle[] & readonly kbArticles = [
 
 ### Step 3: Create the AI agent
 
-Create the AI agent named `itHelpDeskAgent` by following the instructions in [Creating an Agent](../develop/agents/creating-an-agent.md).
+Create the AI agent named `itHelpDeskAgent` by following the instructions in [Creating an Agent](genai/develop/agents/creating-an-agent.md).
 
 ### Step 4: Update the system prompt
 
@@ -129,7 +129,7 @@ final ai:Agent itHelpDeskAgent = check new (
 
 ### Step 5: Add a tool to the agent
 
-Add the following tool to the agent by following the instructions in [Create custom tool](../develop/agents/tools.md#4-create-custom-tool).
+Add the following tool to the agent by following the instructions in [Create custom tool](/docs/genai/develop/agents/tools#4-create-custom-tool).
 
 ```ballerina
 # agents.bal
@@ -152,7 +152,7 @@ isolated function searchKnowledgeBase(string query) returns string {
 
 ### Step 6: Add persistent memory to the agent
 
-Add persistent memory by following the instructions in [Memory](../develop/agents/memory.md).
+Add persistent memory by following the instructions in [Memory](genai/develop/agents/memory.md).
 
     ![Agent with inmemory](/img/genai/develop/agents/29-agent-with-inmemory.png)
 

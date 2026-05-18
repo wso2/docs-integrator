@@ -159,7 +159,7 @@ The Devant Chunker is added from the same **Select Chunker** picker. Its create 
 | **Maximum Overlap Size in Characters** | `50` | Any non-negative integer | Overlap characters between adjacent chunks. |
 | **Chunking Strategy** | `RECURSIVE` | `RECURSIVE`, `PARAGRAPH`, `SENTENCE`, `CHARACTER` | The chunking strategy WSO2 Integration Platform uses. |
 
-Plus the [Standard HTTP Advanced Configurations](model-providers.md#standard-http-advanced-configurations).
+Plus the [Standard HTTP Advanced Configurations](/docs/genai/develop/components/model-providers#standard-http-advanced-configurations).
 
 > Only binary documents are accepted. The document's metadata must include a file name so WSO2 Integration Platform can detect the source format.
 
@@ -180,7 +180,7 @@ The defaults (`200` / `40`) are tuned for prose. Code-heavy or table-heavy conte
 
 ## What's next
 
-- [Embedding Providers](embedding-providers.md) - Configure the model that converts chunks into vectors.
-- [Vector Stores](vector-stores.md) - Set up the store that indexes and retrieves those vectors.
-- [Knowledge Bases](knowledge-bases.md) - Combine a chunker, embedding provider, and vector store into a single ingest-and-retrieve component.
-- [RAG](../rag/overview.md) - End-to-end walkthrough of the ingestion and query flows.
+- [Embedding Providers](/docs/genai/develop/components/embedding-providers) - Configure the model that converts chunks into vectors.
+- [Vector Stores](/docs/genai/develop/components/vector-stores) - Set up the store that indexes and retrieves those vectors.
+- [Knowledge Bases](/docs/genai/develop/components/knowledge-bases) - Combine a chunker, embedding provider, and vector store into a single ingest-and-retrieve component.
+- [RAG](/docs/genai/develop/rag/overview) - End-to-end walkthrough of the ingestion and query flows.
