@@ -15,14 +15,14 @@ The pattern is implemented at the point where the flow controls the receive call
 
 ## Loop-driven polling
 
-Use loop-driven polling with [while loops](/docs/develop/understand-ide/editors/flow-diagram-editor/control#while) when the integration should keep checking a channel or endpoint while it controls the maximum attempts and wait interval. The receive or status-check call stays inside the loop, and the flow exits when it receives a message that is ready to process.
+Use loop-driven polling with [while loops](/develop/understand-ide/editors/flow-diagram-editor/control#while) when the integration should keep checking a channel or endpoint while it controls the maximum attempts and wait interval. The receive or status-check call stays inside the loop, and the flow exits when it receives a message that is ready to process.
 
-1. Create or open the [HTTP service resource](/docs/develop/integration-artifacts/service/http#creating-an-http-service) that starts the polling flow.
-2. Add an HTTP client connection for the source that the flow must poll. See [adding a connection](/docs/develop/integration-artifacts/supporting/connections#adding-a-connection) and the [HTTP client reference](/docs/connectors/catalog/built-in/http/action-reference#client).
-3. Add [configurable variables](/docs/reference/config/configuration-management#configurable-variables) for values such as `maxAttempts` and `pollDelaySeconds`.
-4. Add a [While node](/docs/develop/understand-ide/editors/flow-diagram-editor/control#while) that runs while the attempt count is less than `maxAttempts`.
+1. Create or open the [HTTP service resource](/develop/integration-artifacts/service/http#creating-an-http-service) that starts the polling flow.
+2. Add an HTTP client connection for the source that the flow must poll. See [adding a connection](/develop/integration-artifacts/supporting/connections#adding-a-connection) and the [HTTP client reference](/connectors/catalog/built-in/http/action-reference#client).
+3. Add [configurable variables](/reference/config/configuration-management#configurable-variables) for values such as `maxAttempts` and `pollDelaySeconds`.
+4. Add a [While node](/develop/understand-ide/editors/flow-diagram-editor/control#while) that runs while the attempt count is less than `maxAttempts`.
 5. Inside the loop, add the HTTP client operation that asks for the current message or status.
-6. Add an [If node](/docs/develop/understand-ide/editors/flow-diagram-editor/control#if) that returns the message when it is ready. Otherwise, wait for the configured delay and continue the loop.
+6. Add an [If node](/develop/understand-ide/editors/flow-diagram-editor/control#if) that returns the message when it is ready. Otherwise, wait for the configured delay and continue the loop.
 
 ```ballerina
 // docs-fold-start: Supporting definitions
@@ -63,12 +63,12 @@ service /messages on new http:Listener(8080) {
 
 ## Scheduled broker polling
 
-Use scheduled broker polling when each automation run should pull at most one message from a broker and then stop. This keeps the schedule outside the receive logic while the flow still controls when it asks the broker for the next message. For JMS-backed channels, use the [JMS Message Consumer actions](/docs/connectors/catalog/messaging/java.jms/actions#message-consumer) with `receive` or `receiveNoWait`.
+Use scheduled broker polling when each automation run should pull at most one message from a broker and then stop. This keeps the schedule outside the receive logic while the flow still controls when it asks the broker for the next message. For JMS-backed channels, use the [JMS Message Consumer actions](/connectors/catalog/messaging/java.jms/actions#message-consumer) with `receive` or `receiveNoWait`.
 
-1. Create a [scheduled automation](/docs/develop/integration-artifacts/automation#creating-an-automation) for the polling interval.
-2. Add the `java.jms` **JMS MessageConsumer** connection and bind the broker settings to configurable variables. See the [JMS consumer example](/docs/connectors/catalog/messaging/java.jms/example#adding-the-javajms-connector).
+1. Create a [scheduled automation](/develop/integration-artifacts/automation#creating-an-automation) for the polling interval.
+2. Add the `java.jms` **JMS MessageConsumer** connection and bind the broker settings to configurable variables. See the [JMS consumer example](/connectors/catalog/messaging/java.jms/example#adding-the-javajms-connector).
 3. Add the **Receive** operation from the JMS consumer connection and set the timeout value for the polling window.
-4. Add an [If node](/docs/develop/understand-ide/editors/flow-diagram-editor/control#if) that checks whether the received value is a message.
+4. Add an [If node](/develop/understand-ide/editors/flow-diagram-editor/control#if) that checks whether the received value is a message.
 5. Add the processing steps inside the branch that received a message.
 6. Acknowledge the message only after the processing steps finish successfully.
 

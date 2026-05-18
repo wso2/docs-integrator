@@ -15,10 +15,10 @@ The pattern is implemented at the consumer boundary or immediately inside the co
 
 ## Broker-side selection
 
-Use broker-side selection when the broker can evaluate the criteria before the message reaches the service. For JMS-backed channels, configure a [JMS listener service](/docs/connectors/catalog/messaging/java.jms/triggers#service) with `messageSelector` so the service receives only messages whose headers or properties match the selector expression.
+Use broker-side selection when the broker can evaluate the criteria before the message reaches the service. For JMS-backed channels, configure a [JMS listener service](/connectors/catalog/messaging/java.jms/triggers#service) with `messageSelector` so the service receives only messages whose headers or properties match the selector expression.
 
-1. Create the JMS-backed event service with the [JMS listener](/docs/connectors/catalog/messaging/java.jms/triggers#listener).
-2. Configure the listener connection with the broker endpoint and credentials through [configurable variables](/docs/reference/config/configuration-management#configurable-variables).
+1. Create the JMS-backed event service with the [JMS listener](/connectors/catalog/messaging/java.jms/triggers#listener).
+2. Configure the listener connection with the broker endpoint and credentials through [configurable variables](/reference/config/configuration-management#configurable-variables).
 3. Set the service queue or topic in `@jms:ServiceConfig`.
 4. Set `messageSelector` to the selector expression, such as `eventType = 'OrderCreated' AND priority = 'high'`.
 5. Add processing steps in the `onMessage` flow. The broker delivers only messages that match the selector.
@@ -54,11 +54,11 @@ service "priority-order-consumer" on orderListener {
 
 ## Flow-level selection
 
-Use flow-level selection with [if/else statements](/docs/develop/understand-ide/editors/flow-diagram-editor/control#if) when the consumer must inspect the delivered payload, call another system, or apply rules that cannot be expressed as a broker selector. The service still reads from the shared channel, but the accepted branch contains the processing logic and the unmatched branch is ignored or handled separately.
+Use flow-level selection with [if/else statements](/develop/understand-ide/editors/flow-diagram-editor/control#if) when the consumer must inspect the delivered payload, call another system, or apply rules that cannot be expressed as a broker selector. The service still reads from the shared channel, but the accepted branch contains the processing logic and the unmatched branch is ignored or handled separately.
 
 1. Create or open the consumer service that receives messages from the shared channel.
-2. Open the message handler flow and [add a step](/docs/develop/understand-ide/editors/flow-diagram-editor/#anatomy-of-the-editor).
-3. Add an [If node](/docs/develop/understand-ide/editors/flow-diagram-editor/control#if) at the point where the flow has the payload fields needed for selection.
+2. Open the message handler flow and [add a step](/develop/understand-ide/editors/flow-diagram-editor/#anatomy-of-the-editor).
+3. Add an [If node](/develop/understand-ide/editors/flow-diagram-editor/control#if) at the point where the flow has the payload fields needed for selection.
 4. Set the condition to the consumer criteria, such as `order.priority == "high" && order.region == "west"`.
 5. Add the processing steps inside the **True** branch.
 6. Leave the **False** branch empty when unmatched messages should be ignored, or add separate handling for rejected messages.

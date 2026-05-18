@@ -16,10 +16,10 @@ The pattern is implemented by placing a filtering construct at the point where t
 
 ## Predicate-based filtering
 
-Use predicate-based filtering with [if/else statements](/docs/develop/understand-ide/editors/flow-diagram-editor/control#if) when each message carries the fields needed for a single boolean decision, such as priority, source, header, or status. The accepted path contains the forwarding or processing action. The rejected path does nothing or handles the rejection separately.
+Use predicate-based filtering with [if/else statements](/develop/understand-ide/editors/flow-diagram-editor/control#if) when each message carries the fields needed for a single boolean decision, such as priority, source, header, or status. The accepted path contains the forwarding or processing action. The rejected path does nothing or handles the rejection separately.
 
-1. Open the flow and [add a step](/docs/develop/understand-ide/editors/flow-diagram-editor/#anatomy-of-the-editor).
-2. Add an [If node](/docs/develop/understand-ide/editors/flow-diagram-editor/control#if) at the point where the message has enough data for the decision.
+1. Open the flow and [add a step](/develop/understand-ide/editors/flow-diagram-editor/#anatomy-of-the-editor).
+2. Add an [If node](/develop/understand-ide/editors/flow-diagram-editor/control#if) at the point where the message has enough data for the decision.
 3. Set the condition to `message.priority == HIGH_PRIORITY`.
 4. Add the accepted action inside the matching branch.
 5. Leave the other branch empty when unmatched messages should be discarded.
@@ -59,10 +59,10 @@ service /api/v1 on new http:Listener(8080) {
 
 ## Collection-level filtering
 
-Use collection-level filtering with [query expressions](/docs/reference/language/query-expressions) when the flow already has a group of messages or records and only a subset should continue. Keep the predicate in the `where` clause so the result is the accepted collection.
+Use collection-level filtering with [query expressions](/reference/language/query-expressions) when the flow already has a group of messages or records and only a subset should continue. Keep the predicate in the `where` clause so the result is the accepted collection.
 
-1. Open the flow and [add a step](/docs/develop/understand-ide/editors/flow-diagram-editor/#anatomy-of-the-editor).
-2. Add a [Map Data or Declare Variable step](/docs/reference/language/query-expressions).
+1. Open the flow and [add a step](/develop/understand-ide/editors/flow-diagram-editor/#anatomy-of-the-editor).
+2. Add a [Map Data or Declare Variable step](/reference/language/query-expressions).
 3. Set the output type to the accepted collection type, such as `Message[]`.
 4. Enter a query expression with a `where` clause for the filter predicate.
 5. Use the resulting collection in the next processing or forwarding step.
@@ -96,9 +96,9 @@ function filterHighPriorityMessages(Message[] messages) returns Message[] {
 
 ## Boundary-level filtering
 
-Use boundary-level filtering when the input artifact can reject or route messages before custom flow logic runs. For HTTP-facing inputs, use a [request interceptor](/docs/connectors/catalog/built-in/http/trigger-reference#interceptors) when the decision can be made from request metadata before the resource executes. Other inputs can use their own handler, listener, or subscription selection points.
+Use boundary-level filtering when the input artifact can reject or route messages before custom flow logic runs. For HTTP-facing inputs, use a [request interceptor](/connectors/catalog/built-in/http/trigger-reference#interceptors) when the decision can be made from request metadata before the resource executes. Other inputs can use their own handler, listener, or subscription selection points.
 
-1. Add the source artifact, such as an [HTTP service](/docs/develop/integration-artifacts/service/http#creating-an-http-service).
+1. Add the source artifact, such as an [HTTP service](/develop/integration-artifacts/service/http#creating-an-http-service).
 2. Add a request interceptor for the service boundary.
 3. Read the request metadata needed for the filter, such as a priority header.
 4. Return a response for messages that should stop at the boundary.
@@ -149,9 +149,9 @@ service /events on eventListener {
 
 ## Broker-side delivery filtering
 
-Use broker-side delivery filtering when RabbitMQ can reduce what reaches the flow before consumption. Route matching messages into a dedicated queue with a direct exchange and binding key, then configure the RabbitMQ trigger to consume only that queue. Use [RabbitMQ exchange bindings](/docs/connectors/catalog/messaging/rabbitmq/actions#exchange-management) to bind the accepted-message queue to the exchange with the accepted routing key.
+Use broker-side delivery filtering when RabbitMQ can reduce what reaches the flow before consumption. Route matching messages into a dedicated queue with a direct exchange and binding key, then configure the RabbitMQ trigger to consume only that queue. Use [RabbitMQ exchange bindings](/connectors/catalog/messaging/rabbitmq/actions#exchange-management) to bind the accepted-message queue to the exchange with the accepted routing key.
 
-1. Add the [RabbitMQ event integration](/docs/develop/integration-artifacts/event/rabbitmq#creating-a-rabbitmq-service).
+1. Add the [RabbitMQ event integration](/develop/integration-artifacts/event/rabbitmq#creating-a-rabbitmq-service).
 2. Configure the RabbitMQ trigger connection with the broker host and port.
 3. Set **Queue Name** to the queue that receives accepted messages, such as `high-priority-orders`.
 4. Create the RabbitMQ broker resources with connector actions or broker administration: declare a direct exchange, declare the accepted-message queue, and bind the queue to the exchange with the accepted routing key.

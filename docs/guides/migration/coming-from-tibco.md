@@ -257,7 +257,7 @@ To build a deployable artifact:
 bal build
 ```
 
-See [Deploy](/docs/deploy/overview) for Docker, Kubernetes, and cloud deployment options.
+See [Deploy](/deploy/overview) for Docker, Kubernetes, and cloud deployment options.
 
 ## Concept mapping
 
@@ -387,7 +387,7 @@ For each TIBCO connection resource:
 - **JMS Connection**: Use `ballerinax/kafka` or `ballerinax/rabbitmq`
 - **WSDL/SOAP service**: Run `bal wsdl` to generate a type-safe Ballerina client
 - **File Connection**: Use `ballerina/file`, `ballerina/io`, or `ballerina/ftp`
-- Check the [Connectors](/docs/connectors/overview) page for the full list.
+- Check the [Connectors](/connectors/overview) page for the full list.
 
 ### 4. Activity constructs
 
@@ -412,7 +412,7 @@ The tool maps TIBCO's built-in activities to their Ballerina equivalents:
 - **Shared Variables scope**: TIBCO Shared Variables are global and mutable. In Ballerina, use `configurable` variables (read from `Config.toml`) for static config, or a database/cache for runtime-mutable shared state.
 - **Checkpoint vs. transaction**: TIBCO Checkpoints define recovery points in a process. In Ballerina, use `transaction` blocks for rollback boundaries. True process-level checkpointing requires external state storage.
 - **Mapper Activity output format**: The TIBCO Mapper Activity works on XML data. The migration tool converts these to Ballerina record types, but review complex mappings (especially those with namespace-qualified XML) as they may need adjustments.
-- **Palette connectors**: Not all TIBCO Palette connectors have direct equivalents on Ballerina Central. Check the [Connectors](/docs/connectors/overview) page; for connectors without a match, use the generic `http:Client` or implement a custom Ballerina client.
+- **Palette connectors**: Not all TIBCO Palette connectors have direct equivalents on Ballerina Central. Check the [Connectors](/connectors/overview) page; for connectors without a match, use the generic `http:Client` or implement a custom Ballerina client.
 - **Sub-process calling conventions**: TIBCO sub-processes can be called synchronously or asynchronously. In Ballerina, use a regular function call for synchronous and `start` for fire-and-forget.
 
 ## Before/After examples

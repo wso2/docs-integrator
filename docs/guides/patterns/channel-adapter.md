@@ -17,9 +17,9 @@ The adapter is usually implemented at the edge of the flow. Use connector client
 
 A connector client adapts an external application API into the integration flow. Create the connection with managed connection settings, call the required connector operation, and pass the typed result into the next step.
 
-1. Add the connector client connection for the application channel. See [adding a connection](/docs/develop/integration-artifacts/supporting/connections#adding-a-connection); for this example, select the Jira connector as shown in [adding the Jira connector](/docs/connectors/catalog/productivity-collaboration/jira/example#adding-the-jira-connector).
-2. Configure the endpoint, authentication values, and other connection properties with project configurables. Use the connector-specific [Jira setup guide](/docs/connectors/catalog/productivity-collaboration/jira/setup-guide) and [Jira connection configuration steps](/docs/connectors/catalog/productivity-collaboration/jira/example#configuring-the-jira-connection).
-3. Add the connector operation that reads from or writes to the application channel. Use the [Jira action reference](/docs/connectors/catalog/productivity-collaboration/jira/actions#projects) to select the project operation for this example.
+1. Add the connector client connection for the application channel. See [adding a connection](/develop/integration-artifacts/supporting/connections#adding-a-connection); for this example, select the Jira connector as shown in [adding the Jira connector](/connectors/catalog/productivity-collaboration/jira/example#adding-the-jira-connector).
+2. Configure the endpoint, authentication values, and other connection properties with project configurables. Use the connector-specific [Jira setup guide](/connectors/catalog/productivity-collaboration/jira/setup-guide) and [Jira connection configuration steps](/connectors/catalog/productivity-collaboration/jira/example#configuring-the-jira-connection).
+3. Add the connector operation that reads from or writes to the application channel. Use the [Jira action reference](/connectors/catalog/productivity-collaboration/jira/actions#projects) to select the project operation for this example.
 4. Map the connector response to the message shape used by the rest of the flow.
 
 ```ballerina
@@ -50,11 +50,11 @@ public function readProject(string projectKey) returns jira:Project|error {
 
 ## HTTP service as inbound channel adapter
 
-An HTTP service adapts an inbound HTTP channel into an integration flow. Define the service resource as the adapter entry point, receive a typed request payload, and return the typed response expected by the caller. See [creating an HTTP service](/docs/develop/integration-artifacts/service/http#creating-an-http-service) for the service setup flow.
+An HTTP service adapts an inbound HTTP channel into an integration flow. Define the service resource as the adapter entry point, receive a typed request payload, and return the typed response expected by the caller. See [creating an HTTP service](/develop/integration-artifacts/service/http#creating-an-http-service) for the service setup flow.
 
-1. Create an HTTP service for the inbound channel. See [creating an HTTP service](/docs/develop/integration-artifacts/service/http#creating-an-http-service).
-2. Add the resource that represents the inbound adapter operation. Use [resource inputs](/docs/develop/integration-artifacts/service/http#defining-inputs) to define the request payload or parameters.
-3. Define the response payload type for the resource with [response schemas](/docs/develop/integration-artifacts/service/http#defining-response-schemas).
+1. Create an HTTP service for the inbound channel. See [creating an HTTP service](/develop/integration-artifacts/service/http#creating-an-http-service).
+2. Add the resource that represents the inbound adapter operation. Use [resource inputs](/develop/integration-artifacts/service/http#defining-inputs) to define the request payload or parameters.
+3. Define the response payload type for the resource with [response schemas](/develop/integration-artifacts/service/http#defining-response-schemas).
 4. Add the flow logic that transforms or forwards the received message.
 
 ```ballerina
@@ -84,11 +84,11 @@ service /projects on projectListener {
 
 ## Broker-backed channel adapter
 
-Use a broker listener when the channel is a messaging broker rather than an application API or HTTP endpoint. The service receives records from the broker, converts each record into the flow payload, and acknowledges or publishes through the connector according to the channel contract. Use the relevant broker guide, such as [Kafka consumers](/docs/develop/integration-artifacts/event/kafka#creating-a-kafka-listener), [RabbitMQ services](/docs/develop/integration-artifacts/event/rabbitmq#creating-a-rabbitmq-service), or the [JMS listener](/docs/connectors/catalog/messaging/java.jms/triggers#listener).
+Use a broker listener when the channel is a messaging broker rather than an application API or HTTP endpoint. The service receives records from the broker, converts each record into the flow payload, and acknowledges or publishes through the connector according to the channel contract. Use the relevant broker guide, such as [Kafka consumers](/develop/integration-artifacts/event/kafka#creating-a-kafka-listener), [RabbitMQ services](/develop/integration-artifacts/event/rabbitmq#creating-a-rabbitmq-service), or the [JMS listener](/connectors/catalog/messaging/java.jms/triggers#listener).
 
-1. Create the broker listener for the channel. For Kafka, see [creating a Kafka consumer](/docs/develop/integration-artifacts/event/kafka#creating-a-kafka-listener); for RabbitMQ, see [creating a RabbitMQ service](/docs/develop/integration-artifacts/event/rabbitmq#creating-a-rabbitmq-service); for JMS, see the [JMS listener](/docs/connectors/catalog/messaging/java.jms/triggers#listener).
-2. Configure the broker endpoint, topic or queue, and credentials with configurables. For Kafka, use [service configuration](/docs/develop/integration-artifacts/event/kafka#service-configuration); for RabbitMQ, use [listener configuration](/docs/develop/integration-artifacts/event/rabbitmq#listener-configuration).
-3. Add the message-handling function for the broker event. For Kafka, use [service configuration](/docs/develop/integration-artifacts/event/kafka#service-configuration); for RabbitMQ, use [event handlers](/docs/develop/integration-artifacts/event/rabbitmq#event-handlers).
+1. Create the broker listener for the channel. For Kafka, see [creating a Kafka consumer](/develop/integration-artifacts/event/kafka#creating-a-kafka-listener); for RabbitMQ, see [creating a RabbitMQ service](/develop/integration-artifacts/event/rabbitmq#creating-a-rabbitmq-service); for JMS, see the [JMS listener](/connectors/catalog/messaging/java.jms/triggers#listener).
+2. Configure the broker endpoint, topic or queue, and credentials with configurables. For Kafka, use [service configuration](/develop/integration-artifacts/event/kafka#service-configuration); for RabbitMQ, use [listener configuration](/develop/integration-artifacts/event/rabbitmq#listener-configuration).
+3. Add the message-handling function for the broker event. For Kafka, use [service configuration](/develop/integration-artifacts/event/kafka#service-configuration); for RabbitMQ, use [event handlers](/develop/integration-artifacts/event/rabbitmq#event-handlers).
 4. Convert the broker record to the typed payload used inside the flow.
 
 ```ballerina
