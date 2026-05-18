@@ -6,7 +6,7 @@ title: gRPC Tool
 
 The `bal grpc` tool generates Ballerina code from Protocol Buffer (`.proto`) files. It creates service stubs with RPC method signatures, client connectors for calling gRPC services, and Ballerina record types that correspond to protobuf message definitions. This lets you integrate with gRPC-based microservices using idiomatic Ballerina code.
 
-gRPC code generation is not available through the Visual Designer — **+ Add Artifact** does not include a gRPC option. Use the integrated terminal in your project to run `bal grpc` commands directly.
+gRPC code generation is not available through the Visual Designer. The **+ Add Artifact** menu does not include a gRPC option. Use the integrated terminal in your project to run `bal grpc` commands directly.
 
 ---
 
@@ -94,7 +94,7 @@ my-integration/
 
 ### Step 2: Open the terminal at the project root
 
-In VS Code open the integrated terminal (`` Ctrl+` ``) and confirm you are in the project root — the directory that contains `Ballerina.toml`:
+In the IDE, open the integrated terminal (`` Ctrl+` ``) and confirm you are in the project root, the directory that contains `Ballerina.toml`:
 
 ```bash
 ls Ballerina.toml
@@ -120,7 +120,7 @@ my-integration/
 └── order_service_service.bal     # Service stub with empty RPC methods
 ```
 
-Both files are compiled automatically as part of the project package — no extra imports or configuration needed.
+Both files are compiled automatically as part of the project package, with no extra imports or configuration needed.
 
 ### Step 5: Implement the service
 
@@ -301,7 +301,7 @@ bal grpc --input resources/order_service.proto \
 
 ## Regenerating after proto changes
 
-Re-run the same command whenever the `.proto` file changes — the generated files are overwritten automatically.
+Re-run the same command whenever the `.proto` file changes. The generated files are overwritten automatically.
 
 > Do not edit `order_service_pb.bal` directly. It is always overwritten on regeneration. Put all custom logic in separate files.
 

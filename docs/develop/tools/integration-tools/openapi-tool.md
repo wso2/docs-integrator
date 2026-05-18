@@ -107,8 +107,8 @@ Create a type-safe HTTP client that wraps all API operations defined in the spec
 
 4. In the **Create Connection** step, configure the connection details. Expand **Advanced Configurations** to set the following optional fields:
 
-   - **Config** — The configurations to use when initializing the connector.
-   - **Service Url** — URL of the target service.
+   - **Config**: The configurations to use when initializing the connector.
+   - **Service Url**: URL of the target service.
 
    ![Connection details configuration](/img/develop/tools/openapi-tool/step-connection-details.png)
 
@@ -255,7 +255,7 @@ bal openapi -i openapi.yaml --nullable
 
 **Connecting to an external API**
 
-If the API provider supplies an OpenAPI spec, generate a type-safe client from it — no need to manually configure endpoints, methods, or request/response types. Everything is inferred from the spec. Without this, you would fall back to a generic HTTP connector and handle all of that yourself.
+If the API provider supplies an OpenAPI spec, generate a type-safe client from it. You don't need to manually configure endpoints, methods, or request/response types. Everything is inferred from the spec. Without this, you would fall back to a generic HTTP connector and handle all of that yourself.
 
 1. Obtain the OpenAPI spec from the API provider.
 2. Generate the client: `bal openapi -i partner-api.yaml --mode client`

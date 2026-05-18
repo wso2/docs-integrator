@@ -24,7 +24,7 @@ bal edi --help
 
 EDIFACT is the international EDI standard used globally, with message types such as `ORDERS`, `INVOIC`, and `DESADV`.
 
-### Step 1 — Convert the EDIFACT schema
+### Step 1: Convert the EDIFACT schema
 
 Convert an EDIFACT message type to the Ballerina EDI schema format by specifying the version and transaction type.
 
@@ -38,7 +38,7 @@ For example, to convert an `ORDERS` message in version `d96a`:
 bal edi convertEdifactSchema -v d96a -t ORDERS -o path/to/output
 ```
 
-### Step 2 — Generate Ballerina code
+### Step 2: Generate Ballerina code
 
 Use `codegen` to generate typed Ballerina records and parser functions from the converted schema.
 
@@ -48,17 +48,17 @@ bal edi codegen -i path/to/output/schema.json -o modules/orders/main.bal
 
 This generates the following functions in the output file along with the relevant record types.
 
-- `fromEdiString` — Convert an EDI string to a Ballerina record
-- `toEdiString` — Convert a Ballerina record to an EDI string
-- `getSchema` — Get the EDI schema as an `EdiSchema` object
-- `fromEdiStringWithSchema` — Convert an EDI string to a Ballerina record using a pre-loaded schema
-- `toEdiStringWithSchema` — Convert a Ballerina record to an EDI string using a pre-loaded schema
+- `fromEdiString`: Convert an EDI string to a Ballerina record.
+- `toEdiString`: Convert a Ballerina record to an EDI string.
+- `getSchema`: Get the EDI schema as an `EdiSchema` object.
+- `fromEdiStringWithSchema`: Convert an EDI string to a Ballerina record using a pre-loaded schema.
+- `toEdiStringWithSchema`: Convert a Ballerina record to an EDI string using a pre-loaded schema.
 
 ## Generating types from an X12 schema
 
 X12 is a widely used EDI standard in North America, covering transaction sets for orders, invoices, shipping notices, and more.
 
-### Step 1 — Convert the X12 schema
+### Step 1: Convert the X12 schema
 
 Convert an X12 schema to the Ballerina EDI schema format.
 
@@ -66,7 +66,7 @@ Convert an X12 schema to the Ballerina EDI schema format.
 bal edi convertX12Schema -i path/to/x12-schema -o path/to/output
 ```
 
-### Step 2 — Generate Ballerina code
+### Step 2: Generate Ballerina code
 
 Use `codegen` to generate typed Ballerina records and parser functions from the converted schema.
 
@@ -205,8 +205,8 @@ Generated packages can be published to Ballerina Central and reused across proje
 
 | Flag | Required | Description |
 | --- | --- | --- |
-| `-v`, `--version` | Yes | EDIFACT version (e.g., `d96a`) |
-| `-t`, `--type` | Yes | Transaction type (e.g., `ORDERS`, `INVOIC`) |
+| `-v`, `--version` | Yes | EDIFACT version (for example, `d96a`) |
+| `-t`, `--type` | Yes | Transaction type (for example, `ORDERS`, `INVOIC`) |
 | `-o`, `--output` | Yes | Output directory for the converted schema |
 
 #### bal edi convertESL
