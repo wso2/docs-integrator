@@ -37,15 +37,15 @@ Follow these steps to install and verify the scan tool:
 ## Command syntax
 
 ```bash
-bal scan [OPTIONS] [<package>|<source-file>]
+bal scan [OPTIONS] [<integration>|<source-file>]
 ```
 
 ### Arguments
 
-- `<package>` — Analyzes all Ballerina files in the specified package (optional, defaults to the current directory).
+- `<integration>` — Analyzes all Ballerina files in the specified integration (optional, defaults to the current directory).
 - `<source-file>` — Analyzes a specific standalone Ballerina file (`.bal` extension required).
 
-Analyzing individual Ballerina files that are part of a package is not allowed. You must analyze the entire package or work with standalone files.
+Analyzing individual Ballerina files that are part of a integration is not allowed. You must analyze the entire integration or work with standalone files.
 
 ### Options
 
@@ -57,13 +57,13 @@ Analyzing individual Ballerina files that are part of a package is not allowed. 
 | `--list-rules` | No | `false` | Display all available analysis rules and exit |
 | `--include-rules=<rule1,...>` | No | All rules | Run analysis for specific rules only (comma-separated list) |
 | `--exclude-rules=<rule1,...>` | No | None | Exclude specific rules from analysis (comma-separated list) |
-| `--custom-rules-path=<path>` | No | — | Path to a directory containing custom rule packages |
+| `--custom-rules-path=<path>` | No | — | Path to a directory containing custom rule integrations |
 | `--platforms=<platform1,...>` | No | None | Define platforms for result reporting (e.g., `sonarqube`) |
 | `--platform-triggered` | No | `false` | Indicate that the scan was triggered by a platform (e.g., CI/CD) |
 
 ## Running analysis
 
-Analyze all Ballerina files in the current package by running the following command inside the package directory:
+Analyze all Ballerina files in the current integration by running the following command inside the integration directory:
 
 ```bash
 bal scan
@@ -71,14 +71,14 @@ bal scan
 
 This command will:
 
-- Compile and analyze all `.bal` files in the current package
+- Compile and analyze all `.bal` files in the current integration
 - Print results to the console
 - Save results in JSON format in the `target/report` directory
 
-To analyze a specific package:
+To analyze a specific integration:
 
 ```bash
-bal scan mypackage
+bal scan myintegration
 ```
 
 To analyze a specific standalone Ballerina file:
