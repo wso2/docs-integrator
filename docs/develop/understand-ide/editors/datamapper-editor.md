@@ -4,17 +4,17 @@ title: Data Mapper Editor
 
 # Data Mapper Editor
 
-The Data Mapper editor is the visual surface you open for any data mapper in WSO2 Integrator. It shows the source types on the left, the target type on the right, and the mapping canvas between them, so you can wire fields by drawing links or filling expressions instead of hand-writing the conversion function. The data mapper itself is a typed function with one or more inputs and one output, and every change you make in the editor is reflected in the underlying function source.
+The Data Mapper editor is the visual surface you open for any data mapper in WSO2 Integrator. It shows the source types on the left, the target type on the right, and the mapping area between them, so you can map fields by creating links or filling expressions instead of writing the conversion function manually. The data mapper is either a typed function with one or more inputs and a single output, or a variable declaration with a [Record type](../../../reference/language/type-system.md#records). Every change you make in the editor is reflected in the underlying source.
 
-For end-to-end usage, including how to create a data mapper, work with arrays and nested records, and apply transformations, see [Data mapper](../../integration-artifacts/supporting/data-mapper/data-mapper.md).
+For end-to-end usage, including how to create a data mapper, work with arrays and nested records, and apply transformations, see [Data Mapper](../../integration-artifacts/supporting/data-mapper/data-mapper.md).
 
 ![Data Mapper editor for the transform data mapper](/img/develop/understand-ide/editors/datamapper-editor/overview.png)
 
 ## Open the editor
 
-Select a data mapper under **Data Mappers** in the project explorer, or select the data mapper node from a flow in the [Flow Diagram editor](flow-diagram-editor/flow-diagram-editor.md). The editor opens with the data mapper's inputs on the left, the output on the right, and the mapping canvas between them.
+Select a data mapper under **Data Mappers** in the project explorer, or select the **View** option of the data mapper node from a flow in the [Flow Diagram editor](flow-diagram-editor/flow-diagram-editor.md). To open the data mapper for a [declare variable](flow-diagram-editor/statement.md#declare-variable) node, select the **Open in Data Mapper** button in the side panel.
 
-To create a new data mapper before opening the editor, see [Data mapper](../../integration-artifacts/supporting/data-mapper/data-mapper.md).
+To create a new data mapper before opening the editor, see [Data Mapper](../../integration-artifacts/supporting/data-mapper/data-mapper.md).
 
 ## Header
 
@@ -23,57 +23,51 @@ The header runs along the top of the editor and combines the breadcrumb, the dat
 | Control | Description |
 |---|---|
 | **Breadcrumb** | Shows the path from the parent artifact (for example, `Commons > transform`). Select a segment to return to it. |
-| **Back** | Returns to the previous view, typically the Integrator view or the calling flow. |
+| **Back** | Returns to the previous view. |
 | **Title** | Displays the `fx` icon followed by the data mapper name (for example, `transform`). |
 | **Undo** / **Redo** | Reverses or reapplies recent mapping changes. |
-| **Collapse all** | Collapses every input and output record so you see only the top-level fields. |
-| **Refresh** | Reloads the editor to pick up changes made to the underlying types or inputs. |
-| **Filter input and output fields** | Filters both panels to fields whose names match the search term, useful for large records. |
-| **Auto Map** | Runs the automatic mapping action described below. |
+| **Clear all** | Deletes all mappings. |
+| **Refresh** | Reloads the editor to pick up changes made to the underlying types. |
+| **Filter input and output fields** | Filters fields whose names match the search term, useful for large records. |
+| **Auto Map** | Runs the AI-based automatic mapping action described below. |
 | **Configure** | Opens the [Configure editor](configure-editor.md) for the data mapper. Use it to rename the data mapper, toggle **Public**, or change its inputs and output. |
 | **Close** | Closes the data mapper and returns to the previous view. |
 
-## Selected field bar
+## Expression bar
 
-Below the header, the editor shows a thin bar that reflects the field you are currently working with.
+Below the header, the Expression bar shows the field you are currently working with and provides an editor with completion support to write inline expressions when an output field is selected. See [Expression editor](../../integration-artifacts/supporting/data-mapper/mapping-capabilities.md#expression-editor).
 
-- **No field selected** appears when no link or output field is in focus.
-- When you select an output field or an existing mapping, the bar shows the field path and offers an **fx** action to open the [Expression editor](expression-editor.md) inline, so you can write the value as a free-form expression.
-- The `</>` toggle on the right switches the editor between the visual mapping view and the source view, so you can inspect the generated Ballerina code without leaving the editor.
+## Inputs side
 
-## Inputs panel
+The left side of the editor lists every input the data mapper receives. Each input appears as a collapsible node showing the parameter name and its type, with each field of the type rendered as a row inside the node.
 
-The left side of the editor lists every input the data mapper receives. Each input appears as a collapsible card showing the parameter name and its type, with each field of the type rendered as a row inside the card. Drag a row into the mapping canvas, or onto an output field, to create a mapping.
-
-{/* ![Inputs panel with one input record expanded](/img/develop/understand-ide/editors/datamapper-editor/inputs-panel.png) */}
+{/* ![Inputs side with one input record expanded](/img/develop/understand-ide/editors/datamapper-editor/inputs-panel.png) */}
 
 ### Global Inputs
 
-The **Global Inputs** section at the top of the panel exposes values that are reachable from any data mapper in the integration, such as configurable variables. Use this section when a target field should be filled from configuration rather than from the data mapper's parameters.
+The **Global Inputs** section at the top of the inputs side exposes values that are reachable from anywhere in the integration, such as configurable variables. Use this section when a target field should be mapped from global values.
 
 ### Sub Mappings
 
-A sub mapping is a named intermediate value computed once inside the data mapper and reused across multiple output fields. Select **+ Add Sub Mapping** at the bottom of the inputs panel to create one. A sub mapping behaves like an additional input row: give it a name and a type, fill in the expression that produces its value, and then drag it onto any output field that should use the computed value.
-
-Use sub mappings to avoid repeating the same computation across many output fields, or to break a complex transformation into named steps.
+A sub mapping is a named intermediate mapping computed once inside the data mapper and reused across multiple output fields. Select **+ Add Sub Mapping** at the bottom of the inputs side to create one. A sub mapping behaves like an additional input field. Use sub mappings to avoid repeating the same computation across many output fields, or to break a complex transformation into named steps. See [Sub Mappings](../../integration-artifacts/supporting/data-mapper/submappings.md).
 
 {/* ![Sub mapping defined for a transform data mapper](/img/develop/understand-ide/editors/datamapper-editor/sub-mapping.png) */}
 
-## Mapping canvas
+## Output side
 
-The mapping canvas is the central area between the input and output panels. Lines drawn on the canvas represent field-to-field mappings.
+The right side of the editor shows the data mapper's output type with each field rendered as a row. Every required field is marked with a red asterisk. Use the `⋮` menu on a field to access available field options.
 
-- Draw a line by dragging from an input field's port to an output field's port. The editor generates the corresponding expression for that output field automatically.
-- Select an existing line to highlight the source and target field, or to open the [Expression editor](expression-editor.md) for that mapping.
-- When the input and output types do not match, the editor surfaces a diagnostic so you can fix the mismatch from the expression bar.
+{/* ![Output side showing the target record](/img/develop/understand-ide/editors/datamapper-editor/output-panel.png) */}
 
-{/* ![Mapping canvas with field-to-field links](/img/develop/understand-ide/editors/datamapper-editor/mapping-canvas.png) */}
+## Mapping area
 
-## Output panel
+The mapping area is the central region between the input and output sides. Links on this area represent mapping connections.
 
-The right side of the editor shows the data mapper's output type with each field rendered as a row. Every required field is marked with an asterisk (for example, `taskRef*`). Drop an input row or sub mapping onto an output row to map it, or select the output row to fill it through the expression bar.
+- Select an input field, then select the desired output field to create a mapping. See [Mapping capabilities](../../integration-artifacts/supporting/data-mapper/mapping-capabilities.md).
+- Select an existing link to see available options for that mapping.
+- When there is an issue with a created mapping, the corresponding link shows a diagnostic so you can fix it using the available code actions or the expression bar.
 
-{/* ![Output panel showing the target record](/img/develop/understand-ide/editors/datamapper-editor/output-panel.png) */}
+{/* ![Mapping area with field-to-field links](/img/develop/understand-ide/editors/datamapper-editor/mapping-canvas.png) */}
 
 ## Auto Map
 
@@ -87,7 +81,6 @@ The right side of the editor shows the data mapper's output type with each field
 
 ## What's next
 
-- [Data mapper](../../integration-artifacts/supporting/data-mapper/data-mapper.md): end-to-end guide to creating and using data mappers.
-- [Expression editor](expression-editor.md): write a custom expression for a single mapping.
+- [Data Mapper](../../integration-artifacts/supporting/data-mapper/data-mapper.md): end-to-end guide to creating and using data mappers.
 - [Type editor](type-editor.md): define the record types the data mapper maps between.
 - [Flow Diagram editor](flow-diagram-editor/flow-diagram-editor.md): invoke the data mapper from a flow node.
