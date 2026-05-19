@@ -29,6 +29,6 @@ Create a reusable data mapper from the **Artifacts** page or the left sidebar. C
 
 ## What's next
 
-- [Inline data mapper](./inline.md) — Open the data mapper from a **Declare Variable** or **Update Variable** node.
+- [Inline data mapper](./inline.md) — Open the data mapper from a **Declare Variable** node.
 - [Mapping capabilities](../mapping-capabilities.md) — Connect fields, write expressions, and use AI-assisted mapping.
 - [Array mappings](../array-mappings/array-mappings.md) — Map between arrays using iteration, joins, and aggregation.

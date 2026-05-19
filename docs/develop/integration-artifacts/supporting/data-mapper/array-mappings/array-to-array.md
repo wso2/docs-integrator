@@ -14,15 +14,15 @@ To transform each item in an input array into an item in an output array, use **
 
 Within the focused view, refine the query using the available clauses:
 
-| Clause | Purpose |
+| Clause Type | Purpose |
 |---|---|
-| **where** | Filter elements by a condition |
-| **let** | Define local variables for use in the projection |
-| **order by** | Sort the result |
-| **limit** | Cap the number of output elements |
-| **from** | Add another iteration source |
-| **join** | Combine elements from a second array |
-| **group by** | Group elements before projection |
+| **Condition** | Filter elements by a condition |
+| **Local variable** | Define local variables for use in the projection |
+| **Sort by** | Sort the result |
+| **Limit** | Cap the number of output elements |
+| **From** | Add another iteration source |
+| **Join** | Combine elements from a second array |
+| **Group by** | Group elements before projection |
 
 ## Assign as is
 
@@ -32,13 +32,13 @@ When the input and output array types are identical, use **Assign as is** to ass
 
 ## Nested iterate
 
-To iterate a second array on each iteration of an outer array, first map the outer array using **Map Each Element**. From the focused view, select the second array and map it to the target. The data mapper offers the **Nested Iterate** option to wrap it in an inner query.
+To iterate a second array on each iteration of an outer array, first map the outer array using **Map Each Element**. When inside the focused view, select the second array and map it to the target. Then the data mapper offers the **Nested Iterate** option to wrap it in an inner query.
 
 ![Nested Iterate prompt when mapping a second array inside the focused view](/img/develop/integration-artifacts/supporting/data-mapper/nested-iterate.gif)
 
 ## Join with condition
 
-To join two arrays on a condition, map the first array with **Map Each Element** to enter the focused view. Then map the second array onto the target header. The data mapper offers **Join with Condition**. Define the join condition in the side panel.
+To join two arrays on a condition, first map the first array with **Map Each Element**. When inside the focused view, select the second array and map it to the target. Then the data mapper offers the **Join with Condition** option. Define the join condition in the side panel.
 
 ![Join with Condition prompt and side panel for defining the join expression](/img/develop/integration-artifacts/supporting/data-mapper/join-with-condition.gif)
 
@@ -46,4 +46,4 @@ To join two arrays on a condition, map the first array with **Map Each Element**
 
 - [Array to single value](./array-to-single-value.md) — Reduce an array to a single value.
 - [Generic type mappings](../generic-type-mappings.md) — Generate types from a sample JSON or XML payload.
-- [Submappings](../submappings.md) — Reuse mapping logic across multiple output fields.
+- [Sub Mappings](../submappings.md) — Reuse mapping logic across multiple output fields.

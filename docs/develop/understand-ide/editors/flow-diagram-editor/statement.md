@@ -55,7 +55,7 @@ The picker lists every data mapper in the project under `Within Project`. Select
 
 ![Data Mappers picker with Create Data Mapper action and existing mappers](/img/develop/flow-design-elements/map-data-view.png)
 
-For mapping capabilities, array handling, and submappings, see the [Data mapper](../../../integration-artifacts/supporting/data-mapper/data-mapper.md) reference.
+For mapping capabilities, array handling, and sub mappings, see the [Data Mapper](../../../integration-artifacts/supporting/data-mapper/data-mapper.md) reference.
 
 ## What's next
 
