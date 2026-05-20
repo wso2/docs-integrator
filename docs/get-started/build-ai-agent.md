@@ -10,11 +10,18 @@ An AI agent uses an LLM to reason about user queries and call tools to retrieve 
 
 :::info Prerequisites
 
-- [WSO2 Integrator installed](setup/local-setup.md)
+A working WSO2 Integrator environment. Choose the path that fits how you want to work:
+
+- [Cloud setup](setup/cloud-setup.md) — launch WSO2 Integrator in a browser-based cloud editor.
+- [Local setup](setup/local-setup.md) — install and launch the WSO2 Integrator IDE on your machine.
 
 ## Architecture
 
 ## Step 1: Create the integration
+
+:::info Note
+
+In the cloud editor, you're already inside a project. Skip to Step 2.
 
 1. Open WSO2 Integrator.
 2. Select **Create** in the **Create New Integration** card.
@@ -113,18 +120,14 @@ service /wso2IntegratorAssistant on chatAgentListener {
 }
 ```
 
-Run `bal run` from the project directory. Send a test message with:
-
-```bash
-curl -X POST http://localhost:9090/wso2IntegratorAssistant/chat \
-  -H "Content-Type: application/json" \
-  -d '{"sessionId": "session-1", "message": "Hello"}'
-```
+Click the **Run** button in the top toolbar.
+Select **Chat** from the AI Chat Agent title bar or select **Test** from the pop-up.
+Type `Hello` to check if it works.
 
 ## What's next
 
 - [Build an automation](build-automation.md) — Build a scheduled job
-- [Build an API integration](build-api-integration.md) — Build an HTTP service
+- [Build an Integration as API](build-integration-api.md) — Build an HTTP service
 - [Build an event-driven integration](build-event-driven-integration.md) — React to messages from brokers
 - [Build a file-driven integration](build-file-driven-integration.md) — Process files from FTP or local directories
 - [AI agents](../genai/develop/agents/overview.md) — Learn how to build production-grade AI agents with tools, memory, and evaluations

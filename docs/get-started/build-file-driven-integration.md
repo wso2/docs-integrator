@@ -10,7 +10,9 @@ File integrations are ideal for batch uploads, scheduled file processing, and ET
 
 :::info Prerequisites
 
-- [WSO2 Integrator installed](setup/local-setup.md)
+- A working WSO2 Integrator environment. Choose the path that fits how you want to work:
+    - [Cloud setup](setup/cloud-setup.md) — launch WSO2 Integrator in a browser-based cloud editor.
+    - [Local setup](setup/local-setup.md) — install and launch the WSO2 Integrator IDE on your machine.
 - A file at the listener path to watch. Create one if you don't have one:
 
 
@@ -31,7 +33,11 @@ File integrations are ideal for batch uploads, scheduled file processing, and ET
 
 
 
-## Step 1: Create the project
+## Step 1: Create the integration
+
+:::info Note
+
+In the cloud editor, you're already inside a project. Skip to Step 2.
 
 1. Open WSO2 Integrator.
 2. Select the **Create New Integration** card.
@@ -145,7 +151,7 @@ service file:Service on fileListener {
 }
 ```
 
-Save this as `main.bal`, then run `bal run` from the project directory. With the test file already in place (see Prerequisites), run the modify command in a separate terminal to trigger the handler:
+Save this as `main.bal`, then click the **Run** button in the top toolbar. With the test file already in place (see Prerequisites), run the modify command in a separate terminal to trigger the handler:
 
 <TabItem value="unix" label="macOS / Linux" default>
 

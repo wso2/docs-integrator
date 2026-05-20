@@ -90,4 +90,4 @@ See the [WSO2 documentation archive](https://docs.wso2.com) for previous product
 ## What's next
 
 - [Install WSO2 Integrator](../../get-started/setup/local-setup.md) - Get started with the latest release
-- [Build an API Integration](../../get-started/build-api-integration.md) - Build your first integration
+- [Build an Integration as API](../../get-started/build-integration-api.md) - Build your first integration

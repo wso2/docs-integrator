@@ -135,4 +135,4 @@ The Integration Control Plane (ICP) is a centralized monitoring and management s
 - [WSO2 Cloud concepts](integration-cloud-concepts.md) — data planes, environments, and deployment tracks
 - [Local setup](../setup/local-setup.md) — install the WSO2 Integrator IDE and create your first project
 - [Build an automation](../build-automation.md) — schedule tasks and run background jobs
-- [Build an API integration](../build-api-integration.md) — expose an HTTP service and handle requests
+- [Build an Integration as API](../build-integration-api.md) — expose an HTTP service and handle requests

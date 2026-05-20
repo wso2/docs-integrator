@@ -9,7 +9,7 @@ This guide walks you through connecting a running Ballerina project to ICP, enab
 :::info Prerequisites
 
 - **ICP installed and running.** Follow the [Install ICP](install-icp.md) guide to download, configure, and start the server.
-- **A running Ballerina project.** If you don't have one, follow the [Build an API integration](../../get-started/build-api-integration.md) guide to create one.
+- **A running Ballerina project.** If you don't have one, follow the [Build an Integration as API](../../get-started/build-integration-api.md) guide to create one.
 - **Fluent Bit** (optional, required only for step 5). See the [Fluent Bit installation page](https://docs.fluentbit.io/manual/installation/downloads).
 
 Change the default `admin` password before using ICP in any non-evaluation environment. Go to **Access control** > **Users**, select the `admin` user, and click **Reset Password**.

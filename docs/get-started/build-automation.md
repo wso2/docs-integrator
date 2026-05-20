@@ -10,9 +10,16 @@ An automation runs your integration logic without an external request, on demand
 
 :::info Prerequisites
 
-- [WSO2 Integrator installed](setup/local-setup.md)
+A working WSO2 Integrator environment. Choose the path that fits how you want to work:
+
+- [Cloud setup](setup/cloud-setup.md) — launch WSO2 Integrator in a browser-based cloud editor.
+- [Local setup](setup/local-setup.md) — install and launch the WSO2 Integrator IDE on your machine.
 
 ## Step 1: Create the integration
+
+:::info Note
+
+In the cloud editor, you're already inside a project. Skip to Step 2.
 
 1. Open WSO2 Integrator.
 2. Select the **Create New Integration** card.
@@ -88,7 +95,7 @@ public function main() returns error? {
 }
 ```
 
-Save this as `automation.bal`, then run `bal run` from the project directory. The terminal output contains `Hello World`.
+Save this as `automation.bal`, then click the **Run** button in the top toolbar. The terminal output contains `Hello World`.
 
 ## Scheduling automations
 
@@ -101,7 +108,7 @@ Periodic invocation is configured in an external system once the automation is d
 
 ## What's next
 
-- [Build an API integration](build-api-integration.md) — Build an HTTP service
+- [Build an Integration as API](build-integration-api.md) — Build an HTTP service
 - [Build an AI agent](build-ai-agent.md) — Build an intelligent agent
 - [Build an event-driven integration](build-event-driven-integration.md) — React to messages from brokers
 - [Build a file-driven integration](build-file-driven-integration.md) — Process files from FTP or local directories
