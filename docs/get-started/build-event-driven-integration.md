@@ -120,6 +120,18 @@ service "Orders" on rabbitmqListener {
 
 Save this as `main.bal`, then click the **Run** button in the top toolbar. Once running, open `http://localhost:15672` (default credentials: guest/guest), navigate to **Queues → Orders → Publish message**, and publish any message. The terminal log should display `Received order`.
 
+## Step 6: Deploy to WSO2 Cloud
+
+Deploy your integration to WSO2 Cloud - Integration Platform in any of the following ways:
+
+- If you're using the cloud editor, see [Save and deploy](/deploy/cloud/deploy-from-cloud-editor/#save-and-deploy).
+- If you're using the WSO2 Integrator IDE, see [Deploy from the IDE](/deploy/cloud/push-from-ide).
+- If you'd rather skip the build and try a ready-made sample, one-click deploy it:
+
+    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/orderprocessor" target="_blank">
+        <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" />
+    </a>
+
 ## Supported event sources
 
 | Broker | Ballerina Package |

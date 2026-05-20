@@ -159,6 +159,18 @@ Save this as `main.bal`, then click the **Run** button in the top toolbar.
 Select **Test** in the confirmation dialog, then select **Execute** in the Try-It editor.
 Confirm the response shows `200 OK` with a `Hello World` body.
 
+## Step 8: Deploy to WSO2 Cloud
+
+Deploy your integration to WSO2 Cloud - Integration Platform in any of the following ways:
+
+- If you're using the cloud editor, see [Save and deploy](/deploy/cloud/deploy-from-cloud-editor/#save-and-deploy).
+- If you're using the WSO2 Integrator IDE, see [Deploy from the IDE](/deploy/cloud/push-from-ide).
+- If you'd rather skip the build and try a ready-made sample, one-click deploy it:
+
+    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/helloworldapi" target="_blank">
+        <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" />
+    </a>
+
 ## What's next
 
 - [Build an automation](build-automation.md) — Build a scheduled job
