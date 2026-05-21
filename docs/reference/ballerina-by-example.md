@@ -261,25 +261,3 @@ Ballerina by Example (BBE) is a collection of over 200 runnable code examples th
 | **[Counter Metrics](https://ballerina.io/learn/by-example/counter-metrics/)** | Prometheus counters |
 | **[Gauge Metrics](https://ballerina.io/learn/by-example/gauge-metrics/)** | Prometheus gauges |
 | **[Tracing](https://ballerina.io/learn/by-example/tracing/)** | Distributed tracing |
-
-## Running examples locally
-
-Each example can be run locally with:
-
-```bash
-# Clone the examples repository
-git clone https://github.com/ballerina-platform/ballerina-distribution.git
-
-# Navigate to an example
-cd ballerina-distribution/examples/hello-world
-
-# Run the example
-bal run
-```
-
-Alternatively, use the "Run" button on each example page at [ballerina.io/learn/by-example](https://ballerina.io/learn/by-example/).
-
-## See also
-
-- [Ballerina API Documentation](api/ballerina-documentation.md) — Full API docs
-- [Ballerina Specifications](ballerina-specifications.md) — Language and platform specifications
