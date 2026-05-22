@@ -8,7 +8,7 @@ Automate build, test, and deployment of your WSO2 Integrator projects using GitH
 
 ## Overview
 
-GitHub Actions uses YAML workflow files stored in `.github/workflows/` to define CI/CD pipelines. For WSO2 Integrator projects, a workflow typically installs Java and Ballerina, builds the project, runs tests, creates a Docker image, and deploys to a target environment.
+GitHub Actions uses YAML workflow files stored in `.github/workflows/` to define CI/CD pipelines. For WSO2 Integrator projects, a workflow uses the [`setup-ballerina`](https://github.com/ballerina-platform/setup-ballerina/) action to install Ballerina, then builds the project, runs tests, creates a Docker image, and deploys to a target environment.
 
 ## Prerequisites
 
@@ -32,7 +32,6 @@ on:
     branches: [main]
 
 env:
-  BAL_VERSION: "2201.10.0"
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/wso2-integrator-app
 
@@ -44,29 +43,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Java 17
-        uses: actions/setup-java@v4
+      - name: Set up Ballerina
+        uses: ballerina-platform/setup-ballerina@v1.1.4
         with:
-          distribution: "temurin"
-          java-version: "17"
-
-      - name: Install Ballerina
-        run: |
-          wget -q https://dist.ballerina.io/downloads/${{ env.BAL_VERSION }}/ballerina-${{ env.BAL_VERSION }}-swan-lake-linux-x64.deb
-          sudo dpkg -i ballerina-${{ env.BAL_VERSION }}-swan-lake-linux-x64.deb
+          version: "2201.13.4"
 
       - name: Build
         run: bal build
 
       - name: Run tests
-        run: bal test --code-coverage
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: target/report/
+        run: bal test
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -86,16 +72,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Java 17
-        uses: actions/setup-java@v4
+      - name: Set up Ballerina
+        uses: ballerina-platform/setup-ballerina@v1.1.4
         with:
-          distribution: "temurin"
-          java-version: "17"
-
-      - name: Install Ballerina
-        run: |
-          wget -q https://dist.ballerina.io/downloads/${{ env.BAL_VERSION }}/ballerina-${{ env.BAL_VERSION }}-swan-lake-linux-x64.deb
-          sudo dpkg -i ballerina-${{ env.BAL_VERSION }}-swan-lake-linux-x64.deb
+          version: "2201.13.4"
 
       - name: Build project
         run: bal build
@@ -117,35 +97,10 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
-  deploy-staging:
-    name: Deploy to Staging
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     needs: docker
-    environment: staging
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v3
-
-      - name: Configure kubeconfig
-        run: |
-          mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
-
-      - name: Deploy to staging
-        run: |
-          kubectl set image deployment/wso2-integrator-app \
-            app=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
-            -n staging
-          kubectl rollout status deployment/wso2-integrator-app \
-            -n staging --timeout=300s
-
-  deploy-production:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: deploy-staging
     environment: production
     steps:
       - name: Checkout code
@@ -159,35 +114,31 @@ jobs:
           mkdir -p $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config
 
-      - name: Deploy to production
+      - name: Deploy
         run: |
           kubectl set image deployment/wso2-integrator-app \
-            app=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
-            -n production
-          kubectl rollout status deployment/wso2-integrator-app \
-            -n production --timeout=300s
+            app=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          kubectl rollout status deployment/wso2-integrator-app --timeout=300s
 ```
 
 ## Build step details
 
-The build job installs Java 17 and the Ballerina distribution, then runs `bal build` to compile the project. Build artifacts (the executable JAR) are uploaded for downstream jobs and for manual download.
+The build job uses the [`setup-ballerina`](https://github.com/ballerina-platform/setup-ballerina/) action to install the specified Ballerina version (including the required JDK), then runs `bal build` to compile the project. Build artifacts (the executable JAR) are uploaded for downstream jobs and for manual download.
 
 If your project includes a `Cloud.toml`, the build also generates Docker and Kubernetes artifacts under `target/docker/` and `target/kubernetes/`.
 
 ## Test step details
 
-Tests run with coverage enabled. The `if: always()` condition on the upload step ensures test results are available even when tests fail.
+Tests run against the compiled project. The `setup-ballerina` action ensures the correct Ballerina version is available without manual installation steps.
 
 ```yaml
-- name: Run tests
-  run: bal test --code-coverage
-
-- name: Upload test results
-  if: always()
-  uses: actions/upload-artifact@v4
+- name: Set up Ballerina
+  uses: ballerina-platform/setup-ballerina@v1.1.4
   with:
-    name: test-results
-    path: target/report/
+    version: "2201.13.4"
+
+- name: Run tests
+  run: bal test
 ```
 
 To display test results directly in pull request checks, add a test reporting action:
@@ -204,9 +155,7 @@ To display test results directly in pull request checks, add a test reporting ac
 
 ## Deploy step details
 
-The workflow uses GitHub Environments to manage deployment approvals. Configure the `production` environment under **Settings > Environments** with required reviewers to enforce manual approval before production deployments.
-
-Each environment can have its own set of secrets, allowing different `Config.toml` values per target.
+The deploy job runs after a successful Docker push and uses `kubectl` to roll out the new image. Configure the `production` environment under **Settings > Environments** to add optional approval gates before the deploy runs.
 
 ## Secrets management
 
@@ -218,15 +167,6 @@ Configure repository and environment secrets under **Settings > Secrets and vari
 | `KUBE_CONFIG` | Environment | Base64-encoded kubeconfig file |
 | `DB_PASSWORD` | Environment | Database connection password |
 | `API_KEY` | Environment | External service API key |
-
-Use environment-specific secrets to maintain different credentials per deployment target:
-
-```yaml
-deploy-staging:
-  environment: staging  # Uses staging secrets
-deploy-production:
-  environment: production  # Uses production secrets
-```
 
 ## Pull request workflow
 
@@ -252,22 +192,18 @@ on:
       bal-version:
         required: false
         type: string
-        default: "2201.10.0"
+        default: "2201.13.4"
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: ballerina-platform/setup-ballerina@v1.1.4
         with:
-          distribution: "temurin"
-          java-version: "17"
-      - run: |
-          wget -q https://dist.ballerina.io/downloads/${{ inputs.bal-version }}/ballerina-${{ inputs.bal-version }}-swan-lake-linux-x64.deb
-          sudo dpkg -i ballerina-${{ inputs.bal-version }}-swan-lake-linux-x64.deb
+          version: ${{ inputs.bal-version }}
       - run: bal build
-      - run: bal test --code-coverage
+      - run: bal test
 ```
 
 Call it from other repositories:
@@ -277,7 +213,7 @@ jobs:
   ci:
     uses: my-org/.github/.github/workflows/ballerina-ci.yml@main
     with:
-      bal-version: "2201.10.0"
+      bal-version: "2201.13.4"
 ```
 
 ## What's next

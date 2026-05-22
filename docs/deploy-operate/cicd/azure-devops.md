@@ -32,11 +32,7 @@ trigger:
       - main
       - release/*
 
-pool:
-  vmImage: "ubuntu-latest"
-
 variables:
-  balVersion: "2201.10.0"
   acrName: "myregistry.azurecr.io"
   imageName: "wso2-integrator-app"
   imageTag: "$(Build.BuildId)"
@@ -46,22 +42,15 @@ stages:
     displayName: "Build & Test"
     jobs:
       - job: BuildJob
+        pool:
+          vmImage: "ubuntu-latest"
+        container: ballerina/ballerina:latest
         steps:
-          - task: UseJavaVersion@1
-            inputs:
-              versionSpec: "17"
-              jdkArchitectureOption: "x64"
-
-          - script: |
-              wget https://dist.ballerina.io/downloads/$(balVersion)/ballerina-$(balVersion)-swan-lake-linux-x64.deb
-              sudo dpkg -i ballerina-$(balVersion)-swan-lake-linux-x64.deb
-            displayName: "Install Ballerina"
-
           - script: bal build
             displayName: "Build Ballerina project"
 
-          - script: bal test --code-coverage
-            displayName: "Run tests with coverage"
+          - script: bal test
+            displayName: "Run tests"
 
           - task: PublishTestResults@2
             inputs:
@@ -70,27 +59,15 @@ stages:
             condition: always()
             displayName: "Publish test results"
 
-          - task: PublishCodeCoverageResults@1
-            inputs:
-              codeCoverageTool: "JaCoCo"
-              summaryFileLocation: "**/target/report/**/coverage.xml"
-            displayName: "Publish code coverage"
-
   - stage: Docker
     displayName: "Build & Push Docker Image"
     dependsOn: Build
     jobs:
       - job: DockerJob
+        pool:
+          vmImage: "ubuntu-latest"
+        container: ballerina/ballerina:latest
         steps:
-          - task: UseJavaVersion@1
-            inputs:
-              versionSpec: "17"
-
-          - script: |
-              wget https://dist.ballerina.io/downloads/$(balVersion)/ballerina-$(balVersion)-swan-lake-linux-x64.deb
-              sudo dpkg -i ballerina-$(balVersion)-swan-lake-linux-x64.deb
-            displayName: "Install Ballerina"
-
           - script: bal build
             displayName: "Build Ballerina project"
 
@@ -112,6 +89,8 @@ stages:
     jobs:
       - deployment: DeployToAKS
         environment: "production"
+        pool:
+          vmImage: "ubuntu-latest"
         strategy:
           runOnce:
             deploy:
@@ -131,22 +110,24 @@ stages:
 
 ## Build step details
 
-The build stage compiles your Ballerina source into an executable JAR. The `bal build` command resolves dependencies from Ballerina Central, compiles the code, and produces artifacts in the `target/` directory.
+The build stage runs inside the `ballerina/ballerina:latest` container, which provides Ballerina and the required JDK with no installation steps. The `bal build` command resolves dependencies from Ballerina Central, compiles the code, and produces artifacts in the `target/` directory.
 
 If your project uses a `Cloud.toml` file for Docker or Kubernetes artifact generation, `bal build` also generates the corresponding Dockerfile and Kubernetes manifests automatically.
 
 ```yaml
-- script: bal build
-  displayName: "Build Ballerina project"
+container: ballerina/ballerina:latest
+steps:
+  - script: bal build
+    displayName: "Build Ballerina project"
 ```
 
 ## Test step details
 
-Running `bal test` executes all test functions in your project. Use `--code-coverage` to generate coverage reports that Azure DevOps can display in the pipeline summary.
+Running `bal test` executes all test functions in your project. The job runs inside the same `ballerina/ballerina:latest` container so no additional setup is needed.
 
 ```yaml
-- script: bal test --code-coverage
-  displayName: "Run tests with coverage"
+- script: bal test
+  displayName: "Run tests"
 ```
 
 Test results are written in JUnit XML format under `target/report/`, which the `PublishTestResults` task picks up automatically.
