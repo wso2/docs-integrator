@@ -4,159 +4,131 @@ title: Serverless Deployment
 
 # Serverless Deployment
 
-WSO2 Integrator projects can be deployed as serverless functions, enabling event-driven scaling with zero infrastructure management. Ballerina supports AWS Lambda and Azure Functions as first-class deployment targets.
+WSO2 Integrator projects can be deployed as serverless functions, enabling event-driven scaling with zero infrastructure management. Ballerina supports AWS Lambda and Azure Functions as first-class deployment targets via compiler extensions that generate deployment artifacts automatically at build time.
 
 ## Overview
 
 | Feature | AWS Lambda | Azure Functions |
 |---------|-----------|-----------------|
-| Trigger Types | HTTP (API Gateway), S3, SQS, DynamoDB Streams | HTTP, Timer, Blob Storage, Queue, Event Hub |
-| Cold Start | ~2-5s (JVM), under 100ms (GraalVM) | ~2-5s (JVM), under 100ms (GraalVM) |
+| Trigger Types | HTTP (API Gateway), S3, SQS, DynamoDB Streams, SES | HTTP, Timer, Blob Storage, Queue, CosmosDB |
 | Max Execution | 15 minutes | 10 minutes (Consumption plan) |
-| Memory | 128 MB - 10 GB | 128 MB - 14 GB |
-| Language Runtime | Java 17+ | Java 17+ |
+| Runtime | Custom runtime (provided) | Java 21, Windows hosting |
 
-## AWS lambda
+## Azure Functions
 
-### Step 1 -- create the lambda function
+### Prerequisites
 
-Write a Ballerina function annotated with `@awslambda:Function`:
+Create an Azure Function App with the following settings before deploying:
+
+- **Runtime stack**: Java 21
+- **Hosting OS**: Windows (Linux is not supported for Ballerina custom handlers)
+
+Install the [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local) (`func` CLI) for local development and deployment.
+
+### Step 1: Write the Azure function
+
+Ballerina uses a service-based model for Azure Functions. Attach a listener to a service to define the trigger type. The resource function behaves like a standard `ballerina/http` resource and supports `http:Payload` and `http:Header` annotations.
 
 ```ballerina
-import ballerinax/awslambda;
+import ballerinax/azure.functions as af;
 
-@awslambda:Function
-public function orderProcessor(awslambda:Context ctx,
-                                json payload) returns json|error {
-    // Extract order details
-    string orderId = check payload.orderId;
-
-    // Process the order (call downstream services, transform data, etc.)
-    json result = check processOrder(orderId);
-
-    return {
-        statusCode: 200,
-        body: result
-    };
+service / on new af:HttpListener() {
+    resource function get hello(string name) returns string {
+        return "Hello, " + name + "!";
+    }
 }
 ```
 
-### Step 2 -- build for lambda
-
-```bash
-bal build --cloud=aws_lambda
-```
-
-This generates the deployment artifacts:
-
-```
-target/
-  aws/
-    my_integration.zip       # Lambda deployment package
-    aws-ballerina-lambda.yaml  # SAM template
-```
-
-### Step 3 -- deploy with AWS SAM
-
-```bash
-sam deploy \
-  --template-file target/aws/aws-ballerina-lambda.yaml \
-  --stack-name my-integration-stack \
-  --capabilities CAPABILITY_IAM \
-  --region us-east-1
-```
-
-Alternatively, deploy with the AWS CLI:
-
-```bash
-aws lambda create-function \
-  --function-name orderProcessor \
-  --runtime java17 \
-  --handler my_integration.orderProcessor \
-  --zip-file fileb://target/aws/my_integration.zip \
-  --role arn:aws:iam::123456789:role/lambda-execution-role \
-  --memory-size 512 \
-  --timeout 30
-```
-
-### Step 4 -- add an API gateway trigger
-
-```bash
-aws apigatewayv2 create-api \
-  --name order-api \
-  --protocol-type HTTP \
-  --target arn:aws:lambda:us-east-1:123456789:function:orderProcessor
-```
-
-### Lambda configuration
-
-Configure via environment variables in the Lambda console or template:
-
-```yaml
-Environment:
-  Variables:
-    DB_HOST: "db.internal.example.com"
-    DB_PORT: "5432"
-    API_KEY: "{{resolve:secretsmanager:my-api-key}}"
-```
-
-## Azure functions
-
-### Step 1 -- create the Azure function
+Other trigger types use their corresponding listeners:
 
 ```ballerina
-import ballerinax/azure.functions;
+import ballerinax/azure.functions as af;
 
-@functions:Function
-public function httpTrigger(@functions:HTTPTrigger {}
-                            functions:HTTPRequest request)
-                            returns @functions:HTTPOutput functions:HTTPResponse {
-    json payload = check request.getJsonPayload();
-    string name = check payload.name;
+// Queue trigger
+service "myqueue" on new af:QueueListener({queueName: "myqueue"}) {
+    remote function onMessage(string message) returns error? {
+        // process queue message
+    }
+}
 
-    return {
-        statusCode: 200,
-        body: "Hello, " + name
-    };
+// Timer trigger (runs every minute)
+service "timer" on new af:TimerListener({schedule: "0 */1 * * * *"}) {
+    remote function onTrigger() returns error? {
+        // scheduled work
+    }
+}
+
+// Blob trigger
+service "mycontainer/{name}" on new af:BlobListener({path: "mycontainer/{name}"}) {
+    remote function onUpdated(byte[] content) returns error? {
+        // process blob
+    }
 }
 ```
 
-### Step 2 -- build for Azure functions
+### Step 2: Build
 
 ```bash
-bal build --cloud=azure_functions
+bal build
 ```
 
-Generated artifacts:
+The compiler extension generates the function artifacts automatically:
 
 ```
 target/
   azure_functions/
-    my_integration/
+    <function-name>/
       function.json
-      handler.jar
     host.json
 ```
 
-### Step 3 -- deploy to Azure
+The build output lists the functions and prints the commands to run locally and deploy:
+
+```text
+@azure.functions:Function: get-hello
+
+    Execute the command below to deploy the function locally:
+    $ func start --script-root target/azure_functions --java
+
+    Execute the command below to deploy Ballerina Azure Functions:
+    $ func azure functionapp publish <function_app_name> --script-root target/azure_functions
+```
+
+### Step 3: Run locally
 
 ```bash
-# Create resources
+func start --script-root target/azure_functions --java
+```
+
+### Step 4: Deploy to Azure
+
+First create the required Azure resources:
+
+```bash
 az group create --name integration-rg --location eastus
-az storage account create --name integrationstorage --location eastus \
-  --resource-group integration-rg --sku Standard_LRS
-az functionapp create --resource-group integration-rg \
+
+az storage account create \
+  --name integrationstorage \
+  --location eastus \
+  --resource-group integration-rg \
+  --sku Standard_LRS
+
+az functionapp create \
+  --resource-group integration-rg \
   --consumption-plan-location eastus \
-  --runtime java --runtime-version 17 \
+  --runtime java \
+  --runtime-version 21 \
   --functions-version 4 \
   --name my-integration-func \
-  --storage-account integrationstorage
+  --storage-account integrationstorage \
+  --os-type Windows
+```
 
-# Deploy
-az functionapp deployment source config-zip \
-  --resource-group integration-rg \
-  --name my-integration-func \
-  --src target/azure_functions/my_integration.zip
+Then deploy using the Azure Functions Core Tools:
+
+```bash
+func azure functionapp publish my-integration-func \
+  --script-root target/azure_functions
 ```
 
 ### Azure configuration
@@ -170,17 +142,151 @@ az functionapp config appsettings set \
   --settings "DB_HOST=db.internal.example.com" "DB_PORT=5432"
 ```
 
+## AWS Lambda
+
+### Step 1: Write the Lambda function
+
+Write a Ballerina function annotated with `@lambda:Function`. The function receives a `lambda:Context` and a `json` (or typed event) input and returns `json|error`.
+
+```ballerina
+import ballerinax/aws.lambda;
+import ballerina/uuid;
+
+@lambda:Function
+public function echo(lambda:Context ctx, json input) returns json {
+    return input;
+}
+
+@lambda:Function
+public function generateId(lambda:Context ctx, json input) returns json {
+    return uuid:createType1AsString();
+}
+```
+
+To handle typed event sources, use the corresponding event types:
+
+```ballerina
+import ballerinax/aws.lambda;
+
+@lambda:Function
+public function processOrder(lambda:Context ctx,
+                             lambda:APIGatewayProxyRequest request) returns json|error {
+    string orderId = check request.queryStringParameters["orderId"];
+    return { statusCode: 200, body: "Order " + orderId + " received" };
+}
+
+@lambda:Function
+public function processSQS(lambda:Context ctx, lambda:SQSEvent event) returns json {
+    return event.Records[0].body;
+}
+
+@lambda:Function
+public function processS3(lambda:Context ctx, lambda:S3Event event) returns json {
+    return event.Records[0].s3.'object.key;
+}
+
+@lambda:Function
+public function processDynamoDB(lambda:Context ctx,
+                                lambda:DynamoDBEvent event) returns json {
+    return event.Records[0].dynamodb.Keys.toString();
+}
+```
+
+### Step 2: Build
+
+```bash
+bal build
+```
+
+The compiler extension runs automatically and generates the deployment package:
+
+```
+target/
+  aws_lambda/
+    aws-ballerina-lambda-functions.zip
+```
+
+The build output lists the functions and prints the exact deploy commands to use:
+
+```
+@aws.lambda:Function: echo, generateId, processOrder, processSQS, processS3, processDynamoDB
+
+    Run the following command to deploy each Ballerina AWS Lambda function:
+    aws lambda create-function --function-name <FUNCTION_NAME> \
+      --zip-file fileb://aws-ballerina-lambda-functions.zip \
+      --handler <FILE_NAME>.<FUNCTION_NAME> \
+      --runtime provided \
+      --role <LAMBDA_ROLE_ARN> \
+      --layers arn:aws:lambda:<REGION_ID>:367134611783:layer:ballerina-jre21: \
+      --memory-size 512 --timeout 10
+
+    Run the following command to re-deploy an updated Ballerina AWS Lambda function:
+    aws lambda update-function-code --function-name <FUNCTION_NAME> \
+      --zip-file fileb://aws-ballerina-lambda-functions.zip
+```
+
+### Step 3: Deploy with the AWS CLI
+
+Use the commands printed by the build output, substituting your values. For example:
+
+```bash
+aws lambda create-function \
+  --function-name echo \
+  --zip-file fileb://target/aws_lambda/aws-ballerina-lambda-functions.zip \
+  --handler functions.echo \
+  --runtime provided \
+  --role arn:aws:iam::123456789012:role/lambda-execution-role \
+  --layers arn:aws:lambda:us-east-1:367134611783:layer:ballerina-jre21:1 \
+  --memory-size 512 \
+  --timeout 10
+```
+
+To update an already-deployed function:
+
+```bash
+aws lambda update-function-code \
+  --function-name echo \
+  --zip-file fileb://target/aws_lambda/aws-ballerina-lambda-functions.zip
+```
+
+### Step 4: Add an API Gateway trigger
+
+```bash
+aws apigatewayv2 create-api \
+  --name order-api \
+  --protocol-type HTTP \
+  --target arn:aws:lambda:us-east-1:123456789012:function:processOrder
+```
+
+### Lambda configuration
+
+Configure via environment variables in the Lambda console or deployment script:
+
+```bash
+aws lambda update-function-configuration \
+  --function-name processOrder \
+  --environment "Variables={DB_HOST=db.internal.example.com,DB_PORT=5432}"
+```
+
+For secrets, reference AWS Secrets Manager from your application code rather than embedding values in environment variables.
+
 ## Reducing cold start times
 
 ### Use GraalVM native images
 
-Compile to a native binary to dramatically reduce cold start times:
+Compile to a native binary to reduce startup time.
+
+For AWS Lambda:
 
 ```bash
-bal build --graalvm --cloud=aws_lambda
+bal build --graalvm
 ```
 
-This produces a native executable that starts in under 100ms compared to 2-5 seconds for JVM-based deployments.
+For Azure Functions:
+
+```bash
+bal build --graalvm --cloud="azure_functions"
+```
 
 ### Provisioned concurrency (AWS)
 
@@ -188,7 +294,7 @@ Keep warm instances ready to handle requests:
 
 ```bash
 aws lambda put-provisioned-concurrency-config \
-  --function-name orderProcessor \
+  --function-name processOrder \
   --qualifier production \
   --provisioned-concurrent-executions 5
 ```
@@ -198,10 +304,12 @@ aws lambda put-provisioned-concurrency-config \
 Use the Premium plan for pre-warmed instances:
 
 ```bash
-az functionapp plan create --name premium-plan \
+az functionapp plan create \
+  --name premium-plan \
   --resource-group integration-rg \
   --location eastus \
-  --sku EP1 --min-instances 1
+  --sku EP1 \
+  --min-instances 1
 ```
 
 ## Best practices
@@ -210,13 +318,13 @@ az functionapp plan create --name premium-plan \
 |----------|---------------|
 | Function Size | Keep functions focused on a single operation |
 | Dependencies | Minimize package dependencies to reduce deployment size |
-| Timeouts | Set appropriate timeouts (default is often too high) |
+| Timeouts | Set appropriate timeouts based on expected execution time |
 | Secrets | Use cloud-native secret managers (Secrets Manager, Key Vault) |
 | Observability | Enable X-Ray (AWS) or Application Insights (Azure) |
 | VPC Access | Configure VPC/VNet only when accessing private resources |
 
 ## What's next
 
-- [GraalVM Native Images](graalvm-native-images.md) -- Compile to native binaries for minimal cold start
-- [Managing Configurations](managing-configurations.md) -- Environment-specific configuration strategies
-- [Deploy to AWS / Azure / GCP](aws-azure-gcp.md) -- Container-based cloud deployments
+- [GraalVM Native Images](graalvm-native-images.md) — Compile to native binaries for minimal cold start
+- [Managing Configurations](managing-configurations.md) — Environment-specific configuration strategies
+- [Deploy to AWS / Azure / GCP](aws-azure-gcp.md) — Container-based cloud deployments
