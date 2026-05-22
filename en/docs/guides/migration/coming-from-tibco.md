@@ -9,10 +9,10 @@ import TabAwareToc from '@site/src/components/TabAwareToc';
 
 # Coming from TIBCO BusinessWorks
 
-A tutorial for developers migrating integrations from TIBCO BusinessWorks to WSO2 Integrator. This tutorial walks you through migrating a real TIBCO BusinessWorks project to WSO2 Integrator using the automated migration tool. No prior knowledge of Ballerina or WSO2 Integrator is required.
+A tutorial for developers migrating integrations from TIBCO BusinessWorks to WSO2 Integrator. This tutorial walks you through migrating a real TIBCO BusinessWorks project to WSO2 Integrator using an automated migration tool. No prior knowledge of Ballerina or WSO2 Integrator is required.
 
 **What you'll learn:**
-- How to run the automated migration tool (UI wizard or CLI) to convert a TIBCO BusinessWorks projects to Ballerina code
+- How to run the automated migration tool (UI wizard or CLI) to convert TIBCO BusinessWorks projects to Ballerina code
 - How to read the migration report and handle items the tool couldn't convert automatically
 - How TIBCO concepts (process definitions, activities, shared resources) translate to their WSO2 Integrator equivalents
 - How to configure credentials, test, and run your migrated integration
@@ -21,7 +21,7 @@ A tutorial for developers migrating integrations from TIBCO BusinessWorks to WSO
 
 **Prerequisites:**
 - WSO2 Integrator installed (UI wizard path), **or** Ballerina installed with `bal` on your PATH (CLI path)
-- Git installed (to clone the sample project; not required if using your own project)
+- Git installed (to clone the sample project — not required if using your own project)
 
 ## What You'll Build
 
@@ -34,7 +34,7 @@ You'll migrate the [TIBCO BusinessWorks Credit Application sample](https://githu
 
 **Sample project:** [TN2018/Apps](https://github.com/TIBCOSoftware/bw-samples/tree/master/TN2018/Apps)
 
-The migration tool converts the TIBCO process definitions to Ballerina services, maps the JDBC and HTTP connections, and generates a migration report. You'll review the report, fix up any remaining items, configure credentials in `Config.toml`, and run the result.
+The migration tool converts TIBCO process definitions to Ballerina services, maps JDBC and HTTP connections, and generates a migration report. You'll review the report, fix up any remaining items, configure credentials in `Config.toml`, and run the result.
 
 > **Using your own project?** You can follow every step below using any TIBCO BusinessWorks project(s) instead of the sample.
 
@@ -47,7 +47,7 @@ git clone https://github.com/TIBCOSoftware/bw-samples.git
 cd bw-samples/TN2018/Apps
 ```
 
-Take a moment to look at the project structure. The `Apps` directory contains four cooperating TIBCO BW projects:
+Take a moment to review the project structure. The `Apps` directory contains four cooperating TIBCO BW projects:
 
 ```bash
 TN2018/Apps/
@@ -66,7 +66,7 @@ Each project follows the standard TIBCO BW 6.x Maven multi-module layout: a pare
 
 ## Step 2: Run the migration tool
 
-WSO2 Integrator provides an automated migration tool that converts TIBCO BusinessWorks process definitions to Ballerina code. The tool handles process flows, activities, transitions, shared resources, error handling, and more.
+WSO2 Integrator provides an automated migration tool that converts TIBCO BusinessWorks process definitions to Ballerina code. The tool handles process flows, activities, transitions, shared resources, and error handling.
 
 <TabAwareToc />
 <Tabs>
@@ -82,7 +82,7 @@ The migration wizard guides you through a 5-step process to convert your TIBCO p
 1. Open WSO2 Integrator, click **More Actions**, and select **Migrate Integrations from Other Vendors**.
 2. Select **TIBCO** as the source platform.
 3. Under **Select a Project Folder or Directory**, click **Browse** and select the `TN2018/Apps` directory you cloned in Step 1 (or your own project directory).
-4. Under **Source Layout**, select **Multiple Projects** (the `Apps` directory contains four separate BW projects). If you have a single project, select **Single Project** instead.
+4. Under **Source Layout**, select **Multiple Projects** (the `Apps` directory contains four separate BW projects). If you are working with a single project, select **Single Project** instead.
 
    > **Note:** The **Source Layout** section appears only after you select a directory.
 
@@ -105,7 +105,7 @@ When the dry run completes, the wizard displays a summary of the migration cover
 
    > **Note:** The exact coverage percentages shown in the screenshots may differ from what you see. They reflect the tool's capabilities and the reference project at the time the screenshots were taken, and both evolve over time.
 
-Click **View Full Report** to open the full HTML report. The report includes:
+Click **View Full Report** to open the HTML report. The report includes:
 
 - **Migration Coverage Overview**: Overall coverage percentage with a breakdown of total, migratable, and non-migratable code lines.
 - **Breakdown Components**: Separate coverage for TIBCO activities and process elements.
@@ -173,7 +173,7 @@ When the AI enhancement completes, the status shows **AI Enhancement completed**
 
 ### Prerequisites
 
-- Ballerina installed and the `bal` command available in your environment.
+- Ballerina installed, and the `bal` command available in your environment.
 
 ### Steps
 
@@ -248,7 +248,7 @@ httpEndpoint = "https://api.example.com"
 
 ## Step 4: Test it
 
-If your TIBCO project had tests, the migration tool will have converted them to Ballerina. Run them with:
+If your TIBCO project includes tests, the migration tool will convert them to Ballerina. Run them with:
 
 ```bash
 bal test
