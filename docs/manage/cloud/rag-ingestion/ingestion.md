@@ -103,4 +103,4 @@ You can run ingestion at intervals such as minutely, hourly, daily, monthly, or 
 
 - [RAG retrieval](./retrieval.md) — Query the vector store after ingestion completes.
 - [RAG service](./service.md) — Ingest, chunk, and retrieve documents through the service API.
-- [Managed PostgreSQL and vector databases](./vector-databases.md) — Provision the vector store used by RAG.
+- [Managed vector databases](./vector-databases.md) — Provision the vector store used by RAG.
