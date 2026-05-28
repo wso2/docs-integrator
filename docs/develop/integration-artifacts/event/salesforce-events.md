@@ -30,7 +30,7 @@ Salesforce event integrations subscribe to Change Data Capture (CDC) channels an
 
    ![Service Designer showing the Salesforce Events service canvas](/img/develop/integration-artifacts/event/salesforce-events/step-service-designer.png)
 
-   The four event handlers — `onCreate`, `onUpdate`, `onDelete`, and `onRestore` — are added automatically when the service is created. Click any handler to open it in the flow diagram view and implement the logic.
+   The four event handlers - `onCreate`, `onUpdate`, `onDelete`, and `onRestore` - are added automatically when the service is created. Click any handler to open it in the flow diagram view and implement the logic.
 
 ```ballerina
 import ballerinax/salesforce;
@@ -42,7 +42,7 @@ configurable string password = ?;
 listener salesforce:Listener salesforceListener = new ({
     auth: {
         username: username,
-        password: password, // password concatenated with security token
+        password: password // password concatenated with security token
     }
 });
 
@@ -74,58 +74,68 @@ service salesforce:CdcService on salesforceListener {
 
 ## Listener configuration
 
-In the **Service Designer**, click the **Configure** icon in the header to open the **Salesforce Event Integration Configuration** panel. Select **salesforceListener** under **Attached Listeners** to configure the listener.
+In the **Configure** panel, set **Auth** to a record expression with relevant fields with optional values to set any of the values below. Click **Save Changes** to apply.
 
-| Field | Description | Default |
-|---|---|---|
-| **Name** | Identifier for the listener. | `salesforceListener` |
-| **Auth** | Authentication credentials. SOAP-based authentication accepts a record expression with `username` and `password` fields. REST-based authentication is also supported. Select one of **Bearer Token**, **Password Grant**, **Refresh Token**, or **Client Credentials**. | Required |
-
-Click **Save Changes** to apply updates.
-
-The listener supports two authentication modes.
-
-**SOAP-based authentication** (username and password):
+   ![Salesforce Configiration](/img/develop/integration-artifacts/event/salesforce-events/salesforce-configuration.gif)
 
 ```ballerina
 listener salesforce:Listener salesforceListener = new ({
     auth: {
         username: username,
-        password: password,    // password concatenated with security token
+        password: password    // password concatenated with security token
     }
 });
 ```
+
+The listener supports two authentication modes: **SOAP-based** (username and password) and **REST-based** (OAuth 2.0). The same fields apply whether you configure the listener through the visual designer or directly in Ballerina code.
+
+### SOAP-based authentication
 
 `salesforce:SoapBasedListenerConfig` fields:
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `auth` | `CredentialsConfig` | Required | Authentication credentials. Contains `username` (Salesforce username / email) and `password` (password concatenated with the security token). |
+| `auth` | `CredentialsConfig` | Required | Authentication credentials. Contains `username` (Salesforce username / email) and `password`. The `password` value must be the user password concatenated with the user's security token (`<password><securityToken>`, no separator). |
 | `isSandBox` | `boolean` | `false` | Set to `true` if connecting to a Salesforce sandbox environment. |
 
-**REST-based authentication** (OAuth 2.0 refresh token):
-
-```ballerina
-listener salesforce:Listener salesforceListener = new ({
-    baseUrl: baseUrl,
-    auth: {
-        clientId: clientId,
-        clientSecret: clientSecret,
-        refreshToken: refreshToken,
-        refreshUrl: "https://login.salesforce.com/services/oauth2/token"
-    }
-});
-```
+### REST-based authentication
 
 `salesforce:RestBasedListenerConfig` fields:
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `baseUrl` | `string` | Required | Salesforce instance URL |
-| `auth` | `OAuth2Config` | Required | OAuth 2.0 configuration. Accepts `OAuth2RefreshTokenGrantConfig`, `OAuth2PasswordGrantConfig`, `OAuth2ClientCredentialsGrantConfig`, or `BearerTokenConfig`. |
-| `tokenStore` | `TokenStore` | `InMemoryTokenStore` | Token store for coordinating refresh token rotation across replicas. Use a distributed implementation (e.g., Redis-backed) for multi-replica deployments. |
+| `baseUrl` | `string` | Required | Salesforce instance URL. |
+| `auth` | `OAuth2Config` | Required | OAuth 2.0 configuration. Pick one of `BearerTokenConfig`, `OAuth2PasswordGrantConfig`, `OAuth2RefreshTokenGrantConfig`, or `OAuth2ClientCredentialsGrantConfig` - see [OAuth 2.0 auth variants](#oauth-20-auth-variants) below. |
+| `tokenStore` | `TokenStore` | `InMemoryTokenStore` | Token store for coordinating refresh token rotation (RTR) across replicas. The default InMemoryTokenStore handles RTR automatically for single-replica deployments. For multi-replica deployments (e.g., multiple Kubernetes pods), provide a distributed implementation (e.g., Redis-backed) to prevent token replay conflicts.|
 
-⚠️ `tokenStore` and Refresh Token Rotation (RTR) only apply when using `OAuth2RefreshTokenGrantConfig`. The other grant types bypass the `TokenManager` entirely.
+Token Store and Refresh Token Rotation(RTR) only apply when using OAuth2RefreshTokenGrantConfig. RTR must also be enabled on the Salesforce side, in your Connected App settings, enable Refresh Token Rotation under OAuth policies. The other grant types bypass the TokenManager entirely.
+
+### Common optional fields
+
+These fields apply to both SOAP and REST-based listener configurations:
+
+| Field | Type | Description |
+|---|---|---|
+| `replayFrom` | `int` \| `ReplayOptions` | Replay option: `REPLAY_FROM_TIP`, `REPLAY_FROM_EARLIEST`, or a specific replay ID. |
+| `connectionTimeout` | `decimal` | Connection timeout in seconds. |
+| `readTimeout` | `decimal` | Read timeout in seconds. |
+| `keepAliveInterval` | `decimal` | Keep-alive interval in seconds. |
+| `apiVersion` | `string` | Salesforce Streaming API version. |
+| `sessionTimeout` | `int` | Session timeout in seconds. |
+| `proxyConfig` | `ProxyConfig` | Optional HTTP proxy configuration. |
+
+#### OAuth 2.0 auth variants
+
+The Record Configuration panel's `auth` drop-down (and the corresponding Ballerina record types) exposes four grant configurations. Pick the one that matches how your Connected App is set up.
+
+| Config type | Required fields | Use when |
+|---|---|---|
+| `BearerTokenConfig` | `token` | You already have a short-lived access token and refresh it out-of-band. |
+| `OAuth2PasswordGrantConfig` | `tokenUrl`, `username`, `password` | You authenticate as a Salesforce user with username + password (the `password` value must be `<password><securityToken>`, as for SOAP). |
+| `OAuth2RefreshTokenGrantConfig` | `refreshUrl`, `refreshToken`, `clientId`, `clientSecret` | You have a long-lived refresh token from a Connected App authorization-code flow. Recommended for production. |
+| `OAuth2ClientCredentialsGrantConfig` | `tokenUrl`, `clientId`, `clientSecret` | The Connected App authenticates as itself (machine-to-machine), without a user context. |
+
+All three grant configs additionally accept these optional fields: `scopes`, `defaultTokenExpTime`, `clockSkew`, `optionalParams`, `credentialBearer`, `clientConfig`. `OAuth2PasswordGrantConfig` also accepts `clientId`, `clientSecret`, and `refreshConfig` as optional.
 
 ## Event handlers
 
@@ -178,7 +188,7 @@ The CDC channel the service subscribes to is determined by the service path in B
 
 ## What's next
 
-- [Kafka](kafka.md) — consume messages from Apache Kafka topics
-- [Azure Service Bus](azure-service-bus.md) — consume messages from Azure Service Bus queues
-- [Connections](../supporting/connections.md) — reuse Salesforce credentials across services
-- [Salesforce connector reference](../../../connectors/catalog/crm-sales/salesforce/connector-overview.md) — full connector API reference and trigger reference
+- [Kafka](kafka.md) - consume messages from Apache Kafka topics
+- [Azure Service Bus](azure-service-bus.md) - consume messages from Azure Service Bus queues
+- [Connections](../supporting/connections.md) - reuse Salesforce credentials across services
+- [Salesforce connector reference](../../../connectors/catalog/crm-sales/salesforce/connector-overview.md) - full connector API reference and trigger reference
