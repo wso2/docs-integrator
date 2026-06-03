@@ -155,7 +155,7 @@ See the [ICP API Reference](../api/icp.md) for programmatic access.
 
 ### Can I migrate from MuleSoft or TIBCO?
 
-Yes. WSO2 provides migration guides and tooling to help transition from other integration platforms. See [Coming from MuleSoft](../../guides/migration/coming-from-mulesoft.md) and [Coming from TIBCO](../../guides/migration/coming-from-tibco.md) for platform-specific guidance. For migrating third-party integrations programmatically, see [Migrate third-party integrations](../../develop/create-integrations/migrate-third-party-integrations.md).
+Yes. WSO2 provides migration guides and tooling to help transition from other integration platforms. See [Migrate from MuleSoft](/guides/migration/from-mulesoft) and [Migrate from TIBCO](/guides/migration/from-tibco) for platform-specific guidance. For migrating third-party integrations programmatically, see [Migrate third-party integrations](../../develop/create-integrations/migrate-third-party-integrations.md).
 
 ### Can I run WSO2 MI and WSO2 Integrator side by side?
 

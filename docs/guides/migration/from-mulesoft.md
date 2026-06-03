@@ -1,8 +1,8 @@
 ---
-title: Coming from MuleSoft
+title: Migrate from MuleSoft
 ---
 
-# Coming from MuleSoft
+# Migrate from MuleSoft
 
 A guide for developers migrating integrations from MuleSoft Anypoint to WSO2 Integrator. This tutorial walks you through migrating a real MuleSoft project to WSO2 Integrator using the automated migration tool. No prior knowledge of Ballerina or WSO2 Integrator is required.
 
