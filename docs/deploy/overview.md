@@ -15,8 +15,7 @@ WSO2 Integrator supports multiple deployment targets. Choose the one that fits y
 - **[WSO2 Cloud](./cloud/overview.md)** — Push your project directly from the IDE or the cloud editor to the managed WSO2 Integration Platform. No infrastructure setup required.
 - **[Run locally](./self-hosted/run-locally.md)** — Run your integration on your local machine for development or testing.
 - **[VM-based deployment](../deploy-operate/deploy/vm-based-deployment.md)** — Deploy to a virtual machine or bare-metal server.
-- **[Docker](./self-hosted/docker.md)** and **[Kubernetes](./self-hosted/kubernetes.md)** — Package your integration as a container and deploy it to a Kubernetes cluster.
-- **[Red Hat OpenShift](./self-hosted/openshift.md)** — Deploy on OpenShift using standard Kubernetes tooling.
+- **[Containerized Deployment](./self-hosted/containerized-deployment.md)** — Package your integration as a container and deploy it to Docker, Kubernetes, or Red Hat OpenShift.
 - **[Serverless deployment](../deploy-operate/deploy/serverless-deployment.md)** — Run integrations as serverless functions.
 - **[AWS, Azure, and GCP](../deploy-operate/deploy/aws-azure-gcp.md)** — Deploy to major cloud providers using native services.
 - **[GraalVM native images](../deploy-operate/deploy/graalvm-native-images.md)** — Compile your integration to a native binary for faster startup and lower memory usage.

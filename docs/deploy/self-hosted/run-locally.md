@@ -65,6 +65,4 @@ Ballerina must be installed on the VM. Download it from [ballerina.io](https://b
 
 ## What's next
 
-- [Docker](./docker.md) — Build a Docker image from your project using Code to Cloud
-- [Kubernetes](./kubernetes.md) — Generate Kubernetes manifests and deploy to a cluster using Code to Cloud
-- [Red Hat OpenShift](./openshift.md) — Generate OpenShift manifests and deploy using the `oc` CLI
+- [Containerized Deployment](./containerized-deployment.md) — Deploy your project to Docker, Kubernetes, or Red Hat OpenShift using Code to Cloud

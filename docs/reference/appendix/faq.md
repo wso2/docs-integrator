@@ -107,7 +107,7 @@ WSO2 Integrator supports multiple deployment targets:
 - **GraalVM native:** Build native executables with `bal build --graalvm` for fast startup
 - **Serverless:** Deploy to AWS Lambda or Azure Functions
 
-See [Deploy and Operate](../../deploy/self-hosted/kubernetes.md) for detailed deployment guides.
+See [Deploy and Operate](../../deploy/overview.md) for detailed deployment guides.
 
 ### How do I configure my application for different environments?
 
