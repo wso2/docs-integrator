@@ -13,8 +13,7 @@ Once your integration is ready, this section covers everything you need to ship 
 WSO2 Integrator supports multiple deployment targets. Choose the one that fits your infrastructure:
 
 - **[WSO2 Cloud](./cloud/overview.md)** — Push your project directly from the IDE or the cloud editor to the managed WSO2 Integration Platform. No infrastructure setup required.
-- **[Run locally](./self-hosted/run-locally.md)** — Run your integration on your local machine for development or testing.
-- **[VM-based deployment](../deploy-operate/deploy/vm-based-deployment.md)** — Deploy to a virtual machine or bare-metal server.
+- **[Local and VM deployment](./self-hosted/local-and-vm-deployment.md)** — Run your integration on your local machine for development or testing, or deploy to a virtual machine or bare-metal server.
 - **[Containerized Deployment](./self-hosted/containerized-deployment.md)** — Package your integration as a container and deploy it to Docker, Kubernetes, or Red Hat OpenShift.
 - **[Serverless deployment](../deploy-operate/deploy/serverless-deployment.md)** — Run integrations as serverless functions.
 - **[AWS, Azure, and GCP](../deploy-operate/deploy/aws-azure-gcp.md)** — Deploy to major cloud providers using native services.

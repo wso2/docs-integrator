@@ -192,5 +192,5 @@ Deploy the generated ZIP -- cold start drops from seconds to under 100ms.
 ## What's next
 
 - [Serverless Deployment](serverless-deployment.md) -- Deploy native images as Lambda functions
-- [VM-Based Deployment](vm-based-deployment.md) -- Run native binaries on virtual machines
+- [Local and VM deployment](../../deploy/self-hosted/local-and-vm-deployment.md) -- Run native binaries on virtual machines
 - [Containerized Deployment](../../deploy/self-hosted/containerized-deployment.md) -- Build minimal container images for Docker, Kubernetes, and OpenShift

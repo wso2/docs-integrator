@@ -277,5 +277,5 @@ For non-Kubernetes environments (ECS, VM-based), use cloud-native service discov
 
 ## What's next
 
-- [Run Locally](../../deploy/self-hosted/run-locally.md) -- Develop and test before deploying
+- [Local and VM deployment](../../deploy/self-hosted/local-and-vm-deployment.md) -- Develop and test before deploying
 - [Scaling & High Availability](scaling-high-availability.md) -- Configure scaling and resilience

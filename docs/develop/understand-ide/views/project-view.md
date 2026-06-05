@@ -41,7 +41,7 @@ The deployment options panel appears on the right sidebar and provides shortcuts
 |---|---|
 | [**Deploy to WSO2 Cloud**](../../../deploy/cloud/overview.md) | Fully managed cloud platform for hosting and running integrations. |
 | [**Containerized Deployment**](../../../deploy/self-hosted/containerized-deployment.md) | Build Docker images and deploy integrations to Docker, Kubernetes, or OpenShift. |
-| [**Deploy on a VM**](../../../deploy-operate/deploy/vm-based-deployment.md) | Run integrations as standalone JAR files on virtual machines. |
+| [**Local and VM deployment**](../../../deploy/self-hosted/local-and-vm-deployment.md) | Run integrations locally during development or as standalone JAR files on virtual machines. |
 | [**Integration Control Plane (ICP)**](../../../deploy-operate/observe/integration-control-plane-icp.md) | Monitor and manage running integrations from a centralized dashboard. |
 
 At the project level, click **Enable ICP for all integrations** to activate ICP monitoring for every integration in the project at once.
