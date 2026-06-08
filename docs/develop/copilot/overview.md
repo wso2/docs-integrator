@@ -75,7 +75,7 @@ Type `/` in the Copilot input bar to invoke a command for a specific task.
 | `/doc` | Generate documentation for your integration. |
 | `/openapi` | Import OpenAPI specifications. |
 | `/typecreator` | Create custom types. |
-| `/datamap` | [Generate data mappings](../integration-artifacts/supporting/data-mapper/data-mapper.md). |
+| `/datamap` | [Generate data mappings](../integration-artifacts/supporting/data-mapper/ai-mapping.md). |
 | `/natural-programming` | Experimental. Generate code from requirements and check for drift. |
 
 `/ask` answers only from the Ballerina documentation and does not use your codebase context. For questions about your code or any other topic, message Copilot directly without a command.
@@ -84,6 +84,6 @@ Type `/` in the Copilot input bar to invoke a command for a specific task.
 
 - [Getting started](getting-started.md) — Sign in to WSO2 Integrator Copilot.
 - [Generate tests with AI](../test/ai-generated-cases.md) — Use Copilot to generate test cases.
-- [AI data mapper](../integration-artifacts/supporting/data-mapper/data-mapper.md) — Generate data mappings using AI.
+- [AI data mapper](../integration-artifacts/supporting/data-mapper/ai-mapping.md) — Generate data mappings using AI.
 - [Try-It tool](../test/built-in-try-it-tool.md) — Test services without leaving the IDE.
 - [AI usage and data handling guidelines](../../reference/ai-usage-and-data-handling-guidelines.md) — How Copilot handles your data.
