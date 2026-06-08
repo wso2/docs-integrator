@@ -225,6 +225,6 @@ options.mode = "client"
 
 ## What's next
 
-- [Local and VM deployment](../../deploy/self-hosted/local-and-vm-deployment.md) — build and run the package you just configured.
+- [VM Deployment](../../deploy/self-hosted/vm-deployment.md) — build and run the package you just configured.
 - [Cloud.toml reference](./cloudtoml-reference.md) — add Kubernetes and Docker deployment descriptors when you deploy.
 - [Configuration management](../config/configuration-management.md) — supply runtime values, override via environment variables, and target per-environment configuration.

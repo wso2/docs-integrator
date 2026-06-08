@@ -310,6 +310,4 @@ The `preStop` sleep ensures the pod is removed from the Service endpoints before
 
 ## What's next
 
-- [Environments](environments.md) -- Manage configuration across environments
-- [Deploy to AWS / Azure / GCP](aws-azure-gcp.md) -- Cloud-specific scaling options
 - [Metrics](../observe/metrics-prometheus-grafana.md) -- Monitor scaling behavior with Prometheus
