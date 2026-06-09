@@ -6,7 +6,7 @@ title: GraalVM Native Images
 
 GraalVM native image compilation transforms your Ballerina integration into a platform-specific binary that starts in milliseconds and uses significantly less memory than JVM-based deployments. This is ideal for serverless, CLI tools, and resource-constrained environments.
 
-## Benefits
+## JVM vs native image
 
 | Metric | JVM (JAR) | GraalVM Native |
 |--------|-----------|----------------|
@@ -20,21 +20,54 @@ GraalVM native image compilation transforms your Ballerina integration into a pl
 
 | Requirement | Details |
 |-------------|---------|
-| GraalVM JDK | GraalVM for JDK 17 or later (Community or Enterprise) |
+| GraalVM JDK | GraalVM for JDK 21 (Community or Enterprise Edition) |
 | Native Image | `gu install native-image` (included in newer distributions) |
 | OS Tools | `gcc`, `zlib` headers (Linux), Xcode Command Line Tools (macOS) |
 | Memory | 8 GB+ RAM recommended for compilation |
+| Docker | 8 GB+ memory allocated to Docker (for container builds) |
 
 ### Install GraalVM
 
 ```bash
 # Using SDKMAN (recommended)
-sdk install java 17.0.9-graal
+sdk install java 21.0.2-graalce
 
 # Verify installation
 java -version
 native-image --version
 ```
+
+Set the `GRAALVM_HOME` environment variable:
+
+**Linux/macOS:**
+```bash
+export GRAALVM_HOME=$HOME/.sdkman/candidates/java/current
+```
+
+**Windows:**
+```cmd
+set GRAALVM_HOME=C:\path\to\graalvm
+```
+
+If using SDKMAN, you can alternatively use `JAVA_HOME` instead of `GRAALVM_HOME`.
+
+### Platform-specific requirements
+
+**Windows:**
+- Install Visual Studio with Microsoft Visual C++ (MSVC)
+- Initialize the **x64 Native Tools Command Prompt** before running `bal build --graalvm`
+
+For more details, see [Prerequisites for Native Image on Windows](https://www.graalvm.org/latest/getting-started/windows/#prerequisites-for-native-image-on-windows).
+
+**macOS (Apple Silicon):**
+- GraalVM native-image support for Apple M1/M2 (darwin-aarch64) is experimental
+- Most features work, but some edge cases may have compatibility issues
+
+For more details, see [GraalVM on macOS](https://www.graalvm.org/latest/getting-started/macos/).
+
+**Linux:**
+
+For distribution-specific requirements, see [GraalVM on Linux](https://www.graalvm.org/latest/getting-started/linux/).
 
 ## Building a native image
 
@@ -57,6 +90,16 @@ target/
 ```bash
 ./target/bin/my_integration
 ```
+
+### Test native compatibility
+
+Test your integration with GraalVM to verify runtime compatibility of dependencies:
+
+```bash
+bal test --graalvm
+```
+
+Code coverage and runtime debugging features are not supported with GraalVM native image testing.
 
 ### Build with Docker isolation
 
@@ -112,64 +155,6 @@ Set additional options in `Ballerina.toml`:
 [build-options]
 graalvmBuildOptions = "--no-fallback --initialize-at-build-time -march=native"
 ```
-
-## Deploying native images
-
-### Standalone binary on VM
-
-Copy the binary directly -- no JVM installation needed:
-
-```bash
-scp target/bin/my_integration user@production-vm:/opt/integrations/
-ssh user@production-vm "chmod +x /opt/integrations/my_integration"
-```
-
-Create a systemd service:
-
-```ini
-[Unit]
-Description=WSO2 Integration (Native)
-After=network.target
-
-[Service]
-Type=simple
-User=ballerina
-ExecStart=/opt/integrations/my_integration
-Restart=on-failure
-RestartSec=5
-Environment=BAL_CONFIG_FILES=/opt/integrations/Config.toml
-
-[Install]
-WantedBy=multi-user.target
-```
-
-### Minimal Docker image
-
-Use a `distroless` or `scratch` base image for the smallest possible container:
-
-```dockerfile
-FROM gcr.io/distroless/base-debian12
-COPY target/bin/my_integration /app/my_integration
-COPY Config.toml /app/Config.toml
-WORKDIR /app
-EXPOSE 9090
-ENTRYPOINT ["./my_integration"]
-```
-
-Build and run:
-
-```bash
-docker build -t my-integration:native .
-docker run -p 9090:9090 my-integration:native
-```
-
-### AWS lambda with native image
-
-```bash
-bal build --graalvm --cloud=aws_lambda
-```
-
-Deploy the generated ZIP -- cold start drops from seconds to under 100ms.
 
 ## Troubleshooting
 
