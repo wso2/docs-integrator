@@ -15,7 +15,7 @@ All values are set in `<ICP_HOME>/conf/deployment.toml`. Commented-out keys show
 | `logLevel`                           | `string`  | `"INFO"`    | Log verbosity — `DEBUG`, `INFO`, `WARN`, `ERROR`                      |
 | `enableAuditLogging`                 | `boolean` | `true`      | Enable audit log for authentication and management events             |
 | `enableMetrics`                      | `boolean` | `true`      | Expose Prometheus metrics endpoint                                    |
-| `schedulerIntervalSeconds`           | `int`     | `30`        | Interval (seconds) between health-check polling of connected runtimes |
+| `schedulerIntervalSeconds`           | `int`     | `60`        | How often ICP checks for inactive runtimes and marks them as offline |
 | `refreshTokenCleanupIntervalSeconds` | `int`     | `86400`     | How often expired refresh tokens are purged from the database         |
 
 ## Authentication Settings
@@ -25,6 +25,6 @@ All values are set in `<ICP_HOME>/conf/deployment.toml`. Commented-out keys show
 | `authBackendUrl`             | `string`  | `"https://localhost:9447"` | URL of the authentication backend service                         |
 | `frontendJwtHMACSecret`      | `string`  | —                          | HMAC-SHA256 secret for signing JWT tokens (minimum 32 characters) |
 | `defaultTokenExpiryTime`     | `int`     | `3600`                     | JWT access token lifetime in seconds                              |
-| `refreshTokenExpiryTime`     | `int`     | `604800`                   | Refresh token lifetime in seconds (default: 7 days)               |
+| `refreshTokenExpiryTime`     | `int`     | `86400`                    | Refresh token lifetime in seconds (default: 1 day)                |
 | `enableRefreshTokenRotation` | `boolean` | `true`                     | Rotate refresh token on each use                                  |
-| `maxRefreshTokensPerUser`    | `int`     | `0`                        | Maximum active refresh tokens per user (`0` = unlimited)          |
+| `maxRefreshTokensPerUser`    | `int`     | `10`                       | Maximum active refresh tokens per user (`0` = unlimited)          |

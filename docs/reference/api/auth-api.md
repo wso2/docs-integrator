@@ -1,8 +1,8 @@
 ---
-title: Authentication API
+title: ICP Authentication API
 ---
 
-# Authentication API
+# ICP Authentication API
 
 The ICP server exposes a REST authentication service at:
 
