@@ -1,33 +1,32 @@
 ---
-title: Build a Self-Moderating Social Media Backend
-sidebar_label: Self-Moderating Backend
+title: Build an Event-Driven Social Media Backend with RabbitMQ
+sidebar_label: Build an Event-Driven Social Media Backend with RabbitMQ
 sidebar_position: 1
-description: "Build a Twitter-style social media backend end to end with WSO2 Integrator, touching every core capability of the platform: REST APIs, data persistence, connectors, data mapping, resiliency, validation, security, Kafka event-driven integration, testing, observability, and deployment."
+description: "Build a Twitter-style social media backend with WSO2 Integrator: a REST API that screens every post for sentiment, stores it in MySQL, and announces it to Slack through a RabbitMQ event pipeline. Designed end to end in the Visual Designer, split across three integrations."
 ---
 
-# Build a Self-Moderating Social Media Backend
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-In this tutorial you build a complete, Twitter-style social media backend with [WSO2 Integrator](../../get-started/introduction.md), the low-code integration platform built on Ballerina. You design everything in the **Visual Designer**; WSO2 Integrator generates clean Ballerina underneath, which you can inspect and edit at any time by toggling to the code view.
+# Build an Event-Driven Social Media Backend with RabbitMQ
 
-By the end, a single `POST` will flow from the API through validation, sentiment screening, and storage, and out to a Slack channel. Every piece of it is designed on the canvas, none of it hand-written.
+In this tutorial you build a complete, Twitter-style social media backend with [WSO2 Integrator](../../get-started/introduction.md), the low-code integration platform built on Ballerina. You design everything in the **Visual Designer**, and WSO2 Integrator generates clean Ballerina underneath. Every part below shows both: the visual steps on one tab, and the exact code the platform produced on the other. You never have to type the code.
+
+By the end, a single `POST` will flow from the API through validation, sentiment screening, and storage, and out to a Slack channel.
 
 :::info What you will build
-A backend for a small social network. People register an account, follow each other, and publish short posts: the familiar shape of a Twitter-style feed, exposed as a clean REST API.
-
-The interesting part is what happens when someone publishes. You don't want abusive content landing in your database, so every new post is first screened by a sentiment-analysis service; anything negative is rejected before it is ever stored. An accepted post is saved to MySQL and, without making the author wait, announced to a team Slack channel through a **Kafka** event pipeline, so the community sees new activity the moment it appears. Every hop, from the API through screening and storage out to Slack, is traceable end to end.
-
-You build this as three small, independently deployable integrations rather than one big service. By the end, every part of it is something you designed on the canvas.
+A backend for a small social network where people register, publish short posts, and follow each other. Every new post is first screened by a sentiment-analysis service; anything negative is rejected before it is stored. An accepted post is saved to MySQL and, without making the author wait, announced to a team Slack channel through a **RabbitMQ** event pipeline. You build it as three small integrations, and every part is something you design on the canvas.
 :::
 
 ## Architecture
 
-The application is composed of small, focused integrations rather than one monolith, the way you would build it in production.
+You build three focused integrations inside one project rather than a single monolith, the way you would in production.
 
 | Integration | Type | Responsibility |
 | --- | --- | --- |
-| **Social Media API** | HTTP service | Users and posts REST API. Validates input, screens posts for sentiment, persists to MySQL, and publishes a `post-created` event to Kafka. |
-| **Post Notifier** | Kafka event integration | Consumes `post-created` events and posts a message to Slack. |
-| **Sentiment API** | HTTP service | A small secured service that scores post text as positive, negative, or neutral. |
+| **Social Media API** | HTTP service | Users and posts REST API. Validates input, screens posts for sentiment, persists to MySQL, and publishes a new-post event to RabbitMQ. |
+| **Sentiment API** | HTTP service | A small service that scores post text as positive, negative, or neutral. |
+| **Post Notifier** | RabbitMQ event integration | Consumes new-post messages and posts to Slack. |
 
 ```
                                   ┌───────────────────┐
@@ -38,7 +37,7 @@ The application is composed of small, focused integrations rather than one monol
                         ▼                  ▼                   │ publish
                  ┌────────────┐      ┌──────────┐              ▼
                  │ Sentiment  │      │  MySQL   │        ┌───────────┐
-                 │    API     │      └──────────┘        │   Kafka   │
+                 │    API     │      └──────────┘        │ RabbitMQ  │
                  └────────────┘                          └─────┬─────┘
                                                                │ consume
                                                          ┌─────▼─────┐
@@ -47,58 +46,65 @@ The application is composed of small, focused integrations rather than one monol
                                                          └───────────┘
 ```
 
-### How the pieces fit together
+The integrations collaborate through a deliberate choice of contract. The Social Media API calls the Sentiment API over **HTTP** because it needs the verdict synchronously to decide whether to store the post. It hands the notification off to **RabbitMQ** because the author should not wait on Slack, and because you can add more consumers later (email, analytics) without touching the API.
 
-The three integrations never reach into each other's internals. Each owns one job, and they collaborate through a deliberate choice of contract: an **HTTP call** where one integration needs a synchronous answer from another, and a **Kafka event** where it doesn't. Follow a single `POST /users/{id}/posts` to see why that split matters:
-
-1. The request lands on the **Social Media API**. It first checks the payload is well-formed: a missing name or a malformed phone number is turned away here, before any business logic runs.
-2. The API calls the **Sentiment API** over a secured HTTP connection to score the post's text. This call is synchronous because the API needs the verdict to decide what to do next: if the text scores negative, the API stops and returns `400`, and the post never reaches the database.
-3. A clean post is reshaped to match how it's stored, then written to **MySQL**.
-4. The instant that write succeeds, the API publishes a `post-created` event to **Kafka** and returns to the caller. The author isn't held up waiting for anything that happens afterward.
-5. The **Post Notifier** is listening on that topic. It picks up the event on its own schedule and posts to **Slack**, so a slow or failing notification can never slow down, or break, the original request.
-
-That division is the whole point. Validation, screening, and storage run inline because the caller needs their results to get a meaningful response. The notification runs through a broker because the caller doesn't care about it. Decoupling it that way means you can add more consumers later (an email digest, analytics, a mobile push) by listening to the same event, without ever touching the API.
+The **Social Media API is the orchestrator**: it depends on the sentiment service, a database, and the message pipeline. So you build the two standalone integrations it leans on first (Parts 3 and 4), then assemble the API itself (Parts 5 onward).
 
 :::note Event-driven backbone
-This design uses **Kafka** as a first-class [event integration trigger](../../develop/integration-artifacts/event/kafka.md): you build the consumer entirely in the Visual Designer. The event-driven pattern itself is broker-agnostic; the platform also ships triggers for [RabbitMQ](../../develop/integration-artifacts/event/rabbitmq.md), [MQTT](../../develop/integration-artifacts/event/mqtt.md), [Solace](../../develop/integration-artifacts/event/solace.md), and [Azure Service Bus](../../develop/integration-artifacts/event/azure-service-bus.md).
+RabbitMQ is a first-class [event integration trigger](../../develop/integration-artifacts/event/rabbitmq.md): you build the consumer entirely in the Visual Designer. The pattern is broker-agnostic; the platform also ships triggers for [Kafka](../../develop/integration-artifacts/event/kafka.md), [MQTT](../../develop/integration-artifacts/event/mqtt.md), [Solace](../../develop/integration-artifacts/event/solace.md), and [Azure Service Bus](../../develop/integration-artifacts/event/azure-service-bus.md).
 :::
 
 ## Prerequisites
 
 - [Install WSO2 Integrator](../../get-started/setup/local-setup.md).
 - A MySQL 8 instance (local or containerized).
-- A Kafka broker (local or containerized).
+- A RabbitMQ broker (local or containerized).
 - A Slack workspace where you can create an app and obtain a bot token.
-- Docker, if you want to run the full stack locally in [Part 15](#part-15-deploy).
+- Docker, if you want to run the full stack locally in [Part 13](#part-13-deploy).
 
 ---
 
 ## Part 1: Set up the project
 
-1. Launch **WSO2 Integrator** and [create a project](../../develop/create-integrations/create-a-project.md) named `social-media`.
-2. [Create a new integration](../../develop/create-integrations/create-a-new-integration.md) inside the project to hold your first artifact.
-3. When the project opens, you land in the [Visual Designer](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md#anatomy-of-the-editor). The left panel lists your integration **artifacts**; the [canvas](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md#canvas) shows the flow of whichever artifact you select.
+Everything you build sits inside one project, so you set that up first. WSO2 Integrator creates the project and your first integration together, in a single form.
 
-Throughout this tutorial you design on the canvas, and WSO2 Integrator keeps the Ballerina source in sync. Use the **Show Source** toggle whenever you want to see, or hand-tune, the generated code.
+1. Launch **WSO2 Integrator** and [create a new integration](../../develop/create-integrations/create-a-new-integration.md#configure-the-integration). Name it `social-media`.
+2. Enable **Create within a project**, name the [project](../../develop/create-integrations/create-a-project.md) `social-media`, and choose where it lives on disk. This is the one project that will hold all three integrations from the [architecture](#architecture).
+3. Click **Create Integration**.
 
-:::tip
-A single WSO2 Integrator project can hold many artifacts (services, automations, event integrations, types, connections). You will add all three integrations from the [architecture](#architecture) to this one project.
-:::
+![The Create Integration form, with the integration and project both named social-media and Create within a project enabled](/img/guides/tutorials/social-media/create-integration.png)
+
+The project opens to its landing view. The artifacts panel on the left is where your integration takes shape: **Entry Points**, **Connections**, **Types**, **Functions**, **Data Mappers**, and **Configurations** are all empty for now, and you fill them in as the tutorial goes. The center pane lists the `social-media` integration you just created.
+
+![The social-media project landing view, showing the artifacts panel on the left and the Integrations and Libraries pane in the center](/img/guides/tutorials/social-media/project-landing-view.png)
+
+Open the integration and you land in the [Visual Designer](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md#anatomy-of-the-editor), where the [canvas](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md#canvas) shows the flow of whichever **artifact** you select. The integration is empty, so the Design view invites you to add your first artifact. Every part that follows starts here, with **+ Add Artifact**. Use the **Show Source** toggle whenever you want to see the generated code; you never have to edit it.
+
+![The empty social-media integration in the Design view, showing the "Your integration is empty" message and the Add Artifact button](/img/guides/tutorials/social-media/empty-integration-design.png)
 
 ---
 
 ## Part 2: Model the domain
 
-Start with the data, not the endpoints. You will model three records using the visual [Type editor](../../develop/integration-artifacts/supporting/types.md), with no hand-written type definitions.
+Start with the data. You model three records in the visual [Type editor](../../develop/integration-artifacts/supporting/types.md), with no hand-written type definitions. These records describe your domain, and they back the storage you add to the Social Media service in [Part 5](#part-5-create-the-social-media-rest-api).
 
-1. In the artifacts panel, add a new **Type**.
-2. Create a `User` record with fields `id`, `name`, `mobileNumber`, and `birthDate`.
-3. Create a `Post` record with fields `id`, `description`, `category`, `tags`, `createdDate`, and `userId`.
-4. Create a `Follower` record with fields `id`, `leaderId`, `followerId`, and `createdDate`.
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
 
-The [Type diagram](../../develop/integration-artifacts/supporting/types.md#type-diagram) now shows your domain and the relationships between records.
+1. In the artifacts panel, click **+** next to **Types**.
+2. Choose **Create from scratch**, set **Kind** to **Record**, and name it `User`.
+3. Click **+** to add each field: `id` (`int`, readonly), `name` (`string`), `mobileNumber` (`string`), and `birthDate` (`string`).
+4. Repeat for a `Post` record (`id`, `description`, `category`, `tags`, `createdDate`, `userId`) and a `Follower` record (`id`, `leaderId`, `followerId`, `createdDate`).
+5. Click **View Type Diagram** to see the [type diagram](../../develop/integration-artifacts/supporting/types.md#type-diagram) and the relationships between your records.
 
-The generated types look like this:
+![The Type Diagram showing the User, Post, and Follower records with their fields and types](/img/guides/tutorials/social-media/type-diagram.png)
+
+:::tip
+If you already have a JSON payload, use [Generate type from JSON or XML](../../develop/integration-artifacts/supporting/types.md#generate-type-from-json-or-xml) to create a record in one step.
+:::
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
 
 ```ballerina
 type User record {|
@@ -116,142 +122,275 @@ type Post record {|
     string createdDate;
     int userId;
 |};
+
+type Follower record {|
+    readonly int id;
+    int leaderId;
+    int followerId;
+    string createdDate;
+|};
 ```
 
-:::tip Generate types from a sample
-If you already have a JSON payload, use [Generate type from JSON or XML](../../develop/integration-artifacts/supporting/types.md#generate-type-from-json-or-xml) to create the record in one step.
-:::
+</TabItem>
+</Tabs>
 
-> **Capability: Visual type modeling.** You define your data contract once and reuse it across services, mappers, and connectors with full type safety.
+> **Capability: Visual type modeling.** You define your data contract once and reuse it across services, mappers, connectors, and the persistence layer with full type safety.
 
 ---
 
-## Part 3: Create the REST API
+The Social Media API ties three pieces together: a service to screen posts, a pipeline to announce them, and a store to keep them. Build the two standalone integrations first, the Sentiment API and the Post Notifier.
 
-Now expose the API. You design resources visually with the [HTTP service](../../develop/integration-artifacts/service/http.md) artifact.
+## Part 3: Build the Sentiment API
 
-1. Add a new **Service** and choose **HTTP**.
-2. Set the base path to `/social-media` and accept the default listener on port `9090`.
-3. [Add resources](../../develop/integration-artifacts/service/http.md#resources) for each operation:
+The first standalone integration is the screening service. Build a small **Sentiment API** that takes post text and returns a sentiment label with probabilities. For the tutorial it returns **hardcoded values**, so you can focus on the integration rather than a real model.
 
-| Method | Path | Returns |
-| --- | --- | --- |
-| `GET` | `/users` | `User[]` |
-| `GET` | `/users/{id}` | `User` |
-| `POST` | `/users` | `http:Created` |
-| `DELETE` | `/users/{id}` | `http:Ok` |
-| `GET` | `/users/{id}/posts` | `Post[]` |
-| `POST` | `/users/{id}/posts` | `http:Created` |
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
 
-For each resource, use the designer to [define inputs](../../develop/integration-artifacts/service/http.md#defining-inputs) such as [path parameters](../../develop/integration-artifacts/service/http.md#path-parameters), bind the request [payload](../../develop/integration-artifacts/service/http.md#payload-data-binding) to your record types, define the [response schema](../../develop/integration-artifacts/service/http.md#defining-response-schemas), and choose the [response status codes](../../develop/integration-artifacts/service/http.md#status-codes-with-payload).
+1. From the project view, click **+ Add** to add another integration to the same `social-media` project.
 
-The generated service skeleton:
+   ![The social-media project view with the Add button highlighted](/img/guides/tutorials/social-media/sentiment-add-integration.png)
+
+   Name the new [integration](../../develop/create-integrations/create-a-new-integration.md#configure-the-integration) `sentiment-api`; the package name and organization default from the name. Click **Add Integration**.
+
+   ![The Add New Integration form with the integration named sentiment-api](/img/guides/tutorials/social-media/sentiment-create-integration.png)
+
+2. In the new integration, click **+ Add Artifact**, then **HTTP Service**. Set the **Service Base Path** to `/text-processing`, choose a **Custom Listener** on **Port** `9000` named `httpListener`, and click **Create**.
+
+   ![Creating the HTTP service with base path /text-processing on a custom listener at port 9000](/img/guides/tutorials/social-media/sentiment-http-service.png)
+
+3. Add three [types](../../develop/integration-artifacts/supporting/types.md): a `Post` with a `text` field, a `Probability` with `neg`, `neutral`, and `pos` decimals, and a `Sentiment` holding a `Probability` and a `label`.
+
+   ![The Type Diagram showing the Post, Probability, and Sentiment records](/img/guides/tutorials/social-media/sentiment-types.png)
+
+4. Click **+ Add Resource**. Set the method to **POST** and the path to `api/sentiment`, bind the **Payload** to `Post`, and define responses `201` returning `Sentiment` and `500` returning `error`. Click **Save**.
+
+   ![Adding the POST api/sentiment resource with a Post payload and Sentiment response](/img/guides/tutorials/social-media/sentiment-add-resource.png)
+
+5. Open the resource flow and build the response with **Declare Variable** nodes: one for the `probability`, one for the `sentiment`, then a **Return**. The values are hardcoded for the tutorial.
+
+   ![Building the Sentiment record in the Record Configuration panel](/img/guides/tutorials/social-media/sentiment-return.png)
+
+   ![The completed POST api/sentiment flow: Start, two Declare Variable nodes, Return, and an Error Handler](/img/guides/tutorials/social-media/sentiment-flow.png)
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+The Visual Designer wrote this to `sentiment_api/main.bal`. The probability and label are hardcoded for the tutorial; in production you would score `post.text` with a real model.
 
 ```ballerina
+import ballerina/http;
+
+listener http:Listener httpListener = new (9000);
+
+service /text\-processing on httpListener {
+    resource function post api/sentiment(@http:Payload Post post) returns Sentiment|error {
+        do {
+            Probability probability = {
+                "neg": 0.30135019761690551,
+                "neutral": 0.27119050546800266,
+                "pos": 0.69864980238309449
+            };
+            Sentiment sentiment = {
+                probability: probability,
+                label: "pos"
+            };
+            return sentiment;
+        } on fail error err {
+            // handle error
+            return error("unhandled error", err);
+        }
+    }
+}
+```
+
+The records live alongside it in `types.bal`:
+
+```ballerina
+type Post record {|
+    string text;
+|};
+
+type Probability record {|
+    decimal neg;
+    decimal neutral;
+    decimal pos;
+|};
+
+type Sentiment record {|
+    Probability probability;
+    string label;
+|};
+```
+
+</TabItem>
+</Tabs>
+
+> **Capability: Low-code HTTP service design.** You define the types, the resource, and its response flow visually, and the platform writes the service for you.
+
+---
+
+## Part 4: Build the Post Notifier: RabbitMQ to Slack
+
+The other standalone integration is the announcement pipeline. Build the **Post Notifier**, a RabbitMQ-triggered event integration that consumes new-post messages and posts to Slack. Declare the configurations it needs first, the broker details and the Slack token, then build the connector and the event integration on top of them. This is where RabbitMQ's first-class trigger support shines: you build the consumer entirely in the designer.
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+1. From the project view, click **+ Add** to add a third integration to the same project. Name it `post-notifier` and click **Add Integration**.
+
+   ![The Add New Integration form with the integration named post-notifier](/img/guides/tutorials/social-media/notifier-create-integration.png)
+
+2. [Add the configurations](../../develop/integration-artifacts/supporting/configurations.md#adding-a-configuration) the integration needs: `rabbitmqHost` (`string`) and `rabbitmqPort` (`int`) for the broker, and `slackAuthToken` (`string`) for the Slack app.
+
+   ![The three configurables: rabbitmqHost, rabbitmqPort, and slackAuthToken](/img/guides/tutorials/social-media/notifier-configs.png)
+
+3. Add the [Slack connector](../../connectors/catalog/communication/slack/connector-overview.md). Set its **Config** to bind the token to `slackAuthToken`, and name the connection `slackClient`. Follow the [Slack setup guide](../../connectors/catalog/communication/slack/setup-guide.md#step-1-sign-in-to-slack) to create an app and copy a bot token, then [add scopes](../../connectors/catalog/communication/slack/setup-guide.md#step-3-add-scopes-to-the-token).
+
+   ![Configuring the Slack connection with auth token bound to slackAuthToken and named slackClient](/img/guides/tutorials/social-media/notifier-slack-connection.png)
+
+4. Click **+ Add Artifact**, choose **Event Integration**, then [RabbitMQ](../../develop/integration-artifacts/event/rabbitmq.md#creating-a-rabbitmq-service).
+
+   ![The artifact palette with RabbitMQ selected under Event Integration](/img/guides/tutorials/social-media/notifier-rabbitmq-artifact.png)
+
+   Name the listener `rabbitmqListener`, point its **Host** and **Port** at `rabbitmqHost` and `rabbitmqPort`, and set the **Queue Name** to `ballerina.social.media`. Click **Create**.
+
+   ![Configuring the RabbitMQ listener host, port, and the ballerina.social.media queue](/img/guides/tutorials/social-media/notifier-rabbitmq-config.png)
+
+5. [Add an event handler](../../develop/integration-artifacts/event/rabbitmq.md#adding-an-event-handler) and choose **onMessage**. Define the message content as a `NotificationEvent` type with a `leaderId` field.
+
+   ![Defining the NotificationEvent content type with a leaderId field](/img/guides/tutorials/social-media/notifier-define-content.png)
+
+6. In the `onMessage` flow, add the `slackClient` connection's **Send a message to a channel** operation. Set the **channel** and a **text** built from the event's `leaderId`.
+
+   ![Configuring the Slack message with a channel and a text built from the leaderId](/img/guides/tutorials/social-media/notifier-slack-message.png)
+
+   The completed handler posts to Slack whenever a message lands on the queue.
+
+   ![The onMessage flow: Start, the slack post node, and an Error Handler](/img/guides/tutorials/social-media/notifier-flow.png)
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+Behind the scenes, the Visual Designer generated this. The configurations are declared first, then the connection and the event integration use them:
+
+```ballerina
+import ballerinax/rabbitmq;
+import ballerinax/slack;
+
+configurable string rabbitmqHost = ?;
+configurable int rabbitmqPort = ?;
+configurable string slackAuthToken = ?;
+
+final slack:Client slackClient = check new ({
+    auth: {token: slackAuthToken}
+});
+
+type NotificationEvent record {|
+    string leaderId;
+|};
+
+type NotificationEventMessage record {|
+    *rabbitmq:AnydataMessage;
+    NotificationEvent content;
+|};
+
+listener rabbitmq:Listener rabbitmqListener = new (rabbitmqHost, rabbitmqPort);
+
+service "ballerina.social.media" on rabbitmqListener {
+    remote function onMessage(NotificationEventMessage message) returns error? {
+        _ = check slackClient->/chat\.postMessage.post({
+            channel: "social-media-updates",
+            text: string `User ${message.content.leaderId} has a new post.`
+        });
+    }
+}
+```
+
+You provide the values in `Config.toml`:
+
+```toml
+rabbitmqHost = "localhost"
+rabbitmqPort = 5672
+slackAuthToken = "xoxb-your-bot-token"
+```
+
+</TabItem>
+</Tabs>
+
+> **Capability: RabbitMQ trigger and connectors.** A broker message drives an integration that calls a SaaS connector, the core of event-driven, connector-rich integration.
+
+---
+
+With the Sentiment API and the Post Notifier built, assemble the **Social Media API** that uses them.
+
+## Part 5: Create the Social Media REST API
+
+Build the orchestrator. Give it a database with the [persist feature](../../develop/tools/integration-tools/persist-tool.md), which generates a type-safe client with ready-made CRUD operations, then design the [HTTP service](../../develop/integration-artifacts/service/http.md) resources on top of it.
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+1. In the `social-media` integration, click **+ Add Artifact**, choose **Connection**, then [**Connect to a Database**](../../develop/tools/integration-tools/persist-tool.md#step-1-add-a-connection). Select **MySQL**, introspect the `social_media` schema, pick the `users`, `posts`, and `followers` tables, and name the connection `socialMediaDb`. The wizard generates a type-safe client with [CRUD functions](../../develop/tools/integration-tools/persist-tool.md#use-connection-functions-in-integration-logic): **Get rows**, **Insert rows**, **Update row**, **Delete row**.
+2. Click **+ Add Artifact**, then **HTTP Service** under **Integration as API**. Keep **Design From Scratch**, set the **Service Base Path** to `/social-media`, and accept the **Shared Listener (Port 9090)**. Click **Create**.
+3. Click **+ Add Resource** and [add each resource](../../develop/integration-artifacts/service/http.md#resources) below, setting the method, path, [path parameters](../../develop/integration-artifacts/service/http.md#defining-inputs), payload, and [response schema](../../develop/integration-artifacts/service/http.md#defining-response-schemas):
+
+   | Method | Path | Returns |
+   | --- | --- | --- |
+   | `GET` | `/users` | `User[]` |
+   | `GET` | `/users/{id}` | `User` |
+   | `POST` | `/users` | `http:Created` |
+   | `DELETE` | `/users/{id}` | `http:NoContent` |
+   | `GET` | `/users/{id}/posts` | `PostWithMeta[]` |
+   | `POST` | `/users/{id}/posts` | `http:Created` |
+
+4. In each resource flow, click **+**, expand the `socialMediaDb` connection, and add the matching CRUD function. There is no SQL to write.
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+```ballerina
+final store:Client socialMediaDb = check new ();
+
 service /social-media on new http:Listener(9090) {
 
-    resource function get users() returns User[]|error {
-        // filled in next
+    resource function get users() returns store:User[]|error {
+        return from store:User user in socialMediaDb->/users
+            select user;
     }
 
-    resource function post users/[int id]/posts(NewPost post)
-            returns http:Created|http:BadRequest|error {
-        // filled in next
+    resource function post users(NewUser newUser) returns http:Created|error {
+        _ = check socialMediaDb->/users.post([newUser]);
+        return http:CREATED;
     }
     // ...
 }
 ```
 
-> **Capability: Low-code REST API design.** Resources, parameters, payload binding, and typed responses are all configured in the designer; the OpenAPI contract is derivable from the service.
+</TabItem>
+</Tabs>
+
+> **Capability: Low-code REST API design with model-driven persistence.** Resources, parameters, and typed responses are designed on the canvas and wired straight to a generated, type-safe database client, no SQL required.
 
 ---
 
-## Part 4: Persist to MySQL
+## Part 6: Validate input
 
-Replace the placeholders with real data access. You connect to MySQL through a [Connection](../../develop/integration-artifacts/supporting/connections.md), keeping all credentials in [configurables](../../develop/integration-artifacts/supporting/configurations.md) rather than hardcoded.
+A malformed phone number or an empty name should never reach your logic. Attach [constraints](../../develop/integration-artifacts/supporting/types.md) to your record fields and the platform rejects bad payloads automatically.
 
-1. In the artifacts panel, [add a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection) and choose **MySQL**.
-2. Provide the host, port, database, user, and password. WSO2 Integrator stores these as configurable variables so each environment supplies its own values.
-3. Open the `get users` resource flow and add a query node against the connection to select all users. Repeat for the other resources (select by id, insert user, delete user, select posts, insert post).
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
 
-The generated configurables and a query:
+1. Open the `NewUser` type in the Type editor.
+2. On the `name` field, expand the field options and add a minimum length of `1`.
+3. On the `mobileNumber` field, add a pattern constraint for a phone number.
+4. Save. When a request fails binding, the service returns `400` with the violated rule; you handle the shape centrally in [Part 10](#part-10-handle-errors-consistently).
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
 
 ```ballerina
-configurable string dbHost = ?;
-configurable int dbPort = 3306;
-configurable string dbUser = ?;
-configurable string dbPassword = ?;
-configurable string dbName = "social_media";
-
-final mysql:Client dbClient = check new (dbHost, dbUser, dbPassword, dbName, dbPort);
-
-resource function get users() returns User[]|error {
-    stream<User, sql:Error?> userStream = dbClient->query(`SELECT * FROM users`);
-    return from User user in userStream
-        select user;
-}
-```
-
-:::tip Prefer an ORM-style data layer?
-For a fully model-driven approach, define your entities once and let the [persist tool](../../develop/tools/integration-tools/persist-tool.md) generate the data-access client and schema. See the [Data Persistence](../../develop/integration-artifacts/supporting/data-persistence.md) guide for a complete walkthrough.
-:::
-
-> **Capability: Connections, persistence, and configurables.** Database access is a reusable connection; secrets and environment-specific values stay in configuration.
-
----
-
-## Part 5: Map data visually
-
-Your database rows and your API responses rarely match field-for-field. Use the [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) to transform between them without writing mapping code. See [when to use the data mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md#when-to-use-the-data-mapper) for guidance.
-
-1. In the `post users/[id]/posts` flow, add a **Data Mapper** node.
-2. Set the input to the incoming `NewPost` payload and the output to the `Post` record stored in the database.
-3. Drag fields across for [one-to-one mapping](../../develop/integration-artifacts/supporting/data-mapper/mapping-capabilities.md#one-to-one-mapping), and use [transformation functions](../../develop/integration-artifacts/supporting/data-mapper/mapping-capabilities.md#map-using-transformation-function) to derive values such as `createdDate`.
-
-> **Capability: The Data Mapper.** Drag-and-drop field mapping with transformations, array handling, and sub-mappings, generated as readable transformation functions.
-
----
-
-## Part 6: Screen posts with sentiment analysis
-
-Before a post is saved, screen its text. First build a small **Sentiment API**, then call it from the post flow with resiliency.
-
-### Build the Sentiment API
-
-Add a second **HTTP service** with a `POST /sentiment` resource that accepts text and returns a label (`pos`, `neg`, `neutral`) and a probability. For the tutorial, a simple rule-based implementation is enough; the point is the integration, not the model.
-
-### Call it from the post flow
-
-1. [Add an HTTP connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection) pointing at the Sentiment API.
-2. In the `post users/[id]/posts` flow, add the [HTTP client call](../../connectors/catalog/built-in/http/action-reference.md#client) to `/sentiment`.
-3. Configure **retry** and **timeout** on the client so a transient failure of the sentiment service does not fail the request outright.
-4. Add an [If node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if): if the label is `neg`, return `http:BadRequest`; otherwise continue to persist and publish.
-
-Behind the scenes, the Visual Designer generated this for you, included only so you can see there's nothing hidden:
-
-```ballerina
-SentimentResponse sentiment = check sentimentClient->/sentiment.post({text: post.description});
-if sentiment.label == "neg" {
-    return <http:BadRequest>{body: {message: "Post rejected: negative sentiment"}};
-}
-```
-
-> **Capability: Outbound calls, resiliency, and control flow.** Typed HTTP clients with retry/timeout, combined with visual branching, let you compose decisions over remote results.
-
----
-
-## Part 7: Validate input
-
-Reject malformed payloads before any logic runs by attaching [constraints](../../develop/integration-artifacts/supporting/types.md) to your record fields.
-
-1. Open the `User` type and add constraints, for example a non-empty `name` and a `mobileNumber` matching a phone pattern.
-2. WSO2 Integrator validates the payload automatically and returns a `400` with the violated rule when binding fails.
-
-Switch to the source view and you'll see what the designer wrote onto the type; there's nothing for you to type:
-
-```ballerina
-type User record {|
-    readonly int id;
+public type NewUser record {|
     @constraint:String {minLength: 1}
     string name;
     @constraint:String {pattern: re `^\+?[0-9]{10,15}$`}
@@ -260,129 +399,233 @@ type User record {|
 |};
 ```
 
+</TabItem>
+</Tabs>
+
 > **Capability: Declarative validation.** Validation lives on the type, so every endpoint that binds the type enforces it.
 
 ---
 
-## Part 8: Secure service-to-service calls
+## Part 7: Shape responses with the Data Mapper
 
-The Sentiment API should not be open. Secure the call between the Social Media API and the Sentiment API with **OAuth2**.
+Your stored `Post` keeps `tags` as one comma-separated string, but the API should return them as an array, nested under a `meta` object. Rather than hand-write that transform, you reach for the [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md#when-to-use-the-data-mapper).
 
-1. Protect the Sentiment service by requiring a valid token (configure auth on its listener).
-2. On the outbound HTTP connection from the Social Media API, configure the [OAuth2 client-credentials](../../connectors/catalog/built-in/http/action-reference.md#client) grant, pointing at your token endpoint. Store the client id and secret as configurables.
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
 
-Here's what was generated for you:
+1. In the `get users/[id]/posts` flow, on the node holding the queried posts, click **Open in Data Mapper**.
+2. Set the input to the stored `Post` and the output to the API's `PostWithMeta` record.
+3. Drag `id` and `description` across for [one-to-one mapping](../../develop/integration-artifacts/supporting/data-mapper/mapping-capabilities.md#one-to-one-mapping).
+4. Connect `category` and `createdDate` into the nested `meta` record.
+5. Connect `tags` (a string) to `meta.tags` (an array). Choose **Map using Transformation Function** and split on `,`. For mapping over the list of posts, the designer wraps it in a [Map Each Element](../../develop/integration-artifacts/supporting/data-mapper/array-mappings/array-to-array.md#map-each-element) query.
 
-```ballerina
-final http:Client sentimentClient = check new (sentimentUrl, {
-    auth: {
-        tokenUrl: tokenUrl,
-        clientId: clientId,
-        clientSecret: clientSecret
-    }
-});
-```
-
-> **Capability: OAuth2 security.** Tokens are acquired and refreshed by the client automatically; credentials stay in configuration.
-
----
-
-## Part 9: Publish events to Kafka
-
-When a post is successfully saved, announce it, without making the caller wait for the notification. Publish a `post-created` event to **Kafka**.
-
-1. [Add a Kafka connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection) and set the bootstrap servers via a configurable.
-2. At the end of the successful path in `post users/[id]/posts`, add a node that publishes the new post to the `post-created` topic.
-3. So the response is not delayed by the publish, run it concurrently using the [concurrency](../../develop/understand-ide/editors/flow-diagram-editor/concurrency.md#fork) constructs.
-
-Behind the scenes, the Visual Designer produced:
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
 
 ```ballerina
-configurable string kafkaBootstrap = "localhost:9092";
-final kafka:Producer postProducer = check new (kafkaBootstrap);
-
-check postProducer->send({topic: "post-created", value: savedPost});
-```
-
-> **Capability: Event-driven publishing and concurrency.** The API hands off to a broker and returns immediately; downstream processing is decoupled.
-
----
-
-## Part 10: Consume events and notify Slack
-
-Build the third integration: a **Post Notifier** that listens to Kafka and posts to Slack. This is where Kafka's first-class trigger support shines: you build the consumer entirely in the designer.
-
-1. Add a new **Event Integration** and choose [Kafka](../../develop/integration-artifacts/event/kafka.md#creating-a-kafka-listener).
-2. Configure the listener for the `post-created` topic and a consumer group.
-3. In the listener's `onConsumerRecord` flow, [add the Slack connector](../../connectors/catalog/communication/slack/connector-overview.md). Follow the [Slack setup guide](../../connectors/catalog/communication/slack/setup-guide.md) to create a connection with your bot token.
-4. Use a [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) to turn the post event into a Slack message, then call the Slack [post-message operation](../../connectors/catalog/communication/slack/actions.md#operations).
-
-You can toggle to the source to see what was generated, none of it hand-written:
-
-```ballerina
-service on new kafka:Listener(kafkaBootstrap, {topics: ["post-created"], groupId: "post-notifier"}) {
-    remote function onConsumerRecord(Post[] posts) returns error? {
-        foreach Post post in posts {
-            _ = check slack->postMessage({channel: notifyChannel, text: string `New post: ${post.description}`});
+function mapPostToPostWithMeta(Post[] posts) returns PostWithMeta[] =>
+    from var post in posts
+    select {
+        id: post.id,
+        description: post.description,
+        meta: {
+            tags: re `,`.split(post.tags),
+            category: post.category,
+            createdDate: post.createdDate
         }
+    };
+```
+
+</TabItem>
+</Tabs>
+
+> **Capability: The Data Mapper.** Drag-and-drop field mapping with transformations, array handling, and nesting, generated as readable query expressions.
+
+---
+
+## Part 8: Screen posts with the Sentiment API
+
+Before a post is saved, screen its text with the Sentiment API from [Part 3](#part-3-build-the-sentiment-api). Because that service publishes an OpenAPI contract, you [generate a type-safe client from it](../../develop/tools/integration-tools/openapi-tool.md#generating-a-ballerina-client-from-openapi) and call it like any connection, with retry and timeout built in.
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+1. In the Social Media API, click **+ Add Artifact**, choose **Connection**, then **Connect Via API Specification**, and provide the Sentiment API's OpenAPI spec. Name the connection `sentimentClient` and **Save**.
+2. On the connection, configure **Retry** and **Timeout** so a transient failure does not fail the whole request. See the [HTTP client configuration](../../connectors/catalog/built-in/http/action-reference.md#client).
+3. If you secure the Sentiment API, configure **OAuth2 client credentials** on the same connection, pointing at your token endpoint, with the client id and secret stored as configurables.
+4. In the `post users/[id]/posts` flow, add the generated `post` call to `/api/sentiment`.
+5. Add an [If node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if): if the label is `neg`, return `http:BadRequest`; otherwise continue to persist and publish.
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+```ballerina
+configurable string tokenUrl = ?;
+configurable string clientId = ?;
+configurable string clientSecret = ?;
+
+final sentiment:Client sentimentClient = check new (sentimentUrl, {
+    retryConfig: { interval: 3.0 }
+    // auth: { tokenUrl, clientId, clientSecret }  // add if the Sentiment API is secured
+});
+
+Sentiment sentiment = check sentimentClient->/api/sentiment.post({text: newPost.description});
+if sentiment.label == "neg" {
+    return <http:BadRequest>{body: {message: "Post rejected: negative sentiment"}};
+}
+```
+
+</TabItem>
+</Tabs>
+
+> **Capability: OpenAPI client generation and resiliency.** A contract becomes a type-safe client with retry and timeout, and a visual branch decides on the result.
+
+---
+
+## Part 9: Publish a new-post event to RabbitMQ
+
+A saved post should trigger the Post Notifier from [Part 4](#part-4-build-the-post-notifier-rabbitmq-to-slack), but the author should not wait for it. Publish a new-post event carrying the author's id to **RabbitMQ** and run the publish concurrently so the response returns immediately.
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+1. Add a [RabbitMQ](../../connectors/catalog/messaging/rabbitmq/connector-overview.md) connection and bind the **Host** and **Port** to configurables.
+2. On the success path of `post users/[id]/posts`, add a [**publishMessage**](../../connectors/catalog/messaging/rabbitmq/actions.md#operations) node that publishes a `NotificationEvent` with the author's `leaderId` to the `ballerina.social.media` queue (set it as the **routingKey**). This is the queue the Post Notifier listens on.
+3. Wrap the persist and publish in a [Fork](../../develop/understand-ide/editors/flow-diagram-editor/concurrency.md#fork) so they run concurrently, and let the [Wait](../../develop/understand-ide/editors/flow-diagram-editor/concurrency.md#wait) node join them before responding.
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+```ballerina
+configurable string rabbitmqHost = "localhost";
+configurable int rabbitmqPort = 5672;
+final rabbitmq:Client postPublisher = check new (rabbitmqHost, rabbitmqPort);
+
+fork {
+    worker persist returns error? {
+        _ = check socialMediaDb->/posts.post([savedPost]);
+    }
+    worker publish returns error? {
+        check postPublisher->publishMessage({
+            content: {leaderId: id.toString()},
+            routingKey: "ballerina.social.media"
+        });
     }
 }
 ```
 
-> **Capability: Kafka trigger and connectors.** A broker event drives an integration that calls a SaaS connector, the core of event-driven, connector-rich integration.
+</TabItem>
+</Tabs>
+
+> **Capability: Event-driven publishing and concurrency.** The API hands off to a broker and returns immediately; downstream work is decoupled.
 
 ---
 
-## Part 11: Generate a client from OpenAPI
+## Part 10: Handle errors consistently
 
-If the Sentiment API were owned by another team and published an OpenAPI contract, you would not hand-write a client. Use the OpenAPI tool to [generate a Ballerina client from OpenAPI](../../develop/tools/integration-tools/openapi-tool.md#generating-a-ballerina-client-from-openapi) and call it like any other connection. You can also [generate a service from an OpenAPI spec](../../develop/tools/integration-tools/openapi-tool.md#generating-a-ballerina-service-from-openapi) to start contract-first.
+Every failure should return the same shape. Add a response error interceptor to the Social Media service so a constraint violation becomes a clean `400` and any other error a uniform `500`, both with a timestamp and message.
 
-> **Capability: OpenAPI tooling.** Contracts in, type-safe clients out, keeping consumer and provider in sync.
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
 
----
+1. Review the service's [default error handling](../../develop/integration-artifacts/service/http.md#default-error-handling) and [return typed error status codes](../../develop/integration-artifacts/service/http.md#return-typed-error-status-codes) where a resource needs a specific code.
+2. Add a response error interceptor to the service to catch errors in one place and map them to a uniform error body.
+3. Inside flows where you want to catch and transform a failure, use the [ErrorHandler](../../develop/understand-ide/editors/flow-diagram-editor/error-handling.md#errorhandler) and [Fail](../../develop/understand-ide/editors/flow-diagram-editor/error-handling.md#fail) nodes.
 
-## Part 12: Handle errors consistently
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
 
-So every failure returns the same shape, add an error interceptor to the Social Media service.
+```ballerina
+service class ResponseErrorInterceptor {
+    *http:ResponseErrorInterceptor;
+    remote function interceptResponseError(error err)
+            returns SocialMediaBadRequest|SocialMediaServerError {
+        ErrorDetails details = {message: err.message(), timeStamp: time:utcNow(), details: ""};
+        if err is constraint:Error {
+            return <SocialMediaBadRequest>{body: details};
+        }
+        return <SocialMediaServerError>{body: details};
+    }
+}
+```
 
-1. Review the service's [default error handling](../../develop/integration-artifacts/service/http.md#default-error-handling) and [return typed error status codes](../../develop/integration-artifacts/service/http.md#return-typed-error-status-codes) where a resource should respond with a specific code.
-2. In flows where you want to catch and transform failures, use the [ErrorHandler](../../develop/understand-ide/editors/flow-diagram-editor/error-handling.md#errorhandler) and [Fail](../../develop/understand-ide/editors/flow-diagram-editor/error-handling.md#fail) nodes.
-3. Return a uniform error body with a timestamp, message, and detail.
+</TabItem>
+</Tabs>
 
 > **Capability: Interceptors and error handling.** Cross-cutting concerns are handled in one place rather than repeated in every resource.
 
 ---
 
-## Part 13: Test the integration
+## Part 11: Test the integration
 
-Validate behavior two ways.
+Validate behavior two ways: interactively, and with repeatable unit tests that need no external services.
 
-- Use the built-in Try-it tool to exercise each resource interactively: [open the Try-It tool](../../develop/test/try-it-http.md#open-the-try-it-tool), [compose a request](../../develop/test/try-it-http.md#compose-a-request), and [read the response](../../develop/test/try-it-http.md#read-the-response). Create a user, then create a positive and a negative post and confirm the negative one is rejected.
-- Write [unit tests](../../develop/test/unit-testing.md) for the post-creation logic, [mocking](../../develop/test/mocking.md) the sentiment client and the Kafka producer so tests run without external dependencies.
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+1. [Open the Try-It tool](../../develop/test/try-it-http.md#open-the-try-it-tool) from the Service Designer. [Compose a request](../../develop/test/try-it-http.md#compose-a-request) to create a user, then a positive and a negative post, and [read the response](../../develop/test/try-it-http.md#read-the-response) to confirm the negative one is rejected.
+2. Write [unit tests](../../develop/test/unit-testing.md) for the post-creation logic, [mocking](../../develop/test/mocking.md) the persist client and the sentiment client so tests run without MySQL, RabbitMQ, or the Sentiment API.
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+```ballerina
+@test:Config {}
+function testNegativePostRejected() returns error? {
+    sentimentClient = test:mock(sentiment:Client);
+    test:prepare(sentimentClient).when("post").thenReturn({label: "neg", probability: {}});
+
+    http:Client api = check new ("localhost:9090/social-media");
+    http:Response res = check api->/users/[1]/posts.post({description: "awful", category: "x", tags: ""});
+    test:assertEquals(res.statusCode, 400);
+}
+```
+
+</TabItem>
+</Tabs>
 
 > **Capability: Testing.** Interactive Try-it for fast feedback; unit tests with mocking for repeatable verification.
 
 ---
 
-## Part 14: Trace and observe
+## Part 12: Trace end to end
 
-Follow a single request as it flows API → sentiment → MySQL → Kafka → Slack.
+Follow one request as it flows API → sentiment → MySQL → RabbitMQ → Slack, with no changes to your flows.
 
-1. Enable distributed tracing: [start Jaeger](../../deploy-operate/observe/jaeger-distributed-tracing.md#step-1-start-jaeger), then [configure your integration for Jaeger](../../deploy-operate/observe/jaeger-distributed-tracing.md#step-2-configure-ballerina-for-jaeger).
-2. Send a request and [view traces](../../deploy-operate/observe/jaeger-distributed-tracing.md#step-3-view-traces) to see the spans across all three integrations.
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
 
-For the wider picture, with metrics and logs alongside tracing, see the [three pillars of observability](../../deploy-operate/observe/observability-overview.md#the-three-pillars-of-observability).
+1. [Start Jaeger](../../deploy-operate/observe/jaeger-distributed-tracing.md#step-1-start-jaeger) in a container.
+2. [Configure your integrations for Jaeger](../../deploy-operate/observe/jaeger-distributed-tracing.md#step-2-configure-ballerina-for-jaeger) by enabling observability and pointing the tracer at the collector.
+3. Send a request and [view traces](../../deploy-operate/observe/jaeger-distributed-tracing.md#step-3-view-traces) to see spans across all three integrations. For metrics and logs alongside tracing, see the [three pillars of observability](../../deploy-operate/observe/observability-overview.md#the-three-pillars-of-observability).
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+```toml
+# Config.toml
+[ballerina.observe]
+tracingEnabled = true
+tracingProvider = "jaeger"
+
+[ballerinax.jaeger]
+agentHostname = "localhost"
+agentPort = 4317
+```
+
+</TabItem>
+</Tabs>
 
 > **Capability: Distributed tracing.** End-to-end visibility across services and the broker, with no code changes to your flows.
 
 ---
 
-## Part 15: Deploy
+## Part 13: Deploy
 
-You can run the whole stack locally with Docker, or push to the cloud.
+The same project deploys as containers or to the cloud without rework.
 
-- **Local:** Containerize each integration and run them with MySQL, Kafka, and Jaeger using Docker Compose. See [self-hosted deployment](../../deploy/overview.md).
-- **Cloud:** [Push from the IDE](../../deploy/cloud/push-from-ide.md) to deploy your integrations to WSO2's cloud. See the [cloud deployment overview](../../deploy/cloud/overview.md).
+- **Local:** Containerize each integration and run them with MySQL, RabbitMQ, and Jaeger using Docker Compose. See [self-hosted deployment](../../deploy/overview.md).
+- **Cloud:** [Push the whole project from the IDE](../../deploy/cloud/push-from-ide.md#deploy-the-whole-project) to WSO2 Cloud. See the [cloud deployment overview](../../deploy/cloud/overview.md).
 
 > **Capability: Deployment.** The same project deploys as containers or to the cloud without rework.
 
@@ -390,8 +633,8 @@ You can run the whole stack locally with Docker, or push to the cloud.
 
 ## What's next
 
-You have built a complete, event-driven backend and used every core capability of WSO2 Integrator along the way. From here:
+You have built a complete, event-driven backend across three integrations and designed every part on the canvas. From here:
 
-- Extend the **followers** feature into a fan-out notification flow.
-- Add a [scheduled automation](../../develop/integration-artifacts/automation.md) that emails users a weekly digest of posts.
-- Explore more [event triggers](../../develop/integration-artifacts/event/kafka.md) and [connectors](../../connectors/catalog/communication/slack/connector-overview.md) to grow the platform.
+- Extend the **followers** feature into a fan-out flow that notifies each follower of a new post.
+- Add a [scheduled automation](../../develop/integration-artifacts/automation.md) that emails users a weekly digest.
+- Add a second RabbitMQ consumer (analytics, email) on the `ballerina.social.media` queue without touching the API.
