@@ -88,6 +88,10 @@ service /finance on httpListener {
 </TabItem>
 </PatternImplementationTabs>
 
+:::tip Build it visually with the Data Mapper
+The enriched `BankAccount` is assembled in code here, but the [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) can combine multiple inputs — the original request and the IBAN lookup result — into the target record visually.
+:::
+
 ## Complete sample
 
 The complete project is available in the [content enricher sample](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/enterprise-integration-pattern/content_enricher) on GitHub.

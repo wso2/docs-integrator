@@ -32,6 +32,10 @@ Nested **Foreach** nodes split the request into one message per event and then p
 
 <PatternImage src="/img/eip-patterns/splitter_flow.png" alt="Splitter flow in the WSO2 Integrator visual designer" width={599} />
 
+The [type diagram](../../develop/understand-ide/editors/type-diagram-editor.md) shows the composite message the splitter breaks down: a `ReminderRequest` holds many `Event` records, and each `Event` holds many `Attendee` records:
+
+<PatternImage src="/img/eip-patterns/splitter_types.png" alt="Splitter type diagram in WSO2 Integrator" width={760} />
+
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 

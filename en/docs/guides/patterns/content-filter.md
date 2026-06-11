@@ -32,6 +32,10 @@ The flow projects each reimbursement template down to the two fields the payroll
 
 <PatternImage src="/img/eip-patterns/content_filter_flow.png" alt="Content Filter flow in the WSO2 Integrator visual designer" width={530} />
 
+The [type diagram](../../develop/understand-ide/editors/type-diagram-editor.md) shows what the filter removes: the incoming `DetailedReimbursementTemplate` carries three fields, while the `ReimbursementTemplate` sent onward keeps only `reimbursementTypeID` and `fixedAmount` — `reimbursementTypeName` is dropped:
+
+<PatternImage src="/img/eip-patterns/content_filter_types.png" alt="Content Filter type diagram in WSO2 Integrator" width={619} />
+
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
@@ -77,6 +81,10 @@ service /payroll on httpListener {
 
 </TabItem>
 </PatternImplementationTabs>
+
+:::tip Build it visually with the Data Mapper
+The `select` projection in step 3 is exactly what the [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) does visually: map `DetailedReimbursementTemplate` to `ReimbursementTemplate` and leave `reimbursementTypeName` unlinked — any field you do not connect is dropped from the output. Since the payload is a list, this is an [array mapping](../../develop/integration-artifacts/supporting/data-mapper/array-mappings/array-mappings.md).
+:::
 
 ## Complete sample
 

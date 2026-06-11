@@ -33,6 +33,10 @@ The flow branches on the message version: version 1.0 and version 2.0 are each m
 
 <PatternImage src="/img/eip-patterns/format_indicator_flow.png" alt="Format Indicator flow in the WSO2 Integrator visual designer" width={740} />
 
+The [type diagram](../../develop/understand-ide/editors/type-diagram-editor.md) shows the format indicator at work: the `PatientReq` union accepts either `PatientReqV1` or `PatientReqV2` — each fixing its `version` field — and both resolve to the common `Patient` format:
+
+<PatternImage src="/img/eip-patterns/format_indicator_types.png" alt="Format Indicator type diagram in WSO2 Integrator" width={760} />
+
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
@@ -93,6 +97,10 @@ service /api/v1 on httpListener {
 
 </TabItem>
 </PatternImplementationTabs>
+
+:::tip Build the conversion visually with the Data Mapper
+Mapping each version into `Patient` (step 4) can be done in the [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) instead of code: link `dob` and `diagnosis` straight across, and combine `firstName` and `lastName` into `fullName` with a [many-to-one mapping](../../develop/integration-artifacts/supporting/data-mapper/mapping-capabilities.md#many-to-one-mapping).
+:::
 
 ## Complete sample
 

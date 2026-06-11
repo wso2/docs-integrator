@@ -63,7 +63,7 @@ How a message finds its way from the sender to the correct receiver or receivers
 
 ## Message Transformation
 
-How the content of a message is changed so the receiver gets the data it needs in the shape it expects.
+How the content of a message is changed so the receiver gets the data it needs in the shape it expects. These transformations can be built without writing conversion code using WSO2 Integrator's visual [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md).
 
 | Pattern | Description |
 |---------|-------------|

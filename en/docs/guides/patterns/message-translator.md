@@ -32,6 +32,10 @@ The flow calls the `translate` function to convert the sales data into the Quick
 
 <PatternImage src="/img/eip-patterns/message_translator_flow.png" alt="Message Translator flow in the WSO2 Integrator visual designer" width={530} />
 
+The [type diagram](../../develop/understand-ide/editors/type-diagram-editor.md) makes the translation concrete — the source `SalesData` tree (with its `Customer` and `Opportunity` records) on the left, and the target `QuickBooksInvoice` tree on the right:
+
+<PatternImage src="/img/eip-patterns/message_translator_types.png" alt="Message Translator type diagram in WSO2 Integrator" width={642} />
+
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
@@ -94,6 +98,10 @@ service /api/v1/analytics on httpListener {
 
 </TabItem>
 </PatternImplementationTabs>
+
+:::tip Build it visually with the Data Mapper
+The `translate` function here is hand-written, but the same conversion can be built on a canvas with the visual [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md): link the `SalesData` fields to `QuickBooksInvoice` fields, and use an [array mapping](../../develop/integration-artifacts/supporting/data-mapper/array-mappings/array-mappings.md) to turn each `Opportunity` into an `Invoice` — no conversion code required.
+:::
 
 ## Complete sample
 
