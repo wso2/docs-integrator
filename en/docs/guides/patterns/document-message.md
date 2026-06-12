@@ -12,7 +12,7 @@ import {
 
 # Document Message
 
-Use a Document Message to transfer a unit of data from one application to another. Unlike a command message, the sender does not dictate what the receiver should do with the data — the message simply delivers the document. <EipReferenceLink href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/DocumentMessage.html" label="Enterprise Integration Patterns Document Message reference" />
+Use a Document Message to transfer a unit of data from one application to another. Unlike a command message, the sender does not dictate what the receiver should do with the data. The message simply delivers the document. <EipReferenceLink href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/DocumentMessage.html" label="Enterprise Integration Patterns Document Message reference" />
 
 In WSO2 Integrator, a document message is built by setting a file or structured payload on a request and transmitting it over a client connection. Retry configuration on the connection keeps the document delivery reliable.
 
@@ -25,7 +25,7 @@ This example transfers a CSV document of sales leads to the Zoho CRM bulk upload
 
 1. Create an [HTTP service](../../develop/integration-artifacts/service/http.md#creating-an-http-service) with a `post` resource that accepts the `CsvRequest` payload identifying the organization and file.
 2. Add an HTTP client connection for the Zoho API with a retry configuration. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection).
-3. In the flow, build a request, add the organization and feature headers, and set the CSV file from the FTP incoming directory as a multipart payload — this is the document message.
+3. In the flow, build a request, add the organization and feature headers, and set the CSV file from the FTP incoming directory as a multipart payload. This is the document message.
 4. Post the request to the Zoho bulk upload endpoint and return the `ZohoResponse`.
 
 The flow attaches the CSV file to the request and transfers it to the Zoho bulk-upload endpoint:

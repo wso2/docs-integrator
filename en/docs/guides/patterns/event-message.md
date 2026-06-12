@@ -18,7 +18,7 @@ In WSO2 Integrator, an event message is built from the details of the occurrence
 
 ## Example: Notifying incidents over SMS
 
-This example receives an incident report and transmits it as an event message — an SMS notification sent through the Twilio API. The message body describes what happened and when, and the subscriber's phone number identifies the interested receiver.
+This example receives an incident report and transmits it as an event message: an SMS notification sent through the Twilio API. The message body describes what happened and when, and the subscriber's phone number identifies the interested receiver.
 
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>

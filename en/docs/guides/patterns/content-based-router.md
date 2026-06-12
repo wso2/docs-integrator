@@ -14,7 +14,7 @@ import {
 
 Use a Content-Based Router to examine each message and route it to the correct recipient based on the data the message contains, so one logical function can be served by multiple physical systems. <EipReferenceLink href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/ContentBasedRouter.html" label="Enterprise Integration Patterns Content-Based Router reference" />
 
-In WSO2 Integrator, the router is implemented at the point where the flow has enough message content to choose the recipient — an [If node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) for predicate-based routing or a [Match node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#match) for value-based routing.
+In WSO2 Integrator, the router is implemented at the point where the flow has enough message content to choose the recipient: an [If node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) for predicate-based routing or a [Match node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#match) for value-based routing.
 
 ## Example: Routing tracking requests by country
 

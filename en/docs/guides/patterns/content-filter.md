@@ -25,14 +25,14 @@ This example receives detailed reimbursement templates that include descriptive 
 
 1. Create an [HTTP service](../../develop/integration-artifacts/service/http.md#creating-an-http-service) with a `post` resource that accepts the `DetailedReimbursementTemplate[]` payload.
 2. Add an HTTP client connection for the Xero API. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection).
-3. Add a data mapper (`filterReimbursements`) that maps `DetailedReimbursementTemplate` to `ReimbursementTemplate`, keeping only `reimbursementTypeID` and `fixedAmount` — this is the content filter.
+3. Add a data mapper (`filterReimbursements`) that maps `DetailedReimbursementTemplate` to `ReimbursementTemplate`, keeping only `reimbursementTypeID` and `fixedAmount`. This is the content filter.
 4. Post the filtered list to the Xero pay template endpoint and return the result.
 
 The flow projects each reimbursement template down to the two fields the payroll API needs, then posts the reduced message:
 
 <PatternImage src="/img/eip-patterns/content_filter_flow.png" alt="Content Filter flow in the WSO2 Integrator visual designer" width={530} />
 
-Because `filterReimbursements` is a datamapper function, WSO2 Integrator opens it in the visual [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md). The input `DetailedReimbursementTemplate` carries three fields, but the output keeps only `reimbursementTypeID` and `fixedAmount` — `reimbursementTypeName` has no link, so it is dropped:
+Because `filterReimbursements` is a datamapper function, WSO2 Integrator opens it in the visual [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md). The input `DetailedReimbursementTemplate` carries three fields, but the output keeps only `reimbursementTypeID` and `fixedAmount`. `reimbursementTypeName` has no link, so it is dropped:
 
 <PatternImage src="/img/eip-patterns/content_filter_datamapper.png" alt="Content Filter data mapper in WSO2 Integrator" width={1006} />
 

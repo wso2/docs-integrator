@@ -23,7 +23,7 @@ This example creates customer bank accounts in QuickBooks, which requires a bank
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-The design view shows the two systems the enricher works with — the IBAN service it reads the missing bank code from, and the QuickBooks endpoint it sends the enriched message to:
+The design view shows the two systems the enricher works with: the IBAN service it reads the missing bank code from, and the QuickBooks endpoint it sends the enriched message to:
 
 <PatternImage src="/img/eip-patterns/content_enricher_design.png" alt="Content Enricher integration design view in WSO2 Integrator" width={760} />
 
@@ -89,7 +89,7 @@ service /finance on httpListener {
 </PatternImplementationTabs>
 
 :::tip Build it visually with the Data Mapper
-The enriched `BankAccount` is assembled in code here, but the [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) can combine multiple inputs — the original request and the IBAN lookup result — into the target record visually.
+The enriched `BankAccount` is assembled in code here, but the [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) can combine multiple inputs (the original request and the IBAN lookup result) into the target record visually.
 :::
 
 ## Complete sample

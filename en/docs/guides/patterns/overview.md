@@ -11,7 +11,7 @@ Enterprise Integration Patterns (EIPs) are the accepted solutions to recurring p
 This section demonstrates how to implement the most widely used patterns with WSO2 Integrator. Each pattern page describes the problem the pattern solves, walks through a real-world example, and provides the complete Ballerina source, which you can open and edit visually in the WSO2 Integrator design view. The complete projects are available in the [WSO2 integration samples repository](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/enterprise-integration-pattern).
 
 :::tip How to read these guides
-Every pattern page shows the same integration two ways. The **Visual Designer** tab walks through building the pattern in WSO2 Integrator and includes a flow diagram that traces a message's path through the integration, node by node — this is where you can see the pattern's logic at a glance. The **Ballerina Code** tab shows the equivalent source. The two stay in sync: editing the visual flow updates the code, and editing the code updates the flow.
+Every pattern page shows the same integration two ways. The **Visual Designer** tab walks through building the pattern in WSO2 Integrator and includes a flow diagram that traces a message's path through the integration, node by node, so you can see the pattern's logic at a glance. The **Ballerina Code** tab shows the equivalent source. The two stay in sync: editing the visual flow updates the code, and editing the code updates the flow.
 :::
 
 ## Messaging Systems

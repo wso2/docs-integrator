@@ -23,7 +23,7 @@ This example resolves street addresses to coordinates. The flow first checks the
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-The design view shows the two systems involved — the Google geocoding service the data comes from, and the Firebase store the messages are written to:
+The design view shows the two systems involved: the Google geocoding service the data comes from, and the Firebase store the messages are written to:
 
 <PatternImage src="/img/eip-patterns/message_store_design.png" alt="Message Store integration design view in WSO2 Integrator" width={760} />
 

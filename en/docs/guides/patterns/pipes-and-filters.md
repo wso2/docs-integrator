@@ -14,7 +14,7 @@ import {
 
 Use Pipes and Filters to perform complex processing on a message as a sequence of independent processing steps (filters) connected by channels (pipes), so each step can be developed, tested, and reused on its own. <EipReferenceLink href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/PipesAndFilters.html" label="Enterprise Integration Patterns Pipes and Filters reference" />
 
-In WSO2 Integrator, a Ballerina query expression is a natural pipes-and-filters chain. Each clause — `let`, `where`, `limit`, `order by`, `select` — is an independent filter, and the query pipes the output of one clause into the next.
+In WSO2 Integrator, a Ballerina query expression is a natural pipes-and-filters chain. Each clause (`let`, `where`, `limit`, `order by`, `select`) is an independent filter, and the query pipes the output of one clause into the next.
 
 ## Example: Ranking top-performing employees
 
@@ -29,7 +29,7 @@ This example exposes a service that returns the top-performing employees. The fl
 4. Add a query that chains the processing steps: a `let` clause to compute the weighted performance score, a `where` clause to keep scores above `7.5`, `limit` and `order by` clauses, and a `select` clause that builds the `TopPerformer` result.
 5. Return the query result from the resource.
 
-The flow retrieves the raw records and passes them through a query whose clauses act as successive filters — score, threshold, limit, order, and projection:
+The flow retrieves the raw records and passes them through a query whose clauses act as successive filters: score, threshold, limit, order, and projection:
 
 <PatternImage src="/img/eip-patterns/pipes_and_filters_flow.png" alt="Pipes and Filters flow in the WSO2 Integrator visual designer" width={530} />
 

@@ -23,7 +23,7 @@ This example bridges GraphQL and REST. A GraphQL service accepts queries and mut
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-The design view shows the bridge itself — a GraphQL service on the front forwarding to the Zoho Books REST API connection on the back:
+The design view shows the bridge itself: a GraphQL service on the front forwarding to the Zoho Books REST API connection on the back:
 
 <PatternImage src="/img/eip-patterns/messaging_bridge_design.png" alt="Messaging Bridge integration design view in WSO2 Integrator" width={760} />
 

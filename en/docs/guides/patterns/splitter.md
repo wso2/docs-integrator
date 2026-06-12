@@ -18,7 +18,7 @@ In WSO2 Integrator, the splitter is a [Foreach node](../../develop/understand-id
 
 ## Example: Sending per-attendee event reminders
 
-This example receives a single reminder request that contains multiple events, each with multiple attendees. The flow splits the composite message twice — once per event and once per attendee — and sends each attendee an individual SMS reminder through the Twilio API.
+This example receives a single reminder request that contains multiple events, each with multiple attendees. The flow splits the composite message twice (once per event and once per attendee) and sends each attendee an individual SMS reminder through the Twilio API.
 
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>

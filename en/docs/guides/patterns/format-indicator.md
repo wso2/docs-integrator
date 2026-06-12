@@ -33,11 +33,11 @@ The flow branches on the message version: version 1.0 and version 2.0 are each m
 
 <PatternImage src="/img/eip-patterns/format_indicator_flow.png" alt="Format Indicator flow in the WSO2 Integrator visual designer" width={740} />
 
-The [type diagram](../../develop/understand-ide/editors/type-diagram-editor.md) shows the format indicator at work: the `PatientReq` union accepts either `PatientReqV1` or `PatientReqV2` — each fixing its `version` field — and both resolve to the common `Patient` format:
+The [type diagram](../../develop/understand-ide/editors/type-diagram-editor.md) shows the format indicator at work: the `PatientReq` union accepts either `PatientReqV1` or `PatientReqV2` (each fixing its `version` field), and both resolve to the common `Patient` format:
 
 <PatternImage src="/img/eip-patterns/format_indicator_types.png" alt="Format Indicator type diagram in WSO2 Integrator" width={760} />
 
-The version-1 conversion is written as the datamapper function `toPatient`, so WSO2 Integrator opens it in the visual [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md): `dob` and `diagnosis` map straight across, while `firstName` and `lastName` combine into `fullName` — a [many-to-one mapping](../../develop/integration-artifacts/supporting/data-mapper/mapping-capabilities.md#many-to-one-mapping):
+The version-1 conversion is written as the datamapper function `toPatient`, so WSO2 Integrator opens it in the visual [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md): `dob` and `diagnosis` map straight across, while `firstName` and `lastName` combine into `fullName`, a [many-to-one mapping](../../develop/integration-artifacts/supporting/data-mapper/mapping-capabilities.md#many-to-one-mapping):
 
 <PatternImage src="/img/eip-patterns/format_indicator_datamapper.png" alt="Format Indicator data mapper in WSO2 Integrator" width={1006} />
 

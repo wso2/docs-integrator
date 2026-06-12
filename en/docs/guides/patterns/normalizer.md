@@ -14,7 +14,7 @@ import {
 
 Use a Normalizer to process messages that are semantically equivalent but arrive in different formats. The normalizer routes each format to the right translator so the receiver always gets one common format. <EipReferenceLink href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/Normalizer.html" label="Enterprise Integration Patterns Normalizer reference" />
 
-In WSO2 Integrator, the normalizer combines format detection — a union-typed payload and a type check — with a translator function that builds the common message format from whichever input arrived.
+In WSO2 Integrator, the normalizer combines format detection (a union-typed payload and a type check) with a translator function that builds the common message format from whichever input arrived.
 
 ## Example: Normalizing JSON and XML support tickets
 
@@ -29,7 +29,7 @@ This example accepts support tickets as either JSON or XML. The service detects 
 4. In each branch, extract the subject and comment from the format at hand and call the `normalize` function to build the common ticket structure.
 5. Post the normalized ticket to the Zendesk tickets endpoint and return the ticket URL.
 
-The flow branches on the incoming format — JSON or XML — and both branches call the same `normalize` function to produce one common ticket format:
+The flow branches on the incoming format (JSON or XML), and both branches call the same `normalize` function to produce one common ticket format:
 
 <PatternImage src="/img/eip-patterns/normalizer_flow.png" alt="Normalizer flow in the WSO2 Integrator visual designer" width={760} />
 

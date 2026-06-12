@@ -14,7 +14,7 @@ import {
 
 Use a Message Router to decouple individual processing steps so each message is passed to a different destination depending on a set of conditions, without the sender knowing which destination handles it. <EipReferenceLink href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/MessageRouter.html" label="Enterprise Integration Patterns Message Router reference" />
 
-In WSO2 Integrator, the router is the decision construct in the flow — an [If node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) or a [Match node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#match) — that selects which connection or processing path receives the message.
+In WSO2 Integrator, the router is the decision construct in the flow (an [If node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) or a [Match node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#match)) that selects which connection or processing path receives the message.
 
 ## Example: Routing shipment tracking requests
 
@@ -29,7 +29,7 @@ This example exposes a shipment tracking service that routes each request to a d
 4. In the **True** branch, call the DHL Parcel UK tracking endpoint and return the shipment status.
 5. In the **False** branch, call the DHL Deutsche Post International tracking endpoint and return the event status.
 
-The flow routes each request by destination country — UK to the DHL Parcel UK API, others to the DHL Deutsche Post International API:
+The flow routes each request by destination country: UK to the DHL Parcel UK API, others to the DHL Deutsche Post International API:
 
 <PatternImage src="/img/eip-patterns/message_router_flow.png" alt="Message Router flow in the WSO2 Integrator visual designer" width={760} />
 

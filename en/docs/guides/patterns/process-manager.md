@@ -18,18 +18,18 @@ In WSO2 Integrator, the process manager is the central flow that calls each proc
 
 ## Example: Orchestrating order fulfillment
 
-This example orchestrates a book order across multiple systems. The process manager first creates the order in Shopify, then chooses the shipping step based on the result — FedEx for United States addresses, DHL Express otherwise — and finally triggers the confirmation email asynchronously through SendGrid.
+This example orchestrates a book order across multiple systems. The process manager first creates the order in Shopify, then chooses the shipping step based on the result (FedEx for United States addresses, DHL Express otherwise), and finally triggers the confirmation email asynchronously through SendGrid.
 
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-The design view shows the order service fanning out to four systems — Shopify, FedEx, DHL Express, and SendGrid — that the process manager coordinates:
+The design view shows the order service fanning out to the four systems that the process manager coordinates (Shopify, FedEx, DHL Express, and SendGrid):
 
 <PatternImage src="/img/eip-patterns/process_manager_design.png" alt="Process Manager integration design view in WSO2 Integrator" width={760} />
 
 1. Create an [HTTP service](../../develop/integration-artifacts/service/http.md#creating-an-http-service) with a `post` resource that accepts the `OrderRequest` payload.
 2. Add HTTP client connections for Shopify, FedEx, DHL Express, and SendGrid. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection).
-3. In the flow, post the order to Shopify and capture the `OrderResponse` — this intermediate result drives the next step.
+3. In the flow, post the order to Shopify and capture the `OrderResponse`. This intermediate result drives the next step.
 4. Add an [If node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) on the shipping country: create a FedEx shipment for United States orders, and a DHL shipment otherwise, capturing the tracking number from either branch.
 5. Start the `sendConfirmationMail` step asynchronously so the customer notification does not block the process.
 

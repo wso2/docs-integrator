@@ -28,11 +28,11 @@ The design view shows the channel: a single automation connected to one Zuora co
 <PatternImage src="/img/eip-patterns/point_to_point_channel_design.png" alt="Point-to-Point Channel integration design view in WSO2 Integrator" width={646} />
 
 1. Create an [automation](../../develop/integration-artifacts/automation.md#creating-an-automation) to run the flow.
-2. Add an HTTP client connection that points to the Zuora API — this connection is the point-to-point channel. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection).
+2. Add an HTTP client connection that points to the Zuora API. This connection is the point-to-point channel. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection).
 3. In the flow, declare a variable holding the product details.
 4. Add the HTTP `post` action on the connection to send the product to the single receiver and capture the `ProductCreationResponse`.
 
-The flow sends the product to the single Zuora receiver — exactly one consumer handles the message:
+The flow sends the product to the single Zuora receiver, so exactly one consumer handles the message:
 
 <PatternImage src="/img/eip-patterns/point_to_point_channel_flow.png" alt="Point-to-Point Channel flow in the WSO2 Integrator visual designer" width={530} />
 

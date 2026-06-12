@@ -14,7 +14,7 @@ import {
 
 Use an Idempotent Receiver so the receiver can safely handle duplicate messages: processing the same message more than once has the same effect as processing it once. <EipReferenceLink href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/IdempotentReceiver.html" label="Enterprise Integration Patterns Idempotent Receiver reference" />
 
-In WSO2 Integrator, the receiver keeps track of what it has already processed — keyed by the message identifier — and skips the side effect when the incoming message matches the recorded state.
+In WSO2 Integrator, the receiver keeps track of what it has already processed, keyed by the message identifier, and skips the side effect when the incoming message matches the recorded state.
 
 ## Example: Deduplicating order status updates
 
@@ -26,7 +26,7 @@ This example receives order status updates that may be delivered more than once.
 1. Create an [HTTP service](../../develop/integration-artifacts/service/http.md#creating-an-http-service) with a `put` resource keyed by the `orderId` path parameter.
 2. In the flow, look up the recorded status for the order in the status map.
 3. Add an [If node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) comparing the recorded status with the incoming status.
-4. When they match, return `204 No Content` — the duplicate is acknowledged without reprocessing. Otherwise record the new status and return `201 Created`.
+4. When they match, return `204 No Content`, acknowledging the duplicate without reprocessing. Otherwise record the new status and return `201 Created`.
 
 The flow compares the incoming status with the last recorded status: a duplicate returns `204 No Content`, while a new status is recorded and returns `201 Created`:
 

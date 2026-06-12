@@ -14,7 +14,7 @@ import {
 
 Use a Channel Adapter to connect an application that was not built for messaging to the messaging system, so the integration can send messages to it and receive messages from it through the application's own API. <EipReferenceLink href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/ChannelAdapter.html" label="Enterprise Integration Patterns Channel Adapter reference" />
 
-In WSO2 Integrator, connectors are channel adapters. A connector client wraps an external application's API — its authentication, endpoints, and payload formats — and exposes it to the flow as typed operations, so the rest of the integration works with messages instead of API details.
+In WSO2 Integrator, connectors are channel adapters. A connector client wraps an external application's API (its authentication, endpoints, and payload formats) and exposes it to the flow as typed operations, so the rest of the integration works with messages instead of API details.
 
 ## Example: Adapting Jira into the integration
 
@@ -23,7 +23,7 @@ This example uses the Jira connector as a channel adapter. The connector handles
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-The Jira connector is the channel adapter — it exposes the external Jira API to the automation as a typed connection:
+The Jira connector is the channel adapter: it exposes the external Jira API to the automation as a typed connection:
 
 <PatternImage src="/img/eip-patterns/channel_adapter_design.png" alt="Channel Adapter integration design view in WSO2 Integrator" width={706} />
 

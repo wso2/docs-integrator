@@ -36,7 +36,7 @@ The [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/dat
 
 <PatternImage src="/img/eip-patterns/message_translator_datamapper.png" alt="Message Translator data mapper in WSO2 Integrator" width={1006} />
 
-Once the arrays are linked, open the focused view on the array mapping to map the individual element fields — each `Opportunity`'s `id`, `amount`, and `closeDate` map to the `Invoice` item's `id`, `amount`, and `invoiceDate`:
+Once the arrays are linked, open the focused view on the array mapping to map the individual element fields: each `Opportunity`'s `id`, `amount`, and `closeDate` map to the `Invoice` item's `id`, `amount`, and `invoiceDate`:
 
 <PatternImage src="/img/eip-patterns/message_translator_datamapper_item.png" alt="Message Translator data mapper focused view mapping each array element field" width={1006} />
 

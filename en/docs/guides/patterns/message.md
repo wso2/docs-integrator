@@ -29,7 +29,7 @@ This example builds a message that carries the details of a customer satisfactio
 4. In the flow, declare a variable of type `SurveyUpdateRequest` and assign the survey details. This record instance is the message.
 5. Add the HTTP `put` action on the connection to transmit the message to the survey resource path.
 
-Defining the message is the heart of this pattern. The `SurveyUpdateRequest` record fixes the shape both applications rely on — `title`, `from_template_id`, `footer`, `folder_id`, and `theme_id` — each with its type:
+Defining the message is the heart of this pattern. The `SurveyUpdateRequest` record fixes the shape both applications rely on (`title`, `from_template_id`, `footer`, `folder_id`, and `theme_id`), each with its type:
 
 <PatternImage src="/img/eip-patterns/message_types.png" alt="SurveyUpdateRequest message type in the WSO2 Integrator type diagram" width={355} />
 

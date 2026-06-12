@@ -18,7 +18,7 @@ In WSO2 Integrator, the slip is computed per message and attached to it as a fie
 
 ## Example: Applying loyalty point steps to a payment
 
-This example processes retail payments where the applicable discount steps differ per customer. For each payment, the flow looks up which point programs the customer belongs to — store loyalty points and mobile points — and builds a routing slip listing only those steps. The message is then sent through the point-handling steps named on its slip before the final checkout computes the redeemed amount.
+This example processes retail payments where the applicable discount steps differ per customer. For each payment, the flow looks up which point programs the customer belongs to (store loyalty points and mobile points) and builds a routing slip listing only those steps. The message is then sent through the point-handling steps named on its slip before the final checkout computes the redeemed amount.
 
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>

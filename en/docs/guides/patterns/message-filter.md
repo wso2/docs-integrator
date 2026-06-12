@@ -14,7 +14,7 @@ import {
 
 Use a Message Filter so a component avoids receiving uninteresting messages: messages that match the condition continue through the flow, and all others are discarded. <EipReferenceLink href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/Filter.html" label="Enterprise Integration Patterns Message Filter reference" />
 
-In WSO2 Integrator, the filter is an [If node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) with no else path — when the condition fails, the flow simply ends and the message goes no further.
+In WSO2 Integrator, the filter is an [If node](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) with no else path. When the condition fails, the flow simply ends and the message goes no further.
 
 ## Example: Forwarding only high-priority tickets
 
