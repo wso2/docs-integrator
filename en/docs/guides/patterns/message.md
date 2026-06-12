@@ -23,12 +23,17 @@ This example builds a message that carries the details of a customer satisfactio
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Create an [automation](../../develop/integration-artifacts/automation.md#creating-an-automation) to run the flow.
-2. Add an HTTP client connection that points to the SurveyMonkey API. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection).
-3. In the flow, declare a variable of type `SurveyUpdateRequest` and assign the survey details. This record is the message.
-4. Add the HTTP `put` action on the connection to transmit the message to the survey resource path.
+1. Define the message structure as a record type with the [Type editor](../../develop/understand-ide/editors/type-editor.md). Here, `SurveyUpdateRequest` names the fields the two applications agree on, with a type for each.
+2. Create an [automation](../../develop/integration-artifacts/automation.md#creating-an-automation) to run the flow.
+3. Add an HTTP client connection that points to the SurveyMonkey API. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection).
+4. In the flow, declare a variable of type `SurveyUpdateRequest` and assign the survey details. This record instance is the message.
+5. Add the HTTP `put` action on the connection to transmit the message to the survey resource path.
 
-The flow sends the `SurveyUpdateRequest` message to the SurveyMonkey channel as a single PUT request:
+Defining the message is the heart of this pattern. The `SurveyUpdateRequest` record fixes the shape both applications rely on — `title`, `from_template_id`, `footer`, `folder_id`, and `theme_id` — each with its type:
+
+<PatternImage src="/img/eip-patterns/message_types.png" alt="SurveyUpdateRequest message type in the WSO2 Integrator type diagram" width={355} />
+
+With the message type defined, the flow assigns its values and sends it to the SurveyMonkey channel as a single PUT request:
 
 <PatternImage src="/img/eip-patterns/message_flow.png" alt="Message flow in the WSO2 Integrator visual designer" width={530} />
 

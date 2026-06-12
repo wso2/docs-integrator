@@ -23,6 +23,10 @@ This example sends a product creation message to the Zuora billing API over a de
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>
 
+The design view shows the channel: a single automation connected to one Zuora connection, so the message has exactly one sender and one receiver:
+
+<PatternImage src="/img/eip-patterns/point_to_point_channel_design.png" alt="Point-to-Point Channel integration design view in WSO2 Integrator" width={646} />
+
 1. Create an [automation](../../develop/integration-artifacts/automation.md#creating-an-automation) to run the flow.
 2. Add an HTTP client connection that points to the Zuora API — this connection is the point-to-point channel. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection).
 3. In the flow, declare a variable holding the product details.

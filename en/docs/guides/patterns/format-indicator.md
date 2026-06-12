@@ -37,6 +37,10 @@ The [type diagram](../../develop/understand-ide/editors/type-diagram-editor.md) 
 
 <PatternImage src="/img/eip-patterns/format_indicator_types.png" alt="Format Indicator type diagram in WSO2 Integrator" width={760} />
 
+The version-1 conversion is written as the datamapper function `toPatient`, so WSO2 Integrator opens it in the visual [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md): `dob` and `diagnosis` map straight across, while `firstName` and `lastName` combine into `fullName` — a [many-to-one mapping](../../develop/integration-artifacts/supporting/data-mapper/mapping-capabilities.md#many-to-one-mapping):
+
+<PatternImage src="/img/eip-patterns/format_indicator_datamapper.png" alt="Format Indicator data mapper in WSO2 Integrator" width={1006} />
+
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
@@ -68,17 +72,19 @@ type Patient record {|
 final http:Client patientClient = check new ("http://api.patients.com.balmock.io");
 // docs-fold-end
 
+function toPatient(PatientReqV1 req) returns Patient => {
+    dob: req.dob,
+    fullName: req.firstName + " " + req.lastName,
+    diagnosis: req.diagnosis
+};
+
 listener http:Listener httpListener = new (port = 8080);
 
 service /api/v1 on httpListener {
     resource function post data/patient(PatientReq patintReq) returns error? {
         Patient patient;
         if patintReq is PatientReqV1 {
-            patient = {
-                dob: patintReq.dob,
-                fullName: patintReq.firstName + " " + patintReq.lastName,
-                diagnosis: patintReq.diagnosis
-            };
+            patient = toPatient(patintReq);
         } else {
             patient = {
                 dob: patintReq.patient.dob,
@@ -97,10 +103,6 @@ service /api/v1 on httpListener {
 
 </TabItem>
 </PatternImplementationTabs>
-
-:::tip Build the conversion visually with the Data Mapper
-Mapping each version into `Patient` (step 4) can be done in the [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) instead of code: link `dob` and `diagnosis` straight across, and combine `firstName` and `lastName` into `fullName` with a [many-to-one mapping](../../develop/integration-artifacts/supporting/data-mapper/mapping-capabilities.md#many-to-one-mapping).
-:::
 
 ## Complete sample
 

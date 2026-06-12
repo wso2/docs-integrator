@@ -28,6 +28,10 @@ This example receives a user group creation request and sends it as a command me
 3. In the flow, post the command message to the `usergroups.create` operation with the `x-www-form-urlencoded` media type.
 4. Return the `UserGroupCreationResponse` to the caller.
 
+The `UserGroupCreateRequest` record is the command message — its fields are the parameters of the procedure to invoke: the group's `name`, `description`, and `team_id`:
+
+<PatternImage src="/img/eip-patterns/command_message_types.png" alt="UserGroupCreateRequest command message type in WSO2 Integrator" width={285} />
+
 The flow forwards the command message to Slack's `usergroups.create` operation and returns the result:
 
 <PatternImage src="/img/eip-patterns/command_message_flow.png" alt="Command Message flow in the WSO2 Integrator visual designer" width={530} />

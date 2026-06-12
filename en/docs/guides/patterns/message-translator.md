@@ -25,16 +25,20 @@ This example accepts sales opportunity data from a CRM-style analytics endpoint 
 
 1. Create an [HTTP service](../../develop/integration-artifacts/service/http.md#creating-an-http-service) with a `post` resource that accepts the `SalesData` payload.
 2. Add an HTTP client connection for the QuickBooks API. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection).
-3. Add a data mapper that maps `SalesData` to `QuickBooksInvoice`, converting each opportunity into an invoice entry.
+3. [Add a data mapper](../../develop/integration-artifacts/supporting/data-mapper/access-paths/reusable.md) that maps `SalesData` to `QuickBooksInvoice`, converting each opportunity into an invoice entry.
 4. Call the QuickBooks connection with the translated message.
 
 The flow calls the `translate` function to convert the sales data into the QuickBooks invoice format, then posts it:
 
 <PatternImage src="/img/eip-patterns/message_translator_flow.png" alt="Message Translator flow in the WSO2 Integrator visual designer" width={530} />
 
-The [type diagram](../../develop/understand-ide/editors/type-diagram-editor.md) makes the translation concrete — the source `SalesData` tree (with its `Customer` and `Opportunity` records) on the left, and the target `QuickBooksInvoice` tree on the right:
+The [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) gives this conversion a visual view, which comes in handy for message translations: the `SalesData` fields on the left link to the `QuickBooksInvoice` fields on the right, and an [array mapping](../../develop/integration-artifacts/supporting/data-mapper/array-mappings/array-mappings.md) turns each `Opportunity` into an `Invoice`:
 
-<PatternImage src="/img/eip-patterns/message_translator_types.png" alt="Message Translator type diagram in WSO2 Integrator" width={642} />
+<PatternImage src="/img/eip-patterns/message_translator_datamapper.png" alt="Message Translator data mapper in WSO2 Integrator" width={1006} />
+
+Once the arrays are linked, open the focused view on the array mapping to map the individual element fields — each `Opportunity`'s `id`, `amount`, and `closeDate` map to the `Invoice` item's `id`, `amount`, and `invoiceDate`:
+
+<PatternImage src="/img/eip-patterns/message_translator_datamapper_item.png" alt="Message Translator data mapper focused view mapping each array element field" width={1006} />
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -74,17 +78,15 @@ type Invoice record {|
 final http:Client quickBooks = check new ("http://api.quickbooks.com.balmock.io");
 // docs-fold-end
 
-function translate(SalesData salesData) returns QuickBooksInvoice {
-    return {
-        customerId: salesData.customer.id,
-        invoices: from var oppotunity in salesData.opportunities
-            select {
-                id: oppotunity.id,
-                amount: oppotunity.amount,
-                invoiceDate: oppotunity.closeDate
-            }
-    };
-}
+function translate(SalesData salesData) returns QuickBooksInvoice => {
+    customerId: salesData.customer.id,
+    invoices: from var oppotunity in salesData.opportunities
+        select {
+            id: oppotunity.id,
+            amount: oppotunity.amount,
+            invoiceDate: oppotunity.closeDate
+        }
+};
 
 listener http:Listener httpListener = new (port = 8080);
 
@@ -98,10 +100,6 @@ service /api/v1/analytics on httpListener {
 
 </TabItem>
 </PatternImplementationTabs>
-
-:::tip Build it visually with the Data Mapper
-The `translate` function here is hand-written, but the same conversion can be built on a canvas with the visual [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md): link the `SalesData` fields to `QuickBooksInvoice` fields, and use an [array mapping](../../develop/integration-artifacts/supporting/data-mapper/array-mappings/array-mappings.md) to turn each `Opportunity` into an `Invoice` — no conversion code required.
-:::
 
 ## Complete sample
 
