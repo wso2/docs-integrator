@@ -15,9 +15,10 @@ Salesforce event integrations subscribe to Change Data Capture (CDC) channels an
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **Salesforce** under **Event Integration**.
-3. In the creation form, fill in the following fields:
+1. Open your integration in WSO2 Integrator IDE. If you don't have an integration yet, see [Create a new integration](../../create-integrations/create-a-new-integration.md) to set one up first.
+2. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
+3. In the **Artifacts** panel, select **Salesforce** under **Event Integration**.
+4. In the creation form, fill in the following fields:
 
    ![Salesforce Events creation form](/img/develop/integration-artifacts/event/salesforce-events/step-creation-form.png)
 
@@ -31,7 +32,7 @@ Salesforce event integrations subscribe to Change Data Capture (CDC) channels an
    |---|---|---|
    | **Listener Name** | Identifier for the listener created with this service. | `salesforceListener` |
 
-4. Click **Create**.
+5. Click **Create**.
 
 5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section with all four handlers pre-added.
 

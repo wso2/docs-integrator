@@ -18,9 +18,10 @@ HTTP services expose your integration logic as REST endpoints that clients can c
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Select **+ Add Artifact** in the design view, or **+** next to **Entry Points** in the sidebar.
-2. Select **HTTP Service** under **Integration as API**.
-3. Fill in the creation form fields and select **Create**.
+1. Open your integration in WSO2 Integrator IDE. If you don't have an integration yet, see [Create a new integration](../../create-integrations/create-a-new-integration.md) to set one up first.
+2. Select **+ Add Artifact** in the design view, or **+** next to **Entry Points** in the sidebar.
+3. Select **HTTP Service** under **Integration as API**.
+4. Fill in the creation form fields and select **Create**.
 
 <ThemedImage
     alt="HTTP Service creation form showing Service Contract, Service Base Path, and Advanced Configurations"

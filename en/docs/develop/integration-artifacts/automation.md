@@ -21,12 +21,13 @@ Only one automation can be configured per integration.
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Select the **+ Add Artifact** button in the canvas, or select **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **Automation** under **Automation**.
+1. Open your integration in WSO2 Integrator IDE. If you don't have an integration yet, see [Create a new integration](../create-integrations/create-a-new-integration.md) to set one up first.
+2. Select the **+ Add Artifact** button in the canvas, or select **+** next to **Entry Points** in the sidebar.
+3. In the **Artifacts** panel, select **Automation** under **Automation**.
 
    ![Artifacts panel showing the Automation option](/img/develop/integration-artifacts/automation/add-artifact.png)
 
-3. In the creation form, configure the following fields.
+4. In the creation form, configure the following fields.
 
    ![Create New Automation form](/img/develop/integration-artifacts/automation/create-form.png)
 
@@ -37,13 +38,13 @@ Only one automation can be configured per integration.
    | **Startup Parameters** | Parameters passed to the automation at startup. Select **+ Add Parameter** to add each parameter. |
    | **Return Error** | When selected, the automation exits with an error if execution fails. |
 
-4. Select **Create**.
+5. Select **Create**.
 
-5. WSO2 Integrator opens the automation in the flow designer. The canvas shows a **Start** node, a **+** button to add steps, and an **Error Handler** node.
+6. WSO2 Integrator opens the automation in the flow designer. The canvas shows a **Start** node, a **+** button to add steps, and an **Error Handler** node.
 
    ![Automation flow designer](/img/develop/integration-artifacts/automation/flow-designer.png)
 
-6. Select **+** to open the node panel and add integration steps such as function calls, connections, and control flow.
+7. Select **+** to open the node panel and add integration steps such as function calls, connections, and control flow.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
