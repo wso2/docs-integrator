@@ -1,43 +1,59 @@
 ---
 title: RabbitMQ
-description: Consume messages from RabbitMQ queues with typed message handling, manual acknowledgment, and configurable listener settings.
+description: Create event-driven integrations that consume messages from RabbitMQ queues using typed message handling, manual acknowledgment, and configurable listener settings.
+keywords: [wso2 integrator, rabbitmq, event integration, rabbitmq listener, rabbitmq consumer, message queue, amqp, message processing]
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # RabbitMQ
 
-RabbitMQ event integrations consume messages from a RabbitMQ queue and trigger event handlers as each message arrives. Use them for asynchronous task processing, event-driven workflows, and integrations where producers publish messages that must be reliably consumed and processed.
+RabbitMQ event integrations connect WSO2 Integrator to a RabbitMQ broker as a message consumer. Use them for asynchronous task processing, event-driven workflows, and decoupled integrations where producers publish messages that must be reliably consumed and processed. This page covers how to create a RabbitMQ service, configure the service and listener settings, define event handlers for message processing, and apply error handling patterns.
 
 ## Creating a RabbitMQ service
+
+A RabbitMQ service consists of a listener that connects to the broker and one or more event handlers that process incoming messages.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **RabbitMQ** under **Event Integration**.
-3. In the creation form, fill in the following fields:
+1. Open your integration in WSO2 Integrator IDE. If you don't have an integration yet, see [Create a new integration](../../create-integrations/create-a-new-integration.md) to set one up first.
+2. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
+3. In the **Artifacts** panel, select **RabbitMQ** under **Event Integration**.
+4. Fill in the creation form fields and select **Create**.
 
-   ![RabbitMQ Event Integration creation form](/img/develop/integration-artifacts/event/rabbitmq/step-creation-form.png)
+   <ThemedImage
+       alt="RabbitMQ service creation form"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/rabbitmq/step-creation-form.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/rabbitmq/step-creation-form.png'),
+       }}
+   />
 
-   | Field | Description | Default |
+   | Field | Description | Example |
    |---|---|---|
-   | **Listener Name** | Identifier for the listener created with this service. | `rabbitmqListener` |
+   | **Listener Name** | Identifier for the listener created with this service. This name is used to reference the listener in the service declaration and in the configuration panel. | `rabbitmqListener` |
    | **Host** | Hostname or IP address of the RabbitMQ broker. | `localhost` |
    | **Port** | Port used to connect to the broker. | `5672` |
-   | **Queue Name** | Name of the RabbitMQ queue to listen to. | `myQueue` |
+   | **Queue Name** | Name of the RabbitMQ queue the service subscribes to. | `orders` |
 
-4. Click **Create**.
+   WSO2 Integrator opens the empty service in the **Service Designer**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The header shows the attached listener pill and the queue name pill.
-
-   ![Service Designer showing the RabbitMQ service canvas](/img/develop/integration-artifacts/event/rabbitmq/step-service-designer.png)
-
-6. Click **+ Add Handler** to define how incoming messages are processed.
+   <ThemedImage
+       alt="RabbitMQ Service Designer showing the listener pill and Add Handler button"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/rabbitmq/step-service-designer.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/rabbitmq/step-service-designer.png'),
+       }}
+   />
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
+
+`rabbitmq:Service` connects to a RabbitMQ broker via a `rabbitmq:Listener` and processes incoming messages through the `onMessage` remote function. Annotate the service with `@rabbitmq:ServiceConfig` to set the target queue.
 
 ```ballerina
 import ballerinax/rabbitmq;
@@ -49,7 +65,7 @@ configurable int port = 5672;
 listener rabbitmq:Listener rabbitmqListener = new (host, port);
 
 @rabbitmq:ServiceConfig {
-    queueName: "myQueue"
+    queueName: "orders"
 }
 service on rabbitmqListener {
 
@@ -64,144 +80,200 @@ service on rabbitmqListener {
 
 ## Service configuration
 
-Service configuration sets the queue the service subscribes to and applies advanced queue-level settings.
+Service configuration sets the queue the service subscribes to, controls message acknowledgment behavior, and defines queue declaration properties.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
 In the **Service Designer**, click the **Configure** icon in the header to open the **RabbitMQ Event Integration Configuration** panel. Select **RabbitMQ Event Integration** in the left panel.
 
-![RabbitMQ Event Integration Configuration panel](/img/develop/integration-artifacts/event/rabbitmq/step-service-config.png)
+<ThemedImage
+    alt="RabbitMQ Event Integration Configuration panel"
+    sources={{
+        light: useBaseUrl('/img/develop/integration-artifacts/event/rabbitmq/step-service-config.png'),
+        dark: useBaseUrl('/img/develop/integration-artifacts/event/rabbitmq/step-service-config.png'),
+    }}
+/>
 
-| Field | Description |
-|---|---|
-| **Queue Name** | Name of the queue this service listens to. |
-| **Service Configuration** | Advanced queue-level settings as a `@rabbitmq:ServiceConfig` record expression (e.g., `{ autoAck: false }`). |
+After making edits, click **Save Changes** to apply them.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
-The `@rabbitmq:ServiceConfig` annotation placed before the `service` declaration sets the queue and message acknowledgment mode:
+Place the `@rabbitmq:ServiceConfig` annotation before the `service` declaration to set the queue and acknowledgment mode:
 
 ```ballerina
+import ballerinax/rabbitmq;
+import ballerina/log;
+
+listener rabbitmq:Listener rabbitmqListener = new ("localhost", 5672);
+
 @rabbitmq:ServiceConfig {
-    queueName: "myQueue",
-    autoAck: false
+    queueName: "orders",
+    autoAck: false,
+    config: {
+        durable: true,
+        autoDelete: false
+    }
 }
 service on rabbitmqListener {
+
+    remote function onMessage(rabbitmq:AnydataMessage message,
+                              rabbitmq:Caller caller) returns error? {
+        log:printInfo("Message received", content = message.content.toString());
+        check caller->basicAck();
+    }
 }
 ```
-
-`@rabbitmq:ServiceConfig` fields:
-
-| Field | Type | Default | Description |
-|---|---|---|---|
-| `queueName` | `string` | Required | Name of the queue to consume from |
-| `autoAck` | `boolean` | `true` | When `false`, messages must be manually acknowledged using `rabbitmq:Caller` |
 
 </TabItem>
 </Tabs>
 
+### Service configuration fields
+
+| Field | Description |
+|---|---|
+| **Queue Name** | Name of the queue to subscribe to. Required. |
+| **Auto Ack** | When enabled, messages are automatically acknowledged after the handler returns. When disabled, use `rabbitmq:Caller` in the handler to acknowledge or reject messages manually. Defaults to enabled. |
+| **Config** | Optional. Additional settings for queue declaration. See queue configuration fields below. |
+
+### Queue configuration fields
+
+The `config` field accepts a `QueueConfig` record that controls how the queue is declared on the broker.
+
+| Field | Description |
+|---|---|
+| **Durable** | When `true`, the queue survives broker restarts. Defaults to `false`. |
+| **Exclusive** | When `true`, the queue is used by only one connection and is deleted when that connection closes. Defaults to `false`. |
+| **Auto Delete** | When `true`, the queue is automatically deleted when the last consumer unsubscribes. Defaults to `true`. |
+| **Arguments** | Optional. Additional construction arguments for the queue as key-value pairs. |
+
 ## Listener configuration
 
-The listener connects to the RabbitMQ broker and manages the consumer lifecycle.
+The listener manages the connection to the RabbitMQ broker and controls consumer behavior including authentication, heartbeats, and security.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-In the **RabbitMQ Event Integration Configuration** panel, select **rabbitmqListener** under **Attached Listeners** to configure the listener.
+In the **RabbitMQ Event Integration Configuration** panel, select the listener name under **Attached Listeners** to open its settings.
 
-![Listener configuration — connection and authentication fields](/img/develop/integration-artifacts/event/rabbitmq/step-listener-config-1.png)
+<ThemedImage
+    alt="Listener configuration showing connection and authentication fields"
+    sources={{
+        light: useBaseUrl('/img/develop/integration-artifacts/event/rabbitmq/step-listener-config-1.png'),
+        dark: useBaseUrl('/img/develop/integration-artifacts/event/rabbitmq/step-listener-config-1.png'),
+    }}
+/>
 
-<!-- ![Listener configuration — timeout, security, and auth fields](/img/develop/integration-artifacts/event/rabbitmq/step-listener-config-2.png) -->
+After making edits, click **Save Changes** to apply them.
 
-| Field | Description | Default |
-|---|---|---|
-| **Name** | Identifier for the listener. | `rabbitmqListener` |
-| **Host** | Hostname or IP address of the RabbitMQ broker. | `localhost` |
-| **Port** | Port used to connect to the broker. | `5672` |
-| **Qos Settings** | Consumer prefetch settings. Controls how many unacknowledged messages can be in flight. | `()` |
-| **Username** | Username for broker authentication. | — |
-| **Password** | Password for broker authentication. | — |
-| **Virtual Host** | Virtual host to use when connecting to the broker. | — |
-| **Connection Timeout** | TCP connection establishment timeout in seconds. Set to `0` for infinite. | `0.0` |
-| **Handshake Timeout** | AMQP 0-9-1 protocol handshake timeout in seconds. | `0.0` |
-| **Shutdown Timeout** | Shutdown timeout in seconds. Set to `0` for infinite. If consumers exceed this timeout, any remaining queued deliveries will be lost. Default is `10`. | `0.0` |
-| **Heartbeat** | Initially-requested heartbeat timeout in seconds. Set to `0` for none. | `0.0` |
-| **Validation** | Enable constraint validation on incoming message content. | — |
-| **Secure Socket** | SSL/TLS configuration for secure connections (certificate path and password). | — |
-| **Auth** | Authentication record with `username` and `password` fields. | — |
-
-Click **Save Changes** to apply updates.
+| Field | Description |
+|---|---|
+| **Name** | Identifier for this listener, referenced in the service declaration. |
+| **Host** | Hostname or IP address of the RabbitMQ broker. |
+| **Port** | Port used to connect to the broker. Defaults to `5672`. |
+| **Qos Settings** | Consumer prefetch settings. Controls how many unacknowledged messages can be in flight at once. |
+| **Username** | Username for broker authentication. |
+| **Password** | Password for broker authentication. |
+| **Virtual Host** | Virtual host to use when connecting to the broker. |
+| **Connection Timeout** | TCP connection establishment timeout in seconds. Set to `0` for no timeout. |
+| **Handshake Timeout** | AMQP 0-9-1 protocol handshake timeout in seconds. |
+| **Shutdown Timeout** | Time in seconds to wait for consumers to finish before shutting down. Set to `0` for no timeout. Defaults to `10`. |
+| **Heartbeat** | Heartbeat interval in seconds. Set to `0` to disable heartbeats. |
+| **Validation** | Enables constraint validation on incoming message content. |
+| **Secure Socket** | SSL/TLS configuration for secure connections. |
+| **Auth** | Authentication record with `username` and `password` fields. |
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
+Declare a `rabbitmq:Listener` with the broker address and connection configuration:
+
 ```ballerina
-listener rabbitmq:Listener rabbitmqListener = new (
-    host = "localhost",
-    port = 5672,
-    auth = {
+import ballerinax/rabbitmq;
+
+listener rabbitmq:Listener rabbitmqListener = new ("localhost", 5672, {
+    auth: {
         username: "guest",
         password: "guest"
-    }
-);
+    },
+    heartbeat: 60
+});
 ```
 
-`rabbitmq:ConnectionConfiguration` fields:
-
-| Field | Type | Default | Description |
-|---|---|---|---|
-| `host` | `string` | `"localhost"` | RabbitMQ broker hostname |
-| `port` | `int` | `5672` | Broker port |
-| `username` | `string` | — | Broker username |
-| `password` | `string` | — | Broker password |
-| `virtualHost` | `string` | — | Virtual host |
-| `connectionTimeout` | `decimal` | `0.0` | TCP connection timeout in seconds |
-| `handshakeTimeout` | `decimal` | `0.0` | AMQP handshake timeout in seconds |
-| `shutdownTimeout` | `decimal` | `0.0` | Shutdown timeout in seconds |
-| `heartbeat` | `decimal` | `0.0` | Heartbeat interval in seconds |
-| `secureSocket` | `rabbitmq:SecureSocket?` | — | TLS/SSL configuration |
-| `validation` | `boolean?` | — | Enable constraint validation |
+| Field | Description |
+|---|---|
+| `host` | RabbitMQ broker hostname. Defaults to `"localhost"`. |
+| `port` | Broker port. Defaults to `5672`. |
+| `username` | Broker username. |
+| `password` | Broker password. |
+| `virtualHost` | Virtual host for the connection. |
+| `connectionTimeout` | TCP connection timeout in seconds. Set to `0` for no timeout. |
+| `handshakeTimeout` | AMQP handshake timeout in seconds. |
+| `shutdownTimeout` | Shutdown timeout in seconds. Set to `0` for no timeout. Defaults to `10`. |
+| `heartbeat` | Heartbeat interval in seconds. Set to `0` to disable. |
+| `secureSocket` | TLS/SSL configuration. |
+| `validation` | Enables constraint validation on incoming messages. |
 
 </TabItem>
 </Tabs>
 
 ## Event handlers
 
-An event handler is a `remote function` that WSO2 Integrator calls for each event received from the queue.
+RabbitMQ event trigger supports three remote methods.
 
-### Adding an event handler
+| Handler | Triggered when |
+|---|---|
+| `onMessage` | A new message arrives on the subscribed queue |
+| `onRequest` | An RPC request message arrives with a `replyTo` property set |
+| `onError` | Message processing fails or a handler returns an error |
+
+To add a handler in the **Service Designer**, click **+ Add Handler** and select the handler type in the **Select Handler to Add** panel. WSO2 Integrator opens the **Flow Designer** for that handler.
+
+### onMessage
+
+`onMessage` is the primary event handler for message processing. It is called once for each message delivered from the queue. By default, messages are automatically acknowledged after the handler returns. Set `autoAck: false` in the service configuration and include `rabbitmq:Caller` to acknowledge or reject messages manually.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-In the **Service Designer**, click **+ Add Handler**. A **Select Handler to Add** panel opens on the right listing the available event types.
+Select **onMessage** in the **Select Handler to Add** panel and click **Save**. The **Flow Designer** opens with the handler configuration.
 
-**onMessage** — opens a configuration panel before saving:
+<ThemedImage
+    alt="onMessage handler configuration panel showing Define Content and Caller options"
+    sources={{
+        light: useBaseUrl('/img/develop/integration-artifacts/event/rabbitmq/step-add-handler.png'),
+        dark: useBaseUrl('/img/develop/integration-artifacts/event/rabbitmq/step-add-handler.png'),
+    }}
+/>
 
-![onMessage handler configuration panel](/img/develop/integration-artifacts/event/rabbitmq/step-add-handler.png)
+To bind the incoming message content to a specific type, click **+ Define Content** next to the **Message** configuration field. Paste a sample JSON to let WSO2 Integrator infer the message shape. If you skip **+ Define Content**, the handler receives a `rabbitmq:AnydataMessage` where `content` is `anydata`, requiring a manual type cast to access the message payload.
 
-| Field | Description |
+Under **Advanced Parameters**, enable **Caller** to include the `rabbitmq:Caller` parameter in the handler signature. This is required when **Auto Ack** is disabled on the service and you need to acknowledge messages manually.
+
+Use the flow canvas to add processing steps such as database writes, HTTP calls, data transformations, and conditional logic.
+
+| Parameter | Description |
 |---|---|
-| **+ Define Content** | Define the expected content type of the incoming message (e.g., a typed record). |
-| **Caller** | When selected, includes `rabbitmq:Caller` as a parameter in the handler, enabling manual acknowledgment (`basicAck`) or rejection (`basicNack`) of messages. |
-
-Click **Save** to add the handler.
-
-**onRequest** and **onError** — added directly without additional configuration.
+| **message** | The incoming RabbitMQ message. Access the `content` field to read the message payload and `properties` for AMQP metadata. |
+| **caller** | Optional. Enables manual message acknowledgment. Enable **Caller** under **Advanced Parameters** when **Auto Ack** is disabled on the service. Use a **BasicAck** action to acknowledge or a **BasicNack** action to reject the message. |
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
-**onMessage handler** — called for each message received from the queue:
+Cast `message.content` to the expected type and use `rabbitmq:Caller` to acknowledge the message after processing:
 
 ```ballerina
-type OrderEvent record {|
-    string orderId;
-    string customerId;
-    decimal amount;
-|};
+import ballerinax/rabbitmq;
+import ballerina/log;
+
+type Order readonly & record {
+    int orderId;
+    string productName;
+    decimal price;
+};
+
+listener rabbitmq:Listener rabbitmqListener = new ("localhost", 5672);
 
 @rabbitmq:ServiceConfig {
     queueName: "orders",
@@ -211,35 +283,115 @@ service on rabbitmqListener {
 
     remote function onMessage(rabbitmq:AnydataMessage message,
                               rabbitmq:Caller caller) returns error? {
-        OrderEvent order = check message.content.ensureType();
-        check processOrder(order);
+        Order order = check message.content.ensureType();
+        log:printInfo(string `Processing order ${order.orderId}`);
         check caller->basicAck();
     }
 }
 ```
 
-**onRequest handler** — called for RPC-style request/reply messages:
+</TabItem>
+</Tabs>
+
+### onRequest
+
+`onRequest` handles RPC-style messaging where the message producer expects a reply. It is called when a message is published with a `replyTo` property set. The value returned from `onRequest` is automatically published to the reply queue.
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+Select **onRequest** in the **Select Handler to Add** panel and click **Save**. The **Flow Designer** opens with the handler. Use the flow canvas to process the request and return a response value.
+
+| Parameter | Description |
+|---|---|
+| **message** | The incoming RPC request. Access `message.content` for the request payload and `message.properties.replyTo` for the reply queue name. |
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+Return a value from `onRequest`. The listener automatically publishes it to the `replyTo` queue specified in the message properties:
 
 ```ballerina
+import ballerinax/rabbitmq;
+import ballerina/log;
+
+type PriceRequest record {|
+    string productId;
+|};
+
+listener rabbitmq:Listener rabbitmqListener = new ("localhost", 5672);
+
+@rabbitmq:ServiceConfig {
+    queueName: "price-requests"
+}
 service on rabbitmqListener {
 
-    remote function onRequest(rabbitmq:AnydataMessage message) returns string|error {
-        OrderEvent order = check message.content.ensureType();
-        string result = check processOrder(order);
-        return result;
+    remote function onRequest(rabbitmq:AnydataMessage message) returns decimal|error {
+        PriceRequest request = check message.content.ensureType();
+        log:printInfo(string `Price request for ${request.productId}`);
+        return 99.99d;
     }
 }
 ```
 
-**onError handler** — called when message processing fails:
+</TabItem>
+</Tabs>
+
+The `rabbitmq:AnydataMessage` type is common to all handlers and contains the following fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `content` | `anydata` | Message payload. Cast using `message.content.ensureType()` to access as a typed record. |
+| `routingKey` | `string` | Routing key used when the message was published. |
+| `exchange` | `string` | Exchange the message was published to. Empty string for the default exchange. |
+| `deliveryTag` | `int` | Unique delivery identifier. Used with `caller->basicAck()` or `caller->basicNack()` for manual acknowledgment. |
+| `properties` | `rabbitmq:BasicProperties?` | AMQP message properties including `replyTo`, `correlationId`, `contentType`, and `headers`. |
+
+## Error handling
+
+The `onError` handler is invoked when `onMessage` or `onRequest` returns an error. Use it to log failures, route messages to a dead-letter queue, or trigger alerting. If `onError` is not defined in the service, processing failures are logged to the console with the full stack trace.
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+Select **onError** in the **Select Handler to Add** panel and click **Save**. The **Flow Designer** opens with the handler signature. Use the flow canvas to add logging, dead-letter forwarding, or alerting steps.
+
+| Parameter | Description |
+|---|---|
+| **message** | The original RabbitMQ message that caused the failure. Access `message.content` to inspect the payload. |
+| **err** | The error returned from the failed handler. Use `err.message()` for the failure description and `err.cause()` for the underlying cause. |
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+Add `onError` to the service to handle processing failures. The handler receives the original message and the error returned by the failed handler:
 
 ```ballerina
+import ballerinax/rabbitmq;
+import ballerina/log;
+
+type Order readonly & record {
+    int orderId;
+    string productName;
+    decimal price;
+};
+
+listener rabbitmq:Listener rabbitmqListener = new ("localhost", 5672);
+
+@rabbitmq:ServiceConfig {
+    queueName: "orders"
+}
 service on rabbitmqListener {
+
+    remote function onMessage(rabbitmq:AnydataMessage message) returns error? {
+        Order order = check message.content.ensureType();
+        log:printInfo(string `Processing order ${order.orderId}`);
+    }
 
     remote function onError(rabbitmq:AnydataMessage message,
                             rabbitmq:Error err) returns error? {
         log:printError("Message processing failed",
-                       'error = err,
+                       err,
                        content = message.content.toString());
     }
 }
@@ -248,28 +400,10 @@ service on rabbitmqListener {
 </TabItem>
 </Tabs>
 
-### Handler types
-
-| Handler | Triggered when | Use when |
-|---|---|---|
-| `onMessage` | A new message arrives on the queue | Standard one-way message consumption |
-| `onRequest` | An RPC request message arrives (has a `replyTo` property) | Request/reply messaging patterns |
-| `onError` | A handler returns an error or message processing fails | Logging failures and routing to dead-letter queues |
-
-### Message type
-
-Each handler receives a `rabbitmq:AnydataMessage` parameter with the message content and metadata.
-
-| Field | Type | Description |
-|---|---|---|
-| `content` | `anydata` | Message payload. Use `message.content.ensureType()` to cast to a typed record. |
-| `routingKey` | `string` | Routing key used when the message was published. |
-| `exchange` | `string` | Exchange the message was published to. Empty string for the default exchange. |
-| `deliveryTag` | `int` | Unique delivery identifier. Used with `caller->basicAck(deliveryTag)` for manual acknowledgment. |
-| `properties` | `rabbitmq:BasicProperties?` | AMQP message properties including `replyTo`, `correlationId`, `contentType`, and `headers`. |
-
 ## What's next
 
-- [Kafka](kafka.md) — consume messages from Apache Kafka topics
-- [Connections](../supporting/connections.md) — reuse RabbitMQ connection credentials across services
-- [RabbitMQ connector reference](../../../connectors/catalog/messaging/rabbitmq/connector-overview.md) — full connector API reference and trigger reference
+- [RabbitMQ connector overview](../../../connectors/catalog/messaging/rabbitmq/connector-overview.md) — publish messages and manage queues using the RabbitMQ producer client
+- [RabbitMQ connector example](../../../connectors/catalog/messaging/rabbitmq/example.md) — end-to-end example combining a RabbitMQ consumer and producer
+- [RabbitMQ trigger reference](../../../connectors/catalog/messaging/rabbitmq/triggers.md) — full listener and service callback API reference
+- [Data mapper](../../integration-artifacts/supporting/data-mapper/data-mapper.md) — transform RabbitMQ message payloads between formats using the visual data mapper
+- [Connections](../supporting/connections.md) — store RabbitMQ credentials as reusable named connections
