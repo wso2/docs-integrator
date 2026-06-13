@@ -151,7 +151,7 @@ const sidebars: SidebarsConfig = {
               ],
             },
             {
-              type: 'category', label: 'Event-Driven Integration',
+              type: 'category', label: 'Event Integration',
               collapsed: true,
               items: [
                 'develop/integration-artifacts/event/kafka',
@@ -168,7 +168,7 @@ const sidebars: SidebarsConfig = {
               ],
             },
             {
-              type: 'category', label: 'File-Driven Integration',
+              type: 'category', label: 'File Integration',
               collapsed: true,
               items: [
                 {

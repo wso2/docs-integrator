@@ -1,6 +1,6 @@
 ---
 sidebar_position: 9
-title: "Build a File-Driven Integration"
+title: "Build a File Integration"
 description: Build a Local Files listener in WSO2 Integrator to detect file modifications and log them.
 keywords: [wso2 integrator, file integration, local files, onModify, quick start, ballerina file]
 ---
@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Build a File-Driven Integration
+# Build a File Integration
 
 **Time:** Under 10 minutes | **What you'll build:** A file integration that adds an `onModify` handler to track file changes and uses `printInfo` to log file modification events.
 

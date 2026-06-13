@@ -1,6 +1,6 @@
 ---
 sidebar_position: 8
-title: "Build an Event-Driven Integration"
+title: "Build an Event Integration"
 description: Build an event-driven integration in WSO2 Integrator that consumes messages from a message broker.
 keywords: [wso2 integrator, rabbitmq service, event integration, quick start, ballerina, amqp]
 ---
@@ -9,7 +9,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Build an Event-Driven Integration
+# Build an Event Integration
 
 **Time:** Under 10 minutes | **What you'll build:** An event-driven integration that consumes messages from `Orders` queue in RabbitMQ broker and processes them.
 
