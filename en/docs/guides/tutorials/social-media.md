@@ -48,7 +48,7 @@ You build three focused integrations inside one project rather than a single mon
 
 The integrations collaborate through a deliberate choice of contract. The Social Media API calls the Sentiment API over **HTTP** because it needs the verdict synchronously to decide whether to store the post. It hands the notification off to **RabbitMQ** because the author should not wait on Slack, and because you can add more consumers later (email, analytics) without touching the API.
 
-The **Social Media API is the orchestrator**: it depends on the sentiment service, a database, and the message pipeline. So you build the two standalone integrations it leans on first (Parts 3 and 4), then assemble the API itself (Parts 5 onward).
+The **Social Media API is the orchestrator**: it depends on the sentiment service, a database, and the message pipeline. So you build the two standalone integrations it leans on first (Parts 2 and 3), then assemble the API itself (Parts 4 onward).
 
 :::note Event-driven backbone
 RabbitMQ is a first-class [event integration trigger](../../develop/integration-artifacts/event/rabbitmq.md): you build the consumer entirely in the Visual Designer. The pattern is broker-agnostic; the platform also ships triggers for [Kafka](../../develop/integration-artifacts/event/kafka.md), [MQTT](../../develop/integration-artifacts/event/mqtt.md), [Solace](../../develop/integration-artifacts/event/solace.md), and [Azure Service Bus](../../develop/integration-artifacts/event/azure-service-bus.md).
@@ -60,7 +60,7 @@ RabbitMQ is a first-class [event integration trigger](../../develop/integration-
 - A MySQL 8 instance (local or containerized).
 - A RabbitMQ broker (local or containerized).
 - A Slack workspace where you can create an app and obtain a bot token.
-- Docker, if you want to run the full stack locally in [Part 13](#part-13-deploy).
+- Docker, if you want to run the full stack locally in [Part 12](#part-12-deploy).
 
 ---
 
@@ -84,63 +84,9 @@ Open the integration and you land in the [Visual Designer](../../develop/underst
 
 ---
 
-## Part 2: Model the domain
-
-Start with the data. You model three records in the visual [Type editor](../../develop/integration-artifacts/supporting/types.md), with no hand-written type definitions. These records describe your domain, and they back the storage you add to the Social Media service in [Part 5](#part-5-create-the-social-media-rest-api).
-
-<Tabs>
-<TabItem value="ui" label="Visual Designer" default>
-
-1. In the artifacts panel, click **+** next to **Types**.
-2. Choose **Create from scratch**, set **Kind** to **Record**, and name it `User`.
-3. Click **+** to add each field: `id` (`int`, readonly), `name` (`string`), `mobileNumber` (`string`), and `birthDate` (`string`).
-4. Repeat for a `Post` record (`id`, `description`, `category`, `tags`, `createdDate`, `userId`) and a `Follower` record (`id`, `leaderId`, `followerId`, `createdDate`).
-5. Click **View Type Diagram** to see the [type diagram](../../develop/integration-artifacts/supporting/types.md#type-diagram) and the relationships between your records.
-
-![The Type Diagram showing the User, Post, and Follower records with their fields and types](/img/guides/tutorials/social-media/type-diagram.png)
-
-:::tip
-If you already have a JSON payload, use [Generate type from JSON or XML](../../develop/integration-artifacts/supporting/types.md#generate-type-from-json-or-xml) to create a record in one step.
-:::
-
-</TabItem>
-<TabItem value="code" label="Ballerina Code">
-
-```ballerina
-type User record {|
-    readonly int id;
-    string name;
-    string mobileNumber;
-    string birthDate;
-|};
-
-type Post record {|
-    readonly int id;
-    string description;
-    string category;
-    string[] tags;
-    string createdDate;
-    int userId;
-|};
-
-type Follower record {|
-    readonly int id;
-    int leaderId;
-    int followerId;
-    string createdDate;
-|};
-```
-
-</TabItem>
-</Tabs>
-
-> **Capability: Visual type modeling.** You define your data contract once and reuse it across services, mappers, connectors, and the persistence layer with full type safety.
-
----
-
 The Social Media API ties three pieces together: a service to screen posts, a pipeline to announce them, and a store to keep them. Build the two standalone integrations first, the Sentiment API and the Post Notifier.
 
-## Part 3: Build the Sentiment API
+## Part 2: Build the Sentiment API
 
 The first standalone integration is the screening service. Build a small **Sentiment API** that takes post text and returns a sentiment label with probabilities. For the tutorial it returns **hardcoded values**, so you can focus on the integration rather than a real model.
 
@@ -230,7 +176,7 @@ type Sentiment record {|
 
 ---
 
-## Part 4: Build the Post Notifier: RabbitMQ to Slack
+## Part 3: Build the Post Notifier: RabbitMQ to Slack
 
 The other standalone integration is the announcement pipeline. Build the **Post Notifier**, a RabbitMQ-triggered event integration that consumes new-post messages and posts to Slack. Declare the configurations it needs first, the broker details and the Slack token, then build the connector and the event integration on top of them. This is where RabbitMQ's first-class trigger support shines: you build the consumer entirely in the designer.
 
@@ -324,16 +270,79 @@ slackAuthToken = "xoxb-your-bot-token"
 
 With the Sentiment API and the Post Notifier built, assemble the **Social Media API** that uses them.
 
-## Part 5: Create the Social Media REST API
+## Part 4: Create the Social Media REST API
 
-Build the orchestrator. Give it a database with the [persist feature](../../develop/tools/integration-tools/persist-tool.md), which generates a type-safe client with ready-made CRUD operations, then design the [HTTP service](../../develop/integration-artifacts/service/http.md) resources on top of it.
+This is the heart of the backend. The **Social Media API** is the orchestrator: it exposes the users-and-posts REST API, stores everything in MySQL, screens each post with the Sentiment API, and publishes a new-post event. You assemble it across the next several parts. Here you lay the foundation: create the database, connect to it with the **persist feature** so the platform generates a type-safe client and the entity types, then stand up the REST resources.
+
+### Create the database
+
+The API persists users, posts, and followers in MySQL, so create the schema first. Run this script against your MySQL instance. It creates the database, an application user, the three tables, and a couple of seed users:
+
+```sql
+CREATE DATABASE IF NOT EXISTS social_media;
+
+-- Application user the integration connects as
+CREATE USER IF NOT EXISTS 'social_media_user'@'localhost' IDENTIFIED BY 'social_media_pass';
+GRANT ALL PRIVILEGES ON social_media.* TO 'social_media_user'@'localhost';
+FLUSH PRIVILEGES;
+
+USE social_media;
+
+CREATE TABLE users (
+    id            INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name          VARCHAR(255) NOT NULL,
+    mobile_number VARCHAR(15)  NOT NULL,
+    birth_date    DATE
+);
+
+CREATE TABLE posts (
+    id           INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    description  VARCHAR(255) NOT NULL,
+    category     VARCHAR(255),
+    tags         VARCHAR(255),
+    created_date DATE,
+    user_id      INT          NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE followers (
+    id           INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    leader_id    INT  NOT NULL,
+    follower_id  INT  NOT NULL,
+    created_date DATE,
+    UNIQUE (leader_id, follower_id),
+    FOREIGN KEY (leader_id)   REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (follower_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+INSERT INTO users (name, mobile_number, birth_date) VALUES
+    ('Alice', '+94771234001', '1995-03-12'),
+    ('Bob',   '+94771234002', '1998-07-25');
+```
+
+You now have a `social_media` database reachable with the credentials below. You give these to the connection in the next step:
+
+| Setting | Value |
+| --- | --- |
+| Host | `localhost` |
+| Port | `3306` |
+| Database | `social_media` |
+| User | `social_media_user` |
+| Password | `social_media_pass` |
+
+### Connect and build the service
+
+With the schema in place, connect to it with the [persist feature](../../develop/tools/integration-tools/persist-tool.md) and design the [HTTP service](../../develop/integration-artifacts/service/http.md) on top.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. In the `social-media` integration, click **+ Add Artifact**, choose **Connection**, then [**Connect to a Database**](../../develop/tools/integration-tools/persist-tool.md#step-1-add-a-connection). Select **MySQL**, introspect the `social_media` schema, pick the `users`, `posts`, and `followers` tables, and name the connection `socialMediaDb`. The wizard generates a type-safe client with [CRUD functions](../../develop/tools/integration-tools/persist-tool.md#use-connection-functions-in-integration-logic): **Get rows**, **Insert rows**, **Update row**, **Delete row**.
+1. Click **+ Add Artifact**, choose **Connection**, then [**Connect to a Database**](../../develop/tools/integration-tools/persist-tool.md#step-1-add-a-connection). Select **MySQL** and enter the credentials above. Click **Connect & Introspect Database**, pick the `users`, `posts`, and `followers` tables, and name the connection `socialMediaDb`. The persist feature generates a type-safe client with [CRUD functions](../../develop/tools/integration-tools/persist-tool.md#use-connection-functions-in-integration-logic) (**Get rows**, **Insert rows**, **Update row**, **Delete row**) and the matching `User`, `Post`, and `Follower` entities.
+
+   ![The User, Post, and Follower entities and their relationships](/img/guides/tutorials/social-media/type-diagram.png)
+
 2. Click **+ Add Artifact**, then **HTTP Service** under **Integration as API**. Keep **Design From Scratch**, set the **Service Base Path** to `/social-media`, and accept the **Shared Listener (Port 9090)**. Click **Create**.
-3. Click **+ Add Resource** and [add each resource](../../develop/integration-artifacts/service/http.md#resources) below, setting the method, path, [path parameters](../../develop/integration-artifacts/service/http.md#defining-inputs), payload, and [response schema](../../develop/integration-artifacts/service/http.md#defining-response-schemas):
+3. [Add each resource](../../develop/integration-artifacts/service/http.md#resources) below, setting the method, path, [path parameters](../../develop/integration-artifacts/service/http.md#defining-inputs), payload, and [response schema](../../develop/integration-artifacts/service/http.md#defining-response-schemas):
 
    | Method | Path | Returns |
    | --- | --- | --- |
@@ -349,7 +358,11 @@ Build the orchestrator. Give it a database with the [persist feature](../../deve
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
+The persist feature generated the entities and a type-safe client from the schema. The service uses them directly:
+
 ```ballerina
+import ballerina/http;
+
 final store:Client socialMediaDb = check new ();
 
 service /social-media on new http:Listener(9090) {
@@ -370,11 +383,11 @@ service /social-media on new http:Listener(9090) {
 </TabItem>
 </Tabs>
 
-> **Capability: Low-code REST API design with model-driven persistence.** Resources, parameters, and typed responses are designed on the canvas and wired straight to a generated, type-safe database client, no SQL required.
+> **Capability: Model-driven persistence and low-code REST API design.** A database schema becomes a type-safe client with generated entities and CRUD, and you design resources and typed responses on the canvas with no SQL in your flows.
 
 ---
 
-## Part 6: Validate input
+## Part 5: Validate input
 
 A malformed phone number or an empty name should never reach your logic. Attach [constraints](../../develop/integration-artifacts/supporting/types.md) to your record fields and the platform rejects bad payloads automatically.
 
@@ -384,7 +397,7 @@ A malformed phone number or an empty name should never reach your logic. Attach 
 1. Open the `NewUser` type in the Type editor.
 2. On the `name` field, expand the field options and add a minimum length of `1`.
 3. On the `mobileNumber` field, add a pattern constraint for a phone number.
-4. Save. When a request fails binding, the service returns `400` with the violated rule; you handle the shape centrally in [Part 10](#part-10-handle-errors-consistently).
+4. Save. When a request fails binding, the service returns `400` with the violated rule; you handle the shape centrally in [Part 9](#part-9-handle-errors-consistently).
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -406,7 +419,7 @@ public type NewUser record {|
 
 ---
 
-## Part 7: Shape responses with the Data Mapper
+## Part 6: Shape responses with the Data Mapper
 
 Your stored `Post` keeps `tags` as one comma-separated string, but the API should return them as an array, nested under a `meta` object. Rather than hand-write that transform, you reach for the [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md#when-to-use-the-data-mapper).
 
@@ -443,9 +456,9 @@ function mapPostToPostWithMeta(Post[] posts) returns PostWithMeta[] =>
 
 ---
 
-## Part 8: Screen posts with the Sentiment API
+## Part 7: Screen posts with the Sentiment API
 
-Before a post is saved, screen its text with the Sentiment API from [Part 3](#part-3-build-the-sentiment-api). Because that service publishes an OpenAPI contract, you [generate a type-safe client from it](../../develop/tools/integration-tools/openapi-tool.md#generating-a-ballerina-client-from-openapi) and call it like any connection, with retry and timeout built in.
+Before a post is saved, screen its text with the Sentiment API from [Part 2](#part-2-build-the-sentiment-api). Because that service publishes an OpenAPI contract, you [generate a type-safe client from it](../../develop/tools/integration-tools/openapi-tool.md#generating-a-ballerina-client-from-openapi) and call it like any connection, with retry and timeout built in.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
@@ -482,9 +495,9 @@ if sentiment.label == "neg" {
 
 ---
 
-## Part 9: Publish a new-post event to RabbitMQ
+## Part 8: Publish a new-post event to RabbitMQ
 
-A saved post should trigger the Post Notifier from [Part 4](#part-4-build-the-post-notifier-rabbitmq-to-slack), but the author should not wait for it. Publish a new-post event carrying the author's id to **RabbitMQ** and run the publish concurrently so the response returns immediately.
+A saved post should trigger the Post Notifier from [Part 3](#part-3-build-the-post-notifier-rabbitmq-to-slack), but the author should not wait for it. Publish a new-post event carrying the author's id to **RabbitMQ** and run the publish concurrently so the response returns immediately.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
@@ -521,7 +534,7 @@ fork {
 
 ---
 
-## Part 10: Handle errors consistently
+## Part 9: Handle errors consistently
 
 Every failure should return the same shape. Add a response error interceptor to the Social Media service so a constraint violation becomes a clean `400` and any other error a uniform `500`, both with a timestamp and message.
 
@@ -556,7 +569,7 @@ service class ResponseErrorInterceptor {
 
 ---
 
-## Part 11: Test the integration
+## Part 10: Test the integration
 
 Validate behavior two ways: interactively, and with repeatable unit tests that need no external services.
 
@@ -588,7 +601,7 @@ function testNegativePostRejected() returns error? {
 
 ---
 
-## Part 12: Trace end to end
+## Part 11: Trace end to end
 
 Follow one request as it flows API → sentiment → MySQL → RabbitMQ → Slack, with no changes to your flows.
 
@@ -620,7 +633,7 @@ agentPort = 4317
 
 ---
 
-## Part 13: Deploy
+## Part 12: Deploy
 
 The same project deploys as containers or to the cloud without rework.
 
