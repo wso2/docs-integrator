@@ -6,7 +6,7 @@ description: "Implement Enterprise Integration Patterns with WSO2 Integrator."
 
 # Enterprise Integration Patterns Overview
 
-Enterprise Integration Patterns (EIPs) are the accepted solutions to recurring problems in enterprise integration, catalogued by Gregor Hohpe and Bobby Woolf in [Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/patterns/messaging/index.html). The patterns give integration architects a common language for describing how applications exchange messages, and a proven template for solving each class of problem.
+Enterprise Integration Patterns (EIPs) are the accepted solutions to recurring problems in enterprise integration. They give integration architects a common language for describing how applications exchange messages, and a proven template for solving each class of problem.
 
 This section demonstrates how to implement the most widely used patterns with WSO2 Integrator. Each pattern page describes the problem the pattern solves, walks through a real-world example, and provides the complete Ballerina source, which you can open and edit visually in the WSO2 Integrator design view. The complete projects are available in the [WSO2 integration samples repository](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/enterprise-integration-pattern).
 
