@@ -1,8 +1,10 @@
 ---
-title: HubSpot CRM Engagements Email
+title: Overview
 ---
 
-HubSpot CRM Engagements Email is part of HubSpot's CRM platform, providing programmatic access to email engagement records: tracking sent, received, scheduled, and failed emails associated with CRM contacts. The Ballerina `ballerinax/hubspot.crm.engagements.email` connector (v2.0.0) enables you to create, read, update, delete, search, and batch-manage email engagement objects through the HubSpot CRM v3 API.
+# Overview
+
+HubSpot CRM Engagements Email is part of HubSpot's CRM platform, providing programmatic access to email engagement records: tracking sent, received, scheduled, and failed emails associated with CRM contacts. The `ballerinax/hubspot.crm.engagements.email` connector (v2.0.0) enables you to create, read, update, delete, search, and batch-manage email engagement objects through the HubSpot CRM v3 API.
 
 ## Key features
 

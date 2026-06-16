@@ -1,8 +1,10 @@
 ---
-title: HubSpot CRM Properties
+title: Overview
 ---
 
-HubSpot CRM Properties API allows you to manage custom and default properties on HubSpot CRM objects such as Contacts, Companies, Deals, and Tickets. The Ballerina `ballerinax/hubspot.crm.properties` connector (v2.0.0) provides programmatic access to create, read, update, and archive properties and property groups, as well as batch operations for managing multiple properties at once.
+# Overview
+
+HubSpot CRM Properties API allows you to manage custom and default properties on HubSpot CRM objects such as Contacts, Companies, Deals, and Tickets. The `ballerinax/hubspot.crm.properties` connector (v2.0.0) provides programmatic access to create, read, update, and archive properties and property groups, as well as batch operations for managing multiple properties at once.
 
 ## Key features
 

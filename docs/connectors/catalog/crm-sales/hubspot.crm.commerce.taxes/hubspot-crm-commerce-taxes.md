@@ -1,8 +1,10 @@
 ---
-title: HubSpot CRM Commerce Taxes
+title: Overview
 ---
 
-HubSpot CRM Commerce Taxes is part of HubSpot's CRM Commerce API suite, providing programmatic management of tax objects used in quotes, invoices, and other commerce documents. The Ballerina `ballerinax/hubspot.crm.commerce.taxes` connector (v2.0.0) enables you to create, read, update, archive, search, and batch-manage tax records through the HubSpot REST API.
+# Overview
+
+HubSpot CRM Commerce Taxes is part of HubSpot's CRM Commerce API suite, providing programmatic management of tax objects used in quotes, invoices, and other commerce documents. The `ballerinax/hubspot.crm.commerce.taxes` connector (v2.0.0) enables you to create, read, update, archive, search, and batch-manage tax records through the HubSpot REST API.
 
 ## Key features
 

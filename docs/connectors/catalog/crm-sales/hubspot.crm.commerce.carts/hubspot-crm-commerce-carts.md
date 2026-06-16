@@ -1,8 +1,10 @@
 ---
-title: HubSpot CRM Commerce Carts
+title: Overview
 ---
 
-HubSpot CRM Commerce Carts is part of HubSpot's commerce suite, enabling management of shopping cart objects within the HubSpot CRM. The Ballerina `ballerinax/hubspot.crm.commerce.carts` connector (v2.0.0) provides programmatic access to the HubSpot Carts API, allowing you to create, read, update, delete, search, and batch-manage cart records in your integration flows.
+# Overview
+
+HubSpot CRM Commerce Carts is part of HubSpot's commerce suite, enabling management of shopping cart objects within the HubSpot CRM. The `ballerinax/hubspot.crm.commerce.carts` connector (v2.0.0) provides programmatic access to the HubSpot Carts API, allowing you to create, read, update, delete, search, and batch-manage cart records in your integration flows.
 
 ## Key features
 

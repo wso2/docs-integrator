@@ -4,7 +4,7 @@ title: Overview
 
 # Overview
 
-HubSpot CRM is a cloud-based customer relationship management platform that helps teams manage deals, contacts, and sales pipelines. The Ballerina `ballerinax/hubspot.crm.obj.deals` connector (v1.0.0) provides programmatic access to the HubSpot CRM Deals API, enabling you to create, read, update, archive, search, and batch-manage deal records from your Ballerina integration flows.
+HubSpot CRM Deals is part of HubSpot's CRM platform, enabling management of deal records, pipeline stages, and sales workflows. The `ballerinax/hubspot.crm.obj.deals` connector (v1.0.0) provides programmatic access to the HubSpot CRM Deals API, enabling you to create, read, update, archive, search, and batch-manage deal records from your integration flows.
 
 ## Key features
 

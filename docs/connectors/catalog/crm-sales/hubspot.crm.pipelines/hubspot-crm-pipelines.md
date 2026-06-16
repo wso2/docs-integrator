@@ -1,8 +1,10 @@
 ---
-title: HubSpot CRM Pipelines
+title: Overview
 ---
 
-HubSpot CRM Pipelines is a feature of the HubSpot CRM platform that lets you define and manage sales, support, and order pipelines with configurable stages. The Ballerina `ballerinax/hubspot.crm.pipelines` connector (v2.0.0) provides programmatic access to the HubSpot Pipelines API, enabling you to create, read, update, delete, and audit pipelines and their stages from your Ballerina integration flows.
+# Overview
+
+HubSpot CRM Pipelines is a feature of the HubSpot CRM platform that lets you define and manage sales, support, and order pipelines with configurable stages. The `ballerinax/hubspot.crm.pipelines` connector (v2.0.0) provides programmatic access to the HubSpot Pipelines API, enabling you to create, read, update, delete, and audit pipelines and their stages from your integration flows.
 
 ## Key features
 

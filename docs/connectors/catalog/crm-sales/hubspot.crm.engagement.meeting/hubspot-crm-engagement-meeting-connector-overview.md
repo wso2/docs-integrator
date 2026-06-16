@@ -4,7 +4,7 @@ title: Overview
 
 # Overview
 
-HubSpot CRM is a cloud-based customer relationship management platform that tracks meetings, contacts, deals, and other engagement activities. The Ballerina `ballerinax/hubspot.crm.engagement.meeting` connector (v1.0.0) provides programmatic access to the HubSpot Meetings API v3, enabling you to create, read, update, delete, batch-manage, and search meeting engagements within your HubSpot CRM from Ballerina integration flows.
+HubSpot CRM Engagement Meeting is part of HubSpot's CRM platform, enabling tracking and management of meeting engagements associated with contacts, companies, and deals. The `ballerinax/hubspot.crm.engagement.meeting` connector (v1.0.0) provides programmatic access to the HubSpot Meetings API v3, enabling you to create, read, update, delete, batch-manage, and search meeting engagements within your HubSpot CRM from integration flows.
 
 ## Key features
 

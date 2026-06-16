@@ -94,5 +94,5 @@ Try this sample in WSO2 Integration Platform.
 
 The `ballerinax/hubspot.crm.obj.deals` connector provides practical examples illustrating usage in various scenarios.
 
-1. [Create and Manage Deals](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/tree/main/examples/manage-deals) - See how the HubSpot API can be used to create deals and manage them through the sales pipeline.
-2. [Count Deals in Stages](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/tree/main/examples/count-deals) - See how the HubSpot API can be used to count the number of deals in each stage of the sales pipeline.
+1. [Create and Manage Deals](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/tree/main/examples/manage-deals) - See how the HubSpot API can be used to create deals and manage them through the sales pipeline.
+2. [Count Deals in Stages](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/tree/main/examples/count-deals) - See how the HubSpot API can be used to count the number of deals in each stage of the sales pipeline.

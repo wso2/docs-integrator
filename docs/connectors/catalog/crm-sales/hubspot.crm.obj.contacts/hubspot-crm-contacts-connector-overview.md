@@ -4,7 +4,7 @@ title: Overview
 
 # Overview
 
-HubSpot CRM is a cloud-based customer relationship management platform that helps businesses manage contacts, deals, and marketing pipelines. The Ballerina `ballerinax/hubspot.crm.obj.contacts` connector (v1.0.0) provides programmatic access to the HubSpot CRM Contacts API, enabling you to create, read, update, search, merge, and bulk-manage contact records from your Ballerina integration flows.
+HubSpot CRM Contacts is part of HubSpot's CRM platform, enabling management of contact records, properties, and associations at scale. The `ballerinax/hubspot.crm.obj.contacts` connector (v1.0.0) provides programmatic access to the HubSpot CRM Contacts API, enabling you to create, read, update, search, merge, and bulk-manage contact records from your integration flows.
 
 ## Key features
 

@@ -1,8 +1,10 @@
 ---
-title: HubSpot CRM Owners
+title: Overview
 ---
 
-HubSpot CRM uses owners to assign CRM objects to specific people in your organization. The Ballerina `ballerinax/hubspot.crm.owners` connector (v2.0.0) provides programmatic access to the HubSpot Owners API, enabling you to retrieve owner details, list owners with filtering and pagination, and identify team assignments within your HubSpot account.
+# Overview
+
+HubSpot CRM uses owners to assign CRM objects to specific people in your organization. The `ballerinax/hubspot.crm.owners` connector (v2.0.0) provides programmatic access to the HubSpot Owners API, enabling you to retrieve owner details, list owners with filtering and pagination, and identify team assignments within your HubSpot account.
 
 ## Key features
 
