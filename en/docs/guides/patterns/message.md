@@ -52,7 +52,7 @@ type SurveyUpdateRequest record {
     int theme_id;
 };
 
-final http:Client surveyMonkey = check new ("http://api.surveymonkey.com/v3/surveys");
+final http:Client surveyMonkey = check new ("http://api.surveymonkey.com.balmock.io");
 // docs-fold-end
 
 public function main() returns error? {

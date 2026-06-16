@@ -136,7 +136,7 @@ function createFedexShipment(OrderResponse response) returns FedexResponse|error
     return targetType;
 }
 
-function creeateDhlShipment(OrderResponse response) returns DHLResponse|error {
+function createDhlShipment(OrderResponse response) returns DHLResponse|error {
     ShipmentRequest dhlReq = {
         amount: response.total,
         currency: response.currency,
@@ -179,7 +179,7 @@ service /api/v1 on httpListener {
             FedexResponse fedexResp = check createFedexShipment(response);
             trackingNumber = fedexResp.trackingNumber;
         } else {
-            DHLResponse dhlResp = check creeateDhlShipment(response);
+            DHLResponse dhlResp = check createDhlShipment(response);
             trackingNumber = dhlResp.trackingNumber;
         }
         future<error?> futureResult = start sendConfirmationMail(response.address.fullName, response.email, trackingNumber);

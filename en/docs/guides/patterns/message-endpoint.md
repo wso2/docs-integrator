@@ -39,13 +39,13 @@ The flow receives the typed request, looks up the exchange rates, and returns th
 // docs-fold-start: Supporting definitions
 import ballerina/http;
 
-type Currency "AUD"|"INR"|"BGP";
+type Currency "AUD"|"INR"|"GBP";
 // docs-fold-end
 
 listener http:Listener httpListener = new (port = 8080);
 
 service /api/v1/rates on httpListener {
-    isolated resource function get covert(Currency base, Currency target, decimal amount = 1.00) returns decimal {
+    isolated resource function get convert(Currency base, Currency target, decimal amount = 1.00) returns decimal {
         map<decimal> rates = {
             "AUD": 1.59,
             "INR": 83.24,

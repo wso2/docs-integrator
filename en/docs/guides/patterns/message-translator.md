@@ -36,9 +36,9 @@ The [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/dat
 
 <PatternImage src="/img/eip-patterns/message_translator_datamapper.png" alt="Message Translator data mapper in WSO2 Integrator" width={1006} />
 
-Once the arrays are linked, open the focused view on the array mapping to map the individual element fields: each `Opportunity`'s `id`, `amount`, and `closeDate` map to the `Invoice` item's `id`, `amount`, and `invoiceDate`:
+Expanding both arrays to their element level shows the field correspondence inside the mapping: each `Opportunity`'s `id`, `amount`, and `closeDate` becomes the `Invoice` item's `id`, `amount`, and `invoiceDate`:
 
-<PatternImage src="/img/eip-patterns/message_translator_datamapper_item.png" alt="Message Translator data mapper focused view mapping each array element field" width={1006} />
+<PatternImage src="/img/eip-patterns/message_translator_datamapper_item.png" alt="Message Translator data mapper showing each array element field mapping" width={1006} />
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -49,7 +49,7 @@ import ballerina/http;
 
 type SalesData record {|
     Customer customer;
-    Oppotunity[] opportunities;
+    Opportunity[] opportunities;
 |};
 
 type Customer record {|
@@ -58,7 +58,7 @@ type Customer record {|
     string email;
 |};
 
-type Oppotunity record {|
+type Opportunity record {|
     string id;
     decimal amount;
     string closeDate;
@@ -80,11 +80,11 @@ final http:Client quickBooks = check new ("http://api.quickbooks.com.balmock.io"
 
 function translate(SalesData salesData) returns QuickBooksInvoice => {
     customerId: salesData.customer.id,
-    invoices: from var oppotunity in salesData.opportunities
+    invoices: from var opportunity in salesData.opportunities
         select {
-            id: oppotunity.id,
-            amount: oppotunity.amount,
-            invoiceDate: oppotunity.closeDate
+            id: opportunity.id,
+            amount: opportunity.amount,
+            invoiceDate: opportunity.closeDate
         }
 };
 
