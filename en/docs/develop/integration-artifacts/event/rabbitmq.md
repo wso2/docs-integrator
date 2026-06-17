@@ -98,6 +98,7 @@ service on rabbitmqListener {
 |---|---|---|---|
 | `queueName` | `string` | Required | Name of the queue to consume from |
 | `autoAck` | `boolean` | `true` | When `false`, messages must be manually acknowledged using `rabbitmq:Caller` |
+| `config` | `rabbitmq:QueueConfig?` | — | Queue declaration settings. Set `{ durable: true }` for compatibility with RabbitMQ 4.x, which disables transient non-exclusive queues by default. |
 
 </TabItem>
 </Tabs>
