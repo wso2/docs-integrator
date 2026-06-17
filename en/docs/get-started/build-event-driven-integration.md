@@ -56,6 +56,26 @@ In the cloud editor, you're already inside a project. Skip to Step 2.
 5. Set **Queue Name** to `Orders`.
 6. Select **Create**.
 
+:::caution RabbitMQ 4.x compatibility
+
+RabbitMQ 4.x deprecated transient non-exclusive queues. The visual designer creates a transient queue by default, which causes the following error on startup:
+
+```
+error: I/O Error occurred while declaring the queue: Feature `transient_nonexcl_queues` is deprecated.
+```
+
+After clicking **Create**, open `main.bal` and add the following annotation above the `service` declaration:
+
+```ballerina
+@rabbitmq:ServiceConfig {
+    queueName: "Orders",
+    config: {
+        durable: true
+    }
+}
+```
+:::
+
 <ThemedImage
     alt="Add a RabbitMQ Event Integration Artifact"
     sources={{
@@ -122,6 +142,12 @@ import ballerinax/rabbitmq;
 
 listener rabbitmq:Listener rabbitmqListener = new ("localhost", 5672);
 
+@rabbitmq:ServiceConfig {
+    queueName: "Orders",
+    config: {
+        durable: true
+    }
+}
 service "Orders" on rabbitmqListener {
     remote function onMessage(rabbitmq:AnydataMessage message, rabbitmq:Caller caller) returns error? {
         do {
@@ -169,4 +195,3 @@ Deploy your integration to WSO2 Cloud - Integration Platform in any of the follo
 - [RabbitMQ](../develop/integration-artifacts/event/rabbitmq.md) — Full RabbitMQ listener and publisher reference
 - [MQTT](../develop/integration-artifacts/event/mqtt.md) — Handle MQTT messages from IoT and messaging devices
 - [CDC for PostgreSQL](../develop/integration-artifacts/event/cdc-postgresql.md) — React to database changes with change data capture
-
