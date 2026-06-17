@@ -60,7 +60,7 @@ In the cloud editor, you're already inside a project. Skip to Step 2.
 
 RabbitMQ 4.x deprecated transient non-exclusive queues. The visual designer creates a transient queue by default, which causes the following error on startup:
 
-```
+```bash
 error: I/O Error occurred while declaring the queue: Feature `transient_nonexcl_queues` is deprecated.
 ```
 
