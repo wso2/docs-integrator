@@ -476,10 +476,6 @@ This is the resource that ties everything together. When someone posts, you conf
 
    ![Declaring the http:Created response and returning it](/img/guides/tutorials/social-media/main-return-success.png)
 
-The completed `post users/[id]/posts` flow, from the user check through screening, storage, and the new-post event:
-
-![The complete post resource flow: Start, get user, the user-not-found branch, prepare and call the Sentiment API, the negative-sentiment branch, insert the post, publish to RabbitMQ, and return the created response](/img/guides/tutorials/social-media/main-post-flow.png)
-
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
@@ -548,6 +544,8 @@ Calling `get users`, for example, returns `200 OK` with the seed users:
 ![Testing the get users resource with the Try It tool, returning 200 OK and the seed users](/img/guides/tutorials/social-media/main-try-it.png)
 
 Then exercise `post users/[id]/posts`: a normal post returns `201 Created` and posts to Slack, a post the Sentiment API scores negative returns `406 Not Acceptable`, and an unknown user returns `404 Not Found`.
+
+![Testing the post users resource with the Try It tool: a request body returns 201 Created with a success message](/img/guides/tutorials/social-media/main-try-it-post.png)
 
 ---
 
