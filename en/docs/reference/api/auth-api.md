@@ -1,9 +1,9 @@
 ---
-title: Authentication API
+title: ICP Authentication API
 description: REST API for authentication, token management, and RBAC (users, groups, roles) in the Integration Control Plane.
 ---
 
-# Authentication API
+# ICP Authentication API
 
 The ICP server exposes a REST authentication service at:
 

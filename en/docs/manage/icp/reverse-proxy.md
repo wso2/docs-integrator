@@ -8,19 +8,17 @@ keywords: [wso2 integrator, integration control plane, icp, reverse proxy, nginx
 
 ICP serves the console and API on port `9446` using HTTPS with a self-signed certificate. In production, you typically place a reverse proxy in front of ICP to handle TLS termination, expose a standard port, and integrate with your network infrastructure. This page covers the ICP-specific configuration required when a reverse proxy is in use.
 
-## Update the console frontend
+## Update the backend configuration
 
-The ICP console is a single-page application whose API endpoints are read from `www/config.json` at startup. Update this file to point to the external proxy URL:
+Update the backend endpoint settings in `conf/deployment.toml` to reflect the external hostname:
 
-```json
-{
-  "VITE_GRAPHQL_URL": "https://icp.example.com/graphql",
-  "VITE_AUTH_BASE_URL": "https://icp.example.com/auth",
-  "VITE_OBSERVABILITY_URL": "https://icp.example.com/icp/observability"
-}
+```toml
+backendGraphqlEndpoint       = "https://icp.example.com/graphql"
+backendAuthBaseUrl           = "https://icp.example.com/auth"
+backendObservabilityEndpoint = "https://icp.example.com/icp/observability"
 ```
 
-Restart ICP after saving the file for the changes to take effect.
+These values default to `https://localhost:9446`. ICP automatically propagates them to the console frontend on startup, so `www/config.json` does not need to be edited manually. Restart ICP after saving the file.
 
 ## Update runtime connections
 

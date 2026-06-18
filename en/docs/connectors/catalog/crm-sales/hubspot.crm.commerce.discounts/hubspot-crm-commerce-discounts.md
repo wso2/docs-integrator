@@ -1,9 +1,13 @@
 ---
-title: "HubSpot CRM Commerce Discounts"
-description: "Overview of the ballerinax/hubspot.crm.commerce.discounts connector for WSO2 Integrator."
+title: "Overview"
+description: "HubSpot CRM Commerce Discounts is part of HubSpot's CRM platform, enabling management of discount objects used in commerce workflows such as quotes and invoices."
+connector: true
+connector_name: "hubspot.crm.commerce.discounts"
 ---
 
-HubSpot CRM Commerce Discounts is part of HubSpot's CRM platform, enabling management of discount objects used in commerce workflows such as quotes and invoices. The Ballerina `ballerinax/hubspot.crm.commerce.discounts` connector (v2.0.0) provides programmatic access to HubSpot's Discounts API, allowing you to create, read, update, delete, batch process, and search discount records from your Ballerina integration flows.
+# Overview
+
+HubSpot CRM Commerce Discounts is part of HubSpot's CRM platform, enabling management of discount objects used in commerce workflows such as quotes and invoices. The `ballerinax/hubspot.crm.commerce.discounts` connector (v2.0.0) provides programmatic access to HubSpot's Discounts API, allowing you to create, read, update, delete, batch process, and search discount records from your integration flows.
 
 
 ## Key features

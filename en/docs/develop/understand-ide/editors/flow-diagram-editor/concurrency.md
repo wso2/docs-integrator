@@ -71,7 +71,7 @@ For most integration flows, prefer immutable values to avoid the need for locks 
 
 ## What's next
 
-- [Control](../control) — Branch and loop inside parallel workers.
-- [Error handling](../error-handling) — Handle errors raised inside workers.
-- [Logging](../logging) — Trace concurrent execution.
-- [Statement](../statement) — Declare and update variables shared across workers.
+- [Control](./control.md) — Branch and loop inside parallel workers.
+- [Error handling](./error-handling.md) — Handle errors raised inside workers.
+- [Logging](./logging.md) — Trace concurrent execution.
+- [Statement](./statement.md) — Declare and update variables shared across workers.

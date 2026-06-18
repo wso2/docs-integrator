@@ -75,7 +75,7 @@ The mapping area is the central region between the input and output sides. Links
 
 **Auto Map** in the header opens the WSO2 Integrator Copilot panel alongside the canvas with the `/datamap` command preloaded. Submit the command to let the Copilot read the project files and generate field mappings based on the input and output types. When complete, mapping lines appear on the canvas.
 
-For more, see [AI data mapping](/docs/develop/integration-artifacts/supporting/data-mapper/ai-mapping).
+For more, see [AI data mapping](/develop/integration-artifacts/supporting/data-mapper/ai-mapping).
 
 {/* ![Auto Map suggestions on the mapping canvas](/img/develop/understand-ide/editors/datamapper-editor/auto-map.png) */}
 

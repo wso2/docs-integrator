@@ -1,9 +1,13 @@
 ---
-title: "HubSpot CRM Commerce Orders"
-description: "Overview of the ballerinax/hubspot.crm.commerce.orders connector for WSO2 Integrator."
+title: "Overview"
+description: "HubSpot CRM Commerce Orders is part of HubSpot's CRM platform, enabling management of order objects used in commerce workflows."
+connector: true
+connector_name: "hubspot.crm.commerce.orders"
 ---
 
-HubSpot CRM Commerce Orders is part of HubSpot's CRM platform, enabling management of order objects used in commerce workflows. The Ballerina `ballerinax/hubspot.crm.commerce.orders` connector (v2.0.0) provides programmatic access to the HubSpot Orders API, allowing you to create, read, update, archive, batch-process, and search order records within your Ballerina integration flows.
+# Overview
+
+HubSpot CRM Commerce Orders is part of HubSpot's CRM platform, enabling management of order objects used in commerce workflows. The `ballerinax/hubspot.crm.commerce.orders` connector (v2.0.0) provides programmatic access to the HubSpot Orders API, allowing you to create, read, update, archive, batch-process, and search order records within your integration flows.
 
 
 ## Key features

@@ -41,7 +41,6 @@ The profile is set when the integration is created and cannot be changed later. 
 | `https://<host>:9446/graphql` | GraphQL API |
 | `https://<host>:9446/auth` | Authentication API for login and token refresh |
 | `https://<host>:9446/icp/observability` | Observability REST API |
-| `https://<host>:9446/api/v1` | REST management API (legacy) |
 
 See [ICP API](../../reference/api/icp.md) for the full REST endpoint reference.
 
