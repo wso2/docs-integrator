@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 # Build an Event-Driven Social Media Backend with RabbitMQ
 
-In this tutorial you build a complete, Twitter-style social media backend with [WSO2 Integrator](../../get-started/introduction.md), the low-code integration platform built on Ballerina. You design everything in the **Visual Designer**, and WSO2 Integrator generates clean Ballerina underneath. Most parts show both: the visual steps on one tab, and the exact code the platform produced on the other. You never have to type the code.
+In this tutorial you build a complete, Twitter-style social media backend with [WSO2 Integrator](../../get-started/introduction.md), the low-code integration platform built on Ballerina. You design everything visually, and WSO2 Integrator generates clean Ballerina underneath. Most parts show both: the visual steps on one tab, and the exact code the platform produced on the other.
 
 By the end, a single `POST` will flow from the API through a user check and sentiment screening into MySQL, and out to a Slack channel.
 
@@ -90,7 +90,7 @@ The first standalone integration is the screening service. Build a small **Senti
 
    ![Creating the HTTP service with base path /text-processing on a custom listener at port 9000](/img/guides/tutorials/social-media/sentiment-http-service.png)
 
-3. Add three [types](../../develop/integration-artifacts/supporting/types.md): a `Post` with a `text` field, a `Probability` with `neg`, `neutral`, and `pos` decimals, and a `Sentiment` holding a `Probability` and a `label`.
+3. Add three [types](../../develop/integration-artifacts/supporting/types.md): a `Post` with a `text` field, a `Probability` with `neg`, `neutral`, and `pos` decimals, and a `Sentiment` holding a `Probability` and a `label`. When adding each type, expand **Advanced configs** and tick **Accessible by other integrations** — the Social Media API in [Part 4](#part-4-build-the-social-media-api) imports `Post` and `Sentiment` directly from this module.
 
    ![The Type Diagram showing the Post, Probability, and Sentiment records](/img/guides/tutorials/social-media/sentiment-types.png)
 
@@ -537,7 +537,7 @@ resource function post users/[int id]/posts(@http:Payload NewPost newPost)
 
 Everything is built. Make sure your MySQL and RabbitMQ instances are running and the `social_media` database exists (from [Part 4](#part-4-build-the-social-media-api)), and fill in each integration's `Config.toml` (the database password, the RabbitMQ host and port, and the Slack token). Then **Run** the three integrations.
 
-Open the Social Media service, click **Try It**, and invoke a resource in place. For a step-by-step Try-It walkthrough, see [Run and test](../../genai/tutorials/email-generator-direct-llm.md#4-run-and-test) in the email generator tutorial.
+Open the Social Media service, click **Try It**, and invoke a resource in place.
 
 Calling `get users`, for example, returns `200 OK` with the seed users:
 
