@@ -1,13 +1,24 @@
 #!/usr/bin/env node
 // Lists doc files under en/docs that are not referenced by en/sidebars.ts.
 // Always exits 0 — this is an advisory check.
+//
+// Usage: node scripts/check-orphans.mjs [enDir] [--out <file>]
+//   [enDir]      directory to analyze (default: the `en/` dir next to this script).
+//                Lets a copy of this script analyze a different checkout's source.
+//   --out <file> also write the orphan doc-ids (one per line) to <file>.
 
-import { readFileSync, readdirSync, existsSync, statSync, appendFileSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync, statSync, appendFileSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+const argv = process.argv.slice(2);
+const outIdx = argv.indexOf('--out');
+const outPath = outIdx === -1 ? undefined : argv[outIdx + 1];
+// Positional enDir = first non-flag arg that isn't the value of --out.
+const enDirArg = argv.find((a, i) => !a.startsWith('--') && i !== outIdx + 1);
+
 const here = dirname(fileURLToPath(import.meta.url));
-const enDir = resolve(here, '..');
+const enDir = enDirArg ? resolve(enDirArg) : resolve(here, '..');
 const docsDir = join(enDir, 'docs');
 const sidebarsPath = join(enDir, 'sidebars.ts');
 
@@ -76,6 +87,11 @@ for (const m of sidebarsSrc.matchAll(/connectorVersionedDocs\(\s*['"]([^'"]+)['"
 }
 
 const orphans = [...allDocIds].filter((id) => !referenced.has(id)).sort();
+
+// Machine-readable list (one doc-id per line) for the broken-link-check diff/report.
+if (outPath) {
+  try { writeFileSync(outPath, orphans.join('\n') + (orphans.length ? '\n' : '')); } catch {}
+}
 
 const summaryPath = process.env.GITHUB_STEP_SUMMARY;
 const lines = [];

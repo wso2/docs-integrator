@@ -1,5 +1,6 @@
 import React, { type ComponentProps } from 'react';
 import Tabs from '@theme/Tabs';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 type EipReferenceLinkProps = {
   href: string;
@@ -53,7 +54,7 @@ export function PatternImplementationTabs({
 export function PatternImage({ src, alt, width }: PatternImageProps): React.ReactElement {
   return (
     <img
-      src={src}
+      src={useBaseUrl(src)}
       alt={alt}
       width={width}
       style={{ display: 'block', margin: '0 auto' }}

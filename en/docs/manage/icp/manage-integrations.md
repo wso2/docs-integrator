@@ -79,6 +79,34 @@ When operational, the page provides:
 - Time range selector
 - Log entries with timestamps, levels, and messages
 
+### Loggers
+
+The **Loggers** page lets you change the log level of a running Ballerina integration without restarting it. Loggers are grouped by environment, and each row represents a Ballerina package reporting its current log level from the connected runtimes.
+
+| Column | Description |
+|---|---|
+| **Component Name** | Ballerina package name reporting the log level |
+| **Log Level** | Current log level: `DEBUG`, `INFO`, `WARN`, or `ERROR` |
+
+#### Change the log level
+
+1. Navigate to **Loggers** in the integration sidebar.
+2. Find the environment section for the environment you want to update.
+3. In the **Log Level** column, click the dropdown next to the component and select a new level.
+
+The change is applied immediately to all runtimes connected to that integration in the selected environment. A spinner appears next to the dropdown while the update propagates. Once the runtimes acknowledge the new level, the spinner clears.
+
+The available log levels for Ballerina integrations are:
+
+| Level | When to use |
+|---|---|
+| `DEBUG` | Verbose output for troubleshooting; logs all detail including internal state |
+| `INFO` | Standard operational messages; recommended for normal production use |
+| `WARN` | Potentially harmful situations that do not cause a failure |
+| `ERROR` | Error events that may still allow the integration to continue running |
+
+Click **View Runtimes** on any logger row to see which runtime IDs are receiving log level commands for that component.
+
 ### Metrics
 
 The **Metrics** page shows request performance data when both a connected runtime and observability are configured. See [Observability setup](observability-setup.md) to enable this.
@@ -89,6 +117,29 @@ When operational, the page provides:
 - Requests Per Minute chart
 - Request Latency chart (average, P50, P95, P99)
 - Most Used APIs table with per-endpoint request counts and average response times
+
+### Listeners
+
+Ballerina listeners (HTTP, TCP, and other transport listeners) appear in the **Entry Points** tab of the integration Overview under the **Listener** type. Each listener shows its package, protocol, host, and port. You can start or stop individual listeners directly from the console, which sends a control command to all runtimes running that listener in the selected environment.
+
+![Listener entry point detail panel showing the enable/disable toggle](/img/manage/icp/listener-control-light.png)
+
+#### Start or stop a listener
+
+1. Open the integration and go to **Overview**.
+2. In the environment card, click the **Entry Points** tab.
+3. Click the listener you want to control. The listener detail panel opens on the right.
+4. Use the toggle in the panel to start or stop the listener.
+5. A confirmation dialog appears. Click **Enable** or **Disable** to confirm.
+
+ICP sends a `START` or `STOP` command to every runtime associated with the listener. The listener state updates to **RUNNING** or **STOPPED** once the runtimes acknowledge the command.
+
+| Detail field | Description |
+|---|---|
+| **Package** | Ballerina package the listener is defined in |
+| **Protocol** | Transport protocol (e.g. `HTTP`, `TCP`) |
+| **Host** | Hostname the listener is bound to |
+| **Port** | Port the listener is bound to |
 
 ## What's next
 

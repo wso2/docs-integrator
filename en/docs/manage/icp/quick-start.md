@@ -46,63 +46,17 @@ For full integration management options, see [Manage integrations](manage-integr
 
 This step links your Ballerina application to the integration you just created in ICP.
 
-### Generate a secret
+At a high level, the setup involves:
 
-1. Open the integration and navigate to **Runtimes** in the sidebar.
-2. Find the environment card (e.g. **dev**) and click **+ Add Runtime**.
-3. Click **Generate Secret** and copy the `Config.toml` snippet shown.
+1. Generating a secret from the ICP console.
+2. Adding the secret to `Config.toml` in your Ballerina project with a unique runtime name.
+3. Enabling remote management in `Ballerina.toml`.
+4. Importing the runtime bridge in `main.bal`.
+5. Starting the runtime with `bal run`.
 
-:::info
-The secret is displayed only once. Copy it before closing the dialog.
-:::
+Once connected, the runtime appears in the **Runtimes** view with status **RUNNING**.
 
-### Configure the integration
-
-Open your Ballerina project and apply the following changes:
-
-In **Config.toml**, paste the snippet copied from ICP and set a unique runtime name:
-
-```toml
-[wso2.icp.runtime.bridge]
-environment = "dev"
-project     = "my-project"
-integration = "my-integration"
-runtime     = "my-integration-1"
-secret      = "<generated-secret>"
-```
-
-In **Ballerina.toml**, enable remote management:
-
-```toml
-[build-options]
-remoteManagement = true
-```
-
-In **main.bal**, import the runtime bridge:
-
-```ballerina
-import wso2/icp.runtime.bridge as _;
-```
-
-### Start the runtime
-
-```bash
-bal run
-```
-
-On startup, the bridge logs a confirmation:
-
-```
-ICP agent initialized with server URL: https://localhost:9445
-Sending full heartbeat to ICP server
-Full heartbeat acknowledged by ICP server
-```
-
-### Verify the connection
-
-Navigate to **Runtimes** in the integration sidebar. The runtime appears with status **RUNNING**.
-
-For the full connection procedure including troubleshooting, see [Connect an integration to ICP](connect-runtime.md).
+For the full connection procedure including field reference and troubleshooting, see [Connect an Integration to ICP](connect-runtime.md).
 
 ## 4. Create an environment (optional)
 

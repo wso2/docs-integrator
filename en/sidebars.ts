@@ -1204,6 +1204,24 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Microsoft SharePoint Pages',
+          link: { type: 'doc', id: 'connectors/catalog/storage-file/microsoft.sharepoint.pages/connector-overview' },
+          items: [
+            'connectors/catalog/storage-file/microsoft.sharepoint.pages/setup-guide',
+            'connectors/catalog/storage-file/microsoft.sharepoint.pages/action-reference',
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Microsoft SharePoint Sites',
+          link: { type: 'doc', id: 'connectors/catalog/storage-file/microsoft.sharepoint.sites/connector-overview' },
+          items: [
+            'connectors/catalog/storage-file/microsoft.sharepoint.sites/setup-guide',
+            'connectors/catalog/storage-file/microsoft.sharepoint.sites/action-reference',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Milvus',
           link: { type: 'doc', id: 'connectors/catalog/ai-ml/milvus/connector-overview' },
           items: [
@@ -1822,6 +1840,7 @@ const sidebars: SidebarsConfig = {
             'genai/develop/components/vector-stores',
             'genai/develop/components/knowledge-bases',
             'genai/develop/components/chunkers',
+            'genai/develop/components/data-loaders',
           ],
         },
         // Tutorials
@@ -2256,5 +2275,5 @@ const sidebars: SidebarsConfig = {
   ],
 };
 
-
 export default sidebars;
+

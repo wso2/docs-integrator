@@ -17,7 +17,7 @@ This guide covers manual installation. For evaluation, run via WSO2 Integrator I
 
 :::info Prerequisites
 
-- Java 21 or later
+- Java 21
 - A supported OS: Linux, macOS, or Windows
 - For production deployments: a supported database (PostgreSQL, MySQL, or MSSQL). The default embedded H2 database is suitable for evaluation and development only.
 
@@ -25,7 +25,7 @@ This guide covers manual installation. For evaluation, run via WSO2 Integrator I
 
 ## Install
 
-1. Download `wso2-integration-control-plane-2.0.0.zip` from the [ICP releases page](https://github.com/wso2/integration-control-plane/releases/tag/v2.0.0).
+1. Download the ICP distribution from the [WSO2 Integration Platform page](https://wso2.com/integration-platform/monitoring-and-management/).
 
 2. Extract the zip and navigate into the directory.
 
@@ -33,48 +33,24 @@ This guide covers manual installation. For evaluation, run via WSO2 Integrator I
    <TabItem value="linux-macos" label="Linux / macOS" default>
 
    ```bash
-   unzip wso2-integration-control-plane-2.0.0.zip
-   cd wso2-integration-control-plane-2.0.0
+   unzip wso2-integration-control-plane-<version>.zip
+   cd wso2-integration-control-plane-<version>
    ```
 
    </TabItem>
    <TabItem value="windows" label="Windows">
 
    ```powershell
-   Expand-Archive -Path wso2-integration-control-plane-2.0.0.zip -DestinationPath .
-   cd wso2-integration-control-plane-2.0.0
+   Expand-Archive -Path wso2-integration-control-plane-<version>.zip -DestinationPath .
+   cd wso2-integration-control-plane-<version>
    ```
 
    </TabItem>
    </Tabs>
 
-3. The extracted directory has this layout:
-
-   ```bash
-   wso2-integration-control-plane-2.0.0/
-     bin/
-       icp.sh                  # startup script (Linux / macOS)
-       icp.bat                 # startup script (Windows)
-       icp-server.jar          # server binary
-       ciphertool.sh           # cipher tool (Linux / macOS)
-       ciphertool.bat          # cipher tool (Windows)
-       database/
-         icp_db.mv.db          # embedded H2 database
-         credentials_db.mv.db  # embedded H2 credentials database
-     conf/
-       deployment.toml                   # main configuration file
-       cipher-standalone-config.properties
-       security/               # keystores and TLS certificates
-     dbscripts/                # SQL init scripts for PostgreSQL, MySQL, and MSSQL
-     ciphertool-libs/          # cipher tool dependencies
-     www/                      # console frontend
-     lib/                      # runtime libraries
-   ```
-
 ## Configure
 
-All configuration lives in `conf/deployment.toml`. The defaults work out of the box for local evaluation. ICP starts with the embedded H2 database, 
-listens on `https://localhost:9446`, and creates an `admin` user.
+All configuration lives in `conf/deployment.toml`. The defaults work out of the box for local evaluation.
 
 ### Essential settings
 
@@ -85,7 +61,7 @@ The table below covers the settings most commonly changed. All other settings ar
 | `serverPort` | `9446` | HTTPS port for the ICP console and API |
 | `serverHost` | `0.0.0.0` | IP address ICP binds to. Restrict to a specific interface in production. |
 | `logLevel` | `INFO` | Log verbosity: `DEBUG`, `INFO`, `WARN`, or `ERROR` |
-| `schedulerIntervalSeconds` | `60` | How often ICP polls connected runtimes for status, in seconds. |
+| `schedulerIntervalSeconds` | `60` | How often ICP checks for inactive runtimes and marks them as offline, in seconds. |
 | `frontendJwtHMACSecret` | (default key) | JWT signing secret for user sessions. Change this before going to production. |
 
 Full reference: [Server Configuration](../../reference/icp/server-configuration.md).

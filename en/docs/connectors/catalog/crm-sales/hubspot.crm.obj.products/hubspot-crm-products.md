@@ -1,9 +1,13 @@
 ---
-title: "HubSpot CRM Products"
-description: "Overview of the ballerinax/hubspot.crm.obj.products connector for WSO2 Integrator."
+title: "Overview"
+description: "HubSpot CRM Products is a core object in HubSpot that represents the goods and services you sell, enabling you to associate products with deals and track revenue."
+connector: true
+connector_name: "hubspot.crm.obj.products"
 ---
 
-HubSpot CRM Products is a core object in HubSpot that represents the goods and services you sell, enabling you to associate products with deals and track revenue. The Ballerina `ballerinax/hubspot.crm.obj.products` connector (v2.0.0) provides programmatic access to the HubSpot CRM Products API, allowing you to create, retrieve, update, archive, search, and batch-manage product records within your HubSpot portal.
+# Overview
+
+HubSpot CRM Products is a core object in HubSpot that represents the goods and services you sell, enabling you to associate products with deals and track revenue. The `ballerinax/hubspot.crm.obj.products` connector (v2.0.0) provides programmatic access to the HubSpot CRM Products API, allowing you to create, retrieve, update, archive, search, and batch-manage product records within your HubSpot portal.
 
 
 ## Key features
@@ -41,6 +45,6 @@ As an open source project, WSO2 welcomes contributions from the community.
 
 To contribute to the code for this connector, please create a pull request in the following repository.
 
-* [HubSpot CRM Products Connector GitHub repository](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.products)
+* [HubSpot CRM Products Connector GitHub repository](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.products)
 
 Check the issue tracker for open issues that interest you. We look forward to receiving your contributions.

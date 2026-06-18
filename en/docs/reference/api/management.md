@@ -1,9 +1,9 @@
 ---
-title: Management API
+title: ICP Management API
 description: GraphQL API for managing WSO2 Integrator deployments via the Integration Control Plane (ICP).
 ---
 
-# Management API
+# ICP Management API
 
 The Management API is a GraphQL endpoint exposed by the Integration Control Plane (ICP) server. It provides queries and mutations to manage runtimes, environments, projects, components, artifacts, loggers, secrets, and MI users.
 
@@ -330,18 +330,18 @@ dataServicesByEnvironmentAndComponent(environmentId: String!, componentId: Strin
 dataSourcesByEnvironmentAndComponent(environmentId: String!, componentId: String!): [DataSource!]!
 ```
 
-#### `carbonAppsByEnvironmentAndComponent`
+#### `compositeAppsByEnvironmentAndComponent`
 
 ```graphql
-carbonAppsByEnvironmentAndComponent(environmentId: String!, componentId: String!): [CarbonApp!]!
+compositeAppsByEnvironmentAndComponent(environmentId: String!, componentId: String!): [CompositeApp!]!
 ```
 
-#### `carbonAppFaultStackTrace`
+#### `compositeAppFaultStackTrace`
 
-Returns the fault stack trace for a Carbon App on a specific runtime.
+Returns the fault stack trace for a Composite App on a specific runtime.
 
 ```graphql
-carbonAppFaultStackTrace(runtimeId: String!, appName: String!): CarbonAppFaultStackTrace
+compositeAppFaultStackTrace(runtimeId: String!, appName: String!): CompositeAppFaultStackTrace
 ```
 
 #### `connectorsByEnvironmentAndComponent`
@@ -945,8 +945,8 @@ updateLogLevel(input: UpdateLogLevelInput!): UpdateLogLevelResponse!
 ```graphql
 input UpdateLogLevelInput {
   runtimeIds: [String!]!
-  componentType: RuntimeType    # MI or BI; inferred from first runtime if omitted
-  componentName: String         # required for BI
+  componentType: RuntimeType    # MI or Default; inferred from first runtime if omitted
+  componentName: String         # required for Default profile
   loggerName: String            # required for MI
   loggerClass: String           # optional: provide to add a new MI logger
   logLevel: LogLevel!
@@ -1048,7 +1048,7 @@ deleteMIUser(
 |-------|------|-------------|
 | `runtimeId` | `String!` | Unique runtime identifier |
 | `runtimeName` | `String` | Human-readable name |
-| `runtimeType` | `String!` | `"MI"` or `"BI"` |
+| `runtimeType` | `String!` | `"MI"` or `"Default"` |
 | `status` | `String!` | Current status (e.g., `RUNNING`, `OFFLINE`) |
 | `version` | `String` | Runtime version |
 | `component` | `Component!` | The component this runtime belongs to |
@@ -1075,7 +1075,7 @@ deleteMIUser(
 | `id` | `String!` | Unique component ID |
 | `name` | `String!` | Component name |
 | `displayName` | `String` | Human-readable display name |
-| `componentType` | `RuntimeType!` | `MI` or `BI` |
+| `componentType` | `RuntimeType!` | `MI` or `Default` |
 | `projectId` | `String!` | Parent project ID |
 
 ### `LogLevel` (enum)
@@ -1088,7 +1088,7 @@ deleteMIUser(
 
 ### `RuntimeType` (enum)
 
-`MI` | `BI`
+`MI` | `Default`
 
 ### `ArtifactState` (enum)
 
