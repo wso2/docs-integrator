@@ -6,7 +6,7 @@ title: Logging
 
 Logs are the everyday tool for tracing what an integration did and diagnosing what went wrong. Reach for them when you want a persistent record across runs, when the issue only reproduces in a long-running deployment, or when [editor debugging](../debugging/editor.md) is too heavyweight for the question you have.
 
-WSO2 Integrator supports the four standard severities: **Info**, **Warn**, **Error**, and **Debug**. For the field-by-field reference of the Log nodes, see [Logging in the flow diagram editor](../understand-ide/editors/flow-diagram-editor/logging.md). For runtime configuration (log level, output format, file rotation, aggregation), see [Logging & structured logs](/docs/deploy-operate/observe/logging-overview).
+WSO2 Integrator supports the four standard severities: **Info**, **Warn**, **Error**, and **Debug**. For the field-by-field reference of the Log nodes, see [Logging in the flow diagram editor](../understand-ide/editors/flow-diagram-editor/logging.md). For runtime configuration (log level, output format, file rotation, aggregation), see [Logging & structured logs](/deploy-operate/observe/logging-overview).
 
 ## Add a log statement
 
@@ -92,7 +92,7 @@ Open **Configurations** from the project explorer and select **ballerina/log** u
 
 ![Configurable Variables panel showing the ballerina/log options](/img/develop/troubleshooting/logging/configurable-variables.png)
 
-For the meaning of each option (`format`, `level`, `modules`, `keyValues`, `destinations`, `enableSensitiveDataMasking`), see [Ballerina by Example](/docs/reference/ballerina-by-example).
+For the meaning of each option (`format`, `level`, `modules`, `keyValues`, `destinations`, `enableSensitiveDataMasking`), see [Ballerina by Example](/reference/ballerina-by-example).
 
 Set the level in `Config.toml` before running the integration:
 
@@ -101,7 +101,7 @@ Set the level in `Config.toml` before running the integration:
 level = "DEBUG"
 ```
 
-For module-specific levels, file rotation, and the JSON output format, see [Logging & structured logs](/docs/deploy-operate/observe/logging-overview).
+For module-specific levels, file rotation, and the JSON output format, see [Logging & structured logs](/deploy-operate/observe/logging-overview).
 
 ## Reuse context across calls with child loggers
 
@@ -180,7 +180,7 @@ Ballerina libraries emit their own logs at the module level. The most common one
 accessLogConfig.console = true
 ```
 
-Other modules (such as `ballerina/sql` or `ballerina/grpc`) emit logs under their own module names. To raise or lower their verbosity independently of your integration code, configure module-specific levels as described in [Logging & structured logs](/docs/deploy-operate/observe/logging-overview).
+Other modules (such as `ballerina/sql` or `ballerina/grpc`) emit logs under their own module names. To raise or lower their verbosity independently of your integration code, configure module-specific levels as described in [Logging & structured logs](/deploy-operate/observe/logging-overview).
 
 ## What's next
 
