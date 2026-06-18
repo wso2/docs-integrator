@@ -63,7 +63,7 @@ The project opens to its landing view. The artifacts panel on the left is where 
 
 ![The social-media project landing view, showing the artifacts panel on the left and the Integrations and Libraries pane in the center](/img/guides/tutorials/social-media/project-landing-view.png)
 
-Open the integration and you land in the [Visual Designer](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md#anatomy-of-the-editor), where the [canvas](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md#canvas) shows the flow of whichever **artifact** you select. The integration is empty, so the Design view invites you to add your first artifact. Every part that follows starts here, with **+ Add Artifact**. Use the **Show Source** toggle whenever you want to see the generated code; you never have to edit it.
+Open the integration and you land in the Design view, where the [canvas](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md#canvas) shows the flow of whichever **artifact** you select. The integration is empty, so the Design view invites you to add your first artifact. Every part that follows starts here, with **+ Add Artifact**. Use the **Show Source** toggle whenever you want to see the generated code; you never have to edit it.
 
 ![The empty social-media integration in the Design view, showing the "Your integration is empty" message and the Add Artifact button](/img/guides/tutorials/social-media/empty-integration-design.png)
 
