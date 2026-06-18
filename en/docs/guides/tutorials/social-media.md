@@ -480,7 +480,7 @@ This is the resource that ties everything together. When someone posts, you conf
 <TabItem value="code" label="Ballerina Code">
 
 ```ballerina
-import pasindufernando/sentiment_api; // reuse the Sentiment API's request and response types
+import social_media/sentiment_api; // reuse the Sentiment API's request and response types
 
 resource function post users/[int id]/posts(@http:Payload NewPost newPost)
         returns http:Created|http:NotAcceptable|http:NotFound|error {
@@ -494,7 +494,7 @@ resource function post users/[int id]/posts(@http:Payload NewPost newPost)
 
         // 2. Screen the text with the Sentiment API (406 if negative)
         sentiment_api:Post postMessage = {text: newPost.description};
-        sentiment_api:Sentiment sentiment = check sentimentClient->post("/api/sentiment", [postMessage]);
+        sentiment_api:Sentiment sentiment = check sentimentClient->post("/api/sentiment", postMessage);
         if sentiment.label == "neg" {
             http:NotAcceptable postForbidden = {body: {msg: "Post not acceptable"}};
             return postForbidden;
@@ -513,7 +513,7 @@ resource function post users/[int id]/posts(@http:Payload NewPost newPost)
 
         // 4. Announce it on the queue the Post Notifier listens to
         check rabbitmqClient->publishMessage({
-            content: {"leaderId": id},
+            content: {"leaderId": id.toString()},
             routingKey: "ballerina.social.media"
         });
 

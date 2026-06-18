@@ -1873,12 +1873,12 @@ const sidebars: SidebarsConfig = {
             'guides/migration/from-tibco',
           ],
         },
-        //Tutorials
+        // Tutorials
         {
           type: 'category',
           label: 'Tutorials',
           items: [
-            'guides/tutorials/social-media'          
+            'guides/tutorials/social-media',         
           ],
         },
       ],
