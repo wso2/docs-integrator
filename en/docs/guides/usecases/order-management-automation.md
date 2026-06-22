@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: "Send MySQL order status emails over SMTP"
+title: "Send MySQL Order Status Emails over SMTP"
 sidebar_label: "Order Management Automation"
 description: Build a scheduled automation that finds newly placed orders in a database, emails each customer, and advances the order to processing, designed visually with database and email connections.
 keywords: [wso2 integrator, automation, database, mysql, email, smtp, notification, order management, scheduled job, use case, low-code]
