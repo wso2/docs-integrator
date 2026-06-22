@@ -450,8 +450,6 @@ Iterating over `x1` produces two elements in sequence:
 1. `<name>Sherlock Holmes</name>`
 2. `<details><author>Sir Arthur Conan Doyle</author><language>English</language></details>`
 
-<!-- TODO: Add screenshot of Foreach node configured with x1 -->
-
 **Define the loop body**
 
 Inside the Foreach loop body, add **Declare Variable** nodes to define how each element is processed. For example:
@@ -531,8 +529,6 @@ Click **+** and select **Call Function**. Search for `setChildren` and select it
 | `children` | `` xml `<language>French</language>` `` |
 
 After this call, `x1` holds `<details><language>French</language></details>`.
-
-<!-- TODO: Add screenshot of Call Function panel with setChildren configured -->
 
 **Rename the element with setName**
 
@@ -1147,9 +1143,6 @@ public function main() {
     }
 }
 ```
-
-<!-- TODO: verify this compiles with bal build -->
-
 
 </TabItem>
 </Tabs>
