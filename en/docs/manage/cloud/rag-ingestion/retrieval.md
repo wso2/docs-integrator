@@ -15,6 +15,8 @@ Retrieval-augmented generation (RAG) retrieval searches a vector store for the m
 
 To retrieve chunks that have already been ingested, open your organization from the **Organization** dropdown in the console header. In the left navigation menu, click **RAG**, then select **Retrieval**.
 
+## Set up retrieval
+
 ### Step 1: Initialize the vector store
 
 1. Select `Pinecone` as the vector database.
@@ -71,5 +73,5 @@ For more information, see the [Cohere documentation](https://dashboard.cohere.co
 
 - [RAG ingestion](./ingestion.md) — Configure scheduled ingestion for your vector store.
 - [RAG service](./service.md) — Use the service API to retrieve chunks programmatically.
-- [Managed PostgreSQL and vector databases](./vector-databases.md) — Provision the vector database used for retrieval.
+- [Managed vector databases](./vector-databases.md) — Provision the vector database used for retrieval.
 

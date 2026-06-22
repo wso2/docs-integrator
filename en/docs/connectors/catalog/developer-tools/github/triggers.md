@@ -236,6 +236,40 @@ Each service type uses a different typed payload record. For example, `github:Is
 | `sender` | `User` | User that triggered the push event. |
 | `organization` | `Organization?` | Organization associated with the event, when available. |
 
+### `LabelEvent`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `action` | `LabelActions` | Label event action. |
+| `label` | `Label` | Label payload. |
+| `issue` | `Issue?` | Issue associated with the label change, when available. |
+| `changes` | `Changes?` | Changes associated with the label. |
+| `repository` | `Repository` | Repository where the label event occurred. |
+| `sender` | `User` | User that triggered the label event. |
+| `organization` | `Organization?` | Organization associated with the event, when available. |
+
+### `MilestoneEvent`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `action` | `MilestoneActions` | Milestone event action. |
+| `milestone` | `Milestone` | Milestone payload. |
+| `changes` | `Changes?` | Changes associated with the milestone. |
+| `repository` | `Repository` | Repository where the milestone event occurred. |
+| `sender` | `User` | User that triggered the milestone event. |
+| `organization` | `Organization?` | Organization associated with the event, when available. |
+
+### `ProjectCardEvent`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `action` | `ProjectCardActions` | Project card event action. |
+| `project_card` | `ProjectCard` | Project card payload. |
+| `changes` | `Changes?` | Changes associated with the project card (on edited or converted events). |
+| `repository` | `Repository` | Repository where the project card event occurred. |
+| `sender` | `User` | User that triggered the project card event. |
+| `organization` | `Organization?` | Organization associated with the event, when available. |
+
 ### `Repository`
 
 | Field | Type | Description |

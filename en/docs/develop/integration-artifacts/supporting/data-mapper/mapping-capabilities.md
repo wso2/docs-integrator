@@ -47,16 +47,13 @@ When you need a focused, visual mapping rather than a free-form function, use **
 
 ## Map with AI
 
-Inside any data mapper view, select **Auto Map** in the top-right corner of the canvas to generate mappings automatically using the WSO2 Integrator Copilot.
+Select **Auto Map** in the top-right corner of the data mapper canvas. The WSO2 Integrator Copilot panel opens with the `/datamap` command preloaded. Submit it to generate mappings between your types automatically.
 
-![Data mapper toolbar with the Auto Map button in the top-right corner](/img/develop/integration-artifacts/supporting/data-mapper/ai-map-option.png)
-
-The Copilot panel opens with a `/datamap` command preloaded. Submit it to generate field mappings based on the input and output types, then review and adjust the result on the canvas.
-
-![Copilot panel with the /datamap command ready to generate mappings](/img/develop/integration-artifacts/supporting/data-mapper/ai-map-view.png)
+For a full walkthrough with examples, see [AI data mapping](./ai-mapping.md).
 
 ## What's next
 
 - [Array mappings](./array-mappings/array-mappings.md) — Map between arrays using iteration, joins, and aggregation.
 - [Generic type mappings](./generic-type-mappings.md) — Generate types from a sample JSON or XML payload.
 - [Sub Mappings](./submappings.md) — Reuse mapping logic across multiple output fields.
+- [AI data mapping](./ai-mapping.md) — Generate mapping logic using AI.

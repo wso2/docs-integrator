@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'WSO2 Integrator Documentation',
   tagline: 'Build integrations with low-code simplicity and pro-code power',
-  favicon: 'img/favicon.svg',
+  favicon: 'img/favicon.ico',
 
   future: {
     v4: true,
@@ -89,11 +89,10 @@ const config: Config = {
       },
     },
     navbar: {
-      title: 'WSO2 Integration Platform',
       logo: {
         alt: 'WSO2 Integration Platform Logo',
-        src: 'img/logo.svg',
-        srcDark: 'img/logo-dark.svg',
+        src: 'img/WSO2_Integration_Platform_Black.svg',
+        srcDark: 'img/WSO2_Integration_Platform_White.svg',
         href: '/',
       },
       items: [
@@ -128,7 +127,7 @@ const config: Config = {
         {
           title: 'Deploy',
           items: [
-            { label: 'Docker and Kubernetes', to: '/deploy/self-hosted/kubernetes' },
+            { label: 'Docker and Kubernetes', to: '/deploy/self-hosted/containerized-deployment' },
             { label: 'CI/CD', to: '/deploy-operate/cicd/github-actions' },
             { label: 'Observe', to: '/deploy-operate/observe/observability-overview' },
             { label: 'Secure', to: '/deploy-operate/secure/authentication' },

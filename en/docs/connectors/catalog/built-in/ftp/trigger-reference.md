@@ -133,7 +133,7 @@ An `ftp:Service` is a Ballerina service attached to an `ftp:Listener`. It monito
 | `onError` | <code>remote function onError(ftp:Error err, ftp:Caller caller) returns error?</code> | Invoked when the runtime cannot bind a file's content to the typed parameter of a format-specific handler. For example, an `onFileJson` handler receiving malformed JSON. `caller` is optional. |
 
 :::note
-The `|` in the content parameter lists the supported alternative types. The parameter should only be decalred with **one** of them. For example, `onFile` can be declared with `byte[]` *or* `stream<byte[], error?>`, not both at once.
+The `|` in the content parameter lists the supported alternative types. The parameter should only be declared with **one** of them. For example, `onFile` can be declared with `byte[]` *or* `stream<byte[], error?>`, not both at once.
 
 Multiple format-specific handlers (`onFile`, `onFileText`, `onFileJson`, `onFileXml`, `onFileCsv`) can coexist on the same service to route different file types to different methods using `@ftp:FunctionConfig`'s `fileNamePattern`. `onFileDelete` and `onError`can be added alongside any of them.
 :::

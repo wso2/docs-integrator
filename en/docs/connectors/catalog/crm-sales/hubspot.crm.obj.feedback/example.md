@@ -91,6 +91,6 @@ Try this sample in WSO2 Integration Platform.
 
 The `HubSpot CRM Feedback` connector provides practical examples illustrating usage in various scenarios.
 
-1. [Feedback Reviewing](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.feedback/tree/main/examples/feedback_review) - This example demonstrates the usage of the HubSpot CRM Feedback connector to read a page of feedback submissions, read an object identified by `{feedbackSubmissionId}`, read a batch of feedback submissions by internal ID, or unique property values, and search feedback submissions.
+1. [Feedback Reviewing](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.feedback/tree/main/examples/feedback_review) - This example demonstrates the usage of the HubSpot CRM Feedback connector to read a page of feedback submissions, read an object identified by `{feedbackSubmissionId}`, read a batch of feedback submissions by internal ID, or unique property values, and search feedback submissions.
 
 > **Note**: The feedback submissions endpoints are currently read-only. Feedback submissions cannot be submitted or edited through the API. You can only create properties in the [feedback surveys tool within HubSpot](https://knowledge.hubspot.com/customer-feedback/create-a-custom-survey), and the properties cannot be edited after creation.

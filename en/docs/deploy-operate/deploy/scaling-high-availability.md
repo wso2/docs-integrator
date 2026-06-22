@@ -36,88 +36,7 @@ service /orders on new http:Listener(9090) {
 
 ## Horizontal scaling configuration
 
-### Kubernetes replica scaling
-
-Set the number of replicas in your Kubernetes deployment:
-
-```yaml
-# k8s/deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: wso2-integrator-app
-  namespace: production
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: wso2-integrator-app
-  template:
-    metadata:
-      labels:
-        app: wso2-integrator-app
-    spec:
-      containers:
-        - name: app
-          image: registry.example.com/wso2-integrator-app:latest
-          ports:
-            - containerPort: 9090
-          resources:
-            requests:
-              cpu: "250m"
-              memory: "256Mi"
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
-```
-
-### Horizontal pod autoscaler (HPA)
-
-Automatically scale based on CPU or memory utilization:
-
-```yaml
-# k8s/hpa.yaml
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: wso2-integrator-app-hpa
-  namespace: production
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: wso2-integrator-app
-  minReplicas: 2
-  maxReplicas: 10
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 70
-    - type: Resource
-      resource:
-        name: memory
-        target:
-          type: Utilization
-          averageUtilization: 80
-  behavior:
-    scaleDown:
-      stabilizationWindowSeconds: 300
-      policies:
-        - type: Pods
-          value: 1
-          periodSeconds: 60
-    scaleUp:
-      stabilizationWindowSeconds: 30
-      policies:
-        - type: Pods
-          value: 2
-          periodSeconds: 60
-```
-
-### Cloud.toml Auto-Scaling
+### Cloud.toml auto-scaling
 
 Configure auto-scaling directly in your project's `Cloud.toml`:
 
@@ -130,81 +49,19 @@ cpu_threshold = 70
 memory_threshold = 80
 ```
 
-## Load balancing considerations
+When deploying to Kubernetes, the `bal build --cloud=k8s` command uses these settings to generate HorizontalPodAutoscaler resources automatically. For manual scaling configuration, refer to the [Kubernetes HorizontalPodAutoscaler documentation](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/).
 
-### Kubernetes service
+## Load balancing
 
-Expose your deployment through a Kubernetes Service for internal load balancing:
+When multiple instances of your integration run behind a load balancer, ensure your services are stateless and idempotent. Ballerina HTTP services work seamlessly with standard load balancers (Kubernetes Service, NGINX, HAProxy, cloud load balancers).
 
-```yaml
-# k8s/service.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: wso2-integrator-service
-  namespace: production
-spec:
-  type: ClusterIP
-  selector:
-    app: wso2-integrator-app
-  ports:
-    - port: 80
-      targetPort: 9090
-      protocol: TCP
-```
-
-### Ingress configuration
-
-For external traffic, configure an Ingress resource:
-
-```yaml
-# k8s/ingress.yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: wso2-integrator-ingress
-  namespace: production
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
-spec:
-  tls:
-    - hosts:
-        - api.example.com
-      secretName: tls-secret
-  rules:
-    - host: api.example.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: wso2-integrator-service
-                port:
-                  number: 80
-```
-
-### Session affinity
-
-If your integration requires sticky sessions (not recommended for stateless services), configure session affinity on the Service:
-
-```yaml
-spec:
-  sessionAffinity: ClientIP
-  sessionAffinityConfig:
-    clientIP:
-      timeoutSeconds: 600
-```
+For Kubernetes deployments, use a Service resource for internal load balancing and an Ingress for external traffic. Refer to the [Kubernetes Service documentation](https://kubernetes.io/docs/concepts/services-networking/service/) and [Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) for configuration details.
 
 ## Health checks
 
-Configure health probes so Kubernetes can detect unhealthy instances and route traffic away from them.
+Expose health check endpoints in your Ballerina services to enable load balancers and orchestrators to monitor instance health.
 
-### Ballerina health endpoint
-
-Ballerina HTTP services support health check endpoints. Add a health resource to your service:
+### Health endpoints
 
 ```ballerina
 import ballerina/http;
@@ -227,91 +84,30 @@ service /orders on new http:Listener(9090) {
 }
 ```
 
-### Kubernetes probe configuration
+Configure your orchestrator to call these endpoints for health monitoring. For Kubernetes, use liveness, readiness, and startup probes. Refer to the [Kubernetes Probes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) for configuration details.
 
-```yaml
-spec:
-  containers:
-    - name: app
-      livenessProbe:
-        httpGet:
-          path: /orders/healthz
-          port: 9090
-        initialDelaySeconds: 15
-        periodSeconds: 10
-        failureThreshold: 3
-      readinessProbe:
-        httpGet:
-          path: /orders/readyz
-          port: 9090
-        initialDelaySeconds: 10
-        periodSeconds: 5
-        failureThreshold: 3
-      startupProbe:
-        httpGet:
-          path: /orders/healthz
-          port: 9090
-        initialDelaySeconds: 5
-        periodSeconds: 5
-        failureThreshold: 30
-```
+## High availability strategies
 
-## Failover and resilience
+### Multi-zone deployment
 
-### Multi-Zone deployment
+Deploy integration instances across multiple availability zones or data centers to survive zone failures. In Kubernetes, use topology spread constraints to distribute pods across zones. In cloud environments, use availability zone configuration in your load balancer or auto-scaling groups.
 
-Distribute pods across availability zones using topology spread constraints:
+### Minimum instance count
 
-```yaml
-spec:
-  topologySpreadConstraints:
-    - maxSkew: 1
-      topologyKey: topology.kubernetes.io/zone
-      whenUnsatisfiable: DoNotSchedule
-      labelSelector:
-        matchLabels:
-          app: wso2-integrator-app
-```
+Maintain at least 2 replicas in production to ensure availability during deployments and instance failures. For critical integrations, consider running 3+ replicas across multiple zones.
 
-### Pod disruption budget
-
-Ensure a minimum number of pods remain available during voluntary disruptions (node upgrades, scaling events):
-
-```yaml
-# k8s/pdb.yaml
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: wso2-integrator-pdb
-  namespace: production
-spec:
-  minAvailable: 2
-  selector:
-    matchLabels:
-      app: wso2-integrator-app
-```
+When using Kubernetes, configure PodDisruptionBudgets to prevent voluntary disruptions from taking down too many instances simultaneously during maintenance operations. Refer to the [Kubernetes PodDisruptionBudget documentation](https://kubernetes.io/docs/tasks/run-application/configure-pdb/) for details.
 
 ## Graceful shutdown
 
-Ballerina services handle graceful shutdown automatically. When a `SIGTERM` signal is received, the runtime stops accepting new requests and waits for in-flight requests to complete before shutting down.
+Ballerina services handle graceful shutdown automatically. When a `SIGTERM` signal is received, the runtime:
 
-Configure the Kubernetes termination grace period to allow enough time for in-flight requests:
+1. Stops accepting new requests
+2. Waits for in-flight requests to complete
+3. Shuts down cleanly
 
-```yaml
-spec:
-  terminationGracePeriodSeconds: 60
-  containers:
-    - name: app
-      lifecycle:
-        preStop:
-          exec:
-            command: ["sleep", "5"]  # Allow load balancer to deregister
-```
-
-The `preStop` sleep ensures the pod is removed from the Service endpoints before the application begins shutting down, preventing requests from being routed to a terminating pod.
+Ensure your orchestrator allows sufficient time for graceful shutdown. In Kubernetes, set `terminationGracePeriodSeconds` to at least 60 seconds and use a `preStop` hook with a short delay to allow load balancers to deregister the instance before shutdown begins. Refer to the [Kubernetes Pod Lifecycle documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination) for configuration details.
 
 ## What's next
 
-- [Environments](environments.md) -- Manage configuration across environments
-- [Deploy to AWS / Azure / GCP](aws-azure-gcp.md) -- Cloud-specific scaling options
 - [Metrics](../observe/metrics-prometheus-grafana.md) -- Monitor scaling behavior with Prometheus

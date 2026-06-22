@@ -27,13 +27,7 @@ GitHub event integrations receive webhook callbacks from GitHub and trigger hand
 3. In the **Artifacts** panel, select **GitHub** under **Event Integration**.
 4. In the creation form, fill in the following fields:
 
-   <ThemedImage
-       alt="GitHub Event Integration creation form"
-       sources={{
-           light: useBaseUrl('/img/develop/integration-artifacts/event/github-webhooks/step-creation-form.png'),
-           dark: useBaseUrl('/img/develop/integration-artifacts/event/github-webhooks/step-creation-form.png'),
-       }}
-   />
+   ![Github Webhook creation form](/img/develop/integration-artifacts/event/github-webhooks/step-creation-form.png)
 
    | Field | Description | Default |
    |---|---|---|
@@ -51,18 +45,14 @@ GitHub event integrations receive webhook callbacks from GitHub and trigger hand
 
 6. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill, the active event channel pill, and the **Event Handlers** section with all handlers for the selected channel pre-added.
 
-   <ThemedImage
-       alt="Service Designer showing the GitHub Event Integration canvas"
-       sources={{
-           light: useBaseUrl('/img/develop/integration-artifacts/event/github-webhooks/step-service-designer.png'),
-           dark: useBaseUrl('/img/develop/integration-artifacts/event/github-webhooks/step-service-designer.png'),
-       }}
-   />
+   ![Github Service Designer View](/img/develop/integration-artifacts/event/github-webhooks/step-service-designer.png)
 
    All event handlers for the selected channel are added automatically. Click any handler to open it in the flow diagram view and implement the logic.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
+
+The following complete, runnable Ballerina program creates a GitHub event integration that listens for issue events and logs each one.
 
 ```ballerina
 import ballerinax/trigger.github;
@@ -111,33 +101,19 @@ service github:IssuesService on githubListener {
 }
 ```
 
+Save this as `main.bal` and run `bal run` from the project directory. Configure your GitHub repository webhook to point at the listener URL and use the same `webhookSecret` value in the webhook settings.
+
 </TabItem>
 </Tabs>
 
-## Service and listener configuration
-
-In the **Service Designer**, click the **Configure** icon in the header to open the **GitHub Event Integration Configuration** panel.
+## Listener configuration
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-<ThemedImage
-    alt="GitHub Event Integration Configuration panel"
-    sources={{
-        light: useBaseUrl('/img/develop/integration-artifacts/event/github-webhooks/step-configuration.png'),
-        dark: useBaseUrl('/img/develop/integration-artifacts/event/github-webhooks/step-configuration.png'),
-    }}
-/>
+In the **Service Designer**, click the **Configure** icon in the header to open the **GitHub Event Integration Configuration** panel.
 
-The configuration panel has two sections. The top section configures the service and the bottom section configures the attached listener.
-
-**Service configuration:**
-
-| Field | Description |
-|---|---|
-| **Event Channel** | The GitHub event channel this service handles. Select from the available service types. |
-
-**Listener configuration** (under **Configuration for githubListener**):
+   ![Github Connection Configure View](/img/develop/integration-artifacts/event/github-webhooks/step-configuration.png)
 
 | Field | Description | Default |
 |---|---|---|
@@ -151,6 +127,8 @@ Click **Save Changes** to apply updates.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
+
+The listener is declared at the module level and takes a `ListenerConfig` value plus a port. `webhookSecret` is used to validate the HMAC signature on incoming GitHub webhook requests. Use `configurable` so the secret can be supplied via `Config.toml` or an environment variable without changing source code.
 
 ```ballerina
 listener github:Listener githubListener = new (
@@ -191,100 +169,120 @@ When a GitHub Events service is created, WSO2 Integrator adds all handlers for t
 
 ### IssuesService handlers
 
-| Handler | Triggered when | Payload type |
-|---|---|---|
-| `onOpened` | A new issue is opened | `github:IssuesEvent` |
-| `onClosed` | An issue is closed | `github:IssuesEvent` |
-| `onReopened` | A closed issue is reopened | `github:IssuesEvent` |
-| `onAssigned` | A user is assigned to an issue | `github:IssuesEvent` |
-| `onUnassigned` | A user is unassigned from an issue | `github:IssuesEvent` |
-| `onLabeled` | A label is added to an issue | `github:IssuesEvent` |
-| `onUnlabeled` | A label is removed from an issue | `github:IssuesEvent` |
+Each handler receives a [github:IssuesEvent](../../../connectors/catalog/developer-tools/github/triggers.md#issuesevent) payload.
+
+| Handler | Triggered when |
+|---|---|
+| `onOpened` | A new issue is opened |
+| `onClosed` | An issue is closed |
+| `onReopened` | A closed issue is reopened |
+| `onAssigned` | A user is assigned to an issue |
+| `onUnassigned` | A user is unassigned from an issue |
+| `onLabeled` | A label is added to an issue |
+| `onUnlabeled` | A label is removed from an issue |
 
 ### PullRequestService handlers
 
-| Handler | Triggered when | Payload type |
-|---|---|---|
-| `onOpened` | A pull request is opened | `github:PullRequestEvent` |
-| `onClosed` | A pull request is closed or merged | `github:PullRequestEvent` |
-| `onReopened` | A closed pull request is reopened | `github:PullRequestEvent` |
-| `onAssigned` | A user is assigned to a pull request | `github:PullRequestEvent` |
-| `onUnassigned` | A user is unassigned from a pull request | `github:PullRequestEvent` |
-| `onLabeled` | A label is added | `github:PullRequestEvent` |
-| `onUnlabeled` | A label is removed | `github:PullRequestEvent` |
-| `onEdited` | A pull request title, body, or base branch is edited | `github:PullRequestEvent` |
-| `onReviewRequested` | A review is requested | `github:PullRequestEvent` |
-| `onReviewRequestRemoved` | A review request is removed | `github:PullRequestEvent` |
+Each handler receives a [github:PullRequestEvent](../../../connectors/catalog/developer-tools/github/triggers.md#pullrequestevent) payload.
+
+| Handler | Triggered when |
+|---|---|
+| `onOpened` | A pull request is opened |
+| `onClosed` | A pull request is closed or merged |
+| `onReopened` | A closed pull request is reopened |
+| `onAssigned` | A user is assigned to a pull request |
+| `onUnassigned` | A user is unassigned from a pull request |
+| `onLabeled` | A label is added |
+| `onUnlabeled` | A label is removed |
+| `onEdited` | A pull request title, body, or base branch is edited |
+| `onReviewRequested` | A review is requested |
+| `onReviewRequestRemoved` | A review request is removed |
 
 ### IssueCommentService handlers
 
-| Handler | Triggered when | Payload type |
-|---|---|---|
-| `onCreated` | A comment is added to an issue or pull request | `github:IssueCommentEvent` |
-| `onEdited` | An existing comment is edited | `github:IssueCommentEvent` |
-| `onDeleted` | A comment is deleted | `github:IssueCommentEvent` |
+Each handler receives a [github:IssueCommentEvent](../../../connectors/catalog/developer-tools/github/triggers.md#issuecommentevent) payload.
+
+| Handler | Triggered when |
+|---|---|
+| `onCreated` | A comment is added to an issue or pull request |
+| `onEdited` | An existing comment is edited |
+| `onDeleted` | A comment is deleted |
 
 ### PullRequestReviewService handlers
 
-| Handler | Triggered when | Payload type |
-|---|---|---|
-| `onSubmitted` | A pull request review is submitted | `github:PullRequestReviewEvent` |
-| `onDismissed` | A pull request review is dismissed | `github:PullRequestReviewEvent` |
-| `onEdited` | A pull request review body is edited | `github:PullRequestReviewEvent` |
+Each handler receives a [github:PullRequestReviewEvent](../../../connectors/catalog/developer-tools/github/triggers.md#pullrequestreviewevent) payload.
+
+| Handler | Triggered when |
+|---|---|
+| `onSubmitted` | A pull request review is submitted |
+| `onDismissed` | A pull request review is dismissed |
+| `onEdited` | A pull request review body is edited |
 
 ### PullRequestReviewCommentService handlers
 
-| Handler | Triggered when | Payload type |
-|---|---|---|
-| `onCreated` | A comment is added to a pull request diff | `github:PullRequestReviewCommentEvent` |
-| `onEdited` | A comment on a pull request diff is edited | `github:PullRequestReviewCommentEvent` |
-| `onDeleted` | A comment on a pull request diff is deleted | `github:PullRequestReviewCommentEvent` |
+Each handler receives a [github:PullRequestReviewCommentEvent](../../../connectors/catalog/developer-tools/github/triggers.md#pullrequestreviewcommentevent) payload.
+
+| Handler | Triggered when |
+|---|---|
+| `onCreated` | A comment is added to a pull request diff |
+| `onEdited` | A comment on a pull request diff is edited |
+| `onDeleted` | A comment on a pull request diff is deleted |
 
 ### ReleaseService handlers
 
-| Handler | Triggered when | Payload type |
-|---|---|---|
-| `onPublished` | A release is published | `github:ReleaseEvent` |
-| `onUnpublished` | A release is unpublished | `github:ReleaseEvent` |
-| `onCreated` | A release draft is created | `github:ReleaseEvent` |
-| `onEdited` | A release is edited | `github:ReleaseEvent` |
-| `onDeleted` | A release is deleted | `github:ReleaseEvent` |
-| `onPreReleased` | A release is marked as a pre-release | `github:ReleaseEvent` |
-| `onReleased` | A pre-release is promoted to a full release | `github:ReleaseEvent` |
+Each handler receives a [github:ReleaseEvent](../../../connectors/catalog/developer-tools/github/triggers.md#releaseevent) payload.
+
+| Handler | Triggered when |
+|---|---|
+| `onPublished` | A release is published |
+| `onUnpublished` | A release is unpublished |
+| `onCreated` | A release draft is created |
+| `onEdited` | A release is edited |
+| `onDeleted` | A release is deleted |
+| `onPreReleased` | A release is marked as a pre-release |
+| `onReleased` | A pre-release is promoted to a full release |
 
 ### LabelService handlers
 
-| Handler | Triggered when | Payload type |
-|---|---|---|
-| `onCreated` | A label is created in the repository | `github:LabelEvent` |
-| `onEdited` | A label name or color is changed | `github:LabelEvent` |
-| `onDeleted` | A label is deleted | `github:LabelEvent` |
+Each handler receives a [github:LabelEvent](../../../connectors/catalog/developer-tools/github/triggers.md#labelevent) payload.
+
+| Handler | Triggered when |
+|---|---|
+| `onCreated` | A label is created in the repository |
+| `onEdited` | A label name or color is changed |
+| `onDeleted` | A label is deleted |
 
 ### MilestoneService handlers
 
-| Handler | Triggered when | Payload type |
-|---|---|---|
-| `onCreated` | A milestone is created | `github:MilestoneEvent` |
-| `onOpened` | A closed milestone is reopened | `github:MilestoneEvent` |
-| `onClosed` | A milestone is closed | `github:MilestoneEvent` |
-| `onEdited` | A milestone title or description is edited | `github:MilestoneEvent` |
-| `onDeleted` | A milestone is deleted | `github:MilestoneEvent` |
+Each handler receives a [github:MilestoneEvent](../../../connectors/catalog/developer-tools/github/triggers.md#milestoneevent) payload.
+
+| Handler | Triggered when |
+|---|---|
+| `onCreated` | A milestone is created |
+| `onOpened` | A closed milestone is reopened |
+| `onClosed` | A milestone is closed |
+| `onEdited` | A milestone title or description is edited |
+| `onDeleted` | A milestone is deleted |
 
 ### PushService handlers
 
-| Handler | Triggered when | Payload type |
-|---|---|---|
-| `onPush` | Commits are pushed to a branch or a tag is created or deleted | `github:PushEvent` |
+The handler receives a [github:PushEvent](../../../connectors/catalog/developer-tools/github/triggers.md#pushevent) payload.
+
+| Handler | Triggered when |
+|---|---|
+| `onPush` | Commits are pushed to a branch or a tag is created or deleted |
 
 ### ProjectCardService handlers
 
-| Handler | Triggered when | Payload type |
-|---|---|---|
-| `onCreated` | A card is added to a project board | `github:ProjectCardEvent` |
-| `onEdited` | A card note is edited | `github:ProjectCardEvent` |
-| `onMoved` | A card is moved to a different column | `github:ProjectCardEvent` |
-| `onConverted` | A card note is converted to an issue | `github:ProjectCardEvent` |
-| `onDeleted` | A card is deleted from a project board | `github:ProjectCardEvent` |
+Each handler receives a [github:ProjectCardEvent](../../../connectors/catalog/developer-tools/github/triggers.md#projectcardevent) payload.
+
+| Handler | Triggered when |
+|---|---|
+| `onCreated` | A card is added to a project board |
+| `onEdited` | A card note is edited |
+| `onMoved` | A card is moved to a different column |
+| `onConverted` | A card note is converted to an issue |
+| `onDeleted` | A card is deleted from a project board |
 
 ## Error handling
 
@@ -297,6 +295,8 @@ Add an **Error Handler** block inside the handler flow to define recovery logic.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
+
+The GitHub listener catches errors returned from handler methods, logs them, and continues processing subsequent events. Use `do/on fail` inside a handler to take control of recovery before the error reaches the listener.
 
 ```ballerina
 service github:IssuesService on githubListener {

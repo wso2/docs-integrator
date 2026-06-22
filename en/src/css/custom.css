@@ -170,29 +170,8 @@
   border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 
-.navbar__title {
-  /* Hide the raw title text — replaced visually by ::before / ::after below
-     so "Integration" renders bold and "Platform" renders lighter. The text
-     remains in the DOM for screen readers and SEO. */
-  font-size: 0;
-  letter-spacing: normal;
-}
-
-.navbar__title::before,
-.navbar__title::after {
-  font-size: 1.1rem;
-  letter-spacing: -0.01em;
-  color: var(--ifm-navbar-link-color);
-}
-
-.navbar__title::before {
-  content: 'WSO2 Integration\00a0';
-  font-weight: 700;
-}
-
-.navbar__title::after {
-  content: 'Platform';
-  font-weight: 400;
+.navbar__logo img {
+  height: 30px;
 }
 
 .navbar__link {

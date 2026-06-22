@@ -14,17 +14,13 @@ Once your integration is ready, this section covers everything you need to ship 
 WSO2 Integrator supports multiple deployment targets. Choose the one that fits your infrastructure:
 
 - **[WSO2 Cloud](./cloud/overview.md)** — Push your project directly from the IDE or the cloud editor to the managed WSO2 Integration Platform. No infrastructure setup required.
-- **[Run locally](./self-hosted/run-locally.md)** — Run your integration on your local machine for development or testing.
-- **[VM-based deployment](../deploy-operate/deploy/vm-based-deployment.md)** — Deploy to a virtual machine or bare-metal server.
-- **[Docker](./self-hosted/docker.md)** and **[Kubernetes](./self-hosted/kubernetes.md)** — Package your integration as a container and deploy it to a Kubernetes cluster.
-- **[Red Hat OpenShift](./self-hosted/openshift.md)** — Deploy on OpenShift using standard Kubernetes tooling.
+- **[VM Deployment](./self-hosted/vm-deployment.md)** — Deploy your integration to a virtual machine or bare-metal server as a standalone JAR file.
+- **[Containerized Deployment](./self-hosted/containerized-deployment.md)** — Package your integration as a container and deploy it to Docker, Kubernetes, or Red Hat OpenShift.
 - **[Serverless deployment](../deploy-operate/deploy/serverless-deployment.md)** — Run integrations as serverless functions.
-- **[AWS, Azure, and GCP](../deploy-operate/deploy/aws-azure-gcp.md)** — Deploy to major cloud providers using native services.
 - **[GraalVM native images](../deploy-operate/deploy/graalvm-native-images.md)** — Compile your integration to a native binary for faster startup and lower memory usage.
 
 ## Configuration and scaling
 
-- **[Environments](../deploy-operate/deploy/environments.md)** — Manage dev, staging, and production environment configurations.
 - **[Managing configurations](../deploy-operate/deploy/managing-configurations.md)** — Externalize and manage runtime configuration values.
 - **[Scaling and high availability](../deploy-operate/deploy/scaling-high-availability.md)** — Design your deployment for resilience and scale.
 - **[Capacity planning](../deploy-operate/capacity-planning/overview.md)** — Estimate resource requirements and plan deployment sizing.

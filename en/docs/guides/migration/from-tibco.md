@@ -1,13 +1,14 @@
 ---
-title: Coming from TIBCO BusinessWorks
+title: Migrate from TIBCO BusinessWorks
 description: Migration guide for developers moving from TIBCO BusinessWorks to WSO2 Integrator.
+slug: /guides/migration/from-tibco
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import TabAwareToc from '@site/src/components/TabAwareToc';
 
-# Coming from TIBCO BusinessWorks
+# Migrate from TIBCO BusinessWorks
 
 A tutorial for developers migrating integrations from TIBCO BusinessWorks to WSO2 Integrator. This tutorial walks you through migrating a real TIBCO BusinessWorks project to WSO2 Integrator using the automated migration tool. No prior knowledge of Ballerina or WSO2 Integrator is required.
 

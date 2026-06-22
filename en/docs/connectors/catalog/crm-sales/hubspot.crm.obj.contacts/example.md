@@ -97,7 +97,7 @@ Try this sample in WSO2 Integration Platform.
 
 ## More code examples
 
-The `Ballerina HubSpot CRM Contacts Connector` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.contacts/tree/main/examples/), covering the following use cases:
+The `Ballerina HubSpot CRM Contacts Connector` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.contacts/tree/main/examples/), covering the following use cases:
 
-1. [Email-Advertising](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.contacts/tree/main/examples/Email-Advertising): Unsubscribe and remove customers based on email addresses of CSV-imported data.
-2. [Event-Registration](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.contacts/tree/main/examples/Event-Registration): Event registration and follow-up using CSV-imported data.
+1. [Email-Advertising](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.contacts/tree/main/examples/Email-Advertising): Unsubscribe and remove customers based on email addresses of CSV-imported data.
+2. [Event-Registration](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.contacts/tree/main/examples/Event-Registration): Event registration and follow-up using CSV-imported data.

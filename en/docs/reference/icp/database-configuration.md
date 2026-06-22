@@ -67,7 +67,7 @@ H2 is suitable for development and testing only.
 
 ## Credentials Database
 
-The default authentication backend stores user credentials in a separate database or schema. These are flat top-level keys in `deployment.toml` (not under any table header).
+The default authentication backend stores user credentials in a separate dedicated credentials database. These are flat top-level keys in `deployment.toml` (not under any table header).
 
 ```toml
 credentialsDbType = "postgresql"   # h2, postgresql, mysql, or mssql
@@ -83,8 +83,8 @@ credentialsDbPassword = "icp_password"
 | `credentialsDbType`     | `string` | `"h2"`            | `h2`, `postgresql`, `mysql`, or `mssql` |
 | `credentialsDbHost`     | `string` | `"localhost"`     | Not used for H2                         |
 | `credentialsDbPort`     | `int`    | `5432`            | Not used for H2                         |
-| `credentialsDbName`     | `string` | `"credentialsdb"` | Database/schema name                    |
+| `credentialsDbName`     | `string` | `"credentialsdb"` | Credentials database name               |
 | `credentialsDbUser`     | `string` | `"icp_user"`      | Database user                           |
 | `credentialsDbPassword` | `string` | —                 | Database password                       |
 
-For PostgreSQL, credentials are stored in a `credentials` schema within the same database. For H2, they are stored in `<ICP_HOME>/bin/database/credentials`.
+Credentials are stored in a dedicated credentials database separate from the main ICP database, configured via `credentialsDbName`, `credentialsDbHost`, and `credentialsDbPort`. For H2, they are stored in `<ICP_HOME>/bin/database/credentials`.

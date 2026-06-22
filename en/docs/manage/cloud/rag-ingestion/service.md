@@ -1,6 +1,6 @@
 ---
 title: "RAG Service"
-description: "Use the RAG service API to programmatically ingest, chunk, and retrieve documents in WSO2 - Clouf Integration Platform."
+description: "Use the RAG service API to programmatically ingest, chunk, and retrieve documents in WSO2 Cloud - Integration Platform."
 keywords: [wso2 integrator, rag, api, service, ingestion]
 ---
 
@@ -146,5 +146,5 @@ For more information on ingestion and retrieval, see the [RAG ingestion guide](.
 
 - [RAG ingestion](./ingestion.md) — Configure scheduled ingestion automations.
 - [RAG retrieval](./retrieval.md) — Query a vector store and retrieve relevant chunks.
-- [Managed PostgreSQL and vector databases](./vector-databases.md) — Provision vector databases used by RAG.
+- [Managed vector databases](./vector-databases.md) — Provision vector databases used by RAG.
     

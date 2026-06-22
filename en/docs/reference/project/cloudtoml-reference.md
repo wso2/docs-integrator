@@ -213,6 +213,5 @@ file = "./Secret.toml"
 
 ## What's next
 
-- [Docker](../../deploy/self-hosted/docker.md) — build and run the container image produced from Cloud.toml.
-- [Kubernetes](../../deploy/self-hosted/kubernetes.md) — deploy the generated artifacts to a Kubernetes cluster.
+- [Containerized Deployment](../../deploy/self-hosted/containerized-deployment.md) — deploy to Docker, Kubernetes, or OpenShift using the artifacts produced from Cloud.toml.
 - [Config.toml reference](../config/configtoml-reference.md) — define the runtime values you mount via `[[cloud.config.files]]`.

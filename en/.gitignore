@@ -7,6 +7,11 @@
 # Generated files
 .docusaurus
 .cache-loader
+comment-body.md
+head-links.txt
+base-links.txt
+head-orphans.txt
+base-orphans.txt
 
 # Misc
 .DS_Store

@@ -8,14 +8,6 @@ description: Deploy integrations as serverless functions on AWS Lambda and Azure
 
 WSO2 Integrator projects can be deployed as serverless functions, enabling event-driven scaling with zero infrastructure management. Ballerina supports AWS Lambda and Azure Functions as first-class deployment targets via compiler extensions that generate deployment artifacts automatically at build time.
 
-## Overview
-
-| Feature | AWS Lambda | Azure Functions |
-|---------|-----------|-----------------|
-| Trigger Types | HTTP (API Gateway), S3, SQS, DynamoDB Streams, SES | HTTP, Timer, Blob Storage, Queue, CosmosDB |
-| Max Execution | 15 minutes | 10 minutes (Consumption plan) |
-| Runtime | Custom runtime (provided) | Java 21, Windows hosting |
-
 ## Azure Functions
 
 ### Prerequisites
@@ -74,6 +66,14 @@ service "mycontainer/{name}" on new af:BlobListener({path: "mycontainer/{name}"}
 bal build
 ```
 
+:::note
+The `--cloud` flag is optional for Azure Functions. The compiler auto-detects the Azure Functions extension and defaults to `--cloud="azure_functions"`. You can explicitly specify it to avoid the warning:
+
+```bash
+bal build --cloud="azure_functions"
+```
+:::
+
 The compiler extension generates the function artifacts automatically:
 
 ```
@@ -104,45 +104,14 @@ func start --script-root target/azure_functions --java
 
 ### Step 4: Deploy to Azure
 
-First create the required Azure resources:
+Deploy using the Azure Functions Core Tools:
 
 ```bash
-az group create --name integration-rg --location eastus
-
-az storage account create \
-  --name integrationstorage \
-  --location eastus \
-  --resource-group integration-rg \
-  --sku Standard_LRS
-
-az functionapp create \
-  --resource-group integration-rg \
-  --consumption-plan-location eastus \
-  --runtime java \
-  --runtime-version 21 \
-  --functions-version 4 \
-  --name my-integration-func \
-  --storage-account integrationstorage \
-  --os-type Windows
-```
-
-Then deploy using the Azure Functions Core Tools:
-
-```bash
-func azure functionapp publish my-integration-func \
+func azure functionapp publish <function_app_name> \
   --script-root target/azure_functions
 ```
 
-### Azure configuration
-
-Set application settings for environment-specific configuration:
-
-```bash
-az functionapp config appsettings set \
-  --name my-integration-func \
-  --resource-group integration-rg \
-  --settings "DB_HOST=db.internal.example.com" "DB_PORT=5432"
-```
+Refer to the [Azure Functions documentation](https://learn.microsoft.com/en-us/azure/azure-functions/) for creating and configuring Azure Function Apps.
 
 ## AWS Lambda
 
@@ -200,6 +169,14 @@ public function processDynamoDB(lambda:Context ctx,
 bal build
 ```
 
+:::note
+The `--cloud` flag is optional for AWS Lambda. The compiler auto-detects the Lambda extension. You can explicitly specify it if needed:
+
+```bash
+bal build --cloud="aws_lambda"
+```
+:::
+
 The compiler extension runs automatically and generates the deployment package:
 
 ```
@@ -251,68 +228,19 @@ aws lambda update-function-code \
   --zip-file fileb://target/aws_lambda/aws-ballerina-lambda-functions.zip
 ```
 
-### Step 4: Add an API Gateway trigger
-
-```bash
-aws apigatewayv2 create-api \
-  --name order-api \
-  --protocol-type HTTP \
-  --target arn:aws:lambda:us-east-1:123456789012:function:processOrder
-```
-
-### Lambda configuration
-
-Configure via environment variables in the Lambda console or deployment script:
-
-```bash
-aws lambda update-function-configuration \
-  --function-name processOrder \
-  --environment "Variables={DB_HOST=db.internal.example.com,DB_PORT=5432}"
-```
-
-For secrets, reference AWS Secrets Manager from your application code rather than embedding values in environment variables.
+Refer to the [AWS Lambda documentation](https://docs.aws.amazon.com/lambda/) for deployment configuration and trigger setup.
 
 ## Reducing cold start times
 
 ### Use GraalVM native images
 
-Compile to a native binary to reduce startup time.
-
-For AWS Lambda:
+Compile to a native binary to reduce startup time:
 
 ```bash
 bal build --graalvm
 ```
 
-For Azure Functions:
-
-```bash
-bal build --graalvm --cloud="azure_functions"
-```
-
-### Provisioned concurrency (AWS)
-
-Keep warm instances ready to handle requests:
-
-```bash
-aws lambda put-provisioned-concurrency-config \
-  --function-name processOrder \
-  --qualifier production \
-  --provisioned-concurrent-executions 5
-```
-
-### Premium plan (Azure)
-
-Use the Premium plan for pre-warmed instances:
-
-```bash
-az functionapp plan create \
-  --name premium-plan \
-  --resource-group integration-rg \
-  --location eastus \
-  --sku EP1 \
-  --min-instances 1
-```
+The compiler auto-detects the serverless platform and generates the appropriate native image artifacts.
 
 ## Best practices
 
@@ -321,12 +249,12 @@ az functionapp plan create \
 | Function Size | Keep functions focused on a single operation |
 | Dependencies | Minimize package dependencies to reduce deployment size |
 | Timeouts | Set appropriate timeouts based on expected execution time |
-| Secrets | Use cloud-native secret managers (Secrets Manager, Key Vault) |
-| Observability | Enable X-Ray (AWS) or Application Insights (Azure) |
-| VPC Access | Configure VPC/VNet only when accessing private resources |
+| Secrets | Use cloud-native secret managers for sensitive configuration |
+| Observability | Enable platform observability features for monitoring and tracing |
+| Network Access | Configure network access only when required for private resources |
 
 ## What's next
 
 - [GraalVM Native Images](graalvm-native-images.md) — Compile to native binaries for minimal cold start
 - [Managing Configurations](managing-configurations.md) — Environment-specific configuration strategies
-- [Deploy to AWS / Azure / GCP](aws-azure-gcp.md) — Container-based cloud deployments
+- [Containerized Deployment](../../deploy/self-hosted/containerized-deployment.md) — Deploy as containers to Kubernetes or Docker

@@ -1,23 +1,33 @@
 ---
-sidebar_position: 7
-title: VM-Based Deployment
-description: Deploy integrations as standalone JAR files or centralized consolidated packages on virtual machines.
+title: VM Deployment
+description: Deploy WSO2 Integrator projects as standalone JAR files on virtual machines for self-hosted production deployments.
+keywords: [wso2 integrator, bal run, vm deployment, jar deployment, ballerina cli]
 ---
 
-# VM-Based Deployment
+# VM Deployment
 
-WSO2 Integrator projects compile to executable JAR files that run on any JVM, making virtual machines a straightforward deployment target. You can deploy as standalone JARs for individual services or use consolidated packages to run multiple integrations from a single runtime.
+This page explains how to run WSO2 Integrator projects as standalone JAR files on virtual machines for self-hosted production deployments.
 
-## Prerequisites
+:::info Prerequisites
+- [Ballerina installed](https://ballerina.io/downloads/) on any machine where you want to run the project
+- A WSO2 Integrator project based on Ballerina
+- For production VM deployments: Java Runtime (JDK 21 or later)
+:::
+
+## Deploy with executable JAR
+
+For production VM deployments, WSO2 Integrator projects compile to executable JAR files that run on any JVM. This approach gives you full control over the runtime environment and is ideal for traditional VM-based infrastructure.
+
+### Prerequisites for JAR deployment
 
 | Requirement | Details |
 |-------------|---------|
-| Java Runtime | JDK 17 or later |
+| Java Runtime | JDK 21 or later |
 | Operating System | Linux (recommended), macOS, or Windows |
 | Memory | Minimum 512 MB, recommended 1 GB+ per instance |
 | Ballerina | Distribution installed on the build machine |
 
-## Building the executable JAR
+### Build the executable JAR
 
 Use the `bal build` command to produce a standalone executable JAR.
 
@@ -27,7 +37,7 @@ bal build
 
 This generates a fat JAR in the `target/bin/` directory:
 
-```
+```bash
 target/
   bin/
     my_integration.jar
@@ -48,17 +58,13 @@ java -jar target/bin/my_integration.jar
 | `--observability-included` | Bundle observability dependencies |
 | `-DskipTests` | Skip test execution during build |
 
-## Standalone JAR deployment
-
-The simplest approach is to copy the JAR to the target VM and run it.
-
-### Step 1 -- transfer the JAR
+### Transfer the JAR to your VM
 
 ```bash
 scp target/bin/my_integration.jar user@production-vm:/opt/integrations/
 ```
 
-### Step 2 -- configure the runtime
+### Configure the runtime
 
 Create a `Config.toml` in the same directory as the JAR (or set the `BAL_CONFIG_FILES` environment variable):
 
@@ -73,45 +79,68 @@ username = "svc_user"
 password = "encrypted:xxxxx"
 ```
 
-### Step 3 -- run as a systemd service
-
-Create a systemd unit file at `/etc/systemd/system/my-integration.service`:
-
-```ini
-[Unit]
-Description=WSO2 Integration Service
-After=network.target
-
-[Service]
-Type=simple
-User=ballerina
-Group=ballerina
-WorkingDirectory=/opt/integrations
-ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar my_integration.jar
-Restart=on-failure
-RestartSec=10
-StandardOutput=journal
-StandardError=journal
-Environment=BAL_CONFIG_FILES=/opt/integrations/Config.toml
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable and start the service:
+### Start the integration
 
 ```bash
-sudo systemctl daemon-reload
-sudo systemctl enable my-integration
-sudo systemctl start my-integration
-sudo systemctl status my-integration
+java -jar my_integration.jar
 ```
 
-### Step 4 -- verify the deployment
+For production deployments with JVM tuning:
+
+```bash
+java \
+  -Xms512m \
+  -Xmx1024m \
+  -XX:+UseG1GC \
+  -XX:MaxGCPauseMillis=200 \
+  -XX:+HeapDumpOnOutOfMemoryError \
+  -XX:HeapDumpPath=/var/log/integrations/ \
+  -Dballerina.observability.enabled=true \
+  -jar my_integration.jar
+```
+
+### Verify the deployment
 
 ```bash
 curl http://localhost:9090/health
 ```
+
+## Run on a VM from source
+
+To run the project on a remote virtual machine, install the Ballerina distribution on the VM and run the project directly from source using `bal run`.
+
+### Step 1: Push the project to a remote Git repository
+
+From your local machine, push the project to a remote Git repository such as GitHub, GitLab, or Bitbucket.
+
+```bash
+git add .
+git commit -m "Initial integration project"
+git push origin main
+```
+
+### Step 2: Clone the repository on the VM
+
+SSH into the target VM and clone the repository.
+
+```bash
+git clone https://github.com/your-org/my-integration.git
+cd my-integration
+```
+
+### Step 3: Start the integration
+
+Run the project using the Ballerina CLI.
+
+```bash
+bal run
+```
+
+The runtime starts and the integration begins serving traffic on the configured port.
+
+:::note
+Ballerina must be installed on the VM. Download it from [ballerina.io](https://ballerina.io/downloads/). The version on the VM should match the version used during development.
+:::
 
 ## Consolidated package deployment
 
@@ -213,17 +242,14 @@ java \
 
 ## Log management
 
-Direct logs to files with rotation:
-
-```bash
-java -jar my_integration.jar 2>&1 | tee -a /var/log/integrations/my_integration.log
-```
-
-Or configure logging in `Config.toml`:
+Configure logging in `Config.toml`:
 
 ```toml
 [ballerina.log]
 level = "INFO"
+
+[[ballerina.log.destinations]]
+path = "./logs/app.log"
 ```
 
 ## Health checks and monitoring
@@ -242,6 +268,7 @@ service /health on new http:Listener(9091) {
 
 ## What's next
 
-- [Managing Configurations](managing-configurations.md) -- Per-environment configuration strategies
-- [Scaling & High Availability](scaling-high-availability.md) -- Run multiple instances behind a load balancer
-- [GraalVM Native Images](graalvm-native-images.md) -- Compile to native binaries for faster startup
+- [Containerized Deployment](./containerized-deployment.md) — Deploy your project to Docker, Kubernetes, or Red Hat OpenShift using Code to Cloud
+- [Managing Configurations](../../deploy-operate/deploy/managing-configurations.md) — Per-environment configuration strategies
+- [Scaling & High Availability](../../deploy-operate/deploy/scaling-high-availability.md) — Run multiple instances behind a load balancer
+- [GraalVM Native Images](../../deploy-operate/deploy/graalvm-native-images.md) — Compile to native binaries for faster startup

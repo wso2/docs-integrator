@@ -51,7 +51,7 @@ An **Automation** runs on integration startup. It is the right artifact type for
 
 ## Step 2: Add a text data loader
 
-A **Text Data Loader** reads a file from disk and wraps its content as an `ai:Document`.
+A **Text Data Loader** reads a file from disk and wraps its content as an `ai:Document`. For the full list of available loaders, see [Data Loaders](../components/data-loaders.md).
 
 1. In the flow editor, click **+** to open the **Add Node** panel.
 2. Go to **AI > RAG > Data Loader**.
@@ -197,6 +197,7 @@ See [Knowledge Bases — delete by filter](../components/knowledge-bases.md#avai
 ## What's next
 
 - **[RAG query](rag-query.md)** — retrieve chunks at runtime and generate grounded responses.
+- **[Data Loaders](../components/data-loaders.md)** — read documents from disk, SharePoint, and other sources.
 - **[Knowledge Bases](../components/knowledge-bases.md)** — ingest, retrieve, and delete-by-filter reference.
 - **[Vector Stores](../components/vector-stores.md)** — picking and configuring a production store.
 - **[Embedding Providers](../components/embedding-providers.md)** — available providers and dimension requirements.

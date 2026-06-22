@@ -223,6 +223,7 @@ const sidebars: SidebarsConfig = {
                     },
                     'develop/integration-artifacts/supporting/data-mapper/generic-type-mappings',
                     'develop/integration-artifacts/supporting/data-mapper/submappings',
+                    'develop/integration-artifacts/supporting/data-mapper/ai-mapping',
                   ],
                 },
               ],
@@ -1203,6 +1204,24 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Microsoft SharePoint Pages',
+          link: { type: 'doc', id: 'connectors/catalog/storage-file/microsoft.sharepoint.pages/connector-overview' },
+          items: [
+            'connectors/catalog/storage-file/microsoft.sharepoint.pages/setup-guide',
+            'connectors/catalog/storage-file/microsoft.sharepoint.pages/action-reference',
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Microsoft SharePoint Sites',
+          link: { type: 'doc', id: 'connectors/catalog/storage-file/microsoft.sharepoint.sites/connector-overview' },
+          items: [
+            'connectors/catalog/storage-file/microsoft.sharepoint.sites/setup-guide',
+            'connectors/catalog/storage-file/microsoft.sharepoint.sites/action-reference',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Milvus',
           link: { type: 'doc', id: 'connectors/catalog/ai-ml/milvus/connector-overview' },
           items: [
@@ -1821,6 +1840,7 @@ const sidebars: SidebarsConfig = {
             'genai/develop/components/vector-stores',
             'genai/develop/components/knowledge-bases',
             'genai/develop/components/chunkers',
+            'genai/develop/components/data-loaders',
           ],
         },
         // Tutorials
@@ -1868,8 +1888,8 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Migration Guides',
           items: [
-            'guides/migration/coming-from-mulesoft',
-            'guides/migration/coming-from-tibco',
+            'guides/migration/from-mulesoft',
+            'guides/migration/from-tibco',
           ],
         },
       ],
@@ -1904,15 +1924,10 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Self-Hosted',
           items: [
-            'deploy/self-hosted/run-locally',
-            'deploy/self-hosted/docker',
-            'deploy/self-hosted/kubernetes',
-            'deploy/self-hosted/openshift',
-            'deploy-operate/deploy/vm-based-deployment',
+            'deploy/self-hosted/vm-deployment',
+            'deploy/self-hosted/containerized-deployment',
             'deploy-operate/deploy/serverless-deployment',
-            'deploy-operate/deploy/aws-azure-gcp',
             'deploy-operate/deploy/graalvm-native-images',
-            'deploy-operate/deploy/environments',
             'deploy-operate/deploy/managing-configurations',
             'deploy-operate/deploy/scaling-high-availability',
           ],
@@ -2115,10 +2130,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'ICP',
+          label: 'WSO2 Integration Control Plane',
           link: { type: 'doc', id: 'manage/icp/integration-control-plane' },
           items: [
             'manage/icp/install-icp',
+            'manage/icp/deploy-kubernetes',
             'manage/icp/icp-console-overview',
             'manage/icp/quick-start',
             'manage/icp/connect-runtime',
@@ -2138,14 +2154,6 @@ const sidebars: SidebarsConfig = {
                 'manage/icp/user-stores/default-user-store',
                 'manage/icp/user-stores/ldap-user-store',
                 'manage/icp/user-stores/sso-configuration',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'MI Profile',
-              items: [
-                'manage/icp/mi-profile/observability-setup-mi',
-                'manage/icp/mi-profile/connect-runtime-mi',
               ],
             },
           ],
@@ -2260,5 +2268,5 @@ const sidebars: SidebarsConfig = {
   ],
 };
 
-
 export default sidebars;
+
