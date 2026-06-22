@@ -1,8 +1,9 @@
 ---
 sidebar_position: 1
-title: "Order Management Automation"
-description: Build a scheduled automation that finds newly placed orders in a database and advances them to processing, designed visually with a database connection and control flow.
-keywords: [wso2 integrator, automation, database, mysql, order management, persistence, scheduled job, use case, low-code]
+title: "Send MySQL order status emails over SMTP"
+sidebar_label: "Order Management Automation"
+description: Build a scheduled automation that finds newly placed orders in a database, emails each customer, and advances the order to processing, designed visually with database and email connections.
+keywords: [wso2 integrator, automation, database, mysql, email, smtp, notification, order management, scheduled job, use case, low-code]
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -10,37 +11,47 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Order Management Automation
+# Send MySQL order status emails over SMTP
 
-**Time:** About 20 minutes | **What you'll build:** A scheduled automation that finds newly placed orders in your database and advances them to processing, with nothing to trigger it and no code to write.
+**Time:** About 25 minutes | **What you'll build:** A scheduled automation that finds newly placed orders, emails each customer, and advances the order to processing, with no code to write.
 
-Orders pile up the moment customers start placing them, and something has to move each one from "placed" to "processing" before the warehouse can act on it. Doing that by hand does not scale, and a human checking the database every few minutes is exactly the kind of work software should own. In this guide you build an automation that wakes on a schedule, finds every order still waiting in your database, advances it to processing, and logs what it did. You design the whole thing on the canvas in the Visual Designer, and WSO2 Integrator writes the Ballerina for you.
+Every new order needs two things to happen: the customer should hear it is being handled, and the order should move from `PLACED` to `PROCESSING` so it is never picked up twice. In this guide you build a scheduled automation that does both, bridging your order database and your email server, designed entirely on the canvas in the Visual Designer.
 
 :::info What you will build
 
-An **automation** that, on each run, connects to a MySQL `orders_db`, reads every order whose status is still `PLACED`, updates each one to `PROCESSING`, and prints a short summary to the log. Run it once and the two waiting orders move forward; run it again with nothing left to do and it exits cleanly after a single log line.
+An **automation** that, on each run, reads every `PLACED` order from a MySQL `orders_db`, emails the customer, advances the order to `PROCESSING`, and logs a summary. The first run notifies the two waiting customers and moves their orders forward; a second run finds nothing to do and exits after one log line.
 
 :::
 
 ## How it works
 
-This integration has no listener and no inbound request to respond to. A scheduler invokes its entry point on a recurring basis, and each run walks through the same short flow:
+```mermaid
+flowchart LR
+    Scheduler((Scheduler)) -->|schedule| Automation[Automation]
+    Automation <-->|read / update orders| DB[(MySQL orders_db)]
+    Automation -->|send status email| SMTP[SMTP server]
+    SMTP -->|notify| Customer((Customer))
+```
+
+There is no listener or inbound request. A scheduler invokes the automation periodically, and each run follows the same short flow:
 
 1. Read the `orders` table for rows whose status is still `PLACED`.
 2. If nothing is waiting, log a note and stop.
-3. Otherwise, loop over the waiting orders and update each one to `PROCESSING`.
+3. Otherwise, for each waiting order, email the customer and update the order to `PROCESSING`.
 4. Log a one-line summary of how much work the run did.
 
 You assemble that flow from a handful of visual building blocks:
 
-| Building block | Role in the flow |
-| --- | --- |
-| **Connection** (`ordersDB`) | Reaches the MySQL database and exposes typed read and update operations |
-| **Automation** | The scheduled entry point that runs the logic with no inbound request |
-| **Get rows** | Reads the orders still waiting to be processed |
-| **If** + **Return** | Exits the run early when there is nothing to do |
-| **Foreach** + **Update row** | Iterates the waiting orders and advances each one |
-| **Log Info** | Records progress and a final summary |
+| Building block | Role in the flow | Learn more |
+| --- | --- | --- |
+| **Connection** (`ordersDB`) | Reads and updates orders in MySQL | [Connections](../../develop/integration-artifacts/supporting/connections.md), [Persist tool](../../develop/tools/integration-tools/persist-tool.md) |
+| **Connection** (`emailSmtpclient`) | Sends customer emails through an SMTP server | [Email connector](../../connectors/catalog/built-in/email/email.md) |
+| **Automation** | The scheduled entry point that runs the logic with no inbound request | [Automation](../../develop/integration-artifacts/automation.md) |
+| **Get rows** | Reads the orders still waiting to be processed | [Persist tool](../../develop/tools/integration-tools/persist-tool.md#use-the-generated-client) |
+| **If** + **Return** | Exits the run early when there is nothing to do | [Control](../../develop/understand-ide/editors/flow-diagram-editor/control.md) |
+| **Foreach** | Iterates the waiting orders | [Control](../../develop/understand-ide/editors/flow-diagram-editor/control.md#foreach) |
+| **Send Message** + **Update row** | Emails the customer, then advances the order | [Email connector](../../connectors/catalog/built-in/email/email.md), [Persist tool](../../develop/tools/integration-tools/persist-tool.md#use-the-generated-client) |
+| **Log Info** | Records progress and a final summary | [Logging](../../develop/understand-ide/editors/flow-diagram-editor/logging.md) |
 
 ## Before you begin
 
@@ -51,12 +62,16 @@ You assemble that flow from a handful of visual building blocks:
     - [Local setup](../../get-started/setup/local-setup.md) to install and launch the WSO2 Integrator IDE on your machine.
 - MySQL Server 8.0 or later running on `localhost:3306`. If you need to install or configure it, follow the [MySQL connector setup guide](../../connectors/catalog/database/mysql/setup-guide.md).
 - The sample `orders_db` database, seeded with the data below.
+- An SMTP-enabled email account to send the customer notifications, configured per the [Email connector setup guide](../../connectors/catalog/built-in/email/setup-guide.md) (for example, Gmail with an App Password).
 
 :::
 
 ### Set up the sample database
 
-Run the following against your MySQL server to create the database, a dedicated user, the tables, and the seed data. Two orders start in `PLACED` status (the work this automation will pick up) and two are already `PROCESSING`.
+Run this against your MySQL server to create the database, user, tables, and seed data. Two orders start as `PLACED` (the work to pick up) and two as `PROCESSING`.
+
+<details>
+<summary>View the database setup script</summary>
 
 ```sql
 -- Create the database and a dedicated user
@@ -113,72 +128,42 @@ INSERT INTO orders (order_id, customer_id, product_id, amount, status) VALUES
     ('ORD-004', 'CUST-004', 'PROD-004', 49.99,  'PROCESSING');
 ```
 
-The user needs `SELECT` so the automation can find waiting orders and `UPDATE` so it can advance them. For the full schema and a seed-data reference you can copy, see [Data persistence: set up the database](../../develop/integration-artifacts/supporting/data-persistence.md#set-up-the-database).
+</details>
+
+## Build the automation
+
+Build the flow in the **Visual Designer**, or switch to the **Ballerina Code** tab to see the equivalent source the designer generates for you.
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
 
 ## Step 1: Create the automation
 
-The job runs on a schedule with no inbound request, so the artifact you reach for is an [**automation**](../../develop/integration-artifacts/automation.md#creating-an-automation).
+An [automation](../../develop/integration-artifacts/automation.md#creating-an-automation) runs on a schedule with no inbound request, which makes it the right artifact for a recurring job.
 
-1. Open WSO2 Integrator and select the **Create New Integration** card.
-2. Set **Integration Name** to `OrderProcessingAutomation` and **Project Name** to `order-management-automation`, then select **Create Integration**.
+1. Create a new integration named `OrderProcessingAutomation` in a project named `order-management-automation`.
+2. Add an **Automation** artifact to the integration.
 
-<ThemedImage
-    alt="Create New Integration form with Integration Name set to OrderProcessingAutomation and Project Name set to order-management-automation"
-    sources={{
-        light: useBaseUrl('/img/guides/usecases/order-management-automation/create-integration.png'),
-        dark: useBaseUrl('/img/guides/usecases/order-management-automation/create-integration.png'),
-    }}
-/>
-
-3. From the project overview, open the integration and select **+ Add Artifact**. Under **Automation**, select **Automation**, then **Create**.
-
-<ThemedImage
-    alt="Add Artifact panel showing the Automation, AI, Integration as API, Event, and File categories with Automation selected"
-    sources={{
-        light: useBaseUrl('/img/guides/usecases/order-management-automation/add-automation-artifact.png'),
-        dark: useBaseUrl('/img/guides/usecases/order-management-automation/add-automation-artifact.png'),
-    }}
-/>
-
-You land in the [flow editor](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md) with a single **Start** node. That is the entry point the scheduler will call.
-
-> **Capability: Automation.** You created a scheduled entry point that runs your logic without any inbound request. See [Automation](../../develop/integration-artifacts/automation.md).
+You land in the [flow editor](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md) with a single **Start** node, the entry point the scheduler will call.
 
 ## Step 2: Connect to the order database
 
-The automation needs to reach the orders. Rather than hand-writing a connection string and a data model, you add a [**connection**](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection) and let WSO2 Integrator [introspect the database](../../develop/tools/integration-tools/persist-tool.md#connect-to-a-database) for you.
+1. Add a [connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection): **Add Connection → Connect to a Database → MySQL**.
+2. Enter the credentials below, then [introspect](../../develop/tools/integration-tools/persist-tool.md#connect-to-a-database) the schema.
+3. Select all tables.
+4. Name the connection `ordersDB`.
 
-1. In the flow editor, select **+** below the **Start** node to open the node panel, then select **Add Connection**.
-2. Under **Create New Connector**, choose **Connect to a Database**, then select **MySQL**.
-3. On the **Database Credentials** step, enter the connection details, then select **Connect & Introspect Database**:
+| Field | Value |
+| --- | --- |
+| Host | `localhost` |
+| Port | `3306` |
+| Database | `orders_db` |
+| Username | `orders_user` |
+| Password | `orders_pass` |
 
-    | Field | Value |
-    | --- | --- |
-    | Host | `localhost` |
-    | Port | `3306` |
-    | Database | `orders_db` |
-    | Username | `orders_user` |
-    | Password | `orders_pass` |
+WSO2 Integrator generates a typed client and record types from the schema, and stores the connection settings as [configurable values](../../develop/tools/integration-tools/persist-tool.md#use-the-generated-client) so you can repoint it per environment.
 
-<ThemedImage
-    alt="Database Credentials step of the connection wizard filled in for the MySQL orders_db database"
-    sources={{
-        light: useBaseUrl('/img/guides/usecases/order-management-automation/db-connection-credentials.png'),
-        dark: useBaseUrl('/img/guides/usecases/order-management-automation/db-connection-credentials.png'),
-    }}
-/>
-
-4. On the **Select Tables** step, choose **Select All**. The `customers`, `products`, and `orders` tables come in together because their relationships are detected for you. Select **Continue to Connection Details**.
-
-<ThemedImage
-    alt="Select Tables step with the customers, orders, and products tables all selected"
-    sources={{
-        light: useBaseUrl('/img/guides/usecases/order-management-automation/db-select-tables.png'),
-        dark: useBaseUrl('/img/guides/usecases/order-management-automation/db-select-tables.png'),
-    }}
-/>
-
-5. Set **Connection Name** to `ordersDB` and select **Save Connection**.
+The `ordersDB` connection now appears under **Connections**.
 
 <ThemedImage
     alt="Flow editor showing the ordersDB connection available after the wizard completes"
@@ -188,38 +173,15 @@ The automation needs to reach the orders. Rather than hand-writing a connection 
     }}
 />
 
-WSO2 Integrator reads the schema and generates a [typed data-access client](../../develop/tools/integration-tools/persist-tool.md#use-the-generated-client) along with [record types](../../develop/integration-artifacts/supporting/types.md#adding-a-type) such as `PlacedOrdersType`. You never write a query string or model a table by hand.
-
-:::info Note
-
-The whole connection is generated as configurable values, not just the password, so you can repoint the integration at a different database per environment without editing the design. The host, port, user, and database take the values you entered as defaults, while the password has no default (`= ?`), so you supply it at run time:
-
-```ballerina
-configurable string ordersDBHost = "localhost";
-configurable int ordersDBPort = 3306;
-configurable string ordersDBUser = "orders_user";
-configurable string ordersDBPassword = ?;
-configurable string ordersDBDatabase = "orders_db";
-```
-
-:::
-
-> **Capability: Database connection.** A single visual step gives you typed, generated access to every table. See [Data persistence: create the MySQL connection](../../develop/integration-artifacts/supporting/data-persistence.md#step-1-create-the-mysql-connection) for a step-by-step reference, [Connections](../../develop/integration-artifacts/supporting/connections.md) for connection management, and the [Persist tool](../../develop/tools/integration-tools/persist-tool.md) for how introspection generates the data layer.
-
 ## Step 3: Read the orders waiting to be processed
 
-The first thing each run needs is the list of orders still sitting in `PLACED`. The generated client already has a read operation for the `orders` table; you just point it at the rows you care about.
-
-1. Select **+** below the **Start** node, choose the **ordersDB** connection, and select **Get rows from orders table.**
+1. After the **Start** node, add the `ordersDB` connection's `Get rows from orders table` operation.
 2. Set **Result** to `placedOrders` and check **Select All Fields**.
-3. Expand **Advanced Configurations** and, in the **Where Clause** field, enter `status = ${"PLACED"}` so the operation returns only the waiting orders.
-4. Select **Save**.
+3. Under **Advanced Configurations**, set the **Where Clause** to `status = ${"PLACED"}` so it returns only the waiting orders.
 
-:::info Note
+You type just the condition; WSO2 Integrator turns it into a safe parameterized query.
 
-You type just the condition. WSO2 Integrator turns it into a safe parameterized query for you, so values are never concatenated into raw SQL.
-
-:::
+Your **Where Clause** should match the checkpoint below.
 
 <ThemedImage
     alt="Get rows operation configured with Result placedOrders, Select All Fields, and a Where Clause filtering on status PLACED"
@@ -229,29 +191,15 @@ You type just the condition. WSO2 Integrator turns it into a safe parameterized 
     }}
 />
 
-`placedOrders` is now a typed list of the orders this run should act on.
-
-> **Capability: Typed data access.** You query the database through a generated, strongly typed operation instead of raw SQL. See [Data persistence: get newly placed orders](../../develop/integration-artifacts/supporting/data-persistence.md#step-21-get-newly-placed-orders).
-
 ## Step 4: Skip the run when nothing is waiting
 
-If no orders are waiting, the automation should do nothing and stop. You close that case before doing any work, so an empty run stays cheap and quiet.
+Exit early when there is nothing to do, so an empty run stays cheap and quiet.
 
-1. Select **+** below the **get** node, open the node panel, and under **Control** select **If**.
-2. Set the **Condition** to `placedOrders.length() == 0` and select **Save**.
+1. Add an [**If**](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) node after **get** with the condition `placedOrders.length() == 0`.
+2. Inside the branch, add a **Log Info** node with the message `"No new orders to process."`
+3. After the log, add a [**Return**](../../develop/understand-ide/editors/flow-diagram-editor/control.md#return) node with no value.
 
-<ThemedImage
-    alt="If control node with the condition placedOrders.length() equals 0"
-    sources={{
-        light: useBaseUrl('/img/guides/usecases/order-management-automation/if-empty-check.png'),
-        dark: useBaseUrl('/img/guides/usecases/order-management-automation/if-empty-check.png'),
-    }}
-/>
-
-3. Inside the **If** branch, add a [**Log Info**](../../develop/understand-ide/editors/flow-diagram-editor/logging.md#log-info) node (under **Logging**), set **Msg** to `"No new orders to process."`, and select **Save**.
-4. After the log node, add a **Return** node with no value to end the run.
-
-Your flow now branches: when no orders are waiting it logs a message and returns; otherwise it falls through to the work you add next.
+Your flow should now branch and return early when nothing is waiting.
 
 <ThemedImage
     alt="Flow with the If branch built: when placedOrders is empty it logs No new orders to process and returns"
@@ -261,94 +209,140 @@ Your flow now branches: when no orders are waiting it logs a message and returns
     }}
 />
 
-> **Capability: Control flow.** A visual [**If**](../../develop/understand-ide/editors/flow-diagram-editor/control.md#if) and [**Return**](../../develop/understand-ide/editors/flow-diagram-editor/control.md#return) let the automation branch and exit without a line of hand-written logic. For this exact early-exit pattern, see [Data persistence: handle the case where no orders need processing](../../develop/integration-artifacts/supporting/data-persistence.md#step-22-handle-the-case-where-no-orders-need-processing).
+## Step 5: Notify the customer and advance the order
 
-## Step 5: Advance each order to processing
+To reach your mail server, add an [**Email Smtp**](../../connectors/catalog/built-in/email/email.md) connection named `emailSmtpclient`, binding **Host**, **Username**, **Password**, and **Port** to configurable values and setting **Security** to match your server.
 
-Now for the real work: walk the waiting orders and move each one forward. A **Foreach** node loops the list, and the generated update operation writes the new status back to the database.
+Then build the loop:
 
-1. Select **+** below the **If** node, open the node panel, and under **Control** select [**Foreach**](../../develop/understand-ide/editors/flow-diagram-editor/control.md#foreach). Set **Collection** to `placedOrders` and **Variable Name** to `placedOrder` (the **Variable Type** `PlacedOrdersType` is filled in for you). Select **Save**.
+1. Add a [**Foreach**](../../develop/understand-ide/editors/flow-diagram-editor/control.md#foreach) node after the **If**, looping over `placedOrders` with the item variable `placedOrder` (type `PlacedOrdersType`).
+2. Inside the loop, add the `ordersDB` **Update row in orders table.** operation: **orderId** = `placedOrder.orderId`, **Value** = `{status: "PROCESSING"}`, **Result** = `updatedOrder`.
+3. Inside the loop, add the `emailSmtpclient` **Send Message** operation. In the **Email** record, set **to** to `placedOrder.customer.email`, **subject** to `placedOrder.orderId + ": status update"`, and **body** to `"Hi " + placedOrder.customer.name + ", your order " + placedOrder.orderId + " is now being processed."`.
+4. Inside the loop, add a **Log Info** node with the message `` string `Order advanced to PROCESSING: ${updatedOrder.orderId}` ``.
 
-<ThemedImage
-    alt="Foreach node configured to loop over placedOrders with item variable placedOrder of type PlacedOrdersType"
-    sources={{
-        light: useBaseUrl('/img/guides/usecases/order-management-automation/foreach-config.png'),
-        dark: useBaseUrl('/img/guides/usecases/order-management-automation/foreach-config.png'),
-    }}
-/>
-
-2. Select **+** *inside* the **Foreach** body, choose the **ordersDB** connection, and select **Update row in orders table.** Configure it:
-    - **orderId**: `placedOrder.orderId`
-    - **Value**: `{status: "PROCESSING"}`
-    - **Result**: `updatedOrder`
-
-    Then select **Save**. The update now runs once for every order the loop visits.
+The loop now advances each order, emails its customer, and logs the result.
 
 <ThemedImage
-    alt="Update row operation added inside the Foreach loop, setting status to PROCESSING for the current order"
-    sources={{
-        light: useBaseUrl('/img/guides/usecases/order-management-automation/foreach-update.png'),
-        dark: useBaseUrl('/img/guides/usecases/order-management-automation/foreach-update.png'),
-    }}
-/>
-
-3. Still inside the **Foreach**, add a **Log Info** node so each advanced order leaves a trail. Set **Msg** to:
-
-    ```
-    string `Order advanced to PROCESSING: ${updatedOrder.orderId}`
-    ```
-
-    Then select **Save**.
-
-The loop body is now complete: for each waiting order it updates the row and logs the advance.
-
-<ThemedImage
-    alt="Foreach loop containing the Update row operation and a Log Info node that records each advanced order"
+    alt="Foreach loop that updates the order to PROCESSING, sends the customer an email through emailSmtpclient, and logs the advance"
     sources={{
         light: useBaseUrl('/img/guides/usecases/order-management-automation/foreach-complete.png'),
         dark: useBaseUrl('/img/guides/usecases/order-management-automation/foreach-complete.png'),
     }}
 />
 
-> **Capability: Iteration and persistence.** A **Foreach** loop and a generated **Update row** operation advance every waiting order, all designed on the canvas. See [Data persistence: loop and update each order](../../develop/integration-artifacts/supporting/data-persistence.md#step-23-loop-and-update-each-order).
-
 ## Step 6: Log a summary
 
-After the loop finishes, one line tells you how much the run accomplished.
+After the **Foreach** node, add a final [**Log Info**](../../develop/understand-ide/editors/flow-diagram-editor/logging.md#log-info) node with the message `` string `Done - processed ${placedOrders.length()} orders` ``.
 
-1. After the **Foreach** node, add a **Log Info** node.
-2. Set **Msg** to the following, then select **Save**:
-
-    ```
-    string `Done - processed ${placedOrders.length()} orders`
-    ```
-
-Your flow is complete. It reads the waiting orders, exits early when there are none, advances each one, and reports a summary.
+Your flow is complete: it reads the waiting orders, exits early when there are none, advances each one, and reports a summary.
 
 <ThemedImage
-    alt="Complete automation flow: Start, get placed orders, If empty branch with log and return, then Foreach with update and log"
+    alt="Complete automation flow: Start, get placed orders, If empty branch with log and return, then Foreach with update, send email, and log"
     sources={{
         light: useBaseUrl('/img/guides/usecases/order-management-automation/full-flow.png'),
         dark: useBaseUrl('/img/guides/usecases/order-management-automation/full-flow.png'),
     }}
 />
 
-> **Capability: Logging.** Built-in log nodes give every run an audit trail with no logging boilerplate. See [Logging](../../develop/understand-ide/editors/flow-diagram-editor/logging.md) for every log level, and [Data persistence: log the summary](../../develop/integration-artifacts/supporting/data-persistence.md#step-24-log-the-summary).
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+You design this on the canvas and never write any of it. The Visual Designer keeps the source in sync across `connections.bal`, `types.bal`, and `automation.bal`.
+
+```ballerina
+// connections.bal
+import orderprocessingautomation.ordersdb;
+
+import ballerina/email;
+
+final ordersdb:Client ordersDB = check new (ordersDBHost, ordersDBPort, ordersDBUser, ordersDBPassword, ordersDBDatabase);
+
+final email:SmtpClient emailSmtpclient = check new (string `${emailHost}`, string `${emailUserName}`, string `${emailPassword}`, port = emailPort, security = "START_TLS_NEVER");
+```
+
+```ballerina
+// types.bal
+import ballerina/time;
+
+public type PlacedOrdersType record {|
+    string orderId;
+    decimal amount;
+    string status;
+    time:Civil placedAt;
+    string customerId;
+    string productId;
+    PlacedOrdersCustomerType customer;
+    PlacedOrdersProductType product;
+|};
+
+public type PlacedOrdersCustomerType record {|
+    string customerId;
+    string name;
+    string email;
+    string address;
+|};
+
+public type PlacedOrdersProductType record {|
+    string productId;
+    string productName;
+    string category;
+    decimal price;
+|};
+```
+
+```ballerina
+// automation.bal
+import orderprocessingautomation.ordersdb;
+
+import ballerina/log;
+
+public function main() returns error? {
+    do {
+        PlacedOrdersType[] placedOrders = check ordersDB->/orders.get(whereClause = `status = ${"PLACED"}`);
+        if placedOrders.length() == 0 {
+            log:printInfo("No new orders to process.");
+            return;
+        }
+        foreach PlacedOrdersType placedOrder in placedOrders {
+            ordersdb:Order updatedOrder = check ordersDB->/orders/[placedOrder.orderId].put({status: "PROCESSING"});
+            check emailSmtpclient->sendMessage({
+                to: placedOrder.customer.email,
+                subject: placedOrder.orderId + ": status update",
+                body: "Hi " + placedOrder.customer.name + ", your order " + placedOrder.orderId + " is now being processed."
+            });
+            log:printInfo(string `Order advanced to PROCESSING: ${updatedOrder.orderId}`);
+        }
+        log:printInfo(string `Done - processed ${placedOrders.length()} orders`);
+    } on fail error e {
+        log:printError("Error occurred", 'error = e);
+        return e;
+    }
+}
+```
+
+The clients and the typed [`PlacedOrdersType` record](../../develop/integration-artifacts/supporting/types.md) are generated when you create the connections; the flow logic, as you build the canvas.
+
+</TabItem>
+</Tabs>
 
 ## Run and verify
 
-1. Select **Run** on the integration overview. The first run needs the database password. When prompted, create the `Config.toml` and add:
+1. Select **Run** on the integration overview. When prompted, create the `Config.toml` and supply the database password and your SMTP server details:
 
     ```toml
     ordersDBPassword = "orders_pass"
+    emailHost = "smtp.example.com"
+    emailUserName = "orders@example.com"
+    emailPassword = "<your-smtp-password>"
+    emailPort = 465
     ```
 
-2. Watch the terminal. Each waiting order advances, and a final line reports the count:
+2. Watch the terminal. Each waiting order advances, its customer is emailed, and a final line reports the count:
 
     ```
-    time=2026-06-19T16:05:21.917+05:30 level=INFO module=.../orderprocessingautomation message="Order advanced to PROCESSING: ORD-001"
-    time=2026-06-19T16:05:21.928+05:30 level=INFO module=.../orderprocessingautomation message="Order advanced to PROCESSING: ORD-002"
-    time=2026-06-19T16:05:21.929+05:30 level=INFO module=.../orderprocessingautomation message="Done - processed 2 orders"
+    time=2026-06-22T15:30:03.334+05:30 level=INFO module=.../orderprocessingautomation message="Order advanced to PROCESSING: ORD-001"
+    time=2026-06-22T15:30:03.366+05:30 level=INFO module=.../orderprocessingautomation message="Order advanced to PROCESSING: ORD-002"
+    time=2026-06-22T15:30:03.367+05:30 level=INFO module=.../orderprocessingautomation message="Done - processed 2 orders"
     ```
 
 <ThemedImage
@@ -365,7 +359,7 @@ Your flow is complete. It reads the waiting orders, exits early when there are n
     SELECT order_id, status FROM orders_db.orders WHERE order_id IN ('ORD-001', 'ORD-002');
     ```
 
-    Both rows now read `PROCESSING`.
+    Both rows now read `PROCESSING`, and the two customers (`ada@example.com` and `alan@example.com`) have each received a status-update email.
 
 4. Run the automation a second time. Nothing is waiting, so the early exit kicks in and the terminal shows a single line:
 
@@ -382,48 +376,11 @@ UPDATE orders_db.orders SET status = 'PLACED' WHERE order_id IN ('ORD-001', 'ORD
 ```
 :::
 
-## The generated integration
-
-You designed every step on the canvas. Here is the Ballerina that the Visual Designer generated for you, shown only so you can see there is nothing hidden. You did not write any of it.
-
-<Tabs>
-<TabItem value="automation" label="automation.bal" default>
-
-```ballerina
-import orderprocessingautomation.ordersdb;
-
-import ballerina/log;
-import ballerina/persist;
-import ballerina/sql;
-
-public function main() returns error? {
-    do {
-        PlacedOrdersType[] placedOrders = check ordersDB->/orders.get(whereClause = `status = ${"PLACED"}`);
-        if placedOrders.length() == 0 {
-            log:printInfo("No new orders to process.");
-            return;
-        }
-        foreach PlacedOrdersType placedOrder in placedOrders {
-            ordersdb:Order updatedOrder = check ordersDB->/orders/[placedOrder.orderId].put({status: "PROCESSING"});
-            log:printInfo(string `Order advanced to PROCESSING: ${updatedOrder.orderId}`);
-        }
-        log:printInfo(string `Done - processed ${placedOrders.length()} orders`);
-    } on fail error e {
-        log:printError("Error occurred", 'error = e);
-        return e;
-    }
-}
-```
-
-</TabItem>
-</Tabs>
-
-The connection, the typed [`PlacedOrdersType` record](../../develop/integration-artifacts/supporting/types.md), and the [data-access client](../../develop/tools/integration-tools/persist-tool.md#use-the-generated-client) were all generated when you introspected the database; the flow logic was generated as you built the canvas.
-
 ## What's next
 
 Now that the automation works, you can take it further:
 
-- **Deploy and schedule it.** Ship the automation to wherever it should run: [WSO2 Cloud](../../deploy/cloud/overview.md), a [container on Docker or Kubernetes](../../deploy/self-hosted/containerized-deployment.md), or a [virtual machine](../../deploy/self-hosted/vm-deployment.md). Once it is deployed, configure periodic invocation in that environment: a `cron` entry on a Unix or Linux host, a Kubernetes `CronJob`, a host scheduler such as Windows Task Scheduler or `systemd` timers, or the schedule settings in the WSO2 Integration Platform.
-- **Notify a downstream system.** Add a [connector](../../connectors/overview.md) inside the loop to post each advanced order to a fulfillment service, a message broker, or a chat channel.
-- **Handle more of the lifecycle.** Extend the same pattern to move orders from `PROCESSING` to `SHIPPED`, or to flag orders that have been waiting too long. To shape the data you pass on, define your own [types](../../develop/integration-artifacts/supporting/types.md#adding-a-type) or transform between them with the [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md).
+- **Deploy and schedule it.** Ship it to [WSO2 Cloud](../../deploy/cloud/overview.md), a [container](../../deploy/self-hosted/containerized-deployment.md), or a [virtual machine](../../deploy/self-hosted/vm-deployment.md), then schedule periodic runs there (a `cron` entry, a Kubernetes `CronJob`, a host scheduler, or the WSO2 Integration Platform).
+- **Richen the notification.** The [Email connector](../../connectors/catalog/built-in/email/email.md) also supports HTML bodies, CC/BCC, and attachments, so the plain note can become a branded confirmation.
+- **Reach other channels.** Drop another [connector](../../connectors/overview.md) into the loop to post each order to a fulfillment service, message broker, or chat channel like Slack.
+- **Handle more of the lifecycle.** Reuse the pattern to move orders from `PROCESSING` to `SHIPPED` or flag stale ones, shaping data with your own [types](../../develop/integration-artifacts/supporting/types.md#adding-a-type) or the [Data Mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md).
