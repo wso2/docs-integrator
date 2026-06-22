@@ -100,7 +100,7 @@ Then follow the steps below to configure metrics and tracing data publishing to 
 ## Step 3: Import Prometheus and Jaeger Extensions
 
 To include the Prometheus and Jaeger extensions into the executable, the `ballerinax/prometheus` and `ballerinax/jaeger`
-modules need to be imported into your integration. Open the the file explorer in WSO2 Integrator add the below to the `main.bal` file.
+modules need to be imported into your integration. Open the file explorer in WSO2 Integrator and add the following content to the `main.bal` file.
 
 ```ballerina
 import ballerinax/prometheus as _;

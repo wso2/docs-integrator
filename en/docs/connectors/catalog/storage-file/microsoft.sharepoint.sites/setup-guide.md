@@ -1,6 +1,6 @@
 ---
 connector: true
-connector_name: "sharepoint.sites"
+connector_name: "microsoft.sharepoint.sites"
 title: "Setup Guide"
 description: "How to set up and configure the ballerinax/microsoft.sharepoint.sites connector."
 ---
@@ -30,29 +30,29 @@ This guide walks you through provisioning a Microsoft 365 tenant, registering an
 
 3. In the left panel, navigate to **App registrations** and click **New registration**.
 
-   ![New application registration](/img/connectors/catalog/storage-file/sharepoint.sites/new-application-registration.png)
+   ![New application registration](/img/connectors/catalog/storage-file/microsoft.sharepoint.sites/new-application-registration.png)
 
 4. Enter a name for your application, select the appropriate **Supported account types** (e.g., "Single tenant only"), and click **Register**.
 
-   ![Application registration details](/img/connectors/catalog/storage-file/sharepoint.sites/application-registration-details.png)
+   ![Application registration details](/img/connectors/catalog/storage-file/microsoft.sharepoint.sites/application-registration-details.png)
 
 5. Once the application is registered, copy the **Application (client) ID** and **Directory (tenant) ID** from the Overview page.
 
-   ![Client ID and Tenant ID](/img/connectors/catalog/storage-file/sharepoint.sites/client-id-and-tenant-id.png)
+   ![Client ID and Tenant ID](/img/connectors/catalog/storage-file/microsoft.sharepoint.sites/client-id-and-tenant-id.png)
 
 6. Navigate to **Certificates & secrets** in the left panel, click **New client secret**, provide a description and expiry period, then click **Add**. Copy the generated **client secret value** immediately — it cannot be retrieved later.
 
-   ![Create client secret](/img/connectors/catalog/storage-file/sharepoint.sites/create-client-secret.png)
+   ![Create client secret](/img/connectors/catalog/storage-file/microsoft.sharepoint.sites/create-client-secret.png)
 
 ## Configure API permissions
 
 1. Navigate to **API permissions** in the left panel and click **Add a permission**.
 
-   ![Add API permission](/img/connectors/catalog/storage-file/sharepoint.sites/add-api-permission.png)
+   ![Add API permission](/img/connectors/catalog/storage-file/microsoft.sharepoint.sites/add-api-permission.png)
 
 2. Select **Microsoft Graph** from the available API options.
 
-   ![Microsoft Graph API permission](/img/connectors/catalog/storage-file/sharepoint.sites/microsoft-graph-api-permission.png)
+   ![Microsoft Graph API permission](/img/connectors/catalog/storage-file/microsoft.sharepoint.sites/microsoft-graph-api-permission.png)
 
 3. Choose **Application permissions**, then search for and add the permissions that match your use case before clicking **Add permissions**.
 
@@ -63,7 +63,7 @@ This guide walks you through provisioning a Microsoft 365 tenant, registering an
    | `Sites.Manage.All`      | Update site properties, create/delete columns and content types |
    | `Sites.FullControl.All` | Manage site permissions                                         |
 
-   ![API site permissions](/img/connectors/catalog/storage-file/sharepoint.sites/api-site-permissions.png)
+   ![API site permissions](/img/connectors/catalog/storage-file/microsoft.sharepoint.sites/api-site-permissions.png)
 
    :::tip
    Grant only the permissions your application actually requires. For read-only use cases, `Sites.Read.All` is sufficient. For full connector coverage, add all four.
@@ -71,7 +71,7 @@ This guide walks you through provisioning a Microsoft 365 tenant, registering an
 
 4. Click **Grant admin consent** to approve the permissions for your organization.
 
-   ![Grant admin consent](/img/connectors/catalog/storage-file/sharepoint.sites/grant-admin-consent.png)
+   ![Grant admin consent](/img/connectors/catalog/storage-file/microsoft.sharepoint.sites/grant-admin-consent.png)
 
 ## Construct the token URL
 

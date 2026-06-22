@@ -1,0 +1,65 @@
+name: Broken Link Comment
+
+# Companion to broken-link-check.yaml. That workflow runs on `pull_request` (read-only
+# token for fork PRs) and uploads the rendered comment body + PR number as an artifact.
+# This workflow is triggered by its completion via `workflow_run`, so it runs in the BASE
+# repo context with a read-write GITHUB_TOKEN — and can post the comment even for forks.
+#
+# Security: this workflow never checks out or runs PR code. It only downloads a text
+# artifact and posts a comment, so the untrusted fork code (built/crawled in the other
+# workflow) is never in scope with the write token. This is GitHub's recommended pattern
+# for commenting on fork PRs without using pull_request_target.
+
+on:
+  workflow_run:
+    workflows: ["Broken Link Check"]
+    types:
+      - completed
+
+permissions:
+  contents: read
+  actions: read
+  pull-requests: write
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download comment artifact
+        id: download
+        continue-on-error: true
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: broken-link-comment
+          path: artifact
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Post results as a PR comment
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        with:
+          script: |
+            const fs = require('fs');
+            const bodyPath = 'artifact/comment-body.md';
+            const prPath = 'artifact/pr-number.txt';
+            if (!fs.existsSync(bodyPath) || !fs.existsSync(prPath)) {
+              core.info('No comment artifact found — the check produced no comment body. Skipping.');
+              return;
+            }
+            const body = fs.readFileSync(bodyPath, 'utf8');
+            const issue_number = parseInt(fs.readFileSync(prPath, 'utf8').trim(), 10);
+            if (!issue_number) {
+              core.info('No PR number in artifact — skipping.');
+              return;
+            }
+            const marker = '<!-- broken-link-check -->';
+            const { owner, repo } = context.repo;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number, per_page: 100,
+            });
+            const existing = comments.find((c) => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }

@@ -1,10 +1,13 @@
 ---
 title: "Overview"
+description: "HubSpot Automation Actions is part of the HubSpot CRM platform, enabling developers to create custom workflow actions (extensions) that integrate external services into HubSpot workflows."
+connector: true
+connector_name: "hubspot.automation.actions"
 ---
 
 # Overview
 
-HubSpot Automation Actions is part of the HubSpot CRM platform, enabling developers to create custom workflow actions (extensions) that integrate external services into HubSpot workflows. The Ballerina `ballerinax/hubspot.automation.actions` connector provides programmatic access to the HubSpot Automation Actions API v4, allowing you to manage extension definitions, custom functions, revisions, and complete workflow callbacks.
+HubSpot Automation Actions is part of the HubSpot CRM platform, enabling developers to create custom workflow actions (extensions) that integrate external services into HubSpot workflows. The `ballerinax/hubspot.automation.actions` connector provides programmatic access to the HubSpot Automation Actions API v4, allowing you to manage extension definitions, custom functions, revisions, and complete workflow callbacks.
 
 
 ## Key features

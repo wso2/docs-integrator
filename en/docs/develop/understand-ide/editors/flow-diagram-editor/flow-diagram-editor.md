@@ -39,28 +39,28 @@ Each section of the node palette covers one kind of work. The pages below descri
 
 | Section | Use it for | Nodes |
 |---|---|---|
-| [Connections](./connections) | Invoking actions on a configured client. | `Connection`, plus the actions exposed by each connection type |
-| [Statement](./statement) | Declaring and updating variables, calling functions, and mapping data. | `Declare Variable`, `Update Variable`, `Call Function`, `Map Data` |
-| [Control](./control) | Branching on conditions, matching values, looping, and returning from a flow. | `If`, `Match`, `While`, `Foreach`, `Return` |
-| [AI](./ai) | Calling LLMs directly, building RAG pipelines, and running agents. | `Model Provider`, `Knowledge Base`, `Data Loader`, `Augment Query`, `Agent` |
-| [Error handling](./error-handling) | Catching errors, raising failures, and aborting on unrecoverable conditions. | `ErrorHandler`, `Fail`, `Panic` |
-| [Concurrency](./concurrency) | Running work in parallel, joining workers, and protecting shared state. | `Fork`, `Wait`, `Lock` |
-| [Logging](./logging) | Emitting log messages at info, error, warn, or debug severity. | `Log Info`, `Log Error`, `Log Warn`, `Log Debug` |
-| [Show more functions](./show-more-functions) | Reaching any function the project has access to when the panel does not list it as a shortcut. | Full functions picker (`Within Project`, `Imported Functions`, `Standard Library`) |
+| [Connections](./connections.md) | Invoking actions on a configured client. | `Connection`, plus the actions exposed by each connection type |
+| [Statement](./statement.md) | Declaring and updating variables, calling functions, and mapping data. | `Declare Variable`, `Update Variable`, `Call Function`, `Map Data` |
+| [Control](./control.md) | Branching on conditions, matching values, looping, and returning from a flow. | `If`, `Match`, `While`, `Foreach`, `Return` |
+| [AI](./ai.md) | Calling LLMs directly, building RAG pipelines, and running agents. | `Model Provider`, `Knowledge Base`, `Data Loader`, `Augment Query`, `Agent` |
+| [Error handling](./error-handling.md) | Catching errors, raising failures, and aborting on unrecoverable conditions. | `ErrorHandler`, `Fail`, `Panic` |
+| [Concurrency](./concurrency.md) | Running work in parallel, joining workers, and protecting shared state. | `Fork`, `Wait`, `Lock` |
+| [Logging](./logging.md) | Emitting log messages at info, error, warn, or debug severity. | `Log Info`, `Log Error`, `Log Warn`, `Log Debug` |
+| [Show more functions](./show-more-functions.md) | Reaching any function the project has access to when the panel does not list it as a shortcut. | Full functions picker (`Within Project`, `Imported Functions`, `Standard Library`) |
 
 ## Configuring a node
 
 Most nodes open a configuration form in a side panel when you add them. Forms commonly include:
 
-- **Expression fields** for writing Ballerina expressions. The [Expression editor](../expression-editor) provides type-aware autocomplete and inline validation in any expression field.
-- **Type fields** for choosing or defining record, enum, union, or other types. Use the [Type editor](../type-editor) to create new types inline.
+- **Expression fields** for writing Ballerina expressions. The [Expression editor](../expression-editor.md) provides type-aware autocomplete and inline validation in any expression field.
+- **Type fields** for choosing or defining record, enum, union, or other types. Use the [Type editor](../type-editor.md) to create new types inline.
 - **Variable fields** that bind a result to a named variable for downstream nodes to read.
 
 Save the form to add the node to the flow. The visual designer keeps the canvas and the source in sync, so any change in either view is immediately reflected in the other.
 
 ## What's next
 
-- [Connections](./connections) — Invoke actions on configured clients.
-- [Statement](./statement) — Variables, function calls, and data mapping.
-- [Control](./control) — Conditionals, loops, and returns.
-- [AI](./ai) — LLM calls, RAG, and agents.
+- [Connections](./connections.md) — Invoke actions on configured clients.
+- [Statement](./statement.md) — Variables, function calls, and data mapping.
+- [Control](./control.md) — Conditionals, loops, and returns.
+- [AI](./ai.md) — LLM calls, RAG, and agents.

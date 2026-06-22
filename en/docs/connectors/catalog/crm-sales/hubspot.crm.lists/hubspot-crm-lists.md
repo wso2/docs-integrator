@@ -1,9 +1,13 @@
 ---
-title: "HubSpot CRM Lists"
-description: "Overview of the ballerinax/hubspot.crm.lists connector for WSO2 Integrator."
+title: "Overview"
+description: "HubSpot CRM Lists allows you to create, manage, and segment lists of CRM records such as contacts, companies, deals, and tickets."
+connector: true
+connector_name: "hubspot.crm.lists"
 ---
 
-HubSpot CRM Lists allows you to create, manage, and segment lists of CRM records such as contacts, companies, deals, and tickets. The Ballerina `ballerinax/hubspot.crm.lists` connector (v1.0.0) provides programmatic access to the HubSpot Lists API v3, enabling you to create dynamic and manual lists, manage list memberships, organize lists into folders, and search across lists from your Ballerina integration flows.
+# Overview
+
+HubSpot CRM Lists allows you to create, manage, and segment lists of CRM records such as contacts, companies, deals, and tickets. The `ballerinax/hubspot.crm.lists` connector (v1.0.0) provides programmatic access to the HubSpot Lists API v3, enabling you to create dynamic and manual lists, manage list memberships, organize lists into folders, and search across lists from your integration flows.
 
 
 ## Key features

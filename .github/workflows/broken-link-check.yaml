@@ -1,0 +1,123 @@
+name: Broken Link Check
+
+# Builds the PR head and the base branch, crawls each served build with linkinator (one
+# uniform pass over links, images, and assets — no per-element special casing), posts/
+# updates a PR comment with the introduced-vs-already-on-main breakdown, and FAILS the
+# job (red) when ANY broken link/image is found on the branch (--fail-on-any). To keep
+# merging optional, do NOT add this as a required status check in branch protection — the
+# run goes red but won't block the merge button.
+#
+# The site is served under its production baseUrl, so baseUrl bugs (e.g. an <img
+# src="/img/..."> missing useBaseUrl) surface as real 404s.
+#
+# Note: for PRs from forks the pull_request token is read-only, so the comment
+# step is skipped/no-ops gracefully; the step summary still shows the results.
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  broken-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Build PR head
+        id: build-head
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm ci
+          npm run build
+        env:
+          BASE_URL: /docs-integrator/
+
+      - name: Crawl PR head
+        if: always()
+        continue-on-error: true
+        # Crawl before the base build overwrites en/build. linkinator (a devDependency)
+        # follows every <a>/<img>/<link>/<script>; baseUrl is auto-detected from the build.
+        run: node en/scripts/crawl-site.mjs en/build en/head-links.txt
+
+      - name: Detect orphan pages (PR head)
+        if: always()
+        continue-on-error: true
+        # Also stash the PR-head script in /tmp so it can analyze the base checkout later
+        # (the base branch may have an older check-orphans.mjs without --out).
+        run: |
+          cp en/scripts/check-orphans.mjs /tmp/check-orphans.mjs
+          node en/scripts/check-orphans.mjs --out en/head-orphans.txt
+
+      - name: Build base branch
+        id: build-base
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          HEAD_SHA="$(git rev-parse HEAD)"
+          git fetch origin "${{ github.base_ref }}"
+          git checkout "origin/${{ github.base_ref }}"
+          npm ci
+          npm run build
+          # Detect orphans against the base source using the PR-head script.
+          node /tmp/check-orphans.mjs "$PWD/en" --out /tmp/base-orphans.txt || true
+          # Return to PR head and reinstall its deps (base lacks linkinator) so the
+          # PR-version scripts and the crawler are available for the base crawl.
+          git checkout "$HEAD_SHA"
+          npm ci
+          cp /tmp/base-orphans.txt en/base-orphans.txt 2>/dev/null || true
+        env:
+          BASE_URL: /docs-integrator/
+
+      - name: Crawl base branch
+        if: always()
+        continue-on-error: true
+        # en/build now holds the base-branch build; the script is the PR-head version.
+        run: node en/scripts/crawl-site.mjs en/build en/base-links.txt
+
+      - name: Report broken links, images and orphans
+        if: always()
+        # This step is the GATE: --fail-on-any makes it exit non-zero (failing the job)
+        # whenever ANY broken link/image is found on this branch. The base-branch crawl is
+        # still passed so the comment shows the introduced-vs-already-on-main breakdown, but
+        # it does NOT affect pass/fail. The comment is still posted by the next step
+        # (if: always()), even on a red run.
+        run: |
+          node en/scripts/report-broken-links.mjs \
+            --head en/head-links.txt --base en/base-links.txt \
+            --head-orphans en/head-orphans.txt --base-orphans en/base-orphans.txt \
+            --out en/comment-body.md --fail-on-any
+
+      # Most PRs come from forks, where the pull_request token is read-only and CANNOT
+      # comment. Instead of posting here, stash the comment body + PR number as an
+      # artifact; the broken-link-comment.yaml workflow (workflow_run, base-repo context
+      # with a write token) downloads it and posts/updates the comment.
+      - name: Save PR number
+        if: always()
+        run: echo "${{ github.event.pull_request.number }}" > en/pr-number.txt
+
+      - name: Upload comment artifact
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: broken-link-comment
+          path: |
+            en/comment-body.md
+            en/pr-number.txt
+          if-no-files-found: ignore
+          retention-days: 1

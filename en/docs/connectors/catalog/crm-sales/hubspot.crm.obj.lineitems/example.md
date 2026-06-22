@@ -91,7 +91,7 @@ Try this sample in WSO2 Integration Platform.
 
 ## More code examples
 
-The `Ballerina HubSpot CRM Lineitems Connector` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.lineitems/tree/main/examples/), covering the following use cases:
+The `Ballerina HubSpot CRM Lineitems Connector` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.lineitems/tree/main/examples/), covering the following use cases:
 
-1. [Customer Order fulfillment](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.lineitems/tree/main/examples/customer-order-fulfillment) - Manage customer orders in a warehouse system
-2. [Inventory management](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.lineitems/tree/main/examples/inventory-management) - Manage inventory for an operational deal in an E-commerce platform
+1. [Customer Order fulfillment](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.lineitems/tree/main/examples/customer-order-fulfillment) - Manage customer orders in a warehouse system
+2. [Inventory management](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.lineitems/tree/main/examples/inventory-management) - Manage inventory for an operational deal in an E-commerce platform

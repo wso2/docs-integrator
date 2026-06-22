@@ -1,6 +1,6 @@
 ---
 connector: true
-connector_name: "sharepoint.sites"
+connector_name: "microsoft.sharepoint.sites"
 title: "Microsoft SharePoint Sites"
 description: "Overview of the ballerinax/microsoft.sharepoint.sites connector for WSO2 Integrator."
 ---

@@ -26,6 +26,6 @@ Each action opens its own configuration form when selected. Action forms typical
 
 ## What's next
 
-- [Statement](../statement) — Declare and update variables, call functions, and map data.
-- [Control](../control) — Branch, loop, and return.
+- [Statement](./statement.md) — Declare and update variables, call functions, and map data.
+- [Control](./control.md) — Branch, loop, and return.
 - [Connections reference](../../../integration-artifacts/supporting/connections.md) — Create, configure, and reuse clients to external systems.

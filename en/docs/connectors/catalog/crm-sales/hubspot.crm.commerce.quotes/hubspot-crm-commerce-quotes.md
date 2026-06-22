@@ -1,9 +1,13 @@
 ---
-title: "HubSpot CRM Commerce Quotes"
-description: "Overview of the ballerinax/hubspot.crm.commerce.quotes connector for WSO2 Integrator."
+title: "Overview"
+description: "HubSpot CRM Commerce Quotes API enables you to create, manage, and track sales quotes within HubSpot CRM."
+connector: true
+connector_name: "hubspot.crm.commerce.quotes"
 ---
 
-HubSpot CRM Commerce Quotes API enables you to create, manage, and track sales quotes within HubSpot CRM. The Ballerina `ballerinax/hubspot.crm.commerce.quotes` connector (v2.0.0) provides programmatic access to HubSpot's Quotes API v3, allowing you to perform CRUD operations, batch processing, and search on quote objects from your Ballerina integration flows.
+# Overview
+
+HubSpot CRM Commerce Quotes API enables you to create, manage, and track sales quotes within HubSpot CRM. The `ballerinax/hubspot.crm.commerce.quotes` connector (v2.0.0) provides programmatic access to HubSpot's Quotes API v3, allowing you to perform CRUD operations, batch processing, and search on quote objects from your integration flows.
 
 
 ## Key features

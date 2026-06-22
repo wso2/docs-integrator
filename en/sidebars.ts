@@ -1214,10 +1214,10 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Microsoft SharePoint Sites',
-          link: { type: 'doc', id: 'connectors/catalog/storage-file/sharepoint.sites/connector-overview' },
+          link: { type: 'doc', id: 'connectors/catalog/storage-file/microsoft.sharepoint.sites/connector-overview' },
           items: [
-            'connectors/catalog/storage-file/sharepoint.sites/setup-guide',
-            'connectors/catalog/storage-file/sharepoint.sites/action-reference',
+            'connectors/catalog/storage-file/microsoft.sharepoint.sites/setup-guide',
+            'connectors/catalog/storage-file/microsoft.sharepoint.sites/action-reference',
           ],
         },
         {
@@ -2130,10 +2130,11 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'ICP',
+          label: 'WSO2 Integration Control Plane',
           link: { type: 'doc', id: 'manage/icp/integration-control-plane' },
           items: [
             'manage/icp/install-icp',
+            'manage/icp/deploy-kubernetes',
             'manage/icp/icp-console-overview',
             'manage/icp/quick-start',
             'manage/icp/connect-runtime',

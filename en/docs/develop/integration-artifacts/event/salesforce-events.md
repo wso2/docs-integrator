@@ -92,7 +92,7 @@ service salesforce:CdcService on salesforceListener {
 
 In the **Configure** panel, set **Auth** to a record expression with relevant fields with optional values to set any of the values below. Click **Save Changes** to apply.
 
-   ![Salesforce Configiration](/img/develop/integration-artifacts/event/salesforce-events/salesforce-configuration.gif)
+   ![Salesforce Configuration](/img/develop/integration-artifacts/event/salesforce-events/salesforce-configuration.gif)
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
