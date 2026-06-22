@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Send MySQL Order Status Emails over SMTP"
-sidebar_label: "Order Management Automation"
+sidebar_label: "Send MySQL Order Status Emails over SMTP"
 description: Build a scheduled automation that finds newly placed orders in a database, emails each customer, and advances the order to processing, designed visually with database and email connections.
 keywords: [wso2 integrator, automation, database, mysql, email, smtp, notification, order management, scheduled job, use case, low-code]
 ---
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Send MySQL order status emails over SMTP
+# Send MySQL Order Status Emails over SMTP
 
 **Time:** About 25 minutes | **What you'll build:** A scheduled automation that finds newly placed orders, emails each customer, and advances the order to processing, with no code to write.
 
@@ -339,7 +339,7 @@ The clients and the typed [`PlacedOrdersType` record](../../develop/integration-
 
 2. Watch the terminal. Each waiting order advances, its customer is emailed, and a final line reports the count:
 
-    ```
+    ```bash
     time=2026-06-22T15:30:03.334+05:30 level=INFO module=.../orderprocessingautomation message="Order advanced to PROCESSING: ORD-001"
     time=2026-06-22T15:30:03.366+05:30 level=INFO module=.../orderprocessingautomation message="Order advanced to PROCESSING: ORD-002"
     time=2026-06-22T15:30:03.367+05:30 level=INFO module=.../orderprocessingautomation message="Done - processed 2 orders"
@@ -363,7 +363,7 @@ The clients and the typed [`PlacedOrdersType` record](../../develop/integration-
 
 4. Run the automation a second time. Nothing is waiting, so the early exit kicks in and the terminal shows a single line:
 
-    ```
+    ```bash
     message="No new orders to process."
     ```
 
