@@ -2,6 +2,7 @@
 sidebar_position: 3
 title: XML Processing
 description: Parse, construct, transform, and validate XML data.
+keywords: [wso2 integrator, xml, parse, transform, xslt, xsd validation]
 ---
 
 import Tabs from '@theme/Tabs';
@@ -19,12 +20,12 @@ Use backtick templates and namespace declarations to build XML payloads from sta
 
 ### Building XML payloads
 
-The `xml` type in WSO2 Integrator can hold four kinds of XML nodes: elements, text nodes, comments, and processing instructions. Use XML template literals (backtick syntax: `xml \`...\``) to construct any of these and store the value in a variable declaration node in your integration flow.
+The `xml` type in WSO2 Integrator can hold four kinds of XML nodes: elements, text nodes, comments, and processing instructions. Use XML template literals (backtick syntax: `` xml `...` ``) to construct any of these and store the value in a variable declaration node in your integration flow.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. **Add a Variable**: In the flow designer, click **+** and select **Declare Variable**. Set the **Name** to the variable name (for example, `xmlPayload`) and the **Type** to `xml`.
+1. **Add a Variable**: In the visual designer, click **+** and select **Declare Variable**. Set the **Name** to the variable name (for example, `xmlPayload`) and the **Type** to `xml`.
 
 2. **Enter an XML template**: In the **Expression** field, write an XML template using backtick syntax. The sample below covers all four node kinds and is ready to copy as a starting point:
 
@@ -47,7 +48,7 @@ The `xml` type in WSO2 Integrator can hold four kinds of XML nodes: elements, te
    | `${record.field}` | `${order.total}` | A record field value |
    | `${functionCall()}` | `${generateId()}` | Return value of a function |
 
-   Once you type an expression, the visual designer renders it as a blue chip inside the expression editor — for example, `{x} customerId` — so expressions are visually distinct from the surrounding XML text.
+   Once you type an expression, the visual designer renders it as a blue chip inside the expression editor. For example, `{x} customerId` appears as a chip, so expressions are visually distinct from the surrounding XML text.
 
    ![Declare Variable panel showing xmlPayload with a dynamic expression rendered as a blue chip in the expression field](/img/develop/transform/xml/dynamic-xml.png)
 
@@ -131,11 +132,11 @@ The scope of a declaration depends on where you place it:
 ```ballerina
 import ballerina/io;
 
-// Module-level declaration — placed below imports, available to all functions in this file
+// Module-level declaration: placed below imports, available to all functions in this file
 xmlns "http://example.com/orders" as ord;
 
 public function main() {
-    // Function-level declaration — scoped to this function only
+    // Function-level declaration: scoped to this function only
     xmlns "http://example.com/common" as cmn;
 
     xml nsOrder = xml `<ord:order>
@@ -149,7 +150,7 @@ public function main() {
 </TabItem>
 </Tabs>
 
-## Read & query
+## Read and query
 
 Use XML navigation expressions and iteration to extract and process data from XML payloads.
 
@@ -227,40 +228,40 @@ public function main() {
         <pen><kind>marker</kind><color>blue</color></pen>
     </items>`;
 
-    // x.<name> — every element named `items` within `items` itself
+    // x.<name>: every element named `items` within `items` itself
     xml root = items.<items>;
     io:println(root);
     // Output: <items><!--Contents--><book>...</book><planner>...</planner><book>...</book><pen>...</pen></items>
 
-    // x/* — all children (elements, text nodes, and comments)
+    // x/*: all children (elements, text nodes, and comments)
     xml allChildren = items/*;
     io:println(allChildren);
     // Output: <!--Contents--><book>...</book><planner>...</planner><book>...</book><pen>...</pen>
 
-    // x/<name> — every element named `book` in the children of each element in `items`
+    // x/<name>: every element named `book` in the children of each element in `items`
     xml books = items/<book>;
     io:println(books);
     // Output: <book><name>A Study in Scarlet</name><author><name>Arthur Conan Doyle</name></author></book>
     //         <book><name>The Sign of Four</name><author><name>Arthur Conan Doyle</name></author></book>
 
-    // x/<name1|name2> — every element named `planner` or `pen` in the children
+    // x/<name1|name2>: every element named `planner` or `pen` in the children
     xml plannerOrPen = items/<planner|pen>;
     io:println(plannerOrPen);
     // Output: <planner>Daily Planner<kind>day</kind><pages>365</pages></planner>
     //         <pen><kind>marker</kind><color>blue</color></pen>
 
-    // x/<*> — every element child (excludes text nodes and comments)
+    // x/<*>: every element child (excludes text nodes and comments)
     xml elementChildren = items/<*>;
     io:println(elementChildren);
     // Output: <book>...</book><planner>...</planner><book>...</book><pen>...</pen>
 
-    // x/**/<name> — every element named `name` anywhere in the descendants
+    // x/**/<name>: every element named `name` anywhere in the descendants
     xml allNames = items/**/<name>;
     io:println(allNames);
     // Output: <name>A Study in Scarlet</name><name>Arthur Conan Doyle</name>
     //         <name>The Sign of Four</name><name>Arthur Conan Doyle</name>
 
-    // x/<name>[n] — the element at index n in the matched sequence (zero-based)
+    // x/<name>[n]: the element at index n in the matched sequence (zero-based)
     xml firstBook = items/<book>[0];
     io:println(firstBook);
     // Output: <book><name>A Study in Scarlet</name><author><name>Arthur Conan Doyle</name></author></book>
@@ -282,8 +283,8 @@ WSO2 Integrator provides two ways to read attribute values from an XML element: 
 
 Use dot notation directly on an `xml` value to read an attribute by name:
 
-- `check x.attrName` — reads a required attribute. Returns an `error` if the attribute does not exist or if `x` is not a singleton element.
-- `check x?.attrName` — reads an optional attribute. Returns `()` if the attribute does not exist.
+- `check x.attrName` reads a required attribute. It returns an `error` if the attribute does not exist or if `x` is not a singleton element.
+- `check x?.attrName` reads an optional attribute. It returns `()` if the attribute does not exist.
 
 **`getAttributes()` function**
 
@@ -300,7 +301,7 @@ xml `<para id="greeting" lang="en">Hello</para>`
 
 For each attribute read, add another **Declare Variable** node and enter the expression in the **Expression** field.
 
-**Required attribute — `check x.attrName`**
+**Required attribute: `check x.attrName`**
 
 Name the variable `id`, set the type to `string`, and enter `check product.id`.
 
@@ -308,7 +309,7 @@ Output: `greeting`
 
 If the attribute does not exist, this expression returns an error. Use this form when the attribute is guaranteed to be present.
 
-**Optional attribute — `check x?.attrName`**
+**Optional attribute: `check x?.attrName`**
 
 Name the variable `lang`, set the type to `string?`, and enter `check product?.lang`.
 
@@ -316,9 +317,9 @@ Output: `en`
 
 For an attribute that may be absent, name the variable `sku`, set the type to `string?`, and enter `check product?.sku`.
 
-Output: `()` — the attribute is not on the element, so the result is nil.
+Output: `()`. The attribute is not on the element, so the result is nil.
 
-**All attributes — `getAttributes()`**
+**All attributes: `getAttributes()`**
 
 Name the variable `attrs`, set the type to `map<string>`, and enter `(<xml:Element>product).getAttributes()`.
 
@@ -337,19 +338,19 @@ import ballerina/io;
 public function main() returns error? {
     xml product = xml `<para id="greeting" lang="en">Hello</para>`;
 
-    // Attribute expressions — concise single-attribute access
+    // Attribute expressions: concise single-attribute access
 
-    // x.attrName — required: errors if the attribute does not exist
+    // x.attrName (required): errors if the attribute does not exist
     string id = check product.id;
     io:println(id); // Output: greeting
 
-    // x?.attrName — optional: returns () if the attribute does not exist
+    // x?.attrName (optional): returns () if the attribute does not exist
     string? lang = check product?.lang;
     string? missing = check product?.sku;
     io:println(lang);    // Output: en
     io:println(missing); // Output: ()
 
-    // getAttributes() — returns a map<string> of all attributes at once
+    // getAttributes(): returns a map<string> of all attributes at once
     map<string> attrs = (<xml:Element>product).getAttributes();
     io:println(attrs);        // Output: {"id":"greeting","lang":"en"}
     io:println(attrs["id"]);  // Output: greeting
@@ -527,7 +528,7 @@ Click **+** and select **Call Function**. Search for `setChildren` and select it
 | Parameter | Value |
 |---|---|
 | `self` | `x1` |
-| `children` | `xml \`<language>French</language>\`` |
+| `children` | `` xml `<language>French</language>` `` |
 
 After this call, `x1` holds `<details><language>French</language></details>`.
 
@@ -582,8 +583,8 @@ Use the `+` operator to join two XML values into a single sequence. This is usef
 
 Add two **Declare Variable** nodes:
 
-- Name: `x1`, type: `xml`, expression: `xml \`<name>Sherlock Holmes</name>\``
-- Name: `x2`, type: `xml:Element`, expression: `xml \`<details><author>Sir Arthur Conan Doyle</author><language>English</language></details>\``
+- Name: `x1`, type: `xml`, expression: `` xml `<name>Sherlock Holmes</name>` ``
+- Name: `x2`, type: `xml:Element`, expression: `` xml `<details><author>Sir Arthur Conan Doyle</author><language>English</language></details>` ``
 
 **Concatenate into a new variable**
 
@@ -681,7 +682,7 @@ Click **+** and select **Call Function**. In the search box, type `transform xsl
 | **Result** | `transformedXml` |
 | **Result Type** | `xml` |
 
-![Visual designer showing two Declare Variable nodes for sourceXml and xsl, with the xslt transform configuration panel open on the right](/img/develop/transform/xml/xslt-transform.png)
+![Visual designer showing two Declare Variable nodes for sourceXml and xsl, with the XSLT transform configuration panel open on the right](/img/develop/transform/xml/xslt-transform.png)
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -785,7 +786,7 @@ Click **+** and select **Call Function**. Search for `xml` and select **parseAsT
 | **T** | The target record type | `PurchaseOrder` |
 | **Result** | Name of the result variable | `orders` |
 
-![Flow designer showing the Declare Variable node for the product XML and the parseAsType configuration panel with PurchaseOrder as the target type](/img/develop/transform/xml/parse-as-type.png)
+![Visual designer showing the Declare Variable node for the product XML and the parseAsType configuration panel with PurchaseOrder as the target type](/img/develop/transform/xml/parse-as-type.png)
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -940,7 +941,7 @@ Click **+** and select **Call Function**. Search for `toJson` and select **toJso
 | **Result** | Name of the result variable | `ordersJson` |
 | **Result Type** | Type of the result variable | `json` |
 
-![Flow designer showing the parseAsType and toJson steps with the lang.value toJson configuration panel open on the right](/img/develop/transform/xml/to-json.png)
+![Visual designer showing the parseAsType and toJson steps with the lang.value toJson configuration panel open on the right](/img/develop/transform/xml/to-json.png)
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -1024,7 +1025,7 @@ Click **+** and select **Call Function**. Search for `toXml` and select **toXml*
 | **Result** | Name of the result variable | `result` |
 | **Result Type** | Type of the result variable | `xml` |
 
-![Flow designer showing the Declare Variable node for the Invoice data and the xmldata toXml configuration panel open on the right](/img/develop/transform/xml/to-xml.png)
+![Visual designer showing the Declare Variable node for the Invoice data and the xmldata toXml configuration panel open on the right](/img/develop/transform/xml/to-xml.png)
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -1084,28 +1085,40 @@ Validate XML payloads against an XSD schema to enforce structural contracts at i
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. **Add the XSD file to your project**: Place the `.xsd` file in the `resources` directory of your integration project (for example, `resources/order-schema.xsd`). WSO2 Integrator includes project resources when building the integration.
+1. **Choose a schema source**: The `validate` function accepts the schema in either of two forms:
 
-2. **Add a Call Function step**: In the flow designer, click **+** and select **Call Function**. Search for `validate` and select it from the `data.xmldata` module.
+   - An `.xsd` file. Place the file in the `resources` directory of your integration project (for example, `resources/order-schema.xsd`). WSO2 Integrator includes project resources when building the integration.
+   - A Ballerina record type that represents the schema. Generate the type from your `.xsd` file with the XSD tool. For more information, see [Generating record types from XSD](../tools/integration-tools/xsd-tool.md#generating-record-types-from-xsd).
+
+2. **Add a Call Function step**: In the visual designer, click **+** and select **Call Function**. In the search bar, search for `xsd` and select the **validate** node under the **data.xmldata** section.
 
 3. **Configure the validation inputs**:
 
    | Field | Description |
    |---|---|
-   | **XML value** | The `xml` variable to validate |
-   | **Schema source** | Path to the `.xsd` file within the project resources |
-   | **Result variable** | A variable to capture the validation outcome (`boolean` on success, `xmldata:Error` on failure) |
+   | **Xml Value** | The `xml` value to validate |
+   | **Schema** | The `.xsd` file path or a record type that represents the schema |
+   | **Result** | A variable to capture the validation outcome (`()` on success, `xmldata:Error` on failure) |
 
-4. **Handle the result**: Add a conditional step after the function call. If validation passes, the function returns `true` and the flow continues. If validation fails, it returns an `xmldata:Error` with details about the schema violation.
+4. **Handle the result**: Add a conditional step after the function call. If the XML conforms to the schema, `validate` returns `()` and the flow continues. If validation fails, it returns an `xmldata:Error` with details about the schema violation.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
+
+The `schema` parameter accepts either a file path to an `.xsd` file or a Ballerina record type that represents the schema. The function returns `()` when the XML conforms to the schema, or an `xmldata:Error` otherwise.
 
 ```ballerina
 import ballerina/data.xmldata;
 import ballerina/io;
 
-public function main() returns error? {
+// A record type can serve as the schema. Each field maps to an expected element.
+type Order record {|
+    string orderId;
+    string customer;
+    decimal total;
+|};
+
+public function main() {
     xml validOrder = xml `<Order>
         <orderId>ORD-5001</orderId>
         <customer>Acme Corp</customer>
@@ -1117,18 +1130,18 @@ public function main() returns error? {
         <total>250.00</total>
     </Order>`;
 
-    string schemaPath = "resources/order-schema.xsd";
-
-    // Passing validation — orderId is present
-    boolean|xmldata:Error validResult = xmldata:validate(validOrder, schemaPath);
-    if validResult is boolean {
+    // Validate against an .xsd file in the project resources.
+    xmldata:Error? fileResult = xmldata:validate(validOrder, "resources/order-schema.xsd");
+    if fileResult is () {
         io:println("Validation passed");
+    } else {
+        io:println("Validation failed: ", fileResult.message());
     }
 
-    // Failing validation — orderId is missing (required by schema)
-    boolean|xmldata:Error invalidResult = xmldata:validate(invalidOrder, schemaPath);
-    if invalidResult is xmldata:Error {
-        io:println("Validation failed: ", invalidResult.message());
+    // Validate against a Ballerina record type instead of an .xsd file.
+    xmldata:Error? typeResult = xmldata:validate(invalidOrder, Order);
+    if typeResult is xmldata:Error {
+        io:println("Validation failed: ", typeResult.message());
         // Example output: cvc-complex-type.2.4.a: Invalid content was found
         // starting with element 'customer'. One of '{orderId}' is expected.
     }
@@ -1145,5 +1158,6 @@ public function main() returns error? {
 ## What's next
 
 - [JSON Processing](json.md) - Parse, construct, transform, and validate JSON data
+- [XSD Tool](../tools/integration-tools/xsd-tool.md) - Generate Ballerina record types from an XSD schema
 - [Visual Data Mapper](../integration-artifacts/supporting/data-mapper/data-mapper.md) - Map fields between record types visually
 - [Types](../integration-artifacts/supporting/types.md) - Define record types for type-safe data handling
