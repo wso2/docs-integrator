@@ -18,9 +18,10 @@ HTTP services expose your integration logic as REST endpoints that clients can c
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Select **+ Add Artifact** in the design view, or **+** next to **Entry Points** in the sidebar.
-2. Select **HTTP Service** under **Integration as API**.
-3. Fill in the creation form fields and select **Create**.
+1. Open your integration in WSO2 Integrator IDE. If you don't have an integration yet, see [Create a new integration](../../create-integrations/create-a-new-integration.md) to set one up first.
+2. Select **+ Add Artifact** in the design view, or **+** next to **Entry Points** in the sidebar.
+3. Select **HTTP Service** under **Integration as API**.
+4. Fill in the creation form fields and select **Create**.
 
 <ThemedImage
     alt="HTTP Service creation form showing Service Contract, Service Base Path, and Advanced Configurations"
@@ -171,7 +172,7 @@ Select **+ Attach Listener** at the bottom of the panel to attach an additional 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
-### Inline listener
+**Inline listener**
 
 An inline listener is created with the service declaration. Use `configurable` to allow the port to be set via `Config.toml` or an environment variable without changing source code.
 
@@ -187,7 +188,7 @@ service /api on new http:Listener(port) {
 }
 ```
 
-### Named listener
+**Named listener**
 
 Declare the listener at module level and attach multiple services to it. Use this when multiple services share the same port, or when you need a single TLS configuration for all services on that listener.
 
@@ -323,7 +324,7 @@ type Album record {|
 table<Album> key(title) albums = table [];
 ```
 
-### Service paths and routing
+**Service paths and routing**
 
 The base path is defined in the service declaration and the resource path in the resource method definition. Each resource is invoked using the base path, resource path, and resource accessor (HTTP method).
 
@@ -347,7 +348,7 @@ service /info on new http:Listener(9090) {
 }
 ```
 
-### Path parameters
+**Path parameters**
 
 Path parameters are mandatory, variable parts of a resource URL. Define them in the resource path using the syntax `[type name]` (for example, `albums/[string title]`). Supported types are `string`, `int`, `float`, `boolean`, and `decimal`.
 
@@ -364,7 +365,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-### Query parameters
+**Query parameters**
 
 A resource method argument without any annotation is treated as a query parameter extracted from the request URI. The argument name becomes the query key. Supported types are `string`, `int`, `float`, `boolean`, `decimal`, and array types of these. Query parameters can be nilable (`string? artist`) to make them optional, or defaultable (`string artist = "Unknown"`) to provide a fallback value.
 
@@ -383,7 +384,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-### Header parameters
+**Header parameters**
 
 Use the `@http:Header` annotation to bind a request header value to a resource parameter. The parameter name must match the header name (case-insensitive). If the names differ, specify the actual header name in the annotation configuration. The parameter can be a simple type or an array type for multi-value headers. When the parameter is not nilable, the framework returns `400 Bad Request` if the header is absent.
 
@@ -403,7 +404,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-### Payload data binding
+**Payload data binding**
 
 Payload data binding gives direct access to the request body from the resource method signature. Parameters of type `map`, `array`, `tuple`, `table`, `record`, or `xml` are automatically bound to the payload without annotation. For all other types, use `@http:Payload` explicitly. This feature applies to the `POST`, `PUT`, `PATCH`, `DELETE`, and `DEFAULT` accessors. If binding fails, the framework returns `400 Bad Request` to the client.
 
@@ -421,7 +422,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-### Low-level request and response
+**Low-level request and response**
 
 `http:Request` and `http:Response` are low-level abstractions that underpin data binding, header mapping, and query parameter mapping. They can be used on both the client side and the service side. They are useful when implementing advanced scenarios such as gateways, proxy services, or handling multipart requests. In most cases, `http:Request` and `http:Response` are not needed. The high-level abstractions handle the same things with less code.
 
@@ -445,7 +446,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-### Sending responses
+**Sending responses**
 
 Returning an `anydata` value from a resource method sends an HTTP response where the value becomes the body. The `Content-Type` header is inferred from the return type. The status code is `201 Created` for `POST` resources and `200 OK` for all others.
 
@@ -462,7 +463,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-### Status codes without payload
+**Status codes without payload**
 
 Subtypes of `http:StatusCodeResponse` represent specific HTTP status codes. To send a response with no body or headers, return the relevant constant value (for example, `http:CONFLICT`) and declare the corresponding type (for example, `http:Conflict`) in the return signature.
 
@@ -483,7 +484,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-### Status codes with payload
+**Status codes with payload**
 
 Create a subtype of an `http:StatusCodeResponse` record to include a custom body or headers in the response. Override the `body` field with a typed record for compiler validation, better tooling support, and a more accurate OpenAPI specification.
 
@@ -512,7 +513,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-### http:Caller
+**http:Caller**
 
 `http:Caller` represents the client endpoint that sent the request. Use it to send a response imperatively from within the resource. For example, send a `100 Continue` status before processing the body, or do work after the response is already dispatched to the client. When `http:Caller` is present in the resource signature, the return type is constrained to `error?`. In most cases, returning a value from the resource method is simpler and preferred.
 
@@ -533,7 +534,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-### HTTP status code return types
+**HTTP status code return types**
 
 | Return type | HTTP status | Body sent |
 |---|---|---|
@@ -584,7 +585,7 @@ See [Defining response schemas](#defining-response-schemas) for the full configu
 
 The `http:Listener` intercepts errors returned from resource methods and sends a `500 Internal Server Error` response with the error message in the payload. It also logs the error with a stack trace. Errors originating from the listener itself, such as resource not found, data-binding failures, or authorization errors, are converted to their respective status codes (`404`, `400`, `401`, and so on). Use `do/on fail` to take control of error handling inside the resource instead of relying on the default behavior.
 
-### Default error handling
+**Default error handling**
 
 Use `check` to propagate errors; the listener converts them to `500 Internal Server Error` automatically:
 
@@ -603,7 +604,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-### Return typed error status codes
+**Return typed error status codes**
 
 Declare status code types in the return signature to control which HTTP status each error case maps to:
 
@@ -623,7 +624,7 @@ service / on new http:Listener(9090) {
 }
 ```
 
-### Use `do/on fail` for local recovery
+**Use `do/on fail` for local recovery**
 
 Catch errors inline and return a structured response instead of propagating to the listener:
 

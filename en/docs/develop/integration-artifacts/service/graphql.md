@@ -20,9 +20,10 @@ GraphQL service support is currently in beta.
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Select the **+** **Add Artifacts** button in the canvas or select **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **GraphQL Service** under **Integration as API**.
-3. In the **Create GraphQL Service** form, fill in the following fields:
+1. Open your integration in WSO2 Integrator IDE. If you don't have an integration yet, see [Create a new integration](../../create-integrations/create-a-new-integration.md) to set one up first.
+2. Select the **+** **Add Artifacts** button in the canvas or select **+** next to **Entry Points** in the sidebar.
+3. In the **Artifacts** panel, select **GraphQL Service** under **Integration as API**.
+4. In the **Create GraphQL Service** form, fill in the following fields:
 
    ![GraphQL Service creation form](/img/develop/integration-artifacts/service/graphql-service/step-creation-form.png)
 
@@ -49,14 +50,14 @@ GraphQL service support is currently in beta.
 
    Select **Expand** next to **Advanced Configurations** to set the **Listener Name** and other listener-level options.
 
-4. Select **Create**.
+5. Select **Create**.
 
-5. WSO2 Integrator opens the service in the **GraphQL diagram**, an interactive canvas where you define types, fields, and resolvers. The diagram shows the service card labeled with the base path (for example, `/graphql`) and a **+ Create Operations** button. Use the **Configure** button at the top right to edit service and listener settings, and the toolbar at the bottom left to zoom, fit, refresh, or export the diagram.
+6. WSO2 Integrator opens the service in the **GraphQL diagram**, an interactive canvas where you define types, fields, and resolvers. The diagram shows the service card labeled with the base path (for example, `/graphql`) and a **+ Create Operations** button. Use the **Configure** button at the top right to edit service and listener settings, and the toolbar at the bottom left to zoom, fit, refresh, or export the diagram.
 
    ![GraphQL diagram canvas](/img/develop/integration-artifacts/service/graphql-service/step-graphql-diagram.png)
 
-6. Select **+ Create Operations** on the service card to add a **Query**, **Mutation**, or **Subscription** field.
-7. Select the field row to open the **flow designer** and define the resolver logic.
+7. Select **+ Create Operations** on the service card to add a **Query**, **Mutation**, or **Subscription** field.
+8. Select the field row to open the **flow designer** and define the resolver logic.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">

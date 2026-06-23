@@ -22,9 +22,10 @@ GitHub event integrations receive webhook callbacks from GitHub and trigger hand
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **GitHub** under **Event Integration**.
-3. In the creation form, fill in the following fields:
+1. Open your integration in WSO2 Integrator IDE. If you don't have an integration yet, see [Create a new integration](../../create-integrations/create-a-new-integration.md) to set one up first.
+2. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
+3. In the **Artifacts** panel, select **GitHub** under **Event Integration**.
+4. In the creation form, fill in the following fields:
 
    ![Github Webhook creation form](/img/develop/integration-artifacts/event/github-webhooks/step-creation-form.png)
 
@@ -40,9 +41,9 @@ GitHub event integrations receive webhook callbacks from GitHub and trigger hand
    |---|---|---|
    | **Listener Name** | Identifier for the listener created with this service. | `githubListener` |
 
-4. Click **Create**.
+5. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill, the active event channel pill, and the **Event Handlers** section with all handlers for the selected channel pre-added.
+6. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill, the active event channel pill, and the **Event Handlers** section with all handlers for the selected channel pre-added.
 
    ![Github Service Designer View](/img/develop/integration-artifacts/event/github-webhooks/step-service-designer.png)
 

@@ -21,9 +21,10 @@ Logical replication must be enabled on the PostgreSQL database and on each table
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **CDC for PostgreSQL** under **Event Integration**.
-3. In the creation form, select **Create new** to configure a new listener.
+1. Open your integration in WSO2 Integrator IDE. If you don't have an integration yet, see [Create a new integration](../../create-integrations/create-a-new-integration.md) to set one up first.
+2. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
+3. In the **Artifacts** panel, select **CDC for PostgreSQL** under **Event Integration**.
+4. In the creation form, select **Create new** to configure a new listener.
 
    ![PostgreSQL CDC creation form: connection fields](/img/develop/integration-artifacts/event/cdc-postgresql/step-creation-form.png)
 
@@ -48,9 +49,9 @@ Logical replication must be enabled on the PostgreSQL database and on each table
 
    Under **Table**, enter the fully qualified table name to capture events from in the format `<database>.<schema>.<table>` (for example, `mydb.public.customers`).
 
-4. Click **Create**.
+5. Click **Create**.
 
-5. WSO2 Integrator creates the empty service and opens it in the **Service Designer**. The canvas shows the attached listener pill and the table name pill. The service has no handlers yet.
+6. WSO2 Integrator creates the empty service and opens it in the **Service Designer**. The canvas shows the attached listener pill and the table name pill. The service has no handlers yet.
 
    ![Service Designer showing the PostgreSQL CDC service canvas](/img/develop/integration-artifacts/event/cdc-postgresql/step-service-designer.png)
 

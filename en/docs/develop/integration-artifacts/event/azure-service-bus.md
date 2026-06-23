@@ -15,9 +15,10 @@ Azure Service Bus event integrations consume messages from a queue or topic subs
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **Azure Service Bus** under **Event Integration**.
-3. In the creation form, fill in the following fields:
+1. Open your integration in WSO2 Integrator IDE. If you don't have an integration yet, see [Create a new integration](../../create-integrations/create-a-new-integration.md) to set one up first.
+2. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
+3. In the **Artifacts** panel, select **Azure Service Bus** under **Event Integration**.
+4. In the creation form, fill in the following fields:
 
    ![Azure Service Bus Event Integration creation form](/img/develop/integration-artifacts/event/azure-service-bus/step-creation-form.png)
 
@@ -32,13 +33,13 @@ Azure Service Bus event integrations consume messages from a queue or topic subs
    |---|---|---|
    | **Listener Name** | Identifier for the listener created with this service. | `asbListener` |
 
-4. Click **Create**.
+5. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section.
+6. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section.
 
    ![Service Designer showing the Azure Service Bus service canvas](/img/develop/integration-artifacts/event/azure-service-bus/step-service-designer.png)
 
-6. Click **+ Add Handler** to add event handlers.
+7. Click **+ Add Handler** to add event handlers.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">

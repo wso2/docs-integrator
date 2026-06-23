@@ -15,9 +15,10 @@ MQTT event integrations subscribe to one or more MQTT topics and trigger an `onM
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **MQTT** under **Event Integration**.
-3. In the creation form, fill in the following fields:
+1. Open your integration in WSO2 Integrator IDE. If you don't have an integration yet, see [Create a new integration](../../create-integrations/create-a-new-integration.md) to set one up first.
+2. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
+3. In the **Artifacts** panel, select **MQTT** under **Event Integration**.
+4. In the creation form, fill in the following fields:
 
    ![MQTT Event Integration creation form](/img/develop/integration-artifacts/event/mqtt/step-creation-form.png)
 
@@ -33,13 +34,13 @@ MQTT event integrations subscribe to one or more MQTT topics and trigger an `onM
    |---|---|---|
    | **Listener Name** | Identifier for the listener created with this service. | `mqttListener` |
 
-4. Click **Create**.
+5. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section.
+6. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section.
 
    ![Service Designer showing the MQTT service canvas](/img/develop/integration-artifacts/event/mqtt/step-service-designer.png)
 
-6. Click **+ Add Handler** to add the `onMessage` handler.
+7. Click **+ Add Handler** to add the `onMessage` handler.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
