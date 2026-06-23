@@ -10,6 +10,8 @@ import TabItem from '@theme/TabItem';
 
 # Build an Event-Driven Social Media Backend with RabbitMQ
 
+## Overview
+
 In this tutorial you build a complete, Twitter-style social media backend with [WSO2 Integrator](../../get-started/introduction.md), the low-code integration platform built on Ballerina. You design everything visually, and WSO2 Integrator generates clean Ballerina underneath. Most parts show both: the visual steps on one tab, and the exact code the platform produced on the other.
 
 By the end, a single `POST` will flow from the API through a user check and sentiment screening into MySQL, and out to a Slack channel.
@@ -32,7 +34,7 @@ You build three focused integrations inside one project rather than a single mon
 
 The integrations collaborate through a deliberate choice of contract. The Social Media API calls the Sentiment API over **HTTP** because it needs the verdict synchronously to decide whether to store the post. It hands the notification off to **RabbitMQ** because the author should not wait on Slack, and because you can add more consumers later (email, analytics) without touching the API.
 
-The **Social Media API is the orchestrator**: it depends on the sentiment service, a database, and the message pipeline. So you build the two standalone integrations it leans on first (Parts 2 and 3), then assemble the API itself (Part 4) and run the whole thing (Part 5).
+The **Social Media API is the orchestrator**: it depends on the sentiment service, a database, and the message pipeline. So you build the two standalone integrations it leans on first (Steps 2 and 3), then assemble the API itself (Step 4) and run the whole thing (Step 5).
 
 :::note Event-driven backbone
 RabbitMQ is a first-class [event integration trigger](../../develop/integration-artifacts/event/rabbitmq.md): you build the consumer entirely in the Visual Designer. The pattern is broker-agnostic; the platform also ships triggers for [Kafka](../../develop/integration-artifacts/event/kafka.md), [MQTT](../../develop/integration-artifacts/event/mqtt.md), [Solace](../../develop/integration-artifacts/event/solace.md), and [Azure Service Bus](../../develop/integration-artifacts/event/azure-service-bus.md).
@@ -49,7 +51,7 @@ Before you start, make sure you have:
 
 ---
 
-## Part 1: Set up the project
+## Step 1: Set up the project
 
 Everything you build sits inside one project, so you set that up first. WSO2 Integrator creates the project and your first integration together, in a single form.
 
@@ -71,7 +73,7 @@ Open the integration and you land in the Design view, where the [canvas](../../d
 
 The Social Media API ties three pieces together: a service to screen posts, a pipeline to announce them, and a store to keep them. Build the two standalone integrations first, the Sentiment API and the Post Notifier.
 
-## Part 2: Build the Sentiment API
+## Step 2: Build the Sentiment API
 
 The first standalone integration is the screening service. Build a small **Sentiment API** that takes post text and returns a sentiment label with probabilities. For the tutorial it returns **hardcoded values**, so you can focus on the integration rather than a real model.
 
@@ -90,7 +92,7 @@ The first standalone integration is the screening service. Build a small **Senti
 
    ![Creating the HTTP service with base path /text-processing on a custom listener at port 9000](/img/guides/tutorials/social-media/sentiment-http-service.png)
 
-3. Add three [types](../../develop/integration-artifacts/supporting/types.md): a `Post` with a `text` field, a `Probability` with `neg`, `neutral`, and `pos` decimals, and a `Sentiment` holding a `Probability` and a `label`. When adding each type, expand **Advanced configs** and tick **Accessible by other integrations** — the Social Media API in [Part 4](#part-4-build-the-social-media-api) imports `Post` and `Sentiment` directly from this module.
+3. Add three [types](../../develop/integration-artifacts/supporting/types.md): a `Post` with a `text` field, a `Probability` with `neg`, `neutral`, and `pos` decimals, and a `Sentiment` holding a `Probability` and a `label`. When adding each type, expand **Advanced configs** and tick **Accessible by other integrations** — the Social Media API in [Step 4](#step-4-build-the-social-media-api) imports `Post` and `Sentiment` directly from this module.
 
    ![The Type Diagram showing the Post, Probability, and Sentiment records](/img/guides/tutorials/social-media/sentiment-types.png)
 
@@ -161,7 +163,7 @@ public type Post record {
 
 ---
 
-## Part 3: Build the Post Notifier: RabbitMQ to Slack
+## Step 3: Build the Post Notifier: RabbitMQ to Slack
 
 The other standalone integration is the announcement pipeline. Build the **Post Notifier**, a RabbitMQ-triggered event integration that consumes new-post messages and posts to Slack. Declare the configurations it needs first, the broker details and the Slack token, then build the connector and the event integration on top of them. This is where RabbitMQ's first-class trigger support shines: you build the consumer entirely in the designer.
 
@@ -263,13 +265,16 @@ slackAuthToken = "xoxb-your-bot-token"
 
 With the Sentiment API and the Post Notifier built, assemble the **Social Media API** that uses them.
 
-## Part 4: Build the Social Media API
+## Step 4: Build the Social Media API
 
-This is the heart of the backend. The **Social Media API** is the orchestrator: it exposes the users-and-posts REST API, stores everything in MySQL, screens each post with the Sentiment API from [Part 2](#part-2-build-the-sentiment-api), and announces accepted posts through the Post Notifier from [Part 3](#part-3-build-the-post-notifier-rabbitmq-to-slack). You build all of it here, in the `social-media` integration: create the database, add the connections it needs, then design the resources and the post-creation flow on the canvas.
+This is the heart of the backend. The **Social Media API** is the orchestrator: it exposes the users-and-posts REST API, stores everything in MySQL, screens each post with the Sentiment API from [Step 2](#step-2-build-the-sentiment-api), and announces accepted posts through the Post Notifier from [Step 3](#step-3-build-the-post-notifier-rabbitmq-to-slack). You build all of it here, in the `social-media` integration: create the database, add the connections it needs, then design the resources and the post-creation flow on the canvas.
 
 ### Create the database
 
 The API persists users, posts, and followers in MySQL, so create the schema first. Run this script against your MySQL instance. It creates the database, an application user, the three tables, and a couple of seed users:
+
+<details>
+<summary>View SQL setup script</summary>
 
 ```sql
 CREATE DATABASE IF NOT EXISTS social_media;
@@ -312,6 +317,8 @@ INSERT INTO users (name, mobile_number, birth_date) VALUES
     ('Alice', '+94771234001', '1995-03-12'),
     ('Bob',   '+94771234002', '1998-07-25');
 ```
+
+</details>
 
 You now have a `social_media` database reachable with the credentials below. You give these to the connection in the next step:
 
@@ -533,9 +540,9 @@ resource function post users/[int id]/posts(@http:Payload NewPost newPost)
 
 ---
 
-## Part 5: Run and test
+## Step 5: Run and test
 
-Everything is built. Make sure your MySQL and RabbitMQ instances are running and the `social_media` database exists (from [Part 4](#part-4-build-the-social-media-api)), and fill in each integration's `Config.toml` (the database password, the RabbitMQ host and port, and the Slack token). Then **Run** the three integrations.
+Everything is built. Make sure your MySQL and RabbitMQ instances are running and the `social_media` database exists (from [Step 4](#step-4-build-the-social-media-api)), and fill in each integration's `Config.toml` (the database password, the RabbitMQ host and port, and the Slack token). Then **Run** the three integrations.
 
 Open the Social Media service, click **Try It**, and invoke a resource in place.
 
