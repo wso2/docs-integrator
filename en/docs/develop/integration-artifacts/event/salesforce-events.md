@@ -34,7 +34,7 @@ Salesforce event integrations subscribe to Change Data Capture (CDC) channels an
 
 5. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section with all four handlers pre-added.
+6. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section with all four handlers pre-added.
 
    ![Service Designer showing the Salesforce Events service canvas](/img/develop/integration-artifacts/event/salesforce-events/step-service-designer.png)
 

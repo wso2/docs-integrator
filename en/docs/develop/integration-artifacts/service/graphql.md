@@ -56,8 +56,8 @@ GraphQL service support is currently in beta.
 
    ![GraphQL diagram canvas](/img/develop/integration-artifacts/service/graphql-service/step-graphql-diagram.png)
 
-6. Select **+ Create Operations** on the service card to add a **Query**, **Mutation**, or **Subscription** field.
-7. Select the field row to open the **flow designer** and define the resolver logic.
+7. Select **+ Create Operations** on the service card to add a **Query**, **Mutation**, or **Subscription** field.
+8. Select the field row to open the **flow designer** and define the resolver logic.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">

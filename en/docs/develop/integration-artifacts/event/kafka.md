@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Kafka
 
-Kafka event integrations connect WSO2 Integrator to Apache Kafka topics as a consumer. Use them to build real-time data pipelines, fan out events across downstream systems, and trigger processing logic whenever messages arrive on a topic. This page covers how to create a Kafka service, configure the service and listener settings, define event handlers for message processing and error recovery, and apply error handling patterns.
+Kafka event integrations connect WSO2 Integrator to Apache Kafka topics as a consumer. Use them to build real-time data pipelines, route and distribute events across downstream systems, and trigger processing logic whenever messages arrive on a topic. This page covers how to create a Kafka service, configure the service and listener settings, define event handlers for message processing and error recovery, and apply error handling patterns.
 
 ## Creating a Kafka service
 
@@ -57,8 +57,8 @@ A Kafka service consists of a listener that connects to the broker and one or mo
 `kafka:Service` connects to a Kafka server via a `kafka:Listener` and binds incoming messages directly to a typed record by declaring the expected payload type as the `onConsumerRecord` argument.
 
 ```ballerina
-import ballerinax/kafka;
 import ballerina/log;
+import ballerinax/kafka;
 
 type Order readonly & record {
     int orderId;
@@ -112,8 +112,8 @@ See [Listener configuration fields](#listener-configuration-fields) below for th
 Declare a `kafka:Listener` with the broker address and a `kafka:ConsumerConfiguration` record containing only the required fields to get started.
 
 ```ballerina
-import ballerinax/kafka;
 import ballerina/log;
+import ballerinax/kafka;
 
 type Order readonly & record {
     int orderId;
@@ -200,7 +200,7 @@ Kafka event trigger supports two remote methods.
 
 | Handler | Triggered when |
 |---|---|
-| `onConsumerRecord` | New message arrive from the subscribed topics |
+| `onConsumerRecord` | New messages arrive from the subscribed topics |
 | `onError` | The listener triggers an error before `onConsumerRecord` is invoked |
 
 To add a handler in the **Service Designer**, click **+ Add Handler** and select the handler type in the **Select Handler to Add** panel. WSO2 Integrator opens the **Flow Designer** for that handler.
@@ -353,8 +353,8 @@ Use the flow canvas to add a conditional branch on the error type, log the failu
 Set `autoSeekOnValidationFailure: false` on the listener to route `kafka:PayloadBindingError` and `kafka:PayloadValidationError` to `onError`. Check the error type and use `kafka:Caller` to seek past the erroneous record using the partition offset provided in the error detail:
 
 ```ballerina
-import ballerinax/kafka;
 import ballerina/log;
+import ballerinax/kafka;
 
 type Order readonly & record {
     int orderId;

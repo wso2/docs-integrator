@@ -143,9 +143,9 @@ The `config` field accepts a `QueueConfig` record that controls how the queue is
 
 | Field | Description |
 |---|---|
-| **Durable** | When `true`, the queue survives broker restarts. Defaults to `false`. |
+| **Durable** | When `true`, the queue survives broker restarts. Defaults to `true`. |
 | **Exclusive** | When `true`, the queue is used by only one connection and is deleted when that connection closes. Defaults to `false`. |
-| **Auto Delete** | When `true`, the queue is automatically deleted when the last consumer unsubscribes. Defaults to `true`. |
+| **Auto Delete** | When `true`, the queue is automatically deleted when the last consumer unsubscribes. Defaults to `false`. |
 | **Arguments** | Optional. Additional construction arguments for the queue as key-value pairs. |
 
 ## Listener configuration

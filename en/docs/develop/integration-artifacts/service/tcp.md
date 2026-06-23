@@ -23,7 +23,7 @@ TCP service support is currently in beta.
 <TabItem value="ui" label="Visual Designer" default>
 
 1. Open your integration in WSO2 Integrator IDE. If you don't have an integration yet, see [Create a new integration](../../create-integrations/create-a-new-integration.md) to set one up first.
-2. In the design view, select **Add Artifact**.
+2. Select **+ Add Artifact** in the design view, or **+** next to **Entry Points** in the sidebar.
 3. Select **TCP Service** under **Integration as API**.
 4. Fill in the creation form fields and select **Create**.
 
