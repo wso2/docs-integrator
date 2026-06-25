@@ -58,17 +58,14 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `name` | `string` | Yes | The name of the queue to declare. |
-| `config` | `QueueConfig?` | No | Queue configuration (durable, exclusive, autoDelete, arguments). |
+| `config` | `QueueConfig?` | No | Queue configuration. Defaults: `durable: true`, `exclusive: false`, `autoDelete: false`. |
 
 Returns: `Error?`
 
 Sample code:
 
 ```ballerina
-check rabbitmqClient->queueDeclare("OrderQueue", config = {
-    durable: true,
-    autoDelete: false
-});
+check rabbitmqClient->queueDeclare("OrderQueue");
 ```
 
 </details>
@@ -156,16 +153,14 @@ Parameters:
 |------|------|----------|-------------|
 | `name` | `string` | Yes | The name of the exchange to declare. |
 | `exchangeType` | `ExchangeType` | No | The exchange type: `DIRECT_EXCHANGE`, `FANOUT_EXCHANGE`, `TOPIC_EXCHANGE`, or `HEADERS_EXCHANGE`. |
-| `config` | `ExchangeConfig?` | No | Exchange configuration (durable, autoDelete, arguments). |
+| `config` | `ExchangeConfig?` | No | Exchange configuration. Defaults: `durable: true`, `autoDelete: false`. |
 
 Returns: `Error?`
 
 Sample code:
 
 ```ballerina
-check rabbitmqClient->exchangeDeclare("OrderExchange", rabbitmq:TOPIC_EXCHANGE, config = {
-    durable: true
-});
+check rabbitmqClient->exchangeDeclare("OrderExchange", rabbitmq:TOPIC_EXCHANGE);
 ```
 
 </details>

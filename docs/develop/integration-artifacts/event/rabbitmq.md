@@ -78,6 +78,7 @@ service on rabbitmqListener {
 | Field | Type | Default | Description |
 |---|---|---|---|
 | `queueName` | `string` | Required | Name of the queue to consume from |
+| `config` | `QueueConfig?` | `()` | Optional queue configuration; the queue is declared if it does not exist. Defaults to `durable: true`, `exclusive: false`, `autoDelete: false`. |
 | `autoAck` | `boolean` | `true` | When `false`, messages must be manually acknowledged using `rabbitmq:Caller` |
 
 ## Listener configuration

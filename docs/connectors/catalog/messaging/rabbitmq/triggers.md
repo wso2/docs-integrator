@@ -171,5 +171,5 @@ When `autoAck` is set to `true` (the default), messages are acknowledged automat
 | Field | Type | Description |
 |-------|------|-------------|
 | `queueName` | `string` | The name of the queue to consume messages from. |
-| `config` | `QueueConfig?` | Optional queue configuration; the queue is declared if it does not exist. |
+| `config` | `QueueConfig?` | Optional queue configuration; the queue is declared if it does not exist. Defaults to `durable: true`, `exclusive: false`, `autoDelete: false`. |
 | `autoAck` | `boolean` | If `true` (default), messages are automatically acknowledged before the callback. |
