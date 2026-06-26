@@ -44,10 +44,69 @@ RabbitMQ is a first-class [event integration trigger](../../develop/integration-
 Before you start, make sure you have:
 
 - [WSO2 Integrator installed](../../get-started/setup/local-setup.md).
-- A running **MySQL** instance. See [Set up a MySQL database and user](../../connectors/catalog/database/mysql/setup-guide.md#create-a-mysql-database-and-user).
+- A running **MySQL** instance. A setup script for the `social_media` database is below. See also [Set up a MySQL database and user](../../connectors/catalog/database/mysql/setup-guide.md#create-a-mysql-database-and-user).
 - A running **RabbitMQ** broker. See the [RabbitMQ setup guide](../../connectors/catalog/messaging/rabbitmq/setup-guide.md).
 - A **Slack** app with a bot token. See [Create a Slack application](../../connectors/catalog/communication/slack/setup-guide.md#step-2-create-a-new-slack-application).
 :::
+
+<details>
+<summary>Set up the MySQL database</summary>
+
+Run this script against your MySQL instance. It creates the database, an application user, the three tables, and a couple of seed users:
+
+```sql
+CREATE DATABASE IF NOT EXISTS social_media;
+
+-- Application user the integration connects as
+CREATE USER IF NOT EXISTS 'social_media_user'@'localhost' IDENTIFIED BY 'social_media_pass';
+GRANT ALL PRIVILEGES ON social_media.* TO 'social_media_user'@'localhost';
+FLUSH PRIVILEGES;
+
+USE social_media;
+
+CREATE TABLE users (
+    id            INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name          VARCHAR(255) NOT NULL,
+    mobile_number VARCHAR(15)  NOT NULL,
+    birth_date    DATE
+);
+
+CREATE TABLE posts (
+    id           INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    description  VARCHAR(255) NOT NULL,
+    category     VARCHAR(255),
+    tags         VARCHAR(255),
+    created_date DATE,
+    user_id      INT          NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE followers (
+    id           INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    leader_id    INT  NOT NULL,
+    follower_id  INT  NOT NULL,
+    created_date DATE,
+    UNIQUE (leader_id, follower_id),
+    FOREIGN KEY (leader_id)   REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (follower_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+INSERT INTO users (name, mobile_number, birth_date) VALUES
+    ('Alice', '+94771234001', '1995-03-12'),
+    ('Bob',   '+94771234002', '1998-07-25');
+```
+
+You now have a `social_media` database reachable with these credentials, which you give to the `dbClient` connection in [Step 4](#step-4-build-the-social-media-api):
+
+| Setting | Value |
+| --- | --- |
+| Host | `localhost` |
+| Port | `3306` |
+| Database | `social_media` |
+| User | `social_media_user` |
+| Password | `social_media_pass` |
+
+</details>
 
 ---
 
@@ -267,68 +326,7 @@ With the Sentiment API and the Post Notifier built, assemble the **Social Media 
 
 ## Step 4: Build the Social Media API
 
-This is the heart of the backend. The **Social Media API** is the orchestrator: it exposes the users-and-posts REST API, stores everything in MySQL, screens each post with the Sentiment API from [Step 2](#step-2-build-the-sentiment-api), and announces accepted posts through the Post Notifier from [Step 3](#step-3-build-the-post-notifier-rabbitmq-to-slack). You build all of it here, in the `social-media` integration: create the database, add the connections it needs, then design the resources and the post-creation flow on the canvas.
-
-### Create the database
-
-The API persists users, posts, and followers in MySQL, so create the schema first. Run this script against your MySQL instance. It creates the database, an application user, the three tables, and a couple of seed users:
-
-<details>
-<summary>View SQL setup script</summary>
-
-```sql
-CREATE DATABASE IF NOT EXISTS social_media;
-
--- Application user the integration connects as
-CREATE USER IF NOT EXISTS 'social_media_user'@'localhost' IDENTIFIED BY 'social_media_pass';
-GRANT ALL PRIVILEGES ON social_media.* TO 'social_media_user'@'localhost';
-FLUSH PRIVILEGES;
-
-USE social_media;
-
-CREATE TABLE users (
-    id            INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name          VARCHAR(255) NOT NULL,
-    mobile_number VARCHAR(15)  NOT NULL,
-    birth_date    DATE
-);
-
-CREATE TABLE posts (
-    id           INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    description  VARCHAR(255) NOT NULL,
-    category     VARCHAR(255),
-    tags         VARCHAR(255),
-    created_date DATE,
-    user_id      INT          NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE followers (
-    id           INT  NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    leader_id    INT  NOT NULL,
-    follower_id  INT  NOT NULL,
-    created_date DATE,
-    UNIQUE (leader_id, follower_id),
-    FOREIGN KEY (leader_id)   REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (follower_id) REFERENCES users(id) ON DELETE CASCADE
-);
-
-INSERT INTO users (name, mobile_number, birth_date) VALUES
-    ('Alice', '+94771234001', '1995-03-12'),
-    ('Bob',   '+94771234002', '1998-07-25');
-```
-
-</details>
-
-You now have a `social_media` database reachable with the credentials below. You give these to the connection in the next step:
-
-| Setting | Value |
-| --- | --- |
-| Host | `localhost` |
-| Port | `3306` |
-| Database | `social_media` |
-| User | `social_media_user` |
-| Password | `social_media_pass` |
+This is the heart of the backend. The **Social Media API** is the orchestrator: it exposes the users-and-posts REST API, stores everything in MySQL, screens each post with the Sentiment API from [Step 2](#step-2-build-the-sentiment-api), and announces accepted posts through the Post Notifier from [Step 3](#step-3-build-the-post-notifier-rabbitmq-to-slack). You build all of it here, in the `social-media` integration: add the connections it needs, then design the resources and the post-creation flow on the canvas. The `social_media` database and its tables were created in the Prerequisites.
 
 ### Add the connections
 
@@ -337,7 +335,7 @@ The API talks to three things, so add a connection for each before you build the
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. **Database.** In the artifacts panel, open **Connections** and click **+**, then choose [**Connect to a Database**](../../develop/tools/integration-tools/persist-tool.md#step-1-add-a-connection). Select **MySQL** and enter the credentials above.
+1. **Database.** In the artifacts panel, open **Connections** and click **+**, then choose [**Connect to a Database**](../../develop/tools/integration-tools/persist-tool.md#step-1-add-a-connection). Select **MySQL** and enter the `social_media` credentials from the Prerequisites.
 
    ![Entering the MySQL credentials in the Connect to a Database wizard](/img/guides/tutorials/social-media/main-db-credentials.png)
 
