@@ -1897,7 +1897,8 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Tutorials',
           items: [
-            'guides/tutorials/social-media',         
+            'guides/tutorials/social-media',
+            'guides/tutorials/file-order-hub',
           ],
         },
       ],
