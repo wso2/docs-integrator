@@ -22,15 +22,6 @@
     <path d="M758 424 C 700 452, 692 498, 652 498" marker-end="url(#arrow)"/> <!-- Daily Summary -> Procurement -->
   </g>
 
-  <!-- edge labels -->
-  <g font-size="12.5" fill="#475569" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">
-    <text x="300" y="138">poll · .ok gate</text>
-    <text x="738" y="140">persist</text>
-    <text x="548" y="360">archive</text>
-    <text x="894" y="298" text-anchor="start">read today</text>
-    <text x="706" y="446">email report</text>
-  </g>
-
   <!-- FTP server -->
   <g filter="url(#shadow)">
     <rect x="40" y="90" width="230" height="240" rx="14" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5"/>
@@ -90,4 +81,14 @@
   </g>
   <text x="510" y="494" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Procurement</text>
   <text x="510" y="513" text-anchor="middle" font-size="11.5" fill="#475569">email (SMTP)</text>
+
+  <!-- edge labels (drawn last so they sit above the boxes) -->
+  <g font-size="12.5" fill="#475569" text-anchor="middle" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">
+    <text x="310" y="201">poll</text>
+    <text x="310" y="218">.ok gate</text>
+    <text x="738" y="140">persist</text>
+    <text x="548" y="360">archive</text>
+    <text x="894" y="298" text-anchor="start">read today</text>
+    <text x="706" y="446">email report</text>
+  </g>
 </svg>

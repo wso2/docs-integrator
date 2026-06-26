@@ -1,5 +1,5 @@
 ---
-title: Build a Supplier Order Ingestion Hub with File Integration
+title: Build a Supplier Order Ingestion Hub
 sidebar_label: Build a Supplier Order Ingestion Hub
 sidebar_position: 2
 description: "Build a B2B file-integration hub with WSO2 Integrator: an FTP service that picks up supplier order files in two different formats (CSV and XML), normalizes both into one canonical model with the data mapper, stores them in MySQL, archives the files, and emails a daily summary from a scheduled automation. Designed end to end in the Visual Designer."
@@ -8,25 +8,9 @@ description: "Build a B2B file-integration hub with WSO2 Integrator: an FTP serv
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Build a Supplier Order Ingestion Hub with File Integration
-
-<!--
-TUTORIAL STRUCTURE / SKELETON
-=============================
-Filled section by section as the integration is built and screenshots are captured.
-
-Conventions used while drafting:
-- "📸 Screenshot:" blockquotes mark where a captured image goes. Replace with
-  ![alt](/img/guides/tutorials/order-hub/<name>.png) once the screenshot exists.
-- Ballerina Code tabs hold the exact generated source (verified from the built project).
-- Each step closes with a "> Capability:" callout, mirroring social-media.md.
-
-Status legend:  ☐ not started   ◐ drafting   ☑ verified against built project
--->
+# Build a Supplier Order Ingestion Hub
 
 ## Overview
-
-<!-- ☐ Intro prose. Mirror social-media.md: 2 short paragraphs + a "What you will build" admonition. -->
 
 In this tutorial you build a complete B2B **file ingestion hub** with [WSO2 Integrator](../../get-started/introduction.md), the low-code integration platform built on Ballerina. Suppliers drop order files onto a file server in different formats; your integration turns that mix into one clean, queryable order book, then reports on it daily. You design everything visually, and WSO2 Integrator generates clean Ballerina underneath. Most steps show both: the visual flow on one tab and the generated code on the other.
 
@@ -38,14 +22,12 @@ An ingestion hub for **FreshMart**, a retailer whose suppliers send purchase ord
 
 ## Architecture
 
-<!-- ☑ Reflects the built project: project `order-hub-freshmart`, integrations `order-intake` + `daily-summary`. -->
-
 You build the work as two focused integrations inside one project, plus a shared canonical model they both rely on.
 
 | Integration | Type | Responsibility |
 | --- | --- | --- |
 | **Order Intake** (`order-intake`) | FTP file integration | One listener, two services. The **Greenfield** service consumes CSV from `/greenfield`; the **Harbor** service consumes XML from `/harbor`. Each maps its format to the canonical `Order` with the data mapper, persists to MySQL, and archives the file. |
-| **Daily Summary** (`daily-summary`) | Automation | A scheduled job that reads the day's orders from MySQL, writes a CSV report, and emails it to procurement. |
+| **Daily Summary** (`daily-summary`) | Automation | A scheduled job that reads the day's orders from MySQL, builds an HTML summary, and emails it to procurement. |
 
 ![Architecture diagram: an FTP server holds a /greenfield directory of CSV files and a /harbor directory of XML files; the Order Intake integration polls both through one shared listener, gates on a .ok marker, maps each format to a canonical Order with the data mapper, persists to MySQL, and moves each file to /processed or /errors; the Daily Summary automation reads the day's orders from MySQL and emails a report to procurement](/img/guides/tutorials/order-hub/architecture.svg)
 
@@ -173,6 +155,9 @@ In `orders`, `order_id` is the supplier's **business identifier** (a string such
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
+<details>
+<summary><b>Show the visual walkthrough: project, canonical model, and database connection</b></summary>
+
 1. Launch **WSO2 Integrator** and [create a new integration](../../develop/create-integrations/create-a-new-integration.md#configure-the-integration). Name it `order-intake`. Enable **Create within a project**, name the [project](../../develop/create-integrations/create-a-project.md) `order-hub-freshmart`, and choose where it lives on disk. This is the one project that will hold both the intake and the summary integrations from the [architecture](#architecture). Click **Create Integration**.
 
    ![The Create Integration form, with the integration named order-intake, the project named order-hub-freshmart, and Create within a project enabled](/img/guides/tutorials/order-hub/create-integration.png)
@@ -192,6 +177,8 @@ In `orders`, `order_id` is the supplier's **business identifier** (a string such
    Name the connection `dbClient` and click **Save Connection**. The [persist feature](../../develop/tools/integration-tools/persist-tool.md) generates a type-safe client with [CRUD functions](../../develop/tools/integration-tools/persist-tool.md#use-connection-functions-in-integration-logic) and the matching entities, and declares the connection's configurables (`dbClientHost`, `dbClientPort`, `dbClientDatabase`, and the rest) with the values you entered as defaults.
 
    ![The Create Connection step naming the connection dbClient, with the generated dbClientHost, dbClientPort, and dbClientDatabase configurables](/img/guides/tutorials/order-hub/db-connection.png)
+
+</details>
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -241,14 +228,13 @@ dbClientPassword = "order_hub_pass"
 
 ## Step 2: Stand up the FTP intake (one listener, two services)
 
-<!-- ☐ Build: configs ftpHost/ftpPort/ftpUsername/ftpPassword; FTP listener `ftpListener`;
-     Greenfield service /greenfield; Harbor service /harbor via "Use existing";
-     trigger conditions on each (fileNamePattern, fileAgeFilter, fileDependencyConditions). -->
-
 Both suppliers drop their files on the same file server, so you stand up **one FTP listener** and hang **two services** off it, one watching `/greenfield`, one watching `/harbor`. Each service is gated so it only picks up a file once it matches a name pattern, has settled on disk, and its `.ok` companion has landed. This is the [one listener ↔ many services](../../develop/integration-artifacts/file/ftp-sftp.md#one-listener--many-services) topology: the connection is defined once and shared.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
+
+<details>
+<summary><b>Show the visual walkthrough: configurations, listener, and the two gated services</b></summary>
 
 1. **Declare the FTP configurations.** In the artifacts panel, open **Configurations** and [add](../../develop/integration-artifacts/supporting/configurations.md#adding-a-configuration) `ftpHost` (`string`), `ftpPort` (`int`), `ftpUsername` (`string`), and `ftpPassword` (`string`). Keeping the connection details out of the code lets you point at a different server per environment without touching the integration.
 
@@ -302,6 +288,8 @@ Both suppliers drop their files on the same file server, so you stand up **one F
 You now have two services sharing one listener, each watching its own directory and reading from the same `dbClient` connection.
 
 ![The Design view showing ftpListener with two ftp:Service nodes branching off it, plus the dbClient connection, and the project tree listing both FTP Integration entry points under the single ftpListener](/img/guides/tutorials/order-hub/shared-listener-tree.png)
+
+</details>
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -368,7 +356,8 @@ This is where the hub earns its keep. The Greenfield service receives a CSV file
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-#### Receive the CSV as typed rows
+<details>
+<summary><b>Receive the CSV as typed rows</b></summary>
 
 1. Open the `/greenfield` service and [add a file handler](../../develop/integration-artifacts/file/ftp-sftp.md#adding-a-file-handler): choose **On Create** and set **File Format** to **CSV**. Click **Define Row Schema → Create Type Schema** and define `GreenfieldRow` with the columns of the file: `order_id`, `order_date`, `sku`, `description` (`string`), `qty` (`int`), and `unit_price` (`decimal`).
 
@@ -382,7 +371,10 @@ This is where the hub earns its keep. The Greenfield service receives a CSV file
 
    ![The On Create handler configuration: File Format CSV, Content Schema GreenfieldRow[] greenfieldRows, and After File Processing moving to /processed on success and /errors on error](/img/guides/tutorials/order-hub/greenfield-handler.png)
 
-#### Build the data mapper
+</details>
+
+<details>
+<summary><b>Build the data mapper</b></summary>
 
 3. From **Data Mappers**, create `transformGreenFieldOrders` with input `GreenfieldRow[] greenFieldRows` and output `Order`.
 
@@ -440,7 +432,10 @@ This is where the hub earns its keep. The Greenfield service receives a CSV file
 
     ![The completed transformGreenFieldOrders data mapper, with every Order field mapped from the greenFieldRows input](/img/guides/tutorials/order-hub/greenfield-mapper.png)
 
-#### Persist and archive
+</details>
+
+<details>
+<summary><b>Persist and archive</b></summary>
 
 17. Back on the `/greenfield` service, the `onFileCsv` handler now appears in the **File Handlers** list. Open it.
 
@@ -485,6 +480,8 @@ This is where the hub earns its keep. The Greenfield service receives a CSV file
 26. The completed flow maps the rows, inserts the order, then inserts each line under it.
 
     ![The completed onFileCsv flow: Start, Map Data, the orders post, a Foreach over the lines with the order_lines post inside, and the Error Handler](/img/guides/tutorials/order-hub/greenfield-flow.png)
+
+</details>
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -582,7 +579,8 @@ Harbor sends the same kind of order, but as **XML**, with the values held in att
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-#### Generate the source type from a sample
+<details>
+<summary><b>Generate the source type from a sample</b></summary>
 
 1. From **Types**, add a type and switch to the **Import** tab. Set the format to **XML** and paste a sample Harbor file, then click **Import**. The platform [generates the record structure from the sample](../../develop/integration-artifacts/supporting/data-mapper/generic-type-mappings.md#generate-types-from-a-sample), turning each XML attribute into an `@xmldata:Attribute string` field.
 
@@ -592,13 +590,19 @@ Harbor sends the same kind of order, but as **XML**, with the values held in att
 
    ![Editing the generated record, renaming it from PurchaseOrder to HarborOrder, with its items, currency, date, and id fields](/img/guides/tutorials/order-hub/harbor-type-rename.png)
 
-#### Receive the XML
+</details>
+
+<details>
+<summary><b>Receive the XML</b></summary>
 
 3. Open the `/harbor` service and add an **On Create** handler. Set **File Format** to **XML**, choose `HarborOrder` as the **Content Schema** (delivered as `harborOrder`), and set **Success → Move to** `/processed` and **Error → Move to** `/errors`.
 
    ![The On Create handler configuration for Harbor: File Format XML, Content Schema HarborOrder harborOrder, and the move-to archiving paths](/img/guides/tutorials/order-hub/harbor-handler.png)
 
-#### Build the data mapper
+</details>
+
+<details>
+<summary><b>Build the data mapper</b></summary>
 
 4. From **Data Mappers**, create `transformHarborOrders` with input `HarborOrder harborOrder` and output `Order`, the same output type the Greenfield mapper produces.
 
@@ -664,7 +668,10 @@ Harbor sends the same kind of order, but as **XML**, with the values held in att
 
     ![The completed transformHarborOrders data mapper, with every Order field mapped from the HarborOrder input](/img/guides/tutorials/order-hub/harbor-mapper.png)
 
-#### Persist and archive
+</details>
+
+<details>
+<summary><b>Persist and archive</b></summary>
 
 19. Open the `onFileXml` flow and add a **Map Data** node that runs `transformHarborOrders` over `harborOrder`, into a result `orderResult`.
 
@@ -697,6 +704,8 @@ Harbor sends the same kind of order, but as **XML**, with the values held in att
 25. The completed flow is the same shape as Greenfield's. Only the mapper and the date parsing differ.
 
     ![The completed onFileXml flow: Start, Map Data, the orders post, a Foreach over the lines with the order_lines post inside, and the Error Handler](/img/guides/tutorials/order-hub/harbor-flow.png)
+
+</details>
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -806,10 +815,20 @@ service on ftpListener {
 
 Reporting runs on a clock, not on a file event, so it belongs in a separate [automation](../../develop/integration-artifacts/automation.md) rather than the intake path. You add a second integration to the same project, give it its own database connection, and build an automation that reads the day's orders and emails procurement an HTML summary. Because both integrations live in one project, the automation reuses the same `order_hub` database the intake wrote to.
 
+:::info Scheduling automations
+An automation is a `main` function that runs once per invocation. Its periodic invocation is configured in an external system once the automation is deployed. Available options include:
+
+- **Cron job:** schedule the automation from a cron entry on a Unix or Linux host.
+- **Kubernetes:** define a `CronJob` resource to run the automation on a recurring schedule.
+- **VM:** use a host scheduler such as Windows Task Scheduler or systemd timers.
+- **WSO2 Integration Platform:** configure the schedule in the WSO2 Integration Platform when the integration is pushed to the cloud.
+:::
+
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-#### Create the automation
+<details>
+<summary><b>Create the automation</b></summary>
 
 1. From the project view, click **+ Add** to add a second [integration](../../develop/create-integrations/create-a-new-integration.md#configure-the-integration) to the `order-hub-freshmart` project, and name it `daily-summary`.
 
@@ -823,7 +842,10 @@ Reporting runs on a clock, not on a file event, so it belongs in a separate [aut
 
    ![The Create New Automation screen explaining that periodic invocation is scheduled externally](/img/guides/tutorials/order-hub/summary-automation-create.png)
 
-#### Compute today's date
+</details>
+
+<details>
+<summary><b>Compute today's date</b></summary>
 
 4. In the automation flow, add the `time:utcNow` function to get the current instant.
 
@@ -853,7 +875,10 @@ Reporting runs on a clock, not on a file event, so it belongs in a separate [aut
 
     ![The data mapper mapping timeCivil's year, month, and day onto the date variable](/img/guides/tutorials/order-hub/summary-date-mapper.png)
 
-#### Read today's orders
+</details>
+
+<details>
+<summary><b>Read today's orders</b></summary>
 
 11. This integration needs its own database connection. Add a [**Connect to a Database**](../../develop/tools/integration-tools/persist-tool.md#step-1-add-a-connection) connection to the same `order_hub` MySQL database and name it `dbClient`.
 
@@ -867,7 +892,10 @@ Reporting runs on a clock, not on a file event, so it belongs in a separate [aut
 
     ![The Get rows node with the Where Clause set to order_date equals the date variable](/img/guides/tutorials/order-hub/summary-where-clause.png)
 
-#### Build the HTML summary
+</details>
+
+<details>
+<summary><b>Build the HTML summary</b></summary>
 
 14. Declare a `string[]` named `orderRows`, initialized to `[]`. It collects one HTML table row per order.
 
@@ -901,7 +929,10 @@ Reporting runs on a clock, not on a file event, so it belongs in a separate [aut
 
     ![The htmlBody variable declared in the automation flow](/img/guides/tutorials/order-hub/summary-htmlbody.png)
 
-#### Send the email
+</details>
+
+<details>
+<summary><b>Send the email</b></summary>
 
 22. The SMTP server details belong in [configurations](../../develop/integration-artifacts/supporting/configurations.md#adding-a-configuration). Declare `smtpHost`, `smtpPort`, `smtpUser`, and `smtpPassword`.
 
@@ -922,6 +953,8 @@ Reporting runs on a clock, not on a file event, so it belongs in a separate [aut
 25. The completed automation reads the day's orders, builds the HTML table, and emails it.
 
     ![The completed automation flow: utcNow, utcToCivil, the date variable, the orders query, the row-building loop, the htmlBody, and the email send](/img/guides/tutorials/order-hub/summary-flow.png)
+
+</details>
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -956,8 +989,8 @@ configurable string smtpPassword = ?;
 ```
 
 ```toml
-# Config.toml
-[pasindufernando.daily_summary]
+# Config.toml. The section header uses your package's organization name: [<org>.daily_summary]
+[<org>.daily_summary]
 dbClientPassword = "order_hub_pass"
 smtpPassword = ""
 ```
@@ -1037,7 +1070,7 @@ Now exercise both intakes and the report end to end.
 
 ### Start the services and run the intake
 
-Start the three backing services: the FTP server, MySQL with the `order_hub` schema from [Step 1](#step-1-set-up-the-project-and-the-canonical-model), and the Mailpit SMTP mock. The Docker commands for the FTP and SMTP servers are in the **Prerequisites** collapsibles above.
+Start the three backing services: the FTP server, MySQL with the `order_hub` schema from the Prerequisites, and the Mailpit SMTP mock. The Docker commands for the FTP and SMTP servers are in the **Prerequisites** collapsibles above.
 
 Fill in each integration's `Config.toml` (for `order-intake`, the database and FTP passwords; for `daily-summary`, the database password and SMTP settings), then **Run** the `order-intake` integration. It begins polling `/greenfield` and `/harbor`.
 
@@ -1107,6 +1140,10 @@ docker exec file-order-hub-ftp sh -c 'touch /home/vsftpd/ftpuser/greenfield/GF_9
 ### Run the daily summary
 
 Finally, **Run** the `daily-summary` automation. It queries the orders for today's date, builds the HTML table, and emails the report. Open the Mailpit inbox at [http://localhost:8025](http://localhost:8025) to see the summary, with one row per order and the day's order count.
+
+:::note The report matches on today's date
+The automation selects only orders whose `order_date` equals the day you run it (`order_date = ${date}`). The sample files above use `2026-06-23`, so to see them in the summary either run the automation on that date or change `order_date` in the sample CSV and XML to today's date before dropping them. Otherwise the email arrives with `Total orders today : 0`.
+:::
 
 :::tip Re-running from a clean slate
 To reset between runs, delete everything under the FTP home and clear the tables:
