@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 # Build an Event-Driven Integration
 
-**Time:** Under 10 minutes | **What you'll build:** An event-driven integration that consumes messages from `Orders` queue in RabbitMQ broker and processes them.
+**Time:** Under 10 minutes | **What you'll build:** An event-driven integration that consumes messages from the `Orders` queue in a RabbitMQ broker and processes them.
 
 Event integrations are designed for reactive workflows triggered by messages from a broker. This quick start demonstrates the complete flow: creating a RabbitMQ message listener, adding an event handler to process messages, and implementing the integration logic executed when a message is received.
 
