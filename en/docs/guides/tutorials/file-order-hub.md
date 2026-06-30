@@ -20,6 +20,32 @@ By the end, a CSV file from one supplier and an XML file from another will flow 
 An ingestion hub for **FreshMart**, a retailer whose suppliers send purchase orders as files in incompatible formats: **Greenfield Foods** uploads **CSV**, **Harbor Supplies** uploads **XML**. Each order file is paired with a small `.ok` marker written once its upload finishes. Your integration polls the file server, waits until each order file is complete, **normalizes both formats into one canonical `Order` with the data mapper**, stores the orders in MySQL, and archives each file (to `/processed` on success, `/errors` on failure). A scheduled automation then reads the day's orders and emails a summary to the procurement team. You build it as two integrations in one project, entirely on the canvas.
 :::
 
+## The supplier files
+
+Both suppliers send **one order per file**, paired with a small `.ok` marker written once the upload is complete. The two formats disagree on almost everything, and reconciling them onto one shape is exactly what the data mapper does in [Step 3](#step-3-map-the-greenfield-csv-to-the-canonical-order) and [Step 4](#step-4-map-the-harbor-xml-to-the-same-canonical-order). It helps to know what arrives before you map it.
+
+**Greenfield (CSV).** A header row followed by **one row per line item**. Every row repeats the same `order_id` and `order_date` (one file is one order), and the numeric columns are already typed: `qty` is an integer and `unit_price` a decimal. The date is ISO `YYYY-MM-DD`.
+
+```csv
+order_id,order_date,sku,description,qty,unit_price
+GF-10231,2026-06-23,APL-001,Gala Apples 1kg,120,2.50
+GF-10231,2026-06-23,BAN-004,Bananas 1kg,80,1.20
+GF-10231,2026-06-23,ORG-009,Navel Oranges 1kg,60,3.10
+```
+
+**Harbor (XML).** A single `<purchaseOrder>` element that carries the order header as **attributes** (`id`, `date`, `currency`), with the line items nested under `<items>` as `<item>` elements. Because every value is an XML attribute, the numbers (`units`, `price`) arrive as **text**, and the date is `DD/MM/YYYY`.
+
+```xml
+<purchaseOrder id="HS-55012" date="23/06/2026" currency="USD">
+  <items>
+    <item code="MLK-220" name="Whole Milk 2L" units="200" price="1.85"/>
+    <item code="EGG-012" name="Free-Range Eggs (dozen)" units="150" price="3.40"/>
+  </items>
+</purchaseOrder>
+```
+
+So the two shapes differ in structure (flat rows vs. nested elements), in typing (typed numbers vs. text), in date format (ISO vs. `DD/MM/YYYY`), and even in field names (`sku` vs. `code`, `qty` vs. `units`). The canonical `Order` you define in [Step 1](#step-1-set-up-the-project-and-the-canonical-model) is the single target both of them map onto.
+
 ## Architecture
 
 You build the work as two focused integrations inside one project, plus a shared canonical model they both rely on.
@@ -146,10 +172,6 @@ Everything you build lives in one project that holds both integrations, so you s
 
 You created the `order_hub` database and its tables in the Prerequisites; here you define the canonical model and point a connection at that database.
 
-:::note `order_id` means two different things
-In `orders`, `order_id` is the supplier's **business identifier** (a string such as `GF-10231`). In `order_lines`, `order_id` is the **integer foreign key** into `orders.id`. The persist client surfaces this difference for you (the line's foreign key takes the generated integer key, not the business id), but it is worth keeping straight as you read the inserts in [Step 3](#step-3-map-the-greenfield-csv-to-the-canonical-order).
-:::
-
 ### Create the project and the canonical model
 
 <Tabs>
@@ -260,7 +282,7 @@ Both suppliers drop their files on the same file server, so you stand up **one F
 
    ![The Greenfield FTP Integration service view with the Listener ftpListener chip, an empty File Handlers section, and the Configure button highlighted in the top right](/img/guides/tutorials/order-hub/greenfield-configure.png)
 
-   The **Service Configuration** is a single record you edit as text. Enter the [trigger conditions](../../develop/integration-artifacts/file/dependency-and-trigger-conditions.md) so a file is only delivered when it is genuinely ready:
+   The **Service Configuration** is a single record you edit. Enter the [trigger conditions](../../develop/integration-artifacts/file/dependency-and-trigger-conditions.md) so a file is only delivered when it is genuinely ready:
 
    - a [file name pattern](../../develop/integration-artifacts/file/dependency-and-trigger-conditions.md#file-name-pattern) `GF_.*\.csv`, so only Greenfield CSVs match;
    - a [file age filter](../../develop/integration-artifacts/file/dependency-and-trigger-conditions.md#file-age-filter) `minAge: 30.0`, so a file still being uploaded is left alone until it has settled for 30 seconds;
@@ -285,7 +307,7 @@ Both suppliers drop their files on the same file server, so you stand up **one F
 
    ![The Harbor Service Configuration record showing path /harbor, fileNamePattern HS_.*\.xml, the 30-second fileAgeFilter, and the fileDependencyConditions requiring HS_$1.ok](/img/guides/tutorials/order-hub/harbor-service-config.png)
 
-You now have two services sharing one listener, each watching its own directory and reading from the same `dbClient` connection.
+You now have two services sharing one listener, each watching its own directory.
 
 ![The Design view showing ftpListener with two ftp:Service nodes branching off it, plus the dbClient connection, and the project tree listing both FTP Integration entry points under the single ftpListener](/img/guides/tutorials/order-hub/shared-listener-tree.png)
 
@@ -351,7 +373,7 @@ service on ftpListener {
 
 ## Step 3: Map the Greenfield CSV to the canonical `Order`
 
-This is where the hub earns its keep. The Greenfield service receives a CSV file as typed rows, the [data mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) folds those rows into one canonical `Order`, and the persist client writes the order and its lines to MySQL. Then the file is archived. You build all three on the `/greenfield` service you stood up in [Step 2](#step-2-stand-up-the-ftp-intake-one-listener-two-services).
+This is where the hub earns its keep. The Greenfield service receives the [CSV file](#the-supplier-files) as typed rows, the [data mapper](../../develop/integration-artifacts/supporting/data-mapper/data-mapper.md) folds those rows into one canonical `Order`, and the persist client writes the order and its lines to MySQL. Then the file is archived. You build all three on the `/greenfield` service you stood up in [Step 2](#step-2-stand-up-the-ftp-intake-one-listener-two-services).
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
@@ -363,9 +385,6 @@ This is where the hub earns its keep. The Greenfield service receives a CSV file
 
    ![The Define Row Schema dialog creating the GreenfieldRow type with order_id, order_date, sku, description as string, qty as int, and unit_price as decimal](/img/guides/tutorials/order-hub/greenfield-row-schema.png)
 
-   :::note Add the fields one at a time
-   In **Define Row Schema**, add each field and let the row settle before starting the next. Typing quickly can drop the next field name into the previous row's type column.
-   :::
 
 2. The platform delivers the file as a `GreenfieldRow[]` named `greenfieldRows`. Under [**After File Processing**](../../develop/integration-artifacts/file/ftp-sftp.md#post-processing-moving-or-deleting-files), set **Success → Move to** `/processed` and **Error → Move to** `/errors`, then save. The handler is generated as `onFileCsv`.
 
@@ -380,7 +399,7 @@ This is where the hub earns its keep. The Greenfield service receives a CSV file
 
    ![The Create New Data Mapper form: name transformGreenFieldOrders, input GreenfieldRow[] greenFieldRows, output Order](/img/guides/tutorials/order-hub/greenfield-mapper-create.png)
 
-4. Because one file is one order, the order header comes from the **first row**. Click the `orderId` output field; since the input is an array but you want a single value, choose **Extract Single Element from Array**.
+4. Because one file is one order, the order_id is the same for each row. Click the `orderId` output field; since the input is an array but you want a single row, choose **Extract Single Element from Array**.
 
    ![The data mapper showing the mapping options for orderId, with Extract Single Element from Array selected](/img/guides/tutorials/order-hub/greenfield-mapper-orderid-menu.png)
 
@@ -469,7 +488,7 @@ This is where the hub earns its keep. The Greenfield service receives a CSV file
 
     ![The dbClient connection operations with Insert rows into order_lines table selected inside the Foreach](/img/guides/tutorials/order-hub/greenfield-lines-op.png)
 
-24. Build the line record from `orderLine`, and set its `orderId` to `primaryKeys[0]`, the **integer key** the order insert returned, not the business id (see the [note in Step 1](#step-1-set-up-the-project-and-the-canonical-model)).
+24. Build the line record from `orderLine`, and set its `orderId` to `primaryKeys[0]`, the **integer key** the order insert returned, not the business id.
 
     ![The Record Configuration for the order_lines insert, mapping the OrderLine fields and setting orderId to primaryKeys[0]](/img/guides/tutorials/order-hub/greenfield-persist-lines.png)
 
@@ -574,7 +593,7 @@ For files too big to hold in memory, enable **Stream (Large Files)** on the hand
 
 ## Step 4: Map the Harbor XML to the same canonical `Order`
 
-Harbor sends the same kind of order, but as **XML**, with the values held in attributes, the numbers typed as text, and the date written `DD/MM/YYYY`. The point of this step is that none of that difference survives into the database: the XML lands on the **exact same canonical `Order`** as the CSV, through its own mapper and the same insert shape. You generate the source type from a sample, map it, and persist it just as in [Step 3](#step-3-map-the-greenfield-csv-to-the-canonical-order).
+Harbor sends the same kind of order, but as [**XML**](#the-supplier-files), with the values held in attributes, the numbers typed as text, and the date written `DD/MM/YYYY`. The point of this step is that none of that difference survives into the database: the XML lands on the **exact same canonical `Order`** as the CSV, through its own mapper and the same insert shape. You generate the source type from a sample, map it, and persist it just as in [Step 3](#step-3-map-the-greenfield-csv-to-the-canonical-order).
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
