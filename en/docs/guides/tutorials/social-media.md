@@ -501,7 +501,7 @@ This is the resource that ties everything together. When someone posts, you conf
 
    ![Building the post record and inserting it with the record helper](/img/guides/tutorials/social-media/main-insert-post.png)
 
-6. **Announce it.** Add a `rabbitmqClient` **publishMessage** node with content `{ leaderId: id }` and routing key `ballerina.social.media`, the queue the Post Notifier listens on.
+6. **Announce it.** Add a `rabbitmqClient` **publishMessage** node with content `{ leaderId: id.toString() }` and routing key `ballerina.social.media`, the queue the Post Notifier listens on.
 
    ![Publishing the new-post message to RabbitMQ](/img/guides/tutorials/social-media/main-publish.png)
 
