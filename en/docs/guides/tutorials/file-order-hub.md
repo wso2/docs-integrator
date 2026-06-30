@@ -156,7 +156,7 @@ In `orders`, `order_id` is the supplier's **business identifier** (a string such
 <TabItem value="ui" label="Visual Designer" default>
 
 <details>
-<summary><b>Show the visual walkthrough: project, canonical model, and database connection</b></summary>
+<summary><b>Create the project, canonical model, and database connection</b></summary>
 
 1. Launch **WSO2 Integrator** and [create a new integration](../../develop/create-integrations/create-a-new-integration.md#configure-the-integration). Name it `order-intake`. Enable **Create within a project**, name the [project](../../develop/create-integrations/create-a-project.md) `order-hub-freshmart`, and choose where it lives on disk. This is the one project that will hold both the intake and the summary integrations from the [architecture](#architecture). Click **Create Integration**.
 
@@ -234,7 +234,7 @@ Both suppliers drop their files on the same file server, so you stand up **one F
 <TabItem value="ui" label="Visual Designer" default>
 
 <details>
-<summary><b>Show the visual walkthrough: configurations, listener, and the two gated services</b></summary>
+<summary><b>Declare configurations and create the listener and two services</b></summary>
 
 1. **Declare the FTP configurations.** In the artifacts panel, open **Configurations** and [add](../../develop/integration-artifacts/supporting/configurations.md#adding-a-configuration) `ftpHost` (`string`), `ftpPort` (`int`), `ftpUsername` (`string`), and `ftpPassword` (`string`). Keeping the connection details out of the code lets you point at a different server per environment without touching the integration.
 

@@ -115,7 +115,7 @@ You now have a `social_media` database reachable with these credentials, which y
 Everything you build sits inside one project, so you set that up first. WSO2 Integrator creates the project and your first integration together, in a single form.
 
 <details>
-<summary><b>Show the visual walkthrough: create the project and open the Design view</b></summary>
+<summary><b>Create the project and open the Design view</b></summary>
 
 1. Launch **WSO2 Integrator** and [create a new integration](../../develop/create-integrations/create-a-new-integration.md#configure-the-integration). Name it `social-media`.
 2. Enable **Create within a project**, name the [project](../../develop/create-integrations/create-a-project.md) `social-media`, and choose where it lives on disk. This is the one project that will hold all three integrations from the [architecture](#architecture).
@@ -145,7 +145,7 @@ The first standalone integration is the screening service. Build a small **Senti
 <TabItem value="ui" label="Visual Designer" default>
 
 <details>
-<summary><b>Show the visual walkthrough: service, types, and the sentiment response flow</b></summary>
+<summary><b>Create the service, types, and the response flow</b></summary>
 
 1. From the project view, click **+ Add** to add another integration to the same `social-media` project.
 
@@ -240,7 +240,7 @@ The other standalone integration is the announcement pipeline. Build the **Post 
 <TabItem value="ui" label="Visual Designer" default>
 
 <details>
-<summary><b>Show the visual walkthrough: configurations, Slack connection, and the RabbitMQ event handler</b></summary>
+<summary><b>Add configurations, the Slack connection, and the RabbitMQ handler</b></summary>
 
 1. From the project view, click **+ Add** to add a third integration to the same project. Name it `post-notifier` and click **Add Integration**.
 
@@ -351,7 +351,7 @@ The API talks to three things, so add a connection for each before you build the
 <TabItem value="ui" label="Visual Designer" default>
 
 <details>
-<summary><b>Show the visual walkthrough: the database, RabbitMQ, and Sentiment connections</b></summary>
+<summary><b>Add the database, RabbitMQ, and Sentiment connections</b></summary>
 
 1. **Database.** In the artifacts panel, open **Connections** and click **+**, then choose [**Connect to a Database**](../../develop/tools/integration-tools/persist-tool.md#step-1-add-a-connection). Select **MySQL** and enter the `social_media` credentials from the Prerequisites.
 
@@ -407,7 +407,7 @@ With the connections in place, add the [HTTP service](../../develop/integration-
 <TabItem value="ui" label="Visual Designer" default>
 
 <details>
-<summary><b>Show the visual walkthrough: the HTTP service and the get-users resource</b></summary>
+<summary><b>Create the service and the get-users resource</b></summary>
 
 1. Click **+ Add Artifact**, then **HTTP Service** under **Integration as API**. Keep **Design From Scratch**, set the **Service Base Path** to `/social-media`, and accept the **Shared Listener (Port 9090)**. Click **Create**.
 
@@ -467,7 +467,7 @@ This is the resource that ties everything together. When someone posts, you conf
 <TabItem value="ui" label="Visual Designer" default>
 
 <details>
-<summary><b>Show the visual walkthrough: the post-creation flow</b></summary>
+<summary><b>Build the post-creation flow</b></summary>
 
 1. Add the `POST /users/{id}/posts` resource with a `NewPost` payload (`description`, `tags`, `category`), and define its typed responses: `201` `http:Created`, `404` `http:NotFound`, `406` `http:NotAcceptable`, and `500` `error`.
 
