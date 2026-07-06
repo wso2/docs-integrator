@@ -58,7 +58,7 @@ Clicking a project card opens the project home. It shows all integrations belong
 The page includes:
 
 - Project avatar, display name, and description at the top.
-- An **Integrations** table with **Name**, **Description**, **Type**, and **Last Updated** columns.
+- An **Integrations** table with **Name**, **Description**, **Type**, **Last Updated** and **Actions** columns.
 - A **+ Create Integration** button to add a new integration to the project.
 - An **Integration Types** summary card on the right showing the count by type (Default, MI, and Total).
 

@@ -15,13 +15,13 @@ ICP can authenticate users against an external LDAP directory instead of the bui
 
 All LDAP settings are top-level keys in `conf/deployment.toml`. Only `ldapUserStoreEnabled = true` is strictly required to activate the adapter; all other keys have defaults.
 
-### Activate the adapter
+### Step 1: Activate the adapter
 
 ```toml
 ldapUserStoreEnabled = true
 ```
 
-### Server connection
+### Step 2: Configure the server connection
 
 ```toml
 ldapHostName = "ldap.example.com"   # default: localhost
@@ -33,14 +33,14 @@ ldapConnectionName     = "uid=admin,ou=system"
 ldapConnectionPassword = "secret"
 ```
 
-### User search
+### Step 3: Configure user search
 
 | Key | Default | Description |
 | --- | ------- | ----------- |
 | `ldapUserSearchBase` | `ou=Users,dc=wso2,dc=org` | Base DN for user searches |
 | `ldapUserNameAttribute` | `uid` | Attribute that holds the login username |
 | `ldapUserSearchFilter` | `(&(objectClass=person)(uid=?))` | Filter to locate a user; `?` is replaced with the username |
-| `ldapUserDNPattern` | _(empty)_ | Optional shortcut — construct the DN directly without a search (see below) |
+| `ldapUserDNPattern` | _(empty)_ | Optional shortcut to construct the DN directly without a search (see below) |
 | `ldapDisplayNameAttribute` | _(empty)_ | Attribute used as the display name in ICP; leave empty to use the username |
 
 **`ldapUserDNPattern`** avoids a search round-trip by constructing the DN from the username directly. Use `{0}` as the placeholder:
@@ -51,11 +51,11 @@ ldapUserDNPattern = "uid={0},ou=Users,dc=wso2,dc=org"
 
 If the pattern is set, `ldapUserSearchFilter` and the admin bind are not used for authentication (though they are still used for group lookup if `ldapMemberOfAttribute` is not set).
 
-### Group / role lookup
+### Step 4: Configure group and role lookup
 
-ICP reads groups to determine whether a user should be granted super-admin. Two strategies are supported.
+ICP reads groups solely to determine whether a user should be granted super-admin access. All other access control is managed through ICP's own user management. Two strategies are supported.
 
-#### Strategy A — `memberOf` (Active Directory and some standard LDAP servers)
+#### Strategy A: `memberOf` (Active Directory and some standard LDAP servers)
 
 The user entry contains a `memberOf` attribute that lists the DNs of every group the user belongs to. This is the most efficient strategy.
 
@@ -65,7 +65,7 @@ ldapMemberOfAttribute = "memberOf"
 
 When this is set, the group-search settings below are ignored.
 
-#### Strategy B — Group membership search (standard LDAP)
+#### Strategy B: Group membership search (standard LDAP)
 
 ICP searches the group subtree for entries whose membership attribute contains the user's DN.
 
@@ -84,7 +84,7 @@ ldapMembershipAttribute = "memberUid"
 
 Set `ldapReadGroups = false` to skip group lookup entirely (no user will receive super-admin via LDAP roles).
 
-### Admin role mapping
+### Step 5: Configure admin role mapping
 
 List the LDAP group names (the value of `ldapGroupNameAttribute`, not the full DN) whose members should become ICP super-admins on first login:
 
@@ -193,7 +193,7 @@ On login the adapter:
 1. Resolves the user's LDAP Distinguished Name (DN) — either directly from a pattern or via a directory search.
 2. Authenticates the user by attempting an LDAP bind with their DN and password.
 3. Reads the user's group memberships from the directory.
-4. If any group matches a configured admin role, the user is granted ICP super-admin **on first login** (by adding them to the built-in *Super Admins* group).
+4. If any group matches a configured admin role, the user is granted ICP super-admin (by adding them to the built-in *Super Admins* group). This happens only on the user's **first login** and is not re-evaluated on subsequent logins.
 5. Returns a stable, deterministic user ID (UUID v5 derived from the username and search base) so the same LDAP user always maps to the same ICP user record.
 
 ## Troubleshooting

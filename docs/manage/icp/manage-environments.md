@@ -28,11 +28,11 @@ The environments page shows a table with the following columns:
 | **Created** | Relative timestamp (e.g. *31 days ago*) |
 | **Actions** | **Edit** (pencil) and **Delete** (trash) icons |
 
-Use the search bar to filter environments by name. Pagination controls appear at the bottom when the list exceeds one page.
+Use the search bar to filter environments across all columns. Pagination controls are visible at the bottom of the table.
 
 ## Create an environment
 
-1. On the environments page, click **+ Create**.
+1. On the environments page, click **+ Create Environment**.
 2. Fill in the **Create Environment** form:
 
    | Field | Required | Description |

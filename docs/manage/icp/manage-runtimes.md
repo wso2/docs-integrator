@@ -25,7 +25,7 @@ Runtimes are grouped by environment. Each environment section shows:
 | **Type** | Profile type: default profile or MI |
 | **Component** | Integration name this runtime belongs to |
 | **Status** | Current state: **RUNNING**, OFFLINE, or similar |
-| **Version** | Runtime version, or "Not reported" if unavailable |
+| **Version** | Runtime version, or "-" if unavailable |
 | **Platform** | Ballerina runtime version (e.g. `Ballerina 2201.13.2`) |
 | **OS** | Operating system of the host machine |
 | **Registration time** | Timestamp of first connection to ICP |
@@ -41,8 +41,8 @@ Click **+ Add Runtime** on an environment section to generate a secret and get a
 ## Manage secrets
 
 1. Navigate to the **Runtimes** section at the integration level, then click **Manage Secrets** on any environment section.
-2. The secrets panel opens showing unbound secrets for that environment. Unbound secrets are those not yet claimed by any runtime.
-3. If all secrets are already in use, the panel shows: *"No unbound secrets for this environment."*
+2. The secrets panel opens showing all secrets for that environment - both bound (claimed by a runtime) and unbound (not yet claimed by any runtime).
+3. If there are no secrets, the panel shows: *"No secrets for this integration in this environment."*
 4. Click the delete icon next to a secret to revoke it.
 
 ## Scope differences

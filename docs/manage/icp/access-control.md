@@ -137,6 +137,7 @@ Go to the organization **Access control** and open the **Users** tab. Each user 
 | **Reset password** | Opens a dialog to set a new password |
 | **Unlock account** | Re-enables a locked account |
 | **Revoke sessions** | Terminates all active sessions (disabled for your own account) |
+| **Delete user** | Permanently removes the user |
 
 ## Reference
 

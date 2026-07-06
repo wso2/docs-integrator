@@ -4,11 +4,9 @@ title: Built-in User Store
 
 # Built-in User Store
 
-The built-in user store keeps user credentials — password hashes, salts, and per-user attributes such as failed-login counters — in a dedicated **credentials database**, separate from the main ICP database that holds projects, environments, and integration metadata.
+The built-in user store keeps user credentials (password hashes, salts, and per-user attributes such as failed-login counters) in a dedicated **credentials database**, separate from the main ICP database that holds projects, environments, and integration metadata.
 
 By default both databases use the embedded H2 engine, writing to `<ICP_HOME>/bin/database/`. For production, switch the credentials database to PostgreSQL, MySQL, or MSSQL.
-
----
 
 ## Default Setup (H2)
 
@@ -22,13 +20,24 @@ The default `admin` / `admin` credentials are publicly known. Change the passwor
 
 ## Connecting an External Database
 
-### Step 1 — Create the database and user
+### Step 1: Create the database and user
 
 Create a dedicated database and user on the database server. The user needs `CREATE`, `INSERT`, `UPDATE`, `DELETE`, and `SELECT` privileges on the credentials database.
 
-### Step 2 — Initialize the schema
+**PostgreSQL example:**
 
-Run the appropriate init script to create the `user_credentials` and `user_attributes` tables and seed the default `admin` user. The scripts are included in the ICP distribution:
+```sql
+CREATE DATABASE credentials_db;
+CREATE USER <icp_user> WITH PASSWORD '<icp_user_password>';
+GRANT CONNECT ON DATABASE credentials_db TO <icp_user>;
+\c credentials_db
+GRANT USAGE, CREATE ON SCHEMA public TO <icp_user>;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO <icp_user>;
+```
+
+### Step 2: Initialize the schema
+
+Run the appropriate init script to create the `user_credentials` and `user_attributes` tables and seed the default `admin` user. The scripts are located in the ICP installation directory:
 
 | Database   | Init script                                  |
 | ---------- | -------------------------------------------- |
@@ -39,25 +48,24 @@ Run the appropriate init script to create the `user_credentials` and `user_attri
 Example for PostgreSQL:
 
 ```bash
-psql -h <host> -U <admin_user> -d <credentials_db> \
-  -f db-scripts/credentials_postgresql_init.sql
+psql -h <hostname> -U <icp_user> -d credentials_db -f db-scripts/credentials_postgresql_init.sql
 ```
 
 The init script seeds the `admin` user with a bcrypt hash of the default password `admin`.
 
 The default `admin` / `admin` credentials are publicly known. Change the password immediately after first login via **Profile** > **Change Password**.
 
-### Step 3 — Configure deployment.toml
+### Step 3: Configure deployment.toml
 
 Add the `credentialsDb*` keys as **top-level entries** in `<ICP_HOME>/conf/deployment.toml`, before any `[section]` header:
 
 ```toml
 credentialsDbType     = "postgresql"
-credentialsDbHost     = "db.example.com"
+credentialsDbHost     = "<hostname>"
 credentialsDbPort     = 5432
 credentialsDbName     = "credentials_db"
-credentialsDbUser     = "icp_user"
-credentialsDbPassword = "changeme"
+credentialsDbUser     = "<icp_user>"
+credentialsDbPassword = "<icp_user_password>"
 ```
 
 These keys must be top-level entries, **not** inside the `[icp_server.storage]` section. The `[icp_server.storage]` section controls the main ICP database (projects, environments, etc.), which is configured independently.

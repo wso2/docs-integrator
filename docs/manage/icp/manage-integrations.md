@@ -13,8 +13,6 @@ An integration in ICP represents a deployable Ballerina or MI application that r
 
    | Field | Required | Description |
    |-------|----------|-------------|
-   | **Organization** | Auto | Pre-filled with the current organization. Read-only when navigating from a project. |
-   | **Project** | Auto | Pre-filled with the current project. Change via the dropdown if needed. |
    | **Display Name** | Yes | Human-readable name shown in the console (e.g. `Order Create`) |
    | **Name** | Auto | URL-safe slug derived from the display name. Click the edit icon to override. |
    | **Integration Type** | Yes | **Default profile** (Ballerina) or **MI** (Micro Integrator). Defaults to default profile. |
@@ -28,13 +26,13 @@ The integration appears in the project's integrations table on success.
 
 The integration overview shows one environment card per environment. Each card displays:
 
-- Environment name and runtime count badge (e.g. *0 runtimes* or *1/1 Online*).
+- Environment name and runtime count badge (e.g. *0/1 Offline* or *1/1 Online*).
 - A refresh icon to reload runtime status.
 - **Entry Points** tab listing the services exposed by the integration.
 - **Supporting Artifacts** tab showing additional artifacts when present.
 - **+ Add Runtime** link when no runtimes are registered yet.
 
-When no runtimes are connected, the card shows: *"No runtimes registered for this environment."*
+When no runtimes are connected, the card shows: *"No entry points found for this integration. Add runtime to get started."*
 
 ### Integration sidebar
 
@@ -72,10 +70,10 @@ The **Logs** page shows runtime log entries when both a connected runtime and Op
 
 When operational, the page provides:
 
-- Environment filter
-- Log level filter (INFO, WARN, ERROR, DEBUG)
-- Time range selector
-- Log entries with timestamps, levels, and messages
+- **Filtering**: Environment, log level (INFO, WARN, ERROR, DEBUG), time range, and a keyword search bar
+- **Display controls**: Sort order (Newest first / Oldest first), auto-fetch toggle for automatic reload, and an entry count showing how many entries are loaded
+- **Actions**: Refresh button for manual reload and a download button to export log entries
+- **Log entries**: Each entry shows a timestamp, level, and message
 
 ### Loggers
 
@@ -111,10 +109,10 @@ The **Metrics** page shows request performance data when both a connected runtim
 
 When operational, the page provides:
 
-- Summary cards: Total Requests, Error Count, Error Percentage, and P95 Latency
-- Requests Per Minute chart
-- Request Latency chart (average, P50, P95, P99)
-- Most Used APIs table with per-endpoint request counts and average response times
+- **Summary cards**: Total Requests, Error Count, Error Percentage, and P95 Latency
+- **Overview charts**: Requests Per Minute and Request Latency (average, P50, P95, P99)
+- **Most Used APIs**: Table with per-endpoint request counts, error counts, and average response times
+- **Statistics of APIs**: Section with an API filter dropdown, showing Requests Per Minute, Average Request Latency, Successful Requests by API, and Failed Requests by API charts
 
 ### Listeners
 
@@ -127,7 +125,7 @@ Ballerina listeners (HTTP, TCP, and other transport listeners) appear in the **E
 1. Open the integration and go to **Overview**.
 2. In the environment card, click the **Entry Points** tab.
 3. Click the listener you want to control. The listener detail panel opens on the right.
-4. Use the toggle in the panel to start or stop the listener.
+4. Use the toggle (State) in the panel to start or stop the listener.
 5. A confirmation dialog appears. Click **Enable** or **Disable** to confirm.
 
 ICP sends a `START` or `STOP` command to every runtime associated with the listener. The listener state updates to **RUNNING** or **STOPPED** once the runtimes acknowledge the command.
