@@ -20,6 +20,9 @@ The Code to Cloud feature supports the following containerized deployment platfo
 - For Kubernetes: [kubectl](https://kubernetes.io/docs/tasks/tools/) installed and configured against a Kubernetes cluster
 - For OpenShift: [OpenShift CLI (`oc`)](https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/getting-started-cli.html) installed and logged in to your cluster
 
+:::note Package naming constraint
+The `name` field in `Ballerina.toml` must contain only alphanumerics, underscores, and periods — hyphens are not allowed. Use `my_integration` rather than `my-integration`. Image names in `Cloud.toml` under `[container.image]` can include hyphens.
+
 ## How Code to Cloud works
 
 When you build a Ballerina project with a cloud target, the compiler extension generates deployment artifacts alongside the executable JAR. The artifacts land in the `target/` directory:
@@ -99,18 +102,20 @@ The output confirms the image was built and shows the `docker run` command:
 
 ```
 Compiling source
-        myorg/my-integration:1.0.0
+        myorg/my_integration:1.0.0
 
 Generating executable
 
-Generating artifacts...
+Generating artifacts
 
-        @kubernetes:Docker                       - complete 2/2
+Building the docker image
+
+        ... (Docker BuildKit output) ...
 
         Execute the below command to run the generated Docker image:
         docker run -d -p 9090:9090 myorg/my-integration:v1.0.0
 
-        target/bin/my-integration.jar
+        target/bin/my_integration.jar
 ```
 
 ### Step 5: Run the container
@@ -220,20 +225,32 @@ bal build
 The compiler generates all Kubernetes manifests and prints the `kubectl apply` command:
 
 ```
-Generating artifacts...
+Compiling source
+        myorg/my_integration:1.0.0
 
-        @kubernetes:Service                      - complete 1/2
-        @kubernetes:Service                      - complete 2/2
-        @kubernetes:ConfigMap                    - complete 1/1
-        @kubernetes:Deployment                   - complete 1/1
-        @kubernetes:HPA                          - complete 1/1
-        @kubernetes:Docker                       - complete 2/2
+Generating executable
+
+Generating artifacts
+
+        @kubernetes:Service
+        @kubernetes:ConfigMap
+        @kubernetes:Deployment
+        @kubernetes:HPA
+
+Building the docker image
+
+        ... (Docker BuildKit output) ...
 
         Execute the below command to deploy the Kubernetes artifacts:
-        kubectl apply -f /path/to/project/target/kubernetes/my-integration
+        kubectl apply -f /path/to/project/target/kubernetes/my_integration
+
+        Execute the below command to access service via NodePort:
+        kubectl expose deployment my-integration-deployment --type=NodePort --name=my-integration-svc-local
+
+        target/bin/my_integration.jar
 ```
 
-For a service-type workload, the generated manifest includes a `Deployment`, `Service`, `ConfigMap`, and `HorizontalPodAutoscaler`. The  `HorizontalPodAutoscaler` is only generated when `[cloud.deployment.autoscaling]` is configured.
+For a service-type workload, the generated manifest includes a `Deployment`, `Service`, `ConfigMap`, and `HorizontalPodAutoscaler`. The `HorizontalPodAutoscaler` is only generated when `[cloud.deployment.autoscaling]` is configured.
 
 For Automations, the compiler generates a `Job` or `CronJob` resource instead of a `Deployment`, with no `Service` or `HorizontalPodAutoscaler`.
 
@@ -250,16 +267,16 @@ If you are using Minikube, run `eval $(minikube docker-env)` before `bal build` 
 ### Step 5: Deploy
 
 ```bash
-kubectl apply -f target/kubernetes/my-integration/
+kubectl apply -f target/kubernetes/my_integration/
 ```
 
 Expected output for a service-type workload:
 
 ```
-service/my-integration-svc created
+service/my-integration created
 configmap/config-config-map created
 deployment.apps/my-integration-deployment created
-horizontalpodautoscaler.autoscaling/my-integration-hpa created
+horizontalpodautoscaler.autoscaling/my-integration created
 ```
 
 Automations generate `Job` or `CronJob` resources instead of a `Deployment`, and do not produce a `Service` or `HorizontalPodAutoscaler`.
@@ -384,22 +401,29 @@ bal build
 The compiler generates all OpenShift manifests and prints the `oc apply` command:
 
 ```
-Generating artifacts...
+Compiling source
+        myorg/my_integration:1.0.0
 
-        @kubernetes:Service                      - complete 1/2
-        @kubernetes:Service                      - complete 2/2
-        @kubernetes:ConfigMap                    - complete 1/1
-        @kubernetes:Deployment                   - complete 1/1
-        @kubernetes:HPA                          - complete 1/1
-        @kubernetes:Docker                       - complete 2/2
+Generating executable
 
-        Execute the below command to deploy the Kubernetes artifacts:
-        oc apply -f /path/to/project/target/openshift/my-integration
+Generating artifacts
 
-        target/bin/my-integration.jar
+        @kubernetes:Service
+        @kubernetes:ConfigMap
+        @kubernetes:Deployment
+        @kubernetes:HPA
+
+Building the docker image
+
+        ... (Docker BuildKit output) ...
+
+        Execute the below command to deploy the OpenShift artifacts:
+        oc apply -f /path/to/project/target/openshift/my_integration
+
+        target/bin/my_integration.jar
 ```
 
-For a service-type workload, the generated manifest includes a `Deployment`, `Service`, `ConfigMap`, and `HorizontalPodAutoscaler`. The  `HorizontalPodAutoscaler` is only generated when `[cloud.deployment.autoscaling]` is configured.
+For a service-type workload, the generated manifest includes a `Deployment`, `Service`, `ConfigMap`, and `HorizontalPodAutoscaler`. The `HorizontalPodAutoscaler` is only generated when `[cloud.deployment.autoscaling]` is configured.
 
 For Automations, the compiler generates a `Job` or `CronJob` resource instead of a `Deployment`, with no `Service` or `HorizontalPodAutoscaler`.
 
@@ -414,16 +438,16 @@ docker push myorg/my-integration:v1.0.0
 ### Step 5: Deploy
 
 ```bash
-oc apply -f target/openshift/my-integration/
+oc apply -f target/openshift/my_integration/
 ```
 
 Expected output:
 
 ```
-service/my-integration-svc created
+service/my-integration created
 configmap/config-config-map created
 deployment.apps/my-integration-deployment created
-horizontalpodautoscaler.autoscaling/my-integration-hpa created
+horizontalpodautoscaler.autoscaling/my-integration created
 ```
 
 Automations generate `Job` or `CronJob` resources instead of a `Deployment`, and do not produce a `Service` or `HorizontalPodAutoscaler`.
