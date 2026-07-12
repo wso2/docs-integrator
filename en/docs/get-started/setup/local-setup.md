@@ -8,6 +8,20 @@ keywords: [wso2 integrator, local setup, install, ide, windows, macos, linux]
 
 Install WSO2 Integrator IDE on your machine to develop, test, and debug integrations locally. The IDE is available for Windows, macOS, and Linux.
 
+## System requirements
+
+Before installing WSO2 Integrator, ensure your machine meets the following hardware and software requirements:
+
+| Requirement | Minimum | Recommended |
+| :--- | :--- | :--- |
+| **Operating System** | Windows 10/11 (64-bit), macOS 12 (Monterey) or later, Linux (Ubuntu/Debian, CentOS/RHEL) | Windows 10/11 (64-bit), macOS 14 (Sonoma) or later, Linux (Ubuntu/Debian, CentOS/RHEL) |
+| **Processor (CPU)** | Intel Core i3 (Dual-Core, 2.0 GHz) or equivalent | Intel Core i5/i7 (Quad-Core, 2.5 GHz or above) or Apple Silicon (M1/M2/M3) |
+| **Memory (RAM)** | 4 GB | 8 GB or more |
+| **Disk Space** | 2 GB free space | 10 GB free space (SSD recommended) |
+| **Network** | Active internet connection (for installation, downloading dependencies, and WSO2 Cloud connectivity) | Broadband internet connection |
+
+---
+
 ## Installation steps
 
 ### Step 1: Download WSO2 Integrator
