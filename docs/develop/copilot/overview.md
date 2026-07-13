@@ -65,6 +65,15 @@ Copilot can run your integrations and read the runtime logs to debug issues as t
 
 ![Copilot debugging an integration by reproducing the failing request, inspecting the HTTP response and service logs, and identifying a case-sensitivity bug in the team filter.](/img/develop/copilot/debugging-using-service-logs.png)
 
+## Chat history
+
+Copilot saves each project's conversation, so it stays available after you reload or restart the IDE. History is tied to the project's location on disk, so it no longer appears if you move, rename, or open the project from a different path.
+
+You can also reset the conversation in two ways:
+
+- **New Chat**: Clears the current project's history and starts a fresh conversation.
+- **Restore Checkpoint**: Rolls your integration back to a saved checkpoint, undoing the changes Copilot made afterward and removing the later prompts.
+
 ## Slash commands
 
 Type `/` in the Copilot input bar to invoke a command for a specific task.
