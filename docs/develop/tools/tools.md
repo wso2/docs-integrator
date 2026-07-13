@@ -22,6 +22,7 @@ Generate Ballerina code from API specifications, protocol definitions, and domai
 - [EDI Tool](integration-tools/edi-tool.md) -- Generate Ballerina code from EDI schema definitions for B2B data exchange
 - [WSDL Tool](integration-tools/wsdl-tool.md) -- Generate clients for SOAP/WSDL web services
 - [XSD Tool](integration-tools/xsd-tool.md) -- Generate Ballerina record types from XML Schema definitions
+- [Connector Tool](integration-tools/connector-tool.md) -- Generate production-ready Ballerina connectors from OpenAPI specifications using an AI-assisted pipeline
 
 ## Migration tools
 
@@ -51,3 +52,4 @@ Migrate existing integrations from other platforms to WSO2 Integrator.
 | EDI | `bal edi` | EDI schema | EDI parser/generator | CLI only |
 | Scan | `bal scan` | Source code | Analysis report | CLI only |
 | Persist | `bal persist` | Record types | Data store client | CLI only |
+| Connector | `bal connector` | OpenAPI YAML/JSON | Full connector package (client, tests, examples, docs) | CLI only |
