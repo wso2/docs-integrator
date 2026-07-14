@@ -14,6 +14,7 @@ The Code to Cloud feature supports the following containerized deployment platfo
 - **[Kubernetes](#kubernetes-deployment)** — Deploy to any Kubernetes cluster with auto-generated manifests, services, and autoscaling configurations
 - **[Red Hat OpenShift](#red-hat-openshift-deployment)** — Deploy to OpenShift using the `oc` CLI with platform-specific manifests
 - **[Amazon EKS](#amazon-eks-deployment)** — Deploy to AWS Elastic Kubernetes Service using ECR for image hosting and an internal NLB for service access
+- **[Azure AKS](#azure-aks-deployment)** — Deploy to Azure Kubernetes Service using ACR for image hosting and an Azure Load Balancer for service access
 
 :::info Prerequisites
 - [Docker](https://www.docker.com/) installed and running on your build machine
@@ -568,7 +569,7 @@ docker buildx build \
   target/docker/my_integration/
 ```
 
-If your build machine is already `x86_64`, you can skip `docker buildx` and use `docker push` on the image built by `bal build` instead. For **Arm64 node groups**, omit the `--platform` flag or set it to `linux/arm64`.
+If your build machine is already `x86_64`, you can skip `docker buildx` and use `docker push` on the image built by `bal build` instead. For **Arm64 node groups**, set `--platform linux/arm64`; you can omit the flag only when building on an Arm64 machine (such as Apple Silicon) where the default platform already matches.
 
 ### Step 5: Configure VPC endpoints for private clusters
 
@@ -684,3 +685,183 @@ curl http://<nlb-hostname>.elb.<region>.amazonaws.com:9090/<your-service-path>
 ```
 
 An internal NLB is only reachable from within the same VPC. For internet-facing access, replace `internal-elb` with `elb` in the subnet tag and set `aws-load-balancer-scheme` to `internet-facing` in the Service manifest. Ensure the subnets have a route to an internet gateway.
+
+## Azure AKS deployment
+
+Azure Kubernetes Service (AKS) follows the same Kubernetes deployment path described above, with a few Azure-specific steps: pushing the image to Azure Container Registry (ACR), attaching the registry to the cluster, and exposing the service via an Azure Load Balancer.
+
+### Prerequisites
+
+In addition to the [general prerequisites](#prerequisites), you need:
+
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed and configured (`az login`)
+- An AKS cluster with `kubectl` configured: `az aks get-credentials --resource-group <resource-group> --name <cluster-name>`
+- An [Azure Container Registry](https://azure.microsoft.com/en-us/products/container-registry) created and attached to the cluster:
+
+```bash
+az acr create \
+  --resource-group <resource-group> \
+  --name <registry-name> \
+  --sku Basic
+
+az aks update \
+  --resource-group <resource-group> \
+  --name <cluster-name> \
+  --attach-acr <registry-name>
+```
+
+You can also attach the ACR at cluster creation time with the `--attach-acr` flag:
+
+```bash
+az aks create \
+  --resource-group <resource-group> \
+  --name <cluster-name> \
+  --node-count 1 \
+  --attach-acr <registry-name> \
+  --generate-ssh-keys
+```
+
+### Step 1: Set the cloud target
+
+Open `Ballerina.toml` and set the cloud target:
+
+```toml
+[build-options]
+cloud = "k8s"
+```
+
+### Step 2: Configure the deployment
+
+Create a `Cloud.toml` with your ACR login server as the image repository so the generated Kubernetes manifests reference the correct image URI:
+
+```toml
+[container.image]
+repository = "<registry-name>.azurecr.io"
+name = "my-integration"
+tag = "v1.0.0"
+
+[cloud.deployment]
+min_memory = "100Mi"
+max_memory = "256Mi"
+min_cpu = "500m"
+max_cpu = "500m"
+
+[cloud.deployment.autoscaling]
+min_replicas = 2
+max_replicas = 5
+cpu = 60
+
+[[cloud.config.files]]
+file = "./Config.toml"
+
+[cloud.deployment.probes.liveness]
+port = 9091
+path = "/probes/healthz"
+
+[cloud.deployment.probes.readiness]
+port = 9091
+path = "/probes/readyz"
+```
+
+### Step 3: Build
+
+```bash
+bal build
+```
+
+This generates the Kubernetes manifests under `target/kubernetes/my_integration/` and the Docker build context under `target/docker/my_integration/`.
+
+### Step 4: Build and push the image
+
+Log in to ACR using the Azure CLI:
+
+```bash
+az acr login --name <registry-name>
+```
+
+For **x86_64 node pools**: if you are building on Apple Silicon or another ARM machine, use `docker buildx` to produce a `linux/amd64` image and push it directly to ACR:
+
+```bash
+docker buildx build \
+  --platform linux/amd64 \
+  --tag <registry-name>.azurecr.io/my-integration:v1.0.0 \
+  --push \
+  target/docker/my_integration/
+```
+
+If your build machine is already `x86_64`, you can skip `docker buildx` and push the image built by `bal build` directly:
+
+```bash
+docker push <registry-name>.azurecr.io/my-integration:v1.0.0
+```
+
+For **Arm64 node pools**, set `--platform linux/arm64`; you can omit the flag only when building on an Arm64 machine (such as Apple Silicon) where the default platform already matches.
+
+### Step 5: Deploy
+
+```bash
+kubectl apply -f target/kubernetes/my_integration/
+```
+
+Expected output for a service-type workload:
+
+```bash
+service/my-integration created
+configmap/config-config-map created
+deployment.apps/my-integration-deployment created
+horizontalpodautoscaler.autoscaling/my-integration created
+```
+
+Verify the pods come up:
+
+```bash
+kubectl get pods
+kubectl get services
+kubectl logs -f deployment/my-integration-deployment
+```
+
+### Step 6: Expose and test
+
+The generated manifest deploys a `ClusterIP` service. Create a separate `LoadBalancer` service to expose the integration externally via an Azure Load Balancer:
+
+```bash
+kubectl apply -f - <<'EOF'
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-integration-lb
+spec:
+  selector:
+    app: my_integration
+  type: LoadBalancer
+  ports:
+    - port: 9090
+      targetPort: 9090
+      protocol: TCP
+EOF
+```
+
+Wait for the public IP to be assigned:
+
+```bash
+kubectl get svc my-integration-lb
+```
+
+```bash
+NAME                TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)          AGE
+my-integration-lb   LoadBalancer   10.0.179.234   <public-ip>      9090:31234/TCP   60s
+```
+
+Call the service once the external IP is available:
+
+```bash
+curl http://<public-ip>:9090/<your-service-path>
+```
+
+For an internal (private) load balancer that is reachable only within the virtual network, add the following annotation to the Service manifest:
+
+```yaml
+metadata:
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+```
