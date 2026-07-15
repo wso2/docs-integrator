@@ -6,7 +6,7 @@ title: Connectors Overview
 
 Send a Slack notification when an order ships. Read customer records from Salesforce. Write results to a Google Sheet. Query a database and return the data in an API response.
 
-Connectors make these integrations possible without writing low-level HTTP or protocol code. WSO2 Integrator includes 400+ pre-built connectors for the services your business already uses.
+Connectors make these integrations possible without writing low-level HTTP or protocol code. WSO2 Integrator includes pre-built connectors for the services your business already uses.
 
 ## How connectors fit into your integration
 
