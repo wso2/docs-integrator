@@ -30,8 +30,6 @@ See the **[Action Reference](action-reference.md)** for the full list of operati
 
 * **[Action Reference](action-reference.md)**: Full reference for all clients — operations, parameters, return types, and sample code.
 
-* **[Example](example.md)**: Learn how to build and configure an integration using the **SAP Business One Business Partners** connector, including connection setup, operation configuration, and execution flow.
-
 ## How to contribute
 
 As an open source project, WSO2 welcomes contributions from the community.
