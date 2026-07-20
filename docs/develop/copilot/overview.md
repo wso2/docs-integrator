@@ -29,6 +29,10 @@ Copilot can search the internet for external context or up-to-date documentation
 
 ![Web tools permission prompt in the Copilot input bar.](/img/develop/copilot/web-tool.png)
 
+## MCP tools
+
+Extend Copilot with your own tools by connecting Model Context Protocol (MCP) servers. Once a server is connected, its tools become available to Copilot in chat alongside the built-in tools. See [MCP tools](mcp-tools.md) to enable it and add a server.
+
 ## Clarifying requirements
 
 During the planning or generation phase, Copilot may identify missing information that is critical to the integration. If a requirement is ambiguous, it pauses and presents a list of suggested options. Select one, or select **Other** to type your own answer.
