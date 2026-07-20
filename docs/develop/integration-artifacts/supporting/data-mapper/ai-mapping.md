@@ -22,11 +22,11 @@ For the Data Mapper editor and manual mapping, see [Data Mapper editor](../../..
 
     ![Data Mapper canvas with the input schema on the left and the output schema on the right with no mappings](/img/develop/integration-artifacts/supporting/data-mapper/ai-data-mapper-canvas.png)
 
-4. In the top-right corner of the canvas, select **Auto Map**. The WSO2 Integrator Copilot panel opens alongside the canvas with the `/datamap` command preloaded.
+4. In the top-right corner of the canvas, select **Auto Map**. The WSO2 Integrator Copilot panel opens alongside the canvas with the `/data-map` skill preloaded.
 
-    ![WSO2 Integrator Copilot panel open alongside the Data Mapper canvas with the /datamap command preloaded in the input field](/img/develop/integration-artifacts/supporting/data-mapper/ai-data-mapper-copilot-command.png)
+    ![WSO2 Integrator Copilot panel open alongside the Data Mapper canvas with the /data-map skill preloaded in the input field](/img/develop/integration-artifacts/supporting/data-mapper/ai-data-mapper-copilot-command.png)
 
-5. Submit the command. The Copilot reads the project files, generates field mappings based on the input and output types, and integrates them into your workspace. When complete, mapping lines appear between the matched fields on the canvas.
+5. Submit it. The Copilot reads the project files, generates field mappings based on the input and output types, and integrates them into your workspace. When complete, mapping lines appear between the matched fields on the canvas.
 
     ![Data Mapper canvas with generated field mapping lines connecting the input and output fields, with the completion message in the Copilot panel](/img/develop/integration-artifacts/supporting/data-mapper/ai-data-mapper-result.png)
 

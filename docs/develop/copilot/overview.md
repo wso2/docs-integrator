@@ -65,6 +65,49 @@ Copilot can run your integrations and read the runtime logs to debug issues as t
 
 ![Copilot debugging an integration by reproducing the failing request, inspecting the HTTP response and service logs, and identifying a case-sensitivity bug in the team filter.](/img/develop/copilot/debugging-using-service-logs.png)
 
+## Project instructions
+
+Add an `AGENTS.md` file to your project root to give Copilot standing instructions for the workspace, such as preferred libraries, naming and style rules, or error-handling patterns. Copilot reads the file as project context and applies the relevant instructions on every request.
+
+To create or edit the file, open **Settings** in the Copilot panel and select the file icon on the **Agent instructions** row under **Customize Copilot**. If `AGENTS.md` does not exist yet, selecting the icon creates it from a starter template; otherwise, it opens the existing file for editing.
+
+![The Customize Copilot section in Settings with the Agent instructions row.](/img/develop/copilot/agents-md-settings-row.png)
+
+## Skills
+
+Skills are reusable instruction sets for specific tasks. When your request matches a skill, Copilot applies it automatically for consistent results without repeating the same guidance each time.
+
+Copilot organizes skills into three groups:
+
+- **Built-in**: Skills shipped with Copilot.
+- **Project**: Skills saved to your project under `.agents/skills`.
+- **User**: Skills available across all your projects.
+
+### Manage skills
+
+Open **Settings** in the Copilot panel and select the **Skills** row under **Customize Copilot**. The Skills panel lists each group. Enable or disable individual skills using the controls next to each skill.
+
+Some built-in skills are always active and cannot be disabled.
+
+![The Skills panel listing built-in, project, and user skills with enable toggles.](/img/develop/copilot/skills-manager-panel.png)
+
+### Add your own skill
+
+Select **Add skill** to define a custom skill.
+
+- **Create new**: Enter a **Name**, a **Trigger / Description** that tells Copilot when to use the skill, and an optional **Body** with detailed rules and instructions.
+- **Import**: Upload a `.md` file (with the skill name and description in YAML front matter) or a `.zip` or `.skill` file (containing a `SKILL.md`).
+
+Choose the **Type** to control where the skill lives: **Project** saves it to your project, while **User** makes it available across all your projects.
+
+![The Add skill dialog with the Create new and Import tabs.](/img/develop/copilot/add-skill-modal.png)
+
+### How Copilot uses skills
+
+When a skill is enabled and your request matches its trigger, Copilot applies the skill automatically. If a matching skill is disabled, Copilot pauses and asks whether to enable it. Select **Enable** to turn it on, or **Skip** to continue without it for that message.
+
+![The prompt asking whether to enable a matching skill for the current request.](/img/develop/copilot/enable-skill-prompt.png)
+
 ## Chat history
 
 Copilot saves each project's conversation, so it stays available after you reload or restart the IDE. History is tied to the project's location on disk, so it no longer appears if you move, rename, or open the project from a different path.
@@ -76,7 +119,7 @@ You can also reset the conversation in two ways:
 
 ## Slash commands
 
-Type `/` in the Copilot input bar to invoke a command for a specific task.
+Type `/` in the Copilot input bar to invoke a command for a specific task. You can also invoke an enabled skill directly: type `/` and select the skill from the list, for example `/data-map`.
 
 | Command | Description |
 |---|---|
@@ -84,10 +127,10 @@ Type `/` in the Copilot input bar to invoke a command for a specific task.
 | `/doc` | Generate documentation for your integration. |
 | `/openapi` | Import OpenAPI specifications. |
 | `/typecreator` | Create custom types. |
-| `/datamap` | [Generate data mappings](../integration-artifacts/supporting/data-mapper/ai-mapping.md). |
+| `/data-map` | [Generate data mappings](../integration-artifacts/supporting/data-mapper/ai-mapping.md). |
 | `/natural-programming` | Experimental. Generate code from requirements and check for drift. |
 
-`/ask` answers only from the Ballerina documentation and does not use your codebase context. For questions about your code or any other topic, message Copilot directly without a command.
+`/ask` answers only from the Ballerina documentation and does not use your codebase context. For questions about your code or any other topic, message Copilot directly without a command. `/data-map` is powered by the built-in `data-map` skill rather than a command.
 
 ## See also
 

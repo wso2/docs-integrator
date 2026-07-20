@@ -46,7 +46,7 @@ When you need a focused, visual mapping rather than a free-form function, use **
 
 ## Map with AI
 
-Select **Auto Map** in the top-right corner of the data mapper canvas. The WSO2 Integrator Copilot panel opens with the `/datamap` command preloaded. Submit it to generate mappings between your types automatically.
+Select **Auto Map** in the top-right corner of the data mapper canvas. The WSO2 Integrator Copilot panel opens with the `/data-map` skill preloaded. Submit it to generate mappings between your types automatically.
 
 For a full walkthrough with examples, see [AI data mapping](./ai-mapping.md).
 
