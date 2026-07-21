@@ -11,6 +11,7 @@ Install WSO2 Integrator IDE on your machine to develop, test, and debug integrat
 ## System requirements
 
 Before installing WSO2 Integrator, ensure your machine meets the following hardware and software requirements:
+
 | Requirement | Minimum | Recommended |
 | :--- | :--- | :--- |
 | **Operating System** | Windows 10/11 (64-bit), macOS 12 (Monterey) or later, Linux (Ubuntu/Debian, CentOS/RHEL, Fedora) | Windows 10/11 (64-bit), macOS 14 (Sonoma) or later, Linux (Ubuntu/Debian, CentOS/RHEL, Fedora) |
@@ -18,8 +19,10 @@ Before installing WSO2 Integrator, ensure your machine meets the following hardw
 | **Memory (RAM)** | 4 GB | 8 GB or more |
 | **Disk Space** | 2 GB free space | 10 GB free space (SSD recommended) |
 | **Network** | Active internet connection (only for installation and downloading dependencies) | Broadband internet connection |
+
 ---
 
+## Installation steps
 ## Installation steps
 
 ### Step 1: Download WSO2 Integrator
