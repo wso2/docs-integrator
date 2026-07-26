@@ -2022,6 +2022,18 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'category',
+          label: 'Event-Driven Integration',
+          items: [
+            'guides/event-integration/pub-sub',
+            'guides/event-integration/cqrs',
+            'guides/event-integration/outbox-cdc',
+            'guides/event-integration/competing-consumers',
+            'guides/event-integration/saga',
+            'guides/event-integration/dlq-retry',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Enterprise Integration Patterns',
           items: [
             'guides/patterns/message',
