@@ -25,6 +25,8 @@ The HTTP endpoint accepts a `FlightBooked` event and publishes it to the `trip/f
 
 ```ballerina
 // docs-fold-start: Supporting definitions
+import ballerina/http;
+import ballerina/log;
 import ballerinax/solace;
 
 configurable string solaceUrl = "smf://localhost:55554";
@@ -109,7 +111,7 @@ service solace:Service on solaceListener {
 }
 ```
 
-When the car fails, the hotel's compensation handler cancels the room and publishes `HotelCancelled`. The flight's compensation handler then releases the seat.
+When the car fails, the hotel's compensation handler cancels the room and publishes `HotelCancelled`. The flight's compensation handler releases the seat — in this sample it logs the action; a real implementation would call the flight booking API.
 
 ```ballerina
 // docs-fold-start: Supporting definitions

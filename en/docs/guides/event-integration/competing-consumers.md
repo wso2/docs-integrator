@@ -13,7 +13,7 @@ A media platform needs to generate thumbnail images for uploaded videos. Thumbna
 
 ![Competing Consumers pattern diagram](/img/guides/event-integration/competing-consumers.png)
 
-RabbitMQ distributes messages from a single queue to multiple competing consumers. Each message is delivered to exactly one consumer — whichever picks it up first. Running multiple instances of the same service gives linear throughput scaling: two instances process two jobs in parallel, ten instances process ten. A job that fails on one instance is requeued and picked up by another.
+RabbitMQ distributes messages from a single queue to multiple competing consumers. Each message is delivered to exactly one consumer — whichever picks it up first. Running multiple instances of the same service gives linear throughput scaling: two instances process two jobs in parallel, ten instances process ten.
 
 The producer never needs to know how many consumers exist. Adding capacity is just starting more instances. Reducing capacity is just stopping some; in-flight messages complete before the consumer exits.
 

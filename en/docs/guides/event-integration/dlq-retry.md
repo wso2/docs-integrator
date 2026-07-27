@@ -27,6 +27,8 @@ The HTTP endpoint enqueues a notification as a text message. The sender converts
 
 ```ballerina
 // docs-fold-start: Supporting definitions
+import ballerina/http;
+import ballerina/log;
 import ballerinax/asb;
 
 configurable string connectionString = ?;

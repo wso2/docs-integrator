@@ -23,6 +23,8 @@ Match results are submitted via HTTP and published to Kafka. The write handler r
 
 ```ballerina
 // docs-fold-start: Supporting definitions
+import ballerina/http;
+import ballerina/log;
 import ballerinax/kafka;
 
 configurable string bootstrapServers = "localhost:9092";
@@ -53,6 +55,11 @@ import ballerina/sql;
 import ballerinax/postgresql;
 
 configurable string groupId = "leaderboard-updater";
+configurable string dbHost = "localhost";
+configurable int dbPort = 5432;
+configurable string dbUser = "postgres";
+configurable string dbPassword = "postgres";
+configurable string dbName = "leaderboard";
 final postgresql:Client leaderboardDb = check new (dbHost, dbUser, dbPassword, dbName, dbPort);
 
 listener kafka:Listener kafkaListener = new (bootstrapServers, {

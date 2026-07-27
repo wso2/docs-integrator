@@ -23,6 +23,8 @@ The HTTP handler performs a single database transaction that writes both the use
 
 ```ballerina
 // docs-fold-start: Supporting definitions
+import ballerina/http;
+import ballerina/log;
 import ballerina/uuid;
 import ballerinax/postgresql;
 
