@@ -13,7 +13,7 @@ A multiplayer game needs to record match results as fast as possible while simul
 
 ![CQRS pattern diagram](/img/guides/event-integration/cqrs.png)
 
-Command Query Responsibility Segregation keeps the write model and the read model separate. Commands (writes) go through one path optimized for throughput; queries (reads) go through a different path optimized for retrieval. An event connects the two: the write side publishes a domain event to Kafka, and a consumer updates a dedicated read store (PostgreSQL) that is shaped exactly for the queries it needs to serve.
+Command Query Responsibility Segregation (SQRS) keeps the write model and the read model separate. Commands (writes) go through one path optimized for throughput; queries (reads) go through a different path optimized for retrieval. An event connects the two: the write side publishes a domain event to Kafka, and a consumer updates a dedicated read store (PostgreSQL) that is shaped exactly for the queries it needs to serve.
 
 The write path never touches the leaderboard table. The read path never touches the events log. Each can scale, be indexed, and be tuned independently.
 
