@@ -99,8 +99,8 @@ service /leaderboard on new http:Listener(8091) {
 
 ## Try it yourself
 
-Try this sample in WSO2 Integration Platform.
+Try this sample on WSO2 Cloud.
 
-[![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/event-integration/cqrs_kafka)
+[![Deploy on WSO2 Cloud](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/event-integration/cqrs_kafka)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/event-integration/cqrs_kafka)

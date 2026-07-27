@@ -153,8 +153,8 @@ All four service handlers share the single named listener `solaceListener`. Queu
 
 ## Try it yourself
 
-Try this sample in WSO2 Integration Platform.
+Try this sample on WSO2 Cloud.
 
-[![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/event-integration/saga_solace)
+[![Deploy on WSO2 Cloud](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/event-integration/saga_solace)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/event-integration/saga_solace)
