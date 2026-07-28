@@ -1111,7 +1111,8 @@ const sidebars: SidebarsConfig = {
           items: [
             'connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup-guide',
             'connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/action-reference',
-          ],
+          
+            'connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/example',],
         },
         {
           type: 'category',

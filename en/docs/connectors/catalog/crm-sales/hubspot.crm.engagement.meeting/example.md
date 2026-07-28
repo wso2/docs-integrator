@@ -2,86 +2,96 @@
 
 ## What you'll build
 
-Build a WSO2 Integrator automation that creates a new meeting engagement in HubSpot CRM using the HubSpot CRM Engagement Meeting connector. The integration uses an Automation entry point to trigger the operation and logs the API response for verification.
+Build a WSO2 Integrator automation that creates a HubSpot meeting engagement and logs the response. The integration connects to the HubSpot CRM Engagements API using a private app token and calls the create meeting operation.
 
 **Operations used:**
-- **Create** : Creates a new meeting engagement object in HubSpot CRM via `POST /crm/v3/objects/meetings`
+- **Create a meeting** : Creates a new meeting engagement in HubSpot CRM and returns the created meeting object
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    A((User)) --> B[Create Operation]
+    A((User)) --> B[Create a meeting]
     B --> C[HubSpot Meeting Connector]
     C --> D((HubSpot CRM))
 ```
 
 ## Prerequisites
 
-- A HubSpot account with a Private App access token (bearer token)
+- A HubSpot account with a private app token that has CRM Engagements > Meetings read/write scope
 
-## Setting up the HubSpot CRM Engagement Meeting integration
+## Setting up the HubSpot meeting integration
 
-> **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the connector.
+> **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-new-integration.md) guide to set up your integration first, then return here to add the connector.
 
-## Adding the HubSpot CRM Engagement Meeting connector
+## Adding the HubSpot meeting connector
 
-Select **Add Connection** in the left sidebar under **Connections** to open the connector palette.
+Select **Add Artifact → Connection** from the Integration Overview canvas to open the **Add Connection** palette.
 
 ![HubSpot Meeting connector palette open with search field before any selection](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/hubspot_crm_engagement_meeting_screenshot_01_palette.png)
 
-### Step 1: Search for and select the HubSpot Meeting connector
+### Step 1: Search for and select the HubSpot meeting connector
 
-1. Enter `hubspot` in the connector search box.
-2. Locate **Meeting** (`ballerinax/hubspot.crm.engagement.meeting`) in the results.
-3. Select the connector card to open the **Configure Meeting** connection form.
+1. Enter `hubspot.crm.engagement.meeting` in the search box.
+2. Select the **Meeting** connector card (`ballerinax/hubspot.crm.engagement.meeting`) to open the **Configure Meeting** form.
 
-## Configuring the HubSpot CRM Engagement Meeting connection
+## Configuring the HubSpot meeting connection
 
-### Step 2: Fill in the connection parameters
+### Step 2: Bind connection parameters to configurable variables
 
-Bind the connection's **Config** field to a configurable variable so credentials are not hardcoded.
+Bind the connection fields to a configurable variable so credentials aren't hardcoded:
 
-- **Config** : Set to the HubSpot bearer token auth record using a configurable variable for the token value
+1. In the **Config*** field, select the **Expression** toggle.
+2. Select the pencil icon to the right of the expression textbox to open the helper panel.
+3. Select the **Configurables** tab and select **+ New Configurable**.
+4. Enter `hubspotToken` as the variable name, set the type to `string`, and leave the default value empty.
+5. Select **Save** to inject `hubspotToken` into the expression.
+6. Clear the **Config*** textbox and enter `{auth: {token: hubspotToken}}`.
+7. Confirm **Connection Name** reads `meetingClient`.
+
+- **Config*** : The connection configuration record containing the HubSpot private app token
+- **Connection Name*** : The identifier used to reference this connection in the automation
 
 ![HubSpot Meeting connection form fully filled with all parameters before saving](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/hubspot_crm_engagement_meeting_screenshot_02_connection_form.png)
 
 ### Step 3: Save the connection
 
-Select **Save Connection**. The `meetingClient` connection tile now appears on the integration canvas.
+Select **Save Connection** to persist the connection. The `meetingClient` connection now appears on the canvas.
 
-![HubSpot Meeting Connections panel showing meetingClient entry after saving](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/hubspot_crm_engagement_meeting_screenshot_03_connection_saved.png)
+![HubSpot Meeting Connections panel showing meetingClient entry after saving](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/hubspot_crm_engagement_meeting_screenshot_03_connection_canvas.png)
 
 ### Step 4: Set actual values for your configurables
 
-In the left panel, select **Configurations**. Set a value for each configurable listed below.
+1. In the left panel, select **Configurations**.
+2. Set a value for each configurable listed below.
 
-- **hubspotAuthToken** (string) : Your HubSpot Private App access token (bearer token)
+- **hubspotToken** (string) : Your HubSpot private app token with CRM Engagements > Meetings read/write scope
 
-## Configuring the HubSpot CRM Engagement Meeting Create operation
+## Configuring the HubSpot meeting create a meeting operation
 
 ### Step 5: Add an Automation entry point
 
-1. On the canvas, select **+ Add Artifact**.
-2. Select **Automation** from the artifact picker.
-3. Select **Create** to confirm.
+1. Select **Add Artifact** from the Integration Overview.
+2. Select **Automation** under the Automation section.
+3. Select **Create** to scaffold the automation canvas showing **Start** and **Error Handler** nodes.
 
-The flow canvas opens showing a **Start** node, a placeholder step slot, and an **Error Handler**.
+### Step 6: Select and configure the create a meeting operation
 
-### Step 6: Select and configure the Create operation
+Select the **+** button between the **Start** and **Error Handler** nodes to open the node palette, expand **meetingClient**, and select **Create a meeting**.
 
-1. Select the **+** button between **Start** and **Error Handler** to open the step picker.
-2. Under **Connections → meetingClient**, expand the connection to see all available operations.
+![HubSpot Meeting connection node expanded showing all available operations before selection](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/hubspot_crm_engagement_meeting_screenshot_04_operations.png)
 
-![HubSpot Meeting connection node expanded showing all available operations before selection](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/hubspot_crm_engagement_meeting_screenshot_04_operations_panel.png)
+Configure the operation fields:
 
-3. Select **Create** (maps to `POST /crm/v3/objects/meetings`).
-4. In the operation form, configure the following parameters:
-   - **Payload** : Set to the meeting properties record, including `hs_meeting_title`, `hs_timestamp`, and `hs_meeting_outcome`
-   - **Result** : Set the result variable name to `result`
-5. Select **Save**.
+- **Payload*** : The meeting details record including properties such as title and timestamp, and an associations array
+- **Result*** : The variable name that stores the returned meeting object
 
-![HubSpot Meeting Create operation configuration filled with all values](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/hubspot_crm_engagement_meeting_screenshot_05_operation_filled.png)
+1. Select the **Expression** toggle on the **Payload*** field.
+2. Enter `{properties: {"hs_meeting_title": "Test Meeting", "hs_timestamp": "2026-07-28T10:00:00.000Z"}, associations: []}` in the expression textbox.
+3. In the **Result*** field, enter `result`.
+4. Select **Save**.
+
+![HubSpot Meeting Create a meeting operation configuration filled with all values](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/hubspot_crm_engagement_meeting_screenshot_05_operation_filled.png)
 
 ![Completed HubSpot Meeting automation flow](/img/connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/hubspot_crm_engagement_meeting_screenshot_06_completed_flow.png)
 
@@ -89,9 +99,9 @@ The flow canvas opens showing a **Start** node, a placeholder step slot, and an 
 
 Try this sample in WSO2 Integration Platform.
 
-[![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/hubspot.crm.engagement.meeting_connector_sample)
+[![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/connectors/hubspot_crm_engagement_meeting_connector_sample)
 
-[View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/hubspot.crm.engagement.meeting_connector_sample)
+[View source on GitHub](https://github.com/wso2/integration-samples/tree/main/connectors/hubspot_crm_engagement_meeting_connector_sample)
 
 ## More code examples
 
