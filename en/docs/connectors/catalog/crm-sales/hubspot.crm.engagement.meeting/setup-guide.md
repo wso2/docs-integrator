@@ -1,6 +1,10 @@
 ---
-title: Setup Guide
+connector: true
+connector_name: "hubspot.crm.engagement.meeting"
+title: "Setup Guide"
+description: "How to set up and configure the ballerinax/hubspot.crm.engagement.meeting connector."
 ---
+
 # Setup Guide
 
 This guide walks you through creating a HubSpot developer app and obtaining the OAuth 2.0 credentials required to use the HubSpot CRM Engagement Meetings connector.
@@ -97,3 +101,7 @@ In the **Auth** tab, copy the **Client ID** and **Client Secret**.
 :::tip
 Store the client ID, client secret, and refresh token securely. Use Ballerina's `configurable` feature and a `Config.toml` file to supply them at runtime.
 :::
+
+## Next steps
+
+- [Action Reference](action-reference.md) - Available operations

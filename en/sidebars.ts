@@ -1106,6 +1106,15 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'hubspot.crm.engagement.meeting',
+          link: { type: 'doc', id: 'connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/overview' },
+          items: [
+            'connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/setup-guide',
+            'connectors/catalog/crm-sales/hubspot.crm.engagement.meeting/action-reference',
+          ],
+        },
+        {
+          type: 'category',
           label: 'IBM CTG',
           link: { type: 'doc', id: 'connectors/catalog/erp-business/ibm.ctg/ibm-ctg-connector-overview' },
           items: [
