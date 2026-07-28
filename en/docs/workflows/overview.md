@@ -1,0 +1,51 @@
+---
+title: Durable Workflows Overview
+description: Build long-running, crash-safe business processes with WSO2 Integrator using durable workflows, human tasks, events, and durable AI agents.
+keywords: [wso2 integrator, durable workflow, workflow, human task, agentic workflow, durable agent, temporal, long running, crash recovery]
+sidebar_label: Overview
+slug: /workflows/overview
+---
+
+# Durable Workflows
+
+Most integrations start simple and end up long-lived: an order needs a manager's approval, a claim waits days for supporting documents, a payment needs a retry after a gateway hiccup. A normal program loses everything when the process restarts — a **durable workflow does not**.
+
+WSO2 Integrator lets you design workflows that:
+
+- **Survive crashes and restarts** — every completed step is recorded, and the workflow resumes exactly where it left off. A finished step is never re-executed.
+- **Wait for as long as it takes** — pause for hours, days, or months for a human decision or an external event, consuming no threads or memory while suspended.
+- **Recover from failures** — retry failed steps automatically, or hand the failure to a human who can fix the input and retry.
+- **Keep humans in the loop** — assign role-based tasks that people decide from the [Integration Control Plane](icp/managing-workflows.md) task inbox.
+
+## Two ways to build, one durable runtime
+
+| Durable Workflow | Durable Agentic Workflow |
+| --- | --- |
+| You wire the steps together in a visual flow | You describe the goal; an AI model decides the steps |
+| Explicit, predictable path | Adapts to each request at runtime |
+| Best for known, fixed business logic | Best for branchy, hard-to-enumerate logic |
+
+Both run on the same durable runtime, so an AI agent gets crash-safety, human tasks, timers, and retries for free.
+
+## Getting started
+
+- **[Build a Claim Handling Agent](getting-started/build-a-claim-workflow-agent.md):** Your first durable agentic workflow — an agent that validates expense claims and pays them out only after a manager approves.
+
+## Workflow features
+
+- **[Transaction workflows](develop/transaction-workflow.md):** Wire activities into a reliable, crash-safe flow with automatic retries.
+- **[Human task workflows](develop/human-task-workflow.md):** Pause for role-based human decisions and external data, for as long as it takes.
+- **[Review activities and error handling](develop/review-activity-and-error-handling.md):** Approval gates before risky steps and human-reviewed retries after failures.
+- **[Durable agentic workflows](develop/durable-agentic-workflow.md):** AI agents with durable activities, events, human tasks, and agent-to-agent collaboration.
+
+## Manage running workflows
+
+- **[Integration Control Plane](icp/managing-workflows.md):** See every workflow instance, where it is halted, decide human tasks and reviews, and suspend, resume, or terminate runs.
+
+## Tutorials
+
+- **[Tutorials](tutorials/overview.md):** Complete, step-by-step examples for each workflow feature.
+
+## Reference
+
+- **[Management API](reference/management-api.md):** The REST API behind the Control Plane — list instances, read execution graphs, and complete tasks programmatically.

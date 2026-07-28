@@ -2077,6 +2077,56 @@ const sidebars: SidebarsConfig = {
     },
 
     // ─────────────────────────────────────────────
+    // DURABLE WORKFLOWS
+    // "How do I build long-running, crash-safe processes?"
+    // ─────────────────────────────────────────────
+    {
+      type: 'category',
+      label: 'Durable Workflows',
+      collapsed: true,
+      link: { type: 'doc', id: 'workflows/overview' },
+      items: [
+        // Getting Started
+        {
+          type: 'category',
+          label: 'Getting Started',
+          items: [
+            'workflows/getting-started/build-a-claim-workflow-agent',
+          ],
+        },
+        // Workflow Features
+        {
+          type: 'category',
+          label: 'Workflow Features',
+          items: [
+            'workflows/develop/transaction-workflow',
+            'workflows/develop/human-task-workflow',
+            'workflows/develop/review-activity-and-error-handling',
+            'workflows/develop/durable-agentic-workflow',
+          ],
+        },
+        // Integration Control Plane
+        {
+          type: 'category',
+          label: 'Integration Control Plane',
+          items: [
+            'workflows/icp/managing-workflows',
+          ],
+        },
+        // Tutorials
+        'workflows/tutorials/overview',
+        // API Reference
+        {
+          type: 'category',
+          label: 'API Reference',
+          items: [
+            'workflows/reference/management-api',
+          ],
+        },
+      ],
+    },
+
+    // ─────────────────────────────────────────────
     // TUTORIALS
     // "Show me a complete, real example"
     // ─────────────────────────────────────────────
