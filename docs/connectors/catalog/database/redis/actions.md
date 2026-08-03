@@ -3105,6 +3105,48 @@ Sample response:
 </details>
 
 <details>
+<summary>flushDb</summary>
+
+Remove all the keys from the currently selected database.
+
+Returns: `string|redis:Error`
+
+Sample code:
+
+```ballerina
+string result = check redis->flushDb();
+```
+
+Sample response:
+
+```ballerina
+"OK"
+```
+
+</details>
+
+<details>
+<summary>flushAll</summary>
+
+Remove all the keys from all the databases.
+
+Returns: `string|redis:Error`
+
+Sample code:
+
+```ballerina
+string result = check redis->flushAll();
+```
+
+Sample response:
+
+```ballerina
+"OK"
+```
+
+</details>
+
+<details>
 <summary>close</summary>
 
 Close the connection to the Redis server.
