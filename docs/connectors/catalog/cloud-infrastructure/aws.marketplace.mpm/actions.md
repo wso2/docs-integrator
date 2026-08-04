@@ -20,19 +20,21 @@ Interacts with the AWS Marketplace Metering Service for customer resolution and 
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `region` | `Region` | Required | The AWS region for the Metering Service endpoint (e.g., `US_EAST_1`). |
-| `auth` | `AuthConfig` | Required | AWS authentication credentials containing `accessKeyId`, `secretAccessKey`, and optional `sessionToken`. |
+| `auth` | `auth:AuthConfig` | Required | Authentication configuration: Any standard credential source supported by `aws.auth` package: `StaticAuthConfig`, `ProfileAuthConfig`, `AssumeRoleConfig`, `WebIdentityConfig`, `SsoAuthConfig`, `ProcessAuthConfig`, `DEFAULT_CREDENTIALS` |
+| `region` | `aws:Region\|string` | Required | AWS region for the Marketplace Metering Service (e.g., `aws:US_EAST_1`). |
+| `endpoint` | `aws:EndpointConfig` | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. LocalStack, VPC interface endpoints). |
 
 ### Initializing the client
 
 ```ballerina
+import ballerinax/aws;
 import ballerinax/aws.marketplace.mpm;
 
 configurable string accessKeyId = ?;
 configurable string secretAccessKey = ?;
 
 mpm:Client mpmClient = check new ({
-    region: mpm:US_EAST_1,
+    region: aws:US_EAST_1,
     auth: {
         accessKeyId: accessKeyId,
         secretAccessKey: secretAccessKey
@@ -123,7 +125,7 @@ Returns: `Error?`
 Sample code:
 
 ```ballerina
-check mpmClient->close();
+check mpmClient.close();
 ```
 
 </details>

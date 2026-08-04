@@ -47,7 +47,6 @@ Fill in the following fields, binding each to a configurable variable:
 - **connectionName** : Name for this connection instance (`snsClient`)
 - **accessKeyId** : Your AWS access key ID, bound to a configurable variable
 - **secretAccessKey** : Your AWS secret access key, bound to a configurable variable
-- **securityToken** : Optional AWS security token, bound to a configurable variable
 - **region** : AWS region where your SNS topic resides, bound to a configurable variable
 
 ![AWS SNS connection form fully filled with all parameters before saving](/img/connectors/catalog/communication/aws-sns/sns_screenshot_02_connection_form.png)
@@ -65,8 +64,7 @@ Select **Save Connection**. The `snsClient` connection node appears on the desig
 
 - **snsAccessKeyId** (string) : Your AWS access key ID
 - **snsSecretAccessKey** (string) : Your AWS secret access key
-- **snsSecurityToken** (string) : Your AWS security token (required for temporary credentials)
-- **snsRegion** (string) : The AWS region where your SNS topic is located (for example, `us-east-1`)
+- **snsRegion** (string) : AWS region where your SNS topic resides
 
 ## Configuring the AWS SNS publish operation
 

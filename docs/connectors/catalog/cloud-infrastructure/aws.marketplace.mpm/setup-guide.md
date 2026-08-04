@@ -20,6 +20,8 @@ This guide walks you through setting up AWS IAM credentials and permissions requ
     - **AWSMarketplaceMeteringFullAccess**
 5. Complete the user creation wizard.
 
+For a screenshot-by-screenshot walkthrough of the IAM user creation and access key generation steps, see the [AWS SQS setup guide](../../messaging/aws.sqs/setup-guide.md). The console flow is identical, only the attached policy differs.
+
 For production workloads, consider using an IAM role with temporary credentials (AWS STS) instead of long-lived access keys.
 
 ## Step 2: Generate access keys

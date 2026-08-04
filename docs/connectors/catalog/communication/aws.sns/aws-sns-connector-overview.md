@@ -4,7 +4,7 @@ title: Overview
 
 # Overview
 
-Amazon Simple Notification Service (SNS) is a fully managed pub/sub messaging and notification service for coordinating the delivery of messages to subscribing endpoints and clients. The Ballerina `ballerinax/aws.sns` connector (v3.0.0) provides programmatic access to AWS SNS, enabling you to create topics, manage subscriptions, publish messages, and manage platform applications and SMS capabilities from your Ballerina integration flows.
+Amazon Simple Notification Service (SNS) is a fully managed pub/sub messaging and notification service for coordinating the delivery of messages to subscribing endpoints and clients. The Ballerina `ballerinax/aws.sns` connector provides programmatic access to AWS SNS, enabling you to create topics, manage subscriptions, publish messages, and manage platform applications and SMS capabilities from your Ballerina integration flows.
 
 ## Key features
 

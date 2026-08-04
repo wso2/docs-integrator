@@ -22,19 +22,21 @@ Send, receive, and manage messages and queues in Amazon SQS.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `region` | `Region` | Required | AWS region where the SQS queue is located (e.g., `US_EAST_1`). |
-| `auth` | `StaticAuthConfig\|ProfileAuthConfig\|DEFAULT_CREDENTIALS` | Required | Authentication configuration: static credentials, AWS profile, or default credential chain. |
+| `auth` | `auth:AuthConfig` | Required | Authentication configuration: Any standard credential source supported by `aws.auth` package: `StaticAuthConfig`, `ProfileAuthConfig`, `AssumeRoleConfig`, `WebIdentityConfig`, `SsoAuthConfig`, `ProcessAuthConfig`, `DEFAULT_CREDENTIALS` |
+| `region` | `aws:Region\|string` | Required | AWS region where the SQS queue is located (e.g., `aws:US_EAST_1`). |
+| `endpoint` | `aws:EndpointConfig` | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. LocalStack, VPC interface endpoints). |
 
 ### Initializing the client
 
 ```ballerina
+import ballerinax/aws;
 import ballerinax/aws.sqs;
 
 configurable string accessKeyId = ?;
 configurable string secretAccessKey = ?;
 
 sqs:Client sqsClient = check new ({
-    region: sqs:US_EAST_1,
+    region: aws:US_EAST_1,
     auth: {
         accessKeyId: accessKeyId,
         secretAccessKey: secretAccessKey

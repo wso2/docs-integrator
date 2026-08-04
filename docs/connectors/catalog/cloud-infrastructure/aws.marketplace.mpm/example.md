@@ -2,94 +2,99 @@
 
 ## What you'll build
 
-Build an automation that connects to the **AWS Marketplace Metering Service** and submits usage records for AWS Marketplace sellers. The integration uses configurable variables for AWS credentials and calls `batchMeterUsage` to report metering data in a single request.
+This example resolves a buyer's registration token into a customer identifier. An automation entry point calls the AWS Marketplace Metering Service through the connector, then logs the resolved customer details. The credentials, region, and registration token all stay in configurable variables, so nothing sensitive is stored in the integration.
 
 **Operations used:**
-- **Batch Meter Usage** : Submits usage records for multiple customers in a single call
+- **Resolve Customer** : Retrieves the customer details mapped to a registration token.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    A((User)) --> B[Batch Meter Usage]
-    B --> C[MPM Connector]
+    A((User)) --> B[Resolve Customer]
+    B --> C[AWS Marketplace Metering Service Connector]
     C --> D((AWS Marketplace Metering Service))
 ```
 
 ## Prerequisites
 
-- An AWS account with `accessKeyId` and `secretAccessKey` that have Marketplace Metering permissions
-- A registered AWS Marketplace product with a valid product code
+- An AWS account registered as a seller in the [AWS Marketplace Management Portal](https://aws.amazon.com/marketplace/management/), with a published consumption-based SaaS product.
+- An IAM identity whose access key is allowed to call `aws-marketplace:ResolveCustomer`.
+- A buyer registration token to resolve.
 
-## Setting up the MPM integration
+## Setting up the AWS Marketplace Metering Service integration
 
 > **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the connector.
 
-## Adding the MPM connector
+## Adding the AWS Marketplace Metering Service connector
 
-### Step 1: Open the add connection palette
+### Step 1: Open the connector palette
 
-In the left sidebar, hover over the **Connections** section and select the **Add Connection** button that appears in the toolbar. The connector palette opens with a search field at the top.
+Select **Add Connection** in the **Connections** section.
 
-![MPM connector palette open with search field before any selection](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_01_palette.png)
+![AWS Marketplace Metering Service connector palette open before any connector is selected](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_01_palette.png)
 
-### Step 2: Search and select the connector
+### Step 2: Select the AWS Marketplace Metering Service connector
 
-Enter `aws.marketplace.mpm` in the search field and select the **Mpm** connector card. The **Configure Mpm** form opens.
+1. Enter `aws.marketplace.mpm` in the search field.
+2. Select the **Mpm** card listed under `ballerinax / aws.marketplace.mpm`.
 
-## Configuring the MPM connection
+## Configuring the AWS Marketplace Metering Service connection
 
-### Step 3: Fill in the connection parameters
+### Step 3: Bind the connection parameters to configurable variables
 
-In the **Configure Mpm** form, bind each field to a configurable variable so credentials aren't hardcoded.
+Bind each required connection field to a configurable variable, and keep the default static-credential authentication.
 
-1. Select the **Region** dropdown and choose the AWS region where your Marketplace product is registered.
-2. Select the **Auth** field to open the **Record Configuration** panel, then use the **Configurables** tab to create `awsAccessKeyId` (`string`) and `awsSecretAccessKey` (`string`) configurable variables and reference them in the auth record.
-3. Leave **Connection Name** as `mpmClient` or enter a preferred name.
+- **Auth** : Credentials that sign every metering request.
+- **Region** : AWS region that serves the metering requests.
 
-- **region** : The AWS region where your Marketplace product is registered
-- **auth** : An `AuthConfig` record containing `accessKeyId` and `secretAccessKey`, each bound to a configurable variable
-
-![MPM connection form fully filled with all parameters before saving](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_02_connection_form.png)
+![AWS Marketplace Metering Service connection form with the auth record and region bound to configurable variables before saving](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_02_connection_form.png)
 
 ### Step 4: Save the connection
 
-Select **Save Connection** to persist the connection. The **mpmClient** connection node appears on the canvas.
+Select **Save Connection**, then verify that `mpmClient` appears in the **Connections** section.
 
-![MPM Connections panel showing mpmClient entry after saving](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_03_connections_list.png)
+![Saved mpmClient connection shown in the project tree and on the integration design canvas](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_03_connections_list.png)
 
 ### Step 5: Set actual values for your configurables
 
-1. In the left panel, select **Configurations**.
-2. Set a value for each configurable listed below.
+1. Select **Configurations** at the bottom of the project tree under **Data Mappers**.
+2. Enter a value for each configurable listed below before you run the integration.
 
-- **awsAccessKeyId** (string) : Your AWS access key ID with Marketplace Metering permissions
-- **awsSecretAccessKey** (string) : Your AWS secret access key with Marketplace Metering permissions
+- **region** (`string`) : AWS region that serves your metering requests, such as `us-east-1`.
+- **awsAccessKeyId** (`string`) : Access key ID of the IAM identity allowed to call the metering APIs.
+- **awsSecretAccessKey** (`string`) : Secret access key paired with that access key ID.
+- **registrationToken** (`string`) : Registration token that the buyer provided.
 
-## Configuring the MPM batch meter usage operation
+## Configuring the AWS Marketplace Metering Service Resolve Customer operation
 
 ### Step 6: Add an automation entry point
 
-Select **+ Add Artifact** on the canvas toolbar and select **Automation** from the artifact palette. In the **Create New Automation** panel, select **Create**. A `main` Automation entry point appears under **Entry Points** and the canvas switches to the Automation flow view.
+1. Select **Add Entry Point** next to **Entry Points**.
+2. Select **Automation**.
+3. Select **Create** to accept the default settings.
 
-### Step 7: Select the operation and configure its parameters
+### Step 7: Expand the connection and configure the Resolve Customer operation
 
-1. Select the **+** button inside the Automation flow canvas (between Start and Error Handler) to open the node panel.
-2. Under **Connections → mpmClient**, select **Batch Meter Usage** to open the operation form.
+1. Select the **+** node between **Start** and **Error Handler** in the automation flow.
+2. Expand **mpmClient** to display its operations.
 
-![MPM connection node expanded showing all available operations before selection](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_04_operations_panel.png)
+![mpmClient connection expanded in the node panel to display its operations before one is selected](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_04_operations_panel.png)
 
-Configure the following parameters:
+3. Select **Resolve Customer** and enter its required values.
 
-- **productCode** : Your 15-character AWS Marketplace product code (for example, `"prod-abc123xyzdefgh"`)
-- **usageRecords** : Select **Initialize Array** to add usage records; each record requires `customerId`, `dimension`, `quantity`, and `timestamp`
-- **Result** : Auto-generated variable name `mpmBatchmeterusageresponse` of type `mpm:BatchMeterUsageResponse`
+- **Registration Token** : Buyer registration token to resolve into a customer identifier.
+- **Result** : Name of the variable that receives the resolved customer details.
 
-Select **Save** to add the operation to the flow.
+![Resolve Customer operation form with the registration token bound and the result variable renamed before saving](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_05_operation_form.png)
 
-![MPM Batch Meter Usage operation configuration filled with all values](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_05_operation_filled.png)
+4. Select **Save**.
 
-![Completed MPM automation flow](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_06_completed_flow.png)
+### Step 8: Log the Resolve Customer result
+
+Add a **Log Info** action after the operation to surface the resolved customer details, then return to the visual flow.
+
+![Completed automation flow running from Start through Resolve Customer and Log Info to Error Handler](/img/connectors/catalog/cloud-infrastructure/aws.marketplace.mpm/aws_marketplace_mpm_screenshot_06_completed_flow.png)
 
 ## Try it yourself
 
@@ -98,3 +103,9 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/aws.marketplace.mpm_connector_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/aws.marketplace.mpm_connector_sample)
+
+## More code examples
+
+The `ballerinax/aws.marketplace.mpm` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-aws.marketplace.mpm/tree/main/examples):
+
+1. [**Meter usage**](https://github.com/ballerina-platform/module-ballerinax-aws.marketplace.mpm/tree/main/examples/meter-usage) – Resolves a buyer's registration token into a customer identifier, and reports the usage accumulated for that customer against a product dimension.

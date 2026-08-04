@@ -1,7 +1,3 @@
----
-title: Triggers
----
-
 # Triggers
 
 The `ballerinax/aws.sqs` connector supports event-driven message consumption through a built-in polling Listener. The Listener periodically retrieves messages from an SQS queue and dispatches them to your service callbacks, eliminating the need for manual polling loops.
@@ -13,15 +9,14 @@ Three components work together:
 | `sqs:Listener` | Polls the SQS queue at a configurable interval and dispatches messages to attached services. |
 | `sqs:Service` | Defines `onMessage` and `onError` callbacks invoked when messages arrive or errors occur. |
 | `sqs:Caller` | Provides a `delete()` method to manually acknowledge and delete a message within the callback. |
-| `sqs:Message` | The message payload passed to the `onMessage` callback. |
 
-For action-based record operations, see the [Action Reference](actions.md).
+For action-based operations, see the [Action Reference](actions.md).
 
 ---
 
 ## Listener
 
-The `aws.sqs:Listener` establishes the connection and manages event subscriptions.
+The `sqs:Listener` establishes the connection and manages event subscriptions.
 
 ### Configuration
 
@@ -36,14 +31,15 @@ The listener supports the following connection strategies:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `region` | `Region` | Required | AWS region where the SQS queue is located. |
-| `auth` | `StaticAuthConfig\|ProfileAuthConfig\|DEFAULT_CREDENTIALS` | Required | Authentication configuration: static credentials, AWS profile, or default credential chain. |
+| `auth` | `auth:AuthConfig` | Required | Authentication configuration: Any standard credential source supported by `aws.auth` package: `StaticAuthConfig`, `ProfileAuthConfig`, `AssumeRoleConfig`, `WebIdentityConfig`, `SsoAuthConfig`, `ProcessAuthConfig`, `DEFAULT_CREDENTIALS` |
+| `region` | `aws:Region\|string` | Required | AWS region where the SQS queue is located (e.g., `aws:US_EAST_1`). |
+| `endpoint` | `aws:EndpointConfig` | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. LocalStack, VPC interface endpoints). |
 
 `PollingConfig` fields:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `pollInterval` | `decimal` | `1` | Interval in seconds between poll requests. |
+| `pollInterval` | `decimal` | `1` | Interval in seconds between poll requests. Set to `0` for back-to-back polling (use with caution — high CPU usage). |
 | `waitTime` | `int` | `20` | Long poll wait time in seconds (0–20). |
 | `visibilityTimeout` | `int` | `30` | Visibility timeout in seconds for received messages. |
 
@@ -52,13 +48,14 @@ The listener supports the following connection strategies:
 **Using static credentials:**
 
 ```ballerina
+import ballerinax/aws;
 import ballerinax/aws.sqs;
 
 configurable string accessKeyId = ?;
 configurable string secretAccessKey = ?;
 
 listener sqs:Listener sqsListener = new ({
-    region: sqs:US_EAST_1,
+    region: aws:US_EAST_1,
     auth: {
         accessKeyId: accessKeyId,
         secretAccessKey: secretAccessKey
@@ -69,6 +66,7 @@ listener sqs:Listener sqsListener = new ({
 **With custom polling configuration:**
 
 ```ballerina
+import ballerinax/aws;
 import ballerinax/aws.sqs;
 
 configurable string accessKeyId = ?;
@@ -76,7 +74,7 @@ configurable string secretAccessKey = ?;
 
 listener sqs:Listener sqsListener = new (
     {
-        region: sqs:US_EAST_1,
+        region: aws:US_EAST_1,
         auth: {
             accessKeyId: accessKeyId,
             secretAccessKey: secretAccessKey
@@ -96,19 +94,20 @@ listener sqs:Listener sqsListener = new (
 
 An `sqs:Service` is a Ballerina service attached to an `sqs:Listener`. It is annotated with `@sqs:ServiceConfig` to specify the queue URL and optional settings, and implements callback functions for message processing and error handling.
 
-### Callback signatures
+### Callbacks
 
-| Function | Signature | Description |
+| Callback | Signature | Description |
 |----------|-----------|-------------|
 | `onMessage` | `remote function onMessage(sqs:Message message, sqs:Caller caller) returns error?` | Invoked for each message received from the queue. |
 | `onError` | `remote function onError(sqs:Error err) returns error?` | Invoked when an error occurs during polling or message processing. |
 
 The `sqs:Caller` parameter in `onMessage` is optional. If `autoDelete` is set to `true` (default) in `@sqs:ServiceConfig`, messages are automatically deleted after `onMessage` returns successfully.
 
-### Full usage example
+### Full example
 
 ```ballerina
 import ballerina/log;
+import ballerinax/aws;
 import ballerinax/aws.sqs;
 
 configurable string accessKeyId = ?;
@@ -116,7 +115,7 @@ configurable string secretAccessKey = ?;
 configurable string queueUrl = ?;
 
 listener sqs:Listener sqsListener = new ({
-    region: sqs:US_EAST_1,
+    region: aws:US_EAST_1,
     auth: {
         accessKeyId: accessKeyId,
         secretAccessKey: secretAccessKey

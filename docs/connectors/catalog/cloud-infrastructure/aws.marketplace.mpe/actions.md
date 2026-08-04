@@ -6,38 +6,45 @@ title: Actions
 
 The `ballerinax/aws.marketplace.mpe` package exposes the following clients:
 
+Available clients:
+
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Retrieves customer entitlements for AWS Marketplace products. |
+| [`Client`](#client) | Query the AWS Marketplace Entitlement Service to retrieve and filter customer entitlements by product code, customer identifier, or pricing dimension |
 
 ---
 
 ## Client
 
-Retrieves customer entitlements for AWS Marketplace products.
+AWS Marketplace Entitlement service client for querying customer entitlements for AWS Marketplace products.
 
 ### Configuration
 
+`ConnectionConfig`
+
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `region` | `Region` | Required | The AWS region for the Marketplace Entitlement Service endpoint (e.g., `US_EAST_1`). |
-| `auth` | `AuthConfig` | Required | AWS credentials including `accessKeyId`, `secretAccessKey`, and optional `sessionToken`. |
+| `auth` | `auth:AuthConfig` | Required | Authentication configuration: Any standard credential source supported by `aws.auth` package: `StaticAuthConfig`, `ProfileAuthConfig`, `AssumeRoleConfig`, `WebIdentityConfig`, `SsoAuthConfig`, `ProcessAuthConfig`, `DEFAULT_CREDENTIALS` |
+| `region` | `aws:Region\|string` | Required | The AWS region for the Marketplace Entitlement Service endpoint (e.g., `aws:US_EAST_1`). |
+| `endpoint` | `aws:EndpointConfig` | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. LocalStack, VPC interface endpoints). |
 
 ### Initializing the client
 
 ```ballerina
+import ballerinax/aws;
 import ballerinax/aws.marketplace.mpe;
 
 configurable string accessKeyId = ?;
 configurable string secretAccessKey = ?;
 
-mpe:Client mpeClient = check new (
-    region = mpe:US_EAST_1,
-    auth = {
+mpe:ConnectionConfig config = {
+    region: aws:US_EAST_1,
+    auth: {
         accessKeyId,
         secretAccessKey
     }
-);
+};
+mpe:Client mpeClient = check new (config);
 ```
 
 ### Operations
@@ -49,28 +56,26 @@ mpe:Client mpeClient = check new (
 
 Retrieves the entitlement values for a given product, with optional filtering by customer identifier or dimension and pagination support.
 
-Parameters:
+**Parameters:**
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `productCode` | `string` | Yes | The AWS Marketplace product code (1–255 characters). |
-| `filter` | `EntitlementFilter` | No | Optional filter with `customerIdentifier` and/or `dimension` string arrays to narrow results. |
-| `maxResults` | `int` | No | Maximum number of entitlements to return per request. |
-| `nextToken` | `string` | No | Pagination token from a previous response to retrieve the next page of results. |
+| `productCode` | `string` | Yes | Product code used to uniquely identify a product in AWS Marketplace (1–255 characters). |
+| `filter` | `EntitlementFilter` | No | A filter to narrow results by customer identifier (`customerIdentifier` string array) or product dimension (`dimension` string array). |
+| `maxResults` | `int` | No | The maximum number of results to return in a single call. |
+| `nextToken` | `string` | No | The token for pagination to retrieve the next set of results. |
 
-Returns: `EntitlementsResponse|Error`
+**Returns:** `EntitlementsResponse|Error`
 
-Sample code:
+**Sample code:**
 
 ```ballerina
-mpe:EntitlementsResponse response = check mpeClient->getEntitlements(
-    productCode = "abc123def456"
-);
+mpe:EntitlementsResponse response = check mpeClient->getEntitlements(productCode = "abc123def456");
 ```
 
-Sample response:
+**Sample response:**
 
-```ballerina
+```json
 {
   "entitlements": [
     {
@@ -80,24 +85,8 @@ Sample response:
       "expirationDate": [1735689600, 0],
       "value": 10
     }
-  ],
-  "nextToken": null
+  ]
 }
-```
-
-</details>
-
-<details>
-<summary>close</summary>
-
-Closes the AWS MPE client and releases associated resources.
-
-Returns: `Error?`
-
-Sample code:
-
-```ballerina
-check mpeClient->close();
 ```
 
 </details>
@@ -151,6 +140,23 @@ Sample response:
   ],
   "nextToken": null
 }
+```
+
+</details>
+
+#### Client lifecycle
+
+<details>
+<summary>close</summary>
+
+Closes the AWS MPE client and releases associated resources.
+
+**Returns:** `Error?`
+
+**Sample code:**
+
+```ballerina
+check mpeClient.close();
 ```
 
 </details>

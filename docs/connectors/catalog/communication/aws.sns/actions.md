@@ -20,25 +20,26 @@ Provides operations to interact with AWS SNS: topic management, publishing, subs
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `accessKeyId` | `string` | Required | AWS access key ID. |
-| `secretAccessKey` | `string` | Required | AWS secret access key. |
-| `region` | `string` | `"us-east-1"` | AWS region for the SNS service. |
-| `securityToken` | `string` | `()` | AWS security token for temporary credentials (e.g., from STS AssumeRole). |
+| `auth` | `auth:AuthConfig` | Required | Authentication configuration: Any standard credential source supported by `aws.auth` package: `StaticAuthConfig`, `ProfileAuthConfig`, `AssumeRoleConfig`, `WebIdentityConfig`, `SsoAuthConfig`, `ProcessAuthConfig`, `DEFAULT_CREDENTIALS` |
+| `region` | `aws:Region\|string` | Required | AWS region for the SNS service (e.g., `aws:US_EAST_1`). |
+| `endpoint` | `aws:EndpointConfig` | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. LocalStack, VPC interface endpoints). |
 
 ### Initializing the client
 
 ```ballerina
+import ballerinax/aws;
 import ballerinax/aws.sns;
 
 configurable string accessKeyId = ?;
 configurable string secretAccessKey = ?;
-configurable string region = ?;
 
 sns:Client snsClient = check new ({
-    accessKeyId: accessKeyId,
-    secretAccessKey: secretAccessKey,
-    region: region
-});
+   region: aws:US_EAST_1,
+   auth: {
+      accessKeyId,
+      secretAccessKey
+   }
+})
 ```
 
 ### Operations
