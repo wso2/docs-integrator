@@ -30,7 +30,6 @@ Provides full CRUD access to SAP S/4HANA pricing condition records and all assoc
 
 ```ballerina
 import ballerinax/sap.s4hana.api_slspricingconditionrecord_srv as conditionrecord;
-import ballerinax/sap.s4hana.api_slspricingconditionrecord_srv.oas;
 
 configurable string hostname = ?;
 configurable string username = ?;
@@ -63,12 +62,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListA_SlsPrcgConditionRecordsQueries` | No | OData query parameters: `$filter`, `$select`, `$expand`, `$orderby`, `$top`, `$skip`, `$inlinecount`. |
 
-Returns: `oas:CollectionOfA_SlsPrcgConditionRecordWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgConditionRecordWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgConditionRecordWrapper result = check conditionRecordClient->listA_SlsPrcgConditionRecords(
+conditionrecord:CollectionOfA_SlsPrcgConditionRecordWrapper result = check conditionRecordClient->listA_SlsPrcgConditionRecords(
     queries = {
         \$filter: "ConditionType eq 'PPR0'",
         \$top: 5,
@@ -112,12 +111,12 @@ Parameters:
 | `payload` | `CreateA_SlsPrcgConditionRecord` | Yes | Condition record fields, including an optional deep-inserted `to_SlsPrcgCndnRecdValidity` collection. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 
-Returns: `oas:A_SlsPrcgConditionRecordWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgConditionRecordWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgConditionRecordWrapper created = check conditionRecordClient->createA_SlsPrcgConditionRecord({
+conditionrecord:A_SlsPrcgConditionRecordWrapper created = check conditionRecordClient->createA_SlsPrcgConditionRecord({
     ConditionRecord: "0000000123",
     ConditionSequentialNumber: "1",
     ConditionTable: "304",
@@ -169,12 +168,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetA_SlsPrcgConditionRecordQueries` | No | OData query parameters: `$select`, `$expand`. |
 
-Returns: `oas:A_SlsPrcgConditionRecordWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgConditionRecordWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgConditionRecordWrapper conditionRecord = check conditionRecordClient->getA_SlsPrcgConditionRecord(
+conditionrecord:A_SlsPrcgConditionRecordWrapper conditionRecord = check conditionRecordClient->getA_SlsPrcgConditionRecord(
     "0000000123",
     queries = {
         \$expand: "to_SlsPrcgCndnRecdValidity"
@@ -268,12 +267,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListSlsPrcgCndnRecdSuplmntsOfA_SlsPrcgConditionRecordQueries` | No | OData query parameters for filtering and field selection. |
 
-Returns: `oas:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper supplements =
+conditionrecord:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper supplements =
     check conditionRecordClient->listSlsPrcgCndnRecdSuplmntsOfA_SlsPrcgConditionRecord("0000000123");
 ```
 
@@ -310,12 +309,12 @@ Parameters:
 | `payload` | `CreateA_SlsPrcgCndnRecdSuplmnt` | Yes | New condition supplement fields. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 
-Returns: `oas:A_SlsPrcgCndnRecdSuplmntWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnRecdSuplmntWrapper supplement =
+conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper supplement =
     check conditionRecordClient->createSlsPrcgCndnRecdSuplmntOfA_SlsPrcgConditionRecord(
         "0000000123",
         {
@@ -357,12 +356,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListSlsPrcgCndnRecdValiditiesOfA_SlsPrcgConditionRecordQueries` | No | OData query parameters for filtering and field selection. |
 
-Returns: `oas:CollectionOfA_SlsPrcgCndnRecdValidityWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgCndnRecdValidityWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgCndnRecdValidityWrapper validities =
+conditionrecord:CollectionOfA_SlsPrcgCndnRecdValidityWrapper validities =
     check conditionRecordClient->listSlsPrcgCndnRecdValiditiesOfA_SlsPrcgConditionRecord("0000000123");
 ```
 
@@ -400,12 +399,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListSlsPrcgCndnRecordScalesOfA_SlsPrcgConditionRecordQueries` | No | OData query parameters for filtering and field selection. |
 
-Returns: `oas:CollectionOfA_SlsPrcgCndnRecordScaleWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgCndnRecordScaleWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgCndnRecordScaleWrapper scales =
+conditionrecord:CollectionOfA_SlsPrcgCndnRecordScaleWrapper scales =
     check conditionRecordClient->listSlsPrcgCndnRecordScalesOfA_SlsPrcgConditionRecord("0000000123");
 ```
 
@@ -444,12 +443,12 @@ Parameters:
 | `payload` | `CreateA_SlsPrcgCndnRecordScale` | Yes | New pricing scale fields. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 
-Returns: `oas:A_SlsPrcgCndnRecordScaleWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnRecordScaleWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnRecordScaleWrapper scale =
+conditionrecord:A_SlsPrcgCndnRecordScaleWrapper scale =
     check conditionRecordClient->createSlsPrcgCndnRecordScaleOfA_SlsPrcgConditionRecord(
         "0000000123",
         {
@@ -494,12 +493,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListSlsPrcgConditionRecordTextsOfA_SlsPrcgConditionRecordQueries` | No | OData query parameters for filtering and field selection. |
 
-Returns: `oas:CollectionOfA_SlsPrcgConditionRecordTextWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgConditionRecordTextWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgConditionRecordTextWrapper texts =
+conditionrecord:CollectionOfA_SlsPrcgConditionRecordTextWrapper texts =
     check conditionRecordClient->listSlsPrcgConditionRecordTextsOfA_SlsPrcgConditionRecord("0000000123");
 ```
 
@@ -535,12 +534,12 @@ Parameters:
 | `payload` | `CreateA_SlsPrcgConditionRecordText` | Yes | Text content and language key. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 
-Returns: `oas:A_SlsPrcgConditionRecordTextWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgConditionRecordTextWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgConditionRecordTextWrapper text =
+conditionrecord:A_SlsPrcgConditionRecordTextWrapper text =
     check conditionRecordClient->createSlsPrcgConditionRecordTextOfA_SlsPrcgConditionRecord(
         "0000000123",
         {
@@ -581,12 +580,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListA_SlsPrcgCndnRecdValiditiesQueries` | No | OData query parameters: `$filter`, `$select`, `$expand`, `$orderby`, `$top`, `$skip`, `$inlinecount`. |
 
-Returns: `oas:CollectionOfA_SlsPrcgCndnRecdValidityWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgCndnRecdValidityWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgCndnRecdValidityWrapper result = check conditionRecordClient->listA_SlsPrcgCndnRecdValidities(
+conditionrecord:CollectionOfA_SlsPrcgCndnRecdValidityWrapper result = check conditionRecordClient->listA_SlsPrcgCndnRecdValidities(
     queries = {
         \$filter: "Material eq 'HW0001'"
     }
@@ -628,12 +627,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetA_SlsPrcgCndnRecdValidityQueries` | No | OData query parameters: `$select`, `$expand`. |
 
-Returns: `oas:A_SlsPrcgCndnRecdValidityWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnRecdValidityWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnRecdValidityWrapper validity = check conditionRecordClient->getA_SlsPrcgCndnRecdValidity(
+conditionrecord:A_SlsPrcgCndnRecdValidityWrapper validity = check conditionRecordClient->getA_SlsPrcgCndnRecdValidity(
     "0000000123",
     "/Date(253402214400000)/"
 );
@@ -699,12 +698,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListSlsPrcgCndnRecdSuplmntsOfA_SlsPrcgCndnRecdValidityQueries` | No | OData query parameters for filtering and field selection. |
 
-Returns: `oas:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper supplements =
+conditionrecord:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper supplements =
     check conditionRecordClient->listSlsPrcgCndnRecdSuplmntsOfA_SlsPrcgCndnRecdValidity(
         "0000000123",
         "/Date(253402214400000)/"
@@ -745,12 +744,12 @@ Parameters:
 | `payload` | `CreateA_SlsPrcgCndnRecdSuplmnt` | Yes | New condition supplement fields. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 
-Returns: `oas:A_SlsPrcgCndnRecdSuplmntWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnRecdSuplmntWrapper supplement =
+conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper supplement =
     check conditionRecordClient->createSlsPrcgCndnRecdSuplmntOfA_SlsPrcgCndnRecdValidity(
         "0000000123",
         "/Date(253402214400000)/",
@@ -794,12 +793,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetSlsPrcgConditionRecordOfA_SlsPrcgCndnRecdValidityQueries` | No | OData query parameters: `$select`. |
 
-Returns: `oas:A_SlsPrcgConditionRecordWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgConditionRecordWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgConditionRecordWrapper conditionRecord =
+conditionrecord:A_SlsPrcgConditionRecordWrapper conditionRecord =
     check conditionRecordClient->getSlsPrcgConditionRecordOfA_SlsPrcgCndnRecdValidity(
         "0000000123",
         "/Date(253402214400000)/"
@@ -837,12 +836,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListA_SlsPrcgCndnRecordScalesQueries` | No | OData query parameters: `$filter`, `$select`, `$expand`, `$orderby`, `$top`, `$skip`, `$inlinecount`. |
 
-Returns: `oas:CollectionOfA_SlsPrcgCndnRecordScaleWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgCndnRecordScaleWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgCndnRecordScaleWrapper result = check conditionRecordClient->listA_SlsPrcgCndnRecordScales(
+conditionrecord:CollectionOfA_SlsPrcgCndnRecordScaleWrapper result = check conditionRecordClient->listA_SlsPrcgCndnRecordScales(
     queries = {
         \$filter: "ConditionRecord eq '0000000123'"
     }
@@ -883,12 +882,12 @@ Parameters:
 | `payload` | `CreateA_SlsPrcgCndnRecordScale` | Yes | New pricing scale fields. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 
-Returns: `oas:A_SlsPrcgCndnRecordScaleWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnRecordScaleWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnRecordScaleWrapper scale = check conditionRecordClient->createA_SlsPrcgCndnRecordScale({
+conditionrecord:A_SlsPrcgCndnRecordScaleWrapper scale = check conditionRecordClient->createA_SlsPrcgCndnRecordScale({
     ConditionRecord: "0000000123",
     ConditionSequentialNumber: "1",
     ConditionScaleQuantity: "1000",
@@ -931,12 +930,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetA_SlsPrcgCndnRecordScaleQueries` | No | OData query parameters: `$select`, `$expand`. |
 
-Returns: `oas:A_SlsPrcgCndnRecordScaleWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnRecordScaleWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnRecordScaleWrapper scale = check conditionRecordClient->getA_SlsPrcgCndnRecordScale(
+conditionrecord:A_SlsPrcgCndnRecordScaleWrapper scale = check conditionRecordClient->getA_SlsPrcgCndnRecordScale(
     "0000000123",
     "1",
     "0001"
@@ -1036,12 +1035,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetSlsPrcgCndnRecdSuplmntOfA_SlsPrcgCndnRecordScaleQueries` | No | OData query parameters: `$select`. |
 
-Returns: `oas:A_SlsPrcgCndnRecdSuplmntWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnRecdSuplmntWrapper supplement =
+conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper supplement =
     check conditionRecordClient->getSlsPrcgCndnRecdSuplmntOfA_SlsPrcgCndnRecordScale(
         "0000000123",
         "2",
@@ -1080,12 +1079,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetSlsPrcgConditionRecordOfA_SlsPrcgCndnRecordScaleQueries` | No | OData query parameters: `$select`. |
 
-Returns: `oas:A_SlsPrcgConditionRecordWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgConditionRecordWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgConditionRecordWrapper conditionRecord =
+conditionrecord:A_SlsPrcgConditionRecordWrapper conditionRecord =
     check conditionRecordClient->getSlsPrcgConditionRecordOfA_SlsPrcgCndnRecordScale(
         "0000000123",
         "1",
@@ -1124,12 +1123,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListA_SlsPrcgCndnRecdSuplmntsQueries` | No | OData query parameters: `$filter`, `$select`, `$expand`, `$orderby`, `$top`, `$skip`, `$inlinecount`. |
 
-Returns: `oas:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper result = check conditionRecordClient->listA_SlsPrcgCndnRecdSuplmnts(
+conditionrecord:CollectionOfA_SlsPrcgCndnRecdSuplmntWrapper result = check conditionRecordClient->listA_SlsPrcgCndnRecdSuplmnts(
     queries = {
         \$filter: "ConditionRecord eq '0000000123'"
     }
@@ -1168,12 +1167,12 @@ Parameters:
 | `payload` | `CreateA_SlsPrcgCndnRecdSuplmnt` | Yes | New condition supplement fields. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 
-Returns: `oas:A_SlsPrcgCndnRecdSuplmntWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnRecdSuplmntWrapper supplement = check conditionRecordClient->createA_SlsPrcgCndnRecdSuplmnt({
+conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper supplement = check conditionRecordClient->createA_SlsPrcgCndnRecdSuplmnt({
     ConditionRecord: "0000000123",
     ConditionSequentialNumber: "3",
     ConditionTable: "305",
@@ -1212,12 +1211,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetA_SlsPrcgCndnRecdSuplmntQueries` | No | OData query parameters: `$select`, `$expand`. |
 
-Returns: `oas:A_SlsPrcgCndnRecdSuplmntWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnRecdSuplmntWrapper supplement = check conditionRecordClient->getA_SlsPrcgCndnRecdSuplmnt(
+conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper supplement = check conditionRecordClient->getA_SlsPrcgCndnRecdSuplmnt(
     "0000000123",
     "2"
 );
@@ -1309,12 +1308,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListSlsPrcgCndnRecdValiditiesOfA_SlsPrcgCndnRecdSuplmntQueries` | No | OData query parameters for filtering and field selection. |
 
-Returns: `oas:CollectionOfA_SlsPrcgCndnRecdValidityWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgCndnRecdValidityWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgCndnRecdValidityWrapper validities =
+conditionrecord:CollectionOfA_SlsPrcgCndnRecdValidityWrapper validities =
     check conditionRecordClient->listSlsPrcgCndnRecdValiditiesOfA_SlsPrcgCndnRecdSuplmnt(
         "0000000123",
         "2"
@@ -1356,12 +1355,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListSlsPrcgCndnRecordScalesOfA_SlsPrcgCndnRecdSuplmntQueries` | No | OData query parameters for filtering and field selection. |
 
-Returns: `oas:CollectionOfA_SlsPrcgCndnRecordScaleWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgCndnRecordScaleWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgCndnRecordScaleWrapper scales =
+conditionrecord:CollectionOfA_SlsPrcgCndnRecordScaleWrapper scales =
     check conditionRecordClient->listSlsPrcgCndnRecordScalesOfA_SlsPrcgCndnRecdSuplmnt(
         "0000000123",
         "2"
@@ -1404,12 +1403,12 @@ Parameters:
 | `payload` | `CreateA_SlsPrcgCndnRecordScale` | Yes | New pricing scale fields. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 
-Returns: `oas:A_SlsPrcgCndnRecordScaleWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnRecordScaleWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnRecordScaleWrapper scale =
+conditionrecord:A_SlsPrcgCndnRecordScaleWrapper scale =
     check conditionRecordClient->createSlsPrcgCndnRecordScaleOfA_SlsPrcgCndnRecdSuplmnt(
         "0000000123",
         "2",
@@ -1456,12 +1455,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListSlsPrcgCndnSupplementTextsOfA_SlsPrcgCndnRecdSuplmntQueries` | No | OData query parameters for filtering and field selection. |
 
-Returns: `oas:CollectionOfA_SlsPrcgCndnSupplementTextWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgCndnSupplementTextWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgCndnSupplementTextWrapper texts =
+conditionrecord:CollectionOfA_SlsPrcgCndnSupplementTextWrapper texts =
     check conditionRecordClient->listSlsPrcgCndnSupplementTextsOfA_SlsPrcgCndnRecdSuplmnt(
         "0000000123",
         "2"
@@ -1501,12 +1500,12 @@ Parameters:
 | `payload` | `CreateA_SlsPrcgCndnSupplementText` | Yes | Text content and language key. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 
-Returns: `oas:A_SlsPrcgCndnSupplementTextWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnSupplementTextWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnSupplementTextWrapper text =
+conditionrecord:A_SlsPrcgCndnSupplementTextWrapper text =
     check conditionRecordClient->createSlsPrcgCndnSupplementTextOfA_SlsPrcgCndnRecdSuplmnt(
         "0000000123",
         "2",
@@ -1548,12 +1547,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetSlsPrcgConditionRecordOfA_SlsPrcgCndnRecdSuplmntQueries` | No | OData query parameters: `$select`. |
 
-Returns: `oas:A_SlsPrcgConditionRecordWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgConditionRecordWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgConditionRecordWrapper conditionRecord =
+conditionrecord:A_SlsPrcgConditionRecordWrapper conditionRecord =
     check conditionRecordClient->getSlsPrcgConditionRecordOfA_SlsPrcgCndnRecdSuplmnt(
         "0000000123",
         "2"
@@ -1591,12 +1590,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListA_SlsPrcgConditionRecordTextsQueries` | No | OData query parameters: `$filter`, `$select`, `$expand`, `$orderby`, `$top`, `$skip`, `$inlinecount`. |
 
-Returns: `oas:CollectionOfA_SlsPrcgConditionRecordTextWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgConditionRecordTextWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgConditionRecordTextWrapper result = check conditionRecordClient->listA_SlsPrcgConditionRecordTexts(
+conditionrecord:CollectionOfA_SlsPrcgConditionRecordTextWrapper result = check conditionRecordClient->listA_SlsPrcgConditionRecordTexts(
     queries = {
         \$filter: "Language eq 'EN'"
     }
@@ -1634,12 +1633,12 @@ Parameters:
 | `payload` | `CreateA_SlsPrcgConditionRecordText` | Yes | Text content and language key. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 
-Returns: `oas:A_SlsPrcgConditionRecordTextWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgConditionRecordTextWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgConditionRecordTextWrapper text = check conditionRecordClient->createA_SlsPrcgConditionRecordText({
+conditionrecord:A_SlsPrcgConditionRecordTextWrapper text = check conditionRecordClient->createA_SlsPrcgConditionRecordText({
     ConditionRecord: "0000000123",
     ConditionSequentialNumber: "1",
     Language: "DE",
@@ -1677,12 +1676,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetA_SlsPrcgConditionRecordTextQueries` | No | OData query parameters: `$select`, `$expand`. |
 
-Returns: `oas:A_SlsPrcgConditionRecordTextWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgConditionRecordTextWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgConditionRecordTextWrapper text = check conditionRecordClient->getA_SlsPrcgConditionRecordText(
+conditionrecord:A_SlsPrcgConditionRecordTextWrapper text = check conditionRecordClient->getA_SlsPrcgConditionRecordText(
     "0000000123",
     "1",
     "EN"
@@ -1779,12 +1778,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetSlsPrcgConditionRecordOfA_SlsPrcgConditionRecordTextQueries` | No | OData query parameters: `$select`. |
 
-Returns: `oas:A_SlsPrcgConditionRecordWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgConditionRecordWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgConditionRecordWrapper conditionRecord =
+conditionrecord:A_SlsPrcgConditionRecordWrapper conditionRecord =
     check conditionRecordClient->getSlsPrcgConditionRecordOfA_SlsPrcgConditionRecordText(
         "0000000123",
         "1",
@@ -1823,12 +1822,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `ListA_SlsPrcgCndnSupplementTextsQueries` | No | OData query parameters: `$filter`, `$select`, `$expand`, `$orderby`, `$top`, `$skip`, `$inlinecount`. |
 
-Returns: `oas:CollectionOfA_SlsPrcgCndnSupplementTextWrapper|error`
+Returns: `conditionrecord:CollectionOfA_SlsPrcgCndnSupplementTextWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:CollectionOfA_SlsPrcgCndnSupplementTextWrapper result = check conditionRecordClient->listA_SlsPrcgCndnSupplementTexts(
+conditionrecord:CollectionOfA_SlsPrcgCndnSupplementTextWrapper result = check conditionRecordClient->listA_SlsPrcgCndnSupplementTexts(
     queries = {
         \$filter: "ConditionRecord eq '0000000123'"
     }
@@ -1866,12 +1865,12 @@ Parameters:
 | `payload` | `CreateA_SlsPrcgCndnSupplementText` | Yes | Text content and language key. |
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 
-Returns: `oas:A_SlsPrcgCndnSupplementTextWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnSupplementTextWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnSupplementTextWrapper text = check conditionRecordClient->createA_SlsPrcgCndnSupplementText({
+conditionrecord:A_SlsPrcgCndnSupplementTextWrapper text = check conditionRecordClient->createA_SlsPrcgCndnSupplementText({
     ConditionRecord: "0000000123",
     ConditionSequentialNumber: "2",
     Language: "DE",
@@ -1909,12 +1908,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetA_SlsPrcgCndnSupplementTextQueries` | No | OData query parameters: `$select`, `$expand`. |
 
-Returns: `oas:A_SlsPrcgCndnSupplementTextWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnSupplementTextWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnSupplementTextWrapper text = check conditionRecordClient->getA_SlsPrcgCndnSupplementText(
+conditionrecord:A_SlsPrcgCndnSupplementTextWrapper text = check conditionRecordClient->getA_SlsPrcgCndnSupplementText(
     "0000000123",
     "2",
     "EN"
@@ -2011,12 +2010,12 @@ Parameters:
 | `headers` | `map<string\|string[]>` | No | Additional HTTP request headers. |
 | `queries` | `GetSlsPrcgCndnRecdSuplmntOfA_SlsPrcgCndnSupplementTextQueries` | No | OData query parameters: `$select`. |
 
-Returns: `oas:A_SlsPrcgCndnRecdSuplmntWrapper|error`
+Returns: `conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper|error`
 
 Sample code:
 
 ```ballerina
-oas:A_SlsPrcgCndnRecdSuplmntWrapper supplement =
+conditionrecord:A_SlsPrcgCndnRecdSuplmntWrapper supplement =
     check conditionRecordClient->getSlsPrcgCndnRecdSuplmntOfA_SlsPrcgCndnSupplementText(
         "0000000123",
         "2",
