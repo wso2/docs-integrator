@@ -1234,6 +1234,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Microsoft Teams',
+          link: { type: 'doc', id: 'connectors/catalog/communication/microsoft.teams/overview' },
+          items: [
+            'connectors/catalog/communication/microsoft.teams/setup-guide',
+            'connectors/catalog/communication/microsoft.teams/action-reference',
+            'connectors/catalog/communication/microsoft.teams/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Milvus',
           link: { type: 'doc', id: 'connectors/catalog/ai-ml/milvus/connector-overview' },
           items: [
