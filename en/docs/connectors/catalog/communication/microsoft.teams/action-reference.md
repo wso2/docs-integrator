@@ -3277,7 +3277,7 @@ Returns: `error?`
 Sample code:
 
 ```ballerina
-check teamsClient->sendActivityNotification("<team-id>", { /* SendActivityNotificationRequest */ });
+check teamsClient->sendActivityNotification("<team-id>", {topic: <teams:TeamworkActivityTopic>{atOdataType: "#microsoft.graph.teamworkActivityTopic", 'source: "entityUrl", value: "https://graph.microsoft.com/v1.0/teams/<team-id>"}, activityType: "taskCreated", previewText: <teams:ItemBody>{content: "You have a new notification"}, recipient: <teams:TeamworkNotificationRecipient>{atOdataType: "#microsoft.graph.aadUserNotificationRecipient", "userId": "<user-id>"}});
 ```
 
 </div>
@@ -5731,7 +5731,7 @@ Returns: `TeamworkTag|error`
 Sample code:
 
 ```ballerina
-teams:TeamworkTag result = check teamsClient->createTag("<team-id>", {displayName: "Engineering"});
+teams:TeamworkTag result = check teamsClient->createTag("<team-id>", {displayName: "Engineering", "members": [{"userId": "<user-id>"}]});
 ```
 
 Sample response:
