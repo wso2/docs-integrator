@@ -7,7 +7,7 @@ description: "Overview of the ballerinax/microsoft.teams connector for WSO2 Inte
 
 The `ballerinax/microsoft.teams` connector enables programmatic access to [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) through the Microsoft Graph API v1.0, allowing you to manage teams, channels, members, messages, tabs, and teamwork tags. It supports both delegated (refresh token) and app-only (client credentials) OAuth 2.0 authentication, making it suitable for user-delegated workflows and background automation alike.
 
-## Key Features
+## Key features
 
 - Create, retrieve, update, and delete teams and channels (standard, private, and shared)
 - Manage team and channel members with individual and bulk add/remove operations

@@ -63,11 +63,7 @@ The screenshots in this guide are for illustration only. The Microsoft Entra adm
 
 ## Obtain OAuth 2.0 credentials
 
-Microsoft Entra's v2.0 token endpoint for the registered application is:
-
-```
-https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token
-```
+Microsoft Entra's v2.0 token endpoint for the registered application is `https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token`.
 
 The connector supports two authentication modes:
 

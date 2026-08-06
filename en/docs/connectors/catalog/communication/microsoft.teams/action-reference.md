@@ -156,14 +156,14 @@ Returns: `http:Response|error`
 Sample code:
 
 ```ballerina
-http:Response result = check teamsClient->updateTeam("<team-id>", {displayName: "Engineering", description: "Engineering team", "template@odata.bind": "https://graph.microsoft.com/v1.0/teamsTemplates('standard')"});
+http:Response result = check teamsClient->updateTeam("<team-id>", {displayName: "Engineering", description: "Engineering team"});
 ```
 
 </div>
 
 </details>
 
-#### All Channels
+#### All channels
 
 <details>
 <summary>listAllChannels</summary>
@@ -409,7 +409,7 @@ Returns: `http:Response|error`
 Sample code:
 
 ```ballerina
-http:Response result = check teamsClient->updateChannel("<team-id>", "<channel-id>", {displayName: "Announcements", membershipType: "standard"});
+http:Response result = check teamsClient->updateChannel("<team-id>", "<channel-id>", {displayName: "Announcements", description: "Team-wide announcements and updates"});
 ```
 
 </div>
@@ -515,7 +515,7 @@ Sample response:
 
 </details>
 
-#### Channels / All Members
+#### Channels / all members
 
 <details>
 <summary>listChannelAllMembers</summary>
@@ -670,7 +670,7 @@ Returns: `ConversationMember|error`
 Sample code:
 
 ```ballerina
-teams:ConversationMember result = check teamsClient->updateChannelAllMember("<team-id>", "<channel-id>", "<conversation-member-id>", {"@odata.type": "#microsoft.graph.aadUserConversationMember", roles: ["owner"], "user@odata.bind": "https://graph.microsoft.com/v1.0/users('<user-id>')"});
+teams:ConversationMember result = check teamsClient->updateChannelAllMember("<team-id>", "<channel-id>", "<conversation-member-id>", {"@odata.type": "#microsoft.graph.aadUserConversationMember", roles: ["owner"]});
 ```
 
 Sample response:
@@ -785,7 +785,7 @@ Sample response:
 
 </details>
 
-#### Channels / Enabled Apps
+#### Channels / enabled apps
 
 <details>
 <summary>listChannelEnabledApps</summary>
@@ -890,7 +890,7 @@ Sample response:
 
 </details>
 
-#### Channels / Files Folder
+#### Channels / files folder
 
 <details>
 <summary>getChannelFilesFolder</summary>
@@ -1015,7 +1015,7 @@ check teamsClient->deleteChannelFilesFolderContent("<team-id>", "<channel-id>");
 
 </details>
 
-#### Channels / Members
+#### Channels / members
 
 <details>
 <summary>listChannelMembers</summary>
@@ -1170,7 +1170,7 @@ Returns: `ConversationMember|error`
 Sample code:
 
 ```ballerina
-teams:ConversationMember result = check teamsClient->updateChannelMember("<team-id>", "<channel-id>", "<conversation-member-id>", {"@odata.type": "#microsoft.graph.aadUserConversationMember", roles: ["owner"], "user@odata.bind": "https://graph.microsoft.com/v1.0/users('<user-id>')"});
+teams:ConversationMember result = check teamsClient->updateChannelMember("<team-id>", "<channel-id>", "<conversation-member-id>", {"@odata.type": "#microsoft.graph.aadUserConversationMember", roles: ["owner"]});
 ```
 
 Sample response:
@@ -1285,7 +1285,7 @@ Sample response:
 
 </details>
 
-#### Channels / Messages
+#### Channels / messages
 
 <details>
 <summary>listChannelMessages</summary>
@@ -1663,7 +1663,7 @@ Sample response:
 
 </details>
 
-#### Channels / Messages / Hosted Contents
+#### Channels / messages / hosted contents
 
 <details>
 <summary>listChannelMessageHostedContents</summary>
@@ -1959,7 +1959,7 @@ Sample response:
 
 </details>
 
-#### Channels / Messages / Replies
+#### Channels / messages / replies
 
 <details>
 <summary>listChannelMessageReplies</summary>
@@ -2349,7 +2349,7 @@ Sample response:
 
 </details>
 
-#### Channels / Messages / Replies / Hosted Contents
+#### Channels / messages / replies / hosted contents
 
 <details>
 <summary>listChannelMessageReplyHostedContents</summary>
@@ -2654,7 +2654,7 @@ Sample response:
 
 </details>
 
-#### Channels / Tabs
+#### Channels / tabs
 
 <details>
 <summary>listChannelTabs</summary>
@@ -2809,7 +2809,7 @@ Returns: `TeamsTab|error`
 Sample code:
 
 ```ballerina
-teams:TeamsTab result = check teamsClient->updateChannelTab("<team-id>", "<channel-id>", "<teams-tab-id>", {displayName: "My Tab", "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/<app-id>"});
+teams:TeamsTab result = check teamsClient->updateChannelTab("<team-id>", "<channel-id>", "<teams-tab-id>", {displayName: "My Tab"});
 ```
 
 Sample response:
@@ -2891,7 +2891,7 @@ Sample response:
 
 </details>
 
-#### Incoming Channels
+#### Incoming channels
 
 <details>
 <summary>listIncomingChannels</summary>
@@ -3143,7 +3143,7 @@ Returns: `ConversationMember|error`
 Sample code:
 
 ```ballerina
-teams:ConversationMember result = check teamsClient->updateMember("<team-id>", "<conversation-member-id>", {"@odata.type": "#microsoft.graph.aadUserConversationMember", roles: ["owner"], "user@odata.bind": "https://graph.microsoft.com/v1.0/users('<user-id>')"});
+teams:ConversationMember result = check teamsClient->updateMember("<team-id>", "<conversation-member-id>", {"@odata.type": "#microsoft.graph.aadUserConversationMember", roles: ["owner"]});
 ```
 
 Sample response:
@@ -3255,7 +3255,7 @@ Sample response:
 
 </details>
 
-#### Send Activity Notification
+#### Send activity notification
 
 <details>
 <summary>sendActivityNotification</summary>
@@ -3284,7 +3284,7 @@ check teamsClient->sendActivityNotification("<team-id>", { /* SendActivityNotifi
 
 </details>
 
-#### Primary Channel
+#### Primary channel
 
 <details>
 <summary>getPrimaryChannel</summary>
@@ -3365,14 +3365,14 @@ Returns: `http:Response|error`
 Sample code:
 
 ```ballerina
-http:Response result = check teamsClient->updatePrimaryChannel("<team-id>", {displayName: "Announcements", membershipType: "standard"});
+http:Response result = check teamsClient->updatePrimaryChannel("<team-id>", {description: "Team-wide announcements and updates"});
 ```
 
 </div>
 
 </details>
 
-#### Primary Channel / All Members
+#### Primary channel / all members
 
 <details>
 <summary>listPrimaryChannelAllMembers</summary>
@@ -3522,7 +3522,7 @@ Returns: `ConversationMember|error`
 Sample code:
 
 ```ballerina
-teams:ConversationMember result = check teamsClient->updatePrimaryChannelAllMember("<team-id>", "<conversation-member-id>", {"@odata.type": "#microsoft.graph.aadUserConversationMember", roles: ["owner"], "user@odata.bind": "https://graph.microsoft.com/v1.0/users('<user-id>')"});
+teams:ConversationMember result = check teamsClient->updatePrimaryChannelAllMember("<team-id>", "<conversation-member-id>", {"@odata.type": "#microsoft.graph.aadUserConversationMember", roles: ["owner"]});
 ```
 
 Sample response:
@@ -3634,7 +3634,7 @@ Sample response:
 
 </details>
 
-#### Primary Channel / Enabled Apps
+#### Primary channel / enabled apps
 
 <details>
 <summary>listPrimaryChannelEnabledApps</summary>
@@ -3736,7 +3736,7 @@ Sample response:
 
 </details>
 
-#### Primary Channel / Files Folder
+#### Primary channel / files folder
 
 <details>
 <summary>getPrimaryChannelFilesFolder</summary>
@@ -3857,7 +3857,7 @@ check teamsClient->deletePrimaryChannelFilesFolderContent("<team-id>");
 
 </details>
 
-#### Primary Channel / Members
+#### Primary channel / members
 
 <details>
 <summary>listPrimaryChannelMembers</summary>
@@ -4007,7 +4007,7 @@ Returns: `ConversationMember|error`
 Sample code:
 
 ```ballerina
-teams:ConversationMember result = check teamsClient->updatePrimaryChannelMember("<team-id>", "<conversation-member-id>", {"@odata.type": "#microsoft.graph.aadUserConversationMember", roles: ["owner"], "user@odata.bind": "https://graph.microsoft.com/v1.0/users('<user-id>')"});
+teams:ConversationMember result = check teamsClient->updatePrimaryChannelMember("<team-id>", "<conversation-member-id>", {"@odata.type": "#microsoft.graph.aadUserConversationMember", roles: ["owner"]});
 ```
 
 Sample response:
@@ -4119,7 +4119,7 @@ Sample response:
 
 </details>
 
-#### Primary Channel / Messages
+#### Primary channel / messages
 
 <details>
 <summary>listPrimaryChannelMessages</summary>
@@ -4485,7 +4485,7 @@ Sample response:
 
 </details>
 
-#### Primary Channel / Messages / Hosted Contents
+#### Primary channel / messages / hosted contents
 
 <details>
 <summary>listPrimaryChannelMessageHostedContents</summary>
@@ -4772,7 +4772,7 @@ Sample response:
 
 </details>
 
-#### Primary Channel / Messages / Replies
+#### Primary channel / messages / replies
 
 <details>
 <summary>listPrimaryChannelMessageReplies</summary>
@@ -5150,7 +5150,7 @@ Sample response:
 
 </details>
 
-#### Primary Channel / Messages / Replies / Hosted Contents
+#### Primary channel / messages / replies / hosted contents
 
 <details>
 <summary>listPrimaryChannelMessageReplyHostedContents</summary>
@@ -5446,7 +5446,7 @@ Sample response:
 
 </details>
 
-#### Primary Channel / Tabs
+#### Primary channel / tabs
 
 <details>
 <summary>listPrimaryChannelTabs</summary>
@@ -5596,7 +5596,7 @@ Returns: `TeamsTab|error`
 Sample code:
 
 ```ballerina
-teams:TeamsTab result = check teamsClient->updatePrimaryChannelTab("<team-id>", "<teams-tab-id>", {displayName: "My Tab", "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/<app-id>"});
+teams:TeamsTab result = check teamsClient->updatePrimaryChannelTab("<team-id>", "<teams-tab-id>", {displayName: "My Tab"});
 ```
 
 Sample response:
@@ -5872,7 +5872,7 @@ Sample response:
 
 </details>
 
-#### Tags / Members
+#### Tags / members
 
 <details>
 <summary>listTagMembers</summary>
@@ -5999,41 +5999,6 @@ Sample code:
 
 ```ballerina
 check teamsClient->deleteTagMember("<team-id>", "<teamwork-tag-id>", "<teamwork-tag-member-id>");
-```
-
-</div>
-
-</details>
-
-<details>
-<summary>updateTagMember</summary>
-
-<div>
-
-Sends the tag-member properties to change. Note: Microsoft Graph v1.0 exposes no editable properties for a teamworkTagMember; this is provided for API completeness.
-
-Parameters:
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `teamId` | `string` | Yes | The unique identifier of team |
-| `teamworkTagId` | `string` | Yes | The unique identifier of teamworkTag |
-| `teamworkTagMemberId` | `string` | Yes | The unique identifier of teamworkTagMember |
-| `payload` | `TeamworkTagMember` | Yes | The tag member properties to update |
-| `headers` | `map<string\|string[]>` | No | Headers to be sent with the request |
-
-Returns: `TeamworkTagMember|error`
-
-Sample code:
-
-```ballerina
-teams:TeamworkTagMember result = check teamsClient->updateTagMember("<team-id>", "<teamwork-tag-id>", "<teamwork-tag-member-id>", {"userId": "<user-id>"});
-```
-
-Sample response:
-
-```ballerina
-{"id": "<tag-member-id>", "displayName": "Alex Johnson", "userId": "<user-id>", "tenantId": "<tenant-id>"}
 ```
 
 </div>
