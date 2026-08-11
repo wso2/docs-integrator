@@ -19,11 +19,11 @@ WSO2 Integrator lets you design workflows that:
 
 ## Two ways to build, one durable runtime
 
-| Durable Workflow | Durable Agentic Workflow |
-| --- | --- |
-| You wire the steps together in a visual flow | You describe the goal; an AI model decides the steps |
-| Explicit, predictable path | Adapts to each request at runtime |
-| Best for known, fixed business logic | Best for branchy, hard-to-enumerate logic |
+| Durable Workflow | Durable Agentic Workflow                                             |
+| --- |----------------------------------------------------------------------|
+| You wire the steps together in a visual flow | You describe the goal in natural language; an AI model decides the steps |
+| Explicit, predictable path | Adapts to each request at runtime                                    |
+| Best for known, fixed business logic | Best for branchy, hard-to-enumerate logic                            |
 
 Both run on the same durable runtime, so an AI agent gets crash-safety, human tasks, timers, and retries for free.
 

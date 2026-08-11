@@ -36,19 +36,12 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## Step 2: Add a Durable Agentic Workflow
 
-1. In the design view, select **+ Add Artifact**.
-2. Under **Durable Workflow**, select **Durable Agentic Workflow**.
+1. In the design view, click **+ Add Artifact**.
+2. Under **Durable Workflow**, select **Durable Agentic Workflow** and click **Next**.
 3. Set **Name** to `claimAgent`.
-4. Select **Create Agent**.
+4. Click **Create Agent**.
 
-<ThemedImage
-    alt="Durable Agentic Workflow creation form with Name set to claimAgent and the Create Agent button"
-    sources={{
-        light: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/02-create-agent.png'),
-        dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/02-create-agent.png'),
-    }}
-/>
-
+![Create Durable Agent](/img/workflows/getting-started/build-a-claim-workflow-agent/create-agent.png)
 The agent model opens: a single agent node with anchored **+** buttons for adding capabilities — human tasks (top left), events (bottom left), activities (middle right), and agent tools (bottom right).
 
 ## Step 3: Describe the agent

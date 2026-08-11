@@ -2,12 +2,12 @@
 sidebar_position: 1
 title: Integration Artifacts
 description: Choose the right artifact type to expose APIs, react to events, process files, run scheduled jobs, or power AI agents in WSO2 Integrator.
-keywords: [wso2 integrator, integration artifacts, http service, event handler, automation, file integration]
+keywords: [wso2 integrator, integration artifacts, http service, event handler, automation, file integration, durable workflow]
 ---
 
 # Integration Artifacts
 
-Integration artifacts are the building blocks of every integration. Each type is designed for a specific trigger and communication pattern: receiving HTTP requests, reacting to messages, processing files, running on a schedule, or serving AI agent tools. Choosing the right artifact for the job keeps your integration logic focused and your project easy to navigate.
+Integration artifacts are the building blocks of every integration. Each type is designed for a specific trigger and communication pattern: receiving HTTP requests, reacting to messages, processing files, running on a schedule, driving a long-running process, or serving AI agent tools. Choosing the right artifact for the job keeps your integration logic focused and your project easy to navigate.
 
 ## Artifact categories
 
@@ -27,6 +27,15 @@ Build AI-powered integrations that use large language models to reason, respond,
 |---|---|
 | AI Chat Agent | An LLM-backed agent accessible via a chat interface or API. Covered in the [AI Integrations](../../genai/overview.md) section. |
 | MCP Service | Exposes integration capabilities as tools via the Model Context Protocol for use by AI assistants. Covered in the [AI Integrations](../../genai/overview.md) section. |
+
+### Durable workflows
+
+Model long-running business processes that survive restarts, wait for human decisions, and retry failed steps.
+
+| Artifact | Description |
+|---|---|
+| Durable Workflow | A flow of activities that records every completed step and resumes where it left off after a crash or restart. Use for approvals, multi-step transactions, and processes that wait on people or external events. Covered in the [Durable Workflows](../../workflows/overview.md) section. |
+| Durable Agentic Workflow | An AI agent that runs on the same durable runtime, so it gets crash safety, human tasks, timers, and retries. Use when the steps are branchy and hard to enumerate up front. Covered in the [Durable Workflows](../../workflows/overview.md) section. |
 
 ### Integration as API
 
