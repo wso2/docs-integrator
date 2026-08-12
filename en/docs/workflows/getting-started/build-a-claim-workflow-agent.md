@@ -5,6 +5,8 @@ description: Build your first durable agentic workflow in WSO2 Integrator — an
 keywords: [wso2 integrator, durable workflow, agentic workflow, durable agent, claim workflow, human in the loop, approval]
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
@@ -42,11 +44,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 4. Click **Create Agent**.
 
 ![Create Durable Agent](/img/workflows/getting-started/build-a-claim-workflow-agent/create-agent.png)
-The agent model opens: a single agent node with anchored **+** buttons for adding capabilities — human tasks (top left), events (bottom left), activities (middle right), and agent tools (bottom right).
 
 ## Step 3: Describe the agent
 
-Click the agent node and give it its role and instructions:
+1. Click the agent node and give it its role and instructions:
 
 - **Role:** `Expense claim assistant`
 - **Instructions:**
@@ -56,14 +57,9 @@ Click the agent node and give it its role and instructions:
   reject invalid claims with a clear reason. When a claim is valid, pay it with payClaim
   using the claimed amount. Finish with a one-line summary of the outcome.
   ```
+2. Click **Save**.
 
-<ThemedImage
-    alt="Agent node form with the Role and Instructions fields filled in"
-    sources={{
-        light: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/03-agent-identity.png'),
-        dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/03-agent-identity.png'),
-    }}
-/>
+![Agent node form with the Role and Instructions fields filled in](/img/workflows/getting-started/build-a-claim-workflow-agent/agent-role-and-instructions.png)
 
 ## Step 4: Give the agent activities
 
@@ -71,15 +67,51 @@ Activities are the units of work the agent can call. Each one runs durably — c
 
 First add the claim validator:
 
-1. Select the **+** button on the **middle right** of the agent node and choose **Add Activity**.
-2. Create a new activity named `validateClaim` with a `claim` input and the validation logic:
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+1. Click **+** on the **bottom right** of the agent node and Click **+ Create Activity**.
+2. Set the **Activity Name** to `validateClaim`.
+3. Click **+ Add Parameter**.
+4. For the **Type** field, select **+ Create New Type**.
+5. In the **Create from scratch** tab, enter `ExpenseClaim` as the **Name**.
+6. Click **+** next to **Fields** and add each field:
+
+   | Field | Type |
+   |---|---|
+   | `claimId` | `string` |
+   | `amount` | `decimal` |
+   | `purpose` | `string` |
+
+7. Click **Save** to create the `ExpenseClaim` type. The modal closes and `ExpenseClaim` is auto-injected as the parameter type.
+8. Name the parameter `claim` and click **Add**.
+9. Fill the return type as `boolean` and click **Save**.
+10. Select the newly created `validateClaim` activity to add it to the agent.
+
+![Add `validateClaim` activity`](/img/workflows/getting-started/build-a-claim-workflow-agent/create-expense-claim-type.png)
+
+Now give the activity its body. The activity is a function, so its flow returns the validation result:
+
+1. In the left sidebar, expand **Workflow Activities** and select `validateClaim`. 
+2. In the node panel on the right, under **Control**, select **Return**.
+3. Click the **Expression** field to open the value helper, then select **Inputs** > `claim` > `amount`.
+4. With the cursor after the inserted value, type `> 0d` to require a positive amount.
+5. Click **Save**. and select `claimAgent` under **Workflows** to return to the agent diagram.
+
+![Add `validateClaim` activity`](/img/workflows/getting-started/build-a-claim-workflow-agent/validate-claim-body.gif)
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
 
 ```ballerina
 @workflow:Activity
-function validateClaim(ExpenseClaim claim) returns boolean|error {
-    return claim.amount > 0d && claim.purpose.trim().length() > 0;
+function validateClaim(ExpenseClaim claim) returns boolean {
+    return claim.amount > 0d;
 }
 ```
+
+</TabItem>
+</Tabs>
 
 Then add the payment activity — this is the risky step, so gate it behind a manager:
 
@@ -88,7 +120,7 @@ Then add the payment activity — this is the risky step, so gate it behind a ma
 
 ```ballerina
 @workflow:Activity
-function payClaim(string claimId, decimal amount) returns string|error {
+function payClaim(string claimId, decimal amount) returns string {
     return string `PAY-${claimId}`;
 }
 ```
