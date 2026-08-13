@@ -2109,8 +2109,13 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Integration Control Plane',
+          link: { type: 'doc', id: 'workflows/icp/managing-workflows' },
           items: [
-            'workflows/icp/managing-workflows',
+            'workflows/icp/connect-runtime',
+            'workflows/icp/start-workflow',
+            'workflows/icp/executions',
+            'workflows/icp/human-tasks',
+            'workflows/icp/review-activities',
           ],
         },
         // Tutorials

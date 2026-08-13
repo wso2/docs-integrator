@@ -40,7 +40,12 @@ Both run on the same durable runtime, so an AI agent gets crash-safety, human ta
 
 ## Manage running workflows
 
-- **[Integration Control Plane](icp/managing-workflows.md):** See every workflow instance, where it is halted, decide human tasks and reviews, and suspend, resume, or terminate runs.
+- **[Integration Control Plane](icp/managing-workflows.md):** Where workflow management lives in the console, and the permissions and roles that control each view.
+- **[Connect a workflow runtime](icp/connect-runtime.md):** Register an integration so its workflows, tasks, and reviews appear in the console.
+- **[Start a workflow](icp/start-workflow.md):** Launch an execution from a form generated out of the workflow's input type.
+- **[Workflow executions](icp/executions.md):** Follow a run through its timeline, execution graph, and history, and suspend, resume, or terminate it.
+- **[Complete human tasks](icp/human-tasks.md):** Decide the tasks a workflow is waiting on, from the task inbox.
+- **[Review activities](icp/review-activities.md):** Approve, correct, or reject an activity before it runs or after it fails.
 
 ## Tutorials
 
