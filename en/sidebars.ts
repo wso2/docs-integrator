@@ -165,6 +165,9 @@ const sidebars: SidebarsConfig = {
                 'develop/integration-artifacts/event/solace',
                 'develop/integration-artifacts/event/cdc-mssql',
                 'develop/integration-artifacts/event/cdc-postgresql',
+                'develop/integration-artifacts/event/whatsapp-business',
+                'develop/integration-artifacts/event/telegram',
+                'develop/integration-artifacts/event/google-chat',
               ],
             },
             {
@@ -674,6 +677,17 @@ const sidebars: SidebarsConfig = {
             'connectors/catalog/productivity-collaboration/googleapis.calendar/setup-guide',
             'connectors/catalog/productivity-collaboration/googleapis.calendar/actions',
             'connectors/catalog/productivity-collaboration/googleapis.calendar/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Google Chat',
+          link: { type: 'doc', id: 'connectors/catalog/communication/google-chat/overview' },
+          items: [
+            'connectors/catalog/communication/google-chat/setup-guide',
+            'connectors/catalog/communication/google-chat/actions',
+            'connectors/catalog/communication/google-chat/triggers',
+            'connectors/catalog/communication/google-chat/example',
           ],
         },
         {
@@ -1845,6 +1859,17 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Telegram',
+          link: { type: 'doc', id: 'connectors/catalog/communication/telegram/overview' },
+          items: [
+            'connectors/catalog/communication/telegram/setup-guide',
+            'connectors/catalog/communication/telegram/actions',
+            'connectors/catalog/communication/telegram/triggers',
+            'connectors/catalog/communication/telegram/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Trello',
           link: { type: 'doc', id: 'connectors/catalog/productivity-collaboration/trello/connector-overview' },
           items: [
@@ -1915,6 +1940,17 @@ const sidebars: SidebarsConfig = {
             'connectors/catalog/built-in/websub/action-reference',
             'connectors/catalog/built-in/websub/trigger-reference',
             'connectors/catalog/built-in/websub/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'WhatsApp Business',
+          link: { type: 'doc', id: 'connectors/catalog/communication/whatsapp-business/overview' },
+          items: [
+            'connectors/catalog/communication/whatsapp-business/setup-guide',
+            'connectors/catalog/communication/whatsapp-business/actions',
+            'connectors/catalog/communication/whatsapp-business/triggers',
+            'connectors/catalog/communication/whatsapp-business/example',
           ],
         },
         {
