@@ -2091,18 +2091,33 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Getting Started',
           items: [
+            'workflows/getting-started/build-an-order-processing-workflow',
             'workflows/getting-started/build-a-claim-workflow-agent',
           ],
         },
         // Workflow Features
         {
           type: 'category',
-          label: 'Workflow Features',
+          label: 'Develop Workflows',
           items: [
-            'workflows/develop/transaction-workflow',
+            'workflows/develop/create-workflow',
+            'workflows/develop/start-workflow',
+            'workflows/develop/activities',
+            'workflows/develop/data-events',
             'workflows/develop/human-task-workflow',
             'workflows/develop/review-activity-and-error-handling',
             'workflows/develop/durable-agentic-workflow',
+            'workflows/develop/durable-timers',
+            {
+              type: 'category',
+              label: 'Prebuilt Activities',
+              link: { type: 'doc', id: 'workflows/develop/prebuilt-activities/index' },
+              items: [
+                'workflows/develop/prebuilt-activities/call-rest-api',
+                'workflows/develop/prebuilt-activities/call-soap-api',
+                'workflows/develop/prebuilt-activities/send-email',
+              ],
+            },
           ],
         },
         // Integration Control Plane

@@ -29,14 +29,20 @@ Both run on the same durable runtime, so an AI agent gets crash-safety, human ta
 
 ## Getting started
 
-- **[Build a Claim Handling Agent](getting-started/build-a-claim-workflow-agent.md):** Your first durable agentic workflow — an agent that validates expense claims and pays them out only after a manager approves.
+- **[Build an Order Processing Workflow](getting-started/build-an-order-processing-workflow.md):** Your first durable workflow — it reserves inventory, waits for a payment confirmation, and then confirms or cancels the order.
+- **[Build a Claim Handling Agent](getting-started/build-a-claim-workflow-agent.md):** A durable agentic workflow — an agent that validates expense claims and pays them out only after a manager approves.
 
-## Workflow features
+## Develop workflows
 
-- **[Transaction workflows](develop/transaction-workflow.md):** Wire activities into a reliable, crash-safe flow with automatic retries.
+- **[Create a workflow](develop/create-workflow.md):** Add the artifact, give it an input type, and design its steps on the diagram.
+- **[Start a workflow](develop/start-workflow.md):** Launch a run from a service or an automation, and keep the ID that identifies it.
+- **[Activities](develop/activities.md):** The recorded units of work in a workflow — exactly-once on replay and retryable on failure.
+- **[Durable timers](develop/durable-timers.md):** Pause for hours, days, or months with a wait that survives restarts and holds no resources.
+- **[Data events](develop/data-events.md):** Wait until an external system or a person delivers the data the workflow needs, then resume with it.
 - **[Human task workflows](develop/human-task-workflow.md):** Pause for role-based human decisions and external data, for as long as it takes.
 - **[Review activities and error handling](develop/review-activity-and-error-handling.md):** Approval gates before risky steps and human-reviewed retries after failures.
 - **[Durable agentic workflows](develop/durable-agentic-workflow.md):** AI agents with durable activities, events, human tasks, and agent-to-agent collaboration.
+- **[Prebuilt activities](develop/prebuilt-activities/index.md):** Durable REST, SOAP, and email calls with no wrapper to write.
 
 ## Manage running workflows
 

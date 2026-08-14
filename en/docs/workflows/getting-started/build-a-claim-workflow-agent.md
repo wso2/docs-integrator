@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 title: "Build a Claim Handling Agent"
 description: Build your first durable agentic workflow in WSO2 Integrator — an AI agent that validates expense claims and pays them only after a manager approves.
 keywords: [wso2 integrator, durable workflow, agentic workflow, durable agent, claim workflow, human in the loop, approval]
