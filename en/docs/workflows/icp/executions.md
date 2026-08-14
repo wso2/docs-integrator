@@ -68,7 +68,6 @@ Below them, the run is drawn as a Gantt chart with one row per step, in executio
 | Human task | A task awaiting a person. |
 | Review activity | A review gate, shown as `review-` followed by the reviewed activity's name, so it is distinct from the activity's own row. |
 | Timer | A durable timer, from started to fired or canceled. |
-| Child workflow | A workflow started by this one. |
 | Signal | A point in time rather than a duration, drawn as a single marker. |
 
 Colour carries status. Completed steps are green, failures red, cancellations and timeouts amber, and running steps blue. Successful activities and human tasks use their own hues so they stand out among the completed steps. Hovering a bar shows the step's full name, status, and duration.
@@ -88,7 +87,6 @@ The graph is drawn top to bottom from a **Start** marker, one layer per dependen
 | **Review activity** | An approval gate before an activity runs, or a rerun decision after one fails. |
 | **Timer** | A durable timer. |
 | **Data** | A data event the workflow waits on. |
-| **Child workflow** | A workflow started by this one. |
 
 Node status uses the same vocabulary throughout: `RUNNING`, `WAITING`, `COMPLETED`, `FAILED`, `TIMED_OUT`, and `CANCELED`.
 

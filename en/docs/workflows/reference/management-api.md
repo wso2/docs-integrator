@@ -36,7 +36,7 @@ Base URL: `http://<host>:8234/workflow`
 | `GET /workflows` | List instances. Filters: `status` (`RUNNING`, `SUSPENDED`, `COMPLETED`, `FAILED`, …), `workflowType`, `workflowId` prefix, time bounds, pagination (`limit`, `pageToken`). |
 | `GET /workflows/{workflowId}` | Instance detail: type, status, result, and activity invocations. |
 | `GET /workflows/{workflowId}/history` | Full recorded event history. |
-| `GET /workflows/{workflowId}/execution-graph` | Nodes and edges of the execution so far. Node types: `ACTIVITY`, `TIMER`, `DATA`, `CHILD_WORKFLOW`, `HUMAN_TASK`, `REVIEW_ACTIVITY`. A `DATA` node with status `WAITING` marks a data event the workflow is currently blocked on. |
+| `GET /workflows/{workflowId}/execution-graph` | Nodes and edges of the execution so far. Node types: `ACTIVITY`, `TIMER`, `DATA`, `HUMAN_TASK`, `REVIEW_ACTIVITY`. A `DATA` node with status `WAITING` marks a data event the workflow is currently blocked on. |
 | `GET /workflows/{workflowId}/activity-tree` | The same execution as a tree of typed nodes with inputs, outputs, and attempts. |
 | `POST /workflows/{workflowId}/suspend` | Pause the instance. |
 | `POST /workflows/{workflowId}/resume` | Resume a suspended instance. |
