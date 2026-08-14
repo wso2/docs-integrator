@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 5
 title: "Human Task Workflows"
 description: Pause WSO2 Integrator durable workflows for role-based human decisions and external data — for hours, days, or months — with zero resources held while waiting.
 keywords: [wso2 integrator, durable workflow, human task, approval, human in the loop, data event, task inbox, icp]
@@ -67,43 +67,14 @@ Whatever you put in the decision record is exactly what the decider fills in. Ke
 
 ## Wait for external data
 
-Sometimes the workflow needs *data*, not a decision — the employee submits the bills, a partner system posts a confirmation. Declare a **data event** as a `future` parameter and wait on it:
-
-```ballerina
-@workflow:Workflow
-function expenseApprovalWorkflow(workflow:Context ctx, ExpenseClaim claim,
-        record {|future<BillSubmission> billSubmitted;|} dataEvents) returns ExpenseResult|error {
-    // ... after the manager requests the bills:
-    BillSubmission submission = check wait dataEvents.billSubmitted;
-    // validate the bills and continue
-}
-```
-
-Anyone with the workflow ID can deliver the data — typically a service resource:
-
-```ballerina
-resource function post [string workflowId]/bills(BillSubmission submission) returns json|error {
-    check workflow:sendData(expenseApprovalWorkflow, workflowId, "billSubmitted", submission);
-    return {workflowId, status: "BILLS_SUBMITTED"};
-}
-```
-
-While the workflow waits, the Control Plane's execution graph marks the halt point — a **waiting** data node named after the event — so anyone can see exactly what the process is blocked on.
-
-<ThemedImage
-    alt="Execution graph showing the workflow halted on a waiting billSubmitted data event"
-    sources={{
-        light: useBaseUrl('/img/workflows/develop/human-task-workflow/02-waiting-data-event.png'),
-        dark: useBaseUrl('/img/workflows/develop/human-task-workflow/02-waiting-data-event.png'),
-    }}
-/>
+When the workflow needs *data* rather than a decision — the employee submits the bills, a partner system posts a confirmation — wait on a [data event](data-events.md) instead of a human task. The workflow suspends the same way and resumes when anyone holding the workflow ID delivers the value.
 
 ## A complete two-review flow
 
 Combining tasks and data events gives the classic claim pattern — two reviews with an evidence hand-off between them:
 
 1. **`checkExpenseRequest`** — the manager triages the new claim: request bills, or reject.
-2. The employee submits bills via `workflow:sendData` → the workflow validates them.
+2. The employee submits bills via a [data event](data-events.md) → the workflow validates them.
 3. **`reviewBills`** — the manager sees the validation result and approves or rejects the payout.
 
 Every decision happens in the Control Plane inbox; the service exposes no task-completion endpoints.
@@ -122,5 +93,6 @@ if decision is error {
 
 ## Next steps
 
+- [Data events](data-events.md) — wait for data delivered by a system or a person instead of a decision.
 - [Review activities and error handling](review-activity-and-error-handling.md) — approvals attached to *activities* rather than free-standing tasks.
 - [Integration Control Plane](../icp/managing-workflows.md) — where tasks are decided, and how roles map to users.

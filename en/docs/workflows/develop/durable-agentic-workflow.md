@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 7
 title: "Durable Agentic Workflows"
 description: Build AI agents on the durable workflow runtime in WSO2 Integrator — with durable activities, event channels, human tasks, and agent-to-agent collaboration.
 keywords: [wso2 integrator, durable agent, agentic workflow, ai agent, human in the loop, events, durable]
@@ -108,7 +108,7 @@ All reads are durable: results live in the workflow history, so a crashed caller
 
 ## Traditional or agentic?
 
-Reach for an agentic workflow when the logic is branchy and judgement-heavy ("request whatever is missing, escalate the odd ones"); keep a [transaction workflow](transaction-workflow.md) when the steps are fixed and auditable. The two share activities, tasks, and the runtime — a claim system can use both side by side.
+Reach for an agentic workflow when the logic is branchy and judgement-heavy ("request whatever is missing, escalate the odd ones"); keep a hand-wired [durable workflow](../getting-started/build-an-order-processing-workflow.md) when the steps are fixed and auditable. The two share activities, tasks, and the runtime — a claim system can use both side by side.
 
 ## Next steps
 

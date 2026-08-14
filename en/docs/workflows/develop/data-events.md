@@ -1,0 +1,84 @@
+---
+sidebar_position: 4
+title: "Data Events"
+description: Pause a WSO2 Integrator durable workflow until an external system or a person delivers data, then resume with that value as a typed, recorded result.
+keywords: [wso2 integrator, durable workflow, data event, send data, external data, wait, callback, long running]
+---
+
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+# Data Events
+
+Sometimes a workflow needs *data*, not a decision — the employee submits the supporting bills, a partner system posts a shipping confirmation, a scanner returns a document. A **data event** is a named slot the workflow waits on. The instance suspends until something delivers a value into that slot, then resumes with the value as an ordinary typed result.
+
+Like every other durable wait, it costs nothing while it waits and it survives a restart.
+
+## Pause workflow for data event
+
+Data events are declared as a record of `future` parameters on the workflow function. Each field name is the event name, and its type is the value the workflow expects:
+
+```ballerina
+@workflow:Workflow
+function expenseApprovalWorkflow(workflow:Context ctx, ExpenseClaim claim,
+        record {|future<BillSubmission> billSubmitted;|} dataEvents) returns ExpenseResult|error {
+    // ... after the manager requests the bills:
+    BillSubmission submission = check wait dataEvents.billSubmitted;
+    // validate the bills and continue
+}
+```
+
+The workflow blocks at the `wait` and nowhere else, so you decide exactly where in the flow the data is needed. Declaring several fields gives the workflow several independent events to wait on.
+
+## Bound the wait
+
+Two optional settings live under **Advanced Configurations** in the **Await Data** form:
+
+| Field | Description |
+|---|---|
+| **Min Count** | How many of the awaited events must arrive before the workflow continues. Defaults to all of them. |
+| **Timeout** | The longest the workflow waits. The wait returns an error when the timeout expires, which your workflow can handle. |
+
+```ballerina
+BillSubmission|error submission = wait dataEvents.billSubmitted;
+if submission is error {
+    // the wait timed out; escalate, remind, or end the claim
+}
+```
+
+## Deliver the data
+
+Anyone holding the workflow ID can deliver a value with `workflow:sendData`, naming the event to fill. Typically that is a service resource:
+
+```ballerina
+resource function post [string workflowId]/bills(BillSubmission submission) returns json|error {
+    check workflow:sendData(expenseApprovalWorkflow, workflowId, "billSubmitted", submission);
+    return {workflowId, status: "BILLS_SUBMITTED"};
+}
+```
+
+The workflow ID is what ties the delivery to a specific instance, so hand it to whoever needs to respond — put it in the notification email, the callback URL, or the record you gave the partner system.
+
+:::tip Data event or human task?
+Use a **data event** when a system or a person is submitting *content* the workflow will process. Use a [human task](human-task-workflow.md) when a person is making a *decision* the Control Plane should render as a form in their inbox.
+:::
+
+## Watching a waiting workflow
+
+While the workflow waits, the execution graph in the [Integration Control Plane](../icp/managing-workflows.md) marks the halt point as a `DATA` node named after the event, with status `WAITING` — so anyone can see exactly what the process is blocked on rather than guessing that it is stuck.
+
+<ThemedImage
+    alt="Execution graph showing the workflow halted on a waiting billSubmitted data event"
+    sources={{
+        light: useBaseUrl('/img/workflows/develop/data-events/01-waiting-data-event.png'),
+        dark: useBaseUrl('/img/workflows/develop/data-events/01-waiting-data-event.png'),
+    }}
+/>
+
+The same graph is available over the [Management API](../reference/management-api.md).
+
+## Next steps
+
+- [Human task workflows](human-task-workflow.md) — pause for a person's decision instead of their data.
+- [Durable timers](durable-timers.md) — waiting on the clock instead of an event.
+- [Activities](activities.md) — the recorded steps that process the data once it arrives.

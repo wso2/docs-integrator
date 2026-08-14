@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 6
 title: "Review Activities & Error Handling"
 description: Gate risky workflow steps behind human approval and turn failures into human-reviewed retries in WSO2 Integrator durable workflows.
 keywords: [wso2 integrator, durable workflow, review activity, retry, error handling, approval gate, human review]
