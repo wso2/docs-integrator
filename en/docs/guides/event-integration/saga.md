@@ -32,7 +32,7 @@ import ballerinax/solace;
 configurable string solaceUrl = "smf://localhost:55554";
 configurable string messageVpn = "default";
 configurable string solaceUser = "admin";
-configurable string solacePassword = "admin";
+configurable string solacePassword = ?;
 
 type FlightBooked record {|
     string tripId;
