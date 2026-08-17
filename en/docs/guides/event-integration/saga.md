@@ -49,7 +49,7 @@ final solace:MessageProducer sagaProducer = check new (
 // docs-fold-end
 
 listener solace:Listener solaceListener = check new (
-    url = solaceUrl,
+    solaceUrl,
     messageVpn = messageVpn,
     auth = {username: solaceUser, password: solacePassword}
 );
