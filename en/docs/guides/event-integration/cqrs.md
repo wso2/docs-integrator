@@ -58,7 +58,7 @@ configurable string groupId = "leaderboard-updater";
 configurable string dbHost = "localhost";
 configurable int dbPort = 5432;
 configurable string dbUser = "postgres";
-configurable string dbPassword = "postgres";
+configurable string dbPassword = ?;
 configurable string dbName = "leaderboard";
 final postgresql:Client leaderboardDb = check new (dbHost, dbUser, dbPassword, dbName, dbPort);
 
