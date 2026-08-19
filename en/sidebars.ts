@@ -2104,6 +2104,7 @@ const sidebars: SidebarsConfig = {
             'workflows/develop/start-workflow',
             'workflows/develop/activities',
             'workflows/develop/data-events',
+            'workflows/develop/send-data-event',
             'workflows/develop/human-task-workflow',
             'workflows/develop/review-activity-and-error-handling',
             'workflows/develop/durable-agentic-workflow',
