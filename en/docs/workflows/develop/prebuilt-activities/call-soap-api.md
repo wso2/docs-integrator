@@ -68,5 +68,5 @@ The activity returns `xml`. An endpoint that answers with a multipart message fa
 ## Next steps
 
 - [Call REST API](call-rest-api.md) — the same idea for HTTP endpoints.
-- [Review activities and error handling](../review-activity-and-error-handling.md) — what happens when the call keeps failing.
+- [Error handling and review activities](../review-activity-and-error-handling.md) — what happens when the call keeps failing.
 - [Activities](../activities.md) — write your own activity when the response needs shaping first.

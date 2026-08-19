@@ -61,7 +61,7 @@ function notifyWorkflow(workflow:Context ctx, string recipient) returns error? {
 Set **HTML Body** as well when you want a formatted message. The plain-text **Body** is still sent, so clients that cannot render HTML have something to show.
 
 :::warning A retried email is a second email
-Mail cannot be recalled, and the send is not idempotent: if the message left the server but the activity reported a failure, **Auto Retry** sends it again. For customer-facing mail, prefer **No Automatic Retry**, or **Human Review** so a person decides whether to resend. See [Review activities and error handling](../review-activity-and-error-handling.md).
+Mail cannot be recalled, and the send is not idempotent: if the message left the server but the activity reported a failure, **Auto Retry** sends it again. For customer-facing mail, prefer **No Automatic Retry**, or **Human Review** so a person decides whether to resend. See [Error handling and review activities](../review-activity-and-error-handling.md).
 :::
 
 :::tip Notification or decision?
@@ -70,6 +70,6 @@ Use this activity to tell someone what happened. When the workflow needs an answ
 
 ## Next steps
 
-- [Human task workflows](../human-task-workflow.md) — wait for a person's decision rather than notifying them.
+- [Await human task](../human-task-workflow.md) — wait for a person's decision rather than notifying them.
 - [Call REST API](call-rest-api.md) — reach a notification service over HTTP instead of SMTP.
 - [Activities](../activities.md) — write your own activity when a template or attachment is involved.

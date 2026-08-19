@@ -91,5 +91,5 @@ A `POST` that failed after the server processed it will be sent again when **Aut
 ## Next steps
 
 - [Call SOAP API](call-soap-api.md) — the same idea for SOAP endpoints.
-- [Review activities and error handling](../review-activity-and-error-handling.md) — what happens when the call keeps failing.
+- [Error handling and review activities](../review-activity-and-error-handling.md) — what happens when the call keeps failing.
 - [Activities](../activities.md) — write your own activity when the call needs more than a forward.

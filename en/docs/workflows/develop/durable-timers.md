@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 9
 title: "Durable Timers"
 description: Pause a WSO2 Integrator durable workflow for hours, days, or months with a durable sleep that survives restarts and holds no threads or memory while it waits.
 keywords: [wso2 integrator, durable workflow, timer, sleep, delay, wait, long running, crash recovery]
@@ -53,7 +53,7 @@ A timer and a timeout look similar but answer different questions:
 | **Durable timer** (`ctx->sleep`) | Waits a fixed duration, then continues. Nothing can cut it short. |
 | **Human task timeout** (`timeout = {days: 3}`) | Bounds a wait for a *person or an event*. It ends early when the task is answered, and fails with a timeout error if nobody answers in time. |
 
-Use a timer for a delay you always want, and a timeout when you are waiting on something that may or may not arrive. See [Human task workflows](human-task-workflow.md) for the timeout form and how to handle its error.
+Use a timer for a delay you always want, and a timeout when you are waiting on something that may or may not arrive. See [Await human task](human-task-workflow.md) for the timeout form and how to handle its error.
 
 ## Watching timers
 
@@ -62,5 +62,5 @@ A pending timer appears as a `TIMER` node in the instance's execution graph in t
 ## Next steps
 
 - [Activities](activities.md) — the recorded steps a timer sits between.
-- [Human task workflows](human-task-workflow.md) — waiting on people and external events instead of the clock.
+- [Await human task](human-task-workflow.md) — waiting on people and external events instead of the clock.
 - [Build an order processing workflow](../getting-started/build-an-order-processing-workflow.md) — a timer in a complete flow.

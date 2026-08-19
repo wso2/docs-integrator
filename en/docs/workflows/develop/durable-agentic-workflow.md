@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
 title: "Durable Agentic Workflows"
 description: Build AI agents on the durable workflow runtime in WSO2 Integrator — with durable activities, event channels, human tasks, and agent-to-agent collaboration.
 keywords: [wso2 integrator, durable agent, agentic workflow, ai agent, human in the loop, events, durable]
@@ -61,7 +61,7 @@ Where the agent is *used* — a `supportAgent.run(...)` call in a service — th
 
 ### Activities
 
-`@workflow:Activity` functions the agent may invoke. Each call runs durably with the same guarantees and the same **retry policies** as any workflow activity — including **Requires Approval** gates and **Human Review** retries (see [Review activities and error handling](review-activity-and-error-handling.md)). The agent proposes; your policies decide what needs a human.
+`@workflow:Activity` functions the agent may invoke. Each call runs durably with the same guarantees and the same **retry policies** as any workflow activity — including **Requires Approval** gates and **Human Review** retries (see [Error handling and review activities](review-activity-and-error-handling.md)). The agent proposes; your policies decide what needs a human.
 
 ### Events
 

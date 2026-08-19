@@ -1,5 +1,5 @@
 ---
-sidebar_position: 9
+sidebar_position: 10
 title: "Prebuilt Activities"
 description: Ready-made durable wrappers for the calls every integration makes, so REST, SOAP, and email run as recorded workflow activities without writing one.
 keywords: [wso2 integrator, durable workflow, prebuilt activity, builtin activity, rest api, soap, smtp email, connection]
@@ -38,7 +38,7 @@ Each prebuilt activity has its own fields, covered on its page. These two are co
 
 | Field | Description |
 |---|---|
-| **Retry Policy** | What the engine does when the call fails: **No Automatic Retry**, **Auto Retry** for backoff retries, or **Human Review** to hand the failure to a person. See [Review activities and error handling](../review-activity-and-error-handling.md). |
+| **Retry Policy** | What the engine does when the call fails: **No Automatic Retry**, **Auto Retry** for backoff retries, or **Human Review** to hand the failure to a person. See [Error handling and review activities](../review-activity-and-error-handling.md). |
 | **Check Error** | Propagates a failure to the workflow with `check`. Clear it to handle the error yourself. |
 
 :::tip Idempotent side effects

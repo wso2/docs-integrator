@@ -1,6 +1,6 @@
 ---
-sidebar_position: 6
-title: "Review Activities & Error Handling"
+sidebar_position: 7
+title: "Error Handling & Review Activities"
 description: Gate risky workflow steps behind human approval and turn failures into human-reviewed retries in WSO2 Integrator durable workflows.
 keywords: [wso2 integrator, durable workflow, review activity, retry, error handling, approval gate, human review]
 ---
@@ -8,7 +8,7 @@ keywords: [wso2 integrator, durable workflow, review activity, retry, error hand
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Review Activities & Error Handling
+# Error Handling & Review Activities
 
 Failures and risky steps are where durable workflows earn their keep. Instead of scattering try/catch blocks and retry loops through your code, you attach a **retry policy** to each activity call — and for the steps that matter most, you put a **human review** in front of the step or behind its failure.
 
@@ -105,5 +105,5 @@ Because completed activities are never re-executed, compensation logic only ever
 
 ## Next steps
 
-- [Human task workflows](human-task-workflow.md) — free-standing decisions and external data.
+- [Await human task](human-task-workflow.md) — free-standing decisions and external data.
 - [Durable agentic workflows](durable-agentic-workflow.md) — the same policies applied to an AI agent's activities.

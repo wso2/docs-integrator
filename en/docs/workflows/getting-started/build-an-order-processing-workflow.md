@@ -381,7 +381,7 @@ resource function post [string orderId]/payment() returns json|error {
 </Tabs>
 
 :::tip Take the value from the request
-Anyone holding the workflow ID can deliver the value, so in a real integration this resource is what the payment gateway's callback hits. See [Data events](../develop/data-events.md).
+Anyone holding the workflow ID can deliver the value, so in a real integration this resource is what the payment gateway's callback hits. See [Await data events](../develop/data-events.md).
 :::
 
 ## Step 10: Run it
@@ -435,6 +435,6 @@ Once the integration is [connected to the Integration Control Plane](../icp/conn
 ## Next steps
 
 - [Activities](../develop/activities.md) — retry policies, activity inputs, and how results are recorded.
-- [Data events](../develop/data-events.md) — several events, timeouts, and delivering data from other systems.
-- [Human task workflows](../develop/human-task-workflow.md) — pause the order for a person's decision instead of a system's data.
+- [Await data events](../develop/data-events.md) — several events, timeouts, and delivering data from other systems.
+- [Await human task](../develop/human-task-workflow.md) — pause the order for a person's decision instead of a system's data.
 - [Durable timers](../develop/durable-timers.md) — add a payment deadline that survives restarts.
