@@ -33,12 +33,11 @@ Everything **outside** an activity is ordinary code that runs again on replay. N
 
 ## Define an activity
 
-:::tip Check the prebuilt ones first
-REST calls, SOAP calls, and SMTP email already have durable wrappers that ship with the runtime, so there is nothing to write for those. See [Prebuilt activities](prebuilt-activities/index.md).
-:::
-
 To create an activity, click **+** on **Workflow Activities** in the left sidebar.
-Create Activity form provides the following fields for defining the activity function:
+
+![The left sidebar with the + button on the Workflow Activities entry](/img/workflows/develop/activities/add-workflow-activity.png)
+
+**Create Activity** form provides the following fields for defining the activity function:
 
 | Field | Required | Description |
 |---|---|---|
@@ -47,20 +46,24 @@ Create Activity form provides the following fields for defining the activity fun
 | **Parameters** | No | Defines the inputs of the activity function. Each parameter has a name and a type. Selecting **+ Add Parameter** adds a new parameter definition row. |
 | **Return Type** | No | The type of the value the activity returns, for example `string` or `string\|error`. Leave it empty for an activity that returns nothing. |
 
-[//]: # (// Todo: Add a screenshot of the Create Activity form.)
 After clicking **Create**, you will be directed to design its body in the same flow diagram used for any other function.
+
+:::tip Check the prebuilt ones first
+REST calls, SOAP calls, and SMTP email already have durable wrappers that ship with the runtime, so there is nothing to write for those. See [Prebuilt activities](prebuilt-activities/index.md).
+:::
 
 ## Call an activity from a workflow
 
 To call an activity from a workflow, click **+** on the workflow diagram and select **Call Activity** from the palette's **Workflow → Steps** group. Then select the activity function you want to call.
 Call Activity form provides the following fields for calling an activity function:
 
-| Field                  | Required                  | Description                                                                                                                                                                                        |
-|------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Activity Arguments** | Yes                       | Form field will appear for each activity function parameter. Provide the relevent arguments for each required parameter                                                                            |
-| **Retry Policy**       | Yes                       | When an activity call failied, how should the workflow handle it. No Automatic Retry, Auto Retry, Human Review. See [Review activities and error handling](review-activity-and-error-handling.md). |
-| **Result**             | Only if Ouput is not `null` | Name of the result variable to capture the activity's output.                                                                                                                                      |
-| **Result type**        | Only if Ouput is not `null` | Type of the resulting data of the activity function.                                                                                                                                               |
+| Field                  | Required                                         | Description                                                                                                                                                                                        |
+|------------------------|--------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Activity Arguments** | Yes                                              | Form field will appear for each activity function parameter. Provide the relevent arguments for each required parameter                                                                            |
+| **Retry Policy**       | Yes                                              | When an activity call failied, how should the workflow handle it. No Automatic Retry, Auto Retry, Human Review. See [Error handling and review activities](review-activity-and-error-handling.md). |
+| **Result**             | Only if the output of the activity is not `null` | Name of the result variable to capture the activity's output.                                                                                                                                      |
+| **Result type**        | Only if the output of the activity is not `null` | Type of the resulting data of the activity function.                                                                                                                                               |
+| **Check Error**        | No                                               | Under **Advanced Configurations**. Adds `check` to the call so a failure propagates to the workflow. Clear it to handle the error yourself. Default to `checked`                                    |
 
 ![Call an activity from a workflow](/img/workflows/develop/activities/activity-call.gif)
 
@@ -76,7 +79,7 @@ To give an agent an activity, click **+** on the activity icon at the right bott
 
 | Field | Required | Description |
 |---|---|---|
-| **Retry Policy** | Yes | Engine retry strategy when the activity fails: no automatic retry (an AI agent may still re-invoke it), automatic backoff retries, or a human review task. See [Review activities and error handling](review-activity-and-error-handling.md). |
+| **Retry Policy** | Yes | Engine retry strategy when the activity fails: no automatic retry (an AI agent may still re-invoke it), automatic backoff retries, or a human review task. See [Error handling and review activities](review-activity-and-error-handling.md). |
 | **Reviewer Roles** | Only for **Human Review** | Roles permitted to decide the human review, for example `"manager"` or `["finance", "manager"]`. |
 | **Advanced Configurations** | No | Approval settings for the registered activity, collapsed by default. |
 | ↳ **Requires Approval** | No | Gate the activity: before the agent runs it, a review activity is created and the agent suspends durably until a reviewer proceeds (optionally editing the arguments) or rejects. |
@@ -96,5 +99,5 @@ Each activity call appears as an `ACTIVITY` node in the instance's execution gra
 
 - [Prebuilt activities](prebuilt-activities/index.md) — durable REST, SOAP, and email calls with no wrapper to write.
 - [Durable timers](durable-timers.md) — pause between activities without holding resources.
-- [Review activities and error handling](review-activity-and-error-handling.md) — retry policies and approval gates.
+- [Error handling and review activities](review-activity-and-error-handling.md) — retry policies and approval gates.
 - [Build an order processing workflow](../getting-started/build-an-order-processing-workflow.md) — activities wired into a complete flow.
