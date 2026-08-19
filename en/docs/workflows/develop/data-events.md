@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: "Data Events"
+title: "Await Data Events"
 description: Pause a WSO2 Integrator durable workflow until an external system or a person delivers data, then resume with that value as a typed, recorded result.
 keywords: [wso2 integrator, durable workflow, data event, send data, external data, wait, callback, long running]
 ---
@@ -8,43 +8,42 @@ keywords: [wso2 integrator, durable workflow, data event, send data, external da
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Data Events
+# Await Data Events
 
 Sometimes a workflow needs *data*, not a decision — the employee submits the supporting bills, a partner system posts a shipping confirmation, a scanner returns a document. A **data event** is a named slot the workflow waits on. The instance suspends until something delivers a value into that slot, then resumes with the value as an ordinary typed result.
+
+<ThemedImage
+    alt="A workflow that reserves inventory and then halts on a Wait for payment step bound to paymentData, drawn with a dashed arrow arriving from outside the flow"
+    sources={{
+        light: useBaseUrl('/img/workflows/develop/data-events/await-data-event-light.png'),
+        dark: useBaseUrl('/img/workflows/develop/data-events/await-data-event-dark.png'),
+    }}
+/>
 
 Like every other durable wait, it costs nothing while it waits and it survives a restart.
 
 ## Pause workflow for data event
 
-Data events are declared as a record of `future` parameters on the workflow function. Each field name is the event name, and its type is the value the workflow expects:
+1. On the workflow diagram, click **+** where the workflow should wait.
+2. In the node panel, under **Workflow** > **Steps**, click **Await Data Event**. The **Await Data** form opens.
+3. Fill in the form:
 
-```ballerina
-@workflow:Workflow
-function expenseApprovalWorkflow(workflow:Context ctx, ExpenseClaim claim,
-        record {|future<BillSubmission> billSubmitted;|} dataEvents) returns ExpenseResult|error {
-    // ... after the manager requests the bills:
-    BillSubmission submission = check wait dataEvents.billSubmitted;
-    // validate the bills and continue
-}
-```
+   | Field | Required | Description |
+   |---|---|---|
+   | **Data Receive Variable Name** | Yes | The variable that receives the value once it arrives. |
+   | **Data Type** | Yes | The type of the value the workflow expects. Pick an existing type, or create one from the list. |
+   | **Data Name** | Yes | The name used when sending the data into this workflow. |
+   | **Min Count** | No | Under **Advanced Configurations**. How many of the awaited events must arrive before the workflow continues. Defaults to all of them. |
+   | **Timeout** | No | Under **Advanced Configurations**. The longest the workflow waits, as a duration record. The wait returns an error when the timeout expires, which your workflow can handle. |
 
-The workflow blocks at the `wait` and nowhere else, so you decide exactly where in the flow the data is needed. Declaring several fields gives the workflow several independent events to wait on.
+   **Timeout** opens a **Record Configuration** editor: tick the units you want, such as **minutes**, and fill in their values. Switch the field to **Expression** to write the record yourself instead.
 
-## Bound the wait
+4. Click **Add** to commit the **Data Waits** entry. It collapses to a row showing its type and variable. Use **+ Add Data Waits** to wait on more than one event.
+5. Click **Save**.
 
-Two optional settings live under **Advanced Configurations** in the **Await Data** form:
+![Adding an Await Data Event step and bounding the wait with a timeout](/img/workflows/develop/data-events/await-data-event.gif)
 
-| Field | Description |
-|---|---|
-| **Min Count** | How many of the awaited events must arrive before the workflow continues. Defaults to all of them. |
-| **Timeout** | The longest the workflow waits. The wait returns an error when the timeout expires, which your workflow can handle. |
-
-```ballerina
-BillSubmission|error submission = wait dataEvents.billSubmitted;
-if submission is error {
-    // the wait timed out; escalate, remind, or end the claim
-}
-```
+The diagram gains a wait node, drawn with an arrow arriving from outside the flow, and the workflow now suspends there.
 
 ## Deliver the data
 
@@ -57,7 +56,7 @@ resource function post [string workflowId]/bills(BillSubmission submission) retu
 }
 ```
 
-The workflow ID is what ties the delivery to a specific instance, so hand it to whoever needs to respond — put it in the notification email, the callback URL, or the record you gave the partner system.
+For the visual designer steps, see [Send a data event](send-data-event.md). The workflow ID is what ties the delivery to a specific instance, so hand it to whoever needs to respond — put it in the notification email, the callback URL, or the record you gave the partner system.
 
 :::tip Data event or human task?
 Use a **data event** when a system or a person is submitting *content* the workflow will process. Use a [human task](human-task-workflow.md) when a person is making a *decision* the Control Plane should render as a form in their inbox.
@@ -79,6 +78,6 @@ The same graph is available over the [Management API](../reference/management-ap
 
 ## Next steps
 
-- [Human task workflows](human-task-workflow.md) — pause for a person's decision instead of their data.
+- [Await human task](human-task-workflow.md) — pause for a person's decision instead of their data.
 - [Durable timers](durable-timers.md) — waiting on the clock instead of an event.
 - [Activities](activities.md) — the recorded steps that process the data once it arrives.
