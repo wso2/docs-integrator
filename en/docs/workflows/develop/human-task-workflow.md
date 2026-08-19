@@ -1,98 +1,99 @@
 ---
-sidebar_position: 5
-title: "Human Task Workflows"
-description: Pause WSO2 Integrator durable workflows for role-based human decisions and external data — for hours, days, or months — with zero resources held while waiting.
-keywords: [wso2 integrator, durable workflow, human task, approval, human in the loop, data event, task inbox, icp]
+sidebar_position: 6
+title: "Await Human Task"
+description: Pause a WSO2 Integrator durable workflow until a person with the right role decides, with the decision returned as a typed value.
+keywords: [wso2 integrator, durable workflow, human task, await human task, approval, human in the loop, task inbox, icp]
 ---
 
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Human Task Workflows
+# Await Human Task
 
-Real processes wait on people: a manager approves an expense, a reviewer checks documents, an employee submits missing information. A durable workflow can stop at any point, hand a **task** to a role, and resume the moment someone decides — whether that takes a minute or a month. While it waits, it holds no threads, no memory, no connections.
-
-## Await a human task
-
-Add an **Await Human Task** step from the palette's **Workflow → Steps** group. Give the task a name, the **roles** that may decide it, and the **payload** the decider should see:
-
-```ballerina
-RequestDecision request = check ctx->awaitHumanTask("checkExpenseRequest", "manager",
-        payload = {"claimId": claim.claimId, "employee": claim.employee,
-            "amount": claim.amount, "purpose": claim.purpose},
-        title = string `Check expense request ${claim.claimId}`,
-        description = "Review the new claim: request the supporting bills, or reject it.",
-        timeout = {days: 3});
-```
-
-The workflow suspends here. The task appears in the [Integration Control Plane](../icp/managing-workflows.md) task inbox for every user holding the `manager` role, showing your title, description, and payload.
+Real processes wait on people: a manager approves an expense, a reviewer checks documents, an HR lead assigns a new joiner to a team. An **Await Human Task** step stops the workflow at exactly that point, hands a task to a role, and resumes the moment someone submits a decision, whether that takes a minute or a month. While it waits it holds no threads, no memory, and no connections.
 
 <ThemedImage
-    alt="Integration Control Plane task inbox showing the checkExpenseRequest task with its payload"
+    alt="The employeeOnboarding workflow halted on an Await Human Task step whose result is HRFeedback, with a dashed arrow arriving from an HRManager role marker"
     sources={{
-        light: useBaseUrl('/img/workflows/develop/human-task-workflow/01-task-inbox.png'),
-        dark: useBaseUrl('/img/workflows/develop/human-task-workflow/01-task-inbox.png'),
+        light: useBaseUrl('/img/workflows/develop/human-task-workflow/await-human-task-light.png'),
+        dark: useBaseUrl('/img/workflows/develop/human-task-workflow/await-human-task-dark.png'),
     }}
 />
 
-## Typed decisions build the task form
+## Add the step
 
-The value the human submits is typed — declare a record and the Control Plane renders a matching form. Use an **enum** for the action and it becomes a dropdown:
+The steps below follow one example: an onboarding workflow where an HR lead assigns a new joiner to a team. The task lands in the [Control Plane](../icp/human-tasks.md) inbox of the matching role, as a form rendered with the information needed to answer it. The workflow starts with the employee's details, so its [input type](create-workflow.md) is an `EmployeeDetails` record:
 
-```ballerina
-public enum RequestAction {
-    REQUEST_BILL,
-    REJECT
-}
+| Field | Type |
+|---|---|
+| `id` | `string` |
+| `name` | `string` |
 
-public type RequestDecision record {|
-    RequestAction action;
-    string comment = "";
-|};
-```
+1. On the workflow diagram, click **+** where the workflow should wait.
+2. In the node panel, under **Workflow** > **Steps**, click **Await Human Task**.
+3. Fill in the form:
 
-When the manager submits, the workflow resumes with the decision as a plain value:
+   | Field | Required | Description |
+   |---|---|---|
+   | **Task Name** | Yes | Identifies the task type, for example `Assign Employee to Team`. |
+   | **User Roles** | Yes | One or more roles permitted to complete this task, for example `HRManager`. Only users holding a matching role see the task. |
+   | **Payload** | No | Under **Advanced Configurations**. See [Show the decider what they need](#show-the-decider-what-they-need). |
+   | **Title** | No | Under **Advanced Configurations**. Short summary shown in the inbox, for example `Assign Employee to Team`. |
+   | **Description** | No | Under **Advanced Configurations**. Additional context shown alongside the form, for example `Assign the new employee to the appropriate team and select their team lead.` |
+   | **Timeout** | No | Under **Advanced Configurations**. Maximum time to wait. Omit it to wait indefinitely. |
+   | **Result** | Yes | Name of the variable that receives the decision. |
+   | **Completion Type** | Yes | The type of the data returned when the task is completed. See [Type the decision](#type-the-decision). |
 
-```ballerina
-if request.action == REJECT {
-    // notify and finish
-} else {
-    // ask the employee for the supporting bills
-}
-```
+4. Click **Save**.
 
-:::tip Design for the form
-Whatever you put in the decision record is exactly what the decider fills in. Keep it small: an action enum, a comment, maybe a corrected amount.
+![Adding an Await Human Task step, with its payload, title, description, and a new completion type](/img/workflows/develop/human-task-workflow/await-human-task.gif)
+
+The workflow suspends at this step, and the task appears in the [Integration Control Plane](../icp/human-tasks.md) inbox for every user holding one of the roles you named.
+
+## Show the decider what they need
+
+**Payload** is the context the person answering needs, rendered read-only next to the form. It answers "what am I deciding about?", which the decision form itself cannot.
+
+In the onboarding example that is the employee, so **Payload** is set to the workflow's input, the `EmployeeDetails` record. The new joiner's ID and name then appear alongside the form when the task is completed in the Control Plane.
+
+:::tip Payload is not the decision
+Nothing in the payload comes back to the workflow. It is there to inform the person, while the value they submit is governed by **Completion Type** below.
 :::
 
-## Wait for external data
+## Type the decision
 
-When the workflow needs *data* rather than a decision — the employee submits the bills, a partner system posts a confirmation — wait on a [data event](data-events.md) instead of a human task. The workflow suspends the same way and resumes when anyone holding the workflow ID delivers the value.
+**Completion Type** is what the workflow gets back, and it is also what the Control Plane renders the form from. A plain approve or reject can be a `boolean`, while anything richer wants a record.
 
-## A complete two-review flow
+For the onboarding task, the HR lead answers with a team and a team lead:
 
-Combining tasks and data events gives the classic claim pattern — two reviews with an evidence hand-off between them:
+| Field | Type |
+|---|---|
+| `team` | `string` |
+| `lead` | `string` |
 
-1. **`checkExpenseRequest`** — the manager triages the new claim: request bills, or reject.
-2. The employee submits bills via a [data event](data-events.md) → the workflow validates them.
-3. **`reviewBills`** — the manager sees the validation result and approves or rejects the payout.
+That record produces a two-field form in the inbox, and the workflow resumes with the values as an ordinary typed value. Records created this way are ordinary types, editable later from **Types** in the sidebar. See [Types](../../develop/integration-artifacts/supporting/types.md) for the type editor and the kinds it supports.
 
-Every decision happens in the Control Plane inbox; the service exposes no task-completion endpoints.
+:::tip Design for the form
+Whatever you put in the completion type is exactly what the decider fills in. Keep it small: an action, a comment, maybe a corrected value. Use an enum for a fixed set of choices and the Control Plane renders it as a dropdown.
+:::
 
-## Timeouts
+## Bound the wait
 
-`timeout` bounds the wait. When it expires the task fails with a timeout error your workflow can handle — escalate, remind, or fail gracefully:
+**Timeout** limits how long the task can sit unanswered. When it expires the wait returns an error, which the workflow can handle: escalate to another role, send a reminder, or end the process. Omit it and the task waits indefinitely.
 
-```ballerina
-RequestDecision|error decision = ctx->awaitHumanTask("checkExpenseRequest", "manager",
-        payload = ..., timeout = {days: 3});
-if decision is error {
-    // escalate to a different role, or end the claim
-}
-```
+## Decision or data?
+
+Use a human task when a person is making a **decision** the Control Plane should render as a form. When the workflow needs **content** instead, such as an uploaded document or a partner system's confirmation, [await a data event](data-events.md), which suspends the same way but is filled by whoever holds the workflow ID.
+
+## How these tasks are completed
+
+A workflow never exposes its own endpoint for finishing a task. Completion happens outside the workflow, in one of two places:
+
+- **[Complete human tasks](../icp/human-tasks.md)** in the Integration Control Plane, where the task appears in the inbox of everyone holding a matching role, rendered as a form built from the completion type with the payload shown beside it. This is the route for the people actually deciding.
+- **[Management API](../reference/management-api.md)**, whose `POST /human-tasks/{taskId}/complete` accepts the same decision as JSON, for building your own portal or automating a decision.
 
 ## Next steps
 
-- [Data events](data-events.md) — wait for data delivered by a system or a person instead of a decision.
-- [Review activities and error handling](review-activity-and-error-handling.md) — approvals attached to *activities* rather than free-standing tasks.
-- [Integration Control Plane](../icp/managing-workflows.md) — where tasks are decided, and how roles map to users.
+- [Complete human tasks](../icp/human-tasks.md) — decide a waiting task from the Control Plane inbox.
+- [Await data events](data-events.md) — wait for data delivered by a system or a person instead of a decision.
+- [Error handling and review activities](review-activity-and-error-handling.md) — approvals attached to activities rather than free-standing tasks.
