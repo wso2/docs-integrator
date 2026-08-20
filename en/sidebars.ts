@@ -2105,6 +2105,7 @@ const sidebars: SidebarsConfig = {
           label: 'How to Guides',
           items: [
             'guides/howtoguides/sap-b1-low-stock-purchase-automation',
+            'guides/howtoguides/edi-purchase-order-processing',
           ],
         },
         // Migration Guides
