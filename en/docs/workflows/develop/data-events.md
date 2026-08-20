@@ -45,19 +45,6 @@ Like every other durable wait, it costs nothing while it waits and it survives a
 
 The diagram gains a wait node, drawn with an arrow arriving from outside the flow, and the workflow now suspends there.
 
-## Deliver the data
-
-Anyone holding the workflow ID can deliver a value with `workflow:sendData`, naming the event to fill. Typically that is a service resource:
-
-```ballerina
-resource function post [string workflowId]/bills(BillSubmission submission) returns json|error {
-    check workflow:sendData(expenseApprovalWorkflow, workflowId, "billSubmitted", submission);
-    return {workflowId, status: "BILLS_SUBMITTED"};
-}
-```
-
-For the visual designer steps, see [Send a data event](send-data-event.md). The workflow ID is what ties the delivery to a specific instance, so hand it to whoever needs to respond — put it in the notification email, the callback URL, or the record you gave the partner system.
-
 :::tip Data event or human task?
 Use a **data event** when a system or a person is submitting *content* the workflow will process. Use a [human task](human-task-workflow.md) when a person is making a *decision* the Control Plane should render as a form in their inbox.
 :::
@@ -78,6 +65,7 @@ The same graph is available over the [Management API](../reference/management-ap
 
 ## Next steps
 
+- [Send a data event](send-data-event.md) — the delivery half: fill the event and resume the run.
 - [Await human task](human-task-workflow.md) — pause for a person's decision instead of their data.
 - [Durable timers](durable-timers.md) — waiting on the clock instead of an event.
 - [Activities](activities.md) — the recorded steps that process the data once it arrives.

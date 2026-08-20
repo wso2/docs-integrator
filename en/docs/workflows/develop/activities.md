@@ -63,7 +63,7 @@ Call Activity form provides the following fields for calling an activity functio
 | **Retry Policy**       | Yes                                              | When an activity call failied, how should the workflow handle it. No Automatic Retry, Auto Retry, Human Review. See [Error handling and review activities](review-activity-and-error-handling.md). |
 | **Result**             | Only if the output of the activity is not `null` | Name of the result variable to capture the activity's output.                                                                                                                                      |
 | **Result type**        | Only if the output of the activity is not `null` | Type of the resulting data of the activity function.                                                                                                                                               |
-| **Check Error**        | No                                               | Under **Advanced Configurations**. Adds `check` to the call so a failure propagates to the workflow. Clear it to handle the error yourself. Default to `checked`                                    |
+| **Check Error**        | No                                               | Under **Advanced Configurations**. Adds `check` to the call so a failure automatically propagates out from the workflow. Clear it to handle the error yourself. Defaults to `checked`. See [Error handling in the workflow logic](review-activity-and-error-handling.md#error-handling-in-the-workflow-logic). |
 
 ![Call an activity from a workflow](/img/workflows/develop/activities/activity-call.gif)
 
