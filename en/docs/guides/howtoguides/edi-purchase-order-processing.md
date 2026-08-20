@@ -306,6 +306,6 @@ Change the sender in the `UNB` segment of `orders.edi` to something else and run
 
 ## What's next
 
-- **Pick the files up automatically.** Swap the hard-coded path for a [file listener](../../develop/integration-artifacts/service.md) or an [FTP/SFTP service](../../connectors/catalog/built-in/ftp/ftp.md), so partner drops are processed as they arrive.
+- **Pick the files up automatically.** Swap the hard-coded path for a [local file service](../../develop/integration-artifacts/file/local-files.md) or an [FTP/SFTP service](../../develop/integration-artifacts/file/ftp-sftp.md), so partner drops are processed as they arrive.
 - **Acknowledge the orders.** Trading partners usually expect a reply saying what was accepted and what was rejected. The quarantine list from step 7 is exactly the input for an EDIFACT `APERAK`; see the [EDI acknowledgement example](https://github.com/ballerina-platform/module-ballerina-edi/tree/main/examples/edi-acknowledgement).
 - **Handle several formats at once.** Bundle the schemas for every message type a partner sends into one package with [`libgen`](../../develop/transform/edi.md#building-a-reusable-library-package).
