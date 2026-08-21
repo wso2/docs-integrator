@@ -87,7 +87,7 @@ The tracker lists the share and stores its snapshot through one connection.
     | Auth | The storage account name and access key |
 
     :::tip Best practice
-    Don't hardcode these values into the connection. Click each field and select **Configurables** in the [Expression editor](../../develop/understand-ide/editors/expression-editor.md)'s helper pane, then click **New Configurable**, so the values are supplied at runtime instead of stored in the flow. The tracker uses three: `shareName`, `accountName`, and `accountKey`.
+    Don't hardcode these values into the connection. Click each field and select **Configurables** in the [Expression editor](../../develop/understand-ide/editors/expression-editor.md)'s helper pane, then click **New Configurable**, so the values are supplied at runtime instead of stored in the flow. The tracker uses four: `shareName`, `accountName`, `accountKey`, and the defaulted `snapshotPath`, which only needs overriding to relocate the snapshot.
     :::
 
     <ThemedImage
@@ -121,14 +121,14 @@ isolated function onFileDeleted(string path) {
 
 ## Step 4: Build the diff flow
 
-The flow makes three moves: load the previous run's view of the share, list what is there now, and report every difference before saving the new view. The snapshot lives at `/.change-tracker-snapshot.json` on the share itself, excluded from the diff so the tracker does not report its own bookkeeping. Build the moves on the canvas:
+The flow makes three moves: load the previous run's view of the share, list what is there now, and report every difference before saving the new view. The view is the `Snapshot` record in `types.bal`, saved on the share itself at the `snapshotPath` configurable and excluded from the diff so the tracker does not report its own bookkeeping. Build the moves on the canvas:
 
-1. Add a **Declare Variable** node for `previous`, a `map<string>` of file path to entity tag, initialized to `{}`.
-2. Add the `hasFile` operation from the `shareClient` connection, pointed at the snapshot path, with its result in `snapshotExists`.
-3. Add an **If** node on `snapshotExists`. Inside it, the `getFile` operation reads the snapshot into `stored`, and an **Update Variable** node sets `previous` to `check stored.cloneWithType()`.
-4. Add a **Declare Variable** node for `current` (another `map<string>`, `{}`), then the `list` operation with `recursive` and `includeExtendedInfo` enabled, its result in `entries`. A **Custom Expression** node drains the listing into `current`, keyed path to entity tag, skipping directories and the snapshot's own path.
-5. Add a **Foreach** node over `current.entries()`. Inside it, declare `known = previous[path]`, and an **If** node calls `onFileCreated` when `known is ()` and `onFileModified` when `known != eTag`.
-6. Close the flow with a **Foreach** over `previous` that calls `onFileDeleted` for every path missing from `current`, and the `upload` operation that saves `current` to the snapshot path.
+1. Add a **Declare Variable** node for `previous`, a `Snapshot`, initialized to `{}`.
+2. Add the `hasFile` operation from the `shareClient` connection, pointed at `snapshotPath`, with its result in `snapshotExists`.
+3. Add an **If** node on `snapshotExists`. Inside it, the `getFile` operation reads the saved snapshot directly into `previous`: the operation binds the file's content by the target's record type, so no conversion step follows it.
+4. Add a **Declare Variable** node for `current` (another `Snapshot`, `{}`), then the `list` operation with `recursive` and `includeExtendedInfo` enabled, its result in `entries`. A **Custom Expression** node drains the listing into `current.entries`, keyed path to entity tag, skipping directories and `snapshotPath` itself.
+5. Add a **Foreach** node over `current.entries.entries()`. Inside it, declare `known = previous.entries[path]`, and an **If** node calls `onFileCreated` when `known is ()` and `onFileModified` when `known != eTag`.
+6. Close the flow with a **Foreach** over `previous.entries` that calls `onFileDeleted` for every path missing from `current.entries`, and the `upload` operation that saves `current` to `snapshotPath`: a record uploads as JSON resolved from the destination extension.
 
 Two details are load-bearing. The listing's `includeExtendedInfo` is what puts each file's entity tag on its listing entry; without it the tags are absent and every comparison would be meaningless. And the snapshot is saved only after every difference has been reported, so a run that fails midway reports the same differences again on its next attempt instead of losing them.
 
@@ -152,6 +152,8 @@ The Visual Designer keeps the source in sync as you build; only the three hooks 
 configurable string accountName = ?;
 configurable string accountKey = ?;
 configurable string shareName = ?;
+// The snapshot the previous run saved on the share; excluded from the diff.
+configurable string snapshotPath = "/.change-tracker-snapshot.json";
 ```
 
 ```ballerina
@@ -163,51 +165,56 @@ final files:Client shareClient = check new (shareName, auth = {accountName, acco
 ```
 
 ```ballerina
+// types.bal
+// What the tracker remembers between runs, saved on the share itself.
+type Snapshot record {|
+    // The share's files at the previous run: file path -> entity tag.
+    map<string> entries = {};
+|};
+```
+
+```ballerina
 // automation.bal
 import ballerina/log;
 
 import ballerinax/azure.storage.files;
 
-// The snapshot the previous run saved on the share; excluded from the diff below.
-const SNAPSHOT_PATH = "/.change-tracker-snapshot.json";
-
 public function main() returns error? {
     do {
-        // The previous run's view of the share: file path -> entity tag.
-        map<string> previous = {};
-        boolean snapshotExists = check shareClient->hasFile(SNAPSHOT_PATH);
+        // The previous run's view of the share, bound straight into the snapshot record.
+        Snapshot previous = {};
+        boolean snapshotExists = check shareClient->hasFile(snapshotPath);
         if snapshotExists {
-            json stored = check shareClient->getFile(SNAPSHOT_PATH);
-            previous = check stored.cloneWithType();
+            previous = check shareClient->getFile(snapshotPath);
         }
 
         // The share's current files, each with its entity tag (a new tag on every write).
-        map<string> current = {};
+        Snapshot current = {};
         stream<files:Entry, files:Error?> entries = check shareClient->list("/",
                 {recursive: true, includeExtendedInfo: true});
         check entries.forEach(function(files:Entry entry) {
-            if !entry.isDirectory && entry.path != SNAPSHOT_PATH {
-                current[entry.path] = entry.eTag ?: "";
+            if !entry.isDirectory && entry.path != snapshotPath {
+                current.entries[entry.path] = entry.eTag ?: "";
             }
         });
 
         // Report every difference since the previous run.
-        foreach [string, string] [path, eTag] in current.entries() {
-            string? known = previous[path];
+        foreach [string, string] [path, eTag] in current.entries.entries() {
+            string? known = previous.entries[path];
             if known is () {
                 onFileCreated(path);
             } else if known != eTag {
                 onFileModified(path);
             }
         }
-        foreach string path in previous.keys() {
-            if !current.hasKey(path) {
+        foreach string path in previous.entries.keys() {
+            if !current.entries.hasKey(path) {
                 onFileDeleted(path);
             }
         }
 
         // Save the current view on the share for the next run.
-        check shareClient->upload(current, SNAPSHOT_PATH);
+        check shareClient->upload(current, snapshotPath);
     } on fail error e {
         log:printError("Error occurred", 'error = e);
         return e;
@@ -240,7 +247,7 @@ isolated function onFileDeleted(string path) {
 
 1. Go to **Configurations**, supply the storage account name, the access key, and the share name, then select **Run** on the integration overview.
 
-2. The first run reports every file already on the share as created: there is no previous snapshot, so the first listing is the baseline. The run then saves `/.change-tracker-snapshot.json` to the share and exits.
+2. The first run reports every file already on the share as created: there is no previous snapshot, so the first listing is the baseline. The run then saves its snapshot to the share (at `/.change-tracker-snapshot.json` unless `snapshotPath` says otherwise) and exits.
 
 3. Upload a file to the share, through the Azure portal, the Azure CLI, or an SMB mount, and run the automation again for a `file created` line. Overwrite the same file with different content and run again for `file modified`, and delete it and run once more for `file deleted`.
 
