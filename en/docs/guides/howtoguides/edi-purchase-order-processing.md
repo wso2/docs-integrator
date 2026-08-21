@@ -49,7 +49,7 @@ An EDI file is an *interchange*: an envelope (`UNB`/`UNZ` in EDIFACT, `ISA`/`IEA
 :::
 
 :::tip
-For standard EDIFACT D03A message types, a [prebuilt EDIFACT package](../../reference/data-formats/edi.md#prebuilt-edifact-packages) parses a single message body with no code generation at all. Those packages predate the envelope-aware API, though: they ignore `UNB`/`UNH`/`UNT`/`UNZ`, so they cannot identify a partner from the interchange header or split a batch — both of which this guide does. That is why it generates its own module, and part 2 goes on to adjust the schema for a partner that deviates from the standard, which is the common case in practice.
+For standard EDIFACT D03A message types, a [prebuilt EDIFACT package](../../reference/data-formats/edi.md#prebuilt-edifact-packages) reads a whole interchange with no code generation at all — envelope headers, batch splitting, and quarantining included. Reach for it whenever a partner sends the standard message unchanged. This guide generates its own module because step 5 tightens the schema to what the partner actually sends, which a prebuilt package cannot express — and a partner deviating from the standard is the common case in practice.
 
 X12 specifications are licensed from ASC X12, so no X12 specification ships with the tool and no prebuilt X12 packages are published. The flow in this guide is identical for X12, starting from the schema your organization is licensed to use. If you need help with that, [contact us](https://wso2.com/contact/).
 :::
