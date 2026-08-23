@@ -161,7 +161,7 @@ public function main() returns error? {
 
 ## Part 2: Parse the purchase orders
 
-Reading the orders themselves needs a schema. Generate one from the D03A specification, adjust it to what the partner actually sends, and generate a typed library from it.
+Reading the orders themselves needs a schema. Generate one from the D03A specification, adapt it to what the partner actually sends, and generate a typed library from it.
 
 ### Step 4: Generate the schema
 
@@ -173,7 +173,7 @@ bal edi convertEdifactSchema -v d03a -t ORDERS -i d03a.zip -o schema
 
 This writes `schema/ORDERS.json`, named after the message type.
 
-### Step 5: Adjust the schema for the partner
+### Step 5: Adapt the schema to the partner
 
 Trading partners rarely send a standard message exactly as specified. Because the schema is written out as JSON before any code is generated, a partner's deviations are handled by editing that file — the specification itself is never touched.
 
@@ -185,7 +185,7 @@ A converted schema declares its segments as references into `segmentDefinitions`
 {"ref": "QTY", "tag": "Quantity", "minOccurances": 1, "maxOccurances": 99}
 ```
 
-The fields most often adjusted are `delimiters`, `minOccurances` / `maxOccurances`, a field's `dataType`, and `ignoreSegments` for segments the partner adds that the integration does not care about. See [Adjusting a schema for a trading partner](../../develop/transform/edi.md#adjusting-a-schema-for-a-trading-partner) for the full list, and the [Ballerina EDI specification](https://ballerina.io/spec/edi/#7-schema-definition) for the whole grammar.
+The fields most often adjusted are `delimiters`, `minOccurances` / `maxOccurances`, a field's `dataType`, and `ignoreSegments` for segments the partner adds that the integration does not care about. See [Adapting the schema to a trading partner](../../develop/transform/edi.md#adapting-the-schema-to-a-trading-partner) for the full list, and the [Ballerina EDI specification](https://ballerina.io/spec/edi/#7-schema-definition) for the whole grammar.
 
 Keep the edited schema in version control next to the integration: it is the record of what that partner sends.
 
