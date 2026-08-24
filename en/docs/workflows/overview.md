@@ -42,7 +42,7 @@ Both run on the same durable runtime, so an AI agent gets crash-safety, human ta
 - **[Send a data event](develop/send-data-event.md):** Deliver a value into a waiting run, using the workflow ID it was started with.
 - **[Await human task](develop/human-task-workflow.md):** Pause for role-based human decisions and external data, for as long as it takes.
 - **[Error handling and review activities](develop/review-activity-and-error-handling.md):** Approval gates before risky steps and human-reviewed retries after failures.
-- **[Durable agentic workflows](develop/durable-agentic-workflow.md):** AI agents with durable activities, events, human tasks, and agent-to-agent collaboration.
+- **[Durable agentic workflows](agentic/create-durable-agent.md):** AI agents with durable activities, events, human tasks, and agent-to-agent collaboration.
 - **[Prebuilt activities](develop/prebuilt-activities/index.md):** Durable REST, SOAP, and email calls with no wrapper to write.
 
 ## Manage running workflows

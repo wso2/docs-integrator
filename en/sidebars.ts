@@ -2107,7 +2107,6 @@ const sidebars: SidebarsConfig = {
             'workflows/develop/send-data-event',
             'workflows/develop/human-task-workflow',
             'workflows/develop/review-activity-and-error-handling',
-            'workflows/develop/durable-agentic-workflow',
             'workflows/develop/durable-timers',
             {
               type: 'category',
@@ -2119,6 +2118,18 @@ const sidebars: SidebarsConfig = {
                 'workflows/develop/prebuilt-activities/send-email',
               ],
             },
+          ],
+        },
+        // Agentic Workflow Features
+        {
+          type: 'category',
+          label: 'Develop Agentic Workflows',
+          items: [
+            'workflows/agentic/create-durable-agent',
+            'workflows/agentic/run-durable-agent',
+            'workflows/agentic/send-agent-data-event',
+            'workflows/agentic/get-data-event-result',
+            'workflows/agentic/get-agent-result',
           ],
         },
         // Integration Control Plane

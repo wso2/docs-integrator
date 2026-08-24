@@ -16,7 +16,7 @@ A **durable workflow** is an artifact in your integration, the same as a service
 
    ![The Artifacts page with the Durable Workflow card under the Durable Workflow section](/img/workflows/develop/create-workflow/add-artifact.png)
 
-   **Durable Agentic Workflow** beside it produces the same kind of artifact, but you describe the goal and let a model choose the steps instead of wiring them yourself. See [Durable agentic workflows](durable-agentic-workflow.md).
+   **Durable Agentic Workflow** beside it produces the same kind of artifact, but you describe the goal and let a model choose the steps instead of wiring them yourself. See [Create a Durable Agent](../agentic/create-durable-agent.md).
 
 3. Fill in the **Create New Durable Workflow** form:
 

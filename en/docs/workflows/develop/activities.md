@@ -87,7 +87,7 @@ To give an agent an activity, click **+** on the activity icon at the right bott
 
 ![Register a workflow activity as a durable agent activity](/img/workflows/develop/activities/register-activity-as-agent-activity.png)
 
-Registering the activity is what makes it available to the agent. See [Durable agentic workflows](durable-agentic-workflow.md).
+Registering the activity is what makes it available to the agent. See [Create a Durable Agent](../agentic/create-durable-agent.md).
 
 ## Watching activities run
 

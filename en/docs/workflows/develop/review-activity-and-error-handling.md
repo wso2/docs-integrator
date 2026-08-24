@@ -51,7 +51,7 @@ The task is listed in the **Review Activities** tab of the [Control Plane](../ic
 
 ## Approval gates — review *before* the step runs
 
-Some steps should never run without sign-off, even when nothing has failed. A gate like that is set where a [durable agent](durable-agentic-workflow.md#activities) registers the activity as one of its capabilities: click the activity on the agent's diagram, expand **Advanced Configurations**, and select **Requires Approval**.
+Some steps should never run without sign-off, even when nothing has failed. A gate like that is set where a [durable agent](../agentic/create-durable-agent.md#activities) registers the activity as one of its capabilities: click the activity on the agent's diagram, expand **Advanced Configurations**, and select **Requires Approval**.
 
 | Field                 | Required | Description                                                                                                                                                    |
 |-----------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -118,4 +118,4 @@ What this asks of you in return is a deterministic workflow body, since that is 
 ## Next steps
 
 - [Await human task](human-task-workflow.md) — free-standing decisions and external data.
-- [Durable agentic workflows](durable-agentic-workflow.md) — the same policies applied to an AI agent's activities.
+- [Create a Durable Agent](../agentic/create-durable-agent.md) — the same policies applied to an AI agent's activities.

@@ -217,4 +217,4 @@ curl localhost:9090/claims/<instanceId>
 
 - [Await human task](../develop/human-task-workflow.md) — ask people structured questions, not just approvals.
 - [Error handling and review activities](../develop/review-activity-and-error-handling.md) — let a human fix a failed step's input and retry it.
-- [Durable agentic workflows](../develop/durable-agentic-workflow.md) — events, multi-turn conversations, and agent-to-agent collaboration.
+- [Create a Durable Agent](../agentic/create-durable-agent.md) — events, multi-turn conversations, and agent-to-agent collaboration.
