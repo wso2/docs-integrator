@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: Knowledge Bases
-description: Reference for every Knowledge Base in WSO2 Integrator. Covers the Vector Knowledge Base and Azure AI Search Knowledge Base, including create form fields, advanced configurations, and the ingest, retrieve, and delete actions.
-keywords: [wso2 integrator, knowledge base, rag, vector knowledge base, azure ai search, embedding, chunker]
+description: Reference for every Knowledge Base in WSO2 Integrator. Covers the Vector Knowledge Base, WSO2 Cloud Knowledge Base, and Azure AI Search Knowledge Base, including create form fields, advanced configurations, and the ingest, retrieve, and delete actions.
+keywords: [wso2 integrator, knowledge base, rag, vector knowledge base, azure ai search, wso2 cloud, embedding, chunker]
 ---
 
 # Knowledge Bases
@@ -34,13 +34,14 @@ Two places, both equivalent:
 
 Click **+ Add Knowledge Base** and the **Select Knowledge Base** picker opens:
 
-![Select Knowledge Base picker listing two options: Vector Knowledge Base ('Represents a vector knowledge base for managing chunk indexing and retrieval') and Azure AI Search Knowledge Base ('Represents the Azure Search Knowledge Base implementation').](/img/genai/develop/components/knowledge-bases/01-select-list.png)
+![Select Knowledge Base picker listing three options: Vector Knowledge Base ('Represents a vector knowledge base for managing chunk indexing and retrieval'), WSO2 Cloud Knowledge Base, and Azure AI Search Knowledge Base ('Represents the Azure Search Knowledge Base implementation').](/img/genai/develop/components/knowledge-bases/01-select-list.png)
 
 ## Implementations overview
 
 | Knowledge Base | Module | Storage |
 |---|---|---|
 | **Vector Knowledge Base** | `ballerina/ai` | Any [Vector Store](./vector-stores.md) |
+| **WSO2 Cloud Knowledge Base** | [`ballerinax/ai.wso2.integration`](https://central.ballerina.io/ballerinax/ai.wso2.integration/latest) | Knowledge base service in WSO2 Cloud |
 | **Azure AI Search Knowledge Base** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Azure AI Search index |
 
 ---
@@ -60,6 +61,49 @@ The default implementation. You combine a Vector Store, an Embedding Provider, a
 | **Chunker** | No | `ai:AUTO` | `ai:AUTO` (chunker chosen automatically based on document type), `ai:DISABLE` (no chunking; each document becomes one chunk), or any saved [Chunker](./chunkers.md) connection. |
 
 There are no Advanced Configurations on the Vector Knowledge Base itself. Every knob lives on the underlying Vector Store, Embedding Provider, or Chunker connection.
+
+---
+
+## WSO2 Cloud Knowledge Base
+
+The easiest way to add a cloud-hosted knowledge base. You first create the knowledge base in WSO2 Cloud, choosing the Vector Store, Embedding Provider, and Chunker yourself; it is provisioned and managed there. If the knowledge base is in your own cloud organization, you can connect to it with a single click. If it is not, you can still configure the connection manually.
+
+> Unlike with the Vector and Azure AI Search knowledge bases, you don't set up the connection yourself. The credentials are supplied by the environment when the integration runs, so no secrets are stored in your project.
+
+### Connect to an existing knowledge base
+
+Selecting **WSO2 Cloud Knowledge Base** lists the knowledge bases available in your WSO2 Cloud organization. You need to be signed in to WSO2 Cloud with a project selected for the list to appear.
+
+![List of existing WSO2 Cloud knowledge bases in the signed-in organization, shown below a 'Manually Config WSO2 Cloud Knowledge Base' card.](/img/genai/develop/components/knowledge-bases/05-wso2-cloud-list.png)
+
+Choose one from the **Existing WSO2 Cloud Knowledge Bases** list, and the create form opens with its service URL and credentials already filled in. Click **Save** to create the knowledge base instance.
+
+![Create WSO2 Cloud Knowledge Base form with the Service URL and Knowledge Base Authentication Configuration fields already filled in from the selected knowledge base.](/img/genai/develop/components/knowledge-bases/06-wso2-cloud-prefilled-form.png)
+
+### Configure manually
+
+Choose **Manually Config WSO2 Cloud Knowledge Base** to open a blank form and enter the details yourself.
+
+![Blank Create WSO2 Cloud Knowledge Base form showing the empty Service URL field and the Knowledge Base Authentication Configuration (Token URL, Client ID, Client Secret).](/img/genai/develop/components/knowledge-bases/07-wso2-cloud-manual-form.png)
+
+### Form fields
+
+| Field | Required | Default | Available values |
+|---|---|---|---|
+| **Service URL** | Yes | — | The endpoint of the knowledge base service in WSO2 Cloud. |
+| **Knowledge Base Authentication Configuration** | Yes | — | A bearer token, or OAuth2 client credentials (**Token URL**, **Client ID**, **Client Secret**). Knowledge bases connected from WSO2 Cloud use OAuth2 client credentials. |
+
+### Advanced configurations
+
+![Create WSO2 Cloud Knowledge Base form with Advanced Configurations expanded showing Minimum Similarity Threshold (default 0.7), Cohere Reranker API Key, Cohere Reranker Model, Reranker Top N (default 5), and Connection Configuration.](/img/genai/develop/components/knowledge-bases/08-wso2-cloud-advanced.png)
+
+| Field | Default | Available values | What it controls |
+|---|---|---|---|
+| **Minimum Similarity Threshold** | `0.7` | Decimal `0`–`1` | The lowest similarity score a chunk can have and still be returned by `Retrieve`. |
+| **Cohere Reranker API Key** | `()` | String or empty | API key for the Cohere reranker. Leave empty to skip reranking. |
+| **Cohere Reranker Model** | `()` | String or empty | The Cohere reranker model to use when reranking is enabled. |
+| **Reranker Top N** | `5` | Integer | The number of chunks to keep after reranking. |
+| **Connection Configuration** | `{}` | Record | HTTP client configuration for the connection to the knowledge base service. See [Standard HTTP Advanced Configurations](./model-providers.md#standard-http-advanced-configurations) for available knobs. |
 
 ---
 
@@ -105,6 +149,7 @@ Official website: [Azure AI Search](https://azure.microsoft.com/services/search/
 | Situation | Recommended |
 |---|---|
 | Most projects, especially new ones | **Vector Knowledge Base** with In-Memory (dev) or Pinecone / Pgvector / Weaviate / Milvus (prod). |
+| Knowledge base provisioned and managed in WSO2 Cloud | **WSO2 Cloud Knowledge Base**. |
 | Already running Azure AI Search; need keyword + vector + semantic ranker | **Azure AI Search Knowledge Base**. |
 | Need a custom retrieval source (search engine, graph DB, hand-rolled) | Implement the `ai:KnowledgeBase` contract yourself; the rest of the integration won't change. |
 
