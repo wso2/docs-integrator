@@ -59,7 +59,9 @@ Click the agent node to open the **Configure Agent** form, which holds the agent
 
 ### Activities
 
-Durable agent can also invoke activities. Each call runs durably with the same guarantees and the same **retry policies** as any workflow activity, **Human Review** retries included (see [Error handling and review activities](../develop/review-activity-and-error-handling.md)). In addition to that regular activity call configuration, you can enable **Requires Approval** on sensitive activities, so a person approves the execution before the agent runs the activity. Those approval requests are listed in the **Review Activities** tab of the [Control Plane](../icp/review-activities.md). The agent proposes; your policies decide what needs a human.
+A durable agent uses the same activities as durable workflows. Instead of you wiring the call order, the model chooses which activity to call and when, and each call is recorded exactly as it is in a hand-wired workflow.
+
+In addition, you can enable **Requires Approval** on sensitive activities, so a person approves the execution before the agent runs the activity. Those approval requests are listed in the **Review Activities** tab of the [Control Plane](../icp/review-activities.md).
 
 To register an activity with the agent:
 

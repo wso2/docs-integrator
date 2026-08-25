@@ -31,7 +31,7 @@ When a workflow resumes after a crash or a restart, the runtime replays the work
 Everything **outside** an activity is ordinary code that runs again on replay. No direct API calls, no random values, and no wall-clock reads in the workflow body — put that work in an activity so its result is recorded instead of recomputed.
 :::
 
-## Create an activity
+## Create an activity from scratch
 
 To create an activity, click **+** on **Workflow Activities** in the left sidebar.
 
@@ -47,6 +47,33 @@ To create an activity, click **+** on **Workflow Activities** in the left sideba
 | **Return Type** | No | The type of the value the activity returns, for example `string` or `string\|error`. Leave it empty for an activity that returns nothing. |
 
 After clicking **Create**, you will be directed to design its body in the same flow diagram used for any other function.
+
+## Create an activity from a connection
+
+An activity can also be generated from a connection, so a single operation on an FTP server, a database, or a Slack workspace etc. becomes a durable step without writing its body. The activity wraps the operation, and the runtime records its result like any other.
+
+1. On the workflow diagram, click **+**, then click **Call Activity**. The **Activities** panel opens.
+2. In the **Current Integration** header, click the plug icon.
+
+   ![The Current Integration header with the plus and plug icons on the right](/img/workflows/develop/activities/current-integration-plug.png)
+
+3. The **Connections** panel lists the project's connections. Click a connection to expand its operations, or click **+** to [add a connection](../../develop/integration-artifacts/supporting/connections.md) first, `ftpClient` here.
+4. Click the operation the activity should wrap, **Get** here. The activity form opens, headed with the operation it came from, `ftpClient -> get`.
+5. Fill in the form:
+
+   | Field | Required | Description |
+   |---|---|---|
+   | **Activity Name** | Yes | The name of the generated activity function, for example `ftpGet`. |
+   | **Description** | No | Explains what the activity does. It is prefilled from the operation's own documentation. |
+   | **Choose what the activity takes as input** | No | One checkbox per parameter of the operation. Check a parameter to expose it as an activity input; clear it to fix the value inside the activity instead. |
+   | ↳ **Connection As Parameter** | No | Exposes the connection as the activity's first parameter, the way the prebuilt activities work, instead of using the module-level connection. Check it when the same activity should run against more than one connection. |
+   | **Return Type** | Yes | Derived from the operation and not editable. Where the operation returns a stream, the activity collects it and returns an array, for example `(byte[] & readonly)[]`. |
+
+6. Click **Create Activity**.
+
+![Creating an ftpGet activity from the ftpClient connection's Get operation through the plug icon](/img/workflows/develop/activities/activity-from-connection.gif)
+
+The activity appears under **Workflow Activities** alongside the ones written by hand, and the call form opens for it so it can be placed in the workflow straight away. Checking **Connection As Parameter** adds a **Connection** field to that call form, where the connection is chosen per call.
 
 :::tip Check the prebuilt ones first
 REST calls, SOAP calls, and SMTP email already have durable wrappers that ship with the runtime, so there is nothing to write for those. See [Prebuilt activities](prebuilt-activities/index.md).
@@ -71,24 +98,6 @@ Call Activity form provides the following fields for calling an activity functio
 A *completed* activity never runs twice, but a *failed* attempt may run again once retries are on. Make the side effect idempotent — pass an idempotency key to the payment gateway, upsert instead of insert — so a repeated attempt cannot double-charge or duplicate a record.
 :::
 
-## Activities on a durable agent
-
-A durable agent uses the same activities. Instead of you wiring the call order, the model chooses which activity to call and when, and each call is recorded exactly as it is in a hand-wired workflow.
-
-To give an agent an activity, click **+** on the activity icon at the right bottom of the agent node and select the activity. The register form provides the following fields for registering the activity as a durable agent activity:
-
-| Field | Required | Description |
-|---|---|---|
-| **Retry Policy** | Yes | Engine retry strategy when the activity fails: no automatic retry (an AI agent may still re-invoke it), automatic backoff retries, or a human review task. See [Error handling and review activities](review-activity-and-error-handling.md). |
-| **Reviewer Roles** | Only for **Human Review** | Roles permitted to decide the human review, for example `"manager"` or `["finance", "manager"]`. |
-| **Advanced Configurations** | No | Approval settings for the registered activity, collapsed by default. |
-| ↳ **Requires Approval** | No | Gate the activity: before the agent runs it, a review activity is created and the agent suspends durably until a reviewer proceeds (optionally editing the arguments) or rejects. |
-| ↳ **Reviewer Roles** | Only with **Requires Approval** | Roles permitted to decide the approval review of this activity, for example `"support-lead"` or `["finance", "manager"]`. |
-
-![Register a workflow activity as a durable agent activity](/img/workflows/develop/activities/register-activity-as-agent-activity.png)
-
-Registering the activity is what makes it available to the agent. See [Create a Durable Agent](../agentic/create-durable-agent.md).
-
 ## Watching activities run
 
 Each activity call appears as an `ACTIVITY` node in the instance's execution graph in the [Integration Control Plane](../icp/managing-workflows.md), so you can see which step an instance is on, which activities have completed, and which one failed. The same graph is available over the [Management API](../reference/management-api.md).
@@ -100,4 +109,5 @@ Each activity call appears as an `ACTIVITY` node in the instance's execution gra
 - [Prebuilt activities](prebuilt-activities/index.md) — durable REST, SOAP, and email calls with no wrapper to write.
 - [Durable timers](durable-timers.md) — pause between activities without holding resources.
 - [Error handling and review activities](review-activity-and-error-handling.md) — retry policies and approval gates.
+- [Create a Durable Agent](../agentic/create-durable-agent.md) — registering these same activities on an agent that picks which to call.
 - [Build an order processing workflow](../getting-started/build-an-order-processing-workflow.md) — activities wired into a complete flow.
