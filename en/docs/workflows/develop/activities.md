@@ -31,7 +31,7 @@ When a workflow resumes after a crash or a restart, the runtime replays the work
 Everything **outside** an activity is ordinary code that runs again on replay. No direct API calls, no random values, and no wall-clock reads in the workflow body — put that work in an activity so its result is recorded instead of recomputed.
 :::
 
-## Define an activity
+## Create an activity
 
 To create an activity, click **+** on **Workflow Activities** in the left sidebar.
 

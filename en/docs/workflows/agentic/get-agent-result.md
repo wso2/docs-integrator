@@ -46,7 +46,7 @@ The saved step is drawn as **Get Agent Result** with a dashed connector to the `
 
 **Wait For Result** decides what happens while the instance is still working.
 
-- **Selected**, the default, waits until the instance finishes. The wait is durable, so it costs nothing while it lasts and survives a restart, and the flow continues with the result in hand.
+- **Selected**, the default, waits until the instance finishes.
 - **Cleared** reads without waiting. While the instance is still working the step returns a `workflow:AgentBusyError`, which the flow can handle and report as "still running". This is what a status endpoint usually wants, because the caller gets an answer immediately either way.
 
 A gated activity or a human task counts as still working: the instance is suspended waiting on a person, so a run that looks stalled is often one that needs a decision in the [Control Plane](../icp/managing-workflows.md).
@@ -56,9 +56,7 @@ A gated activity or a human task counts as still working: the instance is suspen
 Both reads are addressed by the instance ID, and they answer different questions.
 
 - **Get Agent Result** returns what the run concluded, once. Use it for the outcome.
-- [Get Data Event Result](get-data-event-result.md) returns the answer to one delivered turn, selected by that turn's correlation token. Use it for a conversation.
-
-A chat endpoint reads turns; a status endpoint reads the result. The same instance serves both.
+- [Get Data Event Result](get-data-event-result.md) returns the answer to one delivered turn, selected by that turn's correlation token. Use it for a conversation or sending additional information to agent during a run.
 
 ## Next steps
 
