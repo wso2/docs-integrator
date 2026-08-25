@@ -243,6 +243,8 @@ To configure a tool, click **Edit** and configure the following fields.
 | **Return Description** | No | A description of the value returned by the tool. |
 | **Advanced Configuration** | No | Contains the agent authentication client configurations and additional security-related settings used to connect with external authorization servers. |
 
+Tool configuration panels also include a **Requires Approval** field, which pauses the agent for human approval before it runs that tool. For details, see [Human-in-the-Loop](human-in-the-loop.md).
+
 ### Advanced configuration
 
 | Field | Required | Description |
@@ -258,5 +260,6 @@ To configure a tool, click **Edit** and configure the following fields.
 ## What's next
 
 - **[Memory](memory.md)** — Make the agent’s tool calls remember earlier turns.
+- **[Human-in-the-Loop](human-in-the-loop.md)** — Pause the agent for approval before it runs a sensitive tool.
 - **[Observability](observability.md)** — See which tools the agent actually selects.
 - **[Evaluations](evaluations/overview.md)** — Learn how to prevent regressions in AI agent quality.

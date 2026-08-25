@@ -2025,6 +2025,7 @@ const sidebars: SidebarsConfig = {
                 'genai/develop/agents/creating-an-agent',
                 'genai/develop/agents/tools',
                 'genai/develop/agents/memory',
+                'genai/develop/agents/human-in-the-loop',
                 'genai/develop/agents/observability',
                 {
                   type: 'category',

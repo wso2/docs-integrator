@@ -40,6 +40,7 @@ The **AI Agent** block allows you to configure the following components of the a
 - **System prompt and agent behavior**: Click the **AI Agent** block to open the configuration panel, where you can configure the agent role, instructions, query input, and response mapping.
 - **Memory configuration**: Use the **Add Memory** option to configure conversational or persistent memory for the agent. For more information, see [Memory](./memory.md).
 - **Tools**: Use the **+** button on the AI Agent block to add tools and integrations that the agent can invoke during execution. For more information, see [Tools](./tools.md).
+- **Human-in-the-loop approval**: Mark a tool as requiring approval so the agent pauses and asks a human before it runs. For more information, see [Human-in-the-Loop](./human-in-the-loop.md).
 - **Model Provider Configuration**: Click the attached model provider node (for example, `wso2ModelProvider`) to configure the LLM provider and model settings used by the agent. For more information, see [Model Providers](../components/model-providers.md).
 
 ## Try it and run
@@ -68,5 +69,6 @@ The chat interface reuses the same session across interactions, enabling memory-
 - **[Creating an Agent](creating-an-agent.md)** - Learn how to create and configure agents using the AI Chat Agent Wizard.
 - **[Tools](tools.md)** - Add functions, connectors, and integrations to your agents.
 - **[Memory](memory.md)** - Configure conversational and persistent memory.
+- **[Human-in-the-Loop](human-in-the-loop.md)** - Pause the agent for approval before it runs a sensitive tool.
 - **[Observability](observability.md)** - Monitor traces, logs, and execution details.
 - **[Evaluations](evaluations/overview.md)** - Test and evaluate agent behavior and response quality.
