@@ -100,7 +100,7 @@ To register a data event:
    |-------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
    | **Event Name**    | Yes      | The channel name senders use. A channel named `chat` is the one that drives the conversation itself.                                                                                                   |
    | **Request Type**  | Yes      | The type of the payload sent to the agent on this channel. Pick a type from the project, a primitive such as `string`, or create one from the list.                                                    |
-   | **Response Type** | No       | The type of the agent's reply on this channel. Declaring one makes the channel request-response, read back with `Get Data Event Result`. Left empty, the channel is one-way.                           |
+   | **Response Type** | No       | The type of the agent's reply on this channel. Declaring one makes the channel request-response, read back with [Get Data Event Result](get-data-event-result.md). Left empty, the channel is one-way.                           |
    | **Cardinality**   | No       | How the channel consumes its events. `MULTI_EVENT`, the default, re-arms after every turn, so events can arrive repeatedly and from multiple senders. `SINGLE_EVENT` is consumed exactly once per run. |
 
 3. Click **Save**.

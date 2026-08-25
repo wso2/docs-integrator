@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Send an Agent Data Event
 
-A [running agent instance](run-durable-agent.md) waits on the event channels registered on it. A **Send Agent Data Event** step delivers one turn on one of those channels, so it usually lives in the entry point the sender calls: the resource a user chats through, the webhook a partner posts a bill to. The step also hands back a correlation token, which is how the answer to that particular turn is read later.
+A [running agent instance](run-durable-agent.md) waits on the data event channels registered on it. A **Send Agent Data Event** step delivers one turn on one of those channels, so it usually lives in the entry point the sender calls: the resource a user chats through, the webhook a partner posts a bill to. The step also hands back a correlation token, which is how the answer to that particular turn is read later.
 
 <ThemedImage
     alt="The chat resource flowing from Start into a Send to chat step, with a dashed connector across to the claimAgent it delivers into, and the Error Handler below"
