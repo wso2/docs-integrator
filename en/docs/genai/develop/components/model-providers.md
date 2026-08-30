@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Model Providers for LLMs
 description: Reference for every model provider for LLM in WSO2 Integrator, covering create form fields, advanced configurations, defaults, and supported models for the Default WSO2 provider, OpenAI, Azure OpenAI, Anthropic, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.
-keywords: [wso2 integrator, model provider, llm, large language model, ai, anthropic, openai, azure openai, google vertex, mistral, deepseek, ollama, openrouter]
+keywords: [wso2 integrator, model provider, llm, large language model, ai, anthropic, openai, azure openai, google vertex, mistral, deepseek, ollama, openrouter, gpt-5, responses api, reasoning effort]
 ---
 
 # Model Providers for LLMs
@@ -125,7 +125,7 @@ Plus the [Standard HTTP advanced configurations](#standard-http-advanced-configu
 
 ## Azure OpenAI
 
-Same family of models as OpenAI, hosted on Azure with per-resource deployments.
+Same family of models as OpenAI (including the GPT-5 family), hosted on Azure with per-resource deployments. Like the OpenAI provider, it can call either the **Chat Completions API** (the default) or the **Responses API**, and it supports both Azure's newer **v1** endpoint and the legacy date-based `api-version` endpoints — see [Service URLs and API versions](#azure-openai-service-urls).
 
 Official website: [Azure OpenAI Service](https://azure.microsoft.com/services/cognitive-services/openai-service/).
 
@@ -135,21 +135,38 @@ Official website: [Azure OpenAI Service](https://azure.microsoft.com/services/co
 
 | Field | Required | Default | Available values |
 |---|---|---|---|
-| **Service URL** | Yes | - | Base URL of your Azure OpenAI resource, e.g. `https://your-resource.openai.azure.com`. |
+| **Service URL** | Yes | - | Base URL of your Azure OpenAI resource. Use the v1 URL (ends with `/v1`, e.g. `https://your-resource.services.ai.azure.com/openai/v1`) or the legacy URL (e.g. `https://your-resource.openai.azure.com`). The URL shape selects the API surface — see [Service URLs and API versions](#azure-openai-service-urls). |
 | **API Key** | Yes | - | Azure OpenAI API key. |
 | **Deployment ID** | Yes | - | The deployment identifier you created in the Azure portal (the model name is implicit in the deployment). |
-| **API Version** | Yes | - | Azure OpenAI API version, e.g. `2023-07-01-preview`. |
+| **API Version** | No | `()` | **Required for legacy (non-`/v1`) service URLs**: a date-based version, e.g. `2024-10-21`. Optional on `/v1` URLs and normally omitted; pass `preview` or `v1` to opt into a specific v1 surface (date-based values are ignored on `/v1` URLs, with a warning). |
 
 ### Advanced configurations
 
-![Azure OpenAI Create Model Provider form with Advanced Configurations expanded. Visible fields: Maximum Tokens (default 512), Temperature (default 0.7), HTTP Version.](/img/genai/develop/components/model-providers/08-azure-openai-advanced.png)
+![Azure OpenAI Create Model Provider form with Advanced Configurations expanded. Visible fields: Maximum Tokens (default 4096), Temperature, HTTP Version.](/img/genai/develop/components/model-providers/08-azure-openai-advanced.png)
 
 | Field | Default | Available values | What it controls |
 |---|---|---|---|
-| **Maximum Tokens** | `512` | Any positive integer | Hard cap on response length. |
-| **Temperature** | `0.7` | `0.0`-`2.0` | Sampling temperature. |
+| **Maximum Tokens** | `4096` | Any positive integer | Hard cap on response length. |
+| **Temperature** | `()` (omitted) | `0.0`-`2.0` or empty | Sampling temperature. Leave empty for deployments of models that reject the parameter (the GPT-5 and o-series reasoning models). |
+| **Reasoning Effort** | `()` (omitted) | `none`, `minimal`, `low`, `medium`, `high`, `xhigh` | Effort spent on reasoning by reasoning-capable models. Not every model accepts every value (for example, `minimal` only on the original `gpt-5` reasoning models, `none` from `gpt-5.1` onward, `xhigh` from `gpt-5.1-codex-max` onward). Because the model is implicit in the deployment, the value is validated by the Azure service rather than at initialization; an unsupported value fails on the first call. |
+| **API Type** | `CHAT_COMPLETIONS` | `CHAT_COMPLETIONS`, `RESPONSES` | The Azure OpenAI API surface to use. Same semantics as the OpenAI provider — see [Chat Completions vs Responses API](#openai-api-type). |
 
 Plus the [Standard HTTP advanced configurations](#standard-http-advanced-configurations).
+
+### Service URLs and API versions {#azure-openai-service-urls}
+
+The wire route is derived from both the **API Type** and the shape of the **Service URL**:
+
+| API Type | `/v1` service URL | Legacy service URL |
+|---|---|---|
+| **`CHAT_COMPLETIONS`** *(default)* | `POST {serviceUrl}/chat/completions` | `POST {base}/deployments/{deploymentId}/chat/completions?api-version=...` |
+| **`RESPONSES`** | `POST {serviceUrl}/responses` | `POST {base}/responses?api-version=...` |
+
+On the legacy surface, a bare origin (e.g. `https://your-resource.openai.azure.com`) is completed with `/openai` automatically; a URL that already carries a path (e.g. an API Management base path) is used verbatim.
+
+:::caution
+On legacy service URLs, use api-version `2024-09-01` or newer for the GPT-5 and o-series reasoning models. Newer api-versions send the token limit as `max_completion_tokens`; older ones fall back to the deprecated `max_tokens` field, which these models reject. The `/v1` surface always uses `max_completion_tokens`.
+:::
 
 :::info
 The Azure package also ships an **Embedding Provider** and the **Azure AI Search Knowledge Base**. See [Azure OpenAI](./embedding-providers.md#azure-openai) and [Azure AI Search](./knowledge-bases.md#azure-ai-search-knowledge-base).
@@ -294,7 +311,7 @@ Ollama is the only provider with **no API key**. Authentication is implicit beca
 
 ## OpenAI
 
-Connects to OpenAI's hosted models (GPT-4o, GPT-4.1, o1 reasoning models, GPT-3.5-turbo).
+Connects to OpenAI's hosted models (the GPT-5 family, GPT-4o, GPT-4.1, and the o-series reasoning models). The provider can call either the **Chat Completions API** (the default) or the newer **Responses API**, selected with the **API Type** advanced configuration — see [Chat Completions vs Responses API](#openai-api-type).
 
 Official website: [platform.openai.com](https://platform.openai.com/).
 
@@ -305,7 +322,7 @@ Official website: [platform.openai.com](https://platform.openai.com/).
 | Field | Required | Default | Available values |
 |---|---|---|---|
 | **API Key** | Yes | - | Your OpenAI API key (starts with `sk-…`). Reference a `configurable` in production. |
-| **Model Type** | Yes | - | `gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `gpt-4.1-nano`, `gpt-4-turbo`, `gpt-3.5-turbo`, `o1`, `o1-pro`, `chatgpt-4o-latest`, `gpt-4o-audio-preview`. Date-pinned variants (e.g. `gpt-4o-2024-11-20`) are also available for reproducibility. |
+| **Model Type** | Yes | - | `gpt-5`, `gpt-5-mini`, `gpt-5-nano`, `gpt-5-pro`, `gpt-5.1`, `gpt-5.2`, `gpt-5.2-pro`, `gpt-5.4`, `gpt-5.4-mini`, `gpt-5.4-nano`, `gpt-5.4-pro`, `gpt-5.5`, `gpt-5.5-pro`, `gpt-5.6`, `gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `gpt-4.1-nano`, `gpt-4-turbo`, `gpt-3.5-turbo`, `o1`, `o1-pro`, `o3`, `o3-mini`, `o3-pro`, `o4-mini`, `chatgpt-4o-latest`, `gpt-4o-audio-preview`. Chat-tuned (`gpt-5-chat-latest`, `gpt-5.1-chat-latest`, `gpt-5.2-chat-latest`), Codex (`gpt-5-codex`, `gpt-5.1-codex`, `gpt-5.1-codex-mini`, `gpt-5.1-codex-max`, `gpt-5.2-codex`, `gpt-5.3-codex`, `codex-mini-latest`), and date-pinned variants (e.g. `gpt-4o-2024-11-20`) are also available. `gpt-5.6` is an alias that always routes to the latest `gpt-5.6-sol` snapshot; `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna` pin a specific snapshot. |
 
 ### Advanced configurations
 
@@ -314,10 +331,36 @@ Official website: [platform.openai.com](https://platform.openai.com/).
 | Field | Default | Available values | What it controls |
 |---|---|---|---|
 | **Service URL** | `https://api.openai.com/v1` | URL string | OpenAI API base URL. Override only for OpenAI-compatible gateways. |
-| **Maximum Tokens** | `512` | Any positive integer | Hard cap on response length. |
-| **Temperature** | `0.7` | `0.0`-`2.0` | Sampling temperature. |
+| **Maximum Tokens** | `4096` | Any positive integer | Hard cap on response length (sent as `max_completion_tokens` on the Chat Completions API and `max_output_tokens` on the Responses API). |
+| **Temperature** | `()` (omitted) | `0.0`-`2.0` or empty | Sampling temperature. Leave empty for models that reject the parameter (the GPT-5 and o-series reasoning models). |
+| **Reasoning Effort** | `()` (omitted) | `none`, `minimal`, `low`, `medium`, `high`, `xhigh` | Effort spent on reasoning by reasoning-capable models. Lower effort returns faster and spends fewer reasoning tokens. Each model accepts only a subset of the values; the combination is validated when the provider is created, so an unsupported pairing fails at initialization with a descriptive error. See [Reasoning effort support by model](#openai-reasoning-effort). |
+| **API Type** | `CHAT_COMPLETIONS` | `CHAT_COMPLETIONS`, `RESPONSES` | The OpenAI endpoint the provider calls. See [Chat Completions vs Responses API](#openai-api-type). |
 
 Plus the [Standard HTTP advanced configurations](#standard-http-advanced-configurations) (Timeout, Retry, Circuit Breaker, Proxy, etc.).
+
+### Chat Completions vs Responses API {#openai-api-type}
+
+The **API Type** setting selects which OpenAI endpoint the provider talks to. Everything else in your flow stays the same: both endpoints support the same **Generate** and **Chat** actions, tool calling, and typed responses, so switching is a connection-level change.
+
+| API Type | Endpoint | Notes |
+|---|---|---|
+| **`CHAT_COMPLETIONS`** *(default)* | `POST /chat/completions` | OpenAI's long-standing chat API. |
+| **`RESPONSES`** | `POST /responses` | OpenAI's newer API surface. System prompts are sent as top-level `instructions`, and tool calls travel as typed input/output items. Requests are sent with `store: false`, so OpenAI does not retain them for later retrieval. |
+
+### Reasoning effort support by model {#openai-reasoning-effort}
+
+Reasoning effort applies only to reasoning models. The chat-tuned variants (`gpt-5-chat-latest`, `gpt-5.1-chat-latest`, `gpt-5.2-chat-latest`) are not reasoning models and reject the parameter.
+
+| Model | Accepted values |
+|---|---|
+| `gpt-5`, `gpt-5-mini`, `gpt-5-nano` | `minimal`, `low`, `medium`, `high` |
+| `gpt-5-pro` | `high` |
+| `gpt-5.1` | `none`, `low`, `medium`, `high` |
+| `gpt-5.2` | `none`, `low`, `medium`, `high`, `xhigh` |
+| `gpt-5.2-pro`, `gpt-5.4-pro`, `gpt-5.5-pro` | `medium`, `high`, `xhigh` |
+| `gpt-5.3-codex` | `low`, `medium`, `high`, `xhigh` |
+| `gpt-5.4`, `gpt-5.4-mini`, `gpt-5.4-nano`, `gpt-5.5`, and the `gpt-5.6` family | `none`, `low`, `medium`, `high`, `xhigh` |
+| o-series (`o1`, `o1-pro`, `o3`, `o3-mini`, `o3-pro`, `o4-mini`) and the Codex models | Accepted; the value is passed through without a per-model restriction list. |
 
 :::info
 The OpenAI package also ships an **Embedding Provider**. See [OpenAI](./embedding-providers.md#openai).

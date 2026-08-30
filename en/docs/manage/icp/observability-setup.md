@@ -13,6 +13,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ICP provides centralized observability for default profile runtimes. Logs and metrics are collected via Fluent Bit, stored in OpenSearch, and displayed in the ICP console. This page guides you through deploying OpenSearch, creating index templates, configuring the integration, and setting up Fluent Bit to complete the observability stack.
 
+:::tip
+This guide covers **default profile** runtimes. To set up observability for a **WSO2 Integrator: MI** runtime connected to ICP, see [Adding observability for ICP](https://mi.docs.wso2.com/en/latest/install-and-setup/install/adding-observability-for-icp/) in the MI documentation.
+:::
+
 :::info Prerequisites
 
 - ICP installed and running. See [Install ICP](install-icp.md).
@@ -643,3 +647,4 @@ Indices are created daily with a date suffix (e.g. `ballerina-metrics-logs-2026.
 - [Manage integrations](manage-integrations.md) — view logs and metrics for connected integrations from the ICP console
 - [Manage runtimes](manage-runtimes.md) — monitor runtime health and status alongside observability data
 - [Access control](access-control.md) — control who can view logs and metrics in the ICP console
+- [Adding observability for ICP](https://mi.docs.wso2.com/en/latest/install-and-setup/install/adding-observability-for-icp/) — set up logs and metrics for WSO2 Integrator: MI runtimes connected to ICP
