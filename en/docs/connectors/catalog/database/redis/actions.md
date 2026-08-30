@@ -3532,6 +3532,58 @@ Sample response:
 </details>
 
 <details>
+<summary>flushDb</summary>
+
+<div>
+
+Remove all the keys from the currently selected database.
+
+
+Returns: `string|redis:Error`
+
+Sample code:
+
+```ballerina
+string result = check redis->flushDb();
+```
+
+Sample response:
+
+```ballerina
+"OK"
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>flushAll</summary>
+
+<div>
+
+Remove all the keys from all the databases.
+
+
+Returns: `string|redis:Error`
+
+Sample code:
+
+```ballerina
+string result = check redis->flushAll();
+```
+
+Sample response:
+
+```ballerina
+"OK"
+```
+
+</div>
+
+</details>
+
+<details>
 <summary>close</summary>
 
 <div>
