@@ -87,6 +87,8 @@ Expand **Advanced Configurations** to view additional persistence-related settin
 
 In an agent hosted on `ai:Listener`, each chat request’s `sessionId` is used as the key for storing conversation messages in the database table. Inspecting this table directly can help debug and analyze conversations.
 
+The same store also persists paused runs for tools that require human approval. A durable store, such as the MSSQL short-term memory store, lets a pending approval survive a restart or be resolved by a different replica. For details, see [Human-in-the-Loop](human-in-the-loop.md).
+
 ## Overflow configuration
 
 Memory works as a sliding window. When new conversation turns exceed the configured memory limit, the **Overflow Configuration** determines how older messages are handled.
@@ -132,6 +134,8 @@ public type Memory distinct isolated object {
     function delete(string key) returns ai:MemoryError?;
 };
 ```
+
+A custom `ai:ShortTermMemoryStore` must additionally implement four checkpoint methods that persist paused human-in-the-loop runs: `putCheckpoint`, `getCheckpoint`, `removeCheckpoint`, and `takeCheckpoint`. See [Human-in-the-Loop](human-in-the-loop.md#make-pauses-survive-a-restart).
 
 The following example shows a minimal PostgreSQL-backed implementation.
 
@@ -193,5 +197,6 @@ The following table provides general recommendations for choosing a memory setup
 
 ## What's next
 
+- **[Human-in-the-Loop](human-in-the-loop.md)** — Pause the agent for approval before it runs a sensitive tool.
 - **[Observability](observability.md)** — See which tools the agent actually selects.
 - **[Evaluations](evaluations/overview.md)** — Learn how to prevent regressions in AI agent quality.
