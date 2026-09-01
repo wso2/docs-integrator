@@ -28,32 +28,31 @@ Use this flow for plain (unencrypted) FTP. Default port: `21`. Supports anonymou
 
    ![Artifacts panel showing FTP / SFTP under File Integration](/img/develop/integration-artifacts/file/ftp-sftp/step-2.png)
 
-3. In the **Create FTP Integration** form, keep **Protocol** set to **ftp**.
-
-   ![Create FTP Integration form, FTP protocol](/img/develop/integration-artifacts/file/ftp-sftp/step-creation-form-ftp.png)
-
-4. Fill in the **Listener Configuration**:
+3. In the **Create FTP Integration** form, fill in the **Listener Configuration**:
 
    | Field | Description |
    |---|---|
    | **Listener Name** | Identifier for this listener (e.g., `ftpListener`). |
+   | **Protocol** | Types of protocol. Select `ftp`. |
    | **Host** | Hostname or IP address of the remote server (e.g., `ftp.example.com`). |
    | **Port Number** | Port to connect on. Set to `21` for standard FTP. |
 
-5. Choose an **authentication method**:
+   ![Create FTP Integration form, FTP protocol](/img/develop/integration-artifacts/file/ftp-sftp/step-creation-form-ftp.png)
+
+4. Choose an **authentication method**:
 
    | Option | Fields revealed | Use when |
    |---|---|---|
    | **No Authentication** | — | The server accepts anonymous logins or a username alone without a password. |
    | **Basic Authentication** | **Username**, **Password** | The server requires a username and password. |
 
-6. Enter the **Monitoring Path** — the directory on the remote server to poll for new files (e.g., `/uploads`). Defaults to `/`.
+5. Enter the **Monitoring Path** — the directory on the remote server to poll for new files (e.g., `/uploads`). Defaults to `/`.
 
-7. Click **Create**. WSO2 Integrator opens the service in the **Service Designer** with the listener pill attached.
+6. Click **Create**. WSO2 Integrator opens the service in the **Service Designer** with the listener pill attached.
 
    ![Service Designer showing the FTP service canvas](/img/develop/integration-artifacts/file/ftp-sftp/step-service-designer.png)
 
-8. Click [**+ Add File Handler**](#adding-a-file-handler) to define how incoming files are processed.
+7. Click [**+ Add File Handler**](#adding-a-file-handler) to define how incoming files are processed.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -120,26 +119,26 @@ part of the configuration.
 <TabItem value="ui" label="Visual Designer" default>
 
 1. Click **+ Add Artifact** → **FTP / SFTP** under **File Integration**.
-2. In the **Create FTP Integration** form, select **Protocol** → **ftps**.
 
-   ![Create FTP Integration form, FTPS protocol](/img/develop/integration-artifacts/file/ftp-sftp/step-creation-form-ftps.png)
-
-3. Fill in the **Listener Configuration**:
+2. In the **Create FTP Integration** form, fill in the **Listener Configuration**:
 
    | Field | Description |
    |---|---|
    | **Listener Name** | Identifier for this listener (e.g., `ftpsListener`). |
+   | **Protocol** | Types of protocol. Select `ftps`. |
    | **Host** | Hostname or IP address of the remote server (e.g., `ftps.example.com`). |
    | **Port Number** | Port to connect on. Set to `21` for explicit FTPS or `990` for implicit FTPS. |
 
-4. Choose an **authentication method**:
+   ![Create FTP Integration form, FTPS protocol](/img/develop/integration-artifacts/file/ftp-sftp/step-creation-form-ftps.png)
+
+3. Choose an **authentication method**:
 
    | Option | Fields revealed | Use when |
    |---|---|---|
    | **No Authentication** | — | The server accepts anonymous TLS connections. |
    | **Basic Authentication** | **Username**, **Password** | The server requires credentials over the encrypted channel. Typical for FTPS. |
 
-5. Expand **Advanced Configurations**. The **Secure Socket** field is
+4. Expand **Advanced Configurations**. The **Secure Socket** field is
    required for FTPS. Click **Record** and supply the SSL/TLS
    configuration — at minimum a truststore or certificate path so the
    client can verify the server:
@@ -153,9 +152,9 @@ part of the configuration.
    See [SSL/TLS configuration](https://central.ballerina.io/ballerina/ftp/latest#SecureSocket) for the full
    field set, including mutual TLS and protocol-version pinning.
 
-6. Enter the **Monitoring Path** and click **Create**.
+5. Enter the **Monitoring Path** and click **Create**.
 
-7. Click [**+ Add File Handler**](#adding-a-file-handler) in the Service Designer to define how incoming files are processed.
+6. Click [**+ Add File Handler**](#adding-a-file-handler) in the Service Designer to define how incoming files are processed.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -210,21 +209,21 @@ Use this flow for SFTP (FTP over SSH). Default port: `22`. The form collects the
 <TabItem value="ui" label="Visual Designer" default>
 
 1. Click **+ Add Artifact** → **FTP / SFTP** under **File Integration**.
-2. In the **Create FTP Integration** form, select **Protocol** → **sftp**.
 
-   ![Create FTP Integration form, SFTP protocol](/img/develop/integration-artifacts/file/ftp-sftp/step-creation-form-sftp.png)
-
-3. Fill in the **Listener Configuration**:
+2. In the **Create FTP Integration** form, fill in the **Listener Configuration**:
 
    | Field | Description |
    |---|---|
    | **Listener Name** | Identifier for this listener (e.g., `sftpListener`). |
+   | **Protocol** | Types of protocol. Select `sftp`. | 
    | **Host** | Hostname or IP address of the remote server (e.g., `sftp.example.com`). |
    | **Port Number** | Port to connect on. Set to `22` for SFTP. |
 
-4. Choose **Certificate-Based Authentication** under **authentication method**. This reveals the **Private Key** and **Username** fields.
+   ![Create FTP Integration form, SFTP protocol](/img/develop/integration-artifacts/file/ftp-sftp/step-creation-form-sftp.png)
 
-5. Enter the **Private Key** record. Click **Record** on the field and supply:
+3. Choose **Certificate-Based Authentication** under **authentication method**. This reveals the **Private Key** and **Username** fields.
+
+4. Enter the **Private Key** record. Click **Record** on the field and supply:
 
    ```ballerina
    {path: "/path/to/private_key"}
@@ -237,9 +236,9 @@ Use this flow for SFTP (FTP over SSH). Default port: `22`. The form collects the
    {path: "/path/to/private_key", password: "my-passphrase"}
    ```
 
-6. Enter the **Username** that matches the configured private key and the **Monitoring Path**.
+5. Enter the **Username** that matches the configured private key and the **Monitoring Path**.
 
-7. Click **Create**. Then click [**+ Add File Handler**](#adding-a-file-handler) in the Service Designer.
+6. Click **Create**. Then click [**+ Add File Handler**](#adding-a-file-handler) in the Service Designer.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
