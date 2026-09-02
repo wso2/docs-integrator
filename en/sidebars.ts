@@ -2102,16 +2102,70 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Enterprise Integration Patterns',
+          link: { type: 'doc', id: 'guides/patterns/overview' },
           items: [
-            'guides/patterns/message',
-            'guides/patterns/message-filter',
-            'guides/patterns/content-based-routing',
-            'guides/patterns/selective-consumer',
-            'guides/patterns/polling-consumer',
-            'guides/patterns/channel-adapter',
-            'guides/patterns/message-dispatcher',
-            'guides/patterns/service-activator',
-            'guides/patterns/message-mapper',
+            {
+              type: 'category',
+              label: 'Messaging Systems',
+              items: [
+                'guides/patterns/message',
+                'guides/patterns/pipes-and-filters',
+                'guides/patterns/message-router',
+                'guides/patterns/message-translator',
+                'guides/patterns/message-endpoint',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Messaging Channels',
+              items: [
+                'guides/patterns/point-to-point-channel',
+                'guides/patterns/channel-adapter',
+                'guides/patterns/messaging-bridge',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Message Construction',
+              items: [
+                'guides/patterns/command-message',
+                'guides/patterns/document-message',
+                'guides/patterns/event-message',
+                'guides/patterns/message-sequence',
+                'guides/patterns/format-indicator',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Message Routing',
+              items: [
+                'guides/patterns/content-based-router',
+                'guides/patterns/message-filter',
+                'guides/patterns/splitter',
+                'guides/patterns/aggregator',
+                'guides/patterns/routing-slip',
+                'guides/patterns/process-manager',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Message Transformation',
+              items: [
+                'guides/patterns/content-enricher',
+                'guides/patterns/content-filter',
+                'guides/patterns/normalizer',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Messaging Endpoints',
+              items: ['guides/patterns/idempotent-receiver'],
+            },
+            {
+              type: 'category',
+              label: 'System Management',
+              items: ['guides/patterns/message-store'],
+            },
           ],
         },
         {
