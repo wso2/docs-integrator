@@ -23,7 +23,6 @@ Before installing WSO2 Integrator, ensure your machine meets the following hardw
 ---
 
 ## Installation steps
-## Installation steps
 
 ### Step 1: Download WSO2 Integrator
 
