@@ -59,6 +59,7 @@ A PostgreSQL CDC listener watches the `outbox` table for new inserts. Each inser
 
 ```ballerina
 // docs-fold-start: Supporting definitions
+import ballerina/log;
 import ballerinax/cdc;
 import ballerinax/postgresql;
 import ballerinax/rabbitmq;
@@ -100,8 +101,8 @@ service cdc:Service on postgresqlCdcListener {
 
 ## Try it yourself
 
-Try this sample on WSO2 Cloud.
+Try this sample in WSO2 Integration Cloud.
 
-[![Deploy on WSO2 Cloud](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/event-integration/outbox_cdc_rabbitmq)
+[![Deploy to WSO2 Cloud](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/event-integration/outbox_cdc_rabbitmq)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/event-integration/outbox_cdc_rabbitmq)

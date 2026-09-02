@@ -90,8 +90,8 @@ In this sample, `recipient == "invalid"` triggers an immediate dead-letter, and 
 
 ## Try it yourself
 
-Try this sample on WSO2 Cloud.
+Try this sample in WSO2 Integration Cloud.
 
-[![Deploy on WSO2 Cloud](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/event-integration/dlq_asb)
+[![Deploy to WSO2 Cloud](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/event-integration/dlq_asb)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/event-integration/dlq_asb)
