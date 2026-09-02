@@ -21,32 +21,32 @@ Executes SQL statements, retrieves results, and monitors execution status via th
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `region` | `Region` | Required | AWS region where the Redshift cluster or workgroup is deployed (e.g., `US_EAST_1`). |
-| `auth` | `StaticAuthConfig\|EC2IAMRoleConfig` | Required | AWS authentication: static access key credentials or EC2 IAM role configuration. |
-| `dbAccessConfig` | `Cluster\|WorkGroup` | `()` | Default database access configuration. Can be overridden per-statement via `ExecutionConfig`. |
+| `auth` | `auth:AuthConfig` | Required | Authentication configuration: Any standard credential source supported by `aws.auth` package: `StaticAuthConfig`, `ProfileAuthConfig`, `AssumeRoleConfig`, `WebIdentityConfig`, `SsoAuthConfig`, `ProcessAuthConfig`, `DEFAULT_CREDENTIALS` |
+| `region` | `aws:Region\|string` | Required | AWS region for the Redshift Data service (e.g., `aws:US_EAST_1`). |
+| `endpoint` | `aws:EndpointConfig` | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. LocalStack, VPC interface endpoints). |
+| `dbAccessConfig` | `Cluster\|WorkGroup` | Optional | The database access configurations for the Redshift Data API. Can be overridden in the individual `execute` and `batchExecute` requests. |
 
 ### Initializing the client
 
 ```ballerina
+import ballerinax/aws;
 import ballerinax/aws.redshiftdata;
 
 configurable string accessKeyId = ?;
 configurable string secretAccessKey = ?;
 configurable string clusterId = ?;
 configurable string database = ?;
-configurable string dbUser = ?;
 
 redshiftdata:Client redshift = check new ({
-    region: redshiftdata:US_EAST_1,
-    auth: {
-        accessKeyId: accessKeyId,
-        secretAccessKey: secretAccessKey
-    },
-    dbAccessConfig: {
-        id: clusterId,
-        database: database,
-        dbUser: dbUser
-    }
+   region: aws:US_EAST_1,
+   auth: {
+      accessKeyId,
+      secretAccessKey
+   },
+   dbAccessConfig: {
+      id: clusterId,
+      database
+   }
 });
 ```
 
@@ -233,13 +233,14 @@ Sample response:
 
 Gracefully closes the AWS Redshift data API client and releases associated resources.
 
+This is a normal method rather than a remote method, so it is called with `.` instead of `->`. Closing the client sends no request to the Redshift Data API.
 
 Returns: `Error?`
 
 Sample code:
 
 ```ballerina
-check redshift->close();
+check redshift.close();
 ```
 
 </div>

@@ -1,95 +1,113 @@
+---
+connector: true
+connector_name: "aws.redshiftdata"
+title: "Example"
+---
+
 # Example
 
 ## What you'll build
 
-Build a WSO2 Integrator automation that connects to the AWS Redshift data API and runs an SQL query using the `ballerinax/aws.redshiftdata` connector. The integration configures AWS credentials as configurable variables and calls the **Execute** operation to submit a SQL statement to Redshift.
+Build an automation that runs a SQL query against an Amazon Redshift database through the Redshift Data API. The integration binds the AWS credentials, region, and database access settings to configurable variables, then submits a read-only query and logs the returned statement ID. Because the Redshift Data API is asynchronous, the operation returns a statement ID that you can use to track the query and retrieve its results.
 
 **Operations used:**
-- **Execute** (`executeStatement`) : Runs a SQL statement against an AWS Redshift database and returns an execution response containing the statement ID
+- **Execute** : Runs a SQL statement, which can be data manipulation language (DML) or data definition language (DDL), and returns the submitted statement ID
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    A((User)) --> B[Execute Operation]
-    B --> C[AWS Redshift data connector]
-    C --> D[(AWS Redshift)]
+    A((User)) --> B[Execute]
+    B --> C[AWS Redshift Data Connector]
+    C --> D[(Amazon Redshift)]
 ```
 
 ## Prerequisites
 
-- AWS credentials: Access Key ID, Secret Access Key, and optionally a Session Token
-- The target AWS region and Redshift database name
+- An active AWS account. If you don't have one, [sign up for a free AWS account](https://aws.amazon.com/free/).
+- A provisioned Amazon Redshift cluster or a serverless workgroup, with a database you can query. To create one, follow the [Amazon Redshift getting started guide](https://docs.aws.amazon.com/redshift/latest/gsg/new-user.html).
+- An IAM user with an access key. Attach the `AmazonRedshiftDataFullAccess` managed policy, or scope a custom policy to the `redshift-data` actions you call.
+- Permission for the IAM user to obtain a database credential. A cluster with a database user needs `redshift:GetClusterCredentials`, a serverless workgroup needs `redshift-serverless:GetCredentials`, and either one needs `secretsmanager:GetSecretValue` when you authenticate through a secret.
 
-## Setting up the AWS Redshift data integration
+## Setting up the AWS Redshift Data integration
 
 > **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the connector.
 
-## Adding the AWS Redshift data connector
+## Adding the AWS Redshift Data connector
 
-### Step 1: Open the add connection palette
+### Step 1: Open the connector palette
 
-Select the **+** (Add Connection) button next to **Connections** in the component tree to open the **Add Connection** palette on the right side of the canvas.
+Select **Add Connection** in the **Connections** section.
 
-![Add Connection palette open](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_01_palette.png)
+![AWS Redshift Data connector palette open in the Add Connection dialog before selection](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_01_palette.png)
 
-### Step 2: Search for the AWS Redshift data connector
+### Step 2: Select the AWS Redshift Data connector
 
-In the **Add Connection** search box, enter `redshiftdata` and select **`ballerinax/aws.redshiftdata`** from the results to open the connection configuration form.
+1. Enter `aws.redshiftdata` in the search field.
+2. Select the **Redshiftdata** connector card.
 
-## Configuring the AWS Redshift data connection
+## Configuring the AWS Redshift Data connection
 
-### Step 3: Fill in the connection parameters
+### Step 3: Bind the connection parameters to configurable variables
 
-Enter a descriptive name for the connection and bind each parameter to a configurable variable so that credentials are never hard-coded:
+Bind each connection field to a configurable variable so that no credential or environment value is stored in the integration. Keep the default static credentials variant for **Auth**, and switch the record fields to **Expression** mode to reference the configurable variables you create.
 
-- **connectionName** : A unique name for this connection (for example, `redshiftdataClient`)
-- **region** : The AWS region where your Redshift cluster is hosted (use Expression mode to enter a string literal such as `"us-east-1"`)
-- **accessKeyId** : AWS access key ID bound to a configurable variable
-- **secretAccessKey** : AWS secret access key bound to a configurable variable
-- **sessionToken** : Optional AWS session token bound to a configurable variable
+- **Auth** : Authentication settings for AWS. The default variant takes a static access key ID and secret access key
+- **Region** : The AWS region that hosts your Redshift cluster or workgroup
+- **Db Access Config** : The cluster identifier and database name that the Redshift Data API runs statements against
 
-![Connection form with all fields filled](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_02_connection_form_filled.png)
+Leave **Endpoint** at its default empty value unless you target a FIPS, dualstack, or custom endpoint.
+
+![AWS Redshift Data connection form with Auth and Region bound to configurable variables before saving](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_02_connection_form_filled.png)
 
 ### Step 4: Save the connection
 
-Select **Save** to persist the connection. The canvas updates to show the new `redshiftdataClient` connection node, and the sidebar lists it under **Connections**.
+Select **Save Connection** and verify that the connection appears in the **Connections** section.
 
-![Canvas showing redshiftdataClient connection node after save](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_03_connection_saved.png)
+![Saved redshiftdataClient connection shown on the integration design canvas and in the project tree](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_03_connection_saved.png)
 
 ### Step 5: Set actual values for your configurables
 
-1. In the left panel, select **Configurations**.
-2. Set a value for each configurable listed below:
+1. Select **Configurations** at the bottom of the project tree under **Data Mappers**.
+2. Enter a value for each configurable listed below before you run the integration.
 
-- **awsAccessKeyId** : `string`: your AWS access key ID
-- **awsSecretAccessKey** : `string`: your AWS secret access key
-- **awsSessionToken** : `string`: your AWS session token (leave blank if not required)
+- **accessKeyId** (`string`) : The access key ID of the IAM user that calls the Redshift Data API.
+- **secretAccessKey** (`string`) : The secret access key that pairs with the access key ID.
+- **region** (`string`) : The AWS region code, such as `us-east-1`.
+- **clusterId** (`string`) : The identifier of the Redshift cluster that hosts the database.
+- **databaseName** (`string`) : The name of the database that the query runs against.
 
-## Configuring the AWS Redshift data executeStatement operation
+> **Warning:** Treat `accessKeyId` and `secretAccessKey` as secrets. Keep them out of source control.
+
+## Configuring the AWS Redshift Data Execute operation
 
 ### Step 6: Add an automation entry point
 
-1. In the component tree, select **Add Artifact** (or the **+** next to **Entry Points**).
-2. Select **Automation** from the artifact type list.
-3. Select **Create** to generate a `main` automation entry point.
+1. Select **Add Artifact** on the integration design canvas.
+2. Select **Automation**.
+3. Select **Create** to accept the default settings.
 
-The canvas switches to the Automation flow view showing a **Start** node, an empty placeholder node, and an **Error Handler** node.
+### Step 7: Expand the connection and configure the Execute operation
 
-### Step 7: Select and configure the execute operation
+1. Select **+** in the automation flow, between **Start** and **Error Handler**.
+2. Expand **redshiftdataClient** to display its operations.
 
-Select the empty placeholder node on the canvas to open the node panel, then locate **`redshiftdataClient`** and select **Execute** to open the operation configuration form. Fill in the following fields:
+![redshiftdataClient connection expanded in the node panel to display its five operations before selection](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_04_operations_panel.png)
 
-- **statement** : The SQL query to run (for example, `SELECT * FROM public.users LIMIT 10`)
-- **dbAccessConfig** : Override the connection-level database access config for this call (for example, `{id: "", database: "dev"}`)
-- **statementName** : A logical name for the SQL statement to aid traceability (for example, `"executeRedshiftQuery"`)
-- **withEvent** : Whether to send an event to Amazon EventBridge after execution; set to `false`
+3. Select **Execute** and enter its required values.
 
-![Execute operation form with all fields filled](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_05_execute_form_filled.png)
+- **Statement** : The SQL statement to run. This example uses a read-only query that returns at most 10 rows
+- **Result** : The name of the variable that holds the returned execution response
 
-Select **Save**. The canvas updates to show a new **`Redshift data : execute`** node between the Start and Error Handler nodes. The result variable `redshiftdataExecutionresponse` (of type `redshiftdata:ExecutionResponse`) is now available for downstream steps.
+![Execute operation form with the SQL statement entered and the result variable named before saving](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_05_execute_form_filled.png)
 
-![Completed automation canvas with execute node](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_06_execute_added.png)
+4. Select **Save**.
+
+### Step 8: Log the Execute result
+
+Add a **Log Info** action after the operation, and enter a message that reads the statement ID from the result variable. The completed flow runs from **Start**, through the operation and the log action, to **Error Handler**.
+
+![Completed automation flow with Start, the Execute operation, the log action, and Error Handler](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_06_execute_added.png)
 
 ## Try it yourself
 
@@ -103,6 +121,6 @@ Try this sample in WSO2 Integration Platform.
 
 The `aws.redshiftdata` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-aws.redshiftdata/tree/main/examples).
 
-1. [Manage users](https://github.com/ballerina-platform/module-ballerinax-aws.redshiftdata/tree/main/examples/manage-users/) - This example demonstrates how to use the Ballerina Redshift data connector to perform SQL operations on an AWS Redshift cluster. It includes creating a table, inserting data, and querying data.
+1. [Manage users](https://github.com/ballerina-platform/module-ballerinax-aws.redshiftdata/tree/main/examples/manage-users/) - This example demonstrates how to use the Ballerina Redshift Data connector to perform SQL operations on an AWS Redshift cluster. It includes creating a table, inserting data, and querying data.
 
 2. [Music store](https://github.com/ballerina-platform/module-ballerinax-aws.redshiftdata/tree/main/examples/music-store) - This example illustrates the process of creating an HTTP RESTful API with Ballerina to perform basic CRUD operations on a database, specifically AWS Redshift, involving setup, configuration, and running examples.

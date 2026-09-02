@@ -462,7 +462,7 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'AWS Redshift Data',
-          link: { type: 'doc', id: 'connectors/catalog/database/aws.redshiftdata/aws-redshift-data-connector-overview' },
+          link: { type: 'doc', id: 'connectors/catalog/database/aws.redshiftdata/connector-overview' },
           items: [
             'connectors/catalog/database/aws.redshiftdata/setup-guide',
             'connectors/catalog/database/aws.redshiftdata/actions',
