@@ -66,11 +66,11 @@ There are no Advanced Configurations on the Vector Knowledge Base itself. Every 
 
 ## WSO2 Cloud Knowledge Base
 
-### Connect to an existing knowledge base
-
 The easiest way to add a cloud-hosted knowledge base. You first create the knowledge base in WSO2 Cloud, choosing the Vector Store, Embedding Provider, and Chunker yourself; it is provisioned and managed there. If the knowledge base is in your own cloud organization, you can connect to it with a single click. If it is not, you can still configure the connection manually.
 
-> Unlike with the Vector and Azure AI Search knowledge bases, you don't set up the connection yourself. The credentials are supplied by the environment when the integration runs, so no secrets are stored in your project.
+### Connect to an existing knowledge base
+
+Unlike with the Vector and Azure AI Search knowledge bases, you don't set up the connection yourself. The credentials are supplied by the environment when the integration runs, so no secrets are stored in your project.
 
 Selecting **WSO2 Cloud Knowledge Base** lists the knowledge bases available in your WSO2 Cloud organization. You need to be signed in to WSO2 Cloud with a project selected for the list to appear.
 
