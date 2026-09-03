@@ -25,9 +25,9 @@ flowchart LR
 ## Prerequisites
 
 - An active AWS account. If you don't have one, [sign up for a free AWS account](https://aws.amazon.com/free/).
-- A provisioned Amazon Redshift cluster or a serverless workgroup, with a database you can query. To create one, follow the [Amazon Redshift getting started guide](https://docs.aws.amazon.com/redshift/latest/gsg/new-user.html).
+- A provisioned Amazon Redshift cluster with a database you can query. To create one, follow the [Amazon Redshift getting started guide](https://docs.aws.amazon.com/redshift/latest/gsg/new-user.html).
 - An IAM user with an access key. Attach the `AmazonRedshiftDataFullAccess` managed policy, or scope a custom policy to the `redshift-data` actions you call.
-- Permission for the IAM user to obtain a database credential. A cluster with a database user needs `redshift:GetClusterCredentials`, a serverless workgroup needs `redshift-serverless:GetCredentials`, and either one needs `secretsmanager:GetSecretValue` when you authenticate through a secret.
+- Permission for the IAM user to obtain a database credential. A cluster that authenticates with a database user needs `redshift:GetClusterCredentials`, and one that authenticates through a secret needs `secretsmanager:GetSecretValue`.
 
 ## Setting up the AWS Redshift Data integration
 
@@ -53,10 +53,12 @@ Select **Add Connection** in the **Connections** section.
 Bind each connection field to a configurable variable so that no credential or environment value is stored in the integration. Keep the default static credentials variant for **Auth**, and switch the record fields to **Expression** mode to reference the configurable variables you create.
 
 - **Auth** : Authentication settings for AWS. The default variant takes a static access key ID and secret access key
-- **Region** : The AWS region that hosts your Redshift cluster or workgroup
+- **Region** : The AWS region that hosts your Redshift cluster
 - **Db Access Config** : The cluster identifier and database name that the Redshift Data API runs statements against
 
 Leave **Endpoint** at its default empty value unless you target a FIPS, dualstack, or custom endpoint.
+
+> **Note:** This example targets a provisioned cluster. The connector also supports serverless workgroups: select the `WorkGroup` variant for **Db Access Config**, which takes the workgroup `name` and `database` in place of the cluster `id` and `database`. A workgroup needs `redshift-serverless:GetCredentials` instead of `redshift:GetClusterCredentials`.
 
 ![AWS Redshift Data connection form with Auth and Region bound to configurable variables before saving](/img/connectors/catalog/database/aws.redshiftdata/redshiftdata_screenshot_02_connection_form_filled.png)
 
