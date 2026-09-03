@@ -17,6 +17,7 @@ WSO2 Integrator, powered by Ballerina, provides native support for a wide range 
 | WebSocket | `ballerina/websocket` | Full-duplex communication over TCP | Real-time messaging, binary and text frames, ping/pong |
 | WebSub | `ballerina/websub`, `ballerina/websubhub` | W3C WebSub pub/sub protocol | Content distribution, webhook-based subscriptions |
 | GraphQL | `ballerina/graphql` | GraphQL query language protocol | Queries, mutations, subscriptions, schema introspection |
+| SOAP | `ballerina/soap` | Simple Object Access Protocol | SOAP 1.1/1.2, WS-Security, WSDL support |
 | gRPC | `ballerina/grpc` | Google Remote Procedure Call | Unary, server streaming, client streaming, bidirectional streaming |
 
 ### HTTP example
@@ -24,20 +25,18 @@ WSO2 Integrator, powered by Ballerina, provides native support for a wide range 
 ```ballerina
 import ballerina/http;
 
-// HTTP/1.1 service
+// HTTP service (default: HTTP/2)
 service /api on new http:Listener(8080) {
     resource function get greeting() returns string {
         return "Hello, World!";
     }
 }
 
-// HTTP/2 client
-http:Client http2Client = check new ("https://api.example.com", {
-    httpVersion: http:HTTP_2_0
-});
+// HTTP client (default: HTTP/2)
+http:Client httpClient = check new ("https://api.example.com");
 ```
 
-## Messaging protocols
+## Message brokers
 
 | Protocol | Module | Description | Key Features |
 |----------|--------|-------------|--------------|
@@ -47,7 +46,10 @@ http:Client http2Client = check new ("https://api.example.com", {
 | NATS | `ballerinax/nats` | Cloud-native messaging | Pub/sub, request/reply, queue groups |
 | NATS Streaming | `ballerinax/stan` | Streaming extension for NATS | Durable subscriptions, message replay, at-least-once delivery |
 | JMS | `ballerinax/java.jms` | Java Message Service | Queues, topics, durable subscribers, message selectors |
+| IBM MQ | `ballerinax/ibm.ibmmq` | IBM enterprise messaging | Queue managers, queues, topics, message persistence |
+| Solace | `ballerinax/solace` | Solace PubSub+ messaging | Pub/sub, queues, topic subscriptions, guaranteed delivery |
 | Azure Service Bus | `ballerinax/asb` | Azure cloud messaging | Queues, topics, sessions, dead-letter queues |
+| AWS SQS | `ballerinax/aws.sqs` | Amazon Simple Queue Service | Standard and FIFO queues, message visibility, dead-letter queues |
 
 ### Kafka example
 
@@ -104,6 +106,7 @@ service class EchoService {
 |----------|--------|-------------|--------------|
 | FTP | `ballerina/ftp` | File Transfer Protocol | Upload, download, list, directory operations |
 | SFTP | `ballerina/ftp` | SSH File Transfer Protocol | Encrypted file transfer, key-based authentication |
+| SMB | `ballerina/smb` | Server Message Block Protocol | File sharing, directory operations, file event listening |
 
 ### FTP example
 
@@ -186,12 +189,16 @@ service "emailObserver" on imapListener {
 | HTTP | Request/Response | At-most-once | N/A | REST APIs, webhooks |
 | gRPC | Request/Response, Streaming | At-most-once | Per stream | Microservice-to-microservice |
 | GraphQL | Request/Response | At-most-once | N/A | Flexible API queries |
+| SOAP | Request/Response | At-most-once | N/A | Legacy web services, enterprise integration |
 | WebSocket | Bidirectional streaming | At-most-once | Per connection | Real-time updates |
 | Kafka | Pub/Sub | At-least-once, Exactly-once | Per partition | Event streaming, log aggregation |
 | RabbitMQ | Pub/Sub, Queue | At-least-once | Per queue | Task distribution, async processing |
 | NATS | Pub/Sub, Request/Reply | At-most-once | None | Lightweight cloud messaging |
 | MQTT | Pub/Sub | QoS 0/1/2 | Per topic | IoT, edge devices |
 | JMS | Pub/Sub, Queue | At-least-once | Per queue | Enterprise messaging |
+| IBM MQ | Pub/Sub, Queue | At-least-once | Per queue | Enterprise messaging, mainframe integration |
+| Solace | Pub/Sub, Queue | At-least-once | Per queue | Event-driven enterprise messaging |
+| AWS SQS | Queue | At-least-once | FIFO optional | Cloud-native task queuing |
 | TCP | Stream | Reliable, ordered | Yes | Custom binary protocols |
 | UDP | Datagram | Unreliable | None | Discovery, broadcast |
 
