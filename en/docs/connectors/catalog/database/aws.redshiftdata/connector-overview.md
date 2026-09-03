@@ -4,7 +4,7 @@ title: "Overview"
 
 # Overview
 
-Amazon Redshift is a fully-managed data warehouse service provided by AWS, designed to efficiently analyze large datasets with high performance and scalability. The Ballerina `ballerinax/aws.redshiftdata` connector provides programmatic access to Amazon Redshift through the Data API, enabling you to execute SQL statements, retrieve results, and manage queries without persistent database connections or JDBC drivers.
+Amazon Redshift is a fully-managed data warehouse service provided by AWS, designed to efficiently analyze large datasets with high performance and scalability. The Ballerina Redshift Data connector provides programmatic access to Amazon Redshift through the Data API, enabling you to execute SQL statements, retrieve results, and manage queries without persistent database connections or JDBC drivers.
 
 ## Key features
 
