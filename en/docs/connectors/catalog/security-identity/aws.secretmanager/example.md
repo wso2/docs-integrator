@@ -1,11 +1,17 @@
+---
+connector: true
+connector_name: "aws.secretmanager"
+title: "Example"
+---
+
 # Example
 
 ## What you'll build
 
-This guide walks through building a WSO2 Integrator workflow that connects to AWS Secrets Manager and retrieves a named secret using the **getSecretValue** operation. The integration uses the `ballerinax/aws.secretmanager` connector, wired to an Automation entry point that triggers the secret retrieval on a scheduled basis. The completed flow on the canvas shows an Automation trigger connected to a `getSecretValue` remote function node, which calls the AWS Secrets Manager API and returns the secret value for downstream use.
+Build an automation that retrieves a secret from AWS Secrets Manager and logs the secret's name and version. The integration binds the AWS credentials, region, and secret identifier to configurable variables, so no credential and no secret identifier is stored in the integration itself. The retrieved secret value stays in memory and is never written to the log.
 
 **Operations used:**
-- **getSecretValue** : Retrieves the value of a named secret stored in AWS Secrets Manager, returning the secret string or binary data along with metadata such as the version ID and stage labels.
+- **Get Secret Value** : Retrieves the contents of the encrypted fields from the specified version of a secret
 
 ## Architecture
 
@@ -13,84 +19,94 @@ This guide walks through building a WSO2 Integrator workflow that connects to AW
 flowchart LR
     A((User)) --> B[Get Secret Value]
     B --> C[AWS Secrets Manager Connector]
-    C --> D((AWS Secrets Manager))
+    C --> D[(AWS Secrets Manager)]
 ```
 
 ## Prerequisites
 
-- An active AWS account with Secrets Manager enabled in the target region (e.g., `us-east-1`).
-- An IAM user or role with `secretsmanager:GetSecretValue` permission and programmatic access (Access Key ID and Secret Access Key).
-- At least one secret already created in AWS Secrets Manager that the integration can retrieve.
+- An active AWS account. If you don't have one, [sign up for a free AWS account](https://aws.amazon.com/free/).
+- A secret stored in AWS Secrets Manager. To create one, follow the [create a secret guide](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html).
+- An IAM user with an access key. Grant it `secretsmanager:GetSecretValue` on the secrets you read, and `kms:Decrypt` on the KMS key that encrypts them when that key is customer managed.
 
-## Setting up the aws.secretmanager integration
+## Setting up the AWS Secrets Manager integration
 
 > **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the connector.
 
-## Adding the aws.secretmanager connector
+## Adding the AWS Secrets Manager connector
 
-### Step 1: Open the add connection palette
+### Step 1: Open the connector palette
 
-Select **+ Add Connection** in the Connections section of the low-code canvas sidebar to open the connector search palette.
-![Connector palette open showing search field and connector list](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_01_palette.png)
+Select **Add Connection** in the **Connections** section.
 
-### Step 2: Search for and select the aws.secretmanager connector
+![AWS Secrets Manager connector palette open in the Add Connection dialog before selection](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_01_palette.png)
 
-1. In the palette search box, enter **aws.secretmanager**.
-2. Locate the **ballerinax/aws.secretmanager** connector card in the filtered results.
-3. Select the connector card to open the connection configuration form.
+### Step 2: Select the AWS Secrets Manager connector
 
-## Configuring the aws.secretmanager connection
+1. Enter `aws.secretmanager` in the search field.
+2. Select the **Secretmanager** connector card.
 
-### Step 3: Bind aws.secretmanager connection parameters to configurables
+## Configuring the AWS Secrets Manager connection
 
-For each connection field, open the helper panel, navigate to the **Configurables** tab, select **+ New Configurable**, enter the variable name and type, and select **Save** to auto-inject the reference into the field.
+### Step 3: Bind the connection parameters to configurable variables
 
-- **Region** : The AWS region the connector should communicate with (e.g., `us-east-1`).
-- **Auth** : The authentication configuration for AWS Secrets Manager, containing the Access Key ID and Secret Access Key bound to configurable variables.
-- **Connection Name** : The identifier for this connection instance.
+Bind each connection field to a configurable variable so that no credential is stored in the integration. Keep the default static credentials variant for **Auth**, and switch both fields to **Expression** mode to reference the configurable variables you create.
 
-![Connection form showing all parameters bound to configurable variables before saving](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_02_connection_form.png)
+- **Auth** : Authentication settings for AWS. The default variant takes a static access key ID and secret access key
+- **Region** : The AWS region that holds your secrets
 
-### Step 4: Save the aws.secretmanager connection
+Leave **Endpoint** at its default empty value unless you target a FIPS, dualstack, or custom endpoint.
 
-Select **Save Connection** to persist the connection configuration. The aws.secretmanager connector node appears on the low-code canvas.
-![Low-code canvas showing the aws.secretmanager connection node saved in the Design view](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_03_connections_list.png)
+![AWS Secrets Manager connection form with Auth and Region bound to configurable variables before saving](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_02_connection_form.png)
+
+### Step 4: Save the connection
+
+Select **Save Connection** and verify that the connection appears in the **Connections** section.
+
+![Saved secretmanagerClient connection shown on the integration design canvas and in the project tree](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_03_connections_list.png)
 
 ### Step 5: Set actual values for your configurables
 
-In the left panel of WSO2 Integrator, select **Configurations** (listed at the bottom of the project tree, under Data Mappers) to open the Configurations panel, then set a value for each configurable:
+1. Select **Configurations** at the bottom of the project tree under **Data Mappers**.
+2. Enter a value for each configurable listed below before you run the integration.
 
-- **awsAccessKeyId** (string) : Your AWS IAM access key ID.
-- **awsSecretAccessKey** (string) : Your AWS IAM secret access key associated with the above key ID.
-- **awsSecretId** (string) : The name or ARN of the secret you want to retrieve.
+- **accessKeyId** (`string`) : The access key ID of the IAM user that reads the secret.
+- **secretAccessKey** (`string`) : The secret access key that pairs with the access key ID.
+- **region** (`string`) : The AWS region code that holds the secret, such as `us-east-1`.
+- **secretId** (`string`) : The friendly name or ARN of the secret to retrieve.
 
-## Configuring the aws.secretmanager getSecretValue operation
+> **Warning:** Treat `accessKeyId` and `secretAccessKey` as secrets. Keep them out of source control.
+
+## Configuring the AWS Secrets Manager Get Secret Value operation
 
 ### Step 6: Add an automation entry point
 
-1. On the low-code canvas, select **+ Add Artifact** and select **Automation** to add a new Automation entry point.
-2. In the **Create New Automation** dialog, select **Create** to accept defaults.
-3. The Automation flow body appears on the canvas with a Start node, an empty body, and an End/Error Handler node.
+1. Select **Add Artifact** on the integration design canvas.
+2. Select **Automation**.
+3. Select **Create** to accept the default settings.
 
-### Step 7: Expand the connection and select the getSecretValue operation
+### Step 7: Expand the connection and configure the Get Secret Value operation
 
-1. Inside the Automation flow body, select the **+** (Add Step) button between the Start node and the End/Error Handler node to open the step-addition panel.
-2. Under **Connections** in the step panel, select the **secretmanagerClient** (aws.secretmanager) connection node to expand it and reveal all available operations.
+1. Select **+** in the automation flow, between **Start** and **Error Handler**.
+2. Expand **secretmanagerClient** to display its operations.
 
-![aws.secretmanager connection node expanded showing all available operations before selection](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_04_operations_panel.png)
+![secretmanagerClient connection expanded in the node panel to display its four operations before selection](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_04_operations_panel.png)
 
-3. Select **Get Secret Value** from the list of operations, then fill in the operation fields:
-   - **Secret Id** : The ARN or name of the secret to retrieve from AWS Secrets Manager, bound to the `awsSecretId` configurable.
-   - **Result** : The name of the local variable that will hold the returned secret value.
-   - **Result Type** : The type of the result variable (`secretmanager:SecretValue`).
-4. Select **Save** to add the getSecretValue step to the automation flow.
+3. Select **Get Secret Value** and enter its required values.
 
-![getSecretValue operation configuration panel with all fields filled](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_05_operation_filled.png)
+- **Secret Id** : The friendly name or ARN of the secret. Bind it to a configurable variable so the integration isn't tied to one secret
+- **Result** : The name of the variable that holds the retrieved secret
 
-### Step 8: Verify the completed integration flow
+![Get Secret Value operation form with the secret identifier bound and the result variable named before saving](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_05_operation_filled.png)
 
-The canvas now shows the completed flow: **Start → secretmanager : getSecretValue (secretValue) → Error Handler → End**, with all nodes connected and no error indicators visible.
-![Completed low-code canvas showing Automation trigger connected to getSecretValue node and End node](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_06_completed_flow.png)
+4. Select **Save**.
+
+### Step 8: Log the Get Secret Value result
+
+Add a **Log Info** action after the operation, and enter a message that reads the secret's name and version from the result variable. The completed flow runs from **Start**, through the operation and the log action, to **Error Handler**.
+
+> **Warning:** Log only metadata such as the secret's name, ARN, or version. Never log the `value` field, because it holds the decrypted secret and log output is rarely as well protected as the secret store.
+
+![Completed automation flow with Start, the Get Secret Value operation, the log action, and Error Handler](/img/connectors/catalog/security-identity/aws.secretmanager/aws_secretmanager_screenshot_06_completed_flow.png)
 
 ## Try it yourself
 

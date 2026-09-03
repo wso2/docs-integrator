@@ -21,23 +21,25 @@ Interact with AWS Secrets Manager to describe and retrieve secrets.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `region` | `Region` | Required | The AWS region where your secrets are stored (e.g., `US_EAST_1`, `EU_WEST_1`). |
-| `auth` | `StaticAuthConfig\|EC2_IAM_ROLE\|DEFAULT_CREDENTIALS` | Required | Authentication configuration: static access key credentials, EC2 IAM role, or default AWS credential chain. |
+| `auth` | `auth:AuthConfig` | Required | Authentication configuration: Any standard credential source supported by `aws.auth` package: `StaticAuthConfig`, `ProfileAuthConfig`, `AssumeRoleConfig`, `WebIdentityConfig`, `SsoAuthConfig`, `ProcessAuthConfig`, `DEFAULT_CREDENTIALS` |
+| `region` | `aws:Region\|string` | Required | AWS region for the Secrets Manager service (e.g., `aws:US_EAST_1`). |
+| `endpoint` | `aws:EndpointConfig` | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. LocalStack, VPC interface endpoints). |
 
 ### Initializing the client
 
 ```ballerina
+import ballerinax/aws;
 import ballerinax/aws.secretmanager;
 
 configurable string accessKeyId = ?;
 configurable string secretAccessKey = ?;
 
 secretmanager:Client secretManagerClient = check new ({
-    region: secretmanager:US_EAST_1,
-    auth: {
-        accessKeyId: accessKeyId,
-        secretAccessKey: secretAccessKey
-    }
+   region: aws:US_EAST_1,
+   auth: {
+      accessKeyId,
+      secretAccessKey
+   }
 });
 ```
 
@@ -78,7 +80,7 @@ Sample response:
   "lastAccessedDate": [1700200000, 0],
   "rotationEnabled": true,
   "owningService": "secretsmanager.amazonaws.com",
-  "primaryRegion": "US_EAST_1",
+  "primaryRegion": "us-east-1",
   "tags": [{"key": "Environment", "value": "Production"}],
   "versionToStages": {
     "v1-abc-123": ["AWSCURRENT"],
@@ -204,7 +206,7 @@ Returns: `Error?`
 Sample code:
 
 ```ballerina
-check secretManagerClient->close();
+check secretManagerClient.close();
 ```
 
 </div>

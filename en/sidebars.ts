@@ -482,7 +482,7 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'AWS Secrets Manager',
-          link: { type: 'doc', id: 'connectors/catalog/security-identity/aws.secretmanager/aws-secrets-manager-connector-overview' },
+          link: { type: 'doc', id: 'connectors/catalog/security-identity/aws.secretmanager/connector-overview' },
           items: [
             'connectors/catalog/security-identity/aws.secretmanager/setup-guide',
             'connectors/catalog/security-identity/aws.secretmanager/actions',
