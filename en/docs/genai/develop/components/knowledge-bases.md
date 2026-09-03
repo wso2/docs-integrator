@@ -86,14 +86,14 @@ Choose **Manually Config WSO2 Cloud Knowledge Base** to open a blank form and en
 
 ![Blank Create WSO2 Cloud Knowledge Base form showing the empty Service URL field and the Knowledge Base Authentication Configuration (Token URL, Client ID, Client Secret).](/img/genai/develop/components/knowledge-bases/07-wso2-cloud-manual-form.png)
 
-### Form fields
+### Connection Form Details
 
 | Field | Required | Default | Available values |
 |---|---|---|---|
 | **Service URL** | Yes | — | The endpoint of the knowledge base service in WSO2 Cloud. |
 | **Knowledge Base Authentication Configuration** | Yes | — | A bearer token, or OAuth2 client credentials (**Token URL**, **Client ID**, **Client Secret**). Knowledge bases connected from WSO2 Cloud use OAuth2 client credentials. |
 
-### Advanced configurations
+#### Advanced configurations
 
 ![Create WSO2 Cloud Knowledge Base form with Advanced Configurations expanded showing Minimum Similarity Threshold (default 0.7), Cohere Reranker API Key, Cohere Reranker Model, Reranker Top N (default 5), and Connection Configuration.](/img/genai/develop/components/knowledge-bases/08-wso2-cloud-advanced.png)
 
