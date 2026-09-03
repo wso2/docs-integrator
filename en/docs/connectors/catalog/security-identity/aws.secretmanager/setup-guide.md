@@ -68,7 +68,7 @@ can use IAM role-based authentication instead of static access keys:
 
 1. Create an IAM role with the required Secrets Manager permissions.
 2. Attach the role to your EC2 instance (or ECS task, Lambda function, etc.).
-3. Use `auth:DEFAULT_CREDENTIALS` as the `auth` value when initializing the connector, with no access keys needed. The default credential provider chain ends at the EC2 instance metadata service, so it picks up the instance profile automatically.
+3. Use `auth:DEFAULT_CREDENTIALS` as the `auth` value when initializing the connector, with no access keys needed. The default credential provider chain tries each supported source in turn and uses the first one that yields credentials, so the role attached to your compute service is picked up automatically: container credentials on an ECS task or EKS pod, and the instance profile served by the instance metadata service (IMDS) on an EC2 instance.
 
 :::note
 IAM role-based auth and default credentials are recommended for production workloads running on AWS, as they eliminate the need to manage static credentials.

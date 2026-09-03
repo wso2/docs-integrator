@@ -8,7 +8,7 @@ title: "Example"
 
 ## What you'll build
 
-Build an automation that retrieves a secret from AWS Secrets Manager and logs the secret's name and version. The integration binds the AWS credentials, region, and secret identifier to configurable variables, so no credential and no secret identifier is stored in the integration itself. The retrieved secret value stays in memory and is never written to the log.
+Build an automation that retrieves a secret from AWS Secrets Manager and logs the secret's name and version. The integration binds the AWS credentials, region, and secret identifier to configurable variables, so no credentials or secret identifiers are stored in the integration itself. The retrieved secret value stays in memory and is never written to the log.
 
 **Operations used:**
 - **Get Secret Value** : Retrieves the contents of the encrypted fields from the specified version of a secret
