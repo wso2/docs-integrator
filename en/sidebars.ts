@@ -2090,6 +2090,88 @@ const sidebars: SidebarsConfig = {
     },
 
     // ─────────────────────────────────────────────
+    // DURABLE WORKFLOWS
+    // "How do I build long-running, crash-safe processes?"
+    // ─────────────────────────────────────────────
+    {
+      type: 'category',
+      label: 'Durable Workflows',
+      collapsed: true,
+      link: { type: 'doc', id: 'workflows/overview' },
+      items: [
+        // Getting Started
+        {
+          type: 'category',
+          label: 'Getting Started',
+          items: [
+            'workflows/getting-started/build-an-order-processing-workflow',
+            'workflows/getting-started/build-a-claim-workflow-agent',
+          ],
+        },
+        // Workflow Features
+        {
+          type: 'category',
+          label: 'Develop Workflows',
+          items: [
+            'workflows/develop/create-workflow',
+            'workflows/develop/start-workflow',
+            'workflows/develop/activities',
+            'workflows/develop/data-events',
+            'workflows/develop/send-data-event',
+            'workflows/develop/human-task-workflow',
+            'workflows/develop/review-activity-and-error-handling',
+            'workflows/develop/durable-timers',
+            {
+              type: 'category',
+              label: 'Prebuilt Activities',
+              link: { type: 'doc', id: 'workflows/develop/prebuilt-activities/index' },
+              items: [
+                'workflows/develop/prebuilt-activities/call-rest-api',
+                'workflows/develop/prebuilt-activities/call-soap-api',
+                'workflows/develop/prebuilt-activities/send-email',
+              ],
+            },
+          ],
+        },
+        // Agentic Workflow Features
+        {
+          type: 'category',
+          label: 'Develop Agentic Workflows',
+          items: [
+            'workflows/agentic/create-durable-agent',
+            'workflows/agentic/run-durable-agent',
+            'workflows/agentic/send-agent-data-event',
+            'workflows/agentic/get-data-event-result',
+            'workflows/agentic/get-agent-result',
+          ],
+        },
+        // Integration Control Plane
+        {
+          type: 'category',
+          label: 'Integration Control Plane',
+          link: { type: 'doc', id: 'workflows/icp/managing-workflows' },
+          items: [
+            'workflows/icp/connect-runtime',
+            'workflows/icp/start-workflow',
+            'workflows/icp/executions',
+            'workflows/icp/human-tasks',
+            'workflows/icp/review-activities',
+          ],
+        },
+        // Tutorials
+        'workflows/tutorials/overview',
+        // API Reference
+        {
+          type: 'category',
+          label: 'API Reference',
+          items: [
+            'workflows/reference/management-api',
+          ],
+        },
+      ],
+    },
+
+    // ─────────────────────────────────────────────
     // TUTORIALS
     // "Show me a complete, real example"
     // ─────────────────────────────────────────────
