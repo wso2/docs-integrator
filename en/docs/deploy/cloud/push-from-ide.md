@@ -63,6 +63,7 @@ A browser opens showing the deployed integration directly on WSO2 Cloud.
 ## What's next
 
 - [View and manage integrations](../../manage/cloud/integrations.md) — Inspect build status, deployment status, and manage the lifecycle of your deployed integrations.
+- [CI/CD overview](../../manage/cloud/cicd/overview.md) — From here on, every commit to the connected branch automatically triggers a new build and deployment. Learn how Git-triggered deployments and deployment pipelines work.
 - [Runtime configurations](../../manage/cloud/configurations/runtime-configurations.md) — Set configurable values per environment and manage reusable configuration groups.
 - [Security configurations](../../manage/cloud/configurations/security-configurations.md) — Secure your integration endpoints with API Key or OAuth2 authentication.
 - [Endpoint configurations](../../manage/cloud/configurations/endpoint-configurations.md) — Control endpoint visibility levels for integrations deployed as Integration as APIs.

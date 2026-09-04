@@ -2406,7 +2406,7 @@ const sidebars: SidebarsConfig = {
         // WSO2 Cloud
         {
           type: 'category',
-          label: 'Deploy to WSO2 Cloud',
+          label: 'WSO2 Cloud',
           link: { type: 'doc', id: 'deploy/cloud/overview' },
           items: [
             'deploy/cloud/push-from-ide',
@@ -2415,11 +2415,7 @@ const sidebars: SidebarsConfig = {
             'deploy/cloud/import-integration',
           ],
         },
-        // Self-hosted: upstream has migrated run-locally / docker /
-        // kubernetes / openshift to deploy/self-hosted/*. The remaining
-        // legacy deploy-operate/deploy/* docs that don't have a new
-        // home yet are listed alongside so they stay reachable until
-        // they're migrated too.
+        // Self-Hosted
         {
           type: 'category',
           label: 'Self-Hosted',
@@ -2428,8 +2424,6 @@ const sidebars: SidebarsConfig = {
             'deploy/self-hosted/containerized-deployment',
             'deploy-operate/deploy/serverless-deployment',
             'deploy-operate/deploy/graalvm-native-images',
-            'deploy-operate/deploy/managing-configurations',
-            'deploy-operate/deploy/scaling-high-availability',
           ],
         },
         // CI/CD
@@ -2441,57 +2435,6 @@ const sidebars: SidebarsConfig = {
             'deploy-operate/cicd/jenkins',
             'deploy-operate/cicd/gitlab',
             'deploy-operate/cicd/azure-devops',
-          ],
-        },
-        // Observe
-        {
-          type: 'category',
-          label: 'Observe',
-          items: [
-            'deploy-operate/observe/observability-overview',
-            'deploy-operate/observe/metrics-overview',
-            'deploy-operate/observe/logging-overview',
-            {
-              type: 'category',
-              label: 'Distributed Tracing',
-              items: [
-                'deploy-operate/observe/jaeger-distributed-tracing',
-                'deploy-operate/observe/zipkin-tracing',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Supported Platforms',
-              items: [
-                'deploy-operate/observe/integration-control-plane-icp',
-                'deploy-operate/observe/recipe-datadog-setup',
-                'deploy-operate/observe/new-relic-integration',
-                'deploy-operate/observe/moesif-api-analytics',
-              ],
-            },
-          ],
-        },
-        // Secure
-        {
-          type: 'category',
-          label: 'Secure',
-          items: [
-            'deploy-operate/secure/keystore-truststore',
-            'deploy-operate/secure/runtime-security',
-            'deploy-operate/secure/authentication',
-            'deploy-operate/secure/api-security-rate-limiting',
-            'deploy-operate/secure/secrets-encryption',
-            'deploy-operate/secure/ip-whitelisting',
-            'deploy-operate/secure/compliance-considerations',
-          ],
-        },
-        // Capacity Planning
-        {
-          type: 'category',
-          label: 'Capacity Planning',
-          items: [
-            'deploy-operate/capacity-planning/overview',
-            'deploy-operate/capacity-planning/performance-benchmarks',
           ],
         },
       ],
@@ -2675,6 +2618,68 @@ const sidebars: SidebarsConfig = {
                 'manage/icp/user-stores/sso-configuration',
               ],
             },
+          ],
+        },
+        // Custom & Third-Party Setups: operational tooling independent of
+        // both WSO2 Cloud and ICP control planes.
+        {
+          type: 'category',
+          label: 'Custom & Third-Party Setups',
+          items: [
+            // Self-Hosted runtime management
+            'deploy-operate/deploy/managing-configurations',
+            'deploy-operate/deploy/scaling-high-availability',
+            // Observability
+            {
+              type: 'category',
+              label: 'Observe',
+              items: [
+                'deploy-operate/observe/observability-overview',
+                'deploy-operate/observe/metrics-overview',
+                'deploy-operate/observe/logging-overview',
+                {
+                  type: 'category',
+                  label: 'Distributed Tracing',
+                  items: [
+                    'deploy-operate/observe/jaeger-distributed-tracing',
+                    'deploy-operate/observe/zipkin-tracing',
+                  ],
+                },
+                {
+                  type: 'category',
+                  label: 'Third-Party Platforms',
+                  items: [
+                    'deploy-operate/observe/integration-control-plane-icp',
+                    'deploy-operate/observe/recipe-datadog-setup',
+                    'deploy-operate/observe/new-relic-integration',
+                    'deploy-operate/observe/moesif-api-analytics',
+                  ],
+                },
+              ],
+            },
+            // Security
+            {
+              type: 'category',
+              label: 'Secure',
+              items: [
+                'deploy-operate/secure/keystore-truststore',
+                'deploy-operate/secure/runtime-security',
+                'deploy-operate/secure/authentication',
+                'deploy-operate/secure/api-security-rate-limiting',
+                'deploy-operate/secure/secrets-encryption',
+                'deploy-operate/secure/ip-whitelisting',
+                'deploy-operate/secure/compliance-considerations',
+              ],
+            },
+          ],
+        },
+        // Capacity Planning: relevant across all deployment and management options.
+        {
+          type: 'category',
+          label: 'Capacity Planning',
+          items: [
+            'deploy-operate/capacity-planning/overview',
+            'deploy-operate/capacity-planning/performance-benchmarks',
           ],
         },
       ],
