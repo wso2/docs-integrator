@@ -431,6 +431,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'AWS DynamoDB',
+          link: { type: 'doc', id: 'connectors/catalog/database/aws.dynamodb/connector-overview' },
+          items: [
+            'connectors/catalog/database/aws.dynamodb/setup-guide',
+            'connectors/catalog/database/aws.dynamodb/actions',
+            'connectors/catalog/database/aws.dynamodb/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'AWS Marketplace MPE',
           link: { type: 'doc', id: 'connectors/catalog/cloud-infrastructure/aws.marketplace.mpe/aws-marketplace-mpe-connector-overview' },
           items: [
@@ -487,6 +497,16 @@ const sidebars: SidebarsConfig = {
             'connectors/catalog/security-identity/aws.secretmanager/setup-guide',
             'connectors/catalog/security-identity/aws.secretmanager/actions',
             'connectors/catalog/security-identity/aws.secretmanager/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'AWS SES',
+          link: { type: 'doc', id: 'connectors/catalog/marketing-social/aws.ses/connector-overview' },
+          items: [
+            'connectors/catalog/marketing-social/aws.ses/setup-guide',
+            'connectors/catalog/marketing-social/aws.ses/actions',
+            'connectors/catalog/marketing-social/aws.ses/example',
           ],
         },
         {
