@@ -7,13 +7,13 @@ import { connectorVersionedDocs } from './src/utils/sidebarUtils';
  * Structure follows the Documentation Blueprint (March 2026).
  * Seven top-level sections answering seven developer questions:
  *
- *   Get Started       — "I'm new — what is this and how do I begin?"
- *   Develop           — "How do I build, transform, and test X?"
+ *   Getting Started   — "I'm new — what is this and how do I begin?"
+ *   Development       — "How do I build, transform, and test X?"
  *   Connectors        — "Can I connect to Y?"
  *   GenAI             — "How do I build AI agents, RAG, or MCP?"
  *   Tutorials         — "Show me a complete, real example"
- *   Deploy            — "How do I ship, run, and secure this?"
- *   Manage            — "How do I set up and manage ICP?"
+ *   Deployment        — "How do I ship, run, and secure this?"
+ *   Management        — "How do I set up and manage ICP?"
  *   Reference         — "What's the exact syntax / config / API for Z?"
  */
 const sidebars: SidebarsConfig = {
@@ -24,7 +24,7 @@ const sidebars: SidebarsConfig = {
     // ─────────────────────────────────────────────
     {
       type: 'category',
-      label: 'Get Started',
+      label: 'Getting Started',
       collapsed: true,
       link: { type: 'doc', id: 'get-started/introduction' },
       items: [
@@ -67,14 +67,14 @@ const sidebars: SidebarsConfig = {
     // ─────────────────────────────────────────────
     {
       type: 'category',
-      label: 'Develop',
+      label: 'Development',
       collapsed: true,
       link: { type: 'doc', id: 'develop/develop' },
       items: [
         // 6.1 Create Integrations
         {
           type: 'category',
-          label: 'Create Integrations',
+          label: 'Creating Integrations',
           items: [
             'develop/create-integrations/create-a-new-integration',
             'develop/create-integrations/open-existing-integration',
@@ -88,7 +88,7 @@ const sidebars: SidebarsConfig = {
         // 6.2 Understand the IDE
         {
           type: 'category',
-          label: 'Understand the IDE',
+          label: 'IDE Overview',
           link: { type: 'doc', id: 'develop/understand-ide/understand-ide' },
           items: [
             'develop/understand-ide/integrator-app',
@@ -234,7 +234,7 @@ const sidebars: SidebarsConfig = {
         // 6.5 Transform (per blueprint)
         {
           type: 'category',
-          label: 'Transform',
+          label: 'Transformations',
           items: [
             'develop/transform/json',
             'develop/transform/xml',
@@ -260,7 +260,7 @@ const sidebars: SidebarsConfig = {
         // 6.6 Try & Test
         {
           type: 'category',
-          label: 'Test',
+          label: 'Testing',
           link: { type: 'doc', id: 'develop/test/overview' },
           items: [
             {
@@ -295,7 +295,7 @@ const sidebars: SidebarsConfig = {
         // 6.7 Debug
         {
           type: 'category',
-          label: 'Debug',
+          label: 'Debugging',
           items: [
             'develop/debugging/editor',
             'develop/debugging/features',
@@ -348,14 +348,7 @@ const sidebars: SidebarsConfig = {
                 'develop/tools/migration-tools/migrate-from-azure-logic-apps',
               ],
             },
-            {
-              type: 'category',
-              label: 'Other',
-              collapsed: true,
-              items: [
-                'develop/tools/other/scan-tool',
-              ],
-            },
+            'develop/tools/other/scan-tool',
           ],
         },
       ],
@@ -1981,7 +1974,7 @@ const sidebars: SidebarsConfig = {
     // ── Build Your Own ──
     {
       type: 'category',
-      label: 'Build Your Own',
+      label: 'Custom Connectors',
       link: { type: 'doc', id: 'connectors/build-your-own/build-own' },
       items: [
         'connectors/build-your-own/create-from-openapi-spec',
@@ -2138,14 +2131,14 @@ const sidebars: SidebarsConfig = {
     // ─────────────────────────────────────────────
     {
       type: 'category',
-      label: 'Deploy',
+      label: 'Deployment',
       collapsed: true,
       link: { type: 'doc', id: 'deploy/overview' },
       items: [
         // WSO2 Cloud
         {
           type: 'category',
-          label: 'Deploy to WSO2 Cloud',
+          label: 'WSO2 Cloud',
           link: { type: 'doc', id: 'deploy/cloud/overview' },
           items: [
             'deploy/cloud/push-from-ide',
@@ -2241,7 +2234,7 @@ const sidebars: SidebarsConfig = {
     // ─────────────────────────────────────────────
     {
       type: 'category',
-      label: 'Manage',
+      label: 'Management',
       collapsed: true,
       link: { type: 'doc', id: 'manage/overview' },
       items: [
@@ -2504,26 +2497,19 @@ const sidebars: SidebarsConfig = {
         'reference/ballerina-by-example',
         'reference/ballerina-specifications',
         'reference/ai-usage-and-data-handling-guidelines',
-        // Miscellaneous
+        // Network
         {
           type: 'category',
-          label: 'Miscellaneous',
+          label: 'Network',
           items: [
             'reference/miscellaneous/configure-a-network-proxy',
             'reference/miscellaneous/proxy-ballerina-central-with-maven-repository',
           ],
         },
-        // Appendix
-        {
-          type: 'category',
-          label: 'Appendix',
-          items: [
-            'reference/appendix/error-code',
-            'reference/appendix/glossary',
-            'reference/appendix/faq',
-            'reference/appendix/release-notes',
-          ],
-        },
+        'reference/appendix/error-code',
+        'reference/appendix/glossary',
+        'reference/appendix/faq',
+        'reference/appendix/release-notes',
       ],
     },
   ],
