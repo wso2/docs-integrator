@@ -511,6 +511,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'AWS SimpleDB',
+          link: { type: 'doc', id: 'connectors/catalog/database/aws.simpledb/connector-overview' },
+          items: [
+            'connectors/catalog/database/aws.simpledb/setup-guide',
+            'connectors/catalog/database/aws.simpledb/actions',
+            'connectors/catalog/database/aws.simpledb/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'AWS SNS',
           link: { type: 'doc', id: 'connectors/catalog/communication/aws.sns/aws-sns-connector-overview' },
           items: [
