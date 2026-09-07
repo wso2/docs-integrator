@@ -7,16 +7,76 @@ description: "How to set up and configure the ballerinax/aws.simpledb connector.
 
 # Setup Guide
 
-Configure your AWS account to grant the connector access to Amazon SimpleDB before initializing the client.
+This guide walks you through setting up your AWS account and obtaining the credentials required to use the AWS SimpleDB connector.
 
 ## Prerequisites
 
-- An active AWS account
-- Permissions to create IAM users and attach IAM policies in the AWS Management Console or via the AWS CLI
+- An active AWS account with access to one of the regions where [Amazon SimpleDB](https://aws.amazon.com/simpledb/) is available
+- Permissions to create IAM users and attach IAM policies in the AWS Management Console
 
-## Confirm SimpleDB availability
+## Step 1: Create an IAM user
 
-Amazon SimpleDB is a legacy service with no AWS Management Console UI. It is available only in the following eight regions:
+1. Log in to the [AWS Management Console](https://console.aws.amazon.com/).
+2. Navigate to **IAM** (Identity and Access Management).
+3. Select **Users** in the left sidebar, then select **Create user**.
+4. Enter a user name (for example, `ballerina-simpledb-connector`) and select **Next**.
+5. Select **Attach policies directly**.
+6. Select **Create policy**, open the **JSON** tab, and paste the policy below, then attach it. Replace `<REGION>`, `<ACCOUNT_ID>`, and `<DOMAIN_NAME>` with the values for your deployment, or use `domain/*` to grant access to every domain in the account.
+
+   ```json
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Effect": "Allow",
+               "Action": "sdb:ListDomains",
+               "Resource": "*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "sdb:CreateDomain",
+                   "sdb:DomainMetadata",
+                   "sdb:DeleteDomain",
+                   "sdb:GetAttributes",
+                   "sdb:PutAttributes",
+                   "sdb:DeleteAttributes",
+                   "sdb:Select"
+               ],
+               "Resource": "arn:aws:sdb:<REGION>:<ACCOUNT_ID>:domain/<DOMAIN_NAME>"
+           }
+       ]
+   }
+   ```
+
+   `sdb:ListDomains` operates across the account and takes no domain resource, so it stays in its own statement scoped to `*`. Every other action, including `CreateDomain`, is scoped to the domain ARN.
+
+7. Select **Next**, review the settings, and select **Create user**.
+
+:::note
+For a screenshot-by-screenshot walkthrough of the IAM user creation and access key generation steps, see the [AWS SQS setup guide](../../messaging/aws.sqs/setup-guide.md). The console flow is identical, only the attached policy differs.
+:::
+
+:::tip
+For production workloads, consider using an IAM role with temporary credentials via AWS STS instead of long-lived access keys.
+:::
+
+## Step 2: Generate access keys
+
+1. In the IAM console, select the user you created.
+2. Go to the **Security credentials** tab.
+3. Under **Access keys**, select **Create access key**.
+4. Select the **Application running outside AWS** use case and select **Next**.
+5. Optionally add a description tag, then select **Create access key**.
+6. Copy the **Access key ID** and **Secret access key**.
+
+:::warning
+The secret access key is shown only once at creation time. Store it securely and do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply credentials at runtime.
+:::
+
+## Step 3: Identify your AWS region
+
+Determine the AWS region that hosts your SimpleDB domains. Amazon SimpleDB is a legacy service with no AWS Management Console UI, and it is available in only these eight regions:
 
 | Region | Endpoint |
 |--------|----------|
@@ -31,92 +91,6 @@ Amazon SimpleDB is a legacy service with no AWS Management Console UI. It is ava
 
 :::note
 The `us-east-1` region uses the region-less `sdb.amazonaws.com` host; the connector resolves this automatically. For new applications, AWS recommends Amazon DynamoDB instead of SimpleDB.
-:::
-
-## Obtain IAM credentials
-
-Create an IAM user for the integration, then generate an access key ID and secret access key for it.
-
-### Create an IAM user
-
-1. In the AWS Management Console, search for **IAM** in the services search bar and select it.
-
-   ![Search IAM](/img/connectors/catalog/database/aws.simpledb/setup/create-user-1.png)
-
-2. Select **Users** in the left navigation pane.
-
-   ![Select Users](/img/connectors/catalog/database/aws.simpledb/setup/create-user-2.png)
-
-3. Select **Create user**.
-
-   ![Create user](/img/connectors/catalog/database/aws.simpledb/setup/create-user-3.png)
-
-4. Enter a suitable **User name** and select **Next**.
-
-   ![Specify user details](/img/connectors/catalog/database/aws.simpledb/setup/specify-user-details.png)
-
-5. Add the required permissions by adding the user to a group, copying permissions, or attaching policies directly. Attach the policy from [Attach SimpleDB permissions](#attach-simpledb-permissions) below, or select **Next** and attach it once the user exists.
-
-   ![Set user permissions](/img/connectors/catalog/database/aws.simpledb/setup/set-user-permissions.png)
-
-6. Review the details and select **Create user**.
-
-   ![Review and create user](/img/connectors/catalog/database/aws.simpledb/setup/review-create-user.png)
-
-### Get the access key ID and secret access key
-
-1. Select the user you just created from the **Users** list.
-
-   ![Select user](/img/connectors/catalog/database/aws.simpledb/setup/users.png)
-
-2. Go to the **Security credentials** tab and select **Create access key**.
-
-   ![Create access key](/img/connectors/catalog/database/aws.simpledb/setup/create-access-key-1.png)
-
-3. Select your use case and select **Next**.
-
-   ![Select use case](/img/connectors/catalog/database/aws.simpledb/setup/select-usecase.png)
-
-4. Copy the **Access key ID** and **Secret access key**. Use these credentials to authenticate your integration.
-
-   ![Retrieve access key](/img/connectors/catalog/database/aws.simpledb/setup/retrieve-access-key.png)
-
-:::warning
-The secret access key is shown only once. Copy both values immediately or download the CSV file. If lost, you must create a new access key pair.
-:::
-
-## Attach SimpleDB permissions
-
-Attach an IAM policy to the user that grants the specific SimpleDB actions your application requires. `ListDomains` operates across the account and takes no domain resource, so it must use a wildcard resource. Every other action, including `CreateDomain`, is scoped to the domain ARN.
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "sdb:ListDomains",
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "sdb:CreateDomain",
-                "sdb:DomainMetadata",
-                "sdb:DeleteDomain",
-                "sdb:GetAttributes",
-                "sdb:PutAttributes",
-                "sdb:DeleteAttributes",
-                "sdb:Select"
-            ],
-            "Resource": "arn:aws:sdb:<REGION>:<ACCOUNT_ID>:domain/<DOMAIN_NAME>"
-        }
-    ]
-}
-```
-
-:::note
-Replace `<REGION>`, `<ACCOUNT_ID>`, and `<DOMAIN_NAME>` with the values appropriate for your deployment. Use `domain/*` as the resource only if you intend to grant access to all domains in the account.
 :::
 
 ## Next steps
