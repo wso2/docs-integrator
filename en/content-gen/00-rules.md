@@ -183,6 +183,8 @@ The only accepted exception is the **What's next** section, where em dashes sepa
 ## Formatting Rules
 
 - **Sidebar items must use title case** (capitalize all major words; lowercase articles, prepositions, and coordinating conjunctions unless they are the first word).
+- **Sidebar labels at the same level must share one grammatical form.** Use noun phrases (`Getting Started`, `Development`, `Deployment`, `Management`), not a mix of bare verbs, verb phrases, and nouns. Noun phrases are preferred because catalog sections such as `Integration Artifacts`, `Guides`, and `Reference` have no natural verb equivalent.
+- **Do not add single-item wrapper categories or vague grouping labels** such as `Other`, `Miscellaneous`, or `Appendix`. Promote the contents to the parent level, or name the group for what it actually contains.
 - Use Docusaurus admonitions: `:::tip`, `:::info`, `:::warning`, `:::danger`
 - Use tables for comparisons and feature lists
 - Use `<details>` for collapsible sections (prerequisites, advanced topics)
