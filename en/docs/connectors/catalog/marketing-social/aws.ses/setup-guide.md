@@ -34,7 +34,7 @@ A new account is in the Amazon SES **sandbox**, where mail can only be sent to v
 3. Select **Users** in the left sidebar, then select **Create user**.
 4. Enter a user name (for example, `ballerina-ses-connector`) and select **Next**.
 5. Select **Attach policies directly**.
-6. Select **Create policy**, open the **JSON** tab, and paste the policy below, then attach it. Replace `<REGION>`, `<ACCOUNT_ID>`, and `<VERIFIED_IDENTITY>` with the values for the identity you verified, or use `identity/*` to grant access to every verified identity in the account.
+6. Select **Create policy**, open the **JSON** tab, and paste the policy below, then attach it. Replace `<REGION>`, `<ACCOUNT_ID>`, `<VERIFIED_IDENTITY>`, and `<TEMPLATE_NAME>` with the values for your deployment, or use `identity/*` to grant access to every verified identity in the account.
 
    ```json
    {
@@ -48,6 +48,11 @@ A new account is in the Amazon SES **sandbox**, where mail can only be sent to v
                    "ses:SendCustomVerificationEmail"
                ],
                "Resource": "arn:aws:ses:<REGION>:<ACCOUNT_ID>:identity/<VERIFIED_IDENTITY>"
+           },
+           {
+               "Effect": "Allow",
+               "Action": "ses:SendCustomVerificationEmail",
+               "Resource": "arn:aws:ses:<REGION>:<ACCOUNT_ID>:custom-verification-email-template/<TEMPLATE_NAME>"
            },
            {
                "Effect": "Allow",
@@ -69,7 +74,7 @@ A new account is in the Amazon SES **sandbox**, where mail can only be sent to v
    }
    ```
 
-   None of the read actions in the second statement can be scoped to an identity ARN, so they stay in a statement of their own scoped to `*` — the two-statement split Amazon SES [documents](https://docs.aws.amazon.com/ses/latest/dg/control-user-access.html) for restricting which identities a user may send from. Some do accept a narrower resource of their own, such as a contact list or template ARN, if you want to scope them further. Add the matching `Create*`, `Update*`, and `Delete*` actions only if your application manages these resources rather than just reading them.
+   `ses:SendCustomVerificationEmail` is granted on both the identity and the template ARN — drop the second statement if you don't send custom verification email. The read actions in the last statement can't be scoped to an identity, so they use `*`; see [controlling access to identities](https://docs.aws.amazon.com/ses/latest/dg/control-user-access.html). Add `Create*`, `Update*`, and `Delete*` actions only if your application manages these resources.
 
 7. Select **Next**, review the settings, and select **Create user**.
 
