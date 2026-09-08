@@ -4,7 +4,7 @@ title: "Overview"
 
 # Overview
 
-Amazon Redshift is a fully managed, petabyte-scale cloud data warehouse service. The Ballerina `ballerinax/aws.redshift` connector (v1.2.1) provides programmatic access to Redshift clusters via JDBC, enabling you to execute queries, perform DML/DDL operations, run batch statements, and call stored procedures from your Ballerina integration flows.
+Amazon Redshift is a fully managed, petabyte-scale cloud data warehouse service. The Redshift connector provides programmatic access to Redshift clusters via JDBC, enabling you to execute queries, perform DML/DDL operations, run batch statements, and call stored procedures from your Ballerina integration flows.
 
 
 ## Key features
