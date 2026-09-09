@@ -25,7 +25,7 @@ Follow the steps below to create a managed PostgreSQL database:
 
 1. Sign in to the WSO2 Cloud Console at [https://console.devant.dev/](https://console.devant.dev/).
 2. In the header, click the **Organization** list. This opens the organization home page.
-3. In the left navigation menu, click **Dependencies**, then **Databases**.
+3. In the left navigation menu, click **Admin**, then **Databases**.
 4. Click **Create** and select **PostgreSQL** as the database type. Provide a display name for this server and follow the instructions.
 5. Select your preferred cloud provider from AWS, Azure, GCP, or DigitalOcean.
     - The cloud provider is used to provision the compute and storage infrastructure for your database.
@@ -41,7 +41,7 @@ Follow the steps below to create a managed PostgreSQL vector database:
 
 1. Sign in to the WSO2 Cloud Console at [https://console.devant.dev/](https://console.devant.dev/).
 2. In the header, click the **Organization** list. This opens the organization home page.
-3. In the left navigation menu, click **Dependencies**, then **Vector Databases**.
+3. In the left navigation menu, click **Admin**, then **Vector Databases**.
 4. Follow steps 4 onwards in the [Create a managed PostgreSQL database](#create-a-managed-postgresql-database) section.
 
 ### Connect to your managed PostgreSQL database
@@ -103,7 +103,7 @@ MySQL is a user-friendly, flexible, open-source relational database management s
 Follow the steps below to create a managed MySQL database:
 
 1. From the environment list on the header, located next to the **Deployment Tracks** list, select your **Organization**.
-2. In the left navigation menu, click **Dependencies**, then **Databases**.
+2. In the left navigation menu, click **Admin**, then **Databases**.
 3. Click **Create** and select **MySQL** as the database type. Provide a display name for this server and follow the instructions.
 4. Select your preferred cloud provider from AWS, Azure, GCP, and DigitalOcean.
     - WSO2 Cloud uses the cloud provider to provision the compute and storage infrastructure for your database.
@@ -179,7 +179,7 @@ Follow the steps below to create a Managed Cache:
 
 1. Sign in to the WSO2 Cloud Console at [https://console.devant.dev/](https://console.devant.dev).
 2. In the header, click the **Organization** list. This opens the organization home page.
-3. In the left navigation menu, click **Dependencies**, then click **Databases**.
+3. In the left navigation menu, click **Admin**, then **Databases**.
 4. Click **+ Create** and select **Managed Cache** as the data store type. Provide a display name for this server and follow the instructions.
 5. Select a preferred cloud provider (AWS, Azure, GCP, or DigitalOcean).
     - The cloud provider provisions the compute and storage infrastructure for your data store.
@@ -309,7 +309,7 @@ To register credentials for a database, follow these steps:
 
 1. Sign in to the [WSO2 Cloud Console](https://console.devant.dev/).
 2. Go to the WSO2 Cloud Console header and select your organization from the **Organization** list.
-3. In the left navigation menu, click **Dependencies**, then click **Databases**.
+3. In the left navigation menu, click **Admin**, then **Databases**.
 4. Click on a required database to view its details.
 5. Click the **Databases** tab.
 6. Click to expand the database for which you want to register credentials, then click **Add Credentials**.
@@ -340,6 +340,7 @@ To remove a database or cache that you added to the Marketplace, click the corre
 
 ## What's next
 
+- [Managed message brokers](managed-message-brokers.md) — Create managed Kafka servers for high-throughput event streaming.
 - [WSO2 Cloud overview](../overview.md) — How WSO2 Cloud manages your deployed integrations end to end.
 - [Configurations overview](../configurations/overview.md) — Set runtime values, secrets, and other configuration per environment.
 

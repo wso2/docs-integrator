@@ -19,4 +19,5 @@ If you want to upgrade the service plan of a platform service you have created, 
 ## What's next
 
 - [Managed databases and caches](../platform-services/managed-databases.md) — Service plans, high-availability tiers, and connection limits for managed PostgreSQL, MySQL, and Cache services.
+- [Managed message brokers](../platform-services/managed-message-brokers.md) — Service plans, high availability, and the backup model for managed Kafka servers.
 - [WSO2 Cloud overview](../overview.md) — How WSO2 Cloud manages your deployed integrations end to end.

@@ -12,7 +12,7 @@ Follow these steps to create a managed PostgreSQL database:
 
 1. Sign in to the WSO2 Cloud.
 2. In the header, open the **Organization** list and select your organization.
-3. In the left navigation menu, click **Dependencies** then **Databases**.
+3. In the left navigation menu, click **Admin**, then **Databases**.
 4. Click **Create** and choose **PostgreSQL**. Enter a display name and follow the prompts.
 5. Choose a cloud provider: AWS, Azure, GCP, or DigitalOcean.
     - The provider determines the underlying compute and storage for the database.
@@ -26,7 +26,7 @@ To create a managed PostgreSQL vector database:
 
 1. Sign in to the WSO2 Cloud.
 2. In the header, select your **Organization**.
-3. In the left navigation menu, click **Dependencies** then **Vector Databases**.
+3. In the left navigation menu, click **Admin**, then **Vector Databases**.
 4. Follow step 4 onwards in the [Create a managed PostgreSQL database](#create-a-managed-postgresql-database) section.
 
 ## Connect to your managed PostgreSQL database
