@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: Chunkers
-description: Reference for every Chunker in WSO2 Integrator. Covers the AUTO and DISABLE constants, Generic Recursive Chunker, Markdown Chunker, HTML Chunker, and the Devant remote chunker, including strategies, defaults, and create form fields.
+description: Reference for every Chunker in WSO2 Integrator. Covers the AUTO and DISABLE constants, Generic Recursive Chunker, Markdown Chunker, and HTML Chunker, including strategies, defaults, and create form fields.
 keywords: [wso2 integrator, chunker, rag, text splitting, chunking strategy, knowledge base, embedding]
 ---
 
@@ -38,16 +38,15 @@ Inside the **Create Vector Knowledge Base** form click **+ Create New Chunker**.
 
 ## Implementations overview
 
-All three local chunkers ship in the core `ballerina/ai` package. The Devant Chunker is a remote implementation that delegates the work to the WSO2 Integration Platform.
+All three local chunkers ship in the core `ballerina/ai` package.
 
 | Chunker | Module | Default strategy | Use when |
 |---|---|---|---|
 | **Generic Recursive** | `ballerina/ai` | `PARAGRAPH` | Plain text. Falls back through paragraph, sentence, line, word, then character. |
 | **Markdown** | `ballerina/ai` | `MARKDOWN_HEADER` | Markdown documents. Splits on headings first, falls back through code block, horizontal line, paragraph, line, sentence, word, then character. |
 | **HTML** | `ballerina/ai` | `HTML_HEADER` | HTML documents. Splits on `<h1>`–`<h6>`, falls back through `<p>`, `<br>`, sentence, word, character. |
-| **Devant** | [`ballerinax/ai.devant`](https://central.ballerina.io/ballerinax/ai.devant/latest) | `RECURSIVE` | Binary documents (PDF, DOCX, PPTX). Delegates to the WSO2 Integration Platform. |
 
-> All four chunkers share the same two top-level parameters: **Max Chunk Size** (the cap, in characters, per chunk) and **Max Overlap Size** (characters reused at the boundary between adjacent chunks for context continuity). The local chunkers default to `200` and `40`; the Devant chunker defaults to `500` and `50`.
+> All three chunkers share the same two top-level parameters: **Max Chunk Size** (the cap, in characters, per chunk) and **Max Overlap Size** (characters reused at the boundary between adjacent chunks for context continuity). Both default to `200` and `40`.
 
 ## Generic Recursive Chunker
 
@@ -138,35 +137,6 @@ No required fields.
 | `HTML_PARAGRAPH` | `<p>` tags. Falls back through `HTML_LINE`, `SENTENCE`, `WORD`, `CHARACTER`. |
 | `HTML_LINE` | `<br>` tags. Falls back through `SENTENCE`, `WORD`, `CHARACTER`. |
 | `SENTENCE` / `WORD` / `CHARACTER` | Same semantics as the other chunkers. |
-
-## Devant Chunker
-
-A remote chunker that delegates the actual splitting to the WSO2 Integration Platform. Useful when you have **binary** documents (PDF, DOCX, PPTX) that the local chunkers can't read directly. Pair it with the Devant Binary Data Loader to read the file as a binary document. 
-
-Official website: [WSO2 Integration Platform](https://wso2.com/integration-platform/).
-
-### Create form
-
-The Devant Chunker is added from the same **Select Chunker** picker. Its create form requires connecting to the WSO2 Integration Platform.
-
-| Field | Required | Default | Available values |
-|---|---|---|---|
-| **Service URL** | Yes | — | The WSO2 Integration Platform service endpoint URL. |
-| **Access Token** | Yes | — | Access token for authenticating with WSO2 Integration Platform. |
-
-### Advanced configurations
-
-| Field | Default | Available values | What it controls |
-|---|---|---|---|
-| **Maximum Chunk Size in Characters** | `500` | Any positive integer | Max characters per chunk. |
-| **Maximum Overlap Size in Characters** | `50` | Any non-negative integer | Overlap characters between adjacent chunks. |
-| **Chunking Strategy** | `RECURSIVE` | `RECURSIVE`, `PARAGRAPH`, `SENTENCE`, `CHARACTER` | The chunking strategy WSO2 Integration Platform uses. |
-
-Plus the [Standard HTTP Advanced Configurations](./model-providers.md#standard-http-advanced-configurations).
-
-> Only binary documents are accepted. The document's metadata must include a file name so WSO2 Integration Platform can detect the source format.
-
----
 
 ## Selecting a chunk size
 
