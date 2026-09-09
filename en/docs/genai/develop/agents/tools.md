@@ -257,6 +257,7 @@ To configure a tool, click **Edit** and configure the following fields.
 
 ## What's next
 
+- **[Identity & access management](identity-and-access-management.md)** - Secure agents, tools, and integrations using authentication and authorization.
 - **[Memory](memory.md)** — Make the agent’s tool calls remember earlier turns.
 - **[Observability](observability.md)** — See which tools the agent actually selects.
 - **[Evaluations](evaluations/overview.md)** — Learn how to prevent regressions in AI agent quality.

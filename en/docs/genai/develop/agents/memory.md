@@ -193,5 +193,6 @@ The following table provides general recommendations for choosing a memory setup
 
 ## What's next
 
+- **[Identity & access management](identity-and-access-management.md)** - Secure agents, tools, and integrations using authentication and authorization.
 - **[Observability](observability.md)** — See which tools the agent actually selects.
 - **[Evaluations](evaluations/overview.md)** — Learn how to prevent regressions in AI agent quality.
