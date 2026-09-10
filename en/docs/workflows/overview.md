@@ -6,11 +6,22 @@ sidebar_label: Overview
 slug: /workflows/overview
 ---
 
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Durable Workflows
 
 Most integrations start simple and end up long-lived: an order needs a manager's approval, a claim waits days for supporting documents, a payment needs a retry after a gateway hiccup. A normal program loses everything when the process restarts — a **durable workflow does not**.
 
-WSO2 Integrator lets you design workflows that:
+<ThemedImage
+    alt="The orderWorkflow diagram: Start, the reserveInventory activity, a Wait for paymentInfo node fed from outside the flow, the sendConfirmationEmail activity, and the end node"
+    sources={{
+        light: useBaseUrl('/img/workflows/overview/workflow-diagram-light.png'),
+        dark: useBaseUrl('/img/workflows/overview/workflow-diagram-dark.png'),
+    }}
+/>
+
+A Workflow is a step-by-step process which completes a larger task. WSO2 Integrator lets you design workflows that: 
 
 - **Survive crashes and restarts** — every completed step is recorded, and the workflow resumes exactly where it left off. A finished step is never re-executed.
 - **Wait for as long as it takes** — pause for hours, days, or months for a human decision or an external event, consuming no threads or memory while suspended.
@@ -42,8 +53,15 @@ Both run on the same durable runtime, so an AI agent gets crash-safety, human ta
 - **[Send a data event](develop/send-data-event.md):** Deliver a value into a waiting run, using the workflow ID it was started with.
 - **[Await human task](develop/human-task-workflow.md):** Pause for role-based human decisions and external data, for as long as it takes.
 - **[Error handling and review activities](develop/review-activity-and-error-handling.md):** Approval gates before risky steps and human-reviewed retries after failures.
-- **[Durable agentic workflows](agentic/create-durable-agent.md):** AI agents with durable activities, events, human tasks, and agent-to-agent collaboration.
 - **[Prebuilt activities](develop/prebuilt-activities/index.md):** Durable REST, SOAP, and email calls with no wrapper to write.
+
+## Develop agentic workflows
+
+- **[Create a durable agent](agentic/create-durable-agent.md):** Describe the goal in natural language, and give the agent activities, data events, and human tasks as its capabilities.
+- **[Run a durable agent](agentic/run-durable-agent.md):** Start an agent instance from an integration flow, and bind the instance ID the rest of the flow needs.
+- **[Send an agent data event](agentic/send-agent-data-event.md):** Deliver one turn on a channel the running agent listens on, and keep the correlation token it returns.
+- **[Get a data event result](agentic/get-data-event-result.md):** Read the agent's answer to a sent turn, using that correlation token.
+- **[Get an agent result](agentic/get-agent-result.md):** Read what an agent instance finally produced, addressed by its instance ID.
 
 ## Manage running workflows
 
@@ -53,10 +71,6 @@ Both run on the same durable runtime, so an AI agent gets crash-safety, human ta
 - **[Workflow executions](icp/executions.md):** Follow a run through its timeline, execution graph, and history, and suspend, resume, or terminate it.
 - **[Complete human tasks](icp/human-tasks.md):** Decide the tasks a workflow is waiting on, from the task inbox.
 - **[Review activities](icp/review-activities.md):** Approve, correct, or reject an activity before it runs or after it fails.
-
-## Tutorials
-
-- **[Tutorials](tutorials/overview.md):** Complete, step-by-step examples for each workflow feature.
 
 ## Reference
 

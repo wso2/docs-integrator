@@ -2145,8 +2145,6 @@ const sidebars: SidebarsConfig = {
             'workflows/icp/review-activities',
           ],
         },
-        // Tutorials
-        'workflows/tutorials/overview',
         // API Reference
         {
           type: 'category',
