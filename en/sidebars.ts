@@ -2507,6 +2507,7 @@ const sidebars: SidebarsConfig = {
       link: { type: 'doc', id: 'manage/overview' },
       items: [
         'manage/choosing-a-control-plane',
+        'manage/releases',
         // Cloud
         {
           type: 'category',
