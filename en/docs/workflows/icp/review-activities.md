@@ -7,6 +7,10 @@ sidebar_label: "Review Activities"
 
 # Review Activities
 
+:::warning Work in progress
+This page is still being written, so parts of it may be incomplete or change before release.
+:::
+
 A review activity is a decision attached to an activity rather than a free-standing task. A workflow raises one in two situations: before a sensitive step runs, so a person can approve it, and after a step fails, so a person can decide whether to try again. Both land on the **Review Activities** tab, where you can see the arguments the step would run with, correct them, and let it proceed, or reject it and hand the outcome back to the workflow.
 
 For how workflows declare these gates, see [Error handling and review activities](../develop/review-activity-and-error-handling.md).

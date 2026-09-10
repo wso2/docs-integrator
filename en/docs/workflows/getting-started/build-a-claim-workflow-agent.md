@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Build a Claim Handling Agent"
-description: Build your first durable agentic workflow in WSO2 Integrator — an AI agent that validates expense claims and pays them only after a manager approves.
+description: Build your first durable agentic workflow in WSO2 Integrator — an AI agent that validates expense claims and pays them only after a Finance reviewer approves.
 keywords: [wso2 integrator, durable workflow, agentic workflow, durable agent, claim workflow, human in the loop, approval]
 ---
 
@@ -12,7 +12,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Build a Claim Handling Agent
 
-**Time:** 15 minutes | **What you'll build:** A durable AI agent that receives expense claims, validates them, and pays them out — but only after a manager approves the payment from the Integration Control Plane. If the process crashes while waiting, it resumes exactly where it left off.
+**Time:** 15 minutes | **What you'll build:** A durable AI agent that receives expense claims, validates them, and pays them out — but only after a Finance reviewer approves the payment from the Integration Control Plane. If the process crashes while waiting, it resumes exactly where it left off.
 
 :::info Prerequisites
 
@@ -227,6 +227,10 @@ function payClaim(ExpenseClaim expenseClaim) {
 </TabItem>
 </Tabs>
 
+:::warning Work in progress
+From **Step 4: Run it** onward it is still being written, so those steps may be incomplete or change before release.
+:::
+
 ## Step 4: Run it
 
 [//]: # (add a section to start icp from the integrator itself)
@@ -264,7 +268,7 @@ curl localhost:9090/claims/<instanceId>
 ## What you built
 
 - A **durable AI agent** whose reasoning, activity calls, and waits all survive restarts.
-- A **gated activity** — the agent can propose a payment, but only a manager can release it.
+- A **gated activity** — the agent can propose a payment, but only a Finance reviewer can release it.
 - A **zero-cost wait** — the claim can sit in the inbox for days without holding any resources.
 
 ## Next steps

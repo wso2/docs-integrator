@@ -7,6 +7,10 @@ keywords: [wso2 integrator, durable workflow, management api, rest, human task a
 
 # Management API
 
+:::warning Work in progress
+This reference is still being written, so parts of it may be incomplete or change before release.
+:::
+
 Every integration with durable workflows can expose a **Management API** — the same REST surface the [Integration Control Plane](../icp/managing-workflows.md) uses. Enable it to build custom portals, automations, or operational tooling.
 
 ## Enable and configure

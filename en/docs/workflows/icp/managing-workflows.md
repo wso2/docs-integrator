@@ -6,6 +6,10 @@ keywords: [wso2 integrator, integration control plane, icp, workflow monitoring,
 
 # Manage Workflows with the Integration Control Plane
 
+:::warning Work in progress
+This page is still being written, so parts of it may be incomplete or change before release.
+:::
+
 The **Integration Control Plane (ICP)** is where running workflows meet their humans. Operations teams watch executions and intervene, and business users decide the tasks and reviews that workflows are waiting on. Everything is gated by role-based access, so each person sees only the work that belongs to them.
 
 This page explains where workflow management lives in the console, how the console maps to your projects and integrations, and which permissions control each view. The pages linked at the end cover each task in detail.

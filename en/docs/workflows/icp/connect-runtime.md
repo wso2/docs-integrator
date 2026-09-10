@@ -10,6 +10,10 @@ import TabItem from '@theme/TabItem';
 
 # Connect a Workflow Runtime
 
+:::warning Work in progress
+This page is still being written, so parts of it may be incomplete or change before release.
+:::
+
 A durable workflow runs inside your integration. The Integration Control Plane (ICP) can list its executions, hand out its human tasks, and control running instances only after the runtime tells ICP where to reach it. This page walks through the whole setup: creating the integration in ICP, generating a secret with workflow management enabled, applying the configuration to your integration, and verifying that the workflows show up.
 
 :::info Prerequisites

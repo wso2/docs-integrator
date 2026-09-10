@@ -7,6 +7,10 @@ sidebar_label: "Complete Human Tasks"
 
 # Complete Human Tasks
 
+:::warning Work in progress
+This page is still being written, so parts of it may be incomplete or change before release.
+:::
+
 When a workflow reaches a decision only a person can make, it suspends and creates a **human task**. The task appears in the **My Tasks** tab of the Integration Control Plane for everyone whose roles allow deciding it, and the workflow resumes the moment one of them submits. Nothing is held open while it waits, so a task can sit for minutes or for months.
 
 For how workflows create these tasks, see [Await human task](../develop/human-task-workflow.md).
