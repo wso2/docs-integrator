@@ -18,6 +18,26 @@ All values are set in `<ICP_HOME>/conf/deployment.toml`. Commented-out keys show
 | `schedulerIntervalSeconds`           | `int`     | `60`        | How often ICP checks for inactive runtimes and marks them as offline |
 | `refreshTokenCleanupIntervalSeconds` | `int`     | `86400`     | How often expired refresh tokens are purged from the database         |
 
+## TLS settings
+
+ICP serves the console and API over HTTPS by default. The distribution uses the default keystore at `<ICP_HOME>/conf/security/wso2carbon.jks`, but you should replace it with a CA-signed certificate for production deployments.
+
+Add the keystore configuration as top-level values in `<ICP_HOME>/conf/deployment.toml`, before any `[icp_server.*]` table:
+
+```toml
+keystorePath = "../conf/security/<custom-keystore>.jks"
+keystorePassword = "<keystore-password>"
+```
+
+If you use a relative path, it is resolved from `<ICP_HOME>/bin`, because ICP is started from the `bin` directory. You can also use an absolute path.
+
+The keystore must contain the private key and certificate chain for the hostname used to access ICP. If the certificate is signed by an internal CA, make sure that CA is trusted by the browsers and clients that connect to ICP.
+
+| Key                | Type     | Default                             | Description                                  |
+| ------------------ | -------- | ----------------------------------- | -------------------------------------------- |
+| `keystorePath`     | `string` | `"../conf/security/wso2carbon.jks"` | Path to the keystore used by the ICP HTTPS listener |
+| `keystorePassword` | `string` | `"wso2carbon"`                      | Password of the keystore                     |
+
 ## Backend endpoint settings
 
 These values default to `localhost:9446` and must be updated when ICP is accessed through a different hostname or behind a reverse proxy.
