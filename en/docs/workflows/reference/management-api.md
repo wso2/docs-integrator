@@ -11,7 +11,9 @@ keywords: [wso2 integrator, durable workflow, management api, rest, human task a
 This reference is still being written, so parts of it may be incomplete or change before release.
 :::
 
-Every integration with durable workflows can expose a **Management API** — the same REST surface the [Integration Control Plane](../icp/managing-workflows.md) uses. Enable it to build custom portals, automations, or operational tooling.
+Every integration with durable workflows can expose a **Management API**: a REST surface, served by the integration runtime itself, over the runs that integration owns. Enable it to build custom portals, automations, or operational tooling.
+
+This is not the [Integration Control Plane](../icp/managing-workflows.md) server's own API. ICP serves the console over GraphQL on port `9446` and spans every registered integration, while the API on this page is integration-local and reaches only one runtime. See [Integration Control Plane](../../manage/icp/integration-control-plane.md) for that side.
 
 ## Enable and configure
 
@@ -26,12 +28,18 @@ apiKeyHeader = "x-api-key"
 
 Base URL: `http://<host>:8234/workflow`
 
+With `enableApiKey` on, every request must carry the key in `apiKeyHeader`. The examples below read it from `$API_KEY`; drop that header when you leave API-key protection off.
+
 ### Caller identity headers
 
 | Header | Purpose |
 | --- | --- |
 | `x-user-id` | Recorded in audit fields (`completedBy`, `decidedBy`). |
 | `x-user-roles` | Comma-separated roles; tasks and reviews are filtered and authorized against them. |
+
+:::warning These headers are trusted as sent
+The runtime reads `x-user-id` and `x-user-roles` from the request. It does not verify them, so a caller that can reach the port directly can name any user and any role. Do not expose the Management API port to untrusted callers. Terminate authentication in front of it, at a gateway or reverse proxy that strips both headers from the incoming request and sets them from the identity it verified.
+:::
 
 ## Workflow instances
 
@@ -55,7 +63,9 @@ append `/{runId}` (for example `GET /workflows/{workflowId}/{runId}/execution-gr
 ### Example: find where an instance is halted
 
 ```bash
-curl -s http://localhost:8234/workflow/workflows/<id>/execution-graph \
+WORKFLOW_ID="019ffed4-c12e-7e24-a438-8bdaae2b5a29"
+curl -s "http://localhost:8234/workflow/workflows/$WORKFLOW_ID/execution-graph" \
+  -H "x-api-key: $API_KEY" \
   -H 'x-user-roles: manager' | jq '.nodes[] | select(.status=="WAITING" or .status=="RUNNING")'
 ```
 
@@ -70,7 +80,8 @@ curl -s http://localhost:8234/workflow/workflows/<id>/execution-graph \
 | `POST /human-tasks/{taskId}/fail` | Fail the task with a reason. |
 
 ```bash
-curl -s -X POST http://localhost:8234/workflow/human-tasks/<taskId>/complete \
+curl -s -X POST "http://localhost:8234/workflow/human-tasks/$TASK_ID/complete" \
+  -H "x-api-key: $API_KEY" \
   -H 'Content-Type: application/json' -H 'x-user-id: alice' -H 'x-user-roles: manager' \
   -d '{"result": {"action": "REQUEST_BILL", "comment": "Please attach the receipts"}}'
 ```
@@ -88,7 +99,8 @@ Approval gates (before a gated step runs) and retry reviews (after a step fails)
 | `POST /review-activities/{taskId}/reject` | Skip the gated call, or surface the failure to the workflow. |
 
 ```bash
-curl -s -X POST http://localhost:8234/workflow/review-activities/<taskId>/proceed-with-input \
+curl -s -X POST "http://localhost:8234/workflow/review-activities/$TASK_ID/proceed-with-input" \
+  -H "x-api-key: $API_KEY" \
   -H 'Content-Type: application/json' -H 'x-user-id: alice' -H 'x-user-roles: manager' \
   -d '{"input": {"claimId": "EXP-1", "amount": 180.50, "currency": "EUR"}}'
 ```

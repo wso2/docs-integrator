@@ -1,7 +1,7 @@
 ---
 sidebar_position: 9
 title: "Durable Timers"
-description: Pause a WSO2 Integrator durable workflow for hours, days, or months with a durable sleep that survives restarts and holds no threads or memory while it waits.
+description: Pause a WSO2 Integrator durable workflow for hours, days, or months with a durable sleep that survives restarts and holds no threads or connections while it waits.
 keywords: [wso2 integrator, durable workflow, timer, sleep, delay, wait, cooling-off period, long running, crash recovery]
 ---
 
@@ -61,7 +61,7 @@ Express the wait in whichever unit reads like the rule it implements. A cooling-
 
 A durable sleep is not a blocked thread. When the workflow reaches the timer:
 
-- The instance **suspends**. It consumes no thread and no memory while waiting, so thousands of accounts sitting out their cooling-off period cost nothing to keep around.
+- The instance **suspends**. It consumes no thread and no connection while waiting, so thousands of accounts can sit out their cooling-off period at once. What stays behind is the run's recorded state in the workflow engine, which is what a restart replays from.
 - The deadline is **recorded**. Restart the integration, redeploy it, or lose the process to a crash, and the timer still fires at its original time.
 - On crash recovery, an **already-elapsed timer does not wait again.** Like a completed activity, it is read back from the record, so a restart never restarts the clock.
 

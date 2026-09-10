@@ -79,6 +79,11 @@ Creating the agent is also where you describe it: the model it thinks with, its 
 import ballerina/ai;
 import ballerina/workflow;
 
+type ExpenseClaim record {|
+    string claimId;
+    decimal amount;
+|};
+
 final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
 final workflow:DurableAgent claimAgent = check new ({
     systemPrompt: {
@@ -261,7 +266,8 @@ The agent validates the claim, decides to pay it, and **pauses** — the gated `
 The agent resumes, completes the payment, and records its summary:
 
 ```bash
-curl localhost:9090/claims/<instanceId>
+INSTANCE_ID="019ffed4-c12e-7e24-a438-8bdaae2b5a29"
+curl "localhost:9090/claims/$INSTANCE_ID"
 # {"instanceId":"...","status":"COMPLETED","summary":"Claim EXP-1 validated and paid (PAY-EXP-1)."}
 ```
 
@@ -269,7 +275,7 @@ curl localhost:9090/claims/<instanceId>
 
 - A **durable AI agent** whose reasoning, activity calls, and waits all survive restarts.
 - A **gated activity** — the agent can propose a payment, but only a Finance reviewer can release it.
-- A **zero-cost wait** — the claim can sit in the inbox for days without holding any resources.
+- A **suspended wait** — the claim can sit in the inbox for days without holding a thread or a connection.
 
 ## Next steps
 

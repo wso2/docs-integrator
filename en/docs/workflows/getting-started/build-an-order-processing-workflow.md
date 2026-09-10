@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Build an Order Processing Workflow
 
-**Time:** 20 minutes | **What you'll build:** A durable workflow that reserves inventory for an order, suspends until a payment confirmation arrives, and then either emails the customer or cancels the order. The every activity output and data events are recorded, so a restart replays the record instead of reserving twice, and the wait for payment costs nothing while it lasts, whether that is seconds or days.
+**Time:** 20 minutes | **What you'll build:** A durable workflow that reserves inventory for an order, suspends until a payment confirmation arrives, and then either emails the customer or cancels the order. Every activity result and data event is recorded, so a restart replays the record instead of reserving twice, and the wait for payment holds no thread and no connection while it lasts, whether that is seconds or days.
 
 The finished flow has three steps:
 
@@ -111,7 +111,7 @@ The first step of the order process reserves stock. You create the activity and 
    | **Retry Policy** | **No Automatic Retry** for now. |
 
 9. Click **Save**. The `reserveInventory` node appears on the diagram.
-10. Give the activity something to do. Click the open icon on the node to open its own diagram, To make it simple let's mock the implementation to a log line.
+10. Give the activity something to do. Click the open icon on the node to open its own diagram. To make it simple, let's mock the implementation with a log line.
 11. Click **+**, then **Log Info** under **Logging**. Set **Msg** to `Inventory reserved` and click **Save**.
 
 ![Creating the reserveInventory activity and calling it from the workflow](/img/workflows/getting-started/build-an-order-processing-workflow/add-activity.gif)
@@ -156,13 +156,13 @@ Payment is confirmed by something outside the workflow, such as a payment gatewa
    | Field | Value | Description                                                                                                                                         |
    |---|---|-----------------------------------------------------------------------------------------------------------------------------------------------------|
    | **Data Receive Variable Name** | `payment` | The variable that receives the value once it arrives.                                                                                               |
-   | **Data Type** | `boolean` | The type of the value the workflow expects. To make this article simple lets go with `boolean`. If the payment is receved, the value will be `true` |
+   | **Data Type** | `boolean` | The type of the value the workflow expects. To make this article simple, let's go with `boolean`. If the payment is received, the value will be `true` |
    | **Data Name** | `payment` | The name used when sending the data into this workflow.                                                                                             |
 
 6. Click **Add** then click **Save**.
 
 The diagram gains a **Wait for payment** node, drawn with an incoming arrow from outside the flow, because that is where the value comes from.
-The workflow now suspends at this line, and only at this line. It holds no thread, no memory, and no connection while it waits, and it survives a restart of the runtime.
+The workflow now suspends at this line, and only at this line. It holds no thread and no connection while it waits, and it survives a restart of the runtime.
 
 ![Adding the payment data event to the workflow](/img/workflows/getting-started/build-an-order-processing-workflow/await-data-event.gif)
 </TabItem>
@@ -231,7 +231,7 @@ The `payment` path tells the customer the order is confirmed. Create that activi
 4. Click `sendEmail` in the **Activities** panel, set **Order Info** to the workflow's input, and click **Save**.
 5. Click the open icon on the `sendEmail` node to open its diagram, To make it simple let's mock the implementation to a log line.
 6. Click **+**, then click **Log Info** under **Logging**.
-7. Leave **Msg** on **Text** and type `Email sent to `. Click on the text box open the field's value helper, then click **Inputs** > `orderInfo` > `customerEmail`. It lands in the text as an expression.
+7. Leave **Msg** on **Text** and type `Email sent to `. Click on the text box to open the field's value helper, then click **Inputs** > `orderInfo` > `customerEmail`. It lands in the text as an expression.
 8. Click **Save**.
 
 ![Creating the sendEmail activity, calling it, and logging the customer address](/img/workflows/getting-started/build-an-order-processing-workflow/send-email.gif)
@@ -381,7 +381,7 @@ resource function post [string orderId]/payment() returns json|error {
 </Tabs>
 
 :::tip Take the value from the request
-Anyone holding the workflow ID can deliver the value, so in a real integration this resource is what the payment gateway's callback hits. See [Await data events](../develop/data-events.md).
+Anyone holding the workflow ID can deliver the value, so in a real integration this resource is what the payment gateway's callback hits. This walkthrough leaves it unprotected to keep the steps short. A real callback needs authentication and authorization on this resource, because the workflow ID on its own is not an authorization check. See [Await data events](../develop/data-events.md).
 :::
 
 ## Step 10: Run it
@@ -397,7 +397,7 @@ A durable workflow keeps its record in a workflow engine, and by default the run
    The in-memory engine keeps the record in the integration's own memory, so stopping the integration loses every run that was in flight. It is meant for trying a workflow out, not for the crash-safety this guide is about. To see a suspended order survive a restart, set `mode` back to `"LOCAL"` and start a Temporal server with `temporal server start-dev` before running.
    :::
 4. Click **Run** to start the integration.
-5. Post an order and keep the returned workflow ID: eg: `019ffed4-c12e-7e24-a438-8bdaae2b5a29`
+5. Post an order and keep the returned workflow ID, e.g.: `019ffed4-c12e-7e24-a438-8bdaae2b5a29`
 
    ```bash
    curl -X POST http://localhost:9090/order \

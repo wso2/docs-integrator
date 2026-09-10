@@ -20,7 +20,7 @@ Sometimes a workflow needs *data*, not a decision — the employee submits the s
     }}
 />
 
-Like every other durable wait, it costs nothing while it waits and it survives a restart.
+Like every other durable wait, it holds no thread and no connection while it waits, and it survives a restart.
 
 ## Pause workflow for data event
 

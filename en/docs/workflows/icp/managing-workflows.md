@@ -112,4 +112,4 @@ Super admins are also given a synthetic `admin` role when calls reach the runtim
 - [Workflow executions](executions.md) — read the timeline, execution graph, and history of a run
 - [Complete human tasks](human-tasks.md) — decide the tasks waiting on your roles
 - [Review activities](review-activities.md) — approve, correct, or reject a gated or failed activity
-- [Management API](../reference/management-api.md) — the REST API behind every view on this page
+- [Management API](../reference/management-api.md) — the integration runtime's own REST API over its workflow runs

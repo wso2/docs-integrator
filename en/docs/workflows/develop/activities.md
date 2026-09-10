@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Activities
 
-An **activity** is a single unit of work that the durable runtime records and its modeled as a function. Anything that touches the outside world — an API call, a database write, a payment, an email — belongs in an activity rather than in the workflow body. That split is what makes a workflow crash-safe: the workflow function can be replayed from the start after a restart, while the work already done inside activities is read back from the record instead of being repeated.
+An **activity** is a single unit of work that the durable runtime records and it's modeled as a function. Anything that touches the outside world — an API call, a database write, a payment, an email — belongs in an activity rather than in the workflow body. That split is what makes a workflow crash-safe: the workflow function can be replayed from the start after a restart, while the work already done inside activities is read back from the record instead of being repeated.
 
 <ThemedImage
     alt="A workflow diagram made of three activity nodes in sequence: reserveInventory capturing inventoryResult, chargePayment capturing paymentResult, and sendConfirmationEmail capturing emailResult"
@@ -86,8 +86,8 @@ Call Activity form provides the following fields for calling an activity functio
 
 | Field                  | Required                                         | Description                                                                                                                                                                                        |
 |------------------------|--------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Activity Arguments** | Yes                                              | Form field will appear for each activity function parameter. Provide the relevent arguments for each required parameter                                                                            |
-| **Retry Policy**       | Yes                                              | When an activity call failied, how should the workflow handle it. No Automatic Retry, Auto Retry, Human Review. See [Error handling and review activities](review-activity-and-error-handling.md). |
+| **Activity Arguments** | Yes                                              | Form field will appear for each activity function parameter. Provide the relevant arguments for each required parameter                                                                            |
+| **Retry Policy**       | Yes                                              | When an activity call fails, how should the workflow handle it. No Automatic Retry, Auto Retry, Human Review. See [Error handling and review activities](review-activity-and-error-handling.md). |
 | **Result**             | Only if the output of the activity is not `null` | Name of the result variable to capture the activity's output.                                                                                                                                      |
 | **Result type**        | Only if the output of the activity is not `null` | Type of the resulting data of the activity function.                                                                                                                                               |
 | **Check Error**        | No                                               | Under **Advanced Configurations**. Adds `check` to the call so a failure automatically propagates out from the workflow. Clear it to handle the error yourself. Defaults to `checked`. See [Error handling in the workflow logic](review-activity-and-error-handling.md#error-handling-in-the-workflow-logic). |

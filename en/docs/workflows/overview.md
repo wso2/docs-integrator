@@ -24,7 +24,7 @@ Most integrations start simple and end up long-lived: an order needs a manager's
 A Workflow is a step-by-step process which completes a larger task. WSO2 Integrator lets you design workflows that: 
 
 - **Survive crashes and restarts** — every completed step is recorded, and the workflow resumes exactly where it left off. A finished step is never re-executed.
-- **Wait for as long as it takes** — pause for hours, days, or months for a human decision or an external event, consuming no threads or memory while suspended.
+- **Wait for as long as it takes** — pause for hours, days, or months for a human decision or an external event, consuming no threads or connections while suspended.
 - **Recover from failures** — retry failed steps automatically, or hand the failure to a human who can fix the input and retry.
 - **Keep humans in the loop** — assign role-based tasks that people decide from the [Integration Control Plane](icp/managing-workflows.md) task inbox.
 
@@ -48,7 +48,7 @@ Both run on the same durable runtime, so an AI agent gets crash-safety, human ta
 - **[Create a workflow](develop/create-workflow.md):** Add the artifact, give it an input type, and design its steps on the diagram.
 - **[Start a workflow](develop/start-workflow.md):** Launch a run from a service or an automation, and keep the ID that identifies it.
 - **[Activities](develop/activities.md):** The recorded units of work in a workflow — exactly-once on replay and retryable on failure.
-- **[Durable timers](develop/durable-timers.md):** Pause for hours, days, or months with a wait that survives restarts and holds no resources.
+- **[Durable timers](develop/durable-timers.md):** Pause for hours, days, or months with a wait that survives restarts and holds no threads or connections.
 - **[Await data events](develop/data-events.md):** Wait until an external system or a person delivers the data the workflow needs, then resume with it.
 - **[Send a data event](develop/send-data-event.md):** Deliver a value into a waiting run, using the workflow ID it was started with.
 - **[Await human task](develop/human-task-workflow.md):** Pause for role-based human decisions and external data, for as long as it takes.

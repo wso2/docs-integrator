@@ -32,7 +32,7 @@ Open **Workflows**, choose an environment, and stay on the **My Tasks** tab. Its
 | **Workflow Name** | The workflow type that created the task. |
 | **Integration** | The integration that owns it. Shown at project level only. |
 | **Workflow ID** | The waiting run. Click it to open that run in [Workflow executions](executions.md). |
-| **Status** | Pending, Completed, Failed, or Terminated. |
+| **Status** | Pending, Completed, Failed, Canceled, or Terminated. |
 | **Started** | When the task was created. |
 | **Open** | Opens the task. |
 

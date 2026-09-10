@@ -45,6 +45,10 @@ There is nothing special about the integration that started the run. Any integra
 
 That also means the ID is worth guarding. A run whose ID was lost keeps waiting, and no code can resume it.
 
+:::warning The ID is not an authorization check
+Holding the workflow ID is all it takes to fill the event, so the resource that accepts the delivery is what has to authenticate and authorize the caller. Protect it the way you would any other write endpoint, and do not treat a workflow ID as a credential.
+:::
+
 ## Next steps
 
 - [Await data events](data-events.md) — the waiting half: declare the event and pause the workflow on it.

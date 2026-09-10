@@ -24,7 +24,7 @@ Every activity call takes a **Retry Policy**, which says what the workflow shoul
 
 ![The activity call form with the Retry Policy dropdown open on No Automatic Retry, Auto Retry, and Human Review](/img/workflows/develop/review-activity/retry-policy.png)
 
-## Auto Retry — for transient failures
+## Auto retry — for transient failures
 
 Choosing **Auto Retry** adds the backoff fields to the form. Every one of them is optional, and a field left empty falls back to its default.
 
@@ -37,15 +37,15 @@ Choosing **Auto Retry** adds the backoff fields to the form. Every one of them i
 
 ![The activity call form with Auto Retry chosen, showing Max Retries, Retry Delay, Retry Backoff, and Max Retry Delay](/img/workflows/develop/review-activity/auto-retry.png)
 
-## Human Review — when a person should fix it
+## Human review — when a person should fix it
 
 Choosing **Human Review** hands a failure to a person instead of to the engine. The workflow does not fail along with the activity and the engine does not retry on its own: the run parks at that step, and a review task is raised carrying the failing input and the error it produced. The task takes its name from the activity being called, so there is nothing to name in the form.
 
-The task is listed in the **Review Activities** tab of the [Control Plane](../icp/review-activities.md) for the roles you name below, matched by exact role name. Until one of them decides it, the run waits there durably and holds no resources, the same as any other durable wait. The decision is what resumes it.
+The task is listed in the **Review Activities** tab of the [Control Plane](../icp/review-activities.md) for the roles you name below, matched by exact role name. Until one of them decides it, the run waits there durably and holds no threads or connections, the same as any other durable wait. The decision is what resumes it.
 
 | Field              | Required | Description                                                                                                                                          |
 |--------------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Reviewer Roles** | Yes      | The role permitted to decide the review, for example `"Finance"`, or a list such as `["finance", "manager"]`. Leave it empty to let any role decide. |
+| **Reviewer Roles** | No       | The role permitted to decide the review, for example `"Finance"`, or a list such as `["finance", "manager"]`. Leave it empty to let any role decide. |
 
 ![The activity call form with Human Review chosen, showing the Reviewer Roles field set to Finance](/img/workflows/develop/review-activity/human-review.png)
 

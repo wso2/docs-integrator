@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Await Human Task
 
-Real processes wait on people: a manager approves an expense, a reviewer checks documents, an HR lead assigns a new joiner to a team. An **Await Human Task** step stops the workflow at exactly that point, hands a task to a role, and resumes the moment someone submits a decision, whether that takes a minute or a month. While it waits it holds no threads, no memory, and no connections.
+Real processes wait on people: a manager approves an expense, a reviewer checks documents, an HR lead assigns a new joiner to a team. An **Await Human Task** step stops the workflow at exactly that point, hands a task to a role, and resumes the moment someone submits a decision, whether that takes a minute or a month. While it waits it holds no threads and no connections.
 
 <ThemedImage
     alt="The employeeOnboarding workflow halted on an Await Human Task step whose result is HRFeedback, with a dashed arrow arriving from an HRManager role marker"
