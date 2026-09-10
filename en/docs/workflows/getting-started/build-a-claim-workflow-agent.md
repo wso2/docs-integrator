@@ -38,144 +38,198 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## Step 2: Add a Durable Agentic Workflow
 
-1. In the design view, click **+ Add Artifact**.
-2. Under **Durable Workflow**, select **Durable Agentic Workflow** and click **Next**.
-3. Set **Name** to `claimAgent`.
-4. Click **Create Agent**.
-
-![Create Durable Agent](/img/workflows/getting-started/build-a-claim-workflow-agent/create-agent.png)
-
-## Step 3: Describe the agent
-
-1. Click the agent node and give it its role and instructions:
-
-- **Role:** `Expense claim assistant`
-- **Instructions:**
-
-  ```text
-  Process expense claims end to end. Validate each claim with validateClaim first and
-  reject invalid claims with a clear reason. When a claim is valid, pay it with payClaim
-  using the claimed amount. Finish with a one-line summary of the outcome.
-  ```
-2. Click **Save**.
-
-![Agent node form with the Role and Instructions fields filled in](/img/workflows/getting-started/build-a-claim-workflow-agent/agent-role-and-instructions.png)
-
-## Step 4: Give the agent activities
-
-Activities are the units of work the agent can call. Each one runs durably — completed work is never lost or repeated, even across restarts.
-
-First add the claim validator:
+Creating the agent is also where you describe it: the model it thinks with, its role, and the instructions it plans from.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Click **+** on the **bottom right** of the agent node and Click **+ Create Activity**.
-2. Set the **Activity Name** to `validateClaim`.
-3. Click **+ Add Parameter**.
-4. For the **Type** field, select **+ Create New Type**.
-5. In the **Create from scratch** tab, enter `ExpenseClaim` as the **Name**.
-6. Click **+** next to **Fields** and add each field:
+1. In the design view, click **+ Add Artifact**.
+2. Under **Durable Workflow**, select **Durable Agentic Workflow**. The **Create New Durable Agentic Workflow** form opens.
 
-   | Field | Type |
-   |---|---|
-   | `claimId` | `string` |
-   | `amount` | `decimal` |
-   | `purpose` | `string` |
+   ![Create Durable Agent](/img/workflows/getting-started/build-a-claim-workflow-agent/create-agent.png)
 
-7. Click **Save** to create the `ExpenseClaim` type. The modal closes and `ExpenseClaim` is auto-injected as the parameter type.
-8. Name the parameter `claim` and click **Add**.
-9. Fill the return type as `boolean` and click **Save**.
-10. Select the newly created `validateClaim` activity to add it to the agent.
+3. Set **Name** to `claimAgent`.
+4. Leave **Model** on **Default WSO2 Model Provider**, the model your Copilot sign-in provides.
+5. Set **Role** to `Expense claim assistant`.
+6. Set **Instructions** to:
 
-![Add `validateClaim` activity`](/img/workflows/getting-started/build-a-claim-workflow-agent/create-expense-claim-type.png)
+   ```text
+   Process expense claims end to end. Validate each claim with validateClaim first and
+   reject invalid claims with a clear reason. When a claim is valid, pay it with payClaim
+   using the claimed amount. Finish with a one-line summary of the outcome.
+   ```
 
-Now give the activity its body. The activity is a function, so its flow returns the validation result:
+7. **Input Data Type** is the structured payload each run starts with. Create the claim record here: click the field, select **+ Create New Type**, and on the **Create from scratch** tab keep **Kind** as **Record**, set **Name** to `ExpenseClaim`, then click **+** next to **Fields** and add:
 
-1. In the left sidebar, expand **Workflow Activities** and select `validateClaim`. 
-2. In the node panel on the right, under **Control**, select **Return**.
-3. Click the **Expression** field to open the value helper, then select **Inputs** > `claim` > `amount`.
-4. With the cursor after the inserted value, type `> 0d` to require a positive amount.
-5. Click **Save**. and select `claimAgent` under **Workflows** to return to the agent diagram.
+   | Field     | Type      |
+   |-----------|-----------|
+   | `claimId` | `string`  |
+   | `amount`  | `decimal` |
 
-![Add `validateClaim` activity`](/img/workflows/getting-started/build-a-claim-workflow-agent/validate-claim-body.gif)
+8. Click **Save**.
+
+9. Click **Create Agent**.
+
+![Creating the claimAgent durable agentic workflow, filling in the model, role, instructions, and an ExpenseClaim input type](/img/workflows/getting-started/build-a-claim-workflow-agent/create-agent.gif)
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
 ```ballerina
+import ballerina/ai;
+import ballerina/workflow;
+
+final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
+final workflow:DurableAgent claimAgent = check new ({
+    systemPrompt: {
+        role: string `Expense claim assistant`,
+        instructions: string `Process expense claims end to end. Validate each claim with validateClaim first and
+        reject invalid claims with a clear reason. When a claim is valid, pay it with payClaim
+        using the claimed amount. Finish with a one-line summary of the outcome.`
+    },
+    model: wso2ModelProvider,
+    inputType: ExpenseClaim
+});
+```
+
+</TabItem>
+</Tabs>
+
+## Step 3: Attach the agent activities
+
+Activities are the units of work the agent can call. Each one runs durably — completed work is never lost or repeated, even across restarts.
+
+### Attach the claim validator
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+1. Click **+** on the activity anchor at the **bottom right** of the agent node. The **Activities** panel opens.
+2. Under **Current Integration**, click **+ Create Activity**. The **Workflow Activity** form opens.
+3. Set **Activity Name** to `validateClaim`.
+4. Under **Parameters**, click **+ Add Parameter**. Set **Type** to the `ExpenseClaim` record created in Step 2 and **Name** to `expenseClaim`, then click **Add**.
+5. Set **Return Type** to `boolean` and click **Save**.
+6. The register form opens, where the activity becomes one of the agent's capabilities. Leave **Retry Policy** on **No Automatic Retry** and click **Save**.
+
+![Creating the validateClaim activity and registering it on the claimAgent node](/img/workflows/getting-started/build-a-claim-workflow-agent/attach-validate-claim.gif)
+
+`validateClaim` joins the agent node as a capability and appears under **Workflow Activities** in the left sidebar.
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+`workflow.bal`:
+```ballerina
+import ballerina/ai;
+import ballerina/workflow;
+
+final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
+final workflow:DurableAgent claimAgent = check new ({
+    systemPrompt: {
+        role: string `Expense claim assistant`,
+        instructions: string `Process expense claims end to end. Validate each claim with validateClaim first and
+        reject invalid claims with a clear reason. When a claim is valid, pay it with payClaim
+        using the claimed amount. Finish with a one-line summary of the outcome.`
+    },
+    model: wso2ModelProvider,
+    inputType: ExpenseClaim,
+    activities: [validateClaim]
+});
+```
+
+`functions.bal`:
+```ballerina
 @workflow:Activity
-function validateClaim(ExpenseClaim claim) returns boolean {
-    return claim.amount > 0d;
+function validateClaim(ExpenseClaim expenseClaim) returns boolean {
 }
 ```
 
 </TabItem>
 </Tabs>
 
-Then add the payment activity — this is the risky step, so gate it behind a manager:
+### Define the claim validator body
 
-1. Add another activity named `payClaim`.
-2. In the activity form, enable **Requires Approval** and set **Reviewer Roles** to `manager`.
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+Creating the activity gives it a signature but an empty body. The activity is a function, so its flow returns the validation result. Let's make it return `true` only for positive claim amounts.:
+
+1. In the left sidebar, expand **Workflow Activities** and select `validateClaim`.
+2. In the node panel on the right, under **Control**, select **Return**.
+3. Click the **Expression** field to open the value helper, then select **Inputs** > `expenseClaim` > `amount`.
+4. With the cursor after the inserted value, type `> 0d` to require a positive amount.
+5. Click **Save**, then select `claimAgent` under **Workflows** to return to the agent diagram.
+
+![Defining the validateClaim activity body with a Return step](/img/workflows/getting-started/build-a-claim-workflow-agent/validate-claim-body.gif)
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
 
 ```ballerina
 @workflow:Activity
-function payClaim(string claimId, decimal amount) returns string {
-    return string `PAY-${claimId}`;
+function validateClaim(ExpenseClaim expenseClaim) returns boolean {
+    return expenseClaim.amount > 0d;
 }
 ```
 
-<ThemedImage
-    alt="Register Activity form with Requires Approval enabled and Reviewer Roles set to manager"
-    sources={{
-        light: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/04-gated-activity.png'),
-        dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/04-gated-activity.png'),
-    }}
-/>
+</TabItem>
+</Tabs>
 
-Behind the scenes the designer maintains a single declaration — the agent *is* the workflow:
+### Add the payment activity
 
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+Paying out is the risky step, so gate it behind a person. The activity is created the same way as the validator, and the register form is where the gate goes on:
+
+1. Click **+** on the activity anchor at the **bottom right** of the agent node, then click **+ Create Activity**.
+2. Set **Activity Name** to `payClaim`.
+3. Under **Parameters**, click **+ Add Parameter**. Set **Type** to `ExpenseClaim` and **Name** to `expenseClaim`, then click **Add**.
+4. Leave **Return Type** empty and click **Save**.
+5. On the register form, expand **Advanced Configurations** and select **Requires Approval**. Before the agent runs the activity, a review activity is created and the agent suspends durably until a reviewer proceeds or rejects.
+6. Set **Reviewer Roles** to `Finance`, the roles permitted to decide that approval.
+7. Click **Save**.
+
+![Creating the payClaim activity and registering it with Requires Approval and the Finance reviewer role](/img/workflows/getting-started/build-a-claim-workflow-agent/attach-pay-claim.gif)
+
+`payClaim` joins the agent node beside `validateClaim`, drawn with a badge marking it as gated. The agent can now propose a payment, but it cannot release one on its own.
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+`workflow.bal`:
 ```ballerina
+import ballerina/ai;
+import ballerina/workflow;
+
+final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
 final workflow:DurableAgent claimAgent = check new ({
     systemPrompt: {
-        role: "Expense claim assistant",
-        instructions: string `Process expense claims end to end. ...`
+        role: string `Expense claim assistant`,
+        instructions: string `Process expense claims end to end. Validate each claim with validateClaim first and
+        reject invalid claims with a clear reason. When a claim is valid, pay it with payClaim
+        using the claimed amount. Finish with a one-line summary of the outcome.`
     },
-    model: claimModel,
-    activities: [
-        validateClaim,
-        {activity: payClaim, requiresApproval: true, userRoles: "manager"}
-    ]
+    model: wso2ModelProvider,
+    inputType: ExpenseClaim,
+    activities: [validateClaim,
+                {activity: payClaim, requiresApproval: true, userRoles: "Finance"}]
 });
 ```
 
-## Step 5: Expose the agent over HTTP
-
-Add an HTTP service so employees can submit claims. Each `run` starts a durable agent instance; the returned `instanceId` is the claim's reference.
-
+`functions.bal`:
 ```ballerina
-service /claims on new http:Listener(9090) {
-
-    resource function post .(ExpenseClaim claim) returns json|error {
-        string instanceId = check claimAgent.run(claim.toJsonString());
-        return {claimId: claim.claimId, instanceId, status: "PROCESSING"};
-    }
-
-    resource function get [string instanceId]() returns json|error {
-        string|error result = claimAgent.getResult(instanceId);
-        if result is workflow:AgentBusyError {
-            return {instanceId, status: "PENDING_APPROVAL"};
-        }
-        if result is error {
-            return result;
-        }
-        return {instanceId, status: "COMPLETED", summary: result};
-    }
+@workflow:Activity
+function payClaim(ExpenseClaim expenseClaim) {
 }
 ```
 
-## Step 6: Run it
+</TabItem>
+</Tabs>
 
+## Step 4: Run it
+
+[//]: # (add a section to start icp from the integrator itself)
 1. Select **Run** in the designer to start the integration.
 2. Submit a claim:
 
@@ -184,11 +238,11 @@ curl -X POST localhost:9090/claims -H 'Content-Type: application/json' \
   -d '{"claimId":"EXP-1","employee":"nimal","amount":180.50,"purpose":"Team lunch"}'
 ```
 
-The agent validates the claim, decides to pay it, and **pauses** — the gated `payClaim` created an approval review for the `manager` role. The workflow now waits durably; you can even restart the integration and nothing is lost.
+The agent validates the claim, decides to pay it, and **pauses** — the gated `payClaim` created an approval review for the `Finance` role. The workflow now waits durably; you can even restart the integration and nothing is lost.
 
-## Step 7: Approve the payment
+## Step 5: Approve the payment
 
-1. Open the **Integration Control Plane** and sign in as a user with the `manager` role.
+1. Open the **Integration Control Plane** and sign in as a user with the `Finance` role.
 2. Open the **Task Inbox** — the `payClaim` approval shows the claim ID and amount the agent proposed.
 3. Select **Proceed**.
 
