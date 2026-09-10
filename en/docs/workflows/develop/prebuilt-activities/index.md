@@ -28,10 +28,6 @@ Three are available today:
 
 The call appears on the diagram as an ordinary activity node, and it behaves like one: recorded on success, retryable on failure, and visible as an `ACTIVITY` node in the [Integration Control Plane](../../icp/executions.md) execution graph.
 
-:::info Connections come first
-A prebuilt activity calls through a connection that already exists in your integration. Create it under **Connections** in the sidebar before you add the step. In code it is a module-level `final` client variable, which is what lets the runtime hand it to the activity worker.
-:::
-
 ## Fields shared by all three
 
 Each prebuilt activity has its own fields, covered on its page. These two are common to all of them:
