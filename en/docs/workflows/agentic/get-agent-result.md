@@ -49,7 +49,7 @@ The saved step is drawn as **Get Agent Result** with a dashed connector to the `
 - **Selected**, the default, waits until the instance finishes.
 - **Cleared** reads without waiting. While the instance is still working the step returns a `workflow:AgentBusyError`, which the flow can handle and report as "still running". This is what a status endpoint usually wants, because the caller gets an answer immediately either way.
 
-A gated activity or a human task counts as still working: the instance is suspended waiting on a person, so a run that looks stalled is often one that needs a decision in the [Control Plane](../icp/managing-workflows.md).
+A gated activity or a human task counts as still working: the instance is suspended waiting on a person, so a run that looks stalled is often one that needs a decision in the [Control Plane](../icp/manage.md).
 
 ## Final result or one turn's answer?
 
@@ -62,4 +62,4 @@ Both reads are addressed by the instance ID, and they answer different questions
 
 - [Get a Data Event Result](get-data-event-result.md) — reading one turn's answer instead of the final outcome.
 - [Run a Durable Agent](run-durable-agent.md) — starting the instance and binding the ID this step needs.
-- [Integration Control Plane](../icp/managing-workflows.md) — seeing why an instance is still working.
+- [Integration Control Plane](../icp/manage.md) — seeing why an instance is still working.

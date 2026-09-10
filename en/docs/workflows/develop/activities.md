@@ -100,7 +100,7 @@ A *completed* activity never runs twice, but a *failed* attempt may run again on
 
 ## Watching activities run
 
-Each activity call appears as an `ACTIVITY` node in the instance's execution graph in the [Integration Control Plane](../icp/managing-workflows.md), so you can see which step an instance is on, which activities have completed, and which one failed. The same graph is available over the [Management API](../reference/management-api.md).
+Each activity call appears as an `ACTIVITY` node in the instance's execution graph in the [Integration Control Plane](../icp/manage.md), so you can see which step an instance is on, which activities have completed, and which one failed. The same graph is available over the [Management API](../reference/management-api.md).
 
 [//]: # (Add a screenshot of the execution graph with an activity node highlighted.)
 
@@ -110,4 +110,4 @@ Each activity call appears as an `ACTIVITY` node in the instance's execution gra
 - [Durable timers](durable-timers.md) — pause between activities without holding resources.
 - [Error handling and review activities](review-activity-and-error-handling.md) — retry policies and approval gates.
 - [Create a Durable Agent](../agentic/create-durable-agent.md) — registering these same activities on an agent that picks which to call.
-- [Build an order processing workflow](../getting-started/build-an-order-processing-workflow.md) — activities wired into a complete flow.
+- [Build an order processing workflow](../getting-started/build-order-processing.md) — activities wired into a complete flow.

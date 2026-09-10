@@ -59,4 +59,4 @@ The saved step is drawn as **Get Data Event Result** with a dashed connector to 
 - [Send an Agent Data Event](send-agent-data-event.md) — the step that produces the correlation token.
 - [Get an Agent Result](get-agent-result.md) — reading the run's final outcome instead of one turn's answer.
 - [Create a Durable Agent](create-durable-agent.md) — declaring the channel and the response type this step reads.
-- [Integration Control Plane](../icp/managing-workflows.md) — following the instance while a turn is in flight.
+- [Integration Control Plane](../icp/manage.md) — following the instance while a turn is in flight.

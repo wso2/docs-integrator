@@ -78,14 +78,14 @@ A timer and a timeout look similar but answer different questions:
 | **Durable timer**      | Waits a fixed duration, then continues. Nothing can cut it short.                                                                            |
 | **Human task timeout** | Bounds a wait for a *person or an event*. It ends early when the task is answered, and fails with a timeout error if nobody answers in time. |
 
-Use a timer for a delay you always want, and a timeout when you are waiting on something that may or may not arrive. The email change rule is the first kind: the 24 hours pass whether or not anyone objects. Giving the owner a way to cancel within the window is the second kind, an [await human task](human-task-workflow.md) or an [await data event](data-events.md) bounded by a timeout.
+Use a timer for a delay you always want, and a timeout when you are waiting on something that may or may not arrive. The email change rule is the first kind: the 24 hours pass whether or not anyone objects. Giving the owner a way to cancel within the window is the second kind, an [await human task](await-human-task.md) or an [await data event](data-events.md) bounded by a timeout.
 
 ## Watching timers
 
-A pending timer appears as a `TIMER` node in the instance's execution graph in the [Integration Control Plane](../icp/managing-workflows.md), so a workflow that looks stalled can be identified as simply waiting, and you can see what it is waiting for and until when. The same graph is available over the [Management API](../reference/management-api.md).
+A pending timer appears as a `TIMER` node in the instance's execution graph in the [Integration Control Plane](../icp/manage.md), so a workflow that looks stalled can be identified as simply waiting, and you can see what it is waiting for and until when. The same graph is available over the [Management API](../reference/management-api.md).
 
 ## Next steps
 
 - [Activities](activities.md) — the recorded steps a timer sits between.
-- [Await human task](human-task-workflow.md) — waiting on people and external events instead of the clock.
-- [Build an order processing workflow](../getting-started/build-an-order-processing-workflow.md) — a timer in a complete flow.
+- [Await human task](await-human-task.md) — waiting on people and external events instead of the clock.
+- [Build an order processing workflow](../getting-started/build-order-processing.md) — a timer in a complete flow.

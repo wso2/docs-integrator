@@ -41,7 +41,7 @@ The **Workflows** page has three tabs. Each one is a separate task, and each is 
 | --- | --- | --- |
 | **My Tasks** | Complete or fail the human tasks that your roles allow you to decide. | [Complete human tasks](human-tasks.md) |
 | **Review Activities** | Approve, correct, or reject an activity before it runs or after it fails. | [Review activities](review-activities.md) |
-| **Workflow Executions** | Browse executions, inspect the timeline and execution graph, start new workflows, and suspend, resume, cancel, or terminate a run. | [Workflow executions](executions.md) and [Start a workflow](start-workflow.md) |
+| **Workflow Executions** | Browse executions, inspect the timeline and execution graph, start new workflows, and suspend, resume, cancel, or terminate a run. | [Workflow executions](executions.md) and [Start a workflow](start.md) |
 
 **My Tasks** and **Review Activities** carry a badge with the amount of work waiting for you. Both counts refresh every 30 seconds. The review badge shows `50+` when there are more pending reviews than one page can report.
 
@@ -108,7 +108,7 @@ Super admins are also given a synthetic `admin` role when calls reach the runtim
 ## What's next
 
 - [Connect a workflow runtime](connect-runtime.md) — register a runtime so its workflows appear in the console
-- [Start a workflow](start-workflow.md) — launch a new execution from the console
+- [Start a workflow](start.md) — launch a new execution from the console
 - [Workflow executions](executions.md) — read the timeline, execution graph, and history of a run
 - [Complete human tasks](human-tasks.md) — decide the tasks waiting on your roles
 - [Review activities](review-activities.md) — approve, correct, or reject a gated or failed activity

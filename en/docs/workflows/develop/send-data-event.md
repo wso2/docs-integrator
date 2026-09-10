@@ -20,7 +20,7 @@ A run parked on an [await data event](data-events.md) stays there until somethin
     }}
 />
 
-The delivery does not create a run. It resumes one, so it needs the workflow ID that [starting the run](start-workflow.md) returned.
+The delivery does not create a run. It resumes one, so it needs the workflow ID that [starting the run](start.md) returned.
 
 ## Send one from an integration
 
@@ -31,7 +31,7 @@ The delivery does not create a run. It resumes one, so it needs the workflow ID 
    | Field | Required | Description |
    |---|---|---|
    | **Workflow Name** | Yes | The workflow to deliver into. The dropdown lists every workflow in the project. |
-   | **Target Workflow Id** | Yes | Which run to resume, so this is the ID that [starting the run](start-workflow.md) returned. |
+   | **Target Workflow Id** | Yes | Which run to resume, so this is the ID that [starting the run](start.md) returned. |
    | **Data Name** | Yes | The event to fill. The dropdown lists the data events declared by the workflow chosen above, so the two cannot drift apart. |
    | **Data** | Yes | The value to deliver. It has to match the type the event declares. |
 
@@ -52,5 +52,5 @@ Holding the workflow ID is all it takes to fill the event, so the resource that 
 ## Next steps
 
 - [Await data events](data-events.md) — the waiting half: declare the event and pause the workflow on it.
-- [Start a workflow](start-workflow.md) — where the workflow ID comes from.
-- [Await human task](human-task-workflow.md) — when a person is deciding rather than submitting content.
+- [Start a workflow](start.md) — where the workflow ID comes from.
+- [Await human task](await-human-task.md) — when a person is deciding rather than submitting content.

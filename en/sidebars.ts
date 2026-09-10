@@ -2091,8 +2091,8 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Getting Started',
           items: [
-            'workflows/getting-started/build-an-order-processing-workflow',
-            'workflows/getting-started/build-a-claim-workflow-agent',
+            'workflows/getting-started/build-order-processing',
+            'workflows/getting-started/build-claim-handling-agent',
           ],
         },
         // Workflow Features
@@ -2100,12 +2100,12 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Develop Workflows',
           items: [
-            'workflows/develop/create-workflow',
-            'workflows/develop/start-workflow',
+            'workflows/develop/create',
+            'workflows/develop/start',
             'workflows/develop/activities',
             'workflows/develop/data-events',
             'workflows/develop/send-data-event',
-            'workflows/develop/human-task-workflow',
+            'workflows/develop/await-human-task',
             'workflows/develop/review-activity-and-error-handling',
             'workflows/develop/durable-timers',
             {
@@ -2136,10 +2136,10 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Integration Control Plane',
-          link: { type: 'doc', id: 'workflows/icp/managing-workflows' },
+          link: { type: 'doc', id: 'workflows/icp/manage' },
           items: [
             'workflows/icp/connect-runtime',
-            'workflows/icp/start-workflow',
+            'workflows/icp/start',
             'workflows/icp/executions',
             'workflows/icp/human-tasks',
             'workflows/icp/review-activities',

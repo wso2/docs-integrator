@@ -130,7 +130,7 @@ A suspended run may continue to be listed as **Running**, because suspension is 
 
 ## What's next
 
-- [Start a workflow](start-workflow.md) — launch a new execution from the console
+- [Start a workflow](start.md) — launch a new execution from the console
 - [Complete human tasks](human-tasks.md) — decide the tasks a halted run is waiting on
 - [Review activities](review-activities.md) — approve, correct, or reject a gated or failed activity
 - [Activities](../develop/activities.md) — how the steps on the timeline are recorded and retried

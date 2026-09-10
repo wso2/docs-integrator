@@ -39,11 +39,11 @@ Mail cannot be recalled, and the send is not idempotent: if the message left the
 :::
 
 :::tip Notification or decision?
-Use this activity to tell someone what happened. When the workflow needs an answer back, pause it with a [human task](../human-task-workflow.md) instead and let the person decide from their inbox in the Control Plane.
+Use this activity to tell someone what happened. When the workflow needs an answer back, pause it with a [human task](../await-human-task.md) instead and let the person decide from their inbox in the Control Plane.
 :::
 
 ## Next steps
 
-- [Await human task](../human-task-workflow.md) — wait for a person's decision rather than notifying them.
+- [Await human task](../await-human-task.md) — wait for a person's decision rather than notifying them.
 - [Call REST API](call-rest-api.md) — reach a notification service over HTTP instead of SMTP.
 - [Activities](../activities.md) — write your own activity when a template or attachment is involved.

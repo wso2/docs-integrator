@@ -26,7 +26,7 @@ A **durable workflow** is an artifact in your integration, the same as a service
    | **Workflow Input Data Type** | No | The type of the data the workflow starts with, usually a record. See [Types](../../develop/integration-artifacts/supporting/types.md). |
 
    :::tip Design it for the launcher
-   Whatever you put in this type is what every caller has to supply, including the form the [Integration Control Plane](../icp/start-workflow.md) generates for starting a run by hand. Keep it to the data the process actually needs.
+   Whatever you put in this type is what every caller has to supply, including the form the [Integration Control Plane](../icp/start.md) generates for starting a run by hand. Keep it to the data the process actually needs.
    :::
 
    ![The Create New Durable Workflow form with Name set to orderWorkflow and Workflow Input Data Type set to OrderInfo](/img/workflows/develop/create-workflow/create-workflow-form.png)
@@ -35,7 +35,7 @@ A **durable workflow** is an artifact in your integration, the same as a service
 
 The workflow opens on its own diagram with a single **Start** node, and appears under **Workflows** in the sidebar.
 
-For a worked example that fills this in end to end, see [Build an order processing workflow](../getting-started/build-an-order-processing-workflow.md).
+For a worked example that fills this in end to end, see [Build an order processing workflow](../getting-started/build-order-processing.md).
 
 ## Design the steps
 
@@ -43,12 +43,12 @@ The workflow diagram is the same flow diagram used everywhere else in WSO2 Integ
 
 | Group | What it holds |
 |---|---|
-| **Workflow** > **Steps** | [Call Activity](activities.md), [Await Human Task](human-task-workflow.md), [Await Data Event](data-events.md), and [Sleep](durable-timers.md). |
+| **Workflow** > **Steps** | [Call Activity](activities.md), [Await Human Task](await-human-task.md), [Await Data Event](data-events.md), and [Sleep](durable-timers.md). |
 | **Workflow** > **Workflow Functions** | Replay-safe helpers: current time, whether the run is replaying, and the run's own ID and type. |
 | **Statement**, **Control**, **Error Handling** | The ordinary building blocks: variables, function calls, `if`, `while`, `foreach`, and error handling. |
 
 ## Next steps
 
-- [Start a workflow](start-workflow.md) — launch a run from a service, an automation, or the console.
+- [Start a workflow](start.md) — launch a run from a service, an automation, or the console.
 - [Activities](activities.md) — the recorded units of work a workflow calls.
-- [Build an order processing workflow](../getting-started/build-an-order-processing-workflow.md) — the whole flow, step by step.
+- [Build an order processing workflow](../getting-started/build-order-processing.md) — the whole flow, step by step.

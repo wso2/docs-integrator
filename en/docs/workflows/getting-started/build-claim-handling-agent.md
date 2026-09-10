@@ -279,6 +279,6 @@ curl "localhost:9090/claims/$INSTANCE_ID"
 
 ## Next steps
 
-- [Await human task](../develop/human-task-workflow.md) — ask people structured questions, not just approvals.
+- [Await human task](../develop/await-human-task.md) — ask people structured questions, not just approvals.
 - [Error handling and review activities](../develop/review-activity-and-error-handling.md) — let a human fix a failed step's input and retry it.
 - [Create a Durable Agent](../agentic/create-durable-agent.md) — events, multi-turn conversations, and agent-to-agent collaboration.

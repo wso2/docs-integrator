@@ -46,12 +46,12 @@ Like every other durable wait, it holds no thread and no connection while it wai
 The diagram gains a wait node, drawn with an arrow arriving from outside the flow, and the workflow now suspends there.
 
 :::tip Data event or human task?
-Use a **data event** when a system or a person is submitting *content* the workflow will process. Use a [human task](human-task-workflow.md) when a person is making a *decision* the Control Plane should render as a form in their inbox.
+Use a **data event** when a system or a person is submitting *content* the workflow will process. Use a [human task](await-human-task.md) when a person is making a *decision* the Control Plane should render as a form in their inbox.
 :::
 
 ## Watching a waiting workflow
 
-While the workflow waits, the execution graph in the [Integration Control Plane](../icp/managing-workflows.md) marks the halt point as a `DATA` node named after the event, with status `WAITING` — so anyone can see exactly what the process is blocked on rather than guessing that it is stuck.
+While the workflow waits, the execution graph in the [Integration Control Plane](../icp/manage.md) marks the halt point as a `DATA` node named after the event, with status `WAITING` — so anyone can see exactly what the process is blocked on rather than guessing that it is stuck.
 
 <ThemedImage
     alt="Execution graph showing the workflow halted on a waiting billSubmitted data event"
@@ -66,6 +66,6 @@ The same graph is available over the [Management API](../reference/management-ap
 ## Next steps
 
 - [Send a data event](send-data-event.md) — the delivery half: fill the event and resume the run.
-- [Await human task](human-task-workflow.md) — pause for a person's decision instead of their data.
+- [Await human task](await-human-task.md) — pause for a person's decision instead of their data.
 - [Durable timers](durable-timers.md) — waiting on the clock instead of an event.
 - [Activities](activities.md) — the recorded steps that process the data once it arrives.

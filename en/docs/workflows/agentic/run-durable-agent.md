@@ -56,5 +56,5 @@ This step creates the instance and binds its ID. It does not sit and wait for th
 
 - [Send an Agent Data Event](send-agent-data-event.md) — delivering a turn to the instance this step started.
 - [Create a Durable Agent](create-durable-agent.md) — the agent and the capabilities this step starts.
-- [Integration Control Plane](../icp/managing-workflows.md) — watching the started instance and deciding what it escalates.
-- [Build a Claim Handling Agent](../getting-started/build-a-claim-workflow-agent.md) — the same agent driven end to end.
+- [Integration Control Plane](../icp/manage.md) — watching the started instance and deciding what it escalates.
+- [Build a Claim Handling Agent](../getting-started/build-claim-handling-agent.md) — the same agent driven end to end.

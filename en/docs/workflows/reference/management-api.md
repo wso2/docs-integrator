@@ -13,7 +13,7 @@ This reference is still being written, so parts of it may be incomplete or chang
 
 Every integration with durable workflows can expose a **Management API**: a REST surface, served by the integration runtime itself, over the runs that integration owns. Enable it to build custom portals, automations, or operational tooling.
 
-This is not the [Integration Control Plane](../icp/managing-workflows.md) server's own API. ICP serves the console over GraphQL on port `9446` and spans every registered integration, while the API on this page is integration-local and reaches only one runtime. See [Integration Control Plane](../../manage/icp/integration-control-plane.md) for that side.
+This is not the [Integration Control Plane](../icp/manage.md) server's own API. ICP serves the console over GraphQL on port `9446` and spans every registered integration, while the API on this page is integration-local and reaches only one runtime. See [Integration Control Plane](../../manage/icp/integration-control-plane.md) for that side.
 
 ## Enable and configure
 

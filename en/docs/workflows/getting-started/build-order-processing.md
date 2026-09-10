@@ -186,7 +186,7 @@ function orderWorkflow(workflow:Context ctx, OrderInfo orderInfo, OrderWorkflowD
 </Tabs>
 
 :::tip Data event or human task?
-Use a **data event** when a system or a person submits *content* the workflow processes, as here. Use a [human task](../develop/human-task-workflow.md) when a person makes a *decision* that the Integration Control Plane should render as a form in their inbox.
+Use a **data event** when a system or a person submits *content* the workflow processes, as here. Use a [human task](../develop/await-human-task.md) when a person makes a *decision* that the Integration Control Plane should render as a form in their inbox.
 :::
 
 ## Step 5: Branch on the payment result
@@ -436,5 +436,5 @@ Once the integration is [connected to the Integration Control Plane](../icp/conn
 
 - [Activities](../develop/activities.md) — retry policies, activity inputs, and how results are recorded.
 - [Await data events](../develop/data-events.md) — several events, timeouts, and delivering data from other systems.
-- [Await human task](../develop/human-task-workflow.md) — pause the order for a person's decision instead of a system's data.
+- [Await human task](../develop/await-human-task.md) — pause the order for a person's decision instead of a system's data.
 - [Durable timers](../develop/durable-timers.md) — add a payment deadline that survives restarts.

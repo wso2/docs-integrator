@@ -20,7 +20,7 @@ A durable workflow runs inside your integration. The Integration Control Plane (
 
 - An ICP server that is running and reachable on port `9445` ([Install ICP](../../manage/icp/install-icp.md))
 - A project and at least one environment in ICP ([Manage projects](../../manage/icp/manage-projects.md))
-- An integration that defines at least one durable workflow ([Build an order processing workflow](../getting-started/build-an-order-processing-workflow.md))
+- An integration that defines at least one durable workflow ([Build an order processing workflow](../getting-started/build-order-processing.md))
 :::
 
 ## 1. Create a workflow integration
@@ -162,7 +162,7 @@ Then check the console:
 2. A **Workflows** item appears in the integration's sidebar.
 3. On the integration overview, the environment card lists your workflow definitions under **Workflow Definitions**. Selecting one shows its running instances, with **View Workflows** and **Start New Workflow** actions.
 
-If all three are true, the setup is complete. Continue with [Start a workflow](start-workflow.md).
+If all three are true, the setup is complete. Continue with [Start a workflow](start.md).
 
 ## How ICP reaches the runtime
 
@@ -197,7 +197,7 @@ Two consequences are worth knowing:
 
 ## What's next
 
-- [Start a workflow](start-workflow.md) — launch a new execution from the console
+- [Start a workflow](start.md) — launch a new execution from the console
 - [Workflow executions](executions.md) — inspect the timeline, execution graph, and history of a run
-- [Manage workflows with the Integration Control Plane](managing-workflows.md) — the permissions and roles that control each view
+- [Manage workflows with the Integration Control Plane](manage.md) — the permissions and roles that control each view
 - [Management API](../reference/management-api.md) — the REST API the console calls

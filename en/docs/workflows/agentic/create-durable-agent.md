@@ -36,7 +36,7 @@ A durable agentic workflow flips the authoring model: instead of wiring steps to
 
    ![The Artifacts page with the Durable Agentic Workflow card under the Durable Workflow section](/img/workflows/agentic/create-durable-agent/add-agent-artifact.png)
 
-   **Durable Workflow** beside it produces the same kind of artifact with the steps wired by hand instead of chosen by a model. See [Create a workflow](../develop/create-workflow.md).
+   **Durable Workflow** beside it produces the same kind of artifact with the steps wired by hand instead of chosen by a model. See [Create a workflow](../develop/create.md).
 
 3. Set **Name** to the name the agent is referenced by, then click **Create Agent**. The agent opens on its own model and appears under **Workflows** in the sidebar.
 
@@ -111,7 +111,7 @@ To register a data event:
 
 ### Human tasks
 
-A human task is an escalation point the agent raises on its own judgement, for example when a claim looks unusual or its documents need a second pair of eyes. The task lands in the [Control Plane](../icp/human-tasks.md) inbox of the roles you name, and the agent suspends durably until someone submits a decision, exactly like an [Await Human Task](../develop/human-task-workflow.md) step in a hand-wired workflow.
+A human task is an escalation point the agent raises on its own judgement, for example when a claim looks unusual or its documents need a second pair of eyes. The task lands in the [Control Plane](../icp/human-tasks.md) inbox of the roles you name, and the agent suspends durably until someone submits a decision, exactly like an [Await Human Task](../develop/await-human-task.md) step in a hand-wired workflow.
 
 To register a human task with the agent:
 
@@ -125,7 +125,7 @@ To register a human task with the agent:
    | **Title**           | No       | Short summary shown in the task inbox.                                                                                                                                                                                                                                                                    |
    | **Description**     | No       | Context shown to the person completing the task, for example `Check that the claim documents are legitimate`.                                                                                                                                                                                             |
    | **Timeout**         | No       | Maximum time to wait for completion as a duration. On expiry the agent is told the task timed out, so it can react rather than wait on. Omit it to wait indefinitely.                                                                                                                                     |
-   | **Completion Type** | No       | The type of the result the person submits, which drives the completion form rendered in the inbox. A plain approve or reject is a `boolean`, while anything richer wants a record. Defaults to `anydata`, a free-form completion form. See [Type the decision](../develop/human-task-workflow.md#type-the-decision). |
+   | **Completion Type** | No       | The type of the result the person submits, which drives the completion form rendered in the inbox. A plain approve or reject is a `boolean`, while anything richer wants a record. Defaults to `anydata`, a free-form completion form. See [Type the decision](../develop/await-human-task.md#type-the-decision). |
 
 3. Click **Save**.
 
@@ -134,15 +134,15 @@ To register a human task with the agent:
 The task joins the agent node as a capability, drawn to the left of the node under its task name. **Task Name**, **User Roles**, and **Title** each take either text or an expression, so any of them can be built in code, for example from a configurable.
 
 :::tip No payload, no result variable
-Unlike an [Await Human Task](../develop/human-task-workflow.md) step, the register form asks for neither a **Payload** nor a **Result** variable. The agent decides when to raise the task and what context to attach, and it reads the decision straight back into its reasoning, which is why **Task Name** and **Description** are what steer it.
+Unlike an [Await Human Task](../develop/await-human-task.md) step, the register form asks for neither a **Payload** nor a **Result** variable. The agent decides when to raise the task and what context to attach, and it reads the decision straight back into its reasoning, which is why **Task Name** and **Description** are what steer it.
 :::
 
 ## Traditional or agentic?
 
-Reach for an agentic workflow when the logic is branchy and judgement-heavy ("request whatever is missing, escalate the odd ones"); keep a hand-wired [durable workflow](../getting-started/build-an-order-processing-workflow.md) when the steps are fixed and auditable. The two share activities, tasks, and the runtime — a claim system can use both side by side.
+Reach for an agentic workflow when the logic is branchy and judgement-heavy ("request whatever is missing, escalate the odd ones"); keep a hand-wired [durable workflow](../getting-started/build-order-processing.md) when the steps are fixed and auditable. The two share activities, tasks, and the runtime — a claim system can use both side by side.
 
 ## Next steps
 
 - [Run a Durable Agent](run-durable-agent.md) — starting an instance of the agent from an integration flow.
-- [Build a Claim Handling Agent](../getting-started/build-a-claim-workflow-agent.md) — the end-to-end getting started.
-- [Integration Control Plane](../icp/managing-workflows.md) — approving the agent's gated steps and reading its progress.
+- [Build a Claim Handling Agent](../getting-started/build-claim-handling-agent.md) — the end-to-end getting started.
+- [Integration Control Plane](../icp/manage.md) — approving the agent's gated steps and reading its progress.

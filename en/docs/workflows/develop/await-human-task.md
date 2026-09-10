@@ -22,7 +22,7 @@ Real processes wait on people: a manager approves an expense, a reviewer checks 
 
 ## Add the step
 
-The steps below follow one example: an onboarding workflow where an HR lead assigns a new joiner to a team. The task lands in the [Control Plane](../icp/human-tasks.md) inbox of the matching role, as a form rendered with the information needed to answer it. The workflow starts with the employee's details, so its [input type](create-workflow.md) is an `EmployeeDetails` record:
+The steps below follow one example: an onboarding workflow where an HR lead assigns a new joiner to a team. The task lands in the [Control Plane](../icp/human-tasks.md) inbox of the matching role, as a form rendered with the information needed to answer it. The workflow starts with the employee's details, so its [input type](create.md) is an `EmployeeDetails` record:
 
 | Field | Type |
 |---|---|

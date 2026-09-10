@@ -117,5 +117,5 @@ What this asks of you in return is a deterministic workflow body, since that is 
 
 ## Next steps
 
-- [Await human task](human-task-workflow.md) — free-standing decisions and external data.
+- [Await human task](await-human-task.md) — free-standing decisions and external data.
 - [Create a Durable Agent](../agentic/create-durable-agent.md) — the same policies applied to an AI agent's activities.
