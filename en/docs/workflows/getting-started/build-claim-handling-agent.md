@@ -7,8 +7,6 @@ keywords: [wso2 integrator, durable workflow, agentic workflow, durable agent, c
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ThemedImage from '@theme/ThemedImage';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Build a Claim Handling Agent
 
@@ -27,14 +25,6 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 2. Select **Create** in the **Create New Integration** card.
 3. Set **Integration Name** to `ClaimHandler`.
 4. Select **Create Integration**.
-
-<ThemedImage
-    alt="Create Integration form with Integration Name set to ClaimHandler"
-    sources={{
-        light: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/01-create-integration.png'),
-        dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/01-create-integration.png'),
-    }}
-/>
 
 ## Step 2: Add a Durable Agentic Workflow
 
@@ -254,14 +244,6 @@ The agent validates the claim, decides to pay it, and **pauses** — the gated `
 1. Open the **Integration Control Plane** and sign in as a user with the `Finance` role.
 2. Open the **Task Inbox** — the `payClaim` approval shows the claim ID and amount the agent proposed.
 3. Select **Proceed**.
-
-<ThemedImage
-    alt="Integration Control Plane task inbox showing the payClaim approval with Proceed, Proceed with input, and Reject actions"
-    sources={{
-        light: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/05-icp-approval.png'),
-        dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/05-icp-approval.png'),
-    }}
-/>
 
 The agent resumes, completes the payment, and records its summary:
 

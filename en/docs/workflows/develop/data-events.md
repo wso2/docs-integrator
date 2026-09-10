@@ -53,14 +53,6 @@ Use a **data event** when a system or a person is submitting *content* the workf
 
 While the workflow waits, the execution graph in the [Integration Control Plane](../icp/manage.md) marks the halt point as a `DATA` node named after the event, with status `WAITING` — so anyone can see exactly what the process is blocked on rather than guessing that it is stuck.
 
-<ThemedImage
-    alt="Execution graph showing the workflow halted on a waiting billSubmitted data event"
-    sources={{
-        light: useBaseUrl('/img/workflows/develop/data-events/01-waiting-data-event.png'),
-        dark: useBaseUrl('/img/workflows/develop/data-events/01-waiting-data-event.png'),
-    }}
-/>
-
 The same graph is available over the [Management API](../reference/management-api.md).
 
 ## Next steps
