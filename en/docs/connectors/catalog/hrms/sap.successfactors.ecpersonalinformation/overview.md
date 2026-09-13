@@ -5,7 +5,9 @@ title: "SAP SuccessFactors Employee Central Personal Information"
 description: "Overview of the ballerinax/sap.successfactors.ecpersonalinformation connector for WSO2 Integrator."
 ---
 
-[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. The `ballerinax/sap.successfactors.ecpersonalinformation` connector provides access to Employee Central data through the SAP SuccessFactors OData v2 API. You can use these APIs to access the personal information of an employee including emergency contact information, social media accounts, email address, and non-effective-dated biographical information such as date of birth, country of birth and national identification card information.
+[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. It provides a unified platform for HR processes including employee data management, organizational structures, and employment lifecycle management.
+
+The `ballerinax/sap.successfactors.ecpersonalinformation` package provides APIs to interact with the SAP SuccessFactors Employee Central Personal Information API.
 
 ## Key Features
 

@@ -5,7 +5,9 @@ title: "SAP SuccessFactors Employee Central Position Management"
 description: "Overview of the ballerinax/sap.successfactors.ecpositionmanagement connector for WSO2 Integrator."
 ---
 
-[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. The `ballerinax/sap.successfactors.ecpositionmanagement` connector provides access to Employee Central data through the SAP SuccessFactors OData v2 API. You can use these APIs for maintain the information about employees position management.
+[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. It provides a unified platform for HR processes including employee data management, organizational structures, and employment lifecycle management.
+
+The `ballerinax/sap.successfactors.ecpositionmanagement` package provides APIs that enable seamless integration with the [SAP SuccessFactors Position Management API v1.0](https://help.sap.com/docs/SAP_SUCCESSFACTORS_PLATFORM/d599f15995d348a1b45ba5603e2aba9b/c508d8543026442d88457f3654b4e91d.html). The service allows to manage organizational positions, position hierarchies, and position-related information.
 
 ## Key Features
 

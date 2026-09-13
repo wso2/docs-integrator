@@ -12,22 +12,29 @@ This guide walks you through getting the necessary details from SAP SuccessFacto
 ## Prerequisites
 
 - An SAP SuccessFactors Employee Central tenant
-- A user account with the required role permissions for the entities this connector accesses
+- Administrator access to Admin Center
 
-## Obtain the API server hostname
-
-SAP SuccessFactors serves OData API traffic from a dedicated API server host, which is usually **different from the host you use to log in to the SuccessFactors UI**. You can find the API server for your data center in [List of API Servers in SAP SuccessFactors](https://help.sap.com/viewer/d599f15995d348a1b45ba5603e2aba9b/LATEST/en-US/af2b8d5437494b12be88fe374eba75b6.html).
-
-:::note
-If Basic Authentication against the login host returns an `LGN0004` error ("You're not allowed to access APIs using Basic Authentication or OAuth on this server"), that confirms you're pointed at the UI host instead of the API host — use the API server hostname instead.
-:::
-
-## Obtain your Company ID and credentials
+## Register an OAuth2 client application
 
 1. Sign in to your SAP SuccessFactors instance as an administrator.
-2. Note your **Company ID**, shown in Admin Center or on the login screen.
-3. Use **Basic Authentication**: the connector's `username` must be formatted as `<username>@<companyID>`, together with the account's password.
-4. Alternatively, for **OAuth 2.0**: navigate to **Admin Center** > **Manage OAuth2 Client Applications** and register a new OAuth2 client application, noting the generated **API Key**.
+
+2. Navigate to **Admin Center** > **Manage OAuth2 Client Applications** and register a new OAuth2 client application for your integration.
+
+![Register OAuth2 App](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-sap/main/docs/setup/sf-1-register-oauth.png)
+
+3. Note down the **API Key** (client ID) and configure the appropriate scopes for the Employee Central APIs you intend to use.
+
+## Locate your Company ID and API server
+
+Locate your **Company ID** and the API server hostname for your SuccessFactors region. You can find the list of API servers in the [SAP SuccessFactors API documentation](https://help.sap.com/viewer/d599f15995d348a1b45ba5603e2aba9b/LATEST/en-US/af2b8d5437494b12be88fe374eba75b6.html).
+
+:::note
+The API server is usually **different from the host you use to log in to the SuccessFactors UI**. If Basic Authentication against the login host returns an `LGN0004` error ("You're not allowed to access APIs using Basic Authentication or OAuth on this server"), that confirms you're pointed at the UI host instead of the API host — use the API server hostname instead.
+:::
+
+## Choose an authentication method
+
+Use **Basic Authentication** (username formatted as `<username>@<companyID>`, plus password) or **OAuth 2.0 SAML Bearer** (using the API Key from the registered client application) to authenticate with the API.
 
 ## Next steps
 

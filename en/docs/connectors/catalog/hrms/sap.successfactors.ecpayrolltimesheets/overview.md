@@ -5,7 +5,9 @@ title: "SAP SuccessFactors Employee Central Payroll Time Sheets"
 description: "Overview of the ballerinax/sap.successfactors.ecpayrolltimesheets connector for WSO2 Integrator."
 ---
 
-[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. The `ballerinax/sap.successfactors.ecpayrolltimesheets` connector provides access to Employee Central data through the SAP SuccessFactors OData v2 API. API to record employee attendances, overtime, on-call times, and allowances
+[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. It provides a unified platform for HR processes including employee data management, organizational structures, and employment lifecycle management.
+
+The `ballerinax/sap.successfactors.ecpayrolltimesheets` package provides APIs that enable seamless integration with the [SAP SuccessFactors Payroll Time Sheets API v1.0](https://help.sap.com/docs/SAP_SUCCESSFACTORS_PLATFORM/d599f15995d348a1b45ba5603e2aba9b/c508d8543026442d88457f3654b4e91d.html). The service allows to manage employee time sheet data, working hours, and payroll-related time information.
 
 ## Key Features
 

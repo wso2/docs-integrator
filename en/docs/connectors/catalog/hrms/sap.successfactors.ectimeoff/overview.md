@@ -5,7 +5,9 @@ title: "SAP SuccessFactors Employee Central Time Off"
 description: "Overview of the ballerinax/sap.successfactors.ectimeoff connector for WSO2 Integrator."
 ---
 
-[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. The `ballerinax/sap.successfactors.ectimeoff` connector provides access to Employee Central data through the SAP SuccessFactors OData v2 API. API to manage absences such as vacation, sick leave, and paid time off
+[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. It provides a unified platform for HR processes including employee data management, organizational structures, and employment lifecycle management.
+
+The `ballerinax/sap.successfactors.ectimeoff` package provides APIs to interact with the SAP SuccessFactors Employee Central Time Off API.
 
 ## Key Features
 

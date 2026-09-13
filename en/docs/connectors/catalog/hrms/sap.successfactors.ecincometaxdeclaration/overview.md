@@ -5,7 +5,9 @@ title: "SAP SuccessFactors Employee Central Income Tax Declaration"
 description: "Overview of the ballerinax/sap.successfactors.ecincometaxdeclaration connector for WSO2 Integrator."
 ---
 
-[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. The `ballerinax/sap.successfactors.ecincometaxdeclaration` connector provides access to Employee Central data through the SAP SuccessFactors OData v2 API. You can use these APIs to record income tax declaration and submit tax declarations actuals. You can also use these APIs to categorize or group investment types, and configure the window period that controls the creation of actuals and proposals.
+[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. It provides a unified platform for HR processes including employee data management, organizational structures, and employment lifecycle management.
+
+The `ballerinax/sap.successfactors.ecincometaxdeclaration` package provides APIs to interact with the SAP SuccessFactors Employee Central Income Tax Declaration API.
 
 ## Key Features
 

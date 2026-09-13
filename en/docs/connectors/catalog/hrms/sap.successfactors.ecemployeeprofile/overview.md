@@ -5,7 +5,9 @@ title: "SAP SuccessFactors Employee Central Employee Profile"
 description: "Overview of the ballerinax/sap.successfactors.ecemployeeprofile connector for WSO2 Integrator."
 ---
 
-[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. The `ballerinax/sap.successfactors.ecemployeeprofile` connector provides access to Employee Central data through the SAP SuccessFactors OData v2 API. You can use these APIs to maintain the general background information of an employee, including education and outside work experiences.
+[SAP SuccessFactors Employee Central](https://www.sap.com/products/hcm/core-hr-payroll.html) is a comprehensive human capital management solution that helps organizations manage their workforce effectively. It provides a unified platform for HR processes including employee data management, organizational structures, and employment lifecycle management.
+
+The `ballerinax/sap.successfactors.ecemployeeprofile` package provides APIs that enable seamless integration with the [SAP SuccessFactors Employee Profile API v1.0](https://help.sap.com/docs/SAP_SUCCESSFACTORS_PLATFORM/d599f15995d348a1b45ba5603e2aba9b/c508d8543026442d88457f3654b4e91d.html). The service allows to maintain the general background information of an employee, including education and outside work experiences.
 
 ## Key Features
 
