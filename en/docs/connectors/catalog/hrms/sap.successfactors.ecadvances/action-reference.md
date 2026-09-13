@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecadvances objects — AdvancesInstallments, AdvancesEligibility, AdvancesAccumulation, Advance — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecadvances objects: AdvancesInstallments, AdvancesEligibility, AdvancesAccumulation, Advance, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

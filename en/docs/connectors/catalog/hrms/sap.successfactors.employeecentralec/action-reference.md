@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages employeecentralec objects — PerGlobalInfoARE, PerGlobalInfoCHN, PerGlobalInfoFIN, EducationDegreeContent, CurrencyExchangeRate, NonRecurringPayment, EducationDegreeEntity, ServiceDeskContactSupportInformation… — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages employeecentralec objects: PerGlobalInfoARE, PerGlobalInfoCHN, PerGlobalInfoFIN, EducationDegreeContent, CurrencyExchangeRate, NonRecurringPayment, EducationDegreeEntity, ServiceDeskContactSupportInformation…, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

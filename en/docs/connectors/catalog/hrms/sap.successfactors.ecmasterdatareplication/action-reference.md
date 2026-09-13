@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecmasterdatareplication objects — EmployeeDataReplicationConfirmationErrorMessage, EmployeeDataReplicationElement, EmployeeDataReplicationNotification, EmployeeDataReplicationConfirmation — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecmasterdatareplication objects: EmployeeDataReplicationConfirmationErrorMessage, EmployeeDataReplicationElement, EmployeeDataReplicationNotification, EmployeeDataReplicationConfirmation, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

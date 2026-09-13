@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages eccompensationinformation objects — OneTimeDeduction, RecurringDeductionItem, EmpCompensation, EmpPayCompRecurring, DeductionScreenId, RecurringDeduction, EmpPayCompNonRecurring, EmpCompensationGroupSumCalculated — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages eccompensationinformation objects: OneTimeDeduction, RecurringDeductionItem, EmpCompensation, EmpPayCompRecurring, DeductionScreenId, RecurringDeduction, EmpPayCompNonRecurring, EmpCompensationGroupSumCalculated, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

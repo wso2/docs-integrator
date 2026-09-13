@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecalternativecostdistribution objects — EmpCostDistribution, EmpCostDistributionItem — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecalternativecostdistribution objects: EmpCostDistribution, EmpCostDistributionItem, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

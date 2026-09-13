@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecpayrolltimesheets objects — EmployeeTimeSheet, ExternalAllowance, TimeCollector, ExternalTimeRecord, ExternalTimeData, DataReplicationProxy, EmployeeTimeSheetEntry, EmployeeTimeValuationResult… — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecpayrolltimesheets objects: EmployeeTimeSheet, ExternalAllowance, TimeCollector, ExternalTimeRecord, ExternalTimeData, DataReplicationProxy, EmployeeTimeSheetEntry, EmployeeTimeValuationResult…, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

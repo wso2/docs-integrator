@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecincometaxdeclaration objects — DeclarationType, FiscalYearVariant, FiscalYearToCountryMap, ItDeclarationTimeBound, ItDeclInvestmentType, ItDeclaration — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecincometaxdeclaration objects: DeclarationType, FiscalYearVariant, FiscalYearToCountryMap, ItDeclarationTimeBound, ItDeclInvestmentType, ItDeclaration, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecglobalassignment objects — SecondaryAssignmentsItem, SecondaryAssignments, RightToReturn, EmpGlobalAssignment — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecglobalassignment objects: SecondaryAssignmentsItem, SecondaryAssignments, RightToReturn, EmpGlobalAssignment, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

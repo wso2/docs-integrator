@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecdismissalprotection objects — EmployeeDismissalProtectionDetail, EmployeeDismissalProtection — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecdismissalprotection objects: EmployeeDismissalProtectionDetail, EmployeeDismissalProtection, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

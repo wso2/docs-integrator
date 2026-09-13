@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecpersonalinformation objects — PerEmergencyContacts, PerPhone, PersonKey, PerPersonal, PerSocialAccount, PerPerson, PerPersonRelationship, PerEmail… — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecpersonalinformation objects: PerEmergencyContacts, PerPhone, PersonKey, PerPersonal, PerSocialAccount, PerPerson, PerPersonRelationship, PerEmail…, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

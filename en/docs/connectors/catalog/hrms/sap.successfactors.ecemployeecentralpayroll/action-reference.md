@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecemployeecentralpayroll objects — EmployeePayrollRunResultsItems, EmployeePayrollRunResults — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecemployeecentralpayroll objects: EmployeePayrollRunResultsItems, EmployeePayrollRunResults, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

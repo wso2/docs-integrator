@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecworkflow objects — MyPendingWorkflow, WfRequestParticipator, WorkflowAllowedActionList, AlertMessage, WfRequestComments, WfRequestStep, AutoDelegateDetail, AutoDelegateConfig… — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecworkflow objects: MyPendingWorkflow, WfRequestParticipator, WorkflowAllowedActionList, AlertMessage, WfRequestComments, WfRequestStep, AutoDelegateDetail, AutoDelegateConfig…, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

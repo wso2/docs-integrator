@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecfoundationorganization objects — FOLegalEntityLocalUSA, FODepartment, FOJobClassLocalCAN, Territory, JobClassificationCountry, FOJobFunction, FODynamicRole, FOFrequency… — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecfoundationorganization objects: FOLegalEntityLocalUSA, FODepartment, FOJobClassLocalCAN, Territory, JobClassificationCountry, FOJobFunction, FODynamicRole, FOFrequency…, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

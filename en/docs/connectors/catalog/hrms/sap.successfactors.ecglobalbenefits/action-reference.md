@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecglobalbenefits objects — BenefitEmployeeClaim, BenefitSavingsPlanSubType, BenefitInsurancePlan, BenefitBalanceCarryForwardDetail, EmployeeWithEmployerMatchContributions, BenefitProgramEnrollment, EmployeeWithEmployerMatchContributionEntries, BenefitInsuranceCoverage… — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecglobalbenefits objects: BenefitEmployeeClaim, BenefitSavingsPlanSubType, BenefitInsurancePlan, BenefitBalanceCarryForwardDetail, EmployeeWithEmployerMatchContributions, BenefitProgramEnrollment, EmployeeWithEmployerMatchContributionEntries, BenefitInsuranceCoverage…, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

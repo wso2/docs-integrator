@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecpositionmanagement objects — PositionRequisitionStatus, PositionMatrixRelationship, Position, getPositionObjectData, PositionRightToReturn — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecpositionmanagement objects: PositionRequisitionStatus, PositionMatrixRelationship, Position, getPositionObjectData, PositionRightToReturn, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

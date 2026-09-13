@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecemploymentinformation objects — EmpBeneficiary, EmpEmployment, EmpEmploymentTermination, EmpPensionPayout, EmpWorkPermit, EmpJobRelationships, EmpJob, PersonEmpTerminationInfo… — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecemploymentinformation objects: EmpBeneficiary, EmpEmployment, EmpEmploymentTermination, EmpPensionPayout, EmpWorkPermit, EmpJobRelationships, EmpJob, PersonEmpTerminationInfo…, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

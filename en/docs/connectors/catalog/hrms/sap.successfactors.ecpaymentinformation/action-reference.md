@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecpaymentinformation objects — PaymentInformationDetailV3KEN, PaymentInformationDetailV3ISR, PaymentInformationDetailV3, PaymentInformationDetailV3ARG, PaymentMethodV3, Bank, CustomPayTypeAssignment, CustomPayType… — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecpaymentinformation objects: PaymentInformationDetailV3KEN, PaymentInformationDetailV3ISR, PaymentInformationDetailV3, PaymentInformationDetailV3ARG, PaymentMethodV3, Bank, CustomPayTypeAssignment, CustomPayType…, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

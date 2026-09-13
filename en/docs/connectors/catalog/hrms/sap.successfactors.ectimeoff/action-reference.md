@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ectimeoff objects — TimeAccountPostingRule, WorkScheduleDayModelVariantAssignment, HolidayAssignment, TimeAccountPurchaseProfile, TimeTypeCAN, WorkScheduleDayModelVariantIdentifier, TimeManagementTerminationEndHandlingExcludedEventReason, TimeAccountPurchaseProfilePayComponentAssignment… — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ectimeoff objects: TimeAccountPostingRule, WorkScheduleDayModelVariantAssignment, HolidayAssignment, TimeAccountPurchaseProfile, TimeTypeCAN, WorkScheduleDayModelVariantIdentifier, TimeManagementTerminationEndHandlingExcludedEventReason, TimeAccountPurchaseProfilePayComponentAssignment…, over the SAP SuccessFactors OData v2 API. |
 
 ---
 

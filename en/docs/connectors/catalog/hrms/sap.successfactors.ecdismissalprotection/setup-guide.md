@@ -28,13 +28,11 @@ This guide walks you through getting the necessary details from SAP SuccessFacto
 
 Locate your **Company ID** and the API server hostname for your SuccessFactors region. You can find the list of API servers in the [SAP SuccessFactors API documentation](https://help.sap.com/viewer/d599f15995d348a1b45ba5603e2aba9b/LATEST/en-US/af2b8d5437494b12be88fe374eba75b6.html).
 
-:::note
-The API server is usually **different from the host you use to log in to the SuccessFactors UI**. If Basic Authentication against the login host returns an `LGN0004` error ("You're not allowed to access APIs using Basic Authentication or OAuth on this server"), that confirms you're pointed at the UI host instead of the API host — use the API server hostname instead.
-:::
-
 ## Choose an authentication method
 
-Use **Basic Authentication** (username formatted as `<username>@<companyID>`, plus password) or **OAuth 2.0 SAML Bearer** (using the API Key from the registered client application) to authenticate with the API.
+**OAuth 2.0 SAML Bearer is recommended**: use the API Key from the registered client application to authenticate with the API. Basic Authentication (username formatted as `<username>@<companyID>`, plus password) is also supported.
+
+![Manage OAuth2 Client Applications](/img/connectors/catalog/hrms/sap.successfactors/manage-oauth2-client-applications.png)
 
 ## Next steps
 

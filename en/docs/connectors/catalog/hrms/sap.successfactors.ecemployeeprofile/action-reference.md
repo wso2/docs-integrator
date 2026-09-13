@@ -12,7 +12,7 @@ Available clients:
 
 | Client | Purpose |
 |--------|---------|
-| [`Client`](#client) | Manages ecemployeeprofile objects — Background_Community, Background_Courses, Background_Benefitselection, Background_OutsideWorkExperience, Background_Promotability, Background_Fsaelection, Background_Compensation, Background_Memberships… — over the SAP SuccessFactors OData v2 API. |
+| [`Client`](#client) | Manages ecemployeeprofile objects: Background_Community, Background_Courses, Background_Benefitselection, Background_OutsideWorkExperience, Background_Promotability, Background_Fsaelection, Background_Compensation, Background_Memberships…, over the SAP SuccessFactors OData v2 API. |
 
 ---
 
