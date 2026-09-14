@@ -2141,6 +2141,13 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'category',
+          label: 'Use Cases',
+          items: [
+            'guides/usecases/order-management-automation',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Enterprise Integration Patterns',
           items: [
             'guides/patterns/message',
