@@ -2,24 +2,24 @@
 
 ## What you'll build
 
-Build an integration that connects to SAP SuccessFactors Employee Central using the SAP SuccessFactors Employee Central Global Benefits connector and retrieves BenefitEmployeeClaim records. The integration sets up an automation entry point that invokes the operation and returns the result.
+Build an integration that connects to SAP SuccessFactors Employee Central and retrieves benefit employee claim records through the SAP SuccessFactors Employee Central Global Benefits connector. The integration exposes an automation entry point that calls the operation and stores the result in a variable you can process further.
 
 **Operations used:**
-- **listBenefitEmployeeClaims** : Queries the BenefitEmployeeClaim collection and returns a page of entities, optionally filtered, sorted, and paged via OData query options.
+- **List Benefit Employee Claims** : Queries the BenefitEmployeeClaim collection and returns a page of entities, optionally filtered, sorted, and paged through OData query options.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    A((User)) --> B[listBenefitEmployeeClaims]
+    A((User)) --> B[List Benefit Employee Claims]
     B --> C[SAP SuccessFactors Employee Central Global Benefits Connector]
     C --> D((SAP SuccessFactors OData API))
 ```
 
 ## Prerequisites
 
-- Access to a SAP SuccessFactors OData API server (see [Setup Guide](setup-guide.md))
-- A Company ID, username, and password (or OAuth2 credentials)
+- Access to a SAP SuccessFactors OData API server (see the [setup guide](setup-guide.md))
+- A company ID, username, and password, or OAuth 2.0 credentials
 
 ## Setting up the SAP SuccessFactors Employee Central Global Benefits integration
 
@@ -27,55 +27,80 @@ flowchart LR
 
 ## Adding the SAP SuccessFactors Employee Central Global Benefits connector
 
-### Step 1: Open the connector palette and add the SAP SuccessFactors Employee Central Global Benefits connector
+### Step 1: Open the connector palette
 
-1. From the project canvas, select **+ Add Artifact** → **Connection**.
-2. In the connector search palette, enter `sap.successfactors.ecglobalbenefits`.
-3. Locate **ballerinax/sap.successfactors.ecglobalbenefits** and select **Add**.
+1. Select **Add Artifact**.
+2. Select **Connection** to open the connector search palette.
+
+![SAP SuccessFactors Employee Central Global Benefits connector palette open before selection](/img/connectors/catalog/hrms/sap.successfactors.ecglobalbenefits/ballerinax_sap_successfactors_ecglobalbenefits_screenshot_01_palette.png)
+
+### Step 2: Select the SAP SuccessFactors Employee Central Global Benefits connector
+
+1. Enter `sap.successfactors.ecglobalbenefits` in the search field.
+2. Select the **Ecglobalbenefits** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Global Benefits connection
 
-### Step 2: Fill in the connection parameters
+### Step 3: Bind the connection parameters to configurable variables
 
-Bind each connection field to a configurable variable to keep credentials out of source code.
+Bind every required connection field to a configurable variable.
 
-- **auth** : Record containing `username` and `password` — bound to `sfUsername` and `sfPassword` configurable variables
-- **hostname** : The SAP SuccessFactors API server hostname — bound to the `sfHostname` configurable variable
-- **connectionName** : Logical name for this connection — leave the default value `ecglobalbenefitsClient`
+- **Config** : Expression containing the `auth` credentials for the SAP SuccessFactors OData server — bind `username` to a `sfUsername` configurable variable and `password` to a `sfPassword` configurable variable.
+- **Hostname** : The SAP SuccessFactors OData API server hostname — bind to a `sfHostname` configurable variable.
 
-### Step 3: Save the connection
+![SAP SuccessFactors Employee Central Global Benefits connection form with all parameters bound before saving](/img/connectors/catalog/hrms/sap.successfactors.ecglobalbenefits/ballerinax_sap_successfactors_ecglobalbenefits_screenshot_02_connection_form.png)
 
-Select **Save Connection**. The connection is saved and `ecglobalbenefitsClient` appears in the **Connections** section of the project tree.
+### Step 4: Save the connection
 
-### Step 4: Set actual values for your configurables
+Select **Save Connection** and verify that **ecglobalbenefitsClient** appears in the **Connections** section.
 
-1. In the left panel, select **Configurations**.
-2. Set a value for each configurable listed below.
+![SAP SuccessFactors Employee Central Global Benefits connection visible after saving](/img/connectors/catalog/hrms/sap.successfactors.ecglobalbenefits/ballerinax_sap_successfactors_ecglobalbenefits_screenshot_03_connections_list.png)
 
-- **sfUsername** (string) : The SF login username, formatted as `<username>@<companyID>`
-- **sfPassword** (string) : The SF login password
-- **sfHostname** (string) : The SAP SuccessFactors API server hostname (for example, `api<n>.successfactors.com`)
+### Step 5: Set actual values for your configurables
 
-## Configuring the SAP SuccessFactors Employee Central Global Benefits listBenefitEmployeeClaims operation
+1. Select **Configurations** at the bottom of the project tree under **Data Mappers**.
+2. Enter a value for each configurable listed below before you run the integration.
 
-### Step 5: Add an automation entry point
+- **sfUsername** (`configurable string`) : The SAP SuccessFactors login username, formatted as `<username>@<companyID>`.
+- **sfPassword** (`configurable string`) : The SAP SuccessFactors login password.
+- **sfHostname** (`configurable string`) : The SAP SuccessFactors OData API server hostname, for example `api68sales.successfactors.com`.
 
-1. Select **+ Add Artifact**.
-2. Select **Automation** to create an automation that can be invoked periodically or manually.
-3. In the **Create New Automation** form, leave the default name and select **Create**.
+## Configuring the SAP SuccessFactors Employee Central Global Benefits List Benefit Employee Claims operation
 
-### Step 6: Select and configure the listBenefitEmployeeClaims operation
+### Step 6: Add an automation entry point
 
-1. In the automation flow canvas, select the **+** button between the **Start** node and the **Error Handler** node.
-2. In the step-addition panel, expand **ecglobalbenefitsClient** under the **Connections** section.
-3. Select **listBenefitEmployeeClaims**.
+1. Select **Add Artifact**.
+2. Select **Automation**.
+3. Select **Create** to accept the default settings.
 
-Configure the operation with the following values:
+### Step 7: Expand the connection and configure the List Benefit Employee Claims operation
 
-- **resultVariable** : Auto-generated — leave the default value
+1. Select the **+** icon between **Start** and **Error Handler**.
+2. Expand **ecglobalbenefitsClient** to display its operations.
 
-Select **Save**. The operation step is added to the automation flow.
+![SAP SuccessFactors Employee Central Global Benefits connection expanded to display operations before selection](/img/connectors/catalog/hrms/sap.successfactors.ecglobalbenefits/ballerinax_sap_successfactors_ecglobalbenefits_screenshot_04_node_panel.png)
+
+3. Select **List Benefit Employee Claims**. The operation has no required parameters, so review the auto-generated result variable.
+
+- **Result** : Name of the variable that stores the returned BenefitEmployeeClaim records — leave the default value, `jsonResult`.
+
+![SAP SuccessFactors Employee Central Global Benefits List Benefit Employee Claims operation configured before saving](/img/connectors/catalog/hrms/sap.successfactors.ecglobalbenefits/ballerinax_sap_successfactors_ecglobalbenefits_screenshot_05_operation_config.png)
+
+4. Select **Save**. The operation step appears in the automation flow between **Start** and **Error Handler**.
+
+![Completed SAP SuccessFactors Employee Central Global Benefits flow with the configured List Benefit Employee Claims operation](/img/connectors/catalog/hrms/sap.successfactors.ecglobalbenefits/ballerinax_sap_successfactors_ecglobalbenefits_screenshot_06_completed_flow.png)
+
+## Try it yourself
+
+Try this sample in WSO2 Integration Platform.
+
+[![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/ecglobalbenefits_connector_sample)
+
+[View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/ecglobalbenefits_connector_sample)
 
 ## More code examples
 
 The SAP SuccessFactors Employee Central connectors provide practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-sap.successfactors.employeecentral/tree/main/examples), covering use cases like syncing employee data and sending notifications.
+
+1. [Google Sheets to SuccessFactors](https://github.com/ballerina-platform/module-ballerinax-sap.successfactors.employeecentral/tree/main/examples/google-sheets-to-successfactors) : Read employee records from a Google Sheets roster and create Personal Information records in SuccessFactors.
+2. [SuccessFactors to Slack](https://github.com/ballerina-platform/module-ballerinax-sap.successfactors.employeecentral/tree/main/examples/successfactors-to-slack) : Poll SuccessFactors for newly onboarded employees and send welcome notifications to a Slack channel.
