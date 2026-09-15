@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Foundation Organization connector
 
-1. Enter `sap.successfactors.ecfoundationorganization` in the search field.
+1. Enter `ecfoundationorganization` in the search field.
 2. Select the **Ecfoundationorganization** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Foundation Organization connection

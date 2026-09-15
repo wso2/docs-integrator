@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Payroll Time Sheets connector
 
-1. Enter `sap.successfactors.ecpayrolltimesheets` in the search field.
+1. Enter `ecpayrolltimesheets` in the search field.
 2. Select the **Ecpayrolltimesheets** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Payroll Time Sheets connection

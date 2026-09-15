@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Payroll connector
 
-1. Enter `sap.successfactors.ecemployeecentralpayroll` in the search field.
+1. Enter `ecemployeecentralpayroll` in the search field.
 2. Select the **Ecemployeecentralpayroll** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Payroll connection

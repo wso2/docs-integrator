@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Employee Profile connector
 
-1. Enter `sap.successfactors.ecemployeeprofile` in the search field.
+1. Enter `ecemployeeprofile` in the search field.
 2. Select the **Ecemployeeprofile** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Employee Profile connection

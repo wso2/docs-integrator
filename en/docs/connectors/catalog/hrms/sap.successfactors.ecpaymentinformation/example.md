@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Payment Information connector
 
-1. Enter `sap.successfactors.ecpaymentinformation` in the search field.
+1. Enter `ecpaymentinformation` in the search field.
 2. Select the **Ecpaymentinformation** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Payment Information connection

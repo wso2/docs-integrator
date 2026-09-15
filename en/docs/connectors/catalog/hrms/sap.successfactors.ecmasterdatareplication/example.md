@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Master Data Replication connector
 
-1. Enter `sap.successfactors.ecmasterdatareplication` in the search field.
+1. Enter `ecmasterdatareplication` in the search field.
 2. Select the **Ecmasterdatareplication** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Master Data Replication connection

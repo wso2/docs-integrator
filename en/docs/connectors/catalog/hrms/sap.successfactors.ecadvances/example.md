@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Advances connector
 
-1. Enter `sap.successfactors.ecadvances` in the search field.
+1. Enter `ecadvances` in the search field.
 2. Select the **Ecadvances** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Advances connection

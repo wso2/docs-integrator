@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Position Management connector
 
-1. Enter `sap.successfactors.ecpositionmanagement` in the search field.
+1. Enter `ecpositionmanagement` in the search field.
 2. Select the **Ecpositionmanagement** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Position Management connection

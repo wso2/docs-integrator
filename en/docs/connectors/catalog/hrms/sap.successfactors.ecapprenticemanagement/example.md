@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Apprentice Management connector
 
-1. Enter `sap.successfactors.ecapprenticemanagement` in the search field.
+1. Enter `ecapprenticemanagement` in the search field.
 2. Select the **Ecapprenticemanagement** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Apprentice Management connection

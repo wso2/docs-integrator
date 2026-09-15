@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Workflow connector
 
-1. Enter `sap.successfactors.ecworkflow` in the search field.
+1. Enter `ecworkflow` in the search field.
 2. Select the **Ecworkflow** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Workflow connection

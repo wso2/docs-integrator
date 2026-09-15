@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Personal Information connector
 
-1. Enter `sap.successfactors.ecpersonalinformation` in the search field.
+1. Enter `ecpersonalinformation` in the search field.
 2. Select the **Ecpersonalinformation** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Personal Information connection

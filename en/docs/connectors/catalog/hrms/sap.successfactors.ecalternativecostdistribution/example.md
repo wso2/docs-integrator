@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Alternative Cost Distribution connector
 
-1. Enter `sap.successfactors.ecalternativecostdistribution` in the search field.
+1. Enter `ecalternativecostdistribution` in the search field.
 2. Select the **Ecalternativecostdistribution** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Alternative Cost Distribution connection

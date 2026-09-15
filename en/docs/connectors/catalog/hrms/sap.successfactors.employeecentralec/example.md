@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central connector
 
-1. Enter `sap.successfactors.employeecentralec` in the search field.
+1. Enter `employeecentralec` in the search field.
 2. Select the **Employeecentralec** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central connection

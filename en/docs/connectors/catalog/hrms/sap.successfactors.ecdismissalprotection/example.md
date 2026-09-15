@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Dismissal Protection connector
 
-1. Enter `sap.successfactors.ecdismissalprotection` in the search field.
+1. Enter `ecdismissalprotection` in the search field.
 2. Select the **Ecdismissalprotection** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Dismissal Protection connection

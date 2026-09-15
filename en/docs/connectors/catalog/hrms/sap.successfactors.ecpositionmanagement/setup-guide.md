@@ -20,6 +20,8 @@ This guide walks you through getting the necessary details from SAP SuccessFacto
 
 2. Navigate to **Admin Center** > **Manage OAuth2 Client Applications** and register a new OAuth2 client application for your integration.
 
+![Manage OAuth2 Client Applications](/img/connectors/catalog/hrms/sap.successfactors/manage-oauth2-client-applications.png)
+
 3. Note down the **API Key** (client ID) and configure the appropriate scopes for the Employee Central APIs you intend to use.
 
 ## Locate your Company ID and API server
@@ -29,8 +31,6 @@ Locate your **Company ID** and the API server hostname for your SuccessFactors r
 ## Choose an authentication method
 
 **OAuth 2.0 SAML Bearer is recommended**: use the API Key from the registered client application to authenticate with the API. Basic Authentication (username formatted as `<username>@<companyID>`, plus password) is also supported.
-
-![Manage OAuth2 Client Applications](/img/connectors/catalog/hrms/sap.successfactors/manage-oauth2-client-applications.png)
 
 ## Next steps
 

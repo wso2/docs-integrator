@@ -36,7 +36,7 @@ flowchart LR
 
 ### Step 2: Select the SAP SuccessFactors Employee Central Employment Information connector
 
-1. Enter `sap.successfactors.ecemploymentinformation` in the search field.
+1. Enter `ecemploymentinformation` in the search field.
 2. Select the **Ecemploymentinformation** connector card.
 
 ## Configuring the SAP SuccessFactors Employee Central Employment Information connection
