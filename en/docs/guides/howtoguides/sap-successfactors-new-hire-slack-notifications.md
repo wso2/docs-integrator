@@ -67,10 +67,10 @@ You land in the [flow editor](../../develop/understand-ide/editors/flow-diagram-
 
 ## Step 2: Connect to SAP SuccessFactors Employee Central
 
-1. Add a [connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection): **Add Connection → Search Connectors**, then search for `sap.successfactors.ecemploymentinformation` and select the **Ecemploymentinformation** connector card.
+1. Add a [connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection): **Add Connection → Search Connectors**, then search for `ecemploymentinformation` and select the **Ecemploymentinformation** connector card.
 
     <ThemedImage
-        alt="Connector search palette with sap.successfactors.ecemploymentinformation entered and the Ecemploymentinformation connector card showing"
+        alt="Connector search palette with ecemploymentinformation entered and the Ecemploymentinformation connector card showing"
         sources={{
             light: useBaseUrl('/img/guides/usecases/sap-successfactors-new-hire-slack-notifications/connector-palette.png'),
             dark: useBaseUrl('/img/guides/usecases/sap-successfactors-new-hire-slack-notifications/connector-palette.png'),
