@@ -131,7 +131,7 @@ A file handler is a `remote function` that WSO2 Integrator calls each time a mat
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-In the **Service Designer**, click **+ Add Handler**. A **Select Handler to Add** panel opens on the right listing the available event types. Click the event type to add it directly. No further configuration is required.
+In the **Service Designer**, click **+ Add Handler**. A **Select Handler to Add** panel opens on the right listing the available event types. Click an event type to open its **Configure Handler** panel, then select **Save**.
 
 ![Select Handler to Add panel showing onCreate, onDelete, and onModify event types](/img/develop/integration-artifacts/file/local-files/step-handler-picker.png)
 
@@ -140,6 +140,18 @@ In the **Service Designer**, click **+ Add Handler**. A **Select Handler to Add*
 | **onCreate** | A new file is created in the monitored directory |
 | **onDelete** | A file is deleted from the monitored directory |
 | **onModify** | An existing file in the monitored directory is modified |
+
+For **onCreate** and **onModify**, the panel includes a **File Handling Options** section that sets what happens to the file after the handler runs:
+
+| Field | Description |
+|---|---|
+| **On Success** | Action to take when the handler completes without returning an error: **Move** the file to another directory, or **Delete** it. See [Post-processing](#post-processing-moving-or-deleting-files). |
+| **On Error** | Action to take when the handler returns an error. Same choices as **On Success**. |
+| **Move To** | Destination directory, required when **Move** is selected. |
+
+An **onDelete** handler has no file handling options, because the file is already gone when it runs.
+
+![Configure onCreate Handler panel showing File Handling Options with On Success and On Error both ticked and set to Move](/img/develop/integration-artifacts/file/local-files/step-file-handling-options.png)
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -192,6 +204,77 @@ Each handler receives a `file:FileEvent` parameter with details about the file s
 |---|---|---|
 | `name` | `string` | Path of the file or directory that changed (absolute when the listener was configured with an absolute path) |
 | `operation` | `string` | One of `"create"`, `"modify"`, `"delete"` (lowercase) |
+
+### Post-processing: moving or deleting files
+
+After an `onCreate` or `onModify` handler returns, the runtime can move the file to another directory or delete it. Configure this on the handler form, and switch to the **Ballerina Code** tab to review the generated annotation.
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+The **File Handling Options** section has two independent toggles:
+
+| Event | Ticked by default? | Action picker | Extra input |
+|---|---|---|---|
+| **On Success** | Yes | **Move** or **Delete** | **Move To** destination, required when Move is chosen |
+| **On Error** | Yes | **Move** or **Delete** | **Move To** destination, required when Move is chosen |
+
+Common combinations:
+
+- **Move on success, move on error**: archive processed files and quarantine failures in separate directories.
+- **Delete on success, move on error**: discard files that processed cleanly, and keep failures for review.
+- **Leave the file in place**: clear **On Success** or **On Error** to skip the action for that outcome.
+
+The form does not expose `preserveSubDirs`. On a recursive listener, a moved file keeps its subdirectory path under the destination. To place files directly in the destination instead, set `preserveSubDirs` to `false` on the **Ballerina Code** tab.
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+The form writes a `@file:FunctionConfig` annotation on the handler. Each of `afterProcess` and `afterError` takes either a move record or the bare constant `file:DELETE`:
+
+```ballerina
+service on fileListener {
+
+    @file:FunctionConfig {
+        afterProcess: {
+            moveTo: "/data/archive"
+        },
+        afterError: file:DELETE
+    }
+    remote function onCreate(file:FileEvent event) returns error? {
+        check processFile(event.name);
+    }
+}
+```
+
+`@file:FunctionConfig` fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `afterProcess` | `file:MOVE\|file:DELETE` | Action to take when the handler returns without an error. Omit the field to leave the file in place. For a move, use `{moveTo: <path>}`. |
+| `afterError` | `file:MOVE\|file:DELETE` | Action to take when the handler returns an error or panics. Same shape as `afterProcess`. |
+
+`file:Move` fields:
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `moveTo` | `string` | None | Directory the file is moved into. The path resolves against the working directory, not against the watched directory. Missing directories are created. |
+| `preserveSubDirs` | `boolean` | `true` | Keeps the path of the file relative to the listener `path` under `moveTo`. Set it to `false` to place the file directly in `moveTo`. |
+
+The annotation is valid on `onCreate` and `onModify`. On `onDelete`, the compiler reports an error.
+
+</TabItem>
+</Tabs>
+
+The runtime applies the following rules to every action:
+
+- A file that already exists at the destination is not replaced. The move fails, the failure is logged, and the source file stays in place.
+- `moveTo` cannot be the watched directory, and on a recursive listener it cannot be a directory inside it. Attaching a service with such a destination fails, as it does when `moveTo` is empty or already exists as something other than a directory.
+- Only regular files are acted on. Directory and symbolic link events are skipped.
+- A failure of the action is logged and is not returned to the handler.
+- If the file is no longer present when the action runs, the action is skipped.
+- Where several services are attached to one listener, only one of them can configure an action for a given handler, and the action runs after every attached service has handled the event. The outcome of the service that configured the action decides between the success and the error action. An error returned by another attached service does not change it.
+- Moving or deleting the file produces a delete event like any other removal, so `onDelete` runs for it in every service that declares it.
 
 ## Reading file content
 
