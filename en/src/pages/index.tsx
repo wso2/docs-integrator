@@ -50,6 +50,16 @@ function IconGenAI(): ReactNode {
   );
 }
 
+function IconWorkflows(): ReactNode {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="8" height="8" rx="2" />
+      <rect x="13" y="13" width="8" height="8" rx="2" />
+      <path d="M7 11v4a2 2 0 0 0 2 2h4" />
+    </svg>
+  );
+}
+
 function IconTutorials(): ReactNode {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -143,6 +153,15 @@ const sections: SectionCard[] = [
     iconBg: '#FDF4FF',
     iconBgDark: 'rgba(168, 85, 247, 0.15)',
     iconColor: '#A855F7',
+  },
+  {
+    title: 'Durable Workflows',
+    description: 'Build long-running, crash-safe processes with human tasks, timers, and retries.',
+    link: '/workflows/overview',
+    icon: <IconWorkflows />,
+    iconBg: '#FFF1F2',
+    iconBgDark: 'rgba(225, 29, 72, 0.15)',
+    iconColor: '#E11D48',
   },
   {
     title: 'Guides',
