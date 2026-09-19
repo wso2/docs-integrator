@@ -23,9 +23,10 @@ import TabItem from '@theme/TabItem';
 ## Step 1: Create the integration
 
 1. Open WSO2 Integrator.
-2. Select **Create** in the **Create New Integration** card.
-3. Set **Integration Name** to `ClaimHandler`.
-4. Select **Create Integration**.
+2. Select **Create** in the **Create a Project** card.
+3. Set **Project Name** to `agent`.
+4. Set **Integration Name** to `ClaimHandler`.
+5. Click **Create**.
 
 ## Step 2: Add a Durable Agentic Workflow
 
@@ -34,7 +35,7 @@ Creating the agent is also where you describe it: the model it thinks with, its 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. In the design view, click **+ Add Artifact**.
+1. In the design view, click **Add Artifact Manually**.
 2. Under **Durable Workflow**, select **Durable Agentic Workflow**. The **Create New Durable Agentic Workflow** form opens.
 
    ![Create Durable Agent](/img/workflows/getting-started/build-a-claim-workflow-agent/create-agent.png)
@@ -105,7 +106,7 @@ Activities are the units of work the agent can call. Each one runs durably — c
 3. Set **Activity Name** to `validateClaim`.
 4. Under **Parameters**, click **+ Add Parameter**. Set **Type** to the `ExpenseClaim` record created in Step 2 and **Name** to `expenseClaim`, then click **Add**.
 5. Set **Return Type** to `boolean` and click **Save**.
-6. The register form opens, where the activity becomes one of the agent's capabilities. Leave **Retry Policy** on **No Automatic Retry** and click **Save**.
+6. Open the register form under current integration, where the activity becomes one of the agent's capabilities. Leave **Retry Policy** on **No Automatic Retry** and click **Save**.
 
 ![Creating the validateClaim activity and registering it on the claimAgent node](/img/workflows/getting-started/build-a-claim-workflow-agent/attach-validate-claim.gif)
 
@@ -151,7 +152,7 @@ function validateClaim(ExpenseClaim expenseClaim) returns boolean {
 Creating the activity gives it a signature but an empty body. The activity is a function, so its flow returns the validation result. Let's make it return `true` only for positive claim amounts.:
 
 1. In the left sidebar, expand **Workflow Activities** and select `validateClaim`.
-2. In the node panel on the right, under **Control**, select **Return**.
+2. In the node panel on the right, click **+**, then under **Control**, select **Return**.
 3. Click the **Expression** field to open the value helper, then select **Inputs** > `expenseClaim` > `amount`.
 4. With the cursor after the inserted value, type `> 0d` to require a positive amount.
 5. Click **Save**, then select `claimAgent` under **Workflows** to return to the agent diagram.
@@ -178,13 +179,17 @@ function validateClaim(ExpenseClaim expenseClaim) returns boolean {
 
 Paying out is the risky step, so gate it behind a person. The activity is created the same way as the validator, and the register form is where the gate goes on:
 
-1. Click **+** on the activity anchor at the **bottom right** of the agent node, then click **+ Create Activity**.
+1. Click **+** on the activity anchor at the **bottom right** of the agent node, then under Current Integration, click the **+** icon to create the activity.
 2. Set **Activity Name** to `payClaim`.
 3. Under **Parameters**, click **+ Add Parameter**. Set **Type** to `ExpenseClaim` and **Name** to `expenseClaim`, then click **Add**.
 4. Leave **Return Type** empty and click **Save**.
-5. On the register form, expand **Advanced Configurations** and check **Requires Approval**. Now, before the agent runs the activity, a review activity is created and the agent suspends durably until a reviewer proceeds or rejects.
-6. Set **Reviewer Roles** to `Finance`, the roles permitted to decide that approval.
-7. Click **Save**.
+
+5. Click the `payClaim` form under current integration, expand **Advanced Configurations** and select **Requires Approval**. Before the agent runs the activity, a review activity is created and the agent suspends durably until a reviewer proceeds or rejects.
+
+6. On the register form, expand **Advanced Configurations** and check **Requires Approval**. Now, before the agent runs the activity, a review activity is created and the agent suspends durably until a reviewer proceeds or rejects.
+
+7. Set **Reviewer Roles** to `Finance`, the roles permitted to decide that approval.
+8. Click **Save**.
 
 ![Creating the payClaim activity and registering it with Requires Approval and the Finance reviewer role](/img/workflows/getting-started/build-a-claim-workflow-agent/attach-pay-claim.gif)
 

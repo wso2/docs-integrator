@@ -37,7 +37,7 @@ The steps below follow one example: an onboarding workflow where an HR lead assi
    |---|---|---|
    | **Task Name** | Yes | Identifies the task type, for example `Assign Employee to Team`. |
    | **User Roles** | Yes | One or more roles permitted to complete this task, for example `HRManager`. Only users holding a matching role see the task. |
-   | **Payload** | No | Under **Advanced Configurations**. See [Show the decider what they need](#show-the-decider-what-they-need). |
+   | **Task Input** | No | Read-only information shown alongside the form to help the user make the decision. See [Show the decider what they need](#show-the-decider-what-they-need). |
    | **Title** | No | Under **Advanced Configurations**. Short summary shown in the inbox, for example `Assign Employee to Team`. |
    | **Description** | No | Under **Advanced Configurations**. Additional context shown alongside the form, for example `Assign the new employee to the appropriate team and select their team lead.` |
    | **Timeout** | No | Under **Advanced Configurations**. Maximum time to wait. Omit it to wait indefinitely. |
@@ -52,12 +52,12 @@ The workflow suspends at this step, and the task appears in the [Integration Con
 
 ## Show the decider what they need
 
-**Payload** is the context the person answering needs, rendered read-only next to the form. It answers "what am I deciding about?", which the decision form itself cannot.
+**Task Input** is the information the person needs to understand the task. It is shown as read-only information alongside the form and helps answer, “What am I deciding about?”, which the decision form itself cannot.
 
-In the onboarding example that is the employee, so **Payload** is set to the workflow's input, the `EmployeeDetails` record. The new joiner's ID and name then appear alongside the form when the task is completed in the Control Plane.
+In the onboarding example that is the employee, so **Task Input** is set to the workflow's input, the `EmployeeDetails` record. The new joiner's ID and name then appear alongside the form when the task is completed in the Control Plane.
 
-:::tip Payload is not the decision
-Nothing in the payload comes back to the workflow. It is there to inform the person, while the value they submit is governed by **Completion Type** below.
+:::tip Task Input is not the decision
+The task input is only there to provide context. It is not returned to the workflow. The value the person submits is determined by the **Completion Type** below.
 :::
 
 ## Type the decision
@@ -89,7 +89,7 @@ Use a human task when a person is making a **decision** the Control Plane should
 
 A workflow never exposes its own endpoint for finishing a task. Completion happens outside the workflow, in one of two places:
 
-- **[Complete human tasks](../icp/human-tasks.md)** in the Integration Control Plane, where the task appears in the inbox of everyone holding a matching role, rendered as a form built from the completion type with the payload shown beside it. This is the route for the people actually deciding.
+- **[Complete human tasks](../icp/human-tasks.md)** in the Integration Control Plane, where the task appears in the inbox of everyone holding a matching role, rendered as a form built from the completion type with the task input shown beside it. This is the route for the people actually deciding.
 - **[Management API](../reference/management-api.md)**, whose `POST /human-tasks/{taskId}/complete` accepts the same decision as JSON, for building your own portal or automating a decision.
 
 ## Next steps

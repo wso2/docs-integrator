@@ -2139,6 +2139,7 @@ const sidebars: SidebarsConfig = {
           link: { type: 'doc', id: 'workflows/icp/manage' },
           items: [
             'workflows/icp/connect-runtime',
+            'workflows/icp/overview',
             'workflows/icp/start',
             'workflows/icp/executions',
             'workflows/icp/human-tasks',

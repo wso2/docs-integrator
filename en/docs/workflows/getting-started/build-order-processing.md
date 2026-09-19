@@ -36,22 +36,29 @@ The finished flow has three steps:
 ## Step 1: Create the integration
 
 1. Open WSO2 Integrator.
-2. Click **Create** in the **Create New Integration** card.
-3. Set **Integration Name** to `OrderProcessor`.
-4. Click **Create Integration**.
+2. Click **Create** in the **Create a Project** card.
+3. Set **Project Name** to `OrderBlock`
+4. Set **Integration Name** to `OrderProcessor`.
+5. Click **Create**.
+
+![WSO2 Integrator home page with the Create a Project card](/img/workflows/getting-started/build-an-order-processing-workflow/wso2-integrator.png)
+
+![Create a new project with project and integration names set](/img/workflows/getting-started/build-an-order-processing-workflow/create-project.png)
 
 ## Step 2: Add durable workflow artifact
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. In the design view, click **+ Add Artifact**.
-2. On the **Artifacts** page, under **Durable Workflow**, click **Durable Workflow**. The **Create New Durable Workflow** form opens.
+1. In the design view, click **Add Artifact Manually**.
+2. On the **Artifacts** page, under **Durable Workflow**, click **Durable Workflow**. Then **Create New Durable Workflow** form opens.
 3. Set **Name** to `orderWorkflow`.
 4. Click the **Workflow Input Data Type** field. Let's create a new type for the order information that the workflow needs.
-5. Click **+ Create New Type**. On the **Create from scratch** tab, with **Kind** set to **Record**.
-6. Change **Name** from `MyType` to `OrderInfo`.
-7. Add each field with the **+** next to **Fields**, then set its name and type:
+5. Click **+ Create New Type**. 
+6. In the **Create New Type** dialog, select the **Create from scratch** tab.
+7. Set **Kind** to **Record**.
+8. Change **Name** from `MyType` to `OrderInfo`.
+9. Add each field with the **+** next to **Fields**, then set its name and type:
    
    | Field | Type |
       |---|---|
@@ -102,7 +109,7 @@ The first step of the order process reserves stock. You create the activity and 
 4. In the **Workflow Activity** form, set **Activity Name** to `reserveInventory`.
 5. Under **Parameters**, click **+ Add Parameter**, set **Type** to `OrderInfo` and **Name** to `orderInfo`, then click **Add**.
 6. Leave **Return Type** empty. This activity holds stock and returns nothing. Click **Save**.
-7. `reserveInventory` now appears under **Current Integration**, and under **Workflow Activities** in the sidebar. Click it to add the call.
+7. In the Activities panel, under Current Integration, click `reserveInventory` to add the activity call to the workflow diagram.
 8. Fill in the call form:
 
    | Field | Value |
@@ -147,7 +154,7 @@ Payment is confirmed by something outside the workflow, such as a payment gatewa
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Log a line first, so the run says why it is sitting still. Click **+** below the activity call, scroll to the bottom of the node panel, and click **Show More Functions**.
+1. Log a line first, so the run says why it is sitting still. Go back to the **orderWorkflow** under workflows. Click the **+** below the reserveInventory step. In the node panel, scroll down and click **Show More Functions**.
 2. In the **Functions** panel, under **Imported Functions** > **log**, click **printInfo**. Set **Msg** to `Waiting for payment` and click **Save**.
 3. Now add the wait. Click **+** below the log step.
 4. In the node panel, under **Workflow** > **Steps**, click **Await Data Event**. The **Await Data** form opens.
@@ -199,9 +206,10 @@ The value that arrived decides what happens next, so split the flow in two.
 1. Click **+** below the wait.
 2. In the node panel, under **Control**, click **If**.
 3. **Condition** is prefilled with `true`. Replace it with the value the wait produced: click the field and pick `payment` under **Variables** in the value helper.
-4. Click **Save**.
+4. Click **Add Else Block**.
+5. Click **Save**.
 
-The diagram splits into a `payment` path and an **Else** path, each with its own **+**.
+The diagram splits into a`payment`path and an **Else** path, each with its own **+**.
 
 ![Branching the workflow on the payment result](/img/workflows/getting-started/build-an-order-processing-workflow/branch-on-payment.gif)
 </TabItem>
@@ -226,13 +234,22 @@ The `payment` path tells the customer the order is confirmed. Create that activi
 <TabItem value="ui" label="Visual Designer" default>
 
 1. Click **+** on the `payment` path, then under **Workflow** > **Steps**, click **Call Activity**.
+
 2. The **Activities** panel already lists `reserveInventory`, so click the **+** on the **Current Integration** header to add another activity.
+
 3. Set **Activity Name** to `sendEmail`. Click **+ Add Parameter**, set **Type** to `OrderInfo` and **Name** to `orderInfo`, click **Add**, then click **Save**.
-4. Click `sendEmail` in the **Activities** panel, set **Order Info** to the workflow's input, and click **Save**.
-5. Click the open icon on the `sendEmail` node to open its diagram, To make it simple let's mock the implementation to a log line.
-6. Click **+**, then click **Log Info** under **Logging**.
-7. Leave **Msg** on **Text** and type `Email sent to `. Click on the text box to open the field's value helper, then click **Inputs** > `orderInfo` > `customerEmail`. It lands in the text as an expression.
-8. Click **Save**.
+
+4. Click `sendEmail` in the **Activities** panel under **Current integration**.
+
+5. In the **Order Info** field, switch from Record to **Expression**, then select the workflow's input, and click **Save**.
+
+6. Click the open icon on the `sendEmail` node to open its diagram, To make it simple let's mock the implementation to a log line.
+
+7. Click **+**, then click **Log Info** under **Logging**.
+
+8. Leave **Msg** on **Text** and type `Email sent to `. Click on the text box to open the field's value helper, then click **Inputs** > `orderInfo` > `customerEmail`. It lands in the text as an expression.
+
+9. Click **Save**.
 
 ![Creating the sendEmail activity, calling it, and logging the customer address](/img/workflows/getting-started/build-an-order-processing-workflow/send-email.gif)
 </TabItem>
@@ -258,9 +275,14 @@ The **Else** path releases the hold instead.
 <TabItem value="ui" label="Visual Designer" default>
 
 1. Click **+** on the **Else** path, then under **Workflow** > **Steps**, click **Call Activity**.
+
 2. Click the **+** on the **Current Integration** header.
-3. Set **Activity Name** to `cancelOrder`, add an `orderInfo` parameter of type `OrderInfo` the same way, and click **Save**.
-4. Click `cancelOrder` in the **Activities** panel, set **Order Info** to the workflow's input, and click **Save**.
+
+3. Set **Activity Name** to `cancelOrder`. Click **+ Add Parameter**, set **Type** to `OrderInfo` and **Name** to `orderInfo`, click **Add**, then click **Save**.
+
+4. Click `cancelOrder` in the **Activities** panel under **Current integration**.
+
+5. In the **Order Info** field, switch from Record to **Expression**, then select the workflow's input, and click **Save**.
 
 Both branches now end in an activity, and the workflow is complete.
 
@@ -296,20 +318,21 @@ A workflow does not start itself. It is launched from an entry point such as a s
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Click **+ Add Artifact**, then under **Integration as API**, click **HTTP Service**.
-2. On the **Create HTTP Service** form, keep **Service Contract** on **Design From Scratch**, put **Service Base Path** as `/'order`, and click **Create**.
-3. The service opens with no resources. Click **Add Resource**.
-4. Set **HTTP Method** to **POST** and **Resource Path** to `.`.
-5. Click **+ Define Payload**, open the **Browse Existing Types** tab, click `OrderInfo` under the current integration, and click **Save**.
-6. Click **Save** to create the resource. Its own diagram opens.
-7. Click **+**, then under **Workflow**, click **Run Workflow**.
-8. Select the `orderWorkflow` under **Current Integration**.
-9. Set **Input** to the request payload and leave **Workflow ID Variable Name** as `workflowId`. Click **Save**.
-10. Click **+** below the node, click **Return** under **Control**, set **Expression** to `workflowId`, and click **Save**.
+1. At the top of the screen, click `OrderProcessor` to return to the project.
+2. Click **+ Add Artifact**, then under **Integration as API**, click **HTTP Service**.
+3. On the **Create HTTP Service** form, keep **Service Contract** on **Design From Scratch**, put **Service Base Path** as `/'order`, and click **Create**.
+4. The service opens with no resources. Click **+Add Resource**.
+5. Set **HTTP Method** to **POST** and **Resource Path** to `.`.
+6. Click **+ Define Payload**, open the **Browse Existing Types** tab, click `OrderInfo` under the current integration, and click **Save**.
+7. Click **Save** to create the resource. Its own diagram opens.
+8. Click **+**, then under **Workflow**, click **Run Workflow**.
+9. Select the `orderWorkflow` under **Current Integration**.
+10. Under Input, switch from Record to **Expression** and set **Input** to the request payload and leave **Workflow ID Variable Name** as `workflowId`. Click **Save**.
+11. Click **+** below the Run Workflow node, click **Return** under **Control**. In the **Expression** field, select variables, then select `workflowId`, and click **Save**.
 
 The resource now starts a run for every order it receives and answers with that run's workflow ID.
 
-![Adding an HTTP service with a POST order resource that starts the workflow](/img/workflows/getting-started/build-an-order-processing-workflow/start-workflow.gif)
+![Adding an HTTP service with a POST order resource that starts the workflow](/img/workflows/getting-started/build-an-order-processing-workflow/step-8-start-workflow.gif)
 </TabItem>
 <TabItem value="code" label="Ballerina code">
    ```ballerina
@@ -344,7 +367,7 @@ The run is now waiting on the `payment` data event, and it will wait forever unt
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. On the service, click **+ Resource**.
+1. On the service, click the **+** button next to **Resources**.
 2. Set **HTTP Method** to **POST**.
 3. The path needs a segment that carries the workflow ID, so click **+ Path Param** and fill in the **Path Parameter** form:
 
@@ -369,7 +392,7 @@ The run is now waiting on the `payment` data event, and it will wait forever unt
 
 The node reads **Send to payment** and is drawn with a dashed arrow across to `orderWorkflow`, because it hands a value to a run rather than calling something.
 
-![Adding a payment resource that sends the data event into the running workflow](/img/workflows/getting-started/build-an-order-processing-workflow/send-data-event.gif)
+![Adding a payment resource that sends the data event into the running workflow](/img/workflows/getting-started/build-an-order-processing-workflow/step-9-send-data-event.gif)
 </TabItem>
 <TabItem value="code" label="Ballerina code">
 ```ballerina
@@ -396,7 +419,7 @@ A durable workflow keeps its record in a workflow engine, and by default the run
    :::warning `IN_MEMORY` does not survive a restart
    The in-memory engine keeps the record in the integration's own memory, so stopping the integration loses every run that was in flight. It is meant for trying a workflow out, not for the crash-safety this guide is about. To see a suspended order survive a restart, set `mode` back to `"LOCAL"` and start a Temporal server with `temporal server start-dev` before running.
    :::
-4. Click **Run** to start the integration.
+4. Click **Run** at the top of the Integrator window to start the integration.
 5. Post an order and keep the returned workflow ID, e.g.: `019ffed4-c12e-7e24-a438-8bdaae2b5a29`
 
    ```bash
