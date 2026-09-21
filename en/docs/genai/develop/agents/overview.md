@@ -19,7 +19,7 @@ An AI agent is composed of four core components that enable reasoning, action ex
 | **Tools** | Functions, APIs, connectors, or services that the agent can invoke during execution |
 | **Memory** | Context and conversation state maintained across interactions |
 
-Without tools, the agent is limited to generating responses without interacting with external systems. Without memory, the agent cannot maintain context across multi-turn conversations.
+Without tools, an agent is limited to generating responses without interacting with external systems. Without memory, the agent cannot maintain context across multi-turn conversations.
 
 In WSO2 Integrator, AI agents can be visually designed, configured with tools and memory, connected to model providers, and exposed through APIs or listeners.
 
@@ -68,5 +68,6 @@ The chat interface reuses the same session across interactions, enabling memory-
 - **[Creating an Agent](creating-an-agent.md)** - Learn how to create and configure agents using the AI Chat Agent Wizard.
 - **[Tools](tools.md)** - Add functions, connectors, and integrations to your agents.
 - **[Memory](memory.md)** - Configure conversational and persistent memory.
+- **[Identity & access management](identity-and-access-management.md)** - Secure agents, tools, and integrations using authentication and authorization.
 - **[Observability](observability.md)** - Monitor traces, logs, and execution details.
 - **[Evaluations](evaluations/overview.md)** - Test and evaluate agent behavior and response quality.

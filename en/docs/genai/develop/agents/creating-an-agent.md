@@ -9,25 +9,28 @@ import TabItem from '@theme/TabItem';
 
 # Creating an Agent
 
-WSO2 Integrator provides a streamlined way to create AI-powered agents using the **AI Chat Agent Wizard**. The wizard scaffolds the required integration artifacts in a single step and opens the visual flow editor, allowing you to configure and customize agent behavior directly from the canvas.
+WSO2 Integrator supports the creation of AI agents as either **Chat agents** or **Inline agents**.
 
-The AI Agent node acts as the core execution component. It enables the agent to interact with external systems, invoke tools, maintain conversational context, and coordinate multi-step reasoning workflows.
+## Chat agents
+
+Chat agents are AI agents exposed through HTTP REST APIs, allowing users or external systems to send prompts and receive responses powered by large language models (LLMs).
+
+## Inline agents
+
+Inline agents can be embedded directly within integration flows, REST APIs, GraphQL resolvers, or backend service logic, and are invoked programmatically as part of workflow execution.
 
 ## Launching the wizard
 
 1. Open your integration project in WSO2 Integrator.
 2. Click **+ Add Artifact** from the project view, or right-click the project tree.
-3. The **Artifacts** page opens.
 
-![Artifacts page in WSO2 Integrator showing all artifact categories — Automation, AI Integration (AI Chat Agent, MCP Service), Integration as API (HTTP Service, GraphQL Service Beta, TCP Service Beta), Event Integration (Kafka, RabbitMQ, MQTT, Azure Service Bus, Salesforce, Twilio, GitHub, Solace, CDC for Microsoft SQL Server, CDC for PostgreSQL).](/img/genai/develop/shared/07-artifacts-page-full.png)
+![Artifacts page in WSO2 Integrator showing all artifact categories.](/img/genai/develop/shared/07-artifacts-page-full.png)
 
-4. Under **AI Integration**, select **AI Chat Agent**.
+## Create a chat agent
 
-## Create an agent
+Under **AI Integration**, select **AI Chat Agent**. Enter a **Name** for the agent and click **Create**.
 
-The wizard initially displays a single input field. The **Create** button remains disabled until a valid agent name is provided.
-
-![The empty AI Chat Agent wizard with a Name field and a disabled Create button. The placeholder shows example names: Customer Support Assistant, Sales Advisor, Data Analyst.](/img/genai/develop/agents/01-create-ai-chat-agent-wizard.png)
+![The empty AI Chat Agent wizard with a Name field and a disabled Create button.](/img/genai/develop/agents/01-create-ai-chat-agent-wizard.png)
 
 | Field | Required | Description |
 |---|---|---|
@@ -35,19 +38,19 @@ The wizard initially displays a single input field. The **Create** button remain
 
 Enter a name (for example, `blogReviewer`) to enable the **Create** button.
 
-After clicking **Create**, WSO2 Integrator generates the required integration artifacts and displays a progress indicator while configuring the service listener and related components.
+WSO2 Integrator generates the required integration artifacts and displays a progress indicator while configuring the service listener and related components.
 
 When the wizard completes, WSO2 Integrator automatically generates the following:
 
-- An AI agent service
+- An HTTP service
 - A listener endpoint
-- An AI Agent node
+- An AI agent
 - An integration flow that handles incoming requests and generates responses
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-![The AI Agent canvas showing Start, an AI Agent node with the agent name and an Add Memory button, and a Return node.](/img/genai/develop/agents/02-agent-flow-canvas.png)
+![The AI agent canvas showing Start, an AI agent node with the agent name and an Add Memory button, and a Return node.](/img/genai/develop/agents/02-agent-flow-canvas.png)
 
 </TabItem>
 
@@ -94,6 +97,66 @@ service /blogReviewer on chatAgentListener {
     }
 }
 ```
+
+</TabItem>
+</Tabs>
+
+## Create an inline agent
+
+You can add an inline agent within integration flows, REST APIs, GraphQL resolvers, or backend service logic.
+
+1. Create or open an existing integration flow.
+2. In the editor, open the **AI** section in the side panel and select **Agent**.
+3. Click **+ Add Agent** to open the agent creation panel.
+
+![Agent creation form](/img/genai/develop/agents/39-agent-creation-form.png)
+
+4. Configure the **Role** and **Instructions** fields to define the agent’s behavior.
+5. Specify the query or prompt to the agent in the **Query** field. Note that this can also be an expression (e.g., a parameter, a variable, etc.).
+6. Click **Save**.
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+![Agent creation form](/img/genai/develop/agents/40-agent.png)
+
+</TabItem>
+
+<TabItem value="code" label="Ballerina Code">
+
+```ballerina
+import ballerina/ai;
+import ballerina/log;
+
+// Default model provider
+final ai:Wso2ModelProvider aiWso2modelprovider =
+    check ai:getDefaultModelProvider();
+
+// Agent declaration
+final ai:Agent aiAgent = check new (
+    systemPrompt = {
+        role: string `Task Assistant`,
+        instructions: string `You are a helpful assistant for
+            managing a to-do list. You can manage tasks and
+            help users plan their schedules.`
+    },
+    model = aiWso2modelprovider
+);
+
+// Main
+public function main() returns error? {
+    while true {
+        string userInput = io:readln("User (or 'exit' to quit): ");
+        if userInput == "exit" {
+            break;
+        }
+        // Pass the user input to the agent and get a response.
+        string response = check aiAgent.run(userInput);
+        io:println("Agent: ", response);
+    }
+}
+```
+
 </TabItem>
 </Tabs>
 
@@ -107,7 +170,7 @@ After generation, you are directed to the integration canvas where you can confi
 
 ## Configure agent behavior
 
-Use the AI Agent node configuration panel to customize how the agent behaves and responds to requests.
+Use the AI agent node configuration panel to customize how the agent behaves and responds to requests.
 
 Click the `AI Agent` node to open the configuration panel and update the following configurations.
 
@@ -133,5 +196,6 @@ Click the `AI Agent` node to open the configuration panel and update the followi
 
 - **[Tools](tools.md)** - Add tools and integrations to the agent.
 - **[Memory](memory.md)** - Configure conversational and persistent memory.
+- **[Identity & access management](identity-and-access-management.md)** - Secure agents, tools, and integrations using authentication and authorization.
 - **[Observability](observability.md)** - Monitor traces, logs, and execution details.
 - **[Evaluations](evaluations/overview.md)** - Test and evaluate agent behavior and response quality.

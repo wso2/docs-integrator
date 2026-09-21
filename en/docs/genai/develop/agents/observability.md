@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 title: Observability
 description: Use the built-in dev-time trace server in the WSO2 Integrator IDE to observe LLM and tool calls as your agent runs.
 keywords: [wso2 integrator, observability, tracing, ai agents, dev-time trace, traces]
