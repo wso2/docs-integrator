@@ -41,11 +41,11 @@ If you plan to use [WSO2 Asgardeo](https://wso2.com/asgardeo/docs/get-started/cr
 
 1. In the visual designer, click the **Agent** node to open the configuration panel. Then, expand **Advanced configuration**.
 
-![Advanced Configuration panel expanded on the Agent configuration form.](/img/genai/develop/agents/30-advence-configuration.png)
+![Advanced Configuration panel expanded on the Agent configuration form.](/img/genai/develop/agents/41-advance-configuration.png)
 
 2. Provide the **Agent ID** and **Agent Secret** obtained from the authorization server.
 
-![Credential input fields showing Agent ID and Agent Secret fields.](/img/genai/develop/agents/31-add-credential.png)
+![Credential input fields showing Agent ID and Agent Secret fields.](/img/genai/develop/agents/42-add-credential.png)
 
 ## Configure tools
 
