@@ -3,7 +3,7 @@ name: WSO2 Integrator Docs Publish
 on:
   push:
     branches:
-      - main
+      - 5.1.x
   workflow_dispatch:
 
 jobs:
