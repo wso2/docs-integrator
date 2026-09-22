@@ -21,7 +21,18 @@ An AI agent is composed of four core components that enable reasoning, action ex
 
 Without tools, an agent is limited to generating responses without interacting with external systems. Without memory, the agent cannot maintain context across multi-turn conversations.
 
-In WSO2 Integrator, AI agents can be visually designed, configured with tools and memory, connected to model providers, and exposed through APIs or listeners.
+In WSO2 Integrator, AI agents can be visually designed, configured with tools and memory, connected to model providers, and exposed through APIs or listeners. An agent can also be attached as a tool of another agent, so one agent delegates part of its work to another. See [Multi-Agent Systems](multi-agent/overview.md).
+
+## Ways to create an agent
+
+| You want | Use | You get |
+|---|---|---|
+| An agent reachable over HTTP as a chat endpoint | **+ Add Artifact** → **AI Integration** → **AI Chat Agent** | An agent, a listener, and a service |
+| An agent used inside one integration | **+ Add Artifact** → **Other Artifacts** → **Agent** → **Create Agent** | A single agent instance |
+| An agent reused across integrations or projects | **+ Add Artifact** → **Other Artifacts** → **Agent** → **Create Agent Definition** | A reusable template in a library package |
+| An agent someone has already built | **Add Agent** → **Pre-built Agents** | An instance of an existing definition |
+
+The last two are covered in [Agent Definitions](definitions/overview.md).
 
 ## What an agent looks like in the canvas
 
@@ -66,7 +77,9 @@ The chat interface reuses the same session across interactions, enabling memory-
 ## What's next
 
 - **[Creating an Agent](creating-an-agent.md)** - Learn how to create and configure agents using the AI Chat Agent Wizard.
+- **[Agent Definitions](definitions/overview.md)** - Build a reusable agent template and share it across projects.
 - **[Tools](tools.md)** - Add functions, connectors, and integrations to your agents.
+- **[Multi-Agent Systems](multi-agent/overview.md)** - Delegate work from one agent to another.
 - **[Memory](memory.md)** - Configure conversational and persistent memory.
 - **[Identity & access management](identity-and-access-management.md)** - Secure agents, tools, and integrations using authentication and authorization.
 - **[Observability](observability.md)** - Monitor traces, logs, and execution details.
