@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Agents as Tools
-description: Attach an agent as a tool of another AI agent in WSO2 Integrator — reusing an existing instance, creating a one-off agent, or instantiating a shared agent definition.
+description: Attach an agent as a tool of another AI agent in WSO2 Integrator — reusing an existing instance, creating a new agent, or instantiating a shared agent definition.
 ---
 
 # Agents as Tools
@@ -27,7 +27,7 @@ This is the same dialog used to add an agent as an artifact, with the same optio
 
 | Option | Result |
 |---|---|
-| **Create Agent** | A one-off agent instance, created for this integration and used only here. |
+| **Create Agent** | An agent instance created for this integration and used only here. |
 | **Create Agent Definition** | A reusable definition, and an instance of it attached as the tool. |
 | **Pre-built Agents** | An instance of a definition that already exists in this project or your organization. |
 
@@ -63,7 +63,7 @@ Write the tool description around the trigger condition — the situations in wh
 
 ## What the sub-agent returns
 
-The value the calling agent receives is determined by the sub-agent's response type — the **Response Type** of an [agent definition](../definitions/overview.md#response-type), or the **Type Descriptor** in a one-off agent's advanced configuration.
+The value the calling agent receives is determined by the sub-agent's response type — the **Response Type** of an [agent definition](../definitions/overview.md#response-type), or the **Type Descriptor** in the advanced configuration of an agent created directly in an integration.
 
 A narrow response type makes the sub-agent easier for the calling agent to use, because the result needs no further interpretation. A `string` response gives the calling agent prose it must reason about again.
 

@@ -11,19 +11,19 @@ import TabItem from '@theme/TabItem';
 
 An **agent definition** is a reusable template for an agent. It captures the role, instructions, tools, and response type once, so the same agent can be instantiated in more than one integration or shared with other projects and other teams.
 
-A **one-off agent**, by contrast, is a single agent instance that belongs to the integration it was created in.
+An **agent** (or an *inline agent*, where the two need distinguishing) is created directly in an integration and belongs to it. It can be used as many times as that integration needs, but it cannot be shared beyond it.
 
 This page describes when to use each, how to create an agent definition, and how to configure it in the Agent Definition Designer.
 
 ## Definitions and instances
 
-| | One-off agent | Agent definition |
+| | Inline agent | Agent definition |
 |---|---|---|
 | **What it is** | A single agent instance | A template that agent instances are created from |
 | **Scope** | The integration it was created in | Reusable across integrations and projects |
 | **Reuse** | Can reuse the instance within the same integration | Instantiate as many times as needed |
 | **Updating behavior** | Edit the instance | Edit the definition; instances pick up the change |
-| **Use it when** | The agent is specific to one flow and won't be reused | The same agent is needed in several places, or by other teams |
+| **Use it when** | The agent is specific to this integration and isn't needed elsewhere | The same agent is needed in several places, or by other teams |
 
 A definition is a template, not a running agent. Nothing executes until an instance is created from it either in an integration flow, or as a [tool of another agent](../multi-agent/agents-as-tools.md).
 
@@ -50,28 +50,30 @@ Only a definition in a library package can be published and consumed by other pr
 4. The **Add Agent** dialog opens.
 5. Select **Create Agent Definition**.
 
-![The Create Agent Definition form with Name, Description, a Create this definition in selector set to New library package, and a Library Name field.](/img/genai/develop/agents/definitions/03-create-agent-definition-library-package.png)
+![The Create Agent Definition form with Name, Description, a Create this definition in selector set to New library package, and a collapsed Advanced Configurations section.](/img/genai/develop/agents/definitions/03-create-agent-definition-library-package.png)
 
 | Field | Required | Description |
 |---|---|---|
 | **Name** | Yes | A unique name for the agent definition, such as `CustomerSupportAgent`. |
 | **Description** | No | A brief description of what the agent does. This is shown in the library catalog, so write it for the people who will consume the definition. |
 | **Create this definition in** | Yes | **New library package** creates a reusable, publishable package in this workspace. **Current integration** keeps the definition local. |
-| **Library Name** | Yes | The name of the reusable library package created in the workspace. Shown only when **New library package** is selected. |
 
-### Package settings
+### Advanced configurations
 
-When creating the definition in a new library package, you can optionally configure **Package settings** to control how the package is published.
+The defaults are derived from the definition's name and your account, so most definitions need nothing here. Click **Expand** on **Advanced Configurations** to change how the library package is named and versioned.
 
 | Field | Required | Description |
 |---|---|---|
+| **Library Name** | Yes | The name of the reusable library package created in this workspace. |
 | **Package Name** | Yes | The package name used when the definition is published and imported. |
 | **Organization** | Yes | The organization that owns this package. This is derived from your account and cannot be edited here. |
 | **Package Version** | No | The version of the package. Defaults to `0.1.0`. |
 
+These fields apply only when **New library package** is selected.
+
 ## Agent Definition Designer
 
-After clicking **Create Agent Definition**, WSO2 Integrator generates the definition and opens the Agent Definition Designer. The designer is where you configure what the agent does. Unlike a one-off agent, a definition is configured through a form rather than the integration canvas since a definition has no flow of its own, because it runs wherever it is instantiated.
+After clicking **Create Agent Definition**, WSO2 Integrator generates the definition and opens the Agent Definition Designer. The designer is where you configure what the agent does. Unlike an agent created directly in an integration, a definition is configured through a form rather than the integration canvas since a definition has no flow of its own, because it runs wherever it is instantiated.
 
 ![The Agent Definition Designer for CustomerSupportAgent, showing the name and description header, a Configuration card with Role and Instructions, a Tools section with an Add Tool button, a Response Type set to string, an Initialization Parameters section, and a collapsed Advanced section.](/img/genai/develop/agents/definitions/06-agent-definition-designer.png)
 
@@ -97,7 +99,7 @@ Because a definition can be instantiated in contexts you don't control, write in
 
 ### Tools
 
-Click **+ Tool** to add capabilities to the definition. The tool types and their configuration are the same as for any other agent — connections, functions, MCP servers, custom tools, and other agents. See [Tools](../tools.md).
+Click **+ Tool** to add capabilities to the definition. The tool types and their configuration are the same as for any other agent: connections, functions, MCP servers, custom tools, and other agents. See [Tools](../tools.md).
 
 Tools added to a definition are part of the template: every instance created from it gets the same tools.
 
@@ -105,7 +107,7 @@ Tools added to a definition are part of the template: every instance created fro
 
 **Response Type** defines the type of value the agent returns when it completes. It defaults to `string`.
 
-Choose a simple type such as `string`, `int`, or `boolean`, or a record type when the agent should return structured data — for example, a support ticket with a category, a priority, and a summary.
+Choose a simple type such as `string`, `int`, or `boolean`, or a record type when the agent should return structured data, such as a support ticket with a category, a priority, and a summary.
 
 A structured response type is easier to work with than `string`, because the result can be used directly instead of being interpreted again. This matters most when the definition is used as a tool by another agent: the response type is the shape the calling agent receives.
 

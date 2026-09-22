@@ -68,7 +68,7 @@ A definition also carries its own composition as metadata: the tools it uses, it
 | Tab | Shows |
 |---|---|
 | **All** | Every definition available to you. |
-| **Project** | Definitions created in the current workspace. |
+| **Project** | Definitions in the current workspace, including those kept in the current integration. |
 | **Organization** | Definitions published by your organization. |
 
 Use the search box to filter by name.
@@ -118,7 +118,6 @@ A definition that works well in the integration it was written for often fails e
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| The definition doesn't appear under **Organization**. | It hasn't been published, or was created in the current integration. | Confirm it lives in a library package, then publish it. |
 | Two definitions have the same name. | Different organizations or packages publish the same name. | Check the organization and package shown under the entry name. |
 | A consumer stops compiling after an upgrade. | A breaking change shipped without a major version bump. | Pin the previous version, then follow the versioning table above. |
 | The agent behaves differently in each consuming project. | Consumers supply different models or memory implementations. | Document the expected model class and memory scope in the description. |
