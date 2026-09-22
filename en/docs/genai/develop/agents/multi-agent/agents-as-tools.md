@@ -72,8 +72,6 @@ An agent attached as a tool has two descriptions, and they are not the same thin
 
 Write the tool description around the trigger condition, meaning the situations in which the calling agent should hand off, rather than around the sub-agent's capabilities. This is where delegation most often fails: a description that reads like a job title tells the calling agent nothing about when to use it.
 
-<!-- TODO: Document the tool configuration fields presented after selecting an agent: name, description, and how the query is passed to the sub-agent. -->
-
 ## What the sub-agent returns
 
 The value the calling agent receives is determined by the sub-agent's response type. This is the **Response Type** of an [agent definition](../definitions/overview.md#response-type), or the **Type Descriptor** in the advanced configuration of an agent created directly in an integration.

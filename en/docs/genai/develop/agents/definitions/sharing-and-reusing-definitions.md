@@ -53,8 +53,6 @@ The dialog confirms what will be published:
 
 The description file is what consumers read on Ballerina Central, and a new library starts with placeholder text. Use **Edit** on the README section of the library Overview page, or **Open Description File** in the publish dialog, to describe what the agent does, what it expects in a query, and what it returns.
 
-<!-- TODO: Confirm the wording shown when no README.md exists. The dialog appears to flag the missing description file. A screenshot of that state would be worth adding here. -->
-
 ## Find a shared definition
 
 Shared definitions appear under **Pre-built Agents** in the **Add Agent** dialog, wherever that dialog is opened from.
@@ -99,8 +97,6 @@ A published definition is public API. Its consumers depend on more than its beha
 | Changing the response type | Yes | Consumers bind against this type, including calling agents. |
 
 Bump the package version for every published change, and reserve breaking changes for a major version bump. Consumers upgrade by moving to the new version.
-
-<!-- TODO: Confirm how consumers are notified of and move to a new version: dependency update in Ballerina.toml, a prompt in the UI, or both. -->
 
 ## Design definitions for reuse
 

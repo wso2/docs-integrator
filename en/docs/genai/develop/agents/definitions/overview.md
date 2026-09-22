@@ -121,8 +121,6 @@ Every definition takes a model provider and an optional memory implementation. C
 
 Parameterize a value when it differs between instances such as an environment-specific endpoint, a tenant identifier, a model choice. Keep it in the definition when it's part of what the agent *is*.
 
-<!-- TODO: Document the + Parameter form fields (name, type, default, description) and how parameters are supplied at instantiation. -->
-
 ### Advanced
 
 The **Advanced** section lists the members of the generated agent class.
