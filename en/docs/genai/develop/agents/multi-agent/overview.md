@@ -61,8 +61,6 @@ This is the production default across the industry: it has the clearest delegati
 
 Other coordination patterns exist in the wider ecosystem, such as peer-to-peer handoff, shared group conversations, and multi-level hierarchies. They trade centralized control for lower per-hop latency or richer shared context, at the cost of debuggability and predictable spend. WSO2 Integrator does not model these directly.
 
-<!-- TODO: Confirm whether an orchestrator can issue delegations concurrently, or whether tool calls are sequential. §4.4 of the proposal notes that concurrent runs must never share a (Memory, sessionId) pair, which is worth stating here if parallel delegation is supported. -->
-
 ## Context and session isolation
 
 The subtlest question in a multi-agent system is what the sub-agent gets to see.

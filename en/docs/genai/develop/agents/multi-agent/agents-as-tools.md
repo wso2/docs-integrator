@@ -71,14 +71,14 @@ Once an agent is selected, configure how the calling agent sees and invokes it.
 |---|---|---|
 | **Tool Name** | Yes | A unique name for the tool, such as `returnsPolicyAgentTool`. |
 | **Description** | No | What the tool does. The calling agent uses this to decide when to invoke it. |
-| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the delegation. Approval requests are listed on the **Human Tasks** page of the [Control Plane](../../../../workflows/icp/human-tasks.md). |
-| **Pass Agent Context** | No | Gives the sub-agent access to the calling agent's `ai:Context`. |
+| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the delegation. See HITL. |
+| **Pass Agent Context** | No | Gives the sub-agent access to the calling agent's `ai:Context`. See [Sharing values with the sub-agent](#sharing-values-with-the-sub-agent). |
 | **OAuth Client Configuration** | No | Credentials the tool uses when calling external authorization servers. The fields are the same as for any other tool. See [Tools](../tools.md#advanced-configuration). |
 | **Result Type** | No | The type the tool returns to the calling agent. See [What the sub-agent returns](#what-the-sub-agent-returns). |
 
 Click **Save Tool** to attach it.
 
-### Passing agent context
+### Sharing values with the sub-agent
 
 `ai:Context` is a key-value store that travels with a run, not the conversation history or anything the model sees. Enabling **Pass Agent Context** adds it as the first parameter of the generated tool, so the sub-agent's own tools can read values the calling agent put there, such as a tenant identifier, a user ID, or a result from an earlier step.
 
@@ -103,14 +103,11 @@ A narrow response type makes the sub-agent easier for the calling agent to use, 
 
 ## Execution behavior
 
-<!-- TODO: Confirm and document:
-     - Whether the sub-agent inherits the caller's session ID and context, or gets its own.
-     - Whether memory is shared with the calling agent by default.
-     - How a sub-agent error surfaces to the calling agent, as a tool error it can recover from or as a failed run.
-     - Whether nesting depth is bounded, and what happens at the limit.
-     - How agent credentials propagate to a sub-agent's tools. -->
+**Failures are recoverable.** A failing sub-agent does not fail the calling agent's run. The error comes back as a tool result the calling agent can react to. Say in its instructions what to do when a delegation fails.
 
-Each agent in the system enforces its own **Maximum Iterations**, so a delegating agent's worst case is its own budget multiplied by its sub-agents'. Set both deliberately. See [Advanced configuration](../creating-an-agent.md#advanced-configuration).
+**Iteration budgets compound.** Each agent enforces its own **Maximum Iterations**, defaulting to its tool count or 10, whichever is larger. A delegating agent's worst case is its own budget multiplied by its sub-agents'. Nesting is not otherwise bounded, so keep hierarchies shallow. See [Advanced configuration](../creating-an-agent.md#advanced-configuration).
+
+**Delegations can run in parallel.** Tool calls from one response run concurrently by default, so two delegations can be in flight at once. This matters if they share memory. See [Memory posture for sub-agents](overview.md#memory-posture-for-sub-agents).
 
 ## Common pitfalls
 
