@@ -63,6 +63,29 @@ Reuse is the simpler default. Create a new instance when the callers must not se
 
 ## Configure the tool
 
+Once an agent is selected, configure how the calling agent sees and invokes it.
+
+![The Use Agent configuration form for returnsPolicyAgent, with Tool Name, Description, the Requires Approval and Pass Agent Context checkboxes, and collapsed OAuth Client Configuration and Result Type sections.](/img/genai/develop/agents/multi-agent/06-configure-tool.png)
+
+| Field | Required | Description |
+|---|---|---|
+| **Tool Name** | Yes | A unique name for the tool, such as `returnsPolicyAgentTool`. |
+| **Description** | No | What the tool does. The calling agent uses this to decide when to invoke it. |
+| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the delegation. Approval requests are listed on the **Human Tasks** page of the [Control Plane](../../../../workflows/icp/human-tasks.md). |
+| **Pass Agent Context** | No | Gives the sub-agent access to the calling agent's `ai:Context`. |
+| **OAuth Client Configuration** | No | Credentials the tool uses when calling external authorization servers. The fields are the same as for any other tool. See [Tools](../tools.md#advanced-configuration). |
+| **Result Type** | No | The type the tool returns to the calling agent. See [What the sub-agent returns](#what-the-sub-agent-returns). |
+
+Click **Save Tool** to attach it.
+
+### Passing agent context
+
+`ai:Context` is a key-value store that travels with a run, not the conversation history or anything the model sees. Enabling **Pass Agent Context** adds it as the first parameter of the generated tool, so the sub-agent's own tools can read values the calling agent put there, such as a tenant identifier, a user ID, or a result from an earlier step.
+
+The model never sees these values and cannot supply them, so anything the sub-agent's *reasoning* needs still belongs in the task description.
+
+### Write the description for the caller, not the agent
+
 An agent attached as a tool has two descriptions, and they are not the same thing:
 
 | | Written for | Purpose |
@@ -93,11 +116,9 @@ Each agent in the system enforces its own **Maximum Iterations**, so a delegatin
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| The sub-agent is never called. | The tool description describes the agent rather than when to use it. | Rewrite it as a trigger condition. |
-| The sub-agent receives the whole conversation. | The calling agent passes the raw user message. | Instruct the calling agent to pass a scoped task. |
+| The sub-agent is never called. | The description is still the generated default, which names the agent but says nothing about the situations it handles. | Replace it with the conditions that should trigger a hand-off. |
 | The calling agent re-answers what the sub-agent already answered. | The response type is `string` and the result reads as advice. | Narrow the response type, and say in the instructions that the result is authoritative. |
 | Two callers see each other's conversation. | A single instance with shared memory is attached to both. | Create a separate instance for each caller. |
-| A sub-agent failure fails the whole request. | The error propagates instead of being handled. | Instruct the calling agent on what to do when the tool fails. |
 
 ## What's next
 
