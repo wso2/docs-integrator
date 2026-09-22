@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Agent Definitions
-description: Reference for agent definitions in WSO2 Integrator — creating a reusable agent template, the Agent Definition Designer, response types, and initialization parameters.
+description: Reference for agent definitions in WSO2 Integrator, covering how to create a reusable agent template, the Agent Definition Designer, response types, and initialization parameters.
 ---
 
 import Tabs from '@theme/Tabs';

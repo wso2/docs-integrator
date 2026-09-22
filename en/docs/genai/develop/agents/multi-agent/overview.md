@@ -1,14 +1,14 @@
 ---
 sidebar_position: 1
 title: Multi-Agent Systems
-description: Why and when to split work across multiple AI agents in WSO2 Integrator — the orchestrator pattern, context and session isolation, and the cost of delegation.
+description: Why and when to split work across multiple AI agents in WSO2 Integrator, covering the orchestrator pattern, context and session isolation, and the cost of delegation.
 ---
 
 # Multi-Agent Systems
 
 A multi-agent system is an architecture in which a task is accomplished not by a single LLM-driven agent, but by several cooperating agents, each with its own instructions, tools, model, and optionally its own memory. Instead of one agent carrying every instruction, every tool definition, and the full working context in a single prompt, the work is decomposed and distributed: one agent plans and delegates, others specialize in retrieval, generation, validation, or domain-specific actions, and their results are composed into a final outcome.
 
-The individual agents remain ordinary agents — an LLM in a loop with tools and instructions. What makes a system multi-agent is the coordination layer: how control flows between agents, what context each agent can see, and how results are aggregated.
+The individual agents remain ordinary agents, an LLM in a loop with tools and instructions. What makes a system multi-agent is the coordination layer: how control flows between agents, what context each agent can see, and how results are aggregated.
 
 In WSO2 Integrator, coordination is expressed by attaching one agent as a tool of another. See [Agents as Tools](agents-as-tools.md) for the mechanics.
 
@@ -18,14 +18,14 @@ A single capable agent with many tools is often the right starting point, but it
 
 | Motivation | What it buys you |
 |---|---|
-| **Context window management** | Every tool schema, instruction, and intermediate result competes for space in one context window. Splitting the work gives the system parallel context capacity far beyond any single model's window — each sub-agent works with a clean, scoped context containing only what its subtask needs. |
+| **Context window management** | Every tool schema, instruction, and intermediate result competes for space in one context window. Splitting the work gives the system parallel context capacity far beyond any single model's window. Each sub-agent works with a clean, scoped context containing only what its subtask needs. |
 | **Specialization** | Tool selection accuracy and instruction-following degrade measurably as a prompt fills with dozens of tools and long, mixed instructions. A focused agent with five relevant tools and a tight system prompt outperforms a generalist with fifty tools on the same subtask. |
-| **Fault isolation** | When a sub-agent goes off the rails — hallucinates, loops, or misuses a tool — the damage is contained to its subtask. The orchestrator can discard the result and retry without corrupting the state of the overall run. |
+| **Fault isolation** | When a sub-agent goes off the rails by hallucinating, looping, or misusing a tool, the damage is contained to its subtask. The orchestrator can discard the result and retry without corrupting the state of the overall run. |
 | **Parallelism** | Independent subtasks, such as researching five competitors or validating five endpoints, can be delegated separately and joined, cutting wall-clock latency. |
 | **Separation of concerns** | An agent reviewing work it did not produce is less prone to self-consistency bias. Writer/reviewer and generator/validator splits produce more reliable output than asking one agent to critique itself. |
 | **Security and permissions** | Each agent is granted only the credentials and tools its role requires, limiting the blast radius of prompt injection or plain mistakes. A read-only research sub-agent cannot be tricked into mutating production data, because it never held those permissions. |
-| **Cost optimization** | Different agents can run on different models — a strong model for planning and synthesis, cheaper and faster models for extraction, classification, or formatting. This is impossible when everything runs inside one agent on one model. |
-| **Governance and auditability** | A delegation trace — the orchestrator assigned this subtask to that agent, which returned this result — is far easier to audit than one opaque monolithic transcript, and gives regulated environments attributable decision points. |
+| **Cost optimization** | Different agents can run on different models. Use a strong model for planning and synthesis, and cheaper, faster models for extraction, classification, or formatting. This is impossible when everything runs inside one agent on one model. |
+| **Governance and auditability** | A delegation trace records that the orchestrator assigned this subtask to that agent, which returned this result. That is far easier to audit than one opaque monolithic transcript, and gives regulated environments attributable decision points. |
 
 ## When to add a sub-agent
 
@@ -50,16 +50,16 @@ WSO2 Integrator supports the **orchestrator** pattern, also called supervisor/wo
 | Aspect | Behavior |
 |---|---|
 | **Topology** | One orchestrator, N workers |
-| **Control flow** | Centralized — the orchestrator decomposes, delegates, and aggregates |
+| **Control flow** | Centralized. The orchestrator decomposes, delegates, and aggregates |
 | **Agent visibility** | Workers do not see each other's outputs |
 | **State and context** | The orchestrator holds the overall state; workers receive scoped subtasks |
-| **Debuggability** | Good — the delegation trace is explicit |
-| **Human-in-the-loop** | Straightforward — insert a checkpoint at the orchestrator |
+| **Debuggability** | Good, because the delegation trace is explicit |
+| **Human-in-the-loop** | Straightforward, by inserting a checkpoint at the orchestrator |
 | **Main failure mode** | Vague subtask specifications; the orchestrator becoming a bottleneck |
 
 This is the production default across the industry: it has the clearest delegation trace, the most natural place to insert human approval, and the most predictable cost profile.
 
-Other coordination patterns exist in the wider ecosystem — peer-to-peer handoff, shared group conversations, and multi-level hierarchies — and they trade centralized control for lower per-hop latency or richer shared context, at the cost of debuggability and predictable spend. WSO2 Integrator does not model these directly.
+Other coordination patterns exist in the wider ecosystem, such as peer-to-peer handoff, shared group conversations, and multi-level hierarchies. They trade centralized control for lower per-hop latency or richer shared context, at the cost of debuggability and predictable spend. WSO2 Integrator does not model these directly.
 
 <!-- TODO: Confirm whether an orchestrator can issue delegations concurrently, or whether tool calls are sequential. §4.4 of the proposal notes that concurrent runs must never share a (Memory, sessionId) pair, which is worth stating here if parallel delegation is supported. -->
 
@@ -67,24 +67,24 @@ Other coordination patterns exist in the wider ecosystem — peer-to-peer handof
 
 The subtlest question in a multi-agent system is what the sub-agent gets to see.
 
-By default a sub-agent is **isolated**: it receives only the task the orchestrator composes in its tool call, and runs in a fresh session. This gives the strongest fault isolation and the cleanest context, which is the core value of the pattern. The trade-off is that results depend entirely on the orchestrator writing self-contained subtask specifications — which is also the pattern's main failure mode.
+By default a sub-agent is **isolated**: it receives only the task the orchestrator composes in its tool call, and runs in a fresh session. This gives the strongest fault isolation and the cleanest context, which is the core value of the pattern. The trade-off is that results depend entirely on the orchestrator writing self-contained subtask specifications, which is also the pattern's main failure mode.
 
 Because the sub-agent cannot see the conversation, anything it needs must be in the task description. Say so in the orchestrator's instructions, and in the [tool description](agents-as-tools.md#configure-the-tool) of every attached agent.
 
 ### Memory posture for sub-agents
 
-The orchestrator's own record of the delegation — the tool call and its result — is the canonical representation of the sub-work. The sub-agent usually does not need to remember anything itself.
+The tool call and its result, as recorded by the orchestrator, are the canonical representation of the sub-work. The sub-agent usually does not need to remember anything itself.
 
 - **Prefer stateless sub-agents.** An agent configured without memory clears its session after every run.
 - **Otherwise, give each sub-agent its own memory.** Isolated memory per sub-agent keeps its internal dialogue out of the orchestrator's history.
-- **Never reuse the orchestrator's session key.** A sub-agent writing into the orchestrator's session pollutes it with the sub-agent's internal turns, and the store keeps only the latest system message per key — so the sub-agent's persona overwrites the orchestrator's.
+- **Never reuse the orchestrator's session key.** A sub-agent writing into the orchestrator's session pollutes it with the sub-agent's internal turns, and the store keeps only the latest system message per key, so the sub-agent's persona overwrites the orchestrator's.
 - **Never let two concurrent runs share the same memory instance and session ID.** A run reads history at the start and writes at the end; two runs on one key interleave into a single corrupted conversation.
 
 If a sub-agent genuinely needs persistent memory on a shared store, key it per sub-agent and per conversation rather than by the parent's raw session ID. See [Memory](../memory.md).
 
 ## Cost and latency
 
-Every delegation is a full agent run — its own prompt, its own tool-calling loop, its own tokens. A sub-agent that averages four reasoning steps turns one call into five.
+Every delegation is a full agent run with its own prompt, its own tool-calling loop, and its own tokens. A sub-agent that averages four reasoning steps turns one call into five.
 
 - **Token spend compounds.** The orchestrator pays for the sub-agent's entire run, then pays again to reason about the result.
 - **Latency is additive.** The orchestrator waits for each delegation before it can continue.

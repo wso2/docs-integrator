@@ -53,13 +53,13 @@ The dialog confirms what will be published:
 
 The description file is what consumers read on Ballerina Central, and a new library starts with placeholder text. Use **Edit** on the README section of the library Overview page, or **Open Description File** in the publish dialog, to describe what the agent does, what it expects in a query, and what it returns.
 
-<!-- TODO: Confirm the wording shown when no README.md exists — the dialog appears to flag the missing description file. A screenshot of that state would be worth adding here. -->
+<!-- TODO: Confirm the wording shown when no README.md exists. The dialog appears to flag the missing description file. A screenshot of that state would be worth adding here. -->
 
 ## Find a shared definition
 
 Shared definitions appear under **Pre-built Agents** in the **Add Agent** dialog, wherever that dialog is opened from.
 
-![The Add Agent dialog showing the Pre-built Agents section with a CustomerSupportAgent entry labelled with its organization and package name.](/img/genai/develop/agents/multi-agent/02-add-agent-prebuilt.png)
+![The Add Agent dialog showing the Pre-built Agents section with entries labelled by their organization and package name.](/img/genai/develop/agents/multi-agent/05-add-agent-dialog.png)
 
 Each entry shows the definition name and the organization and package it comes from, so definitions with the same name from different sources stay distinguishable.
 
@@ -75,7 +75,7 @@ Use the search box to filter by name.
 
 ## Use a shared definition
 
-Select the definition under **Pre-built Agents**. WSO2 Integrator adds the package as a dependency and guides you through supplying the values the definition needs — its model provider, memory, and any [initialization parameters](overview.md#initialization-parameters) it declares.
+Select the definition under **Pre-built Agents**. WSO2 Integrator adds the package as a dependency and guides you through supplying its model provider, memory, and any [initialization parameters](overview.md#initialization-parameters) it declares.
 
 The definition can be used in two places:
 
@@ -86,7 +86,7 @@ Consumers configure the instance, not the definition. Role, instructions, tools,
 
 ## Versioning a definition
 
-A published definition is public API. Its consumers depend on more than its behavior — they depend on its response type and its initialization parameters.
+A published definition is public API. Its consumers depend on more than its behavior. They also depend on its response type and its initialization parameters.
 
 | Change | Breaking? | Notes |
 |---|---|---|
@@ -100,7 +100,7 @@ A published definition is public API. Its consumers depend on more than its beha
 
 Bump the package version for every published change, and reserve breaking changes for a major version bump. Consumers upgrade by moving to the new version.
 
-<!-- TODO: Confirm how consumers are notified of and move to a new version — dependency update in Ballerina.toml, a prompt in the UI, or both. -->
+<!-- TODO: Confirm how consumers are notified of and move to a new version: dependency update in Ballerina.toml, a prompt in the UI, or both. -->
 
 ## Design definitions for reuse
 
@@ -109,7 +109,7 @@ A definition that works well in the integration it was written for often fails e
 - **Write the description for consumers.** It appears in the library catalog and is often all a consumer reads before picking the definition.
 - **Keep instructions caller-independent.** Don't assume a particular flow, request format, or upstream system.
 - **Parameterize what varies, fix what defines.** Environment endpoints, tenant identifiers, and model choices belong in initialization parameters. The agent's role does not.
-- **Don't hard-code a model provider.** It is a constructor parameter for a reason — consumers run in different environments.
+- **Don't hard-code a model provider.** It is a constructor parameter for a reason, because consumers run in different environments.
 - **Choose the response type deliberately.** It is the hardest thing to change later.
 - **Scope memory per instance.** Memory is supplied at initialization, so consumers control isolation.
 - **Keep internal details out.** Instructions, tool names, and descriptions are published with the package, so keep internal system names and confidential business rules out of a definition you intend to publish.

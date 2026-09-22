@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Agents as Tools
-description: Attach an agent as a tool of another AI agent in WSO2 Integrator — reusing an existing instance, creating a new agent, or instantiating a shared agent definition.
+description: Attach an agent as a tool of another AI agent in WSO2 Integrator by reusing an existing instance, creating a new agent, or instantiating a shared agent definition.
 ---
 
 # Agents as Tools
@@ -10,20 +10,35 @@ An agent can be attached to another agent as a tool. The calling agent then trea
 
 This page describes how to attach an agent as a tool and how to configure the result. For guidance on whether to split work across agents at all, see [Multi-Agent Systems](overview.md).
 
+## Open the agent node
+
+Tools are attached from the agent node, so start by creating an agent or opening an existing one. Select the agent under **Agents** in the project tree to open its canvas.
+
+![The agent node canvas for aiAgent, showing the AI Agent node with an Add Memory button and the agent's role and instructions, and a + button on the edge of the node.](/img/genai/develop/agents/multi-agent/01-agent-node-canvas.png)
+
+:::note
+If the canvas shows an `agent:run` node, you are looking at the integration flow that *uses* the agent, not the agent node itself. Click **Open Agent** on the to get there.
+
+![The Chat Agent Service flow showing Start, an agent:run node for aiAgent with an Open Agent button, and Return.](/img/genai/develop/agents/multi-agent/02-integration-flow-open-agent.png)
+:::
+
 ## Attach an agent as a tool
 
-1. Select the **AI Agent** node in the agent canvas and click the **+** button, or click **+ Tool** in the [Agent Definition Designer](../definitions/overview.md#agent-definition-designer).
-2. In the **Add Tool** panel, open the **Agent** section.
+1. Click the **+** button on the **AI Agent** node. The **Add Tool** panel opens with the available tool types.
 
-![The Add Tool panel with a search box and an Agent section containing an Add Agent button.](/img/genai/develop/agents/multi-agent/01-add-tool-agent.png)
+![The Add Tool panel listing Use Connection, Use Function, Use Agent, Use MCP Server, and Create Custom Tool.](/img/genai/develop/agents/multi-agent/03-add-tool-panel.png)
 
-Agents already instantiated in the project are listed here and can be attached directly. If the agent you want doesn't exist yet, click **+ Add Agent**.
+2. Select **Use Agent**, which delegates to another agent in your integration by wrapping it as a tool. For the other tool types, see [Tools](../tools.md).
 
-3. The **Add Agent** dialog opens.
+![The Add Tool - Use Agent panel, headed "Pick an agent from your integration to hand off requests to", with a search box and an Agent section containing an Add Agent button.](/img/genai/develop/agents/multi-agent/04-use-agent-panel.png)
 
-![The Add Agent dialog showing Create Agent, Create Agent Definition, and a Pre-built Agents section containing CustomerSupportAgent.](/img/genai/develop/agents/multi-agent/02-add-agent-prebuilt.png)
+Agents already instantiated in the integration are listed here and can be attached directly.
 
-This is the same dialog used to add an agent as an artifact, with the same options:
+3. If the agent you want doesn't exist yet, click **+ Add Agent** and choose where the new agent comes from.
+
+![The Add Agent dialog showing Create Agent, Create Agent Definition, and a Pre-built Agents section containing ReturnsPolicyAgent and customer_support_agent.](/img/genai/develop/agents/multi-agent/05-add-agent-dialog.png)
+
+The options are the same as when adding an agent as an artifact:
 
 | Option | Result |
 |---|---|
@@ -32,8 +47,6 @@ This is the same dialog used to add an agent as an artifact, with the same optio
 | **Pre-built Agents** | An instance of a definition that already exists in this project or your organization. |
 
 For the fields in each path, see [Create an agent definition](../definitions/overview.md#create-an-agent-definition).
-
-> **Tip:** Creating a definition from inside the tool flow is a reasonable path when you know the specialist will be reused. You build it, share it, and attach it in one pass, rather than creating an artifact first and coming back.
 
 ## Reuse an instance or create a new one
 
@@ -57,13 +70,13 @@ An agent attached as a tool has two descriptions, and they are not the same thin
 | **Tool name and description** | The calling agent's LLM | Deciding *whether* to delegate, and when |
 | **Role and instructions** | The sub-agent's own LLM | Deciding *how* to do the work once delegated |
 
-Write the tool description around the trigger condition — the situations in which the calling agent should hand off — not around the sub-agent's capabilities. This is where delegation most often fails: a description that reads like a job title tells the calling agent nothing about when to use it.
+Write the tool description around the trigger condition, meaning the situations in which the calling agent should hand off, rather than around the sub-agent's capabilities. This is where delegation most often fails: a description that reads like a job title tells the calling agent nothing about when to use it.
 
-<!-- TODO: Document the tool configuration fields presented after selecting an agent — name, description, and how the query is passed to the sub-agent. -->
+<!-- TODO: Document the tool configuration fields presented after selecting an agent: name, description, and how the query is passed to the sub-agent. -->
 
 ## What the sub-agent returns
 
-The value the calling agent receives is determined by the sub-agent's response type — the **Response Type** of an [agent definition](../definitions/overview.md#response-type), or the **Type Descriptor** in the advanced configuration of an agent created directly in an integration.
+The value the calling agent receives is determined by the sub-agent's response type. This is the **Response Type** of an [agent definition](../definitions/overview.md#response-type), or the **Type Descriptor** in the advanced configuration of an agent created directly in an integration.
 
 A narrow response type makes the sub-agent easier for the calling agent to use, because the result needs no further interpretation. A `string` response gives the calling agent prose it must reason about again.
 
@@ -72,7 +85,7 @@ A narrow response type makes the sub-agent easier for the calling agent to use, 
 <!-- TODO: Confirm and document:
      - Whether the sub-agent inherits the caller's session ID and context, or gets its own.
      - Whether memory is shared with the calling agent by default.
-     - How a sub-agent error surfaces to the calling agent — as a tool error it can recover from, or as a failed run.
+     - How a sub-agent error surfaces to the calling agent, as a tool error it can recover from or as a failed run.
      - Whether nesting depth is bounded, and what happens at the limit.
      - How agent credentials propagate to a sub-agent's tools. -->
 
