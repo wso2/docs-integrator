@@ -11,9 +11,11 @@ If you have already [signed in to WSO2 Integrator](../../get-started/setup/local
 
 ## Sign in from the Copilot welcome screen
 
-1. In your WSO2 Integrator project view, open Copilot by clicking the **Generate with AI** button, or the **Open WSO2 Integrator Copilot** icon in the top-right corner of the editor toolbar.
+1. In your WSO2 Integrator project view, open Copilot from the prompt box on your project overview. Select the Copilot orb in the prompt box to open the chat panel, or type what you want to build and press Enter; Copilot opens its panel and submits the prompt for you. Use the attach button beside the box to add files as context.
 
-   ![Open WSO2 Integrator Copilot icon](/img/develop/copilot/open-copilot-icon.png)
+   ![The Copilot prompt box on the project overview](/img/develop/copilot/copilot-prompt-box.png)
+
+   While Copilot works, the prompt box shows the live status in place of its input, and the floating status orb stays hidden so only one Copilot surface is on screen. See [Copilot in the background](background-copilot.md).
 
 2. The Copilot welcome screen opens with the available sign-in options.
 
