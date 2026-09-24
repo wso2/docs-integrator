@@ -6,76 +6,36 @@ description: "Implement the Message pattern with WSO2 Integrator."
 import TabItem from '@theme/TabItem';
 import {
   EipReferenceLink,
+  PatternImage,
   PatternImplementationTabs,
 } from '@site/src/utils/eipPatternComponents';
 
 # Message
 
-Use the Message pattern to package information into a structure that can move through a message channel without losing the distinction between system metadata and business data. <EipReferenceLink href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/Message.html" label="Enterprise Integration Patterns Message reference" />
+A Message packages a piece of information as a data record so it can be transmitted through a message channel from one application to another. <EipReferenceLink href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/Message.html" label="Enterprise Integration Patterns Message reference" />
 
-The pattern is implemented by defining the message shape close to the integration logic and binding it to a transport only at the channel boundary. Use a typed envelope when the application needs a transport-independent message. Use native protocol or connector bindings when the message is already tied to HTTP headers, payloads, or a broker-specific record.
+In WSO2 Integrator, a message is modeled as a Ballerina record. The record type defines the structure of the data both applications agree on, and a client connection transmits the record over the channel.
 
-## Typed message envelope
+## Example: Updating a survey
 
-Use a typed message envelope when the integration needs a stable application-level message shape before it sends data to a connector or returns it from a resource function. Model the envelope as a closed record with separate records for headers and body fields.
-
-<PatternImplementationTabs>
-<TabItem value="ui" label="Visual Designer" default>
-
-1. Create a new integration in WSO2 Integrator.
-2. Add the header, body, and envelope records in [Types](../../develop/integration-artifacts/supporting/types.md).
-3. Open the flow and [add a step](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md#anatomy-of-the-editor).
-4. Add a **Declare Variable** or **Map Data** step to construct the envelope.
-5. Pass the envelope to the connector call, return it from the resource function, or map it into another boundary-specific message.
-
-</TabItem>
-<TabItem value="code" label="Ballerina Code">
-
-```ballerina
-type OrderHeaders record {|
-    string correlationId;
-    string source;
-    string messageType;
-|};
-
-type OrderBody record {|
-    string orderId;
-    decimal amount;
-    string currency;
-|};
-
-type OrderMessage record {|
-    OrderHeaders headers;
-    OrderBody body;
-|};
-
-function buildOrderMessage(OrderBody order, string correlationId) returns OrderMessage {
-    return {
-        headers: {
-            correlationId,
-            source: "order-service",
-            messageType: "OrderCreated"
-        },
-        body: order
-    };
-}
-```
-
-</TabItem>
-</PatternImplementationTabs>
-
-## Channel boundary binding
-
-Use channel boundary binding when the message arrives through, or leaves through, a protocol that already provides metadata and payload locations. Keep the EIP Message shape explicit in the flow, then map HTTP headers, HTTP payloads, or broker records into that envelope at the boundary.
+This example builds a message that carries the details of a customer satisfaction survey update and sends it to the SurveyMonkey API. The `SurveyUpdateRequest` record defines the message structure, and the HTTP client transmits it as a `PUT` request.
 
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Add and configure the required connector under **Connections**. For brokered messages, select the relevant connector, such as the [NATS connector](../../connectors/catalog/messaging/nats/connector-overview.md), from the [messaging connector catalog](../../connectors/catalog/index.mdx).
-2. Add the listener or entry point for the inbound channel. For HTTP, start by [creating an HTTP service](../../develop/integration-artifacts/service/http.md#creating-an-http-service).
-3. Bind the request payload as the body and bind transport metadata, such as headers, as message headers.
-4. Add a **Map Data** step to create the typed message envelope from the inbound payload and metadata.
-5. Publish the envelope through the connector, forward it to another channel, or return it from the resource function.
+1. Define the message structure as a record type with the [Type editor](../../develop/understand-ide/editors/type-editor.md). Here, `SurveyUpdateRequest` names the fields the two applications agree on, with a type for each.
+2. Create an [automation](../../develop/integration-artifacts/automation.md#creating-an-automation) to run the flow.
+3. Add an HTTP client connection that points to the SurveyMonkey API. See [adding a connection](../../develop/integration-artifacts/supporting/connections.md#adding-a-connection).
+4. In the flow, declare a variable of type `SurveyUpdateRequest` and assign the survey details. This record instance is the message.
+5. Add the HTTP `put` action on the connection to transmit the message to the survey resource path.
+
+Defining the message is the heart of this pattern. The `SurveyUpdateRequest` record fixes the shape both applications rely on (`title`, `from_template_id`, `footer`, `folder_id`, and `theme_id`), each with its type:
+
+<PatternImage src="/img/eip-patterns/message_types.png" alt="SurveyUpdateRequest message type in the WSO2 Integrator type diagram" width={355} />
+
+With the message type defined, the flow assigns its values and sends it to the SurveyMonkey channel as a single PUT request:
+
+<PatternImage src="/img/eip-patterns/message_flow.png" alt="Message flow in the WSO2 Integrator visual designer" width={530} />
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -83,49 +43,33 @@ Use channel boundary binding when the message arrives through, or leaves through
 ```ballerina
 // docs-fold-start: Supporting definitions
 import ballerina/http;
-import ballerinax/nats;
 
-final nats:Client orderEvents = check new (nats:DEFAULT_URL);
+type SurveyUpdateRequest record {
+    string title;
+    string from_template_id;
+    boolean footer;
+    string folder_id;
+    int theme_id;
+};
 
-type OrderHeaders record {|
-    string correlationId;
-    string source;
-    string messageType;
-|};
-
-type OrderBody record {|
-    string orderId;
-    decimal amount;
-    string currency;
-|};
-
-type OrderMessage record {|
-    OrderHeaders headers;
-    OrderBody body;
-|};
+final http:Client surveyMonkey = check new ("http://api.surveymonkey.com.balmock.io");
 // docs-fold-end
 
-service /orders on new http:Listener(8080) {
-
-    resource function post .(
-            @http:Header {name: "x-correlation-id"} string correlationId,
-            OrderBody payload) returns OrderMessage|error {
-        OrderMessage message = {
-            headers: {
-                correlationId,
-                source: "http-api",
-                messageType: "OrderCreated"
-            },
-            body: payload
-        };
-        check orderEvents->publishMessage({
-            subject: "orders.created",
-            content: message
-        });
-        return message;
-    }
+public function main() returns error? {
+    SurveyUpdateRequest message = {
+        title: "Customer Satisfaction Survey 2025",
+        from_template_id: "customer_satisfaction_template_7",
+        footer: true,
+        folder_id: "customer_satisfaction",
+        theme_id: 789
+    };
+    http:Response response = check surveyMonkey->/v3/surveys/["1267"].put(message, targetType = http:Response);
 }
 ```
 
 </TabItem>
 </PatternImplementationTabs>
+
+## Complete sample
+
+The complete project is available in the [message sample](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/enterprise-integration-pattern/message) on GitHub.
