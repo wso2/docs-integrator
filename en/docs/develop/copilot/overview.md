@@ -20,6 +20,10 @@ Copilot has two modes: plan and edit. Switch between them using the toggle in th
 
   ![Plan mode showing a structured step-by-step breakdown of execution tasks.](/img/develop/copilot/plan-mode.png)
 
+## Running in the background
+
+Copilot runs in the background, so closing the panel does not stop a run. While it works, a status bar item, a floating status orb, and a mini chat keep you informed and let you follow along or reply without opening the full panel. See [Copilot in the background](background-copilot.md).
+
 ## Generating connectors
 
 Copilot can generate a custom connector when a pre-built one is not available. During integration generation, if no pre-built connector exists, Copilot prompts the user for an OpenAPI specification. The user can also directly request to generate a custom connector. Once generated, the connector is available for Copilot to use in the flow.
@@ -44,7 +48,7 @@ During the planning or generation phase, Copilot may identify missing informatio
 
 ## Reviewing
 
-After generation completes, you can inspect exactly what was built or changed before finalizing the changes. Review the generated artifacts as the flow diagram or as source code with a diff view.
+After generation completes, you can inspect exactly what was built or changed before finalizing the changes. Copilot shows the change set in a unified diff diagram that marks added, removed, and modified parts, and you can step through the resulting and previous versions of each artifact. See [Reviewing changes](reviewing-changes.md).
 
 ![Review mode showing the generated integration diagram.](/img/develop/copilot/review-mode.png)
 
@@ -170,6 +174,8 @@ Type `/` in the Copilot input bar to invoke a command for a specific task. You c
 ## See also
 
 - [Getting started](getting-started.md) — Sign in to WSO2 Integrator Copilot.
+- [Copilot in the background](background-copilot.md) shows how to follow a run while the panel is closed.
+- [Reviewing changes](reviewing-changes.md) shows how to inspect a run's changes in a unified diff.
 - [Generate tests with AI](../test/ai-generated-cases.md) — Use Copilot to generate test cases.
 - [AI data mapper](../integration-artifacts/supporting/data-mapper/ai-mapping.md) — Generate data mappings using AI.
 - [Try-It tool](../test/built-in-try-it-tool.md) — Test services without leaving the IDE.
