@@ -6,6 +6,7 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start en",
     "build": "docusaurus build en",
+    "build:choreo": "NODE_OPTIONS=--require=./scripts/choreo-fs-patch.cjs DOCUSAURUS_NO_PERSISTENT_CACHE=true DOCUSAURUS_DISABLE_LAST_UPDATE=true docusaurus build en",
     "swizzle": "docusaurus swizzle en",
     "deploy": "docusaurus deploy en",
     "clear": "docusaurus clear en",
@@ -29,6 +30,7 @@
     "@docusaurus/module-type-aliases": "3.9.2",
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",
+    "graceful-fs": "^4.2.11",
     "linkinator": "^7.6.1",
     "typescript": "~5.6.2"
   },
