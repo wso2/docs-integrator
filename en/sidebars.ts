@@ -2113,7 +2113,25 @@ const sidebars: SidebarsConfig = {
               collapsed: true,
               items: [
                 'genai/develop/agents/creating-an-agent',
+                {
+                  type: 'category',
+                  label: 'Agent Definitions',
+                  link: { type: 'doc', id: 'genai/develop/agents/definitions/overview' },
+                  collapsed: true,
+                  items: [
+                    'genai/develop/agents/definitions/sharing-and-reusing-definitions',
+                  ],
+                },
                 'genai/develop/agents/tools',
+                {
+                  type: 'category',
+                  label: 'Multi-Agent',
+                  link: { type: 'doc', id: 'genai/develop/agents/multi-agent/overview' },
+                  collapsed: true,
+                  items: [
+                    'genai/develop/agents/multi-agent/agents-as-tools',
+                  ],
+                },
                 'genai/develop/agents/memory',
                 'genai/develop/agents/observability',
                 {

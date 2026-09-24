@@ -14,13 +14,13 @@ This page describes the supported tool types, how to add them to an agent, and h
 
 ## Add a tool
 
-To add a tool to an agent, select the **AI Agent** node in the agent canvas and click the **+** button.
+To add a tool to an agent, click the **+** button on the **AI Agent** node in the agent canvas.
 
 ![Add tool](/img/genai/develop/agents/29-tool.png)
 
 This opens the **Add Tool** panel, where you can choose how to add capabilities to the agent.
 
-![The Add Tool dialog with four options: Use Connection, Use Function, Use MCP Server, Create Custom Tool. Each option has a one-line description.](/img/genai/develop/agents/05-add-tool-dialog.png)
+![The Add Tool panel listing Use Connection, Use Function, Use Agent, Use MCP Server, and Create Custom Tool, each with a one-line description.](/img/genai/develop/agents/multi-agent/03-add-tool-panel.png)
 
 The following tool integration options are available:
 
@@ -28,6 +28,7 @@ The following tool integration options are available:
 |---|---|
 | **Use Connection** | Use an existing WSO2 Integrator connector such as Salesforce, Gmail, MySQL, or GitHub. Each connector operation becomes available as an agent tool. |
 | **Use Function** | Expose an existing project function or standard library function as an agent tool. |
+| **Use Agent** | Delegate to another agent, wrapped as a tool, so this agent can hand off requests and use the response. |
 | **Use MCP Server** | Connect to tools hosted on a remote MCP server, including custom, community, or SaaS MCP endpoints. |
 | **Create Custom Tool** | Define a new tool by specifying its name, description, parameters, and return type directly from the UI. |
 
@@ -98,7 +99,15 @@ The tool metadata — including descriptions, parameters, and input/output schem
 
 ![Add function](/img/genai/develop/shared/18-add-function.png)
 
-## 3. Use MCP server
+## 3. Use agent
+
+Selecting **Use Agent** attaches another agent as a tool. The calling agent decides when to invoke it, passes it a task, and uses what comes back.
+
+Agents already instantiated in the integration are listed for selection, and new ones can be created from the same panel. For the full flow and the fields on the tool, see [Agents as Tools](multi-agent/agents-as-tools.md).
+
+Use this option when a task needs its own multi-step reasoning rather than a single action. See [Multi-Agent Systems](multi-agent/overview.md) for when to split work this way.
+
+## 4. Use MCP server
 
 Selecting **Use MCP Server** opens the **Add MCP Server** panel.
 
@@ -118,7 +127,7 @@ After saving, every tool exposed by the MCP server — or every tool selected in
 
 > **Tip:** A WSO2 Integrator project can also consume its own MCP service. See [Exposing a Service as MCP](../mcp/exposing-as-mcp.md).
 
-## 4. Create custom tool
+## 5. Create custom tool
 
 Use this option when you want to define a tool before implementing its logic, or when the tool requires a fully custom structure.
 
@@ -241,6 +250,8 @@ To configure a tool, click **Edit** and configure the following fields.
 | **Parameters** | No | Defines the input parameters used when invoking the tool. |
 | **Return Type** | Yes | Defines the type of value returned by the tool. |
 | **Return Description** | No | A description of the value returned by the tool. |
+| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See HITL. |
+| **Pass Agent Context** | No | Gives the tool access to the agent's `ai:Context`, a key-value store carried through the run that the model never sees. |
 | **Advanced Configuration** | No | Contains the agent authentication client configurations and additional security-related settings used to connect with external authorization servers. |
 
 ### Advanced configuration
