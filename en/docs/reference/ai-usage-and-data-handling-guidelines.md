@@ -1,7 +1,7 @@
 ---
 title: AI Usage and Data Handling Guidelines
 description: Understand how WSO2 Integrator Copilot handles prompts, responses, feedback, and authentication data, and the best practices to follow when using AI features.
-keywords: [wso2 integrator, copilot, ai, data handling, privacy, byok, anthropic, aws bedrock, asgardeo]
+keywords: [wso2 integrator, copilot, ai, data handling, privacy, byok, anthropic, aws bedrock, google vertex ai, asgardeo]
 ---
 
 # AI Usage and Data Handling Guidelines
@@ -60,6 +60,12 @@ Organizations can configure Copilot to run using their own model provider accoun
 - Copilot can also run using Claude models deployed on Amazon Bedrock.
 - Requires an active Claude deployment in your Amazon Bedrock environment.
 - Users must provide their own access keys for connectivity.
+
+### Google Vertex AI
+
+- Copilot can also run using Claude models deployed on Google Vertex AI.
+- Requires an active Anthropic Claude deployment in your Google Cloud project.
+- Users must provide the GCP project ID, the location of the deployment, and the path to a service account JSON key file.
 
 ## Open source
 
