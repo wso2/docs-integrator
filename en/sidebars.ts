@@ -258,6 +258,7 @@ const sidebars: SidebarsConfig = {
             'develop/copilot/getting-started',
             'develop/copilot/overview',
             'develop/copilot/mcp-tools',
+            'develop/copilot/usage-limits',
           ],
         },
         // 6.6 Try & Test
