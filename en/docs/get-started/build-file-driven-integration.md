@@ -95,6 +95,10 @@ In the cloud editor, you're already inside a project. Skip to Step 2.
     }}
 />
 
+:::info
+In the **Configure onModify Handler** panel, clear both **On Success** and **On Error** under **File Handling Options**. Both arrive ticked and set to **Move**, which moves each processed file out of the watched directory. Clearing them keeps `testfile.txt` in `/tmp`, where the later steps expect it. See [Post-processing: moving or deleting files](../develop/integration-artifacts/file/local-files.md#post-processing-moving-or-deleting-files).
+:::
+
 ## Step 4: Add file tracking logic
 
 1. Select **+** in the flow diagram.
