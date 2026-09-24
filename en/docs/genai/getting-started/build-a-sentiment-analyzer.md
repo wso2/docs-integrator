@@ -28,10 +28,19 @@ A direct LLM call is the simplest way to use AI in an integration: you send a pr
 ## Step 1: Add an HTTP service
 
 1. Select your integration from the Project overview canvas.
-2. In the Design canvas, select **Add Artifact**.
-3. Select **HTTP Service** under **Integration as API**.
+2. On the **Design** tab, select **Add Artifact manually** below the WSO2 Integrator Copilot's quick-start cards.
+3. On the Artifacts page, select **HTTP Service** under **Integration as API**.
+
+<ThemedImage
+    alt="Artifacts page listing artifact types such as Automation, AI Integration, and Integration as API, with HTTP Service highlighted"
+    sources={{
+        light: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/artifacts-picker.png'),
+        dark: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/artifacts-picker.png'),
+    }}
+/>
+
 4. Keep **Service Contract** as **Design From Scratch**.
-5. Set **Service Base Path** to `/`.
+5. Keep **Service Base Path** as `/`.
 6. Select **Create**.
 
 <ThemedImage
@@ -75,7 +84,8 @@ The LLM call returns one of three values. Define an enum so Ballerina can enforc
     }}
 />
 
-6. Select **Save** on the payload panel, then **Save** on the resource.
+6. Select **Save** on the payload panel. The resource configuration also lets you add **Query Parameter** and **Header** fields, and it prefills the response codes with `201` (`json`) and `500` (`error`). Leave these at their defaults for this quick start.
+7. Select **Save** on the resource.
 
 <ThemedImage
     alt="POST analyze resource configured with the AnalyzePayload request body"
@@ -87,18 +97,29 @@ The LLM call returns one of three values. Define an enum so Ballerina can enforc
 
 ## Step 4: Add a direct LLM call
 
-1. Select **+** inside the resource flow.
+The resource opens as a visual flow with **Start** connected to an **Error Handler**.
+
+1. Select **+** on the connector between **Start** and **Error Handler**.
 2. Select **Model Provider** under **Direct LLM**.
 3. Select **+ Add Model Provider**, then choose **WSO2 Model Provider**.
-4. Keep the default name and select **Save**. The provider is added under **Connections**.
-5. Select the **Generate** action.
-6. Set **Prompt** to `Classify the sentiment of this customer review and provide a confidence score between 0.0 and 1.0 indicating how confident you are in the classification. Review: ${payload.text}`.
-7. Set the result variable name to `sentimentResult`.
-8. For **Expected Type**, create a new record type `SentimentResult` with two fields: `sentiment` of type `Sentiment` and `confidence` of type `float`. Select **Save** in the type creator.
-9. Back in the Generate panel, select `SentimentResult` in the **Expected Type** field, then select **Save**.
+4. Keep the default name and select **Save**. The provider is added under **Connections** as `aiWso2modelprovider`, and a confirmation message confirms the default configuration values were added.
 
 <ThemedImage
-    alt="Configuring the Generate action with the classification prompt and SentimentResult as the expected return type"
+    alt="Model Providers panel showing aiWso2modelprovider added to the flow between Start and Error Handler"
+    sources={{
+        light: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/add-model-provider.png'),
+        dark: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/add-model-provider.png'),
+    }}
+/>
+
+5. Select `aiWso2modelprovider`, then select the **generate** action.
+6. Set **Prompt** to `Classify the sentiment of this customer review and provide a confidence score between 0.0 and 1.0 indicating how confident you are in the classification. Review: ${payload.text}`.
+7. Set **Result** to `sentimentResult`.
+8. For **Expected Type**, create a new record type `SentimentResult` with two fields: `sentiment` of type `Sentiment` and `confidence` of type `float`. Select **Save** in the type creator.
+9. Back in the generate panel, select `SentimentResult` in the **Expected Type** field, then select **Save**.
+
+<ThemedImage
+    alt="Configuring the generate action with the classification prompt and SentimentResult as the expected return type"
     sources={{
         light: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/add-prompt-and-return-type.png'),
         dark: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/add-prompt-and-return-type.png'),
@@ -112,8 +133,10 @@ The LLM call returns one of three values. Define an enum so Ballerina can enforc
 3. Set **Expression** to `sentimentResult`.
 4. Select **Save**.
 
+The flow now shows **Start**, **ai:generate**, **Return**, and the **Error Handler** the visual designer added automatically to catch failures from the LLM call. Use the **Flow**/**Sequence** toggle at the top right to switch between the diagram and a linear step list.
+
 <ThemedImage
-    alt="Final flow with Start, ai:generate, Return, and the WSO2 model provider connection"
+    alt="Final flow with Start, ai:generate, Return, the WSO2 model provider connection, and an Error Handler"
     sources={{
         light: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/final-view.png'),
         dark: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/final-view.png'),
@@ -122,13 +145,14 @@ The LLM call returns one of three values. Define an enum so Ballerina can enforc
 
 ## Step 6: Run and test
 
-1. Select **Run**.
-2. Select **Try It** in the confirmation dialog.
-3. Send a `POST` to `/analyze` with the body `{"text": "Absolutely loved this product! Best purchase I made all year."}`.
-4. Confirm the response includes `"sentiment":"POSITIVE"` along with a `confidence` score.
+1. Select **Run**. WSO2 Integrator compiles and starts the integration in the terminal.
+2. Select **Try It**. A `TryIt.hurl` request file opens, prefilled with a `POST` request to `/analyze` and an example JSON body.
+3. Update the JSON body if needed, for example `{"text": "Absolutely loved this product! Best purchase I made all year."}`.
+4. Select the run icon next to the request to send it.
+5. Confirm the response shows `Status: 201 Created` with a body that includes `"sentiment": "POSITIVE"` along with a `confidence` score.
 
 <ThemedImage
-    alt="Running the integration and testing it with the Try It panel showing a POSITIVE sentiment response with a confidence score"
+    alt="Running the integration and testing it with the Hurl Client Runner's Try It panel showing a 201 Created response with a POSITIVE sentiment and a confidence score"
     sources={{
         light: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/run-and-test.png'),
         dark: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer/run-and-test.png'),
@@ -138,7 +162,7 @@ The LLM call returns one of three values. Define an enum so Ballerina can enforc
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
-The following Ballerina program produces the same integration shown in the Visual Designer steps. The LLM returns a `SentimentResult` record so the response includes both the sentiment and a confidence score (for example, `{"sentiment":"POSITIVE","confidence":0.98}`).
+The following Ballerina program produces the same integration shown in the Visual Designer steps. The LLM returns a `SentimentResult` record so the response includes both the sentiment and a confidence score (for example, `{"sentiment":"POSITIVE","confidence":0.98}`). The visual designer wraps the call in a `do`/`on fail` block, matching the **Error Handler** node shown in the flow.
 
 `types.bal`:
 
@@ -175,20 +199,24 @@ import ballerina/http;
 listener http:Listener httpDefaultListener = http:getDefaultListener();
 
 service / on httpDefaultListener {
-    resource function post analyze(@http:Payload AnalyzePayload payload) returns SentimentResult|error {
-        SentimentResult sentimentResult = check aiWso2modelprovider->generate(
-            `Classify the sentiment of this customer review and provide a confidence score
-            between 0.0 and 1.0 indicating how confident you are in the classification.
-            Review: ${payload.text}`
-        );
-        return sentimentResult;
+    resource function post analyze(@http:Payload AnalyzePayload payload) returns json|error {
+        do {
+            SentimentResult sentimentResult = check aiWso2modelprovider->generate(
+                `Classify the sentiment of this customer review and provide a confidence score
+                between 0.0 and 1.0 indicating how confident you are in the classification.
+                Review: ${payload.text}`
+            );
+            return sentimentResult;
+        } on fail error err {
+            return error("unhandled error", err);
+        }
     }
 }
 ```
 
-Note that `generate` takes an expected type descriptor as an argument, but it is not explicitly passed here. Ballerina infers it from the type of the variable the result is assigned to (`SentimentResult`), so the call stays concise while still being fully type-checked.
+Note that `generate` takes an expected type descriptor as an argument, but it is not explicitly passed here. Ballerina infers it from the type of the variable the result is assigned to (`SentimentResult`), so the call stays concise while still being fully type-checked. The resource itself returns `json|error`: the `do`/`on fail` block catches any error from the LLM call (the **Error Handler** node) and lets you customize the failure response, while the successful path still returns the fully typed `sentimentResult`.
 
-Run and test the integration from WSO2 Integrator using the **Try It** panel as shown in Step 6. The response will look similar to `{"sentiment":"POSITIVE","confidence":0.98}`, with the actual sentiment and confidence score determined by the model.
+Run and test the integration from WSO2 Integrator using the **Try It** panel as shown in Step 6. The response returns `Status: 201 Created` with a body similar to `{"sentiment":"POSITIVE","confidence":0.98}`, with the actual sentiment and confidence score determined by the model.
 
 </TabItem>
 </Tabs>

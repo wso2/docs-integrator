@@ -38,41 +38,23 @@ The agent receives customer messages over HTTP, reasons about which tool to call
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-## Step 1: Create the agent
+## Step 1: Create and configure the agent
 
 1. Open WSO2 Integrator and create or select your project.
-2. Select **Add Artifact**.
-3. Under **AI Integration**, select **AI Chat Agent**.
-4. Set the **Name** to `Customer Care Agent` and select **Create**.
+2. On the **Design** tab, select **Add Artifact manually** (below the WSO2 Integrator Copilot's quick-start cards).
+3. On the Artifacts page, under **AI Integration**, select **Chat Agent Service**.
 
 <ThemedImage
-    alt="The Add Artifact panel with AI Chat Agent selected under the AI Integration section"
+    alt="Artifacts page with Chat Agent Service highlighted under AI Integration, alongside Durable Agentic Workflow and MCP Service"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/create-agent-1.png'),
         dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/create-agent-1.png'),
     }}
 />
 
-The visual designer opens with the agent flow: a **Start** node, an **AI Agent** node, and a **Return** node.
-
-## Step 2: Configure the agent
-
-### 2.1 Open the agent configuration
-
-Select the **AI Agent** node to open the configuration panel on the right.
-
-<ThemedImage
-    alt="The AI Chat Agent visual designer showing the agent flow with Start, AI Agent, and Return nodes"
-    sources={{
-        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-1.png'),
-        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-1.png'),
-    }}
-/>
-
-### 2.2 Write the system prompt
-
-1. Set the **Role** to `Customer Support Agent`.
-2. Paste the following into **Instructions**:
+4. On the **Create Chat Agent Service** form, set:
+   - **Role** to `Customer Support Agent`.
+   - **Instructions** to:
 
 ```
 You are a helpful customer support agent for ShopEasy, an online retailer.
@@ -81,76 +63,90 @@ Always use the available tools to look up accurate information — never guess.
 Keep responses friendly and concise. Include relevant IDs (order ID, return ID) in your responses.
 ```
 
+   - **Model** as **Default WSO2 Model Provider**.
+   - Leave **Maximum Iterations** at its default (`INFER_TOOL_COUNT`).
+
 <ThemedImage
-    alt="The agent configuration panel showing the Role and Instructions fields filled in"
+    alt="Create Chat Agent Service form with Role, Instructions, Model set to Default WSO2 Model Provider, and Maximum Iterations defaulting to INFER_TOOL_COUNT"
     sources={{
-        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-2.png'),
-        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-2.png'),
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/create-agent-2.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/create-agent-2.png'),
     }}
 />
 
-### 2.3 Set advanced configurations
-
-1. Expand **Advanced Configurations**.
-2. Set **Maximum Iterations** to `10`.
-3. Select **Save**.
-
-<ThemedImage
-    alt="The advanced configuration panel showing Maximum Iterations set to 10"
-    sources={{
-        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-3.png'),
-        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/configure-agent-3.png'),
-    }}
-/>
-
-:::info Why set Maximum Iterations to 10?
-The default is based on the number of toolkit objects, not individual tools. With one MCP toolkit wrapping three tools, the default is 2, which is too low for multi-step queries. Setting it to 10 gives the agent enough room to reason, call a tool, and respond.
+:::info Why leave Maximum Iterations at its default?
+`INFER_TOOL_COUNT` resolves to `max(number of tools, 10)` — at least 10 reasoning-action cycles, or more if the agent has more tools available. Once the MCP toolkit is attached in Step 2, this default already gives the agent enough room to reason, call a tool, and respond, without needing a manual override.
 :::
 
-## Step 3: Add the MCP server as a tool
-
-### 3.1 Select the tool type
-
-1. Select **+** on the **AI Agent** node.
-2. Select **Use MCP Server**.
+5. Leave **Verbose**, **Tool Loading Strategy**, and **Execute Tool Calls In Parallel** at their defaults.
+6. Set **Agent Name** to `CustomerCareAgent`.
+7. Set **Service Base Path** to expose the chat service, for example `/customer-care-agent`.
+8. Select **Create**.
 
 <ThemedImage
-    alt="The Add Tool panel with Use MCP Server highlighted"
+    alt="Bottom of the Create Chat Agent Service form with Agent Name set to CustomerCareAgent and Service Base Path set to /customer-care-agent"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/create-agent-3.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/create-agent-3.png'),
+    }}
+/>
+
+This creates an **AI Agent Service** with a `POST /chat` resource and a `chatAgentListener`, plus the `CustomerCareAgent` agent under **Agents**. Select **CustomerCareAgent** under **Agents** to open its canvas: the **AI Agent** node is connected to the model provider, with a **+ Add Memory** button and a `+` icon at its bottom-right corner for adding tools.
+
+<ThemedImage
+    alt="AI Agent node for CustomerCareAgent connected to the model provider, with an Add Memory button and a + icon for adding tools"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/create-agent-4.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/create-agent-4.png'),
+    }}
+/>
+
+## Step 2: Add the MCP server as a tool
+
+### 2.1 Select the tool type
+
+Select the **+** at the bottom-right corner of the **AI Agent** node. The **Add Tool** panel opens, listing **Use Connection**, **Use Function**, **Use Agent**, **Use MCP Server**, and **Create Custom Tool**. Select **Use MCP Server**.
+
+<ThemedImage
+    alt="Add Tool panel listing Use Connection, Use Function, Use Agent, Use MCP Server (highlighted), and Create Custom Tool, each with a short description"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-1.png'),
         dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-1.png'),
     }}
 />
 
-### 3.2 Configure the server URL
+### 2.2 Configure the server URL
 
 1. Set **Server URL** to `http://localhost:8080/mcp`.
 2. Leave **Requires Authentication** off.
-3. Select **Save**.
 
 <ThemedImage
-    alt="The Add MCP Server panel with the server URL set to http://localhost:8080/mcp"
+    alt="Add Tool - Use MCP Server panel with Server URL set to http://localhost:8080/mcp and Requires Authentication unchecked"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-2.png'),
         dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-2.png'),
     }}
 />
 
-The MCP toolkit appears as `aiMcpbasetoolkit` attached to the agent node in the visual designer. The agent will discover the available tools from the server at startup.
+The panel also lists **Info** (the MCP client identity sent to the server, defaults to `{name: "MCP Client", version: "1.0.0"}`), **Tools to Include** (defaults to **All**), and a set of advanced HTTP client options — timeout, redirects, pooling, caching, compression, circuit breaker, retries, and TLS — under further scrolling. Leave these at their defaults for this tutorial.
+
+3. Leave **Result** as the default `aiMcpbasetoolkit` and select **Save**.
+
+The MCP toolkit appears as `aiMcpbasetoolkit` attached to the agent node, connected by a dashed line, and a `McpToolKit` type is added under **Types** in the sidebar. The agent will discover the available tools from the server at startup.
 
 <ThemedImage
-    alt="The completed agent flow showing the AI Agent node connected to the aiMcpbasetoolkit"
+    alt="The completed agent flow showing the AI Agent node connected by a dashed line to the aiMcpbasetoolkit"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-3.png'),
         dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/add-mcp-3.png'),
     }}
 />
 
-## Step 4: Run and test
+## Step 3: Run and test
 
-Make sure the ShopEasy MCP server is running, then click the **Play** button in the top-right corner of the WSO2 Integrator IDE to start the agent.
+Make sure the ShopEasy MCP server is running, then select **Run**. WSO2 Integrator applies the `--experimental` flag and compiles and starts the service, with progress shown in the integrated terminal.
 
-Once the agent is running, click **Chat** in the toolbar (next to **Tracing: Off**) to open the built-in chat panel. Type your message in the input field and press **Enter** to send it.
+Once it's running, open the `chat` resource — its flow shows **Start**, an `agent:run` node (with an **Open Agent** link back to the `CustomerCareAgent` canvas), and **Return**. Select **Chat** in the toolbar (next to **Tracing**) to open the **Agent Chat** panel. Type your message in the input field and press **Enter** to send it.
 
 Try the following messages to exercise all three tools:
 
@@ -159,10 +155,10 @@ Try the following messages to exercise all three tools:
 - *"I want to return ORD-001. The item arrived damaged."*
 
 <ThemedImage
-    alt="The agent running in the WSO2 Integrator IDE with the MCP toolkit connected and the Ballerina Debug indicator active"
+    alt="Chat Agent Service resource flow (Start, agent:run, Return) alongside the Agent Chat panel showing a question about order ORD-042 and the agent's answer"
     sources={{
-        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/run-and-test.gif'),
-        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/run-and-test.gif'),
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/run-and-test.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp/run-and-test.png'),
     }}
 />
 
@@ -171,15 +167,15 @@ For more detail on using the chat panel, see [Try-It experiences](../../develop/
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
-**`connections.bal`**: model provider and MCP toolkit connection:
+**`connections.bal`**: MCP toolkit connection:
 
 ```ballerina
 import ballerina/ai;
 
-final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
-
 final AiMcpbasetoolkit aiMcpbasetoolkit = check new ("http://localhost:8080/mcp");
 ```
+
+The model provider is initialized inline with `ai:getDefaultModelProvider()` in `agents.bal`, so no separate connection is needed for the default WSO2 model provider.
 
 **`agents.bal`**: agent definition:
 
@@ -187,14 +183,14 @@ final AiMcpbasetoolkit aiMcpbasetoolkit = check new ("http://localhost:8080/mcp"
 import ballerina/ai;
 import ballerina/mcp;
 
-final ai:Agent customerCareAgent = check new (
+final ai:Agent CustomerCareAgent = check new (
     systemPrompt = {
-        role: string `Customer Care Agent`,
+        role: string `Customer Support Agent`,
         instructions: string `You are a helpful customer support agent for ShopEasy, an online retailer.
 Help customers with product availability, order tracking, and return requests.
 Always use the available tools to look up accurate information. Never guess.
 Keep responses friendly and concise. Include relevant IDs (order ID, return ID) in your responses.`
-    }, maxIter = 10, model = wso2ModelProvider, tools = [aiMcpbasetoolkit]
+    }, model = check ai:getDefaultModelProvider(), tools = [aiMcpbasetoolkit]
 );
 
 isolated class AiMcpbasetoolkit {
@@ -229,15 +225,15 @@ import ballerina/http;
 
 listener ai:Listener chatAgentListener = new (listenOn = check http:getDefaultListener());
 
-service /customerCareAgent on chatAgentListener {
+service /customer\-care\-agent on chatAgentListener {
     resource function post chat(@http:Payload ai:ChatReqMessage request) returns ai:ChatRespMessage|error {
-        string stringResult = check customerCareAgent.run(request.message, request.sessionId);
+        string stringResult = check CustomerCareAgent.run(request.message, request.sessionId);
         return {message: stringResult};
     }
 }
 ```
 
-To run and test the agent, follow the same steps in the **Visual Designer** tab under [Step 4: Run and test](#step-4-run-and-test).
+To run and test the agent, follow the same steps in the **Visual Designer** tab under [Step 3: Run and test](#step-3-run-and-test).
 
 </TabItem>
 </Tabs>
