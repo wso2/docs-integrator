@@ -84,12 +84,12 @@ Queries the TimeAccountPostingRule collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeAccountPostingRulesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListTimeAccountPostingRulesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listTimeAccountPostingRules();
+ListTimeAccountPostingRulesResponse result = check client->listTimeAccountPostingRules();
 ```
 
 **Sample response:**
@@ -119,12 +119,12 @@ Retrieves a single TimeAccountPostingRule entity identified by its key propertie
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeAccountPostingRuleQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Account\ Posting\ Rule&#124;error`
+**Returns:** `GetTimeAccountPostingRuleResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Account\ Posting\ Rule result = check client->getTimeAccountPostingRule(TimeType_externalCode, externalCode);
+GetTimeAccountPostingRuleResponse result = check client->getTimeAccountPostingRule(TimeType_externalCode, externalCode);
 ```
 
 </div>
@@ -146,12 +146,12 @@ Queries the WorkScheduleDayModelVariantAssignment collection and returns a page 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWorkScheduleDayModelVariantAssignmentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListWorkScheduleDayModelVariantAssignmentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listWorkScheduleDayModelVariantAssignments();
+ListWorkScheduleDayModelVariantAssignmentsResponse result = check client->listWorkScheduleDayModelVariantAssignments();
 ```
 
 **Sample response:**
@@ -181,12 +181,12 @@ Retrieves a single WorkScheduleDayModelVariantAssignment entity identified by it
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetWorkScheduleDayModelVariantAssignmentQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Work\ Schedule\ Day\ Model\ Variant\ Assignment&#124;error`
+**Returns:** `GetWorkScheduleDayModelVariantAssignmentResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Work\ Schedule\ Day\ Model\ Variant\ Assignment result = check client->getWorkScheduleDayModelVariantAssignment(WorkScheduleDayModel_externalCode, externalCode);
+GetWorkScheduleDayModelVariantAssignmentResponse result = check client->getWorkScheduleDayModelVariantAssignment(WorkScheduleDayModel_externalCode, externalCode);
 ```
 
 </div>
@@ -208,12 +208,12 @@ Queries the HolidayAssignment collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListHolidayAssignmentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListHolidayAssignmentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listHolidayAssignments();
+ListHolidayAssignmentsResponse result = check client->listHolidayAssignments();
 ```
 
 **Sample response:**
@@ -243,12 +243,12 @@ Retrieves a single HolidayAssignment entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetHolidayAssignmentQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Holiday\ Assignment&#124;error`
+**Returns:** `GetHolidayAssignmentResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Holiday\ Assignment result = check client->getHolidayAssignment(HolidayCalendar_externalCode, date);
+GetHolidayAssignmentResponse result = check client->getHolidayAssignment(HolidayCalendar_externalCode, date);
 ```
 
 </div>
@@ -270,12 +270,12 @@ Queries the TimeAccountPurchaseProfile collection and returns a page of entities
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeAccountPurchaseProfilesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListTimeAccountPurchaseProfilesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listTimeAccountPurchaseProfiles();
+ListTimeAccountPurchaseProfilesResponse result = check client->listTimeAccountPurchaseProfiles();
 ```
 
 **Sample response:**
@@ -304,12 +304,12 @@ Retrieves a single TimeAccountPurchaseProfile entity identified by its key prope
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeAccountPurchaseProfileQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Account\ Purchase\ Profile&#124;error`
+**Returns:** `GetTimeAccountPurchaseProfileResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Account\ Purchase\ Profile result = check client->getTimeAccountPurchaseProfile(externalCode);
+GetTimeAccountPurchaseProfileResponse result = check client->getTimeAccountPurchaseProfile(externalCode);
 ```
 
 </div>
@@ -331,12 +331,12 @@ Queries the TimeTypeCAN collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeTypeCANsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListTimeTypeCANsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listTimeTypeCANs();
+ListTimeTypeCANsResponse result = check client->listTimeTypeCANs();
 ```
 
 **Sample response:**
@@ -366,12 +366,12 @@ Retrieves a single TimeTypeCAN entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeTypeCANQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Type\ CAN&#124;error`
+**Returns:** `GetTimeTypeCANResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Type\ CAN result = check client->getTimeTypeCAN(TimeType_externalCode, externalCode);
+GetTimeTypeCANResponse result = check client->getTimeTypeCAN(TimeType_externalCode, externalCode);
 ```
 
 </div>
@@ -393,12 +393,12 @@ Queries the WorkScheduleDayModelVariantIdentifier collection and returns a page 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWorkScheduleDayModelVariantIdentifiersQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListWorkScheduleDayModelVariantIdentifiersResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listWorkScheduleDayModelVariantIdentifiers();
+ListWorkScheduleDayModelVariantIdentifiersResponse result = check client->listWorkScheduleDayModelVariantIdentifiers();
 ```
 
 **Sample response:**
@@ -427,12 +427,12 @@ Retrieves a single WorkScheduleDayModelVariantIdentifier entity identified by it
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetWorkScheduleDayModelVariantIdentifierQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Work\ Schedule\ Day\ Model\ Variant\ Identifier&#124;error`
+**Returns:** `GetWorkScheduleDayModelVariantIdentifierResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Work\ Schedule\ Day\ Model\ Variant\ Identifier result = check client->getWorkScheduleDayModelVariantIdentifier(externalCode);
+GetWorkScheduleDayModelVariantIdentifierResponse result = check client->getWorkScheduleDayModelVariantIdentifier(externalCode);
 ```
 
 </div>
@@ -454,12 +454,12 @@ Queries the TimeManagementTerminationEndHandlingExcludedEventReason collection a
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeManagementTerminationEndHandlingExcludedEventReasonsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_6&#124;error`
+**Returns:** `ListTimeManagementTerminationEndHandlingExcludedEventReasonsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_6 result = check client->listTimeManagementTerminationEndHandlingExcludedEventReasons();
+ListTimeManagementTerminationEndHandlingExcludedEventReasonsResponse result = check client->listTimeManagementTerminationEndHandlingExcludedEventReasons();
 ```
 
 **Sample response:**
@@ -489,12 +489,12 @@ Retrieves a single TimeManagementTerminationEndHandlingExcludedEventReason entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeManagementTerminationEndHandlingExcludedEventReasonQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Management\ Termination\ End\ Handling\ Excluded\ Event\ Reason&#124;error`
+**Returns:** `GetTimeManagementTerminationEndHandlingExcludedEventReasonResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Management\ Termination\ End\ Handling\ Excluded\ Event\ Reason result = check client->getTimeManagementTerminationEndHandlingExcludedEventReason(TimeManagementTerminationEndHandlingExclusion_externalCode, externalCode);
+GetTimeManagementTerminationEndHandlingExcludedEventReasonResponse result = check client->getTimeManagementTerminationEndHandlingExcludedEventReason(TimeManagementTerminationEndHandlingExclusion_externalCode, externalCode);
 ```
 
 </div>
@@ -516,12 +516,12 @@ Queries the TimeAccountPurchaseProfilePayComponentAssignment collection and retu
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeAccountPurchaseProfilePayComponentAssignmentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_7&#124;error`
+**Returns:** `ListTimeAccountPurchaseProfilePayComponentAssignmentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_7 result = check client->listTimeAccountPurchaseProfilePayComponentAssignments();
+ListTimeAccountPurchaseProfilePayComponentAssignmentsResponse result = check client->listTimeAccountPurchaseProfilePayComponentAssignments();
 ```
 
 **Sample response:**
@@ -551,12 +551,12 @@ Retrieves a single TimeAccountPurchaseProfilePayComponentAssignment entity ident
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeAccountPurchaseProfilePayComponentAssignmentQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Account\ Purchase\ Profile\ Pay\ Component\ Assignment&#124;error`
+**Returns:** `GetTimeAccountPurchaseProfilePayComponentAssignmentResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Account\ Purchase\ Profile\ Pay\ Component\ Assignment result = check client->getTimeAccountPurchaseProfilePayComponentAssignment(TimeAccountPurchaseProfile_externalCode, payComponent);
+GetTimeAccountPurchaseProfilePayComponentAssignmentResponse result = check client->getTimeAccountPurchaseProfilePayComponentAssignment(TimeAccountPurchaseProfile_externalCode, payComponent);
 ```
 
 </div>
@@ -632,12 +632,12 @@ Queries the WorkScheduleDayModelAssignment collection and returns a page of enti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWorkScheduleDayModelAssignmentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_9&#124;error`
+**Returns:** `ListWorkScheduleDayModelAssignmentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_9 result = check client->listWorkScheduleDayModelAssignments();
+ListWorkScheduleDayModelAssignmentsResponse result = check client->listWorkScheduleDayModelAssignments();
 ```
 
 **Sample response:**
@@ -665,12 +665,12 @@ Creates a new WorkScheduleDayModelAssignment entity from the supplied payload.
 | `payload` | <code>WorkScheduleDayModelAssignment</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedWork\ Schedule\ Day\ Model\ Assignment&#124;error`
+**Returns:** `CreateWorkScheduleDayModelAssignmentResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedWork\ Schedule\ Day\ Model\ Assignment result = check client->createWorkScheduleDayModelAssignment(payload);
+CreateWorkScheduleDayModelAssignmentResponse result = check client->createWorkScheduleDayModelAssignment(payload);
 ```
 
 </div>
@@ -692,12 +692,12 @@ Retrieves a single WorkScheduleDayModelAssignment entity identified by its key p
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetWorkScheduleDayModelAssignmentQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Work\ Schedule\ Day\ Model\ Assignment&#124;error`
+**Returns:** `GetWorkScheduleDayModelAssignmentResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Work\ Schedule\ Day\ Model\ Assignment result = check client->getWorkScheduleDayModelAssignment(WorkSchedule_externalCode, day);
+GetWorkScheduleDayModelAssignmentResponse result = check client->getWorkScheduleDayModelAssignment(WorkSchedule_externalCode, day);
 ```
 
 </div>
@@ -716,7 +716,7 @@ Updates the WorkScheduleDayModelAssignment identified by its key properties with
 |------|------|----------|--------------|
 | `WorkSchedule_externalCode` | <code>string</code> | Yes | key: WorkSchedule_externalCode |
 | `day` | <code>int</code> | Yes | key: day |
-| `payload` | <code>ModifiedWork\ Schedule\ Day\ Model\ Assignment</code> | Yes | New property values |
+| `payload` | <code>UpdateWorkScheduleDayModelAssignmentPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -852,12 +852,12 @@ Queries the TimeTypeNLD collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeTypeNLDsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_11&#124;error`
+**Returns:** `ListTimeTypeNLDsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_11 result = check client->listTimeTypeNLDs();
+ListTimeTypeNLDsResponse result = check client->listTimeTypeNLDs();
 ```
 
 **Sample response:**
@@ -887,12 +887,12 @@ Retrieves a single TimeTypeNLD entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeTypeNLDQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Type\ NLD&#124;error`
+**Returns:** `GetTimeTypeNLDResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Type\ NLD result = check client->getTimeTypeNLD(TimeType_externalCode, externalCode);
+GetTimeTypeNLDResponse result = check client->getTimeTypeNLD(TimeType_externalCode, externalCode);
 ```
 
 </div>
@@ -914,12 +914,12 @@ Queries the TimeTypeSWE collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeTypeSWEsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_12&#124;error`
+**Returns:** `ListTimeTypeSWEsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_12 result = check client->listTimeTypeSWEs();
+ListTimeTypeSWEsResponse result = check client->listTimeTypeSWEs();
 ```
 
 **Sample response:**
@@ -949,12 +949,12 @@ Retrieves a single TimeTypeSWE entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeTypeSWEQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Type\ SWE&#124;error`
+**Returns:** `GetTimeTypeSWEResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Type\ SWE result = check client->getTimeTypeSWE(TimeType_externalCode, externalCode);
+GetTimeTypeSWEResponse result = check client->getTimeTypeSWE(TimeType_externalCode, externalCode);
 ```
 
 </div>
@@ -976,12 +976,12 @@ Queries the TimeTypeNOR collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeTypeNORsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_13&#124;error`
+**Returns:** `ListTimeTypeNORsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_13 result = check client->listTimeTypeNORs();
+ListTimeTypeNORsResponse result = check client->listTimeTypeNORs();
 ```
 
 **Sample response:**
@@ -1011,12 +1011,12 @@ Retrieves a single TimeTypeNOR entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeTypeNORQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Type\ NOR&#124;error`
+**Returns:** `GetTimeTypeNORResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Type\ NOR result = check client->getTimeTypeNOR(TimeType_externalCode, externalCode);
+GetTimeTypeNORResponse result = check client->getTimeTypeNOR(TimeType_externalCode, externalCode);
 ```
 
 </div>
@@ -1038,12 +1038,12 @@ Queries the TimeTypeITA collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeTypeITAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_14&#124;error`
+**Returns:** `ListTimeTypeITAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_14 result = check client->listTimeTypeITAs();
+ListTimeTypeITAsResponse result = check client->listTimeTypeITAs();
 ```
 
 **Sample response:**
@@ -1073,12 +1073,12 @@ Retrieves a single TimeTypeITA entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeTypeITAQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Type\ ITA&#124;error`
+**Returns:** `GetTimeTypeITAResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Type\ ITA result = check client->getTimeTypeITA(TimeType_externalCode, externalCode);
+GetTimeTypeITAResponse result = check client->getTimeTypeITA(TimeType_externalCode, externalCode);
 ```
 
 </div>
@@ -1100,12 +1100,12 @@ Queries the AbsenceCountingMethod collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAbsenceCountingMethodsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_15&#124;error`
+**Returns:** `ListAbsenceCountingMethodsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_15 result = check client->listAbsenceCountingMethods();
+ListAbsenceCountingMethodsResponse result = check client->listAbsenceCountingMethods();
 ```
 
 **Sample response:**
@@ -1134,12 +1134,12 @@ Retrieves a single AbsenceCountingMethod entity identified by its key property.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetAbsenceCountingMethodQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Absence\ Counting\ Method&#124;error`
+**Returns:** `GetAbsenceCountingMethodResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Absence\ Counting\ Method result = check client->getAbsenceCountingMethod(externalCode);
+GetAbsenceCountingMethodResponse result = check client->getAbsenceCountingMethod(externalCode);
 ```
 
 </div>
@@ -1161,12 +1161,12 @@ Queries the ShiftClassification collection and returns a page of entities, optio
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListShiftClassificationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_16&#124;error`
+**Returns:** `ListShiftClassificationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_16 result = check client->listShiftClassifications();
+ListShiftClassificationsResponse result = check client->listShiftClassifications();
 ```
 
 **Sample response:**
@@ -1195,12 +1195,12 @@ Retrieves a single ShiftClassification entity identified by its key property.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetShiftClassificationQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Shift\ Classification&#124;error`
+**Returns:** `GetShiftClassificationResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Shift\ Classification result = check client->getShiftClassification(externalCode);
+GetShiftClassificationResponse result = check client->getShiftClassification(externalCode);
 ```
 
 </div>
@@ -1222,12 +1222,12 @@ Queries the WorkScheduleDay collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWorkScheduleDaysQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_17&#124;error`
+**Returns:** `ListWorkScheduleDaysResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_17 result = check client->listWorkScheduleDays();
+ListWorkScheduleDaysResponse result = check client->listWorkScheduleDays();
 ```
 
 **Sample response:**
@@ -1255,12 +1255,12 @@ Creates a new WorkScheduleDay entity from the supplied payload.
 | `payload` | <code>WorkScheduleDay</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedWork\ Schedule\ Day&#124;error`
+**Returns:** `CreateWorkScheduleDayResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedWork\ Schedule\ Day result = check client->createWorkScheduleDay(payload);
+CreateWorkScheduleDayResponse result = check client->createWorkScheduleDay(payload);
 ```
 
 </div>
@@ -1282,12 +1282,12 @@ Retrieves a single WorkScheduleDay entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetWorkScheduleDayQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Work\ Schedule\ Day&#124;error`
+**Returns:** `GetWorkScheduleDayResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Work\ Schedule\ Day result = check client->getWorkScheduleDay(WorkSchedule_externalCode, day);
+GetWorkScheduleDayResponse result = check client->getWorkScheduleDay(WorkSchedule_externalCode, day);
 ```
 
 </div>
@@ -1306,7 +1306,7 @@ Updates the WorkScheduleDay identified by its key properties with the supplied p
 |------|------|----------|--------------|
 | `WorkSchedule_externalCode` | <code>string</code> | Yes | key: WorkSchedule_externalCode |
 | `day` | <code>int</code> | Yes | key: day |
-| `payload` | <code>ModifiedWork\ Schedule\ Day</code> | Yes | New property values |
+| `payload` | <code>UpdateWorkScheduleDayPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -1362,12 +1362,12 @@ Queries the HolidayCalendar collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListHolidayCalendarsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_18&#124;error`
+**Returns:** `ListHolidayCalendarsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_18 result = check client->listHolidayCalendars();
+ListHolidayCalendarsResponse result = check client->listHolidayCalendars();
 ```
 
 **Sample response:**
@@ -1396,12 +1396,12 @@ Retrieves a single HolidayCalendar entity identified by its key property.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetHolidayCalendarQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Holiday\ Calendar&#124;error`
+**Returns:** `GetHolidayCalendarResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Holiday\ Calendar result = check client->getHolidayCalendar(externalCode);
+GetHolidayCalendarResponse result = check client->getHolidayCalendar(externalCode);
 ```
 
 </div>
@@ -1423,12 +1423,12 @@ Queries the TimeManagementTerminationEndHandlingExcludedTimeAccountType collecti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeManagementTerminationEndHandlingExcludedTimeAccountTypesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_19&#124;error`
+**Returns:** `ListTimeManagementTerminationEndHandlingExcludedTimeAccountTypesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_19 result = check client->listTimeManagementTerminationEndHandlingExcludedTimeAccountTypes();
+ListTimeManagementTerminationEndHandlingExcludedTimeAccountTypesResponse result = check client->listTimeManagementTerminationEndHandlingExcludedTimeAccountTypes();
 ```
 
 **Sample response:**
@@ -1458,12 +1458,12 @@ Retrieves a single TimeManagementTerminationEndHandlingExcludedTimeAccountType e
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeManagementTerminationEndHandlingExcludedTimeAccountTypeQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Management\ Termination\ End\ Handling\ Excluded\ Time\ Account\ Type&#124;error`
+**Returns:** `GetTimeManagementTerminationEndHandlingExcludedTimeAccountTypeResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Management\ Termination\ End\ Handling\ Excluded\ Time\ Account\ Type result = check client->getTimeManagementTerminationEndHandlingExcludedTimeAccountType(TimeManagementTerminationEndHandlingExclusion_externalCode, externalCode);
+GetTimeManagementTerminationEndHandlingExcludedTimeAccountTypeResponse result = check client->getTimeManagementTerminationEndHandlingExcludedTimeAccountType(TimeManagementTerminationEndHandlingExclusion_externalCode, externalCode);
 ```
 
 </div>
@@ -1643,12 +1643,12 @@ Queries the WorkScheduleDayModelAssignmentSegment collection and returns a page 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWorkScheduleDayModelAssignmentSegmentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_22&#124;error`
+**Returns:** `ListWorkScheduleDayModelAssignmentSegmentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_22 result = check client->listWorkScheduleDayModelAssignmentSegments();
+ListWorkScheduleDayModelAssignmentSegmentsResponse result = check client->listWorkScheduleDayModelAssignmentSegments();
 ```
 
 **Sample response:**
@@ -1676,12 +1676,12 @@ Creates a new WorkScheduleDayModelAssignmentSegment entity from the supplied pay
 | `payload` | <code>WorkScheduleDayModelAssignmentSegment</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedWork\ Schedule\ Day\ Model\ Assignment\ Segment&#124;error`
+**Returns:** `CreateWorkScheduleDayModelAssignmentSegmentResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedWork\ Schedule\ Day\ Model\ Assignment\ Segment result = check client->createWorkScheduleDayModelAssignmentSegment(payload);
+CreateWorkScheduleDayModelAssignmentSegmentResponse result = check client->createWorkScheduleDayModelAssignmentSegment(payload);
 ```
 
 </div>
@@ -1704,12 +1704,12 @@ Retrieves a single WorkScheduleDayModelAssignmentSegment entity identified by it
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetWorkScheduleDayModelAssignmentSegmentQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Work\ Schedule\ Day\ Model\ Assignment\ Segment&#124;error`
+**Returns:** `GetWorkScheduleDayModelAssignmentSegmentResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Work\ Schedule\ Day\ Model\ Assignment\ Segment result = check client->getWorkScheduleDayModelAssignmentSegment(WorkScheduleDayModelAssignment_day, WorkSchedule_externalCode, externalCode);
+GetWorkScheduleDayModelAssignmentSegmentResponse result = check client->getWorkScheduleDayModelAssignmentSegment(WorkScheduleDayModelAssignment_day, WorkSchedule_externalCode, externalCode);
 ```
 
 </div>
@@ -1729,7 +1729,7 @@ Updates the WorkScheduleDayModelAssignmentSegment identified by its key properti
 | `WorkScheduleDayModelAssignment_day` | <code>int</code> | Yes | key: WorkScheduleDayModelAssignment_day |
 | `WorkSchedule_externalCode` | <code>string</code> | Yes | key: WorkSchedule_externalCode |
 | `externalCode` | <code>string</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedWork\ Schedule\ Day\ Model\ Assignment\ Segment</code> | Yes | New property values |
+| `payload` | <code>UpdateWorkScheduleDayModelAssignmentSegmentPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -1946,12 +1946,12 @@ Queries the TimeManagementTerminationEndHandlingConfiguration collection and ret
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeManagementTerminationEndHandlingConfigurationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_25&#124;error`
+**Returns:** `ListTimeManagementTerminationEndHandlingConfigurationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_25 result = check client->listTimeManagementTerminationEndHandlingConfigurations();
+ListTimeManagementTerminationEndHandlingConfigurationsResponse result = check client->listTimeManagementTerminationEndHandlingConfigurations();
 ```
 
 **Sample response:**
@@ -1980,12 +1980,12 @@ Retrieves a single TimeManagementTerminationEndHandlingConfiguration entity iden
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeManagementTerminationEndHandlingConfigurationQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Management\ Termination\ End\ Handling\ Configuration&#124;error`
+**Returns:** `GetTimeManagementTerminationEndHandlingConfigurationResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Management\ Termination\ End\ Handling\ Configuration result = check client->getTimeManagementTerminationEndHandlingConfiguration(externalCode);
+GetTimeManagementTerminationEndHandlingConfigurationResponse result = check client->getTimeManagementTerminationEndHandlingConfiguration(externalCode);
 ```
 
 </div>
@@ -2007,12 +2007,12 @@ Queries the HolidayCategory collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListHolidayCategorysQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_26&#124;error`
+**Returns:** `ListHolidayCategorysResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_26 result = check client->listHolidayCategorys();
+ListHolidayCategorysResponse result = check client->listHolidayCategorys();
 ```
 
 **Sample response:**
@@ -2047,12 +2047,12 @@ Retrieves a single HolidayCategory entity identified by its key property.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetHolidayCategoryQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Holiday\ Category&#124;error`
+**Returns:** `GetHolidayCategoryResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Holiday\ Category result = check client->getHolidayCategory(externalCode);
+GetHolidayCategoryResponse result = check client->getHolidayCategory(externalCode);
 ```
 
 </div>
@@ -2074,12 +2074,12 @@ Queries the ElectronicSicknessCertificateExclusionReasonDEU collection and retur
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListElectronicSicknessCertificateExclusionReasonDEUsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_27&#124;error`
+**Returns:** `ListElectronicSicknessCertificateExclusionReasonDEUsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_27 result = check client->listElectronicSicknessCertificateExclusionReasonDEUs();
+ListElectronicSicknessCertificateExclusionReasonDEUsResponse result = check client->listElectronicSicknessCertificateExclusionReasonDEUs();
 ```
 
 **Sample response:**
@@ -2108,12 +2108,12 @@ Retrieves a single ElectronicSicknessCertificateExclusionReasonDEU entity identi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetElectronicSicknessCertificateExclusionReasonDEUQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Electronic\ Sickness\ Certificate\ Exclusion\ Reason\ DEU&#124;error`
+**Returns:** `GetElectronicSicknessCertificateExclusionReasonDEUResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Electronic\ Sickness\ Certificate\ Exclusion\ Reason\ DEU result = check client->getElectronicSicknessCertificateExclusionReasonDEU(externalCode);
+GetElectronicSicknessCertificateExclusionReasonDEUResponse result = check client->getElectronicSicknessCertificateExclusionReasonDEU(externalCode);
 ```
 
 </div>
@@ -2188,12 +2188,12 @@ Queries the TimeAccountType collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeAccountTypesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_29&#124;error`
+**Returns:** `ListTimeAccountTypesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_29 result = check client->listTimeAccountTypes();
+ListTimeAccountTypesResponse result = check client->listTimeAccountTypes();
 ```
 
 **Sample response:**
@@ -2222,12 +2222,12 @@ Retrieves a single TimeAccountType entity identified by its key property.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeAccountTypeQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Account\ Type&#124;error`
+**Returns:** `GetTimeAccountTypeResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Account\ Type result = check client->getTimeAccountType(externalCode);
+GetTimeAccountTypeResponse result = check client->getTimeAccountType(externalCode);
 ```
 
 </div>
@@ -2249,12 +2249,12 @@ Queries the AccrualCalculationBase collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAccrualCalculationBasesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_30&#124;error`
+**Returns:** `ListAccrualCalculationBasesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_30 result = check client->listAccrualCalculationBases();
+ListAccrualCalculationBasesResponse result = check client->listAccrualCalculationBases();
 ```
 
 **Sample response:**
@@ -2282,12 +2282,12 @@ Creates a new AccrualCalculationBase entity from the supplied payload.
 | `payload` | <code>AccrualCalculationBase</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedAccrual\ Calculation\ Base&#124;error`
+**Returns:** `CreateAccrualCalculationBaseResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedAccrual\ Calculation\ Base result = check client->createAccrualCalculationBase(payload);
+CreateAccrualCalculationBaseResponse result = check client->createAccrualCalculationBase(payload);
 ```
 
 </div>
@@ -2308,12 +2308,12 @@ Retrieves a single AccrualCalculationBase entity identified by its key property.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetAccrualCalculationBaseQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Accrual\ Calculation\ Base&#124;error`
+**Returns:** `GetAccrualCalculationBaseResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Accrual\ Calculation\ Base result = check client->getAccrualCalculationBase(externalCode);
+GetAccrualCalculationBaseResponse result = check client->getAccrualCalculationBase(externalCode);
 ```
 
 </div>
@@ -2331,7 +2331,7 @@ Updates the AccrualCalculationBase identified by its key property with the suppl
 | Name | Type | Required | Description |
 |------|------|----------|--------------|
 | `externalCode` | <code>string</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedAccrual\ Calculation\ Base</code> | Yes | New property values |
+| `payload` | <code>UpdateAccrualCalculationBasePayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -2386,12 +2386,12 @@ Queries the EmployeeTimeUSA collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeTimeUSAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_31&#124;error`
+**Returns:** `ListEmployeeTimeUSAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_31 result = check client->listEmployeeTimeUSAs();
+ListEmployeeTimeUSAsResponse result = check client->listEmployeeTimeUSAs();
 ```
 
 **Sample response:**
@@ -2419,12 +2419,12 @@ Creates a new EmployeeTimeUSA entity from the supplied payload.
 | `payload` | <code>EmployeeTimeUSA</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedEmployee\ Time\ USA&#124;error`
+**Returns:** `CreateEmployeeTimeUSAResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedEmployee\ Time\ USA result = check client->createEmployeeTimeUSA(payload);
+CreateEmployeeTimeUSAResponse result = check client->createEmployeeTimeUSA(payload);
 ```
 
 </div>
@@ -2446,12 +2446,12 @@ Retrieves a single EmployeeTimeUSA entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetEmployeeTimeUSAQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Employee\ Time\ USA&#124;error`
+**Returns:** `GetEmployeeTimeUSAResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Employee\ Time\ USA result = check client->getEmployeeTimeUSA(EmployeeTime_externalCode, externalCode);
+GetEmployeeTimeUSAResponse result = check client->getEmployeeTimeUSA(EmployeeTime_externalCode, externalCode);
 ```
 
 </div>
@@ -2470,7 +2470,7 @@ Updates the EmployeeTimeUSA identified by its key properties with the supplied p
 |------|------|----------|--------------|
 | `EmployeeTime_externalCode` | <code>string</code> | Yes | key: EmployeeTime_externalCode |
 | `externalCode` | <code>int</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedEmployee\ Time\ USA</code> | Yes | New property values |
+| `payload` | <code>UpdateEmployeeTimeUSAPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -2526,12 +2526,12 @@ Queries the TimeTypeUSA collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeTypeUSAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_32&#124;error`
+**Returns:** `ListTimeTypeUSAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_32 result = check client->listTimeTypeUSAs();
+ListTimeTypeUSAsResponse result = check client->listTimeTypeUSAs();
 ```
 
 **Sample response:**
@@ -2561,12 +2561,12 @@ Retrieves a single TimeTypeUSA entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeTypeUSAQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Type\ USA&#124;error`
+**Returns:** `GetTimeTypeUSAResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Type\ USA result = check client->getTimeTypeUSA(TimeType_externalCode, externalCode);
+GetTimeTypeUSAResponse result = check client->getTimeTypeUSA(TimeType_externalCode, externalCode);
 ```
 
 </div>
@@ -2588,12 +2588,12 @@ Queries the TemporaryTimeInformation collection and returns a page of entities, 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTemporaryTimeInformationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_33&#124;error`
+**Returns:** `ListTemporaryTimeInformationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_33 result = check client->listTemporaryTimeInformations();
+ListTemporaryTimeInformationsResponse result = check client->listTemporaryTimeInformations();
 ```
 
 **Sample response:**
@@ -2621,12 +2621,12 @@ Creates a new TemporaryTimeInformation entity from the supplied payload.
 | `payload` | <code>TemporaryTimeInformation</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedTemporary\ Time\ Information&#124;error`
+**Returns:** `CreateTemporaryTimeInformationResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedTemporary\ Time\ Information result = check client->createTemporaryTimeInformation(payload);
+CreateTemporaryTimeInformationResponse result = check client->createTemporaryTimeInformation(payload);
 ```
 
 </div>
@@ -2647,12 +2647,12 @@ Retrieves a single TemporaryTimeInformation entity identified by its key propert
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTemporaryTimeInformationQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Temporary\ Time\ Information&#124;error`
+**Returns:** `GetTemporaryTimeInformationResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Temporary\ Time\ Information result = check client->getTemporaryTimeInformation(externalCode);
+GetTemporaryTimeInformationResponse result = check client->getTemporaryTimeInformation(externalCode);
 ```
 
 </div>
@@ -2670,7 +2670,7 @@ Updates the TemporaryTimeInformation identified by its key property with the sup
 | Name | Type | Required | Description |
 |------|------|----------|--------------|
 | `externalCode` | <code>string</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedTemporary\ Time\ Information</code> | Yes | New property values |
+| `payload` | <code>UpdateTemporaryTimeInformationPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -2725,12 +2725,12 @@ Queries the TimeTypeProfile collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeTypeProfilesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_34&#124;error`
+**Returns:** `ListTimeTypeProfilesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_34 result = check client->listTimeTypeProfiles();
+ListTimeTypeProfilesResponse result = check client->listTimeTypeProfiles();
 ```
 
 **Sample response:**
@@ -2760,12 +2760,12 @@ Retrieves a single TimeTypeProfile entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeTypeProfileQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Type\ Profile&#124;error`
+**Returns:** `GetTimeTypeProfileResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Type\ Profile result = check client->getTimeTypeProfile(externalCode, mdfSystemEffectiveStartDate);
+GetTimeTypeProfileResponse result = check client->getTimeTypeProfile(externalCode, mdfSystemEffectiveStartDate);
 ```
 
 </div>
@@ -2840,12 +2840,12 @@ Queries the TimeTypeDEU collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeTypeDEUsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_36&#124;error`
+**Returns:** `ListTimeTypeDEUsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_36 result = check client->listTimeTypeDEUs();
+ListTimeTypeDEUsResponse result = check client->listTimeTypeDEUs();
 ```
 
 **Sample response:**
@@ -2875,12 +2875,12 @@ Retrieves a single TimeTypeDEU entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeTypeDEUQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Type\ DEU&#124;error`
+**Returns:** `GetTimeTypeDEUResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Type\ DEU result = check client->getTimeTypeDEU(TimeType_externalCode, externalCode);
+GetTimeTypeDEUResponse result = check client->getTimeTypeDEU(TimeType_externalCode, externalCode);
 ```
 
 </div>
@@ -2902,12 +2902,12 @@ Queries the TimeType collection and returns a page of entities, optionally filte
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeTypesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_37&#124;error`
+**Returns:** `ListTimeTypesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_37 result = check client->listTimeTypes();
+ListTimeTypesResponse result = check client->listTimeTypes();
 ```
 
 **Sample response:**
@@ -2936,12 +2936,12 @@ Retrieves a single TimeType entity identified by its key property.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeTypeQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Type&#124;error`
+**Returns:** `GetTimeTypeResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Type result = check client->getTimeType(externalCode);
+GetTimeTypeResponse result = check client->getTimeType(externalCode);
 ```
 
 </div>
@@ -2963,12 +2963,12 @@ Queries the TimeManagementTerminationEndHandlingExclusion collection and returns
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeManagementTerminationEndHandlingExclusionsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_38&#124;error`
+**Returns:** `ListTimeManagementTerminationEndHandlingExclusionsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_38 result = check client->listTimeManagementTerminationEndHandlingExclusions();
+ListTimeManagementTerminationEndHandlingExclusionsResponse result = check client->listTimeManagementTerminationEndHandlingExclusions();
 ```
 
 **Sample response:**
@@ -2997,12 +2997,12 @@ Retrieves a single TimeManagementTerminationEndHandlingExclusion entity identifi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeManagementTerminationEndHandlingExclusionQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Management\ Termination\ End\ Handling\ Exclusion&#124;error`
+**Returns:** `GetTimeManagementTerminationEndHandlingExclusionResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Management\ Termination\ End\ Handling\ Exclusion result = check client->getTimeManagementTerminationEndHandlingExclusion(externalCode);
+GetTimeManagementTerminationEndHandlingExclusionResponse result = check client->getTimeManagementTerminationEndHandlingExclusion(externalCode);
 ```
 
 </div>
@@ -3104,12 +3104,12 @@ Queries the WorkScheduleDayModel collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWorkScheduleDayModelsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_40&#124;error`
+**Returns:** `ListWorkScheduleDayModelsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_40 result = check client->listWorkScheduleDayModels();
+ListWorkScheduleDayModelsResponse result = check client->listWorkScheduleDayModels();
 ```
 
 **Sample response:**
@@ -3137,12 +3137,12 @@ Creates a new WorkScheduleDayModel entity from the supplied payload.
 | `payload` | <code>WorkScheduleDayModel</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedWork\ Schedule\ Day\ Model&#124;error`
+**Returns:** `CreateWorkScheduleDayModelResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedWork\ Schedule\ Day\ Model result = check client->createWorkScheduleDayModel(payload);
+CreateWorkScheduleDayModelResponse result = check client->createWorkScheduleDayModel(payload);
 ```
 
 </div>
@@ -3163,12 +3163,12 @@ Retrieves a single WorkScheduleDayModel entity identified by its key property.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetWorkScheduleDayModelQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Work\ Schedule\ Day\ Model&#124;error`
+**Returns:** `GetWorkScheduleDayModelResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Work\ Schedule\ Day\ Model result = check client->getWorkScheduleDayModel(externalCode);
+GetWorkScheduleDayModelResponse result = check client->getWorkScheduleDayModel(externalCode);
 ```
 
 </div>
@@ -3186,7 +3186,7 @@ Updates the WorkScheduleDayModel identified by its key property with the supplie
 | Name | Type | Required | Description |
 |------|------|----------|--------------|
 | `externalCode` | <code>string</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedWork\ Schedule\ Day\ Model</code> | Yes | New property values |
+| `payload` | <code>UpdateWorkScheduleDayModelPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -3241,12 +3241,12 @@ Queries the TimeAccountSnapshot collection and returns a page of entities, optio
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeAccountSnapshotsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_41&#124;error`
+**Returns:** `ListTimeAccountSnapshotsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_41 result = check client->listTimeAccountSnapshots();
+ListTimeAccountSnapshotsResponse result = check client->listTimeAccountSnapshots();
 ```
 
 **Sample response:**
@@ -3275,12 +3275,12 @@ Retrieves a single TimeAccountSnapshot entity identified by its key property.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeAccountSnapshotQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Account\ Snapshot&#124;error`
+**Returns:** `GetTimeAccountSnapshotResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Account\ Snapshot result = check client->getTimeAccountSnapshot(externalCode);
+GetTimeAccountSnapshotResponse result = check client->getTimeAccountSnapshot(externalCode);
 ```
 
 </div>
@@ -3302,12 +3302,12 @@ Queries the EmpTimeAccountBalance collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpTimeAccountBalancesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_42&#124;error`
+**Returns:** `ListEmpTimeAccountBalancesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_42 result = check client->listEmpTimeAccountBalances();
+ListEmpTimeAccountBalancesResponse result = check client->listEmpTimeAccountBalances();
 ```
 
 **Sample response:**
@@ -3336,12 +3336,12 @@ Retrieves a single EmpTimeAccountBalance entity identified by its key property.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetEmpTimeAccountBalanceQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Employee\ Time\ Account\ Balance&#124;error`
+**Returns:** `GetEmpTimeAccountBalanceResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Employee\ Time\ Account\ Balance result = check client->getEmpTimeAccountBalance(timeAccount);
+GetEmpTimeAccountBalanceResponse result = check client->getEmpTimeAccountBalance(timeAccount);
 ```
 
 </div>
@@ -3417,12 +3417,12 @@ Queries the EmployeeTimeNLD collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeTimeNLDsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_44&#124;error`
+**Returns:** `ListEmployeeTimeNLDsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_44 result = check client->listEmployeeTimeNLDs();
+ListEmployeeTimeNLDsResponse result = check client->listEmployeeTimeNLDs();
 ```
 
 **Sample response:**
@@ -3450,12 +3450,12 @@ Creates a new EmployeeTimeNLD entity from the supplied payload.
 | `payload` | <code>EmployeeTimeNLD</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedEmployee\ Time\ NLD&#124;error`
+**Returns:** `CreateEmployeeTimeNLDResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedEmployee\ Time\ NLD result = check client->createEmployeeTimeNLD(payload);
+CreateEmployeeTimeNLDResponse result = check client->createEmployeeTimeNLD(payload);
 ```
 
 </div>
@@ -3477,12 +3477,12 @@ Retrieves a single EmployeeTimeNLD entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetEmployeeTimeNLDQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Employee\ Time\ NLD&#124;error`
+**Returns:** `GetEmployeeTimeNLDResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Employee\ Time\ NLD result = check client->getEmployeeTimeNLD(EmployeeTime_externalCode, externalCode);
+GetEmployeeTimeNLDResponse result = check client->getEmployeeTimeNLD(EmployeeTime_externalCode, externalCode);
 ```
 
 </div>
@@ -3501,7 +3501,7 @@ Updates the EmployeeTimeNLD identified by its key properties with the supplied p
 |------|------|----------|--------------|
 | `EmployeeTime_externalCode` | <code>string</code> | Yes | key: EmployeeTime_externalCode |
 | `externalCode` | <code>int</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedEmployee\ Time\ NLD</code> | Yes | New property values |
+| `payload` | <code>UpdateEmployeeTimeNLDPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -3557,12 +3557,12 @@ Queries the EmployeeTimeSWE collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeTimeSWEsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_45&#124;error`
+**Returns:** `ListEmployeeTimeSWEsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_45 result = check client->listEmployeeTimeSWEs();
+ListEmployeeTimeSWEsResponse result = check client->listEmployeeTimeSWEs();
 ```
 
 **Sample response:**
@@ -3590,12 +3590,12 @@ Creates a new EmployeeTimeSWE entity from the supplied payload.
 | `payload` | <code>EmployeeTimeSWE</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedEmployee\ Time\ SWE&#124;error`
+**Returns:** `CreateEmployeeTimeSWEResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedEmployee\ Time\ SWE result = check client->createEmployeeTimeSWE(payload);
+CreateEmployeeTimeSWEResponse result = check client->createEmployeeTimeSWE(payload);
 ```
 
 </div>
@@ -3617,12 +3617,12 @@ Retrieves a single EmployeeTimeSWE entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetEmployeeTimeSWEQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Employee\ Time\ SWE&#124;error`
+**Returns:** `GetEmployeeTimeSWEResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Employee\ Time\ SWE result = check client->getEmployeeTimeSWE(EmployeeTime_externalCode, externalCode);
+GetEmployeeTimeSWEResponse result = check client->getEmployeeTimeSWE(EmployeeTime_externalCode, externalCode);
 ```
 
 </div>
@@ -3641,7 +3641,7 @@ Updates the EmployeeTimeSWE identified by its key properties with the supplied p
 |------|------|----------|--------------|
 | `EmployeeTime_externalCode` | <code>string</code> | Yes | key: EmployeeTime_externalCode |
 | `externalCode` | <code>int</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedEmployee\ Time\ SWE</code> | Yes | New property values |
+| `payload` | <code>UpdateEmployeeTimeSWEPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -3697,12 +3697,12 @@ Queries the EmployeeTimeNOR collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeTimeNORsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_46&#124;error`
+**Returns:** `ListEmployeeTimeNORsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_46 result = check client->listEmployeeTimeNORs();
+ListEmployeeTimeNORsResponse result = check client->listEmployeeTimeNORs();
 ```
 
 **Sample response:**
@@ -3730,12 +3730,12 @@ Creates a new EmployeeTimeNOR entity from the supplied payload.
 | `payload` | <code>EmployeeTimeNOR</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedEmployee\ Time\ NOR&#124;error`
+**Returns:** `CreateEmployeeTimeNORResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedEmployee\ Time\ NOR result = check client->createEmployeeTimeNOR(payload);
+CreateEmployeeTimeNORResponse result = check client->createEmployeeTimeNOR(payload);
 ```
 
 </div>
@@ -3757,12 +3757,12 @@ Retrieves a single EmployeeTimeNOR entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetEmployeeTimeNORQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Employee\ Time\ NOR&#124;error`
+**Returns:** `GetEmployeeTimeNORResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Employee\ Time\ NOR result = check client->getEmployeeTimeNOR(EmployeeTime_externalCode, externalCode);
+GetEmployeeTimeNORResponse result = check client->getEmployeeTimeNOR(EmployeeTime_externalCode, externalCode);
 ```
 
 </div>
@@ -3781,7 +3781,7 @@ Updates the EmployeeTimeNOR identified by its key properties with the supplied p
 |------|------|----------|--------------|
 | `EmployeeTime_externalCode` | <code>string</code> | Yes | key: EmployeeTime_externalCode |
 | `externalCode` | <code>int</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedEmployee\ Time\ NOR</code> | Yes | New property values |
+| `payload` | <code>UpdateEmployeeTimeNORPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -3837,12 +3837,12 @@ Queries the EmployeeTimeITA collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeTimeITAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_47&#124;error`
+**Returns:** `ListEmployeeTimeITAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_47 result = check client->listEmployeeTimeITAs();
+ListEmployeeTimeITAsResponse result = check client->listEmployeeTimeITAs();
 ```
 
 **Sample response:**
@@ -3870,12 +3870,12 @@ Creates a new EmployeeTimeITA entity from the supplied payload.
 | `payload` | <code>EmployeeTimeITA</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedEmployee\ Time\ ITA&#124;error`
+**Returns:** `CreateEmployeeTimeITAResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedEmployee\ Time\ ITA result = check client->createEmployeeTimeITA(payload);
+CreateEmployeeTimeITAResponse result = check client->createEmployeeTimeITA(payload);
 ```
 
 </div>
@@ -3897,12 +3897,12 @@ Retrieves a single EmployeeTimeITA entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetEmployeeTimeITAQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Employee\ Time\ ITA&#124;error`
+**Returns:** `GetEmployeeTimeITAResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Employee\ Time\ ITA result = check client->getEmployeeTimeITA(EmployeeTime_externalCode, externalCode);
+GetEmployeeTimeITAResponse result = check client->getEmployeeTimeITA(EmployeeTime_externalCode, externalCode);
 ```
 
 </div>
@@ -3921,7 +3921,7 @@ Updates the EmployeeTimeITA identified by its key properties with the supplied p
 |------|------|----------|--------------|
 | `EmployeeTime_externalCode` | <code>string</code> | Yes | key: EmployeeTime_externalCode |
 | `externalCode` | <code>int</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedEmployee\ Time\ ITA</code> | Yes | New property values |
+| `payload` | <code>UpdateEmployeeTimeITAPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -3977,12 +3977,12 @@ Queries the EmployeeTimeCAN collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeTimeCANsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_48&#124;error`
+**Returns:** `ListEmployeeTimeCANsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_48 result = check client->listEmployeeTimeCANs();
+ListEmployeeTimeCANsResponse result = check client->listEmployeeTimeCANs();
 ```
 
 **Sample response:**
@@ -4010,12 +4010,12 @@ Creates a new EmployeeTimeCAN entity from the supplied payload.
 | `payload` | <code>EmployeeTimeCAN</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedEmployee\ Time\ CAN&#124;error`
+**Returns:** `CreateEmployeeTimeCANResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedEmployee\ Time\ CAN result = check client->createEmployeeTimeCAN(payload);
+CreateEmployeeTimeCANResponse result = check client->createEmployeeTimeCAN(payload);
 ```
 
 </div>
@@ -4037,12 +4037,12 @@ Retrieves a single EmployeeTimeCAN entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetEmployeeTimeCANQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Employee\ Time\ CAN&#124;error`
+**Returns:** `GetEmployeeTimeCANResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Employee\ Time\ CAN result = check client->getEmployeeTimeCAN(EmployeeTime_externalCode, externalCode);
+GetEmployeeTimeCANResponse result = check client->getEmployeeTimeCAN(EmployeeTime_externalCode, externalCode);
 ```
 
 </div>
@@ -4061,7 +4061,7 @@ Updates the EmployeeTimeCAN identified by its key properties with the supplied p
 |------|------|----------|--------------|
 | `EmployeeTime_externalCode` | <code>string</code> | Yes | key: EmployeeTime_externalCode |
 | `externalCode` | <code>int</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedEmployee\ Time\ CAN</code> | Yes | New property values |
+| `payload` | <code>UpdateEmployeeTimeCANPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -4117,12 +4117,12 @@ Queries the TimeManagementTerminationEndHandlingLegalEntityConfiguration collect
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeManagementTerminationEndHandlingLegalEntityConfigurationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_49&#124;error`
+**Returns:** `ListTimeManagementTerminationEndHandlingLegalEntityConfigurationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_49 result = check client->listTimeManagementTerminationEndHandlingLegalEntityConfigurations();
+ListTimeManagementTerminationEndHandlingLegalEntityConfigurationsResponse result = check client->listTimeManagementTerminationEndHandlingLegalEntityConfigurations();
 ```
 
 **Sample response:**
@@ -4152,12 +4152,12 @@ Retrieves a single TimeManagementTerminationEndHandlingLegalEntityConfiguration 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeManagementTerminationEndHandlingLegalEntityConfigurationQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Management\ Termination\ End\ Handling\ Legal\ Entity\ Configuration&#124;error`
+**Returns:** `GetTimeManagementTerminationEndHandlingLegalEntityConfigurationResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Management\ Termination\ End\ Handling\ Legal\ Entity\ Configuration result = check client->getTimeManagementTerminationEndHandlingLegalEntityConfiguration(TimeManagementTerminationEndHandlingConfiguration_externalCode, externalCode);
+GetTimeManagementTerminationEndHandlingLegalEntityConfigurationResponse result = check client->getTimeManagementTerminationEndHandlingLegalEntityConfiguration(TimeManagementTerminationEndHandlingConfiguration_externalCode, externalCode);
 ```
 
 </div>
@@ -4179,12 +4179,12 @@ Queries the EmployeeTimePOL collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeTimePOLsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_50&#124;error`
+**Returns:** `ListEmployeeTimePOLsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_50 result = check client->listEmployeeTimePOLs();
+ListEmployeeTimePOLsResponse result = check client->listEmployeeTimePOLs();
 ```
 
 **Sample response:**
@@ -4212,12 +4212,12 @@ Creates a new EmployeeTimePOL entity from the supplied payload.
 | `payload` | <code>EmployeeTimePOL</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedEmployee\ Time\ POL&#124;error`
+**Returns:** `CreateEmployeeTimePOLResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedEmployee\ Time\ POL result = check client->createEmployeeTimePOL(payload);
+CreateEmployeeTimePOLResponse result = check client->createEmployeeTimePOL(payload);
 ```
 
 </div>
@@ -4239,12 +4239,12 @@ Retrieves a single EmployeeTimePOL entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetEmployeeTimePOLQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Employee\ Time\ POL&#124;error`
+**Returns:** `GetEmployeeTimePOLResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Employee\ Time\ POL result = check client->getEmployeeTimePOL(EmployeeTime_externalCode, externalCode);
+GetEmployeeTimePOLResponse result = check client->getEmployeeTimePOL(EmployeeTime_externalCode, externalCode);
 ```
 
 </div>
@@ -4263,7 +4263,7 @@ Updates the EmployeeTimePOL identified by its key properties with the supplied p
 |------|------|----------|--------------|
 | `EmployeeTime_externalCode` | <code>string</code> | Yes | key: EmployeeTime_externalCode |
 | `externalCode` | <code>int</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedEmployee\ Time\ POL</code> | Yes | New property values |
+| `payload` | <code>UpdateEmployeeTimePOLPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -4482,12 +4482,12 @@ Queries the TimeAccountPayoutProfile collection and returns a page of entities, 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeAccountPayoutProfilesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_51&#124;error`
+**Returns:** `ListTimeAccountPayoutProfilesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_51 result = check client->listTimeAccountPayoutProfiles();
+ListTimeAccountPayoutProfilesResponse result = check client->listTimeAccountPayoutProfiles();
 ```
 
 **Sample response:**
@@ -4516,12 +4516,12 @@ Retrieves a single TimeAccountPayoutProfile entity identified by its key propert
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeAccountPayoutProfileQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Account\ Payout\ Profile&#124;error`
+**Returns:** `GetTimeAccountPayoutProfileResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Account\ Payout\ Profile result = check client->getTimeAccountPayoutProfile(externalCode);
+GetTimeAccountPayoutProfileResponse result = check client->getTimeAccountPayoutProfile(externalCode);
 ```
 
 </div>
@@ -4543,12 +4543,12 @@ Queries the TimeAccountSummary collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeAccountSummarysQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `CollectionofTime\ Account\ Summary&#124;error`
+**Returns:** `ListTimeAccountSummarysResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CollectionofTime\ Account\ Summary result = check client->listTimeAccountSummarys();
+ListTimeAccountSummarysResponse result = check client->listTimeAccountSummarys();
 ```
 
 </div>
@@ -4610,12 +4610,12 @@ Queries the TimeAccountTypeAUS collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeAccountTypeAUSsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_52&#124;error`
+**Returns:** `ListTimeAccountTypeAUSsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_52 result = check client->listTimeAccountTypeAUSs();
+ListTimeAccountTypeAUSsResponse result = check client->listTimeAccountTypeAUSs();
 ```
 
 **Sample response:**
@@ -4645,12 +4645,12 @@ Retrieves a single TimeAccountTypeAUS entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeAccountTypeAUSQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Account\ Type\ AUS&#124;error`
+**Returns:** `GetTimeAccountTypeAUSResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Account\ Type\ AUS result = check client->getTimeAccountTypeAUS(TimeAccountType_externalCode, externalCode);
+GetTimeAccountTypeAUSResponse result = check client->getTimeAccountTypeAUS(TimeAccountType_externalCode, externalCode);
 ```
 
 </div>
@@ -4672,12 +4672,12 @@ Queries the PeriodicTimeAccountUpdateProfile collection and returns a page of en
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPeriodicTimeAccountUpdateProfilesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_53&#124;error`
+**Returns:** `ListPeriodicTimeAccountUpdateProfilesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_53 result = check client->listPeriodicTimeAccountUpdateProfiles();
+ListPeriodicTimeAccountUpdateProfilesResponse result = check client->listPeriodicTimeAccountUpdateProfiles();
 ```
 
 **Sample response:**
@@ -4706,12 +4706,12 @@ Retrieves a single PeriodicTimeAccountUpdateProfile entity identified by its key
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetPeriodicTimeAccountUpdateProfileQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Periodic\ Time\ Account\ Update\ Profile&#124;error`
+**Returns:** `GetPeriodicTimeAccountUpdateProfileResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Periodic\ Time\ Account\ Update\ Profile result = check client->getPeriodicTimeAccountUpdateProfile(externalCode);
+GetPeriodicTimeAccountUpdateProfileResponse result = check client->getPeriodicTimeAccountUpdateProfile(externalCode);
 ```
 
 </div>
@@ -4733,12 +4733,12 @@ Queries the AvailableTimeType collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAvailableTimeTypesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_54&#124;error`
+**Returns:** `ListAvailableTimeTypesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_54 result = check client->listAvailableTimeTypes();
+ListAvailableTimeTypesResponse result = check client->listAvailableTimeTypes();
 ```
 
 **Sample response:**
@@ -4769,12 +4769,12 @@ Retrieves a single AvailableTimeType entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetAvailableTimeTypeQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Available\ Time\ Type&#124;error`
+**Returns:** `GetAvailableTimeTypeResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Available\ Time\ Type result = check client->getAvailableTimeType(TimeTypeProfile_externalCode, TimeTypeProfile_mdfSystemEffectiveStartDate, externalCode);
+GetAvailableTimeTypeResponse result = check client->getAvailableTimeType(TimeTypeProfile_externalCode, TimeTypeProfile_mdfSystemEffectiveStartDate, externalCode);
 ```
 
 </div>
@@ -4796,12 +4796,12 @@ Queries the WorkSchedule collection and returns a page of entities, optionally f
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWorkSchedulesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_55&#124;error`
+**Returns:** `ListWorkSchedulesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_55 result = check client->listWorkSchedules();
+ListWorkSchedulesResponse result = check client->listWorkSchedules();
 ```
 
 **Sample response:**
@@ -4829,12 +4829,12 @@ Creates a new WorkSchedule entity from the supplied payload.
 | `payload` | <code>WorkSchedule</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedWork\ Schedule&#124;error`
+**Returns:** `CreateWorkScheduleResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedWork\ Schedule result = check client->createWorkSchedule(payload);
+CreateWorkScheduleResponse result = check client->createWorkSchedule(payload);
 ```
 
 </div>
@@ -4855,12 +4855,12 @@ Retrieves a single WorkSchedule entity identified by its key property.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetWorkScheduleQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Work\ Schedule&#124;error`
+**Returns:** `GetWorkScheduleResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Work\ Schedule result = check client->getWorkSchedule(externalCode);
+GetWorkScheduleResponse result = check client->getWorkSchedule(externalCode);
 ```
 
 </div>
@@ -4878,7 +4878,7 @@ Updates the WorkSchedule identified by its key property with the supplied payloa
 | Name | Type | Required | Description |
 |------|------|----------|--------------|
 | `externalCode` | <code>string</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedWork\ Schedule</code> | Yes | New property values |
+| `payload` | <code>UpdateWorkSchedulePayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -4933,12 +4933,12 @@ Queries the EmployeeTimeAUS collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeTimeAUSsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_56&#124;error`
+**Returns:** `ListEmployeeTimeAUSsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_56 result = check client->listEmployeeTimeAUSs();
+ListEmployeeTimeAUSsResponse result = check client->listEmployeeTimeAUSs();
 ```
 
 **Sample response:**
@@ -4966,12 +4966,12 @@ Creates a new EmployeeTimeAUS entity from the supplied payload.
 | `payload` | <code>EmployeeTimeAUS</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedEmployee\ Time\ AUS&#124;error`
+**Returns:** `CreateEmployeeTimeAUSResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedEmployee\ Time\ AUS result = check client->createEmployeeTimeAUS(payload);
+CreateEmployeeTimeAUSResponse result = check client->createEmployeeTimeAUS(payload);
 ```
 
 </div>
@@ -4993,12 +4993,12 @@ Retrieves a single EmployeeTimeAUS entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetEmployeeTimeAUSQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Employee\ Time\ AUS&#124;error`
+**Returns:** `GetEmployeeTimeAUSResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Employee\ Time\ AUS result = check client->getEmployeeTimeAUS(EmployeeTime_externalCode, externalCode);
+GetEmployeeTimeAUSResponse result = check client->getEmployeeTimeAUS(EmployeeTime_externalCode, externalCode);
 ```
 
 </div>
@@ -5017,7 +5017,7 @@ Updates the EmployeeTimeAUS identified by its key properties with the supplied p
 |------|------|----------|--------------|
 | `EmployeeTime_externalCode` | <code>string</code> | Yes | key: EmployeeTime_externalCode |
 | `externalCode` | <code>int</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedEmployee\ Time\ AUS</code> | Yes | New property values |
+| `payload` | <code>UpdateEmployeeTimeAUSPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -5073,12 +5073,12 @@ Queries the WorkScheduleDayModelSegment collection and returns a page of entitie
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWorkScheduleDayModelSegmentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_57&#124;error`
+**Returns:** `ListWorkScheduleDayModelSegmentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_57 result = check client->listWorkScheduleDayModelSegments();
+ListWorkScheduleDayModelSegmentsResponse result = check client->listWorkScheduleDayModelSegments();
 ```
 
 **Sample response:**
@@ -5106,12 +5106,12 @@ Creates a new WorkScheduleDayModelSegment entity from the supplied payload.
 | `payload` | <code>WorkScheduleDayModelSegment</code> | Yes | New entity |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
-**Returns:** `CreatedWork\ Schedule\ Day\ Model\ Segment&#124;error`
+**Returns:** `CreateWorkScheduleDayModelSegmentResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-CreatedWork\ Schedule\ Day\ Model\ Segment result = check client->createWorkScheduleDayModelSegment(payload);
+CreateWorkScheduleDayModelSegmentResponse result = check client->createWorkScheduleDayModelSegment(payload);
 ```
 
 </div>
@@ -5133,12 +5133,12 @@ Retrieves a single WorkScheduleDayModelSegment entity identified by its key prop
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetWorkScheduleDayModelSegmentQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Work\ Schedule\ Day\ Model\ Segment&#124;error`
+**Returns:** `GetWorkScheduleDayModelSegmentResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Work\ Schedule\ Day\ Model\ Segment result = check client->getWorkScheduleDayModelSegment(WorkScheduleDayModel_externalCode, externalCode);
+GetWorkScheduleDayModelSegmentResponse result = check client->getWorkScheduleDayModelSegment(WorkScheduleDayModel_externalCode, externalCode);
 ```
 
 </div>
@@ -5157,7 +5157,7 @@ Updates the WorkScheduleDayModelSegment identified by its key properties with th
 |------|------|----------|--------------|
 | `WorkScheduleDayModel_externalCode` | <code>string</code> | Yes | key: WorkScheduleDayModel_externalCode |
 | `externalCode` | <code>string</code> | Yes | key: externalCode |
-| `payload` | <code>ModifiedWork\ Schedule\ Day\ Model\ Segment</code> | Yes | New property values |
+| `payload` | <code>UpdateWorkScheduleDayModelSegmentPayload</code> | Yes | New property values |
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 
 **Returns:** `error?`
@@ -5213,12 +5213,12 @@ Queries the RecalculationBasedField collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRecalculationBasedFieldsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_58&#124;error`
+**Returns:** `ListRecalculationBasedFieldsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_58 result = check client->listRecalculationBasedFields();
+ListRecalculationBasedFieldsResponse result = check client->listRecalculationBasedFields();
 ```
 
 **Sample response:**
@@ -5248,12 +5248,12 @@ Retrieves a single RecalculationBasedField entity identified by its key properti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetRecalculationBasedFieldQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Recalculation\ Based\ Field&#124;error`
+**Returns:** `GetRecalculationBasedFieldResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Recalculation\ Based\ Field result = check client->getRecalculationBasedField(TimeAccountType_externalCode, recalcField);
+GetRecalculationBasedFieldResponse result = check client->getRecalculationBasedField(TimeAccountType_externalCode, recalcField);
 ```
 
 </div>
@@ -5275,12 +5275,12 @@ Queries the Holiday collection and returns a page of entities, optionally filter
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListHolidaysQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_59&#124;error`
+**Returns:** `ListHolidaysResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_59 result = check client->listHolidays();
+ListHolidaysResponse result = check client->listHolidays();
 ```
 
 **Sample response:**
@@ -5404,12 +5404,12 @@ Queries the TimeTypeAUS collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeTypeAUSsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_61&#124;error`
+**Returns:** `ListTimeTypeAUSsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_61 result = check client->listTimeTypeAUSs();
+ListTimeTypeAUSsResponse result = check client->listTimeTypeAUSs();
 ```
 
 **Sample response:**
@@ -5439,12 +5439,12 @@ Retrieves a single TimeTypeAUS entity identified by its key properties.
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>GetTimeTypeAUSQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Time\ Type\ AUS&#124;error`
+**Returns:** `GetTimeTypeAUSResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Time\ Type\ AUS result = check client->getTimeTypeAUS(TimeType_externalCode, externalCode);
+GetTimeTypeAUSResponse result = check client->getTimeTypeAUS(TimeType_externalCode, externalCode);
 ```
 
 </div>

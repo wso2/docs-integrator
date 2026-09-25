@@ -84,12 +84,12 @@ Queries the EmpBeneficiary collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpBeneficiariesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListEmpBeneficiariesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listEmpBeneficiaries();
+ListEmpBeneficiariesResponse result = check client->listEmpBeneficiaries();
 ```
 
 **Sample response:**
@@ -173,12 +173,12 @@ Queries the EmpEmployment collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpEmploymentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListEmpEmploymentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listEmpEmployments();
+ListEmpEmploymentsResponse result = check client->listEmpEmployments();
 ```
 
 **Sample response:**
@@ -277,12 +277,12 @@ Queries the EmpEmploymentTermination collection and returns a page of entities, 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpEmploymentTerminationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListEmpEmploymentTerminationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listEmpEmploymentTerminations();
+ListEmpEmploymentTerminationsResponse result = check client->listEmpEmploymentTerminations();
 ```
 
 **Sample response:**
@@ -378,12 +378,12 @@ Queries the EmpPensionPayout collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpPensionPayoutsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListEmpPensionPayoutsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listEmpPensionPayouts();
+ListEmpPensionPayoutsResponse result = check client->listEmpPensionPayouts();
 ```
 
 **Sample response:**
@@ -467,12 +467,12 @@ Queries the EmpWorkPermit collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpWorkPermitsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListEmpWorkPermitsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listEmpWorkPermits();
+ListEmpWorkPermitsResponse result = check client->listEmpWorkPermits();
 ```
 
 **Sample response:**
@@ -563,12 +563,12 @@ Queries the EmpJobRelationships collection and returns a page of entities, optio
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpJobRelationshipssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListEmpJobRelationshipssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listEmpJobRelationshipss();
+ListEmpJobRelationshipssResponse result = check client->listEmpJobRelationshipss();
 ```
 
 **Sample response:**
@@ -666,12 +666,12 @@ Queries the EmpJob collection and returns a page of entities, optionally filtere
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpJobsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_6&#124;error`
+**Returns:** `ListEmpJobsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_6 result = check client->listEmpJobs();
+ListEmpJobsResponse result = check client->listEmpJobs();
 ```
 
 **Sample response:**
@@ -769,12 +769,12 @@ Queries the PersonEmpTerminationInfo collection and returns a page of entities, 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPersonEmpTerminationInfosQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_7&#124;error`
+**Returns:** `ListPersonEmpTerminationInfosResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_7 result = check client->listPersonEmpTerminationInfos();
+ListPersonEmpTerminationInfosResponse result = check client->listPersonEmpTerminationInfos();
 ```
 
 **Sample response:**
@@ -846,12 +846,12 @@ Queries the HireDateChange collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListHireDateChangesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_8&#124;error`
+**Returns:** `ListHireDateChangesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_8 result = check client->listHireDateChanges();
+ListHireDateChangesResponse result = check client->listHireDateChanges();
 ```
 
 **Sample response:**

@@ -84,12 +84,12 @@ Queries the CertificationContent collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListCertificationContentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListCertificationContentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listCertificationContents();
+ListCertificationContentsResponse result = check client->listCertificationContents();
 ```
 
 **Sample response:**
@@ -260,12 +260,12 @@ Queries the FamilyEntity collection and returns a page of entities, optionally f
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFamilyEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListFamilyEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listFamilyEntities();
+ListFamilyEntitiesResponse result = check client->listFamilyEntities();
 ```
 
 **Sample response:**
@@ -437,12 +437,12 @@ Queries the CertificationEntity collection and returns a page of entities, optio
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListCertificationEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListCertificationEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listCertificationEntities();
+ListCertificationEntitiesResponse result = check client->listCertificationEntities();
 ```
 
 **Sample response:**
@@ -600,12 +600,12 @@ Queries the JobResponsibilityContent collection and returns a page of entities, 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobResponsibilityContentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListJobResponsibilityContentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listJobResponsibilityContents();
+ListJobResponsibilityContentsResponse result = check client->listJobResponsibilityContents();
 ```
 
 **Sample response:**
@@ -776,12 +776,12 @@ Queries the InterviewQuestionContent collection and returns a page of entities, 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListInterviewQuestionContentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListInterviewQuestionContentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listInterviewQuestionContents();
+ListInterviewQuestionContentsResponse result = check client->listInterviewQuestionContents();
 ```
 
 **Sample response:**
@@ -952,12 +952,12 @@ Queries the JobResponsibilityEntity collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobResponsibilityEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListJobResponsibilityEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listJobResponsibilityEntities();
+ListJobResponsibilityEntitiesResponse result = check client->listJobResponsibilityEntities();
 ```
 
 **Sample response:**
@@ -1115,12 +1115,12 @@ Queries the RatedSkillMapping collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRatedSkillMappingsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_6&#124;error`
+**Returns:** `ListRatedSkillMappingsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_6 result = check client->listRatedSkillMappings();
+ListRatedSkillMappingsResponse result = check client->listRatedSkillMappings();
 ```
 
 **Sample response:**
@@ -1291,12 +1291,12 @@ Queries the RoleCompetencyBehaviorMappingEntity collection and returns a page of
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRoleCompetencyBehaviorMappingEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_7&#124;error`
+**Returns:** `ListRoleCompetencyBehaviorMappingEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_7 result = check client->listRoleCompetencyBehaviorMappingEntities();
+ListRoleCompetencyBehaviorMappingEntitiesResponse result = check client->listRoleCompetencyBehaviorMappingEntities();
 ```
 
 **Sample response:**
@@ -1482,12 +1482,12 @@ Queries the RoleEntity collection and returns a page of entities, optionally fil
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRoleEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_8&#124;error`
+**Returns:** `ListRoleEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_8 result = check client->listRoleEntities();
+ListRoleEntitiesResponse result = check client->listRoleEntities();
 ```
 
 **Sample response:**
@@ -1691,12 +1691,12 @@ Queries the JobProfileLocalizedData collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobProfileLocalizedDataQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_9&#124;error`
+**Returns:** `ListJobProfileLocalizedDataResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_9 result = check client->listJobProfileLocalizedData();
+ListJobProfileLocalizedDataResponse result = check client->listJobProfileLocalizedData();
 ```
 
 **Sample response:**
@@ -1860,12 +1860,12 @@ Queries the JobCodeMappingEntity collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobCodeMappingEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_10&#124;error`
+**Returns:** `ListJobCodeMappingEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_10 result = check client->listJobCodeMappingEntities();
+ListJobCodeMappingEntitiesResponse result = check client->listJobCodeMappingEntities();
 ```
 
 **Sample response:**
@@ -2029,12 +2029,12 @@ Queries the CompetencyType collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListCompetencyTypesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_11&#124;error`
+**Returns:** `ListCompetencyTypesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_11 result = check client->listCompetencyTypes();
+ListCompetencyTypesResponse result = check client->listCompetencyTypes();
 ```
 
 **Sample response:**
@@ -2192,12 +2192,12 @@ Queries the EmploymentConditionContent collection and returns a page of entities
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmploymentConditionContentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_12&#124;error`
+**Returns:** `ListEmploymentConditionContentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_12 result = check client->listEmploymentConditionContents();
+ListEmploymentConditionContentsResponse result = check client->listEmploymentConditionContents();
 ```
 
 **Sample response:**
@@ -2368,12 +2368,12 @@ Queries the FamilyCompetencyMappingEntity collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFamilyCompetencyMappingEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_13&#124;error`
+**Returns:** `ListFamilyCompetencyMappingEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_13 result = check client->listFamilyCompetencyMappingEntities();
+ListFamilyCompetencyMappingEntitiesResponse result = check client->listFamilyCompetencyMappingEntities();
 ```
 
 **Sample response:**
@@ -2550,12 +2550,12 @@ Queries the PhysicalReqEntity collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPhysicalReqEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_14&#124;error`
+**Returns:** `ListPhysicalReqEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_14 result = check client->listPhysicalReqEntities();
+ListPhysicalReqEntitiesResponse result = check client->listPhysicalReqEntities();
 ```
 
 **Sample response:**
@@ -2713,12 +2713,12 @@ Queries the InterviewQuestionEntity collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListInterviewQuestionEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_15&#124;error`
+**Returns:** `ListInterviewQuestionEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_15 result = check client->listInterviewQuestionEntities();
+ListInterviewQuestionEntitiesResponse result = check client->listInterviewQuestionEntities();
 ```
 
 **Sample response:**
@@ -2876,12 +2876,12 @@ Queries the JDTemplateFamilyMapping collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJDTemplateFamilyMappingsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_16&#124;error`
+**Returns:** `ListJDTemplateFamilyMappingsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_16 result = check client->listJDTemplateFamilyMappings();
+ListJDTemplateFamilyMappingsResponse result = check client->listJDTemplateFamilyMappings();
 ```
 
 **Sample response:**
@@ -3056,12 +3056,12 @@ Queries the BehaviorMappingEntity collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBehaviorMappingEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_17&#124;error`
+**Returns:** `ListBehaviorMappingEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_17 result = check client->listBehaviorMappingEntities();
+ListBehaviorMappingEntitiesResponse result = check client->listBehaviorMappingEntities();
 ```
 
 **Sample response:**
@@ -3225,12 +3225,12 @@ Queries the SkillEntity collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListSkillEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_18&#124;error`
+**Returns:** `ListSkillEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_18 result = check client->listSkillEntities();
+ListSkillEntitiesResponse result = check client->listSkillEntities();
 ```
 
 **Sample response:**
@@ -3388,12 +3388,12 @@ Queries the PhysicalReqContent collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPhysicalReqContentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_19&#124;error`
+**Returns:** `ListPhysicalReqContentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_19 result = check client->listPhysicalReqContents();
+ListPhysicalReqContentsResponse result = check client->listPhysicalReqContents();
 ```
 
 **Sample response:**
@@ -3564,12 +3564,12 @@ Queries the SkillContent collection and returns a page of entities, optionally f
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListSkillContentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_20&#124;error`
+**Returns:** `ListSkillContentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_20 result = check client->listSkillContents();
+ListSkillContentsResponse result = check client->listSkillContents();
 ```
 
 **Sample response:**
@@ -3759,12 +3759,12 @@ Queries the RoleCompetencyMappingEntity collection and returns a page of entitie
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRoleCompetencyMappingEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_21&#124;error`
+**Returns:** `ListRoleCompetencyMappingEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_21 result = check client->listRoleCompetencyMappingEntities();
+ListRoleCompetencyMappingEntitiesResponse result = check client->listRoleCompetencyMappingEntities();
 ```
 
 **Sample response:**
@@ -3941,12 +3941,12 @@ Queries the SelfReportSkillMapping collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListSelfReportSkillMappingsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_22&#124;error`
+**Returns:** `ListSelfReportSkillMappingsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_22 result = check client->listSelfReportSkillMappings();
+ListSelfReportSkillMappingsResponse result = check client->listSelfReportSkillMappings();
 ```
 
 **Sample response:**
@@ -4195,12 +4195,12 @@ Queries the FamilySkillMappingEntity collection and returns a page of entities, 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFamilySkillMappingEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_24&#124;error`
+**Returns:** `ListFamilySkillMappingEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_24 result = check client->listFamilySkillMappingEntities();
+ListFamilySkillMappingEntitiesResponse result = check client->listFamilySkillMappingEntities();
 ```
 
 **Sample response:**
@@ -4371,12 +4371,12 @@ Queries the RoleSkillMappingEntity collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRoleSkillMappingEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_25&#124;error`
+**Returns:** `ListRoleSkillMappingEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_25 result = check client->listRoleSkillMappingEntities();
+ListRoleSkillMappingEntitiesResponse result = check client->listRoleSkillMappingEntities();
 ```
 
 **Sample response:**
@@ -4547,12 +4547,12 @@ Queries the JobDescTemplate collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobDescTemplatesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_26&#124;error`
+**Returns:** `ListJobDescTemplatesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_26 result = check client->listJobDescTemplates();
+ListJobDescTemplatesResponse result = check client->listJobDescTemplates();
 ```
 
 **Sample response:**
@@ -4724,12 +4724,12 @@ Queries the SkillProfile collection and returns a page of entities, optionally f
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListSkillProfilesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_27&#124;error`
+**Returns:** `ListSkillProfilesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_27 result = check client->listSkillProfiles();
+ListSkillProfilesResponse result = check client->listSkillProfiles();
 ```
 
 **Sample response:**
@@ -4901,12 +4901,12 @@ Queries the CompetencyEntity collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListCompetencyEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_28&#124;error`
+**Returns:** `ListCompetencyEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_28 result = check client->listCompetencyEntities();
+ListCompetencyEntitiesResponse result = check client->listCompetencyEntities();
 ```
 
 **Sample response:**
@@ -5085,12 +5085,12 @@ Queries the CompetencyContent collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListCompetencyContentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_29&#124;error`
+**Returns:** `ListCompetencyContentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_29 result = check client->listCompetencyContents();
+ListCompetencyContentsResponse result = check client->listCompetencyContents();
 ```
 
 **Sample response:**
@@ -5286,12 +5286,12 @@ Queries the RelevantIndustryEntity collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRelevantIndustryEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_30&#124;error`
+**Returns:** `ListRelevantIndustryEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_30 result = check client->listRelevantIndustryEntities();
+ListRelevantIndustryEntitiesResponse result = check client->listRelevantIndustryEntities();
 ```
 
 **Sample response:**
@@ -5449,12 +5449,12 @@ Queries the RoleTalentPoolMappingEntity collection and returns a page of entitie
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRoleTalentPoolMappingEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_31&#124;error`
+**Returns:** `ListRoleTalentPoolMappingEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_31 result = check client->listRoleTalentPoolMappingEntities();
+ListRoleTalentPoolMappingEntitiesResponse result = check client->listRoleTalentPoolMappingEntities();
 ```
 
 **Sample response:**
@@ -5618,12 +5618,12 @@ Queries the EmploymentConditionEntity collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmploymentConditionEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_32&#124;error`
+**Returns:** `ListEmploymentConditionEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_32 result = check client->listEmploymentConditionEntities();
+ListEmploymentConditionEntitiesResponse result = check client->listEmploymentConditionEntities();
 ```
 
 **Sample response:**
@@ -5781,12 +5781,12 @@ Queries the JobDescSection collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobDescSectionsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_33&#124;error`
+**Returns:** `ListJobDescSectionsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_33 result = check client->listJobDescSections();
+ListJobDescSectionsResponse result = check client->listJobDescSections();
 ```
 
 **Sample response:**
@@ -5950,12 +5950,12 @@ Queries the RelevantIndustryContent collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRelevantIndustryContentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_34&#124;error`
+**Returns:** `ListRelevantIndustryContentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_34 result = check client->listRelevantIndustryContents();
+ListRelevantIndustryContentsResponse result = check client->listRelevantIndustryContents();
 ```
 
 **Sample response:**
@@ -6126,12 +6126,12 @@ Queries the PositionEntity collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPositionEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_35&#124;error`
+**Returns:** `ListPositionEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_35 result = check client->listPositionEntities();
+ListPositionEntitiesResponse result = check client->listPositionEntities();
 ```
 
 **Sample response:**
@@ -6303,12 +6303,12 @@ Queries the PositionCompetencyMappingEntity collection and returns a page of ent
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPositionCompetencyMappingEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_36&#124;error`
+**Returns:** `ListPositionCompetencyMappingEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_36 result = check client->listPositionCompetencyMappingEntities();
+ListPositionCompetencyMappingEntitiesResponse result = check client->listPositionCompetencyMappingEntities();
 ```
 
 **Sample response:**
@@ -6472,12 +6472,12 @@ Queries the PositionSkillMappingEntity collection and returns a page of entities
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPositionSkillMappingEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_37&#124;error`
+**Returns:** `ListPositionSkillMappingEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_37 result = check client->listPositionSkillMappingEntities();
+ListPositionSkillMappingEntitiesResponse result = check client->listPositionSkillMappingEntities();
 ```
 
 **Sample response:**

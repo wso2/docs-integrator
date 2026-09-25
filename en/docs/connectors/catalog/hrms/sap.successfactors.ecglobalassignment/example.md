@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecglobalassignmentClient** appears 
 
 3. Select **List Secondary Assignments Items**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned SecondaryAssignmentsItem records — leave the default value, `ecglobalassignmentWrapper`.
+- **Result** : Name of the variable that stores the returned SecondaryAssignmentsItem records.
 
 ![SAP SuccessFactors Employee Central Global Assignment List Secondary Assignments Items operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecglobalassignment/ballerinax_sap_successfactors_ecglobalassignment_screenshot_05_operation_form.png)
 

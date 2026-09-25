@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecmasterdatareplicationClient** app
 
 3. Select **List Employee Data Replication Confirmation Error Messages**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned EmployeeDataReplicationConfirmationErrorMessage records — leave the default value, `ecmasterdatareplicationWrapper`.
+- **Result** : Name of the variable that stores the returned EmployeeDataReplicationConfirmationErrorMessage records.
 
 ![SAP SuccessFactors Employee Central Master Data Replication List Employee Data Replication Confirmation Error Messages operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecmasterdatareplication/ballerinax_sap_successfactors_ecmasterdatareplication_screenshot_05_operation_form.png)
 

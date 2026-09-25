@@ -84,12 +84,12 @@ Queries the MyPendingWorkflow collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListMyPendingWorkflowsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListMyPendingWorkflowsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listMyPendingWorkflows();
+ListMyPendingWorkflowsResponse result = check client->listMyPendingWorkflows();
 ```
 
 **Sample response:**
@@ -161,12 +161,12 @@ Queries the WfRequestParticipator collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWfRequestParticipatorsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListWfRequestParticipatorsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listWfRequestParticipators();
+ListWfRequestParticipatorsResponse result = check client->listWfRequestParticipators();
 ```
 
 **Sample response:**
@@ -238,12 +238,12 @@ Queries the WorkflowAllowedActionList collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWorkflowAllowedActionListsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListWorkflowAllowedActionListsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listWorkflowAllowedActionLists();
+ListWorkflowAllowedActionListsResponse result = check client->listWorkflowAllowedActionLists();
 ```
 
 **Sample response:**
@@ -315,12 +315,12 @@ Queries the AlertMessage collection and returns a page of entities, optionally f
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAlertMessagesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListAlertMessagesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listAlertMessages();
+ListAlertMessagesResponse result = check client->listAlertMessages();
 ```
 
 **Sample response:**
@@ -485,12 +485,12 @@ Queries the WfRequestComments collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWfRequestCommentssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListWfRequestCommentssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listWfRequestCommentss();
+ListWfRequestCommentssResponse result = check client->listWfRequestCommentss();
 ```
 
 **Sample response:**
@@ -562,12 +562,12 @@ Queries the WfRequestStep collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWfRequestStepsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListWfRequestStepsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listWfRequestSteps();
+ListWfRequestStepsResponse result = check client->listWfRequestSteps();
 ```
 
 **Sample response:**
@@ -649,12 +649,12 @@ Queries the AutoDelegateDetail collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAutoDelegateDetailsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_6&#124;error`
+**Returns:** `ListAutoDelegateDetailsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_6 result = check client->listAutoDelegateDetails();
+ListAutoDelegateDetailsResponse result = check client->listAutoDelegateDetails();
 ```
 
 **Sample response:**
@@ -896,12 +896,12 @@ Queries the EmpWfRequest collection and returns a page of entities, optionally f
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpWfRequestsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_8&#124;error`
+**Returns:** `ListEmpWfRequestsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_8 result = check client->listEmpWfRequests();
+ListEmpWfRequestsResponse result = check client->listEmpWfRequests();
 ```
 
 **Sample response:**
@@ -973,12 +973,12 @@ Queries the WfRequest collection and returns a page of entities, optionally filt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListWfRequestsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_9&#124;error`
+**Returns:** `ListWfRequestsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_9 result = check client->listWfRequests();
+ListWfRequestsResponse result = check client->listWfRequests();
 ```
 
 **Sample response:**

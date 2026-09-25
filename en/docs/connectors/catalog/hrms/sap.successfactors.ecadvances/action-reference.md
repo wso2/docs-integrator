@@ -84,12 +84,12 @@ Queries the AdvancesInstallments collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAdvancesInstallmentssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListAdvancesInstallmentssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listAdvancesInstallmentss();
+ListAdvancesInstallmentssResponse result = check client->listAdvancesInstallmentss();
 ```
 
 **Sample response:**
@@ -165,12 +165,12 @@ Queries the AdvancesEligibility collection and returns a page of entities, optio
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAdvancesEligibilitysQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListAdvancesEligibilitysResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listAdvancesEligibilitys();
+ListAdvancesEligibilitysResponse result = check client->listAdvancesEligibilitys();
 ```
 
 **Sample response:**
@@ -243,12 +243,12 @@ Queries the AdvancesAccumulation collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAdvancesAccumulationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListAdvancesAccumulationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listAdvancesAccumulations();
+ListAdvancesAccumulationsResponse result = check client->listAdvancesAccumulations();
 ```
 
 **Sample response:**
@@ -318,12 +318,12 @@ Queries the Advance collection and returns a page of entities, optionally filter
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAdvancesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListAdvancesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listAdvances();
+ListAdvancesResponse result = check client->listAdvances();
 ```
 
 **Sample response:**

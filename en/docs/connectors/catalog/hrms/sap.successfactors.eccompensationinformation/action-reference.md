@@ -84,12 +84,12 @@ Queries the OneTimeDeduction collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListOneTimeDeductionsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListOneTimeDeductionsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listOneTimeDeductions();
+ListOneTimeDeductionsResponse result = check client->listOneTimeDeductions();
 ```
 
 **Sample response:**
@@ -161,12 +161,12 @@ Queries the RecurringDeductionItem collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRecurringDeductionItemsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListRecurringDeductionItemsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listRecurringDeductionItems();
+ListRecurringDeductionItemsResponse result = check client->listRecurringDeductionItems();
 ```
 
 **Sample response:**
@@ -244,12 +244,12 @@ Queries the EmpCompensation collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpCompensationExpandEmpCompensationCalculatedNavsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListEmpCompensationExpandEmpCompensationCalculatedNavsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listEmpCompensationExpandEmpCompensationCalculatedNavs();
+ListEmpCompensationExpandEmpCompensationCalculatedNavsResponse result = check client->listEmpCompensationExpandEmpCompensationCalculatedNavs();
 ```
 
 **Sample response:**
@@ -325,12 +325,12 @@ Queries the EmpCompensation collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpCompensationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_6&#124;error`
+**Returns:** `ListEmpCompensationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_6 result = check client->listEmpCompensations();
+ListEmpCompensationsResponse result = check client->listEmpCompensations();
 ```
 
 **Sample response:**
@@ -419,12 +419,12 @@ Queries the EmpPayCompRecurring collection and returns a page of entities, optio
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpPayCompRecurringsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListEmpPayCompRecurringsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listEmpPayCompRecurrings();
+ListEmpPayCompRecurringsResponse result = check client->listEmpPayCompRecurrings();
 ```
 
 **Sample response:**
@@ -513,12 +513,12 @@ Queries the DeductionScreenId collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListDeductionScreenIdsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListDeductionScreenIdsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listDeductionScreenIds();
+ListDeductionScreenIdsResponse result = check client->listDeductionScreenIds();
 ```
 
 **Sample response:**
@@ -590,12 +590,12 @@ Queries the RecurringDeduction collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRecurringDeductionsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListRecurringDeductionsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listRecurringDeductions();
+ListRecurringDeductionsResponse result = check client->listRecurringDeductions();
 ```
 
 **Sample response:**
@@ -674,12 +674,12 @@ Queries the EmpPayCompNonRecurring collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpPayCompNonRecurringsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_7&#124;error`
+**Returns:** `ListEmpPayCompNonRecurringsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_7 result = check client->listEmpPayCompNonRecurrings();
+ListEmpPayCompNonRecurringsResponse result = check client->listEmpPayCompNonRecurrings();
 ```
 
 **Sample response:**
@@ -757,12 +757,12 @@ Queries the EmpCompensationGroupSumCalculated collection and returns a page of e
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpCompensationGroupSumCalculatedsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_8&#124;error`
+**Returns:** `ListEmpCompensationGroupSumCalculatedsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_8 result = check client->listEmpCompensationGroupSumCalculateds();
+ListEmpCompensationGroupSumCalculatedsResponse result = check client->listEmpCompensationGroupSumCalculateds();
 ```
 
 **Sample response:**

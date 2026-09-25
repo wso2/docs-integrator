@@ -84,12 +84,12 @@ Queries the EmpCostDistribution collection and returns a page of entities, optio
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpCostDistributionsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListEmpCostDistributionsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listEmpCostDistributions();
+ListEmpCostDistributionsResponse result = check client->listEmpCostDistributions();
 ```
 
 **Sample response:**
@@ -248,12 +248,12 @@ Queries the EmpCostDistributionItem collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpCostDistributionItemsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListEmpCostDistributionItemsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listEmpCostDistributionItems();
+ListEmpCostDistributionItemsResponse result = check client->listEmpCostDistributionItems();
 ```
 
 **Sample response:**

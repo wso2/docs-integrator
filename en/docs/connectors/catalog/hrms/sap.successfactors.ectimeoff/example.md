@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ectimeoffClient** appears in the **
 
 3. Select **List Time Account Posting Rules**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned TimeAccountPostingRule records — leave the default value, `ectimeoffWrapper`.
+- **Result** : Name of the variable that stores the returned TimeAccountPostingRule records.
 
 ![SAP SuccessFactors Employee Central Time Off List Time Account Posting Rules operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ectimeoff/ballerinax_sap_successfactors_ectimeoff_screenshot_05_operation_form.png)
 

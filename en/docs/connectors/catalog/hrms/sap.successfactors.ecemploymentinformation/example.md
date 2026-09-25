@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecemploymentinformationClient** app
 
 3. Select **List Emp Employments**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned EmpEmployment records — leave the default value, `ecemploymentinformationWrapper1`.
+- **Result** : Name of the variable that stores the returned EmpEmployment records.
 
 ![SAP SuccessFactors Employee Central Employment Information List Emp Employments operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecemploymentinformation/ballerinax_sap_successfactors_ecemploymentinformation_screenshot_05_operation_form.png)
 

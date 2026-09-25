@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecemployeeprofileClient** appears i
 
 3. Select **List Background Communities**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned Background_Community records — leave the default value, `ecemployeeprofileWrapper`.
+- **Result** : Name of the variable that stores the returned Background_Community records.
 
 ![SAP SuccessFactors Employee Central Employee Profile List Background Communities operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecemployeeprofile/ballerinax_sap_successfactors_ecemployeeprofile_screenshot_05_operation_form.png)
 

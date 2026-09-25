@@ -84,12 +84,12 @@ Queries the SecondaryAssignmentsItem collection and returns a page of entities, 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListSecondaryAssignmentsItemsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListSecondaryAssignmentsItemsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listSecondaryAssignmentsItems();
+ListSecondaryAssignmentsItemsResponse result = check client->listSecondaryAssignmentsItems();
 ```
 
 **Sample response:**
@@ -251,12 +251,12 @@ Queries the SecondaryAssignments collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListSecondaryAssignmentssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListSecondaryAssignmentssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listSecondaryAssignmentss();
+ListSecondaryAssignmentssResponse result = check client->listSecondaryAssignmentss();
 ```
 
 **Sample response:**
@@ -429,12 +429,12 @@ Queries the RightToReturn collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListRightToReturnsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListRightToReturnsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listRightToReturns();
+ListRightToReturnsResponse result = check client->listRightToReturns();
 ```
 
 **Sample response:**
@@ -602,12 +602,12 @@ Queries the EmpGlobalAssignment collection and returns a page of entities, optio
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmpGlobalAssignmentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListEmpGlobalAssignmentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listEmpGlobalAssignments();
+ListEmpGlobalAssignmentsResponse result = check client->listEmpGlobalAssignments();
 ```
 
 **Sample response:**

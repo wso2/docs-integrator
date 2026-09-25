@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecemployeecentralpayrollClient** ap
 
 3. Select **List Employee Payroll Run Results Itemss**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned EmployeePayrollRunResultsItems records — leave the default value, `ecemployeecentralpayrollWrapper`.
+- **Result** : Name of the variable that stores the returned EmployeePayrollRunResultsItems records.
 
 ![SAP SuccessFactors Employee Central Payroll List Employee Payroll Run Results Itemss operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecemployeecentralpayroll/ballerinax_sap_successfactors_ecemployeecentralpayroll_screenshot_05_operation_form.png)
 

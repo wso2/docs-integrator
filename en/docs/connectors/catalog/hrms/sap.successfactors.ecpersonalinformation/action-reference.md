@@ -84,12 +84,12 @@ Queries the PerEmergencyContacts collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerEmergencyContactssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListPerEmergencyContactssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listPerEmergencyContactss();
+ListPerEmergencyContactssResponse result = check client->listPerEmergencyContactss();
 ```
 
 **Sample response:**
@@ -161,12 +161,12 @@ Queries the PerPhone collection and returns a page of entities, optionally filte
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerPhonesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListPerPhonesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listPerPhones();
+ListPerPhonesResponse result = check client->listPerPhones();
 ```
 
 **Sample response:**
@@ -267,12 +267,12 @@ Queries the PersonKey collection and returns a page of entities, optionally filt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPersonKeysQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListPersonKeysResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listPersonKeys();
+ListPersonKeysResponse result = check client->listPersonKeys();
 ```
 
 **Sample response:**
@@ -342,12 +342,12 @@ Queries the PerPersonal collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerPersonalsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListPerPersonalsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listPerPersonals();
+ListPerPersonalsResponse result = check client->listPerPersonals();
 ```
 
 **Sample response:**
@@ -418,12 +418,12 @@ Queries the PerSocialAccount collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerSocialAccountsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListPerSocialAccountsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listPerSocialAccounts();
+ListPerSocialAccountsResponse result = check client->listPerSocialAccounts();
 ```
 
 **Sample response:**
@@ -524,12 +524,12 @@ Queries the PerPerson collection and returns a page of entities, optionally filt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerPersonsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListPerPersonsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listPerPersons();
+ListPerPersonsResponse result = check client->listPerPersons();
 ```
 
 **Sample response:**
@@ -667,12 +667,12 @@ Queries the PerPersonRelationship collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerPersonRelationshipsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_6&#124;error`
+**Returns:** `ListPerPersonRelationshipsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_6 result = check client->listPerPersonRelationships();
+ListPerPersonRelationshipsResponse result = check client->listPerPersonRelationships();
 ```
 
 **Sample response:**
@@ -744,12 +744,12 @@ Queries the PerEmail collection and returns a page of entities, optionally filte
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerEmailsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_7&#124;error`
+**Returns:** `ListPerEmailsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_7 result = check client->listPerEmails();
+ListPerEmailsResponse result = check client->listPerEmails();
 ```
 
 **Sample response:**
@@ -820,12 +820,12 @@ Queries the HrisEmergencyContactAddressDEFLT collection and returns a page of en
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListHrisEmergencyContactAddressDEFLTsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_8&#124;error`
+**Returns:** `ListHrisEmergencyContactAddressDEFLTsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_8 result = check client->listHrisEmergencyContactAddressDEFLTs();
+ListHrisEmergencyContactAddressDEFLTsResponse result = check client->listHrisEmergencyContactAddressDEFLTs();
 ```
 
 **Sample response:**
@@ -895,12 +895,12 @@ Queries the PerNationalId collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerNationalIdsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_9&#124;error`
+**Returns:** `ListPerNationalIdsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_9 result = check client->listPerNationalIds();
+ListPerNationalIdsResponse result = check client->listPerNationalIds();
 ```
 
 **Sample response:**
@@ -972,12 +972,12 @@ Queries the PerNationalIdWithValidityPeriod collection and returns a page of ent
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerNationalIdWithValidityPeriodsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_10&#124;error`
+**Returns:** `ListPerNationalIdWithValidityPeriodsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_10 result = check client->listPerNationalIdWithValidityPeriods();
+ListPerNationalIdWithValidityPeriodsResponse result = check client->listPerNationalIdWithValidityPeriods();
 ```
 
 **Sample response:**
@@ -1086,12 +1086,12 @@ Queries the PerAddressDEFLT collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerAddressDEFLTsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_11&#124;error`
+**Returns:** `ListPerAddressDEFLTsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_11 result = check client->listPerAddressDEFLTs();
+ListPerAddressDEFLTsResponse result = check client->listPerAddressDEFLTs();
 ```
 
 **Sample response:**
@@ -1197,12 +1197,12 @@ Queries the NameFormatGO collection and returns a page of entities, optionally f
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListNameFormatGOsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_12&#124;error`
+**Returns:** `ListNameFormatGOsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_12 result = check client->listNameFormatGOs();
+ListNameFormatGOsResponse result = check client->listNameFormatGOs();
 ```
 
 **Sample response:**
@@ -1272,12 +1272,12 @@ Queries the NameElementGO collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListNameElementGOsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_13&#124;error`
+**Returns:** `ListNameElementGOsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_13 result = check client->listNameElementGOs();
+ListNameElementGOsResponse result = check client->listNameElementGOs();
 ```
 
 **Sample response:**
@@ -1350,12 +1350,12 @@ Queries the PerBiographicalInfoLocBRA collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerBiographicalInfoLocBRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_14&#124;error`
+**Returns:** `ListPerBiographicalInfoLocBRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_14 result = check client->listPerBiographicalInfoLocBRAs();
+ListPerBiographicalInfoLocBRAsResponse result = check client->listPerBiographicalInfoLocBRAs();
 ```
 
 **Sample response:**
@@ -1426,12 +1426,12 @@ Queries the PerBiographicalInfoLocCHL collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerBiographicalInfoLocCHLsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_15&#124;error`
+**Returns:** `ListPerBiographicalInfoLocCHLsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_15 result = check client->listPerBiographicalInfoLocCHLs();
+ListPerBiographicalInfoLocCHLsResponse result = check client->listPerBiographicalInfoLocCHLs();
 ```
 
 **Sample response:**
@@ -1502,12 +1502,12 @@ Queries the PerBiographicalInfoLocFRA collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerBiographicalInfoLocFRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_16&#124;error`
+**Returns:** `ListPerBiographicalInfoLocFRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_16 result = check client->listPerBiographicalInfoLocFRAs();
+ListPerBiographicalInfoLocFRAsResponse result = check client->listPerBiographicalInfoLocFRAs();
 ```
 
 **Sample response:**
@@ -1580,12 +1580,12 @@ Queries the PerBiographicalInfoLocITA collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerBiographicalInfoLocITAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_17&#124;error`
+**Returns:** `ListPerBiographicalInfoLocITAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_17 result = check client->listPerBiographicalInfoLocITAs();
+ListPerBiographicalInfoLocITAsResponse result = check client->listPerBiographicalInfoLocITAs();
 ```
 
 **Sample response:**
@@ -1658,12 +1658,12 @@ Queries the PerBiographicalInfoLocVEN collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerBiographicalInfoLocVENsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_18&#124;error`
+**Returns:** `ListPerBiographicalInfoLocVENsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_18 result = check client->listPerBiographicalInfoLocVENs();
+ListPerBiographicalInfoLocVENsResponse result = check client->listPerBiographicalInfoLocVENs();
 ```
 
 **Sample response:**

@@ -84,12 +84,12 @@ Queries the EmployeePayrollRunResultsItems collection and returns a page of enti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeePayrollRunResultsItemssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListEmployeePayrollRunResultsItemssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listEmployeePayrollRunResultsItemss();
+ListEmployeePayrollRunResultsItemssResponse result = check client->listEmployeePayrollRunResultsItemss();
 ```
 
 **Sample response:**
@@ -257,12 +257,12 @@ Queries the EmployeePayrollRunResults collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeePayrollRunResultssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListEmployeePayrollRunResultssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listEmployeePayrollRunResultss();
+ListEmployeePayrollRunResultssResponse result = check client->listEmployeePayrollRunResultss();
 ```
 
 **Sample response:**

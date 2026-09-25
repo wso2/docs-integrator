@@ -84,12 +84,12 @@ Queries the EmployeeDataReplicationConfirmationErrorMessage collection and retur
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeDataReplicationConfirmationErrorMessagesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListEmployeeDataReplicationConfirmationErrorMessagesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listEmployeeDataReplicationConfirmationErrorMessages();
+ListEmployeeDataReplicationConfirmationErrorMessagesResponse result = check client->listEmployeeDataReplicationConfirmationErrorMessages();
 ```
 
 **Sample response:**
@@ -200,12 +200,12 @@ Queries the EmployeeDataReplicationElement collection and returns a page of enti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeDataReplicationElementsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListEmployeeDataReplicationElementsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listEmployeeDataReplicationElements();
+ListEmployeeDataReplicationElementsResponse result = check client->listEmployeeDataReplicationElements();
 ```
 
 **Sample response:**
@@ -316,12 +316,12 @@ Queries the EmployeeDataReplicationNotification collection and returns a page of
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeDataReplicationNotificationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListEmployeeDataReplicationNotificationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listEmployeeDataReplicationNotifications();
+ListEmployeeDataReplicationNotificationsResponse result = check client->listEmployeeDataReplicationNotifications();
 ```
 
 **Sample response:**
@@ -428,12 +428,12 @@ Queries the EmployeeDataReplicationConfirmation collection and returns a page of
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeDataReplicationConfirmationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListEmployeeDataReplicationConfirmationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listEmployeeDataReplicationConfirmations();
+ListEmployeeDataReplicationConfirmationsResponse result = check client->listEmployeeDataReplicationConfirmations();
 ```
 
 **Sample response:**

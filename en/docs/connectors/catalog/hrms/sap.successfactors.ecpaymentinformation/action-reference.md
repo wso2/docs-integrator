@@ -84,12 +84,12 @@ Queries the PaymentInformationDetailV3KEN collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3KENsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListPaymentInformationDetailV3KENsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listPaymentInformationDetailV3KENs();
+ListPaymentInformationDetailV3KENsResponse result = check client->listPaymentInformationDetailV3KENs();
 ```
 
 **Sample response:**
@@ -254,12 +254,12 @@ Queries the PaymentInformationDetailV3ISR collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3ISRsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListPaymentInformationDetailV3ISRsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listPaymentInformationDetailV3ISRs();
+ListPaymentInformationDetailV3ISRsResponse result = check client->listPaymentInformationDetailV3ISRs();
 ```
 
 **Sample response:**
@@ -424,12 +424,12 @@ Queries the PaymentInformationDetailV3 collection and returns a page of entities
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3sQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListPaymentInformationDetailV3sResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listPaymentInformationDetailV3s();
+ListPaymentInformationDetailV3sResponse result = check client->listPaymentInformationDetailV3s();
 ```
 
 **Sample response:**
@@ -591,12 +591,12 @@ Queries the PaymentInformationDetailV3ARG collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3ARGsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListPaymentInformationDetailV3ARGsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listPaymentInformationDetailV3ARGs();
+ListPaymentInformationDetailV3ARGsResponse result = check client->listPaymentInformationDetailV3ARGs();
 ```
 
 **Sample response:**
@@ -761,12 +761,12 @@ Queries the PaymentMethodV3 collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentMethodV3sQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListPaymentMethodV3sResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listPaymentMethodV3s();
+ListPaymentMethodV3sResponse result = check client->listPaymentMethodV3s();
 ```
 
 **Sample response:**
@@ -934,12 +934,12 @@ Queries the Bank collection and returns a page of entities, optionally filtered,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBanksQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListBanksResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listBanks();
+ListBanksResponse result = check client->listBanks();
 ```
 
 **Sample response:**
@@ -1095,12 +1095,12 @@ Queries the CustomPayTypeAssignment collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListCustomPayTypeAssignmentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_6&#124;error`
+**Returns:** `ListCustomPayTypeAssignmentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_6 result = check client->listCustomPayTypeAssignments();
+ListCustomPayTypeAssignmentsResponse result = check client->listCustomPayTypeAssignments();
 ```
 
 **Sample response:**
@@ -1259,12 +1259,12 @@ Queries the CustomPayType collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListCustomPayTypesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_7&#124;error`
+**Returns:** `ListCustomPayTypesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_7 result = check client->listCustomPayTypes();
+ListCustomPayTypesResponse result = check client->listCustomPayTypes();
 ```
 
 **Sample response:**
@@ -1420,12 +1420,12 @@ Queries the PaymentInformationDetailV3NGA collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3NGAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_8&#124;error`
+**Returns:** `ListPaymentInformationDetailV3NGAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_8 result = check client->listPaymentInformationDetailV3NGAs();
+ListPaymentInformationDetailV3NGAsResponse result = check client->listPaymentInformationDetailV3NGAs();
 ```
 
 **Sample response:**
@@ -1599,12 +1599,12 @@ Queries the PaymentInformationDetailV3CZE collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3CZEsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_9&#124;error`
+**Returns:** `ListPaymentInformationDetailV3CZEsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_9 result = check client->listPaymentInformationDetailV3CZEs();
+ListPaymentInformationDetailV3CZEsResponse result = check client->listPaymentInformationDetailV3CZEs();
 ```
 
 **Sample response:**
@@ -1778,12 +1778,12 @@ Queries the PaymentInformationV3 collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationV3sQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_10&#124;error`
+**Returns:** `ListPaymentInformationV3sResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_10 result = check client->listPaymentInformationV3s();
+ListPaymentInformationV3sResponse result = check client->listPaymentInformationV3s();
 ```
 
 **Sample response:**
@@ -1942,12 +1942,12 @@ Queries the PaymentInformationDetailV3COL collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3COLsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_11&#124;error`
+**Returns:** `ListPaymentInformationDetailV3COLsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_11 result = check client->listPaymentInformationDetailV3COLs();
+ListPaymentInformationDetailV3COLsResponse result = check client->listPaymentInformationDetailV3COLs();
 ```
 
 **Sample response:**
@@ -2121,12 +2121,12 @@ Queries the PaymentInformationDetailV3VEN collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3VENsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_12&#124;error`
+**Returns:** `ListPaymentInformationDetailV3VENsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_12 result = check client->listPaymentInformationDetailV3VENs();
+ListPaymentInformationDetailV3VENsResponse result = check client->listPaymentInformationDetailV3VENs();
 ```
 
 **Sample response:**
@@ -2300,12 +2300,12 @@ Queries the PaymentInformationDetailV3NZL collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3NZLsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_13&#124;error`
+**Returns:** `ListPaymentInformationDetailV3NZLsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_13 result = check client->listPaymentInformationDetailV3NZLs();
+ListPaymentInformationDetailV3NZLsResponse result = check client->listPaymentInformationDetailV3NZLs();
 ```
 
 **Sample response:**
@@ -2470,12 +2470,12 @@ Queries the PaymentInformationDetailV3USA collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3USAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_14&#124;error`
+**Returns:** `ListPaymentInformationDetailV3USAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_14 result = check client->listPaymentInformationDetailV3USAs();
+ListPaymentInformationDetailV3USAsResponse result = check client->listPaymentInformationDetailV3USAs();
 ```
 
 **Sample response:**
@@ -2649,12 +2649,12 @@ Queries the PaymentInformationDetailV3ECU collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3ECUsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_15&#124;error`
+**Returns:** `ListPaymentInformationDetailV3ECUsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_15 result = check client->listPaymentInformationDetailV3ECUs();
+ListPaymentInformationDetailV3ECUsResponse result = check client->listPaymentInformationDetailV3ECUs();
 ```
 
 **Sample response:**
@@ -2828,12 +2828,12 @@ Queries the PaymentInformationDetailV3GBR collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3GBRsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_16&#124;error`
+**Returns:** `ListPaymentInformationDetailV3GBRsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_16 result = check client->listPaymentInformationDetailV3GBRs();
+ListPaymentInformationDetailV3GBRsResponse result = check client->listPaymentInformationDetailV3GBRs();
 ```
 
 **Sample response:**
@@ -3007,12 +3007,12 @@ Queries the PaymentInformationDetailV3FRA collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3FRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_17&#124;error`
+**Returns:** `ListPaymentInformationDetailV3FRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_17 result = check client->listPaymentInformationDetailV3FRAs();
+ListPaymentInformationDetailV3FRAsResponse result = check client->listPaymentInformationDetailV3FRAs();
 ```
 
 **Sample response:**
@@ -3186,12 +3186,12 @@ Queries the PaymentMethodAssignmentV3 collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentMethodAssignmentV3sQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_18&#124;error`
+**Returns:** `ListPaymentMethodAssignmentV3sResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_18 result = check client->listPaymentMethodAssignmentV3s();
+ListPaymentMethodAssignmentV3sResponse result = check client->listPaymentMethodAssignmentV3s();
 ```
 
 **Sample response:**
@@ -3353,12 +3353,12 @@ Queries the PaymentInformationDetailV3JPN collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3JPNsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_19&#124;error`
+**Returns:** `ListPaymentInformationDetailV3JPNsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_19 result = check client->listPaymentInformationDetailV3JPNs();
+ListPaymentInformationDetailV3JPNsResponse result = check client->listPaymentInformationDetailV3JPNs();
 ```
 
 **Sample response:**
@@ -3523,12 +3523,12 @@ Queries the PaymentInformationDetailV3ZAF collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3ZAFsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_20&#124;error`
+**Returns:** `ListPaymentInformationDetailV3ZAFsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_20 result = check client->listPaymentInformationDetailV3ZAFs();
+ListPaymentInformationDetailV3ZAFsResponse result = check client->listPaymentInformationDetailV3ZAFs();
 ```
 
 **Sample response:**
@@ -3693,12 +3693,12 @@ Queries the PaymentInformationDetailV3ITA collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3ITAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_21&#124;error`
+**Returns:** `ListPaymentInformationDetailV3ITAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_21 result = check client->listPaymentInformationDetailV3ITAs();
+ListPaymentInformationDetailV3ITAsResponse result = check client->listPaymentInformationDetailV3ITAs();
 ```
 
 **Sample response:**
@@ -3863,12 +3863,12 @@ Queries the PaymentInformationDetailV3MEX collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3MEXsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_22&#124;error`
+**Returns:** `ListPaymentInformationDetailV3MEXsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_22 result = check client->listPaymentInformationDetailV3MEXs();
+ListPaymentInformationDetailV3MEXsResponse result = check client->listPaymentInformationDetailV3MEXs();
 ```
 
 **Sample response:**
@@ -4033,12 +4033,12 @@ Queries the PaymentInformationDetailV3ESP collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3ESPsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_23&#124;error`
+**Returns:** `ListPaymentInformationDetailV3ESPsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_23 result = check client->listPaymentInformationDetailV3ESPs();
+ListPaymentInformationDetailV3ESPsResponse result = check client->listPaymentInformationDetailV3ESPs();
 ```
 
 **Sample response:**
@@ -4212,12 +4212,12 @@ Queries the PaymentInformationDetailV3BRA collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3BRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_24&#124;error`
+**Returns:** `ListPaymentInformationDetailV3BRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_24 result = check client->listPaymentInformationDetailV3BRAs();
+ListPaymentInformationDetailV3BRAsResponse result = check client->listPaymentInformationDetailV3BRAs();
 ```
 
 **Sample response:**
@@ -4382,12 +4382,12 @@ Queries the PaymentInformationDetailV3CHL collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3CHLsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_25&#124;error`
+**Returns:** `ListPaymentInformationDetailV3CHLsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_25 result = check client->listPaymentInformationDetailV3CHLs();
+ListPaymentInformationDetailV3CHLsResponse result = check client->listPaymentInformationDetailV3CHLs();
 ```
 
 **Sample response:**
@@ -4552,12 +4552,12 @@ Queries the PaymentInformationDetailV3BLR collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3BLRsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_26&#124;error`
+**Returns:** `ListPaymentInformationDetailV3BLRsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_26 result = check client->listPaymentInformationDetailV3BLRs();
+ListPaymentInformationDetailV3BLRsResponse result = check client->listPaymentInformationDetailV3BLRs();
 ```
 
 **Sample response:**
@@ -4731,12 +4731,12 @@ Queries the PaymentInformationDetailV3IRQ collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3IRQsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_27&#124;error`
+**Returns:** `ListPaymentInformationDetailV3IRQsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_27 result = check client->listPaymentInformationDetailV3IRQs();
+ListPaymentInformationDetailV3IRQsResponse result = check client->listPaymentInformationDetailV3IRQs();
 ```
 
 **Sample response:**
@@ -4901,12 +4901,12 @@ Queries the PaymentInformationDetailV3MMR collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3MMRsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_28&#124;error`
+**Returns:** `ListPaymentInformationDetailV3MMRsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_28 result = check client->listPaymentInformationDetailV3MMRs();
+ListPaymentInformationDetailV3MMRsResponse result = check client->listPaymentInformationDetailV3MMRs();
 ```
 
 **Sample response:**
@@ -5080,12 +5080,12 @@ Queries the PaymentInformationDetailV3MWI collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3MWIsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_29&#124;error`
+**Returns:** `ListPaymentInformationDetailV3MWIsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_29 result = check client->listPaymentInformationDetailV3MWIs();
+ListPaymentInformationDetailV3MWIsResponse result = check client->listPaymentInformationDetailV3MWIs();
 ```
 
 **Sample response:**
@@ -5250,12 +5250,12 @@ Queries the PaymentInformationDetailV3NAM collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3NAMsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_30&#124;error`
+**Returns:** `ListPaymentInformationDetailV3NAMsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_30 result = check client->listPaymentInformationDetailV3NAMs();
+ListPaymentInformationDetailV3NAMsResponse result = check client->listPaymentInformationDetailV3NAMs();
 ```
 
 **Sample response:**
@@ -5429,12 +5429,12 @@ Queries the PaymentInformationDetailV3PER collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3PERsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_31&#124;error`
+**Returns:** `ListPaymentInformationDetailV3PERsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_31 result = check client->listPaymentInformationDetailV3PERs();
+ListPaymentInformationDetailV3PERsResponse result = check client->listPaymentInformationDetailV3PERs();
 ```
 
 **Sample response:**
@@ -5608,12 +5608,12 @@ Queries the PaymentInformationDetailV3ZWE collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3ZWEsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_32&#124;error`
+**Returns:** `ListPaymentInformationDetailV3ZWEsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_32 result = check client->listPaymentInformationDetailV3ZWEs();
+ListPaymentInformationDetailV3ZWEsResponse result = check client->listPaymentInformationDetailV3ZWEs();
 ```
 
 **Sample response:**
@@ -5778,12 +5778,12 @@ Queries the PaymentInformationDetailV3SVN collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3SVNsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_33&#124;error`
+**Returns:** `ListPaymentInformationDetailV3SVNsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_33 result = check client->listPaymentInformationDetailV3SVNs();
+ListPaymentInformationDetailV3SVNsResponse result = check client->listPaymentInformationDetailV3SVNs();
 ```
 
 **Sample response:**
@@ -5948,12 +5948,12 @@ Queries the PaymentInformationDetailV3MKD collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3MKDsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_34&#124;error`
+**Returns:** `ListPaymentInformationDetailV3MKDsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_34 result = check client->listPaymentInformationDetailV3MKDs();
+ListPaymentInformationDetailV3MKDsResponse result = check client->listPaymentInformationDetailV3MKDs();
 ```
 
 **Sample response:**
@@ -6118,12 +6118,12 @@ Queries the PaymentInformationDetailV3MOZ collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3MOZsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_35&#124;error`
+**Returns:** `ListPaymentInformationDetailV3MOZsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_35 result = check client->listPaymentInformationDetailV3MOZs();
+ListPaymentInformationDetailV3MOZsResponse result = check client->listPaymentInformationDetailV3MOZs();
 ```
 
 **Sample response:**
@@ -6297,12 +6297,12 @@ Queries the PaymentInformationDetailV3GHA collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3GHAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_36&#124;error`
+**Returns:** `ListPaymentInformationDetailV3GHAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_36 result = check client->listPaymentInformationDetailV3GHAs();
+ListPaymentInformationDetailV3GHAsResponse result = check client->listPaymentInformationDetailV3GHAs();
 ```
 
 **Sample response:**
@@ -6476,12 +6476,12 @@ Queries the PaymentInformationDetailV3SVK collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3SVKsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_37&#124;error`
+**Returns:** `ListPaymentInformationDetailV3SVKsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_37 result = check client->listPaymentInformationDetailV3SVKs();
+ListPaymentInformationDetailV3SVKsResponse result = check client->listPaymentInformationDetailV3SVKs();
 ```
 
 **Sample response:**
@@ -6646,12 +6646,12 @@ Queries the PaymentInformationDetailV3TUN collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3TUNsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_38&#124;error`
+**Returns:** `ListPaymentInformationDetailV3TUNsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_38 result = check client->listPaymentInformationDetailV3TUNs();
+ListPaymentInformationDetailV3TUNsResponse result = check client->listPaymentInformationDetailV3TUNs();
 ```
 
 **Sample response:**
@@ -6816,12 +6816,12 @@ Queries the PaymentInformationDetailV3SUR collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3SURsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_39&#124;error`
+**Returns:** `ListPaymentInformationDetailV3SURsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_39 result = check client->listPaymentInformationDetailV3SURs();
+ListPaymentInformationDetailV3SURsResponse result = check client->listPaymentInformationDetailV3SURs();
 ```
 
 **Sample response:**
@@ -6986,12 +6986,12 @@ Queries the PaymentInformationDetailV3PRY collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3PRYsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_40&#124;error`
+**Returns:** `ListPaymentInformationDetailV3PRYsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_40 result = check client->listPaymentInformationDetailV3PRYs();
+ListPaymentInformationDetailV3PRYsResponse result = check client->listPaymentInformationDetailV3PRYs();
 ```
 
 **Sample response:**
@@ -7156,12 +7156,12 @@ Queries the PaymentInformationDetailV3BOL collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPaymentInformationDetailV3BOLsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_41&#124;error`
+**Returns:** `ListPaymentInformationDetailV3BOLsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_41 result = check client->listPaymentInformationDetailV3BOLs();
+ListPaymentInformationDetailV3BOLsResponse result = check client->listPaymentInformationDetailV3BOLs();
 ```
 
 **Sample response:**

@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecadvancesClient** appears in the *
 
 3. Select **List Advances Installmentss**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned advances installment records — leave the default value, `ecadvancesWrapper`.
+- **Result** : Name of the variable that stores the returned advances installment records.
 
 ![SAP SuccessFactors Employee Central Advances List Advances Installmentss operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecadvances/ballerinax_sap_successfactors_ecadvances_screenshot_05_operation_form.png)
 

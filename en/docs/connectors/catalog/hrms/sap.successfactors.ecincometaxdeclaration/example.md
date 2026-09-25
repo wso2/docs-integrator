@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecincometaxdeclarationClient** appe
 
 3. Select **List Declaration Types**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned DeclarationType records — leave the default value, `ecincometaxdeclarationWrapper`.
+- **Result** : Name of the variable that stores the returned DeclarationType records.
 
 ![SAP SuccessFactors Employee Central Income Tax Declaration List Declaration Types operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecincometaxdeclaration/ballerinax_sap_successfactors_ecincometaxdeclaration_screenshot_05_operation_form.png)
 

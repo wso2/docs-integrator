@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecpositionmanagementClient** appear
 
 3. Select **List Position Requisition Statuses**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned PositionRequisitionStatus records — leave the default value, `ecpositionmanagementWrapper`.
+- **Result** : Name of the variable that stores the returned PositionRequisitionStatus records.
 
 ![SAP SuccessFactors Employee Central Position Management List Position Requisition Statuses operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecpositionmanagement/ballerinax_sap_successfactors_ecpositionmanagement_screenshot_05_operation_form.png)
 

@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecapprenticemanagementClient** appe
 
 3. Select **List Apprentice Event Types**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned ApprenticeEventType records — leave the default value, `ecapprenticemanagementWrapper`.
+- **Result** : Name of the variable that stores the returned ApprenticeEventType records.
 
 ![SAP SuccessFactors Employee Central Apprentice Management List Apprentice Event Types operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecapprenticemanagement/ballerinax_sap_successfactors_ecapprenticemanagement_screenshot_05_operation_form.png)
 

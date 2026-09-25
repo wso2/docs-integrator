@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **eccompensationinformationClient** a
 
 3. Select **List One Time Deductions**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned OneTimeDeduction records — leave the default value, `eccompensationinformationWrapper`.
+- **Result** : Name of the variable that stores the returned OneTimeDeduction records.
 
 ![SAP SuccessFactors Employee Central Compensation Information List One Time Deductions operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.eccompensationinformation/ballerinax_sap_successfactors_eccompensationinformation_screenshot_05_operation_form.png)
 

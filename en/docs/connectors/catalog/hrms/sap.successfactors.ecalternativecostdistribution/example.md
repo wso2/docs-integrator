@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecalternativecostdistributionClient
 
 3. Select **List Emp Cost Distributions**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned cost distribution records — leave the default value, `ecalternativecostdistributionWrapper`.
+- **Result** : Name of the variable that stores the returned cost distribution records.
 
 ![SAP SuccessFactors Employee Central Alternative Cost Distribution List Emp Cost Distributions operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecalternativecostdistribution/ballerinax_sap_successfactors_ecalternativecostdistribution_screenshot_05_operation_form.png)
 

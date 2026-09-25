@@ -84,12 +84,12 @@ Queries the EmployeeTimeSheet collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeTimeSheetsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListEmployeeTimeSheetsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listEmployeeTimeSheets();
+ListEmployeeTimeSheetsResponse result = check client->listEmployeeTimeSheets();
 ```
 
 **Sample response:**
@@ -177,12 +177,12 @@ Queries the ExternalAllowance collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListExternalAllowancesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListExternalAllowancesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listExternalAllowances();
+ListExternalAllowancesResponse result = check client->listExternalAllowances();
 ```
 
 **Sample response:**
@@ -340,12 +340,12 @@ Queries the TimeCollector collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeCollectorsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListTimeCollectorsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listTimeCollectors();
+ListTimeCollectorsResponse result = check client->listTimeCollectors();
 ```
 
 **Sample response:**
@@ -417,12 +417,12 @@ Queries the ExternalTimeRecord collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListExternalTimeRecordsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListExternalTimeRecordsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listExternalTimeRecords();
+ListExternalTimeRecordsResponse result = check client->listExternalTimeRecords();
 ```
 
 **Sample response:**
@@ -587,12 +587,12 @@ Queries the ExternalTimeData collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListExternalTimeDataQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListExternalTimeDataResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listExternalTimeData();
+ListExternalTimeDataResponse result = check client->listExternalTimeData();
 ```
 
 **Sample response:**
@@ -750,12 +750,12 @@ Queries the DataReplicationProxy collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListDataReplicationProxiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListDataReplicationProxiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listDataReplicationProxies();
+ListDataReplicationProxiesResponse result = check client->listDataReplicationProxies();
 ```
 
 **Sample response:**
@@ -832,12 +832,12 @@ Queries the EmployeeTimeSheetEntry collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeTimeSheetEntriesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_6&#124;error`
+**Returns:** `ListEmployeeTimeSheetEntriesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_6 result = check client->listEmployeeTimeSheetEntries();
+ListEmployeeTimeSheetEntriesResponse result = check client->listEmployeeTimeSheetEntries();
 ```
 
 **Sample response:**
@@ -912,12 +912,12 @@ Queries the EmployeeTimeValuationResult collection and returns a page of entitie
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeTimeValuationResultsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_7&#124;error`
+**Returns:** `ListEmployeeTimeValuationResultsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_7 result = check client->listEmployeeTimeValuationResults();
+ListEmployeeTimeValuationResultsResponse result = check client->listEmployeeTimeValuationResults();
 ```
 
 **Sample response:**
@@ -992,12 +992,12 @@ Queries the AllowanceRecording collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAllowanceRecordingsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_8&#124;error`
+**Returns:** `ListAllowanceRecordingsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_8 result = check client->listAllowanceRecordings();
+ListAllowanceRecordingsResponse result = check client->listAllowanceRecordings();
 ```
 
 **Sample response:**
@@ -1069,12 +1069,12 @@ Queries the AvailableAllowanceType collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAvailableAllowanceTypesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_9&#124;error`
+**Returns:** `ListAvailableAllowanceTypesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_9 result = check client->listAvailableAllowanceTypes();
+ListAvailableAllowanceTypesResponse result = check client->listAvailableAllowanceTypes();
 ```
 
 **Sample response:**
@@ -1152,12 +1152,12 @@ Queries the ExternalTimeSegment collection and returns a page of entities, optio
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListExternalTimeSegmentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_10&#124;error`
+**Returns:** `ListExternalTimeSegmentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_10 result = check client->listExternalTimeSegments();
+ListExternalTimeSegmentsResponse result = check client->listExternalTimeSegments();
 ```
 
 **Sample response:**
@@ -1321,12 +1321,12 @@ Queries the TimeRecording collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTimeRecordingsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_11&#124;error`
+**Returns:** `ListTimeRecordingsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_11 result = check client->listTimeRecordings();
+ListTimeRecordingsResponse result = check client->listTimeRecordings();
 ```
 
 **Sample response:**
@@ -1398,12 +1398,12 @@ Queries the Allowance collection and returns a page of entities, optionally filt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListAllowancesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_12&#124;error`
+**Returns:** `ListAllowancesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_12 result = check client->listAllowances();
+ListAllowancesResponse result = check client->listAllowances();
 ```
 
 **Sample response:**

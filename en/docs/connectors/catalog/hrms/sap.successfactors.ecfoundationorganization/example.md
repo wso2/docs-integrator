@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecfoundationorganizationClient** ap
 
 3. Select **List Fo Legal Entity Local Us As**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned FOLegalEntityLocalUSA records — leave the default value, `ecfoundationorganizationWrapper`.
+- **Result** : Name of the variable that stores the returned FOLegalEntityLocalUSA records.
 
 ![SAP SuccessFactors Employee Central Foundation Organization List Fo Legal Entity Local Us As operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecfoundationorganization/ballerinax_sap_successfactors_ecfoundationorganization_screenshot_05_operation_form.png)
 

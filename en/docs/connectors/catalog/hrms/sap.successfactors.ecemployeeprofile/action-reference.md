@@ -84,12 +84,12 @@ Queries the Background_Community collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundCommunitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListBackgroundCommunitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listBackgroundCommunities();
+ListBackgroundCommunitiesResponse result = check client->listBackgroundCommunities();
 ```
 
 **Sample response:**
@@ -262,12 +262,12 @@ Queries the Background_Courses collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundCoursessQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListBackgroundCoursessResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listBackgroundCoursess();
+ListBackgroundCoursessResponse result = check client->listBackgroundCoursess();
 ```
 
 **Sample response:**
@@ -446,12 +446,12 @@ Queries the Background_Benefitselection collection and returns a page of entitie
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundBenefitselectionsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListBackgroundBenefitselectionsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listBackgroundBenefitselections();
+ListBackgroundBenefitselectionsResponse result = check client->listBackgroundBenefitselections();
 ```
 
 **Sample response:**
@@ -651,12 +651,12 @@ Queries the Background_OutsideWorkExperience collection and returns a page of en
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundOutsideWorkExperiencesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListBackgroundOutsideWorkExperiencesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listBackgroundOutsideWorkExperiences();
+ListBackgroundOutsideWorkExperiencesResponse result = check client->listBackgroundOutsideWorkExperiences();
 ```
 
 **Sample response:**
@@ -841,12 +841,12 @@ Queries the Background_Promotability collection and returns a page of entities, 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundPromotabilitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListBackgroundPromotabilitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listBackgroundPromotabilities();
+ListBackgroundPromotabilitiesResponse result = check client->listBackgroundPromotabilities();
 ```
 
 **Sample response:**
@@ -1022,12 +1022,12 @@ Queries the Background_Fsaelection collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundFsaelectionsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListBackgroundFsaelectionsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listBackgroundFsaelections();
+ListBackgroundFsaelectionsResponse result = check client->listBackgroundFsaelections();
 ```
 
 **Sample response:**
@@ -1197,12 +1197,12 @@ Queries the Background_Compensation collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundCompensationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_6&#124;error`
+**Returns:** `ListBackgroundCompensationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_6 result = check client->listBackgroundCompensations();
+ListBackgroundCompensationsResponse result = check client->listBackgroundCompensations();
 ```
 
 **Sample response:**
@@ -1372,12 +1372,12 @@ Queries the Background_Memberships collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundMembershipssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_7&#124;error`
+**Returns:** `ListBackgroundMembershipssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_7 result = check client->listBackgroundMembershipss();
+ListBackgroundMembershipssResponse result = check client->listBackgroundMembershipss();
 ```
 
 **Sample response:**
@@ -1550,12 +1550,12 @@ Queries the Background_Documents collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundDocumentssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_8&#124;error`
+**Returns:** `ListBackgroundDocumentssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_8 result = check client->listBackgroundDocumentss();
+ListBackgroundDocumentssResponse result = check client->listBackgroundDocumentss();
 ```
 
 **Sample response:**
@@ -1728,12 +1728,12 @@ Queries the Background_FuncExperience collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundFuncExperiencesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_9&#124;error`
+**Returns:** `ListBackgroundFuncExperiencesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_9 result = check client->listBackgroundFuncExperiences();
+ListBackgroundFuncExperiencesResponse result = check client->listBackgroundFuncExperiences();
 ```
 
 **Sample response:**
@@ -1909,12 +1909,12 @@ Queries the Background_TalentPool collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundTalentPoolsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_10&#124;error`
+**Returns:** `ListBackgroundTalentPoolsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_10 result = check client->listBackgroundTalentPools();
+ListBackgroundTalentPoolsResponse result = check client->listBackgroundTalentPools();
 ```
 
 **Sample response:**
@@ -2087,12 +2087,12 @@ Queries the UserBadges collection and returns a page of entities, optionally fil
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListUserBadgessQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_11&#124;error`
+**Returns:** `ListUserBadgessResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_11 result = check client->listUserBadgess();
+ListUserBadgessResponse result = check client->listUserBadgess();
 ```
 
 **Sample response:**
@@ -2229,12 +2229,12 @@ Queries the Background_Googledocs collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundGoogledocssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_12&#124;error`
+**Returns:** `ListBackgroundGoogledocssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_12 result = check client->listBackgroundGoogledocss();
+ListBackgroundGoogledocssResponse result = check client->listBackgroundGoogledocss();
 ```
 
 **Sample response:**
@@ -2407,12 +2407,12 @@ Queries the Background_Awards collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundAwardssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_13&#124;error`
+**Returns:** `ListBackgroundAwardssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_13 result = check client->listBackgroundAwardss();
+ListBackgroundAwardssResponse result = check client->listBackgroundAwardss();
 ```
 
 **Sample response:**
@@ -2585,12 +2585,12 @@ Queries the Background_Education collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundEducationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_14&#124;error`
+**Returns:** `ListBackgroundEducationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_14 result = check client->listBackgroundEducations();
+ListBackgroundEducationsResponse result = check client->listBackgroundEducations();
 ```
 
 **Sample response:**
@@ -2760,12 +2760,12 @@ Queries the Background_Mobility collection and returns a page of entities, optio
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundMobilitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_15&#124;error`
+**Returns:** `ListBackgroundMobilitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_15 result = check client->listBackgroundMobilities();
+ListBackgroundMobilitiesResponse result = check client->listBackgroundMobilities();
 ```
 
 **Sample response:**
@@ -2938,12 +2938,12 @@ Queries the Background_VarPayEmpHistData collection and returns a page of entiti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundVarPayEmpHistDataQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_16&#124;error`
+**Returns:** `ListBackgroundVarPayEmpHistDataResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_16 result = check client->listBackgroundVarPayEmpHistData();
+ListBackgroundVarPayEmpHistDataResponse result = check client->listBackgroundVarPayEmpHistData();
 ```
 
 **Sample response:**
@@ -3116,12 +3116,12 @@ Queries the Background_InsideWorkExperience collection and returns a page of ent
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundInsideWorkExperiencesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_17&#124;error`
+**Returns:** `ListBackgroundInsideWorkExperiencesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_17 result = check client->listBackgroundInsideWorkExperiences();
+ListBackgroundInsideWorkExperiencesResponse result = check client->listBackgroundInsideWorkExperiences();
 ```
 
 **Sample response:**
@@ -3291,12 +3291,12 @@ Queries the Background_PreferredNextMove collection and returns a page of entiti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundPreferredNextMovesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_18&#124;error`
+**Returns:** `ListBackgroundPreferredNextMovesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_18 result = check client->listBackgroundPreferredNextMoves();
+ListBackgroundPreferredNextMovesResponse result = check client->listBackgroundPreferredNextMoves();
 ```
 
 **Sample response:**
@@ -3469,12 +3469,12 @@ Queries the BadgeTemplates collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBadgeTemplatessQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_19&#124;error`
+**Returns:** `ListBadgeTemplatessResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_19 result = check client->listBadgeTemplatess();
+ListBadgeTemplatessResponse result = check client->listBadgeTemplatess();
 ```
 
 **Sample response:**
@@ -3546,12 +3546,12 @@ Queries the EPPublicProfile collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEPPublicProfilesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_20&#124;error`
+**Returns:** `ListEPPublicProfilesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_20 result = check client->listEPPublicProfiles();
+ListEPPublicProfilesResponse result = check client->listEPPublicProfiles();
 ```
 
 **Sample response:**
@@ -3709,12 +3709,12 @@ Queries the Background_Languages collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundLanguagessQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_21&#124;error`
+**Returns:** `ListBackgroundLanguagessResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_21 result = check client->listBackgroundLanguagess();
+ListBackgroundLanguagessResponse result = check client->listBackgroundLanguagess();
 ```
 
 **Sample response:**
@@ -3884,12 +3884,12 @@ Queries the Background_SysScoreCardDevelopmentObjectivesPortlet collection and r
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundSysScoreCardDevelopmentObjectivesPortletsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_22&#124;error`
+**Returns:** `ListBackgroundSysScoreCardDevelopmentObjectivesPortletsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_22 result = check client->listBackgroundSysScoreCardDevelopmentObjectivesPortlets();
+ListBackgroundSysScoreCardDevelopmentObjectivesPortletsResponse result = check client->listBackgroundSysScoreCardDevelopmentObjectivesPortlets();
 ```
 
 **Sample response:**
@@ -4059,12 +4059,12 @@ Queries the Background_TalentPoolcorp collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundTalentPoolcorpsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_23&#124;error`
+**Returns:** `ListBackgroundTalentPoolcorpsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_23 result = check client->listBackgroundTalentPoolcorps();
+ListBackgroundTalentPoolcorpsResponse result = check client->listBackgroundTalentPoolcorps();
 ```
 
 **Sample response:**
@@ -4237,12 +4237,12 @@ Queries the EPCustomBackgroundPortlet collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEPCustomBackgroundPortletsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_24&#124;error`
+**Returns:** `ListEPCustomBackgroundPortletsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_24 result = check client->listEPCustomBackgroundPortlets();
+ListEPCustomBackgroundPortletsResponse result = check client->listEPCustomBackgroundPortlets();
 ```
 
 **Sample response:**
@@ -4316,12 +4316,12 @@ Queries the Background_SpecialAssign collection and returns a page of entities, 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundSpecialAssignsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_25&#124;error`
+**Returns:** `ListBackgroundSpecialAssignsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_25 result = check client->listBackgroundSpecialAssigns();
+ListBackgroundSpecialAssignsResponse result = check client->listBackgroundSpecialAssigns();
 ```
 
 **Sample response:**
@@ -4497,12 +4497,12 @@ Queries the Background_Certificates collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundCertificatessQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_26&#124;error`
+**Returns:** `ListBackgroundCertificatessResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_26 result = check client->listBackgroundCertificatess();
+ListBackgroundCertificatessResponse result = check client->listBackgroundCertificatess();
 ```
 
 **Sample response:**
@@ -4675,12 +4675,12 @@ Queries the Background_VarPayEmpHistDataECSource collection and returns a page o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundVarPayEmpHistDataECSourcesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_27&#124;error`
+**Returns:** `ListBackgroundVarPayEmpHistDataECSourcesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_27 result = check client->listBackgroundVarPayEmpHistDataECSources();
+ListBackgroundVarPayEmpHistDataECSourcesResponse result = check client->listBackgroundVarPayEmpHistDataECSources();
 ```
 
 **Sample response:**
@@ -4853,12 +4853,12 @@ Queries the Background_LeadExperience collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBackgroundLeadExperiencesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_28&#124;error`
+**Returns:** `ListBackgroundLeadExperiencesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_28 result = check client->listBackgroundLeadExperiences();
+ListBackgroundLeadExperiencesResponse result = check client->listBackgroundLeadExperiences();
 ```
 
 **Sample response:**
@@ -5034,12 +5034,12 @@ Queries the TrendData_SysOverallObjective collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTrendDataSysOverallObjectivesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_29&#124;error`
+**Returns:** `ListTrendDataSysOverallObjectivesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_29 result = check client->listTrendDataSysOverallObjectives();
+ListTrendDataSysOverallObjectivesResponse result = check client->listTrendDataSysOverallObjectives();
 ```
 
 **Sample response:**
@@ -5206,12 +5206,12 @@ Queries the TrendData_SysOverallCompetency collection and returns a page of enti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTrendDataSysOverallCompetenciesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_30&#124;error`
+**Returns:** `ListTrendDataSysOverallCompetenciesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_30 result = check client->listTrendDataSysOverallCompetencies();
+ListTrendDataSysOverallCompetenciesResponse result = check client->listTrendDataSysOverallCompetencies();
 ```
 
 **Sample response:**
@@ -5378,12 +5378,12 @@ Queries the TrendData_SysOverallPotential collection and returns a page of entit
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTrendDataSysOverallPotentialsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_31&#124;error`
+**Returns:** `ListTrendDataSysOverallPotentialsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_31 result = check client->listTrendDataSysOverallPotentials();
+ListTrendDataSysOverallPotentialsResponse result = check client->listTrendDataSysOverallPotentials();
 ```
 
 **Sample response:**
@@ -5550,12 +5550,12 @@ Queries the TrendData_SysOverallPerformance collection and returns a page of ent
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTrendDataSysOverallPerformancesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_32&#124;error`
+**Returns:** `ListTrendDataSysOverallPerformancesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_32 result = check client->listTrendDataSysOverallPerformances();
+ListTrendDataSysOverallPerformancesResponse result = check client->listTrendDataSysOverallPerformances();
 ```
 
 **Sample response:**
@@ -5722,12 +5722,12 @@ Queries the TrendData_SysOverallCustom1 collection and returns a page of entitie
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTrendDataSysOverallCustom1sQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_33&#124;error`
+**Returns:** `ListTrendDataSysOverallCustom1sResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_33 result = check client->listTrendDataSysOverallCustom1s();
+ListTrendDataSysOverallCustom1sResponse result = check client->listTrendDataSysOverallCustom1s();
 ```
 
 **Sample response:**
@@ -5894,12 +5894,12 @@ Queries the TrendData_SysOverallCustom2 collection and returns a page of entitie
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTrendDataSysOverallCustom2sQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_34&#124;error`
+**Returns:** `ListTrendDataSysOverallCustom2sResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_34 result = check client->listTrendDataSysOverallCustom2s();
+ListTrendDataSysOverallCustom2sResponse result = check client->listTrendDataSysOverallCustom2s();
 ```
 
 **Sample response:**

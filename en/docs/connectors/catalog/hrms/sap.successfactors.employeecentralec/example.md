@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **employeecentralecClient** appears i
 
 3. Select **List Per Global Info Ar Es**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned PerGlobalInfoARE records — leave the default value, `employeecentralecWrapper`.
+- **Result** : Name of the variable that stores the returned PerGlobalInfoARE records.
 
 ![SAP SuccessFactors Employee Central List Per Global Info Ar Es operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.employeecentralec/ballerinax_sap_successfactors_employeecentralec_screenshot_05_operation_form.png)
 

@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecskillsmanagementClient** appears 
 
 3. Select **List Certification Contents**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned CertificationContent records — leave the default value, `ecskillsmanagementWrapper`.
+- **Result** : Name of the variable that stores the returned CertificationContent records.
 
 ![SAP SuccessFactors Employee Central Skills Management List Certification Contents operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecskillsmanagement/ballerinax_sap_successfactors_ecskillsmanagement_screenshot_05_operation_form.png)
 

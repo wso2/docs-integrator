@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecpersonalinformationClient** appea
 
 3. Select **List Per Emergency Contactss**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned PerEmergencyContacts records — leave the default value, `ecpersonalinformationWrapper`.
+- **Result** : Name of the variable that stores the returned PerEmergencyContacts records.
 
 ![SAP SuccessFactors Employee Central Personal Information List Per Emergency Contactss operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecpersonalinformation/ballerinax_sap_successfactors_ecpersonalinformation_screenshot_05_operation_form.png)
 

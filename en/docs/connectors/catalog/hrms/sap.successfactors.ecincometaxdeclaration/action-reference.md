@@ -84,12 +84,12 @@ Queries the DeclarationType collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListDeclarationTypesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListDeclarationTypesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listDeclarationTypes();
+ListDeclarationTypesResponse result = check client->listDeclarationTypes();
 ```
 
 **Sample response:**
@@ -159,12 +159,12 @@ Queries the FiscalYearVariant collection and returns a page of entities, optiona
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFiscalYearVariantsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListFiscalYearVariantsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listFiscalYearVariants();
+ListFiscalYearVariantsResponse result = check client->listFiscalYearVariants();
 ```
 
 **Sample response:**
@@ -234,12 +234,12 @@ Queries the FiscalYearToCountryMap collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFiscalYearToCountryMapsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListFiscalYearToCountryMapsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listFiscalYearToCountryMaps();
+ListFiscalYearToCountryMapsResponse result = check client->listFiscalYearToCountryMaps();
 ```
 
 **Sample response:**
@@ -309,12 +309,12 @@ Queries the ItDeclarationTimeBound collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListItDeclarationTimeBoundsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListItDeclarationTimeBoundsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listItDeclarationTimeBounds();
+ListItDeclarationTimeBoundsResponse result = check client->listItDeclarationTimeBounds();
 ```
 
 **Sample response:**
@@ -384,12 +384,12 @@ Queries the ItDeclInvestmentType collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListItDeclInvestmentTypesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListItDeclInvestmentTypesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listItDeclInvestmentTypes();
+ListItDeclInvestmentTypesResponse result = check client->listItDeclInvestmentTypes();
 ```
 
 **Sample response:**
@@ -466,12 +466,12 @@ Queries the ItDeclaration collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListItDeclarationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListItDeclarationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listItDeclarations();
+ListItDeclarationsResponse result = check client->listItDeclarations();
 ```
 
 **Sample response:**

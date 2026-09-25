@@ -84,12 +84,12 @@ Queries the PerGlobalInfoARE collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoAREsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListPerGlobalInfoAREsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listPerGlobalInfoAREs();
+ListPerGlobalInfoAREsResponse result = check client->listPerGlobalInfoAREs();
 ```
 
 **Sample response:**
@@ -167,12 +167,12 @@ Queries the PerGlobalInfoCHN collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoCHNsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListPerGlobalInfoCHNsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listPerGlobalInfoCHNs();
+ListPerGlobalInfoCHNsResponse result = check client->listPerGlobalInfoCHNs();
 ```
 
 **Sample response:**
@@ -250,12 +250,12 @@ Queries the PerGlobalInfoFIN collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoFINsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListPerGlobalInfoFINsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listPerGlobalInfoFINs();
+ListPerGlobalInfoFINsResponse result = check client->listPerGlobalInfoFINs();
 ```
 
 **Sample response:**
@@ -333,12 +333,12 @@ Queries the EducationDegreeContent collection and returns a page of entities, op
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEducationDegreeContentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListEducationDegreeContentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listEducationDegreeContents();
+ListEducationDegreeContentsResponse result = check client->listEducationDegreeContents();
 ```
 
 **Sample response:**
@@ -509,12 +509,12 @@ Queries the CurrencyExchangeRate collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListCurrencyExchangeRatesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListCurrencyExchangeRatesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listCurrencyExchangeRates();
+ListCurrencyExchangeRatesResponse result = check client->listCurrencyExchangeRates();
 ```
 
 **Sample response:**
@@ -678,12 +678,12 @@ Queries the NonRecurringPayment collection and returns a page of entities, optio
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListNonRecurringPaymentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListNonRecurringPaymentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listNonRecurringPayments();
+ListNonRecurringPaymentsResponse result = check client->listNonRecurringPayments();
 ```
 
 **Sample response:**
@@ -755,12 +755,12 @@ Queries the EducationDegreeEntity collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEducationDegreeEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_6&#124;error`
+**Returns:** `ListEducationDegreeEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_6 result = check client->listEducationDegreeEntities();
+ListEducationDegreeEntitiesResponse result = check client->listEducationDegreeEntities();
 ```
 
 **Sample response:**
@@ -918,12 +918,12 @@ Queries the ServiceDeskContactSupportInformation collection and returns a page o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListServiceDeskContactSupportInformationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_7&#124;error`
+**Returns:** `ListServiceDeskContactSupportInformationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_7 result = check client->listServiceDeskContactSupportInformations();
+ListServiceDeskContactSupportInformationsResponse result = check client->listServiceDeskContactSupportInformations();
 ```
 
 **Sample response:**
@@ -1088,12 +1088,12 @@ Queries the PerGlobalInfoBRA collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoBRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_8&#124;error`
+**Returns:** `ListPerGlobalInfoBRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_8 result = check client->listPerGlobalInfoBRAs();
+ListPerGlobalInfoBRAsResponse result = check client->listPerGlobalInfoBRAs();
 ```
 
 **Sample response:**
@@ -1171,12 +1171,12 @@ Queries the PerGlobalInfoCHE collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoCHEsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_9&#124;error`
+**Returns:** `ListPerGlobalInfoCHEsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_9 result = check client->listPerGlobalInfoCHEs();
+ListPerGlobalInfoCHEsResponse result = check client->listPerGlobalInfoCHEs();
 ```
 
 **Sample response:**
@@ -1254,12 +1254,12 @@ Queries the PerGlobalInfoGBR collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoGBRsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_10&#124;error`
+**Returns:** `ListPerGlobalInfoGBRsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_10 result = check client->listPerGlobalInfoGBRs();
+ListPerGlobalInfoGBRsResponse result = check client->listPerGlobalInfoGBRs();
 ```
 
 **Sample response:**
@@ -1337,12 +1337,12 @@ Queries the PerGlobalInfoAUS collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoAUSsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_11&#124;error`
+**Returns:** `ListPerGlobalInfoAUSsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_11 result = check client->listPerGlobalInfoAUSs();
+ListPerGlobalInfoAUSsResponse result = check client->listPerGlobalInfoAUSs();
 ```
 
 **Sample response:**
@@ -1420,12 +1420,12 @@ Queries the PerGlobalInfoESP collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoESPsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_12&#124;error`
+**Returns:** `ListPerGlobalInfoESPsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_12 result = check client->listPerGlobalInfoESPs();
+ListPerGlobalInfoESPsResponse result = check client->listPerGlobalInfoESPs();
 ```
 
 **Sample response:**
@@ -1503,12 +1503,12 @@ Queries the EducationMajorEntity collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEducationMajorEntitiesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_13&#124;error`
+**Returns:** `ListEducationMajorEntitiesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_13 result = check client->listEducationMajorEntities();
+ListEducationMajorEntitiesResponse result = check client->listEducationMajorEntities();
 ```
 
 **Sample response:**
@@ -1666,12 +1666,12 @@ Queries the PerGlobalInfoCAN collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoCANsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_14&#124;error`
+**Returns:** `ListPerGlobalInfoCANsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_14 result = check client->listPerGlobalInfoCANs();
+ListPerGlobalInfoCANsResponse result = check client->listPerGlobalInfoCANs();
 ```
 
 **Sample response:**
@@ -1749,12 +1749,12 @@ Queries the PerGlobalInfoUSA collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoUSAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_15&#124;error`
+**Returns:** `ListPerGlobalInfoUSAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_15 result = check client->listPerGlobalInfoUSAs();
+ListPerGlobalInfoUSAsResponse result = check client->listPerGlobalInfoUSAs();
 ```
 
 **Sample response:**
@@ -1832,12 +1832,12 @@ Queries the ServiceDeskCountrySupportInformation collection and returns a page o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListServiceDeskCountrySupportInformationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_16&#124;error`
+**Returns:** `ListServiceDeskCountrySupportInformationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_16 result = check client->listServiceDeskCountrySupportInformations();
+ListServiceDeskCountrySupportInformationsResponse result = check client->listServiceDeskCountrySupportInformations();
 ```
 
 **Sample response:**
@@ -2001,12 +2001,12 @@ Queries the EducationMajorContent collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEducationMajorContentsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_17&#124;error`
+**Returns:** `ListEducationMajorContentsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_17 result = check client->listEducationMajorContents();
+ListEducationMajorContentsResponse result = check client->listEducationMajorContents();
 ```
 
 **Sample response:**
@@ -2184,12 +2184,12 @@ Queries the PerGlobalInfoFRA collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoFRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_18&#124;error`
+**Returns:** `ListPerGlobalInfoFRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_18 result = check client->listPerGlobalInfoFRAs();
+ListPerGlobalInfoFRAsResponse result = check client->listPerGlobalInfoFRAs();
 ```
 
 **Sample response:**
@@ -2267,12 +2267,12 @@ Queries the PerGlobalInfoDEU collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoDEUsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_19&#124;error`
+**Returns:** `ListPerGlobalInfoDEUsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_19 result = check client->listPerGlobalInfoDEUs();
+ListPerGlobalInfoDEUsResponse result = check client->listPerGlobalInfoDEUs();
 ```
 
 **Sample response:**
@@ -2350,12 +2350,12 @@ Queries the PerGlobalInfoDNK collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoDNKsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_20&#124;error`
+**Returns:** `ListPerGlobalInfoDNKsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_20 result = check client->listPerGlobalInfoDNKs();
+ListPerGlobalInfoDNKsResponse result = check client->listPerGlobalInfoDNKs();
 ```
 
 **Sample response:**
@@ -2433,12 +2433,12 @@ Queries the PerGlobalInfoITA collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoITAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_21&#124;error`
+**Returns:** `ListPerGlobalInfoITAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_21 result = check client->listPerGlobalInfoITAs();
+ListPerGlobalInfoITAsResponse result = check client->listPerGlobalInfoITAs();
 ```
 
 **Sample response:**
@@ -2516,12 +2516,12 @@ Queries the PerGlobalInfoNLD collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoNLDsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_22&#124;error`
+**Returns:** `ListPerGlobalInfoNLDsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_22 result = check client->listPerGlobalInfoNLDs();
+ListPerGlobalInfoNLDsResponse result = check client->listPerGlobalInfoNLDs();
 ```
 
 **Sample response:**
@@ -2599,12 +2599,12 @@ Queries the PerGlobalInfoPRT collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoPRTsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_23&#124;error`
+**Returns:** `ListPerGlobalInfoPRTsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_23 result = check client->listPerGlobalInfoPRTs();
+ListPerGlobalInfoPRTsResponse result = check client->listPerGlobalInfoPRTs();
 ```
 
 **Sample response:**
@@ -2682,12 +2682,12 @@ Queries the PerGlobalInfoQAT collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoQATsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_24&#124;error`
+**Returns:** `ListPerGlobalInfoQATsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_24 result = check client->listPerGlobalInfoQATs();
+ListPerGlobalInfoQATsResponse result = check client->listPerGlobalInfoQATs();
 ```
 
 **Sample response:**
@@ -2765,12 +2765,12 @@ Queries the PerGlobalInfoSAU collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoSAUsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_25&#124;error`
+**Returns:** `ListPerGlobalInfoSAUsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_25 result = check client->listPerGlobalInfoSAUs();
+ListPerGlobalInfoSAUsResponse result = check client->listPerGlobalInfoSAUs();
 ```
 
 **Sample response:**
@@ -2848,12 +2848,12 @@ Queries the PerGlobalInfoZAF collection and returns a page of entities, optional
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPerGlobalInfoZAFsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_26&#124;error`
+**Returns:** `ListPerGlobalInfoZAFsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_26 result = check client->listPerGlobalInfoZAFs();
+ListPerGlobalInfoZAFsResponse result = check client->listPerGlobalInfoZAFs();
 ```
 
 **Sample response:**

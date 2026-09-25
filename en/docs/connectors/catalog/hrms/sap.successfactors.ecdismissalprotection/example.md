@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecdismissalprotectionClient** appea
 
 3. Select **List Employee Dismissal Protection Details**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned EmployeeDismissalProtectionDetail records — leave the default value, `ecdismissalprotectionWrapper`.
+- **Result** : Name of the variable that stores the returned EmployeeDismissalProtectionDetail records.
 
 ![SAP SuccessFactors Employee Central Dismissal Protection List Employee Dismissal Protection Details operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecdismissalprotection/ballerinax_sap_successfactors_ecdismissalprotection_screenshot_05_operation_form.png)
 

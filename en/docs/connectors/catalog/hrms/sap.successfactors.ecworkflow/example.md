@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecworkflowClient** appears in the *
 
 3. Select **List My Pending Workflows**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned MyPendingWorkflow records — leave the default value, `ecworkflowWrapper`.
+- **Result** : Name of the variable that stores the returned MyPendingWorkflow records.
 
 ![SAP SuccessFactors Employee Central Workflow List My Pending Workflows operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecworkflow/ballerinax_sap_successfactors_ecworkflow_screenshot_05_operation_form.png)
 

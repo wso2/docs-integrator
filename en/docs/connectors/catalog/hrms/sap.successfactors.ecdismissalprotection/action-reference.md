@@ -84,12 +84,12 @@ Queries the EmployeeDismissalProtectionDetail collection and returns a page of e
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeDismissalProtectionDetailsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListEmployeeDismissalProtectionDetailsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listEmployeeDismissalProtectionDetails();
+ListEmployeeDismissalProtectionDetailsResponse result = check client->listEmployeeDismissalProtectionDetails();
 ```
 
 **Sample response:**
@@ -253,12 +253,12 @@ Queries the EmployeeDismissalProtection collection and returns a page of entitie
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListEmployeeDismissalProtectionsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListEmployeeDismissalProtectionsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listEmployeeDismissalProtections();
+ListEmployeeDismissalProtectionsResponse result = check client->listEmployeeDismissalProtections();
 ```
 
 **Sample response:**

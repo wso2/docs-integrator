@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecpayrolltimesheetsClient** appears
 
 3. Select **List Employee Time Sheets**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned EmployeeTimeSheet records — leave the default value, `ecpayrolltimesheetsWrapper`.
+- **Result** : Name of the variable that stores the returned EmployeeTimeSheet records.
 
 ![SAP SuccessFactors Employee Central Payroll Time Sheets List Employee Time Sheets operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecpayrolltimesheets/ballerinax_sap_successfactors_ecpayrolltimesheets_screenshot_05_operation_form.png)
 

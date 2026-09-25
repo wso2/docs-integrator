@@ -84,12 +84,12 @@ Queries the PositionRequisitionStatus collection and returns a page of entities,
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPositionRequisitionStatusesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListPositionRequisitionStatusesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listPositionRequisitionStatuses();
+ListPositionRequisitionStatusesResponse result = check client->listPositionRequisitionStatuses();
 ```
 
 **Sample response:**
@@ -247,12 +247,12 @@ Queries the PositionMatrixRelationship collection and returns a page of entities
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPositionMatrixRelationshipsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_1&#124;error`
+**Returns:** `ListPositionMatrixRelationshipsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_1 result = check client->listPositionMatrixRelationships();
+ListPositionMatrixRelationshipsResponse result = check client->listPositionMatrixRelationships();
 ```
 
 **Sample response:**
@@ -429,12 +429,12 @@ Queries the Position collection and returns a page of entities, optionally filte
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPositionsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListPositionsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listPositions();
+ListPositionsResponse result = check client->listPositions();
 ```
 
 **Sample response:**
@@ -645,12 +645,12 @@ Queries the PositionRightToReturn collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPositionRightToReturnsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListPositionRightToReturnsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listPositionRightToReturns();
+ListPositionRightToReturnsResponse result = check client->listPositionRightToReturns();
 ```
 
 **Sample response:**

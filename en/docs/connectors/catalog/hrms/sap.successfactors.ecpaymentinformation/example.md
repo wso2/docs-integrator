@@ -82,7 +82,7 @@ Select **Save Connection** and verify that **ecpaymentinformationClient** appear
 
 3. Select **List Payment Information Detail V3ke Ns**. The operation has no required parameters, so review the auto-generated result variable.
 
-- **Result** : Name of the variable that stores the returned PaymentInformationDetailV3KEN records — leave the default value, `ecpaymentinformationWrapper`.
+- **Result** : Name of the variable that stores the returned PaymentInformationDetailV3KEN records.
 
 ![SAP SuccessFactors Employee Central Payment Information List Payment Information Detail V3ke Ns operation with all values entered before saving](/img/connectors/catalog/hrms/sap.successfactors.ecpaymentinformation/ballerinax_sap_successfactors_ecpaymentinformation_screenshot_05_operation_form.png)
 

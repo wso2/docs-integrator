@@ -84,12 +84,12 @@ Queries the FOLegalEntityLocalUSA collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOLegalEntityLocalUSAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper&#124;error`
+**Returns:** `ListFOLegalEntityLocalUSAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper result = check client->listFOLegalEntityLocalUSAs();
+ListFOLegalEntityLocalUSAsResponse result = check client->listFOLegalEntityLocalUSAs();
 ```
 
 **Sample response:**
@@ -249,12 +249,12 @@ Queries the FOJobClassLocalCAN collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOJobClassLocalCANsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_2&#124;error`
+**Returns:** `ListFOJobClassLocalCANsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_2 result = check client->listFOJobClassLocalCANs();
+ListFOJobClassLocalCANsResponse result = check client->listFOJobClassLocalCANs();
 ```
 
 **Sample response:**
@@ -326,12 +326,12 @@ Queries the Territory collection and returns a page of entities, optionally filt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListTerritorysQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_3&#124;error`
+**Returns:** `ListTerritorysResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_3 result = check client->listTerritorys();
+ListTerritorysResponse result = check client->listTerritorys();
 ```
 
 **Sample response:**
@@ -401,12 +401,12 @@ Queries the JobClassificationCountry collection and returns a page of entities, 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobClassificationCountrysQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_4&#124;error`
+**Returns:** `ListJobClassificationCountrysResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_4 result = check client->listJobClassificationCountrys();
+ListJobClassificationCountrysResponse result = check client->listJobClassificationCountrys();
 ```
 
 **Sample response:**
@@ -568,12 +568,12 @@ Queries the FOJobFunction collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOJobFunctionsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_5&#124;error`
+**Returns:** `ListFOJobFunctionsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_5 result = check client->listFOJobFunctions();
+ListFOJobFunctionsResponse result = check client->listFOJobFunctions();
 ```
 
 **Sample response:**
@@ -805,12 +805,12 @@ Queries the FOFrequency collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOFrequencysQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_7&#124;error`
+**Returns:** `ListFOFrequencysResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_7 result = check client->listFOFrequencys();
+ListFOFrequencysResponse result = check client->listFOFrequencys();
 ```
 
 **Sample response:**
@@ -888,12 +888,12 @@ Queries the LegalEntityFRA collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityFRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_8&#124;error`
+**Returns:** `ListLegalEntityFRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_8 result = check client->listLegalEntityFRAs();
+ListLegalEntityFRAsResponse result = check client->listLegalEntityFRAs();
 ```
 
 **Sample response:**
@@ -1061,12 +1061,12 @@ Queries the FOPayGrade collection and returns a page of entities, optionally fil
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOPayGradesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_9&#124;error`
+**Returns:** `ListFOPayGradesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_9 result = check client->listFOPayGrades();
+ListFOPayGradesResponse result = check client->listFOPayGrades();
 ```
 
 **Sample response:**
@@ -1147,12 +1147,12 @@ Queries the FOJobClassLocalAUS collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOJobClassLocalAUSsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_10&#124;error`
+**Returns:** `ListFOJobClassLocalAUSsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_10 result = check client->listFOJobClassLocalAUSs();
+ListFOJobClassLocalAUSsResponse result = check client->listFOJobClassLocalAUSs();
 ```
 
 **Sample response:**
@@ -1286,12 +1286,12 @@ Queries the FOJobClassLocalITA collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOJobClassLocalITAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_12&#124;error`
+**Returns:** `ListFOJobClassLocalITAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_12 result = check client->listFOJobClassLocalITAs();
+ListFOJobClassLocalITAsResponse result = check client->listFOJobClassLocalITAs();
 ```
 
 **Sample response:**
@@ -1363,12 +1363,12 @@ Queries the JobClassificationBRA collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobClassificationBRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_13&#124;error`
+**Returns:** `ListJobClassificationBRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_13 result = check client->listJobClassificationBRAs();
+ListJobClassificationBRAsResponse result = check client->listJobClassificationBRAs();
 ```
 
 **Sample response:**
@@ -1542,12 +1542,12 @@ Queries the JobClassificationZAF collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobClassificationZAFsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_14&#124;error`
+**Returns:** `ListJobClassificationZAFsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_14 result = check client->listJobClassificationZAFs();
+ListJobClassificationZAFsResponse result = check client->listJobClassificationZAFs();
 ```
 
 **Sample response:**
@@ -1721,12 +1721,12 @@ Queries the LegalEntityDEU collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityDEUsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_15&#124;error`
+**Returns:** `ListLegalEntityDEUsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_15 result = check client->listLegalEntityDEUs();
+ListLegalEntityDEUsResponse result = check client->listLegalEntityDEUs();
 ```
 
 **Sample response:**
@@ -1888,12 +1888,12 @@ Queries the JobClassificationGBR collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobClassificationGBRsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_16&#124;error`
+**Returns:** `ListJobClassificationGBRsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_16 result = check client->listJobClassificationGBRs();
+ListJobClassificationGBRsResponse result = check client->listJobClassificationGBRs();
 ```
 
 **Sample response:**
@@ -2067,12 +2067,12 @@ Queries the JobClassificationFRA collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobClassificationFRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_17&#124;error`
+**Returns:** `ListJobClassificationFRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_17 result = check client->listJobClassificationFRAs();
+ListJobClassificationFRAsResponse result = check client->listJobClassificationFRAs();
 ```
 
 **Sample response:**
@@ -2237,12 +2237,12 @@ Queries the Periods collection and returns a page of entities, optionally filter
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPeriodssQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_18&#124;error`
+**Returns:** `ListPeriodssResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_18 result = check client->listPeriodss();
+ListPeriodssResponse result = check client->listPeriodss();
 ```
 
 **Sample response:**
@@ -2313,12 +2313,12 @@ Queries the BudgetGroup collection and returns a page of entities, optionally fi
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListBudgetGroupsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_19&#124;error`
+**Returns:** `ListBudgetGroupsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_19 result = check client->listBudgetGroups();
+ListBudgetGroupsResponse result = check client->listBudgetGroups();
 ```
 
 **Sample response:**
@@ -2531,12 +2531,12 @@ Queries the JobClassificationAUS collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobClassificationAUSsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_21&#124;error`
+**Returns:** `ListJobClassificationAUSsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_21 result = check client->listJobClassificationAUSs();
+ListJobClassificationAUSsResponse result = check client->listJobClassificationAUSs();
 ```
 
 **Sample response:**
@@ -2710,12 +2710,12 @@ Queries the PayScaleArea collection and returns a page of entities, optionally f
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPayScaleAreasQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_22&#124;error`
+**Returns:** `ListPayScaleAreasResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_22 result = check client->listPayScaleAreas();
+ListPayScaleAreasResponse result = check client->listPayScaleAreas();
 ```
 
 **Sample response:**
@@ -2871,12 +2871,12 @@ Queries the FOJobClassLocalUSA collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOJobClassLocalUSAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_23&#124;error`
+**Returns:** `ListFOJobClassLocalUSAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_23 result = check client->listFOJobClassLocalUSAs();
+ListFOJobClassLocalUSAsResponse result = check client->listFOJobClassLocalUSAs();
 ```
 
 **Sample response:**
@@ -2948,12 +2948,12 @@ Queries the FOLegalEntityLocalFRA collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOLegalEntityLocalFRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_24&#124;error`
+**Returns:** `ListFOLegalEntityLocalFRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_24 result = check client->listFOLegalEntityLocalFRAs();
+ListFOLegalEntityLocalFRAsResponse result = check client->listFOLegalEntityLocalFRAs();
 ```
 
 **Sample response:**
@@ -3033,12 +3033,12 @@ Queries the FOJobClassLocalFRA collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOJobClassLocalFRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_25&#124;error`
+**Returns:** `ListFOJobClassLocalFRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_25 result = check client->listFOJobClassLocalFRAs();
+ListFOJobClassLocalFRAsResponse result = check client->listFOJobClassLocalFRAs();
 ```
 
 **Sample response:**
@@ -3110,12 +3110,12 @@ Queries the FOLegalEntityLocalDEU collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOLegalEntityLocalDEUsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_26&#124;error`
+**Returns:** `ListFOLegalEntityLocalDEUsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_26 result = check client->listFOLegalEntityLocalDEUs();
+ListFOLegalEntityLocalDEUsResponse result = check client->listFOLegalEntityLocalDEUs();
 ```
 
 **Sample response:**
@@ -3187,12 +3187,12 @@ Queries the JobClassificationITA collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobClassificationITAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_27&#124;error`
+**Returns:** `ListJobClassificationITAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_27 result = check client->listJobClassificationITAs();
+ListJobClassificationITAsResponse result = check client->listJobClassificationITAs();
 ```
 
 **Sample response:**
@@ -3357,12 +3357,12 @@ Queries the LegalEntityESP collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityESPsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_28&#124;error`
+**Returns:** `ListLegalEntityESPsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_28 result = check client->listLegalEntityESPs();
+ListLegalEntityESPsResponse result = check client->listLegalEntityESPs();
 ```
 
 **Sample response:**
@@ -3524,12 +3524,12 @@ Queries the FOJobClassLocalGBR collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOJobClassLocalGBRsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_29&#124;error`
+**Returns:** `ListFOJobClassLocalGBRsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_29 result = check client->listFOJobClassLocalGBRs();
+ListFOJobClassLocalGBRsResponse result = check client->listFOJobClassLocalGBRs();
 ```
 
 **Sample response:**
@@ -3609,12 +3609,12 @@ Queries the FOCorporateAddressDEFLT collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOCorporateAddressDEFLTsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_30&#124;error`
+**Returns:** `ListFOCorporateAddressDEFLTsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_30 result = check client->listFOCorporateAddressDEFLTs();
+ListFOCorporateAddressDEFLTsResponse result = check client->listFOCorporateAddressDEFLTs();
 ```
 
 **Sample response:**
@@ -3764,12 +3764,12 @@ Queries the JobClassificationUSA collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobClassificationUSAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_32&#124;error`
+**Returns:** `ListJobClassificationUSAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_32 result = check client->listJobClassificationUSAs();
+ListJobClassificationUSAsResponse result = check client->listJobClassificationUSAs();
 ```
 
 **Sample response:**
@@ -3934,12 +3934,12 @@ Queries the FOJobClassLocalDEFLT collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOJobClassLocalDEFLTsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_33&#124;error`
+**Returns:** `ListFOJobClassLocalDEFLTsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_33 result = check client->listFOJobClassLocalDEFLTs();
+ListFOJobClassLocalDEFLTsResponse result = check client->listFOJobClassLocalDEFLTs();
 ```
 
 **Sample response:**
@@ -4019,12 +4019,12 @@ Queries the FOEventReason collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOEventReasonsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_34&#124;error`
+**Returns:** `ListFOEventReasonsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_34 result = check client->listFOEventReasons();
+ListFOEventReasonsResponse result = check client->listFOEventReasons();
 ```
 
 **Sample response:**
@@ -4185,12 +4185,12 @@ Queries the FOJobClassLocalBRA collection and returns a page of entities, option
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOJobClassLocalBRAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_36&#124;error`
+**Returns:** `ListFOJobClassLocalBRAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_36 result = check client->listFOJobClassLocalBRAs();
+ListFOJobClassLocalBRAsResponse result = check client->listFOJobClassLocalBRAs();
 ```
 
 **Sample response:**
@@ -4270,12 +4270,12 @@ Queries the FOLocationGroup collection and returns a page of entities, optionall
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOLocationGroupsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_37&#124;error`
+**Returns:** `ListFOLocationGroupsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_37 result = check client->listFOLocationGroups();
+ListFOLocationGroupsResponse result = check client->listFOLocationGroups();
 ```
 
 **Sample response:**
@@ -4346,12 +4346,12 @@ Queries the FOLegalEntityLocalESP collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOLegalEntityLocalESPsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_38&#124;error`
+**Returns:** `ListFOLegalEntityLocalESPsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_38 result = check client->listFOLegalEntityLocalESPs();
+ListFOLegalEntityLocalESPsResponse result = check client->listFOLegalEntityLocalESPs();
 ```
 
 **Sample response:**
@@ -4431,12 +4431,12 @@ Queries the PayScaleType collection and returns a page of entities, optionally f
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPayScaleTypesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_39&#124;error`
+**Returns:** `ListPayScaleTypesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_39 result = check client->listPayScaleTypes();
+ListPayScaleTypesResponse result = check client->listPayScaleTypes();
 ```
 
 **Sample response:**
@@ -4592,12 +4592,12 @@ Queries the FOLegalEntityLocalDEFLT collection and returns a page of entities, o
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOLegalEntityLocalDEFLTsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_40&#124;error`
+**Returns:** `ListFOLegalEntityLocalDEFLTsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_40 result = check client->listFOLegalEntityLocalDEFLTs();
+ListFOLegalEntityLocalDEFLTsResponse result = check client->listFOLegalEntityLocalDEFLTs();
 ```
 
 **Sample response:**
@@ -4669,12 +4669,12 @@ Queries the LegalEntityRUS collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityRUSsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_41&#124;error`
+**Returns:** `ListLegalEntityRUSsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_41 result = check client->listLegalEntityRUSs();
+ListLegalEntityRUSsResponse result = check client->listLegalEntityRUSs();
 ```
 
 **Sample response:**
@@ -4842,12 +4842,12 @@ Queries the JobClassificationCAN collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobClassificationCANsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_42&#124;error`
+**Returns:** `ListJobClassificationCANsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_42 result = check client->listJobClassificationCANs();
+ListJobClassificationCANsResponse result = check client->listJobClassificationCANs();
 ```
 
 **Sample response:**
@@ -5103,12 +5103,12 @@ Queries the LegalEntitySVN collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntitySVNsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_44&#124;error`
+**Returns:** `ListLegalEntitySVNsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_44 result = check client->listLegalEntitySVNs();
+ListLegalEntitySVNsResponse result = check client->listLegalEntitySVNs();
 ```
 
 **Sample response:**
@@ -5270,12 +5270,12 @@ Queries the LegalEntitySAU collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntitySAUsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_45&#124;error`
+**Returns:** `ListLegalEntitySAUsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_45 result = check client->listLegalEntitySAUs();
+ListLegalEntitySAUsResponse result = check client->listLegalEntitySAUs();
 ```
 
 **Sample response:**
@@ -5437,12 +5437,12 @@ Queries the LegalEntityPRY collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityPRYsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_46&#124;error`
+**Returns:** `ListLegalEntityPRYsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_46 result = check client->listLegalEntityPRYs();
+ListLegalEntityPRYsResponse result = check client->listLegalEntityPRYs();
 ```
 
 **Sample response:**
@@ -5610,12 +5610,12 @@ Queries the LegalEntityCAN collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityCANsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_47&#124;error`
+**Returns:** `ListLegalEntityCANsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_47 result = check client->listLegalEntityCANs();
+ListLegalEntityCANsResponse result = check client->listLegalEntityCANs();
 ```
 
 **Sample response:**
@@ -5777,12 +5777,12 @@ Queries the LegalEntityBOL collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityBOLsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_48&#124;error`
+**Returns:** `ListLegalEntityBOLsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_48 result = check client->listLegalEntityBOLs();
+ListLegalEntityBOLsResponse result = check client->listLegalEntityBOLs();
 ```
 
 **Sample response:**
@@ -5944,12 +5944,12 @@ Queries the LegalEntityTHA collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityTHAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_49&#124;error`
+**Returns:** `ListLegalEntityTHAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_49 result = check client->listLegalEntityTHAs();
+ListLegalEntityTHAsResponse result = check client->listLegalEntityTHAs();
 ```
 
 **Sample response:**
@@ -6219,12 +6219,12 @@ Queries the LegalEntityBLR collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityBLRsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_52&#124;error`
+**Returns:** `ListLegalEntityBLRsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_52 result = check client->listLegalEntityBLRs();
+ListLegalEntityBLRsResponse result = check client->listLegalEntityBLRs();
 ```
 
 **Sample response:**
@@ -6392,12 +6392,12 @@ Queries the LegalEntityTUN collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityTUNsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_53&#124;error`
+**Returns:** `ListLegalEntityTUNsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_53 result = check client->listLegalEntityTUNs();
+ListLegalEntityTUNsResponse result = check client->listLegalEntityTUNs();
 ```
 
 **Sample response:**
@@ -6559,12 +6559,12 @@ Queries the LegalEntitySGP collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntitySGPsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_54&#124;error`
+**Returns:** `ListLegalEntitySGPsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_54 result = check client->listLegalEntitySGPs();
+ListLegalEntitySGPsResponse result = check client->listLegalEntitySGPs();
 ```
 
 **Sample response:**
@@ -6732,12 +6732,12 @@ Queries the LegalEntityUSA collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityUSAsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_55&#124;error`
+**Returns:** `ListLegalEntityUSAsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_55 result = check client->listLegalEntityUSAs();
+ListLegalEntityUSAsResponse result = check client->listLegalEntityUSAs();
 ```
 
 **Sample response:**
@@ -6899,12 +6899,12 @@ Queries the PayPeriod collection and returns a page of entities, optionally filt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPayPeriodsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_56&#124;error`
+**Returns:** `ListPayPeriodsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_56 result = check client->listPayPeriods();
+ListPayPeriodsResponse result = check client->listPayPeriods();
 ```
 
 **Sample response:**
@@ -7117,12 +7117,12 @@ Queries the FOLegalEntityLocalARG collection and returns a page of entities, opt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOLegalEntityLocalARGsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_58&#124;error`
+**Returns:** `ListFOLegalEntityLocalARGsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_58 result = check client->listFOLegalEntityLocalARGs();
+ListFOLegalEntityLocalARGsResponse result = check client->listFOLegalEntityLocalARGs();
 ```
 
 **Sample response:**
@@ -7202,12 +7202,12 @@ Queries the FOGeozone collection and returns a page of entities, optionally filt
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOGeozonesQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_59&#124;error`
+**Returns:** `ListFOGeozonesResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_59 result = check client->listFOGeozones();
+ListFOGeozonesResponse result = check client->listFOGeozones();
 ```
 
 **Sample response:**
@@ -7288,12 +7288,12 @@ Queries the LegalEntityARG collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLegalEntityARGsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_60&#124;error`
+**Returns:** `ListLegalEntityARGsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_60 result = check client->listLegalEntityARGs();
+ListLegalEntityARGsResponse result = check client->listLegalEntityARGs();
 ```
 
 **Sample response:**
@@ -7455,12 +7455,12 @@ Queries the FOBusinessUnit collection and returns a page of entities, optionally
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOBusinessUnitsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_61&#124;error`
+**Returns:** `ListFOBusinessUnitsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_61 result = check client->listFOBusinessUnits();
+ListFOBusinessUnitsResponse result = check client->listFOBusinessUnits();
 ```
 
 **Sample response:**
@@ -7699,12 +7699,12 @@ Queries the FOPayGroup collection and returns a page of entities, optionally fil
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFOPayGroupsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_63&#124;error`
+**Returns:** `ListFOPayGroupsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_63 result = check client->listFOPayGroups();
+ListFOPayGroupsResponse result = check client->listFOPayGroups();
 ```
 
 **Sample response:**
@@ -7880,12 +7880,12 @@ Queries the LocalizedData collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListLocalizedDatasQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_64&#124;error`
+**Returns:** `ListLocalizedDatasResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_64 result = check client->listLocalizedDatas();
+ListLocalizedDatasResponse result = check client->listLocalizedDatas();
 ```
 
 **Sample response:**
@@ -7956,12 +7956,12 @@ Queries the FoTranslation collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListFoTranslationsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_65&#124;error`
+**Returns:** `ListFoTranslationsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_65 result = check client->listFoTranslations();
+ListFoTranslationsResponse result = check client->listFoTranslations();
 ```
 
 **Sample response:**
@@ -8031,12 +8031,12 @@ Queries the PayScaleGroup collection and returns a page of entities, optionally 
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListPayScaleGroupsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_66&#124;error`
+**Returns:** `ListPayScaleGroupsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_66 result = check client->listPayScaleGroups();
+ListPayScaleGroupsResponse result = check client->listPayScaleGroups();
 ```
 
 **Sample response:**
@@ -8497,12 +8497,12 @@ Queries the JobClassificationBGR collection and returns a page of entities, opti
 | `headers` | <code>map&#60;string&#124;string[]&#62;</code> | No | Headers to be sent with the request |
 | `queries` | <code>ListJobClassificationBGRsQueries</code> | No | Queries to be sent with the request |
 
-**Returns:** `Wrapper_71&#124;error`
+**Returns:** `ListJobClassificationBGRsResponse&#124;error`
 
 **Sample code:**
 
 ```ballerina
-Wrapper_71 result = check client->listJobClassificationBGRs();
+ListJobClassificationBGRsResponse result = check client->listJobClassificationBGRs();
 ```
 
 **Sample response:**
