@@ -2271,6 +2271,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'guides/howtoguides/sap-b1-low-stock-purchase-automation',
             'guides/howtoguides/s3-events-via-sqs-listener',
+            'guides/howtoguides/azure-files-change-tracker',
           ],
         },
         // Migration Guides
