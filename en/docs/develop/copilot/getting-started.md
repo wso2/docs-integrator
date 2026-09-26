@@ -11,18 +11,27 @@ If you have already [signed in to WSO2 Integrator](../../get-started/setup/local
 
 ## Sign in from the Copilot welcome screen
 
-1. In your WSO2 Integrator project view, open Copilot by clicking the **Generate with AI** button, or the **Open WSO2 Integrator Copilot** icon in the top-right corner of the editor toolbar.
+1. Open your integration's overview to start working with Copilot.
 
-   ![Open WSO2 Integrator Copilot icon](/img/develop/copilot/open-copilot-icon.png)
+   - **New integration**: The overview shows the Copilot composer. Describe what you want to build and send it, or pick one of the examples under **Try one of these**. To open the Copilot panel without a prompt, select the Copilot orb above the composer.
 
-2. The Copilot welcome screen opens with the available sign-in options.
+     ![The Copilot composer on the overview of a new integration.](/img/develop/copilot/copilot-composer.png)
 
-   ![WSO2 Integrator Copilot welcome screen](/img/develop/copilot/copilot-sign-in.png)
+   - **Integration with artifacts**: Select the Copilot orb in the bottom-right corner. Select it once for a quick chat, or double-click it to open the full Copilot panel.
 
-   - **Login using WSO2 Integration Platform** (recommended): Sign in with your WSO2 Cloud account.
-   - **Enter your [Anthropic API key](https://platform.claude.com/settings/keys)**: Use your own Anthropic key to power Copilot.
-   - **Enter your [AWS Bedrock credentials](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html)**: Use your AWS Bedrock account.
-   - **Enter your [Google Vertex AI credentials](https://docs.cloud.google.com/vertex-ai/docs/authentication)**: Use your Google Vertex AI account.
+     ![The WSO2 Integrator Copilot orb on the integration overview.](/img/develop/copilot/copilot-orb.png)
+
+   When a Ballerina file or diagram is open, you can also select the **Open WSO2 Integrator Copilot** icon in the editor toolbar.
+
+2. The Copilot panel opens on the welcome screen with the available sign-in options.
+
+   ![WSO2 Integrator Copilot welcome screen with the sign-in options.](/img/develop/copilot/copilot-sign-in.png)
+
+   - **Login using your WSO2 Cloud account** (recommended): Sign in with your WSO2 Cloud account. No API keys are required.
+   - Under **Use your own AI provider**:
+     - **Anthropic API Key**: Use your own [Anthropic API key](https://platform.claude.com/settings/keys) to power Copilot.
+     - **AWS Bedrock**: Use your [AWS Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html) account.
+     - **Google Vertex AI**: Use your [Google Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/authentication) account.
 
 3. Select one option and complete the sign-in. Once authenticated, Copilot opens its chat view and is ready to use.
 

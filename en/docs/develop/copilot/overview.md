@@ -24,13 +24,13 @@ Copilot has two modes: plan and edit. Switch between them using the toggle in th
 
 Copilot can generate a custom connector when a pre-built one is not available. During integration generation, if no pre-built connector exists, Copilot prompts the user for an OpenAPI specification. The user can also directly request to generate a custom connector. Once generated, the connector is available for Copilot to use in the flow.
 
-![Copilot generating custom connector code from an OpenAPI specification.](/img/develop/copilot/connector-generator.png)
+![Copilot asking for an OpenAPI specification to generate a custom connector.](/img/develop/copilot/connector-generator.png)
 
 ## Using web tools
 
 Copilot can search the internet for external context or up-to-date documentation. It asks for permission before each search unless you enable the web tools toggle in the input bar.
 
-![Web tools permission prompt in the Copilot input bar.](/img/develop/copilot/web-tool.png)
+![The web tools toggle in the Copilot input bar.](/img/develop/copilot/web-tool.png)
 
 ## MCP tools
 
