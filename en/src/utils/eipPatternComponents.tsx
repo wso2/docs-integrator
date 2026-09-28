@@ -1,4 +1,4 @@
-import React, { type ComponentProps } from 'react';
+import React, { use, type ComponentProps } from 'react';
 import Tabs from '@theme/Tabs';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
