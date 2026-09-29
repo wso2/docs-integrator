@@ -1,25 +1,27 @@
 /**
  * Mirrors @docusaurus/theme-classic/src/theme/DocSidebar/Desktop/styles.module.css
- * so the swizzled component renders identically. The Content's `.menu`
- * already has `flex-grow: 1`, which pushes ProductDocsLinks (added in
- * index.tsx) to the bottom of the sidebar.
+ * so the swizzled component renders identically, EXCEPT `padding-top`
+ * below also reserves space for the sticky secondary row (product/
+ * version pill + copy-page button, see theme/Navbar/index.tsx) that
+ * sits beneath the navbar on every page -- stock only reserves
+ * `--ifm-navbar-height`, which left the sidebar's own content starting
+ * too high and scrolling out from under that row instead of staying
+ * put beside it. `.theme-doc-sidebar-container`'s negative margin-top
+ * (custom.css) carries the matching other half of this fix. The
+ * Content's `.menu` already has `flex-grow: 1`, which pushes
+ * ProductDocsLinks (added in index.tsx) to the bottom of the sidebar.
  */
 @media (min-width: 997px) {
   .sidebar {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding-top: var(--ifm-navbar-height);
+    padding-top: calc(var(--ifm-navbar-height) + var(--wso2-secondary-row-height));
     width: var(--doc-sidebar-width);
   }
 
   .sidebarWithHideableNavbar {
     padding-top: 0;
-  }
-
-  .sidebarHidden {
-    opacity: 0;
-    visibility: hidden;
   }
 
   .sidebarLogo {
@@ -40,4 +42,103 @@
 
 .sidebarLogo {
   display: none;
+}
+
+/* ---- Collapse button, overlaid on the first sidebar row instead of
+   its own header row (no separate title row anymore -- see index.tsx).
+   `.sidebarContentWrap` is `position: relative` so `top`/`right` below
+   are relative to Content's own box, not the whole `.sidebar` (which
+   would also have to account for `padding-top: var(--ifm-navbar-height)`
+   varying with `hideOnScroll`). The `top` value is tied to Content's
+   stock `.menu` padding (0.5rem, see node_modules/@docusaurus/theme-classic's
+   Desktop/Content/styles.module.css) -- nudge it if that padding, or
+   `.menu__link`'s padding/font-size in custom.css, ever changes. */
+.sidebarContentWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.sidebarCollapseOverlay {
+  position: absolute;
+  top: 10px;
+  /* Aligned with .menu__caret's own right edge (custom.css): .menu's
+     fixed 8px right padding (also custom.css, forced deterministic for
+     exactly this reason) + .menu__caret's own 14px margin-right = 22px
+     total inset from this element's own container. Since this button
+     sits in .sidebarContentWrap (a sibling of the scrolling .menu, not
+     a descendant of it), it needs that same 22px spelled out here by
+     hand -- there's no shared box either could inherit it from. */
+  right: 22px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--wso2-text-muted);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.sidebarCollapseOverlay:hover {
+  background-color: var(--ifm-color-emphasis-100);
+  color: var(--wso2-heading-color);
+}
+
+/* ---- Collapsed icon rail ---- */
+.rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 64px;
+  height: 100%;
+  padding: 14px 0;
+  padding-top: calc(var(--ifm-navbar-height) + var(--wso2-secondary-row-height) + 14px);
+  background: var(--wso2-sidebar-bg);
+}
+
+.railDivider {
+  width: 28px;
+  height: 1px;
+  background: var(--wso2-surface-border);
+  margin: 8px 0;
+}
+
+.railButton {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--wso2-text-muted);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.railButton:hover {
+  background-color: var(--ifm-color-emphasis-100);
+  color: var(--wso2-heading-color);
+}
+
+/* The very first rail button is the expand toggle -- bordered/carded,
+   like the reference, to stand apart from the plain category icons. */
+.rail > .railButton:first-child {
+  border: 1px solid var(--wso2-surface-border);
+  background: var(--ifm-background-color);
+  color: var(--wso2-heading-color);
+  box-shadow: var(--wso2-card-shadow);
+}
+
+.rail > .railButton:first-child:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--wso2-accent-text);
 }

@@ -1,0 +1,195 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12vh 1rem 1rem;
+  background: rgba(15, 23, 42, 0.32);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 640px;
+  max-height: 76vh;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28), 0 2px 8px rgba(15, 23, 42, 0.12);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--wso2-surface-border);
+}
+
+.headerIcon {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--wso2-heading-color);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.35rem 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 1.05rem;
+  color: var(--wso2-heading-color);
+}
+
+.input::placeholder {
+  color: var(--wso2-text-muted);
+}
+
+.input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.clear,
+.close {
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: var(--wso2-text-muted);
+  cursor: pointer;
+}
+
+.clear {
+  padding: 0.25rem 0.9rem 0.25rem 0.5rem;
+  border-right: 1px solid var(--wso2-surface-border);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 8px;
+}
+
+.clear:hover,
+.close:hover {
+  color: var(--wso2-heading-color);
+}
+
+.close:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.body {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hit {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  color: var(--wso2-heading-color);
+  text-decoration: none;
+}
+
+.hit:hover {
+  color: var(--wso2-heading-color);
+  text-decoration: none;
+}
+
+.hit[data-active='true'] {
+  background: var(--wso2-accent-light);
+}
+
+.hitIcon {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--wso2-text-muted);
+}
+
+.hitText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.hitTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.925rem;
+  font-weight: 600;
+}
+
+.hitTitle mark {
+  background: transparent;
+  color: var(--wso2-accent-text);
+  text-decoration: underline;
+}
+
+.hitPath {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.775rem;
+  color: var(--wso2-text-muted);
+}
+
+.empty {
+  margin: 0;
+  padding: 1.5rem 0.75rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--wso2-text-muted);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.6rem 1rem;
+  border-top: 1px solid var(--wso2-surface-border);
+  background: var(--wso2-well-bg);
+  font-size: 0.775rem;
+  color: var(--wso2-text-muted);
+}
+
+.hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.hint kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 0.3rem;
+  border: 1px solid var(--wso2-surface-border);
+  border-radius: 5px;
+  background: var(--ifm-background-surface-color);
+  box-shadow: none;
+  font-family: inherit;
+  font-size: 0.7rem;
+  color: var(--wso2-text-muted);
+}

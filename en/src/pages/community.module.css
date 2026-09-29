@@ -1,0 +1,167 @@
+.hero {
+  background: linear-gradient(150deg, #26365a, #1b2a49);
+  color: #ffffff;
+  padding: 3.5rem 0;
+}
+
+/* Same box model as .main below (width:100%, same 1080px cap, same
+   40px horizontal padding) -- not .hero's own 780px/2rem scheme it
+   used to have, which put the "Community" title and subtitle at a
+   different left edge than the cards/banner beneath them. They only
+   looked aligned before by coincidence, when .main was stuck short of
+   its own 1080px cap by a stock Docusaurus flex-layout quirk (see
+   .main's own comment) -- fixing that quirk made this mismatch
+   visible instead of masking it. Readability of the subtitle line
+   length is still handled by .heroSubtitle's own tighter 560px cap
+   below, not by constraining this whole block. */
+.heroInner {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(30px, 3.2vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: #ffffff;
+}
+
+.heroSubtitle {
+  margin: 14px 0 0;
+  max-width: 560px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #c8d3e6;
+}
+
+/* width:100% (not just max-width) -- this page's real parent, theme-
+   classic's own `.mainWrapper` (node_modules/@docusaurus/theme-classic/
+   .../Layout/styles.module.css), is `display: flex; flex-direction:
+   column`, and a column-flex child with `margin: 0 auto` but no
+   explicit width doesn't stretch to the cross-axis like normal block
+   layout would -- auto margins on a flex item suppress `align-items:
+   stretch` and the item shrinks to its own content size instead
+   (measured ~867px in a 1440px viewport, not the intended 1080px cap).
+   width:100% forces it to actually claim the full cross-axis (still
+   capped at max-width, still centered via the auto margins), which is
+   what the .grid column-count math below assumes. */
+.main {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 40px 72px;
+}
+
+/* Same single-rule auto-fit pattern as this page originally had (and
+   still has on saas) -- no manual breakpoints, columns just reflow
+   naturally as the viewport narrows. The one deliberate change from
+   that original minmax(230px, 1fr): the minimum is tuned to 260px, not
+   230px. CHANNELS is ordered so row 1 is GitHub/Discord/Stack Overflow
+   and row 2 is LinkedIn/YouTube/X (see community.tsx's own comment on
+   that array) -- .main's own 1080px max-width caps this grid's real
+   content width at 1000px (1080 - 2x40px padding) at any viewport wide
+   enough to hit that cap, and auto-fit's column count is
+   floor((contentWidth + gap) / (min + gap)). At 230px that's
+   floor(1018/248) = 4 columns, splitting the 6 cards 4-and-2 instead of
+   3-and-3; at 260px it's floor(1018/278) = 3, landing exactly on the
+   intended grouping -- and it drops to 2 columns below ~896px viewport
+   width and 1 below ~618px on this same formula, with no separate
+   breakpoint needed to make that happen. 1fr (not a fixed px column)
+   still stretches each column to fill the full row, so the grid's
+   right edge lines up with the "Want to contribute" banner below it. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--wso2-surface-border);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-2px);
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #fde3d9;
+  color: var(--wso2-accent-text);
+}
+
+[data-theme='dark'] .cardIcon {
+  background: rgba(241, 78, 35, 0.16);
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--wso2-heading-color);
+}
+
+.cardDesc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ifm-font-color-base);
+}
+
+.contributeBanner {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px 32px;
+  border-radius: 16px;
+  background: var(--wso2-well-bg);
+  border: 1px solid var(--wso2-surface-border);
+}
+
+.contributeBannerTitle {
+  margin: 0 0 4px;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--wso2-heading-color);
+}
+
+.contributeBannerText {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--ifm-font-color-base);
+}
+
+.contributeBannerLink {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 12px;
+  background: var(--ifm-color-primary);
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none !important;
+}

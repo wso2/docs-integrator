@@ -1,10 +1,26 @@
 name: WSO2 Integrator Docs Publish
 
+# main is the product-agnostic template/governance branch (see
+# MAINTENANCE.md) and normally isn't force-pushed to production the way
+# saas, wso2-integrator, and wso2-connectors are -- but this workflow
+# still fires on any ordinary push to main, so it needs the same
+# multi-branch-safe deploy settings those three branches already carry,
+# or the next push here wipes out whatever they've published.
+#
+# keep_files: true is load-bearing -- without it, peaceiris wipes the
+# entire gh-pages branch before each deploy, deleting whatever the other
+# branches' workflows published. The shared concurrency group prevents
+# two of these workflows from racing to push gh-pages at once.
+
 on:
   push:
     branches:
       - main
   workflow_dispatch:
+
+concurrency:
+  group: gh-pages-deploy
+  cancel-in-progress: false
 
 jobs:
   release-wso2-integrator-docs:
@@ -35,3 +51,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: en/build
+          keep_files: true

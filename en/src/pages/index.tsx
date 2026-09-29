@@ -1,22 +1,28 @@
 import type { ReactNode } from 'react';
-import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from '@docusaurus/Link';
-import { useHistory } from '@docusaurus/router';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import SearchBar from '@site/src/components/SearchBar';
 
 import styles from './index.module.css';
 
 /* ------------------------------------------------------------------ */
-/*  Clean SVG Icon Components                                          */
+/*  Clean SVG Icon Components -- same set as saas's homepage. A few     */
+/*  (IconDeploy, IconMigrate, IconObserve) are unused here; IconIcons/  */
+/*  IconHomepage/IconWorkflows are unused too since those three no      */
+/*  longer have cards in "Explore the scaffold" (still real docs pages, */
+/*  reachable via the Explore navbar dropdown and sidebar) -- all kept  */
+/*  defined rather than deleted in case a real product forking from     */
+/*  this branch wants them back.                                        */
 /* ------------------------------------------------------------------ */
-function IconGetStarted(): ReactNode {
+function IconSection(): ReactNode {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <polygon points="10 8 16 12 10 16 10 8" />
+      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+      <polyline points="2 17 12 22 22 17" />
+      <polyline points="2 12 12 17 22 12" />
     </svg>
   );
 }
@@ -26,26 +32,6 @@ function IconDevelop(): ReactNode {
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="16 18 22 12 16 6" />
       <polyline points="8 6 2 12 8 18" />
-    </svg>
-  );
-}
-
-function IconConnectors(): ReactNode {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="3" width="7" height="7" rx="1.5" />
-      <rect x="14" y="3" width="7" height="7" rx="1.5" />
-      <rect x="3" y="14" width="7" height="7" rx="1.5" />
-      <rect x="14" y="14" width="7" height="7" rx="1.5" />
-    </svg>
-  );
-}
-
-function IconGenAI(): ReactNode {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2l2.09 6.26L20.18 10l-6.09 1.74L12 18l-2.09-6.26L3.82 10l6.09-1.74L12 2z" />
-      <path d="M20 16l.62 1.88L22.5 18.5l-1.88.62L20 21l-.62-1.88L17.5 18.5l1.88-.62L20 16z" />
     </svg>
   );
 }
@@ -67,13 +53,10 @@ function IconDeploy(): ReactNode {
   );
 }
 
-function IconReference(): ReactNode {
+function IconMigrate(): ReactNode {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-      <polyline points="14 2 14 8 20 8" />
-      <line x1="16" y1="13" x2="8" y2="13" />
-      <line x1="16" y1="17" x2="8" y2="17" />
+      <path d="M4 7h13l-3-3M20 17H7l3 3" />
     </svg>
   );
 }
@@ -94,241 +77,267 @@ function IconManage(): ReactNode {
   );
 }
 
+function IconObserve(): ReactNode {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 14a8 8 0 1 1 16 0" />
+      <path d="M12 14l4-5" />
+      <path d="M4 14h1M19 14h1M12 14v1" />
+    </svg>
+  );
+}
+
+/** The pulse/waveform mark used as the "Docs" badge icon in the hero. */
+function IconWave({ stroke = 'currentColor', size = 14 }: { stroke?: string; size?: number }): ReactNode {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 12h3l2-4 3 8 2-4h4" />
+    </svg>
+  );
+}
+
+function IconArrowRight(): ReactNode {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+      <path d="M4 12h15M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
+function IconDownload(): ReactNode {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 4v11M7.5 10.5 12 15l4.5-4.5" />
+      <path d="M5 19h14" />
+    </svg>
+  );
+}
+
+function IconIcons(): ReactNode {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="7" height="7" rx="1.5" />
+      <circle cx="17.5" cy="6.5" r="3.5" />
+      <path d="M3 21v-4a4 4 0 0 1 4-4h1" />
+      <path d="M21 21v-4a4 4 0 0 0-4-4h-1" />
+    </svg>
+  );
+}
+
+function IconHomepage(): ReactNode {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 11l8-7 8 7" />
+      <path d="M6 10v9h12v-9" />
+    </svg>
+  );
+}
+
+function IconWorkflows(): ReactNode {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="6" cy="6" r="3" />
+      <circle cx="6" cy="18" r="3" />
+      <circle cx="18" cy="12" r="3" />
+      <path d="M6 9v6M8.5 7.5 15.5 10.5M8.5 16.5 15.5 13.5" />
+    </svg>
+  );
+}
+
+function IconGetStarted(): ReactNode {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M13 2 3 14h7l-1 8 10-12h-7z" />
+    </svg>
+  );
+}
+
+function IconReference(): ReactNode {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 5h6a3 3 0 0 1 3 3v11a2.5 2.5 0 0 0-2.5-2.5H5Z" />
+      <path d="M19 5h-2a3 3 0 0 0-3 3v11a2.5 2.5 0 0 1 2.5-2.5H19Z" />
+    </svg>
+  );
+}
+
+function IconTools(): ReactNode {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 3a4 4 0 0 0-4.8 4.9L4 16.1V20h3.9l8.2-8.2A4 4 0 0 0 21 7l-3 3-2-2Z" />
+    </svg>
+  );
+}
+
 /* ------------------------------------------------------------------ */
-/*  Section Data                                                       */
+/*  Section Data -- this branch's own scaffold sections plus saas's     */
+/*  Platform Overview/Get Started/Guides/Reference (copied verbatim or  */
+/*  sample-filled, see each section's own docs).                        */
 /* ------------------------------------------------------------------ */
 type SectionCard = {
   title: string;
   description: string;
   link: string;
   icon: ReactNode;
-  iconBg: string;
-  iconBgDark: string;
   iconColor: string;
 };
 
 const sections: SectionCard[] = [
   {
-    title: 'Get started',
-    description: 'Install, set up, and build your first integration in under 10 minutes.',
-    link: '/get-started/introduction',
-    icon: <IconGetStarted />,
-    iconBg: '#ECFDF5',
-    iconBgDark: 'rgba(5, 150, 105, 0.15)',
-    iconColor: '#059669',
-  },
-  {
-    title: 'Develop',
-    description: 'Build services, transform data, and test integrations on your machine.',
-    link: '/develop/overview',
-    icon: <IconDevelop />,
-    iconBg: '#EFF6FF',
-    iconBgDark: 'rgba(37, 99, 235, 0.15)',
-    iconColor: '#2563EB',
-  },
-  {
-    title: 'Connectors',
-    description: 'Browse pre-built connectors for SaaS, databases, messaging, and AI.',
-    link: '/connectors/overview',
-    icon: <IconConnectors />,
-    iconBg: '#F0EDFF',
-    iconBgDark: 'rgba(124, 58, 237, 0.15)',
+    title: 'Platform Overview',
+    description: 'Copied verbatim from saas -- common to every product branch.',
+    link: '/platform-overview',
+    icon: <IconManage />,
     iconColor: '#7C3AED',
   },
   {
-    title: 'AI Integrations',
-    description: 'Build AI-powered integrations with agents, RAG, and MCP servers.',
-    link: '/genai/overview',
-    icon: <IconGenAI />,
-    iconBg: '#FDF4FF',
-    iconBgDark: 'rgba(168, 85, 247, 0.15)',
-    iconColor: '#A855F7',
+    title: 'Get Started',
+    description: 'Sample sign-up/concepts/quickstarts pages, in the same shape saas uses.',
+    link: '/get-started',
+    icon: <IconGetStarted />,
+    iconColor: '#F14E23',
+  },
+  {
+    title: 'Section 1',
+    description: 'Placeholder top-level section with sample sub-sections, demonstrating the nested-category convention.',
+    link: '/section-1',
+    icon: <IconSection />,
+    iconColor: '#059669',
+  },
+  {
+    title: 'Section 2',
+    description: 'Two plain leaf docs, each with its own sidebar separator label.',
+    link: '/section-2',
+    icon: <IconDevelop />,
+    iconColor: '#26365A',
   },
   {
     title: 'Guides',
-    description: 'End-to-end tutorials and integration patterns.',
-    link: '/guides/overview',
+    description: 'A searchable guide catalog with a few sample guides.',
+    link: '/guides',
     icon: <IconTutorials />,
-    iconBg: '#FFF8EB',
-    iconBgDark: 'rgba(217, 119, 6, 0.15)',
-    iconColor: '#D97706',
-  },
-  {
-    title: 'Deploy',
-    description: 'Docker, Kubernetes, CI/CD, observability, and production security.',
-    link: '/deploy/overview',
-    icon: <IconDeploy />,
-    iconBg: '#ECFEFF',
-    iconBgDark: 'rgba(8, 145, 178, 0.15)',
-    iconColor: '#0891B2',
-  },
-  {
-    title: 'Manage',
-    description: 'Centralized control and observability via the Integration Control Plane (ICP).',
-    link: '/manage/overview',
-    icon: <IconManage />,
-    iconBg: '#EEF2FF',
-    iconBgDark: 'rgba(79, 70, 229, 0.15)',
-    iconColor: '#4F46E5',
+    iconColor: '#0EA5E9',
   },
   {
     title: 'Reference',
-    description: 'Language reference, configuration keys, CLI commands, and error codes.',
-    link: '/reference/overview',
+    description: 'Sample FAQ and glossary pages, in the same shape saas uses.',
+    link: '/reference',
     icon: <IconReference />,
-    iconBg: '#F1F5F9',
-    iconBgDark: 'rgba(100, 116, 139, 0.15)',
-    iconColor: '#475569',
+    iconColor: '#7C2D12',
+  },
+  {
+    title: 'Tools',
+    description: 'Brand color palette/logos, and downloadable Claude Code skills for this repo.',
+    link: '/tools',
+    icon: <IconTools />,
+    iconColor: '#0F766E',
   },
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Quick-links shown when the search input is focused but empty       */
+/*  Quick-links shown when the search input is focused but empty, and   */
+/*  in the "What do you want to build?" tutorial row below the hero.    */
 /* ------------------------------------------------------------------ */
 const quickLinks = [
-  { label: 'Build an Automation', to: '/get-started/build-automation' },
-  { label: 'Build an AI Agent', to: '/get-started/build-ai-agent' },
-  { label: 'Build an API Integration', to: '/get-started/build-api-integration' },
-  { label: 'Connector catalog', to: '/connectors/overview' },
+  { label: 'Build an Integration as API', sub: 'Sample quickstart', to: '/get-started/quickstarts/build-integration-api' },
+  { label: 'Build an AI Agent', sub: 'Sample quickstart', to: '/get-started/quickstarts/build-ai-agent' },
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Central Search Bar                                                 */
+/*  Welcome screenshot -- the real WSO2 Integrator get-started screen,  */
+/*  copied verbatim from wso2-integrator's own homepage (image and all) */
+/*  since this branch otherwise has no real product to screenshot. A    */
+/*  polished mockup export with its own rounded corners/shadow/glow     */
+/*  already baked in, so it's rendered standalone rather than inside a  */
+/*  .productCard browser-chrome frame -- that frame would double up the */
+/*  styling and clip the image's own soft edges (same reasoning as      */
+/*  wso2-integrator's own version of this component).                   */
 /* ------------------------------------------------------------------ */
-function SearchBar(): ReactNode {
-  const history = useHistory();
-  const searchPath = useBaseUrl('/search');
-  const [query, setQuery] = useState('');
-  const [focused, setFocused] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-
-  // Keyboard shortcut: "/" to focus search
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (
-        e.key === '/' &&
-        !['INPUT', 'TEXTAREA', 'SELECT'].includes(
-          (e.target as HTMLElement).tagName,
-        )
-      ) {
-        e.preventDefault();
-        inputRef.current?.focus();
-      }
-    };
-    document.addEventListener('keydown', handler);
-    return () => document.removeEventListener('keydown', handler);
-  }, []);
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (
-        wrapperRef.current &&
-        !wrapperRef.current.contains(e.target as Node)
-      ) {
-        setFocused(false);
-      }
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, []);
-
-  const handleSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      if (query.trim()) {
-        history.push(`${searchPath}?q=${encodeURIComponent(query.trim())}`);
-        setFocused(false);
-      }
-    },
-    [query, history, searchPath],
-  );
-
+function WelcomeScreenshot(): ReactNode {
+  const src = useBaseUrl('/img/landing/wso2-integrator-welcome.png');
   return (
-    <div ref={wrapperRef} className={styles.searchWrapper}>
-      <form onSubmit={handleSubmit} className={styles.searchForm}>
-        <button type="submit" className={styles.searchIconButton} aria-label="Search">
-          <svg
-            className={styles.searchIcon}
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-        </button>
-        <input
-          ref={inputRef}
-          type="text"
-          className={styles.searchInput}
-          placeholder="Search documentation..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => setFocused(true)}
-          aria-label="Search documentation"
-        />
-        <kbd className={styles.searchKbd}>/</kbd>
-      </form>
-
-      {/* Quick-links dropdown when focused and empty query */}
-      {focused && !query && (
-        <div className={styles.searchDropdown}>
-          <p className={styles.searchDropdownLabel}>Popular pages</p>
-          {quickLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={styles.searchDropdownItem}
-              onClick={() => setFocused(false)}>
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
+    <img
+      className={styles.heroScreenshot}
+      src={src}
+      alt="WSO2 Integrator welcome and sign-in screen"
+    />
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Hero Banner                                                        */
+/*  Hero Banner -- split layout: welcome screenshot + download button   */
+/*  (left, copied verbatim from wso2-integrator's own homepage) plus     */
+/*  badge/heading/search/CTA (right). Unlike this branch's earlier      */
+/*  no-heroLeft/heroRightSolo version, the .heroRight/.heroLeft border  */
+/*  divider is back now that there's a real left column again.          */
 /* ------------------------------------------------------------------ */
 function HomepageHeader(): ReactNode {
+  const { siteConfig } = useDocusaurusContext();
   return (
     <header className={styles.heroBanner}>
-      <div className="container">
+      <div className={styles.heroInner}>
+        <div className={styles.heroLeft}>
+          <WelcomeScreenshot />
+          <div className={styles.downloadRow}>
+            <Link
+              className={styles.downloadBtn}
+              href="https://wso2.com/products/downloads/?product=wso2integrator"
+              target="_blank"
+              rel="noopener noreferrer">
+              <IconDownload />
+              Download WSO2 Integrator
+            </Link>
+            <span className={styles.downloadCaption}>
+              Windows &middot; macOS &middot; Linux
+              <br />
+              100% open source
+            </span>
+          </div>
+        </div>
 
-        <Heading as="h1">WSO2 Integration Platform</Heading>
-        <p className={styles.heroSubtitle}>
-          Build and deploy integrations with low-code simplicity and pro-code power.
-        </p>
-        <SearchBar />
-        <div className={styles.buttons}>
-          <Link
-            className={styles.heroBtn}
-            to="/get-started/build-automation">
-            Build your first integration
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </Link>
+        <div className={styles.heroRight}>
+          <span className={styles.heroBadge}>
+            <IconWave stroke="#FF8A3D" />
+            Docs · Scaffold
+          </span>
+          <Heading as="h1">{siteConfig.title}</Heading>
+          <p className={styles.heroSubtitle}>{siteConfig.tagline}</p>
+          <SearchBar quickLinks={quickLinks} />
+          <div className={styles.buttons}>
+            <Link className={styles.heroBtn} to="/get-started">
+              Let's Get Started
+              <IconArrowRight />
+            </Link>
+          </div>
         </div>
       </div>
     </header>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  "What do you want to build?" — tutorial row                        */
+/* ------------------------------------------------------------------ */
+function TutorialRow(): ReactNode {
+  return (
+    <section className={styles.tutorialRow}>
+      <Heading as="h2" className={styles.tutorialRowTitle}>
+        What do you want to build?
+      </Heading>
+      <div className={styles.tutorialGrid}>
+        {quickLinks.map((link) => (
+          <Link key={link.to} to={link.to} className={styles.tutorialCard}>
+            <span className={styles.tutorialCardText}>
+              <span className={styles.tutorialCardTitle}>{link.label}</span>
+              <span className={styles.tutorialCardSub}>{link.sub}</span>
+            </span>
+            <span className={styles.tutorialCardArrow}>
+              <IconArrowRight />
+            </span>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -338,59 +347,23 @@ function HomepageHeader(): ReactNode {
 function SectionCards(): ReactNode {
   return (
     <section className={styles.sectionCards}>
-      <div className="container">
-        <div className={styles.sectionGrid}>
-          {sections.map((card, idx) => (
-            <Link
-              key={idx}
-              to={card.link}
-              className={styles.sectionCard}
-              style={
-                {
-                  '--icon-bg': card.iconBg,
-                  '--icon-bg-dark': card.iconBgDark,
-                  '--icon-color': card.iconColor,
-                } as React.CSSProperties
-              }>
-              <span className={styles.sectionIcon}>{card.icon}</span>
-              <Heading as="h3" className={styles.sectionCardTitle}>
-                {card.title}
-              </Heading>
-              <p className={styles.sectionCardDesc}>{card.description}</p>
-              <span className={styles.sectionCardArrow}>&rarr;</span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  What's New banner                                                  */
-/* ------------------------------------------------------------------ */
-function WhatsNew(): ReactNode {
-  return (
-    <section className={styles.whatsNew}>
-      <div className="container">
-        <Link
-          to="/reference/appendix/release-notes"
-          className={styles.whatsNewLink}>
-          <span className={styles.whatsNewBadge}>New</span>
-          Check out the latest release notes
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </Link>
+      <Heading as="h2" className={styles.sectionCardsTitle}>
+        Explore the scaffold
+      </Heading>
+      <div className={styles.sectionGrid}>
+        {sections.map((card, idx) => (
+          <Link
+            key={idx}
+            to={card.link}
+            className={styles.sectionCard}
+            style={{ '--icon-color': card.iconColor } as React.CSSProperties}>
+            <span className={styles.sectionIcon}>{card.icon}</span>
+            <Heading as="h3" className={styles.sectionCardTitle}>
+              {card.title}
+            </Heading>
+            <p className={styles.sectionCardDesc}>{card.description}</p>
+          </Link>
+        ))}
       </div>
     </section>
   );
@@ -405,8 +378,8 @@ export default function Home(): ReactNode {
     <Layout title="Home" description={siteConfig.tagline}>
       <HomepageHeader />
       <main>
+        <TutorialRow />
         <SectionCards />
-        <WhatsNew />
       </main>
     </Layout>
   );

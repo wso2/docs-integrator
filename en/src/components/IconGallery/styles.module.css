@@ -1,0 +1,69 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px 12px;
+  border-radius: var(--ifm-card-border-radius);
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--wso2-surface-border);
+  box-shadow: var(--wso2-card-shadow);
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.tile:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--wso2-card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.tileIcon {
+  display: flex;
+  color: var(--wso2-text-muted);
+  transition: color 0.2s ease;
+}
+
+/* PaletteIcon's <svg> always carries the global "palette-card-icon"
+   class, which custom.css's ".markdown .palette-card-icon" rule
+   absolutely-positions (top/right corner of a .palette-card) -- correct
+   there, but outside a .palette-card it pulls the icon out of this
+   tile's flow entirely (so it renders elsewhere, invisible in the tile
+   until something -- e.g. a hover-triggered repaint of the misplaced
+   element -- makes it noticeable). Reset that positioning back to a
+   normal, in-flow element here. */
+.tileIcon :global(.palette-card-icon) {
+  position: static;
+  top: auto;
+  right: auto;
+}
+
+.tile:hover .tileIcon {
+  color: var(--ifm-color-primary);
+}
+
+.tileName {
+  font-size: 0.78rem;
+  font-family: var(--ifm-font-family-monospace);
+  text-align: center;
+  word-break: break-word;
+  color: var(--ifm-font-color-base);
+}
+
+.tileHint {
+  font-size: 0.68rem;
+  color: var(--wso2-text-muted);
+  visibility: hidden;
+}
+
+.tile:hover .tileHint {
+  visibility: visible;
+}

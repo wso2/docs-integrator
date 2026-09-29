@@ -1,0 +1,204 @@
+name: Sync shared theme to product branches
+
+# Propagates the shared visual identity and governance docs from `main`,
+# the canonical branch, to every product branch — same "accept
+# duplication, automate sync" pattern as the docs content sync, applied
+# to theme/chrome and process docs instead of documentation content. See
+# MAINTENANCE.md for the full model this fits into (in particular, why
+# `main` is the source and not any one product branch).
+#
+# Add a branch to the matrix below to bring it into the shared-theme
+# contract when a new product launches (e.g. wso2-agent-builder).
+#
+# IconGallery, SearchBar, and ColorSwatch travel together even though
+# they're main's own design-system reference components (Icons/Homepage/
+# Tools scaffold docs, not real product content): en/src/theme/
+# MDXComponents/index.tsx -- itself fully shared -- imports all three
+# unconditionally, so any target missing one fails to typecheck/build
+# the moment it receives that file.
+#
+# ConnectorCatalog is NOT here at all, not even styles.module.css --
+# learned the hard way establishing the theme on wso2-connectors: its
+# real index.tsx (never shared) and styles.module.css were already
+# evolved together, coupled by exact class name, well past main's own
+# placeholder version of the stylesheet. Syncing just the stylesheet
+# replaced every class name the real markup depends on, breaking the
+# catalog page's entire layout. The whole component -- index.tsx,
+# context.tsx, Filters.tsx, styles.module.css -- is wso2-connectors-
+# owned now, maintained there directly, never synced from here.
+#
+# ArtifactPicker's data.ts is deliberately excluded below (three
+# explicit files instead of the whole directory): index.tsx,
+# styles.module.css, and inlineIcons.ts are genuinely generic
+# presentation code, but data.ts is each branch's own real artifact
+# list (saas's own doc paths, hrefs that don't exist on other
+# branches). Same class of bug as ConnectorCatalog above, caught
+# before it actually broke anything this time.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'en/src/theme-shared/**'
+      - 'en/src/theme/**'
+      - 'en/src/plugins/expose-sidebars/**'
+      - 'en/src/plugins/guidesCatalogPlugin.js'
+      - 'en/src/components/SiteNav/**'
+      - 'en/src/components/TabAwareToc/**'
+      - 'en/src/components/ProductDocsLinks/**'
+      - 'en/src/components/SidebarProductHeader/**'
+      - 'en/src/components/ExploreDropdown/**'
+      - 'en/src/components/GuidesCatalog/**'
+      - 'en/src/components/PaletteCard/**'
+      - 'en/src/components/PaletteIcon/**'
+      - 'en/src/components/CloudDocsLink/**'
+      - 'en/src/components/IconGallery/**'
+      - 'en/src/components/SearchBar/**'
+      - 'en/src/components/ColorSwatch/**'
+      - 'en/src/components/AiAssistantPanel/**'
+      - 'en/src/components/ArtifactPicker/index.tsx'
+      - 'en/src/components/ArtifactPicker/styles.module.css'
+      - 'en/src/components/ArtifactPicker/inlineIcons.ts'
+      - 'en/src/pages/community.tsx'
+      - 'en/src/pages/community.module.css'
+      - 'en/src/pages/contribute.tsx'
+      - 'en/src/pages/contribute.module.css'
+      - 'en/src/css/custom.css'
+      # Deliberately NOT 'en/static/img/**': every product branch keeps
+      # its own doc-content images under en/static/img/<section>/... --
+      # only these specific brand/icon assets are truly theme-shared.
+      # See SHARED_PATHS below for why the sync step also can't just
+      # rm -rf this whole directory the way it does for the paths above.
+      - 'en/static/img/WSO2_Integration_Platform_Black.svg'
+      - 'en/static/img/WSO2_Integration_Platform_White.svg'
+      - 'en/static/img/favicon.ico'
+      - 'en/static/img/favicon.svg'
+      - 'en/static/img/logo-dark.svg'
+      - 'en/static/img/logo.svg'
+      - 'en/static/img/wso2-integration-platform-black.svg'
+      - 'en/static/img/wso2-integration-platform-full-colour.svg'
+      - 'en/static/img/artifact-icons/**'
+      - 'en/static/img/branding/**'
+      - 'en/plugins/docusaurus-plugin-markdown-export/**'
+      - 'scripts/preview-all-sites.mjs'
+      - 'MAINTENANCE.md'
+      - 'CONTRIBUTING.md'
+      - 'AGENTS.md'
+      - 'HOW_TO_WRITE_A_GUIDE.md'
+      - 'UI_UX_GUIDELINES.md'
+      - '.github/workflows/staging_sync.yaml'
+  workflow_dispatch:
+
+env:
+  SHARED_PATHS: >-
+    en/src/theme-shared
+    en/src/theme
+    en/src/plugins/expose-sidebars
+    en/src/plugins/guidesCatalogPlugin.js
+    en/src/components/SiteNav
+    en/src/components/TabAwareToc
+    en/src/components/ProductDocsLinks
+    en/src/components/SidebarProductHeader
+    en/src/components/ExploreDropdown
+    en/src/components/GuidesCatalog
+    en/src/components/PaletteCard
+    en/src/components/PaletteIcon
+    en/src/components/CloudDocsLink
+    en/src/components/IconGallery
+    en/src/components/SearchBar
+    en/src/components/ColorSwatch
+    en/src/components/AiAssistantPanel
+    en/src/components/ReportIssueButton
+    en/src/components/FloatingActions
+    en/src/components/ArtifactPicker/index.tsx
+    en/src/components/ArtifactPicker/styles.module.css
+    en/src/components/ArtifactPicker/inlineIcons.ts
+    en/src/pages/community.tsx
+    en/src/pages/community.module.css
+    en/src/pages/contribute.tsx
+    en/src/pages/contribute.module.css
+    en/src/css/custom.css
+    en/static/img/WSO2_Integration_Platform_Black.svg
+    en/static/img/WSO2_Integration_Platform_White.svg
+    en/static/img/favicon.ico
+    en/static/img/favicon.svg
+    en/static/img/logo-dark.svg
+    en/static/img/logo.svg
+    en/static/img/wso2-integration-platform-black.svg
+    en/static/img/wso2-integration-platform-full-colour.svg
+    en/static/img/artifact-icons
+    en/static/img/branding
+    en/plugins/docusaurus-plugin-markdown-export
+    scripts/preview-all-sites.mjs
+    MAINTENANCE.md
+    CONTRIBUTING.md
+    AGENTS.md
+    HOW_TO_WRITE_A_GUIDE.md
+    UI_UX_GUIDELINES.md
+    .github/workflows/staging_sync.yaml
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [saas, wso2-integrator, wso2-connectors]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push shared theme + governance files to ${{ matrix.target }}
+        run: |
+          git config user.name "Docs Bot"
+          git config user.email "docs@wso2.com"
+
+          git fetch origin main ${{ matrix.target }}
+          git checkout -b sync-theme-${{ matrix.target }} origin/${{ matrix.target }}
+
+          # Full replace, not overlay: `git checkout <ref> -- <path>` only
+          # adds/updates files present in <ref> — it never removes a path
+          # that exists on the target but not on main. Since these paths
+          # are meant to be wholly owned by the shared contract (no
+          # target-specific files inside them — see the comment up in
+          # `on.paths` for the two exceptions this burned once:
+          # ConnectorCatalog, dropped entirely, and ArtifactPicker's
+          # data.ts, excluded by listing individual files instead of the
+          # whole directory), clear each one first so a removal on main
+          # actually propagates. Guarded to directories only; single-file
+          # paths (custom.css, MAINTENANCE.md, etc.) are just overwritten.
+          #
+          # This is exactly why en/static/img/artifact-icons and
+          # en/static/img/branding are the only static/img entries here,
+          # never the whole en/static/img directory: every product
+          # branch keeps its own doc-content images under
+          # en/static/img/<section>/... (thousands of them, e.g.
+          # wso2-connectors' per-connector screenshots), and rm -rf-ing
+          # the whole directory would delete all of it. artifact-icons
+          # and branding hold only shared icon/logo assets with no
+          # per-branch content mixed in, so the full-replace pattern is
+          # safe for those two specifically.
+          for p in $SHARED_PATHS; do
+            if [ -d "$p" ]; then
+              rm -rf "$p"
+            fi
+            git checkout origin/main -- "$p" 2>/dev/null || true
+          done
+
+          git add -A -- $SHARED_PATHS
+
+          if git diff --cached --quiet; then
+            echo "No shared-theme/governance changes to sync to ${{ matrix.target }}."
+            exit 0
+          fi
+
+          git commit -m "theme(sync): shared theme + governance docs from main ($(date +%Y-%m-%d))"
+          git push origin sync-theme-${{ matrix.target }}
+
+          gh pr create --base ${{ matrix.target }} --head sync-theme-${{ matrix.target }} \
+            --title "theme(sync): shared theme + governance docs from main" \
+            --body "Auto-synced shared theme files (custom.css, theme overrides, SiteNav, ProductDocsLinks, TabAwareToc, SidebarProductHeader, ExploreDropdown, GuidesCatalog + its plugin, PaletteCard/PaletteIcon/IconGallery/ColorSwatch/SearchBar, scripts/preview-all-sites.mjs, AiAssistantPanel, ArtifactPicker's presentation code (not its per-branch data.ts), expose-sidebars, markdown-export, brand assets) and governance docs (MAINTENANCE.md, CONTRIBUTING.md, AGENTS.md, HOW_TO_WRITE_A_GUIDE.md, UI_UX_GUIDELINES.md, staging_sync.yaml). ConnectorCatalog is NOT included -- it's wso2-connectors-owned, not shared. Review for ${{ matrix.target }}-specific breakage before merge -- in particular, GuidesCatalog/ArtifactPicker only do something if this branch's own docusaurus.config.ts registers guidesCatalogPlugin and its docs actually use these components; see HOW_TO_WRITE_A_GUIDE.md."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

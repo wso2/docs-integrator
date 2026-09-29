@@ -1,0 +1,40 @@
+.secondaryRow {
+  position: sticky;
+  top: var(--ifm-navbar-height);
+  z-index: calc(var(--ifm-z-index-fixed) - 1);
+  background-color: var(--ifm-background-color);
+  border-bottom: 1px solid var(--wso2-surface-border);
+  /* Kept in sync with custom.css's --wso2-secondary-row-height, which
+     other rules (anchor scroll-margin) size against -- see that
+     variable's definition for why this needs to be a known height. */
+  min-height: var(--wso2-secondary-row-height);
+}
+
+.secondaryRowInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem var(--ifm-navbar-padding-horizontal);
+}
+
+/* Groups #wso2-edit-page-slot (see index.tsx's docstring) with
+   CopyPageButton so they sit right next to each other on the row's
+   right side, instead of `justify-content: space-between` above
+   spreading a third top-level child away from CopyPageButton. */
+.rightGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Below this, the product+version pill group and the Copy Page button
+   no longer fit on one line at their normal sizes (see each component's
+   own mobile rules for how they shrink) -- wrap instead of clipping or
+   forcing horizontal scroll on the whole row. */
+@media (max-width: 480px) {
+  .secondaryRowInner {
+    flex-wrap: wrap;
+    row-gap: 0.4rem;
+  }
+}

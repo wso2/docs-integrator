@@ -1,0 +1,77 @@
+/* Icon-only trigger -- Infima's stock .navbar__search-input is sized
+   and padded for a real input with placeholder text ("Search") to the
+   right of the icon; this one has no visible text at all (see
+   index.tsx's docstring), so it's shrunk to a small square with the
+   icon centered instead of left-offset to make room for text that
+   isn't there. Undoes the anchor defaults (underline, link color)
+   Infima doesn't need to override on a real input but we do here.
+   Selector is `:global(.navbar__search-input).trigger` (two classes,
+   not one) so its `width: 2rem` deterministically beats custom.css's
+   un-media-queried `.navbar__search-input { width: 16rem }` regardless
+   of stylesheet load order -- this now needs to hold across the whole
+   996-1920px band index.tsx's breakpoint covers, not just below 996px
+   where a same-specificity tie happened to resolve in our favor.
+   `height`/`border-radius`/`margin` match custom.css's `.navbar-icon-link`
+   exactly (same 2rem circular hit target, same 0.0625rem gap -- tight
+   enough that 6 social icons plus this trigger plus the color toggle
+   still fit next to FAQ without any of them needing to shrink or
+   overlap, see the flex-shrink:0 rules those elements carry now) --
+   without these the trigger rendered as a taller, square, unhighlighted
+   box next to GitHub/Discord/LinkedIn/YouTube/X's identical circles,
+   visibly out of line with the rest of that icon row. `display: flex`,
+   not `inline-flex` -- its parent (theme-classic's own NavbarSearch
+   wrapper div) is a plain block container with no flex/align-items of
+   its own, so an inline-level child here still sits inside an
+   anonymous line box sized by the surrounding line-height, a few
+   pixels taller than the 2rem circle itself and vertically offset by
+   baseline alignment. A block-level flex child has no such line box,
+   so the wrapper hugs it exactly and it centers the same way
+   `.navbar-icon-link` does one level up (a real .navbar__items--right
+   flex child, not nested in an extra wrapper div at all). */
+:global(.navbar__search-input).trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 0.0625rem;
+  padding: 0;
+  border-radius: 50%;
+  background-position: center !important;
+  color: var(--ifm-navbar-search-input-placeholder-color) !important;
+  text-decoration: none !important;
+  border: 0;
+  appearance: none;
+  cursor: pointer;
+}
+
+.trigger:hover {
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-navbar-search-input-placeholder-color) !important;
+  text-decoration: none !important;
+}
+
+/* Wide form (1800px+): an input-shaped button carrying the placeholder
+   text. Keeps Infima's own `.navbar__search-input` look (icon drawn as a
+   left background image, pill radius, tinted fill) -- only what a button
+   needs on top: no border, left-aligned muted text, pointer cursor. */
+:global(.navbar__search-input).triggerWide {
+  display: flex;
+  align-items: center;
+  width: 14rem;
+  height: 2.25rem;
+  margin: 0 0.25rem;
+  border: 0;
+  appearance: none;
+  text-align: left;
+  color: var(--ifm-navbar-search-input-placeholder-color);
+  cursor: pointer;
+}
+
+.triggerText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  color: var(--wso2-text-muted);
+}

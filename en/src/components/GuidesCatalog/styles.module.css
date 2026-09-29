@@ -1,0 +1,90 @@
+/* ================================================================
+   GUIDES CATALOG — Search + per-guide cards
+   Search input styling matches ConnectorCatalog's (see its
+   styles.module.css) for a consistent search affordance site-wide.
+   ================================================================ */
+.guidesCatalog {
+  margin-top: 0.5rem;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  color: #7B8598;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.7rem 2.5rem 0.7rem 2.75rem;
+  font-size: 0.925rem;
+  font-family: inherit;
+  border: 1.5px solid #E5E9F0;
+  border-radius: 12px;
+  background: #FFFFFF;
+  color: #565656;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchInput::placeholder {
+  color: #7B8598;
+}
+
+.searchInput:focus {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px rgba(241, 78, 35, 0.1);
+}
+
+[data-theme='dark'] .searchInput {
+  background: #0E1728;
+  border-color: rgba(255, 255, 255, 0.09);
+  color: #B6C1D3;
+}
+
+[data-theme='dark'] .searchInput::placeholder {
+  color: #8B94A7;
+}
+
+[data-theme='dark'] .searchInput:focus {
+  box-shadow: 0 0 0 3px rgba(241, 78, 35, 0.15);
+}
+
+.clearButton {
+  position: absolute;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #7B8598;
+  cursor: pointer;
+}
+
+.clearButton:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #565656;
+}
+
+[data-theme='dark'] .clearButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #B6C1D3;
+}
+
+.resultCount {
+  font-size: 0.825rem;
+  color: #7B8598;
+  margin-bottom: 1rem;
+}
