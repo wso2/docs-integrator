@@ -1,0 +1,244 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Product and version are two independent bordered pills side by side
+   (a small gap between, not fused into one control) -- matches the
+   reference exactly. */
+.pillGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pillWrapper {
+  position: relative;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 100%;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--wso2-surface-border);
+  border-radius: 11px;
+  background: var(--ifm-background-color);
+  color: var(--wso2-heading-color);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  box-shadow: var(--wso2-card-shadow);
+  transition: border-color 0.15s ease;
+}
+
+.pill:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+/* `min-width` (not a fixed `width`) so the pill grows to fit the
+   longest real product label ("WSO2 Connectors") instead of clipping
+   it -- only one product name is ever shown here at a time (switching
+   products is a full page load to a different site, not a client-side
+   swap), so there's no "jumping width" to guard against; a fixed width
+   sized for "SaaS" was just truncating the longer names. */
+.pillProduct {
+  min-width: 10rem;
+  justify-content: space-between;
+}
+
+/* The 10rem min-width exists so the pill doesn't clip the longest real
+   product label ("WSO2 Connectors") -- on a narrow phone that fixed
+   floor competes with the version pill and the Copy Page button for
+   the same ~320-375px of width. Let it shrink to fit instead; the pill
+   grows to the label's own natural width regardless (see .pillProduct
+   .pillLabel's unconditional `max-width: none` below) rather than being
+   truncated -- .secondaryRowInner (theme/Navbar/styles.module.css)
+   already wraps at this same breakpoint, and Edit this page/Copy page
+   go icon-only here too, so there's room for the full name without
+   clipping it to an unreadable "WSO2 Integr…". */
+@media (max-width: 480px) {
+  .pillProduct {
+    min-width: 0;
+  }
+}
+
+.pillLabel {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 9rem;
+}
+
+.pillProduct .pillLabel {
+  max-width: none;
+  flex: 1;
+  text-align: left;
+}
+
+.pill > svg {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* Icon badge shown before the product pill's label -- full opacity,
+   unlike the trailing chevron above. */
+.pillIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: #FDE3D9;
+  color: var(--wso2-accent-text);
+}
+
+[data-theme='dark'] .pillIcon {
+  background: rgba(241, 78, 35, 0.16);
+}
+
+/* Dot shown before the version pill's label. */
+.pillDot {
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px #FDE3D9;
+}
+
+[data-theme='dark'] .pillDot {
+  box-shadow: 0 0 0 3px rgba(241, 78, 35, 0.16);
+}
+
+.pillMenu {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  z-index: 10;
+  min-width: 10rem;
+  padding: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--wso2-surface-border);
+  border-radius: 16px;
+  box-shadow: var(--wso2-card-shadow-hover);
+}
+
+.pillMenuItem {
+  display: block;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base) !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+.pillMenuItem:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme='dark'] .pillMenuItem:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ---- Product dropdown ("Platform Components") ---- */
+.pillMenuWide {
+  width: 330px;
+}
+
+/* Marks connectors as a supporting product (a catalog used BY saas and
+   integrator) rather than a third platform of the same kind as those
+   two -- same divider treatment as the Copy Page dropdown's own
+   .markdownDropdownDivider. */
+.pillMenuDivider {
+  height: 1px;
+  background-color: var(--wso2-surface-border);
+  margin: 0.35rem 0.35rem;
+}
+
+.pillMenuHeading {
+  padding: 8px 10px 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wso2-text-muted);
+}
+
+.pillMenuRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 10px;
+  border-radius: 12px;
+  text-decoration: none !important;
+  transition: background-color 0.15s ease;
+}
+
+/* Hover is the only background highlight in the open menu -- including
+   on the current product's own row. The current product is still
+   marked (gradient icon, bold accent-colored title/desc below), just
+   not with a permanently-lit row background: a menu that's meant for
+   picking where to go shouldn't visually anchor on where you already
+   are while you're scanning it. Same peach used by the Copy Page
+   dropdown's own hover (DocBreadcrumbs' .markdownDropdownItem:hover),
+   so every dropdown in the chrome shares one hover treatment. */
+.pillMenuRow:hover {
+  background-color: #FDE3D9;
+}
+
+[data-theme='dark'] .pillMenuRow:hover {
+  background-color: rgba(241, 78, 35, 0.16);
+}
+
+.pillMenuRowIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--wso2-well-bg);
+  color: var(--wso2-text-muted);
+}
+
+.pillMenuRowIconActive {
+  background: linear-gradient(145deg, #FF8A3D, #F14E23);
+  color: #FFFFFF;
+}
+
+.pillMenuRowText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pillMenuRowTitle {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--wso2-heading-color);
+}
+
+.pillMenuRowActive .pillMenuRowTitle {
+  font-weight: 700;
+  color: var(--wso2-accent-text);
+}
+
+.pillMenuRowDesc {
+  font-size: 12px;
+  color: var(--wso2-text-muted);
+}
+
+.pillMenuRowActive .pillMenuRowDesc {
+  color: var(--ifm-font-color-base);
+}

@@ -1,0 +1,6 @@
+{
+  "theme.SearchPage.emptyResultsTitle": {
+    "message": "Search Documentation",
+    "description": "The search page title for empty query"
+  }
+}

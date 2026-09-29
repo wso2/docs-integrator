@@ -1,0 +1,69 @@
+.categoryLink {
+  overflow: hidden;
+}
+
+/*
+TODO merge this logic back in Infima?
+ */
+:global(.menu__link--sublist-caret)::after {
+  margin-left: var(--ifm-menu-link-padding-vertical);
+}
+
+.categoryLinkLabel {
+  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Top-level (level 1) only -- icon + label side by side instead of the
+   plain text-only label stock/nested categories use. Deliberately its own
+   class rather than an override of .categoryLinkLabel: that one is a
+   `display: -webkit-box` + `-webkit-box-orient: vertical` line-clamp box,
+   which stacks children vertically (icon above the text) in any browser
+   where an overriding `display: flex` doesn't win. */
+.categoryLinkLabelTop {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.categoryIcon {
+  display: flex;
+  flex-shrink: 0;
+  color: inherit;
+  opacity: 0.75;
+}
+
+/* Category with a badge: the label stays on one line and the pill sits on
+   its own row beneath it (customProps.badge). */
+.categoryTextCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  min-width: 0;
+}
+
+.categoryTextOneLine {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.categoryBadge {
+  padding: 0 0.4rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--wso2-text-muted);
+}

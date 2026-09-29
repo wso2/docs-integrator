@@ -1,0 +1,112 @@
+name: Fork Preview (gh-pages)
+
+# One-off, manual-only workflow -- NOT part of the real pipeline (that's
+# staging_sync.yaml -> staging -> Choreo, and promote_to_production.yaml
+# -> gh-pages -> wso2.com). This exists purely so this fork's own free
+# GitHub Pages hosting (https://<owner>.github.io/docs-integrator/) can
+# show a quick merged preview to share internally, without needing
+# anyone to run a build locally.
+#
+# Builds saas + wso2-integrator + wso2-connectors with baseUrls rooted
+# at /docs-integrator/ (this fork's real Pages path) instead of the real
+# pipeline's production baseUrls (/integration-platform/docs/..., meant
+# for wso2.com) -- those two don't match, which is why pointing Pages at
+# `staging` or `gh-pages` as populated by the real pipeline 404s/blank-
+# pages under this fork's URL. Merges the same way staging_sync.yaml
+# does (root + /integrator + /connectors), then replaces `gh-pages`
+# outright (no keep_files -- this IS the whole site each run).
+#
+# Trigger manually: Actions tab -> Fork Preview (gh-pages) -> Run workflow.
+# Requires Settings -> Actions -> General -> Workflow permissions ->
+# "Read and write permissions" (same fix needed for staging_sync.yaml).
+#
+# Also sets CROSS_PRODUCT_BASE so the product switcher, "Connectors"
+# navbar link, and footer cross-links (which don't use BASE_URL at all,
+# by design -- see themeConfig.ts's CROSS_PRODUCT_BASE docstring) point
+# at this fork's own path instead of the real /integration-platform/docs/
+# production root. Without this, the site itself loads fine but every
+# cross-product link inside it 404s.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fork-preview-deploy
+  cancel-in-progress: false
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out saas
+        uses: actions/checkout@v4
+        with:
+          ref: saas
+          path: saas
+
+      - name: Check out wso2-integrator
+        uses: actions/checkout@v4
+        with:
+          ref: wso2-integrator
+          path: integrator
+
+      - name: Check out wso2-connectors
+        uses: actions/checkout@v4
+        with:
+          ref: wso2-connectors
+          path: connectors
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build saas (root of gh-pages)
+        run: |
+          npm ci
+          npm run build
+        working-directory: saas
+        env:
+          BASE_URL: /docs-integrator/
+          CROSS_PRODUCT_BASE: /docs-integrator/
+
+      - name: Build wso2-integrator (gh-pages/integrator)
+        run: |
+          npm ci
+          npm run build
+        working-directory: integrator
+        env:
+          BASE_URL: /docs-integrator/integrator/
+          CROSS_PRODUCT_BASE: /docs-integrator/
+
+      - name: Build wso2-connectors (gh-pages/connectors)
+        run: |
+          npm ci
+          npm run build
+        working-directory: connectors
+        env:
+          BASE_URL: /docs-integrator/connectors/
+          CROSS_PRODUCT_BASE: /docs-integrator/
+
+      - name: Merge builds into one tree
+        run: |
+          mkdir -p merged
+          cp -r saas/en/build/. merged/
+          mkdir -p merged/integrator
+          cp -r integrator/en/build/. merged/integrator/
+          mkdir -p merged/connectors
+          cp -r connectors/en/build/. merged/connectors/
+          touch merged/.nojekyll
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: merged
+          # Deliberately no keep_files -- `merged` already IS the
+          # complete site (all three products), so a full replace is
+          # correct each run.

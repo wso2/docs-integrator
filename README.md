@@ -1,128 +1,174 @@
-# WSO2 Integrator Docs
+# docs-integrator
 
-Documentation source for WSO2 Integrator, built with Docusaurus.
+Documentation source for the WSO2 Integration Platform, built with
+Docusaurus. This repo publishes several product branches as one merged
+multi-product site:
+
+| Branch | Product | Path |
+|---|---|---|
+| `saas` | WSO2 Cloud | `/saas/` |
+| `wso2-integrator` | WSO2 Integrator (self-hosted) | `/integrator/` |
+| `wso2-connectors` | Connectors catalog | `/connectors/` |
+
+**You are on `main`.** This branch carries no real product content —
+it's the shared-theme/governance source of truth every product branch
+forks from and syncs shared pieces out of, plus a placeholder `docs/`
+scaffold that demonstrates every doc-authoring convention this repo
+uses. See [MAINTENANCE.md](MAINTENANCE.md) for the full branch model
+(what `main` is for, in detail, is its own section there).
 
 ## Repository Layout
 
-- `docs-integrator/en` - Docusaurus site source
-- `issue_template.md` - issue template
-- `pull_request_template.md` - PR template
+- `en/` — Docusaurus site source (docs, theme, components, config)
+- `en/docs/` — on `main`, a placeholder scaffold (see `en/docs/homepage/`,
+  `en/docs/workflows/`, and the rest) rather than real product docs
+- `en/src/theme-shared/`, `en/src/theme/`, `en/src/components/*` — the
+  shared theme (see "Theme & shared governance" below)
+- `scripts/preview-all-sites.mjs` — local multi-branch preview (see
+  "Local testing" below)
+- `MAINTENANCE.md` — branch/release model, what's shared vs. per-branch
+- `CONTRIBUTING.md` — Golden Rules, doc structure conventions, PR scenarios
+- `AGENTS.md` — pre-flight checklist for AI-assisted doc changes
+- `HOW_TO_WRITE_A_GUIDE.md` — frontmatter checklist for `guides/` content
+- `issue_template.md`, `pull_request_template.md` — issue/PR templates
 
 ## Prerequisites
 
-- Node.js `>= 20` (project is tested with Node 20)
+- Node.js `>= 20`
 - npm `>= 10`
 
 ## Quick Start
 
 ```bash
-npm install
-npm run start
+npm install        # once, from the repo root
+cd en
+npm run start -- --host localhost
 ```
 
-Then open the local URL printed in the terminal (usually `http://localhost:3000`).
+Open the local URL Docusaurus prints (usually `http://localhost:3000`).
 
 ## Common Commands
 
-Run these from `docs-integrator/` (the npm project root):
+Run these from `en/`:
 
 ```bash
 npm run start      # local dev server (hot reload)
-npm run build      # production build in ./build
-npm run serve      # serve built site locally
+npm run build      # production build in en/build
+npm run serve      # serve that build locally
 npm run typecheck  # TypeScript checks
-npm run clear      # clear Docusaurus cache
+npm run clear      # clear the Docusaurus cache
 ```
 
-## Contributing Guide
+## Local testing
 
-### 1) Create a Branch
+A single branch's `npm run start`/`npm run build` only shows that one
+branch in isolation — no product switcher, no cross-product links, no
+version pill. To check something the way it actually publishes (all
+product branches merged into one site), run from the repo root:
 
 ```bash
-git checkout -b docs/<short-topic>
+npm run preview:all              # build + merge + serve saas, wso2-integrator, wso2-connectors
+npm run preview:all -- --dev     # faster: separate dev servers, no merge/cross-links
+npm run preview:all saas         # only specific branches
 ```
 
-### 2) Make Changes
+This spins up a dedicated git worktree per branch under the OS temp
+directory (never touches whichever branch you currently have checked
+out) — see `scripts/preview-all-sites.mjs`'s own header comment for
+the full mechanics, including a Windows/Git-Bash `BASE_URL`
+path-mangling bug it specifically works around.
 
-Typical files:
+## Theme & shared governance
 
-- Markdown docs: `docs-integrator/en`
-- Site config: `docs-integrator/en/docusaurus.config.ts`
-- Sidebar structure: `docs-integrator/en/sidebars.ts`
-- Styling overrides: `docs-integrator/en/src/css/custom.css`
+`main` is the canonical source for everything that should look and
+behave the same across every product branch: the visual theme
+(`en/src/theme-shared/`, `en/src/theme/`), shared reusable components
+(`PaletteCard`, `PaletteIcon`, `IconGallery`, `SearchBar`,
+`SidebarProductHeader`, `GuidesCatalog`, and more — see
+`en/src/components/`), and governance docs (this file's siblings:
+`MAINTENANCE.md`, `CONTRIBUTING.md`, `AGENTS.md`,
+`HOW_TO_WRITE_A_GUIDE.md`, `UI_UX_GUIDELINES.md`).
 
-### 3) Validate Locally
+A push to `main` touching any of these triggers
+`.github/workflows/sync-theme.yaml`, which opens a PR against every
+product branch in its matrix with the change. The exact file list is
+`sync-theme.yaml`'s own `SHARED_PATHS` — see MAINTENANCE.md's "Shared
+theme & shared governance" section for the model this fits into, and
+why `main` (not any one product branch) is the source.
 
-```bash
-npm run typecheck
-npm run build
-```
+**Not shared, deliberately per-branch:** `en/docusaurus.config.ts`
+(navbar/footer content, plugins), `en/src/pages/index.tsx` +
+`index.module.css` (the homepage), `en/docs/` itself (real content),
+and this README.
 
-Use `npm run start` while editing for quick preview.
+## Adding a new product
 
-### 4) Commit
+Short version — see MAINTENANCE.md's "Onboarding a new product" table
+for the authoritative checklist, and
+[`docs/workflows/workflows.md`](en/docs/workflows/workflows.md) (or
+`/workflows` on a running build) for a full worked example and the
+deep dive on path/workflow configuration:
 
-Use clear, scoped commit messages.
+1. **New branch:** `git checkout main && git checkout -b wso2-<product>`, push it.
+2. **New docs content:** replace `en/docs/`'s placeholder scaffold
+   with the product's real sections — each new top-level folder needs
+   `sidebar_position`, an explicit `_category_.json`, and (if it has
+   2+ docs) its own `<folder>/<folder>.md` index page. See
+   `CONTRIBUTING.md`'s "Doc structure conventions" and this branch's
+   own scaffold (`en/docs/section-1/`, `en/docs/section-2/`, etc.) for
+   worked examples of every convention.
+3. **Path setup** (`.github/workflows/staging_sync.yaml`, edited on
+   `main`): add the branch to `on.push.branches`, add a case to the
+   `BASE_URL` `case` statement giving it its own subpath (e.g.
+   `/integration-platform/docs/<product>/` — no product owns the bare
+   family root), and a matching `Deploy ... (staging/<subpath>)` step.
+4. **Workflow edits, elsewhere:**
+   - `scripts/preview-all-sites.mjs`'s `SITES` map — add an entry so
+     local multi-branch preview includes it.
+   - `en/src/components/SidebarProductHeader`'s `PRODUCTS` map — add
+     label/description/icon/path so it appears in the product switcher.
+   - `en/src/theme/DocSidebar/Desktop/icons.tsx`'s `ICONS_BY_LABEL` —
+     add an entry per real top-level category label, so the sidebar's
+     icon rail doesn't fall back to a generic dot.
+   - `.github/workflows/sync-theme.yaml`'s matrix — add the branch so
+     it starts receiving the shared theme.
+   - This file's branch table above, and `MAINTENANCE.md`'s /
+     `CONTRIBUTING.md`'s branch tables.
+5. **Homepage:** replace the placeholder `sections`/`quickLinks`
+   arrays in `en/src/pages/index.tsx` with the product's own —
+   see `docs/homepage/homepage.md` for what lives where.
+6. **Versioning**, if the product needs release-versioned docs: see
+   MAINTENANCE.md's Versioning row and CONTRIBUTING.md's "I'm cutting
+   a new wso2-integrator release version" for the step-by-step.
 
-Examples:
+## Content conventions
 
-- `docs(api): clarify OAuth token rotation steps`
-- `docs(nav): reorganize integration examples sidebar`
-- `style: improve table readability on mobile`
-
-### 5) Open a Pull Request
-
-- Fill in `pull_request_template.md`
-- Link related issue(s)
-- Add screenshots for UI/styling changes
-- Call out breaking or structural doc changes
-
-## Content Quality Checklist
-
-Before opening a PR, confirm:
-
-- Links work and are not broken
-- Headings are consistent and scannable
-- Code snippets are complete and tested where possible
-- New pages are added to sidebar/navigation if needed
-- Build and type checks pass
+Before touching `en/docs/`, read `CONTRIBUTING.md`'s "Golden Rules"
+and "Doc structure conventions", and `AGENTS.md`'s pre-flight
+checklist if you're making the change with AI assistance. In short:
+every doc needs an explicit `slug:`; every folder with 2+ docs needs
+an index page and an explicit `_category_.json`; verify with a real
+`npx docusaurus build` (from `en/`), not a visual skim.
 
 ## Working with AI Agents
 
-AI-assisted contributions are welcome.
-
-### Rules for Agent-Assisted Changes
-
-- Treat AI output as a draft; a human reviewer remains responsible
-- Verify technical accuracy against source code and official docs
-- Do not commit secrets, tokens, or internal-only data
-- Keep changes small and reviewable
-- Include a short "AI usage note" in the PR description
-
-### Suggested AI Prompt Template
-
-```text
-Task: <what to change>
-Scope: <exact files/folders allowed>
-Constraints: <style, terminology, version, formatting>
-Validation: run `npm run typecheck` and `npm run build`
-Output: summarize changed files and rationale
-```
-
-### AI Usage Note (for PR description)
-
-```text
-AI-assisted: Yes
-Tool: <Codex/Claude/Copilot/Other>
-How used: <drafting/editing/refactoring/checking>
-Human verification: <what you manually validated>
-```
+AI-assisted contributions are welcome — `AGENTS.md`'s checklist is the
+starting point for any AI-assisted change to `en/docs/`. When opening
+a PR with AI-assisted changes, treat the output as a draft (a human
+reviewer verifies technical accuracy against source code and official
+docs, and confirms nothing secret was committed), and note in the PR
+description roughly what was AI-assisted and what you manually
+verified.
 
 ## Troubleshooting
 
-- `npm run dev` fails: this project uses `npm run start` for local development.
-- Dependency issues: delete `node_modules` and `package-lock.json`, then run `npm install`.
+- `npm run dev` fails: this project uses `npm run start`, not `dev`.
+- Dependency issues: delete `node_modules` and `package-lock.json`,
+  then run `npm install` again.
 - Node version mismatch: run `nvm use 20`.
+- `npm run preview:all` fails on a fresh clone: it needs each branch's
+  own `npm install` inside its worktree, which it does automatically
+  unless you pass `--skip-install`.
 
 ## License
 

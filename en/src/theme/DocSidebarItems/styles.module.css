@@ -1,36 +1,16 @@
-.searchItem {
-  padding: 0.5rem 0.75rem 0.25rem;
-  list-style: none;
+.separator {
+  margin: 0.9rem 0.75rem 0.4rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--wso2-border-subtle);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wso2-text-muted);
 }
 
-.searchInput {
-  width: 100%;
-  padding: 0.4rem 0.65rem;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 6px;
-  background: var(--ifm-background-color);
-  color: var(--ifm-font-color-base);
-  font-size: 0.8rem;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.searchInput:focus {
-  border-color: var(--ifm-color-primary);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ifm-color-primary) 20%, transparent);
-}
-
-.searchInput::placeholder {
-  color: var(--ifm-color-emphasis-500);
-}
-
-.noResults {
-  margin: 0.4rem 0 0;
-  font-size: 0.78rem;
-  color: var(--ifm-color-emphasis-600);
-  text-align: center;
-}
-
-[data-theme='dark'] .searchInput {
-  border-color: var(--ifm-color-emphasis-400);
+.separator:first-child {
+  margin-top: 0.25rem;
+  padding-top: 0;
+  border-top: none;
 }

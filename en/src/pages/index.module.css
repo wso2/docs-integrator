@@ -1,7 +1,7 @@
 /**
  * Landing Page — Modern, Clean Design
  *
- * WSO2 Brand: #17223A #1B2A49 #5CD1FF #B7E4FC
+ * WSO2 Brand: #1B2A49 #26365A (navy) #F14E23 #FF8A3D (Pulse orange)
  * Neutrals:   #000 #0D0D0D #262626 #565656 #D9D9D9 #F2F2F2 #FFF
  *
  * Design: Clean SVG icons with color-coded badges,
@@ -9,110 +9,215 @@
  */
 
 /* ================================================================
-   HERO — Light blue in light theme, dark navy in dark theme
+   HERO — split layout: product-screenshot card (left) + heading/
+   search/CTA (right). Always the navy gradient, independent of the
+   site's light/dark theme (like a fixed brand banner).
    ================================================================ */
 .heroBanner {
-  padding: 4.5rem 0 3.5rem;
-  text-align: center;
   position: relative;
-  background: linear-gradient(180deg, #0F172A 0%, #1B2A49 100%);
+  overflow: hidden;
+  padding: 4.5rem 2rem 5rem;
+  background: linear-gradient(150deg, #26365A, #1B2A49);
   color: #FFFFFF;
 }
 
-.heroTopActions {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 5.5rem;
-  margin-bottom: -1.5rem;
+.heroBanner::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 640px;
+  height: 340px;
+  background: radial-gradient(closest-side, rgba(241, 78, 35, 0.28), transparent);
+  pointer-events: none;
+}
+
+.heroInner {
   position: relative;
-  z-index: 20;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+/* ---- Left: welcome screenshot ---- */
+.heroLeft {
+  flex: 1 1 420px;
+  min-width: 0;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+/* The screenshot is a polished mockup export with its own rounded
+   corners/shadow/glow already baked in -- no wrapper chrome here (that
+   would double up the framing and clip its own soft edges). Copied
+   verbatim from wso2-integrator's own homepage -- see WelcomeScreenshot
+   in index.tsx. */
+.heroScreenshot {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.downloadRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.downloadBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 12px;
+  background: #FFFFFF;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #1B2A49 !important;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+  text-decoration: none !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.downloadBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.34);
+}
+
+.downloadCaption {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #9FB0CC;
+}
+
+/* ---- Right: badge / heading / search / CTA ---- */
+.heroRight {
+  flex: 1 1 400px;
+  min-width: 0;
+  max-width: 600px;
+  padding-left: 40px;
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 22px;
+}
+
+.heroBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #FFD9CC;
 }
 
 .heroBanner h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  margin-bottom: 0.75rem;
+  margin: 0;
+  font-size: clamp(34px, 3.6vw, 52px);
+  line-height: 1.06;
+  font-weight: 800;
+  letter-spacing: -1.4px;
   color: #FFFFFF;
 }
 
 .heroSubtitle {
-  font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
   max-width: 520px;
-  margin: 0 auto;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #C8D3E6;
 }
 
-/* Subtle top glow */
-.heroBanner::before {
-  content: '';
-  position: absolute;
-  top: -40%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 60%);
-  pointer-events: none;
-}
+@media screen and (max-width: 900px) {
+  /* Stacked single column below the desktop side-by-side breakpoint --
+     .heroRight (badge/heading/search/CTA) first, then a horizontal
+     divider (was a vertical .heroRight border-left when side by side;
+     becomes a .heroLeft border-top now that it's second/below instead
+     of second/right), then .heroLeft (screenshot/download/caption).
+     Everything centered, since there's no longer a second column to
+     visually balance against. */
+  .heroInner {
+    flex-direction: column;
+    /* Tighter than the 2.5rem desktop side-by-side gap -- stacked,
+       that much empty space read as a gap before the divider line
+       even starts, on top of .heroLeft's own padding-top after it. */
+    gap: 1.25rem;
+  }
 
-/* Dark theme hero */
-[data-theme='dark'] .heroBanner {
-  background: linear-gradient(180deg, #0F172A 0%, #1B2A49 100%);
-}
+  .heroRight {
+    order: 1;
+    padding-left: 0;
+    border-left: none;
+    align-items: center;
+    text-align: center;
+  }
 
-/* Stronger glow in dark mode for visual interest */
-[data-theme='dark'] .heroBanner::before {
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0.03) 40%, transparent 65%);
+  .buttons {
+    justify-content: center;
+  }
+
+  .heroLeft {
+    order: 2;
+    align-items: center;
+    text-align: center;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .downloadRow {
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 3rem 1.5rem 2.5rem;
-  }
-
-  .heroBanner h1 {
-    font-size: 2rem;
-  }
-
-  .heroSubtitle {
-    font-size: 1rem;
+    padding: 3rem 1.25rem 2.5rem;
   }
 }
 
 .buttons {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 560px;
 }
 
-/* Hero CTA — sky blue button on dark navy background */
+/* Hero CTA — the one CTA gradient (Pulse orange) */
 .heroBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  background: #38BDF8;
-  color: #0F172A;
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.7rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.2s ease;
+  gap: 10px;
+  height: 50px;
+  padding: 0 24px;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #FF8A3D, #F14E23);
+  color: #FFFFFF !important;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none !important;
+  box-shadow: 0 12px 30px rgba(241, 78, 35, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .heroBtn:hover {
-  background: #56CBFA;
-  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35);
-  text-decoration: none;
-  color: #0F172A;
   transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(241, 78, 35, 0.42);
 }
 
 .heroBtn svg {
@@ -123,385 +228,158 @@
   transform: translateX(3px);
 }
 
+/* SEARCH BAR CSS moved to src/components/SearchBar/styles.module.css
+   when that component was pulled out of this page -- see index.tsx. */
+
 /* ================================================================
-   CENTRAL SEARCH BAR
+   "What do you want to build?" — bordered cards, icon badge on the
+   right (title + subtitle on the left)
    ================================================================ */
-.searchWrapper {
-  position: relative;
-  max-width: 520px;
-  margin: 2rem auto 0;
-  z-index: 10;
+.tutorialRow {
+  padding: 56px 40px 24px;
+  max-width: 1180px;
+  margin: 0 auto;
 }
 
-.searchForm {
+.tutorialRowTitle {
+  margin: 0 0 20px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--wso2-heading-color);
+}
+
+.tutorialGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.tutorialCard {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 0 1rem;
-  transition: all 0.2s ease;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--wso2-surface-border);
+  box-shadow: var(--wso2-card-shadow);
+  color: inherit !important;
+  text-decoration: none !important;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-.searchForm:focus-within {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+.tutorialCard:hover {
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-2px);
 }
 
-.searchIcon {
-  flex-shrink: 0;
-  color: rgba(255, 255, 255, 0.35);
-  margin-right: 0.5rem;
-  transition: color 0.2s ease;
-}
-
-.searchForm:focus-within .searchIcon {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.searchIconButton {
-  background: transparent;
-  border: none;
-  padding: 0;
+.tutorialCardText {
   display: flex;
-  align-items: center;
-  cursor: pointer;
-  outline: none;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.searchIconButton:hover .searchIcon {
-  color: rgba(255, 255, 255, 0.8);
+.tutorialCardTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--wso2-heading-color);
 }
 
-.searchInput {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #FFFFFF;
-  font-size: 0.95rem;
-  padding: 0.75rem 0;
-  font-family: inherit;
-  line-height: 1.5;
+.tutorialCardSub {
+  font-size: 13px;
+  color: var(--wso2-text-muted);
 }
 
-.searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.searchInput:focus::placeholder {
-  color: rgba(255, 255, 255, 0.45);
-}
-
-.searchKbd {
+.tutorialCardArrow {
+  display: grid;
+  place-items: center;
   flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.65rem;
-  font-family: inherit;
-  font-weight: 600;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 5px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.3);
-  pointer-events: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: #FDE3D9;
+  color: var(--wso2-accent-text);
+  transition: transform 0.2s ease;
 }
 
-.searchForm:focus-within .searchKbd {
-  display: none;
+[data-theme='dark'] .tutorialCardArrow {
+  background: rgba(241, 78, 35, 0.16);
 }
 
-/* Quick-links dropdown */
-.searchDropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 10px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  padding: 0.4rem;
-  z-index: 100;
-}
-
-[data-theme='dark'] .searchDropdown {
-  background: #151E31;
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-}
-
-.searchDropdownLabel {
-  font-size: 0.65rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #565656;
-  padding: 0.5rem 0.75rem 0.25rem;
-  margin: 0;
-}
-
-[data-theme='dark'] .searchDropdownLabel {
-  color: #64748B;
-}
-
-.searchDropdownItem {
-  display: block;
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  color: #262626;
-  text-decoration: none;
-  transition: all 0.15s ease;
-}
-
-[data-theme='dark'] .searchDropdownItem {
-  color: #D9D9D9;
-}
-
-.searchDropdownItem:hover {
-  background: #F2F2F2;
-  color: #17223A;
-  text-decoration: none;
-}
-
-[data-theme='dark'] .searchDropdownItem:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #FFFFFF;
-}
-
-@media screen and (max-width: 768px) {
-  .searchWrapper {
-    max-width: 100%;
-    margin: 1.5rem 0 0;
-  }
-
-  .searchForm {
-    border-radius: 10px;
-  }
-
-  .searchKbd {
-    display: none;
-  }
+.tutorialCard:hover .tutorialCardArrow {
+  transform: translateX(3px);
 }
 
 /* ================================================================
-   SECTION CARDS — Clean, modern grid
+   "Explore the platform" — bordered cards, icon in a square badge
    ================================================================ */
 .sectionCards {
-  padding: 3.5rem 0 3rem;
-  background: linear-gradient(180deg, #EFF6FF 0%, #F0F7FF 40%, #F8FAFC 100%);
+  padding: 36px 40px 72px;
+  max-width: 1180px;
+  margin: 0 auto;
 }
 
-[data-theme='dark'] .sectionCards {
-  background: linear-gradient(180deg, #141D30 0%, #0E1629 50%, #0B1120 100%);
+.sectionCardsTitle {
+  margin: 0 0 20px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--wso2-heading-color);
 }
 
 .sectionGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  max-width: 940px;
-  margin: 0 auto;
-}
-
-@media screen and (max-width: 768px) {
-  .sectionGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .sectionGrid {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
 }
 
 .sectionCard {
-  position: relative;
-  padding: 1.25rem;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  padding: 22px;
+  border-radius: 16px;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--wso2-surface-border);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease;
 }
 
 .sectionCard:hover {
-  border-color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 4px 24px rgba(0, 119, 182, 0.08), 0 8px 32px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  transform: translateY(-3px);
+  border-color: var(--ifm-color-primary);
   text-decoration: none;
   color: inherit;
 }
 
-[data-theme='dark'] .sectionCard {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-[data-theme='dark'] .sectionCard:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.14);
-  box-shadow: 0 4px 24px rgba(56, 189, 248, 0.08), 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-/* Icon badge — color-coded via CSS custom properties */
+/* Icon badge — bordered square, icon color-coded via CSS custom
+   properties (kept per-category for quick visual scanning). */
 .sectionIcon {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: 8px;
-  margin-bottom: 0.75rem;
-  background: var(--icon-bg);
+  border-radius: 11px;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--wso2-surface-border);
   color: var(--icon-color);
 }
 
-[data-theme='dark'] .sectionIcon {
-  background: var(--icon-bg-dark);
-}
-
 .sectionCardTitle {
-  font-size: 0.95rem;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
+  font-size: 15.5px;
+  font-weight: 700;
   letter-spacing: -0.01em;
-  color: #262626;
-}
-
-[data-theme='dark'] .sectionCardTitle {
-  color: #F2F2F2;
+  color: var(--wso2-heading-color);
 }
 
 .sectionCardDesc {
-  font-size: 0.825rem;
-  color: #565656;
+  font-size: 13.5px;
+  color: var(--ifm-font-color-base);
   margin: 0;
   line-height: 1.55;
   flex-grow: 1;
 }
 
-[data-theme='dark'] .sectionCardDesc {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* Hover arrow indicator */
-.sectionCardArrow {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  font-size: 0.875rem;
-  color: #D9D9D9;
-  transition: all 0.2s ease;
-  opacity: 0;
-  transform: translateX(-4px);
-}
-
-.sectionCard:hover .sectionCardArrow {
-  opacity: 1;
-  transform: translateX(0);
-  color: #565656;
-}
-
-[data-theme='dark'] .sectionCardArrow {
-  color: rgba(255, 255, 255, 0.15);
-}
-
-[data-theme='dark'] .sectionCard:hover .sectionCardArrow {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* ================================================================
-   WHAT'S NEW — Subtle pill
-   ================================================================ */
-.whatsNew {
-  padding: 1.5rem 0 4rem;
-  text-align: center;
-  background: #F8FAFC;
-}
-
-[data-theme='dark'] .whatsNew {
-  background: #0E1629;
-}
-
-.whatsNewLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.85rem;
-  color: #475569;
-  text-decoration: none;
-  padding: 0.6rem 1.25rem;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.2s ease;
-}
-
-.whatsNewLink:hover {
-  border-color: rgba(255, 255, 255, 0.8);
-  color: #262626;
-  text-decoration: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.whatsNewLink svg {
-  transition: transform 0.2s ease;
-}
-
-.whatsNewLink:hover svg {
-  transform: translateX(2px);
-}
-
-[data-theme='dark'] .whatsNewLink {
-  color: rgba(255, 255, 255, 0.6);
-  border-color: rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
-}
-
-[data-theme='dark'] .whatsNewLink:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.whatsNewBadge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  /* WSO2 brand primary blue — keeps the badge on-brand alongside the
-     navy-to-sky-blue gradient in the brand guidelines and matches the
-     primary color used throughout the site. */
-  background: #0077B6;
-  color: #FFFFFF;
-  padding: 0.15rem 0.5rem;
-  border-radius: 100px;
-}
-
-[data-theme='dark'] .whatsNewBadge {
-  /* Brighter sky-blue in dark mode for legibility on the navy surface,
-     matching --ifm-color-primary used in dark theme. */
-  background: #38BDF8;
-  color: #0B1120;
-}

@@ -1,0 +1,225 @@
+/**
+ * Always the navy gradient, independent of the site's light/dark theme --
+ * same brand-banner treatment as the hero (see pages/index.module.css).
+ */
+.footer {
+  background: linear-gradient(150deg, var(--wso2-navy-mid), var(--wso2-navy));
+  color: var(--wso2-on-navy-cool);
+}
+
+/* One row -- brand column (logo/tagline + social icons stacked below
+   it, see .footerBrandCol) on the left, the config-driven link
+   sections beside it (see .footerColsGrid), each separated by a
+   vertical rule. No product branch has more than a handful of
+   footer.links sections (5 today, across all branches), so everything
+   fits one row instead of a stacked layout -- see the max-width:640px
+   override below for how this degrades to stacked + horizontal rules
+   once columns no longer fit one line. */
+.footerTop {
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 56px 40px 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footerBrandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 0 0 auto;
+  max-width: 300px;
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Flex row, not a grid -- each .footerCol gets a border-left instead
+   of participating in a wrapping grid, since a vertical-rule divider
+   only reads correctly when columns sit in a real single row (see the
+   max-width:640px override below for how this degrades to stacked +
+   horizontal rules once they no longer fit one line). margin-left:
+   auto pins the whole group to the right edge of .footerTop --
+   flowing toward the brand/logo column on the left instead of
+   trailing loose space after the last section -- and flex: 0 1 auto
+   (not 1 1 auto) keeps it from stretching back out to fill that
+   pushed-open gap. */
+.footerColsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 1 auto;
+  gap: 0 32px;
+  margin-left: auto;
+}
+
+.footerLogo {
+  display: block;
+  height: 52px;
+  width: auto;
+  align-self: flex-start;
+}
+
+.footerTagline {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--wso2-on-navy-muted);
+}
+
+.footerSocial {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Icon-only circular buttons -- same reference pattern as MuleSoft's
+   footer social row, and the same 2rem-scale circular hit target as
+   the navbar's own .navbar-icon-link, just on the footer's translucent-
+   white-on-navy palette instead of that one's light/dark-mode colors. */
+.footerSocialBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--wso2-on-navy-text) !important;
+  text-decoration: none !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.footerSocialBtn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--ifm-color-primary-lighter);
+  text-decoration: none;
+}
+
+/* ---- Link columns (config-driven, from docusaurus.config.ts) ----
+   border-left is the vertical separator between sections -- removed
+   on the first column so the row doesn't start with a leading rule,
+   and swapped for a border-top (see the max-width:640px override)
+   once columns stack instead of sitting side by side. */
+.footerCol {
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding-left: 32px;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.footerCol:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+
+.footerColTitle {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wso2-on-navy-label);
+}
+
+.footerColLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  color: var(--wso2-on-navy-cool) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+}
+
+.footerColLink:hover {
+  color: var(--wso2-on-navy-text) !important;
+  text-decoration: none;
+}
+
+/* ---- Bottom bar ---- */
+.footerBottom {
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 18px 40px 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+}
+
+.footerCopyright {
+  font-size: 12.5px;
+  color: var(--wso2-on-navy-muted-dim);
+}
+
+.footerLegal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-left: auto;
+}
+
+.footerLegalLink {
+  font-size: 12.5px;
+  color: var(--wso2-on-navy-muted-dim) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+}
+
+.footerLegalLink:hover {
+  color: var(--wso2-on-navy-text) !important;
+  text-decoration: none;
+}
+
+/* The 40px fixed side padding above eats a much bigger share of a
+   320-375px phone's width than a desktop's; tighten it instead of
+   leaving it fixed. footerLegal's margin-left: auto (pushing it to the
+   far right of .footerBottom) also only makes sense when it shares a
+   line with the copyright text -- once flex-wrap drops it to its own
+   line at this width, that same auto margin would strand it at the
+   right edge instead of lining up under the copyright text. */
+@media (max-width: 640px) {
+  .footerTop {
+    padding: 40px 20px 24px;
+    gap: 24px;
+  }
+
+  /* Vertical rules only read correctly in a real single row -- once
+     the columns stack (one per line) below this width, swap each
+     .footerCol's border-left/padding-left for a border-top/padding-top
+     instead, so the separator still shows but runs the right
+     direction for a stacked layout. */
+  .footerColsGrid {
+    flex-direction: column;
+    gap: 20px 0;
+    margin-left: 0;
+  }
+
+  .footerCol {
+    padding-left: 0;
+    padding-top: 20px;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .footerCol:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .footerBottom {
+    padding: 16px 20px 32px;
+  }
+
+  .footerLegal {
+    margin-left: 0;
+  }
+}

@@ -70,6 +70,15 @@ export default function MarkdownButton({ markdownUrl }: MarkdownButtonProps): Re
     setIsOpen(false);
   };
 
+  const handleDownloadPdf = () => {
+    setIsOpen(false);
+    // The browser's native print-to-PDF, not a server-rendered PDF -- no
+    // backend/service needed. Print-specific CSS (custom.css's @media
+    // print block) hides the navbar/sidebar/TOC/footer chrome so the
+    // print/PDF-save dialog only shows the article content.
+    window.print();
+  };
+
   const handleOpenInChatGPT = () => {
     window.open(`https://chat.openai.com/?q=${encodeURIComponent(getPromptWithHtml())}`, '_blank');
     setIsOpen(false);
@@ -77,6 +86,18 @@ export default function MarkdownButton({ markdownUrl }: MarkdownButtonProps): Re
 
   const handleOpenInPerplexity = () => {
     window.open(`https://www.perplexity.ai/?q=${encodeURIComponent(getPromptWithMarkdown())}`, '_blank');
+    setIsOpen(false);
+  };
+
+  const handleOpenInGemini = () => {
+    // gemini.google.com/app itself doesn't read a `q` param (only
+    // third-party browser extensions inject text into it). The actual
+    // Gemini-powered entry point that does read `q` natively is Google
+    // Search's AI Mode -- `udm=50` selects that mode -- which is what
+    // production doc sites using this same pattern (e.g. Ethereum, Sui)
+    // actually link to for their "Open in Gemini" button.
+    const params = new URLSearchParams({ q: getPromptWithMarkdown(), udm: '50' });
+    window.open(`https://www.google.com/search?${params.toString()}`, '_blank');
     setIsOpen(false);
   };
 
@@ -88,10 +109,11 @@ export default function MarkdownButton({ markdownUrl }: MarkdownButtonProps): Re
         type="button"
         aria-expanded={isOpen}
         aria-haspopup="true"
+        aria-label={copied ? 'Copied!' : copyError ? 'Copy failed!' : 'Copy page'}
         title="Copy page content for LLMs"
       >
         <CopyIcon />
-        <span>{copied ? 'Copied!' : copyError ? 'Copy failed!' : 'Copy page'}</span>
+        <span className={styles.markdownDropdownButtonLabel}>{copied ? 'Copied!' : copyError ? 'Copy failed!' : 'Copy page'}</span>
         <ChevronIcon isOpen={isOpen} />
       </button>
 
@@ -112,6 +134,14 @@ export default function MarkdownButton({ markdownUrl }: MarkdownButtonProps): Re
               <div className={styles.markdownDropdownItemText}>
                 <span className={styles.markdownDropdownItemTitle}>View as Markdown</span>
                 <span className={styles.markdownDropdownItemDesc}>View this page as plain text</span>
+              </div>
+            </button>
+
+            <button className={styles.markdownDropdownItem} onClick={handleDownloadPdf}>
+              <PdfIcon />
+              <div className={styles.markdownDropdownItemText}>
+                <span className={styles.markdownDropdownItemTitle}>Download as PDF</span>
+                <span className={styles.markdownDropdownItemDesc}>Print or save this page as a PDF</span>
               </div>
             </button>
 
@@ -143,6 +173,15 @@ export default function MarkdownButton({ markdownUrl }: MarkdownButtonProps): Re
               </div>
               <ExternalIcon />
             </button>
+
+            <button className={styles.markdownDropdownItem} onClick={handleOpenInGemini}>
+              <GeminiIcon />
+              <div className={styles.markdownDropdownItemText}>
+                <span className={styles.markdownDropdownItemTitle}>Open in Gemini</span>
+                <span className={styles.markdownDropdownItemDesc}>Ask questions about this page</span>
+              </div>
+              <ExternalIcon />
+            </button>
           </div>
         </>
       )}
@@ -163,6 +202,16 @@ function MarkdownIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
       <path d="M14.85 3c.63 0 1.15.52 1.14 1.15v7.7c0 .63-.51 1.15-1.15 1.15H1.15C.52 13 0 12.48 0 11.84V4.15C0 3.52.52 3 1.15 3h13.7zM9 11V5H7l-1.5 2.25L4 5H2v6h2V8l1.5 2L7 8v3h2zm2.99.5L14.5 8H13V5h-2v3H9.5l2.49 3.5z" />
+    </svg>
+  );
+}
+
+function PdfIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M4 0a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V5.5L9.5 0H4z" opacity="0.25" />
+      <path d="M9.5 0v3.5A1.5 1.5 0 0011 5h3.5L9.5 0z" opacity="0.5" />
+      <path d="M4.5 9.5h1a1 1 0 011 1v.5a1 1 0 01-1 1h-.5V13h-1V9.5h.5zm.5 1.5h.5v-.5H5v.5zM7.5 9.5H9v1H8v.5h.75v1H8V13H7.5V9.5zm3 0h1.25c.55 0 1 .45 1 1v1.5c0 .55-.45 1-1 1H10.5V9.5zm1 2.5h.25c.14 0 .25-.11.25-.25v-1.5c0-.14-.11-.25-.25-.25H11.5v2z" />
     </svg>
   );
 }
@@ -203,6 +252,14 @@ function ClaudeIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 256 257" fill="currentColor" aria-hidden="true">
       <path d="m50.228 170.321 50.357-28.257.843-2.463-.843-1.361h-2.462l-8.426-.518-28.775-.778-24.952-1.037-24.175-1.296-6.092-1.297L0 125.796l.583-3.759 5.12-3.434 7.324.648 16.202 1.101 24.304 1.685 17.629 1.037 26.118 2.722h4.148l.583-1.685-1.426-1.037-1.101-1.037-25.147-17.045-27.22-18.017-14.258-10.37-7.713-5.25-3.888-4.925-1.685-10.758 7-7.713 9.397.649 2.398.648 9.527 7.323 20.35 15.75L94.817 91.9l3.889 3.24 1.555-1.102.195-.777-1.75-2.917-14.453-26.118-15.425-26.572-6.87-11.018-1.814-6.61c-.648-2.723-1.102-4.991-1.102-7.778l7.972-10.823L71.42 0 82.05 1.426l4.472 3.888 6.61 15.101 10.694 23.786 16.591 32.34 4.861 9.592 2.592 8.879.973 2.722h1.685v-1.556l1.36-18.211 2.528-22.36 2.463-28.776.843-8.1 4.018-9.722 7.971-5.25 6.222 2.981 5.12 7.324-.713 4.73-3.046 19.768-5.962 30.98-3.889 20.739h2.268l2.593-2.593 10.499-13.934 17.628-22.036 7.778-8.749 9.073-9.657 5.833-4.601h11.018l8.1 12.055-3.628 12.443-11.342 14.388-9.398 12.184-13.48 18.147-8.426 14.518.778 1.166 2.01-.194 30.46-6.481 16.462-2.982 19.637-3.37 8.88 4.148.971 4.213-3.5 8.62-20.998 5.184-24.628 4.926-36.682 8.685-.454.324.519.648 16.526 1.555 7.065.389h17.304l32.21 2.398 8.426 5.574 5.055 6.805-.843 5.184-12.962 6.611-17.498-4.148-40.83-9.721-14-3.5h-1.944v1.167l11.666 11.406 21.387 19.314 26.767 24.887 1.36 6.157-3.434 4.86-3.63-.518-23.526-17.693-9.073-7.972-20.545-17.304h-1.36v1.814l4.73 6.935 25.017 37.59 1.296 11.536-1.814 3.76-6.481 2.268-7.13-1.297-14.647-20.544-15.1-23.138-12.185-20.739-1.49.843-7.194 77.448-3.37 3.953-7.778 2.981-6.48-4.925-3.436-7.972 3.435-15.749 4.148-20.544 3.37-16.333 3.046-20.285 1.815-6.74-.13-.454-1.49.194-15.295 20.999-23.267 31.433-18.406 19.702-4.407 1.75-7.648-3.954.713-7.064 4.277-6.286 25.47-32.405 15.36-20.092 9.917-11.6-.065-1.686h-.583L44.07 198.125l-12.055 1.555-5.185-4.86.648-7.972 2.463-2.593 20.35-13.999-.064.065Z" />
+    </svg>
+  );
+}
+
+function GeminiIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 0c.61 6.16 5.84 11.39 12 12-6.16.61-11.39 5.84-12 12-.61-6.16-5.84-11.39-12-12C6.16 11.39 11.39 6.16 12 0z" />
     </svg>
   );
 }

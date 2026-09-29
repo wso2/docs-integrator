@@ -1,0 +1,151 @@
+import type { ReactNode } from 'react';
+import Link from '@docusaurus/Link';
+import Layout from '@theme/Layout';
+import Heading from '@theme/Heading';
+
+import styles from './community.module.css';
+
+interface Channel {
+  title: string;
+  description: string;
+  href: string;
+  icon: ReactNode;
+}
+
+function DiscordIcon(): ReactNode {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M6 18c-1-4 .3-8.5 2-10l1 1.4A9 9 0 0 1 15 9.4L16 8c1.7 1.5 3 6 2 10a13 13 0 0 1-4 1.6l-.8-1.5a11 11 0 0 0-3.4 0L9 19.6A13 13 0 0 1 6 18Z" />
+      <path d="M10 13v.01M14 13v.01" />
+    </svg>
+  );
+}
+
+function LinkedInIcon(): ReactNode {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M6.94 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM3.2 8.75h3.5V21H3.2Zm6.3 0h3.36v1.68h.05c.47-.88 1.6-1.8 3.3-1.8 3.53 0 4.19 2.32 4.19 5.35V21h-3.5v-5.44c0-1.3-.02-2.97-1.81-2.97-1.82 0-2.1 1.42-2.1 2.88V21H9.5Z" />
+    </svg>
+  );
+}
+
+function StackOverflowIcon(): ReactNode {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.4 18.2v-4.6h1.5V19.7H4.6v-6.1h1.5v4.6ZM7.7 13.6l7.3 1.5.3-1.5-7.3-1.6Zm1-3.6 6.8 3.1.6-1.4-6.7-3.2Zm2-3.4 5.8 4.8.9-1.2-5.7-4.8Zm3.3-3.5-1.2.9 4.4 5.9 1.2-.9ZM7.6 17.1h7.4v-1.5H7.6Z" />
+    </svg>
+  );
+}
+
+function YoutubeIcon(): ReactNode {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 5 12 5 12 5s-6 0-7.7.3a2.7 2.7 0 0 0-1.9 1.9A28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9C6 19 12 19 12 19s6 0 7.7-.3a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8ZM10 15.2V8.8l5.5 3.2Z" />
+    </svg>
+  );
+}
+
+function XIcon(): ReactNode {
+  return (
+    <svg width="20" height="20" viewBox="0 0 640 640" fill="currentColor" aria-hidden="true">
+      <path d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z" />
+    </svg>
+  );
+}
+
+function GithubIcon(): ReactNode {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5.01 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" />
+    </svg>
+  );
+}
+
+/** The same 6 channels as the navbar's icon row and the footer's
+ * Community section (GitHub, Discord, Stack Overflow, YouTube,
+ * LinkedIn, X) -- kept consistent across all three rather than each
+ * surface listing its own subset -- hand-written here with real
+ * descriptions and icons for card presentation, not just a label +
+ * href like a plain footer link. Order matches the two-row grouping
+ * `.grid`'s fixed 3-column layout is tuned for (see community.module.css):
+ * GitHub/Discord/Stack Overflow on top, LinkedIn/YouTube/X below. */
+const CHANNELS: Channel[] = [
+  {
+    title: 'GitHub',
+    description: 'Browse the source, file an issue, or send a pull request -- the platform is open source.',
+    href: 'https://github.com/wso2',
+    icon: <GithubIcon />,
+  },
+  {
+    title: 'Discord',
+    description: 'Ask questions, share what you’re building, and talk directly with the team and other users.',
+    href: 'https://discord.com/invite/wso2',
+    icon: <DiscordIcon />,
+  },
+  {
+    title: 'Stack Overflow',
+    description: 'Search existing answers or ask a new question tagged wso2 -- good for specific, technical problems.',
+    href: 'https://stackoverflow.com/questions/tagged/wso2',
+    icon: <StackOverflowIcon />,
+  },
+  {
+    title: 'LinkedIn',
+    description: 'Follow WSO2 for product announcements, release highlights, and company news.',
+    href: 'https://www.linkedin.com/company/wso2',
+    icon: <LinkedInIcon />,
+  },
+  {
+    title: 'YouTube',
+    description: 'Product walkthroughs, webinars, and conference talks from the WSO2 team.',
+    href: 'https://www.youtube.com/@WSO2official',
+    icon: <YoutubeIcon />,
+  },
+  {
+    title: 'X',
+    description: 'Follow @wso2 for announcements, release news, and quick updates.',
+    href: 'https://twitter.com/intent/follow?screen_name=wso2',
+    icon: <XIcon />,
+  },
+];
+
+export default function Community(): ReactNode {
+  return (
+    <Layout title="Community" description="Where to ask questions, share feedback, and connect with the WSO2 Integration Platform community.">
+      <header className={styles.hero}>
+        <div className={styles.heroInner}>
+          <Heading as="h1">Community</Heading>
+          <p className={styles.heroSubtitle}>
+            Use the channels below to ask questions, find answers, share feedback, and help make
+            these docs and the platform better.
+          </p>
+        </div>
+      </header>
+
+      <main className={styles.main}>
+        <div className={styles.grid}>
+          {CHANNELS.map((c) => (
+            <a key={c.title} href={c.href} target="_blank" rel="noopener noreferrer" className={styles.card}>
+              <span className={styles.cardIcon}>{c.icon}</span>
+              <span className={styles.cardTitle}>{c.title}</span>
+              <p className={styles.cardDesc}>{c.description}</p>
+            </a>
+          ))}
+        </div>
+
+        <div className={styles.contributeBanner}>
+          <div>
+            <Heading as="h2" className={styles.contributeBannerTitle}>
+              Want to contribute?
+            </Heading>
+            <p className={styles.contributeBannerText}>
+              Fix a typo, improve an explanation, or add a guide -- every contribution helps.
+            </p>
+          </div>
+          <Link className={styles.contributeBannerLink} to="/contribute">
+            See how to contribute &rarr;
+          </Link>
+        </div>
+      </main>
+    </Layout>
+  );
+}

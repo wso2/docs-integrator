@@ -1,0 +1,29 @@
+/* Deliberately a quieter, outlined treatment (not AiAssistantPanel's
+   solid Pulse-orange) -- this sits right beside the primary "ask AI"
+   action and shouldn't visually compete with it for attention; a
+   secondary utility action reads as secondary. Sizing comes from
+   FloatingActions's shared --floating-fab-size, same as
+   AiAssistantPanel's .fab, so the two stay the same size as each
+   other at every breakpoint without duplicating the actual numbers
+   here. */
+.fab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--floating-fab-size, 3.25rem);
+  height: var(--floating-fab-size, 3.25rem);
+  border-radius: 999px;
+  border: 1px solid var(--wso2-surface-border);
+  background: var(--ifm-background-surface-color);
+  color: var(--wso2-text-muted);
+  box-shadow: var(--wso2-card-shadow-hover);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.fab:hover {
+  transform: scale(1.06);
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}

@@ -4,10 +4,8 @@ import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import { useSidebarBreadcrumbs } from '@docusaurus/plugin-content-docs/client';
 import { useLocation, useHistory } from '@docusaurus/router';
 import { usePluginData } from '@docusaurus/useGlobalData';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import Link from '@docusaurus/Link';
 import { useConnectorVersion } from '@site/src/utils/connectorVersion';
-import MarkdownButton from './MarkdownButton';
 import styles from './styles.module.css';
 
 const CATEGORY_TAGS = {
@@ -135,17 +133,10 @@ function buildVersionedPath({
 }
 
 export default function DocBreadcrumbsWrapper(props) {
-  const { frontMatter, metadata } = useDoc();
+  const { frontMatter } = useDoc();
   const breadcrumbs = useSidebarBreadcrumbs();
   const location = useLocation();
   const history = useHistory();
-  const docsBaseUrl = useBaseUrl('/docs');
-
-  // metadata.id is relative to docs/ with the extension stripped, and preserves
-  // "index" for directory index files — matching exactly what the export plugin writes.
-  const markdownUrl = location.pathname.startsWith(docsBaseUrl)
-    ? `${docsBaseUrl}/${metadata.id}.md`
-    : null;
 
   // Read connector version data from the plugin's global data.
   let allConnectorVersions = {};
@@ -257,24 +248,18 @@ export default function DocBreadcrumbsWrapper(props) {
   // Not a versioned connector page — render default breadcrumbs + badge.
   if (!isConnector || !hasMultipleVersions) {
     return (
-      <div className={styles.breadcrumbRow}>
-        <div className={styles.breadcrumbsLeft}>
-          <DocBreadcrumbs {...props} />
-          {pageSlug === 'overview' && <CategoryBadge categorySlug={categorySlug} />}
-        </div>
-        {markdownUrl && <MarkdownButton markdownUrl={markdownUrl} />}
+      <div className={styles.breadcrumbsLeft}>
+        <DocBreadcrumbs {...props} />
+        {pageSlug === 'overview' && <CategoryBadge categorySlug={categorySlug} />}
       </div>
     );
   }
 
   if (!breadcrumbs || breadcrumbs.length === 0) {
     return (
-      <div className={styles.breadcrumbRow}>
-        <div className={styles.breadcrumbsLeft}>
-          <DocBreadcrumbs {...props} />
-          {pageSlug === 'overview' && <CategoryBadge categorySlug={categorySlug} />}
-        </div>
-        {markdownUrl && <MarkdownButton markdownUrl={markdownUrl} />}
+      <div className={styles.breadcrumbsLeft}>
+        <DocBreadcrumbs {...props} />
+        {pageSlug === 'overview' && <CategoryBadge categorySlug={categorySlug} />}
       </div>
     );
   }
@@ -318,44 +303,41 @@ export default function DocBreadcrumbsWrapper(props) {
   const afterConnector = isOverviewPage ? [] : allAfterConnector;
 
   return (
-    <div className={styles.breadcrumbRow}>
-      <nav className={styles.breadcrumbsLeft} aria-label="Breadcrumbs">
-        {pageSlug === 'overview' && <CategoryBadge categorySlug={categorySlug} />}
-        {beforeConnector.map((crumb, i) => (
-          <React.Fragment key={i}>
-            <span className={styles.breadcrumbItem}>
-              {crumb.href ? (
-                <Link className={styles.breadcrumbLink} to={crumb.href}>
-                  {crumb.label}
-                </Link>
-              ) : (
-                <span className={styles.breadcrumbLink}>{crumb.label}</span>
-              )}
-            </span>
-            <span className={styles.separator}>/</span>
-          </React.Fragment>
-        ))}
+    <nav className={styles.breadcrumbsLeft} aria-label="Breadcrumbs">
+      {pageSlug === 'overview' && <CategoryBadge categorySlug={categorySlug} />}
+      {beforeConnector.map((crumb, i) => (
+        <React.Fragment key={i}>
+          <span className={styles.breadcrumbItem}>
+            {crumb.href ? (
+              <Link className={styles.breadcrumbLink} to={crumb.href}>
+                {crumb.label}
+              </Link>
+            ) : (
+              <span className={styles.breadcrumbLink}>{crumb.label}</span>
+            )}
+          </span>
+          <span className={styles.separator}>/</span>
+        </React.Fragment>
+      ))}
 
-        <span className={styles.breadcrumbItem}>
-          <VersionDropdown
-            versions={availableVersions}
-            currentVersion={displayVersion}
-            onSelect={handleVersionSelect}
-          />
-        </span>
+      <span className={styles.breadcrumbItem}>
+        <VersionDropdown
+          versions={availableVersions}
+          currentVersion={displayVersion}
+          onSelect={handleVersionSelect}
+        />
+      </span>
 
-        {afterConnector.map((crumb, i) => (
-          <React.Fragment key={`after-${i}`}>
-            <span className={styles.separator}>/</span>
-            <span className={styles.breadcrumbItem}>
-              <span className={styles.breadcrumbLink}>
-                <strong>{crumb.label}</strong>
-              </span>
+      {afterConnector.map((crumb, i) => (
+        <React.Fragment key={`after-${i}`}>
+          <span className={styles.separator}>/</span>
+          <span className={styles.breadcrumbItem}>
+            <span className={styles.breadcrumbLink}>
+              <strong>{crumb.label}</strong>
             </span>
-          </React.Fragment>
-        ))}
-      </nav>
-      {markdownUrl && <MarkdownButton markdownUrl={markdownUrl} />}
-    </div>
+          </span>
+        </React.Fragment>
+      ))}
+    </nav>
   );
 }

@@ -1,0 +1,164 @@
+name: Staging Sync
+
+# Keeps the `staging` branch as a continuously-updated, merged preview of
+# all product branches together -- the input to whatever hosts staging
+# (Choreo), and the source tree that promote_to_production.yaml later
+# ships to `gh-pages` byte-for-byte. Fires on every push to a product
+# branch directly, instead of waiting for a promotion event -- staging
+# is meant to always be current, unlike production.
+#
+# This file is intentionally IDENTICAL on every product branch -- it
+# reads `github.ref_name` at runtime to pick the right BASE_URL, so
+# there is nothing branch-specific to hand-edit. It's authored on `main`
+# (see MAINTENANCE.md) and distributed to every product branch by the
+# same shared-sync automation that distributes the shared theme. The one
+# time you DO edit it: adding a new product branch to the trigger list
+# and the case statement below when that product launches.
+#
+# CURRENTLY OUT OF SYNC WITH THAT: saas moved from owning the bare
+# staging root to its own /saas/ subpath (matching /integrator/ and
+# /connectors/), which touched this file directly on `saas` rather than
+# going through `main` first -- this same change (the `saas` case below,
+# its deploy step's `destination_dir: saas`, and the new root-redirect
+# deploy step, conditioned on `github.ref_name == 'saas'` since
+# root-redirect/ only exists on that branch) needs to land on `main` too,
+# or the next shared-sync distribution silently reverts it here.
+#
+# Deliberately does NOT deploy to production. See promote_to_production.yaml
+# (lives on `main`) for that half of the pipeline.
+
+on:
+  push:
+    branches:
+      - saas
+      - wso2-integrator
+      - wso2-connectors
+      # - wso2-agent-builder   # add when this product launches
+  workflow_dispatch:
+
+concurrency:
+  group: staging-deploy
+  cancel-in-progress: false
+
+jobs:
+  build-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Resolve this branch's BASE_URL
+        id: cfg
+        env:
+          # Unset on the real org repo (production/staging always build
+          # against the real custom-domain path). Set as a repo variable
+          # on a personal fork's own GitHub Pages -- which has no custom
+          # domain, so it serves everything one level deeper, under
+          # /<repo-name>/ -- to point builds at that fork's own actual
+          # root instead (Settings -> Secrets and variables -> Actions ->
+          # Variables -> FORK_BASE_PATH, e.g. "/docs-integrator/").
+          FORK_BASE_PATH: ${{ vars.FORK_BASE_PATH }}
+        run: |
+          family_base="${FORK_BASE_PATH:-/integration-platform/docs/}"
+          case "${{ github.ref_name }}" in
+            saas)
+              echo "base_url=${family_base}saas/" >> "$GITHUB_OUTPUT"
+              ;;
+            wso2-integrator)
+              echo "base_url=${family_base}integrator/" >> "$GITHUB_OUTPUT"
+              ;;
+            wso2-connectors)
+              echo "base_url=${family_base}connectors/" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "::error::No staging config for branch '${{ github.ref_name }}' -- add it to this case statement and to the trigger list above."
+              exit 1
+              ;;
+          esac
+          echo "cross_product_base=${family_base}" >> "$GITHUB_OUTPUT"
+
+      - name: Build Docusaurus site
+        run: npm run build
+        env:
+          BASE_URL: ${{ steps.cfg.outputs.base_url }}
+          # See themeConfig.ts's CROSS_PRODUCT_BASE docstring -- without
+          # this, cross-product links (navbar logo, product switcher)
+          # would still point at the production family root even on a
+          # fork build using FORK_BASE_PATH above for its own baseUrl.
+          CROSS_PRODUCT_BASE: ${{ steps.cfg.outputs.cross_product_base }}
+
+      # `keep_files: true` is load-bearing: without it, peaceiris wipes
+      # the whole `staging` branch before each deploy, deleting whatever
+      # the other product branches (and, now, the root redirect) already
+      # published there -- this job only builds and publishes the one
+      # branch that triggered it. (promote_to_production.yaml, by
+      # contrast, deliberately omits keep_files: it ships the already-
+      # merged `staging` tree as a single full replace, so nothing
+      # `staging` doesn't have should survive on `gh-pages` either.)
+      # Near-identical deploy steps below (not one parametrized step)
+      # because peaceiris's `destination_dir` input can't be made
+      # conditionally empty/different from inside one step.
+
+      - name: Deploy saas (staging/saas)
+        if: github.ref_name == 'saas'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: staging
+          publish_dir: en/build
+          destination_dir: saas
+          keep_files: true
+
+      - name: Prepare root redirect for this base path
+        if: github.ref_name == 'saas'
+        # root-redirect/index.html hardcodes the production target
+        # (/integration-platform/docs/saas/) since it's a plain static
+        # file, not part of the Docusaurus build. On the real org repo
+        # this sed is a no-op (steps.cfg's base_url IS that exact
+        # string there); on a fork with FORK_BASE_PATH set, it rewrites
+        # the redirect to that fork's own resolved saas base instead of
+        # shipping a link that 404s on it.
+        run: |
+          mkdir -p /tmp/root-redirect
+          sed "s#/integration-platform/docs/saas/#${{ steps.cfg.outputs.base_url }}#g" root-redirect/index.html > /tmp/root-redirect/index.html
+
+      - name: Deploy root redirect (root of staging)
+        if: github.ref_name == 'saas'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: staging
+          publish_dir: /tmp/root-redirect
+          keep_files: true
+
+      - name: Deploy wso2-integrator (staging/integrator)
+        if: github.ref_name == 'wso2-integrator'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: staging
+          publish_dir: en/build
+          destination_dir: integrator
+          keep_files: true
+
+      - name: Deploy wso2-connectors (staging/connectors)
+        if: github.ref_name == 'wso2-connectors'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: staging
+          publish_dir: en/build
+          destination_dir: connectors
+          keep_files: true

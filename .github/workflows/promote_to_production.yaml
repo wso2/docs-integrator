@@ -1,0 +1,57 @@
+name: Promote to Production
+
+# Ships an already-built, already-reviewed `staging` tree straight to
+# `gh-pages` -- no rebuild. Whatever's checked out at `inputs.ref` is
+# pushed byte-for-byte, so production always matches exactly what was
+# validated together on staging ("build once, promote the artifact",
+# not "rebuild at each stage and hope it still matches"). See
+# MAINTENANCE.md for the full develop -> staging -> production model
+# this is one half of (staging_sync.yaml on each product branch is the
+# other half).
+#
+# Lives on `main`, not on any product branch -- there's nothing
+# product-specific here to duplicate; it acts purely on whatever ref you
+# hand it.
+#
+# Typical use: once `staging` looks right, tag its current tip for a
+# record of exactly what's being promoted, then run this dispatch with
+# that tag as `ref`:
+#
+#   git tag production-2024.03.01 <sha-of-staging-tip>
+#   git push origin production-2024.03.01
+#   # Actions tab -> Promote to Production -> Run workflow -> ref: production-2024.03.01
+#
+# `ref: staging` (the default) skips the tag for a quick ad-hoc promote;
+# prefer tagging for anything that should be reproducible/rollback-able.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch, tag, or SHA to promote (usually a tag on staging, or `staging` itself)"
+        required: true
+        default: staging
+
+concurrency:
+  group: gh-pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the tree being promoted
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Deploy to production
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: .
+          # No keep_files here, deliberately: `staging` at `ref` already
+          # IS the complete merged site (all product branches), so a
+          # full replace is correct -- anything staging doesn't have
+          # shouldn't survive on production either.
