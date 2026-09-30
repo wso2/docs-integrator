@@ -18,7 +18,7 @@ An [AI Agent](../agents/overview.md) in WSO2 Integrator can use any MCP server a
 
 On the agent canvas, click **+ Add Tool** → **Use MCP Server**. The **Add MCP Server** panel opens:
 
-![The Add MCP Server panel. Tools to Include is set to All. Advanced Configurations expanded showing: Info (name and version), HTTP Version with Select / Expression toggle, HTTP1 Settings, HTTP2 Settings, Timeout (default 30 seconds), Forwarded.](/img/genai/develop/agents/08-add-mcp-server.png)
+![The Add MCP Server panel. Tools to Include is set to All. Advanced Configurations expanded showing: Info (name and version), HTTP Version with Select / Expression toggle, HTTP1 Settings, HTTP2 Settings, Timeout (default 30 seconds), Forwarded.](/img/genai/develop/mcp/consuming-mcp-from-agent/01-add-mcp-server.png)
 
 | Field | What it does |
 |---|---|
@@ -97,7 +97,7 @@ When an MCP server exposes many tools, do not pull them all in. Pick the few you
 
 In the **Edit MCP Server** panel, set **Tools to Include** to **Selected** and check the tools the agent should have access to. The panel queries the server and lists every tool it advertises.
 
-![The Edit MCP Server panel with Tools to Include set to Selected, showing the Available Tools list with searchProducts and submitReturnRequest checked and getOrderStatus unchecked.](/img/genai/develop/agents/29-mcp-filter-tools.png)
+![The Edit MCP Server panel with Tools to Include set to Selected, showing the Available Tools list with searchProducts and submitReturnRequest checked and getOrderStatus unchecked.](/img/genai/develop/mcp/consuming-mcp-from-agent/02-mcp-filter-tools.png)
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">

@@ -2115,6 +2115,7 @@ const sidebars: SidebarsConfig = {
                 'genai/develop/agents/creating-an-agent',
                 'genai/develop/agents/tools',
                 'genai/develop/agents/gated-tools',
+                'genai/develop/agents/identity-and-access-management',
                 'genai/develop/agents/memory',
                 'genai/develop/agents/observability',
                 {

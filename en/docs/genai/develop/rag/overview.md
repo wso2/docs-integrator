@@ -10,8 +10,8 @@ RAG (Retrieval-Augmented Generation) grounds LLM responses in your own documents
 
 This solves two common problems with direct LLM calls:
 
-- **Hallucinations** — the model produces plausible-sounding but incorrect answers because it doesn't have access to your specific content.
-- **Stale knowledge** — the model's training data has a cutoff and won't reflect your latest documentation or data.
+- **Hallucinations**. The model produces plausible-sounding but incorrect answers because it doesn't have access to your specific content.
+- **Stale knowledge**. The model's training data has a cutoff and won't reflect your latest documentation or data.
 
 ## How it works
 

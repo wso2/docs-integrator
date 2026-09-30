@@ -44,11 +44,11 @@ If you plan to use [WSO2 Asgardeo](https://wso2.com/asgardeo/docs/get-started/cr
 
 1. In the visual designer, click the **Agent** node to open the configuration panel. Then, expand **Advanced configuration**.
 
-![Advanced Configuration panel expanded on the Agent configuration form.](/img/genai/develop/agents/41-advence-configuration.png)
+![Advanced Configuration panel expanded on the Agent configuration form.](/img/genai/develop/agents/identity-and-access-management/01-advanced-configuration.png)
 
 2. Provide the **Agent ID** and **Agent Secret** obtained from the authorization server.
 
-![Credential input fields showing Agent ID and Agent Secret fields.](/img/genai/develop/agents/42-add-credential.png)
+![Credential input fields showing Agent ID and Agent Secret fields.](/img/genai/develop/agents/identity-and-access-management/02-add-credential.png)
 
 ## Configure tools
 
@@ -58,7 +58,7 @@ If you plan to use [WSO2 Asgardeo](https://wso2.com/asgardeo/docs/get-started/cr
 
 2. In the **Auth** Configuration Panel, select the authentication type as **AgentIdAuthConfig** and update the values obtained from the authorization server.
 
-![Add auth configuration](/img/genai/develop/agents/34-auth-configuration.png)  
+![Add auth configuration](/img/genai/develop/agents/identity-and-access-management/03-auth-configuration.png)  
 
 | Field | Required | Description |
 |---|---|---|
@@ -74,17 +74,17 @@ If you plan to use [WSO2 Asgardeo](https://wso2.com/asgardeo/docs/get-started/cr
 
 4. Navigate to **Available Tools**, select the required tools, and click on the **Secure Access (Shield)** icon of the specific tool and add the scopes.
 
-![Add scopes](/img/genai/develop/agents/35-add-scopes.png)  
+![Add scopes](/img/genai/develop/agents/identity-and-access-management/04-add-scopes.png)  
 
 ### Configure auth for Non-MCP tool
 
 1. Click on the **3-dot menu** and then click **Edit**.  
    
-![Edit tool](/img/genai/develop/agents/32-edit-tool.png)
+![Edit tool](/img/genai/develop/agents/identity-and-access-management/05-edit-tool.png)
 
 2. Go to the **Advanced Configuration**, click **Expand** and fill the form with the values obtained from the authorization server.
 
-![Advanced configuration](/img/genai/develop/agents/33-tool-advanced-config.png)
+![Advanced configuration](/img/genai/develop/agents/identity-and-access-management/06-tool-advanced-config.png)
 
 | Field | Required | Description |
 |---|---|---|

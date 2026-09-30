@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: AI Agents
-description: Reference for AI Agents in WSO2 Integrator — the AI Chat Agent Wizard, system prompt, tools, memory, observability, and evaluations.
+description: Reference for AI Agents in WSO2 Integrator. The Chat Agent Service wizard, system prompt, tools, memory, observability, and evaluations.
 ---
 
 # AI Agents
@@ -25,23 +25,22 @@ In WSO2 Integrator, AI agents can be visually designed, configured with tools an
 
 ## What an agent looks like in the canvas
 
-The agent is represented as a simple integration flow consisting of the following blocks:
+Creating a **Chat Agent Service** artifact (under **AI Integration** on the Artifacts page) produces two related canvases:
 
-- **Start**
-- **AI Agent**
-- **Return**
+- The **resource flow** (for example the `chat` resource): **Start** → an `agent:run` node bound to a result variable, with an **Open Agent** link → **Return**.
+- The **agent's own canvas**, opened via **Open Agent**: a single **AI Agent** block showing the agent name, an **+ Add Memory** button, and a preview of its role and instructions, connected to its model provider.
 
-The **AI Agent** block provides a centralized configuration interface for defining the agent’s behavior and capabilities.
+The **AI Agent** block provides a centralized configuration interface for defining the agent's behavior and capabilities.
 
-![The AI Agent canvas showing Start, an AI Agent node with the agent name and an Add Memory button, and a Return node.](/img/genai/develop/agents/02-agent-flow-canvas.png)
+![The AI Agent canvas showing the AI Agent node with its name, an Add Memory button, a role and instructions preview, and a connection to the model provider.](/img/genai/develop/agents/overview/agent-flow-canvas.png)
 
 The **AI Agent** block allows you to configure the following components of the agent:
 
-- **System prompt and agent behavior**: Click the **AI Agent** block to open the configuration panel, where you can configure the agent role, instructions, query input, and response mapping.
-- **Memory configuration**: Use the **Add Memory** option to configure conversational or persistent memory for the agent. For more information, see [Memory](./memory.md).
-- **Tools**: Use the **+** button on the AI Agent block to add tools and integrations that the agent can invoke during execution. For more information, see [Tools](./tools.md).
+- **System prompt and agent behavior**: Role and Instructions are set when you create the **Chat Agent Service** artifact. Select the role/instructions preview on the **AI Agent** block afterward to edit them.
+- **Memory configuration**: Use the **+ Add Memory** button to configure conversational or persistent memory for the agent. For more information, see [Memory](./memory.md).
+- **Tools**: Select the **+** on the AI Agent block to open the **Add Tool** panel, which lists **Use Connection**, **Use Function**, **Use Agent**, **Use MCP Server**, and **Create Custom Tool**. For more information, see [Tools](./tools.md).
 - **Gated tools**: Mark a tool as requiring approval so the agent pauses and asks a person before it runs. For more information, see [Gated Tools](./gated-tools.md).
-- **Model Provider Configuration**: Click the attached model provider node (for example, `wso2ModelProvider`) to configure the LLM provider and model settings used by the agent. For more information, see [Model Providers](../components/model-providers.md).
+- **Model Provider Configuration**: Select the attached model provider connection (for example, `aiWso2modelprovider`) to configure the LLM provider and model settings used by the agent. For more information, see [Model Providers](../components/model-providers.md).
 
 ## Try it and run
 
@@ -66,7 +65,7 @@ The chat interface reuses the same session across interactions, enabling memory-
 
 ## What's next
 
-- **[Creating an Agent](creating-an-agent.md)** - Learn how to create and configure agents using the AI Chat Agent Wizard.
+- **[Creating an Agent](creating-an-agent.md)** - Learn how to create and configure agents using the Chat Agent Service wizard.
 - **[Tools](tools.md)** - Add functions, connectors, and integrations to your agents.
 - **[Memory](memory.md)** - Configure conversational and persistent memory.
 - **[Identity & access management](identity-and-access-management.md)** - Secure agents, tools, and integrations using authentication and authorization.

@@ -21,11 +21,11 @@ An **MCP service** is a WSO2 Integrator artifact that publishes a set of tools o
 1. In the design view, select **Add Artifact**.
 2. Under the **AI Integration** category, select **MCP Service**.
 
-   ![Artifacts page showing the AI Integration category with two artifacts: AI Chat Agent and MCP Service. Above is Automation; below is Integration as API.](/img/genai/develop/mcp/07-mcp-add-artifact.png)
+   ![Artifacts page showing the AI Integration category with two artifacts: AI Chat Agent and MCP Service. Above is Automation; below is Integration as API.](/img/genai/develop/mcp/exposing-as-mcp/01-mcp-add-artifact.png)
 
 3. Fill in the creation form fields and click **Create**.
 
-   ![Create MCP Service form showing Service Name, Version, Port (default 8080), Base Path (/mcp), and an expandable Advanced Configurations section.](/img/genai/develop/mcp/08-mcp-create-service.png)
+   ![Create MCP Service form showing Service Name, Version, Port (default 8080), Base Path (/mcp), and an expandable Advanced Configurations section.](/img/genai/develop/mcp/exposing-as-mcp/02-mcp-create-service.png)
 
 | Field | Description |
 |---|---|
@@ -37,7 +37,7 @@ An **MCP service** is a WSO2 Integrator artifact that publishes a set of tools o
 
 After clicking **Create**, WSO2 Integrator opens the service in the **MCP Service Editor**. The header shows the attached listener pill, a **Tools** section, and **Configure** / **Try It** buttons in the top-right.
 
-![The MCP Service editor showing the listener chip, the Tools section with 'No tools found. Add a new tool.' and a + Add Tool button.](/img/genai/develop/mcp/01-mcp-service-overview.png)
+![The MCP Service editor showing the listener chip, the Tools section with 'No tools found. Add a new tool.' and a + Add Tool button.](/img/genai/develop/mcp/exposing-as-mcp/03-mcp-service-overview.png)
 
 | Element | What it does |
 |---|---|
@@ -91,7 +91,7 @@ In the **MCP Service Editor**, click **Configure** in the header to open the **M
 
 Click the edit icon on the **Service Configuration** record to open the record editor.
 
-![Service Configuration record editor showing fields: info (with name and version), httpConfig (optional), options (optional), sessionMode (optional, default auto).](/img/genai/develop/mcp/03-mcp-service-configuration.png)
+![Service Configuration record editor showing fields: info (with name and version), httpConfig (optional), options (optional), sessionMode (optional, default auto).](/img/genai/develop/mcp/exposing-as-mcp/04-mcp-service-configuration.png)
 
 | Field | Description |
 |---|---|
@@ -159,7 +159,7 @@ The listener binds to a port and handles incoming MCP connections over Streamabl
 
 In the **MCP Service Configuration** panel, select the listener under **Attached Listeners** to configure it.
 
-![Listener configuration panel showing Name, Listen To (port), Host, HTTP1 Settings, and Secure Socket fields.](/img/genai/develop/mcp/05-mcp-listener-configuration.png)
+![Listener configuration panel showing Name, Listen To (port), Host, HTTP1 Settings, and Secure Socket fields.](/img/genai/develop/mcp/exposing-as-mcp/05-mcp-listener-configuration.png)
 
 For standard HTTP setups, only **Listen To** (the port) is required. Configure **Secure Socket** to enable HTTPS.
 
@@ -241,7 +241,7 @@ Tools are the operations the MCP service exposes. Each tool has a name, a descri
 
 Click **+ Add Tool** in the editor to open the **Tool Configuration** panel.
 
-![The Tool Configuration panel showing Tool Name, Tool Description, Parameters, and Return Type fields, with the MCP Service editor visible behind it.](/img/genai/develop/mcp/02-mcp-tool-configuration.png)
+![The Tool Configuration panel showing Tool Name, Tool Description, Parameters, and Return Type fields, with the MCP Service editor visible behind it.](/img/genai/develop/mcp/exposing-as-mcp/06-mcp-tool-configuration.png)
 
 | Field | Required | Description |
 |---|---|---|
@@ -252,7 +252,7 @@ Click **+ Add Tool** in the editor to open the **Tool Configuration** panel.
 
 After clicking **Save**, the tool appears as a row under **Tools** in the editor and WSO2 Integrator generates a `remote function` within the service.
 
-![The MCP Service Editor with a single tool 'add' listed under Tools.](/img/genai/develop/mcp/06-mcp-service-with-tool.png)
+![The MCP Service Editor with a single tool 'add' listed under Tools.](/img/genai/develop/mcp/exposing-as-mcp/07-mcp-service-with-tool.png)
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">

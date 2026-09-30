@@ -28,7 +28,7 @@ See the **[Email Generator with Direct LLM](../../tutorials/email-generator-dire
 
 A typical flow with a direct LLM call has a `generate` node sitting between your inputs and the next step, with a small wire to the model-provider connection on the right.
 
-![A WSO2 Integrator flow on the canvas showing Start, an ai:generate node bound to an aiWso2modelprovider connection on the right, then log:printInfo with template `string ${summary}`, then Return, then Error Handler.](/img/genai/develop/direct-llm/21-complete-flow-with-direct-llm.png)
+![A WSO2 Integrator flow on the canvas showing Start, an ai:generate node bound to an aiWso2modelprovider connection on the right, then log:printInfo with template `string ${summary}`, then Return, then Error Handler.](/img/genai/develop/direct-llm/overview/01-complete-flow-with-direct-llm.png)
 
 To build this you do three things, in order:
 
@@ -52,13 +52,13 @@ The `generate` node is the workhorse of direct LLM calls. It sends a single prom
 
 The `generate` action lives **on the model-provider connection itself**, not as a standalone node under AI. Once a provider exists, open the **Model Providers** panel on the right side of the flow editor, expand the connection, and click **Generate**.
 
-![The right-side Model Providers panel with aiWso2modelprovider expanded, showing two actions: Chat and Generate. The Generate action is highlighted with a description that it sends a chat request to the model and generates a value that belongs to the type corresponding to the type descriptor argument.](/img/genai/develop/direct-llm/22-pick-generate-action.png)
+![The right-side Model Providers panel with aiWso2modelprovider expanded, showing two actions: Chat and Generate. The Generate action is highlighted with a description that it sends a chat request to the model and generates a value that belongs to the type corresponding to the type descriptor argument.](/img/genai/develop/direct-llm/overview/02-pick-generate-action.png)
 
 ### The configuration form
 
 When the form opens, three fields are all you need: the **Prompt**, the **Result** variable, and the **Expected Type**. Add the prompt that describes the work, pick the type you want the response in for your use case, and click **Save**.
 
-![The Generate configuration panel for the aiWso2modelprovider generate action. The Prompt field shows the Insert menu open with options for Inputs, Variables, Configurables, Functions, and Documents. An Expected Type field is below, with a Save button.](/img/genai/develop/direct-llm/23-generate-action-configure-prompt.png)
+![The Generate configuration panel for the aiWso2modelprovider generate action, showing the Prompt field with the Insert menu open, listing Inputs, Variables, Configurables, Functions, and Documents. Result and Expected Type fields are below, with a Save button.](/img/genai/develop/direct-llm/overview/03-generate-action-configure-prompt.png)
 
 | Field | Required | What it does |
 |---|---|---|
@@ -80,9 +80,9 @@ Click **Save** and the node lands in the flow as `<provider>:generate` (for exam
 
 The **Prompt** is the instruction you send to the LLM. Click any **Prompt** field and WSO2 Integrator opens a rich-text editor in a dialog. The toolbar gives you the usual formatting tools (Insert, undo/redo, Bold, Italic, Link, headings, quote, lists, tables, magic-wand AI assist) and a **Preview / Source** toggle.
 
-![The Prompt editor dialog opened with the toolbar at the top (Insert, undo/redo, Bold, Italic, Link, H1, quote, lists, table, AI assist) and the Insert menu open, showing five options: Inputs, Variables, Configurables, Functions, Documents.](/img/genai/develop/direct-llm/24-prompt-editor.png)
+![The Prompt editor dialog opened with the toolbar at the top: Insert, undo/redo, Bold, Italic, Link, H1, quote, lists, table, and a magic-wand AI assist icon, plus a Preview/Source toggle.](/img/genai/develop/direct-llm/overview/04-prompt-editor.png)
 
-The **Insert** menu is the bridge between the prompt and the rest of your project. Open it to pull in values from anywhere in scope: request inputs, flow variables, configurables, project functions, or RAG documents.
+The **Insert** menu is the bridge between the prompt and the rest of your project. Select it to pull in values from anywhere in scope: request inputs, flow variables, configurables, project functions, or RAG documents. It opens a menu listing **Inputs**, **Variables**, **Configurables**, **Functions**, and **Documents** (shown open in the screenshot above).
 
 | Element | What it does |
 |---|---|

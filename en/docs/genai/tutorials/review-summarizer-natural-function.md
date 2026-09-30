@@ -39,13 +39,13 @@ The first run may also prompt you for the `wso2aiKey` configuration value. The *
 
 ### Step 1.1: Open the create form
 
-From the project sidebar, hover the **Natural Functions** node and click the **+** that appears on the right.
+From the project sidebar, hover the **Natural Functions** node and click the **+** that appears on the right (tooltip: **Add Natural Function**).
 
-![Project sidebar with the Natural Functions node hovered, showing the inline + button on the right.](/img/genai/tutorials/review-summarizer-natural-function/02-add-natural-function-sidebar.png)
+![Project sidebar with the Natural Functions node hovered, showing the inline + button and an "Add Natural Function" tooltip.](/img/genai/tutorials/review-summarizer-natural-function/02-add-natural-function-sidebar.png)
 
-(You can also reach the same form from the integration **Overview** page: click **+ Add Artifact** and pick **Natural Function** under **Other Artifacts**.)
+(You can also reach the same form from the integration **Overview** page: select **Add Artifact manually** below the WSO2 Integrator Copilot's quick-start cards, then pick **Natural Function** under **Other Artifacts**.)
 
-![Add Artifact panel scrolled to Other Artifacts, with the Natural Function (Beta) tile highlighted.](/img/genai/tutorials/review-summarizer-natural-function/03-add-natural-function-add-artifact.png)
+![Artifacts page with Other Artifacts section showing Function, Natural Function (Beta) highlighted, Data Mapper, Type, Connection, Agent, and Configuration tiles.](/img/genai/tutorials/review-summarizer-natural-function/03-add-natural-function-add-artifact.png)
 
 ### Step 1.2: Name and parameter
 
@@ -55,9 +55,9 @@ The **Create New Natural Function** form opens. Set:
 |---|---|
 | **Name** | `analyzeCustomerReviews` |
 
-![Empty Create New Natural Function form with Name, Parameters (Add Parameter link), Return Type, and Create button.](/img/genai/tutorials/review-summarizer-natural-function/04-create-new-natural-function-form.png)
+![Create New Natural Function form with Name set to analyzeCustomerReviews, Parameters (Add Parameter link), Return Type, and Create button.](/img/genai/tutorials/review-summarizer-natural-function/04-create-new-natural-function-form.png)
 
-Click **+ Add Parameter** and fill in:
+Click **+ Add Parameter**. The parameter fields expand inline on the same page (not a separate dialog). Fill in:
 
 | Field | Value |
 |---|---|
@@ -65,19 +65,15 @@ Click **+ Add Parameter** and fill in:
 | **Name** | `customerReview` |
 | **Description** | `Review of the customer` |
 
-![Add Parameter dialog with Type string, Name customerReview, Description "Review of the customer", Cancel and Save buttons.](/img/genai/tutorials/review-summarizer-natural-function/05-add-parameter.png)
+![Add Parameter fields expanded inline with Type string, Name customerReview, Description "Review of the customer", Cancel and Add buttons.](/img/genai/tutorials/review-summarizer-natural-function/05-add-parameter.png)
 
-Click **Save**. The parameter appears as a pill in the Parameters list.
+Click **Add**. The parameter appears as a row in the Parameters list, with edit and delete icons.
 
 ### Step 1.3: Build the return type
 
 The function will return a `ReviewResponse` record. The fastest way to define one is to import a JSON sample.
 
-Click the **Return Type** field. From the dropdown, click **Create New Type**.
-
-![Return Type dropdown listing primitive types with a Create New Type entry and an Open Type Browser link.](/img/genai/tutorials/review-summarizer-natural-function/06-create-new-type.png)
-
-In the **Create New Type** dialog, switch to the **Import** tab. Set:
+Click the **Return Type** field, then select **Create New Type**. The **Create New Type** dialog opens on top of the form; switch to the **Import** tab. Set:
 
 | Field | Value |
 |---|---|
@@ -100,9 +96,13 @@ Paste the following JSON sample into the textarea:
 }
 ```
 
-![Create New Type dialog on the Import tab with Format JSON, Name ReviewResponse, an Import JSON File button, and the JSON sample pasted into the textarea.](/img/genai/tutorials/review-summarizer-natural-function/07-create-from-json.png)
+![Create New Type dialog on the Import tab with Format JSON, Name ReviewResponse, an Import JSON File button, and the JSON sample pasted into the textarea.](/img/genai/tutorials/review-summarizer-natural-function/06-create-new-type.png)
 
-Click **Import**. WSO2 Integrator infers and registers three types under the **Types** node in the sidebar:
+Click **Import**. WSO2 Integrator infers and registers three types, closes the dialog, and returns you to the completed function form: the parameter row now shows edit/delete icons, and **Return Type** is set to `ReviewResponse`.
+
+![Completed Create New Natural Function form with the customerReview parameter (edit/delete icons) and Return Type set to ReviewResponse, ready to select Create.](/img/genai/tutorials/review-summarizer-natural-function/07-create-from-json.png)
+
+The three registered types appear under the **Types** node in the sidebar:
 
 - `ReviewResponse`: the top-level record with fields `sentiment`, `summary`, `topics`, `churn_risk`, `suggested_action`.
 - `Topics`: the array type used for the `topics` field (an alias for `TopicsItem[]`).
@@ -120,15 +120,15 @@ Click **Create**. WSO2 Integrator generates the Ballerina source and opens the f
 - **Types**: `ReviewResponse`, `Topics`, `TopicsItem`.
 - **Natural Functions**: `analyzeCustomerReviews`.
 
-The flow shows a single **Prompt** node between **Start** and the end of the function:
+The flow shows a single **Prompt** node between **Start** and the end of the function. A pencil (edit) icon sits at the top-right corner of the node, and a small circular connection icon sits just outside it, linked by a short connector line:
 
-![Natural function flow with Start, an empty Prompt node ("Enter your prompt here..."), and the end marker. A small cog icon sits to the right of the Prompt node.](/img/genai/tutorials/review-summarizer-natural-function/08-prompt-node-in-flow-diagram.png)
+![Natural function flow with Start, an empty Prompt node ("Enter your prompt here..."), a pencil icon, and a circular connection icon linked to the node.](/img/genai/tutorials/review-summarizer-natural-function/08-prompt-node-in-flow-diagram.png)
 
 ### Step 1.5: Bind the model provider
 
-Hover the cog icon on the right of the Prompt node. The tooltip reads **Configure Model Provider**. Click it.
+Hover or click the circular connection icon next to the Prompt node. The tooltip reads **Configure Model Provider**.
 
-![Prompt node with the cog icon highlighted on the right and a tooltip reading "Configure Model Provider".](/img/genai/tutorials/review-summarizer-natural-function/09-bind-the-model-provider.png)
+![Prompt node with the circular connection icon highlighted (blue border) and a tooltip reading "Configure Model Provider".](/img/genai/tutorials/review-summarizer-natural-function/09-bind-the-model-provider.png)
 
 The **Configure Model Provider Connection** panel slides in. Pick the auto-created `_analyzeCustomerReviewsModel` connection and click **Save**.
 
@@ -140,22 +140,26 @@ If you'd rather use OpenAI, Anthropic, Azure OpenAI, or any other provider, clic
 
 ### Step 1.6: Write the prompt
 
-Click the pencil icon at the top-right of the Prompt node. The inline editor opens; click **Expand Editor** for the full Markdown editor with formatting tools.
+Click the pencil icon at the top-right of the Prompt node (tooltip: **Edit Prompt**). The full Prompt editor opens directly, with a formatting toolbar (**Insert**, undo/redo, **Bold**, *Italic*, link, headings, quote, lists, table, and **Preview**/**Source** toggles).
 
-Type the following prompt. Use **Bold** for the role line, and the **Insert** menu (or just type) to interpolate the parameter:
+Type the following prompt, and use the **Insert** menu (or just type the parameter name) to interpolate `customerReview` — it renders as a token pill reading `{x} customerReview`, backed by the Ballerina template expression `${customerReview}`:
 
-> You are a **customer review analyzer**. For the review below, identify the overall sentiment, extract the key topics being discussed with their individual sentiment, and suggest a follow-up action if needed.
+> You are a customer review analyzer. For the review below, identify the overall sentiment, extract the key topics being discussed with their individual sentiment, and suggest a follow-up action if needed.
 >
-> Review: `${customerReview}`
+> Review: `{x} customerReview`
 
-![Expanded Prompt editor with the prompt typed and the phrase "customer review analyzer" bold.](/img/genai/tutorials/review-summarizer-natural-function/12-prompt-editor-with-the-prompt-written.png)
+![Prompt editor with the prompt typed and the customerReview parameter shown as a token pill.](/img/genai/tutorials/review-summarizer-natural-function/12-prompt-editor-with-the-prompt-written.png)
 
-Close the expanded view and click **Save**. The natural function is complete; the Prompt node shows the saved body inline, and behind the scenes WSO2 Integrator generated the Ballerina source.
+Click **Save**. The natural function is complete; the Prompt node shows the saved body inline, and behind the scenes WSO2 Integrator generated the Ballerina source.
+
+:::note
+Reopening a saved prompt (clicking the pencil icon again) opens a smaller floating editor with the same text but no formatting toolbar, and **Cancel**/**Save** buttons — a quick-edit view distinct from the full editor used the first time.
+:::
 
 <Tabs>
 <TabItem value="visual" label="Visual Designer" default>
 
-![Prompt node showing the saved prompt body inline.](/img/genai/tutorials/review-summarizer-natural-function/13-prompt-saved-in-flow-diagram.png)
+![Prompt node showing the saved prompt body inline, connected to the model provider's circular icon.](/img/genai/tutorials/review-summarizer-natural-function/13-prompt-saved-in-flow-diagram.png)
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -163,7 +167,7 @@ Close the expanded view and click **Save**. The natural function is complete; th
 ```ballerina
 function analyzeCustomerReviews(string customerReview) returns ReviewResponse|error {
     ReviewResponse|error result = natural {
-        You are a **customer review analyzer**. For the review below, identify
+        You are a customer review analyzer. For the review below, identify
         the overall sentiment, extract the key topics being discussed with their
         individual sentiment, and suggest a follow-up action if needed.
 
@@ -184,9 +188,9 @@ The function is callable; now we expose it as an API.
 
 ### Step 2.1: Add the service artifact
 
-Click the back arrow to return to the integration **Overview**, then **+ Add Artifact**. Under **Integration as API**, pick **HTTP Service**.
+Click the back arrow to return to the integration **Overview**, then select **Add Artifact manually**. Under **Integration as API**, pick **HTTP Service**.
 
-![Add Artifact panel showing Automation, AI Integration, Integration as API (HTTP Service highlighted, GraphQL Service Beta, TCP Service Beta), Event Integration, and File Integration.](/img/genai/tutorials/review-summarizer-natural-function/14-create-http-service.png)
+![Artifacts page showing Automation, Durable Workflow, AI Integration (Chat Agent Service, Durable Agentic Workflow, MCP Service), Integration as API (HTTP Service highlighted, GraphQL Service Beta, TCP Service Beta), and Event Integration.](/img/genai/tutorials/review-summarizer-natural-function/14-create-http-service.png)
 
 In the **Create HTTP Service** form, set:
 
@@ -201,11 +205,11 @@ Click **Create**. The HTTP Service editor opens with no resources yet.
 
 ### Step 2.2: Add the POST resource
 
-Click **+ Add Resource**.
+Click **+ Add Resource**. The **Select HTTP Method to Add** picker opens.
 
-![HTTP Service editor with Listener httpDefaultListener, Base Path /api/v1, the Resources section showing "No resources found. Add a new resource." and a + Add Resource button.](/img/genai/tutorials/review-summarizer-natural-function/16-add-post-resource.png)
+![HTTP Service editor with Listener httpDefaultListener, Base Path /api/v1, no resources yet, and the Select HTTP Method to Add picker open with POST highlighted.](/img/genai/tutorials/review-summarizer-natural-function/16-add-post-resource.png)
 
-In the **Select HTTP Method to Add** picker, choose **POST**, then configure the resource:
+Choose **POST**, then configure the resource:
 
 | Field | Value |
 |---|---|
@@ -216,9 +220,9 @@ In the **Select HTTP Method to Add** picker, choose **POST**, then configure the
 
 ![Resource Configuration panel with HTTP Method POST, Resource Path analyze, a string review payload, and Responses 201 ReviewResponse / 500 error. Save button at the bottom right.](/img/genai/tutorials/review-summarizer-natural-function/17-post-resource-configured-in-form.png)
 
-Click **Save**. The resource flow opens with **Start**, an empty placeholder, and an **Error Handler**.
+Click **Save**. The resource flow opens with **Start**, a **+** placeholder on the connector, and an **Error Handler**.
 
-![Resource flow showing Start, an empty placeholder ("Select node from node panel."), and Error Handler.](/img/genai/tutorials/review-summarizer-natural-function/18-resource-flow-add-new.png)
+![Resource flow showing Start, a + placeholder icon on the connector, and Error Handler.](/img/genai/tutorials/review-summarizer-natural-function/18-resource-flow-add-new.png)
 
 ---
 
@@ -226,41 +230,41 @@ Click **Save**. The resource flow opens with **Start**, an empty placeholder, an
 
 ### Step 3.1: Open the Add Node panel
 
-Click the empty placeholder between **Start** and **Error Handler**. The **Add Node** panel slides in. Expand the **AI** category and click **Call Natural Function**.
+Click the **+** placeholder between **Start** and **Error Handler**. The **Add Node** panel slides in. Expand the **AI** category and click **Call Natural Function** (tooltip: **Call a natural programming function**).
 
-![Add Node panel with AI category expanded, showing Direct LLM (Model Provider, Call Natural Function) and RAG nodes. The Call Natural Function tile is highlighted.](/img/genai/tutorials/review-summarizer-natural-function/19-select-natural-function-in-add-new.png)
+![Add Node panel with AI category expanded, showing Direct LLM (Model Provider, Call Natural Function) and RAG nodes. The Call Natural Function tile is highlighted with a "Call a natural programming function" tooltip.](/img/genai/tutorials/review-summarizer-natural-function/19-select-natural-function-in-add-new.png)
 
 ### Step 3.2: Pick the function
 
-The **Natural Functions** picker lists every natural function in the project. Pick `analyzeCustomerReviews`.
+The **Natural Functions** picker lists every natural function in the project under **Current Integration**. Pick `analyzeCustomerReviews`.
 
-![Natural Functions picker with a Search box and a Current Integration section showing analyzeCustomerReviews.](/img/genai/tutorials/review-summarizer-natural-function/20-choose-analyzeCustomerReviews.png)
+![Natural Functions picker with a Search box and a Current Integration section showing the analyzeCustomerReviews tile.](/img/genai/tutorials/review-summarizer-natural-function/20-choose-analyzeCustomerReviews.png)
 
 ### Step 3.3: Bind the argument
 
-The configuration form opens. Each parameter on the function becomes a row; here you only have `CustomerReview`.
+The configuration form opens, titled with your project and function name (for example, `customer_review_analyzer : analyzeCustomerReviews`). Each parameter on the function becomes a row; here you only have `CustomerReview`, with a **Text**/**Expression** toggle.
 
-![Configuration form for the analyzeCustomerReviews call: empty CustomerReview field with Text/Expression toggle, Result name reviewResponse, Variable Type ReviewResponse (locked), Save button.](/img/genai/tutorials/review-summarizer-natural-function/21-natural-function-config-form.png)
+![Configuration form for the analyzeCustomerReviews call: empty CustomerReview field with Text/Expression toggle, Result name reviewResponse, Variable Type ReviewResponse (locked), Save button disabled.](/img/genai/tutorials/review-summarizer-natural-function/21-natural-function-config-form.png)
 
-Bind **CustomerReview** to the inbound payload variable `review`. Leave **Result** (the variable name that will hold the typed return value, used by the next node) as `reviewResponse`, and **Variable Type** as the locked `ReviewResponse` (it always matches the function's declared return type).
+Switch **CustomerReview** to **Expression** and bind it to the inbound payload variable `review`. Leave **Result** (the variable name that will hold the typed return value, used by the next node) as `reviewResponse`, and **Variable Type** as the locked `ReviewResponse` (it always matches the function's declared return type).
 
-![Configuration form filled in: CustomerReview bound to review (variable pill), Result reviewResponse, Variable Type ReviewResponse, Save button enabled.](/img/genai/tutorials/review-summarizer-natural-function/22-bind-review-to-customer-review.png)
+![Configuration form filled in: CustomerReview in Expression mode bound to review (variable pill), Result reviewResponse, Variable Type ReviewResponse, Save button enabled.](/img/genai/tutorials/review-summarizer-natural-function/22-bind-review-to-customer-review.png)
 
 Click **Save**. The natural-function node lands in the flow.
 
 ### Step 3.4: Add the return
 
-Click the empty placeholder between the natural function call and **Error Handler**. In the Add Node panel, under **Control**, pick **Return**.
+Click **+** between the natural function call and **Error Handler**. In the Add Node panel, under **Control**, pick **Return**.
 
-![Resource flow with Start, the analyzeCustomerReviews (reviewResponse) node, an empty placeholder, and Error Handler. The Add Node panel on the right has Return highlighted under Control.](/img/genai/tutorials/review-summarizer-natural-function/23-add-return.png)
+![Resource flow with Start, the analyzeCustomerReviews (reviewResponse) node, and Error Handler. The Add Node panel on the right has Return highlighted under Control.](/img/genai/tutorials/review-summarizer-natural-function/23-add-return.png)
 
 In the Return panel, set the **Expression / Return value** to `reviewResponse`.
 
-![Return node configuration panel saying "This operation has no required parameters. Optional settings can be configured below." with the Expression set to the variable reviewResponse. A Saving... indicator is on the right.](/img/genai/tutorials/review-summarizer-natural-function/24-set-reviewResponse-as-return.png)
+![Return node configuration panel saying "This operation has no required parameters. Optional settings can be configured below." with the Expression set to the variable reviewResponse.](/img/genai/tutorials/review-summarizer-natural-function/24-set-reviewResponse-as-return.png)
 
-The completed flow:
+The completed flow, with a **Try It** button now available at the top right:
 
-![Final resource flow with Start, then analyzeCustomerReviews (reviewResponse), then Return reviewResponse, then Error Handler.](/img/genai/tutorials/review-summarizer-natural-function/25-complete-flow.png)
+![Final resource flow with Start, then analyzeCustomerReviews (reviewResponse), then Return reviewResponse, then Error Handler, with Configure and Try It buttons at the top.](/img/genai/tutorials/review-summarizer-natural-function/25-complete-flow.png)
 
 ---
 
@@ -268,13 +272,11 @@ The completed flow:
 
 ### Step 4.1: Run the service
 
-From the **Overview** page click **Run**. WSO2 Integrator applies the `--experimental` flag and starts the service.
-
-![Integration Overview page with the Run button highlighted in the top-right toolbar. The design diagram shows httpDefaultListener connected to the /api/v1 service with a POST /analyze resource. A toast at the bottom right reads "WSO2 default model provider configuration values were added to t…".](/img/genai/tutorials/review-summarizer-natural-function/26-run.png)
+From the resource editor, select **Run**. WSO2 Integrator applies the `--experimental` flag and compiles and starts the service, with progress shown in the integrated terminal.
 
 ### Step 4.2: Send a test request
 
-From the resource editor, click **Try It** in the top-right toolbar. Send a `POST /api/v1/analyze` with this body:
+Select **Try It**. A `TryIt.hurl` file opens with a `POST` request to `/api/v1/analyze` prefilled. Update the JSON body with a review to analyze, for example:
 
 ```json
 {
@@ -282,11 +284,13 @@ From the resource editor, click **Try It** in the top-right toolbar. Send a `POS
 }
 ```
 
+Select the run icon next to the request to send it.
+
 ### Step 4.3: Read the structured response
 
-The natural function returns a fully structured response matching `ReviewResponse`.
+The response appears inline below the request, in the same `TryIt.hurl` tab. It shows `Status: 201 Created` and a fully structured body matching `ReviewResponse`.
 
-![Try It panel showing the POST /api/v1/analyze request and the structured ReviewResponse returned by the natural function.](/img/genai/tutorials/review-summarizer-natural-function/27-try-it-result.png)
+![TryIt.hurl showing the POST /api/v1/analyze request and the structured ReviewResponse — sentiment, summary, per-topic sentiment, churn_risk, and suggested_action — returned below it.](/img/genai/tutorials/review-summarizer-natural-function/26-try-it-result.png)
 
 The LLM analyzed the review, identified the overall sentiment, extracted per-topic sentiment, flagged the customer as a churn risk, and suggested a concrete follow-up action. The response comes back as a typed `ReviewResponse` record, with no JSON parsing or schema validation in your code.
 

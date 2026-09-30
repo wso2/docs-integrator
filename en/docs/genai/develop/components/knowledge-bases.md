@@ -30,11 +30,11 @@ Two places, both equivalent:
 - **Add Node panel** > **AI** > **RAG** > **Knowledge Base**.
 - **Right-side Knowledge Bases panel** > **+ Add Knowledge Base**.
 
-![Right-side Knowledge Bases panel showing the search bar and a + Add Knowledge Base button at the top of an empty list.](/img/genai/develop/components/knowledge-bases/00-panel-empty.png)
+![Right-side Knowledge Bases panel showing the search bar and a + Add Knowledge Base button at the top of an empty list.](/img/genai/develop/components/knowledge-bases/01-panel-empty.png)
 
 Click **+ Add Knowledge Base** and the **Select Knowledge Base** picker opens:
 
-![Select Knowledge Base picker listing three options: Vector Knowledge Base ('Represents a vector knowledge base for managing chunk indexing and retrieval'), WSO2 Cloud Knowledge Base, and Azure AI Search Knowledge Base ('Represents the Azure Search Knowledge Base implementation').](/img/genai/develop/components/knowledge-bases/01-select-list.png)
+![Select Knowledge Base picker listing three options: Vector Knowledge Base ('Represents a vector knowledge base for managing chunk indexing and retrieval'), WSO2 Cloud Knowledge Base, and Azure AI Search Knowledge Base ('Represents the Azure Search Knowledge Base implementation').](/img/genai/develop/components/knowledge-bases/02-select-list.png)
 
 ## Implementations overview
 
@@ -52,7 +52,7 @@ The default implementation. You combine a Vector Store, an Embedding Provider, a
 
 ### Create form
 
-![Create Vector Knowledge Base form showing three required pluggable fields: Vector Store (with + Create New Vector Store link), Embedding Model (with + Create New Embedding Model link), Chunker (default ai:AUTO, with + Create New Chunker link). Below: Knowledge Base Name aiVectorknowledgebase, Result Type ai:VectorKnowledgeBase.](/img/genai/develop/components/knowledge-bases/02-vector-kb-form.png)
+![Create Vector Knowledge Base form showing three required pluggable fields: Vector Store (with + Create New Vector Store link), Embedding Model (with + Create New Embedding Model link), Chunker (default ai:AUTO, with + Create New Chunker link). Below: Knowledge Base Name aiVectorknowledgebase, Result Type ai:VectorKnowledgeBase.](/img/genai/develop/components/knowledge-bases/03-vector-kb-form.png)
 
 | Field | Required | Default | Available values |
 |---|---|---|---|
@@ -72,11 +72,11 @@ A Knowledge Base that's deployed in WSO2 cloud. If you doesn't already have a WS
 
 Selecting **WSO2 Cloud Knowledge Base** lists the knowledge bases available in your WSO2 Cloud organization. You need to be signed in to WSO2 Cloud with a project selected for the list to appear.
 
-![List of existing WSO2 Cloud knowledge bases in the signed-in organization, shown below a 'Manually Config WSO2 Cloud Knowledge Base' card.](/img/genai/develop/components/knowledge-bases/05-wso2-cloud-list.png)
+![List of existing WSO2 Cloud knowledge bases in the signed-in organization, shown below a 'Manually Config WSO2 Cloud Knowledge Base' card.](/img/genai/develop/components/knowledge-bases/04-wso2-cloud-list.png)
 
 Choose one from the **Existing WSO2 Cloud Knowledge Bases** list, and the create form opens with its service URL and credentials already filled in. Click **Save** to create the knowledge base instance.
 
-![Create WSO2 Cloud Knowledge Base form with the Service URL and Knowledge Base Authentication Configuration fields already filled in from the selected knowledge base.](/img/genai/develop/components/knowledge-bases/06-wso2-cloud-prefilled-form.png)
+![Create WSO2 Cloud Knowledge Base form with the Service URL and Knowledge Base Authentication Configuration fields already filled in from the selected knowledge base.](/img/genai/develop/components/knowledge-bases/05-wso2-cloud-prefilled-form.png)
 
 The credentials are supplied by the environment when the integration runs, so no secrets are stored in your project.
 
@@ -84,7 +84,7 @@ The credentials are supplied by the environment when the integration runs, so no
 
 Choose **Manually Config WSO2 Cloud Knowledge Base** to open a blank form and enter the details yourself.
 
-![Blank Create WSO2 Cloud Knowledge Base form showing the empty Service URL field and the Knowledge Base Authentication Configuration (Token URL, Client ID, Client Secret).](/img/genai/develop/components/knowledge-bases/07-wso2-cloud-manual-form.png)
+![Blank Create WSO2 Cloud Knowledge Base form showing the empty Service URL field and the Knowledge Base Authentication Configuration (Token URL, Client ID, Client Secret).](/img/genai/develop/components/knowledge-bases/06-wso2-cloud-manual-form.png)
 
 ### Connection Form Details
 
@@ -95,7 +95,7 @@ Choose **Manually Config WSO2 Cloud Knowledge Base** to open a blank form and en
 
 #### Advanced configurations
 
-![Create WSO2 Cloud Knowledge Base form with Advanced Configurations expanded showing Minimum Similarity Threshold (default 0.7), Cohere Reranker API Key, Cohere Reranker Model, Reranker Top N (default 5), and Connection Configuration.](/img/genai/develop/components/knowledge-bases/08-wso2-cloud-advanced.png)
+![Create WSO2 Cloud Knowledge Base form with Advanced Configurations expanded showing Minimum Similarity Threshold (default 0.7), Cohere Reranker API Key, Cohere Reranker Model, Reranker Top N (default 5), and Connection Configuration.](/img/genai/develop/components/knowledge-bases/07-wso2-cloud-advanced.png)
 
 | Field | Default | Available values | What it controls |
 |---|---|---|---|
@@ -117,7 +117,7 @@ Official website: [Azure AI Search](https://azure.microsoft.com/services/search/
 
 ### Create form
 
-![Create Azure AI Search Knowledge Base form showing required fields: Service URL (the Service URL of the Azure AI Search instance), API Key (for authenticating with the Azure AI Search service), Index (name of an existing search index or a search:SearchIndex definition to create), Embedding Model (optional pluggable field with + Create New Embedding Model link), Chunker (default ai:AUTO).](/img/genai/develop/components/knowledge-bases/03-azure-search-basic.png)
+![Create Azure AI Search Knowledge Base form showing required fields: Service URL (the Service URL of the Azure AI Search instance), API Key (for authenticating with the Azure AI Search service), Index (name of an existing search index or a search:SearchIndex definition to create), Embedding Model (optional pluggable field with + Create New Embedding Model link), Chunker (default ai:AUTO).](/img/genai/develop/components/knowledge-bases/08-azure-search-basic.png)
 
 | Field | Required | Default | Available values |
 |---|---|---|---|
@@ -129,7 +129,7 @@ Official website: [Azure AI Search](https://azure.microsoft.com/services/search/
 
 ### Advanced configurations
 
-![Azure AI Search Knowledge Base Create form with Advanced Configurations expanded showing Verbose (default false), API Version (default 2025-09-01), Content Field Name (default 'content'), Search Client Connection Config (default {}), Index Client Connection Config (default {}), Semantic Configuration Name.](/img/genai/develop/components/knowledge-bases/04-azure-search-advanced.png)
+![Azure AI Search Knowledge Base Create form with Advanced Configurations expanded showing Verbose (default false), API Version (default 2025-09-01), Content Field Name (default 'content'), Search Client Connection Config (default {}), Index Client Connection Config (default {}), Semantic Configuration Name.](/img/genai/develop/components/knowledge-bases/09-azure-search-advanced.png)
 
 | Field | Default | Available values | What it controls |
 |---|---|---|---|

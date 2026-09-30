@@ -13,7 +13,7 @@ Memory is the infrastructure enabling AI systems to store, recall, and utilize p
 
 Click **+ Add Memory** on the AI Agent node. The **Configure Memory** panel opens on the right.
 
-![The Configure Memory panel — Select Memory dropdown set to Short Term Memory, with description 'Initializes short-term memory with an optional store and overflow configuration.' This operation has no required parameters info banner. Advanced Configurations section with Store (Default: In-Memory Short Term Memory Store), Overflow Configuration (Default: Overflow Trim), Memory Name set to aiShorttermmemory. Save button at the bottom.](/img/genai/develop/agents/09-configure-memory.png)
+![The Configure Memory panel — Select Memory dropdown set to Short Term Memory, with description 'Initializes short-term memory with an optional store and overflow configuration.' This operation has no required parameters info banner. Advanced Configurations section with Store (Default: In-Memory Short Term Memory Store), Overflow Configuration (Default: Overflow Trim), Memory Name set to aiShorttermmemory. Save button at the bottom.](/img/genai/develop/agents/memory/01-configure-memory.png)
 
 | Field | Required | Description |
 |---|---|---|
@@ -38,7 +38,7 @@ The **Store** field determines where the conversation history is stored.
 
 Click **+ Create New Memory Store** to open the **Select Memory Store** picker.
 
-![The Select Memory Store panel listing two stores: In Memory Short Term Memory Store with description 'Provides an in-memory chat message store.' (highlighted as default) and MSSQL Short Term Memory Store with description 'Represents an MS SQL-backed short-term memory store for messages.'](/img/genai/develop/agents/10-select-memory-store.png)
+![The Select Memory Store panel listing two stores: In Memory Short Term Memory Store with description 'Provides an in-memory chat message store.' (highlighted as default) and MSSQL Short Term Memory Store with description 'Represents an MS SQL-backed short-term memory store for messages.'](/img/genai/develop/agents/memory/02-select-memory-store.png)
 
 | Store | Module | Survives restart? | Recommended use |
 |---|---|---|---|
@@ -69,7 +69,7 @@ Configure the following settings and save the configuration.
 
 Selecting **MSSQL Short Term Memory Store** opens a configuration form for creating an MSSQL-backed memory store.
 
-![Create Memory Store form for MSSQL. Fields: MS SQL Client* (with description 'The MS SQL client or database configuration to connect to the database.', Record/Expression toggle, default `new ('', (), (), (), 0, '', (), ())`). Advanced Configurations Expand link. Memory Store Name* (default 'mssqlShorttermmemorystore'). Result Type* (default 'mssql:ShortTermMemoryStore', locked). Save button.](/img/genai/develop/agents/20-create-mssql-memory-store.png)
+![Create Memory Store form for MSSQL. Fields: MS SQL Client* (with description 'The MS SQL client or database configuration to connect to the database.', Record/Expression toggle, default `new ('', (), (), (), 0, '', (), ())`). Advanced Configurations Expand link. Memory Store Name* (default 'mssqlShorttermmemorystore'). Result Type* (default 'mssql:ShortTermMemoryStore', locked). Save button.](/img/genai/develop/agents/memory/03-create-mssql-memory-store.png)
 
 | Field | Required | Description |
 |---|---|---|
@@ -82,7 +82,7 @@ Selecting **MSSQL Short Term Memory Store** opens a configuration form for creat
 
 Expand **Advanced Configurations** to view additional persistence-related settings.
 
-![Create Memory Store form for MSSQL with Advanced Configurations expanded. Fields visible: Cache Config (Default: {}, description 'The cache configuration for in-memory caching of messages.', Record/Expression). Max Messages Per Key (Default: 20, description 'The maximum number of interactive messages to store per key.', Number/Expression). Table Name (Default: 'ChatMessages', description 'The name of the database table to store chat messages (default 'ChatMessages'). Must start with a letter or underscore and contain only letters, digits, and underscores.', Text/Expression).](/img/genai/develop/agents/21-mssql-memory-advanced.png)
+![Create Memory Store form for MSSQL with Advanced Configurations expanded. Fields visible: Cache Config (Default: {}, description 'The cache configuration for in-memory caching of messages.', Record/Expression). Max Messages Per Key (Default: 20, description 'The maximum number of interactive messages to store per key.', Number/Expression). Table Name (Default: 'ChatMessages', description 'The name of the database table to store chat messages (default 'ChatMessages'). Must start with a letter or underscore and contain only letters, digits, and underscores.', Text/Expression).](/img/genai/develop/agents/memory/04-mssql-memory-advanced.png)
 
 | Field | Default | Description |
 |---|---|---|
@@ -206,7 +206,7 @@ The effective size of the memory window depends on the model’s context window,
 
 After memory is configured, the AI Agent block on the canvas displays the attached memory configuration as a sub-block.
 
-![The AI Chat Agent canvas after Memory has been attached. The AI Agent block now has an additional inner block 'Memory: ShortTermMemory' between the agent name (AI Agent / stringResult) and the BlogReviewer label.](/img/genai/develop/agents/22-agent-with-memory-attached.png)
+![The AI Chat Agent canvas after Memory has been attached. The AI Agent block now has an additional inner block 'Memory: ShortTermMemory' between the agent name (AI Agent / stringResult) and the BlogReviewer label.](/img/genai/develop/agents/memory/05-agent-with-memory-attached.png)
 
 ## Sessions and isolation
 
