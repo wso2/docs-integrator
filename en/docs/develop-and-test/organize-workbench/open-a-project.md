@@ -54,6 +54,10 @@ WSO2 Integrator detects the project structure and opens the [project view](../..
 
 4. Click a project to clone it to your local machine and open it in WSO2 Integrator.
 
+## Troubleshooting
+
+If the editor shows **WSO2 Integrator cannot start** or **Your project dependencies need to be updated** instead of your project, the project or your Ballerina installation was set up with an earlier Ballerina version. See [Migration troubleshooting](../../editor/troubleshooting/migration-troubleshooting.md) to update, or to stay on your current version.
+
 ## What's next
 
 - [Project view](../../editor/views/project-view.md) — Manage, run, and debug your project

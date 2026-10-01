@@ -1,5 +1,6 @@
 ---
-sidebar_position: 1
+sidebar_position: 0
+sidebar_label: Overview
 title: Editor Troubleshooting
 description: Fix common editor issues.
 slug: /editor/editor-troubleshooting
@@ -8,6 +9,8 @@ slug: /editor/editor-troubleshooting
 # Editor Troubleshooting
 
 Use this page when something in the WSO2 Integrator editor isn't behaving the way you expect: a feature doesn't respond, a diagram doesn't load, or an action errors out. Before you file an issue, capture verbose editor output so the team can act on the report.
+
+If the editor shows **WSO2 Integrator cannot start** or **Your project dependencies need to be updated** after you move to WSO2 Integrator 5.1.0, see [Migration troubleshooting](migration-troubleshooting.md).
 
 ## Steps : Capture verbose editor output
 
@@ -53,6 +56,7 @@ If the Ballerina channel doesn't show any error, still file the issue. Include t
 
 ## What's next
 
+- [Migration troubleshooting](migration-troubleshooting.md) - resolve the Ballerina version and dependency screens that appear after you move to WSO2 Integrator 5.1.0.
 - [Errors and stack traces](../../develop-and-test/troubleshooting/errors-and-stack-traces.md) - interpret the error text you captured from the Ballerina output channel.
 - [Logging](../../develop-and-test/troubleshooting/logging.md) - add log statements once the IDE is working again to trace what the integration does at runtime.
 - [Debug Your Integration](../../develop-and-test/debugging/debugging.md) - set breakpoints and step through the integration after the IDE issue is resolved.
