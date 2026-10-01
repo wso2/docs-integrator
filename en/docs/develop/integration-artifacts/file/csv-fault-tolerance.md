@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # CSV Fault Tolerance
 
-Real-world CSV files rarely arrive perfectly clean. A single bad row (a stray comma, a wrong data type, a trailing blank) would normally fail the whole file. With **CSV fault tolerance** enabled, the listener treats malformed rows as a per-row issue instead of a per-file one. It skips rows that don't fit your schema and hands the rest to the handler as if nothing happened.
+Real-world CSV files rarely arrive perfectly clean. A single bad row (a stray comma, a wrong data type, a trailing blank) would normally fail the whole file. With **Csv Fail Safe** enabled, the listener treats malformed rows as a per-row issue instead of a per-file one. It skips rows that don't fit your schema and hands the rest to the handler as if nothing happened.
 
 ## What the handler sees
 
@@ -23,10 +23,7 @@ Fault tolerance only skips rows that fail **typed binding**. If your handler is 
 On the **Add File Handler** form, click **+ Define Row Schema** and describe each column as a field on a Ballerina record. This flips the handler parameter to a typed array (for example `Order[]`), and rows that don't match trigger binding errors that fault tolerance can skip. See the [row-schema step in Streaming large files](streaming-large-files.md#enabling-streaming) for a walkthrough.
 :::
 
-Fault tolerance combines cleanly with:
-
-- **Streaming** — works with [streamed CSV](streaming-large-files.md). A bad row no longer terminates the stream; processing continues through the rest of the file.
-- **Move / Delete post-processing** — because the handler completes successfully, the file follows the **After Success** action as it would for a clean run.
+Fault tolerance works with **Move / Delete post-processing**, because the handler completes successfully, the file follows the **After Success** action just as it would for a clean run.
 
 ## Configuration
 
