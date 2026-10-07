@@ -23,7 +23,7 @@ The Library view is a dedicated view in WSO2 Integrator for creating utilities a
 
 ## Library overview canvas
 
-The library overview canvas is the central area of the Library view. It provides a dashboard for the library, showing the library name as a heading and an **Artifacts summary** with cards for the total number of defined types, functions, data mappers, and connections.
+The library overview canvas is the central area of the Library view. It provides a dashboard for the library, showing the library name as a heading and an **Artifacts summary** with a card for each artifact category that has artifacts, such as **Types** and **Functions**. Each card shows the number of artifacts defined in that category.
 
 <ThemedImage
     alt="Library overview canvas"
@@ -41,6 +41,8 @@ Click the **+ Add Artifacts** button at the top right of the canvas to add a new
 - **Data Mapper**
 - **Type**
 - **Connection**
+- **Agent**
+- **Agent Definition**
 - **Configuration**
 
 <ThemedImage
