@@ -87,10 +87,19 @@ The toolbar sits at the top of the Integration view and provides quick access to
 | **Configure** | Opens the configuration panel, equivalent to adding a configuration from the project explorer. |
 | **Run** | Builds and runs your integration locally. WSO2 Integrator compiles the Ballerina code, starts the services, and displays the output in the terminal panel. |
 | **Debug** | Starts a debug session with the debugger attached. Set breakpoints, step through execution, inspect variables and payloads, and evaluate expressions at runtime. |
+| **Deployment** | Shows or hides the deployment options panel on the right side of the view. |
 
 ## Deployment options panel
 
-The deployment options panel appears on the right sidebar and provides shortcuts to deploy the integration to different environments.
+Select **Deployment** in the toolbar to open the deployment options panel on the right side of the view. The panel provides shortcuts to deploy the integration to different environments. Select **Deployment** again to close it.
+
+<ThemedImage
+    alt="Deployment button in the toolbar"
+    sources={{
+        light: useBaseUrl('/img/editor/views/integration-view/deployment-button.png'),
+        dark: useBaseUrl('/img/editor/views/integration-view/deployment-button.png'),
+    }}
+/>
 
 <ThemedImage
     alt="Deployment options"
@@ -102,16 +111,15 @@ The deployment options panel appears on the right sidebar and provides shortcuts
 
 | Option | Target |
 |---|---|
-| [**Deploy to WSO2 Cloud**](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) | Fully managed cloud platform for hosting and running integrations. |
-| [**Containerized Deployment**](../../deploy-and-run/self-hosted/containerized-deployment.md) | Build Docker images and deploy integrations to Docker, Kubernetes, or OpenShift. |
-| [**VM Deployment**](../../deploy-and-run/self-hosted/vm-deployment.md) | Deploy integrations as standalone JAR files on virtual machines. |
-| [**Integration Control Plane (ICP)**](../../icp/index.md) | Monitor and manage running integrations from a centralized dashboard. |
+| [**Deploy to WSO2 Cloud**](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) | Fully managed cloud platform for hosting and running integrations. Select **Deploy** to start. |
+| [**Deploy with Docker**](../../deploy-and-run/self-hosted/containerized-deployment.md) | Build Docker images and deploy integrations to Docker, Kubernetes, or OpenShift. |
+| [**Deploy on a VM**](../../deploy-and-run/self-hosted/vm-deployment.md) | Deploy integrations as standalone JAR files on virtual machines. |
 
-Select **Enable ICP monitoring** to activate ICP for this integration, or expand **Publish to local ICP** to push the integration to a local Integration Control Plane instance.
+The panel also includes an **Integration Control Plane** section for monitoring and managing running integrations from a centralized dashboard. Select **Enable ICP monitoring** to activate the [Integration Control Plane (ICP)](../../icp/index.md) for this integration, or expand **Publish to local ICP** to push the integration to a local ICP instance.
 
-## README section
+## Readme tab
 
-The README section at the bottom of the Integration view displays the contents of your project's `README.md` file. Use it to document the purpose, setup instructions, and usage notes for your integration.
+The **Readme** tab next to **Design** displays the contents of your project's `README.md` file. Use it to document the purpose, setup instructions, and usage notes for your integration.
 
 <ThemedImage
     alt="Readme"
