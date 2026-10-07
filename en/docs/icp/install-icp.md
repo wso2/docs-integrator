@@ -20,7 +20,7 @@ This guide covers manual installation. For evaluation, run via WSO2 Integrator I
 
 :::info Prerequisites
 
-- Java 21
+- Java 25
 - A supported OS: Linux, macOS, or Windows
 - For production deployments: a supported database (PostgreSQL, MySQL, MSSQL, or Oracle Database 19c or later). The default embedded H2 database is suitable for evaluation and development only.
 
