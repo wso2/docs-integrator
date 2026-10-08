@@ -554,5 +554,5 @@ listener smb:Listener smbListener = new (
 
 - [FTP / SFTP](ftp-sftp.md) — poll a remote FTP, SFTP, or FTPS server instead of a network share
 - [Local files](local-files.md) — monitor a local directory
-- [SMB connector](../../../connectors/catalog/storage-file/smb/overview.md) — call SMB operations from an integration instead of being triggered by them
+- [SMB connector](product://connectors/catalog/storage-file/smb/overview) — call SMB operations from an integration instead of being triggered by them
 - [Data Mapper](../supportive-artifacts/data-mapper/data-mapper.md) — transform incoming file payloads between formats

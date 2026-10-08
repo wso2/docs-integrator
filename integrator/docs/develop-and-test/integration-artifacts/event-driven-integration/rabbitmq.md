@@ -261,4 +261,4 @@ Each handler receives a `rabbitmq:AnydataMessage` parameter with the message con
 
 - [Kafka](kafka.md) — consume messages from Apache Kafka topics
 - [Connections](../supportive-artifacts/connections.md) — reuse RabbitMQ connection credentials across services
-- [RabbitMQ connector reference](../../../connectors/catalog/messaging/rabbitmq/connector-overview.md) — full connector API reference and trigger reference
+- [RabbitMQ connector reference](product://connectors/catalog/messaging/rabbitmq/connector-overview) — full connector API reference and trigger reference

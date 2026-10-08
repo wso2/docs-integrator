@@ -127,12 +127,12 @@ Listeners exist for every broker, every event source, and every streaming networ
 
 | Category | What it covers | Connector |
 | ----- | ----- | ----- |
-| [Database query streaming](#database-query-streaming-sql) | Result sets returned as lazy streams of records | [MySQL](../connectors/catalog/database/mysql/connector-overview.md), [PostgreSQL](../connectors/catalog/database/postgresql/connector-overview.md), [Microsoft SQL Server (MSSQL)](../connectors/catalog/database/mssql/connector-overview.md), [OracleDB](../connectors/catalog/database/oracledb/oracle-db-connector-overview.md), [Snowflake](../connectors/catalog/database/snowflake/connector-overview.md), [JDBC](../connectors/catalog/database/java.jdbc/java-jdbc-connector-overview.md) |
+| [Database query streaming](#database-query-streaming-sql) | Result sets returned as lazy streams of records | [MySQL](product://connectors/catalog/database/mysql/connector-overview), [PostgreSQL](product://connectors/catalog/database/postgresql/connector-overview), [Microsoft SQL Server (MSSQL)](product://connectors/catalog/database/mssql/connector-overview), [OracleDB](product://connectors/catalog/database/oracledb/oracle-db-connector-overview), [Snowflake](product://connectors/catalog/database/snowflake/connector-overview), [JDBC](product://connectors/catalog/database/java.jdbc/java-jdbc-connector-overview) |
 | [CSV streaming](#csv-streaming) | Streaming CSV parser that yields one record at a time | [CSV](../develop-and-test/data-transformation/csv-flat-file.md#processing-large-files) |
-| [Message brokers](#message-brokers) | Distributed event streaming and messaging | [Kafka](../connectors/catalog/messaging/kafka/connector-overview.md), [RabbitMQ](../connectors/catalog/messaging/rabbitmq/connector-overview.md), [MQTT](../connectors/catalog/built-in/mqtt/mqtt.md), [NATS](../connectors/catalog/messaging/nats/connector-overview.md), [JMS](../connectors/catalog/messaging/java.jms/jms-connector-overview.md), [ASB](../connectors/catalog/messaging/asb/azure-service-bus-connector-overview.md), [Solace](../connectors/catalog/messaging/solace/connector-overview.md), [AWS SQS](../connectors/catalog/messaging/aws.sqs/aws-sqs-connector-overview.md), [AWS SNS](../connectors/catalog/communication/aws.sns/aws-sns-connector-overview.md) |
-| [Change Data Capture and SaaS event sources](#change-data-capture-and-saas-event-sources) | Database change events, cloud/SaaS events | [CDC](../connectors/catalog/database/cdc/connector-overview.md), [Salesforce](../connectors/catalog/crm-sales/salesforce/connector-overview.md), [Email](../connectors/catalog/built-in/email/email.md), [DynamoDB Streams](https://central.ballerina.io/ballerinax/aws.dynamodbstreams/latest), [GitHub Trigger](https://central.ballerina.io/ballerinax/trigger.github/latest) |
-| [File / object transfer streaming](#file-object-transfer-streaming) | Memory-efficient streaming over file transfer protocols | [I/O](https://central.ballerina.io/ballerina/io/latest), [FTP](../connectors/catalog/built-in/ftp/ftp.md), [SMB](https://central.ballerina.io/ballerina/smb/latest) |
-| [Streaming network protocols](#streaming-network-protocols) | Long-lived bidirectional / server-streamed connections | [WebSocket](../connectors/catalog/built-in/websocket/websocket.md), [gRPC](../connectors/catalog/built-in/grpc/grpc.md), [HTTP](../connectors/catalog/built-in/http/overview.md) (SSE), [GraphQL](../connectors/catalog/built-in/graphql/graphql.md) (subscriptions), [UDP](../connectors/catalog/built-in/udp/udp.md) |
+| [Message brokers](#message-brokers) | Distributed event streaming and messaging | [Kafka](product://connectors/catalog/messaging/kafka/connector-overview), [RabbitMQ](product://connectors/catalog/messaging/rabbitmq/connector-overview), [MQTT](product://connectors/catalog/built-in/mqtt/mqtt), [NATS](product://connectors/catalog/messaging/nats/connector-overview), [JMS](product://connectors/catalog/messaging/java.jms/jms-connector-overview), [ASB](product://connectors/catalog/messaging/asb/azure-service-bus-connector-overview), [Solace](product://connectors/catalog/messaging/solace/connector-overview), [AWS SQS](product://connectors/catalog/messaging/aws.sqs/aws-sqs-connector-overview), [AWS SNS](product://connectors/catalog/communication/aws.sns/aws-sns-connector-overview) |
+| [Change Data Capture and SaaS event sources](#change-data-capture-and-saas-event-sources) | Database change events, cloud/SaaS events | [CDC](product://connectors/catalog/database/cdc/connector-overview), [Salesforce](product://connectors/catalog/crm-sales/salesforce/connector-overview), [Email](product://connectors/catalog/built-in/email/email), [DynamoDB Streams](https://central.ballerina.io/ballerinax/aws.dynamodbstreams/latest), [GitHub Trigger](https://central.ballerina.io/ballerinax/trigger.github/latest) |
+| [File / object transfer streaming](#file-object-transfer-streaming) | Memory-efficient streaming over file transfer protocols | [I/O](https://central.ballerina.io/ballerina/io/latest), [FTP](product://connectors/catalog/built-in/ftp/ftp), [SMB](https://central.ballerina.io/ballerina/smb/latest) |
+| [Streaming network protocols](#streaming-network-protocols) | Long-lived bidirectional / server-streamed connections | [WebSocket](product://connectors/catalog/built-in/websocket/websocket), [gRPC](product://connectors/catalog/built-in/grpc/grpc), [HTTP](product://connectors/catalog/built-in/http/overview) (SSE), [GraphQL](product://connectors/catalog/built-in/graphql/graphql) (subscriptions), [UDP](product://connectors/catalog/built-in/udp/udp) |
 
 ## Database query streaming (SQL) {#database-query-streaming-sql}
 
@@ -176,7 +176,7 @@ decimal totalRevenue = check from var {status, amount} in orderStream
 
 Use `query()` (returns a stream) for result sets that may have many rows. Use `queryRow()` (returns a single record) when you expect exactly one row — for example, a primary-key lookup.
 
-For per-database actions and configuration, see the connector docs: [MySQL](../connectors/catalog/database/mysql/actions.md), [PostgreSQL](../connectors/catalog/database/postgresql/actions.md), [MSSQL](../connectors/catalog/database/mssql/actions.md), [Oracle Database](../connectors/catalog/database/oracledb/actions.md).
+For per-database actions and configuration, see the connector docs: [MySQL](product://connectors/catalog/database/mysql/actions), [PostgreSQL](product://connectors/catalog/database/postgresql/actions), [MSSQL](product://connectors/catalog/database/mssql/actions), [Oracle Database](product://connectors/catalog/database/oracledb/actions).
 
 ## CSV streaming {#csv-streaming}
 
@@ -209,15 +209,15 @@ Each broker has a producer/client and a listener. The listener-driven services d
 
 | Connector | Broker | Delivery semantics | Capabilities |
 | ----- | ----- | ----- | ----- |
-| [Kafka](../connectors/catalog/messaging/kafka/connector-overview.md) | Apache Kafka | At-least-once, exactly-once (transactions) | Consumer groups, SASL/SSL, Avro, GraalVM-compatible |
-| [RabbitMQ](../connectors/catalog/messaging/rabbitmq/connector-overview.md) | RabbitMQ (AMQP 0-9-1) | At-least-once | Direct/Fanout/Topic/Headers exchanges, client ack |
-| [MQTT](../connectors/catalog/built-in/mqtt/mqtt.md) | MQTT brokers | QoS 0/1/2 | Last-will, retained messages, IoT-oriented |
-| [NATS](../connectors/catalog/messaging/nats/connector-overview.md) | NATS / JetStream | At-most-once (core) / at-least-once (JetStream) | Publish-subscribe, request-reply, and load-balanced queues, JetStream for persistent messaging |
-| [JMS](../connectors/catalog/messaging/java.jms/jms-connector-overview.md) | JMS providers (ActiveMQ, Artemis) | At-least-once | Queues, topics, durable subscribers |
-| [ASB](../connectors/catalog/messaging/asb/azure-service-bus-connector-overview.md) | Azure Service Bus | At-least-once | Sessions, dead-lettering, batch operations |
-| [Solace](../connectors/catalog/messaging/solace/connector-overview.md) | Solace PubSub+ | At-least-once | Pub/Sub, request/reply, queuing modes |
-| [AWS SQS](../connectors/catalog/messaging/aws.sqs/aws-sqs-connector-overview.md) | Amazon SQS | At-least-once (FIFO: exactly-once) | Standard and FIFO queues |
-| [AWS SNS](../connectors/catalog/communication/aws.sns/aws-sns-connector-overview.md) | Amazon SNS | Topic fan-out | Pub/sub with topic subscriptions |
+| [Kafka](product://connectors/catalog/messaging/kafka/connector-overview) | Apache Kafka | At-least-once, exactly-once (transactions) | Consumer groups, SASL/SSL, Avro, GraalVM-compatible |
+| [RabbitMQ](product://connectors/catalog/messaging/rabbitmq/connector-overview) | RabbitMQ (AMQP 0-9-1) | At-least-once | Direct/Fanout/Topic/Headers exchanges, client ack |
+| [MQTT](product://connectors/catalog/built-in/mqtt/mqtt) | MQTT brokers | QoS 0/1/2 | Last-will, retained messages, IoT-oriented |
+| [NATS](product://connectors/catalog/messaging/nats/connector-overview) | NATS / JetStream | At-most-once (core) / at-least-once (JetStream) | Publish-subscribe, request-reply, and load-balanced queues, JetStream for persistent messaging |
+| [JMS](product://connectors/catalog/messaging/java.jms/jms-connector-overview) | JMS providers (ActiveMQ, Artemis) | At-least-once | Queues, topics, durable subscribers |
+| [ASB](product://connectors/catalog/messaging/asb/azure-service-bus-connector-overview) | Azure Service Bus | At-least-once | Sessions, dead-lettering, batch operations |
+| [Solace](product://connectors/catalog/messaging/solace/connector-overview) | Solace PubSub+ | At-least-once | Pub/Sub, request/reply, queuing modes |
+| [AWS SQS](product://connectors/catalog/messaging/aws.sqs/aws-sqs-connector-overview) | Amazon SQS | At-least-once (FIFO: exactly-once) | Standard and FIFO queues |
+| [AWS SNS](product://connectors/catalog/communication/aws.sns/aws-sns-connector-overview) | Amazon SNS | Topic fan-out | Pub/sub with topic subscriptions |
 
 ### Kafka example
 
@@ -278,13 +278,13 @@ Beyond message brokers, the default profile exposes streams of events from datab
 
 | Connector | Source | What it emits |
 | ----- | ----- | ----- |
-| [CDC](../connectors/catalog/database/cdc/connector-overview.md), [Microsoft SQL Server (MSSQL)](../connectors/catalog/database/mssql/connector-overview.md) | MSSQL CDC | INSERT/UPDATE/DELETE events from a SQL Server table |
-| [CDC](../connectors/catalog/database/cdc/connector-overview.md), [PostgreSQL](../connectors/catalog/database/postgresql/connector-overview.md) | PostgreSQL CDC | Logical replication change events |
-| [CDC](../connectors/catalog/database/cdc/connector-overview.md), [MySQL](../connectors/catalog/database/mysql/connector-overview.md) | MySQL CDC | Binlog-based change events |
+| [CDC](product://connectors/catalog/database/cdc/connector-overview), [Microsoft SQL Server (MSSQL)](product://connectors/catalog/database/mssql/connector-overview) | MSSQL CDC | INSERT/UPDATE/DELETE events from a SQL Server table |
+| [CDC](product://connectors/catalog/database/cdc/connector-overview), [PostgreSQL](product://connectors/catalog/database/postgresql/connector-overview) | PostgreSQL CDC | Logical replication change events |
+| [CDC](product://connectors/catalog/database/cdc/connector-overview), [MySQL](product://connectors/catalog/database/mysql/connector-overview) | MySQL CDC | Binlog-based change events |
 | [DynamoDB Streams](https://central.ballerina.io/ballerinax/aws.dynamodbstreams/latest) | AWS DynamoDB Streams | Item-level changes from a DynamoDB table |
-| [Salesforce](../connectors/catalog/crm-sales/salesforce/connector-overview.md) | Salesforce events | Platform events, change data capture events |
+| [Salesforce](product://connectors/catalog/crm-sales/salesforce/connector-overview) | Salesforce events | Platform events, change data capture events |
 | [GitHub Trigger](https://central.ballerina.io/ballerinax/trigger.github/latest) | GitHub Webhooks | Repository, PR, issue events |
-| [Email](../connectors/catalog/built-in/email/email.md) | POP3 / IMAP4 | New email messages |
+| [Email](product://connectors/catalog/built-in/email/email) | POP3 / IMAP4 | New email messages |
 | [Twilio Trigger](https://central.ballerina.io/ballerinax/twilio/latest) | Twilio | SMS, voice events |
 
 ### CDC example (PostgreSQL)
@@ -326,7 +326,7 @@ For workflows involving large files, the default profile exposes file contents a
 | Connector | Streaming surface |
 | ----- | ----- |
 | [I/O](https://central.ballerina.io/ballerina/io/latest) | `fileReadBlocksAsStream`, `fileReadCsvAsStream`, `fileWriteBlocksFromStream` for local files |
-| [FTP](../connectors/catalog/built-in/ftp/ftp.md) | `ftp:Client->getBytesAsStream` / `put` over FTP and SFTP; `ftp:Listener` for file-arrival events |
+| [FTP](product://connectors/catalog/built-in/ftp/ftp) | `ftp:Client->getBytesAsStream` / `put` over FTP and SFTP; `ftp:Listener` for file-arrival events |
 | [SMB](https://central.ballerina.io/ballerina/smb/latest) | `smb:Client->getBytesAsStream` / `put` over SMB; `smb:Listener` for file-arrival events |
 
 ### Download from FTP as a byte stream
@@ -384,11 +384,11 @@ Some protocols are inherently streaming: the connection itself is long-lived, an
 
 | Module | Protocol | Streaming model |
 | ----- | ----- | ----- |
-| [WebSocket](../connectors/catalog/built-in/websocket/websocket.md) | WebSocket | Full-duplex text/binary frames over a single connection |
-| [gRPC](../connectors/catalog/built-in/grpc/grpc.md) | gRPC | Unary, server-streaming, client-streaming, and bidirectional streaming RPCs |
-| [HTTP](../connectors/catalog/built-in/http/overview.md) (SSE) | HTTP (SSE) | Server-to-client push as a `stream<http:SseEvent, error?>` over a long-lived HTTP connection |
-| [GraphQL](../connectors/catalog/built-in/graphql/graphql.md) | GraphQL subscriptions | A `subscribe` resolver returns a `stream<T, error?>`, typically carried over WebSocket |
-| [UDP](../connectors/catalog/built-in/udp/udp.md) | UDP | Connectionless datagram send/receive for high-throughput unordered streams |
+| [WebSocket](product://connectors/catalog/built-in/websocket/websocket) | WebSocket | Full-duplex text/binary frames over a single connection |
+| [gRPC](product://connectors/catalog/built-in/grpc/grpc) | gRPC | Unary, server-streaming, client-streaming, and bidirectional streaming RPCs |
+| [HTTP](product://connectors/catalog/built-in/http/overview) (SSE) | HTTP (SSE) | Server-to-client push as a `stream<http:SseEvent, error?>` over a long-lived HTTP connection |
+| [GraphQL](product://connectors/catalog/built-in/graphql/graphql) | GraphQL subscriptions | A `subscribe` resolver returns a `stream<T, error?>`, typically carried over WebSocket |
+| [UDP](product://connectors/catalog/built-in/udp/udp) | UDP | Connectionless datagram send/receive for high-throughput unordered streams |
 
 WebSocket and gRPC use a listener/frame model, while HTTP SSE and GraphQL subscriptions surface a literal `stream<...>` value, tying directly back to [streams](#streams).
 

@@ -159,7 +159,7 @@ When a GitHub Events service is created, WSO2 Integrator adds all handlers for t
 
 ### IssuesService handlers
 
-Each handler receives a [github:IssuesEvent](../../../connectors/catalog/developer-tools/github/triggers.md#issuesevent) payload.
+Each handler receives a [github:IssuesEvent](product://connectors/catalog/developer-tools/github/triggers#issuesevent) payload.
 
 | Handler | Triggered when |
 |---|---|
@@ -173,7 +173,7 @@ Each handler receives a [github:IssuesEvent](../../../connectors/catalog/develop
 
 ### PullRequestService handlers
 
-Each handler receives a [github:PullRequestEvent](../../../connectors/catalog/developer-tools/github/triggers.md#pullrequestevent) payload.
+Each handler receives a [github:PullRequestEvent](product://connectors/catalog/developer-tools/github/triggers#pullrequestevent) payload.
 
 | Handler | Triggered when |
 |---|---|
@@ -190,7 +190,7 @@ Each handler receives a [github:PullRequestEvent](../../../connectors/catalog/de
 
 ### IssueCommentService handlers
 
-Each handler receives a [github:IssueCommentEvent](../../../connectors/catalog/developer-tools/github/triggers.md#issuecommentevent) payload.
+Each handler receives a [github:IssueCommentEvent](product://connectors/catalog/developer-tools/github/triggers#issuecommentevent) payload.
 
 | Handler | Triggered when |
 |---|---|
@@ -200,7 +200,7 @@ Each handler receives a [github:IssueCommentEvent](../../../connectors/catalog/d
 
 ### PullRequestReviewService handlers
 
-Each handler receives a [github:PullRequestReviewEvent](../../../connectors/catalog/developer-tools/github/triggers.md#pullrequestreviewevent) payload.
+Each handler receives a [github:PullRequestReviewEvent](product://connectors/catalog/developer-tools/github/triggers#pullrequestreviewevent) payload.
 
 | Handler | Triggered when |
 |---|---|
@@ -210,7 +210,7 @@ Each handler receives a [github:PullRequestReviewEvent](../../../connectors/cata
 
 ### PullRequestReviewCommentService handlers
 
-Each handler receives a [github:PullRequestReviewCommentEvent](../../../connectors/catalog/developer-tools/github/triggers.md#pullrequestreviewcommentevent) payload.
+Each handler receives a [github:PullRequestReviewCommentEvent](product://connectors/catalog/developer-tools/github/triggers#pullrequestreviewcommentevent) payload.
 
 | Handler | Triggered when |
 |---|---|
@@ -220,7 +220,7 @@ Each handler receives a [github:PullRequestReviewCommentEvent](../../../connecto
 
 ### ReleaseService handlers
 
-Each handler receives a [github:ReleaseEvent](../../../connectors/catalog/developer-tools/github/triggers.md#releaseevent) payload.
+Each handler receives a [github:ReleaseEvent](product://connectors/catalog/developer-tools/github/triggers#releaseevent) payload.
 
 | Handler | Triggered when |
 |---|---|
@@ -234,7 +234,7 @@ Each handler receives a [github:ReleaseEvent](../../../connectors/catalog/develo
 
 ### LabelService handlers
 
-Each handler receives a [github:LabelEvent](../../../connectors/catalog/developer-tools/github/triggers.md#labelevent) payload.
+Each handler receives a [github:LabelEvent](product://connectors/catalog/developer-tools/github/triggers#labelevent) payload.
 
 | Handler | Triggered when |
 |---|---|
@@ -244,7 +244,7 @@ Each handler receives a [github:LabelEvent](../../../connectors/catalog/develope
 
 ### MilestoneService handlers
 
-Each handler receives a [github:MilestoneEvent](../../../connectors/catalog/developer-tools/github/triggers.md#milestoneevent) payload.
+Each handler receives a [github:MilestoneEvent](product://connectors/catalog/developer-tools/github/triggers#milestoneevent) payload.
 
 | Handler | Triggered when |
 |---|---|
@@ -256,7 +256,7 @@ Each handler receives a [github:MilestoneEvent](../../../connectors/catalog/deve
 
 ### PushService handlers
 
-The handler receives a [github:PushEvent](../../../connectors/catalog/developer-tools/github/triggers.md#pushevent) payload.
+The handler receives a [github:PushEvent](product://connectors/catalog/developer-tools/github/triggers#pushevent) payload.
 
 | Handler | Triggered when |
 |---|---|
@@ -264,7 +264,7 @@ The handler receives a [github:PushEvent](../../../connectors/catalog/developer-
 
 ### ProjectCardService handlers
 
-Each handler receives a [github:ProjectCardEvent](../../../connectors/catalog/developer-tools/github/triggers.md#projectcardevent) payload.
+Each handler receives a [github:ProjectCardEvent](product://connectors/catalog/developer-tools/github/triggers#projectcardevent) payload.
 
 | Handler | Triggered when |
 |---|---|
@@ -302,5 +302,5 @@ Return `error?` from a handler to allow unhandled errors to propagate to the lis
 - [Kafka](kafka.md) — consume messages from Apache Kafka topics
 - [Salesforce Events](salesforce-events.md) — listen to Salesforce Change Data Capture events
 - [Connections](../supportive-artifacts/connections.md) — reuse GitHub credentials across services
-- [GitHub connector reference](../../../connectors/catalog/developer-tools/github/connector-overview.md) — full connector API reference
-- [GitHub Personal Access Token Setup Guide](../../../connectors/catalog/developer-tools/github/setup-guide.md) — create a GitHub Personal Access Token and configure a repository webhook
+- [GitHub connector reference](product://connectors/catalog/developer-tools/github/connector-overview) — full connector API reference
+- [GitHub Personal Access Token Setup Guide](product://connectors/catalog/developer-tools/github/setup-guide) — create a GitHub Personal Access Token and configure a repository webhook

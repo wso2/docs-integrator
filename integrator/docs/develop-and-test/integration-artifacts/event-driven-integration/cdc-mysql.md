@@ -8,7 +8,7 @@ MySQL CDC integrations capture row-level changes from MySQL tables in real time 
 
 :::info Prerequisites
 
-Binary logging must be enabled on the MySQL server (`log_bin` set to `ON`) with `binlog_format` set to `ROW`, and the database user used for CDC needs the `REPLICATION SLAVE`, `REPLICATION CLIENT`, and `SELECT` privileges, before creating this integration. See the [CDC connector setup guide](../../../connectors/catalog/database/cdc/setup-guide.md) for step-by-step instructions.
+Binary logging must be enabled on the MySQL server (`log_bin` set to `ON`) with `binlog_format` set to `ROW`, and the database user used for CDC needs the `REPLICATION SLAVE`, `REPLICATION CLIENT`, and `SELECT` privileges, before creating this integration. See the [CDC connector setup guide](product://connectors/catalog/database/cdc/setup-guide) for step-by-step instructions.
 
 ## Create a CDC service for MySQL
 

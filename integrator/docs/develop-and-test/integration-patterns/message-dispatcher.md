@@ -15,7 +15,7 @@ The pattern is implemented at the point where the integration receives a message
 
 ## Stateful round-robin dispatch
 
-Use stateful round-robin dispatch when each incoming message should be sent to the next processor in a fixed set. Store the current processor index in the service, update it with a `lock`, and call the selected processor through an [HTTP client connection](../../connectors/catalog/built-in/http/action-reference.md#client). The `lock` keeps the index update consistent when multiple requests arrive at the same time. For constructs that do not have a full visual representation, switch to pro-code through the [Flow Diagram editor](../../editor/canvases/flow-canvas/flow-canvas.md#configuring-a-node).
+Use stateful round-robin dispatch when each incoming message should be sent to the next processor in a fixed set. Store the current processor index in the service, update it with a `lock`, and call the selected processor through an [HTTP client connection](product://connectors/catalog/built-in/http/action-reference#client). The `lock` keeps the index update consistent when multiple requests arrive at the same time. For constructs that do not have a full visual representation, switch to pro-code through the [Flow Diagram editor](../../editor/canvases/flow-canvas/flow-canvas.md#configuring-a-node).
 
 1. Create an [HTTP service](../integration-artifacts/integration-as-api/http.md#creating-an-http-service) for the dispatcher entry point.
 2. Add a `GET` resource, such as `/process`, and define a query parameter that carries the message reference, such as `resourceUrl`. See [resource inputs](../integration-artifacts/integration-as-api/http.md#defining-inputs).

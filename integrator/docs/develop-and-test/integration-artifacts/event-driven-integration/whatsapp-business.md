@@ -235,5 +235,5 @@ WhatsApp Business Cloud has ten webhook fields, one per `WhatsAppService` handle
 - [Telegram](telegram.md) — react to Telegram Bot API webhook updates
 - [Google Chat](google-chat.md) — react to Google Chat interaction events
 - [Connections](../supportive-artifacts/connections.md) — reuse WhatsApp Business credentials across services
-- [WhatsApp Business connector reference](../../../connectors/catalog/communication/whatsapp-business/overview.md) — full connector API reference
-- [WhatsApp Business setup guide](../../../connectors/catalog/communication/whatsapp-business/setup-guide.md) — create a Meta app and configure the webhook
+- [WhatsApp Business connector reference](product://connectors/catalog/communication/whatsapp-business/overview) — full connector API reference
+- [WhatsApp Business setup guide](product://connectors/catalog/communication/whatsapp-business/setup-guide) — create a Meta app and configure the webhook

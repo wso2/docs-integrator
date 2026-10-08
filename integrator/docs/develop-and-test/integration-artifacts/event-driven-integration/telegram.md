@@ -8,7 +8,7 @@ Telegram event integrations receive webhook updates from the Telegram Bot API an
 
 The Telegram webhook listener must be reachable over HTTPS from the internet. For local development, use a tunneling tool such as [ngrok](https://ngrok.com) to create a public HTTPS URL for your local port.
 
-Create a bot and get a token by messaging [@BotFather](https://t.me/BotFather) on Telegram and sending `/newbot`. See the [setup guide](../../../connectors/catalog/communication/telegram/setup-guide.md) for details.
+Create a bot and get a token by messaging [@BotFather](https://t.me/BotFather) on Telegram and sending `/newbot`. See the [setup guide](product://connectors/catalog/communication/telegram/setup-guide) for details.
 
 ## Creating a Telegram listener
 
@@ -224,5 +224,5 @@ This listener supports nine Telegram update types, one per `TelegramService` han
 - [WhatsApp Business](whatsapp-business.md) — react to WhatsApp Business Cloud webhook events
 - [Google Chat](google-chat.md) — react to Google Chat interaction events
 - [Connections](../supportive-artifacts/connections.md) — reuse Telegram credentials across services
-- [Telegram connector reference](../../../connectors/catalog/communication/telegram/overview.md) — full connector API reference
-- [Telegram setup guide](../../../connectors/catalog/communication/telegram/setup-guide.md) — create a bot and configure the webhook
+- [Telegram connector reference](product://connectors/catalog/communication/telegram/overview) — full connector API reference
+- [Telegram setup guide](product://connectors/catalog/communication/telegram/setup-guide) — create a bot and configure the webhook

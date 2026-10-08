@@ -8,7 +8,7 @@ Microsoft SQL Server CDC integrations capture row-level changes from SQL Server 
 
 :::info Prerequisites
 
-CDC must be enabled on the SQL Server database and on each table you want to track before creating this integration. See the [CDC connector setup guide](../../../connectors/catalog/database/cdc/setup-guide.md) for step-by-step instructions.
+CDC must be enabled on the SQL Server database and on each table you want to track before creating this integration. See the [CDC connector setup guide](product://connectors/catalog/database/cdc/setup-guide) for step-by-step instructions.
 
 ## Create a CDC service for Microsoft SQL Server
 
@@ -322,6 +322,6 @@ The handler parameter types are inferred at runtime from the row data. Declare a
 
 ## What's next
 
-- [CDC Connector Overview](../../../connectors/catalog/database/cdc/connector-overview.md) — full CDC connector reference covering listeners, configuration, and supported databases
+- [CDC Connector Overview](product://connectors/catalog/database/cdc/connector-overview) — full CDC connector reference covering listeners, configuration, and supported databases
 - [Data Mapper](../supportive-artifacts/data-mapper/data-mapper.md) — transform change events into the shape your downstream systems expect
 - [CDC for PostgreSQL](cdc-postgresql.md) — capture changes from PostgreSQL tables

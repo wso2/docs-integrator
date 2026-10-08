@@ -8,7 +8,7 @@ PostgreSQL CDC integrations capture row-level changes from PostgreSQL tables in 
 
 :::info Prerequisites
 
-Logical replication must be enabled on the PostgreSQL database and on each table you want to track before creating this integration. See the [CDC connector setup guide](../../../connectors/catalog/database/cdc/setup-guide.md) for step-by-step instructions.
+Logical replication must be enabled on the PostgreSQL database and on each table you want to track before creating this integration. See the [CDC connector setup guide](product://connectors/catalog/database/cdc/setup-guide) for step-by-step instructions.
 
 ## Create a CDC service for PostgreSQL
 
@@ -328,6 +328,6 @@ The `onCreate`, `onUpdate`, `onDelete`, and `onRead` handlers receive the row da
 
 ## What's next
 
-- [CDC Connector Overview](../../../connectors/catalog/database/cdc/connector-overview.md) — full CDC connector reference covering listeners, configuration, and supported databases
+- [CDC Connector Overview](product://connectors/catalog/database/cdc/connector-overview) — full CDC connector reference covering listeners, configuration, and supported databases
 - [Data Mapper](../supportive-artifacts/data-mapper/data-mapper.md) — transform change events into the shape your downstream systems expect
 - [CDC for Microsoft SQL Server](cdc-mssql.md) — capture changes from Microsoft SQL Server tables
