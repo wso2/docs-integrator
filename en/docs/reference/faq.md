@@ -1,163 +1,171 @@
 ---
 sidebar_position: 1
 title: FAQ
-description: Frequently asked questions about WSO2 Integrator.
+description: Frequently asked questions about Integration platform on WSO2 cloud.
 keywords: [wso2 integrator, faq, frequently asked questions, troubleshooting]
 slug: /reference/faq
 ---
 
-# FAQ
+# Frequently Asked Questions
 
-## About WSO2 Integrator
+## General
 
-### What is WSO2 Integrator?
+### Q: What is Integration platform on WSO2 cloud?
+Integration platform on WSO2 cloud is a powerful IPaaS with first-class AI support. Incorporate AI agents into the integrations you build in low-code and pro-code, and move away from siloed systems to intelligent digital experiences with WSO2 cloud—the AI iPaaS that your AI Agents can call “home”.
 
-WSO2 Integrator is a Ballerina-powered integration platform that combines low-code visual design and pro-code development. It allows developers to build, test, and deploy integrations that connect APIs, databases, messaging systems, SaaS applications, and AI services. The WSO2 Integrator IDE offers a visual designer and a code editor with full bidirectional sync, alongside a comprehensive connector library and built-in observability.
+### Q: What is an organization in WSO2 cloud?
+An organization is a logical grouping of users and their resources. It may represent a company, community, or a single user. Users can belong to multiple organizations, and each organization can have different roles assigned to its users to control access to WSO2 cloud features.
 
-### How can integrations be triggered?
+### Q: What is a project in WSO2 cloud?
+A project is a logical grouping of related integrations to help you organize your work. Each project provides runtime isolation through namespaces when you deploy integrations.
 
-WSO2 Integrator supports several entry points for kicking off an integration:
+### Q: What is an integration in WSO2 cloud?
+An integration in WSO2 cloud is a solution that connects systems, automates processes, or exposes functionality. Integrations can take many forms, such as automations, AI agents, APIs, event-driven flows, or file-based processes.
 
-- **Services:** Network-accessible endpoints (HTTP, GraphQL, gRPC, WebSocket) that respond to incoming requests
-- **Automations:** Scheduled or manually triggered jobs that run without an external request (cron-based, interval-based, or one-time)
-- **Event handlers:** Reactive integrations triggered by messages from Kafka, RabbitMQ, NATS, MQTT, or other event sources
-- **File-driven flows:** Integrations triggered by changes on a local file system or an SFTP/FTP location
+### Q: What is the difference between an internal and external API?
+In WSO2 cloud, you can publish an API as an internal or an external API. A user or an application can access an external API publicly over the internet, whereas an internal API is only accessible through other integrations within the same organization.
 
-Any of these entry points can use AI agents, data transformations, and connectors to build any integration pattern.
+### Q: What is a connector in WSO2 cloud Marketplace?
+A connector is a reusable WSO2 Integrator package that simplifies connecting to external or internal systems and APIs, such as Salesforce, SAP, GitHub, and Twilio. You can use the connectors available in the WSO2 cloud marketplace to implement your integration use cases. Connectors can be created and published by both WSO2 and WSO2 cloud users.
 
-### What protocols and standards does WSO2 Integrator support?
+### Q: What is a trigger in WSO2 cloud Marketplace?
+A trigger is a construct that enables users to receive known event payloads from external systems, facilitating event-driven programming.
 
-WSO2 Integrator supports a wide range of protocols and data formats through Ballerina's standard and extended libraries:
+### Q: What is a sample/template in WSO2 cloud?
+A sample or template is a prebuilt WSO2 Integrator program that covers a popular integration use case or pattern. Examples include connecting Salesforce to Slack or implementing content-based routing.
 
-- **API protocols:** HTTP/REST, GraphQL, gRPC, WebSocket, SOAP
-- **Messaging:** Kafka, RabbitMQ, NATS, MQTT, JMS
-- **Data access:** MySQL, PostgreSQL, MSSQL, Oracle, MongoDB, Redis
-- **File transfer:** FTP, SFTP, local file system
-- **Email:** SMTP, IMAP, POP3
-- **Data formats:** JSON, XML, CSV, YAML, TOML, EDI, HL7/FHIR
-- **Security:** OAuth 2.0, JWT, Basic Auth, mutual TLS
+### Q: What are the support options in WSO2 cloud?
+You can find information about our support plans, including `free`, `basic`, and `enterprise` options at https://wso2.com/saas-support-plans/.
 
-### What version of Ballerina does WSO2 Integrator use?
+### Q: How can I perform log monitoring or analytics for the Azure environment?
+If you have a log monitoring product or service, such as Azure Monitor, you can use it together with WSO2 cloud. Note: The log monitoring tool is not included in the infrastructure cost.
 
-WSO2 Integrator is built on the Ballerina Swan Lake distribution. The exact distribution version is specified in each project's `Ballerina.toml` file under the `[package].distribution` field.
+### Q: What is the maximum request payload size supported by WSO2 cloud?
+WSO2 cloud allows a maximum request payload size of 50 MB.
 
-### Is WSO2 Integrator open source?
+### Q: What source control software does WSO2 cloud support?
+WSO2 cloud now supports GitHub, Bitbucket and GitLab.
 
-WSO2 Integrator builds on Ballerina, which is open source under the Apache 2.0 license. The WSO2 Integrator IDE and tooling are provided by WSO2. Check the WSO2 licensing page for specific license details.
+### Q: Why don't I see the undeployed builds for my integration in WSO2 cloud?
+You are allowed to build your integration any number of times. However, WSO2 cloud has a limit on retaining undeployed builds. For users on the free-tier, WSO2 cloud will retain **only one** undeployed build. For those on any other tier, WSO2 cloud will retain the **latest five** undeployed builds.
 
-## Development
+### Q: What is WSO2 Integrator?
+WSO2 Integrator is a 100% open-source, AI-native integration platform built for the cloud. It helps you connect any system across your business and tackle integration challenges with ease. By using integration platform on WSO2 cloud, you can accelerate delivery—often 2–3x faster. Learn more at https://wso2.com/integrator/.
 
-### Do I need to know Ballerina to use WSO2 Integrator?
+### Q: What is Asgardeo?
+Asgardeo is an identity provider (IdP) that allows developers to secure access for consumers, business partners, employees, and APIs. Asgardeo is WSO2 cloud’s default IDP. To learn more, visit https://wso2.com/asgardeo/.
 
-Not to get started. WSO2 Integrator offers full parity between the visual designer and the code editor, so any integration can be built end-to-end in low-code. Developers already comfortable with Ballerina may find pro-code more familiar for complex flows, but neither mode locks you out of any capability. Changes in one view are instantly reflected in the other.
+### Q: As a Cloud Data Plane user, how can I create integrations in multiple data planes?
+When an organization admin onboards a new organization in WSO2 cloud, they can choose the preferred data plane. WSO2 cloud then sets the selected data plane as the default for the entire organization. Subsequently, users within the free tier of the cloud data plane can create integrations only in the set default data plane. If a free-tier user needs to create integrations in a different data plane, the user must get a paid subscription.
 
-### Can I use existing Ballerina packages?
+### Q: Can WSO2 cloud automatically identify my endpoints?
+Yes. WSO2 cloud uses underlying buildpack technology to scan your source code and configuration files for standard web framework patterns and port declarations.
+However, if an endpoint cannot be automatically identified, you must manually define it in your component.yaml file. Automatic identification may not work if:
+- Your service uses a non-standard port that is not commonly recognized.
+- The port is assigned dynamically at runtime.
+- The `.choreo/component.yaml` file is missing or contains formatting errors.
 
-Yes. Any package published on [Ballerina Central](https://central.ballerina.io) can be imported and used in your integration projects. Add packages by importing them in your Ballerina source code, and they will be resolved automatically during `bal build`.
+How to manually define an endpoint: If automatic detection fails, add an endpoints section to your `component.yaml` as shown below:
+```yaml
+endpoints:
+  - name: "Greeter API"
+    port: 9090
+    type: "REST"
+    scheme: "http"
+    context: "/"
+    visibility: "Public"
+```
+By explicitly defining these attributes, you provide a "source of truth" that ensures your service is correctly exposed regardless of the automatic detection outcome.
 
-### What IDE support is available?
+## Security and data protection
 
-The WSO2 Integrator IDE includes:
+### Q: How is data managed in WSO2 cloud?
+WSO2 cloud manages data using WSO2 containers and Kubernetes clusters, which provide scalability, resilience, and security. Find out more [here](https://wso2.cachefly.net/wso2/sites/all/trust/wso2-public-cloud-data-protection-faq.pdf).
 
-- Visual designer
-- Sequence diagram view
-- Pro-code editor with IntelliSense and type checking
-- Integrated debugger with breakpoints and variable inspection
-- Try It tool for testing services
-- Visual data mapper for transformations
-- Project scaffolding and templates
+### Q: What is the WSO2 Subprocessor list?
+This is a detailed list of all subprocessors used by WSO2, including their name, location, and purpose. This information is updated frequently to ensure compliance with data protection regulations and is found [here](https://wso2.cachefly.net/wso2/sites/all/trust/wso2-public-cloud-subprocessor-list.pdf).
 
-### How do I debug my integrations?
+### Q: How do we secure WSO2 Private and Public Clouds?
+WSO2 uses a range of security controls and design patterns to protect against several threats, including internal attacks, software supply chain attacks, service and platform attacks, and more. For more details, see [Cloud Security Process](https://security.docs.wso2.com/en/latest/security-processes/cloud-security-process/).
 
-WSO2 Integrator supports standard breakpoint-based debugging. Set breakpoints in either the visual designer or the code editor, then launch the debugger from the IDE. You can also use remote debugging by running `bal run --debug <port>` and attaching the IDE's debugger to the specified port.
+### Q: How can I connect a WSO2 cloud integration with a protected third-party application?
+To connect a WSO2 cloud integration with a third-party application, it is necessary to establish seamless communication between the integration and the protected third-party application, especially when connecting to external databases like MySQL, MSSQL, PGSQL, Oracle DB, etc.
+To ensure this, the requests coming from the WSO2 cloud data plane must be allowed by adding the specific data plane IP ranges to your allowlist.
 
-### Where can I find troubleshooting help for common issues?
+**If your primary region is US:**
 
-Refer to errors and stack traces for symptom-to-fix recipes covering IDE issues, build errors, runtime errors, and diagnostic tools. Dedicated guidance is also available for logging, deployment issues, and performance tuning.
+- WSO2 cloud US data plane: `20.22.170.144/28`
+- WSO2 cloud EU data plane: `20.166.183.112/28`
 
-### Can I write tests for my integrations?
+**If your primary region is EU:**
 
-Yes. Ballerina has a built-in test framework (`ballerina/test`) that supports:
+- WSO2 cloud EU data plane: `54.170.135.118, 52.215.28.29`
 
-- Unit tests with assertions
-- Service-level integration tests with mock servers
-- Data-driven tests with data providers
-- Test groups and selective execution
-- Code coverage reports
-- Mocking of clients and external dependencies
+## Data planes
 
-Run tests with `bal test` and generate reports with `bal test --test-report --code-coverage`.
+### Q: What is a WSO2 cloud control plane?
+The WSO2 cloud control plane is a centralized management component that oversees and coordinates the workloads deployed by customers. It provides a unified point of control and visibility for the organization, allowing administrators to manage, monitor, and orchestrate the organization’s resources efficiently.
 
-## AI integrations
+### Q: What is a data plane?
+A data plane in WSO2 cloud is a computing environment designed for running customer workloads. These environments are hosted in either a dedicated cloud infrastructure owned by the customer (private data planes) or on public cloud infrastructure owned by WSO2, also known as the WSO2 cloud data plane.
 
-### Does WSO2 Integrator support building AI agents and RAG?
+### Q: Which regions support the WSO2 cloud data plane(CDP)?
+The WSO2 cloud data plane is currently supported in the US East 2 and North Europe. However, WSO2 is planning to add support for additional regions as needed.
 
-Yes. WSO2 Integrator includes first-class support for AI agents, retrieval-augmented generation (RAG), Model Context Protocol (MCP) servers, and direct LLM calls. See [AI Integrations](../develop-and-test/integration-artifacts/ai-integrations/ai-integrations.md) for the full set of building blocks.
+### Q: Which regions support private data planes(PDPs)?
+Private data planes can be deployed in any region where Azure and AWS are available and meet the requirements for PDPs.
 
-### Which LLM and vector store providers are supported?
+### Q: If I want to use my Azure AKS instances as the private data plane, what are the minimum requirements I should meet?
+We recommend using a minimum of two (2) workload nodes to ensure high availability.
 
-WSO2 Integrator ships connectors for major LLM providers and vector stores. See the [Connectors catalog](../connectors/catalog/index.mdx) for the current list.
+### Q: Are the WSO2 cloud control plane and data planes highly available? Are they running on multiple clusters?
+The WSO2 cloud control plane and data plane are designed for high availability using Azure components like AKS, MSSQL, ACR, KV, Service Bus, and so on, with a high availability of 99.99%, which allows at least three workload nodes. In the event of a node failure or upgrade, this setup provides reliable failover. WSO2 also has a backup and recovery strategy in place, including continuous restore drills. If you require AKS cluster-level redundancy, we can consider multiple zones. In this case, the cost will include an additional infrastructure cost.
 
-## Deploy and operate
+## Environments
 
-### Where can I deploy WSO2 Integrator applications?
+### Q: As a WSO2 cloud data plane user, why can't I create environments?
+You can create environments only if you have a paid subscription in WSO2 cloud. It can be either Pay-as-you-Go (PAYG) or an Enterprise plan.
 
-WSO2 Integrator supports multiple deployment targets:
+### Q: I am a Pay-As-You-Go (PAYG) customer using the WSO2 cloud data plane. How many environments can I create?
+You can create up to 5 environments at the organization level, including the existing Development & Production environments by default. If you have projects in both data planes (US & EU), there will be 4 environments already created in total, and you will only be allowed to create one additional environment either in the US or EU data plane.
 
-- **Docker containers:** Generate Dockerfiles and images with `bal build --cloud=docker`
-- **Kubernetes:** Generate K8s manifests with `bal build --cloud=k8s` and configure via `Cloud.toml`
-- **WSO2 Integration Platform:** Deploy to WSO2's managed platform
-- **Bare metal / VM:** Run the executable JAR directly with `bal run` or `java -jar`
-- **GraalVM native:** Build native executables with `bal build --graalvm` for fast startup
-- **Serverless:** Deploy to AWS Lambda or Azure Functions
+### Q: I am an Enterprise subscription customer using the WSO2 cloud private data plane. How many environments do I get?
+As an Enterprise subscription customer, the number of environments you can use is **not** limited.  However, the more environments you use, the more resources you will consume in the data plane for the workload you deploy. This may result in higher infrastructure costs for the private data plane.
 
-See [Deploy and Run](../deploy-and-run/deploy-and-run.md) for detailed deployment guides.
+### Q: As a WSO2 cloud data plane user, why don’t I see both US & EU data planes in the data plane selector when creating an environment?
+You will see both US & EU data planes only if you have a paid subscription and have created projects in both US & EU data planes.
 
-### How do I configure my application for different environments?
+### Q: I am a customer who use WSO2 cloud in a private data plane. How many environments can I create?
+Initially, you will receive the requested number of environments when establishing your private data plane. Subsequently, you can create additional environments as needed.
 
-Use `Config.toml` for environment-specific values and provide them at deployment time. The configuration precedence (highest to lowest) is:
+## Billing and support
 
-1. `BAL_CONFIG_VAR_*` environment variables
-2. Command-line arguments (`-Ckey=value`)
-3. `BAL_CONFIG_DATA` environment variable
-4. Config files (via `BAL_CONFIG_FILES` or default `Config.toml`)
-5. Default values in source code
+### Q: Whom do I reach out to if I have a billing question?
+You can reach out to cloud-billing-support@wso2.com or create a support ticket via our support portal.
 
-This allows you to use the same built artifact across development, staging, and production by varying only the configuration.
+### Q: What's a Developer plan?
+A Developer plan allows you to try out WSO2 cloud’s capabilities at no cost. It’s ideal for proof of concept (PoC) tasks or workloads with limited transactions. This plan allows you to experiment with up to 5 integrations and provides US$1,000/year of WSO2 cloud data plane (CDP) credits.
 
-### How do I handle secrets and sensitive configuration?
+### Q: How do I calculate the infrastructure costs?
+Calculating infrastructure costs depends on the type of workload you want to manage. Here are a few examples:
 
-WSO2 Integrator uses `Config.toml` files for runtime configuration. For secrets, keep them in a separate `Config.toml` (or another file referenced via the `BAL_CONFIG_FILES` environment variable) that is not checked into version control. Never commit secret values to git, whether they sit in `Config.toml` or anywhere else. In Kubernetes, mount the secret file from a `Secret`, or inject individual values as environment variables using `BAL_CONFIG_VAR_*` prefixes. See [Secrets and encryption](../deploy-and-run/secure/secrets-encryption.md) for the full pattern.
+- **Example 1**: Creating, deploying, and managing a new Integration as an API within WSO2 cloud; pay for 1 x integration + infrastructure cost. Each container deployed will be approximately US$57.25 per month on the default configuration provided by WSO2 cloud. Additional resources will be charged based on the type of resource required.
+- **Example 2**: Creating, deploying, and managing a microservice; the same approach as example 1.
 
-### Does WSO2 Integrator support horizontal scaling?
+### Q: What are the integration limitations?
 
-Yes. Ballerina services are stateless by default, making them suitable for horizontal scaling. Configure autoscaling in `Cloud.toml` with `[cloud.deployment.autoscaling]` settings, or use your Kubernetes cluster's HPA (Horizontal Pod Autoscaler) directly.
+- **Developer plan**: Allows up to a maximum of five free integrations and unlimited paid integrations.
+- **PAYG plan**: Allows unlimited paid integrations.
+- **Enterprise plan**: Allows unlimited paid integrations.
 
-### How do I monitor my integrations in production?
+### Q: How do I read the bill?
+Your bill will detail the number of integrations used, infrastructure consumed, support plans used, and any additional services you may have purchased. If you are unsure about any charges on your bill, reach out to us on https://discord.com/invite/wso2 for clarification.
 
-WSO2 Integrator supports observability through:
+### Q: Is support included in the WSO2 cloud Enterprise plan?
+The WSO2 cloud Enterprise plan does not automatically include support; however, you can purchase support plans in addition to the Enterprise plan at any time. Find out more at https://wso2.com/saas-support-plans/.
 
-- **Metrics:** Prometheus-compatible metrics exposed at a configurable endpoint
-- **Distributed tracing:** Jaeger-compatible traces for request flow analysis
-- **Logging:** Structured logging via `ballerina/log` with configurable levels
-- **WSO2 Cloud console:** Built-in dashboards, alerting, live logs, and metrics for integrations deployed to WSO2 Cloud
+### Q: I am an Enterprise subscription customer who wants to use the WSO2 cloud private data plane. What costs will I incur in addition to the subscription and support plan?
+You can start by using a basic plan or contact us for an Enterprise support plan.
 
-Enable observability by setting `observabilityIncluded = true` in `Ballerina.toml` under `[build-options]`. See [Observe](../observe/observe.md) for the console-based monitoring experience on WSO2 Cloud.
-
-## Migration
-
-<!-- TODO: Add an MI positioning question (how WSO2 Integrator relates to WSO2 MI)-->
-
-### Can I migrate from MuleSoft or TIBCO?
-
-Yes. WSO2 provides migration guides and tooling to help transition from other integration platforms. See [Migrate from MuleSoft](/migrate/from-mulesoft), [Migrate from TIBCO](/migrate/from-tibco), and [Migrate from Azure Logic Apps](/migrate/from-azure-logic-apps) for platform-specific guidance. For the underlying migration tooling (CLI and automated code generation), see [Migrate to WSO2 Integrator](/migrate).
-
-### Can I run WSO2 MI and WSO2 Integrator side by side?
-
-Yes. The two products use different runtimes and can coexist in the same environment. This allows you to adopt WSO2 Integrator for new projects while continuing to run your existing MI deployments. You can also migrate integrations incrementally using the [migration tools](/migrate). For MI-specific guidance, refer to the [MI documentation](https://mi.docs.wso2.com).
-
-## See also
-
-- [Get Started](../get-started/cloud-setup.md) — Sign up and set up WSO2 Integrator
-- [Build an Integration as API](../get-started/quickstarts/build-integration-api.md) — Build your first integration
-- [Glossary](./glossary.md) — Definitions of key terms
+### Q: I want to upgrade from PAYG to an Enterprise subscription. Will there be an outage during the upgrade?
+No, there are no outages when upgrading a plan.
