@@ -17,3 +17,7 @@ Complete, end-to-end examples you can follow from start to finish.
 :::
 
 <GuidesCatalog />
+
+## Enterprise integration patterns
+
+Reusable solutions to recurring integration problems, each implemented in WSO2 Integrator as a Visual Designer flow and the equivalent Ballerina code. See [Enterprise Integration Patterns](enterprise-integration-patterns/enterprise-integration-patterns.md).
