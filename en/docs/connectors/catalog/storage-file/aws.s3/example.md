@@ -5,7 +5,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## What you'll build
 
-This integration demonstrates how to connect to Amazon Web Services Simple Storage Service (S3) using the `ballerinax/aws.s3` connector in WSO2 Integrator. The workflow uses an Automation entry point to invoke the `createBucket` operation, which creates a new S3 bucket in the specified AWS region.
+This integration demonstrates how to connect to Amazon Web Services Simple Storage Service (S3) using the AWS S3 connector in WSO2 Integrator. The workflow uses an Automation entry point to invoke the `createBucket` operation, which creates a new S3 bucket in the specified AWS region.
 
 **Operations used:**
 - **createBucket** : creates a new Amazon S3 bucket in the specified AWS region using the provided bucket name

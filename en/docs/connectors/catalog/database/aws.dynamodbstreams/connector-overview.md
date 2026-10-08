@@ -14,7 +14,7 @@ The AWS DynamoDB Streams connector enables integration with [Amazon DynamoDB Str
 - Complete coverage of the DynamoDB Streams APIs
 - Checkpointable shard reads
 - Auto-paginating Ballerina stream for listing streams and a polling records
-- Flexible credential configuration: static keys, AWS credentials file profiles, STS assume-role, web identity (OIDC), IAM Identity Center (SSO), an external credential process, or the default AWS credential provider chain
+- Flexible authentication using any standard credential source supported by AWS
 - Automatic refresh of expiring temporary credentials
 
 ## Actions

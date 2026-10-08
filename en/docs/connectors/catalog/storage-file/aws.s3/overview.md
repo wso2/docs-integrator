@@ -19,6 +19,7 @@ Amazon S3 (Simple Storage Service) is a highly scalable, durable, and secure obj
 - Generate presigned URLs for secure, time-limited object access or upload without exposing credentials
 - Manage multipart uploads: initiate, upload parts individually, complete, or abort large object uploads
 - Copy objects between buckets and retrieve object metadata without downloading content
+- Flexible authentication using any standard credential source supported by AWS
 
 ## Actions
 

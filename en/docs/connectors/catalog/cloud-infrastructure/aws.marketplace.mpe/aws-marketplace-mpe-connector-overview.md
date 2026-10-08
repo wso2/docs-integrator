@@ -13,7 +13,7 @@ AWS Marketplace Entitlement Service (MPE) enables AWS Marketplace sellers to pro
 - Filter entitlements by customer identifier or dimension
 - Pagination support for large entitlement result sets via maxResults and nextToken
 - Support for all AWS regions including GovCloud and isolated partitions
-- Temporary credential support via optional session tokens (AWS STS)
+- Flexible authentication using any standard credential source supported by AWS
 - Built-in request validation using Ballerina constraint annotations
 
 ## Actions

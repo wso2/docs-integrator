@@ -13,7 +13,7 @@ Amazon Redshift is a fully-managed data warehouse service provided by AWS, desig
 - Stream query results as typed Ballerina records using `getResultAsStream`
 - Poll and monitor statement execution status with `describe`
 - Support for both provisioned Cluster and Serverless WorkGroup access patterns
-- Flexible authentication using any standard credential source supported by the `aws.auth` package
+- Flexible authentication using any standard credential source supported by AWS
 - Parameterized query support via `sql:ParameterizedQuery` for safe SQL execution
 
 ## Actions

@@ -5,7 +5,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## What you'll build
 
-Build a WSO2 Integrator automation that publishes a message to an AWS Simple Notification Service (SNS) topic using the `ballerinax/aws.sns` connector. The integration connects to SNS using AWS credentials stored as configurable variables, then publishes a message to a specified topic ARN.
+Build a WSO2 Integrator automation that publishes a message to an AWS Simple Notification Service (SNS) topic using the AWS SNS connector. The integration connects to SNS using AWS credentials stored as configurable variables, then publishes a message to a specified topic ARN.
 
 **Operations used:**
 - **Publish** : Publishes a message to an SNS topic ARN, phone number, or mobile endpoint

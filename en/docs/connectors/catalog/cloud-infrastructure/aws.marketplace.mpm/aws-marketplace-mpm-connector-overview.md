@@ -13,7 +13,7 @@ AWS Marketplace Metering Service enables SaaS providers to report customer usage
 - Submit batch metering usage records for up to 25 usage records per request
 - Support for usage allocations with tagging for granular billing breakdowns
 - Built-in input validation with constraints on product codes, dimensions, quantities, and tag formats
-- Support for all 43 AWS regions via the Region enum
+- Flexible authentication using any standard credential source supported by AWS
 - Temporary credential support via optional session tokens for AWS STS-based authentication
 
 ## Actions

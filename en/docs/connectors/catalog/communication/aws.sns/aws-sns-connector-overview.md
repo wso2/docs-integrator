@@ -17,6 +17,7 @@ Amazon Simple Notification Service (SNS) is a fully managed pub/sub messaging an
 - SMS sandbox management including phone number verification and opt-out handling
 - Tag management and access control via topic permissions
 - Data protection policy management for message data redaction and auditing
+- Flexible authentication using any standard credential source supported by AWS
 
 ## Actions
 

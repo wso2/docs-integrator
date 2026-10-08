@@ -16,7 +16,7 @@ Amazon Simple Queue Service (SQS) is a fully managed message queuing service tha
 - FIFO queue support with message grouping, deduplication, and ordering guarantees
 - Dead-letter queue message move tasks for reprocessing failed messages
 - Queue tagging for cost allocation and resource organization
-- Flexible authentication with static credentials, AWS profiles, or default credential chain
+- Flexible authentication using any standard credential source supported by AWS
 
 ## Actions
 

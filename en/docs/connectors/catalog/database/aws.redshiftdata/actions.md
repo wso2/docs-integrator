@@ -5,7 +5,7 @@ toc_max_heading_level: 4
 
 # Actions
 
-The `ballerinax/aws.redshiftdata` package exposes the following clients:
+The AWS Redshiftdata connector exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
@@ -21,10 +21,10 @@ Executes SQL statements, retrieves results, and monitors execution status via th
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `auth:AuthConfig` | Required | Authentication configuration: Any standard credential source supported by `aws.auth` package: `StaticAuthConfig`, `ProfileAuthConfig`, `AssumeRoleConfig`, `WebIdentityConfig`, `SsoAuthConfig`, `ProcessAuthConfig`, `DEFAULT_CREDENTIALS` |
-| `region` | `aws:Region\|string` | Required | AWS region for the Redshift Data service (e.g., `aws:US_EAST_1`). |
-| `endpoint` | `aws:EndpointConfig` | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. LocalStack, VPC interface endpoints). |
-| `dbAccessConfig` | `Cluster\|WorkGroup` | Optional | The database access configurations for the Redshift Data API. Can be overridden in the individual `execute` and `batchExecute` requests. |
+| `auth` | <code>auth:AuthConfig</code> | Required | Authentication configuration: static credentials, AWS profile, STS assume-role, web identity (OIDC), IAM Identity Center (SSO), external credential process, or the default provider chain |
+| `region` | <code>aws:Region&#124;string</code> | Required | AWS region: an `aws:Region` enum member or a plain region string (e.g., `"us-east-1"`) for regions not yet in the enum |
+| `endpoint` | <code>aws:EndpointConfig</code> | - | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. VPC interface endpoints) |
+| `dbAccessConfig` | `Cluster\|WorkGroup` | - | The database access configurations for the Redshift Data API. Can be overridden in the individual `execute` and `batchExecute` requests. |
 
 ### Initializing the client
 
