@@ -9,7 +9,7 @@ This guide walks you through setting up your AWS account and obtaining the crede
 ## Prerequisites
 
 - An active AWS account ([sign up at aws.amazon.com](https://aws.amazon.com/))
-- Sufficient IAM permissions to create users and policies in your AWS account
+- Sufficient IAM permissions to create users, policies, and access keys in your AWS account.
 
 ## Step 1: Create an IAM user
 
