@@ -27,11 +27,11 @@ flowchart LR
 
 ### Setting up the Telegram integration
 
-> **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the trigger.
+> **New to WSO2 Integrator?** Follow the [Create a New Integration](product://integrator/develop-and-test/create-workspace) guide to set up your integration first, then return here to add the trigger.
 
 ### Adding the Telegram trigger
 
-Add a Telegram event integration and implement the listener and service as described in the [Telegram event integration guide](../../../../develop/integration-artifacts/event/telegram.md). WSO2 Integrator renders the listener and service on the design canvas, with all available handlers listed under **Event Handlers**.
+Add a Telegram event integration and implement the listener and service as described in the [Telegram event integration guide](product://integrator/develop-and-test/integration-artifacts/event-driven-integration/telegram). WSO2 Integrator renders the listener and service on the design canvas, with all available handlers listed under **Event Handlers**.
 
 <ThemedImage
     alt="WSO2 Integrator design canvas showing the telegramListener connected to TelegramService with onMessage and onEditedMessage handlers"

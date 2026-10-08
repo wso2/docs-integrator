@@ -60,7 +60,7 @@ Make sure your OpenAPI specification is valid and well-structured before importi
 
 ### Step 4: Create the connection
 
-After you select **Save** in the previous step, WSO2 Integrator generates the connector from the specification and moves you to the **Create Connection** step of the **Connect via API Specification** wizard. Complete this step to create a connection with the name you provided. The connection is then available in the [Flow Diagram editor](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md) for any integration in the project.
+After you select **Save** in the previous step, WSO2 Integrator generates the connector from the specification and moves you to the **Create Connection** step of the **Connect via API Specification** wizard. Complete this step to create a connection with the name you provided. The connection is then available in the [Flow Diagram editor](product://integrator/editor/canvases/flow-canvas) for any integration in the project.
 
 <ThemedImage
     alt="Create the connection in the Connect via API Specification wizard"
@@ -72,7 +72,7 @@ After you select **Save** in the previous step, WSO2 Integrator generates the co
 
 ## Add a connection while building a flow
 
-You don't have to start from the **Artifacts** view. While you work in the [Flow Diagram editor](../../develop/understand-ide/editors/flow-diagram-editor/flow-diagram-editor.md), open the node palette with the **+** button and select **Add Connection** to start the same **Connect via API Specification** wizard without leaving your integration.
+You don't have to start from the **Artifacts** view. While you work in the [Flow Diagram editor](product://integrator/editor/canvases/flow-canvas), open the node palette with the **+** button and select **Add Connection** to start the same **Connect via API Specification** wizard without leaving your integration.
 
 <ThemedImage
     alt="Add a connection from the node palette in the Flow Diagram editor"
@@ -88,7 +88,7 @@ A connector generated this way is added directly to your project. To make it reu
 
 ## What's next
 
-- [Connections](../../develop/integration-artifacts/supporting/connections.md): Understand how connections are configured and reused across an integration.
+- [Connections](product://integrator/develop-and-test/integration-artifacts/supportive-artifacts/connections): Understand how connections are configured and reused across an integration.
 - [Build from Scratch](custom-development.md): Build a connector from scratch using Ballerina for full control over the implementation.
 - [Build your own connector](build-own.md): Compare approaches for creating custom connectors.
 - [Publish Connector](publish-connector.md): Share a finished connector via Ballerina Central.

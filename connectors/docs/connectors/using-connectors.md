@@ -28,7 +28,7 @@ Fill in the connection initialization form with the connector's specific configu
     }}
 />
 
-See [Connections](../develop-and-test/integration-artifacts/supportive-artifacts/connections.md) for how to add, edit, and reuse connections across an integration, and the [node palette's connection section](../editor/canvases/flow-canvas/node-palette.md#connection) for adding one without leaving the flow you're building.
+See [Connections](product://integrator/develop-and-test/integration-artifacts/supportive-artifacts/connections) for how to add, edit, and reuse connections across an integration, and the [node palette's connection section](product://integrator/editor/canvases/flow-canvas/node-palette#connection) for adding one without leaving the flow you're building.
 
 ## Invoke an action
 
@@ -52,11 +52,11 @@ Select an action and configure its inputs the same way you would any other node.
     }}
 />
 
-See the [node palette's connection actions section](../editor/canvases/flow-canvas/node-palette.md#connection-actions) for the mechanics.
+See the [node palette's connection actions section](product://integrator/editor/canvases/flow-canvas/node-palette#connection-actions) for the mechanics.
 
 ## Handle a trigger
 
-Most connectors are action-only, but a select few (primarily databases, messaging systems, and file storage) also support triggers — inbound events the external service pushes into your integration. See [Kafka](../develop-and-test/integration-artifacts/event-driven-integration/kafka.md) and [CDC (MySQL)](../develop-and-test/integration-artifacts/event-driven-integration/cdc-mysql.md) for two worked examples of setting up a trigger-based flow.
+Most connectors are action-only, but a select few (primarily databases, messaging systems, and file storage) also support triggers — inbound events the external service pushes into your integration. See [Kafka](product://integrator/develop-and-test/integration-artifacts/event-driven-integration/kafka) and [CDC (MySQL)](product://integrator/develop-and-test/integration-artifacts/event-driven-integration/cdc-mysql) for two worked examples of setting up a trigger-based flow.
 
 ## What's next
 

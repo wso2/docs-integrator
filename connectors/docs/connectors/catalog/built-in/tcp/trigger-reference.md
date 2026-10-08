@@ -58,7 +58,7 @@ listener tcp:Listener tcpListener = new (3000, secureSocket = {
 ```
 
 :::tip Generating certificates
-For instructions on generating certificates using `keytool`, see [Keystores and Truststores](../../../../deploy-operate/secure/keystore-truststore.md).
+For instructions on generating certificates using `keytool`, see [Keystores and Truststores](product://integrator/deploy-and-run/secure/keystore-truststore).
 
 ---
 

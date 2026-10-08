@@ -25,7 +25,7 @@ flowchart TD
 
 ## Setting up the Snowflake integration
 
-Set up a new WSO2 Integrator project by following the [project creation guide](../../../../develop/create-integrations/create-a-new-integration.md) before proceeding with the steps below.
+Set up a new WSO2 Integrator project by following the [project creation guide](product://integrator/develop-and-test/create-workspace) before proceeding with the steps below.
 
 ## Adding the Snowflake connector
 

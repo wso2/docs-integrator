@@ -58,7 +58,7 @@ See the **[Trigger Reference](triggers.md)** for listener configuration, service
 - [Setup Guide](setup-guide.md); create a namespace, queue or topic, and obtain your connection string
 - [Action Reference](actions.md): send, receive, and administer messages
 - [Trigger Reference](triggers.md): event-driven message consumption with `asb:Listener`
-- [Azure Service Bus event integration](../../../../develop/integration-artifacts/event/azure-service-bus.md): configure the listener in WSO2 Integrator
+- [Azure Service Bus event integration](product://integrator/develop-and-test/integration-artifacts/event-driven-integration/azure-service-bus): configure the listener in WSO2 Integrator
 
 ## How to contribute
 

@@ -36,7 +36,7 @@ A library adds integration capabilities that don't need a client or connection a
 
 A connection is a named, reusable configuration that holds the credentials and endpoint settings for an external service, such as API keys, OAuth tokens, and hostnames. You define it once; every action in your integration uses it by name.
 
-For details on creating and managing connections, see [Connections](../develop/integration-artifacts/supporting/connections.md).
+For details on creating and managing connections, see [Connections](product://integrator/develop-and-test/integration-artifacts/supportive-artifacts/connections).
 
 ### Action
 
@@ -57,5 +57,5 @@ Most connectors are action-only. Trigger support is available for select connect
 
 - [Using Connectors](using-connectors.md): See how connections, actions, and triggers come together in a real integration
 - [Connector catalog](catalog/index.mdx): Browse all available connectors
-- [Connections](../develop/integration-artifacts/supporting/connections.md): Create and manage connections in your integration
+- [Connections](product://integrator/develop-and-test/integration-artifacts/supportive-artifacts/connections): Create and manage connections in your integration
 - [Build your own connector](build-your-own/build-own.md): Create a custom connector for a service not in the catalog

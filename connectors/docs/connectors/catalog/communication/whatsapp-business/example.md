@@ -26,11 +26,11 @@ flowchart LR
 
 ### Setting up the WhatsApp Business integration
 
-> **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the trigger.
+> **New to WSO2 Integrator?** Follow the [Create a New Integration](product://integrator/develop-and-test/create-workspace) guide to set up your integration first, then return here to add the trigger.
 
 ### Adding the WhatsApp Business trigger
 
-Add a WhatsApp Business event integration and implement the listener and service as described in the [WhatsApp Business event integration guide](../../../../develop/integration-artifacts/event/whatsapp-business.md). WSO2 Integrator renders the listener and service on the design canvas, with all available handlers listed under **Event Handlers**.
+Add a WhatsApp Business event integration and implement the listener and service as described in the [WhatsApp Business event integration guide](product://integrator/develop-and-test/integration-artifacts/event-driven-integration/whatsapp-business). WSO2 Integrator renders the listener and service on the design canvas, with all available handlers listed under **Event Handlers**.
 
 <ThemedImage
     alt="WSO2 Integrator design canvas showing the whatsappListener connected to WhatsAppService with onMessages and onAccountUpdate handlers"

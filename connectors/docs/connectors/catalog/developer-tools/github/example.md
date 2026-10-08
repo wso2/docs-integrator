@@ -28,7 +28,7 @@ flowchart LR
 
 ### Setting up the GitHub integration
 
-> **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the connector.
+> **New to WSO2 Integrator?** Follow the [Create a New Integration](product://integrator/develop-and-test/create-workspace) guide to set up your integration first, then return here to add the connector.
 
 ### Adding the GitHub connector
 
@@ -175,7 +175,7 @@ flowchart LR
 
 ### Setting up the GitHub integration
 
-> **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the trigger.
+> **New to WSO2 Integrator?** Follow the [Create a New Integration](product://integrator/develop-and-test/create-workspace) guide to set up your integration first, then return here to add the trigger.
 
 ### Adding the GitHub trigger
 
@@ -288,6 +288,6 @@ Try this sample in WSO2 Integration Platform.
 
 ## What's next
 
-- [GitHub Webhooks](../../../../develop/integration-artifacts/event/github-webhooks.md): full reference for all event channels and handlers
+- [GitHub Webhooks](product://integrator/develop-and-test/integration-artifacts/event-driven-integration/github-webhooks): full reference for all event channels and handlers
 - [Setup Guide](setup-guide.md): create a GitHub Personal Access Token and configure a repository webhook
 - [Action Reference](actions.md): full list of REST API operations and sample code

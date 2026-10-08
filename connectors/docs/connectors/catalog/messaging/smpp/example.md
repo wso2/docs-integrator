@@ -31,7 +31,7 @@ See the [Setup Guide](setup-guide.md) for how to obtain these from your provider
 
 ## Setting up the SMPP integration
 
-> **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the connector.
+> **New to WSO2 Integrator?** Follow the [Create a New Integration](product://integrator/develop-and-test/create-workspace) guide to set up your integration first, then return here to add the connector.
 
 ## Adding the SMPP connector
 

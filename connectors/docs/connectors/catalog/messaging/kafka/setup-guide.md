@@ -65,6 +65,6 @@ Managed Kafka services (Confluent Cloud, Amazon MSK, Azure Event Hubs) provide t
 
 For encrypted connections:
 
-1. Generate a CA certificate, server certificate, and key, or obtain them from your PKI. See [Keystores and Truststores](../../../../deploy-operate/secure/keystore-truststore.md) for step-by-step instructions using `keytool`.
+1. Generate a CA certificate, server certificate, and key, or obtain them from your PKI. See [Keystores and Truststores](product://integrator/deploy-and-run/secure/keystore-truststore) for step-by-step instructions using `keytool`.
 2. Configure the broker's `server.properties` with the keystore and truststore paths.
 3. Note the **truststore/certificate file path** and **keystore credentials**; you will use these when configuring the Ballerina connector.

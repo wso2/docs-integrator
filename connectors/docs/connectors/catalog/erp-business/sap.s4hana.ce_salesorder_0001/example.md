@@ -23,7 +23,7 @@ flowchart LR
 
 ## Setting up the sap.s4hana.ce_salesorder_0001 integration
 
-> **New to WSO2 Integrator?** Follow the [Create a New Integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the connector.
+> **New to WSO2 Integrator?** Follow the [Create a New Integration](product://integrator/develop-and-test/create-workspace) guide to set up your integration first, then return here to add the connector.
 
 ## Adding the sap.s4hana.ce_salesorder_0001 connector
 

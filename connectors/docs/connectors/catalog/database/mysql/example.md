@@ -26,7 +26,7 @@ flowchart LR
 ## Set up the MySQL integration
 
 :::tip New to WSO2 Integrator?
-Follow the [Create a new integration](../../../../develop/create-integrations/create-a-new-integration.md) guide to set up your integration first, then return here to add the connector.
+Follow the [Create a new integration](product://integrator/develop-and-test/create-workspace) guide to set up your integration first, then return here to add the connector.
 
 ## Add the MySQL connector
 

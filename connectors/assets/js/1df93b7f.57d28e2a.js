@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkwso2_integrator_docs=globalThis.webpackChunkwso2_integrator_docs||[]).push([[34583],{35552(o,t,a){a.r(t),a.d(t,{default:()=>e});var r=a(56347),s=a(86025),c=a(74848);function e(){return(0,c.jsx)(r.rd,{to:(0,s.Ay)("/catalog")})}}}]);
