@@ -66,6 +66,7 @@ Sampling every request is fine for development. In production, use `probabilisti
 |---------|----------|-------|
 | **Jaeger** | Production-grade distributed tracing | [Jaeger](open-source/jaeger.md) |
 | **Zipkin** | A lightweight tracing alternative | [Zipkin](open-source/zipkin.md) |
+| **OpenTelemetry** | Any OTLP backend, such as an OpenTelemetry Collector, with traces and metrics from one extension | [OpenTelemetry](open-source/opentelemetry.md) |
 
 You can also send traces to a managed platform: [Datadog](commercial/datadog.md) and [New Relic](commercial/new-relic.md) both accept traces, and [Moesif](commercial/moesif.md) supports traces alongside metrics and logs. For a complete stack that includes tracing, see the [Local Development Stack](recipes/local-development-stack.md) and [Kubernetes Production Stack](recipes/kubernetes-production-stack.md) recipes.
 
@@ -73,5 +74,6 @@ You can also send traces to a managed platform: [Datadog](commercial/datadog.md)
 
 - [Jaeger](open-source/jaeger.md) — Set up Jaeger and view traces
 - [Zipkin](open-source/zipkin.md) — Set up Zipkin and view traces
+- [OpenTelemetry](open-source/opentelemetry.md) — Export traces over OTLP to any compatible backend
 - [Metrics](metrics.md) — Collect and monitor metrics alongside traces
 - [Logging](logging.md) — Configure structured logging
