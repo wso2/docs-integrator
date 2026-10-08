@@ -125,7 +125,7 @@ service "Orders" on rabbitmqListener {
 
 ## Step 6: Deploy to WSO2 Cloud
 
-Deploy your integration to WSO2 Cloud. Check [Save and deploy](/deploy-and-run/deploy-from-cloud-editor#save-and-deploy).
+Deploy your integration to WSO2 Cloud. Check [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 
 ## Skip ahead: deploy a ready-made sample
 

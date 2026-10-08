@@ -92,7 +92,7 @@ Yes. WSO2 Integrator includes first-class support for AI agents, retrieval-augme
 
 ### Which LLM and vector store providers are supported?
 
-WSO2 Integrator ships connectors for major LLM providers and vector stores. See the [Connectors catalog](../connectors/catalog/index.mdx) for the current list.
+WSO2 Integrator ships connectors for major LLM providers and vector stores. See the [Connectors catalog](product://connectors/catalog) for the current list.
 
 ## Deploy and operate
 
