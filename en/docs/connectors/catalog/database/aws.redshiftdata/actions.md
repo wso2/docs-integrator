@@ -23,7 +23,7 @@ Executes SQL statements, retrieves results, and monitors execution status via th
 |-------|------|---------|-------------|
 | `auth` | <code>auth:AuthConfig</code> | Required | Authentication configuration: static credentials, AWS profile, STS assume-role, web identity (OIDC), IAM Identity Center (SSO), external credential process, or the default provider chain |
 | `region` | <code>aws:Region&#124;string</code> | Required | AWS region: an `aws:Region` enum member or a plain region string (e.g., `"us-east-1"`) for regions not yet in the enum |
-| `endpoint` | <code>aws:EndpointConfig</code> | - | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. VPC interface endpoints) |
+| `endpoint` | <code>aws:EndpointConfig</code> | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. VPC interface endpoints) |
 | `dbAccessConfig` | `Cluster\|WorkGroup` | - | The database access configurations for the Redshift Data API. Can be overridden in the individual `execute` and `batchExecute` requests. |
 
 ### Initializing the client

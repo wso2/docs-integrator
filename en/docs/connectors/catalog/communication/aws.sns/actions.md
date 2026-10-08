@@ -22,8 +22,8 @@ Provides operations to interact with AWS SNS: topic management, publishing, subs
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `auth` | <code>auth:AuthConfig</code> | Required | Authentication configuration: static credentials, AWS profile, STS assume-role, web identity (OIDC), IAM Identity Center (SSO), external credential process, or the default provider chain |
-| `region` | <code>aws:Region&#124;string</code> | Required | AWS region: an `aws:Region` enum member or a plain region string (e.g., `"us-east-1"`) for regions not yet in the enum |
-| `endpoint` | <code>aws:EndpointConfig</code> | - | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. VPC interface endpoints) |
+| `region` | <code>aws:Region&#124;string</code> | `us-east-1` | AWS region: an `aws:Region` enum member or a plain region string (e.g., `"us-east-1"`) for regions not yet in the enum |
+| `endpoint` | <code>aws:EndpointConfig</code> | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. VPC interface endpoints) |
 
 ### Initializing the client
 

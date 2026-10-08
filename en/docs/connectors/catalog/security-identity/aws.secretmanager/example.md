@@ -154,3 +154,11 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/aws.secretmanager_connector_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/aws.secretmanager_connector_sample)
+
+## More code examples
+
+The `ballerinax/aws.secretmanager` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-aws.secretmanager/tree/main/examples):
+
+1. [**Database credentials**](https://github.com/ballerina-platform/module-ballerinax-aws.secretmanager/tree/main/examples/database-credentials) – Loads a database credential from a secret, keeps the password out of the logs, and checks for a previous version to fall back on during rotation.
+
+2. [**Secret rotation audit**](https://github.com/ballerina-platform/module-ballerinax-aws.secretmanager/tree/main/examples/secret-rotation-audit) – Discovers the secrets carrying a tag key and reports which of them are outside a rotation SLA.
