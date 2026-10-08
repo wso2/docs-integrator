@@ -154,7 +154,7 @@ Your flow should now branch and return early when nothing is low.
 
 ## Step 5: Raise a purchase request and notify procurement
 
-To reach your mail server, add an [**Email Smtp**](../../connectors/catalog/built-in/email/email.md) connection named `emailSmtpclient`:
+To reach your mail server, add an [**Email Smtp**](product://connectors/catalog/built-in/email/email) connection named `emailSmtpclient`:
 
 | Field | Value |
 | --- | --- |
@@ -359,4 +359,4 @@ The `inventory:Client` and `purchasing:Client` are generated when you add the co
 Now that the automation works, you can take it further:
 
 - **Deploy and schedule it.** Ship it to [WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md), then schedule periodic runs there (a `cron` entry, a Kubernetes `CronJob`, a host scheduler, or the WSO2 Integration Platform).
-- **Richen the notification.** The [Email connector](../../connectors/catalog/built-in/email/email.md) also supports HTML bodies, CC/BCC, and attachments, so procurement's plain note can become a formatted daily digest listing every item raised in that run.
+- **Richen the notification.** The [Email connector](product://connectors/catalog/built-in/email/email) also supports HTML bodies, CC/BCC, and attachments, so procurement's plain note can become a formatted daily digest listing every item raised in that run.

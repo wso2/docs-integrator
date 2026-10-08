@@ -34,7 +34,7 @@ The WSO2 Integrator Scheduler invokes the automation periodically, and each run 
 :::info Prerequisites
 
 - A working WSO2 Integrator environment. See [Cloud setup](../../get-started/setup/setup.md).
-- An Azure storage account with a file share, and its account name and access key. The [Azure Files connector setup guide](../../connectors/catalog/storage-file/azure.storage.files/setup-guide.md) walks through creating these.
+- An Azure storage account with a file share, and its account name and access key. The [Azure Files connector setup guide](product://connectors/catalog/storage-file/azure.storage.files/setup-guide) walks through creating these.
 - The share must already exist. A tracker watches a share, it does not provision one.
 
 ## Build the change tracker
@@ -245,4 +245,4 @@ Now that the tracker works, you can take it further:
 
 - **Track changes within seconds.** If a schedule's granularity is too coarse, run the same diff resident: move the body of `main` into a function and invoke it from a `task:Listener` service with `trigger = {interval: ...}`. The diff stays metadata-only, so even a few-second interval costs only listing calls; the trade is a process that never exits.
 - **Make the hooks idempotent.** The snapshot is saved only at the end of a run, so a run that fails after firing some hooks reports those same differences again on the next run. That at-least-once behavior is what keeps events from being lost, and hooks that tolerate a repeat make it harmless downstream.
-- **Process the files themselves.** To act on file content as files arrive, use the [Azure Files trigger](../../connectors/catalog/storage-file/azure.storage.files/trigger-reference.md): it dispatches each file to a handler and fits consume-style processing, where each handled file is deleted or moved out of the watched path.
+- **Process the files themselves.** To act on file content as files arrive, use the [Azure Files trigger](product://connectors/catalog/storage-file/azure.storage.files/trigger-reference): it dispatches each file to a handler and fits consume-style processing, where each handled file is deleted or moved out of the watched path.

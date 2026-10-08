@@ -25,7 +25,7 @@ S3 Bucket  ──(ObjectCreated)──►  SQS Queue  ──(poll)──►  sqs
 
 - An AWS account with permissions to manage S3, SQS, and IAM.
 - A working WSO2 Integrator environment. See [Setup](../../get-started/setup/setup.md).
-- AWS Access Key ID and Secret Access Key for an IAM user who has the necessary `sqs:ReceiveMessage`, `sqs:DeleteMessage`, and `sqs:GetQueueAttributes` permissions on your SQS queue. See the [AWS SQS Setup Guide](../../connectors/catalog/messaging/aws.sqs/setup-guide.md) if you need to create credentials.
+- AWS Access Key ID and Secret Access Key for an IAM user who has the necessary `sqs:ReceiveMessage`, `sqs:DeleteMessage`, and `sqs:GetQueueAttributes` permissions on your SQS queue. See the [AWS SQS Setup Guide](product://connectors/catalog/messaging/aws.sqs/setup-guide) if you need to create credentials.
 
 ## Part 1: Configure AWS
 
@@ -184,7 +184,7 @@ Add two **Record Type** artifacts to the project:
     | Field | Value |
     |---|---|
     | Region | The AWS region where your SQS queue is located, for example `us-east-1` |
-    | Access Key ID | Your AWS Access Key ID (use a configurable). To create these credentials, go to the [IAM Console](https://console.aws.amazon.com/iam/) → **Users** → select your user → **Security credentials** tab → **Create access key**. See the [AWS SQS Setup Guide](../../connectors/catalog/messaging/aws.sqs/setup-guide.md) for detailed steps. |
+    | Access Key ID | Your AWS Access Key ID (use a configurable). To create these credentials, go to the [IAM Console](https://console.aws.amazon.com/iam/) → **Users** → select your user → **Security credentials** tab → **Create access key**. See the [AWS SQS Setup Guide](product://connectors/catalog/messaging/aws.sqs/setup-guide) for detailed steps. |
     | Secret Access Key | The secret key generated alongside the Access Key ID above (use a configurable). Copy it when it is first shown — AWS does not display it again. |
     | Queue URL | The full URL you copied from the SQS queue details page in Step 1, for example `https://sqs.us-east-1.amazonaws.com/123456789012/s3-events` |
     | Poll Interval | `30` (seconds between polls) |

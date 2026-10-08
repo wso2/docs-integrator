@@ -176,7 +176,7 @@ The dialog provides the following configuration for selecting a tool:
 | **Server URL** | The MCP endpoint URL, for example `http://localhost:9090/mcp` or `https://mcp.example.com`. |
 | **Requires Authentication** | Enable this option if the server requires authentication, then configure the required authentication settings. |
 | **Tools to Include** | Select `All` to expose every tool advertised by the server, or choose a specific subset of tools by name. |
-| **Advanced Configurations** | Additional [HTTP client configurations](../../../../connectors/catalog/built-in/http/action-reference.md#client). |
+| **Advanced Configurations** | Additional [HTTP client configurations](product://connectors/catalog/built-in/http/action-reference#client). |
 | **Result** | The name of the variable used to store the result returned by the MCP tool invocation. |
 
 After saving, every tool exposed by the MCP server — or every tool selected in **Tools to Include** — becomes available to the agent. These tools appear alongside local function tools and are used transparently from the agent’s perspective.

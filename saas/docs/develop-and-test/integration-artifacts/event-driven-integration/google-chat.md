@@ -8,7 +8,7 @@ Google Chat event integrations receive interaction events directly from Google C
 
 The Google Chat listener must be reachable over a public HTTPS URL. For local development, use a tunneling tool such as [ngrok](https://ngrok.com) to create a public URL for your local port.
 
-After starting the integration, configure your Chat app in the **Google Cloud Console** under **Google Chat API → Configuration**: set the **HTTP endpoint URL** to your listener's public URL and choose an **Authentication audience** that matches your service's configuration. See the [setup guide](../../../connectors/catalog/communication/google-chat/setup-guide.md) for details.
+After starting the integration, configure your Chat app in the **Google Cloud Console** under **Google Chat API → Configuration**: set the **HTTP endpoint URL** to your listener's public URL and choose an **Authentication audience** that matches your service's configuration. See the [setup guide](product://connectors/catalog/communication/google-chat/setup-guide) for details.
 
 ## Creating a Google Chat listener
 
@@ -188,5 +188,5 @@ Each handler receives the event and, for most event types, an event-specific cal
 - [WhatsApp Business](whatsapp-business.md) — react to WhatsApp Business Cloud webhook events
 - [Telegram](telegram.md) — react to Telegram Bot API webhook updates
 - [Connections](../supportive-artifacts/connections.md) — reuse Google Chat credentials across services
-- [Google Chat connector reference](../../../connectors/catalog/communication/google-chat/overview.md) — full connector API reference
-- [Google Chat setup guide](../../../connectors/catalog/communication/google-chat/setup-guide.md) — create a GCP project and configure the Chat app
+- [Google Chat connector reference](product://connectors/catalog/communication/google-chat/overview) — full connector API reference
+- [Google Chat setup guide](product://connectors/catalog/communication/google-chat/setup-guide) — create a GCP project and configure the Chat app

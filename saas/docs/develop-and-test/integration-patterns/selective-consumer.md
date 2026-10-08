@@ -15,9 +15,9 @@ The pattern is implemented at the consumer boundary or immediately inside the co
 
 ## Broker-side selection
 
-Use broker-side selection when the broker can evaluate the criteria before the message reaches the service. For JMS-backed channels, configure a [JMS listener service](../../connectors/catalog/messaging/java.jms/triggers.md#service) with `messageSelector` so the service receives only messages whose headers or properties match the selector expression.
+Use broker-side selection when the broker can evaluate the criteria before the message reaches the service. For JMS-backed channels, configure a [JMS listener service](product://connectors/catalog/messaging/java.jms/triggers#service) with `messageSelector` so the service receives only messages whose headers or properties match the selector expression.
 
-1. Create the JMS-backed event service with the [JMS listener](../../connectors/catalog/messaging/java.jms/triggers.md#listener).
+1. Create the JMS-backed event service with the [JMS listener](product://connectors/catalog/messaging/java.jms/triggers#listener).
 2. Configure the listener connection with the broker endpoint and credentials through [configurable variables](../../reference/configuration-reference.md#configurable-variables).
 3. Set the service queue or topic in `@jms:ServiceConfig`.
 4. Set `messageSelector` to the selector expression, such as `eventType = 'OrderCreated' AND priority = 'high'`.

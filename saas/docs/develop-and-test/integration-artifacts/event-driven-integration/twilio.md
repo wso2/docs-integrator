@@ -224,4 +224,4 @@ Service callbacks return `error?`. If a handler returns an `error`, the listener
 - [Kafka](kafka.md) — consume messages from Apache Kafka topics
 - [MQTT](mqtt.md) — subscribe to MQTT topics for IoT and lightweight messaging
 - [Connections](../supportive-artifacts/connections.md) — reuse Twilio credentials across services
-- [Twilio connector reference](../../../connectors/catalog/communication/twilio/overview.md) — full connector API reference
+- [Twilio connector reference](product://connectors/catalog/communication/twilio/overview) — full connector API reference

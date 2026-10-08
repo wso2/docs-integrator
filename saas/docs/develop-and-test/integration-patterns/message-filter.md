@@ -96,7 +96,7 @@ function filterHighPriorityMessages(Message[] messages) returns Message[] {
 
 ## Boundary-level filtering
 
-Use boundary-level filtering when the input artifact can reject or route messages before custom flow logic runs. For HTTP-facing inputs, use a [request interceptor](../../connectors/catalog/built-in/http/trigger-reference.md#interceptors) when the decision can be made from request metadata before the resource executes. Other inputs can use their own handler, listener, or subscription selection points.
+Use boundary-level filtering when the input artifact can reject or route messages before custom flow logic runs. For HTTP-facing inputs, use a [request interceptor](product://connectors/catalog/built-in/http/trigger-reference#interceptors) when the decision can be made from request metadata before the resource executes. Other inputs can use their own handler, listener, or subscription selection points.
 
 1. Add the source artifact, such as an [HTTP service](../integration-artifacts/integration-as-api/http.md#creating-an-http-service).
 2. Add a request interceptor for the service boundary.
@@ -149,7 +149,7 @@ service /events on eventListener {
 
 ## Broker-side delivery filtering
 
-Use broker-side delivery filtering when RabbitMQ can reduce what reaches the flow before consumption. Route matching messages into a dedicated queue with a direct exchange and binding key, then configure the RabbitMQ trigger to consume only that queue. Use [RabbitMQ exchange bindings](../../connectors/catalog/messaging/rabbitmq/actions.md#exchange-management) to bind the accepted-message queue to the exchange with the accepted routing key.
+Use broker-side delivery filtering when RabbitMQ can reduce what reaches the flow before consumption. Route matching messages into a dedicated queue with a direct exchange and binding key, then configure the RabbitMQ trigger to consume only that queue. Use [RabbitMQ exchange bindings](product://connectors/catalog/messaging/rabbitmq/actions#exchange-management) to bind the accepted-message queue to the exchange with the accepted routing key.
 
 1. Add the [RabbitMQ event integration](../integration-artifacts/event-driven-integration/rabbitmq.md#creating-a-rabbitmq-service).
 2. Configure the RabbitMQ trigger connection with the broker host and port.

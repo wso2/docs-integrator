@@ -110,7 +110,7 @@ Generate a new connector locally when a pre-built connector isn't available for 
 - **Connect via API Specification**: generate a typed HTTP client from an OpenAPI or WSDL file. For more information, see the [OpenAPI tool](../../developer-tools/integration-tools/openapi-tool.md) and the [WSDL tool](../../developer-tools/integration-tools/wsdl-tool.md).
 - **Connect to a Database**: generate a typed database client by introspecting the schema of a MySQL, MS SQL, or PostgreSQL database.
 
-Connectors created this way are added directly to your project. To make one reusable across projects, publish it to a registry like Ballerina Central. See [Build your own connector](../../../connectors/build-your-own/build-own.md) and [Publish to Ballerina Central](../../../connectors/build-your-own/custom-development.md#step-6-publish-the-connector).
+Connectors created this way are added directly to your project. To make one reusable across projects, publish it to a registry like Ballerina Central. See [Build your own connector](product://connectors/build-your-own/build-own) and [Publish to Ballerina Central](product://connectors/build-your-own/custom-development#step-6-publish-the-connector).
 
 **Pre-built Connectors**
 
@@ -122,7 +122,7 @@ Select an already-published connector from the connector library. The panel prov
 | **Standard** | Connectors maintained as part of the Ballerina platform and its extended library for popular third-party systems. | `ballerina/*` (for example, `ballerina/http`, `ballerina/graphql`, `ballerina/tcp`)<br/>`ballerinax/*` (for example, `ballerinax/mysql`, `ballerinax/kafka`, `ballerinax/rabbitmq`) |
 | **Organization** | Connectors developed and published by your organization. | `<your-org>/*` |
 
-For the complete list of available connectors, see the [Connector Catalog](../../../connectors/catalog/index.mdx).
+For the complete list of available connectors, see the [Connector Catalog](product://connectors/catalog).
 
 ## Best practices
 

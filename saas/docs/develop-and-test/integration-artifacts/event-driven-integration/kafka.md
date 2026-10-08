@@ -147,7 +147,7 @@ service on orderListener {
 
 ## What's next
 
-- [Kafka Connector Overview](../../../connectors/catalog/messaging/kafka/connector-overview.md) — full connector reference for producer and consumer clients
-- [Action Reference](../../../connectors/catalog/messaging/kafka/actions.md) — all producer and consumer operations, parameters, and sample code
-- [Trigger Reference](../../../connectors/catalog/messaging/kafka/triggers.md) — event-driven listener and service callback reference
-- [Setup Guide](../../../connectors/catalog/messaging/kafka/setup-guide.md) — set up a local or managed Kafka cluster
+- [Kafka Connector Overview](product://connectors/catalog/messaging/kafka/connector-overview) — full connector reference for producer and consumer clients
+- [Action Reference](product://connectors/catalog/messaging/kafka/actions) — all producer and consumer operations, parameters, and sample code
+- [Trigger Reference](product://connectors/catalog/messaging/kafka/triggers) — event-driven listener and service callback reference
+- [Setup Guide](product://connectors/catalog/messaging/kafka/setup-guide) — set up a local or managed Kafka cluster

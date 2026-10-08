@@ -13,9 +13,9 @@ Start building your integration by prompting [WSO2 Integrator Copilot](../editor
 <PaletteCard icon="quickstart" href="/develop-and-test/create-workspace">
   <h3 class="palette-card-title">Create integrations</h3>
   <ul class="palette-card-list">
-    <li>Create new project</li>
-    <li>Add intgerations to project</li>
-    <li>Start with sample integrations</li>
+    <li>Start new integration project</li>
+    <li>Explore samples</li>
+    <li>Build libraries</li>
   </ul>
 
 <PaletteCard icon="editor-window" href="/editor">

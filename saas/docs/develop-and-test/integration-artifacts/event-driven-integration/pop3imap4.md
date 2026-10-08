@@ -200,6 +200,6 @@ remote function onMessage(email:Message msg) returns error? {
 
 ## What's next
 
-- [Trigger Reference](../../../connectors/catalog/built-in/email/trigger-reference.md) — Full listener and callback reference
-- [Action Reference](../../../connectors/catalog/built-in/email/action-reference.md) — SMTP, IMAP, and POP3 client operations
+- [Trigger Reference](product://connectors/catalog/built-in/email/trigger-reference) — Full listener and callback reference
+- [Action Reference](product://connectors/catalog/built-in/email/action-reference) — SMTP, IMAP, and POP3 client operations
 - [Ballerina email specification](https://ballerina.io/spec/email/#41-pop3-listener) — Complete language-level reference

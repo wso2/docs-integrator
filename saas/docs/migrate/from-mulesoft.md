@@ -218,7 +218,7 @@ Open `migration_report.html` and work through any non-migratable items. If you o
 
 1. **Unsupported Mule elements**: Implement the equivalent Ballerina logic manually. Refer to the [concept and component mapping table](#concept-and-component-mapping) below.
 2. **DataWeave transformations**: Simple field mappings can be redone with the Visual Data Mapper. Complex transformations should be rewritten as Ballerina query expressions.
-3. **Custom connectors**: Check [Connectors](../../connectors/overview.md) for a Ballerina equivalent, or call the service's REST API directly using `http:Client`.
+3. **Custom connectors**: Check [Connectors](product://connectors/overview) for a Ballerina equivalent, or call the service's REST API directly using `http:Client`.
 
 ### Configure credentials
 
@@ -429,7 +429,7 @@ For each MuleSoft connector:
 - **File/FTP** → `ballerina/ftp`, `ballerina/io`
 - **JMS** → `ballerinax/java.jms` or migrate to Kafka
 - **Email** → `ballerina/email`
-- Check the [Connectors](../../connectors/overview.md) page for the full list.
+- Check the [Connectors](product://connectors/overview) page for the full list.
 
 ### 4. Flow control constructs
 

@@ -18,7 +18,7 @@ The pattern is implemented at the point where the flow controls the receive call
 Use loop-driven polling with [while loops](../../editor/canvases/flow-canvas/node-palette.md#while) when the integration should keep checking a channel or endpoint while it controls the maximum attempts and wait interval. The receive or status-check call stays inside the loop, and the flow exits when it receives a message that is ready to process.
 
 1. Create or open the [HTTP service resource](../integration-artifacts/integration-as-api/http.md#creating-an-http-service) that starts the polling flow.
-2. Add an HTTP client connection for the source that the flow must poll. See [adding a connection](../integration-artifacts/supportive-artifacts/connections.md#adding-a-connection) and the [HTTP client reference](../../connectors/catalog/built-in/http/action-reference.md#client).
+2. Add an HTTP client connection for the source that the flow must poll. See [adding a connection](../integration-artifacts/supportive-artifacts/connections.md#adding-a-connection) and the [HTTP client reference](product://connectors/catalog/built-in/http/action-reference#client).
 3. Add [configurable variables](../../reference/configuration-reference.md#configurable-variables) for values such as `maxAttempts` and `pollDelaySeconds`.
 4. Add a [While node](../../editor/canvases/flow-canvas/node-palette.md#while) that runs while the attempt count is less than `maxAttempts`.
 5. Inside the loop, add the HTTP client operation that asks for the current message or status.
@@ -63,10 +63,10 @@ service /messages on new http:Listener(8080) {
 
 ## Scheduled broker polling
 
-Use scheduled broker polling when each automation run should pull at most one message from a broker and then stop. This keeps the schedule outside the receive logic while the flow still controls when it asks the broker for the next message. For JMS-backed channels, use the [JMS Message Consumer actions](../../connectors/catalog/messaging/java.jms/actions.md#message-consumer) with `receive` or `receiveNoWait`.
+Use scheduled broker polling when each automation run should pull at most one message from a broker and then stop. This keeps the schedule outside the receive logic while the flow still controls when it asks the broker for the next message. For JMS-backed channels, use the [JMS Message Consumer actions](product://connectors/catalog/messaging/java.jms/actions#message-consumer) with `receive` or `receiveNoWait`.
 
 1. Create a [scheduled automation](../integration-artifacts/automation.md#creating-an-automation) for the polling interval.
-2. Add the `java.jms` **JMS MessageConsumer** connection and bind the broker settings to configurable variables. See the [JMS consumer example](../../connectors/catalog/messaging/java.jms/example.md#adding-the-javajms-connector).
+2. Add the `java.jms` **JMS MessageConsumer** connection and bind the broker settings to configurable variables. See the [JMS consumer example](product://connectors/catalog/messaging/java.jms/example#adding-the-javajms-connector).
 3. Add the **Receive** operation from the JMS consumer connection and set the timeout value for the polling window.
 4. Add an [If node](../../editor/canvases/flow-canvas/node-palette.md#if) that checks whether the received value is a message.
 5. Add the processing steps inside the branch that received a message.
