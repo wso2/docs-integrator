@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Data Mapper
 
-The Data Mapper is the visual surface you open for any data mapper artifact in WSO2 Integrator. It shows the source types on the left, the target type on the right, and the mapping area between them, so you can map fields by creating links or filling expressions instead of writing the conversion function manually. The data mapper is either a typed function with one or more inputs and a single output, or a variable declaration with a supported type. Every change you make here is reflected in the underlying source.
+The Data Mapper is the visual surface you open for any data transformation artifact in WSO2 Integrator. It shows the source types on the left, the target type on the right, and the mapping area between them, so you can map fields by creating links or filling expressions instead of writing the conversion function manually. The data mapper is either a typed function with one or more inputs and a single output, or a variable declaration with a supported type. Every change you make here is reflected in the underlying source.
 
 For end-to-end usage, including how to create a data mapper, work with arrays and nested records, and apply transformations, see [Data Mapper](../../develop-and-test/integration-artifacts/supportive-artifacts/data-mapper/data-mapper.md).
 
@@ -137,7 +137,7 @@ For more, see [AI data mapping](/develop-and-test/integration-artifacts/supporti
 
 ## Configure
 
-**Configure** in the header opens the data mapper's configuration in the [Configuration Panel](../panels/configuration-panel.md). Use it to rename the data mapper, toggle **Public**, or change the **Inputs** and **Output** (the same fields you set when you created the data mapper). Any change you make there is reflected in the data mapper when you return.
+**Configure** in the header opens the data mapper's configuration. Use it to rename the data mapper, toggle **Public**, or change the **Inputs** and **Output** (the same fields you set when you created the data mapper). Any change you make there is reflected in the data mapper when you return.
 
 <ThemedImage
     alt="Configure button in the data mapper header"
