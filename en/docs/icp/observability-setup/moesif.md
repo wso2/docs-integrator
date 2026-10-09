@@ -38,35 +38,77 @@ You will use two different credentials:
 
 ## 2. Publish metrics from the integration
 
-Keep the runtime connection settings from [Connect an integration to ICP](../connect-runtime.md), and update the following files in your integration project.
+The integration publishes metrics to Moesif only while it is running and handling requests. Moesif and ICP show no metrics until the integration receives requests.
 
-In `Ballerina.toml`, enable observability alongside remote management:
+Keep the runtime connection settings from [Connect an integration to ICP](../connect-runtime.md), and follow these steps in your integration project.
 
-```toml
-[build-options]
-remoteManagement = true
-observabilityIncluded = true
-```
+1. In `Ballerina.toml`, enable observability alongside remote management:
 
-In `main.bal`, add the Moesif import and keep the ICP runtime bridge import:
+   ```toml
+   [build-options]
+   remoteManagement = true
+   observabilityIncluded = true
+   ```
 
-```ballerina
-import ballerinax/moesif as _;
-import wso2/icp.runtime.bridge as _;
-```
+2. In `main.bal`, add the Moesif import and keep the ICP runtime bridge import:
 
-In `Config.toml`, add the following settings. If a section already exists, merge these keys into it instead of duplicating the section.
+   ```ballerina
+   import ballerinax/moesif as _;
+   import wso2/icp.runtime.bridge as _;
+   ```
 
-```toml
-[ballerina.observe]
-metricsEnabled = true
-metricsReporter = "moesif"
+   The integration must expose a service, such as an HTTP service, to receive requests. A program with only a `main` function exits after it runs and does not generate metrics. If your integration does not have a service yet, you can use the following example. It exposes a `GET /hello` endpoint on port `9090` and writes a log entry for each request:
 
-[ballerinax.moesif]
-applicationId = "<MOESIF_COLLECTOR_APPLICATION_ID>"
-```
+   ```ballerina
+   import ballerina/http;
+   import ballerina/log;
+   import ballerinax/moesif as _;
+   import wso2/icp.runtime.bridge as _;
 
-Replace `<MOESIF_COLLECTOR_APPLICATION_ID>` with the value copied in step 1. Restart the integration with `bal run` from the project directory, then send requests to its service endpoints to generate metrics.
+   service /hello on new http:Listener(9090) {
+       resource function get .() returns string {
+           log:printInfo("Received a request");
+           return "Hello";
+       }
+   }
+   ```
+
+3. In `Config.toml`, add the following settings. If a section already exists, merge these keys into it instead of duplicating the section.
+
+   ```toml
+   [ballerina.observe]
+   metricsEnabled = true
+   metricsReporter = "moesif"
+
+   [ballerinax.moesif]
+   applicationId = "<MOESIF_COLLECTOR_APPLICATION_ID>"
+   ```
+
+   Replace `<MOESIF_COLLECTOR_APPLICATION_ID>` with the value copied in step 1.
+
+4. Start or restart the integration from the project directory:
+
+   ```bash
+   bal run
+   ```
+
+   Keep the integration running. Its logs show `Full heartbeat acknowledged by ICP server` when it is connected to ICP.
+
+5. In a separate terminal, send requests to the integration's service endpoint. For the example service, run:
+
+   ```bash
+   for i in $(seq 1 20); do curl http://localhost:9090/hello; done
+   ```
+
+   On Windows PowerShell, run:
+
+   ```powershell
+   1..20 | ForEach-Object { curl.exe http://localhost:9090/hello }
+   ```
+
+   Each request generates metrics that the integration publishes to Moesif.
+
+6. In Moesif, open the application created in step 1 and confirm that events from the integration appear. It can take a few minutes for the first events to appear.
 
 ## 3. Publish application logs
 
