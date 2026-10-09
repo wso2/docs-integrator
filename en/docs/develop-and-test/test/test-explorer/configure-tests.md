@@ -218,7 +218,7 @@ Understanding what happens when a lifecycle function fails helps you design resi
 | `@test:BeforeGroups` | All tests in that group and their teardown. `@test:AfterGroups` is skipped unless `alwaysRun: true`. |
 | `@test:BeforeEach` | All remaining test functions. `@test:AfterSuite` still runs. |
 | `before` attribute function | The test itself and its `after` function are both skipped. |
-| Test function | Nothing else is skipped. Other tests continue normally. |
+| Test function | Tests that list the failed test in `dependsOn` are skipped. Other tests continue normally. |
 | `@test:AfterEach` | All subsequent `@test:BeforeEach`, `@test:AfterEach`, and test functions are skipped. |
 
 ## What's next

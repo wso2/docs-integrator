@@ -143,7 +143,6 @@ Hard-coding hostnames and ports in tests makes them brittle when infrastructure 
 import ballerina/http;
 
 configurable int servicePort = 9090;
-configurable string serviceHost = "http://localhost:9090";
 
 service http:Service /orders on new http:Listener(servicePort) {
     resource function get .() returns json {

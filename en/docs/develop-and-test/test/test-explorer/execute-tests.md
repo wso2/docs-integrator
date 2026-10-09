@@ -32,7 +32,7 @@ The framework runs lifecycle functions in a fixed order for each test. Knowing t
 | `@test:BeforeGroups` | Tests in that group are skipped along with their per-test setup and teardown. `@test:AfterGroups` is skipped unless `alwaysRun: true`. Other groups are not affected. |
 | `@test:BeforeEach` | All test functions are skipped. `@test:AfterSuite` still runs. `@test:AfterGroups` does not run unless `alwaysRun: true`. |
 | `before` attribute function | That test and its `after` function are both skipped. |
-| Test function | Nothing else is skipped. Other tests continue normally. |
+| Test function | Tests that list the failed test in `dependsOn` are skipped. Other tests continue normally. |
 | `@test:AfterEach` | All subsequent `@test:BeforeEach`, `@test:AfterEach`, and test functions are skipped. |
 
 If `alwaysRun: true` is set on `@test:AfterGroups` or `@test:AfterSuite`, those functions run regardless of the status of other functions.
@@ -73,7 +73,7 @@ Run a single test function by name:
 bal test --tests <test_function>
 ```
 
-Run a function in a specific module when multiple modules define functions with the same name:
+Run the given test function(s) in the default module only:
 
 ```
 bal test --tests PackageName:<test_function>
@@ -191,7 +191,7 @@ isolated int processedCount = 0;
     dataProvider: orderDataProvider
 }
 isolated function testOrderProcessing(string orderId, decimal amount, string expectedStatus) returns error? {
-    test:assertEquals(amount > 0.0d, true);
+    test:assertTrue(amount >= 0.0d, msg = "Order amount must not be negative");
     runtime:sleep(0.05);
     lock {
         processedCount += 1;
