@@ -91,10 +91,10 @@ The annotation accepts either a `QueueServiceConfiguration` or a `TopicServiceCo
 
 | Function | Signature | Description |
 |----------|-----------|-------------|
-| `onMessage` | `remote function onMessage(record {\|*solace:Message; T payload;\|} message, solace:Caller? caller) returns solace:Error?` | Invoked when a message is received on the subscribed queue or topic. Narrow `T` to a specific type to trigger data binding. |
+| `onMessage` | `remote function onMessage(record {\|*solace:Message; T payload;\|} message, solace:Caller caller) returns solace:Error?` | Invoked when a message is received on the subscribed queue or topic. Narrow `T` to a specific type to trigger data binding. |
 | `onError` | `remote function onError(solace:Error err) returns solace:Error?` | Optional. Invoked when an error occurs during message receipt or data binding. |
 
-> **Note:** The `caller` parameter of `onMessage` is optional. Omit it when the service relies on `AUTO_ACK`; include a `solace:Caller` parameter to acknowledge, negatively acknowledge, or control a transacted session manually.
+> **Note:** The `caller` parameter of `onMessage` can be omitted entirely. Omit it when the service relies on `AUTO_ACK`; include it to acknowledge, negatively acknowledge, or control a transacted session manually. When declared, it must be of type `solace:Caller`.
 
 ### Full usage example
 
@@ -153,8 +153,8 @@ The `solace:Caller` is injected into `onMessage` when the callback declares it a
 |----------|-----------|-------------|
 | `ack` | `remote function ack(solace:Message message) returns solace:Error?` | Acknowledges a message. Required when `ackMode` is `CLIENT_ACK` on a non-transacted service. |
 | `nack` | `remote function nack(solace:Message message, boolean requeue = true) returns solace:Error?` | Negatively acknowledges a message. With `requeue: true` (the default), the broker redelivers it; with `requeue: false`, the broker routes it to the dead message queue. |
-| `commit` | `remote function commit() returns solace:Error?` | Commits the listener's transacted session. Requires `transacted = true` on the listener configuration. |
-| `rollback` | `remote function rollback() returns solace:Error?` | Rolls back the listener's transacted session; every message received since the last commit or rollback is redelivered. |
+| `commit` | `remote function 'commit() returns solace:Error?` | Commits the listener's transacted session. Requires `transacted = true` on the listener configuration. |
+| `rollback` | `remote function 'rollback() returns solace:Error?` | Rolls back the listener's transacted session; every message received since the last commit or rollback is redelivered. |
 
 ---
 
@@ -175,7 +175,7 @@ The `solace:Caller` is injected into `onMessage` when the callback declares it a
 | `senderId` | `string?` | Identifier of the sending client. |
 | `senderTimestamp` | `int?` | Sender-side timestamp in milliseconds. |
 | `sequenceNumber` | `int?` | Application-assigned or auto-generated sequence number. |
-| `properties` | `map<anydata>?` | User-defined message properties. |
+| `properties` | `map<Property>?` | User-defined message properties. `Property` is `boolean\|int\|byte\|float\|string\|byte[]\|map<Property>`. |
 | `userData` | `byte[]?` | Up to 36 bytes of application-defined binary data. |
 | `receiveTimestamp` | `int?` | Receive-only. Broker-side receive timestamp in milliseconds. Populated when `generateReceiveTimestamps` is `true`. |
 | `redelivered` | `boolean?` | Receive-only. Whether this delivery is a redelivery. |
@@ -222,7 +222,7 @@ public type Destination Topic|Queue;
 | `keyStore` | `KeyStore` | `()` | Keystore used for mutual TLS. |
 | `trustedCommonNames` | `string[]` | `()` | Up to 16 common names accepted in the broker's certificate. |
 | `excludedProtocols` | `Protocol[]` | `[]` | TLS protocol versions to exclude. |
-| `cipherSuites` | `string[]` | `()` | Allowed cipher suites. |
+| `cipherSuites` | `SslCipherSuite[]` | `()` | Allowed cipher suites. Each entry must be an `SslCipherSuite` value, for example `ECDHE_RSA_AES256_CBC_SHA384`. |
 | `validation` | `record {\|boolean enabled = true; boolean validateDate = true; boolean validateHostname = true;\|}` | all `true` | Certificate validation controls. |
 
 `TrustStore` fields: `location: string`, `password: string`, `format: JKS|PKCS12 = JKS`. `KeyStore` adds `keyPassword?: string` and `keyAlias?: string`.

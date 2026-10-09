@@ -4,14 +4,14 @@ title: "Overview"
 
 # Overview
 
-Solace PubSub+ is an advanced event broker that supports publish/subscribe, queueing, request/reply, and streaming patterns. The Ballerina `ballerinax/solace.jms` connector provides programmatic access to Solace PubSub+ through the standard Java Message Service (JMS) 2.0 API, letting you publish and consume messages on queues and topics using JMS session semantics, with support for direct and persistent delivery, durable subscriptions, session-transacted messaging, and event-driven listener services.
+Solace PubSub+ is an advanced event broker that supports publish/subscribe, queueing, request/reply, and streaming patterns. The Ballerina `ballerinax/solace.jms` connector provides programmatic access to Solace PubSub+ through the standard Java Message Service (JMS) 2.0 API, letting you publish and consume messages on queues and topics using JMS session semantics, with support for non-persistent and persistent delivery, durable subscriptions, session-transacted messaging, and event-driven listener services.
 
 ## Key features
 
 - Publish messages to Solace queues and topics with `Message Producer`.
 - Consume messages from queues and topics with blocking and non-blocking receive via `Message Consumer`.
 - Event-driven message processing with a listener and compiler-validated service callbacks for automatic dispatch.
-- Direct (at-most-once) and persistent (guaranteed) delivery modes.
+- Non-persistent (at-most-once) and persistent (guaranteed) delivery modes, with optional direct transport for low-latency messaging.
 - Standard JMS session acknowledgement modes: automatic, client, duplicates-ok, and session-transacted.
 - JMS SQL-92 message selectors for broker-side content filtering.
 - Durable and temporary topic subscriptions, and durable queue subscriptions.

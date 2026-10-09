@@ -173,6 +173,7 @@ flowchart LR
 
 #### Step 2: Bind the connection parameters to configurable variables
 
+- **Url** : The Solace broker URL, bound to a configurable variable.
 - **Auth** : Enter `{username: solaceUsername, password: solacePassword}` in expression mode, referencing configurable variables for both fields.
 - **Subscription Config** : Enter `{queueName: solaceQueueName}` in expression mode, referencing a configurable variable for the queue name.
 

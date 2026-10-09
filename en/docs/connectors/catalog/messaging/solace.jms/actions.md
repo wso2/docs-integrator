@@ -314,7 +314,7 @@ if message is jms:Message {
 
 <div>
 
-Commits all messages received since the last commit or rollback in the current session-transacted consumer. Requires `ackMode = SESSION_TRANSACTED` and `directTransport = false` on the subscription configuration.
+Commits all messages received since the last commit or rollback in the current session-transacted consumer. Requires `ackMode = SESSION_TRANSACTED` in `subscriptionConfig` and `directTransport = false` on the consumer configuration.
 
 Returns: `jms:Error?`
 
@@ -335,7 +335,7 @@ check solaceJmsConsumer->'commit();
 
 <div>
 
-Rolls back the current session-transacted consumer. Every message received since the last commit or rollback is redelivered. Requires `ackMode = SESSION_TRANSACTED` and `directTransport = false` on the subscription configuration.
+Rolls back the current session-transacted consumer. Every message received since the last commit or rollback is redelivered. Requires `ackMode = SESSION_TRANSACTED` in `subscriptionConfig` and `directTransport = false` on the consumer configuration.
 
 Returns: `jms:Error?`
 
