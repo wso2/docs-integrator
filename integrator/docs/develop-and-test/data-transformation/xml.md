@@ -12,9 +12,17 @@ WSO2 Integrator provides built-in support for XML processing, making it easy to 
 
 Create XML values directly in WSO2 Integrator using backtick templates. The `xml` type supports XML elements, text nodes, comments, and processing instructions, making it easy to construct structured XML payloads within integrations.
 
-1. **Add a Variable**: In the flow designer, click **+** and select **Declare Variable**. Set the variable type to `xml` and provide an XML backtick template as the expression (for example: **xml `<example></example>`**).
+1. **Add a variable for the XML literal**. Click **+** and select **Declare Variable**. Configure:
+   - **Variable Name**: `greeting`
+   - **Variable Type**: `xml`
+   - **Expression**: `` xml `<greeting>Hello, World!</greeting>` ``
 
-2. **Use embedded expressions**: Insert dynamic values into XML templates using `${variableName}` syntax. Each XML variable is represented as a separate **Declare Variable** step in the flow, allowing you to visually manage XML construction.
+2. **Add nested XML elements**. Add another **Declare Variable** step for more complex XML. Configure:
+   - **Variable Name**: `orders`
+   - **Variable Type**: `xml`
+   - **Expression**: An XML backtick template with nested elements (for example, `` xml `<order id="ORD-100"><customer>Acme Corp</customer></order>` ``)
+
+3. **Use embedded expressions for dynamic values**. To insert dynamic values into XML templates, use `${variableName}` syntax inside the XML backtick template. First, add a **Declare Variable** step for each dynamic value (for example, `name` of type `string`), then add another **Declare Variable** with an XML expression that references those variables (for example, `` xml `<shipment><recipient>${name}</recipient></shipment>` ``). Each variable appears as a separate step in the flow.
 
    <ThemedImage
        alt="Flow designer showing Declare Variable for XML literal construction including dynamic expressions"
@@ -24,7 +32,7 @@ Create XML values directly in WSO2 Integrator using backtick templates. The `xml
        }}
    />
 
-3. **Configure the expression**: Select a variable node to view and edit the XML template expression from the side panel.
+4. **View or edit the expression**. Click a variable node on the canvas to open the side panel, where you can view and modify the XML template expression.
 
    <ThemedImage
        alt="Side panel showing the dynamic XML variable with embedded expression"
@@ -66,11 +74,22 @@ public function main() {
 
 Create XML text nodes, comments, and processing instructions directly using XML backtick templates. These XML node types can be stored in variables and used when building or transforming XML payloads.
 
-1. **Add Variable**: In the flow designer, add separate **Declare Variable** with the type set to `xml` for each XML node type such as text, comment, or processing instruction.
+1. **Add a text node**. Click **+** and select **Declare Variable**. Configure:
+   - **Variable Name**: `text`
+   - **Variable Type**: `xml`
+   - **Expression**: `` xml `Hello, World!` ``
 
-2. **Define XML node values**: Provide the required XML backtick template expression for the node type you want to create.
+2. **Add a comment node**. Add another **Declare Variable** step. Configure:
+   - **Variable Name**: `comment`
+   - **Variable Type**: `xml`
+   - **Expression**: `` xml `` ``
 
-3. **View the flow representation**: Each XML node appears as an individual **Declare Variable** step in the integration flow.
+3. **Add a processing instruction**. Add another **Declare Variable** step. Configure:
+   - **Variable Name**: `pi`
+   - **Variable Type**: `xml`
+   - **Expression**: `` xml `<?xml-stylesheet type="text/xsl" href="style.xsl"?>` ``
+
+   Each XML node appears as an individual **Declare Variable** step in the integration flow.
 
 <ThemedImage
     alt="Flow designer showing Declare Variable for XML text, comment, and processing instruction nodes"
@@ -103,15 +122,34 @@ public function main() {
 
 Access child elements, attributes, and text content using XML navigation expressions in WSO2 Integrator. XML navigation makes it easy to query and extract specific parts of XML payloads during integration flows.
 
-1. **Define the XML input**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `xml` and enter the XML literal as the expression. Name the variable `catalog`. This variable is then referenced in all subsequent navigation steps.
+1. **Define the XML input**. Click **+** and select **Declare Variable**. Configure:
+   - **Variable Name**: `catalog`
+   - **Variable Type**: `xml`
+   - **Expression**: An XML backtick template containing the full catalog structure (see the **Ballerina Code** tab for the sample XML)
 
-2. **Navigate child elements**: Add a **Declare Variable** step and use expressions such as `catalog/<product>` to select child elements by name, or `catalog/*` to retrieve all child elements.
+   This variable is referenced in all subsequent navigation steps.
 
-3. **Access text content**: Use the `.data()` function in a variable expression (for example, `(firstProduct/<name>).data()`) to extract the text value of an XML element.
+2. **Navigate child elements by name**. Add a **Declare Variable** step. Configure:
+   - **Variable Name**: `products`
+   - **Variable Type**: `xml`
+   - **Expression**: `catalog/<product>` (selects all `<product>` children)
 
-4. **Access attributes**: Use `.getAttributes()["attributeName"]` to retrieve attribute values from an XML element.
+   To retrieve all child elements regardless of name, use `catalog/*` as the expression.
 
-5. **Filter descendants**: Use descendant navigation expressions such as `catalog/**/<name>` to find matching elements at any level of the XML hierarchy.
+3. **Access text content**. Add a **Declare Variable** step. Configure:
+   - **Variable Name**: `productName`
+   - **Variable Type**: `string`
+   - **Expression**: `(firstProduct/<name>).data()` (extracts the text value of the `<name>` element)
+
+4. **Access attributes**. Add a **Declare Variable** step. Configure:
+   - **Variable Name**: `id`
+   - **Variable Type**: `string?`
+   - **Expression**: `(<xml:Element>firstProduct).getAttributes()["id"]` (retrieves the `id` attribute value)
+
+5. **Filter descendants**. Add a **Declare Variable** step. Configure:
+   - **Variable Name**: `names`
+   - **Variable Type**: `xml`
+   - **Expression**: `catalog/**/<name>` (finds all `<name>` elements at any depth in the XML hierarchy)
 
    <ThemedImage
        alt="Flow designer showing Declare Variable for XML navigation including child access, text content, attributes, and descendant filtering"
@@ -121,7 +159,7 @@ Access child elements, attributes, and text content using XML navigation express
        }}
    />
 
-6. **View and edit expressions**: Select a variable node to view or modify the XML navigation expression from the side panel.
+6. **View or edit expressions**. Click a variable node on the canvas to open the side panel, where you can view and modify the XML navigation expression.
 
    <ThemedImage
        alt="Side panel showing the products variable with catalog child access expression"
@@ -174,9 +212,21 @@ Handle namespaced XML using `xmlns` declarations in Ballerina.
 
 `xmlns` namespace declarations cannot be added through the Visual Designer. Open the Ballerina source file directly and add the `xmlns` bindings at the top of the function or module before using namespace-prefixed expressions in the flow.
 
-1. **Add namespace declarations in code**: Open the `.bal` file and declare the required namespaces (for example, `xmlns "http://example.com/orders" as ord;`).
+1. **Add namespace declarations in code**. Open the `.bal` file and declare the required namespaces at the top of the function. For example:
+   ```ballerina
+   xmlns "http://example.com/orders" as ord;
+   xmlns "http://example.com/common" as cmn;
+   ```
 
-2. **Navigate namespaced elements**: Add a **Declare Variable** and use the namespace prefix in the expression (for example, `nsOrder/<cmn:customer>`).
+2. **Construct namespaced XML**. Back in the flow designer, click **+** and select **Declare Variable**. Configure:
+   - **Variable Name**: `nsOrder`
+   - **Variable Type**: `xml`
+   - **Expression**: An XML backtick template using the declared namespace prefixes (for example, `` xml `<ord:order><cmn:customer>Acme Corp</cmn:customer></ord:order>` ``)
+
+3. **Navigate namespaced elements**. Add another **Declare Variable** step. Configure:
+   - **Variable Name**: `customer`
+   - **Variable Type**: `xml`
+   - **Expression**: `nsOrder/<cmn:customer>` (uses the namespace prefix to select the child element)
 
    <ThemedImage
        alt="Flow designer showing Declare Variable for namespaced XML construction and navigation"
@@ -208,16 +258,27 @@ public function main() {
 
 Use `foreach` loops or query expressions to process XML sequences in WSO2 Integrator. XML iteration is useful for reading, filtering, and transforming repeating XML elements such as lists of items, records, or orders.
 
-1. **Add a Foreach step**: Click **+** and select **Foreach** under **Control**. In the configuration panel, specify the XML collection to iterate over and the loop variable name.
+1. **Define the XML input**. Click **+** and select **Declare Variable**. Configure:
+   - **Variable Name**: `items`
+   - **Variable Type**: `xml`
+   - **Expression**: An XML backtick template containing the items to iterate over (see the **Ballerina Code** tab for the sample XML)
 
-   | Field | Description |
+2. **Add a Foreach step**. Click **+** and select **Foreach** under **Control**. Configure:
+
+   | Field | Value |
    |---|---|
-   | **Collection** | The XML sequence to iterate over (for example, `items/<item>`) |
-   | **Variable** | The loop variable bound to each XML element |
+   | **Collection** | `items/<item>` |
+   | **Variable Name** | `item` |
+   | **Variable Type** | `xml` |
 
-2. **Process XML elements inside the loop**: Add **Declare Variable** steps inside the loop body to extract values using XML navigation expressions such as `(item/<sku>).data()`.
+3. **Extract values inside the loop**. Inside the Foreach body, click **+** and select **Declare Variable** for each value to extract. For example:
+   - **Variable Name**: `sku`, **Variable Type**: `string`, **Expression**: `(item/<sku>).data()`
+   - **Variable Name**: `qty`, **Variable Type**: `string`, **Expression**: `(item/<qty>).data()`
 
-3. **Use query expressions for filtering**: Add a **Declare Variable** step with a query expression to filter or transform XML sequences based on conditions.
+4. **Use query expressions for filtering**. To filter or transform XML sequences based on conditions, add a **Declare Variable** step outside the loop. Configure:
+   - **Variable Name**: `highQty`
+   - **Variable Type**: `xml`
+   - **Expression**: A query expression that filters elements (for example, `from xml item in items/<item> let string qtyStr = (item/<qty>).data() let int qty = check int:fromString(qtyStr) where qty > 2 select item`)
 
    <ThemedImage
        alt="Flow designer showing a Foreach node iterating over XML items with variable extraction steps inside the loop body"
@@ -258,9 +319,14 @@ public function main() returns error? {
 
 Modify XML structures by updating child elements or attributes. XML mutation is useful when transforming payloads, enriching messages, or updating XML content dynamically during integration flows.
 
-1. **Add a Variable**: Create a **Declare Variable** with the type set to `xml:Element` and initialize it using an XML literal.
+1. **Define the XML element**. Click **+** and select **Declare Variable**. Configure:
+   - **Variable Name**: `doc`
+   - **Variable Type**: `xml:Element`
+   - **Expression**: `` xml `<order><status>pending</status></order>` ``
 
-2. **Mutate the XML element**: Click **+** and select **Call Function**. In the right-side panel, search for `setChildren` and select it from the `lang.xml` module. Provide `doc` as the target and the replacement XML literal as the argument.
+2. **Mutate the XML element**. Click **+** and select **Call Function**. In the right-side panel, search for `setChildren` and select it from the `lang.xml` module. Configure:
+   - **Target**: `doc`
+   - **Children** (argument): The replacement XML literal (for example, `` xml `<status>completed</status><updatedAt>2025-01-15</updatedAt>` ``)
 
    <ThemedImage
        alt="Right-side panel showing the setChildren function search result from the lang.xml module"
@@ -300,13 +366,45 @@ public function main() {
 
 Use the `data.xmldata` module to convert XML data into typed Ballerina records for type-safe access and easier manipulation. Converting XML into records simplifies validation, transformation, and field access within integration flows.
 
-1. **Define the target record types**: Navigate to **Types** in the sidebar and click **+** to create  type `PurchaseOrder`, `ShipTo` and `Item`, see [Types](../integration-artifacts/supportive-artifacts/types.md).
+1. **Define the target record types**. Navigate to **Types** in the sidebar and click **+**. Select **Create from scratch**, set **Kind** to **Record**, and create the following types:
+
+   **`PurchaseOrder`** — add these fields using the **+** button:
+
+   | Field | Type |
+   |---|---|
+   | `orderDate` | `string` |
+   | `shipTo` | `ShipTo` |
+   | `item` | `Item[]` |
+
+   **`ShipTo`** — add these fields:
+
+   | Field | Type |
+   |---|---|
+   | `name` | `string` |
+   | `street` | `string` |
+   | `city` | `string` |
+
+   **`Item`** — add these fields:
+
+   | Field | Type |
+   |---|---|
+   | `partNum` | `string` |
+   | `productName` | `string` |
+   | `quantity` | `int` |
+   | `price` | `decimal` |
+
+   For details on creating types, see [Types](../integration-artifacts/supportive-artifacts/types.md).
 
    :::info
    The `@xmldata:Attribute` annotation marks a record field as an XML attribute. This annotation cannot be added through the Visual Designer. After creating the `Item` type, open the generated `.bal` file and add `@xmldata:Attribute` manually above the `partNum` field definition.
    :::
 
-2. **Parse XML into the record type**: In the flow designer, click **+** and select **Call Function**. In the right-side panel, search for `parseAsType` and select it from the `data.xmldata` module.
+2. **Define the XML input**. Click **+** and select **Declare Variable**. Configure:
+   - **Variable Name**: `product`
+   - **Variable Type**: `xml`
+   - **Expression**: An XML backtick template containing the purchase order XML (see the **Ballerina Code** tab for the sample XML)
+
+3. **Parse XML into the record type**. Click **+** and select **Call Function**. In the right-side panel, search for `parseAsType` and select it from the `data.xmldata` module.
 
    <ThemedImage
        alt="right-side panel showing parseAsType search results with the data.xmldata module entry highlighted"
@@ -316,7 +414,10 @@ Use the `data.xmldata` module to convert XML data into typed Ballerina records f
        }}
    />
 
-   Provide the XML value `product` as the argument and set `PurchaseOrder` as the target record type.
+   Configure the function call:
+   - **XML Value** (argument): `product`
+   - **Result**: `orders`
+   - **T**: `PurchaseOrder`
 
    <ThemedImage
        alt="Flow designer showing the parseAsType function call step with PurchaseOrder as the result type"
@@ -373,9 +474,25 @@ public function main() returns error? {
 
 Convert Ballerina records into XML using the `data.xmldata` module. Record-to-XML conversion is useful when generating XML payloads for APIs, external systems, or XML-based integrations.
 
-1. **Define the record type**: Navigate to **Types** in the sidebar and click **+** to create a new type using xml, see [Types](../integration-artifacts/supportive-artifacts/types.md).
+1. **Define the record type**. Navigate to **Types** in the sidebar and click **+**. Select **Create from scratch**, set **Kind** to **Record**, and name it `Invoice`. Add the following fields using the **+** button:
 
-2. **Convert the record to XML**: In the flow designer, click **+** and select **Call Function**. In the right-side panel, search for `toXml` and select it from the `data.xmldata` module. Provide the `Invoice` record `inv` as the argument and set the result type to `xml`.
+   | Field | Type |
+   |---|---|
+   | `invoiceId` | `string` |
+   | `customer` | `string` |
+   | `total` | `decimal` |
+
+   For details on creating types, see [Types](../integration-artifacts/supportive-artifacts/types.md).
+
+2. **Create the record value**. Click **+** and select **Declare Variable**. Configure:
+   - **Variable Name**: `inv`
+   - **Variable Type**: `Invoice`
+   - **Expression**: `{invoiceId: "INV-2001", customer: "Globex Inc", total: 1500.00}`
+
+3. **Convert the record to XML**. Click **+** and select **Call Function**. In the right-side panel, search for `toXml` and select it from the `data.xmldata` module. Configure:
+   - **Value** (argument): `inv`
+   - **Result**: `invoiceXml`
+   - **Return Type**: `xml`
 
 <ThemedImage
     alt="right-side panel showing toXml search results with the data.xmldata module entry highlighted"
@@ -385,7 +502,7 @@ Convert Ballerina records into XML using the `data.xmldata` module. Record-to-XM
     }}
 />
 
-3. **Use the generated XML**: The resulting XML value can be returned from a service, sent to external systems, or further transformed within the integration flow.
+4. **Use the generated XML**. The resulting `invoiceXml` value can be returned from a service, sent to external systems, or further transformed within the integration flow.
 
 <ThemedImage
     alt="Flow designer showing the toXml function call step with xml as the result type"
@@ -423,11 +540,19 @@ public function main() returns error? {
 
 Convert XML data to JSON by first parsing the XML into a typed record using the `data.xmldata` module, then converting the record to JSON using the built-in `toJson()` method from `lang.value`. To convert JSON back to XML, use `xmldata:fromJson` from `data.xmldata`. These conversions are useful when integrating XML-based systems with JSON-based APIs and services.
 
-1. **Define the record types**: Navigate to **Types** in the sidebar and click **+** to create each type from scratch. Define the source record with fields matching your XML structure and the target record with fields required for the JSON output. For more information, see [Types](../integration-artifacts/supportive-artifacts/types.md).
+1. **Define the record types**. Navigate to **Types** in the sidebar and click **+**. Select **Create from scratch**, set **Kind** to **Record**, and create a record matching your XML structure. For example, create a `Customer` record with fields `name` (string) and `email` (string). For details on creating types, see [Types](../integration-artifacts/supportive-artifacts/types.md).
 
-2. **Parse XML into a record**: Follow the steps in [XML to record conversion](#xml-to-record-conversion) to parse the XML value into a typed record.
+2. **Define the XML input**. Click **+** and select **Declare Variable**. Configure:
+   - **Variable Name**: `customers`
+   - **Variable Type**: `xml`
+   - **Expression**: An XML backtick template containing the customer XML (see the **Ballerina Code** tab for the sample XML)
 
-3. **Convert the record to JSON**: Click **+** and select **Call Function**. In the right-side panel, search for `toJson` and select it from the `lang.value` module. Provide the parsed record as the argument. The return value is a `json` value.
+3. **Parse XML into a record**. Follow the steps in [XML to record conversion](#xml-to-record-conversion) to parse the XML value into a typed record using `parseAsType` from the `data.xmldata` module.
+
+4. **Convert the record to JSON**. Click **+** and select **Call Function**. In the right-side panel, search for `toJson` and select it from the `lang.value` module. Configure:
+   - **Value** (argument): `customer` (the parsed record)
+   - **Result**: `customerJson`
+   - **Return Type**: `json`
 
    <ThemedImage
        alt="Flow designer showing the XML parse, mapOrder, and toJson return steps in sequence"
@@ -437,7 +562,7 @@ Convert XML data to JSON by first parsing the XML into a typed record using the 
        }}
    />
 
-4. **Map fields visually**: Use the [Visual Data Mapper](../integration-artifacts/supportive-artifacts/data-mapper/data-mapper.md) to map or transform fields between record structures before converting the result into JSON.
+5. **(Optional) Map fields visually**. Use the [Visual Data Mapper](../integration-artifacts/supportive-artifacts/data-mapper/data-mapper.md) to map or transform fields between record structures before converting the result into JSON.
 
 ```ballerina
 import ballerina/data.xmldata;
