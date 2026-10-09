@@ -11,7 +11,11 @@ Distributed tracing follows a single request end to end as it passes through you
 
 WSO2 Integrator produces traces using OpenTelemetry. You choose the backend that receives and displays them.
 
-## Enable tracing in your integration
+## Enable tracing with Jaeger or Zipkin
+
+:::note Using OpenTelemetry?
+The OpenTelemetry extension is set up differently and uses its own sampler options. Follow the [OpenTelemetry](open-source/opentelemetry.md) guide instead.
+:::
 
 Tracing needs three things: observability included in the build, the extension for your tracing backend, and the tracing configuration.
 
@@ -48,7 +52,7 @@ tracingProvider = "jaeger"
 
 Each backend also takes its own connection settings (agent host and port, sampler, and buffering) under `[ballerinax.jaeger]` or `[ballerinax.zipkin]`. Those are covered on the backend's page.
 
-## Sampling
+## Sampling with Jaeger and Zipkin
 
 Sampling controls how many requests are traced. Both Jaeger and Zipkin support the same three strategies, set with `samplerType` and `samplerParam`:
 
