@@ -11,7 +11,11 @@ Distributed tracing follows a single request end to end as it passes through you
 
 WSO2 Integrator produces traces using OpenTelemetry. You choose the backend that receives and displays them.
 
-## Enable tracing in your integration
+## Enable tracing with Jaeger or Zipkin
+
+:::note Using OpenTelemetry?
+The OpenTelemetry extension is set up differently and uses its own sampler options. Follow the [OpenTelemetry](open-source/opentelemetry.md) guide instead.
+:::
 
 Tracing needs three things: observability included in the build, the extension for your tracing backend, and the tracing configuration.
 
@@ -48,7 +52,7 @@ tracingProvider = "jaeger"
 
 Each backend also takes its own connection settings (agent host and port, sampler, and buffering) under `[ballerinax.jaeger]` or `[ballerinax.zipkin]`. Those are covered on the backend's page.
 
-## Sampling
+## Sampling with Jaeger and Zipkin
 
 Sampling controls how many requests are traced. Both Jaeger and Zipkin support the same three strategies, set with `samplerType` and `samplerParam`:
 
@@ -66,6 +70,7 @@ Sampling every request is fine for development. In production, use `probabilisti
 |---------|----------|-------|
 | **Jaeger** | Production-grade distributed tracing | [Jaeger](open-source/jaeger.md) |
 | **Zipkin** | A lightweight tracing alternative | [Zipkin](open-source/zipkin.md) |
+| **OpenTelemetry** | Any OTLP backend, such as an OpenTelemetry Collector, with traces and metrics from one extension | [OpenTelemetry](open-source/opentelemetry.md) |
 
 You can also send traces to a managed platform: [Datadog](commercial/datadog.md) and [New Relic](commercial/new-relic.md) both accept traces, and [Moesif](commercial/moesif.md) supports traces alongside metrics and logs. For a complete stack that includes tracing, see the [Local Development Stack](recipes/local-development-stack.md) and [Kubernetes Production Stack](recipes/kubernetes-production-stack.md) recipes.
 
@@ -73,5 +78,6 @@ You can also send traces to a managed platform: [Datadog](commercial/datadog.md)
 
 - [Jaeger](open-source/jaeger.md) — Set up Jaeger and view traces
 - [Zipkin](open-source/zipkin.md) — Set up Zipkin and view traces
+- [OpenTelemetry](open-source/opentelemetry.md) — Export traces over OTLP to any compatible backend
 - [Metrics](metrics.md) — Collect and monitor metrics alongside traces
 - [Logging](logging.md) — Configure structured logging

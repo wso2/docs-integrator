@@ -235,6 +235,7 @@ service /orders on new http:Listener(9090) {
 
 - [Prometheus and Grafana](open-source/prometheus-grafana.md) — Scrape configuration, Kubernetes, and Grafana dashboards
 - [Distributed tracing](tracing.md) — Trace requests across services with Jaeger or Zipkin
+- [OpenTelemetry](open-source/opentelemetry.md) — Push metrics over OTLP to an OpenTelemetry Collector or other backend
 - [Logging](logging.md) — Configure structured logging
 - [Integration Control Plane](../icp/index.md) — Centralized monitoring dashboard
 - [Overview](observe.md) — Full observability architecture
