@@ -55,7 +55,7 @@ The data plane can be:
 
 - **WSO2-managed:** Provisioned and operated by WSO2 as part of WSO2 Integration Cloud.
 - **Private (cloud):** Running in your own AWS, Azure, GCP, OpenShift, or Kubernetes environment, but still managed through WSO2 Integration Cloud's control plane.
-- **Self-hosted:** Running entirely on your own infrastructure, managed end-to-end by you.
+- **Self-Hosted:** Running entirely on your own infrastructure, managed end-to-end by you.
 
 ### Observability plane
 
