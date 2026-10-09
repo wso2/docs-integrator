@@ -4,7 +4,7 @@ title: Actions
 
 # Actions
 
-The `ballerinax/aws.sqs` package exposes the following clients:
+The AWS SQS connector exposes the following clients:
 
 | Client | Purpose |
 |--------|---------|
@@ -22,9 +22,9 @@ Send, receive, and manage messages and queues in Amazon SQS.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `auth:AuthConfig` | Required | Authentication configuration: Any standard credential source supported by `aws.auth` package: `StaticAuthConfig`, `ProfileAuthConfig`, `AssumeRoleConfig`, `WebIdentityConfig`, `SsoAuthConfig`, `ProcessAuthConfig`, `DEFAULT_CREDENTIALS` |
-| `region` | `aws:Region\|string` | Required | AWS region where the SQS queue is located (e.g., `aws:US_EAST_1`). |
-| `endpoint` | `aws:EndpointConfig` | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. LocalStack, VPC interface endpoints). |
+| `auth` | <code>auth:AuthConfig</code> | Required | Authentication configuration: static credentials, AWS profile, STS assume-role, web identity (OIDC), IAM Identity Center (SSO), external credential process, or the default provider chain |
+| `region` | <code>aws:Region&#124;string</code> | Required | AWS region: an `aws:Region` enum member or a plain region string (e.g., `"us-east-1"`) for regions not yet in the enum |
+| `endpoint` | <code>aws:EndpointConfig</code> | Optional | Optional endpoint options: FIPS/dualstack variants, or a custom endpoint override (e.g. VPC interface endpoints) |
 
 ### Initializing the client
 

@@ -14,8 +14,7 @@ The AWS DynamoDB connector enables Ballerina programs to connect and interact wi
 - Batch writes that return any items DynamoDB leaves unprocessed under load in `UnprocessedItems`, for the caller to resubmit
 - On-demand backup creation and deletion for point-in-time recovery
 - Time-to-live (TTL) status retrieval and account provisioned-capacity quota inspection
-- Flexible credential configuration: static access keys, AWS profile files, STS assume-role, web identity (OIDC), IAM Identity Center (SSO), external credential process, or the default provider chain
-- FIPS, dualstack, and custom endpoint support (e.g., LocalStack, VPC interface endpoints)
+- Flexible authentication using any standard credential source supported by AWS
 
 ## Actions
 

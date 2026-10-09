@@ -2,7 +2,7 @@
 
 ## What you'll build
 
-Build a WSO2 Integrator automation that publishes a message to an AWS Simple Notification Service (SNS) topic using the `ballerinax/aws.sns` connector. The integration connects to SNS using AWS credentials stored as configurable variables, then publishes a message to a specified topic ARN.
+Build a WSO2 Integrator automation that publishes a message to an AWS Simple Notification Service (SNS) topic using the AWS SNS connector. The integration connects to SNS using AWS credentials stored as configurable variables, then publishes a message to a specified topic ARN.
 
 **Operations used:**
 - **Publish** : Publishes a message to an SNS topic ARN, phone number, or mobile endpoint
@@ -138,3 +138,11 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/aws.sns_connector_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/aws.sns_connector_sample)
+
+## More code examples
+
+The `ballerinax/aws.sns` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-aws.sns/tree/main/examples):
+
+1. [**Football scores**](https://github.com/ballerina-platform/module-ballerinax-aws.sns/tree/main/examples/football-scores) – Delivers live football scores to fans, using topics, subscriptions, and message filtering so that each fan receives only the scores of matches involving the player they follow.
+
+2. [**Weather alert service**](https://github.com/ballerina-platform/module-ballerinax-aws.sns/tree/main/examples/weather-alert) – Sends weather alerts for multiple cities, so that users can subscribe to a city and receive its alerts over email or SMS.

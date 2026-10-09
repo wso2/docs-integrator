@@ -2,7 +2,7 @@
 
 ## What you'll build
 
-This integration demonstrates how to connect to Amazon Web Services Simple Storage Service (S3) using the `ballerinax/aws.s3` connector in WSO2 Integrator. The workflow uses an Automation entry point to invoke the `createBucket` operation, which creates a new S3 bucket in the specified AWS region.
+This integration demonstrates how to connect to Amazon Web Services Simple Storage Service (S3) using the AWS S3 connector in WSO2 Integrator. The workflow uses an Automation entry point to invoke the `createBucket` operation, which creates a new S3 bucket in the specified AWS region.
 
 **Operations used:**
 - **createBucket** : creates a new Amazon S3 bucket in the specified AWS region using the provided bucket name
@@ -135,3 +135,11 @@ Try this sample in WSO2 Integration Platform.
 [![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/aws.s3_connector_sample)
 
 [View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/aws.s3_connector_sample)
+
+## More code examples
+
+The `ballerinax/aws.s3` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-aws.s3/tree/master/examples):
+
+1. [**S3 report archiver**](https://github.com/ballerina-platform/module-ballerinax-aws.s3/tree/master/examples/s3-report-archiver) – Implements an ETL-style workflow that reads CSV reports, transforms them, and archives the results to an S3 bucket for long-term storage.
+
+2. [**FTP to S3 sync**](https://github.com/ballerina-platform/module-ballerinax-aws.s3/tree/master/examples/ftp-to-s3-sync) – Syncs files from an FTP server to an S3 bucket and generates a summary report of skipped or failed transfers.

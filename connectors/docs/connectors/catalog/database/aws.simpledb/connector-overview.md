@@ -12,7 +12,7 @@ The AWS SimpleDB connector enables integration with Amazon SimpleDB, a highly av
 - Store, retrieve and delete item attributes
 - Query items across a domain using SQL-like `select` expressions
 - Support for consistent reads to ensure up-to-date query results
-- Flexible credential configuration: static keys, AWS profiles, STS assume-role, web identity (OIDC), IAM Identity Center (SSO), external credential process, or the default AWS credential provider chain
+- Flexible authentication using any standard credential source supported by AWS
 - Automatic refresh of expiring temporary credentials
 
 ## Actions

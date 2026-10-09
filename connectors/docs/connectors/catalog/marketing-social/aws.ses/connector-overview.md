@@ -15,8 +15,7 @@ The AWS SES connector enables integration with [Amazon Simple Email Service (Ama
 - Manage contact lists, contacts, and topics with subscription filtering and unsubscribe-link support
 - Create, update, retrieve, list, and delete email templates and custom verification email templates
 - Auto-paginating streams over all list operations so results beyond the first page are retrieved transparently
-- Flexible AWS credential support: static access keys, credential file profiles, STS assume-role, web identity (OIDC), IAM Identity Center (SSO), an external credential process, or the default provider chain
-- Automatic refresh of expiring temporary credentials with FIPS, dualstack, and custom endpoint support
+- Flexible authentication using any standard credential source supported by AWS
 
 ## Actions
 
