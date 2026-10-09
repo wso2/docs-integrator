@@ -24,9 +24,35 @@ Construct JSON directly using Ballerina types. The `json` type accepts null, boo
 <TabItem value="ui" label="Visual Designer" default>
 
 
-1. **Add a Variable**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `json` and enter a JSON value as the expression.
+1. **Add Variable steps for scalar values**. In the flow designer, click **+** and select **Statement** → **Declare Variable**. Add a variable for each scalar JSON value:
+   - Name: `name`, Type: `json`, Expression: `"Acme Corp"`
+   - Name: `count`, Type: `json`, Expression: `42`
+   - Name: `active`, Type: `json`, Expression: `true`
+   - Name: `empty`, Type: `json`, Expression: `()`
 
-2. **Build nested structures**: Add additional **Declare Variable** steps for nested JSON objects and arrays. Each variable appears as a separate **Declare Variable** step in the flow.
+2. **Add a Variable step for a JSON object**. Click **+** and select **Declare Variable**. Set the name to `customer`, the type to `json`, and enter the following as the expression:
+
+   ```json
+   {
+       "id": 1001,
+       "name": "Acme Corp",
+       "active": true,
+       "tags": ["enterprise", "priority"]
+   }
+   ```
+
+3. **Add a Variable step for a nested structure**. Click **+** and select **Declare Variable**. Set the name to `orderItem`, the type to `json`, and enter the following as the expression:
+
+   ```json
+   {
+       "orderId": "ORD-5001",
+       "customer": customer,
+       "items": [
+           {"sku": "WDG-01", "qty": 5, "price": 29.99},
+           {"sku": "GDG-02", "qty": 2, "price": 49.99}
+       ]
+   }
+   ```
 
    <ThemedImage
        alt="Flow designer showing Declare Variable steps for JSON value construction including nested objects and arrays"
@@ -36,7 +62,7 @@ Construct JSON directly using Ballerina types. The `json` type accepts null, boo
        }}
    />
 
-3. **Configure the expression**: Click a variable node to view and edit the JSON expression in the side panel.
+4. **Add a Function Call step to print the result**. Click **+** and select **Call Function**. Search for `println` and pass `orderItem.toJsonString()` as the argument.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -83,14 +109,28 @@ Access JSON fields with field access. Since `json` is dynamically shaped, most a
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. **Define the JSON input**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `json` and enter the JSON value as the expression. Name the variable `payload`. This variable is then referenced in all subsequent field access steps.
+1. **Add a Variable step for the JSON input**. In the flow designer, click **+** and select **Statement** → **Declare Variable**. Set the name to `payload`, the type to `json`, and enter the following as the expression:
 
-2. **Add Variable steps for field access**: Click **+** and select **Declare Variable**. Set the type to `json` and enter a field access expression on `payload`, such as `check payload.orderId`.
+   ```json
+   {
+       "orders": {
+           "id": "ORD-100",
+           "customer": "Globex Inc",
+           "items": [
+               {"sku": "A1", "qty": 3},
+               {"sku": "B2", "qty": 7}
+           ]
+       }
+   }
+   ```
 
-3. **Use optional access**: For keys that may not exist, use `?.` syntax in the expression (for example, `check payload?.notes`) to return `()` instead of an error.
+2. **Add a Variable step for field access**. Click **+** and select **Declare Variable**. Set the name to `orderId`, the type to `json`, and the expression to `check payload.orders.id`. This returns the value `"ORD-100"`.
 
-4. **Narrow to a specific type**: Set the variable type to `string`, `int`, or another concrete type and use `check` in the expression to perform type narrowing.
+3. **Add a Variable step for optional access**. Click **+** and select **Declare Variable**. Set the name to `notes`, the type to `json?`, and the expression to `check payload.orders?.notes`. The `?.` syntax returns `()` instead of an error when the key does not exist.
 
+4. **Add a Variable step for array element access**. Click **+** and select **Declare Variable**. Set the name to `items`, the type to `json[]`, and the expression to `check (check payload.orders.items).cloneWithType()`. Then add another variable named `item` of type `json` with the expression `items[0]`.
+
+5. **Narrow to a specific type**. Click **+** and select **Declare Variable**. Set the name to `customer`, the type to `string`, and the expression to `check payload.orders.customer`. Setting a concrete type (such as `string` or `int`) with `check` performs type narrowing at runtime.
 
    <ThemedImage
        alt="Flow designer showing Declare Variable steps for JSON field access, optional access, and type narrowing"
@@ -145,11 +185,20 @@ Use `fromJsonString()` when you need a quick untyped `json` value without defini
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. **Add a Declare Variable step for the raw string**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `string` and enter the JSON string as the expression. Name the variable `raw`.
+1. **Add a Variable step for the raw string**. In the flow designer, click **+** and select **Statement** → **Declare Variable**. Set the name to `raw`, the type to `string`, and enter the following as the expression:
 
-2. **Parse the string**: Click **+** and select **Call Function**. In the right-side panel, search for `fromJsonString` and select it. Pass `raw` as the argument and set the result type to `json`.
+   ```
+   string `{"name": "Widget", "price": 29.99, "inStock": true}`
+   ```
 
-3. **Extract typed values**: Add a **Declare Variable** step with a concrete type (for example, `string`) and use a field access expression such as `check parsed.name` to extract values from the parsed JSON.
+2. **Parse the string into a JSON value**. Click **+** and select **Call Function**. Search for `fromJsonString` and select it. Configure:
+   - **String Value***: `raw`
+   - **Result***: `parsed`
+   - **T***: `json`
+
+3. **Extract a typed value**. Click **+** and select **Declare Variable**. Set the name to `name`, the type to `string`, and the expression to `check parsed.name`. Setting the type to `string` with `check` performs type narrowing from `json` to `string`.
+
+4. **Add a Function Call step to print the result**. Click **+** and select **Call Function**. Search for `println` and pass `name` as the argument.
 
    <ThemedImage
        alt="Flow designer showing the fromJsonString function call step and variable extraction steps"
@@ -185,7 +234,16 @@ Use `jsondata:parseString()` when the JSON structure is known. Define a matching
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. **Define the target record type**: Navigate to **Types** in the sidebar and click **+** to add a new type. Define the `Product` record. For details on creating types, see [Types](../integration-artifacts/supportive-artifacts/types.md).
+1. **Define the target record type**. Navigate to **Types** in the sidebar and click **+** to add a new type. Select **Create from scratch**, set **Kind** to **Record**, and name it `Product`. Add fields using the **+** button:
+
+   | Field | Type |
+   |---|---|
+   | `name` | `string` |
+   | `price` | `decimal` |
+   | `inStock` | `boolean` |
+   | `category` | `string?` |
+
+   For details on creating types, see [Types](../integration-artifacts/supportive-artifacts/types.md).
 
    <ThemedImage
        alt="New Type panel showing the Product record fields defined from scratch"
@@ -195,9 +253,13 @@ Use `jsondata:parseString()` when the JSON structure is known. Define a matching
        }}
    />
 
-2. **Add a Declare Variable step for the JSON string**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `string` and enter the JSON string as the expression. Name the variable `jsonStr`.
+2. **Add a Variable step for the JSON string**. In the flow designer, click **+** and select **Statement** → **Declare Variable**. Set the name to `jsonStr`, the type to `string`, and enter the following as the expression:
 
-3. **Parse into the record type**: Click **+** and select **Call Function**. In the right-side panel, search for `parseString` and select it from the `data.jsondata` module.
+   ```
+   string `{"name": "Widget", "price": 29.99, "inStock": true, "category": "hardware"}`
+   ```
+
+3. **Parse into the record type**. Click **+** and select **Call Function**. Search for `parseString` and select it from the `data.jsondata` module.
 
    <ThemedImage
        alt="Right-side panel showing parseString search results with the data.jsondata module entry highlighted"
@@ -207,7 +269,12 @@ Use `jsondata:parseString()` when the JSON structure is known. Define a matching
        }}
    />
 
-   Pass `jsonStr` as the argument. The module is automatically imported into your file.
+   Configure the function call:
+   - **String***: `jsonStr`
+   - **Result***: `product`
+   - **T***: `Product`
+
+   The `data.jsondata` module is automatically imported into your file.
 
    <ThemedImage
        alt="Right-side panel showing the parseString function form with jsonStr as the argument and Product as the return type"
@@ -216,6 +283,8 @@ Use `jsondata:parseString()` when the JSON structure is known. Define a matching
            dark: useBaseUrl('/img/develop/transform/json/json-parsestring-form.png'),
        }}
    />
+
+4. **Add Function Call steps to print the results**. Click **+** and select **Call Function**. Search for `println` and pass `product.name` as the argument. Add a second `println` step and pass `product.price`.
 
    <ThemedImage
        alt="Flow designer showing the parseString function call step with Product as the result type"
@@ -266,11 +335,23 @@ Use `jsondata:parseAsType()` when you already have a `json` value and want to co
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. **Define the record type**: Navigate to **Types** in the sidebar and click **+** to add a new type. Define the record with the fields matching your JSON structure. For details on creating types, see [Types](../integration-artifacts/supportive-artifacts/types.md).
+1. **Define the record type**. Navigate to **Types** in the sidebar and click **+** to add a new type. Select **Create from scratch**, set **Kind** to **Record**, and name it `Product`. Add fields using the **+** button:
 
-2. **Assign the json value**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `json` and enter the JSON value as the expression. Name the variable `jsonInput`.
+   | Field | Type |
+   |---|---|
+   | `name` | `string` |
+   | `price` | `decimal` |
+   | `inStock` | `boolean` |
 
-3. **Convert to the record type**: Click **+** and select **Call Function**. In the right-side panel, search for `parseAsType` and select it from the `data.jsondata` module. Pass `jsonInput` as the argument and set the result type to your defined record.
+   For details on creating types, see [Types](../integration-artifacts/supportive-artifacts/types.md).
+
+2. **Add a Variable step for the JSON value**. In the flow designer, click **+** and select **Statement** → **Declare Variable**. Set the name to `jsonInput`, the type to `json`, and enter the following as the expression:
+
+   ```json
+   {"name": "Widget", "price": 29.99, "inStock": true}
+   ```
+
+3. **Convert to the record type**. Click **+** and select **Call Function**. Search for `parseAsType` and select it from the `data.jsondata` module.
 
    <ThemedImage
        alt="right-side panel showing parseAsType search results with the data.jsondata module entry highlighted"
@@ -279,6 +360,13 @@ Use `jsondata:parseAsType()` when you already have a `json` value and want to co
            dark: useBaseUrl('/img/develop/transform/json/json-parseastype-search.png'),
        }}
    />
+
+   Configure the function call:
+   - **Json Value***: `jsonInput`
+   - **Result***: `product`
+   - **T***: `Product`
+
+4. **Add Function Call steps to print the results**. Click **+** and select **Call Function**. Search for `println` and pass `product.name` as the argument. Add a second `println` step and pass `product.price`.
 
    <ThemedImage
        alt="Flow designer showing the parseAsType function call step with jsonInput as the argument and Product as the result type"
@@ -320,11 +408,28 @@ Use `jsondata:parseString()` to parse a JSON array string directly into a typed 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. **Define the record type**: Navigate to **Types** in the sidebar and click **+** to add a new type. Define the `OrderItem` record from scratch with the following fields: `sku` (`string`), `quantity` (`int`), and `unitPrice` (`decimal`). For details on creating types, see [Types](../integration-artifacts/supportive-artifacts/types.md).
+1. **Define the record type**. Navigate to **Types** in the sidebar and click **+** to add a new type. Select **Create from scratch**, set **Kind** to **Record**, and name it `OrderItem`. Add fields using the **+** button:
 
-2. **Add a Variable step for the JSON string**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `string` and enter the JSON array string as the expression. Name the variable `itemsJson`.
+   | Field | Type |
+   |---|---|
+   | `sku` | `string` |
+   | `quantity` | `int` |
+   | `unitPrice` | `decimal` |
 
-3. **Parse the array**: Click **+** and select **Call Function**. In the right-side panel, search for `parseString` and select it from the `data.jsondata` module. Pass `itemsJson` as the argument and set the result type to `OrderItem[]`.
+   For details on creating types, see [Types](../integration-artifacts/supportive-artifacts/types.md).
+
+2. **Add a Variable step for the JSON array string**. In the flow designer, click **+** and select **Statement** → **Declare Variable**. Set the name to `itemsJson`, the type to `string`, and enter the following as the expression:
+
+   ```
+   string `[{"sku": "A1", "quantity": 3, "unitPrice": 10.00}, {"sku": "B2", "quantity": 1, "unitPrice": 25.50}]`
+   ```
+
+3. **Parse the array**. Click **+** and select **Call Function**. Search for `parseString` and select it from the `data.jsondata` module. Configure:
+   - **String***: `itemsJson`
+   - **Result***: `items`
+   - **T***: `OrderItem[]`
+
+4. **Add a Function Call step to print the result**. Click **+** and select **Call Function**. Search for `println` and pass `items` as the argument.
 
    <ThemedImage
        alt="Flow designer showing the jsondata parseString function call step for parsing a JSON array into typed records"
@@ -370,9 +475,16 @@ Combine multiple JSON objects using the `mergeJson` function.
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. **Add Variable steps**: In the flow designer, click **+** and select **Declare Variable**. Set the type to `json` and enter the JSON value as the expression. Add a second **Declare Variable** step for the merge.
+1. **Add a Variable step for the first JSON object**. In the flow designer, click **+** and select **Statement** → **Declare Variable**. Set the name to `order1`, the type to `json`, and enter `{"sku": "A1", "quantity": "3"}` as the expression.
 
-2. **Merge the objects**: Click **+** and select **Call Function**. In the right-side panel, search for `mergeJson` and select it from the `lang.value` module. Pass two `json` values as arguments.
+2. **Add a Variable step for the second JSON object**. Click **+** and select **Declare Variable**. Set the name to `order2`, the type to `json`, and enter `{"address": "Sri Lanka", "status": "pending"}` as the expression.
+
+3. **Merge the objects**. Click **+** and select **Call Function**. Search for `mergeJson` and select it from the `lang.value` module (this adds the `ballerina/lang.value` import). Configure:
+   - **Json1***: `order1`
+   - **Json2***: `order2`
+   - **Result***: `orders`
+
+4. **Add a Function Call step to print the result**. Click **+** and select **Call Function**. Search for `println` and pass `orders` as the argument.
 
    <ThemedImage
        alt="Flow designer showing two Declare Variable steps for order1 and order2 followed by a mergeJson function call step"
@@ -429,9 +541,11 @@ Use optional types (?) to represent fields that may be missing or contain null v
 
 <TabItem value="ui" label="Visual Designer" default>
 
-1. **Use optional access**: Add a **Declare Variable** step with the type `json?` and use optional access syntax `check payload?.description` as the expression. This returns `()` for null or missing fields.
+1. **Add a Variable step for the JSON payload**. In the flow designer, click **+** and select **Statement** → **Declare Variable**. Set the name to `payload`, the type to `json`, and enter `{"name": "Test", "description": null}` as the expression.
 
-2. **Apply the Elvis operator**: Add another **Declare Variable** step with a concrete type (for example, `string`) and use a conditional expression such as `desc is string ? desc : "No description provided"` to provide a default value.
+2. **Add a Variable step for optional access**. Click **+** and select **Declare Variable**. Set the name to `desc`, the type to `json?`, and the expression to `check payload?.description`. The `?.` syntax returns `()` for null or missing fields instead of an error.
+
+3. **Add a Variable step with the Elvis operator**. Click **+** and select **Declare Variable**. Set the name to `description`, the type to `string`, and the expression to `desc is string ? desc : "No description provided"`. This provides a default value when the field is null or absent.
 
    <ThemedImage
        alt="Flow designer showing Declare Variable steps for optional access and Elvis operator for null handling"
@@ -466,6 +580,32 @@ For large JSON payloads, use `jsondata:parseStream()` to process JSON data direc
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
+
+1. **Define the record type**. Navigate to **Types** in the sidebar and click **+** to add a new type. Select **Create from scratch**, set **Kind** to **Record**, and name it `Product`. Add fields using the **+** button:
+
+   | Field | Type |
+   |---|---|
+   | `id` | `string` |
+   | `name` | `string` |
+   | `price` | `decimal` |
+
+   For details on creating types, see [Types](../integration-artifacts/supportive-artifacts/types.md).
+
+2. **Open the file as a byte stream**. In the flow designer, click **+** and select **Call Function**. Search for `fileReadBlocksAsStream` under **io** and select it (this adds the `ballerina/io` import). Configure:
+   - **Path***: `"products.json"`
+   - **Result***: `byteStream`
+
+3. **Parse the stream into typed records**. Click **+** and select **Call Function**. Search for `parseStream` and select it from the `data.jsondata` module (this adds the `ballerina/data.jsondata` import). Configure:
+   - **Stream***: `byteStream`
+   - **Result***: `products`
+   - **T***: `Product[]`
+
+4. **Add a Foreach step to iterate**. Click **+** and select **Foreach** under **Control**. Set:
+   - **Collection**: `products`
+   - **Variable Name***: `product`
+   - **Variable Type***: `Product`
+
+5. **Add a Function Call step inside the loop**. Inside the Foreach body, click **+** and select **Call Function**. Search for `println` and pass `product` as the argument.
 
    <ThemedImage
        alt="Flow designer showing a parseStream function call step reading a byte stream into a typed Product array"
