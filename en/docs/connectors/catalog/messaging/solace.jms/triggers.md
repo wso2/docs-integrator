@@ -94,10 +94,10 @@ The annotation accepts either a `QueueServiceConfiguration` or a `TopicServiceCo
 
 | Function | Signature | Description |
 |----------|-----------|-------------|
-| `onMessage` | `remote function onMessage(record {\|*jms:Message; T payload;\|} message, jms:Caller? caller) returns jms:Error?` | Invoked when a message is received on the subscribed queue or topic. Narrow `T` to a specific type to trigger data binding. |
+| `onMessage` | `remote function onMessage(record {\|*jms:Message; T payload;\|} message, jms:Caller caller) returns jms:Error?` | Invoked when a message is received on the subscribed queue or topic. Narrow `T` to a specific type to trigger data binding. |
 | `onError` | `remote function onError(jms:Error err) returns jms:Error?` | Optional. Invoked when an error occurs during message receipt or data binding. |
 
-> **Note:** The `caller` parameter of `onMessage` is optional. Omit it when the service relies on `AUTO_ACKNOWLEDGE` or `DUPS_OK_ACKNOWLEDGE`; include a `jms:Caller` parameter to acknowledge a message or control a session-transacted service manually.
+> **Note:** The `caller` parameter of `onMessage` can be omitted entirely. Omit it when the service relies on `AUTO_ACKNOWLEDGE` or `DUPS_OK_ACKNOWLEDGE`; include it to acknowledge a message or control a session-transacted service manually. When declared, it must be of type `jms:Caller`.
 
 ### Full usage example
 
@@ -155,8 +155,8 @@ The `jms:Caller` is injected into `onMessage` when the callback declares it as a
 | Function | Signature | Description |
 |----------|-----------|-------------|
 | `ack` | `remote function ack(jms:Message message) returns jms:Error?` | Acknowledges a message. Required when `ackMode` is `CLIENT_ACKNOWLEDGE`. |
-| `commit` | `remote function commit() returns jms:Error?` | Commits the listener's session-transacted service. Requires `ackMode: SESSION_TRANSACTED` on the service configuration. |
-| `rollback` | `remote function rollback() returns jms:Error?` | Rolls back the session-transacted service; every message received since the last commit or rollback is redelivered. |
+| `commit` | `remote function 'commit() returns jms:Error?` | Commits the listener's session-transacted service. Requires `ackMode: SESSION_TRANSACTED` on the service configuration. |
+| `rollback` | `remote function 'rollback() returns jms:Error?` | Rolls back the session-transacted service; every message received since the last commit or rollback is redelivered. |
 
 ---
 
@@ -174,7 +174,7 @@ The `jms:Caller` is injected into `onMessage` when the callback declares it as a
 | `correlationId` | `string?` | Correlation identifier for request/reply patterns. |
 | `replyTo` | `Destination?` | Destination the receiver should reply to. |
 | `senderId` | `string?` | Identifier of the sending client. A Solace extension with no standard JMS equivalent. |
-| `properties` | `map<anydata>?` | User-defined message properties. |
+| `properties` | `map<Property>?` | User-defined message properties. `Property` is `boolean\|int\|byte\|float\|string`, so only JMS scalar property values are allowed (no `byte[]` or nested maps). |
 | `messageId` | `string?` | Receive-only. Broker-assigned message identifier. |
 | `timestamp` | `int?` | Receive-only. Broker-side send timestamp in milliseconds. |
 | `redelivered` | `boolean?` | Receive-only. Whether this delivery is a redelivery. |
@@ -221,7 +221,7 @@ public type Destination Topic|Queue;
 | `keyStore` | `KeyStore` | `()` | Keystore used for mutual TLS. |
 | `trustedCommonNames` | `string[]` | `()` | Up to 16 common names accepted in the broker's certificate. |
 | `excludedProtocols` | `Protocol[]` | `[]` | TLS protocol versions to exclude. |
-| `cipherSuites` | `string[]` | `()` | Allowed cipher suites. |
+| `cipherSuites` | `SslCipherSuite[]` | `()` | Allowed cipher suites. Each entry must be an `SslCipherSuite` value, for example `ECDHE_RSA_AES256_CBC_SHA384`. |
 | `validation` | `record {\|boolean enabled = true; boolean validateDate = true; boolean validateHostname = true;\|}` | all `true` | Certificate validation controls. |
 
 `TrustStore` fields: `location: string`, `password: string`, `format: JKS|PKCS12 = JKS`. `KeyStore` adds `keyPassword?: string` and `keyAlias?: string`.
