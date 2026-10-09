@@ -2482,6 +2482,7 @@ const sidebars: SidebarsConfig = {
             'guides/howtoguides/sap-b1-low-stock-purchase-automation',
             'guides/howtoguides/s3-events-via-sqs-listener',
             'guides/howtoguides/azure-files-change-tracker',
+            'guides/howtoguides/sf-ec-leave-to-google-calendar-sync',
           ],
         },
         // Migration Guides
