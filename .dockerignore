@@ -1,0 +1,15 @@
+.git
+.github
+node_modules
+en/node_modules
+en/build
+en/.docusaurus
+en/.cache-loader
+.idea
+.vscode
+.DS_Store
+**/.DS_Store
+.claude
+.codex
+.venv
+.vercel
