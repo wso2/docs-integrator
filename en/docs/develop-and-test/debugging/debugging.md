@@ -1,6 +1,6 @@
 ---
 sidebar_position: 0
-sidebar_label: Debug Your Intgeration
+sidebar_label: Debug Your Integration
 title: Debug Your Integration
 description: Set breakpoints, step through code, and inspect program state in a WSO2 Integrator debug session, including test and remote debugging.
 keywords: [wso2 integrator, editor debugging, breakpoints, debug session, remote debugging, test debugging, stepping, watch panel, debug console, expression evaluation]
@@ -16,11 +16,11 @@ import TabItem from '@theme/TabItem';
 
 Editor debugging lets you pause an integration mid-run and inspect the values flowing through it. This page covers everything from the everyday quick start (set a breakpoint and launch a debug session) through the full set of features available once a session is running: stepping, inspection panels, advanced breakpoints, and test or remote debugging.
 
-## Before you start
-
+:::info Prerequisites
 - Open the integration project in WSO2 Integrator.
 - Confirm the integration has an executable entry point, such as a service or an automation.
 - Open the **Problems** panel at the bottom of the editor and make sure the workspace is free of compile errors.
+:::
 
 <ThemedImage
     alt="Problems panel showing a clean workspace"
@@ -85,7 +85,7 @@ A conditional breakpoint pauses only when a Ballerina expression evaluates to `t
 3. Enter a condition, for example `order.total > 1000` or `customer.tier == "premium"`.
 
 <ThemedImage
-    alt="Editing a breakpoint to add a hit condition"
+    alt="Editing a breakpoint to add an expression condition"
     sources={{
         light: useBaseUrl('/img/develop/troubleshooting/debugging-features/expression.png'),
         dark: useBaseUrl('/img/develop/troubleshooting/debugging-features/expression.png'),
@@ -127,7 +127,7 @@ Execution pauses at the first breakpoint it hits. Output streams to the **Debug 
 Once execution is paused, the debug toolbar appears at the top of the editor. Use it to move through the integration one step at a time.
 
 <ThemedImage
-    alt="Debug toolbar with continue, pause, step over, step into, step out, restart, and stop controls"
+    alt="Debug toolbar with continue, step over, step into, step out, restart, and stop controls"
     sources={{
         light: useBaseUrl('/img/develop/troubleshooting/debugging-features/debug-toolbar.png'),
         dark: useBaseUrl('/img/develop/troubleshooting/debugging-features/debug-toolbar.png'),
@@ -137,7 +137,7 @@ Once execution is paused, the debug toolbar appears at the top of the editor. Us
 | Action | Shortcut | What it does |
 |--------|----------|--------------|
 | Continue | F5 | Resume execution until the next breakpoint. |
-| Pause | Shift+F5 | Suspend a running program at its current line. |
+| Pause | F6 | Suspend a running program at its current line. |
 | Step Over | F10 | Run the current line and pause on the next one, without entering function calls. |
 | Step Into | F11 | Enter the function called on the current line. |
 | Step Out | Shift+F11 | Run the rest of the current function and pause when it returns. |
@@ -177,7 +177,7 @@ Use the **Watch** panel to track specific expressions across breakpoints. Add an
 - `response.statusCode`. Check the current HTTP status.
 
 <ThemedImage
-    alt="Watch panel evaluating expressions during a paused session"
+    alt="Watch panel with an input field for adding an expression"
     sources={{
         light: useBaseUrl('/img/develop/troubleshooting/debugging-features/watch-panel.png'),
         dark: useBaseUrl('/img/develop/troubleshooting/debugging-features/watch-panel.png'),
@@ -243,11 +243,41 @@ bal run --debug <port> <jar>      # executable JAR
 bal test --debug <port> <path>    # tests
 ```
 
-Then add a **Ballerina Remote** configuration to `launch.json` with the `debuggeeHost` and `debuggeePort` matching the running process, and click **Start Debugging**. The same breakpoints, stepping, and inspection features work against the remote process.
+Then attach the editor to the running process:
+
+1. Open the **Run and Debug** view from the [activity bar](../../editor/editor-window.md#activity-bar).
+2. Select **Ballerina Remote** from the configuration dropdown.
+3. Click **Start Debugging**.
+
+<ThemedImage
+    alt="Run and Debug configuration dropdown with Ballerina Remote selected"
+    sources={{
+        light: useBaseUrl('/img/develop/troubleshooting/editor-debugging/remote-debug-config.png'),
+        dark: useBaseUrl('/img/develop/troubleshooting/editor-debugging/remote-debug-config.png'),
+    }}
+/>
+
+The same breakpoints, stepping, and inspection features work against the remote process.
+
+The default **Ballerina Remote** configuration attaches to `127.0.0.1` on port `5005`. To attach to another host or port, edit `debuggeeHost` and `debuggeePort` in `.vscode/launch.json` to match the host of the running process and the port you passed to `--debug`. If **Ballerina Remote** is missing from the dropdown, add it to `.vscode/launch.json`:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Ballerina Remote",
+            "type": "ballerina",
+            "request": "attach",
+            "debuggeeHost": "127.0.0.1",
+            "debuggeePort": "5005"
+        }
+    ]
+}
+```
 
 ## What's Next
 
-- [Logging](../troubleshooting/logging.md) - add a persistent record instead of a live debug session.
-- [Errors and stack traces](../troubleshooting/errors-and-stack-traces.md) - read the error output when you cannot attach a debugger.
-- [Developer Tools](../developer-tools/developer-tools.md) - quick-start setup for a debug session.
-- [Async API Tool](../developer-tools/integration-tools/asyncapi-tool.md) - quick-start setup for a debug session.
+- [Logging](../troubleshooting/logging.md) — add a persistent record instead of a live debug session.
+- [Errors and stack traces](../troubleshooting/errors-and-stack-traces.md) — read the error output when you cannot attach a debugger.
+- [Test Your Integration](../test/test.md) — write tests that catch issues before you need to debug them.
