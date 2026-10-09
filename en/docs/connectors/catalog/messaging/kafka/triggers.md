@@ -12,7 +12,7 @@ Three components work together:
 | Component | Role |
 |-----------|------|
 | `kafka:Listener` | Continuously polls Kafka topics at a configurable interval and dispatches records to attached services. |
-| `kafka:Service` | Defines the `onConsumerRecord` callback invoked for each batch of consumed records. |
+| `kafka:Service` | Defines the `onConsumerRecord` callback invoked for each batch of consumed records, and an optional `onError` callback for polling and data-binding errors. |
 | `kafka:Caller` | Provided in the callback to enable manual offset commits and seeking within the service handler. |
 
 For action-based record operations, see the [Action Reference](actions.md).
@@ -36,7 +36,7 @@ The listener supports the following connection strategies:
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `groupId` | `string?` | `()` | Consumer group identifier for coordinated consumption. |
-| `topics` | `string|string[]?` | `()` | Topic(s) to subscribe to. |
+| `topics` | `string\|string[]?` | `()` | Topic(s) to subscribe to. |
 | `offsetReset` | `OffsetResetMethod?` | `()` | Strategy when no initial offset exists (`"earliest"`, `"latest"`, `"none"`). |
 | `pollingInterval` | `decimal?` | `()` | Interval in seconds between consecutive polls. |
 | `pollingTimeout` | `decimal?` | `()` | Timeout in seconds for each poll call. |
@@ -99,6 +99,7 @@ A `kafka:Service` is a Ballerina service attached to a `kafka:Listener`. It impl
 | `onConsumerRecord` | `remote function onConsumerRecord(kafka:Caller caller, kafka:BytesConsumerRecord[] records) returns error?` | Standard form: caller first, records second. |
 | `onConsumerRecord` | `remote function onConsumerRecord(kafka:BytesConsumerRecord[] records, kafka:Caller caller) returns error?` | Parameter order can be reversed: records first, caller second. |
 | `onConsumerRecord` | `remote function onConsumerRecord(kafka:BytesConsumerRecord[] records) returns error?` | `kafka:Caller` is optional. Omit it when manual offset management is not needed. |
+| `onError` | `remote function onError(kafka:Error err, kafka:Caller caller) returns error?` | Optional. Invoked when an error occurs while polling records or binding them to the declared type. The `kafka:Caller` parameter may be omitted. |
 
 :::note
 The records array type can be replaced with any typed Ballerina record (`T[]`) for automatic payload deserialization. The `readonly` modifier can also be applied to the records parameter (e.g., `readonly & T[] records`).
@@ -152,11 +153,11 @@ Set `autoCommit: false` in the listener configuration when using manual offset c
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | `byte[]?` | Optional message key as a byte array. |
+| `key` | `anydata?` | Optional message key. Inherited from `AnydataConsumerRecord`; only `value` and `headers` are narrowed to bytes. |
 | `value` | `byte[]` | Message payload as a byte array. |
 | `timestamp` | `int` | Record timestamp in epoch milliseconds. |
 | `offset` | `PartitionOffset` | The partition and offset of this record. |
-| `headers` | `map&lt;byte[]|byte[][]&gt;` | Record headers as key-value pairs. |
+| `headers` | `map<byte[]\|byte[][]>` | Record headers as key-value pairs. |
 
 ### `AnydataConsumerRecord`
 
@@ -166,7 +167,7 @@ Set `autoCommit: false` in the listener configuration when using manual offset c
 | `value` | `anydata` | Message payload. |
 | `timestamp` | `int` | Record timestamp in epoch milliseconds. |
 | `offset` | `PartitionOffset` | The partition and offset of this record. |
-| `headers` | `map&lt;byte[]|byte[][]|string|string[]&gt;` | Record headers as key-value pairs. |
+| `headers` | `map<byte[]\|byte[][]\|string\|string[]>` | Record headers as key-value pairs. |
 
 ### `TopicPartition`
 

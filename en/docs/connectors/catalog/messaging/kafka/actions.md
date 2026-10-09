@@ -35,10 +35,14 @@ Publishes messages to Kafka topics with configurable serialization, compression,
 | `linger` | `decimal?` | `()` | Time in seconds to wait for additional messages before sending a batch. |
 | `requestTimeout` | `decimal?` | `()` | Time in seconds to wait for a response from the broker. |
 | `schemaRegistryUrl` | `string?` | `()` | URL of the Confluent Schema Registry for Avro serialization. |
+| `schemaRegistryConfig` | `map<anydata>?` | `()` | Confluent Schema Registry client configuration, using the `confluent.cregistry` `ConnectionConfig` fields (`baseUrl`, `originals`, `headers`, `identityMapCapacity`). Used when `keySerializerType` or `valueSerializerType` is `SER_AVRO`. |
+| `keySchema` | `string?` | `()` | Avro schema used to serialize message keys when `keySerializerType` is `SER_AVRO`. |
+| `valueSchema` | `string?` | `()` | Avro schema used to serialize message values when `valueSerializerType` is `SER_AVRO`. |
+| `avroSchema` | `string?` | `()` | **Deprecated.** Use `keySchema` and `valueSchema` instead. |
 | `secureSocket` | `SecureSocket?` | `()` | SSL/TLS configuration for encrypted connections. |
 | `auth` | `AuthenticationConfiguration?` | `()` | SASL authentication configuration. |
 | `securityProtocol` | `SecurityProtocol` | `PROTOCOL_PLAINTEXT` | Security protocol (`"PLAINTEXT"`, `"SASL_PLAINTEXT"`, `"SASL_SSL"`, `"SSL"`). |
-| `additionalProperties` | `map&lt;string&gt;?` | `()` | Additional Kafka producer properties not covered by named fields. |
+| `additionalProperties` | `map<string>?` | `()` | Additional Kafka producer properties not covered by named fields. |
 
 ### Initializing the client
 
@@ -67,7 +71,7 @@ Parameters:
 |------|------|----------|-------------|
 | `producerRecord` | `AnydataProducerRecord` | Yes | The record containing the topic, key, value, and optional headers. |
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -92,7 +96,7 @@ Parameters:
 |------|------|----------|-------------|
 | `producerRecord` | `AnydataProducerRecord` | Yes | The record containing the topic, key, value, and optional headers. |
 
-Returns: `kafka:RecordMetadata|error`
+Returns: `kafka:RecordMetadata|kafka:Error`
 
 Sample code:
 
@@ -125,7 +129,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -148,7 +152,7 @@ Parameters:
 |------|------|----------|-------------|
 | `topic` | `string` | Yes | The Kafka topic name. |
 
-Returns: `kafka:TopicPartition[]|error`
+Returns: `kafka:TopicPartition[]|kafka:Error`
 
 Sample code:
 
@@ -176,7 +180,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -197,7 +201,7 @@ Subscribes to Kafka topics and polls for messages with manual offset management.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `groupId` | `string?` | `()` | Consumer group identifier for coordinated consumption. |
-| `topics` | `string|string[]?` | `()` | Topic(s) to subscribe to on initialization. |
+| `topics` | `string\|string[]?` | `()` | Topic(s) to subscribe to on initialization. |
 | `offsetReset` | `OffsetResetMethod?` | `()` | Strategy when no initial offset exists (`"earliest"`, `"latest"`, `"none"`). |
 | `keyDeserializerType` | `DeserializerType` | `DES_BYTE_ARRAY` | Deserializer for message keys. |
 | `valueDeserializerType` | `DeserializerType` | `DES_BYTE_ARRAY` | Deserializer for message values. |
@@ -208,12 +212,13 @@ Subscribes to Kafka topics and polls for messages with manual offset management.
 | `maxPollRecords` | `int?` | `()` | Maximum number of records returned per poll call. |
 | `isolationLevel` | `IsolationLevel?` | `()` | Controls how transactional messages are read (`"read_committed"` or `"read_uncommitted"`). |
 | `schemaRegistryUrl` | `string?` | `()` | URL of the Confluent Schema Registry for Avro deserialization. |
+| `schemaRegistryConfig` | `map<anydata>?` | `()` | Confluent Schema Registry client configuration, using the `confluent.cregistry` `ConnectionConfig` fields (`baseUrl`, `originals`, `headers`, `identityMapCapacity`). Used when `keyDeserializerType` or `valueDeserializerType` is `DES_AVRO`. |
 | `pollingTimeout` | `decimal?` | `()` | Timeout in seconds for each poll call. |
 | `pollingInterval` | `decimal?` | `()` | Interval in seconds between consecutive polls (used with Listener). |
 | `secureSocket` | `SecureSocket?` | `()` | SSL/TLS configuration for encrypted connections. |
 | `auth` | `AuthenticationConfiguration?` | `()` | SASL authentication configuration. |
 | `securityProtocol` | `SecurityProtocol` | `PROTOCOL_PLAINTEXT` | Security protocol (`"PLAINTEXT"`, `"SASL_PLAINTEXT"`, `"SASL_SSL"`, `"SSL"`). |
-| `additionalProperties` | `map&lt;string&gt;?` | `()` | Additional Kafka consumer properties not covered by named fields. |
+| `additionalProperties` | `map<string>?` | `()` | Additional Kafka consumer properties not covered by named fields. |
 | `validation` | `boolean` | `true` | Enable constraint validation on deserialized records. |
 | `decoupleProcessing` | `boolean` | `false` | Decouple record processing from polling for improved throughput. |
 | `autoSeekOnValidationFailure` | `boolean` | `true` | Automatically seek past records that fail data-binding or constraint validation. Set to `false` to stop and surface the error instead. |
@@ -243,9 +248,9 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `topics` | `string|string[]` | Yes | Topic name(s) to subscribe to. |
+| `topics` | `string\|string[]` | Yes | Topic name(s) to subscribe to. |
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 :::note
 `groupId` must be set in the consumer configuration before calling `subscribe()`. Calling this method without a `groupId` causes a **panic**, not a returned error, and cannot be caught with `check`.
@@ -270,7 +275,7 @@ Parameters:
 |------|------|----------|-------------|
 | `regex` | `string` | Yes | Regular expression pattern for topic names. |
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -290,7 +295,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -311,7 +316,7 @@ Parameters:
 |------|------|----------|-------------|
 | `partitions` | `TopicPartition[]` | Yes | Array of topic-partition pairs to assign. |
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -333,9 +338,9 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `timeout` | `decimal` | Yes | Maximum time in seconds to block waiting for records. |
-| `T` | `typedesc&lt;AnydataConsumerRecord[]&gt;` | No | Expected consumer record array type for deserialization. |
+| `T` | `typedesc<AnydataConsumerRecord[]>` | No | Expected consumer record array type for deserialization. |
 
-Returns: `T|error`
+Returns: `T|kafka:Error`
 
 Sample code:
 
@@ -364,9 +369,9 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `timeout` | `decimal` | Yes | Maximum time in seconds to block waiting for records. |
-| `T` | `typedesc&lt;anydata[]&gt;` | No | Expected payload array type for deserialization. |
+| `T` | `typedesc<anydata[]>` | No | Expected payload array type for deserialization. |
 
-Returns: `T|error`
+Returns: `T|kafka:Error`
 
 Sample code:
 
@@ -394,7 +399,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -416,7 +421,7 @@ Parameters:
 | `offsets` | `PartitionOffset[]` | Yes | Array of partition-offset pairs to commit. |
 | `duration` | `decimal` | No | Timeout in seconds for the commit operation. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -440,7 +445,7 @@ Parameters:
 |------|------|----------|-------------|
 | `offset` | `PartitionOffset` | Yes | The partition and offset to seek to. |
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -464,7 +469,7 @@ Parameters:
 |------|------|----------|-------------|
 | `partitions` | `TopicPartition[]` | Yes | Partitions to seek to the beginning. |
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -485,7 +490,7 @@ Parameters:
 |------|------|----------|-------------|
 | `partitions` | `TopicPartition[]` | Yes | Partitions to seek to the end. |
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -507,7 +512,7 @@ Parameters:
 | `partition` | `TopicPartition` | Yes | The topic-partition to query. |
 | `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
-Returns: `kafka:PartitionOffset|error?`
+Returns: `kafka:PartitionOffset|kafka:Error?`
 
 Sample code:
 
@@ -537,7 +542,7 @@ Parameters:
 | `partition` | `TopicPartition` | Yes | The topic-partition to query. |
 | `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
-Returns: `int|error`
+Returns: `int|kafka:Error`
 
 Sample code:
 
@@ -567,7 +572,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 
-Returns: `kafka:TopicPartition[]|error`
+Returns: `kafka:TopicPartition[]|kafka:Error`
 
 Sample code:
 
@@ -593,7 +598,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 
-Returns: `string[]|error`
+Returns: `string[]|kafka:Error`
 
 Sample code:
 
@@ -621,7 +626,7 @@ Parameters:
 | `topic` | `string` | Yes | The Kafka topic name. |
 | `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
-Returns: `kafka:TopicPartition[]|error`
+Returns: `kafka:TopicPartition[]|kafka:Error`
 
 Sample code:
 
@@ -648,7 +653,7 @@ Parameters:
 |------|------|----------|-------------|
 | `partitions` | `TopicPartition[]` | Yes | Partitions to pause. |
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -669,7 +674,7 @@ Parameters:
 |------|------|----------|-------------|
 | `partitions` | `TopicPartition[]` | Yes | Partitions to resume. |
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
@@ -689,7 +694,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 
-Returns: `kafka:TopicPartition[]|error`
+Returns: `kafka:TopicPartition[]|kafka:Error`
 
 Sample code:
 
@@ -716,7 +721,7 @@ Parameters:
 |------|------|----------|-------------|
 | `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
-Returns: `string[]|error`
+Returns: `string[]|kafka:Error`
 
 Sample code:
 
@@ -744,7 +749,7 @@ Parameters:
 | `partitions` | `TopicPartition[]` | Yes | Partitions to query. |
 | `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
-Returns: `kafka:PartitionOffset[]|error`
+Returns: `kafka:PartitionOffset[]|kafka:Error`
 
 Sample code:
 
@@ -774,7 +779,7 @@ Parameters:
 | `partitions` | `TopicPartition[]` | Yes | Partitions to query. |
 | `duration` | `decimal` | No | Timeout in seconds. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
-Returns: `kafka:PartitionOffset[]|error`
+Returns: `kafka:PartitionOffset[]|kafka:Error`
 
 Sample code:
 
@@ -804,7 +809,7 @@ Parameters:
 | `topicPartitionTimestamps` | `TopicPartitionTimestamp[]` | Yes | Array of `[TopicPartition, int]` tuples where `int` is the target timestamp in milliseconds since epoch. |
 | `duration` | `decimal?` | No | Timeout in seconds. Defaults to `()` (uses the consumer's configured default API timeout). |
 
-Returns: `kafka:TopicPartitionOffset[]|error`
+Returns: `kafka:TopicPartitionOffset[]|kafka:Error`
 
 Each element of the returned array is a `[TopicPartition, OffsetAndTimestamp?]` tuple. The `OffsetAndTimestamp` value contains `offset` (int), `timestamp` (int), and `leaderEpoch` (int?). The second element can be `()` if no offset was found for the given timestamp.
 
@@ -837,7 +842,7 @@ Parameters:
 |------|------|----------|-------------|
 | `duration` | `decimal` | No | Timeout in seconds to wait for graceful shutdown. Defaults to `-1` (uses the consumer's configured default API timeout). |
 
-Returns: `error?`
+Returns: `kafka:Error?`
 
 Sample code:
 
