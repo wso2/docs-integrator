@@ -216,17 +216,73 @@ function readInjectedSecret(string filePath) returns map<string>|error {
 
 ## AWS Secrets Manager
 
-```ballerina
-import ballerinax/aws.secretsmanager;
+On AWS, keep secrets in AWS Secrets Manager (or as `SecureString` parameters in SSM Parameter Store) and let the integration read them in one of two ways.
 
-secretsmanager:Client smClient = check new ({
-    region: "us-east-1",
-    accessKeyId: accessKeyId,
-    secretAccessKey: secretAccessKey
+### Inject secrets at startup
+
+Have the platform resolve each secret and pass it to the integration as a `BAL_CONFIG_VAR_<VARIABLE_NAME>` environment variable. The integration code only declares a `configurable` variable and never calls AWS:
+
+```ballerina
+configurable string dbPassword = ?;
+```
+
+- **Amazon ECS**: list the secrets in the `secrets` block of the task definition. ECS fetches them with the task execution role when the task starts. See [Amazon ECS deployment](../self-hosted/containerized-deployment.md#step-5-register-the-task-definition).
+- **Amazon EKS**: use the [External Secrets Operator](https://external-secrets.io/) to sync secrets into a Kubernetes Secret. Install the operator and create a `ClusterSecretStore` for AWS by following the [operator's AWS guide](https://external-secrets.io/latest/provider/aws-secrets-manager/), then define the values to sync:
+
+  ```yaml
+  apiVersion: external-secrets.io/v1
+  kind: ExternalSecret
+  metadata:
+    name: my-integration-config
+  spec:
+    refreshInterval: 1h
+    secretStoreRef:
+      name: aws-secretsmanager
+      kind: ClusterSecretStore
+    target:
+      name: my-integration-env
+    data:
+      - secretKey: BAL_CONFIG_VAR_DBPASSWORD
+        remoteRef:
+          key: prod/my-integration/db
+          property: password
+  ```
+
+  Load the synced Secret into the integration's container:
+
+  ```bash
+  kubectl set env deployment/my-integration-deployment --from=secret/my-integration-env
+  ```
+
+  To keep this change across rebuilds, apply it as a [Kustomize](https://kustomize.io/) patch on the generated manifests.
+
+Environment variables are read only when the process starts. After you rotate a secret, restart the integration to pick up the new value: run `aws ecs update-service --force-new-deployment` on ECS, or `kubectl rollout restart` on EKS.
+
+### Read secrets at runtime
+
+To pick up rotated values without a restart, read the secret with the <a href="/integration-platform/docs/connectors/catalog/security-identity/aws.secretmanager/aws-secrets-manager-connector-overview"><code>ballerinax/aws.secretmanager</code></a> connector. With `auth:DEFAULT_CREDENTIALS`, the connector uses the IAM role of the compute environment, so no access keys are needed to fetch the secret. See [Access AWS Services Securely](aws-access.md).
+
+```ballerina
+import ballerinax/aws;
+import ballerinax/aws.auth;
+import ballerinax/aws.secretmanager;
+
+final secretmanager:Client secrets = check new ({
+    region: aws:US_EAST_1,
+    auth: auth:DEFAULT_CREDENTIALS
 });
 
-string dbPassword = check smClient->getSecretValue("prod/db/password");
+function getDbPassword() returns string|error {
+    secretmanager:SecretValue secret = check secrets->getSecretValue("prod/my-integration/db");
+    byte[]|string value = secret.value;
+    string secretString = value is string ? value : check string:fromBytes(value);
+    // The secret stores a JSON document such as {"password":"..."}
+    json document = check secretString.fromJsonString();
+    return (check document.password).toString();
+}
 ```
+
+The role needs `secretsmanager:GetSecretValue` on the secret, and `kms:Decrypt` if the secret is encrypted with a customer managed KMS key.
 
 ## TLS configuration
 
@@ -295,3 +351,5 @@ For database encryption, configure at the database level:
 - [Authentication](authentication.md) — Secure service endpoints with OAuth 2.0, JWT, and mTLS
 - [Compliance considerations](compliance-considerations.md) — Audit logging and data protection
 - [Runtime security](runtime-security.md) — Additional runtime security settings
+- [Access AWS Services Securely](aws-access.md) — IAM role-based credentials for AWS connectors
+- [WSO2 Integrator on AWS](../../aws.md) — Everything WSO2 Integrator offers on AWS

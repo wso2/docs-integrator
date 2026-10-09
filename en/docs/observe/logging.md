@@ -161,8 +161,19 @@ JSON output:
 }
 ```
 
+## Send logs to Amazon CloudWatch Logs
+
+Integrations log to stdout, so on AWS the platform ships the output to CloudWatch Logs without code changes. Set `format = "json"` under `[ballerina.log]` so each log line arrives as one structured event that you can query with CloudWatch Logs Insights.
+
+| Platform | How logs reach CloudWatch Logs |
+|----------|--------------------------------|
+| Amazon ECS | The `awslogs` log driver in the task definition. See [Amazon ECS deployment](../deploy-and-run/self-hosted/containerized-deployment.md#step-5-register-the-task-definition). |
+| Amazon EKS | Fluent Bit, or the Amazon CloudWatch Observability EKS add-on |
+| AWS Lambda | Automatic; function output goes to the `/aws/lambda/<function-name>` log group |
+
 ## What's next
 
 - [Metrics](metrics.md) — Monitor service health with Prometheus
 - [Distributed tracing](tracing.md) — Trace requests across services
 - [Integration Control Plane](../icp/index.md) — Centralized monitoring dashboard
+- [WSO2 Integrator on AWS](../aws.md) — Everything WSO2 Integrator offers on AWS

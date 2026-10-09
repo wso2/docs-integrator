@@ -231,6 +231,10 @@ service /orders on new http:Listener(9090) {
 }
 ```
 
+## Send metrics to Amazon Managed Service for Prometheus
+
+On AWS, have an [AWS Distro for OpenTelemetry](https://aws-otel.github.io/) collector or the CloudWatch agent scrape the integration's metrics endpoint (port `9797`), and remote-write the metrics to Amazon Managed Service for Prometheus or publish them to CloudWatch. Use the same scrape settings as in [Setting up Prometheus](#setting-up-prometheus).
+
 ## What's next
 
 - [Prometheus and Grafana](open-source/prometheus-grafana.md) — Scrape configuration, Kubernetes, and Grafana dashboards

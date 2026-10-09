@@ -164,6 +164,16 @@ public function processDynamoDB(lambda:Context ctx,
 }
 ```
 
+Typed event records are available for these event sources. For any other source, accept the event as `json`.
+
+| Event source | Event type |
+|--------------|------------|
+| Amazon S3 | `lambda:S3Event` |
+| Amazon SQS | `lambda:SQSEvent` |
+| Amazon DynamoDB Streams | `lambda:DynamoDBEvent` |
+| Amazon SES | `lambda:SESEvent` |
+| Amazon API Gateway (proxy integration) | `lambda:APIGatewayProxyRequest` |
+
 ### Step 2: Build
 
 ```bash
@@ -231,6 +241,10 @@ aws lambda update-function-code \
 
 Refer to the [AWS Lambda documentation](https://docs.aws.amazon.com/lambda/) for deployment configuration and trigger setup.
 
+### Grant AWS permissions
+
+Lambda runs the function as its **execution role**, the role you pass with `--role` to `aws lambda create-function`. If the function uses AWS connectors, such as Amazon S3 or Amazon DynamoDB, add the permissions they need to that role and configure the connectors with `auth:DEFAULT_CREDENTIALS`. The Lambda runtime exposes the role's credentials as environment variables, which the default credential chain reads, so the function needs no access keys. See [Access AWS Services Securely](../secure/aws-access.md).
+
 ## Reducing cold start times
 
 ### Use GraalVM native images
@@ -259,3 +273,4 @@ The compiler auto-detects the serverless platform and generates the appropriate 
 - [GraalVM Native Images](graalvm-native-images.md) — Compile to native binaries for minimal cold start
 - [Managing Configurations](../managing-configurations.md) — Environment-specific configuration strategies
 - [Containerized Deployment](containerized-deployment.md) — Deploy as containers to Kubernetes or Docker
+- [WSO2 Integrator on AWS](../../aws.md) — Everything WSO2 Integrator offers on AWS

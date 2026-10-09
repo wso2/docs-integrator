@@ -299,6 +299,15 @@ function ToolsIcon(): ReactNode {
   );
 }
 
+function AwsIcon(): ReactNode {
+  return (
+    <svg {...iconProps}>
+      <path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 8.5a4.75 4.75 0 0 1-.5 9.5Z" />
+      <path d="M8 21.5c2.6 1.1 5.4 1.1 8 0M14.5 20.5l1.6 1-1 1.6" />
+    </svg>
+  );
+}
+
 function FallbackIcon(): ReactNode {
   return (
     <svg {...iconProps}>
@@ -328,6 +337,7 @@ const ICONS_BY_LABEL: Record<string, () => ReactNode> = {
   'deploy and run': DeployIcon,
   observe: ObserveIcon,
   manage: ManageIcon,
+  aws: AwsIcon,
   migrate: MigrateIcon,
   'integration control plane': IntegrationControlPlaneIcon,
   'integration control plane (icp)': IntegrationControlPlaneIcon,

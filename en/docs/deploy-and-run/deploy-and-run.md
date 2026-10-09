@@ -36,6 +36,7 @@ Choose where your integrations run. Where you deploy also decides how you [manag
     <PaletteChip href="/deploy-and-run/self-hosted/vm-deployment">Virtual machines</PaletteChip>
     <PaletteChip href="/deploy-and-run/self-hosted/serverless-deployment">Serverless</PaletteChip>
     <PaletteChip href="/deploy-and-run/self-hosted/graalvm-native-images">GraalVM native images</PaletteChip>
+    <PaletteChip href="/aws">AWS</PaletteChip>
   </div>
 </PaletteCard>
 
@@ -87,6 +88,7 @@ Choose where your integrations run. Where you deploy also decides how you [manag
     <PaletteChip href="/deploy-and-run/secure/api-security-rate-limiting">API security</PaletteChip>
     <PaletteChip href="/deploy-and-run/secure/secrets-encryption">Secrets and encryption</PaletteChip>
     <PaletteChip href="/deploy-and-run/secure/compliance-considerations">Compliance</PaletteChip>
+    <PaletteChip href="/deploy-and-run/secure/aws-access">AWS access</PaletteChip>
   </div>
 </PaletteCard>
 

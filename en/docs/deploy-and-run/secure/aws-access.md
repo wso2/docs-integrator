@@ -1,0 +1,273 @@
+---
+title: Access AWS Services Securely
+description: Give WSO2 Integrator AWS credentials through IAM roles on Amazon ECS, Amazon EKS, Amazon EC2, and AWS Lambda, assume roles across accounts, sign requests to any AWS API, and keep AWS traffic inside your VPC.
+keywords: [wso2 integrator, aws, iam role, default credentials, assume role, irsa, eks pod identity, instance profile, sigv4, vpc endpoints, fips]
+slug: /deploy-and-run/secure/aws-access
+sidebar_position: 9
+---
+
+# Access AWS Services Securely
+
+All AWS connectors share one authentication model from the [`ballerinax/aws.auth`](https://central.ballerina.io/ballerinax/aws/latest) module, so a credential setup that works for one connector works for all of them. This page covers how to give an integration AWS credentials without storing access keys, how to reach resources in other accounts, how to call AWS APIs that don't have a connector, and how to keep AWS traffic private.
+
+The credential setting is the `auth` field of the connector configuration, except in `aws.dynamodbstreams`, where it is named `credentials`.
+
+:::note
+The `aws.redshift` connector authenticates with a database user and password over JDBC, and `ai.aws.dynamodb` takes access keys. Neither uses this model.
+:::
+
+## Use the default credential chain
+
+When the integration runs on AWS, set `auth` to `auth:DEFAULT_CREDENTIALS`. The connector then uses temporary credentials from the IAM role attached to the compute environment and refreshes them before they expire. There are no access keys to store, rotate, or leak.
+
+```ballerina
+import ballerinax/aws;
+import ballerinax/aws.auth;
+import ballerinax/aws.sqs;
+
+final sqs:Client sqsClient = check new ({
+    region: aws:US_EAST_1,
+    auth: auth:DEFAULT_CREDENTIALS
+});
+```
+
+The default chain checks the following sources in order and uses the first one that returns credentials:
+
+1. JVM system properties
+2. Environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`)
+3. Web identity token (EKS IRSA)
+4. IAM Identity Center (SSO) session
+5. Shared config and credentials files (`~/.aws/config`, `~/.aws/credentials`)
+6. External credential process
+7. Container credentials (ECS task role, EKS Pod Identity)
+8. EC2 instance profile (IMDS)
+
+Because the chain also reads `~/.aws/credentials` and SSO sessions, the same code runs unchanged on your workstation after `aws configure` or `aws sso login`.
+
+:::tip
+Make sure no `AWS_ACCESS_KEY_ID` or `AWS_SECRET_ACCESS_KEY` environment variables are set in your container image or task definition. Environment variables come earlier in the chain than the IAM role, so stray keys silently take precedence over the role.
+:::
+
+## Attach an IAM role
+
+Grant the role only the actions your integration calls. For example, an integration that consumes one queue needs this policy:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "sqs:ReceiveMessage",
+        "sqs:DeleteMessage",
+        "sqs:GetQueueAttributes"
+      ],
+      "Resource": "arn:aws:sqs:us-east-1:<account-id>:orders"
+    }
+  ]
+}
+```
+
+Then attach the role in the way your compute service expects.
+
+### Amazon ECS
+
+Set the role as the **task role** (`taskRoleArn`) in the task definition. The ECS agent serves its credentials to the container, and the default chain reads them as container credentials. See [Amazon ECS deployment](../self-hosted/containerized-deployment.md#amazon-ecs-deployment).
+
+:::note
+ECS uses two roles. The **task role** is what your integration code runs as. The **task execution role** is what the ECS agent uses to pull the image, write logs, and fetch secrets for injection. Put connector permissions on the task role only.
+:::
+
+### Amazon EKS
+
+EKS offers two ways to bind an IAM role to a pod. Both work with `DEFAULT_CREDENTIALS` without code changes.
+
+**EKS Pod Identity** (recommended for new clusters). Install the `eks-pod-identity-agent` add-on, then associate the role with a Kubernetes service account:
+
+```bash
+aws eks create-pod-identity-association \
+  --cluster-name <cluster-name> \
+  --namespace <namespace> \
+  --service-account my-integration \
+  --role-arn arn:aws:iam::<account-id>:role/my-integration-role
+```
+
+The role's trust policy must allow the `pods.eks.amazonaws.com` service principal to call `sts:AssumeRole` and `sts:TagSession`.
+
+**IAM Roles for Service Accounts (IRSA)**. Associate an OIDC provider with the cluster, create a role that trusts it, and annotate the service account with the role ARN:
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: my-integration
+  namespace: <namespace>
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/my-integration-role
+```
+
+EKS injects `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE` into every pod that uses this service account, and the default chain picks them up.
+
+With either option, the pod must run as that service account. The manifests generated by `bal build` use the namespace's `default` service account, so set the service account after deploying:
+
+```bash
+kubectl create serviceaccount my-integration   # skip if you applied the IRSA manifest above
+kubectl patch deployment my-integration-deployment \
+  -p '{"spec":{"template":{"spec":{"serviceAccountName":"my-integration"}}}}'
+```
+
+To keep this change across rebuilds, apply it as a [Kustomize](https://kustomize.io/) patch on the generated manifests.
+
+### Amazon EC2
+
+Attach an **instance profile** that contains the role. See [Run on Amazon EC2](../self-hosted/vm-deployment.md#run-on-amazon-ec2).
+
+### AWS Lambda
+
+Lambda runs the function as its **execution role**. See [Grant AWS permissions to a Lambda function](../self-hosted/serverless-deployment.md#grant-aws-permissions).
+
+## Access resources in another AWS account
+
+To reach a resource in another account, have the connector assume a role in that account by passing an `auth:AssumeRoleConfig`:
+
+```ballerina
+final sqs:Client partnerQueue = check new ({
+    region: aws:EU_WEST_1,
+    auth: {
+        roleArn: "arn:aws:iam::<other-account-id>:role/order-queue-writer",
+        roleSessionName: "wso2-integrator",
+        stsRegion: aws:EU_WEST_1
+    }
+});
+```
+
+The connector first resolves its own identity through `sourceCredentials`, which defaults to `auth:DEFAULT_CREDENTIALS`. It then calls STS `AssumeRole` and renews the session before it expires. The session lasts `duration` seconds, 3600 by default. For this to work:
+
+- The role in the other account must trust the role your integration runs as.
+- The role your integration runs as must be allowed to call `sts:AssumeRole` on the target role.
+- If the other account requires an external ID, set `externalId`.
+
+:::tip
+`stsRegion` defaults to `us-east-1`. Set it to the region your integration runs in, so STS calls stay in that region and can use an STS VPC endpoint.
+:::
+
+## Other credential sources
+
+The `auth` field also accepts the following configurations. They are mainly useful outside AWS, or when you want to pin one source instead of relying on the chain.
+
+| Configuration | Use when |
+|---------------|----------|
+| `auth:StaticAuthConfig` (`accessKeyId`, `secretAccessKey`, optional `sessionToken`) | Quick local tests, or systems that cannot use roles. Avoid in production. |
+| `auth:ProfileAuthConfig` (`profileName`, `credentialsFilePath`) | Local development with a named profile from `aws configure` |
+| `auth:SsoAuthConfig` (`ssoStartUrl`, `ssoRegion`, `accountId`, `roleName`) | Local development with IAM Identity Center after `aws sso login` |
+| `auth:WebIdentityConfig` (`roleArn`, `webIdentityTokenFile`) | CI/CD pipelines and other platforms that issue OIDC tokens |
+| `auth:ProcessAuthConfig` (`command`) | Workloads outside AWS that use IAM Roles Anywhere or another `credential_process` helper |
+
+## Call AWS APIs without a connector
+
+For AWS services without a dedicated connector, use `ballerinax/aws` and `ballerinax/aws.auth` with a plain `http:Client`. `aws:resolveEndpointHost` finds the service endpoint for a region, and `auth:getSignedHeaders` signs the request with AWS Signature Version 4, using the same credential sources as the connectors.
+
+The following example publishes an event to Amazon EventBridge:
+
+```ballerina
+import ballerina/http;
+import ballerinax/aws;
+import ballerinax/aws.auth;
+
+final auth:CredentialProvider credentials = check new (auth:DEFAULT_CREDENTIALS);
+final string eventsHost = aws:resolveEndpointHost("events", aws:US_EAST_1);
+final http:Client eventBridge = check new ("https://" + eventsHost);
+
+public function publishOrderPlaced(string orderId) returns error? {
+    json body = {
+        Entries: [
+            {
+                Source: "com.example.orders",
+                DetailType: "OrderPlaced",
+                Detail: {orderId}.toJsonString()
+            }
+        ]
+    };
+    byte[] payload = body.toJsonString().toBytes();
+
+    map<string> signedHeaders = check auth:getSignedHeaders({
+        method: "POST",
+        host: eventsHost,
+        headers: {
+            "content-type": "application/x-amz-json-1.1",
+            "x-amz-target": "AWSEvents.PutEvents"
+        },
+        payload
+    }, check credentials.getCredentials(), aws:US_EAST_1, "events");
+
+    http:Request request = new;
+    request.setBinaryPayload(payload);
+    foreach [string, string] [name, value] in signedHeaders.entries() {
+        request.setHeader(name, value);
+    }
+    http:Response response = check eventBridge->execute("POST", "/", request);
+    if response.statusCode != http:STATUS_OK {
+        return error(string `PutEvents failed with HTTP ${response.statusCode}: ${check response.getTextPayload()}`);
+    }
+
+    // PutEvents returns HTTP 200 even when it rejects some entries
+    json result = check response.getJsonPayload();
+    int failedEntryCount = check (check result.FailedEntryCount).ensureType();
+    if failedEntryCount > 0 {
+        return error(string `PutEvents rejected ${failedEntryCount} entries: ${(check result.Entries).toJsonString()}`);
+    }
+}
+```
+
+`PutEvents` can accept some entries and reject others in the same call, so check `FailedEntryCount` as well as the HTTP status. Each rejected entry in `Entries` carries an `ErrorCode` and `ErrorMessage`.
+
+Create one `auth:CredentialProvider` and reuse it. It caches credentials and renews temporary credentials automatically.
+
+## Keep AWS traffic inside your VPC
+
+To let tasks and pods in private subnets reach AWS services without a NAT gateway, add VPC endpoints for the services your deployment and connectors use:
+
+| Service | Endpoint service name | Type | Needed for |
+|---------|----------------------|------|------------|
+| ECR API | `com.amazonaws.<region>.ecr.api` | Interface | Image pulls |
+| ECR Docker | `com.amazonaws.<region>.ecr.dkr` | Interface | Image pulls |
+| S3 | `com.amazonaws.<region>.s3` | Gateway | Image layers and the `aws.s3` connector |
+| CloudWatch Logs | `com.amazonaws.<region>.logs` | Interface | The `awslogs` log driver |
+| Secrets Manager | `com.amazonaws.<region>.secretsmanager` | Interface | Secret injection and the `aws.secretmanager` connector |
+| SSM | `com.amazonaws.<region>.ssm` | Interface | Parameter injection |
+| STS | `com.amazonaws.<region>.sts` | Interface | IRSA, web identity, and assume-role credentials |
+| SQS, SNS, and others | `com.amazonaws.<region>.sqs`, `com.amazonaws.<region>.sns`, and so on | Interface | The matching connectors |
+| DynamoDB | `com.amazonaws.<region>.dynamodb` | Gateway | The `aws.dynamodb` connector |
+
+When an interface endpoint has **private DNS** enabled, the service's regular hostname resolves to the endpoint inside the VPC, so the connectors need no changes. To use a different endpoint, set the connector's `endpoint` field:
+
+| Setting | Effect |
+|---------|--------|
+| `endpoint: {fips: true}` | Uses FIPS 140 validated endpoints, for example for FedRAMP workloads in AWS GovCloud (US) |
+| `endpoint: {dualstack: true}` | Uses endpoints that support both IPv4 and IPv6 |
+| `endpoint: {customEndpoint: "<url>"}` | Calls the given URL, such as an endpoint-specific VPC endpoint DNS name or [LocalStack](https://www.localstack.cloud/) during local testing |
+
+```ballerina
+final sqs:Client sqsClient = check new ({
+    region: aws:US_GOV_WEST_1,
+    auth: auth:DEFAULT_CREDENTIALS,
+    endpoint: {fips: true}
+});
+```
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+|---------|--------------|-----|
+| `auth:CredentialResolutionError` at startup | No source in the default chain returned credentials | Check that a role is attached: the task role on ECS, a service account association on EKS, or an instance profile on EC2. |
+| `AccessDenied` that names an unexpected principal | Access keys in environment variables take precedence over the role | Remove `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` from the image and from the task or pod spec. |
+| `AccessDenied` on `sts:AssumeRole` | The trust policy or the caller's permission is missing | The target role must trust the caller's role, and the caller needs `sts:AssumeRole` on the target role. |
+| A pod on EKS uses the node's role instead of its own | The pod runs as the `default` service account | Set `serviceAccountName` on the deployment and restart the pods. |
+| A container on EC2 cannot get credentials | The IMDSv2 hop limit is `1` | Set `--http-put-response-hop-limit 2` on the instance. |
+
+## What's next
+
+- [WSO2 Integrator on AWS](../../aws.md): everything WSO2 Integrator offers on AWS
+- [Secrets and Encryption](secrets-encryption.md#aws-secrets-manager): load configuration from AWS Secrets Manager and SSM Parameter Store
+- [Containerized Deployment](../self-hosted/containerized-deployment.md#amazon-ecs-deployment): deploy to Amazon ECS on Fargate or Amazon EKS

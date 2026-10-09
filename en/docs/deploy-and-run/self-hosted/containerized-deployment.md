@@ -18,14 +18,15 @@ The Code to Cloud feature supports the following containerized deployment platfo
 - **[Kubernetes](#kubernetes-deployment)** — Deploy to any Kubernetes cluster with auto-generated manifests, services, and autoscaling configurations
 - **[Red Hat OpenShift](#red-hat-openshift-deployment)** — Deploy to OpenShift using the `oc` CLI with platform-specific manifests
 - **[Amazon EKS](#amazon-eks-deployment)** — Deploy to AWS Elastic Kubernetes Service using ECR for image hosting and an internal NLB for service access
+- **[Amazon ECS](#amazon-ecs-deployment)** — Run on AWS Fargate without a Kubernetes cluster, using ECR for image hosting, IAM task roles for AWS credentials, and Secrets Manager for configuration
 - **[Azure AKS](#azure-aks-deployment)** — Deploy to Azure Kubernetes Service using ACR for image hosting and an Azure Load Balancer for service access
 
-:::info Prerequisites
+## Prerequisites {#general-prerequisites}
+
 - [Docker](https://www.docker.com/) installed and running on your build machine
 - A WSO2 Integrator project based on Ballerina
 - For Kubernetes: [kubectl](https://kubernetes.io/docs/tasks/tools/) installed and configured against a Kubernetes cluster
 - For OpenShift: [OpenShift CLI (`oc`)](https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/getting-started-cli.html) installed and logged in to your cluster
-:::
 
 :::note Package naming constraint
 The `name` field in `Ballerina.toml` must contain only alphanumerics, underscores, and periods — hyphens are not allowed. Use `my_integration` rather than `my-integration`. Image names in `Cloud.toml` under `[container.image]` can include hyphens.
@@ -522,7 +523,7 @@ Amazon Elastic Kubernetes Service (EKS) follows the same Kubernetes deployment p
 
 ### Prerequisites
 
-In addition to the [general prerequisites](#prerequisites), you need:
+In addition to the [general prerequisites](#general-prerequisites), you need:
 
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed and configured (`aws configure` or `aws sso login`)
 - An EKS cluster with `kubectl` configured: `aws eks update-kubeconfig --region <region> --name <cluster-name>`
@@ -659,6 +660,10 @@ kubectl get services
 kubectl logs -f deployment/my-integration-deployment
 ```
 
+:::tip
+To give the pods AWS credentials for connectors such as Amazon SQS or Amazon S3, bind an IAM role to the deployment's service account with EKS Pod Identity or IRSA. See [Access AWS Services Securely](../secure/aws-access.md#amazon-eks).
+:::
+
 ### Step 7: Expose and test
 
 Tag the cluster subnets so the EKS load balancer controller can discover them:
@@ -720,13 +725,201 @@ curl http://<nlb-hostname>.elb.<region>.amazonaws.com:9090/<your-service-path>
 An internal NLB is only reachable from within the same VPC. For internet-facing access, replace `internal-elb` with `elb` in the subnet tag and set `aws-load-balancer-scheme` to `internet-facing` in the Service manifest. Ensure the subnets have a route to an internet gateway.
 :::
 
+## Amazon ECS deployment
+
+Amazon Elastic Container Service (ECS) on AWS Fargate runs the container image built by Code to Cloud without a Kubernetes cluster or servers to manage. The task gets AWS credentials from its IAM task role, reads secrets from AWS Secrets Manager and SSM Parameter Store at startup, and sends its logs to Amazon CloudWatch Logs.
+
+### Prerequisites
+
+In addition to the [general prerequisites](#general-prerequisites), you need:
+
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed and configured (`aws configure` or `aws sso login`)
+- A VPC with at least two subnets, and a security group that allows inbound traffic on the integration's port (`9090` in this example)
+- An [Amazon ECR](https://aws.amazon.com/ecr/) repository:
+
+```bash
+aws ecr create-repository --region <region> --repository-name my-integration
+```
+
+### Step 1: Build the image
+
+Set the cloud target in `Ballerina.toml`:
+
+```toml
+[build-options]
+cloud = "docker"
+```
+
+Point the image at your ECR repository in `Cloud.toml`:
+
+```toml
+[container.image]
+repository = "<account-id>.dkr.ecr.<region>.amazonaws.com"
+name = "my-integration"
+tag = "v1.0.0"
+```
+
+Build the project:
+
+```bash
+bal build
+```
+
+### Step 2: Push the image to ECR
+
+Log in to ECR and push the image. Fargate runs `linux/amd64` by default. On Apple Silicon or another Arm machine, build for that platform with `docker buildx`:
+
+```bash
+aws ecr get-login-password --region <region> | \
+  docker login --username AWS --password-stdin <account-id>.dkr.ecr.<region>.amazonaws.com
+
+docker buildx build \
+  --platform linux/amd64 \
+  --tag <account-id>.dkr.ecr.<region>.amazonaws.com/my-integration:v1.0.0 \
+  --push \
+  target/docker/my_integration/
+```
+
+:::tip
+To run on AWS Graviton, build with `--platform linux/arm64` and add `"runtimePlatform": {"cpuArchitecture": "ARM64", "operatingSystemFamily": "LINUX"}` to the task definition.
+:::
+
+### Step 3: Store configuration in AWS
+
+Keep secrets in Secrets Manager and plain settings in SSM Parameter Store.
+
+To keep the password out of your shell history and the process list, put the secret in a file instead of on the command line. Create `db-secret.json` with a text editor, with the content `{"password":"<db-password>"}`, and then run:
+
+```bash
+chmod 600 db-secret.json
+
+aws secretsmanager create-secret --region <region> \
+  --name prod/my-integration/db \
+  --secret-string file://db-secret.json
+
+rm db-secret.json
+
+aws ssm put-parameter --region <region> \
+  --name /my-integration/prod/queue-url \
+  --type String \
+  --value https://sqs.<region>.amazonaws.com/<account-id>/orders
+```
+
+### Step 4: Create the IAM roles
+
+Create two roles that the `ecs-tasks.amazonaws.com` service principal can assume:
+
+- **Task execution role** (`my-integration-execution-role`): attach the AWS managed policy `AmazonECSTaskExecutionRolePolicy` for image pulls and logging. To let ECS inject the values from Step 3, add `secretsmanager:GetSecretValue` on the secret and `ssm:GetParameters` on the parameter. If the secret is encrypted with a customer managed KMS key, also add `kms:Decrypt` on that key.
+- **Task role** (`my-integration-task-role`): attach the permissions your AWS connectors need. Connectors configured with `auth:DEFAULT_CREDENTIALS` pick up this role automatically. See [Access AWS Services Securely](../secure/aws-access.md#amazon-ecs).
+
+### Step 5: Register the task definition
+
+Create a log group for the container output:
+
+```bash
+aws logs create-log-group --region <region> --log-group-name /ecs/my-integration
+```
+
+Save the following as `task-definition.json`. The `secrets` block injects each value as a `BAL_CONFIG_VAR_<VARIABLE_NAME>` environment variable, which WSO2 Integrator reads into the matching `configurable` variable. The variable name after the prefix must be uppercase. See [Managing Configurations](../managing-configurations.md#environment-variable-overrides) for the naming rules.
+
+```json
+{
+  "family": "my-integration",
+  "requiresCompatibilities": ["FARGATE"],
+  "networkMode": "awsvpc",
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::<account-id>:role/my-integration-execution-role",
+  "taskRoleArn": "arn:aws:iam::<account-id>:role/my-integration-task-role",
+  "containerDefinitions": [
+    {
+      "name": "my-integration",
+      "image": "<account-id>.dkr.ecr.<region>.amazonaws.com/my-integration:v1.0.0",
+      "essential": true,
+      "portMappings": [{ "containerPort": 9090, "protocol": "tcp" }],
+      "secrets": [
+        {
+          "name": "BAL_CONFIG_VAR_DBPASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:<region>:<account-id>:secret:prod/my-integration/db-<suffix>:password::"
+        },
+        {
+          "name": "BAL_CONFIG_VAR_QUEUEURL",
+          "valueFrom": "arn:aws:ssm:<region>:<account-id>:parameter/my-integration/prod/queue-url"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/my-integration",
+          "awslogs-region": "<region>",
+          "awslogs-stream-prefix": "integration"
+        }
+      }
+    }
+  ]
+}
+```
+
+These two entries supply these variables in your code:
+
+```ballerina
+configurable string dbPassword = ?;
+configurable string queueUrl = ?;
+```
+
+Register the task definition:
+
+```bash
+aws ecs register-task-definition --region <region> \
+  --cli-input-json file://task-definition.json
+```
+
+### Step 6: Create the cluster and service
+
+```bash
+aws ecs create-cluster --region <region> --cluster-name integrations
+
+aws ecs create-service --region <region> \
+  --cluster integrations \
+  --service-name my-integration \
+  --task-definition my-integration \
+  --desired-count 2 \
+  --launch-type FARGATE \
+  --network-configuration "awsvpcConfiguration={subnets=[<subnet-id-1>,<subnet-id-2>],securityGroups=[<security-group-id>],assignPublicIp=DISABLED}"
+```
+
+The subnets need a route to ECR, CloudWatch Logs, and Secrets Manager. Use private subnets with either a NAT gateway or [VPC endpoints](../secure/aws-access.md#keep-aws-traffic-inside-your-vpc).
+
+To expose an HTTP service, put an Application Load Balancer in front of it. Add `--load-balancers targetGroupArn=<target-group-arn>,containerName=my-integration,containerPort=9090` to `create-service`. The target group must use the `ip` target type.
+
+### Step 7: Verify
+
+Check that the tasks are running:
+
+```bash
+aws ecs describe-services --region <region> \
+  --cluster integrations --services my-integration \
+  --query 'services[0].{desired:desiredCount,running:runningCount,events:events[:3]}'
+```
+
+Follow the integration logs:
+
+```bash
+aws logs tail /ecs/my-integration --region <region> --follow
+```
+
+If a task stops right after it starts, `aws ecs describe-tasks` shows the `stoppedReason`. The usual causes are:
+
+- `ResourceInitializationError`: the task execution role cannot read a secret, or the subnets have no route to Secrets Manager. Add `secretsmanager:GetSecretValue` (and `kms:Decrypt`) to the execution role, and add a NAT gateway or a VPC endpoint.
+- A required `configurable` variable with no value: check the `secrets` entries and their uppercase `BAL_CONFIG_VAR_` names.
+
 ## Azure AKS deployment
 
 Azure Kubernetes Service (AKS) follows the same Kubernetes deployment path described above, with a few Azure-specific steps: pushing the image to Azure Container Registry (ACR), attaching the registry to the cluster, and exposing the service via an Azure Load Balancer.
 
 ### Prerequisites
 
-In addition to the [general prerequisites](#prerequisites), you need:
+In addition to the [general prerequisites](#general-prerequisites), you need:
 
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed and configured (`az login`)
 - An AKS cluster with `kubectl` configured: `az aks get-credentials --resource-group <resource-group> --name <cluster-name>`
@@ -905,3 +1098,9 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 ```
 :::
+
+## What's next
+
+- [Managing Configurations](../managing-configurations.md) — Supply configuration values to containers
+- [Scaling and High Availability](../scaling-high-availability.md) — Run multiple replicas reliably
+- [WSO2 Integrator on AWS](../../aws.md) — Everything WSO2 Integrator offers on AWS

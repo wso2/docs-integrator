@@ -67,6 +67,8 @@ Sampling every request is fine for development. In production, use `probabilisti
 | **Jaeger** | Production-grade distributed tracing | [Jaeger](open-source/jaeger.md) |
 | **Zipkin** | A lightweight tracing alternative | [Zipkin](open-source/zipkin.md) |
 
+To send traces to **AWS X-Ray**, use the Jaeger extension, which exports spans over OTLP gRPC. Set `agentHostname` and `agentPort` to an [AWS Distro for OpenTelemetry](https://aws-otel.github.io/) (ADOT) collector, and configure the collector's `awsxray` exporter. Run the collector as a sidecar on Amazon ECS or as a DaemonSet on Amazon EKS.
+
 You can also send traces to a managed platform: [Datadog](commercial/datadog.md) and [New Relic](commercial/new-relic.md) both accept traces, and [Moesif](commercial/moesif.md) supports traces alongside metrics and logs. For a complete stack that includes tracing, see the [Local Development Stack](recipes/local-development-stack.md) and [Kubernetes Production Stack](recipes/kubernetes-production-stack.md) recipes.
 
 ## What's next
