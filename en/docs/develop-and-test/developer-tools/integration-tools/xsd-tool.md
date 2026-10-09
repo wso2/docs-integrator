@@ -27,13 +27,13 @@ The XSD tool is currently supported only through the Ballerina CLI (pro-code). T
 
 ```bash
 # Generate Ballerina records from an XSD file
-bal xsd -i schema.xsd
+bal xsd schema.xsd
 
-# Specify output directory
-bal xsd -i schema.xsd -o generated/
+# Generate records into a specific submodule
+bal xsd schema.xsd --module custom
 
-# Generate from a remote URL
-bal xsd -i https://example.com/schemas/order.xsd
+# Generate types for all XSD files in a directory
+bal xsd inputs
 ```
 
 ### Example XSD
@@ -91,37 +91,84 @@ bal xsd -i https://example.com/schemas/order.xsd
 ```ballerina
 import ballerina/data.xmldata;
 
-@xmldata:Namespace {prefix: "ord", uri: "http://example.com/orders"}
-type Order record {|
-    string OrderId;
-    string CustomerId;
-    string OrderDate;
-    ItemList Items;
-    decimal Total;
-    OrderStatus Status;
-    string? Notes = ();
+@xmldata:Namespace {uri: "http://example.com/orders"}
+public type Order record {|
+    @xmldata:Sequence {minOccurs: 1, maxOccurs: 1}
+    SequenceGroup sequenceGroup;
     @xmldata:Attribute
-    string? version = ();
+    string version?;
 |};
 
-type ItemList record {|
+@xmldata:Namespace {uri: "http://example.com/orders"}
+public type ItemList record {|
+    @xmldata:Sequence {minOccurs: 1, maxOccurs: 65535}
+    SequenceGroup1[] sequenceGroup1;
+|};
+
+@xmldata:Namespace {uri: "http://example.com/orders"}
+public type LineItem record {|
+    @xmldata:Sequence {minOccurs: 1, maxOccurs: 1}
+    SequenceGroup2 sequenceGroup2;
+|};
+
+@xmldata:Namespace {uri: "http://example.com/orders"}
+public enum OrderStatus {
+    PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED
+};
+
+@xmldata:Name {value: "Order"}
+@xmldata:Namespace {uri: "http://example.com/orders"}
+public type Order1 record {|
+    @xmldata:Sequence {minOccurs: 1, maxOccurs: 1}
+    SequenceGroup sequenceGroup;
+    @xmldata:Attribute
+    string version?;
+|};
+
+public type SequenceGroup record {|
+    @xmldata:SequenceOrder {value: 1}
+    @xmldata:Element {minOccurs: 1, maxOccurs: 1}
+    string OrderId;
+    @xmldata:SequenceOrder {value: 2}
+    @xmldata:Element {minOccurs: 1, maxOccurs: 1}
+    string CustomerId;
+    @xmldata:SequenceOrder {value: 3}
+    @xmldata:Element {minOccurs: 1, maxOccurs: 1}
+    string OrderDate;
+    @xmldata:SequenceOrder {value: 4}
+    @xmldata:Element {minOccurs: 1, maxOccurs: 1}
+    ItemList Items;
+    @xmldata:SequenceOrder {value: 5}
+    @xmldata:Element {minOccurs: 1, maxOccurs: 1}
+    decimal Total;
+    @xmldata:SequenceOrder {value: 6}
+    @xmldata:Element {minOccurs: 1, maxOccurs: 1}
+    OrderStatus Status;
+    @xmldata:SequenceOrder {value: 7}
+    @xmldata:Element {minOccurs: 0, maxOccurs: 1}
+    string Notes?;
+|};
+
+public type SequenceGroup1 record {|
+    @xmldata:SequenceOrder {value: 1}
+    @xmldata:Element {minOccurs: 1, maxOccurs: 65535}
     LineItem[] Item;
 |};
 
-type LineItem record {|
+public type SequenceGroup2 record {|
+    @xmldata:SequenceOrder {value: 1}
+    @xmldata:Element {minOccurs: 1, maxOccurs: 1}
     string ProductId;
+    @xmldata:SequenceOrder {value: 2}
+    @xmldata:Element {minOccurs: 1, maxOccurs: 1}
     string ProductName;
+    @xmldata:SequenceOrder {value: 3}
+    @xmldata:Element {minOccurs: 1, maxOccurs: 1}
     int Quantity;
+    @xmldata:SequenceOrder {value: 4}
+    @xmldata:Element {minOccurs: 1, maxOccurs: 1}
     decimal UnitPrice;
 |};
-
-enum OrderStatus {
-    PENDING,
-    CONFIRMED,
-    SHIPPED,
-    DELIVERED,
-    CANCELLED
-}
 ```
 
 ## Using generated types
@@ -174,12 +221,12 @@ service /api on new http:Listener(servicePort) {
         Order 'order = check xmldata:parseAsType(orderXml);
 
         // Transform to JSON response
+        SequenceGroup details = 'order.sequenceGroup;
         return {
-            id: 'order.OrderId,
-            customer: 'order.CustomerId,
-            total: 'order.Total,
-            status: 'order.Status,
-            itemCount: 'order.Items.Item.length()
+            id: details.OrderId,
+            customer: details.CustomerId,
+            total: details.Total,
+            status: details.Status
         };
     }
 }
@@ -190,7 +237,7 @@ service /api on new http:Listener(servicePort) {
 The tool maps XSD types to Ballerina types as follows:
 
 | XSD Type | Ballerina Type |
-|---|---|
+| --- | --- |
 | `xs:string` | `string` |
 | `xs:integer`, `xs:int`, `xs:long` | `int` |
 | `xs:decimal` | `decimal` |
@@ -206,11 +253,14 @@ The tool maps XSD types to Ballerina types as follows:
 
 ## Command reference
 
-| Command | Description |
-|---|---|
-| `bal xsd -i <file.xsd>` | Generate records from XSD |
-| `bal xsd -i <url>` | Generate from remote XSD |
-| `-o <dir>` | Output directory |
+```bash
+bal xsd <source-path> [-m | --module] <output-module-name>
+```
+
+| Option | Description |
+| --- | --- |
+| `<source-path>` | Path to an XSD file or a directory containing XSD files (mandatory) |
+| `-m`, `--module <output-module-name>` | The name of the module in which the Ballerina types are generated |
 
 ## What's next
 
