@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: Vector Stores
-description: Reference for every vector store in WSO2 Integrator, covering create form fields, advanced configurations, query modes, and metadata filter support for In-Memory, Pinecone, pgvector, Weaviate, and Milvus.
-keywords: [wso2 integrator, vector store, embeddings, knowledge base, in-memory, milvus, pgvector, pinecone, weaviate]
+description: Reference for every vector store in WSO2 Integrator, covering create form fields, advanced configurations, query modes, and metadata filter support for In-Memory, Amazon S3 Vectors, Pinecone, pgvector, Weaviate, and Milvus.
+keywords: [wso2 integrator, vector store, embeddings, knowledge base, in-memory, amazon s3 vectors, aws, milvus, pgvector, pinecone, weaviate]
 slug: /develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/vector-stores
 ---
 
@@ -49,7 +49,7 @@ Most stores support filtering vectors by their metadata using standard operators
 | `in` | Value is in the given list |
 | `nin` | Value is not in the given list |
 
-Multiple filters can be combined with `AND` or `OR`. Each connector handles the exact wire-format mapping (Pinecone uses `$eq`, pgvector compiles to JSONB, Weaviate uses GraphQL `Equal`, and Milvus has its own filter syntax). You write filters the same way regardless of store.
+Multiple filters can be combined with `AND` or `OR`. Each connector handles the exact wire-format mapping (Pinecone and Amazon S3 Vectors use `$eq`, pgvector compiles to JSONB, Weaviate uses GraphQL `Equal`, and Milvus has its own filter syntax). You write filters the same way regardless of store.
 
 ### Query modes
 
@@ -77,10 +77,10 @@ Local stores let you choose the metric. Hosted stores manage it themselves (you 
 Inside the **Create Vector Knowledge Base** form click **+ Create New Vector Store**, or open the **Vector Stores** panel from any flow editor. The **Select Vector Store** picker shows the supported stores:
 
 <ThemedImage
-    alt="Select Vector Store picker listing In Memory Vector Store, Milvus Vector Store, pgvector Vector Store, Pinecone Vector Store (highlighted), and Weaviate Vector Store, each with a one-line description."
+    alt="Select Vector Store picker with a search box, listing In Memory Vector Store, Opensearch Vector Store, S3 Vector Store, Milvus Vector Store, Pgvector Vector Store, Pinecone Vector Store, and Weaviate Vector Store, each with a one-line description."
     sources={{
-        light: useBaseUrl('/img/genai/develop/components/vector-stores/01-select-list.png'),
-        dark: useBaseUrl('/img/genai/develop/components/vector-stores/01-select-list.png'),
+        light: useBaseUrl('/img/genai/develop/components/vector-stores/01-select-list-v5.1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/components/vector-stores/01-select-list-v5.1.0.png'),
     }}
 />
 
@@ -89,6 +89,7 @@ Inside the **Create Vector Knowledge Base** form click **+ Create New Vector Sto
 | Store | Module | Modes supported | Hosted/local |
 |---|---|---|---|
 | **In-Memory** | `ballerina/ai` | DENSE | Local (process memory) |
+| **Amazon S3 Vectors** | [`ballerinax/ai.aws.s3`](https://central.ballerina.io/ballerinax/ai.aws.s3/latest) | DENSE | Hosted (AWS) |
 | **Milvus** | [`ballerinax/ai.milvus`](https://central.ballerina.io/ballerinax/ai.milvus/latest) | DENSE | Hosted or self-hosted |
 | **pgvector** | [`ballerinax/ai.pgvector`](https://central.ballerina.io/ballerinax/ai.pgvector/latest) | DENSE, SPARSE | Self-hosted PostgreSQL |
 | **Pinecone** | [`ballerinax/ai.pinecone`](https://central.ballerina.io/ballerinax/ai.pinecone/latest) | DENSE, SPARSE, HYBRID | Hosted |
@@ -127,6 +128,113 @@ No required fields.
 :::warning
 Supports dense vectors only. Adding sparse or hybrid vectors raises an error.
 :::
+
+## Amazon S3 Vectors
+
+Amazon S3 Vectors stores vectors in a vector index inside an S3 vector bucket, and searches them with an approximate nearest neighbor query. It is a separate AWS service from S3 object storage, with its own endpoint and its own `s3vectors` IAM actions. The store ships in the same package as the [AWS S3 Text Data Loader](data-loaders.md#aws-s3-text-data-loader), so one package covers loading documents from S3 and storing their vectors in S3 Vectors.
+
+Official website: [Amazon S3 Vectors](https://aws.amazon.com/s3/features/vectors/).
+
+:::tip
+To have Amazon Bedrock chunk and embed the documents and query S3 Vectors for you, use the [Bedrock Self-Managed Knowledge Base](knowledge-bases.md#aws-bedrock) instead of a Vector Knowledge Base with this store.
+:::
+
+### Before you start
+
+**Create the vector bucket and index first.** The store doesn't create them. Three index settings matter, and AWS doesn't let you change any of them after the index is created:
+
+- **Dimension** must match your embedding provider's output dimension (1 to 4,096).
+- **Distance metric** is `cosine` or `euclidean`.
+- **Non-filterable metadata keys** must include `content`. The store keeps each chunk's text in this metadata key. AWS limits filterable metadata to 2 KB per vector, which chunk text easily exceeds, while non-filterable metadata can use the rest of the 40 KB per vector. If you set a different **contentKey** (see [S3 Vectors configuration](#s3-vectors-configuration)), declare that key instead.
+
+See [Creating a vector index in a vector bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-create-index.html).
+
+**Use a region where S3 Vectors is available.** It isn't offered in every AWS region. See [S3 Vectors AWS Regions and endpoints](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-regions-quotas.html).
+
+**Grant the IAM permissions.** The identity the store runs as needs these actions on the index:
+
+| Action | Needed for |
+|---|---|
+| `s3vectors:GetIndex` | Checking the index when the store is created. Not needed when **validateIndexOnInit** is `false`. |
+| `s3vectors:PutVectors` | **Add**. |
+| `s3vectors:QueryVectors` | **Query** with an embedding. |
+| `s3vectors:ListVectors` | **Query** without an embedding, which the Vector Knowledge Base's **Delete By Filter** uses. |
+| `s3vectors:GetVectors` | Every **Query**. AWS requires it whenever a query returns metadata or uses a filter, and the store always reads the chunk from metadata. Without it, **Query** fails with `403`. |
+| `s3vectors:DeleteVectors` | **Delete**. |
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3vectors:GetIndex",
+        "s3vectors:PutVectors",
+        "s3vectors:QueryVectors",
+        "s3vectors:ListVectors",
+        "s3vectors:GetVectors",
+        "s3vectors:DeleteVectors"
+      ],
+      "Resource": "arn:aws:s3vectors:us-east-1:111122223333:bucket/amzn-s3-demo-vector-bucket/index/idx"
+    }
+  ]
+}
+```
+
+See the permissions sections of [QueryVectors](https://docs.aws.amazon.com/AmazonS3/latest/API/API_S3VectorBuckets_QueryVectors.html) and [ListVectors](https://docs.aws.amazon.com/AmazonS3/latest/API/API_S3VectorBuckets_ListVectors.html).
+
+### Create form
+
+In the **Select Vector Store** picker, this store is listed as **S3 Vector Store**.
+
+<ThemedImage
+    alt={"Create Vector Store form titled 'Initializes the S3 Vectors vector store.' showing Connection Config (required, Record/Expression toggle, prefilled with {auth: {accessKeyId: \"\", secretAccessKey: \"\"}}), Index (required, Record/Expression toggle, default {}), S3 Vectors Configuration (Default: {}), HTTP Configuration (Default: {}), and Vector Store Name (default s3Vectorstore)."}
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components/vector-stores/12-s3-vectors-form-v5.1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/components/vector-stores/12-s3-vectors-form-v5.1.0.png'),
+    }}
+/>
+
+| Field | Required | Default | Available values |
+|---|---|---|---|
+| **Connection Config** | Yes | — | How to reach S3 Vectors. See [Connection config](#s3-vectors-connection-config). |
+| **Index** | Yes | — | The target index: either `vectorBucketName` and `indexName` together, for example `{vectorBucketName: "amzn-s3-demo-vector-bucket", indexName: "idx"}`, or `indexArn` on its own. Setting both forms, or only one of the two names, fails. |
+| **S3 Vectors Configuration** | No | `{}` | Store behavior. See [S3 Vectors configuration](#s3-vectors-configuration). |
+| **HTTP Configuration** | No | `{}` | Standard HTTP knobs. Same fields as [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations), with two exceptions: the store always uses HTTP/1.1 without chunked request bodies, because S3 Vectors rejects both HTTP/2 and chunked bodies, and **Retry Config** is ignored, because the store retries on its own. |
+
+:::tip
+**Connection Config** is prefilled with empty static access keys. When the integration runs on AWS, use `DEFAULT_CREDENTIALS` instead so that no long-lived keys are kept in the integration.
+:::
+
+#### Connection config {#s3-vectors-connection-config}
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| **auth** | `auth:AuthConfig` | — | `DEFAULT_CREDENTIALS`, or one of the credential records in [AWS credential options](model-providers.md#aws-credential-options). |
+| **region** | `aws:Region \| string` | `us-east-1` | The region of the vector bucket. |
+| **endpoint** | `aws:EndpointConfig` | `()` (derived from **region**) | Only `customEndpoint` is useful here: a full endpoint URL, including the scheme, that replaces the derived one. `fips` must stay `false`; AWS lists no FIPS endpoint for S3 Vectors, so `true` fails when the store is created. `dualstack` is ignored, because every S3 Vectors endpoint is already dual-stack (`s3vectors.<region>.api.aws`). |
+
+For an [interface VPC endpoint](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-privatelink.html), enable private DNS on the endpoint and leave **endpoint** empty.
+
+#### S3 Vectors configuration {#s3-vectors-configuration}
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| **contentKey** | `string` | `"content"` | The metadata key that holds the chunk text. It must be a non-filterable key on the index. |
+| **filters** | `ai:MetadataFilters` | `()` | Filters applied to every **Query**, combined with the query's own filters using `AND`. |
+| **returnVectorData** | `boolean` | `false` | Whether **Query** returns each match's embedding. S3 Vectors doesn't return embeddings from a search, so the store makes extra `GetVectors` calls (up to 100 keys each) when this is `true`. When `false`, the embedding of each match is empty. |
+| **maxListScan** | `int` | `100000` | The most vectors that a **Query** without an embedding reads before it fails. See [Behavior and limits](#s3-vectors-behavior-and-limits). |
+| **validateIndexOnInit** | `boolean` | `true` | Whether the store reads the index with `GetIndex` when it is created. This catches a missing index and a filterable content key at startup, and lets **Add** check each vector's dimension before sending it. |
+
+### Behavior and limits {#s3-vectors-behavior-and-limits}
+
+- **Dense vectors and text chunks only.** S3 Vectors has no sparse or hybrid index, and the chunk text is stored as metadata, so chunk content must be a `string`.
+- **Large adds and deletes aren't atomic.** The store sends up to 500 vectors per request. If a request fails, the earlier requests are already applied.
+- **`similarityScore` is converted from the S3 Vectors distance** so that higher means more similar: `1 - distance` for a `cosine` index, and `1 / (1 + distance)` for a `euclidean` index.
+- **Range filters need numbers.** The store saves `createdAt` and `modifiedAt` as epoch seconds, so range filters on them must use epoch seconds too.
+- **Filtered queries on a `CLASSIC` index can return fewer than Top K matches.** Indexes in vector buckets created on or after September 30, 2026 are `ENHANCED` and filter before searching. See [Changing a vector index's mode](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-index-mode.html).
+- **A query without an embedding scans the index** with `ListVectors` and checks the filters in the integration. The Vector Knowledge Base's **Delete By Filter** sends this kind of query, so it reads the whole index, and fails after more than **maxListScan** vectors.
 
 ## Milvus
 
@@ -299,12 +407,13 @@ This connector supports dense vectors only. Weaviate maps the `certainty` score 
 | Situation | Recommended |
 |---|---|
 | Prototyping; tiny dataset; tests | **In-Memory.** No infrastructure required. |
+| Already on AWS; don't want to run a vector database | **Amazon S3 Vectors.** |
 | Already running PostgreSQL | **pgvector.** Keeps vectors next to your existing data. |
 | Want hosted, multi-tenant by default | **Pinecone**. |
 | Want open-source plus rich filtering & GraphQL | **Weaviate**. |
 | Very large datasets, k8s-native | **Milvus**. |
 
-Selection is based on operational concerns (where your data already lives, what your team already runs). All five satisfy the same Vector Store contract. The rest of the project does not change when you swap.
+Selection is based on operational concerns (where your data already lives, what your team already runs). All six satisfy the same Vector Store contract. The rest of the project does not change when you swap.
 
 ## What's next
 

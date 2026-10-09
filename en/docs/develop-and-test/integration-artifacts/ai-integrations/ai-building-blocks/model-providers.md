@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Model Providers for LLMs
-description: Reference for every model provider for LLM in WSO2 Integrator, covering create form fields, advanced configurations, defaults, and supported models for the Default WSO2 provider, OpenAI, Azure OpenAI, Anthropic, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.
-keywords: [wso2 integrator, model provider, llm, large language model, ai, anthropic, openai, azure openai, google vertex, mistral, deepseek, ollama, openrouter]
+description: Reference for every model provider for LLM in WSO2 Integrator, covering create form fields, advanced configurations, defaults, and supported models for the Default WSO2 provider, OpenAI, Azure OpenAI, Anthropic, AWS Bedrock, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.
+keywords: [wso2 integrator, model provider, llm, large language model, ai, anthropic, aws bedrock, openai, azure openai, google vertex, mistral, deepseek, ollama, openrouter]
 slug: /develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers
 ---
 
@@ -45,20 +45,20 @@ Per-call overrides are not exposed in the form. Anything that varies per request
 - Click **+ Add Model Provider** and the **Select Model Provider** picker opens with a card for each provider type:
 
 <ThemedImage
-    alt="Select Model Provider picker listing Default Model Provider (WSO2), Anthropic, Azure OpenAI, DeepSeek, Google Vertex, Mistral, Ollama, OpenAI, with one-line descriptions for each."
+    alt="Select Model Provider picker listing Default Model Provider (WSO2), Anthropic Model Provider, Bedrock Model Providers (a group marked 14 options), Azure OpenAI, Deepseek, Gemini, Google Vertex, Mistral, Ollama, and OpenAI Model Provider, with one-line descriptions for each."
     sources={{
-        light: useBaseUrl('/img/genai/develop/components/model-providers/02-select-list-top.png'),
-        dark: useBaseUrl('/img/genai/develop/components/model-providers/02-select-list-top.png'),
+        light: useBaseUrl('/img/genai/develop/components/model-providers/02-select-list-top-v5.1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/components/model-providers/02-select-list-top-v5.1.0.png'),
     }}
 />
 
 Scroll to see the remaining options:
 
 <ThemedImage
-    alt="Select Model Provider picker scrolled to show DeepSeek (highlighted), Google Vertex, Mistral, Ollama, OpenAI, and OpenRouter Model Provider entries."
+    alt="Select Model Provider picker scrolled to show Bedrock Model Providers (14 options), Azure OpenAI (highlighted), Deepseek, Gemini, Google Vertex, Mistral, Ollama, OpenAI, and OpenRouter Model Provider entries."
     sources={{
-        light: useBaseUrl('/img/genai/develop/components/model-providers/03-select-list-bottom.png'),
-        dark: useBaseUrl('/img/genai/develop/components/model-providers/03-select-list-bottom.png'),
+        light: useBaseUrl('/img/genai/develop/components/model-providers/03-select-list-bottom-v5.1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/components/model-providers/03-select-list-bottom-v5.1.0.png'),
     }}
 />
 
@@ -68,6 +68,7 @@ Scroll to see the remaining options:
 |---|---|---|---|
 | **Default WSO2** | `ballerina/ai` | No (signed-in via WSO2) | Yes. See [Default WSO2 Embedding Provider](embedding-providers.md#default-wso2-embedding-provider) |
 | **Anthropic** | [`ballerinax/ai.anthropic`](https://central.ballerina.io/ballerinax/ai.anthropic/latest) | Yes | No |
+| **AWS Bedrock** | [`ballerinax/ai.aws.bedrock`](https://central.ballerina.io/ballerinax/ai.aws.bedrock/latest) | AWS credentials or a Bedrock API key | Yes |
 | **Azure OpenAI** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Yes | Yes |
 | **DeepSeek** | [`ballerinax/ai.deepseek`](https://central.ballerina.io/ballerinax/ai.deepseek/latest) | Yes | No |
 | **Google Vertex** | [`ballerinax/ai.googleapis.vertex`](https://central.ballerina.io/ballerinax/ai.googleapis.vertex/latest) | OAuth2 / service account | Yes |
@@ -162,6 +163,146 @@ Official website: [anthropic.com](https://www.anthropic.com/).
 | **Temperature** | `0.7` | `0.0`-`1.0` | Sampling temperature. |
 
 Plus the [Standard HTTP advanced configurations](#standard-http-advanced-configurations).
+
+## AWS Bedrock
+
+Amazon Bedrock serves models from many vendors, including Anthropic, OpenAI, Amazon, Mistral, Qwen, Google, and DeepSeek, from your own AWS account and region.
+
+Official website: [aws.amazon.com/bedrock](https://aws.amazon.com/bedrock/).
+
+Bedrock serves models through two endpoints, and the package ships a separate model provider for each endpoint and vendor:
+
+| Endpoint | Model providers | When to use |
+|---|---|---|
+| **Bedrock Runtime** | Bedrock Common, Anthropic, OpenAI, Amazon, Mistral, Qwen, Google, DeepSeek | The default choice. Supports guardrails and cross-region inference profiles. |
+| **Bedrock Mantle** | Anthropic, OpenAI, Mistral, Qwen, Google, DeepSeek | When the model you need is not served on Bedrock Runtime, or when requests must stay in one region for a model that Bedrock Runtime serves only through cross-region profiles, such as the GPT-6 models. |
+
+In the **Select Model Provider** picker, all of these are grouped under one **Bedrock Model Providers** card. Expand it to choose a provider, for example **Bedrock Runtime Anthropic Model Provider** or **Bedrock Mantle OpenAI Model Provider**.
+
+**Bedrock Common** accepts any Bedrock model ID and calls it through the Converse API. Use it for vendors that have no provider of their own, such as Meta, Writer, xAI, Moonshot AI, MiniMax, NVIDIA, and Z.AI.
+
+:::warning
+Bedrock Mantle uses a separate IAM permission, **`bedrock-mantle:CreateInference`**. A role that can call Bedrock Runtime (`bedrock:InvokeModel`) still gets `AccessDenied` on Mantle until you grant it. If you authenticate with a Bedrock API key, Mantle also needs **`bedrock-mantle:CallWithBearerToken`**. See [Amazon Bedrock powered by AWS Mantle](https://docs.aws.amazon.com/service-authorization/latest/reference/list_bedrock-mantle.html).
+:::
+
+### Create form
+
+<ThemedImage
+    alt="Create Model Provider form for the Bedrock Runtime Anthropic Model Provider showing three required fields: Model (text/expression toggle, value us.anthropic.claude-fable-5-1), AWS Credentials (record/expression toggle, with hint 'AWS credentials, or auth:DEFAULT_CREDENTIALS for the default chain'), and Region (text/expression toggle, value us-west-2). Below: Advanced Configurations Expand link, Model Provider Name bedrockRuntimeanthropicmodelprovider, Result Type bedrock:RuntimeAnthropicModelProvider."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components/model-providers/24-aws-bedrock-runtime-anthropic-basic-v5.1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/components/model-providers/24-aws-bedrock-runtime-anthropic-basic-v5.1.0.png'),
+    }}
+/>
+
+Every AWS Bedrock model provider has the same three required fields; only the model IDs each one accepts differ.
+
+| Field | Required | Default | Available values |
+|---|---|---|---|
+| **Model** | Yes | - | A Bedrock model ID, such as one from the table below, or any other ID the endpoint serves. On Bedrock Runtime providers this can also be a cross-region inference profile ID (for example `us.anthropic.claude-sonnet-4-6`) or a provisioned-throughput, custom-model-deployment, or inference-profile ARN. |
+| **AWS Credentials** | Yes | - | `DEFAULT_CREDENTIALS`, or one of the records in [AWS credential options](#aws-credential-options). |
+| **Region** | Yes | - | The AWS region to call, for example `us-east-1`. There is no default. If **Model** is an ARN, the ARN's region is used. |
+
+Model IDs each provider knows about:
+
+| Provider | Bedrock Runtime | Bedrock Mantle |
+|---|---|---|
+| **Anthropic** | `us.anthropic.claude-opus-5-5`, `us.anthropic.claude-opus-5`, `us.anthropic.claude-opus-4-8`, `us.anthropic.claude-opus-4-7`, `us.anthropic.claude-sonnet-5`, `us.anthropic.claude-sonnet-4-6`, `us.anthropic.claude-haiku-4-5-20251001-v1:0`, `us.anthropic.claude-fable-5`, `us.anthropic.claude-fable-5-1` | `anthropic.claude-opus-5-5`, `anthropic.claude-opus-5`, `anthropic.claude-opus-4-8`, `anthropic.claude-opus-4-7`, `anthropic.claude-sonnet-5`, `anthropic.claude-haiku-4-5`, `anthropic.claude-fable-5`, `anthropic.claude-fable-5-1` |
+| **OpenAI** | `openai.gpt-oss-120b-1:0`, `openai.gpt-oss-20b-1:0`, `us.openai.gpt-6-astra`, `us.openai.gpt-6-sol`, `us.openai.gpt-6-luna` | `openai.gpt-5.5`, `openai.gpt-5.4`, `openai.gpt-5.6-sol`, `openai.gpt-5.6-terra`, `openai.gpt-5.6-luna`, `openai.gpt-oss-120b-1:0`, `openai.gpt-6-astra`, `openai.gpt-6-sol`, `openai.gpt-6-luna` |
+| **Amazon** | `amazon.nova-pro-v1:0`, `amazon.nova-lite-v1:0`, `amazon.nova-micro-v1:0` | - |
+| **Mistral** | `mistral.mistral-large-3-675b-instruct`, `mistral.mistral-large-2407-v1:0`, `mistral.mistral-large-2402-v1:0`, `mistral.mistral-7b-instruct-v0:2` | `mistral.mistral-large-3-675b-instruct` |
+| **Qwen** | `qwen.qwen3-32b-v1:0`, `qwen.qwen3-coder-480b-a35b-v1:0` | `qwen.qwen3-32b-v1:0`, `qwen.qwen3-coder-480b-a35b-v1:0` |
+| **Google** | `google.gemma-3-4b-it`, `google.gemma-3-12b-it`, `google.gemma-3-27b-it` | `google.gemma-3-4b-it`, `google.gemma-3-12b-it`, `google.gemma-3-27b-it`, `google.gemma-4-e2b`, `google.gemma-4-26b-a4b`, `google.gemma-4-31b` |
+| **DeepSeek** | `us.deepseek.r1-v1:0`, `deepseek.v3.2` | `deepseek.v3.2` |
+| **Bedrock Common** | Any model ID | - |
+
+These models are Legacy on Bedrock, with an end-of-life date of March 30, 2027: `google.gemma-3-4b-it`, `google.gemma-3-12b-it`, `google.gemma-3-27b-it`, `mistral.mistral-7b-instruct-v0:2`, `qwen.qwen3-coder-480b-a35b-v1:0`, and `us.deepseek.r1-v1:0`.
+
+:::note
+IDs that start with `us.` are US cross-region inference profiles and work only when **Region** is a US region. In other regions, type the profile ID for your geography instead, for example `eu.anthropic.claude-haiku-4-5-20251001-v1:0` or `global.anthropic.claude-haiku-4-5-20251001-v1:0`. Most current Claude models on Bedrock Runtime are served only through these profiles, and AWS rejects the bare `anthropic.` ID. A few accept the bare ID in specific regions only; check the model's card in [Amazon Bedrock models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html).
+:::
+
+### Advanced configurations
+
+The advanced fields depend on the endpoint and the vendor. For example:
+
+**Bedrock Runtime Anthropic** has **API**, the Runtime-only fields (Guardrail, Service Tier, Latency Optimized), and the Claude fields (Thinking, Effort).
+
+<ThemedImage
+    alt="AWS Bedrock Runtime Anthropic Create Model Provider form with Advanced Configurations scrolled to the Runtime-only fields Service Tier, Latency Optimized, and Guardrail, followed by Retry Config and HTTP Config."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components/model-providers/25-aws-bedrock-runtime-anthropic-advanced-v5.1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/components/model-providers/25-aws-bedrock-runtime-anthropic-advanced-v5.1.0.png'),
+    }}
+/>
+
+**Bedrock Mantle Anthropic** has no **API** field and no Runtime-only fields, but keeps Thinking and Effort.
+
+<ThemedImage
+    alt="AWS Bedrock Mantle Anthropic Create Model Provider form with Advanced Configurations scrolled to Retry Config, HTTP Config, Thinking (a ThinkingConfig record), and Effort, followed by Model Provider Name bedrockMantleanthropicmodelprovider and Result Type bedrock:MantleAnthropicModelProvider."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components/model-providers/26-aws-bedrock-mantle-anthropic-advanced-v5.1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/components/model-providers/26-aws-bedrock-mantle-anthropic-advanced-v5.1.0.png'),
+    }}
+/>
+
+**Bedrock Common** has no **API** field (it always uses Converse) and no vendor-specific fields.
+
+<ThemedImage
+    alt="AWS Bedrock Common Create Model Provider form with Advanced Configurations expanded showing Endpoint Configuration, Maximum Tokens (default 4096), Temperature, Stop Sequences, Additional Model Request Fields, and Service Tier. There is no API field."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components/model-providers/27-aws-bedrock-common-advanced-v5.1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/components/model-providers/27-aws-bedrock-common-advanced-v5.1.0.png'),
+    }}
+/>
+
+All fields across the AWS Bedrock model providers:
+
+| Field | Default | Available values | What it controls |
+|---|---|---|---|
+| **API** | `CONVERSE` | `CONVERSE`, `INVOKE`, plus `MESSAGES` (Anthropic), `RESPONSES` (OpenAI), or `CHAT_COMPLETIONS` (all except Amazon and Anthropic) | Which Bedrock API the request uses. Bedrock Runtime providers only; Bedrock Common always uses Converse. Bedrock Mantle providers use the API AWS serves each model on, for example Responses for GPT-5.x. |
+| **Endpoint Configuration** | `()` (derived from Region) | `fips`, `dualstack`, `customEndpoint` | Endpoint variant, or a full URL override such as a VPC endpoint. |
+| **Maximum Tokens** | `4096` | Any positive integer, or empty | Hard cap on response length. Leave empty to use the model's own limit. |
+| **Temperature** | `()` (omitted from request) | Model-specific, or empty | Sampling temperature. Leave empty to use the model's default. |
+| **Stop Sequences** | `()` | String array | Stop sequences for every call. A per-call **Stop** overrides these. |
+| **Additional Model Request Fields** | `()` | Open record, for example `{"top_p": 0.9}` | Extra request fields sent to Bedrock unchanged. |
+| **Guardrail** | `()` | `guardrailIdentifier`, `guardrailVersion` | Applies an Amazon Bedrock guardrail. Bedrock Runtime only. |
+| **Service Tier** | `()` | `TIER_DEFAULT`, `TIER_PRIORITY`, `TIER_FLEX`, `TIER_RESERVED` | Bedrock processing tier. Bedrock Runtime only. |
+| **Latency Optimized** | `()` | `true`, `false` | Requests latency-optimized inference where the model and region support it. Bedrock Runtime only. |
+| **Retry Config** | `maxRetries` 3, `initialDelay` 1.0, `maxDelay` 20.0, `backoffFactor` 2.0 | Record | Backoff for throttling and transient errors (408, 429, 500, 502, 503, 504). |
+| **HTTP Config** | `{}` | Record | The [Standard HTTP advanced configurations](#standard-http-advanced-configurations), grouped in one record. There is no **Service URL**; use **Endpoint Configuration**. |
+
+Provider-specific fields:
+
+| Provider | Field | Available values | What it controls |
+|---|---|---|---|
+| **Anthropic** | **Thinking** | `mode` (`ADAPTIVE`, `ENABLED`, `DISABLED`), `budgetTokens` | Claude extended thinking. |
+| **Anthropic** | **Effort** | `EFFORT_LOW`, `EFFORT_MEDIUM`, `EFFORT_HIGH`, `EFFORT_XHIGH`, `EFFORT_MAX` | How much reasoning Claude spends. Supported values vary by model. |
+| **OpenAI** | **Reasoning Effort** | `REASONING_NONE`, `REASONING_MINIMAL`, `REASONING_LOW`, `REASONING_MEDIUM`, `REASONING_HIGH`, `REASONING_XHIGH`, `REASONING_MAX` | Reasoning depth for GPT models. |
+| **Qwen** | **Enable Thinking** | `true`, `false` | Qwen3 thinking mode. |
+
+### AWS credential options {#aws-credential-options}
+
+| Auth type | Fields | When to use |
+|---|---|---|
+| **Default credentials** | `DEFAULT_CREDENTIALS` | Uses the standard AWS credential chain (environment variables, shared config file, SSO, EKS, ECS, and EC2 roles). No setup is needed when the integration runs on AWS. |
+| **Static keys** | `accessKeyId`, `secretAccessKey`, optional `sessionToken` | IAM user access keys or temporary STS credentials. |
+| **Named profile** | `profileName`, optional `credentialsFilePath` | A profile from `~/.aws/credentials`. |
+| **Assume role** | `roleArn`, optional `externalId`, `roleSessionName`, `duration`, `stsRegion`, `sourceCredentials` | Cross-account access through an IAM role. |
+| **Web identity** | `roleArn`, `webIdentityTokenFile`, optional `roleSessionName`, `stsRegion` | OIDC web identity tokens. |
+| **SSO** | `ssoStartUrl`, `ssoRegion`, `accountId`, `roleName`, optional `ssoSessionName` | IAM Identity Center. |
+| **Credential process** | `command` | An external program that prints credentials. |
+| **Bedrock API key** | `apiKey` | A [Bedrock API key](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html). The key's identity needs `bedrock:CallWithBearerToken` for Bedrock Runtime, or `bedrock-mantle:CallWithBearerToken` for Bedrock Mantle. See [API key permissions](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys-permissions.html). |
+
+:::note
+**Generate** with a non-`string` **Expected Type** is not supported on the Bedrock Mantle Anthropic provider; use the Bedrock Runtime Anthropic provider instead. **Chat** works on every provider.
+
+**Chat** also accepts images (PNG, JPEG, GIF, and WebP) on the Converse API and the Anthropic Messages API. On other APIs, a message with an image returns an error.
+:::
+
+:::info
+The AWS Bedrock package also ships **Embedding Providers** (Titan and Cohere). See [Embedding providers](embedding-providers.md).
+:::
 
 ## Azure OpenAI
 
@@ -533,7 +674,7 @@ Editing a connection follows the same pattern for every component type. Embeddin
 
 ## What's next
 
-- [Embedding providers](embedding-providers.md) — Vector embeddings for RAG. The OpenAI, Azure, Vertex, OpenRouter, and Default WSO2 packages also ship embedding providers.
+- [Embedding providers](embedding-providers.md) — Vector embeddings for RAG. The OpenAI, Azure, AWS Bedrock, Vertex, OpenRouter, and Default WSO2 packages also ship embedding providers.
 - [Vector stores](vector-stores.md) — Persist and query embeddings using Pinecone, Weaviate, Qdrant, pgvector, and other backends.
 - [Knowledge bases](knowledge-bases.md) — Managed retrieval sources, including Azure AI Search, that plug directly into RAG flows.
 - [Chunkers](chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.
