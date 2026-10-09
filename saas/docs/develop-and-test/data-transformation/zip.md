@@ -50,13 +50,18 @@ Set `includeSourceDirectory` to `false` when you want the directory's *contents*
 
 1. **Add a Function Call step** — Click **+** and select **Statement** → **Call Function**, then search for `compress` under **zip**.
 
-2. **Open Advanced Configurations** — Select **Expand** next to **Advanced Configurations** to reveal the **Options** field. It takes the whole `CompressOptions` record, so enter the fields you need as a record literal:
+2. **Apply Advanced Configurations** — Select the **Options** field to open the **Record Configuration** for `CompressOptions`, then set:
+   - **level**: `BEST`
+   - **includeSourceDirectory**: unchecked (`false`)
+   - **overwrite**: checked (`true`)
 
-   ```
-   {includeSourceDirectory: false, level: zip:BEST, overwrite: true}
-   ```
-
-   Use the **Record**/**Expression** toggle to switch between the guided record editor and a raw expression.
+   <ThemedImage
+       alt="The Record Configuration dialog for CompressOptions showing level set to BEST, includeSourceDirectory unchecked, and overwrite checked"
+       sources={{
+           light: useBaseUrl('/img/develop/transform/zip/zip-compress-options.png'),
+           dark: useBaseUrl('/img/develop/transform/zip/zip-compress-options.png'),
+       }}
+   />
 
 ```ballerina
 import ballerina/zip;
@@ -93,17 +98,17 @@ Set `overwrite` to `true` for a job that regenerates the same archive on every r
    - **Result***: `entries`
    - **Result Type*** is fixed at `zip:Entry[]`
 
-   <ThemedImage
-       alt="The zip : listEntries configuration form showing the Path field and the entries result variable typed as zip:Entry[]"
-       sources={{
-           light: useBaseUrl('/img/develop/transform/zip/zip-listentries-form.png'),
-           dark: useBaseUrl('/img/develop/transform/zip/zip-listentries-form.png'),
-       }}
-   />
-
-2. **Add a Foreach step** — Click **+** and select **Foreach** under **Control**. Set the **Collection** to `entries` and the **Variable Name** to `entry`.
+2. **Add a Foreach step** — Click **+** and select **Foreach** under **Control**. Set the **Collection** to `entries` and the **Variable Name** to `entry` and set the variable type as `zip:Entry`.
 
 3. **Read each entry inside the loop** — Within the Foreach body, use `entry.name`, `entry.isDirectory`, and `entry.uncompressedSize` to decide how to handle each item. Skip directory entries with an **If** node, or pass the name straight to a downstream step.
+
+   <ThemedImage
+       alt=""
+       sources={{
+           light: useBaseUrl('/img/develop/transform/zip/zip-list-entries.png'),
+           dark: useBaseUrl('/img/develop/transform/zip/zip-list-entries.png'),
+       }}
+   />
 
 ```ballerina
 import ballerina/io;
@@ -153,7 +158,7 @@ cannot extract entry 'orders.csv': file '/data/extracted/orders.csv' already exi
 
 The alternatives are `zip:REPLACE`, which overwrites the existing file, and `zip:SKIP`, which leaves it in place and continues. Choose `zip:SKIP` for a retryable job that may re-process the same archive, and `zip:REPLACE` when the archive is the source of truth.
 
-1. **Open the decompress step** — Select the existing `zip : decompress` node in the flow to reopen its configuration form.
+1. **Open the decompress step** — Select the existing `zip:decompress` node in the flow to reopen its configuration form.
 
 2. **Set the write mode in Options** — Select **Expand** next to **Advanced Configurations**, then set **Options** to a `DecompressOptions` record carrying the mode you want:
 
@@ -250,35 +255,53 @@ A partner uploads a ZIP of CSV files. The integration inspects it, rejects anyth
 
 1. **Create the automation** — Add an **Automation** artifact so the integration starts from `main`, or attach this logic to an existing file or FTP entry point.
 
-2. **Add a Function Call step for inspection** — Call `zip:listEntries` on the incoming archive path and assign the result to `entries`.
+2. **Add a Function Call step for inspection** — Inside the error handler, call `zip:listEntries` on the incoming archive path (e.g., `"reports.zip"`) and assign the result to `entries`.
 
-3. **Add an If step** — Click **+** and select **If** under **Control**. Test `entries.length() > 500` and route the true branch to your rejection logic.
+3. **Add an If step** — Click **+** and select **If** under **Control**. Set the condition to `entries.length() < 500` so the extraction only proceeds when the entry count is within the allowed limit.
 
-4. **Add a Function Call step for extraction** — Call `zip:decompress` with the archive path, the staging directory, and the `limits` record described above.
+4. **Add a Function Call step for extraction** — Inside the `If` true branch, call `zip:decompress` with the archive path, the staging directory (`"./staging"`), and the `limits` record described above.
 
-5. **Add a Foreach step** — Iterate `entries`, skip entries where `isDirectory` is `true`, and call your CSV processing function with the extracted path for each remaining entry.
+5. **Add a Foreach step** — Still inside the `If` true branch, add a **Foreach** under **Control**. Set the **Collection** to `entries` and the **Variable Name** to `entry`.
+
+6. **Filter non-CSV entries** — Inside the Foreach body, add an **If** step with the condition `entry.isDirectory || !entry.name.endsWith(".csv")` and place a **Continue** in its true branch to skip directory entries and non-CSV files.
+
+7. **Process each CSV** — After the filter, call `io:fileReadCsv` with the extracted file path and pass the result to `io:println`.
+
+   <ThemedImage
+       alt="The complete integration flow showing zip:listEntries, an If check on entry count, zip:decompress with limits, a Foreach iterating entries with a filter for CSV files, and io:fileReadCsv processing each file"
+       sources={{
+           light: useBaseUrl('/img/develop/transform/zip/zip-integration-example.png'),
+           dark: useBaseUrl('/img/develop/transform/zip/zip-integration-example.png'),
+       }}
+   />
 
 ```ballerina
 import ballerina/io;
 import ballerina/log;
 import ballerina/zip;
 
-configurable string stagingDir = "./staging";
-
-public function processBatch(string archivePath) returns error? {
-    zip:Entry[] entries = check zip:listEntries(archivePath);
-    log:printInfo("batch received", archive = archivePath, entries = entries.length());
-
-    check zip:decompress(archivePath, stagingDir, {
-        limits: {maxEntries: 500, maxTotalSize: 104857600, maxCompressionRatio: 100}
-    });
-
-    foreach zip:Entry entry in entries {
-        if entry.isDirectory || !entry.name.endsWith(".csv") {
-            continue;
+public function main() returns error? {
+    do {
+        zip:Entry[] entries = check zip:listEntries("reports.zip");
+        if entries.length() < 500 {
+            check zip:decompress("reports.zip", "./staging", {
+                                                                 limits: {
+                                                                     maxEntries: 500,
+                                                                     maxTotalSize: 104857600,
+                                                                     maxCompressionRatio: 100
+                                                                 }
+                                                             });
+            foreach zip:Entry entry in entries {
+                if entry.isDirectory || !entry.name.endsWith(".csv") {
+                    continue;
+                }
+                string[][] rows = check io:fileReadCsv(string `staging/${entry.name}`);
+                io:println(rows);
+            }
         }
-        string[][] rows = check io:fileReadCsv(string `${stagingDir}/${entry.name}`);
-        check handleRows(entry.name, rows);
+    } on fail error e {
+        log:printError("Error occurred", 'error = e);
+        return e;
     }
 }
 ```

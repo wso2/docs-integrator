@@ -8,7 +8,7 @@ Extract text from existing PDFs, convert PDF pages to images, and generate PDF d
 
 ## Text Extraction
 
-Read the textual content of a PDF one page at a time. The module provides three entry points; choose the one that matches where the PDF originates.
+Read the textual content of a PDF one page at a time. The module provides three entry points — choose the one that matches where the PDF originates.
 
 ### Extracting from PDF Bytes
 
@@ -81,10 +81,10 @@ Render each page of a PDF to a Base64-encoded PNG. Useful for page previews, thu
 
 The three variants mirror text extraction: bytes, file path, or URL. Each returns a `string[]` where every element is a Base64-encoded PNG for one page.
 
-1. **Add a Function Call step for conversion**: Click **+** and select **Call Function**. Choose one of the following depending on your input.
-   - `pdf:toImages`: when the input is `byte[]`
-   - `pdf:fileToImages`: when the input is a file path `string`
-   - `pdf:urlToImages`: when the input is a URL `string`
+1. **Add a Function Call step for conversion**: Click **+** and select **Call Function**. Choose one of the following under pdf library depending on your input.
+   - `toImages`: when the input is `byte[]`
+   - `fileToImages`: when the input is a file path `string`
+   - `urlToImages`: when the input is a URL `string`
 
    Then, assign the `string[]` result to a variable named `pageImages`.
 
@@ -92,7 +92,7 @@ The three variants mirror text extraction: bytes, file path, or URL. Each return
 
    > **Why an index range here?** Each output file needs a unique name (`page-1.png`, `page-2.png`, ...), so the loop tracks the page number through `i`. Direct iteration over `pageImages` (as in the text-extraction example) wouldn't expose the position.
 
-3. **Decode and write each image**: Inside the loop, click **+** and select **Call Function**. Call `array:fromBase64(pageImages[i])` to obtain the raw PNG bytes for the current page, then call `io:fileWriteBytes` with the path expression `` string `./page-${i + 1}.png` `` to save each page as a separate, numbered PNG file.
+3. **Decode and write each image**: Inside the loop, click **+** and select **Call Function**. Call `fromBase64(pageImages[i])` to obtain the raw PNG bytes for the current page, then call `fileWriteBytes` with the path expression `` string `./page-${i + 1}.png` `` to save each page as a separate, numbered PNG file.
 
    <ThemedImage
        alt="Flow designer showing the fileToImages function call, an index-range foreach, and the fromBase64 plus fileWriteBytes steps inside the loop"
@@ -119,7 +119,7 @@ public function main() returns error? {
 
 ## HTML to PDF Rendering
 
-Convert parameterized HTML templates into PDF bytes suitable for download, email attachments, or storage. The rendering engine covers document-style HTML and CSS. Tables, inline images, fonts, colored cells, and injected stylesheets without depending on a headless browser.
+Convert parameterized HTML templates into PDF bytes suitable for download, email attachments, or storage. The rendering engine covers document-style HTML and CSS — tables, inline images, fonts, colored cells, and injected stylesheets — without depending on a headless browser.
 
 ### Rendering an HTML String
 
@@ -132,7 +132,7 @@ Read or build an HTML string, then pass it to `pdf:parseHtml` to obtain the PDF 
    - **Result***: `pdfBytes`
    - **Type**: `byte[]`
 
-3. **Add a Function Call step for output**: Click **+** and select **Call Function**. Call `io:fileWriteBytes("./output.pdf", pdfBytes)` to save the PDF to disk, or assign `pdfBytes` to an `http:Response` payload to return it from a service.
+3. **Add a Function Call step for output**: Click **+** and select **Call Function**. Call `fileWriteBytes` and set `Path` as `"./output.pdf"` and the `Content` as `pdfBytes` and save the PDF to disk, or assign `pdfBytes` to an `http:Response` payload to return it from a service.
 
    <ThemedImage
        alt="Flow designer showing the html variable, parseHtml function call producing pdfBytes, and fileWriteBytes save step"
@@ -162,11 +162,11 @@ public function main() returns error? {
 
 ### Customizing Page Size, Margins, and Fonts
 
-`parseHtml` accepts a set of named options; page size, margins, a `maxPages` cap, custom fonts for non-Latin scripts, a `fallbackFontSize` applied when CSS does not specify one, and extra CSS injected into every render.
+`parseHtml` accepts a `ConversionOptions` record spread as named arguments: page size, margins (`PageMargins`), a `maxPages` cap, custom fonts for non-Latin scripts, a `fallbackFontSize` (default `12.0`) applied when CSS does not specify one, and `additionalCss` injected into every render.
 
 > **Custom-font prerequisite**: The example below uses [Noto Sans SC](https://fonts.google.com/noto/specimen/Noto+Sans+SC) for custom-font rendering. Download the font file and place it at `./resources/NotoSansSC.ttf` in your Ballerina project before running the integration. Substitute any TrueType font that covers your target script.
 
-1. **Add a Function Call step for the font bytes**: Click **+** and select **Call Function**. Call `io:fileReadBytes("./resources/NotoSansSC.ttf")` and assign the result to a `byte[] & readonly` variable named `fontBytes`. The font is required to render non-Latin scripts such as Chinese, Japanese, Korean, Arabic, or Devanagari.
+1. **Add a Function Call step for the font bytes**: Click **+** and select **Call Function**. Call `fileReadBytes("./resources/NotoSansSC.ttf")` and assign the result to a `byte[] & readonly` variable named `fontBytes`. The font is required to render non-Latin scripts such as Chinese, Japanese, Korean, Arabic, or Devanagari.
 
    > **Note**: Declare `fontBytes` at module scope (as shown in the Ballerina Code tab) so the font is read once at startup rather than on every render.
 
@@ -174,7 +174,8 @@ public function main() returns error? {
    - **html***: `html`
    - **pageSize**: `pdf:LETTER`
    - **margins**: `{top: 36.0, right: 40.0, bottom: 36.0, left: 40.0}`
-   - **customFonts**: `[{family: "NotoSansSC", content: fontBytes}]`
+   - **customFonts**: `[{family: "NotoSansSC", content: fontBytes}]` (the `Font` record also accepts optional `bold` and `italic` boolean fields, both defaulting to `false`)
+   - **fallbackFontSize**: `12.0` (applied when the HTML/CSS does not specify a font size)
    - **maxPages**: `50`
    - **Result***: `pdfBytes`
 
@@ -215,7 +216,7 @@ public function main() returns error? {
 
 For landscape orientation, use a `pdf:CustomPageSize` with the width and height of the standard portrait size swapped.
 
-For the complete list of options, the `StandardPageSize` enum, the `CustomPageSize` record, and the `Font` record, see the [ballerina/pdf API reference on Ballerina Central](https://central.ballerina.io/ballerina/pdf/latest).
+For the complete list of options, the `ConversionOptions` record, the `StandardPageSize` enum, the `CustomPageSize` record, the `PageMargins` record, and the `Font` record, see the [ballerina/pdf API reference on Ballerina Central](https://central.ballerina.io/ballerina/pdf/latest).
 
 ### Supported HTML and CSS
 
@@ -234,16 +235,26 @@ Build an HTTP service that renders a parameterized template into a PDF and retur
 
 2. **Configure the response**: Open the **Responses** tab on the resource. Edit the success response (click the pencil icon) and pick **Dynamic - Response** from the **Status Code** dropdown. This lets the resource return any `http:Response`, which is required to carry the binary PDF payload.
 
-3. **Add a Function Call step to build the HTML**: Click **+** and select **Call Function**. Call your template function — for example, `buildInvoiceHtml(customer, amount, dueDate)`.
+3. **Add a Declare Variable step for the HTML**: Click **+** and, under **Statement**, select **Declare Variable**. Set the type to `string` and the name to `html`. Switch the toggle from **Record** to **Expression** and enter the HTML as a Ballerina template literal (`` string `...` ``), interpolating the query parameters directly into the markup:
 
-- The function won't exist yet, so create it from the picker: expand **Project**, select **Create Function**, and define it using the signature shown in the Ballerina Code tab. Assign the result to a `string` variable named `html`.
+   ```
+   string `<!DOCTYPE html>
+   <html>
+     <body style="font-family: 'Liberation Sans'; padding: 24px;">
+       <h1>Invoice</h1>
+       <p>Customer: ${customer}</p>
+       <p>Amount due: $${amount}</p>
+       <p>Due by: ${dueDate}</p>
+     </body>
+   </html>`
+   ```
 
-4. **Add a Function Call step for rendering**: Click **+** and select **Call Function**. Call `pdf:parseHtml(html)` and assign the result to `pdfBytes`.
+4. **Add a Function Call step for rendering**: Click **+** and select **Call Function**. Call `parseHtml(html)` and assign the result to `pdfBytes`.
 
-5. **Build the response**: Add the following three steps in order inside the flow:
+5. **Build the response**: Add the following steps in order inside the flow:
    - **Declare Variable** with type `http:Response`, name `response`, and expression `new`.
-   - **Call Function** under **http** calling `response.setBinaryPayload(pdfBytes)`.
-   - **Call Function** under **http** calling `response.setContentType("application/pdf")`.
+   - **Declare Variable** with type `()`, name `payload`, and expression `response.setBinaryPayload(pdfBytes)`.
+   - **Declare Variable** with type `error?`, name `contentType`, and expression `response.setContentType("application/pdf")`.
 
 6. **Return the response**: Click **+** and, under **Control**, select **Return**. Set the return value to `response`.
 

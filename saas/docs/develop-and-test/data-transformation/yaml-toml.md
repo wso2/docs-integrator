@@ -33,13 +33,13 @@ Read YAML content and convert it into Ballerina values with type safety.
 
    For details on creating types, see [Types](../integration-artifacts/supportive-artifacts/types.md).
 
-2. **Add a Function Call step to read the file as bytes**: In the flow designer, click **+** and select **Function Call**. Search for `io:fileReadBytes` in the library picker and select it (this adds the `ballerina/io` import). Pass `"config.yaml"` as the path argument and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly` by the function's return signature.
+2. **Add a Function Call step to read the file as bytes**: In the flow designer, click **+** and select **Function Call**. Search for `fileReadBytes` in the library picker and select it (this adds the `ballerina/io` import). Pass `"config.yaml"` as the path argument and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly` by the function's return signature.
 
 3. **Add a Function Call step to parse into the typed record**: Click **+** and select **Function Call**. Search for `yaml:parseBytes` in the library picker and select it (this adds the `ballerina/data.yaml` import). Pass `fileContent` as the argument and assign the return value to a variable named `config` of type `ServerConfig`. The target type is inferred from the variable, so no separate type-conversion step is needed.
 
-4. **Add a Function Call step to print the server info**: Click **+** and select **Function Call**. Search for `io:println`. The function accepts a list of values — add two arguments. Set the first argument to `"Server: " + config.host + ":"` (string concatenation works between strings) and the second argument to `config.port` (kept separate because `+` cannot mix a string with an `int`).
+4. **Add a Function Call step to print the server info**: Click **+** and select **Function Call**. Search for `println`. The function accepts a list of values — add two arguments. Set the first argument to `"Server: " + config.host + ":"` (string concatenation works between strings) and the second argument to `config.port` (kept separate because `+` cannot mix a string with an `int`).
 
-5. **Add a Function Call step to print the database pool size**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"DB Pool Size: "` and `config.database.poolSize`.
+5. **Add a Function Call step to print the database pool size**: Click **+** and select **Function Call**. Search for `println` and add two arguments: `"DB Pool Size: "` and `config.database.poolSize`.
 
    <ThemedImage
        alt="Flow designer showing YAML file read, typed conversion, and console output steps"
@@ -99,7 +99,7 @@ Parse YAML content directly from a string value.
 
 3. **Add a Variable step for nested access**: Click **+** and select **Declare Variable**. Set the name to `envVars`, the type to `json`, and the expression to `check yamlValue.env`.
 
-4. **Add a Function Call step to print the env vars**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"Env vars: "` and `envVars` (kept separate because `+` cannot mix a string with a `json` value).
+4. **Add a Function Call step to print the env vars**: Click **+** and select **Function Call**. Search for `println` and add two arguments: `"Env vars: "` and `envVars` (kept separate because `+` cannot mix a string with a `json` value).
 
    <ThemedImage
        alt="Flow designer showing YAML string parsing, nested value access, and console output steps"
@@ -157,9 +157,9 @@ Serialize Ballerina values back to YAML format.
 
 2. **Add a Function Call step to serialize to a YAML string**: Click **+** and select **Function Call**. Search for `yaml:toYamlString` in the library picker and select it (this adds the `ballerina/data.yaml` import). Pass `deployment` as the argument and assign the return value to a variable named `yamlString` of type `string`.
 
-3. **Add a Function Call step to write to a file**: Click **+** and select **Function Call**. Search for `io:fileWriteString` in the library picker and select it (this adds the `ballerina/io` import). Pass `"deployment.yaml"` as the path argument and `yamlString` as the content argument.
+3. **Add a Function Call step to write to a file**: Click **+** and select **Function Call**. Search for `fileWriteString` in the library picker and select it (this adds the `ballerina/io` import). Pass `"deployment.yaml"` as the path argument and `yamlString` as the content argument.
 
-4. **Add a Function Call step to print the YAML**: Click **+** and select **Function Call**. Search for `io:println` and pass `yamlString` as the argument.
+4. **Add a Function Call step to print the YAML**: Click **+** and select **Function Call**. Search for `println` and pass `yamlString` as the argument.
 
    <ThemedImage
        alt="Flow designer showing YAML serialization, file write, and console output steps"
@@ -202,7 +202,7 @@ public function main() returns error? {
 
 Handle YAML files with multiple documents separated by `---`.
 
-1. **Add a Function Call step to read the file as bytes**: In the flow designer, click **+** and select **Function Call**. Search for `io:fileReadBytes` in the library picker and select it (this adds the `ballerina/io` import). Pass an appropriate YAML file path (such as `"k8s-manifests.yaml"`) as the path argument and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly` by the function's return signature.
+1. **Add a Function Call step to read the file as bytes**: In the flow designer, click **+** and select **Function Call**. Search for `fileReadBytes` in the library picker and select it (this adds the `ballerina/io` import). Pass an appropriate YAML file path (such as `"k8s-manifests.yaml"`) as the path argument and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly` by the function's return signature.
 
 2. **Add a Function Call step to parse the documents**: Click **+** and select **Function Call**. Search for `yaml:parseBytes` in the library picker and select it (this adds the `ballerina/data.yaml` import). In the **S** (Source byte[] value) field, switch the input to **expression** mode and pick `fileContent` from the variable picker. Set **Result\*** (the result variable name) to `documents` and **T\*** (the target type) to `json[]`. The function parses all `---`-separated documents into the array automatically.
 
@@ -214,7 +214,7 @@ Handle YAML files with multiple documents separated by `---`.
 
 6. **Add a Variable step inside the loop to convert the kind to a string**: Click **+** and select **Declare Variable**. Set the name to `kind`, the type to `string`, and the expression to `kindJson.toString()`.
 
-7. **Add a Function Call step inside the loop to print the kind**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"Processing: "` and `kind`.
+7. **Add a Function Call step inside the loop to print the kind**: Click **+** and select **Function Call**. Search for `println` and add two arguments: `"Processing: "` and `kind`.
 
    <ThemedImage
        alt="Flow designer showing multi-document YAML parsing with foreach iteration"
@@ -270,11 +270,11 @@ Read TOML files into Ballerina maps and records.
 
 2. **Add a Function Call step to read the file**: In the flow designer, click **+** and select **Function Call**. Search for `toml:readFile` in the library picker and select it (this adds the `ballerina/toml` import). Pass `"project.toml"` as the path argument and assign the return value to a variable named `tomlData` of type `map<json>`.
 
-3. **Add a Function Call step to print the project name**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"Project: "` and `tomlData["name"]`.
+3. **Add a Function Call step to print the project name**: Click **+** and select **Function Call**. Search for `println` and add two arguments: `"Project: "` and `tomlData["name"]`.
 
 4. **Add a Variable step for typed conversion**: Click **+** and select **Declare Variable**. Set the name to `config`, the type to `ProjectConfig`, and the expression to `check tomlData.ensureType()`.
 
-5. **Add a Function Call step to print the project version**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"Version: "` and `config.version`.
+5. **Add a Function Call step to print the project version**: Click **+** and select **Function Call**. Search for `println` and add two arguments: `"Version: "` and `config.version`.
 
    <ThemedImage
        alt="Flow designer showing TOML file read, raw print, typed conversion, and version print steps"
@@ -372,7 +372,7 @@ Create both functions first via **+** on the **Functions** entry in the left sid
 
 In the `yamlToJson` function flow:
 
-1. **Add a Function Call step to read the file as bytes**: Click **+** and select **Function Call**. Search for `io:fileReadBytes` in the library picker and select it (this adds the `ballerina/io` import). Pass `yamlFilePath` as the path argument and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly`.
+1. **Add a Function Call step to read the file as bytes**: Click **+** and select **Function Call**. Search for `fileReadBytes` in the library picker and select it (this adds the `ballerina/io` import). Pass `yamlFilePath` as the path argument and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly`.
 
 2. **Add a Function Call step to parse**: Click **+** and select **Function Call**. Search for `yaml:parseBytes` in the library picker and select it (this adds the `ballerina/data.yaml` import). In the **S** (Source byte[] value) field, switch the input to **expression** mode and pick `fileContent`. Set **Result\*** to `yamlData` and **T\*** to `json`.
 
@@ -382,7 +382,7 @@ In the `jsonToYaml` function flow:
 
 4. **Add a Function Call step to serialize**: Click **+** and select **Function Call**. Search for `yaml:toYamlString` in the library picker and select it. Pass `data` as the argument and assign the return value to a variable named `yamlString` of type `string`.
 
-5. **Add a Function Call step to write to the file**: Click **+** and select **Function Call**. Search for `io:fileWriteString` in the library picker and select it. Pass `outputPath` as the path argument and `yamlString` as the content argument.
+5. **Add a Function Call step to write to the file**: Click **+** and select **Function Call**. Search for `fileWriteString` in the library picker and select it. Pass `outputPath` as the path argument and `yamlString` as the content argument.
 
    <ThemedImage
        alt="Flow designer showing YAML-to-JSON conversion function flows"
@@ -434,7 +434,7 @@ Build a configuration loader that reads from YAML or TOML based on file extensio
 5. **Extract the extension**: Click **+** and select **Declare Variable**. Set the name to `ext`, the type to `string`, and the expression to `filePath.substring(dotIndex + 1)`.
 
 6. **Add an If step for the YAML branch**: Click **+** and select **If** under **Control**. Set the condition to `ext == "yaml" || ext == "yml"`. Inside the branch:
-   - Add a Function Call for `io:fileReadBytes`. Pass `filePath` and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly`.
+   - Add a Function Call for `fileReadBytes`. Pass `filePath` and assign the return value to a variable named `fileContent`. The variable type is fixed at `byte[] & readonly`.
    - Add a Function Call for `yaml:parseBytes` (adds the `ballerina/data.yaml` import). In **S**, switch the input to **expression** mode and pick `fileContent`. Set **Result\*** to `appConfig` and **T\*** to `AppConfig`.
    - Add a Return step with expression `appConfig`.
 
@@ -447,7 +447,7 @@ Build a configuration loader that reads from YAML or TOML based on file extensio
 
 9. **In the `main` function flow, call `loadConfig`**: Add a Function Call step, search for `loadConfig` (it appears as a user-defined function), pass `"app-config.yaml"` as the file path, and assign the result value to a variable named `config` of type `AppConfig`.
 
-10. **Add a Function Call to print the startup message**: Click **+** and select **Function Call**. Search for `io:println` and add two arguments: `"Starting " + config.appName + " on port "` (string concatenation between strings) and `config.port`.
+10. **Add a Function Call to print the startup message**: Click **+** and select **Function Call**. Search for `println` and add two arguments: `"Starting " + config.appName + " on port "` (string concatenation between strings) and `config.port`.
 
    <ThemedImage
        alt="Flow designer showing the dynamic configuration loader with If/Else branching for YAML and TOML formats"
