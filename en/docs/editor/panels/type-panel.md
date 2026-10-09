@@ -24,8 +24,8 @@ You can open the Type Panel from two places, depending on where you are working.
     <ThemedImage
         alt="Add a type from the project explorer"
         sources={{
-            light: useBaseUrl('/img/editor/panels/type-panel/01-add-type-integration-view.png'),
-            dark: useBaseUrl('/img/editor/panels/type-panel/01-add-type-integration-view.png'),
+            light: useBaseUrl('/img/editor/panels/type-panel/01-add-type-project-explorer.png'),
+            dark: useBaseUrl('/img/editor/panels/type-panel/01-add-type-project-explorer.png'),
         }}
     />
 
