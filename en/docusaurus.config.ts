@@ -3,8 +3,8 @@ import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'WSO2 Integrator Documentation',
-  tagline: 'Build integrations with low-code simplicity and pro-code power',
+  title: 'WSO2 Integration Platform Documentation',
+  tagline: 'Official documentation for WSO2 Integration Platform \u2014 build, deploy, and manage integrations with low-code simplicity and pro-code power.',
   favicon: 'img/favicon.ico',
 
   future: {
