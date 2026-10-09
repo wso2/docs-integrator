@@ -4,7 +4,7 @@ title: "Overview"
 
 # Overview
 
-RabbitMQ is an open-source message broker that supports multiple messaging protocols including AMQP 0-9-1. The Ballerina `ballerinax/rabbitmq` connector (v3.3.2) provides programmatic access to RabbitMQ, enabling you to publish messages, consume messages synchronously or asynchronously via listener services, declare and manage queues and exchanges, and build event-driven integration flows.
+RabbitMQ is an open-source message broker that supports multiple messaging protocols including AMQP 0-9-1. The Ballerina `ballerinax/rabbitmq` connector (v3.6.1) provides programmatic access to RabbitMQ, enabling you to publish messages, consume messages synchronously or asynchronously via listener services, declare and manage queues and exchanges, and build event-driven integration flows.
 
 
 ## Key features
@@ -40,8 +40,9 @@ Supported trigger events:
 |-------|----------|-------------|
 | Message received | `onMessage` | Fired when a message arrives on the subscribed queue (one-way consumption). |
 | Request received | `onRequest` | Fired when a message arrives and a reply is expected (request-reply pattern). |
+| Processing error | `onError` | Optional. Fired when message dispatch or data binding fails. |
 
-See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the `EventData` payload structure.
+See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the `AnydataMessage` payload structure.
 
 ## Documentation
 

@@ -11,7 +11,7 @@ Three components work together:
 | Component | Role |
 |-----------|------|
 | `rabbitmq:Listener` | Connects to the RabbitMQ broker, subscribes to queues, and dispatches incoming messages to attached services. |
-| `rabbitmq:Service` | Defines `onMessage` and/or `onRequest` callbacks invoked when messages arrive on the configured queue. |
+| `rabbitmq:Service` | Defines an `onMessage` or `onRequest` callback invoked when messages arrive on the configured queue, and an optional `onError` callback for dispatch and data-binding errors. |
 | `rabbitmq:Caller` | Provided to callbacks for manual message acknowledgement or rejection when `autoAck` is `false`. |
 | `rabbitmq:AnydataMessage` | The message payload passed to each callback, containing content, routing key, exchange, delivery tag, and properties. |
 
@@ -39,12 +39,16 @@ The listener supports the following connection strategies:
 | `port` | `int` | Required | RabbitMQ server AMQP port (constructor parameter). |
 | `qosSettings` | `QosSettings?` | `()` | Quality of Service prefetch settings (constructor parameter). |
 | `auth` | `Credentials` | `()` | Username and password credentials. |
+| `username` | `string` | `()` | Username used to establish the connection. |
+| `password` | `string` | `()` | Password used to establish the connection. |
 | `virtualHost` | `string` | `()` | The virtual host to connect to. |
 | `connectionTimeout` | `decimal` | `()` | Connection timeout in seconds. |
-| `handshakeTimeout` | `decimal` | `()` | TLS handshake timeout in seconds. |
+| `handshakeTimeout` | `decimal` | `()` | AMQP 0-9-1 protocol handshake timeout in seconds. |
 | `shutdownTimeout` | `decimal` | `()` | Shutdown timeout in seconds. |
 | `heartbeat` | `decimal` | `()` | Heartbeat interval in seconds. |
+| `validation` | `boolean` | `true` | Enable constraint validation for messages. |
 | `secureSocket` | `SecureSocket` | `()` | TLS/SSL configuration for secure connections. |
+| `failoverAddresses` | `Address[]?` | `()` | Additional broker addresses (`{host, port}`) for cluster and failover support. The primary `host` and `port` are always tried first; if that connection fails, these addresses are tried in order. |
 
 ### Initializing the listener
 
@@ -102,8 +106,13 @@ A `rabbitmq:Service` is a Ballerina service attached to a `rabbitmq:Listener`. I
 
 | Function | Signature | Description |
 |----------|-----------|-------------|
-| `onMessage` | `remote function onMessage(rabbitmq:AnydataMessage message, rabbitmq:Caller caller?) returns error?` | Invoked when a message arrives on the queue. Use for one-way message consumption. |
-| `onRequest` | `remote function onRequest(rabbitmq:AnydataMessage message, rabbitmq:Caller caller?) returns anydata` | Invoked when a message arrives and a reply is expected. The return value is sent back as the response. |
+| `onMessage` | `remote function onMessage(rabbitmq:AnydataMessage message, rabbitmq:Caller caller) returns error?` | Invoked when a message arrives on the queue. Use for one-way message consumption. |
+| `onRequest` | `remote function onRequest(rabbitmq:AnydataMessage message, rabbitmq:Caller caller) returns anydata` | Invoked when a message arrives and a reply is expected. The return value is sent back as the response. |
+| `onError` | `remote function onError(rabbitmq:AnydataMessage message, rabbitmq:Error err) returns error?` | Optional. Invoked when message dispatch or data binding fails. |
+
+:::note
+The `caller` parameter of `onMessage` and `onRequest` can be omitted. Include it when the service uses `autoAck: false` and needs to acknowledge or reject messages manually.
+:::
 
 :::note
 You can implement either `onMessage` or `onRequest`, not both in the same service. Use `onMessage` for fire-and-forget consumption and `onRequest` when the publisher expects a reply.
@@ -180,4 +189,5 @@ When `autoAck` is set to `true` (the default), messages are acknowledged automat
 |-------|------|-------------|
 | `queueName` | `string` | The name of the queue to consume messages from. |
 | `config` | `QueueConfig?` | Optional queue configuration; the queue is declared if it does not exist. Defaults to `durable: true`, `exclusive: false`, `autoDelete: false`. |
+| `consumerTag` | `string?` | Optional consumer tag that identifies this subscription on the broker. |
 | `autoAck` | `boolean` | If `true` (default), messages are automatically acknowledged before the callback. |

@@ -24,13 +24,16 @@ Publish messages, consume messages, and manage queues and exchanges on a RabbitM
 | `host` | `string` | Required | RabbitMQ server hostname (constructor parameter). |
 | `port` | `int` | Required | RabbitMQ server AMQP port (constructor parameter). |
 | `auth` | `Credentials` | `()` | Username and password credentials for authentication. |
+| `username` | `string` | `()` | Username used to establish the connection. |
+| `password` | `string` | `()` | Password used to establish the connection. |
 | `virtualHost` | `string` | `()` | The virtual host to connect to. |
 | `connectionTimeout` | `decimal` | `()` | Connection timeout in seconds. |
-| `handshakeTimeout` | `decimal` | `()` | TLS handshake timeout in seconds. |
+| `handshakeTimeout` | `decimal` | `()` | AMQP 0-9-1 protocol handshake timeout in seconds. |
 | `shutdownTimeout` | `decimal` | `()` | Shutdown timeout in seconds. |
 | `heartbeat` | `decimal` | `()` | Heartbeat interval in seconds. |
 | `validation` | `boolean` | `true` | Enable constraint validation for messages. |
 | `secureSocket` | `SecureSocket` | `()` | TLS/SSL configuration for secure connections. |
+| `failoverAddresses` | `Address[]?` | `()` | Additional broker addresses (`{host, port}`) for cluster and failover support. The primary `host` and `port` are always tried first; if that connection fails, these addresses are tried in order. |
 
 ### Initializing the client
 
@@ -59,7 +62,7 @@ Parameters:
 | `name` | `string` | Yes | The name of the queue to declare. |
 | `config` | `QueueConfig?` | No | Queue configuration. Defaults: `durable: true`, `exclusive: false`, `autoDelete: false`. |
 
-Returns: `Error?`
+Returns: `rabbitmq:Error?`
 
 Sample code:
 
@@ -79,7 +82,7 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 
-Returns: `string|error`
+Returns: `string|rabbitmq:Error`
 
 Sample code:
 
@@ -108,7 +111,7 @@ Parameters:
 | `ifUnused` | `boolean` | No | Delete only if the queue has no consumers. |
 | `ifEmpty` | `boolean` | No | Delete only if the queue is empty. |
 
-Returns: `Error?`
+Returns: `rabbitmq:Error?`
 
 Sample code:
 
@@ -129,7 +132,7 @@ Parameters:
 |------|------|----------|-------------|
 | `queueName` | `string` | Yes | The name of the queue to purge. |
 
-Returns: `Error?`
+Returns: `rabbitmq:Error?`
 
 Sample code:
 
@@ -151,10 +154,10 @@ Parameters:
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `name` | `string` | Yes | The name of the exchange to declare. |
-| `exchangeType` | `ExchangeType` | No | The exchange type: `DIRECT_EXCHANGE`, `FANOUT_EXCHANGE`, `TOPIC_EXCHANGE`, or `HEADERS_EXCHANGE`. |
+| `exchangeType` | `ExchangeType` | No | The exchange type: `DIRECT_EXCHANGE`, `FANOUT_EXCHANGE`, `TOPIC_EXCHANGE`, or the string literal `"headers"` (there is no `HEADERS_EXCHANGE` constant). |
 | `config` | `ExchangeConfig?` | No | Exchange configuration. Defaults: `durable: true`, `autoDelete: false`. |
 
-Returns: `Error?`
+Returns: `rabbitmq:Error?`
 
 Sample code:
 
@@ -175,7 +178,7 @@ Parameters:
 |------|------|----------|-------------|
 | `exchangeName` | `string` | Yes | The name of the exchange to delete. |
 
-Returns: `Error?`
+Returns: `rabbitmq:Error?`
 
 Sample code:
 
@@ -198,7 +201,7 @@ Parameters:
 | `exchangeName` | `string` | Yes | The name of the exchange to bind to. |
 | `bindingKey` | `string` | Yes | The binding key for the queue-exchange binding. |
 
-Returns: `Error?`
+Returns: `rabbitmq:Error?`
 
 Sample code:
 
@@ -221,7 +224,7 @@ Parameters:
 |------|------|----------|-------------|
 | `message` | `AnydataMessage` | Yes | The message to publish, containing `content`, `routingKey`, and optionally `exchange` and `properties`. |
 
-Returns: `Error?`
+Returns: `rabbitmq:Error?`
 
 Sample code:
 
@@ -249,7 +252,7 @@ Parameters:
 | `autoAck` | `boolean` | No | If `true`, the message is automatically acknowledged. |
 | `T` | `typedesc<AnydataMessage>` | No | Expected message type for data binding. |
 
-Returns: `AnydataMessage|error`
+Returns: `AnydataMessage|rabbitmq:Error`
 
 Sample code:
 
@@ -278,7 +281,7 @@ Parameters:
 | `autoAck` | `boolean` | No | If `true`, the message is automatically acknowledged. |
 | `T` | `typedesc<anydata>` | No | Expected payload type for data binding. |
 
-Returns: `anydata|error`
+Returns: `anydata|rabbitmq:Error`
 
 Sample code:
 
@@ -305,10 +308,10 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `ackTarget` | `AnydataMessage|int` | Yes | The message or delivery tag to acknowledge. |
+| `ackTarget` | `AnydataMessage\|int` | Yes | The message or delivery tag to acknowledge. |
 | `multiple` | `boolean` | No | If `true`, acknowledges all messages up to and including the given delivery tag. |
 
-Returns: `Error?`
+Returns: `rabbitmq:Error?`
 
 Sample code:
 
@@ -328,11 +331,11 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `ackTarget` | `AnydataMessage|int` | Yes | The message or delivery tag to reject. |
+| `ackTarget` | `AnydataMessage\|int` | Yes | The message or delivery tag to reject. |
 | `multiple` | `boolean` | No | If `true`, rejects all messages up to and including the given delivery tag. |
 | `requeue` | `boolean` | No | If `true`, rejected messages are requeued rather than discarded. |
 
-Returns: `Error?`
+Returns: `rabbitmq:Error?`
 
 Sample code:
 
@@ -357,7 +360,7 @@ Parameters:
 | `closeCode` | `int?` | No | The close code to send to the server. |
 | `closeMessage` | `string?` | No | The close message to send to the server. |
 
-Returns: `Error?`
+Returns: `rabbitmq:Error?`
 
 Sample code:
 
@@ -379,7 +382,7 @@ Parameters:
 | `closeCode` | `int?` | No | The close code. |
 | `closeMessage` | `string?` | No | The close message. |
 
-Returns: `Error?`
+Returns: `rabbitmq:Error?`
 
 Sample code:
 
