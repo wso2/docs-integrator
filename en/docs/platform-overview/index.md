@@ -32,7 +32,7 @@ It supports the integration lifecycle, from development and testing through depl
 The platform separates how you develop an integration from where it runs and how it is operated, giving you flexibility to choose the deployment model that fits your organization.
 
 <ThemedImage
-    alt="Integration lifecycle from Design through Develop and Test, Build, Deploy, Validate, Promote, Manage and Observe, to Improve or Retire"
+    alt="WSO2 Integration Platform is an open-source platform for building, running, and managing integrations"
     sources={{
         light: useBaseUrl('/img/platform-overview/integration-platform-overview.png'),
         dark: useBaseUrl('/img/platform-overview/integration-platform-overview.png'),
@@ -54,6 +54,14 @@ WSO2 Integration Platform supports several integration styles using shared capab
 
 AI serves two roles in the platform: it assists developers in building integrations, and it can participate in execution through AI services and agents.
 
+<ThemedImage
+    alt="AI assists developers in building integrations, and it can participate in execution through AI services and agents"
+    sources={{
+        light: useBaseUrl('/img/platform-overview/role-of-AI.png'),
+        dark: useBaseUrl('/img/platform-overview/role-of-AI.png'),
+    }}
+/>
+
 ## Platform components
 
 The platform brings together following core components.
@@ -70,13 +78,13 @@ It combines:
 - Testing and debugging to validate behavior before deployment.
 - Visual and code representations remain synchronized, allowing you to move between them as you develop.
 
-WSO2 Integrator is powered by [Ballerina](https://ballerina.io/), a programming language designed for integration. Prior knowledge of Ballerina is not required to begin: you can start with APIs, connectors, mappings, and workflows, then use the underlying code when needed.
+WSO2 Integrator is powered by [Ballerina](https://ballerina.io/), a programming language designed for integration. Prior knowledge of Ballerina is **not required** to begin: you can start with APIs, connectors, mappings, and workflows, then use the underlying code when needed.
 
 ### WSO2 Integration Cloud (WSO2 iPaaS)
 
 [WSO2 Integration Cloud](https://console.devant.dev/) is a managed environment for building and running integrations. WSO2 operates the underlying infrastructure, allowing your team to focus on integration development.
 
-You can develop in the browser-based editor, import an existing integration from a source repository, or start with a pre-built sample. The managed service provides deployment, scaling, availability, management, and observability capabilities.
+You can develop in the cloud editor, import an existing integration from a source repository, or start with a pre-built sample. The managed service provides deployment, scaling, availability, management, and observability capabilities.
 
 ### WSO2 Integration Control Plane (ICP)
 
@@ -84,7 +92,8 @@ WSO2 Integration Control Plane is a centralized place to manage self-hosted inte
 
 It provides visibility across projects and environments, helping teams deploy integrations, check their status, and manage ongoing operations from one console.
 
-ICP also surfaces health information, metrics, and aggregated logs. You can use these capabilities alongside your organization’s existing observability tools.
+ICP also surfaces health information, metrics, and aggregated logs. But for self-hosted deployments, you aren't limited to ICP, WSO2 Intgerator is designed to integrate seamlessly with your organization's existing observability stack.
+
 
 ### Connectors
 
@@ -124,6 +133,14 @@ The platform supports a continuous integration lifecycle:
 | Build and deploy | Package the integration, run automated checks, and deploy it through your delivery pipeline. Validate and promote it across environments. | 
 | Manage | Operate integrations centrally through ICP or the managed cloud experience. | 
 | Observe | Use health information, logs, metrics, and distributed traces to monitor behavior and investigate failures. | 
+
+<ThemedImage
+    alt="Integration lifecycle with WSO2 Integration Platform"
+    sources={{
+        light: useBaseUrl('/img/platform-overview/integration-lifecycle.png'),
+        dark: useBaseUrl('/img/platform-overview/integration-lifecycle.png'),
+    }}
+/>
 
 ## How the platform fits together 
 
