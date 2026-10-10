@@ -336,6 +336,7 @@ Routing rules:
 - A per-handler `@files:FunctionConfig` with a `fileNamePattern` overrides extension routing for that handler. When several patterns match one file name, the handlers are checked in the fixed order `onFileText`, `onFileJson`, `onFileXml`, `onFileCsv`, then `onFile`. At most one handler runs per file.
 - A file whose extension maps to a handler the service does not declare falls back to `onFile`; if `onFile` is also absent, the file is skipped and logged.
 - A file routed to a typed handler whose content is malformed raises a `files:ContentBindingError` — it never falls through to `onFile`. Its detail carries the file's path in `filePath`, and its raw bytes in `content` when the download had already completed. When the service declares an `onError` handler, the error is delivered there and the file's fate follows **`onError`'s own** `@files:FunctionConfig`; the content handler's `afterError` is not applied. When the service declares no `onError`, the error is logged and the content handler's `afterError` applies.
+- A CSV stream handler is the exception for individual rows. A row that fails to bind while the handler reads the stream is returned to the handler as a `files:Error` from the stream, not raised as a `files:ContentBindingError`. It does not reach `onError`; if the handler returns it, the handler's `afterError` applies.
 
 ### Post-processing: moving or deleting files
 
@@ -410,7 +411,7 @@ On `onError`, `afterProcess` applies when it returns normally and `afterError` w
 
 ### Typed content and streaming
 
-JSON and XML handlers can receive their payload as a free-form value (`json`, `xml`) or as a typed record you define; CSV handlers bind typed records only. CSV and Raw Bytes handlers can additionally receive the content as a `stream<T, error?>`, so the handler never holds the whole file in memory. The **Format** picker on the handler form selects the base delivery type; to bind typed records or streams, edit the handler's content parameter type in the code view.
+JSON and XML handlers can receive their payload as a free-form value (`json`, `xml`) or as a typed record you define; CSV handlers receive rows as string arrays (`string[][]`) or as typed records. CSV and Raw Bytes handlers can additionally receive the content as a `stream<T, error?>`, so the handler never holds the whole file in memory. The **Format** picker on the handler form selects the base delivery type; to bind typed records or streams, edit the handler's content parameter type in the code view.
 
 **Typed CSV rows** — the file's first row is always consumed as the header and maps each row's fields:
 
@@ -461,7 +462,7 @@ remote function onFile(stream<byte[], error?> content, files:FileInfo file) retu
 }
 ```
 
-A content value that does not match the declared parameter type is a `files:ContentBindingError`, delivered to `onError`. To relax the record binding — treating a null value as an optional field and an absent field as a nilable field — set `laxDataBinding: true` on the [listener configuration](#listener-configuration).
+A content value that does not match the declared parameter type is a `files:ContentBindingError`, delivered to `onError`. The exception is a row of a CSV stream, which fails inside the handler instead; see [Content types](#content-types). To relax the record binding — treating a null value as an optional field and an absent field as a nilable field — set `laxDataBinding: true` on the [listener configuration](#listener-configuration).
 
 ### FileInfo
 
