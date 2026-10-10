@@ -411,7 +411,7 @@ On `onError`, `afterProcess` applies when it returns normally and `afterError` w
 
 ### Typed content and streaming
 
-JSON and XML handlers can receive their payload as a free-form value (`json`, `xml`) or as a typed record you define; CSV handlers bind typed records only. CSV and Raw Bytes handlers can additionally receive the content as a `stream<T, error?>`, so the handler never holds the whole file in memory. The **Format** picker on the handler form selects the base delivery type; to bind typed records or streams, edit the handler's content parameter type in the code view.
+JSON and XML handlers can receive their payload as a free-form value (`json`, `xml`) or as a typed record you define; CSV handlers receive rows as string arrays (`string[][]`) or as typed records. CSV and Raw Bytes handlers can additionally receive the content as a `stream<T, error?>`, so the handler never holds the whole file in memory. The **Format** picker on the handler form selects the base delivery type; to bind typed records or streams, edit the handler's content parameter type in the code view.
 
 **Typed CSV rows** — the file's first row is always consumed as the header and maps each row's fields:
 
