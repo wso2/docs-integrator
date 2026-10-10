@@ -36,13 +36,23 @@ You almost always pick one of these in the **Vector Knowledge Base** form's **Ch
 
 ## Where to find chunkers
 
-Inside the **Create Vector Knowledge Base** form click **+ Create New Chunker**. The **Select Chunker** picker shows the available types:
+Inside the **Create Vector Knowledge Base** form click **+ Create New Chunker**. The **Select Chunker** picker opens with a single **AI Chunkers** entry, described as *"Chunkers available in ballerina/ai"* and badged **3 options**:
 
 <ThemedImage
-    alt="Select Chunker picker listing three chunkers: Generic Recursive Chunker (Represents a Generic document chunker. Provides functionality to recursively chunk a text), Markdown Chunker (Represents a Markdown document chunker. Provides functionality to recursively chunk a Markdown document), and Html Chunker (Represents an HTML document chunker. Provides functionality to recursively chunk a HTML document)."
+    alt="Select Chunker picker showing a single AI Chunkers entry, described as Chunkers available in ballerina/ai and badged 3 options."
     sources={{
-        light: useBaseUrl('/img/genai/develop/components/chunkers/01-select-list.png'),
-        dark: useBaseUrl('/img/genai/develop/components/chunkers/01-select-list.png'),
+        light: useBaseUrl('/img/genai/develop/components-v5.1/chunkers/01-select-list-collapsed-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/components-v5.1/chunkers/01-select-list-collapsed-v5.1.png'),
+    }}
+/>
+
+Expand **AI Chunkers** to reveal the three individual chunker types: **Generic Recursive Chunker** (*"Represents a Genereric document chunker..."*), **Markdown Chunker** (*"Represents a Markdown document chunker..."*), and **Html Chunker** (*"Represents an HTML document chunker..."*):
+
+<ThemedImage
+    alt="Select Chunker picker with AI Chunkers expanded, listing Generic Recursive Chunker, Markdown Chunker, and Html Chunker, each with a short description."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components-v5.1/chunkers/02-select-list-expanded-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/components-v5.1/chunkers/02-select-list-expanded-v5.1.png'),
     }}
 />
 
@@ -66,24 +76,14 @@ For plain text. Begins splitting using the chosen strategy and recursively falls
 ### Create form
 
 <ThemedImage
-    alt="Create Chunker form for Generic Recursive showing the banner 'This operation has no required parameters. Optional settings can be configured below.' Advanced Configurations Expand link, Chunker Name aiGenericrecursivechunker, Result Type ai:GenericRecursiveChunker."
+    alt="Create Chunker form for Generic Recursive. Header reads 'Initializes a new instance of the GenericRecursiveChunker.' Banner: 'This operation has no required parameters. Optional settings can be configured below.' Fields: Max Chunk Size (default 200), Max Overlap Size (default 40), Strategy (default PARAGRAPH), Chunker Name (default aiGenericrecursivechunker), Result Type (locked to ai:GenericRecursiveChunker). Save button."
     sources={{
-        light: useBaseUrl('/img/genai/develop/components/chunkers/02-generic-recursive-basic.png'),
-        dark: useBaseUrl('/img/genai/develop/components/chunkers/02-generic-recursive-basic.png'),
+        light: useBaseUrl('/img/genai/develop/components-v5.1/chunkers/03-generic-recursive-basic-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/components-v5.1/chunkers/03-generic-recursive-basic-v5.1.png'),
     }}
 />
 
 No required fields. Sensible defaults work for most prose.
-
-### Advanced configurations
-
-<ThemedImage
-    alt="Generic Recursive Chunker Create form with Advanced Configurations expanded showing Max Chunk Size (default 200), Max Overlap Size (default 40), Strategy (default PARAGRAPH)."
-    sources={{
-        light: useBaseUrl('/img/genai/develop/components/chunkers/03-generic-recursive-advanced.png'),
-        dark: useBaseUrl('/img/genai/develop/components/chunkers/03-generic-recursive-advanced.png'),
-    }}
-/>
 
 | Field | Default | Available values | What it controls |
 |---|---|---|---|
@@ -110,24 +110,14 @@ Header-aware chunker for Markdown. Starts at heading level `##` and walks down b
 ### Create form
 
 <ThemedImage
-    alt="Create Chunker form for Markdown showing the banner 'This operation has no required parameters. Optional settings can be configured below.' Advanced Configurations Expand link, Chunker Name aiMarkdownchunker, Result Type ai:MarkdownChunker."
+    alt="Create Chunker form for Markdown. Header reads 'Initializes a new instance of the MarkdownChunker.' Banner: 'This operation has no required parameters. Optional settings can be configured below.' Fields: Max Chunk Size (default 200), Max Overlap Size (default 40), Strategy (default MARKDOWN_HEADER), Chunker Name (default aiMarkdownchunker), Result Type (locked to ai:MarkdownChunker). Save button."
     sources={{
-        light: useBaseUrl('/img/genai/develop/components/chunkers/04-markdown-basic.png'),
-        dark: useBaseUrl('/img/genai/develop/components/chunkers/04-markdown-basic.png'),
+        light: useBaseUrl('/img/genai/develop/components-v5.1/chunkers/04-markdown-basic-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/components-v5.1/chunkers/04-markdown-basic-v5.1.png'),
     }}
 />
 
 No required fields.
-
-### Advanced configurations
-
-<ThemedImage
-    alt="Markdown Chunker Create form with Advanced Configurations expanded showing Max Chunk Size (default 200), Max Overlap Size (default 40), Strategy (default MARKDOWN_HEADER)."
-    sources={{
-        light: useBaseUrl('/img/genai/develop/components/chunkers/05-markdown-advanced.png'),
-        dark: useBaseUrl('/img/genai/develop/components/chunkers/05-markdown-advanced.png'),
-    }}
-/>
 
 | Field | Default | Available values | What it controls |
 |---|---|---|---|
@@ -151,24 +141,14 @@ Tag-aware chunker for HTML. Starts at heading tags and falls back through paragr
 ### Create form
 
 <ThemedImage
-    alt="Create Chunker form for HTML showing the banner 'This operation has no required parameters. Optional settings can be configured below.' Advanced Configurations Expand link, Chunker Name aiHtmlchunker, Result Type ai:HtmlChunker."
+    alt="Create Chunker form for HTML. Header reads 'Initializes a new instance of the HtmlChunker.' Banner: 'This operation has no required parameters. Optional settings can be configured below.' Fields: Max Chunk Size (default 200), Max Overlap Size (default 40), Strategy (default HTML_HEADER), Chunker Name (default aiHtmlchunker), Result Type (locked to ai:HtmlChunker). Save button."
     sources={{
-        light: useBaseUrl('/img/genai/develop/components/chunkers/06-html-basic.png'),
-        dark: useBaseUrl('/img/genai/develop/components/chunkers/06-html-basic.png'),
+        light: useBaseUrl('/img/genai/develop/components-v5.1/chunkers/05-html-basic-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/components-v5.1/chunkers/05-html-basic-v5.1.png'),
     }}
 />
 
 No required fields.
-
-### Advanced configurations
-
-<ThemedImage
-    alt="HTML Chunker Create form with Advanced Configurations expanded showing Max Chunk Size (default 200), Max Overlap Size (default 40), Strategy (default HTML_HEADER)."
-    sources={{
-        light: useBaseUrl('/img/genai/develop/components/chunkers/07-html-advanced.png'),
-        dark: useBaseUrl('/img/genai/develop/components/chunkers/07-html-advanced.png'),
-    }}
-/>
 
 | Field | Default | Available values | What it controls |
 |---|---|---|---|
@@ -197,8 +177,8 @@ The Devant Chunker is added from the same **Select Chunker** picker. Its create 
 
 | Field | Required | Default | Available values |
 |---|---|---|---|
-| **Service URL** | Yes | — | The WSO2 Integration Platform service endpoint URL. |
-| **Access Token** | Yes | — | Access token for authenticating with WSO2 Integration Platform. |
+| **Service URL** | Yes | N/A | The WSO2 Integration Platform service endpoint URL. |
+| **Access Token** | Yes | N/A | Access token for authenticating with WSO2 Integration Platform. |
 
 ### Advanced configurations
 
