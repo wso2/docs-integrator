@@ -1013,7 +1013,7 @@ service on ftpListener {
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `path` | `string` | `"/"` | Directory on the remote server to monitor for new files. |
+| `path` | `string` | — | Directory on the remote server to monitor for new files. Required. |
 | `fileNamePattern` | `string?` | — | Regex to filter which files trigger handlers. Only matching files are processed. |
 | `fileAgeFilter` | `FileAgeFilter?` | — | Age bounds to skip files that are too new (still uploading) or too old (stale). See [File dependency and trigger conditions](dependency-and-trigger-conditions.md). |
 | `fileDependencyConditions` | `FileDependencyCondition[]?` | — | Conditions that block processing until related files exist. See [File dependency and trigger conditions](dependency-and-trigger-conditions.md). |
