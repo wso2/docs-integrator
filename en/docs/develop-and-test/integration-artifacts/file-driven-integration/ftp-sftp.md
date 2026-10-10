@@ -421,8 +421,8 @@ type Order record {|
     int quantity;
 |};
 
-remote function onFileJson(Order order, ftp:FileInfo fileInfo) returns error? {
-    // order is deserialized from JSON
+remote function onFileJson(Order 'order, ftp:FileInfo fileInfo) returns error? {
+    // 'order is deserialized from JSON
 }
 ```
 
