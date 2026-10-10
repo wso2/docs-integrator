@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
-title: CSV & Flat File Processing
-description: Parse, transform, and write CSV and flat file data.
+title: CSV and flat file processing
+description: Parse, transform, and write CSV and other delimited flat file data.
 slug: /develop-and-test/data-transformation/csv-flat-file
 ---
 
@@ -10,13 +10,9 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# CSV & Flat File Processing
+# CSV and flat file processing
 
-CSV and flat files are commonly used data exchange formats for spreadsheets, reports, batch-processing systems, legacy applications, and data integration workflows. Formats such as CSV, TSV, and fixed-width files are widely used to store and transfer structured tabular data between systems.
-
-WSO2 Integrator provides built-in support for CSV and flat-file processing, enabling developers to read, parse, validate, transform, and generate delimited or fixed-width data without relying on external libraries. The ballerina/data.csv module offers type-safe APIs for handling tabular data and converting rows into structured records.
-
-With native CSV and flat-file support, developers can efficiently process large datasets, transform file content, map records between formats, and integrate file-based systems with APIs, databases, and enterprise applications.
+CSV and other delimited flat files, such as TSV and pipe-delimited files, are a common way to exchange tabular data between spreadsheets, reporting tools, batch systems, and legacy applications. WSO2 Integrator parses delimited data into typed records with the `ballerina/data.csv` module and writes CSV output with the `ballerina/io` module. You can stream large files, handle custom delimiters and headerless input, and skip malformed rows without stopping the integration.
 
 ## Mapping CSV columns to records
 
@@ -31,7 +27,7 @@ This flexibility is the foundation for everything that follows: full row mapping
 
 2. **Add a Variable step**. Add a **Declare Variable** step with the CSV string assigned to `csvData`.
 
-3. **Parse the CSV string**. Use `csv:parseString` with:
+3. **Parse the CSV string**. Click **+** and select **Call Function**. Search for `parseString` and select it under **data.csv**. Configure:
    - **Csv String***: `csvData`
    - **Result***: `summaries`
    - **T***: `EmployeeSummary[]`
@@ -160,7 +156,7 @@ Use `csv:parseBytes()` for byte arrays or `csv:parseStream()` for streaming larg
    - **Result***: `transactions`
    - **T***: `Transaction[]`
 
-4. **(Optional) Use a byte block stream as input**. For files larger than the available byte-array buffer, swap `io:fileReadBytes` for `io:fileReadBlocksAsStream` and `csv:parseBytes` for `csv:parseStream`. The result is still a fully-materialized array. To process records one at a time without holding the whole file in memory, see [Processing large files](#processing-large-files).
+4. **(Optional) Use a byte block stream as input**. For files larger than the available byte-array buffer, swap `fileReadBytes` for `fileReadBlocksAsStream` under **io**, and `parseBytes` for `parseStream` under **data.csv**. The result is still a fully-materialized array. To process records one at a time without holding the whole file in memory, see [Processing large files](#processing-large-files).
 
    <ThemedImage
        alt="Flow designer showing file read and CSV parse steps"
@@ -265,7 +261,7 @@ Use `parseToStream` when:
 
 ## Parser options
 
-All of the CSV parser functions (`csv:parseString`, `csv:parseBytes`, `csv:parseStream`, `csv:parseToStream`) accept the same set of options that control how the input is read. Use these options to switch delimiters, skip header banners, treat specific tokens as nil, validate values against record constraints, or enable [fail-safe mode](#fail-safe-processing).
+All of the CSV parser functions (`csv:parseString`, `csv:parseBytes`, `csv:parseStream`, `csv:parseToStream`) accept the same set of options that control how the input is read. Use these options to switch delimiters, skip banner lines above the header or specific data rows, treat specific tokens as nil, validate values against record constraints, or enable [fail-safe mode](#fail-safe-processing).
 
 In the visual designer, parser options live under **Advanced Configurations** → **Options** on the parse step. The field is empty by default (`{}`), meaning all defaults apply.
 
@@ -301,20 +297,20 @@ The fields below match the `ParseOptions` record in the `ballerina/data.csv` mod
 | `lineTerminator` | `LineTerminator\|LineTerminator[]` | Row terminator, or set of terminators to accept. `LineTerminator` is an enum with members `LF` (`"\n"`) and `CRLF` (`"\r\n"`). Default `[LF, CRLF]`. |
 | `nilValue` | `NilValue?` | Token treated as nil during parsing. `NilValue` is an enum with members `NULL` (`"null"`), `NOT_APPLICABLE` (`"N/A"`), `EMPTY_STRING` (`""`), and `NIL` (`"()"`). Default `()`. |
 | `comment` | `string:Char` | Lines beginning with this character are skipped. Default `"#"`. |
-| `header` | `int:Unsigned32?` | Row index of the header row. Default `0`. Set to `()` for input with no header row. See [Headerless CSV](#headerless-csv). |
+| `header` | `int:Unsigned32?` | Zero-based index of the header row. Lines above the header row are skipped, so use this option to skip banner lines that precede the header. Default `0`. Set to `()` for input with no header row. See [Headerless CSV](#headerless-csv). |
 | `customHeadersIfHeadersAbsent` | `string[]?` | Header names to use when the input has no header row. Default `()`. |
 | `allowDataProjection` | `record\|false` | Controls projection when the target record covers only a subset of CSV columns. Set to `false` to require an exact match. The record form has `nilAsOptionalField` and `absentAsNilableType` boolean fields, both defaulting to `false`. Default `{}`. |
-| `skipLines` | `int[]\|string` | Lines to skip, given as an integer array (for example, `[1, 3]`) or as a range expression string (for example, `"2-4,7"`). Default `[]`. |
+| `skipLines` | `int[]\|string` | Data rows to skip, numbered from `1` starting at the first row after the header. Given as an integer array (for example, `[1, 3]`) or as a single inclusive range string (for example, `"2-4"`). Default `[]`. |
 | `enableConstraintValidation` | `boolean` | When `true`, parsed values are validated against any constraints declared on the record type. Default `true`. |
 | `outputWithHeaders` | `boolean` | When the parsed result is a list (`anydata[][]`), include the header row as the first inner array. Default `false`. |
-| `failSafe` | `FailSafeOptions?` | Skips and logs invalid rows instead of aborting the parse. See [Fail-safe processing](#fail-safe-processing). |
+| `failSafe` | `FailSafeOptions` | Skips and logs invalid rows instead of aborting the parse. Not set by default, so parsing stops at the first invalid row. See [Fail-safe processing](#fail-safe-processing). |
 
 In Ballerina code, options are passed as the second argument to the parser function:
 
 ```ballerina
 T[] result = check csv:parseString(csvData, {
     delimiter: "\t",
-    skipLines: [0, 1],
+    skipLines: [1],
     nilValue: csv:NULL
 });
 ```
@@ -333,7 +329,7 @@ Configure parsing behavior for TSV (tab-separated values, a CSV-like format that
 
 2. **Add a Variable step**. Add a **Declare Variable** step for `tsvData` and provide the tab-separated content.
 
-3. **Parse with custom delimiter**. Use `csv:parseString` and configure:
+3. **Parse with custom delimiter**. Click **+** and select **Call Function**. Search for `parseString` and select it under **data.csv**. Configure:
    - **Csv String***: `tsvData`
    - **Result***: `logs`
    - **T***: `LogEntry[]`
@@ -390,7 +386,7 @@ When a file has no header row, you have two options:
 
 1. **Declare the CSV data variable**. Add a **Declare Variable** step with the headerless CSV content.
 
-2. **Parse as headerless CSV**. Configure `csv:parseString` with:
+2. **Parse as headerless CSV**. Click **+** and select **Call Function**. Search for `parseString` and select it under **data.csv**. Configure:
    - **Csv String***: `csvData`
    - **Result***: `rows`
    - **T***: `string[][]`
@@ -456,7 +452,7 @@ Write arrays of records directly to CSV files using `io:fileWriteCsv()`.
 
 2. **Add a Variable step**. Create a variable named `products` of type `Product[]`.
 
-3. **Write the CSV file**. Use `io:fileWriteCsv` with:
+3. **Write the CSV file**. Click **+** and select **Call Function**. Search under **io** and select `fileWriteCsv`. Configure:
    - **Path***: `./output/product-catalog.csv`
    - **Content***: `products`
 
@@ -511,10 +507,10 @@ Enable fail-safe by setting the [`failSafe`](#available-options) option on the p
 <TabItem value="ui" label="Visual Designer" default>
 
 1. **Define the record type**. Create a `Book` record with fields:
-   - `name`
-   - `author`
-   - `price`
-   - `publishDate`
+   - `name` (string)
+   - `author` (string)
+   - `price` (decimal)
+   - `publishDate` (string)
 
 2. **Add CSV input data**. Include at least one invalid row to test fail-safe behavior.
 
@@ -570,18 +566,89 @@ Design Patterns,Gang of Four,INVALID,1994-10-31`;
 
 The invalid row is skipped, the error is logged, and only valid rows are returned.
 
-Beyond console logging, `failSafe` can also write errors to a log file, with options for what to record (parser metadata, the raw row, or both) and how to write (append or overwrite).
+Beyond console logging, `failSafe` can write errors to a log file. The `FailSafeOptions` record has the following fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `enableConsoleLogs` | `boolean` | Logs each skipped row's error to the console. Default `true`. |
+| `includeSourceDataInConsole` | `boolean` | Adds the offending row's raw data to each console log entry. Default `false`. |
+| `fileOutputMode` | `FileOutputMode` | Writes errors to a file. Not set by default. |
+
+The `FileOutputMode` record controls where and how errors are written:
+
+| Field | Type | Description |
+|---|---|---|
+| `filePath` | `string` | Path of the error log file. Missing parent directories are created. Required. |
+| `contentType` | `ErrorLogContentType` | What to record for each skipped row: `csv:METADATA` (timestamp, row and column location, and error message), `csv:RAW` (the offending row only), or `csv:RAW_AND_METADATA` (both). Default `csv:METADATA`. |
+| `fileWriteOption` | `FileWriteOption` | `csv:APPEND` adds entries to an existing file. `csv:OVERWRITE` replaces the file when logging starts. Default `csv:APPEND`. |
+
+The following example writes the skipped row and its error details to a log file instead of the console:
+
+```ballerina
+import ballerina/data.csv;
+import ballerina/io;
+
+type Book record {|
+    string name;
+    string author;
+    decimal price;
+    string publishDate;
+|};
+
+public function main() returns error? {
+    string csvData = string `name,author,price,publishDate
+Clean Code,Robert Martin,25.50,2008-08-01
+Design Patterns,Gang of Four,INVALID,1994-10-31`;
+
+    Book[] books = check csv:parseString(csvData, {
+        failSafe: {
+            enableConsoleLogs: false,
+            fileOutputMode: {
+                filePath: "./logs/csv-errors.log",
+                contentType: csv:RAW_AND_METADATA,
+                fileWriteOption: csv:OVERWRITE
+            }
+        }
+    });
+
+    io:println(books);
+}
+```
+
+With `csv:RAW_AND_METADATA`, each skipped row is written as one JSON line:
+
+```json
+{"time":"2026-10-10T06:08:25.751813Z","location":{"row":3,"column":3},"offendingRow":"Design Patterns,Gang of Four,INVALID,1994-10-31","message":"value 'INVALID' cannot be cast into 'decimal'"}
+```
 
 ## Edge cases
 
 ### Quoted fields and special characters
 
-The `ballerina/data.csv` module supports RFC 4180 compliant CSV, including quoted fields containing commas, newlines, and escaped quotes.
+Enclose a field in the [`textEnclosure`](#available-options) character (default `"`) when its value contains the delimiter or a line break. To include the enclosure character inside an enclosed field, precede it with the [`escapeChar`](#available-options) character (default `\`), for example `"He said \"hello\""`.
 
 ### Encoding
 
-Use byte arrays and proper encoding conversion when processing non-UTF-8 CSV files.
+The parser decodes input as UTF-8 by default. For files in another character set, read the file as bytes or as a byte block stream and set the [`encoding`](#available-options) option to the source encoding:
+
+```ballerina
+import ballerina/data.csv;
+import ballerina/io;
+
+type Customer record {|
+    string name;
+    string city;
+|};
+
+public function main() returns error? {
+    byte[] content = check io:fileReadBytes("./resources/customers-latin1.csv");
+    Customer[] customers = check csv:parseBytes(content, {encoding: "ISO-8859-1"});
+    io:println(customers);
+}
+```
 
 ## What's next
 
-- [EDI Processing](edi.md) — Process enterprise data interchange formats
+- [CSV fault tolerance](../integration-artifacts/file-driven-integration/csv-fault-tolerance.md) — Handle malformed rows in CSV files that arrive through file integrations
+- [Local files](../integration-artifacts/file-driven-integration/local-files.md) — Process CSV files as they arrive in a local directory
+- [EDI processing](edi.md) — Process electronic data interchange formats
