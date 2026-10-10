@@ -261,7 +261,7 @@ Use `parseToStream` when:
 
 ## Parser options
 
-All of the CSV parser functions (`csv:parseString`, `csv:parseBytes`, `csv:parseStream`, `csv:parseToStream`) accept the same set of options that control how the input is read. Use these options to switch delimiters, skip header banners, treat specific tokens as nil, validate values against record constraints, or enable [fail-safe mode](#fail-safe-processing).
+All of the CSV parser functions (`csv:parseString`, `csv:parseBytes`, `csv:parseStream`, `csv:parseToStream`) accept the same set of options that control how the input is read. Use these options to switch delimiters, skip banner lines above the header or specific data rows, treat specific tokens as nil, validate values against record constraints, or enable [fail-safe mode](#fail-safe-processing).
 
 In the visual designer, parser options live under **Advanced Configurations** → **Options** on the parse step. The field is empty by default (`{}`), meaning all defaults apply.
 
@@ -297,10 +297,10 @@ The fields below match the `ParseOptions` record in the `ballerina/data.csv` mod
 | `lineTerminator` | `LineTerminator\|LineTerminator[]` | Row terminator, or set of terminators to accept. `LineTerminator` is an enum with members `LF` (`"\n"`) and `CRLF` (`"\r\n"`). Default `[LF, CRLF]`. |
 | `nilValue` | `NilValue?` | Token treated as nil during parsing. `NilValue` is an enum with members `NULL` (`"null"`), `NOT_APPLICABLE` (`"N/A"`), `EMPTY_STRING` (`""`), and `NIL` (`"()"`). Default `()`. |
 | `comment` | `string:Char` | Lines beginning with this character are skipped. Default `"#"`. |
-| `header` | `int:Unsigned32?` | Row index of the header row. Default `0`. Set to `()` for input with no header row. See [Headerless CSV](#headerless-csv). |
+| `header` | `int:Unsigned32?` | Zero-based index of the header row. Lines above the header row are skipped, so use this option to skip banner lines that precede the header. Default `0`. Set to `()` for input with no header row. See [Headerless CSV](#headerless-csv). |
 | `customHeadersIfHeadersAbsent` | `string[]?` | Header names to use when the input has no header row. Default `()`. |
 | `allowDataProjection` | `record\|false` | Controls projection when the target record covers only a subset of CSV columns. Set to `false` to require an exact match. The record form has `nilAsOptionalField` and `absentAsNilableType` boolean fields, both defaulting to `false`. Default `{}`. |
-| `skipLines` | `int[]\|string` | Lines to skip, given as an integer array (for example, `[1, 3]`) or as a range expression string (for example, `"2-4,7"`). Default `[]`. |
+| `skipLines` | `int[]\|string` | Data rows to skip, numbered from `1` starting at the first row after the header. Given as an integer array (for example, `[1, 3]`) or as a single inclusive range string (for example, `"2-4"`). Default `[]`. |
 | `enableConstraintValidation` | `boolean` | When `true`, parsed values are validated against any constraints declared on the record type. Default `true`. |
 | `outputWithHeaders` | `boolean` | When the parsed result is a list (`anydata[][]`), include the header row as the first inner array. Default `false`. |
 | `failSafe` | `FailSafeOptions?` | Skips and logs invalid rows instead of aborting the parse. See [Fail-safe processing](#fail-safe-processing). |
@@ -310,7 +310,7 @@ In Ballerina code, options are passed as the second argument to the parser funct
 ```ballerina
 T[] result = check csv:parseString(csvData, {
     delimiter: "\t",
-    skipLines: [0, 1],
+    skipLines: [1],
     nilValue: csv:NULL
 });
 ```
