@@ -430,7 +430,7 @@ remote function onFileJson(Order 'order, ftp:FileInfo fileInfo) returns error? {
 
 ```ballerina
 remote function onFileCsv(stream<string[], error?> content, ftp:FileInfo fileInfo) returns error? {
-    check content.forEach(function(string[] row) returns error? {
+    check content.forEach(function(string[] row) {
         // Process each row without loading the whole file into memory
     });
 }
