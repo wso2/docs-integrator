@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Configure Agent Memory
-description: Reference for configuring AI agent memory in WSO2 Integrator — short-term in-memory, MSSQL, Redis, PostgreSQL, SQLite, Amazon DynamoDB, custom stores, overflow strategy, and the state after memory is attached.
+description: Reference for configuring AI agent memory in WSO2 Integrator, short-term in-memory, MSSQL, Redis, PostgreSQL, SQLite, Amazon DynamoDB, custom stores, overflow strategy, and the state after memory is attached.
 keywords: [wso2 integrator, ai agent, memory, short term memory, memory store, mssql, redis, postgresql, sqlite, dynamodb, session]
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/memory
 ---
@@ -18,29 +18,21 @@ Memory is the infrastructure enabling AI systems to store, recall, and utilize p
 Click **+ Add Memory** on the AI Agent node. The **Configure Memory** panel opens on the right.
 
 <ThemedImage
-    alt="The Configure Memory panel — Select Memory dropdown set to Short Term Memory, with description 'Initializes short-term memory with an optional store and overflow configuration.' This operation has no required parameters info banner. Advanced Configurations section with Store (Default: In-Memory Short Term Memory Store), Overflow Configuration (Default: Overflow Trim), Memory Name set to aiShorttermmemory. Save button at the bottom."
+    alt="The Configure Memory panel: Select Memory dropdown set to Short Term Memory, with description 'Initializes short-term memory with an optional store and overflow configuration.' Store (Default: In-Memory Short Term Memory Store) with a Select/Expression toggle and a + Create New Memory Store link. Overflow Configuration (Default: Overflow Trim Configuration) with a Record/Expression toggle. Memory Name set to aiShorttermmemory. Save button at the bottom."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/09-configure-memory.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/09-configure-memory.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/01-configure-memory-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/01-configure-memory-v5.1.png'),
     }}
 />
 
 | Field | Required | Description |
 |---|---|---|
 | **Select Memory*** | Yes | Specifies the memory strategy used by the agent. Currently, the supported option is **Short Term Memory**. |
-| **Advanced Configurations** | No | Contains additional memory-related settings such as **Store** and **Overflow Configuration**. |
+| **Store** | No | Defines where conversation memory is stored. Available options include **In-Memory Short Term Memory Store** and the database-backed **MSSQL**, **Redis**, **PostgreSQL**, **SQLite**, and **Amazon DynamoDB** short term memory stores. Click **+ Create New Memory Store** to create one. |
+| **Overflow Configuration** | No | Defines what happens when the memory window reaches its limit. The default option is **Overflow Trim Configuration**. |
 | **Memory Name*** | Yes | The variable name used in the generated source code. The default value is `aiShorttermmemory`. |
 
 After saving, the AI Agent block on the canvas expands to include a Memory sub-block. See [Agent after memory is attached](#agent-after-memory-is-attached).
-
-### Advanced configurations
-
-Click **Expand** in the **Advanced Configurations** section to view the **Store** and **Overflow Configuration** settings in detail.
-
-| Field | Required | Description |
-|---|---|---|
-| **Store** | No | Defines where conversation memory is stored. Available options include **In-Memory Short Term Memory Store** and the database-backed **MSSQL**, **Redis**, **PostgreSQL**, **SQLite**, and **Amazon DynamoDB** short term memory stores. |
-| **Overflow Configuration** | No | Defines what happens when the memory window reaches its limit. The default option is **Overflow Trim**. |
 
 ## Add memory store
 
@@ -49,21 +41,21 @@ The **Store** field determines where the conversation history is stored.
 Click **+ Create New Memory Store** to open the **Select Memory Store** picker.
 
 <ThemedImage
-    alt="The Select Memory Store panel listing two stores: In Memory Short Term Memory Store with description 'Provides an in-memory chat message store.' (highlighted as default) and MSSQL Short Term Memory Store with description 'Represents an MS SQL-backed short-term memory store for messages.'"
+    alt="The Select Memory Store panel with a search box and six stores: In Memory Short Term Memory Store, Amazon DynamoDB Short Term Memory Store, MSSQL Short Term Memory Store, PostgreSQL Short Term Memory Store, Redis Short Term Memory Store, and SQLite Short Term Memory Store, each with a short description."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/10-select-memory-store.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/10-select-memory-store.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/02-select-memory-store-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/02-select-memory-store-v5.1.png'),
     }}
 />
 
 | Store | Module | Survives restart? | Recommended use |
 |---|---|---|---|
-| **In Memory Short Term Memory Store** | `ballerina/ai` | No — data is stored only in process memory. | Suitable for most agents. Lightweight, fast, and requires no additional infrastructure. |
-| **MSSQL Short Term Memory Store** | [`ballerinax/ai.memory.mssql`](https://central.ballerina.io/ballerinax/ai.memory.mssql/latest) | Yes — backed by an MSSQL database. | Suitable for long-running conversations, audit/compliance requirements, and conversations that span multiple sessions. |
-| **Redis Short Term Memory Store** | [`ballerinax/ai.memory.redis`](https://central.ballerina.io/ballerinax/ai.memory.redis/latest) | Yes — subject to your Redis persistence settings. | Suitable for low-latency shared memory, especially when several integration replicas serve the same sessions. |
-| **PostgreSQL Short Term Memory Store** | [`ballerinax/ai.memory.postgresql`](https://central.ballerina.io/ballerinax/ai.memory.postgresql/latest) | Yes — backed by a PostgreSQL database. | Same use cases as MSSQL, for teams already running PostgreSQL. |
-| **SQLite Short Term Memory Store** | [`ballerinax/ai.sqlite`](https://central.ballerina.io/ballerinax/ai.sqlite/latest) | Yes — backed by a SQLite database file. | Suitable for durable single-node memory without running a database server; local development and lightweight deployments. |
-| **Amazon DynamoDB Short Term Memory Store** | [`ballerinax/ai.aws.dynamodb`](https://central.ballerina.io/ballerinax/ai.aws.dynamodb/latest) | Yes — backed by an Amazon DynamoDB table. | Suitable for serverless, AWS-native deployments with on-demand scaling. |
+| **In Memory Short Term Memory Store** | `ballerina/ai` | No. Data is stored only in process memory. | Suitable for most agents. Lightweight, fast, and requires no additional infrastructure. |
+| **MSSQL Short Term Memory Store** | [`ballerinax/ai.memory.mssql`](https://central.ballerina.io/ballerinax/ai.memory.mssql/latest) | Yes. Backed by an MSSQL database. | Suitable for long-running conversations, audit/compliance requirements, and conversations that span multiple sessions. |
+| **Redis Short Term Memory Store** | [`ballerinax/ai.memory.redis`](https://central.ballerina.io/ballerinax/ai.memory.redis/latest) | Yes. Subject to your Redis persistence settings. | Suitable for low-latency shared memory, especially when several integration replicas serve the same sessions. |
+| **PostgreSQL Short Term Memory Store** | [`ballerinax/ai.memory.postgresql`](https://central.ballerina.io/ballerinax/ai.memory.postgresql/latest) | Yes. Backed by a PostgreSQL database. | Same use cases as MSSQL, for teams already running PostgreSQL. |
+| **SQLite Short Term Memory Store** | [`ballerinax/ai.sqlite`](https://central.ballerina.io/ballerinax/ai.sqlite/latest) | Yes. Backed by a SQLite database file. | Suitable for durable single-node memory without running a database server; local development and lightweight deployments. |
+| **Amazon DynamoDB Short Term Memory Store** | [`ballerinax/ai.aws.dynamodb`](https://central.ballerina.io/ballerinax/ai.aws.dynamodb/latest) | Yes. Backed by an Amazon DynamoDB table. | Suitable for serverless, AWS-native deployments with on-demand scaling. |
 
 Additional database-backed stores can be added in the same way. The picker automatically expands as new stores become available.
 
@@ -73,50 +65,53 @@ For backends that are not available in the picker (for example, MySQL), implemen
 
 Selecting **In Memory Short Term Memory Store** opens the configuration form for an in-memory memory store.
 
+<ThemedImage
+    alt="Create Memory Store form for an in-memory store. Fields: Size (Default: 10). Memory Store Name* (default 'aiInmemoryshorttermmemorystore'). Result Type* (default 'ai:InMemoryShortTermMemoryStore', locked). Save button."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/03-create-inmemory-store-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/03-create-inmemory-store-v5.1.png'),
+    }}
+/>
+
 Configure the following settings and save the configuration.
 
 | Field | Required | Description |
 |---|---|---|
+| **Size** | No | The maximum number of messages stored in memory. Default: `10`. |
 | **Memory Store Name*** | Yes | The variable name used for the generated memory store. Default: `aiInmemoryshorttermmemorystore`. |
 | **Result Type*** | Yes | The generated result type. Default: `ai:InMemoryShortTermMemoryStore`. |
-| **Size** | No | The maximum number of messages stored in memory. Default: `10`. |
 
 ### Creating an MSSQL short-term memory store
 
 Selecting **MSSQL Short Term Memory Store** opens a configuration form for creating an MSSQL-backed memory store.
 
 <ThemedImage
-    alt="Create Memory Store form for MSSQL. Fields: MS SQL Client* (with description 'The MS SQL client or database configuration to connect to the database.', Record/Expression toggle, default `new ('', (), (), (), 0, '', (), ())`). Advanced Configurations Expand link. Memory Store Name* (default 'mssqlShorttermmemorystore'). Result Type* (default 'mssql:ShortTermMemoryStore', locked). Save button."
+    alt="Create Memory Store form for MSSQL. Fields: MS SQL Client* (default `new ('', (), (), (), 0, '', (), ())`), Max Messages Per Key (Default: 20), Cache Config (Default: {}), Table Name (Default: 'ChatMessages'), Checkpoint Table Name (Default: 'Checkpoints')."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/20-create-mssql-memory-store.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/20-create-mssql-memory-store.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/04-create-mssql-memory-store-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/04-create-mssql-memory-store-v5.1.png'),
+    }}
+/>
+
+Scrolling further shows **Memory Store Name**, **Result Type**, and the **Save** button:
+
+<ThemedImage
+    alt="Bottom of the Create Memory Store form for MSSQL showing the end of Table Name, Checkpoint Table Name, Memory Store Name* (default 'mssqlShorttermmemorystore'), Result Type* (default 'mssql:ShortTermMemoryStore', locked), and the Save button."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/05-mssql-memory-scrolled-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/05-mssql-memory-scrolled-v5.1.png'),
     }}
 />
 
 | Field | Required | Description |
 |---|---|---|
 | **MS SQL Client*** | Yes | Specifies the MSSQL client or database configuration used to connect to the database. Supports both **Record** and **Expression** modes. The default value initializes an `mssql:Client`: `new ("", (), (), (), 0, "", (), ())`. Configure the required connection details such as host, username, password, database name, and port. |
-| **Advanced Configurations** | No | Additional optional configurations for the memory store. See below for more details. |
+| **Max Messages Per Key** | No | Defines the maximum number of messages stored per session ID. Default: `20`. When the limit is reached, the oldest messages are removed. |
+| **Cache Config** | No | Configures the in-memory cache layer on top of the SQL store. Default: `{}`. This helps reduce database round-trips for frequently accessed sessions. |
+| **Table Name** | No | Specifies the database table used to store chat messages. Default: `"ChatMessages"`. If the table does not exist, it is created automatically. |
+| **Checkpoint Table Name** | No | Specifies the database table used to store human-in-the-loop pause checkpoints. Default: `"Checkpoints"`. Create this table before using human-in-the-loop; must be different from the chat messages table. |
 | **Memory Store Name*** | Yes | The variable name used for the generated memory store. Default: `mssqlShorttermmemorystore`. |
 | **Result Type*** | Yes | The generated result type. Default: `mssql:ShortTermMemoryStore`. |
-
-#### Advanced configurations of MSSQL memory store
-
-Expand **Advanced Configurations** to view additional persistence-related settings.
-
-<ThemedImage
-    alt="Create Memory Store form for MSSQL with Advanced Configurations expanded. Fields visible: Cache Config (Default: {}, description 'The cache configuration for in-memory caching of messages.', Record/Expression). Max Messages Per Key (Default: 20, description 'The maximum number of interactive messages to store per key.', Number/Expression). Table Name (Default: 'ChatMessages', description 'The name of the database table to store chat messages (default 'ChatMessages'). Must start with a letter or underscore and contain only letters, digits, and underscores.', Text/Expression)."
-    sources={{
-        light: useBaseUrl('/img/genai/develop/agents/21-mssql-memory-advanced.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/21-mssql-memory-advanced.png'),
-    }}
-/>
-
-| Field | Default | Description |
-|---|---|---|
-| **Cache Config** | `{}` | Configures the in-memory cache layer on top of the SQL store. This helps reduce database round-trips for frequently accessed sessions. |
-| **Max Messages Per Key** | `20` | Defines the maximum number of messages stored per session ID. When the limit is reached, the oldest messages are removed. |
-| **Table Name** | `"ChatMessages"` | Specifies the database table used to store chat messages. If the table does not exist, it is created automatically. |
 
 In an agent hosted on `ai:Listener`, each chat request’s `sessionId` is used as the key for storing conversation messages in the database table. Inspecting this table directly can help debug and analyze conversations.
 
@@ -126,18 +121,22 @@ Selecting **Redis Short Term Memory Store** opens a configuration form for creat
 
 | Field | Required | Description |
 |---|---|---|
+<ThemedImage
+    alt="Create Memory Store form for Redis. Fields: Redis Client* (default `new ({})`), Max Messages Per Key (Default: 20), Cache Config (Default: ()), Key Prefix (Default: 'chat_memory'), Memory Store Name* (default 'redisShorttermmemorystore'), Result Type* (default 'redis:ShortTermMemoryStore', locked)."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/06-create-redis-memory-store-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/06-create-redis-memory-store-v5.1.png'),
+    }}
+/>
+
+| Field | Required | Description |
+|---|---|---|
 | **Redis Client*** | Yes | Specifies the Redis client or connection configuration used to connect to the Redis server. Supports both **Record** and **Expression** modes. Provide a `redis:ConnectionConfig` record (connection URI or host/port with authentication, connection pooling, cluster mode, and TLS options) or an existing `redis:Client`. |
-| **Advanced Configurations** | No | Additional optional configurations for the memory store. See below for more details. |
+| **Max Messages Per Key** | No | Defines the maximum number of interactive messages stored per session ID. Default: `20`. When the limit is reached, the oldest messages are removed. |
+| **Cache Config** | No | Configures an optional in-memory cache layer on top of Redis. Default: `()`. This helps reduce Redis round-trips for frequently accessed sessions. |
+| **Key Prefix** | No | The prefix for the Redis keys that store chat messages. Default: `"chat_memory"`. A session's messages are stored under `<prefix>:<sessionId>:system` and `<prefix>:<sessionId>:interactive`. |
 | **Memory Store Name*** | Yes | The variable name used for the generated memory store. Default: `redisShorttermmemorystore`. |
 | **Result Type*** | Yes | The generated result type. Default: `redis:ShortTermMemoryStore`. |
-
-#### Advanced configurations of Redis memory store
-
-| Field | Default | Description |
-|---|---|---|
-| **Max Messages Per Key** | `20` | Defines the maximum number of interactive messages stored per session ID. When the limit is reached, the oldest messages are removed. |
-| **Cache Config** | `()` | Configures an optional in-memory cache layer on top of Redis. This helps reduce Redis round-trips for frequently accessed sessions. |
-| **Key Prefix** | `"chat_memory"` | The prefix for the Redis keys that store chat messages. A session's messages are stored under `<prefix>:<sessionId>:system` and `<prefix>:<sessionId>:interactive`. |
 
 Whether the conversation history survives a restart depends on your Redis persistence settings (RDB/AOF).
 
@@ -145,61 +144,87 @@ Whether the conversation history survives a restart depends on your Redis persis
 
 Selecting **PostgreSQL Short Term Memory Store** opens a configuration form for creating a PostgreSQL-backed memory store.
 
+<ThemedImage
+    alt="Create Memory Store form for PostgreSQL. Fields: Database Connection* (default empty database name), Max Messages Per Key (Default: 20), Table Name (Default: 'chat_messages'), Checkpoint Table Name (Default: 'checkpoints')."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/07-create-postgresql-memory-store-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/07-create-postgresql-memory-store-v5.1.png'),
+    }}
+/>
+
+Scrolling further shows the end of **Checkpoint Table Name**, **Memory Store Name**, **Result Type**, and the **Save** button:
+
+<ThemedImage
+    alt="Bottom of the Create Memory Store form for PostgreSQL showing Memory Store Name* (default 'postgresqlShorttermmemorystore'), Result Type* (default 'postgresql:ShortTermMemoryStore', locked), and the Save button."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/08-postgresql-memory-scrolled-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/08-postgresql-memory-scrolled-v5.1.png'),
+    }}
+/>
+
 | Field | Required | Description |
 |---|---|---|
 | **Database Connection*** | Yes | Specifies the PostgreSQL client or database configuration used to connect to the database. Supports both **Record** and **Expression** modes. Provide a database configuration record with **Host** (default `localhost`), **Username** (default `postgres`), **Password**, **Database Name**, **Port** (default `5432`), and optional client options and connection pool settings, or an existing `postgresql:Client`. |
-| **Advanced Configurations** | No | Additional optional configurations for the memory store. See below for more details. |
+| **Max Messages Per Key** | No | Defines the maximum number of interactive messages stored per session ID. Default: `20`. When the limit is reached, the oldest messages are removed. |
+| **Table Name** | No | Specifies the database table used to store chat messages. Default: `"chat_messages"`. If the table does not exist, it is created automatically. Must start with a letter or underscore and contain only letters, digits, and underscores. Note that PostgreSQL folds unquoted identifiers to lower case. |
+| **Checkpoint Table Name** | No | Specifies the database table used to store approval pause checkpoints. Default: `"checkpoints"`. It is created lazily on first use and must be different from the chat messages table. The same identifier rules apply. |
 | **Memory Store Name*** | Yes | The variable name used for the generated memory store. Default: `postgresqlShorttermmemorystore`. |
 | **Result Type*** | Yes | The generated result type. Default: `postgresql:ShortTermMemoryStore`. |
-
-#### Advanced configurations of PostgreSQL memory store
-
-| Field | Default | Description |
-|---|---|---|
-| **Max Messages Per Key** | `20` | Defines the maximum number of interactive messages stored per session ID. When the limit is reached, the oldest messages are removed. |
-| **Table Name** | `"chat_messages"` | Specifies the database table used to store chat messages. If the table does not exist, it is created automatically. Must start with a letter or underscore and contain only letters, digits, and underscores. Note that PostgreSQL folds unquoted identifiers to lower case. |
-| **Checkpoint Table Name** | `"checkpoints"` | Specifies the database table used to store approval pause checkpoints. It is created lazily on first use and must be different from the chat messages table. The same identifier rules apply. |
 
 ### Creating a SQLite short-term memory store
 
 Selecting **SQLite Short Term Memory Store** opens a configuration form for creating a SQLite-backed memory store. SQLite provides durable, file-backed memory without running a separate database server.
 
+<ThemedImage
+    alt="Create Memory Store form for SQLite. Fields: Database Connection* (default empty URL), Maximum Messages Per Key (Default: 20), Table Name (Default: 'chat_messages'), Checkpoint Table Name (Default: 'checkpoints'), and the start of Memory Store Name*."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/09-create-sqlite-memory-store-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/09-create-sqlite-memory-store-v5.1.png'),
+    }}
+/>
+
+Scrolling further shows the end of **Checkpoint Table Name**, **Memory Store Name**, **Result Type**, and the **Save** button:
+
+<ThemedImage
+    alt="Bottom of the Create Memory Store form for SQLite showing Memory Store Name* (default 'sqliteShorttermmemorystore'), Result Type* (default 'sqlite:ShortTermMemoryStore', locked), and the Save button."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/10-sqlite-memory-scrolled-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/10-sqlite-memory-scrolled-v5.1.png'),
+    }}
+/>
+
 | Field | Required | Description |
 |---|---|---|
-| **Database Connection*** | Yes | Specifies the SQLite JDBC client or database configuration used to connect to the database. Supports both **Record** and **Expression** modes. Provide a database configuration record with a **URL** (must start with `jdbc:sqlite:` — for example, `jdbc:sqlite:./chat.db` for a file-backed database or `jdbc:sqlite::memory:` for an in-process one), optional session **Options** (journal mode, busy timeout), and a **Connection Timeout** (default `30` seconds), or an existing `jdbc:Client`. |
-| **Advanced Configurations** | No | Additional optional configurations for the memory store. See below for more details. |
+| **Database Connection*** | Yes | Specifies the SQLite JDBC client or database configuration used to connect to the database. Supports both **Record** and **Expression** modes. Provide a database configuration record with a **URL** (must start with `jdbc:sqlite:`, for example `jdbc:sqlite:./chat.db` for a file-backed database or `jdbc:sqlite::memory:` for an in-process one), optional session **Options** (journal mode, busy timeout), and a **Connection Timeout** (default `30` seconds), or an existing `jdbc:Client`. |
+| **Maximum Messages Per Key** | No | Defines the maximum number of interactive messages stored per session ID (must be a positive integer). Default: `20`. When the limit is reached, the oldest messages are removed. |
+| **Table Name** | No | Specifies the database table used to store chat messages. Default: `"chat_messages"`. If the table does not exist, it is created automatically. Must start with a letter or underscore and contain only letters, digits, and underscores. |
+| **Checkpoint Table Name** | No | Specifies the database table used to store approval pause checkpoints. Default: `"checkpoints"`. It is created lazily on first use and must be different from the chat messages table. The same identifier rules apply. |
 | **Memory Store Name*** | Yes | The variable name used for the generated memory store. Default: `sqliteShorttermmemorystore`. |
 | **Result Type*** | Yes | The generated result type. Default: `sqlite:ShortTermMemoryStore`. |
 
-#### Advanced configurations of SQLite memory store
-
-| Field | Default | Description |
-|---|---|---|
-| **Maximum Messages Per Key** | `20` | Defines the maximum number of interactive messages stored per session ID. When the limit is reached, the oldest messages are removed. |
-| **Table Name** | `"chat_messages"` | Specifies the database table used to store chat messages. If the table does not exist, it is created automatically. Must start with a letter or underscore and contain only letters, digits, and underscores. |
-| **Checkpoint Table Name** | `"checkpoints"` | Specifies the database table used to store approval pause checkpoints. It is created lazily on first use and must be different from the chat messages table. The same identifier rules apply. |
-
 :::note
-SQLite is a single-writer database, so the store pins its connection pool to a single connection. A `jdbc:sqlite::memory:` database lives in the integration process and loses its data on shutdown — use a file-backed URL for memory that must survive restarts.
+SQLite is a single-writer database, so the store pins its connection pool to a single connection. A `jdbc:sqlite::memory:` database lives in the integration process and loses its data on shutdown; use a file-backed URL for memory that must survive restarts.
 :::
 
 ### Creating an Amazon DynamoDB short-term memory store
 
 Selecting **Amazon DynamoDB Short Term Memory Store** opens a configuration form for creating a DynamoDB-backed memory store.
 
+<ThemedImage
+    alt="Create Memory Store form for Amazon DynamoDB. Fields: Database Connection* (default empty AWS credentials and region), Max Messages Per Key (Default: 20), Table Configuration (Default: empty), Memory Store Name* (default 'dynamodbShorttermmemorystore'), Result Type* (default 'dynamodb:ShortTermMemoryStore', locked). Save button."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/11-create-dynamodb-memory-store-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/11-create-dynamodb-memory-store-v5.1.png'),
+    }}
+/>
+
 | Field | Required | Description |
 |---|---|---|
 | **Database Connection*** | Yes | Specifies the DynamoDB client or connection configuration used to connect to Amazon DynamoDB. Supports both **Record** and **Expression** modes. Provide a `dynamodb:ConnectionConfig` record (AWS region and credentials) or an existing `dynamodb:Client`. |
-| **Advanced Configurations** | No | Additional optional configurations for the memory store. See below for more details. |
+| **Max Messages Per Key** | No | Defines the maximum number of interactive messages stored per session ID. Default: `20`. When the limit is reached, the oldest messages are removed. |
+| **Table Configuration** | No | Configures the DynamoDB table that backs the store. Default: `{}`. See the table below. |
 | **Memory Store Name*** | Yes | The variable name used for the generated memory store. Default: `dynamodbShorttermmemorystore`. |
 | **Result Type*** | Yes | The generated result type. Default: `dynamodb:ShortTermMemoryStore`. |
-
-#### Advanced configurations of Amazon DynamoDB memory store
-
-| Field | Default | Description |
-|---|---|---|
-| **Max Messages Per Key** | `20` | Defines the maximum number of interactive messages stored per session ID. When the limit is reached, the oldest messages are removed. |
-| **Table Configuration** | `{}` | Configures the DynamoDB table that backs the store. See the table below. |
 
 The **Table Configuration** record contains the following fields:
 
@@ -235,10 +260,10 @@ The effective size of the memory window depends on the model’s context window,
 After memory is configured, the AI Agent block on the canvas displays the attached memory configuration as a sub-block.
 
 <ThemedImage
-    alt="The AI Chat Agent canvas after Memory has been attached. The AI Agent block now has an additional inner block 'Memory: ShortTermMemory' between the agent name (AI Agent / stringResult) and the BlogReviewer label."
+    alt="The blogReviewer AI Agent node with an additional inner sub-block 'Memory: ShortTermMemory', between the agent header and the Blog Reviewer role description."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/22-agent-with-memory-attached.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/22-agent-with-memory-attached.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/memory/12-agent-with-memory-attached-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/memory/12-agent-with-memory-attached-v5.1.png'),
     }}
 />
 
@@ -325,8 +350,8 @@ The following table provides general recommendations for choosing a memory setup
 
 | Situation | Recommended setup |
 |---|---|
-| Getting started with a new chat agent | Use the default configuration — In-Memory Short-Term Memory with the default overflow configuration. |
-| The agent needs to retain conversations across restarts | Configure **Short Term Memory** with a database-backed store — **MSSQL**, **PostgreSQL**, **SQLite**, **Redis**, or **Amazon DynamoDB**. |
+| Getting started with a new chat agent | Use the default configuration: In-Memory Short-Term Memory with the default overflow configuration. |
+| The agent needs to retain conversations across restarts | Configure **Short Term Memory** with a database-backed store: **MSSQL**, **PostgreSQL**, **SQLite**, **Redis**, or **Amazon DynamoDB**. |
 | Several integration replicas must share session state with low latency | Configure **Redis Short Term Memory Store**. |
 | Durable memory without running a database server | Configure **SQLite Short Term Memory Store** with a file-backed URL. |
 | Serverless deployment on AWS | Configure **Amazon DynamoDB Short Term Memory Store**. |
