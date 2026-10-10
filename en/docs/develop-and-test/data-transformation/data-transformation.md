@@ -69,4 +69,6 @@ Most integrations spend as much time reshaping data as they do moving it. Use th
 
 ## What's next
 
+- [Data Mapper](../integration-artifacts/supportive-artifacts/data-mapper/data-mapper.md) — Map fields between types visually
+- [Types](../integration-artifacts/supportive-artifacts/types.md) — Define the record types that parsed data binds to
 - [Integration artifacts](../integration-artifacts/integration-artifacts.md) — Build the services, automations, and handlers that call these transformations
