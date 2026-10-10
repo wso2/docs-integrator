@@ -12,11 +12,7 @@ import TabItem from '@theme/TabItem';
 
 # CSV & Flat File Processing
 
-CSV and flat files are commonly used data exchange formats for spreadsheets, reports, batch-processing systems, legacy applications, and data integration workflows. Formats such as CSV, TSV, and fixed-width files are widely used to store and transfer structured tabular data between systems.
-
-WSO2 Integrator provides built-in support for CSV and flat-file processing, enabling developers to read, parse, validate, transform, and generate delimited or fixed-width data without relying on external libraries. The ballerina/data.csv module offers type-safe APIs for handling tabular data and converting rows into structured records.
-
-With native CSV and flat-file support, developers can efficiently process large datasets, transform file content, map records between formats, and integrate file-based systems with APIs, databases, and enterprise applications.
+CSV and other delimited flat files, such as TSV and pipe-delimited files, are a common way to exchange tabular data between spreadsheets, reporting tools, batch systems, and legacy applications. WSO2 Integrator parses delimited data into typed records with the `ballerina/data.csv` module and writes CSV output with the `ballerina/io` module. You can stream large files, handle custom delimiters and headerless input, and skip malformed rows without stopping the integration.
 
 ## Mapping CSV columns to records
 
@@ -576,7 +572,7 @@ Beyond console logging, `failSafe` can also write errors to a log file, with opt
 
 ### Quoted fields and special characters
 
-The `ballerina/data.csv` module supports RFC 4180 compliant CSV, including quoted fields containing commas, newlines, and escaped quotes.
+Enclose a field in the [`textEnclosure`](#available-options) character (default `"`) when its value contains the delimiter or a line break. To include the enclosure character inside an enclosed field, precede it with the [`escapeChar`](#available-options) character (default `\`), for example `"He said \"hello\""`.
 
 ### Encoding
 
