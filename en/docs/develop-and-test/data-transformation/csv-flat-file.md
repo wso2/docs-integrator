@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
-title: CSV & Flat File Processing
-description: Parse, transform, and write CSV and flat file data.
+title: CSV and flat file processing
+description: Parse, transform, and write CSV and other delimited flat file data.
 slug: /develop-and-test/data-transformation/csv-flat-file
 ---
 
@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# CSV & Flat File Processing
+# CSV and flat file processing
 
 CSV and other delimited flat files, such as TSV and pipe-delimited files, are a common way to exchange tabular data between spreadsheets, reporting tools, batch systems, and legacy applications. WSO2 Integrator parses delimited data into typed records with the `ballerina/data.csv` module and writes CSV output with the `ballerina/io` module. You can stream large files, handle custom delimiters and headerless input, and skip malformed rows without stopping the integration.
 
@@ -507,10 +507,10 @@ Enable fail-safe by setting the [`failSafe`](#available-options) option on the p
 <TabItem value="ui" label="Visual Designer" default>
 
 1. **Define the record type**. Create a `Book` record with fields:
-   - `name`
-   - `author`
-   - `price`
-   - `publishDate`
+   - `name` (string)
+   - `author` (string)
+   - `price` (decimal)
+   - `publishDate` (string)
 
 2. **Add CSV input data**. Include at least one invalid row to test fail-safe behavior.
 
@@ -649,4 +649,6 @@ public function main() returns error? {
 
 ## What's next
 
-- [EDI Processing](edi.md) — Process enterprise data interchange formats
+- [CSV fault tolerance](../integration-artifacts/file-driven-integration/csv-fault-tolerance.md) — Handle malformed rows in CSV files that arrive through file integrations
+- [Local files](../integration-artifacts/file-driven-integration/local-files.md) — Process CSV files as they arrive in a local directory
+- [EDI processing](edi.md) — Process electronic data interchange formats
