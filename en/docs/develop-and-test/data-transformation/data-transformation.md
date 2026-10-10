@@ -1,7 +1,7 @@
 ---
 title: Transform Your Data
-description: Transform data between formats in WSO2 Integrator using the visual Data Mapper together with JSON, XML, CSV, XLSX, EDI, YAML/TOML, PDF, and ZIP processing.
-keywords: [wso2 integrator, data transformation, data mapper, json, xml, csv, xlsx, edi, yaml, toml, pdf, zip]
+description: Transform data between formats in WSO2 Integrator using the visual Data Mapper, format-specific processing for JSON, XML, CSV, XLSX, EDI, YAML/TOML, PDF, and ZIP, and template rendering.
+keywords: [wso2 integrator, data transformation, data mapper, json, xml, csv, xlsx, edi, yaml, toml, pdf, zip, template, freemarker]
 sidebar_label: Overview
 sidebar_position: 0
 slug: /develop-and-test/data-transformation
@@ -45,9 +45,9 @@ Most integrations spend as much time reshaping data as they do moving it. Use th
   <p class="palette-card-desc">Parse, transform, and generate EDI documents.</p>
 </PaletteCard>
 
-<PaletteCard icon="yaml-toml" href="/develop-and-test/data-transformation/yaml-toml">
-  <h3 class="palette-card-title">YAML &amp; TOML</h3>
-  <p class="palette-card-desc">Parse, construct, and transform YAML and TOML data.</p>
+<PaletteCard icon="pdf" href="/develop-and-test/data-transformation/pdf">
+  <h3 class="palette-card-title">PDF</h3>
+  <p class="palette-card-desc">Extract text, convert pages to images, and render HTML to PDF.</p>
 </PaletteCard>
 
 <PaletteCard icon="template" href="/develop-and-test/data-transformation/freemarker">
@@ -55,18 +55,20 @@ Most integrations spend as much time reshaping data as they do moving it. Use th
   <p class="palette-card-desc">Render text, HTML, YAML, and other formats from FreeMarker templates.</p>
 </PaletteCard>
 
-<PaletteCard icon="pdf" href="/develop-and-test/data-transformation/pdf">
-  <h3 class="palette-card-title">PDF</h3>
-  <p class="palette-card-desc">Extract text, convert pages to images, and render HTML to PDF.</p>
-</PaletteCard>
-
 <PaletteCard icon="zip" href="/develop-and-test/data-transformation/zip">
   <h3 class="palette-card-title">ZIP Archives</h3>
   <p class="palette-card-desc">Create, inspect, and safely extract ZIP archives.</p>
+</PaletteCard>
+
+<PaletteCard icon="yaml-toml" href="/develop-and-test/data-transformation/yaml-toml">
+  <h3 class="palette-card-title">YAML &amp; TOML</h3>
+  <p class="palette-card-desc">Parse, construct, and transform YAML and TOML data.</p>
 </PaletteCard>
 
 </PaletteGrid>
 
 ## What's next
 
+- [Data Mapper](../integration-artifacts/supportive-artifacts/data-mapper/data-mapper.md) — Map fields between types visually
+- [Types](../integration-artifacts/supportive-artifacts/types.md) — Define the record types that parsed data binds to
 - [Integration artifacts](../integration-artifacts/integration-artifacts.md) — Build the services, automations, and handlers that call these transformations
