@@ -448,7 +448,7 @@ remote function onFile(byte[] content, ftp:FileInfo fileInfo) returns error? {
 
 ```ballerina
 remote function onFileDelete(string deletedFile) returns error? {
-    // deletedFile is the name of the file that was removed
+    // deletedFile is the path of the file that was removed
 }
 ```
 
