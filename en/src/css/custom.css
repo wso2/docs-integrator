@@ -757,6 +757,14 @@ h1, h2, h3, h4, h5, h6 {
   border-top: 1px solid var(--wso2-border-subtle);
 }
 
+/* A heading that opens a tab panel sits directly under the tab box's own
+   border, so the section divider above would render as a stray line. */
+.markdown .tabs-container [role='tabpanel'] > h3:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
 /* Jumping to a heading (card link, TOC, #anchor in the URL) must clear
    BOTH sticky rows: the navbar itself and the product/"Copy page" row
    stacked under it (theme/Navbar's .secondaryRow). Docusaurus only
