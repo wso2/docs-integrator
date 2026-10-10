@@ -16,8 +16,8 @@ WSO2 Integrator MCP services run over the **Streamable HTTP** transport. The gen
    <ThemedImage
        alt="Artifacts page showing the AI Integration category with Chat Agent Service, Durable Agentic Workflow, Voice Agent Service, and MCP Service. Above are Automation and Durable Workflow; below is Integration as API."
        sources={{
-           light: useBaseUrl('/img/genai/develop/mcp/mcp-add-artifact.png'),
-           dark: useBaseUrl('/img/genai/develop/mcp/mcp-add-artifact.png'),
+           light: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/01-mcp-add-artifact-v5.1.png'),
+           dark: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/01-mcp-add-artifact-v5.1.png'),
        }}
    />
 
@@ -26,8 +26,8 @@ WSO2 Integrator MCP services run over the **Streamable HTTP** transport. The gen
    <ThemedImage
        alt="Create MCP Service form with the Design From Scratch and Import From OpenAPI Specification options, and fields for Service Name, Version, Port (default 8080), Base Path (/mcp), and an expandable Advanced Configurations section."
        sources={{
-           light: useBaseUrl('/img/genai/develop/mcp/mcp-create-service.png'),
-           dark: useBaseUrl('/img/genai/develop/mcp/mcp-create-service.png'),
+           light: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/02-mcp-create-service-v5.1.png'),
+           dark: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/02-mcp-create-service-v5.1.png'),
        }}
    />
 
@@ -84,7 +84,7 @@ The function name becomes the tool name. The doc comment becomes the tool descri
 
 Service configuration controls the base path, the server identity advertised to clients, the session management mode, and HTTP-level options such as CORS and authentication.
 
-In the **MCP Service Editor**, click **Configure** in the header to open the **MCP Service Configuration** form.
+In the **MCP Service Editor**, click **Configure** in the header to open the **MCP Service Configuration** page. The left-hand navigation lists **MCP Service** and, under **Attached Listeners**, each listener the service uses (for example, `mcpListener`). Selecting **MCP Service** shows the service-level fields below.
 
 | Field | Description |
 |---|---|
@@ -97,8 +97,8 @@ The same form also shows the configuration of the attached listener. See [Listen
 <ThemedImage
     alt="Record Configuration editor for StreamableHttpServiceConfiguration showing the info field (with version and name), httpConfig, sessionMode (auto), and the optional options field."
     sources={{
-        light: useBaseUrl('/img/genai/develop/mcp/mcp-service-configuration.png'),
-        dark: useBaseUrl('/img/genai/develop/mcp/mcp-service-configuration.png'),
+        light: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/03-mcp-service-configuration-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/03-mcp-service-configuration-v5.1.png'),
     }}
 />
 
@@ -169,8 +169,8 @@ In the **MCP Service Configuration** form, select the listener under **Attached 
 <ThemedImage
     alt="Configuration for mcpListener showing Name, Listen To (8080), Host, HTTP1 Settings, Secure Socket, HTTP Version, and Timeout fields."
     sources={{
-        light: useBaseUrl('/img/genai/develop/mcp/mcp-listener-configuration.png'),
-        dark: useBaseUrl('/img/genai/develop/mcp/mcp-listener-configuration.png'),
+        light: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/04-mcp-listener-configuration-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/04-mcp-listener-configuration-v5.1.png'),
     }}
 />
 
@@ -248,8 +248,8 @@ Click **+ Add Tool** in the editor to open the **New Tool Configuration** panel.
 <ThemedImage
     alt="The New Tool Configuration panel showing Tool Name, Tool Description, Parameters, Return Type, and a collapsed Advanced Configurations section, with the MCP Service editor visible behind it."
     sources={{
-        light: useBaseUrl('/img/genai/develop/mcp/mcp-tool-configuration.png'),
-        dark: useBaseUrl('/img/genai/develop/mcp/mcp-tool-configuration.png'),
+        light: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/05-mcp-tool-configuration-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/05-mcp-tool-configuration-v5.1.png'),
     }}
 />
 
@@ -379,8 +379,8 @@ In the **New Tool Configuration** panel, expand **Advanced Configurations**.
 <ThemedImage
     alt="The Advanced Configurations section of the New Tool Configuration panel showing the Meta checkbox, Transport Parameters with HTTP Headers and a + Header button, and Request Access with Request and Headers checkboxes."
     sources={{
-        light: useBaseUrl('/img/genai/develop/mcp/mcp-tool-advanced-configurations.png'),
-        dark: useBaseUrl('/img/genai/develop/mcp/mcp-tool-advanced-configurations.png'),
+        light: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/06-mcp-tool-advanced-configurations-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/06-mcp-tool-advanced-configurations-v5.1.png'),
     }}
 />
 
@@ -598,7 +598,7 @@ Once your service is running, MCP clients connect by URL.
 }
 ```
 
-**Another agent inside WSO2 Integrator** — see [Consuming MCP from an Agent](consuming-mcp-from-agent.md).
+**Another agent inside WSO2 Integrator**: see [Consuming MCP from an Agent](consuming-mcp-from-agent.md).
 
 ## Operational notes
 

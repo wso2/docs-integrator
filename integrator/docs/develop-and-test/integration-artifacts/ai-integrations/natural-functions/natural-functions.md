@@ -20,8 +20,8 @@ A finished natural function is a single **Prompt** node sitting between **Start*
 <ThemedImage
     alt="Overview of a natural function in the Flow Designer showing the Prompt node with a saved prompt body."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/42-how-a-natural-function-looks-like.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/42-how-a-natural-function-looks-like.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/01-how-a-natural-function-looks-like-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/01-how-a-natural-function-looks-like-v5.1.png'),
     }}
 />
 
@@ -58,8 +58,8 @@ There are two equivalent entry points; both open the same form.
 <ThemedImage
     alt="Project sidebar showing the Natural Functions section with the + button to add a new natural function."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/43-add-natural-function-from-left-sidebar.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/43-add-natural-function-from-left-sidebar.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/02-add-natural-function-from-left-sidebar-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/02-add-natural-function-from-left-sidebar-v5.1.png'),
     }}
 />
 
@@ -68,8 +68,8 @@ There are two equivalent entry points; both open the same form.
 <ThemedImage
     alt="Add Artifact panel with the Natural Function tile highlighted under Other Artifacts."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/44-add-natural-function-from-add-artifact-menu.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/44-add-natural-function-from-add-artifact-menu.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/03-add-natural-function-from-add-artifact-menu-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/03-add-natural-function-from-add-artifact-menu-v5.1.png'),
     }}
 />
 
@@ -80,8 +80,8 @@ The form has three fields and a **Create** button.
 <ThemedImage
     alt="Create New Natural Function form with Name, Parameters, Return Type fields and a Create button."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/45-create-natural-function-menu.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/45-create-natural-function-menu.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/04-create-natural-function-menu-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/04-create-natural-function-menu-v5.1.png'),
     }}
 />
 
@@ -98,8 +98,8 @@ Click **+ Add Parameter**. The inline dialog asks for a type, a name, and a shor
 <ThemedImage
     alt="Add Parameter dialog with Type, Name, and Description fields."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/46-create-natural-function-add-parameter.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/46-create-natural-function-add-parameter.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/05-create-natural-function-add-parameter-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/05-create-natural-function-add-parameter-v5.1.png'),
     }}
 />
 
@@ -110,8 +110,8 @@ Click **Return Type**. The picker offers primitives, plus **Create New Type** an
 <ThemedImage
     alt="Return Type dropdown showing primitive types and options to create or browse types."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/47-create-natural-function-return-type.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/47-create-natural-function-return-type.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/06-create-natural-function-return-type-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/06-create-natural-function-return-type-v5.1.png'),
     }}
 />
 
@@ -122,8 +122,8 @@ For most natural functions you want a **record** so each output field is named a
   <ThemedImage
       alt="Create New Type dialog on the Create from scratch tab with Kind set to Record and a Fields section."
       sources={{
-          light: useBaseUrl('/img/genai/develop/natural-functions/48-create-new-type-record.png'),
-          dark: useBaseUrl('/img/genai/develop/natural-functions/48-create-new-type-record.png'),
+          light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/07-create-new-type-record-v5.1.png'),
+          dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/07-create-new-type-record-v5.1.png'),
       }}
   />
 
@@ -132,8 +132,8 @@ For most natural functions you want a **record** so each output field is named a
   <ThemedImage
       alt="Create New Type dialog on the Import tab with a JSON sample pasted into the textarea."
       sources={{
-          light: useBaseUrl('/img/genai/develop/natural-functions/49-create-new-type-import.png'),
-          dark: useBaseUrl('/img/genai/develop/natural-functions/49-create-new-type-import.png'),
+          light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/08-create-new-type-import-v5.1.png'),
+          dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/08-create-new-type-import-v5.1.png'),
       }}
   />
 
@@ -142,8 +142,8 @@ The new type is selected automatically as the function's return type. With at le
 <ThemedImage
     alt="Create New Natural Function form filled in with name, parameter, and return type, with the Create button enabled."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/50-create-natural-function-all-configured.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/50-create-natural-function-all-configured.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/09-create-natural-function-all-configured-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/09-create-natural-function-all-configured-v5.1.png'),
     }}
 />
 
@@ -165,13 +165,23 @@ Adding a provider, the per-provider form fields, the supported models, and the a
 
 ## Writing the Prompt {#writing-the-prompt}
 
-Click the pencil icon at the top-right of the Prompt node. An inline editor opens; click **Expand Editor** for the full Markdown editor with formatting tools.
+Click the pencil icon at the top-right of the Prompt node. Since the prompt is empty, this opens the inline editor directly on the node:
 
 <ThemedImage
-    alt="Prompt editor open on the Prompt node, ready to write the prompt body."
+    alt="Prompt editor open inline on the Prompt node, empty and ready to write the prompt body."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/51-natural-function-add-prompt.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/51-natural-function-add-prompt.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/10-natural-function-add-prompt-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/10-natural-function-add-prompt-v5.1.png'),
+    }}
+/>
+
+Click the expand icon at the bottom-right of the editor to open the full Markdown editor with formatting tools:
+
+<ThemedImage
+    alt="Expanded Prompt editor with the full Markdown toolbar (Insert, Undo/Redo, Bold, Italic, Link, Heading, blockquote, lists, table, Preview/Source) and the prompt body typed in."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/11-natural-function-prompt-expanded-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/11-natural-function-prompt-expanded-v5.1.png'),
     }}
 />
 
@@ -182,13 +192,13 @@ Click the pencil icon at the top-right of the Prompt node. An inline editor open
 | **H1**, **lists**, **blockquote**, **table** | Structural Markdown. Useful for *Rules:*-style lists and *Examples:*-style sections. |
 | **Preview / Source** | Toggle between rendered Markdown and the literal text the runtime sends. |
 
-Click **Save**. The body collapses back into the Prompt node.
+Collapse the editor and the body saves back into the Prompt node, shown as the literal Markdown source (for example, `**bold**` stays as asterisks rather than rendering bold):
 
 <ThemedImage
-    alt="Prompt node with the saved prompt body shown inline."
+    alt="Prompt node with the saved prompt body shown inline as literal Markdown source text, including ** markers around an emphasized phrase."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/52-natural-function-with-prompt.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/52-natural-function-with-prompt.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/12-natural-function-with-prompt-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/12-natural-function-with-prompt-v5.1.png'),
     }}
 />
 
@@ -221,10 +231,10 @@ If the model produces something that doesn't match the type, the runtime asks it
 - **Add field descriptions.** Each field in the type editor takes a short description; that description is included in the JSON schema sent to the LLM. Visualised in the Types editor, a record with a nested array (`Topics`) and a row record (`TopicsItem`) looks like this:
 
     <ThemedImage
-        alt="Types editor showing a record type with field descriptions filled in."
+        alt="Types diagram showing ReviewResponse linked to its nested Topics array and TopicsItem row record, with the Edit Type panel open on the right showing the sentiment field's Default Value and Description inputs."
         sources={{
-            light: useBaseUrl('/img/genai/develop/natural-functions/53-add-field-description-to-types.png'),
-            dark: useBaseUrl('/img/genai/develop/natural-functions/53-add-field-description-to-types.png'),
+            light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/13-add-field-description-to-types-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/13-add-field-description-to-types-v5.1.png'),
         }}
     />
 
@@ -245,32 +255,40 @@ Once the function exists, calling it from a flow is one step.
 3. In the **Add Node** panel, expand the **AI** category and click **Call Natural Function**.
 
 <ThemedImage
-    alt="Add Node panel with the AI category showing the Call Natural Function option highlighted."
+    alt="Add Node panel with the AI category showing the Call Natural Function option highlighted, and its tooltip reading Call a natural programming function."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/54-add-natural-function-in-a-flow.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/54-add-natural-function-in-a-flow.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/14-add-natural-function-in-a-flow-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/14-add-natural-function-in-a-flow-v5.1.png'),
     }}
 />
 
-4. The **Natural Functions** picker lists every natural function in the current integration. Pick one.
+4. The **Natural Functions** picker lists every natural function in the current integration, grouped under **Current Integration**. Pick one.
+
+<ThemedImage
+    alt="Natural Functions picker listing naturalFunction under Current Integration."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/15-select-natural-function-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/15-select-natural-function-v5.1.png'),
+    }}
+/>
 
 5. The configuration form opens. Each parameter on the function becomes a row; bind it to an in-scope value. **Result** is the variable name that holds the typed return; **Variable Type** is locked to the function's declared return type.
 
 <ThemedImage
-    alt="Call Natural Function configuration form with parameters bound to in-scope variables and the Save button enabled."
+    alt="Call Natural Function configuration form showing CustomerReview bound to the expression {review}, Result set to reviewResponse, Variable Type locked to ReviewResponse, and the Save button."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/55-select-and-configure-input.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/55-select-and-configure-input.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/16-select-and-configure-input-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/16-select-and-configure-input-v5.1.png'),
     }}
 />
 
 6. Click **Save**. A new node appears in the flow, named after the bound result variable. Use that variable like any other typed value: return it from an HTTP resource (it becomes the JSON response), branch on a field with `Match`, transform it with `Map Data`, or pass it to another node.
 
 <ThemedImage
-    alt="Final resource flow showing the natural function call node connected between Start and the Return node."
+    alt="Final resource flow showing the naturalFunction call node (binding to reviewResponse) connected between Start and a Return node that returns reviewResponse."
     sources={{
-        light: useBaseUrl('/img/genai/develop/natural-functions/56-final-flow-view-with-a-natural-function.png'),
-        dark: useBaseUrl('/img/genai/develop/natural-functions/56-final-flow-view-with-a-natural-function.png'),
+        light: useBaseUrl('/img/genai/develop/natural-functions-v5.1/17-final-flow-view-with-a-natural-function-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/natural-functions-v5.1/17-final-flow-view-with-a-natural-function-v5.1.png'),
     }}
 />
 

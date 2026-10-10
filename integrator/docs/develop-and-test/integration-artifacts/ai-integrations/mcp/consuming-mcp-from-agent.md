@@ -8,30 +8,32 @@ An [AI Agent](../agents/agents.md) in WSO2 Integrator can use any MCP server as 
 
 ## Adding an MCP server to an agent
 
-On the agent canvas, click **+ Add Tool** → **Use MCP Server**. The **Add MCP Server** panel opens:
+On the agent canvas, click **+ Add Tool** → **Use MCP Server**. The **Add Tool - Use MCP Server** panel opens:
 
 <ThemedImage
-    alt="The Add MCP Server panel. Tools to Include is set to All. Advanced Configurations expanded showing: Info (name and version), HTTP Version with Select / Expression toggle, HTTP1 Settings, HTTP2 Settings, Timeout (default 30 seconds), Forwarded."
+    alt="The Add Tool - Use MCP Server panel showing Server URL (http://localhost:8080/mcp), a Requires Authentication checkbox, Tools to Include set to Selected, and the Available Tools list (3 of 3 selected: getTextStatistics, getReadabilityScore, analyzeStructure, each with a Read more link), a collapsed Advanced Configurations section, and Result (default aiMcpbasetoolkit)."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/08-add-mcp-server.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/08-add-mcp-server.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/consuming-mcp-from-agent/01-add-mcp-server-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/consuming-mcp-from-agent/01-add-mcp-server-v5.1.png'),
     }}
 />
 
 | Field | What it does |
 |---|---|
-| **Server URL** | The MCP endpoint, for example `http://localhost:9090/mcp`. |
-| **Tools to Include** | `All` to expose every tool the server advertises, or a list of names to expose only some. |
-| **Info → name** | The MCP client identifier sent to the server. |
-| **Info → version** | A version string for your client. |
-| **HTTP Version** | `HTTP/2_0` for modern Streamable HTTP servers; `HTTP/1_1` for older ones. |
-| **HTTP1 / HTTP2 Settings** | Protocol tuning such as keep-alive, header sizes, and frame sizes. |
-| **Timeout** | Per-call timeout. Default 30 s; increase for slow tools. |
-| **Forwarded** | Whether to send `Forwarded` / `X-Forwarded-For` when sitting behind a proxy. |
+| **Server URL** | The MCP endpoint, for example `http://localhost:8080/mcp`. |
+| **Requires Authentication** | Enable if the server requires authentication, to reveal the auth configuration fields. |
+| **Tools to Include** | `All` to expose every tool the server advertises, or `Selected` to expose only some. |
+| **Available Tools** (shown when **Selected**) | Lists every tool the server advertises, with its description and a **Read more** link. Check the ones the agent should have access to; **Select All** / **Deselect All** toggles everything at once. |
+| **Advanced Configurations → Info → name/version** | The MCP client identifier and version sent to the server. |
+| **Advanced Configurations → HTTP Version** | `HTTP/2_0` for modern Streamable HTTP servers; `HTTP/1_1` for older ones. |
+| **Advanced Configurations → HTTP1 / HTTP2 Settings** | Protocol tuning such as keep-alive, header sizes, and frame sizes. |
+| **Advanced Configurations → Timeout** | Per-call timeout. Default 30 s; increase for slow tools. |
+| **Advanced Configurations → Forwarded** | Whether to send `Forwarded` / `X-Forwarded-For` when sitting behind a proxy. |
+| **Result** | The variable name for the generated toolkit instance (for example, `aiMcpbasetoolkit`). |
 
 After **Save**, every selected tool from the MCP server appears in the agent's tool list. They are indistinguishable to the agent's LLM from any other tool.
 
-Saving the **Add MCP Server** panel generates a per-server toolkit class that implements `ai:McpBaseToolKit`, plus a module-level instance that connects at startup. The agent receives the toolkit through its `tools` list.
+Saving the **Add MCP Server** panel generates a toolkit class named `McpToolKit` that implements `ai:McpBaseToolKit`, plus a module-level instance that connects at startup. The agent receives the toolkit through its `tools` list.
 
 In `agents.bal`, WSO2 Integrator generates the toolkit class and the agent declaration:
 
@@ -41,11 +43,11 @@ import ballerina/mcp;
 
 final ai:Agent aiAgent = check new (
     systemPrompt = {role: string `AI Agent`, instructions: string ``},
-    model = wso2ModelProvider,
+    model = check ai:getDefaultModelProvider(),
     tools = [aiMcpbasetoolkit]
 );
 
-isolated class AiMcpbasetoolkit {
+isolated class McpToolKit {
     *ai:McpBaseToolKit;
     private final mcp:StreamableHttpClient mcpClient;
     private final readonly & ai:ToolConfig[] tools;
@@ -72,10 +74,7 @@ isolated class AiMcpbasetoolkit {
 In `connections.bal`, it instantiates the toolkit with the server URL from the panel:
 
 ```ballerina
-import ballerina/ai;
-
-final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
-final AiMcpbasetoolkit aiMcpbasetoolkit = check new ("http://localhost:8080/mcp");
+final McpToolKit aiMcpbasetoolkit = check new ("http://localhost:8080/mcp");
 ```
 
 Settings from the panel land in this generated code as follows: **Server URL** is the first argument in `connections.bal`; **Info** maps to the `info` parameter; **Tools to Include** is enforced by the `permittedTools` argument to `ai:getPermittedMcpToolConfigs`; and the **Advanced Configurations** (`HTTP Version`, `HTTP1/HTTP2 Settings`, `Timeout`, `Forwarded`) are passed through `mcp:StreamableHttpClientTransportConfig`.
@@ -84,13 +83,13 @@ Settings from the panel land in this generated code as follows: **Server URL** i
 
 When an MCP server exposes many tools, do not pull them all in. Pick the few you actually want.
 
-In the **Edit MCP Server** panel, set **Tools to Include** to **Selected** and check the tools the agent should have access to. The panel queries the server and lists every tool it advertises.
+In the **Edit MCP Server** panel, set **Tools to Include** to **Selected** and check the tools the agent should have access to. The panel queries the server and lists every tool it advertises under **Available Tools**, with a **Select All** / **Deselect All** shortcut and a running count (for example, "1 of 3 selected").
 
 <ThemedImage
-    alt="The Edit MCP Server panel with Tools to Include set to Selected, showing the Available Tools list with searchProducts and submitReturnRequest checked and getOrderStatus unchecked."
+    alt="The Edit MCP Server panel with Tools to Include set to Selected, showing the Available Tools list (1 of 3 selected) with getTextStatistics checked and getReadabilityScore and analyzeStructure unchecked, each with a Read more link."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/29-mcp-filter-tools.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/29-mcp-filter-tools.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/consuming-mcp-from-agent/02-mcp-filter-tools-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/consuming-mcp-from-agent/02-mcp-filter-tools-v5.1.png'),
     }}
 />
 
