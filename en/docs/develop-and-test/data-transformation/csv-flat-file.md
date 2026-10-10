@@ -27,7 +27,7 @@ This flexibility is the foundation for everything that follows: full row mapping
 
 2. **Add a Variable step**. Add a **Declare Variable** step with the CSV string assigned to `csvData`.
 
-3. **Parse the CSV string**. Use `csv:parseString` with:
+3. **Parse the CSV string**. Click **+** and select **Call Function**. Search for `parseString` and select it under **data.csv**. Configure:
    - **Csv String***: `csvData`
    - **Result***: `summaries`
    - **T***: `EmployeeSummary[]`
@@ -156,7 +156,7 @@ Use `csv:parseBytes()` for byte arrays or `csv:parseStream()` for streaming larg
    - **Result***: `transactions`
    - **T***: `Transaction[]`
 
-4. **(Optional) Use a byte block stream as input**. For files larger than the available byte-array buffer, swap `io:fileReadBytes` for `io:fileReadBlocksAsStream` and `csv:parseBytes` for `csv:parseStream`. The result is still a fully-materialized array. To process records one at a time without holding the whole file in memory, see [Processing large files](#processing-large-files).
+4. **(Optional) Use a byte block stream as input**. For files larger than the available byte-array buffer, swap `fileReadBytes` for `fileReadBlocksAsStream` under **io**, and `parseBytes` for `parseStream` under **data.csv**. The result is still a fully-materialized array. To process records one at a time without holding the whole file in memory, see [Processing large files](#processing-large-files).
 
    <ThemedImage
        alt="Flow designer showing file read and CSV parse steps"
@@ -329,7 +329,7 @@ Configure parsing behavior for TSV (tab-separated values, a CSV-like format that
 
 2. **Add a Variable step**. Add a **Declare Variable** step for `tsvData` and provide the tab-separated content.
 
-3. **Parse with custom delimiter**. Use `csv:parseString` and configure:
+3. **Parse with custom delimiter**. Click **+** and select **Call Function**. Search for `parseString` and select it under **data.csv**. Configure:
    - **Csv String***: `tsvData`
    - **Result***: `logs`
    - **T***: `LogEntry[]`
@@ -386,7 +386,7 @@ When a file has no header row, you have two options:
 
 1. **Declare the CSV data variable**. Add a **Declare Variable** step with the headerless CSV content.
 
-2. **Parse as headerless CSV**. Configure `csv:parseString` with:
+2. **Parse as headerless CSV**. Click **+** and select **Call Function**. Search for `parseString` and select it under **data.csv**. Configure:
    - **Csv String***: `csvData`
    - **Result***: `rows`
    - **T***: `string[][]`
@@ -452,7 +452,7 @@ Write arrays of records directly to CSV files using `io:fileWriteCsv()`.
 
 2. **Add a Variable step**. Create a variable named `products` of type `Product[]`.
 
-3. **Write the CSV file**. Use `io:fileWriteCsv` with:
+3. **Write the CSV file**. Click **+** and select **Call Function**. Search under **io** and select `fileWriteCsv`. Configure:
    - **Path***: `./output/product-catalog.csv`
    - **Content***: `products`
 
