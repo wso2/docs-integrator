@@ -421,8 +421,8 @@ type Order record {|
     int quantity;
 |};
 
-remote function onFileJson(Order order, ftp:FileInfo fileInfo) returns error? {
-    // order is deserialized from JSON
+remote function onFileJson(Order 'order, ftp:FileInfo fileInfo) returns error? {
+    // 'order is deserialized from JSON
 }
 ```
 
@@ -430,7 +430,7 @@ remote function onFileJson(Order order, ftp:FileInfo fileInfo) returns error? {
 
 ```ballerina
 remote function onFileCsv(stream<string[], error?> content, ftp:FileInfo fileInfo) returns error? {
-    check content.forEach(function(string[] row) returns error? {
+    check content.forEach(function(string[] row) {
         // Process each row without loading the whole file into memory
     });
 }
@@ -448,7 +448,7 @@ remote function onFile(byte[] content, ftp:FileInfo fileInfo) returns error? {
 
 ```ballerina
 remote function onFileDelete(string deletedFile) returns error? {
-    // deletedFile is the name of the file that was removed
+    // deletedFile is the path of the file that was removed
 }
 ```
 
@@ -1013,7 +1013,7 @@ service on ftpListener {
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `path` | `string` | `"/"` | Directory on the remote server to monitor for new files. |
+| `path` | `string` | — | Directory on the remote server to monitor for new files. Required. |
 | `fileNamePattern` | `string?` | — | Regex to filter which files trigger handlers. Only matching files are processed. |
 | `fileAgeFilter` | `FileAgeFilter?` | — | Age bounds to skip files that are too new (still uploading) or too old (stale). See [File dependency and trigger conditions](dependency-and-trigger-conditions.md). |
 | `fileDependencyConditions` | `FileDependencyCondition[]?` | — | Conditions that block processing until related files exist. See [File dependency and trigger conditions](dependency-and-trigger-conditions.md). |
@@ -1036,7 +1036,7 @@ The listener controls **how** to connect — protocol, host, authentication, pol
 | **Auth** | Authentication record carrying credentials, a private key, and/or an SSL/TLS `secureSocket`. See the per-protocol sections above for the typical shapes. | — |
 | **Polling Interval** | Seconds between directory polls. | `60` |
 | **User Dir Is Root** | When `true`, treats the login home directory as `/` and suppresses directory-change commands. Set this for chrooted or jailed servers. | `false` |
-| **Lax Data Binding** | When `true`, data-binding errors on the handler's content parameter return `()` instead of surfacing as an error. | `false` |
+| **Lax Data Binding** | When `true`, relaxes data binding for the handler's content parameter: `null` values map to optional fields, and absent fields map to nilable fields. Content that still does not match the type raises a binding error. | `false` |
 | **Connect Timeout** | Connection timeout in seconds. | `30.0` |
 | **Socket Config** | Socket read/write timeouts. See [`ftp:SocketConfig` reference](https://central.ballerina.io/ballerina/ftp/latest#SocketConfig). | — |
 | **Proxy** | Proxy configuration for SFTP connections (SFTP only). | — |
@@ -1072,7 +1072,7 @@ listener ftp:Listener ftpListener = new (
 | `auth` | `ftp:AuthConfiguration?` | — | Credentials, private key, and/or `secureSocket`. See [`ftp:AuthConfiguration` reference](https://central.ballerina.io/ballerina/ftp/latest#AuthConfiguration). |
 | `pollingInterval` | `decimal` | `60` | Interval in seconds between directory polls. |
 | `userDirIsRoot` | `boolean` | `false` | Treat the login home directory as root and prevent directory-change commands. |
-| `laxDataBinding` | `boolean` | `false` | When `true`, data binding errors return `()` instead of an error. |
+| `laxDataBinding` | `boolean` | `false` | When `true`, `null` values map to optional fields and absent fields map to nilable fields during data binding. Content that still does not match the type raises a binding error. |
 | `connectTimeout` | `decimal` | `30.0` | Connection timeout in seconds. |
 | `socketConfig` | `ftp:SocketConfig?` | — | Socket timeout configuration. See [`ftp:SocketConfig` reference](https://central.ballerina.io/ballerina/ftp/latest#SocketConfig). |
 | `fileTransferMode` | `ftp:FileTransferMode` | `BINARY` | File transfer mode (`BINARY` or `ASCII`). Use `ASCII` only for text-only files on servers that require line-ending conversion. |
