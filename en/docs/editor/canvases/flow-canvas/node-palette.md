@@ -536,7 +536,7 @@ An agent runs an autonomous workflow against a model and a set of tools. Given a
     }}
 />
 
-For tool binding, memory, and observability, see [AI agents](../../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md). For a stand-alone chat agent service, create the **AI Chat Agent** artifact from the **Artifacts** panel instead of adding the node by hand.
+For tool binding, memory, and observability, see [AI agents](../../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md). For a stand-alone chat agent service, create the **AI Chat Agent** artifact from the **Artifacts** panel instead of adding the node by hand. To reach the same agent over a voice call instead, add this node to a [Voice Agent Service](../../../develop-and-test/integration-artifacts/ai-integrations/voice-agent/voice-agent.md) instead of a chat service.
 
 ## Error Handling
 

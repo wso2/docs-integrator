@@ -40,6 +40,11 @@ WSO2 Integrator lets you build AI-powered integrations, including direct LLM cal
   <p class="palette-card-desc">Expose your integrations as MCP tools for AI assistants, or use external MCP tools with your agents.</p>
 </PaletteCard>
 
+<PaletteCard icon="agents" href="/develop-and-test/integration-artifacts/ai-integrations/voice-agent">
+  <h3 class="palette-card-title">Voice Agent</h3>
+  <p class="palette-card-desc">Attach an AI agent to a cloud voice listener so callers can talk to it.</p>
+</PaletteCard>
+
 <PaletteCard icon="natural-functions" href="/develop-and-test/integration-artifacts/ai-integrations/natural-functions">
   <h3 class="palette-card-title">Natural Functions</h3>
   <p class="palette-card-desc">Experimental. Write the function body in plain English. The LLM returns a value that conforms to your declared return type.</p>
