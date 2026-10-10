@@ -303,7 +303,7 @@ The fields below match the `ParseOptions` record in the `ballerina/data.csv` mod
 | `skipLines` | `int[]\|string` | Data rows to skip, numbered from `1` starting at the first row after the header. Given as an integer array (for example, `[1, 3]`) or as a single inclusive range string (for example, `"2-4"`). Default `[]`. |
 | `enableConstraintValidation` | `boolean` | When `true`, parsed values are validated against any constraints declared on the record type. Default `true`. |
 | `outputWithHeaders` | `boolean` | When the parsed result is a list (`anydata[][]`), include the header row as the first inner array. Default `false`. |
-| `failSafe` | `FailSafeOptions?` | Skips and logs invalid rows instead of aborting the parse. See [Fail-safe processing](#fail-safe-processing). |
+| `failSafe` | `FailSafeOptions` | Skips and logs invalid rows instead of aborting the parse. Not set by default, so parsing stops at the first invalid row. See [Fail-safe processing](#fail-safe-processing). |
 
 In Ballerina code, options are passed as the second argument to the parser function:
 
@@ -566,7 +566,60 @@ Design Patterns,Gang of Four,INVALID,1994-10-31`;
 
 The invalid row is skipped, the error is logged, and only valid rows are returned.
 
-Beyond console logging, `failSafe` can also write errors to a log file, with options for what to record (parser metadata, the raw row, or both) and how to write (append or overwrite).
+Beyond console logging, `failSafe` can write errors to a log file. The `FailSafeOptions` record has the following fields:
+
+| Field | Type | Description |
+|---|---|---|
+| `enableConsoleLogs` | `boolean` | Logs each skipped row's error to the console. Default `true`. |
+| `includeSourceDataInConsole` | `boolean` | Adds the offending row's raw data to each console log entry. Default `false`. |
+| `fileOutputMode` | `FileOutputMode` | Writes errors to a file. Not set by default. |
+
+The `FileOutputMode` record controls where and how errors are written:
+
+| Field | Type | Description |
+|---|---|---|
+| `filePath` | `string` | Path of the error log file. Missing parent directories are created. Required. |
+| `contentType` | `ErrorLogContentType` | What to record for each skipped row: `csv:METADATA` (timestamp, row and column location, and error message), `csv:RAW` (the offending row only), or `csv:RAW_AND_METADATA` (both). Default `csv:METADATA`. |
+| `fileWriteOption` | `FileWriteOption` | `csv:APPEND` adds entries to an existing file. `csv:OVERWRITE` replaces the file when logging starts. Default `csv:APPEND`. |
+
+The following example writes the skipped row and its error details to a log file instead of the console:
+
+```ballerina
+import ballerina/data.csv;
+import ballerina/io;
+
+type Book record {|
+    string name;
+    string author;
+    decimal price;
+    string publishDate;
+|};
+
+public function main() returns error? {
+    string csvData = string `name,author,price,publishDate
+Clean Code,Robert Martin,25.50,2008-08-01
+Design Patterns,Gang of Four,INVALID,1994-10-31`;
+
+    Book[] books = check csv:parseString(csvData, {
+        failSafe: {
+            enableConsoleLogs: false,
+            fileOutputMode: {
+                filePath: "./logs/csv-errors.log",
+                contentType: csv:RAW_AND_METADATA,
+                fileWriteOption: csv:OVERWRITE
+            }
+        }
+    });
+
+    io:println(books);
+}
+```
+
+With `csv:RAW_AND_METADATA`, each skipped row is written as one JSON line:
+
+```json
+{"time":"2026-10-10T06:08:25.751813Z","location":{"row":3,"column":3},"offendingRow":"Design Patterns,Gang of Four,INVALID,1994-10-31","message":"value 'INVALID' cannot be cast into 'decimal'"}
+```
 
 ## Edge cases
 
@@ -576,7 +629,23 @@ Enclose a field in the [`textEnclosure`](#available-options) character (default 
 
 ### Encoding
 
-Use byte arrays and proper encoding conversion when processing non-UTF-8 CSV files.
+The parser decodes input as UTF-8 by default. For files in another character set, read the file as bytes or as a byte block stream and set the [`encoding`](#available-options) option to the source encoding:
+
+```ballerina
+import ballerina/data.csv;
+import ballerina/io;
+
+type Customer record {|
+    string name;
+    string city;
+|};
+
+public function main() returns error? {
+    byte[] content = check io:fileReadBytes("./resources/customers-latin1.csv");
+    Customer[] customers = check csv:parseBytes(content, {encoding: "ISO-8859-1"});
+    io:println(customers);
+}
+```
 
 ## What's next
 
