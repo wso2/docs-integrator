@@ -45,9 +45,9 @@ Most integrations spend as much time reshaping data as they do moving it. Use th
   <p class="palette-card-desc">Parse, transform, and generate EDI documents.</p>
 </PaletteCard>
 
-<PaletteCard icon="yaml-toml" href="/develop-and-test/data-transformation/yaml-toml">
-  <h3 class="palette-card-title">YAML &amp; TOML</h3>
-  <p class="palette-card-desc">Parse, construct, and transform YAML and TOML data.</p>
+<PaletteCard icon="pdf" href="/develop-and-test/data-transformation/pdf">
+  <h3 class="palette-card-title">PDF</h3>
+  <p class="palette-card-desc">Extract text, convert pages to images, and render HTML to PDF.</p>
 </PaletteCard>
 
 <PaletteCard icon="template" href="/develop-and-test/data-transformation/freemarker">
@@ -55,14 +55,14 @@ Most integrations spend as much time reshaping data as they do moving it. Use th
   <p class="palette-card-desc">Render text, HTML, YAML, and other formats from FreeMarker templates.</p>
 </PaletteCard>
 
-<PaletteCard icon="pdf" href="/develop-and-test/data-transformation/pdf">
-  <h3 class="palette-card-title">PDF</h3>
-  <p class="palette-card-desc">Extract text, convert pages to images, and render HTML to PDF.</p>
-</PaletteCard>
-
 <PaletteCard icon="zip" href="/develop-and-test/data-transformation/zip">
   <h3 class="palette-card-title">ZIP Archives</h3>
   <p class="palette-card-desc">Create, inspect, and safely extract ZIP archives.</p>
+</PaletteCard>
+
+<PaletteCard icon="yaml-toml" href="/develop-and-test/data-transformation/yaml-toml">
+  <h3 class="palette-card-title">YAML &amp; TOML</h3>
+  <p class="palette-card-desc">Parse, construct, and transform YAML and TOML data.</p>
 </PaletteCard>
 
 </PaletteGrid>
