@@ -37,8 +37,9 @@ function getStockLevel(string sku) returns StockLevel|error {
 public client class MockInventoryClient {
     remote function get(string path, map<string|string[]>? headers = (),
                         http:TargetType targetType = http:Response)
-            returns http:Response|anydata|http:ClientError {
-        return {sku: "SKU-001", quantity: 42};
+            returns http:Response|anydata|stream<http:SseEvent, error?>|http:ClientError {
+        StockLevel stock = {sku: "SKU-001", quantity: 42};
+        return stock;
     }
 }
 
@@ -68,8 +69,9 @@ public function testGetStockLevel() {
     test:prepare(inventoryClient).when("get").thenReturn(getDefaultStock());
 
     // Override with a specific response when called with a particular path.
+    StockLevel outOfStock = {sku: "OUT-OF-STOCK", quantity: 0};
     test:prepare(inventoryClient).when("get")
-        .withArguments("/stock/OUT-OF-STOCK").thenReturn({sku: "OUT-OF-STOCK", quantity: 0});
+        .withArguments("/stock/OUT-OF-STOCK").thenReturn(outOfStock);
 
     StockLevel|error result = getStockLevel("SKU-001");
     test:assertEquals(result, {sku: "SKU-001", quantity: 42});
@@ -91,7 +93,7 @@ import ballerina/test;
 type JobStatus readonly & record {string state;};
 
 @test:Config
-public function testJobPolling() {
+public function testJobPolling() returns error? {
     inventoryClient = test:mock(http:Client);
 
     JobStatus pending = {state: "pending"};
@@ -101,10 +103,10 @@ public function testJobPolling() {
     test:prepare(inventoryClient).when("get")
         .thenReturnSequence(pending, complete);
 
-    JobStatus|error first = check inventoryClient->get("/jobs/42");
+    JobStatus first = check inventoryClient->get("/jobs/42");
     test:assertEquals(first, pending);
 
-    JobStatus|error second = check inventoryClient->get("/jobs/42");
+    JobStatus second = check inventoryClient->get("/jobs/42");
     test:assertEquals(second, complete);
 }
 ```
@@ -115,7 +117,7 @@ public function testJobPolling() {
 
 ### Stub a void method
 
-When a method returns `()`, stub it with `doNothing` to verify the call was made without triggering side effects. This is typical for fire-and-forget operations like sending a notification or writing an audit log.
+When a method has no return type or an optional return type, stub it with `doNothing` so the call completes without triggering side effects. This is typical for fire-and-forget operations like sending a notification or writing an audit log.
 
 ```ballerina
 import ballerina/email;
@@ -168,6 +170,11 @@ public client class EmpClient {
     resource function get employee/welcome/[string id](string firstName, string lastName) returns string {
         return "Welcome " + firstName + " " + lastName + ". Your ID is " + id;
     }
+}
+
+public function getEmployee(string id) returns Employee? {
+    Employee? employee = empClient->/employee/[id].get();
+    return employee;
 }
 ```
 
@@ -253,9 +260,12 @@ function testGetEmployeesSequentially() {
     test:prepare(empClient).whenResource("employee/:id")
         .onMethod("get").thenReturnSequence(emp1, emp2, emp3);
 
-    test:assertEquals(empClient->/employee/["emp001"].get(), emp1);
-    test:assertEquals(empClient->/employee/["emp002"].get(), emp2);
-    test:assertEquals(empClient->/employee/["emp003"].get(), emp3);
+    Employee? result1 = empClient->/employee/["emp001"].get();
+    test:assertEquals(result1, emp1);
+    Employee? result2 = empClient->/employee/["emp002"].get();
+    test:assertEquals(result2, emp2);
+    Employee? result3 = empClient->/employee/["emp003"].get();
+    test:assertEquals(result3, emp3);
 }
 ```
 
@@ -353,11 +363,12 @@ function testWithCustomRounding() {
     // Use a truncation strategy instead of the production rounding logic.
     test:when(roundMockFn).call("truncateToTwoDecimals");
 
-    test:assertEquals(applyTax(10.555d), 11.61d);
+    // 10.56 * 1.1 = 11.616. Rounding gives 11.62, truncation gives 11.61.
+    test:assertEquals(applyTax(10.56d), 11.61d);
 }
 
 public function truncateToTwoDecimals(decimal value) returns decimal {
-    return <decimal>(<int>(value * 100.0d)) / 100.0d;
+    return (value * 100.0d).floor() / 100.0d;
 }
 ```
 

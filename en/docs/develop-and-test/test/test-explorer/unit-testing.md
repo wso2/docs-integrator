@@ -64,9 +64,10 @@ function testGetOrderReturnsOk() returns error? {
 
 @test:Config
 function testOrderStatusIsPending() returns error? {
-    Order order = check (check testClient->/[42].get()).getJsonPayload().cloneWithType();
-    test:assertEquals(order.status, "pending", msg = "Newly created order should have pending status");
-    test:assertTrue(order.orderId > 0, msg = "Order ID must be positive");
+    http:Response response = check testClient->/[42].get();
+    Order result = check (check response.getJsonPayload()).cloneWithType();
+    test:assertEquals(result.status, "pending", msg = "Newly created order should have pending status");
+    test:assertTrue(result.orderId > 0, msg = "Order ID must be positive");
 }
 
 @test:Config
@@ -225,7 +226,7 @@ dbPort = 5432
 serviceUrl = "http://localhost:9090"
 ```
 
-The `Config.toml` inside `tests/` takes precedence over the module-level `Config.toml` during test execution, so you can safely override production values such as database hosts, ports, or external service URLs with test-safe alternatives.
+During test execution, only the `Config.toml` inside `tests/` is used. The `Config.toml` at the package root is not read when you run `bal test`, so values are not inherited from it. Provide every configurable value that the tests need in `tests/Config.toml`. This lets you safely replace production values such as database hosts, ports, or external service URLs with test-safe alternatives.
 
 You can also pass configuration values directly from the command line when running tests in different environments:
 

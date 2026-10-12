@@ -131,14 +131,14 @@ See [Service configuration fields](#service-configuration-fields) below for the 
 | **compression** | Controls response compression. Configure the compression algorithm and which content types to compress. |
 | **chunking** | Chunked transfer encoding mode for responses. Options: `AUTO` (default), `ALWAYS`, `NEVER`. |
 | **cors** | CORS policy applied to all resources in this service. Configure allowed origins, methods, and headers. |
-| **auth** | Authentication handlers applied at the service level. All resources inherit this setting unless overridden. |
-| **mediaTypeSubtypePrefix** | Custom prefix added to the media type subtype in the `Content-Type` response header. |
 | **treatNilableAsOptional** | When enabled (default), nilable-typed parameters are treated as optional in the request. |
 | **openApiDefinition** | Inline OpenAPI definition attached to the service for documentation and validation purposes. |
 | **validation** | When enabled (default), validates inbound request payloads against the declared schema. |
+| **laxDataBinding** | When enabled, allows data binding to succeed even if the payload contains extra fields not in the schema. |
+| **auth** | Authentication handlers applied at the service level. All resources inherit this setting unless overridden. |
+| **mediaTypeSubtypePrefix** | Custom prefix added to the media type subtype in the `Content-Type` response header. |
 | **serviceType** | Overrides the default service dispatch behavior. Use for advanced routing scenarios. |
 | **basePath** | Override the base path declared on the service, useful when attaching the service to a different path at runtime. |
-| **laxDataBinding** | When enabled, allows data binding to succeed even if the payload contains extra fields not in the schema. |
 
 ## Listener configuration
 
@@ -258,7 +258,7 @@ Select **+ Add Resource** in the **Service Designer** to open the resource creat
 |---|---|
 | **HTTP Method** | HTTP verb the resource responds to. Options: `GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `HEAD`, `OPTIONS`. |
 | **Resource Path** | Path segment appended to the service base path (for example, `orders` gives the full path `/api/orders`). Use `.` to match the service base path itself. |
-| **Path Param** | Adds a variable segment to the URL path. The client supplies the value inline in the URL (for example, `/orders/{id}`). Each path param becomes a typed parameter in the resource function. Supported types: `string`, `int`, `float`, `boolean`, `decimal`. |
+| **Path Param** | Adds a variable segment to the URL path. The client supplies the value inline in the URL (for example, `/orders/{id}`). Each path param becomes a typed parameter in the resource function. Supported types are `string`, `int`, `float`, `boolean`, `decimal`, and array types of these. |
 | **Query Parameter** | Adds a named URL query parameter extracted from the request URI (for example, `?artist=Coltrane`). Can be optional (nilable type) or given a default value so the resource can be called without it. |
 | **Header** | Binds a specific request header to a named parameter. The parameter name must match the header name. |
 | **Define Payload** | Defines the expected schema for the request body. Available for **POST**, **PUT**, **PATCH**, **DELETE**, and **DEFAULT** methods. |
@@ -298,12 +298,12 @@ Select **Advanced Configurations** in the resource edit panel to configure setti
 
 | Field | Description |
 |---|---|
-| **name** | Custom name for this resource, used for display and documentation purposes. |
 | **consumes** | Media types the resource accepts in the request body (for example, `application/json`, `application/xml`). Requests with a different `Content-Type` are rejected. |
 | **produces** | Media types the resource can return in the response body. |
 | **cors** | CORS policy specific to this resource, overriding the service-level CORS setting. |
-| **auth** | Authentication configuration for this resource, overriding the service-level authentication setting. |
 | **transactionInfectable** | When enabled, allows a client-initiated distributed transaction to propagate into this resource. |
+| **name** | Custom name for this resource, used for display and documentation purposes. |
+| **auth** | Authentication configuration for this resource, overriding the service-level authentication setting. |
 | **linkedTo** | Links this resource to related resources for navigation and documentation purposes. |
 
 Select **Add more resources** before selecting **Save** to add another resource without closing the form.
