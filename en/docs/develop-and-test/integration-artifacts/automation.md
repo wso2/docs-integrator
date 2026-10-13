@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 # Automation
 
-An automation runs without an external request. Use it for periodic data synchronization, batch processing, report generation, and other recurring tasks that execute on a timer or on demand. Periodic invocation is scheduled in an external system such as a cron job, Kubernetes, or WSO2 Integration Platform.
+An automation executes integration logic when started, without waiting for an incoming service request. Use it for periodic data synchronization, batch processing, report generation, and other recurring tasks that execute on a timer or on demand. Periodic invocation is scheduled in an external system such as a cron job, Kubernetes, or WSO2 Integration Platform.
 
 :::note
 Only one automation can be configured per integration.
@@ -23,8 +23,7 @@ Only one automation can be configured per integration.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
-
-1. Select the **+ Add Artifact** button in the canvas, or select **+** next to **Entry Points** in the sidebar.
+1. Select the **Add Artifact manually** button on the Integration Overview page, or select **+** next to **Entry Points** in the sidebar.
 2. In the **Artifacts** panel, select **Automation** under **Automation**.
 
    <ThemedImage

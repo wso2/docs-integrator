@@ -26,8 +26,8 @@ Create a reusable data mapper from the **Artifacts** page or the left sidebar. C
    <ThemedImage
        alt="Create New Data Mapper form with Name, Public, Inputs, and Output fields"
        sources={{
-           light: useBaseUrl('/img/develop/integration-artifacts/supporting/data-mapper/reusable-datamapper-form.png'),
-           dark: useBaseUrl('/img/develop/integration-artifacts/supporting/data-mapper/reusable-datamapper-form.png'),
+           light: useBaseUrl('/img/develop/integration-artifacts/supporting/data-mapper/reusable-datamapper-form-v5.1.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/supporting/data-mapper/reusable-datamapper-form-v5.1.png'),
        }}
    />
 
@@ -43,8 +43,8 @@ Create a reusable data mapper from the **Artifacts** page or the left sidebar. C
    <ThemedImage
        alt="Data mapper canvas with input record on the left and output record on the right"
        sources={{
-           light: useBaseUrl('/img/develop/integration-artifacts/supporting/data-mapper/datamapper-view.png'),
-           dark: useBaseUrl('/img/develop/integration-artifacts/supporting/data-mapper/datamapper-view.png'),
+           light: useBaseUrl('/img/develop/integration-artifacts/supporting/data-mapper/datamapper-view-v5.1.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/supporting/data-mapper/datamapper-view-v5.1.png'),
        }}
    />
 

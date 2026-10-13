@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Give Tools to Agent
-description: Reference for adding tools to a WSO2 Integrator AI agent — connections, functions, MCP servers, and custom tools.
+description: Reference for adding tools to a WSO2 Integrator AI agent, connections, functions, MCP servers, and custom tools.
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/tools
 ---
 
@@ -21,10 +21,10 @@ This page describes the supported tool types, how to add them to an agent, and h
 To add a tool to an agent, click the **+** button on the **AI Agent** node in the agent canvas.
 
 <ThemedImage
-    alt="Add tool"
+    alt="The + button on the AI Agent node in the agent canvas, used to open the Add Tool panel."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/29-tool.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/29-tool.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/01-add-tool-trigger-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/01-add-tool-trigger-v5.1.png'),
     }}
 />
 
@@ -33,8 +33,8 @@ This opens the **Add Tool** panel, where you can choose how to add capabilities 
 <ThemedImage
     alt="The Add Tool panel listing Use Connection, Use Function, Use Agent, Use MCP Server, and Create Custom Tool, each with a one-line description."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/multi-agent/03-add-tool-panel.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/multi-agent/03-add-tool-panel.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/02-add-tool-panel-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/02-add-tool-panel-v5.1.png'),
     }}
 />
 
@@ -52,110 +52,120 @@ Each option opens a dedicated configuration panel for setting up the selected to
 
 ## 1. Use connection
 
-Selecting **Use Connection** opens the **Add Connection** dialog.
+Selecting **Use Connection** opens the **Add Tool - Use Connection** panel, listing connectors to pick an existing connection or browse a connector's actions.
 
 <ThemedImage
-    alt="The Add Connection dialog with options for creating a new connector or selecting a pre-built connector."
+    alt="The Add Tool - Use Connection panel with a Search connectors box, an All Categories dropdown, and a Popular category (12) listing HTTP, Salesforce, SAP, Snowflake, PostgreSQL, MySQL, MS SQL, Kafka Producer, AWS S3, GitHub, Slack, and Google Sheets."
     sources={{
-        light: useBaseUrl('/img/genai/develop/shared/08-add-connection-dialog.png'),
-        dark: useBaseUrl('/img/genai/develop/shared/08-add-connection-dialog.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/03-use-connection-popular-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/03-use-connection-popular-v5.1.png'),
     }}
 />
 
-The dialog provides the following options for creating or selecting a connector:
+The panel provides the following options for finding a connector:
 
 | Option | Description |
 |---|---|
-| **Create New Connector → Connect via API Specification** | Generate a connector using an OpenAPI or WSDL specification. |
-| **Create New Connector → Connect to a Database** | Generate a connector by introspecting a database such as MySQL, MSSQL, or PostgreSQL. |
-| **Pre-built Connectors** | Use an existing connector provided by WSO2 Integrator, such as HTTP, Salesforce, Gmail, or GitHub. |
+| **Search connectors** | Find a connector by name across every category. |
+| **All Categories** | Filter the list to a single category. |
+| **Popular** | The most commonly used connectors across all categories, shown by default. |
 
-The **Pre-built Connectors** section can be filtered using the **All**, **Standard**, and **Organization** tabs and includes AI-related connectors and integrations.
-
-### 1.1 Connect via API specification
-
-Select the specification type and import the API specification file.
+Choosing a category from the **All Categories** dropdown narrows the list to the connectors in that category, with a count next to the category name. The available categories are **Network**, **Database**, **Messaging**, **AI & Machine Learning**, **CRM & Sales**, **Communication**, **Productivity & Collaboration**, **Storage & Files**, **Media & Content**, **Finance & Accounting**, **ERP & Business Operations**, **Human Resources**, **Marketing & Social Media**, **E-Commerce**, **Website & Apps**, **Cloud & DevOps**, **Security & Identity**, **Analytics**, **Support**, **IoT & Devices**, **Education**, **Lifestyle & News**, and **Other**, in addition to the default **Popular** list.
 
 <ThemedImage
-    alt="Specification"
+    alt="The Add Tool - Use Connection panel filtered to the Network category (9), listing HTTP, GraphQL, WebSocket, MCP Streamable HTTP, FTP, TCP, UDP, SOAP 1.1, and SOAP 1.2."
     sources={{
-        light: useBaseUrl('/img/genai/develop/shared/17-specification.png'),
-        dark: useBaseUrl('/img/genai/develop/shared/17-specification.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/04-use-all-connection-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/04-use-all-connection-v5.1.png'),
     }}
 />
 
-### 1.2 Connect to a database
+### 1.1 Select an operation
 
-Select the database type and provide the required connection details.
+Select a connector from the **Popular** list, a category such as **AI & Machine Learning**, or a search result.
+
+After selecting a connector, WSO2 Integrator lists its available operations, searchable by name:
 
 <ThemedImage
-    alt="Database Connection"
+    alt="The Add Tool - Use Connection panel showing the HTTP connector's operations, with a Search 22 actions box and a list including Delete, Execute, Forward, Get, Get next promise, Get promised response, Get response, and Has promise, each with a short description."
     sources={{
-        light: useBaseUrl('/img/genai/develop/shared/16-database-connection.png'),
-        dark: useBaseUrl('/img/genai/develop/shared/16-database-connection.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/05-use-connection-actions-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/05-use-connection-actions-v5.1.png'),
     }}
 />
 
-### 1.3 Use Pre-built connectors
-
-Select the connector.
+Selecting an operation opens its tool configuration:
 
 <ThemedImage
-    alt="The Add Connection dialog showing the AI-related connector catalogue."
+    alt="Tool configuration for the HTTP connector's Get operation. Fields: Tool Name (default getTool), Description (prefilled from the operation), Connection (required, with a + Create HTTP Connection action when none exists yet), a Requires Approval checkbox, and collapsed sections for Inputs and Mapping, OAuth Client Configuration, and Result Type."
     sources={{
-        light: useBaseUrl('/img/genai/develop/shared/09-add-connection-ai-catalogue.png'),
-        dark: useBaseUrl('/img/genai/develop/shared/09-add-connection-ai-catalogue.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/06-tool-metadata-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/06-tool-metadata-v5.1.png'),
     }}
 />
 
-After selecting a connector, WSO2 Integrator displays the available operations. Select the operations that the agent should be allowed to invoke. Each selected operation becomes available as an agent tool.
-
-The tool metadata, including descriptions, parameters, and input/output schemas, is automatically derived from the connector definition. You only need to provide the tool name.
-
-<ThemedImage
-    alt="Tool metadata configuration"
-    sources={{
-        light: useBaseUrl('/img/genai/develop/shared/15-tool-metadata.png'),
-        dark: useBaseUrl('/img/genai/develop/shared/15-tool-metadata.png'),
-    }}
-/>
+| Field | Required | Description |
+|---|---|---|
+| **Tool Name** | Yes | A unique name for the tool, prefilled from the operation. |
+| **Description** | No | Explains what the tool does, prefilled from the connector definition. The agent uses this to decide when to invoke the tool. |
+| **Connection** | Yes | The saved connection this tool runs on. Select an existing one, or click **+ Create *Connector* Connection** to create one inline if none exists yet. |
+| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gated Tools](gated-tools.md). |
+| **Inputs and Mapping** | No | The operation's parameters and how they map to the tool's inputs, derived from the connector definition. |
+| **OAuth Client Configuration** | No | OAuth client settings, when the connection's authentication requires them. |
+| **Result Type** | No | The Ballerina type the tool returns, derived from the connector definition. |
 
 Use this option when a suitable pre-built or generated connector already exists, allowing the agent to interact with external systems without requiring additional wrapper code.
 
 ## 2. Use function
 
-Selecting **Use Function** opens the **Create Tool from Function** panel. The panel groups available functions into three sections, each with separate search support using the search box at the top.
+Selecting **Use Function** opens the **Add Tool - Use Function** panel, with a **Search functions** box at the top and the available functions grouped into collapsible sections.
 
 <ThemedImage
-    alt="The Create Tool from Function panel with a search box at the top. Sections: Within Project (functions defined in the current project, currently empty since no function has been authored). Standard Library expanded with three subgroups — io (fileReadJson, fileReadString, fileWriteJson, fileWriteString, print, println), log (printDebug, printError, printInfo, printWarn), time (utcFromString, utcNow). Imported Functions section collapsed at the bottom."
+    alt="The Add Tool - Use Function panel with a Search functions box. Sections: Within Project, showing the current integration (ai_applications) and a + Create Function action, collapsed Standard Library, and Extended Library expanded showing functions grouped by module, such as client.config (constructHTTPClientConfig), azure_eventhub (createRandomUUIDWithoutHyphens), and others grouped by the connector module name."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/06-tool-from-function.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/06-tool-from-function.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/07-use-function-panel-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/07-use-function-panel-v5.1.png'),
     }}
 />
 
-The dialog provides the following options for selecting a function:
+Expanding **Standard Library** lists Ballerina standard library functions grouped by module, such as `regex` (`matches`, `replace`, `replaceAll`, `search`, `searchAll`, `split`), `data.yaml` (`parseBytes`, `parseStream`, `parseString`, `toYamlString`), and `yaml` (`readFile`, `readString`, `writeFile`, `writeString`):
 
-| Group | Description |
+<ThemedImage
+    alt="The Add Tool - Use Function panel with Standard Library expanded, showing modules regex, data.yaml, yaml, and auth, each listing their functions."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/08-use-function-stdlib-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/08-use-function-stdlib-v5.1.png'),
+    }}
+/>
+
+The panel provides the following sections for selecting a function:
+
+| Section | Description |
 |---|---|
-| **Within Project** | Functions defined within your own project, including [natural functions](../natural-functions/natural-functions.md), can be added as tools with a single click. |
-| **Standard Library** | A curated set of commonly used Ballerina utility functions organized by module. |
-| ↳ **`io`** | `fileReadJson`, `fileReadString`, `fileWriteJson`, `fileWriteString`, `print`, `println` |
-| ↳ **`log`** | `printDebug`, `printError`, `printInfo`, `printWarn` |
-| ↳ **`time`** | `utcFromString`, `utcNow` |
-| **Imported Functions** | Functions from modules already imported into your project, such as `googleapis.gmail` or `salesforce`. |
+| **Within Project** | Functions defined within your own project, including [natural functions](../natural-functions/natural-functions.md). Click **+ Create Function** to author a new one inline. |
+| **Standard Library** | Ballerina standard library functions, grouped by module (for example `regex`, `data.yaml`, `yaml`, `auth`). |
+| **Extended Library** | Functions from connector modules available to the project (for example a configured connector's helper functions), grouped by module name. |
 
-Select the functions that the agent should be allowed to invoke. Each selected function becomes available as an agent tool.
-
-The tool metadata — including descriptions, parameters, and input/output schemas — is automatically derived from the function definition. You only need to provide a tool name.
+Use **Search functions** to find a specific function by name across all three sections instead of browsing each one. Selecting a function opens its tool configuration:
 
 <ThemedImage
-    alt="Add function"
+    alt="Tool configuration for the regex module's matches function. Fields: Tool Name (default matchesTool), Description (prefilled from the function's doc comment), a Requires Approval checkbox, and collapsed sections for Inputs and Mapping, OAuth Client Configuration, and Result Type. Save Tool button at the bottom."
     sources={{
-        light: useBaseUrl('/img/genai/develop/shared/18-add-function.png'),
-        dark: useBaseUrl('/img/genai/develop/shared/18-add-function.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/09-use-function-config-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/09-use-function-config-v5.1.png'),
     }}
 />
+
+| Field | Required | Description |
+|---|---|---|
+| **Tool Name** | Yes | A unique name for the tool, prefilled from the function name. |
+| **Description** | No | Explains what the tool does, prefilled from the function's doc comment when available. |
+| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gated Tools](gated-tools.md). |
+| **Inputs and Mapping** | No | The function's parameters and how they map to the tool's inputs, derived from the function signature. |
+| **OAuth Client Configuration** | No | OAuth client settings, when the function needs them (for example a connector-derived function that calls an OAuth-protected endpoint). |
+| **Result Type** | No | The Ballerina type the tool returns, derived from the function's return type. |
+
+Each selected function becomes available as an agent tool.
 
 ## 3. Use agent
 
@@ -167,13 +177,13 @@ Use this option when a task needs its own multi-step reasoning rather than a sin
 
 ## 4. Use MCP server
 
-Selecting **Use MCP Server** opens the **Add MCP Server** panel.
+Selecting **Use MCP Server** opens the **Add Tool - Use MCP Server** panel.
 
 <ThemedImage
-    alt="The Add MCP Server panel — Tools to Include set to All, then Advanced Configurations including Info (name, version), HTTP Version with a Select / Expression toggle, HTTP1 Settings, HTTP2 Settings, Timeout (default 30 seconds), Forwarded."
+    alt="The Add Tool - Use MCP Server panel with Server Url, Requires Authentication, Tools to Include set to All, a collapsed Advanced Configurations section, and Result set to aiMcpbasetoolkit."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/08-add-mcp-server.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/08-add-mcp-server.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/10-add-mcp-server-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/10-add-mcp-server-v5.1.png'),
     }}
 />
 
@@ -187,7 +197,7 @@ The dialog provides the following configuration for selecting a tool:
 | **Advanced Configurations** | Additional [HTTP client configurations](product://connectors/catalog/built-in/http/action-reference#client). |
 | **Result** | The name of the variable used to store the result returned by the MCP tool invocation. |
 
-After saving, every tool exposed by the MCP server — or every tool selected in **Tools to Include** — becomes available to the agent. These tools appear alongside local function tools and are used transparently from the agent’s perspective.
+After saving, every tool exposed by the MCP server, or every tool selected in **Tools to Include**, becomes available to the agent. These tools appear alongside local function tools and are used transparently from the agent’s perspective.
 
 > **Tip:** A WSO2 Integrator project can also consume its own MCP service. See [Exposing a Service as MCP](../mcp/exposing-as-mcp.md).
 
@@ -195,38 +205,39 @@ After saving, every tool exposed by the MCP server — or every tool selected in
 
 Use this option when you want to define a tool before implementing its logic, or when the tool requires a fully custom structure.
 
-Selecting **Create Custom Tool** opens the **Create New Agent Tool** dialog. This full-page dialog provides a structured interface for defining a custom tool.
+Selecting **Create Custom Tool** opens the **Add Tool - Create Custom Tool** panel, a structured form for defining a custom tool.
 
 <ThemedImage
-    alt="The Create New Agent Tool dialog (initial empty state). Header: 'Create New Agent Tool — Create a new agent tool that can be invoked by AI agents.' Section: 'Create New Agent Tool — Define the inputs and outputs of the tool'. Field 1: Name* (with 'missing identifier' validation warning). Field 2: Description (description text area: 'Description of the agent tool. This will help AI agents understand when to use this tool and how to use it.'). Field 3: Parameters with explanation 'Define the inputs for the agent tool. These are the parameters that AI agents will use when calling this tool.' and + Add Parameter link. Field 4: Return Type (with type icon). Field 5: Description (for the return value). Advanced Configurations Expand at the bottom."
+    alt="The Add Tool - Create Custom Tool panel (initial empty state). Fields: Name (empty), Description (text area), Parameters with a + Add Parameter link, Return Type (with a type icon), Description (for the return value), a Requires Approval checkbox, and a collapsed Advanced Configurations section. Cancel and Create Tool buttons at the bottom."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/23-create-custom-tool-blank.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/23-create-custom-tool-blank.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/11-create-custom-tool-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/11-create-custom-tool-v5.1.png'),
     }}
 />
 
-The dialog provides the following options for creating a function:
+The panel provides the following fields for creating a tool:
 
 | Field | Required | Description |
 |---|---|---|
-| **Name*** | Yes | The name of the tool used by the LLM to identify and invoke it. |
+| **Name** | Yes | The name of the tool used by the LLM to identify and invoke it. |
 | **Description** | No | Explains what the tool does and when the agent should use it. Although optional, providing a clear description significantly improves tool selection accuracy by the LLM. |
 | **Parameters** | No | Defines the input parameters for the tool. Each parameter includes a name, type, and description. The descriptions help the LLM understand what values to provide. Selecting **+ Add Parameter** adds a new parameter definition row. |
-| **Return Type*** | Yes | Defines the Ballerina type returned by the tool. This determines the schema exposed to the LLM. Supported primitive types include `string`, `int`, `float`, `decimal`, `boolean`, and `()`. You can also select **+ Create New Type** or **Open Type Browser** to use project-defined record types. |
+| **Return Type** | Yes | Defines the Ballerina type returned by the tool. This determines the schema exposed to the LLM. Supported primitive types include `string`, `int`, `float`, `decimal`, `boolean`, and `()`. You can also select **+ Create New Type** or **Open Type Browser** to use project-defined record types. |
 | **Description** (return) | No | A short description of the return value. |
+| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gated Tools](gated-tools.md). |
 | **Advanced Configurations** | No | Additional settings such as visibility and Agent Identity client configuration. |
 
 After clicking **Create**, WSO2 Integrator generates a stub function annotated with `@ai:AgentTool`. You can then implement the tool logic inside the generated function.
 
 ## After adding a tool
 
-The new tool appears in the agent’s right-side **Tools** panel and is included in every reasoning step from that point onward.
+The new tool appears as its own node on the canvas, connected to the **AI Agent** node with a dashed line, and is included in every reasoning step from that point onward.
 
 <ThemedImage
-    alt="Database Connection"
+    alt="The blogReviewer AI Agent node with an attached matchesTool node, connected with a dashed line."
     sources={{
-        light: useBaseUrl('/img/genai/develop/shared/19-agent-with-tools.png'),
-        dark: useBaseUrl('/img/genai/develop/shared/19-agent-with-tools.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/12-agent-with-tool-node-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/12-agent-with-tool-node-v5.1.png'),
     }}
 />
 
@@ -310,24 +321,32 @@ final ai:Agent toolAgent = check new (
 After adding the toolkit, the agent can invoke all tools exposed by the `TaskManagerToolkit`, including addTask and listTasks. Since the toolkit maintains shared state internally, all tool invocations operate on the same task collection managed by the toolkit instance.
 
 <ThemedImage
-    alt="Agent with toolkit."
+    alt="The blogReviewer AI Agent node with two attached tools: matchesTool and taskManager, the toolkit instance, each connected with a dashed line."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/30-toolkit.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/30-toolkit.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/13-agent-with-toolkit-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/13-agent-with-toolkit-v5.1.png'),
     }}
 />
 
 ## Configure an attached tool
 
-Once a tool is attached, you can view, edit, or delete it by clicking the vertical ellipsis button of the attached tool.
-
-To configure a tool, click **Edit** and configure the following fields. 
+Once a tool is attached, right-click its node to **Edit**, **View**, or **Delete** it.
 
 <ThemedImage
-    alt="Configure tool"
+    alt="Right-click context menu on the matchesTool node, showing Edit, View, and Delete options."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/31-tool-configuration.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/31-tool-configuration.png'),
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/14-tool-node-context-menu-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/14-tool-node-context-menu-v5.1.png'),
+    }}
+/>
+
+Selecting **View** (or clicking the node) opens the tool's own flow view: for a function- or connector-based tool, its underlying call and return; for a custom tool, the generated function stub. Click **Configure** at the top of that view to edit the tool's fields.
+
+<ThemedImage
+    alt="Configure tool for the matchesTool custom function. Fields: Name, Description, Parameters with their types and + Add Parameter, Return Type, Description (return), a Requires Approval checkbox, and a collapsed Advanced Configurations section. Cancel and Save buttons at the bottom."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/agents-v5.1/tools/15-tool-configure-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/agents-v5.1/tools/15-tool-configure-v5.1.png'),
     }}
 />
 
@@ -339,8 +358,7 @@ To configure a tool, click **Edit** and configure the following fields.
 | **Return Type** | Yes | Defines the type of value returned by the tool. |
 | **Return Description** | No | A description of the value returned by the tool. |
 | **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gated Tools](gated-tools.md). |
-| **Pass Agent Context** | No | Gives the tool access to the agent's `ai:Context`, a key-value store carried through the run that the model never sees. |
-| **Advanced Configuration** | No | Contains the agent authentication client configurations and additional security-related settings used to connect with external authorization servers. |
+| **Advanced Configurations** | No | Contains the agent authentication client configurations and additional security-related settings used to connect with external authorization servers. |
 
 ### Advanced configuration
 

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: RAG Ingestion
-description: How to build a RAG ingestion integration in WSO2 Integrator — load documents, chunk them, generate embeddings, and store vectors in a knowledge base.
+description: How to build a RAG ingestion integration in WSO2 Integrator, load documents, chunk them, generate embeddings, and store vectors in a knowledge base.
 keywords: [wso2 integrator, rag, rag ingestion, knowledge base, vector store, embedding provider]
 slug: /develop-and-test/integration-artifacts/ai-integrations/rag/rag-ingestion
 ---
@@ -46,14 +46,14 @@ The `ingest` action on the Knowledge Base handles everything after document load
 
 An **Automation** runs on integration startup. It is the right artifact type for a one-shot ingestion job.
 
-1. In the design view, select **+ Add Artifact**.
+1. On the **Design** tab, select **Add Artifact manually** (below the WSO2 Integrator Copilot's quick-start cards). If the project already has other artifacts, this same button appears directly as **+ Add Artifact** instead.
 2. On the Artifacts page, select **Automation** and click **Create**.
 
     <ThemedImage
-        alt="Artifacts page with Automation selected."
+        alt="Artifacts page with Automation selected, showing the artifact-type filter tabs (All, Automation, Workflow, AI, API, Event, File, Other)."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/01-rag-ingestion-artifacts.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/01-rag-ingestion-artifacts.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/01-rag-ingestion-artifacts-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/01-rag-ingestion-artifacts-v5.1.png'),
         }}
     />
 
@@ -65,29 +65,29 @@ A **Text Data Loader** reads a file from disk and wraps its content as an `ai:Do
 
 1. In the flow editor, click **+** to open the **Add Node** panel.
 2. Go to **AI > RAG > Data Loader**.
-3. Click **Add Data Loader** and select **Text Data Loader**.
+3. Click **Add Data Loader**. The picker lists **Text Data Loader** and **Microsoft SharePoint Text Data Loader**. Select **Text Data Loader**.
 
     <ThemedImage
-        alt="Add Node panel showing AI > RAG > Data Loader with Text Data Loader selected."
+        alt="Data Loaders picker listing Text Data Loader and Microsoft SharePoint Text Data Loader, with Text Data Loader selected."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/02-add-dataloader.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/02-add-dataloader.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/02-add-dataloader-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/02-add-dataloader-v5.1.png'),
         }}
     />
 
-4. In the configuration panel:
+4. In the configuration panel, the **Data Loader Name** field auto-fills a generated name (for example `aiTextdataloader`). Rename it to something descriptive, and set **Paths**:
 
     | Field | Value |
     | --- | --- |
-    | **Paths** | Path to the file you want to ingest, for example `/resources/knowledge.pdf` |
-    | **Name** | A variable name for the loader, for example `loader` |
-    | **Result Type** | The variable type, set to `ai:TextDataLoader`. |
+    | **Paths** | Path to the file you want to ingest, relative to the project root, for example `resources/knowledge.md`. Do not add a leading `/`; a leading slash is treated as an absolute path and the file won't be found. |
+    | **Data Loader Name** | A variable name for the loader, for example `loader` |
+    | **Result Type** | The variable type, locked to `ai:TextDataLoader`. |
 
     <ThemedImage
-        alt="Text Data Loader configuration form showing Paths, Name, and Result Type fields."
+        alt="Text Data Loader configuration form with Paths set to a relative file path, Data Loader Name set to loader, and Result Type ai:TextDataLoader."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/03-dataloader-form.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/03-dataloader-form.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/03-dataloader-form-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/03-dataloader-form-v5.1.png'),
         }}
     />
 
@@ -101,13 +101,13 @@ The node appears on the right panel. It does not load yet. You call its `load` f
 
 Call the loader's `load` function to execute the read and get back an `ai:Document[]`.
 
-1. Click on the `loader` node and select the `load` action call.
+1. Click on the `loader` connection and select the **Load** action, *"Loads documents as TextDocuments from a source."*
 
     <ThemedImage
-        alt="Loader node with the load action call selected."
+        alt="loader connection expanded showing the Load action with its tooltip."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/04-call-load-action.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/04-call-load-action.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/04-call-load-action-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/04-call-load-action-v5.1.png'),
         }}
     />
 
@@ -118,8 +118,8 @@ Call the loader's `load` function to execute the read and get back an `ai:Docume
     <ThemedImage
         alt="Load action form with result variable name set to documents."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/05-load-form.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/05-load-form.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/05-load-form-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/05-load-form-v5.1.png'),
         }}
     />
 
@@ -128,8 +128,8 @@ Call the loader's `load` function to execute the read and get back an `ai:Docume
     <ThemedImage
         alt="Flow editor showing the load action node added to the automation flow."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/06-load-node.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/06-load-node.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/06-load-node-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/06-load-node-v5.1.png'),
         }}
     />
 
@@ -140,35 +140,36 @@ Call the loader's `load` function to execute the read and get back an `ai:Docume
 The **Vector Knowledge Base** owns the three pluggable parts of a RAG store: a vector store, an embedding provider, and a chunker.
 
 1. Click **+** to add a node.
-2. Go to **AI > RAG > Knowledge Base**.
+2. Go to **AI > RAG > Knowledge Base**. Click **Add Knowledge Base**. The picker lists **Vector Knowledge Base**, **Azure AI Search Knowledge Base**, and **WSO2 Cloud Knowledge Base**. Select **Vector Knowledge Base**.
 
     <ThemedImage
-        alt="Select Knowledge Base picker showing Vector Knowledge Base option."
+        alt="Knowledge Bases picker listing Vector Knowledge Base, Azure AI Search Knowledge Base, and WSO2 Cloud Knowledge Base."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/07-knowledge-base.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/07-knowledge-base.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/07-knowledge-base-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/07-knowledge-base-v5.1.png'),
         }}
     />
 
-3. Click **Add Knowledge Base** and select **Vector Knowledge Base**.
-4. Fill in the form:
+3. The **ai : Vector Knowledge Base** form opens with three required building blocks, each created inline:
 
     | Field | Required | Values |
     | --- | --- | --- |
-    | **Vector Store** | Yes | In-Memory Vector Store, Pinecone, pgvector, Weaviate, or Milvus. |
-    | **Embedding Model** | Yes | Default Embedding Provider (WSO2) or any other listed embedding provider. Produces 1536-dimensional dense vectors. |
-    | **Chunker** | No | `ai:AUTO` is the default and works for most cases. Switch to a specific chunker if retrieval quality degrades: use **Markdown** for `.md` files, **HTML** for web pages, or **Generic Recursive** for plain text. |
-    | **Knowledge Base Name** | — | For example, `knowledgeBase` |
+    | **Vector Store** | Yes | Click **+ Create New Vector Store** to pick from In Memory, Milvus, Pgvector, Pinecone, or Weaviate, then fill in its own create form (for the in-memory store, just a name; the **Similarity Metric** defaults to `COSINE`). |
+    | **Embedding Model** | Yes | Click **+ Create New Embedding Model** to pick from Default Embedding Provider (WSO2), Azure, Google Vertex, OpenAI, or OpenRouter, then fill in its own create form. Produces 1536-dimensional dense vectors. |
+    | **Chunker** | No | `AUTO` is the default and works for most cases. Switch to a specific chunker if retrieval quality degrades: use **Markdown** for `.md` files, **HTML** for web pages, or **Generic Recursive** for plain text. |
+    | **Knowledge Base Name** | Yes | Auto-fills a generated name, for example `aiVectorknowledgebase`. |
+
+    Each inline creation returns you to this form with the field filled in, and the new connection also appears in the left **Connections** tree.
 
     <ThemedImage
-        alt="Vector Knowledge Base form showing Vector Store, Embedding Model, Chunker, and Knowledge Base Name fields."
+        alt="Completed ai : Vector Knowledge Base form with Vector Store, Embedding Model, Chunker set to AUTO, and Knowledge Base Name filled in."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/08-vector-knowledge-base-form.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/08-vector-knowledge-base-form.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/08-vector-knowledge-base-form-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/08-vector-knowledge-base-form-v5.1.png'),
         }}
     />
 
-5. Click **Save**.
+4. Click **Save**.
 
 :::warning
  In-memory storage is not durable and is local to the current integration runtime. All vectors are lost when the integration stops. Use **In-Memory Vector Store** only when ingestion and query run in the same integration runtime/process for local development or testing. If ingestion and query run as separate integrations or processes, configure an external vector store such as Pinecone, pgvector, Weaviate, or Milvus, and set `vectorDimension: 1536` to match the WSO2 embedding provider's output.
@@ -187,23 +188,23 @@ See [Vector Stores](../ai-building-blocks/vector-stores.md) and [Knowledge Bases
 Call `ingest` on the knowledge base to chunk, embed, and persist the loaded documents.
 
 1. Click **+** after the knowledge base creation node.
-2. Select the `knowledgeBase` variable and choose the **Ingest** action.
+2. Select the `aiVectorknowledgebase` connection and choose **Ingest**, *"Indexes a collection of chunks. Converts each chunk to an embedding and stores it in the vector store, making the chunk searchable through the retriever."*
 
     <ThemedImage
-        alt="Knowledge Base node with Ingest action selected."
+        alt="aiVectorknowledgebase connection expanded showing Ingest, Retrieve, and Delete By Filter actions, with the Ingest tooltip visible."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/09-ingest-action.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/09-ingest-action.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/09-ingest-action-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/09-ingest-action-v5.1.png'),
         }}
     />
 
-3. Set **Documents** to the `documents` variable from Step 3.
+3. The **Documents** field defaults to **Record** mode. Switch it to **Expression** mode and set it to the `documents` variable from Step 3.
 
     <ThemedImage
-        alt="Ingest action form with the Documents field set to the documents variable."
+        alt="Ingest action form with the Documents field in Expression mode, set to the documents variable."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/10-ingest-doc-form.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/10-ingest-doc-form.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/10-ingest-doc-form-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/10-ingest-doc-form-v5.1.png'),
         }}
     />
 
@@ -212,8 +213,8 @@ Call `ingest` on the knowledge base to chunk, embed, and persist the loaded docu
     <ThemedImage
         alt="Flow editor showing the ingest node added after the knowledge base node."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/11-with-ingest-node.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/11-with-ingest-node.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/11-with-ingest-node-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/11-with-ingest-node-v5.1.png'),
         }}
     />
 
@@ -227,19 +228,19 @@ The `ingest` action:
 
 ## Step 6: Add a completion log
 
-Add a **Log Info** node after the ingest call to confirm the integration finished.
+Add a **Log Info** node (under **Logging** in the Add Node panel, tooltip *"Prints info logs."*) after the ingest call to confirm the integration finished.
 
 | Field | Value |
 | --- | --- |
-| **Message** | For example, `"RAG ingestion complete."` |
+| **Msg** | For example, `"RAG ingestion complete."` |
 
 This is optional but useful during development and when the automation runs on a schedule.
 
 <ThemedImage
-    alt="Full RAG ingestion integration with data loader, knowledge base, ingest, and log nodes."
+    alt="Completed RAG ingestion flow: Start, ai:load, ai:ingest, log:printInfo, and Error Handler."
     sources={{
-        light: useBaseUrl('/img/genai/develop/rag/12-full-rag-ingestion-pipeline.png'),
-        dark: useBaseUrl('/img/genai/develop/rag/12-full-rag-ingestion-pipeline.png'),
+        light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/12-full-rag-ingestion-pipeline-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/12-full-rag-ingestion-pipeline-v5.1.png'),
     }}
 />
 
@@ -249,17 +250,17 @@ This is optional but useful during development and when the automation runs on a
 
 Click **Run** at the top right of the project view. WSO2 Integrator compiles and starts the integration. Because the artifact is an Automation, the ingestion function executes immediately on startup.
 
-Watch the **Run** panel output for the log message. If the run fails, check:
+Watch the terminal output for the log message. If the run fails with `File does not exist`, check:
 
-- The file path is correct relative to the project root.
+- The file path in **Paths** is relative to the project root and does not start with `/`. A leading slash is treated as an absolute path, so `resources/knowledge.md` works but `/resources/knowledge.md` does not.
 - The WSO2 model provider is configured (`Ballerina: Configure default WSO2 model provider`).
 - The embedding provider and vector store are reachable (for external stores).
 
     <ThemedImage
-        alt="Run panel output showing the RAG ingestion integration completed successfully."
+        alt="Terminal output showing the RAG ingestion integration completed successfully with the &quot;RAG ingestion complete.&quot; log message."
         sources={{
-            light: useBaseUrl('/img/genai/develop/rag/13-run-rag-ingestion-pipeline.png'),
-            dark: useBaseUrl('/img/genai/develop/rag/13-run-rag-ingestion-pipeline.png'),
+            light: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/13-run-rag-ingestion-pipeline-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/rag-v5.1/rag-ingestion/13-run-rag-ingestion-pipeline-v5.1.png'),
         }}
     />
 
@@ -272,7 +273,7 @@ The in-memory store is rebuilt on every restart, so re-running the integration r
 - Use **Delete By Filter** before re-ingesting a document to avoid duplicates. Filter by a metadata field like `source` or `version`.
 - Schedule the automation with a trigger (for example, an HTTP call, a cron, or a file-watch event) rather than running it once.
 
-See [Knowledge Bases — delete by filter](../ai-building-blocks/knowledge-bases.md#available-actions) for details.
+See [Knowledge Bases: delete by filter](../ai-building-blocks/knowledge-bases.md#available-actions) for details.
 
 ---
 

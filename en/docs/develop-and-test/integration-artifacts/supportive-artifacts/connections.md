@@ -26,8 +26,8 @@ Connection artifacts centralize the configuration for external systems. Define c
    <ThemedImage
        alt="WSO2 Integrator Add connection via sidebar"
        sources={{
-           light: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/new-connection-sidebar.png'),
-           dark: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/new-connection-sidebar.png'),
+           light: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/new-connection-sidebar-v5.1.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/new-connection-sidebar-v5.1.png'),
        }}
    />
 
