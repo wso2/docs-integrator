@@ -5,8 +5,6 @@ keywords: [wso2 integrator, agent, ai agent, reusable, supporting artifact]
 slug: /develop-and-test/integration-artifacts/supportive-artifacts/agent
 ---
 
-{/* NOTE: saas-owned copy -- this page is excluded from the wso2-integrator content sync (sync-content-to-saas.yaml, SAAS_OWNED_FILES). References to durable agentic workflows are removed here because durable workflow isn't available on WSO2 Cloud yet; restore them (and drop this page from SAAS_OWNED_FILES) when it ships. */}
-
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
@@ -14,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 # Agent
 
-An Agent artifact is a standalone AI agent definition — the same model, system prompt, tools, and memory building blocks described in [AI Agents](../ai-integrations/agents/agents.md) — added directly within an integration flow, a REST API, a GraphQL resolver, or backend service logic, instead of being scaffolded together with its own chat service the way the [AI Chat Agent Wizard](../ai-integrations/agents/create-an-agent.md) does. Use it when you want to invoke the agent programmatically as part of logic you're already writing, or reference it the same way you'd use a [Connection](connections.md) or a [Type](types.md) from a Chat Agent Service, an MCP Service.
+An Agent artifact is a standalone AI agent definition — the same model, system prompt, tools, and memory building blocks described in [AI Agents](../ai-integrations/agents/agents.md) — added directly within an integration flow, a REST API, a GraphQL resolver, or backend service logic, instead of being scaffolded together with its own chat service the way the [AI Chat Agent Wizard](../ai-integrations/agents/create-an-agent.md) does. Use it when you want to invoke the agent programmatically as part of logic you're already writing, or reference it the same way you'd use a [Connection](connections.md) or a [Type](types.md) from a Chat Agent Service, an MCP Service, or a [Durable Agentic Workflow](../workflow/durable-agentic-workflow/durable-agentic-workflow.md).
 
 ## Creating an Agent
 
@@ -97,3 +95,4 @@ After generation, you can configure the following aspects of the agent the same 
 
 - [AI Agents](../ai-integrations/agents/agents.md) — the model, system prompt, tools, and memory components that make up an agent
 - [Creating an Agent](../ai-integrations/agents/create-an-agent.md) — the AI Chat Agent Wizard walkthrough
+- [Durable Agentic Workflow](../workflow/durable-agentic-workflow/durable-agentic-workflow.md) — use an agent to drive a durable workflow's decisions

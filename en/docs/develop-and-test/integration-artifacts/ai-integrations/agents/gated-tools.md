@@ -6,8 +6,6 @@ keywords: [wso2 integrator, gated tools, tool approval, approval gate, ai agents
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/gated-tools
 ---
 
-{/* NOTE: saas-owned copy -- this page is excluded from the wso2-integrator content sync (sync-content-to-saas.yaml, SAAS_OWNED_FILES). The "Need more than an approval?" tip that links to the durable workflow pages is removed here because durable workflow isn't available on WSO2 Cloud yet; restore it (and drop this page from SAAS_OWNED_FILES) when it ships. */}
-
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
@@ -18,6 +16,10 @@ import TabItem from '@theme/TabItem';
 By default, an agent runs on autopilot. It reasons and calls tools in a loop until it produces an answer, with no opportunity for a person to step in. That is fine for read-only actions such as looking up an order, but risky for sensitive ones such as issuing a refund, deleting a record, or sending an email.
 
 Gating a tool makes the agent pause immediately before it runs that tool, show what it proposes to do, and continue once a person has approved or rejected the tool call.
+
+:::tip Need more than an approval?
+A [durable agentic workflow](../../workflow/durable-agentic-workflow/durable-agentic-workflow.md) keeps the same pause-for-approval, then goes much further: it can ask for a typed value, choose who may answer, set a deadline, retry or hand a failed step to a person, and resume after a crash, at the cost of running on Temporal. See [Gated Tools or Durable Agentic Workflow](gated-tools-or-durable-agentic-workflow.md) for the full comparison.
+:::
 
 ## How it works
 
