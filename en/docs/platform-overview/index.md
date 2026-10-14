@@ -25,14 +25,14 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## What is WSO2 Integration Platform?
 
-WSO2 Integration Platform is an open-source platform for building, running, and managing integrations that connect applications, APIs, data, events, and AI agents across cloud, on-premises, and hybrid environments.
+WSO2 Integration Platform is a platform for building, running, and managing integrations that connect applications, APIs, data, events, and AI agents across cloud, on-premises, and hybrid environments. It is built on open-source foundations and open standards, and is available both as a fully managed service and as a self-hosted deployment.
 
 It supports the integration lifecycle, from development and testing through deployment, management, and observability. Visual design, source code, AI assistance, and enterprise connectivity work together in a consistent development experience.
 
 The platform separates how you develop an integration from where it runs and how it is operated, giving you flexibility to choose the deployment model that fits your organization.
 
 <ThemedImage
-    alt="WSO2 Integration Platform is an open-source platform for building, running, and managing integrations"
+    alt="WSO2 Integration Platform for building, running, and managing integrations"
     sources={{
         light: useBaseUrl('/img/platform-overview/integration-platform-overview.png'),
         dark: useBaseUrl('/img/platform-overview/integration-platform-overview.png'),
@@ -51,6 +51,7 @@ WSO2 Integration Platform supports several integration styles using shared capab
 | File-driven integrations | Receive, transform, and exchange files across systems.| 
 | Workflows | Coordinate multi-step business processes, including long-running processes that wait for events, timers, or human decisions. | 
 | AI Agents | Combine integration logic with AI reasoning, and enable agents to access enterprise data and take action through tools. | 
+| MCP servers | Expose integrations as Model Context Protocol (MCP) tools, so AI assistants and agents can discover and call your enterprise capabilities through a governed boundary. | 
 
 AI serves two roles in the platform: it assists developers in building integrations, and it can participate in execution through AI services and agents.
 
