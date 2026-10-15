@@ -8,7 +8,7 @@ Once your integration is ready, this section covers how to ship it and how to ru
 
 ## Deploy
 
-Choose where your integrations run. Where you deploy also decides how you [manage](../manage.md) and [observe](../observe/observe.md) them.
+Choose where your integrations run. Where you deploy also decides how you [manage](../manage/manage.md) and [observe](../observe/observe.md) them.
 
 <PaletteCard icon="cloud" href="/deploy-and-run/deploy-to-wso2-cloud">
   <h3 class="palette-card-title">Deploy to WSO2 Cloud</h3>

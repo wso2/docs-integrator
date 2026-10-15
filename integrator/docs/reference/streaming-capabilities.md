@@ -129,10 +129,10 @@ Listeners exist for every broker, every event source, and every streaming networ
 | ----- | ----- | ----- |
 | [Database query streaming](#database-query-streaming-sql) | Result sets returned as lazy streams of records | [MySQL](product://connectors/catalog/database/mysql/connector-overview), [PostgreSQL](product://connectors/catalog/database/postgresql/connector-overview), [Microsoft SQL Server (MSSQL)](product://connectors/catalog/database/mssql/connector-overview), [OracleDB](product://connectors/catalog/database/oracledb/oracle-db-connector-overview), [Snowflake](product://connectors/catalog/database/snowflake/connector-overview), [JDBC](product://connectors/catalog/database/java.jdbc/java-jdbc-connector-overview) |
 | [CSV streaming](#csv-streaming) | Streaming CSV parser that yields one record at a time | [CSV](../develop-and-test/data-transformation/csv-flat-file.md#processing-large-files) |
-| [Message brokers](#message-brokers) | Distributed event streaming and messaging | [Kafka](product://connectors/catalog/messaging/kafka/connector-overview), [RabbitMQ](product://connectors/catalog/messaging/rabbitmq/connector-overview), [MQTT](product://connectors/catalog/built-in/mqtt/mqtt), [NATS](product://connectors/catalog/messaging/nats/connector-overview), [JMS](product://connectors/catalog/messaging/java.jms/jms-connector-overview), [ASB](product://connectors/catalog/messaging/asb/azure-service-bus-connector-overview), [Solace](product://connectors/catalog/messaging/solace/connector-overview), [AWS SQS](product://connectors/catalog/messaging/aws.sqs/aws-sqs-connector-overview), [AWS SNS](product://connectors/catalog/communication/aws.sns/aws-sns-connector-overview) |
-| [Change Data Capture and SaaS event sources](#change-data-capture-and-saas-event-sources) | Database change events, cloud/SaaS events | [CDC](product://connectors/catalog/database/cdc/connector-overview), [Salesforce](product://connectors/catalog/crm-sales/salesforce/connector-overview), [Email](product://connectors/catalog/built-in/email/email), [DynamoDB Streams](https://central.ballerina.io/ballerinax/aws.dynamodbstreams/latest), [GitHub Trigger](https://central.ballerina.io/ballerinax/trigger.github/latest) |
-| [File / object transfer streaming](#file-object-transfer-streaming) | Memory-efficient streaming over file transfer protocols | [I/O](https://central.ballerina.io/ballerina/io/latest), [FTP](product://connectors/catalog/built-in/ftp/ftp), [SMB](https://central.ballerina.io/ballerina/smb/latest) |
-| [Streaming network protocols](#streaming-network-protocols) | Long-lived bidirectional / server-streamed connections | [WebSocket](product://connectors/catalog/built-in/websocket/websocket), [gRPC](product://connectors/catalog/built-in/grpc/grpc), [HTTP](product://connectors/catalog/built-in/http/overview) (SSE), [GraphQL](product://connectors/catalog/built-in/graphql/graphql) (subscriptions), [UDP](product://connectors/catalog/built-in/udp/udp) |
+| [Message brokers](#message-brokers) | Distributed event streaming and messaging | [Kafka](product://connectors/catalog/messaging/kafka/connector-overview), [RabbitMQ](product://connectors/catalog/messaging/rabbitmq/connector-overview), [MQTT](product://connectors/catalog/messaging/mqtt/mqtt), [NATS](product://connectors/catalog/messaging/nats/connector-overview), [JMS](product://connectors/catalog/messaging/java.jms/jms-connector-overview), [ASB](product://connectors/catalog/messaging/asb/azure-service-bus-connector-overview), [Solace](product://connectors/catalog/messaging/solace/connector-overview), [AWS SQS](product://connectors/catalog/messaging/aws.sqs/aws-sqs-connector-overview), [AWS SNS](product://connectors/catalog/communication/aws.sns/aws-sns-connector-overview) |
+| [Change Data Capture and SaaS event sources](#change-data-capture-and-saas-event-sources) | Database change events, cloud/SaaS events | [CDC](product://connectors/catalog/database/cdc/connector-overview), [Salesforce](product://connectors/catalog/crm-sales/salesforce/connector-overview), [Email](product://connectors/catalog/communication/email/email), [DynamoDB Streams](https://central.ballerina.io/ballerinax/aws.dynamodbstreams/latest), [GitHub Trigger](https://central.ballerina.io/ballerinax/trigger.github/latest) |
+| [File / object transfer streaming](#file-object-transfer-streaming) | Memory-efficient streaming over file transfer protocols | [I/O](https://central.ballerina.io/ballerina/io/latest), [FTP](product://connectors/catalog/storage-file/ftp/ftp), [SMB](https://central.ballerina.io/ballerina/smb/latest) |
+| [Streaming network protocols](#streaming-network-protocols) | Long-lived bidirectional / server-streamed connections | [WebSocket](product://connectors/catalog/network-protocols/websocket/websocket), [gRPC](product://connectors/catalog/network-protocols/grpc/grpc), [HTTP](product://connectors/catalog/network-protocols/http/overview) (SSE), [GraphQL](product://connectors/catalog/network-protocols/graphql/graphql) (subscriptions), [UDP](product://connectors/catalog/network-protocols/udp/udp) |
 
 ## Database query streaming (SQL) {#database-query-streaming-sql}
 
@@ -211,7 +211,7 @@ Each broker has a producer/client and a listener. The listener-driven services d
 | ----- | ----- | ----- | ----- |
 | [Kafka](product://connectors/catalog/messaging/kafka/connector-overview) | Apache Kafka | At-least-once, exactly-once (transactions) | Consumer groups, SASL/SSL, Avro, GraalVM-compatible |
 | [RabbitMQ](product://connectors/catalog/messaging/rabbitmq/connector-overview) | RabbitMQ (AMQP 0-9-1) | At-least-once | Direct/Fanout/Topic/Headers exchanges, client ack |
-| [MQTT](product://connectors/catalog/built-in/mqtt/mqtt) | MQTT brokers | QoS 0/1/2 | Last-will, retained messages, IoT-oriented |
+| [MQTT](product://connectors/catalog/messaging/mqtt/mqtt) | MQTT brokers | QoS 0/1/2 | Last-will, retained messages, IoT-oriented |
 | [NATS](product://connectors/catalog/messaging/nats/connector-overview) | NATS / JetStream | At-most-once (core) / at-least-once (JetStream) | Publish-subscribe, request-reply, and load-balanced queues, JetStream for persistent messaging |
 | [JMS](product://connectors/catalog/messaging/java.jms/jms-connector-overview) | JMS providers (ActiveMQ, Artemis) | At-least-once | Queues, topics, durable subscribers |
 | [ASB](product://connectors/catalog/messaging/asb/azure-service-bus-connector-overview) | Azure Service Bus | At-least-once | Sessions, dead-lettering, batch operations |
@@ -284,7 +284,7 @@ Beyond message brokers, the default profile exposes streams of events from datab
 | [DynamoDB Streams](https://central.ballerina.io/ballerinax/aws.dynamodbstreams/latest) | AWS DynamoDB Streams | Item-level changes from a DynamoDB table |
 | [Salesforce](product://connectors/catalog/crm-sales/salesforce/connector-overview) | Salesforce events | Platform events, change data capture events |
 | [GitHub Trigger](https://central.ballerina.io/ballerinax/trigger.github/latest) | GitHub Webhooks | Repository, PR, issue events |
-| [Email](product://connectors/catalog/built-in/email/email) | POP3 / IMAP4 | New email messages |
+| [Email](product://connectors/catalog/communication/email/email) | POP3 / IMAP4 | New email messages |
 | [Twilio Trigger](https://central.ballerina.io/ballerinax/twilio/latest) | Twilio | SMS, voice events |
 
 ### CDC example (PostgreSQL)
@@ -326,7 +326,7 @@ For workflows involving large files, the default profile exposes file contents a
 | Connector | Streaming surface |
 | ----- | ----- |
 | [I/O](https://central.ballerina.io/ballerina/io/latest) | `fileReadBlocksAsStream`, `fileReadCsvAsStream`, `fileWriteBlocksFromStream` for local files |
-| [FTP](product://connectors/catalog/built-in/ftp/ftp) | `ftp:Client->getBytesAsStream` / `put` over FTP and SFTP; `ftp:Listener` for file-arrival events |
+| [FTP](product://connectors/catalog/storage-file/ftp/ftp) | `ftp:Client->getBytesAsStream` / `put` over FTP and SFTP; `ftp:Listener` for file-arrival events |
 | [SMB](https://central.ballerina.io/ballerina/smb/latest) | `smb:Client->getBytesAsStream` / `put` over SMB; `smb:Listener` for file-arrival events |
 
 ### Download from FTP as a byte stream
@@ -384,11 +384,11 @@ Some protocols are inherently streaming: the connection itself is long-lived, an
 
 | Module | Protocol | Streaming model |
 | ----- | ----- | ----- |
-| [WebSocket](product://connectors/catalog/built-in/websocket/websocket) | WebSocket | Full-duplex text/binary frames over a single connection |
-| [gRPC](product://connectors/catalog/built-in/grpc/grpc) | gRPC | Unary, server-streaming, client-streaming, and bidirectional streaming RPCs |
-| [HTTP](product://connectors/catalog/built-in/http/overview) (SSE) | HTTP (SSE) | Server-to-client push as a `stream<http:SseEvent, error?>` over a long-lived HTTP connection |
-| [GraphQL](product://connectors/catalog/built-in/graphql/graphql) | GraphQL subscriptions | A `subscribe` resolver returns a `stream<T, error?>`, typically carried over WebSocket |
-| [UDP](product://connectors/catalog/built-in/udp/udp) | UDP | Connectionless datagram send/receive for high-throughput unordered streams |
+| [WebSocket](product://connectors/catalog/network-protocols/websocket/websocket) | WebSocket | Full-duplex text/binary frames over a single connection |
+| [gRPC](product://connectors/catalog/network-protocols/grpc/grpc) | gRPC | Unary, server-streaming, client-streaming, and bidirectional streaming RPCs |
+| [HTTP](product://connectors/catalog/network-protocols/http/overview) (SSE) | HTTP (SSE) | Server-to-client push as a `stream<http:SseEvent, error?>` over a long-lived HTTP connection |
+| [GraphQL](product://connectors/catalog/network-protocols/graphql/graphql) | GraphQL subscriptions | A `subscribe` resolver returns a `stream<T, error?>`, typically carried over WebSocket |
+| [UDP](product://connectors/catalog/network-protocols/udp/udp) | UDP | Connectionless datagram send/receive for high-throughput unordered streams |
 
 WebSocket and gRPC use a listener/frame model, while HTTP SSE and GraphQL subscriptions surface a literal `stream<...>` value, tying directly back to [streams](#streams).
 

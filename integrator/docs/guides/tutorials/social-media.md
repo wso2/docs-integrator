@@ -335,7 +335,7 @@ The API talks to three things, so add a connection for each before you build the
 
    ![Configuring the RabbitMQ client connection with host and port configurables](/img/guides/tutorials/social-media/main-rabbitmq-client.png)
 
-3. **Sentiment API.** Add an [HTTP](pathname:///integration-platform/docs/connectors/catalog/built-in/http/action-reference#client) connection with the **Url** of the Sentiment API, `http://localhost:9000/text-processing`, and name it `sentimentClient`.
+3. **Sentiment API.** Add an [HTTP](product://connectors/catalog/network-protocols/http/action-reference#client) connection with the **Url** of the Sentiment API, `http://localhost:9000/text-processing`, and name it `sentimentClient`.
 
    ![Configuring the sentiment HTTP client connection pointing at the Sentiment API URL](/img/guides/tutorials/social-media/main-sentiment-client.png)
 
