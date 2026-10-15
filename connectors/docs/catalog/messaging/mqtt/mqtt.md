@@ -2,7 +2,7 @@
 title: MQTT
 ---
 
-MQTT is a lightweight messaging protocol designed for constrained devices and low-bandwidth, high-latency networks, widely used in IoT scenarios. The Ballerina `ballerina/mqtt` connector (v1.4.0) provides a complete MQTT v5 client for publishing and subscribing to messages, as well as a listener for event-driven message consumption, enabling seamless integration with any MQTT broker.
+MQTT is a lightweight messaging protocol designed for constrained devices and low-bandwidth, high-latency networks, widely used in IoT scenarios. The Ballerina `ballerina/mqtt` connector (v1.4.3) provides a complete MQTT v5 client for publishing and subscribing to messages, as well as a listener for event-driven message consumption, enabling seamless integration with any MQTT broker.
 
 ## Key features
 
@@ -34,8 +34,8 @@ Supported trigger events:
 | Event | Callback | Description |
 |-------|----------|-------------|
 | Message received | `onMessage` | Fired when a message is received on a subscribed topic. |
-| Error occurred | `onError` | Fired when an error occurs during message processing. |
-| Delivery completed | `onComplete` | Fired when a message delivery is completed (acknowledgement received from broker). |
+| Error occurred | `onError` | Fired when the listener connection is lost or the underlying MQTT client reports an error. |
+| Delivery completed | `onComplete` | Fired when a message published over the listener connection (for example, a response sent with `caller->respond()`) completes delivery. |
 
 See the **[Trigger Reference](trigger-reference.md)** for listener configuration, service callbacks, and the event payload structure.
 

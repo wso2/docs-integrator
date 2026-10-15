@@ -4,7 +4,7 @@ title: Overview
 
 # Overview
 
-IBM MQ is an enterprise messaging middleware that enables applications to communicate reliably across distributed systems using message queues and publish/subscribe topics. The Ballerina `ballerinax/ibm.ibmmq` connector (v1.4.2) provides programmatic access to IBM MQ queue managers, queues, and topics, enabling you to produce and consume messages within your Ballerina integration flows.
+IBM MQ is an enterprise messaging middleware that enables applications to communicate reliably across distributed systems using message queues and publish/subscribe topics. The Ballerina `ballerinax/ibm.ibmmq` connector (v1.4.5) provides programmatic access to IBM MQ queue managers, queues, and topics, enabling you to produce and consume messages within your Ballerina integration flows.
 
 ## Key features
 
@@ -38,8 +38,9 @@ Supported trigger events:
 | Event | Callback | Description |
 |-------|----------|-------------|
 | Message received | `onMessage` | Fired when a message is available on the configured queue or topic subscription. |
+| Error occurred | `onError` | Optional. Fired when an error occurs while receiving a message or dispatching it to `onMessage`. |
 
-See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the `EventData` payload structure.
+See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the `ibmmq:Message` payload structure.
 
 ## Documentation
 

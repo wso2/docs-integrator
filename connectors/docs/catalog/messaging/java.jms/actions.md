@@ -86,7 +86,7 @@ Returns: `jms:Error?`
 Sample code:
 
 ```ballerina
-check connection->start();
+check connection->'start();
 ```
 
 </details>
@@ -129,10 +129,11 @@ Manages transactions and creates message producers and consumers.
 
 ### Configuration
 
-| Field | Type | Default | Description |
+A `Session` has no public constructor. Create it with `connection->createSession(ackMode)`:
+
+| Parameter | Type | Default | Description |
 |-------|------|---------|-------------|
-| `connection` | `jms:Connection` | Required | The JMS connection to create the session from. |
-| `ackMode` | `AcknowledgementMode` | `AUTO_ACKNOWLEDGE` | Session acknowledgement mode. |
+| `ackMode` | `AcknowledgementMode` | `AUTO_ACKNOWLEDGE` | Session acknowledgement mode: `AUTO_ACKNOWLEDGE`, `CLIENT_ACKNOWLEDGE`, `SESSION_TRANSACTED`, or `DUPS_OK_ACKNOWLEDGE`. |
 
 ### Initializing the client
 
@@ -219,7 +220,7 @@ Returns: `jms:Error?`
 Sample code:
 
 ```ballerina
-check session->commit();
+check session->'commit();
 ```
 
 </details>
@@ -234,7 +235,7 @@ Returns: `jms:Error?`
 Sample code:
 
 ```ballerina
-check session->rollback();
+check session->'rollback();
 ```
 
 </details>
@@ -285,9 +286,10 @@ Sends messages to JMS queues and topics.
 
 ### Configuration
 
-| Field | Type | Default | Description |
+A `MessageProducer` has no public constructor. Create it with `session.createProducer(destination)`:
+
+| Parameter | Type | Default | Description |
 |-------|------|---------|-------------|
-| `session` | `jms:Session` | Required | The JMS session used to create this producer. |
 | `destination` | `Destination?` | `()` | Default destination. If set, `send` uses this destination. |
 
 ### Initializing the client
@@ -312,16 +314,17 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `message` | `Message` | Yes | The JMS message to send. Content can be `string`, `map`, or `byte[]`. |
+| `message` | `Message` | Yes | The JMS message to send: a `jms:TextMessage` (`string` content), `jms:MapMessage` (`map<anydata>` content), or `jms:BytesMessage` (`byte[]` content). |
 
 Returns: `jms:Error?`
 
 Sample code:
 
 ```ballerina
-check producer->send({
+jms:TextMessage message = {
     content: "Hello from Ballerina!"
-});
+};
+check producer->send(message);
 ```
 
 </details>
@@ -343,10 +346,10 @@ Returns: `jms:Error?`
 Sample code:
 
 ```ballerina
-check producer->sendTo(
-    {'type: jms:QUEUE, name: "orders"},
-    {content: orderPayload.toJsonString().toBytes()}
-);
+jms:BytesMessage message = {
+    content: orderPayload.toJsonString().toBytes()
+};
+check producer->sendTo({'type: jms:QUEUE, name: "orders"}, message);
 ```
 
 </details>

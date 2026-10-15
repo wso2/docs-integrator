@@ -4,14 +4,14 @@ title: Overview
 
 # Overview
 
-Slack is a cloud-based team communication platform that enables real-time messaging, file sharing, and collaboration across channels and workspaces. The Ballerina `ballerinax/slack` connector (v5.0.0) provides programmatic access to the Slack Web API, allowing you to send messages, manage conversations, upload files, search content, and administer workspaces from your Ballerina integration flows.
+Slack is a cloud-based team communication platform that enables real-time messaging, file sharing, and collaboration across channels and workspaces. The Ballerina `ballerinax/slack` connector (v5.0.1) provides programmatic access to the Slack Web API, allowing you to send messages, manage conversations, manage files, search content, and administer workspaces from your Ballerina integration flows.
 
 ## Key features
 
 - Post, update, delete, and schedule messages to Slack channels and users using the Chat API
 - Manage conversations: create, archive, rename, join, and retrieve message history and thread replies
-- Search messages and files across workspaces with keyword and channel filters
-- Upload, list, retrieve, and delete files shared within Slack channels
+- Search messages across workspaces with keyword and channel filters
+- List, retrieve, and delete files shared within Slack channels
 - Add, remove, and list emoji reactions on messages
 - Retrieve and manage user profiles, presence status, and per-user conversation lists
 - Pin and unpin messages and files in channels for quick team reference
@@ -29,7 +29,7 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 ## Documentation
 
-* **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Slack App and obtaining the Bot User OAuth token required to use the Slack connector.
+* **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Slack App and obtaining the OAuth token required to use the Slack connector.
 
 * **[Action Reference](actions.md)**: Full reference for all clients: operations, parameters, return types, and sample code.
 

@@ -89,7 +89,7 @@ Add the `ballerinax/nats` package to your project's `Ballerina.toml`:
 [[dependency]]
 org = "ballerinax"
 name = "nats"
-version = "3.3.0"
+version = "3.3.2"
 ```
 
 Or use the Ballerina CLI:

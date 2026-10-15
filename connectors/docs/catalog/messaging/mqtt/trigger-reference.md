@@ -33,7 +33,7 @@ The listener supports the following connection strategies:
 | `serverUri` | <code>string</code> | Required | The MQTT broker URL (e.g., `tcp://localhost:1883`). Passed as a constructor parameter. |
 | `clientId` | <code>string</code> | Required | A unique client identifier. Passed as a constructor parameter. |
 | `subscriptions` | <code>string&#124;string[]&#124;Subscription&#124;Subscription[]</code> | Required | The topic(s) to subscribe to. Passed as a constructor parameter. |
-| `connectionConfig` | <code>ConnectionConfiguration</code> | `()` | Connection settings including authentication, TLS, reconnection, and keep-alive. |
+| `connectionConfig` | <code>ConnectionConfiguration?</code> | `()` | Connection settings including authentication, TLS, reconnection, and keep-alive. |
 | `manualAcks` | <code>boolean</code> | `false` | If `true`, messages must be explicitly acknowledged using `caller->complete()`. If `false`, messages are auto-acknowledged. |
 
 ### Initializing the listener
@@ -85,8 +85,8 @@ An `mqtt:Service` is a Ballerina service attached to an `mqtt:Listener`. It impl
 | Function | Signature | Description |
 |----------|-----------|-------------|
 | `onMessage` | <code>remote function onMessage(mqtt:Message message, mqtt:Caller caller) returns error?</code> | Invoked when a message is received on a subscribed topic. The `caller` parameter is optional and used for manual acknowledgement or response. |
-| `onError` | <code>remote function onError(mqtt:Error err) returns error?</code> | Invoked when an error occurs during message processing. This callback is optional. |
-| `onComplete` | <code>remote function onComplete(mqtt:DeliveryToken token) returns error?</code> | Invoked when a message delivery is completed (broker acknowledgement received). This callback is optional. |
+| `onError` | <code>remote function onError(mqtt:Error err) returns error?</code> | Invoked when the listener connection is lost or the underlying MQTT client reports an error. The parameter can also be typed as `error`. Errors returned from `onMessage` are logged, not passed to `onError`. This callback is optional. |
+| `onComplete` | <code>remote function onComplete(mqtt:DeliveryToken token) returns error?</code> | Invoked when a message published over the listener connection (for example, a response sent with `caller->respond()`) completes delivery. This callback is optional. |
 
 The `onMessage` callback is required. The `onError` and `onComplete` callbacks are optional: implement only the ones you need.
 
@@ -131,6 +131,15 @@ service on tempListener {
 
 When `manualAcks` is set to `true` in the listener configuration, you must call `caller->complete()` in your `onMessage` callback to acknowledge each message. When `manualAcks` is `false` (default), messages are acknowledged automatically.
 
+### Caller
+
+The `mqtt:Caller` is passed to `onMessage` when the method declares it as the second parameter.
+
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `complete` | <code>remote function complete() returns mqtt:Error?</code> | Acknowledges the received message. Use it when `manualAcks` is `true`. |
+| `respond` | <code>remote function respond(mqtt:Message response) returns mqtt:Error?</code> | Publishes `response` to the response topic of the received message, copying its correlation data. Returns an `mqtt:Error` if the received message has no response topic. |
+
 ---
 
 ## Supporting types
@@ -146,6 +155,13 @@ When `manualAcks` is set to `true` in the listener configuration, you must call 
 | `messageId` | <code>int?</code> | The message ID assigned by the broker. |
 | `topic` | <code>string?</code> | The topic on which the message was received. |
 | `properties` | <code>MessageProperties?</code> | MQTT v5 message properties (response topic, correlation data). |
+
+### `MessageProperties`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `responseTopic` | <code>string?</code> | The topic to send the response to in a request-response scenario. |
+| `correlationData` | <code>byte[]?</code> | Correlation data that identifies the request a response belongs to. |
 
 ### `DeliveryToken`
 

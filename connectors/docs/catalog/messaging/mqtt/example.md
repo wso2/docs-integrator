@@ -50,7 +50,7 @@ Select **Add Connection** (the **+** button in the **Connections** section) on t
 #### Step 2: Select the MQTT connector
 
 1. In the **Search connectors...** box, enter `mqtt`.
-2. Select **MQTT Client** (the `ballerinax/mqtt` connector: choose **Client**, not **Caller**) to open the connection form.
+2. Select **MQTT Client** (the `ballerina/mqtt` connector: choose **Client**, not **Caller**) to open the connection form.
 
 ### Configuring the MQTT connection
 
@@ -264,9 +264,9 @@ To fire a test event, use one of the following approaches:
 
 Once a message is published, the console prints a JSON representation of the `mqtt:Message` record, for example:
 
-`{"topic":"sensors/temperature","payload":"eyJ0ZW1wIjoyMi41fQ==","qos":"AT_MOST_ONCE","retain":false}`
+`{"payload":[123,34,116,101,109,112,34,58,50,50,46,53,125],"qos":0,"retained":false,"duplicate":false,"messageId":0,"topic":"sensors/temperature","properties":{}}`
 
-> **Tip:** The `payload` field is Base64-encoded. Decode it to read the original message content.
+> **Tip:** The `payload` field is a byte array. Use `string:fromBytes(message.payload)` to read the original message content.
 
 ### Try it yourself
 

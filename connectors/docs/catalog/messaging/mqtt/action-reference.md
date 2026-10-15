@@ -20,17 +20,22 @@ Publish messages to MQTT topics, subscribe to topics, and receive messages.
 |-------|------|---------|-------------|
 | `serverUri` | <code>string</code> | Required | The MQTT broker URL (e.g., `tcp://localhost:1883` or `ssl://broker.example.com:8883`). Passed as a constructor parameter. |
 | `clientId` | <code>string</code> | Required | A unique client identifier for the MQTT session. Passed as a constructor parameter. |
-| `connectionConfig` | <code>ConnectionConfiguration</code> | `()` | Connection settings including authentication, TLS, reconnection, and keep-alive. |
-| `connectionConfig.username` | <code>string</code> | `()` | Username for broker authentication. |
-| `connectionConfig.password` | <code>string</code> | `()` | Password for broker authentication. |
-| `connectionConfig.secureSocket` | <code>SecureSocket</code> | `()` | SSL/TLS configuration for secure connections. |
-| `connectionConfig.maxReconnectDelay` | <code>int</code> | `()` | Maximum delay (in milliseconds) between reconnection attempts. |
-| `connectionConfig.keepAliveInterval` | <code>int</code> | `()` | Keep-alive interval in seconds. |
-| `connectionConfig.connectionTimeout` | <code>int</code> | `()` | Connection timeout in seconds. |
-| `connectionConfig.cleanStart` | <code>boolean</code> | `()` | Whether to start a clean session (discard previous session state). |
-| `connectionConfig.serverUris` | <code>string[]</code> | `()` | Fallback server URIs for high availability. |
-| `connectionConfig.automaticReconnect` | <code>boolean</code> | `()` | Whether to automatically reconnect on connection loss. |
-| `willDetails` | <code>WillDetails</code> | `()` | Last Will and Testament message configuration, sent by the broker if the client disconnects unexpectedly. |
+| `connectionConfig` | <code>ConnectionConfiguration?</code> | `()` | Connection settings including authentication, TLS, reconnection, and keep-alive. |
+| `connectionConfig.username` | <code>string?</code> | `()` | Username for broker authentication. |
+| `connectionConfig.password` | <code>string?</code> | `()` | Password for broker authentication. |
+| `connectionConfig.secureSocket` | <code>SecureSocket?</code> | `()` | SSL/TLS configuration for secure connections. |
+| `connectionConfig.secureSocket.cert` | <code>crypto:TrustStore&#124;string?</code> | `()` | Trust store, or path to the certificate file, used to verify the broker. |
+| `connectionConfig.secureSocket.key` | <code>crypto:KeyStore&#124;CertKey?</code> | `()` | Key store, or a `CertKey` record (`certFile`, `keyFile`, optional `keyPassword`), used for client authentication. |
+| `connectionConfig.secureSocket.protocol` | <code>record &#123;&#124;Protocol name; string version;&#124;&#125;?</code> | `()` | Protocol (`mqtt:SSL` or `mqtt:TLS`) and its version. |
+| `connectionConfig.maxReconnectDelay` | <code>int?</code> | `()` | Maximum delay (in milliseconds) between reconnection attempts. |
+| `connectionConfig.keepAliveInterval` | <code>int?</code> | `()` | Keep-alive interval in seconds. |
+| `connectionConfig.connectionTimeout` | <code>int?</code> | `()` | Connection timeout in seconds. |
+| `connectionConfig.cleanStart` | <code>boolean?</code> | `()` | Whether to start a clean session (discard previous session state). |
+| `connectionConfig.serverUris` | <code>string[]?</code> | `()` | Fallback server URIs for high availability. |
+| `connectionConfig.automaticReconnect` | <code>boolean?</code> | `()` | Whether to automatically reconnect on connection loss. |
+| `willDetails` | <code>WillDetails?</code> | `()` | Last Will and Testament message configuration, sent by the broker if the client disconnects unexpectedly. |
+| `willDetails.willMessage` | <code>mqtt:Message</code> | Required | The last will message to publish. |
+| `willDetails.destinationTopic` | <code>string</code> | Required | The topic to publish the last will message to. |
 
 ### Initializing the client
 
@@ -57,7 +62,7 @@ Publishes a message to the specified MQTT topic.
 | `topic` | <code>string</code> | Yes | The MQTT topic to publish to. |
 | `message` | <code>mqtt:Message</code> | Yes | The message to publish, including payload, QoS level, and retention flag. |
 
-**Returns:** `mqtt:DeliveryToken|error`
+**Returns:** `mqtt:DeliveryToken|mqtt:Error`
 
 **Sample code:**
 
@@ -90,7 +95,7 @@ Subscribes to one or more MQTT topics. Accepts a topic string, string array, Sub
 |------|------|----------|-------------|
 | `subscriptions` | <code>string&#124;string[]&#124;Subscription&#124;Subscription[]</code> | Yes | The topic(s) to subscribe to, optionally with QoS settings. |
 
-**Returns:** `error?`
+**Returns:** `mqtt:Error?`
 
 **Sample code:**
 
@@ -108,7 +113,7 @@ check mqttClient->subscribe([
 
 Returns a stream of messages from subscribed topics. Use this for pull-based message consumption.
 
-**Returns:** `stream<mqtt:Message, error?>|error`
+**Returns:** `stream<mqtt:Message, error?>|mqtt:Error`
 
 **Sample code:**
 
@@ -136,7 +141,7 @@ check from mqtt:Message msg in messages
 
 Checks whether the client is currently connected to the MQTT broker.
 
-**Returns:** `boolean|error`
+**Returns:** `boolean|mqtt:Error`
 
 **Sample code:**
 
@@ -157,7 +162,7 @@ true
 
 Disconnects the client from the MQTT broker gracefully.
 
-**Returns:** `error?`
+**Returns:** `mqtt:Error?`
 
 **Sample code:**
 
@@ -172,7 +177,7 @@ check mqttClient->disconnect();
 
 Reconnects the client to the MQTT broker after a disconnect.
 
-**Returns:** `error?`
+**Returns:** `mqtt:Error?`
 
 **Sample code:**
 
@@ -187,7 +192,7 @@ check mqttClient->reconnect();
 
 Closes the client connection and releases all resources.
 
-**Returns:** `error?`
+**Returns:** `mqtt:Error?`
 
 **Sample code:**
 

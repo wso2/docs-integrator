@@ -70,7 +70,7 @@ Submits a message to the SMSC (`submit_sm`) and waits for the response. Requires
 |------|------|----------|-------------|
 | `sms` | <code>TextSms&#124;BinarySms</code> | Yes | The message to send: a `TextSms` (the client encodes it) or a `BinarySms` (pre-encoded octets) |
 
-**Returns:** `SubmitResult|Error`
+**Returns:** `SubmitResult|smpp:Error`
 
 **Sample code:**
 
@@ -99,7 +99,7 @@ Submits one message to several destinations in a single `submit_multi` request. 
 | `sms` | <code>TextSms&#124;BinarySms</code> | Yes | The message to send; `sms.destinationAddress` is not used |
 | `destinationAddresses` | <code>string[]</code> | Yes | The recipient addresses for this batch; must contain at least one |
 
-**Returns:** `MultiSubmitResult|Error`
+**Returns:** `MultiSubmitResult|smpp:Error`
 
 **Sample code:**
 
@@ -123,7 +123,7 @@ Submits a message via `data_sm` instead of `submit_sm`, the alternative MT trans
 |------|------|----------|-------------|
 | `data` | <code>TextSms&#124;BinarySms</code> | Yes | The message to send |
 
-**Returns:** `SubmitResult|Error`
+**Returns:** `SubmitResult|smpp:Error`
 
 **Sample code:**
 
@@ -151,7 +151,7 @@ Queries the SMSC's current view of a previously submitted message's delivery sta
 | `messageId` | <code>string</code> | Yes | The SMSC's `message_id` for the message, as returned by `submit`/`submitMulti`/`submitData` |
 | `sourceAddress` | <code>string</code> | Yes | The message's original source address |
 
-**Returns:** `QueryResult|Error`
+**Returns:** `QueryResult|smpp:Error`
 
 **Sample code:**
 
@@ -174,7 +174,7 @@ Cancels a previously submitted, not-yet-delivered message (`cancel_sm`). Require
 | `sourceAddress` | <code>string</code> | Yes | The message's original source address |
 | `destinationAddress` | <code>string</code> | Yes | The message's original destination address |
 
-**Returns:** `Error?`
+**Returns:** `smpp:Error?`
 
 **Sample code:**
 
@@ -197,7 +197,7 @@ Replaces the text/attributes of a previously submitted, not-yet-delivered messag
 | `sourceAddress` | <code>string</code> | Yes | The message's original source address |
 | `sms` | <code>TextSms&#124;BinarySms</code> | Yes | The replacement content |
 
-**Returns:** `Error?`
+**Returns:** `smpp:Error?`
 
 **Sample code:**
 
@@ -219,7 +219,7 @@ Unbinds and releases the underlying SMSC session. Idempotent: closing an already
 
 No parameters
 
-**Returns:** `Error?`
+**Returns:** `smpp:Error?`
 
 **Sample code:**
 

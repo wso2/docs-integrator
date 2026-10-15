@@ -144,14 +144,12 @@ Provides operations to put messages onto and get messages from an IBM MQ queue.
 
 ### Configuration
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `name` | `string` | Required | Name of the IBM MQ queue manager. |
-| `host` | `string` | Required | Hostname of the IBM MQ server. |
-| `port` | `int` | `1414` | Port number of the IBM MQ server. |
-| `channel` | `string` | Required | Server connection channel name. |
-| `userID` | `string` | `()` | User ID for authentication. |
-| `password` | `string` | `()` | Password for authentication. |
+An `ibmmq:Queue` is not created directly. Obtain it from an initialized `ibmmq:QueueManager` by calling `accessQueue`:
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `queueName` | `string` | Yes | Name of the queue to access (e.g., `"DEV.QUEUE.1"`). |
+| `options` | `int` | Yes | Queue open options, combined with `\|` (e.g., `ibmmq:MQOO_OUTPUT` for producing, `ibmmq:MQOO_INPUT_AS_Q_DEF` for consuming). |
 
 ### Initializing the client
 
@@ -266,14 +264,14 @@ Provides operations to publish messages to and receive messages from an IBM MQ t
 
 ### Configuration
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `name` | `string` | Required | Name of the IBM MQ queue manager. |
-| `host` | `string` | Required | Hostname of the IBM MQ server. |
-| `port` | `int` | `1414` | Port number of the IBM MQ server. |
-| `channel` | `string` | Required | Server connection channel name. |
-| `userID` | `string` | `()` | User ID for authentication. |
-| `password` | `string` | `()` | Password for authentication. |
+An `ibmmq:Topic` is not created directly. Obtain it from an initialized `ibmmq:QueueManager` by calling `accessTopic`:
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `topicName` | `string` | Yes | Name of the topic object (e.g., `"dev"`). |
+| `topicString` | `string` | Yes | Topic string to publish or subscribe against (e.g., `"DEV.BASE.TOPIC"`). |
+| `openTopicOption` | `OPEN_TOPIC_OPTION` | Yes | Whether to open the topic for subscription (`ibmmq:OPEN_AS_SUBSCRIPTION`) or publication (`ibmmq:OPEN_AS_PUBLICATION`). |
+| `options` | `int` | Yes | Topic open options, combined with `\|` (e.g., `ibmmq:MQOO_OUTPUT` for publishing). |
 
 ### Initializing the client
 

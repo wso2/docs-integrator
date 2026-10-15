@@ -21,9 +21,9 @@ Connects to a NATS server to publish messages and perform request-reply exchange
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `url` | `string|string[]` | Required | NATS server URL (e.g., `"nats://localhost:4222"`) or a list of URLs for clustering. Use the constant `nats:DEFAULT_URL` for the default local server. |
+| `url` | `string\|string[]` | Required | NATS server URL (e.g., `"nats://localhost:4222"`) or a list of URLs for clustering. Use the constant `nats:DEFAULT_URL` for the default local server. |
 | `connectionName` | `string` | `"ballerina-nats"` | A human-readable name for this connection, useful for server-side monitoring. |
-| `auth` | `Credentials|Tokens|()` | `()` | Authentication configuration. Use `nats:Credentials` for username/password or `nats:Tokens` for token-based auth. |
+| `auth` | `Credentials\|Tokens\|()` | `()` | Authentication configuration. Use `nats:Credentials` for username/password or `nats:Tokens` for token-based auth. |
 | `retryConfig` | `RetryConfig?` | `()` | Reconnection retry settings including `maxReconnect`, `reconnectWait`, and `connectionTimeout`. |
 | `ping` | `Ping?` | `()` | Ping interval configuration with `pingInterval` (seconds) and `maxPingsOut` fields. |
 | `secureSocket` | `SecureSocket?` | `()` | TLS/SSL configuration with CA certificate, client certificate, and key paths. |
@@ -81,7 +81,7 @@ public function main() returns error? {
     });
 
     io:println("Message published successfully.");
-    check natsClient->close();
+    check natsClient.close();
 }
 ```
 
@@ -120,14 +120,14 @@ public function main() returns error? {
 
     string replyContent = check string:fromBytes(<byte[]>reply.content);
     io:println("Reply received: ", replyContent);
-    check natsClient->close();
+    check natsClient.close();
 }
 ```
 
 Sample response:
 
 ```ballerina
-{"content": [112, 111, 110, 103], "subject": "_INBOX.abc123", "replyTo": ()}
+{"content": [112, 111, 110, 103], "subject": "_INBOX.abc123"}
 ```
 
 </details>
@@ -149,7 +149,7 @@ Returns: `Error?`
 Sample code:
 
 ```ballerina
-check natsClient->close();
+check natsClient.close();
 ```
 
 </details>
@@ -165,14 +165,8 @@ Manages JetStream streams and publishes or pull-consumes persistent messages.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `natsClient` | `nats:Client` | Required | An already-initialized `nats:Client` instance. The JetStream client reuses the underlying NATS connection. |
-| `name` | `string?` | `()` | Stream name. Must be unique within the JetStream account. |
-| `subjects` | `string|string[]?` | `()` | Subject(s) the stream captures. Supports wildcards (e.g., `"orders.*"`). |
-| `storageType` | `StorageType?` | `FILE` | Storage backend: `FILE` for disk persistence or `MEMORY` for in-memory storage. |
-| `retentionPolicy` | `RetentionPolicy?` | `LIMITS` | Retention policy: `LIMITS` (size/age-based), `INTEREST` (consumer-based), or `WORKQUEUE` (consume-once). |
-| `maxMsgs` | `float?` | `()` | Maximum number of messages retained in the stream. |
-| `maxBytes` | `float?` | `()` | Maximum total bytes retained in the stream. |
-| `maxAge` | `decimal?` | `()` | Maximum age of messages in nanoseconds before they are removed. |
-| `replicas` | `int?` | `1` | Number of replicas for the stream in a clustered deployment. |
+
+Streams are configured with a `StreamConfiguration` record passed to `addStream` and `updateStream` (see [Stream management](#stream-management)).
 
 ### Initializing the client
 
@@ -211,6 +205,25 @@ Parameters:
 |------|------|----------|-------------|
 | `streamConfig` | `StreamConfiguration` | Yes | Configuration for the new stream including name, subjects, storage type, and retention policy. |
 
+`StreamConfiguration` fields (all optional; when a field is omitted, the NATS server default applies):
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `name` | `string` | `()` | Stream name. Must be unique within the JetStream account. |
+| `description` | `string` | `()` | A short description of the purpose of the stream. |
+| `subjects` | `string\|string[]` | `()` | Subject(s) the stream captures. Supports wildcards (e.g., `"orders.*"`). Defaults to the stream name. |
+| `retentionPolicy` | `RetentionPolicy` | `()` (server default: `LIMITS`) | Retention policy: `LIMITS` (size/age-based), `INTEREST` (consumer-based), or `WORKQUEUE` (consume-once). |
+| `maxConsumers` | `float` | `()` | Maximum number of consumers that can be defined for the stream. Use `-1` for unlimited. |
+| `maxMsgs` | `float` | `()` | Maximum number of messages retained in the stream before the discard policy takes action. |
+| `maxMsgsPerSubject` | `float` | `()` | Maximum number of messages retained per subject. |
+| `maxBytes` | `float` | `()` | Maximum total bytes retained in the stream before the discard policy takes action. |
+| `maxAge` | `decimal` | `()` | Maximum age of any message in the stream, in seconds. |
+| `maxMsgSize` | `float` | `()` | The largest message (in bytes) the stream accepts. |
+| `storageType` | `StorageType` | `()` (server default: `FILE`) | Storage backend: `FILE` for disk persistence or `MEMORY` for in-memory storage. |
+| `replicas` | `int` | `()` (server default: `1`) | Number of replicas for the stream in a clustered deployment. |
+| `noAck` | `boolean` | `()` | If `true`, acknowledgements for published messages are not sent back to the client. |
+| `discardPolicy` | `DiscardPolicy` | `()` (server default: `OLD`) | Action when `maxMsgs` or `maxBytes` is reached: `NEW` refuses new messages; `OLD` deletes old messages to make space. |
+
 Returns: `Error?`
 
 Sample code:
@@ -221,7 +234,7 @@ check jsClient->addStream({
     subjects: ["events.>"],
     storageType: nats:FILE,
     maxMsgs: 1000000.0,
-    maxAge: 86400000000000.0  // 24 hours in nanoseconds
+    maxAge: 86400  // 24 hours in seconds
 });
 ```
 
@@ -236,7 +249,7 @@ Parameters:
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `streamConfig` | `StreamConfiguration` | Yes | Updated stream configuration. The `name` field must match an existing stream. |
+| `streamConfig` | `StreamConfiguration` | Yes | Updated stream configuration (see the `StreamConfiguration` fields under `addStream`). The `name` field must match an existing stream. |
 
 Returns: `Error?`
 

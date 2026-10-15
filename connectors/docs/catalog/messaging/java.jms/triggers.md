@@ -4,13 +4,13 @@ title: Triggers
 
 # Triggers
 
-The `ballerinax/java.jms` connector supports event-driven message consumption through a `jms:Listener`. When messages arrive on a configured queue or topic, the listener dispatches them to your service's `onMessage` callback automatically; no polling loop required.
+The `ballerinax/java.jms` connector supports event-driven message consumption through a `jms:Listener`. When messages arrive on the queue or topic configured for the listener, the listener dispatches them to your service's `onMessage` callback automatically; no polling loop required.
 
 Three components work together:
 
 | Component | Role |
 |-----------|------|
-| `jms:Listener` | Connects to the JMS broker and listens for incoming messages on queues or topics. |
+| `jms:Listener` | Connects to the JMS broker and listens for incoming messages on a single queue or topic. |
 | `jms:Service` | Defines the `onMessage` callback invoked for each received message. |
 | `jms:Caller` | Provides message acknowledgement and transaction control within service callbacks. |
 | `jms:Message` | The message payload passed to the `onMessage` callback. |
@@ -25,11 +25,13 @@ The `java.jms:Listener` establishes the connection and manages event subscriptio
 
 ### Configuration
 
-The listener supports the following connection strategies:
+The listener is initialized with `MessageListenerConfigurations`, passed as named arguments to `new`:
 
-| Config Type | Description |
-|-------------|-------------|
-| `ConnectionConfiguration` | Configures the JMS broker connection for the listener. |
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `connectionConfig` | `ConnectionConfiguration` | Required | Configures the JMS broker connection for the listener. |
+| `acknowledgementMode` | `AcknowledgementMode` | `AUTO_ACKNOWLEDGE` | Session acknowledgement mode: `AUTO_ACKNOWLEDGE`, `CLIENT_ACKNOWLEDGE`, `SESSION_TRANSACTED`, or `DUPS_OK_ACKNOWLEDGE`. |
+| `consumerOptions` | `ConsumerOptions` | Required | The queue or topic to consume from, plus the underlying consumer options. |
 
 `ConnectionConfiguration` fields:
 
@@ -42,6 +44,16 @@ The listener supports the following connection strategies:
 | `password` | `string` | `()` | Password for broker authentication. |
 | `properties` | `map<string>` | `{}` | Additional JNDI properties. |
 
+`ConsumerOptions` fields:
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `destination` | `Destination` | Required | The queue or topic to consume from. |
+| `type` | `ConsumerType` | `DEFAULT` | Consumer type: `DEFAULT`, `DURABLE`, `SHARED`, or `SHARED_DURABLE`. Non-default types require a `TOPIC` destination. |
+| `messageSelector` | `string` | `""` | JMS message selector expression to filter messages. |
+| `noLocal` | `boolean` | `false` | If true, excludes messages published by this connection. |
+| `subscriberName` | `string` | `()` | Subscription name, required for `DURABLE`, `SHARED`, and `SHARED_DURABLE` types. |
+
 ### Initializing the listener
 
 **Basic listener with ActiveMQ:**
@@ -51,10 +63,18 @@ import ballerinax/java.jms;
 
 configurable string providerUrl = ?;
 
-listener jms:Listener jmsListener = check new ({
-    initialContextFactory: "org.apache.activemq.jndi.ActiveMQInitialContextFactory",
-    providerUrl: providerUrl
-});
+listener jms:Listener jmsListener = check new (
+    connectionConfig = {
+        initialContextFactory: "org.apache.activemq.jndi.ActiveMQInitialContextFactory",
+        providerUrl: providerUrl
+    },
+    consumerOptions = {
+        destination: {
+            'type: jms:QUEUE,
+            name: "orders"
+        }
+    }
+);
 ```
 
 **Listener with authentication:**
@@ -66,19 +86,27 @@ configurable string providerUrl = ?;
 configurable string username = ?;
 configurable string password = ?;
 
-listener jms:Listener jmsListener = check new ({
-    initialContextFactory: "org.apache.activemq.jndi.ActiveMQInitialContextFactory",
-    providerUrl: providerUrl,
-    username: username,
-    password: password
-});
+listener jms:Listener jmsListener = check new (
+    connectionConfig = {
+        initialContextFactory: "org.apache.activemq.jndi.ActiveMQInitialContextFactory",
+        providerUrl: providerUrl,
+        username: username,
+        password: password
+    },
+    consumerOptions = {
+        destination: {
+            'type: jms:QUEUE,
+            name: "orders"
+        }
+    }
+);
 ```
 
 ---
 
 ## Service
 
-A `jms:Service` is a Ballerina service attached to a `jms:Listener`. It is annotated with `@jms:ServiceConfig` to specify the queue or topic to consume from, along with session acknowledgement mode and optional message selectors.
+A `jms:Service` is a Ballerina service attached to a `jms:Listener`. The queue or topic to consume from, the session acknowledgement mode, and optional message selectors are configured on the listener (`consumerOptions` and `acknowledgementMode`), so each listener consumes from a single destination.
 
 ### Callback signatures
 
@@ -97,34 +125,36 @@ import ballerinax/java.jms;
 
 configurable string providerUrl = ?;
 
-listener jms:Listener jmsListener = check new ({
-    initialContextFactory: "org.apache.activemq.jndi.ActiveMQInitialContextFactory",
-    providerUrl: providerUrl
-});
+listener jms:Listener jmsListener = check new (
+    connectionConfig = {
+        initialContextFactory: "org.apache.activemq.jndi.ActiveMQInitialContextFactory",
+        providerUrl: providerUrl
+    },
+    acknowledgementMode = jms:CLIENT_ACKNOWLEDGE,
+    consumerOptions = {
+        destination: {
+            'type: jms:QUEUE,
+            name: "orders"
+        }
+    }
+);
 
-@jms:ServiceConfig {
-    queueName: "orders"
-}
 service "order-processor" on jmsListener {
     remote function onMessage(jms:Message message, jms:Caller caller) returns error? {
-        match message.content {
-            var content if content is byte[] => {
-                string textContent = check string:fromBytes(content);
-                log:printInfo("Received order", content = textContent);
-            }
-            var content if content is string => {
-                log:printInfo("Received text message", content = content);
-            }
-            var content if content is map<jms:Value> => {
-                log:printInfo("Received map message", content = content.toString());
-            }
+        if message is jms:BytesMessage {
+            string textContent = check string:fromBytes(message.content);
+            log:printInfo("Received order", content = textContent);
+        } else if message is jms:TextMessage {
+            log:printInfo("Received text message", content = message.content);
+        } else if message is jms:MapMessage {
+            log:printInfo("Received map message", content = message.content.toString());
         }
         check caller->acknowledge(message);
     }
 }
 ```
 
-Use `@jms:ServiceConfig` with `queueName` for queue consumption or `topicName` for topic subscription. For durable topic subscriptions, set `consumerType: jms:DURABLE` and provide a `subscriberName`.
+Set `consumerOptions.destination` to `{'type: jms:QUEUE, name: ...}` for queue consumption or `{'type: jms:TOPIC, name: ...}` for topic subscription. For durable topic subscriptions, also set `'type: jms:DURABLE` in `consumerOptions` and provide a `subscriberName`.
 
 ---
 
@@ -145,8 +175,15 @@ Use `@jms:ServiceConfig` with `queueName` for queue consumption or `topicName` f
 | `expiration` | `int?` | Expiration time in milliseconds (0 = no expiration). |
 | `deliveredTime` | `int?` | The earliest time the message can be delivered. |
 | `priority` | `int?` | Message priority (0-9, default 4). |
-| `properties` | `map?` | Application-defined message properties. |
-| `content` | `string\|map\|byte[]` | The message body: text, map, or binary content. |
+| `properties` | `map<anydata>?` | Application-defined message properties. |
+
+`Message` has no body field. Received messages are one of the following subtypes, each of which includes all `Message` fields plus a `content` field:
+
+| Type | `content` type | Description |
+|------|----------------|-------------|
+| `TextMessage` | `string` | Text message body. |
+| `MapMessage` | `map<anydata>` | Map message body. |
+| `BytesMessage` | `byte[]` | Binary message body. |
 
 ### `Destination`
 
@@ -154,22 +191,3 @@ Use `@jms:ServiceConfig` with `queueName` for queue consumption or `topicName` f
 |-------|------|-------------|
 | `type` | `DestinationType` | Destination type: `QUEUE`, `TEMPORARY_QUEUE`, `TOPIC`, or `TEMPORARY_TOPIC`. |
 | `name` | `string?` | The destination name (not required for temporary destinations). |
-
-### `QueueConfig`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `sessionAckMode` | `AcknowledgementMode` | Session acknowledgement mode. Defaults to `AUTO_ACKNOWLEDGE`. |
-| `queueName` | `string` | The name of the queue to consume from. |
-| `messageSelector` | `string?` | Optional JMS message selector expression. |
-
-### `TopicConfig`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `sessionAckMode` | `AcknowledgementMode` | Session acknowledgement mode. Defaults to `AUTO_ACKNOWLEDGE`. |
-| `topicName` | `string` | The name of the topic to subscribe to. |
-| `messageSelector` | `string?` | Optional JMS message selector expression. |
-| `noLocal` | `boolean` | If true, excludes messages published by this connection. Defaults to `false`. |
-| `consumerType` | `ConsumerType` | Consumer type: `DEFAULT`, `DURABLE`, `SHARED`, or `SHARED_DURABLE`. |
-| `subscriberName` | `string?` | Subscription name, required for `DURABLE` and `SHARED_DURABLE` types. |

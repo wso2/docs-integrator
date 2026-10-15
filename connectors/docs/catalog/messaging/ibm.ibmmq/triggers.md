@@ -11,7 +11,7 @@ Three components work together:
 | Component | Role |
 |-----------|------|
 | `ibmmq:Listener` | Connects to an IBM MQ queue manager and polls for messages on configured queues or topic subscriptions. |
-| `ibmmq:Service` | Defines the `onMessage` callback invoked when a message is received. |
+| `ibmmq:Service` | Defines the `onMessage` callback invoked when a message is received, and an optional `onError` callback for runtime errors. |
 | `ibmmq:Caller` | Provides transaction control (commit/rollback) and message acknowledgement within the service callback. |
 | `ibmmq:Message` | The message payload and metadata passed to the `onMessage` callback. |
 
@@ -79,6 +79,7 @@ An `ibmmq:Service` is a Ballerina service attached to an `ibmmq:Listener`. It is
 | Function | Signature | Description |
 |----------|-----------|-------------|
 | `onMessage` | `remote function onMessage(ibmmq:Message message) returns error?` | Invoked when a message is received from the configured queue or topic. Optionally accepts an `ibmmq:Caller` parameter for transaction control. |
+| `onError` | `remote function onError(ibmmq:Error err) returns error?` | Optional. Invoked when an error occurs while receiving a message or dispatching it to `onMessage`. Must have exactly one parameter of type `ibmmq:Error`. |
 
 The `@ibmmq:ServiceConfig` annotation accepts either a `QueueConfig` (with `queueName`) or a `TopicConfig` (with `topicName`) to specify the message source.
 
@@ -138,6 +139,11 @@ For transactional processing, set `sessionAckMode: ibmmq:SESSION_TRANSACTED` in 
 | `format` | `string` | Format name associated with the message data (e.g., `"MQSTR"`). |
 | `replyToQueueName` | `string` | Name of the reply-to queue. |
 | `replyToQueueManagerName` | `string` | Name of the reply-to queue manager. |
+| `putApplicationType` | `int` | Type of application that put the message. |
+| `encoding` | `int` | Representation used for numeric values in the message data, as a combination of `ibmmq:MQENC_*` options (default: `MQENC_INTEGER_NORMAL \| MQENC_DECIMAL_NORMAL \| MQENC_FLOAT_IEEE_NORMAL`). |
+| `characterSet` | `MessageCharset` | Coded character set identifier of character data in the message (default: `MQCCSI_Q_MGR`). |
+| `accountingToken` | `byte[]` | Accounting token, part of the message identity, used to charge the work performed as a result of the message. |
+| `userId` | `string` | ID of the user who originated the message. |
 | `headers` | `Header[]` | Message headers (MQRFH2, MQRFH, MQCIH, or MQIIH). |
 
 ### `QueueConfig`
@@ -146,6 +152,7 @@ For transactional processing, set `sessionAckMode: ibmmq:SESSION_TRANSACTED` in 
 |-------|------|-------------|
 | `queueName` | `string` | Name of the queue to consume messages from. |
 | `sessionAckMode` | `AcknowledgementMode` | Session acknowledgement mode (default: `AUTO_ACKNOWLEDGE`). Set to `SESSION_TRANSACTED` for transactional processing. |
+| `messageSelector` | `string` | Optional. Only messages whose properties match this selector expression (e.g., `"priority = 'high'"`) are delivered. If not set, all messages are delivered. |
 | `pollingInterval` | `decimal` | Interval in seconds between polling attempts (default: `10`). |
 | `receiveTimeout` | `decimal` | Maximum time in seconds to wait for a message during each poll (default: `5`). |
 
@@ -158,13 +165,14 @@ For transactional processing, set `sessionAckMode: ibmmq:SESSION_TRANSACTED` in 
 | `consumerType` | `ConsumerType` | Type of consumer: `DEFAULT`, `DURABLE`, `SHARED`, or `SHARED_DURABLE`. |
 | `subscriberName` | `string` | Subscription identifier name (required for durable subscriptions). |
 | `sessionAckMode` | `AcknowledgementMode` | Session acknowledgement mode (default: `AUTO_ACKNOWLEDGE`). |
+| `messageSelector` | `string` | Optional. Only messages whose properties match this selector expression (e.g., `"priority = 'high'"`) are delivered. If not set, all messages are delivered. |
 | `pollingInterval` | `decimal` | Interval in seconds between polling attempts (default: `10`). |
 | `receiveTimeout` | `decimal` | Maximum time in seconds to wait for a message during each poll (default: `5`). |
 
 ### `Caller`
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `acknowledge` | `function` | Acknowledges the received message (remote function). |
-| `'commit` | `function` | Commits the current transaction (remote function). |
-| `'rollback` | `function` | Rolls back the current transaction (remote function). |
+| Remote function | Signature | Description |
+|-----------------|-----------|-------------|
+| `acknowledge` | `acknowledge(ibmmq:Message message) returns ibmmq:Error?` | Acknowledges the given received message. |
+| `'commit` | `'commit() returns ibmmq:Error?` | Commits all messages received in the current transaction. |
+| `'rollback` | `'rollback() returns ibmmq:Error?` | Rolls back all messages received in the current transaction. |

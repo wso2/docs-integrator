@@ -192,10 +192,11 @@ The canvas now shows an **Automation** flow with a **Start** node and an **Error
 
 #### Step 3: Fill in the connection parameters
 
-Select the **JMS MessageConsumer** connector entry to open its connection configuration form. Bind each field to a configurable variable:
+Select the **JMS MessageConsumer** connector entry to open its connection configuration form. A `jms:MessageConsumer` has no public constructor; it is created from a JMS session with `session.createConsumer(destination = ...)`, and the session is created from a `jms:Connection` with `connection->createSession(jms:AUTO_ACKNOWLEDGE)`. Bind each value to a configurable variable:
 
-- **session** : The `jms:Session` object used to create the consumer
-- **acknowledgementMode** : The session acknowledgement mode (e.g., `AUTO_ACKNOWLEDGE`)
+- **initialContextFactory** : The JNDI initial context factory class used by the connection
+- **providerUrl** : The URL of the JMS provider used by the connection
+- **destination** : The queue to consume from, for example `{'type: jms:QUEUE, name: jmsQueueName}`
 
 <ThemedImage
     alt="java.jms connection form fully filled with all parameters before saving"

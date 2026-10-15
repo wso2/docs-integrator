@@ -92,7 +92,10 @@ service on smsListener {
 A `TRANSCEIVER`-bound listener can declare an `smpp:Caller` parameter (matched by type, in either parameter order) and reply on the same session:
 
 ```ballerina
-service on smsListener {
+listener smpp:Listener replyListener = check new ("smsc.example.com", systemId, password,
+        port = 2775, bindType = smpp:TRANSCEIVER);
+
+service on replyListener {
     remote function onDeliverSm(smpp:Sms sms, smpp:Caller caller) returns error? {
         smpp:SubmitResult result = check caller->submit({
             destinationAddress: sms.sourceAddress,
@@ -132,6 +135,6 @@ The records below are what the listener hands to your service callbacks.
 | `submitDate` | <code>string?</code> | Original submission time (`yyMMddHHmm`, no timezone) |
 | `doneDate` | <code>string?</code> | Final-state time (`yyMMddHHmm`, no timezone) |
 | `errorCode` | <code>string?</code> | A network/SMSC-specific error code (`err:`) |
-| `text` | <code>string?</code> | A short echo of the original message (`text:`) |
+| `text` | <code>string?</code> | A short echo of the original message (`Text:`) |
 
 Every `DeliveryReceipt` field is optional: SMSCs vary in which parts of the Appendix B receipt format they include, and a field that was not present in the receipt text is absent rather than defaulted.
