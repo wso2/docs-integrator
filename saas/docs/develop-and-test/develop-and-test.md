@@ -4,7 +4,7 @@ title: Develop and Test
 
 # Build your integration
 
-This section covers the Develop and Test phase of the [integration lifecycle](../platform-overview/index.md#4-wso2-integration-platform-across-the-lifecycle): building integrations in the WSO2 Integrator editor before anything ships. We assume you're already familiar with the editor's surfaces from the [Editor Tour](../editor/editor.md).
+This section covers the Develop and Test phase of the [integration lifecycle](../platform-overview/index.md#from-development-to-production): building integrations in the WSO2 Integrator editor before anything ships. We assume you're already familiar with the editor's surfaces from the [Editor Tour](../editor/editor.md).
 
 Start building your integration by prompting [WSO2 Integrator Copilot](../editor/copilot/copilot.md) to generate a first working version of your integration flow, refine it on the visual designer, and drop into Ballerina pro-code only when you need more precise control; everything stays in sync throughout.
 

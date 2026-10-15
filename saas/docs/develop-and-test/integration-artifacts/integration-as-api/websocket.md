@@ -83,7 +83,7 @@ Not all WebSocket service configuration options are available through the visual
 
 ## Implementing connection handlers
 
-The `onTextMessage`, `onBinaryMessage`, `onClose`, `onError`, and `onIdleTimeout` handlers are implemented inside the connection service class (for example, `ChatService`) rather than in the main WebSocket service. Access the service class through the **Types** panel in the sidebar.
+The `onOpen`, `onTextMessage`, `onBinaryMessage`, `onClose`, `onError`, and `onIdleTimeout` handlers are implemented inside the connection service class (for example, `ChatService`) rather than in the main WebSocket service. Access the service class through the **Types** panel in the sidebar.
 
 **Finding the connection service class**
 
@@ -102,7 +102,7 @@ In the upgrade resource flow designer, click the **Return** step. The right pane
 In the sidebar, expand **Types** and click the connection service class name (for example, `ChatService`). This opens the **Types** view, which shows the type diagram for that class with its methods listed.
 
 <ThemedImage
-    alt="Flow designer for the GET upgrade resource showing the Return step with new ChatService()"
+    alt="Types view showing the ChatService type diagram with its remote methods"
     sources={{
         light: useBaseUrl('/img/develop/integration-artifacts/service/websocket-service/step-type-diagram.png'),
         dark: useBaseUrl('/img/develop/integration-artifacts/service/websocket-service/step-type-diagram.png'),
@@ -117,7 +117,7 @@ Click the Service Class type node in the diagram to open the **Service Class Des
 - **Methods** — the remote functions generated for the connection service.
 
 <ThemedImage
-    alt="Flow designer for the GET upgrade resource showing the Return step with new ChatService()"
+    alt="Service Class Designer for ChatService showing Class Variables and Methods"
     sources={{
         light: useBaseUrl('/img/develop/integration-artifacts/service/websocket-service/step-service-class.png'),
         dark: useBaseUrl('/img/develop/integration-artifacts/service/websocket-service/step-service-class.png'),

@@ -34,13 +34,59 @@ A typical flow with a direct LLM call has a `generate` node sitting between your
 
 To build this you do three things, in order:
 
-1. **Pick a Model Provider connection.** You can use the **Default WSO2 Model Provider**, or see **[Model Providers](../ai-building-blocks/model-providers.md)** for other providers (OpenAI, Anthropic, Azure OpenAI, etc.).
-2. [**Add the Generate Node**](#the-generate-node), the call itself.
+1. [**Add a model provider**](#add-a-model-provider), the connection to the LLM.
+2. [**Add the generate node**](#the-generate-node), the call itself.
 3. [**Write the prompt**](#the-prompt-editor) and pick the expected type.
 
 The rest of this page walks each step in order.
 
-If your project does not have a model provider yet, head over to [Model Providers](../ai-building-blocks/model-providers.md) first. The fastest one is the **Default WSO2 Model Provider**. No API key required, just a one-time WSO2 sign-in.
+---
+
+## Add a model provider
+
+A model provider is the connection that the `generate` node uses to reach the LLM. You create it once and reuse it in every direct LLM call in the integration.
+
+1. In the flow canvas, select the **+** icon where you want to add the LLM call. In the node palette that opens, under **AI** > **Direct LLM**, select **Model Provider**.
+
+    <ThemedImage
+        alt="The node palette on the right side of the flow canvas, with the AI section expanded and Model Provider highlighted under Direct LLM. Knowledge Base, Data Loader, and Augment Query appear under RAG."
+        sources={{
+            light: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/05-add-model-provider-node-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/05-add-model-provider-node-v5.1.png'),
+        }}
+    />
+
+2. The **Model Providers** panel lists the model providers in the project. If the project has none yet, select **Add Model Provider**.
+
+    <ThemedImage
+        alt="The Model Providers panel with an empty list and the Add Model Provider button highlighted."
+        sources={{
+            light: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/06-add-model-provider-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/06-add-model-provider-v5.1.png'),
+        }}
+    />
+
+3. Select a provider from the list. The simplest option is **Default Model Provider (WSO2)**, which needs no API key, only a one-time WSO2 sign-in. To use OpenAI, Anthropic, Azure OpenAI, or another provider, see [Model Providers](../ai-building-blocks/model-providers.md).
+
+    <ThemedImage
+        alt="The Model Providers list showing Default Model Provider (WSO2) highlighted, followed by Anthropic, Azure OpenAI, Deepseek, Google Vertex, Mistral, Ollama, and OpenAI model providers."
+        sources={{
+            light: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/07-select-default-model-provider-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/07-select-default-model-provider-v5.1.png'),
+        }}
+    />
+
+4. Enter a **Model Provider Name** (for example, `aiWso2modelprovider`) and select **Save**. The **Result Type** is set for you based on the provider you selected.
+
+    <ThemedImage
+        alt="The ai : Model Provider form with Model Provider Name set to aiWso2modelprovider, a locked Result Type of ai:Wso2ModelProvider, and a Save button."
+        sources={{
+            light: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/08-model-provider-config-v5.1.png'),
+            dark: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/08-model-provider-config-v5.1.png'),
+        }}
+    />
+
+The new connection appears under **Connections** in the project explorer and in the **Model Providers** list.
 
 ---
 
@@ -50,31 +96,31 @@ The `generate` node is the workhorse of direct LLM calls. It sends a single prom
 
 ### Where to find it
 
-The `generate` action lives **on the model-provider connection itself**, not as a standalone node under AI. Once a provider exists, open the **Model Providers** panel on the right side of the flow editor, expand the connection, and click **Generate**.
+The `generate` action lives **on the model-provider connection itself**, not as a standalone node under AI. In the node panel, under **AI** > **Direct LLM**, select **Model Provider** to open the **Model Providers** panel. Expand the connection, and select **Generate**.
 
 <ThemedImage
-    alt="The right-side Model Providers panel with aiWso2modelprovider expanded, showing two actions: Chat and Generate. The Generate action is highlighted with a description that it sends a chat request to the model and generates a value that belongs to the type corresponding to the type descriptor argument."
+    alt="The Model Providers panel with aiWso2modelprovider expanded, showing two actions: Chat and Generate. The Generate tooltip says that it sends a chat request to the model and generates a value that belongs to the type corresponding to the type descriptor argument."
     sources={{
-        light: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/02-pick-generate-action-v5.1.png'),
-        dark: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/02-pick-generate-action-v5.1.png'),
+        light: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/09-pick-generate-action-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/09-pick-generate-action-v5.1.png'),
     }}
 />
 
 ### The configuration form
 
-When the form opens, three fields are all you need: the **Prompt**, the **Result** variable, and the **Expected Type**. Add the prompt that describes the work, pick the type you want the response in for your use case, and click **Save**.
+When the form opens, three fields are all you need: the **Prompt**, the **Result** variable, and the **Expected Type**. Add the prompt that describes the work, pick the type you want the response in for your use case, and select **Save**.
 
 <ThemedImage
-    alt="The Generate configuration panel for the aiWso2modelprovider generate action, showing the Prompt field with the Insert menu open, listing Inputs, Variables, Configurables, Functions, and Documents. Result and Expected Type fields are below, with a Save button."
+    alt="The aiWso2modelprovider generate form with the Prompt field set to Summarize the payload, where payload is an inserted variable, the Result field set to td, the Expected Type field set to string, and a Save button."
     sources={{
-        light: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/03-generate-action-configure-prompt-v5.1.png'),
-        dark: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/03-generate-action-configure-prompt-v5.1.png'),
+        light: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/10-generate-action-configure-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/10-generate-action-configure-v5.1.png'),
     }}
 />
 
 | Field | Required | What it does |
 |---|---|---|
-| **Prompt** | Yes | The instruction sent to the LLM. Detailed in [The prompt editor](#the-prompt-editor). |
+| **Prompt** | Yes | The instruction sent to the LLM. Use the **Prompt** mode to write a prompt template with inserted values, or the **Expression** mode to pass a Ballerina expression. Detailed in [The prompt editor](#the-prompt-editor). |
 | **Result** | Yes | The variable name where the response is stored. Used by later nodes. |
 | **Expected Type** | Yes | The Ballerina type the response should be parsed into. |
 
@@ -100,7 +146,7 @@ The **Prompt** is the instruction you send to the LLM. Click any **Prompt** fiel
     }}
 />
 
-The **Insert** menu is the bridge between the prompt and the rest of your project. Select it to pull in values from anywhere in scope: request inputs, flow variables, configurables, project functions, or RAG documents. It opens a menu listing **Inputs**, **Variables**, **Configurables**, **Functions**, and **Documents** (shown open in the screenshot above).
+The **Insert** menu is the bridge between the prompt and the rest of your project. Select it to pull in values from anywhere in scope: request inputs, flow variables, configurables, project functions, or RAG documents. It opens a menu listing **Inputs**, **Variables**, **Configurables**, **Functions**, and **Documents**.
 
 | Element | What it does |
 |---|---|

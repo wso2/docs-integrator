@@ -906,7 +906,7 @@ An automation is a `main` function that runs once per invocation. Its periodic i
 
     ![The Configurable Variables view listing the smtpHost, smtpPort, smtpUser, and smtpPassword configurables](/img/guides/tutorials/order-hub/summary-smtp-configs.png)
 
-23. Add an [**Email (SMTP)**](pathname:///integration-platform/docs/connectors/catalog/built-in/email) connection named `emailSmtpclient`, binding **Host**, **Username**, and **Password** to those configurables.
+23. Add an [**Email (SMTP)**](product://connectors/catalog/communication/email/email) connection named `emailSmtpclient`, binding **Host**, **Username**, and **Password** to those configurables.
 
     ![Configuring the Email SMTP connection with host, username, and password bound to the configurables](/img/guides/tutorials/order-hub/summary-email-connection.png)
 
@@ -914,7 +914,7 @@ An automation is a `main` function that runs once per invocation. Its periodic i
     A local mock such as Mailpit has no TLS and no auth, so set the connection's **security** to `START_TLS_NEVER` (and leave the username/password empty). Pointing the default SSL settings at port `1025` would hang.
     :::
 
-24. Add the `emailSmtpclient` [**Send a message**](pathname:///integration-platform/docs/connectors/catalog/built-in/email/action-reference) operation. Set the recipient and subject, and pass the `htmlBody` you built.
+24. Add the `emailSmtpclient` [**Send a message**](product://connectors/catalog/communication/email/action-reference) operation. Set the recipient and subject, and pass the `htmlBody` you built.
 
     ![The Record Configuration for the email message, with the recipient, subject, and htmlBody](/img/guides/tutorials/order-hub/summary-send-email.png)
 

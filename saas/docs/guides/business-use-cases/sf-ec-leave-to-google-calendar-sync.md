@@ -31,10 +31,10 @@ The WSO2 Integrator Scheduler invokes the automation periodically, and each run 
 
 - A working WSO2 Integrator environment. See [Setup](../../get-started/setup/setup.md).
 - Access to an SAP SuccessFactors Employee Central tenant, and credentials for the Time Off API:
-    - Follow the [SAP SuccessFactors Employee Central Time Off connector setup guide](../../connectors/catalog/hrms/sap.successfactors.ectimeoff/setup-guide.md) to register an OAuth 2.0 SAML Bearer client (recommended) or set up a username and password.
+    - Follow the [SAP SuccessFactors Employee Central Time Off connector setup guide](product://connectors/catalog/hrms/sap.successfactors.ectimeoff/setup-guide) to register an OAuth 2.0 SAML Bearer client (recommended) or set up a username and password.
     - It gives you the `apiKey`, `companyId`, `userName`, and `tokenUrl` values used in Step 2, the `private_key.pem` and `certificate.pem` files (supplied to the connector as file paths), and your API server hostname (for example `api12.successfactors.eu`).
 - A Google account with a Google Calendar, and OAuth 2.0 credentials for it:
-    - Follow the [Google Calendar connector setup guide](../../connectors/catalog/productivity-collaboration/googleapis.calendar/setup-guide.md) to create a Google Cloud project, enable the Calendar API, and create an OAuth client.
+    - Follow the [Google Calendar connector setup guide](product://connectors/catalog/productivity-collaboration/googleapis.calendar/setup-guide) to create a Google Cloud project, enable the Calendar API, and create an OAuth client.
     - It gives you the `clientId`, `clientSecret`, and `refreshToken` values used in Step 3. The `refreshUrl` is Google's token endpoint, `https://oauth2.googleapis.com/token`.
 
 ## Build the automation

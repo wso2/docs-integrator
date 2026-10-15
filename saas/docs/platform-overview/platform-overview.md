@@ -6,17 +6,17 @@ title: Platform overview
 
 ## What is WSO2 Integration Platform?
 
-WSO2 Integration Platform is an open-source platform for building, running, and managing integrations that connect applications, APIs, data, events, and AI agents across cloud, on-premises, and hybrid environments.
+WSO2 Integration Platform is a platform for building, running, and managing integrations that connect applications, APIs, data, events, and AI agents across cloud, on-premises, and hybrid environments. It is built on open-source foundations and open standards, and is available both as a fully managed service and as a self-hosted deployment.
 
 It supports the integration lifecycle, from development and testing through deployment, management, and observability. Visual design, source code, AI assistance, and enterprise connectivity work together in a consistent development experience.
 
 The platform separates how you develop an integration from where it runs and how it is operated, giving you flexibility to choose the deployment model that fits your organization.
 
 <ThemedImage
-    alt="WSO2 Integration Platform is an open-source platform for building, running, and managing integrations"
+    alt="WSO2 Integration Platform architecture: development tools, control plane, data plane and observability plane, connecting developers, operators, consumers and enterprise systems"
     sources={{
-        light: useBaseUrl('/img/platform-overview/integration-platform-overview.png'),
-        dark: useBaseUrl('/img/platform-overview/integration-platform-overview.png'),
+        light: useBaseUrl('/img/platform-overview/wso2-integration-platform-architecture-v5.1.png'),
+        dark: useBaseUrl('/img/platform-overview/wso2-integration-platform-architecture-v5.1.png'),
     }}
 />
 
@@ -32,14 +32,15 @@ WSO2 Integration Platform supports several integration styles using shared capab
 | File-driven integrations | Receive, transform, and exchange files across systems.|
 | Workflows | Coordinate multi-step business processes, including long-running processes that wait for events, timers, or human decisions. |
 | AI Agents | Combine integration logic with AI reasoning, and enable agents to access enterprise data and take action through tools. |
+| MCP servers | Expose integrations as Model Context Protocol (MCP) tools, so AI assistants and agents can discover and call your enterprise capabilities through a governed boundary. |
 
 AI serves two roles in the platform: it assists developers in building integrations, and it can participate in execution through AI services and agents.
 
 <ThemedImage
     alt="AI assists developers in building integrations, and it can participate in execution through AI services and agents"
     sources={{
-        light: useBaseUrl('/img/platform-overview/role-of-AI.png'),
-        dark: useBaseUrl('/img/platform-overview/role-of-AI.png'),
+        light: useBaseUrl('/img/platform-overview/ai-in-integration-v5.1.png'),
+        dark: useBaseUrl('/img/platform-overview/ai-in-integration-v5.1.png'),
     }}
 />
 
@@ -94,10 +95,10 @@ Integrations developed in WSO2 Integrator can run in managed or self-hosted envi
 | Private or hybrid | A private data plane or dedicated infrastructure | WSO2 manages control and observability capabilities centrally | Runtime infrastructure responsibility depends on the selected arrangement. |
 
 <ThemedImage
-    alt="Integration lifecycle from Design through Develop and Test, Build, Deploy, Validate, Promote, Manage and Observe, to Improve or Retire"
+    alt="Deployment models: self-hosted, where you run both the control plane (ICP) and the data plane, and WSO2 Integration Cloud (iPaaS), where WSO2 manages the control plane and you choose a cloud or private data plane"
     sources={{
-        light: useBaseUrl('/img/platform-overview/deployment-model.png'),
-        dark: useBaseUrl('/img/platform-overview/deployment-model.png'),
+        light: useBaseUrl('/img/platform-overview/deployment-models-v5.1.png'),
+        dark: useBaseUrl('/img/platform-overview/deployment-models-v5.1.png'),
     }}
 />
 
@@ -117,8 +118,8 @@ The platform supports a continuous integration lifecycle:
 <ThemedImage
     alt="Integration lifecycle with WSO2 Integration Platform"
     sources={{
-        light: useBaseUrl('/img/platform-overview/integration-lifecycle.png'),
-        dark: useBaseUrl('/img/platform-overview/integration-lifecycle.png'),
+        light: useBaseUrl('/img/platform-overview/integration-lifecycle-v5.1.png'),
+        dark: useBaseUrl('/img/platform-overview/integration-lifecycle-v5.1.png'),
     }}
 />
 
@@ -137,6 +138,5 @@ The platform supports OpenTelemetry, allowing logs, metrics, and traces to feed 
 # Where to go next
 
 - [Concepts](../get-started/concepts/concepts.mdx): Learn the vocabulary used across WSO2 Integration Platform, from organizations and projects to deployment and observability.
-- [Local setup](../get-started/setup/setup.md): Install WSO2 Integrator and set up your local development environment.
+- [Setup](../get-started/setup/setup.md): Set up your development environment.
 - [Quickstarts](../get-started/quickstarts/build-integration-api.md): Build your first integration in under 10 minutes: an API, automation, AI agent, event-driven, or file-driven integration.
-- [Choosing a control plane](../manage.md): Compare WSO2 Cloud and the self-hosted Integration Control Plane (ICP) to pick the one that fits your deployment.
