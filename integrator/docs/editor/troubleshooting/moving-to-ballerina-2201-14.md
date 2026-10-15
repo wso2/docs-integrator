@@ -1,8 +1,8 @@
 ---
-title: Moving to Ballerina 2201.14.0
+title: Moving to Ballerina 2201.14
 ---
 
-# Moving to Ballerina 2201.14.0
+# Moving to Ballerina 2201.14
 
 WSO2 Integrator 5.1.0, the WSO2 Integrator extension 1.2.0, and the Ballerina extension 6.0.0 run on Ballerina 2201.14.0, which moves from Java 21 to Java 25. When you open an older setup or integration in these releases, the editor can show one of two screens instead of your integration. This page explains why each screen appears and the options you have.
 
@@ -31,12 +31,12 @@ You can either update Ballerina, or keep your current Ballerina version and swit
 To update from a terminal instead, run the following command, then reload the VS Code window:
 
 ```bash
-bal dist pull 2201.14.0
+bal dist pull 2201.14.1
 ```
 
 If you installed Ballerina with the installer, rather than through the extension, run the command with `sudo` on macOS and Linux, or from an administrator command prompt on Windows.
 
-Run `bal version` to confirm that Ballerina 2201.14.0 is active.
+Run `bal version` to confirm that Ballerina 2201.14.1 is active.
 
 ### Keep your current Ballerina version
 
@@ -109,7 +109,7 @@ bal clean
 bal build --sticky=false
 ```
 
-These commands don't change `distribution` in `Ballerina.toml`. If the file has a `distribution` field, set it to `2201.14.0` by hand.
+These commands don't change `distribution` in `Ballerina.toml`. If the file has a `distribution` field, set it to `2201.14.1` by hand.
 
 :::note Running `bal` with the WSO2 Integrator app
 The WSO2 Integrator app bundles its own Ballerina distribution, which usually isn't on your `PATH`. Run the commands in the app's terminal (**Terminal** > **New Terminal**), which uses the bundled `bal`. Outside the app, use the `bal` in the `components/ballerina/bin` directory of the app installation, for example `/Applications/WSO2 Integrator.app/Contents/components/ballerina/bin/bal` on macOS.
@@ -129,7 +129,7 @@ If the update keeps failing, capture the output and report the issue as describe
 Commit the updated `Dependencies.toml` and `Ballerina.toml` files so that others working on the integration get the same versions. The integration now needs Ballerina 2201.14.0, so also update the following:
 
 - **Teammates' setups:** everyone working on the integration needs WSO2 Integrator 5.1.0, or VS Code with Ballerina 2201.14.0. A build on an earlier Ballerina version can still succeed, but it sets `distribution-version` in `Dependencies.toml` back to that version. If that change is committed, the editor shows **Your project dependencies need to be updated** again for everyone on 2201.14.0.
-- **CI/CD pipelines and Docker images:** update any pipeline step or base image that installs or pins an earlier Ballerina version to 2201.14.0.
+- **CI/CD pipelines and Docker images:** update any pipeline step or base image that installs or pins an earlier Ballerina version to 2201.14.1.
 - **Runtime:** executables built with Ballerina 2201.14.0 need Java 25 to run. Update the Java runtime or base image wherever you deploy them. On a Java version earlier than 25, the integration fails to start with an `UnsupportedClassVersionError`.
 
 ### Keep the current dependencies
