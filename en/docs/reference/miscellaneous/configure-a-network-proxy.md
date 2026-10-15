@@ -70,3 +70,4 @@ These domains must be accessible from your network:
 3. Maven Central Repository - `https://repo.maven.apache.org/maven2`
 4. Docker Hub - `https://hub.docker.com/u/ballerina`
 5. Alpine Linux Repository - `http://dl-cdn.alpinelinux.org/`
+6. Update service - `https://apis.wso2.com/`, `https://integrator-updates-cdn.wso2.com/`
