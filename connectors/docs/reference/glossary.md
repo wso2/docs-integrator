@@ -12,9 +12,9 @@ A specific operation you invoke through a connection, such as "send SMS" or "cre
 
 The functional category a connector is classified under in the catalog (for example, Database, Messaging, Storage & Files) — set via the connector package's `Area/` keyword. See [Publish Connector](../build-your-own/publish-connector.md).
 
-### Built-in connector
+### Protocol-level connector
 
-A connector that ships with the platform itself (HTTP, FTP, gRPC, GraphQL, MQTT, MCP, WebSocket, WebSub, Email, AI, and similar protocol-level modules), rather than integrating with a specific third-party vendor's API. Built-in connectors often have no Setup Guide, since there's no external account or credentials to configure.
+A connector that ships with the platform itself (HTTP, gRPC, GraphQL, TCP, UDP, WebSocket, WebSub, FTP, MQTT, Email, MCP, and AI), rather than integrating with a specific third-party vendor's API. These connectors often have no setup guide, because there's no external account or credentials to configure.
 
 ### Connection
 

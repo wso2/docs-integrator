@@ -24,9 +24,9 @@ Actions are outbound: your integration calls the external service. Triggers are 
 
 Around 165 connector families, browsable and filterable by category (AI & ML, Database, CRM & Sales, Messaging, Storage & Files, and more) and by vendor in the [Connector Catalog](../catalog/index.mdx).
 
-### What are "Built-in" connectors, and how are they different from the rest of the catalog?
+### Why do some connectors have no setup guide?
 
-Built-in connectors (HTTP, FTP, gRPC, GraphQL, MQTT, MCP, WebSocket, WebSub, Email, AI, and similar protocol-level modules) ship with the platform itself, rather than integrating with a specific third-party vendor's API like Salesforce, SAP, or HubSpot do. Several of them have no Setup Guide for exactly this reason — there's no external account or credentials to configure.
+Protocol-level connectors (HTTP, gRPC, GraphQL, TCP, UDP, WebSocket, WebSub, FTP, MQTT, Email, MCP, and AI) ship with the platform itself, rather than integrating with a specific third-party vendor's API like Salesforce, SAP, or HubSpot do. Several of them have no setup guide for exactly this reason, because there's no external account or credentials to configure. You can find them under categories such as Network & Protocols, Messaging, and Storage & Files in the [Connector Catalog](../catalog/index.mdx).
 
 ### What if there's no connector for the service I need?
 
