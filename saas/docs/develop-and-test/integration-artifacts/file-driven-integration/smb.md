@@ -16,8 +16,8 @@ The listener speaks SMB dialects 2.0.2 through 3.1.1 and authenticates with NTLM
    <ThemedImage
        alt="Artifacts panel showing SMB under File Integration"
        sources={{
-           light: useBaseUrl('/img/develop/integration-artifacts/file/smb/step-artifacts-panel.png'),
-           dark: useBaseUrl('/img/develop/integration-artifacts/file/smb/step-artifacts-panel.png'),
+           light: useBaseUrl('/img/develop/integration-artifacts/file/smb/step-artifacts-panel-v5.1.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/file/smb/step-artifacts-panel-v5.1.png'),
        }}
    />
 
@@ -400,7 +400,7 @@ Chunks are a fixed 64 KB for the listener; the listener's `bufferSize` setting d
 :::note When a row fails to parse
 A bad row (malformed CSV or wrong type) stops the stream right there. The handler returns an error, so the file takes the **On Error** path you configured under [Post-processing](#post-processing-moving-or-deleting-files). Anything your handler already did for earlier rows (database writes, API calls, published messages) stays.
 
-When you retry the file, those rows run again. To stay safe, make your handler idempotent (check before you write) or track which rows you've already processed per file. If you'd rather skip bad rows and keep going, set **CSV Fail Safe** on the listener — see [Listener configuration](#listener-configuration).
+When you retry the file, those rows run again. To stay safe, make your handler idempotent (check before you write) or track which rows you've already processed per file. To skip malformed rows instead of failing the entire file, enable [CSV fault tolerance](csv-fault-tolerance.md).
 
 ### FileInfo
 
@@ -552,6 +552,7 @@ listener smb:Listener smbListener = new (
 
 ## What's next
 
+- [CSV fault tolerance](csv-fault-tolerance.md) — skip malformed rows instead of failing the whole file
 - [FTP / SFTP](ftp-sftp.md) — poll a remote FTP, SFTP, or FTPS server instead of a network share
 - [Local files](local-files.md) — monitor a local directory
 - [SMB connector](product://connectors/catalog/storage-file/smb/overview) — call SMB operations from an integration instead of being triggered by them

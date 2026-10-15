@@ -38,7 +38,7 @@ bal grpc --input resources/order_service.proto --mode service --output .
 
 ## Step 4: Verify generated files
 
-The tool places two files in the project root:
+The tool places two files in the project root. The service stub is named after the **service** declared in the proto file (`OrderService`), not the proto file name:
 
 ```
 my-integration/
@@ -47,13 +47,13 @@ my-integration/
 ├── resources/
 │   └── order_service.proto
 ├── order_service_pb.bal          # Message types and descriptor constant
-└── order_service.bal     # Service stub with empty RPC methods
+└── orderservice_service.bal      # Service stub with empty RPC methods
 ```
 
 | File | Contents |
 |---|---|
 | `order_service_pb.bal` | Message record types and the `ORDER_SERVICE_DESC` descriptor constant required by `@grpc:Descriptor` |
-| `order_service.bal` | Service stub with all RPC remote functions to implement |
+| `orderservice_service.bal` | Service stub with all RPC remote functions to implement |
 
 Both files are compiled automatically as part of the project — no extra imports or configuration needed.
 
@@ -61,15 +61,15 @@ Both files are compiled automatically as part of the project — no extra import
 
 ## Step 5: Implement the service
 
-Open `order_service.bal` and fill in the generated stub methods with your integration logic:
+Open `orderservice_service.bal` and fill in the generated stub methods with your integration logic:
 
 ```ballerina
 import ballerina/grpc;
 
-listener grpc:Listener grpcListener = new (9090);
+listener grpc:Listener ep = new (9090);
 
 @grpc:Descriptor {value: ORDER_SERVICE_DESC}
-service "OrderService" on grpcListener {
+service "OrderService" on ep {
 
     remote function GetOrder(GetOrderRequest request) returns Order|error {
         // TODO: Implement
@@ -80,6 +80,10 @@ service "OrderService" on grpcListener {
     }
 
     remote function ListOrders(ListOrdersRequest request) returns stream<Order, error?>|error {
+        // TODO: Implement
+    }
+
+    remote function UploadOrders(stream<CreateOrderRequest, grpc:Error?> clientStream) returns Order|error {
         // TODO: Implement
     }
 

@@ -24,6 +24,7 @@ service OrderService {
     rpc GetOrder (GetOrderRequest) returns (Order);
     rpc CreateOrder (CreateOrderRequest) returns (Order);
     rpc ListOrders (ListOrdersRequest) returns (stream Order);
+    rpc UploadOrders (stream CreateOrderRequest) returns (Order);
     rpc StreamUpdates (stream OrderUpdate) returns (stream StatusUpdate);
 }
 
@@ -80,6 +81,8 @@ enum OrderStatus {
 
 Use this when you want to **expose** a gRPC service from your integrator project.
 
+The generated service and client file names are derived from the **service name** in the proto file. For `service OrderService` in `order_service.proto`, the tool generates `orderservice_service.bal` and `orderservice_client.bal`.
+
 ### Step 1: Place the proto file in your project
 
 Copy your `.proto` file into a `resources/` folder inside your integrator project:
@@ -117,14 +120,14 @@ my-integration/
 ├── resources/
 │   └── order_service.proto
 ├── order_service_pb.bal          # Message types (records)
-└── order_service_service.bal     # Service stub with empty RPC methods
+└── orderservice_service.bal     # Service stub with empty RPC methods
 ```
 
 Both files are compiled automatically as part of the project package, with no extra imports or configuration needed.
 
 ### Step 5: Implement the service
 
-Open `order_service_service.bal` and fill in the generated stub methods with your integration logic:
+Open `orderservice_service.bal` and fill in the generated stub methods with your integration logic:
 
 ```ballerina
 import ballerina/grpc;
@@ -143,6 +146,10 @@ service "OrderService" on ep {
     }
 
     remote function ListOrders(ListOrdersRequest request) returns stream<Order, error?>|error {
+        // TODO: Implement
+    }
+
+    remote function UploadOrders(stream<CreateOrderRequest, grpc:Error?> clientStream) returns Order|error {
         // TODO: Implement
     }
 
@@ -190,7 +197,7 @@ my-integration/
 ├── resources/
 │   └── order_service.proto
 ├── order_service_pb.bal          # Message types (records)
-└── order_service_client.bal      # Type-safe client connector
+└── orderservice_client.bal      # Type-safe client connector
 ```
 
 ### Step 5: Use the client in your integration
@@ -205,7 +212,7 @@ my-integration/
 ├── resources/
 │   └── order_service.proto
 ├── order_service_pb.bal
-└── order_service_client.bal
+└── orderservice_client.bal
 ```
 
 In `connections.bal`:
@@ -255,18 +262,21 @@ function listCustomerOrders(string customerId) returns Order[]|error {
 **Bidirectional streaming:**
 
 ```ballerina
-function streamOrderUpdates(OrderUpdate[] updates) returns OrderStatus[]|error {
+function streamOrderUpdates(OrderUpdate[] updates) returns StatusUpdate[]|error {
     StreamUpdatesStreamingClient streamClient = check orderClient->StreamUpdates();
     foreach OrderUpdate update in updates {
         check streamClient->sendOrderUpdate(update);
     }
     check streamClient->complete();
 
-    OrderStatus[] statuses = [];
-    OrderStatus|error? response = streamClient->receiveOrderStatus();
-    while response is OrderStatus {
+    StatusUpdate[] statuses = [];
+    StatusUpdate|grpc:Error? response = streamClient->receiveStatusUpdate();
+    while response is StatusUpdate {
         statuses.push(response);
-        response = streamClient->receiveOrderStatus();
+        response = streamClient->receiveStatusUpdate();
+    }
+    if response is grpc:Error {
+        return response;
     }
     return statuses;
 }
@@ -282,20 +292,21 @@ Omit `--mode` to generate only the stub file:
 bal grpc --input resources/order_service.proto --output .
 ```
 
-This produces `order_service_pb.bal` file.
+This produces only the `order_service_pb.bal` file (message types and the descriptor constant). No service or client file is generated.
 
 ---
 
 ## Proto import paths
 
-If your proto file imports other proto files, add `--proto_path` for each import directory:
+If your proto file imports other proto files, use `--proto-path` to tell the tool where to resolve them. The directory you pass must contain the input `.proto` file, and imports are resolved relative to it:
 
 ```bash
 bal grpc --input resources/order_service.proto \
-  --proto_path ./resources/ \
-  --proto_path ./third_party/ \
+  --proto-path resources \
   --output .
 ```
+
+The flag is spelled `--proto-path` (with a hyphen); `--proto_path` is rejected. Pass the directory without a leading `./` or trailing `/`, and make sure it encompasses the input file, otherwise the tool fails with `Input .proto file does not reside within the path specified using --proto-path`.
 
 ---
 
@@ -315,10 +326,10 @@ bal grpc --input <proto-file> [options]
 
 | Flag | Alias | Required | Default | Description |
 |------|-------|----------|---------|-------------|
-| `--input` | `-i` | Yes | — | Path to the `.proto` file |
-| `--output` | `-o` | No | Current directory | Output directory for generated files |
-| `--mode` | — | No | Both | Generation mode: `client`, `service`, or omit for both |
-| `--proto-path` | — | No | — | Path to a directory containing imported `.proto` files |
+| `--input` | — | Yes | — | Path to a `.proto` file, or a directory containing multiple `.proto` files |
+| `--output` | — | No | Directory named after the proto `package` (or `temp` if no package is declared) | Output directory for generated files |
+| `--mode` | — | No | — | `client` or `service` to also generate sample code. If omitted, only the stub file (`*_pb.bal`) is generated |
+| `--proto-path` | — | No | — | Directory used to resolve `import` statements. It must contain the input `.proto` file |
 
 ## Protobuf to Ballerina type mapping
 
