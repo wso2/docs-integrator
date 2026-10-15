@@ -16,7 +16,6 @@ Securing integrations in WSO2 Integrator at runtime involves hardening the JVM, 
 
 ```bash
 java \
-  -Djava.security.manager \
   -Djava.rmi.server.hostname=localhost \
   -Dcom.sun.management.jmxremote=false \
   -XX:+UseG1GC \
@@ -27,7 +26,6 @@ java \
 
 | Flag | Purpose |
 |------|---------|
-| `-Djava.security.manager` | Enable the Java Security Manager |
 | `-Dcom.sun.management.jmxremote=false` | Disable remote JMX access |
 | `-Djava.rmi.server.hostname=localhost` | Restrict RMI to localhost |
 | `-XX:+UseContainerSupport` | Respect container memory limits |
@@ -39,7 +37,7 @@ Always run on a supported, patched JDK version. Subscribe to security advisories
 
 ```bash
 java -version
-# Ensure JDK 17.0.x or later with latest patch
+# Ensure JDK 25 with latest patch
 ```
 
 ## Keystores and Truststores
@@ -74,7 +72,7 @@ Group=ballerina
 Use a non-root user in your Dockerfile:
 
 ```dockerfile
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:25-jre
 RUN addgroup --system ballerina && adduser --system --ingroup ballerina ballerina
 COPY target/bin/my_integration.jar /app/my_integration.jar
 COPY Config.toml /app/Config.toml

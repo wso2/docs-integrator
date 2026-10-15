@@ -212,7 +212,7 @@ hostname="api.example.com"
 enableSSL=true'
 ```
 
-When both `BAL_CONFIG_FILES` and `BAL_CONFIG_DATA` are set, values from `BAL_CONFIG_DATA` take precedence.
+When both `BAL_CONFIG_FILES` and `BAL_CONFIG_DATA` are set, values from `BAL_CONFIG_FILES` take precedence.
 
 ### Per-environment configuration
 

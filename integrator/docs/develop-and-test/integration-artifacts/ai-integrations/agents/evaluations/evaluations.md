@@ -11,13 +11,13 @@ The feature is built around three stages.
 | Stage | What it is | Page |
 |---|---|---|
 | **Evalsets** | A golden dataset of conversation traces, captured from real chats with your agent and refined in the **Evalset Viewer**. | [Create evalsets](evalsets.md) |
-| **Evaluations** | Evaluation functions, configured in a form and assembled in the visual designer, that score agent behaviour against an evalset (or run standalone logic). | [Create evaluations](creating-evaluations.md) |
+| **Evaluations** | Evaluation functions that score agent behaviour, created from a prebuilt template or built in the visual designer, with or without an evalset. | [Templates](create-evaluations-templates.md), [Custom](create-evaluations-custom.md) |
 | **Runs and reports** | Run an evaluation on the current agent build and review the **Evaluation Report** and the **Evaluation History** trend across runs. | [Run evaluations](running-evaluations.md) |
 
 ## How the stages fit together
 
 1. Chat with your agent and export the session traces into an **evalset**. Use the editor to edit messages, reorder or add turns, and update tool calls.
-2. Create an **evaluation** from the **Test Explorer**. Pick the evalset to score against, set the target pass rate, then build the checks in the visual designer (including LLM-as-judge if you need subjective scoring).
+2. Create an **evaluation** from the **Test Explorer**. Start from a prebuilt template for common checks such as tool trajectory or LLM-as-judge scoring, or build custom checks in the visual designer. Pick the evalset to score against and set the target pass rate.
 3. **Run** the evaluation. The report shows pass or fail per case, and the **Evaluation History** view tracks pass rate across runs so you can correlate regressions with the changes that caused them.
 
 ## When to use evaluations
@@ -31,5 +31,6 @@ The feature is built around three stages.
 ## What's next
 
 - [Create evalsets](evalsets.md) — Capture real chats and curate them into a golden dataset.
-- [Create evaluations](creating-evaluations.md) — Configure scoring and build the checks in the visual designer.
+- [Create evaluations from templates](create-evaluations-templates.md) — Configure a prebuilt evaluation template in a form.
+- [Create custom evaluations](create-evaluations-custom.md) — Build your own checks in the visual designer.
 - [Run evaluations](running-evaluations.md) — Execute runs and review the report and history.

@@ -40,7 +40,7 @@ jobs:
       - name: Set up Ballerina
         uses: ballerina-platform/setup-ballerina@v1.1.4
         with:
-          version: "2201.13.4"
+          version: "2201.14.0"
 
       - name: Test
         run: bal test
@@ -57,7 +57,7 @@ The [`setup-ballerina`](https://github.com/ballerina-platform/setup-ballerina/) 
 - name: Set up Ballerina
   uses: ballerina-platform/setup-ballerina@v1.1.4
   with:
-    version: "2201.13.4"
+    version: "2201.14.0"
 
 - name: Test
   run: bal test

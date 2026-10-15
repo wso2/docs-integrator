@@ -59,6 +59,7 @@ Authenticates a user with username and password. Returns a short-lived JWT acces
 | Status | Meaning |
 |--------|---------|
 | `401` | Invalid credentials |
+| `403` | Password login is disabled (`passwordLoginDisabled = true`); sign in with SSO instead |
 | `429` | Account locked out — check `Retry-After` header for seconds remaining |
 | `500` | Authentication backend unavailable |
 
@@ -92,6 +93,8 @@ Exchanges a refresh token for a new access token. Does **not** require an `Autho
 
 When refresh token rotation is enabled (default), the old refresh token is revoked and a new one is returned.
 
+When federated access control is enabled (`federatedAccessControlEnabled = true`), the call returns `403 Forbidden` and revokes the refresh token if the user no longer has any ICP permissions.
+
 ---
 
 ### `POST /auth/login/oidc`
@@ -106,7 +109,9 @@ Exchanges an OIDC authorization code for an ICP access token. SSO must be config
 }
 ```
 
-**Response `200 OK`:** Same structure as `/auth/login`, with `"isOidcUser": true`. The `requirePasswordChange` field is omitted for OIDC users.
+**Response `200 OK`:** Same structure as `/auth/login`, with `"isOidcUser": true` and an additional `idToken` field containing the identity provider's ID token (pass it as `idTokenHint` to `/auth/oidc/logout-url`). The `requirePasswordChange` field is omitted for OIDC users.
+
+When federated access control is enabled (`federatedAccessControlEnabled = true`), returns `403 Forbidden` if the user has no ICP permissions (for example, none of their identity provider groups are mapped).
 
 ---
 
@@ -125,6 +130,30 @@ Returns the OIDC authorization URL to redirect the user to for SSO login.
 ```json
 {
   "authorizationUrl": "https://sso.example.com/authorize?client_id=...&state=..."
+}
+```
+
+---
+
+### `POST /auth/oidc/logout-url`
+
+Returns the identity provider's RP-initiated logout URL, used to end the SSO session at the identity provider. The post-logout redirect is the `/login` page on the origin of `ssoRedirectUri`. SSO must be configured and enabled.
+
+**Request body:**
+
+```json
+{
+  "idTokenHint": "<id-token-from-oidc-login>"
+}
+```
+
+`idTokenHint` is optional.
+
+**Response `200 OK`:**
+
+```json
+{
+  "logoutUrl": "https://sso.example.com/logout?id_token_hint=...&post_logout_redirect_uri=..."
 }
 ```
 
@@ -161,7 +190,7 @@ Returns the user management operations supported by the active user store (local
 }
 ```
 
-LDAP-backed deployments return only `["authenticate"]`.
+LDAP-backed deployments return only `["authenticate"]`. When password login is disabled (`passwordLoginDisabled = true`), the list is empty.
 
 ---
 
@@ -260,7 +289,7 @@ Creates a new user. Requires `user_mgt:manage_users` permission.
 
 Username must match `^[a-zA-Z0-9_.]+$`.
 
-**Response `201 Created`:** Created user object.
+**Response `201 Created`:** Created user object. Returns `403 Forbidden` when password login is disabled (`passwordLoginDisabled = true`), because users are then provisioned through SSO login.
 
 ### `DELETE /auth/orgs/{orgHandle}/users/{userId}`
 
@@ -284,7 +313,7 @@ Revokes all active sessions for a user (admin action). Cannot be used on your ow
 
 Unlocks an account locked by failed login attempts. Requires `user_mgt:manage_users`.
 
-**Response `200 OK`:** `{ "message": "Account unlocked successfully" }`
+**Response `200 OK`:** `{ "message": "Account unlocked" }`
 
 ### `GET /auth/orgs/{orgHandle}/users/{userId}/permissions`
 
@@ -297,13 +326,13 @@ Returns the effective permissions for a user at a given scope. Users may fetch t
 ```json
 {
   "userId": "usr-001",
-  "scope": { "orgUuid": "org-uuid-001", "projectUuid": "proj-abc" },
+  "scope": { "orgUuid": 1, "projectUuid": "proj-abc" },
   "permissions": [],
   "permissionNames": ["integration_mgt:view", "integration_mgt:manage"]
 }
 ```
 
-`orgUuid` is a string UUID.
+`orgUuid` is an integer organization ID (`1` for the default organization).
 
 ### `PUT /auth/orgs/{orgHandle}/users/{userId}/groups`
 
@@ -379,7 +408,7 @@ Assigns one or more roles to a group at a specified scope. Requires appropriate 
 ```json
 {
   "roleIds": ["role-001"],
-  "orgUuid": "org-uuid-001",
+  "orgUuid": 1,
   "projectUuid": "proj-abc",
   "envUuid": "env-001",
   "integrationUuid": "comp-xyz"
@@ -397,6 +426,41 @@ Lists all role assignments for a group, enriched with role names and scope detai
 ### `DELETE /auth/orgs/{orgHandle}/groups/{groupId}/roles/{mappingId}`
 
 Removes a role mapping from a group. The org-level Super Admin role cannot be removed from the Super Admins group. Requires appropriate permissions at the mapping's scope.
+
+---
+
+## SSO Group Mappings
+
+These endpoints manage the rules that map identity provider claims to ICP groups. See [SSO group mapping](user-stores/sso-group-mapping.md).
+
+### `GET /auth/orgs/{orgHandle}/sso/group-mappings`
+
+Lists all SSO group mappings in the organization. Requires `user_mgt:manage_groups` or `user_mgt:update_group_roles`.
+
+### `POST /auth/orgs/{orgHandle}/sso/group-mappings`
+
+Creates a mapping from an identity provider claim value to an ICP group. Requires `user_mgt:manage_groups` or `user_mgt:update_group_roles` at the mapping's scope.
+
+**Request body:**
+
+```json
+{
+  "issuer": "https://sso.example.com/oauth2/token",
+  "claimName": "groups",
+  "claimValue": "icp-developers",
+  "groupId": "grp-001",
+  "projectUuid": "proj-abc",
+  "integrationUuid": "comp-xyz"
+}
+```
+
+`projectUuid` and `integrationUuid` are optional; omit them for an org-level mapping.
+
+**Response `201 Created`:** Created mapping object. Returns `409 Conflict` if an equivalent mapping already exists.
+
+### `DELETE /auth/orgs/{orgHandle}/sso/group-mappings/{mappingId}`
+
+Deletes an SSO group mapping. Requires `user_mgt:manage_groups` or `user_mgt:update_group_roles` at the mapping's scope.
 
 ---
 
@@ -453,13 +517,15 @@ Returns all available system permissions grouped by domain. Accessible to any au
 ```json
 {
   "permissions": [
-    { "permissionId": "perm-001", "permissionName": "integration_mgt:view", "permissionDomain": "integration_mgt" }
+    { "permissionId": "perm-001", "permissionName": "integration_mgt:view", "permissionDomain": "Integration-Management" }
   ],
   "groupedByDomain": {
-    "integration_mgt": [],
-    "environment_mgt": [],
-    "project_mgt": [],
-    "user_mgt": []
+    "Integration-Management": [],
+    "Environment-Management": [],
+    "Project-Management": [],
+    "Observability-Management": [],
+    "User-Management": [],
+    "Workflow-Management": []
   }
 }
 ```

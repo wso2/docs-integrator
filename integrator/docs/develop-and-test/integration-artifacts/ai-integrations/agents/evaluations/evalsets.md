@@ -94,13 +94,13 @@ An evalset records what the agent did during the chat. It becomes a golden datas
 
 ## Browse your evalsets
 
-Open the **Test Explorer** by clicking the test beaker icon in the activity bar on the left. The **Evalsets** panel lists every evalset in the project. Expand one to see its threads, then click a thread to open it in the **Evalset Viewer**.
+Open the **Test Explorer** by clicking the test beaker icon in the activity bar on the left. The **Evalsets** panel lists every evalset in the project. Click an evalset to open it in the **Evalset Viewer**, which lists its threads. Expand an evalset in the panel to see its threads, then click a thread to open it.
 
 <ThemedImage
-    alt="Test Explorer with the Evalsets panel showing the math-tutor evalset expanded to one thread, and the Evalset Viewer open on the right."
+    alt="Test Explorer with the math-tutor evalset in the Evalsets panel, and the Evalset Viewer open on the right listing its thread-1c603f79 thread."
     sources={{
-        light: useBaseUrl('/img/genai/develop/agents/evaluations/test-explorer.png'),
-        dark: useBaseUrl('/img/genai/develop/agents/evaluations/test-explorer.png'),
+        light: useBaseUrl('/img/genai/develop/agents/evaluations/test-explorer-evalset-viewer.png'),
+        dark: useBaseUrl('/img/genai/develop/agents/evaluations/test-explorer-evalset-viewer.png'),
     }}
 />
 
@@ -166,5 +166,6 @@ There is no import option. To bring in an evalset from elsewhere, copy the `<nam
 
 ## What's next
 
-- [Create evaluations](creating-evaluations.md) — Build evaluation functions that use this evalset.
+- [Create evaluations from templates](create-evaluations-templates.md) — Rerun the agent and compare its behaviour with this evalset using a prebuilt evaluation template.
+- [Create custom evaluations](create-evaluations-custom.md) — Build custom evaluation functions that use this evalset.
 - [Run evaluations](running-evaluations.md) — Replay the evalset against the current agent build.

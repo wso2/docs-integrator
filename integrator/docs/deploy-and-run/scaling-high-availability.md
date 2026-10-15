@@ -16,7 +16,6 @@ Ballerina services in WSO2 Integrator are designed to be stateless, making them 
 
 ```ballerina
 import ballerina/http;
-import ballerina/cache;
 
 // Use an external cache or database for shared state
 configurable string redisHost = "localhost";
@@ -26,8 +25,8 @@ service /orders on new http:Listener(9090) {
     // Each request is self-contained -- no in-memory session state
     resource function get [string orderId]() returns json|error {
         // Fetch from external data store
-        json order = check getOrderFromDatabase(orderId);
-        return order;
+        json orderData = check getOrderFromDatabase(orderId);
+        return orderData;
     }
 }
 ```
@@ -43,8 +42,8 @@ Configure auto-scaling directly in your project's `Cloud.toml`:
 [cloud.deployment.autoscaling]
 min_replicas = 2
 max_replicas = 10
-cpu_threshold = 70
-memory_threshold = 80
+cpu = 70
+memory = 80
 ```
 
 When deploying to Kubernetes, the `bal build --cloud=k8s` command uses these settings to generate HorizontalPodAutoscaler resources automatically. For manual scaling configuration, refer to the [Kubernetes HorizontalPodAutoscaler documentation](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/).

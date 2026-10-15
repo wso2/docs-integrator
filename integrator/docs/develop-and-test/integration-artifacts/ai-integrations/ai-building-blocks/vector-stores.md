@@ -80,7 +80,7 @@ Local stores let you choose the metric. Hosted stores manage it themselves (you 
     }}
 />
 
-## Implementations overview
+## Supported vector stores
 
 | Store | Module | Modes supported | Hosted/local |
 |---|---|---|---|

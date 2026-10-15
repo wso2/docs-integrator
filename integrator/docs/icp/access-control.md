@@ -12,7 +12,7 @@ Access control in ICP determines who can view, edit, and manage resources across
 
 A **role** is a named set of permissions. ICP ships with five built-in roles (see [Default roles](#default-roles)). You can also create custom roles tailored to your team's needs.
 
-Permissions cover five areas: environment management, integration management, observability, project management, and user management. Each area contains two to five granular permissions (see [Permissions](#permissions)).
+Permissions cover six areas: environment management, integration management, observability, project management, user management, and workflow management. Each area contains two to five granular permissions (see [Permissions](#permissions)).
 
 Roles and their permissions are defined at the organization level only. Lower levels (project, integration) can use roles in mappings but cannot change what a role is allowed to do.
 
@@ -32,9 +32,9 @@ A **mapping** binds a role to a group, granting every user in that group the rol
   | Project | All integrations within that project |
   | Integration | That single integration only |
 
-- **Applicable environments**: either **All Environments** or a set of named environments (e.g. only *dev*). When scoped to selected environments, the mapping only takes effect for runtimes in those environments.
+- **Applicable environments**: either **All Environments** or a single named environment (e.g. only *dev*). When scoped to a selected environment, the mapping only takes effect for runtimes in that environment.
 
-Mappings created at a higher level are visible at lower levels but can only be removed at the level where they were created.
+Mappings created at a higher level are visible at lower levels but cannot be removed there. Remove a mapping at the level where it was created or at a higher level.
 
 ### Where things live
 
@@ -77,7 +77,7 @@ Create the mapping at the project level so it is scoped to that project.
 
 The mapping level is recorded as **Project**. Members of that group have the Developer role within this project only. Other projects are unaffected.
 
-ICP automatically creates a `<Project Name> Admins` group with the *Project Admin* role whenever you create a project. You can add users to this group instead of creating a new mapping.
+ICP automatically creates a `<project-name-slug> Admins` group with the *Project Admin* role whenever you create a project, and adds the project creator to it. You can add users to this group instead of creating a new mapping.
 
 ### Give a team read-only access to production
 
@@ -86,7 +86,7 @@ Combine a restrictive role with environment scoping.
 1. Go to the organization **Access control** and open the **Roles** tab.
 2. Click the *Viewer* role (or create a custom read-only role).
 3. In the **Groups** tab, click **+ Add Groups**.
-4. Select the group, choose **Selected Environments**, pick **prod**, and click **Assign**.
+4. Select the group, choose **Selected Environment**, pick **prod**, and click **Assign**.
 
 Members of that group can view resources in the *prod* environment but have no access in *dev* or other environments unless granted separately.
 
@@ -98,7 +98,7 @@ Create the mapping at the integration level.
 2. Open the **Roles** tab and click the target role (e.g. *Developer*).
 3. Click **+ Add Group**, select the group, choose environments, and click **Assign**.
 
-The mapping level is **Integration**. The group's users have that role only for this integration.
+The mapping level is shown as **Component**. The group's users have that role only for this integration.
 
 ### Create a custom role
 
@@ -114,11 +114,11 @@ To edit permissions later, click the role to open **Manage Role**, make changes 
 
 **Remove a mapping**
 
-Navigate to the level where the mapping was created (check the **Mapping Level** badge on the mapping row). Open the role or group detail and click the **Delete** icon.
+Navigate to the level where the mapping was created (check the **Mapping Level** badge on the mapping row) or a higher level. Open the role or group detail and click the **Remove** icon.
 
 **Remove a user from a group**
 
-Go to the organization **Access control** and open the **Groups** tab. Open the group, find the user in the **Users** tab, and click the **Delete** icon. The user loses any permissions granted through that group.
+Go to the organization **Access control** and open the **Groups** tab. Open the group, find the user in the **Users** tab, and click the **Remove** icon. The user loses any permissions granted through that group.
 
 **Delete a user**
 
@@ -149,17 +149,17 @@ Go to the organization **Access control** and open the **Users** tab. Each user 
 | Developer | Development access with limited permissions |
 | Project Admin | Administrative access to a specific project |
 | Super Admin | Full access to all resources and permissions |
-| Viewer | Read-only access across all resources |
+| Viewer | Read-only access with view permissions only |
 
 ### Default groups
 
 | Group | Description |
 |-------|-------------|
-| Super Admins | Super administrators with full system access |
-| Administrators | Organization administrators |
-| Developers | Development team members |
+| Super Admins | Group for super administrators with full access |
+| Administrators | Group for administrators |
+| Developers | Group for developers |
 
-Each new project also auto-creates a `<Project Name> Admins` group mapped to the *Project Admin* role at the project level.
+Each new project also auto-creates a `<project-name-slug> Admins` group mapped to the *Project Admin* role at the project level.
 
 ### Permissions
 
@@ -201,7 +201,16 @@ Each new project also auto-creates a `<Project Name> Admins` group mapped to the
 | `user_mgt:manage_roles` | Create and delete roles |
 | `user_mgt:manage_users` | Create and delete users |
 | `user_mgt:update_group_roles` | Assign and remove roles from groups |
-| `user_mgt:update_users` | Edit user profile and properties |
+| `user_mgt:update_users` | Assign users to groups |
+
+#### Workflow management
+
+| Permission | Description |
+|------------|-------------|
+| `workflow_mgt:manage_human_tasks` | Complete, fail, and cancel human tasks, and decide review activities |
+| `workflow_mgt:manage_workflows` | Start, suspend, resume, cancel, and terminate workflow executions, and decide review activities |
+| `workflow_mgt:view_human_tasks` | View human tasks |
+| `workflow_mgt:view_workflows` | View workflow executions |
 
 ## What's next
 

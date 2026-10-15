@@ -20,8 +20,8 @@ GraalVM native image compilation transforms your Ballerina integration into a pl
 
 | Requirement | Details |
 |-------------|---------|
-| GraalVM JDK | GraalVM for JDK 21 (Community or Enterprise Edition) |
-| Native Image | `gu install native-image` (included in newer distributions) |
+| GraalVM JDK | GraalVM for JDK 25 (Community or Enterprise Edition) |
+| Native Image | Included in GraalVM for JDK 25 distributions |
 | OS Tools | `gcc`, `zlib` headers (Linux), Xcode Command Line Tools (macOS) |
 | Memory | 8 GB+ RAM recommended for compilation |
 | Docker | 8 GB+ memory allocated to Docker (for container builds) |
@@ -30,7 +30,7 @@ GraalVM native image compilation transforms your Ballerina integration into a pl
 
 ```bash
 # Using SDKMAN (recommended)
-sdk install java 21.0.2-graalce
+sdk install java 25.4.4.1+1-graalce
 
 # Verify installation
 java -version

@@ -27,20 +27,21 @@ You rarely call these directly. Knowledge Base `ingest` and `retrieve` operation
 - The **Select Embedding Provider** picker opens, listing the available providers with a search bar at the top:
 
 <ThemedImage
-    alt="Select Embedding Provider picker with a search bar and four cards: Default Embedding Provider (WSO2), described as a WSO2 embedding provider implementation that provides embedding capabilities using WSO2's AI service; Azure Embedding Provider, described as an interface for interacting with Azure OpenAI Embedding Models; Google Vertex Embedding Provider; and OpenRouter Embedding Provider, both described as a client class that provides an interface for generating vector embeddings."
+    alt="Select Embedding Provider picker with a search bar and five cards: Default Embedding Provider (WSO2), described as a WSO2 embedding provider implementation that provides embedding capabilities using WSO2's AI service; Azure Embedding Provider, described as an interface for interacting with Azure OpenAI Embedding Models; Google Vertex Embedding Provider, described as a client class that provides an interface for generating vector embeddings; OpenAI Embedding Provider, described as an interface for interacting with OpenAI Embedding Models; and OpenRouter Embedding Provider, described as a client class that provides an interface for generating vector embeddings."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/01-select-embedding-provider-v5.1.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/01-select-embedding-provider-v5.1.png'),
     }}
 />
 
-## Implementations overview
+## Supported embedding providers
 
 | Provider | Module | API key required? | Default model |
 |---|---|---|---|
 | **Default WSO2** | `ballerina/ai` | No (signed-in via WSO2) | WSO2-managed |
 | **Azure OpenAI** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Yes | None |
 | **Google Vertex** | [`ballerinax/ai.googleapis.vertex`](https://central.ballerina.io/ballerinax/ai.googleapis.vertex/latest) | OAuth2 / service account | `text-embedding-005` |
+| **OpenAI** | [`ballerinax/ai.openai`](https://central.ballerina.io/ballerinax/ai.openai/latest) | Yes | None |
 | **OpenRouter** | [`ballerinax/ai.openrouter`](https://central.ballerina.io/ballerinax/ai.openrouter/latest) | Yes | None |
 
 The HTTP-level advanced configurations on every external embedding provider use the same set of fields as model providers. For the full reference, see [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations).
@@ -138,6 +139,58 @@ Scrolling further shows Timeout, Forwarded, Compression, and Payload Validation,
 
 Expanding **Advanced Configurations** shows the exact same panel as the [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations) section on the Model Providers page. Vertex adds no provider-specific fields here.
 
+## OpenAI
+
+Connects to OpenAI's hosted embedding models.
+
+Official website: [OpenAI embeddings documentation](https://platform.openai.com/docs/guides/embeddings).
+
+### Create form
+
+The form opens with **API Key**, **Embedding Model Type**, and **Service URL**, followed by **HTTP Version**, **Timeout**, and the start of **Forwarded**:
+
+<ThemedImage
+    alt="Create Embedding Provider form for OpenAI. Header reads 'Initializes the OpenAI embedding model with the given connection configuration.' Fields shown: API Key, Embedding Model Type (No Selection), Service URL (default https://api.openai.com/v1), HTTP Version (default HTTP_2_0), Timeout (default 60), and the start of Forwarded (default disable)."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/09-openai-basic-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/09-openai-basic-v5.1.png'),
+    }}
+/>
+
+| Field | Required | Default | Available values |
+|---|---|---|---|
+| **API Key** | Yes | N/A | The OpenAI API key. Get one from the [OpenAI API keys](https://platform.openai.com/api-keys) page. |
+| **Embedding Model Type** | Yes | N/A | `TEXT_EMBEDDING_3_SMALL` (`text-embedding-3-small`), `TEXT_EMBEDDING_3_LARGE` (`text-embedding-3-large`), `TEXT_EMBEDDING_ADA_002` (`text-embedding-ada-002`). The OpenAI embedding model name. |
+| **Service URL** | No | `https://api.openai.com/v1` | The base URL of the OpenAI API endpoint. |
+
+Scrolling further shows **Forwarded**, **Compression**, and **Payload Validation**, then the collapsed **Advanced Configurations** toggle, and finally **Embedding Provider Name** and **Result Type**:
+
+<ThemedImage
+    alt="Bottom of the OpenAI Create Embedding Provider form showing the end of Timeout, then Forwarded (default disable), Compression (default AUTO), Payload Validation (default true), the collapsed Advanced Configurations toggle, Embedding Provider Name set to openaiEmbeddingprovider, Result Type locked to openai:EmbeddingProvider, and the Save button."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/10-openai-inline-bottom-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/10-openai-inline-bottom-v5.1.png'),
+    }}
+/>
+
+The connection fields on the form are optional and have these defaults:
+
+| Field | Default | Available values |
+|---|---|---|
+| **HTTP Version** | `HTTP_2_0` | The HTTP version understood by the client. |
+| **Timeout** | `60` | The maximum time to wait (in seconds) for a response before closing the connection. |
+| **Forwarded** | `"disable"` | The choice of setting the `forwarded`/`x-forwarded` header. |
+| **Compression** | `AUTO` | `AUTO`, `ALWAYS`, `NEVER`. Specifies the way of handling the compression (`accept-encoding`) header. |
+| **Payload Validation** | `true` | `true`, `false`. Enables inbound payload validation provided by the constraint package. |
+| **Embedding Provider Name** | `openaiEmbeddingprovider` | Name of the embedding-provider connection. |
+| **Result Type** | `openai:EmbeddingProvider` | Locked. |
+
+### Advanced configurations
+
+Expanding **Advanced Configurations** shows the exact same panel as the [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations) section on the Model Providers page. OpenAI adds no provider-specific fields here.
+
+The OpenAI embedding provider accepts text-only chunks. Image or audio chunks raise an error.
+
 ## OpenRouter
 
 OpenRouter exposes embedding models from many providers behind a single API.
@@ -187,6 +240,7 @@ OpenRouter's embedding endpoint accepts text-only chunks. Image or audio chunks 
 | Prototyping, no infra setup | **Default WSO2**: sign in once, no key needed. |
 | Already on Azure | **Azure OpenAI**: keep traffic inside your Azure tenant. |
 | Already on Google Cloud | **Vertex**: same auth as the rest of GCP. |
+| Already using OpenAI models | **OpenAI**: use your existing OpenAI API key. |
 | Want one key across many vendors | **OpenRouter**. |
 
 The provider selected at ingest time must remain consistent for the lifetime of the vector store. Switching providers requires re-embedding all stored content.

@@ -8,7 +8,7 @@ Automate build and test of your WSO2 Integrator projects using Azure DevOps Pipe
 
 ## Overview
 
-Azure DevOps Pipelines provides a fully managed CI/CD service that integrates with Git repositories. For WSO2 Integrator projects built on Ballerina, a pipeline runs tests and builds the package using the official `ballerina/ballerina` Docker image with no manual installation steps required.
+Azure DevOps Pipelines provides a fully managed CI/CD service that integrates with Git repositories. For WSO2 Integrator projects built on Ballerina, a pipeline installs Ballerina on the Microsoft-hosted Ubuntu agent, then runs tests and builds the package.
 
 ## Prerequisites
 
@@ -29,9 +29,12 @@ trigger:
 pool:
   vmImage: "ubuntu-latest"
 
-container: ballerina/ballerina:latest
-
 steps:
+  - script: |
+      wget -q https://dist.ballerina.io/downloads/2201.14.0/ballerina-2201.14.0-swan-lake-linux-x64.deb
+      sudo dpkg -i ballerina-2201.14.0-swan-lake-linux-x64.deb
+    displayName: "Install Ballerina"
+
   - script: bal test
     displayName: "Run tests"
 
@@ -41,12 +44,17 @@ steps:
 
 ## Test step details
 
-The pipeline runs inside the `ballerina/ballerina:latest` container, which provides Ballerina and the required JDK with no installation steps.
+The pipeline installs Ballerina from the official Linux installer, which includes the Java runtime that Ballerina needs, and then runs the tests.
+
+The pipeline doesn't use the `ballerina/ballerina` image as a container job. That image is based on Alpine Linux, which doesn't meet the [Azure Pipelines requirements for Linux container jobs](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/container-phases?view=azure-devops#requirements-for-container-jobs).
 
 ```yaml
-container: ballerina/ballerina:latest
-
 steps:
+  - script: |
+      wget -q https://dist.ballerina.io/downloads/2201.14.0/ballerina-2201.14.0-swan-lake-linux-x64.deb
+      sudo dpkg -i ballerina-2201.14.0-swan-lake-linux-x64.deb
+    displayName: "Install Ballerina"
+
   - script: bal test
     displayName: "Run tests"
 ```

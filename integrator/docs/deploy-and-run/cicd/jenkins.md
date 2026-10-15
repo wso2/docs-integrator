@@ -26,7 +26,7 @@ Create a `Jenkinsfile` at the root of your repository:
 pipeline {
     agent {
         docker {
-            image 'ballerina/ballerina:latest'
+            image 'ballerina/ballerina:2201.14.0'
         }
     }
 
@@ -48,12 +48,12 @@ pipeline {
 
 ## Test stage details
 
-The pipeline uses the `ballerina/ballerina:latest` Docker image as its agent, so Ballerina and the required JDK are available with no installation steps.
+The pipeline uses the `ballerina/ballerina:2201.14.0` Docker image as its agent, so Ballerina and the required JDK are available with no installation steps.
 
 ```groovy
 agent {
     docker {
-        image 'ballerina/ballerina:latest'
+        image 'ballerina/ballerina:2201.14.0'
     }
 }
 ```

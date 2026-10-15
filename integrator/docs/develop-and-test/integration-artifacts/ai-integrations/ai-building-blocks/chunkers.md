@@ -49,7 +49,7 @@ Expand **AI Chunkers** to reveal the three individual chunker types: **Generic R
     }}
 />
 
-## Implementations overview
+## Supported chunkers
 
 All three local chunkers ship in the core `ballerina/ai` package. The Devant Chunker is a remote implementation that delegates the work to the WSO2 Integration Platform.
 

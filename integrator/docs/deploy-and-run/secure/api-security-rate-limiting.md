@@ -13,7 +13,6 @@ Implement rate limiting using a middleware pattern with Ballerina's HTTP interce
 ```ballerina
 import ballerina/http;
 import ballerina/cache;
-import ballerina/time;
 
 final cache:Cache rateLimitCache = new ({
     capacity: 10000,
@@ -33,7 +32,7 @@ service class RateLimitInterceptor {
                 headers: {"Retry-After": "60"}
             };
         }
-        rateLimitCache.put(clientIp, (count is int ? count + 1 : 1));
+        check rateLimitCache.put(clientIp, (count is int ? count + 1 : 1));
         return ctx.next();
     }
 }
@@ -45,9 +44,11 @@ Configure maximum request payload size on the HTTP listener:
 
 ```ballerina
 listener http:Listener apiListener = new (9090, {
-    maxPayloadSize: 1048576,  // 1 MB max payload
-    maxHeaderSize: 8192,      // 8 KB max header size
-    maxUriLength: 4096        // 4 KB max URI length
+    requestLimits: {
+        maxEntityBodySize: 1048576,  // 1 MB max payload
+        maxHeaderSize: 8192,         // 8 KB max header size
+        maxUriLength: 4096           // 4 KB max URI length
+    }
 });
 ```
 

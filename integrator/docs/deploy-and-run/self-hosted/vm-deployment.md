@@ -9,7 +9,7 @@ This page explains how to run WSO2 Integrator projects as standalone JAR files o
 :::info Prerequisites
 - [Ballerina installed](https://ballerina.io/downloads/) on any machine where you want to run the project
 - A WSO2 Integrator project based on Ballerina
-- For production VM deployments: Java Runtime (JDK 21 or later)
+- For production VM deployments: Java Runtime (JDK 25 or later)
 
 ## Deploy with executable JAR
 
@@ -19,7 +19,7 @@ For production VM deployments, WSO2 Integrator projects compile to executable JA
 
 | Requirement | Details |
 |-------------|---------|
-| Java Runtime | JDK 21 or later |
+| Java Runtime | JDK 25 or later |
 | Operating System | Linux (recommended), macOS, or Windows |
 | Memory | Minimum 512 MB, recommended 1 GB+ per instance |
 | Ballerina | Distribution installed on the build machine |
@@ -53,7 +53,6 @@ java -jar target/bin/my_integration.jar
 | `--cloud=docker` | Also generate Docker artifacts |
 | `--graalvm` | Build a GraalVM native image |
 | `--observability-included` | Bundle observability dependencies |
-| `-DskipTests` | Skip test execution during build |
 
 ### Transfer the JAR to your VM
 
@@ -92,7 +91,6 @@ java \
   -XX:MaxGCPauseMillis=200 \
   -XX:+HeapDumpOnOutOfMemoryError \
   -XX:HeapDumpPath=/var/log/integrations/ \
-  -Dballerina.observability.enabled=true \
   -jar my_integration.jar
 ```
 
@@ -173,7 +171,15 @@ name = "notification_handler"
 version = "2.1.0"
 ```
 
-3. Build the consolidated JAR:
+3. Import each integration in a source file of the consolidation project (for example, `main.bal`) so that its services start with the runtime. A dependency entry in `Ballerina.toml` alone does not start them:
+
+```ballerina
+import myorg/order_service as _;
+import myorg/inventory_sync as _;
+import myorg/notification_handler as _;
+```
+
+4. Build the consolidated JAR:
 
 ```bash
 bal build
@@ -224,7 +230,6 @@ java \
   -XX:MaxGCPauseMillis=200 \
   -XX:+HeapDumpOnOutOfMemoryError \
   -XX:HeapDumpPath=/var/log/integrations/ \
-  -Dballerina.observability.enabled=true \
   -jar my_integration.jar
 ```
 

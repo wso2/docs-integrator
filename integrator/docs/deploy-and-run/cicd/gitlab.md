@@ -21,7 +21,7 @@ Create a `.gitlab-ci.yml` file at the root of your repository:
 
 ```yaml
 # .gitlab-ci.yml
-image: ballerina/ballerina:latest
+image: ballerina/ballerina:2201.14.0
 
 stages:
   - test

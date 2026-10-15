@@ -39,9 +39,17 @@ These values default to `localhost:9446` and must be updated when ICP is accesse
 | `enableRefreshTokenRotation` | `boolean` | `true`                     | Rotate refresh token on each use                                  |
 | `maxRefreshTokensPerUser`    | `int`     | `10`                       | Maximum active refresh tokens per user (`0` = unlimited)          |
 
+## MI management access settings
+
+| Key               | Type      | Default | Description |
+| ----------------- | --------- | ------- | ----------- |
+| `miTunnelEnabled` | `boolean` | `false` | Send management requests to MI runtimes in heartbeat responses instead of calling each runtime's management API directly. Use this when ICP cannot reach the MI management API, for example when MI runs behind a load balancer. Requires WSO2 Integrator: MI 4.7.0 or later. |
+
+Add `miTunnelEnabled` before the first `[section]` header and restart ICP. For details, see [Connect MI behind a load balancer](https://mi.docs.wso2.com/en/4.7.0/install-and-setup/install/connecting-an-integration-to-icp/#connect-mi-behind-a-load-balancer) in the MI documentation.
+
 ## Runtime management TLS settings
 
-ICP calls each runtime's management API directly, over HTTPS, to show artifact source and WSDLs, change loggers, enable or disable artifacts, and toggle tracing and statistics. These settings control how ICP verifies the certificate the runtime presents.
+ICP calls each runtime's management API directly, over HTTPS, to show artifact source and WSDLs, change loggers, enable or disable artifacts, and toggle tracing and statistics. These settings control how ICP verifies the certificate the runtime presents. They don't apply to MI runtimes when `miTunnelEnabled` is `true`, because ICP then doesn't call the MI management API directly.
 
 `artifactsApiTrustStorePath` and `artifactsApiTrustStorePassword` are available from ICP 2.1.0. For earlier versions, see [Trust an internal CA on ICP 2.0.0](#trust-an-internal-ca-on-icp-200).
 

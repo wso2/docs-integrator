@@ -15,7 +15,7 @@ Configure the main database in the `[icp_server.storage]` section of `<ICP_HOME>
 | `dbPort`                | `int`     | `5432`        | Database server port (not used for H2)                                               |
 | `dbName`                | `string`  | `"icp_db"`    | Database or schema name. For Oracle, the service name of the database or PDB          |
 | `dbUser`                | `string`  | `"icp_user"`  | Database user                                                                        |
-| `dbPassword`            | `string`  | —             | Database password                                                                    |
+| `dbPassword`            | `string`  | `"icp_password"` | Database password — **must be changed to a unique password in production**        |
 | `dbUseTLS`              | `boolean` | `false`       | Connect over TLS. Set to `true` for Oracle TCPS endpoints, such as Autonomous Database |
 | `maxOpenConnections`    | `int`     | `10`          | Maximum number of open connections in the pool                                        |
 | `minIdleConnections`    | `int`     | `5`           | Minimum number of idle connections in the pool                                        |
@@ -80,14 +80,14 @@ Note the following when you use Oracle:
 - The schema user needs `CREATE SESSION`, `CREATE TABLE`, `CREATE VIEW`, `CREATE TRIGGER`, `CREATE SEQUENCE`, and a tablespace quota. See [Install ICP](install-icp.md#database).
 - Oracle applies `UNIQUE` constraints to rows with partially null keys, whereas MySQL treats any null key column as distinct. Deduplicate `group_role_mapping` before you migrate data from MySQL.
 
-### H2 (In-Memory)
+### H2
 
 ```toml
 [icp_server.storage]
 dbType = "h2"
 ```
 
-H2 is suitable for development and testing only.
+H2 stores the main database in a file named after `dbName`, so the default is `<ICP_HOME>/bin/database/icp_db.mv.db`. H2 is suitable for development and testing only.
 
 ---
 
@@ -111,7 +111,7 @@ credentialsDbPassword = "icp_password"
 | `credentialsDbPort`     | `int`     | `5432`             | Not used for H2                                   |
 | `credentialsDbName`     | `string`  | `"credentials_db"` | Credentials database name                         |
 | `credentialsDbUser`     | `string`  | `"icp_user"`       | Database user                                     |
-| `credentialsDbPassword` | `string`  | —                  | Database password                                 |
+| `credentialsDbPassword` | `string`  | `"icp_password"`   | Database password                                 |
 | `credentialsDbUseTLS`   | `boolean` | `false`            | Connect over TLS. Set to `true` for Oracle TCPS endpoints |
 
 The credentials database is independent of the main database, so the two can use different engines.

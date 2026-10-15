@@ -45,7 +45,7 @@ Either one opens the **Select Knowledge Base** picker, listing all supported typ
     }}
 />
 
-## Implementations overview
+## Supported knowledge bases
 
 | Knowledge Base | Module | Storage |
 |---|---|---|

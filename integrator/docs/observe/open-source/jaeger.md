@@ -12,27 +12,27 @@ Jaeger is an open-source distributed tracing platform that helps you monitor and
 |-------------|---------|
 | Jaeger | Version 1.45 or later (all-in-one or production deployment) |
 | Ballerina | Built with `--observability-included` |
-| Network | Integration must reach the Jaeger agent or collector |
+| Network | Integration must reach the Jaeger OTLP gRPC endpoint (port `4317`) |
 
 ## Step 1: Start Jaeger
 
-Run the Jaeger OpenTelemetry all-in-one image for development and testing:
+Run the Jaeger all-in-one image for development and testing:
 
 ```bash
 docker run -d --name jaeger \
   -p 13133:13133 \
   -p 16686:16686 \
   -p 4317:4317 \
-  jaegertracing/opentelemetry-all-in-one:latest
+  jaegertracing/jaeger:latest
 ```
 
 | Port | Protocol | Purpose |
 |------|----------|---------|
 | 4317 | gRPC | OpenTelemetry collector (OTLP) |
-| 13133 | HTTP | Health check endpoint |
+| 13133 | HTTP | Health check endpoint (`/status`) |
 | 16686 | HTTP | Jaeger UI |
 
-For production deployments with higher throughput, use the dedicated Jaeger collector and agent components.
+For production deployments with higher throughput, use a dedicated Jaeger collector deployment with a persistent storage backend.
 
 ## Step 2: Configure Ballerina for Jaeger
 
@@ -83,11 +83,11 @@ If `Config.toml` doesn't exist, create it in your project root directory.
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | `agentHostname` | string | `"localhost"` | Jaeger agent hostname |
-| `agentPort` | int | `4317` | Jaeger OpenTelemetry receiver port (gRPC) |
+| `agentPort` | int | `55680` | Jaeger OpenTelemetry receiver port (gRPC). Set it to `4317` for current Jaeger versions. |
 | `samplerType` | string | `"const"` | Sampling strategy: `const`, `probabilistic`, `ratelimiting` |
-| `samplerParam` | float | `1.0` | Sampler parameter (1.0 = sample all) |
-| `reporterFlushInterval` | int | `2000` | Flush interval in milliseconds |
-| `reporterBufferSize` | int | `1000` | Maximum spans buffered |
+| `samplerParam` | decimal | `1` | Sampler parameter (1.0 = sample all) |
+| `reporterFlushInterval` | int | `1000` | Flush interval in milliseconds |
+| `reporterBufferSize` | int | `10000` | Maximum spans buffered |
 
 ### Sampling strategies
 

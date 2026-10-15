@@ -14,21 +14,21 @@ Log all sensitive operations for compliance audits:
 import ballerina/log;
 import ballerina/time;
 
-function auditLog(string action, string userId, string resource, json? details = ()) {
+function auditLog(string action, string userId, string 'resource, json? details = ()) {
     log:printInfo("AUDIT",
         action = action,
         userId = userId,
-        resource = resource,
+        'resource = 'resource,
         timestamp = time:utcToString(time:utcNow()),
         details = details.toString()
     );
 }
 
 // Usage in service resources
-resource function post orders(http:Request req, OrderRequest order) returns http:Created|error {
+resource function post orders(http:Request req, OrderRequest orderRequest) returns http:Created|error {
     string userId = check extractUserId(req);
-    string orderId = check createOrder(order);
-    auditLog("CREATE_ORDER", userId, "orders/" + orderId, order.toJson());
+    string orderId = check createOrder(orderRequest);
+    auditLog("CREATE_ORDER", userId, "orders/" + orderId, orderRequest.toJson());
     return <http:Created>{body: {orderId: orderId}};
 }
 ```

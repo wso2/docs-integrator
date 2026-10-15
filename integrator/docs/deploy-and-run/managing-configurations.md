@@ -100,7 +100,7 @@ Use the `BAL_CONFIG_FILES` environment variable to specify one or more configura
 export BAL_CONFIG_FILES=config/prod/Config.toml
 bal run
 
-# Multiple config files (merged in order, later files override earlier)
+# Multiple config files (merged; earlier files take precedence over later ones)
 export BAL_CONFIG_FILES=config/base/Config.toml:config/prod/Config.toml
 java -jar my_integration.jar
 ```
