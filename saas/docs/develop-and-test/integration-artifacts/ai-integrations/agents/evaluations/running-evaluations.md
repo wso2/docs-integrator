@@ -4,7 +4,7 @@ title: Run Evaluations
 
 # Run Evaluations
 
-Once an evaluation is [configured](creating-evaluations.md), you can run it and review the results in the **Evaluation Report**. Run history is preserved so you can track quality over time and see exactly which code changes affected each run.
+Once an evaluation is configured from a [template](create-evaluations-templates.md) or as a [custom evaluation](create-evaluations-custom.md), you can run it and review the results in the **Evaluation Report**. Run history is preserved so you can track quality over time and see exactly which code changes affected each run.
 
 ## Run an evaluation
 
@@ -90,4 +90,5 @@ This makes it easy to correlate a regression with a specific change. **Restore t
 
 - [Observability](../observability.md) — Trace a single failed case to see exactly what the agent did.
 - [Create evalsets](evalsets.md) — Expand coverage by adding new cases.
-- [Create evaluations](creating-evaluations.md) — Add new checks or LLM-as-judge scoring.
+- [Create evaluations from templates](create-evaluations-templates.md) — Add new checks or LLM-as-judge scoring from a template.
+- [Create custom evaluations](create-evaluations-custom.md) — Build your own checks in the visual designer.
