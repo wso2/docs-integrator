@@ -47,9 +47,29 @@ Use the controls in the bottom-right corner of the canvas to adjust the view:
 
 You can also scroll to zoom and drag to pan across the canvas.
 
-### Generate with AI
+### Build with Copilot
 
-Click the **Generate with AI** button at the top of the canvas to open the [WSO2 Integrator Copilot](../copilot/copilot.md). Describe what you want in natural language, and WSO2 Integrator Copilot generates the integration with the appropriate entry points, connections, and logic.
+Describe what you want in natural language, and [WSO2 Integrator Copilot](../copilot/copilot.md) generates the integration with the appropriate entry points, connections, and logic.
+
+- **New integration**: The canvas shows the Copilot composer. Describe what you want to build and send it, or pick one of the examples under **Try one of these**.
+
+  <ThemedImage
+      alt="The Copilot composer on the overview of a new integration."
+      sources={{
+          light: useBaseUrl('/img/editor/copilot/copilot-composer.png'),
+          dark: useBaseUrl('/img/editor/copilot/copilot-composer.png'),
+      }}
+  />
+
+- **Integration with artifacts**: Select the Copilot orb in the bottom-right corner of the canvas. Select it once for a quick chat, or double-click it to open the full Copilot panel.
+
+  <ThemedImage
+      alt="The WSO2 Integrator Copilot orb on the integration overview."
+      sources={{
+          light: useBaseUrl('/img/editor/copilot/copilot-orb.png'),
+          dark: useBaseUrl('/img/editor/copilot/copilot-orb.png'),
+      }}
+  />
 
 ### Add artifact
 
@@ -122,7 +142,15 @@ The **Readme** tab next to **Design** displays the contents of your project's `R
     }}
 />
 
-Click **Edit** to modify the README directly. You can also click **Generate with AI** to create a README automatically based on your project's components and configuration.
+Click **Edit** to modify the README directly. On a new integration that has a README but no artifacts yet, you can also click **Generate with Readme** to have Copilot plan and build the integration from the README.
+
+<ThemedImage
+    alt="The Readme tab of a new integration showing the README content and the Generate with Readme button."
+    sources={{
+        light: useBaseUrl('/img/editor/views/integration-view/generate-with-readme-v5.1.png'),
+        dark: useBaseUrl('/img/editor/views/integration-view/generate-with-readme-v5.1.png'),
+    }}
+/>
 
 ## What's next
 
