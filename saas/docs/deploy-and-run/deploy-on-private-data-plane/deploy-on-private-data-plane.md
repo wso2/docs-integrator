@@ -1,10 +1,12 @@
 ---
-title: Deploy on a Private Data Plane
+title: Set up a Private Data Plane
 ---
 
-# Deploy on a Private Data Plane
+# Set up a Private Data Plane
 
 A private data plane (PDP) provides dedicated infrastructure for a single organization to run its integrations. Unlike a cloud data plane which runs on shared multi-tenant infrastructure managed by WSO2, a private data plane gives your organization full isolation at the runtime level. This makes it the right choice when you have strict data residency requirements, need to meet compliance standards like GDPR or HIPAA, or want runtime traffic to stay within your own network boundary. Private data planes can be deployed on Azure, AWS, GCP, or on-premises infrastructure.
+
+A private data plane is still part of WSO2 Cloud and is managed through the same control plane, so [deploying an integration](../deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) works exactly as it does on the WSO2 Cloud data plane. This page covers the one-time infrastructure setup, which is a platform administrator task.
 
 ## Infrastructure requirements
 

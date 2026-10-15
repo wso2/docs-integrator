@@ -73,6 +73,14 @@ Managed backing services and resources your integrations can use.
     <li>Deploy the AI agents that consume them</li>
   </ul>
 
+<PaletteCard icon="agents" href="/manage/voice-agents">
+  <h3 class="palette-card-title">Voice Agents (Preview)</h3>
+  <ul class="palette-card-list">
+    <li>Add voice to a deployed AI agent</li>
+    <li>Choose speech-to-text and text-to-speech providers</li>
+    <li>Test it live in the Voice Tester</li>
+  </ul>
+
 ## Organization and billing
 
 Organization-level governance, separate from day-to-day integration work.

@@ -53,7 +53,7 @@ Scroll to see the remaining options:
     }}
 />
 
-## Implementations overview
+## Supported model providers
 
 | Provider | Module | API key required? | Has embedding provider? |
 |---|---|---|---|
@@ -516,6 +516,8 @@ Reasoning effort applies only to reasoning models. The chat-tuned variants (`gpt
 | `gpt-5.3-codex` | `low`, `medium`, `high`, `xhigh` |
 | `gpt-5.4`, `gpt-5.4-mini`, `gpt-5.4-nano`, `gpt-5.5`, and the `gpt-5.6` family | `none`, `low`, `medium`, `high`, `xhigh` |
 | o-series (`o1`, `o1-pro`, `o3`, `o3-mini`, `o3-pro`, `o4-mini`) and the Codex models | Accepted; the value is passed through without a per-model restriction list. |
+
+The OpenAI package also ships an **Embedding Provider**. See [OpenAI](embedding-providers.md#openai).
 
 ## OpenRouter
 

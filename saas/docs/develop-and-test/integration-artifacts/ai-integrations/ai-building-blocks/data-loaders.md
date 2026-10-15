@@ -28,7 +28,7 @@ In the flow editor, open the **Add Node** panel and go to **AI > RAG > Data Load
     }}
 />
 
-## Implementations overview
+## Supported data loaders
 
 | Data Loader | Module | Reads from | Result type |
 |---|---|---|---|

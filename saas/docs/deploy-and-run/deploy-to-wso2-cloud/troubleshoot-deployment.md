@@ -10,14 +10,15 @@ Before you start digging into the deployment layer, confirm the integration runs
 
 ## Configuration in deployed environments
 
-Configurable values are resolved in this priority order (highest to lowest):
+On WSO2 Cloud, configurable values are not read from a `Config.toml` file in the repository. They are set per environment from the integration's **Configure** view and injected at runtime, so a value that works locally can still be missing or wrong once deployed.
 
-1. `BAL_CONFIG_VAR_<VARIABLE_NAME>` environment variables (per-variable override; highest priority).
-2. The `BAL_CONFIG_DATA` environment variable (inline TOML).
-3. Files listed in `BAL_CONFIG_FILES` (colon-separated on Linux and macOS, semicolon-separated on Windows).
-4. `Config.toml` in the working directory.
+If a deployed integration fails to start with `value not provided for required configurable variable`, the configurable was declared in the integration but never given a value for that environment.
 
-For sensitive values such as API keys and passwords, prefer injecting each value through a `BAL_CONFIG_VAR_<VARIABLE_NAME>=<value>` environment variable rather than committing them to a file. See [Managing configurations](managing-configurations.md) for how to set these per environment on WSO2 Cloud.
+1. Open the integration from the project home.
+2. Click **Configure** on the environment card for the failing environment.
+3. Check that every required configurable has a value, then click **Update**.
+
+The integration restarts with the new configuration. For sensitive values such as API keys and passwords, mark the value as a secret so it is stored in the data plane's secret vault rather than held in plain text. See [Runtime configurations](../../manage/configurations/runtime-configurations.md) for configuring values per environment, secrets, and organization-level configuration groups.
 
 ## What's next
 

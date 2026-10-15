@@ -10,7 +10,7 @@ Before you start digging into the deployment layer, confirm the integration runs
 
 ## Docker deployments
 
-WSO2 Integrator supports Code-to-Cloud (C2C) Docker generation through `cloud = "docker"` in `Ballerina.toml`. The generated Dockerfile uses the `ballerina/jvm-runtime` base image, which is Debian-based. A custom base image (for example, Alpine) can introduce native library compatibility issues, particularly around DNS resolution and TLS.
+WSO2 Integrator supports Code-to-Cloud (C2C) Docker generation through `cloud = "docker"` in `Ballerina.toml`. The generated Dockerfile uses the `ballerina/jvm-runtime` base image, which is Alpine-based. A custom base image can introduce native library compatibility issues, particularly around DNS resolution and TLS.
 
 Build the image:
 
@@ -71,16 +71,16 @@ tag = "v1.0.0"
 
 [cloud.deployment]
 min_memory = "256Mi"      # default: "100Mi"
-max_memory = "512Mi"      # default: "256Mi"
-min_cpu = "250m"          # default: "1000m"
-max_cpu = "1500m"         # default: "1500m"
+max_memory = "512Mi"      # default: "512Mi"
+min_cpu = "250m"          # default: "200m"
+max_cpu = "1500m"         # default: "500m"
 external_accessible = true
 
 [cloud.deployment.autoscaling]
-min_replicas = 2          # default: 2
-max_replicas = 5          # default: 3
+min_replicas = 2          # default: 1
+max_replicas = 5          # default: 2
 cpu = 50                  # CPU threshold percentage; default: 50
-memory = 80               # memory threshold percentage; default: 80
+memory = 80               # memory threshold percentage; default: not set
 
 [cloud.deployment.probes.readiness]
 port = 9090
@@ -103,7 +103,7 @@ file = "Config.toml"
 # Secret files mounted to a directory
 [[cloud.secret.files]]
 file = "secrets.toml"
-mount_dir = "/home/ballerina/secrets"
+mount_dir = "/home/ballerina/data"
 ```
 
 For the full `Cloud.toml` reference, see the [Code-to-Cloud specification](https://github.com/ballerina-platform/ballerina-spec/blob/master/c2c/code-to-cloud-spec.md).
@@ -120,7 +120,7 @@ bal build --graalvm
 
 ### Prerequisites
 
-- GraalVM JDK installed, with `GRAALVM_HOME` set or `native-image` on the `PATH`.
+- GraalVM JDK installed, with `GRAALVM_HOME` set to the GraalVM installation directory.
 - The following block in `Ballerina.toml` (alternative to the `--graalvm` CLI flag):
 
 ```toml
@@ -137,13 +137,13 @@ If a native image fails at runtime, reproduce the issue with `bal run` (without 
 
 | Error or symptom                           | Cause                                               | Fix                                                                                          |
 | :----------------------------------------- | :-------------------------------------------------- | :------------------------------------------------------------------------------------------- |
-| `native-image` command not found           | GraalVM not installed or not on the `PATH`          | Install GraalVM, set `GRAALVM_HOME`, and run `gu install native-image`                       |
+| `native-image` command not found           | GraalVM not installed or not on the `PATH`          | Install GraalVM and set `GRAALVM_HOME` to the GraalVM installation directory                 |
 | Reflection error at runtime                | A class accessed through reflection isn't registered | Add a `reflect-config.json` file to `resources/META-INF/native-image/` in the project        |
 | Build fails with "unsupported feature"     | A library uses a JVM feature that GraalVM doesn't support | Check whether the library has GraalVM support; some `ballerinax` connectors may not be compatible |
 | Native image crashes at runtime            | Runtime behavior differs from JVM mode              | Test in JVM mode first. If JVM mode works, file a GraalVM compatibility issue.               |
 | Build takes very long or runs out of memory | Native image compilation is resource-intensive     | Increase the build memory: `graalvmBuildOptions = "-J-Xmx8g"`                                |
 
-`JAVA_OPTS` (for example, `-Xmx`) does **not** apply to native images. Native images manage their own memory. To control native image heap size, use `-R:MaxHeapSize=512m` in `graalvmBuildOptions` or at runtime.
+`JAVA_OPTS` (for example, `-Xmx`) does **not** apply to native images. Native images manage their own memory. To control native image heap size, use `-R:MaxHeapSize=512m` in `graalvmBuildOptions`, or pass `-Xmx512m` to the native executable at runtime.
 
 ## Choreo deployments
 
@@ -169,9 +169,10 @@ If a native image fails at runtime, reproduce the issue with `bal run` (without 
 Configurable values are resolved in this priority order (highest to lowest):
 
 1. `BAL_CONFIG_VAR_<VARIABLE_NAME>` environment variables (per-variable override; highest priority).
-2. The `BAL_CONFIG_DATA` environment variable (inline TOML).
+2. `-C<key>=<value>` command-line arguments.
 3. Files listed in `BAL_CONFIG_FILES` (colon-separated on Linux and macOS, semicolon-separated on Windows).
-4. `Config.toml` in the working directory.
+4. The `BAL_CONFIG_DATA` environment variable (inline TOML), used only when `BAL_CONFIG_FILES` isn't set.
+5. `Config.toml` in the working directory, used only when neither `BAL_CONFIG_FILES` nor `BAL_CONFIG_DATA` is set.
 
 For sensitive values such as API keys and passwords, prefer injecting each value through a `BAL_CONFIG_VAR_<VARIABLE_NAME>=<value>` environment variable instead of mounting a file. This keeps secrets off disk inside the container.
 
