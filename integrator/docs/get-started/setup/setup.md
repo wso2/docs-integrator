@@ -18,6 +18,9 @@ Before installing WSO2 Integrator, ensure your machine meets the following hardw
 | **Disk Space** | 4 GB free space | 10 GB free space (SSD recommended) |
 | **Network** | Internet connection to install, update, and pull packages from Ballerina Central | Broadband internet connection |
 
+:::tip Behind a corporate proxy?
+If your network restricts internet access, see [Work in a Restricted Network](../../develop-and-test/create-workspace/restricted-networks/restricted-networks.md) to configure a proxy before you install.
+
 ## Installation steps
 
 ### Step 1: Download WSO2 Integrator

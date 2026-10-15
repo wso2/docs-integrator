@@ -1,8 +1,8 @@
 ---
-title: Integration Control Plane(ICP) support in Editor
+title: Integration Control Plane(ICP) Support in Editor
 ---
 
-# Integration Control Plane(ICP) support in  Editor
+# Integration Control Plane(ICP) Support in  Editor
 
 The WSO2 Integrator editor can start a local **Integration Control Plane (ICP)** server so you can observe and manage your integrations while you are still developing them. Enable ICP for an integration, run it as usual, and its runtime shows up in the ICP console.
 

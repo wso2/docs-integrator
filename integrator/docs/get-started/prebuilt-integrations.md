@@ -1,8 +1,8 @@
 ---
-title: Pre-built Integrations
+title: Pre-Built Integrations
 ---
 
-# Try Pre-built Integrations
+# Try Pre-Built Integrations
 
 **Time:** Under 10 minutes | **What you'll do:** Download a ready-made integration between two applications, add your credentials, and run it. You don't build anything from scratch.
 

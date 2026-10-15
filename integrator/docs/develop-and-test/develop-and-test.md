@@ -2,7 +2,7 @@
 title: Develop and Test
 ---
 
-# Build your integration
+# Build Your Integration
 
 This section covers the Develop and Test phase of the [integration lifecycle](../platform-overview/index.md#from-development-to-production): building integrations in the WSO2 Integrator editor before anything ships. We assume you're already familiar with the editor's surfaces from the [Editor Tour](../editor/editor.md).
 
