@@ -13,7 +13,7 @@ The finished flow has three steps:
 3. **Send the confirmation email** when payment succeeded, or **cancel the order** when it did not.
 
 <ThemedImage
-    alt="The completed orderWorkflow diagram: Start, the reserveInventory activity, a log step, a Wait for payment node fed from outside the flow, and an If that branches to sendEmail on the payment path and cancelOrder on the Else path"
+    alt="The completed orderWorkflow diagram: Start, the reserveInventory activity, a Wait for payment node fed from outside the flow, and an If that branches to sendEmail on the payment path and cancelOrder on the Else path"
     sources={{
         light: useBaseUrl('/img/workflows/getting-started/build-an-order-processing-workflow/completed-workflow-light.png'),
         dark: useBaseUrl('/img/workflows/getting-started/build-an-order-processing-workflow/completed-workflow-dark.png'),
@@ -55,10 +55,9 @@ The finished flow has three steps:
 3. Set **Name** to `orderWorkflow`.
 4. Click the **Workflow Input Data Type** field, then create a new type for the order information that the workflow needs.
 5. Click **+ Create New Type**.
-6. In the **Create New Type** dialog, select the **Create from scratch** tab.
-7. Set **Kind** to **Record**.
-8. Change **Name** from `MyType` to `OrderInfo`.
-9. Add each field with the **+** next to **Fields**, then set its name and type:
+6. The **Create New Type** dialog opens with the correct defaults: the **Create from scratch** tab and **Kind** set to **Record**.
+7. Change **Name** from `MyType` to `OrderInfo`.
+8. Add each field with the **+** next to **Fields**, then set its name and type:
 
    | Field | Type |
    |---|---|
@@ -67,8 +66,8 @@ The finished flow has three steps:
    | `customerEmail` | `string` |
    | `total` | `int` |
 
-10. Click **Save**. The record is added to your project and appears under **Types** in the sidebar.
-11. Click **Create**. The workflow is generated and its diagram opens with a single **Start** node, ready for the first step.
+9. Click **Save**. The record is added to your project and appears under **Types** in the sidebar.
+10. Click **Create**. The workflow is generated and its diagram opens with a single **Start** node, ready for the first step. The workflow receives the order as its `input` parameter.
 
 <ThemedImage
     alt="Creating the orderWorkflow durable workflow and its OrderInfo input type"
@@ -89,7 +88,7 @@ type OrderInfo record {|
 
 ```ballerina
 @workflow:Workflow
-function orderWorkflow(workflow:Context ctx, OrderInfo orderInfo) returns json|error {
+function orderWorkflow(workflow:Context ctx, OrderInfo input) returns json|error {
 }
 ```
 
@@ -107,14 +106,14 @@ The first step of the order process reserves stock. You create the activity and 
 3. Under **Current Integration**, click **+ Create Activity**.
 4. In the **Workflow Activity** form, set **Activity Name** to `reserveInventory`.
 5. Under **Parameters**, click **+ Add Parameter**, set **Type** to `OrderInfo` and **Name** to `orderInfo`, then click **Add**.
-6. Leave **Return Type** empty. This activity holds stock and returns nothing. Click **Save**.
+6. Leave **Return Type** empty. This activity holds stock and returns nothing, so the designer declares it as `returns error?`. Click **Save**.
 7. In the **Activities** panel, under **Current Integration**, click `reserveInventory` to add the activity call to the workflow diagram.
 8. Fill in the call form:
 
    | Field | Value |
    |---|---|
    | **Order Info** | The order to reserve. Switch to **Expression** and set it to the workflow's input parameter. |
-   | **Retry Policy** | **No Automatic Retry** for now. |
+   | **Retry Policy** | Leave it on **No Retry**, the default, for now. |
 
 9. Click **Save**. The `reserveInventory` node appears on the diagram.
 10. Give the activity something to do. Click the open icon on the node to open its own diagram. To keep it simple, mock the implementation with a log line.
@@ -140,8 +139,8 @@ function reserveInventory(OrderInfo orderInfo) returns error? {
 
 ```ballerina
 @workflow:Workflow
-function orderWorkflow(workflow:Context ctx, OrderInfo orderInfo) returns json|error {
-    anydata inventoryResult = check ctx->callActivity(reserveInventory, {orderInfo: orderInfo});
+function orderWorkflow(workflow:Context ctx, OrderInfo input) returns json|error {
+    () _ = check ctx->callActivity(reserveInventory, {orderInfo: input});
 }
 ```
 
@@ -152,11 +151,9 @@ function orderWorkflow(workflow:Context ctx, OrderInfo orderInfo) returns json|e
 
 Payment is confirmed by something outside the workflow, such as a payment gateway callback or an operator action. Model that as a **data event**: a named slot the workflow waits on, and that anyone holding the workflow ID can fill.
 
-1. Log a line first, so the run says why it is sitting still. Go back to the **orderWorkflow** under workflows. Click the **+** below the reserveInventory step. In the node panel, scroll down and click **Show More Functions**.
-2. In the **Functions** panel, under **Imported Functions** > **log**, click **printInfo**. Set **Msg** to `Waiting for payment` and click **Save**.
-3. Now add the wait. Click **+** below the log step.
-4. In the node panel, under **Workflow** > **Steps**, click **Await Data Event**. The **Await Data** form opens.
-5. Under **Data Waits**, fill in the entry:
+1. Go back to **orderWorkflow** under **Workflows** in the sidebar, then click the **+** below the `reserveInventory` step.
+2. In the node panel, under **Workflow** > **Steps**, click **Await Data**. The **Await Data** form opens.
+3. Under **Data Waits**, fill in the entry:
 
    | Field | Value | Description                                                                                                                                         |
    |---|---|-----------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -164,7 +161,7 @@ Payment is confirmed by something outside the workflow, such as a payment gatewa
    | **Data Type** | `boolean` | The type of the value the workflow expects. To keep this guide simple, use `boolean`. If the payment is received, the value is `true`. |
    | **Data Name** | `payment` | The name used when sending the data into this workflow.                                                                                             |
 
-6. Click **Add** then click **Save**.
+4. Click **Add** then click **Save**.
 
 The diagram gains a **Wait for payment** node, drawn with an incoming arrow from outside the flow, because that is where the value comes from.
 The workflow now suspends at this line, and only at this line. It holds no thread and no connection while it waits, and it survives a restart of the runtime.
@@ -186,9 +183,8 @@ type OrderWorkflowData record {|
 
 ```ballerina
 @workflow:Workflow
-function orderWorkflow(workflow:Context ctx, OrderInfo orderInfo, OrderWorkflowData data) returns json|error {
-    anydata inventoryResult = check ctx->callActivity(reserveInventory, {orderInfo: orderInfo});
-    log:printInfo("Waiting for payment");
+function orderWorkflow(workflow:Context ctx, OrderInfo input, OrderWorkflowData data) returns json|error {
+    () _ = check ctx->callActivity(reserveInventory, {orderInfo: input});
     boolean payment = check wait data.payment;
 }
 ```
@@ -257,7 +253,7 @@ The `payment` path tells the customer the order is confirmed. Create that activi
 
 ```ballerina
 @workflow:Activity
-function sendEmail(OrderInfo orderInfo) {
+function sendEmail(OrderInfo orderInfo) returns error? {
     log:printInfo(string `Email sent to ${orderInfo.customerEmail}`);
 }
 ```
@@ -269,7 +265,7 @@ Keep **Msg** on **Text** whenever the message is words with values dropped into 
 
 The **Else** path releases the hold instead.
 
-1. Click **+** on the **Else** path, then under **Workflow** > **Steps**, click **Call Activity**.
+1. Go back to **orderWorkflow** under **Workflows** in the sidebar. Click **+** on the **Else** path, then under **Workflow** > **Steps**, click **Call Activity**.
 
 2. Click the **+** on the **Current Integration** header.
 
@@ -291,20 +287,19 @@ Both branches now end in an activity, and the workflow is complete.
 
 ```ballerina
 @workflow:Activity
-function cancelOrder(OrderInfo orderInfo) {
+function cancelOrder(OrderInfo orderInfo) returns error? {
 }
 ```
 
 ```ballerina
 @workflow:Workflow
-function orderWorkflow(workflow:Context ctx, OrderInfo orderInfo, OrderWorkflowData data) returns json|error {
-    anydata inventoryResult = check ctx->callActivity(reserveInventory, {orderInfo: orderInfo});
-    log:printInfo("Waiting for payment");
+function orderWorkflow(workflow:Context ctx, OrderInfo input, OrderWorkflowData data) returns json|error {
+    () _ = check ctx->callActivity(reserveInventory, {orderInfo: input});
     boolean payment = check wait data.payment;
     if payment {
-        anydata result = check ctx->callActivity(sendEmail, {orderInfo: orderInfo});
+        () _ = check ctx->callActivity(sendEmail, {orderInfo: input});
     } else {
-        anydata result = check ctx->callActivity(cancelOrder, {orderInfo: orderInfo});
+        () _ = check ctx->callActivity(cancelOrder, {orderInfo: input});
     }
 }
 ```
@@ -315,9 +310,9 @@ A workflow does not start itself. It is launched from an entry point such as a s
 
 1. At the top of the screen, click `OrderProcessor` to return to the project.
 2. Click **+ Add Artifact**, then under **Integration as API**, click **HTTP Service**.
-3. On the **Create HTTP Service** form, keep **Service Contract** on **Design From Scratch**, set **Service Base Path** to `/'order`, and click **Create**.
-4. The service opens with no resources. Click **+ Add Resource**.
-5. Set **HTTP Method** to **POST** and **Resource Path** to `.`.
+3. On the **Create HTTP Service** form, keep **Service Contract** on **Design From Scratch**, set **Service Base Path** to `/orderProcess`, and click **Create**.
+4. The service opens with no resources. Click **+ Add Resource**, then click **POST** in the **Select HTTP Method to Add** list.
+5. In **New Resource Configuration**, set **Resource Path** to `.`.
 6. Click **+ Define Payload**, open the **Browse Existing Types** tab, click `OrderInfo` under the current integration, and click **Save**.
 7. Click **Save** to create the resource. Its own diagram opens.
 8. Click **+**, then under **Workflow**, click **Run Workflow**.
@@ -341,7 +336,7 @@ import ballerina/workflow;
 
 listener http:Listener httpDefaultListener = http:getDefaultListener();
 
-service /'order' on httpDefaultListener {
+service /orderProcess on httpDefaultListener {
 
     resource function post .(OrderInfo payload) returns json|error {
         string workflowId = check workflow:run(orderWorkflow, payload);
@@ -353,15 +348,12 @@ service /'order' on httpDefaultListener {
 :::info Hold on to the workflow ID
 **Run Workflow** starts an instance and returns immediately with its ID. It does not wait for the order to finish, which is the point: the run may sit on the payment event for days. Return the ID to the caller, because it is what ties a later payment confirmation to this instance.
 
-:::tip Why `'order` and not `order`
-`order` is a Ballerina keyword, so the resource path is written as the quoted identifier `'order`. The HTTP path is unaffected: the resource still answers on `/order`.
-
 ## Step 9: Deliver the payment confirmation
 
 The run is now waiting on the `payment` data event, and it will wait forever until something fills it. Add a second resource that does.
 
-1. On the service, click the **+** button next to **Resources**.
-2. Set **HTTP Method** to **POST**.
+1. Return to the service: click **HTTP Service - /orderProcess** under **Entry Points** in the sidebar.
+2. Click **+ Resource**, then click **POST**.
 3. The path needs a segment that carries the workflow ID, so click **+ Path Param** and fill in the **Path Parameter** form:
 
    | Field | Value | Description |
@@ -406,7 +398,7 @@ Anyone holding the workflow ID can deliver the value, so in a real integration t
 
 A durable workflow keeps its record in a workflow engine, and by default the runtime expects a local Temporal server (`mode` defaults to `LOCAL`). To keep this walkthrough self-contained, switch to the in-memory engine, which runs inside the integration and needs nothing external. See [Deployment modes](../../develop-and-test/integration-artifacts/workflow/durable-workflow/deployment-modes.md) for the four modes and the settings each one needs.
 
-1. In the sidebar, click **Configurations**.
+1. In the sidebar, hover over **Configurations** and click its **View Configuration** icon.
 2. On the **Configurable Variables** page, under **Imported libraries**, click **ballerina/workflow**.
 3. In the box under `mode`, enter `"IN_MEMORY"`.
 
@@ -425,7 +417,7 @@ A durable workflow keeps its record in a workflow engine, and by default the run
 5. Post an order and keep the returned workflow ID, for example `019ffed4-c12e-7e24-a438-8bdaae2b5a29`:
 
    ```bash
-   curl -X POST http://localhost:9090/order \
+   curl -X POST http://localhost:9090/orderProcess \
      -H 'Content-Type: application/json' \
      -d '{"id": "ORD-1", "customerId": "CUS-9", "customerEmail": "ann@example.com", "total": 4500}'
    ```
@@ -433,26 +425,33 @@ A durable workflow keeps its record in a workflow engine, and by default the run
    The workflow reserves the inventory and then suspends on the `payment` event.
 
    ```bash
-   Compiling source (UP-TO-DATE)
-   myorg/orderprocessor:0.1.0
+   Compiling source
+   	myorg/orderprocessor:0.1.0
+   WARNING [types.bal:(11:5,11:29)] undocumented field 'payment'
 
    Running executable
 
-   time=2026-08-14T11:23:04.009+05:30 level=INFO module=myorg/orderprocessor message="Inventory reserved"
-   time=2026-08-14T11:23:04.028+05:30 level=INFO module=myorg/orderprocessor message="Waiting for payment"
+   time=2026-10-13T07:53:30.737Z level=INFO module=ballerina/workflow message="" logger="workflow-metrics" sample="workflow.started" workflow_type="workflow-orderWorkflow" task_kind="none" task_name="none" workflow_id="019ffed4-c12e-7e24-a438-8bdaae2b5a29" run_id="16f8ef66-ade6-4534-b709-4bc3259b4e3b"
+   time=2026-10-13T13:23:30.814+05:30 level=INFO module=myorg/orderprocessor message="Inventory reserved"
+   time=2026-10-13T07:53:30.830Z level=INFO module=ballerina/workflow message="" logger="workflow-metrics" sample="activity.executed" activity_type="reserveInventory" workflow_id="019ffed4-c12e-7e24-a438-8bdaae2b5a29" run_id="16f8ef66-ade6-4534-b709-4bc3259b4e3b" attempt=1 outcome="success" duration_seconds=0.022
+   time=2026-10-13T07:53:30.832Z level=INFO module=ballerina/workflow message="Activity execution type=reserveInventory workflowId=019ffed4-c12e-7e24-a438-8bdaae2b5a29 runId=16f8ef66-ade6-4534-b709-4bc3259b4e3b activityId=5ea5fc48-6754-3de2-99dc-3c3bf7f4ea1a attempt=1 outcome=success durationMs=22 args={\"orderInfo\":{\"total\":4500,\"customerEmail\":\"ann@example.com\",\"customerId\":\"CUS-9\",\"id\":\"ORD-1\"}} result=null"
    ```
 
 6. Confirm the payment with the workflow ID from the previous response:
 
    ```bash
-   curl -X POST http://localhost:9090/order/019ffed4-c12e-7e24-a438-8bdaae2b5a29/payment \
+   curl -X POST http://localhost:9090/orderProcess/019ffed4-c12e-7e24-a438-8bdaae2b5a29/payment \
      -H 'Content-Type: application/json' -d 'true'
    ```
 
    The workflow resumes and sends the confirmation email. Post `false` instead and it cancels the order.
 
    ```bash
-   time=2026-08-14T11:34:13.224+05:30 level=INFO module=myorg/orderprocessor message="Email sent to ann@example.com"
+   time=2026-10-13T07:53:33.279Z level=INFO module=ballerina/workflow message="" logger="workflow-metrics" sample="data.sent" data_name="payment" workflow_id="019ffed4-c12e-7e24-a438-8bdaae2b5a29" outcome="success"
+   time=2026-10-13T13:23:33.300+05:30 level=INFO module=myorg/orderprocessor message="Email sent to ann@example.com"
+   time=2026-10-13T07:53:33.304Z level=INFO module=ballerina/workflow message="" logger="workflow-metrics" sample="activity.executed" activity_type="sendEmail" workflow_id="019ffed4-c12e-7e24-a438-8bdaae2b5a29" run_id="16f8ef66-ade6-4534-b709-4bc3259b4e3b" attempt=1 outcome="success" duration_seconds=0.009
+   time=2026-10-13T07:53:33.306Z level=INFO module=ballerina/workflow message="Activity execution type=sendEmail workflowId=019ffed4-c12e-7e24-a438-8bdaae2b5a29 runId=16f8ef66-ade6-4534-b709-4bc3259b4e3b activityId=855793ce-3be1-36bf-99bb-e247797db228 attempt=1 outcome=success durationMs=9 args={\"orderInfo\":{\"total\":4500,\"customerEmail\":\"ann@example.com\",\"customerId\":\"CUS-9\",\"id\":\"ORD-1\"}} result=null"
+   time=2026-10-13T07:53:33.338Z level=INFO module=ballerina/workflow message="" logger="workflow-metrics" sample="workflow.closed" workflow_type="workflow-orderWorkflow" task_kind="none" task_name="none" workflow_id="019ffed4-c12e-7e24-a438-8bdaae2b5a29" run_id="16f8ef66-ade6-4534-b709-4bc3259b4e3b" outcome="success" duration_seconds=2.688
    ```
 
 ## Watch it run

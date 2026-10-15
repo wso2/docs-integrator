@@ -10,28 +10,30 @@ The send is recorded like any other [activity](../activities.md), which is what 
 
 ## Fields
 
-The activity returns nothing, so there is no result variable to name.
+The activity returns nothing, so there is no result variable to name unless you clear **Check Error**: then **Result** names the variable that receives the error, or nil when the send succeeded.
 
 | Field             | Required | Description                                           |
 |-------------------|----------|-------------------------------------------------------|
 | **Connection**    | Yes      | The `email:SmtpClient` to send through.               |
 | **To**            | Yes      | Recipient address, or a list of addresses.            |
 | **Subject**       | Yes      | Subject line.                                         |
-| **Body**          | Yes      | Plain-text body.                                      |
 | **From**          | Yes      | Sender address.                                       |
-| **CC**, **BCC**   | No       | Further recipients. Under the advanced fields.        |
+| **Body**          | Yes      | Plain-text body.                                      |
+| **CC**, **BCC**   | No       | Further recipients.                                   |
 | **Reply To**      | No       | Where replies should go.                              |
 | **Sender**        | No       | Envelope sender, when it differs from **From**.       |
 | **HTML Body**     | No       | An HTML body sent alongside the plain-text one.       |
 | **Content Type**  | No       | MIME content type override, for example `text/plain`. |
 | **Email Headers** | No       | Additional mail headers.                              |
 
-**Retry Policy** and **Check Error** work the same as for every prebuilt activity. See [Prebuilt activities](prebuilt-activities.md#fields-shared-by-all-three).
+The optional fields above sit under the advanced fields.
+
+**Approval Policy**, **Retry Policy**, and **Check Error** work the same as for every prebuilt activity. See [Prebuilt activities](prebuilt-activities.md#fields-shared-by-all-three).
 
 Set **HTML Body** as well when you want a formatted message. The plain-text **Body** is still sent, so clients that cannot render HTML have something to show.
 
 :::warning A retried email is a second email
-Mail cannot be recalled, and the send is not idempotent: if the message left the server but the activity reported a failure, **Auto Retry** sends it again. For customer-facing mail, prefer **No Automatic Retry**, or **Human Review** so a person decides whether to resend. See [Error handling and review activities](../review-activity-and-error-handling.md).
+Mail cannot be recalled, and the send is not idempotent: if the message left the server but the activity reported a failure, **Auto Retry** sends it again. For customer-facing mail, prefer **No Retry**, or **Human Review** so a person decides whether to resend. See [Error handling and review activities](../review-activity-and-error-handling.md).
 
 :::tip Notification or decision?
 Use this activity to tell someone what happened. When the workflow needs an answer back, pause it with a [human task](../await-human-task.md) instead and let the person decide from their inbox in the Control Plane.

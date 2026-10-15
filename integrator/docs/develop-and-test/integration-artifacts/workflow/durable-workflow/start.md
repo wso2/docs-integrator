@@ -17,7 +17,7 @@ A workflow does not start itself. Something has to launch it. It can be any type
 ## Start one from an integration
 
 1. In the trigger artifact flow design, click **+**.
-2. In the node panel, under **Workflow**, click **Run Workflow**.
+2. In the node panel, under **Workflow**, click **Run Workflow**. The panel lists the workflows in the project; click the one to start.
 
    <ThemedImage
        alt="The node panel with Run Workflow and Send Data Event under the Workflow group"
@@ -31,13 +31,14 @@ A workflow does not start itself. Something has to launch it. It can be any type
 
    | Field | Required | Description |
    |---|---|---|
+   | **Workflow** | Yes | The workflow to start. It is preselected with the one you clicked, and can be changed here. |
    | **Input** | Yes | The data the workflow starts with. It must match the workflow's [input type](create.md). Pick the request payload from **Inputs** in the value helper. |
    | **Workflow ID Variable Name** | Yes | The variable that receives the ID of the started run. |
 
 4. Click **Save**.
 
 <ThemedImage
-    alt="Adding a Run Workflow step and following its link to the workflow it starts"
+    alt="Adding a Run Workflow step that starts shipmentWorkflow with the request payload"
     sources={{
         light: useBaseUrl('/img/workflows/develop/start-workflow/add-run-workflow.gif'),
         dark: useBaseUrl('/img/workflows/develop/start-workflow/add-run-workflow.gif'),

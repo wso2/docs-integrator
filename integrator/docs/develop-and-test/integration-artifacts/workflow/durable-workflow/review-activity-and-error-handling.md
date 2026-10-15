@@ -6,18 +6,19 @@ title: Error Handling and Review Activities
 
 Failures and risky steps are where durable workflows earn their keep. Instead of scattering try/catch blocks and retry loops through your flow, you attach a **retry policy** to each activity call — and for the steps that matter most, you put a **human review** in front of the step or behind its failure.
 
-## The three retry policies
+## Retry policies
 
 Every activity call takes a **Retry Policy**, which says what the workflow should do after a failed attempt to execute that activity.
 
-| Policy                           | What happens on failure                                                                                                          |
-|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
-| **No Automatic Retry** (default) | An error is returned from the workflow if the first activity execution attempt fails.                                           |
-| **Auto Retry**                   | The engine re-executes the activity with configurable attempts, delay, and backoff.                                              |
-| **Human Review**                 | A **review task** is created for the roles you name. The reviewer can retry as-is, retry with corrected input, or fail the step. |
+| Policy                     | What happens on failure                                                                                                          |
+|----------------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| **No Retry** (default)     | The activity call returns the error from its first failed attempt, and with **Check Error** selected the workflow fails with it. |
+| **Auto Retry**             | The engine re-executes the activity with configurable attempts, delay, and backoff.                                              |
+| **Human Review**           | A **review task** is created for the roles you name. The reviewer can retry as-is, retry with corrected input, or fail the step. |
+| **Retry, then Review**     | The engine retries first, as with **Auto Retry**, and raises the review only when the last attempt fails. **Max Retries** is required here. |
 
 <ThemedImage
-    alt="The activity call form with the Retry Policy dropdown open on No Automatic Retry, Auto Retry, and Human Review"
+    alt="The activity call form with the Retry Policy dropdown open on its options"
     sources={{
         light: useBaseUrl('/img/workflows/develop/review-activity/retry-policy.png'),
         dark: useBaseUrl('/img/workflows/develop/review-activity/retry-policy.png'),
@@ -51,7 +52,8 @@ The review is listed on the **Human Tasks** page of the [Control Plane](../../..
 
 | Field              | Required | Description                                                                                                                                          |
 |--------------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Reviewer Roles** | No       | The role permitted to decide the review, for example `"Finance"`, or a list of roles such as `["finance", "manager"]`. Leave it empty to let any role decide. |
+| **Reviewer Roles** | Yes      | One or more roles permitted to decide the review, for example `Finance`. It can be left empty only when **Reviewers** names the users who may decide; the form refuses a review that names nobody. |
+| **Title**, **Description**, **Timeout** | No | How the review reads in the inbox and how long it may wait. Left empty, the title and description are worded from the activity and its failure, and the review waits indefinitely. |
 
 <ThemedImage
     alt="The activity call form with Human Review chosen, showing the Reviewer Roles field set to Finance"
@@ -63,22 +65,22 @@ The review is listed on the **Human Tasks** page of the [Control Plane](../../..
 
 ## Approval gates — review *before* the step runs
 
-Some steps should never run without sign-off, even when nothing has failed. A gate like that is set where a [durable agent](../durable-agentic-workflow/create-durable-agent.md#activities) registers the activity as one of its capabilities: click the activity on the agent's diagram, expand **Advanced Configurations**, and select **Requires Approval**.
+Some steps should never run without sign-off, even when nothing has failed. A gate like that is the **Approval Policy** of the activity call. It is on the **Call Activity** form of a workflow, and on the form where a [durable agent](../durable-agentic-workflow/create-durable-agent.md#activities) registers the activity as one of its capabilities.
 
-| Field                 | Required | Description                                                                                                                                                    |
-|-----------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Requires Approval** | No       | Gates the activity. Cleared by default, so an activity runs unattended unless you say otherwise.                                                                |
-| **Reviewer Roles**    | No       | The role permitted to decide this activity's approval reviews, for example `"Finance"`, or a list of roles such as `["finance", "manager"]`. Left empty, the agent's own approval roles apply. |
+| Field               | Required | Description                                                                                                                                                    |
+|---------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Approval Policy** | Yes      | **No Approval** (the default) runs the activity unattended. **Human Approval** gates it behind an approval review.                                            |
+| **Reviewer Roles**  | Yes      | Shown for **Human Approval**. One or more roles permitted to decide the approval, for example `Finance`. It can be left empty only when **Reviewers** names the users who may decide. |
 
 <ThemedImage
-    alt="The payClaim activity registration form with Requires Approval selected and Reviewer Roles set to Finance"
+    alt="The activity call form with Approval Policy set to Human Approval and Reviewer Roles set to Finance"
     sources={{
         light: useBaseUrl('/img/workflows/develop/review-activity/requires-approval.png'),
         dark: useBaseUrl('/img/workflows/develop/review-activity/requires-approval.png'),
     }}
 />
 
-With the gate on, the agent suspends durably before every call to that activity and raises a review activity showing the arguments it *proposes*. Gates are decided on the **Human Tasks** page of the Control Plane. See [Decide a review activity](../../../../icp/manage-workflows/complete-human-tasks.md#decide-a-review-activity).
+With the gate on, the run suspends durably before every call to that activity and raises a review activity showing the arguments it *proposes*. The reviewer proceeds, proceeds with edited arguments, or rejects. Gates are decided on the **Human Tasks** page of the Control Plane. See [Decide a review activity](../../../../icp/manage-workflows/complete-human-tasks.md#decide-a-review-activity).
 
 ## Error handling in the workflow logic
 
@@ -126,8 +128,9 @@ Both branches rejoin the flow after the **If**, so `startShipment` runs whether 
 | --- | --- |
 | Flaky downstream, safe to repeat | Auto Retry |
 | Bad input a person could correct | Human Review |
-| Risky or irreversible step (payments, deletions) | Approval gate (**Requires Approval**) |
-| Business-level failure with a fallback path | No Automatic Retry + workflow logic |
+| Flaky downstream that may still need a person | Retry, then Review |
+| Risky or irreversible step (payments, deletions) | Approval gate (**Approval Policy** set to **Human Approval**) |
+| Business-level failure with a fallback path | No Retry + workflow logic |
 
 ## Crash recovery
 
@@ -141,7 +144,7 @@ Everything above rests on one guarantee: the engine writes down the outcome of e
 | A durable timer   | The original deadline, so an elapsed wait does not restart its clock.                                             |
 | Current time      | The instant the run first reached that step. The workflow always works with the time at which it first got there. |
 
-This is why a durable workflow needs no state management of its own. You write no checkpoint rows, no status columns, and no resume logic, and you do not reload progress when a run picks back up: the variables in the workflow body are rebuilt from the record, so the code after a wait sees exactly what the code before it left behind. The recorded events for a run are listed on the **History** tab in the [Control Plane](../../../../icp/manage-workflows/workflow-executions.md).
+This is why a durable workflow needs no state management of its own. You write no checkpoint rows, no status columns, and no resume logic, and you do not reload progress when a run picks back up: the variables in the workflow body are rebuilt from the record, so the code after a wait sees exactly what the code before it left behind. The recorded events for a run are listed in its **Event History** in the [Control Plane](../../../../icp/manage-workflows/workflow-executions.md), which opens from the debug-information icon on the execution's **Execution** card.
 
 What this asks of you in return is a deterministic workflow body, since that is the part that runs again on every replay. See [Activities](activities.md#why-the-split-matters).
 

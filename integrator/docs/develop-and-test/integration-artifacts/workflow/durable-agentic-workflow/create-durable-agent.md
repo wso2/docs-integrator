@@ -25,30 +25,33 @@ A durable agentic workflow flips the authoring model: instead of wiring steps to
 ## Add a durable agent artifact
 
 1. In the design view, click **+ Add Artifact**.
-2. On the **Artifacts** page, under **Durable Workflow**, click **Durable Agentic Workflow**.
+2. On the **Artifacts** page, under **AI Integration**, click **Durable Agentic Workflow**.
 
    <ThemedImage
-       alt="The Artifacts page with the Durable Agentic Workflow card under the Durable Workflow section"
+       alt="The Artifacts page with the Durable Agentic Workflow card under the AI Integration section"
        sources={{
            light: useBaseUrl('/img/workflows/agentic/create-durable-agent/add-agent-artifact.png'),
            dark: useBaseUrl('/img/workflows/agentic/create-durable-agent/add-agent-artifact.png'),
        }}
    />
 
-   **Durable Workflow** beside it produces the same kind of artifact with the steps wired by hand instead of chosen by a model. See [Create a workflow](../durable-workflow/create.md).
+   **Durable Workflow**, under its own section, produces the same kind of artifact with the steps wired by hand instead of chosen by a model. See [Create a workflow](../durable-workflow/create.md).
 
-3. Set **Name** to the name the agent is referenced by, then click **Create Agent**. The agent opens on its own model and appears under **Workflows** in the sidebar.
+3. Set **Name** to the name the agent is referenced by, choose the **Model**, and fill in **Role** and **Instructions** (see [Configure the agent](#configure-the-agent)). **Input Data Type** is optional: set it when the agent is started with a structured payload, and leave it empty to start it with the query text alone. Click **Create Agent**. The agent opens on its own model.
 
 ## Configure the agent
 
-Click the agent node to open the **Configure Agent** form, which holds the agent's role, its instructions, and its reasoning limit.
+Click the gear icon on the agent node (**Configure Agent**) to open the **Configure Agent** form, which holds the agent's role, its instructions, and its run limits. The model is set from the model circle to the right of the agent node.
 
 | Field                  | Required | Description                                                                                                                                          |
 |------------------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Role**               | Yes      | The agent's primary function, for example `Expense claim assistant`. It appears under the agent's name on the node.                                  |
 | **Instructions**       | Yes      | What the agent should do, in natural language. This is what the model plans from, so name the capabilities it should use and the outcome you expect. |
-| **Query**              | No       | The initial user query. Left empty, the agent waits for the first chat event instead of starting on its own.                                         |
-| **Maximum Iterations** | No       | The most reasoning iterations the model may take in one turn.                                                                                        |
+| **Input Type**         | No       | The structured input a run is given, for example `json` or a record type.                                                                            |
+| **Result Type**        | No       | The type a run produces, for example a record type. Left empty, the result is the agent's final text.                                                |
+| **Maximum Iterations** | No       | The most reasoning iterations the model may take in one turn. Defaults to 16.                                                                        |
+| **Event Timeout**      | No       | How long the agent waits for each data event, as a duration. Left empty, it waits indefinitely.                                                      |
+| **Maximum Event Waits**| No       | How many data events a run may wait for before it fails. Defaults to 50.                                                                             |
 
 **Role** and **Instructions** each take either a prompt or an expression. Keep the field on **Prompt** to write the text directly, and switch it to **Expression** to build the value in code, for example from a configurable.
 
@@ -66,36 +69,28 @@ Click the agent node to open the **Configure Agent** form, which holds the agent
 
 A durable agent uses the same activities as durable workflows. Instead of you wiring the call order, the model chooses which activity to call and when, and each call is recorded exactly as it is in a hand-wired workflow.
 
-In addition, you can enable **Requires Approval** on sensitive activities, so a person approves the execution before the agent runs the activity. Those approval requests are listed on the **Human Tasks** page of the [Control Plane](../../../../icp/manage-workflows/complete-human-tasks.md).
+In addition, you can set an **Approval Policy** on sensitive activities, so a person approves the execution before the agent runs the activity. Those approval requests are listed on the **Human Tasks** page of the [Control Plane](../../../../icp/manage-workflows/complete-human-tasks.md).
 
 To register an activity with the agent:
 
 1. Click **+** on the activity anchor at the bottom right of the agent node.
 2. Under **Current Integration**, click the activity you want the agent to have, `payClaim` here. Its register form opens.
-3. Choose the **Retry Policy** the engine applies when the agent's call to this activity fails. The policies are the same three a hand-wired activity call takes. See [The three retry policies](../durable-workflow/review-activity-and-error-handling.md#the-three-retry-policies).
-4. Expand **Advanced Configurations** to describe the activity to the model and to gate it:
-
-   | Field                    | Required                        | Description                                                                                                                       |
-   |--------------------------|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-   | **Activity Name**        | No                              | The name advertised to the model. Defaults to the function name.                                                                  |
-   | **Activity Description** | No                              | Tells the model what the activity does and when to use it.                                                                        |
-   | **Requires Approval**    | No                              | Gates the activity: the agent suspends durably before every call and raises a review activity carrying the arguments it proposes. |
-   | **Reviewer Roles**       | Only with **Requires Approval** | The roles permitted to decide that approval, for example `"Finance"` or `["finance", "manager"]`.                                 |
-
+3. Choose the **Approval Policy**. **No Approval**, the default, lets the agent call the activity directly. **Human Approval** gates it: the agent suspends durably before every call and raises a review carrying the arguments it proposes, which a reviewer proceeds with (optionally editing the arguments) or rejects. Set **Reviewer Roles** to the roles permitted to decide that approval, for example `"Finance"` or `["finance", "manager"]`, or name **Reviewers** instead.
+4. Choose the **Retry Policy** the engine applies when the agent's call to this activity fails: **No Retry** (the default), **Auto Retry**, **Human Review**, or **Retry, then Review**, the same policies a hand-wired activity call takes. See [Retry policies](../durable-workflow/review-activity-and-error-handling.md#retry-policies).
 5. Click **Save**.
 
 <ThemedImage
-    alt="Registering payClaim as a durable agent activity, gating it with Requires Approval and setting Reviewer Roles to Finance"
+    alt="Registering payClaim as a durable agent activity, gating it with Human Approval and setting Reviewer Roles to Finance"
     sources={{
         light: useBaseUrl('/img/workflows/agentic/create-durable-agent/register-activity.gif'),
         dark: useBaseUrl('/img/workflows/agentic/create-durable-agent/register-activity.gif'),
     }}
 />
 
-The activity joins the agent node as a capability, drawn with a shield badge while it is gated. Registering it is what makes it available to the model, so an activity the agent never needs is best left off the list.
+The activity joins the agent node as a capability, drawn with a person badge while it is gated. Registering it is what makes it available to the model, so an activity the agent never needs is best left off the list.
 
 :::tip No arguments to wire
-Unlike a [Call Activity](../durable-workflow/activities.md#call-an-activity-from-a-workflow) step in a hand-wired workflow, the register form asks for no activity arguments. The agent maps them at runtime from what it has gathered, which is why **Activity Description** and the parameter names are worth writing clearly.
+Unlike a [Call Activity](../durable-workflow/activities.md#call-an-activity-from-a-workflow) step in a hand-wired workflow, the register form asks for no activity arguments. The agent maps them at runtime from what it has gathered, which is why the activity's doc comment, which the model reads as its description, and the parameter names are worth writing clearly.
 
 ### Events
 
@@ -111,7 +106,7 @@ To register a data event:
    | Field             | Required | Description                                                                                                                                                                                            |
    |-------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
    | **Event Name**    | Yes      | The channel name senders use. A channel named `chat` is the one that drives the conversation itself.                                                                                                   |
-   | **Request Type**  | Yes      | The type of the payload sent to the agent on this channel. Pick a type from the project, a primitive such as `string`, or create one from the list.                                                    |
+   | **Request Type**  | Yes      | The type of the payload sent to the agent on this channel. Defaults to `string`. Pick a type from the project, a primitive, or create one from the list.                                               |
    | **Response Type** | No       | The type of the agent's reply on this channel. Declaring one makes the channel request-response, read back with [Get Data Event Result](get-data-event-result.md). Left empty, the channel is one-way.                           |
    | **Cardinality**   | No       | How the channel consumes its events. `MULTI_EVENT`, the default, re-arms after every turn, so events can arrive repeatedly and from multiple senders. `SINGLE_EVENT` is consumed exactly once per run. |
 
@@ -137,7 +132,7 @@ To register a human task with the agent:
    | Field               | Required | Description                                                                                                                                                                                                                                                                                               |
    |---------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
    | **Task Name**       | Yes      | Identifies the task type, `ReviewDocuments` here. It is also the tool name advertised to the model, so name it for the decision it asks for.                                                                                                                                                              |
-   | **User Roles**      | Yes      | The roles permitted to complete this task, for example `Finance`. Only users holding a matching role see the task.                                                                                                                                                                                        |
+   | **User Roles**      | Yes, unless **Users** are named | The roles permitted to complete this task, for example `Finance`. Only users holding a matching role see the task. **Users**, **Excluded Users**, **Excluded Roles**, **Administrator Roles**, **Administrator Users**, and **Task Input Type** (the shape of the input the agent supplies) are under **Advanced Configurations**.                                                       |
    | **Title**           | No       | Short summary shown in the task inbox.                                                                                                                                                                                                                                                                    |
    | **Description**     | No       | Context shown to the person completing the task, for example `Check that the claim documents are legitimate`.                                                                                                                                                                                             |
    | **Timeout**         | No       | Maximum time to wait for completion, as a duration. On expiry, the agent is told the task timed out, so it can react rather than keep waiting. Omit it to wait indefinitely.                                                                                                                                     |

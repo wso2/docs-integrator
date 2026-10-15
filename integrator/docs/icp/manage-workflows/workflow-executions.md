@@ -36,7 +36,8 @@ Use the following filters to find an execution:
 | **Search by workflow ID** | Finds an execution by its workflow ID. |
 | **Status** | Filters executions by status: **All**, **Running**, **Completed**, **Failed**, **Terminated**, **Canceled**, or **Timed out**. |
 | **Workflow Name** | Filters the list by workflow definition, such as `orderWorkflow` or `paymentWorkflow`. |
-| **Any time** | Filters the list by time range: **Past 10 minutes**, **Past 30 minutes**, **Past 1 hour**, **Past 24 hours**, or **Custom**. |
+| **Any time** | Filters the list by start time: **Past 30 minutes**, **Past 1 hour**, **Past 24 hours**, **Past 3 days**, **Past 7 days**, **Past 30 days**, or **Custom**, which adds **Start From** and **End On** fields. |
+| **Clear** | Appears once a filter is set, and resets them all. |
 
 ### Page actions
 
@@ -45,7 +46,7 @@ Use the following filters to find an execution:
 | **Refresh** | Reloads the execution list. |
 | **Start New Workflow** | Opens the form for starting a new workflow execution. |
 
-When auto-refresh is enabled, the console periodically retrieves the latest execution data without requiring a manual refresh.
+The **auto-refresh** toggle next to the **Updated** time keeps the list checking for fresher data every 30 seconds. Turn it off and the list updates only when you refresh it.
 
 ### Execution list columns
 
@@ -85,6 +86,8 @@ The **Execution** card shows the current status of the run and the details that 
 | **Started** | The date and time the execution began. |
 | **Closed** | The date and time the execution finished. This field appears only after the execution is no longer running. |
 
+The badge also shows how long a finished execution ran, and a failed execution shows its error message below the fields.
+
 <ThemedImage
     alt="Execution details card showing the instance ID, workflow name, and started time"
     sources={{
@@ -97,7 +100,7 @@ The **Execution** card shows the current status of the run and the details that 
 
 The **Workflow Input** card shows the data that was provided when the execution started. For example, if you started a workflow with a customer's order details, those details appear here.
 
-Use the **`{}`** icon to switch between the structured view and the raw JSON view. Select the **copy** icon to copy the workflow input.
+Use the **`{}`** icon to switch between the structured view and the raw JSON view. Select the **copy** icon to copy the workflow input. Once the execution completes, a **Workflow Result** card beside it shows the value it returned.
 
 <ThemedImage
     alt="Workflow Input card showing the data provided when the execution started"
@@ -109,13 +112,12 @@ Use the **`{}`** icon to switch between the structured view and the raw JSON vie
 
 ### Execution flow
 
-The **Execution Flow** section shows the steps in a workflow execution and how they are connected. For example, it can show:
+Below the cards, the execution flow shows the steps in a workflow execution and how they are connected. For example, it can show:
 
-- `reserveInventory` — an activity that completed successfully.
-- `payment` — a data event that is waiting for data.
-- `if payment` — a conditional step that determines which branch to execute.
-- `sendEmail` — the branch that was executed.
-- `cancelOrder` — the other branch, which was not executed.
+- `reserveInventory` — an activity, marked **COMPLETED**.
+- `payment` — a data event the run is **WAITING** on.
+- `if payment` — the condition that picks a branch.
+- `sendEmail` and `cancelOrder` — the two branches, marked **not executed** until the data arrives and one of them runs.
 
 The timeline next to the flow shows when each step ran, how long it took, and the total execution time.
 
@@ -147,12 +149,13 @@ Use the action buttons in the panel header to change what happens to an executio
 - **Suspend** pauses a running execution at its current position, and **Resume** continues it from where it paused.
 - **Cancel** stops the execution gracefully, so the workflow can run its own cleanup logic.
 - **Terminate** stops the execution immediately, without running any cleanup logic.
+- **Wake**, shown only for a running durable agent, ends an in-progress sleep early.
 
-The panel shows only the buttons that apply to the execution's current status and your permissions. For example, a completed execution has no **Suspend** button, and **Resume** appears only while the execution is suspended.
+The panel shows only the buttons that apply to the execution's current status and your permissions. For example, a completed execution has no **Suspend** button, and **Resume** appears only while the execution is suspended. **Reset…** remains available after the execution closes. All of them need `workflow_mgt:manage_workflows`.
 
 ### Reset a workflow
 
-Select **Reset** to open the **Reset Workflow** dialog, and then choose where to replay from:
+Select **Reset…** to open the **Reset Workflow** dialog, and then choose where to replay from:
 
 - **Before the last step** redoes only the most recent workflow task.
 - **From the beginning** reruns the whole workflow with its original input.
@@ -182,7 +185,7 @@ The status doesn't change the moment you select **Suspend**. It can still read *
 
 ### Cancel or terminate an execution
 
-**Terminate** asks you to confirm and enter a reason, and you can't undo it. Prefer **Cancel** when the workflow has cleanup logic that needs to run.
+**Terminate** asks you to confirm in the **Terminate Workflow** dialog, with an optional reason, and you can't undo it. Prefer **Cancel** when the workflow has cleanup logic that needs to run.
 
 ## What's next
 

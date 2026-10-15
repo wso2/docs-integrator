@@ -20,29 +20,30 @@ Three are available today:
 
 1. On the workflow diagram, click **+**.
 2. In the node panel, under **Workflow** > **Steps**, click **Call Activity**.
-3. In the **Activities** panel, expand **Prebuilt Activities** and click the one you need.
+3. In the **Activities** panel, under **Prebuilt Activities**, click the one you need.
 4. Choose the **Connection** to call through, fill in the call's fields, and click **Save**.
 
 The call appears on the diagram as an ordinary activity node, and it behaves like one: recorded on success, retryable on failure, and visible as an `ACTIVITY` node in the [Integration Control Plane](../../../../../icp/manage-workflows/workflow-executions.md) execution graph.
 
 ## Fields shared by all three
 
-Each prebuilt activity has its own fields, covered on its page. These two are common to all of them:
+Each prebuilt activity has its own fields, covered on its page. These are common to all of them:
 
 | Field | Description |
 |---|---|
-| **Retry Policy** | What the engine does when the call fails: **No Automatic Retry**, **Auto Retry** for backoff retries, or **Human Review** to hand the failure to a person. See [Error handling and review activities](../review-activity-and-error-handling.md). |
-| **Check Error** | Propagates a failure to the workflow with `check`. Clear it to handle the error yourself. |
+| **Approval Policy** | **No Approval**, or **Human Approval** to have a person approve the call before it runs. See [Error handling and review activities](../review-activity-and-error-handling.md). |
+| **Retry Policy** | What the engine does when the call fails: **No Retry**, **Auto Retry** for backoff retries, **Human Review** to hand the failure to a person, or **Retry, then Review** to retry first and hand the failure to a person if the retries run out. See [Error handling and review activities](../review-activity-and-error-handling.md). |
+| **Check Error** | Propagates a failure to the workflow with `check`. Clear it to handle the error yourself. Under the advanced fields. |
 
 :::tip Idempotent side effects
 A completed prebuilt activity never runs twice, but a failed attempt runs again once **Auto Retry** is on. That matters most for calls that change something: a retried `POST` or a retried email can create a duplicate. Send an idempotency key with the request where the API supports one, or keep retries off for calls that cannot be repeated safely.
 
 ## When to write your own activity instead
 
-Reach for a custom [activity](../activities.md) when the call is not one of the three above, when you want several calls recorded as a single step, or when the response needs shaping before the workflow sees it. Two other entries in the **Activities** panel cover the middle ground:
+Reach for a custom [activity](../activities.md) when the call is not one of the three above, when you want several calls recorded as a single step, or when the response needs shaping before the workflow sees it. Two actions in the **Activities** panel cover the middle ground:
 
 - **Create Activity from a Connection** generates an activity function around an action on a connector you already have, which is the route for connectors other than HTTP, SOAP, and SMTP.
-- **+ Create Activity** writes an empty activity function for you to design.
+- **Create Activity** writes an empty activity function for you to design.
 
 ## Next steps
 

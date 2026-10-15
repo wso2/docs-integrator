@@ -24,7 +24,7 @@ These are ordinary configurable variables on the `ballerina/workflow` module, so
 
 In the designer:
 
-1. In the sidebar, click **Configurations**.
+1. In the sidebar, hover over **Configurations** and click its **View Configurations** icon.
 2. On the **Configurable Variables** page, under **Imported libraries**, click **ballerina/workflow**.
 3. Fill in the box under the variable you want to set, for example `mode`.
 
@@ -83,20 +83,9 @@ All three are ignored in `IN_MEMORY` mode.
 :::tip One queue per program
 Two integrations sharing a task queue will poll each other's tasks. Name the queue after the program, as in `ORDER_WORKFLOW_TASK_QUEUE`, whenever more than one workflow program runs against the same server.
 
-## Default activity retry policy
-
-These four set the retry policy applied to every activity that does not override it. A single call overrides them through its own **Retry Policy**, which is where **Auto Retry** sets values such as **Max Retries** and **Retry Delay**. See [Error handling and review activities](review-activity-and-error-handling.md).
-
-| Setting | Default | Description |
-|---|---|---|
-| `activityRetryInitialInterval` | `1` | Delay in seconds before the first retry attempt. Must be a positive integer. |
-| `activityRetryBackoffCoefficient` | `2.0` | Multiplier applied to the interval after each attempt. With an initial interval of 1 second and a coefficient of `2.0`, retries occur at 1s, 2s, 4s, 8s, and so on. Must be `1.0` or greater. |
-| `activityRetryMaximumInterval` | `0` | Maximum delay in seconds between retries, which caps the exponential backoff. `0` means no upper limit. Any other value must be greater than `0`. |
-| `activityRetryMaximumAttempts` | `1` | Maximum retry attempts. `1`, the default, executes the activity once and does not retry. `0` means unlimited retries. Any positive value sets the cap. |
-
 ## What's next
 
-- [Activities](activities.md) — the recorded units of work these retry settings apply to
-- [Error handling and review activities](review-activity-and-error-handling.md) — overriding the default policy on a single activity call
-- [Getting started](../../../../icp/manage-workflows/manage-workflows.md) — registering the integration with the Integration Control Plane
+- [Activities](activities.md) — the recorded units of work a workflow calls
+- [Error handling and review activities](review-activity-and-error-handling.md) — retry and review policies on an activity call
+- [Manage workflows](../../../../icp/manage-workflows/manage-workflows.md) — registering the integration with the Integration Control Plane
 - [Management API](management-api.md) — the REST surface served by the integration runtime

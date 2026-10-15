@@ -19,7 +19,7 @@ Use it to reach the SOAP services that legacy systems still expose, without writ
 | **Path**       | No           | Path appended to the connection's base URL. Under the advanced fields.               |
 | **Result**     | Yes          | The variable that receives the response envelope.                                    |
 
-**Retry Policy** and **Check Error** work the same as for every prebuilt activity. See [Prebuilt activities](prebuilt-activities.md#fields-shared-by-all-three).
+**Approval Policy**, **Retry Policy**, and **Check Error** work the same as for every prebuilt activity. See [Prebuilt activities](prebuilt-activities.md#fields-shared-by-all-three).
 
 ## SOAP 1.1 and SOAP 1.2
 

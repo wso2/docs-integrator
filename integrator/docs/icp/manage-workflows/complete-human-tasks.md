@@ -12,7 +12,7 @@ Two kinds of work arrive on that page:
 - A **review activity** is a decision attached to an activity rather than a freestanding question. It is raised in two cases:
 
   - **After an activity fails**, when its retry policy is **Human Review**, so a person decides whether to retry it. See [Human review failed activities](../../develop-and-test/integration-artifacts/workflow/durable-workflow/review-activity-and-error-handling.md#human-review--when-a-person-should-fix-it).
-  - **Before an activity runs**, when a durable agent registered it with **Requires Approval**, so a person approves the call first. See [Durable agent activities](../../develop-and-test/integration-artifacts/workflow/durable-agentic-workflow/create-durable-agent.md#activities).
+  - **Before an activity runs**, when a durable agent registered it with **Approval Policy** set to **Human Approval**, so a person approves the call first. See [Durable agent activities](../../develop-and-test/integration-artifacts/workflow/durable-agentic-workflow/create-durable-agent.md#activities).
 
 :::info Prerequisites
 
@@ -23,7 +23,7 @@ Two kinds of work arrive on that page:
 
 A task or review activity is addressed to the roles the workflow declares, and **Human Tasks** shows a user only the tasks applicable to them. Create each role the workflow names, such as a `Finance` role on an approval gate, and attach it to the group that holds those users, or the task reaches nobody. See [Access control](../access-control.md).
 
-Permissions and roles do different jobs. A permission decides whether you may open the page and act at all, and the role name decides which items you see. Holding the permission without a matching role shows you nothing to decide, which is why a task can be listed as **Read-only**.
+Permissions and roles do different jobs. A permission decides whether you may open the page and act at all, and the role name decides which items you see. Holding the permission without a matching role shows you nothing to decide, because the item is not listed for you.
 
 ## Find your tasks
 
@@ -45,7 +45,7 @@ In the integration view, open **Human Tasks** in the sidebar and pick an environ
 | **Type** | **All**, **Tasks**, or **Reviews**. Shown only when you can see both kinds. |
 | **Status** | **Pending** when the page opens. Also **All**, **Completed**, **Failed**, **Canceled**, and **Terminated**. |
 | **Workflow Name** | Narrows to one workflow definition. |
-| Time range | Narrows to the items started in a period. **Any time** when the page opens. |
+| Time range | Narrows to the items started in a period. **Any time** while the status is **Pending**, and **Past 3 days** for any other status, until you pick a range. |
 | **Integration** | Narrows to one integration. Shown at project level when more than one integration is in scope. |
 | **Clear** | Appears as soon as a filter differs from its default, and resets them all. |
 | **Select reviews…** | Starts a selection of pending reviews to retry or fail together. It is disabled when the list holds none, because human tasks are completed one at a time through their own form. |
@@ -97,7 +97,7 @@ Open a human task from the queue. The panel gathers what you need in order to an
 | **Task** | **Task Name**, the **Workflow Name** and **Parent Workflow** it belongs to, when it was **Created**, the **Eligible Roles** that may complete it, and the **Administrators** who may reassign it or change its deadline. Each row of roles is shown as one chip per role. |
 | **Task Input** | The payload the workflow sent with the task, read-only, one row per value. Use the braces icon to read it as JSON, or the copy icon to copy it. |
 | **Actions** | **Complete Task** and **Mark as Failed**. Shown while the task is pending, to users holding `workflow_mgt:manage_human_tasks`. |
-| **Administer** | **Reassign** and **Change Deadline**. Shown while the task is pending, to users holding one of its administrator roles. See [Administer a task](#administer-a-task). |
+| **Administer** | **Reassign** and **Change Deadline**. Shown while the task is pending, to its administrators who also hold `workflow_mgt:manage_human_tasks`. See [Administer a task](#administer-a-task). |
 
 ### Submit a result
 
@@ -111,7 +111,7 @@ Open a human task from the queue. The panel gathers what you need in order to an
     }}
 />
 
-The fields come from the result type the workflow declared for the task. See [Await Human Task](../../develop-and-test/integration-artifacts/workflow/durable-workflow/await-human-task.md).
+The fields come from the result type the workflow declared for the task. See [Await Human Task](../../develop-and-test/integration-artifacts/workflow/durable-workflow/await-human-task.md). Only a record result type has a form. Any other type, such as a plain `boolean`, opens a **Result (JSON)** box with the note "This task declares no result schema", and you enter the value itself, for example `true`.
 
 ```ballerina
 public type OrderValidation record {|
@@ -119,8 +119,8 @@ public type OrderValidation record {|
     string reason = "";
 |};
 
-OrderValidation decision = check ctx->awaitHumanTask("Validate Order", "Admin",
-        payload = order);
+OrderValidation decision = check ctx->awaitHumanTask("Validate Order", orderInfo,
+        userRoles = "Admin");
 ```
 
 That record renders as a **Valid** Yes/No toggle and a **Reason** text box. Each declared type maps to a control:
@@ -152,7 +152,7 @@ A review activity names the activity it guards, and its **Trigger** says why it 
 
 | Trigger | Raised | What you are deciding |
 | --- | --- | --- |
-| **Approval gate — review before the activity runs** | Before a gated activity runs, including every activity a durable agent registered with **Requires Approval** | Whether the call should be made at all, and with which arguments |
+| **Approval gate — review before the activity runs** | Before a gated activity runs, including every activity a durable agent registered with **Approval Policy** set to **Human Approval** | Whether the call should be made at all, and with which arguments |
 | **Review failure — decide the failed activity's retry** | After an activity failed | Whether to run it again, with the original or corrected arguments, or to let the failure reach the workflow |
 
 <ThemedImage
@@ -216,9 +216,9 @@ A bulk decision cannot edit arguments, so correct an input through **Proceed wit
 
 Completing a task and administering it are separate jobs. The **Eligible Roles** decide the task; the **Administrators** decide who gets to decide it, and how long they have. Both are named when the work is created, and both are shown on the item: the **Task** card carries an **Administrators** row on a human task, and the **Activity** card carries one on a review activity, reading **Not provided** when the work names no administrator.
 
-When you hold one of those administrator roles, a pending item carries an **Administer** card below **Actions**, reading *You administer this task. Each action below is recorded in its history under your name.* It offers **Reassign** and **Change Deadline**.
+When you hold one of those administrator roles, a pending item carries an **Administer** card below **Actions** (**Decisions** on a review activity), reading *You administer this task. Each action below is recorded in its history under your name.* It offers **Reassign** and **Change Deadline**.
 
-Neither action decides the item. The task stays **Pending**, and the workflow stays suspended, until someone from the audience completes it or fails it.
+Neither action decides the item. The task stays **Pending**, and the workflow stays suspended, until someone from the audience, or an administrator, completes it or fails it. A completion by an administrator is recorded as such in the item's decision.
 
 :::tip Administering is governed by role name
 The **Administer** card reaches you only when you hold an ICP role whose name matches one of the item's **Administrators**. The same exact, case-sensitive match applies to the roles you type into **Reassign**, so a role named there reaches nobody until an ICP role of that exact name exists and is mapped to a group. See [Reviewers need their roles](#reviewers-need-their-roles).

@@ -36,7 +36,7 @@ To create an activity, click **+** on **Workflow Activities** in the left sideba
     }}
 />
 
-The **Create Activity** form provides the following fields for defining the activity function:
+The **Create New Workflow Activity** form provides the following fields for defining the activity function:
 
 | Field | Required | Description |
 |---|---|---|
@@ -70,9 +70,9 @@ An activity can also be generated from a connection, so a single operation on an
    |---|---|---|
    | **Activity Name** | Yes | The name of the generated activity function, for example `ftpGet`. |
    | **Description** | No | Explains what the activity does. It is prefilled from the operation's own documentation. |
-   | **Choose what the activity takes as input** | No | One checkbox per parameter of the operation. Check a parameter to expose it as an activity input; clear it to fix the value inside the activity instead. |
-   | ↳ **Connection As Parameter** | No | Exposes the connection as the activity's first parameter, the way the prebuilt activities work, instead of using the module-level connection. Check it when the same activity should run against more than one connection. |
-   | **Return Type** | Yes | Derived from the operation and not editable. Where the operation returns a stream, the activity collects it and returns an array, for example `(byte[] & readonly)[]`. |
+   | **Choose what the activity takes as input** | No | One checkbox per parameter of the operation. Check a parameter to expose it as an activity input; clear a required one to fix its value inside the activity instead, in the **Value for '&lt;parameter&gt;'** field that appears under it. Optional parameters are under **Advanced Configurations**. |
+   | ↳ **Connection as parameter** | No | Exposes the connection as the activity's first parameter, the way the prebuilt activities work, instead of using the module-level connection. Check it when the same activity should run against more than one connection. |
+   | **Return Type** | Yes | Derived from the operation. It is editable only where the operation returns a union, to narrow it, or infers its return type. Where the operation returns a stream, the activity collects it and returns an array, for example `(byte[] & readonly)[]`. |
 
 6. Click **Create Activity**.
 
@@ -84,7 +84,7 @@ An activity can also be generated from a connection, so a single operation on an
     }}
 />
 
-The activity appears under **Workflow Activities** alongside the ones written by hand, and the call form opens for it so it can be placed in the workflow straight away. Checking **Connection As Parameter** adds a **Connection** field to that call form, where the connection is chosen per call.
+The activity appears under **Workflow Activities** alongside the ones written by hand, and the panel returns to the **Activities** list, where you click the new activity to place its call in the workflow. Checking **Connection as parameter** adds a **Connection** field to that call form, where the connection is chosen per call.
 
 :::tip Check the prebuilt ones first
 REST calls, SOAP calls, and SMTP email already have durable wrappers that ship with the runtime, so there is nothing to write for those. See [Prebuilt activities](prebuilt-activities/prebuilt-activities.md).
@@ -98,7 +98,8 @@ The **Call Activity** form provides the following fields for calling an activity
 | Field                  | Required                                         | Description                                                                                                                                                                                        |
 |------------------------|--------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Activity Arguments** | Yes                                              | A form field appears for each activity function parameter. Provide the relevant arguments for each required parameter.                                                                            |
-| **Retry Policy**       | Yes                                              | Determines how the workflow handles a failed activity call: **No Automatic Retry**, **Auto Retry**, or **Human Review**. See [Error handling and review activities](review-activity-and-error-handling.md). |
+| **Approval Policy**    | Yes                                              | Whether a person must approve the call before it runs: **No Approval** (the default) or **Human Approval**. See [Approval gates](review-activity-and-error-handling.md#approval-gates--review-before-the-step-runs). |
+| **Retry Policy**       | Yes                                              | Determines how the workflow handles a failed activity call: **No Retry** (the default), **Auto Retry**, **Human Review**, or **Retry, then Review**. See [Error handling and review activities](review-activity-and-error-handling.md). |
 | **Result**             | Only if the output of the activity is not `null` | Name of the result variable to capture the activity's output.                                                                                                                                      |
 | **Result Type**        | Only if the output of the activity is not `null` | Type of the resulting data of the activity function.                                                                                                                                               |
 | **Check Error**        | No                                               | Under **Advanced Configurations**. Adds `check` to the call so a failure automatically propagates out from the workflow. Clear it to handle the error yourself. Selected by default. See [Error handling in the workflow logic](review-activity-and-error-handling.md#error-handling-in-the-workflow-logic). |

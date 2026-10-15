@@ -12,10 +12,10 @@ Workflow management adds four permissions in the **Workflow-Management** domain.
 
 | Permission                        | Allows                                                                                            |
 |-----------------------------------|---------------------------------------------------------------------------------------------------|
-| `workflow_mgt:view_workflows`     | View workflow executions.                                                                         |
+| `workflow_mgt:view_workflows`     | View workflow executions and review activities.                                                   |
 | `workflow_mgt:manage_workflows`   | Start, suspend, resume, cancel, and terminate workflow executions, and decide review activities.  |
-| `workflow_mgt:view_human_tasks`   | View human tasks.                                                                                 |
-| `workflow_mgt:manage_human_tasks` | Complete, fail, and cancel human tasks, and decide review activities.                             |
+| `workflow_mgt:view_human_tasks`   | View human tasks and review activities.                                                           |
+| `workflow_mgt:manage_human_tasks` | Complete, fail, and cancel human tasks, reassign them and change their deadlines, and decide review activities. |
 
 ## Default role grants
 
@@ -26,18 +26,18 @@ Workflow management adds four permissions in the **Workflow-Management** domain.
 | Viewer                            | View only       | No access           |
 
 :::warning Project-scope access
-The project-level **Workflows** page checks permissions granted at project level or above. A user whose workflow permissions were granted only on individual integrations does not pass that check and must use the integration-level page instead.
+The project-level **Workflows** and **Human Tasks** pages check permissions granted at project level or above. A user whose workflow permissions were granted only on individual integrations does not pass that check and must use the integration-level page instead.
 
 ## How roles decide who sees a task
 
 :::note Permissions open the view, roles fill it
 Permissions decide who can open the workflow views. **Roles** decide which tasks and reviews appear inside them.
 
-When you open a task list, ICP forwards your ICP role names to the runtime, and the runtime returns only the tasks whose eligible roles include one of them. Matching is an exact, case-sensitive comparison of role names, so a task declared for `manager` in the workflow code is visible only to users holding an ICP role named exactly `manager`.
+When you open a task list, ICP forwards your ICP role names to the runtime, together with your username, and the runtime returns only the tasks whose eligible roles include one of them, or that name you as a user or an administrator. Matching is an exact, case-sensitive comparison of role names, so a task declared for `manager` in the workflow code is visible only to users holding an ICP role named exactly `manager`.
 
 ```ballerina
-RequestDecision request = check ctx->awaitHumanTask("checkExpenseRequest", "manager",
-        payload = {"claimId": claim.claimId, "amount": claim.amount});
+RequestDecision request = check ctx->awaitHumanTask("checkExpenseRequest",
+        {"claimId": claim.claimId, "amount": claim.amount}, userRoles = "manager");
 ```
 
 Create the ICP roles that are required to complete the human task (`manager`, `finance`, `support-lead`, and so on), grant them the workflow permissions above, and map them to the groups whose members should decide those tasks.

@@ -7,7 +7,7 @@ title: Run a Durable Agent
 A durable agent does nothing until something starts it. The **Run Durable Agent** step starts one instance from an ordinary integration flow and binds the new instance ID to a variable, so the rest of the flow can send that instance turns and read its result. See [Create a Durable Agent](create-durable-agent.md) for building the agent this step starts.
 
 <ThemedImage
-    alt="The claim resource flowing from Start into the claimAgent node labeled instanceId, with the ReviewDocuments human task and the chat data event on the left, the gated payClaim activity on the right, and the Error Handler below"
+    alt="The claim resource flowing from Start into a durable agent : run node for claimAgent that binds instanceId, then a Return of instanceId, with the Error Handler below"
     sources={{
         light: useBaseUrl('/img/workflows/agentic/run-durable-agent/agent-in-flow-light.png'),
         dark: useBaseUrl('/img/workflows/agentic/run-durable-agent/agent-in-flow-dark.png'),

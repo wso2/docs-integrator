@@ -19,7 +19,7 @@ A **durable workflow** is an artifact in your integration, the same as a service
        }}
    />
 
-   **Durable Agentic Workflow** beside it produces the same kind of artifact, but you describe the goal and let a model choose the steps instead of wiring them yourself. See [Create a Durable Agent](../durable-agentic-workflow/create-durable-agent.md).
+   **Durable Agentic Workflow**, under **AI Integration** on the same page, produces the same kind of artifact, but you describe the goal and let a model choose the steps instead of wiring them yourself. See [Create a Durable Agent](../durable-agentic-workflow/create-durable-agent.md).
 
 3. Fill in the **Create New Durable Workflow** form:
 
@@ -52,8 +52,9 @@ The workflow diagram is the same flow diagram used everywhere else in WSO2 Integ
 
 | Group | What it holds |
 |---|---|
-| **Workflow** > **Steps** | [Call Activity](activities.md), [Await Human Task](await-human-task.md), [Await Data Event](data-events.md), and [Sleep](durable-timers.md). |
-| **Workflow** > **Workflow Functions** | Replay-safe helpers: current time, whether the run is replaying, and the run's own ID and type. |
+| **Workflow** > **Steps** | [Call Activity](activities.md), [Human Task](await-human-task.md), [Await Data](data-events.md), and [Sleep](durable-timers.md). |
+| **Workflow** > **Workflow Functions** | Replay-safe helpers: current time, whether the run is replaying, the run's own ID and type, and who completed the last human task or decided the last review. |
+| **Workflow** > **Child Workflows** | Start another workflow as a child of this one, wait for it, or send it data. |
 | **Statement**, **Control**, **Error Handling** | The ordinary building blocks: variables, function calls, `if`, `while`, `foreach`, and error handling. |
 
 ## Next steps

@@ -7,7 +7,7 @@ title: Durable Timers
 Long-running processes spend most of their life waiting: a cooling-off period before a sensitive change takes effect, a settlement delay before a payout, a reminder three days after a request. A **durable timer** is how a workflow waits. The instance suspends, the runtime remembers when to wake it, and nothing is held open in the meantime.
 
 <ThemedImage
-    alt="The emailChangeRequest workflow running from Start through validateEmailChange, a workflow : Sleep step, and performEmailChange"
+    alt="The emailChangeRequest workflow running from Start through validateEmailChange, a Sleep step, and performEmailChange"
     sources={{
         light: useBaseUrl('/img/workflows/develop/durable-timers/sleep-step-light.png'),
         dark: useBaseUrl('/img/workflows/develop/durable-timers/sleep-step-dark.png'),
@@ -30,11 +30,11 @@ The `emailChangeRequest` workflow puts that rule in one place. It validates the 
    |--------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
    | **Duration** | Yes      | How long to wait. Keep the field on **Record** to build the duration from units in a form, or switch it to **Expression** to write the record yourself, for example to take the period from a configurable. |
 
-4. On **Record**, click the field to open the **Record Configuration** editor, select the units the wait is expressed in, and fill in their values. The cooling-off period here is one day, so **days** is selected and set to `1`.
+4. On **Record**, click the field to open the **Record Configuration** editor, select the units the wait is expressed in, and fill in their values. The cooling-off period here is one day, so **hours** is selected and set to `24`.
 5. Click **Save**.
 
 <ThemedImage
-    alt="Adding a Sleep step between validateEmailChange and performEmailChange, selecting days in the Record Configuration editor and setting it to 1"
+    alt="Adding a Sleep step between validateEmailChange and performEmailChange, selecting hours in the Record Configuration editor and setting it to 24"
     sources={{
         light: useBaseUrl('/img/workflows/develop/durable-timers/add-sleep-step.gif'),
         dark: useBaseUrl('/img/workflows/develop/durable-timers/add-sleep-step.gif'),
@@ -43,7 +43,7 @@ The `emailChangeRequest` workflow puts that rule in one place. It validates the 
 
 ### Duration units
 
-**Record Configuration** offers one field per unit, all optional, so a duration names only the units it needs:
+**Record Configuration** offers one field per unit, all optional, so a duration names only the units it needs. A **Sleep** step counts only `hours`, `minutes`, and `seconds`; the larger units apply to timeouts, not to **Sleep**:
 
 | Unit      | Type      |
 |-----------|-----------|
@@ -55,7 +55,7 @@ The `emailChangeRequest` workflow puts that rule in one place. It validates the 
 | `minutes` | `int`     |
 | `seconds` | `decimal` |
 
-Express the wait in whichever unit reads like the rule it implements. A cooling-off period written as 24 hours can be selected as `hours` set to `24` or, as in the recording above, `days` set to `1`.
+Express a **Sleep** in hours, minutes, and seconds: a one-day cooling-off period is `hours` set to `24`, and a week is `hours` set to `168`.
 
 ## What makes it durable
 
@@ -65,7 +65,7 @@ A durable sleep is not a blocked thread. When the workflow reaches the timer:
 - The deadline is **recorded**. Restart the integration, redeploy it, or lose the process to a crash, and the timer still fires at its original time.
 - On crash recovery, an **already-elapsed timer does not wait again.** Like a completed activity, it is read back from the record, so a restart never restarts the clock.
 
-Never use the regular **Standard Library Sleep** inside a workflow. It blocks a thread, it is invisible to the runtime, and the wait is lost on restart, so the workflow resumes with the delay silently skipped or repeated. Always use the workflow context's durable sleep.
+Never use a regular sleep, such as `runtime:sleep`, inside a workflow. It blocks a thread, it is invisible to the runtime, and the wait is lost on restart, so the workflow resumes with the delay silently skipped or repeated. Always use the workflow context's durable sleep.
 
 ## Timers versus task timeouts
 

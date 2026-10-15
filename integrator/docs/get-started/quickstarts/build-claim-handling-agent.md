@@ -25,7 +25,7 @@ title: Build a Claim Handling Durable Agent
 Creating the agent is also where you describe it: the model it thinks with, its role, and the instructions it plans from.
 
 1. In the design view, click **Add Artifact Manually**.
-2. Under **Durable Workflow**, select **Durable Agentic Workflow**. The **Create New Durable Agentic Workflow** form opens.
+2. Under **AI Integration**, select **Durable Agentic Workflow**. The **Create New Durable Agentic Workflow** form opens.
 
    <ThemedImage
        alt="Create Durable Agent"
@@ -98,7 +98,7 @@ Activities are the units of work the agent can call. Each one runs durably — c
 3. Set **Activity Name** to `validateClaim`.
 4. Under **Parameters**, click **+ Add Parameter**. Set **Type** to the `ExpenseClaim` record created in Step 2 and **Name** to `expenseClaim`, then click **Add**.
 5. Set **Return Type** to `boolean` and click **Save**.
-6. Click the `validateClaim` form under **Current Integration**. Leave **Retry Policy** on **No Automatic Retry** and click **Save**.
+6. Click the `validateClaim` form under **Current Integration**. Leave **Retry Policy** on **No Retry** and click **Save**.
 
 <ThemedImage
     alt="Creating the validateClaim activity and registering it on the claimAgent node"
@@ -110,7 +110,7 @@ Activities are the units of work the agent can call. Each one runs durably — c
 
 `validateClaim` joins the agent node as a capability and appears under **Workflow Activities** in the left sidebar.
 
-`workflow.bal`:
+`workflows.bal`:
 ```ballerina
 import ballerina/ai;
 import ballerina/workflow;
@@ -131,8 +131,10 @@ final workflow:DurableAgent claimAgent = check new ({
 
 `functions.bal`:
 ```ballerina
+import ballerina/workflow;
+
 @workflow:Activity
-function validateClaim(ExpenseClaim expenseClaim) returns boolean {
+function validateClaim(ExpenseClaim expenseClaim) returns boolean|error {
 }
 ```
 
@@ -144,7 +146,7 @@ Creating the activity gives it a signature but an empty body. The activity is a 
 2. Click **+** on the flow diagram to open the node panel, then under **Control**, select **Return**.
 3. Click the **Expression** field to open the value helper, then select **Inputs** > `expenseClaim` > `amount`.
 4. With the cursor after the inserted value, type `> 0d` to require a positive amount.
-5. Click **Save**, then select `claimAgent` under **Workflows** to return to the agent diagram.
+5. Click **Save**, then select `claimAgent` in the left sidebar to return to the agent diagram.
 
 <ThemedImage
     alt="Defining the validateClaim activity body with a Return step"
@@ -156,7 +158,7 @@ Creating the activity gives it a signature but an empty body. The activity is a 
 
 ```ballerina
 @workflow:Activity
-function validateClaim(ExpenseClaim expenseClaim) returns boolean {
+function validateClaim(ExpenseClaim expenseClaim) returns boolean|error {
     return expenseClaim.amount > 0d;
 }
 ```
@@ -170,13 +172,13 @@ Paying out is the risky step, so gate it behind a person. The activity is create
 3. Under **Parameters**, click **+ Add Parameter**. Set **Type** to `ExpenseClaim` and **Name** to `expenseClaim`, then click **Add**.
 4. Leave **Return Type** empty and click **Save**.
 
-5. Click the `payClaim` form under **Current Integration** to open its register form, expand **Advanced Configurations**, and select **Requires Approval**. Now, before the agent runs the activity, a review activity is created and the agent suspends durably until a reviewer proceeds or rejects.
+5. Click the `payClaim` form under **Current Integration** to open its register form, and set **Approval Policy** to **Human Approval**. Now, before the agent runs the activity, a review activity is created and the agent suspends durably until a reviewer proceeds or rejects.
 
 6. Set **Reviewer Roles** to `Finance`, the roles permitted to decide that approval.
 7. Click **Save**.
 
 <ThemedImage
-    alt="Creating the payClaim activity and registering it with Requires Approval and the Finance reviewer role"
+    alt="Creating the payClaim activity and registering it with Human Approval and the Finance reviewer role"
     sources={{
         light: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/attach-pay-claim.gif'),
         dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/attach-pay-claim.gif'),
@@ -185,7 +187,7 @@ Paying out is the risky step, so gate it behind a person. The activity is create
 
 `payClaim` joins the agent node beside `validateClaim`, drawn with a badge marking it as gated. The agent can now propose a payment, but it cannot release one on its own.
 
-`workflow.bal`:
+`workflows.bal`:
 ```ballerina
 import ballerina/ai;
 import ballerina/workflow;
@@ -201,14 +203,16 @@ final workflow:DurableAgent claimAgent = check new ({
     model: wso2ModelProvider,
     inputType: ExpenseClaim,
     activities: [validateClaim,
-                {activity: payClaim, requiresApproval: true, userRoles: "Finance"}]
+                {activity: payClaim, approvalPolicy: {userRoles: "Finance"}}]
 });
 ```
 
 `functions.bal`:
 ```ballerina
+import ballerina/workflow;
+
 @workflow:Activity
-function payClaim(ExpenseClaim expenseClaim) {
+function payClaim(ExpenseClaim expenseClaim) returns error? {
 }
 ```
 
@@ -216,7 +220,7 @@ function payClaim(ExpenseClaim expenseClaim) {
 
 An agent does nothing until something starts it. Give the integration an HTTP resource that hands each incoming claim to `claimAgent` and answers with the ID of the run it started.
 
-1. Click **+ Add Artifact**, then under **Integration as API**, click **HTTP Service**.
+1. Click **ClaimHandler** in the breadcrumb to open the integration overview, click **+ Add Artifact**, then under **Integration as API**, click **HTTP Service**.
 2. On the **Create HTTP Service** form, keep **Service Contract** on **Design From Scratch**, leave **Service Base Path** as `/`, and click **Create**.
 3. The service opens with no resources. Click **+ Add Resource**.
 4. Set **HTTP Method** to **POST** and **Resource Path** to `claim`.
@@ -271,7 +275,7 @@ The gated `payClaim` suspends the run until a Finance reviewer decides on it, an
 The terminal opens on an **ICP Server** task and logs the startup. The server is ready once it reports the console address:
 
 ```text
-Starting ICP Server with configuration: /Applications/WSO2 Integrator.app/Contents/components/icp/conf/deployment.toml
+Starting ICP Server with configuration: /Users/<you>/.wso2-integrator/components/icp/2.1.0/conf/deployment.toml
 ... message="WSO2 Integrator: ICP Console started at https://localhost:9446"
 ... message="Workflow management service started at 0.0.0.0:9446"
 ```
@@ -306,11 +310,13 @@ Leave the containers running for the rest of this guide.
 ## Step 7: Run it
 
 1. Select **Run** in the integration header to start the integration.
+
+   If the integration does not yet hold access details for the default provider, the first run asks: "This integration uses the WSO2 default AI provider, but it isn't configured yet. Configure it now?" Click **Configure Now**. It writes the provider's access details to `Config.toml` using your Copilot sign-in, and the run continues. Later runs refresh them on their own.
 2. Watch the terminal. After `Compiling source` and `Running executable`, the runtime bridge connects to the ICP server started in Step 5:
 
    ```text
    ... module=wso2/icp.runtime.bridge message="ICP agent initialized with server URL: https://localhost:9445"
-   ... module=wso2/icp.runtime.bridge message="ICP agent started successfully with job ID: {\"id\":\"59000\"}"
+   ... module=wso2/icp.runtime.bridge message="ICP agent started successfully with job ID: {\"id\":59000}"
    ... module=wso2/icp.runtime.bridge message="Full heartbeat acknowledged by ICP server"
    ```
 
@@ -318,7 +324,7 @@ Leave the containers running for the rest of this guide.
 
 ## Step 8: Submit a new claim
 
-Once the service is up, a `Tryit.hurl` file opens automatically beside the designer, holding a request generated from the `claim` resource. Send the claim from there.
+Once the service is up, a notification asks "1 service found in the integration. Test with Try It Client?". Click **Test**. A `TryIt.hurl` file opens beside the designer, holding a request generated from the `claim` resource. Send the claim from there.
 
 The generated request already carries the method, URL, and content type, along with the schema the resource expects:
 
@@ -330,19 +336,18 @@ The generated request already carries the method, URL, and content type, along w
     }}
 />
 
-Replace the `{?}` placeholders with a real claim, then click the run button in the request cell's left gutter to send it.
+Fill in a real claim: replace the `{?}` placeholder for `claimId` and the `0` for `amount`, then click the run button in the request cell's left gutter to send it.
 
 ```json
 {
   "claimId": "2002",
-  "amount": 1500,
-  "purpose": "Demo purpose"
+  "amount": 1500
 }
 ```
 
 ```bash
 curl -X POST localhost:9090/claim -H 'Content-Type: application/json' \
-  -d '{"claimId":"2002","amount":1500,"purpose":"Demo purpose"}'
+  -d '{"claimId":"2002","amount":1500}'
 ```
 
 The response appears under the cell as **201 Created**, with the new run's instance ID as the body:
@@ -392,24 +397,25 @@ The run is now sitting on the `payClaim` approval, and the ICP console is where 
     }}
 />
 
-## Step 10: Assign the Finance role to your user
+## Step 10: Give your user the Finance role
 
-The review is on the timeline, but it is not yet addressed to you. `payClaim` was registered with `Finance` as its reviewer role, and the console signs you in as `admin`, a super admin who does not carry that role, so the approval will not reach you until your user does.
+The review is on the timeline, but it is not yet addressed to you. `payClaim` was registered with `Finance` as its reviewer role, and the console signs you in as `admin`, who does not carry that role yet. Roles reach users through groups, so create a `Finance` role that can see and decide human tasks, and a group that grants it.
 
-1. In the left navigation, under **MANAGEMENT**, click **Access-control**. The **Users** tab lists a single user, `admin` (**System Administrator**), in the **Super Admins** and **default-project Admins** groups.
-2. Open the **Roles** tab. It holds only the built-in roles (**Admin**, **Developer**, **Project Admin**, **Super Admin**, **Viewer**), so click **+ Create Role**, set **Role Name** to `Finance`, and click **Create**. Leave every permission group unchecked.
-3. Open the **Groups** tab and click **Super Admins**, the group that holds `admin`.
-4. On the **ROLES** tab, click **+ Add Roles**. Select `Finance` in the **Roles** dropdown, leave **Applicable Environments** on **All Environments**, and click **Add**.
+1. Click **Default Organization** at the top of the console to leave the integration, then in the left navigation, under **MANAGEMENT**, click **Access-control**. Inside an integration, **Access-control** shows only that integration's roles and groups. The **Users** tab lists a single user, `admin` (**System Administrator**).
+2. Open the **Roles** tab and click **+ Create Role**. Set **Role Name** to `Finance`, expand **Workflow-Management**, and select `workflow_mgt:view_human_tasks`, `workflow_mgt:manage_human_tasks`, and `workflow_mgt:view_workflows`. Click **Create**.
+3. Open the **Groups** tab, click **+ Create Group**, set **Name** to `Finance Reviewers`, and click **Create**.
+4. Click **Finance Reviewers**. On the **USERS** tab, click **+ Add Users**, select **System Administrator (admin)**, and click **Add**.
+5. On the **ROLES** tab, click **+ Add Roles**. Select `Finance` in the **Roles** dropdown, leave **Applicable Environments** on **All Environments**, and click **Add**.
 
 <ThemedImage
-    alt="Creating the Finance role under Access Control and adding it to the Super Admins group"
+    alt="Creating the Finance role with the workflow permissions, creating the Finance Reviewers group, and adding admin and the Finance role to it"
     sources={{
         light: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/assign-finance-role.gif'),
         dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/assign-finance-role.gif'),
     }}
 />
 
-The console confirms **Role(s) added to group successfully**, and the group's role list now holds **Finance** beside **Super Admin**, both mapped at **Organization** level for **All** environments. Roles reach a user through their groups, so `admin` is now a `Finance` reviewer.
+The console confirms **Role(s) added to group successfully**. `admin` now holds `Finance` through **Finance Reviewers**, so the approval reaches it. In a real deployment, add the accounts of the people who approve payments to this group; `admin` stands in for them here.
 
 ## Step 11: Approve the payment
 
@@ -434,10 +440,10 @@ The console reports **Activity proceeded**, and on the next refresh the list rea
     }}
 />
 
-Open the run again from **Workflows**. `payClaim` has now completed. The agent takes one closing turn, and the execution reads **Completed**, with a **Closed** time and a **Workflow Result** holding the agent's own summary of the claim:
+Open the run again from **Workflows**. `payClaim` has now completed. The agent takes one closing turn, and the execution reads **Completed**, with a **Closed** time and a **Workflow Result** holding the agent's own summary of the claim. The model words it differently on each run, for example:
 
 ```text
-The claim has been processed successfully and paid with the ID PAY-2002.
+The claim with ID 2002 has been processed and paid successfully.
 ```
 
 <ThemedImage
@@ -448,7 +454,7 @@ The claim has been processed successfully and paid with the ID PAY-2002.
     }}
 />
 
-The timeline is green end to end, and it shows where the time went: the thinking turns and `validateClaim` took seconds, `payClaim` ran in milliseconds once released, and `review-payClaim` accounts for almost the entire run. The claim was not being worked on for 52 of its 53 minutes. It was waiting for a person, and it lost nothing by waiting.
+The timeline is green end to end, and it shows where the time went: the thinking turns and `validateClaim` took seconds, `payClaim` ran in milliseconds once released, and `review-payClaim` accounts for almost the entire run. For most of the run, nobody was working on the claim. It was waiting for a person, and it lost nothing by waiting.
 
 ## Next steps
 

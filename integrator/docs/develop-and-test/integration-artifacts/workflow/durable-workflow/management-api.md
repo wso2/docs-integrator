@@ -15,7 +15,7 @@ The REST surface lives in its own module, `ballerina/workflow.management.rest`. 
 ### From the designer
 
 1. Open the integration overview.
-2. In the right panel, below **Integration Control Plane**, find the **Workflow** section.
+2. In the right panel, below **Integration Control Plane**, find the **Workflow** section. It appears once the integration uses workflows.
 3. Select **Enable Workflow Management REST API**.
 
 <ThemedImage
@@ -26,7 +26,7 @@ The REST surface lives in its own module, `ballerina/workflow.management.rest`. 
     }}
 />
 
-Selecting it adds the `ballerina/workflow.management.rest` import to `main.bal`.
+Selecting it adds the `ballerina/workflow.management.rest` import to `main.bal` and sets `enableManagementApi = true` in `Config.toml`.
 
 ### By hand
 
@@ -38,7 +38,7 @@ import ballerina/workflow.management.rest as _;
 
 ### Switch it on
 
-Importing the module alone opens no port. The API starts only when `enableManagementApi` is `true`. Set it, along with the port, TLS, and CORS settings, from the configuration editor, or directly in `Config.toml` under the module's own table:
+Importing the module alone opens no port. The API starts only when `enableManagementApi` is `true`, which the designer checkbox sets for you. Set it by hand, along with the port, TLS, and CORS settings, from the configuration editor, or directly in `Config.toml` under the module's own table:
 
 ```toml
 [ballerina.workflow.management.rest]
@@ -53,12 +53,12 @@ Base URL: `http://<host>:8234/workflow`
 
 ## Authentication
 
-Authentication is configured under the same table. **Basic authentication is on by default**, so enabling the API without choosing a scheme fails at startup rather than quietly publishing an open endpoint.
+Authentication is configured under the same table. **Basic authentication is on by default**, so enabling the API without choosing a scheme does not publish an open endpoint: every request is refused with `401` until you add users to `[[ballerina.auth.users]]` or enable another scheme.
 
 | Setting | Default | Description |
 |---|---|---|
 | `enableBasicAuth` | `true` | HTTP basic authentication against Ballerina's file user store, with credentials from `[[ballerina.auth.users]]`. |
-| `enableJwtAuth` | `false` | JWT bearer tokens validated against a JWKS endpoint. Requires `jwtIssuer`, `jwtAudience`, and `jwksUrl`. |
+| `enableJwtAuth` | `false` | JWT bearer tokens validated against a JWKS endpoint. Requires `jwksUrl`. `jwtIssuer` and `jwtAudience` are optional, and each claim is checked only when set. The token is read from `jwtAuthHeader`, `Authorization` by default. |
 | `enableOAuth` | `false` | OAuth2 bearer tokens validated by introspection. Requires `oauth2IntrospectionUrl`. |
 | `enableApiKey` | `false` | A shared key in a request header. Requires `apiKeyValue`. The header name is `apiKeyHeader`, `x-api-key` by default. |
 
@@ -71,7 +71,7 @@ Enabling TLS and restricting CORS use the same table:
 | `enableTls` | `false` | Serves over HTTPS. Requires `certFile` and `keyFile`, both PEM. |
 | `enableCors` | `true` | Sends CORS headers. Set it to `false` when a gateway handles CORS. |
 | `corsAllowOrigins` | `["*"]` | Restrict this in production, for example to `["https://portal.example.com"]`. |
-| `corsAllowHeaders` | `Content-Type`, `x-user-id`, `x-user-roles`, `Authorization`, `x-api-key` | If you change `apiKeyHeader`, add the new name to this list. |
+| `corsAllowHeaders` | `Content-Type`, `x-user-id`, `x-user-roles`, `Authorization`, `x-api-key` | If you change `apiKeyHeader` or `jwtAuthHeader`, add the new name to this list. |
 
 An externally exposed deployment. Basic auth credentials are not settings of this module: they come from Ballerina's own file user store table.
 
@@ -123,10 +123,10 @@ With `enforceScopes = true`, token-based callers must also carry an OAuth scope 
 
 | Scope | Default value | Permits |
 |---|---|---|
-| `scopeWorkflowView` | `workflow:view` | Reading workflows: list, get, history, graphs. |
-| `scopeWorkflowManage` | `workflow:manage` | Mutating workflows: start, suspend, resume, terminate, cancel. Implies the view scope on workflow routes. |
-| `scopeHumanTaskView` | `humantask:view` | Reading human tasks. |
-| `scopeHumanTaskManage` | `humantask:manage` | Mutating human tasks: complete, fail. Implies the view scope on human-task routes. |
+| `scopeWorkflowView` | `workflow:view` | `GET` on every route outside `/human-tasks`: workflows, review activities, runtime, definitions, and metadata. |
+| `scopeWorkflowManage` | `workflow:manage` | `POST` on the same routes, such as starting, suspending, or terminating a workflow and deciding a review. Implies the view scope on them. |
+| `scopeHumanTaskView` | `humantask:view` | `GET` on `/human-tasks` routes. |
+| `scopeHumanTaskManage` | `humantask:manage` | `POST` on `/human-tasks` routes: complete, fail, reassign, and deadline. Implies the view scope on them. |
 
 Scopes are separate from roles. A scope authorizes a class of operation, while whether a particular task is yours to decide is still the task's own audience: its roles or user ID, minus its exclusions.
 
@@ -136,20 +136,21 @@ Scopes are separate from roles. A scope authorizes a class of operation, while w
 |---|---|
 | `GET /runtime` | This worker's runtime state. Returns `{"taskQueue": "..."}`. |
 | `GET /definitions` | The workflow types this integration registers, for launcher UIs. |
+| `GET /metadata` | The integration's workflow metadata: its definitions, human tasks, activities, and agents with their schemas, and each workflow's graph. |
 
 ## Workflow instances
 
 | Method and path | Description |
 |---|---|
 | `GET /workflows` | List instances. Filters: `status`, `workflowType`, `workflowId`, `startedBy`, `taskQueue`, the four time bounds `startTimeFrom`, `startTimeTo`, `closeTimeFrom`, `closeTimeTo`, and pagination with `limit` (default `20`) and `pageToken`. |
-| `POST /workflows` | Start a workflow: `{"workflowType": "...", "input": {…}}`, optionally with `workflowId` and `timeoutSeconds`. |
+| `POST /workflows` | Start a workflow: `{"workflowType": "...", "input": {…}}`, optionally with `workflowId` and `timeoutSeconds`. With a `workflowId`, `ifRunning` (`FAIL`, `USE_EXISTING`, or `TERMINATE_EXISTING`) and `ifClosed` (`ALLOW_DUPLICATE`, `ALLOW_DUPLICATE_FAILED_ONLY`, or `REJECT_DUPLICATE`) decide what happens when that ID is already in use. Responds `201` with `workflowId` and `runId`, or `200` with `"started": false` when it joined a running instance. |
 | `GET /workflows/{workflowId}` | Instance detail: type, status, result, and activity invocations. |
 | `GET /workflows/{workflowId}/history` | Full recorded event history. |
 | `GET /workflows/{workflowId}/activity-tree` | The execution as a tree of typed nodes with inputs, outputs, and attempts. |
 | `GET /workflows/{workflowId}/execution-graph` | Nodes and edges of the execution so far. |
 | `POST /workflows/{workflowId}/suspend` | Pause the instance. |
 | `POST /workflows/{workflowId}/resume` | Resume a suspended instance. |
-| `POST /workflows/{workflowId}/wake` | Wake the instance. |
+| `POST /workflows/{workflowId}/wake` | Wake a durable agent instance from its built-in `sleep` tool. Harmless when it is not sleeping. |
 | `POST /workflows/{workflowId}/cancel` | Request graceful cancellation. |
 | `POST /workflows/{workflowId}/terminate` | Stop immediately, with no cleanup. Optional body `{"reason": "..."}`. |
 | `POST /workflows/{workflowId}/data/{dataName}` | Deliver a named data event. The body is the payload, verbatim, so a workflow awaiting `dataEvents.approval` receives exactly what is posted. |
@@ -267,11 +268,14 @@ A bulk decision cannot change the arguments an activity is retried with, because
 
 ## Response codes
 
-Operations report why they failed in a protocol-independent way, and the HTTP adapter maps that reason to a status code:
+Operations report why they failed in a protocol-independent way, and the HTTP adapter maps that reason to a status code. Authentication failures are answered before any operation runs:
 
 | Status | Meaning |
 |---|---|
+| `200 OK` | The operation succeeded. |
+| `201 Created` | `POST /workflows` started a new run. |
 | `400 Bad Request` | The request was invalid, such as a malformed bulk selection. |
+| `401 Unauthorized` | The request carries no valid credential for an enabled scheme. |
 | `403 Forbidden` | The caller's roles or scopes do not permit the operation. |
 | `404 Not Found` | No such workflow, task, or review. |
 | `409 Conflict` | The target is not in a state that allows the operation. |

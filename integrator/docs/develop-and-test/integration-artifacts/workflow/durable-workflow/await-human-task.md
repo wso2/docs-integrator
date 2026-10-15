@@ -4,10 +4,10 @@ title: Await Human Task
 
 # Await Human Task
 
-Real processes wait on people: a manager approves an expense, a reviewer checks documents, an HR lead assigns a new joiner to a team. An **Await Human Task** step stops the workflow at exactly that point, hands a task to a role, and resumes the moment someone submits a decision, whether that takes a minute or a month. While it waits, it holds no threads and no connections.
+Real processes wait on people: a manager approves an expense, a reviewer checks documents, an HR lead assigns a new joiner to a team. A **Human Task** step stops the workflow at exactly that point, hands a task to a role, and resumes the moment someone submits a decision, whether that takes a minute or a month. While it waits, it holds no threads and no connections.
 
 <ThemedImage
-    alt="The employeeOnboarding workflow halted on an Await Human Task step whose result is HRFeedback, with a dashed arrow arriving from an HRManager role marker"
+    alt="The employeeOnboarding workflow with a Human Task step whose result is feedback, with a dashed arrow arriving from the role marker"
     sources={{
         light: useBaseUrl('/img/workflows/develop/human-task-workflow/await-human-task-light.png'),
         dark: useBaseUrl('/img/workflows/develop/human-task-workflow/await-human-task-dark.png'),
@@ -24,24 +24,24 @@ The steps below follow one example: an onboarding workflow where an HR lead assi
 | `name` | `string` |
 
 1. On the workflow diagram, click **+** where the workflow should wait.
-2. In the node panel, under **Workflow** > **Steps**, click **Await Human Task**.
+2. In the node panel, under **Workflow** > **Steps**, click **Human Task**.
 3. Fill in the form:
 
    | Field | Required | Description |
    |---|---|---|
    | **Task Name** | Yes | Identifies the task type, for example `Assign Employee to Team`. |
-   | **User Roles** | Yes | One or more roles permitted to complete this task, for example `HRManager`. Only users holding a matching role see the task. |
-   | **Task Input** | No | Read-only information shown alongside the form to help the user make the decision. See [Show the decider what they need](#show-the-decider-what-they-need). |
-   | **Title** | No | Under **Advanced Configurations**. Short summary shown in the inbox, for example `Assign Employee to Team`. |
-   | **Description** | No | Under **Advanced Configurations**. Additional context shown alongside the form, for example `Assign the new employee to the appropriate team and select their team lead.` |
-   | **Timeout** | No | Under **Advanced Configurations**. Maximum time to wait. Omit it to wait indefinitely. |
+   | **User Roles** | Yes | One or more roles permitted to complete this task, for example `HRManager`. Only users holding a matching role see the task. It can be left empty only when **Users** names the people who may complete it; the form refuses a task that names nobody. |
+   | **Task Input** | Yes | Read-only information shown alongside the form to help the user make the decision. Enter `{}` when there is nothing to show. See [Show the decider what they need](#show-the-decider-what-they-need). |
+   | **Title** | No | Short summary shown in the inbox, for example `Assign Employee to Team`. |
+   | **Description** | No | Additional context shown alongside the form, for example `Assign the new employee to the appropriate team and select their team lead.` |
+   | **Timeout** | No | Maximum time to wait. Omit it to wait indefinitely. |
    | **Result** | Yes | Name of the variable that receives the decision. |
-   | **Completion Type** | Yes | The type of the data returned when the task is completed. See [Type the decision](#type-the-decision). |
+   | **Completion Type** | Yes | The type of the data returned when the task is completed. Defaults to `boolean`. See [Type the decision](#type-the-decision). |
 
 4. Click **Save**.
 
 <ThemedImage
-    alt="Adding an Await Human Task step, with its payload, title, description, and a new completion type"
+    alt="Adding a Human Task step with its role, task input, title, description, and a new HRFeedback completion type"
     sources={{
         light: useBaseUrl('/img/workflows/develop/human-task-workflow/await-human-task.gif'),
         dark: useBaseUrl('/img/workflows/develop/human-task-workflow/await-human-task.gif'),
@@ -61,7 +61,7 @@ The task input is only there to provide context. It is not returned to the workf
 
 ## Type the decision
 
-**Completion Type** is what the workflow gets back, and it is also what the Control Plane renders the form from. A plain approve or reject can be a `boolean`, while anything richer wants a record.
+**Completion Type** is what the workflow gets back. When it is a record, it is also what the Control Plane renders the form from. Any other type, such as a plain `boolean` for an approve or reject, has no form: the decider types the value, for example `true`, into a JSON box. Use a record whenever the decider should fill in a form.
 
 For the onboarding task, the HR lead answers with a team and a team lead:
 
