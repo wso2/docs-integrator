@@ -21,8 +21,8 @@ For development and evaluation, WSO2 Integrator ships its own ICP server and wri
 <ThemedImage
     alt="Enabling ICP monitoring, expanding Publish to local ICP, and starting the bundled ICP server from the deployment options panel"
     sources={{
-        light: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/start-icp-server.gif'),
-        dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/start-icp-server.gif'),
+        light: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/start-icp-server-v5.1.gif'),
+        dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/start-icp-server-v5.1.gif'),
     }}
 />
 
@@ -83,8 +83,8 @@ Select **Overview** in the console navigation to open the integration overview.
 <ThemedImage
     alt="Integration overview showing workflow definitions, workflow actions, and runtime status"
     sources={{
-        light: useBaseUrl('/img/workflows/icp/integration-overview.png'),
-        dark: useBaseUrl('/img/workflows/icp/integration-overview.png'),
+        light: useBaseUrl('/img/workflows/icp/integration-overview-v5.1.png'),
+        dark: useBaseUrl('/img/workflows/icp/integration-overview-v5.1.png'),
     }}
 />
 

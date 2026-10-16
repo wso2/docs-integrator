@@ -285,8 +285,8 @@ The status bar at the bottom right switches from **ICP: Stopped** to **ICP: Runn
 <ThemedImage
     alt="Enabling ICP monitoring, expanding Publish to local ICP, and starting the local ICP server from the Deployment Options panel"
     sources={{
-        light: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/start-icp-server.gif'),
-        dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/start-icp-server.gif'),
+        light: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/start-icp-server-v5.1.gif'),
+        dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/start-icp-server-v5.1.gif'),
     }}
 />
 
