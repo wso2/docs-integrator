@@ -297,7 +297,7 @@ The exported file contains every trace in the current session, in the order they
 
 The trace viewer described above is wired to the built-in **IDE trace provider**. To send traces to your existing observability stack instead (Jaeger, Zipkin, or any OpenTelemetry-compatible collector), swap the trace provider in your project files.
 
-The example below uses Jaeger. For other providers, follow the same pattern with the matching `ballerinax` extension. See the [Ballerina observability overview](https://ballerina.io/learn/overview-of-ballerina-observability/) for the full list of supported platforms.
+The example below uses Jaeger. For other providers, follow the same pattern with the matching `ballerinax` extension. See [Choose a tracing backend](../../../../observe/tracing.md#choose-a-tracing-backend) for the full list of supported platforms.
 
 Three changes are required:
 
@@ -322,7 +322,7 @@ Three changes are required:
     tracingProvider = "jaeger"
     ```
 
-When you run the integration, spans flow to the configured collector instead of the IDE trace viewer. To point at a non-local collector or tune sampling, add a `[ballerinax.jaeger]` section to `Config.toml` with provider-specific keys. See the [Ballerina Jaeger configuration guide](https://ballerina.io/learn/supported-observability-tools-and-platforms/jaeger/) for the full list of configurables.
+When you run the integration, spans flow to the configured collector instead of the IDE trace viewer. To point at a non-local collector or tune sampling, add a `[ballerinax.jaeger]` section to `Config.toml` with provider-specific keys. See the [Jaeger configuration options](../../../../observe/open-source/jaeger.md#configuration-options) for the full list of configurables.
 
 To switch back to the dev-time viewer, change the import to `ballerinax/idetraceprovider as _;` and set `tracingProvider = "idetraceprovider"` in `Config.toml`.
 
