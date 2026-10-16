@@ -58,13 +58,13 @@ Once done, you are ready to bring your own identity to WSO2 Cloud.
 
 ## Bring your own identity to WSO2 Cloud
 
-When you create an organization in WSO2 Cloud, the platform provisions an organization with the same name in Asgardeo. To bring your own identity, configure a federated enterprise IdP in that Asgardeo organization.
+When you create an organization in WSO2 Cloud, the platform provisions an organization with the same name in WSO2 Identity Platform. To bring your own identity, configure a federated enterprise IdP in that WSO2 Identity Platform organization.
 
 Follow these steps to configure the federated IdP:
 
-1. Sign in to [Asgardeo](https://asgardeo.io/).
-2. Configure a federated enterprise identity provider by following the steps in [Asgardeo documentation: Add standard-based login](https://wso2.com/asgardeo/docs/guides/authentication/enterprise-login/).
-3. In the Asgardeo Console left navigation menu, click **Applications**. You will see an application named **WSO2_LOGIN_FOR_DEVANT**.
+1. Sign in to [WSO2 Identity Platform](https://asgardeo.io/).
+2. Configure a federated enterprise identity provider by following the steps in [WSO2 Identity Platform documentation: Add standard-based login](https://wso2.com/asgardeo/docs/guides/authentication/enterprise-login/).
+3. In the WSO2 Identity Platform Console left navigation menu, click **Applications**. You will see an application named **WSO2_LOGIN_FOR_DEVANT**.
 4. Click on the application to edit it.
 5. Click the **Sign-in Method** tab to view the configured connection.
 
@@ -79,20 +79,20 @@ WSO2 Cloud lets you configure role-based access control (RBAC) for users who res
 Before you configure RBAC, complete the following:
 
 1. Configure enterprise login for your organization. For instructions, see [Configure enterprise login for your organization](#configure-enterprise-login-for-your-organization).
-2. Ensure your enterprise IdP includes group or role attributes in the tokens it sends to Asgardeo via the respective protocol.
+2. Ensure your enterprise IdP includes group or role attributes in the tokens it sends to WSO2 Identity Platform via the respective protocol.
 3. Confirm that you have administrator privileges in WSO2 Cloud.
 
-### Step 1: Configure Asgardeo
+### Step 1: Configure WSO2 Identity Platform
 
-1. Sign in to [Asgardeo](https://asgardeo.io/).
-2. [Configure your IdP as an external IdP in Asgardeo](https://wso2.com/asgardeo/docs/guides/authentication/enterprise-login/). You can select OpenID Connect or SAML as the protocol between Asgardeo and your IdP.
+1. Sign in to [WSO2 Identity Platform](https://asgardeo.io/).
+2. [Configure your IdP as an external IdP in WSO2 Identity Platform](https://wso2.com/asgardeo/docs/guides/authentication/enterprise-login/). You can select OpenID Connect or SAML as the protocol between WSO2 Identity Platform and your IdP.
 
     :::note
-    If you use OpenID Connect, configure the requested scopes so that Asgardeo can retrieve the relevant group or role details from the external IdP.
+    If you use OpenID Connect, configure the requested scopes so that WSO2 Identity Platform can retrieve the relevant group or role details from the external IdP.
     :::
 
 3. Configure the application:
-    1. In the Asgardeo Console left navigation menu, click **Applications**. You will see an application named **WSO2_LOGIN_FOR_DEVANT_CONSOLE**.
+    1. In the WSO2 Identity Platform Console left navigation menu, click **Applications**. You will see an application named **WSO2_LOGIN_FOR_DEVANT_CONSOLE**.
     2. Click on the application to edit it.
     3. Click the **Sign-in Method** tab.
     4. Configure the IdP for login based on the protocol you selected:
@@ -103,7 +103,7 @@ Before you configure RBAC, complete the following:
     7. Click **Update**.
 
 4. Add the user attributes as OpenID Connect scopes:
-    1. In the Asgardeo Console left navigation menu, click **Scopes**.
+    1. In the WSO2 Identity Platform Console left navigation menu, click **Scopes**.
     2. In the **OpenID Connect Scopes** pane, click **OpenID** to edit it.
     3. Click **New Attribute** and select the **Groups** attribute.
     4. Click **Save** and then click **Save Changes**.
