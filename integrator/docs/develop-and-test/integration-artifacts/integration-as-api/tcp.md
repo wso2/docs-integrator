@@ -275,7 +275,10 @@ service class TcpConnectionService {
     *tcp:ConnectionService;
 
     remote function onBytes(tcp:Caller caller, readonly & byte[] data) returns tcp:Error? {
-        string message = check string:fromBytes(data);
+        string|error message = string:fromBytes(data);
+        if message is error {
+            return error tcp:Error("Received data that is not valid UTF-8", message);
+        }
         log:printInfo("Received message", data = message);
         check caller->writeBytes("ACK".toBytes());
     }
@@ -294,7 +297,7 @@ service class TcpConnectionService {
 
 | Callback | Signature | Trigger | Typical use |
 |---|---|---|---|
-| `onConnect` | `(tcp:Caller caller) returns tcp:ConnectionService\|tcp:Error` | New TCP client connects | Instantiate and return the connection service |
+| `onConnect` | `(tcp:Caller caller) returns tcp:ConnectionService\|tcp:Error?` | New TCP client connects | Instantiate and return the connection service |
 | `onBytes` | `(readonly & byte[] data) returns byte[]\|tcp:Error?` or `(tcp:Caller caller, readonly & byte[] data) returns tcp:Error?` | Data received from the client | Echo bytes back directly, or use `caller->writeBytes()` for explicit writes |
 | `onClose` | `()` | Client disconnects | Release per-connection resources |
 | `onError` | `(tcp:Error err)` | Connection error occurs | Log and handle the error condition |
