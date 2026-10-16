@@ -40,6 +40,15 @@ export BAL_CONFIG_VAR_APIKEY="<api-key>"
 bal run
 ```
 
+### On Amazon Bedrock AgentCore Runtime
+
+AgentCore Runtime passes configuration to the agent as environment variables, set in the runtime's configuration. A configurable is read from `BAL_CONFIG_VAR_` followed by its name in uppercase: `mcpClientSecret` becomes `BAL_CONFIG_VAR_MCPCLIENTSECRET`.
+
+These values aren't masked. `GetAgentRuntime` returns them in full to anyone with `bedrock-agentcore:GetAgentRuntime` on the runtime, and they appear again in every `update-agent-runtime` request. Keep secrets out of them where you can:
+
+- **Model provider keys:** don't give the agent a provider key. Store the key in AgentCore Identity (**AgentCore** > **Identity** > **Outbound Auth** > **API key**), and add an **Inference** target to AgentCore Gateway that uses it. The agent then calls the model through the Gateway with its Gateway token.
+- **Gateway client credentials:** the agent needs a Cognito client ID and secret to get its Gateway token. Store the secret in AWS Secrets Manager and have the agent [read it at runtime](#read-secrets-at-runtime) with the runtime's IAM role. The environment variable then holds only the secret's name. See [Amazon Bedrock AgentCore Runtime deployment](../self-hosted/containerized-deployment.md#step-2-connect-the-agent-to-agentcore-gateway).
+
 ## Kubernetes secrets
 
 Mount Kubernetes Secrets as files or environment variables:

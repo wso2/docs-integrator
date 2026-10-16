@@ -154,6 +154,8 @@ JSON output, with one log entry per line:
 {"time":"2025-03-15T10:30:00.000Z", "level":"INFO", "module":"myorg/order_service", "message":"Processing order", "orderId":"ORD-12345", "customerId":"CUST-789", "total":149.99, "itemCount":3}
 ```
 
+When tracing is enabled, each log record also carries the `traceId` and `spanId` of the request that wrote it. Log platforms that parse JSON, such as Amazon CloudWatch Logs, turn these into queryable fields. You can then go from a log line to its trace and back. In the default key-value format, the same values are present but stay unparsed.
+
 ## Send logs to Amazon CloudWatch Logs
 
 Integrations log to stderr, so on AWS the platform ships the output to CloudWatch Logs without code changes. Switch to the [JSON log format](#json-log-format) so each log line arrives as one structured event that you can query with CloudWatch Logs Insights:
@@ -166,6 +168,7 @@ Integrations log to stderr, so on AWS the platform ships the output to CloudWatc
 | Amazon ECS | The `awslogs` log driver in the task definition. See [Amazon ECS deployment](../deploy-and-run/self-hosted/containerized-deployment.md#step-5-register-the-task-definition). |
 | Amazon EKS | Fluent Bit, or the Amazon CloudWatch Observability EKS add-on |
 | AWS Lambda | Automatic; function output goes to the `/aws/lambda/<function-name>` log group |
+| Amazon Bedrock AgentCore Runtime | Automatic; output goes to the `/aws/bedrock-agentcore/runtimes/<runtime-id>-DEFAULT` log group |
 
 ## What's next
 

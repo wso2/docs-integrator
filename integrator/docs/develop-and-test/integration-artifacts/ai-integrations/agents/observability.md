@@ -324,7 +324,46 @@ Three changes are required:
 
 When you run the integration, spans flow to the configured collector instead of the editor trace viewer. To point at a non-local collector or tune sampling, add a `[ballerinax.jaeger]` section to `Config.toml` with provider-specific keys. See the [Jaeger configuration options](../../../../observe/open-source/jaeger.md#configuration-options) for the full list of configurables.
 
-To switch back to the dev-time viewer, change the import to `ballerinax/idetraceprovider as _;` and set `tracingProvider = "idetraceprovider"` in `Config.toml`.
+### Export over OTLP
+
+To send traces to an OpenTelemetry Collector, or to any backend that accepts OTLP, use the `ballerina/otel` module in place of the Jaeger extension. Keep `observabilityIncluded = true` in `Ballerina.toml`, then:
+
+1. Import the module:
+
+    ```ballerina
+    import ballerina/otel as _;
+    ```
+
+2. In `Config.toml`, select the `otel` provider and set the endpoint:
+
+    ```toml
+    [ballerina.observe]
+    tracingEnabled = true
+    tracingProvider = "otel"
+
+    [ballerina.otel]
+    tracesEndpoint = "http://127.0.0.1:4317"
+    tracesProtocol = "grpc"
+
+    [ballerina.otel.tracesResourceAttributes]
+    "service.name" = "my-agent"
+    ```
+
+`ballerina/otel` sends requests without signing them. A backend that requires signed or authenticated requests, such as AWS X-Ray, needs an OpenTelemetry Collector in between to add the credentials.
+
+Agent spans follow the OpenTelemetry GenAI semantic conventions, which most AI observability backends understand. A few details matter when a backend expects specific attribute names:
+
+| Span | Attribute | Holds |
+|---|---|---|
+| `invoke_agent` (one per agent run) | `gen_ai.input.messages`, `gen_ai.output.messages` | The prompt and the agent's answer |
+| `invoke_agent` | `gen_ai.conversation.id` | The `sessionId` passed to `agent.run()` |
+| `execute_tool` (one per tool call) | `gen_ai.tool.arguments`, `gen_ai.tool.output` | The tool's arguments and its result |
+| LLM call spans | `gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens` | Token counts, recorded as **strings** |
+| All spans | Instrumentation scope name `otel` | The instrumentation that produced the span; some backends select spans by it |
+
+If your backend expects other names, for example `session.id` for the session or integer token counts, rename or convert the attributes in the collector rather than in the agent.
+
+To switch back to the dev-time viewer from either provider, change the import to `ballerinax/idetraceprovider as _;` and set `tracingProvider = "idetraceprovider"` in `Config.toml`.
 
 ## What's next
 
