@@ -179,9 +179,9 @@ Return `error?` from a handler to allow unhandled errors to propagate to the lis
 | `onWidgetUpdated` | A widget requests an autocomplete or similar update. |
 | `onAppCommand` | A user invokes a Chat app command. |
 | `onAppHome` | A user opens the app's home page. |
-| `onSubmitForm` | A user submits a dialog or form. |
+| `onSubmitForm` | A user submits a form from the app's home page. |
 
-Each handler receives the event and, for most event types, an event-specific caller (`chat:MessageCaller`, `chat:CardClickedCaller`, `chat:AppHomeCaller`, or `chat:SubmitFormCaller`) pre-configured with the event's space context. Use the caller to `respond` synchronously within the event window, or to call Chat APIs asynchronously (`sendMessage`, `updateMessage`, `deleteMessage`, `getSpace`).
+Each handler receives the event and, for most event types, an event-specific caller (`chat:MessageCaller`, `chat:CardClickedCaller`, `chat:WidgetUpdatedCaller`, `chat:AppHomeCaller`, or `chat:SubmitFormCaller`) pre-configured with the event's space context. Use the caller to `respond` synchronously within the event window. `chat:MessageCaller` and `chat:CardClickedCaller` can also call Chat APIs asynchronously (`sendMessage`, `updateMessage`, `deleteMessage`, `getSpace`).
 
 ## What's next
 

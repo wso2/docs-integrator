@@ -80,9 +80,9 @@ configurable string kafkaTopic = "orders";
 listener kafka:Listener kafkaListener = new (bootstrapServers, {
     groupId: groupId,
     topics: [kafkaTopic],
-    offsetReset: kafka:OFFSET_RESET_LATEST, // skip old messages, only consume new ones
+    offsetReset: kafka:OFFSET_RESET_LATEST, // start from the latest offset when no committed offset exists
     pollingInterval: 1,
-    autoCommit: false // required when using caller->commit()
+    autoCommit: false // commit offsets manually with caller->'commit()
 });
 
 service kafka:Service on kafkaListener {
@@ -99,14 +99,14 @@ service kafka:Service on kafkaListener {
                 log:printError("Failed to process message, skipping", 'error = e, offset = msg.offset.offset, partition = msg.offset.partition.partition);
             }
         }
-        check caller->commit();
+        check caller->'commit();
     }
 }
 ```
 
-## Service configuration
+## Listener configuration {#service-configuration}
 
-Service configuration controls the service name and the Kafka listener it is attached to.
+Listener configuration controls how the Kafka listener attached to the service connects to the brokers and consumes from topics.
 
 In the **Kafka Listener Designer**, click **Configure** to open the **Kafka Event Integration Configuration** panel.
 
@@ -131,7 +131,7 @@ The left panel shows the service name and its **Attached Listeners**. Pick the K
 | **Offset Reset** | Strategy when no committed offset exists: `earliest`, `latest`, or `none`. |
 | **Partition Assignment Strategy** | Class that implements the partition assignment strategy among consumer group members. |
 
-Service configuration maps to the `ConsumerConfiguration` record passed when constructing the listener:
+Listener configuration maps to the `ConsumerConfiguration` record passed when constructing the listener:
 
 ```ballerina
 listener kafka:Listener orderListener = new ("localhost:9092", {
@@ -141,7 +141,8 @@ listener kafka:Listener orderListener = new ("localhost:9092", {
 });
 
 service on orderListener {
-    // handlers
+    remote function onConsumerRecord(kafka:AnydataConsumerRecord[] records) returns error? {
+    }
 }
 ```
 

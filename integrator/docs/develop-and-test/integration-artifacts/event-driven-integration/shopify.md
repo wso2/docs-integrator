@@ -8,7 +8,7 @@ Shopify event integrations receive webhook callbacks from a Shopify store and tr
 
 The Shopify webhook listener must be reachable from the internet. For local development, use a tunneling tool such as [ngrok](https://ngrok.com) to create a public URL for your local port. In production, deploy the integration to a publicly accessible host.
 
-After starting the integration, register the webhook in your **Shopify admin** under **Settings > Notifications > Webhooks** (or via the Admin API), pointing the webhook URL to `http://<your-host>:<port>` with the topic that matches the event handlers you implement (for example, `orders/create`). Use the same **API secret key** configured in Shopify as the listener's `apiSecretKey`, which the listener uses to verify the `X-Shopify-Hmac-SHA256` signature on incoming requests.
+After starting the integration, register the webhook in your **Shopify admin** under **Settings > Notifications > Webhooks** (or via the Admin API), pointing the webhook URL to `https://<your-host>` with the topic that matches the event handlers you implement (for example, `orders/create`). Use the same **API secret key** configured in Shopify as the listener's `apiSecretKey`, which the listener uses to verify the `X-Shopify-Hmac-SHA256` signature on incoming requests.
 
 ## Creating a Shopify service
 
@@ -28,27 +28,27 @@ listener shopify:Listener shopifyListener = new (listenerConfig, port);
 service shopify:OrdersService on shopifyListener {
 
     remote function onOrdersCreate(shopify:OrderEvent event) returns error? {
-        log:printInfo("Order created", orderId = event.id.toString());
+        log:printInfo("Order created", orderId = (event?.id).toString());
     }
 
     remote function onOrdersUpdated(shopify:OrderEvent event) returns error? {
-        log:printInfo("Order updated", orderId = event.id.toString());
+        log:printInfo("Order updated", orderId = (event?.id).toString());
     }
 
     remote function onOrdersPaid(shopify:OrderEvent event) returns error? {
-        log:printInfo("Order paid", orderId = event.id.toString());
+        log:printInfo("Order paid", orderId = (event?.id).toString());
     }
 
     remote function onOrdersFulfilled(shopify:OrderEvent event) returns error? {
-        log:printInfo("Order fulfilled", orderId = event.id.toString());
+        log:printInfo("Order fulfilled", orderId = (event?.id).toString());
     }
 
     remote function onOrdersPartiallyFulfilled(shopify:OrderEvent event) returns error? {
-        log:printInfo("Order partially fulfilled", orderId = event.id.toString());
+        log:printInfo("Order partially fulfilled", orderId = (event?.id).toString());
     }
 
     remote function onOrdersCancelled(shopify:OrderEvent event) returns error? {
-        log:printInfo("Order cancelled", orderId = event.id.toString());
+        log:printInfo("Order cancelled", orderId = (event?.id).toString());
     }
 }
 ```

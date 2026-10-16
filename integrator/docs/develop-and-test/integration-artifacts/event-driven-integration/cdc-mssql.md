@@ -28,6 +28,7 @@ CDC must be enabled on the SQL Server database and on each table you want to tra
 
    | Field | Description | Default |
    |---|---|---|
+   | **Listener Name** | Identifier for the listener created with this service. | `mssqlCdcListener` |
    | **Host** | Hostname of the Microsoft SQL Server. | `localhost` |
    | **Port** | Port number of the Microsoft SQL Server. | `1433` |
    | **Username** | Username for the SQL Server connection. | Required |
@@ -39,10 +40,9 @@ CDC must be enabled on the SQL Server database and on each table you want to tra
 
    | Field | Description | Default |
    |---|---|---|
-   | **Listener Name** | Identifier for the listener created with this service. | `mssqlCdcListener` |
    | **Database Instance** | Microsoft SQL Server named instance (if applicable). | — |
    | **Secure Socket** | SSL/TLS configuration for a secure connection. | — |
-   | **Options** | Additional options for the CDC engine as a record expression. Common keys include `snapshotMode` (for example, `"no_data"` to skip the initial snapshot) and `skippedOperations` (for example, `[cdc:TRUNCATE, cdc:UPDATE, cdc:DELETE]` to capture only inserts). | — |
+   | **Options** | Additional options for the CDC engine as a record expression. Common keys include `snapshotMode` (for example, `cdc:NO_DATA` to skip the initial snapshot) and `skippedOperations` (for example, `[cdc:TRUNCATE, cdc:UPDATE, cdc:DELETE]` to skip truncate, update, and delete events; note that snapshot reads still trigger `onRead` unless `snapshotMode` is also set to `cdc:NO_DATA`). | — |
 
    Under **Table**, enter the fully qualified table name to capture events from in the format `<database>.<schema>.<table>` (for example, `mydb.dbo.customers`).
 
@@ -62,7 +62,7 @@ CDC must be enabled on the SQL Server database and on each table you want to tra
 import ballerina/log;
 import ballerinax/cdc;
 import ballerinax/mssql;
-// Loads the SQL Server JDBC driver at runtime; required for CDC to work.
+// Bundles the Debezium SQL Server connector; required for CDC to work.
 import ballerinax/mssql.cdc.driver as _;
 
 // Credentials and target table loaded from Config.toml at startup.
@@ -91,7 +91,7 @@ type Customer record {|
     string email;
 |};
 
-// Scopes the service to a specific fully qualified table.
+// Routes change events for this fully qualified table to the service.
 @cdc:ServiceConfig {
     tables: dbTable
 }
@@ -139,7 +139,7 @@ In the **Service Designer**, click the **Configure** icon in the header to open 
 
 | Field | Description |
 |---|---|
-| **Service Config** | Advanced CDC configuration as a record expression. The `tables` field sets the table(s) to capture changes from, using the fully qualified format `<database>.<schema>.<table>`. Provide a single table as a string (for example, `"mydb.dbo.customers"`), or multiple tables as a string array (for example, `["mydb.dbo.customers", "mydb.dbo.orders"]`). |
+| **Service Config** | Advanced CDC configuration as a record expression. The `tables` field sets the table(s) whose change events are routed to this service, using the fully qualified format `<database>.<schema>.<table>`. Provide a single table as a string (for example, `"mydb.dbo.customers"`), or multiple tables as a string array (for example, `["mydb.dbo.customers", "mydb.dbo.orders"]`). |
 
 The `tables` field accepts either a single table name as a string or multiple tables as a string array.
 
@@ -148,21 +148,31 @@ The `tables` field accepts either a single table name as a string or multiple ta
 @cdc:ServiceConfig {
     tables: "mydb.dbo.customers"
 }
-service cdc:Service on mssqlCdcListener { }
+service cdc:Service on mssqlCdcListener {
+    remote function onCreate(record {} after) returns error? {
+        log:printInfo("Row inserted", data = after.toString());
+    }
+}
+```
 
+```ballerina
 // Multiple tables: the service receives events for both `customers` and `orders`,
 // and the same handlers run for each.
 @cdc:ServiceConfig {
     tables: ["mydb.dbo.customers", "mydb.dbo.orders"]
 }
-service cdc:Service on mssqlCdcListener { }
+service cdc:Service on mssqlCdcListener {
+    remote function onCreate(record {} after) returns error? {
+        log:printInfo("Row inserted", data = after.toString());
+    }
+}
 ```
 
 ## Listener configuration
 
 In the **CDC for Microsoft SQL Server Configuration** panel, select **mssqlCdcListener** under **Attached Listeners** to configure the listener.
 
-A single service can be attached to more than one listener. Attach multiple listeners when one service needs to process change events from more than one SQL Server source. For example, you can capture changes from two separate SQL Server instances, or from two databases with different connection settings, and route every event through the same handler logic.
+A CDC service can be attached to only one listener.
 
 <ThemedImage
     alt="Listener configuration: Database, Engine Name, Internal Schema Storage, Offset Storage, Liveness Interval, Options"
@@ -181,8 +191,6 @@ A single service can be attached to more than one listener. Attach multiple list
 | **Offset Storage** | Offset storage configuration for tracking CDC progress. | `{fileName: "tmp/debezium-offsets.dat"}` |
 | **Liveness Interval** | Interval in seconds for checking CDC listener liveness. | `60.0` |
 | **Options** | Additional connector options as a record expression. | `{}` |
-
-Click **+ Attach Listener** to attach an additional listener to the same service.
 
 Click **Save Changes** to apply updates.
 
@@ -254,7 +262,7 @@ The configuration panel exposes the following fields:
 | Field | Description |
 |---|---|
 | **+ Define Database Entry** | Defines the record type representing one row of the tracked table. The handler receives this record at runtime with values from the change event. |
-| **Advanced Parameters > TableName** | Scopes the handler to a specific table. This is selected by default so that the handler only runs for changes on the table it was added for. Clear the checkbox if you want the handler to run for changes on every table the service is attached to. |
+| **Advanced Parameters > TableName** | Adds a `string` parameter to the handler that receives the name of the table the change event came from. It does not filter events. |
 
 Click **Save** to add the handler. Added handlers appear in the **Event Handlers** list on the Service Designer, where you can edit or remove each one.
 
@@ -305,6 +313,11 @@ service cdc:Service on mssqlCdcListener {
     remote function onError(error err) returns error? {
         log:printError("CDC processing error", 'error = err);
     }
+}
+
+// Placeholder for your own downstream integration logic.
+function syncToDownstream(string operation, Customer row) returns error? {
+    log:printInfo("Syncing change", operation = operation, id = row.id);
 }
 ```
 

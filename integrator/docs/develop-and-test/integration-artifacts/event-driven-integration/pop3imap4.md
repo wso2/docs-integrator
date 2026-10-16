@@ -35,10 +35,11 @@ Click the service node (or the service name in the sidebar) to open the **Email 
 
 ```ballerina
 import ballerina/email;
+import ballerina/log;
 
 configurable string host = "pop.example.com";
 configurable string username = "reader@example.com";
-configurable string password = ?; // app password after enaling pop3/imap4 protocol for the email address
+configurable string password = ?; // app password after enabling pop3/imap4 protocol for the email address
 
 listener email:PopListener popListener = check new ({
     host: host,
@@ -50,7 +51,7 @@ listener email:PopListener popListener = check new ({
 
 service on popListener {
 
-    remote function onMessage(email:Message msg) returns error? {
+    remote function onMessage(email:Message msg) {
         string sender = msg.'from ?: "(unknown sender)";
         string subject = msg.subject;
         string body = msg.body ?: "";
@@ -94,10 +95,11 @@ Click the service node (or the service name in the sidebar) to open the **Email 
 
 ```ballerina
 import ballerina/email;
+import ballerina/log;
 
 configurable string host = "imap.example.com";
 configurable string username = "reader@example.com";
-configurable string password = ?; // app password after enaling pop3/imap4 protocol for the email address
+configurable string password = ?; // app password after enabling pop3/imap4 protocol for the email address
 
 listener email:ImapListener imapListener = check new ({
     host: host,
@@ -109,7 +111,7 @@ listener email:ImapListener imapListener = check new ({
 
 service on imapListener {
 
-    remote function onMessage(email:Message msg) returns error? {
+    remote function onMessage(email:Message msg) {
         string sender = msg.'from ?: "(unknown sender)";
         string subject = msg.subject;
         string body = msg.body ?: "";
@@ -147,7 +149,7 @@ Both `email:PopListenerConfiguration` and `email:ImapListenerConfiguration` shar
 |---|---|---|
 | `onMessage` | New email arrives during a polling cycle | Parse subject and body, route to a downstream system |
 | `onError` | A polling cycle fails | Log the error, alert on repeated failures |
-| `onClose` | Listener shuts down | Release resources, flush in-flight state |
+| `onClose` | The connection to the email server is closed | Release resources, flush in-flight state |
 
 ## Implementing email processing
 
@@ -166,17 +168,21 @@ Not all listener configuration options are available through the visual designer
 The `onMessage` handler receives an `email:Message` record containing the full message:
 
 ```ballerina
-remote function onMessage(email:Message msg) returns error? {
+remote function onMessage(email:Message msg) {
     string sender = msg.'from ?: "(unknown sender)";
-    string subject = msg.subject ?: "(no subject)";
+    string subject = msg.subject;
     string body = msg.body ?: "";
 
     log:printInfo("Email received", sender = sender, subject = subject);
 
-    if subject.includesMatch(re `[Oo]rder`) {
-        check processOrderEmail(sender, body);
-    } else if subject.includesMatch(re `[Ss]upport`) {
-        check createSupportTicket(sender, subject, body);
+    do {
+        if subject.includesMatch(re `[Oo]rder`) {
+            check processOrderEmail(sender, body);
+        } else if subject.includesMatch(re `[Ss]upport`) {
+            check createSupportTicket(sender, subject, body);
+        }
+    } on fail error e {
+        log:printError("Failed to process email", e, subject = subject);
     }
 }
 ```

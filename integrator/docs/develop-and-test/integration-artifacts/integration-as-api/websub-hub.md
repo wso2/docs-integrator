@@ -77,11 +77,13 @@ service /hub on hubListener {
 | `onUnsubscriptionValidation` | Additional unsubscription validation (optional) | Enforce custom unsubscription rules |
 | `onUnsubscriptionIntentVerified` | Hub verifies unsubscription intent | Remove the persisted subscription |
 
+The `onRegisterTopic`, `onDeregisterTopic`, `onUpdateMessage`, `onSubscriptionIntentVerified`, and `onUnsubscriptionIntentVerified` callbacks are mandatory. The other callbacks are optional.
+
 ### Optional validation callbacks
 
 The `onSubscriptionValidation` and `onUnsubscriptionValidation` callbacks are optional. If implemented, the hub invokes them after `onSubscription` or `onUnsubscription` (respectively) and before intent verification. Use them to enforce custom business rules — for example, restricting subscriptions to known topics or authorized callers.
 
-Return `nil` (or omit a return) to accept the request. Return a `SubscriptionDeniedError` or `UnsubscriptionDeniedError` to reject it.
+Return `nil` (or omit a return) to accept the request. Return a `SubscriptionDeniedError` or `UnsubscriptionDeniedError` to reject it. The example below uses the `topics` and `subscriptions` maps declared in [Implementing hub logic](#implementing-hub-logic).
 
 ```ballerina
 remote function onSubscriptionValidation(websubhub:Subscription msg)
@@ -89,7 +91,7 @@ remote function onSubscriptionValidation(websubhub:Subscription msg)
     // Reject subscriptions to unregistered topics
     lock {
         if !topics.hasKey(msg.hubTopic) {
-            return error websubhub:SubscriptionDeniedError("topic not registered");
+            return error websubhub:SubscriptionDeniedError("topic not registered", statusCode = 406);
         }
     }
     // Returning nil accepts the subscription
@@ -100,7 +102,7 @@ remote function onUnsubscriptionValidation(websubhub:Unsubscription msg)
     // Reject if the subscription does not exist
     lock {
         if !subscriptions.hasKey(msg.hubCallback) {
-            return error websubhub:UnsubscriptionDeniedError("subscription not found");
+            return error websubhub:UnsubscriptionDeniedError("subscription not found", statusCode = 406);
         }
     }
 }
@@ -124,7 +126,7 @@ service /hub on hubListener {
     remote function onRegisterTopic(websubhub:TopicRegistration msg)
             returns websubhub:TopicRegistrationSuccess|error {
         lock {
-            topics[msg.topic] = msg;
+            topics[msg.topic] = msg.cloneReadOnly();
         }
         log:printInfo("Topic registered", topic = msg.topic);
         return websubhub:TOPIC_REGISTRATION_SUCCESS;
@@ -144,8 +146,8 @@ service /hub on hubListener {
             foreach websubhub:VerifiedSubscription sub in subscriptions {
                 if sub.hubTopic == msg.hubTopic {
                     websubhub:HubClient hubClient = check new (sub);
-                    check hubClient->notifyContentDistribution({
-                        content: msg.content
+                    _ = check hubClient->notifyContentDistribution({
+                        content: msg.content.clone()
                     });
                 }
             }
@@ -161,7 +163,7 @@ service /hub on hubListener {
     remote function onSubscriptionIntentVerified(websubhub:VerifiedSubscription msg)
             returns error? {
         lock {
-            subscriptions[msg.hubCallback] = msg;
+            subscriptions[msg.hubCallback] = msg.cloneReadOnly();
         }
         log:printInfo("Subscription verified", callback = msg.hubCallback);
     }
@@ -185,17 +187,17 @@ service /hub on hubListener {
 Although WebSub hub service creation is not supported in the visual designer, you can use it to implement logic for event handlers defined in code. Once the service exists in the project, it appears in the **Entry Points** sidebar and on the design canvas.
 
 <ThemedImage
-    alt="Flow designer for the GET upgrade resource showing the Return step with new ChatService()"
+    alt="Design canvas showing the hubListener listener connected to the /hub websubhub:Service node"
     sources={{
         light: useBaseUrl('/img/develop/integration-artifacts/service/websubhub-service/step-canvas.png'),
         dark: useBaseUrl('/img/develop/integration-artifacts/service/websubhub-service/step-canvas.png'),
     }}
 />
 
-Click the service node (or the service name in the sidebar) to open the **WebSub Hub Service** designer, which lists the event handlers.
+Click the service node (or the service name in the sidebar) to open the **WEBSUBHUB Service** designer, which lists the event handlers.
 
 <ThemedImage
-    alt="Flow designer for the GET upgrade resource showing the Return step with new ChatService()"
+    alt="WEBSUBHUB Service designer listing the event handlers of the /hub service"
     sources={{
         light: useBaseUrl('/img/develop/integration-artifacts/service/websubhub-service/step-service.png'),
         dark: useBaseUrl('/img/develop/integration-artifacts/service/websubhub-service/step-service.png'),
@@ -205,7 +207,7 @@ Click the service node (or the service name in the sidebar) to open the **WebSub
 Click any handler row (for example, `onUpdateMessage`) to open its **flow designer view**, where you can define the integration logic visually.
 
 <ThemedImage
-    alt="Flow designer for the GET upgrade resource showing the Return step with new ChatService()"
+    alt="Flow designer for the onUpdateMessage remote function showing the Return step with websubhub:ACKNOWLEDGEMENT"
     sources={{
         light: useBaseUrl('/img/develop/integration-artifacts/service/websubhub-service/step-flow.png'),
         dark: useBaseUrl('/img/develop/integration-artifacts/service/websubhub-service/step-flow.png'),

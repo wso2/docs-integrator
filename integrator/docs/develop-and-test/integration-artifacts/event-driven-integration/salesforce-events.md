@@ -58,7 +58,7 @@ listener salesforce:Listener salesforceListener = new ({
     }
 });
 
-service salesforce:CdcService on salesforceListener {
+service salesforce:CdcService "/data/ChangeEvents" on salesforceListener {
 
     remote function onCreate(salesforce:EventData event) returns error? {
         log:printInfo("Record created",

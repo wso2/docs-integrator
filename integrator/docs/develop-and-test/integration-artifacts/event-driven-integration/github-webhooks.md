@@ -94,6 +94,10 @@ service github:IssuesService on githubListener {
     remote function onUnlabeled(github:IssuesEvent payload) returns error? {
         log:printInfo("Issue unlabeled", number = payload.issue.number);
     }
+
+    // IssuesService also requires onEdited, onDeleted, onTransferred, onPinned, onUnpinned,
+    // onMilestoned, onDemilestoned, onLocked, onUnlocked, onTyped, and onUntyped.
+    // Implement them as well; handlers you don't need can have empty bodies.
 }
 ```
 
@@ -229,7 +233,7 @@ Each handler receives a [github:ReleaseEvent](product://connectors/catalog/devel
 | `onCreated` | A release draft is created |
 | `onEdited` | A release is edited |
 | `onDeleted` | A release is deleted |
-| `onPreReleased` | A release is marked as a pre-release |
+| `onPrereleased` | A release is marked as a pre-release |
 | `onReleased` | A pre-release is promoted to a full release |
 
 ### LabelService handlers
@@ -268,11 +272,11 @@ Each handler receives a [github:ProjectCardEvent](product://connectors/catalog/d
 
 | Handler | Triggered when |
 |---|---|
-| `onCreated` | A card is added to a project board |
-| `onEdited` | A card note is edited |
-| `onMoved` | A card is moved to a different column |
-| `onConverted` | A card note is converted to an issue |
-| `onDeleted` | A card is deleted from a project board |
+| `onProjectCardCreated` | A card is added to a project board |
+| `onProjectCardEdited` | A card note is edited |
+| `onProjectCardMoved` | A card is moved to a different column |
+| `onProjectCardConverted` | A card note is converted to an issue |
+| `onProjectCardDeleted` | A card is deleted from a project board |
 
 ## Error handling
 
@@ -283,14 +287,11 @@ Add an **Error Handler** block inside the handler flow to define recovery logic.
 The GitHub listener catches errors returned from handler methods, logs them, and continues processing subsequent events. Use `do/on fail` inside a handler to take control of recovery before the error reaches the listener.
 
 ```ballerina
-service github:IssuesService on githubListener {
-
-    remote function onOpened(github:IssuesEvent payload) returns error? {
-        do {
-            log:printInfo("Issue opened", number = payload.issue.number);
-        } on fail error err {
-            log:printError("Failed to handle onOpened event", err);
-        }
+remote function onOpened(github:IssuesEvent payload) returns error? {
+    do {
+        log:printInfo("Issue opened", number = payload.issue.number);
+    } on fail error err {
+        log:printError("Failed to handle onOpened event", err);
     }
 }
 ```

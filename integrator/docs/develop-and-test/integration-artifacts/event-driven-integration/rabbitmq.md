@@ -88,6 +88,9 @@ The `@rabbitmq:ServiceConfig` annotation placed before the `service` declaration
     autoAck: false
 }
 service on rabbitmqListener {
+    remote function onMessage(rabbitmq:AnydataMessage message, rabbitmq:Caller caller) returns error? {
+        check caller->basicAck();
+    }
 }
 ```
 
@@ -122,11 +125,11 @@ In the **RabbitMQ Event Integration Configuration** panel, select **rabbitmqList
 | **Username** | Username for broker authentication. | — |
 | **Password** | Password for broker authentication. | — |
 | **Virtual Host** | Virtual host to use when connecting to the broker. | — |
-| **Connection Timeout** | TCP connection establishment timeout in seconds. Set to `0` for infinite. | `0.0` |
-| **Handshake Timeout** | AMQP 0-9-1 protocol handshake timeout in seconds. | `0.0` |
-| **Shutdown Timeout** | Shutdown timeout in seconds. Set to `0` for infinite. If consumers exceed this timeout, any remaining queued deliveries will be lost. Default is `10`. | `0.0` |
-| **Heartbeat** | Initially-requested heartbeat timeout in seconds. Set to `0` for none. | `0.0` |
-| **Validation** | Enable constraint validation on incoming message content. | — |
+| **Connection Timeout** | TCP connection establishment timeout in seconds. Set to `0` for infinite. | — |
+| **Handshake Timeout** | AMQP 0-9-1 protocol handshake timeout in seconds. | — |
+| **Shutdown Timeout** | Shutdown timeout in seconds. Set to `0` for infinite. If consumers exceed this timeout, any remaining queued deliveries will be lost. | `10` |
+| **Heartbeat** | Initially-requested heartbeat timeout in seconds. Set to `0` for none. | — |
+| **Validation** | Enable constraint validation on incoming message content. | `true` |
 | **Secure Socket** | SSL/TLS configuration for secure connections (certificate path and password). | — |
 | **Auth** | Authentication record with `username` and `password` fields. | — |
 
@@ -143,21 +146,19 @@ listener rabbitmq:Listener rabbitmqListener = new (
 );
 ```
 
-`rabbitmq:ConnectionConfiguration` fields:
+`host` and `port` are required constructor arguments. The other arguments are `rabbitmq:ConnectionConfiguration` fields:
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `host` | `string` | `"localhost"` | RabbitMQ broker hostname |
-| `port` | `int` | `5672` | Broker port |
 | `username` | `string` | — | Broker username |
 | `password` | `string` | — | Broker password |
 | `virtualHost` | `string` | — | Virtual host |
-| `connectionTimeout` | `decimal` | `0.0` | TCP connection timeout in seconds |
-| `handshakeTimeout` | `decimal` | `0.0` | AMQP handshake timeout in seconds |
-| `shutdownTimeout` | `decimal` | `0.0` | Shutdown timeout in seconds |
-| `heartbeat` | `decimal` | `0.0` | Heartbeat interval in seconds |
+| `connectionTimeout` | `decimal` | — | TCP connection timeout in seconds |
+| `handshakeTimeout` | `decimal` | — | AMQP handshake timeout in seconds |
+| `shutdownTimeout` | `decimal` | — | Shutdown timeout in seconds |
+| `heartbeat` | `decimal` | — | Heartbeat interval in seconds |
 | `secureSocket` | `rabbitmq:SecureSocket?` | — | TLS/SSL configuration |
-| `validation` | `boolean?` | — | Enable constraint validation |
+| `validation` | `boolean` | `true` | Enable constraint validation |
 
 ## Event handlers
 
@@ -203,8 +204,8 @@ service on rabbitmqListener {
 
     remote function onMessage(rabbitmq:AnydataMessage message,
                               rabbitmq:Caller caller) returns error? {
-        OrderEvent order = check message.content.ensureType();
-        check processOrder(order);
+        OrderEvent orderEvent = check message.content.ensureType();
+        check processOrder(orderEvent);
         check caller->basicAck();
     }
 }
@@ -213,20 +214,30 @@ service on rabbitmqListener {
 **onRequest handler** — called for RPC-style request/reply messages:
 
 ```ballerina
+@rabbitmq:ServiceConfig {
+    queueName: "order-requests"
+}
 service on rabbitmqListener {
 
     remote function onRequest(rabbitmq:AnydataMessage message) returns string|error {
-        OrderEvent order = check message.content.ensureType();
-        string result = check processOrder(order);
+        OrderEvent orderEvent = check message.content.ensureType();
+        string result = check processOrder(orderEvent);
         return result;
     }
 }
 ```
 
-**onError handler** — called when message processing fails:
+**onError handler** — called when a message cannot be dispatched to `onMessage` or `onRequest`:
 
 ```ballerina
+@rabbitmq:ServiceConfig {
+    queueName: "orders"
+}
 service on rabbitmqListener {
+
+    remote function onMessage(OrderEvent orderEvent) returns error? {
+        check processOrder(orderEvent);
+    }
 
     remote function onError(rabbitmq:AnydataMessage message,
                             rabbitmq:Error err) returns error? {
@@ -243,7 +254,7 @@ service on rabbitmqListener {
 |---|---|---|
 | `onMessage` | A new message arrives on the queue | Standard one-way message consumption |
 | `onRequest` | An RPC request message arrives (has a `replyTo` property) | Request/reply messaging patterns |
-| `onError` | A handler returns an error or message processing fails | Logging failures and routing to dead-letter queues |
+| `onError` | A message cannot be dispatched to `onMessage` or `onRequest` (for example, payload binding fails) | Logging failures and routing to dead-letter queues |
 
 ### Message type
 
@@ -254,7 +265,7 @@ Each handler receives a `rabbitmq:AnydataMessage` parameter with the message con
 | `content` | `anydata` | Message payload. Use `message.content.ensureType()` to cast to a typed record. |
 | `routingKey` | `string` | Routing key used when the message was published. |
 | `exchange` | `string` | Exchange the message was published to. Empty string for the default exchange. |
-| `deliveryTag` | `int` | Unique delivery identifier. Used with `caller->basicAck(deliveryTag)` for manual acknowledgment. |
+| `deliveryTag` | `int` | Unique delivery identifier. `caller->basicAck()` acknowledges the current delivery. |
 | `properties` | `rabbitmq:BasicProperties?` | AMQP message properties including `replyTo`, `correlationId`, `contentType`, and `headers`. |
 
 ## What's next
