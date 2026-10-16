@@ -1,0 +1,37 @@
+/* Floating, fixed to the viewport rather than injected into the stock
+   SearchPage's own markup (that component is a plugin-provided,
+   unswizzled-elsewhere React tree we only wrap, not edit line by line)
+   -- sits just under the navbar, top-right, like a conventional modal
+   close button, since landing on /search reads like stepping into an
+   overlay even though it's a real page. */
+.closeButton {
+  position: fixed;
+  top: calc(var(--ifm-navbar-height) + 16px);
+  right: 24px;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--wso2-surface-border);
+  background: var(--ifm-background-surface-color);
+  color: var(--wso2-text-muted);
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.closeButton:hover {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--wso2-heading-color);
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .closeButton {
+    top: calc(var(--ifm-navbar-height) + 10px);
+    right: 12px;
+  }
+}

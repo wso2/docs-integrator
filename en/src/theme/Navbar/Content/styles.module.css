@@ -1,0 +1,132 @@
+/*
+Hide color mode toggle in small viewports
+ */
+.colorModeToggle {
+  flex-shrink: 0;
+}
+
+@media (max-width: 996px) {
+  .colorModeToggle {
+    display: none;
+  }
+}
+
+/* Vertical divider between the color-mode toggle and the icon-only
+   social/GitHub links that follow it -- see NavbarContent's own
+   docstring for the full right-zone order this sits in. Sized against
+   the 2rem .navbar-icon-link buttons it sits between (custom.css),
+   not the full navbar height, so it doesn't touch the navbar's own
+   top/bottom border. Hidden below 996px along with .colorModeToggle
+   and the individual .navbar__item icons themselves (Infima's own
+   breakpoint) -- nothing left to divide there either. */
+.iconDivider {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 1px;
+  height: 1.25rem;
+  margin: 0 0.375rem;
+  background-color: var(--wso2-surface-border);
+}
+
+@media (max-width: 996px) {
+  .iconDivider {
+    display: none;
+  }
+}
+
+/* Tablet-width windows only (996-1200px): stop the logo zone from growing
+   to match the right zone's flex:1 (Infima's stock two-equal-flex
+   centering trick, see NavbarContent's own docstring). There the right
+   zone (search + icons) is pinned at its own min-content width, so
+   leaving both outer zones at flex:1 drags the center nav items
+   rightward, toward the right zone -- left-aligned next to the logo is
+   the better trade there. Above 1200px there is room to keep the items
+   truly centered. */
+@media (min-width: 997px) and (max-width: 1200px) {
+  .logoZone {
+    flex: 0 1 auto;
+  }
+}
+
+/* Guaranteed breathing room between the last center item (FAQ) and the
+   search icon at every desktop width -- however tight the row gets, the
+   two never touch. Padding on the right zone (not a margin on the
+   center zone) so it takes part in the zone's min-content width. The
+   logo zone gets the mirrored padding so the two outer zones stay the
+   same width and the center items sit exactly in the middle. */
+@media (min-width: 997px) {
+  :global(.navbar__items--right) {
+    padding-left: 1.5rem;
+  }
+}
+
+/* Mirror padding on the logo zone, only where the items are centered (the
+   tablet range above is left-aligned, so no mirror is needed there). */
+@media (min-width: 1201px) {
+  .logoZone {
+    padding-right: 1.5rem;
+  }
+}
+
+/* Tablet-width windows can't fit the full icon row next to the center
+   nav items without the two running into each other (the row is ~1180px
+   wide at its fullest), so shed the least essential icons first -- all
+   of them are still one tap away in the mobile drawer and the footer.
+   Only GitHub and Discord stay from 1101px up; below that the row is
+   just search and the color-mode toggle. Matches on the links' own
+   `aria-label` (theme-shared/themeConfig.ts) since they share one
+   className. `!important` because .navbar-icon-link (custom.css) forces
+   `display: flex !important`. */
+@media (min-width: 997px) and (max-width: 1339px) {
+  :global(.navbar__items--right) a[aria-label='Stack Overflow'],
+  :global(.navbar__items--right) a[aria-label='LinkedIn'],
+  :global(.navbar__items--right) a[aria-label='YouTube'],
+  :global(.navbar__items--right) a[aria-label='X (Twitter)'] {
+    display: none !important;
+  }
+}
+
+@media (min-width: 997px) and (max-width: 1100px) {
+  :global(.navbar__items--right) a[aria-label='GitHub'],
+  :global(.navbar__items--right) a[aria-label='Discord'],
+  .iconDivider {
+    display: none !important;
+  }
+}
+
+/* Vertical separators between the center zone's plain nav-item links
+   (Contribute, Community, Blog, FAQ, ...) -- same visual weight as
+   .iconDivider above, but border-based since these sit in stock
+   Infima `.navbar__item` markup we don't otherwise control. Skipped
+   on the first item so the row doesn't start with a leading rule. */
+:global(.navbar__items--center) :global(.navbar__item):not(:first-child) {
+  position: relative;
+}
+
+:global(.navbar__items--center) :global(.navbar__item):not(:first-child)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 1.25rem;
+  background-color: var(--wso2-surface-border);
+}
+
+/*
+Restore some Infima style that broke with CSS Cascade Layers
+See https://github.com/facebook/docusaurus/pull/11142
+ */
+:global(.navbar__items--right) > :last-child {
+  padding-right: 0;
+}
+
+/* NOT giving `.navbar__items--center` `overflow-x: clip` (tried it,
+   reverted) -- ExploreDropdown's flyout is a wide 2-column card grid,
+   a real DOM descendant of this zone even though it's
+   `position: absolute`; overflow clipping on an ancestor still clips
+   an absolutely-positioned descendant's paint, so it rendered cut off
+   down the middle. Crowding is instead handled by SearchBar collapsing
+   to a ~2rem icon below 1920px (see SearchBar/index.tsx), the tablet
+   `.logoZone` rule above, and the right zone's fixed left padding. */

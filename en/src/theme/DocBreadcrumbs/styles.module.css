@@ -1,18 +1,10 @@
-.breadcrumbRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding: 0.5rem 0;
-  font-size: 0.875rem;
-}
-
 .breadcrumbsLeft {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.25rem;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
 }
 
 .breadcrumbItem {
@@ -144,23 +136,43 @@
 .markdownDropdownButton {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 0.75rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--ifm-color-emphasis-700);
-  background-color: var(--ifm-color-emphasis-100);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 8px;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  background-color: var(--ifm-background-color);
+  border: 1px solid var(--wso2-surface-border, var(--ifm-color-emphasis-300));
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
   white-space: nowrap;
-  line-height: 1.4;
+  line-height: 1.2;
 }
 
 .markdownDropdownButton:hover {
-  background-color: var(--ifm-color-emphasis-200);
-  border-color: var(--ifm-color-emphasis-400);
+  border-color: var(--ifm-color-primary);
+}
+
+/* Icon-only on narrow phones, matching EditThisPage's own icon-only
+   collapse (theme/EditThisPage/styles.module.css) and the same
+   breakpoint .secondaryRowInner already wraps at
+   (theme/Navbar/styles.module.css) -- the two sit side by side on that
+   row and shrink together so the product/version pills beside them
+   (SidebarProductHeader) have room to show their full, untruncated
+   label instead. The chevron stays: unlike Edit this page (a plain
+   link), this button opens a menu, and losing every visual cue that
+   tapping it does something beyond navigating would be a real
+   affordance loss, not just a style change. */
+@media (max-width: 480px) {
+  .markdownDropdownButton {
+    gap: 0.2rem;
+    padding: 0.5rem;
+  }
+
+  .markdownDropdownButtonLabel {
+    display: none;
+  }
 }
 
 .markdownDropdownMenu {
@@ -192,8 +204,16 @@
   transition: background-color 0.15s ease;
 }
 
+/* Same peach/orange highlight used for the active row in the product
+   dropdown (SidebarProductHeader) -- here triggered on hover instead of
+   a persistent "active" state, since these are one-shot actions, not a
+   "where am I" list. */
 .markdownDropdownItem:hover {
-  background-color: var(--ifm-color-emphasis-100);
+  background-color: #FDE3D9;
+}
+
+[data-theme='dark'] .markdownDropdownItem:hover {
+  background-color: rgba(241, 78, 35, 0.16);
 }
 
 .markdownDropdownItem svg:first-child {
@@ -201,6 +221,11 @@
   width: 16px;
   height: 16px;
   color: var(--ifm-color-emphasis-600);
+  transition: color 0.15s ease;
+}
+
+.markdownDropdownItem:hover svg:first-child {
+  color: var(--wso2-accent-text);
 }
 
 .markdownDropdownItemText {
@@ -213,6 +238,11 @@
 .markdownDropdownItemTitle {
   font-weight: 500;
   color: var(--ifm-color-emphasis-900);
+  transition: color 0.15s ease;
+}
+
+.markdownDropdownItem:hover .markdownDropdownItemTitle {
+  color: var(--wso2-accent-text);
 }
 
 .markdownDropdownItemDesc {
@@ -225,16 +255,6 @@
   height: 1px;
   background-color: var(--ifm-color-emphasis-200);
   margin: 0.5rem 0;
-}
-
-[data-theme='dark'] .markdownDropdownButton {
-  color: var(--ifm-color-emphasis-600);
-  background-color: var(--ifm-color-emphasis-100);
-  border-color: var(--ifm-color-emphasis-400);
-}
-
-[data-theme='dark'] .markdownDropdownButton:hover {
-  background-color: var(--ifm-color-emphasis-200);
 }
 
 [data-theme='dark'] .markdownDropdownMenu {

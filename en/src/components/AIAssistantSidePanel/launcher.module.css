@@ -1,0 +1,53 @@
+/* Size comes from the shared FloatingActions wrapper. Pulse Orange,
+   the same color as the panel's own buttons. */
+.fab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--floating-fab-size, 3.25rem);
+  height: var(--floating-fab-size, 3.25rem);
+  border-radius: 999px;
+  border: none;
+  background: var(--ifm-color-primary);
+  color: var(--wso2-on-navy-text);
+  box-shadow: var(--wso2-card-shadow-hover);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.fab:hover {
+  transform: scale(1.06);
+}
+
+/* Right-edge panel starting below the two sticky header rows (navbar +
+   product row), which stay full width -- like the WSO2 Cloud console. */
+.dock {
+  position: fixed;
+  top: calc(var(--ifm-navbar-height) + var(--wso2-secondary-row-height, 0px));
+  right: 0;
+  bottom: 0;
+  z-index: 300;
+  display: flex;
+  box-shadow: var(--wso2-card-shadow-hover);
+  animation: slideIn 0.2s ease-out;
+}
+
+
+@keyframes slideIn {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Phones and tablets: not enough room to share, so the panel covers the
+   page instead. */
+@media (max-width: 996px) {
+  .dock {
+    left: 0;
+  }
+}

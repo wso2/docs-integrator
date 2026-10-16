@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { useLocation } from '@docusaurus/router';
 import { Prism } from 'prism-react-renderer';
 import SiteNav from '@site/src/components/SiteNav';
+import FloatingActions from '@site/src/components/FloatingActions';
+import { CatalogProvider } from '@site/src/components/ConnectorCatalog/context';
 
 // Make Prism available globally so extensions can reach it
 (typeof global !== 'undefined' ? global : window).Prism = Prism;
@@ -122,9 +124,10 @@ function useNavbarActiveState() {
 export default function Root({ children }) {
   useNavbarActiveState();
   return (
-    <>
+    <CatalogProvider>
       <SiteNav />
       {children}
-    </>
+      <FloatingActions />
+    </CatalogProvider>
   );
 }

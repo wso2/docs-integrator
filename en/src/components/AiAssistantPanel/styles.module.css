@@ -1,0 +1,165 @@
+/* Fixed-position + z-index used to live here directly; now provided by
+   the shared FloatingActions wrapper this sits inside of (see
+   src/components/FloatingActions), so this button and ReportIssueButton
+   move, space, and resize together at each breakpoint instead of each
+   having its own copy of the same positioning/sizing rules to keep in
+   sync by hand. `position: relative` is still needed here, though --
+   .panel below anchors to THIS element specifically (opens directly
+   above the AI button, not shifted by ReportIssueButton's presence). */
+.wrapper {
+  position: relative;
+}
+
+.fab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--floating-fab-size, 3.25rem);
+  height: var(--floating-fab-size, 3.25rem);
+  border-radius: 999px;
+  border: none;
+  background: var(--ifm-color-primary);
+  color: var(--ifm-background-color);
+  box-shadow: var(--wso2-card-shadow-hover);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.fab:hover {
+  transform: scale(1.06);
+}
+
+.panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.75rem);
+  width: 20rem;
+  max-width: calc(100vw - 3rem);
+  background: var(--ifm-background-color);
+  border: 1px solid var(--wso2-surface-border);
+  border-radius: 16px;
+  box-shadow: var(--wso2-card-shadow-hover);
+  padding: 1rem;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.panelTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.closeButton {
+  display: flex;
+  padding: 0.15rem;
+  border: none;
+  background: none;
+  color: var(--wso2-text-muted);
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.closeButton:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .closeButton:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.panelHint {
+  font-size: 0.8125rem;
+  color: var(--ifm-font-color-secondary);
+  margin-bottom: 0.6rem;
+}
+
+.examples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.exampleButton {
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--wso2-surface-border);
+  border-radius: 10px;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.exampleButton:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.customForm {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.customInput {
+  flex: 1;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--wso2-surface-border);
+  border-radius: 8px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.8125rem;
+}
+
+.customSubmit {
+  padding: 0.45rem 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--ifm-color-primary);
+  color: var(--ifm-background-color);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.customSubmit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chooser {
+  padding-top: 0.25rem;
+}
+
+.chooserLabel {
+  font-size: 0.8125rem;
+  color: var(--ifm-font-color-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.chooserButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.chooserButton {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--wso2-surface-border);
+  border-radius: 10px;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.chooserButton:hover {
+  border-color: var(--ifm-color-primary);
+}

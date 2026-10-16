@@ -1,0 +1,184 @@
+/* Moved from src/pages/index.module.css when SearchBar was pulled out
+   into its own component -- unchanged otherwise. Assumes a dark
+   background (see index.tsx's docstring); .previewFrame below supplies
+   one for use outside the homepage hero. */
+.searchWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  z-index: 10;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  height: 54px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 0 1rem;
+  transition: all 0.2s ease;
+}
+
+.searchForm:focus-within {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow: 0 0 0 3px rgba(241, 78, 35, 0.1);
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  color: #9FB0CC;
+  margin-right: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.searchForm:focus-within .searchIcon {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.searchIconButton {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+}
+
+.searchIconButton:hover .searchIcon {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.searchInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 15px;
+  padding: 0.75rem 0;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.searchInput:focus::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.searchKbd {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-family: inherit;
+  font-weight: 600;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+}
+
+.searchForm:focus-within .searchKbd {
+  display: none;
+}
+
+/* Quick-links dropdown */
+.searchDropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  padding: 0.4rem;
+  z-index: 100;
+}
+
+[data-theme='dark'] .searchDropdown {
+  background: #0E1728;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.searchDropdownLabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #565656;
+  padding: 0.5rem 0.75rem 0.25rem;
+  margin: 0;
+}
+
+[data-theme='dark'] .searchDropdownLabel {
+  color: #8B94A7;
+}
+
+.searchDropdownItem {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: #262626;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+[data-theme='dark'] .searchDropdownItem {
+  color: #D9D9D9;
+}
+
+.searchDropdownItem:hover {
+  background: #F2F2F2;
+  color: #1B2A49;
+  text-decoration: none;
+}
+
+[data-theme='dark'] .searchDropdownItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+}
+
+@media screen and (max-width: 768px) {
+  .searchWrapper {
+    max-width: 100%;
+    margin: 1.5rem 0 0;
+  }
+
+  .searchForm {
+    border-radius: 10px;
+  }
+
+  .searchKbd {
+    display: none;
+  }
+}
+
+/* Same navy gradient as pages/index.module.css's .heroBanner, so a
+   SearchBar rendered in a doc page (a plain light/dark theme
+   background, not the hero's fixed dark one) still reads correctly --
+   see SearchBarPreview's docstring in index.tsx. */
+.previewFrame {
+  padding: 2.5rem 2rem;
+  border-radius: var(--ifm-card-border-radius);
+  background: linear-gradient(150deg, #26365A, #1B2A49);
+  display: flex;
+  justify-content: center;
+}
+
+.previewFrame .searchWrapper {
+  max-width: 560px;
+}

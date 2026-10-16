@@ -1,0 +1,348 @@
+/* ================================================================
+   ARTIFACT PICKER — Search, category pills, grouped icon-tile grid.
+   Mirrors the "Add a new artifact" panel in the editor. Reuses the
+   same search/chip visual language as ConnectorCatalog for
+   consistency across the site's two searchable-grid components.
+   ================================================================ */
+
+.picker {
+  margin-top: 0.5rem;
+}
+
+/* ── Toolbar (search + chips) ── */
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  color: var(--wso2-text-muted);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.7rem 2.5rem 0.7rem 2.75rem;
+  font-size: 0.925rem;
+  font-family: inherit;
+  border: 1.5px solid var(--wso2-surface-border);
+  border-radius: 12px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchInput::placeholder {
+  color: var(--wso2-text-muted);
+}
+
+.searchInput:focus {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px var(--wso2-accent-light);
+}
+
+.clearButton {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 6px;
+  background: var(--ifm-background-surface-color);
+  color: var(--wso2-text-muted);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.clearButton:hover {
+  background: var(--wso2-surface-border);
+  color: var(--wso2-heading-color);
+}
+
+/* ── Category chips ── */
+.categoryChips {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: inherit;
+  border: 1px solid var(--wso2-surface-border);
+  border-radius: 20px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  line-height: 1.4;
+}
+
+.chip:hover {
+  background: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-primary);
+  color: var(--wso2-accent-text);
+}
+
+.chipActive {
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: #FFFFFF;
+}
+
+.chipActive:hover {
+  color: #FFFFFF;
+}
+
+/* ── Section (one per category) ── */
+.section {
+  margin-bottom: 2.75rem;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionHeader {
+  margin-bottom: 1.1rem;
+}
+
+/* Icon sits on its own row with just the title, so it aligns against
+   a single line of text instead of a font-metric-dependent nudge
+   against a multi-line (title + description) block. */
+.sectionTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.sectionIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+/* ArtifactIcon renders either an <img> (real, fixed-color brand
+   logos -- Solace, MySQL, Azure... kept exactly as vendored) or a
+   <span> wrapping an inlined <svg> (monochrome glyph icons, with
+   fill="currentColor"). This class ends up directly on whichever one
+   it is, so it has to work both ways: sizes an <img> directly via
+   object-fit, and sizes+centers a <span>'s injected <svg> child.
+   `color` only matters for the inline-svg case -- a theme token, so
+   those icons go dark in light mode and light in dark mode
+   automatically, same as any other icon on the site (e.g.
+   PaletteIcon), no fixed backdrop needed. */
+.sectionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  color: var(--wso2-heading-color);
+}
+
+.sectionIcon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* !important because the global .markdown h3 rule (custom.css) --
+   border-top + 2.5rem margin-top + 1.5rem padding-top, meant for
+   regular doc section headings -- has higher specificity (class +
+   element) than a lone CSS-module class here, and would otherwise
+   win and draw an unwanted divider above every category title. */
+.sectionTitle {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--wso2-heading-color);
+}
+
+.sectionDesc {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-base);
+}
+
+/* ── Tile grid --
+   Deliberately narrow (product panel shows ~4-5 compact tiles per
+   row), matching the size of the real "Add a new artifact" cards
+   rather than the bigger descriptive cards used elsewhere on the
+   site (.palette-card / ConnectorCatalog's .card). */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 0.65rem;
+  align-items: stretch;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--wso2-surface-border);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+a.card:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--wso2-card-shadow-hover);
+  transform: translateY(-1px);
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardDisabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+/* Fixed-size, centered box around the icon -- normalizes wildly
+   inconsistent native SVG sizes (24x24, 128x128, 1800x1800,
+   non-square 55x61...). No background chip: see .sectionIcon's
+   comment for why (real brand colors via <img>, theme-adaptive
+   currentColor via inline <svg> -- both read fine on their own). */
+.cardIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  color: var(--wso2-heading-color);
+}
+
+.cardIcon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cardName {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--wso2-heading-color);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.betaBadge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: var(--wso2-accent-light);
+  color: var(--wso2-accent-text);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+/* Neutral gray, deliberately not the brand-accent styling .betaBadge
+   uses -- this isn't a product state, it's a "needs a manual review"
+   marker for pages written by research agents (see the `generated`
+   flag in data.ts). Remove the flag once a page's been checked. */
+.generatedBadge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--wso2-surface-border);
+  color: var(--wso2-text-muted);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+/* ── Empty state ── */
+.empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--wso2-text-muted);
+}
+
+.empty p {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.resetButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: 1.5px solid var(--ifm-color-primary);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ifm-color-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.resetButton:hover {
+  background: var(--ifm-color-primary);
+  color: #FFFFFF;
+}

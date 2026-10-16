@@ -1,0 +1,44 @@
+/**
+ * Mirrors @docusaurus/theme-classic/src/theme/DocRoot/Layout/Sidebar/styles.module.css,
+ * deliberately NOT inside an `@layer` block -- see index.tsx's docstring
+ * for why (the original's `@layer`-wrapped version can't be overridden
+ * from our unlayered custom.css, not even with `!important`).
+ *
+ * `flex` (not just `width`) pins the sidebar's size explicitly:
+ *   - `flex-shrink: 0` stops the flexbox algorithm from silently
+ *     re-negotiating some of this width away to the sibling main-content
+ *     area's `flex-grow: 1` (observed settling at an arbitrary in-between
+ *     size otherwise, regardless of what `width` said).
+ *   - `min-width: 0` overrides flex items' default `min-width: auto`,
+ *     which floors shrinking at content's min-content size -- wider than
+ *     64px once the sidebar has its own nav content -- so without this
+ *     the collapsed width is silently ignored too.
+ */
+.docSidebarContainer {
+  display: none;
+}
+
+@media (min-width: 997px) {
+  .docSidebarContainer {
+    display: block;
+    flex: 0 0 var(--doc-sidebar-width);
+    min-width: 0;
+    margin-top: calc(-1 * var(--ifm-navbar-height));
+    border-right: 1px solid var(--ifm-toc-border-color);
+    will-change: width;
+    transition: flex-basis var(--ifm-transition-fast) ease;
+    clip-path: inset(0);
+  }
+
+  .docSidebarContainerHidden {
+    flex: 0 0 var(--doc-sidebar-hidden-width);
+    cursor: pointer;
+  }
+
+  .sidebarViewport {
+    top: 0;
+    position: sticky;
+    height: 100%;
+    max-height: 100vh;
+  }
+}

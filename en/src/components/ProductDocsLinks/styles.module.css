@@ -55,5 +55,27 @@
 }
 
 .productLink:hover .productLinkIcon {
-  color: var(--ifm-menu-color-active, #0077B6);
+  color: var(--ifm-menu-color-active, #D63B12);
+}
+
+/* The Ballerina wordmark standing in for the word "Ballerina" on the
+   "Learn [logo]" entry -- both light/dark images are in the DOM, only
+   one is ever shown (see BallerinaLogo's docstring in index.tsx). */
+.productLinkLogo {
+  height: 0.8rem;
+  width: auto;
+  margin-left: 0.35rem;
+  vertical-align: middle;
+}
+
+.productLinkLogoDark {
+  display: none;
+}
+
+[data-theme='dark'] .productLinkLogoLight {
+  display: none;
+}
+
+[data-theme='dark'] .productLinkLogoDark {
+  display: inline;
 }

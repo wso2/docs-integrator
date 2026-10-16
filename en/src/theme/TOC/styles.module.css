@@ -1,0 +1,25 @@
+/* This wrapper's own `position: sticky` -- not @theme-original/TOC's
+   `.theme-doc-toc-desktop` (custom.css overrides that one too, but it
+   ends up nested inside this already-sticky, already-scrollable
+   wrapper, so its own sticky positioning is moot; this rule is the one
+   that actually determines what's visible). Needs the same secondary
+   row allowance as the sidebar and the inner TOC override -- see
+   custom.css's `.theme-doc-toc-desktop` note for the full explanation.
+   Without it, "On this page" (this wrapper's title) scrolled away
+   behind the navbar/secondary row while the heading list below it
+   (independently sticky via the inner component) stayed visible. */
+.tocWrapper {
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + var(--wso2-secondary-row-height) + 1rem);
+  max-height: calc(100vh - (var(--ifm-navbar-height) + var(--wso2-secondary-row-height) + 2rem));
+  overflow-y: auto;
+}
+
+.tocTitle {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wso2-text-muted);
+  margin-bottom: 12px;
+}

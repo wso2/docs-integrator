@@ -1,0 +1,108 @@
+.hero {
+  background: linear-gradient(150deg, #26365a, #1b2a49);
+  color: #ffffff;
+  padding: 3.5rem 2rem;
+}
+
+.heroInner {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(30px, 3.2vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: #ffffff;
+}
+
+.heroSubtitle {
+  margin: 0;
+  max-width: 560px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #c8d3e6;
+}
+
+.githubBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #1b2a49 !important;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none !important;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+}
+
+.main {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 48px 40px 72px;
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.step {
+  display: flex;
+  gap: 18px;
+}
+
+.stepNumber {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #fde3d9;
+  color: var(--wso2-accent-text);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+[data-theme='dark'] .stepNumber {
+  background: rgba(241, 78, 35, 0.16);
+}
+
+.stepTitle {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--wso2-heading-color);
+}
+
+.stepText {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ifm-font-color-base);
+}
+
+.footerNote {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--wso2-surface-border);
+  font-size: 13px;
+  color: var(--wso2-text-muted);
+}
+
+.footerNote p {
+  margin: 0;
+}

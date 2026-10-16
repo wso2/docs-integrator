@@ -1,0 +1,291 @@
+/**
+ * LandingHero -- shared homepage hero. Always the navy gradient, independent
+ * of the site's light/dark theme (like a fixed brand banner).
+ */
+
+.heroBanner {
+  position: relative;
+  overflow: hidden;
+  padding: 4.5rem 2rem 5rem;
+  background: linear-gradient(150deg, #26365A, #1B2A49);
+  color: #FFFFFF;
+}
+
+.heroBanner::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 640px;
+  height: 340px;
+  background: radial-gradient(closest-side, rgba(241, 78, 35, 0.28), transparent);
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+/* ---- Left: product screenshot in a window frame ---- */
+.heroLeft {
+  flex: 1 1 420px;
+  min-width: 0;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.productCard {
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.35);
+}
+
+.productCardChrome {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.productCardDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.productCardTitle {
+  margin-left: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #9FB0CC;
+}
+
+.productCard img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- Right: badge / heading / subtitle / CTA / secondary / footnote ---- */
+.heroRight {
+  flex: 1 1 400px;
+  min-width: 0;
+  max-width: 680px;
+  padding-left: 40px;
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 22px;
+}
+
+.heroBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #FFD9CC;
+}
+
+.heroBanner h1 {
+  margin: 0;
+  font-size: clamp(34px, 3.6vw, 52px);
+  line-height: 1.06;
+  font-weight: 800;
+  letter-spacing: -1.4px;
+  color: #FFFFFF;
+}
+
+.heroSubtitle {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #C8D3E6;
+}
+
+@media screen and (max-width: 900px) {
+  /* Stacked single column below the desktop side-by-side breakpoint --
+     .heroRight (badge/heading/search/CTA) first, then a horizontal
+     divider (was a vertical .heroRight border-left when side by side;
+     becomes a .heroLeft border-top now that it's second/below instead
+     of second/right), then .heroLeft (screenshot/download/caption).
+     Everything centered, since there's no longer a second column to
+     visually balance against. */
+  .heroInner {
+    flex-direction: column;
+    /* Tighter than the 2.5rem desktop side-by-side gap -- stacked,
+       that much empty space read as a gap before the divider line
+       even starts, on top of .heroLeft's own padding-top after it. */
+    gap: 1.25rem;
+  }
+
+  .heroRight {
+    order: 1;
+    padding-left: 0;
+    border-left: none;
+    align-items: center;
+    text-align: center;
+  }
+
+  .heroLeft {
+    order: 2;
+    align-items: center;
+    text-align: center;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+  }
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 3rem 1.25rem 2.5rem;
+  }
+}
+
+/* CTA and secondary link sit side by side on one row (wrapping onto
+   two on narrow widths); the footnote takes the full row beneath. */
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 40px;
+  width: 100%;
+}
+
+.heroButtons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Low-emphasis companion to the CTA: outline only, no gradient or shadow. */
+.heroBtnGhost {
+  display: inline-flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 20px;
+  border-radius: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: transparent;
+  color: #E4EAF5 !important;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.heroBtnGhost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Hero CTA — the one CTA gradient (Pulse orange) */
+.heroBtn {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 10px;
+  height: 50px;
+  padding: 0 24px;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #FF8A3D, #F14E23);
+  color: #FFFFFF !important;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none !important;
+  box-shadow: 0 12px 30px rgba(241, 78, 35, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.heroBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(241, 78, 35, 0.42);
+}
+
+.heroBtn svg {
+  transition: transform 0.2s ease;
+}
+
+.heroBtn:hover svg {
+  transform: translateX(3px);
+}
+
+.heroSecondary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  font-size: 14px;
+  color: #C8D3E6;
+}
+
+/* Plain text link: underlined label with its icon right beside it, kept on
+   one line so the two never separate. */
+.heroSecondary a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+}
+
+.heroSecondaryLabel {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.heroSecondary a svg {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  color: #FF8A3D;
+}
+
+.heroFootnote {
+  flex: 1 0 100%;
+  /* Pull up against the secondary row: cancels most of .heroActions's row gap. */
+  margin: -14px 0 0;
+  font-size: 11.5px;
+  color: #9FB0CC;
+}
+
+@media screen and (max-width: 900px) {
+  .heroActions,
+  .heroButtons {
+    justify-content: center;
+  }
+
+  .heroSecondary {
+    justify-content: center;
+  }
+
+  .heroFootnote {
+    text-align: center;
+  }
+}
