@@ -122,7 +122,7 @@ Index templates tell OpenSearch how to map fields before any data arrives. Apply
 
 ### Application logs template
 
-Maps the `time`, `message`, and `icp_runtimeId` fields for the `ballerina-application-logs-*` index pattern:
+Maps the `time`, `level`, `message`, and `icp_runtimeId` fields for the `ballerina-application-logs-*` index pattern:
 
 ```bash
 curl -X PUT 'https://<opensearch-host>:<opensearch-port>/_index_template/wso2_integration_application_log_template' \
@@ -134,6 +134,7 @@ curl -X PUT 'https://<opensearch-host>:<opensearch-port>/_index_template/wso2_in
       "mappings": {
         "properties": {
           "time":           { "type": "date", "format": "yyyy-MM-dd'\''T'\''HH:mm:ss.SSS'\''Z'\''||strict_date_optional_time||epoch_millis" },
+          "level":          { "type": "keyword" },
           "message":        { "type": "text" },
           "icp_runtimeId":  { "type": "keyword" }
         }
@@ -151,6 +152,7 @@ First, save the following JSON to a file named `app-log-template.json`:
     "mappings": {
       "properties": {
         "time": { "type": "date", "format": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'||strict_date_optional_time||epoch_millis" },
+        "level": { "type": "keyword" },
         "message": { "type": "text" },
         "icp_runtimeId": { "type": "keyword" }
       }
@@ -169,7 +171,7 @@ A `{"acknowledged":true}` response confirms the template was created.
 
 ### Metrics logs template
 
-Maps the same base fields plus numeric types for the latency fields used by the ICP Metrics page:
+Maps the `time` and `message` fields plus numeric types for the latency fields used by the ICP Metrics page:
 
 ```bash
 curl -X PUT 'https://<opensearch-host>:<opensearch-port>/_index_template/wso2_integration_metrics_log_template' \
@@ -541,7 +543,7 @@ ballerina-application-logs-2026.04.30
 ballerina-metrics-logs-2026.04.30
 ```
 
-Use the host, port, and credentials for your OpenSearch deployment. For plain HTTP OpenSearch (no TLS), use `http://` and drop `-k`. On Windows, run this command in PowerShell using `curl.exe` in place of `curl`.
+Use the host, port, and credentials for your OpenSearch deployment. For plain HTTP OpenSearch (no TLS), use `http://`. On Windows, run this command in PowerShell using `curl.exe` in place of `curl`.
 
 ### Check ICP console
 
@@ -568,8 +570,8 @@ curl 'http://localhost:9090/<your-endpoint>'
 | Metrics page shows "No metrics data" | `metricsLogsEnabled` not set | Add `metricsLogsEnabled = true` to `[ballerina.observe]` in `Config.toml` |
 | Metrics page shows "No metrics data" | Metrics log file not configured | Set `logFilePath` in `[ballerinax.metrics.logs]` |
 | Metrics page shows "No metrics data" | Lua enrichment scripts missing from Fluent Bit config | Add the Lua `[FILTER]` blocks (especially `extract_bal_metrics_data`). See step 4. |
-| Logs page shows "Observability service is unavailable" | ICP Server can't reach OpenSearch | Verify `opensearchUrl` in ICP Server's `deployment.toml` |
-| OpenSearch rejects documents with "total fields [1000] exceeded" | Deeply nested JSON in log messages | Increase limit: `curl -X PUT '.../_settings' -d '{"index.mapping.total_fields.limit": 2000}'` or add to the index template |
+| Logs page shows "To enable the logs view you need to setup observability with either Moesif or OpenSearch" instead of logs | ICP Server can't reach OpenSearch | Verify `opensearchUrl` in ICP Server's `deployment.toml` |
+| OpenSearch rejects documents with "total fields [1000] exceeded" | Deeply nested JSON in log messages | Increase limit: `curl -X PUT 'https://<opensearch-host>:<opensearch-port>/ballerina-application-logs-*/_settings' -u 'admin:<your-opensearch-password>' -H 'Content-Type: application/json' -d '{"index.mapping.total_fields.limit": 2000}'` or add to the index template |
 
 ## Index lifecycle
 
