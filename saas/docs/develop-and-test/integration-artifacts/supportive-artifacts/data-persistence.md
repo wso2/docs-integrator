@@ -22,7 +22,7 @@ The example uses an e-commerce order table. A scheduled automation picks up all 
 
 ## Prerequisites
 
-- WSO2 Integrator IDE installed. Refer to [Install WSO2 Integrator](../../../get-started/setup/setup.md) for instructions.
+- WSO2 Integrator is installed. Refer to [Install WSO2 Integrator](../../../get-started/setup/setup.md) for instructions.
 - A running MySQL instance (version 8.0 or later) accessible on `localhost:3306`.
 
 ### Set up the database

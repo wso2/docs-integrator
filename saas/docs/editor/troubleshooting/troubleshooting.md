@@ -72,5 +72,5 @@ If the Ballerina channel doesn't show any error, still file the issue. Include t
 
 - [Moving to Ballerina 2201.14](moving-to-ballerina-2201-14.md) - resolve the Ballerina version and dependency screens that appear after you move to Ballerina 2201.14.0.
 - [Errors and stack traces](../../develop-and-test/troubleshooting/errors-and-stack-traces.md) - interpret the error text you captured from the Ballerina output channel.
-- [Logging](../../develop-and-test/troubleshooting/logging.md) - add log statements once the IDE is working again to trace what the integration does at runtime.
-- [Debug Your Integration](../../develop-and-test/debugging/debugging.md) - set breakpoints and step through the integration after the IDE issue is resolved.
+- [Logging](../../develop-and-test/troubleshooting/logging.md) - add log statements once the editor is working again to trace what the integration does at runtime.
+- [Debug Your Integration](../../develop-and-test/debugging/debugging.md) - set breakpoints and step through the integration after the editor issue is resolved.

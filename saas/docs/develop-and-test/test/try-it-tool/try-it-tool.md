@@ -19,5 +19,5 @@ Different integration types open a different Try-It interface. Select the one th
 
 ## What's next
 
-- [Test Explorer](../test-explorer/test-explorer.md) — run automated test suites from the IDE
+- [Test Explorer](../test-explorer/test-explorer.md) — run automated test suites from the editor
 - [Generate tests with AI](../ai-generated-cases.md) — generate test code automatically

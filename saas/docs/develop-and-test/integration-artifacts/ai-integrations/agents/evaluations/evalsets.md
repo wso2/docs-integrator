@@ -8,7 +8,7 @@ An **evalset** is a set of sample conversations that you have reviewed and appro
 
 Each evalset is stored as a file that holds one or more **threads**. A thread is one conversation with the agent. Each turn in a thread, a user message and the agent's reply, is stored as a **trace**. When you run an evaluation, each thread is one test case that passes or fails as a whole.
 
-The fastest way to create an evalset is to chat with your agent in the IDE and export the session traces.
+The fastest way to create an evalset is to chat with your agent in the editor and export the session traces.
 
 :::info Prerequisites
 Make sure tracing is enabled on the agent before you start chatting, so each turn is captured and available to export. See [Enable tracing](../observability.md#enable-tracing) for the steps.

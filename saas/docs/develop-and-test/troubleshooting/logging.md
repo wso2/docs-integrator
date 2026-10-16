@@ -205,4 +205,4 @@ Other modules (such as `ballerina/sql` or `ballerina/grpc`) emit logs under thei
 - [Deployment](deployment.md) - diagnose issues that surface only after the integration ships.
 - [Profiling](profiling.md) - investigate slow paths once logs point at the area.
 - [Strand dump analysis](strand-dump-analysis.md) - inspect runtime strand state when an integration hangs.
-- [IDE troubleshooting](../../editor/troubleshooting/troubleshooting.md) - resolve editor and tooling problems.
+- [editor troubleshooting](../../editor/troubleshooting/troubleshooting.md) - resolve editor and tooling problems.

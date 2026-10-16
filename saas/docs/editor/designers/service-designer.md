@@ -29,7 +29,7 @@ The header shows the service type and a short tagline, together with the high-le
 | **Back** | Returns to the previous view (typically the Integration view). |
 | **Undo** / **Redo** | Reverses or reapplies recent changes to the service. |
 | **Configure** | Opens the service configuration panel so you can change the listener, base path, and other service-level settings. |
-| **Try It** | Sends sample requests to the service from inside the IDE. Available for HTTP services only. |
+| **Try It** | Sends sample requests to the service from inside the editor. Available for HTTP services only. |
 | **More** | Opens additional actions for the service. For HTTP services, this includes **Export OpenAPI** to download the generated OpenAPI specification. |
 
 ## Read-only metadata
@@ -64,7 +64,7 @@ Select the **delete** icon on the row. The designer asks you to confirm before r
 
 ## Try It
 
-For HTTP services, **Try It** in the header opens an in-IDE request console. Pick a resource, fill in path parameters, query parameters, headers, and a request body, then send the request to the running service and inspect the response. Use this to sanity-check a resource without leaving the IDE.
+For HTTP services, **Try It** in the header opens an in-editor request console. Pick a resource, fill in path parameters, query parameters, headers, and a request body, then send the request to the running service and inspect the response. Use this to sanity-check a resource without leaving the editor.
 
 ## More menu
 

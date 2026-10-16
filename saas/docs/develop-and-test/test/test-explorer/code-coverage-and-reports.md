@@ -84,6 +84,6 @@ bal test --test-report --code-coverage --coverage-format=xml --excludes='./gener
 ## What's next
 
 - [Execute tests](execute-tests.md) — CLI options for running, filtering, and parallel test execution
-- [Test Explorer](test-explorer.md) — run tests and view results from the IDE without the command line
+- [Test Explorer](test-explorer.md) — run tests and view results from the editor without the command line
 - [Write unit tests](unit-testing.md) — assertions, directory structure, and configuration values
 - [Test groups](groups.md) — partition tests into named groups to target coverage runs
