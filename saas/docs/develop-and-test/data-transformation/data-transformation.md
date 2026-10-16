@@ -1,8 +1,8 @@
 ---
-title: Transform Your Data
+title: Data Transformation
 ---
 
-# Transform Your Data
+# Data Transformation
 
 Most integrations spend as much time reshaping data as they do moving it. Use the visual **Data Mapper** to wire fields between typed values, and reach for the format-specific pages below whenever you need to parse, construct, or stream a particular file format.
 

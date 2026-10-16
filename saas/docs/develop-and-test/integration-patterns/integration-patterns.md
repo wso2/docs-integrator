@@ -1,8 +1,8 @@
 ---
-title: Apply Integration Patterns
+title: Enterprise Integration Patterns (EIP)
 ---
 
-# Apply Integration Patterns
+# Enterprise Integration Patterns (EIP)
 
 Reusable enterprise integration patterns you can apply across projects, each shown as both a Visual Designer flow and the equivalent Ballerina code.
 
