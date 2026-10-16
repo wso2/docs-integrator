@@ -23,8 +23,8 @@ Publishes messages to a Google Cloud Pub/Sub topic.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `batchConfig` | `BatchConfig` | `()` | Message batching configuration (max delay, message count, byte limit). |
-| `compression` | `record {\| int threshold; \|}` | `()` | Compression configuration. Messages exceeding the `threshold` (in bytes, default `240`) are compressed. |
-| `auth` | `GcpCredentialConfig` | `()` | GCP service account credentials. Contains a `path` field pointing to the JSON key file. |
+| `compression` | `record {\| int threshold = 240; \|}` | `()` | Compression configuration. Messages exceeding the `threshold` (in bytes, default `240`) are compressed. |
+| `auth` | `GcpCredentialConfig` | `()` | GCP service account credentials. Contains a `path` field pointing to the JSON key file. If omitted, Application Default Credentials are used. |
 | `enableMessageOrdering` | `boolean` | `false` | Enable message ordering using ordering keys. |
 | `retryConfig` | `RetryConfig` | `()` | Retry configuration with exponential backoff for publish failures. |
 
@@ -49,7 +49,7 @@ pubsub:Publisher publisher = check new (project, topic,
 <details>
 <summary>publish</summary>
 
-Publishes a message to the configured Pub/Sub topic. The message data can be `string`, `json`, `xml`, or `byte[]`: non-byte types are automatically serialized.
+Publishes a message to the configured Pub/Sub topic. The message data can be any `anydata` value: `byte[]` is sent as-is, `string` and `xml` values are sent as UTF-8 text, and all other values are serialized as JSON.
 
 Parameters:
 

@@ -8,14 +8,16 @@ Google Cloud Pub/Sub is a fully managed, real-time messaging service from Google
 
 ## Key features
 
-- Publish messages to Google Cloud Pub/Sub topics with automatic serialization of `string`, `json`, `xml`, and `byte[]` payloads
+- Publish messages to Google Cloud Pub/Sub topics with automatic serialization of `anydata` payloads (`string`, `xml`, `json`, records, and raw `byte[]`)
 - Consume messages from subscriptions using an event-driven listener with automatic pull streaming
+- Bind received message payloads directly to `string`, `xml`, `json`, record, or `byte[]` types
 - Acknowledge or reject (nack) messages from within service callbacks for reliable delivery
 - Configurable message batching with control over max delay, message count, and byte limits
+- Optional message compression for payloads above a configurable size threshold
 - Message ordering support via ordering keys for strict in-order delivery
 - Flow control settings to manage outstanding message count and byte limits on the subscriber
 - Configurable retry policies with exponential backoff for publish operations
-- GCP service account authentication via JSON key file
+- GCP service account authentication via JSON key file, or Application Default Credentials when no key file is configured
 
 ## Actions
 
@@ -36,8 +38,9 @@ Supported trigger events:
 | Event | Callback | Description |
 |-------|----------|-------------|
 | Message received | `onMessage` | Fired when a new message is received from the subscription. |
+| Dispatch error | `onError` | Optional. Fired when a received message cannot be dispatched to `onMessage` (for example, when payload data binding fails). |
 
-See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the `EventData` payload structure.
+See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the `Message` payload structure.
 
 ## Documentation
 

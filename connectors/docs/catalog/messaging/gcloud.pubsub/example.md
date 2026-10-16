@@ -49,11 +49,11 @@ flowchart LR
 
 After selecting **Pub/Sub Publisher**, the connection configuration form opens. Fill in every field by binding it to a configurable variable using the helper panel. For each field, select the **Open Helper Panel** icon to the right of the input box, switch to the **Configurables** tab, then select **New Configurable** to create the variable.
 
-- **topicName** : Full Pub/Sub topic resource name (e.g., `projects/my-project/topics/my-topic`)
-- **projectId** : Google Cloud project ID
-- **credentials** : Service account credentials; select the **Expression** toggle and enter `{credentialsJson: pubsubAuthToken}`, where `pubsubAuthToken` is a `string` configurable holding the service account JSON
+- **project** : Google Cloud project ID
+- **topic** : Pub/Sub topic ID (e.g., `my-topic`). Enter the topic ID only, not the full resource name; the connector resolves it within the configured project.
+- **auth** : Service account credentials; select the **Expression** toggle and enter `{path: pubsubCredentialsPath}`, where `pubsubCredentialsPath` is a `string` configurable holding the path to the service account JSON key file
 
-> **Note:** The `pubsub:Credentials` record supports `credentialsPath?` (path to a credentials file) and `credentialsJson?` (the JSON string directly). Use `credentialsJson` when passing credentials as a string.
+> **Note:** The `pubsub:GcpCredentialConfig` record has a single `path` field (the path to the service account JSON key file). If `auth` is omitted, the connector uses Application Default Credentials.
 
 The **Connection Name** field defaults to `pubsubPublisher`. Keep this value.
 
@@ -82,9 +82,9 @@ Select **Save** to create the connection. The canvas updates and the **pubsubPub
 1. In the left panel, select **Configurations**.
 2. Set a value for each configurable listed below.
 
-- **pubsubTopicName** (string) : Full topic resource name, e.g., `projects/YOUR_PROJECT_ID/topics/YOUR_TOPIC_NAME`
 - **pubsubProjectId** (string) : Your Google Cloud project ID
-- **pubsubAuthToken** (string) : Service account JSON credentials string
+- **pubsubTopicName** (string) : Topic ID, e.g., `my-topic`
+- **pubsubCredentialsPath** (string) : Path to the service account JSON key file
 - **pubsubMessagePayload** (string) : Message content to publish
 
 ## Configuring the Pub/Sub publish operation

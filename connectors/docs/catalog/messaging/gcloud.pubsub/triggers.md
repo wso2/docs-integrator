@@ -6,12 +6,12 @@ title: Triggers
 
 The `ballerinax/gcloud.pubsub` connector supports event-driven message consumption through a streaming pull mechanism. When messages arrive on a Google Cloud Pub/Sub subscription, the listener receives them in real time and invokes your service's `onMessage` callback automatically.
 
-Three components work together:
+Four components work together:
 
 | Component | Role |
 |-----------|------|
 | `pubsub:Listener` | Connects to Google Cloud Pub/Sub and opens streaming pull connections to receive messages from subscriptions. |
-| `pubsub:Service` | Defines the `onMessage` callback invoked for each received message. |
+| `pubsub:Service` | Defines the `onMessage` callback invoked for each received message, and an optional `onError` callback. |
 | `pubsub:Caller` | Provided to the callback to acknowledge (`ack`) or reject (`nack`) the received message. |
 | `pubsub:Message` | The message payload passed to the `onMessage` callback, containing data, attributes, and metadata. |
 
@@ -29,13 +29,13 @@ The listener supports the following connection strategies:
 
 | Config Type | Description |
 |-------------|-------------|
-| `ListenerConfiguration` | Configuration for the Pub/Sub listener. Authenticates using a GCP service account key file. |
+| `ListenerConfiguration` | Configuration for the Pub/Sub listener. Authenticates using a GCP service account key file, or Application Default Credentials if `auth` is omitted. |
 
 `ListenerConfiguration` fields:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `GcpCredentialConfig` | `()` | GCP service account credentials. Contains a `path` field pointing to the JSON key file. |
+| `auth` | `GcpCredentialConfig` | `()` | GCP service account credentials. Contains a `path` field pointing to the JSON key file. If omitted, Application Default Credentials are used. |
 
 ### Initializing the listener
 
@@ -62,9 +62,10 @@ A `pubsub:Service` is a Ballerina service attached to a `pubsub:Listener`. It is
 
 | Function | Signature | Description |
 |----------|-----------|-------------|
-| `onMessage` | `remote function onMessage(pubsub:Message message, pubsub:Caller caller) returns error?` | Invoked when a message is received from the subscription. Use the `Caller` to acknowledge or reject the message. |
+| `onMessage` | `remote function onMessage(pubsub:Message message, pubsub:Caller caller) returns error?` | Invoked when a message is received from the subscription. Use the `Caller` to acknowledge or reject the message. The `caller` parameter is optional. |
+| `onError` | `remote function onError(pubsub:Error err) returns error?` | Optional. Invoked when a received message cannot be dispatched to `onMessage`, for example when payload data binding fails. The message is nacked. |
 
-Use `caller->ack()` to acknowledge successful processing, or `caller->nack()` to reject the message and request re-delivery.
+Use `caller->ack()` to acknowledge successful processing, or `caller->nack()` to reject the message and request re-delivery. If `onMessage` does not declare a `caller` parameter, the message is acknowledged automatically after `onMessage` returns.
 
 ### Full usage example
 
@@ -105,10 +106,12 @@ The `@pubsub:ServiceConfig` annotation supports additional fields for fine-tunin
 | Field | Type | Description |
 |-------|------|-------------|
 | `messageId` | `string?` | The unique ID assigned by Pub/Sub when the message is published. |
-| `data` | `anydata` | The message payload. |
+| `data` | `anydata` | The message payload. When received through `pubsub:Message`, this is the raw `byte[]` payload. |
 | `attributes` | `map<string>?` | Optional key-value attributes attached to the message. |
 | `publishTime` | `time:Utc?` | The timestamp when the message was published by the server. |
 | `orderingKey` | `string?` | The ordering key for message ordering, if set by the publisher. |
+
+To bind the received payload to a specific type, declare the `onMessage` parameter as a record type that includes `pubsub:Message` and narrows `data`, for example `record {| *pubsub:Message; string data; |}`. Supported `data` types include `string`, `xml`, `byte[]`, records, and other JSON-compatible types. If binding fails, the message is nacked and `onError` is invoked.
 
 ### `ServiceConfiguration`
 
