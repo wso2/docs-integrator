@@ -4,90 +4,52 @@ title: Release Notes
 
 # Release Notes
 
-## WSO2 Integrator 5.0.0 — H1 2026
+## WSO2 Integration Platform (H2 2026\)
 
-WSO2 Integrator 5.0.0 is a milestone release for the WSO2 Integration Platform. It consolidates the BI, MI, and SI profiles into a single unified offering: **WSO2 Integrator**. The release also introduces a set of headline improvements that meaningfully change how teams build, manage, and operate integrations.
+WSO2 Integration Platform H2 release includes WSO2 Integrator 5.1, which builds on the AI-native foundation introduced in the previous release by expanding support for building enterprise-grade AI agents, and making AI the primary integration development experience while expanding platform capabilities across workflow integration, observability, cloud operations, event-driven integration, file processing, and enterprise connectivity.
 
-Rather than walk through every change, this note focuses on the five improvements that matter most, and why we made them.
+### AI Agents
 
-### 1. A truly conversational way to build integrations
+Enterprise AI agent capabilities have been expanded with support for persistent memory providers, voice-enabled agents, reusable agent composition, parallel tool execution, human-in-the-loop interactions, evaluation templates, and event-driven triggers. Together, these improvements make it easier to build enterprise-grade AI agents that are reliable, reusable, and capable of participating in long-running business processes. The release also enhances retrieval-augmented generation (RAG) by adding additional enterprise data loaders and retrieval capabilities within ingestion pipelines to simplify validation and troubleshooting.
 
-Integration development has always been iterative, but tooling rarely reflected that. Developers would write a requirement, generate some code, hit a wall, and start over. With 5.0.0, that cycle changes fundamentally.
+### AI-Native Integration Development
 
-The [**WSO2 Integrator Copilot**](../editor/copilot/capabilities.md) now supports multi-turn, conversational development. A developer describes a business requirement in natural language. The Copilot proposes an integration plan. The developer refines it (adding rules, OpenAPI specs, or constraints) across multiple exchanges. Once the plan is ready, the Copilot generates the full end-to-end integration, opens the visual diagram, and stays in the conversation to help with configuration, testing, and validation.
+AI continues to be at the center of the WSO2 Integrator experience. In this release, Copilot evolves into the primary way developers build integrations, enabling users to describe integration requirements using natural language and automatically generate complete integration flows that can be validated visually and refined through AI assistance. While the generated code remains fully accessible, the primary development experience is now centered around intent rather than manual implementation.
 
-This isn't prompt-and-hope — it's a genuine back-and-forth where the developer stays in control and the AI handles the heavy lifting. The result: faster development cycles and integrations that more accurately reflect the original requirement.
+The platform also expands its AI ecosystem by introducing support for GPT-5, AWS Bedrock, and Google Gemini models and embedding providers, giving organizations greater flexibility in selecting the AI services that best meet their requirements.
 
-### 2. Built-in governance for AI-driven integrations
+Copilot itself becomes significantly more extensible with support for Skills and Model Context Protocol (MCP). Users can configure MCP servers at both user and project scope, manage reusable Skills, and customize AI behavior through a unified configuration experience that brings together MCP servers, Skills, and agent instructions.
 
-As enterprises embed GenAI into mission-critical workflows, a new problem emerges: how do you know your AI is behaving correctly? Unlike traditional integrations, AI-driven flows are non-deterministic. They can drift. They can be subtly wrong in ways that are difficult to catch without the right tooling.
+### Workflow Integration
 
-WSO2 Integrator 5.0.0 addresses this with a built-in **LLM evaluation framework**. Teams can collect execution traces, build reusable datasets from real-world runs, and write evaluation rules — from simple assertions to LLM-as-a-judge assessments — that validate AI behavior before it reaches production.
+WSO2 Integrator 5.1 introduces first-class workflow integration capabilities for orchestrating long-running business processes. Unlike traditional request-response integrations, workflows can pause, wait for external events or human interaction, and resume execution while maintaining a durable state. The workflow engine includes built-in support for human tasks, timers, wait-for-data patterns, retry handling, and activities for integrating with external systems. Integration Cloud also introduces Bring Your Own (BYO) Temporal support together with workflow management and monitoring capabilities, enabling organizations to build reliable workflow-driven integration solutions.
 
-Alongside this, the new **Agent Execution Visualizer** gives developers real-time visibility into what an AI agent is actually doing: which tools it's calling, in what sequence, and how intermediate results shape the next decision. This makes debugging agents practical rather than guesswork.
+The release also introduces durable agentic workflows, which are AI agents embedded into a long-running business process. Unlike a traditional workflow that follows a deterministic path, a durable agentic workflow is one where the goal of the workflow is described in natural language at development time, and the AI agent decides the best path at runtime. Similar to durable workflows, the AI agent is also able to save progress, maintain a durable state as it waits for external events, and resume execution.
 
-You shouldn't deploy AI into production without the ability to evaluate and observe it. 5.0.0 makes that possible without leaving the platform.
+### Enhanced Observability
 
-### 3. Centralized control with the Integration Control Plane
+This release establishes a unified observability experience across cloud and self-managed deployments. Moesif is introduced as the default observability platform for metrics, logs, and traces, providing consistent visibility across Integration Cloud and Integration Control Plane. Organizations can continue using their preferred observability platforms through expanded OpenTelemetry support, including generic OTLP exporters for traces, metrics, and logs. These improvements simplify operational monitoring while providing greater flexibility for enterprise deployments.
 
-Managing distributed integration deployments has historically meant stitching together multiple dashboards, log sources, and access controls. The **Integration Control Plane (ICP)** in 5.0.0 changes that.
+### Integration Cloud
 
-ICP provides a unified runtime dashboard with real-time health, connectivity, and metadata visibility across all environments. Operators can:
+Integration Cloud continues to evolve beyond a developer-focused environment by introducing capabilities designed for both developers and business users. A new User Portal allows integration consumers to trigger automations, complete approval tasks, monitor execution, and review automation history. AI assistance is now integrated throughout the cloud experience, helping users discover integrations, generate solutions, troubleshoot failures, and understand platform capabilities using natural language. The cloud experience is further enhanced with new MCP tooling, including an integrated MCP Inspector, REST-to-MCP conversion, and MCP component generation for exposing existing enterprise services to AI agents.
 
-- Start and stop integrations centrally.
-- Access consolidated logs and metrics.
-- Manage access through project- and environment-scoped RBAC with Admin and Developer roles.
-- Authenticate through built-in login, OIDC-based SSO, or external user stores.
+### Integration Control Plane
 
-One place to govern everything. Whether you're running integrations across cloud, on-premises, or hybrid environments, ICP gives you the visibility and control to operate confidently at scale.
+Integration Control Plane continues to align its capabilities with Integration Cloud, providing a more consistent operational experience across deployment models. This release introduces enhanced automation visibility, service monitoring, AI-assisted operations, and observability experiences while adding federated authorization support for enterprise identity providers, single sign-on, and role-based access control. A dedicated User Portal is also introduced to provide business users with a unified operational experience across cloud and self-managed deployments.
 
-### 4. Reliable file processing at scale
+### Event and File Integration
 
-File-based integration sounds simple until you try to run it reliably in a distributed environment. Race conditions, duplicate reads, and failed recoveries are common problems that teams work around rather than solve. 5.0.0 addresses these directly.
+Event-driven integration capabilities continue to expand with support for Solace SMF events, Oracle Change Data Capture (CDC), SAP JCo listeners, and improved OpenTelemetry tracing for event-driven applications. These additions strengthen the platform's ability to build real-time enterprise integrations.
 
-- A new **coordination model** ensures that only a single processing node handles any given file at a time, preventing duplicate reads and race conditions in clustered deployments.
-- **Automatic failover** means that if a node goes down mid-processing, another node picks up seamlessly without compromising data integrity.
-- CSV processing has been overhauled. Where the previous approach would reject an entire file on a single malformed row, the new **fail-safe model** continues processing valid records, isolates the problematic ones, and surfaces diagnostics to reduce manual investigation.
-- **Streaming support** means large files are processed row by row without loading everything into memory.
+File integration has also been significantly enhanced. WSO2 Integrator now supports FreeMarker template processing for generating HTML, email content, configuration files, and other text-based artifacts. The EDI library introduces improved parsing capabilities for large and complex EDI documents, while connector enhancements add support for SMB, SharePoint, Azure Storage, AWS S3, and streaming XLSX processing.
 
-These improvements make WSO2 Integrator a more dependable foundation for mission-critical batch processing and data pipelines.
+### Connectivity and Ecosystem
 
-### 5. Expanded connectivity: Solace, CDC, and beyond
+The connector ecosystem continues to expand with support for Microsoft Dynamics 365 Finance & Operations, additional SAP connectors, Redis enhancements, and a shared AWS authentication library that simplifies the development of AWS-based connectors. These additions broaden the range of enterprise systems that can be integrated using WSO2 Integrator.
 
-Modern integration strategies depend on connecting the technologies enterprises already rely on, across APIs, events, and data systems.
+### WSO2 Integrator: MI 4.7
 
-- Native support for **Solace PubSub+**, enabling organizations to connect WSO2 Integrator directly into their event mesh environments. Guaranteed messaging, message persistence, and fine-grained access control let teams build and manage real-time event flows without custom workarounds.
-- **Change Data Capture (CDC)** support extended to **Microsoft SQL Server** and **PostgreSQL**, broadening the range of enterprise systems that can participate in event-driven architectures.
-- **Liveness and readiness checks** for CDC listeners, helping ensure stable deployments in Kubernetes and other orchestrated environments.
+WSO2 Integrator: MI continues to evolve, and this release introduces runtime improvements such as Brotli compression support, improved cluster visibility, cloud-native configuration management, AWS Secrets Manager integration, and priority-based Composite Application deployment.
 
-Together, these connectivity improvements reflect a consistent priority: meet teams where their systems are, not where we'd prefer them to be.
-
-### Additional improvements
-
-Beyond the five headline areas above, 5.0.0 includes a range of further enhancements across the platform.
-
-- **JDK 25 compatibility**, enabling the platform to leverage the latest Java performance and security improvements.
-- **Agent Framework upgrades** with MCP support, persistent memory, and summarization — enabling context-aware autonomous agents within integration flows.
-- Built-in **Agent ID integration** for identity and access management of AI agents, with runtime security validation enforced automatically during tool execution.
-
-### WSO2 Integrator: MI 4.6.0
-
-WSO2 Integrator 5.0.0 also brings enhancements to the MI profile with the release of **WSO2 Integrator: MI 4.6.0**:
-
-- **Enhanced RAG capabilities**, with support for vector databases (Weaviate, Milvus) and Azure OpenAI embedding models, plus a new WSO2 model provider available at no additional cost.
-- **Full OpenTelemetry support** (metrics, traces, and logs), with Prometheus 3.5.0 compatibility and Moesif integration.
-- **Remote debugging** via the VS Code extension, Synapse unit test coverage reporting, and workspace-level build and run with multi-module project support.
-- With the new **Agent mode**, the platform can autonomously design integrations, deploy artifacts, test flows, and generate test cases — helping developers move faster with less manual effort. **Amazon Bedrock login** support also simplifies access to external foundation models and enterprise AI capabilities.
-- **AMQP 1.0 protocol support**, a **gRPC connector** with import support, **nested and reusable queries** in Data Services, and optimized **Ballerina-to-MI connector conversion**.
-- **Enterprise-grade security improvements** including FIPS-certified cryptography (Bouncy Castle FIPS provider), built-in OAuth 2.0 and JWT validation handlers, and post-quantum cryptography capabilities.
-
-WSO2 Integrator 5.0.0 is available now. [Install WSO2 Integrator](../get-started/setup/setup.md) or sign up for SaaS today.
-
-## Previous releases
-
-See the [WSO2 documentation archive](https://docs.wso2.com) for previous product releases.
-
-## What's next
-
-- [Install WSO2 Integrator](../get-started/setup/setup.md) - Get started with the latest release
-- [Build an Integration as API](../get-started/quickstarts/build-integration-api.md) - Build your first integration
+Developer productivity has also been significantly improved through new editor capabilities, including Data Services Try-It support, an enhanced Data Service Call Mediator, Workspace Overview, and simplified dependency management. AI-assisted development is further strengthened with enterprise-aware Copilot capabilities, allowing organizations to define custom AI instructions, and reusable skills, that align AI-generated recommendations with enterprise standards and best practices. New connectors for Solace, Azure Service Bus, and PGP expand enterprise connectivity, while enhanced Amazon S3 streaming support enables more efficient processing of large files.
