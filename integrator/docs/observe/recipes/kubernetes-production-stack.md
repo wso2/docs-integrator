@@ -4,7 +4,7 @@ title: Kubernetes Production Stack
 
 # Kubernetes Production Stack
 
-Enterprise-grade observability setup for Kubernetes deployments using Prometheus Operator, Grafana, and Jaeger Operator. Includes automatic metric scraping, distributed tracing, and managed dashboards.
+Enterprise-grade observability setup for Kubernetes deployments using Prometheus Operator, Grafana, and Jaeger. Includes automatic metric scraping, distributed tracing, and managed dashboards.
 
 ## Architecture
 
@@ -14,16 +14,16 @@ WSO2 Integrator Pods
 │                          ▼
 │                     Prometheus StatefulSet
 │                          ▼
-└─ Traces (6831) ──▶ Jaeger Operator (manages Jaeger collectors)
+└─ Traces (4317) ──▶ Jaeger Deployment (OTLP receiver)
                           ▼
-                     Jaeger StatefulSet
+                     Elasticsearch
 
 Grafana Deployment ◀── Prometheus, Jaeger
 ```
 
 ## Prerequisites
 
-- Kubernetes cluster 1.20+
+- Kubernetes cluster 1.25+
 - Helm 3+
 - kubectl configured
 
@@ -52,18 +52,13 @@ helm repo update
 
 ### Step 3: Install Prometheus Stack
 
-```bash
-helm install prometheus prometheus-community/kube-prometheus-stack \
-  -n observability \
-  -f prometheus-values.yml
-```
-
 Create `prometheus-values.yml`:
 
 ```yaml
 prometheus:
   prometheusSpec:
     retention: 15d
+    enableAdminAPI: true
     resources:
       requests:
         cpu: 500m
@@ -79,14 +74,6 @@ prometheus:
 grafana:
   enabled: true
   adminPassword: "admin-password"
-  datasources:
-    datasources.yaml:
-      apiVersion: 1
-      datasources:
-        - name: Prometheus
-          type: prometheus
-          access: proxy
-          url: http://prometheus-operated:9090
 
 alertmanager:
   enabled: true
@@ -101,7 +88,53 @@ alertmanager:
       receiver: 'null'
 ```
 
-### Step 4: Install Jaeger Operator
+The chart provisions Grafana's Prometheus data source, so you don't need to add one.
+
+```bash
+helm install prometheus prometheus-community/kube-prometheus-stack \
+  -n observability \
+  -f prometheus-values.yml
+```
+
+### Step 4: Install Jaeger
+
+Create `jaeger-values.yml`. It configures Jaeger v2 to receive OTLP traces and store them in Elasticsearch. Replace `http://elasticsearch:9200` with the URL of your Elasticsearch cluster.
+
+```yaml
+userconfig:
+  service:
+    extensions: [jaeger_storage, jaeger_query, healthcheckv2]
+    pipelines:
+      traces:
+        receivers: [otlp]
+        processors: [batch]
+        exporters: [jaeger_storage_exporter]
+  extensions:
+    healthcheckv2:
+      use_v2: true
+      http:
+        endpoint: 0.0.0.0:13133
+    jaeger_query:
+      storage:
+        traces: primary_store
+    jaeger_storage:
+      backends:
+        primary_store:
+          elasticsearch:
+            server_urls: ["http://elasticsearch:9200"]
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+        http:
+          endpoint: 0.0.0.0:4318
+  processors:
+    batch: {}
+  exporters:
+    jaeger_storage_exporter:
+      trace_storage: primary_store
+```
 
 ```bash
 helm install jaeger jaegertracing/jaeger \
@@ -109,23 +142,9 @@ helm install jaeger jaegertracing/jaeger \
   -f jaeger-values.yml
 ```
 
-Create `jaeger-values.yml`:
-
-```yaml
-jaeger:
-  strategy: production
-  storage:
-    type: elasticsearch
-    elasticsearch:
-      host: elasticsearch
-      port: 9200
-  sampling:
-    type: probabilistic
-    probabilisticSampler:
-      samplingPercentage: 10
-```
-
 ### Step 5: Deploy Your Integration
+
+Replace `myorg/wso2-integrator:latest` with your integration's container image. The integration must import `ballerinax/prometheus` and `ballerinax/jaeger` and be built with `observabilityIncluded = true`, as described in [Metrics](../metrics.md) and [Jaeger distributed tracing](../open-source/jaeger.md). The environment variables below enable metrics and tracing without a `Config.toml`.
 
 ```yaml
 apiVersion: apps/v1
@@ -156,16 +175,20 @@ spec:
             - name: metrics
               containerPort: 9797
           env:
-            - name: BALLERINA_OBSERVE_METRICS_ENABLED
+            - name: BAL_CONFIG_VAR_BALLERINA_OBSERVE_METRICSENABLED
               value: "true"
-            - name: BALLERINAX_PROMETHEUS_PORT
+            - name: BAL_CONFIG_VAR_BALLERINA_OBSERVE_METRICSREPORTER
+              value: "prometheus"
+            - name: BAL_CONFIG_VAR_BALLERINAX_PROMETHEUS_PORT
               value: "9797"
-            - name: BALLERINA_OBSERVE_TRACING_ENABLED
+            - name: BAL_CONFIG_VAR_BALLERINA_OBSERVE_TRACINGENABLED
               value: "true"
-            - name: BALLERINAX_JAEGER_AGENT_HOSTNAME
-              value: "jaeger-agent.observability.svc.cluster.local"
-            - name: BALLERINAX_JAEGER_AGENT_PORT
-              value: "6831"
+            - name: BAL_CONFIG_VAR_BALLERINA_OBSERVE_TRACINGPROVIDER
+              value: "jaeger"
+            - name: BAL_CONFIG_VAR_BALLERINAX_JAEGER_AGENTHOSTNAME
+              value: "jaeger.observability.svc.cluster.local"
+            - name: BAL_CONFIG_VAR_BALLERINAX_JAEGER_AGENTPORT
+              value: "4317"
           resources:
             requests:
               cpu: 250m
@@ -174,14 +197,12 @@ spec:
               cpu: 500m
               memory: 1Gi
           livenessProbe:
-            httpGet:
-              path: /health
+            tcpSocket:
               port: http
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
-            httpGet:
-              path: /ready
+            tcpSocket:
               port: http
             initialDelaySeconds: 10
             periodSeconds: 5
@@ -260,6 +281,8 @@ kind: PrometheusRule
 metadata:
   name: wso2-integrator-alerts
   namespace: default
+  labels:
+    release: prometheus
 spec:
   groups:
     - name: wso2-integrator.rules
@@ -267,8 +290,8 @@ spec:
       rules:
         - alert: HighErrorRate
           expr: |
-            (sum(rate(http_response_status_total{status_code=~"5.."}[5m])) by (service)) /
-            (sum(rate(http_requests_total[5m])) by (service)) > 0.05
+            (sum(rate(requests_total_value{http_status_code_group="5xx"}[5m])) by (service)) /
+            (sum(rate(requests_total_value[5m])) by (service)) > 0.05
           for: 5m
           labels:
             severity: critical
@@ -279,7 +302,7 @@ spec:
 
         - alert: HighLatency
           expr: |
-            histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le, service)) > 2
+            max(response_time_seconds{quantile="0.95", timeWindow="300000"}) by (service) > 2
           for: 10m
           labels:
             severity: warning
@@ -303,20 +326,18 @@ spec:
 Import pre-built dashboard for Kubernetes:
 
 ```bash
+# Download the dashboard and point it at the Prometheus data source
+curl -s https://grafana.com/api/dashboards/7249/revisions/1/download \
+  | sed 's/${DS_PROMETHEUS}/Prometheus/g' > kubernetes.json
+
 # Install dashboard configmap
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: grafana-dashboards
-  namespace: observability
-data:
-  kubernetes.json: |
-    $(curl -s https://grafana.com/api/dashboards/7249/revisions/1/download)
-EOF
+kubectl create configmap grafana-dashboard-kubernetes -n observability \
+  --from-file=kubernetes.json
+kubectl label configmap grafana-dashboard-kubernetes -n observability \
+  grafana_dashboard=1
 ```
 
-Then reference in Grafana's dashboard provisioning.
+Grafana's dashboard sidecar loads ConfigMaps that have the `grafana_dashboard=1` label.
 
 ## Scaling Considerations
 
@@ -329,17 +350,26 @@ Then reference in Grafana's dashboard provisioning.
 
 ### Backup Prometheus Data
 
+Take a TSDB snapshot through the admin API (enabled by `enableAdminAPI: true` in Step 3):
+
 ```bash
-kubectl exec -n observability prometheus-operated-0 -- \
-  prometheus-admin --config.file=/etc/prometheus/prometheus.yml \
-  --storage.tsdb.path=/prometheus backup /tmp/prometheus-backup
+kubectl port-forward -n observability svc/prometheus-operated 9090:9090
+# In another terminal:
+curl -X POST http://localhost:9090/api/v1/admin/tsdb/snapshot
 ```
+
+Prometheus writes the snapshot to the `snapshots` directory on its data volume. Back up that volume with your volume snapshot or backup tool.
 
 ### Backup Grafana Dashboards
 
+Export dashboards through the Grafana HTTP API:
+
 ```bash
-kubectl exec -n observability deployment/prometheus-grafana -- \
-  grafana-cli admin export-dashboard > grafana-dashboard-backup.json
+kubectl port-forward -n observability svc/prometheus-grafana 3000:80
+# In another terminal, list the dashboards and note the uid of each one:
+curl -s -u admin:admin-password "http://localhost:3000/api/search?type=dash-db"
+curl -s -u admin:admin-password "http://localhost:3000/api/dashboards/uid/<uid>" \
+  > grafana-dashboard-backup.json
 ```
 
 ## Troubleshooting
@@ -356,18 +386,18 @@ kubectl port-forward -n observability svc/prometheus-operated 9090:9090
 
 **Jaeger not receiving traces:**
 ```bash
-# Check Jaeger Agent:
-kubectl get pod -n observability -l app=jaeger
+# Check Jaeger:
+kubectl get pod -n observability -l app.kubernetes.io/name=jaeger
 
 # Check logs:
-kubectl logs -n observability -l app=jaeger-agent
+kubectl logs -n observability -l app.kubernetes.io/name=jaeger
 ```
 
 **Grafana not showing metrics:**
 ```bash
-# Check Prometheus datasource:
-kubectl exec -n observability deployment/prometheus-grafana -- \
-  curl -s http://prometheus-operated:9090/-/healthy
+# Check that Prometheus is reachable inside the cluster:
+kubectl run -n observability prometheus-check --rm -i --restart=Never \
+  --image=curlimages/curl -- curl -s http://prometheus-operated:9090/-/healthy
 ```
 
 ## What's Next

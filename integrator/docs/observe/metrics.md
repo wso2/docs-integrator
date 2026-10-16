@@ -86,7 +86,7 @@ Replace `localhost:9797` with your service's host and port. The metrics endpoint
 You can run Prometheus using Docker:
 
 ```bash
-docker run -p 9090:9090 -v <path_to_prometheus.yml>:/etc/prometheus/ prom/prometheus
+docker run -p 9090:9090 -v <path_to_prometheus.yml>:/etc/prometheus/prometheus.yml prom/prometheus
 ```
 
 **Note:** If running Ballerina on localhost and Prometheus in Docker, use `host.docker.internal:9797` as your target instead to allow Docker to access the host machine:
@@ -108,37 +108,21 @@ There are many other ways to install Prometheus besides Docker. Visit the [offic
 
 Ballerina automatically collects and exposes the following metrics without any additional code:
 
-### HTTP Service Metrics
-
 | Metric | Type | Description |
 |--------|------|-------------|
-| `http_requests_total` | Counter | Total number of HTTP requests received |
-| `http_request_duration_seconds` | Histogram | Request processing duration |
-| `http_requests_in_flight` | Gauge | Number of requests currently being processed |
-| `http_response_status_total` | Counter | Response count by HTTP status code |
+| `requests_total_value` | Counter | Total number of requests |
+| `response_errors_total_value` | Counter | Total number of failed requests (for example, 5xx responses) |
+| `inprogress_requests_value` | Gauge | Number of requests currently being processed |
+| `response_time_seconds` | Summary | Response time quantiles (`quantile` label) over time windows of 10, 60 and 300 seconds (`timeWindow` label: `10000`, `60000`, `300000`) |
+| `response_time_seconds_value` | Gauge | Response time of the latest request |
+| `response_time_seconds_mean`, `_max`, `_min`, `_stdDev` | Gauge | Response time statistics over the same time windows |
+| `response_time_nanoseconds_total_value` | Counter | Total response time in nanoseconds |
 
-### HTTP Client Metrics
+The same metrics cover both HTTP services and HTTP clients. Labels identify the source, for example:
 
-| Metric | Type | Description |
-|--------|------|-------------|
-| `http_client_requests_total` | Counter | Total outbound HTTP requests |
-| `http_client_request_duration_seconds` | Histogram | Outbound request duration |
-| `http_client_response_status_total` | Counter | Outbound response count by status code |
-
-### JVM Metrics
-
-| Metric | Type | Description |
-|--------|------|-------------|
-| `jvm_memory_bytes_used` | Gauge | JVM memory usage |
-| `jvm_threads_current` | Gauge | Current number of JVM threads |
-| `jvm_gc_collection_seconds_total` | Counter | Time spent in garbage collection |
-
-### Database Metrics
-
-| Metric | Type | Description |
-|--------|------|-------------|
-| `ballerina_sql_query_duration_seconds` | Histogram | Database query latency |
-| `ballerina_sql_active_connections` | Gauge | Active DB connections |
+- Services: `entrypoint_service_name`, `src_resource_path`, `http_url`, `http_method`, and `http_status_code_group` (`2xx`, `4xx`, `5xx`)
+- Clients: `src_client_remote="true"`, `http_base_url` or `peer_address`, `http_method`, and `http_status_code_group`
+- All metrics: `src_module` and `entrypoint_function_name`. Failed requests also carry `error="true"`
 
 ## Custom Metrics
 
@@ -153,78 +137,111 @@ Create application-specific metrics to track business KPIs and integration-speci
 
 ### Counter (Monotonically increasing)
 
-Use counters for metrics that only increase:
+Use counters for metrics that only increase. A metric is exported only after you register it:
 
 ```ballerina
 import ballerina/observe;
 
 final observe:Counter ordersProcessed = new ("orders_processed_total",
-    description = "Total number of orders processed",
-    tags = {}
+    desc = "Total number of orders processed"
 );
 
-// Increment in your service logic
-ordersProcessed.increment(amount = 1);
+function init() returns error? {
+    // Register the metric so that it's exported
+    check ordersProcessed.register();
+}
+
+// Call from your service logic
+function recordOrder() {
+    ordersProcessed.increment();
+}
 ```
+
+The exported name gets a `_value` suffix, so this counter appears as `orders_processed_total_value`.
 
 ### Gauge (Value that goes up and down)
 
 Use gauges for metrics that can increase or decrease:
 
 ```ballerina
+import ballerina/observe;
+
 final observe:Gauge activeConnections = new ("active_connections",
-    description = "Number of active connections",
-    tags = {}
+    desc = "Number of active connections"
 );
 
-// Adjust the value
-activeConnections.increment(amount = 1);
-activeConnections.decrement(amount = 1);
+function init() returns error? {
+    check activeConnections.register();
+}
+
+function onConnect() {
+    activeConnections.increment();
+}
+
+function onDisconnect() {
+    activeConnections.decrement();
+}
 ```
 
-### Labels and histograms
+This gauge is exported as `active_connections_value`, along with statistics over a time window: `active_connections` (quantiles) and `active_connections_mean`, `_max`, `_min` and `_stdDev`.
 
-Custom metrics can carry labels, and histograms record distributions such as processing time:
+### Tags and statistics
+
+Custom metrics can carry tags, which are exported as Prometheus labels. There is no histogram type. To record a distribution such as processing time, set each value on a gauge and use its statistics:
 
 ```ballerina
-import ballerina/observe;
 import ballerina/http;
+import ballerina/observe;
+import ballerina/time;
 
-// Define custom metrics
-final observe:Counter orderCounter = new("orders_processed_total",
-    "Total number of orders processed",
-    ["status", "region"]
+// Each distinct set of tags is a separate series of the same metric
+final observe:Counter ordersSucceeded = new ("orders_processed_total",
+    desc = "Total number of orders processed",
+    tags = {"status": "success", "region": "us_east"}
 );
 
-final observe:Gauge activeOrders = new("orders_active",
-    "Number of orders currently being processed",
-    ["region"]
+final observe:Counter ordersFailed = new ("orders_processed_total",
+    desc = "Total number of orders processed",
+    tags = {"status": "failure", "region": "us_east"}
 );
 
-final observe:Histogram orderProcessingTime = new("order_processing_duration_seconds",
-    "Time taken to process an order",
-    [],
-    [0.01, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0]
+final observe:Gauge activeOrders = new ("orders_active",
+    desc = "Number of orders currently being processed",
+    tags = {"region": "us_east"}
 );
 
-service /orders on new http:Listener(9090) {
-    resource function post .(@http:Payload json order) returns json|error {
-        int startTime = observe:currentTimeMillis();
-        activeOrders.increment(1.0, ["us-east"]);
+final observe:Gauge orderProcessingTime = new ("order_processing_duration_seconds",
+    desc = "Time taken to process an order"
+);
 
-        do {
-            // Process order...
-            orderCounter.increment(1.0, ["success", "us-east"]);
-            return { status: "accepted" };
-        } on fail error e {
-            orderCounter.increment(1.0, ["failure", "us-east"]);
-            return e;
-        } finally {
-            activeOrders.increment(-1.0, ["us-east"]);
-            float duration = <float>(observe:currentTimeMillis() - startTime) / 1000.0;
-            orderProcessingTime.observe(duration, []);
+function init() returns error? {
+    check ordersSucceeded.register();
+    check ordersFailed.register();
+    check activeOrders.register();
+    check orderProcessingTime.register();
+}
+
+service /orders on new http:Listener(8080) {
+    resource function post .(@http:Payload json payload) returns json|error {
+        decimal startTime = time:monotonicNow();
+        activeOrders.increment();
+
+        json|error result = processOrder(payload);
+
+        activeOrders.decrement();
+        orderProcessingTime.setValue(<float>(time:monotonicNow() - startTime));
+        if result is error {
+            ordersFailed.increment();
+            return result;
         }
+        ordersSucceeded.increment();
+        return result;
     }
+}
+
+function processOrder(json payload) returns json|error {
+    // Process order...
+    return {status: "accepted"};
 }
 ```
 

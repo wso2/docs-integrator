@@ -13,9 +13,9 @@ WSO2 Integrator
 ├── Metrics (9797) ──▶ Prometheus
 │                          ▲
 │                          │
-└─ Logs (stdout) ──▶ Promtail ──▶ Loki
+└─ Logs (stderr) ──▶ Promtail ──▶ Loki
 │
-└─ Traces (6831) ──▶ Jaeger (all-in-one)
+└─ Traces (4317) ──▶ Jaeger (all-in-one)
                           ▲
                           │
                     Jaeger UI (16686)
@@ -25,26 +25,20 @@ Grafana (3000) ◀── Prometheus, Loki
 
 ## Docker Compose Setup
 
-Create `docker-compose.yml`:
+Create `docker-compose.yml`. The `integrator` service runs the executable JAR built from your integration project (placed in an `integration` directory next to this file) and reads its `Config.toml` from that directory:
 
 ```yaml
-version: "3.8"
-
 services:
   # WSO2 Integrator
   integrator:
-    image: ballerina:latest
+    image: eclipse-temurin:21-jre
+    working_dir: /app
+    command: sh -c "java -jar target/bin/*.jar"
     ports:
       - "8090:9090"  # API
       - "9797:9797"  # Metrics
-    environment:
-      - BALLERINA_OBSERVE_METRICS_ENABLED=true
-      - BALLERINAX_PROMETHEUS_PORT=9797
-      - BALLERINA_OBSERVE_TRACING_ENABLED=true
-      - BALLERINAX_JAEGER_AGENT_HOSTNAME=jaeger
-      - BALLERINAX_JAEGER_AGENT_PORT=6831
     volumes:
-      - ./integrations:/app
+      - ./integration:/app
     depends_on:
       - prometheus
       - jaeger
@@ -77,7 +71,6 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
       - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
-      - ./grafana-dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
     depends_on:
       - prometheus
       - loki
@@ -88,11 +81,8 @@ services:
   jaeger:
     image: jaegertracing/all-in-one:latest
     ports:
-      - "6831:6831/udp"   # Jaeger agent
-      - "14268:14268"     # Jaeger collector
-      - "16686:16686"     # Jaeger UI
-    environment:
-      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+      - "4317:4317"     # OTLP gRPC receiver
+      - "16686:16686"   # Jaeger UI
     networks:
       - observability
 
@@ -103,7 +93,7 @@ services:
       - "3100:3100"
     volumes:
       - ./loki-config.yml:/etc/loki/local-config.yaml
-      - loki-data:/tmp/loki
+      - loki-data:/loki
     command: -config.file=/etc/loki/local-config.yaml
     networks:
       - observability
@@ -112,7 +102,7 @@ services:
   promtail:
     image: grafana/promtail:latest
     volumes:
-      - /var/log:/var/log:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./promtail-config.yml:/etc/promtail/config.yml
     command: -config.file=/etc/promtail/config.yml
     depends_on:
@@ -168,45 +158,39 @@ datasources:
 ```yaml
 auth_enabled: false
 
-ingester:
-  chunk_idle_period: 3m
-  chunk_retain_period: 1m
-  max_chunk_age: 1h
-  chunk_encoding: json
-
-limits_config:
-  enforce_metric_name: false
-  reject_old_samples: true
-  reject_old_samples_max_age: 168h
-
-schema_config:
-  configs:
-    - from: 2021-06-01
-      store: boltdb-shipper
-      object_store: filesystem
-      schema:
-        version: v11
-        index:
-          prefix: index_
-          period: 24h
-
 server:
   http_listen_port: 3100
   log_level: info
 
-storage_config:
-  boltdb_shipper:
-    active_index_directory: /tmp/loki/boltdb-shipper-active
-    cache_location: /tmp/loki/boltdb-shipper-cache
-    shared_store: filesystem
-  filesystem:
-    directory: /tmp/loki/chunks
+common:
+  path_prefix: /loki
+  storage:
+    filesystem:
+      chunks_directory: /loki/chunks
+      rules_directory: /loki/rules
+  replication_factor: 1
+  ring:
+    kvstore:
+      store: inmemory
 
-chunk_store_config:
-  max_look_back_period: 0s
+schema_config:
+  configs:
+    - from: 2024-01-01
+      store: tsdb
+      object_store: filesystem
+      schema: v13
+      index:
+        prefix: index_
+        period: 24h
+
+limits_config:
+  reject_old_samples: true
+  reject_old_samples_max_age: 168h
 ```
 
 ### Promtail Configuration (`promtail-config.yml`)
+
+Promtail discovers the `integrator` container through the Docker socket and reads its output:
 
 ```yaml
 server:
@@ -217,16 +201,33 @@ clients:
   - url: http://loki:3100/loki/api/v1/push
 
 scrape_configs:
-  - job_name: system
-    static_configs:
-      - targets:
-          - localhost
-        labels:
-          job: integrator
-          __path__: /var/log/*log
+  - job_name: integrator
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 5s
+        filters:
+          - name: label
+            values: ["com.docker.compose.service=integrator"]
+    relabel_configs:
+      - target_label: job
+        replacement: integrator
 ```
 
 ## Ballerina Integration Configuration
+
+Enable observability in the integration's `Ballerina.toml`:
+
+```toml
+[build-options]
+observabilityIncluded = true
+```
+
+Import the Prometheus and Jaeger extensions in one of the integration's `.bal` files:
+
+```ballerina
+import ballerinax/prometheus as _;
+import ballerinax/jaeger as _;
+```
 
 Create `Config.toml` in your integration:
 
@@ -243,7 +244,7 @@ host = "0.0.0.0"
 
 [ballerinax.jaeger]
 agentHostname = "jaeger"
-agentPort = 6831
+agentPort = 4317
 samplerType = "const"
 samplerParam = 1.0
 
@@ -257,17 +258,24 @@ level = "INFO"
    ```bash
    mkdir observability-stack
    cd observability-stack
-   # Copy all configuration files here
+   # Copy all configuration files here, and your integration project into an `integration` directory
    ```
 
-2. **Start all services:**
+2. **Build the integration:**
    ```bash
-   docker-compose up -d
+   cd integration
+   bal build
+   cd ..
    ```
 
-3. **Verify services are running:**
+3. **Start all services:**
    ```bash
-   docker-compose ps
+   docker compose up -d
+   ```
+
+4. **Verify services are running:**
+   ```bash
+   docker compose ps
    ```
 
 ## Accessing the Services
@@ -275,29 +283,28 @@ level = "INFO"
 - **Grafana Dashboard:** http://localhost:3000 (username: admin, password: admin)
 - **Prometheus:** http://localhost:9090
 - **Jaeger UI:** http://localhost:16686
-- **Loki UI:** http://localhost:3100
 
 ## Creating Dashboards
 
 ### Grafana Dashboard for Metrics
 
 1. Open Grafana (http://localhost:3000)
-2. Click **+** → **Dashboard** → **Create Dashboard**
+2. Click **+** → **New dashboard**
 3. Add panels with these PromQL queries:
 
 **Request Rate:**
 ```promql
-rate(http_requests_total[5m])
+sum(rate(requests_total_value[5m]))
 ```
 
 **Error Rate:**
 ```promql
-rate(http_response_status_total{status_code=~"5.."}[5m]) / rate(http_requests_total[5m])
+sum(rate(requests_total_value{http_status_code_group="5xx"}[5m])) / sum(rate(requests_total_value[5m]))
 ```
 
 **P95 Latency:**
 ```promql
-histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))
+response_time_seconds{quantile="0.95", timeWindow="300000"}
 ```
 
 ### Grafana Dashboard for Logs
@@ -318,33 +325,33 @@ histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))
 
 **By level:**
 ```
-{job="integrator"} | json | level="ERROR"
+{job="integrator"} | logfmt | level="ERROR"
 ```
 
 ## Troubleshooting
 
 **Metrics not appearing in Prometheus:**
-- Check that integrator is running: `docker-compose logs integrator`
+- Check that integrator is running: `docker compose logs integrator`
 - Verify metrics endpoint: `curl http://localhost:9797/metrics`
 - Check Prometheus targets: http://localhost:9090/targets
 
 **No traces in Jaeger:**
-- Verify Jaeger is running: `docker-compose logs jaeger`
-- Check that integrator is sending traces to `jaeger:6831`
+- Verify Jaeger is running: `docker compose logs jaeger`
+- Check that integrator is sending traces to `jaeger:4317`
 
 **No logs in Loki:**
-- Check Promtail is running: `docker-compose logs promtail`
-- Verify log file paths in `promtail-config.yml`
-- Check Loki is receiving data: `docker-compose logs loki`
+- Check Promtail is running: `docker compose logs promtail`
+- Verify that Promtail can read the Docker socket (`/var/run/docker.sock`)
+- Check Loki is receiving data: `docker compose logs loki`
 
 ## Cleaning Up
 
 ```bash
 # Stop all services
-docker-compose down
+docker compose down
 
 # Remove all data volumes
-docker-compose down -v
+docker compose down -v
 ```
 
 ## What's Next

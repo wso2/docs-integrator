@@ -10,34 +10,42 @@ All values are set in `<ICP_HOME>/conf/deployment.toml`. Commented-out keys show
 
 | Key                                  | Type      | Default     | Description                                                           |
 | ------------------------------------ | --------- | ----------- | --------------------------------------------------------------------- |
-| `serverPort`                         | `int`     | `9446`      | HTTPS port for all ICP endpoints                                      |
+| `serverPort`                         | `int`     | `9446`      | HTTPS port for the console and its APIs (GraphQL, auth, observability) |
+| `runtimeListenerPort`                | `int`     | `9445`      | HTTPS port that runtimes send heartbeats to                           |
+| `authServicePort`                    | `int`     | `9447`      | Port of the built-in user store authentication service               |
+| `ldapAuthServicePort`                | `int`     | `9450`      | Port of the LDAP authentication adapter                               |
+| `defaultOpensearchAdaptorPort`       | `int`     | `9449`      | Port of the OpenSearch adapter service                                |
 | `serverHost`                         | `string`  | `"0.0.0.0"` | Bind address                                                          |
-| `logLevel`                           | `string`  | `"INFO"`    | Log verbosity — `DEBUG`, `INFO`, `WARN`, `ERROR`                      |
+| `logLevel`                           | `string`  | `"INFO"`    | Has no effect. To change the ICP server log level, set `level` under the `[[ballerina.log.modules]]` entry for `wso2/icp_server` |
 | `enableAuditLogging`                 | `boolean` | `true`      | Enable audit log for authentication and management events             |
-| `enableMetrics`                      | `boolean` | `true`      | Expose Prometheus metrics endpoint                                    |
+| `enableMetrics`                      | `boolean` | `true`      | Has no effect in ICP 2.1.0                                            |
 | `schedulerIntervalSeconds`           | `int`     | `60`        | How often ICP checks for inactive runtimes and marks them as offline |
 | `refreshTokenCleanupIntervalSeconds` | `int`     | `86400`     | How often expired refresh tokens are purged from the database         |
 
 ## Backend endpoint settings
 
-These values default to `localhost:9446` and must be updated when ICP is accessed through a different hostname or behind a reverse proxy.
+When ICP is accessed through a different hostname or behind a reverse proxy, set `publicBaseUrl`. ICP derives all the console's backend URLs and the CORS allowed origins from it. The other keys override individual URLs.
 
 | Key                             | Type     | Default                                       | Description                                          |
 | ------------------------------- | -------- | --------------------------------------------- | ---------------------------------------------------- |
-| `backendGraphqlEndpoint`        | `string` | `"https://localhost:9446/graphql"`            | URL of the ICP GraphQL API endpoint                  |
-| `backendAuthBaseUrl`            | `string` | `"https://localhost:9446/auth"`               | Base URL of the ICP authentication service           |
-| `backendObservabilityEndpoint`  | `string` | `"https://localhost:9446/icp/observability"`  | URL of the ICP observability endpoint                |
+| `publicBaseUrl`                 | `string` | `"https://localhost:9446"`                    | External base URL of the ICP console (scheme, host, and port, no trailing slash) |
+| `backendGraphqlEndpoint`        | `string` | `<publicBaseUrl>/graphql`                     | URL of the ICP GraphQL API endpoint                  |
+| `backendAuthBaseUrl`            | `string` | `<publicBaseUrl>/auth`                        | Base URL of the ICP authentication service           |
+| `backendObservabilityEndpoint`  | `string` | `<publicBaseUrl>/icp/observability`           | URL of the ICP observability endpoint                |
+| `backendWorkflowEndpoint`       | `string` | `<publicBaseUrl>/icp/workflow`                | URL of the ICP workflow management endpoint          |
+| `backendTryitEndpoint`          | `string` | `<publicBaseUrl>/icp/tryit`                   | URL of the ICP try-it proxy endpoint                 |
+| `backendWsUrl`                  | `string` | `<publicBaseUrl>/runtime-status` (`wss://`)   | WebSocket URL for live runtime status                |
 
 ## Authentication settings
 
 | Key                          | Type      | Default                    | Description                                                       |
 | ---------------------------- | --------- | -------------------------- | ----------------------------------------------------------------- |
 | `authBackendUrl`             | `string`  | `"https://localhost:9447"` | URL of the authentication backend service                         |
-| `frontendJwtHMACSecret`      | `string`  | —                          | HMAC-SHA256 secret for signing JWT tokens (minimum 32 characters) |
+| `frontendJwtHMACSecret`      | `string`  | `"default-secret-key-at-least-32-characters-long-for-hs256"` | HMAC-SHA256 secret for signing JWT tokens. The default is public, so change it in production. Use at least 32 characters (not enforced). |
 | `defaultTokenExpiryTime`     | `int`     | `3600`                     | JWT access token lifetime in seconds                              |
 | `refreshTokenExpiryTime`     | `int`     | `86400`                    | Refresh token lifetime in seconds (default: 1 day)                |
 | `enableRefreshTokenRotation` | `boolean` | `true`                     | Rotate refresh token on each use                                  |
-| `maxRefreshTokensPerUser`    | `int`     | `10`                       | Maximum active refresh tokens per user (`0` = unlimited)          |
+| `maxRefreshTokensPerUser`    | `int`     | `10`                       | Not enforced in ICP 2.1.0                                          |
 
 ## MI management access settings
 
@@ -91,7 +99,7 @@ When a runtime, or a gateway in front of it, presents a certificate issued by a 
 
 The truststore replaces the JVM's default `cacerts` for these calls. If some runtimes use publicly signed certificates, import those CAs into the truststore as well. The certificate's host name must match the runtime's management hostname.
 
-ICP fails to start if the truststore cannot be loaded, for example if the file is missing, the password is wrong, or the file is not a JKS or PKCS12 store. ICP logs a warning at startup if a truststore is set while either `artifactsApiAllowInsecureTLS` is still `true`, because the truststore is not used while validation is off.
+ICP fails to start if the truststore cannot be loaded, for example if the file is missing, the password is wrong, or the file is not a JKS or PKCS12 store. ICP logs a warning at startup if a truststore is set while either `artifactsApiAllowInsecureTLS` key is still `true`, because the truststore is not used while validation is off.
 
 ### Trust an internal CA on ICP 2.0.0
 

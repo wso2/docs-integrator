@@ -4,7 +4,7 @@ title: Zipkin
 
 # Zipkin
 
-Zipkin is an open-source distributed tracing platform that helps troubleshoot latency problems in service architectures. WSO2 Integrator provides built-in Zipkin support, publishing tracing data in OpenTelemetry format.
+Zipkin is an open-source distributed tracing platform that helps troubleshoot latency problems in service architectures. WSO2 Integrator provides built-in Zipkin support, publishing tracing data in Zipkin format.
 
 ## Prerequisites
 
@@ -74,13 +74,71 @@ reporterBufferSize = 10000
 | `agentHostname` | string | `"localhost"` | Hostname of the Zipkin agent. Use `localhost` if running on the same node as Ballerina. |
 | `agentPort` | int | `9411` | Port on which the Zipkin agent is listening. |
 | `samplerType` | string | `"const"` | Sampling strategy: `const`, `probabilistic`, or `ratelimiting`. |
-| `samplerParam` | float | `1.0` | For `const`: `0` (no sampling) or `1` (sample all). For `probabilistic`: `0.0`–`1.0`. For `ratelimiting`: positive integer (rate per second). |
+| `samplerParam` | decimal | `1` | For `const`: `0` (no sampling) or `1` (sample all). For `probabilistic`: `0.0`–`1.0`. For `ratelimiting`: positive integer (rate per second). |
 | `reporterFlushInterval` | int | `1000` | Interval (ms) at which the client sends spans to the agent. |
 | `reporterBufferSize` | int | `10000` | Queue size of the Zipkin client. |
 
 ## Step 4: Send Requests
 
-Run the service and send requests to your service to generate trace data. Example cURL commands:
+Run the service and send requests to it to generate trace data. The example requests below call this sample shop service (`main.bal`), which listens on port `8090`:
+
+```ballerina
+import ballerina/http;
+import ballerinax/zipkin as _;
+
+type Product record {|
+    int id;
+    string name;
+    decimal price;
+|};
+
+type OrderRequest record {|
+    int productId;
+    int quantity;
+|};
+
+type Order record {|
+    int id;
+    *OrderRequest;
+|};
+
+map products = {
+    "1": {id: 1, name: "Laptop", price: 1200.00},
+    "2": {id: 2, name: "Mouse", price: 25.00},
+    "3": {id: 3, name: "Keyboard", price: 45.00}
+};
+Order[] orders = [];
+
+service /shop on new http:Listener(8090) {
+
+    resource function get products() returns Product[] {
+        return products.toArray();
+    }
+
+    resource function post product(Product product) returns Product {
+        products[product.id.toString()] = product;
+        return product;
+    }
+
+    resource function post 'order(OrderRequest request) returns Order|http:NotFound {
+        if !products.hasKey(request.productId.toString()) {
+            return http:NOT_FOUND;
+        }
+        Order newOrder = {id: orders.length(), ...request};
+        orders.push(newOrder);
+        return newOrder;
+    }
+
+    resource function get 'order/[int id]() returns Order|http:NotFound {
+        if id < 0 || id >= orders.length() {
+            return http:NOT_FOUND;
+        }
+        return orders[id];
+    }
+}
+```
+
+Example cURL commands:
 
 ```bash
 curl -X GET http://localhost:8090/shop/products
@@ -112,7 +170,7 @@ Zipkin displays traces as a timeline of spans:
 - **Service Name**: The Ballerina service that generated the span
 - **Span Name**: The HTTP method and resource path
 - **Duration**: Time taken for the operation
-- **Annotations**: Client send/receive, server send/receive timestamps
+- **Annotations**: Checkpoints recorded while the request is processed, each with the source module and code position (`src.module`, `src.position`)
 
 ## What's next
 

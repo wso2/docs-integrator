@@ -44,7 +44,7 @@ ICP redirects to the new project's home page and updates the breadcrumb to `Orga
 ## Edit a project
 
 1. On the **All Projects** page, click the **Edit** icon on a project card.
-2. Update the **Display Name** or **Description**. The **Name** slug is read-only after creation.
+2. Update the **Name** (the display name) or **Description**. The **Handler** (the URL-safe name set at creation) is read-only.
 3. Click **Save**.
 
 ## Delete a project
@@ -53,7 +53,7 @@ ICP redirects to the new project's home page and updates the breadcrumb to `Orga
 2. Read the confirmation dialog and type the project's display name exactly to confirm.
 3. Click **Delete Project**.
 
-Deleting a project removes all associated integrations and their data. This action cannot be undone.
+You can only delete a project that has no integrations. Delete each integration in the project first; otherwise the deletion fails with "Cannot delete project. Project contains components that must be deleted first." This action cannot be undone.
 
 ## Project home
 
@@ -70,9 +70,9 @@ Clicking a project card opens the project home. It shows all integrations belong
 The page includes:
 
 - Project avatar, display name, and description at the top.
-- An **Integrations** table with **Name**, **Description**, **Type**, **Last Updated** and **Actions** columns.
+- An **Integrations** table with **Name**, **Description**, **Type** (the integration type, such as Integration as API or Automation; blank if not set), **Technology** (WSO2 Integrator or WSO2 Integrator: MI), **Last Updated** and **Actions** (Edit and Delete) columns.
 - A **+ Create Integration** button to add a new integration to the project.
-- An **Integration Types** summary card on the right showing the count by type (Default, MI, and Total).
+- An **Integration Types** summary card on the right showing the number of integrations of each integration type (such as Integration as API or Automation), plus the **Total**. Integrations without an integration type are counted only in the total.
 
 If no integrations exist yet, the table shows a prompt to create the first integration.
 
@@ -82,11 +82,13 @@ The sidebar changes to project scope when you navigate into a project:
 
 | Item | Description |
 |------|-------------|
-| **Overview** | Integrations list and type breakdown |
+| **Overview** | Integrations list and integration type breakdown |
 | **Runtimes** | Runtimes across all integrations in the project |
+| **Workflows** | Durable workflows and their executions. See [Manage workflows](manage-workflows/manage-workflows.md). |
+| **Human Tasks** | Human tasks that workflows are waiting on. See [Complete human tasks](manage-workflows/complete-human-tasks.md). |
 | **Logs** | Aggregated logs for all runtimes in the project |
 | **Metrics** | Project-level performance metrics |
-| **Environments** | Environments available to the project (managed at organization level) |
+| **Environments** | Organization-level environments, which users with permission can also manage from here |
 | **Access control** | Role assignments scoped to this project |
 
 ## What's next

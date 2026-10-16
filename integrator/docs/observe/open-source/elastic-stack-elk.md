@@ -25,16 +25,22 @@ Ballerina Integration ──▶ Log Files ──▶ Filebeat ──▶ Elasticse
 
 ## Step 1 -- configure Ballerina logging
 
-Enable structured JSON logging in `Config.toml`:
+Enable structured JSON logging to a file in `Config.toml`:
 
 ```toml
 [ballerina.log]
 level = "INFO"
+format = "json"
+
+[[ballerina.log.destinations]]
+type = "file"
+path = "/var/log/integrations/app.log"
 ```
 
 Emit structured log entries in your code:
 
 ```ballerina
+import ballerina/http;
 import ballerina/log;
 
 service /api on new http:Listener(9090) {
@@ -44,7 +50,7 @@ service /api on new http:Listener(9090) {
 
         log:printInfo("Order received",
             orderId = orderId,
-            source = "api",
+            channel = "api",
             action = "create"
         );
 
@@ -58,6 +64,10 @@ service /api on new http:Listener(9090) {
 
         return result;
     }
+}
+
+function processOrder(json payload) returns json|error {
+    return {status: "created"};
 }
 ```
 
@@ -89,6 +99,9 @@ output.elasticsearch:
   hosts: ["http://elasticsearch:9200"]
   index: "ballerina-integrations-%{+yyyy.MM.dd}"
 
+setup.template.name: "ballerina-integrations"
+setup.template.pattern: "ballerina-integrations-*"
+
 setup.kibana:
   host: "http://kibana:5601"
 ```
@@ -101,7 +114,7 @@ Start Filebeat:
 
 ## Step 3 -- configure Logstash (Optional)
 
-For advanced log processing, use Logstash between Filebeat and Elasticsearch:
+For advanced log processing, use Logstash between Filebeat and Elasticsearch. Save this pipeline as `logstash.conf`:
 
 ```ruby
 input {
@@ -111,11 +124,8 @@ input {
 }
 
 filter {
-  json {
-    source => "message"
-  }
   date {
-    match => ["timestamp", "ISO8601"]
+    match => ["time", "ISO8601"]
     target => "@timestamp"
   }
   mutate {
@@ -127,17 +137,36 @@ output {
   elasticsearch {
     hosts => ["http://elasticsearch:9200"]
     index => "ballerina-integrations-%{+yyyy.MM.dd}"
+    action => "create"
   }
 }
 ```
 
+Then replace the `output.elasticsearch` section of `filebeat.yml` with:
+
+```yaml
+output.logstash:
+  hosts: ["logstash:5044"]
+```
+
+When you use the Docker Compose setup below, add a Logstash service to it:
+
+```yaml
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.11.0
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    depends_on:
+      - elasticsearch
+```
+
 ## Step 4 -- create Kibana dashboards
 
-### Index pattern
+### Data view
 
-1. Open Kibana and navigate to **Stack Management** > **Index Patterns**.
-2. Create a pattern: `ballerina-integrations-*`.
-3. Select `@timestamp` as the time field.
+1. Open Kibana and navigate to **Stack Management** > **Data Views**.
+2. Create a data view with the index pattern `ballerina-integrations-*`.
+3. Select `@timestamp` as the timestamp field.
 
 ### Useful visualizations
 
@@ -153,13 +182,12 @@ output {
 | Query | Purpose |
 |-------|---------|
 | `level: "ERROR"` | Find all error logs |
-| `service: "order-service" AND orderId: "ORD-123"` | Trace a specific order |
+| `fields.service: "order-service" AND orderId: "ORD-123"` | Trace a specific order |
 | `level: "ERROR" AND NOT message: "timeout"` | Errors excluding timeouts |
 
 ## Docker compose setup
 
 ```yaml
-version: "3.8"
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
@@ -182,6 +210,7 @@ services:
 
   filebeat:
     image: docker.elastic.co/beats/filebeat:8.11.0
+    command: filebeat -e -strict.perms=false
     volumes:
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/log/integrations:/var/log/integrations:ro

@@ -36,7 +36,12 @@ The token is validated using **kid-based lookup**:
    - **Required scope claim**: `runtime_agent`
    - **Clock skew tolerance**: 10 seconds
 
-Tokens are provisioned when a runtime key is created in the ICP (via the Management API). A key can be unbound (not yet associated with a project/component) or bound.
+The ICP does not issue runtime tokens. The runtime signs its own token with an org secret, which you generate in the ICP console or with the `createOrgSecret` mutation of the Management API. The secret has the form `<keyId>.<keyMaterial>`. Sign the JWT with HS256, using `keyMaterial` as the HMAC key, and set:
+
+- `kid` in the JWT header to `keyId`
+- `iss` to `icp-runtime-jwt-issuer`, `aud` to `icp-server`, and `scope` to `runtime_agent` in the payload
+
+The ICP runtime bridge does this for you from the `secret` in its configuration. A key can be unbound (not yet associated with a project/component) or bound.
 
 ---
 
@@ -53,10 +58,10 @@ After processing the heartbeat, the ICP runs reconciliation and returns any pend
 ```json
 {
   "heartbeatVersion": "v1.0",
-  "runtimeId": "runtime-abc123",
-  "runtimeType": "wso2-mi",
+  "runtimeId": "3f2b8c1e-6d4a-4e9b-9a71-0c5d2e8f4b10",
+  "runtimeType": "MI",
   "status": "RUNNING",
-  "environment": "dev-env",
+  "environment": "dev",
   "project": "MyProject",
   "component": "OrderService",
   "version": "1.0.0",
@@ -78,7 +83,7 @@ After processing the heartbeat, the ICP runs reconciliation and returns any pend
   "artifacts": {
     "listeners": [],
     "services": [],
-    "apis": [{ "name": "OrderAPI", "state": "enabled" }],
+    "apis": [{ "name": "OrderAPI", "context": "/orders", "state": "enabled" }],
     "proxyServices": [],
     "sequences": [],
     "tasks": [],
@@ -95,7 +100,7 @@ After processing the heartbeat, the ICP runs reconciliation and returns any pend
     "inboundEndpoints": []
   },
   "runtimeHash": "sha256-abc123...",
-  "timestamp": "2025-05-01T10:00:00Z"
+  "timestamp": [1746093600, 0]
 }
 ```
 
@@ -104,19 +109,19 @@ After processing the heartbeat, the ICP runs reconciliation and returns any pend
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `heartbeatVersion` | string | No | Heartbeat format version. Default: `"v1.0"` |
-| `runtimeId` | string | Yes | Unique identifier for this runtime instance |
-| `runtimeType` | string | Yes | Runtime type identifier (e.g., `"wso2-mi"`) |
-| `status` | string | Yes | Current runtime status (`"RUNNING"`, `"STOPPED"`, etc.) |
-| `environment` | string | Yes | Environment handler or UUID the runtime belongs to |
-| `project` | string | Yes | Project name or UUID |
-| `component` | string | Yes | Component/integration name or UUID |
+| `runtimeId` | string | Yes | Unique identifier for this runtime instance, as a 36-character UUID |
+| `runtimeType` | string | Yes | `"MI"` or `"BI"` |
+| `status` | string | Yes | Current runtime status (`"RUNNING"`). The ICP marks the runtime `OFFLINE` when its heartbeats stop |
+| `environment` | string | Yes | Handler of the environment the runtime belongs to. It must match the environment of the key |
+| `project` | string | Yes | Project name. For an unbound key, it is converted to a handler (for example, `MyProject` becomes `myproject`) and the project is created if it does not exist. For a bound key, the bound project is used |
+| `component` | string | Yes | Component/integration name, handled the same way as `project` |
 | `version` | string | No | Runtime version |
 | `runtimeHostname` | string | No | Hostname of the MI management API |
 | `runtimePort` | string | No | Port of the MI management API |
 | `nodeInfo` | object | Yes | Host system information (see below) |
 | `artifacts` | object | Yes | All deployed artifacts grouped by type (see below) |
 | `runtimeHash` | string | Yes | Hash of the full runtime state, used for delta comparison |
-| `timestamp` | string | Yes | ISO 8601 UTC timestamp of the heartbeat |
+| `timestamp` | array | Yes | UTC time of the heartbeat as `[epochSeconds, fractionOfSecond]`, for example `[1746093600, 0]` |
 | `logLevels` | object | No | Current log levels as a `{ "loggerName": "LEVEL" }` map (Ballerina runtimes) |
 
 **`nodeInfo` fields:**
@@ -161,9 +166,9 @@ After processing the heartbeat, the ICP runs reconciliation and returns any pend
 | `endpoints` | array | Named endpoints (MI) |
 | `inboundEndpoints` | array | Inbound endpoints (MI) |
 
-Each artifact entry includes at minimum a `name` field and a `state` field (`"enabled"` or `"disabled"`).
+Each artifact entry includes a `name` field and, optionally, a `state` field (`"enabled"` or `"disabled"`). Some types need more fields; for example, `apis` entries also need a `context`.
 
-**Response `200 OK`:**
+**Response `201 Created`:**
 
 ```json
 {
@@ -171,12 +176,13 @@ Each artifact entry includes at minimum a `name` field and a `state` field (`"en
   "fullHeartbeatRequired": false,
   "commands": [
     {
-      "commandId": "cmd-001",
-      "runtimeId": "runtime-abc123",
-      "targetArtifact": { "name": "OrderAPI" },
+      "commandId": "01f1c859-4034-1260-b29d-9b94be3f8329",
+      "runtimeId": "3f2b8c1e-6d4a-4e9b-9a71-0c5d2e8f4b10",
+      "targetArtifact": { "name": "httpListener", "package": "" },
       "action": "STOP",
-      "issuedAt": "2025-05-01T10:01:00Z",
-      "status": "PENDING"
+      "issuedAt": [1792042108, 0.4409251],
+      "status": "PENDING",
+      "signature": "rzY2WwZEWSayUSGWFjy1OS3wUbXR1NElZvCykgyIoX4="
     }
   ],
   "errors": []
@@ -185,10 +191,10 @@ Each artifact entry includes at minimum a `name` field and a `state` field (`"en
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `acknowledged` | boolean | `true` if the heartbeat was accepted and processed |
+| `acknowledged` | boolean | `true` if the heartbeat was accepted and processed. If processing fails, the response is still `201` with `acknowledged: false` and the reason in `errors` |
 | `fullHeartbeatRequired` | boolean | If `true`, the runtime must send a full heartbeat on the next cycle |
 | `commands` | array | Control commands to execute (may be empty) |
-| `errors` | array | Error messages if processing partially failed |
+| `errors` | array | Error messages if processing failed |
 
 **`commands` entry fields:**
 
@@ -197,16 +203,18 @@ Each artifact entry includes at minimum a `name` field and a `state` field (`"en
 | `commandId` | string | Unique command identifier |
 | `runtimeId` | string | Target runtime |
 | `targetArtifact.name` | string | Name of the artifact to act on |
-| `action` | string | `START`, `STOP`, or `SET_LOGGER_LEVEL` |
-| `issuedAt` | string | ISO 8601 UTC timestamp |
+| `targetArtifact.package` | string | Package of the artifact, if any |
+| `action` | string | `START`, `STOP`, `SET_LOGGER_LEVEL`, `WORKFLOW_MGMT`, or `MI_MGMT` |
+| `issuedAt` | array | UTC time as `[epochSeconds, fractionOfSecond]` |
 | `status` | string | `PENDING`, `SENT`, `ACKNOWLEDGED`, `FAILED`, or `COMPLETED` |
 | `payload` | string | JSON-encoded additional data for the action (e.g., log level settings) |
+| `signature` | string | Base64 HMAC-SHA256 signature of the command, keyed with the org secret, so the runtime can verify that the command came from the ICP |
 
 **Error responses:**
 
 | Status | Reason |
 |--------|--------|
-| `400 Bad Request` | Invalid heartbeat payload, unknown `kid`, or invalid project/component name |
+| `400 Bad Request` | Invalid heartbeat payload (for example, a `runtimeId` that is not a UUID or a `heartbeatVersion` other than `v1.0`), unknown `kid`, or invalid project/component name |
 | `401 Unauthorized` | Missing or invalid JWT, or insufficient scope (requires `runtime_agent`) |
 | `409 Conflict` | Environment or runtime type mismatch between the JWT key binding and the heartbeat |
 
@@ -216,16 +224,16 @@ Each artifact entry includes at minimum a `name` field and a `state` field (`"en
 
 Submits a lightweight delta heartbeat containing only the runtime ID and a hash of its current state. If the hash matches the ICP's last known state, no full resync is needed, reducing overhead for stable runtimes.
 
-If the key is unbound (not yet associated with a project/component), the ICP cannot resolve the context from a delta heartbeat alone and instructs the runtime to send a full heartbeat.
+If the key is unbound (not yet associated with a project/component), the ICP cannot resolve the context from a delta heartbeat alone. It returns `acknowledged: false` and `fullHeartbeatRequired: true` to instruct the runtime to send a full heartbeat.
 
 **Request body:**
 
 ```json
 {
   "heartbeatVersion": "v1.0",
-  "runtimeId": "runtime-abc123",
+  "runtimeId": "3f2b8c1e-6d4a-4e9b-9a71-0c5d2e8f4b10",
   "runtimeHash": "sha256-abc123...",
-  "timestamp": "2025-05-01T10:05:00Z"
+  "timestamp": [1746093900, 0]
 }
 ```
 
@@ -234,9 +242,9 @@ If the key is unbound (not yet associated with a project/component), the ICP can
 | `heartbeatVersion` | string | No | Heartbeat format version. Default: `"v1.0"` |
 | `runtimeId` | string | Yes | Unique identifier for this runtime instance |
 | `runtimeHash` | string | Yes | Hash of the full runtime state |
-| `timestamp` | string | Yes | ISO 8601 UTC timestamp |
+| `timestamp` | array | Yes | UTC time as `[epochSeconds, fractionOfSecond]` |
 
-**Response `200 OK`:**
+**Response `201 Created`:**
 
 Same structure as the full heartbeat response. If `fullHeartbeatRequired` is `true`, the runtime must send a `POST /icp/heartbeat` on the next cycle.
 

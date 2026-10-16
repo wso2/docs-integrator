@@ -77,43 +77,43 @@ Create a Grafana dashboard to visualize your integration metrics.
 
 ### Data Source Configuration
 
-1. In Grafana, navigate to **Configuration > Data Sources**
+1. In Grafana, navigate to **Connections > Data sources**
 2. Add a Prometheus data source pointing to your Prometheus server
 3. Set the URL (e.g., `http://prometheus:9090`)
 
 ### Dashboard Panels
 
-Create panels for the following key metrics:
+Create panels for the following key metrics. Ballerina exports counters and gauges with a `_value` suffix, and response times as a summary (`response_time_seconds` with `quantile` and `timeWindow` labels), not a histogram:
 
 **Request Rate Panel (Graph):**
 
 ```promql
-rate(http_requests_total{job="wso2-integrator"}[5m])
+sum by (http_url) (rate(requests_total_value{job="wso2-integrator"}[5m]))
 ```
 
 **Error Rate Panel (Graph):**
 
 ```promql
-rate(http_response_status_total{job="wso2-integrator", status_code=~"5.."}[5m])
-/ rate(http_requests_total{job="wso2-integrator"}[5m])
+sum(rate(requests_total_value{job="wso2-integrator", http_status_code_group="5xx"}[5m]))
+/ sum(rate(requests_total_value{job="wso2-integrator"}[5m]))
 ```
 
 **Request Duration P99 Panel (Graph):**
 
 ```promql
-histogram_quantile(0.99, rate(http_request_duration_seconds_bucket{job="wso2-integrator"}[5m]))
+max by (http_url) (response_time_seconds{job="wso2-integrator", quantile="0.99", timeWindow="60000"})
 ```
 
 **Active Requests Panel (Stat):**
 
 ```promql
-http_requests_in_flight{job="wso2-integrator"}
+sum(inprogress_requests_value{job="wso2-integrator"})
 ```
 
 **Custom Order Metrics Panel (Graph):**
 
 ```promql
-rate(orders_processed_total{status="success"}[5m])
+rate(orders_processed_total_value{status="success"}[5m])
 ```
 
 ### Alerting Rules
@@ -126,7 +126,7 @@ groups:
   - name: wso2-integrator-alerts
     rules:
       - alert: HighErrorRate
-        expr: rate(http_response_status_total{status_code=~"5.."}[5m]) > 0.05
+        expr: sum by (service) (rate(requests_total_value{http_status_code_group="5xx"}[5m])) / sum by (service) (rate(requests_total_value[5m])) > 0.05
         for: 5m
         labels:
           severity: critical
@@ -135,7 +135,7 @@ groups:
           description: "Error rate is {{ $value | humanizePercentage }} over the last 5 minutes"
 
       - alert: HighLatency
-        expr: histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m])) > 2
+        expr: max by (service, http_url) (response_time_seconds{quantile="0.99", timeWindow="60000"}) > 2
         for: 5m
         labels:
           severity: warning

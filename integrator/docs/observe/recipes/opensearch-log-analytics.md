@@ -10,7 +10,7 @@ Complete log aggregation and analytics using OpenSearch (open-source Elasticsear
 
 ```bash
 WSO2 Integrator
-├── Logs (stdout) ──▶ Fluent Bit ──▶ OpenSearch ──▶ OpenSearch Dashboards
+├── Logs (file) ───▶ Fluent Bit ──▶ OpenSearch ──▶ OpenSearch Dashboards
 │                                       (indexing)        (UI)
 │
 └─ Metrics (9797) ──▶ Prometheus ──▶ Grafana (optional)
@@ -19,25 +19,68 @@ WSO2 Integrator
 ## Prerequisites
 
 - Docker & Docker Compose
+- Ballerina (to build the integration as an executable JAR)
 - 4GB RAM minimum (8GB recommended)
 - 20GB disk space for OpenSearch data
+
+## Prepare the integration
+
+The `integrator` service runs your integration's executable JAR from the `./integrations` directory.
+
+1. Add the Prometheus extension import to your integration (for example, in `main.bal`):
+
+   ```ballerina
+   import ballerinax/prometheus as _;
+   ```
+
+2. Enable observability in `Ballerina.toml`:
+
+   ```toml
+   [build-options]
+   observabilityIncluded = true
+   ```
+
+3. Build the integration and copy the JAR into `./integrations`:
+
+   ```bash
+   bal build
+   mkdir -p integrations
+   cp target/bin/<integration-name>.jar integrations/
+   ```
+
+4. Create `integrations/Config.toml` to enable metrics and write JSON logs to the shared log volume:
+
+   ```toml
+   [ballerina.observe]
+   metricsEnabled = true
+   metricsReporter = "prometheus"
+
+   [ballerinax.prometheus]
+   port = 9797
+   host = "0.0.0.0"
+
+   [ballerina.log]
+   level = "INFO"
+   format = "json"
+
+   [[ballerina.log.destinations]]
+   path = "/var/log/integrator/app.log"
+   ```
 
 ## Docker Compose Setup
 
 Create `docker-compose.yml`:
 
 ```yaml
-version: "3.8"
-
 services:
   # OpenSearch (Log Storage & Search)
   opensearch:
-    image: opensearchproject/opensearch:latest
+    image: opensearchproject/opensearch:3.5.0
     environment:
       - cluster.name=opensearch-cluster
       - discovery.type=single-node
       - DISABLE_SECURITY_PLUGIN=true
-      - JAVA_OPTS=-Xms512m -Xmx512m
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
     ports:
       - "9200:9200"
       - "9600:9600"
@@ -48,7 +91,7 @@ services:
 
   # OpenSearch Dashboards (Visualization)
   opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:latest
+    image: opensearchproject/opensearch-dashboards:3.5.0
     ports:
       - "5601:5601"
     environment:
@@ -61,13 +104,11 @@ services:
 
   # Fluent Bit (Log Shipper)
   fluent-bit:
-    image: fluent/fluent-bit:latest
+    image: fluent/fluent-bit:4.2.2
     volumes:
       - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
       - ./parsers.conf:/fluent-bit/etc/parsers.conf
-      - /var/log:/var/log:ro
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - integrator-logs:/var/log/integrator:ro
     depends_on:
       - opensearch
     networks:
@@ -75,14 +116,14 @@ services:
 
   # WSO2 Integrator
   integrator:
-    image: ballerina:latest
+    image: eclipse-temurin:21-jre
+    # Replace <integration-name> with the name of your JAR
+    command: ["java", "-jar", "/app/<integration-name>.jar"]
     ports:
       - "8090:9090"
       - "9797:9797"
     environment:
-      - BALLERINA_OBSERVE_METRICS_ENABLED=true
-      - BALLERINAX_PROMETHEUS_PORT=9797
-      - BALLERINA_LOG_LEVEL=INFO
+      - BAL_CONFIG_FILES=/app/Config.toml
     volumes:
       - ./integrations:/app
       - integrator-logs:/var/log/integrator
@@ -146,14 +187,6 @@ networks:
     DB           /tmp/fluent-bit-state.db
     DB.Locking   true
 
-# Monitor Docker logs
-[INPUT]
-    Name         docker
-    Tag          docker.*
-    Path         /var/lib/docker/containers
-    Parser       docker
-    Refresh_Interval 30
-
 # Modify logs to add metadata
 [FILTER]
     Name         modify
@@ -161,11 +194,6 @@ networks:
     Add          service wso2-integrator
     Add          environment production
     Add          source log-file
-
-[FILTER]
-    Name         modify
-    Match        docker.*
-    Add          environment production
 
 # Output to OpenSearch
 [OUTPUT]
@@ -175,7 +203,8 @@ networks:
     Port         9200
     HTTP_User    admin
     HTTP_Passwd  admin
-    Index        logs-${TAG}-%Y.%m.%d
+    Logstash_Format On
+    Logstash_Prefix logs-ballerina
     Type         _doc
     Suppress_Type_Name On
     Retry_Limit  3
@@ -257,11 +286,11 @@ docker-compose logs -f fluent-bit
 ### Step 1: Create Index Pattern
 
 1. Open OpenSearch Dashboards at http://localhost:5601
-2. Go to **Stack Management** > **Index Patterns**
-3. Click **Create Index Pattern**
-4. Pattern name: `logs-ballerina.*`
+2. Go to **Dashboards Management** > **Index patterns**
+3. Click **Create index pattern**
+4. Pattern name: `logs-ballerina-*`
 5. Time field: `@timestamp`
-6. Click **Create Index Pattern**
+6. Click **Create index pattern**
 
 ### Step 2: Create Visualizations
 
@@ -269,16 +298,16 @@ docker-compose logs -f fluent-bit
 
 1. Go to **Visualize** > **Create**
 2. Select **Area** visualization
-3. Index: `logs-ballerina.*`
+3. Index: `logs-ballerina-*`
 4. X-axis: **Date Histogram** on `@timestamp`
 5. Y-axis: **Count**
-6. Split series by: `level`
+6. Split series by: **Terms** on `level.keyword`
 7. Save as "Log Volume by Level"
 
 #### Error Count Table
 
-1. Create **Table** visualization
-2. Index: `logs-ballerina.*`
+1. Create **Data Table** visualization
+2. Index: `logs-ballerina-*`
 3. Bucket: **Terms** on `level.keyword`
 4. Add filter: `level: ERROR`
 5. Metric: **Count**
@@ -287,7 +316,7 @@ docker-compose logs -f fluent-bit
 #### Service Breakdown
 
 1. Create **Pie** visualization
-2. Index: `logs-ballerina.*`
+2. Index: `logs-ballerina-*`
 3. Bucket: **Terms** on `service.keyword`
 4. Metric: **Count**
 5. Save as "Logs by Service"
@@ -295,7 +324,7 @@ docker-compose logs -f fluent-bit
 #### Log Message Breakdown
 
 1. Create **Data Table** visualization
-2. Index: `logs-ballerina.*`
+2. Index: `logs-ballerina-*`
 3. Bucket: **Terms** on `message.keyword` (top 10)
 4. Metric: **Count**
 5. Save as "Top Log Messages"
@@ -316,9 +345,9 @@ docker-compose logs -f fluent-bit
 | `level: ("ERROR" OR "WARN")` | Warnings and errors |
 | `orderId.keyword: "ORD-12345"` | Trace specific order |
 | `message: "Payment failed"` | Search error messages |
-| `level: "ERROR" NOT message: "timeout"` | Errors excluding timeouts |
-| `service: exists` | Logs with service field |
-| `@timestamp: ["2024-01-01" TO "2024-01-31"]` | Date range |
+| `level: "ERROR" AND NOT message: "timeout"` | Errors excluding timeouts |
+| `service:*` | Logs with service field |
+| `@timestamp >= "2024-01-01" AND @timestamp <= "2024-01-31"` | Date range |
 
 ## Advanced: Data Prepper for Trace Analytics
 
@@ -327,21 +356,50 @@ OpenSearch supports distributed trace analytics via Data Prepper:
 ```yaml
 # docker-compose addition
 data-prepper:
-  image: opensearchproject/data-prepper:latest
+  image: opensearchproject/data-prepper:2.16.0
   volumes:
-    - ./data-prepper-config.yml:/etc/data-prepper/config.yaml
+    - ./pipelines.yaml:/usr/share/data-prepper/pipelines/pipelines.yaml
   ports:
     - "21890:21890"  # OTEL receiver
   depends_on:
     - opensearch
+  networks:
+    - opensearch
 ```
 
-Configure Ballerina to send traces to Data Prepper:
+Create `pipelines.yaml`:
+
+```yaml
+otel-trace-pipeline:
+  source:
+    otel_trace_source:
+      port: 21890
+      ssl: false
+  processor:
+    - otel_traces:
+  sink:
+    - opensearch:
+        hosts: ["http://opensearch:9200"]
+        index_type: trace-analytics-raw
+```
+
+Configure Ballerina to send traces to Data Prepper. Add `import ballerinax/jaeger as _;` to the integration, rebuild it, and update `integrations/Config.toml`:
 
 ```toml
+[ballerina.observe]
+metricsEnabled = true
+metricsReporter = "prometheus"
+tracingEnabled = true
+tracingProvider = "jaeger"
+
 [ballerinax.jaeger]
-reporterEndpoint = "http://data-prepper:21890/api/traces"
+agentHostname = "data-prepper"
+agentPort = 21890
+samplerType = "const"
+samplerParam = 1.0
 ```
+
+Spans are stored in the `otel-v1-apm-span-*` indices.
 
 ## Performance Optimization
 
@@ -352,41 +410,47 @@ environment:
   - "OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g"
 ```
 
-### Index Lifecycle Management (ILM)
+### Index state management (ISM)
 
-Configure automatic index rollover:
+Fluent Bit already writes one index per day. Configure automatic deletion of indices older than 30 days:
 
 ```bash
-curl -X PUT "localhost:9200/_ilm/policy/logs-policy" -H 'Content-Type: application/json' -d'
+curl -X PUT "localhost:9200/_plugins/_ism/policies/logs-policy" -H 'Content-Type: application/json' -d'
 {
-  "policy": "logs-policy",
-  "phases": {
-    "hot": {
-      "min_age": "0d",
-      "actions": {
-        "rollover": {
-          "max_primary_shard_size": "50gb",
-          "max_age": "1d"
-        }
+  "policy": {
+    "description": "Delete WSO2 Integrator log indices after 30 days",
+    "default_state": "hot",
+    "states": [
+      {
+        "name": "hot",
+        "actions": [],
+        "transitions": [
+          { "state_name": "delete", "conditions": { "min_index_age": "30d" } }
+        ]
+      },
+      {
+        "name": "delete",
+        "actions": [ { "delete": {} } ],
+        "transitions": []
       }
-    },
-    "delete": {
-      "min_age": "30d",
-      "actions": {
-        "delete": {}
-      }
+    ],
+    "ism_template": {
+      "index_patterns": ["logs-ballerina-*"],
+      "priority": 100
     }
   }
 }
 '
 ```
 
+The policy applies to `logs-ballerina-*` indices created after it is added.
+
 ### Fluent Bit Buffer Configuration
 
 ```ini
 [OUTPUT]
     Name         opensearch
-    Buffer_Limit false
+    Buffer_Size  False
     Retry_Limit  3
 ```
 
@@ -401,7 +465,7 @@ docker-compose logs fluent-bit
 curl http://localhost:9200/_cat/indices?v
 
 # Check log files exist
-docker-compose exec fluent-bit ls -la /var/log/integrator/
+docker-compose exec integrator ls -la /var/log/integrator/
 ```
 
 **OpenSearch disk space issues:**
@@ -410,7 +474,7 @@ docker-compose exec fluent-bit ls -la /var/log/integrator/
 curl http://localhost:9200/_cat/allocation?v
 
 # Delete old indices
-curl -X DELETE "localhost:9200/logs-ballerina-*-2024.01.*"
+curl -X DELETE "localhost:9200/logs-ballerina-2024.01.*"
 ```
 
 **Query performance issues:**
@@ -426,12 +490,20 @@ curl -X POST "localhost:9200/logs-ballerina*/_forcemerge?max_num_segments=1"
 
 ### Create Snapshot Repository
 
+OpenSearch only accepts file system repositories under a path listed in `path.repo`. Add it to the `opensearch` service environment and recreate the container with `docker-compose up -d opensearch`:
+
+```yaml
+      - path.repo=/usr/share/opensearch/data/snapshots
+```
+
+This path is inside the `opensearch-data` volume, so copy the snapshots elsewhere if you need off-host backups.
+
 ```bash
 curl -X PUT "localhost:9200/_snapshot/my_backup" -H 'Content-Type: application/json' -d'
 {
   "type": "fs",
   "settings": {
-    "location": "/mnt/backup"
+    "location": "/usr/share/opensearch/data/snapshots"
   }
 }
 '
@@ -445,8 +517,16 @@ curl -X PUT "localhost:9200/_snapshot/my_backup/snapshot_1?wait_for_completion=t
 
 ### Restore Snapshot
 
+An index can't be restored while an open index with the same name exists, so delete (or close) the log indices first and restore only those:
+
 ```bash
-curl -X POST "localhost:9200/_snapshot/my_backup/snapshot_1/_restore"
+curl -X DELETE "localhost:9200/logs-ballerina-*"
+
+curl -X POST "localhost:9200/_snapshot/my_backup/snapshot_1/_restore" -H 'Content-Type: application/json' -d'
+{
+  "indices": "logs-ballerina-*"
+}
+'
 ```
 
 ## Cleanup

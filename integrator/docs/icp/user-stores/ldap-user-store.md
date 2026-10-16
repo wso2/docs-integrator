@@ -21,11 +21,13 @@ All LDAP settings are top-level keys in `conf/deployment.toml`. Only `ldapUserSt
 ldapUserStoreEnabled = true
 ```
 
+When LDAP is enabled, users in the built-in user store, including the default `admin`, can no longer sign in. Before switching, make sure at least one LDAP user is a member of a group listed in `ldapAdminRoles` (see Step 5).
+
 ### Step 2: Configure the server connection
 
 ```toml
 ldapHostName = "ldap.example.com"   # default: localhost
-ldapPort     = 10389                # default: 10389; use 636 for LDAPS
+ldapPort     = 389                  # default: 389; use 636 for LDAPS
 
 # Service-account credentials used to search the directory.
 # Omit (leave empty) for anonymous bind.
@@ -41,7 +43,7 @@ ldapConnectionPassword = "secret"
 | `ldapUserNameAttribute` | `uid` | Attribute that holds the login username |
 | `ldapUserSearchFilter` | `(&(objectClass=person)(uid=?))` | Filter to locate a user; `?` is replaced with the username |
 | `ldapUserDNPattern` | _(empty)_ | Optional shortcut to construct the DN directly without a search (see below) |
-| `ldapDisplayNameAttribute` | _(empty)_ | Attribute used as the display name in ICP; leave empty to use the username |
+| `ldapDisplayNameAttribute` | `cn` | Attribute used as the display name in ICP; set it to empty to use the username |
 
 **`ldapUserDNPattern`** avoids a search round-trip by constructing the DN from the username directly. Use `{0}` as the placeholder:
 
@@ -102,7 +104,7 @@ For production deployments, enable TLS:
 ldapSslEnabled = true
 
 # Path to a JKS truststore containing the LDAP server's CA certificate.
-# If omitted, certificate verification is disabled (not recommended for production).
+# Required when ldapSslEnabled is true.
 ldapTrustStorePath     = "../conf/security/ldap-truststore.jks"
 ldapTrustStorePassword = "truststore-password"
 ```
@@ -200,9 +202,9 @@ On login the adapter:
 
 | Symptom | Cause | Fix |
 | ------- | ----- | --- |
-| Login returns 401 with no error in logs | User not found in directory | Check `ldapUserSearchBase` and `ldapUserSearchFilter`; verify the username attribute matches the login name |
-| Login returns 500 "Authentication service unavailable" | Cannot reach LDAP server | Check `ldapHostName`, `ldapPort`, firewall rules |
+| Login returns 401 and the log shows `LDAP user search failed` with `Entry is not found for DN` | User not found in directory. The message names the search base DN even when that DN exists | Check `ldapUserSearchBase` and `ldapUserSearchFilter`; verify the username attribute matches the login name |
+| Login returns 500 "Authentication service error" and the log shows `Unexpected LDAP error during bind` | Cannot reach LDAP server | Check `ldapHostName`, `ldapPort`, firewall rules |
 | Users can log in but are never super-admin | Group names don't match | `ldapAdminRoles` values must match the `ldapGroupNameAttribute` value exactly (case-sensitive) |
-| TLS handshake failure | CA certificate not trusted | Import the LDAP server's CA cert into the truststore |
+| With LDAPS enabled, login returns 401 "Invalid credentials" for valid users | LDAP server certificate not trusted by the truststore | Import the LDAP server's CA cert into the truststore |
 | Users get super-admin on first login but lose it after re-deploy | Expected behaviour | Super-admin is set once at first login; subsequent changes must be managed via the ICP user management UI |
 | Display name shows as username | `ldapDisplayNameAttribute` missing on entry | Verify the attribute name or set `ldapDisplayNameAttribute = ""` to always use the username |

@@ -10,7 +10,7 @@ Complete log aggregation, full-text search, and visualization using the Elastic 
 
 ```bash
 WSO2 Integrator
-├── Logs (stdout) ──▶ Filebeat ──▶ Logstash ──▶ Elasticsearch ──▶ Kibana
+├── Logs (stderr) ──▶ Filebeat ──▶ Logstash ──▶ Elasticsearch ──▶ Kibana
 │                                   (optional)      (indexing)       (UI)
 │
 └─ Metrics (9797) ──▶ Prometheus ──▶ Grafana (optional, for metrics)
@@ -24,11 +24,9 @@ WSO2 Integrator
 
 ## Docker Compose Setup
 
-Create `docker-compose.yml`:
+Create `docker-compose.yml`. The `integrator` service runs the executable JAR built from your integration project (placed in an `integration` directory next to this file) and writes its logs in JSON format so that each field is indexed:
 
 ```yaml
-version: "3.8"
-
 services:
   # Elasticsearch (Log Storage & Search)
   elasticsearch:
@@ -86,17 +84,20 @@ services:
 
   # WSO2 Integrator
   integrator:
-    image: ballerina:latest
+    image: eclipse-temurin:21-jre
+    working_dir: /app
+    command: sh -c "java -jar target/bin/*.jar"
     ports:
       - "8090:9090"
       - "9797:9797"
     environment:
-      - BALLERINA_OBSERVE_METRICS_ENABLED=true
-      - BALLERINAX_PROMETHEUS_PORT=9797
-      - BALLERINA_LOG_LEVEL=INFO
+      - BAL_CONFIG_VAR_BALLERINA_OBSERVE_METRICSENABLED=true
+      - BAL_CONFIG_VAR_BALLERINA_OBSERVE_METRICSREPORTER=prometheus
+      - BAL_CONFIG_VAR_BALLERINAX_PROMETHEUS_PORT=9797
+      - BAL_CONFIG_VAR_BALLERINA_LOG_LEVEL=INFO
+      - BAL_CONFIG_VAR_BALLERINA_LOG_FORMAT=json
     volumes:
-      - ./integrations:/app
-      - integrator-logs:/var/log/integrator
+      - ./integration:/app
     networks:
       - elk
 
@@ -130,7 +131,6 @@ volumes:
   elasticsearch-data:
   prometheus-data:
   grafana-data:
-  integrator-logs:
 
 networks:
   elk:
@@ -139,24 +139,48 @@ networks:
 
 ## Configuration Files
 
+### Integration configuration
+
+Enable observability in the integration's `Ballerina.toml`:
+
+```toml
+[build-options]
+observabilityIncluded = true
+```
+
+Import the Prometheus extension in one of the integration's `.bal` files:
+
+```ballerina
+import ballerinax/prometheus as _;
+```
+
 ### Filebeat Configuration (`filebeat.yml`)
 
-```yaml
-filebeat.inputs:
-  - type: log
-    enabled: true
-    paths:
-      - /var/log/integrator/*.log
-      - /var/lib/docker/containers/*/*.log
-    json.keys_under_root: true
-    json.add_error_key: true
-    fields:
-      service: wso2-integrator
-      environment: production
+Filebeat discovers the `integrator` container through the Docker socket and ships only that container's logs:
 
-processors:
-  - add_kubernetes_metadata:
-      in_cluster: true
+```yaml
+filebeat.autodiscover:
+  providers:
+    - type: docker
+      templates:
+        - condition:
+            equals:
+              docker.container.labels.com.docker.compose.service: integrator
+          config:
+            - type: filestream
+              id: integrator-${data.docker.container.id}
+              paths:
+                - /var/lib/docker/containers/${data.docker.container.id}/*.log
+              parsers:
+                - container: ~
+                - ndjson:
+                    target: ""
+                    overwrite_keys: true
+                    add_error_key: true
+              fields:
+                service: wso2-integrator
+                environment: production
+              fields_under_root: true
 
 output.logstash:
   hosts: ["logstash:5044"]
@@ -196,7 +220,7 @@ filter {
     }
 
     # Remove empty fields
-    remove_field => ["beat.name", "beat.timezone", "input.type"]
+    remove_field => ["[input][type]"]
   }
 
   # Extract orderId if present
@@ -211,7 +235,6 @@ output {
   elasticsearch {
     hosts => ["elasticsearch:9200"]
     index => "ballerina-integrations-%{+yyyy.MM.dd}"
-    document_type => "_doc"
   }
 
   # Optional: Forward to stdout for debugging
@@ -249,14 +272,19 @@ datasources:
 ## Running the Stack
 
 ```bash
+# Build the integration
+cd integration
+bal build
+cd ..
+
 # Start all services
-docker-compose up -d
+docker compose up -d
 
 # Verify services are running
-docker-compose ps
+docker compose ps
 
 # View logs
-docker-compose logs -f
+docker compose logs -f
 ```
 
 ## Accessing the Services
@@ -266,14 +294,14 @@ docker-compose logs -f
 - **Grafana (metrics):** http://localhost:3000
 - **Prometheus:** http://localhost:9090
 
-## Setting Up Kibana Index Pattern
+## Setting up Kibana data view
 
 1. Open Kibana at http://localhost:5601
-2. Go to **Stack Management** > **Index Patterns**
-3. Click **Create Index Pattern**
-4. Pattern name: `ballerina-integrations-*`
-5. Time field: `@timestamp`
-6. Click **Create Index Pattern**
+2. Go to **Stack Management** > **Data Views**
+3. Click **Create data view**
+4. Index pattern: `ballerina-integrations-*`
+5. Timestamp field: `@timestamp`
+6. Click **Save data view to Kibana**
 
 ## Creating Kibana Visualizations
 
@@ -317,10 +345,12 @@ docker-compose logs -f
 | `service: "wso2-integrator" AND orderId: "ORD-123"` | Trace a specific order |
 | `level: "ERROR" AND NOT message: "timeout"` | Errors excluding timeouts |
 | `message: "Payment failed"` | Search error messages |
-| `orderId: exists` | Logs with orderId field |
+| `orderId: *` | Logs with orderId field |
 | `level: "WARN" OR level: "ERROR"` | Warnings and errors |
 
 ## Advanced: Logstash Parsing Examples
+
+These patterns extract values written into the log message text itself, not values passed as separate key-value pairs.
 
 ### Extract Order Information
 
@@ -366,21 +396,17 @@ environment:
 ### Index Retention Policy
 
 ```bash
-# Delete old indices (via Elasticsearch API)
-curl -X DELETE "localhost:9200/ballerina-integrations-2024.01.*"
+# Delete an old index by name (Elasticsearch rejects wildcard deletes by default)
+curl -X DELETE "localhost:9200/ballerina-integrations-2024.01.01"
 ```
 
 ### Logstash Pipeline Config
 
-```ruby
-# Optimize batch settings
-output {
-  elasticsearch {
-    hosts => ["elasticsearch:9200"]
-    bulk_size => 500
-    idle_flush_time => 1
-  }
-}
+```yaml
+# Optimize batch settings (logstash service in docker-compose.yml)
+environment:
+  - PIPELINE_BATCH_SIZE=500
+  - PIPELINE_BATCH_DELAY=50
 ```
 
 ## Troubleshooting
@@ -388,10 +414,10 @@ output {
 **No logs appearing in Kibana:**
 ```bash
 # Check Filebeat is running
-docker-compose logs filebeat
+docker compose logs filebeat
 
 # Check Logstash is receiving beats
-docker-compose logs logstash | grep "beats"
+docker compose logs logstash | grep "beats"
 
 # Check Elasticsearch has data
 curl http://localhost:9200/_cat/indices
@@ -403,7 +429,7 @@ curl http://localhost:9200/_cat/indices
 curl http://localhost:9200/_cat/indices?v
 
 # Wait for data to arrive (can take 30 seconds)
-docker-compose logs integrator | tail -20
+docker compose logs integrator | tail -20
 ```
 
 **High disk usage:**
@@ -415,16 +441,15 @@ docker-compose logs integrator | tail -20
 
 ```bash
 # Stop all services
-docker-compose down
+docker compose down
 
 # Remove all data
-docker-compose down -v
+docker compose down -v
 ```
 
 ## What's Next
 
 - [Elastic Stack (ELK)](../open-source/elastic-stack-elk.md) — The focused integration guide for this platform
-- **[Elastic Stack (ELK) Details](../open-source/elastic-stack-elk.md)** – Advanced configuration and deployment
 - **[OpenSearch Setup](opensearch-log-analytics.md)** – Open-source alternative
 - **[Logging Overview](../logging.md)** – Learn more about logging
 - **[Metrics Overview](../metrics.md)** – Add metrics collection

@@ -91,7 +91,7 @@ Then follow the steps below to configure metrics and tracing data publishing to 
          - kafka_consumers_value
          - kafka_errors_value
        headers:
-       Accept: "text/plain; version=0.0.4"
+         Accept: "text/plain; version=0.0.4"
    ```
 
 2. Add configuration for tracing
@@ -102,7 +102,7 @@ Then follow the steps below to configure metrics and tracing data publishing to 
 
    ```yaml
    apm_config:
-   enabled: true
+     enabled: true
    ```
 
    Ballerina uses OpenTelemetry to provide traces. Therefore, we need to set up OpenTelemetry configurations as follows.
@@ -112,7 +112,7 @@ Then follow the steps below to configure metrics and tracing data publishing to 
        receiver:
            protocols:
                grpc:
-               endpoint: 0.0.0.0:4317
+                   endpoint: 0.0.0.0:4317
    ```
 
 ## Step 3: Import Prometheus and Jaeger Extensions
@@ -127,7 +127,7 @@ import ballerinax/jaeger as _;
 
 To support Prometheus as the metrics reporter, an HTTP endpoint starts with the context `/metrics` on the default port `9797` when the Ballerina service starts.
 
-Jaeger extension has an `Opentelemetry GRPC Span Exporter` which will push tracing data as batches to the endpoint (default - `http://localhost:4317`) in OpenTelemetry format.
+Jaeger extension has an `Opentelemetry GRPC Span Exporter` which will push tracing data as batches to the endpoint set by `agentHostname` and `agentPort` (`localhost:4317` in the configuration below, which is the Datadog agent's OTLP gRPC endpoint) in OpenTelemetry format.
 
 ## Step 4: Configure Runtime Configurations
 
@@ -135,7 +135,7 @@ Add the below to `Ballerina.toml` file.
 
 ```toml
 [build-options]
-remoteManagement = true
+observabilityIncluded = true
 ```
 
 Tracing and metrics can be enabled in your integration using configurations similar to the following in your
@@ -170,15 +170,72 @@ The table below provides the descriptions of each configuration option and possi
 | `ballerinax.prometheus.port` | The value of the port to which the `/metrics` service will bind. This service will be used by Prometheus to scrape the information of the Ballerina service. | `9797` | Any suitable value for port 0 - 65535. However, within that range, ports 0 - 1023 are generally reserved for specific purposes, therefore it is advisable to select a port without that range. |
 | `ballerinax.prometheus.host` | The name of the host to which the `/metrics` service will bind. This service will be used by Prometheus to scrape the information of the Ballerina service. | `0.0.0.0` | IP or Hostname or `0.0.0.0` of the node in which the Ballerina service is running. |
 | `ballerinax.jaeger.agentHostname` | Hostname of the Jaeger agent | `localhost` | IP or hostname of the Jaeger agent. If it is running on the same node as Ballerina, it can be `localhost`. |
-| `ballerinax.jaeger.agentPort` | Port of the Jaeger agent | `4317` | The port on which the Jaeger agent is listening. |
+| `ballerinax.jaeger.agentPort` | Port of the Jaeger agent | `55680` | The port on which the Jaeger agent is listening. |
 | `ballerinax.jaeger.samplerType` | Type of the sampling methods used in the Jaeger tracer. | `const` | `const`, `probabilistic`, or `ratelimiting`. |
 | `ballerinax.jaeger.samplerParam` | It is a floating value. Based on the sampler type, the effect of the sampler param varies. | `1.0` | For `const`: `0` (no sampling) or `1` (sample all spans), for `probabilistic`: `0.0` to `1.0`, for `ratelimiting`: any positive integer (rate per second). |
-| `ballerinax.jaeger.reporterFlushInterval` | The Jaeger client will be sending the spans to the agent at this interval. | `2000` | Any positive integer value. |
-| `ballerinax.jaeger.reporterBufferSize` | Queue size of the Jaeger client. | `1000` | Any positive integer value. |
+| `ballerinax.jaeger.reporterFlushInterval` | The Jaeger client will be sending the spans to the agent at this interval. | `1000` | Any positive integer value. |
+| `ballerinax.jaeger.reporterBufferSize` | Queue size of the Jaeger client. | `10000` | Any positive integer value. |
 
 ## Step 5: Send Requests
 
-Run the service and send requests to `http://localhost:8090/shop/products`.
+Run the service and send requests to it. The example requests below call this sample shop service (`main.bal`), which listens on port `8090`:
+
+```ballerina
+import ballerina/http;
+import ballerinax/jaeger as _;
+import ballerinax/prometheus as _;
+
+type Product record {|
+    int id;
+    string name;
+    decimal price;
+|};
+
+type OrderRequest record {|
+    int productId;
+    int quantity;
+|};
+
+type Order record {|
+    int id;
+    *OrderRequest;
+|};
+
+map products = {
+    "1": {id: 1, name: "Laptop", price: 1200.00},
+    "2": {id: 2, name: "Mouse", price: 25.00},
+    "3": {id: 3, name: "Keyboard", price: 45.00}
+};
+Order[] orders = [];
+
+service /shop on new http:Listener(8090) {
+
+    resource function get products() returns Product[] {
+        return products.toArray();
+    }
+
+    resource function post product(Product product) returns Product {
+        products[product.id.toString()] = product;
+        return product;
+    }
+
+    resource function post 'order(OrderRequest request) returns Order|http:NotFound {
+        if !products.hasKey(request.productId.toString()) {
+            return http:NOT_FOUND;
+        }
+        Order newOrder = {id: orders.length(), ...request};
+        orders.push(newOrder);
+        return newOrder;
+    }
+
+    resource function get 'order/[int id]() returns Order|http:NotFound {
+        if id < 0 || id >= orders.length() {
+            return http:NOT_FOUND;
+        }
+        return orders[id];
+    }
+}
+```
 
 Example cURL commands:
 
