@@ -27,7 +27,7 @@ You rarely call these directly. Knowledge Base `ingest` and `retrieve` operation
 - The **Select Embedding Provider** picker opens, listing the available providers with a search bar at the top:
 
 <ThemedImage
-    alt="Select Embedding Provider picker with a search bar and five cards: Default Embedding Provider (WSO2), described as a WSO2 embedding provider implementation that provides embedding capabilities using WSO2's AI service; Azure Embedding Provider, described as an interface for interacting with Azure OpenAI Embedding Models; Google Vertex Embedding Provider, described as a client class that provides an interface for generating vector embeddings; OpenAI Embedding Provider, described as an interface for interacting with OpenAI Embedding Models; and OpenRouter Embedding Provider, described as a client class that provides an interface for generating vector embeddings."
+    alt="Select Embedding Provider picker with a search bar and six cards: Default Embedding Provider (WSO2), the Bedrock Embedding Providers group (2 options, available in ballerinax/ai.aws.bedrock), Azure Embedding Provider, Google Vertex Embedding Provider, OpenAI Embedding Provider, and OpenRouter Embedding Provider, each with a one-line description."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/01-select-embedding-provider-v5.1.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/01-select-embedding-provider-v5.1.png'),
@@ -39,6 +39,7 @@ You rarely call these directly. Knowledge Base `ingest` and `retrieve` operation
 | Provider | Module | API key required? | Default model |
 |---|---|---|---|
 | **Default WSO2** | `ballerina/ai` | No (signed-in via WSO2) | WSO2-managed |
+| **AWS Bedrock** | [`ballerinax/ai.aws.bedrock`](https://central.ballerina.io/ballerinax/ai.aws.bedrock/latest) | AWS credentials or a Bedrock API key | None |
 | **Azure OpenAI** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Yes | None |
 | **Google Vertex** | [`ballerinax/ai.googleapis.vertex`](https://central.ballerina.io/ballerinax/ai.googleapis.vertex/latest) | OAuth2 / service account | `text-embedding-005` |
 | **OpenAI** | [`ballerinax/ai.openai`](https://central.ballerina.io/ballerinax/ai.openai/latest) | Yes | None |
@@ -61,6 +62,59 @@ Routes through the WSO2 intelligence service. The same WSO2 sign-in that unlocks
 />
 
 This provider has no provider-specific fields and no advanced configurations.
+
+## AWS Bedrock
+
+Amazon Bedrock serves Amazon Titan and Cohere embedding models from your own AWS account and region. The package ships one embedding provider per vendor: **Bedrock Titan Embedding Provider** and **Bedrock Cohere Embedding Provider**. In the **Select Embedding Provider** picker, both are grouped under one **Bedrock Embedding Providers** card.
+
+Official website: [aws.amazon.com/bedrock](https://aws.amazon.com/bedrock/).
+
+### Create form
+
+<ThemedImage
+    alt="Create Embedding Provider form for the Bedrock Titan Embedding Provider, headed 'Amazon Titan text embeddings on AWS Bedrock.', showing three required fields: Model (select/expression toggle), Authentication (record/expression toggle, with hint 'AWS credentials or a Bedrock API key; auth:DEFAULT_CREDENTIALS uses the default chain'), and Region (select/expression toggle), then the optional Endpoint Configuration. Below: Advanced Configurations Expand link and Embedding Provider Name bedrockTitanembeddingprovider."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/11-aws-bedrock-titan-basic-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/11-aws-bedrock-titan-basic-v5.1.png'),
+    }}
+/>
+
+Both AWS Bedrock embedding providers have the same create form fields.
+
+| Field | Required | Default | Available values |
+|---|---|---|---|
+| **Model** | Yes | — | **Titan**: `amazon.titan-embed-text-v2:0` (1024 dims, configurable down), `amazon.titan-embed-text-v1` (1536 dims). **Cohere**: `cohere.embed-english-v3` (1024 dims), `cohere.embed-multilingual-v3` (1024 dims), `cohere.embed-v4:0` (1536 dims, configurable down). Any other ID that starts with `amazon.titan-embed` (Titan) or `cohere.embed` (Cohere) is also accepted, including cross-region inference profile IDs such as `us.cohere.embed-v4:0`. Model ARNs are not accepted. |
+| **Authentication** | Yes | — | `auth:DEFAULT_CREDENTIALS`, one of the AWS credential records, or a Bedrock API key. See [AWS authentication options](model-providers.md#aws-credential-options). |
+| **Region** | Yes | — | The AWS region to call, for example `us-east-1`. There is no default. |
+| **Endpoint Configuration** | No | `()` (derived from Region) | `fips`, `dualstack`, `customEndpoint`. Endpoint variant, or a full URL override such as a VPC endpoint. |
+
+`cohere.embed-v4:0` is served in-region only in `us-east-1`, `eu-west-1`, and `ap-northeast-1`. In other regions, use a cross-region inference profile ID instead: `us.cohere.embed-v4:0`, `eu.cohere.embed-v4:0`, or `global.cohere.embed-v4:0`. See the [Embed v4 model card](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-cohere-embed-v4.html).
+
+### Advanced configurations
+
+<ThemedImage
+    alt="Bedrock Cohere Create Embedding Provider form scrolled to Endpoint Configuration, then Advanced Configurations expanded showing Input Type (No Selection, with hint 'Input type for every call. Unset: queries for embed, documents for batchEmbed.'), Truncate, Dimensions (hint '256, 512, 1024 or 1536 (Embed v4 only). Defaults to 1536.'), and Additional Model Request Fields."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/12-aws-bedrock-cohere-advanced-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/components-v5.1/embedding-providers/12-aws-bedrock-cohere-advanced-v5.1.png'),
+    }}
+/>
+
+| Field | Provider | Default | Available values | What it controls |
+|---|---|---|---|---|
+| **Input Type** | Cohere | `()` (set per call) | `SEARCH_DOCUMENT`, `SEARCH_QUERY`, `CLASSIFICATION`, `CLUSTERING` | What the embeddings are for. Cohere requires it on every request. When unset, **Embed** sends `SEARCH_QUERY` and **Batch Embed** sends `SEARCH_DOCUMENT`. When set, every call uses that value. |
+| **Truncate** | Cohere | `()` (model default) | `TRUNCATE_NONE`, `TRUNCATE_START`, `TRUNCATE_END` | How over-long input is handled. `TRUNCATE_NONE` returns an error; the other two drop tokens from the start or the end. |
+| **Dimensions** | Both | `()` (model default) | Titan V2: `256`, `512`, `1024`. Cohere Embed v4: `256`, `512`, `1024`, `1536`. | Output vector size. Must match the dimension of your vector store index. Setting it on Titan V1 or Cohere Embed v3 fails when the provider is created. |
+| **Normalize** | Titan | `()` (`true` on Titan V2) | `true`, `false` | Whether Titan returns a unit-length vector. |
+| **Additional Model Request Fields** | Both | `()` | Open record, for example `{"top_p": 0.9}` | Extra request fields sent to Bedrock unchanged. |
+| **Retry Config** | Both | `maxRetries` 3, `initialDelay` 1.0, `maxDelay` 20.0, `backoffFactor` 2.0 | Record | Backoff for throttling and transient errors (408, 429, 500, 502, 503, 504). |
+| **HTTP Config** | Both | `{}` | Record | The [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations), grouped in one record. There is no **Service URL**; use **Endpoint Configuration**. |
+
+**Cohere's Input Type affects retrieval quality without raising any error.** Cohere recommends `SEARCH_DOCUMENT` for the content you store and `SEARCH_QUERY` for search queries. In a [Vector Knowledge Base](knowledge-bases.md#vector-knowledge-base), leave **Input Type** unset: ingest uses **Batch Embed**, which sends `SEARCH_DOCUMENT`, and retrieve uses **Embed**, which sends `SEARCH_QUERY`. Setting it applies the same value to both.
+
+**Batch Embed** sends up to 96 chunks per request to Cohere. Titan accepts one text per request, so Titan makes one request per chunk. Both return the embeddings in the same order as the input chunks.
+
+Both providers accept text chunks only. Image or audio chunks return an error.
 
 ## Azure OpenAI
 
@@ -238,6 +292,7 @@ OpenRouter's embedding endpoint accepts text-only chunks. Image or audio chunks 
 | Situation | Recommended |
 |---|---|
 | Prototyping, no infra setup | **Default WSO2**: sign in once, no key needed. |
+| Already on AWS | **AWS Bedrock**: IAM credentials, and requests stay in the AWS region you choose, unless you use a cross-region inference profile ID such as `us.cohere.embed-v4:0`. |
 | Already on Azure | **Azure OpenAI**: keep traffic inside your Azure tenant. |
 | Already on Google Cloud | **Vertex**: same auth as the rest of GCP. |
 | Already using OpenAI models | **OpenAI**: use your existing OpenAI API key. |
