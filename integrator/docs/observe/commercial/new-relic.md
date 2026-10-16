@@ -8,7 +8,62 @@ title: New Relic
 troubleshoot their applications, infrastructure, and digital experiences in real-time. Both metrics and tracing of an integration can
 be viewed with New Relic.
 
-The sample shop service will be used in this guide. Follow the steps given below to observe tracing and metrics in New Relic.
+This guide uses the following sample shop service (`main.bal`), which listens on port `8090`. Follow the steps given below to observe tracing and metrics in New Relic.
+
+```ballerina
+import ballerina/http;
+
+type Product record {|
+    int id;
+    string name;
+    decimal price;
+|};
+
+type OrderRequest record {|
+    int productId;
+    int quantity;
+|};
+
+type Order record {|
+    int id;
+    *OrderRequest;
+|};
+
+map products = {
+    "1": {id: 1, name: "Laptop", price: 1200.00},
+    "2": {id: 2, name: "Mouse", price: 25.00},
+    "3": {id: 3, name: "Keyboard", price: 45.00}
+};
+Order[] orders = [];
+
+service /shop on new http:Listener(8090) {
+
+    resource function get products() returns Product[] {
+        return products.toArray();
+    }
+
+    resource function post product(Product product) returns Product {
+        products[product.id.toString()] = product;
+        return product;
+    }
+
+    resource function post 'order(OrderRequest request) returns Order|http:NotFound {
+        if !products.hasKey(request.productId.toString()) {
+            return http:NOT_FOUND;
+        }
+        Order newOrder = {id: orders.length(), ...request};
+        orders.push(newOrder);
+        return newOrder;
+    }
+
+    resource function get 'order/[int id]() returns Order|http:NotFound {
+        if id < 0 || id >= orders.length() {
+            return http:NOT_FOUND;
+        }
+        return orders[id];
+    }
+}
+```
 
 ## Step 1: Create a New Relic Account and API Key
 
@@ -32,7 +87,7 @@ New Relic extension pushes metrics in New Relic metric format to the New Relic s
 
 ## Step 3: Configure Runtime Configurations
 
-Add the below to `Ballerina.toml` file.
+Make sure `observabilityIncluded = true` is set under `[build-options]` in the `Ballerina.toml` file. New projects include it by default. Do not add a second `[build-options]` table.
 
 ```toml
 [build-options]
@@ -99,7 +154,7 @@ Environment variable can be configured for either a single user or multiple user
 | `ballerinax.newrelic.tracingReporterFlushInterval` | The New Relic tracing client will be sending the spans to the agent at this interval. | `15000` | Any positive integer value |
 | `ballerinax.newrelic.tracingReporterBufferSize` | Queue size of the New Relic tracing client. | `10000` | Any positive integer value |
 | `ballerinax.newrelic.metricReporterFlushInterval` | The New Relic client will be sending the metrics to the agent at this interval. | `15000` | Any positive integer value |
-| `ballerinax.newrelic.metricReporterClientTimeout` | Queue size of the New Relic metric client. | `10000` | Any positive integer value |
+| `ballerinax.newrelic.metricReporterClientTimeout` | Timeout of the New Relic metric client, in milliseconds. | `10000` | Any positive integer value |
 
 ## Step 4: Send Requests
 
