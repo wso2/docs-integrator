@@ -17,7 +17,7 @@ Create a bot and get a token by messaging [@BotFather](https://t.me/BotFather) o
 3. In the creation form, fill in the following fields:
 
    <ThemedImage
-       alt="Create Telegram form showing the Listener Name, Port, Bot Token, and Public URL fields"
+       alt="Create Telegram form showing the Listener Name, Port, Access Token, and Callback URL fields"
        sources={{
            light: useBaseUrl('/img/develop/integration-artifacts/event/telegram/step-service-form.png'),
            dark: useBaseUrl('/img/develop/integration-artifacts/event/telegram/step-service-form.png'),
@@ -27,7 +27,7 @@ Create a bot and get a token by messaging [@BotFather](https://t.me/BotFather) o
    | Field | Description | Default |
    |---|---|---|
    | **Listener Name** | Identifier for the listener created with this service. | `telegramListener` |
-   | **Webhook Listener Port** | The port on which the webhook listener accepts incoming HTTP requests. | `8090` |
+   | **Port** | The port on which the webhook listener accepts incoming HTTP requests. | `8090` |
    | **Access Token** | The bot access token issued by @BotFather. Used both to derive the webhook secret token and, together with **Callback URL**, to auto-register the webhook. | Required |
    | **Callback URL** | This listener's public HTTPS URL, used to auto-register the webhook when set. | `()` |
 
@@ -47,11 +47,11 @@ Create a bot and get a token by messaging [@BotFather](https://t.me/BotFather) o
 import ballerinax/telegram;
 import ballerina/log;
 
-configurable string botAccessToken = ?;
+configurable string accessToken = ?;
 configurable string callbackUrl = ?;
 configurable int listenerPort = 8090;
 
-listener telegram:Listener telegramListener = new (listenerPort, accessToken = botAccessToken, callbackUrl = callbackUrl);
+listener telegram:Listener telegramListener = new (listenerPort, accessToken = accessToken, callbackUrl = callbackUrl);
 
 service telegram:TelegramService on telegramListener {
 
@@ -108,7 +108,7 @@ Service configuration maps to the `telegram:ListenerConfig` passed when construc
 ```ballerina
 listener telegram:Listener telegramListener = new (
     listenerPort,
-    accessToken = botAccessToken,
+    accessToken = accessToken,
     callbackUrl = callbackUrl
 );
 
@@ -205,7 +205,7 @@ If a handler declared with a `Caller` never calls `caller->complete()`, the list
 
 ### Handler types
 
-This listener supports nine Telegram update types, one per `TelegramService` handler. All are optional. Implement only the ones your bot needs. Telegram's `allowed_updates` already keeps unsupported update types from reaching your webhook; among the nine supported types, an update whose handler you didn't declare is logged and dropped after reaching the listener.
+This listener supports nine Telegram update types, one per `TelegramService` handler. All are optional. Implement only the ones your bot needs. Telegram's `allowed_updates` already keeps unsupported update types from reaching your webhook; among the nine supported types, an update whose handler you didn't declare is acknowledged and ignored.
 
 | Handler | Triggered when |
 |---|---|

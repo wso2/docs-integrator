@@ -167,7 +167,11 @@ The **ServiceConfig** field accepts a record expression that sets the destinatio
     queueName: "orders",
     ackMode: "CLIENT_ACK"
 }
-service solace:Service on solaceListener { }
+service solace:Service on solaceListener {
+    remote function onMessage(solace:Message message, solace:Caller caller) returns solace:Error? {
+        check caller->ack(message);
+    }
+}
 
 // Topic subscription
 @solace:ServiceConfig {
@@ -175,7 +179,10 @@ service solace:Service on solaceListener { }
     durability: "TEMPORARY",
     ackMode: "AUTO_ACK"
 }
-service solace:Service on solaceListener { }
+service solace:Service on solaceListener {
+    remote function onMessage(solace:Message message) returns solace:Error? {
+    }
+}
 ```
 
 ## Listener configuration
@@ -276,6 +283,8 @@ type TradeMessage record {|
     TradeEvent payload;
 |};
 
+function executeTrade(TradeEvent trade) returns error? {}
+
 @solace:ServiceConfig {
     queueName: "trades",
     ackMode: "CLIENT_ACK"
@@ -299,7 +308,13 @@ service solace:Service on solaceListener {
 **onError handler** — called when message receipt or data binding fails:
 
 ```ballerina
+@solace:ServiceConfig {
+    queueName: "trades"
+}
 service solace:Service on solaceListener {
+
+    remote function onMessage(solace:Message message) returns error? {
+    }
 
     remote function onError(solace:Error err) returns solace:Error? {
         log:printError("Solace error", 'error = err);
@@ -312,7 +327,7 @@ service solace:Service on solaceListener {
 | Handler | Triggered when | Use when |
 |---|---|---|
 | `onMessage` | A new message arrives from the queue or topic | Processing incoming messages |
-| `onError` | A message receipt or data-binding error occurs | Logging failures and triggering alerts |
+| `onError` | Message receipt or data binding fails, or `onMessage` returns an error | Logging failures and triggering alerts |
 
 ## What's next
 

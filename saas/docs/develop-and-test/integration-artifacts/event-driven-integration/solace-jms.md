@@ -87,7 +87,7 @@ Solace (JMS) event integrations consume messages from a Solace PubSub+ queue or 
 import ballerinax/solace.jms;
 import ballerina/log;
 
-configurable string brokerUrl = "smf://localhost:55554";
+configurable string brokerUrl = "smf://localhost:55555";
 configurable string msgVpn = "default";
 configurable string username = "admin";
 configurable string password = "admin";
@@ -136,8 +136,7 @@ The **ServiceConfig** field accepts a record expression that sets the destinatio
 
 | Field | Description | Default |
 |---|---|---|
-| **queueName** | Name of the durable queue to consume from. Required unless **durability** is `TEMPORARY`; not allowed when `TEMPORARY`. | — |
-| **durability** | `DURABLE` for a named, broker-provisioned queue, or `TEMPORARY` for a broker-generated temporary queue. | `DURABLE` |
+| **queueName** | Name of the queue to consume from. | Required |
 | **ackMode** | JMS session acknowledgement mode: `AUTO_ACKNOWLEDGE`, `CLIENT_ACKNOWLEDGE`, `DUPS_OK_ACKNOWLEDGE`, or `SESSION_TRANSACTED`. | `AUTO_ACKNOWLEDGE` |
 | **messageSelector** | JMS SQL-92 message selector expression. | — |
 
@@ -157,7 +156,11 @@ The **ServiceConfig** field accepts a record expression that sets the destinatio
     queueName: "orders",
     ackMode: jms:CLIENT_ACKNOWLEDGE
 }
-service jms:Service on jmsListener { }
+service jms:Service on jmsListener {
+    remote function onMessage(jms:Message message, jms:Caller caller) returns jms:Error? {
+        check caller->ack(message);
+    }
+}
 
 // Topic subscription
 @jms:ServiceConfig {
@@ -165,7 +168,10 @@ service jms:Service on jmsListener { }
     durability: jms:TEMPORARY,
     ackMode: jms:AUTO_ACKNOWLEDGE
 }
-service jms:Service on jmsListener { }
+service jms:Service on jmsListener {
+    remote function onMessage(jms:Message message) returns jms:Error? {
+    }
+}
 ```
 
 ## Listener configuration
@@ -199,7 +205,7 @@ Click **Save Changes** to apply updates.
 
 ```ballerina
 listener jms:Listener jmsListener = check new (
-    "smf://localhost:55554",
+    "smf://localhost:55555",
     messageVpn = "default",
     auth = {
         username: username,
@@ -264,6 +270,8 @@ type TradeMessage record {|
     TradeEvent payload;
 |};
 
+function executeTrade(TradeEvent trade) returns error? {}
+
 @jms:ServiceConfig {
     queueName: "trades",
     ackMode: jms:CLIENT_ACKNOWLEDGE
@@ -287,7 +295,13 @@ service jms:Service on jmsListener {
 **onError handler** — called when message receipt or data binding fails:
 
 ```ballerina
+@jms:ServiceConfig {
+    queueName: "trades"
+}
 service jms:Service on jmsListener {
+
+    remote function onMessage(jms:Message message) returns error? {
+    }
 
     remote function onError(jms:Error err) returns jms:Error? {
         log:printError("Solace JMS error", 'error = err);

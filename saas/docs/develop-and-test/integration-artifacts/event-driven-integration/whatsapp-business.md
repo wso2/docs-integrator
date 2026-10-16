@@ -27,7 +27,7 @@ After starting the integration, configure the webhook in the **Meta App Dashboar
    | Field | Description | Default |
    |---|---|---|
    | **Listener Name** | Identifier for the listener created with this service. | `businessListener` |
-   | **Webhook Listener Port** | The port on which the webhook listener accepts incoming HTTP requests. | `8090` |
+   | **Port** | The port on which the webhook listener accepts incoming HTTP requests. | `8090` |
    | **Verify Token** | The verification token configured in the Meta App dashboard. | Required |
    | **App Secret** | The Meta app secret, used to verify inbound webhook notifications via `X-Hub-Signature-256`. | Required |
 
@@ -45,9 +45,9 @@ configurable string verifyToken = ?;
 configurable string appSecret = ?;
 configurable int listenerPort = 8090;
 
-listener business:Listener whatsappListener = new (listenerPort, verifyToken = verifyToken, appSecret = appSecret);
+listener business:Listener businessListener = new (listenerPort, verifyToken = verifyToken, appSecret = appSecret);
 
-service business:WhatsAppService on whatsappListener {
+service business:WhatsAppService on businessListener {
 
     remote function onMessages(business:MessagesNotification notification) returns error? {
         if notification is business:Messages {
@@ -104,7 +104,7 @@ Click **Attach Listener** to attach an additional listener to the same service.
 
 Click **Save Changes** to apply updates.
 
-Service configuration maps to the `ListenerConfig` passed when constructing the listener. The `@business:ServiceConfig` annotation placed before the `service` declaration sets the acknowledgement mode:
+The listener is constructed with a port number or an existing `http:Listener` (`listenTo`) plus the `business:ListenerConfig` fields. The `@business:ServiceConfig` annotation placed before the `service` declaration sets the acknowledgement mode:
 
 ```ballerina
 listener business:Listener businessListener = new (
@@ -121,10 +121,11 @@ service on businessListener {
 }
 ```
 
-`business:ListenerConfig` fields:
+Listener constructor parameters (`listenTo` followed by the `business:ListenerConfig` fields):
 
 | Field | Type | Default | Description |
 |---|---|---|---|
+| `listenTo` | `int\|http:Listener` | Required | A port number to bind a new `http:Listener` to, or an existing `http:Listener`. Passed as the first positional argument. |
 | `verifyToken` | `string` | Required | The verification token configured in the Meta App dashboard. |
 | `appSecret` | `string` | Required | The Meta app secret, used to verify the `X-Hub-Signature-256` header on inbound webhook notifications. |
 
@@ -210,11 +211,11 @@ service business:WhatsAppService on businessListener {
 }
 ```
 
-If a handler declared with a `Caller` never calls `caller->complete()`, the listener never sends its own `200 OK` for that request, and Meta's own retry behavior treats the resulting failure the same as any other failed delivery. Meta may redeliver a notification if the acknowledgement is slow, dropped, or never sent, under either `autoAck` setting, not just `false`, so make handler processing idempotent, or deduplicate using `InboundMessage.messageId` (`wamid`) for messages, or `MessageStatusUpdate.messageId` plus `status` for status updates.
+With `autoAck: false`, if a handler never calls `caller->complete()`, the listener responds `500 Internal Server Error` for that request, and Meta treats it like any other failed delivery and may retry it. With the default `autoAck: true`, the notification is already acknowledged before the handler runs, so calling `caller->complete()` is a no-op. Meta may redeliver a notification if the acknowledgement is slow, dropped, or never sent, under either `autoAck` setting, not just `false`, so make handler processing idempotent, or deduplicate using `InboundMessage.messageId` (`wamid`) for messages, or `MessageStatusUpdate.messageId` plus `status` for status updates.
 
 ### Handler types
 
-WhatsApp Business Cloud has ten webhook fields, one per `WhatsAppService` handler, plus an eleventh `onError` handler that fires whenever one of the ten returns an error while being dispatched. Declare only the handlers you need. A field whose handler you didn't declare is logged and dropped.
+The listener supports ten WhatsApp Business Cloud webhook fields, one per `WhatsAppService` handler, plus an eleventh `onError` handler that fires whenever one of the ten returns an error while being dispatched. Declare only the handlers you need. Notifications for any other webhook field, or for a field whose handler you didn't declare, are logged and dropped.
 
 | Handler | Webhook field | Triggered when |
 |---|---|---|

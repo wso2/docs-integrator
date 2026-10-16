@@ -38,7 +38,7 @@ Two places, both equivalent:
 Either one opens the **Select Knowledge Base** picker, listing all supported types with a search bar at the top:
 
 <ThemedImage
-    alt="Select Knowledge Base picker with a search bar and three cards: Vector Knowledge Base described as managing chunk indexing and retrieval, Azure AI Search Knowledge Base described as the Azure Search Knowledge Base implementation, and WSO2 Cloud Knowledge Base described as a WSO2 Cloud knowledge base for retrieval."
+    alt="Select Knowledge Base picker with a search bar and four cards: Vector Knowledge Base, WSO2 Cloud Knowledge Base, the Bedrock Knowledge Bases group (2 options, available in ballerinax/ai.aws.bedrock) expanded to show Bedrock Managed Knowledge Base and Bedrock Self-Managed Knowledge Base, and Azure AI Search Knowledge Base."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/02-select-list-v5.1.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/02-select-list-v5.1.png'),
@@ -50,6 +50,7 @@ Either one opens the **Select Knowledge Base** picker, listing all supported typ
 | Knowledge Base | Module | Storage |
 |---|---|---|
 | **Vector Knowledge Base** | `ballerina/ai` | Any [Vector Store](vector-stores.md) |
+| **AWS Bedrock** (Managed and Self-Managed) | [`ballerinax/ai.aws.bedrock`](https://central.ballerina.io/ballerinax/ai.aws.bedrock/latest) | An Amazon Bedrock knowledge base |
 | **Azure AI Search Knowledge Base** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Azure AI Search index |
 | **WSO2 Cloud Knowledge Base** | [`ballerinax/ai.wso2.integration`](https://central.ballerina.io/ballerinax/ai.wso2.integration/latest) | Knowledge base service in WSO2 Cloud |
 
@@ -76,6 +77,112 @@ The default implementation. You combine a Vector Store, an Embedding Provider, a
 | **Chunker** | No | `ai:AUTO` | `ai:AUTO` (chunker chosen automatically based on document type), `ai:DISABLE` (no chunking; each document becomes one chunk), or any saved [Chunker](chunkers.md) connection. |
 
 There are no Advanced Configurations on the Vector Knowledge Base itself. Every knob lives on the underlying Vector Store, Embedding Provider, or Chunker connection.
+
+---
+
+## AWS Bedrock
+
+An Amazon Bedrock knowledge base stores, chunks, embeds, and searches your documents inside your own AWS account and region. The package ships two knowledge bases, one for each kind of Bedrock knowledge base:
+
+| Knowledge base | Vector store | When to use |
+|---|---|---|
+| **Bedrock Managed Knowledge Base** | Run by Bedrock. Nothing to provision. Search is always hybrid (keyword and semantic). | You don't want to run a vector store. |
+| **Bedrock Self-Managed Knowledge Base** | Your own, already provisioned: Amazon OpenSearch Serverless, Amazon OpenSearch Service managed cluster, Amazon S3 Vectors, Amazon Aurora PostgreSQL, Amazon Neptune Analytics, Pinecone, Redis Enterprise Cloud, or MongoDB Atlas. | You already run one of these stores, or you need control over indexing and ranking. |
+
+In the **Select Knowledge Base** picker, both are grouped under one **Bedrock Knowledge Bases** card.
+
+Official website: [Amazon Bedrock Knowledge Bases](https://aws.amazon.com/bedrock/knowledge-bases/).
+
+> Unlike the [Vector Knowledge Base](#vector-knowledge-base) above, neither Bedrock knowledge base takes a Vector Store or Embedding Model connection: Bedrock embeds the documents and talks to the vector store itself.
+
+Both knowledge bases work in one of two ways:
+
+- **Attach by ID.** Pass the ID of a knowledge base you already set up in AWS, for example `KB12345678`. **Retrieve** searches every data source on it, including content that AWS connectors such as Amazon S3, SharePoint, or Confluence sync in. **Ingest** and **Delete By Filter** also need the knowledge base to have a **Custom** data source; creating the connection fails, with a message saying why, if it has none.
+- **Find or create by name.** Pass a definition record. If a knowledge base with that name exists, the connection attaches to it, after checking that its role, embedding model, and storage match the definition. If none exists, the connection creates the knowledge base and a Custom data source. If more than one has that name, creating the connection fails and lists their IDs.
+
+Find or create is meant for a single instance, a local run, or a first-time setup. If two instances of your integration start at the same moment, both can create a knowledge base with the same name, and every later start then fails until you delete one. For a deployment with replicas or restarts, create the knowledge base once and pass its **ID**.
+
+### Create form
+
+<ThemedImage
+    alt="Create form for the Bedrock Managed Knowledge Base, titled 'ai.aws.bedrock : Knowledge Base', showing Knowledge Base (required, hint 'An existing knowledge base ID, or a definition to find or create by name'), Authentication and Region (required), then Data Source ID (default ()), Chunker (default ai:AUTO, with + Create New Chunker), and Reranking Model (hint: Bedrock's managed reranking when unset; RERANKING_NONE turns it off)."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/13-aws-bedrock-basic-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/13-aws-bedrock-basic-v5.1.png'),
+    }}
+/>
+
+Both AWS Bedrock knowledge bases have the same create form fields, except reranking: **Reranking Model** on the Managed form, **Reranking** on the Self-Managed form.
+
+| Field | Required | Default | Available values |
+|---|---|---|---|
+| **Knowledge Base** | Yes | — | A knowledge base ID (10 characters, for example `KB12345678`; an ARN is not accepted), or a definition record to find or create by name: `ManagedKnowledgeBaseDefinition` (Managed) or `SelfManagedKnowledgeBaseDefinition` (Self-Managed). See [Definition records](#bedrock-definition-records). The knowledge base must be `ACTIVE`, and of the matching kind: a Managed connection can't attach to a self-managed knowledge base, or the other way round. |
+| **Authentication** | Yes | — | `auth:DEFAULT_CREDENTIALS`, or one of the records in [AWS authentication options](model-providers.md#aws-credential-options) **except Bedrock API key**. |
+| **Region** | Yes | — | The AWS region the knowledge base is in, for example `us-east-1`. There is no default. |
+| **Data Source ID** | No | `()` (detected) | The ID of the Custom data source that **Ingest** writes to and **Delete By Filter** deletes from. Leave empty when the knowledge base has exactly one Custom data source. Leave it empty also when a definition creates a new knowledge base; the new one gets its data source from the definition. |
+| **Chunker** | No | `()` (detected) | `ai:AUTO`, `ai:DISABLE`, or any saved [Chunker](chunkers.md) connection. Client-side chunking before **Ingest**. Leave empty to follow the data source: `ai:DISABLE` when Bedrock chunks the documents, `ai:AUTO` when the data source's chunking strategy is `NONE`. Setting a chunker when Bedrock chunks the documents fails, because Bedrock would split them again. |
+| **Reranking Model** (Managed only) | No | `()` (Bedrock default: managed reranking) | `RERANKING_NONE`, `RERANKING_MANAGED`. Whether Bedrock reranks the results with its managed reranker. Managed reranking is not available on a knowledge base created with your own embedding model. |
+| **Reranking** (Self-Managed only) | No | `()` (no reranking) | `modelArn`, optional `numberOfRerankedResults`. Reranks the results with a Bedrock reranker model. `numberOfRerankedResults` can't be higher than **Number Of Results**; creating the connection fails if it is. |
+| **Endpoint Configuration** | No | `()` (derived from Region) | `fips` (AWS offers FIPS endpoints for knowledge bases only in `us-east-1` and `us-west-2`), `customEndpoint`. A `customEndpoint` is used for both Bedrock knowledge base endpoints, so it suits a mock or a single gateway. For a VPC endpoint, enable private DNS and leave this empty. `dualstack` is not supported. |
+| **Ingest Timeout** | No | `300` | Seconds. How long **Ingest** waits for the documents to be indexed. |
+
+**Knowledge bases don't accept Bedrock API keys.** AWS doesn't allow API keys on the Agents for Amazon Bedrock APIs that knowledge bases use, so the **Authentication** field has no API key option. See [Use an Amazon Bedrock API key](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys-use.html).
+
+The identity needs `bedrock:Retrieve` for **Retrieve**, and the [direct ingestion permissions](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-direct-ingestion-prereq.html) for **Ingest** and **Delete By Filter**. Without them, these actions fail with `AccessDenied`.
+
+### Advanced configurations
+
+<ThemedImage
+    alt="Create form for the Bedrock Self-Managed Knowledge Base scrolled to Endpoint Configuration and Ingest Timeout (default 300), then Advanced Configurations expanded showing Number Of Results (hint 'Upper limit on results per retrieval (1-100)'), Override Search Type (No Selection), HTTP Config, and Retry Config."
+    sources={{
+        light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/14-aws-bedrock-self-managed-advanced-v5.1.png'),
+        dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/14-aws-bedrock-self-managed-advanced-v5.1.png'),
+    }}
+/>
+
+| Field | Knowledge base | Default | Available values | What it controls |
+|---|---|---|---|---|
+| **Number Of Results** | Both | `()` (follows **Top K**, up to `100`) | `1` to `100` | The most results Bedrock returns per search request. Bedrock can return fewer. **Top K** on the **Retrieve** action still limits the total. |
+| **Override Search Type** | Self-Managed | `()` (Bedrock chooses) | `SEARCH_SEMANTIC`, `SEARCH_HYBRID` | Vector-only or hybrid (vector and keyword) search. Hybrid search needs a store with a filterable text field. The AWS API reference lists only OpenSearch Serverless; the AWS user guide also lists Aurora PostgreSQL and MongoDB Atlas. Leave empty unless your store supports it. |
+| **Retry Config** | Both | `maxRetries` 3, `initialDelay` 1.0, `maxDelay` 20.0, `backoffFactor` 2.0 | Record | Backoff for throttling and transient errors (408, 429, 500, 502, 503, 504). |
+| **HTTP Config** | Both | `()` | Record | The [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations), grouped in one record. There is no **Service URL**; use **Endpoint Configuration**. |
+
+### Definition records {#bedrock-definition-records}
+
+Use a definition record in **Knowledge Base** to find or create a knowledge base by name.
+
+**`ManagedKnowledgeBaseDefinition`** (Bedrock Managed Knowledge Base):
+
+| Field | Required | Default | What it controls |
+|---|---|---|---|
+| `name` | Yes | — | Knowledge base name, and the lookup key. Letters and digits, optionally separated by single `_` or `-` characters. |
+| `serviceRoleArn` | Yes | — | ARN of the IAM role Bedrock uses to manage the knowledge base. |
+| `description` | No | `()` | Description. |
+| `dataSource` | No | `{name: "ballerina-custom-source"}` | The Custom data source created with the knowledge base: `name`, optional `description`. |
+| `embeddingModel` | No | `()` (Bedrock's own model) | Your own embedding model, as `embeddingModelArn`. The connection always sets 1024 dimensions and `FLOAT32`, which AWS requires for a managed knowledge base. Supported models: Amazon Titan Text Embeddings V2, Cohere Embed English v3, Cohere Embed Multilingual v3, Cohere Embed v4, and Amazon Nova Multimodal Embeddings. This can't be changed later, and rules out `RERANKING_MANAGED`. |
+| `kmsKeyArn` | No | `()` (AWS managed key) | A customer-managed KMS key for the stored data. |
+| `readyTimeout` | No | `300` | Seconds to wait for a new knowledge base and data source to become ready. |
+
+**`SelfManagedKnowledgeBaseDefinition`** (Bedrock Self-Managed Knowledge Base):
+
+| Field | Required | Default | What it controls |
+|---|---|---|---|
+| `name` | Yes | — | Knowledge base name, and the lookup key. Letters and digits, optionally separated by single `_` or `-` characters. |
+| `serviceRoleArn` | Yes | — | ARN of the IAM role Bedrock uses to manage the knowledge base. It also needs access to your vector store. See [Knowledge base permissions](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-permissions.html). |
+| `description` | No | `()` | Description. |
+| `embeddingModelArn` | Yes | — | ARN of the Bedrock embedding model, for example `arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-embed-text-v2:0`. |
+| `embeddingModel` | No | `()` (model defaults) | `dimensions` and `embeddingDataType` (`EMBEDDING_FLOAT32`, or `EMBEDDING_BINARY` on OpenSearch only). `dimensions` must match your vector index. |
+| `storageConfiguration` | Yes | — | Your vector store, as one of `OpenSearchServerlessStorage`, `OpenSearchManagedClusterStorage`, `S3VectorsStorage`, `RdsStorage`, `NeptuneAnalyticsStorage`, `PineconeStorage`, `RedisEnterpriseCloudStorage`, or `MongoDbAtlasStorage`. The store must already exist. |
+| `dataSource` | No | `{name: "ballerina-custom-source"}` | The Custom data source: `name`, optional `description`, `chunkingStrategy` (`FIXED_SIZE` or `NONE`), and for `FIXED_SIZE`, `maxTokens` (`300`) and `overlapPercentage` (`20`). Set `NONE` to chunk with a **Chunker** instead. The strategy can't be changed later. |
+| `readyTimeout` | No | `300` | Seconds to wait for a new knowledge base and data source to become ready. |
+
+**The vector store must already exist.** AWS can create a vector store for you only from the console, not through the API. Create it with the console, Terraform, or AWS CDK first, then reference it in `storageConfiguration`.
+
+### Action behavior
+
+- **Ingest** waits until every document is indexed, or until **Ingest Timeout** passes, so a **Retrieve** right after it finds the documents. It accepts text only. A document with an `id` in its metadata replaces the earlier document with the same `id`. When the connection splits a document into several chunks, the chunks get the IDs `<id>#0`, `<id>#1`, and so on.
+- **Retrieve** filter support depends on the vector store. AWS notes that `in` and `nin` filters are best supported on OpenSearch Serverless and Neptune Analytics, and that MongoDB Atlas needs filters configured in its vector index before filtering works. See [Manual metadata filtering](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-filters).
+- **Delete By Filter** needs at least one filter condition, so it can't delete everything by accident. It deletes only from the connection's own Custom data source (the one **Ingest** writes to); content in other data sources is left alone. It searches that data source to find the matching documents, so use it for cleanup rather than on every request. If some documents can't be deleted or confirmed, it still deletes the rest and returns an error that names them. Running it again usually deletes the rest.
 
 ---
 
@@ -226,6 +333,7 @@ Expanding **Advanced Configurations** shows **Pool Configuration**, **Circuit Br
 | Situation | Recommended |
 |---|---|
 | Most projects, especially new ones | **Vector Knowledge Base** with In-Memory (dev) or Pinecone / Pgvector / Weaviate / Milvus (prod). |
+| Already on AWS, or want AWS to handle chunking and embedding | **AWS Bedrock**: Managed if you don't want to run a vector store, Self-Managed if you already run one. |
 | Knowledge base provisioned and managed in WSO2 Cloud | **WSO2 Cloud Knowledge Base**. |
 | Already running Azure AI Search; need keyword + vector + semantic ranker | **Azure AI Search Knowledge Base**. |
 | Need a custom retrieval source (search engine, graph DB, hand-rolled) | Implement the `ai:KnowledgeBase` contract yourself; the rest of the integration won't change. |

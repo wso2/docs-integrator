@@ -23,7 +23,7 @@ The `bal graphql` tool generates Ballerina service skeletons and client code fro
 4. Browse or enter the path to your GraphQL SDL file.
 5. Configure the **Service Base Path** and listener settings.
 6. Click **Create**.
-7. WSO2 Integrator generates the service with resolver stubs and record types matching your GraphQL schema.
+7. WSO2 Integrator generates the service with resolver stubs and types matching your GraphQL schema.
 
 ### Basic service generation
 
@@ -33,7 +33,28 @@ bal graphql -i schema.graphql --mode service
 
 # Specify output directory
 bal graphql -i schema.graphql --mode service -o generated/
+
+# Generate record types instead of service classes for object types where possible
+bal graphql -i schema.graphql --mode service --use-records-for-objects
 ```
+
+### Command usage for service generation
+
+```bash
+ bal graphql [-i | --input] <graphql-schema-file-path>
+              [-o | --output] <output-location>
+              [-m | --mode] service
+              [-r | --use-records-for-objects]
+```
+
+### Command options for service generation
+
+| Command option      | Description | Mandatory/Optional |
+|----------------|-------------|--------------------|
+| `-i, --input`     | The `input` command option specifies the path of the GraphQL schema file (for example, `schema.graphql`). | Mandatory          |
+| `-o, --output`   | The `output` command option specifies the output location of the generated files. If this command option is not specified, the Ballerina files will be generated at the same location in which the `bal graphql` command is executed. | Optional           |
+| `-m, --mode`   | The `mode` parameter specifies the operation mode. It indicates the way to process the schema file. If the `mode` flag is not specified, the `graphql` tool will infer the mode from the `input` file extension. The mode should be `service` for the service generation. | Optional           |
+| `-r, --use-records-for-objects`   | The `use-records-for-objects` flag generates record types instead of service classes for GraphQL object types where possible. This flag can only be used with the `service` mode. | Optional           |
 
 ### Example schema
 
@@ -42,7 +63,7 @@ Given the following `schema.graphql`:
 ```graphql
 type Query {
     customer(id: ID!): Customer
-    orders(customerId: ID!, limit: Int = 10): [Order!]!
+    orders(customerId: ID!, first: Int = 10): [Order!]!
 }
 
 type Mutation {
@@ -92,76 +113,103 @@ enum OrderStatus {
 
 ### Generated service code
 
-The tool generates a Ballerina service with resolver stubs:
+The tool generates two files: `types.bal` and `service.bal`.
+
+`types.bal` contains a service object type named after the schema file, and the types used in the schema. By default, GraphQL object types are generated as service classes:
 
 ```ballerina
 import ballerina/graphql;
 
-service /graphql on new graphql:Listener(9090) {
+type schema service object {
+    *graphql:Service;
+    resource function get customer(@graphql:ID string id) returns Customer?;
+    resource function get orders(@graphql:ID string customerId, int? first = 10) returns Order[];
+    remote function createOrder(OrderInput input) returns Order;
+    remote function updateOrderStatus(@graphql:ID string orderId, OrderStatus status) returns Order;
+};
 
-    // Query resolvers
-    resource function get customer(string id) returns Customer?|error {
-        // TODO: Implement resolver
-    }
-
-    resource function get orders(string customerId, int 'limit = 10)
-            returns Order[]|error {
-        // TODO: Implement resolver
-    }
-
-    // Mutation resolvers
-    remote function createOrder(OrderInput input) returns Order|error {
-        // TODO: Implement resolver
-    }
-
-    remote function updateOrderStatus(string orderId, OrderStatus status)
-            returns Order|error {
-        // TODO: Implement resolver
-    }
-}
-```
-
-And corresponding record types:
-
-```ballerina
-// Auto-generated from GraphQL schema
-type Customer record {|
-    string id;
-    string name;
-    string email;
-    Order[] orders;
-|};
-
-type Order record {|
-    string id;
-    string customerId;
-    LineItem[] items;
-    float total;
-    OrderStatus status;
-|};
-
-type LineItem record {|
-    string productId;
-    int quantity;
-    float unitPrice;
-|};
-
-type OrderInput record {|
+public type OrderInput record {|
+    @graphql:ID
     string customerId;
     LineItemInput[] items;
 |};
 
-type LineItemInput record {|
+public type LineItemInput record {|
+    @graphql:ID
     string productId;
     int quantity;
 |};
 
-enum OrderStatus {
+public enum OrderStatus {
     PENDING,
     CONFIRMED,
     SHIPPED,
     DELIVERED,
     CANCELLED
+}
+
+public distinct service class Customer {
+    resource function get id() returns @graphql:ID string {
+    }
+
+    resource function get name() returns string {
+    }
+
+    resource function get email() returns string {
+    }
+
+    resource function get orders() returns Order[] {
+    }
+}
+
+public distinct service class Order {
+    resource function get id() returns @graphql:ID string {
+    }
+
+    resource function get customerId() returns @graphql:ID string {
+    }
+
+    resource function get items() returns LineItem[] {
+    }
+
+    resource function get total() returns float {
+    }
+
+    resource function get status() returns OrderStatus {
+    }
+}
+
+public distinct service class LineItem {
+    resource function get productId() returns @graphql:ID string {
+    }
+
+    resource function get quantity() returns int {
+    }
+
+    resource function get unitPrice() returns float {
+    }
+}
+```
+
+`service.bal` contains the service that implements the service object type, with a resolver stub for each `Query` and `Mutation` field:
+
+```ballerina
+import ballerina/graphql;
+
+configurable int port = 9090;
+
+service schema on new graphql:Listener(port) {
+    resource function get customer(@graphql:ID string id) returns Customer? {
+    }
+
+    resource function get orders(@graphql:ID string customerId, int? first = 10) returns Order[] {
+    }
+
+    remote function createOrder(OrderInput input) returns Order {
+    }
+
+    remote function updateOrderStatus(@graphql:ID string orderId, OrderStatus status) returns Order {
+    }
 }
 ```
 
@@ -211,8 +259,8 @@ Client generation from GraphQL schemas is currently supported only through the B
      }
  }
 
- query GetOrders($customerId: ID!, $limit: Int) {
-     orders(customerId: $customerId, limit: $limit) {
+ query GetOrders($customerId: ID!, $first: Int) {
+     orders(customerId: $customerId, first: $first) {
          id
          total
          status
