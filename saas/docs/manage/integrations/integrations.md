@@ -1,8 +1,8 @@
 ---
-title: Manage Integrations
+title: Integration Management
 ---
 
-# Manage Integrations
+# Integration Management
 
 After pushing your integrations to WSO2 Cloud - Integration Platform, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on WSO2 Cloud yet, see the [Deploy](../../deploy-and-run/deploy-and-run.md) section.
 
@@ -102,5 +102,5 @@ The integration is permanently deleted.
 ## What's next
 
 - [API Management](api-management/api-management.md) — Publish, secure, rate-limit, and govern integrations exposed as APIs.
-- [Manage Configurations](../configurations/configurations.md) — Configure integration settings, runtime configurations, build configurations, and scaling options.
+- [Configuration Management](../configurations/configurations.md) — Configure integration settings, runtime configurations, build configurations, and scaling options.
 - [Manage Projects](../projects.md) — Create, edit, and remove projects in your organization.

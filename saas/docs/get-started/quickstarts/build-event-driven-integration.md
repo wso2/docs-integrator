@@ -10,7 +10,7 @@ Event integrations are designed for reactive workflows triggered by messages fro
 
 :::info Prerequisites
 
-- A working WSO2 Integrator environment. See [Cloud setup](../../get-started/cloud-setup.md).
+- A working WSO2 Integrator environment. See [Cloud setup](../../get-started/setup/setup.md).
 - A running RabbitMQ instance (or use Docker: `docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:4.2-management`)
 
 ## Step 1: Create the integration

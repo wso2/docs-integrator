@@ -1,8 +1,8 @@
 ---
-title: Manage Environments
+title: Environment Management
 ---
 
-# Manage Environments
+# Environment Management
 
 The WSO2 Integration Platform runs integrations in isolated environments within a data plane. Environments let you develop and test integrations safely before exposing them to production.
 

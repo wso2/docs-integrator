@@ -65,7 +65,7 @@ Managed backing services and resources your integrations can use.
     <li>Use them from your integrations</li>
   </ul>
 
-<PaletteCard icon="rag" href="/manage/rag-ingestion">
+<PaletteCard icon="rag" href="/manage/rag-ingestion/vector-databases">
   <h3 class="palette-card-title">RAG Ingestion</h3>
   <ul class="palette-card-list">
     <li>Load documents into managed vector databases</li>
@@ -85,14 +85,14 @@ Managed backing services and resources your integrations can use.
 
 Organization-level governance, separate from day-to-day integration work.
 
-<PaletteCard icon="billing" href="/manage/billing">
+<PaletteCard icon="billing" href="/manage/billing/pricing-and-plans">
   <h3 class="palette-card-title">Billing</h3>
   <ul class="palette-card-list">
     <li>Analyze usage across your organization</li>
     <li>Pricing and plans for platform services</li>
   </ul>
 
-<PaletteCard icon="audit" href="/manage/audit">
+<PaletteCard icon="audit" href="/manage/audit/audit-logs">
   <h3 class="palette-card-title">Audit</h3>
   <ul class="palette-card-list">
     <li>Organization-level audit logs</li>

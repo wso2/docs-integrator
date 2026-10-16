@@ -7,7 +7,7 @@ title: Runtime Security
 Securing an integration on WSO2 Cloud involves managing keystores and certificates and applying network-level controls at the application level. WSO2 Cloud manages the underlying runtime and JVM for you.
 
 :::info Prerequisites
-- WSO2 Integrator set up and a working integration ([Cloud setup](../../get-started/cloud-setup.md))
+- WSO2 Integrator set up and a working integration ([Cloud setup](../../get-started/setup/setup.md))
 
 ## Keystores and Truststores
 

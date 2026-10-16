@@ -63,7 +63,7 @@ This page defines the vocabulary used across WSO2 Integration Platform, grouped 
 
 ## What's next
 
-- [Cloud setup](../cloud-setup.md): sign up for WSO2 Cloud and create your first project
+- [Cloud setup](../setup/setup.md): sign up for WSO2 Cloud and create your first project
 - [Build an automation](../quickstarts/build-automation.md): schedule tasks and run background jobs
 - [Build an Integration as API](../quickstarts/build-integration-api.md): expose an HTTP service and handle requests
 - [Deploy](../../deploy-and-run/deploy-and-run.md): deployment targets, CI/CD, and security

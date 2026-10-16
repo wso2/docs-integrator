@@ -10,7 +10,7 @@ An automation runs your integration logic without an external request, on demand
 
 :::info Prerequisites
 
-A working WSO2 Integrator environment. See [Cloud setup](../../get-started/cloud-setup.md) to sign up and launch WSO2 Integrator in the browser-based cloud editor.
+A working WSO2 Integrator environment. See [Cloud setup](../../get-started/setup/setup.md) to sign up and launch WSO2 Integrator in the browser-based cloud editor.
 
 ## Step 1: Create the integration
 

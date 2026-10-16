@@ -1,8 +1,8 @@
 ---
-title: Manage Access
+title: Users, Roles, and Access
 ---
 
-# Manage Access
+# Users, Roles, and Access
 
 WSO2 Cloud - Integration Platform gives you centralized control over who can access your organization and projects, what actions they can perform, and how they authenticate. You can define granular permissions using roles and groups, enforce organization-wide policies, and connect your existing enterprise identity provider so users sign in with familiar credentials.
 

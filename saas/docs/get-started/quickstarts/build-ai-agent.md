@@ -10,7 +10,7 @@ An AI agent uses an LLM to reason about user queries and call tools to retrieve 
 
 :::info Prerequisites
 
-A working WSO2 Integrator environment. See [Cloud setup](../../get-started/cloud-setup.md) to sign up and launch WSO2 Integrator in the browser-based cloud editor.
+A working WSO2 Integrator environment. See [Cloud setup](../../get-started/setup/setup.md) to sign up and launch WSO2 Integrator in the browser-based cloud editor.
 
 ## Architecture
 

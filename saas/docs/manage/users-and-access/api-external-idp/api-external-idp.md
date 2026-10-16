@@ -1,8 +1,8 @@
 ---
-title: Access Integration as APIs with External IdP
+title: External Identity Providers
 ---
 
-# Access Integration as APIs with External IdP
+# External Identity Providers
 
 WSO2 Cloud - Integration Platform lets you connect an external identity provider (IdP) so that API consumers can use tokens issued by their own identity system to access integrations secured with OAuth2.
 

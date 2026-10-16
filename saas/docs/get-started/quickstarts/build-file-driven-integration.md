@@ -10,7 +10,7 @@ File integrations are ideal for batch uploads, scheduled file processing, and ET
 
 :::info Prerequisites
 
-- A working WSO2 Integrator environment. See [Cloud setup](../../get-started/cloud-setup.md).
+- A working WSO2 Integrator environment. See [Cloud setup](../../get-started/setup/setup.md).
 - A file at the listener path to watch. Create one if you don't have one:
 
 
