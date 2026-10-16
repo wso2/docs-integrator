@@ -63,4 +63,4 @@ The Explorer may show **No Schema Available** if schema introspection is disable
 
 - [Test HTTP service](try-it-http.md) — request builder for REST endpoints
 - [Test Chat agent](try-it-chat.md) — conversational testing for AI agents
-- [Test Explorer](../test-explorer/test-explorer.md) — create and run automated test cases from the IDE
+- [Test Explorer](../test-explorer/test-explorer.md) — create and run automated test cases from the editor

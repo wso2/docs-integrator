@@ -61,6 +61,6 @@ Copilot runs the service in the background as part of the test. To stop the runn
 ## What's next
 
 - [Test GraphQL service](try-it-graphql.md) — built-in GraphiQL editor for testing GraphQL operations
-- [Test Explorer](../test-explorer/test-explorer.md) — create and run automated test cases from the IDE
+- [Test Explorer](../test-explorer/test-explorer.md) — create and run automated test cases from the editor
 - [Write unit tests](../test-explorer/unit-testing.md) — automated tests with assertions for repeatable verification
 - [Execute tests](../test-explorer/execute-tests.md) — CLI options for filtering and running tests

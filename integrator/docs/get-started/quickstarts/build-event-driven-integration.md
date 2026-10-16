@@ -37,9 +37,9 @@ If you're using the cloud editor, a project is already open, so you can skip thi
       }}
    />
 
-3. Set **Project Name** to `event-integration`.
+3. Set **Project name** to `event-integration`.
 
-4. Set **Integration Name** to `OrderProcessor`.
+4. Set **Integration name** to `OrderProcessor`.
 
 5. Click **Create**.
 
@@ -55,7 +55,7 @@ If you're using the cloud editor, a project is already open, so you can skip thi
 
 1. Select your integration from the project overview canvas.
 
-2. In the design view, click **Add Artifact Manually**.
+2. In the design view, click **Add Artifact manually**.
 
    <ThemedImage
       alt="Integration design view with the Add Artifact manually button highlighted"
@@ -93,7 +93,7 @@ If you're using the cloud editor, a project is already open, so you can skip thi
 
 1. In the RabbitMQ service design view, click **+ Add Handler**.
 
-2. Select **onMessage**.
+2. Set **Format** to **On Message**.
 
 3. Click **Save**.
 
@@ -107,7 +107,7 @@ If you're using the cloud editor, a project is already open, so you can skip thi
 
 ## Step 4: Add message processing logic
 
-1. Click **+** inside the resource flow.
+1. Click **+** inside the `onMessage` flow.
 
 2. Select **Call Function** under **Statement**.
 
@@ -148,11 +148,11 @@ If you're using the cloud editor, a project is already open, so you can skip thi
 2. The integration starts and listens for messages on the `Orders` queue.
 
 3. Open the RabbitMQ Management UI at `http://localhost:15672` (default credentials: guest/guest).
-   - Go to **Queues → Orders → Publish message**, enter any text as the payload, and click **Publish message**.
+   - Go to **Queues and Streams → Orders → Publish message**, enter any text as the payload, and click **Publish message**.
    - Confirm the integration log displays `Received order`.
 
    <ThemedImage
-      alt="Run and Test the Integration"
+      alt="Running the integration and the Received order log in the terminal"
       sources={{
          light: useBaseUrl('/img/get-started/build-event-driven-integration/run-and-test-the-integration.gif'),
          dark: useBaseUrl('/img/get-started/build-event-driven-integration/run-and-test-the-integration.gif'),
@@ -188,6 +188,8 @@ service "Orders" on rabbitmqListener {
 
 ## Step 6: Deploy to WSO2 Cloud
 
+Before you deploy, set **Host** and **Port** to a RabbitMQ broker that WSO2 Cloud can reach; `localhost` doesn't resolve to your local broker there.
+
 Deploy your integration to WSO2 Cloud - Integration Platform in any of the following ways:
 
 - If you're using the cloud editor, see [Save and deploy](../../deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor.md#save-and-deploy).
@@ -210,10 +212,10 @@ Deploy your integration to WSO2 Cloud - Integration Platform in any of the follo
 |---|---|
 | **Apache Kafka** | `ballerinax/kafka` |
 | **RabbitMQ** | `ballerinax/rabbitmq` |
-| **MQTT** | `ballerinax/mqtt` |
-| **Azure Service Bus** | `ballerinax/azure.servicebus` |
+| **MQTT** | `ballerina/mqtt` |
+| **Azure Service Bus** | `ballerinax/asb` |
 | **Salesforce** | `ballerinax/salesforce` |
-| **GitHub Webhooks** | `ballerinax/github` |
+| **GitHub Webhooks** | `ballerinax/trigger.github` |
 
 ## What's next
 

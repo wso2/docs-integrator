@@ -21,8 +21,8 @@ WSO2 Integrator Copilot is integrated into the WSO2 Integrator developer experie
 />
 
 - **WSO2 Integrator Copilot**: Provides in-editor assistance such as code completion, explanations, and suggestions.
-- **Language Server**: Powers intelligent features inside the IDE, including syntax awareness and integration with Copilot services.
-- **WSO2 Intelligence endpoint**: A lightweight intermediary service that connects the IDE to Anthropic or Amazon Bedrock models. This service does not retain data.
+- **Language Server**: Powers intelligent features inside the editor, including syntax awareness and integration with Copilot services.
+- **WSO2 Intelligence endpoint**: A lightweight intermediary service that connects the editor to Anthropic or Amazon Bedrock models. This service does not retain data.
 - **Anthropic or Amazon Bedrock integration**: The endpoint forwards user prompts and context to the selected large language model (LLM) provider for processing.
 
 ## Authentication

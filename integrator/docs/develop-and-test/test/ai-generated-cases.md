@@ -73,4 +73,4 @@ Generated tests reflect what Copilot inferred from your code. Always check that:
 - [Write unit tests](test-explorer/unit-testing.md) — test function structure, assertions, and `@test:Config` reference
 - [Mocking](test-explorer/mocking.md) — review and adjust the mock stubs Copilot generates
 - [Code coverage and reports](test-explorer/code-coverage-and-reports.md) — measure how much of your code the generated tests exercise
-- [Test Explorer](test-explorer/test-explorer.md) — run and review test results from the IDE
+- [Test Explorer](test-explorer/test-explorer.md) — run and review test results from the editor

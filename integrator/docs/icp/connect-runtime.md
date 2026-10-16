@@ -6,7 +6,7 @@ title: Connect an Integration to ICP
 
 An integration connects to ICP by including the `wso2/icp.runtime.bridge` module and providing a `Config.toml` with a secret generated from the ICP console. Once configured, the bridge sends periodic heartbeats so ICP can monitor and manage the runtime. This page guides you through generating a secret, configuring the integration, and starting the runtime.
 
-This guide covers manual configuration. If you are developing in the WSO2 Integrator IDE, the setup is automated. See [Integration Control Plane (ICP)](index.md).
+This guide covers manual configuration. If you are developing in the WSO2 Integrator, the setup is automated. See [Integration Control Plane (ICP)](index.md).
 
 :::info Prerequisites
 
@@ -97,7 +97,7 @@ import wso2/icp.runtime.bridge as _;
 
 This is a blank import (`as _`). It registers the bridge module, which activates automatically at startup.
 
-When you enable ICP monitoring through the WSO2 Integrator IDE, the `Ballerina.toml` and `main.bal` changes are applied automatically.
+When you enable ICP monitoring through the WSO2 Integrator, the `Ballerina.toml` and `main.bal` changes are applied automatically.
 
 ## 3. Start the application
 
@@ -107,7 +107,7 @@ Open a terminal in your integration directory and run:
 bal run
 ```
 
-Click the **Run** button in the WSO2 Integrator IDE. Because ICP is already running externally, a popup appears saying **ICP is not running**. Click **Run Anyway** to proceed.
+Click the **Run** button in the WSO2 Integrator. Because ICP is already running externally, a popup appears saying **ICP is not running**. Click **Run Anyway** to proceed.
 
 On startup the bridge logs:
 

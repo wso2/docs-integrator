@@ -4,10 +4,10 @@ title: Import an Integration to WSO2 Cloud
 
 # Import an Integration
 
-If your integration is already in a Git repository, you can import it directly into WSO2 Cloud without going through the WSO2 Integrator IDE. WSO2 Cloud automatically builds and deploys the integration to the Development environment once the import is complete.
+If your integration is already in a Git repository, you can import it directly into WSO2 Cloud without going through the WSO2 Integrator. WSO2 Cloud automatically builds and deploys the integration to the Development environment once the import is complete.
 
 :::info Prerequisites
-- An integration created with WSO2 Integrator IDE pushed to a remote Git repository (GitHub, GitLab, Bitbucket, or Azure DevOps).
+- An integration created with WSO2 Integrator pushed to a remote Git repository (GitHub, GitLab, Bitbucket, or Azure DevOps).
 - A WSO2 Cloud account. Sign up at [WSO2 Cloud](https://console.devant.dev) if you don't have one.
 
 ## Connect your Git provider

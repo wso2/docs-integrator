@@ -8,7 +8,7 @@ The Test Explorer is the built-in testing panel in WSO2 Integrator. It gives you
 
 ## Open Test Explorer
 
-Select the **Testing** icon (beaker) in the activity bar on the left side of the IDE. The **TEST EXPLORER** panel opens and lists all test functions discovered in your project.
+Select the **Testing** icon (beaker) in the activity bar on the left side of the editor. The **TEST EXPLORER** panel opens and lists all test functions discovered in your project.
 
 ## How tests are listed
 

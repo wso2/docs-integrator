@@ -35,7 +35,7 @@ The top menu bar covers general application actions. Integrator-specific actions
 
 ## Activity bar
 
-The activity bar is the narrow vertical strip on the far-left edge of the IDE. Each icon opens a different panel or tool, and the active icon is highlighted.
+The activity bar is the narrow vertical strip on the far-left edge of the editor. Each icon opens a different panel or tool, and the active icon is highlighted.
 
 <ThemedImage
     alt="Activity bar"
@@ -53,7 +53,7 @@ The activity bar is the narrow vertical strip on the far-left edge of the IDE. E
 | **Run and Debug** | Opens the debug panel for setting breakpoints, launching the integration with the debugger, and inspecting variables. |
 | **Test Explorer** | Opens the test explorer to view, run, and debug the test cases defined for your integration. |
 | **Accounts** | Shows the signed-in WSO2 Integrator account and provides actions to manage extension account preferences and language model access. |
-| **Manage** | Opens the IDE management menu with access to the Command Palette, Profiles, Settings, Keyboard Shortcuts, Snippets, Tasks, and Themes. |
+| **Manage** | Opens the editor management menu with access to the Command Palette, Profiles, Settings, Keyboard Shortcuts, Snippets, Tasks, and Themes. |
 
 Select the **WSO2 Integrator** icon at any time to return to the project explorer and the current view.
 
@@ -125,7 +125,7 @@ The toolbar is the same across the [Project view](views/project-view.md), [Integ
 
 ## Status bar
 
-The status bar runs across the bottom edge of the IDE and shows the current state of your project, runtime, and tooling at a glance. Select an item to open the related panel or action.
+The status bar runs across the bottom edge of the editor and shows the current state of your project, runtime, and tooling at a glance. Select an item to open the related panel or action.
 
 <ThemedImage
     alt="Status bar"
@@ -139,9 +139,9 @@ The status bar runs across the bottom edge of the IDE and shows the current stat
 |---|---|
 | **Branch indicator** (for example, `main*`) | Shows the active Git branch for the project. An asterisk indicates uncommitted changes. Select it to switch or manage branches. |
 | **Problems** (error and warning counts) | Shows the number of errors and warnings detected in the current project. Select it to open the Problems panel. |
-| **Ballerina version** | Shows the Ballerina distribution version that the IDE is using to build and run your integration (for example, `Ballerina 2201.13.4 (Swan Lake Update 13)`). |
+| **Ballerina version** | Shows the Ballerina distribution version that the editor is using to build and run your integration (for example, `Ballerina 2201.13.4 (Swan Lake Update 13)`). |
 | **ICP** | Shows the status of the [Integration Control Plane](../icp/index.md) connection (for example, `ICP: Stopped`). Select it to start, stop, or configure ICP for the project. |
-| **Notifications** | Opens the notifications panel for messages from the IDE and its extensions. |
+| **Notifications** | Opens the notifications panel for messages from the editor and its extensions. |
 
 ## What's next
 

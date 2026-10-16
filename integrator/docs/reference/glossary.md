@@ -20,7 +20,7 @@ title: Glossary
 | **Config.toml** | Environment-specific runtime configuration file. Provides values for `configurable` variables. Should not be committed to version control when it contains secrets. |
 | **configurable** | A Ballerina keyword that marks a variable as externally configurable via `Config.toml`, environment variables, or CLI arguments. Use `= ?` for required values with no default. |
 | **Connector** | A pre-built `ballerinax` package for connecting to an external system (Salesforce, Kafka, MySQL, etc.). Handles authentication, serialization, and error mapping. |
-| **Data Mapper** | A visual data transformation tool in the WSO2 Integrator IDE design view. Maps fields between source and target schemas, with AI-assisted suggestions. |
+| **Data Mapper** | A visual data transformation tool in the WSO2 Integrator design view. Maps fields between source and target schemas, with AI-assisted suggestions. |
 | **Dependencies.toml** | Auto-generated lock file that records the exact resolved versions of all package dependencies. Should be committed to version control. |
 | **distinct error** | A Ballerina error type with a unique identity, allowing pattern matching on specific error categories. Used to define application-specific error hierarchies. |
 | **do/on fail** | Ballerina's error handling block. Code in `do` runs normally; `on fail` catches errors from `check` expressions. Also supported on `while`, `foreach`, `lock`, `transaction`, and `retry` blocks. |
@@ -38,7 +38,7 @@ title: Glossary
 | **Module** | A sub-unit of a Ballerina package. A package has a default module (root) and can contain multiple named modules under the `modules/` directory. |
 | **Natural Function** | An LLM call treated as a typed function call in Ballerina. You define input/output types and the platform handles the prompt, API call, and response parsing. |
 | **Package** | The unit of code distribution in Ballerina. Defined by `Ballerina.toml` and publishable to Ballerina Central. Contains one or more modules. At the product level, users typically speak of integrations or libraries rather than packages. |
-| **Pro-code** | The Ballerina source-editing mode in the WSO2 Integrator IDE. Stays in sync with the visual designer, with full auto-complete, type checking, and debugging. |
+| **Pro-code** | The Ballerina source-editing mode in the WSO2 Integrator. Stays in sync with the visual designer, with full auto-complete, type checking, and debugging. |
 | **Project** | A workspace containing integration code, dependencies, configuration, and deployment artifacts. Defined by `Ballerina.toml`. |
 | **Query Expression** | Ballerina's SQL-like syntax for filtering, transforming, and aggregating data within code. Supports `from`, `where`, `let`, `select`, `order by`, `limit`, and `join` clauses. |
 | **RAG** | Retrieval-Augmented Generation. A pattern that combines document retrieval from a vector database with LLM generation for knowledge-grounded AI responses. |
@@ -49,10 +49,10 @@ title: Glossary
 | **Structural Typing** | Ballerina's type compatibility model. Types are compatible based on their structure (shape of values) rather than their declared names. |
 | **Tool calling** | The mechanism by which an LLM-backed agent invokes typed functions, including MCP tools, to act on external systems. |
 | **Transaction** | A Ballerina language construct for coordinating atomic operations across multiple resources. Supports distributed transactions with automatic rollback on failure. |
-| **Try It** | A built-in tool in the WSO2 Integrator IDE for sending test requests to running services and viewing responses inline. |
+| **Try It** | A built-in tool in the WSO2 Integrator for sending test requests to running services and viewing responses inline. |
 | **Union Type** | A Ballerina type that can hold values of multiple types. Written as `TypeA\|TypeB`. Used extensively for error handling (`string\|error`) and optional values (`T?` is `T\|()`). |
-| **Visual Designer** | The visual editor in the WSO2 Integrator IDE for building integration logic. Stays in sync with the Ballerina source. |
+| **Visual Designer** | The visual editor in the WSO2 Integrator for building integration logic. Stays in sync with the Ballerina source. |
 | **Worker** | A Ballerina concurrency primitive. Workers execute code in parallel within a function and can communicate via message passing using the `->` and `<-` operators. |
 | **WSO2 Integration Platform** | The WSO2 cloud platform for deploying and managing integrations without managing infrastructure. |
-| **WSO2 Integrator IDE** | The IDE for building integrations with WSO2 Integrator. Provides both the visual designer and the Ballerina source editor with bidirectional sync. |
+| **WSO2 Integrator** | The editor for building integrations. It provides a visual designer and a Ballerina source editor that stay in sync. |
 | **xml** | A Ballerina built-in sequence type for XML data. Supports elements, text, comments, and processing instructions with XPath-like navigation syntax. |

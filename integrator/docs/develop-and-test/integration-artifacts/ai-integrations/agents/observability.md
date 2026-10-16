@@ -4,7 +4,7 @@ title: Observe Agent Behavior
 
 # Observability
 
-When you run an agent, you want to see exactly what it did. Which tools it picked, what it sent to the LLM, what came back, and how long each step took. WSO2 Integrator ships with a **dev-time trace server**, a built-in tracing backend that runs alongside the IDE and streams spans into a **Traces** panel as your integration executes. With tracing on, the LLM's tool choices and interpretations of each result are visible in the spans, so you can debug agent behavior without adding print statements.
+When you run an agent, you want to see exactly what it did. Which tools it picked, what it sent to the LLM, what came back, and how long each step took. WSO2 Integrator ships with a **dev-time trace server**, a built-in tracing backend that runs alongside the editor and streams spans into a **Traces** panel as your integration executes. With tracing on, the LLM's tool choices and interpretations of each result are visible in the spans, so you can debug agent behavior without adding print statements.
 
 ## Enable tracing
 
@@ -42,7 +42,7 @@ Agents declared inline in source, anywhere outside the AI Chat Agent wizard, don
 2. Run **Ballerina: Enable Tracing**.
 
 <ThemedImage
-    alt="WSO2 Integrator IDE command palette with 'Enable Tracing' typed. The top suggestion is 'Ballerina: Enable Tracing'."
+    alt="WSO2 Integrator command palette with 'Enable Tracing' typed. The top suggestion is 'Ballerina: Enable Tracing'."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/observability/04-enable-tracing-command.png'),
         dark: useBaseUrl('/img/genai/develop/agents/observability/04-enable-tracing-command.png'),
@@ -52,7 +52,7 @@ Agents declared inline in source, anywhere outside the AI Chat Agent wizard, don
 To stop tracing, run **Ballerina: Disable Tracing** the same way.
 
 <ThemedImage
-    alt="WSO2 Integrator IDE command palette with 'Disable Tracing' typed. The top suggestion is 'Ballerina: Disable Tracing'."
+    alt="WSO2 Integrator command palette with 'Disable Tracing' typed. The top suggestion is 'Ballerina: Disable Tracing'."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/observability/05-disable-tracing-command.png'),
         dark: useBaseUrl('/img/genai/develop/agents/observability/05-disable-tracing-command.png'),
@@ -63,14 +63,14 @@ The command works for chat agents too, so you can use it interchangeably with th
 
 ## View traces
 
-There are two ways to look at traces from a running agent. The **View Trace** link inside the chat window (for chat agents), and the **Traces** panel at the bottom of the IDE.
+There are two ways to look at traces from a running agent. The **View Trace** link inside the chat window (for chat agents), and the **Traces** panel at the bottom of the editor.
 
 ### From the chat window
 
 When you run a chat agent and open its chat panel, every agent response carries a **View Trace** link, and the chat header has a **Session Traces** button.
 
 <ThemedImage
-    alt="The Agent Chat panel on the right side of the IDE showing a math tutor conversation. Each agent reply has an 'Execution Steps (n)' label and a 'View Trace' link below it. The chat header has 'Session Traces' and 'Clear Chat' buttons."
+    alt="The Agent Chat panel on the right side of the editor showing a math tutor conversation. Each agent reply has an 'Execution Steps (n)' label and a 'View Trace' link below it. The chat header has 'Session Traces' and 'Clear Chat' buttons."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/observability/06-chat-view-trace.png'),
         dark: useBaseUrl('/img/genai/develop/agents/observability/06-chat-view-trace.png'),
@@ -117,10 +117,10 @@ Each row is one chat turn, with its timestamp, trace ID, user input, and the age
 
 ### From the Traces panel
 
-For agents without a chat window, or when you want a flat list of every trace the integration has produced, use the **Traces** panel at the bottom of the IDE. Open it with `Cmd+J` (macOS) or `Ctrl+J` (Windows/Linux), then switch to the **Traces** tab. As the integration runs, traces stream in.
+For agents without a chat window, or when you want a flat list of every trace the integration has produced, use the **Traces** panel at the bottom of the editor. Open it with `Cmd+J` (macOS) or `Ctrl+J` (Windows/Linux), then switch to the **Traces** tab. As the integration runs, traces stream in.
 
 <ThemedImage
-    alt="The Traces tab at the bottom of the IDE listing several traces. The expanded one shows a 'post /chat (SERVER)' span with a child 'invoke_agent Math Tutor (CLIENT)' span."
+    alt="The Traces tab at the bottom of the editor listing several traces. The expanded one shows a 'post /chat (SERVER)' span with a child 'invoke_agent Math Tutor (CLIENT)' span."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/observability/03-traces-panel.png'),
         dark: useBaseUrl('/img/genai/develop/agents/observability/03-traces-panel.png'),
@@ -141,7 +141,7 @@ By default the panel shows every trace the integration produces, including trace
 
 ## The trace viewer
 
-The trace viewer is the panel that opens when you click **View Trace**, a trace ID, or a span in the **Traces** panel. It's built specifically for understanding agent runs, so most of what you need is in this one view. You don't have to bounce between an external tool and the IDE.
+The trace viewer is the panel that opens when you click **View Trace**, a trace ID, or a span in the **Traces** panel. It's built specifically for understanding agent runs, so most of what you need is in this one view. You don't have to bounce between an external tool and the editor.
 
 ### Span timeline
 
@@ -258,7 +258,7 @@ The detail pane has a **Search all sections...** field that filters within the c
 
 ## Export traces
 
-Traces are useful beyond the IDE, in bug reports, regression baselines, or evaluation runs. The trace viewer can export in two formats:
+Traces are useful beyond the editor, in bug reports, regression baselines, or evaluation runs. The trace viewer can export in two formats:
 
 - **JSON.** The full trace as structured data. Best for archiving, sharing in a bug report, or comparing two runs.
 - **Evalset.** The trace converted into an evaluation set you can run later through the testing framework. See [Evaluations](evaluations/evaluations.md) for the full workflow.
@@ -295,7 +295,7 @@ The exported file contains every trace in the current session, in the order they
 
 ## Connect to an external trace provider
 
-The trace viewer described above is wired to the built-in **IDE trace provider**. To send traces to your existing observability stack instead (Jaeger, Zipkin, or any OpenTelemetry-compatible collector), swap the trace provider in your project files.
+The trace viewer described above is wired to the built-in **editor trace provider**. To send traces to your existing observability stack instead (Jaeger, Zipkin, or any OpenTelemetry-compatible collector), swap the trace provider in your project files.
 
 The example below uses Jaeger. For other providers, follow the same pattern with the matching `ballerinax` extension. See [Choose a tracing backend](../../../../observe/tracing.md#choose-a-tracing-backend) for the full list of supported platforms.
 
@@ -322,7 +322,7 @@ Three changes are required:
     tracingProvider = "jaeger"
     ```
 
-When you run the integration, spans flow to the configured collector instead of the IDE trace viewer. To point at a non-local collector or tune sampling, add a `[ballerinax.jaeger]` section to `Config.toml` with provider-specific keys. See the [Jaeger configuration options](../../../../observe/open-source/jaeger.md#configuration-options) for the full list of configurables.
+When you run the integration, spans flow to the configured collector instead of the editor trace viewer. To point at a non-local collector or tune sampling, add a `[ballerinax.jaeger]` section to `Config.toml` with provider-specific keys. See the [Jaeger configuration options](../../../../observe/open-source/jaeger.md#configuration-options) for the full list of configurables.
 
 To switch back to the dev-time viewer, change the import to `ballerinax/idetraceprovider as _;` and set `tracingProvider = "idetraceprovider"` in `Config.toml`.
 

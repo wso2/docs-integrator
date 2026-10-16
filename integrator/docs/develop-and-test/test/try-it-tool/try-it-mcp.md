@@ -62,4 +62,4 @@ The right panel shows the full detail for the selected tool and lets you invoke 
 - [Test HTTP service](try-it-http.md) — request builder for REST endpoints
 - [Test GraphQL service](try-it-graphql.md) — built-in GraphiQL editor for GraphQL operations
 - [Test Chat agent](try-it-chat.md) — conversational testing for AI agents
-- [Test Explorer](../test-explorer/test-explorer.md) — create and run automated test cases from the IDE
+- [Test Explorer](../test-explorer/test-explorer.md) — create and run automated test cases from the editor

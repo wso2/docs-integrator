@@ -26,7 +26,7 @@ WSO2 Cloud includes a browser-based editor where you can create and develop inte
 
 ## Develop your integration
 
-Develop your integration in the cloud editor as you would in the WSO2 Integrator IDE. You can add artifacts, configure connections, define data mappers, and more.
+Develop your integration in the cloud editor as you would in the WSO2 Integrator. You can add artifacts, configure connections, define data mappers, and more.
 
 ## Save and deploy
 

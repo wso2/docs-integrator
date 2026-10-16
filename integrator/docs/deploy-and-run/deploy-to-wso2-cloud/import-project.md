@@ -4,12 +4,12 @@ title: Import a Project to WSO2 Cloud
 
 # Import a Project
 
-If you have an existing project created with the WSO2 Integrator IDE in a Git repository, you can import it directly into WSO2 Cloud. During import, you configure each integration in the project and WSO2 Cloud creates them all at once.
+If you have an existing project created with the WSO2 Integrator in a Git repository, you can import it directly into WSO2 Cloud. During import, you configure each integration in the project and WSO2 Cloud creates them all at once.
 
 If you don't have an existing project and would like to get started on a new project, see <CloudDocsLink to="/manage/projects">Managing projects on WSO2 Cloud.
 
 :::info Prerequisites
-- A project created with the WSO2 Integrator IDE and pushed to a remote Git repository (GitHub, GitLab, Bitbucket, or Azure DevOps).
+- A project created with the WSO2 Integrator and pushed to a remote Git repository (GitHub, GitLab, Bitbucket, or Azure DevOps).
 - A WSO2 Cloud account. Sign up at [WSO2 Cloud](https://console.devant.dev) if you don't have one.
 
 ## Connect your Git provider

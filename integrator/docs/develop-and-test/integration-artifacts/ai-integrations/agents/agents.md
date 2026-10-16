@@ -65,7 +65,7 @@ The top-right controls in the agent canvas allow you to interact with and test t
 | Button | Description |
 |---|---|
 | **Tracing: Off / On** | Enables or disables OpenTelemetry tracing for the agent |
-| **Chat** | Opens an in-IDE chat interface for interacting with the agent |
+| **Chat** | Opens an in-editor chat interface for interacting with the agent |
 
 The chat interface reuses the same session across interactions, enabling memory-aware conversations during development and testing.
 

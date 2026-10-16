@@ -237,7 +237,7 @@ If the source TIBCO project had tests, the migration tool converts them to Balle
 bal test
 ```
 
-You can also use the **Try-It** tool built into WSO2 Integrator to send requests to your HTTP service interactively without leaving the IDE. Open the service file, click **Try it**, and test each endpoint against the responses returned by the original TIBCO application.
+You can also use the **Try-It** tool built into WSO2 Integrator to send requests to your HTTP service interactively without leaving the editor. Open the service file, click **Try it**, and test each endpoint against the responses returned by the original TIBCO application.
 
 ## Deploy
 

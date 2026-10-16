@@ -109,6 +109,6 @@ Moving from another platform? See [Migrate](../migrate/index.md).
 
 ## What's next
 
-- [Create a new integration](create-workspace/create-a-project.md) — Start a project in the WSO2 Integrator IDE or from the CLI
+- [Create a new integration](create-workspace/create-a-project.md) — Start a project in the WSO2 Integrator or from the CLI
 - [Design integration logic](../editor/canvases/flow-canvas/flow-canvas.md) — Wire up the flow between request and response
 - [Deploy and operate](../deploy-and-run/deploy-and-run.md) — Ship your integration once it's ready

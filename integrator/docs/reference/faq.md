@@ -8,7 +8,7 @@ title: FAQ
 
 ### What is WSO2 Integrator?
 
-WSO2 Integrator is a Ballerina-powered integration platform that combines low-code visual design and pro-code development. It allows developers to build, test, and deploy integrations that connect APIs, databases, messaging systems, SaaS applications, and AI services. The WSO2 Integrator IDE offers a visual designer and a code editor with full bidirectional sync, alongside a comprehensive connector library and built-in observability.
+WSO2 Integrator is a Ballerina-powered integration platform that combines low-code visual design and pro-code development. It allows developers to build, test, and deploy integrations that connect APIs, databases, messaging systems, SaaS applications, and AI services. The WSO2 Integrator offers a visual designer and a code editor with full bidirectional sync, alongside a comprehensive connector library and built-in observability.
 
 ### How can integrations be triggered?
 
@@ -39,7 +39,7 @@ WSO2 Integrator is built on the Ballerina Swan Lake distribution. The exact dist
 
 ### Is WSO2 Integrator open source?
 
-WSO2 Integrator builds on Ballerina, which is open source under the Apache 2.0 license. The WSO2 Integrator IDE and tooling are provided by WSO2. Check the WSO2 licensing page for specific license details.
+WSO2 Integrator builds on Ballerina, which is open source under the Apache 2.0 license. WSO2 provides WSO2 Integrator and its tooling. Check the WSO2 licensing page for specific license details.
 
 ## Development
 
@@ -51,9 +51,9 @@ Not to get started. WSO2 Integrator offers full parity between the visual design
 
 Yes. Any package published on [Ballerina Central](https://central.ballerina.io) can be imported and used in your integration projects. Add packages by importing them in your Ballerina source code, and they will be resolved automatically during `bal build`.
 
-### What IDE support is available?
+### What editor features are available?
 
-The WSO2 Integrator IDE includes:
+The WSO2 Integrator includes:
 
 - Visual designer
 - Sequence diagram view
@@ -65,11 +65,11 @@ The WSO2 Integrator IDE includes:
 
 ### How do I debug my integrations?
 
-WSO2 Integrator supports standard breakpoint-based debugging. Set breakpoints in either the visual designer or the code editor, then launch the debugger from the IDE. You can also use remote debugging by running `bal run --debug <port>` and attaching the IDE's debugger to the specified port.
+WSO2 Integrator supports standard breakpoint-based debugging. Set breakpoints in either the visual designer or the code editor, then launch the debugger from the editor. You can also use remote debugging by running `bal run --debug <port>` and attaching the editor's debugger to the specified port.
 
 ### Where can I find troubleshooting help for common issues?
 
-Refer to errors and stack traces for symptom-to-fix recipes covering IDE issues, build errors, runtime errors, and diagnostic tools. Dedicated guidance is also available for logging, deployment issues, and performance tuning.
+Refer to errors and stack traces for symptom-to-fix recipes covering editor issues, build errors, runtime errors, and diagnostic tools. Dedicated guidance is also available for logging, deployment issues, and performance tuning.
 
 ### Can I write tests for my integrations?
 
