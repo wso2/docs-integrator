@@ -1,8 +1,8 @@
 ---
-title: Deploy from the Editor
+title: Deploy from WSO2 Integrator
 ---
 
-# Deploy to WSO2 Cloud from the Editor
+# Deploy from WSO2 Integrator
 
 You can deploy your integrations to WSO2 Cloud directly from the WSO2 Integrator editor. You can deploy the entire project at once or deploy a single integration individually.
 

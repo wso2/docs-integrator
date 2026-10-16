@@ -1,8 +1,8 @@
 ---
-title: Create Integration Workspace
+title: The Integration Workspace
 ---
 
-# Create Integration Workspace
+# The Integration Workspace
 
 WSO2 Integrator organizes your work into three concepts that build on each other:
 

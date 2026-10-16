@@ -1,8 +1,8 @@
 ---
-title: Editor Troubleshooting
+title: Diagnose Issues
 ---
 
-# Editor Troubleshooting
+# Diagnose Issues
 
 Use this page when something in the WSO2 Integrator editor isn't behaving the way you expect: a feature doesn't respond, a diagram doesn't load, or an action errors out. Before you file an issue, capture verbose editor output so the team can act on the report.
 
