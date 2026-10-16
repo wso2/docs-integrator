@@ -32,6 +32,7 @@ Gather the following endpoint URLs from your identity provider. Most providers p
 | Authorization endpoint | Where ICP sends users to authenticate |
 | Token endpoint | Where ICP exchanges the authorization code for tokens |
 | End-session endpoint | Where ICP sends users on sign out to end their identity provider session |
+| JWKS URI | Where ICP fetches the keys used to validate ID token signatures |
 
 ## Step 2: Update `deployment.toml`
 
@@ -51,6 +52,7 @@ ssoIssuer = "https://your-provider.com"
 ssoAuthorizationEndpoint = "https://your-provider.com/oauth2/authorize"
 ssoTokenEndpoint = "https://your-provider.com/oauth2/token"
 ssoLogoutEndpoint = "https://your-provider.com/oauth2/logout"
+ssoJwksUrl = "https://your-provider.com/oauth2/jwks"
 ssoClientId = "your-client-id"
 ssoClientSecret = "your-client-secret"
 ssoRedirectUri = "https://localhost:9446/sso/callback"
@@ -71,11 +73,13 @@ Restart the ICP server after saving changes.
 | `ssoAuthorizationEndpoint` | Authorization endpoint URL |
 | `ssoTokenEndpoint` | Token endpoint URL |
 | `ssoLogoutEndpoint` | End-session endpoint URL. Required when SSO is enabled. ICP uses it to end the identity provider session when a user signs out. See [Sign out](#sign-out). |
+| `ssoJwksUrl` | JWKS URI of your identity provider (`jwks_uri` in the discovery document). Required when SSO is enabled. ICP uses it to validate ID token signatures. |
 | `ssoClientId` | Client ID from your identity provider |
 | `ssoClientSecret` | Client secret from your identity provider |
 | `ssoRedirectUri` | Redirect URI registered with your identity provider |
 | `ssoUsernameClaim` | Claim to use as the ICP username: `email` or `preferred_username` |
 | `ssoScopes` | OIDC scopes to request. `openid` is required. |
+| `ssoAllowInsecureTLS` | Optional. Default `false`. Set to `true` to skip TLS certificate validation when ICP calls the token and JWKS endpoints, for example with an identity provider that uses a self-signed certificate. Use only for local testing. |
 
 ## Provider-specific examples
 
@@ -87,6 +91,7 @@ ssoIssuer = "https://api.asgardeo.io/t/<org>/oauth2/token"
 ssoAuthorizationEndpoint = "https://api.asgardeo.io/t/<org>/oauth2/authorize"
 ssoTokenEndpoint = "https://api.asgardeo.io/t/<org>/oauth2/token"
 ssoLogoutEndpoint = "https://api.asgardeo.io/t/<org>/oidc/logout"
+ssoJwksUrl = "https://api.asgardeo.io/t/<org>/oauth2/jwks"
 ssoClientId = "your-client-id"
 ssoClientSecret = "your-client-secret"
 ssoRedirectUri = "https://localhost:9446/sso/callback"
@@ -102,6 +107,7 @@ ssoIssuer = "https://<domain>.okta.com/oauth2/default"
 ssoAuthorizationEndpoint = "https://<domain>.okta.com/oauth2/default/v1/authorize"
 ssoTokenEndpoint = "https://<domain>.okta.com/oauth2/default/v1/token"
 ssoLogoutEndpoint = "https://<domain>.okta.com/oauth2/default/v1/logout"
+ssoJwksUrl = "https://<domain>.okta.com/oauth2/default/v1/keys"
 ssoClientId = "your-client-id"
 ssoClientSecret = "your-client-secret"
 ssoRedirectUri = "https://localhost:9446/sso/callback"
@@ -117,6 +123,7 @@ ssoIssuer = "https://<domain>.auth0.com/"
 ssoAuthorizationEndpoint = "https://<domain>.auth0.com/authorize"
 ssoTokenEndpoint = "https://<domain>.auth0.com/oauth/token"
 ssoLogoutEndpoint = "https://<domain>.auth0.com/oidc/logout"
+ssoJwksUrl = "https://<domain>.auth0.com/.well-known/jwks.json"
 ssoClientId = "your-client-id"
 ssoClientSecret = "your-client-secret"
 ssoRedirectUri = "https://localhost:9446/sso/callback"
@@ -132,6 +139,7 @@ ssoIssuer = "https://login.microsoftonline.com/<tenant-id>/v2.0"
 ssoAuthorizationEndpoint = "https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/authorize"
 ssoTokenEndpoint = "https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/token"
 ssoLogoutEndpoint = "https://login.microsoftonline.com/<tenant-id>/oauth2/v2.0/logout"
+ssoJwksUrl = "https://login.microsoftonline.com/<tenant-id>/discovery/v2.0/keys"
 ssoClientId = "your-client-id"
 ssoClientSecret = "your-client-secret"
 ssoRedirectUri = "https://localhost:9446/sso/callback"
@@ -147,6 +155,7 @@ ssoIssuer = "https://<keycloak-domain>/realms/<realm>"
 ssoAuthorizationEndpoint = "https://<keycloak-domain>/realms/<realm>/protocol/openid-connect/auth"
 ssoTokenEndpoint = "https://<keycloak-domain>/realms/<realm>/protocol/openid-connect/token"
 ssoLogoutEndpoint = "https://<keycloak-domain>/realms/<realm>/protocol/openid-connect/logout"
+ssoJwksUrl = "https://<keycloak-domain>/realms/<realm>/protocol/openid-connect/certs"
 ssoClientId = "your-client-id"
 ssoClientSecret = "your-client-secret"
 ssoRedirectUri = "https://localhost:9446/sso/callback"
@@ -195,7 +204,7 @@ Users who sign in with a local password are not affected. Signing out revokes th
 | `invalid_client` or `invalid_grant` error | Incorrect client ID or secret, or the IdP application is inactive | Verify both values and confirm the application is enabled in your identity provider. |
 | Redirect URI mismatch error | `ssoRedirectUri` does not exactly match the URI registered in the identity provider | Check for differences in protocol, hostname, port, and trailing slashes. |
 | User is missing required claims | The identity provider is not including `sub` and `email` or `preferred_username` in the ID token | Configure your identity provider to include these claims. Verify `ssoUsernameClaim` matches a claim your provider returns. |
-| ICP fails to start with `SSO is enabled but 'ssoLogoutEndpoint' is not configured` | `ssoEnabled` is `true` but `ssoLogoutEndpoint` is empty | Set `ssoLogoutEndpoint` to your identity provider's end-session endpoint and restart ICP. |
+| SSO sign-in fails with `SSO is enabled but '<parameter>' is not configured` (for example, `ssoLogoutEndpoint` or `ssoJwksUrl`) | `ssoEnabled` is `true` but a required parameter is empty. ICP checks these at startup only when `passwordLoginDisabled` or `federatedAccessControlEnabled` is `true`; otherwise it starts and the error appears at sign-in | Set the missing parameter in `conf/deployment.toml` and restart ICP. |
 | The identity provider shows an error such as an invalid or unregistered post-logout redirect URI after signing out | The ICP login page is not registered as an allowed post-logout redirect URI | Register `<origin of ssoRedirectUri>/login` (for example, `https://localhost:9446/login`) in your identity provider. |
 | After signing out, **Sign in with SSO** goes straight into ICP without asking for credentials | The identity provider session was not ended. Either the end-session endpoint could not be reached, in which case ICP clears its own session and returns to the login page, or `ssoLogoutEndpoint` does not point to the provider's OIDC end-session endpoint | Confirm that `ssoLogoutEndpoint` matches the `end_session_endpoint` value in your provider's `/.well-known/openid-configuration` document, and that the provider is reachable from the browser. |
 | User authenticated successfully but has no access | User account was created but has no assigned roles | An administrator must grant roles to the account in ICP. See [Access Control](../access-control.md). |

@@ -13,8 +13,8 @@ After signing in, the **All Projects** page is the default landing view. Project
 <ThemedImage
     alt="All Projects page showing three project cards — Order Service, Payment Service, and Shipping Service — in a grid layout with a Create Project button at the top right."
     sources={{
-        light: useBaseUrl('/img/manage/icp/all-projects-light.png'),
-        dark: useBaseUrl('/img/manage/icp/all-projects-light.png'),
+        light: useBaseUrl('/img/manage/icp/all-projects-light-v5.1.png'),
+        dark: useBaseUrl('/img/manage/icp/all-projects-light-v5.1.png'),
     }}
 />
 
@@ -62,8 +62,8 @@ Clicking a project card opens the project home. It shows all integrations belong
 <ThemedImage
     alt="Order Service project home showing the integrations list with Order Create and Order Process entries, a Create Integration button, and an Integration Types summary card on the right."
     sources={{
-        light: useBaseUrl('/img/manage/icp/project-integrations-light.png'),
-        dark: useBaseUrl('/img/manage/icp/project-integrations-light.png'),
+        light: useBaseUrl('/img/manage/icp/project-integrations-light-v5.1.png'),
+        dark: useBaseUrl('/img/manage/icp/project-integrations-light-v5.1.png'),
     }}
 />
 

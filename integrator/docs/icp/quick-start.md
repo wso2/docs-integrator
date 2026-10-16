@@ -101,8 +101,8 @@ For full project management options, see [Manage projects](manage-projects.md).
    <ThemedImage
        alt="Create New Integration form with Technology and Integration Type options"
        sources={{
-           light: useBaseUrl('/img/icp/quick-start/create-new-integration-form.png'),
-           dark: useBaseUrl('/img/icp/quick-start/create-new-integration-form.png'),
+           light: useBaseUrl('/img/icp/quick-start/create-new-integration-form-v5.1.png'),
+           dark: useBaseUrl('/img/icp/quick-start/create-new-integration-form-v5.1.png'),
        }}
    />
 

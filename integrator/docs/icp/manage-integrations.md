@@ -121,8 +121,8 @@ Ballerina listeners (HTTP, TCP, and other transport listeners) appear in the **E
 <ThemedImage
     alt="Listener entry point detail panel showing the enable/disable toggle"
     sources={{
-        light: useBaseUrl('/img/manage/icp/listener-control-light.png'),
-        dark: useBaseUrl('/img/manage/icp/listener-control-light.png'),
+        light: useBaseUrl('/img/manage/icp/listener-control-light-v5.1.png'),
+        dark: useBaseUrl('/img/manage/icp/listener-control-light-v5.1.png'),
     }}
 />
 

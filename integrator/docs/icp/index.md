@@ -65,8 +65,8 @@ The MI profile in ICP 2.1.0 supports WSO2 Micro Integrator 4.7.0 and later. Earl
    <ThemedImage
        alt="ICP Integrations View"
        sources={{
-           light: useBaseUrl('/img/deploy-operate/observe/icp-integrations.png'),
-           dark: useBaseUrl('/img/deploy-operate/observe/icp-integrations.png'),
+           light: useBaseUrl('/img/deploy-operate/observe/icp-integrations-v5.1.png'),
+           dark: useBaseUrl('/img/deploy-operate/observe/icp-integrations-v5.1.png'),
        }}
    />
 
@@ -75,8 +75,8 @@ The MI profile in ICP 2.1.0 supports WSO2 Micro Integrator 4.7.0 and later. Earl
    <ThemedImage
        alt="ICP Integration Artifacts"
        sources={{
-           light: useBaseUrl('/img/deploy-operate/observe/icp-artifacts.png'),
-           dark: useBaseUrl('/img/deploy-operate/observe/icp-artifacts.png'),
+           light: useBaseUrl('/img/deploy-operate/observe/icp-artifacts-v5.1.png'),
+           dark: useBaseUrl('/img/deploy-operate/observe/icp-artifacts-v5.1.png'),
        }}
    />
 

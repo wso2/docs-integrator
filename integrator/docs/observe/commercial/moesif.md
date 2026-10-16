@@ -24,33 +24,79 @@ After you log into Moesif Portal, get your `Moesif Application ID` during the on
    import ballerinax/moesif as _;
    ```
 
+   If you don't have an integration yet, you can use the following sample shop service, which listens on port `8090`. The requests in **Step 5** call this service.
+
+   ```ballerina
+   import ballerina/http;
+   import ballerinax/moesif as _;
+
+   type Product record {|
+       int id;
+       string name;
+       decimal price;
+   |};
+
+   type OrderRequest record {|
+       int productId;
+       int quantity;
+   |};
+
+   type Order record {|
+       int id;
+       *OrderRequest;
+   |};
+
+   map products = {
+       "1": {id: 1, name: "Laptop", price: 1200.00},
+       "2": {id: 2, name: "Mouse", price: 25.00},
+       "3": {id: 3, name: "Keyboard", price: 45.00}
+   };
+   Order[] orders = [];
+
+   service /shop on new http:Listener(8090) {
+
+       resource function get products() returns Product[] {
+           return products.toArray();
+       }
+
+       resource function post product(Product product) returns Product {
+           products[product.id.toString()] = product;
+           return product;
+       }
+
+       resource function post 'order(OrderRequest request) returns Order|http:NotFound {
+           if !products.hasKey(request.productId.toString()) {
+               return http:NOT_FOUND;
+           }
+           Order newOrder = {id: orders.length(), ...request};
+           orders.push(newOrder);
+           return newOrder;
+       }
+
+       resource function get 'order/[int id]() returns Order|http:NotFound {
+           if id < 0 || id >= orders.length() {
+               return http:NOT_FOUND;
+           }
+           return orders[id];
+       }
+   }
+   ```
+
 3. Create the `Config.toml` file in the package directory to set the runtime configurations.
-4. To enable the extension and publish traces to Moesif, add the following to the `Config.toml`.
+4. To enable the extension and publish traces and metrics to Moesif, add the following to the `Config.toml`. To publish only traces, leave out `metricsEnabled` and `metricsReporter`. To publish only metrics, leave out `tracingEnabled` and `tracingProvider`.
 
    ```toml
    [ballerina.observe]
    tracingEnabled=true
    tracingProvider="moesif"
+   metricsEnabled=true
+   metricsReporter="moesif"
 
    [ballerinax.moesif]
    applicationId = "<MOESIF_APPLICATION_ID>"    # Mandatory Configuration.
    reporterBaseUrl = "https://api.moesif.net"   # Optional Configuration. Default value is 'https://api.moesif.net'
    tracingReporterFlushInterval = 1000          # Optional Configuration. Default value is 1000
    tracingReporterBufferSize = 10000            # Optional Configuration. Default value is 10000
-   isTraceLoggingEnabled = false                # Optional Configuration. Default value is false
-   isPayloadLoggingEnabled = false              # Optional Configuration. Default value is false
-   ```
-
-5. To enable metrics publishing, add the following to the `Config.toml`.
-
-   ```toml
-   [ballerina.observe]
-   metricsEnabled=true
-   metricsReporter="moesif"
-
-   [ballerinax.moesif]
-   applicationId = "<MOESIF_APPLICATION_ID>"     # Mandatory Configuration.
-   reporterBaseUrl = "https://api.moesif.net"   # Optional Configuration. Default value is 'https://api.moesif.net'
    metricsReporterFlushInterval = 15000         # Optional Configuration. Default value is 15000
    metricsReporterClientTimeout = 10000         # Optional Configuration. Default value is 10000
    isTraceLoggingEnabled = false                # Optional Configuration. Default value is false
@@ -62,7 +108,7 @@ After you log into Moesif Portal, get your `Moesif Application ID` during the on
    key1 = "value1"
    key2 = "value2"
    ```
-6. Replace `<MOESIF_APPLICATION_ID>` with the application ID obtained in **Step 1**.
+5. Replace `<MOESIF_APPLICATION_ID>` with the application ID obtained in **Step 1**.
 
 The table below provides the descriptions of each configuration option and possible values that can be assigned.
 

@@ -27,8 +27,8 @@ The ICP console has two main navigation elements: the breadcrumb bar at the top 
 <ThemedImage
     alt="ICP console showing the breadcrumb bar and sidebar"
     sources={{
-        light: useBaseUrl('/img/manage/icp/icp-console-overview-light.png'),
-        dark: useBaseUrl('/img/manage/icp/icp-console-overview-light.png'),
+        light: useBaseUrl('/img/manage/icp/icp-console-overview-light-v5.1.png'),
+        dark: useBaseUrl('/img/manage/icp/icp-console-overview-light-v5.1.png'),
     }}
 />
 
