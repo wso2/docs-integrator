@@ -4,13 +4,13 @@ title: OpenAPI Tool
 
 # OpenAPI Tool
 
-The `bal openapi` tool bridges OpenAPI specifications and Ballerina code. It generates type-safe Ballerina service stubs and client connectors from OpenAPI (Swagger) YAML or JSON files, and can also export an OpenAPI specification from an existing Ballerina service. This ensures your integrations conform to API contracts and eliminates boilerplate.
+The `bal openapi` tool bridges OpenAPI specifications and Ballerina code. It generates type-safe Ballerina service stubs and client connectors from OpenAPI (Swagger) YAML or JSON files, and can also export an OpenAPI specification from an existing Ballerina service. This keeps your integrations aligned with the API contract and removes the need to write boilerplate code.
 
 ## Generating a Ballerina service from OpenAPI
 
 Create a service skeleton that matches an OpenAPI specification. The generated code includes resource functions, request/response types, and validation constraints.
 
-1. Click the **+** **Add Artifacts** button in the canvas or click **+** next to **Entry Points** in the sidebar.
+1. In the canvas, click **+ Add Artifact** (or **Add Artifact manually** if the integration has no artifacts yet), or click **+** next to **Entry Points** in the sidebar.
 2. In the **Artifacts** panel, select **HTTP Service** under **Integration as API**.
 3. Select **Import From OpenAPI Specification** under **Service Contract**.
 
@@ -22,19 +22,19 @@ Create a service skeleton that matches an OpenAPI specification. The generated c
        }}
    />
 
-4. Browse or enter the path to your OpenAPI specification file (YAML or JSON).
-5. Configure the **Service Base Path** and listener settings.
+4. Click **Select File** and choose your OpenAPI specification file (YAML or JSON).
+5. Enter a **Service Type Name**. Optionally, expand **Advanced Configurations** to choose between the **Shared Listener (Port 9090)** and a **Custom Listener**.
 6. Click **Create**.
 7. WSO2 Integrator generates the service with resource function stubs, request/response types, and validation constraints matching your OpenAPI specification.
 
 ### Basic service generation
 
 ```bash
-# Generate a service from an OpenAPI spec
+# Generate a service stub from an OpenAPI spec
 bal openapi -i openapi.yaml --mode service
 
-# Specify output directory
-bal openapi -i openapi.yaml --mode service -o generated/
+# Generate a service contract type from an OpenAPI spec
+bal openapi -i openapi.yaml --mode service --with-service-contract
 ```
 
 ### Generated service structure
@@ -42,39 +42,32 @@ bal openapi -i openapi.yaml --mode service -o generated/
 For an OpenAPI spec defining a `/orders` resource, the tool generates:
 
 ```
-generated/
-├── openapi_service.bal     # Service with resource function stubs
+project/
+├── service_contract.bal    # Service contract type with resource function definitions
 ├── types.bal               # Request/response record types
-└── utils.bal               # Helper utilities
 ```
 
-The generated service file includes empty resource functions matching each OpenAPI operation:
+The generated service contract file contains a service type with resource functions that match each OpenAPI operation:
 
 ```ballerina
 import ballerina/http;
 
-listener http:Listener ep = new (8090);
-
-service /api on ep {
+@http:ServiceConfig {basePath: "/api"}
+type OASServiceType service object {
+    *http:ServiceContract;
 
     // GET /orders
     resource function get orders(string? status, int 'limit = 20)
-            returns Order[]|http:InternalServerError {
-        // TODO: Implement logic
-    }
+            returns Order[]|http:InternalServerError;
 
     // POST /orders
     resource function post orders(OrderRequest payload)
-            returns http:Created|http:BadRequest {
-        // TODO: Implement logic
-    }
+            returns http:Created|http:BadRequest;
 
     // GET /orders/{orderId}
     resource function get orders/[string orderId]()
-            returns Order|http:NotFound {
-        // TODO: Implement logic
-    }
-}
+            returns Order|http:NotFound;
+};
 ```
 
 The generated types file includes record definitions derived from the OpenAPI schemas:
@@ -101,13 +94,42 @@ type LineItem record {|
 |};
 ```
 
+To implement the service, attach the generated service contract type to an HTTP listener and implement each resource function:
+
+```ballerina
+import ballerina/http;
+
+listener http:Listener httpDefaultListener = http:getDefaultListener();
+
+service OASServiceType on httpDefaultListener {
+
+    // GET /orders
+    resource function get orders(string? status, int 'limit = 20)
+            returns Order[]|http:InternalServerError {
+        // TODO: Implement logic
+    }
+
+    // POST /orders
+    resource function post orders(OrderRequest payload)
+            returns http:Created|http:BadRequest {
+        // TODO: Implement logic
+    }
+
+    // GET /orders/{orderId}
+    resource function get orders/[string orderId]()
+            returns Order|http:NotFound {
+        // TODO: Implement logic
+    }
+}
+```
+
 ## Generating a Ballerina client from OpenAPI
 
 Create a type-safe HTTP client that wraps all API operations defined in the spec.
 
-1. Click the **+** **Add Artifacts** button in the canvas.
+1. In the canvas, click **+ Add Artifact** (or **Add Artifact manually** if the integration has no artifacts yet).
 2. In the **Artifacts** panel, select **Connection** under **Other Artifacts**.
-3. Select **Connect Via API Specification** and provide the OpenAPI spec file.
+3. Select **Connect via API Specification**. In the **Import API Specification** step, keep **Specification Type** as **OpenAPI**, enter a **Connector Name**, choose your OpenAPI specification file under **Import Specification File**, and click **Save Connector**.
 
    <ThemedImage
        alt="Client generation from OpenAPI"
@@ -117,7 +139,7 @@ Create a type-safe HTTP client that wraps all API operations defined in the spec
        }}
    />
 
-4. In the **Create Connection** step, configure the connection details. Expand **Advanced Configurations** to set the following optional fields:
+4. In the **Create Connection** step, configure the optional connection settings:
 
    - **Config**: The configurations to use when initializing the connector.
    - **Service Url**: URL of the target service.
@@ -147,22 +169,22 @@ bal openapi -i openapi.yaml --mode client --client-methods remote
 ### Using the generated client
 
 ```ballerina
-import generated_client as api;
+import ballerina/http;
 
 configurable string apiUrl = ?;
 configurable string apiKey = ?;
 
-final api:Client orderClient = check new (apiUrl, {
+final Client orderClient = check new (apiUrl, {
     httpVersion: http:HTTP_1_1,
     customHeaders: {"X-API-Key": apiKey}
 });
 
-function getOrders(string? status) returns api:Order[]|error {
+function getOrders(string? status) returns Order[]|error {
     // The client method name matches the operationId from the spec
     return orderClient->getOrders(status = status);
 }
 
-function createOrder(api:OrderRequest req) returns api:Order|error {
+function createOrder(OrderRequest req) returns Order|error {
     return orderClient->createOrder(req);
 }
 ```
@@ -184,8 +206,8 @@ bal openapi -i openapi.yaml
 Generate an OpenAPI specification from an existing Ballerina HTTP service:
 
 1. Open the HTTP service in the **Service Designer**.
-2. Click **Export** in the service header toolbar.
-3. Select **Export OpenAPI Specification**.
+2. Click the **⋮** (more options) icon in the service header.
+3. Select **Export OpenAPI Spec**.
 
    <ThemedImage
        alt="Export OpenAPI from service"
@@ -195,8 +217,7 @@ Generate an OpenAPI specification from an existing Ballerina HTTP service:
        }}
    />
 
-4. Choose the output location.
-5. Click **Select OAS Save Location**.
+4. Choose the folder to save the specification in, and click **Select OAS Save Location**.
 
 ```bash
 # Export OpenAPI spec from a Ballerina project
@@ -279,7 +300,7 @@ bal openapi -i openapi.yaml --nullable
 
 **Connecting to an external API**
 
-If the API provider supplies an OpenAPI spec, generate a type-safe client from it. You don't need to manually configure endpoints, methods, or request/response types. Everything is inferred from the spec. Without this, you would fall back to a generic HTTP connector and handle all of that yourself.
+If the API provider supplies an OpenAPI spec, generate a type-safe client from it. The tool derives the endpoints, operations, and request/response types from the spec, so you don't have to define them manually as you would with a generic HTTP connector.
 
 1. Obtain the OpenAPI spec from the API provider.
 2. Generate the client: `bal openapi -i partner-api.yaml --mode client`
@@ -287,10 +308,10 @@ If the API provider supplies an OpenAPI spec, generate a type-safe client from i
 
 **Contract-first service design**
 
-Design your API as an OpenAPI spec first, then generate service stubs from it. Fill in the implementation knowing you cannot drift from the agreed contract.
+Design your API as an OpenAPI spec first, then generate service stubs from it. The generated service contract type is validated at compile time, so your implementation can't drift from the agreed contract.
 
 1. Author your OpenAPI spec.
-2. Generate service stubs: `bal openapi -i my-api.yaml --mode service`
+2. Generate service stubs: `bal openapi -i my-api.yaml --mode service --with-service-contract`
 3. Implement the generated resource functions.
 
 **Publishing your API**
@@ -317,7 +338,7 @@ Once your service is built, export its OpenAPI specification and share it with c
 | `array` | — | `T[]` |
 | `object` | — | `record {}` |
 | `oneOf` | — | Union type |
-| `allOf` | — | Intersection type |
+| `allOf` | — | Type inclusion |
 
 ## What's next
 
