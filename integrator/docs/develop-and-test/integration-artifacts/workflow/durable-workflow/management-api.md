@@ -26,7 +26,7 @@ The REST surface lives in its own module, `ballerina/workflow.management.rest`. 
     }}
 />
 
-Selecting it adds the `ballerina/workflow.management.rest` import to `main.bal` and sets `enableManagementApi = true` in `Config.toml`.
+Selecting it adds the `ballerina/workflow.management.rest` import to `main.bal`. It also writes `enableManagementApi = true` to `Config.toml`, which is already the default.
 
 ### By hand
 
@@ -36,13 +36,12 @@ Import the module in the integration:
 import ballerina/workflow.management.rest as _;
 ```
 
-### Switch it on
+### Configure the API
 
-Importing the module alone opens no port. The API starts only when `enableManagementApi` is `true`, which the designer checkbox sets for you. Set it by hand, along with the port, TLS, and CORS settings, from the configuration editor, or directly in `Config.toml` under the module's own table:
+Importing the module serves the API, with no other setting needed. To keep the import without opening the port, set `enableManagementApi` to `false`. Set the port, TLS, and CORS settings from the configuration editor, or directly in `Config.toml` under the module's own table:
 
 ```toml
 [ballerina.workflow.management.rest]
-enableManagementApi = true
 port = 8234                 # default
 ```
 
@@ -53,7 +52,7 @@ Base URL: `http://<host>:8234/workflow`
 
 ## Authentication
 
-Authentication is configured under the same table. **Basic authentication is on by default**, so enabling the API without choosing a scheme does not publish an open endpoint: every request is refused with `401` until you add users to `[[ballerina.auth.users]]` or enable another scheme.
+Authentication is configured under the same table. **Basic authentication is on by default**, so importing the module without choosing a scheme does not publish an open endpoint: every request is refused with `401` until you add users to `[[ballerina.auth.users]]` or enable another scheme. When basic auth is the only scheme and no users are configured, a startup warning and the `401` response say how to fix it.
 
 | Setting | Default | Description |
 |---|---|---|
@@ -77,10 +76,9 @@ An externally exposed deployment. Basic auth credentials are not settings of thi
 
 ```toml
 [ballerina.workflow.management.rest]
-enableManagementApi = true
-enableTls           = true
-certFile            = "/etc/certs/tls.crt"
-keyFile             = "/etc/certs/tls.key"
+enableTls = true
+certFile  = "/etc/certs/tls.crt"
+keyFile   = "/etc/certs/tls.key"
 
 [[ballerina.auth.users]]
 username = "ops"
@@ -91,8 +89,7 @@ A cluster-internal deployment behind a service mesh that already handles identit
 
 ```toml
 [ballerina.workflow.management.rest]
-enableManagementApi = true
-enableBasicAuth     = false
+enableBasicAuth = false
 ```
 
 :::warning An unauthenticated API is open to the port
