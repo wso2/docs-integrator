@@ -18,7 +18,7 @@ GitHub is a widely used platform for version control and collaboration, allowing
 - Security advisory access: query global and repository-specific security advisories
 - GitHub Actions and workflow management: list and trigger workflow runs
 - Dependabot, code scanning, and secret scanning alert access
-- Event-driven webhook handling for GitHub issues, pull requests, releases, pushes, and repository activity
+- Event-driven webhook handling for GitHub issues, pull requests, releases, pushes, and repository activity through the companion `ballerinax/trigger.github` package
 - Resource-based API design using Ballerina resource functions for intuitive path-based access to GitHub REST endpoints
 
 ## Actions
@@ -39,7 +39,7 @@ See the [GitHub Webhooks](product://integrator/develop-and-test/integration-arti
 
 ## Triggers
 
-Triggers allow your integration to react to GitHub repository activity in real time. The connector provides a webhook listener that receives GitHub events and invokes your service callbacks automatically when issues, pull requests, releases, pushes, and other repository events occur.
+Triggers allow your integration to react to GitHub repository activity in real time. The separate `ballerinax/trigger.github` package provides a webhook listener that receives GitHub events and invokes your service callbacks automatically when issues, pull requests, releases, pushes, and other repository events occur.
 
 Supported trigger events:
 

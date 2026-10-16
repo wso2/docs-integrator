@@ -50,7 +50,7 @@ Select **+ Add Artifact** on the Integration Design canvas. In the **Artifacts**
 
 Enter `github` in the search box to filter results, then select the **GitHub** connector card. In the connection configuration form, bind the connection fields to configurable variables:
 
-- **auth.token** : Personal access token used to authenticate GitHub API requests
+- **Config** : Switch to **Expression** mode and enter `{auth: {token: githubAuthToken}}`, where `githubAuthToken` is a `string` configurable that holds the personal access token used to authenticate GitHub API requests
 - **Connection Name** : Logical name for this connection (`githubClient`)
 
 <ThemedImage

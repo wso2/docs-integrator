@@ -6,7 +6,7 @@ title: Triggers
 
 The `ballerinax/trigger.github` package supports event-driven GitHub webhook processing through a listener. The listener receives webhook requests from GitHub and invokes your service callbacks when issues, pull requests, releases, pushes, labels, milestones, project cards, and related repository events occur.
 
-Three components work together:
+This reference covers `ballerinax/trigger.github` version 0.11.0. The following components work together:
 
 | Component | Role |
 |-----------|------|
@@ -39,7 +39,7 @@ The listener supports the following connection strategy:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `webhookSecret` | `string` | `DEFAULT_SECRET` | Secret token used to validate GitHub webhook requests. Configure the same value in the GitHub repository webhook settings. |
+| `webhookSecret` | `string` | `""` | Secret token used to validate GitHub webhook requests. Configure the same value in the GitHub repository webhook settings. |
 
 The listener also accepts a port or an HTTP listener object to expose the webhook endpoint. If you do not provide a port, the listener uses the default port `8090`.
 
@@ -99,7 +99,9 @@ A GitHub trigger service is a Ballerina service attached to a `github:Listener`.
 | `github:PushService` | `onPush` | `remote function onPush(github:PushEvent payload) returns error?` | Invoked when commits are pushed to a repository. |
 | `github:ProjectCardService` | `onCreated`, `onEdited`, `onMoved`, `onConverted`, `onDeleted` | `remote function <callback>(github:ProjectCardEvent payload) returns error?` | Invoked when a GitHub project card event is received. |
 
-You do not need to implement every callback in a service type. Implement only the GitHub event actions relevant to your integration.
+A service must implement every remote function defined by its service type. WSO2 Integrator generates all the handlers for you; leave the handlers you do not need with an empty body.
+
+Version 0.12.0 of `ballerinax/trigger.github` adds more service types and callbacks, and renames some callbacks. For example, `onPreReleased` becomes `onPrereleased`, and the `ProjectCardService` callbacks become `onProjectCardCreated`, `onProjectCardEdited`, and so on. If your project uses 0.12.0, implement the callbacks defined by that version.
 
 ### Full usage example
 
@@ -130,6 +132,21 @@ service github:IssuesService on githubListener {
             issue = payload.issue.title,
             repository = payload.repository.full_name
         );
+    }
+
+    remote function onReopened(github:IssuesEvent payload) returns error? {
+    }
+
+    remote function onAssigned(github:IssuesEvent payload) returns error? {
+    }
+
+    remote function onUnassigned(github:IssuesEvent payload) returns error? {
+    }
+
+    remote function onLabeled(github:IssuesEvent payload) returns error? {
+    }
+
+    remote function onUnlabeled(github:IssuesEvent payload) returns error? {
     }
 }
 ```
