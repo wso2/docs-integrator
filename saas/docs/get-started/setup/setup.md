@@ -47,16 +47,7 @@ The name must:
 
 Read and accept the [Privacy Policy](https://wso2.com/devant/privacy-policy/) and [Terms of Use](https://wso2.com/devant/terms-of-use/), then click **Create**.
 
-## Step 4: Select your persona
-
-Choose the persona that matches your role, then click **Next**:
-
-- **Developer/Architect/Product Manager**: Focus on building, testing, and deploying applications.
-- **Platform Engineer/SRE**: Focus on infrastructure, governance, service mesh, and monitoring.
-
-Your selection personalizes the views and workflows shown in the platform. You can always switch between personas anytime.
-
-## Step 5: Select a region
+## Step 4: Select a region
 
 Select the cloud region where you want to deploy your integrations and click **Confirm**.
 
@@ -73,7 +64,7 @@ You land on the **Overview** page of the default project in your new organizatio
 :::info Invite others
 To give teammates access, an organization admin can invite them from the organization settings. Invited users can only see resources within that organization. See [Users and access control](../../manage/users-and-access/users-and-access.md) for more information.
 
-## Step 6: Open the cloud editor
+## Step 5: Open the cloud editor
 
 On the project overview page, click **Create on Cloud**. WSO2 Integrator provisions a cloud editor instance for you, showing progress through each setup stage.
 
