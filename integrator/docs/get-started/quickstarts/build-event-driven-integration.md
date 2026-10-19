@@ -4,21 +4,30 @@ title: Build an Event-Driven Integration
 
 # Build an Event-Driven Integration
 
-**Time:** Under 10 minutes | **What you'll build:** An event-driven integration that consumes messages from `Orders` queue in RabbitMQ broker and processes them.
+<QuickstartHeader
+  time="Under 10 minutes"
+  build={<>An event-driven integration that consumes messages from <code>Orders</code> queue in RabbitMQ broker and processes them.</>}
+/>
 
 <p style={{textAlign: 'justify'}}>
 Event integrations are designed for reactive workflows triggered by messages from a broker. This quick start demonstrates the complete flow: creating a RabbitMQ message listener, adding an event handler to process messages, and implementing the integration logic executed when a message is received.
 </p>
 
-:::info Prerequisites
-- A working WSO2 Integrator environment. Choose the path that fits how you want to work:
-   - <CloudDocsLink to="/get-started/cloud-setup">Cloud setup — launch WSO2 Integrator in a browser-based cloud editor.
-   - [Local setup](../setup/setup.md) — install and launch WSO2 Integrator on your machine.
-- A running RabbitMQ instance. To start one with Docker, run:
+## Prerequisites
 
-  ```bash
-  docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:4.2-management
-  ```
+A working WSO2 Integrator environment.
+
+<PrereqCard icon="local" title="Local setup" href="/get-started/setup">
+  Install and launch WSO2 Integrator on your machine.
+
+<PrereqCard icon="cloud" title="WSO2 Cloud Account" href="/get-started/setup" cloud>
+  For AI assisted development and WSO2 Cloud deployments.
+
+Also required, a running RabbitMQ instance. To start one with Docker, run:
+
+```bash
+docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:4.2-management
+```
 
 ## Step 1: Create the integration
 
@@ -159,6 +168,26 @@ If you're using the cloud editor, a project is already open, so you can skip thi
       }}
    />
 
+## Step 6: Deploy to WSO2 Cloud
+
+Before you deploy, set **Host** and **Port** to a RabbitMQ broker that WSO2 Cloud can reach; `localhost` doesn't resolve to your local broker there.
+
+Deploy your integration to WSO2 Cloud - Integration Platform in any of the following ways:
+
+- If you're using the cloud editor, see [Save and deploy](../../deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor.md#save-and-deploy).
+- If you're using WSO2 Integrator on your machine, see [Deploy from WSO2 Integrator](../../deploy-and-run/deploy-to-wso2-cloud/push-from-ide.md).
+
+<PaletteCard icon="ai" highlight>
+  <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
+  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the OrderProcessor sample straight to WSO2 Cloud.</p>
+  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
+    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/orderprocessor" target="_blank" rel="noopener noreferrer">
+      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
+    </a>
+
+
+</div>
+
 ## Source code
 
 <details>
@@ -185,26 +214,6 @@ service "Orders" on rabbitmqListener {
 ```
 
 </details>
-
-## Step 6: Deploy to WSO2 Cloud
-
-Before you deploy, set **Host** and **Port** to a RabbitMQ broker that WSO2 Cloud can reach; `localhost` doesn't resolve to your local broker there.
-
-Deploy your integration to WSO2 Cloud - Integration Platform in any of the following ways:
-
-- If you're using the cloud editor, see [Save and deploy](../../deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor.md#save-and-deploy).
-- If you're using WSO2 Integrator on your machine, see [Deploy from WSO2 Integrator](../../deploy-and-run/deploy-to-wso2-cloud/push-from-ide.md).
-
-<PaletteCard icon="ai" highlight>
-  <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
-  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the OrderProcessor sample straight to WSO2 Cloud.</p>
-  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
-    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/orderprocessor" target="_blank" rel="noopener noreferrer">
-      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
-    </a>
-
-
-</div>
 
 ## Supported event sources
 

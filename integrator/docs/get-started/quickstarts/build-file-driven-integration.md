@@ -4,36 +4,35 @@ title: Build a File-Driven Integration
 
 # Build a File-Driven Integration
 
-**Time:** Under 10 minutes | **What you'll build:** A file integration that adds an `onModify` handler to track file changes and uses `printInfo` to log file modification events.
+<QuickstartHeader
+  time="Under 10 minutes"
+  build={<>A file integration that adds an <code>onModify</code> handler to track file changes and uses <code>printInfo</code> to log file modification events.</>}
+/>
 
 <p style={{textAlign: 'justify'}}>
 File integrations are ideal for batch uploads, scheduled file processing, and ETL workflows triggered by files appearing in a folder or FTP server.
 </p>
 
-:::info Prerequisites
+## Prerequisites
 
-- A working WSO2 Integrator environment. Choose the path that fits how you want to work:
-   - <CloudDocsLink to="/get-started/cloud-setup">Cloud setup — launch WSO2 Integrator in a browser-based cloud editor.
-   - [Local setup](../setup/setup.md) — install and launch WSO2 Integrator on your machine.
-- A file at the listener path to watch. Create one if you don't have one:
+A working WSO2 Integrator environment.
 
+<PrereqCard icon="local" title="Local setup" href="/get-started/setup">
+  Install and launch WSO2 Integrator on your machine.
 
+<PrereqCard icon="cloud" title="WSO2 Cloud Account" href="/get-started/setup" cloud>
+  For AI assisted development and WSO2 Cloud deployments.
 
+Also required, a file at the listener path to watch. Create one if you don't have one:
 
- ```bash
- echo "test" > /tmp/testfile.txt
- ```
+```bash
+echo "test" > /tmp/testfile.txt
+```
 
-
-
-
- ```bat
- mkdir C:\tmp 2>nul
- echo test > C:\tmp\testfile.txt
- ```
-
-
-
+```bat
+mkdir C:\tmp 2>nul
+echo test > C:\tmp\testfile.txt
+```
 
 ## Step 1: Create the integration
 

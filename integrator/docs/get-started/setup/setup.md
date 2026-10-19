@@ -96,11 +96,11 @@ Sign in with your WSO2 Cloud account to deploy to WSO2 Cloud, manage environment
    />
 
 :::info Don't have a WSO2 Cloud account?
-Create one and set up your organization by following <CloudDocsLink to="/get-started/cloud-setup">Cloud setup in the WSO2 Cloud documentation, then return here to sign in.
+Create one and set up your organization by following <CloudDocsLink to="/get-started/setup">Cloud setup in the WSO2 Cloud documentation, then return here to sign in.
 
 ## Next steps
 
-- <CloudDocsLink to="/get-started/cloud-setup">Cloud setup — Create a WSO2 Cloud account and organization to get the most out of WSO2 Integrator.
+- <CloudDocsLink to="/get-started/setup">Cloud setup — Create a WSO2 Cloud account and organization to get the most out of WSO2 Integrator.
 - [Develop a new integration](../../develop-and-test/create-workspace/create-a-project.md) — Create a new integration project and start building.
 - [Open an existing integration](../../develop-and-test/create-workspace/open-a-project.md) — Continue working on a project you already have.
 - [Explore sample integrations](../../develop-and-test/create-workspace/explore-sample-integrations.md) — Learn from ready-made examples.

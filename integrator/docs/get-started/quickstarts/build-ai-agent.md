@@ -4,17 +4,24 @@ title: Build an AI Agent
 
 # Build an AI Agent
 
-**Time:** Under 10 minutes | **What you'll build:** An AI agent that connects to an LLM, uses tools, and responds to user queries in chat.
+<QuickstartHeader
+  time="Under 10 minutes"
+  build={<>An AI agent that connects to an LLM, uses tools, and responds to user queries in chat.</>}
+/>
 
 <p style={{textAlign: 'justify'}}>
 An AI agent uses an LLM to understand user queries, reason about them, and call tools to retrieve information or perform actions. This quick start walks you through the full process: creating a project, adding an AI Chat Agent artifact, configuring its instructions, and testing the agent in the built-in chat panel.
 </p>
 
-:::info Prerequisites
-A working WSO2 Integrator environment. Choose the path that fits how you want to work:
+## Prerequisites
 
-- <CloudDocsLink to="/get-started/cloud-setup">Cloud setup — launch WSO2 Integrator in a browser-based cloud editor.
-- [Local setup](../setup/setup.md) — install and launch WSO2 Integrator on your machine.
+A working WSO2 Integrator environment.
+
+<PrereqCard icon="local" title="Local setup" href="/get-started/setup">
+  Install and launch WSO2 Integrator on your machine.
+
+<PrereqCard icon="cloud" title="WSO2 Cloud Account" href="/get-started/setup" cloud>
+  For AI assisted development and WSO2 Cloud deployments.
 
 ## Step 1: Create the integration
 
@@ -125,6 +132,24 @@ If you are using the WSO2 model provider, the access token is obtained through [
       }}
    />
 
+## Step 4: Deploy to WSO2 Cloud
+
+Deploy your integration to WSO2 Cloud - Integration Platform in any of the following ways:
+
+- If you're using the cloud editor, see [Save and deploy](../../deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor.md#save-and-deploy).
+- If you're using WSO2 Integrator on your machine, see [Deploy from WSO2 Integrator](../../deploy-and-run/deploy-to-wso2-cloud/push-from-ide.md).
+
+<PaletteCard icon="ai" highlight>
+  <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
+  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the AIAgent sample straight to WSO2 Cloud.</p>
+  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
+    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/aiagent" target="_blank" rel="noopener noreferrer">
+      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
+    </a>
+
+
+</div>
+
 ## Source code
 
 <details>
@@ -164,24 +189,6 @@ service /wso2IntegratorAssistant on chatAgentListener {
 ```
 
 </details>
-
-## Step 4: Deploy to WSO2 Cloud
-
-Deploy your integration to WSO2 Cloud - Integration Platform in any of the following ways:
-
-- If you're using the cloud editor, see [Save and deploy](../../deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor.md#save-and-deploy).
-- If you're using WSO2 Integrator on your machine, see [Deploy from WSO2 Integrator](../../deploy-and-run/deploy-to-wso2-cloud/push-from-ide.md).
-
-<PaletteCard icon="ai" highlight>
-  <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
-  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the AIAgent sample straight to WSO2 Cloud.</p>
-  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
-    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/aiagent" target="_blank" rel="noopener noreferrer">
-      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
-    </a>
-
-
-</div>
 
 ## What's next
 

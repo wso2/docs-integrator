@@ -4,7 +4,12 @@ title: Build a Durable Workflow
 
 # Build a Durable Workflow
 
-**Time:** 20 minutes | **What you'll build:** A durable workflow that reserves inventory for an order, suspends until a payment confirmation arrives, and then either emails the customer or cancels the order. Every activity result and data event is recorded, so a restart replays the record instead of reserving twice, and the wait for payment holds no thread and no connection while it lasts, whether that is seconds or days.
+<QuickstartHeader
+  time="20 minutes"
+  build={<>A durable workflow that handles customer orders</>}
+/>
+
+The durable workflow reserves inventory for an order, suspends until a payment confirmation arrives, and then either emails the customer or cancels the order. Every activity result and data event is recorded, so a restart replays the record instead of reserving twice, and the wait for payment holds no thread and no connection while it lasts, whether that is seconds or days.
 
 The finished flow has three steps:
 
@@ -20,9 +25,15 @@ The finished flow has three steps:
     }}
 />
 
-:::info Prerequisites
+## Prerequisites
 
-- [WSO2 Integrator installed](../setup/setup.md)
+A working WSO2 Integrator environment.
+
+<PrereqCard icon="local" title="Local setup" href="/get-started/setup">
+  Install and launch WSO2 Integrator on your machine.
+
+<PrereqCard icon="cloud" title="WSO2 Cloud Account" href="/get-started/setup" cloud>
+  For AI assisted development and WSO2 Cloud deployments.
 
 ## Step 1: Create the integration
 

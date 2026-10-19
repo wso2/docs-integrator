@@ -4,15 +4,27 @@ title: Pre-Built Integrations
 
 # Try Pre-Built Integrations
 
-**Time:** Under 10 minutes | **What you'll do:** Download a ready-made integration between two applications, add your credentials, and run it. You don't build anything from scratch.
+<QuickstartHeader
+  time="Under 10 minutes"
+  build={<>A ready-made integration between two applications, downloaded, configured with your credentials, and run.</>}
+/>
 
+<p style={{textAlign: 'justify'}}>
 Building an integration from scratch means learning the platform's abstractions, wiring up connectors, and testing the logic before anything useful happens, even for a straightforward use case. Pre-built integrations skip all that: each one is a ready-made integration for a real, common use case. Pick the one you need, download it, configure it, and run it.
+</p>
 
 :::note Sample integrations vs. pre-built integrations
 [Sample integrations](../develop-and-test/create-workspace/explore-sample-integrations.md) teach you the platform's abstractions. Pre-built integrations are different: each one is a real, already-wired integration for an actual business use case.
 
-:::info Prerequisites
-WSO2 Integrator installed on your machine. If you haven't installed it yet, see [Setup](setup/setup.md).
+## Prerequisites
+
+A working WSO2 Integrator environment.
+
+<PrereqCard icon="local" title="Local setup" href="/get-started/setup">
+  Install and launch WSO2 Integrator on your machine.
+
+<PrereqCard icon="cloud" title="WSO2 Cloud Account" href="/get-started/setup" cloud>
+  For WSO2 Cloud deployments.
 
 ## Step 1: Open the catalog
 

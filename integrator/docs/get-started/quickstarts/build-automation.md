@@ -4,18 +4,24 @@ title: Build an Automation
 
 # Build an Automation
 
-**Time:** Under 10 minutes | **What you'll build:** An automation that prints `Hello World` to the terminal when it runs.
+<QuickstartHeader
+  time="Under 10 minutes"
+  build={<>An automation that prints <code>Hello World</code> to the terminal when it runs.</>}
+/>
 
 <p style={{textAlign: 'justify'}}>
 An automation runs your integration logic without requiring an external request, either on demand or on a schedule. Automations are useful for tasks such as data synchronization, report generation, and routine maintenance. This quick start walks you through the full process: adding an automation artifact, building the logic in the visual designer, running it, and reviewing scheduling options for production.
 </p>
 
-:::info Prerequisites
+## Prerequisites
 
-A working WSO2 Integrator environment. Choose the path that fits how you want to work:
+A working WSO2 Integrator environment.
 
-- <CloudDocsLink to="/get-started/cloud-setup">Cloud setup — launch WSO2 Integrator in a browser-based cloud editor.
-- [Local setup](../setup/setup.md) — install and launch WSO2 Integrator on your machine.
+<PrereqCard icon="local" title="Local setup" href="/get-started/setup">
+  Install and launch WSO2 Integrator on your machine.
+
+<PrereqCard icon="cloud" title="WSO2 Cloud Account" href="/get-started/setup" cloud>
+  For AI assisted development and WSO2 Cloud deployments.
 
 ## Step 1: Create the integration
 
@@ -140,6 +146,24 @@ If you're using the cloud editor, a project is already open, so you can skip thi
       }}
    />
 
+## Step 5: Deploy to WSO2 Cloud
+
+Deploy your integration to WSO2 Cloud - Integration Platform in any of the following ways:
+
+- If you're using the cloud editor, see [Save and deploy](../../deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor.md#save-and-deploy).
+- If you're using WSO2 Integrator on your machine, see [Deploy from WSO2 Integrator](../../deploy-and-run/deploy-to-wso2-cloud/push-from-ide.md).
+
+<PaletteCard icon="ai" highlight>
+  <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
+  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the HelloWorldAutomation sample straight to WSO2 Cloud.</p>
+  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
+    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/automation" target="_blank" rel="noopener noreferrer">
+      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
+    </a>
+
+
+</div>
+
 ## Source code
 
 <details>
@@ -162,24 +186,6 @@ public function main() returns error? {
 ```
 
 </details>
-
-## Step 5: Deploy to WSO2 Cloud
-
-Deploy your integration to WSO2 Cloud - Integration Platform in any of the following ways:
-
-- If you're using the cloud editor, see [Save and deploy](../../deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor.md#save-and-deploy).
-- If you're using WSO2 Integrator on your machine, see [Deploy from WSO2 Integrator](../../deploy-and-run/deploy-to-wso2-cloud/push-from-ide.md).
-
-<PaletteCard icon="ai" highlight>
-  <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
-  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the HelloWorldAutomation sample straight to WSO2 Cloud.</p>
-  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
-    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/automation" target="_blank" rel="noopener noreferrer">
-      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
-    </a>
-
-
-</div>
 
 ## Scheduling automations
 
