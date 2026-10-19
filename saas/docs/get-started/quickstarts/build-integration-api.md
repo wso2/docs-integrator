@@ -4,13 +4,19 @@ title: Build an Integration as API
 
 # Build an Integration as API
 
-**Time:** Under 10 minutes | **What you'll build:** An HTTP service that listens on `/hello/greeting`, calls an external API, and returns the response to the caller.
+<QuickstartHeader
+  time="Under 10 minutes"
+  build={<>An HTTP service that listens on <code>/hello/greeting</code>, calls an external API, and returns the response to the caller.</>}
+/>
 
 An HTTP service exposes your integration logic as a REST endpoint. This quick start shows the full cycle: create a service, add a resource, connect to an external API, and test it using the Try-It/Test panel in WSO2 Integrator.
 
-:::info Prerequisites
+## Prerequisites
 
-A working WSO2 Integrator environment. See [Cloud setup](../../get-started/setup/setup.md) to sign up and launch WSO2 Integrator in the browser-based cloud editor.
+A working WSO2 Integrator environment.
+
+<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">
+  Sign up and launch WSO2 Integrator in the browser-based cloud editor.
 
 ## Step 1: Create the integration
 
@@ -129,6 +135,21 @@ In the cloud editor, you're already inside a project. Skip to Step 2.
     }}
 />
 
+## Step 8: Deploy to WSO2 Cloud
+
+Deploy your integration to WSO2 Cloud. Check [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
+
+<PaletteCard icon="ai" highlight>
+  <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
+  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the HelloWorldAPI sample straight to WSO2 Cloud.</p>
+  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
+    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/helloworldapi" target="_blank" rel="noopener noreferrer">
+      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
+    </a>
+
+
+</div>
+
 ## Source code
 
 <details>
@@ -158,15 +179,3 @@ service /hello on httpDefaultListener {
 ```
 
 </details>
-
-## Step 8: Deploy to WSO2 Cloud
-
-Deploy your integration to WSO2 Cloud. Check [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
-
-## Skip ahead: deploy a ready-made sample
-
-Rather not build it yourself? One-click deploy the `HelloWorldAPI` sample straight to WSO2 Cloud:
-
-<a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/helloworldapi" target="_blank">
-    <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" />
-</a>
