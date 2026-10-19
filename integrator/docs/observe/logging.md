@@ -1,0 +1,177 @@
+---
+title: Logging
+---
+
+# Logging
+
+Configure logging for your WSO2 Integrator services to capture operational data, debug issues, and feed log aggregation systems. Ballerina provides structured logging with full context propagation, making it easy to correlate logs with traces and metrics.
+
+## Default Logging Behavior
+
+Ballerina provides a built-in `ballerina/log` module that writes log messages to standard error (stderr). By default, the log level is set to `INFO`, and messages are emitted in the key-value (logfmt) format. To get JSON instead, set `format = "json"` as shown in [JSON Log Format](#json-log-format).
+
+```ballerina
+import ballerina/http;
+import ballerina/log;
+
+service /orders on new http:Listener(9090) {
+    resource function post .(@http:Payload json payload) returns json|error {
+        string orderId = check payload.id;
+        log:printInfo("Order received", orderId = orderId);
+        // Process order...
+        log:printInfo("Order processed successfully", orderId = orderId);
+        return { status: "accepted" };
+    }
+}
+```
+
+Default output format:
+
+```
+time=2025-03-15T10:30:00.000Z level=INFO module=myorg/order_service message="Order received" orderId="ORD-12345"
+```
+
+## Log Levels and Configuration
+
+Ballerina supports the following log levels, from most to least verbose:
+
+| Level | Usage |
+|---|---|
+| `DEBUG` | Detailed diagnostic information for development |
+| `INFO` | General operational events (default) |
+| `WARN` | Potentially harmful situations that deserve attention |
+| `ERROR` | Error events that may still allow the service to continue |
+
+### Setting the Log Level
+
+Configure the log level in `Config.toml`:
+
+```toml
+# Config.toml
+[ballerina.log]
+level = "DEBUG"
+```
+
+Or set it via environment variable:
+
+```bash
+export BAL_CONFIG_VAR_BALLERINA_LOG_LEVEL=DEBUG
+```
+
+### Module-Specific Log Levels
+
+Control log verbosity per module to reduce noise in production:
+
+```toml
+# Config.toml
+[ballerina.log]
+level = "WARN"                          # Global default
+
+[[ballerina.log.modules]]
+name = "myorg/order_service"
+level = "INFO"                          # More verbose for this module
+
+[[ballerina.log.modules]]
+name = "myorg/payment_client"
+level = "DEBUG"                         # Debug a specific module
+```
+
+### Using Log Functions
+
+```ballerina
+import ballerina/log;
+
+public function processPayment(string orderId, decimal amount) returns error? {
+    log:printDebug("Starting payment processing", orderId = orderId, amount = amount);
+
+    do {
+        // Process payment...
+        log:printInfo("Payment completed", orderId = orderId, amount = amount);
+    } on fail error e {
+        log:printError("Payment failed", orderId = orderId, 'error = e);
+        return e;
+    }
+}
+```
+
+## Structured Logging Format
+
+Ballerina emits structured logs in key-value format by default, which is compatible with most log aggregation tools. Each log entry includes:
+
+- `time` -- ISO 8601 timestamp
+- `level` -- Log level
+- `module` -- Ballerina module name
+- `message` -- Log message string
+- Custom key-value pairs passed as named arguments
+
+### Adding Context to Log Entries
+
+Pass additional context as named arguments to log functions:
+
+```ballerina
+import ballerina/http;
+import ballerina/log;
+
+service /orders on new http:Listener(9090) {
+    resource function post .(@http:Payload json payload) returns json|error {
+        string orderId = check payload.id;
+        string customerId = check payload.customerId;
+        decimal total = check payload.total;
+        json[] items = check payload.items.ensureType();
+
+        log:printInfo("Processing order",
+            orderId = orderId,
+            customerId = customerId,
+            total = total,
+            itemCount = items.length()
+        );
+
+        return { status: "accepted" };
+    }
+}
+```
+
+Output:
+
+```
+time=2025-03-15T10:30:00.000Z level=INFO module=myorg/order_service message="Processing order" orderId="ORD-12345" customerId="CUST-789" total=149.99 itemCount=3
+```
+
+### JSON Log Format
+
+For systems that require JSON-formatted logs, configure the log output format:
+
+```toml
+# Config.toml
+[ballerina.log]
+level = "INFO"
+format = "json"
+```
+
+JSON output, with one log entry per line:
+
+```json
+{"time":"2025-03-15T10:30:00.000Z", "level":"INFO", "module":"myorg/order_service", "message":"Processing order", "orderId":"ORD-12345", "customerId":"CUST-789", "total":149.99, "itemCount":3}
+```
+
+When tracing is enabled, each log record also carries the `traceId` and `spanId` of the request that wrote it. Log platforms that parse JSON, such as Amazon CloudWatch Logs, turn these into queryable fields. You can then go from a log line to its trace and back. In the default key-value format, the same values are present but stay unparsed.
+
+## Send logs to Amazon CloudWatch Logs
+
+Integrations log to stderr, so on AWS the platform ships the output to CloudWatch Logs without code changes. Switch to the [JSON log format](#json-log-format) so each log line arrives as one structured event that you can query with CloudWatch Logs Insights:
+
+- In `Config.toml`, set `format = "json"` under `[ballerina.log]`.
+- In a container, where `Config.toml` isn't part of the image, set the environment variable `BAL_CONFIG_VAR_BALLERINA_LOG_FORMAT=json` instead. On Amazon ECS, add it to the `environment` list of the container definition.
+
+| Platform | How logs reach CloudWatch Logs |
+|----------|--------------------------------|
+| Amazon ECS | The `awslogs` log driver in the task definition. See [Amazon ECS deployment](../deploy-and-run/self-hosted/containerized-deployment.md#step-5-register-the-task-definition). |
+| Amazon EKS | Fluent Bit, or the Amazon CloudWatch Observability EKS add-on |
+| AWS Lambda | Automatic; function output goes to the `/aws/lambda/<function-name>` log group |
+| Amazon Bedrock AgentCore Runtime | Automatic; output goes to the `/aws/bedrock-agentcore/runtimes/<runtime-id>-DEFAULT` log group |
+
+## What's next
+
+- [Metrics](metrics.md) — Monitor service health with Prometheus
+- [Distributed tracing](tracing.md) — Trace requests across services
+- [Integration Control Plane](../icp/index.md) — Centralized monitoring dashboard

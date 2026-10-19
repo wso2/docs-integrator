@@ -1,0 +1,277 @@
+---
+title: Serverless Deployment
+---
+
+# Serverless Deployment
+
+WSO2 Integrator projects can be deployed as serverless functions, enabling event-driven scaling with zero infrastructure management. Ballerina supports AWS Lambda and Azure Functions as first-class deployment targets via compiler extensions that generate deployment artifacts automatically at build time.
+
+## Azure Functions
+
+### Prerequisites
+
+Create an Azure Function App with the following settings before deploying:
+
+- **Runtime stack**: Java 21
+- **Hosting OS**: Windows (Linux is not supported for Ballerina custom handlers)
+
+Install the [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local) (`func` CLI) for local development and deployment.
+
+### Step 1: Write the Azure function
+
+Ballerina uses a service-based model for Azure Functions. Attach a listener to a service to define the trigger type. The resource function behaves like a standard `ballerina/http` resource and supports `http:Payload` and `http:Header` annotations.
+
+```ballerina
+import ballerinax/azure.functions as af;
+
+service / on new af:HttpListener() {
+    resource function get hello(string name) returns string {
+        return "Hello, " + name + "!";
+    }
+}
+```
+
+Other trigger types use their corresponding listeners, configured with a trigger annotation:
+
+```ballerina
+import ballerinax/azure.functions as af;
+
+// Queue trigger
+@af:QueueTrigger {queueName: "myqueue"}
+listener af:QueueListener queueListener = new af:QueueListener();
+
+service "myqueue" on queueListener {
+    remote function onMessage(string message) {
+        // process queue message
+    }
+}
+
+// Timer trigger (runs every minute)
+@af:TimerTrigger {schedule: "0 */1 * * * *"}
+listener af:TimerListener timerListener = new af:TimerListener();
+
+service "timer" on timerListener {
+    remote function onTrigger(af:TimerMetadata metadata) {
+        // scheduled work
+    }
+}
+
+// Blob trigger
+@af:BlobTrigger {path: "mycontainer/{name}"}
+listener af:BlobListener blobListener = new af:BlobListener();
+
+service "blob" on blobListener {
+    remote function onUpdate(byte[] content) {
+        // process blob
+    }
+}
+```
+
+### Step 2: Build
+
+```bash
+bal build
+```
+
+The `--cloud` flag is optional for Azure Functions. The compiler auto-detects the Azure Functions extension and defaults to `--cloud="azure_functions"`. You can explicitly specify it to avoid the warning:
+
+```bash
+bal build --cloud="azure_functions"
+```
+
+The compiler extension generates the function artifacts automatically:
+
+```
+target/
+  azure_functions/
+    <function-name>/
+      function.json
+    host.json
+```
+
+The build output lists the functions and prints the commands to run locally and deploy:
+
+```text
+@azure.functions:Function: get-hello
+
+    Execute the command below to deploy the function locally:
+    $ func start --script-root target/azure_functions --java
+
+    Execute the command below to deploy Ballerina Azure Functions:
+    $ func azure functionapp publish <function_app_name> --script-root target/azure_functions
+```
+
+### Step 3: Run locally
+
+```bash
+func start --script-root target/azure_functions --java
+```
+
+### Step 4: Deploy to Azure
+
+Deploy using the Azure Functions Core Tools:
+
+```bash
+func azure functionapp publish <function_app_name> \
+  --script-root target/azure_functions
+```
+
+Refer to the [Azure Functions documentation](https://learn.microsoft.com/en-us/azure/azure-functions/) for creating and configuring Azure Function Apps.
+
+## AWS Lambda
+
+### Step 1: Write the Lambda function
+
+Write a Ballerina function annotated with `@lambda:Function`. The function receives a `lambda:Context` and a `json` (or typed event) input and returns `json|error`.
+
+```ballerina
+import ballerinax/aws.lambda;
+import ballerina/uuid;
+
+@lambda:Function
+public function echo(lambda:Context ctx, json input) returns json {
+    return input;
+}
+
+@lambda:Function
+public function generateId(lambda:Context ctx, json input) returns json {
+    return uuid:createType1AsString();
+}
+```
+
+To handle typed event sources, use the corresponding event types:
+
+```ballerina
+import ballerinax/aws.lambda;
+
+@lambda:Function
+public function processOrder(lambda:Context ctx,
+                             lambda:APIGatewayProxyRequest request) returns json|error {
+    string orderId = check request.queryStringParameters["orderId"].ensureType();
+    return { statusCode: 200, body: "Order " + orderId + " received" };
+}
+
+@lambda:Function
+public function processSQS(lambda:Context ctx, lambda:SQSEvent event) returns json {
+    return event.Records[0].body;
+}
+
+@lambda:Function
+public function processS3(lambda:Context ctx, lambda:S3Event event) returns json {
+    return event.Records[0].s3.'object.key;
+}
+
+@lambda:Function
+public function processDynamoDB(lambda:Context ctx,
+                                lambda:DynamoDBEvent event) returns json {
+    return event.Records[0].dynamodb.Keys.toString();
+}
+```
+
+Typed event records are available for these event sources. For any other source, accept the event as `json`.
+
+| Event source | Event type |
+|--------------|------------|
+| Amazon S3 | `lambda:S3Event` |
+| Amazon SQS | `lambda:SQSEvent` |
+| Amazon DynamoDB Streams | `lambda:DynamoDBEvent` |
+| Amazon SES | `lambda:SESEvent` |
+| Amazon API Gateway (proxy integration) | `lambda:APIGatewayProxyRequest` |
+
+### Step 2: Build
+
+```bash
+bal build
+```
+
+The `--cloud` flag is optional for AWS Lambda. The compiler auto-detects the Lambda extension. You can explicitly specify it if needed:
+
+```bash
+bal build --cloud="aws_lambda"
+```
+
+The compiler extension runs automatically and generates the deployment package:
+
+```
+target/
+  aws_lambda/
+    aws-ballerina-lambda-functions.zip
+```
+
+The build output lists the functions and prints the exact deploy commands to use:
+
+```
+@aws.lambda:Function: echo, generateId, processOrder, processSQS, processS3, processDynamoDB
+
+    Run the following command to deploy each Ballerina AWS Lambda function:
+    aws lambda create-function --function-name <FUNCTION_NAME> \
+      --zip-file fileb://aws-ballerina-lambda-functions.zip \
+      --handler <PACKAGE_NAME>.<FUNCTION_NAME> \
+      --runtime provided \
+      --role <LAMBDA_ROLE_ARN> \
+      --layers arn:aws:lambda:<REGION_ID>:367134611783:layer:ballerina-jre21: \
+      --memory-size 512 --timeout 10
+
+    Run the following command to re-deploy an updated Ballerina AWS Lambda function:
+    aws lambda update-function-code --function-name <FUNCTION_NAME> \
+      --zip-file fileb://aws-ballerina-lambda-functions.zip
+```
+
+### Step 3: Deploy with the AWS CLI
+
+Use the commands printed by the build output, substituting your values. For example:
+
+```bash
+aws lambda create-function \
+  --function-name echo \
+  --zip-file fileb://target/aws_lambda/aws-ballerina-lambda-functions.zip \
+  --handler functions.echo \
+  --runtime provided \
+  --role arn:aws:iam::123456789012:role/lambda-execution-role \
+  --layers arn:aws:lambda:us-east-1:367134611783:layer:ballerina-jre21:1 \
+  --memory-size 512 \
+  --timeout 10
+```
+
+To update an already-deployed function:
+
+```bash
+aws lambda update-function-code \
+  --function-name echo \
+  --zip-file fileb://target/aws_lambda/aws-ballerina-lambda-functions.zip
+```
+
+Refer to the [AWS Lambda documentation](https://docs.aws.amazon.com/lambda/) for deployment configuration and trigger setup.
+
+### Grant AWS permissions
+
+Lambda runs the function as its **execution role**, the role you pass with `--role` to `aws lambda create-function`. If the function uses AWS connectors, such as Amazon S3 or Amazon DynamoDB, add the permissions they need to that role and configure the connectors with `auth:DEFAULT_CREDENTIALS`. The Lambda runtime exposes the role's credentials as environment variables, which the default credential chain reads, so the function needs no access keys. See [Access AWS Services Securely](../secure/aws-access.md).
+
+## Reducing cold start times
+
+### Use GraalVM native images
+
+Compile to a native binary to reduce startup time:
+
+```bash
+bal build --graalvm
+```
+
+The compiler auto-detects the serverless platform and generates the appropriate native image artifacts.
+
+## Best practices
+
+| Practice | Recommendation |
+|----------|---------------|
+| Function Size | Keep functions focused on a single operation |
+| Dependencies | Minimize package dependencies to reduce deployment size |
+| Timeouts | Set appropriate timeouts based on expected execution time |
+| Secrets | Use cloud-native secret managers for sensitive configuration |
+| Observability | Enable platform observability features for monitoring and tracing |
+| Network Access | Configure network access only when required for private resources |
+
+## What's next
+
+- [GraalVM Native Images](graalvm-native-images.md) — Compile to native binaries for minimal cold start
+- [Managing Configurations](../managing-configurations.md) — Environment-specific configuration strategies
+- [Containerized Deployment](containerized-deployment.md) — Deploy as containers to Kubernetes or Docker

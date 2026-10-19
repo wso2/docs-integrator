@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkwso2_integrator_docs=globalThis.webpackChunkwso2_integrator_docs||[]).push([[53009],{75390(e,r,s){s.d(r,{createArchitectureServices:()=>c.S});var c=s(65530);s(27757)}}]);
