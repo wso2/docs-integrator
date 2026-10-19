@@ -2,7 +2,20 @@
 title: Setup Guide
 ---
 
-# Setup Guide
+{/* ConnectorHeader is wso2-connectors-only (its MDXComponents entry
+    doesn't survive sync-theme from main, which doesn't know this
+    component exists), so it's imported explicitly here rather than
+    relied on as a global MDX component. */}
+
+<ConnectorHeader
+  name="Alfresco"
+  version="2.0.2"
+  vendor="Alfresco"
+  category="Storage & Files"
+  description="Enterprise content management platform with document CRUD, versioning, shared links, and collaboration features"
+  icon="https://bcentral-packageicons.azureedge.net/images/ballerinax_alfresco_2.0.2.png"
+  packageName="ballerinax/alfresco"
+/>
 
 This guide walks you through creating an Alfresco account and obtaining the Basic Authentication credentials required to use the Alfresco connector.
 
