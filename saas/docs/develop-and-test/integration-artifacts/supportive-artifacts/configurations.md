@@ -145,5 +145,5 @@ For the complete configuration reference (supported types, value sources, resolu
 
 ## What's next
 
-- [Configuration management](../../../reference/configuration-reference.md#configuration-management) — Complete configuration reference: value sources, precedence, and environment variables.
+- [Configuration management](../../../manage/configurations/configuration-management.md) — Complete configuration reference: value sources, precedence, and environment variables.
 - [Connections](connections.md) — Use configurable variables to parameterize connections.
