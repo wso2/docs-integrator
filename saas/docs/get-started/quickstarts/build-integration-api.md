@@ -15,28 +15,29 @@ An HTTP service exposes your integration logic as a REST endpoint. This quick st
 
 A working WSO2 Integrator environment.
 
-<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">
-  Sign up and launch WSO2 Integrator in the browser-based cloud editor.
+<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">Sign up and launch WSO2 Integrator in the browser-based cloud editor.
 
 ## Step 1: Create the integration
 
-:::info Note
+1. On the project home page, click **Create on Cloud**.
 
-In the cloud editor, you're already inside a project. Skip to Step 2.
+   <ThemedImage
+       alt="WSO2 Cloud project home showing the Create on Cloud option"
+       sources={{
+           light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+           dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+       }}
+   />
 
-1. Open WSO2 Integrator.
-2. Select the **Create New Integration** card.
-3. Set **Integration Name** to `HelloWorldAPI`.
-4. Set **Project Name** to `integration-as-api`.
-5. Select **Create Integration**.
+2. The WSO2 Integrator cloud editor opens in your browser. Add an artifact to your integration, then deploy it to WSO2 Cloud from the Deploy to WSO2 Cloud panel on the right.
 
-<ThemedImage
-    alt="Create new integration form with Integration Name set to HelloWorldAPI and Project Name set to integration-as-api"
+   <ThemedImage
+    alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
     sources={{
-        light: useBaseUrl('/img/get-started/build-api-integration/create-project.png'),
-        dark: useBaseUrl('/img/get-started/build-api-integration/create-project.png'),
+        light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
+        dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
     }}
-/>
+    />
 
 ## Step 2: Add an HTTP service
 

@@ -376,7 +376,7 @@ public function main() returns error? {
 }
 ```
 
-For file-arrival events, both modules also expose a Listener. For the file-streaming deep dive, see [FTP / SFTP](../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#streaming-large-files).
+For file-arrival events, both modules also expose a Listener. For the file-streaming deep dive, see [FTP / SFTP](../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#streaming-large-files).
 
 ## Streaming network protocols {#streaming-network-protocols}
 
@@ -483,7 +483,7 @@ See [Supported Protocols](supported-protocols.md) for the full protocol matrix.
 
 * [Query Expressions](https://ballerina.io/spec/lang/master/) — full clause reference
 * [CSV](data-formats/csv.md) — CSV format reference
-* [Streaming large files](../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#streaming-large-files) — deep dive on file streaming
+* [Streaming large files](../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#streaming-large-files) — deep dive on file streaming
 * [Build an Event-Driven Integration](../get-started/quickstarts/build-event-driven-integration.md) — quick start
 * Event-driven artifact pages: [Kafka](../develop-and-test/integration-artifacts/event-driven-integration/kafka.md), [RabbitMQ](../develop-and-test/integration-artifacts/event-driven-integration/rabbitmq.md), [MQTT](../develop-and-test/integration-artifacts/event-driven-integration/mqtt.md), [Azure Service Bus](../develop-and-test/integration-artifacts/event-driven-integration/azure-service-bus.md), [Solace](../develop-and-test/integration-artifacts/event-driven-integration/solace.md)
 * [Supported Protocols](supported-protocols.md) — complete protocol matrix

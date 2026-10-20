@@ -22,7 +22,7 @@ This page defines the vocabulary used across WSO2 Integration Platform, grouped 
   <p class="palette-card-desc">What you compose an integration from in the WSO2 Integrator editor.</p>
   <div class="palette-chip-row">
     <PaletteChip href="#integration">Integration
-    <PaletteChip href="#integration-types">Integration types
+    <PaletteChip href="#integration-types">Integration styles
     <PaletteChip href="#endpoint">Endpoint
     <PaletteChip href="#connection">Connection
     <PaletteChip href="#types">Types

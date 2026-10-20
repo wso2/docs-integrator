@@ -2,9 +2,9 @@
 title: Get Started
 ---
 
-# Get Started with WSO2 Integration Platform
+# Get Started with Integration Platform on WSO2 Cloud
 
-New to WSO2 Integration Platform? Start here: set up your WSO2 Cloud account, learn the vocabulary used across the docs, then build your first integration with a quickstart that matches what you're trying to do.
+New to Integration Platform on WSO2 Cloud? Start here: set up your WSO2 Cloud account, learn the vocabulary used across the docs, then build your first integration with a quickstart that matches what you're trying to do.
 
 <PaletteCard icon="cloud" href="/get-started/setup">
   <h3 class="palette-card-title">Cloud Setup</h3>

@@ -14,7 +14,7 @@ WSO2 Cloud - Integration Platform lets you create managed Kafka services as a pl
 
 1. Sign in to the WSO2 Cloud Console at [https://console.devant.dev/](https://console.devant.dev/).
 2. In the header, click the **Organization** list. This opens the organization home page.
-3. In the left navigation menu, click **Dependencies**, then select the message broker service type.
+3. In the left navigation menu, click **Message Brokers**.
 4. Provide a display name, select a cloud provider and region, and choose a service plan.
 5. Create the topics your integrations will publish to and consume from.
 

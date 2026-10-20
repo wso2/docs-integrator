@@ -15,31 +15,35 @@ Event integrations are designed for reactive workflows triggered by messages fro
 
 A working WSO2 Integrator environment.
 
-<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">
-  Sign up and launch WSO2 Integrator in the browser-based cloud editor.
+<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">Sign up and launch WSO2 Integrator in the browser-based cloud editor.
 
-<PrereqCard icon="cloud" title="RabbitMQ" code="docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:4.2-management">
-  A running instance, or start one with Docker:
+You'll also need a running RabbitMQ instance. Start one with Docker:
+
+```bash
+docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:4.2-management
+```
 
 ## Step 1: Create the integration
 
-:::info Note
+1. On the project home page, click **Create on Cloud**.
 
-In the cloud editor, you're already inside a project. Skip to Step 2.
+   <ThemedImage
+       alt="WSO2 Cloud project home showing the Create on Cloud option"
+       sources={{
+           light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+           dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+       }}
+   />
 
-1. Open WSO2 Integrator.
-2. Select the **Create New Integration** card.
-3. Set **Integration Name** to `OrderProcessor`.
-4. Set **Project Name** to `event-integration`.
-5. Select **Create Integration**.
+2. The WSO2 Integrator cloud editor opens in your browser. Add an artifact to your integration, then deploy it to WSO2 Cloud from the Deploy to WSO2 Cloud panel on the right.
 
-<ThemedImage
-    alt="Create a New Integration Project"
+   <ThemedImage
+    alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
     sources={{
-        light: useBaseUrl('/img/get-started/build-event-driven-integration/create-project.png'),
-        dark: useBaseUrl('/img/get-started/build-event-driven-integration/create-project.png'),
+        light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
+        dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
     }}
-/>
+    />
 
 ## Step 2: Add a RabbitMQ event listener
 

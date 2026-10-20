@@ -532,11 +532,11 @@ service /invoices on invoicesListener {
 
 Delivery is at-least-once. The listener keeps no per-file state, so a file that stays on the watched path fires again on every poll — consume processed files with the [post-processing actions](#post-processing-moving-or-deleting-files) or through the [`Caller`](#caller-operations). One file is never dispatched twice at once: at most one invocation runs per path at a time, and a file overwritten while its handler is running is picked up on a later poll. For exactly-once effects, make handlers idempotent or claim each file by renaming it out of the watched path before processing. A file still being written when a poll runs can be picked up mid-write — set `minFileAgeSeconds` on the [service configuration](#service-configuration) to guard against partial writes.
 
-For the general concept, see [Services and listeners](../../../get-started/concepts/concepts.mdx#integration-types).
+For the general concept, see [Services and listeners](ftp-sftp/ftp-sftp.md#service-and-listener).
 
 ## Service configuration
 
-The optional `@files:ServiceConfig` annotation controls what the service watches — recursion into subdirectories, file-name filtering, and a minimum file age. It does not carry a path: the watched path is the service's attach point, so where the [FTP/SFTP service](ftp-sftp.md#service-configuration) sets a `path` field, the Azure Files service is declared as `service /incoming on shareListener`.
+The optional `@files:ServiceConfig` annotation controls what the service watches — recursion into subdirectories, file-name filtering, and a minimum file age. It does not carry a path: the watched path is the service's attach point, so where the [FTP/SFTP service](ftp-sftp/ftp-sftp.md#service-configuration) sets a `path` field, the Azure Files service is declared as `service /incoming on shareListener`.
 
 ```ballerina
 type OrderRow record {|

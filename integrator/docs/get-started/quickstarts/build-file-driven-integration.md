@@ -226,6 +226,6 @@ service file:Service on fileListener {
 ## What's next
 
 - [Local files](../../develop-and-test/integration-artifacts/file-driven-integration/local-files.md) — Full Local Files listener reference (events, recursive watching, file handlers)
-- [FTP/SFTP](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md) — Watch and process files on remote FTP or SFTP servers
-- [Streaming large files](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#streaming-large-files) — Process large files without loading them fully into memory
-- [CSV fault tolerance](../../develop-and-test/integration-artifacts/file-driven-integration/csv-fault-tolerance.md) — Handle errors and partial failures when processing CSV files
+- [FTP/SFTP](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md) — Watch and process files on remote FTP or SFTP servers
+- [Streaming large files](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#streaming-large-files) — Process large files without loading them fully into memory
+- [CSV fault tolerance](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/csv-fault-tolerance.md) — Handle errors and partial failures when processing CSV files

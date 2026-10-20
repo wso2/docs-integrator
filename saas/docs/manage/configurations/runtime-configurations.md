@@ -71,7 +71,7 @@ Configuration groups let you define a named set of configurable fields at the or
     |---|---|
     | **Key** | The key name for the configurable value. |
     | **Type** | Either **Text** (a plain string value) or **File mount** (a file that the integration mounts at runtime). |
-    | **Secret** | Optional. If the value is sensitive, you can mark it as a secret by clicking the padlock icon. [More about secrets](#secrets). |
+    | **Secret** | Optional. If the value is sensitive, you can mark it as a secret by clicking the padlock icon. [More about secrets](#configuration-groups). |
 
     <ThemedImage
         alt="Config Group Creation"
