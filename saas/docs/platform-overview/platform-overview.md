@@ -26,7 +26,7 @@ WSO2 Integration Platform supports several integration styles using shared capab
 
 | Integration Style | What you can do |
 |---|---|
-| Integration APIs | Expose business capabilities as APIs and connect multiple backend systems behind a single service. |
+| Integrations as APIs | Expose business capabilities as APIs and connect multiple backend systems behind a single service. |
 | Automations | Run scheduled or triggered tasks, such as synchronizing data between SaaS applications. |
 | Event-driven integrations | Publish, consume, and react to events and messages from applications and message brokers. |
 | File-driven integrations | Receive, transform, and exchange files across systems.|
