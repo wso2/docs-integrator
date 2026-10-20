@@ -15,29 +15,31 @@ An automation runs your integration logic without an external request, on demand
 
 ## Prerequisites
 
-A working WSO2 Cloud environment.
+A working WSO2 Integrator environment.
 
-<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">
-  Sign up and launch WSO2 Integrator in the browser-based cloud editor.
+<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">Sign up and launch WSO2 Integrator in the browser-based cloud editor.
 
 ## Step 1: Create the integration
 
-:::info Note
-In the cloud editor, you're already inside a project. Skip to [Step 2: Add an automation artifact](#step-2-add-an-automation-artifact).
+1. On the project home page, click **Create on Cloud**.
 
-1. Open WSO2 Integrator.
-2. Select the **Create New Integration** card.
-3. Set **Integration Name** to `HelloWorldAutomation`.
-4. Set **Project Name** to `automation-quickstart`.
-5. **Create Integration**.
+   <ThemedImage
+       alt="WSO2 Cloud project home showing the Create on Cloud option"
+       sources={{
+           light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+           dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+       }}
+   />
 
-<ThemedImage
-    alt="Create new integration form with Integration Name set to HelloWorldAutomation and Project Name set to automation-quickstart"
+2. The WSO2 Integrator cloud editor opens in your browser. Add an artifact to your integration, then deploy it to WSO2 Cloud from the Deploy to WSO2 Cloud panel on the right.
+
+   <ThemedImage
+    alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
     sources={{
-        light: useBaseUrl('/img/get-started/build-automation/create-the-project.png'),
-        dark: useBaseUrl('/img/get-started/build-automation/create-the-project.png'),
+        light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
+        dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
     }}
-/>
+    />
 
 ## Step 2: Add an automation artifact
 

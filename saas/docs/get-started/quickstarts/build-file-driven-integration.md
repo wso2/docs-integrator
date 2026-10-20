@@ -15,10 +15,9 @@ File integrations are ideal for batch uploads, scheduled file processing, and ET
 
 A working WSO2 Integrator environment.
 
-<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">
-  Sign up and launch WSO2 Integrator in the browser-based cloud editor.
+<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">Sign up and launch WSO2 Integrator in the browser-based cloud editor.
 
-You'll also need a file at the listener path to watch. Create one if you don't have one:
+<p style={{marginTop: '12px'}}>You'll also need a file at the listener path to watch. Create one if you don't have one:</p>
 
 ```bash
 echo "test" > /tmp/testfile.txt
@@ -31,27 +30,28 @@ echo test > C:\tmp\testfile.txt
 
 ## Step 1: Create the integration
 
-:::info Note
+1. On the project home page, click **Create on Cloud**.
 
-In the cloud editor, you're already inside a project. Skip to Step 2.
+   <ThemedImage
+       alt="WSO2 Cloud project home showing the Create on Cloud option"
+       sources={{
+           light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+           dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+       }}
+   />
 
-1. Open WSO2 Integrator.
-2. Select the **Create New Integration** card.
-3. Set **Integration Name** to `FileTracker`.
-4. Set **Project Name** to `file-integration`.
-5. Select **Create Integration**.
+2. The WSO2 Integrator cloud editor opens in your browser. Add an artifact to your integration, then deploy it to WSO2 Cloud from the Deploy to WSO2 Cloud panel on the right.
 
-<ThemedImage
-    alt="Create Integration form with Integration Name set to FileTracker and Project Name set to file-integration"
+   <ThemedImage
+    alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
     sources={{
-        light: useBaseUrl('/img/get-started/build-file-driven-integration/create-the-project-light.png'),
-        dark: useBaseUrl('/img/get-started/build-file-driven-integration/create-the-project-light.png'),
+        light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
+        dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
     }}
-/>
-
+    />
 ## Step 2: Add a file integration artifact
 
-1. Select **FileTracker** from Project Overview Canvas.
+1. Select your integration from the project overview canvas.
 2. In the design view, select **+ Add Artifact**.
 3. Select **Local Files** under **File Integration**.
 4. Set **Path** to `/tmp` (macOS/Linux) or `C:\tmp` (Windows). Select **Create**.

@@ -48,8 +48,8 @@ You are allowed to build your integration any number of times. However, WSO2 clo
 ### Q: What is WSO2 Integrator?
 WSO2 Integrator is a 100% open-source, AI-native integration platform built for the cloud. It helps you connect any system across your business and tackle integration challenges with ease. By using integration platform on WSO2 cloud, you can accelerate delivery—often 2–3x faster. Learn more at https://wso2.com/integrator/.
 
-### Q: What is Asgardeo?
-Asgardeo is an identity provider (IdP) that allows developers to secure access for consumers, business partners, employees, and APIs. Asgardeo is WSO2 cloud’s default IDP. To learn more, visit https://wso2.com/asgardeo/.
+### Q: What is WSO2 Identity Platform?
+WSO2 Identity Platform is an identity provider (IdP) that allows developers to secure access for consumers, business partners, employees, and APIs. WSO2 Identity Platform is WSO2 cloud’s default IDP. To learn more, visit https://wso2.com/identity-platform/.
 
 ### Q: As a Cloud Data Plane user, how can I create integrations in multiple data planes?
 When an organization admin onboards a new organization in WSO2 cloud, they can choose the preferred data plane. WSO2 cloud then sets the selected data plane as the default for the entire organization. Subsequently, users within the free tier of the cloud data plane can create integrations only in the set default data plane. If a free-tier user needs to create integrations in a different data plane, the user must get a paid subscription.
@@ -72,6 +72,20 @@ endpoints:
     visibility: "Public"
 ```
 By explicitly defining these attributes, you provide a "source of truth" that ensures your service is correctly exposed regardless of the automatic detection outcome.
+
+### Q: How can I find my Organization ID and Organization Handle?
+To find your Organization ID and Organization Handle, follow these steps:
+- Navigate to your organization.
+- From the left navigation menu, select **Admin → Settings**.
+You can view and copy the **Organization ID** and **Organization Handle** from the Settings page.
+
+<ThemedImage
+  alt="Organization settings page with the Copy ID and Copy Handle buttons highlighted"
+  sources={{
+    light: useBaseUrl('/img/reference/ai-usage/organiztion-id.png'),
+    dark: useBaseUrl('/img/reference/ai-usage/organiztion-id.png'),
+  }}
+/>
 
 ## Security and data protection
 
