@@ -379,7 +379,7 @@ service on fileListener {
 
 ## What's next
 
-- [FTP / SFTP](ftp-sftp.md) — monitor a remote file server instead of a local directory
+- [FTP / SFTP](ftp-sftp/ftp-sftp.md) — monitor a remote file server instead of a local directory
 - [File integrations on S3 file events](../../../guides/how-to-guides/s3-events-via-sqs-listener.md) — react to S3 uploads using an SQS listener
 - [Connections](../supportive-artifacts/connections.md) — reuse connection credentials across services
 - [Data Mapper](../supportive-artifacts/data-mapper/data-mapper.md) — transform incoming file payloads between formats

@@ -561,6 +561,6 @@ public function main() returns error? {
 
 ## What's next
 
-- [CSV fault tolerance](../integration-artifacts/file-driven-integration/csv-fault-tolerance.md) — Handle malformed rows in CSV files that arrive through file integrations
+- [CSV fault tolerance](../integration-artifacts/file-driven-integration/ftp-sftp/csv-fault-tolerance.md) — Handle malformed rows in CSV files that arrive through file integrations
 - [Local files](../integration-artifacts/file-driven-integration/local-files.md) — Process CSV files as they arrive in a local directory
 - [EDI processing](edi.md) — Process electronic data interchange formats

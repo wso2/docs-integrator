@@ -137,7 +137,7 @@ The voice listener only accepts calls once it's deployed. From the project overv
 
 Click **Deploy** under **Deploy to WSO2 Cloud**, pick the organization and project, and connect a Git remote if the project doesn't have one yet. This flow is identical for every artifact type — see [Deploy to WSO2 Cloud from WSO2 Integrator](../../../../deploy-and-run/deploy-to-wso2-cloud/push-from-ide.md) for the full walkthrough.
 
-Once deployed, enable voice for the integration in WSO2 Cloud. WSO2 Cloud runs the voice pipeline for you: callers connect over WebRTC, their speech is transcribed and sent to `onChatMessage`, and the reply is converted back to speech. You choose the speech-to-text and text-to-speech providers when you set it up. See [Voice Agents](https://wso2.com/integration-platform/docs/saas/manage/voice-agents) in the WSO2 Cloud documentation to configure and test the voice pipeline.
+Once deployed, enable voice for the integration in WSO2 Cloud. WSO2 Cloud runs the voice pipeline for you: callers connect over WebRTC, their speech is transcribed and sent to `onChatMessage`, and the reply is converted back to speech. You choose the speech-to-text and text-to-speech providers when you set it up. See [Voice Agents](product://saas/manage/voice-agents) in the WSO2 Cloud documentation to configure and test the voice pipeline.
 
 The voice pipeline is available only on WSO2 Cloud. Deploying with Docker or on a VM runs the service, but callers can't reach it by voice.
 
@@ -147,11 +147,11 @@ The voice pipeline is available only on WSO2 Cloud. Deploying with Docker or on 
 |---|---|---|
 | Caller hears silence or a generic error. | `onChatMessage` still returns `error("Not Implemented")`. | Add the Agent node and return its result, as shown above. |
 | Agent forgets earlier turns in the same call. | `message.sessionId` isn't passed to `agent.run()`, or no memory is attached. | Pass the session ID as the session key and attach a [memory store](../agents/memory.md). |
-| Callers can't connect to the agent. | The integration isn't deployed to WSO2 Cloud, or voice isn't enabled for it. | Deploy to WSO2 Cloud and [enable voice for the integration](https://wso2.com/integration-platform/docs/saas/manage/voice-agents). |
+| Callers can't connect to the agent. | The integration isn't deployed to WSO2 Cloud, or voice isn't enabled for it. | Deploy to WSO2 Cloud and [enable voice for the integration](product://saas/manage/voice-agents). |
 
 ## What's next
 
-- **[Voice Agents on WSO2 Cloud](https://wso2.com/integration-platform/docs/saas/manage/voice-agents)** — Configure the voice pipeline and test the agent with your voice.
+- **[Voice Agents on WSO2 Cloud](product://saas/manage/voice-agents)** — Configure the voice pipeline and test the agent with your voice.
 - **[Creating an Agent](../agents/create-an-agent.md)** — System prompt, tools, and memory shared by every agent type.
 - **[Build a Hotel Finder Agent](../../../../guides/how-to-guides/build-a-hotel-finder-agent.md)** — Build an agent with custom tools, step by step.
 - **[Build a Customer Care Agent with MCP](../../../../guides/business-use-cases/building-a-customer-care-agent-mcp.md)** — Build an agent that uses an MCP server as a tool.
