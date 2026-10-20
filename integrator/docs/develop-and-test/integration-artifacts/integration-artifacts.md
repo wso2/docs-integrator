@@ -11,5 +11,5 @@ Integration artifacts are the building blocks of every integration. Each type is
 - [Automation](automation.md) — run scheduled or on-demand integration jobs
 - [HTTP service](integration-as-api/http.md) — the most common starting point for integration APIs
 - [Kafka](event-driven-integration/kafka.md) — consume and process messages from Apache Kafka
-- [FTP/SFTP](file-driven-integration/ftp-sftp.md) — process files from remote file servers
+- [FTP/SFTP](file-driven-integration/ftp-sftp/ftp-sftp.md) — process files from remote file servers
 - [Connections](supportive-artifacts/connections.md) — connect to external systems once and reuse across your integration
