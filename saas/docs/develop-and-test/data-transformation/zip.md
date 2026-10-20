@@ -319,6 +319,6 @@ Inspecting before extracting means an archive that fails your own checks never t
 ## What's Next
 
 - [Local Files](../integration-artifacts/file-driven-integration/local-files.md) — trigger an integration when an archive lands in a watched directory.
-- [FTP/SFTP](../integration-artifacts/file-driven-integration/ftp-sftp.md) — pick up archives from a remote server and push generated ones back.
+- [FTP/SFTP](../integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md) — pick up archives from a remote server and push generated ones back.
 - [CSV & Flat File Processing](csv-flat-file.md) — parse the files an archive yields.
-- [Streaming Large Files](../integration-artifacts/file-driven-integration/ftp-sftp.md#streaming-large-files) — handle payloads too large to hold in memory.
+- [Streaming Large Files](../integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#streaming-large-files) — handle payloads too large to hold in memory.

@@ -50,12 +50,12 @@ You build the work as two focused integrations inside one project, plus a shared
 
 ![Architecture diagram: an FTP server holds a /greenfield directory of CSV files and a /harbor directory of XML files; the Order Intake integration polls both through one shared listener, gates on a .ok marker, maps each format to a canonical Order with the data mapper, persists to MySQL, and moves each file to /processed or /errors; the Daily Summary automation reads the day's orders from MySQL and emails a report to procurement](/img/guides/tutorials/order-hub/architecture.svg)
 
-The two intake services share **one listener** because both directories live on the same file server: the connection is defined once, and each service points at its own directory with its own handler. This is the [one listener ↔ many services](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#one-listener--many-services) topology. The summary is a separate [automation](../../develop-and-test/integration-artifacts/automation.md) rather than part of intake because it runs on a clock, not on a file event, keeping reporting out of the ingestion path.
+The two intake services share **one listener** because both directories live on the same file server: the connection is defined once, and each service points at its own directory with its own handler. This is the [one listener ↔ many services](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#one-listener--many-services) topology. The summary is a separate [automation](../../develop-and-test/integration-artifacts/automation.md) rather than part of intake because it runs on a clock, not on a file event, keeping reporting out of the ingestion path.
 
 The **data mapper is the heart of the hub**: it is what lets two unrelated file shapes converge on a single `Order`. So you define the canonical model and database first (Step 1), stand up the file intake (Step 2), build the two mappers (Steps 3 and 4), add the scheduled report (Step 5), and run the whole thing (Step 6).
 
 :::note Plain FTP is used for clarity
-This walkthrough uses plain **FTP** so the visual steps stay simple and reproducible. For real partner exchange, switch the listener to **SFTP** or **FTPS**: the same services and handlers, just a different protocol and credentials on the listener. See [Creating an SFTP service](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#creating-an-sftp-service).
+This walkthrough uses plain **FTP** so the visual steps stay simple and reproducible. For real partner exchange, switch the listener to **SFTP** or **FTPS**: the same services and handlers, just a different protocol and credentials on the listener. See [Creating an SFTP service](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#creating-an-sftp-service).
 
 :::info Prerequisites
 Before you start, make sure you have:
@@ -232,7 +232,7 @@ dbClientPassword = "order_hub_pass"
 
 ## Step 2: Stand up the FTP intake (one listener, two services)
 
-Both suppliers drop their files on the same file server, so you stand up **one FTP listener** and hang **two services** off it, one watching `/greenfield`, one watching `/harbor`. Each service is gated so it only picks up a file once it matches a name pattern, has settled on disk, and its `.ok` companion has landed. This is the [one listener ↔ many services](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#one-listener--many-services) topology: the connection is defined once and shared.
+Both suppliers drop their files on the same file server, so you stand up **one FTP listener** and hang **two services** off it, one watching `/greenfield`, one watching `/harbor`. Each service is gated so it only picks up a file once it matches a name pattern, has settled on disk, and its `.ok` companion has landed. This is the [one listener ↔ many services](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#one-listener--many-services) topology: the connection is defined once and shared.
 
 <details>
 <summary><b>Declare configurations and create the listener and two services</b></summary>
@@ -249,7 +249,7 @@ Both suppliers drop their files on the same file server, so you stand up **one F
 
    ![The artifact palette with FTP / SFTP highlighted under the File Integration group](/img/guides/tutorials/order-hub/ftp-sftp-artifact.png)
 
-3. **Configure the Greenfield listener.** Select the **FTP** protocol and **Basic Authentication**, then bind **Host**, **Port Number**, **Username**, and **Password** to the configurables you just declared. Switch each field to **Expression** mode and reference `ftpHost`, `ftpPort`, `ftpUsername`, and `ftpPassword`. Set the **Monitoring Path** to `/greenfield` and click **Next**. This creates the listener (named `ftpListener`) and the first service together. See [Creating an FTP service](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#creating-an-ftp-service) for the full field reference.
+3. **Configure the Greenfield listener.** Select the **FTP** protocol and **Basic Authentication**, then bind **Host**, **Port Number**, **Username**, and **Password** to the configurables you just declared. Switch each field to **Expression** mode and reference `ftpHost`, `ftpPort`, `ftpUsername`, and `ftpPassword`. Set the **Monitoring Path** to `/greenfield` and click **Next**. This creates the listener (named `ftpListener`) and the first service together. See [Creating an FTP service](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#creating-an-ftp-service) for the full field reference.
 
    ![The Create FTP Integration form: FTP protocol, Basic Authentication, Host/Port/Username/Password bound to configurables in Expression mode, and Monitoring Path set to /greenfield](/img/guides/tutorials/order-hub/ftp-create-greenfield.png)
 
@@ -261,11 +261,11 @@ Both suppliers drop their files on the same file server, so you stand up **one F
 
    ![The Greenfield FTP Integration service view with the Listener ftpListener chip, an empty File Handlers section, and the Configure button highlighted in the top right](/img/guides/tutorials/order-hub/greenfield-configure.png)
 
-   The **Service Configuration** is a single record you edit. Enter the [trigger conditions](../../develop-and-test/integration-artifacts/file-driven-integration/dependency-and-trigger-conditions.md) so a file is only delivered when it is genuinely ready:
+   The **Service Configuration** is a single record you edit. Enter the [trigger conditions](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/dependency-and-trigger-conditions.md) so a file is only delivered when it is genuinely ready:
 
-   - a [file name pattern](../../develop-and-test/integration-artifacts/file-driven-integration/dependency-and-trigger-conditions.md#file-name-pattern) `GF_.*\.csv`, so only Greenfield CSVs match;
-   - a [file age filter](../../develop-and-test/integration-artifacts/file-driven-integration/dependency-and-trigger-conditions.md#file-age-filter) `minAge: 30.0`, so a file still being uploaded is left alone until it has settled for 30 seconds;
-   - a [file dependency condition](../../develop-and-test/integration-artifacts/file-driven-integration/dependency-and-trigger-conditions.md#file-dependency-conditions) requiring the `.ok` marker: target pattern `GF_(.*)\.csv` with required file `GF_$1.ok`, so the [capture group](../../develop-and-test/integration-artifacts/file-driven-integration/dependency-and-trigger-conditions.md#how-capture-groups-work) ties each `GF_10231.csv` to its own `GF_10231.ok`.
+   - a [file name pattern](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/dependency-and-trigger-conditions.md#file-name-pattern) `GF_.*\.csv`, so only Greenfield CSVs match;
+   - a [file age filter](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/dependency-and-trigger-conditions.md#file-age-filter) `minAge: 30.0`, so a file still being uploaded is left alone until it has settled for 30 seconds;
+   - a [file dependency condition](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/dependency-and-trigger-conditions.md#file-dependency-conditions) requiring the `.ok` marker: target pattern `GF_(.*)\.csv` with required file `GF_$1.ok`, so the [capture group](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/dependency-and-trigger-conditions.md#how-capture-groups-work) ties each `GF_10231.csv` to its own `GF_10231.ok`.
 
    ```ballerina
    {
@@ -280,7 +280,7 @@ Both suppliers drop their files on the same file server, so you stand up **one F
 
    ![The Service Configuration record for the Greenfield service showing path /greenfield, fileNamePattern, fileAgeFilter, and the fileDependencyConditions gating on the .ok marker, with the ftpListener configuration below](/img/guides/tutorials/order-hub/service-config.png)
 
-5. **Add the Harbor service on the same listener.** Add another **FTP / SFTP** artifact, but this time [reuse the existing listener](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#reusing-an-existing-listener-when-creating-a-service): pick `ftpListener` from **Listener Name** (its protocol and credentials are inherited and locked), and set only the **Monitoring Path** to `/harbor`. Then gate it the same way, with the XML equivalents: pattern `HS_.*\.xml`, the same 30-second age filter, and dependency target `HS_(.*)\.xml` requiring `HS_$1.ok`.
+5. **Add the Harbor service on the same listener.** Add another **FTP / SFTP** artifact, but this time [reuse the existing listener](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#reusing-an-existing-listener-when-creating-a-service): pick `ftpListener` from **Listener Name** (its protocol and credentials are inherited and locked), and set only the **Monitoring Path** to `/harbor`. Then gate it the same way, with the XML equivalents: pattern `HS_.*\.xml`, the same 30-second age filter, and dependency target `HS_(.*)\.xml` requiring `HS_$1.ok`.
 
    ![The Create FTP Integration form reusing the existing ftpListener: the protocol and credential fields are disabled, and only the Monitoring Path is set, to /harbor](/img/guides/tutorials/order-hub/ftp-create-harbor.png)
 
@@ -351,11 +351,11 @@ This is where the hub earns its keep. The Greenfield service receives the [CSV f
 <details>
 <summary><b>Receive the CSV as typed rows</b></summary>
 
-1. Open the `/greenfield` service and [add a file handler](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#adding-a-file-handler): choose **On Create** and set **File Format** to **CSV**. Click **Define Row Schema → Create Type Schema** and define `GreenfieldRow` with the columns of the file: `order_id`, `order_date`, `sku`, `description` (`string`), `qty` (`int`), and `unit_price` (`decimal`).
+1. Open the `/greenfield` service and [add a file handler](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#adding-a-file-handler): choose **On Create** and set **File Format** to **CSV**. Click **Define Row Schema → Create Type Schema** and define `GreenfieldRow` with the columns of the file: `order_id`, `order_date`, `sku`, `description` (`string`), `qty` (`int`), and `unit_price` (`decimal`).
 
    ![The Define Row Schema dialog creating the GreenfieldRow type with order_id, order_date, sku, description as string, qty as int, and unit_price as decimal](/img/guides/tutorials/order-hub/greenfield-row-schema.png)
 
-2. The platform delivers the file as a `GreenfieldRow[]` named `greenfieldRows`. Under [**After File Processing**](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#post-processing-moving-or-deleting-files), set **Success → Move to** `/processed` and **Error → Move to** `/errors`, then save. The handler is generated as `onFileCsv`.
+2. The platform delivers the file as a `GreenfieldRow[]` named `greenfieldRows`. Under [**After File Processing**](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#post-processing-moving-or-deleting-files), set **Success → Move to** `/processed` and **Error → Move to** `/errors`, then save. The handler is generated as `onFileCsv`.
 
    ![The On Create handler configuration: File Format CSV, Content Schema GreenfieldRow[] greenfieldRows, and After File Processing moving to /processed on success and /errors on error](/img/guides/tutorials/order-hub/greenfield-handler.png)
 
@@ -549,7 +549,7 @@ service on ftpListener {
 > **Capability: array mapping and aggregation.** One visual mapping turns a flat CSV into a typed, nested `Order`, folding many rows into one order, computing each line total, and aggregating the order total, with no parsing code.
 
 :::note Very large CSVs
-For files too big to hold in memory, enable **Stream (Large Files)** on the handler to process rows in chunks, and add [CSV fault tolerance](../../develop-and-test/integration-artifacts/file-driven-integration/csv-fault-tolerance.md) to skip malformed rows instead of failing the file. See [Streaming large files](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#streaming-large-files).
+For files too big to hold in memory, enable **Stream (Large Files)** on the handler to process rows in chunks, and add [CSV fault tolerance](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/csv-fault-tolerance.md) to skip malformed rows instead of failing the file. See [Streaming large files](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#streaming-large-files).
 
 ---
 
@@ -1123,6 +1123,6 @@ You have built a complete B2B ingestion hub as two integrations, designed in the
 Explore more of what you can build with WSO2 Integrator:
 
 - [Build an Event-Driven Social Media Backend with RabbitMQ](./social-media.md)
-- [Streaming large files](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md#streaming-large-files)
-- [CSV fault tolerance](../../develop-and-test/integration-artifacts/file-driven-integration/csv-fault-tolerance.md)
+- [Streaming large files](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#streaming-large-files)
+- [CSV fault tolerance](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/csv-fault-tolerance.md)
 - [EDI Processing](../../develop-and-test/data-transformation/edi.md)
