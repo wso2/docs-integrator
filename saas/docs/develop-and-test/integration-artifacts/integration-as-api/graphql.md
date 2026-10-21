@@ -98,14 +98,12 @@ Service-level settings map to the `@graphql:ServiceConfig` annotation placed bef
 ```ballerina
 @graphql:ServiceConfig {
     maxQueryDepth: 7,
+    introspection: true, // default is true; set to false to disable introspection
     graphiql: {
-        enabled: true,
-        path: "graphiql"
+        enabled: true
     },
-    cors: {
-        allowOrigins: ["https://app.example.com"],
-        allowMethods: ["POST", "GET"],
-        allowHeaders: ["Content-Type", "Authorization"],
+    cacheConfig: {
+        enabled: true,
         maxAge: 3600
     }
 }
@@ -127,8 +125,7 @@ All `@graphql:ServiceConfig` fields:
 | `graphiql` | `Graphiql` | `{enabled: false}` | Enable the built-in GraphiQL client and set its path |
 | `interceptors` | `readonly & Interceptor[]` | `[]` | Field-level interceptor chain |
 | `introspection` | `boolean` | `true` | Allow schema introspection queries |
-| `validation` | `boolean` | `true` | Enable query and variable validation |
-| `schemaString` | `string` | `""` | Embedded SDL string (set automatically for generated services) |
+| `validation` | `boolean` | `true` | Enable constraint validation on input values. Query and variable validation always run, regardless of this setting. |
 | `cacheConfig` | `ServerCacheConfig?` | `()` | Service-wide field cache configuration |
 
 ### CORS configuration
