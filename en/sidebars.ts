@@ -214,6 +214,17 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Azure Blob Storage',
+          link: { type: 'doc', id: 'catalog/storage-file/azure.storage.blob/overview' },
+          items: [
+            'catalog/storage-file/azure.storage.blob/setup-guide',
+            'catalog/storage-file/azure.storage.blob/action-reference',
+            'catalog/storage-file/azure.storage.blob/trigger-reference',
+            'catalog/storage-file/azure.storage.blob/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Azure Files',
           link: { type: 'doc', id: 'catalog/storage-file/azure.storage.files/overview' },
           items: [
