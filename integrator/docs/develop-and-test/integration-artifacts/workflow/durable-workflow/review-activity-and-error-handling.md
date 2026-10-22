@@ -16,6 +16,7 @@ Every activity call takes a **Retry Policy**, which says what the workflow shoul
 | **Auto Retry**             | The engine re-executes the activity with configurable attempts, delay, and backoff.                                              |
 | **Human Review**           | A **review task** is created for the roles you name. The reviewer can retry as-is, retry with corrected input, or fail the step. |
 | **Retry, then Review**     | The engine retries first, as with **Auto Retry**, and raises the review only when the last attempt fails. **Max Retries** is required here. |
+| **From Expression**        | The policy is the `workflow:RetryPolicy` value you type in **Retry Policy Expression**: a constant, a variable, or a record literal. |
 
 <ThemedImage
     alt="The activity call form with the Retry Policy dropdown open on its options"
@@ -53,7 +54,16 @@ The review is listed on the **Human Tasks** page of the [Control Plane](../../..
 | Field              | Required | Description                                                                                                                                          |
 |--------------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Reviewer Roles** | Yes      | One or more roles permitted to decide the review, for example `Finance`. It can be left empty only when **Reviewers** names the users who may decide; the form refuses a review that names nobody. |
-| **Title**, **Description**, **Timeout** | No | How the review reads in the inbox and how long it may wait. Left empty, the title and description are worded from the activity and its failure, and the review waits indefinitely. |
+| **Reviewers**      | No       | User IDs permitted to decide the review, whatever their roles. |
+| **Excluded Reviewers** | No   | User IDs that may not decide the review. |
+| **Excluded Roles** | No       | Roles that may not decide the review. |
+| **Administrator Roles** | No  | Roles that administer the review: they see it, and can reassign it, move its deadline, or decide it. See [Administer a task](../../../../icp/manage-workflows/complete-human-tasks.md#administer-a-task). |
+| **Administrator Users** | No  | User IDs that administer the review. |
+| **Title**          | No       | Short summary shown in the reviewer's inbox. Defaults to a phrase naming the activity being reviewed. |
+| **Description**    | No       | Context shown with the decision. Defaults to a description of the failure and the outcomes available. |
+| **Timeout**        | No       | How long to wait for a decision from when the review opens, for example `{days: 1, hours: 2, minutes: 30}`. Left empty, the review waits indefinitely. |
+
+**Retry, then Review** shows the same fields, together with the [Auto Retry fields](#auto-retry--for-transient-failures).
 
 <ThemedImage
     alt="The activity call form with Human Review chosen, showing the Reviewer Roles field set to Finance"
@@ -69,8 +79,11 @@ Some steps should never run without sign-off, even when nothing has failed. A ga
 
 | Field               | Required | Description                                                                                                                                                    |
 |---------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Approval Policy** | Yes      | **No Approval** (the default) runs the activity unattended. **Human Approval** gates it behind an approval review.                                            |
+| **Approval Policy** | Yes      | **No Approval** (the default) runs the activity unattended. **Human Approval** gates it behind an approval review. **From Expression** takes a `workflow:ApprovalPolicy` value typed in **Approval Policy Expression**. |
 | **Reviewer Roles**  | Yes      | Shown for **Human Approval**. One or more roles permitted to decide the approval, for example `Finance`. It can be left empty only when **Reviewers** names the users who may decide. |
+| **Reviewers**, **Excluded Reviewers**, **Excluded Roles**, **Administrator Roles**, **Administrator Users**, **Timeout** | No | Shown for **Human Approval**, and work as they do for a [human review](#human-review--when-a-person-should-fix-it). |
+| **Title**           | No       | Short summary shown in the reviewer's inbox. Defaults to a phrase naming what is being approved. |
+| **Description**     | No       | Context shown with the decision. Defaults to a description of the call and its arguments. |
 
 <ThemedImage
     alt="The activity call form with Approval Policy set to Human Approval and Reviewer Roles set to Finance"
