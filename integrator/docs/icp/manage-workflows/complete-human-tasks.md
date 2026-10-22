@@ -11,8 +11,8 @@ Two kinds of work arrive on that page:
 - A **task** asks a person for something the workflow cannot compute, such as validating an order or judging a claim. You complete a form, and the workflow resumes with what you submit. See [Await Human Task](../../develop-and-test/integration-artifacts/workflow/durable-workflow/await-human-task.md).
 - A **review activity** is a decision attached to an activity rather than a freestanding question. It is raised in two cases:
 
-  - **After an activity fails**, when its retry policy is **Human Review**, so a person decides whether to retry it. See [Human review failed activities](../../develop-and-test/integration-artifacts/workflow/durable-workflow/review-activity-and-error-handling.md#human-review--when-a-person-should-fix-it).
-  - **Before an activity runs**, when a durable agent registered it with **Approval Policy** set to **Human Approval**, so a person approves the call first. See [Durable agent activities](../../develop-and-test/integration-artifacts/workflow/durable-agentic-workflow/create-durable-agent.md#activities).
+  - **After an activity fails**, when its retry policy is **Human Review**, or **Retry, then Review** once its automatic retries are spent, so a person decides whether to retry it. See [Human review failed activities](../../develop-and-test/integration-artifacts/workflow/durable-workflow/review-activity-and-error-handling.md#human-review--when-a-person-should-fix-it).
+  - **Before an activity runs**, when its **Approval Policy** is set to **Human Approval**, on a workflow's activity call or on an activity a durable agent registered, so a person approves the call first. See [Approval gates](../../develop-and-test/integration-artifacts/workflow/durable-workflow/review-activity-and-error-handling.md#approval-gates--review-before-the-step-runs).
 
 :::info Prerequisites
 

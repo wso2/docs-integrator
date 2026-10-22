@@ -138,12 +138,13 @@ For the complete configuration reference (supported types, value sources, resolu
 
 | Practice | Description |
 |---|---|
-| **Never commit the Config.toml file** | Keep the `Config.toml` file out of version control. |
+| **Never commit the Config.toml file** | Keep the `Config.toml` file out of version control. See [Secrets and encryption](../../../deploy-and-run/secure/secrets-encryption.md). |
 | **Mark required values explicitly** | For configurations that must come from the environment (such as endpoints and credentials), leave **Default Value** empty in the Visual Designer and use `?` in code so that the value is mandated and absence causes startup to fail. |
 | **Group related settings** | Use record types to group settings that belong to the same subsystem (for example, database configuration or CRM settings). |
 | **Document defaults** | Use the **Documentation** field to explain the purpose and valid range of each setting. |
 
 ## What's next
 
-- [Configuration management](../../../manage/configurations/configuration-management.md) — Complete configuration reference: value sources, precedence, and environment variables.
+- [Configuration management](../../../reference/configuration-reference.md#configuration-management) — Complete configuration reference: value sources, precedence, and environment variables.
+- [Secrets and encryption](../../../deploy-and-run/secure/secrets-encryption.md) — Securely manage credentials and other sensitive values.
 - [Connections](connections.md) — Use configurable variables to parameterize connections.
