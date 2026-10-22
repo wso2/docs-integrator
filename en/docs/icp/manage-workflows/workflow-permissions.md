@@ -8,7 +8,7 @@ slug: /icp/manage-workflows/workflow-permissions
 
 # Workflow Permissions
 
-The **Workflows** and **Human Tasks** views in the Integration Control Plane are gated by role-based access, so each person sees only the work that belongs to them. This page covers the permissions that open each view and the roles that carry them by default.
+Access to the **Workflows** and **Human Tasks** views in the Integration Control Plane (ICP) is controlled by roles, so each person sees only the work that belongs to them. This page covers the permissions that open each view and the roles that carry them by default.
 
 ## The Workflow-Management permissions
 
@@ -39,7 +39,9 @@ The project-level **Workflows** and **Human Tasks** pages check permissions gran
 Permissions decide who can open the workflow views. **Roles** decide which tasks and reviews appear inside them.
 :::
 
-When you open a task list, ICP forwards your ICP role names to the runtime, together with your username, and the runtime returns only the tasks whose eligible roles include one of them, or that name you as a user or an administrator. Matching is an exact, case-sensitive comparison of role names, so a task declared for `manager` in the workflow code is visible only to users holding an ICP role named exactly `manager`.
+When you open a task list, ICP sends your username and your ICP role names to the runtime. The runtime returns only the tasks that list one of your roles as an eligible role, or that name you as a user or an administrator.
+
+Role names must match exactly, including uppercase and lowercase letters. For example, a task declared for `manager` in the workflow code is visible only to users holding an ICP role named exactly `manager`.
 
 ```ballerina
 RequestDecision request = check ctx->awaitHumanTask("checkExpenseRequest",
@@ -54,6 +56,6 @@ Super admins are also given a synthetic `admin` role when calls reach the runtim
 
 ## What's next
 
-- [Workflow executions](workflow-executions.md) — browse runs, read the timeline, and control a running instance
+- [Workflow executions](workflow-executions.md) — browse executions, read the timeline, and control a running instance
 - [Access control](../access-control.md) — roles, groups, and mappings in ICP
 - [Complete human tasks](complete-human-tasks.md) — decide the tasks and reviews these permissions gate

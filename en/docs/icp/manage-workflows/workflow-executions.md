@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Workflow Executions"
-description: Browse workflow executions in the WSO2 Integration Control Plane, view an execution's status, input, and flow, and reset, suspend, resume, cancel, or terminate a run.
+description: Browse workflow executions in the WSO2 Integration Control Plane, view an execution's status, input, and flow, and reset, suspend, resume, cancel, or terminate an execution.
 keywords: [wso2 integrator, integration control plane, icp, workflow execution, execution details, reset workflow, suspend, terminate]
 slug: /icp/manage-workflows/workflow-executions
 ---
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Workflow Executions
 
-The **Workflow Executions** page lists the runs created by workflows in the selected integration and environment. Select a run to view its status, input, and execution flow, and to reset, suspend, resume, cancel, or terminate it.
+The **Workflow Executions** page lists every execution of your workflows in the selected environment. Select an execution to view its status, input, and flow, and to reset, suspend, resume, cancel, or terminate it.
 
 :::info Prerequisites
 
@@ -21,9 +21,9 @@ The **Workflow Executions** page lists the runs created by workflows in the sele
 
 ## Open the workflow executions page
 
-Select **Workflows** in the console navigation. The console opens the **Workflow Executions** page for the current integration.
+Select **Workflows** in the console navigation. The console opens the **Workflow Executions** page.
 
-The page header shows the integration name and an environment selector. Use the selector to switch between environments such as `dev` and `prod`.
+The page subtitle shows the name you registered in ICP, such as `orderprocessor`. Use the **Environment** selector to switch between environments such as `dev` and `prod`.
 
 <ThemedImage
     alt="Workflow Executions page showing the environment selector, filters, auto-refresh control, and execution list"
@@ -64,8 +64,8 @@ Each row in the list is one workflow execution, listed newest first. The columns
 
 | Column | Description |
 | --- | --- |
-| **Workflow ID** | The identifier of the workflow execution. A copy icon next to the value copies the ID. |
-| **Run ID** | The identifier assigned to the individual workflow run. A copy icon next to the value copies the ID. |
+| **Workflow ID** | The ID of the execution. You can set it when you start the workflow; otherwise the runtime assigns one. It stays the same when the execution is reset. A copy icon next to the value copies the ID. |
+| **Run ID** | The ID of one attempt of the execution. Each reset creates a new run with a new Run ID, so the same Workflow ID can appear in more than one row. A copy icon next to the value copies the ID. |
 | **Workflow Name** | The workflow definition used to create the execution. |
 | **Status** | The current state of the execution, such as **Running**, **Completed**, **Suspended**, **Terminated**, or **Canceled**. |
 | **Started** | The date and time when the execution started. |
@@ -86,13 +86,13 @@ The panel header holds the action buttons, which are covered in [Manage an execu
 
 ### Execution status and details
 
-The **Execution** card shows the current status of the run and the details that identify it.
+The **Execution** card shows the current status of the execution and the details that identify it.
 
 | Field | Description |
 | --- | --- |
 | **Status** | The current state of the execution, shown as a badge next to the **Execution** title. For example, **Running**, **Suspended**, or **Completed**. |
-| **Instance ID** | A unique identifier for this execution. A copy icon next to the value copies the ID. |
-| **Workflow Name** | The workflow definition this execution is an instance of, such as `orderWorkflow`. |
+| **Workflow ID** | A unique identifier for this execution. A copy icon next to the value copies the ID. |
+| **Workflow Name** | The workflow this execution runs, such as `orderWorkflow`. |
 | **Started** | The date and time the execution began. |
 | **Closed** | The date and time the execution finished. This field appears only after the execution is no longer running. |
 
@@ -110,7 +110,7 @@ The badge also shows how long a finished execution ran, and a failed execution s
 
 The **Workflow Input** card shows the data that was provided when the execution started. For example, if you started a workflow with a customer's order details, those details appear here.
 
-Use the **`{}`** icon to switch between the structured view and the raw JSON view. Select the **copy** icon to copy the workflow input. Once the execution completes, a **Workflow Result** card beside it shows the value it returned.
+Use the **`{}`** icon to switch between the structured view and the raw JSON view. Select the **copy** icon to copy the workflow input. Once the execution completes, a **Workflow Result** card beside it shows the value the workflow returned.
 
 <ThemedImage
     alt="Workflow Input card showing the data provided when the execution started"
@@ -125,7 +125,7 @@ Use the **`{}`** icon to switch between the structured view and the raw JSON vie
 Below the cards, the execution flow shows the steps in a workflow execution and how they are connected. For example, it can show:
 
 - `reserveInventory` — an activity, marked **COMPLETED**.
-- `payment` — a data event the run is **WAITING** on.
+- `payment` — a data event the execution is **WAITING** on.
 - `if payment` — the condition that picks a branch.
 - `sendEmail` and `cancelOrder` — the two branches, marked **not executed** until the data arrives and one of them runs.
 
@@ -150,7 +150,7 @@ Select a step to view its details, including the input and execution status.
 />
 
 :::warning
-The execution flow is generated from workflow checkpoints and is an approximation of the execution. It may not show every action performed during the workflow run.
+The execution flow is generated from workflow checkpoints and is an approximation of the execution. It may not show every action performed during the execution.
 :::
 
 ## Manage an execution
@@ -161,7 +161,7 @@ Use the action buttons in the panel header to change what happens to an executio
 - **Suspend** pauses a running execution at its current position, and **Resume** continues it from where it paused.
 - **Cancel** stops the execution gracefully, so the workflow can run its own cleanup logic.
 - **Terminate** stops the execution immediately, without running any cleanup logic.
-- **Wake**, shown only for a running durable agent, ends an in-progress sleep early.
+- **Wake**, shown only when the execution is a running durable agent, ends an in-progress sleep early.
 
 :::note
 The panel shows only the buttons that apply to the execution's current status and your permissions. For example, a completed execution has no **Suspend** button, and **Resume** appears only while the execution is suspended. **Reset…** remains available after the execution closes. All of them need `workflow_mgt:manage_workflows`.
@@ -171,7 +171,7 @@ The panel shows only the buttons that apply to the execution's current status an
 
 Select **Reset…** to open the **Reset Workflow** dialog, and then choose where to replay from:
 
-- **Before the last step** redoes only the most recent workflow task.
+- **Before the last step** replays only the most recent step.
 - **From the beginning** reruns the whole workflow with its original input.
 - **A specific point in this run's history** starts the replay from a history point you select.
 
@@ -187,7 +187,7 @@ Optionally, enter a **Reason**. Then select **Reset Workflow** to confirm, or **
 
 ### Suspend and resume an execution
 
-The status doesn't change the moment you select **Suspend**. It can still read **Running** for a short time, because the console sends the suspension to the workflow as a signal instead of applying it immediately. Once the workflow engine confirms that the run has paused, the status changes to **Suspended** and **Resume** replaces **Suspend**.
+The status doesn't change the moment you select **Suspend**. It can still read **Running** for a short time, because the console sends the suspension to the workflow as a signal instead of applying it immediately. Once the workflow engine confirms that the execution has paused, the status changes to **Suspended** and **Resume** replaces **Suspend**.
 
 <ThemedImage
     alt="Execution details of a suspended execution with the Suspended status and the Resume button highlighted"
@@ -204,6 +204,6 @@ The status doesn't change the moment you select **Suspend**. It can still read *
 ## What's next
 
 - [Start a workflow](start-a-workflow.md) — launch a new execution from the console
-- [Complete human tasks](complete-human-tasks.md) — decide the tasks and reviews a halted run is waiting on
+- [Complete human tasks](complete-human-tasks.md) — decide the tasks and reviews a waiting execution needs
 - [Activities](../../develop-and-test/integration-artifacts/workflow/durable-workflow/activities.md) — how the steps on the timeline are recorded and retried
 - [Management API](../../develop-and-test/integration-artifacts/workflow/durable-workflow/management-api.md) — read the same history and execution graph over REST
