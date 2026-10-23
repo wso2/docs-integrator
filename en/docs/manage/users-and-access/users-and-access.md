@@ -33,6 +33,10 @@ When you secure an integration's endpoints with OAuth2, the platform needs to kn
 
 The platform validates the incoming token against the registered IdP's well-known endpoint, then checks whether the token carries the required scopes before granting access to a resource. You can restrict a registered IdP to specific environments if you need different providers in development and production.
 
+## User Portal
+
+The User Portal is a separate portal that exposes your integrations to external users. After you enable it for your organization, you can publish AI agents, automations, and workflows to it. Users sign in through your WSO2 Identity Platform organization and can chat with agents and run automations and workflows without access to the WSO2 Cloud console.
+
 ## In this section
 
 | Page | What it covers |
@@ -40,3 +44,4 @@ The platform validates the incoming token against the registered IdP's well-know
 | [Control access](./access-control.md) | Create groups, assign roles at organization or project scope, and invite users. |
 | [Configure enterprise login](./configure-enterprise-login.md) | Enable enterprise login for your organization and set up RBAC for external IdP users. |
 | [Access APIs with an External IdP](./api-external-idp/api-external-idp.md) | Use external IdPs to access Integration as APIs with OAuth2. |
+| [User Portal](./user-portal/user-portal.md) | Enable the User Portal for your organization and publish integrations to it for external users. |
