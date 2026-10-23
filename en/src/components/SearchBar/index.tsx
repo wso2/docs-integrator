@@ -1,21 +1,26 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import Link from '@docusaurus/Link';
-import { useHistory } from '@docusaurus/router';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 
+import SearchModal from '@site/src/theme/SearchBar/SearchModal';
 import styles from './styles.module.css';
 
 export type SearchBarQuickLink = { label: string; sub?: string; to: string };
 
 /**
- * The homepage hero's own search box -- submits to the search-local
- * plugin's `/search` page, same as the persistent one in the navbar
- * (`src/theme/SearchBar`, a separate, always-stock component); this one
- * is bigger, sits in the hero, and adds a "/" keyboard shortcut plus an
- * optional "Popular pages" dropdown. Originally lived inline in
- * `pages/index.tsx` -- pulled out here so a doc page can render a live
- * instance too (see `SearchBarPreview` below and docs/homepage/).
+ * The homepage hero's own search box -- a separate, older component from
+ * `LandingHero`/`HeroSearch` (what the real product homepages actually
+ * render; see pages/index.tsx), kept alive by `docs/homepage/`'s own
+ * demo page on `main`'s scaffold. This one is bigger, sits in the hero,
+ * and adds a "/" keyboard shortcut plus an optional "Popular pages"
+ * dropdown. Originally lived inline in `pages/index.tsx` -- pulled out
+ * here so a doc page can render a live instance too (see
+ * `SearchBarPreview` below and docs/homepage/).
+ *
+ * Opens the same SearchModal every other search entry point does
+ * (previously submitted to the search-local plugin's own `/search`
+ * page, which no longer exists now that search is Algolia-backed --
+ * see sharedAlgoliaSearch's docstring in themeConfig.ts).
  *
  * Styled for a dark background (white text, translucent white borders)
  * to match the homepage hero it was designed for -- rendering it
@@ -24,10 +29,9 @@ export type SearchBarQuickLink = { label: string; sub?: string; to: string };
  * matching dark frame.
  */
 export default function SearchBar({ quickLinks = [] }: { quickLinks?: SearchBarQuickLink[] }): ReactNode {
-  const history = useHistory();
-  const searchPath = useBaseUrl('/search');
   const [query, setQuery] = useState('');
   const [focused, setFocused] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -66,11 +70,11 @@ export default function SearchBar({ quickLinks = [] }: { quickLinks?: SearchBarQ
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (query.trim()) {
-        history.push(`${searchPath}?q=${encodeURIComponent(query.trim())}`);
         setFocused(false);
+        setModalOpen(true);
       }
     },
-    [query, history, searchPath],
+    [query],
   );
 
   return (
@@ -121,6 +125,8 @@ export default function SearchBar({ quickLinks = [] }: { quickLinks?: SearchBarQ
           ))}
         </div>
       )}
+
+      {modalOpen && <SearchModal initialQuery={query} onClose={() => setModalOpen(false)} />}
     </div>
   );
 }

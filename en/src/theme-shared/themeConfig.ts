@@ -27,6 +27,41 @@ import type { HtmlTagObject } from '@docusaurus/types';
  * real production/staging never set this, so they're unaffected. */
 export const CROSS_PRODUCT_BASE = process.env.CROSS_PRODUCT_BASE || '/integration-platform/docs/';
 
+/** Site-wide Algolia search -- one index crawled across every product
+ * under /integration-platform/docs/** (saas, wso2-integrator,
+ * wso2-connectors; wso2-agent-builder once it's live), so searching
+ * from any one product surfaces results from the others too. Previously
+ * each branch ran its own @easyops-cn/docusaurus-search-local instance,
+ * which could only ever see that branch's own build.
+ *
+ * `apiKey` is the Algolia SEARCH-ONLY key (read-only by design, safe to
+ * ship to the browser/commit here) -- not the crawler's admin key,
+ * which stays out of this repo entirely.
+ *
+ * `contextualSearch` is deliberately off: Docusaurus's built-in Algolia
+ * integration defaults this to true, which auto-scopes results to the
+ * current site's own docs-plugin/version context -- a feature built for
+ * ONE Docusaurus site with multiple doc instances/versions, not four
+ * genuinely separate per-product builds like this repo's. Left on, it
+ * would likely filter the other three products back out and silently
+ * reproduce the exact problem this exists to fix. The crawler's own
+ * config (Algolia dashboard, not this repo) also doesn't emit a
+ * `lang`/version facet this site's instances would agree on, which is
+ * the other half of what contextualSearch relies on.
+ *
+ * The crawler's `hierarchy.lvl0` is currently hardcoded to the literal
+ * string "Documentation" for every page (see its recordExtractor
+ * config), not derived from which product a result came from -- so
+ * results don't visually distinguish saas/integrator/connectors in the
+ * dropdown yet. That's a crawler-config fix (Algolia dashboard), not
+ * something this file can change. */
+export const sharedAlgoliaSearch = {
+  appId: '8LWM72S9RU',
+  apiKey: 'f6a71bd87c46d1b686d3f89fbfbe176b',
+  indexName: 'Integration Documenation',
+  contextualSearch: false,
+};
+
 /** Production's real custom domain -- the one signal that reliably tells
  * apart the gh-pages promotion (served from here) from everywhere else
  * this exact same build output also runs (Choreo staging, a fork's own
