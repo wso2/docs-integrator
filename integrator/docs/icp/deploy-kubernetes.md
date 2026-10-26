@@ -11,7 +11,7 @@ The ICP Helm chart deploys the WSO2 Integration Control Plane (ICP) 2.0.0 on any
 - [Helm](https://helm.sh/docs/intro/install/) 3.x
 - [kubectl](https://kubernetes.io/docs/tasks/tools/) configured against your cluster
 - A running Kubernetes cluster (AKS, EKS, or any compatible cluster)
-- The WSO2 ICP container image. The community image is available on Docker Hub at [`wso2/wso2-integration-control-plane:2.0.0`](https://hub.docker.com/r/wso2/wso2-integration-control-plane) and requires no login. For U2-updated images with patches and fixes, use `docker.wso2.com/wso2-integration-control-plane:2.0.0` — this requires a WSO2 subscription and `docker login docker.wso2.com` first. Refer to the [U2 documentation](https://updates.docs.wso2.com/en/latest/updates/how-to-use-docker-images-to-receive-updates/) for details.
+- The WSO2 ICP container image. The community image is available on Docker Hub at [`wso2/wso2-integration-control-plane:2.0.0`](https://hub.docker.com/r/wso2/wso2-integration-control-plane) and requires no login. For U2-updated images with patches and fixes, use `registry.wso2.com/wso2-integrator/integration-control-plane:2.0.0` — this requires a WSO2 subscription and `docker login registry.wso2.com` first. Refer to the [U2 documentation](https://updates.docs.wso2.com/en/latest/updates/how-to-use-docker-images-to-receive-updates/) for details.
 
 ## Install the chart
 
