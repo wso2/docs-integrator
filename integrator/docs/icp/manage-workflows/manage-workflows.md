@@ -4,7 +4,7 @@ title: Manage Workflows
 
 # Manage Workflows
 
-The Integration Control Plane (ICP) is where you watch and steer the durable workflows an integration runs. This page covers connecting an integration to ICP and finding your way around the workflow views it opens up.
+The Integration Control Plane (ICP) is where you monitor and control your durable workflows. In WSO2 Integrator, workflows are built inside an integration. This page covers connecting a workflow to ICP and finding your way around the workflow views.
 
 ## Connect a workflow runtime
 
@@ -14,9 +14,9 @@ A durable workflow runs inside your integration. The Integration Control Plane (
 
 For development and evaluation, WSO2 Integrator ships its own ICP server and writes the runtime bridge configuration for you, so there is nothing to create in the console by hand.
 
-1. Open the integration overview and, under **Integration Control Plane**, check **Enable ICP monitoring**.
+1. In WSO2 Integrator, open the overview of your integration and, under **Integration Control Plane**, check **Enable ICP monitoring**.
 2. Expand **Publish to local ICP** and click **Start ICP Server**.
-3. Start the integration. It registers with the server as it boots.
+3. Run the workflow. It registers with the server as it boots.
 
 <ThemedImage
     alt="Enabling ICP monitoring, expanding Publish to local ICP, and starting the bundled ICP server from the deployment options panel"
@@ -26,17 +26,17 @@ For development and evaluation, WSO2 Integrator ships its own ICP server and wri
     }}
 />
 
-Start ICP before the integration, so the integration has somewhere to publish to as it comes up. The project and the integration are both created for you, and because the integration carries a durable workflow it is registered as a workflow integration.
+Start the ICP server before you run the workflow, so ICP is ready to receive the registration. ICP creates the project and the workflow in the console for you.
 
-For more information, see [Configuring the integration node with ICP](../connect-runtime.md).
+For more information, see [Connect an Integration to ICP](../connect-runtime.md).
 
 ### Register the integration on an installed ICP
 
-On a server you installed yourself ([Install ICP](../install-icp.md)), create the project and the integration in the console, then connect a runtime to it.
+On an ICP server you installed yourself ([Install ICP](../install-icp.md)), create the project and the workflow in the console, then connect a runtime to it.
 
 #### 1. Create a workflow integration
 
-The **Workflow** integration type is what tells ICP that this integration hosts workflows.
+Setting the integration type to **Workflow** tells ICP that this integration contains workflows, so the console shows the workflow views for it.
 
 1. Go to **Projects** > *your project*, or click **Create Project** first.
 2. Click **Create Integration** and fill in the **Create New Integration** form:
@@ -60,7 +60,7 @@ The **Workflow** integration type is what tells ICP that this integration hosts 
 
 #### 2. Add a runtime
 
-Add a runtime to the new integration the same way as for any other integration: generate a secret from **Add Runtime** on the environment card, add the snippet to the integration's `Config.toml` with a unique runtime name, enable remote management in `Ballerina.toml`, import the runtime bridge, and start the integration.
+Add a runtime to the new workflow the same way as for any other integration: generate a secret from **Add Runtime** on the environment card, add the snippet to the integration's `Config.toml` with a unique runtime name, enable remote management in `Ballerina.toml`, import the runtime bridge, and run the workflow.
 
 The full procedure, with the field reference and troubleshooting, is in [Connect an Integration to ICP](../connect-runtime.md).
 
@@ -76,7 +76,7 @@ Once the runtime's heartbeat reaches ICP:
 
 ## Open an integration overview
 
-Once an integration is registered, the Integration Control Plane provides workflow management views for it. From an integration overview, you can review the available workflows, open their executions, start a workflow, and view the connected runtimes.
+Once a workflow is registered, the Integration Control Plane provides workflow management views for it. From an integration overview, you can review the available workflows, open their executions, start a workflow, and view the connected runtimes.
 
 Select **Overview** in the console navigation to open the integration overview.
 
@@ -92,7 +92,7 @@ From the overview page you can take three actions:
 
 | Action                           | What it does                                                                                                                              |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| **Select a workflow definition** | The **Workflow Definitions** dropdown lists the workflows the integration provides. Selecting one scopes the buttons and the counts below to that workflow. |
+| **Select a workflow definition** | The **Workflow Definitions** dropdown lists the workflows inside the integration. Selecting one scopes the buttons and the counts below to that workflow. |
 | **View Workflows**               | Opens the **Workflow Executions** page, filtered to the selected workflow in that environment.                                            |
 | **Start New Workflow**           | Opens the **Start Workflow** dialog with the selected workflow chosen, where you enter its input values. Shown only to users who can start workflows. See [Start a workflow](start-a-workflow.md). |
 
