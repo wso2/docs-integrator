@@ -24,9 +24,9 @@ Manages PayPal billing plans and subscriptions via the PayPal Subscriptions REST
 | `auth` | `OAuth2ClientCredentialsGrantConfig` | Required | OAuth 2.0 client credentials config containing `clientId`, `clientSecret`, and `tokenUrl`. The default `tokenUrl` points to the PayPal sandbox token endpoint. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use for requests. |
 | `timeout` | `decimal` | `30` | HTTP client request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration for secure connections. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration for secure connections. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Whether to validate request and response payloads against the OpenAPI schema. |
 | `laxDataBinding` | `boolean` | `true` | When true, unknown fields in responses are ignored rather than causing errors. |
 

@@ -29,20 +29,20 @@ The `jms:Listener` establishes the broker connection. Each attached service subs
 |-------|------|---------|-------------|
 | `messageVpn` | `string` | `"default"` | Solace message VPN name. |
 | `auth` | `BasicAuthConfiguration\|KerberosConfiguration\|OAuth2Configuration` | Required | Authentication configuration. See [Supporting types](#supporting-types). |
-| `secureSocket` | `SecureSocket` | `()` | TLS/SSL configuration. |
-| `clientName` | `string` | `()` | Client identifier reported to the broker. A unique name is generated when omitted. |
+| `secureSocket` | `SecureSocket` | Optional | TLS/SSL configuration. |
+| `clientName` | `string` | Optional | Client identifier reported to the broker. A unique name is generated when omitted. |
 | `clientDescription` | `string` | `"Ballerina Solace JMS Connector"` | A description for the application client. |
 | `enableDynamicDurables` | `boolean` | `false` | Automatically provision durable destinations that don't already exist on the broker. |
 | `directTransport` | `boolean` | `true` | Consume over direct (at-most-once) transport. Set to `false` for session-transacted services or flow-control tuning. |
 | `directOptimized` | `boolean` | `true` | Optimize the session for direct messaging throughput. |
 | `compressionLevel` | `int` | `0` | ZLIB compression level (0-9, where 0 is no compression). |
-| `localhost` | `string` | `()` | Local interface IP address to bind for outbound connections. |
+| `localhost` | `string` | Optional | Local interface IP address to bind for outbound connections. |
 | `connectTimeout` | `decimal` | `30.0` | Connection timeout in seconds. |
 | `readTimeout` | `decimal` | `10.0` | Read timeout in seconds. |
-| `retryConfig` | `RetryConfiguration` | `()` | Reconnection retry configuration. |
-| `transportWindowSize` | `int` | `()` | Maximum number of guaranteed messages the broker can have in flight, unacknowledged (1-255). Only applies when `directTransport` is `false`. |
+| `retryConfig` | `RetryConfiguration` | Optional | Reconnection retry configuration. |
+| `transportWindowSize` | `int` | Optional | Maximum number of guaranteed messages the broker can have in flight, unacknowledged (1-255). Only applies when `directTransport` is `false`. |
 | `ackThreshold` | `int` | `60` | Percentage of `transportWindowSize` consumed before an automatic acknowledgement is sent (1-75). Only applies when `directTransport` is `false`. |
-| `ackTimer` | `decimal` | `()` | Maximum time in seconds to hold an unacknowledged message before sending an automatic acknowledgement (0.02-1.5). Only applies when `directTransport` is `false`. |
+| `ackTimer` | `decimal` | Optional | Maximum time in seconds to hold an unacknowledged message before sending an automatic acknowledgement (0.02-1.5). Only applies when `directTransport` is `false`. |
 
 > **Important:** Session-transacted messaging (`ackMode: SESSION_TRANSACTED`) requires `directTransport: false`. A session-transacted commit or rollback is local to a single listener or client session — it can't span multiple client instances, for example a separate producer and consumer used together.
 
@@ -217,11 +217,11 @@ public type Destination Topic|Queue;
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `trustStore` | `TrustStore` | `()` | Truststore used to validate the broker's certificate. |
-| `keyStore` | `KeyStore` | `()` | Keystore used for mutual TLS. |
-| `trustedCommonNames` | `string[]` | `()` | Up to 16 common names accepted in the broker's certificate. |
+| `trustStore` | `TrustStore` | Optional | Truststore used to validate the broker's certificate. |
+| `keyStore` | `KeyStore` | Optional | Keystore used for mutual TLS. |
+| `trustedCommonNames` | `string[]` | Optional | Up to 16 common names accepted in the broker's certificate. |
 | `excludedProtocols` | `Protocol[]` | `[]` | TLS protocol versions to exclude. |
-| `cipherSuites` | `SslCipherSuite[]` | `()` | Allowed cipher suites. Each entry must be an `SslCipherSuite` value, for example `ECDHE_RSA_AES256_CBC_SHA384`. |
+| `cipherSuites` | `SslCipherSuite[]` | Optional | Allowed cipher suites. Each entry must be an `SslCipherSuite` value, for example `ECDHE_RSA_AES256_CBC_SHA384`. |
 | `validation` | `record {\|boolean enabled = true; boolean validateDate = true; boolean validateHostname = true;\|}` | all `true` | Certificate validation controls. |
 
 `TrustStore` fields: `location: string`, `password: string`, `format: JKS|PKCS12 = JKS`. `KeyStore` adds `keyPassword?: string` and `keyAlias?: string`.

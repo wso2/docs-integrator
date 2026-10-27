@@ -21,18 +21,18 @@ Manage collections, indexes, and vector data; perform similarity search and quer
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `authConfig` | `AuthConfig` | `()` | Token-based authentication configuration. |
-| `credentialsConfig` | `CredentialsConfig` | `()` | Username and password authentication configuration. |
-| `idleTimeout` | `int` | `()` | Idle timeout in seconds. |
+| `authConfig` | `AuthConfig` | Optional | Token-based authentication configuration. |
+| `credentialsConfig` | `CredentialsConfig` | Optional | Username and password authentication configuration. |
+| `idleTimeout` | `int` | Optional | Idle timeout in seconds. |
 | `keepAliveTime` | `int` | `55` | Keep-alive ping interval in seconds. |
 | `keepAliveTimeout` | `int` | `20` | Keep-alive timeout in seconds. |
 | `keepAliveWithoutCalls` | `boolean` | `false` | Whether to send keep-alive pings without active calls. |
 | `rpcDeadline` | `int` | `0` | RPC deadline in seconds. `0` means no deadline. |
 | `connectTimeout` | `int` | `10` | Connection timeout in seconds. |
-| `databaseName` | `string` | `()` | Target database name. |
-| `serverName` | `string` | `()` | Server name for TLS verification. |
-| `proxyAddress` | `string` | `()` | Proxy server address. |
-| `secureConfig` | `SecureConfig` | `()` | TLS/SSL configuration with client and server certificate paths. |
+| `databaseName` | `string` | Optional | Target database name. |
+| `serverName` | `string` | Optional | Server name for TLS verification. |
+| `proxyAddress` | `string` | Optional | Proxy server address. |
+| `secureConfig` | `SecureConfig` | Optional | TLS/SSL configuration with client and server certificate paths. |
 
 ### Initializing the client
 

@@ -32,9 +32,9 @@ Search for nonprofits and look up available search filters.
 | `subscriptionKey` | `string` | Required | Candid API subscription key for authentication. |
 | `httpVersion` | `http:HttpVersion` | `http:HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable/disable payload validation. |
 | `laxDataBinding` | `boolean` | `true` | Use lax data binding for responses. |
 
@@ -346,9 +346,9 @@ Retrieve detailed nonprofit profiles and download PDF reports.
 | `subscriptionKey` | `string` | Required | Candid API subscription key for authentication. |
 | `httpVersion` | `http:HttpVersion` | `http:HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable/disable payload validation. |
 | `laxDataBinding` | `boolean` | `true` | Use lax data binding for responses. |
 
@@ -577,9 +577,9 @@ Download Charity Check PDF reports for IRS compliance verification.
 | `subscriptionKey` | `string` | Required | Candid API subscription key for authentication. |
 | `httpVersion` | `http:HttpVersion` | `http:HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable/disable payload validation. |
 | `laxDataBinding` | `boolean` | `true` | Use lax data binding for responses. |
 

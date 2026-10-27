@@ -26,15 +26,15 @@ Publishes messages to Solace queues and topics with optional transacted session 
 |-------|------|---------|-------------|
 | `messageVpn` | `string` | `"default"` | Solace message VPN name. |
 | `auth` | `BasicAuthConfiguration\|KerberosConfiguration\|OAuth2Configuration` | Required | Authentication configuration. See [Supporting types](triggers.md#supporting-types). |
-| `secureSocket` | `SecureSocket` | `()` | TLS/SSL configuration for secure connections. |
-| `clientName` | `string` | `()` | Client identifier reported to the broker. A unique name is generated when omitted. |
+| `secureSocket` | `SecureSocket` | Optional | TLS/SSL configuration for secure connections. |
+| `clientName` | `string` | Optional | Client identifier reported to the broker. A unique name is generated when omitted. |
 | `clientDescription` | `string` | `"Ballerina Solace Connector"` | A description for the application client. |
 | `transacted` | `boolean` | `false` | Enable a transacted session for `commit`/`rollback` control over sent messages. |
 | `compressionLevel` | `int` | `0` | ZLIB compression level (0-9, where 0 is no compression). |
-| `localhost` | `string` | `()` | Local interface IP address to bind for outbound connections. |
+| `localhost` | `string` | Optional | Local interface IP address to bind for outbound connections. |
 | `connectTimeout` | `decimal` | `30.0` | Connection timeout in seconds. |
 | `readTimeout` | `decimal` | `10.0` | Read timeout in seconds. |
-| `retryConfig` | `RetryConfiguration` | `()` | Reconnection retry configuration. |
+| `retryConfig` | `RetryConfiguration` | Optional | Reconnection retry configuration. |
 | `generateSendTimestamps` | `boolean` | `false` | Attach a broker-visible send timestamp to every outgoing message. |
 | `generateSequenceNumbers` | `boolean` | `false` | Attach an auto-incrementing sequence number to every outgoing message. |
 
@@ -162,15 +162,15 @@ Consumes messages from a single Solace queue or topic, chosen at connection time
 | `subscriptionConfig` | `QueueConfiguration\|TopicConfiguration` | Required | The queue or topic to consume from. |
 | `messageVpn` | `string` | `"default"` | Solace message VPN name. |
 | `auth` | `BasicAuthConfiguration\|KerberosConfiguration\|OAuth2Configuration` | Required | Authentication configuration. See [Supporting types](triggers.md#supporting-types). |
-| `secureSocket` | `SecureSocket` | `()` | TLS/SSL configuration for secure connections. |
-| `clientName` | `string` | `()` | Client identifier reported to the broker. A unique name is generated when omitted. |
+| `secureSocket` | `SecureSocket` | Optional | TLS/SSL configuration for secure connections. |
+| `clientName` | `string` | Optional | Client identifier reported to the broker. A unique name is generated when omitted. |
 | `clientDescription` | `string` | `"Ballerina Solace Connector"` | A description for the application client. |
 | `transacted` | `boolean` | `false` | Enable a transacted session for `commit`/`rollback` control over received messages. |
 | `compressionLevel` | `int` | `0` | ZLIB compression level (0-9, where 0 is no compression). |
-| `localhost` | `string` | `()` | Local interface IP address to bind for outbound connections. |
+| `localhost` | `string` | Optional | Local interface IP address to bind for outbound connections. |
 | `connectTimeout` | `decimal` | `30.0` | Connection timeout in seconds. |
 | `readTimeout` | `decimal` | `10.0` | Read timeout in seconds. |
-| `retryConfig` | `RetryConfiguration` | `()` | Reconnection retry configuration. |
+| `retryConfig` | `RetryConfiguration` | Optional | Reconnection retry configuration. |
 | `generateReceiveTimestamps` | `boolean` | `false` | Populate `receiveTimestamp` on every received message. |
 | `calculateMessageExpiration` | `boolean` | `false` | Populate `expiration` on every received message. |
 
@@ -181,10 +181,10 @@ Consumes messages from a single Solace queue or topic, chosen at connection time
 | `queueName` | `string` | `()` | The name of the durable queue to consume from. Must already exist on the broker. |
 | `durability` | `Durability` | `DURABLE` | `DURABLE` for a named, broker-provisioned queue, or `TEMPORARY` for a broker-generated temporary queue. |
 | `ackMode` | `AcknowledgementMode` | `AUTO_ACK` | `AUTO_ACK` acknowledges automatically on receive; `CLIENT_ACK` requires an explicit `ack` call. |
-| `messageSelector` | `string` | `()` | SQL-92 message selector expression. Only matching messages are delivered. |
+| `messageSelector` | `string` | Optional | SQL-92 message selector expression. Only matching messages are delivered. |
 | `transportWindowSize` | `int` | `255` | Maximum number of guaranteed messages the broker can have in flight, unacknowledged. |
 | `ackThreshold` | `int` | `60` | Percentage of `transportWindowSize` consumed before an automatic acknowledgement is sent. |
-| `ackTimer` | `decimal` | `()` | Maximum time to hold an unacknowledged message before sending an automatic acknowledgement. |
+| `ackTimer` | `decimal` | Optional | Maximum time to hold an unacknowledged message before sending an automatic acknowledgement. |
 | `reconnectTries` | `int` | `-1` | Number of reconnection attempts after a flow failure. `-1` retries indefinitely. |
 | `reconnectRetryInterval` | `decimal` | `3.0` | Delay in seconds between reconnection attempts. |
 
@@ -194,12 +194,12 @@ Consumes messages from a single Solace queue or topic, chosen at connection time
 |-------|------|---------|-------------|
 | `topicName` | `string` | Required | The name of the topic to subscribe to. |
 | `durability` | `Durability` | `TEMPORARY` | `TEMPORARY` for a direct, at-most-once subscription, or `DURABLE` for a durable topic endpoint. |
-| `endpointName` | `string` | `()` | The durable topic endpoint name. Required when `durability` is `DURABLE`. |
+| `endpointName` | `string` | Optional | The durable topic endpoint name. Required when `durability` is `DURABLE`. |
 | `ackMode` | `AcknowledgementMode` | `AUTO_ACK` | `AUTO_ACK` acknowledges automatically on receive; `CLIENT_ACK` requires an explicit `ack` call. |
-| `messageSelector` | `string` | `()` | SQL-92 message selector expression. Not supported on a `TEMPORARY` (direct) topic subscription. |
+| `messageSelector` | `string` | Optional | SQL-92 message selector expression. Not supported on a `TEMPORARY` (direct) topic subscription. |
 | `transportWindowSize` | `int` | `255` | Maximum number of guaranteed messages the broker can have in flight, unacknowledged. |
 | `ackThreshold` | `int` | `60` | Percentage of `transportWindowSize` consumed before an automatic acknowledgement is sent. |
-| `ackTimer` | `decimal` | `()` | Maximum time to hold an unacknowledged message before sending an automatic acknowledgement. |
+| `ackTimer` | `decimal` | Optional | Maximum time to hold an unacknowledged message before sending an automatic acknowledgement. |
 | `reconnectTries` | `int` | `-1` | Number of reconnection attempts after a flow failure. `-1` retries indefinitely. |
 | `reconnectRetryInterval` | `decimal` | `3.0` | Delay in seconds between reconnection attempts. |
 

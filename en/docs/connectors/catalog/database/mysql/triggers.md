@@ -46,16 +46,16 @@ The listener supports the following connection strategies:
 | `connectTimeout` | <code>decimal?</code> | `()` | Connection timeout in seconds. Inherited from `cdc:DatabaseConnection`. |
 | `secure` | <code>cdc:SecureDatabaseConnection?</code> | `()` | SSL/TLS configuration for the database connection. Inherited from `cdc:DatabaseConnection`. |
 | `databaseServerId` | <code>string</code> | auto-generated random integer (as a string) | Unique identifier for this MySQL server instance in the replication topology. |
-| `includedDatabases` | <code>string&#124;string[]?</code> | `()` | Regex patterns of databases to capture changes from. Do not use alongside `excludedDatabases`. |
-| `excludedDatabases` | <code>string&#124;string[]?</code> | `()` | Regex patterns of databases to exclude from capture. Do not use alongside `includedDatabases`. |
-| `includedTables` | <code>string&#124;string[]?</code> | `()` | Fully-qualified table names or regex patterns to capture (for example, `"mydb.orders"`). Mutually exclusive with `excludedTables`. |
-| `excludedTables` | <code>string&#124;string[]?</code> | `()` | Regex patterns of tables to exclude. Mutually exclusive with `includedTables`. |
-| `includedColumns` | <code>string&#124;string[]?</code> | `()` | Regex patterns of columns to capture. Mutually exclusive with `excludedColumns`. |
-| `excludedColumns` | <code>string&#124;string[]?</code> | `()` | Regex patterns of columns to exclude. Mutually exclusive with `includedColumns`. |
-| `messageKeyColumns` | <code>cdc:MessageKeyColumns[]?</code> | `()` | Composite message key columns for change events. |
+| `includedDatabases` | <code>string&#124;string[]?</code> | Optional | Regex patterns of databases to capture changes from. Do not use alongside `excludedDatabases`. |
+| `excludedDatabases` | <code>string&#124;string[]?</code> | Optional | Regex patterns of databases to exclude from capture. Do not use alongside `includedDatabases`. |
+| `includedTables` | <code>string&#124;string[]?</code> | Optional | Fully-qualified table names or regex patterns to capture (for example, `"mydb.orders"`). Mutually exclusive with `excludedTables`. |
+| `excludedTables` | <code>string&#124;string[]?</code> | Optional | Regex patterns of tables to exclude. Mutually exclusive with `includedTables`. |
+| `includedColumns` | <code>string&#124;string[]?</code> | Optional | Regex patterns of columns to capture. Mutually exclusive with `excludedColumns`. |
+| `excludedColumns` | <code>string&#124;string[]?</code> | Optional | Regex patterns of columns to exclude. Mutually exclusive with `includedColumns`. |
+| `messageKeyColumns` | <code>cdc:MessageKeyColumns[]?</code> | Optional | Composite message key columns for change events. |
 | `tasksMax` | <code>int</code> | `1` | Maximum number of tasks for the connector. The MySQL connector always uses a single task, so changing this has no effect. |
-| `replicationConfig` | <code>ReplicationConfiguration?</code> | `()` | MySQL GTID-based replication configuration (`gtidSourceIncludes`/`gtidSourceExcludes`). |
-| `binlogConfig` | <code>BinlogConfiguration?</code> | `()` | MySQL binlog configuration (for example, `bufferSize`). |
+| `replicationConfig` | <code>ReplicationConfiguration?</code> | Optional | MySQL GTID-based replication configuration (`gtidSourceIncludes`/`gtidSourceExcludes`). |
+| `binlogConfig` | <code>BinlogConfiguration?</code> | Optional | MySQL binlog configuration (for example, `bufferSize`). |
 
 `MySqlListenerConfiguration` fields:
 
@@ -210,15 +210,15 @@ CDC options for the listener. Extends `cdc:Options` with MySQL-specific fields.
 | `maxQueueSize` | <code>int</code> | `8192` | Maximum number of events in the internal queue. |
 | `maxBatchSize` | <code>int</code> | `2048` | Maximum number of events per processing batch. |
 | `queryTimeout` | <code>decimal</code> | `60.0` | Database query timeout in seconds. |
-| `heartbeatConfig` | <code>cdc:RelationalHeartbeatConfiguration?</code> | `()` | Heartbeat for keeping the MySQL replication connection alive. |
+| `heartbeatConfig` | <code>cdc:RelationalHeartbeatConfiguration?</code> | Optional | Heartbeat for keeping the MySQL replication connection alive. |
 | `signalConfig` | <code>cdc:SignalConfiguration?</code> | `()` | Signal-channel configuration for ad-hoc control. |
 | `transactionMetadataConfig` | <code>cdc:TransactionMetadataConfiguration?</code> | `()` | Transaction-boundary event configuration. |
 | `columnTransformConfig` | <code>cdc:ColumnTransformConfiguration?</code> | `()` | Column masking/transformation configuration. |
 | `topicConfig` | <code>cdc:TopicConfiguration?</code> | `()` | Topic naming and routing configuration. |
 | `connectionRetryConfig` | <code>cdc:ConnectionRetryConfiguration?</code> | `()` | Error handling and retry configuration. |
 | `performanceConfig` | <code>cdc:PerformanceConfiguration?</code> | `()` | Performance-tuning configuration. |
-| `extendedSnapshot` | <code>ExtendedSnapshotConfiguration?</code> | `()` | MySQL extended snapshot configuration (for example, `lockTimeout`). Narrows the parent `cdc:Options.extendedSnapshot`. |
-| `dataTypeConfig` | <code>DataTypeConfiguration?</code> | `()` | MySQL-specific type handling: `bigIntUnsignedHandlingMode`, `enableTimeAdjuster`, `includeSchemaChanges`. |
+| `extendedSnapshot` | <code>ExtendedSnapshotConfiguration?</code> | Optional | MySQL extended snapshot configuration (for example, `lockTimeout`). Narrows the parent `cdc:Options.extendedSnapshot`. |
+| `dataTypeConfig` | <code>DataTypeConfiguration?</code> | Optional | MySQL-specific type handling: `bigIntUnsignedHandlingMode`, `enableTimeAdjuster`, `includeSchemaChanges`. |
 
 ### `cdc:SecureDatabaseConnection`
 
@@ -234,8 +234,8 @@ SSL/TLS configuration for the CDC database connection. Set on `MySqlDatabaseConn
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `gtidSourceIncludes` | <code>string&#124;string[]?</code> | `()` | Comma-separated list of GTID source UUIDs to include. |
-| `gtidSourceExcludes` | <code>string&#124;string[]?</code> | `()` | Comma-separated list of GTID source UUIDs to exclude. |
+| `gtidSourceIncludes` | <code>string&#124;string[]?</code> | Optional | Comma-separated list of GTID source UUIDs to include. |
+| `gtidSourceExcludes` | <code>string&#124;string[]?</code> | Optional | Comma-separated list of GTID source UUIDs to exclude. |
 
 ### `BinlogConfiguration`
 

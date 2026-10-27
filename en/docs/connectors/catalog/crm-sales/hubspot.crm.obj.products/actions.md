@@ -24,10 +24,10 @@ Manage HubSpot CRM product records: individual and batch CRUD, upsert, and searc
 | `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: bearer token (Private App), OAuth 2.0 refresh token, or legacy API key. |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | <code>decimal</code> | `30` | Maximum time in seconds to wait for a response. |
-| `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
-| `secureSocket` | <code>http:ClientSecureSocket</code> | `()` | SSL/TLS configuration. |
-| `proxy` | <code>http:ProxyConfig</code> | `()` | Proxy server configuration. |
-| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | `()` | Circuit breaker configuration. |
+| `retryConfig` | <code>http:RetryConfig</code> | Optional | Retry configuration for failed requests. |
+| `secureSocket` | <code>http:ClientSecureSocket</code> | Optional | SSL/TLS configuration. |
+| `proxy` | <code>http:ProxyConfig</code> | Optional | Proxy server configuration. |
+| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | Optional | Circuit breaker configuration. |
 
 ### Initializing the client
 

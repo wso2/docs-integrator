@@ -46,20 +46,20 @@ The listener supports the following connection strategies:
 | `databaseName` | <code>string</code> | Required | Name of the database to capture changes from. |
 | `connectTimeout` | <code>decimal?</code> | `()` | Connection timeout in seconds. Inherited from `cdc:DatabaseConnection`. |
 | `secure` | <code>cdc:SecureDatabaseConnection?</code> | `()` | SSL/TLS configuration for the database connection. Inherited from `cdc:DatabaseConnection`. |
-| `includedSchemas` | <code>string&#124;string[]?</code> | `()` | Regex patterns of schemas to include in capture. Mutually exclusive with `excludedSchemas`. |
-| `excludedSchemas` | <code>string&#124;string[]?</code> | `()` | Regex patterns of schemas to exclude from capture. Mutually exclusive with `includedSchemas`. |
-| `includedTables` | <code>string&#124;string[]?</code> | `()` | Fully-qualified table names or regex patterns to capture (for example, `"public.customers"`). Mutually exclusive with `excludedTables`. |
-| `excludedTables` | <code>string&#124;string[]?</code> | `()` | Regex patterns of tables to exclude. Mutually exclusive with `includedTables`. |
-| `includedColumns` | <code>string&#124;string[]?</code> | `()` | Regex patterns of columns to capture. Mutually exclusive with `excludedColumns`. |
-| `excludedColumns` | <code>string&#124;string[]?</code> | `()` | Regex patterns of columns to exclude. Mutually exclusive with `includedColumns`. |
-| `messageKeyColumns` | <code>cdc:MessageKeyColumns[]?</code> | `()` | Composite message-key column mappings for change events. |
+| `includedSchemas` | <code>string&#124;string[]?</code> | Optional | Regex patterns of schemas to include in capture. Mutually exclusive with `excludedSchemas`. |
+| `excludedSchemas` | <code>string&#124;string[]?</code> | Optional | Regex patterns of schemas to exclude from capture. Mutually exclusive with `includedSchemas`. |
+| `includedTables` | <code>string&#124;string[]?</code> | Optional | Fully-qualified table names or regex patterns to capture (for example, `"public.customers"`). Mutually exclusive with `excludedTables`. |
+| `excludedTables` | <code>string&#124;string[]?</code> | Optional | Regex patterns of tables to exclude. Mutually exclusive with `includedTables`. |
+| `includedColumns` | <code>string&#124;string[]?</code> | Optional | Regex patterns of columns to capture. Mutually exclusive with `excludedColumns`. |
+| `excludedColumns` | <code>string&#124;string[]?</code> | Optional | Regex patterns of columns to exclude. Mutually exclusive with `includedColumns`. |
+| `messageKeyColumns` | <code>cdc:MessageKeyColumns[]?</code> | Optional | Composite message-key column mappings for change events. |
 | `tasksMax` | <code>int</code> | `1` | Maximum number of tasks. The PostgreSQL connector always uses a single task, so changing this has no effect. |
 | `pluginName` | <code>PostgreSQLLogicalDecodingPlugin</code> | `PGOUTPUT` | Logical decoding plugin to use (`PGOUTPUT` or `DECODERBUFS`). **Deprecated**: use `replicationConfig.pluginName` instead. |
 | `slotName` | <code>string</code> | `"debezium"` | Name of the logical replication slot. **Deprecated**: use `replicationConfig.slotName` instead. |
 | `publicationName` | <code>string</code> | `"dbz_publication"` | Name of the PostgreSQL publication for the `PGOUTPUT` plugin. **Deprecated**: use `publicationConfig.publicationName` instead. |
-| `replicationConfig` | <code>ReplicationConfiguration?</code> | `()` | Logical decoding plugin, slot name, and slot parameters. Takes priority over the deprecated top-level fields. |
-| `publicationConfig` | <code>PublicationConfiguration?</code> | `()` | Publication name and autocreate mode. Takes priority over the deprecated top-level `publicationName`. |
-| `streamingConfig` | <code>StreamingConfiguration?</code> | `()` | Streaming and status-update configuration (status update interval, xmin fetch interval, LSN flush mode). |
+| `replicationConfig` | <code>ReplicationConfiguration?</code> | Optional | Logical decoding plugin, slot name, and slot parameters. Takes priority over the deprecated top-level fields. |
+| `publicationConfig` | <code>PublicationConfiguration?</code> | Optional | Publication name and autocreate mode. Takes priority over the deprecated top-level `publicationName`. |
+| `streamingConfig` | <code>StreamingConfiguration?</code> | Optional | Streaming and status-update configuration (status update interval, xmin fetch interval, LSN flush mode). |
 
 `PostgresListenerConfiguration` fields:
 
@@ -226,7 +226,7 @@ Replaces the deprecated top-level `pluginName` and `slotName` fields on `Postgre
 | `pluginName` | <code>PostgreSQLLogicalDecodingPlugin</code> | `PGOUTPUT` | Logical decoding plugin to use. |
 | `slotName` | <code>string</code> | `"debezium"` | Name of the PostgreSQL logical replication slot. |
 | `slotDropOnStop` | <code>boolean</code> | `false` | Drop the replication slot when the connector stops. |
-| `slotStreamParams` | <code>string?</code> | `()` | Custom replication slot stream parameters. |
+| `slotStreamParams` | <code>string?</code> | Optional | Custom replication slot stream parameters. |
 
 ### `PublicationConfiguration`
 
@@ -243,7 +243,7 @@ Replaces the deprecated top-level `publicationName` field on `PostgresDatabaseCo
 |-------|------|---------|-------------|
 | `statusUpdateInterval` | <code>decimal</code> | `10` | Interval, in seconds, for sending status updates to PostgreSQL. |
 | `xminFetchInterval` | <code>decimal</code> | `0` | Interval, in seconds, for fetching the current `xmin` position. `0` disables periodic fetching. |
-| `lsnFlushMode` | <code>LsnFlushMode?</code> | `()` | LSN flushing strategy. |
+| `lsnFlushMode` | <code>LsnFlushMode?</code> | Optional | LSN flushing strategy. |
 
 ### `PublicationAutocreateMode`
 
@@ -275,15 +275,15 @@ PostgreSQL-specific CDC options. Set on `PostgresListenerConfiguration.options`.
 | `maxQueueSize` | <code>int</code> | `8192` | Maximum number of events in the internal queue. |
 | `maxBatchSize` | <code>int</code> | `2048` | Maximum number of events per processing batch. |
 | `queryTimeout` | <code>decimal</code> | `60` | Database query timeout in seconds. `0` disables the timeout. |
-| `heartbeatConfig` | <code>cdc:HeartbeatConfiguration?</code> | `()` | Heartbeat configuration for keeping the replication connection active. Inherited from `cdc:Options`. |
+| `heartbeatConfig` | <code>cdc:HeartbeatConfiguration?</code> | Optional | Heartbeat configuration for keeping the replication connection active. Inherited from `cdc:Options`. |
 | `signalConfig` | <code>cdc:SignalConfiguration?</code> | `()` | Signal-channel configuration for ad-hoc control. Inherited from `cdc:Options`. |
 | `transactionMetadataConfig` | <code>cdc:TransactionMetadataConfiguration?</code> | `()` | Transaction-boundary event configuration. Inherited from `cdc:Options`. |
 | `columnTransformConfig` | <code>cdc:ColumnTransformConfiguration?</code> | `()` | Column masking and transformation configuration. Inherited from `cdc:Options`. |
 | `topicConfig` | <code>cdc:TopicConfiguration?</code> | `()` | Topic naming and routing configuration. Inherited from `cdc:Options`. |
 | `connectionRetryConfig` | <code>cdc:ConnectionRetryConfiguration?</code> | `()` | Connection retry behavior. Inherited from `cdc:Options`. |
 | `performanceConfig` | <code>cdc:PerformanceConfiguration?</code> | `()` | Performance-tuning configuration. Inherited from `cdc:Options`. |
-| `extendedSnapshot` | <code>ExtendedSnapshotConfiguration?</code> | `()` | PostgreSQL extended snapshot configuration (lock timeout, isolation mode). Narrows the parent `cdc:Options.extendedSnapshot`. |
-| `dataTypeConfig` | <code>cdc:DataTypeConfiguration?</code> | `()` | Data-type handling configuration including schema-change tracking. |
+| `extendedSnapshot` | <code>ExtendedSnapshotConfiguration?</code> | Optional | PostgreSQL extended snapshot configuration (lock timeout, isolation mode). Narrows the parent `cdc:Options.extendedSnapshot`. |
+| `dataTypeConfig` | <code>cdc:DataTypeConfiguration?</code> | Optional | Data-type handling configuration including schema-change tracking. |
 
 ### `ExtendedSnapshotConfiguration`
 
@@ -292,7 +292,7 @@ PostgreSQL-specific extension of `cdc:RelationalExtendedSnapshotConfiguration`.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `lockTimeout` | <code>decimal</code> | `10` | Lock acquisition timeout in seconds during snapshot. |
-| `isolationMode` | <code>cdc:SnapshotIsolationMode?</code> | `()` | Transaction isolation level used during the snapshot. |
+| `isolationMode` | <code>cdc:SnapshotIsolationMode?</code> | Optional | Transaction isolation level used during the snapshot. |
 
 ### `cdc:SecureDatabaseConnection`
 

@@ -27,7 +27,7 @@ Connects to a remote TCP host to send and receive raw byte data.
 | `localHost` | <code>string</code> | `()` | Local interface address to bind the client socket to. |
 | `timeout` | <code>decimal</code> | `300` | Socket read timeout in seconds. |
 | `writeTimeout` | <code>decimal</code> | `300` | Socket write timeout in seconds. |
-| `secureSocket` | <code>ClientSecureSocket</code> | `()` | SSL/TLS configuration for secure connections. |
+| `secureSocket` | <code>ClientSecureSocket</code> | Optional | SSL/TLS configuration for secure connections. |
 
 ### Initializing the client
 

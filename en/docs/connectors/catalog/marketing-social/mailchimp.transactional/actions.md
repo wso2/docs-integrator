@@ -23,10 +23,10 @@ Provides access to all Mandrill API endpoints for transactional email sending, t
 |-------|------|---------|-------------|
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker configuration for fault tolerance. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker configuration for fault tolerance. |
 | `compression` | `http:Compression` | `COMPRESSION_AUTO` | HTTP compression configuration. |
 | `cache` | `http:CacheConfig` | `{}` | HTTP response cache configuration. |
 

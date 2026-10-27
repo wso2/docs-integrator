@@ -38,19 +38,19 @@ The listener supports the following connection strategy:
 | `protocol` | <code>Protocol</code> | `FTP` | The file transfer protocol to use (`FTP`, `FTPS`, or `SFTP`). |
 | `host` | <code>string</code> | `"127.0.0.1"` | Hostname or IP address of the FTP server. |
 | `port` | <code>int</code> | `21` | Port number of the FTP server. Typically `21` for FTP and FTPS explicit, and `990` for FTPS implicit.|
-| `auth` | <code>AuthConfiguration</code> | `()` | Authentication settings, including credentials, SSH private key (SFTP), SSL/TLS configuration (FTPS), and preferred SFTP authentication methods. |
+| `auth` | <code>AuthConfiguration</code> | Optional | Authentication settings, including credentials, SSH private key (SFTP), SSL/TLS configuration (FTPS), and preferred SFTP authentication methods. |
 | `pollingInterval` | <code>decimal</code> | `60.0` | Interval in seconds between directory polls. |
 | `userDirIsRoot` | <code>boolean</code> | `false` | Whether to treat the user's home directory as the root directory. |
 | `laxDataBinding` | <code>boolean</code> | `false` | When `true`, enables relaxed data binding for JSON/XML: `null` values map to optional fields and missing fields map to `null` values. |
 | `connectTimeout` | <code>decimal</code> | `30.0` | Connection timeout in seconds. |
-| `socketConfig` | <code>SocketConfig</code> | `()` | Per-protocol socket timeouts: `ftpDataTimeout` (FTP data), `ftpSocketTimeout` (FTP control), and `sftpSessionTimeout` (SFTP session). |
+| `socketConfig` | <code>SocketConfig</code> | Optional | Per-protocol socket timeouts: `ftpDataTimeout` (FTP data), `ftpSocketTimeout` (FTP control), and `sftpSessionTimeout` (SFTP session). |
 | `fileTransferMode` | <code>FileTransferMode</code> | `BINARY` | File transfer mode (`BINARY` or `ASCII`). |
-| `retryConfig` | <code>RetryConfig</code> | `()` | Retry configuration for transient failures during file content retrieval. When set, failed reads are retried with exponential backoff before the error reaches the handler or `onError`. Polling itself is not retried. |
-| `proxy` | <code>ProxyConfiguration</code> | `()` | Proxy / jump-host configuration (SFTP only). |
+| `retryConfig` | <code>RetryConfig</code> | Optional | Retry configuration for transient failures during file content retrieval. When set, failed reads are retried with exponential backoff before the error reaches the handler or `onError`. Polling itself is not retried. |
+| `proxy` | <code>ProxyConfiguration</code> | Optional | Proxy / jump-host configuration (SFTP only). |
 | `sftpCompression` | <code>TransferCompression[]</code> | `[NO]` | Compression algorithms to negotiate (`ZLIB`, `ZLIBOPENSSH`, `NO`) (SFTP only). |
-| `sftpSshKnownHosts` | <code>string</code> | `()` | Path to the SSH `known_hosts` file used for host key verification (SFTP only). |
-| `csvFailSafe` | <code>FailSafeOptions</code> | `()` | Fail-safe CSV processing for `onFileCsv`. When set, malformed rows are skipped and logged to a separate file in the current working directory instead of failing the handler. |
-| `coordination` | <code>CoordinationConfig</code> | `()` | Distributed task coordination. When set, multiple listener members coordinate so that only one polls at a time and the others act as warm standby. |
+| `sftpSshKnownHosts` | <code>string</code> | Optional | Path to the SSH `known_hosts` file used for host key verification (SFTP only). |
+| `csvFailSafe` | <code>FailSafeOptions</code> | Optional | Fail-safe CSV processing for `onFileCsv`. When set, malformed rows are skipped and logged to a separate file in the current working directory instead of failing the handler. |
+| `coordination` | <code>CoordinationConfig</code> | Optional | Distributed task coordination. When set, multiple listener members coordinate so that only one polls at a time and the others act as warm standby. |
 
 :::note
 The deprecated fields `path`, `fileNamePattern`, `fileAgeFilter`, and `fileDependencyConditions` still exist on `ListenerConfiguration` but should not be used in new code. Configure these on the service via `@ftp:ServiceConfig` instead, see [File Dependency and Trigger Conditions](product://integrator/develop-and-test/integration-artifacts/file-driven-integration/dependency-and-trigger-conditions).

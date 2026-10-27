@@ -24,9 +24,9 @@ Manage HubSpot communication records: CRUD, batch operations, and search.
 | `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or API keys. |
 | `httpVersion` | <code>HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
-| `retryConfig` | <code>RetryConfig</code> | `()` | Retry configuration for failed requests. |
-| `secureSocket` | <code>ClientSecureSocket</code> | `()` | SSL/TLS configuration. |
-| `proxy` | <code>ProxyConfig</code> | `()` | Proxy server configuration. |
+| `retryConfig` | <code>RetryConfig</code> | Optional | Retry configuration for failed requests. |
+| `secureSocket` | <code>ClientSecureSocket</code> | Optional | SSL/TLS configuration. |
+| `proxy` | <code>ProxyConfig</code> | Optional | Proxy server configuration. |
 
 ### Initializing the client
 

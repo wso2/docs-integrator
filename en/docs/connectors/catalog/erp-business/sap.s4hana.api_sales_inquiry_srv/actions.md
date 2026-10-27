@@ -25,9 +25,9 @@ Provides typed access to all entities exposed by the SAP S/4HANA API_SALES_INQUI
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use for requests. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
 | `forwarded` | `string` | `"disable"` | Controls forwarding of the `X-Forwarded-For` header. |
-| `retryConfig` | `http:RetryConfig` | `()` | Automatic retry configuration for transient failures. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration, including custom trust stores for SAP certificates. |
-| `proxy` | `http:ProxyConfig` | `()` | HTTP proxy configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Automatic retry configuration for transient failures. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration, including custom trust stores for SAP certificates. |
+| `proxy` | `http:ProxyConfig` | Optional | HTTP proxy configuration. |
 | `validation` | `boolean` | `true` | Enable or disable response payload validation against generated types. |
 
 ### Initializing the client

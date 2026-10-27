@@ -24,9 +24,9 @@ Provides access to all Zoom Meetings REST API v2 operations: meeting management,
 | `auth` | `ApiKeysConfig\|http:BearerTokenConfig\|http:OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration: API key authorization header, static bearer token, or OAuth 2.0 refresh token grant. |
 | `httpVersion` | `http:HttpVersion` | `"2_0"` | HTTP protocol version to use for requests. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration for the HTTP client. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration for the HTTP client. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable constraint validation on request and response payloads. |
 
 ### Initializing the client

@@ -24,9 +24,9 @@ Provides access to the Asana REST API for managing tasks, projects, sections, te
 | `auth` | `http:BearerTokenConfig\|http:OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration. Typically a Personal Access Token as bearer token. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 
 ### Initializing the client
 

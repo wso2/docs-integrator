@@ -24,10 +24,10 @@ Provides programmatic access to Salesforce Marketing Cloud REST APIs for journey
 | `auth` | `OAuth2ClientCredentialsGrantConfig` | Required | OAuth 2.0 client credentials configuration with `clientId`, `clientSecret`, and `accountId`. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
-| `circuitBreaker` | `CircuitBreakerConfig` | `()` | Circuit breaker configuration for fault tolerance. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `ProxyConfig` | Optional | Proxy server configuration. |
+| `circuitBreaker` | `CircuitBreakerConfig` | Optional | Circuit breaker configuration for fault tolerance. |
 | `cache` | `CacheConfig` | `{}` | HTTP caching configuration. |
 | `compression` | `Compression` | `AUTO` | HTTP compression setting. |
 | `validation` | `boolean` | `true` | Enable/disable payload validation. |

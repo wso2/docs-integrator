@@ -45,7 +45,7 @@ The listener supports the following connection strategies:
 | `excludedColumns` | `string\|string[]` | `()` | Column name(s) to exclude from change event payloads. |
 | `connectTimeout` | `decimal` | `()` | Database connection timeout in seconds. |
 | `tasksMax` | `int` | `1` | Maximum number of concurrent connector tasks. |
-| `secure` | `SecureDatabaseConnection` | `()` | SSL/TLS configuration for the database connection. |
+| `secure` | `SecureDatabaseConnection` | Optional | SSL/TLS configuration for the database connection. |
 
 `Options` fields:
 

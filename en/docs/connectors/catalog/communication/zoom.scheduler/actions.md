@@ -24,9 +24,9 @@ Provides access to all Zoom Scheduler API operations including schedules, availa
 | `auth` | `http:BearerTokenConfig\|http:OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration: OAuth 2.0 refresh token config or a bearer token. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable constraint validation on request/response payloads. |
 
 ### Initializing the client

@@ -23,11 +23,11 @@ Perform search, document lookup, indexing, autocomplete, and suggestion operatio
 |-------|------|---------|-------------|
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `compression` | `http:Compression` | `http:COMPRESSION_AUTO` | Compression setting for requests and responses. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker configuration for fault tolerance. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker configuration for fault tolerance. |
 | `cache` | `http:CacheConfig` | `{}` | HTTP cache configuration. |
 | `validation` | `boolean` | `true` | Enable or disable payload validation. |
 

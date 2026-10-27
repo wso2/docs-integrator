@@ -38,7 +38,7 @@ The listener supports the following connection strategies:
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `localHost` | <code>string</code> | `()` | The hostname or IP address to bind the listener to. |
-| `secureSocket` | <code>ListenerSecureSocket</code> | `()` | SSL/TLS configuration for secure inbound connections. |
+| `secureSocket` | <code>ListenerSecureSocket</code> | Optional | SSL/TLS configuration for secure inbound connections. |
 
 ### Initializing the listener
 

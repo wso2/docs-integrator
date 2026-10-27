@@ -24,9 +24,9 @@ PayPal Invoicing API v2: invoice CRUD, send/remind/cancel, payments, refunds, se
 | `auth` | `OAuth2ClientCredentialsGrantConfig` | Required | OAuth 2.0 client credentials grant configuration. Requires `clientId` and `clientSecret`. Default token URL is `https://api-m.sandbox.paypal.com/v1/oauth2/token`. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable/disable payload validation. |
 | `laxDataBinding` | `boolean` | `true` | Use lax data binding for response payloads. |
 

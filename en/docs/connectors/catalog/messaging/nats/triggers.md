@@ -40,12 +40,12 @@ The listener supports the following connection strategies:
 |-------|------|---------|-------------|
 | `url` | `string\|string[]` | Required | NATS server URL (constructor parameter), or a list of URLs for a cluster. Use `nats:DEFAULT_URL` (`"nats://localhost:4222"`) for a local server. |
 | `connectionName` | `string` | `"ballerina-nats"` | The name of the connection, useful for server-side monitoring. |
-| `retryConfig` | `RetryConfig` | `()` | Reconnection settings: `maxReconnect`, `reconnectWait` (seconds), and `connectionTimeout` (seconds). |
-| `ping` | `Ping` | `()` | Ping settings: `pingInterval` (seconds) and `maxPingsOut`. |
+| `retryConfig` | `RetryConfig` | Optional | Reconnection settings: `maxReconnect`, `reconnectWait` (seconds), and `connectionTimeout` (seconds). |
+| `ping` | `Ping` | Optional | Ping settings: `pingInterval` (seconds) and `maxPingsOut`. |
 | `auth` | `Credentials\|Tokens` | `()` | Authentication configuration. Use `nats:Credentials` for username/password or `nats:Tokens` for token-based auth. |
 | `inboxPrefix` | `string` | `"_INBOX."` | The connection's inbox prefix, which all inboxes start with. |
 | `noEcho` | `boolean` | `false` | If `true`, the server does not echo messages back to this connection when it has subscriptions on the subject being published to. |
-| `secureSocket` | `SecureSocket` | `()` | TLS/SSL configuration. |
+| `secureSocket` | `SecureSocket` | Optional | TLS/SSL configuration. |
 | `validation` | `boolean` | `true` | Enables constraint validation of the bound payload. |
 
 ### Initializing the listener
@@ -287,8 +287,8 @@ Used by the `@nats:ServiceConfig` annotation.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `subject` | `string` | Required | The subject to subscribe to. Supports `*` and `>` wildcards. |
-| `queueName` | `string` | `()` | The queue group name. Messages are distributed across subscribers in the same queue group. |
-| `pendingLimits` | `PendingLimits` | `()` | Limits on the number and size of pending messages held by the subscription. |
+| `queueName` | `string` | Optional | The queue group name. Messages are distributed across subscribers in the same queue group. |
+| `pendingLimits` | `PendingLimits` | Optional | Limits on the number and size of pending messages held by the subscription. |
 
 ### `PendingLimits`
 
@@ -304,7 +304,7 @@ Used by the `@nats:StreamServiceConfig` annotation.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `subject` | `string` | Required | The JetStream subject to subscribe to. |
-| `queueName` | `string` | `()` | The queue group name. |
+| `queueName` | `string` | Optional | The queue group name. |
 | `autoAck` | `boolean` | `true` | Acknowledges the message automatically. |
 
 ### `RetryConfig`

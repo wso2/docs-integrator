@@ -25,9 +25,9 @@ Provides full CRUD, batch, and search operations on HubSpot CRM lead objects.
 | `serviceUrl` | `string` | `"https://api.hubapi.com/crm/v3/objects/leads"` | Base URL of the HubSpot CRM Leads API. |
 | `httpVersion` | `http:HttpVersion` | `http:HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | HTTP proxy configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | HTTP proxy configuration. |
 | `validation` | `boolean` | `true` | Enables constraint validation on request/response payloads. |
 
 ### Initializing the client

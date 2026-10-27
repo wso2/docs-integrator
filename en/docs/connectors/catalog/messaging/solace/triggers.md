@@ -29,15 +29,15 @@ The `solace:Listener` establishes the broker connection. Each attached service s
 |-------|------|---------|-------------|
 | `messageVpn` | `string` | `"default"` | Solace message VPN name. |
 | `auth` | `BasicAuthConfiguration\|KerberosConfiguration\|OAuth2Configuration` | Required | Authentication configuration. See [Supporting types](#supporting-types). |
-| `secureSocket` | `SecureSocket` | `()` | TLS/SSL configuration. |
-| `clientName` | `string` | `()` | Client identifier reported to the broker. A unique name is generated when omitted. |
+| `secureSocket` | `SecureSocket` | Optional | TLS/SSL configuration. |
+| `clientName` | `string` | Optional | Client identifier reported to the broker. A unique name is generated when omitted. |
 | `clientDescription` | `string` | `"Ballerina Solace Connector"` | A description for the application client. |
 | `transacted` | `boolean` | `false` | Enable a transacted session shared by every service attached to this listener. See the note below. |
 | `compressionLevel` | `int` | `0` | ZLIB compression level (0-9, where 0 is no compression). |
-| `localhost` | `string` | `()` | Local interface IP address to bind for outbound connections. |
+| `localhost` | `string` | Optional | Local interface IP address to bind for outbound connections. |
 | `connectTimeout` | `decimal` | `30.0` | Connection timeout in seconds. |
 | `readTimeout` | `decimal` | `10.0` | Read timeout in seconds. |
-| `retryConfig` | `RetryConfiguration` | `()` | Reconnection retry configuration. |
+| `retryConfig` | `RetryConfiguration` | Optional | Reconnection retry configuration. |
 | `generateReceiveTimestamps` | `boolean` | `false` | Populate `receiveTimestamp` on every message delivered to a service. |
 | `calculateMessageExpiration` | `boolean` | `false` | Populate `expiration` on every message delivered to a service. |
 
@@ -218,11 +218,11 @@ public type Destination Topic|Queue;
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `trustStore` | `TrustStore` | `()` | Truststore used to validate the broker's certificate. |
-| `keyStore` | `KeyStore` | `()` | Keystore used for mutual TLS. |
-| `trustedCommonNames` | `string[]` | `()` | Up to 16 common names accepted in the broker's certificate. |
+| `trustStore` | `TrustStore` | Optional | Truststore used to validate the broker's certificate. |
+| `keyStore` | `KeyStore` | Optional | Keystore used for mutual TLS. |
+| `trustedCommonNames` | `string[]` | Optional | Up to 16 common names accepted in the broker's certificate. |
 | `excludedProtocols` | `Protocol[]` | `[]` | TLS protocol versions to exclude. |
-| `cipherSuites` | `SslCipherSuite[]` | `()` | Allowed cipher suites. Each entry must be an `SslCipherSuite` value, for example `ECDHE_RSA_AES256_CBC_SHA384`. |
+| `cipherSuites` | `SslCipherSuite[]` | Optional | Allowed cipher suites. Each entry must be an `SslCipherSuite` value, for example `ECDHE_RSA_AES256_CBC_SHA384`. |
 | `validation` | `record {\|boolean enabled = true; boolean validateDate = true; boolean validateHostname = true;\|}` | all `true` | Certificate validation controls. |
 
 `TrustStore` fields: `location: string`, `password: string`, `format: JKS|PKCS12 = JKS`. `KeyStore` adds `keyPassword?: string` and `keyAlias?: string`.

@@ -24,11 +24,11 @@ Manages HubSpot cart objects: CRUD, search, and batch operations via the HubSpot
 | `auth` | `http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig` | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or HubSpot private app API keys. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `ProxyConfig` | Optional | Proxy server configuration. |
 | `compression` | `Compression` | `COMPRESSION_AUTO` | HTTP compression setting. |
-| `circuitBreaker` | `CircuitBreakerConfig` | `()` | Circuit breaker configuration for fault tolerance. |
+| `circuitBreaker` | `CircuitBreakerConfig` | Optional | Circuit breaker configuration for fault tolerance. |
 | `cache` | `CacheConfig` | `{}` | HTTP response cache configuration. |
 
 ### Initializing the client

@@ -24,9 +24,9 @@ Provides full access to HubSpot Feedback Submissions: list, read, search, create
 | `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|ApiKeysConfig` | Required | Authentication configuration. Use `OAuth2RefreshTokenGrantConfig` for OAuth 2.0, `http:BearerTokenConfig` for a bearer token, or `ApiKeysConfig` for private app tokens. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable constraint validation on request/response payloads. |
 
 ### Initializing the client

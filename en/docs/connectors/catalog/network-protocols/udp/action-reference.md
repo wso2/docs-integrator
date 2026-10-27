@@ -26,7 +26,7 @@ Sends and receives UDP datagrams without a fixed remote host connection.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `timeout` | <code>decimal</code> | `300` | Socket read timeout in seconds. |
-| `localHost` | <code>string</code> | `()` | Local network interface to bind the socket to. |
+| `localHost` | <code>string</code> | Optional | Local network interface to bind the socket to. |
 
 ### Initializing the client
 
@@ -126,7 +126,7 @@ Sends and receives UDP data to/from a fixed remote host and port.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `timeout` | <code>decimal</code> | `300` | Socket read timeout in seconds. |
-| `localHost` | <code>string</code> | `()` | Local network interface to bind the socket to. |
+| `localHost` | <code>string</code> | Optional | Local network interface to bind the socket to. |
 
 ### Initializing the client
 

@@ -300,12 +300,12 @@ Advanced MySQL connection options. Passed to `Client.init` via the `options` par
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `ssl` | <code>SecureSocket?</code> | `()` | SSL/TLS security settings. |
-| `failoverConfig` | <code>FailoverConfig?</code> | `()` | Server failover configuration. |
+| `ssl` | <code>SecureSocket?</code> | Optional | SSL/TLS security settings. |
+| `failoverConfig` | <code>FailoverConfig?</code> | Optional | Server failover configuration. |
 | `useXADatasource` | <code>boolean</code> | `false` | Enable XA transactions (uses `MysqlXADataSource`). |
 | `connectTimeout` | <code>decimal</code> | `30.0` | Connection timeout in seconds. |
 | `socketTimeout` | <code>decimal</code> | `0.0` | Socket read/write timeout in seconds (`0.0` means no timeout). |
-| `serverTimezone` | <code>string?</code> | `()` | Server timezone for handling temporal values. |
+| `serverTimezone` | <code>string?</code> | Optional | Server timezone for handling temporal values. |
 | `noAccessToProcedureBodies` | <code>boolean</code> | `false` | Allow procedure calls when the user lacks privileges to read procedure metadata. |
 
 ### `FailoverConfig`
@@ -313,8 +313,8 @@ Advanced MySQL connection options. Passed to `Client.init` via the `options` par
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `failoverServers` | <code>FailoverServer[]</code> | Required | Array of secondary server configurations. |
-| `timeBeforeRetry` | <code>int?</code> | `()` | Seconds to wait before attempting to reconnect to the primary server. |
-| `queriesBeforeRetry` | <code>int?</code> | `()` | Number of queries to execute before attempting to reconnect to the primary server. |
+| `timeBeforeRetry` | <code>int?</code> | Optional | Seconds to wait before attempting to reconnect to the primary server. |
+| `queriesBeforeRetry` | <code>int?</code> | Optional | Number of queries to execute before attempting to reconnect to the primary server. |
 | `failoverReadOnly` | <code>boolean</code> | `true` | Open connections to secondary hosts in `READ ONLY` mode. |
 
 ### `FailoverServer`
@@ -329,8 +329,8 @@ Advanced MySQL connection options. Passed to `Client.init` via the `options` par
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `mode` | <code>SSLMode</code> | `SSL_PREFERRED` | SSL mode (see below). |
-| `key` | <code>crypto:KeyStore?</code> | `()` | Keystore configuration for client certificates. |
-| `cert` | <code>crypto:TrustStore?</code> | `()` | Truststore configuration for trusted CA certificates. |
+| `key` | <code>crypto:KeyStore?</code> | Optional | Keystore configuration for client certificates. |
+| `cert` | <code>crypto:TrustStore?</code> | Optional | Truststore configuration for trusted CA certificates. |
 | `allowPublicKeyRetrieval` | <code>boolean</code> | `false` | Allow the special handshake round-trip to fetch the server's RSA public key directly. |
 
 ### `SSLMode`

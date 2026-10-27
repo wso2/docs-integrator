@@ -24,10 +24,10 @@ Full Mistral REST API: chat, FIM, embeddings, OCR, moderation, agents, models, f
 | `auth` | `http:BearerTokenConfig` | Required | Bearer token configuration with the Mistral API key. |
 | `httpVersion` | `http:HttpVersion` | `http:HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Response timeout in seconds. |
-| `retryConfig` | `http:RetryConfig?` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket?` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig?` | `()` | Proxy server configuration. |
-| `circuitBreaker` | `http:CircuitBreakerConfig?` | `()` | Circuit breaker configuration. |
+| `retryConfig` | `http:RetryConfig?` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket?` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig?` | Optional | Proxy server configuration. |
+| `circuitBreaker` | `http:CircuitBreakerConfig?` | Optional | Circuit breaker configuration. |
 | `compression` | `http:Compression` | `http:COMPRESSION_AUTO` | Compression setting for requests. |
 | `validation` | `boolean` | `true` | Enable or disable constraint validation. |
 

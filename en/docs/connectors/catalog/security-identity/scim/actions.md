@@ -24,9 +24,9 @@ SCIM 2.0 RESTful API client for user, group, bulk operations, service provider c
 | `auth` | `OAuth2ClientCredentialsGrantConfig` | Required | OAuth 2.0 client credentials grant configuration including `tokenUrl`, `clientId`, `clientSecret`, and `scopes`. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | The maximum time to wait (in seconds) for a response before closing the connection. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enables the inbound payload validation functionality provided by the constraint package. |
 | `laxDataBinding` | `boolean` | `true` | Enables relaxed data binding on the client side. When enabled, `nil` values are treated as optional. |
 

@@ -24,9 +24,9 @@ Provides all HubSpot CRM Contacts API operations: CRUD, batch, search, merge, an
 | `auth` | `BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|ApiKeysConfig` | Required | Authentication configuration: bearer token, OAuth 2.0 refresh token, or private app API key. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig?` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket?` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig?` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig?` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket?` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig?` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable constraint validation on response payloads. |
 | `laxDataBinding` | `boolean` | `true` | Allow lax data binding to ignore unknown fields in responses. |
 

@@ -35,16 +35,16 @@ The listener supports the following connection strategies:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `groupId` | `string?` | `()` | Consumer group identifier for coordinated consumption. |
+| `groupId` | `string?` | Optional | Consumer group identifier for coordinated consumption. |
 | `topics` | `string\|string[]?` | `()` | Topic(s) to subscribe to. |
-| `offsetReset` | `OffsetResetMethod?` | `()` | Strategy when no initial offset exists (`"earliest"`, `"latest"`, `"none"`). |
-| `pollingInterval` | `decimal?` | `()` | Interval in seconds between consecutive polls. |
-| `pollingTimeout` | `decimal?` | `()` | Timeout in seconds for each poll call. |
+| `offsetReset` | `OffsetResetMethod?` | Optional | Strategy when no initial offset exists (`"earliest"`, `"latest"`, `"none"`). |
+| `pollingInterval` | `decimal?` | Optional | Interval in seconds between consecutive polls. |
+| `pollingTimeout` | `decimal?` | Optional | Timeout in seconds for each poll call. |
 | `autoCommit` | `boolean` | `true` | Automatically commit offsets. Set to `false` for manual offset control via `kafka:Caller`. |
-| `concurrentConsumers` | `int?` | `()` | Number of concurrent consumers for parallel processing. |
+| `concurrentConsumers` | `int?` | Optional | Number of concurrent consumers for parallel processing. |
 | `decoupleProcessing` | `boolean` | `false` | Decouple record processing from polling for improved throughput. |
-| `secureSocket` | `SecureSocket?` | `()` | SSL/TLS configuration. |
-| `auth` | `AuthenticationConfiguration?` | `()` | SASL authentication configuration. |
+| `secureSocket` | `SecureSocket?` | Optional | SSL/TLS configuration. |
+| `auth` | `AuthenticationConfiguration?` | Optional | SASL authentication configuration. |
 | `securityProtocol` | `SecurityProtocol` | `PROTOCOL_PLAINTEXT` | Security protocol. |
 
 ### Initializing the listener

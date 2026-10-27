@@ -24,14 +24,14 @@ Mailchimp Marketing API: audiences, members, campaigns, automations, templates, 
 | `auth` | `http:CredentialsConfig` | Required | HTTP Basic Auth credentials. Use any string for `username` and your Mailchimp API key for `password`. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
-| `circuitBreaker` | `CircuitBreakerConfig` | `()` | Circuit breaker configuration. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `ProxyConfig` | Optional | Proxy server configuration. |
+| `circuitBreaker` | `CircuitBreakerConfig` | Optional | Circuit breaker configuration. |
 | `compression` | `Compression` | `()` | Compression configuration. |
 | `cache` | `CacheConfig` | `()` | HTTP caching configuration. |
-| `followRedirects` | `FollowRedirects` | `()` | Redirect configuration. |
-| `poolConfig` | `PoolConfiguration` | `()` | Connection pool settings. |
+| `followRedirects` | `FollowRedirects` | Optional | Redirect configuration. |
+| `poolConfig` | `PoolConfiguration` | Optional | Connection pool settings. |
 | `validation` | `boolean` | `true` | Enable or disable schema validation. |
 
 ### Initializing the client

@@ -25,7 +25,7 @@ The `ballerinax/googleapis.chat` package exposes the following client:
 | `httpVersion` | <code>http:HttpVersion</code> | <code>http:HTTP_2_0</code> | The HTTP version understood by the client. |
 | `timeout` | <code>decimal</code> | <code>30</code> | The maximum time to wait (in seconds) for a response. |
 | `forwarded` | <code>string</code> | <code>"disable"</code> | The choice of setting `forwarded`/`x-forwarded` header. |
-| `retryConfig` | <code>http:RetryConfig</code> | <code>()</code> | Retry configuration for failed requests. |
+| `retryConfig` | <code>http:RetryConfig</code> | Optional | Retry configuration for failed requests. |
 | `cache` | <code>http:CacheConfig</code> | <code>{}</code> | HTTP caching-related configurations. |
 
 ### Initializing the client

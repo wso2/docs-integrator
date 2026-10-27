@@ -26,10 +26,10 @@ The `ballerinax/whatsapp.business` package exposes the following client:
 | `httpVersion` | <code>http:HttpVersion</code> | <code>http:HTTP_2_0</code> | The HTTP version understood by the client. |
 | `timeout` | <code>decimal</code> | <code>30</code> | The maximum time to wait (in seconds) for a response. |
 | `forwarded` | <code>string</code> | <code>"disable"</code> | The choice of setting `forwarded`/`x-forwarded` header. |
-| `poolConfig` | <code>http:PoolConfiguration</code> | <code>()</code> | Configurations associated with request pooling. |
+| `poolConfig` | <code>http:PoolConfiguration</code> | Optional | Configurations associated with request pooling. |
 | `cache` | <code>http:CacheConfig</code> | <code>{}</code> | HTTP caching-related configurations. |
 | `compression` | <code>http:Compression</code> | <code>http:COMPRESSION_AUTO</code> | The way of handling the `accept-encoding` header. |
-| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | <code>()</code> | Configurations associated with the behavior of the circuit breaker. |
+| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | Optional | Configurations associated with the behavior of the circuit breaker. |
 
 ### Initializing the client
 

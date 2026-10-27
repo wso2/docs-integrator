@@ -31,7 +31,7 @@ Sends emails via SMTP with support for text/HTML bodies, attachments, and custom
 | `password` | <code>string?</code> | `()` | Password for SMTP authentication. |
 | `port` | <code>int</code> | `465` | Port number of the SMTP server. |
 | `security` | <code>Security</code> | `SSL` | Type of security channel (`SSL`, `START_TLS_AUTO`, `START_TLS_ALWAYS`, or `START_TLS_NEVER`). |
-| `secureSocket` | <code>SecureSocket</code> | `()` | SSL/TLS secure socket configuration. |
+| `secureSocket` | <code>SecureSocket</code> | Optional | SSL/TLS secure socket configuration. |
 
 ### Initializing the client
 
@@ -139,7 +139,7 @@ Receives emails from an IMAP server with configurable folder and timeout.
 | `password` | <code>string</code> | Required | Password for IMAP authentication. |
 | `port` | <code>int</code> | `993` | Port number of the IMAP server. |
 | `security` | <code>Security</code> | `SSL` | Type of security channel (`SSL`, `START_TLS_AUTO`, `START_TLS_ALWAYS`, or `START_TLS_NEVER`). |
-| `secureSocket` | <code>SecureSocket</code> | `()` | SSL/TLS secure socket configuration. |
+| `secureSocket` | <code>SecureSocket</code> | Optional | SSL/TLS secure socket configuration. |
 
 ### Initializing the client
 
@@ -224,7 +224,7 @@ Receives emails from a POP3 server with configurable folder and timeout.
 | `password` | <code>string</code> | Required | Password for POP3 authentication. |
 | `port` | <code>int</code> | `995` | Port number of the POP3 server. |
 | `security` | <code>Security</code> | `SSL` | Type of security channel (`SSL`, `START_TLS_AUTO`, `START_TLS_ALWAYS`, or `START_TLS_NEVER`). |
-| `secureSocket` | <code>SecureSocket</code> | `()` | SSL/TLS secure socket configuration. |
+| `secureSocket` | <code>SecureSocket</code> | Optional | SSL/TLS secure socket configuration. |
 
 ### Initializing the client
 

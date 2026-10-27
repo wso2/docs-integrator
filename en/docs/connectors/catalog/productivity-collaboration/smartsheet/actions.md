@@ -24,9 +24,9 @@ Manages all Smartsheet resources: sheets, rows, columns, folders, workspaces, us
 | `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig` | Required | Bearer token config (`{token: "..."}`) or OAuth 2.0 refresh token config. |
 | `httpVersion` | `HttpVersion` | `HTTP_1_1` | HTTP protocol version. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `ProxyConfig` | Optional | Proxy server configuration. |
 
 ### Initializing the client
 

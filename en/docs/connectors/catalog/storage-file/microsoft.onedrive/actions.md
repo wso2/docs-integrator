@@ -24,9 +24,9 @@ Microsoft Graph v1.0 API: drive and item CRUD, content management, sharing, sear
 | `auth` | `OAuth2RefreshTokenGrantConfig\|BearerTokenConfig` | Required | OAuth 2.0 refresh token configuration or bearer token. The refresh URL defaults to `https://login.microsoftonline.com/common/oauth2/v2.0/token`. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `ProxyConfig` | Optional | Proxy server configuration. |
 
 ### Initializing the client
 

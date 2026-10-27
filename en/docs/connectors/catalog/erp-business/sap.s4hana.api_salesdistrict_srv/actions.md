@@ -23,18 +23,18 @@ Provides read access to SAP S/4HANA sales district master data and multilingual 
 |-------|------|---------|-------------|
 | `auth` | `CredentialsConfig` | Required | SAP basic authentication credentials containing `username` and `password`. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
-| `http1Settings` | `ClientHttp1Settings?` | `()` | HTTP/1.x-specific client settings. |
-| `http2Settings` | `ClientHttp2Settings?` | `()` | HTTP/2-specific client settings. |
+| `http1Settings` | `ClientHttp1Settings?` | Optional | HTTP/1.x-specific client settings. |
+| `http2Settings` | `ClientHttp2Settings?` | Optional | HTTP/2-specific client settings. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
 | `forwarded` | `string` | `"disable"` | Whether to forward or handle the `forwarded`/`x-forwarded-for` header. |
-| `poolConfig` | `PoolConfiguration?` | `()` | HTTP connection pool configuration. |
-| `cache` | `CacheConfig?` | `()` | HTTP response caching configuration. |
+| `poolConfig` | `PoolConfiguration?` | Optional | HTTP connection pool configuration. |
+| `cache` | `CacheConfig?` | Optional | HTTP response caching configuration. |
 | `compression` | `Compression` | `COMPRESSION_AUTO` | Specifies whether to compress/decompress requests and responses. |
-| `circuitBreaker` | `CircuitBreakerConfig?` | `()` | Circuit breaker configuration. |
-| `retryConfig` | `RetryConfig?` | `()` | Retry configuration for failed requests. |
-| `responseLimits` | `ResponseLimitConfigs?` | `()` | Response size limit configuration. |
-| `secureSocket` | `ClientSecureSocket?` | `()` | SSL/TLS configuration for secure connections. |
-| `proxy` | `ProxyConfig?` | `()` | Proxy server configuration. |
+| `circuitBreaker` | `CircuitBreakerConfig?` | Optional | Circuit breaker configuration. |
+| `retryConfig` | `RetryConfig?` | Optional | Retry configuration for failed requests. |
+| `responseLimits` | `ResponseLimitConfigs?` | Optional | Response size limit configuration. |
+| `secureSocket` | `ClientSecureSocket?` | Optional | SSL/TLS configuration for secure connections. |
+| `proxy` | `ProxyConfig?` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Whether to enable constraint validation on request and response payloads. |
 
 ### Initializing the client

@@ -26,7 +26,7 @@ Invokes CICS programs via ECI and manages the IBM CTG gateway connection lifecyc
 | `cicsServer` | `string` | Required | The logical name of the CICS server (region) registered with the CTG gateway. |
 | `auth` | `Auth` | Required | CICS user credentials record containing `userId` and `password`. |
 | `socketConnectTimeout` | `int` | `15` | Timeout in seconds for establishing a socket connection to the CTG gateway daemon. |
-| `secureSocket` | `SecureSocket` | `()` | SSL/TLS configuration for secure connections to the CTG gateway. Omit for non-SSL connections. |
+| `secureSocket` | `SecureSocket` | Optional | SSL/TLS configuration for secure connections to the CTG gateway. Omit for non-SSL connections. |
 | `enableTrace` | `boolean` | `false` | Enables application-level tracing for debugging ECI interactions. |
 
 ### Initializing the client

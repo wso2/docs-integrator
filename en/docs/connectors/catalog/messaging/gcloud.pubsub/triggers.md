@@ -35,7 +35,7 @@ The listener supports the following connection strategies:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `auth` | `GcpCredentialConfig` | `()` | GCP service account credentials. Contains a `path` field pointing to the JSON key file. If omitted, Application Default Credentials are used. |
+| `auth` | `GcpCredentialConfig` | Optional | GCP service account credentials. Contains a `path` field pointing to the JSON key file. If omitted, Application Default Credentials are used. |
 
 ### Initializing the listener
 

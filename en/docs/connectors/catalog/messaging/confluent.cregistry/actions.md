@@ -23,8 +23,8 @@ Registers and retrieves schemas from Confluent Schema Registry.
 |-------|------|---------|-------------|
 | `baseUrl` | `string` | Required | The base URL of the Schema Registry endpoint (e.g., `https://psrc-xxxxx.us-east-2.aws.confluent.cloud`). |
 | `identityMapCapacity` | `int` | `1000` | Capacity of the schema ID map for a particular subject. |
-| `originals` | `map<anydata>?` | `()` | Connection configurations for authentication and SSL (e.g., basic auth credentials, truststore settings). |
-| `headers` | `map<string>?` | `()` | Custom HTTP headers to include in requests to the Schema Registry. |
+| `originals` | `map<anydata>?` | Optional | Connection configurations for authentication and SSL (e.g., basic auth credentials, truststore settings). |
+| `headers` | `map<string>?` | Optional | Custom HTTP headers to include in requests to the Schema Registry. |
 
 ### Initializing the client
 

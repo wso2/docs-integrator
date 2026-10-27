@@ -25,24 +25,24 @@ Publishes messages to Kafka topics with configurable serialization, compression,
 |-------|------|---------|-------------|
 | `acks` | `ProducerAcks` | `ACKS_SINGLE` | Number of acknowledgments the producer requires (`"all"`, `"0"`, or `"1"`). |
 | `compressionType` | `CompressionType` | `COMPRESSION_NONE` | Compression algorithm for messages (`"none"`, `"gzip"`, `"snappy"`, `"lz4"`, `"zstd"`). |
-| `clientId` | `string?` | `()` | Identifier sent to the broker for logging and monitoring. |
+| `clientId` | `string?` | Optional | Identifier sent to the broker for logging and monitoring. |
 | `keySerializerType` | `SerializerType` | `SER_BYTE_ARRAY` | Serializer for message keys. |
 | `valueSerializerType` | `SerializerType` | `SER_BYTE_ARRAY` | Serializer for message values. |
-| `transactionalId` | `string?` | `()` | Transactional ID for exactly-once delivery. |
+| `transactionalId` | `string?` | Optional | Transactional ID for exactly-once delivery. |
 | `enableIdempotence` | `boolean` | `false` | Enable idempotent producer for exactly-once semantics. |
-| `retryCount` | `int?` | `()` | Number of retries for failed send attempts. |
-| `batchSize` | `int?` | `()` | Maximum number of bytes to batch before sending. |
-| `linger` | `decimal?` | `()` | Time in seconds to wait for additional messages before sending a batch. |
-| `requestTimeout` | `decimal?` | `()` | Time in seconds to wait for a response from the broker. |
-| `schemaRegistryUrl` | `string?` | `()` | URL of the Confluent Schema Registry for Avro serialization. |
+| `retryCount` | `int?` | Optional | Number of retries for failed send attempts. |
+| `batchSize` | `int?` | Optional | Maximum number of bytes to batch before sending. |
+| `linger` | `decimal?` | Optional | Time in seconds to wait for additional messages before sending a batch. |
+| `requestTimeout` | `decimal?` | Optional | Time in seconds to wait for a response from the broker. |
+| `schemaRegistryUrl` | `string?` | Optional | URL of the Confluent Schema Registry for Avro serialization. |
 | `schemaRegistryConfig` | `map<anydata>?` | `()` | Confluent Schema Registry client configuration, using the `confluent.cregistry` `ConnectionConfig` fields (`baseUrl`, `originals`, `headers`, `identityMapCapacity`). Used when `keySerializerType` or `valueSerializerType` is `SER_AVRO`. |
 | `keySchema` | `string?` | `()` | Avro schema used to serialize message keys when `keySerializerType` is `SER_AVRO`. |
 | `valueSchema` | `string?` | `()` | Avro schema used to serialize message values when `valueSerializerType` is `SER_AVRO`. |
-| `avroSchema` | `string?` | `()` | **Deprecated.** Use `keySchema` and `valueSchema` instead. |
-| `secureSocket` | `SecureSocket?` | `()` | SSL/TLS configuration for encrypted connections. |
-| `auth` | `AuthenticationConfiguration?` | `()` | SASL authentication configuration. |
+| `avroSchema` | `string?` | Optional | **Deprecated.** Use `keySchema` and `valueSchema` instead. |
+| `secureSocket` | `SecureSocket?` | Optional | SSL/TLS configuration for encrypted connections. |
+| `auth` | `AuthenticationConfiguration?` | Optional | SASL authentication configuration. |
 | `securityProtocol` | `SecurityProtocol` | `PROTOCOL_PLAINTEXT` | Security protocol (`"PLAINTEXT"`, `"SASL_PLAINTEXT"`, `"SASL_SSL"`, `"SSL"`). |
-| `additionalProperties` | `map<string>?` | `()` | Additional Kafka producer properties not covered by named fields. |
+| `additionalProperties` | `map<string>?` | Optional | Additional Kafka producer properties not covered by named fields. |
 
 ### Initializing the client
 
@@ -200,25 +200,25 @@ Subscribes to Kafka topics and polls for messages with manual offset management.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `groupId` | `string?` | `()` | Consumer group identifier for coordinated consumption. |
+| `groupId` | `string?` | Optional | Consumer group identifier for coordinated consumption. |
 | `topics` | `string\|string[]?` | `()` | Topic(s) to subscribe to on initialization. |
-| `offsetReset` | `OffsetResetMethod?` | `()` | Strategy when no initial offset exists (`"earliest"`, `"latest"`, `"none"`). |
+| `offsetReset` | `OffsetResetMethod?` | Optional | Strategy when no initial offset exists (`"earliest"`, `"latest"`, `"none"`). |
 | `keyDeserializerType` | `DeserializerType` | `DES_BYTE_ARRAY` | Deserializer for message keys. |
 | `valueDeserializerType` | `DeserializerType` | `DES_BYTE_ARRAY` | Deserializer for message values. |
 | `autoCommit` | `boolean` | `true` | Automatically commit offsets at regular intervals. |
-| `autoCommitInterval` | `decimal?` | `()` | Interval in seconds between automatic offset commits. |
-| `sessionTimeout` | `decimal?` | `()` | Timeout in seconds for detecting consumer failures. |
-| `heartBeatInterval` | `decimal?` | `()` | Interval in seconds between heartbeats to the consumer coordinator. |
-| `maxPollRecords` | `int?` | `()` | Maximum number of records returned per poll call. |
-| `isolationLevel` | `IsolationLevel?` | `()` | Controls how transactional messages are read (`"read_committed"` or `"read_uncommitted"`). |
-| `schemaRegistryUrl` | `string?` | `()` | URL of the Confluent Schema Registry for Avro deserialization. |
+| `autoCommitInterval` | `decimal?` | Optional | Interval in seconds between automatic offset commits. |
+| `sessionTimeout` | `decimal?` | Optional | Timeout in seconds for detecting consumer failures. |
+| `heartBeatInterval` | `decimal?` | Optional | Interval in seconds between heartbeats to the consumer coordinator. |
+| `maxPollRecords` | `int?` | Optional | Maximum number of records returned per poll call. |
+| `isolationLevel` | `IsolationLevel?` | Optional | Controls how transactional messages are read (`"read_committed"` or `"read_uncommitted"`). |
+| `schemaRegistryUrl` | `string?` | Optional | URL of the Confluent Schema Registry for Avro deserialization. |
 | `schemaRegistryConfig` | `map<anydata>?` | `()` | Confluent Schema Registry client configuration, using the `confluent.cregistry` `ConnectionConfig` fields (`baseUrl`, `originals`, `headers`, `identityMapCapacity`). Used when `keyDeserializerType` or `valueDeserializerType` is `DES_AVRO`. |
-| `pollingTimeout` | `decimal?` | `()` | Timeout in seconds for each poll call. |
-| `pollingInterval` | `decimal?` | `()` | Interval in seconds between consecutive polls (used with Listener). |
-| `secureSocket` | `SecureSocket?` | `()` | SSL/TLS configuration for encrypted connections. |
-| `auth` | `AuthenticationConfiguration?` | `()` | SASL authentication configuration. |
+| `pollingTimeout` | `decimal?` | Optional | Timeout in seconds for each poll call. |
+| `pollingInterval` | `decimal?` | Optional | Interval in seconds between consecutive polls (used with Listener). |
+| `secureSocket` | `SecureSocket?` | Optional | SSL/TLS configuration for encrypted connections. |
+| `auth` | `AuthenticationConfiguration?` | Optional | SASL authentication configuration. |
 | `securityProtocol` | `SecurityProtocol` | `PROTOCOL_PLAINTEXT` | Security protocol (`"PLAINTEXT"`, `"SASL_PLAINTEXT"`, `"SASL_SSL"`, `"SSL"`). |
-| `additionalProperties` | `map<string>?` | `()` | Additional Kafka consumer properties not covered by named fields. |
+| `additionalProperties` | `map<string>?` | Optional | Additional Kafka consumer properties not covered by named fields. |
 | `validation` | `boolean` | `true` | Enable constraint validation on deserialized records. |
 | `decoupleProcessing` | `boolean` | `false` | Decouple record processing from polling for improved throughput. |
 | `autoSeekOnValidationFailure` | `boolean` | `true` | Automatically seek past records that fail data-binding or constraint validation. Set to `false` to stop and surface the error instead. |

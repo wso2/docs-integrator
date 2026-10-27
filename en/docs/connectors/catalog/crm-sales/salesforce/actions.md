@@ -41,9 +41,9 @@ REST API: record CRUD, SOQL/SOSL, metadata, reports, password management, batch,
 | `apiVersion` | <code>string</code> | <code>"59.0"</code> | Salesforce REST API version. |
 | `httpVersion` | <code>HttpVersion</code> | <code>HTTP_2_0</code> | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | <code>60</code> | Request timeout in seconds. |
-| `retryConfig` | <code>RetryConfig</code> | <code>()</code> | Retry configuration for failed requests. |
-| `secureSocket` | <code>ClientSecureSocket</code> | <code>()</code> | SSL/TLS configuration. |
-| `proxy` | <code>ProxyConfig</code> | <code>()</code> | Proxy server configuration. |
+| `retryConfig` | <code>RetryConfig</code> | Optional | Retry configuration for failed requests. |
+| `secureSocket` | <code>ClientSecureSocket</code> | Optional | SSL/TLS configuration. |
+| `proxy` | <code>ProxyConfig</code> | Optional | Proxy server configuration. |
 
 ### Initializing the client
 

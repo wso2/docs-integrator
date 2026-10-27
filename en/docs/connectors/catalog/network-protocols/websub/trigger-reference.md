@@ -38,7 +38,7 @@ The listener supports the following connection strategies:
 |-------|------|---------|-------------|
 | `host` | <code>string</code> | `"0.0.0.0"` | The listener bind address. |
 | `http1Settings` | <code>http:ListenerHttp1Settings</code> | `{}` | HTTP/1.x specific settings. |
-| `secureSocket` | <code>http:ListenerSecureSocket</code> | `()` | SSL/TLS configuration for the listener. |
+| `secureSocket` | <code>http:ListenerSecureSocket</code> | Optional | SSL/TLS configuration for the listener. |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `120` | Request idle timeout in seconds. |
 | `gracefulShutdownPeriod` | <code>decimal</code> | `20` | Time in seconds to wait for unsubscription verification before shutting down. |

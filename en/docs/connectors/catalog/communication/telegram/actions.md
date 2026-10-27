@@ -25,7 +25,7 @@ The `ballerinax/telegram` package exposes the following client:
 | `httpVersion` | <code>http:HttpVersion</code> | <code>http:HTTP_2_0</code> | The HTTP version understood by the client. |
 | `timeout` | <code>decimal</code> | <code>30</code> | The maximum time to wait (in seconds) for a response. |
 | `forwarded` | <code>string</code> | <code>"disable"</code> | The choice of setting `forwarded`/`x-forwarded` header. |
-| `poolConfig` | <code>http:PoolConfiguration</code> | <code>()</code> | Configurations associated with request pooling. |
+| `poolConfig` | <code>http:PoolConfiguration</code> | Optional | Configurations associated with request pooling. |
 | `cache` | <code>http:CacheConfig</code> | <code>{}</code> | HTTP caching-related configurations. |
 
 ### Initializing the client

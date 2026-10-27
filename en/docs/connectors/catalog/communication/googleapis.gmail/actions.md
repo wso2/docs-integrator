@@ -24,11 +24,11 @@ Gmail REST API: messages, drafts, threads, labels, history, profile, and attachm
 | `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig` | Required | OAuth 2.0 refresh token config or bearer token. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `compression` | `http:Compression` | `COMPRESSION_AUTO` | Compression setting for requests. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker configuration. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker configuration. |
 | `cache` | `http:CacheConfig` | `{}` | HTTP response cache configuration. |
 | `validation` | `boolean` | `true` | Enable payload validation against the OpenAPI spec. |
 | `laxDataBinding` | `boolean` | `true` | Allow lax data binding for response payloads. |

@@ -24,9 +24,9 @@ Discord REST API v10: messages, channels, guilds, members, roles, webhooks, comm
 | `auth` | `ApiKeysConfig\|OAuth2ClientCredentialsGrantConfig\|BearerTokenConfig\|OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration. Use `ApiKeysConfig` for bot token, or an OAuth2 config for OAuth2 flows. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `ProxyConfig` | Optional | Proxy server configuration. |
 
 ### Initializing the client
 

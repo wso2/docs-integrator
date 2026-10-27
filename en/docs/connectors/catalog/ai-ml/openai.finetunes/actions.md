@@ -24,12 +24,12 @@ Provides access to OpenAI fine-tuning, files, and models REST API endpoints.
 | `auth` | `http:BearerTokenConfig` | Required | Bearer token configuration using your OpenAI API key. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `ProxyConfig` | Optional | Proxy server configuration. |
 | `compression` | `http:Compression` | `COMPRESSION_AUTO` | HTTP compression configuration. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker configuration for fault tolerance. |
-| `poolConfig` | `http:PoolConfiguration` | `()` | Connection pool configuration. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker configuration for fault tolerance. |
+| `poolConfig` | `http:PoolConfiguration` | Optional | Connection pool configuration. |
 | `cache` | `http:CacheConfig` | `()` | HTTP response cache configuration. |
 | `validation` | `boolean` | `true` | Enable or disable payload validation. |
 

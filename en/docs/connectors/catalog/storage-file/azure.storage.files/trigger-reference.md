@@ -36,8 +36,8 @@ The `files:Listener` holds the connection credentials and the polling schedule. 
 |-------|------|---------|-------------|
 | `auth` | <code>AuthConfig</code> | Required | The authentication configuration. Accepts any credential from the auth union; see the [Action Reference](action-reference.md#configuration) for the credential records. |
 | `pollingInterval` | <code>decimal</code> | <code>60</code> | Interval in seconds between polls of the watched path. Must be greater than zero; the listener fails to initialize otherwise. |
-| `retryConfig` | <code>RetryConfig</code> | <code>()</code> | Retry behavior for service requests; omit for the service defaults. |
-| `transportConfig` | <code>TransportConfig</code> | <code>()</code> | HTTP transport settings (proxy, connection pool, TLS); omit for the defaults. |
+| `retryConfig` | <code>RetryConfig</code> | Optional | Retry behavior for service requests; omit for the service defaults. |
+| `transportConfig` | <code>TransportConfig</code> | Optional | HTTP transport settings (proxy, connection pool, TLS); omit for the defaults. |
 | `laxDataBinding` | <code>boolean</code> | <code>false</code> | Relaxed data binding for the typed content handlers: JSON, XML, and CSV record binding treat a null value as an optional field and an absent field as a nilable field. |
 
 ### Initializing the listener
@@ -185,8 +185,8 @@ The type of the optional `@files:ServiceConfig` annotation on the service.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `recursive` | <code>boolean</code> | <code>true</code> | Whether the service watches subdirectories under the watched path. |
-| `fileNamePattern` | <code>string</code> | <code>()</code> | A regular expression matched against the file name (not the path); non-matching files are never dispatched to this service. An invalid pattern fails when the service is attached. |
-| `minFileAgeSeconds` | <code>decimal</code> | <code>()</code> | Skip files younger than this many seconds, guarding against files still being written. |
+| `fileNamePattern` | <code>string</code> | Optional | A regular expression matched against the file name (not the path); non-matching files are never dispatched to this service. An invalid pattern fails when the service is attached. |
+| `minFileAgeSeconds` | <code>decimal</code> | Optional | Skip files younger than this many seconds, guarding against files still being written. |
 
 ### `FunctionConfiguration`
 
@@ -194,9 +194,9 @@ The type of the optional `@files:FunctionConfig` annotation on individual handle
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `fileNamePattern` | <code>string</code> | <code>()</code> | Per-handler routing override: a regular expression matched against the file name. Ignored on `onError`, which is never routed a file. |
-| `afterProcess` | <code>DELETE&#124;Move</code> | <code>()</code> | Auto-consume action after the handler returns normally. On `onError`, it applies when `onError` returns normally, meaning it handled the binding failure. |
-| `afterError` | <code>DELETE&#124;Move</code> | <code>()</code> | Auto-consume action after the handler returns an error or panics. On a content handler it also covers content-binding failures, but only when the service declares no `onError`. On `onError` it applies when `onError` itself returns an error or panics. |
+| `fileNamePattern` | <code>string</code> | Optional | Per-handler routing override: a regular expression matched against the file name. Ignored on `onError`, which is never routed a file. |
+| `afterProcess` | <code>DELETE&#124;Move</code> | Optional | Auto-consume action after the handler returns normally. On `onError`, it applies when `onError` returns normally, meaning it handled the binding failure. |
+| `afterError` | <code>DELETE&#124;Move</code> | Optional | Auto-consume action after the handler returns an error or panics. On a content handler it also covers content-binding failures, but only when the service declares no `onError`. On `onError` it applies when `onError` itself returns an error or panics. |
 
 `files:DELETE` deletes the file. A `Move` record moves it:
 

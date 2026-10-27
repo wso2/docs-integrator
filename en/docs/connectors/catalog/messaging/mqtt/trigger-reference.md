@@ -39,7 +39,7 @@ The listener supports the following connection strategies:
 | `serverUri` | <code>string</code> | Required | The MQTT broker URL (e.g., `tcp://localhost:1883`). Passed as a constructor parameter. |
 | `clientId` | <code>string</code> | Required | A unique client identifier. Passed as a constructor parameter. |
 | `subscriptions` | <code>string&#124;string[]&#124;Subscription&#124;Subscription[]</code> | Required | The topic(s) to subscribe to. Passed as a constructor parameter. |
-| `connectionConfig` | <code>ConnectionConfiguration?</code> | `()` | Connection settings including authentication, TLS, reconnection, and keep-alive. |
+| `connectionConfig` | <code>ConnectionConfiguration?</code> | Optional | Connection settings including authentication, TLS, reconnection, and keep-alive. |
 | `manualAcks` | <code>boolean</code> | `false` | If `true`, messages must be explicitly acknowledged using `caller->complete()`. If `false`, messages are auto-acknowledged. |
 
 ### Initializing the listener

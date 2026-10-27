@@ -40,7 +40,7 @@ The listener supports the following connection strategies:
 | `localPort` | <code>int</code> | Required | The local port number to bind the listener to (passed as a constructor argument). |
 | `remoteHost` | <code>string</code> | `()` | If set, the listener only accepts datagrams from this remote host. |
 | `remotePort` | <code>int</code> | `()` | If set, the listener only accepts datagrams from this remote port. |
-| `localHost` | <code>string</code> | `()` | The local network interface to bind the listener to. |
+| `localHost` | <code>string</code> | Optional | The local network interface to bind the listener to. |
 
 ### Initializing the listener
 

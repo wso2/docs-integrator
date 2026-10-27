@@ -25,9 +25,9 @@ Provides full CRUD, batch operations, and search for HubSpot CRM Line Item recor
 | `serviceUrl` | `string` | `"https://api.hubapi.com/crm/v3/objects/line_items"` | Base URL of the HubSpot CRM Line Items API. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable/disable constraint validation on request/response payloads. |
 
 ### Initializing the client

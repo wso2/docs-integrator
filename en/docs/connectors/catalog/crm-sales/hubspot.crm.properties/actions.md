@@ -24,11 +24,11 @@ Manage CRM object properties and property groups via the HubSpot Properties API.
 | `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token grant, bearer token, or API keys. |
 | `httpVersion` | <code>http:HttpVersion</code> | `http:HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | The maximum time to wait (in seconds) for a response before closing the connection. |
-| `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
-| `secureSocket` | <code>http:ClientSecureSocket</code> | `()` | SSL/TLS configuration. |
-| `proxy` | <code>http:ProxyConfig</code> | `()` | Proxy server configuration. |
+| `retryConfig` | <code>http:RetryConfig</code> | Optional | Retry configuration for failed requests. |
+| `secureSocket` | <code>http:ClientSecureSocket</code> | Optional | SSL/TLS configuration. |
+| `proxy` | <code>http:ProxyConfig</code> | Optional | Proxy server configuration. |
 | `compression` | <code>http:Compression</code> | `http:COMPRESSION_AUTO` | Specifies the way of handling compression (`accept-encoding`) header. |
-| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | `()` | Circuit breaker configuration for fault tolerance. |
+| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | Optional | Circuit breaker configuration for fault tolerance. |
 | `validation` | <code>boolean</code> | `true` | Enables inbound payload validation via the constraint package. |
 
 ### Initializing the client

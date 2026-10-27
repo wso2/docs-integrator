@@ -30,16 +30,16 @@ Provides access to SAP S/4HANA material documents (headers, items and serial num
 | `http2Settings` | `http:ClientHttp2Settings` | `{}` | HTTP/2 client settings. |
 | `timeout` | `decimal` | `60` | Maximum time (in seconds) to wait for a response before closing the connection. |
 | `forwarded` | `string` | `"disable"` | Controls the `forwarded`/`x-forwarded` header. |
-| `followRedirects` | `http:FollowRedirects` | `()` | Redirection settings. |
-| `poolConfig` | `http:PoolConfiguration` | `()` | Connection pool settings. |
+| `followRedirects` | `http:FollowRedirects` | Optional | Redirection settings. |
+| `poolConfig` | `http:PoolConfiguration` | Optional | Connection pool settings. |
 | `cache` | `http:CacheConfig` | `{}` | HTTP caching settings. |
 | `compression` | `http:Compression` | `http:COMPRESSION_AUTO` | How the `accept-encoding` header is handled. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker settings. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry settings. |
-| `cookieConfig` | `http:CookieConfig` | `()` | Cookie settings. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker settings. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry settings. |
+| `cookieConfig` | `http:CookieConfig` | Optional | Cookie settings. |
 | `responseLimits` | `http:ResponseLimitConfigs` | `{}` | Limits on inbound response size. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration for secure connections. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration for secure connections. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `socketConfig` | `http:ClientSocketConfig` | `{}` | Client socket settings. |
 | `validation` | `boolean` | `true` | Enables inbound payload validation using the constraint package. |
 | `laxDataBinding` | `boolean` | `true` | Enables relaxed data binding, treating `nil` values as optional and absent fields as nilable. |

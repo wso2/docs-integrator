@@ -32,16 +32,16 @@ The client is initialized with a `ConnectionConfig` record, the `hostname` of th
 | `http2Settings` | `http:ClientHttp2Settings` | `{}` | HTTP/2 protocol settings. |
 | `timeout` | `decimal` | `60` | Maximum time in seconds to wait for a response before closing the connection. |
 | `forwarded` | `string` | `"disable"` | Choice of setting the `forwarded`/`x-forwarded` header. |
-| `followRedirects` | `http:FollowRedirects` | `()` | Redirection settings. |
-| `poolConfig` | `http:PoolConfiguration` | `()` | Request pooling settings. |
+| `followRedirects` | `http:FollowRedirects` | Optional | Redirection settings. |
+| `poolConfig` | `http:PoolConfiguration` | Optional | Request pooling settings. |
 | `cache` | `http:CacheConfig` | `{}` | HTTP caching settings. |
 | `compression` | `http:Compression` | `http:COMPRESSION_AUTO` | Handling of the `accept-encoding` header. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker settings. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry settings. |
-| `cookieConfig` | `http:CookieConfig` | `()` | Cookie settings. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker settings. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry settings. |
+| `cookieConfig` | `http:CookieConfig` | Optional | Cookie settings. |
 | `responseLimits` | `http:ResponseLimitConfigs` | `{}` | Inbound response size limits. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS settings. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server settings. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS settings. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server settings. |
 | `socketConfig` | `http:ClientSocketConfig` | `{}` | Client socket settings. |
 | `validation` | `boolean` | `true` | Enables inbound payload validation through the constraint package. |
 | `laxDataBinding` | `boolean` | `true` | Enables relaxed data binding, so `nil` values are treated as optional and absent fields as nilable. |

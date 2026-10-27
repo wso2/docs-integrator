@@ -39,10 +39,10 @@ The listener supports the following connection strategies:
 | `host` | `string` | Required | Hostname of the IBM MQ server. |
 | `port` | `int` | `1414` | Port number of the IBM MQ server. |
 | `channel` | `string` | Required | Server connection channel name. |
-| `userID` | `string` | `()` | User ID for authentication. |
-| `password` | `string` | `()` | Password for authentication. |
-| `sslCipherSuite` | `SslCipherSuite` | `()` | SSL cipher suite for secure connections. |
-| `secureSocket` | `SecureSocket` | `()` | SSL/TLS trust store and key store configuration. |
+| `userID` | `string` | Optional | User ID for authentication. |
+| `password` | `string` | Optional | Password for authentication. |
+| `sslCipherSuite` | `SslCipherSuite` | Optional | SSL cipher suite for secure connections. |
+| `secureSocket` | `SecureSocket` | Optional | SSL/TLS trust store and key store configuration. |
 
 ### Initializing the listener
 

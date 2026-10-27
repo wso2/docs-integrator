@@ -27,9 +27,9 @@ Primary client for all Twilio REST API operations: messaging, calls, phone numbe
  |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version to use for requests. |
 | `timeout` | <code>decimal</code> | `60` | Request timeout in seconds. |
-| `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
-| `secureSocket` | <code>http:ClientSecureSocket</code> | `()` | SSL/TLS configuration. |
-| `proxy` | <code>http:ProxyConfig</code> | `()` | Proxy server configuration. |
+| `retryConfig` | <code>http:RetryConfig</code> | Optional | Retry configuration for failed requests. |
+| `secureSocket` | <code>http:ClientSecureSocket</code> | Optional | SSL/TLS configuration. |
+| `proxy` | <code>http:ProxyConfig</code> | Optional | Proxy server configuration. |
 | `validation` | <code>boolean</code> | `true` | Enables inbound payload validation using the constraint package. |
 
 ### Initializing the client

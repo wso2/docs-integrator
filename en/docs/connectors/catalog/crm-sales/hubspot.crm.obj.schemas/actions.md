@@ -24,9 +24,9 @@ Manage HubSpot custom object schemas, their properties, and inter-object associa
 | `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: Bearer token (Private App), OAuth 2.0 refresh token, or legacy API key. |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | <code>decimal</code> | `30` | Request timeout in seconds. |
-| `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
-| `secureSocket` | <code>http:ClientSecureSocket</code> | `()` | SSL/TLS configuration. |
-| `proxy` | <code>http:ProxyConfig</code> | `()` | Proxy server configuration. |
+| `retryConfig` | <code>http:RetryConfig</code> | Optional | Retry configuration for failed requests. |
+| `secureSocket` | <code>http:ClientSecureSocket</code> | Optional | SSL/TLS configuration. |
+| `proxy` | <code>http:ProxyConfig</code> | Optional | Proxy server configuration. |
 | `validation` | <code>boolean</code> | `true` | Enables inbound payload validation via the constraint package. |
 | `laxDataBinding` | <code>boolean</code> | `true` | When enabled, nil values are treated as optional and absent fields as nilable types. |
 

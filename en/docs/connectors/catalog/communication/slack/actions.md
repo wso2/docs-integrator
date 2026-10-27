@@ -24,9 +24,9 @@ Provides access to all Slack Web API methods for messaging, conversations, users
 | `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig` | Required | Authentication configuration: a bearer token record `{token: "xoxp-..."}` or an OAuth 2.0 refresh token grant config. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable response payload validation against the Slack API schema. |
 | `laxDataBinding` | `boolean` | `true` | Allow lax data binding for API responses with extra fields. |
 

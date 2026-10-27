@@ -29,10 +29,10 @@ Connects to an IBM MQ queue manager and provides access to queues and topics.
 | `host` | `string` | Required | Hostname of the IBM MQ server. |
 | `port` | `int` | `1414` | Port number of the IBM MQ server. |
 | `channel` | `string` | Required | Server connection channel name. |
-| `userID` | `string` | `()` | User ID for authentication. |
-| `password` | `string` | `()` | Password for authentication. |
-| `sslCipherSuite` | `SslCipherSuite` | `()` | SSL cipher suite (e.g., `TLS12ORHIGHER`). |
-| `secureSocket` | `SecureSocket` | `()` | SSL/TLS trust store and key store configuration. |
+| `userID` | `string` | Optional | User ID for authentication. |
+| `password` | `string` | Optional | Password for authentication. |
+| `sslCipherSuite` | `SslCipherSuite` | Optional | SSL cipher suite (e.g., `TLS12ORHIGHER`). |
+| `secureSocket` | `SecureSocket` | Optional | SSL/TLS trust store and key store configuration. |
 
 ### Initializing the client
 

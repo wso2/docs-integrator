@@ -44,7 +44,7 @@ The listener supports the following connection strategies:
 | `pollingInterval` | <code>decimal</code> | `30` | Time interval in seconds between email polling attempts. |
 | `port` | <code>int</code> | `993` | Port number of the IMAP server. |
 | `security` | <code>Security</code> | `SSL` | Type of security channel (`SSL`, `START_TLS_AUTO`, `START_TLS_ALWAYS`, or `START_TLS_NEVER`). |
-| `secureSocket` | <code>SecureSocket</code> | `()` | SSL/TLS secure socket configuration. |
+| `secureSocket` | <code>SecureSocket</code> | Optional | SSL/TLS secure socket configuration. |
 
 **`PopListenerConfiguration` fields:**
 
@@ -56,7 +56,7 @@ The listener supports the following connection strategies:
 | `pollingInterval` | <code>decimal</code> | `30` | Time interval in seconds between email polling attempts. |
 | `port` | <code>int</code> | `995` | Port number of the POP3 server. |
 | `security` | <code>Security</code> | `SSL` | Type of security channel (`SSL`, `START_TLS_AUTO`, `START_TLS_ALWAYS`, or `START_TLS_NEVER`). |
-| `secureSocket` | <code>SecureSocket</code> | `()` | SSL/TLS secure socket configuration. |
+| `secureSocket` | <code>SecureSocket</code> | Optional | SSL/TLS secure socket configuration. |
 
 ### Initializing the listener
 

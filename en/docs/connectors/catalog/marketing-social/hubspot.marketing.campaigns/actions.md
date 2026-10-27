@@ -24,10 +24,10 @@ Manage HubSpot marketing campaigns: CRUD, batch operations, asset associations, 
 | `auth` | <code>http:BearerTokenConfig&#124;OAuth2RefreshTokenGrantConfig&#124;ApiKeysConfig</code> | Required | Authentication configuration: OAuth 2.0 refresh token, bearer token, or private app API key. |
 | `httpVersion` | <code>http:HttpVersion</code> | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | <code>decimal</code> | `30` | Maximum wait time for a response in seconds. |
-| `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
-| `secureSocket` | <code>http:ClientSecureSocket</code> | `()` | SSL/TLS configuration. |
-| `proxy` | <code>http:ProxyConfig</code> | `()` | Proxy server configuration. |
-| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | `()` | Circuit breaker configuration for fault tolerance. |
+| `retryConfig` | <code>http:RetryConfig</code> | Optional | Retry configuration for failed requests. |
+| `secureSocket` | <code>http:ClientSecureSocket</code> | Optional | SSL/TLS configuration. |
+| `proxy` | <code>http:ProxyConfig</code> | Optional | Proxy server configuration. |
+| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | Optional | Circuit breaker configuration for fault tolerance. |
 | `validation` | <code>boolean</code> | `true` | Enable or disable constraint validation. |
 
 ### Initializing the client

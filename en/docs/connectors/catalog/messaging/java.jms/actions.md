@@ -29,8 +29,8 @@ Establishes a connection to the JMS broker and creates sessions.
 | `initialContextFactory` | `string` | Required | JNDI initial context factory class (e.g., `org.apache.activemq.jndi.ActiveMQInitialContextFactory`). |
 | `providerUrl` | `string` | Required | JMS provider URL (e.g., `tcp://localhost:61616`). |
 | `connectionFactoryName` | `string` | `"ConnectionFactory"` | JNDI name of the connection factory. |
-| `username` | `string` | `()` | Username for broker authentication. |
-| `password` | `string` | `()` | Password for broker authentication. |
+| `username` | `string` | Optional | Username for broker authentication. |
+| `password` | `string` | Optional | Password for broker authentication. |
 | `properties` | `map<string>` | `{}` | Additional JNDI properties. |
 
 ### Initializing the client
@@ -443,7 +443,7 @@ Receives and acknowledges messages from JMS queues and topics.
 | `type` | `ConsumerType` | `DEFAULT` | Consumer type: `DEFAULT`, `DURABLE`, `SHARED`, or `SHARED_DURABLE`. |
 | `messageSelector` | `string` | `""` | JMS message selector expression to filter messages. |
 | `noLocal` | `boolean` | `false` | If true, excludes messages published by this connection's own producers. |
-| `subscriberName` | `string` | `()` | Subscription name, required for `DURABLE` and `SHARED_DURABLE` types. |
+| `subscriberName` | `string` | Optional | Subscription name, required for `DURABLE` and `SHARED_DURABLE` types. |
 
 ### Initializing the client
 

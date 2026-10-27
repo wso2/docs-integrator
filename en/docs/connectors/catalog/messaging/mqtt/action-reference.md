@@ -26,7 +26,7 @@ Publish messages to MQTT topics, subscribe to topics, and receive messages.
 |-------|------|---------|-------------|
 | `serverUri` | <code>string</code> | Required | The MQTT broker URL (e.g., `tcp://localhost:1883` or `ssl://broker.example.com:8883`). Passed as a constructor parameter. |
 | `clientId` | <code>string</code> | Required | A unique client identifier for the MQTT session. Passed as a constructor parameter. |
-| `connectionConfig` | <code>ConnectionConfiguration?</code> | `()` | Connection settings including authentication, TLS, reconnection, and keep-alive. |
+| `connectionConfig` | <code>ConnectionConfiguration?</code> | Optional | Connection settings including authentication, TLS, reconnection, and keep-alive. |
 | `connectionConfig.username` | <code>string?</code> | `()` | Username for broker authentication. |
 | `connectionConfig.password` | <code>string?</code> | `()` | Password for broker authentication. |
 | `connectionConfig.secureSocket` | <code>SecureSocket?</code> | `()` | SSL/TLS configuration for secure connections. |
@@ -39,7 +39,7 @@ Publish messages to MQTT topics, subscribe to topics, and receive messages.
 | `connectionConfig.cleanStart` | <code>boolean?</code> | `()` | Whether to start a clean session (discard previous session state). |
 | `connectionConfig.serverUris` | <code>string[]?</code> | `()` | Fallback server URIs for high availability. |
 | `connectionConfig.automaticReconnect` | <code>boolean?</code> | `()` | Whether to automatically reconnect on connection loss. |
-| `willDetails` | <code>WillDetails?</code> | `()` | Last Will and Testament message configuration, sent by the broker if the client disconnects unexpectedly. |
+| `willDetails` | <code>WillDetails?</code> | Optional | Last Will and Testament message configuration, sent by the broker if the client disconnects unexpectedly. |
 | `willDetails.willMessage` | <code>mqtt:Message</code> | Required | The last will message to publish. |
 | `willDetails.destinationTopic` | <code>string</code> | Required | The topic to publish the last will message to. |
 

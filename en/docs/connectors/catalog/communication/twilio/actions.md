@@ -25,18 +25,18 @@ Full Twilio REST API access: messaging, voice calls, phone numbers, recordings, 
 |-------|------|---------|-------------|
 | `auth` | <code>AuthTokenConfig&#124;ApiKeyConfig</code> | Required | Authentication configuration: either Auth Token or API Key based. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
-| `http1Settings` | `ClientHttp1Settings` | `()` | Configurations for HTTP/1.x protocol. |
-| `http2Settings` | `ClientHttp2Settings` | `()` | Configurations for HTTP/2 protocol. |
+| `http1Settings` | `ClientHttp1Settings` | Optional | Configurations for HTTP/1.x protocol. |
+| `http2Settings` | `ClientHttp2Settings` | Optional | Configurations for HTTP/2 protocol. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
 | `forwarded` | `string` | `"disable"` | The choice of setting `forwarded`/`x-forwarded` header. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
-| `responseLimits` | `ResponseLimitConfigs` | `()` | Configurations associated with inbound response size limits. |
-| `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration for failed requests. |
+| `responseLimits` | `ResponseLimitConfigs` | Optional | Configurations associated with inbound response size limits. |
+| `secureSocket` | `ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `ProxyConfig` | Optional | Proxy server configuration. |
 | `compression` | `Compression` | `COMPRESSION_AUTO` | HTTP compression configuration. |
-| `circuitBreaker` | `CircuitBreakerConfig` | `()` | Circuit breaker configuration for fault tolerance. |
-| `poolConfig` | `PoolConfiguration` | `()` | HTTP connection pool configuration. |
-| `cache` | `CacheConfig` | `()` | HTTP response cache configuration. |
+| `circuitBreaker` | `CircuitBreakerConfig` | Optional | Circuit breaker configuration for fault tolerance. |
+| `poolConfig` | `PoolConfiguration` | Optional | HTTP connection pool configuration. |
+| `cache` | `CacheConfig` | Optional | HTTP response cache configuration. |
 | `validation` | `boolean` | `true` | Enable/disable payload validation. |
 
 ### Initializing the client

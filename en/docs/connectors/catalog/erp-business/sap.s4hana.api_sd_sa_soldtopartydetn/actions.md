@@ -23,18 +23,18 @@ Provides access to sold-to party determination records for sales scheduling agre
 |-------|------|---------|-------------|
 | `auth` | `http:CredentialsConfig` | Required | HTTP Basic Auth credentials containing `username` and `password` for the SAP inbound communication user. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use for requests. |
-| `http1Settings` | `ClientHttp1Settings` | `()` | HTTP/1.x client settings including keep-alive, chunking, and proxy configuration. |
-| `http2Settings` | `http:ClientHttp2Settings` | `()` | HTTP/2 client settings. |
+| `http1Settings` | `ClientHttp1Settings` | Optional | HTTP/1.x client settings including keep-alive, chunking, and proxy configuration. |
+| `http2Settings` | `http:ClientHttp2Settings` | Optional | HTTP/2 client settings. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
 | `forwarded` | `string` | `"disable"` | Forwarded header handling configuration. |
-| `poolConfig` | `http:PoolConfiguration` | `()` | HTTP connection pool configuration. |
-| `cache` | `http:CacheConfig` | `()` | HTTP response caching configuration. |
+| `poolConfig` | `http:PoolConfiguration` | Optional | HTTP connection pool configuration. |
+| `cache` | `http:CacheConfig` | Optional | HTTP response caching configuration. |
 | `compression` | `http:Compression` | `COMPRESSION_AUTO` | Compression setting for requests and responses. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker configuration for fault tolerance. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `responseLimits` | `http:ResponseLimitConfigs` | `()` | Response size limit configuration. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration for secure connections. |
-| `proxy` | `http:ProxyConfig` | `()` | HTTP proxy server configuration. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker configuration for fault tolerance. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `responseLimits` | `http:ResponseLimitConfigs` | Optional | Response size limit configuration. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration for secure connections. |
+| `proxy` | `http:ProxyConfig` | Optional | HTTP proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable or disable response payload validation. |
 
 ### Initializing the client

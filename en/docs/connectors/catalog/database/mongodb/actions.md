@@ -29,7 +29,7 @@ Top-level client for connecting to MongoDB, listing databases, and obtaining Dat
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `connection` | <code>ConnectionParameters&#124;string</code> | Required | Structured connection parameters or a MongoDB connection string URI. |
-| `options` | <code>ConnectionProperties?</code> | `()` | Optional connection properties (read concern, write concern, pool settings, SSL, timeouts). |
+| `options` | <code>ConnectionProperties?</code> | Optional | Optional connection properties (read concern, write concern, pool settings, SSL, timeouts). |
 
 ### Initializing the client
 
@@ -813,7 +813,7 @@ Structured connection parameters used in `ConnectionConfig.connection`.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `serverAddress` | <code>ServerAddress&#124;ServerAddress[]</code> | `{}` | A single server address, or an array for replica sets and sharded clusters. |
-| `auth` | <code>BasicAuthCredential&#124;ScramSha1AuthCredential&#124;ScramSha256AuthCredential&#124;X509Credential&#124;GssApiCredential</code> | `()` | Optional. Authentication credentials: pick the record that matches your server's configured auth mechanism. See [Authentication credentials](#authentication-credentials) below. |
+| `auth` | <code>BasicAuthCredential&#124;ScramSha1AuthCredential&#124;ScramSha256AuthCredential&#124;X509Credential&#124;GssApiCredential</code> | Optional | Optional. Authentication credentials: pick the record that matches your server's configured auth mechanism. See [Authentication credentials](#authentication-credentials) below. |
 
 ### `ServerAddress`
 
@@ -856,7 +856,7 @@ Same field shape as `BasicAuthCredential`. The `authMechanism` is the constant `
 |-------|------|---------|-------------|
 | `authMechanism` | <code>AUTH_GSSAPI</code> | `AUTH_GSSAPI` | Always `"GSSAPI"`. Read-only. |
 | `username` | <code>string</code> | Required | Kerberos principal username. |
-| `serviceName` | <code>string?</code> | `()` | Override the default service name (`"mongodb"`). |
+| `serviceName` | <code>string?</code> | Optional | Override the default service name (`"mongodb"`). |
 
 ### `ConnectionProperties`
 
@@ -864,22 +864,22 @@ Optional connection-level settings passed via `ConnectionConfig.options`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `readConcern` | <code>ReadConcern?</code> | `()` | Read concern level (see below). |
-| `writeConcern` | <code>string?</code> | `()` | Write concern level (for example `"majority"`). |
-| `readPreference` | <code>string?</code> | `()` | Read preference for replica sets (for example `"secondaryPreferred"`). |
-| `replicaSet` | <code>string?</code> | `()` | Replica-set name. The driver uses it to validate that the cluster matches. |
+| `readConcern` | <code>ReadConcern?</code> | Optional | Read concern level (see below). |
+| `writeConcern` | <code>string?</code> | Optional | Write concern level (for example `"majority"`). |
+| `readPreference` | <code>string?</code> | Optional | Read preference for replica sets (for example `"secondaryPreferred"`). |
+| `replicaSet` | <code>string?</code> | Optional | Replica-set name. The driver uses it to validate that the cluster matches. |
 | `sslEnabled` | <code>boolean</code> | `false` | Enable SSL/TLS. Set `secureSocket` together with this when a custom trust chain is needed. |
 | `invalidHostNameAllowed` | <code>boolean</code> | `false` | Allow invalid hostnames in TLS handshakes. |
-| `secureSocket` | <code>SecureSocket?</code> | `()` | TLS keystore and truststore configuration. Required when `sslEnabled` is `true` and you provide custom certificates. |
-| `retryWrites` | <code>boolean?</code> | `()` | Retry writes on transient errors. |
-| `socketTimeout` | <code>int?</code> | `()` | Socket timeout in milliseconds. |
-| `connectionTimeout` | <code>int?</code> | `()` | Connection timeout in milliseconds. |
-| `maxPoolSize` | <code>int?</code> | `()` | Maximum connections in the pool. |
-| `maxIdleTime` | <code>int?</code> | `()` | Maximum idle time of a pooled connection (milliseconds). |
-| `maxLifeTime` | <code>int?</code> | `()` | Maximum lifetime of a pooled connection (milliseconds). |
-| `minPoolSize` | <code>int?</code> | `()` | Minimum pool size. |
-| `localThreshold` | <code>int?</code> | `()` | Local-threshold latency for server selection (milliseconds). |
-| `heartbeatFrequency` | <code>int?</code> | `()` | Frequency of cluster heartbeats (milliseconds). |
+| `secureSocket` | <code>SecureSocket?</code> | Optional | TLS keystore and truststore configuration. Required when `sslEnabled` is `true` and you provide custom certificates. |
+| `retryWrites` | <code>boolean?</code> | Optional | Retry writes on transient errors. |
+| `socketTimeout` | <code>int?</code> | Optional | Socket timeout in milliseconds. |
+| `connectionTimeout` | <code>int?</code> | Optional | Connection timeout in milliseconds. |
+| `maxPoolSize` | <code>int?</code> | Optional | Maximum connections in the pool. |
+| `maxIdleTime` | <code>int?</code> | Optional | Maximum idle time of a pooled connection (milliseconds). |
+| `maxLifeTime` | <code>int?</code> | Optional | Maximum lifetime of a pooled connection (milliseconds). |
+| `minPoolSize` | <code>int?</code> | Optional | Minimum pool size. |
+| `localThreshold` | <code>int?</code> | Optional | Local-threshold latency for server selection (milliseconds). |
+| `heartbeatFrequency` | <code>int?</code> | Optional | Frequency of cluster heartbeats (milliseconds). |
 
 ### `SecureSocket`
 
@@ -905,14 +905,14 @@ A union of the supported read-concern levels:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `comment` | <code>string?</code> | `()` | Comment included with the operation in MongoDB logs. |
+| `comment` | <code>string?</code> | Optional | Comment included with the operation in MongoDB logs. |
 | `bypassDocumentValidation` | <code>boolean</code> | `false` | Skip server-side schema validation. |
 
 ### `InsertManyOptions`
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `comment` | <code>string?</code> | `()` | Comment included with the operation. |
+| `comment` | <code>string?</code> | Optional | Comment included with the operation. |
 | `bypassDocumentValidation` | <code>boolean</code> | `false` | Skip server-side schema validation. |
 | `ordered` | <code>boolean</code> | `true` | When `true`, insertion stops at the first error. When `false`, the connector attempts every document and reports per-document failures. |
 
@@ -921,39 +921,39 @@ A union of the supported read-concern levels:
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `sort` | <code>map&lt;json&gt;</code> | `{}` | Sort specification (for example `{"year": -1}`). |
-| `limit` | <code>int?</code> | `()` | Maximum number of documents to return. |
-| `batchSize` | <code>int?</code> | `()` | Cursor batch size. |
-| `skip` | <code>int?</code> | `()` | Number of documents to skip. |
+| `limit` | <code>int?</code> | Optional | Maximum number of documents to return. |
+| `batchSize` | <code>int?</code> | Optional | Cursor batch size. |
+| `skip` | <code>int?</code> | Optional | Number of documents to skip. |
 
 ### `CountOptions`
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `limit` | <code>int?</code> | `()` | Maximum number of documents to count. |
-| `skip` | <code>int?</code> | `()` | Number of documents to skip before counting. |
-| `maxTimeMS` | <code>int?</code> | `()` | Maximum time the operation can run, in milliseconds. |
-| `hint` | <code>string?</code> | `()` | Hint as a JSON string indicating which index to use. |
+| `limit` | <code>int?</code> | Optional | Maximum number of documents to count. |
+| `skip` | <code>int?</code> | Optional | Number of documents to skip before counting. |
+| `maxTimeMS` | <code>int?</code> | Optional | Maximum time the operation can run, in milliseconds. |
+| `hint` | <code>string?</code> | Optional | Hint as a JSON string indicating which index to use. |
 
 ### `CreateIndexOptions`
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `background` | <code>boolean?</code> | `()` | Build the index in the background (legacy MongoDB). |
-| `unique` | <code>boolean?</code> | `()` | Enforce uniqueness on the indexed fields. |
+| `background` | <code>boolean?</code> | Optional | Build the index in the background (legacy MongoDB). |
+| `unique` | <code>boolean?</code> | Optional | Enforce uniqueness on the indexed fields. |
 | `name` | <code>string?</code> | `()` | Custom index name. |
-| `sparse` | <code>boolean?</code> | `()` | Index only documents where the indexed field exists. |
-| `expireAfterSeconds` | <code>int?</code> | `()` | TTL on documents in the collection. Creates a TTL index. |
-| `version` | <code>int?</code> | `()` | Index version number. |
-| `weights` | <code>map&lt;json&gt;?</code> | `()` | Per-field weights for text indexes. |
-| `defaultLanguage` | <code>string?</code> | `()` | Default language for text indexes. |
-| `languageOverride` | <code>string?</code> | `()` | Field name that overrides the default language per document. |
-| `textVersion` | <code>int?</code> | `()` | Text-index version. |
-| `sphereVersion` | <code>int?</code> | `()` | 2dsphere-index version. |
-| `bits` | <code>int?</code> | `()` | 2d-index geohash precision. |
-| `min` | <code>float?</code> | `()` | 2d-index minimum boundary. |
-| `max` | <code>float?</code> | `()` | 2d-index maximum boundary. |
+| `sparse` | <code>boolean?</code> | Optional | Index only documents where the indexed field exists. |
+| `expireAfterSeconds` | <code>int?</code> | Optional | TTL on documents in the collection. Creates a TTL index. |
+| `version` | <code>int?</code> | Optional | Index version number. |
+| `weights` | <code>map&lt;json&gt;?</code> | Optional | Per-field weights for text indexes. |
+| `defaultLanguage` | <code>string?</code> | Optional | Default language for text indexes. |
+| `languageOverride` | <code>string?</code> | Optional | Field name that overrides the default language per document. |
+| `textVersion` | <code>int?</code> | Optional | Text-index version. |
+| `sphereVersion` | <code>int?</code> | Optional | 2dsphere-index version. |
+| `bits` | <code>int?</code> | Optional | 2d-index geohash precision. |
+| `min` | <code>float?</code> | Optional | 2d-index minimum boundary. |
+| `max` | <code>float?</code> | Optional | 2d-index maximum boundary. |
 | `partialFilterExpression` | <code>map&lt;json&gt;</code> | `{}` | Filter expression for partial indexes. |
-| `hidden` | <code>boolean?</code> | `()` | Hide the index from the query planner. |
+| `hidden` | <code>boolean?</code> | Optional | Hide the index from the query planner. |
 
 ### `UpdateOptions`
 
@@ -961,9 +961,9 @@ A union of the supported read-concern levels:
 |-------|------|---------|-------------|
 | `upsert` | <code>boolean</code> | `false` | Insert a new document if no match is found. |
 | `bypassDocumentValidation` | <code>boolean</code> | `false` | Skip server-side schema validation. |
-| `comment` | <code>string?</code> | `()` | Comment included with the operation. |
-| `hint` | <code>map&lt;json&gt;?</code> | `()` | Hint as a document indicating which index to use. |
-| `hintString` | <code>string?</code> | `()` | Hint as a string indicating which index to use. |
+| `comment` | <code>string?</code> | Optional | Comment included with the operation. |
+| `hint` | <code>map&lt;json&gt;?</code> | Optional | Hint as a document indicating which index to use. |
+| `hintString` | <code>string?</code> | Optional | Hint as a string indicating which index to use. |
 
 ### `Update`
 

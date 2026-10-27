@@ -23,14 +23,14 @@ Retrieves SAP Sales Area master data via the SAP S/4HANA OData API.
 |-------|------|---------|-------------|
 | `auth` | `http:CredentialsConfig` | Required | HTTP Basic Authentication credentials; provide `username` and `password` of the SAP technical user. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use for requests. |
-| `http1Settings` | `ClientHttp1Settings` | `()` | HTTP/1.x client settings including keep-alive and chunking. |
-| `http2Settings` | `http:ClientHttp2Settings` | `()` | HTTP/2 client settings. |
+| `http1Settings` | `ClientHttp1Settings` | Optional | HTTP/1.x client settings including keep-alive and chunking. |
+| `http2Settings` | `http:ClientHttp2Settings` | Optional | HTTP/2 client settings. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
 | `forwarded` | `string` | `"disable"` | Whether to forward `X-Forwarded-*` headers. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for transient failures. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker configuration. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration for secure connections. |
-| `proxy` | `http:ProxyConfig` | `()` | HTTP proxy configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for transient failures. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker configuration. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration for secure connections. |
+| `proxy` | `http:ProxyConfig` | Optional | HTTP proxy configuration. |
 | `validation` | `boolean` | `true` | Enable or disable response payload validation. |
 
 ### Initializing the client

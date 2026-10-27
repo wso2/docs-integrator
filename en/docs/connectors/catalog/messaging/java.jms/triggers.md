@@ -40,8 +40,8 @@ The listener is initialized with `MessageListenerConfigurations`, passed as name
 | `initialContextFactory` | `string` | Required | JNDI initial context factory class (e.g., `org.apache.activemq.jndi.ActiveMQInitialContextFactory`). |
 | `providerUrl` | `string` | Required | JMS provider URL (e.g., `tcp://localhost:61616`). |
 | `connectionFactoryName` | `string` | `"ConnectionFactory"` | JNDI name of the connection factory. |
-| `username` | `string` | `()` | Username for broker authentication. |
-| `password` | `string` | `()` | Password for broker authentication. |
+| `username` | `string` | Optional | Username for broker authentication. |
+| `password` | `string` | Optional | Password for broker authentication. |
 | `properties` | `map<string>` | `{}` | Additional JNDI properties. |
 
 `ConsumerOptions` fields:
@@ -52,7 +52,7 @@ The listener is initialized with `MessageListenerConfigurations`, passed as name
 | `type` | `ConsumerType` | `DEFAULT` | Consumer type: `DEFAULT`, `DURABLE`, `SHARED`, or `SHARED_DURABLE`. Non-default types require a `TOPIC` destination. |
 | `messageSelector` | `string` | `""` | JMS message selector expression to filter messages. |
 | `noLocal` | `boolean` | `false` | If true, excludes messages published by this connection. |
-| `subscriberName` | `string` | `()` | Subscription name, required for `DURABLE`, `SHARED`, and `SHARED_DURABLE` types. |
+| `subscriberName` | `string` | Optional | Subscription name, required for `DURABLE`, `SHARED`, and `SHARED_DURABLE` types. |
 
 ### Initializing the listener
 

@@ -29,13 +29,13 @@ Sends subscription and unsubscription requests to a WebSub hub.
 | `http1Settings` | <code>http:ClientHttp1Settings</code> | `{}` | HTTP/1.x specific settings. |
 | `http2Settings` | <code>http:ClientHttp2Settings</code> | `{}` | HTTP/2 specific settings. |
 | `timeout` | <code>decimal</code> | `60` | Maximum wait time for a response in seconds. |
-| `followRedirects` | <code>http:FollowRedirects</code> | `()` | Redirect handling configuration. |
-| `poolConfig` | <code>http:PoolConfiguration</code> | `()` | Connection pooling configuration. |
-| `auth` | <code>http:ClientAuthConfig</code> | `()` | Client authentication configuration. |
-| `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
+| `followRedirects` | <code>http:FollowRedirects</code> | Optional | Redirect handling configuration. |
+| `poolConfig` | <code>http:PoolConfiguration</code> | Optional | Connection pooling configuration. |
+| `auth` | <code>http:ClientAuthConfig</code> | Optional | Client authentication configuration. |
+| `retryConfig` | <code>http:RetryConfig</code> | Optional | Retry configuration for failed requests. |
 | `responseLimits` | <code>http:ResponseLimitConfigs</code> | `{}` | Response size limit configuration. |
-| `secureSocket` | <code>http:ClientSecureSocket</code> | `()` | SSL/TLS configuration. |
-| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | `()` | Circuit breaker configuration for fault tolerance. |
+| `secureSocket` | <code>http:ClientSecureSocket</code> | Optional | SSL/TLS configuration. |
+| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | Optional | Circuit breaker configuration for fault tolerance. |
 
 ### Initializing the client
 
@@ -133,13 +133,13 @@ Discovers WebSub hub and topic URLs from a resource URL via HTTP Link headers.
 | `http1Settings` | <code>http:ClientHttp1Settings</code> | `{}` | HTTP/1.x specific settings. |
 | `http2Settings` | <code>http:ClientHttp2Settings</code> | `{}` | HTTP/2 specific settings. |
 | `timeout` | <code>decimal</code> | `60` | Maximum wait time for a response in seconds. |
-| `followRedirects` | <code>http:FollowRedirects</code> | `()` | Redirect handling configuration. |
-| `poolConfig` | <code>http:PoolConfiguration</code> | `()` | Connection pooling configuration. |
-| `auth` | <code>http:ClientAuthConfig</code> | `()` | Client authentication configuration. |
-| `retryConfig` | <code>http:RetryConfig</code> | `()` | Retry configuration for failed requests. |
+| `followRedirects` | <code>http:FollowRedirects</code> | Optional | Redirect handling configuration. |
+| `poolConfig` | <code>http:PoolConfiguration</code> | Optional | Connection pooling configuration. |
+| `auth` | <code>http:ClientAuthConfig</code> | Optional | Client authentication configuration. |
+| `retryConfig` | <code>http:RetryConfig</code> | Optional | Retry configuration for failed requests. |
 | `responseLimits` | <code>http:ResponseLimitConfigs</code> | `{}` | Response size limit configuration. |
-| `secureSocket` | <code>http:ClientSecureSocket</code> | `()` | SSL/TLS configuration. |
-| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | `()` | Circuit breaker configuration for fault tolerance. |
+| `secureSocket` | <code>http:ClientSecureSocket</code> | Optional | SSL/TLS configuration. |
+| `circuitBreaker` | <code>http:CircuitBreakerConfig</code> | Optional | Circuit breaker configuration for fault tolerance. |
 
 ### Initializing the client
 

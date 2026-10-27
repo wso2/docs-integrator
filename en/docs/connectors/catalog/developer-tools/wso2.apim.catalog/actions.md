@@ -30,9 +30,9 @@ Manage WSO2 APIM Service Catalog entries: CRUD, definition retrieval, usage look
 | `auth.clientSecret` | `string` | `()` | OAuth2 client secret obtained from Dynamic Client Registration. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version for requests. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration for mutual TLS or custom server certificates. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration for mutual TLS or custom server certificates. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable or disable constraint validation on request and response payloads. |
 
 ### Initializing the client

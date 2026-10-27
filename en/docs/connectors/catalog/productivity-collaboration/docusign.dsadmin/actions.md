@@ -24,9 +24,9 @@ DocuSign Admin API: organization, user, permission, group, export/import, and as
 | `auth` | `http:BearerTokenConfig\|OAuth2RefreshTokenGrantConfig` | Required | OAuth 2.0 refresh token grant config or bearer token config for authentication. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | The maximum time to wait (in seconds) for a response before closing the connection. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS-related options. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS-related options. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enables inbound payload validation provided by the constraint package. |
 | `laxDataBinding` | `boolean` | `true` | Enables relaxed data binding: nil values are treated as optional and absent fields as nilable. |
 

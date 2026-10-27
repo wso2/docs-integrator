@@ -23,18 +23,18 @@ Provides read access to SAP S/4HANA sales organization master data via the API_S
 |-------|------|---------|-------------|
 | `auth` | `http:CredentialsConfig` | Required | SAP user credentials; provide `username` and `password`. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version to use. |
-| `http1Settings` | `ClientHttp1Settings` | `()` | HTTP/1.x client settings including keep-alive, chunking, and proxy. |
-| `http2Settings` | `http:ClientHttp2Settings` | `()` | HTTP/2 client settings. |
+| `http1Settings` | `ClientHttp1Settings` | Optional | HTTP/1.x client settings including keep-alive, chunking, and proxy. |
+| `http2Settings` | `http:ClientHttp2Settings` | Optional | HTTP/2 client settings. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
 | `forwarded` | `string` | `"disable"` | Forwarded header handling mode. |
-| `poolConfig` | `http:PoolConfiguration` | `()` | HTTP connection pool configuration. |
-| `cache` | `http:CacheConfig` | `()` | HTTP response caching configuration. |
+| `poolConfig` | `http:PoolConfiguration` | Optional | HTTP connection pool configuration. |
+| `cache` | `http:CacheConfig` | Optional | HTTP response caching configuration. |
 | `compression` | `http:Compression` | `COMPRESSION_AUTO` | Compression mode for requests and responses. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker configuration for fault tolerance. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `responseLimits` | `http:ResponseLimitConfigs` | `()` | Limits for response header and body sizes. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration for secure connections. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker configuration for fault tolerance. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `responseLimits` | `http:ResponseLimitConfigs` | Optional | Limits for response header and body sizes. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration for secure connections. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable or disable constraint validation on response records. |
 
 ### Initializing the client

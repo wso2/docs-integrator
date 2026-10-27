@@ -30,8 +30,8 @@ Both clients take a `ClientConfiguration`. Credentials come from the [Setup Guid
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `auth` | <code>AuthConfig</code> | Required | The authentication configuration: one credential-artifact record (an account key, a bare SAS token, a full SAS URL, a connection string, or a Microsoft Entra ID identity). |
-| `retryConfig` | <code>RetryConfig</code> | <code>()</code> | Retry behavior for service requests; omit for the service defaults. |
-| `transportConfig` | <code>TransportConfig</code> | <code>()</code> | HTTP transport settings (proxy, connection pool, TLS); omit for the defaults. |
+| `retryConfig` | <code>RetryConfig</code> | Optional | Retry behavior for service requests; omit for the service defaults. |
+| `transportConfig` | <code>TransportConfig</code> | Optional | HTTP transport settings (proxy, connection pool, TLS); omit for the defaults. |
 
 `AuthConfig` is a union of the credential records below. Each member has a unique required field or field combination, so the right member is selected by the fields you supply. The only exception is the pair `DefaultEntraIdConfig` and `ManagedIdentityConfig`, which would otherwise share the same field shape; these two, and only these two, carry a `kind` discriminator field. The other Entra ID records have no `kind` field.
 
@@ -41,7 +41,7 @@ Both clients take a `ClientConfiguration`. Credentials come from the [Setup Guid
 |-------|------|---------|-------------|
 | `accountName` | <code>string</code> | Required | The storage account name, used to sign requests and to derive the service URL. |
 | `accountKey` | <code>string</code> | Required | A base64-encoded access key of the storage account. |
-| `serviceUrl` | <code>string</code> | <code>()</code> | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
+| `serviceUrl` | <code>string</code> | Optional | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
 
 **`SasConfig`**, Shared Access Signature (SAS) authentication with a bare SAS token:
 
@@ -70,7 +70,7 @@ Both clients take a `ClientConfiguration`. Credentials come from the [Setup Guid
 |-------|------|---------|-------------|
 | `kind` | <code>DEFAULT_AZURE_CREDENTIAL</code> | Required | Selects the default credential chain (the value `"default"`). |
 | `accountName` | <code>string</code> | Required | The storage account name (determines the service URL unless `serviceUrl` overrides it). |
-| `serviceUrl` | <code>string</code> | <code>()</code> | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
+| `serviceUrl` | <code>string</code> | Optional | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
 
 **`ManagedIdentityConfig`**, authentication as an Azure managed identity, for workloads running on Azure compute (VMs, App Service, AKS, Functions):
 
@@ -79,7 +79,7 @@ Both clients take a `ClientConfiguration`. Credentials come from the [Setup Guid
 | `kind` | <code>MANAGED_IDENTITY</code> | Required | Selects the managed-identity credential (the value `"managed-identity"`). |
 | `accountName` | <code>string</code> | Required | The storage account name (determines the service URL unless `serviceUrl` overrides it). |
 | `clientId` | <code>string</code> | <code>()</code> | The client id of a user-assigned managed identity; omit to use the system-assigned identity. |
-| `serviceUrl` | <code>string</code> | <code>()</code> | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
+| `serviceUrl` | <code>string</code> | Optional | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
 
 **`ClientSecretConfig`**, authentication as a service principal with a client secret:
 
@@ -89,7 +89,7 @@ Both clients take a `ClientConfiguration`. Credentials come from the [Setup Guid
 | `tenantId` | <code>string</code> | Required | The Entra ID tenant (directory) id. |
 | `clientId` | <code>string</code> | Required | The application (client) id of the service principal. |
 | `clientSecret` | <code>string</code> | Required | The client secret of the service principal. |
-| `serviceUrl` | <code>string</code> | <code>()</code> | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
+| `serviceUrl` | <code>string</code> | Optional | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
 
 **`ClientCertificateConfig`**, authentication as a service principal with a client certificate:
 
@@ -99,8 +99,8 @@ Both clients take a `ClientConfiguration`. Credentials come from the [Setup Guid
 | `tenantId` | <code>string</code> | Required | The Entra ID tenant (directory) id. |
 | `clientId` | <code>string</code> | Required | The application (client) id of the service principal. |
 | `certificatePath` | <code>string</code> | Required | The path to the certificate file (PEM, or PFX when `certificatePassword` is set). |
-| `certificatePassword` | <code>string</code> | <code>()</code> | The password protecting the certificate file, when it has one. |
-| `serviceUrl` | <code>string</code> | <code>()</code> | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
+| `certificatePassword` | <code>string</code> | Optional | The password protecting the certificate file, when it has one. |
+| `serviceUrl` | <code>string</code> | Optional | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
 
 **`WorkloadIdentityConfig`**, workload-identity authentication, for Kubernetes workloads federated with Entra ID:
 
@@ -110,7 +110,7 @@ Both clients take a `ClientConfiguration`. Credentials come from the [Setup Guid
 | `tenantId` | <code>string</code> | Required | The Entra ID tenant (directory) id. |
 | `clientId` | <code>string</code> | Required | The application (client) id federated with the workload. |
 | `tokenFilePath` | <code>string</code> | Required | The path to the file holding the federated service-account token. |
-| `serviceUrl` | <code>string</code> | <code>()</code> | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
+| `serviceUrl` | <code>string</code> | Optional | The file service endpoint URL, including the scheme. Omit to use the default <code>https://&#123;accountName&#125;.file.core.windows.net</code>. |
 
 **`RetryConfig`**, retry behavior for service requests:
 
@@ -121,15 +121,15 @@ Both clients take a `ClientConfiguration`. Credentials come from the [Setup Guid
 | `tryTimeoutSeconds` | <code>decimal</code> | <code>60</code> | The timeout applied to each individual try, in seconds. |
 | `retryDelaySeconds` | <code>decimal</code> | <code>4</code> | The base delay between tries, in seconds. |
 | `maxRetryDelaySeconds` | <code>decimal</code> | <code>120</code> | The upper bound on the delay between tries, in seconds. |
-| `secondaryHostUrl` | <code>string</code> | <code>()</code> | A secondary endpoint to retry reads against (geo-redundant accounts). |
+| `secondaryHostUrl` | <code>string</code> | Optional | A secondary endpoint to retry reads against (geo-redundant accounts). |
 
 **`TransportConfig`**, HTTP transport settings, proxying, connection pooling, and TLS:
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `proxy` | <code>ProxyConfig</code> | <code>()</code> | Route traffic through this proxy. |
+| `proxy` | <code>ProxyConfig</code> | Optional | Route traffic through this proxy. |
 | `connectionPool` | <code>ConnectionPoolConfig</code> | <code>&#123;&#125;</code> | Connection-pool tuning. |
-| `secureSocket` | <code>SecureSocket</code> | <code>()</code> | Custom TLS settings (trust and key material, verification). |
+| `secureSocket` | <code>SecureSocket</code> | Optional | Custom TLS settings (trust and key material, verification). |
 
 **`ProxyConfig`**, routes the connector's traffic through a proxy server:
 
@@ -138,8 +138,8 @@ Both clients take a `ClientConfiguration`. Credentials come from the [Setup Guid
 | `proxyType` | <code>ProxyType</code> | Required | The proxy protocol (`HTTP`, `SOCKS4`, or `SOCKS5`). |
 | `host` | <code>string</code> | Required | The proxy host name or IP address. |
 | `port` | <code>int</code> | Required | The proxy port. |
-| `username` | <code>string</code> | <code>()</code> | The user name, when the proxy requires authentication. |
-| `password` | <code>string</code> | <code>()</code> | The password, when the proxy requires authentication. |
+| `username` | <code>string</code> | Optional | The user name, when the proxy requires authentication. |
+| `password` | <code>string</code> | Optional | The password, when the proxy requires authentication. |
 | `nonProxyHosts` | <code>string[]</code> | <code>[]</code> | Hosts reached directly, bypassing the proxy. |
 
 **`ConnectionPoolConfig`**, tunes the connector's HTTP connection pool:
@@ -155,16 +155,16 @@ Both clients take a `ClientConfiguration`. Credentials come from the [Setup Guid
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `cert` | <code>crypto:TrustStore&#124;string</code> | <code>()</code> | The trust material for verifying the server: a PKCS12 or JKS truststore, or the path to a PEM certificate file. Omit to trust the platform's default certificate authorities. |
+| `cert` | <code>crypto:TrustStore&#124;string</code> | Optional | The trust material for verifying the server: a PKCS12 or JKS truststore, or the path to a PEM certificate file. Omit to trust the platform's default certificate authorities. |
 | `'key` | <code>crypto:KeyStore&#124;CertKey</code> | <code>()</code> | The client's own identity for mutual TLS: a PKCS12 or JKS keystore, or a certificate and private key pair. Omit when the server does not request a client certificate. |
-| `tlsVersions` | <code>string[]</code> | <code>()</code> | The TLS versions offered during the handshake (e.g. `TLSv1.3`, `TLSv1.2`). Omit to use the platform defaults. |
-| `ciphers` | <code>string[]</code> | <code>()</code> | The cipher suites offered during the handshake. Omit to use the platform defaults. |
+| `tlsVersions` | <code>string[]</code> | Optional | The TLS versions offered during the handshake (e.g. `TLSv1.3`, `TLSv1.2`). Omit to use the platform defaults. |
+| `ciphers` | <code>string[]</code> | Optional | The cipher suites offered during the handshake. Omit to use the platform defaults. |
 | `verifyHostName` | <code>boolean</code> | <code>true</code> | Verify that the server certificate matches the host being called. Disabling this removes protection against man-in-the-middle attacks, so it is meant for testing only. |
 | `shareSession` | <code>boolean</code> | <code>true</code> | Allow TLS sessions to be reused across connections. |
 | `validateRevocation` | <code>boolean</code> | <code>false</code> | Check the server certificate against revocation information: a stapled OCSP response when the server sends one, otherwise an OCSP or CRL fetch. Requires `cert` to be set. |
-| `serverName` | <code>string</code> | <code>()</code> | The SNI (Server Name Indication) host name presented during the handshake; omit to use the host being called. |
-| `handshakeTimeoutSeconds` | <code>decimal</code> | <code>()</code> | The TLS handshake timeout, in seconds. |
-| `sessionTimeoutSeconds` | <code>decimal</code> | <code>()</code> | How long a TLS session stays reusable, in seconds. |
+| `serverName` | <code>string</code> | Optional | The SNI (Server Name Indication) host name presented during the handshake; omit to use the host being called. |
+| `handshakeTimeoutSeconds` | <code>decimal</code> | Optional | The TLS handshake timeout, in seconds. |
+| `sessionTimeoutSeconds` | <code>decimal</code> | Optional | How long a TLS session stays reusable, in seconds. |
 
 **`CertKey`**, a client certificate and private key pair, as files:
 
@@ -172,7 +172,7 @@ Both clients take a `ClientConfiguration`. Credentials come from the [Setup Guid
 |-------|------|---------|-------------|
 | `certFile` | <code>string</code> | Required | The path to the certificate file. |
 | `keyFile` | <code>string</code> | Required | The path to the private key file. |
-| `keyPassword` | <code>string</code> | <code>()</code> | The password protecting the private key, when it has one. |
+| `keyPassword` | <code>string</code> | Optional | The password protecting the private key, when it has one. |
 
 ### Initializing the client
 
@@ -1714,11 +1714,11 @@ The standard content headers that can be set on a file.
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `contentType` | <code>string</code> | <code>()</code> | The MIME type of the content (e.g. `application/pdf`), served as `Content-Type` on downloads. |
-| `contentEncoding` | <code>string</code> | <code>()</code> | Any encoding applied to the stored content (e.g. `gzip`). |
-| `contentLanguage` | <code>string</code> | <code>()</code> | The natural language of the content (e.g. `en-US`). |
-| `contentDisposition` | <code>string</code> | <code>()</code> | How receivers should present the content (e.g. `attachment` or `inline`). |
-| `cacheControl` | <code>string</code> | <code>()</code> | Caching directives served with the file (e.g. `max-age=3600, private`). |
-| `contentMd5` | <code>string</code> | <code>()</code> | Base64-encoded MD5 of the content, for integrity verification. |
+| `contentEncoding` | <code>string</code> | Optional | Any encoding applied to the stored content (e.g. `gzip`). |
+| `contentLanguage` | <code>string</code> | Optional | The natural language of the content (e.g. `en-US`). |
+| `contentDisposition` | <code>string</code> | Optional | How receivers should present the content (e.g. `attachment` or `inline`). |
+| `cacheControl` | <code>string</code> | Optional | Caching directives served with the file (e.g. `max-age=3600, private`). |
+| `contentMd5` | <code>string</code> | Optional | Base64-encoded MD5 of the content, for integrity verification. |
 
 ### ShareListOptions
 
@@ -1726,7 +1726,7 @@ Options for `AdminClient.listShares`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `prefix` | <code>string</code> | <code>()</code> | Return only shares whose name begins with this prefix. |
+| `prefix` | <code>string</code> | Optional | Return only shares whose name begins with this prefix. |
 | `includeMetadata` | <code>boolean</code> | <code>false</code> | Include each share's metadata in the results. |
 | `includeSnapshots` | <code>boolean</code> | <code>false</code> | Include share snapshots in the results. |
 | `includeDeleted` | <code>boolean</code> | <code>false</code> | Include soft-deleted shares in the results. |
@@ -1741,7 +1741,7 @@ Options for `AdminClient.createShare`.
 | `quotaInGb` | <code>int</code> | <code>()</code> | The provisioned capacity of the share, in GiB; when absent, the account kind's default quota applies. |
 | `accessTier` | <code>ShareAccessTier</code> | <code>()</code> | The access tier for the share; when absent, the account kind's default tier applies (`TRANSACTION_OPTIMIZED` on pay-as-you-go accounts, `PREMIUM` on premium accounts). |
 | `enabledProtocols` | <code>ShareProtocol[]</code> | <code>[SMB]</code> | The protocols to enable on the share (SMB and/or NFS). |
-| `rootSquash` | <code>NfsRootSquash</code> | <code>()</code> | The NFS root-squash setting (NFS shares only); when absent, NFS shares default to `NO_ROOT_SQUASH`. |
+| `rootSquash` | <code>NfsRootSquash</code> | Optional | The NFS root-squash setting (NFS shares only); when absent, NFS shares default to `NO_ROOT_SQUASH`. |
 
 ### ShareDeleteOptions
 
@@ -1749,9 +1749,9 @@ Options for `AdminClient.deleteShare`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `deleteSnapshots` | <code>ShareSnapshotsDeleteOption</code> | <code>()</code> | How the share's snapshots are handled; when absent, only the share itself is deleted (the delete fails if snapshots exist). |
+| `deleteSnapshots` | <code>ShareSnapshotsDeleteOption</code> | Optional | How the share's snapshots are handled; when absent, only the share itself is deleted (the delete fails if snapshots exist). |
 | `snapshotId` | <code>string</code> | <code>()</code> | Delete a specific snapshot rather than the share itself. |
-| `leaseId` | <code>string</code> | <code>()</code> | The active lease id, required when the share is leased. |
+| `leaseId` | <code>string</code> | Optional | The active lease id, required when the share is leased. |
 
 ### DirectoryCreateOptions
 
@@ -1767,7 +1767,7 @@ Options for `Client.list`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `prefix` | <code>string</code> | <code>()</code> | Return only entries whose name begins with this prefix. |
+| `prefix` | <code>string</code> | Optional | Return only entries whose name begins with this prefix. |
 | `recursive` | <code>boolean</code> | <code>false</code> | List entries in subdirectories as well. |
 | `pageSize` | <code>int</code> | <code>5000</code> | The number of entries fetched per service round-trip, up to the service maximum of 5,000. Does not cap the total number of results. |
 | `includeExtendedInfo` | <code>boolean</code> | <code>false</code> | Include the ETag and timestamps on each entry. |
@@ -1788,7 +1788,7 @@ Options for `Client.createFile` (creating an empty file of a given size).
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `contentHeaders` | <code>ContentHeaders</code> | <code>()</code> | Content headers to set on the file, such as `Content-Type` and `Cache-Control`. |
+| `contentHeaders` | <code>ContentHeaders</code> | Optional | Content headers to set on the file, such as `Content-Type` and `Cache-Control`. |
 | `metadata` | <code>map&lt;string&gt;</code> | <code>()</code> | User-defined metadata to set on the file. |
 
 ### UploadOptions
@@ -1797,7 +1797,7 @@ Options for the upload operations (`uploadFromFile` and `uploadFromStream`; `upl
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `contentHeaders` | <code>ContentHeaders</code> | <code>()</code> | Content headers to set on the file, such as `Content-Type` and `Cache-Control`. |
+| `contentHeaders` | <code>ContentHeaders</code> | Optional | Content headers to set on the file, such as `Content-Type` and `Cache-Control`. |
 | `metadata` | <code>map&lt;string&gt;</code> | <code>()</code> | User-defined metadata to set on the file. |
 
 ### UploadContentOptions
@@ -1806,7 +1806,7 @@ Options for `upload`: every [UploadOptions](#uploadoptions) field, plus the reco
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `fileFormat` | <code>FileFormat</code> | <code>()</code> | The serialization format for `json`, record, and record array content: `JSON`, `XML`, or `CSV`. When absent, the format is inferred from the destination path's extension (`.json`, `.xml`, `.csv`). |
+| `fileFormat` | <code>FileFormat</code> | Optional | The serialization format for `json`, record, and record array content: `JSON`, `XML`, or `CSV`. When absent, the format is inferred from the destination path's extension (`.json`, `.xml`, `.csv`). |
 
 ### DownloadOptions
 
@@ -1814,7 +1814,7 @@ Options for `download`, included by `getFile`'s `GetFileOptions`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `range` | <code>Range</code> | <code>()</code> | Download only this byte range instead of the whole file. |
+| `range` | <code>Range</code> | Optional | Download only this byte range instead of the whole file. |
 | `snapshotId` | <code>string</code> | <code>()</code> | Read from the share snapshot with this id instead of the live share. |
 
 ### GetFileOptions
@@ -1823,7 +1823,7 @@ Options for `getFile`: every [DownloadOptions](#downloadoptions) field, plus the
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `fileFormat` | <code>FileFormat</code> | <code>()</code> | The binding format for `record {}` and `record {}[]` targets: `JSON`, `XML`, or `CSV`. When absent, the format is inferred from the path's extension (`.json`, `.xml`, `.csv`). |
+| `fileFormat` | <code>FileFormat</code> | Optional | The binding format for `record {}` and `record {}[]` targets: `JSON`, `XML`, or `CSV`. When absent, the format is inferred from the path's extension (`.json`, `.xml`, `.csv`). |
 
 ### CopyOptions
 
@@ -1839,7 +1839,7 @@ Options for `Client.listRanges` and `Client.listRangesDiff`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `range` | <code>Range</code> | <code>()</code> | Restrict the listing to this byte range. |
+| `range` | <code>Range</code> | Optional | Restrict the listing to this byte range. |
 
 ### ShareSasSignatureValues
 
@@ -1849,10 +1849,10 @@ The inputs for generating a share-scoped SAS via `Client.generateShareSas` or `C
 |-------|------|---------|-------------|
 | `expiryTime` | <code>time:Utc</code> | <code>()</code> | The end of the SAS validity period (UTC). May be omitted only when `identifier` references a stored access policy that carries an expiry. |
 | `permissions` | <code>ShareSasPermissions</code> | <code>()</code> | The permissions the SAS grants. May be omitted only when `identifier` references a stored access policy that carries permissions. |
-| `startTime` | <code>time:Utc</code> | <code>()</code> | The start of the SAS validity period (UTC); omit for immediately valid. |
-| `protocol` | <code>SasProtocol</code> | <code>()</code> | The protocols a request presenting the SAS may use; omit to allow HTTPS and HTTP. |
-| `ipRange` | <code>string</code> | <code>()</code> | An IP address or range the requests must come from (e.g. `168.1.5.60-168.1.5.70`). |
-| `identifier` | <code>string</code> | <code>()</code> | The identifier of a stored access policy on the share, as an alternative to spelling out expiry and permissions here. Not valid for the user delegation variants, which reject it. |
+| `startTime` | <code>time:Utc</code> | Optional | The start of the SAS validity period (UTC); omit for immediately valid. |
+| `protocol` | <code>SasProtocol</code> | Optional | The protocols a request presenting the SAS may use; omit to allow HTTPS and HTTP. |
+| `ipRange` | <code>string</code> | Optional | An IP address or range the requests must come from (e.g. `168.1.5.60-168.1.5.70`). |
+| `identifier` | <code>string</code> | Optional | The identifier of a stored access policy on the share, as an alternative to spelling out expiry and permissions here. Not valid for the user delegation variants, which reject it. |
 
 Generation fails with an `Error` when neither `identifier` nor both `expiryTime` and `permissions` are supplied.
 
@@ -1876,10 +1876,10 @@ The inputs for generating a file-scoped SAS via `Client.generateSas` or `Client.
 |-------|------|---------|-------------|
 | `expiryTime` | <code>time:Utc</code> | <code>()</code> | The end of the SAS validity period (UTC). May be omitted only when `identifier` references a stored access policy that carries an expiry. |
 | `permissions` | <code>FileSasPermissions</code> | <code>()</code> | The permissions the SAS grants. May be omitted only when `identifier` references a stored access policy that carries permissions. |
-| `startTime` | <code>time:Utc</code> | <code>()</code> | The start of the SAS validity period (UTC); omit for immediately valid. |
-| `protocol` | <code>SasProtocol</code> | <code>()</code> | The protocols a request presenting the SAS may use; omit to allow HTTPS and HTTP. |
-| `ipRange` | <code>string</code> | <code>()</code> | An IP address or range the requests must come from (e.g. `168.1.5.60-168.1.5.70`). |
-| `identifier` | <code>string</code> | <code>()</code> | The identifier of a stored access policy on the share, as an alternative to spelling out expiry and permissions here. Not valid for the user delegation variants, which reject it. |
+| `startTime` | <code>time:Utc</code> | Optional | The start of the SAS validity period (UTC); omit for immediately valid. |
+| `protocol` | <code>SasProtocol</code> | Optional | The protocols a request presenting the SAS may use; omit to allow HTTPS and HTTP. |
+| `ipRange` | <code>string</code> | Optional | An IP address or range the requests must come from (e.g. `168.1.5.60-168.1.5.70`). |
+| `identifier` | <code>string</code> | Optional | The identifier of a stored access policy on the share, as an alternative to spelling out expiry and permissions here. Not valid for the user delegation variants, which reject it. |
 
 Generation fails with an `Error` when neither `identifier` nor both `expiryTime` and `permissions` are supplied.
 
@@ -1903,9 +1903,9 @@ The inputs for generating an account-level SAS via `AdminClient.generateAccountS
 | `expiryTime` | <code>time:Utc</code> | Required | The end of the SAS validity period (UTC). |
 | `permissions` | <code>AccountSasPermissions</code> | Required | The permissions the SAS grants. |
 | `resourceTypes` | <code>AccountSasResourceTypes</code> | Required | The resource types the SAS applies to. |
-| `startTime` | <code>time:Utc</code> | <code>()</code> | The start of the SAS validity period (UTC); omit for immediately valid. |
-| `protocol` | <code>SasProtocol</code> | <code>()</code> | The protocols a request presenting the SAS may use; omit to allow HTTPS and HTTP. |
-| `ipRange` | <code>string</code> | <code>()</code> | An IP address or range the requests must come from (e.g. `168.1.5.60-168.1.5.70`). |
+| `startTime` | <code>time:Utc</code> | Optional | The start of the SAS validity period (UTC); omit for immediately valid. |
+| `protocol` | <code>SasProtocol</code> | Optional | The protocols a request presenting the SAS may use; omit to allow HTTPS and HTTP. |
+| `ipRange` | <code>string</code> | Optional | An IP address or range the requests must come from (e.g. `168.1.5.60-168.1.5.70`). |
 
 ### AccountSasPermissions
 

@@ -24,13 +24,13 @@ HTTP client for SAP APIs with built-in CSRF token authentication.
 | `auth` | `CredentialsConfig\|BearerTokenConfig\|OAuth2RefreshTokenGrantConfig\|...` | Required | Authentication configuration. Supports Basic Auth (username/password), Bearer Token, or OAuth 2.0 grants. |
 | `httpVersion` | `HttpVersion` | `HTTP_2_0` | HTTP protocol version used by the client. |
 | `timeout` | `decimal` | `60` | Maximum time to wait (in seconds) for a response before closing the connection. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration for failed requests. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration for failed requests. |
 | `secureSocket` | `ClientSecureSocket` | `()` | SSL/TLS configuration for secure connections. |
 | `proxy` | `ProxyConfig` | `()` | Proxy server configuration. |
 | `cache` | `CacheConfig` | `{}` | HTTP caching configuration. |
 | `compression` | `Compression` | `COMPRESSION_AUTO` | Specifies the way of handling the `Accept-Encoding` header. |
 | `forwarded` | `string` | `"disable"` | Configuration for the `Forwarded`/`X-Forwarded` header handling. |
-| `poolConfig` | `PoolConfiguration` | `()` | Connection pool configuration. |
+| `poolConfig` | `PoolConfiguration` | Optional | Connection pool configuration. |
 | `validation` | `boolean` | `true` | Enables inbound payload validation provided by the constraint package. |
 
 ### Initializing the client

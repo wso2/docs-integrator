@@ -32,16 +32,16 @@ The client is initialized with a `ConnectionConfig` record, the API `hostname` (
 | `http2Settings` | `http:ClientHttp2Settings` | `{}` | Configurations related to the HTTP/2 protocol. |
 | `timeout` | `decimal` | `60` | Maximum time (in seconds) to wait for a response before closing the connection. |
 | `forwarded` | `string` | `"disable"` | Choice of setting the `forwarded`/`x-forwarded` header. |
-| `followRedirects` | `http:FollowRedirects` | `()` | Configurations associated with redirection. |
-| `poolConfig` | `http:PoolConfiguration` | `()` | Configurations associated with request pooling. |
+| `followRedirects` | `http:FollowRedirects` | Optional | Configurations associated with redirection. |
+| `poolConfig` | `http:PoolConfiguration` | Optional | Configurations associated with request pooling. |
 | `cache` | `http:CacheConfig` | `{}` | HTTP caching related configurations. |
 | `compression` | `http:Compression` | `http:COMPRESSION_AUTO` | How the `accept-encoding` header is handled. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Configurations associated with the circuit breaker. |
-| `retryConfig` | `http:RetryConfig` | `()` | Configurations associated with retrying. |
-| `cookieConfig` | `http:CookieConfig` | `()` | Configurations associated with cookies. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Configurations associated with the circuit breaker. |
+| `retryConfig` | `http:RetryConfig` | Optional | Configurations associated with retrying. |
+| `cookieConfig` | `http:CookieConfig` | Optional | Configurations associated with cookies. |
 | `responseLimits` | `http:ResponseLimitConfigs` | `{}` | Configurations associated with inbound response size limits. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS related options. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server related options. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS related options. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server related options. |
 | `socketConfig` | `http:ClientSocketConfig` | `{}` | Client socket configuration. |
 | `validation` | `boolean` | `true` | Enables inbound payload validation provided by the constraint package. |
 | `laxDataBinding` | `boolean` | `true` | Enables relaxed data binding: `nil` values are treated as optional and absent fields as nilable. |

@@ -23,11 +23,11 @@ Publishes messages to a Google Cloud Pub/Sub topic.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `batchConfig` | `BatchConfig` | `()` | Message batching configuration (max delay, message count, byte limit). |
+| `batchConfig` | `BatchConfig` | Optional | Message batching configuration (max delay, message count, byte limit). |
 | `compression` | `record {\| int threshold = 240; \|}` | `()` | Compression configuration. Messages exceeding the `threshold` (in bytes, default `240`) are compressed. |
-| `auth` | `GcpCredentialConfig` | `()` | GCP service account credentials. Contains a `path` field pointing to the JSON key file. If omitted, Application Default Credentials are used. |
+| `auth` | `GcpCredentialConfig` | Optional | GCP service account credentials. Contains a `path` field pointing to the JSON key file. If omitted, Application Default Credentials are used. |
 | `enableMessageOrdering` | `boolean` | `false` | Enable message ordering using ordering keys. |
-| `retryConfig` | `RetryConfig` | `()` | Retry configuration with exponential backoff for publish failures. |
+| `retryConfig` | `RetryConfig` | Optional | Retry configuration with exponential backoff for publish failures. |
 
 ### Initializing the client
 

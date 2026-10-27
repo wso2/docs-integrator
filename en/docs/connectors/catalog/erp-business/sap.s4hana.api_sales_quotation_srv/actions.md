@@ -25,9 +25,9 @@ Provides full CRUD access to SAP S/4HANA sales quotation data via the API_SALES_
 | `httpVersion` | `http:HttpVersion` | `HTTP_1_1` | HTTP protocol version to use for outbound requests. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
 | `forwarded` | `string` | `"disable"` | Strategy for handling the `X-Forwarded-For` header. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration for the HTTP client. |
-| `proxy` | `http:ProxyConfig` | `()` | HTTP proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration for the HTTP client. |
+| `proxy` | `http:ProxyConfig` | Optional | HTTP proxy server configuration. |
 | `validation` | `boolean` | `true` | Enable or disable response payload validation against the OData schema. |
 
 ### Initializing the client

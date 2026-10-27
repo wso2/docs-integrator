@@ -38,16 +38,16 @@ The listener supports the following connection strategies:
 | `host` | `string` | Required | RabbitMQ server hostname (constructor parameter). |
 | `port` | `int` | Required | RabbitMQ server AMQP port (constructor parameter). |
 | `qosSettings` | `QosSettings?` | `()` | Quality of Service prefetch settings (constructor parameter). |
-| `auth` | `Credentials` | `()` | Username and password credentials. |
+| `auth` | `Credentials` | Optional | Username and password credentials. |
 | `username` | `string` | `()` | Username used to establish the connection. |
 | `password` | `string` | `()` | Password used to establish the connection. |
-| `virtualHost` | `string` | `()` | The virtual host to connect to. |
-| `connectionTimeout` | `decimal` | `()` | Connection timeout in seconds. |
-| `handshakeTimeout` | `decimal` | `()` | AMQP 0-9-1 protocol handshake timeout in seconds. |
-| `shutdownTimeout` | `decimal` | `()` | Shutdown timeout in seconds. |
-| `heartbeat` | `decimal` | `()` | Heartbeat interval in seconds. |
+| `virtualHost` | `string` | Optional | The virtual host to connect to. |
+| `connectionTimeout` | `decimal` | Optional | Connection timeout in seconds. |
+| `handshakeTimeout` | `decimal` | Optional | AMQP 0-9-1 protocol handshake timeout in seconds. |
+| `shutdownTimeout` | `decimal` | Optional | Shutdown timeout in seconds. |
+| `heartbeat` | `decimal` | Optional | Heartbeat interval in seconds. |
 | `validation` | `boolean` | `true` | Enable constraint validation for messages. |
-| `secureSocket` | `SecureSocket` | `()` | TLS/SSL configuration for secure connections. |
+| `secureSocket` | `SecureSocket` | Optional | TLS/SSL configuration for secure connections. |
 | `failoverAddresses` | `Address[]?` | `()` | Additional broker addresses (`{host, port}`) for cluster and failover support. The primary `host` and `port` are always tried first; if that connection fails, these addresses are tried in order. |
 
 ### Initializing the listener

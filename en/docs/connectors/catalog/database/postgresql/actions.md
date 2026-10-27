@@ -301,28 +301,28 @@ Advanced PostgreSQL connection options. Passed to `Client.init` through the `opt
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `ssl` | <code>SecureSocket?</code> | `()` | SSL/TLS security settings. |
+| `ssl` | <code>SecureSocket?</code> | Optional | SSL/TLS security settings. |
 | `connectTimeout` | <code>decimal</code> | `0` | Connection timeout in seconds. `0` means the JDBC driver default (typically no timeout). |
 | `socketTimeout` | <code>decimal</code> | `0` | Socket read/write timeout in seconds (`0` means no timeout). |
 | `loginTimeout` | <code>decimal</code> | `0` | Time, in seconds, allowed to complete the database login (`0` means no timeout). |
-| `rowFetchSize` | <code>int?</code> | `()` | Number of rows to fetch in a single round trip when streaming results. |
-| `cachedMetadataFieldsCount` | <code>int?</code> | `()` | Number of fields cached per connection. |
-| `cachedMetadataFieldSize` | <code>int?</code> | `()` | Size, in bytes, of metadata fields cached per connection. |
-| `preparedStatementThreshold` | <code>int?</code> | `()` | Number of `PreparedStatement` executions required before switching to a server-side prepared statement. |
-| `preparedStatementCacheQueries` | <code>int?</code> | `()` | Maximum number of prepared statements cached per connection. |
-| `preparedStatementCacheSize` | <code>int?</code> | `()` | Maximum size, in mebibytes, of the prepared statement cache per connection. |
+| `rowFetchSize` | <code>int?</code> | Optional | Number of rows to fetch in a single round trip when streaming results. |
+| `cachedMetadataFieldsCount` | <code>int?</code> | Optional | Number of fields cached per connection. |
+| `cachedMetadataFieldSize` | <code>int?</code> | Optional | Size, in bytes, of metadata fields cached per connection. |
+| `preparedStatementThreshold` | <code>int?</code> | Optional | Number of `PreparedStatement` executions required before switching to a server-side prepared statement. |
+| `preparedStatementCacheQueries` | <code>int?</code> | Optional | Maximum number of prepared statements cached per connection. |
+| `preparedStatementCacheSize` | <code>int?</code> | Optional | Maximum size, in mebibytes, of the prepared statement cache per connection. |
 | `cancelSignalTimeout` | <code>decimal</code> | `10` | Time, in seconds, by which the cancel command is sent out of band over its own connection. |
-| `keepAliveTcpProbe` | <code>boolean?</code> | `()` | Enable TCP keep-alive probes on the socket. |
-| `binaryTransfer` | <code>boolean?</code> | `()` | Use the binary protocol for sending and receiving data when supported. |
-| `currentSchema` | <code>string?</code> | `()` | The schema to be used by the client. |
+| `keepAliveTcpProbe` | <code>boolean?</code> | Optional | Enable TCP keep-alive probes on the socket. |
+| `binaryTransfer` | <code>boolean?</code> | Optional | Use the binary protocol for sending and receiving data when supported. |
+| `currentSchema` | <code>string?</code> | Optional | The schema to be used by the client. |
 
 ### `SecureSocket`
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `mode` | <code>SSLMode</code> | `PREFER` | SSL mode (see below). |
-| `rootcert` | <code>string?</code> | `()` | File name of the SSL root certificate. Defaults to `${user.home}/.postgresql/root.crt` on Unix or `%appdata%/postgresql/root.crt` on Windows. |
-| `key` | <code>crypto:KeyStore&#124;CertKey?</code> | `()` | Client certificate configuration. Use a `crypto:KeyStore` for JKS or PKCS#12 keystores, or a `CertKey` record for PEM files. |
+| `rootcert` | <code>string?</code> | Optional | File name of the SSL root certificate. Defaults to `${user.home}/.postgresql/root.crt` on Unix or `%appdata%/postgresql/root.crt` on Windows. |
+| `key` | <code>crypto:KeyStore&#124;CertKey?</code> | Optional | Client certificate configuration. Use a `crypto:KeyStore` for JKS or PKCS#12 keystores, or a `CertKey` record for PEM files. |
 
 ### `CertKey`
 
@@ -332,7 +332,7 @@ Represents a client certificate, private key, and optional key password loaded f
 |-------|------|---------|-------------|
 | `certFile` | <code>string</code> | Required | Path to the file containing the client certificate. |
 | `keyFile` | <code>string</code> | Required | Path to the file containing the client private key. |
-| `keyPassword` | <code>string?</code> | `()` | Password for the private key, if it is encrypted. |
+| `keyPassword` | <code>string?</code> | Optional | Password for the private key, if it is encrypted. |
 
 ### `SSLMode`
 

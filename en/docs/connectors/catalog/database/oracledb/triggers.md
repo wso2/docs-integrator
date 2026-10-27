@@ -43,8 +43,8 @@ The listener supports the following connection strategies:
 | `hostname` | `string` | `"localhost"` | The hostname of the Oracle server. Ignored when `url` is set. |
 | `port` | `int` | `1521` | The port number of the Oracle listener. Ignored when `url` is set. |
 | `databaseName` | `string` | Required | The root container (CDB) name for multitenant Oracle, or the database name for legacy non-CDB Oracle. |
-| `url` | `string?` | `()` | Raw JDBC URL for TNS, RAC, or TCPS connections. Overrides `hostname` and `port` only. |
-| `pdbName` | `string?` | `()` | The pluggable database (PDB) name, for multitenant installations only. |
+| `url` | `string?` | Optional | Raw JDBC URL for TNS, RAC, or TCPS connections. Overrides `hostname` and `port` only. |
+| `pdbName` | `string?` | Optional | The pluggable database (PDB) name, for multitenant installations only. |
 | `adapterMode` | `AdapterMode` | `LOGMINER` | LogMiner buffering mode: connector-side (`LOGMINER`) or database-side (`LOGMINER_UNBUFFERED`). |
 | `racNodes` | `string\|string[]?` | `()` | RAC node list (`host:port` or `host:port/SID`). Required when connecting to an Oracle RAC cluster, even when `url` is set. |
 | `includedSchemas` | `string\|string[]?` | `()` | Regex patterns of schemas to capture. Mutually exclusive with `excludedSchemas`. |
@@ -53,8 +53,8 @@ The listener supports the following connection strategies:
 | `excludedTables` | `string\|string[]?` | `()` | Regex patterns of tables to exclude. Mutually exclusive with `includedTables`. |
 | `includedColumns` | `string\|string[]?` | `()` | Regex patterns of columns to capture. Mutually exclusive with `excludedColumns`. |
 | `excludedColumns` | `string\|string[]?` | `()` | Regex patterns of columns to exclude. Mutually exclusive with `includedColumns`. |
-| `logMinerConfig` | `LogMinerConfiguration?` | `()` | LogMiner adapter tunables. See [Supporting types](#supporting-types). |
-| `driverConfig` | `DriverConfiguration?` | `()` | Oracle JDBC driver pass-through configuration (mTLS, Oracle Wallet, timezone handling). |
+| `logMinerConfig` | `LogMinerConfiguration?` | Optional | LogMiner adapter tunables. See [Supporting types](#supporting-types). |
+| `driverConfig` | `DriverConfiguration?` | Optional | Oracle JDBC driver pass-through configuration (mTLS, Oracle Wallet, timezone handling). |
 
 :::note
 Unlike the MySQL and PostgreSQL connectors, `OracleDatabaseConnection` does **not** support the inherited `secure` field (`cdc:SecureDatabaseConnection`) — the Oracle connector does not read `database.ssl.*` properties, and setting `secure` raises a configuration error at listener initialization. Configure TLS through `driverConfig.mtls` instead, using either a Java keystore/truststore (`DriverSslConfiguration`) or an Oracle Wallet location string.
@@ -236,16 +236,16 @@ LogMiner adapter tunables. Applies to both `LOGMINER` and `LOGMINER_UNBUFFERED` 
 |-------|------|---------|-------------|
 | `strategy` | `LogMiningStrategy` | `ONLINE_CATALOG` | Mining strategy used when reading redo/archive logs. |
 | `queryFilterMode` | `LogMiningQueryFilterMode` | `NONE` | How table-include filters are applied to the LogMiner query (`NONE`, `IN`, `REGEX`). |
-| `readOnlyHostname` | `string?` | `()` | Hostname of a read-only standby to direct LogMiner queries at. |
+| `readOnlyHostname` | `string?` | Optional | Hostname of a read-only standby to direct LogMiner queries at. |
 | `flushTableName` | `string` | `"LOG_MINING_FLUSH"` | Name of the internal flush table; useful for RAC deployments. |
-| `buffer` | `LogMinerMemoryBufferConfiguration?` | `()` | In-memory transaction buffer tunables. |
-| `sessionMaxDuration` | `decimal?` | `()` | Max time before closing and reopening the LogMiner session, in seconds; no limit if not set. |
+| `buffer` | `LogMinerMemoryBufferConfiguration?` | Optional | In-memory transaction buffer tunables. |
+| `sessionMaxDuration` | `decimal?` | Optional | Max time before closing and reopening the LogMiner session, in seconds; no limit if not set. |
 | `restartConnection` | `boolean` | `false` | Restart the JDBC connection when a mining session is rotated. |
-| `batch` | `LogMinerBatchConfiguration?` | `()` | SCN-based mining batch sizing. |
-| `sleep` | `LogMinerSleepConfiguration?` | `()` | Sleep timing between mining iterations. |
-| `archive` | `LogMinerArchiveLogConfiguration?` | `()` | Archive-log mining configuration. |
-| `transactionRetentionTime` | `decimal?` | `()` | Time to retain transactions in the buffer before forced commit/rollback, in seconds. |
-| `maxWindowTime` | `decimal?` | `()` | Max mining window duration in seconds before forced advance of the offset. |
+| `batch` | `LogMinerBatchConfiguration?` | Optional | SCN-based mining batch sizing. |
+| `sleep` | `LogMinerSleepConfiguration?` | Optional | Sleep timing between mining iterations. |
+| `archive` | `LogMinerArchiveLogConfiguration?` | Optional | Archive-log mining configuration. |
+| `transactionRetentionTime` | `decimal?` | Optional | Time to retain transactions in the buffer before forced commit/rollback, in seconds. |
+| `maxWindowTime` | `decimal?` | Optional | Max mining window duration in seconds before forced advance of the offset. |
 | `includedUsernames` | `string\|string[]?` | `()` | Usernames whose changes to capture. Mutually exclusive with `excludedUsernames`. |
 | `excludedUsernames` | `string\|string[]?` | `()` | Usernames whose changes to skip. Mutually exclusive with `includedUsernames`. |
 | `includedClientIds` | `string\|string[]?` | `()` | JDBC client IDs whose changes to capture. Mutually exclusive with `excludedClientIds`. |
@@ -266,7 +266,7 @@ LogMiner adapter tunables. Applies to both `LOGMINER` and `LOGMINER_UNBUFFERED` 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `trackRsId` | `boolean` | `true` | Track the row-id (RS_ID) of each event in the transaction buffer. |
-| `transactionEventsThreshold` | `int?` | `()` | Max events per transaction before abandoning the transaction. |
+| `transactionEventsThreshold` | `int?` | Optional | Max events per transaction before abandoning the transaction. |
 
 ### `LogMinerBatchConfiguration`
 
@@ -294,7 +294,7 @@ Sleep timing between LogMiner mining iterations, in seconds.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `logHours` | `int?` | `()` | Number of hours of archive logs to scan for the start SCN. If not set, mines all archive logs. |
+| `logHours` | `int?` | Optional | Number of hours of archive logs to scan for the start SCN. If not set, mines all archive logs. |
 | `destinationName` | `string\|string[]?` | `()` | Configured Oracle archive destination(s) to use when mining archive logs. |
 | `logOnlyMode` | `boolean` | `false` | Mine only archive logs, ignoring redo logs. Increases latency but improves reliability. |
 | `logOnlyScnPollInterval` | `decimal` | `10` | Poll interval in seconds when waiting for a new SCN. Applicable only when `logOnlyMode` is `true`. |
@@ -305,10 +305,10 @@ Oracle-specific CDC options for snapshot, LOB capture, streaming, and data type 
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `extendedSnapshot` | `OracleExtendedSnapshotConfiguration?` | `()` | Snapshot config with Oracle-specific configuration-based sub-flags. |
-| `dataTypeConfig` | `OracleDataTypeConfiguration?` | `()` | Data type handling, including Oracle `INTERVAL` representation. |
-| `heartbeatConfig` | `cdc:RelationalHeartbeatConfiguration?` | `()` | Heartbeat configuration for keeping the connection alive. |
-| `streamingDelay` | `decimal?` | `()` | Delay between snapshot completion and streaming start, in seconds. |
+| `extendedSnapshot` | `OracleExtendedSnapshotConfiguration?` | Optional | Snapshot config with Oracle-specific configuration-based sub-flags. |
+| `dataTypeConfig` | `OracleDataTypeConfiguration?` | Optional | Data type handling, including Oracle `INTERVAL` representation. |
+| `heartbeatConfig` | `cdc:RelationalHeartbeatConfiguration?` | Optional | Heartbeat configuration for keeping the connection alive. |
+| `streamingDelay` | `decimal?` | Optional | Delay between snapshot completion and streaming start, in seconds. |
 | `queryFetchSize` | `int` | `10000` | JDBC fetch size for streaming queries. |
 | `lobEnabled` | `boolean` | `false` | Enable CLOB/NCLOB/BLOB/XML capture. Incompatible with the `HYBRID` mining strategy. |
 | `unavailableValuePlaceholder` | `string` | `"__debezium_unavailable_value"` | Placeholder string emitted for unchanged LOB columns. |
@@ -322,7 +322,7 @@ Extends `cdc:RelationalExtendedSnapshotConfiguration` with Oracle-specific confi
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `configurationBased` | `ConfigurationBasedSnapshot?` | `()` | Sub-flags active only when `snapshotMode == CONFIGURATION_BASED`. |
+| `configurationBased` | `ConfigurationBasedSnapshot?` | Optional | Sub-flags active only when `snapshotMode == CONFIGURATION_BASED`. |
 
 ### `ConfigurationBasedSnapshot`
 

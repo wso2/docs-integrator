@@ -26,7 +26,7 @@ The client is configured with a `ConnectionConfig` record.
 | `connection` | `ConnectionUri\|ConnectionParams` | `"redis://localhost:6379"` | Redis connection URI string or a `ConnectionParams` record with host, port, username, password, and options. |
 | `connectionPooling` | `boolean` | `false` | Whether to enable connection pooling. |
 | `isClusterConnection` | `boolean` | `false` | Whether this is a Redis cluster connection. |
-| `secureSocket` | `SecureSocket?` | `()` | SSL/TLS configuration for encrypted connections. |
+| `secureSocket` | `SecureSocket?` | Optional | SSL/TLS configuration for encrypted connections. |
 
 ### Configuration types
 
@@ -44,8 +44,8 @@ Field-based connection configuration.
 |-------|------|---------|-------------|
 | `host` | `string` | `"localhost"` | Host address of the Redis database. |
 | `port` | `int` | `6379` | Port of the Redis database. |
-| `username` | `string?` | `()` | Username for the Redis database (Redis 6.0+ ACL). |
-| `password` | `string?` | `()` | Password for the Redis database. |
+| `username` | `string?` | Optional | Username for the Redis database (Redis 6.0+ ACL). |
+| `password` | `string?` | Optional | Password for the Redis database. |
 | `options` | `Options` | `{}` | Additional connection options. |
 
 #### `Options`
@@ -54,7 +54,7 @@ Connection options.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `clientName` | `string?` | `()` | Name of the client. |
+| `clientName` | `string?` | Optional | Name of the client. |
 | `database` | `int` | `0` | Database index the client should interact with. Not applicable for cluster connections. |
 | `connectionTimeout` | `int` | `60` | Connection timeout in seconds. |
 | `keepAlive` | `KeepAliveConfig?` | `()` | TCP keep-alive configuration for detecting stale connections. Set to `()` to disable. |
@@ -77,8 +77,8 @@ SSL/TLS configuration.
 |-------|------|---------|-------------|
 | `cert` | `crypto:TrustStore\|string?` | `()` | A `crypto:TrustStore` record (`{path, password}`) or a path to a single certificate file the client trusts. |
 | `key` | `crypto:KeyStore\|CertKey?` | `()` | A `crypto:KeyStore` record (`{path, password}`) or a `CertKey` value (used for mutual TLS). |
-| `protocols` | `string[]?` | `()` | List of protocols used for the connection, such as `TLSv1.2`, `TLSv1.1`, `TLSv1`. |
-| `ciphers` | `string[]?` | `()` | List of ciphers to be used for SSL connections. |
+| `protocols` | `string[]?` | Optional | List of protocols used for the connection, such as `TLSv1.2`, `TLSv1.1`, `TLSv1`. |
+| `ciphers` | `string[]?` | Optional | List of ciphers to be used for SSL connections. |
 | `verifyMode` | `SslVerifyMode` | `FULL` | Server-certificate verification mode. |
 | `startTls` | `boolean` | `false` | Whether StartTLS is enabled. |
 
@@ -90,7 +90,7 @@ Client certificate and private key (used for mutual TLS).
 |-------|------|---------|-------------|
 | `certFile` | `string` | Required | Path to the certificate file. |
 | `keyFile` | `string` | Required | Path to the private key file in PKCS8 format. |
-| `keyPassword` | `string?` | `()` | Password of the private key, if encrypted. |
+| `keyPassword` | `string?` | Optional | Password of the private key, if encrypted. |
 
 #### `SslVerifyMode`
 

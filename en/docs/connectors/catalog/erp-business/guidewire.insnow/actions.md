@@ -24,11 +24,11 @@ Provides access to the Guidewire InsuranceNow REST API for applications, policie
 | `auth` | `http:BearerTokenConfig\|http:CredentialsConfig` | Required | Bearer token or username/password credentials for authentication. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `compression` | `http:Compression` | `COMPRESSION_AUTO` | Compression configuration for requests. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker configuration. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker configuration. |
 | `validation` | `boolean` | `true` | Enable or disable payload validation. |
 | `laxDataBinding` | `boolean` | `true` | Enable lax data binding to ignore unmapped fields. |
 

@@ -46,16 +46,16 @@ The listener supports the following connection strategies:
 | `databaseNames` | <code>string&#124;string[]</code> | Required | Name(s) of the database(s) to capture changes from. |
 | `connectTimeout` | <code>decimal?</code> | `()` | Connection timeout in seconds. Inherited from `cdc:DatabaseConnection`. |
 | `secure` | <code>cdc:SecureDatabaseConnection?</code> | `()` | SSL/TLS configuration for the database connection. Inherited from `cdc:DatabaseConnection`. |
-| `databaseInstance` | <code>string?</code> | `()` | Named SQL Server instance, if applicable. |
-| `includedSchemas` | <code>string&#124;string[]?</code> | `()` | Schema(s) to include in CDC capture (for example, `"dbo"`). Mutually exclusive with `excludedSchemas`. |
-| `excludedSchemas` | <code>string&#124;string[]?</code> | `()` | Schema(s) to exclude from CDC capture. Mutually exclusive with `includedSchemas`. |
-| `includedTables` | <code>string&#124;string[]?</code> | `()` | Table identifiers in `schema.table` format, or regex patterns to capture (for example, `"dbo.Employees"`). Mutually exclusive with `excludedTables`. |
-| `excludedTables` | <code>string&#124;string[]?</code> | `()` | Regex patterns of tables to exclude from capture. Mutually exclusive with `includedTables`. |
-| `includedColumns` | <code>string&#124;string[]?</code> | `()` | Regex patterns of columns to capture. Mutually exclusive with `excludedColumns`. |
-| `excludedColumns` | <code>string&#124;string[]?</code> | `()` | Regex patterns of columns to exclude from capture. Mutually exclusive with `includedColumns`. |
-| `messageKeyColumns` | <code>cdc:MessageKeyColumns[]?</code> | `()` | Composite message-key column mappings for change events. |
+| `databaseInstance` | <code>string?</code> | Optional | Named SQL Server instance, if applicable. |
+| `includedSchemas` | <code>string&#124;string[]?</code> | Optional | Schema(s) to include in CDC capture (for example, `"dbo"`). Mutually exclusive with `excludedSchemas`. |
+| `excludedSchemas` | <code>string&#124;string[]?</code> | Optional | Schema(s) to exclude from CDC capture. Mutually exclusive with `includedSchemas`. |
+| `includedTables` | <code>string&#124;string[]?</code> | Optional | Table identifiers in `schema.table` format, or regex patterns to capture (for example, `"dbo.Employees"`). Mutually exclusive with `excludedTables`. |
+| `excludedTables` | <code>string&#124;string[]?</code> | Optional | Regex patterns of tables to exclude from capture. Mutually exclusive with `includedTables`. |
+| `includedColumns` | <code>string&#124;string[]?</code> | Optional | Regex patterns of columns to capture. Mutually exclusive with `excludedColumns`. |
+| `excludedColumns` | <code>string&#124;string[]?</code> | Optional | Regex patterns of columns to exclude from capture. Mutually exclusive with `includedColumns`. |
+| `messageKeyColumns` | <code>cdc:MessageKeyColumns[]?</code> | Optional | Composite message-key column mappings for change events. |
 | `tasksMax` | <code>int</code> | `1` | Maximum number of CDC tasks. |
-| `streamingConfig` | <code>StreamingConfiguration?</code> | `()` | Streaming and status-update configuration for CDC change events. |
+| `streamingConfig` | <code>StreamingConfiguration?</code> | Optional | Streaming and status-update configuration for CDC change events. |
 
 `MsSqlListenerConfiguration` fields:
 

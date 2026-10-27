@@ -27,18 +27,18 @@ Connects to FTP/FTPS/SFTP servers for file read/write, directory management, and
 | `protocol` | <code>Protocol</code> | `FTP` | The file transfer protocol to use (`FTP`, `FTPS`, or `SFTP`). |
 | `host` | <code>string</code> | `"127.0.0.1"` | Hostname or IP address of the FTP server. |
 | `port` | <code>int</code> | `21` | Port number of the FTP server. |
-| `auth` | <code>AuthConfiguration</code> | `()` | Authentication configuration including credentials, private key, and secure socket settings. |
+| `auth` | <code>AuthConfiguration</code> | Optional | Authentication configuration including credentials, private key, and secure socket settings. |
 | `userDirIsRoot` | <code>boolean</code> | `false` | Whether to treat the user's home directory as the root directory. |
 | `laxDataBinding` | <code>boolean</code> | `false` | If true, enables relaxed data binding: null values in JSON/XML map to optional fields, and missing fields map to null values. |
 | `connectTimeout` | <code>decimal</code> | `30.0` | Connection timeout in seconds. |
-| `socketConfig` | <code>SocketConfig</code> | `()` | Socket timeout configuration for FTP data, FTP socket, and SFTP session timeouts. |
-| `proxy` | <code>ProxyConfiguration</code> | `()` | Proxy server configuration for the connection (SFTP only). |
+| `socketConfig` | <code>SocketConfig</code> | Optional | Socket timeout configuration for FTP data, FTP socket, and SFTP session timeouts. |
+| `proxy` | <code>ProxyConfiguration</code> | Optional | Proxy server configuration for the connection (SFTP only). |
 | `fileTransferMode` | <code>FileTransferMode</code> | `BINARY` | File transfer mode (`BINARY` or `ASCII`) (FTP only). |
 | `sftpCompression` | <code>TransferCompression[]</code> | `[NO]` | Compression algorithms for SFTP transfers (`ZLIB`, `ZLIBOPENSSH`, or `NO`). |
-| `sftpSshKnownHosts` | <code>string</code> | `()` | Path to the SSH known hosts file for SFTP host key verification. |
-| `csvFailSafe` | <code>FailSafeOptions</code> | `()` | Fail-safe CSV content processing. When set, malformed CSV records are skipped and written to a separate file in the current directory instead of failing the operation. |
-| `retryConfig` | <code>RetryConfig</code> | `()` | Retry configuration for transient failures on non-streaming read operations (getBytes, getText, getJson, getXml, getCsv). If not specified, no retry is attempted. |
-| `circuitBreaker` | <code>CircuitBreakerConfig</code> | `()` | Circuit breaker for client operations. When the failure ratio exceeds the configured threshold, the client fails fast without contacting the server until the breaker resets. |
+| `sftpSshKnownHosts` | <code>string</code> | Optional | Path to the SSH known hosts file for SFTP host key verification. |
+| `csvFailSafe` | <code>FailSafeOptions</code> | Optional | Fail-safe CSV content processing. When set, malformed CSV records are skipped and written to a separate file in the current directory instead of failing the operation. |
+| `retryConfig` | <code>RetryConfig</code> | Optional | Retry configuration for transient failures on non-streaming read operations (getBytes, getText, getJson, getXml, getCsv). If not specified, no retry is attempted. |
+| `circuitBreaker` | <code>CircuitBreakerConfig</code> | Optional | Circuit breaker for client operations. When the failure ratio exceeds the configured threshold, the client fails fast without contacting the server until the breaker resets. |
 
 ### Initializing the client
 

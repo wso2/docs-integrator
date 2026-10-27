@@ -24,9 +24,9 @@ Provides read access to SAP S/4HANA Incoterms classifications, versions, and the
 | `auth` | `http:CredentialsConfig` | Required | Basic authentication credentials containing `username` and `password` for the SAP S/4HANA Communication User. |
 | `httpVersion` | `http:HttpVersion` | `http:HTTP_2_0` | HTTP protocol version to use for outbound requests. |
 | `timeout` | `decimal` | `60` | Request timeout in seconds. |
-| `retryConfig` | `http:RetryConfig?` | `()` | Retry configuration for transient request failures. |
-| `secureSocket` | `http:ClientSecureSocket?` | `()` | SSL/TLS configuration for secure connections. |
-| `proxy` | `http:ProxyConfig?` | `()` | HTTP proxy server configuration. |
+| `retryConfig` | `http:RetryConfig?` | Optional | Retry configuration for transient request failures. |
+| `secureSocket` | `http:ClientSecureSocket?` | Optional | SSL/TLS configuration for secure connections. |
+| `proxy` | `http:ProxyConfig?` | Optional | HTTP proxy server configuration. |
 | `validation` | `boolean` | `true` | Enables constraint validation on request and response payloads. |
 
 ### Initializing the client

@@ -24,8 +24,8 @@ Jira Cloud REST API v3: issues, projects, search, comments, workflows, users, an
 | `auth` | `http:CredentialsConfig\|OAuth2RefreshTokenGrantConfig\|http:BearerTokenConfig` | Required | Authentication configuration. Use `http:CredentialsConfig` for Basic Auth (email + API token), `OAuth2RefreshTokenGrantConfig` for OAuth 2.0, or `http:BearerTokenConfig` for bearer token. |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | The maximum time to wait (in seconds) for a response before closing the connection. |
-| `retryConfig` | `http:RetryConfig` | `()` | Configurations associated with retrying. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS-related options. |
+| `retryConfig` | `http:RetryConfig` | Optional | Configurations associated with retrying. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS-related options. |
 
 ### Initializing the client
 

@@ -24,11 +24,11 @@ Provides access to the core features of Alfresco Content Services via the REST A
 | `auth` | `http:CredentialsConfig` | Required | Basic authentication credentials (username and password). |
 | `httpVersion` | `http:HttpVersion` | `HTTP_2_0` | HTTP protocol version. |
 | `timeout` | `decimal` | `30` | The maximum time to wait (in seconds) for a response before closing the connection. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS-related options. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS-related options. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `cache` | `http:CacheConfig` | `{}` | HTTP caching related configurations. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker configuration for fault tolerance. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker configuration for fault tolerance. |
 | `compression` | `http:Compression` | `COMPRESSION_AUTO` | Specifies the way of handling compression (`accept-encoding`) header. |
 
 ### Initializing the client

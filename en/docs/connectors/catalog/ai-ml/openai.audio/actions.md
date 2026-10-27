@@ -27,16 +27,16 @@ Provides text-to-speech generation, audio transcription, and audio translation v
 | `http2Settings` | `http:ClientHttp2Settings` | `{}` | HTTP/2 specific configurations. |
 | `timeout` | `decimal` | `30` | Request timeout in seconds. |
 | `forwarded` | `string` | `"disable"` | Forwarded header handling mode. |
-| `followRedirects` | `http:FollowRedirects` | `()` | Redirect handling configuration. |
-| `poolConfig` | `http:PoolConfiguration` | `()` | Connection pool configuration. |
+| `followRedirects` | `http:FollowRedirects` | Optional | Redirect handling configuration. |
+| `poolConfig` | `http:PoolConfiguration` | Optional | Connection pool configuration. |
 | `cache` | `http:CacheConfig` | `{}` | HTTP caching configuration. |
 | `compression` | `http:Compression` | `COMPRESSION_AUTO` | Content compression setting. |
-| `circuitBreaker` | `http:CircuitBreakerConfig` | `()` | Circuit breaker configuration. |
-| `retryConfig` | `http:RetryConfig` | `()` | Retry configuration for failed requests. |
-| `cookieConfig` | `http:CookieConfig` | `()` | Cookie handling configuration. |
+| `circuitBreaker` | `http:CircuitBreakerConfig` | Optional | Circuit breaker configuration. |
+| `retryConfig` | `http:RetryConfig` | Optional | Retry configuration for failed requests. |
+| `cookieConfig` | `http:CookieConfig` | Optional | Cookie handling configuration. |
 | `responseLimits` | `http:ResponseLimitConfigs` | `{}` | Response size limit configuration. |
-| `secureSocket` | `http:ClientSecureSocket` | `()` | SSL/TLS configuration. |
-| `proxy` | `http:ProxyConfig` | `()` | Proxy server configuration. |
+| `secureSocket` | `http:ClientSecureSocket` | Optional | SSL/TLS configuration. |
+| `proxy` | `http:ProxyConfig` | Optional | Proxy server configuration. |
 | `socketConfig` | `http:ClientSocketConfig` | `{}` | TCP socket configuration. |
 | `validation` | `boolean` | `true` | Enable payload validation. |
 | `laxDataBinding` | `boolean` | `true` | Enable lax data binding. |
