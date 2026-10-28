@@ -15,7 +15,11 @@ A **Large Language Model (LLM)** is a neural network trained on large text corpo
 
 A **Model Provider** is WSO2 Integrator's unified abstraction over LLMs. It wraps the provider-specific API behind a consistent interface, so Direct LLM Calls, Natural Functions, the RAG `generate` node, and AI agents all work the same way regardless of which LLM you choose. Pick a provider, fill in the form, and click **Save**.
 
-Every model provider exposes the same two actions, so switching LLMs is a connection-level swap that leaves the rest of your flow unchanged.
+Every model provider exposes the same four actions, so switching LLMs is a connection-level swap that leaves the rest of your flow unchanged.
+
+:::note
+Model providers also support **streaming**. Instead of waiting for the complete response, an integration can receive the model's output piece by piece while it is still being generated. This is useful for long answers, chat UIs, and forwarding responses to clients over Server-Sent Events (SSE).
+:::
 
 ## Available actions
 
@@ -24,7 +28,9 @@ Every model provider exposes the following actions.
 | Action | What it does | Required parameters | Optional parameters |
 |---|---|---|---|
 | **Generate** | Sends a prompt to the model and binds the response to a typed Ballerina value. The everyday action behind a `generate` node, a Natural Function, or RAG `ai:generate`. | **Prompt** (the instruction template), **Expected Type** (the type the response is parsed into) | None per call. Anything you want to tune (temperature, max tokens) lives on the connection. |
+| **Generate As Stream** | Sends a prompt to the model and streams back the answer as text fragments (`stream<string, ai:Error?>`) while it is being generated. Returns text only. Use **Generate** when you need a typed, structured result. | **Prompt** (the instruction template) | None per call. Anything you want to tune lives on the connection. |
 | **Chat** | Sends a list of chat messages and (optionally) tool definitions; returns the model's reply, including any tool calls. Used by Agents. | **Messages** (the conversation), **Tools** (tool definitions for tool calling) | **Stop** (a stop sequence). |
+| **Chat As Stream** | Sends a list of chat messages and (optionally) tool definitions; streams back the model's reply as message chunks (`stream<ai:ChatMessageChunk, ai:Error?>`). Each chunk can carry answer text, reasoning, tool-call fragments, or the finish reason. | **Messages** (the conversation), **Tools** (tool definitions for tool calling) | **Stop** (a stop sequence). |
 
 :::note
 Per-call overrides are not exposed in the form. Anything that varies per request belongs in the prompt; anything that varies across the project is set once on the connection (see [Standard HTTP advanced configurations](#standard-http-advanced-configurations) below).
