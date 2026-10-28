@@ -8,6 +8,8 @@ After pushing your integrations to WSO2 Cloud - Integration Platform, you can vi
 
 If your integration is exposed as an API, see [API Management](api-management/api-management.md) for lifecycle states, security, rate limiting, and the developer portal.
 
+If your integration is a workflow, see [Manage Workflows](workflows.md) to start and monitor workflow runs and act on human tasks and reviews.
+
 ## View integrations
 
 1. Log in to [WSO2 Cloud](https://console.devant.dev). The default project opens automatically.

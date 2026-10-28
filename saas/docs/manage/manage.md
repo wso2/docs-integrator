@@ -44,6 +44,7 @@ WSO2 Cloud - Integration Platform is a managed cloud environment for running int
     <li>User groups and roles</li>
     <li>Organization- or project-level access</li>
     <li>Enterprise login with an external identity provider</li>
+    <li>User Portal for external users</li>
   </ul>
 
 ## Managed platform services
