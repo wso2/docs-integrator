@@ -128,7 +128,9 @@ If you're using the cloud editor, a project is already open, so you can skip thi
       }}
    />
 
-3. Select **printInfo** under **log**.
+3. Search for `printInfo` in the functions panel.
+
+4. In the search results, go to the **Standard Library** section and select the **printInfo** function under **log**.
 
    <ThemedImage
       alt="Functions list with printInfo highlighted under log"
@@ -138,9 +140,9 @@ If you're using the cloud editor, a project is already open, so you can skip thi
       }}
    />
 
-4. Set **Msg** to `Received order`.
+5. Set **Msg** to `Received order`.
 
-5. Click **Save**.
+6. Click **Save**.
 
    <ThemedImage
       alt="log:printInfo panel with Msg set to Received order"
