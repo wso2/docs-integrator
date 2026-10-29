@@ -1,8 +1,8 @@
 ---
-title: Managed Vector Databases
+title: Vector Databases
 ---
 
-# Managed Vector Databases
+# Vector Databases
 
 WSO2 Cloud - Integration Platform provides fully managed PostgreSQL databases and managed PostgreSQL vector databases for efficient vector similarity search. You can provision services on AWS, Azure, GCP, and DigitalOcean.
 
@@ -80,4 +80,4 @@ The following connection limits apply based on service plan:
 
 - [WSO2 Integration Platform overview](../manage.md) — Learn the management areas available in WSO2 Integration Platform.
 - [Managed databases and caches](../managed-databases-and-caches.md) — Create and manage other database and cache services.
-- [RAG ingestion](./ingestion.md) — Configure ingestion for knowledge bases and vector stores.
+- [RAG ingestion](./knowledge-bases/ingestion.md) — Configure ingestion for knowledge bases and vector stores.
