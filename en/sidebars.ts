@@ -73,6 +73,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'AuthZEN',
+          link: { type: 'doc', id: 'catalog/security-identity/authzen/connector-overview' },
+          items: [
+            'catalog/security-identity/authzen/setup-guide',
+            'catalog/security-identity/authzen/actions',
+            'catalog/security-identity/authzen/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'AWS DynamoDB',
           link: { type: 'doc', id: 'catalog/database/aws.dynamodb/connector-overview' },
           items: [
