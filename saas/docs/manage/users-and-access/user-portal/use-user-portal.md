@@ -4,7 +4,7 @@ title: Use the User Portal
 
 # Use the User Portal
 
-After you [sign in to the User Portal](sign-in-to-user-portal.md), you see the integrations that your organization published to you. This page explains how to find an integration and how to use each type:
+After you [sign in to the User Portal](sign-in-to-user-portal.md), you see the integrations that your organization published to you. Your roles decide which integrations you see and what you can do with them. If you do not see an integration that you expect, or a button is disabled, contact your organization's administrator. See [Scopes](manage-users.md#scopes). This page explains how to find an integration and how to use each type:
 
 - [Chat with an AI agent](#chat-with-an-ai-agent)
 - [Run an automation](#run-an-automation)
@@ -53,7 +53,7 @@ On the **Integrations** tab, find the AI agent and click **Chat**. The chat pane
         }}
     />
 
-3. Click **Execute**. The button is available after you fill in every required field.
+3. Click **Execute**. The button is available after you fill in every required field. If you do not have permission to run the automation, the button is disabled.
 
 The panel closes, and the automation runs on its latest deployment track.
 
@@ -140,7 +140,7 @@ A workflow can wait for a person before it continues. It does this in two ways:
 - **Task**: The workflow asks you to provide a response, such as a decision or some information.
 - **Approval**: The workflow asks you to approve or reject a step. An approval can come before a step runs, or after a step fails so that you can decide whether to run it again.
 
-You see only the tasks and approvals that you are allowed to act on. Workflows often assign them to a role. If you expect to see a task but it is not there, contact your organization's administrator. Administrators can assign roles to users. See [Create a role and assign it to a user](manage-users.md#create-a-role-and-assign-it-to-a-user).
+You see only the tasks and approvals that you are allowed to act on. Workflows often assign them to a role. If you expect to see a task but it is not there, contact your organization's administrator. Administrators can assign roles to users. See [Roles for workflow tasks](manage-users.md#roles-for-workflow-tasks).
 
 Tasks and approvals that are waiting on you appear in the following places:
 

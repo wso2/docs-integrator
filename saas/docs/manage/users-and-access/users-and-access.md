@@ -30,7 +30,7 @@ The platform validates the incoming token against the registered IdP's well-know
 
 ## User Portal
 
-The User Portal is a separate portal that exposes your integrations to external users. After you enable it for your organization, you can publish AI agents, automations, and workflows to it. Users sign in through your WSO2 Identity Platform organization and can chat with agents and run automations and workflows without access to the WSO2 Cloud console.
+The User Portal is a separate portal that exposes your integrations to external users. After you enable it for your organization, you can publish AI agents, automations, and workflows to it. Users sign in through your WSO2 Identity Platform organization and can chat with agents and run automations and workflows without access to the WSO2 Cloud console. You manage User Portal users and roles, and the permissions of each role, from the WSO2 Cloud console.
 
 ## In this section
 
@@ -39,4 +39,4 @@ The User Portal is a separate portal that exposes your integrations to external 
 | [Control access](./access-control.md) | Create groups, assign roles at organization or project scope, and invite users. |
 | [Configure enterprise login](./configure-enterprise-login.md) | Enable enterprise login for your organization and set up RBAC for external IdP users. |
 | [Access APIs with an External IdP](./api-external-idp/api-external-idp.md) | Use external IdPs to access Integration as APIs with OAuth2. |
-| [User Portal](./user-portal/user-portal.md) | Enable the User Portal for your organization and publish integrations to it for external users. |
+| [User Portal](./user-portal/user-portal.md) | Enable the User Portal for your organization, manage its users and roles, and publish integrations to it for external users. |

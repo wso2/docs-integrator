@@ -20,8 +20,9 @@ For each automation, users can also see when it last ran and, if it is scheduled
 
 ## Prerequisites
 
-- The User Portal is enabled for your organization. See [Enable the User Portal](user-portal.md#enable-the-user-portal).
+- The User Portal is enabled for your organization. See [Enable the User Portal](user-portal.md#enable-the-user-portal). Until then, the integration's overview page shows a **Publish to User Portal** button instead of the toggle. Click it, then click **Enable in Settings** to go to the **User Portal** page. If you do not have the permissions to enable the User Portal, ask an organization administrator to enable it.
 - The integration is deployed to the production environment. Until then, **Publish to User Portal** is disabled. See [Promote an integration](../../environments/promotion.md).
+- Your role includes the **Manage Organization** permission and the permission to publish APIs to the Developer Portal. Without these permissions, **Publish to User Portal** is disabled. You need the same permissions to choose the chat endpoints of an AI agent and to unpublish an integration.
 
 ## Publish an integration
 
@@ -59,6 +60,8 @@ When you confirm, the platform publishes the integration to the User Portal. For
 
 Automations are not called through the Developer Portal, so the platform skips these steps for them.
 
+Publishing an integration does not give users access to it. To see the integration in the User Portal, a user needs a role with the view scope for the integration's type. See [Scopes](manage-users.md#scopes).
+
 After the integration is published, the platform shows a confirmation message, and a **User Portal** button appears on the overview page. Click it to open the User Portal for your organization in a new tab. The User Portal tries to sign you in automatically. See [Automatic sign-in from the console](sign-in-to-user-portal.md#automatic-sign-in-from-the-console).
 
 <ThemedImage
@@ -74,21 +77,24 @@ After the integration is published, the platform shows a confirmation message, a
 If the platform cannot publish the integration, it shows an error message. The following are common causes:
 
 - **The AI agent has no endpoint with a `/chat` resource in production.** Deploy an endpoint with a `/chat` resource to production, then try again.
-- **The platform cannot publish an endpoint to the Developer Portal.** This can happen when another API in the Developer Portal already uses the same name. To fix this, publish the endpoint to the Developer Portal manually from the integration's **Lifecycle** page. See [Lifecycle Management](../../integrations/api-management/lifecycle-management.md). Then return to the overview page and publish the integration to the User Portal again.
+- **The platform cannot publish an endpoint to the Developer Portal.** This can happen when another API in the Developer Portal already uses the same name. To fix this, publish the endpoint to the Developer Portal manually. Open the integration, then in the left navigation menu, click **Develop** > **Lifecycle**. See [Lifecycle Management](../../integrations/api-management/lifecycle-management.md). Then go to the integration's **Overview** page and publish the integration to the User Portal again.
 
 ## Choose the chat endpoints of an AI agent
 
 If a published AI agent has more than one endpoint with a chat resource, you can choose which endpoints are available in the User Portal. By default, all of them are available.
 
-1. On the AI agent's overview page, go to the production environment card.
-2. Next to each chat endpoint, turn the **User Portal** toggle on or off.
+1. Open the AI agent.
+2. In the left navigation menu, click **Overview**.
+3. On the production environment card, next to each chat endpoint, turn the **User Portal** toggle on or off.
 
 When you turn on the toggle for an endpoint, the platform publishes that endpoint to the Developer Portal if needed, then makes it available in the User Portal.
 
 ## Unpublish an integration
 
-1. On the integration's overview page, turn off the **Publish to User Portal** toggle.
-2. In the confirmation dialog, click **Unpublish**.
+1. Open the integration.
+2. In the left navigation menu, click **Overview**.
+3. Turn off the **Publish to User Portal** toggle.
+4. In the confirmation dialog, click **Unpublish**.
 
 The integration no longer appears in the User Portal. For AI agents and workflows, the platform removes the User Portal's Developer Portal subscriptions to the endpoints.
 
@@ -96,6 +102,6 @@ Unpublishing from the User Portal does not change the lifecycle state of the end
 
 ## What's next
 
-- [Add users](manage-users.md) so that external users can sign in to the User Portal.
+- [Manage users and roles](manage-users.md) so that users can sign in to the User Portal and see the integrations.
 - [Sign in to the User Portal](sign-in-to-user-portal.md).
 - [Use the User Portal](use-user-portal.md) to chat with AI agents, run automations, and work with workflows.
