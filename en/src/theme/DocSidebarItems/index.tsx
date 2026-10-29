@@ -16,10 +16,6 @@
  * still does 100% of the ordering (via each item's own `position`); this
  * only adds a label, it never overrides structure or order.
  *
- * A `lockedSiblings` prop (see DocSidebarItem/Category) renders extra rows
- * after the real items -- plain, non-navigating `<span>`s with an optional
- * badge pill, for "coming soon" entries with no doc file of their own.
- *
  * A category can also be rendered "inline" (`customProps.inline: true` in its
  * _category_.json): it isn't drawn as a collapsible group; its children take
  * its place, at the same level as its siblings, with the category's own
@@ -37,18 +33,6 @@ import {
 } from '@docusaurus/plugin-content-docs/client';
 import DocSidebarItem from '@theme/DocSidebarItem';
 import type { Props } from '@theme/DocSidebarItems';
-
-type LockedSibling = { label: string; badge?: string };
-
-// Module augmentation (not a local type alias) so `lockedSiblings` is part
-// of `Props` wherever `@theme/DocSidebarItems` is imported -- e.g.
-// DocSidebarItem/Category, which passes it through -- not just in this
-// file's own scope.
-declare module '@theme/DocSidebarItems' {
-  export interface Props {
-    lockedSiblings?: LockedSibling[];
-  }
-}
 
 import styles from './styles.module.css';
 
@@ -82,7 +66,7 @@ function inlineCategories(items: Props['items']): Props['items'] {
   });
 }
 
-function DocSidebarItems({ items, lockedSiblings, ...props }: Props): ReactNode {
+function DocSidebarItems({ items, ...props }: Props): ReactNode {
   const flatItems = useMemo(() => inlineCategories(items), [items]);
   const visibleItems = useVisibleSidebarItems(flatItems, props.activePath);
   return (
@@ -100,16 +84,6 @@ function DocSidebarItems({ items, lockedSiblings, ...props }: Props): ReactNode 
           </React.Fragment>
         );
       })}
-      {lockedSiblings?.map((sibling) => (
-        <li className="menu__list-item" key={sibling.label}>
-          <span className={styles.lockedLink} aria-disabled="true">
-            <span className={styles.lockedTextCol}>
-              <span className={styles.lockedLabel}>{sibling.label}</span>
-              {sibling.badge && <span className={styles.lockedBadge}>{sibling.badge}</span>}
-            </span>
-          </span>
-        </li>
-      ))}
     </DocSidebarItemsExpandedStateProvider>
   );
 }
