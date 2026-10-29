@@ -47,113 +47,232 @@ A working WSO2 Integrator environment.
 2. The WSO2 Integrator cloud editor opens in your browser. Add an artifact to your integration, then deploy it to WSO2 Cloud from the Deploy to WSO2 Cloud panel on the right.
 
    <ThemedImage
-    alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
-    sources={{
-        light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
-        dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
-    }}
-    />
+       alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
+       sources={{
+           light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
+           dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
+       }}
+   />
+
+:::info Note
+The cloud editor creates a default integration for you, so you don't need to name it now. You can change its name when you deploy it. For more information, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
+:::
 
 ## Step 2: Add an HTTP service
 
-1. Select your integration from the project overview canvas.
-2. Select **+ Add Artifact** in the design canvas.
-3. Select **HTTP Service** under **Integration as API**.
-4. Keep **Service Contract** as **Design From Scratch**.
-5. Set **Service Base Path** to `/hello`.
-6. Select **Create**.
+1. In the design view, click **Add Artifact manually**.
 
-<ThemedImage
-    alt="Selecting HTTP Service in the Add Artifact panel and setting the base path to /hello"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-api-integration/add-an-http-service.png'),
-        dark: useBaseUrl('/img/get-started/build-api-integration/add-an-http-service.png'),
-    }}
-/>
+   <ThemedImage
+       alt="Integration design view with the Add Artifact manually button highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/add-artifact.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/add-artifact.png'),
+       }}
+   />
+
+2. Select **HTTP Service** under **Integration as API**.
+
+   <ThemedImage
+       alt="Artifacts page with HTTP Service highlighted under Integration as API"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/select-http.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/select-http.png'),
+       }}
+   />
+
+3. Keep **Service Contract** as **Design From Scratch**.
+
+4. Set **Service Base Path** to `/hello`.
+
+5. Click **Create**.
+
+   <ThemedImage
+       alt="Create HTTP Service form with Service Base Path set to /hello"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/add-an-http-service.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/add-an-http-service.png'),
+       }}
+   />
 
 ## Step 3: Add a resource
 
-1. In the HTTP service design view, select **+ Add Resource**.
-2. Select **GET**.
-3. Set **Resource path** to `greeting`.
-4. Select **Save**.
+1. In the HTTP service design view, click **+ Add Resource**.
 
-<ThemedImage
-    alt="Adding a GET resource at the /greeting path in the HTTP service designer"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-api-integration/add-resource.png'),
-        dark: useBaseUrl('/img/get-started/build-api-integration/add-resource.png'),
-    }}
-/>
+2. Select **GET**.
+
+   <ThemedImage
+       alt="Select HTTP Method to Add panel with GET highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/select-get.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/select-get.png'),
+       }}
+   />
+
+3. Set **Resource path** to `greeting`.
+
+4. Click **Save**.
+
+   <ThemedImage
+       alt="New Resource Configuration panel with Resource Path set to greeting"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/add-resource.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/add-resource.png'),
+       }}
+   />
 
 ## Step 4: Connect to an external API
 
-1. Select **+** inside the resource flow.
-2. Select **Add Connection**.
-3. Select **HTTP**.
-4. Set **Url** to `https://apis.wso2.com/zvdz/mi-qsg/v1.0`.
-5. Set **Connection Name** to `externalApi`.
-6. Select **Save Connection**.
+1. Click **+** inside the resource flow.
 
-<ThemedImage
-    alt="Configuring an HTTP connection to the external API in the Add Connection panel"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-api-integration/add-connection.png'),
-        dark: useBaseUrl('/img/get-started/build-api-integration/add-connection.png'),
-    }}
-/>
+   <ThemedImage
+       alt="Resource flow with the add node button highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/select-plus.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/select-plus.png'),
+       }}
+   />
+
+2. Click **Add Connection** under **Connections**.
+
+   <ThemedImage
+       alt="Node panel with Add Connection highlighted under Connections"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/add-connection.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/add-connection.png'),
+       }}
+   />
+
+3. Select **HTTP** under **Pre-built Connectors**.
+
+   <ThemedImage
+       alt="Add Connection dialog with the HTTP connector highlighted under Pre-built Connectors"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/add-connection-http.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/add-connection-http.png'),
+       }}
+   />
+
+4. The **Connect to Third-Party service** form opens. Set **Url** to:
+
+   ```text
+   https://apis.wso2.com/zvdz/mi-qsg/v1.0
+   ```
+
+   <ThemedImage
+       alt="Connect to Third-Party service form with Url set"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/set-url.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/set-url.png'),
+       }}
+   />
+
+5. Scroll to the bottom of the form. Set **Connection Name** to `externalApi`.
+
+6. Click **Save Connection**.
+
+   <ThemedImage
+       alt="Connect to Third-Party service form with Connection Name set to externalApi"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/set-connection-name.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/set-connection-name.png'),
+       }}
+   />
 
 ## Step 5: Call the external API
 
-1. Select **+** inside the resource flow.
-2. Select **externalApi**.
-3. Select **Get**.
-4. Set **Path** to `/`.
-5. Set **Result** to `response`.
-6. Set **Target Type** to `json`.
-7. Select **Save**.
+1. Click **+** inside the resource flow.
 
-<ThemedImage
-    alt="Configuring the GET call on the externalApi connection with path / and result variable response"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-api-integration/invoke-connection.png'),
-        dark: useBaseUrl('/img/get-started/build-api-integration/invoke-connection.png'),
-    }}
-/>
+   <ThemedImage
+       alt="Resource flow with the add node button highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/select-plus-call-api.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/select-plus-call-api.png'),
+       }}
+   />
+
+2. Select **externalApi**.
+
+3. Select **Get**.
+
+   <ThemedImage
+       alt="Node panel with the externalApi connection and its Get action highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/select-externalapi.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/select-externalapi.png'),
+       }}
+   />
+
+4. Set **Path** to `/`.
+
+5. Set **Result** to `response`.
+
+6. Set **Target Type** to `json`.
+
+7. Click **Save**.
+
+   <ThemedImage
+       alt="externalApi get form with Path, Result, and Target Type set"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/invoke-connection.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/invoke-connection.png'),
+       }}
+   />
 
 ## Step 6: Return the response
 
-1. Select **+** inside the resource flow after the external API call node we just added.
-2. Select **Return**.
-3. Set **Expression** to `response`.
-4. Select **Save**.
+1. Click **+** inside the resource flow, below the external API call node you just added.
 
-<ThemedImage
-    alt="Adding a Return node with the expression set to response"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-api-integration/add-return-node.png'),
-        dark: useBaseUrl('/img/get-started/build-api-integration/add-return-node.png'),
-    }}
-/>
+   <ThemedImage
+       alt="Resource flow with the add node button highlighted after the http:get node"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/select-plus-after-call.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/select-plus-after-call.png'),
+       }}
+   />
+
+2. Select **Return** under **Control**.
+
+   <ThemedImage
+       alt="Node panel with Return highlighted under Control"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/select-return.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/select-return.png'),
+       }}
+   />
+
+3. In the **Expression** field, select `response` from the variables.
+
+4. Click **Save**.
+
+   <ThemedImage
+       alt="Return panel with Expression set to response"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/add-return-node.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/add-return-node.png'),
+       }}
+   />
 
 ## Step 7: Run and test
 
-1. Select **Run**.
-2. Select **Test** in the confirmation dialog.
-3. Select **Execute**.
+1. Click **Run**.
+
+2. Click **Test** in the confirmation dialog.
+
+3. Click **Execute**.
+
 4. Confirm the response shows `200 OK` with a `Hello World` body.
 
-<ThemedImage
-    alt="Running the integration and testing it with the Try It panel showing a 200 OK response"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-api-integration/run-and-test.gif'),
-        dark: useBaseUrl('/img/get-started/build-api-integration/run-and-test.gif'),
-    }}
-/>
+   <ThemedImage
+       alt="Running the integration and testing it with the Try It panel showing a 200 OK response"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/run-and-test.gif'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/run-and-test.gif'),
+       }}
+   />
 
 ## Step 8: Deploy to WSO2 Cloud
 
-Deploy your integration to WSO2 Cloud. Check [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
+To deploy your integration to WSO2 Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 
 <div class="skip-ahead-card">
 
