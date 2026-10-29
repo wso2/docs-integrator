@@ -44,6 +44,7 @@ WSO2 Cloud - Integration Platform is a managed cloud environment for running int
     <li>User groups and roles</li>
     <li>Organization- or project-level access</li>
     <li>Enterprise login with an external identity provider</li>
+    <li>User Portal for external users</li>
   </ul>
 
 ## Managed platform services
@@ -65,15 +66,15 @@ Managed backing services and resources your integrations can use.
     <li>Use them from your integrations</li>
   </ul>
 
-<PaletteCard icon="rag" href="/manage/rag-ingestion/vector-databases">
-  <h3 class="palette-card-title">RAG Ingestion</h3>
+<PaletteCard icon="rag" href="/manage/rag-ingestion/knowledge-bases">
+  <h3 class="palette-card-title">Managed AI Services</h3>
   <ul class="palette-card-list">
-    <li>Load documents into managed vector databases</li>
-    <li>Query them</li>
-    <li>Deploy the AI agents that consume them</li>
+    <li>Create and manage knowledge bases</li>
+    <li>Ingest and retrieve enterprise data</li>
+    <li>Connect integrations and AI agents</li>
   </ul>
 
-<PaletteCard icon="agents" href="/manage/voice-agents">
+<PaletteCard icon="agents" href="/manage/rag-ingestion/voice-agents">
   <h3 class="palette-card-title">Voice Agents (Preview)</h3>
   <ul class="palette-card-list">
     <li>Add voice to a deployed AI agent</li>

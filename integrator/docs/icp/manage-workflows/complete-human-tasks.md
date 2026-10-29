@@ -4,7 +4,7 @@ title: Complete Human Tasks
 
 # Complete Human Tasks
 
-When a durable workflow reaches a point only a person can settle, it suspends and puts the work on the **Human Tasks** page of the Integration Control Plane. Nothing is held open while it waits, so the work can sit there for minutes or for months, and the workflow resumes the moment someone decides it.
+When a durable workflow reaches a step that needs a person's decision, it suspends and adds the work to the **Human Tasks** page of the Integration Control Plane (ICP). Nothing is held open while the workflow waits, so the work can stay there for minutes or for months. The workflow continues as soon as someone completes the work.
 
 Two kinds of work arrive on that page:
 
@@ -27,7 +27,7 @@ Permissions and roles do different jobs. A permission decides whether you may op
 
 ## Find your tasks
 
-In the integration view, open **Human Tasks** in the sidebar and pick an environment. The page holds one queue of the work waiting on a person: human tasks and the review activities raised by gated or failed activities. Only the items applicable to you are listed.
+Open **Human Tasks** in the console sidebar and pick an environment. The page holds one queue of the work waiting on a person: human tasks and the review activities raised by gated or failed activities. Only the items applicable to you are listed.
 
 <ThemedImage
     alt="The Human Tasks page listing three pending items for one integration: a review failure, a human task, and an approval gate review"
@@ -41,7 +41,7 @@ In the integration view, open **Human Tasks** in the sidebar and pick an environ
 
 | Control | What it does |
 | --- | --- |
-| **Search by workflow ID** | Narrows the list to the items belonging to one workflow instance. |
+| **Search by workflow ID** | Narrows the list to the items belonging to one workflow execution. |
 | **Type** | **All**, **Tasks**, or **Reviews**. Shown only when you can see both kinds. |
 | **Status** | **Pending** when the page opens. Also **All**, **Completed**, **Failed**, **Canceled**, and **Terminated**. |
 | **Workflow Name** | Narrows to one workflow definition. |
@@ -58,10 +58,10 @@ Beside the filters, the refresh icon fetches immediately, and the **auto-refresh
 | Column | Description |
 | --- | --- |
 | **Task** | The item's title, with an icon for its kind. A review activity also carries a badge reading **Approval gate**, **Review failure**, or **Review**. A **Read-only** badge means you can see the item but hold no matching role to complete it. |
-| **Workflow Name** | The workflow definition the parent instance runs. |
-| **Integration** | The integration whose runtime owns the item, resolved from its task queue. Shown at project level when more than one integration is in scope. |
+| **Workflow Name** | The workflow the item belongs to, such as `orderWorkflow`. |
+| **Integration** | The name you registered in ICP that the item belongs to. Shown at project level when more than one integration is in scope. |
 | **Task ID** | The item's own identifier, which the management API and audit records use to name it. |
-| **Workflow ID** | The parent workflow instance waiting on this item. |
+| **Workflow ID** | The ID of the workflow execution waiting on this item. |
 | **Status** | Pending, Completed, Failed, Canceled, or Terminated. |
 | **Started** | When the item was created. |
 
@@ -72,10 +72,10 @@ Click a row to open it. A human task opens the form described in [Complete a hum
 | Status | Meaning |
 | --- | --- |
 | **Pending** | Waiting for someone to decide it. |
-| **Completed** | Someone decided it and the workflow resumed. A rejected review also completes; its failure is what travels to the workflow. |
+| **Completed** | Someone decided it and the workflow resumed. A rejected review is also listed as **Completed**, and the rejection is sent to the workflow as a failure. |
 | **Failed** | A human task that was failed through **Mark as Failed**, or that reached its deadline before anyone acted. |
-| **Canceled** | Retired without a decision, for example because the run it belonged to closed. |
-| **Terminated** | Ended without a decision when the underlying task or its run was terminated. |
+| **Canceled** | Retired without a decision, for example because the execution it belonged to ended. |
+| **Terminated** | Ended without a decision when the task or its execution was terminated. |
 
 Only a pending item can be decided. A completed, failed, canceled, or terminated item still opens, but it opens read-only, with its decision and result recorded instead of the action cards.
 
@@ -144,7 +144,7 @@ Keep result records small. Whatever the record declares is exactly what the pers
 
 **Mark as Failed** ends the task without a result. A **Reason** is required and is relayed to the workflow as the failure reason. The task is recorded as **Failed**, the failure is propagated to the workflow, and the workflow decides what happens next, for example by escalating to another role or by ending the process.
 
-Use it when the task cannot be answered at all. To answer with a rejection the workflow already expects, complete the task with the rejecting value instead, so the run follows its normal rejection path.
+Use it when the task cannot be answered at all. To answer with a rejection the workflow already expects, complete the task with the rejecting value instead, so the execution follows its normal rejection path.
 
 ## Decide a review activity
 
@@ -208,13 +208,13 @@ Because the activity has already run, the decisions read as a retry: **Proceed**
 
 ### Decide several reviews at once
 
-**Select reviews…** above the list turns on checkboxes for the pending reviews, and the banner reports how many can be selected. **Retry Selected** reruns each selected activity with its original arguments, and **Fail Selected** rejects them all with one optional feedback note. Each dialog confirms the count before anything is sent, and the result reports how many were applied, skipped, and errored.
+**Select reviews…** above the list turns on checkboxes for the pending reviews, and the banner reports how many can be selected. **Retry Selected** reruns each selected activity with its original arguments, and **Fail Selected** rejects them all with one optional feedback note. Each dialog confirms the count before anything is sent, and the result reports how many were applied, skipped, and failed.
 
 A bulk decision cannot edit arguments, so correct an input through **Proceed with Changes** on the review itself. Human tasks are never selectable here, because each one is completed through its own form.
 
 ## Administer a task
 
-Completing a task and administering it are separate jobs. The **Eligible Roles** decide the task; the **Administrators** decide who gets to decide it, and how long they have. Both are named when the work is created, and both are shown on the item: the **Task** card carries an **Administrators** row on a human task, and the **Activity** card carries one on a review activity, reading **Not provided** when the work names no administrator.
+Completing a task and administering it are separate jobs. Users with one of the **Eligible Roles** complete the task. Users with one of the **Administrators** roles control who can complete it and by when. Both are named when the work is created, and both are shown on the item: the **Task** card carries an **Administrators** row on a human task, and the **Activity** card carries one on a review activity, reading **Not provided** when the work names no administrator.
 
 When you hold one of those administrator roles, a pending item carries an **Administer** card below **Actions** (**Decisions** on a review activity), reading *You administer this task. Each action below is recorded in its history under your name.* It offers **Reassign** and **Change Deadline**.
 
@@ -225,7 +225,7 @@ The **Administer** card reaches you only when you hold an ICP role whose name ma
 
 ### Reassign
 
-**Reassign** hands the task to a new audience. The form opens pre-filled with the audience the task currently carries, so an unedited field keeps what it had.
+**Reassign** changes who can complete the task. The form opens with the task's current roles and users filled in, so any field you leave unchanged keeps its value.
 
 <ThemedImage
     alt="The Administer card on the Validate Order task with Reassign selected, showing the Roles, Users, Excluded roles, and Excluded users boxes above the Reassign button"
@@ -239,8 +239,8 @@ The **Administer** card reaches you only when you hold an ICP role whose name ma
 | --- | --- |
 | **Roles** | One role name per line. Anyone holding one of these may complete the task. |
 | **Users** | One user ID per line, for handing the task to named people rather than to a role. |
-| **Excluded roles** | One role name per line, kept out of the audience. |
-| **Excluded users** | One user ID per line, kept out of the audience. |
+| **Excluded roles** | One role name per line. Users holding these roles cannot complete the task. |
+| **Excluded users** | One user ID per line. These users cannot complete the task. |
 
 The task needs at least one role or user, so you cannot reassign it to nobody. **Reassign** applies the new audience and **Cancel** closes the form without changing it.
 
@@ -258,13 +258,13 @@ The task needs at least one role or user, so you cannot reassign it to nobody. *
 
 Set **Days**, **Hours**, and **Minutes**, and **Extend** applies that span measured from now, not from when the task was created or from its existing deadline. **Clear deadline** removes the deadline instead, which leaves the task open until someone decides it. **Cancel** closes the form without changing anything.
 
-The deadline is the **Timeout** the workflow declared for the task. See [Bound the wait](../../develop-and-test/integration-artifacts/workflow/durable-workflow/await-human-task.md#bound-the-wait). A task that reaches it with nobody acting is recorded as **Failed**, and the waiting workflow is resumed with that error to handle. Extending the deadline is therefore how you keep a run alive when the person who has to answer cannot answer yet, and clearing it is how you take the time limit off a task altogether.
+The deadline is the **Timeout** the workflow declared for the task. See [Bound the wait](../../develop-and-test/integration-artifacts/workflow/durable-workflow/await-human-task.md#bound-the-wait). If nobody completes the task before the deadline, the task is recorded as **Failed**, and the workflow continues with that error to handle. Give the task more time when the assigned person needs it, or remove the deadline so the task stays open until someone completes it.
 
 ## What's next
 
 - [Await Human Task](../../develop-and-test/integration-artifacts/workflow/durable-workflow/await-human-task.md) — how a workflow creates tasks and types their results
 - [Error handling and review activities](../../develop-and-test/integration-artifacts/workflow/durable-workflow/review-activity-and-error-handling.md) — how a workflow declares approval gates and failure reviews
 - [Await data events](../../develop-and-test/integration-artifacts/workflow/durable-workflow/data-events.md) — wait for data from a system or a person instead of a decision
-- [Workflow executions](workflow-executions.md) — see where the waiting run is halted
+- [Workflow executions](workflow-executions.md) — see where the waiting execution has stopped
 - [Workflow permissions](workflow-permissions.md) — the permissions behind each view and action
 - [Management API](../../develop-and-test/integration-artifacts/workflow/durable-workflow/management-api.md) — complete tasks and decide reviews programmatically

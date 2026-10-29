@@ -82,28 +82,6 @@ Creating the agent is also where you describe it: the model it thinks with, its 
     }}
 />
 
-```ballerina
-import ballerina/ai;
-import ballerina/workflow;
-
-type ExpenseClaim record {|
-    string claimId;
-    decimal amount;
-|};
-
-final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
-final workflow:DurableAgent claimAgent = check new ({
-    systemPrompt: {
-        role: string `Expense claim assistant`,
-        instructions: string `Process expense claims end to end. Validate each claim with validateClaim first and
-        reject invalid claims with a clear reason. When a claim is valid, pay it with payClaim
-        using the claimed amount. Finish with a one-line summary of the outcome.`
-    },
-    model: wso2ModelProvider,
-    inputType: ExpenseClaim
-});
-```
-
 ## Step 3: Attach the agent activities
 
 Activities are the units of work the agent can call. Each one runs durably — completed work is never lost or repeated, even across restarts.
@@ -127,34 +105,6 @@ Activities are the units of work the agent can call. Each one runs durably — c
 
 `validateClaim` joins the agent node as a capability and appears under **Workflow Activities** in the left sidebar.
 
-`workflows.bal`:
-```ballerina
-import ballerina/ai;
-import ballerina/workflow;
-
-final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
-final workflow:DurableAgent claimAgent = check new ({
-    systemPrompt: {
-        role: string `Expense claim assistant`,
-        instructions: string `Process expense claims end to end. Validate each claim with validateClaim first and
-        reject invalid claims with a clear reason. When a claim is valid, pay it with payClaim
-        using the claimed amount. Finish with a one-line summary of the outcome.`
-    },
-    model: wso2ModelProvider,
-    inputType: ExpenseClaim,
-    activities: [validateClaim]
-});
-```
-
-`functions.bal`:
-```ballerina
-import ballerina/workflow;
-
-@workflow:Activity
-function validateClaim(ExpenseClaim expenseClaim) returns boolean|error {
-}
-```
-
 ### Define the claim validator body
 
 Creating the activity gives it a signature but an empty body. The activity is a function, so its flow returns the validation result. Make it return `true` only for positive claim amounts:
@@ -172,13 +122,6 @@ Creating the activity gives it a signature but an empty body. The activity is a 
         dark: useBaseUrl('/img/workflows/getting-started/build-a-claim-workflow-agent/validate-claim-body.gif'),
     }}
 />
-
-```ballerina
-@workflow:Activity
-function validateClaim(ExpenseClaim expenseClaim) returns boolean|error {
-    return expenseClaim.amount > 0d;
-}
-```
 
 ### Add the payment activity
 
@@ -203,35 +146,6 @@ Paying out is the risky step, so gate it behind a person. The activity is create
 />
 
 `payClaim` joins the agent node beside `validateClaim`, drawn with a badge marking it as gated. The agent can now propose a payment, but it cannot release one on its own.
-
-`workflows.bal`:
-```ballerina
-import ballerina/ai;
-import ballerina/workflow;
-
-final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
-final workflow:DurableAgent claimAgent = check new ({
-    systemPrompt: {
-        role: string `Expense claim assistant`,
-        instructions: string `Process expense claims end to end. Validate each claim with validateClaim first and
-        reject invalid claims with a clear reason. When a claim is valid, pay it with payClaim
-        using the claimed amount. Finish with a one-line summary of the outcome.`
-    },
-    model: wso2ModelProvider,
-    inputType: ExpenseClaim,
-    activities: [validateClaim,
-                {activity: payClaim, approvalPolicy: {userRoles: "Finance"}}]
-});
-```
-
-`functions.bal`:
-```ballerina
-import ballerina/workflow;
-
-@workflow:Activity
-function payClaim(ExpenseClaim expenseClaim) returns error? {
-}
-```
 
 ## Step 4: Start the agent from a service
 
@@ -259,27 +173,8 @@ The resource now starts an agent run for every claim it receives and answers wit
     }}
 />
 
-`main.bal`:
-```ballerina
-import ballerina/http;
-
-listener http:Listener httpDefaultListener = http:getDefaultListener();
-
-service / on httpDefaultListener {
-    resource function post claim(@http:Payload ExpenseClaim payload) returns json|error {
-        do {
-            string instanceId = check claimAgent.run("Process Claim", payload);
-            return instanceId;
-        } on fail error err {
-            // handle error
-            return error("unhandled error", err);
-        }
-    }
-}
-```
-
 :::info Hold on to the instance ID
-`run` starts the agent and returns immediately with its instance ID. It does not wait for the claim to finish, which is the point: the run may sit on the `payClaim` approval for days. Return the ID to the caller, because it is what addresses this run later.
+**Run Durable Agent** starts the agent and returns immediately with its instance ID. It does not wait for the claim to finish, which is the point: the run may sit on the `payClaim` approval for days. Return the ID to the caller, because it is what addresses this run later.
 
 ## Step 5: Start the local ICP server
 
@@ -472,6 +367,81 @@ The claim with ID 2002 has been processed and paid successfully.
 />
 
 The timeline is green end to end, and it shows where the time went: the thinking turns and `validateClaim` took seconds, `payClaim` ran in milliseconds once released, and `review-payClaim` accounts for almost the entire run. For most of the run, nobody was working on the claim. It was waiting for a person, and it lost nothing by waiting.
+
+## Source code
+
+<details>
+<summary>View the generated Ballerina code</summary>
+
+**Types** (`types.bal`)
+
+```ballerina
+type ExpenseClaim record {|
+    string claimId;
+    decimal amount;
+|};
+```
+
+**Durable agent** (`workflows.bal`)
+
+```ballerina
+import ballerina/ai;
+import ballerina/workflow;
+
+final ai:Wso2ModelProvider wso2ModelProvider = check ai:getDefaultModelProvider();
+final workflow:DurableAgent claimAgent = check new ({
+    systemPrompt: {
+        role: string `Expense claim assistant`,
+        instructions: string `Process expense claims end to end. Validate each claim with validateClaim first and
+        reject invalid claims with a clear reason. When a claim is valid, pay it with payClaim
+        using the claimed amount. Finish with a one-line summary of the outcome.`
+    },
+    model: wso2ModelProvider,
+    inputType: ExpenseClaim,
+    activities: [validateClaim,
+                {activity: payClaim, approvalPolicy: {userRoles: "Finance"}}]
+});
+```
+
+**Activities** (`functions.bal`)
+
+```ballerina
+import ballerina/workflow;
+
+@workflow:Activity
+function validateClaim(ExpenseClaim expenseClaim) returns boolean|error {
+    return expenseClaim.amount > 0d;
+}
+
+@workflow:Activity
+function payClaim(ExpenseClaim expenseClaim) returns error? {
+}
+```
+
+**HTTP service** (`main.bal`)
+
+The `wso2/icp.runtime.bridge` import is added when you enable ICP monitoring in Step 5.
+
+```ballerina
+import ballerina/http;
+import wso2/icp.runtime.bridge as _;
+
+listener http:Listener httpDefaultListener = http:getDefaultListener();
+
+service / on httpDefaultListener {
+    resource function post claim(@http:Payload ExpenseClaim payload) returns json|error {
+        do {
+            string instanceId = check claimAgent.run("Process Claim", payload);
+            return instanceId;
+        } on fail error err {
+            // handle error
+            return error("unhandled error", err);
+        }
+    }
+}
+```
+
+</details>
 
 ## Next steps
 
