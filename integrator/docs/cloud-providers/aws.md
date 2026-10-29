@@ -4,33 +4,33 @@ title: WSO2 Integrator on AWS
 
 # WSO2 Integrator on AWS
 
-WSO2 Integrator has native support for Amazon Web Services ([AWS](https://aws.amazon.com/)). Connect to AWS services, add AI
-with Amazon Bedrock, run your integrations on AWS, keep them secure
-without storing access keys, and observe how they're running. This page covers
-everything in one place, in the order you'll need it.
+WSO2 Integrator provides support for building, deploying, securing, and observing integrations on Amazon Web Services ([AWS](https://aws.amazon.com/)). You can connect to AWS services, use Amazon Bedrock for AI capabilities, deploy integrations on AWS compute services, securely access AWS resources using IAM roles, and monitor integrations using AWS observability services.
+This page provides an overview of the capabilities and resources available for using WSO2 Integrator with AWS.
 
 <ThemedImage
     alt="Architecture diagram: an event in AWS (SQS or Lambda) triggers WSO2 Integrator, which runs on ECS, EKS, EC2 or Lambda, optionally calls Amazon Bedrock for AI, and talks to AWS services like S3, DynamoDB, SNS, SES and Redshift -- secured by IAM roles and watched with CloudWatch, X-Ray and Prometheus."
     sources={{
-        light: useBaseUrl('/img/aws/architecture-light.png'),
-        dark: useBaseUrl('/img/aws/architecture-dark.png'),
+        light: useBaseUrl('/img/aws/architecture-light-v5.1.png'),
+        dark: useBaseUrl('/img/aws/architecture-dark-v5.1.png'),
     }}
 />
 
 ## [New to AWS?](https://docs.aws.amazon.com/)
 
+Here are four AWS concepts you'll see throughout this guide
+
 <PaletteGrid cols={2}>
-  <PaletteCard icon="deploy-run" href="https://docs.aws.amazon.com/AmazonECS/latest/userguide/what-is-fargate.html">
-    <h3 class="palette-card-title">Fargate</h3>
-    <p class="palette-card-desc">A serverless compute engine for containers - no EC2 instances to manage, used by the recommended ECS deployment below.</p>
+  <PaletteCard icon="deploy-run" href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html">
+    <h3 class="palette-card-title">ECS</h3>
+    <p class="palette-card-desc">A fully managed container orchestration service for running your integration, used by the recommended deployment below.</p>
 
   <PaletteCard icon="security" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">
     <h3 class="palette-card-title">IAM role</h3>
     <p class="palette-card-desc">An identity AWS gives your integration, so it can use AWS without access keys in your code.</p>
 
-  <PaletteCard icon="cloud" href="https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html">
-    <h3 class="palette-card-title">Region</h3>
-    <p class="palette-card-desc">The AWS location where your services run, for example <code>us-east-1</code>.</p>
+  <PaletteCard icon="connections" href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">
+    <h3 class="palette-card-title">VPC</h3>
+    <p class="palette-card-desc">An isolated virtual network within AWS where you run and connect your resources.</p>
 
   <PaletteCard icon="ai" href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html">
     <h3 class="palette-card-title">Amazon Bedrock</h3>
@@ -128,7 +128,7 @@ Most teams start with a connector.
 
 
 
-### Add AI with Amazon Bedrock {#ai}
+###  Build AI applications with Amazon Bedrock {#ai}
 
 Use AI models hosted on AWS, so your data stays in your AWS account.
 
@@ -168,7 +168,7 @@ Use AI models hosted on AWS, so your data stays in your AWS account.
 
 
 
-### AI Assistance with Amazon Bedrock
+### Use Amazon Bedrock for AI-assisted development
 
 Bedrock also powers AI features built into WSO2 Integrator itself.
 
@@ -367,13 +367,17 @@ runs. See [Access AWS services securely](/deploy-and-run/secure/aws-access).
   </tbody>
 </table>
 
-[Browse the full AWS connector catalog &rarr;](product://connectors/catalog)
-
 ## What's next?
 
+  {/* TODO: uncomment once a "Build your first AWS integration" guide exists
   <PaletteCard icon="book" href="/guides/business-use-cases" highlight standalone>
-    <h3 class="palette-card-title">Explore a business use case with AWS</h3>
-    <p class="palette-card-desc">See complete, end-to-end solutions built with WSO2 Integrator to understand AWS native support.</p>
+    <h3 class="palette-card-title">Build your first AWS integration</h3>
+    <p class="palette-card-desc">A complete, end-to-end guide to building your first integration with AWS services.</p>
+
+  */}
+  <PaletteCard icon="connections" href="product://connectors/catalog?vendor=Amazon" highlight standalone>
+    <h3 class="palette-card-title">Browse AWS connectors &rarr;</h3>
+    <p class="palette-card-desc">See every AWS connector available in WSO2 Integrator, from S3 and DynamoDB to SNS and SES.</p>
 
 
 </div>
