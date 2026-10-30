@@ -3,7 +3,7 @@ sidebar_position: 3
 title: Voice Agents
 description: Enable voice for an AI agent on WSO2 Cloud - Integration Platform by connecting it to LiveKit, a speech-to-text provider, and a text-to-speech provider.
 keywords: [wso2 integrator, wso2 cloud, voice agent, ai agent, livekit, speech to text, text to speech]
-slug: /manage/rag-ingestion/voice-agents
+slug: /manage/managed-ai-services/voice-agents
 ---
 
 import ThemedImage from '@theme/ThemedImage';

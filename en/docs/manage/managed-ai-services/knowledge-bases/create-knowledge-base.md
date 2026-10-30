@@ -4,7 +4,7 @@ sidebar_label: Create a Knowledge Base
 title: Create a Knowledge Base
 description: Create a managed Knowledge Base with a vector store, embedding model, chunking strategy, and optional data source in WSO2 Cloud.
 keywords: [wso2 integrator, wso2 cloud, create knowledge base, rag, vector store, embedding model, chunking, google drive, amazon s3]
-slug: /manage/rag-ingestion/create-knowledge-base
+slug: /manage/managed-ai-services/knowledge-bases/create-knowledge-base
 ---
 
 import ThemedImage from '@theme/ThemedImage';

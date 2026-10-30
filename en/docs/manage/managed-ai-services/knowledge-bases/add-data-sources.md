@@ -4,7 +4,7 @@ sidebar_label: Add Data Sources
 title: Add Data Sources
 description: Add Google Drive or Amazon S3 data sources to a Knowledge Base, configure one-time or scheduled ingestion, and monitor ingestion runs.
 keywords: [wso2 integrator, rag ingestion, knowledge base, data source, google drive, amazon s3, scheduled ingestion]
-slug: /manage/rag-ingestion/ingestion
+slug: /manage/managed-ai-services/knowledge-bases/add-data-sources
 ---
 
 import ThemedImage from '@theme/ThemedImage';

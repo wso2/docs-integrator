@@ -4,7 +4,7 @@ sidebar_label: Overview
 title: Knowledge Bases
 description: Understand managed Knowledge Bases, their resources, and how they support retrieval-augmented generation in WSO2 Cloud.
 keywords: [wso2 integrator, wso2 cloud, knowledge base, rag, vector store, embedding model, chunking, data source, kb service]
-slug: /manage/rag-ingestion/knowledge-bases
+slug: /manage/managed-ai-services/knowledge-bases
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -82,6 +82,6 @@ Use the **AI Services** > **Knowledge Base** page to view all Knowledge Bases in
 
 - [Create a Knowledge Base](./create-knowledge-base.md) and optionally attach its first data source.
 - [Manage a Knowledge Base](./manage-knowledge-base.md), its data sources, schedules, services, and retrieval settings.
-- [Add data sources](./ingestion.md) to ingest content from Google Drive or Amazon S3.
+- [Add data sources](./add-data-sources.md) to ingest content from Google Drive or Amazon S3.
 - [Review Vector Databases](../vector-databases.md) available to Knowledge Bases.
 - Open the Knowledge Base from WSO2 Integrator by selecting a **WSO2 Cloud Knowledge Base** connection. See [Connect to an existing WSO2 Cloud Knowledge Base](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/knowledge-bases.md#connect-to-an-existing-knowledge-base).
