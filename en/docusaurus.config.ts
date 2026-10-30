@@ -135,7 +135,11 @@ const config: Config = {
         },
         blog: false,
         theme: {
-          customCss: './src/css/custom.css',
+          // custom.css is wholesale-shared (sync-theme.yaml), overwritten in
+          // full on every sync from main -- product.css is this branch's own,
+          // never synced (see its own header comment). Keep page-specific or
+          // branch-specific CSS there, not in custom.css.
+          customCss: ['./src/css/custom.css', './src/css/product.css'],
         },
       } satisfies Preset.Options,
     ],

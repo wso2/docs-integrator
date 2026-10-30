@@ -1,0 +1,203 @@
+/* Per-branch CSS escape hatch -- the `src/theme-local/` equivalent for
+   stylesheets. `custom.css` is wholesale-shared (see sync-theme.yaml's
+   SHARED_PATHS): every sync run from `main` overwrites it in full, so
+   anything page-specific or branch-specific hand-edited into it gets
+   silently deleted the next time a sync lands. This file is deliberately
+   NOT in SHARED_PATHS -- registered alongside custom.css in this
+   branch's own docusaurus.config.ts (`theme.customCss`), it survives
+   every sync untouched.
+
+   Put a page's or branch's own styling here, never in custom.css. */
+
+/* ================================================================
+   CLOUD PROVIDERS -- "WSO2 Integrator on AWS" page
+   (docs/cloud-providers/aws.md)
+
+   The Build/AI/Deploy/Secure/Observe section icon badges, the "Start
+   here" 4-step strip, and the Connect/Add AI/AI Assistance vertical
+   sub-step rail used on that page. Same --wso2-accent-* tokens as the
+   rest of the site (light/dark aware), not raw hex. (No connecting
+   line on the part headers themselves -- that read too much like the
+   Steps component's own quickstart-step treatment, which these
+   sections aren't: a sequence to read in order, not steps to do.)
+
+   The icon badge and its `## heading` sit in a flex row (`.part-head`)
+   rather than the heading being a JSX prop/child of some wrapper
+   component: a literal `##`/`###` inside a plain <div> still becomes a
+   real heading node in the page's MDX AST (TOC extraction, the
+   #anchor, "On this page" active-state highlighting all keep
+   working), which it would NOT if the heading were instead rendered
+   BY a React component. The heading's own default top margin is
+   zeroed here so centering it against the 44px badge via
+   `align-items: center` isn't thrown off by that margin pushing it
+   down within the row.
+
+   Every selector below is scoped under this page's own `.aws-page`
+   wrapper (see aws.md) -- both because two of them override the
+   shared .palette-card component (and must not bleed into every other
+   PaletteCard sitewide: connector catalog, Editor Tour landing,
+   quickstarts, etc.) and because names like `.step-head`/`.sub-head`
+   are generic enough that an unrelated page could plausibly reuse them
+   for something else; unscoped, this page's layout rules would apply
+   there too.
+   ================================================================ */
+.aws-page .part-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+.aws-page .part-head h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.aws-page .part-icon-badge {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--wso2-accent-light);
+  border: 1px solid var(--wso2-accent);
+  color: var(--wso2-accent);
+}
+[data-theme='dark'] .aws-page .part-icon-badge {
+  background: var(--ifm-background-color);
+}
+
+/* Overrides the shared .palette-card component:
+   1. Drops .palette-card-title's usual divider -- this page's cards
+      already get a divider from the part/sub-steps rails, and a
+      second one directly under each card title read as redundant.
+   2. Pins each card's pill row to the card's own bottom edge instead
+      of letting it float right under a description of varying length,
+      so pill rows line up across a row of cards regardless of how
+      much text is above them. */
+.markdown .aws-page .palette-card-title {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.markdown .aws-page .palette-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.markdown .aws-page .palette-chip-row {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+/* "Start here" 4-step strip (Build/Deploy/Secure/Observe). */
+.aws-page .step-cols {
+  display: flex;
+  gap: 20px;
+  margin-top: 4px;
+}
+.aws-page .step-col {
+  flex: 1;
+  min-width: 0;
+}
+.aws-page .step-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.aws-page .step-num {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--wso2-accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+.aws-page .step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--wso2-accent);
+  opacity: 0.3;
+}
+.markdown .aws-page .step-title {
+  margin: 0 0 4px;
+  padding-top: 0;
+  border-top: none;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--wso2-heading-color);
+}
+.aws-page .step-title a {
+  color: inherit;
+  text-decoration: none;
+}
+.aws-page .step-title a:hover {
+  color: var(--wso2-accent-text);
+}
+.aws-page .step-desc {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--wso2-text-muted);
+}
+@media (max-width: 760px) {
+  .aws-page .step-cols {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+/* "Build for AWS" vertical sub-step rail -- Connect with AWS / Add AI
+   with Amazon Bedrock / AI Assistance with Amazon Bedrock. */
+.aws-page .sub-steps {
+  position: relative;
+  margin: 18px 0 4px;
+  padding-left: 22px;
+}
+.aws-page .sub-steps::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--wso2-accent);
+  opacity: 0.3;
+}
+.aws-page .sub-head {
+  position: relative;
+}
+.aws-page .sub-head::before {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wso2-accent);
+}
+
+/* AWS connectors table -- sized to its own content instead of Infima's
+   default full-width markdown table, since its rows are short category/
+   connector/use-case text, not prose. */
+.aws-page .aws-connectors-table {
+  width: auto;
+  max-width: 100%;
+}
+
+/* .skip-ahead-card hides PaletteCard's corner `icon` prop badge (see its
+   own comment in this file) -- correct for its original quickstart usage,
+   where that card already carries its own "AI" cue elsewhere, but wrong
+   here: the "Amazon ECS on Fargate" card has no other icon, so hiding it
+   left the card with no icon at all. Restore it for this page only. */
+.aws-page .skip-ahead-card .palette-card-icon {
+  display: block;
+}
