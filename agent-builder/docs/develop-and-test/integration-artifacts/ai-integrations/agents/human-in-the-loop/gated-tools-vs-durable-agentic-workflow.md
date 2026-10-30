@@ -4,7 +4,7 @@ title: Gated Tools vs Durable Agentic Workflow
 
 # Gated Tools vs Durable Agentic Workflow
 
-Gated tools and durable agentic workflows are two ways to keep a human in the loop: both let a person approve an AI agent's call before it runs. A [gated tool](gate-tools-for-approval.md) adds a yes-or-no approval to an agent you already have. A [durable agentic workflow](product://integrator/develop-and-test/integration-artifacts/workflow/durable-agentic-workflow) goes further: it can wait days for a decision, ask the person for input, and record who decided. Use the tables below to compare what each one covers and what each costs to set up.
+Gated tools and durable agentic workflows are two ways to keep a human in the loop: both let a person approve an AI agent's call before it runs. A [gated tool](gate-tools-for-approval.md) adds a yes-or-no approval to an agent you already have. A [durable agentic workflow](../../durable-agentic-workflow/durable-agentic-workflow.md) goes further: it can wait days for a decision, ask the person for input, and record who decided. Use the tables below to compare what each one covers and what each costs to set up.
 
 ## Capability comparison
 
