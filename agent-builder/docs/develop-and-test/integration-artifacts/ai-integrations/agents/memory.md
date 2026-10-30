@@ -231,7 +231,7 @@ The **Table Configuration** record contains the following fields:
 
 The store keys items by a `MemoryKey` partition key and a `MessageId` sort key. Session IDs beginning with `checkpoint#` are reserved for approval pause checkpoints and are rejected.
 
-The same store also persists paused runs for tools that require approval before they run. A durable store lets a pending approval survive a restart or be resolved by a different replica. For details, see [Gated Tools](gated-tools.md).
+The same store also persists paused runs for tools that require approval before they run. A durable store lets a pending approval survive a restart or be resolved by a different replica. For details, see [Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md).
 
 ## Overflow configuration
 
@@ -285,7 +285,7 @@ public type Memory distinct isolated object {
 };
 ```
 
-A custom `ai:ShortTermMemoryStore` must additionally implement four checkpoint methods that persist paused runs awaiting approval: `putCheckpoint`, `getCheckpoint`, `removeCheckpoint`, and `takeCheckpoint`. See [Gated Tools](gated-tools.md#make-pauses-survive-a-restart).
+A custom `ai:ShortTermMemoryStore` must additionally implement four checkpoint methods that persist paused runs awaiting approval: `putCheckpoint`, `getCheckpoint`, `removeCheckpoint`, and `takeCheckpoint`. See [Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md#make-pauses-survive-a-restart).
 
 The following example shows a minimal PostgreSQL-backed implementation.
 
@@ -351,6 +351,6 @@ The following table provides general recommendations for choosing a memory setup
 ## What's next
 
 - **[Identity & Access Management](identity-and-access-management.md)** — Secure agents, tools, and integrations with identity and access control.
-- **[Gated Tools](gated-tools.md)** — Pause the agent for approval before it runs a sensitive tool.
+- **[Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md)** — Pause the agent for approval before it runs a sensitive tool.
 - **[Observability](observability.md)** — See which tools the agent actually selects.
 - **[Evaluations](evaluations/evaluations.md)** — Learn how to prevent regressions in AI agent quality.

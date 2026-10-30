@@ -112,7 +112,7 @@ Use when the customer asks whether an order can be returned, or asks about the r
 |---|---|---|
 | **Tool Name** | Yes | A unique name for the tool. Defaults to the agent's name followed by `Tool`, such as `returnsPolicyAgentTool`. |
 | **Description** | No | What the tool does. The calling agent uses this to decide when to invoke it. Defaults to `Delegates a query to <agent>.` |
-| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the delegation. See [Gated Tools](../gated-tools.md). |
+| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the delegation. See [Gate Tools for Approval](../human-in-the-loop/gate-tools-for-approval.md). |
 | **Pass Agent Context** | No | Gives the sub-agent access to the calling agent's `ai:Context`. See [Sharing values with the sub-agent](#sharing-values-with-the-sub-agent). |
 | **OAuth Client Configuration** | No | Credentials the tool uses when calling external authorization servers. The fields are the same as for any other tool. See [Tools](../tools.md). |
 | **Result Type** | No | The type the tool returns to the calling agent. Defaults to `string`. See [What the sub-agent returns](#what-the-sub-agent-returns). |

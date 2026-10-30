@@ -522,6 +522,6 @@ ${payload.toJsonString()}`);
 
 ## What's next
 
-- [Gated tools or durable agentic workflow](../../develop-and-test/integration-artifacts/ai-integrations/agents/gated-tools-or-durable-agentic-workflow.md) — Choose between an agent with gated tools and a durable agent
-- [Gated tools](../../develop-and-test/integration-artifacts/ai-integrations/agents/gated-tools.md) — Pause a regular agent's tool calls for human approval in chat
+- [Gated tools vs durable agentic workflow](../../develop-and-test/integration-artifacts/ai-integrations/agents/human-in-the-loop/gated-tools-vs-durable-agentic-workflow.md) — Choose between an agent with gated tools and a durable agent
+- [Gate Tools for Approval](../../develop-and-test/integration-artifacts/ai-integrations/agents/human-in-the-loop/gate-tools-for-approval.md) — Pause a regular agent's tool calls for human approval in chat
 - [Build an AI agent](build-ai-agent.md) — Build a chat agent and test it in the built-in chat panel

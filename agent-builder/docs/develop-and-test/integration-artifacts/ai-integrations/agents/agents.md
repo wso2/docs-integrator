@@ -77,7 +77,7 @@ From the canvas, you can configure the following components of the agent:
 - **System prompt and agent behavior**: Click the **AI Agent** node to open the **Edit Agent** panel, where you can configure the agent's role, instructions, and advanced settings.
 - **Memory configuration**: Use **Add Memory** on the **AI Agent** node to configure conversational or persistent memory for the agent. For more information, see [Memory](memory.md).
 - **Tools**: Use **Add Tool** to add tools and MCP servers that the agent can call during execution. For more information, see [Tools](tools.md).
-- **Gated tools**: Mark a tool as requiring approval so the agent pauses and asks a person before it runs. For more information, see [Gated Tools](gated-tools.md).
+- **Gated tools (HITL)**: Mark a tool as requiring approval so the agent pauses and asks a person before it runs. For more information, see [Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md).
 - **Model provider configuration**: Click the model provider node (for example, **Default WSO2 Model Provider**) to choose the provider the agent uses, or create a new one. For more information, see [Model Providers](../ai-building-blocks/model-providers.md).
 
 The **Evaluations** and **Tracing: Off / On** buttons at the top right of the canvas open the agent's [evaluations](evaluations/evaluations.md) and turn [tracing](observability.md) on or off.
@@ -118,7 +118,7 @@ The chat reuses the same session across messages, so you can test memory-aware c
 - **[Agent Definitions](definitions/definitions.md)** - Build a reusable agent template and share it across projects.
 - **[Tools](tools.md)** - Add functions, connectors, and MCP servers to your agents.
 - **[Multi-Agent Systems](multi-agent/multi-agent.md)** - Delegate work from one agent to another.
-- **[Gated Tools](gated-tools.md)** - Pause a tool call for approval before it runs.
+- **[Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md)** - Pause a tool call for human-in-the-loop approval before it runs.
 - **[Memory](memory.md)** - Configure conversational and persistent memory.
 - **[Observability](observability.md)** - Monitor traces, logs, and execution details.
 - **[Identity & Access Management](identity-and-access-management.md)** - Secure agents and tools with identity and access control.

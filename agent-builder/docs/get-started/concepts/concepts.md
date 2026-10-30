@@ -105,7 +105,7 @@ An agent definition is a reusable agent configuration that can be shared and use
 
 ### Durable agent
 
-A durable agent runs as a workflow. It can wait days for a person or an event, and it resumes where it left off after a restart. Use a durable agent when a step must wait for human approval before it runs. You create one with **Add Agent** > **Create Durable Agent**. See [Gated Tools or Durable Agentic Workflow](../../develop-and-test/integration-artifacts/ai-integrations/agents/gated-tools-or-durable-agentic-workflow.md).
+A durable agent runs as a workflow. It can wait days for a person or an event, and it resumes where it left off after a restart. Use a durable agent when a step must wait for human approval before it runs. You create one with **Add Agent** > **Create Durable Agent**. See [Gated Tools vs Durable Agentic Workflow](../../develop-and-test/integration-artifacts/ai-integrations/agents/human-in-the-loop/gated-tools-vs-durable-agentic-workflow.md).
 
 ### Trigger
 

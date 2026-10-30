@@ -8,7 +8,7 @@ WSO2 Agent Builder lets you build AI agents and the agentic integrations around 
 
 <PaletteCard icon="agents" href="/develop-and-test/integration-artifacts/ai-integrations/agents">
   <h3 class="palette-card-title">AI Agents</h3>
-  <p class="palette-card-desc">Autonomous LLM-driven agents that reason over a system prompt, call tools, and keep memory across turns. Covers reusable definitions, multi-agent systems, gated tools, observability, and evaluations.</p>
+  <p class="palette-card-desc">Autonomous LLM-driven agents that reason over a system prompt, call tools, and keep memory across turns. Covers reusable definitions, multi-agent systems, human-in-the-loop approval with gated tools, observability, and evaluations.</p>
 
 <PaletteCard icon="ai-building-blocks" href="/develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks">
   <h3 class="palette-card-title">AI Building Blocks</h3>
