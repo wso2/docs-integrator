@@ -44,6 +44,7 @@ const WORKTREE_ROOT = path.join(tmpdir(), 'docs-integrator-worktrees');
 const SITES = {
   saas: { branch: 'saas', baseUrl: '/integration-platform/docs/saas/', mergeSubdir: 'integration-platform/docs/saas' },
   integrator: { branch: 'wso2-integrator', baseUrl: '/integration-platform/docs/integrator/', mergeSubdir: 'integration-platform/docs/integrator' },
+  'agent-builder': { branch: 'wso2-agent-builder', baseUrl: '/integration-platform/docs/agent-builder/', mergeSubdir: 'integration-platform/docs/agent-builder' },
   connectors: { branch: 'wso2-connectors', baseUrl: '/integration-platform/docs/connectors/', mergeSubdir: 'integration-platform/docs/connectors' },
 };
 

@@ -317,6 +317,14 @@ function FallbackIcon(): ReactNode {
   );
 }
 
+function CloudProvidersIcon(): ReactNode {
+  return (
+    <svg {...iconProps}>
+      <path d="M7 18a4.5 4.5 0 0 1-.5-8.97A5.5 5.5 0 0 1 17.2 7.3 4 4 0 0 1 17 18H7Z" />
+    </svg>
+  );
+}
+
 const ICONS_BY_LABEL: Record<string, () => ReactNode> = {
   'platform overview': PlatformOverviewIcon,
   // Bare "Overview" (wso2-connectors' flat top-level doc, not a category)
@@ -354,6 +362,7 @@ const ICONS_BY_LABEL: Record<string, () => ReactNode> = {
   'build a connector': BuildYourOwnIcon,
   'publish connector': PublishConnectorIcon,
   'setup guide': SetupGuideIcon,
+  'cloud providers': CloudProvidersIcon,
   actions: ActionsIcon,
   triggers: TriggersIcon,
   example: ExampleIcon,

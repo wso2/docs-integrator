@@ -30,13 +30,15 @@ const GROUP_PREVIEW_LIMIT = 4;
 const HEADING_LEVELS = ['lvl1', 'lvl2', 'lvl3', 'lvl4', 'lvl5', 'lvl6'] as const;
 
 /** 'all' applies no facet filter; every other key maps to the `product`
- * facet value the crawler stamps on each record. wso2-agent-builder
- * isn't listed yet (not live -- see MEMORY.md); add it with key
- * `agent-builder` and label `'AB'` once it is. */
+ * facet value the crawler stamps on each record -- must match the
+ * `product` facet the Algolia crawler config stamps on agent-builder's
+ * own records (dashboard-side, not in this repo) or this pill silently
+ * returns zero results instead of erroring. */
 const PRODUCTS: { key: string; label: string }[] = [
   { key: 'all', label: 'All products' },
   { key: 'saas', label: 'WSO2 Cloud' },
   { key: 'integrator', label: 'WSO2 Integrator' },
+  { key: 'agent-builder', label: 'Agent Builder' },
   { key: 'connectors', label: 'Connectors' },
 ];
 
