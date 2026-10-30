@@ -66,7 +66,7 @@ The panel provides the following fields for creating a tool:
 | **Parameters** | No | The inputs the agent supplies when invoking the tool. Select **+ Add Parameter** to add one, then set its **Type**, **Name**, and **Description**, and select **Add**. |
 | **Return Type** | No | The Ballerina type returned by the tool, such as `string`, `int`, `boolean`, or a record type from your project. |
 | **Description** (return) | No | A short description of the return value. |
-| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gated Tools](gated-tools.md). |
+| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md). |
 | **Advanced Configurations** | No | Additional settings that depend on the tool type. See [Advanced configuration](#advanced-configuration). |
 
 After you select **Create Tool**, WSO2 Agent Builder generates a stub function annotated with `@ai:AgentTool`. Implement the tool logic inside the generated function.
@@ -138,7 +138,7 @@ Selecting an action opens its tool configuration:
 | **Tool Name** | Yes | A unique name for the tool, prefilled from the action. |
 | **Description** | No | Explains what the tool does, prefilled from the connector definition. The agent uses this to decide when to invoke the tool. |
 | **Connection** | Yes | The connection this tool runs on. Select an existing one, or select **+ Create *Connector* Connection** to create one if none exists yet. |
-| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gated Tools](gated-tools.md). |
+| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md). |
 | **Inputs and Mapping** | No | The action's parameters and how they map to the tool's inputs, derived from the connector definition. |
 | **OAuth Client Configuration** | No | OAuth client settings, when the connection's authentication requires them. |
 | **Result Type** | No | The Ballerina type the tool returns, derived from the connector definition. |
@@ -189,7 +189,7 @@ Use **Search functions** to find a function by name across all three sections. S
 |---|---|---|
 | **Tool Name** | Yes | A unique name for the tool, prefilled from the function name. |
 | **Description** | No | Explains what the tool does, prefilled from the function's documentation when available. |
-| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gated Tools](gated-tools.md). |
+| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md). |
 | **Inputs and Mapping** | No | The function's parameters and how they map to the tool's inputs, derived from the function signature. |
 | **OAuth Client Configuration** | No | OAuth client settings, when the function needs them (for example a connector-derived function that calls an OAuth-protected endpoint). |
 | **Result Type** | No | The Ballerina type the tool returns, derived from the function's return type. |
@@ -289,7 +289,7 @@ Write the description for the LLM, not for a developer:
 - **Say when not to call it,** if other tools look similar. For example, "Don't use for refunds; use `refundOrder` instead."
 - **Describe each parameter's meaning and format,** such as "The order ID, a number like 1042." The agent fills arguments from these descriptions.
 - **Describe what the tool returns,** so the agent knows how to use the result.
-- **Mention side effects,** such as "Issues a real refund. It can't be undone." This also helps reviewers decide on [gated tools](gated-tools.md).
+- **Mention side effects,** such as "Issues a real refund. It can't be undone." This also helps reviewers decide on [gated tools](human-in-the-loop/gate-tools-for-approval.md).
 - **Use a clear tool name,** such as `getOrderStatus` rather than `getTool`. The name is also sent to the LLM.
 
 **Edit prefilled descriptions.** For **Use Connection** and **Use Function**, WSO2 Agent Builder prefills **Tool Name** and **Description** from the connector or function documentation. That text describes the API, not your use case. For example, the HTTP connector's **get** action is prefilled with "Retrieve a representation of a specified resource from an HTTP endpoint.", which doesn't tell the agent when to call it. Replace it before you select **Save Tool**. To change an existing tool, select its node and then **Configure**.
@@ -409,7 +409,7 @@ The tool's view shows its own flow: for a function- or connector-based tool, its
 | **Parameters** | No | Defines the input parameters used when invoking the tool. |
 | **Return Type** | No | Defines the type of value returned by the tool. |
 | **Return Description** | No | A description of the value returned by the tool. |
-| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gated Tools](gated-tools.md). |
+| **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md). |
 | **Advanced Configurations** | No | Additional settings that depend on the tool type. See [Advanced configuration](#advanced-configuration). |
 
 ### Advanced configuration

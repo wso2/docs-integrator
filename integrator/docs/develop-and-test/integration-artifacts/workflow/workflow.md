@@ -33,7 +33,7 @@ Both run on the same durable runtime, so an AI agent gets crash safety, human ta
 
 ## Getting started
 
-- **[Build an Order Processing Workflow](../../../get-started/quickstarts/build-order-processing.md):** Your first durable workflow — it reserves inventory, waits for a payment confirmation, and then confirms or cancels the order.
+- **[Build an Order Processing Workflow](../../../get-started/quickstarts/build-durable-workflow.md):** Your first durable workflow — it reserves inventory, waits for a payment confirmation, and then confirms or cancels the order.
 - **[Build a Claim Handling Durable Agent](../../../get-started/quickstarts/build-claim-handling-agent.md):** A durable agentic workflow — an agent that validates expense claims and pays them out only after a Finance reviewer approves.
 
 ## Develop workflows

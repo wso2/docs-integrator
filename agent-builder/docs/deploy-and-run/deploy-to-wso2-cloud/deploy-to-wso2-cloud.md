@@ -7,7 +7,7 @@ title: Deploy to WSO2 Cloud
 You can deploy your agents to WSO2 Cloud directly from WSO2 Agent Builder. WSO2 Cloud is a fully managed platform, so there's no infrastructure to set up. You can deploy a single agentic integration, or every agentic integration in a project at once.
 
 :::info Prerequisites
-- A project with at least one agentic integration that has something to run: an [agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent.md) with a trigger, or a [durable agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/gated-tools-or-durable-agentic-workflow.md). Until it has one, **Deploy to WSO2 Cloud** is unavailable and shows "No deployable integration found".
+- Your project must include at least one executable agentic integration, such as an [agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent.md) with a trigger or a [durable agent](../../develop-and-test/integration-artifacts/ai-integrations/durable-agentic-workflow/durable-agentic-workflow.md). Without one, the **Deploy to WSO2 Cloud** option is disabled and displays "No deployable integration found".
 
 ## Deploy an agentic integration
 
