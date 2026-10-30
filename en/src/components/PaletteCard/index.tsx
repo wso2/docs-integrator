@@ -85,7 +85,20 @@ export function PaletteCard({
     .join(' ');
 
   if (href) {
-    const external = !isInternalUrl(href);
+    // A `pathname://` href (what crossProductLinks.js rewrites a `product://`
+    // link to -- see that plugin's own comment) is a real site-relative path
+    // to a SIBLING product's separate build, not a foreign URL -- but
+    // `isInternalUrl`'s generic `hasProtocol` check flags its `pathname:`
+    // prefix as one anyway. Without this, such a link fell into the
+    // external branch below: a plain, un-prefixed `<a href="pathname://...">`
+    // that's both missing this site's baseUrl AND literally has the
+    // `pathname://` marker still in it -- a dead link either way. `Link`
+    // itself already knows how to unwrap `pathname://` into a real `<a>`
+    // with no client-side routing (the same escape hatch the navbar and
+    // MDXComponents/A use), so route it there instead, same as any other
+    // internal href.
+    const isCrossProductLink = href.startsWith('pathname://');
+    const external = !isInternalUrl(href) && !isCrossProductLink;
     // Internal hrefs MUST go through Link -- a plain <a href="/manage/..."> is
     // un-prefixed and only ever "worked" by accident while this site's own
     // baseUrl was "/"; now that it's "/integration-platform/docs/saas/" (and
@@ -97,7 +110,7 @@ export function PaletteCard({
     // Link is for same-site client-side routing only.
     if (!external) {
       return (
-        <Link className={className} to={href}>
+        <Link className={className} to={href} {...(isCrossProductLink && { autoAddBaseUrl: false })}>
           {content}
         </Link>
       );
@@ -120,8 +133,10 @@ export function PaletteChip({
   children: React.ReactNode;
 }): React.ReactElement {
   // Same internal-vs-external split as PaletteCard above, and for the same
-  // reason -- see that block's comment.
-  if (!isInternalUrl(href)) {
+  // reason -- see that block's comment, including the `pathname://`
+  // cross-product carve-out.
+  const isCrossProductLink = href.startsWith('pathname://');
+  if (!isInternalUrl(href) && !isCrossProductLink) {
     return (
       <a className="palette-chip" href={href} target="_blank" rel="noopener noreferrer">
         {children}
@@ -129,7 +144,7 @@ export function PaletteChip({
     );
   }
   return (
-    <Link className="palette-chip" to={href}>
+    <Link className="palette-chip" to={href} {...(isCrossProductLink && { autoAddBaseUrl: false })}>
       {children}
     </Link>
   );

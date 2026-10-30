@@ -1,13 +1,15 @@
 # Contributing to docs-integrator
 
-This repo publishes three products from three branches onto one merged
-site (`/integration-platform/docs/`, `/integrator/`, `/connectors/`):
+This repo publishes four products from four branches onto one merged
+site (`/integration-platform/docs/`, `/integrator/`, `/connectors/`,
+`/agent-builder/`):
 
 | Branch | Product | Versioned? |
 |---|---|---|
 | `saas` | WSO2 Cloud | No |
 | `wso2-integrator` | WSO2 Integrator (self-hosted) | Yes |
 | `wso2-connectors` | Connectors catalog | No |
+| `wso2-agent-builder` | WSO2 Agent Builder | No |
 
 (`main` isn't a product branch — see [MAINTENANCE.md](MAINTENANCE.md)
 for what it's for and how a change actually reaches production.)

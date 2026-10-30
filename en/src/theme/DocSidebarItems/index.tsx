@@ -23,6 +23,10 @@
  * whose pages should sit directly under a section label instead of inside a
  * group -- the folder (and so every slug and relative link) stays as it is.
  *
+ * A `lockedSiblings` prop (see DocSidebarItem/Category) renders extra rows
+ * after the real items -- plain, non-navigating `<span>`s with an optional
+ * badge pill, for "coming soon" entries with no doc file of their own.
+ *
  * Original: node_modules/@docusaurus/theme-classic/lib/theme/DocSidebarItems/index.js
  * Keep this file in sync if you bump the @docusaurus/theme-classic major version.
  */
@@ -48,6 +52,18 @@ function customPropsOf(item: SidebarItem): Record<string, unknown> | undefined {
   return (item as { customProps?: Record<string, unknown> }).customProps;
 }
 
+type LockedSibling = { label: string; badge?: string };
+
+// Module augmentation (not a local type alias) so `lockedSiblings` is part
+// of `Props` wherever `@theme/DocSidebarItems` is imported -- e.g.
+// DocSidebarItem/Category, which passes it through -- not just in this
+// file's own scope.
+declare module '@theme/DocSidebarItems' {
+  export interface Props {
+    lockedSiblings?: LockedSibling[];
+  }
+}
+
 /** Replaces each `inline` category with its children (see header comment). */
 function inlineCategories(items: Props['items']): Props['items'] {
   return items.flatMap((item): SidebarItem[] => {
@@ -66,7 +82,7 @@ function inlineCategories(items: Props['items']): Props['items'] {
   });
 }
 
-function DocSidebarItems({ items, ...props }: Props): ReactNode {
+function DocSidebarItems({ items, lockedSiblings, ...props }: Props): ReactNode {
   const flatItems = useMemo(() => inlineCategories(items), [items]);
   const visibleItems = useVisibleSidebarItems(flatItems, props.activePath);
   return (
@@ -84,6 +100,16 @@ function DocSidebarItems({ items, ...props }: Props): ReactNode {
           </React.Fragment>
         );
       })}
+      {lockedSiblings?.map((sibling) => (
+        <li className="menu__list-item" key={sibling.label}>
+          <span className={styles.lockedLink} aria-disabled="true">
+            <span className={styles.lockedTextCol}>
+              <span className={styles.lockedLabel}>{sibling.label}</span>
+              {sibling.badge && <span className={styles.lockedBadge}>{sibling.badge}</span>}
+            </span>
+          </span>
+        </li>
+      ))}
     </DocSidebarItemsExpandedStateProvider>
   );
 }

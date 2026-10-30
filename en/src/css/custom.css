@@ -2211,15 +2211,35 @@ li .tabs-container [role="tabpanel"] .theme-code-block {
    usual disclosure convention. `mask` (not a plain <img>/background)
    so it tints with `background-color` and follows the theme/hover
    colour changes for free. */
+/* position/top/left reset -- Docusaurus's own (un-swizzled) Details
+   component ships its own `summary::before` triangle at
+   `position: absolute; top: 0.45rem; left: 0` (see @docusaurus/
+   theme-common's Details/styles.module.css). That rule and this one
+   have matching specificity, so the cascade resolves them PROPERTY BY
+   PROPERTY rather than one rule fully winning: this rule's `content`/
+   `mask`/colour applied, but Docusaurus's `position: absolute; left: 0`
+   also applied, which pulled the chevron out of this row's flex layout
+   (margin-right/gap no longer apply to an absolutely-positioned
+   element) and pinned it at the text's left edge -- overlapping
+   "View the generated code" instead of sitting beside it. */
 .markdown details > summary::before {
   content: '';
+  position: static;
+  top: auto;
+  left: auto;
   flex: none;
-  width: 16px;
-  height: 16px;
-  margin-right: 4px;
+  /* Bigger + a bolder stroke (2.6 vs. the SVG's usual 1.8 elsewhere on
+     the site) specifically here -- this is the one icon on the page
+     that's ALSO the click target's only visual affordance (the whole
+     summary row has no button chrome otherwise), so it should read as
+     "clickable" at a glance more than a purely decorative icon needs to. */
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
   background-color: var(--wso2-accent-text);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+  border: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
   transition: transform 0.2s ease;
 }
 

@@ -24,6 +24,17 @@
  *
  * Walks the tree by hand (no unist-util-visit) so it works without adding
  * a dependency or caring about CJS/ESM interop.
+ *
+ * Also rewrites `href="product://..."` on an MDX JSX element (e.g.
+ * `<PaletteCard href="product://connectors/catalog">`) -- those attribute
+ * values live on `mdxJsxFlowElement`/`mdxJsxTextElement` nodes, not on a
+ * `link`/`definition` node the way a markdown `[text](product://...)` link
+ * does, so the plain `node.url` check above never saw them. Left
+ * unrewritten, PaletteCard/PaletteChip's own `isInternalUrl` check (which
+ * flags ANY `word:` prefix as a foreign protocol, not just http(s)) treats
+ * `product:` as external and renders a plain `<a href="product://...">`
+ * straight to the browser -- a dead link, since `product:` isn't a
+ * registered URL scheme.
  */
 const PREFIX = 'product://';
 
@@ -36,6 +47,13 @@ function rewrite(url, base) {
 function walk(node, base) {
   if ((node.type === 'link' || node.type === 'definition') && node.url) {
     node.url = rewrite(node.url, base);
+  }
+  if (node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') {
+    (node.attributes || []).forEach((attr) => {
+      if (attr.type === 'mdxJsxAttribute' && attr.name === 'href') {
+        attr.value = rewrite(attr.value, base);
+      }
+    });
   }
   if (Array.isArray(node.children)) {
     node.children.forEach((child) => walk(child, base));
