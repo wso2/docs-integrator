@@ -45,6 +45,7 @@ const ISSUE_CHOOSER_URLS: Record<ProductKey, string> = {
   cloud: 'https://github.com/wso2/product-integrator/issues/new/choose',
   integrator: 'https://github.com/wso2/product-integrator/issues/new/choose',
   connectors: 'https://github.com/wso2/product-integrator/issues/new/choose',
+  agentBuilder: 'https://github.com/wso2/product-integrator/issues/new/choose',
 };
 
 /** Exported for DocFeedback's own "Report an issue" link -- same product

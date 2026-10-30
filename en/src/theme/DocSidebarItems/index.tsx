@@ -16,16 +16,16 @@
  * still does 100% of the ordering (via each item's own `position`); this
  * only adds a label, it never overrides structure or order.
  *
- * A `lockedSiblings` prop (see DocSidebarItem/Category) renders extra rows
- * after the real items -- plain, non-navigating `<span>`s with an optional
- * badge pill, for "coming soon" entries with no doc file of their own.
- *
  * A category can also be rendered "inline" (`customProps.inline: true` in its
  * _category_.json): it isn't drawn as a collapsible group; its children take
  * its place, at the same level as its siblings, with the category's own
  * `separatorBefore` label (if any) above the first one. Use it for a section
  * whose pages should sit directly under a section label instead of inside a
  * group -- the folder (and so every slug and relative link) stays as it is.
+ *
+ * A `lockedSiblings` prop (see DocSidebarItem/Category) renders extra rows
+ * after the real items -- plain, non-navigating `<span>`s with an optional
+ * badge pill, for "coming soon" entries with no doc file of their own.
  *
  * Original: node_modules/@docusaurus/theme-classic/lib/theme/DocSidebarItems/index.js
  * Keep this file in sync if you bump the @docusaurus/theme-classic major version.
@@ -37,18 +37,6 @@ import {
 } from '@docusaurus/plugin-content-docs/client';
 import DocSidebarItem from '@theme/DocSidebarItem';
 import type { Props } from '@theme/DocSidebarItems';
-
-type LockedSibling = { label: string; badge?: string };
-
-// Module augmentation (not a local type alias) so `lockedSiblings` is part
-// of `Props` wherever `@theme/DocSidebarItems` is imported -- e.g.
-// DocSidebarItem/Category, which passes it through -- not just in this
-// file's own scope.
-declare module '@theme/DocSidebarItems' {
-  export interface Props {
-    lockedSiblings?: LockedSibling[];
-  }
-}
 
 import styles from './styles.module.css';
 
@@ -62,6 +50,18 @@ type SidebarItem = Props['items'][number];
 
 function customPropsOf(item: SidebarItem): Record<string, unknown> | undefined {
   return (item as { customProps?: Record<string, unknown> }).customProps;
+}
+
+type LockedSibling = { label: string; badge?: string };
+
+// Module augmentation (not a local type alias) so `lockedSiblings` is part
+// of `Props` wherever `@theme/DocSidebarItems` is imported -- e.g.
+// DocSidebarItem/Category, which passes it through -- not just in this
+// file's own scope.
+declare module '@theme/DocSidebarItems' {
+  export interface Props {
+    lockedSiblings?: LockedSibling[];
+  }
 }
 
 /** Replaces each `inline` category with its children (see header comment). */

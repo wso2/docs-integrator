@@ -13,7 +13,7 @@ import {
 
 import styles from './styles.module.css';
 
-export type ProductKey = 'cloud' | 'integrator' | 'connectors';
+export type ProductKey = 'cloud' | 'integrator' | 'agentBuilder' | 'connectors';
 
 /**
  * The header's product + version switcher: one 320px segmented control
@@ -53,6 +53,12 @@ const PRODUCTS: Record<ProductKey, { label: string; path: string; icon: () => Re
     icon: PulseIcon,
     tone: 'iconIntegrator',
   },
+  agentBuilder: {
+    label: 'WSO2 Agent Builder',
+    path: 'agent-builder/',
+    icon: PulseIcon,
+    tone: 'iconAgent',
+  },
   connectors: {
     label: 'WSO2 Connectors',
     path: 'connectors/catalog',
@@ -63,9 +69,17 @@ const PRODUCTS: Record<ProductKey, { label: string; path: string; icon: () => Re
 
 const DEFAULT_CROSS_PRODUCT_BASE = '/integration-platform/docs/';
 
-/** Row order in the panel; connectors sits below a divider (and Agent
- * Manager's "coming soon" row) as a supporting product. */
-const PRODUCT_ORDER: ProductKey[] = ['cloud', 'integrator', 'connectors'];
+/** Row order in the panel; connectors sits below a divider as a
+ * supporting product, catalog rather than a product of its own. */
+const PRODUCT_ORDER: ProductKey[] = ['cloud', 'integrator', 'agentBuilder', 'connectors'];
+
+/** Products whose docs are versioned -- a non-current row for one of these
+ * gets a static "Latest" version half instead of a plain link (see the
+ * `staticLatest` comment below for why it's static rather than that
+ * product's real active version: a sibling product's version list isn't
+ * available from here). `cloud` and `connectors` have no version switcher
+ * of their own, so they're never in this list. */
+const VERSIONED_PRODUCTS: ProductKey[] = ['integrator', 'agentBuilder'];
 
 /** Detects which of the three sites this build is, from its own baseUrl
  * -- no per-branch config needed, so this file can be byte-identical
@@ -75,6 +89,7 @@ const PRODUCT_ORDER: ProductKey[] = ['cloud', 'integrator', 'connectors'];
  * "which product is this" logic in exactly one place. */
 export function detectCurrentProduct(baseUrl: string): ProductKey {
   if (baseUrl.includes('/integrator/')) return 'integrator';
+  if (baseUrl.includes('/agent-builder/')) return 'agentBuilder';
   if (baseUrl.includes('/connectors/')) return 'connectors';
   if (baseUrl.includes('/saas/')) return 'cloud';
   // Fallback for a local/dev build with baseUrl '/' (no product segment
@@ -155,7 +170,8 @@ function BackIcon(): ReactNode {
  * `currentColor` the way an inline <svg> can, so this always renders in
  * the source file's own fixed brand orange regardless of which
  * product's row it's in -- intentional, not a limitation to work
- * around: the mark itself stays the same real logo everywhere. */
+ * around: the mark itself stays the same real logo everywhere, Agent
+ * Builder included now that it's live. */
 function PulseIcon(): ReactNode {
   const src = useBaseUrl('/img/favicon.svg');
   return <img src={src} alt="" width={26} height={26} aria-hidden="true" />;
@@ -342,10 +358,11 @@ function Switcher({ model, compact }: { model: VersionModel | null; compact: boo
               const isCurrent = key === current;
               // The current product's row carries the site's version half
               // (a button that opens step 2, not an inline list); a
-              // different integrator row shows a static "Latest" half
-              // (that site's version list isn't available from here).
+              // different versioned product's row shows a static "Latest"
+              // half instead (that site's version list isn't available
+              // from here).
               const rowVersioned = isCurrent && versioned;
-              const staticLatest = !isCurrent && key === 'integrator';
+              const staticLatest = !isCurrent && VERSIONED_PRODUCTS.includes(key);
 
               const nameContent = (
                 <>
@@ -362,22 +379,7 @@ function Switcher({ model, compact }: { model: VersionModel | null; compact: boo
 
               return (
                 <div key={key} className={styles.rowGroup}>
-                  {key === 'connectors' && (
-                    <>
-                      {/* Future product: shown, not clickable. */}
-                      <div aria-disabled="true" className={clsx(styles.row, styles.rowDisabled)}>
-                        <span className={clsx(styles.rowName, styles.rowNameHalf, styles.rowNameStatic)}>
-                          <span className={clsx(styles.badge, styles.iconAgent)}>
-                            <PulseIcon />
-                          </span>
-                          WSO2 Agent Builder
-                        </span>
-                        <span className={clsx(styles.segDivider, styles.segDividerSoft)} />
-                        <span className={styles.rowSoon}>Coming soon</span>
-                      </div>
-                      <span aria-hidden="true" className={styles.rule} />
-                    </>
-                  )}
+                  {key === 'connectors' && <span aria-hidden="true" className={styles.rule} />}
                   <div className={clsx(styles.row, isCurrent && styles.rowCurrent)}>
                     {isCurrent ? (
                       <Link

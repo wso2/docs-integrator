@@ -309,18 +309,18 @@ function ToolsIcon(): ReactNode {
   );
 }
 
-function CloudProvidersIcon(): ReactNode {
-  return (
-    <svg {...iconProps}>
-      <path d="M7 18a4.5 4.5 0 0 1-.5-8.97A5.5 5.5 0 0 1 17.2 7.3 4 4 0 0 1 17 18H7Z" />
-    </svg>
-  );
-}
-
 function FallbackIcon(): ReactNode {
   return (
     <svg {...iconProps}>
       <circle cx="12" cy="12" r="2.5" />
+    </svg>
+  );
+}
+
+function CloudProvidersIcon(): ReactNode {
+  return (
+    <svg {...iconProps}>
+      <path d="M7 18a4.5 4.5 0 0 1-.5-8.97A5.5 5.5 0 0 1 17.2 7.3 4 4 0 0 1 17 18H7Z" />
     </svg>
   );
 }
@@ -352,7 +352,6 @@ const ICONS_BY_LABEL: Record<string, () => ReactNode> = {
   guides: GuidesIcon,
   reference: ReferenceIcon,
   'connector catalog': ConnectorCatalogIcon,
-  'cloud providers': CloudProvidersIcon,
   'using connectors': UsingConnectorsIcon,
   // wso2-integrator's 5.0.0 top-level "Connectors" category (see
   // versioned_sidebars/version-5.0.0-sidebars.json there).
@@ -363,6 +362,7 @@ const ICONS_BY_LABEL: Record<string, () => ReactNode> = {
   'build a connector': BuildYourOwnIcon,
   'publish connector': PublishConnectorIcon,
   'setup guide': SetupGuideIcon,
+  'cloud providers': CloudProvidersIcon,
   actions: ActionsIcon,
   triggers: TriggersIcon,
   example: ExampleIcon,

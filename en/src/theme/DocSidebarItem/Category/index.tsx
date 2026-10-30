@@ -15,6 +15,13 @@
  * quieter pill can sit next to it via `customProps.version` (e.g.
  * "2.1.0") for that product's current release number.
  *
+ * A category without a link of its own (`link: null`) can still make its
+ * title land on its first child -- the overview page, listed first inside
+ * the group -- by setting `customProps.landOnFirst: true` in its
+ * _category_.json. The title then behaves like a category that has a link:
+ * clicking it navigates and expands, and the caret alone collapses. Stock
+ * only uses that first-child link as a server-side-render fallback.
+ *
  * A category can also list future, not-yet-real entries after its actual
  * children via `customProps.lockedSiblings` (e.g. Cloud Providers' Azure/GCP
  * "Soon" rows) -- `[{label, badge?}, ...]` in its _category_.json. These
@@ -22,13 +29,6 @@
  * items from real files, so there's no other way to show a "coming soon"
  * row without one); DocSidebarItems renders them as plain, non-navigating
  * rows instead of real sidebar items. See DocSidebarItems for the render.
- *
- * A category without a link of its own (`link: null`) can still make its
- * title land on its first child -- the overview page, listed first inside
- * the group -- by setting `customProps.landOnFirst: true` in its
- * _category_.json. The title then behaves like a category that has a link:
- * clicking it navigates and expands, and the caret alone collapses. Stock
- * only uses that first-child link as a server-side-render fallback.
  *
  * Everything else (collapse state, auto-expand-when-active, the SSR
  * href fallback, keyboard/ARIA handling) is copied as-is from stock --
