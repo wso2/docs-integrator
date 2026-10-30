@@ -46,6 +46,14 @@ name: Sync shared theme to product branches
 # list (saas's own doc paths, hrefs that don't exist on other
 # branches). Same class of bug as ConnectorCatalog above, caught
 # before it actually broke anything this time.
+#
+# en/src/css/product.css is ALSO deliberately excluded, same reason:
+# en/src/css/custom.css below is a single always-overwritten file, so any
+# page-specific or branch-specific rule hand-added to it gets silently
+# deleted the next time this syncs (this actually broke wso2-integrator's
+# cloud-providers/aws.md page styling). product.css is that branch's own,
+# never-synced file instead -- see MAINTENANCE.md's "When a branch needs
+# its own CSS".
 
 on:
   push:

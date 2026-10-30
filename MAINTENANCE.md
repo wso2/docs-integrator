@@ -64,7 +64,9 @@ branch — but only via automation, never by hand:
   `QuickstartHeader`/`Prerequisites`/`Steps` (globally registered on every doc via
   the shared `theme/MDXComponents`), `DocFeedback` (rendered by the shared `theme/TOC`)),
   ConnectorCatalog's styling/filtering (not its own `index.tsx`, which stays
-  per-branch), the markdown-export plugin) and governance docs (this file,
+  per-branch), the markdown-export plugin -- but NOT `en/src/css/product.css`,
+  each branch's own never-synced CSS file, see "When a branch needs its own
+  CSS" below) and governance docs (this file,
   `CONTRIBUTING.md`, `HOW_TO_WRITE_A_GUIDE.md`, `UI_UX_GUIDELINES.md`,
   `CODEOWNERS`) are edited only on `main`. This is the full inventory of
   what's mechanically synced -- see `sync-theme.yaml`'s own `SHARED_PATHS`
@@ -118,6 +120,21 @@ it on `main` (a new `theme-local/<Name>.tsx` default + the shared file's
 own import of it) in the same PR that needs it, then give every other
 branch the trivial no-op default too -- see the two existing extension
 points for the pattern.
+
+### When a branch needs its own CSS
+
+`en/src/css/custom.css` is wholesale-shared like the files above -- a sync
+from `main` overwrites it in full, deleting any page-specific or
+branch-specific rule hand-added to it (this happened to `wso2-integrator`'s
+`cloud-providers/aws.md` page styling, the reason that branch had been
+skipping sync-theme PRs). `en/src/css/product.css` is the CSS equivalent of
+`theme-local/`: a file every branch owns, deliberately **excluded** from
+`SHARED_PATHS`, registered alongside `custom.css` in that branch's own
+`docusaurus.config.ts` (`theme.customCss: [...]`, same array both files are
+listed in). `main`'s own copy stays empty -- it has no page content to
+style. Put a page's or branch's own CSS there, never in `custom.css`; a
+genuinely sitewide fix or component style still belongs in `custom.css` on
+`main` so every branch gets it.
 
 ## The develop → staging → production pipeline
 

@@ -1,0 +1,11 @@
+/* Per-branch CSS escape hatch -- the `src/theme-local/` equivalent for
+   stylesheets. `custom.css` is wholesale-shared (see sync-theme.yaml's
+   SHARED_PATHS): every sync run from `main` overwrites it in full, so
+   anything page-specific or branch-specific hand-edited into it gets
+   silently deleted the next time a sync lands. This file is deliberately
+   NOT in SHARED_PATHS -- registered alongside custom.css in this
+   branch's own docusaurus.config.ts (`theme.customCss`), it survives
+   every sync untouched.
+
+   Put a page's or branch's own styling here, never in custom.css. `main`
+   keeps this file empty -- it has no page content of its own to style. */

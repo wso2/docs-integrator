@@ -73,6 +73,14 @@ const DEFAULT_CROSS_PRODUCT_BASE = '/integration-platform/docs/';
  * supporting product, catalog rather than a product of its own. */
 const PRODUCT_ORDER: ProductKey[] = ['cloud', 'integrator', 'agentBuilder', 'connectors'];
 
+/** Products whose docs are versioned -- a non-current row for one of these
+ * gets a static "Latest" version half instead of a plain link (see the
+ * `staticLatest` comment below for why it's static rather than that
+ * product's real active version: a sibling product's version list isn't
+ * available from here). `cloud` and `connectors` have no version switcher
+ * of their own, so they're never in this list. */
+const VERSIONED_PRODUCTS: ProductKey[] = ['integrator', 'agentBuilder'];
+
 /** Detects which of the three sites this build is, from its own baseUrl
  * -- no per-branch config needed, so this file can be byte-identical
  * across branches. Exported so other wholesale-shared components that
@@ -350,10 +358,11 @@ function Switcher({ model, compact }: { model: VersionModel | null; compact: boo
               const isCurrent = key === current;
               // The current product's row carries the site's version half
               // (a button that opens step 2, not an inline list); a
-              // different integrator row shows a static "Latest" half
-              // (that site's version list isn't available from here).
+              // different versioned product's row shows a static "Latest"
+              // half instead (that site's version list isn't available
+              // from here).
               const rowVersioned = isCurrent && versioned;
-              const staticLatest = !isCurrent && key === 'integrator';
+              const staticLatest = !isCurrent && VERSIONED_PRODUCTS.includes(key);
 
               const nameContent = (
                 <>
