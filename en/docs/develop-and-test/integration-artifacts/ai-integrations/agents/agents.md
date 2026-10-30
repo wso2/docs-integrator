@@ -48,7 +48,7 @@ Open the **Add Agent** dialog from the **Add Agent** button on your agentic inte
 | An agent reused across agentic integrations or projects | **Add Agent** → **Create Agent Definition** | A reusable template that you can share |
 | An agent someone has already built | **Add Agent** → **Pre-built Agents** | An instance of an existing definition |
 
-The last two are covered in [Agent Definitions](definitions/definitions.md). For a durable agent, see [Build a Durable Agent](../../../../get-started/quickstarts/build-durable-agent.md).
+The last two are covered in [Shareable Agents](definitions/definitions.md). For a durable agent, see [Build a Durable Agent](../../../../get-started/quickstarts/build-durable-agent.md).
 
 ## Connect an agent to a trigger
 
@@ -123,7 +123,7 @@ The chat reuses the same session across messages, so you can test memory-aware c
 ## What's next
 
 - **[Creating an Agent](create-an-agent.md)** - Learn how to create and configure agents.
-- **[Agent Definitions](definitions/definitions.md)** - Build a reusable agent template and share it across projects.
+- **[Shareable Agents](definitions/definitions.md)** - Build a reusable agent template and share it across projects.
 - **[Tools](tools.md)** - Add functions, connectors, and MCP servers to your agents.
 - **[Multi-Agent Systems](multi-agent/multi-agent.md)** - Delegate work from one agent to another.
 - **[Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md)** - Pause a tool call for human-in-the-loop approval before it runs.

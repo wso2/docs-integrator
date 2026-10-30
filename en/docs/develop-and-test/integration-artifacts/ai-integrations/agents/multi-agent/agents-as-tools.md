@@ -23,7 +23,7 @@ The steps follow one customer support example in a `support_desk` agentic integr
     Answer customer questions about orders. Delegate any question about returns or return eligibility to the returns policy tool, and include the order ID and the customer's reason in the task. Treat its answer as authoritative.
     ```
 
-- **The sub-agent** is `returnsPolicyAgent`, an instance of the `ReturnsPolicyAgent` definition created in [Agent Definitions](../definitions/definitions.md#create-an-agent-definition). The orchestrator hands returns questions to it.
+- **The sub-agent** is `returnsPolicyAgent`, an instance of the `ReturnsPolicyAgent` definition created in [Shareable Agents](../definitions/definitions.md#create-an-agent-definition). The orchestrator hands returns questions to it.
 
 ## Open the calling agent
 
@@ -259,6 +259,6 @@ For the rest of the trace viewer, see [Observability](../observability.md).
 ## What's next
 
 - **[Multi-Agent Systems](multi-agent.md)** — Topologies, cost, and when not to delegate.
-- **[Agent Definitions](../definitions/definitions.md)** — Build a specialist once and reuse it.
+- **[Shareable Agents](../definitions/definitions.md)** — Build a specialist once and reuse it.
 - **[Tools](../tools.md)** — The other tool types available to an agent.
 - **[Observability](../observability.md)** — Trace a delegated call end to end.

@@ -119,6 +119,6 @@ Set a maximum iteration count on every agent in the system, and use [observabili
 ## What's next
 
 - **[Agents as Tools](agents-as-tools.md)** — Attach an agent as a tool of another agent.
-- **[Agent Definitions](../definitions/definitions.md)** — Build a specialist once and reuse it.
+- **[Shareable Agents](../definitions/definitions.md)** — Build a specialist once and reuse it.
 - **[Memory](../memory.md)** — Configure conversational and persistent memory.
 - **[Observability](../observability.md)** — Trace delegation across agents.

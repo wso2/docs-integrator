@@ -1,7 +1,7 @@
 ---
 sidebar_position: 0
-sidebar_label: Definitions and Instances
-title: Agent Definitions
+sidebar_label: Create a Definition
+title: Shareable Agents
 description: Reference for agent definitions in WSO2 Agent Builder, covering how to create a reusable agent template, the Agent Definition Designer, response types, initialization parameters, and creating instances.
 ---
 
@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Agent Definitions
+# Shareable Agents
 
 An **agent definition** is a reusable template for an agent. It captures the role, instructions, tools, and response type once, so the same agent can be instantiated in more than one agentic integration or shared with other projects and other teams.
 

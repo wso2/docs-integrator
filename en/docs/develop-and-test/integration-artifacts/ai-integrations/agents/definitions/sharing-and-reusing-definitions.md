@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+sidebar_label: Publish and Reuse
 title: Sharing and Reusing Definitions
 description: Publish an agent definition as a library package, discover shared definitions in the Pre-built Agents catalog, and version a definition without breaking its consumers.
 ---
@@ -168,6 +169,6 @@ A definition that works well in the integration it was written for often fails e
 
 ## What's next
 
-- **[Agent Definitions](definitions.md)** — Create and configure a definition.
+- **[Shareable Agents](definitions.md)** — Create and configure a definition.
 - **[Agents as Tools](../multi-agent/agents-as-tools.md)** — Use a shared definition as a tool of another agent.
 - **[Multi-Agent Systems](../multi-agent/multi-agent.md)** — Decide when to split work across agents.
