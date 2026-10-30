@@ -75,7 +75,7 @@ Managed backing services and resources your integrations can use.
   </ul>
 
 <PaletteCard icon="agents" href="/manage/rag-ingestion/voice-agents">
-  <h3 class="palette-card-title">Voice Agents (Preview)</h3>
+  <h3 class="palette-card-title">Voice Agents</h3>
   <ul class="palette-card-list">
     <li>Add voice to a deployed AI agent</li>
     <li>Choose speech-to-text and text-to-speech providers</li>
