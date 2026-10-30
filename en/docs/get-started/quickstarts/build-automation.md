@@ -56,53 +56,113 @@ A working WSO2 Integrator environment.
     }}
     />
 
+:::info Note
+The cloud editor creates a default integration for you, so you don't need to name it now. You can change its name when you deploy it. For more information, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
+:::
+
 ## Step 2: Add an automation artifact
 
-1. Select your integration from the project overview canvas.
-2. Select **+ Add Artifact** in the design canvas.
-3. Select **Automation** under **Automation**.
-4. Select **Create**.
+1. In the design view, click **Add Artifact manually**.
 
-<ThemedImage
-    alt="Create New Automation form opened after selecting Automation under Automation"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-automation/add-an-automation-artifact.png'),
-        dark: useBaseUrl('/img/get-started/build-automation/add-an-automation-artifact.png'),
-    }}
-/>
+   <ThemedImage
+       alt="Integration design view with the Add Artifact manually button highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/add-artifact.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/add-artifact.png'),
+       }}
+   />
+
+2. Select **Automation** under **Automation**.
+
+   <ThemedImage
+       alt="Artifacts page with Automation highlighted under Automation"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-automation/select-automation.png'),
+           dark: useBaseUrl('/img/get-started/build-automation/select-automation.png'),
+       }}
+   />
+
+3. Click **Create**.
+
+   <ThemedImage
+       alt="Create New Automation form with the Create button"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-automation/add-an-automation-artifact.png'),
+           dark: useBaseUrl('/img/get-started/build-automation/add-an-automation-artifact.png'),
+       }}
+   />
 
 ## Step 3: Add logic
 
-1. Select **+** after the **Start** node to open the node panel.
-2. Select **Call Function**.
-3. Select **Print** under **io** from the function list.
-4. Select **Initialize Array** for the **Values** parameter.
-5. Set **Values** to `"Hello World"` and select **Save**.
+1. Click **+** below the **Start** node to open the node panel.
 
-<ThemedImage
-    alt="io:print configuration panel with the Values parameter set to Hello World, ready to be saved"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-automation/add-logic.png'),
-        dark: useBaseUrl('/img/get-started/build-automation/add-logic.png'),
-    }}
-/>
+   <ThemedImage
+       alt="Automation flow with the add node button highlighted below the Start node"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-automation/select-plus.png'),
+           dark: useBaseUrl('/img/get-started/build-automation/select-plus.png'),
+       }}
+   />
+
+2. Select **Call Function** under **Statement**.
+
+   <ThemedImage
+       alt="Node panel with Call Function highlighted under Statement"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-automation/call-function-selection.png'),
+           dark: useBaseUrl('/img/get-started/build-automation/call-function-selection.png'),
+       }}
+   />
+
+3. Search for `print` in the functions panel.
+
+4. In the search results, go to the **Standard Library** section and select the **print** function under **io**.
+
+   <ThemedImage
+       alt="Functions panel search results with print highlighted under io in the Standard Library section"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-automation/select-print.png'),
+           dark: useBaseUrl('/img/get-started/build-automation/select-print.png'),
+       }}
+   />
+
+5. Click **Initialize Array** for the **Values** parameter.
+
+   <ThemedImage
+       alt="io:print panel with the Initialize Array button highlighted under Values"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-automation/select-initialize-array.png'),
+           dark: useBaseUrl('/img/get-started/build-automation/select-initialize-array.png'),
+       }}
+   />
+
+6. Set **Values** to `"Hello World"` and click **Save**.
+
+   <ThemedImage
+       alt="io:print panel with Values set to Hello World"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-automation/add-logic.png'),
+           dark: useBaseUrl('/img/get-started/build-automation/add-logic.png'),
+       }}
+   />
 
 ## Step 4: Run and test
 
-1. Select **Run**.
+1. Click **Run**.
+
 2. Confirm the terminal output contains `Hello World`.
 
-<ThemedImage
-    alt="Running the automation and seeing the Hello World output in the terminal"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-automation/run-and-test-light.gif'),
-        dark: useBaseUrl('/img/get-started/build-automation/run-and-test-light.gif'),
-    }}
-/>
+   <ThemedImage
+       alt="Running the automation and seeing the Hello World output in the terminal"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-automation/run-and-test-light.gif'),
+           dark: useBaseUrl('/img/get-started/build-automation/run-and-test-light.gif'),
+       }}
+   />
 
 ## Step 5: Deploy to WSO2 Cloud
 
-Deploy your integration to WSO2 Cloud. Check [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
+To deploy your integration to WSO2 Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 
 <div class="skip-ahead-card">
 
