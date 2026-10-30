@@ -1,9 +1,10 @@
 ---
-sidebar_position: 5
-title: Knowledge Bases
-description: Reference for every Knowledge Base in WSO2 Integrator. Covers the Vector Knowledge Base, the AWS Bedrock knowledge bases, and the Azure AI Search Knowledge Base, including create form fields, advanced configurations, and the retrieve action.
-keywords: [wso2 integrator, knowledge base, rag, vector knowledge base, aws bedrock, bedrock knowledge base, azure ai search, embedding, chunker]
-slug: /develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/knowledge-bases
+sidebar_position: 0
+sidebar_label: Overview
+title: Knowledge Bases Overview
+description: Reference for every knowledge base provider WSO2 Integrator supports. Covers the Vector Knowledge Base, the AWS Bedrock knowledge bases, the Azure AI Search Knowledge Base, and the WSO2 Cloud Knowledge Base, including create form fields, advanced configurations, and the retrieve action.
+keywords: [wso2 integrator, knowledge base, rag, vector knowledge base, aws bedrock, bedrock knowledge base, azure ai search, wso2 cloud knowledge base, embedding, chunker]
+slug: /develop-and-test/integration-artifacts/ai-integrations/knowledge-bases
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -13,7 +14,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 A **Knowledge Base** is a managed store of documents that your integration can index and query. It provides a consistent interface for adding content, retrieving the most relevant chunks for a given query, and removing stale content, regardless of the underlying storage technology.
 
-In WSO2 Agent Builder, an agent uses a Knowledge Base as a tool to retrieve the most relevant chunks for a question. It uses three pluggable parts (a [Vector Store](vector-stores.md), an [Embedding Provider](embedding-providers.md), and a [Chunker](chunkers.md)).
+In WSO2 Agent Builder, an agent uses a Knowledge Base as a tool to retrieve the most relevant chunks for a question. It uses three pluggable parts (a [Vector Store](../ai-building-blocks/vector-stores.md), an [Embedding Provider](../ai-building-blocks/embedding-providers.md), and a [Chunker](../ai-building-blocks/chunkers.md)). To learn how a knowledge base grounds agent responses using Retrieval-Augmented Generation (RAG), see [How Knowledge Bases Work](how-knowledge-bases-work.md).
 
 ## Available actions
 
@@ -24,10 +25,6 @@ When you add a knowledge base to an agent as a tool, the agent can use the **Ret
 | **Retrieve** | Returns the chunks most similar to a query, optionally filtered by metadata. | **Query** (the search text). | **Top K** (default `10`, use `-1` for all). **Filters** (metadata filter). |
 
 Each `Retrieve` result has the matched chunk and a `similarityScore`.
-
-:::note
-The agent only reads from the knowledge base. To add documents to it, create and load the knowledge base in WSO2 Cloud.
-:::
 
 ## Where to find knowledge bases
 
@@ -57,7 +54,7 @@ This opens the **Select Knowledge Base** picker. It lists all five supported kno
 
 | Knowledge Base | Module | Storage |
 |---|---|---|
-| **Vector Knowledge Base** | `ballerina/ai` | Any [Vector Store](vector-stores.md) |
+| **Vector Knowledge Base** | `ballerina/ai` | Any [Vector Store](../ai-building-blocks/vector-stores.md) |
 | **AWS Bedrock** (Managed and Self-Managed) | [`ballerinax/ai.aws.bedrock`](https://central.ballerina.io/ballerinax/ai.aws.bedrock/latest) | An Amazon Bedrock knowledge base |
 | **Azure AI Search Knowledge Base** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Azure AI Search index |
 | **WSO2 Cloud Knowledge Base** | [`ballerinax/ai.wso2.integration`](https://central.ballerina.io/ballerinax/ai.wso2.integration/latest) | Knowledge base service in WSO2 Cloud |
@@ -92,9 +89,9 @@ The create form starts with **Vector Store**, **Embedding Model**, and **Chunker
 
 | Field | Required | Default | Available values |
 |---|---|---|---|
-| **Vector Store** | Yes | N/A | Any saved [Vector Store](vector-stores.md) connection. Click **+ Create New Vector Store** to make one inline. |
-| **Embedding Model** | Yes | N/A | Any saved [Embedding Provider](embedding-providers.md) connection. **Use the same provider on ingest and retrieve.** Embeddings from different providers are not interchangeable. |
-| **Chunker** | No | `ai:AUTO` | `ai:AUTO` (chunker chosen automatically based on document type), `ai:DISABLE` (no chunking; each document becomes one chunk), or any saved [Chunker](chunkers.md) connection. |
+| **Vector Store** | Yes | N/A | Any saved [Vector Store](../ai-building-blocks/vector-stores.md) connection. Click **+ Create New Vector Store** to make one inline. |
+| **Embedding Model** | Yes | N/A | Any saved [Embedding Provider](../ai-building-blocks/embedding-providers.md) connection. **Use the same provider on ingest and retrieve.** Embeddings from different providers are not interchangeable. |
+| **Chunker** | No | `ai:AUTO` | `ai:AUTO` (chunker chosen automatically based on document type), `ai:DISABLE` (no chunking; each document becomes one chunk), or any saved [Chunker](../ai-building-blocks/chunkers.md) connection. |
 
 At the bottom of the form, enter the **Knowledge Base Name**. The **Result Type** is set to `ai:VectorKnowledgeBase`:
 
@@ -151,10 +148,10 @@ Both AWS Bedrock knowledge bases have the same create form fields, except rerank
 | Field | Required | Default | Available values |
 |---|---|---|---|
 | **Knowledge Base** | Yes | — | A knowledge base ID (10 characters, for example `KB12345678`; an ARN is not accepted), or a definition record to find or create by name: `ManagedKnowledgeBaseDefinition` (Managed) or `SelfManagedKnowledgeBaseDefinition` (Self-Managed). See [Definition records](#bedrock-definition-records). The knowledge base must be `ACTIVE`, and of the matching kind: a Managed connection can't attach to a self-managed knowledge base, or the other way round. |
-| **Authentication** | Yes | — | `auth:DEFAULT_CREDENTIALS`, or one of the records in [AWS authentication options](model-providers.md#aws-credential-options) **except Bedrock API key**. |
+| **Authentication** | Yes | — | `auth:DEFAULT_CREDENTIALS`, or one of the records in [AWS authentication options](../ai-building-blocks/model-providers.md#aws-credential-options) **except Bedrock API key**. |
 | **Region** | Yes | — | The AWS region the knowledge base is in, for example `us-east-1`. There is no default. |
 | **Data Source ID** | No | `()` (detected) | The ID of the Custom data source that **Ingest** writes to and **Delete By Filter** deletes from. Leave empty when the knowledge base has exactly one Custom data source. Leave it empty also when a definition creates a new knowledge base; the new one gets its data source from the definition. |
-| **Chunker** | No | `()` (detected) | `ai:AUTO`, `ai:DISABLE`, or any saved [Chunker](chunkers.md) connection. Client-side chunking before **Ingest**. Leave empty to follow the data source: `ai:DISABLE` when Bedrock chunks the documents, `ai:AUTO` when the data source's chunking strategy is `NONE`. Setting a chunker when Bedrock chunks the documents fails, because Bedrock would split them again. |
+| **Chunker** | No | `()` (detected) | `ai:AUTO`, `ai:DISABLE`, or any saved [Chunker](../ai-building-blocks/chunkers.md) connection. Client-side chunking before **Ingest**. Leave empty to follow the data source: `ai:DISABLE` when Bedrock chunks the documents, `ai:AUTO` when the data source's chunking strategy is `NONE`. Setting a chunker when Bedrock chunks the documents fails, because Bedrock would split them again. |
 | **Reranking Model** (Managed only) | No | `()` (Bedrock default: managed reranking) | `RERANKING_NONE`, `RERANKING_MANAGED`. Whether Bedrock reranks the results with its managed reranker. Managed reranking is not available on a knowledge base created with your own embedding model. |
 | **Reranking** (Self-Managed only) | No | `()` (no reranking) | `modelArn`, optional `numberOfRerankedResults`. Reranks the results with a Bedrock reranker model. `numberOfRerankedResults` can't be higher than **Number Of Results**; creating the connection fails if it is. |
 | **Endpoint Configuration** | No | `()` (derived from Region) | `fips` (AWS offers FIPS endpoints for knowledge bases only in `us-east-1` and `us-west-2`), `customEndpoint`. A `customEndpoint` is used for both Bedrock knowledge base endpoints, so it suits a mock or a single gateway. For a VPC endpoint, enable private DNS and leave this empty. `dualstack` is not supported. |
@@ -173,7 +170,7 @@ The identity needs `bedrock:Retrieve` for **Retrieve**, and the [direct ingestio
 | **Number Of Results** | Both | `()` (follows **Top K**, up to `100`) | `1` to `100` | The most results Bedrock returns per search request. Bedrock can return fewer. **Top K** on the **Retrieve** action still limits the total. |
 | **Override Search Type** | Self-Managed | `()` (Bedrock chooses) | `SEARCH_SEMANTIC`, `SEARCH_HYBRID` | Vector-only or hybrid (vector and keyword) search. Hybrid search needs a store with a filterable text field. The AWS API reference lists only OpenSearch Serverless; the AWS user guide also lists Aurora PostgreSQL and MongoDB Atlas. Leave empty unless your store supports it. |
 | **Retry Config** | Both | `maxRetries` 3, `initialDelay` 1.0, `maxDelay` 20.0, `backoffFactor` 2.0 | Record | Backoff for throttling and transient errors (408, 429, 500, 502, 503, 504). |
-| **HTTP Config** | Both | `()` | Record | The [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations), grouped in one record. There is no **Service URL**; use **Endpoint Configuration**. |
+| **HTTP Config** | Both | `()` | Record | The [Standard HTTP advanced configurations](../ai-building-blocks/model-providers.md#standard-http-advanced-configurations), grouped in one record. There is no **Service URL**; use **Endpoint Configuration**. |
 
 ### Definition records {#bedrock-definition-records}
 
@@ -249,8 +246,8 @@ The form opens with **Service URL**, **API Key**, **Index**, **Embedding Model**
 | **Service URL** | Yes | N/A | Service URL of your Azure AI Search instance. |
 | **API Key** | Yes | N/A | API key for authenticating with the Azure AI Search service. |
 | **Index** | Yes | N/A | The name of an existing search index, or a `search:SearchIndex` definition (a record describing the index schema). When creating a new index, ensure it contains one key field of type string. |
-| **Embedding Model** | No | `()` | Any saved [Embedding Provider](embedding-providers.md) connection. Used for query and ingest if provided. Leave empty to rely on Azure AI Search's integrated vectorization. |
-| **Chunker** | No | `ai:AUTO` | `ai:AUTO`, `ai:DISABLE`, or any saved [Chunker](chunkers.md) connection. |
+| **Embedding Model** | No | `()` | Any saved [Embedding Provider](../ai-building-blocks/embedding-providers.md) connection. Used for query and ingest if provided. Leave empty to rely on Azure AI Search's integrated vectorization. |
+| **Chunker** | No | `ai:AUTO` | `ai:AUTO`, `ai:DISABLE`, or any saved [Chunker](../ai-building-blocks/chunkers.md) connection. |
 
 Scrolling further shows **Embedding Model**, **Chunker**, **Verbose**, and **API Version**:
 
@@ -267,8 +264,8 @@ Scrolling further shows **Embedding Model**, **Chunker**, **Verbose**, and **API
 | **Verbose** | `false` | `true`, `false` | Whether to enable verbose logging during ingest and retrieve. Useful when debugging. |
 | **API Version** | `2025-09-01` | Azure AI Search API version string | The Azure AI Search REST API version to use. |
 | **Content Field Name** | `"content"` | String | The name of the field in the index that contains the main chunk content. |
-| **Search Client Connection Config** | `{}` | Record | Connection configuration for the Azure AI Search service client. Required only when `Index` is provided as a `search:SearchIndex` definition (i.e. when the connector creates the index for you). See [Standard HTTP Advanced Configurations](model-providers.md#standard-http-advanced-configurations) for available knobs. |
-| **Index Client Connection Config** | `{}` | Record | Connection configuration for the Azure AI Search index client. See [Standard HTTP Advanced Configurations](model-providers.md#standard-http-advanced-configurations) for available knobs. |
+| **Search Client Connection Config** | `{}` | Record | Connection configuration for the Azure AI Search service client. Required only when `Index` is provided as a `search:SearchIndex` definition (i.e. when the connector creates the index for you). See [Standard HTTP Advanced Configurations](../ai-building-blocks/model-providers.md#standard-http-advanced-configurations) for available knobs. |
+| **Index Client Connection Config** | `{}` | Record | Connection configuration for the Azure AI Search index client. See [Standard HTTP Advanced Configurations](../ai-building-blocks/model-providers.md#standard-http-advanced-configurations) for available knobs. |
 | **Semantic Configuration Name** | `()` | String or empty | The name of the semantic configuration to use for semantic search. Leave empty for plain vector / keyword search. |
 
 Continue scrolling to configure **Content Field Name**, **Search Client Connection Config**, **Index Client Connection Config**, and **Semantic Configuration Name**:
@@ -297,7 +294,7 @@ Scrolling to the bottom shows **Knowledge Base Name** and **Result Type**:
 
 ## WSO2 Cloud Knowledge Base
 
-A Knowledge Base that's deployed in WSO2 Cloud. If you don't already have a WSO2 Cloud Knowledge Base deployed in your organization, create the knowledge base in WSO2 Cloud first. It is provisioned and managed there.
+A Knowledge Base that's deployed in WSO2 Cloud. If you don't already have a WSO2 Cloud Knowledge Base deployed in your organization, create the knowledge base and ingest documents in WSO2 Cloud first. It is provisioned and managed there. See [Knowledge bases in WSO2 Cloud](product://saas/manage/rag-ingestion/knowledge-bases).
 
 ### Connect to an existing knowledge base
 
@@ -404,7 +401,7 @@ Continuing the scroll shows **Response Limit Configuration** and **Payload Valid
 
 ### Advanced configurations
 
-Expanding **Advanced Configurations** shows **Pool Configuration**, **Circuit Breaker Configuration**, **Retry Configuration**, **Secure Socket Configuration**, and **Proxy Configuration**, the same fields as the [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations) section on the Model Providers page:
+Expanding **Advanced Configurations** shows **Pool Configuration**, **Circuit Breaker Configuration**, **Retry Configuration**, **Secure Socket Configuration**, and **Proxy Configuration**, the same fields as the [Standard HTTP advanced configurations](../ai-building-blocks/model-providers.md#standard-http-advanced-configurations) section on the Model Providers page:
 
 <ThemedImage
     alt="Create WSO2 Cloud Knowledge Base form with Advanced Configurations expanded showing Pool Configuration, Circuit Breaker Configuration, Retry Configuration, and Secure Socket Configuration."
@@ -438,4 +435,5 @@ At the bottom of the expanded section, configure **Proxy Configuration**, then c
 
 ## What's next
 
-- [Chunkers](chunkers.md) — How documents are split before ingest.
+- [Use with an agent](use-with-an-agent.md) — Give an agent the Retrieve action as a tool.
+- [Chunkers](../ai-building-blocks/chunkers.md) — How documents are split before ingest.

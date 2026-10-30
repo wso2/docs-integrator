@@ -280,7 +280,7 @@ Selecting a type lists its actions, such as **Retrieve**, which returns the chun
     }}
 />
 
-Use this option to let the agent decide when to search your documents, instead of retrieving context before every call. See [Knowledge Bases](../ai-building-blocks/knowledge-bases.md) and [RAG](../rag/rag.md).
+Use this option to let the agent decide when to search your documents, instead of retrieving context before every call. See [How Knowledge Bases Work](../knowledge-bases/how-knowledge-bases-work.md) and [Knowledge Bases](../knowledge-bases/knowledge-bases.md).
 
 ## After adding a tool
 

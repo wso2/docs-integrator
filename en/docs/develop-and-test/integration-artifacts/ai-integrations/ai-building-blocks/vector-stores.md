@@ -15,7 +15,7 @@ A vector database stores vector embeddings and enables similarity search over th
 
 A **Vector Store** is WSO2 Agent Builder's abstraction over these databases, exposing a common interface for every supported backend.
 
-It is the storage half of a [Knowledge Base](knowledge-bases.md). The [Embedding Provider](embedding-providers.md) produces the vectors, and the Vector Store abstracts where and how they are persisted and retrieved at query time.
+It is the storage half of a [Knowledge Base](../knowledge-bases/knowledge-bases.md). The [Embedding Provider](embedding-providers.md) produces the vectors, and the Vector Store abstracts where and how they are persisted and retrieved at query time.
 
 ## Available actions
 
@@ -129,7 +129,7 @@ Amazon S3 Vectors stores vectors in a vector index inside an S3 vector bucket, a
 Official website: [Amazon S3 Vectors](https://aws.amazon.com/s3/features/vectors/).
 
 :::tip
-To have Amazon Bedrock chunk and embed the documents and query S3 Vectors for you, use the [Bedrock Self-Managed Knowledge Base](knowledge-bases.md#aws-bedrock) instead of a Vector Knowledge Base with this store.
+To have Amazon Bedrock chunk and embed the documents and query S3 Vectors for you, use the [Bedrock Self-Managed Knowledge Base](../knowledge-bases/knowledge-bases.md#aws-bedrock) instead of a Vector Knowledge Base with this store.
 :::
 
 ### Before you start
@@ -376,6 +376,6 @@ Selection is based on operational concerns (where your data already lives, what 
 
 ## What's next
 
-- [Knowledge Bases](knowledge-bases.md) — Combine a vector store with an embedding provider and a chunker.
+- [Knowledge Bases](../knowledge-bases/knowledge-bases.md) — Combine a vector store with an embedding provider and a chunker.
 - [Chunkers](chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.
-- [RAG](../rag/rag.md) — Visual designer walkthrough for RAG ingestion and query in WSO2 Agent Builder.
+- [How Knowledge Bases Work](../knowledge-bases/how-knowledge-bases-work.md) — Visual designer walkthrough for RAG ingestion and query in WSO2 Agent Builder.
