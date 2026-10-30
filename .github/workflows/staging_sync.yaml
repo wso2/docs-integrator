@@ -24,7 +24,7 @@ on:
       - saas
       - wso2-integrator
       - wso2-connectors
-      # - wso2-agent-builder   # add when this product launches
+      - wso2-agent-builder
   workflow_dispatch:
 
 concurrency:
@@ -81,6 +81,9 @@ jobs:
               ;;
             wso2-connectors)
               echo "base_url=${family_base}connectors/" >> "$GITHUB_OUTPUT"
+              ;;
+            wso2-agent-builder)
+              echo "base_url=${family_base}agent-builder/" >> "$GITHUB_OUTPUT"
               ;;
             *)
               echo "::error::No staging config for branch '${{ github.ref_name }}' -- add it to this case statement and to the trigger list above."
@@ -183,4 +186,14 @@ jobs:
           publish_branch: staging
           publish_dir: en/build
           destination_dir: connectors
+          keep_files: true
+
+      - name: Deploy wso2-agent-builder (staging/agent-builder)
+        if: github.ref_name == 'wso2-agent-builder'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: staging
+          publish_dir: en/build
+          destination_dir: agent-builder
           keep_files: true
