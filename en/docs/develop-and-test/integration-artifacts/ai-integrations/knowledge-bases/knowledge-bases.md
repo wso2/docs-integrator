@@ -63,7 +63,7 @@ This opens the **Select Knowledge Base** picker. It lists all five supported kno
 
 ## Vector Knowledge Base
 
-The default implementation. You combine a Vector Store, an Embedding Provider, and a Chunker into a single connection that the rest of your RAG flows share.
+The default implementation. It combines a Vector Store, an Embedding Provider, and a Chunker into one knowledge base connection, which you use both to ingest documents and to retrieve them.
 
 ### Create form
 
