@@ -7,6 +7,8 @@ slug: /develop-and-test/integration-artifacts/ai-integrations/voice-agent
 
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Voice Agent
 
@@ -27,11 +29,16 @@ In WSO2 Agent Builder, voice is a trigger on an agent, just like a chat channel.
 
 Both call the same [`ai:Agent`](../agents/agents.md#components-of-an-ai-agent). They differ only in the transport and message format.
 
-## Add a Voice Chat trigger
+## Before you start
 
-Before you start, create the agent you want to expose over voice. See [Creating an Agent](../agents/create-an-agent.md) for configuring the system prompt, [tools](../agents/tools.md), and [memory](../agents/memory.md). You can add the Voice Chat trigger to an agent that already has an **Agent Chat** trigger, so the same agent answers both chat and voice.
+Create the agent you want to expose over voice. See [Creating an Agent](../agents/create-an-agent.md) for configuring the system prompt, [tools](../agents/tools.md), and [memory](../agents/memory.md). You can add the Voice Chat trigger to an agent that already has an **Agent Chat** trigger, so the same agent answers both chat and voice.
 
 This example uses `customerSupportAgent`, a customer support agent that checks order status, explains the return policy, and creates support tickets. It already has an **Agent Chat** trigger at `/customer-support-agent`.
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+## Add a Voice Chat trigger
 
 1. Under **Agents**, select the agent to open its canvas. Select **Add Trigger** on the left of the **AI Agent** node.
 
@@ -112,7 +119,12 @@ Selecting **Voice Agent Integration** itself opens the **Voice Service** view, w
     }}
 />
 
-The generated `main.bal` is similar to the following:
+The session ID is passed as the session key so the agent's memory tracks each call separately. Without it, every caller shares the same conversation history.
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+Adding a **Voice Chat** trigger adds a `CloudVoiceListener` and a `VoiceService` to **`main.bal`**, next to the existing **Agent Chat** service:
 
 ```ballerina
 import ballerina/ai;
@@ -139,7 +151,12 @@ isolated service integration:VoiceService on voiceListener {
 }
 ```
 
+`onChatMessage` receives an `integration:ChatMessage` (the transcribed speech, with a session ID for the call) and returns the text to speak back to the caller. WSO2 Agent Builder wires the agent into it for you, so there's no placeholder to replace.
+
 The session ID is passed as the session key so the agent's memory tracks each call separately. Without it, every caller shares the same conversation history.
+
+</TabItem>
+</Tabs>
 
 ## Deploy to WSO2 Cloud
 
