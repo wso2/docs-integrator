@@ -46,7 +46,7 @@ A working WSO2 Integrator environment.
        }}
    />
 
-2. The WSO2 Integrator cloud editor opens in your browser. Add an artifact to your integration, then deploy it to WSO2 Cloud from the Deploy to WSO2 Cloud panel on the right.
+2. The WSO2 Integrator cloud editor opens in your browser.
 
    <ThemedImage
     alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
