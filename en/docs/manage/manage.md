@@ -85,7 +85,7 @@ Managed backing services and resources your integrations can use.
   </ul>
 </PaletteCard>
 
-<PaletteCard icon="rag" href="/manage/rag-ingestion/knowledge-bases">
+<PaletteCard icon="rag" href="/manage/managed-ai-services">
   <h3 class="palette-card-title">Managed AI Services</h3>
   <ul class="palette-card-list">
     <li>Create and manage knowledge bases</li>
@@ -94,7 +94,7 @@ Managed backing services and resources your integrations can use.
   </ul>
 </PaletteCard>
 
-<PaletteCard icon="agents" href="/manage/rag-ingestion/voice-agents">
+<PaletteCard icon="agents" href="/manage/managed-ai-services/voice-agents">
   <h3 class="palette-card-title">Voice Agents</h3>
   <ul class="palette-card-list">
     <li>Add voice to a deployed AI agent</li>

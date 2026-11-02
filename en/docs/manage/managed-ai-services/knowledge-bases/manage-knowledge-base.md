@@ -4,7 +4,7 @@ sidebar_label: Manage a Knowledge Base
 title: Manage a Knowledge Base
 description: Manage Knowledge Base configuration, data sources, services, API access, retrieval tests, and deletion in WSO2 Cloud.
 keywords: [wso2 integrator, wso2 cloud, manage knowledge base, kb data source, kb service, api key, retrieval, reranking]
-slug: /manage/rag-ingestion/manage-knowledge-base
+slug: /manage/managed-ai-services/knowledge-bases/manage-knowledge-base
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -115,4 +115,4 @@ Deleting a Knowledge Base removes the managed configuration. Confirm separately 
 
 - [Knowledge Bases overview](./knowledge-bases.md)
 - [Create a Knowledge Base](./create-knowledge-base.md)
-- [Add data sources](./ingestion.md)
+- [Add data sources](./add-data-sources.md)
