@@ -26,7 +26,7 @@ flowchart LR
 
 ## Create and populate the knowledge base in WSO2 Cloud
 
-Follow [Ingest documents into a knowledge base in WSO2 Cloud](product://saas/manage/cloud/rag-ingestion/ingestion) to:
+To ingest documents into a knowledge base in WSO2 Cloud:
 
 1. Create a knowledge base in your WSO2 Cloud project.
 2. Add the documents or data source that you want the knowledge base to index.
