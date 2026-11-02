@@ -27,7 +27,7 @@ An AI agent is composed of four core components that enable reasoning, action ex
 
 Without tools, the agent is limited to generating responses without interacting with external systems. Without memory, the agent cannot maintain context across multi-turn conversations.
 
-In WSO2 Agent Builder, you design agents visually inside an agentic integration, give them tools and memory, connect them to a model provider, and connect them to **triggers** such as a chat channel, an HTTP endpoint, or an event source. An agent can also be attached as a tool of another agent, so one agent delegates part of its work to another. See [Multi-Agent Systems](multi-agent/multi-agent.md).
+In WSO2 Agent Builder, you design agents visually inside an agentic integration, give them tools and memory, connect them to a model provider, and connect them to **triggers** such as a chat channel, an HTTP endpoint, or an event source. Agents can also work together, either one after another in a fixed order or under an orchestrator that delegates to them. See [Multi-Agent Concepts](multi-agent/multi-agent.md).
 
 ## Ways to create an agent
 
@@ -48,7 +48,7 @@ Open the **Add Agent** dialog from the **Add Agent** button on your agentic inte
 | An agent reused across agentic integrations or projects | **Add Agent** → **Create Agent Definition** | A reusable template that you can share |
 | An agent someone has already built | **Add Agent** → **Pre-built Agents** | An instance of an existing definition |
 
-The last two are covered in [Agent Definitions](definitions/definitions.md). For a durable agent, see [Build a Durable Agent](../../../../get-started/quickstarts/build-durable-agent.md).
+The last two are covered in [Create an Agent Definition](definitions/definitions.md). For a durable agent, see [Build a Durable Agent](../../../../get-started/quickstarts/build-durable-agent.md).
 
 ## Connect an agent to a trigger
 
@@ -123,9 +123,9 @@ The chat reuses the same session across messages, so you can test memory-aware c
 ## What's next
 
 - **[Creating an Agent](create-an-agent.md)** - Learn how to create and configure agents.
-- **[Agent Definitions](definitions/definitions.md)** - Build a reusable agent template and share it across projects.
+- **[Create an Agent Definition](definitions/definitions.md)** - Build a reusable agent template and share it across projects.
 - **[Tools](tools.md)** - Add functions, connectors, and MCP servers to your agents.
-- **[Multi-Agent Systems](multi-agent/multi-agent.md)** - Delegate work from one agent to another.
+- **[Multi-Agent Concepts](multi-agent/multi-agent.md)** - Run agents in sequence, or under an orchestrator.
 - **[Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md)** - Pause a tool call for human-in-the-loop approval before it runs.
 - **[Memory](memory.md)** - Configure conversational and persistent memory.
 - **[Observability](observability.md)** - Monitor traces, logs, and execution details.

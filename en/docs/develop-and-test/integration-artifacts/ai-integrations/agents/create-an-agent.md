@@ -31,7 +31,7 @@ In WSO2 Agent Builder, you first create an agent, then decide how it's called:
         }}
     />
 
-    To create a reusable agent definition or use a pre-built agent instead, see [Agent Definitions](definitions/definitions.md).
+    To create a reusable agent definition or use a pre-built agent instead, see [Create an Agent Definition](definitions/definitions.md).
 
 3. Configure the agent's role, instructions, and model:
 

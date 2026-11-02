@@ -269,4 +269,4 @@ service /wso\-2\-integrator\-assistant on agentChatListener {
 
 - [Build a durable agent](build-durable-agent.md) — Build an agent that can pause for human approval and resume
 - [AI agents](../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md) — Learn how to build production-grade AI agents with tools, memory, and evaluations
-- [Agents as tools](../../develop-and-test/integration-artifacts/ai-integrations/agents/multi-agent/agents-as-tools.md) — Delegate work from one agent to another
+- [Hierarchical agents](../../develop-and-test/integration-artifacts/ai-integrations/agents/multi-agent/hierarchical-agents.md) — Delegate work from one agent to another
