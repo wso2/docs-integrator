@@ -65,32 +65,13 @@ Then create a database (for example `helpdesk`) and the `ChatMessages` table in 
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    Employee([Employee])
-
-    subgraph "IT Helpdesk AI Agent"
-        direction TB
-
-        Agent["ai:Agent"]
-        Memory["Persistent Memory\nMSSQL"]
-        Model["Model Provider\nDefault WSO2 Model Provider"]
-
-        subgraph Tools["Tools"]
-            T1["searchKnowledgeBase"]
-        end
-
-        Agent --- Memory
-        Agent --- T1
-        Agent --- Model
-    end
-
-    DB[("MSSQL")]
-
-    Employee <-->|Agent Chat trigger| Agent
-
-    Memory --- DB
-```
+<ThemedImage
+    alt="Architecture: an employee sends a message and session ID over HTTP to the Agent Chat trigger at /it-helpdesk/chat, which runs itHelpDeskAgent with the Default WSO2 Model Provider, the searchKnowledgeBase tool, and ShortTermMemory that stores conversation history in the MSSQL ChatMessages table"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v5.1/architecture-v1.0.png'),
+        dark: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v5.1/architecture-v1.0.png'),
+    }}
+/>
 
 ## Build the integration
 

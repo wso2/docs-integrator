@@ -6,18 +6,20 @@ keywords: [wso2 agent builder, observability, icp, integration control plane, fl
 slug: /observe/icp-observability
 ---
 
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # ICP Observability Setup
 
 When your agents run on your own infrastructure, the [Integration Control Plane](product://integrator/icp) (ICP) can show their logs and metrics in one console, alongside health and runtime status. ICP reads this data from one of two observability providers: Moesif or OpenSearch. With OpenSearch, the data is populated by Fluent Bit tailing the runtime's log files.
 
-```mermaid
-flowchart LR
-    Runtime["Agent runtime"] -->|"app.log, metrics.log"| FluentBit[Fluent Bit]
-    FluentBit --> OpenSearch[OpenSearch]
-    Runtime -->|heartbeats| ICP["ICP server"]
-    ICP -->|queries| OpenSearch
-    Console["ICP console"] --> ICP
-```
+<ThemedImage
+    alt="The agent runtime writes app.log and metrics.log, which Fluent Bit ships to OpenSearch. The runtime also sends heartbeats to the ICP server, which queries OpenSearch. The ICP console reads logs, metrics, and health from the ICP server"
+    sources={{
+        light: useBaseUrl('/img/observe/icp-observability-v1.0.png'),
+        dark: useBaseUrl('/img/observe/icp-observability-v1.0.png'),
+    }}
+/>
 
 Setting up OpenSearch involves four steps:
 

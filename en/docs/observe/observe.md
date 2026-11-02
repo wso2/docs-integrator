@@ -9,6 +9,9 @@ hide_table_of_contents: true
 wide_layout: true
 ---
 
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Observe
 
 Observability is how you understand an agent's runtime behavior, using metrics, logs, and traces. WSO2 Agent Builder emits all three, and you choose where they go.
@@ -35,23 +38,13 @@ Like [managing](../manage/manage.md) agents, how you observe them depends on whe
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    subgraph Runtime["Ballerina Runtime"]
-        Metrics["Metrics Agent"]
-        Tracing["Tracing Agent"]
-        Logging["Log Agent"]
-    end
-    
-    Prometheus[Prometheus]
-    Grafana[Grafana]
-    Jaeger[Jaeger / Zipkin]
-    ELK[ELK / OpenSearch / Loki]
-
-    Metrics ----> Prometheus ----> Grafana
-    Tracing ----> Jaeger
-    Logging ----> ELK
-```
+<ThemedImage
+    alt="The Ballerina runtime's metrics agent sends metrics to Prometheus, which feeds Grafana dashboards; its tracing agent sends traces to Jaeger or Zipkin; and its log agent sends logs to ELK, OpenSearch, or Loki"
+    sources={{
+        light: useBaseUrl('/img/observe/observe-architecture-v1.0.png'),
+        dark: useBaseUrl('/img/observe/observe-architecture-v1.0.png'),
+    }}
+/>
 
 ## Instrument your agent
 
