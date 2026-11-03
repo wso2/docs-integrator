@@ -27,13 +27,21 @@ A working WSO2 Integrator environment.
 <PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">Sign up and launch WSO2 Integrator in the browser-based cloud editor.</PrereqCard>
 </div>
 
-You'll also need a running RabbitMQ instance. Start one with Docker:
-
 <div style={{gridColumn: '1 / -1', minWidth: 0}}>
 
-```bash
-docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:4.2-management
-```
+You'll also need access to a RabbitMQ instance that is reachable over the internet. Have the following details ready:
+
+- The instance's host and port.
+- A username and password for the instance.
+- The instance's virtual host.
+
+:::tip Get a free RabbitMQ instance
+If you don't have a RabbitMQ instance, create a free one on [CloudAMQP](https://www.cloudamqp.com/) using the **Little Lemur** plan. Then open the instance and find its connection details under **AMQP details**. Use port `5672`, and use the **User & Vhost** value as both the username and the virtual host.
+:::
+
+:::info Note
+The cloud editor runs in WSO2 Cloud and cannot connect to a RabbitMQ instance running on `localhost` on your computer.
+:::
 
 </div>
 
@@ -53,7 +61,7 @@ docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:4.2-management
        }}
    />
 
-2. The WSO2 Integrator cloud editor opens in your browser. Add an artifact to your integration, then deploy it to WSO2 Cloud from the Deploy to WSO2 Cloud panel on the right.
+2. The WSO2 Integrator cloud editor opens in your browser.
 
    <ThemedImage
     alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
@@ -89,7 +97,7 @@ The cloud editor creates a default integration for you, so you don't need to nam
        }}
    />
 
-3. Set **Host** to `localhost` and **Port** to `5672`. If your RabbitMQ instance runs elsewhere, use its host and port instead.
+3. Set **Host** to your RabbitMQ instance's host, and **Port** to its port. The default RabbitMQ port is `5672`.
 
 4. Set **Queue Name** to `Orders`.
 
@@ -103,11 +111,37 @@ The cloud editor creates a default integration for you, so you don't need to nam
        }}
    />
 
+6. Under **Listeners** in the project explorer, select **rabbitmqListener** to open the **Rabbitmq Listener Configuration** page.
+
+7. Set **Username** and **Password** to your RabbitMQ instance's username and password.
+
+8. Set **Virtual Host** to your instance's virtual host. For CloudAMQP, this is the same as the username.
+
+   <ThemedImage
+       alt="Rabbitmq Listener Configuration page with Username, Password, and Virtual Host set"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/set-listener-credentials.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/set-listener-credentials.png'),
+       }}
+   />
+
+9. Scroll to the bottom of the page, and click **Save**.
+
+   <ThemedImage
+       alt="Bottom of the Rabbitmq Listener Configuration page with the Save button highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/save-listener.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/save-listener.png'),
+       }}
+   />
+
 ## Step 3: Add `onMessage` event handler
 
-1. In the RabbitMQ service design view, click **+ Add Handler**.
+1. Under **Entry Points** in the project explorer, select **RabbitMQ Event Integration** to open the service design view.
 
-2. In the **Select Handler to Add** panel, select **On Message**.
+2. Click **+ Add Handler**.
+
+3. In the **Select Handler to Add** panel, select **On Message**.
 
    <ThemedImage
        alt="Select Handler to Add panel with On Message highlighted"
@@ -117,7 +151,7 @@ The cloud editor creates a default integration for you, so you don't need to nam
        }}
    />
 
-3. Click **Save**.
+4. Click **Save**.
 
    <ThemedImage
        alt="Configure On Message Handler panel with Format set to On Message and the Save button"
@@ -177,39 +211,29 @@ The cloud editor creates a default integration for you, so you don't need to nam
 
 1. Click **Run**. The integration starts and listens for messages on the `Orders` queue.
 
-2. Open the RabbitMQ Management UI at `http://localhost:15672`. The default username and password are both `guest`.
+2. In CloudAMQP, open your instance and click **RabbitMQ Manager**. The RabbitMQ management UI opens in a new tab, already signed in.
 
-3. Go to **Queues and Streams** > **Orders** > **Publish message**.
+3. Click the **Queues and Streams** tab, and then click **Orders** in the **Name** column.
 
-4. Enter any text as the payload, and click **Publish message**.
+4. On the **Orders** queue page, scroll down and click the **Publish message** section heading to open it.
 
-5. Confirm the integration log displays `Received order`.
+5. In **Payload**, enter any text, for example `order 1`.
+
+6. Click the **Publish message** button below the **Payload** box.
+
+7. Confirm the **Debug Console** shows a log line that ends with `message="Received order"`.
 
    <ThemedImage
-       alt="Running the integration and the Received order log in the terminal"
+       alt="Debug Console showing the Received order log line after a message is published"
        sources={{
-           light: useBaseUrl('/img/get-started/build-event-driven-integration/run-and-test-the-integration.gif'),
-           dark: useBaseUrl('/img/get-started/build-event-driven-integration/run-and-test-the-integration.gif'),
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/run-and-test.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/run-and-test.png'),
        }}
    />
 
 ## Step 6: Deploy to WSO2 Cloud
 
 To deploy your integration to WSO2 Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
-
-<div class="skip-ahead-card">
-
-<PaletteCard icon="ai" highlight>
-  <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
-  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the OrderProcessor sample straight to WSO2 Cloud.</p>
-  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
-    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/orderprocessor" target="_blank" rel="noopener noreferrer">
-      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
-    </a>
-  </div>
-</PaletteCard>
-
-</div>
 
 </Steps>
 
@@ -224,10 +248,11 @@ The steps above generate the following complete, runnable Ballerina program:
 import ballerina/log;
 import ballerinax/rabbitmq;
 
-listener rabbitmq:Listener rabbitmqListener = new ("localhost", 5672);
+listener rabbitmq:Listener rabbitmqListener = new (host = "<your-rabbitmq-host>", port = 5672, username = "<your-username>", password = "<your-password>", virtualHost = "<your-vhost>");
 
-service "Orders" on rabbitmqListener {
-    remote function onMessage(rabbitmq:AnydataMessage message, rabbitmq:Caller caller) returns error? {
+@rabbitmq:ServiceConfig {queueName: "Orders"}
+service rabbitmq:Service on rabbitmqListener {
+    remote function onMessage(rabbitmq:AnydataMessage message) returns error? {
         do {
             log:printInfo("Received order");
         } on fail error err {
