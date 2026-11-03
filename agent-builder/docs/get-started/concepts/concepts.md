@@ -101,7 +101,7 @@ You add an agent from the agentic integration overview with **Add Agent** > **Cr
 
 ### Agent definition
 
-An agent definition is a reusable agent configuration that can be shared and used to create agents with the same configuration. You create one with **Add Agent** > **Create Agent Definition**. See [Agent Definitions](../../develop-and-test/integration-artifacts/ai-integrations/agents/definitions/definitions.md).
+An agent definition is a reusable agent configuration that can be shared and used to create agents with the same configuration. You create one with **Add Agent** > **Create Agent Definition**. See [Create an Agent Definition](../../develop-and-test/integration-artifacts/ai-integrations/agents/definitions/definitions.md).
 
 ### Durable agent
 
@@ -134,7 +134,7 @@ Memory lets an agent remember earlier messages in a conversation, so it can answ
 
 ### Knowledge base
 
-A knowledge base lets an agent answer from your own documents. Documents are split into chunks, turned into embeddings by an embedding provider, and stored in a vector store. At query time, the agent retrieves the most relevant chunks and uses them in its answer. See [Knowledge Bases](../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/knowledge-bases.md).
+A knowledge base lets an agent answer from your own documents. Documents are split into chunks, turned into embeddings by an embedding provider, and stored in a vector store. At query time, the agent retrieves the most relevant chunks and uses them in its answer. See [How Knowledge Bases Work](../../develop-and-test/integration-artifacts/ai-integrations/knowledge-bases/how-knowledge-bases-work.md).
 
 ### Connection
 

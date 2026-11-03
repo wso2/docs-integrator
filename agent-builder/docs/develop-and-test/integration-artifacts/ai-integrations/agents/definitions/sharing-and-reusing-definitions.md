@@ -1,8 +1,8 @@
 ---
-title: Sharing and Reusing Definitions
+title: Publish and Reuse Definitions
 ---
 
-# Sharing and Reusing Definitions
+# Publish and Reuse Definitions
 
 An agent definition created in a library package can be published and used by other integrations, other projects, and other teams in your organization. Consumers find it in the **Pre-built Agents** catalog and create instances of it directly, instead of recreating its role, instructions, and tools themselves.
 
@@ -116,7 +116,7 @@ Select the definition under **Pre-built Agents**. WSO2 Agent Builder adds the pa
 The definition can be used in two places:
 
 - In an agentic integration, through **Add Agent** on the integration's **Overview**.
-- As a tool of another agent, through **Add Tool → Use Agent → + Add Agent**. See [Agents as Tools](../multi-agent/agents-as-tools.md).
+- As a tool of another agent, through **Add Tool → Use Agent → + Add Agent**. See [Hierarchical Agents](../multi-agent/hierarchical-agents.md).
 
 To use a private definition, you must be a member of the organization that published it.
 
@@ -161,6 +161,6 @@ A definition that works well in the integration it was written for often fails e
 
 ## What's next
 
-- **[Agent Definitions](definitions.md)** — Create and configure a definition.
-- **[Agents as Tools](../multi-agent/agents-as-tools.md)** — Use a shared definition as a tool of another agent.
-- **[Multi-Agent Systems](../multi-agent/multi-agent.md)** — Decide when to split work across agents.
+- **[Create an Agent Definition](definitions.md)** — Create and configure a definition.
+- **[Hierarchical Agents](../multi-agent/hierarchical-agents.md)** — Use a shared definition as a tool of another agent.
+- **[Multi-Agent Concepts](../multi-agent/multi-agent.md)** — Decide when to split work across agents.

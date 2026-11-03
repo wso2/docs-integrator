@@ -4,7 +4,7 @@ title: AI Integrations Overview
 
 # AI Integrations
 
-WSO2 Agent Builder lets you build AI agents and the agentic integrations around them, including agents with tools and memory, direct LLM calls, RAG pipelines, MCP servers, and voice agents.
+WSO2 Agent Builder lets you build AI agents and the agentic integrations around them, including agents with tools and memory, direct LLM calls, knowledge bases, MCP servers, and voice agents.
 
 <PaletteCard icon="agents" href="/develop-and-test/integration-artifacts/ai-integrations/agents">
   <h3 class="palette-card-title">AI Agents</h3>
@@ -12,11 +12,11 @@ WSO2 Agent Builder lets you build AI agents and the agentic integrations around 
 
 <PaletteCard icon="ai-building-blocks" href="/develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks">
   <h3 class="palette-card-title">AI Building Blocks</h3>
-  <p class="palette-card-desc">The shared connections and stores every AI feature is built from: model providers, embedding providers, vector stores, knowledge bases, chunkers, and data loaders.</p>
+  <p class="palette-card-desc">The shared connections and stores every AI feature is built from: model providers, embedding providers, vector stores, chunkers, and data loaders.</p>
 
-<PaletteCard icon="rag" href="/develop-and-test/integration-artifacts/ai-integrations/rag">
-  <h3 class="palette-card-title">Retrieval-Augmented Generation (RAG)</h3>
-  <p class="palette-card-desc">Ground LLM responses in your own documents. Ingest documents into a knowledge base, then retrieve the relevant chunks at query time and inject them into the prompt.</p>
+<PaletteCard icon="knowledge-bases" href="/develop-and-test/integration-artifacts/ai-integrations/knowledge-bases">
+  <h3 class="palette-card-title">Knowledge Bases</h3>
+  <p class="palette-card-desc">Ground agent responses in your own documents with Retrieval-Augmented Generation (RAG). Ingest documents into a knowledge base, then let an agent retrieve the relevant chunks at query time.</p>
 
 <PaletteCard icon="mcp" href="/develop-and-test/integration-artifacts/ai-integrations/mcp">
   <h3 class="palette-card-title">Model Context Protocol (MCP)</h3>

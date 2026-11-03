@@ -200,9 +200,9 @@ Select **Save Tool** to add it. WSO2 Agent Builder generates a tool function ann
 
 Selecting **Use Agent** attaches another agent as a tool. The calling agent decides when to invoke it, passes it a task, and uses what comes back.
 
-Agents already in the agentic integration are listed for selection, and new ones can be created from the same panel. For the full flow and the fields on the tool, see [Agents as Tools](multi-agent/agents-as-tools.md).
+Agents already in the agentic integration are listed for selection, and new ones can be created from the same panel. For the full flow and the fields on the tool, see [Hierarchical Agents](multi-agent/hierarchical-agents.md).
 
-Use this option when a task needs its own multi-step reasoning rather than a single action. See [Multi-Agent Systems](multi-agent/multi-agent.md) for when to split work this way.
+Use this option when a task needs its own multi-step reasoning rather than a single action. See [Multi-Agent Concepts](multi-agent/multi-agent.md) for when to split work this way.
 
 ## 5. Use MCP server
 
@@ -265,7 +265,7 @@ Selecting a type lists its actions, such as **Retrieve**, which returns the chun
     }}
 />
 
-Use this option to let the agent decide when to search your documents, instead of retrieving context before every call. See [Knowledge Bases](../ai-building-blocks/knowledge-bases.md) and [RAG](../rag/rag.md).
+Use this option to let the agent decide when to search your documents, instead of retrieving context before every call. See [How Knowledge Bases Work](../knowledge-bases/how-knowledge-bases-work.md) and [Knowledge Bases](../knowledge-bases/knowledge-bases.md).
 
 ## After adding a tool
 

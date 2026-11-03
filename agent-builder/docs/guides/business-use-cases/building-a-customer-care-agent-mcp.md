@@ -6,13 +6,13 @@ title: Build a Customer Care Agent with MCP
 
 ## What you'll build
 
-```mermaid
-flowchart LR
-    Agent["Customer Care Agent"]
-    MCP["ShopEasy MCP server"]
-
-    Agent -- MCP protocol --> MCP
-```
+<ThemedImage
+    alt="Architecture: a customer sends chat messages over HTTP to the Agent Chat trigger at /customer-care-agent, which runs CustomerCareAgent with the Default WSO2 Model Provider; the agent calls the ShopEasy MCP server at localhost:8080/mcp through an MCP toolkit, using the searchProducts, getOrderStatus, and submitReturnRequest tools"
+    sources={{
+        light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp-v5.1/architecture-v1.0.png'),
+        dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp-v5.1/architecture-v1.0.png'),
+    }}
+/>
 
 A customer care agent that connects to a ShopEasy MCP server and answers product availability, order status, and return questions over a chat API.
 

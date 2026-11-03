@@ -1,8 +1,8 @@
 ---
-title: Agent Definitions
+title: Create an Agent Definition
 ---
 
-# Agent Definitions
+# Create an Agent Definition
 
 An **agent definition** is a reusable template for an agent. It captures the role, instructions, tools, and response type once, so the same agent can be instantiated in more than one agentic integration or shared with other projects and other teams.
 
@@ -20,7 +20,7 @@ This page describes when to use each, how to create an agent definition, and how
 | **Updating behavior** | Edit the instance | Edit the definition; instances pick up the change |
 | **Use it when** | The agent is specific to this integration and isn't needed elsewhere | The same agent is needed in several places, or by other teams |
 
-A definition is a template, not a running agent. Nothing executes until an instance is created from it, either as an agent in an integration that a trigger calls, or as a [tool of another agent](../multi-agent/agents-as-tools.md).
+A definition is a template, not a running agent. Nothing executes until an instance is created from it, either as an agent in an integration that a trigger calls, or as a [tool of another agent](../multi-agent/hierarchical-agents.md).
 
 ## Where a definition lives
 
@@ -35,9 +35,9 @@ A definition in a new library package appears in the project tree as ` (Library)
 
 A local definition can still be instantiated multiple times within the integration, but it cannot be published or consumed by other projects.
 
-Only a definition in a library package can be published and consumed by other projects. See [Sharing and Reusing Definitions](sharing-and-reusing-definitions.md).
+Only a definition in a library package can be published and consumed by other projects. See [Publish and Reuse Definitions](sharing-and-reusing-definitions.md).
 
-## Create an agent definition
+## Create a definition
 
 1. Open your agentic integration in WSO2 Agent Builder.
 2. Click **Add Agent** on the integration's **Overview**. In an integration with no agents yet, **Add Agent** is under **Or start from scratch**.
@@ -226,7 +226,7 @@ The model provider and memory are constructor parameters rather than fixed value
 Once a definition exists, create instances of it from the **Pre-built Agents** section of the **Add Agent** dialog, in either of the places that dialog appears:
 
 - **Add Agent** on the integration's **Overview** - to use the agent in an integration, called by its own trigger.
-- **Add Tool → Use Agent → + Add Agent** - to use the agent as a tool of another agent. See [Agents as Tools](../multi-agent/agents-as-tools.md).
+- **Add Tool → Use Agent → + Add Agent** - to use the agent as a tool of another agent. See [Hierarchical Agents](../multi-agent/hierarchical-agents.md).
 
 Selecting a definition opens the **Configure Agent** step, which asks for a value for each initialization parameter, such as **Model** and **Memory**, and an **Agent Name** for the instance. Click **Add Agent** to create it.
 
@@ -245,7 +245,7 @@ The instance is listed under **Agents** in the project tree. On the integration'
 
 ## What's next
 
-- **[Sharing and Reusing Definitions](sharing-and-reusing-definitions.md)** — Publish a definition and consume it from other projects.
-- **[Agents as Tools](../multi-agent/agents-as-tools.md)** — Use an agent as a tool of another agent.
+- **[Publish and Reuse Definitions](sharing-and-reusing-definitions.md)** — Publish a definition and consume it from other projects.
+- **[Hierarchical Agents](../multi-agent/hierarchical-agents.md)** — Use an agent as a tool of another agent.
 - **[Tools](../tools.md)** — Add connections, functions, MCP servers, and custom tools.
 - **[Memory](../memory.md)** — Configure conversational and persistent memory.
