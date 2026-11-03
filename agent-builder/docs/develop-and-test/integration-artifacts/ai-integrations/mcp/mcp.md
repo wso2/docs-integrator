@@ -25,27 +25,13 @@ With WSO2 Agent Builder, you can build both sides of MCP: an **MCP server** (an 
 
 ## How the two sides fit together
 
-<div style={{flex: '1 1 320px'}}>
-
-```mermaid
-flowchart TB
-    ExtClient["AI assistant or agent<br/>(Claude Desktop, Copilot,<br/>your own AI agent)"]
-    WSO2Server["Your WSO2 Agent Builder<br/>MCP service<br/><br/>tools = remote functions<br/>in the service"]
-    ExtClient -- MCP --> WSO2Server
-```
-
-*Exposing as MCP*
-
-```mermaid
-flowchart TB
-    WSO2Agent["Your WSO2 Agent Builder<br/>AI agent"]
-    ExtServer["Another MCP server<br/>(Slack, GitHub, vendor)<br/><br/>tools = whatever<br/>the server exposes"]
-    WSO2Agent -- MCP --> ExtServer
-```
-
-*Consuming MCP from an agent*
-
-</div>
+<ThemedImage
+    alt="Two sides of MCP. Exposing as MCP: an AI assistant or agent such as Claude Desktop, GitHub Copilot, or your own AI agent calls your WSO2 Agent Builder MCP service over MCP, where each function in the service is a tool. Consuming MCP from an agent: your WSO2 Agent Builder AI agent adds another MCP server as a tool through an MCP toolkit and calls another MCP server, such as Slack, GitHub, or a vendor server, over MCP"
+    sources={{
+        light: useBaseUrl('/img/genai/develop/mcp-v5.1/mcp-overview-v1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/mcp-v5.1/mcp-overview-v1.0.png'),
+    }}
+/>
 
 You can do both in the same project. A single project might expose a few tools (your CRM lookups) over MCP for outside assistants while its agents use Slack and GitHub MCP servers.
 
