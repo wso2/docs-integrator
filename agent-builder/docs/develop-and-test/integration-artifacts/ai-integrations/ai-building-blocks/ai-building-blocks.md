@@ -4,7 +4,7 @@ title: AI Building Blocks
 
 # AI Building Blocks
 
-Every AI feature in WSO2 Agent Builder, agents, direct LLM calls, and RAG, is composed from the same small set of shared connections and stores. Configure one once, then reuse it wherever it's needed in your agentic integration.
+Every AI feature in WSO2 Agent Builder, agents, direct LLM calls, and knowledge bases, is composed from the same small set of shared connections and stores. Configure one once, then reuse it wherever it's needed in your agentic integration.
 
 <PaletteCard icon="model-providers" href="/develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers">
   <h3 class="palette-card-title">Model Providers</h3>
@@ -18,10 +18,6 @@ Every AI feature in WSO2 Agent Builder, agents, direct LLM calls, and RAG, is co
   <h3 class="palette-card-title">Vector Stores</h3>
   <p class="palette-card-desc">Persist embeddings and run similarity search across In-Memory, Pinecone, pgvector, Weaviate, or Milvus.</p>
 
-<PaletteCard icon="knowledge-bases" href="/develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/knowledge-bases">
-  <h3 class="palette-card-title">Knowledge Bases</h3>
-  <p class="palette-card-desc">The indexable document store RAG reads from and writes to, composed of a vector store, embedding provider, and chunker.</p>
-
 <PaletteCard icon="chunkers" href="/develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/chunkers">
   <h3 class="palette-card-title">Chunkers</h3>
   <p class="palette-card-desc">Split documents into chunks before embedding. Smaller chunks improve retrieval precision; larger chunks preserve more surrounding context.</p>
@@ -32,5 +28,5 @@ Every AI feature in WSO2 Agent Builder, agents, direct LLM calls, and RAG, is co
 
 ## What's next
 
-- [RAG](../rag/rag.md) — Ground LLM responses in your own documents using these building blocks together
+- [How Knowledge Bases Work](../knowledge-bases/how-knowledge-bases-work.md) — Combine these building blocks into a knowledge base that grounds agent responses in your own documents
 - [AI Agents](../agents/agents.md) — Use a model provider to power an agent's reasoning

@@ -4,7 +4,7 @@ title: Data Loaders
 
 # Data Loaders
 
-A **Data Loader** reads documents from a source and returns them as `ai:Document` values, ready to be chunked, embedded, and indexed by a [Knowledge Base](knowledge-bases.md). Use a data loader when you build a custom ingestion flow in WSO2 Integrator. For the recommended workflow, [ingest documents in WSO2 Cloud](../rag/rag-ingestion.md) instead.
+A **Data Loader** reads documents from a source and returns them as `ai:Document` values, ready to be chunked, embedded, and indexed by a [Knowledge Base](../knowledge-bases/knowledge-bases.md). Use a data loader when you build a custom ingestion flow in WSO2 Integrator. To ingest documents without building a flow, create a [knowledge base in WSO2 Cloud](product://saas/manage/rag-ingestion/knowledge-bases) instead.
 
 ## Available actions
 
@@ -60,7 +60,7 @@ Reads files from the local file system and wraps their content as `ai:Document` 
 | **Data Loader Name** | Yes | The variable name for the loader instance. |
 | **Result Type** | Yes | The variable type, set to `ai:TextDataLoader`. |
 
-Pass the output of **Load** to the [Knowledge Base **Ingest** action](knowledge-bases.md#available-actions) when building a custom ingestion flow.
+Pass the output of **Load** to the [Knowledge Base **Ingest** action](../knowledge-bases/knowledge-bases.md#available-actions) when building a custom ingestion flow.
 
 ## AWS S3 Text Data Loader
 
@@ -235,6 +235,6 @@ Plus the [Standard HTTP advanced configurations](model-providers.md#standard-htt
 
 ## What's next
 
-- [RAG ingestion](../rag/rag-ingestion.md) - Wire a data loader into an ingestion pipeline.
-- [Knowledge Bases](knowledge-bases.md) - Combine a chunker, embedding provider, and vector store to ingest the loaded documents.
+- [Ingest documents](../knowledge-bases/ingest-documents.md) - Wire a data loader into an ingestion pipeline.
+- [Knowledge Bases](../knowledge-bases/knowledge-bases.md) - Combine a chunker, embedding provider, and vector store to ingest the loaded documents.
 - [Chunkers](chunkers.md) - Control how loaded documents are split before embedding.

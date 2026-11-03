@@ -110,7 +110,7 @@ Both AWS Bedrock embedding providers have the same create form fields.
 | **Retry Config** | Both | `maxRetries` 3, `initialDelay` 1.0, `maxDelay` 20.0, `backoffFactor` 2.0 | Record | Backoff for throttling and transient errors (408, 429, 500, 502, 503, 504). |
 | **HTTP Config** | Both | `{}` | Record | The [Standard HTTP advanced configurations](model-providers.md#standard-http-advanced-configurations), grouped in one record. There is no **Service URL**; use **Endpoint Configuration**. |
 
-**Cohere's Input Type affects retrieval quality without raising any error.** Cohere recommends `SEARCH_DOCUMENT` for the content you store and `SEARCH_QUERY` for search queries. In a [Vector Knowledge Base](knowledge-bases.md#vector-knowledge-base), leave **Input Type** unset: ingest uses **Batch Embed**, which sends `SEARCH_DOCUMENT`, and retrieve uses **Embed**, which sends `SEARCH_QUERY`. Setting it applies the same value to both.
+**Cohere's Input Type affects retrieval quality without raising any error.** Cohere recommends `SEARCH_DOCUMENT` for the content you store and `SEARCH_QUERY` for search queries. In a [Vector Knowledge Base](../knowledge-bases/knowledge-bases.md#vector-knowledge-base), leave **Input Type** unset: ingest uses **Batch Embed**, which sends `SEARCH_DOCUMENT`, and retrieve uses **Embed**, which sends `SEARCH_QUERY`. Setting it applies the same value to both.
 
 **Batch Embed** sends up to 96 chunks per request to Cohere. Titan accepts one text per request, so Titan makes one request per chunk. Both return the embeddings in the same order as the input chunks.
 
@@ -303,6 +303,6 @@ The provider selected at ingest time must remain consistent for the lifetime of 
 ## What's next
 
 - [Vector Stores](vector-stores.md) — Where the embeddings live.
-- [Knowledge Bases](knowledge-bases.md) — The object that ties an embedding provider, a vector store, and a chunker together.
+- [Knowledge Bases](../knowledge-bases/knowledge-bases.md) — The object that ties an embedding provider, a vector store, and a chunker together.
 - [Chunkers](chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.
-- [RAG](../rag/rag.md) — WSO2 Agent Builder walkthrough for ingestion and query flows.
+- [How Knowledge Bases Work](../knowledge-bases/how-knowledge-bases-work.md) — WSO2 Agent Builder walkthrough for ingestion and query flows.
