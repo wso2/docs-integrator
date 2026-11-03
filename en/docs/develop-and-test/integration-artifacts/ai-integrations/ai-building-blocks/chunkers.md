@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 5
 title: Chunkers
 description: Reference for every Chunker in WSO2 Agent Builder. Covers the AUTO and DISABLE constants, Generic Recursive Chunker, Markdown Chunker, HTML Chunker, and the Devant remote chunker, including strategies, defaults, and create form fields.
 keywords: [wso2 agent builder, chunker, rag, text splitting, chunking strategy, knowledge base, embedding]
@@ -36,7 +36,7 @@ You almost always pick one of these in the **Vector Knowledge Base** form's **Ch
 
 ## Where to find chunkers
 
-Chunkers are configured in the **Create Vector Knowledge Base** form, which opens whenever you create a vector knowledge base. For example, on the agent canvas select **Add Tool** → **Use Knowledge Base** → **Vector Knowledge Base** → **Retrieve**, then select **Create knowledge base**. See [Knowledge Bases](knowledge-bases.md).
+Chunkers are configured in the **Create Vector Knowledge Base** form, which opens whenever you create a vector knowledge base. For example, on the agent canvas select **Add Tool** → **Use Knowledge Base** → **Vector Knowledge Base** → **Retrieve**, then select **Create knowledge base**. See [Knowledge Bases](../knowledge-bases/knowledge-bases.md).
 
 The form's **Chunker** field defaults to **AUTO**. To use a specific chunker, select **+ Create New Chunker** below it.
 
@@ -229,5 +229,5 @@ The defaults (`200` / `40`) are tuned for prose. Code-heavy or table-heavy conte
 
 - [Embedding Providers](embedding-providers.md) - Configure the model that converts chunks into vectors.
 - [Vector Stores](vector-stores.md) - Set up the store that indexes and retrieves those vectors.
-- [Knowledge Bases](knowledge-bases.md) - Combine a chunker, embedding provider, and vector store into a single ingest-and-retrieve component.
-- [RAG](../rag/rag.md) - End-to-end walkthrough of the ingestion and query flows.
+- [Knowledge Bases](../knowledge-bases/knowledge-bases.md) - Combine a chunker, embedding provider, and vector store into a single ingest-and-retrieve component.
+- [How Knowledge Bases Work](../knowledge-bases/how-knowledge-bases-work.md) - End-to-end walkthrough of the ingestion and query flows.

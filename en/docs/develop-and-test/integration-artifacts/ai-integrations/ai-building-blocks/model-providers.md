@@ -371,7 +371,7 @@ Scrolling further shows Timeout, Forwarded, Compression, Payload Validation, the
 Expanding **Advanced Configurations** shows the exact same panel as the [Standard HTTP advanced configurations](#standard-http-advanced-configurations) section above. Azure OpenAI adds no further provider-specific fields here.
 
 :::info
-The Azure package also ships an **Embedding Provider** and the **Azure AI Search Knowledge Base**. See [Azure OpenAI](embedding-providers.md#azure-openai) and [Azure AI Search](knowledge-bases.md#azure-ai-search-knowledge-base).
+The Azure package also ships an **Embedding Provider** and the **Azure AI Search Knowledge Base**. See [Azure OpenAI](embedding-providers.md#azure-openai) and [Azure AI Search](../knowledge-bases/knowledge-bases.md#azure-ai-search-knowledge-base).
 :::
 
 ## DeepSeek
@@ -763,5 +763,5 @@ Editing follows the same pattern for every component type. Embedding providers, 
 
 - [Embedding providers](embedding-providers.md) — Vector embeddings for RAG. The OpenAI, Azure, AWS Bedrock, Vertex, OpenRouter, and Default WSO2 packages also ship embedding providers.
 - [Vector stores](vector-stores.md) — Persist and query embeddings using Pinecone, Weaviate, Qdrant, pgvector, and other backends.
-- [Knowledge bases](knowledge-bases.md) — Managed retrieval sources, including Azure AI Search, that plug directly into RAG flows.
+- [Knowledge Bases](../knowledge-bases/knowledge-bases.md) — Managed retrieval sources, including Azure AI Search, that plug directly into RAG flows.
 - [Chunkers](chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.

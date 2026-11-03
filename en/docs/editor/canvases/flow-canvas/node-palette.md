@@ -387,7 +387,7 @@ The **AI** section of the node panel lets you build AI-powered integrations dire
 | Sub-category | Use it for | Reference |
 |---|---|---|
 | **Direct LLM** | Send a prompt to an LLM and bind the response to a typed variable. | [Model providers](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md) |
-| **RAG** | Ground LLM responses in your own documents by retrieving relevant chunks at query time. | [RAG](../../../develop-and-test/integration-artifacts/ai-integrations/rag/rag.md) |
+| **RAG** | Ground LLM responses in your own documents by retrieving relevant chunks at query time. | [How Knowledge Bases Work](../../../develop-and-test/integration-artifacts/ai-integrations/knowledge-bases/how-knowledge-bases-work.md) |
 | **Agent** | Run multi-turn workflows where an LLM plans the next step, calls tools, and uses memory. | [AI agents](../../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md) |
 
 For an end-to-end orientation to the AI building blocks in WSO2 Agent Builder, see the [AI Integrations overview](../../../develop-and-test/integration-artifacts/ai-integrations/ai-integrations.md).
@@ -459,7 +459,7 @@ Select **Add Knowledge Base** to open the picker with the supported knowledge ba
     }}
 />
 
-For the full reference, see [Knowledge bases](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/knowledge-bases.md).
+For the full reference, see [Knowledge Bases](../../../develop-and-test/integration-artifacts/ai-integrations/knowledge-bases/knowledge-bases.md).
 
 ### Data Loader
 
@@ -490,7 +490,7 @@ Select **Add Data Loader** to open the picker with the supported data loaders.
     }}
 />
 
-For the ingestion flow, supported formats, and how to point the loader at a directory of documents, see the [RAG ingestion](../../../develop-and-test/integration-artifacts/ai-integrations/rag/rag-ingestion.md).
+For the ingestion flow, supported formats, and how to point the loader at a directory of documents, see the [Ingest documents](../../../develop-and-test/integration-artifacts/ai-integrations/knowledge-bases/ingest-documents.md).
 
 ### Recursive Document Chunker
 
@@ -576,7 +576,7 @@ For the full reference, see [Chunkers](../../../develop-and-test/integration-art
     }}
 />
 
-For the recommended agent-based workflow, where retrieval is exposed to an AI agent as a tool, see [RAG query with an agent](../../../develop-and-test/integration-artifacts/ai-integrations/rag/rag-query.md).
+For the recommended agent-based workflow, where retrieval is exposed to an AI agent as a tool, see [Retrieve from a knowledge base with an agent](../../../develop-and-test/integration-artifacts/ai-integrations/knowledge-bases/use-with-an-agent.md).
 
 ### Vector Store
 

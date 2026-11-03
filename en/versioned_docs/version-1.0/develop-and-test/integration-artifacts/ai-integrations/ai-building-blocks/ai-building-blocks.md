@@ -1,7 +1,7 @@
 ---
 title: AI Building Blocks
-description: The shared connections and stores every AI feature in WSO2 Agent Builder is built from -- model providers, embedding providers, vector stores, knowledge bases, chunkers, and data loaders.
-keywords: [wso2 agent builder, model provider, embedding provider, vector store, knowledge base, chunker, data loader, rag]
+description: The shared connections and stores every AI feature in WSO2 Agent Builder is built from -- model providers, embedding providers, vector stores, chunkers, and data loaders.
+keywords: [wso2 agent builder, model provider, embedding provider, vector store, chunker, data loader, knowledge base, rag]
 sidebar_label: Building Blocks
 sidebar_position: 0
 slug: /develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks
@@ -11,7 +11,7 @@ wide_layout: true
 
 # AI Building Blocks
 
-Every AI feature in WSO2 Agent Builder, agents, direct LLM calls, and RAG, is composed from the same small set of shared connections and stores. Configure one once, then reuse it wherever it's needed in your agentic integration.
+Every AI feature in WSO2 Agent Builder, agents, direct LLM calls, and knowledge bases, is composed from the same small set of shared connections and stores. Configure one once, then reuse it wherever it's needed in your agentic integration.
 
 <PaletteGrid>
 
@@ -30,11 +30,6 @@ Every AI feature in WSO2 Agent Builder, agents, direct LLM calls, and RAG, is co
   <p class="palette-card-desc">Persist embeddings and run similarity search across In-Memory, Pinecone, pgvector, Weaviate, or Milvus.</p>
 </PaletteCard>
 
-<PaletteCard icon="knowledge-bases" href="/develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/knowledge-bases">
-  <h3 class="palette-card-title">Knowledge Bases</h3>
-  <p class="palette-card-desc">The indexable document store RAG reads from and writes to, composed of a vector store, embedding provider, and chunker.</p>
-</PaletteCard>
-
 <PaletteCard icon="chunkers" href="/develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/chunkers">
   <h3 class="palette-card-title">Chunkers</h3>
   <p class="palette-card-desc">Split documents into chunks before embedding. Smaller chunks improve retrieval precision; larger chunks preserve more surrounding context.</p>
@@ -49,5 +44,5 @@ Every AI feature in WSO2 Agent Builder, agents, direct LLM calls, and RAG, is co
 
 ## What's next
 
-- [RAG](../rag/rag.md) — Ground LLM responses in your own documents using these building blocks together
+- [How Knowledge Bases Work](../knowledge-bases/how-knowledge-bases-work.md) — Combine these building blocks into a knowledge base that grounds agent responses in your own documents
 - [AI Agents](../agents/agents.md) — Use a model provider to power an agent's reasoning
