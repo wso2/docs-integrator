@@ -10,6 +10,7 @@
 
 export type ArtifactCategoryKey =
   | 'automation'
+  | 'workflow'
   | 'ai'
   | 'api'
   | 'event'
@@ -44,6 +45,12 @@ export const CATEGORIES: ArtifactCategory[] = [
     label: 'Automation',
     icon: `${ICON_BASE}/automation.svg`,
     description: 'Run integration logic on a schedule or manually, without a network listener.',
+  },
+  {
+    key: 'workflow',
+    label: 'Durable Workflow',
+    icon: `${ICON_BASE}/durable-workflow.svg`,
+    description: 'Design long-running workflow logic that can be interrupted by events, use timers, involve human tasks, and run with crash recovery.',
   },
   {
     key: 'ai',
@@ -83,6 +90,10 @@ const AI = '/develop-and-test/integration-artifacts/ai-integrations';
 export const ARTIFACTS: Artifact[] = [
   // Automation
   { name: 'Automation', category: 'automation', icon: `${ICON_BASE}/automation.svg`, href: `${DEV}/automation` },
+
+  // Durable Workflow
+  { name: 'Durable Workflow', category: 'workflow', icon: `${ICON_BASE}/durable-workflow.svg`, href: `${DEV}/workflow/durable-workflow` },
+  { name: 'Durable Agentic Workflow', category: 'workflow', icon: `${ICON_BASE}/durable-workflow.svg`, href: `${DEV}/workflow/durable-agentic-workflow` },
 
   // AI Integration
   { name: 'Chat Agent Service', category: 'ai', icon: `${ICON_BASE}/chat-agent.svg`, href: `${AI}/agents` },
