@@ -14,10 +14,10 @@ import TabItem from '@theme/TabItem';
 
 SAP ECC event integrations register WSO2 Integrator as an RFC server program with the SAP gateway. Once registered, the SAP system pushes events to the integration over the SAP Java Connector (JCo): outbound IDocs distributed through ALE, and calls to RFC function modules that are routed to the registered program. Use them to react to SAP business documents such as orders, deliveries, and material master changes as they are created, or to let ABAP programs call out to WSO2 Integrator synchronously, without polling SAP.
 
-One SAP ECC (JCo) listener can host two kinds of services, and both can be attached to the same listener:
+The SAP ECC event integration provides two services. Both run on the same listener, and you can create either one or both:
 
-- **IDoc Service** receives the IDocs that SAP distributes through an ALE port, such as `ORDERS05` sales orders, `MATMAS05` material masters, or `DEBMAS07` customer masters. Use it to replicate SAP business documents into other systems, publish them to a message broker, or start a downstream workflow as soon as a document is created or changed in SAP.
-- **RFC Service** answers function module calls that an ABAP program or transaction makes on the registered RFC destination and waits for synchronously. Use it to let SAP look up data that lives outside SAP, validate a document against an external system, or call a partner service without leaving ABAP.
+- **IDoc Service**: Receives the IDocs that SAP distributes through an ALE port, such as `ORDERS05` sales orders, `MATMAS05` material masters, or `DEBMAS07` customer masters. Use it to replicate SAP business documents into other systems, publish them to a message broker, or start a downstream workflow as soon as a document is created or changed in SAP.
+- **RFC Service**: Answers function module calls that an ABAP program or transaction makes on the registered RFC destination and waits for a synchronous response. Use it to let SAP look up data that lives outside SAP, validate a document against an external system, or call a partner service without leaving ABAP.
 
 :::info Prerequisites
 
