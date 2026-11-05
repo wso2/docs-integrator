@@ -31,7 +31,7 @@ The SAP ECC (JCo) event integration provides two service types that can be attac
 See the [SAP ECC (JCo) connector setup guide](product://connectors/catalog/erp-business/sap.jco/setup-guide) for step-by-step SAP-side instructions.
 :::
 
-## Create an SAP ECC events service
+## Creating an SAP ECC service
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
@@ -260,6 +260,9 @@ listener jco:Listener sapListener = new ({
 });
 ```
 
+</TabItem>
+</Tabs>
+
 `jco:ServerConfig` accepts the following fields:
 
 | Field | Type | Default | Description |
@@ -333,12 +336,9 @@ listener jco:Listener sapListener = new ({
 The listener starts asynchronously. A successful start means the server has been handed to the JCo runtime, not that registration with the gateway has completed. If the gateway is unreachable or rejects the program ID, JCo retries automatically and reports each failure through the service's `onError` handler, so implement `onError` to surface connectivity problems.
 :::
 
-</TabItem>
-</Tabs>
-
 ## Event handlers
 
-When an SAP ECC events service is created, WSO2 Integrator adds the handlers for the selected service type automatically. Click a handler in the **Service Designer** to open the flow diagram view and implement the processing logic.
+When an SAP ECC service is created, WSO2 Integrator adds the handlers for the selected service type automatically. Click a handler in the **Service Designer** to open the flow diagram view and implement the processing logic.
 
 ### IDoc Service handlers
 
@@ -435,7 +435,7 @@ service jco:RfcService on sapListener {
 
 Field values in a `jco:RfcRecord` can be `string`, `int`, `float`, `decimal`, `boolean`, `time:Date`, `time:TimeOfDay`, `byte[]`, a nested record (structure), or a record array (table).
 
-## Trigger events from SAP
+## Triggering events from SAP
 
 After the integration starts, use the following transactions to verify the registration and send test events.
 
