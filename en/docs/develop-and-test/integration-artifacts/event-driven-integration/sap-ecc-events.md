@@ -31,6 +31,10 @@ See the [SAP ECC (JCo) connector setup guide](product://connectors/catalog/erp-b
 
 ## Creating an SAP ECC service
 
+One listener can host one IDoc service and one RFC service. Create the IDoc service first, which also creates the listener, and then attach the RFC service to the same listener. If you only need one of them, create that one on its own.
+
+### Creating an IDoc service
+
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
@@ -96,11 +100,11 @@ See the [SAP ECC (JCo) connector setup guide](product://connectors/catalog/erp-b
 
    - **Select SAP IDoc Library JAR File**: Path to `sapidoc3.jar`.
    - **Select SAP JCo Library JAR File**: Path to `sapjco3.jar`.
-   - **Service Type**: The kind of SAP event the service handles. Select **IDoc Service** (the default) to receive IDocs, or **RFC Service** to handle inbound function module calls.
+   - **Service Type**: Keep **IDoc Service**, the default.
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section with the handlers for the selected service type pre-added.
+5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section with `onReceive` and `onError` pre-added.
 
    <ThemedImage
        alt="Service Designer showing the SAP ECC (JCo) IDoc service canvas"
@@ -110,32 +114,10 @@ See the [SAP ECC (JCo) connector setup guide](product://connectors/catalog/erp-b
        }}
    />
 
-   An IDoc service is created with `onReceive` and `onError`. An RFC service is created with `onCall` and `onError`. Click any handler to open it in the flow diagram view and implement the logic.
-
-6. To handle both IDocs and RFC calls, repeat the steps and select the other **Service Type**. In the creation form, choose **Use Existing Listener** and pick the listener you created the first time instead of creating a new one. One listener can host at most one IDoc service and one RFC service.
-
-   <ThemedImage
-       alt="SAP ECC (JCo) Event Integration creation form reusing the existing listener for an RFC service"
-       sources={{
-           light: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-creation-form-rfc.png'),
-           dark: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-creation-form-rfc.png'),
-       }}
-   />
-
-   The RFC service opens in the **Service Designer** with `onCall` and `onError` pre-added. Both services share the listener pill and the program ID.
-
-   <ThemedImage
-       alt="Service Designer showing the SAP ECC (JCo) RFC service canvas"
-       sources={{
-           light: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-service-designer-rfc.png'),
-           dark: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-service-designer-rfc.png'),
-       }}
-   />
+   Click a handler to open it in the flow diagram view and implement the logic.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
-
-The following example handles both IDocs and RFC calls on one listener. Remove the service you do not need.
 
 ```ballerina
 import ballerina/log;
@@ -178,7 +160,66 @@ service jco:IDocService on sapListener {
         log:printError("IDoc listener error", err);
     }
 }
+```
 
+The SAP JCo JARs must be declared as `provided` platform dependencies in `Ballerina.toml`. The Visual Designer adds these entries for you when you select the JARs in the creation form.
+
+```toml
+[[platform.java21.dependency]]
+path = "libs/sapidoc3.jar"
+groupId = "com.sap"
+artifactId = "com.sap.conn.idoc"
+version = "3.1.*"
+scope = "provided"
+
+[[platform.java21.dependency]]
+path = "libs/sapjco3.jar"
+groupId = "com.sap"
+artifactId = "com.sap.conn.jco"
+version = "3.1.*"
+scope = "provided"
+```
+
+</TabItem>
+</Tabs>
+
+### Creating an RFC service
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
+2. In the **Artifacts** panel, select **SAP ECC (JCo)** under **Event Integration**.
+3. In the creation form, select **Use Existing Listener** and pick the listener created with the IDoc service (for example, `jcoListener`). The SAP driver libraries registered with that listener are shown under **SAP Driver Libraries**. If the integration has no SAP ECC (JCo) listener yet, select **Create New Listener** and fill in the fields described in [Creating an IDoc service](#creating-an-idoc-service).
+
+   <ThemedImage
+       alt="SAP ECC (JCo) Event Integration creation form reusing the existing listener for an RFC service"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-creation-form-rfc.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-creation-form-rfc.png'),
+       }}
+   />
+
+4. Set **Service Type** to **RFC Service** and click **Create**.
+
+5. WSO2 Integrator opens the service in the **Service Designer** with `onCall` and `onError` pre-added. Both services share the listener pill and the program ID.
+
+   <ThemedImage
+       alt="Service Designer showing the SAP ECC (JCo) RFC service canvas"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-service-designer-rfc.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-service-designer-rfc.png'),
+       }}
+   />
+
+   Click a handler to open it in the flow diagram view and implement the logic.
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
+Attach the RFC service to the listener declared for the IDoc service. If the integration only handles RFC calls, declare the listener and the `Ballerina.toml` platform dependencies exactly as shown in [Creating an IDoc service](#creating-an-idoc-service).
+
+```ballerina
 // Answers function module calls that SAP routes to the registered program.
 service jco:RfcService on sapListener {
 
@@ -198,24 +239,6 @@ service jco:RfcService on sapListener {
         log:printError("RFC listener error", err);
     }
 }
-```
-
-The SAP JCo JARs must be declared as `provided` platform dependencies in `Ballerina.toml`. The Visual Designer adds these entries for you when you select the JARs in the creation form.
-
-```toml
-[[platform.java21.dependency]]
-path = "libs/sapidoc3.jar"
-groupId = "com.sap"
-artifactId = "com.sap.conn.idoc"
-version = "3.1.*"
-scope = "provided"
-
-[[platform.java21.dependency]]
-path = "libs/sapjco3.jar"
-groupId = "com.sap"
-artifactId = "com.sap.conn.jco"
-version = "3.1.*"
-scope = "provided"
 ```
 
 </TabItem>
