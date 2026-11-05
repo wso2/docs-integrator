@@ -14,13 +14,6 @@ import TabItem from '@theme/TabItem';
 
 SAP ECC event integrations register WSO2 Integrator as an RFC server program with the SAP gateway. Once registered, the SAP system pushes events to the integration over the SAP Java Connector (JCo): outbound IDocs distributed through ALE, and calls to RFC function modules that are routed to the registered program. Use them to react to SAP business documents such as orders, deliveries, and material master changes as they are created, or to let ABAP programs call out to WSO2 Integrator synchronously, without polling SAP.
 
-The SAP ECC (JCo) event integration provides two service types that can be attached to the same listener:
-
-| Service type | Handler | Use when |
-|---|---|---|
-| **IDoc Service** | `onReceive` | SAP sends IDocs (for example, `ORDERS05`, `MATMAS05`, `DEBMAS07`) to the integration through an ALE port. |
-| **RFC Service** | `onCall` | An ABAP program or a transaction calls a function module on the registered RFC destination and expects a synchronous response. |
-
 :::info Prerequisites
 
 - **SAP JCo libraries.** SAP's proprietary `sapjco3.jar`, `sapidoc3.jar`, and the native library for your operating system (`libsapjco3.so`, `sapjco3.dll`, or `libsapjco3.dylib`) are not bundled with the connector. Download them from the [SAP Support Portal](https://support.sap.com/en/product/connectors/jco.html) and keep the native library on the JVM library path (`LD_LIBRARY_PATH`, `PATH`, or `DYLD_LIBRARY_PATH`).
