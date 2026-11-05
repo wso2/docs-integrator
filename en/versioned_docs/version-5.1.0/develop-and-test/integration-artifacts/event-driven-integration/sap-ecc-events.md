@@ -362,7 +362,7 @@ The listener starts asynchronously. A successful start means the server has been
 
 ## Event handlers
 
-When an SAP ECC service is created, WSO2 Integrator adds the handlers for the selected service type automatically. Click a handler in the **Service Designer** to open the flow diagram view and implement the processing logic.
+When an SAP ECC service is created, WSO2 Integrator adds the handlers for the selected service type automatically. Click a handler in the **Service Designer** or in the project tree to open it in the **Flow Designer** and implement the processing logic.
 
 ### IDoc Service handlers
 
@@ -371,17 +371,29 @@ When an SAP ECC service is created, WSO2 Integrator adds the handlers for the se
 | `onReceive` | SAP sends an IDoc to the registered program | Transforming the IDoc and forwarding it to downstream systems |
 | `onError` | The JCo runtime reports a gateway, registration, or IDoc parsing error | Logging failures and sending alerts |
 
-Click **onReceive** in the **Service Designer** or in the project tree to open the handler in the **Flow Designer** and add the processing logic.
+`onReceive` receives the IDoc as an `xml` value in the standard `IDOC` XML format. The control record (`EDI_DC40`) carries the IDoc type, message type, and partner details, and the data records follow as segments named after the IDoc segment types.
+
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+The following flow reads the message type and IDoc number from the control record, logs them, and branches on the message type to read the order header segment.
 
 <ThemedImage
-    alt="Flow Designer for the SAP ECC (JCo) onReceive handler"
+    alt="Flow Designer for the SAP ECC (JCo) onReceive handler with variable, log, and if nodes"
     sources={{
         light: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-onreceive-flow.png'),
         dark: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-onreceive-flow.png'),
     }}
 />
 
-`onReceive` receives the IDoc as an `xml` value in the standard `IDOC` XML format. The control record (`EDI_DC40`) carries the IDoc type, message type, and partner details, and the data records follow as segments named after the IDoc segment types.
+To build it, click **+** on the canvas and add nodes in order:
+
+1. **Declare Variable** `messageType` with the expression `(iDoc/**/<MESTYP>).data()`, and another for `idocNumber` with `(iDoc/**/<DOCNUM>).data()`.
+2. **Log** (`log:printInfo`) with the message `IDoc received` and the two variables as key-value pairs.
+3. **If** with the condition `messageType == "ORDERS"`. Inside the branch, declare `header` as `iDoc/**/<E1EDK01>` and log `(header/<CURCY>).data()`.
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
 
 ```ballerina
 service jco:IDocService on sapListener {
@@ -405,6 +417,10 @@ service jco:IDocService on sapListener {
 }
 ```
 
+
+</TabItem>
+</Tabs>
+
 To work with typed values, declare a record that mirrors the IDoc structure and convert the XML with `xmldata:parseAsType`, or open the IDoc in the [Data Mapper](../supportive-artifacts/data-mapper/data-mapper.md) to map it to your target type.
 
 :::note
@@ -417,16 +433,6 @@ IDoc delivery is fire-and-forget. SAP considers the IDoc delivered as soon as th
 |---|---|---|
 | `onCall` | SAP calls a function module on the RFC destination that points to the registered program | Serving lookups, validations, or callbacks that ABAP programs call synchronously |
 | `onError` | The JCo runtime reports a gateway, registration, parameter construction, or response serialization error | Logging failures and sending alerts |
-
-Click **onCall** to open the handler in the **Flow Designer**. The value you return from the flow is sent back to SAP as the function module's response.
-
-<ThemedImage
-    alt="Flow Designer for the SAP ECC (JCo) onCall handler"
-    sources={{
-        light: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-oncall-flow.png'),
-        dark: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-oncall-flow.png'),
-    }}
-/>
 
 `onCall` receives the name of the function module and its parameters, and its return value is sent back to SAP as the function module's export and table parameters. The function module must exist in the SAP system (it supplies the parameter metadata), but its ABAP implementation is not executed; the integration answers in its place.
 
@@ -444,31 +450,44 @@ Return one of the following:
 | `()` | Returns without data. Use for function modules with no export parameters. |
 | `error` | Raised as an ABAP exception in the calling program. |
 
+<Tabs>
+<TabItem value="ui" label="Visual Designer" default>
+
+The following flow answers `STFC_CONNECTION`, the standard SAP connection test module, and rejects anything else.
+
+<ThemedImage
+    alt="Flow Designer for the SAP ECC (JCo) onCall handler with if, variable, and return nodes"
+    sources={{
+        light: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-oncall-flow.png'),
+        dark: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-oncall-flow.png'),
+    }}
+/>
+
+To build it, click **+** on the canvas and add nodes in order:
+
+1. **If** with the condition `functionName != "STFC_CONNECTION"`. Inside the branch, add **Return** with `error("Unsupported function module: " + functionName)`.
+2. **Declare Variable** `importParams` with `parameters.importParameters ?: {}`, and `requestText` with `(importParams["REQUTEXT"] ?: "").toString()`.
+3. **Return** with the record `{"ECHOTEXT": requestText, "RESPTEXT": "Handled by WSO2 Integrator"}`. Its fields become the export parameters `ECHOTEXT` and `RESPTEXT` on the SAP side.
+
+</TabItem>
+<TabItem value="code" label="Ballerina Code">
+
 ```ballerina
 service jco:RfcService on sapListener {
 
     remote function onCall(string functionName, jco:RfcParameters parameters) returns jco:RfcRecord|xml|error? {
-        match functionName {
-            "STFC_CONNECTION" => {
-                jco:RfcRecord importParams = parameters.importParameters ?: {};
-                return {
-                    "ECHOTEXT": (importParams["REQUTEXT"] ?: "").toString(),
-                    "RESPTEXT": "Handled by WSO2 Integrator"
-                };
-            }
-            "Z_CHECK_CUSTOMER_CREDIT" => {
-                jco:RfcRecord importParams = parameters.importParameters ?: {};
-                string customerId = (importParams["CUSTOMER_ID"] ?: "").toString();
-                return {
-                    "CREDIT_STATUS": "A",
-                    "CREDIT_LIMIT": 50000.00d,
-                    "MESSAGE": "Credit approved for customer " + customerId
-                };
-            }
-            _ => {
-                return error("Unsupported function module: " + functionName);
-            }
+        // Reject function modules this service does not implement.
+        if functionName != "STFC_CONNECTION" {
+            return error("Unsupported function module: " + functionName);
         }
+        // Read the import parameters SAP passed in.
+        jco:RfcRecord importParams = parameters.importParameters ?: {};
+        string requestText = (importParams["REQUTEXT"] ?: "").toString();
+        // The returned record becomes the export parameters of the function module.
+        return {
+            "ECHOTEXT": requestText,
+            "RESPTEXT": "Handled by WSO2 Integrator"
+        };
     }
 
     remote function onError(error err) returns error? {
@@ -476,6 +495,11 @@ service jco:RfcService on sapListener {
     }
 }
 ```
+
+To serve several function modules from one service, branch on `functionName` with a `match` statement and return the record that each module expects.
+
+</TabItem>
+</Tabs>
 
 Field values in a `jco:RfcRecord` can be `string`, `int`, `float`, `decimal`, `boolean`, `time:Date`, `time:TimeOfDay`, `byte[]`, a nested record (structure), or a record array (table).
 
