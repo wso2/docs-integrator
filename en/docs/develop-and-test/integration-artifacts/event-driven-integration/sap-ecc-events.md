@@ -38,6 +38,15 @@ See the [SAP ECC (JCo) connector setup guide](product://connectors/catalog/erp-b
 
 1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
 2. In the **Artifacts** panel, select **SAP ECC (JCo)** under **Event Integration**.
+
+   <ThemedImage
+       alt="Artifacts panel showing SAP ECC (JCo) under Event Integration"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-artifacts-panel.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-artifacts-panel.png'),
+       }}
+   />
+
 3. In the creation form, select **Create New Listener** and fill in the following fields under **Listener Configurations**:
 
    <ThemedImage
@@ -70,6 +79,14 @@ See the [SAP ECC (JCo) connector setup guide](product://connectors/catalog/erp-b
    | **Password** | SAP logon password. Switch the field to **Expression** and reference a configurable (for example, `sapPassword`) so the secret is not stored in code. | Required |
    | **Language** | SAP logon language. | `EN` |
    | **Group** | Logon group for message server load balancing. | `PUBLIC` |
+
+   <ThemedImage
+       alt="SAP ECC (JCo) Event Integration creation form: repository destination fields"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-creation-form-repository.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-creation-form-repository.png'),
+       }}
+   />
 
    Expand **Advanced Configurations** to set the server name.
 
@@ -347,6 +364,16 @@ When an SAP ECC service is created, WSO2 Integrator adds the handlers for the se
 | `onReceive` | SAP sends an IDoc to the registered program | Transforming the IDoc and forwarding it to downstream systems |
 | `onError` | The JCo runtime reports a gateway, registration, or IDoc parsing error | Logging failures and sending alerts |
 
+Click **onReceive** in the **Service Designer** or in the project tree to open the handler in the **Flow Designer** and add the processing logic.
+
+<ThemedImage
+    alt="Flow Designer for the SAP ECC (JCo) onReceive handler"
+    sources={{
+        light: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-onreceive-flow.png'),
+        dark: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-onreceive-flow.png'),
+    }}
+/>
+
 `onReceive` receives the IDoc as an `xml` value in the standard `IDOC` XML format. The control record (`EDI_DC40`) carries the IDoc type, message type, and partner details, and the data records follow as segments named after the IDoc segment types.
 
 ```ballerina
@@ -383,6 +410,16 @@ IDoc delivery is fire-and-forget. SAP considers the IDoc delivered as soon as th
 |---|---|---|
 | `onCall` | SAP calls a function module on the RFC destination that points to the registered program | Serving lookups, validations, or callbacks that ABAP programs call synchronously |
 | `onError` | The JCo runtime reports a gateway, registration, parameter construction, or response serialization error | Logging failures and sending alerts |
+
+Click **onCall** to open the handler in the **Flow Designer**. The value you return from the flow is sent back to SAP as the function module's response.
+
+<ThemedImage
+    alt="Flow Designer for the SAP ECC (JCo) onCall handler"
+    sources={{
+        light: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-oncall-flow.png'),
+        dark: useBaseUrl('/img/develop/integration-artifacts/event/sap-ecc-events/step-oncall-flow.png'),
+    }}
+/>
 
 `onCall` receives the name of the function module and its parameters, and its return value is sent back to SAP as the function module's export and table parameters. The function module must exist in the SAP system (it supplies the parameter metadata), but its ABAP implementation is not executed; the integration answers in its place.
 
