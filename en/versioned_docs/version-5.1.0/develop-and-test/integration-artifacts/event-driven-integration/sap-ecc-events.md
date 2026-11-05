@@ -14,6 +14,11 @@ import TabItem from '@theme/TabItem';
 
 SAP ECC event integrations register WSO2 Integrator as an RFC server program with the SAP gateway. Once registered, the SAP system pushes events to the integration over the SAP Java Connector (JCo): outbound IDocs distributed through ALE, and calls to RFC function modules that are routed to the registered program. Use them to react to SAP business documents such as orders, deliveries, and material master changes as they are created, or to let ABAP programs call out to WSO2 Integrator synchronously, without polling SAP.
 
+One SAP ECC (JCo) listener can host two kinds of services, and both can be attached to the same listener:
+
+- **IDoc Service** receives the IDocs that SAP distributes through an ALE port, such as `ORDERS05` sales orders, `MATMAS05` material masters, or `DEBMAS07` customer masters. Use it to replicate SAP business documents into other systems, publish them to a message broker, or start a downstream workflow as soon as a document is created or changed in SAP.
+- **RFC Service** answers function module calls that an ABAP program or transaction makes on the registered RFC destination and waits for synchronously. Use it to let SAP look up data that lives outside SAP, validate a document against an external system, or call a partner service without leaving ABAP.
+
 :::info Prerequisites
 
 - **SAP JCo libraries.** SAP's proprietary `sapjco3.jar`, `sapidoc3.jar`, and the native library for your operating system (`libsapjco3.so`, `sapjco3.dll`, or `libsapjco3.dylib`) are not bundled with the connector. Download them from the [SAP Support Portal](https://support.sap.com/en/product/connectors/jco.html) and keep the native library on the JVM library path (`LD_LIBRARY_PATH`, `PATH`, or `DYLD_LIBRARY_PATH`).
@@ -50,28 +55,24 @@ See the [SAP ECC (JCo) connector setup guide](product://connectors/catalog/erp-b
        }}
    />
 
-   | Field | Description | Default |
-   |---|---|---|
-   | **Listener Name** | Identifier for the listener created with this service. | `jcoListener` |
-   | **Server Configuration** / **Advanced Properties** | Choose **Server Configuration** to fill in the structured fields below, or **Advanced Properties** to supply raw JCo properties (`jco.server.*` and `jco.client.*`) as a `map<string>` expression. | `Server Configuration` |
-   | **Gateway Host** | Host name or IP address of the SAP gateway. For a single application server this is the application server host. | Required |
-   | **Gateway Service** | Gateway service name or port number. The service name is `sapgw<instance number>` (for example, `sapgw00`), which resolves to port `33<instance number>`. | Required |
-   | **Program ID** | Program ID of the registered server program created in SM59. | Required |
-   | **Connection Count** | Number of connections the server registers with the gateway. Raise it to process more IDocs or RFC calls in parallel. | `2` |
+   - **Listener Name**: Identifier for the listener created with this service. Defaults to `jcoListener`.
+   - **Server Configuration** or **Advanced Properties**: Choose **Server Configuration** to fill in the structured fields below, or **Advanced Properties** to supply raw JCo properties (`jco.server.*` and `jco.client.*`) as a `map<string>` expression.
+   - **Gateway Host**: Host name or IP address of the SAP gateway. For a single application server this is the application server host.
+   - **Gateway Service**: Gateway service name or port number. The service name is `sapgw<instance number>` (for example, `sapgw00`), which resolves to port `33<instance number>`.
+   - **Program ID**: Program ID of the registered server program created in SM59.
+   - **Connection Count**: Number of connections the server registers with the gateway. Defaults to `2`. Raise it to process more IDocs or RFC calls in parallel.
 
    Under **Repository destination**, choose how the listener logs on to SAP to read IDoc and function module metadata:
 
-   | Field | Description | Default |
-   |---|---|---|
-   | **Destination Configurations** | Log on with the credentials below. The listener registers them as an internal JCo destination. | Selected |
-   | **Destination ID** | Reuse the destination of an existing SAP ECC (JCo) connection in the integration. Enter the `destinationId` the connection was created with. | - |
-   | **Application Server Host** | SAP application server host name. | Required |
-   | **System Number** | Two-digit SAP system number. | Required |
-   | **Client Number** | Three-digit SAP client. | Required |
-   | **User** | SAP logon user. | Required |
-   | **Password** | SAP logon password. Switch the field to **Expression** and reference a configurable (for example, `sapPassword`) so the secret is not stored in code. | Required |
-   | **Language** | SAP logon language. | `EN` |
-   | **Group** | Logon group for message server load balancing. | `PUBLIC` |
+   - **Destination Configurations**: Log on with the credentials below. The listener registers them as an internal JCo destination. This is the default.
+   - **Destination ID**: Reuse the destination of an existing SAP ECC (JCo) connection in the integration instead. Enter the `destinationId` the connection was created with.
+   - **Application Server Host**: SAP application server host name.
+   - **System Number**: Two-digit SAP system number.
+   - **Client Number**: Three-digit SAP client.
+   - **User**: SAP logon user.
+   - **Password**: SAP logon password. Switch the field to **Expression** and reference a configurable (for example, `sapPassword`) so the secret is not stored in code.
+   - **Language**: SAP logon language. Defaults to `EN`.
+   - **Group**: Logon group for message server load balancing. Defaults to `PUBLIC`.
 
    <ThemedImage
        alt="SAP ECC (JCo) Event Integration creation form: repository destination fields"
@@ -81,11 +82,7 @@ See the [SAP ECC (JCo) connector setup guide](product://connectors/catalog/erp-b
        }}
    />
 
-   Expand **Advanced Configurations** to set the server name.
-
-   | Field | Description | Default |
-   |---|---|---|
-   | **Server Name** | Name under which the server is registered with the JCo runtime. | Generated UUID |
+   Expand **Advanced Configurations** to set the **Server Name**, the name under which the server is registered with the JCo runtime. A UUID is generated if you leave it empty.
 
    Scroll down to **SAP Driver Libraries** and select the SAP JARs. The files are copied into the project's `libs` directory (if needed) and registered as `provided` platform dependencies in `Ballerina.toml`. Then pick the **Service Type**.
 
@@ -97,11 +94,9 @@ See the [SAP ECC (JCo) connector setup guide](product://connectors/catalog/erp-b
        }}
    />
 
-   | Field | Description | Default |
-   |---|---|---|
-   | **Select SAP IDoc Library JAR File** | Path to `sapidoc3.jar`. | Required |
-   | **Select SAP JCo Library JAR File** | Path to `sapjco3.jar`. | Required |
-   | **Service Type** | The kind of SAP event the service handles. Select **IDoc Service** to receive IDocs or **RFC Service** to handle inbound function module calls. | `IDoc Service` |
+   - **Select SAP IDoc Library JAR File**: Path to `sapidoc3.jar`.
+   - **Select SAP JCo Library JAR File**: Path to `sapjco3.jar`.
+   - **Service Type**: The kind of SAP event the service handles. Select **IDoc Service** (the default) to receive IDocs, or **RFC Service** to handle inbound function module calls.
 
 4. Click **Create**.
 
