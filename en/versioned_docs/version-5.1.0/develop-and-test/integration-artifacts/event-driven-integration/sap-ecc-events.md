@@ -293,25 +293,21 @@ listener jco:Listener sapListener = new ({
 
 `jco:ServerConfig` accepts the following fields:
 
-| Field | Type | Default | Description |
-|---|---|---|---|
-| `gwhost` | `string` | Required | SAP gateway host to register the server with |
-| `gwserv` | `string` | Required | SAP gateway service name (`sapgw<nn>`) or port number |
-| `progid` | `string` | Required | Program ID of the registered server program (transaction SM59) |
-| `connectionCount` | `int` | `2` | Number of connections registered with the gateway; also the maximum number of IDocs or RFC calls processed in parallel |
-| `repositoryDestination` | `string` \| `jco:DestinationConfig` | Required | RFC destination used to read IDoc and function module metadata. Either SAP credentials as a `jco:DestinationConfig`, or the `destinationId` of a `jco:Client` that is already initialized in the same integration |
+- `gwhost` (`string`, required): SAP gateway host to register the server with.
+- `gwserv` (`string`, required): SAP gateway service name (`sapgw<nn>`) or port number.
+- `progid` (`string`, required): Program ID of the registered server program (transaction SM59).
+- `connectionCount` (`int`, default `2`): Number of connections registered with the gateway. This is also the maximum number of IDocs or RFC calls processed in parallel.
+- `repositoryDestination` (`string` or `jco:DestinationConfig`, required): RFC destination used to read IDoc and function module metadata. Pass SAP credentials as a `jco:DestinationConfig`, or the `destinationId` of a `jco:Client` that is already initialized in the same integration.
 
 `jco:DestinationConfig` has these fields:
 
-| Field | Type | Default | Description |
-|---|---|---|---|
-| `ashost` | `string` | Required | SAP application server host |
-| `sysnr` | `string` | Required | SAP system number (for example, `"00"`) |
-| `jcoClient` | `string` | Required | SAP client (for example, `"800"`) |
-| `user` | `string` | Required | SAP logon user |
-| `passwd` | `string` | Required | SAP logon password |
-| `lang` | `string` | `"EN"` | Logon language |
-| `group` | `string` | `"PUBLIC"` | Logon group, used with message server load balancing |
+- `ashost` (`string`, required): SAP application server host.
+- `sysnr` (`string`, required): SAP system number, for example `"00"`.
+- `jcoClient` (`string`, required): SAP client, for example `"800"`.
+- `user` (`string`, required): SAP logon user.
+- `passwd` (`string`, required): SAP logon password.
+- `lang` (`string`, default `"EN"`): Logon language.
+- `group` (`string`, default `"PUBLIC"`): Logon group, used with message server load balancing.
 
 ### Reusing an SAP ECC (JCo) connection
 
