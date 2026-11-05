@@ -1,5 +1,5 @@
 ---
-title: SAP ECC Events
+title: SAP ECC
 description: Receive IDocs and inbound RFC calls from SAP ECC in real time with an SAP JCo listener, using onReceive and onCall handlers.
 keywords: [wso2 integrator, sap ecc, sap jco, idoc, rfc, idoc listener, rfc server, event integration, ale]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/sap-ecc-events
@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# SAP ECC Events
+# SAP ECC
 
 SAP ECC event integrations register WSO2 Integrator as an RFC server program with the SAP gateway. Once registered, the SAP system pushes events to the integration over the SAP Java Connector (JCo): outbound IDocs distributed through ALE, and calls to RFC function modules that are routed to the registered program. Use them to react to SAP business documents such as orders, deliveries, and material master changes as they are created, or to let ABAP programs call out to WSO2 Integrator synchronously, without polling SAP.
 
