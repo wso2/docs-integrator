@@ -25,7 +25,6 @@ Reach for a Durable Agentic Workflow instead of a plain Durable Workflow when th
 
 ## What's next
 
-- [Build a Claim Handling Durable Agent](../../../../get-started/quickstarts/build-claim-handling-agent.md) — a worked example: an agent that validates expense claims and pays them out only after a Finance reviewer approves.
 - [Durable Workflow](../durable-workflow/durable-workflow.md) — the same durable execution model, without an agent driving it.
 - [AI Agents](../../ai-integrations/agents/agents.md) — the agent building block (model, system prompt, tools, memory) used inside this workflow.
 - [Creating an Agent](../../ai-integrations/agents/create-an-agent.md) — configure the agent's role, instructions, and tools.
