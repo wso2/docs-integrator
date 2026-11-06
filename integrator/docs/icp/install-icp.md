@@ -182,7 +182,7 @@ Full reference: [Database Configuration](database-configuration.md).
 
 The server logs its startup to the console. Once you see the listener ready message, ICP is available at `https://localhost:9446`.
 
-ICP ships with a self-signed certificate. Your browser will show a security warning on first visit. Accept the warning to proceed.
+ICP ships with a self-signed certificate. Your browser will show a security warning on first visit. Accept the warning to proceed. For production, replace it with a CA-signed certificate. See [Configure TLS Certificates](configure-tls.md).
 
 ## Sign in
 
