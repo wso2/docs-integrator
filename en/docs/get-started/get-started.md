@@ -34,7 +34,6 @@ New to Integration Platform on WSO2 Cloud? Start here: set up your WSO2 Cloud ac
     <PaletteChip href="/get-started/quickstarts/build-event-driven-integration">Event-Driven</PaletteChip>
     <PaletteChip href="/get-started/quickstarts/build-file-driven-integration">File-Driven</PaletteChip>
     <PaletteChip href="/get-started/quickstarts/build-durable-workflow">Durable Workflows</PaletteChip>
-    <PaletteChip href="/get-started/quickstarts/build-durable-agent">Durable Agent</PaletteChip>
   </div>
 </PaletteCard>
 

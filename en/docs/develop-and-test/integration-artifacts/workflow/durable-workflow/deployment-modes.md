@@ -13,6 +13,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 Every durable workflow keeps its record in a workflow engine, and that record is what a run replays from after a crash or a restart. The `mode` configurable decides which engine the runtime talks to and how it reaches it, from an in-memory engine for trying a workflow out to a managed cloud deployment in production.
 
+:::info Workflows on WSO2 Cloud
+On WSO2 Cloud, workflows deployed to an environment connect to the Temporal server set in that environment's Temporal credential. See [Temporal Credentials](../../../../manage/configurations/temporal-credentials.md).
+:::
+
 ## The four modes
 
 | Mode | What it runs against | What it needs |

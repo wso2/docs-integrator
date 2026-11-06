@@ -39,12 +39,9 @@ The finished flow has three steps:
 
 A working WSO2 Integrator environment.
 
-<PrereqCard icon="local" title="Local setup" href="/get-started/setup">
-  Install and launch WSO2 Integrator on your machine.
-</PrereqCard>
-<PrereqCard icon="cloud" title="WSO2 Cloud Account" href="/get-started/setup" cloud>
-  For AI assisted development and WSO2 Cloud deployments.
-</PrereqCard>
+<div style={{gridColumn: '1 / -1', minWidth: 0}}>
+<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">Sign up and launch WSO2 Integrator in the browser-based cloud editor.</PrereqCard>
+</div>
 
 </Prerequisites>
 
