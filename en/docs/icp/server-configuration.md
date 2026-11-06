@@ -39,7 +39,7 @@ One keystore serves the certificate for all ICP HTTPS listeners (ports `9445`, `
 | `observabilityBackendURL` | `string`  | `"https://localhost:9449"`                    | URL ICP uses to call its OpenSearch adapter service. The host name must be in the server certificate |
 | `ldapAuthBackendUrl`      | `string`  | `"https://localhost:9450"`                    | URL ICP uses to call its LDAP auth service when the LDAP user store is enabled. The host name must be in the server certificate |
 
-`authBackendUrl` (see [Authentication settings](#authentication-settings)) also must use a host name that is in the server certificate. Relative paths are resolved from `<ICP_HOME>/bin`.
+When `authBackendUrl` (see [Authentication settings](#authentication-settings)) points to the built-in user store, it also must use a host name that is in the server certificate. When it points to a custom backend, the host name must match that backend's certificate, and the CA that issued it must be in the truststore. Relative paths are resolved from `<ICP_HOME>/bin`.
 
 ## Backend endpoint settings
 

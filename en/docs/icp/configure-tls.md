@@ -42,17 +42,24 @@ If your CA does not issue certificates for `localhost`, leave it out and point t
 
 ## Step 1: Create the keystore
 
-Combine the certificate, its private key, and the CA chain into a PKCS12 keystore:
+1. Create a CA chain file. List the CA that issued the server certificate first and the root CA last. If your CA gave you a bundle in this order, use it instead:
 
-```bash
-openssl pkcs12 -export \
-  -in icp.crt \
-  -inkey icp.key \
-  -certfile ca-chain.crt \
-  -name icp \
-  -out <ICP_HOME>/conf/security/icp-keystore.p12 \
-  -passout pass:<keystore-password>
-```
+    ```bash
+    cat intermediate-ca.crt ca-root.crt > ca-chain.crt
+    ```
+
+    If the server certificate is issued directly by the root CA, use `ca-root.crt` as the chain file.
+
+2. Combine the certificate, its private key, and the CA chain into a PKCS12 keystore. OpenSSL prompts for the keystore password:
+
+    ```bash
+    openssl pkcs12 -export \
+      -in icp.crt \
+      -inkey icp.key \
+      -certfile ca-chain.crt \
+      -name icp \
+      -out <ICP_HOME>/conf/security/icp-keystore.p12
+    ```
 
 - Keep only one private key entry in the keystore. ICP has no setting to choose a key alias.
 - The private key password must be the same as the keystore password. `openssl pkcs12 -export` uses the same password for both.
@@ -86,14 +93,19 @@ publicBaseUrl = "https://icp.example.com:9446"
 
 If you use a relative path, it is resolved from `<ICP_HOME>/bin`, because ICP is started from the `bin` directory. You can also use an absolute path.
 
-If the certificate does not include `localhost`, also add the following keys. The host name must be in the certificate and must resolve to the ICP server from the ICP server itself, through DNS or `/etc/hosts`:
+If the certificate does not include `localhost`, point ICP's calls to its own services at a host name in the certificate. The host name must resolve to the ICP server from the ICP server itself, through DNS or `/etc/hosts`.
 
 ```toml
-authBackendUrl = "https://icp.example.com:9447"
 observabilityBackendURL = "https://icp.example.com:9449"
-# Only when the LDAP user store is enabled:
-# ldapAuthBackendUrl = "https://icp.example.com:9450"
+# Built-in user store only. Keep your existing value if authBackendUrl points to a custom backend.
+authBackendUrl = "https://icp.example.com:9447"
+# LDAP user store only (ldapUserStoreEnabled = true).
+ldapAuthBackendUrl = "https://icp.example.com:9450"
 ```
+
+Set only the keys for the user store you use. For the available backends, see [Authentication Backends](authentication-config.md#authentication-backends).
+
+If `authBackendUrl` points to a custom authentication backend, ICP verifies that backend's certificate against the ICP truststore, not the ICP server certificate. Import the CA that issued the backend's certificate into the ICP truststore, as in [Step 2](#step-2-add-the-ca-to-the-icp-truststore).
 
 To store the passwords encrypted, see [Encrypt Secrets](encrypt-secrets.md).
 
@@ -149,12 +161,13 @@ For the other settings, see [Connecting an integration to ICP](https://mi.docs.w
 
 ## Verify the setup
 
-1. Check that each port serves your certificate. Each port should print `Verify return code: 0 (ok)`:
+1. Check that each port serves your certificate, signed by your CA and valid for the host name. Each port should print `Verify return code: 0 (ok)`:
 
     ```bash
     for p in 9445 9446 9447 9449; do
       echo "== $p"
       echo | openssl s_client -connect icp.example.com:$p -servername icp.example.com \
+        -verify_hostname icp.example.com \
         -CAfile ca-root.crt 2>/dev/null | grep -E "subject=|issuer=|Verify return code"
     done
     ```
