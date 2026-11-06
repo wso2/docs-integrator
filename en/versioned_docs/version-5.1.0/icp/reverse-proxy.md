@@ -10,6 +10,8 @@ sidebar_position: 4
 
 ICP serves the console and API on port `9446` using HTTPS with a self-signed certificate. In production, you typically place a reverse proxy in front of ICP to handle TLS termination, expose a standard port, and integrate with your network infrastructure. This page covers the ICP-specific configuration required when a reverse proxy is in use.
 
+A reverse proxy is optional. To serve a CA-signed certificate directly from ICP, see [Configure TLS Certificates](configure-tls.md).
+
 ## Update the backend configuration
 
 Set `publicBaseUrl` in `conf/deployment.toml` to the external URL of the console. Add it as a top-level entry, before any `[section]` header:
