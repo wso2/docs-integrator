@@ -87,8 +87,8 @@ Set `runtime` to a short, meaningful name that identifies this instance in the I
 | `secret` | Yes | none | Secret generated in step 1 |
 | `serverUrl` | No | `https://localhost:9445` | ICP runtime listener endpoint |
 | `heartbeatInterval` | No | `10` | Seconds between heartbeats |
-| `cert` | No | none | Path to a PEM certificate for the ICP server |
-| `enableSSL` | No | `false` | Enforce TLS certificate verification |
+| `cert` | When `enableSSL` is `true` | none | Path to the PEM certificate of the CA that issued the ICP server certificate. The JVM's default truststore is not used |
+| `enableSSL` | No | `false` | Verify the ICP server certificate. When `false`, the certificate is not verified |
 | `enableWorkflowManagement` | No | `true` | Allow ICP to manage this runtime's workflows over the heartbeat channel. Set to `false` to disable workflow management from ICP; `START`, `STOP`, and `SET_LOGGER_LEVEL` commands remain available |
 | `runtimeHostUrl` | No | `http://localhost` | URL whose host ICP uses to reach this runtime for Try-It requests. Only the host is used |
 | `requireSignedCommands` | No | `false` | Refuse control commands from ICP that are not signed |
@@ -183,6 +183,8 @@ If the runtime fails to connect or does not appear in ICP, check logs on both si
 | Runtime does not appear in ICP | The runtime cannot reach ICP, or `serverUrl` is pointing to the wrong host or port | Check ICP is running and reachable on port `9445`. Verify `serverUrl` in `Config.toml` is correct. Check for firewall rules blocking the connection. |
 | Runtime appears but status is not **RUNNING** | The runtime started but heartbeats have stopped | Check the integration process is still running. Look for errors in the integration logs. Verify network connectivity to ICP. |
 | `PKIX path building failed` in integration logs | The runtime does not trust the ICP server's self-signed certificate | Set `enableSSL = false` in `Config.toml` for non-production, or point `cert` to the ICP server's CA certificate |
+| Integration stops at startup with `Certificate file location must be provided for secure connection` | `enableSSL` is `true`, but `cert` is not set | Set `cert` to the PEM certificate of the CA that issued the ICP server certificate. See [Configure TLS Certificates](configure-tls.md) |
+| `Failed to send initial heartbeat` with `SSLHandshakeException` in integration logs | The `serverUrl` host name is not in the ICP server certificate | Use a host name from the certificate's Subject Alternative Names |
 
 ## What's next
 
