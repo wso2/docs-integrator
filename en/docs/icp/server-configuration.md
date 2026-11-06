@@ -26,6 +26,21 @@ All values are set in `<ICP_HOME>/conf/deployment.toml`. Commented-out keys show
 | `schedulerIntervalSeconds`           | `int`     | `60`        | How often ICP checks for inactive runtimes and marks them as offline |
 | `refreshTokenCleanupIntervalSeconds` | `int`     | `86400`     | How often expired refresh tokens are purged from the database         |
 
+## TLS settings
+
+One keystore serves the certificate for all ICP HTTPS listeners (ports `9445`, `9446`, `9447`, and `9449`). The truststore holds the CAs that ICP trusts when it calls its own auth and OpenSearch adapter services. To use a CA-signed certificate, see [Configure TLS Certificates](configure-tls.md).
+
+| Key                       | Type      | Default                                       | Description |
+| ------------------------- | --------- | --------------------------------------------- | ----------- |
+| `keystorePath`            | `string`  | `"../conf/security/wso2carbon.jks"`           | JKS or PKCS12 keystore with the server certificate and private key. Keep one private key entry in it |
+| `keystorePassword`        | `string`  | `"wso2carbon"`                                | Password of the keystore and its private key |
+| `truststorePath`          | `string`  | `"../conf/security/client-truststore.jks"`    | Truststore used to verify the certificates of ICP's internal HTTPS calls |
+| `truststorePassword`      | `string`  | `"wso2carbon"`                                | Password of the truststore |
+| `observabilityBackendURL` | `string`  | `"https://localhost:9449"`                    | URL ICP uses to call its OpenSearch adapter service. The host name must be in the server certificate |
+| `ldapAuthBackendUrl`      | `string`  | `"https://localhost:9450"`                    | URL ICP uses to call its LDAP auth service when the LDAP user store is enabled. The host name must be in the server certificate |
+
+`authBackendUrl` (see [Authentication settings](#authentication-settings)) also must use a host name that is in the server certificate. Relative paths are resolved from `<ICP_HOME>/bin`.
+
 ## Backend endpoint settings
 
 When ICP is accessed through a different hostname or behind a reverse proxy, set `publicBaseUrl`. ICP derives all the console's backend URLs and the CORS allowed origins from it. The other keys override individual URLs.
