@@ -38,6 +38,10 @@ You'll also need access to an FTP, SFTP, or FTPS server that is reachable over t
 
 To test the integration, you'll also need an FTP or SFTP client to upload a file to the specified folder.
 
+:::tip Get a free FTP server
+If you don't have a server, create a free test server on [SFTPCloud](https://sftpcloud.io/tools/free-ftp-server) by clicking **Create test FTP server**. Use the host, port, username, and password it shows.
+:::
+
 :::info Note
 The cloud editor runs in WSO2 Cloud and cannot connect to a server running on `localhost` on your computer. Make sure the server is accessible over the internet.
 :::
