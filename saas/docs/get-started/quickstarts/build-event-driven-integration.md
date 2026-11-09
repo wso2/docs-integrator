@@ -17,11 +17,17 @@ A working WSO2 Integrator environment.
 
 <PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">Sign up and launch WSO2 Integrator in the browser-based cloud editor.
 
-You'll also need a running RabbitMQ instance. Start one with Docker:
+You'll also need access to a RabbitMQ instance that is reachable over the internet. Have the following details ready:
 
-```bash
-docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:4.2-management
-```
+- The instance's host and port.
+- A username and password for the instance.
+- The instance's virtual host.
+
+:::tip Get a free RabbitMQ instance
+If you don't have a RabbitMQ instance, create a free one on [CloudAMQP](https://www.cloudamqp.com/) using the **Little Lemur** plan. Then open the instance and find its connection details under **AMQP details**. Use port `5672`, and use the **User & Vhost** value as both the username and the virtual host.
+
+:::info Note
+The cloud editor runs in WSO2 Cloud and cannot connect to a RabbitMQ instance running on `localhost` on your computer.
 
 ## Step 1: Create the integration
 
@@ -35,7 +41,7 @@ docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:4.2-management
        }}
    />
 
-2. The WSO2 Integrator cloud editor opens in your browser. Add an artifact to your integration, then deploy it to WSO2 Cloud from the Deploy to WSO2 Cloud panel on the right.
+2. The WSO2 Integrator cloud editor opens in your browser.
 
    <ThemedImage
     alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
@@ -45,83 +51,168 @@ docker run -d -p 5672:5672 -p 15672:15672 rabbitmq:4.2-management
     }}
     />
 
+:::info Note
+The cloud editor creates a default integration for you, so you don't need to name it now. You can change its name when you deploy it. For more information, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
+
 ## Step 2: Add a RabbitMQ event listener
 
-1. Select your integration from the project overview canvas.
-2. Select **+ Add Artifact** in the design canvas.
-3. Select **RabbitMQ** under **Event Integration**.
-4. Set **Host** to `localhost` and **Port** to `5672` (update these if your RabbitMQ instance runs elsewhere).
-5. Set **Queue Name** to `Orders`.
-6. Select **Create**.
+1. In the design view, click **Add Artifact manually**.
 
-<ThemedImage
-    alt="Add a RabbitMQ Event Integration Artifact"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-event-driven-integration/add-a-rabbitmq-listener.png'),
-        dark: useBaseUrl('/img/get-started/build-event-driven-integration/add-a-rabbitmq-listener.png'),
-    }}
-/>
+   <ThemedImage
+       alt="Integration design view with the Add Artifact manually button highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-api-integration/add-artifact.png'),
+           dark: useBaseUrl('/img/get-started/build-api-integration/add-artifact.png'),
+       }}
+   />
+
+2. Select **RabbitMQ** under **Event Integration**.
+
+   <ThemedImage
+       alt="Artifacts page with RabbitMQ highlighted under Event Integration"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/select-rabbitmq.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/select-rabbitmq.png'),
+       }}
+   />
+
+3. Set **Host** to your RabbitMQ instance's host, and **Port** to its port. The default RabbitMQ port is `5672`.
+
+4. Set **Queue Name** to `Orders`.
+
+5. Click **Create**.
+
+   <ThemedImage
+       alt="Create RabbitMQ Event Integration form with Host, Port, and Queue Name set"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/add-a-rabbitmq-listener.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/add-a-rabbitmq-listener.png'),
+       }}
+   />
+
+6. Under **Listeners** in the project explorer, select **rabbitmqListener** to open the **Rabbitmq Listener Configuration** page.
+
+7. Set **Username** and **Password** to your RabbitMQ instance's username and password.
+
+8. Set **Virtual Host** to your instance's virtual host. For CloudAMQP, this is the same as the username.
+
+   <ThemedImage
+       alt="Rabbitmq Listener Configuration page with Username, Password, and Virtual Host set"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/set-listener-credentials.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/set-listener-credentials.png'),
+       }}
+   />
+
+9. Scroll to the bottom of the page, and click **Save**.
+
+   <ThemedImage
+       alt="Bottom of the Rabbitmq Listener Configuration page with the Save button highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/save-listener.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/save-listener.png'),
+       }}
+   />
 
 ## Step 3: Add `onMessage` event handler
 
-1. In the RabbitMQ service design view, select **+ Add Handler**.
-2. Select **onMessage**.
-3. Select **Save**.
+1. Under **Entry Points** in the project explorer, select **RabbitMQ Event Integration** to open the service design view.
 
-<ThemedImage
-    alt="Add onMessage Event Handler"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-event-driven-integration/add-event-handler.png'),
-        dark: useBaseUrl('/img/get-started/build-event-driven-integration/add-event-handler.png'),
-    }}
-/>
+2. Click **+ Add Handler**.
+
+3. In the **Select Handler to Add** panel, select **On Message**.
+
+   <ThemedImage
+       alt="Select Handler to Add panel with On Message highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/select-on-message.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/select-on-message.png'),
+       }}
+   />
+
+4. Click **Save**.
+
+   <ThemedImage
+       alt="Configure On Message Handler panel with Format set to On Message and the Save button"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/add-event-handler.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/add-event-handler.png'),
+       }}
+   />
 
 ## Step 4: Add message processing logic
 
-1. Select **+** inside the resource flow.
-2. Select **Call Function**.
-3. Select **printInfo** under **log**.
-4. Set **Msg** to `Received order`.
-5. Select **Save**.
+1. Click **+** inside the `onMessage` flow.
 
-<ThemedImage
-    alt="Add Message Processing Logic"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-event-driven-integration/add-message-processing-logic.png'),
-        dark: useBaseUrl('/img/get-started/build-event-driven-integration/add-message-processing-logic.png'),
-    }}
-/>
+   <ThemedImage
+       alt="onMessage flow with the add node button highlighted below the Start node"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/select-plus.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/select-plus.png'),
+       }}
+   />
+
+2. Select **Call Function** under **Statement**.
+
+   <ThemedImage
+       alt="Node panel with Call Function highlighted under Statement"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/select-call-function.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/select-call-function.png'),
+       }}
+   />
+
+3. Search for `printInfo` in the functions panel.
+
+4. In the search results, go to the **Standard Library** section and select the **printInfo** function under **log**.
+
+   <ThemedImage
+       alt="Functions panel search results with printInfo highlighted under log in the Standard Library section"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/select-printinfo.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/select-printinfo.png'),
+       }}
+   />
+
+5. Set **Msg** to `Received order`.
+
+6. Click **Save**.
+
+   <ThemedImage
+       alt="log:printInfo panel with Msg set to Received order"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/add-message-processing-logic.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/add-message-processing-logic.png'),
+       }}
+   />
 
 ## Step 5: Run and test the integration
 
-1. Select **Run**.
-2. The integration starts and listens for messages on the `Orders` queue.
-3. Open the RabbitMQ Management UI at `http://localhost:15672` (default credentials: guest/guest).
-   - Go to **Queues → Orders → Publish message**, enter any text as the payload, and select **Publish message**.
-   - Confirm the integration log displays `Received order`.
+1. Click **Run**. The integration starts and listens for messages on the `Orders` queue.
 
-<ThemedImage
-    alt="Run and Test the Integration"
-    sources={{
-        light: useBaseUrl('/img/get-started/build-event-driven-integration/run-and-test-the-integration.gif'),
-        dark: useBaseUrl('/img/get-started/build-event-driven-integration/run-and-test-the-integration.gif'),
-    }}
-/>
+2. In CloudAMQP, open your instance and click **RabbitMQ Manager**. The RabbitMQ management UI opens in a new tab, already signed in.
+
+3. Click the **Queues and Streams** tab, and then click **Orders** in the **Name** column.
+
+4. On the **Orders** queue page, scroll down and click the **Publish message** section heading to open it.
+
+5. In **Payload**, enter any text, for example `order 1`.
+
+6. Click the **Publish message** button below the **Payload** box.
+
+7. Confirm the **Debug Console** shows a log line that ends with `message="Received order"`.
+
+   <ThemedImage
+       alt="Debug Console showing the Received order log line after a message is published"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-event-driven-integration/run-and-test.png'),
+           dark: useBaseUrl('/img/get-started/build-event-driven-integration/run-and-test.png'),
+       }}
+   />
 
 ## Step 6: Deploy to WSO2 Cloud
 
-Deploy your integration to WSO2 Cloud. Check [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
-
-<PaletteCard icon="ai" highlight>
-  <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
-  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the OrderProcessor sample straight to WSO2 Cloud.</p>
-  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
-    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/orderprocessor" target="_blank" rel="noopener noreferrer">
-      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
-    </a>
-
-
-</div>
+To deploy your integration to WSO2 Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 
 ## Source code
 
@@ -134,10 +225,11 @@ The steps above generate the following complete, runnable Ballerina program:
 import ballerina/log;
 import ballerinax/rabbitmq;
 
-listener rabbitmq:Listener rabbitmqListener = new ("localhost", 5672);
+listener rabbitmq:Listener rabbitmqListener = new (host = "<your-rabbitmq-host>", port = 5672, username = "<your-username>", password = "<your-password>", virtualHost = "<your-vhost>");
 
-service "Orders" on rabbitmqListener {
-    remote function onMessage(rabbitmq:AnydataMessage message, rabbitmq:Caller caller) returns error? {
+@rabbitmq:ServiceConfig {queueName: "Orders"}
+service rabbitmq:Service on rabbitmqListener {
+    remote function onMessage(rabbitmq:AnydataMessage message) returns error? {
         do {
             log:printInfo("Received order");
         } on fail error err {
