@@ -9,6 +9,8 @@ slug: /get-started/setup
 
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Set up WSO2 Integrator
 
@@ -107,6 +109,156 @@ Sign in with your WSO2 Cloud account to deploy to WSO2 Cloud, manage environment
 :::info Don't have a WSO2 Cloud account?
 Create one and set up your organization by following <CloudDocsLink to="/get-started/setup">Cloud setup</CloudDocsLink> in the WSO2 Cloud documentation, then return here to sign in.
 :::
+
+## Update WSO2 Integrator
+
+WSO2 Integrator includes a built-in updater that automatically checks for updates to the application and its bundled components, including the Ballerina runtime, Java runtime, and Integration Control Plane (ICP). You don't need to download or reinstall WSO2 Integrator to keep it up to date.
+
+### Check for updates
+
+WSO2 Integrator checks for updates in the background and notifies you when updates are available. To check for updates yourself:
+
+<Tabs groupId="os">
+<TabItem value="macos" label="macOS" default>
+
+On the menu bar, click **WSO2 Integrator**, and then click **Check for Updates...**.
+
+<ThemedImage
+    alt="WSO2 Integrator menu on macOS with Check for Updates highlighted"
+    sources={{
+        light: useBaseUrl('/img/get-started/setup/update/check-for-updates-menu.png'),
+        dark: useBaseUrl('/img/get-started/setup/update/check-for-updates-menu.png'),
+    }}
+/>
+
+</TabItem>
+<TabItem value="windows" label="Windows">
+
+On the menu bar, click **Help**, and then click **Check for Updates**.
+
+<ThemedImage
+    alt="WSO2 Integrator Help menu on Windows with Check for Updates highlighted"
+    sources={{
+        light: useBaseUrl('/img/get-started/setup/update/check-for-updates-menu-windows.png'),
+        dark: useBaseUrl('/img/get-started/setup/update/check-for-updates-menu-windows.png'),
+    }}
+/>
+
+</TabItem>
+</Tabs>
+
+If updates are available, WSO2 Integrator shows a notification that lists them. To install them, see [Update components](#update-components).
+
+<ThemedImage
+    alt="Notification that updates are available for WSO2 Integrator components, with Update All and Show Details buttons"
+    sources={{
+        light: useBaseUrl('/img/get-started/setup/update/updates-available-notification.png'),
+        dark: useBaseUrl('/img/get-started/setup/update/updates-available-notification.png'),
+    }}
+/>
+
+### Update components
+
+<Tabs groupId="os">
+<TabItem value="macos" label="macOS" default>
+
+1. In the notification, click **Update All**. To see the updates first, click **Show Details**.
+
+   <ThemedImage
+       alt="Notification that updates are available for WSO2 Integrator components, with Update All highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/setup/update/component-update-notification.png'),
+           dark: useBaseUrl('/img/get-started/setup/update/component-update-notification.png'),
+       }}
+   />
+
+2. When the download completes, click **Reload Window** in the notification to finish updating.
+
+   <ThemedImage
+       alt="Notification asking to reload the window to finish updating components, with the Reload Window button"
+       sources={{
+           light: useBaseUrl('/img/get-started/setup/update/reload-window-notification.png'),
+           dark: useBaseUrl('/img/get-started/setup/update/reload-window-notification.png'),
+       }}
+   />
+
+3. To confirm the update, click **WSO2 Integrator**, and then click **Check for Updates...** again.
+
+   <ThemedImage
+       alt="WSO2 Integrator menu on macOS showing Check for Updates after the components are updated"
+       sources={{
+           light: useBaseUrl('/img/get-started/setup/update/check-for-updates-menu-after-update.png'),
+           dark: useBaseUrl('/img/get-started/setup/update/check-for-updates-menu-after-update.png'),
+       }}
+   />
+
+   WSO2 Integrator shows the **WSO2 Integrator is up to date.** notification.
+
+   <ThemedImage
+       alt="WSO2 Integrator is up to date notification"
+       sources={{
+           light: useBaseUrl('/img/get-started/setup/update/up-to-date-notification.png'),
+           dark: useBaseUrl('/img/get-started/setup/update/up-to-date-notification.png'),
+       }}
+   />
+
+You can also update components from the menu bar:
+
+1. Click **WSO2 Integrator**, and then click **Update WSO2 Integrator Components**.
+
+   <ThemedImage
+       alt="WSO2 Integrator menu on macOS with Update WSO2 Integrator Components highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/setup/update/update-components-menu.png'),
+           dark: useBaseUrl('/img/get-started/setup/update/update-components-menu.png'),
+       }}
+   />
+
+2. While the update downloads, the menu shows **Downloading Component Updates...**.
+
+   <ThemedImage
+       alt="WSO2 Integrator menu on macOS showing Downloading Component Updates"
+       sources={{
+           light: useBaseUrl('/img/get-started/setup/update/downloading-component-updates-menu.png'),
+           dark: useBaseUrl('/img/get-started/setup/update/downloading-component-updates-menu.png'),
+       }}
+   />
+
+</TabItem>
+<TabItem value="windows" label="Windows">
+
+1. In the notification, click **Update All**. To see the updates first, click **Show Details**.
+
+   <ThemedImage
+       alt="Notification that updates are available for WSO2 Integrator components, with Update All highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/setup/update/component-update-notification.png'),
+           dark: useBaseUrl('/img/get-started/setup/update/component-update-notification.png'),
+       }}
+   />
+
+2. When the download completes, click **Reload Window** in the notification to finish updating.
+
+   <ThemedImage
+       alt="Notification asking to reload the window to finish updating components, with the Reload Window button"
+       sources={{
+           light: useBaseUrl('/img/get-started/setup/update/reload-window-notification.png'),
+           dark: useBaseUrl('/img/get-started/setup/update/reload-window-notification.png'),
+       }}
+   />
+
+3. To confirm the update, click **Help**, and then click **Check for Updates** again. WSO2 Integrator shows the **WSO2 Integrator is up to date.** notification.
+
+   <ThemedImage
+       alt="WSO2 Integrator is up to date notification"
+       sources={{
+           light: useBaseUrl('/img/get-started/setup/update/up-to-date-notification.png'),
+           dark: useBaseUrl('/img/get-started/setup/update/up-to-date-notification.png'),
+       }}
+   />
+
+</TabItem>
+</Tabs>
 
 ## Next steps
 
