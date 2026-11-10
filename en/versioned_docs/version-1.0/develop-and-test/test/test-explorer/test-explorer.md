@@ -1,6 +1,6 @@
 ---
 sidebar_position: 0
-sidebar_label: Test Explorer Basics
+sidebar_label: Overview
 title: Test Explorer
 description: Create, run, and manage automated test cases for your integrations using the Test Explorer panel in WSO2 Agent Builder.
 keywords: [wso2 agent builder, test explorer, create test, run tests, test report, unit testing]

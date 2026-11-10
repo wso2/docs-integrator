@@ -1,6 +1,6 @@
 ---
 sidebar_position: 0
-sidebar_label: Try-It Experiences
+sidebar_label: Overview
 title: Try-It Tool
 description: Test your work during development directly from WSO2 Agent Builder without an external client.
 keywords: [wso2 agent builder, try-it tool, test chat agent, test http service, test mcp]
