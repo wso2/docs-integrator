@@ -1,12 +1,12 @@
 ---
-sidebar_position: 4
-title: Evaluate Agent Behavior
+sidebar_position: 1
+title: Overview
 description: Reference for AI agent evaluations in WSO2 Agent Builder. Capture session traces into evalsets, build evaluations in the visual designer, and review run reports and history.
 keywords: [wso2 agent builder, ai agent, evaluations, evalset, golden dataset, llm-as-judge, regression]
-slug: /develop-and-test/integration-artifacts/agents/evaluations
+slug: /develop-and-test/test/evaluations
 ---
 
-# Evaluations
+# Agent Evaluations
 
 **Evaluations** are how you keep an AI agent's quality from regressing. Unlike unit tests with deterministic outputs, agent behaviour has to be judged across several dimensions: correctness, tool selection, groundedness, safety, and tone. Evaluations in WSO2 Agent Builder give you a structured way to measure those dimensions, see why a run regressed, and watch the trend across builds.
 
@@ -39,7 +39,7 @@ You can also ask Copilot in the chat to add evaluations for your agent.
 | Use evaluations when... | Look elsewhere when... |
 |---|---|
 | You're about to change instructions, tools, or the model and want a regression check. | You need a single deterministic unit test for a pure function. |
-| You want a baseline of agent quality you can track across runs and commits. | You're debugging one specific failed run. Use [Observability](../observability.md). |
+| You want a baseline of agent quality you can track across runs and commits. | You're debugging one specific failed run. Use [Observability](../../integration-artifacts/agents/observability.md). |
 | You need to verify safety and refusal behaviour before shipping. | You're still prototyping and haven't picked the agent's tools yet. |
 
 ## What's next

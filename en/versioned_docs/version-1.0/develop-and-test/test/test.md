@@ -16,7 +16,7 @@ WSO2 Agent Builder provides a full testing toolkit built into the editor. You do
 | Approach | What it does | When to use |
 |---|---|---|
 | **[Try-It tool](try-it-tool/try-it-tool.md)** | Sends live requests to a running integration and shows the response instantly. No test code required. Supports chat agents, HTTP services, and MCP servers. | While building. Verify behavior after every change before writing formal tests. |
-| **[Agent evaluations](../integration-artifacts/agents/evaluations/evaluations.md)** | Capture agent session traces into evalsets, then score agent responses against expected behavior with LLM-as-judge and regression checks. | When testing AI agents. Validate response quality and tool use, and catch regressions over time. |
+| **[Agent evaluations](../test/evaluations/evaluations.md)** | Capture agent session traces into evalsets, then score agent responses against expected behavior with LLM-as-judge and regression checks. | When testing AI agents. Validate response quality and tool use, and catch regressions over time. |
 | **[Test Explorer](test-explorer/test-explorer.md)** | Runs automated test cases written with the Ballerina test framework. Provides a visual view of pass/fail results, lets you re-run failures, and generates HTML and coverage reports. | When a feature is stable. Write repeatable tests that run in CI and catch regressions. |
 | **[Generate integration tests](../../editor/copilot/capabilities.md#generate-integration-tests)** | WSO2 Agent Builder Copilot writes Ballerina tests for your integration, such as tests for an agent's tools, and runs them with the built-in test runner. | When you want test coverage fast. Generate a first draft, then review and extend. |
 
@@ -41,7 +41,7 @@ The Ballerina test framework supports the full range of test patterns you need f
 ## What's next
 
 - [Try-It tool](try-it-tool/try-it-tool.md) — verify behavior interactively without writing test code
-- [Evaluate agent behavior](../integration-artifacts/agents/evaluations/evaluations.md) — score agent responses with evalsets and LLM-as-judge
+- [Evaluate agent behavior](../test/evaluations/evaluations.md) — score agent responses with evalsets and LLM-as-judge
 - [Write unit tests](test-explorer/unit-testing.md) — test functions, assertions, and directory structure
 - [Generate integration tests with Copilot](../../editor/copilot/capabilities.md#generate-integration-tests) — let Copilot write and run tests for your agent tools
 - [Execute tests](test-explorer/execute-tests.md) — CLI options for filtering, rerunning, and parallelizing test runs

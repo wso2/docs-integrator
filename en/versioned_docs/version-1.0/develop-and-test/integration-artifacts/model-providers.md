@@ -1,6 +1,6 @@
 ---
-sidebar_position: 6
-sidebar_custom_props: { separatorBefore: "Shared Connections" }
+sidebar_position: 5
+sidebar_custom_props: { separatorBefore: "Agent Resources" }
 sidebar_label: Model Providers
 title: Model Providers for LLMs
 description: Reference for every model provider for LLM in WSO2 Agent Builder, covering create form fields, advanced configurations, defaults, and supported models for the Default WSO2 provider, OpenAI, Azure OpenAI, Anthropic, AWS Bedrock, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.

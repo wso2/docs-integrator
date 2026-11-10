@@ -1,6 +1,6 @@
 ---
 sidebar_position: 0
-sidebar_label: MCP Integration
+sidebar_label: Overview
 title: MCP Integration
 description: Reference for MCP features in WSO2 Agent Builder. Covers exposing services as MCP servers and consuming MCP servers from AI agents.
 slug: /develop-and-test/integration-artifacts/mcp
@@ -9,7 +9,7 @@ slug: /develop-and-test/integration-artifacts/mcp
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# MCP Integration
+# MCP Servers & Tools
 
 The **Model Context Protocol** (MCP) is an open standard that lets AI assistants discover and call tools exposed by external servers. See the [MCP specification](https://modelcontextprotocol.io) for the protocol details.
 

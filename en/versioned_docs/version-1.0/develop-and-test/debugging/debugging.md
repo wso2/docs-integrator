@@ -1,6 +1,6 @@
 ---
 sidebar_position: 0
-sidebar_label: Debug Your Integration
+sidebar_label: Debug Agentic Integration
 title: Debug Your Integration
 description: Set breakpoints, step through code, and inspect program state in a WSO2 Agent Builder debug session, including test and remote debugging.
 keywords: [wso2 agent builder, editor debugging, breakpoints, debug session, remote debugging, test debugging, stepping, watch panel, debug console, expression evaluation]
@@ -12,7 +12,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Debug Your Integration
+# Debug Agentic Integration
 
 Editor debugging lets you pause an integration mid-run and inspect the values flowing through it. This page covers everything from the everyday quick start (set a breakpoint and launch a debug session) through the full set of features available once a session is running: stepping, inspection panels, advanced breakpoints, and test or remote debugging.
 

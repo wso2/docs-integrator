@@ -107,7 +107,7 @@ Start by describing what your agent should do to [WSO2 Agent Builder Copilot](..
   </ul>
 </PaletteCard>
 
-<PaletteCard icon="test" href="/develop-and-test/integration-artifacts/agents/evaluations">
+<PaletteCard icon="test" href="/develop-and-test/test/evaluations">
   <h3 class="palette-card-title">Evaluate Your Agent</h3>
   <ul class="palette-card-list">
     <li>Capture sessions into evalsets</li>

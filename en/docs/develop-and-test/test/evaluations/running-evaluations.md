@@ -3,7 +3,7 @@ sidebar_position: 5
 title: Run Evaluations
 description: Run AI agent evaluations in WSO2 Agent Builder and review per-run reports, score trends, and code changes that influenced each result.
 keywords: [wso2 agent builder, ai agent, evaluation, report, run history, regression, fix with copilot]
-slug: /develop-and-test/integration-artifacts/agents/evaluations/running-evaluations
+slug: /develop-and-test/test/evaluations/running-evaluations
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -133,7 +133,7 @@ This makes it easy to correlate a regression with a specific change. **Restore t
 
 ## What's next
 
-- [Observability](../observability.md) — Trace a single failed case to see exactly what the agent did.
+- [Observability](../../integration-artifacts/agents/observability.md) — Trace a single failed case to see exactly what the agent did.
 - [Create evalsets](evalsets.md) — Expand coverage by adding new cases.
 - [Create evaluations from templates](create-evaluations-templates.md) — Add new checks or LLM-as-judge scoring from a template.
 - [Create custom evaluations](create-evaluations-custom.md) — Build your own checks in the visual designer.

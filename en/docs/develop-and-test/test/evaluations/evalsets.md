@@ -3,7 +3,7 @@ sidebar_position: 2
 title: Create Evalsets
 description: Capture conversations with your AI agent in WSO2 Agent Builder and export the session traces into a golden dataset you can replay against future agent builds.
 keywords: [wso2 agent builder, ai agent, evalset, golden dataset, session traces]
-slug: /develop-and-test/integration-artifacts/agents/evaluations/evalsets
+slug: /develop-and-test/test/evaluations/evalsets
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -18,7 +18,7 @@ Each evalset is stored as a file that holds one or more **threads**. A thread is
 The fastest way to create an evalset is to chat with your agent in the editor and export the session traces.
 
 :::info Prerequisites
-Make sure tracing is enabled on the agent before you start chatting, so each turn is captured and available to export. See [Enable tracing](../observability.md#enable-tracing) for the steps.
+Make sure tracing is enabled on the agent before you start chatting, so each turn is captured and available to export. See [Enable tracing](../../integration-artifacts/agents/observability.md#enable-tracing) for the steps.
 
 - If your integration is already running when you enable tracing, restart it. Tracing starts with the next run.
 - The **Session Traces** button appears only when tracing is on and the chat has at least one agent reply with a trace.
@@ -57,7 +57,7 @@ In the **Session Traces** view, click **Export** and choose **Export as Evalset*
 :::tip
 **Export as JSON** writes the raw traces to a JSON file. Use it when you want a full debug snapshot rather than an evalset.
 
-To turn a single turn into an evalset, export one trace instead. See [Export a single trace](../observability.md#export-a-single-trace).
+To turn a single turn into an evalset, export one trace instead. See [Export a single trace](../../integration-artifacts/agents/observability.md#export-a-single-trace).
 :::
 
 ### 4. Choose create or append

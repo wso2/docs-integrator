@@ -447,4 +447,4 @@ The advanced settings depend on the tool type. For example, a connection tool ca
 
 - **[Memory](memory.md)** — Make the agent's tool calls remember earlier turns.
 - **[Observability](observability.md)** — See which tools the agent actually selects.
-- **[Evaluations](evaluations/evaluations.md)** — Learn how to prevent regressions in AI agent quality.
+- **[Evaluations](../../test/evaluations/evaluations.md)** — Learn how to prevent regressions in AI agent quality.

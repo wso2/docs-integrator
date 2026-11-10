@@ -1,5 +1,6 @@
 ---
-sidebar_position: 6
+sidebar_position: 8
+sidebar_label: Secure Agent Access
 title: Identity & Access Management
 description: Learn how to secure AI agents, tools, and integrations using identity and access control in WSO2 Agent Builder.
 keywords: [wso2 agent builder, ai agent, identity, access control, oauth2, authorization, authentication, agent security]
@@ -9,7 +10,7 @@ slug: /develop-and-test/integration-artifacts/agents/identity-and-access-managem
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Identity & Access Management
+# Secure Agent Access
 
 AI agents interact with MCP servers, APIs, databases, and enterprise systems to perform tasks autonomously. As agents access enterprise resources and external services, it is important to secure and govern these interactions using proper identity and access control mechanisms.
 
@@ -141,4 +142,4 @@ If you plan to use [WSO2 Asgardeo](https://wso2.com/asgardeo/docs/get-started/cr
 ## What's next
 
 - **[Observability](observability.md)** - Monitor traces, logs, and execution details.
-- **[Evaluations](evaluations/evaluations.md)** - Test and evaluate agent behavior and response quality.
+- **[Evaluations](../../test/evaluations/evaluations.md)** - Test and evaluate agent behavior and response quality.

@@ -23,5 +23,5 @@ Different integration types open a different Try-It interface. Select the one th
 
 ## What's next
 
-- [Agent evaluations](../../integration-artifacts/agents/evaluations/evaluations.md) — score agent responses with evalsets and LLM-as-judge
+- [Agent evaluations](../../test/evaluations/evaluations.md) — score agent responses with evalsets and LLM-as-judge
 - [Test Explorer](../test-explorer/test-explorer.md) — run automated test suites from the editor

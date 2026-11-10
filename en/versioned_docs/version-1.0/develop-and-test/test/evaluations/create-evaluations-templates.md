@@ -3,7 +3,7 @@ sidebar_position: 3
 title: Create Evaluations from Templates
 description: Create AI agent evaluations in WSO2 Agent Builder from prebuilt templates. Pick a rule-based or LLM-as-judge template, configure it in a form, and save it without building a flow.
 keywords: [wso2 agent builder, ai agent, evaluation, evaluation template, tool trajectory, llm-as-judge]
-slug: /develop-and-test/integration-artifacts/agents/evaluations/create-evaluations-templates
+slug: /develop-and-test/test/evaluations/create-evaluations-templates
 ---
 
 import ThemedImage from '@theme/ThemedImage';

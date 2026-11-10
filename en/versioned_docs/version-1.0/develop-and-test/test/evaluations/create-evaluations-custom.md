@@ -3,7 +3,7 @@ sidebar_position: 4
 title: Create Custom Evaluations
 description: Create custom AI agent evaluations in WSO2 Agent Builder. Fill the AI Evaluation form, optionally pick an evalset to score against, and build the checks in the visual designer.
 keywords: [wso2 agent builder, ai agent, evaluation, custom evaluation, visual designer]
-slug: /develop-and-test/integration-artifacts/agents/evaluations/creating-evaluations
+slug: /develop-and-test/test/evaluations/creating-evaluations
 ---
 
 import ThemedImage from '@theme/ThemedImage';

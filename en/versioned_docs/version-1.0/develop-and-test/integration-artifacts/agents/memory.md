@@ -364,4 +364,4 @@ The following table provides general recommendations for choosing a memory setup
 - **[Identity & Access Management](identity-and-access-management.md)** — Secure agents, tools, and integrations with identity and access control.
 - **[Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md)** — Pause the agent for approval before it runs a sensitive tool.
 - **[Observability](observability.md)** — See which tools the agent actually selects.
-- **[Evaluations](evaluations/evaluations.md)** — Learn how to prevent regressions in AI agent quality.
+- **[Evaluations](../../test/evaluations/evaluations.md)** — Learn how to prevent regressions in AI agent quality.

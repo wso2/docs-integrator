@@ -1,5 +1,6 @@
 ---
-sidebar_position: 5
+sidebar_position: 7
+sidebar_custom_props: { separatorBefore: "Visibility & Control" }
 title: Observe Agent Behavior
 description: Use the built-in dev-time trace server in WSO2 Agent Builder to observe LLM and tool calls as your agent runs.
 keywords: [wso2 agent builder, observability, tracing, ai agents, dev-time trace, traces]
@@ -265,7 +266,7 @@ The detail pane has a **Search all sections...** field that filters within the c
 Traces are useful beyond the editor, in bug reports, regression baselines, or evaluation runs. The trace viewer can export in two formats:
 
 - **JSON.** The full trace as structured data. Best for archiving, sharing in a bug report, or comparing two runs.
-- **Evalset.** The trace converted into an evaluation set you can run later through the testing framework. See [Evaluations](evaluations/evaluations.md) for the full workflow.
+- **Evalset.** The trace converted into an evaluation set you can run later through the testing framework. See [Evaluations](../../test/evaluations/evaluations.md) for the full workflow.
 
 You can export a single trace or every trace in a chat session.
 
@@ -371,6 +372,6 @@ To switch back to the dev-time viewer from either provider, change the import to
 
 ## What's next
 
-- **[Evaluations](evaluations/evaluations.md)** — turn observed behavior into automated regression checks.
+- **[Evaluations](../../test/evaluations/evaluations.md)** — turn observed behavior into automated regression checks.
 - **[Tools](tools.md)** — clear tool descriptions are the biggest lever on what shows up in traces.
 - **[Memory](memory.md)** — every turn's memory contents appear in the LLM call spans.

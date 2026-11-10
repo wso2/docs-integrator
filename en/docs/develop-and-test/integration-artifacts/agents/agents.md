@@ -1,6 +1,6 @@
 ---
 sidebar_position: 0
-sidebar_label: Agent Basics
+sidebar_label: Overview
 title: AI Agents
 description: Reference for AI agents in WSO2 Agent Builder — creating agents, connecting them to triggers, the agent canvas, tools, memory, model providers, and chatting with an agent.
 keywords: [wso2 agent builder, ai agent, agent canvas, triggers, agent chat, tools, memory, model provider]
@@ -88,7 +88,7 @@ From the canvas, you can configure the following components of the agent:
 - **Gated tools (HITL)**: Mark a tool as requiring approval so the agent pauses and asks a person before it runs. For more information, see [Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md).
 - **Model provider configuration**: Click the model provider node (for example, **Default WSO2 Model Provider**) to choose the provider the agent uses, or create a new one. For more information, see [Model Providers](../model-providers.md).
 
-The **Evaluations** and **Tracing: Off / On** buttons at the top right of the canvas open the agent's [evaluations](evaluations/evaluations.md) and turn [tracing](observability.md) on or off.
+The **Evaluations** and **Tracing: Off / On** buttons at the top right of the canvas open the agent's [evaluations](../../test/evaluations/evaluations.md) and turn [tracing](observability.md) on or off.
 
 ## Try it and run
 
@@ -130,4 +130,4 @@ The chat reuses the same session across messages, so you can test memory-aware c
 - **[Memory](memory.md)** - Configure conversational and persistent memory.
 - **[Observability](observability.md)** - Monitor traces, logs, and execution details.
 - **[Identity & Access Management](identity-and-access-management.md)** - Secure agents and tools with identity and access control.
-- **[Evaluations](evaluations/evaluations.md)** - Test and evaluate agent behavior and response quality.
+- **[Evaluations](../../test/evaluations/evaluations.md)** - Test and evaluate agent behavior and response quality.

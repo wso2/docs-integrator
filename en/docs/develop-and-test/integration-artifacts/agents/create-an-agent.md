@@ -329,4 +329,4 @@ In a flow, select an `agent : run` node to open the **AI Agent** panel. Changes 
 - **[Tools](tools.md)** - Add tools to the agent.
 - **[Memory](memory.md)** - Configure conversational and persistent memory.
 - **[Observability](observability.md)** - Monitor traces, logs, and execution details.
-- **[Evaluations](evaluations/evaluations.md)** - Test and evaluate agent behavior and response quality.
+- **[Evaluations](../../test/evaluations/evaluations.md)** - Test and evaluate agent behavior and response quality.

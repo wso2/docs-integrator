@@ -143,5 +143,5 @@ The Test Explorer creates and runs tests written with the Ballerina test framewo
 
 ## What's next
 
-- [Evaluate agent behavior](../../integration-artifacts/agents/evaluations/evaluations.md) — score agent responses with evalsets and LLM-as-judge
+- [Evaluate agent behavior](../../test/evaluations/evaluations.md) — score agent responses with evalsets and LLM-as-judge
 - [Configure test lifecycle](configure-tests.md) — set up suite-level and group-level setup and teardown
