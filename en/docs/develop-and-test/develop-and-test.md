@@ -62,7 +62,7 @@ Start by describing what your agent should do to [WSO2 Agent Builder Copilot](..
 
 <PaletteGrid>
 
-<PaletteCard icon="agents" href="/develop-and-test/integration-artifacts/ai-integrations/agents">
+<PaletteCard icon="agents" href="/develop-and-test/integration-artifacts/agents">
   <h3 class="palette-card-title">Add Agents</h3>
   <ul class="palette-card-list">
     <li>Agents and durable agents</li>
@@ -71,7 +71,7 @@ Start by describing what your agent should do to [WSO2 Agent Builder Copilot](..
   </ul>
 </PaletteCard>
 
-<PaletteCard icon="artifacts" href="/develop-and-test/integration-artifacts">
+<PaletteCard icon="artifacts" href="/develop-and-test/integration-artifacts/knowledge-bases">
   <h3 class="palette-card-title">Add AI Integrations</h3>
   <ul class="palette-card-list">
     <li>MCP servers</li>
@@ -98,7 +98,7 @@ Start by describing what your agent should do to [WSO2 Agent Builder Copilot](..
 
 <PaletteGrid>
 
-<PaletteCard icon="manage-observe" href="/develop-and-test/integration-artifacts/ai-integrations/agents/observability">
+<PaletteCard icon="manage-observe" href="/develop-and-test/integration-artifacts/agents/observability">
   <h3 class="palette-card-title">Trace Your Agent</h3>
   <ul class="palette-card-list">
     <li>Chat with your agent in Agent Chat</li>
@@ -107,7 +107,7 @@ Start by describing what your agent should do to [WSO2 Agent Builder Copilot](..
   </ul>
 </PaletteCard>
 
-<PaletteCard icon="test" href="/develop-and-test/integration-artifacts/ai-integrations/agents/evaluations">
+<PaletteCard icon="test" href="/develop-and-test/integration-artifacts/agents/evaluations">
   <h3 class="palette-card-title">Evaluate Your Agent</h3>
   <ul class="palette-card-list">
     <li>Capture sessions into evalsets</li>

@@ -55,7 +55,7 @@ Click the **+ Add Artifacts** button at the top right of the canvas to add a new
     }}
 />
 
-For detailed information on configuring each specific artifact type, see the [Integration artifacts](../../develop-and-test/integration-artifacts/integration-artifacts.md) documentation.
+For detailed information on configuring each specific artifact type, see the [Integration artifacts](../../develop-and-test/develop-and-test.md) documentation.
 
 ## Artifact management
 
@@ -108,5 +108,5 @@ The README section at the bottom of the Library view displays the contents of yo
 ## What's next
 
 - [Create a library](../../develop-and-test/create-workspace/create-a-project.md) — Set up a new library package for sharing common logic across agentic integrations.
-- [Integration artifacts](../../develop-and-test/integration-artifacts/integration-artifacts.md) — Learn about the artifact types you can define in a library.
+- [Integration artifacts](../../develop-and-test/develop-and-test.md) — Learn about the artifact types you can define in a library.
 - [Functions](product://integrator/develop-and-test/integration-artifacts/supportive-artifacts/functions) — Encapsulate reusable logic in function artifacts for validation and transformation.

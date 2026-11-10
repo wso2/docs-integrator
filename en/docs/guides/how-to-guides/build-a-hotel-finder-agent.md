@@ -109,7 +109,7 @@ The integration opens with the WSO2 Agent Builder Copilot, which asks **What sho
 
 By default, the agent uses the WSO2 model provider, so no third-party API key is required. Sign in to WSO2 Agent Builder if prompted.
 
-To use a different LLM instead, see [Model providers](../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md) for the full list of supported providers (OpenAI, Anthropic, Azure OpenAI, and others).
+To use a different LLM instead, see [Model providers](../../develop-and-test/integration-artifacts/model-providers.md) for the full list of supported providers (OpenAI, Anthropic, Azure OpenAI, and others).
 
 :::
 
@@ -200,7 +200,7 @@ The tool now appears as a node connected to the agent. Select it to open its flo
 
    :::note
 
-   This uses hardcoded sample data. In a real scenario, you would call an external hotel API, query a database, or connect an [MCP tool](../../develop-and-test/integration-artifacts/ai-integrations/agents/tools.md).
+   This uses hardcoded sample data. In a real scenario, you would call an external hotel API, query a database, or connect an [MCP tool](../../develop-and-test/integration-artifacts/agents/tools.md).
 
    :::
 
@@ -315,7 +315,7 @@ The tool now appears as a node connected to the agent. Select it to open its flo
 
    :::note
 
-   This returns hardcoded sample data. In a real scenario, you would query a booking system, call an availability API, or connect an [MCP tool](../../develop-and-test/integration-artifacts/ai-integrations/agents/tools.md).
+   This returns hardcoded sample data. In a real scenario, you would query a booking system, call an availability API, or connect an [MCP tool](../../develop-and-test/integration-artifacts/agents/tools.md).
 
    :::
 
@@ -424,7 +424,7 @@ Create a file named `agents.bal`. Each tool is an `isolated` function annotated 
 
 :::note
 
-Both tools use hardcoded sample data. In a real scenario, you would call external APIs, query a database, or connect [MCP tools](../../develop-and-test/integration-artifacts/ai-integrations/agents/tools.md).
+Both tools use hardcoded sample data. In a real scenario, you would call external APIs, query a database, or connect [MCP tools](../../develop-and-test/integration-artifacts/agents/tools.md).
 
 :::
 
@@ -534,6 +534,6 @@ This example demonstrates two patterns you will reuse in production agents:
 
 ## What's next
 
-- [Creating an agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent.md) — Full reference for agent configuration
-- [Tools](../../develop-and-test/integration-artifacts/ai-integrations/agents/tools.md) — Advanced tool patterns, including connection-backed tools and MCP servers
-- [Memory](../../develop-and-test/integration-artifacts/ai-integrations/agents/memory.md) — Custom memory strategies beyond the default session store
+- [Creating an agent](../../develop-and-test/integration-artifacts/agents/create-an-agent.md) — Full reference for agent configuration
+- [Tools](../../develop-and-test/integration-artifacts/agents/tools.md) — Advanced tool patterns, including connection-backed tools and MCP servers
+- [Memory](../../develop-and-test/integration-artifacts/agents/memory.md) — Custom memory strategies beyond the default session store

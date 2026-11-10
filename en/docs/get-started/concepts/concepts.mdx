@@ -101,21 +101,21 @@ A library holds reusable components and utilities, such as functions, types, and
 
 ## Build and Test
 
-The concepts you work with while building an agent in WSO2 Agent Builder. These are covered in depth in [AI Agents](../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md).
+The concepts you work with while building an agent in WSO2 Agent Builder. These are covered in depth in [AI Agents](../../develop-and-test/integration-artifacts/agents/agents.md).
 
 ### Agent
 
 An agent uses a large language model (LLM) to understand a request, reason about it, and call [tools](#tool) to retrieve information or perform actions. You define an agent with a **Role**, **Instructions**, and a **Model**, and you can give it tools, [memory](#memory), and [knowledge bases](#knowledge-base).
 
-You add an agent from the agentic integration overview with **Add Agent** > **Create Agent**. See [Create an Agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent.md).
+You add an agent from the agentic integration overview with **Add Agent** > **Create Agent**. See [Create an Agent](../../develop-and-test/integration-artifacts/agents/create-an-agent.md).
 
 ### Agent definition
 
-An agent definition is a reusable agent configuration that can be shared and used to create agents with the same configuration. You create one with **Add Agent** > **Create Agent Definition**. See [Create an Agent Definition](../../develop-and-test/integration-artifacts/ai-integrations/agents/definitions/definitions.md).
+An agent definition is a reusable agent configuration that can be shared and used to create agents with the same configuration. You create one with **Add Agent** > **Create Agent Definition**. See [Create an Agent Definition](../../develop-and-test/integration-artifacts/agents/definitions/definitions.md).
 
 ### Durable agent
 
-A durable agent runs as a workflow. It can wait days for a person or an event, and it resumes where it left off after a restart. Use a durable agent when a step must wait for human approval before it runs. You create one with **Add Agent** > **Create Durable Agent**. See [Gated Tools vs Durable Agentic Workflow](../../develop-and-test/integration-artifacts/ai-integrations/agents/human-in-the-loop/gated-tools-vs-durable-agentic-workflow.md).
+A durable agent runs as a workflow. It can wait days for a person or an event, and it resumes where it left off after a restart. Use a durable agent when a step must wait for human approval before it runs. You create one with **Add Agent** > **Create Durable Agent**. See [Gated Tools vs Durable Agentic Workflow](../../develop-and-test/integration-artifacts/agents/human-in-the-loop/gated-tools-vs-durable-agentic-workflow.md).
 
 ### Trigger
 
@@ -128,23 +128,23 @@ A trigger connects an agent to the channel or event source that calls it. You ad
 
 ### Model provider
 
-A model provider connects an agent to an LLM. Each agent uses one model provider. New agents use the **Default WSO2 Model Provider**, which works after you [sign in](../setup.md#step-4-sign-in-to-wso2-agent-builder). You can also connect providers such as Anthropic, OpenAI, Azure OpenAI, AWS Bedrock, Google Vertex, Mistral, DeepSeek, OpenRouter, or Ollama. See [Model Providers](../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md).
+A model provider connects an agent to an LLM. Each agent uses one model provider. New agents use the **Default WSO2 Model Provider**, which works after you [sign in](../setup.md#step-4-sign-in-to-wso2-agent-builder). You can also connect providers such as Anthropic, OpenAI, Azure OpenAI, AWS Bedrock, Google Vertex, Mistral, DeepSeek, OpenRouter, or Ollama. See [Model Providers](../../develop-and-test/integration-artifacts/model-providers.md).
 
 ### Tool
 
-A tool is an action an agent can choose to call while it works on a request. You add one with **Add Tool** on the agent canvas, from a connection, a function, another agent, a knowledge base, or an MCP server, or by creating a custom tool. A tool can require human approval before it runs. See [Give Tools to Agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/tools.md).
+A tool is an action an agent can choose to call while it works on a request. You add one with **Add Tool** on the agent canvas, from a connection, a function, another agent, a knowledge base, or an MCP server, or by creating a custom tool. A tool can require human approval before it runs. See [Give Tools to Agent](../../develop-and-test/integration-artifacts/agents/tools.md).
 
 ### MCP server
 
-The Model Context Protocol (MCP) is an open standard that lets agents discover and call tools over the network. An agent can use the tools of an external MCP server, and an agentic integration can expose its own functionality as an MCP server for other agents to call. See [MCP Integration](../../develop-and-test/integration-artifacts/ai-integrations/mcp/mcp.md).
+The Model Context Protocol (MCP) is an open standard that lets agents discover and call tools over the network. An agent can use the tools of an external MCP server, and an agentic integration can expose its own functionality as an MCP server for other agents to call. See [MCP Integration](../../develop-and-test/integration-artifacts/mcp/mcp.md).
 
 ### Memory
 
-Memory lets an agent remember earlier messages in a conversation, so it can answer follow-up questions in context. You configure it with **+ Add Memory** on the agent node, and choose where the messages are stored. See [Configure Agent Memory](../../develop-and-test/integration-artifacts/ai-integrations/agents/memory.md).
+Memory lets an agent remember earlier messages in a conversation, so it can answer follow-up questions in context. You configure it with **+ Add Memory** on the agent node, and choose where the messages are stored. See [Configure Agent Memory](../../develop-and-test/integration-artifacts/agents/memory.md).
 
 ### Knowledge base
 
-A knowledge base lets an agent answer from your own documents. Documents are split into chunks, turned into embeddings by an embedding provider, and stored in a vector store. At query time, the agent retrieves the most relevant chunks and uses them in its answer. See [How Knowledge Bases Work](../../develop-and-test/integration-artifacts/ai-integrations/knowledge-bases/how-knowledge-bases-work.md).
+A knowledge base lets an agent answer from your own documents. Documents are split into chunks, turned into embeddings by an embedding provider, and stored in a vector store. At query time, the agent retrieves the most relevant chunks and uses them in its answer. See [How Knowledge Bases Work](../../develop-and-test/integration-artifacts/knowledge-bases/how-knowledge-bases-work.md).
 
 ### Connection
 
@@ -176,11 +176,11 @@ Agent Chat is the built-in chat panel you use to try an agent while you build it
 
 ### Tracing
 
-Tracing records each step an agent takes to answer a request: the LLM calls it makes, the tools it calls, and the inputs and outputs of each. Turn it on with **Tracing: Off** in the canvas header, then click **View Trace** under a reply in Agent Chat to see what happened. See [Observe Agent Behavior](../../develop-and-test/integration-artifacts/ai-integrations/agents/observability.md).
+Tracing records each step an agent takes to answer a request: the LLM calls it makes, the tools it calls, and the inputs and outputs of each. Turn it on with **Tracing: Off** in the canvas header, then click **View Trace** under a reply in Agent Chat to see what happened. See [Observe Agent Behavior](../../develop-and-test/integration-artifacts/agents/observability.md).
 
 ### Evaluations
 
-Evaluations check that an agent behaves as expected, by running it against a set of recorded conversations (an evalset) and scoring its answers. Use them to catch regressions when you change the instructions, the model, or the tools. See [Evaluate Agent Behavior](../../develop-and-test/integration-artifacts/ai-integrations/agents/evaluations/evaluations.md).
+Evaluations check that an agent behaves as expected, by running it against a set of recorded conversations (an evalset) and scoring its answers. Use them to catch regressions when you change the instructions, the model, or the tools. See [Evaluate Agent Behavior](../../develop-and-test/integration-artifacts/agents/evaluations/evaluations.md).
 
 ## Deploy and Run
 
@@ -234,4 +234,4 @@ WSO2 Agent Builder emits telemetry through OpenTelemetry and integrates with est
 - [Setup](../setup.md): install WSO2 Agent Builder and sign in
 - [Build an AI agent](../quickstarts/build-ai-agent.md): build your first AI agent in under 10 minutes
 - [Build a durable agent](../quickstarts/build-durable-agent.md): build an agent that waits for human approval
-- [AI Agents](../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md): agents, tools, memory, and evaluations in depth
+- [AI Agents](../../develop-and-test/integration-artifacts/agents/agents.md): agents, tools, memory, and evaluations in depth

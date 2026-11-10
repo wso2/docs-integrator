@@ -36,7 +36,7 @@ You can also start from the integration **Overview**, which shows each service a
     }}
 />
 
-To create a new service, open an agent, select **Add Trigger**, and choose the trigger type, for example **HTTP** under **API Endpoints**. See [Creating an Agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent.md).
+To create a new service, open an agent, select **Add Trigger**, and choose the trigger type, for example **HTTP** under **API Endpoints**. See [Creating an Agent](../../develop-and-test/integration-artifacts/agents/create-an-agent.md).
 
 ## Header
 
@@ -146,6 +146,6 @@ The **More** (`⋮`) menu groups actions that are specific to the service type. 
 
 ## What's next
 
-- [Creating an Agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent.md): create an agent and add the trigger that creates the service.
+- [Creating an Agent](../../develop-and-test/integration-artifacts/agents/create-an-agent.md): create an agent and add the trigger that creates the service.
 - [Flow Canvas](../canvases/flow-canvas/flow-canvas.md): edit the logic that runs when a resource or handler is invoked.
 - [Type Panel](../panels/type-panel.md): define the request and response types used by the service.
