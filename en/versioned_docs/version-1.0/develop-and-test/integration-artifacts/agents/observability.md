@@ -10,7 +10,7 @@ slug: /develop-and-test/integration-artifacts/agents/observability
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Observability
+# Observe Agent Behavior
 
 When you run an agent, you want to see exactly what it did. Which tools it picked, what it sent to the LLM, what came back, and how long each step took. WSO2 Agent Builder ships with a **dev-time trace server**, a built-in tracing backend that runs alongside the editor and collects spans as your agentic integration executes. With tracing on, the LLM's tool choices and interpretations of each result are visible in the spans, so you can debug agent behavior without adding print statements.
 

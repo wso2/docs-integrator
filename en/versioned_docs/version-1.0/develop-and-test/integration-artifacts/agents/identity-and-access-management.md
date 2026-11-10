@@ -10,7 +10,7 @@ slug: /develop-and-test/integration-artifacts/agents/identity-and-access-managem
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Identity & Access Management
+# Secure Agent Access
 
 AI agents interact with MCP servers, APIs, databases, and enterprise systems to perform tasks autonomously. As agents access enterprise resources and external services, it is important to secure and govern these interactions using proper identity and access control mechanisms.
 
