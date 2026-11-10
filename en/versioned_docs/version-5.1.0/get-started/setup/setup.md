@@ -112,7 +112,7 @@ Create one and set up your organization by following <CloudDocsLink to="/get-sta
 
 ## Update WSO2 Integrator
 
-WSO2 Integrator includes a built-in updater that automatically checks for updates to the application and its bundled components, including the Ballerina runtime, Java runtime, and Integration Control Plane (ICP). You don't need to download or reinstall WSO2 Integrator to keep it up to date.
+WSO2 Integrator includes a built-in updater that automatically checks for updates to the application and its bundled components, including the Ballerina runtime, Java runtime, Integration Control Plane (ICP), and the wso2.ballerina extension. You don't need to download or reinstall WSO2 Integrator to keep it up to date.
 
 ### Check for updates
 
