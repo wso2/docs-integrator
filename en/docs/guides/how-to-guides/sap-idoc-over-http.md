@@ -67,7 +67,7 @@ Build the service first, so that it is running when you test the connection from
         }}
     />
 
-2. On the **Artifacts** page, select **HTTP Service** under **Integration as API**.
+2. On the integration overview, select **Add Artifact manually**. On the **Artifacts** page, select **HTTP Service** under **Integration as API**.
 
     <ThemedImage
         alt="Artifacts page with the HTTP Service card selected under Integration as API"
@@ -116,7 +116,7 @@ SAP posts each IDoc as an XML document, so the resource takes an `xml` payload.
 
 The XML that SAP sends has the IDoc type as its root element, for example `<MATMAS05>`, with one `<IDOC>` element. Inside it, `EDI_DC40` is the control record and every other element is a segment. Creating record types for this structure lets the Data Mapper show the IDoc fields.
 
-1. In the project explorer, select **+** next to **Types**, open the **Import** tab, and set **Format** to **XML**.
+1. In the project explorer, select **+** next to **Types**, then select **Add Type**. In the **New Type** panel, open the **Import** tab and set **Format** to **XML**.
 2. Paste a sample `MATMAS05` IDoc and select **Import**. Include only the segments and fields you need; the import creates one record type per element, and segments and fields that are not in a type are ignored when an IDoc is converted:
 
     ```xml
@@ -147,7 +147,7 @@ The XML that SAP sends has the IDoc type as its root element, for example `<MATM
         }}
     />
 
-3. The import infers `DOCNUM` as `int`, which would drop the leading zeros of the IDoc number. Open the **EDI_DC40** type, select **Edit**, change the type of `DOCNUM` to `string`, and select **Save**.
+3. The import infers `DOCNUM` as `int`, which would drop the leading zeros of the IDoc number. In the type diagram, open the **⋮** menu on the **EDI_DC40** card and select **Edit**. Change the type of `DOCNUM` to `string`, and select **Save**.
 
     <ThemedImage
         alt="Edit Type panel for EDI_DC40 with DOCNUM changed to string, next to the type diagram of IDOC, EDI_DC40 and E1MARAM"
@@ -190,8 +190,8 @@ The XML that SAP sends has the IDoc type as its root element, for example `<MATM
 
 ## Step 5: Map the IDoc with the Data Mapper
 
-1. Select the **+** after the conversion step, then [**Map Data**](../../editor/canvases/flow-canvas/node-palette.md#map-data), and select **Create Data Mapper**.
-2. Name the data mapper `toMaterialEvent`. Under **Inputs**, select **Add Argument** and enter `matmas`. Set **Output** to `MaterialEvent` and **Result** to `materialEvent`, then select **Open in Data Mapper**.
+1. Select the **+** after the conversion step, then [**Map Data**](../../editor/canvases/flow-canvas/node-palette.md#map-data). Expand **Within Project** and select **Create Data Mapper**.
+2. Name the data mapper `toMaterialEvent`. Under **Inputs**, select **Add Argument**, enter `matmas`, and select **Add**. Set **Output** to `MaterialEvent` and **Result** to `materialEvent`, then select **Open in Data Mapper**.
 
     <ThemedImage
         alt="Data Mapper Creation form with the name toMaterialEvent, the input matmas of type MATMAS05, the output type MaterialEvent and the result materialEvent"
