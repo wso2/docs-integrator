@@ -141,7 +141,7 @@ The voice listener only accepts calls once it's deployed. From the project overv
     }}
 />
 
-Click **Deploy** under **Deploy to WSO2 Cloud**, pick the organization and project, and connect a Git remote if the project doesn't have one yet. This flow is identical for every artifact type — see [Deploy to WSO2 Cloud from WSO2 Integrator](../../../../deploy-and-run/deploy-to-wso2-cloud/push-from-ide.md) for the full walkthrough.
+Click **Deploy** under **Deploy to WSO2 Cloud**, pick the organization and project, and connect a Git remote if the project doesn't have one yet. This flow is identical for every artifact type — see [Deploy to WSO2 Cloud from WSO2 Integrator](../../../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) for the full walkthrough.
 
 Once deployed, enable voice for the integration in WSO2 Cloud. WSO2 Cloud runs the voice pipeline for you: callers connect over WebRTC, their speech is transcribed and sent to `onChatMessage`, and the reply is converted back to speech. You choose the speech-to-text and text-to-speech providers when you set it up. See [Voice Agents](https://wso2.com/integration-platform/docs/saas/manage/voice-agents) in the WSO2 Cloud documentation to configure and test the voice pipeline.
 

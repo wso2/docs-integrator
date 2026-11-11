@@ -197,7 +197,7 @@ Before you deploy, set **Host** and **Port** to a RabbitMQ broker that WSO2 Clou
 Deploy your integration to WSO2 Cloud - Integration Platform in any of the following ways:
 
 - If you're using the cloud editor, see [Save and deploy](../../deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor.md#save-and-deploy).
-- If you're using WSO2 Integrator on your machine, see [Deploy from WSO2 Integrator](../../deploy-and-run/deploy-to-wso2-cloud/push-from-ide.md).
+- If you're using WSO2 Integrator on your machine, see [Deploy from WSO2 Integrator](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md).
 
 <div class="skip-ahead-card">
 
