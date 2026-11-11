@@ -154,7 +154,7 @@ Configure the **Paths** field with a configurable so the file path can be change
 3. In the **New Configurable** dialog, fill in:
    - **Variable Name**: `path`
    - **Variable Type**: `string`
-   - **Documentation**: *Path of the HR policy document to ingest.*
+   - **Description**: *Path of the HR policy document to ingest.*
 
    <ThemedImage
        alt="New Configurable dialog for path"
