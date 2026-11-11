@@ -35,8 +35,8 @@ WSO2 Integrator's configuration support is built on Ballerina's configurable var
    <ThemedImage
        alt="WSO2 Integrator sidebar showing add Configuration"
        sources={{
-           light: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/add-configuration.png'),
-           dark: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/add-configuration.png'),
+           light: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/add-configuration-v5.1.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/add-configuration-v5.1.png'),
        }}
    />
 
@@ -47,13 +47,13 @@ WSO2 Integrator's configuration support is built on Ballerina's configurable var
    | **Variable Name** | The identifier used to reference the variable within your integration (for example, `token`). Required. |
    | **Variable Type** | The type of the variable (for example, `string`, `int`, `boolean`, or a user-defined type). Required. |
    | **Default Value** | An optional default value. Leave empty to make the variable required. The integration fails to start unless you supply a value at runtime. |
-   | **Documentation** | Optional description set as variable documentation. |
+   | **Description** | Optional description of the variable. |
 
    <ThemedImage
-       alt="Add Configurable Variable form showing Variable Name, Variable Type, Default Value, and Documentation fields"
+       alt="Add Configurable Variable form showing Variable Name, Variable Type, Default Value, and Description fields"
        sources={{
-           light: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/create-configuration.png'),
-           dark: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/create-configuration.png'),
+           light: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/create-configuration-v5.1.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/create-configuration-v5.1.png'),
        }}
    />
 
@@ -101,8 +101,8 @@ Click the icon next to **Configurations** in the sidebar to open the **Configura
 <ThemedImage
     alt="Configurable Variables panel showing variables grouped by Integration and Imported libraries"
     sources={{
-        light: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/configurable-variables.png'),
-        dark: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/configurable-variables.png'),
+        light: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/configurable-variables-v5.1.png'),
+        dark: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/configurable-variables-v5.1.png'),
     }}
 />
 
@@ -123,8 +123,8 @@ Use the **Configurable Variables** panel to set values for your configurable var
 <ThemedImage
     alt="Providing values in the Configurable Variables panel"
     sources={{
-        light: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/provide-values.png'),
-        dark: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/provide-values.png'),
+        light: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/provide-values-v5.1.png'),
+        dark: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/provide-values-v5.1.png'),
     }}
 />
 
@@ -170,7 +170,7 @@ For the complete configuration reference (supported types, value sources, resolu
 | **Never commit the Config.toml file** | Keep the `Config.toml` file out of version control. See [Secrets and encryption](../../../deploy-and-run/secure/secrets-encryption.md). |
 | **Mark required values explicitly** | For configurations that must come from the environment (such as endpoints and credentials), leave **Default Value** empty in the Visual Designer and use `?` in code so that the value is mandated and absence causes startup to fail. |
 | **Group related settings** | Use record types to group settings that belong to the same subsystem (for example, database configuration or CRM settings). |
-| **Document defaults** | Use the **Documentation** field to explain the purpose and valid range of each setting. |
+| **Document defaults** | Use the **Description** field to explain the purpose and valid range of each setting. |
 
 ## What's next
 
