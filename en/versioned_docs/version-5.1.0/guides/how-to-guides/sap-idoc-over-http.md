@@ -23,6 +23,15 @@ SAP usually sends IDocs to an external system over transactional RFC, which need
 
 ## How it works
 
+<ThemedImage
+    alt="Architecture diagram: SAP S/4HANA Private Cloud sends a MATMAS IDoc as XML through an XML HTTP port and an SM59 destination to the WSO2 Integrator HTTP service POST /sap/idocs, which returns 201 Created; the service maps the MATMAS05 IDoc to a MaterialEvent with the Data Mapper, ready to send on to a target system such as an ERP, database or message broker"
+    style={{border: 'none', boxShadow: 'none', borderRadius: 0}}
+    sources={{
+        light: useBaseUrl('/img/guides/usecases/sap-idoc-over-http/architecture.png'),
+        dark: useBaseUrl('/img/guides/usecases/sap-idoc-over-http/architecture.png'),
+    }}
+/>
+
 1. A material is distributed in SAP, for example with transaction `BD10`, or automatically through change pointers.
 2. ALE builds a `MATMAS05` IDoc for the receiving partner and hands it to the partner's **XML HTTP** port.
 3. The port turns the IDoc into IDoc XML and sends it with an HTTP `POST` to the URL defined in an SM59 **HTTP connection to an external server**.
