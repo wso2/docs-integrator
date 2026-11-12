@@ -44,7 +44,7 @@ Apply only to the selected service. The form is split into the service's own set
 - **StreamableHttpServiceConfig**: the server information sent to MCP clients, such as the server name and version, along with options such as the session mode and HTTP settings.
 - **Configuration for `<listener>`**: the listener's own settings (for example, **Name**, **Listen To**, **Host**, **HTTP1 Settings**, **Secure Socket**, and **HTTP Version** for an MCP listener), one block per attached listener.
 
-For what each MCP setting does, see [Service configuration](../../develop-and-test/integration-artifacts/ai-integrations/mcp/exposing-as-mcp.md#service-configuration) and [Listener configuration](../../develop-and-test/integration-artifacts/ai-integrations/mcp/exposing-as-mcp.md#listener-configuration).
+For what each MCP setting does, see [Service configuration](../../develop-and-test/integration-artifacts/mcp/exposing-as-mcp.md#service-configuration) and [Listener configuration](../../develop-and-test/integration-artifacts/mcp/exposing-as-mcp.md#listener-configuration).
 
 The left pane lists the service and its **Attached Listeners** so you can jump straight to the block you want to edit.
 
@@ -65,5 +65,5 @@ On the project and service levels, the panel stages your edits until you select 
 ## What's next
 
 - [Service Designer](../designers/service-designer.md): return to the service designer to manage resources and handlers.
-- [Exposing a Service as MCP](../../develop-and-test/integration-artifacts/ai-integrations/mcp/exposing-as-mcp.md): create an MCP service and configure its tools.
+- [Exposing a Service as MCP](../../develop-and-test/integration-artifacts/mcp/exposing-as-mcp.md): create an MCP service and configure its tools.
 - [Expression Panel](expression-panel.md): use configurable variables in expressions.

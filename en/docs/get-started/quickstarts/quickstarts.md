@@ -31,4 +31,4 @@ Before you start, [set up WSO2 Agent Builder](../setup.md) and sign in.
 ## What's next
 
 - [Concepts](../concepts/concepts.mdx) — Learn the vocabulary used across the docs.
-- [AI Agents](../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md) — Go deeper into agents, tools, memory, and evaluations.
+- [AI Agents](../../develop-and-test/integration-artifacts/agents/agents.md) — Go deeper into agents, tools, memory, and evaluations.

@@ -141,5 +141,5 @@ The panel also includes a **Management** section for monitoring and managing you
 ## What's next
 
 - [Flow Canvas](../canvases/flow-canvas/flow-canvas.md) — Build logic using the visual designer.
-- [Integration artifacts](../../develop-and-test/integration-artifacts/integration-artifacts.md) — Learn about artifact types and their configuration.
+- [Integration artifacts](../../develop-and-test/develop-and-test.md) — Learn about artifact types and their configuration.
 - [Deploy to WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) — Deploy your agentic integration to the cloud.

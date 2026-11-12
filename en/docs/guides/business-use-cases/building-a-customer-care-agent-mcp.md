@@ -35,7 +35,7 @@ The agent receives customer messages over HTTP, reasons about which tool to call
 
 
 :::info Prerequisites
-- A model provider for the agent. This tutorial uses the **Default WSO2 Model Provider**. For other options, see [Model providers for LLMs](../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md).
+- A model provider for the agent. This tutorial uses the **Default WSO2 Model Provider**. For other options, see [Model providers for LLMs](../../develop-and-test/integration-artifacts/model-providers.md).
 - The **ShopEasy MCP server** running locally. Clone the repo and follow its README to start it: [github.com/wso2/integration-samples](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/samples/customer-care-agent/mcp).
 :::
 
@@ -263,7 +263,7 @@ To run and test the agent, follow the same steps in the **Visual Designer** tab 
 
 ## What's next
 
-- [Exposing a service as an MCP server](../../develop-and-test/integration-artifacts/ai-integrations/mcp/exposing-as-mcp.md) — Build your own MCP server like the one used in this tutorial
-- [Consuming MCP from an agent](../../develop-and-test/integration-artifacts/ai-integrations/mcp/consuming-mcp-from-agent.md) — Reference for the MCP toolkit options
-- [Adding memory to an agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/memory.md) — Persist conversation history across sessions
-- [AI agent observability](../../develop-and-test/integration-artifacts/ai-integrations/agents/observability.md) — Trace tool calls and monitor agent performance
+- [Exposing a service as an MCP server](../../develop-and-test/integration-artifacts/mcp/exposing-as-mcp.md) — Build your own MCP server like the one used in this tutorial
+- [Consuming MCP from an agent](../../develop-and-test/integration-artifacts/mcp/consuming-mcp-from-agent.md) — Reference for the MCP toolkit options
+- [Adding memory to an agent](../../develop-and-test/integration-artifacts/agents/memory.md) — Persist conversation history across sessions
+- [AI agent observability](../../develop-and-test/integration-artifacts/agents/observability.md) — Trace tool calls and monitor agent performance

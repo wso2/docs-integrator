@@ -13,7 +13,7 @@ You can deploy your agents to WSO2 Agent Manager directly from WSO2 Agent Builde
 
 :::info Prerequisites
 - Access to a WSO2 Agent Manager instance: its console URL and an account that can sign in to it.
-- A project with an agentic integration that has something to run, such as an [agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent.md) with a trigger.
+- A project with an agentic integration that has something to run, such as an [agent](../../develop-and-test/integration-artifacts/agents/create-an-agent.md) with a trigger.
 - The project published to a GitHub repository. Agent Manager builds from GitHub, so it needs your code there. To publish a project, see steps 5a–5e in [Deploy to WSO2 Cloud](../deploy-to-wso2-cloud/deploy-to-wso2-cloud.md#deploy-an-agentic-integration).
 :::
 

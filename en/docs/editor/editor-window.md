@@ -91,7 +91,7 @@ When an agentic integration or library is open, the project explorer groups its 
 | **Functions** | Reusable logic blocks, such as agent tools, callable from agents, entry points, or other functions. |
 | **Configurations** | Variables sourced from `Config.toml` at runtime. |
 
-For details on each artifact type, see [Integration artifacts](../develop-and-test/integration-artifacts/integration-artifacts.md).
+For details on each artifact type, see [Integration artifacts](../develop-and-test/develop-and-test.md).
 
 ## Editor tab area
 

@@ -85,7 +85,7 @@ export const CATEGORIES: ArtifactCategory[] = [
 ];
 
 const DEV = '/develop-and-test/integration-artifacts';
-const AI = '/develop-and-test/integration-artifacts/ai-integrations';
+const AI = '/develop-and-test/integration-artifacts';
 
 export const ARTIFACTS: Artifact[] = [
   // Automation

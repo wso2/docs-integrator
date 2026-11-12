@@ -1,1 +1,1 @@
-{ "label": "Build Agentic Integrations", "position": 2, "customProps": { "separatorBefore": "Develop Integrations" } }
+{ "label": "Build Agentic Integrations", "position": 2, "link": null, "customProps": { "separatorBefore": "Build Agentic Integrations", "inline": true } }
