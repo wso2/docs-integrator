@@ -165,9 +165,11 @@ connectors┘          (per product branch)   (merged, always
 **Develop** — PRs into a product branch, reviewed, merged.
 
 **Staging** — automatic, on every push to a product branch.
-`staging_sync.yaml` builds only the branch that changed and updates its
-subdirectory of `staging` (`keep_files: true`, same trick production
-already uses), leaving the other two products' subdirectories alone.
+`staging_sync.yaml` builds only the branch that changed and *mirrors*
+its subdirectory of `staging`: that subdirectory is deleted and
+recreated from the build, so a page the build no longer emits stops
+being served, while the staging root and the other three products'
+subdirectories are left untouched.
 Choreo watches `staging` and redeploys on its own. Always current, no
 gate — that's the point of staging.
 
@@ -177,7 +179,7 @@ gate — that's the point of staging.
 record of exactly what's being promoted, then runs
 `promote_to_production.yaml` (`workflow_dispatch`, from `main`'s Actions
 tab) with that tag as the `ref` input. That workflow does **no build** —
-it checks out the tagged tree (already-built static HTML, all three
+it checks out the tagged tree (already-built static HTML, all four
 products merged) and pushes it to `gh-pages` as-is. Production can never
 end up with a combination of products that wasn't actually validated
 together on staging, and rollback is just re-running the promote
@@ -188,7 +190,7 @@ workflow against an older tag.
 | Where | Change |
 |---|---|
 | New branch | Create `wso2-<product>` from `main` |
-| `staging_sync.yaml` | Add the branch to the trigger list, add a case to the `case` statement's `BASE_URL` lookup with its **own subpath** -- e.g. `/integration-platform/docs/<product>/`, the exact same pattern `saas` (`/saas/`) and `wso2-integrator` (`/integrator/`) already use -- **and add its own `Deploy <product>` step** (copy an existing one, give it its own `destination_dir` matching that subpath). Skipping the deploy step is the easy mistake: the branch still builds fine, it just never gets published anywhere. Every product gets its own subpath; none of them owns the bare family root (that's a static redirect stub, `root-redirect/index.html`, saas-only). Full worked example: `docs/workflows/workflows.md`'s "How to configure its path". |
+| `staging_sync.yaml` | Add the branch to the trigger list, and add a case to the `case` statement setting **both** outputs: `base_url` with its **own subpath** -- e.g. `/integration-platform/docs/<product>/`, the exact same pattern `saas` (`/saas/`) and `wso2-integrator` (`/integrator/`) already use -- **and `product_dir`** naming that same subpath (`<product>`). There is no per-product deploy step to add: the single `Mirror this product's subtree onto staging` step publishes whatever `product_dir` names. Setting only `base_url` is the easy mistake: the branch still builds fine, but `product_dir` comes back empty and the mirror step fails instead of publishing. Every product gets its own subpath; none of them owns the bare family root (that's a static redirect stub, `root-redirect/index.html`, saas-only). Full worked example: `docs/workflows/workflows.md`'s "How to configure its path". |
 | `scripts/preview-all-sites.mjs` `SITES` map | Add an entry, same shape as the existing three (`baseUrl`/`mergeSubdir` following that same subpath) |
 | `en/src/components/SidebarProductHeader`'s `ProductKey` type, `PRODUCTS` map, `PRODUCT_ORDER` array, and `detectCurrentProduct()` | Add the new key to the `ProductKey` union first -- `tsc` then won't pass until every `Record<ProductKey, ...>` map has a matching entry, including `ReportIssueButton`'s below. Then add label/description/icon/`path` to `PRODUCTS`; add the key to `PRODUCT_ORDER` too (a plain `ProductKey[]`, **not** exhaustiveness-checked -- miss this and the build still passes, the product just silently never appears in the switcher dropdown); and add a matching `baseUrl.includes('/<product>/')` branch to `detectCurrentProduct()`. Full worked example: `docs/workflows/workflows.md`'s "How to configure its path". |
 | `en/src/components/ReportIssueButton` `ISSUE_CHOOSER_URLS` map | Add the new product's own issue-tracker repo (`.../issues/new/choose`), keyed the same `ProductKey` as `SidebarProductHeader`'s `PRODUCTS` map (reuses its exported `detectCurrentProduct()`, not duplicated) -- this file is wholesale-shared, so the repo can't be a single constant. `tsc` won't pass until this map has an entry either. Full worked example: `docs/workflows/workflows.md`'s "How to configure its issue-tracker URL". |
