@@ -122,4 +122,4 @@ The integration now opens inside the new project. A home icon appears at the top
 
 - [Project view](../../editor/views/project-view.md) — Run, edit, and debug your sample project
 - [Create a project](create-a-project.md) — Start a new project from scratch
-- [Integration artifacts](../integration-artifacts/integration-artifacts.md) — Understand the artifact types used in samples
+- [Integration artifacts](../develop-and-test.md) — Understand the artifact types used in samples

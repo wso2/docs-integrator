@@ -86,7 +86,7 @@ Run tests with `bal test` and generate reports with `bal test --test-report --co
 
 ### Does WSO2 Agent Builder support RAG and MCP as well as agents?
 
-Yes. WSO2 Agent Builder includes first-class support for AI agents, retrieval-augmented generation (RAG), Model Context Protocol (MCP) servers, and direct LLM calls. See [AI Integrations](../develop-and-test/integration-artifacts/ai-integrations/ai-integrations.md) for the full set of building blocks.
+Yes. WSO2 Agent Builder includes first-class support for AI agents, retrieval-augmented generation (RAG), Model Context Protocol (MCP) servers, and direct LLM calls. See [AI Integrations](../develop-and-test/develop-and-test.md) for the full set of building blocks.
 
 ### Which LLM and vector store providers are supported?
 

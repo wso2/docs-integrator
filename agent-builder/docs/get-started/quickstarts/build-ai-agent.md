@@ -119,7 +119,7 @@ The agent's canvas opens. It shows the agent with its role and instructions, the
 
 :::tip Default model provider
 
-By default, the agent uses the WSO2 model provider. If you want to use a different LLM, see [Model providers](../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md) for the full list of supported providers (OpenAI, Azure OpenAI, Anthropic, and others).
+By default, the agent uses the WSO2 model provider. If you want to use a different LLM, see [Model providers](../../develop-and-test/integration-artifacts/model-providers.md) for the full list of supported providers (OpenAI, Azure OpenAI, Anthropic, and others).
 
 If you are using the WSO2 model provider, the access token is obtained through [WSO2 Agent Builder Copilot](../../editor/copilot/copilot.md). If you have not already signed in, you will be prompted to do so.
 
@@ -241,5 +241,5 @@ service /wso\-2\-integrator\-assistant on agentChatListener {
 ## What's next
 
 - [Build a durable agent](build-durable-agent.md) — Build an agent that can pause for human approval and resume
-- [AI agents](../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md) — Learn how to build production-grade AI agents with tools, memory, and evaluations
-- [Hierarchical agents](../../develop-and-test/integration-artifacts/ai-integrations/agents/multi-agent/hierarchical-agents.md) — Delegate work from one agent to another
+- [AI agents](../../develop-and-test/integration-artifacts/agents/agents.md) — Learn how to build production-grade AI agents with tools, memory, and evaluations
+- [Hierarchical agents](../../develop-and-test/integration-artifacts/agents/multi-agent/hierarchical-agents.md) — Delegate work from one agent to another

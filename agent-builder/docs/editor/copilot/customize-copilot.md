@@ -111,7 +111,7 @@ WSO2 Agent Builder Copilot ships with a built-in set of tools for building agent
 
 This lets you and your team extend Copilot with the tools your work needs, whether they run as a local process or a remote service.
 
-This section is about giving *Copilot* extra tools. To make *your own agents and services* speak MCP, whether by exposing a service as an MCP server or by consuming MCP from an AI agent, see [MCP integration](../../develop-and-test/integration-artifacts/ai-integrations/mcp/mcp.md).
+This section is about giving *Copilot* extra tools. To make *your own agents and services* speak MCP, whether by exposing a service as an MCP server or by consuming MCP from an AI agent, see [MCP integration](../../develop-and-test/integration-artifacts/mcp/mcp.md).
 
 ### Enable MCP tools
 
@@ -300,5 +300,5 @@ HTTP server with an environment-backed header:
 ## See also
 
 - [Built-in Capabilities](capabilities.md) — Explore planning, review, testing, and more.
-- [MCP integration](../../develop-and-test/integration-artifacts/ai-integrations/mcp/mcp.md) — Expose your services as MCP servers or consume MCP from an AI agent.
+- [MCP integration](../../develop-and-test/integration-artifacts/mcp/mcp.md) — Expose your services as MCP servers or consume MCP from an AI agent.
 - [Copilot architecture and data handling](copilot-architecture.md) — How Copilot handles your data.

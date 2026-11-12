@@ -38,7 +38,7 @@ Before getting started, ensure that the following requirements are met:
   );
   ```
 
-  If you plan to use human-in-the-loop, also create the checkpoint table. See [Memory](../../develop-and-test/integration-artifacts/ai-integrations/agents/memory.md) for the schemas.
+  If you plan to use human-in-the-loop, also create the checkpoint table. See [Memory](../../develop-and-test/integration-artifacts/agents/memory.md) for the schemas.
 
 :::tip Local MSSQL for testing
 To try this tutorial locally, you can run SQL Server in Docker:
