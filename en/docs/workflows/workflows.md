@@ -23,7 +23,7 @@ For the full branch model this all sits inside (`main` → product branch
 | Workflow | Triggers on | What it does |
 | --- | --- | --- |
 | `sync-theme.yaml` | Push to `main` touching a shared path | Copies the shared theme/components/governance docs (the same list `MAINTENANCE.md`'s "Shared theme & shared governance" section names) from `main` out to every product branch in its matrix, as a PR against each. **Lives only on `main`.** |
-| `staging_sync.yaml` | Push to a product branch (`saas`, `wso2-integrator`, `wso2-connectors`, ...) | Builds that one branch and publishes it into its own subpath on the `staging` branch (`keep_files: true`, so it never wipes what other product branches already published there). This is the file with the path-configuration case statement -- see "How to configure its path" below. **Identical on every product branch**, authored on `main`, distributed by `sync-theme.yaml`. |
+| `staging_sync.yaml` | Push to a product branch (`saas`, `wso2-integrator`, `wso2-connectors`, ...) | Builds that one branch and **mirrors** it into its own subpath on the `staging` branch: that subpath is deleted and recreated from the build, so a page the build no longer emits stops being served, while the staging root and the other products' subpaths are left untouched. This is the file with the path-configuration case statement -- see "How to configure its path" below. **Identical on every product branch**, authored on `main`, distributed by `sync-theme.yaml`. |
 | `promote_to_production.yaml` | Manual (`workflow_dispatch`, a `ref` input) | Ships the already-built `staging` tree to `gh-pages` byte-for-byte -- no rebuild, so production always matches exactly what was validated on staging together. **Lives only on `main`** (nothing branch-specific to duplicate). |
 | `pr_build_check.yaml` | PR targeting `main` | Enforces title-case on frontmatter/labels, builds the site, and flags any doc page not reachable from the sidebar (`check-orphans.mjs`). Each product branch keeps its own copy pointed at itself, not synced from here. |
 | `broken-link-check.yaml` + `broken-link-comment.yaml` | PR targeting `main` (check), then that workflow's completion (comment) | Builds the PR head and base, crawls both, and posts a PR comment showing introduced-vs-preexisting broken links/images. Split in two so the comment step can run with write-token access even for fork PRs (see the file's own docstring for why). Fails the check but isn't a required status, so it doesn't block merging. |
@@ -50,15 +50,13 @@ Worked example, onboarding a hypothetical `wso2-agent-builder`:
    `sync-theme.yaml` -- don't hand-edit it directly on a product
    branch, that edit gets silently reverted on the next sync):
    - Add `wso2-agent-builder` to `on.push.branches`.
-   - Add a case to the `case "${{ github.ref_name }}"` statement (see
-     below).
-   - Add a `Deploy wso2-agent-builder (staging/agent-builder)` step,
-     copied from the `wso2-connectors` one, with its own
-     `destination_dir`. Skipping this step is the easiest mistake to
-     make here: the branch still builds fine (the `case` statement
-     alone is enough to resolve a `BASE_URL`), it just never actually
-     gets published anywhere, which looks like a broken build
-     somewhere else until you notice the deploy step is missing.
+   - Add a case to the `case "${{ github.ref_name }}"` statement
+     setting **both** `base_url` and `product_dir` (see below).
+     There is no per-product deploy step to add any more -- one
+     `Mirror this product's subtree onto staging` step publishes
+     whatever `product_dir` names. Setting only `base_url` is the easy
+     mistake: the branch still builds fine, but `product_dir` comes
+     back empty and the mirror step fails rather than publishing.
 3. In `scripts/preview-all-sites.mjs`'s `SITES` map, add an entry so
    the new branch is included in local multi-site preview builds.
 4. In `SidebarProductHeader/index.tsx`:
@@ -110,9 +108,11 @@ branch's BASE_URL" step.
 case "${{ github.ref_name }}" in
   saas)
     echo "base_url=${family_base}saas/" >> "$GITHUB_OUTPUT"
+    echo "product_dir=saas" >> "$GITHUB_OUTPUT"
     ;;
   wso2-agent-builder)
     echo "base_url=${family_base}agent-builder/" >> "$GITHUB_OUTPUT"
+    echo "product_dir=agent-builder" >> "$GITHUB_OUTPUT"
     ;;
   # ...
 esac
@@ -122,12 +122,11 @@ That `base_url` output flows into the build as the `BASE_URL`
 environment variable, which `docusaurus.config.ts` reads directly:
 `baseUrl: process.env.BASE_URL || '/'` -- unset (the `'/'` fallback)
 is exactly what running `npm run start` locally gets, which is why
-`AGENTS.md`'s own quickstart needs no extra flags. The matching
-`Deploy ... (staging/agent-builder)` step's `destination_dir` is what
-actually places the build output at that subpath on the `staging`
-branch -- the `base_url` string and the `destination_dir` value must
-describe the same subpath, or the deployed build's internal links
-won't match where it's actually served from.
+`AGENTS.md`'s own quickstart needs no extra flags. The `product_dir`
+output from the same case entry is what actually places the build
+output at that subpath on the `staging` branch -- `base_url`'s last
+segment and `product_dir` must name the same subpath, or the deployed
+build's internal links won't match where it's actually served from.
 
 Two more places read/reference that same subpath, both already listed
 in the checklist above:

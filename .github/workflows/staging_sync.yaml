@@ -186,6 +186,14 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
+
+          # A case entry above that sets base_url but forgets product_dir
+          # would otherwise reach `rm -rf ""` with a confusing error.
+          if [ -z "${PRODUCT:-}" ]; then
+            echo "::error::No product_dir resolved for '${GITHUB_REF_NAME}' -- its entry in the case statement of the 'Resolve this branch's BASE_URL' step must set product_dir as well as base_url."
+            exit 1
+          fi
+
           REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 
           # Shallow single-branch clone: `staging` carries one deploy commit
