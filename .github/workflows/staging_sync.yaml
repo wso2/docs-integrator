@@ -8,12 +8,13 @@ name: Staging Sync
 # is meant to always be current, unlike production.
 #
 # This file is intentionally IDENTICAL on every product branch -- it
-# reads `github.ref_name` at runtime to pick the right BASE_URL, so
-# there is nothing branch-specific to hand-edit. It's authored on `main`
-# (see MAINTENANCE.md) and distributed to every product branch by the
-# same shared-sync automation that distributes the shared theme. The one
-# time you DO edit it: adding a new product branch to the trigger list
-# and the case statement below when that product launches.
+# reads `github.ref_name` at runtime to pick the right BASE_URL and
+# staging subdirectory, so there is nothing branch-specific to
+# hand-edit. It's authored on `main` (see MAINTENANCE.md) and
+# distributed to every product branch by the same shared-sync automation
+# that distributes the shared theme. The one time you DO edit it: adding
+# a new product branch to the trigger list and the case statement below
+# when that product launches.
 #
 # Deliberately does NOT deploy to production. See promote_to_production.yaml
 # (lives on `main`) for that half of the pipeline.
@@ -27,6 +28,8 @@ on:
       - wso2-agent-builder
   workflow_dispatch:
 
+# Per-branch, NOT one shared group across the four products -- see the
+# long comment above the mirror step for why serializing them is worse.
 concurrency:
   group: staging-deploy-${{ github.ref_name }}
   cancel-in-progress: false
@@ -34,6 +37,9 @@ concurrency:
 jobs:
   build-and-sync:
     runs-on: ubuntu-latest
+    # The mirror step pushes to `staging` with the default token.
+    permissions:
+      contents: write
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -66,9 +72,11 @@ jobs:
           case "${{ github.ref_name }}" in
             saas)
               echo "base_url=${family_base}saas/" >> "$GITHUB_OUTPUT"
+              echo "product_dir=saas" >> "$GITHUB_OUTPUT"
               ;;
             wso2-integrator)
               echo "base_url=${family_base}integrator/" >> "$GITHUB_OUTPUT"
+              echo "product_dir=integrator" >> "$GITHUB_OUTPUT"
               # Default Node heap isn't enough once a branch carries more
               # than one versioned_docs/ snapshot (confirmed: wso2-integrator's
               # own 5.1.0 cut crashed this build step with "JavaScript heap
@@ -81,9 +89,11 @@ jobs:
               ;;
             wso2-connectors)
               echo "base_url=${family_base}connectors/" >> "$GITHUB_OUTPUT"
+              echo "product_dir=connectors" >> "$GITHUB_OUTPUT"
               ;;
             wso2-agent-builder)
               echo "base_url=${family_base}agent-builder/" >> "$GITHUB_OUTPUT"
+              echo "product_dir=agent-builder" >> "$GITHUB_OUTPUT"
               ;;
             *)
               echo "::error::No staging config for branch '${{ github.ref_name }}' -- add it to this case statement and to the trigger list above."
@@ -120,28 +130,6 @@ jobs:
           find en/build -name '*.html' -print0 | xargs -0 sed -i 's#<head>#<head><meta name="robots" content="noindex, nofollow">#'
           find en/build -name 'sitemap.xml' -delete
 
-      # `keep_files: true` is load-bearing: without it, peaceiris wipes
-      # the whole `staging` branch before each deploy, deleting whatever
-      # the other product branches (and, now, the root redirect) already
-      # published there -- this job only builds and publishes the one
-      # branch that triggered it. (promote_to_production.yaml, by
-      # contrast, deliberately omits keep_files: it ships the already-
-      # merged `staging` tree as a single full replace, so nothing
-      # `staging` doesn't have should survive on `gh-pages` either.)
-      # Near-identical deploy steps below (not one parametrized step)
-      # because peaceiris's `destination_dir` input can't be made
-      # conditionally empty/different from inside one step.
-
-      - name: Deploy saas (staging/saas)
-        if: github.ref_name == 'saas'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: staging
-          publish_dir: en/build
-          destination_dir: saas
-          keep_files: true
-
       - name: Prepare root redirect for this base path
         if: github.ref_name == 'saas'
         # root-redirect/index.html hardcodes the production target
@@ -159,41 +147,122 @@ jobs:
             sed -i 's#<head>#<head><meta name="robots" content="noindex, nofollow">#' /tmp/root-redirect/index.html
           fi
 
-      - name: Deploy root redirect (root of staging)
-        if: github.ref_name == 'saas'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: staging
-          publish_dir: /tmp/root-redirect
-          keep_files: true
+      # Each run builds exactly ONE product, so the step below MIRRORS that
+      # product's own subtree of `staging` and touches nothing else: the
+      # directory is deleted and recreated from `en/build`, so a page the
+      # build no longer emits stops being served. A mirror is idempotent --
+      # staging/<product> equals that branch's build output by construction.
+      #
+      # This replaced `peaceiris/actions-gh-pages` with `keep_files: true`,
+      # which only ever ADDED files: a renamed or deleted doc kept its old
+      # URL alive forever. agent-builder's pre-reorg
+      # `.../ai-integrations/agents/gated-tools` was still serving its
+      # 2026-10-29 build two weeks after the 2026-10-30 rename, alongside
+      # the page's current URL, and promote_to_production had copied it to
+      # production byte-for-byte (~234 such orphans across the four
+      # products). Dropping `keep_files` was never the alternative: it is
+      # branch-wide, so it would have wiped the other three products and
+      # the staging root along with the stale files.
+      #
+      # The staging ROOT is deliberately never cleaned, and the guard below
+      # refuses to push if anything already there went missing. It holds
+      # files no Docusaurus build can regenerate -- `Dockerfile` and
+      # `nginx.conf`, hand-committed for Choreo's container, plus
+      # `.nojekyll`, `.dockerignore` and saas's family root redirect -- and
+      # promote_to_production would copy any such loss straight to
+      # production.
+      #
+      # Two product branches pushing at once is handled by re-mirroring onto
+      # the new tip and pushing again, NOT by a shared concurrency group:
+      # GitHub keeps only ONE pending run per group, so funnelling all four
+      # products into one group would let a third push cancel a second
+      # product's queued deploy outright, leaving that product stale on
+      # staging until its next push. Re-mirroring is safe precisely because
+      # a mirror rebuilds the subtree from scratch instead of applying a
+      # diff, so there is nothing to conflict.
+      - name: Mirror this product's subtree onto staging
+        env:
+          PRODUCT: ${{ steps.cfg.outputs.product_dir }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 
-      - name: Deploy wso2-integrator (staging/integrator)
-        if: github.ref_name == 'wso2-integrator'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: staging
-          publish_dir: en/build
-          destination_dir: integrator
-          keep_files: true
+          # Shallow single-branch clone: `staging` carries one deploy commit
+          # per push over a ~30k-file tree, so its history is not worth
+          # fetching. Pushing from it is still a plain fast-forward.
+          if git clone --quiet --depth 1 --single-branch --branch staging "$REMOTE" /tmp/staging; then
+            cd /tmp/staging
+          else
+            # First run on a fork with no `staging` yet (peaceiris created
+            # the branch on demand). The org's hand-placed root files aren't
+            # needed for a fork's own GitHub Pages, so an empty root is fine.
+            echo "No staging branch yet -- bootstrapping an empty one."
+            mkdir -p /tmp/staging
+            cd /tmp/staging
+            git init --quiet --initial-branch staging
+            git remote add origin "$REMOTE"
+            touch .nojekyll
+          fi
+          git config user.name "Docs Bot"
+          git config user.email "docs@wso2.com"
 
-      - name: Deploy wso2-connectors (staging/connectors)
-        if: github.ref_name == 'wso2-connectors'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: staging
-          publish_dir: en/build
-          destination_dir: connectors
-          keep_files: true
+          mirror_and_commit() {
+            # Recomputed per attempt: on a retry HEAD is the new remote tip,
+            # which may legitimately carry root files this run hasn't seen.
+            root_blobs=""
+            if git rev-parse --verify --quiet HEAD >/dev/null; then
+              root_blobs="$(git ls-tree HEAD | awk '$2 == "blob"' | cut -f2)"
+            fi
 
-      - name: Deploy wso2-agent-builder (staging/agent-builder)
-        if: github.ref_name == 'wso2-agent-builder'
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: staging
-          publish_dir: en/build
-          destination_dir: agent-builder
-          keep_files: true
+            rm -rf "$PRODUCT"
+            mkdir -p "$PRODUCT"
+            cp -a "$GITHUB_WORKSPACE/en/build/." "$PRODUCT/"
+            # peaceiris added this per deploy; `docusaurus build` does not
+            # emit it, and without it GitHub Pages runs Jekyll on production
+            # and silently drops any path with a leading underscore.
+            touch "$PRODUCT/.nojekyll"
+            if [ "$PRODUCT" = "saas" ]; then
+              cp /tmp/root-redirect/index.html index.html
+            fi
+
+            while read -r f; do
+              if [ -n "$f" ] && [ ! -f "$f" ]; then
+                echo "::error::staging root lost '$f' -- refusing to push"
+                exit 1
+              fi
+            done <<< "$root_blobs"
+
+            # A build that silently produced nothing must not be mirrored
+            # over a good one -- an empty mirror would delete the live product.
+            if [ ! -f "$PRODUCT/index.html" ]; then
+              echo "::error::build produced no $PRODUCT/index.html -- refusing to push"
+              exit 1
+            fi
+            pages="$(find "$PRODUCT" -name '*.html' | wc -l)"
+            if [ "$pages" -lt 50 ]; then
+              echo "::error::only $pages HTML pages built for $PRODUCT -- refusing to push"
+              exit 1
+            fi
+            echo "Mirroring $pages pages into staging/$PRODUCT."
+
+            git add -A
+            if git diff --cached --quiet; then
+              echo "staging/$PRODUCT already matches this build -- nothing to push."
+              exit 0
+            fi
+            git commit --quiet -m "deploy($PRODUCT): ${GITHUB_SHA}"
+          }
+
+          for attempt in 1 2 3; do
+            mirror_and_commit
+            if git push --quiet origin "HEAD:staging"; then
+              echo "Pushed staging/$PRODUCT on attempt $attempt."
+              exit 0
+            fi
+            echo "staging moved under us -- re-mirroring onto the new tip."
+            git fetch --quiet --depth 1 origin staging
+            git reset --quiet --hard FETCH_HEAD
+          done
+          echo "::error::could not push to staging after 3 attempts"
+          exit 1
