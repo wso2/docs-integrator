@@ -981,7 +981,7 @@ service / on new http:Listener(port) {
 :::caution Conversations last only as long as the microVM
 The agent keeps its conversation memory inside the container. By default, AgentCore Runtime stops a session's microVM after 15 minutes without an invocation or after 8 hours in total, and it also stops one that fails its health check. A later call with the same session id starts a new microVM, and the agent no longer remembers the conversation. It doesn't report an error.
 
-To keep a conversation beyond that, store it outside the container in a durable [memory store](../../develop-and-test/integration-artifacts/ai-integrations/agents/memory.md#add-memory-store).
+To keep a conversation beyond that, store it outside the container in a durable [memory store](../../develop-and-test/integration-artifacts/agents/memory.md#add-memory-store).
 
 Log the reason for any failure inside the container. When the agent returns an error, the caller sees only a `RuntimeClientError` with HTTP status 424. The cause is in the runtime's log group.
 

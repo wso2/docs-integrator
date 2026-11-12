@@ -367,11 +367,11 @@ The **AI** section of the node panel lets you build AI-powered integrations dire
 
 | Sub-category | Use it for | Reference |
 |---|---|---|
-| **Direct LLM** | Send a prompt to an LLM and bind the response to a typed variable. | [Model providers](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md) |
-| **RAG** | Ground LLM responses in your own documents by retrieving relevant chunks at query time. | [How Knowledge Bases Work](../../../develop-and-test/integration-artifacts/ai-integrations/knowledge-bases/how-knowledge-bases-work.md) |
-| **Agent** | Run multi-turn workflows where an LLM plans the next step, calls tools, and uses memory. | [AI agents](../../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md) |
+| **Direct LLM** | Send a prompt to an LLM and bind the response to a typed variable. | [Model providers](../../../develop-and-test/integration-artifacts/model-providers.md) |
+| **RAG** | Ground LLM responses in your own documents by retrieving relevant chunks at query time. | [How Knowledge Bases Work](../../../develop-and-test/integration-artifacts/knowledge-bases/how-knowledge-bases-work.md) |
+| **Agent** | Run multi-turn workflows where an LLM plans the next step, calls tools, and uses memory. | [AI agents](../../../develop-and-test/integration-artifacts/agents/agents.md) |
 
-For an end-to-end orientation to the AI building blocks in WSO2 Agent Builder, see the [AI Integrations overview](../../../develop-and-test/integration-artifacts/ai-integrations/ai-integrations.md).
+For an end-to-end orientation to the AI building blocks in WSO2 Agent Builder, see the [AI Integrations overview](../../../develop-and-test/develop-and-test.md).
 
 ### Model Provider
 
@@ -409,7 +409,7 @@ Selecting **Model Provider** lists the model providers already in the project. S
     }}
 />
 
-For provider-specific configuration, model selection, and usage patterns, see [Model providers](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md).
+For provider-specific configuration, model selection, and usage patterns, see [Model providers](../../../develop-and-test/integration-artifacts/model-providers.md).
 
 ### Knowledge Base
 
@@ -427,7 +427,7 @@ Select **Add Knowledge Base** to open the picker with the supported knowledge ba
 
 | Knowledge base | Description |
 |---|---|
-| **Vector Knowledge Base** | Generic vector knowledge base for managing chunk indexing and retrieval. Plug in any supported [Vector Store](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/vector-stores.md), [Embedding Provider](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/embedding-providers.md), and [Chunker](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/chunkers.md). |
+| **Vector Knowledge Base** | Generic vector knowledge base for managing chunk indexing and retrieval. Plug in any supported [Vector Store](../../../develop-and-test/integration-artifacts/knowledge-bases/vector-stores.md), [Embedding Provider](../../../develop-and-test/integration-artifacts/knowledge-bases/embedding-providers.md), and [Chunker](../../../develop-and-test/integration-artifacts/knowledge-bases/chunkers.md). |
 | **Bedrock Knowledge Bases** | Knowledge bases from the `ballerinax/ai.aws.bedrock` module, grouped under one entry. |
 | **Azure AI Search Knowledge Base** | Implementation backed by Azure AI Search. |
 | **WSO2 Cloud Knowledge Base** | Knowledge base hosted on WSO2 Cloud, used for retrieval. |
@@ -440,7 +440,7 @@ Select **Add Knowledge Base** to open the picker with the supported knowledge ba
     }}
 />
 
-For the full reference, see [Knowledge Bases](../../../develop-and-test/integration-artifacts/ai-integrations/knowledge-bases/knowledge-bases.md).
+For the full reference, see [Knowledge Bases](../../../develop-and-test/integration-artifacts/knowledge-bases/knowledge-bases.md).
 
 ### Data Loader
 
@@ -471,7 +471,7 @@ Select **Add Data Loader** to open the picker with the supported data loaders.
     }}
 />
 
-For the ingestion flow, supported formats, and how to point the loader at a directory of documents, see the [Ingest documents](../../../develop-and-test/integration-artifacts/ai-integrations/knowledge-bases/ingest-documents.md).
+For the ingestion flow, supported formats, and how to point the loader at a directory of documents, see the [Ingest documents](../../../develop-and-test/integration-artifacts/knowledge-bases/ingest-documents.md).
 
 ### Recursive Document Chunker
 
@@ -528,7 +528,7 @@ Select **Add Chunker** to open the picker with the supported chunkers.
     }}
 />
 
-For the full reference, see [Chunkers](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/chunkers.md).
+For the full reference, see [Chunkers](../../../develop-and-test/integration-artifacts/knowledge-bases/chunkers.md).
 
 ### Augment Query
 
@@ -557,7 +557,7 @@ For the full reference, see [Chunkers](../../../develop-and-test/integration-art
     }}
 />
 
-For the recommended agent-based workflow, where retrieval is exposed to an AI agent as a tool, see [Retrieve from a knowledge base with an agent](../../../develop-and-test/integration-artifacts/ai-integrations/knowledge-bases/use-with-an-agent.md).
+For the recommended agent-based workflow, where retrieval is exposed to an AI agent as a tool, see [Retrieve from a knowledge base with an agent](../../../develop-and-test/integration-artifacts/knowledge-bases/use-with-an-agent.md).
 
 ### Vector Store
 
@@ -581,7 +581,7 @@ Select **Add Vector Store** to open the picker with the supported vector stores:
     }}
 />
 
-For the full reference, see [Vector stores](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/vector-stores.md).
+For the full reference, see [Vector stores](../../../develop-and-test/integration-artifacts/knowledge-bases/vector-stores.md).
 
 ### Embedding Provider
 
@@ -605,7 +605,7 @@ Select **Add Embedding Provider** to open the picker with the supported embeddin
     }}
 />
 
-For the full reference, see [Embedding providers](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/embedding-providers.md).
+For the full reference, see [Embedding providers](../../../develop-and-test/integration-artifacts/knowledge-bases/embedding-providers.md).
 
 ### Agent
 
@@ -647,7 +647,7 @@ Selecting an agent opens the **AI Agent** form, which runs the agent for a given
     }}
 />
 
-For tool binding, memory, and observability, see [AI agents](../../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md). To expose an agent as a chat service, select **Add Trigger** on the agent card in the [Integration view](../../views/integration-view.md) and pick **Agent Chat**, instead of adding the node by hand. To reach the same agent over a voice call instead, add this node to a [Voice Agent Service](../../../develop-and-test/integration-artifacts/ai-integrations/voice-agent/voice-agent.md) instead of a chat service.
+For tool binding, memory, and observability, see [AI agents](../../../develop-and-test/integration-artifacts/agents/agents.md). To expose an agent as a chat service, select **Add Trigger** on the agent card in the [Integration view](../../views/integration-view.md) and pick **Agent Chat**, instead of adding the node by hand. To reach the same agent over a voice call instead, add this node to a [Voice Agent Service](../../../develop-and-test/integration-artifacts/voice-agent/voice-agent.md) instead of a chat service.
 
 ## Error Handling
 
@@ -969,6 +969,6 @@ This is the same picker that opens from the [Call Function](#call-function) node
 - [Type Panel](../../panels/type-panel.md) — Define the record, enum, union, or other types used in node fields.
 - [Expression Panel](../../panels/expression-panel.md) — Author Ballerina expressions with autocomplete and validation.
 - [Data Mapper](../../designers/data-mapper.md) — The visual surface a **Map Data** node opens.
-- [AI Integrations overview](../../../develop-and-test/integration-artifacts/ai-integrations/ai-integrations.md) — All AI building blocks at a glance.
+- [AI Integrations overview](../../../develop-and-test/develop-and-test.md) — All AI building blocks at a glance.
 - [Connections reference](product://integrator/develop-and-test/integration-artifacts/supportive-artifacts/connections) — Create, configure, and reuse clients to external systems.
 - [Functions](product://integrator/develop-and-test/integration-artifacts/supportive-artifacts/functions) — Create, organize, and reuse functions across artifacts.

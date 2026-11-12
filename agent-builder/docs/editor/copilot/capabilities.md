@@ -164,7 +164,6 @@ To undo what Copilot changed, select **Restore Checkpoint**. It rolls your integ
 - [Copilot in the Background](background-copilot.md) — Follow a run while the panel is closed.
 - [Reviewing Changes](reviewing-changes.md) — Inspect a run's changes in a unified diff.
 - [Customize Copilot](customize-copilot.md) — Give Copilot project instructions, reusable skills, and your own tools through MCP servers.
-- [Generate tests with AI](product://integrator/develop-and-test/test/ai-generated-cases) — Use Copilot to generate test cases.
 - [AI data mapper](product://integrator/develop-and-test/integration-artifacts/supportive-artifacts/data-mapper/ai-mapping) — Generate data mappings using AI.
-- [Try-It tool](product://integrator/develop-and-test/test/try-it-tool) — Test services without leaving the editor.
+- [Try-It tool](../../develop-and-test/test/try-it-tool/try-it-tool.md) — Test services without leaving the editor.
 - [Copilot architecture and data handling](copilot-architecture.md) — How Copilot handles your data.

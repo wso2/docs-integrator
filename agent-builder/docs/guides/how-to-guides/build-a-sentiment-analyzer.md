@@ -10,7 +10,7 @@ This quick start shows the full cycle in WSO2 Agent Builder: define the result t
 
 :::info Prerequisites
 
-- [Model Providers for LLMs](../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md)
+- [Model Providers for LLMs](../../develop-and-test/integration-artifacts/model-providers.md)
 - A project to work in. If you do not have one, see [Create a new integration](../../develop-and-test/create-workspace/create-a-project.md).
 
 ## Step 1: Create the agentic integration
@@ -115,7 +115,7 @@ The **Types** view shows `SentimentResult` linked to the `Sentiment` enum.
 
    You don't need to describe the output format. The typed response you set on the HTTP trigger in Step 4 tells the model what shape to return.
 
-5. Keep **Model** as **Default WSO2 Model Provider**. No third-party API key is required. To use a different LLM, see [Model providers](../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md).
+5. Keep **Model** as **Default WSO2 Model Provider**. No third-party API key is required. To use a different LLM, see [Model providers](../../develop-and-test/integration-artifacts/model-providers.md).
 
 <ThemedImage
     alt="Create Agent form with Role set to SentimentAnalyzer, the sentiment classification instructions, and Model set to Default WSO2 Model Provider"
@@ -359,5 +359,5 @@ Because the `sentiment` field is an enum, the agent cannot return free-form text
 ## What's next
 
 - [Build a Hotel Finder Agent](build-a-hotel-finder-agent.md) — Add custom tools and session-scoped memory
-- [What is an AI Agent?](../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md) — Understand the agent architecture
-- [What are Tools?](../../develop-and-test/integration-artifacts/ai-integrations/agents/tools.md) — Learn tool design patterns
+- [What is an AI Agent?](../../develop-and-test/integration-artifacts/agents/agents.md) — Understand the agent architecture
+- [What are Tools?](../../develop-and-test/integration-artifacts/agents/tools.md) — Learn tool design patterns

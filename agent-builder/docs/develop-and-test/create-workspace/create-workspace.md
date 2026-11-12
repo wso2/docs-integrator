@@ -33,5 +33,5 @@ A project can hold any number of agentic integrations and libraries side by side
 
 ## What's next
 
-- [Integration artifacts](../integration-artifacts/integration-artifacts.md) — Understand the AI artifact types you build inside an agentic integration
+- [Integration artifacts](../develop-and-test.md) — Understand the AI artifact types you build inside an agentic integration
 - [Project view](../../editor/views/project-view.md) — Manage, run, and debug a multi-package project
