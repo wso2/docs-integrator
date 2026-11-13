@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
-title: "Call RFC Function Modules and Receive IDocs with SAP S/4HANA Private Cloud"
-sidebar_label: "Call RFC Function Modules and Receive IDocs with SAP S/4HANA Private Cloud"
+title: "Call RFC Functions and Receive IDocs with SAP S/4HANA Private Cloud"
+sidebar_label: "Call RFC Functions and Receive IDocs with SAP S/4HANA Private Cloud"
 description: Build one integration that reads material master data from SAP S/4HANA Private Cloud (or SAP ECC) by calling a BAPI over RFC, and receives MATMAS IDocs that SAP sends to it through ALE, designed visually with the SAP JCo connector.
 keywords: [wso2 integrator, sap, sap s/4hana private cloud, sap private cloud, sap ecc, sap s/4hana, rfc, bapi, idoc, ale, matmas, sap jco, registered server program, low-code]
 slug: /guides/how-to-guides/sap-rfc-and-idoc-integration
@@ -15,7 +15,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Call RFC Function Modules and Receive IDocs with SAP S/4HANA Private Cloud
+# Call RFC Functions and Receive IDocs with SAP S/4HANA Private Cloud
 
 **Time:** About 60 minutes | **What you'll build:** One integration that talks to SAP in both directions. An HTTP API calls the `BAPI_MATERIAL_GET_DETAIL` function module over RFC and returns a material as JSON. An IDoc listener registers with the SAP gateway and receives the `MATMAS` IDocs that SAP sends whenever a material is distributed.
 
