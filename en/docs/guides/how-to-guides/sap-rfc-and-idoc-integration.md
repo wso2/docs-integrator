@@ -21,6 +21,15 @@ import TabItem from '@theme/TabItem';
 
 ## How it works
 
+<ThemedImage
+    alt="Architecture diagram: a web or mobile app calls the WSO2 Integrator HTTP service GET /materials/{material}, which uses the SAP JCo RFC client connection to call BAPI_MATERIAL_GET_DETAIL over RFC on SAP S/4HANA Private Cloud and returns the material as JSON; SAP S/4HANA Private Cloud sends MATMAS IDocs through ALE to the SAP JCo IDoc listener registered as a program at the gateway, which passes the IDoc as XML to the IDoc service, where onReceive maps it with the Data Mapper"
+    style={{border: 'none', boxShadow: 'none', borderRadius: 0}}
+    sources={{
+        light: useBaseUrl('/img/guides/usecases/sap-rfc-and-idoc-integration/architecture.png'),
+        dark: useBaseUrl('/img/guides/usecases/sap-rfc-and-idoc-integration/architecture.png'),
+    }}
+/>
+
 The integration has two independent paths that share the same SAP credentials.
 
 - **RFC path (you call SAP).** A client calls `GET /materials/{material}`. The HTTP service calls `BAPI_MATERIAL_GET_DETAIL` through the SAP JCo client, picks the general data out of the result, and returns it as JSON.
@@ -200,7 +209,7 @@ Build the flow in the **Visual Designer**, or switch to the **Ballerina Code** t
         }}
     />
 
-2. On the **Artifacts** page, select **HTTP Service** under **Integration as API**.
+2. The integration opens on the **What would you like to build?** page. Select **Add Artifact manually**, then select **HTTP Service** under **Integration as API**.
 
     <ThemedImage
         alt="Artifacts page with the HTTP Service card selected under Integration as API"
@@ -391,7 +400,7 @@ If SAP cannot be reached or rejects the logon, **execute** returns an error, the
         }}
     />
 
-The service opens with two event handlers: `onReceive` for incoming IDocs and `onError` for listener errors.
+**SAP ECC (JCo) IDoc Service** appears under **Entry Points** in the project tree, with two event handlers: `onReceive` for incoming IDocs and `onError` for listener errors.
 
 <ThemedImage
     alt="SAP ECC (JCo) IDoc Service designer listing the onReceive and onError event handlers on sapListener"
@@ -407,7 +416,7 @@ The service opens with two event handlers: `onReceive` for incoming IDocs and `o
 
 ### Create the IDoc types
 
-1. In the project tree, select **Types**, then select **Add Type**. In the **New Type** panel, open the **Import** tab and set **Format** to **XML**.
+1. In the project tree, hover over **Types** and select the **+** next to it. In the **New Type** panel, open the **Import** tab and set **Format** to **XML**.
 2. Paste a sample `MATMAS05` IDoc and select **Import**. This sample has the fields that the guide uses:
 
     ```xml
@@ -458,7 +467,7 @@ The service opens with two event handlers: `onReceive` for incoming IDocs and `o
         }}
     />
 
-4. Select **Add Type** again and, on the **Create from scratch** tab, create the output record `MaterialUpdate` with eight `string` fields: `idocNumber`, `material`, `description`, `materialType`, `materialGroup`, `baseUnit`, `netWeight` and `weightUnit`.
+4. In the **Types** view, select **Add Type** and, on the **Create from scratch** tab, create the output record `MaterialUpdate` with eight `string` fields: `idocNumber`, `material`, `description`, `materialType`, `materialGroup`, `baseUnit`, `netWeight` and `weightUnit`.
 
     <ThemedImage
         alt="Edit Type panel for the MaterialUpdate record with eight string fields, shown next to the IDoc types in the Types diagram"
@@ -480,7 +489,7 @@ The service opens with two event handlers: `onReceive` for incoming IDocs and `o
         }}
     />
 
-2. Select the **+** below the new step, then **Map Data**, and choose to create a data mapper. Name it `toMaterialUpdate`, add the input `matmas` of type `MATMAS05`, set **Output** to `MaterialUpdate` and **Result** to `materialUpdate`, and select **Open in Data Mapper**.
+2. Select the **+** below the new step, then **Map Data**, and select **Create Data Mapper**. Name it `toMaterialUpdate`. Under **Inputs**, select **Add Argument**, open the helper pane, pick `matmas` under **Variables** so the input gets the `MATMAS05` type, and select **Add**. Set **Output** to `MaterialUpdate` and **Result** to `materialUpdate`, and select **Open in Data Mapper**.
 
     <ThemedImage
         alt="Data Mapper Creation form with the name toMaterialUpdate, the input matmas of type MATMAS05, the output type MaterialUpdate and the result variable materialUpdate"
@@ -503,7 +512,7 @@ The service opens with two event handlers: `onReceive` for incoming IDocs and `o
     | `IDOC.E1MARAM.NTGEW` | `netWeight` |
     | `IDOC.E1MARAM.GEWEI` | `weightUnit` |
 
-    Mapping the `E1MAKTM` array to the `description` string adds an `[0]` index node that picks the first description segment (see [Array to single value](../../develop-and-test/integration-artifacts/supportive-artifacts/data-mapper/array-mappings/array-to-single-value.md)). Select `description` and, in the [expression bar](../../develop-and-test/integration-artifacts/supportive-artifacts/data-mapper/mapping-capabilities.md#expression-bar), set its expression to `matmas.IDOC.E1MARAM.E1MAKTM[0].MAKTX`. Then select `netWeight` and set its expression to `matmas.IDOC.E1MARAM.NTGEW.trim()` to drop the padding.
+    When you link the `E1MAKTM` array to the `description` string, select **Extract Single Element from Array**. This adds an `[0]` index node that picks the first description segment (see [Array to single value](../../develop-and-test/integration-artifacts/supportive-artifacts/data-mapper/array-mappings/array-to-single-value.md)). Select `description` and, in the [expression bar](../../develop-and-test/integration-artifacts/supportive-artifacts/data-mapper/mapping-capabilities.md#expression-bar), set its expression to `matmas.IDOC.E1MARAM.E1MAKTM[0].MAKTX`. Then select `netWeight` and set its expression to `matmas.IDOC.E1MARAM.NTGEW.trim()` to drop the padding.
 
     <ThemedImage
         alt="Data Mapper toMaterialUpdate with lines from DOCNUM, MATNR, MTART, MATKL, MEINS, NTGEW, GEWEI and the E1MAKTM array, through an index 0 node, to the eight MaterialUpdate fields"
