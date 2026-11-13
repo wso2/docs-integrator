@@ -98,7 +98,7 @@ export default function LandingHero({
   secondary,
   footnote,
 }: LandingHeroProps): ReactNode {
-  const src = useBaseUrl('/img/landing/hero-light-v1.0.png');
+  const src = useBaseUrl('/img/landing/hero.png');
   return (
     <header className={styles.heroBanner}>
       <div className={styles.heroInner}>
