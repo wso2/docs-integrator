@@ -730,14 +730,6 @@ scope = "provided"
 
 2. Select **Run**. The HTTP service starts on port `9090`, and the listener registers at the SAP gateway.
 
-    <ThemedImage
-        alt="WSO2 Integrator terminal showing bal run compiling sapmaterials and running the executable, with no listener errors"
-        sources={{
-            light: useBaseUrl('/img/guides/usecases/sap-rfc-and-idoc-integration/23-run-console.png'),
-            dark: useBaseUrl('/img/guides/usecases/sap-rfc-and-idoc-integration/23-run-console.png'),
-        }}
-    />
-
 3. Call the RFC path. On the resource, select **Try It**, enter the material number, and run the request, or use any HTTP client:
 
     ```bash
@@ -745,7 +737,7 @@ scope = "provided"
     ```
 
     <ThemedImage
-        alt="Terminal showing curl http://localhost:9090/materials/FG233 returning the material FG233 with description FERT 233, PD, Repetitive Manuf., material type FERT, material group L004 and base unit ST"
+        alt="WSO2 Integrator terminal with bal run on the left and curl http://localhost:9090/materials/FG233 on the right, returning the material FG233 with description FERT 233, PD, Repetitive Manuf., material type FERT, material group L004 and base unit ST"
         sources={{
             light: useBaseUrl('/img/guides/usecases/sap-rfc-and-idoc-integration/24-api-response.png'),
             dark: useBaseUrl('/img/guides/usecases/sap-rfc-and-idoc-integration/24-api-response.png'),
