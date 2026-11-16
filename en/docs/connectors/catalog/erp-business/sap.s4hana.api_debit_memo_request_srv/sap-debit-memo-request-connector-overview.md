@@ -7,7 +7,9 @@ description: "Create, read, update and delete debit memo requests with their ite
 
 # Overview
 
-The WSO2 **SAP Debit Memo Request connector** provides access to every operation of the SAP S/4HANA Cloud OData API `API_DEBIT_MEMO_REQUEST_SRV` (Debit Memo Request (A2X)), so that your integrations can manage debit memo requests without calling the service directly. A debit memo request is the sales document that requests an additional charge to a customer, for example when goods were invoiced at too low a price or a surcharge was not billed; after it is approved, SAP creates the debit memo from it in billing. With the connector, you can create, read, update and delete debit memo requests with their items, partners, pricing elements and texts, and read their subsequent documents.
+The WSO2 **SAP Debit Memo Request connector** provides access to every operation of the SAP S/4HANA Cloud OData API `API_DEBIT_MEMO_REQUEST_SRV` (Debit Memo Request (A2X)), so that your integrations can manage debit memo requests without calling the service directly.
+
+A debit memo request is the sales document that requests an additional charge to a customer, for example when goods were invoiced at too low a price or a surcharge was not billed; after it is approved, SAP creates the debit memo from it in billing. With the connector, you can create, read, update and delete debit memo requests with their items, partners, pricing elements and texts, and read their subsequent documents.
 
 ## Key features
 

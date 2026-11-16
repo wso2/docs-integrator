@@ -7,7 +7,9 @@ description: "Read billing documents with their items, partners, pricing element
 
 # Overview
 
-The WSO2 **SAP Billing Document connector** provides access to every operation of the SAP S/4HANA Cloud OData API `API_BILLING_DOCUMENT_SRV` (Billing Document - Read, Cancel, GetPDF), so that your integrations can work with billing documents without calling the service directly. Billing documents are the invoices, credit memos and debit memos that SAP creates when sales orders and deliveries are billed. With the connector, you can read billing documents with their items, business partners, pricing elements and texts, cancel a billing document, and retrieve a billing document in PDF format.
+The WSO2 **SAP Billing Document connector** provides access to every operation of the SAP S/4HANA Cloud OData API `API_BILLING_DOCUMENT_SRV` (Billing Document - Read, Cancel, GetPDF), so that your integrations can work with billing documents without calling the service directly.
+
+Billing documents are the invoices, credit memos and debit memos that SAP creates when sales orders and deliveries are billed. With the connector, you can read billing documents with their items, business partners, pricing elements and texts, cancel a billing document, and retrieve a billing document in PDF format.
 
 ## Key features
 

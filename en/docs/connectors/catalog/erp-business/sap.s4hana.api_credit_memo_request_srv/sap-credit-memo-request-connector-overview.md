@@ -7,7 +7,9 @@ description: "Create, read, update and delete credit memo requests with their it
 
 # Overview
 
-The WSO2 **SAP Credit Memo Request connector** provides access to every operation of the SAP S/4HANA Cloud OData API `API_CREDIT_MEMO_REQUEST_SRV` (Credit Memo Request (A2X)), so that your integrations can manage credit memo requests without calling the service directly. A credit memo request is the sales document that requests a credit to a customer, for example for a price difference, a damaged shipment or a quantity discrepancy; once it is approved and its billing block is removed, SAP creates the credit memo from it in billing. With the connector, you can create, read, update and delete credit memo requests with their items, header and item partners, pricing elements and texts, read their subsequent documents, and release or reject their approval requests.
+The WSO2 **SAP Credit Memo Request connector** provides access to every operation of the SAP S/4HANA Cloud OData API `API_CREDIT_MEMO_REQUEST_SRV` (Credit Memo Request (A2X)), so that your integrations can manage credit memo requests without calling the service directly.
+
+A credit memo request is the sales document that requests a credit to a customer, for example for a price difference, a damaged shipment or a quantity discrepancy; once it is approved and its billing block is removed, SAP creates the credit memo from it in billing. With the connector, you can create, read, update and delete credit memo requests with their items, header and item partners, pricing elements and texts, read their subsequent documents, and release or reject their approval requests.
 
 ## Key features
 

@@ -7,7 +7,9 @@ description: "Create, read and update products with their descriptions, units of
 
 # Overview
 
-The WSO2 **SAP Product Master connector** provides access to every operation of the SAP S/4HANA Cloud OData API `API_PRODUCT_SRV` (Product Master (A2X)), so that your integrations can maintain product master data without calling the service directly. SAP documents this API under APIs for Master Data Maintenance, because the product master is shared by sales, procurement, inventory, production and accounting. With the connector, you can create, read and update products with their general data, descriptions, texts and units of measure, together with the organizational data that each plant, sales organization and valuation area uses.
+The WSO2 **SAP Product Master connector** provides access to every operation of the SAP S/4HANA Cloud OData API `API_PRODUCT_SRV` (Product Master (A2X)), so that your integrations can maintain product master data without calling the service directly.
+
+SAP documents this API under APIs for Master Data Maintenance, because the product master is shared by sales, procurement, inventory, production and accounting. With the connector, you can create, read and update products with their general data, descriptions, texts and units of measure, together with the organizational data that each plant, sales organization and valuation area uses.
 
 ## Key features
 

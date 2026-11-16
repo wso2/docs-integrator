@@ -7,7 +7,9 @@ description: "Create, read, update and delete returns orders with their items, p
 
 # Overview
 
-The WSO2 **SAP Customer Return connector** provides access to every operation of the SAP S/4HANA Cloud OData API `API_CUSTOMER_RETURN_SRV` (Customer Return (A2X)), so that your integrations can manage customer returns orders without calling the service directly. A returns order is the sales document that records the products a customer sends back and how SAP refunds or replaces them. With the connector, you can create, read, update and delete returns orders with their items, header and item partners, pricing elements, texts and related objects, read schedule lines, serial numbers and the steps and statuses of the advanced returns management process, and approve or reject returns orders.
+The WSO2 **SAP Customer Return connector** provides access to every operation of the SAP S/4HANA Cloud OData API `API_CUSTOMER_RETURN_SRV` (Customer Return (A2X)), so that your integrations can manage customer returns orders without calling the service directly.
+
+A returns order is the sales document that records the products a customer sends back and how SAP refunds or replaces them. With the connector, you can create, read, update and delete returns orders with their items, header and item partners, pricing elements, texts and related objects, read schedule lines, serial numbers and the steps and statuses of the advanced returns management process, and approve or reject returns orders.
 
 This connector works with the returns order itself. The returns delivery that SAP creates from a returns order to receive the goods back into the warehouse is handled by the [SAP Customer Returns Delivery](../sap.s4hana.api_customer_returns_delivery_srv_0002/sap-customer-returns-delivery-connector-overview.md) connector.
 
