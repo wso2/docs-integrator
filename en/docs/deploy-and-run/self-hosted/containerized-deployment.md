@@ -953,67 +953,44 @@ aws ecr create-repository --region <region> --repository-name my-agent
 
 ### Step 1: Write the service
 
-AgentCore Runtime starts your container and talks to it over a fixed contract. An agent runtime uses the `HTTP` protocol, and the container must serve `GET /ping` and `POST /invocations` on `0.0.0.0:8080`:
+AgentCore Runtime starts your container and talks to it over a fixed contract. An agent runtime uses the `HTTP` protocol, and the container must serve `GET /ping` and `POST /invocations` on `0.0.0.0:8080`. The `ballerinax/ai.aws.bedrock.agentcore` module, part of `ballerinax/ai.aws.bedrock` 1.1.0 or later, serves that contract for you, so the service holds only the agent logic. Its `agentcore:Listener`:
 
-- `GET /ping` returns `200` with `{"status":"Healthy"}`. The runtime polls it every few seconds.
-- `POST /invocations` takes the caller's JSON payload and returns JSON.
-- Each invocation carries the session id in the `X-Amzn-Bedrock-AgentCore-Runtime-Session-Id` header. A session id has at least 33 characters.
+- Listens on port 8080 and waits up to 15 minutes for an answer, AgentCore's limit for a synchronous invocation. A plain `http:Listener` gives up after 60 seconds.
+- Answers `GET /ping` with the status your `get ping` resource returns. It reports a new `time_of_last_update` only when that status changes, so an idle session still stops after 15 minutes instead of running, and billing, until its 8 hour limit.
+- Reads the AgentCore request headers into an `agentcore:Context`, converts the JSON body to the type you declare, and returns your result as JSON.
 
-The following service exposes an agent over this contract. It passes the session id to the agent as its memory key:
+The following service exposes an agent over this contract. It uses the session id as the agent's memory key:
 
 ```ballerina
 import ballerina/ai;
 import ballerina/http;
-import ballerina/log;
-
-configurable int port = 8080;
+import ballerinax/ai.aws.bedrock.agentcore;
 
 type InvocationRequest record {
     string prompt;
 };
 
-type InvocationResponse record {|
-    string response;
-    string status;
-|};
+listener agentcore:Listener agentCoreListener = new;
 
-type FailureResponse record {|
-    string message;
-    string status;
-|};
+service on agentCoreListener {
 
-service / on new http:Listener(port) {
+    // AgentCore's health check. Keep it cheap; it never calls the model.
+    resource function get ping() returns agentcore:PingStatus => agentcore:HEALTHY;
 
-    // Health probe polled by AgentCore Runtime.
-    resource function get ping() returns json => {status: "Healthy"};
-
-    resource function post invocations(@http:Payload InvocationRequest payload,
-            @http:Header {name: "X-Amzn-Bedrock-AgentCore-Runtime-Session-Id"} string? sessionId)
-            returns http:Ok|http:InternalServerError {
-        // The session id doubles as the agent's memory key.
-        string session = sessionId ?: "default";
-
-        ai:Agent|error agent = agentFor();
-        if agent is error {
-            log:printError("agent unavailable", agent, session = session);
-            return <http:InternalServerError>{
-                body: <FailureResponse>{message: agent.message(), status: "error"}
-            };
-        }
-
-        string|ai:Error response = agent.run(payload.prompt, sessionId = session);
-        if response is ai:Error {
-            log:printError("agent run failed", response, session = session);
-            return <http:InternalServerError>{
-                body: <FailureResponse>{message: response.message(), status: "error"}
-            };
-        }
-        return <http:Ok>{body: <InvocationResponse>{response, status: "success"}};
+    resource function post invocations(@http:Payload InvocationRequest payload, agentcore:Context ctx)
+            returns json|error {
+        // A call without a session id gets the request id, so it never shares another conversation's memory.
+        string session = ctx.sessionId ?: ctx.requestId;
+        ai:Agent agent = check agentFor();
+        string response = check agent.run(payload.prompt, sessionId = session);
+        return {response, status: "success"};
     }
 }
 ```
 
-`agentFor()` returns the agent, which Step 2 builds. Each session runs in its own microVM.
+`agentFor()` returns the agent, which Step 2 builds. Each invocation carries the session id in the `X-Amzn-Bedrock-AgentCore-Runtime-Session-Id` header, which the listener puts in `ctx.sessionId`. A session id has at least 33 characters. Each session runs in its own microVM.
+
+The compiler checks the service: it must declare `get ping` and `post invocations`, no other resource or remote function, and it must be attached at the root path. A request body that doesn't match `InvocationRequest` is answered with `400` before the resource runs.
 
 :::caution Conversations last only as long as the microVM
 The agent keeps its conversation memory inside the container. By default, AgentCore Runtime stops a session's microVM after 15 minutes without an invocation or after 8 hours in total, and it also stops one that fails its health check. A later call with the same session id starts a new microVM, and the agent no longer remembers the conversation. It doesn't report an error.
@@ -1022,7 +999,11 @@ To keep a conversation beyond that, store it outside the container in a durable 
 :::
 
 :::note
-Log the reason for any failure inside the container. When the agent returns an error, the caller sees only a `RuntimeClientError` with HTTP status 424. The cause is in the runtime's log group.
+When the resource returns an error, the listener logs it with its cause, the request id, and the session id, and answers `500` with a generic message. The caller sees only a `RuntimeClientError` with HTTP status 424. The cause is in the runtime's log group, on the `The invocation failed` line.
+:::
+
+:::note
+AgentCore Runtime doesn't forward the user id that a caller passes with `--runtime-user-id`, or its own request id, to the container. `ctx.userId` is always `()`, and `ctx.requestId` is generated for each invocation. A call made with a user id arrives with a workload access token in `ctx.workloadAccessToken` instead.
 :::
 
 ### Step 2: Connect the agent to AgentCore Gateway
@@ -1344,8 +1325,8 @@ If the runtime doesn't deploy or the invocation fails, the usual causes are:
 
 - The image pushed, but the runtime fails to deploy: the image isn't `linux/arm64`, or it was pushed without `--provenance=false`.
 - The caller gets `An error occurred when starting the runtime`: the program exited at startup. Look in the log for `unused environment variable`, or for an unknown key in `Config.toml`, and run the image locally.
-- The runtime is `READY`, but its log group is empty: the runtime isn't using the `HTTP` protocol, or the service doesn't listen on port `8080`.
-- The caller gets `RuntimeClientError` (HTTP 424) with no detail: the agent's own error message is in the runtime's log group, on the `agent unavailable` or `agent run failed` line.
+- The runtime is `READY`, but its log group is empty: the runtime isn't using the `HTTP` protocol, or the listener was given a port other than `8080`.
+- The caller gets `RuntimeClientError` (HTTP 424) with no detail: the agent's own error is in the runtime's log group, on the `The invocation failed` line.
 - The log shows `not authorized to perform: secretsmanager:GetSecretValue`: the runtime's role can't read the client secret. Check the `GatewayClientSecret` statement from Step 6.
 - `Failed to initialize the MCP client`: the Gateway is unreachable, or it refused the token.
 - Model calls return `400` with `Failed to fetch outbound api key`: the Gateway's service role can't read the model provider's key from AgentCore Identity. It needs `bedrock-agentcore:GetResourceApiKey` on the credential provider and `secretsmanager:GetSecretValue` on its secret.
