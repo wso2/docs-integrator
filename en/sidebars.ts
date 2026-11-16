@@ -1214,6 +1214,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'SAP Billing Document',
+          link: { type: 'doc', id: 'catalog/erp-business/sap.s4hana.api_billing_document_srv/sap-billing-document-connector-overview' },
+          items: [
+            'catalog/erp-business/sap.s4hana.api_billing_document_srv/setup-guide',
+            'catalog/erp-business/sap.s4hana.api_billing_document_srv/actions',
+            'catalog/erp-business/sap.s4hana.api_billing_document_srv/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'SAP Business One Administration',
           link: { type: 'doc', id: 'catalog/erp-business/sap.businessone.administration/overview' },
           items: [
@@ -1374,12 +1384,42 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'SAP Credit Memo Request',
+          link: { type: 'doc', id: 'catalog/erp-business/sap.s4hana.api_credit_memo_request_srv/sap-credit-memo-request-connector-overview' },
+          items: [
+            'catalog/erp-business/sap.s4hana.api_credit_memo_request_srv/setup-guide',
+            'catalog/erp-business/sap.s4hana.api_credit_memo_request_srv/actions',
+            'catalog/erp-business/sap.s4hana.api_credit_memo_request_srv/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'SAP Customer Return',
+          link: { type: 'doc', id: 'catalog/erp-business/sap.s4hana.api_customer_return_srv/sap-customer-return-connector-overview' },
+          items: [
+            'catalog/erp-business/sap.s4hana.api_customer_return_srv/setup-guide',
+            'catalog/erp-business/sap.s4hana.api_customer_return_srv/actions',
+            'catalog/erp-business/sap.s4hana.api_customer_return_srv/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'SAP Customer Returns Delivery',
           link: { type: 'doc', id: 'catalog/erp-business/sap.s4hana.api_customer_returns_delivery_srv_0002/sap-customer-returns-delivery-connector-overview' },
           items: [
             'catalog/erp-business/sap.s4hana.api_customer_returns_delivery_srv_0002/setup-guide',
             'catalog/erp-business/sap.s4hana.api_customer_returns_delivery_srv_0002/actions',
             'catalog/erp-business/sap.s4hana.api_customer_returns_delivery_srv_0002/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'SAP Debit Memo Request',
+          link: { type: 'doc', id: 'catalog/erp-business/sap.s4hana.api_debit_memo_request_srv/sap-debit-memo-request-connector-overview' },
+          items: [
+            'catalog/erp-business/sap.s4hana.api_debit_memo_request_srv/setup-guide',
+            'catalog/erp-business/sap.s4hana.api_debit_memo_request_srv/actions',
+            'catalog/erp-business/sap.s4hana.api_debit_memo_request_srv/example',
           ],
         },
         {
@@ -1491,6 +1531,16 @@ const sidebars: SidebarsConfig = {
             'catalog/erp-business/sap.s4hana.api_physical_inventory_doc_srv/setup-guide',
             'catalog/erp-business/sap.s4hana.api_physical_inventory_doc_srv/actions',
             'catalog/erp-business/sap.s4hana.api_physical_inventory_doc_srv/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'SAP Product Master',
+          link: { type: 'doc', id: 'catalog/erp-business/sap.s4hana.api_product_srv/sap-product-master-connector-overview' },
+          items: [
+            'catalog/erp-business/sap.s4hana.api_product_srv/setup-guide',
+            'catalog/erp-business/sap.s4hana.api_product_srv/actions',
+            'catalog/erp-business/sap.s4hana.api_product_srv/example',
           ],
         },
         {
