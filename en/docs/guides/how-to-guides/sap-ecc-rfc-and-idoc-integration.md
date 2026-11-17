@@ -402,7 +402,7 @@ If SAP cannot be reached or rejects the logon, **execute** returns an error, the
         }}
     />
 
-**SAP ECC (JCo) IDoc Service** appears under **Entry Points** in the project tree, with two event handlers: `onReceive` for incoming IDocs and `onError` for listener errors.
+**SAP ECC (JCo) IDoc Service** appears under **Entry Points** in the project tree (select it there if WSO2 Integrator returns to the **Artifacts** page), with two event handlers: `onReceive` for incoming IDocs and `onError` for listener errors.
 
 <ThemedImage
     alt="SAP ECC (JCo) IDoc Service designer listing the onReceive and onError event handlers on sapListener"
@@ -425,7 +425,7 @@ If SAP cannot be reached or rejects the logon, **execute** returns an error, the
     <MATMAS05>
         <IDOC BEGIN="1">
             <EDI_DC40 SEGMENT="1">
-                <DOCNUM>0000000000058002</DOCNUM>
+                <DOCNUM>0000000003528747</DOCNUM>
                 <IDOCTYP>MATMAS05</IDOCTYP>
                 <MESTYP>MATMAS</MESTYP>
                 <SNDPRN>T90CLNT090</SNDPRN>
@@ -795,7 +795,7 @@ scope = "provided"
 6. The integration parses the IDoc, maps it, and logs the `MaterialUpdate` record in the console:
 
     <ThemedImage
-        alt="WSO2 Integrator terminal under the onReceive flow, with the log line IDoc 0000000003528746 mapped, followed by the MaterialUpdate JSON for material P-100"
+        alt="WSO2 Integrator terminal under the onError flow, with the log line IDoc 0000000003528747 mapped, followed by the MaterialUpdate JSON for material P-100"
         sources={{
             light: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/26-console-idoc-received.png'),
             dark: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/26-console-idoc-received.png'),
@@ -803,7 +803,7 @@ scope = "provided"
     />
 
     ```text
-    time=2026-11-17T13:02:10.328+05:30 level=INFO module=<org>/sapmaterials message="IDoc 0000000003528746 mapped: {\"idocNumber\":\"0000000003528746\", \"material\":\"P-100\", \"description\":\"Pump PRECISION 100\", \"materialType\":\"FERT\", \"materialGroup\":\"001\", \"baseUnit\":\"PCE\", \"netWeight\":\"250.000\", \"weightUnit\":\"KGM\"}"
+    time=2026-11-17T14:15:36.726+05:30 level=INFO module=<org>/sapmaterials message="IDoc 0000000003528747 mapped: {\"idocNumber\":\"0000000003528747\", \"material\":\"P-100\", \"description\":\"Pump PRECISION 100\", \"materialType\":\"FERT\", \"materialGroup\":\"001\", \"baseUnit\":\"PCE\", \"netWeight\":\"250.000\", \"weightUnit\":\"KGM\"}"
     ```
 
     SAP ECC sends unit fields in the IDoc as ISO codes, so `baseUnit` is `PCE` and `weightUnit` is `KGM`, while `BAPI_MATERIAL_GET_DETAIL` returns the internal units `ST` and `KG`.
