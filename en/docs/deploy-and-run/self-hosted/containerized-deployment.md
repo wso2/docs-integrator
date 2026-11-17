@@ -964,6 +964,7 @@ The following service exposes an agent over this contract. It uses the session i
 ```ballerina
 import ballerina/ai;
 import ballerina/http;
+import ballerina/uuid;
 import ballerinax/ai.aws.bedrock.agentcore;
 
 type InvocationRequest record {
@@ -979,8 +980,10 @@ service on agentCoreListener {
 
     resource function post invocations(@http:Payload InvocationRequest payload, agentcore:Context ctx)
             returns json|error {
-        // A call without a session id gets the request id, so it never shares another conversation's memory.
-        string session = ctx.sessionId ?: ctx.requestId;
+        // A call without a session id gets a fresh UUID, never the caller-controlled request id, and the two kinds of
+        // key are prefixed, so no header can select another conversation's memory.
+        string? sessionId = ctx.sessionId;
+        string session = sessionId is string ? "session:" + sessionId : "oneoff:" + uuid:createType4AsString();
         ai:Agent agent = check agentFor();
         string response = check agent.run(payload.prompt, sessionId = session);
         return {response, status: "success"};
@@ -1003,7 +1006,7 @@ When the resource returns an error, the listener logs it with its cause, the req
 :::
 
 :::note
-AgentCore Runtime doesn't forward the user id that a caller passes with `--runtime-user-id`, or its own request id, to the container. `ctx.userId` is always `()`, and `ctx.requestId` is generated for each invocation. A call made with a user id arrives with a workload access token in `ctx.workloadAccessToken` instead.
+AgentCore Runtime doesn't forward the user id that a caller passes with `--runtime-user-id`, or its own request id, to the container. `ctx.userId` is always `()`, and `ctx.requestId` is generated in practice. A caller can still set the request id header, so never use `ctx.requestId` as a memory key or for any trust decision. A call made with a user id arrives with a workload access token in `ctx.workloadAccessToken` instead.
 :::
 
 ### Step 2: Connect the agent to AgentCore Gateway
