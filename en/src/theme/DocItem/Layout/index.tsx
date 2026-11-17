@@ -83,6 +83,13 @@ export default function DocItemLayout({ children }: Props): ReactNode {
   // (article's global max-width: 820px in custom.css), so a .palette-grid
   // can lay out more columns instead of leaving that space empty.
   const isWideLayout = Boolean((frontMatter as { wide_layout?: boolean }).wide_layout);
+  // Opt-in page-scoped class on <article> (wrapper_class: plan-matrix),
+  // so CSS that should apply to one page's content can be written against
+  // that class instead of as a global rule. Docusaurus has frontmatter for
+  // this (`wrapperClassName`) but theme-classic honors it for standalone
+  // MDX pages only (theme/MDXPage), never for docs -- setting it on a doc
+  // silently does nothing, hence this passthrough.
+  const wrapperClass = (frontMatter as { wrapper_class?: string }).wrapper_class;
   // When the desktop "On this page" column renders, theme/TOC carries
   // "Edit this page" + "Copy page" at its top instead. The connector
   // catalog is the exception: theme/TOC swaps that column for the filter
@@ -99,7 +106,7 @@ export default function DocItemLayout({ children }: Props): ReactNode {
         <ContentVisibility metadata={metadata} />
         <DocVersionBanner />
         <div className={styles.docItemContainer}>
-          <article className={clsx(isWideLayout && styles.articleWide, !isWideLayout && !isConnectorCatalog && styles.articleCentered)}>
+          <article className={clsx(isWideLayout && styles.articleWide, !isWideLayout && !isConnectorCatalog && styles.articleCentered, wrapperClass)}>
             <div className={styles.topRow}>
               <DocBreadcrumbs />
               {!actionsInToc && (

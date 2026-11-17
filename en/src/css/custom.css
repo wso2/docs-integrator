@@ -1385,6 +1385,65 @@ table th {
   border-color: rgba(255, 255, 255, 0.09);
 }
 
+/* Plan-comparison tables (opt in per page with `wrapperClassName:
+   plan-matrix` in frontmatter) -- one shared width and identical column
+   widths for every table on the page.
+
+   The global `table` rule above is deliberately shrink-to-fit
+   (`width: max-content` + `display: block` so a wide table scrolls
+   instead of overflowing). That sizes each table to its own longest
+   cell, which is right for one-off tables but wrong for a matrix that's
+   been split into consecutive per-section tables sharing one set of
+   column headings: eight tables each snapping to a different width read
+   as eight unrelated tables, and a checkmark lands in a different place
+   in each one.
+
+   `table-layout: fixed` only takes effect on `display: table`, which
+   costs the scroll-on-overflow behavior -- so this applies above the
+   site's 996px breakpoint only, and narrow viewports keep the stock
+   scrollable table. */
+@media (min-width: 997px) {
+  .plan-matrix table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  /* First column carries the capability name (the longest prose); the
+     remaining columns split what's left equally under `fixed`, so the
+     plan columns stay the same width as each other and across tables. */
+  .plan-matrix table th:first-child,
+  .plan-matrix table td:first-child {
+    width: 31%;
+  }
+
+  .plan-matrix table td,
+  .plan-matrix table th {
+    vertical-align: top;
+    overflow-wrap: break-word;
+  }
+}
+
+/* Plan columns centered: nearly every value in them is a checkmark, a
+   dash, a count or "Unlimited", and those read best centered under their
+   heading. Applies at every width (unlike the fixed layout above) --
+   alignment doesn't depend on the table being fixed. The capability
+   column stays left-aligned.
+
+   The exceptions are cells holding a sentence or a multi-line list,
+   which are hard to scan centered and ragged; those opt out per cell
+   with <span class="cell-prose">, which re-establishes a left-aligned
+   block inside the centered cell. */
+.plan-matrix table td:not(:first-child),
+.plan-matrix table th:not(:first-child) {
+  text-align: center;
+}
+
+.plan-matrix table .cell-prose {
+  display: block;
+  text-align: left;
+}
+
 /* Admonitions — neutral base, colored left border only. Info/tip/note/
    danger keep their conventional status colors (a widely-recognized
    convention across doc systems, independent of brand primary); only
