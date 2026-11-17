@@ -98,4 +98,5 @@ The MySQL, PostgreSQL, and Redis Platform Services are optional services made av
 
 - [Pricing and plans](./pricing-and-plans.md) — How WSO2 Cloud bills platform services, and how to upgrade a service plan.
 - [Usage dashboards](./usage-dashboards.md) — Analyze usage across your organization.
+- [Integration Runtime Updates and Upgrades](../../reference/runtime-updates-and-upgrades.md) — Runtime availability, optional upgrades, and supported runtime versions.
 - [FAQ: Billing and support](../../reference/faq.md) — Answers to common subscription and billing questions.
