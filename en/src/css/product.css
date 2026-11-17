@@ -1,0 +1,80 @@
+/* Branch-owned CSS for the `saas` product branch.
+ *
+ * Everything page-specific or branch-specific belongs here, NEVER in
+ * custom.css: custom.css is wholesale-synced from `main` by sync-theme.yaml,
+ * so a rule hand-added to it is deleted in full by the next sync (this is
+ * what bit wso2-integrator's cloud-providers/aws.md styling -- see
+ * MAINTENANCE.md, "When a branch needs its own CSS"). This file is
+ * permanently excluded from SHARED_PATHS and is registered alongside
+ * custom.css in this branch's own docusaurus.config.ts, which is itself
+ * deliberately not synced.
+ */
+
+/* === Acceptable Usage Policy -- plan comparison tables ===================
+ *
+ * Scoped to that one page via the `docs-doc-id-<id>` class Docusaurus puts
+ * on <html> for every doc page. Note the coupling: the selector embeds the
+ * doc id, so RENAMING OR MOVING that page silently stops these rules from
+ * matching and the tables fall back to the global shrink-to-fit look. Grep
+ * for the doc id before moving the page.
+ *
+ * (Docusaurus has frontmatter for this -- `wrapperClassName` -- but
+ * theme-classic honors it for standalone MDX pages only, never for docs,
+ * where it silently does nothing. Routing it through a frontmatter flag
+ * instead would mean hand-editing the wholesale-shared
+ * theme/DocItem/Layout, which the next sync-theme run would revert.)
+ *
+ * The page holds one 4-column table per section, all sharing the headings
+ * Capability | Free Trial | Growth | Enterprise. The global `table` rule in
+ * custom.css is deliberately shrink-to-fit (`width: max-content` +
+ * `display: block` so a wide table scrolls instead of overflowing), which
+ * sizes each table to its own longest cell -- eight tables each snapping to
+ * a different width read as eight unrelated tables, and a checkmark lands
+ * in a different place in each one.
+ *
+ * `table-layout: fixed` only takes effect on `display: table`, which costs
+ * the scroll-on-overflow behavior -- so the fixed layout applies above the
+ * site's 996px breakpoint only, and narrow viewports keep the stock
+ * scrollable table.
+ */
+@media (min-width: 997px) {
+  html[class*='docs-doc-id-manage/billing/acceptable-usage-policy'] table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  /* First column carries the capability name (the longest prose); the
+     remaining columns split what's left equally under `fixed`, so the plan
+     columns stay the same width as each other and across tables. */
+  html[class*='docs-doc-id-manage/billing/acceptable-usage-policy'] table th:first-child,
+  html[class*='docs-doc-id-manage/billing/acceptable-usage-policy'] table td:first-child {
+    width: 31%;
+  }
+
+  html[class*='docs-doc-id-manage/billing/acceptable-usage-policy'] table td,
+  html[class*='docs-doc-id-manage/billing/acceptable-usage-policy'] table th {
+    vertical-align: top;
+    overflow-wrap: break-word;
+  }
+}
+
+/* Plan columns centered: nearly every value in them is a checkmark, a dash,
+   a count or "Unlimited", and those read best centered under their heading.
+   Applies at every width (unlike the fixed layout above) -- alignment
+   doesn't depend on the table being fixed. The capability column stays
+   left-aligned.
+
+   The exceptions are cells holding a sentence or a multi-line list, which
+   are hard to scan centered and ragged; those opt out per cell in the
+   markdown with <span class="cell-prose">, which re-establishes a
+   left-aligned block inside the centered cell. */
+html[class*='docs-doc-id-manage/billing/acceptable-usage-policy'] table td:not(:first-child),
+html[class*='docs-doc-id-manage/billing/acceptable-usage-policy'] table th:not(:first-child) {
+  text-align: center;
+}
+
+html[class*='docs-doc-id-manage/billing/acceptable-usage-policy'] table .cell-prose {
+  display: block;
+  text-align: left;
+}

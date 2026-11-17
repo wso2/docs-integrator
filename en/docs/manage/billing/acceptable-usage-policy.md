@@ -4,7 +4,6 @@ title: "Acceptable Usage Policy"
 description: "Entitlements, quotas, and limits for each WSO2 Integration Platform SaaS subscription plan - Free Trial, Growth, and Enterprise."
 keywords: [wso2 integrator, wso2 cloud, acceptable usage policy, subscription plans, free trial, growth, enterprise, quotas, limits, entitlements]
 slug: /manage/billing/acceptable-usage-policy
-wrapper_class: plan-matrix
 ---
 
 # Acceptable Usage Policy
