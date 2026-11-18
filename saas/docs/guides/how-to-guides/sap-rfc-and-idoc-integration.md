@@ -436,6 +436,10 @@ If SAP cannot be reached or rejects the logon, **execute** returns an error, the
 
     WSO2 Integrator creates one record type per element: `MATMAS05`, `IDOC`, `EDI_DC40`, `E1MARAM` and `E1MAKTM`.
 
+    :::tip Generate the IDoc types from the XSD
+    To get types for every segment and field instead of a sample, download the IDoc's XML schema in SAP with transaction `WE60` (enter the basic type, then **Documentation > XML Schema**), and generate the types with the [XSD tool](../../develop-and-test/developer-tools/integration-tools/xsd-tool.md): `bal xsd MATMAS05.xsd`. The generated fields are all `string` and repeating segments are arrays, so no type fixes are needed, but the field paths differ from the ones in this guide.
+    :::
+
 3. Adjust the types the import inferred from the sample values, so that every real IDoc parses. Open each type from the **Types** diagram, change the field, and select **Save**:
 
     - `EDI_DC40`: set `DOCNUM` to `string`. As an `int`, the IDoc number would lose its leading zeros.
