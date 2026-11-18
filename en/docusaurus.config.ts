@@ -86,7 +86,9 @@ const config: Config = {
         },
         blog: false,
         theme: {
-          customCss: './src/css/custom.css',
+          // product.css is this branch's own, never-synced CSS file --
+          // see MAINTENANCE.md, "When a branch needs its own CSS".
+          customCss: ['./src/css/custom.css', './src/css/product.css'],
         },
       } satisfies Preset.Options,
     ],

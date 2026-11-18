@@ -18,6 +18,14 @@ wide_layout: true
   </ul>
 </PaletteCard>
 
+<PaletteCard icon="server" href="/reference/runtime-updates-and-upgrades">
+  <h3 class="palette-card-title">Runtime Updates and Upgrades</h3>
+  <ul class="palette-card-list">
+    <li>Currently supported integration runtime versions</li>
+    <li>Whether and when to upgrade an existing integration</li>
+  </ul>
+</PaletteCard>
+
 <PaletteCard icon="book" href="/reference/glossary">
   <h3 class="palette-card-title">Glossary</h3>
   <ul class="palette-card-list">

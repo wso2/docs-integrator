@@ -50,7 +50,7 @@ WSO2 cloud allows a maximum request payload size of 50 MB.
 WSO2 cloud now supports GitHub, Bitbucket and GitLab.
 
 ### Q: Why don't I see the undeployed builds for my integration in WSO2 cloud?
-You are allowed to build your integration any number of times. However, WSO2 cloud has a limit on retaining undeployed builds. For users on the free-tier, WSO2 cloud will retain **only one** undeployed build. For those on any other tier, WSO2 cloud will retain the **latest five** undeployed builds.
+You are allowed to build your integration any number of times. However, WSO2 cloud has a limit on retaining undeployed builds. For users on the Free Trial plan, WSO2 cloud will retain **only one** undeployed build. For those on any other plan, WSO2 cloud will retain the **latest five** undeployed builds.
 
 ### Q: What is WSO2 Integrator?
 WSO2 Integrator is a 100% open-source, AI-native integration platform built for the cloud. It helps you connect any system across your business and tackle integration challenges with ease. By using integration platform on WSO2 cloud, you can accelerate delivery—often 2–3x faster. Learn more at https://wso2.com/integrator/.
@@ -59,7 +59,7 @@ WSO2 Integrator is a 100% open-source, AI-native integration platform built for 
 WSO2 Identity Platform is an identity provider (IdP) that allows developers to secure access for consumers, business partners, employees, and APIs. WSO2 Identity Platform is WSO2 cloud’s default IDP. To learn more, visit https://wso2.com/identity-platform/.
 
 ### Q: As a Cloud Data Plane user, how can I create integrations in multiple data planes?
-When an organization admin onboards a new organization in WSO2 cloud, they can choose the preferred data plane. WSO2 cloud then sets the selected data plane as the default for the entire organization. Subsequently, users within the free tier of the cloud data plane can create integrations only in the set default data plane. If a free-tier user needs to create integrations in a different data plane, the user must get a paid subscription.
+When an organization admin onboards a new organization in WSO2 cloud, they can choose the preferred data plane. WSO2 cloud then sets the selected data plane as the default for the entire organization. Subsequently, users on the Free Trial plan can create integrations only in the set default data plane. If a Free Trial user needs to create integrations in a different data plane, the user must get a paid subscription.
 
 ### Q: Can WSO2 cloud automatically identify my endpoints?
 Yes. WSO2 cloud uses underlying buildpack technology to scan your source code and configuration files for standard web framework patterns and port declarations.
@@ -142,10 +142,10 @@ The WSO2 cloud control plane and data plane are designed for high availability u
 ## Environments
 
 ### Q: As a WSO2 cloud data plane user, why can't I create environments?
-You can create environments only if you have a paid subscription in WSO2 cloud. It can be either Pay-as-you-Go (PAYG) or an Enterprise plan.
+You can create environments only if you have a paid subscription in WSO2 cloud. It can be either a Growth or an Enterprise plan.
 
-### Q: I am a Pay-As-You-Go (PAYG) customer using the WSO2 cloud data plane. How many environments can I create?
-You can create up to 5 environments at the organization level, including the existing Development & Production environments by default. If you have projects in both data planes (US & EU), there will be 4 environments already created in total, and you will only be allowed to create one additional environment either in the US or EU data plane.
+### Q: I am a Growth plan customer using the WSO2 cloud data plane. How many environments can I create?
+The Growth plan includes 2 environments at the organization level, which the default Development and Production environments already use. See the [Acceptable Usage Policy](../manage/billing/acceptable-usage-policy.md) for the environment entitlement on each plan.
 
 ### Q: I am an Enterprise subscription customer using the WSO2 cloud private data plane. How many environments do I get?
 As an Enterprise subscription customer, the number of environments you can use is **not** limited.  However, the more environments you use, the more resources you will consume in the data plane for the workload you deploy. This may result in higher infrastructure costs for the private data plane.
@@ -158,11 +158,13 @@ Initially, you will receive the requested number of environments when establishi
 
 ## Billing and support
 
+For the full list of entitlements and usage limits on each plan, see the [Acceptable Usage Policy](../manage/billing/acceptable-usage-policy.md).
+
 ### Q: Whom do I reach out to if I have a billing question?
 You can reach out to cloud-billing-support@wso2.com or create a support ticket via our support portal.
 
-### Q: What's a Developer plan?
-A Developer plan allows you to try out WSO2 cloud’s capabilities at no cost. It’s ideal for proof of concept (PoC) tasks or workloads with limited transactions. This plan allows you to experiment with up to 5 integrations and provides US$1,000/year of WSO2 cloud data plane (CDP) credits.
+### Q: What's the Free Trial plan?
+The Free Trial plan allows you to try out WSO2 cloud’s capabilities at no cost. It’s ideal for proof of concept (PoC) tasks or workloads with limited transactions. This plan allows you to experiment with up to 5 integrations and provides US$1,000/year of WSO2 cloud data plane (CDP) credits.
 
 ### Q: How do I calculate the infrastructure costs?
 Calculating infrastructure costs depends on the type of workload you want to manage. Here are a few examples:
@@ -172,8 +174,8 @@ Calculating infrastructure costs depends on the type of workload you want to man
 
 ### Q: What are the integration limitations?
 
-- **Developer plan**: Allows up to a maximum of five free integrations and unlimited paid integrations.
-- **PAYG plan**: Allows unlimited paid integrations.
+- **Free Trial plan**: Allows up to a maximum of five free integrations and unlimited paid integrations.
+- **Growth plan**: Allows unlimited paid integrations.
 - **Enterprise plan**: Allows unlimited paid integrations.
 
 ### Q: How do I read the bill?
@@ -185,5 +187,5 @@ The WSO2 cloud Enterprise plan does not automatically include support; however, 
 ### Q: I am an Enterprise subscription customer who wants to use the WSO2 cloud private data plane. What costs will I incur in addition to the subscription and support plan?
 You can start by using a basic plan or contact us for an Enterprise support plan.
 
-### Q: I want to upgrade from PAYG to an Enterprise subscription. Will there be an outage during the upgrade?
+### Q: I want to upgrade from Growth to an Enterprise subscription. Will there be an outage during the upgrade?
 No, there are no outages when upgrading a plan.
