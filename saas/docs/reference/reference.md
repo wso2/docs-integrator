@@ -10,6 +10,13 @@ title: Reference
     <li>Frequently asked questions about WSO2 Integrator</li>
   </ul>
 
+<PaletteCard icon="server" href="/reference/runtime-updates-and-upgrades">
+  <h3 class="palette-card-title">Runtime Updates and Upgrades</h3>
+  <ul class="palette-card-list">
+    <li>Currently supported integration runtime versions</li>
+    <li>Whether and when to upgrade an existing integration</li>
+  </ul>
+
 <PaletteCard icon="book" href="/reference/glossary">
   <h3 class="palette-card-title">Glossary</h3>
   <ul class="palette-card-list">
