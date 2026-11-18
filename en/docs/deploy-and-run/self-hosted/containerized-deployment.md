@@ -993,7 +993,11 @@ service on agentCoreListener {
 
 `agentFor()` returns the agent, which Step 2 builds. Each invocation carries the session id in the `X-Amzn-Bedrock-AgentCore-Runtime-Session-Id` header, which the listener puts in `ctx.sessionId`. A session id has at least 33 characters. Each session runs in its own microVM.
 
-The compiler checks the service: it must declare `get ping` and `post invocations`, no other resource or remote function, and it must be attached at the root path. A request body that doesn't match `InvocationRequest` is answered with `400` before the resource runs.
+The compiler checks the service: it must declare `get ping` and `post invocations`, no other resource or remote function, and it must be attached at the root path. The payload type must be one a JSON body can hold, so `xml`, `table`, and `string:RegExp` are rejected. A request body that doesn't match `InvocationRequest` is answered with `400` before the resource runs.
+
+In WSO2 Agent Builder, the agent's canvas shows the service as the agent's trigger, next to its model, memory, and tools:
+
+![An agent's canvas in WSO2 Agent Builder, with the agentcore:InvocationService trigger highlighted on the left of the AI Agent node](/img/deploy-and-run/self-hosted/03-agentcore-agent-canvas-v1.0.png)
 
 :::caution Conversations last only as long as the microVM
 The agent keeps its conversation memory inside the container. By default, AgentCore Runtime stops a session's microVM after 15 minutes without an invocation or after 8 hours in total, and it also stops one that fails its health check. A later call with the same session id starts a new microVM, and the agent no longer remembers the conversation. It doesn't report an error.
@@ -1146,7 +1150,11 @@ Follow these rules for every image you deploy to AgentCore Runtime:
 
 ### Step 4: Build and test locally
 
-Build the project. Code to Cloud builds the executable JAR, generates the Docker build context under `target/docker/my_agent/`, and builds the image for your machine:
+In WSO2 Agent Builder, open the agentic integration's overview, select **Deploy**, expand **Amazon Bedrock AgentCore**, and select **Build Image**. To send the agent's traces to AWS X-Ray and CloudWatch, keep **Export traces to AWS X-Ray and CloudWatch** selected.
+
+![The Deploy panel on an agentic integration's overview, with Amazon Bedrock AgentCore expanded and the Build Image button highlighted](/img/deploy-and-run/self-hosted/04-agentcore-build-image-v1.0.png)
+
+Alternatively, build from the terminal. Code to Cloud builds the executable JAR, generates the Docker build context under `target/docker/my_agent/`, and builds the image for your machine:
 
 ```bash
 bal build
