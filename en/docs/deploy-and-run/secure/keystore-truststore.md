@@ -1,14 +1,14 @@
 ---
 sidebar_position: 1
 title: Keystores and Truststores
-description: Create, configure, and manage keystores and truststores for TLS, mutual TLS, and secure connections in WSO2 Agent Builder.
-keywords: [wso2 agent builder, keystore, truststore, tls, mtls, security, certificates]
+description: Create, configure, and manage keystores and truststores for TLS, mutual TLS, and secure connections in Choreo Agent Builder.
+keywords: [choreo agent builder, keystore, truststore, tls, mtls, security, certificates]
 slug: /deploy-and-run/secure/keystore-truststore
 ---
 
 # Keystores and Truststores
 
-Keystores and truststores are foundational to securing communication in production deployments. This guide explains what each is, how to create them, and how to configure them in WSO2 Agent Builder.
+Keystores and truststores are foundational to securing communication in production deployments. This guide explains what each is, how to create them, and how to configure them in Choreo Agent Builder.
 
 | Concept | What it stores | Primary use |
 |---------|---------------|-------------|

@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Overview
 title: Observe
-description: Monitor and diagnose WSO2 Agent Builder agents in production with metrics, logs, and distributed traces, on WSO2 Cloud or with your own observability stack.
-keywords: [wso2 agent builder, observability, monitoring, metrics, logging, tracing]
+description: Monitor and diagnose Choreo Agent Builder agents in production with metrics, logs, and distributed traces, on Choreo Cloud or with your own observability stack.
+keywords: [choreo agent builder, observability, monitoring, metrics, logging, tracing]
 slug: /observe
 hide_table_of_contents: true
 wide_layout: true
@@ -14,7 +14,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Observe
 
-Observability is how you understand an agent's runtime behavior, using metrics, logs, and traces. WSO2 Agent Builder emits all three, and you choose where they go.
+Observability is how you understand an agent's runtime behavior, using metrics, logs, and traces. Choreo Agent Builder emits all three, and you choose where they go.
 
 Two distinct activities sit under this heading, and it is worth keeping them apart:
 
@@ -24,7 +24,7 @@ Two distinct activities sit under this heading, and it is worth keeping them apa
 :::info Observability follows your deployment
 Like [managing](../manage/manage.md) agents, how you observe them depends on where they run:
 
-- **Deployed to WSO2 Cloud:** observability is built in, with nothing to set up. See <CloudDocsLink to="/observe">Observe on WSO2 Cloud</CloudDocsLink>.
+- **Deployed to Choreo Cloud:** observability is built in, with nothing to set up. See <CloudDocsLink to="/observe">Observe on Choreo Cloud</CloudDocsLink>.
 - **Running on your own infrastructure:** the [Integration Control Plane](product://integrator/icp) surfaces health, metrics, and logs, and you can send the same telemetry to the open-source or commercial tools below.
 :::
 

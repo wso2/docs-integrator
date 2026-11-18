@@ -2,7 +2,7 @@
 sidebar_position: 0
 sidebar_label: Multi-Agent Concepts
 title: Multi-Agent Concepts
-description: Why and when to split work across multiple AI agents in WSO2 Agent Builder, how sequential and hierarchical agents differ, and how context, sessions, and cost behave across agents.
+description: Why and when to split work across multiple AI agents in Choreo Agent Builder, how sequential and hierarchical agents differ, and how context, sessions, and cost behave across agents.
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -14,7 +14,7 @@ A multi-agent system is an architecture in which a task is accomplished not by a
 
 The individual agents remain ordinary agents, an LLM in a loop with tools and instructions. What makes a system multi-agent is the coordination layer: how control flows between agents, what context each agent can see, and how results are aggregated.
 
-WSO2 Agent Builder supports two ways to coordinate agents:
+Choreo Agent Builder supports two ways to coordinate agents:
 
 - **[Sequential agents](sequential-agents.md)** run one after another in a fixed order, each passing its result to the next.
 - **[Hierarchical agents](hierarchical-agents.md)** put an orchestrator in charge, which decides at run time which specialist agents to call.
@@ -102,7 +102,7 @@ Use **sequential** agents when the stages are known in advance and every request
 
 The two combine. A stage in a sequential chain can be an orchestrator with its own specialists, and a specialist can call other agents in turn. Keep such systems shallow: every level multiplies cost and makes failures harder to trace.
 
-Other coordination patterns exist in the wider ecosystem, such as peer-to-peer handoff and shared group conversations. They trade centralized control for lower per-hop latency or richer shared context, at the cost of debuggability and predictable spend. WSO2 Agent Builder does not model these directly. Delegation only goes one way: an agent can't be a tool of one of its own sub-agents.
+Other coordination patterns exist in the wider ecosystem, such as peer-to-peer handoff and shared group conversations. They trade centralized control for lower per-hop latency or richer shared context, at the cost of debuggability and predictable spend. Choreo Agent Builder does not model these directly. Delegation only goes one way: an agent can't be a tool of one of its own sub-agents.
 
 ## Context and session isolation
 

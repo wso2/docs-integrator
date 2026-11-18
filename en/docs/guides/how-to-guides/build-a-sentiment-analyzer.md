@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: "Build a Sentiment Analyzer"
-description: Build your first AI integration in WSO2 Agent Builder. An agent exposed through a typed HTTP trigger that classifies customer reviews.
-keywords: [wso2 agent builder, ai agent, llm, http trigger, sentiment analysis, quick start, ballerina ai]
+description: Build your first AI integration in Choreo Agent Builder. An agent exposed through a typed HTTP trigger that classifies customer reviews.
+keywords: [choreo agent builder, ai agent, llm, http trigger, sentiment analysis, quick start, ballerina ai]
 slug: /guides/how-to-guides/build-a-sentiment-analyzer
 card_icon: ai
 card_summary: Your first AI agent, exposed as a typed HTTP endpoint
@@ -18,7 +18,7 @@ import TabItem from '@theme/TabItem';
 
 **Time:** Under 10 minutes | **What you'll build:** An HTTP endpoint that listens on `POST /sentiment-analyzer/analyze`, sends a customer review to an AI agent, and returns the sentiment (`POSITIVE`, `NEGATIVE`, or `NEUTRAL`) along with a confidence score.
 
-This quick start shows the full cycle in WSO2 Agent Builder: define the result types, create an agent with classification instructions, expose it through a typed HTTP trigger, and test it. Because the trigger's response is typed, Ballerina enforces the result: the agent can only return one of the three sentiment values.
+This quick start shows the full cycle in Choreo Agent Builder: define the result types, create an agent with classification instructions, expose it through a typed HTTP trigger, and test it. Because the trigger's response is typed, Ballerina enforces the result: the agent can only return one of the three sentiment values.
 
 :::info Prerequisites
 
@@ -31,7 +31,7 @@ This quick start shows the full cycle in WSO2 Agent Builder: define the result t
 
 ## Step 1: Create the agentic integration
 
-1. Open WSO2 Agent Builder and select **Create** under **Start Building your Agent**.
+1. Open Choreo Agent Builder and select **Create** under **Start Building your Agent**.
 2. Set **Project name** to `Sentiment-Analyzer` and choose a **Location**.
 3. Under **What do you want to build?**, keep **Agentic Integration** selected.
 4. Set **Agentic integration name** to `SentimentAnalyzer`.
@@ -45,10 +45,10 @@ This quick start shows the full cycle in WSO2 Agent Builder: define the result t
     }}
 />
 
-The integration opens with the WSO2 Agent Builder Copilot, which asks **What should your agent do?** Skip it for this quick start and build the integration manually.
+The integration opens with the Choreo Agent Builder Copilot, which asks **What should your agent do?** Skip it for this quick start and build the integration manually.
 
 <ThemedImage
-    alt="SentimentAnalyzer integration home page showing the WSO2 Agent Builder Copilot prompt, example agents, and the Add Agent and Add MCP Server buttons under Or start from scratch"
+    alt="SentimentAnalyzer integration home page showing the Choreo Agent Builder Copilot prompt, example agents, and the Add Agent and Add MCP Server buttons under Or start from scratch"
     sources={{
         light: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer-v1.0/02-integration-home-v1.0.png'),
         dark: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer-v1.0/02-integration-home-v1.0.png'),
@@ -131,10 +131,10 @@ The **Types** view shows `SentimentResult` linked to the `Sentiment` enum.
 
    You don't need to describe the output format. The typed response you set on the HTTP trigger in Step 4 tells the model what shape to return.
 
-5. Keep **Model** as **Default WSO2 Model Provider**. No third-party API key is required. To use a different LLM, see [Model providers](../../develop-and-test/integration-artifacts/model-providers.md).
+5. Keep **Model** as **Default Choreo Model Provider**. No third-party API key is required. To use a different LLM, see [Model providers](../../develop-and-test/integration-artifacts/model-providers.md).
 
 <ThemedImage
-    alt="Create Agent form with Role set to SentimentAnalyzer, the sentiment classification instructions, and Model set to Default WSO2 Model Provider"
+    alt="Create Agent form with Role set to SentimentAnalyzer, the sentiment classification instructions, and Model set to Default Choreo Model Provider"
     sources={{
         light: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer-v1.0/07-create-agent-v1.0.png'),
         dark: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer-v1.0/07-create-agent-v1.0.png'),
@@ -152,10 +152,10 @@ The **Types** view shows `SentimentResult` linked to the `Sentiment` enum.
     }}
 />
 
-The agent canvas for `SentimentAnalyzer` shows the **AI Agent** node connected to **Default WSO2 Model Provider**, with **Add Trigger** on its left.
+The agent canvas for `SentimentAnalyzer` shows the **AI Agent** node connected to **Default Choreo Model Provider**, with **Add Trigger** on its left.
 
 <ThemedImage
-    alt="AI Agent canvas for SentimentAnalyzer connected to the Default WSO2 Model Provider, with Add Trigger, Add Memory, and Add Tool options"
+    alt="AI Agent canvas for SentimentAnalyzer connected to the Default Choreo Model Provider, with Add Trigger, Add Memory, and Add Tool options"
     sources={{
         light: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer-v1.0/09-ai-agent-canvas-v1.0.png'),
         dark: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer-v1.0/09-ai-agent-canvas-v1.0.png'),
@@ -233,7 +233,7 @@ The **Instructions** field tells the agent what to do with each request. The tri
 The agent canvas now shows the **HTTP Service · /sentiment-analyzer** trigger with **POST /analyze** connected to the agent.
 
 <ThemedImage
-    alt="SentimentAnalyzer agent canvas with the HTTP Service POST /analyze trigger connected to the AI Agent node and the Default WSO2 Model Provider"
+    alt="SentimentAnalyzer agent canvas with the HTTP Service POST /analyze trigger connected to the AI Agent node and the Default Choreo Model Provider"
     sources={{
         light: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer-v1.0/15-agent-with-http-trigger-v1.0.png'),
         dark: useBaseUrl('/img/genai/getting-started/build-a-sentiment-analyzer-v1.0/15-agent-with-http-trigger-v1.0.png'),
@@ -293,7 +293,7 @@ Use the **Flow**/**Sequence** toggle at the top right to switch between the diag
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
-The following Ballerina program is what WSO2 Agent Builder generates from the Visual Designer steps. The resource binds the agent's reply to `SentimentResult`, so the response includes both the sentiment and a confidence score (for example, `{"sentiment":"POSITIVE","confidence":0.95}`). The HTTP resource wraps the agent call in a `do`/`on fail` block, matching the **Error Handler** node shown in the flow.
+The following Ballerina program is what Choreo Agent Builder generates from the Visual Designer steps. The resource binds the agent's reply to `SentimentResult`, so the response includes both the sentiment and a confidence score (for example, `{"sentiment":"POSITIVE","confidence":0.95}`). The HTTP resource wraps the agent call in a `do`/`on fail` block, matching the **Error Handler** node shown in the flow.
 
 `types.bal`:
 
@@ -357,7 +357,7 @@ ${payload.toJsonString()}`);
 
 Note that `run` is not explicitly given an expected type here. Ballerina infers it from the type of the variable the result is assigned to (`SentimentResult`), so the agent is asked for a reply of that shape and the reply is validated against it before it is returned.
 
-Run and test the integration from WSO2 Agent Builder using the **Try It** panel as shown in Step 6, or with `curl`:
+Run and test the integration from Choreo Agent Builder using the **Try It** panel as shown in Step 6, or with `curl`:
 
 ```bash
 curl -X POST http://localhost:9090/sentiment-analyzer/analyze \

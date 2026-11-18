@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Voice Agent
-description: Expose an AI agent over a voice channel in WSO2 Agent Builder by adding a Voice Chat trigger, then deploy it to WSO2 Cloud so callers can talk to it.
+description: Expose an AI agent over a voice channel in Choreo Agent Builder by adding a Voice Chat trigger, then deploy it to Choreo Cloud so callers can talk to it.
 slug: /develop-and-test/integration-artifacts/voice-agent
 ---
 
@@ -12,9 +12,9 @@ import TabItem from '@theme/TabItem';
 
 # Voice Agent
 
-A **Voice Chat** trigger exposes an [AI agent](../agents/agents.md) over a voice channel. WSO2 Agent Builder hosts the voice connection for you. Your agent receives the caller's speech as transcribed text and returns a text reply. WSO2 Cloud converts that reply to speech and plays it back to the caller, so you never handle audio yourself.
+A **Voice Chat** trigger exposes an [AI agent](../agents/agents.md) over a voice channel. Choreo Agent Builder hosts the voice connection for you. Your agent receives the caller's speech as transcribed text and returns a text reply. Choreo Cloud converts that reply to speech and plays it back to the caller, so you never handle audio yourself.
 
-In WSO2 Agent Builder, voice is a trigger on an agent, just like a chat channel.
+In Choreo Agent Builder, voice is a trigger on an agent, just like a chat channel.
 
 ## How it differs from an Agent Chat trigger
 
@@ -87,7 +87,7 @@ This example uses `customerSupportAgent`, a customer support agent that checks o
 
 ## Review the onChatMessage handler
 
-`onChatMessage` receives an `integration:ChatMessage` (the transcribed speech, with a session ID for the call) and returns the text to speak back to the caller. WSO2 Agent Builder wires the agent into it for you, so there's no placeholder to replace.
+`onChatMessage` receives an `integration:ChatMessage` (the transcribed speech, with a session ID for the call) and returns the text to speak back to the caller. Choreo Agent Builder wires the agent into it for you, so there's no placeholder to replace.
 
 Under **Entry Points**, expand **Voice Agent Integration** and select `onChatMessage`. The flow is **Start**, an **agent : run** node that calls `customerSupportAgent`, and a **Return** node that returns `response`.
 
@@ -151,14 +151,14 @@ isolated service integration:VoiceService on voiceListener {
 }
 ```
 
-`onChatMessage` receives an `integration:ChatMessage` (the transcribed speech, with a session ID for the call) and returns the text to speak back to the caller. WSO2 Agent Builder wires the agent into it for you, so there's no placeholder to replace.
+`onChatMessage` receives an `integration:ChatMessage` (the transcribed speech, with a session ID for the call) and returns the text to speak back to the caller. Choreo Agent Builder wires the agent into it for you, so there's no placeholder to replace.
 
 The session ID is passed as the session key so the agent's memory tracks each call separately. Without it, every caller shares the same conversation history.
 
 </TabItem>
 </Tabs>
 
-## Deploy to WSO2 Cloud
+## Deploy to Choreo Cloud
 
 The voice listener only accepts calls once it's deployed. Select the **VoiceAgentIntegration** integration in the project explorer to open its **Overview**. The canvas shows both triggers, the **Agent Chat** (`POST /chat`) and the **Voice Chat** (`onChatMessage`), connected to `customerSupportAgent` with its model, memory, and three tools.
 
@@ -170,30 +170,30 @@ The voice listener only accepts calls once it's deployed. Select the **VoiceAgen
     }}
 />
 
-Select **Deploy** at the top right. The **Deploy** panel lists the deployment targets (**WSO2 Agent Manager**, **WSO2 Cloud**, **Docker Image**, and **Virtual Machine**) and the **Management** options (**Agent Manager Observability** and **Integration Control Plane**).
+Select **Deploy** at the top right. The **Deploy** panel lists the deployment targets (**Choreo Agent Manager**, **Choreo Cloud**, **Docker Image**, and **Virtual Machine**) and the **Management** options (**Agent Manager Observability** and **Integration Control Plane**).
 
 <ThemedImage
-    alt="Deploy panel next to the overview canvas, with WSO2 Agent Manager expanded, listing WSO2 Agent Manager, WSO2 Cloud, Docker Image, and Virtual Machine under Deploy, and Agent Manager Observability and Integration Control Plane under Management."
+    alt="Deploy panel next to the overview canvas, with Choreo Agent Manager expanded, listing Choreo Agent Manager, Choreo Cloud, Docker Image, and Virtual Machine under Deploy, and Agent Manager Observability and Integration Control Plane under Management."
     sources={{
         light: useBaseUrl('/img/genai/develop/voice-chat-v1.0/09-deploy-panel-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/voice-chat-v1.0/09-deploy-panel-v1.0.png'),
     }}
 />
 
-Expand **WSO2 Cloud** and select **Deploy to WSO2 Cloud**. Pick the organization and project, and connect a Git remote if the project doesn't have one yet. See [Deploy to WSO2 Cloud from WSO2 Integrator](product://integrator/deploy-and-run/deploy-to-wso2-cloud/push-from-ide) for the full walkthrough.
+Expand **Choreo Cloud** and select **Deploy to Choreo Cloud**. Pick the organization and project, and connect a Git remote if the project doesn't have one yet. See [Deploy to Choreo Cloud from Choreo Integrator](product://integrator/deploy-and-run/deploy-to-choreo-cloud/push-from-ide) for the full walkthrough.
 
 <ThemedImage
-    alt="Deploy panel with WSO2 Cloud expanded, describing it as a fully managed platform, with a Deploy to WSO2 Cloud button."
+    alt="Deploy panel with Choreo Cloud expanded, describing it as a fully managed platform, with a Deploy to Choreo Cloud button."
     sources={{
-        light: useBaseUrl('/img/genai/develop/voice-chat-v1.0/10-deploy-to-wso2-cloud-v1.0.png'),
-        dark: useBaseUrl('/img/genai/develop/voice-chat-v1.0/10-deploy-to-wso2-cloud-v1.0.png'),
+        light: useBaseUrl('/img/genai/develop/voice-chat-v1.0/10-deploy-to-choreo-cloud-v1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/voice-chat-v1.0/10-deploy-to-choreo-cloud-v1.0.png'),
     }}
 />
 
-Once deployed, enable voice for the integration in WSO2 Cloud. WSO2 Cloud runs the voice pipeline for you: callers connect over WebRTC, their speech is transcribed and sent to `onChatMessage`, and the reply is converted back to speech. You choose the speech-to-text and text-to-speech providers when you set it up. See [Voice Agents](https://wso2.com/integration-platform/docs/saas/manage/voice-agents) in the WSO2 Cloud documentation to configure and test the voice pipeline.
+Once deployed, enable voice for the integration in Choreo Cloud. Choreo Cloud runs the voice pipeline for you: callers connect over WebRTC, their speech is transcribed and sent to `onChatMessage`, and the reply is converted back to speech. You choose the speech-to-text and text-to-speech providers when you set it up. See [Voice Agents](https://wso2.com/integration-platform/docs/saas/manage/voice-agents) in the Choreo Cloud documentation to configure and test the voice pipeline.
 
 :::note
-The voice pipeline is available only on WSO2 Cloud. Deploying as a Docker image or on a virtual machine runs the service, but callers can't reach it by voice.
+The voice pipeline is available only on Choreo Cloud. Deploying as a Docker image or on a virtual machine runs the service, but callers can't reach it by voice.
 :::
 
 ## Common pitfalls
@@ -202,11 +202,11 @@ The voice pipeline is available only on WSO2 Cloud. Deploying as a Docker image 
 |---|---|---|
 | Caller hears long or garbled replies. | The agent's instructions allow Markdown, lists, or long answers. | Ask for short, plain-text replies (one or two sentences, no Markdown) in the agent's **Instructions**. |
 | Agent forgets earlier turns in the same call. | No memory is attached to the agent, or the session ID isn't passed to `agent.run()`. | Attach a [memory store](../agents/memory.md) and keep **Session ID** bound to `message.sessionId`. |
-| Callers can't connect to the agent. | The integration isn't deployed to WSO2 Cloud, or voice isn't enabled for it. | Deploy to WSO2 Cloud and [enable voice for the integration](https://wso2.com/integration-platform/docs/saas/manage/voice-agents). |
+| Callers can't connect to the agent. | The integration isn't deployed to Choreo Cloud, or voice isn't enabled for it. | Deploy to Choreo Cloud and [enable voice for the integration](https://wso2.com/integration-platform/docs/saas/manage/voice-agents). |
 
 ## What's next
 
-- **[Voice Agents on WSO2 Cloud](https://wso2.com/integration-platform/docs/saas/manage/voice-agents)** — Configure the voice pipeline and test the agent with your voice.
+- **[Voice Agents on Choreo Cloud](https://wso2.com/integration-platform/docs/saas/manage/voice-agents)** — Configure the voice pipeline and test the agent with your voice.
 - **[Creating an Agent](../agents/create-an-agent.md)** — System prompt, tools, and memory shared by every agent type.
 - **[Build a Hotel Finder Agent](../../../guides/how-to-guides/build-a-hotel-finder-agent.md)** — Build an agent with custom tools, step by step.
 - **[Build a Customer Care Agent with MCP](../../../guides/business-use-cases/building-a-customer-care-agent-mcp.md)** — Build an agent that uses an MCP server as a tool.

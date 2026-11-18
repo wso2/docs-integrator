@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: Chunkers
-description: Reference for every Chunker in WSO2 Agent Builder. Covers the AUTO and DISABLE constants, Generic Recursive Chunker, Markdown Chunker, HTML Chunker, and the Devant remote chunker, including strategies, defaults, and create form fields.
-keywords: [wso2 agent builder, chunker, rag, text splitting, chunking strategy, knowledge base, embedding]
+description: Reference for every Chunker in Choreo Agent Builder. Covers the AUTO and DISABLE constants, Generic Recursive Chunker, Markdown Chunker, HTML Chunker, and the Devant remote chunker, including strategies, defaults, and create form fields.
+keywords: [choreo agent builder, chunker, rag, text splitting, chunking strategy, knowledge base, embedding]
 slug: /develop-and-test/integration-artifacts/knowledge-bases/chunkers
 ---
 

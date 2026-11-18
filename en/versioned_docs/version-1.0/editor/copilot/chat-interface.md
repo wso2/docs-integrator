@@ -1,7 +1,7 @@
 ---
 title: "Copilot Chat Interface"
-description: Reference for the WSO2 Agent Builder Copilot chat input bar — commands, built-in skills, Edit/Plan modes, web access, and slash commands.
-keywords: [wso2 agent builder, copilot, chat controls, slash commands, plan mode, edit mode]
+description: Reference for the Choreo Agent Builder Copilot chat input bar — commands, built-in skills, Edit/Plan modes, web access, and slash commands.
+keywords: [choreo agent builder, copilot, chat controls, slash commands, plan mode, edit mode]
 sidebar_position: 2
 slug: /editor/copilot/chat-interface
 ---

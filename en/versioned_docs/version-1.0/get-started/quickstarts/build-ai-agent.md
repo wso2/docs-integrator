@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: "Build an AI Agent"
-description: Build an AI agent in WSO2 Agent Builder, connect it to a chat trigger, and test it in the built-in chat panel.
-keywords: [wso2 agent builder, ai agent, llm, chat agent, genai, quick start, ballerina ai]
+description: Build an AI agent in Choreo Agent Builder, connect it to a chat trigger, and test it in the built-in chat panel.
+keywords: [choreo agent builder, ai agent, llm, chat agent, genai, quick start, ballerina ai]
 slug: /get-started/quickstarts/build-ai-agent
 ---
 
@@ -25,13 +25,13 @@ An AI agent uses an LLM to understand user queries, reason about them, and call 
 
 ## Prerequisites
 
-A working WSO2 Agent Builder environment.
+A working Choreo Agent Builder environment.
 
 <PrereqCard icon="local" title="Local setup" href="/get-started/setup">
-  Install and launch WSO2 Agent Builder on your machine.
+  Install and launch Choreo Agent Builder on your machine.
 </PrereqCard>
-<PrereqCard icon="cloud" title="WSO2 Cloud Account" href="/get-started/setup" cloud>
-  For AI assisted development and WSO2 Cloud deployments.
+<PrereqCard icon="cloud" title="Choreo Cloud Account" href="/get-started/setup" cloud>
+  For AI assisted development and Choreo Cloud deployments.
 </PrereqCard>
 
 </Prerequisites>
@@ -41,9 +41,9 @@ A working WSO2 Agent Builder environment.
 
 ## Step 1: Create the project
 
-1. Open WSO2 Agent Builder. The **Get Started** view opens.
+1. Open Choreo Agent Builder. The **Get Started** view opens.
 
-   If you're not signed in, a welcome screen asks you to sign in first. Click **Sign in with WSO2 Integration Platform**, or click **Skip for now** and sign in later. The default WSO2 model provider used in this quick start needs you to be signed in before you run the agent.
+   If you're not signed in, a welcome screen asks you to sign in first. Click **Sign in with Choreo Integration Platform**, or click **Skip for now** and sign in later. The default Choreo model provider used in this quick start needs you to be signed in before you run the agent.
 
    :::note
    If Agent Builder opens a project you worked on before, open a new window (**Cmd+Shift+N** on macOS, **Ctrl+Shift+N** on Windows and Linux) to get to **Get Started**.
@@ -52,7 +52,7 @@ A working WSO2 Agent Builder environment.
 2. Under **Start Building your Agent**, click **Create**.
 
    <ThemedImage
-      alt="The WSO2 Agent Builder Get Started view, with a Start Building your Agent card containing Create and Open buttons, a Pre-built Agents and Samples card with an Explore button, a Sign In button, and a Recent Projects list."
+      alt="The Choreo Agent Builder Get Started view, with a Start Building your Agent card containing Create and Open buttons, a Pre-built Agents and Samples card with an Explore button, a Sign In button, and a Recent Projects list."
       sources={{
          light: useBaseUrl('/img/get-started/build-ai-agent/get-started-v1.0.png'),
          dark: useBaseUrl('/img/get-started/build-ai-agent/get-started-v1.0.png'),
@@ -81,7 +81,7 @@ A working WSO2 Agent Builder environment.
 1. The project opens on the new `AIAgent` integration. Under **Or start from scratch**, click **Add Agent**.
 
    <ThemedImage
-      alt="The AIAgent integration page with the WSO2 Agent Builder Copilot prompt, example cards, and the Add Agent and Add MCP Server buttons under Or start from scratch."
+      alt="The AIAgent integration page with the Choreo Agent Builder Copilot prompt, example cards, and the Add Agent and Add MCP Server buttons under Or start from scratch."
       sources={{
          light: useBaseUrl('/img/get-started/build-ai-agent/integration-start-v1.0.png'),
          dark: useBaseUrl('/img/get-started/build-ai-agent/integration-start-v1.0.png'),
@@ -89,7 +89,7 @@ A working WSO2 Agent Builder environment.
    />
 
    :::tip
-   You can also describe what your agent should do in the **WSO2 Agent Builder Copilot** prompt and let Copilot build it. This quick start builds the agent by hand.
+   You can also describe what your agent should do in the **Choreo Agent Builder Copilot** prompt and let Copilot build it. This quick start builds the agent by hand.
    :::
 
 2. In the **Add Agent** dialog, select **Create Agent**.
@@ -107,17 +107,17 @@ A working WSO2 Agent Builder environment.
 4. Set **Instructions** to:
 
    ```text
-   You are a highly skilled WSO2 Integration Architect. Your goal is to assist developers in building, debugging, and optimizing integration flows.
+   You are a highly skilled Choreo Integration Architect. Your goal is to assist developers in building, debugging, and optimizing integration flows.
    ```
 
-5. Leave **Model** set to **Default WSO2 Model Provider**, and leave **Advanced Configurations** at their default values.
+5. Leave **Model** set to **Default Choreo Model Provider**, and leave **Advanced Configurations** at their default values.
 
 6. Set **Agent Name** to `wso2IntegratorAssistant`.
 
 7. Click **Create Agent**.
 
    <ThemedImage
-      alt="The Create Agent form with Role set to Wso2IntegratorAssistant, the Instructions filled in, Model set to Default WSO2 Model Provider, and Agent Name set to wso2IntegratorAssistant."
+      alt="The Create Agent form with Role set to Wso2IntegratorAssistant, the Instructions filled in, Model set to Default Choreo Model Provider, and Agent Name set to wso2IntegratorAssistant."
       sources={{
          light: useBaseUrl('/img/get-started/build-ai-agent/create-agent-form-v1.0.png'),
          dark: useBaseUrl('/img/get-started/build-ai-agent/create-agent-form-v1.0.png'),
@@ -127,7 +127,7 @@ A working WSO2 Agent Builder environment.
 The agent's canvas opens. It shows the agent with its role and instructions, the model provider it uses, and **Add Trigger**, **Add Memory**, and **Add Tool** for extending it.
 
 <ThemedImage
-   alt="The wso2IntegratorAssistant agent canvas with Add Trigger on the left, the AI Agent node with Add Memory and its role and instructions, the Default WSO2 Model Provider on the right, and Add Tool below."
+   alt="The wso2IntegratorAssistant agent canvas with Add Trigger on the left, the AI Agent node with Add Memory and its role and instructions, the Default Choreo Model Provider on the right, and Add Tool below."
    sources={{
       light: useBaseUrl('/img/get-started/build-ai-agent/agent-canvas-v1.0.png'),
       dark: useBaseUrl('/img/get-started/build-ai-agent/agent-canvas-v1.0.png'),
@@ -136,9 +136,9 @@ The agent's canvas opens. It shows the agent with its role and instructions, the
 
 :::tip Default model provider
 
-By default, the agent uses the WSO2 model provider. If you want to use a different LLM, see [Model providers](../../develop-and-test/integration-artifacts/model-providers.md) for the full list of supported providers (OpenAI, Azure OpenAI, Anthropic, and others).
+By default, the agent uses the Choreo Model Provider. If you want to use a different LLM, see [Model providers](../../develop-and-test/integration-artifacts/model-providers.md) for the full list of supported providers (OpenAI, Azure OpenAI, Anthropic, and others).
 
-If you are using the WSO2 model provider, the access token is obtained through [WSO2 Agent Builder Copilot](../../editor/copilot/copilot.md). If you have not already signed in, you will be prompted to do so.
+If you are using the Choreo Model Provider, the access token is obtained through [Choreo Agent Builder Copilot](../../editor/copilot/copilot.md). If you have not already signed in, you will be prompted to do so.
 :::
 
 
@@ -196,25 +196,25 @@ The trigger appears on the canvas, connected to the agent.
 3. The **Agent Chat** panel opens. Type `Hello` to check that it works.
 
    <ThemedImage
-      alt="The AIAgent Overview beside the Agent Chat panel, where Hello is answered with Hello! How can I assist you today with your WSO2 integration needs?"
+      alt="The AIAgent Overview beside the Agent Chat panel, where Hello is answered with Hello! How can I assist you today with your Choreo Labs integration needs?"
       sources={{
          light: useBaseUrl('/img/get-started/build-ai-agent/run-and-test-v1.0.png'),
          dark: useBaseUrl('/img/get-started/build-ai-agent/run-and-test-v1.0.png'),
       }}
    />
 
-## Step 5: Deploy to WSO2 Cloud
+## Step 5: Deploy to Choreo Cloud
 
-Deploy your integration to WSO2 Cloud. See [Deploy to WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md).
+Deploy your integration to Choreo Cloud. See [Deploy to Choreo Cloud](../../deploy-and-run/deploy-to-choreo-cloud/deploy-to-choreo-cloud.md).
 
 <div class="skip-ahead-card">
 
 <PaletteCard icon="ai" highlight>
   <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
-  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the AIAgent sample straight to WSO2 Cloud.</p>
+  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the AIAgent sample straight to Choreo Cloud.</p>
   <div class="palette-chip-row" style={{justifyContent: 'center'}}>
     <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/aiagent" target="_blank" rel="noopener noreferrer">
-      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
+      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to Choreo Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
     </a>
   </div>
 </PaletteCard>
@@ -239,7 +239,7 @@ import ballerina/ai;
 final ai:Agent wso2IntegratorAssistant = check new (
     systemPrompt = {
         role: string `Wso2IntegratorAssistant`,
-        instructions: string `You are a highly skilled WSO2 Integration Architect. Your goal is to assist developers in building, debugging, and optimizing integration flows.`
+        instructions: string `You are a highly skilled Choreo Integration Architect. Your goal is to assist developers in building, debugging, and optimizing integration flows.`
     },
     model = check ai:getDefaultModelProvider()
 );

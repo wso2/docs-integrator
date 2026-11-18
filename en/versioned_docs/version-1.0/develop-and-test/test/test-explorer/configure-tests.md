@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Configure Test Lifecycle
-description: Set up and tear down state at suite, group, and per-test levels, and control test execution order in WSO2 Agent Builder.
-keywords: [wso2 agent builder, test lifecycle, BeforeSuite, AfterSuite, BeforeEach, AfterEach, test setup, teardown]
+description: Set up and tear down state at suite, group, and per-test levels, and control test execution order in Choreo Agent Builder.
+keywords: [choreo agent builder, test lifecycle, BeforeSuite, AfterSuite, BeforeEach, AfterEach, test setup, teardown]
 slug: /develop-and-test/test/test-explorer/configure-tests
 ---
 

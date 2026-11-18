@@ -2,7 +2,7 @@
 sidebar_position: 5
 title: Type Canvas
 description: Visualize relationships between types in your agentic integration or library on a single canvas.
-keywords: [wso2 agent builder, type canvas, type diagram, types, records, enums, service classes, data model]
+keywords: [choreo agent builder, type canvas, type diagram, types, records, enums, service classes, data model]
 slug: /editor/canvases/type-canvas
 ---
 

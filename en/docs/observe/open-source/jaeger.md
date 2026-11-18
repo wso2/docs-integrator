@@ -1,13 +1,13 @@
 ---
 sidebar_position: 2
 title: Jaeger
-description: Set up Jaeger for distributed tracing of WSO2 Agent Builder agents.
+description: Set up Jaeger for distributed tracing of Choreo Agent Builder agents.
 slug: /observe/open-source/jaeger
 ---
 
 # Jaeger
 
-Jaeger is an open-source distributed tracing platform that helps you monitor and troubleshoot request flows across your agents. WSO2 Agent Builder provides built-in Jaeger support through the OpenTelemetry protocol.
+Jaeger is an open-source distributed tracing platform that helps you monitor and troubleshoot request flows across your agents. Choreo Agent Builder provides built-in Jaeger support through the OpenTelemetry protocol.
 
 ## Prerequisites
 

@@ -1,7 +1,7 @@
 ---
 title: Access AWS Services Securely
-description: Give WSO2 Agent Builder AWS credentials through IAM roles on Amazon ECS, Amazon EKS, Amazon EC2, and AWS Lambda, assume roles across accounts, sign requests to any AWS API, and keep AWS traffic inside your VPC.
-keywords: [wso2 agent builder, aws, iam role, default credentials, assume role, irsa, eks pod identity, instance profile, sigv4, vpc endpoints, fips]
+description: Give Choreo Agent Builder AWS credentials through IAM roles on Amazon ECS, Amazon EKS, Amazon EC2, and AWS Lambda, assume roles across accounts, sign requests to any AWS API, and keep AWS traffic inside your VPC.
+keywords: [choreo agent builder, aws, iam role, default credentials, assume role, irsa, eks pod identity, instance profile, sigv4, vpc endpoints, fips]
 slug: /deploy-and-run/secure/aws-access
 sidebar_position: 9
 ---

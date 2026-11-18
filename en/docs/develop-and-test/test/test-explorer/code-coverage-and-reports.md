@@ -1,8 +1,8 @@
 ---
 sidebar_position: 8
 title: Code Coverage and Reports
-description: Generate test reports, measure code coverage, enforce coverage thresholds, and export JaCoCo XML in WSO2 Agent Builder.
-keywords: [wso2 agent builder, code coverage, test report, jacoco, coverage threshold]
+description: Generate test reports, measure code coverage, enforce coverage thresholds, and export JaCoCo XML in Choreo Agent Builder.
+keywords: [choreo agent builder, code coverage, test report, jacoco, coverage threshold]
 slug: /develop-and-test/test/test-explorer/code-coverage-and-reports
 ---
 

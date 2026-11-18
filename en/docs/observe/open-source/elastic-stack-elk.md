@@ -1,13 +1,13 @@
 ---
 sidebar_position: 4
 title: Elastic Stack (ELK)
-description: Connect WSO2 Agent Builder agents to Elasticsearch, Logstash, and Kibana for log aggregation and analysis.
+description: Connect Choreo Agent Builder agents to Elasticsearch, Logstash, and Kibana for log aggregation and analysis.
 slug: /observe/open-source/elastic-stack-elk
 ---
 
 # Elastic Stack (ELK)
 
-The Elastic Stack (Elasticsearch, Logstash, Kibana) provides powerful log aggregation, search, and visualization for your WSO2 Agent Builder agents. Use it to centralize logs, analyze conversation patterns, and create operational dashboards.
+The Elastic Stack (Elasticsearch, Logstash, Kibana) provides powerful log aggregation, search, and visualization for your Choreo Agent Builder agents. Use it to centralize logs, analyze conversation patterns, and create operational dashboards.
 
 ## Prerequisites
 

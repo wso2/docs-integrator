@@ -2,7 +2,7 @@
 sidebar_position: 0
 sidebar_label: How to Guides
 title: How to Guides
-description: Step-by-step guides for building AI agents in WSO2 Agent Builder.
+description: Step-by-step guides for building AI agents in Choreo Agent Builder.
 slug: /guides/how-to-guides
 hide_table_of_contents: true
 wide_layout: true
@@ -11,7 +11,7 @@ wide_layout: true
 # How to Guides
 
 Step-by-step walkthroughs that build a complete, working project in
-WSO2 Agent Builder, from creating the agentic integration to running
+Choreo Agent Builder, from creating the agentic integration to running
 and testing it. Each guide covers a different pattern:
 
 - **Build a Sentiment Analyzer**: an AI agent exposed through a typed

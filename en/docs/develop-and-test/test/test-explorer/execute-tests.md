@@ -1,8 +1,8 @@
 ---
 sidebar_position: 7
 title: Execute Tests
-description: Run, filter, rerun, and parallelize tests using the bal test CLI in WSO2 Agent Builder.
-keywords: [wso2 agent builder, execute tests, bal test, parallel tests, rerun failed, test groups]
+description: Run, filter, rerun, and parallelize tests using the bal test CLI in Choreo Agent Builder.
+keywords: [choreo agent builder, execute tests, bal test, parallel tests, rerun failed, test groups]
 slug: /develop-and-test/test/test-explorer/execute-tests
 ---
 

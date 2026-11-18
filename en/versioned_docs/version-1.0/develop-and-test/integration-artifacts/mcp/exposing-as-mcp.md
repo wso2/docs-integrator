@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Exposing a Service as MCP
-description: Reference for MCP services in WSO2 Agent Builder, covering the listener, service, tools, transport parameters, and session modes.
+description: Reference for MCP services in Choreo Agent Builder, covering the listener, service, tools, transport parameters, and session modes.
 slug: /develop-and-test/integration-artifacts/mcp/exposing-as-mcp
 ---
 
@@ -12,20 +12,20 @@ import TabItem from '@theme/TabItem';
 
 # Exposing a Service as MCP
 
-An **MCP service** is a WSO2 Agent Builder entry point that publishes a set of tools over the Model Context Protocol. Any MCP-compatible client (Claude Desktop, GitHub Copilot, or another AI agent) can connect, discover the tools, and call them. This page covers the configuration options for the listener, service, and tools, including how to read request metadata and HTTP request data, handle sessions, and define tools dynamically.
+An **MCP service** is a Choreo Agent Builder entry point that publishes a set of tools over the Model Context Protocol. Any MCP-compatible client (Claude Desktop, GitHub Copilot, or another AI agent) can connect, discover the tools, and call them. This page covers the configuration options for the listener, service, and tools, including how to read request metadata and HTTP request data, handle sessions, and define tools dynamically.
 
-MCP services in WSO2 Agent Builder run over the **Streamable HTTP** transport. The generated code uses the `mcp:StreamableHttpListener` listener and the `mcp:StreamableHttpService` service type from the `ballerina/mcp` module.
+MCP services in Choreo Agent Builder run over the **Streamable HTTP** transport. The generated code uses the `mcp:StreamableHttpListener` listener and the `mcp:StreamableHttpService` service type from the `ballerina/mcp` module.
 
 ## Creating an MCP service
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Open your project in WSO2 Agent Builder.
+1. Open your project in Choreo Agent Builder.
 2. On the project home page, under **Or start from scratch**, select **Add MCP Server**.
 
    <ThemedImage
-       alt="The WSO2 Agent Builder project home page for the Unit Converter project, showing the WSO2 Agent Builder Copilot prompt box, four example cards (Customer Support, Issue Triager, Helpdesk Responder, and Order Tools), and the Add Agent and Add MCP Server buttons under Or start from scratch."
+       alt="The Choreo Agent Builder project home page for the Unit Converter project, showing the Choreo Agent Builder Copilot prompt box, four example cards (Customer Support, Issue Triager, Helpdesk Responder, and Order Tools), and the Add Agent and Add MCP Server buttons under Or start from scratch."
        sources={{
            light: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/01-mcp-add-artifact-v1.0.png'),
            dark: useBaseUrl('/img/genai/develop/mcp-v5.1/exposing-as-mcp/01-mcp-add-artifact-v1.0.png'),
@@ -51,7 +51,7 @@ MCP services in WSO2 Agent Builder run over the **Streamable HTTP** transport. T
 | **Base Path** | URL prefix for the MCP service (for example, `/mcp`). |
 | **Advanced Configurations** | Expand to set the name of the listener that is created for the service. Defaults to `mcpListener`. |
 
-After you select **Create**, WSO2 Agent Builder adds the service under **Entry Points** in the project sidebar and opens it in the **MCP Service editor**. The header shows the listener and base path, a **Tools** section, and **Configure** / **Try It** buttons in the top-right.
+After you select **Create**, Choreo Agent Builder adds the service under **Entry Points** in the project sidebar and opens it in the **MCP Service editor**. The header shows the listener and base path, a **Tools** section, and **Configure** / **Try It** buttons in the top-right.
 
 <ThemedImage
     alt="The MCP Service editor showing the Listener (mcpListener) and Base Path (/mcp) chips, the Configure and Try It buttons, and the Tools section with 'No tools found. Add a new tool.' and a + Add Tool button. The project sidebar lists MCP Service under Entry Points."
@@ -108,7 +108,7 @@ In the **MCP Service editor**, select **Configure** in the header to open the **
 
 | Field | Description |
 |---|---|
-| **Streamable HTTP Service** | The service type. Read-only; WSO2 Agent Builder always creates an `mcp:StreamableHttpService`, which handles MCP tool calls over the Streamable HTTP transport. |
+| **Streamable HTTP Service** | The service type. Read-only; Choreo Agent Builder always creates an `mcp:StreamableHttpService`, which handles MCP tool calls over the Streamable HTTP transport. |
 | **Base Path** | URL prefix for the MCP endpoint (for example, `/mcp`). Required. |
 | **StreamableHttpServiceConfig** | The `@mcp:StreamableHttpServiceConfig` annotation record. Select the field to open the **Record Configuration** editor. |
 
@@ -299,7 +299,7 @@ Select **+ Add Tool** in the editor to open the **New Tool Configuration** panel
 | **Return Type** | Yes | Ballerina type returned by the tool. |
 | **Advanced Configurations** | No | Bind request metadata and HTTP request data to the tool. See [Transport parameters and request metadata](#transport-parameters-and-request-metadata). |
 
-After you select **Save**, WSO2 Agent Builder generates a `remote function` within the service and opens the tool's flow diagram, where you implement the tool logic. The tool also appears under **Entry Points** > **MCP Service** in the project sidebar and as a row under **Tools** in the MCP Service editor.
+After you select **Save**, Choreo Agent Builder generates a `remote function` within the service and opens the tool's flow diagram, where you implement the tool logic. The tool also appears under **Entry Points** > **MCP Service** in the project sidebar and as a row under **Tools** in the MCP Service editor.
 
 <ThemedImage
     alt="The Remote Function view for the add tool, showing an empty flow with a Start node and the Flow and Sequence tabs. The project sidebar lists add under Entry Points > MCP Service."
@@ -345,7 +345,7 @@ When you want explicit control over the description or input schema, use the `@m
 | Field | Description |
 |---|---|
 | **description** | Tool description sent to clients. Overrides the function's doc comment. |
-| **schema** | A `map<json>` JSON Schema for the tool's parameters. Overrides the schema WSO2 Agent Builder derives from parameter types. Use when you need richer schema metadata (enums, defaults, custom validation) than Ballerina types can express. |
+| **schema** | A `map<json>` JSON Schema for the tool's parameters. Overrides the schema Choreo Agent Builder derives from parameter types. Use when you need richer schema metadata (enums, defaults, custom validation) than Ballerina types can express. |
 
 ```ballerina
 @mcp:Tool {
@@ -601,7 +601,7 @@ service mcp:StreamableHttpAdvancedService /mcp on mcpListener {
 | Use `mcp:StreamableHttpService` when… | Use `mcp:StreamableHttpAdvancedService` when… |
 |---|---|
 | Tools map cleanly to compile-time `remote function`s. | Tools are dynamic (defined in configuration, a database, or another service). |
-| You want WSO2 Agent Builder to derive schemas automatically. | You want hand-crafted JSON schemas or extra validation. |
+| You want Choreo Agent Builder to derive schemas automatically. | You want hand-crafted JSON schemas or extra validation. |
 | You want to build the service in the visual designer. | You want one handler that routes every tool call. |
 
 :::info
@@ -664,7 +664,7 @@ Once your service is running, MCP clients connect by URL.
 }
 ```
 
-**An agent built with WSO2 Agent Builder**: see [Consuming MCP from an agent](consuming-mcp-from-agent.md).
+**An agent built with Choreo Agent Builder**: see [Consuming MCP from an agent](consuming-mcp-from-agent.md).
 
 ## Operational notes
 
@@ -680,7 +680,7 @@ Once your service is running, MCP clients connect by URL.
 Yes. These types still compile and run:
 
 - `mcp:Listener` is deprecated. Replace it with `mcp:StreamableHttpListener`, which takes the same arguments.
-- `mcp:Service` and `mcp:AdvancedService` are transport-agnostic service types and are not deprecated. Their tools can't bind HTTP request data (`@http:Header`, `http:Headers`, `http:Request`). Use `mcp:StreamableHttpService` and `mcp:StreamableHttpAdvancedService`, which WSO2 Agent Builder generates by default, when you need that data.
+- `mcp:Service` and `mcp:AdvancedService` are transport-agnostic service types and are not deprecated. Their tools can't bind HTTP request data (`@http:Header`, `http:Headers`, `http:Request`). Use `mcp:StreamableHttpService` and `mcp:StreamableHttpAdvancedService`, which Choreo Agent Builder generates by default, when you need that data.
 - The `httpConfig` and `sessionMode` fields of `@mcp:ServiceConfig` are deprecated. Set them in `@mcp:StreamableHttpServiceConfig` on an `mcp:StreamableHttpService` instead.
 
 ## What's next

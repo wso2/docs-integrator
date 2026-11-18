@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Overview
 title: AI Agents
-description: Reference for AI agents in WSO2 Agent Builder — creating agents, connecting them to triggers, the agent canvas, tools, memory, model providers, and chatting with an agent.
-keywords: [wso2 agent builder, ai agent, agent canvas, triggers, agent chat, tools, memory, model provider]
+description: Reference for AI agents in Choreo Agent Builder — creating agents, connecting them to triggers, the agent canvas, tools, memory, model providers, and chatting with an agent.
+keywords: [choreo agent builder, ai agent, agent canvas, triggers, agent chat, tools, memory, model provider]
 slug: /develop-and-test/integration-artifacts/agents
 ---
 
@@ -27,11 +27,11 @@ An AI agent is composed of four core components that enable reasoning, action ex
 
 Without tools, the agent is limited to generating responses without interacting with external systems. Without memory, the agent cannot maintain context across multi-turn conversations.
 
-In WSO2 Agent Builder, you design agents visually inside an agentic integration, give them tools and memory, connect them to a model provider, and connect them to **triggers** such as a chat channel, an HTTP endpoint, or an event source. Agents can also work together, either one after another in a fixed order or under an orchestrator that delegates to them. See [Multi-Agent Concepts](multi-agent/multi-agent.md).
+In Choreo Agent Builder, you design agents visually inside an agentic integration, give them tools and memory, connect them to a model provider, and connect them to **triggers** such as a chat channel, an HTTP endpoint, or an event source. Agents can also work together, either one after another in a fixed order or under an orchestrator that delegates to them. See [Multi-Agent Concepts](multi-agent/multi-agent.md).
 
 ## Ways to create an agent
 
-Open the **Add Agent** dialog from the **Add Agent** button on your agentic integration's overview, or from the **Add Agent** action on the **Agents** node in the WSO2 Agent Builder side bar.
+Open the **Add Agent** dialog from the **Add Agent** button on your agentic integration's overview, or from the **Add Agent** action on the **Agents** node in the Choreo Agent Builder side bar.
 
 <ThemedImage
     alt="The Add Agent dialog with Create Agent, Create Durable Agent, and Create Agent Definition under Create New, and a Pre-built Agents section with All, Project, and Organization filters."
@@ -61,7 +61,7 @@ An agent runs when a trigger calls it. On the agent canvas, click **Add Trigger*
 | **Event Sources** | Runs the agent when something happens in another system. | For example Kafka, RabbitMQ, AWS SQS, Salesforce, GitHub |
 | **File Sources** | Runs the agent when a file becomes available in a location. | Azure Files, FTP / SFTP, Local Files, SMB |
 
-**Agent Chat** gives the agent an HTTP chat endpoint (for example `POST /support-agent/chat`) that you can also chat with from inside WSO2 Agent Builder. An agent can have more than one trigger. Each trigger appears under **Entry Points** in the side bar.
+**Agent Chat** gives the agent an HTTP chat endpoint (for example `POST /support-agent/chat`) that you can also chat with from inside Choreo Agent Builder. An agent can have more than one trigger. Each trigger appears under **Entry Points** in the side bar.
 
 ## What an agent looks like in the canvas
 
@@ -73,7 +73,7 @@ Select an agent under **Agents** in the side bar, or on the agentic integration'
 - **Add Tool** below the model provider, and the tools the agent can call
 
 <ThemedImage
-    alt="The agent canvas for supportAgent, showing an Agent Chat trigger on /support-agent connected to the AI Agent node, which has an Add Memory button and the agent's role and instructions, and is connected to the Default WSO2 Model Provider. Add Trigger and Add Tool buttons sit beside the node, and Evaluations and Tracing: Off buttons are at the top right."
+    alt="The agent canvas for supportAgent, showing an Agent Chat trigger on /support-agent connected to the AI Agent node, which has an Add Memory button and the agent's role and instructions, and is connected to the Default Choreo Model Provider. Add Trigger and Add Tool buttons sit beside the node, and Evaluations and Tracing: Off buttons are at the top right."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/02-agent-flow-canvas-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/agents/02-agent-flow-canvas-v1.0.png'),
@@ -86,7 +86,7 @@ From the canvas, you can configure the following components of the agent:
 - **Memory configuration**: Use **Add Memory** on the **AI Agent** node to configure conversational or persistent memory for the agent. For more information, see [Memory](memory.md).
 - **Tools**: Use **Add Tool** to add tools and MCP servers that the agent can call during execution. For more information, see [Tools](tools.md).
 - **Gated tools (HITL)**: Mark a tool as requiring approval so the agent pauses and asks a person before it runs. For more information, see [Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md).
-- **Model provider configuration**: Click the model provider node (for example, **Default WSO2 Model Provider**) to choose the provider the agent uses, or create a new one. For more information, see [Model Providers](../model-providers.md).
+- **Model provider configuration**: Click the model provider node (for example, **Default Choreo Model Provider**) to choose the provider the agent uses, or create a new one. For more information, see [Model Providers](../model-providers.md).
 
 The **Evaluations** and **Tracing: Off / On** buttons at the top right of the canvas open the agent's [evaluations](../../test/evaluations/evaluations.md) and turn [tracing](observability.md) on or off.
 
@@ -96,7 +96,7 @@ To chat with an agent that has an **Agent Chat** trigger:
 
 1. On the agent canvas, click the **Agent Chat** trigger. This opens the **Chat Agent Service** view, where the agent runs between **Start** and **Return**.
 2. Click **Chat** at the top right.
-3. If the agentic integration isn't running yet, WSO2 Agent Builder asks whether to run it. Select **Run Integration**.
+3. If the agentic integration isn't running yet, Choreo Agent Builder asks whether to run it. Select **Run Integration**.
 
 The **Agent Chat** panel opens next to the canvas. Send a message to see the agent's reply.
 
@@ -115,10 +115,10 @@ The chat reuses the same session across messages, so you can test memory-aware c
 | Symptom | Likely cause | Fix |
 |---|---|---|
 | Agent doesn't pick the tool you expected. | Tool description is vague, or the system prompt doesn't mention when to use the tool. | Tighten the tool description; add a one-liner trigger condition in Instructions. |
-| Agent's first response is empty or fails. | You aren't signed in, so the Default WSO2 Model Provider can't be used. | Sign in to WSO2 Agent Builder, then run **Configure default WSO2 model provider** from the Command Palette. |
+| Agent's first response is empty or fails. | You aren't signed in, so the Default Choreo Model Provider can't be used. | Sign in to Choreo Agent Builder, then run **Configure default Choreo model provider** from the Command Palette. |
 | Agent drifts off-topic over a long conversation. | Memory is full and trimming is dropping the system prompt context. | Lower **Max Messages Per Key** (MSSQL) or use a larger-context model. |
 | Same input produces wildly different responses. | Temperature is high on the model provider. | Lower temperature on the provider's Advanced Configurations. |
-| Running the agentic integration fails with "default model provider not configured". | `wso2aiKey` missing from `Config.toml`. | Run **Configure default WSO2 model provider** from the Command Palette again. |
+| Running the agentic integration fails with "default model provider not configured". | `wso2aiKey` missing from `Config.toml`. | Run **Configure default Choreo model provider** from the Command Palette again. |
 
 ## What's next
 

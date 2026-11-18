@@ -12,7 +12,7 @@ Enterprise-grade observability setup for Kubernetes deployments using Prometheus
 ## Architecture
 
 ```bash
-WSO2 Agent Builder agent pods
+Choreo Agent Builder agent pods
 ├── Metrics (9797) ──▶ Prometheus Operator (auto-discovers ServiceMonitor)
 │                          ▼
 │                     Prometheus StatefulSet
@@ -406,6 +406,6 @@ kubectl run -n observability prometheus-check --rm -i --restart=Never \
 ## What's Next
 
 - **[ELK Stack Recipe](elk-stack.md)** – Add advanced log aggregation
-- **[Integration Control Plane](product://integrator/icp)** – Centralized WSO2 monitoring
+- **[Integration Control Plane](product://integrator/icp)** – Centralized Choreo Labs monitoring
 - **[Metrics Overview](../metrics.md)** – Learn more about metrics
 - **[Jaeger distributed tracing](../open-source/jaeger.md)** – Learn more about tracing

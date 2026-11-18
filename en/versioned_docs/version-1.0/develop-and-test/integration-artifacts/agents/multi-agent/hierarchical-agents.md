@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Hierarchical Agents
-description: Build an orchestrator in WSO2 Agent Builder that delegates to specialist agents attached as its tools, by reusing an existing agent, creating a new one, or instantiating a shared agent definition, then test the delegation from a chat trigger.
+description: Build an orchestrator in Choreo Agent Builder that delegates to specialist agents attached as its tools, by reusing an existing agent, creating a new one, or instantiating a shared agent definition, then test the delegation from a chat trigger.
 slug: /develop-and-test/integration-artifacts/agents/multi-agent/hierarchical-agents
 ---
 
@@ -12,7 +12,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 In a hierarchical system, an orchestrator agent owns the request. It decides at run time which specialist agents to involve, hands each one a task, and combines their answers into its reply. Unlike [sequential agents](sequential-agents.md), which run every stage in a fixed order, the orchestrator calls only the specialists a request needs.
 
-In WSO2 Agent Builder, you build the hierarchy by attaching each specialist to the orchestrator as a tool. The orchestrator then treats it like any other tool: it decides when to invoke it, passes it a task, and uses what comes back.
+In Choreo Agent Builder, you build the hierarchy by attaching each specialist to the orchestrator as a tool. The orchestrator then treats it like any other tool: it decides when to invoke it, passes it a task, and uses what comes back.
 
 This page describes how to attach an agent as a tool, how to configure the result, and how to test the delegation end to end. For guidance on whether to split work across agents at all, see [Multi-Agent Concepts](multi-agent.md).
 
@@ -44,7 +44,7 @@ When you finish, the integration's **Overview** shows the hierarchy: an **Agent 
 Tools are attached on the calling agent's canvas, so start by creating an agent or opening an existing one. Select the agent under **Agents** in the project tree, or select its card on the integration's **Overview**. In the example, open `supportOrchestrator`.
 
 <ThemedImage
-    alt="The agent canvas for supportOrchestrator, showing the AI Agent node with its Customer Support Orchestrator role and instructions, an Add Memory button, Add Trigger on the left, the Default WSO2 Model Provider on the right, and Add Tool below it."
+    alt="The agent canvas for supportOrchestrator, showing the AI Agent node with its Customer Support Orchestrator role and instructions, an Add Memory button, Add Trigger on the left, the Default Choreo Model Provider on the right, and Add Tool below it."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/multi-agent/01-agent-node-canvas-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/agents/multi-agent/01-agent-node-canvas-v1.0.png'),
@@ -101,10 +101,10 @@ If the canvas shows **Start**, an `agent : run` node, and **Return**, you are lo
 
     In the example, select **returns_policy_agent** under **Pre-built Agents**.
 
-4. If you picked a pre-built agent, the **Configure Agent** step asks for the values the definition needs to create an instance: its **Model**, an optional **Memory**, any initialization parameters the definition declares, and an **Agent Name** for the new instance. In the example, keep the **Default WSO2 Model Provider**, leave **Memory** empty, and keep the generated **Agent Name**, `returnsPolicyAgent`. Click **Add Agent**.
+4. If you picked a pre-built agent, the **Configure Agent** step asks for the values the definition needs to create an instance: its **Model**, an optional **Memory**, any initialization parameters the definition declares, and an **Agent Name** for the new instance. In the example, keep the **Default Choreo Model Provider**, leave **Memory** empty, and keep the generated **Agent Name**, `returnsPolicyAgent`. Click **Add Agent**.
 
     <ThemedImage
-        alt="The Configure Agent step for ReturnsPolicyAgent, with Model set to Default WSO2 Model Provider, an empty Memory selector with a Create New Memory link, and Agent Name set to returnsPolicyAgent."
+        alt="The Configure Agent step for ReturnsPolicyAgent, with Model set to Default Choreo Model Provider, an empty Memory selector with a Create New Memory link, and Agent Name set to returnsPolicyAgent."
         sources={{
             light: useBaseUrl('/img/genai/develop/agents/multi-agent/07-configure-prebuilt-agent-v1.0.png'),
             dark: useBaseUrl('/img/genai/develop/agents/multi-agent/07-configure-prebuilt-agent-v1.0.png'),
@@ -179,7 +179,7 @@ Repeat the same steps for each specialist the orchestrator delegates to. This ti
     ```
 
     <ThemedImage
-        alt="The Create Agent form opened from the Use Agent panel, with Role set to Shipping Information Specialist, the shipping rules as Instructions, and Model set to Default WSO2 Model Provider."
+        alt="The Create Agent form opened from the Use Agent panel, with Role set to Shipping Information Specialist, the shipping rules as Instructions, and Model set to Default Choreo Model Provider."
         sources={{
             light: useBaseUrl('/img/genai/develop/agents/multi-agent/22-create-specialist-agent-v1.0.png'),
             dark: useBaseUrl('/img/genai/develop/agents/multi-agent/22-create-specialist-agent-v1.0.png'),

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Test Services and Clients
-description: Send requests to running HTTP services and mock external client dependencies in WSO2 Agent Builder.
-keywords: [wso2 agent builder, test services, test http client, mock client, integration testing]
+description: Send requests to running HTTP services and mock external client dependencies in Choreo Agent Builder.
+keywords: [choreo agent builder, test services, test http client, mock client, integration testing]
 slug: /develop-and-test/test/test-explorer/services-clients
 ---
 

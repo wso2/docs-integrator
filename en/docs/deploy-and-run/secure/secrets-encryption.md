@@ -1,8 +1,8 @@
 ---
 sidebar_position: 6
 title: Secrets and Encryption
-description: Manage secrets and configure encryption at rest and in transit for WSO2 Agent Builder services.
-keywords: [wso2 agent builder, secrets, encryption, config.toml, vault, kubernetes secrets, tls]
+description: Manage secrets and configure encryption at rest and in transit for Choreo Agent Builder services.
+keywords: [choreo agent builder, secrets, encryption, config.toml, vault, kubernetes secrets, tls]
 slug: /deploy-and-run/secure/secrets-encryption
 ---
 

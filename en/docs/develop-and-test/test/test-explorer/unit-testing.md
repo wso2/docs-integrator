@@ -1,14 +1,14 @@
 ---
 sidebar_position: 1
 title: Write Unit Tests
-description: Structure the test directory, write test functions, use assertions, and configure test-only values in WSO2 Agent Builder.
-keywords: [wso2 agent builder, unit testing, ballerina test, test:Config, assertions]
+description: Structure the test directory, write test functions, use assertions, and configure test-only values in Choreo Agent Builder.
+keywords: [choreo agent builder, unit testing, ballerina test, test:Config, assertions]
 slug: /develop-and-test/test/test-explorer/unit-testing
 ---
 
 # Write Unit Tests
 
-WSO2 Agent Builder uses the Ballerina test framework for automated testing. Test functions are placed in a dedicated `tests/` folder inside your module and discovered automatically when you run `bal test`. This page covers how to structure the test directory, how to use assertions to verify behavior, and how to supply test-only configuration values.
+Choreo Agent Builder uses the Ballerina test framework for automated testing. Test functions are placed in a dedicated `tests/` folder inside your module and discovered automatically when you run `bal test`. This page covers how to structure the test directory, how to use assertions to verify behavior, and how to supply test-only configuration values.
 
 ## Test directory structure
 

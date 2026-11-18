@@ -1,7 +1,7 @@
 ---
 title: "Built-in Capabilities"
-description: "Write, test, debug, and fix agents with WSO2 Agent Builder Copilot."
-keywords: [wso2 agent builder, copilot, ai, agent generation]
+description: "Write, test, debug, and fix agents with Choreo Agent Builder Copilot."
+keywords: [choreo agent builder, copilot, ai, agent generation]
 sidebar_position: 3
 slug: /editor/copilot/copilot-capabilities
 ---
@@ -11,10 +11,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Copilot Built-in Capabilities
 
-WSO2 Agent Builder Copilot builds agents and the integrations around them from natural language prompts. It produces ready-to-use artifacts in your project, such as agents, tools, connections, and triggers. Iterate through follow-up prompts to refine logic, add features, or modify behavior.
+Choreo Agent Builder Copilot builds agents and the integrations around them from natural language prompts. It produces ready-to-use artifacts in your project, such as agents, tools, connections, and triggers. Iterate through follow-up prompts to refine logic, add features, or modify behavior.
 
 <ThemedImage
-    alt="WSO2 Agent Builder Copilot panel showing the changes it made after adding a tool to an agent."
+    alt="Choreo Agent Builder Copilot panel showing the changes it made after adding a tool to an agent."
     sources={{
         light: useBaseUrl('/img/editor/copilot/copilot-overview-v1.0.png'),
         dark: useBaseUrl('/img/editor/copilot/copilot-overview-v1.0.png'),
@@ -169,7 +169,7 @@ To undo what Copilot changed, select **Restore Checkpoint**. It rolls your integ
 
 ## See also
 
-- [WSO2 Agent Builder Copilot](copilot.md) — Sign in to WSO2 Agent Builder Copilot.
+- [Choreo Agent Builder Copilot](copilot.md) — Sign in to Choreo Agent Builder Copilot.
 - [Copilot Chat Interface](chat-interface.md) — Chat controls, slash commands, and modes.
 - [Copilot in the Background](background-copilot.md) — Follow a run while the panel is closed.
 - [Reviewing Changes](reviewing-changes.md) — Inspect a run's changes in a unified diff.

@@ -2,7 +2,7 @@
 sidebar_position: 0
 sidebar_label: Business Use Cases
 title: Business Use Cases
-description: End-to-end tutorials that build AI agents for real business scenarios in WSO2 Agent Builder.
+description: End-to-end tutorials that build AI agents for real business scenarios in Choreo Agent Builder.
 slug: /guides/business-use-cases
 hide_table_of_contents: true
 wide_layout: true
@@ -11,7 +11,7 @@ wide_layout: true
 # Business Use Cases
 
 End-to-end tutorials that build an AI agent for a concrete business
-scenario in WSO2 Agent Builder, from creating the agentic integration
+scenario in Choreo Agent Builder, from creating the agentic integration
 to running and testing it. Each tutorial adds a different capability
 to the agent:
 

@@ -1,21 +1,21 @@
 ---
 title: GitLab CI/CD
-description: CI/CD pipeline with GitLab for WSO2 Agent Builder.
+description: CI/CD pipeline with GitLab for Choreo Agent Builder.
 slug: /deploy-and-run/cicd/gitlab
 sidebar_position: 3
 ---
 
 # GitLab CI/CD
 
-Automate build and test of your WSO2 Agent Builder projects using GitLab CI/CD pipelines.
+Automate build and test of your Choreo Agent Builder projects using GitLab CI/CD pipelines.
 
 ## Overview
 
-GitLab CI/CD uses a `.gitlab-ci.yml` file at the root of your repository to define pipeline stages. For WSO2 Agent Builder projects, the pipeline runs tests and builds the Ballerina package using the official Ballerina Docker image.
+GitLab CI/CD uses a `.gitlab-ci.yml` file at the root of your repository to define pipeline stages. For Choreo Agent Builder projects, the pipeline runs tests and builds the Ballerina package using the official Ballerina Docker image.
 
 ## Prerequisites
 
-- A GitLab project with your WSO2 Agent Builder (Ballerina) source code
+- A GitLab project with your Choreo Agent Builder (Ballerina) source code
 - GitLab Runner available (shared or project-specific)
 
 ## Pipeline configuration

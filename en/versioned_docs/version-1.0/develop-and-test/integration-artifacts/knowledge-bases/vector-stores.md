@@ -1,8 +1,8 @@
 ---
 sidebar_position: 7
 title: Vector Stores
-description: Reference for every vector store in WSO2 Agent Builder, covering create form fields, advanced configurations, query modes, and metadata filter support for In-Memory, Amazon S3 Vectors, Pinecone, pgvector, Weaviate, and Milvus.
-keywords: [wso2 agent builder, vector store, embeddings, knowledge base, in-memory, amazon s3 vectors, aws, milvus, pgvector, pinecone, weaviate]
+description: Reference for every vector store in Choreo Agent Builder, covering create form fields, advanced configurations, query modes, and metadata filter support for In-Memory, Amazon S3 Vectors, Pinecone, pgvector, Weaviate, and Milvus.
+keywords: [choreo agent builder, vector store, embeddings, knowledge base, in-memory, amazon s3 vectors, aws, milvus, pgvector, pinecone, weaviate]
 slug: /develop-and-test/integration-artifacts/knowledge-bases/vector-stores
 ---
 
@@ -13,7 +13,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 A vector database stores vector embeddings and enables similarity search over them, forming the foundation for semantic search and RAG applications.
 
-A **Vector Store** is WSO2 Agent Builder's abstraction over these databases, exposing a common interface for every supported backend.
+A **Vector Store** is Choreo Agent Builder's abstraction over these databases, exposing a common interface for every supported backend.
 
 It is the storage half of a [Knowledge Base](../knowledge-bases/knowledge-bases.md). The [Embedding Provider](embedding-providers.md) produces the vectors, and the Vector Store abstracts where and how they are persisted and retrieved at query time.
 
@@ -378,4 +378,4 @@ Selection is based on operational concerns (where your data already lives, what 
 
 - [Knowledge Bases](../knowledge-bases/knowledge-bases.md) — Combine a vector store with an embedding provider and a chunker.
 - [Chunkers](chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.
-- [How Knowledge Bases Work](../knowledge-bases/how-knowledge-bases-work.md) — Visual designer walkthrough for RAG ingestion and query in WSO2 Agent Builder.
+- [How Knowledge Bases Work](../knowledge-bases/how-knowledge-bases-work.md) — Visual designer walkthrough for RAG ingestion and query in Choreo Agent Builder.

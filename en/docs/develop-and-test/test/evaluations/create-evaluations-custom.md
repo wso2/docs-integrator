@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: Create Custom Evaluations
-description: Create custom AI agent evaluations in WSO2 Agent Builder. Fill the AI Evaluation form, optionally pick an evalset to score against, and build the checks in the visual designer.
-keywords: [wso2 agent builder, ai agent, evaluation, custom evaluation, visual designer]
+description: Create custom AI agent evaluations in Choreo Agent Builder. Fill the AI Evaluation form, optionally pick an evalset to score against, and build the checks in the visual designer.
+keywords: [choreo agent builder, ai agent, evaluation, custom evaluation, visual designer]
 slug: /develop-and-test/test/evaluations/creating-evaluations
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Create Custom Evaluations
 
-A **custom evaluation** is an evaluation function whose logic you build yourself. You start by filling a short form, and WSO2 Agent Builder opens the rest of the configuration in the visual designer. Use a custom evaluation when none of the prebuilt [evaluation templates](create-evaluations-templates.md) fits the check you need.
+A **custom evaluation** is an evaluation function whose logic you build yourself. You start by filling a short form, and Choreo Agent Builder opens the rest of the configuration in the visual designer. Use a custom evaluation when none of the prebuilt [evaluation templates](create-evaluations-templates.md) fits the check you need.
 
 :::info Prerequisites
 The example on this page scores the agent against an evalset, so have at least one evalset in your project. See [Create evalsets](evalsets.md) to capture or import one. A custom evaluation with **No evalset** does not need one.

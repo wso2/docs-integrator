@@ -1,17 +1,17 @@
 ---
 title: Jenkins
-description: CI/CD pipeline with Jenkins for WSO2 Agent Builder.
+description: CI/CD pipeline with Jenkins for Choreo Agent Builder.
 slug: /deploy-and-run/cicd/jenkins
 sidebar_position: 2
 ---
 
 # Jenkins
 
-Automate build and test of your WSO2 Agent Builder projects using Jenkins declarative pipelines.
+Automate build and test of your Choreo Agent Builder projects using Jenkins declarative pipelines.
 
 ## Overview
 
-Jenkins provides a flexible CI/CD platform that can be self-hosted or run in the cloud. For WSO2 Agent Builder projects, a Jenkins pipeline runs tests and builds the Ballerina project using the official `ballerina/ballerina` Docker image as the build agent.
+Jenkins provides a flexible CI/CD platform that can be self-hosted or run in the cloud. For Choreo Agent Builder projects, a Jenkins pipeline runs tests and builds the Ballerina project using the official `ballerina/ballerina` Docker image as the build agent.
 
 ## Prerequisites
 

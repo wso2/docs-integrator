@@ -2,7 +2,7 @@
 title: Integration Control Plane(ICP) Support in Editor
 sidebar_label: ICP Support
 description: Run a local Integration Control Plane (ICP) server from the editor to observe and manage your agentic integrations while you develop them.
-keywords: [wso2 agent builder, icp, integration control plane, observability, monitoring, local development]
+keywords: [choreo agent builder, icp, integration control plane, observability, monitoring, local development]
 sidebar_position: 6
 slug: /editor/integration-control-plane
 ---
@@ -12,7 +12,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Integration Control Plane(ICP) Support in  Editor
 
-The WSO2 Agent Builder editor can start a local **Integration Control Plane (ICP)** server so you can observe and manage your agentic integrations while you are still developing them. Enable ICP for an agentic integration, run it as usual, and its runtime shows up in the ICP console.
+The Choreo Agent Builder editor can start a local **Integration Control Plane (ICP)** server so you can observe and manage your agentic integrations while you are still developing them. Enable ICP for an agentic integration, run it as usual, and its runtime shows up in the ICP console.
 
 :::info
 The local ICP server is meant for development and trying ICP out. To monitor and manage integrations that are deployed, see the [Integration Control Plane documentation](product://integrator/icp).
@@ -69,7 +69,7 @@ When the server is up, the editor shows a notification with its address, `https:
 />
 
 :::note
-If an agent in the agentic integration uses the WSO2 default model provider and it isn't configured yet, the editor asks you to configure it before the run starts. Select **Configure Now** and sign in to continue. Otherwise, the run is cancelled.
+If an agent in the agentic integration uses the Choreo default model provider and it isn't configured yet, the editor asks you to configure it before the run starts. Select **Configure Now** and sign in to continue. Otherwise, the run is cancelled.
 :::
 
 ## Run and observe your agentic integration

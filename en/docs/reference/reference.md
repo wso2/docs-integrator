@@ -2,7 +2,7 @@
 sidebar_position: 0
 sidebar_label: Reference
 title: Reference
-description: "FAQ and glossary for WSO2 Agent Builder."
+description: "FAQ and glossary for Choreo Agent Builder."
 slug: /reference
 hide_table_of_contents: true
 wide_layout: true

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: "Get an Agent Result"
-description: Read a durable agent instance's final result in WSO2 Agent Builder, either waiting until the run finishes or checking back while it's still working.
-keywords: [wso2 agent builder, durable agent, get agent result, final result, instance id, agentbusyerror, status endpoint, durable agentic workflow]
+description: Read a durable agent instance's final result in Choreo Agent Builder, either waiting until the run finishes or checking back while it's still working.
+keywords: [choreo agent builder, durable agent, get agent result, final result, instance id, agentbusyerror, status endpoint, durable agentic workflow]
 slug: /develop-and-test/integration-artifacts/durable-agentic-workflow/get-agent-result
 ---
 

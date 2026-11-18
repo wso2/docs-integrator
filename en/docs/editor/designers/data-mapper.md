@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: Data Mapper
-description: Map fields between source and target types visually in WSO2 Agent Builder, without writing transformation code.
+description: Map fields between source and target types visually in Choreo Agent Builder, without writing transformation code.
 slug: /editor/designers/data-mapper
 ---
 
@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Data Mapper
 
-The Data Mapper is the visual surface you open for any data transformation in WSO2 Agent Builder. It shows the source types on the left, the target type on the right, and the mapping area between them, so you can map fields by creating links or filling expressions instead of writing the conversion function manually. A data mapper is a typed function with one or more inputs and a single output. Every change you make here is reflected in the underlying source.
+The Data Mapper is the visual surface you open for any data transformation in Choreo Agent Builder. It shows the source types on the left, the target type on the right, and the mapping area between them, so you can map fields by creating links or filling expressions instead of writing the conversion function manually. A data mapper is a typed function with one or more inputs and a single output. Every change you make here is reflected in the underlying source.
 
 <ThemedImage
     alt="Data Mapper for the transform function, with Global Inputs and the 'order Order input on the left, the OrderSummary output on the right, and links mapping orderId, customer name and email, items, and status."
@@ -22,7 +22,7 @@ The Data Mapper is the visual surface you open for any data transformation in WS
 
 ## Create a data mapper
 
-In WSO2 Agent Builder, you create a data mapper from a flow, for example the flow of a resource behind an agent's HTTP trigger.
+In Choreo Agent Builder, you create a data mapper from a flow, for example the flow of a resource behind an agent's HTTP trigger.
 
 1. In the [Flow Canvas](../canvases/flow-canvas/flow-canvas.md), select **+** where you want the mapping, then select **Map Data** under **Statement**.
 
@@ -199,10 +199,10 @@ The mapping area is the central region between the input and output sides. Links
 
 ## Auto Map
 
-**Auto Map** in the header opens the WSO2 Agent Builder Copilot panel alongside the data mapper, with a `/data-map` request for the current data mapper prefilled (for example, `/data-map generate mappings for the @transform function`). Submit it to let the Copilot read the project files and generate field mappings based on the input and output types. When complete, mapping lines appear in the data mapper.
+**Auto Map** in the header opens the Choreo Agent Builder Copilot panel alongside the data mapper, with a `/data-map` request for the current data mapper prefilled (for example, `/data-map generate mappings for the @transform function`). Submit it to let the Copilot read the project files and generate field mappings based on the input and output types. When complete, mapping lines appear in the data mapper.
 
 <ThemedImage
-    alt="Auto Map button highlighted in the data mapper header, and the WSO2 Agent Builder Copilot panel with /data-map generate mappings for the @transform function highlighted in the input box."
+    alt="Auto Map button highlighted in the data mapper header, and the Choreo Agent Builder Copilot panel with /data-map generate mappings for the @transform function highlighted in the input box."
     sources={{
         light: useBaseUrl('/img/editor/designers/data-mapper-v1.0/15-auto-map-v1.0.png'),
         dark: useBaseUrl('/img/editor/designers/data-mapper-v1.0/15-auto-map-v1.0.png'),

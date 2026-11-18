@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: "Run a Durable Agent"
-description: Start a durable agent instance from a flow in WSO2 Agent Builder and bind its instance ID, so later steps can send it turns and read its result.
-keywords: [wso2 agent builder, durable agent, run durable agent, start agent, instance id, durable agentic workflow, http trigger]
+description: Start a durable agent instance from a flow in Choreo Agent Builder and bind its instance ID, so later steps can send it turns and read its result.
+keywords: [choreo agent builder, durable agent, run durable agent, start agent, instance id, durable agentic workflow, http trigger]
 slug: /develop-and-test/integration-artifacts/durable-agentic-workflow/run-durable-agent
 ---
 

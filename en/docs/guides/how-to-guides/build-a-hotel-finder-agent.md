@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: "Build a Hotel Finder Agent"
-description: Build a conversational hotel finder agent with two custom tools and a chat endpoint in WSO2 Agent Builder.
-keywords: [wso2 agent builder, ai agent, hotel finder, custom tools, llm, ballerina ai, genai]
+description: Build a conversational hotel finder agent with two custom tools and a chat endpoint in Choreo Agent Builder.
+keywords: [choreo agent builder, ai agent, hotel finder, custom tools, llm, ballerina ai, genai]
 slug: /guides/how-to-guides/build-a-hotel-finder-agent
 card_icon: agents
 card_summary: An agent with two custom tools, exposed through an Agent Chat trigger
@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 
 :::info Prerequisites
 
-- [WSO2 Agent Builder installed](../../get-started/setup.md)
+- [Choreo Agent Builder installed](../../get-started/setup.md)
 
 :::
 
@@ -29,7 +29,7 @@ import TabItem from '@theme/TabItem';
 
 ## Step 1: Create the agentic integration
 
-1. Open WSO2 Agent Builder and select **Create** under **Start Building your Agent**.
+1. Open Choreo Agent Builder and select **Create** under **Start Building your Agent**.
 2. Set **Project name** to `AI-Integrations` and choose a **Location**.
 3. Under **What do you want to build?**, keep **Agentic Integration** selected.
 4. Set **Agentic integration name** to `HotelFinder`.
@@ -45,12 +45,12 @@ import TabItem from '@theme/TabItem';
 
 ## Step 2: Create the agent
 
-The integration opens with the WSO2 Agent Builder Copilot, which asks **What should your agent do?** Skip it for this guide and build the agent manually.
+The integration opens with the Choreo Agent Builder Copilot, which asks **What should your agent do?** Skip it for this guide and build the agent manually.
 
 1. Under **Or start from scratch**, select **Add Agent**.
 
 <ThemedImage
-    alt="HotelFinder integration home page showing the WSO2 Agent Builder Copilot prompt, example agents, and the Add Agent and Add MCP Server buttons under Or start from scratch"
+    alt="HotelFinder integration home page showing the Choreo Agent Builder Copilot prompt, example agents, and the Add Agent and Add MCP Server buttons under Or start from scratch"
     sources={{
         light: useBaseUrl('/img/genai/getting-started/build-a-hotel-finder-agent-v1.0/02-integration-home-v1.0.png'),
         dark: useBaseUrl('/img/genai/getting-started/build-a-hotel-finder-agent-v1.0/02-integration-home-v1.0.png'),
@@ -93,7 +93,7 @@ The integration opens with the WSO2 Agent Builder Copilot, which asks **What sho
     }}
 />
 
-5. Keep the model as the **Default WSO2 Model Provider**, and leave the remaining agent settings at their defaults.
+5. Keep the model as the **Default Choreo Model Provider**, and leave the remaining agent settings at their defaults.
 6. Set **Agent Name** to `HotelFinderAssistant`.
 7. Select **Create Agent**.
 
@@ -107,16 +107,16 @@ The integration opens with the WSO2 Agent Builder Copilot, which asks **What sho
 
 :::tip Default model provider
 
-By default, the agent uses the WSO2 model provider, so no third-party API key is required. Sign in to WSO2 Agent Builder if prompted.
+By default, the agent uses the Choreo Model Provider, so no third-party API key is required. Sign in to Choreo Agent Builder if prompted.
 
 To use a different LLM instead, see [Model providers](../../develop-and-test/integration-artifacts/model-providers.md) for the full list of supported providers (OpenAI, Anthropic, Azure OpenAI, and others).
 
 :::
 
-The agent canvas for `HotelFinderAssistant` opens. The **AI Agent** node is connected to **Default WSO2 Model Provider**, with **Add Trigger** on its left and **Add Tool** at its bottom-right corner.
+The agent canvas for `HotelFinderAssistant` opens. The **AI Agent** node is connected to **Default Choreo Model Provider**, with **Add Trigger** on its left and **Add Tool** at its bottom-right corner.
 
 <ThemedImage
-    alt="AI Agent canvas for HotelFinderAssistant connected to the Default WSO2 Model Provider, with Add Trigger, Add Memory, and Add Tool options"
+    alt="AI Agent canvas for HotelFinderAssistant connected to the Default Choreo Model Provider, with Add Trigger, Add Memory, and Add Tool options"
     sources={{
         light: useBaseUrl('/img/genai/getting-started/build-a-hotel-finder-agent-v1.0/06-ai-agent-canvas-v1.0.png'),
         dark: useBaseUrl('/img/genai/getting-started/build-a-hotel-finder-agent-v1.0/06-ai-agent-canvas-v1.0.png'),
@@ -332,7 +332,7 @@ The tool now appears as a node connected to the agent. Select it to open its flo
 Return to the agent canvas. The agent now shows both tools connected.
 
 <ThemedImage
-    alt="HotelFinderAssistant agent canvas showing the AI Agent node connected to the Default WSO2 Model Provider and to the searchHotels and checkAvailability tools"
+    alt="HotelFinderAssistant agent canvas showing the AI Agent node connected to the Default Choreo Model Provider and to the searchHotels and checkAvailability tools"
     sources={{
         light: useBaseUrl('/img/genai/getting-started/build-a-hotel-finder-agent-v1.0/17-agent-with-tools-v1.0.png'),
         dark: useBaseUrl('/img/genai/getting-started/build-a-hotel-finder-agent-v1.0/17-agent-with-tools-v1.0.png'),
@@ -420,7 +420,7 @@ type Availability record {|
 
 <h2> Step 2: Define tools and create the agent </h2>
 
-Create a file named `agents.bal`. Each tool is an `isolated` function annotated with `@ai:AgentTool`. The LLM uses the summary line and `+ param - description` lines from the Ballerina doc comment to decide when and how to call the tool. The model provider is initialized inline with `ai:getDefaultModelProvider()`, so no separate connections file is needed for the default WSO2 model provider.
+Create a file named `agents.bal`. Each tool is an `isolated` function annotated with `@ai:AgentTool`. The LLM uses the summary line and `+ param - description` lines from the Ballerina doc comment to decide when and how to call the tool. The model provider is initialized inline with `ai:getDefaultModelProvider()`, so no separate connections file is needed for the default Choreo model provider.
 
 :::note
 

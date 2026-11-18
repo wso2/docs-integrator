@@ -1,8 +1,8 @@
 ---
 sidebar_position: 7
 title: IP Whitelisting
-description: Configure IP-based access control to restrict service access to trusted addresses in WSO2 Agent Builder.
-keywords: [wso2 agent builder, ip whitelisting, ip filtering, cidr, network policy, access control]
+description: Configure IP-based access control to restrict service access to trusted addresses in Choreo Agent Builder.
+keywords: [choreo agent builder, ip whitelisting, ip filtering, cidr, network policy, access control]
 slug: /deploy-and-run/secure/ip-whitelisting
 ---
 

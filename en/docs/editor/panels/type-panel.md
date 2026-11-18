@@ -2,7 +2,7 @@
 sidebar_position: 4
 title: Type Panel
 description: Define and edit records, enums, unions, arrays, and service classes used across your project.
-keywords: [wso2 agent builder, type panel, record, enum, union, array, service class, import json, import xml]
+keywords: [choreo agent builder, type panel, record, enum, union, array, service class, import json, import xml]
 slug: /editor/panels/type-panel
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Type Panel
 
-The Type Panel is the side panel you open whenever you create or change a custom type in WSO2 Agent Builder. It gives you one form to define records, enums, unions, arrays, and service classes, configure each member or field, and toggle advanced options such as additional fields and read-only types. Every change you save in the panel updates the type's Ballerina source and the type card on the [Type Canvas](../canvases/type-canvas.md).
+The Type Panel is the side panel you open whenever you create or change a custom type in Choreo Agent Builder. It gives you one form to define records, enums, unions, arrays, and service classes, configure each member or field, and toggle advanced options such as additional fields and read-only types. Every change you save in the panel updates the type's Ballerina source and the type card on the [Type Canvas](../canvases/type-canvas.md).
 
 For a canvas-level view of how all the types in your project relate to each other, see the [Type Canvas](../canvases/type-canvas.md).
 

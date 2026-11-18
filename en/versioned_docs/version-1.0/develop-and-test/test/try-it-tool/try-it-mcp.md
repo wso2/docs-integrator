@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: Test MCP Server
-description: Invoke MCP tools and inspect responses using the built-in MCP Inspector in WSO2 Agent Builder.
-keywords: [wso2 agent builder, try-it, mcp server, model context protocol, mcp inspector, test mcp tools]
+description: Invoke MCP tools and inspect responses using the built-in MCP Inspector in Choreo Agent Builder.
+keywords: [choreo agent builder, try-it, mcp server, model context protocol, mcp inspector, test mcp tools]
 slug: /develop-and-test/test/try-it-tool/try-it-mcp
 ---
 
@@ -35,7 +35,7 @@ The left panel controls how the inspector connects to your MCP server.
 
 | Field | Description |
 |---|---|
-| **Transport Type** | The protocol used to communicate with the server. Defaults to **Streamable HTTP** for MCP services built with WSO2 Agent Builder. |
+| **Transport Type** | The protocol used to communicate with the server. Defaults to **Streamable HTTP** for MCP services built with Choreo Agent Builder. |
 | **URL** | The endpoint of your running MCP server, for example `http://localhost:9090/mcp`. |
 | **Connection Type** | How the inspector routes requests. **Via Proxy** is the default and works for local development. |
 | **Authentication** | Expandable section to configure authentication credentials if your server requires them. |
