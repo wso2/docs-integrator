@@ -52,8 +52,8 @@ The platform separates how you develop an integration from where it runs and how
 <ThemedImage
     alt="Choreo Integration Platform architecture: development tools, control plane, data plane and observability plane, connecting developers, operators, consumers and enterprise systems"
     sources={{
-        light: useBaseUrl('/img/platform-overview/wso2-integration-platform-architecture-v5.1.png'),
-        dark: useBaseUrl('/img/platform-overview/wso2-integration-platform-architecture-v5.1.png'),
+        light: useBaseUrl('/img/platform-overview/choreo-platform-architecture-v1.0.png'),
+        dark: useBaseUrl('/img/platform-overview/choreo-platform-architecture-v1.0.png'),
     }}
 />
 
@@ -76,8 +76,8 @@ AI serves two roles in the platform: it assists developers in building integrati
 <ThemedImage
     alt="AI assists developers in building integrations, and it can participate in execution through AI services and agents"
     sources={{
-        light: useBaseUrl('/img/platform-overview/ai-in-integration-v5.1.png'),
-        dark: useBaseUrl('/img/platform-overview/ai-in-integration-v5.1.png'),
+        light: useBaseUrl('/img/platform-overview/choreo-ai-in-integration-v1.0.png'),
+        dark: useBaseUrl('/img/platform-overview/choreo-ai-in-integration-v1.0.png'),
     }}
 />
 
@@ -150,10 +150,10 @@ Integrations developed in Choreo Integrator and agents developed in Choreo Agent
 | Private or hybrid | A private data plane or dedicated infrastructure | Choreo Labs manages control and observability capabilities centrally | Runtime infrastructure responsibility depends on the selected arrangement. |
 
 <ThemedImage
-    alt="Deployment models: self-hosted, where you run both the control plane (ICP) and the data plane, and Choreo Cloud (iPaaS), where Choreo Labs manages the control plane and you choose a cloud or private data plane"
+    alt="Deployment models: self-hosted, where you run both the control plane (ICP) and the data plane, and Choreo Cloud (iPaaS), where Choreo manages the control plane and you choose a cloud or private data plane"
     sources={{
-        light: useBaseUrl('/img/platform-overview/deployment-models-v5.1.png'),
-        dark: useBaseUrl('/img/platform-overview/deployment-models-v5.1.png'),
+        light: useBaseUrl('/img/platform-overview/choreo-deployment-options-v1.0.png'),
+        dark: useBaseUrl('/img/platform-overview/choreo-deployment-options-v1.0.png'),
     }}
 />
 
@@ -173,8 +173,8 @@ The platform supports a continuous integration lifecycle:
 <ThemedImage
     alt="Integration lifecycle with Choreo Integration Platform"
     sources={{
-        light: useBaseUrl('/img/platform-overview/integration-lifecycle-v5.1.png'),
-        dark: useBaseUrl('/img/platform-overview/integration-lifecycle-v5.1.png'),
+        light: useBaseUrl('/img/platform-overview/choreo-integration-lifecycle-v1.0.png'),
+        dark: useBaseUrl('/img/platform-overview/choreo-integration-lifecycle-v1.0.png'),
     }}
 />
 
