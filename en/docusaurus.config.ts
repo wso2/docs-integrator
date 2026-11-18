@@ -18,7 +18,7 @@ import {
 } from './src/theme-shared/themeConfig';
 
 const config: Config = {
-  title: 'WSO2 Agent Builder',
+  title: 'Choreo Agent Builder',
   tagline: 'Build, evaluate, and deploy AI agents with Copilot — powered by your Agent Manager\'s LLMs and MCP tools',
   favicon: 'img/favicon.ico',
 
@@ -194,7 +194,7 @@ const config: Config = {
           href: 'https://github.com/wso2/product-agent-builder/releases',
           position: 'right',
           className: 'navbar-download-btn',
-          'aria-label': 'Download WSO2 Agent Builder',
+          'aria-label': 'Download Choreo Agent Builder',
         },
       ],
     },
