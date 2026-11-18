@@ -91,6 +91,7 @@ Organization-level governance, separate from day-to-day integration work.
   <ul class="palette-card-list">
     <li>Analyze usage across your organization</li>
     <li>Pricing and plans for platform services</li>
+    <li>Plan entitlements and usage limits</li>
   </ul>
 
 <PaletteCard icon="audit" href="/manage/audit/audit-logs">

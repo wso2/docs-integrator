@@ -129,6 +129,10 @@ The XML that SAP sends has the IDoc type as its root element, for example ``, wi
         }}
     />
 
+    :::tip Generate the IDoc types from the XSD
+    To get types for every segment and field instead of a sample, download the IDoc's XML schema in SAP with transaction `WE60` (enter the basic type, then **Documentation > XML Schema**), and generate the types with the [XSD tool](../../develop-and-test/developer-tools/integration-tools/xsd-tool.md): `bal xsd MATMAS05.xsd`. The generated fields are all `string` and repeating segments are arrays, so no type fixes are needed, but the field paths differ from the ones in this guide.
+    :::
+
 3. The import infers `DOCNUM` as `int`, which would drop the leading zeros of the IDoc number. In the type diagram, open the **⋮** menu on the **EDI_DC40** card and select **Edit**. Change the type of `DOCNUM` to `string`, and select **Save**.
 
     <ThemedImage
