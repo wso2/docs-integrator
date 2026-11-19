@@ -208,10 +208,10 @@ In the left panel, select **Configurations**. In the Configurable Variables pane
 #### Step 2: Select the Azure Blob Storage integration type
 
 1. Select the **+** button in the WSO2 Integrator side panel header to open the **New Integration** wizard (on an empty project, the **+ Add Integration or Library** button in the project view opens the same wizard), and continue to the **Type** step.
-2. Scroll to the **File Integration** category, select the **Azure Blob Storage** card, and select **Next**.
+2. Scroll to the **File Integration** category, select the **Azure Blobs** card, and select **Next**.
 
 <ThemedImage
-    alt="New Integration wizard with the Azure Blob Storage card selected"
+    alt="New Integration wizard with the Azure Blobs card selected"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/storage-file/azure.storage.blob/azure_blob_trigger_screenshots_01_new_integration_wizard.png'),
         dark: useBaseUrl('/img/connectors/catalog/storage-file/azure.storage.blob/azure_blob_trigger_screenshots_01_new_integration_wizard.png'),
