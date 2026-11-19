@@ -995,9 +995,9 @@ service on agentCoreListener {
 
 The compiler checks the service: it must declare `get ping` and `post invocations`, no other resource or remote function, and it must be attached at the root path. The payload type must be one a JSON body can hold, so `xml`, `table`, and `string:RegExp` are rejected. A request body that doesn't match `InvocationRequest` is answered with `400` before the resource runs.
 
-In WSO2 Agent Builder, the agent's canvas shows the service as the agent's trigger, next to its model, memory, and tools:
+To add the service from WSO2 Agent Builder, select **Add Trigger** on the agent's canvas and choose **Amazon Bedrock AgentCore** under **AI Platforms**. Then make the generated `post invocations` resource use the memory key shown above.
 
-![An agent's canvas in WSO2 Agent Builder, with the agentcore:InvocationService trigger highlighted on the left of the AI Agent node](/img/deploy-and-run/self-hosted/03-agentcore-agent-canvas-v1.0.png)
+![The Add Trigger dialog in WSO2 Agent Builder, with Amazon Bedrock AgentCore under AI Platforms highlighted](/img/deploy-and-run/self-hosted/03-agentcore-add-trigger-v1.0.png)
 
 :::caution Conversations last only as long as the microVM
 The agent keeps its conversation memory inside the container. By default, AgentCore Runtime stops a session's microVM after 15 minutes without an invocation or after 8 hours of compute lifetime, and it also stops one that fails its health check. A later call with the same session id starts a new microVM with a fresh lifetime, and the agent no longer remembers the conversation. It doesn't report an error.
