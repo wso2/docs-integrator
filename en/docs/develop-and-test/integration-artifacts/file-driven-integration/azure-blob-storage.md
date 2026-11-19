@@ -27,10 +27,10 @@ One flow creates the listener and the service together; the authentication metho
 
 1. Click **+** in the WSO2 Integrator side panel header to open the **New Integration** wizard (on an empty project, the **+ Add Integration or Library** button in the project view opens the same wizard), and continue to the **Type** step.
 
-2. Scroll to the **File Integration** category, select the **Azure Blob Storage** card, and click **Next**.
+2. Scroll to the **File Integration** category, select the **Azure Blobs** card, and click **Next**.
 
    <ThemedImage
-       alt="New Integration wizard with the Azure Blob Storage card selected"
+       alt="New Integration wizard with the Azure Blobs card selected"
        sources={{
            light: useBaseUrl('/img/connectors/catalog/storage-file/azure.storage.blob/azure_blob_trigger_screenshots_01_new_integration_wizard.png'),
            dark: useBaseUrl('/img/connectors/catalog/storage-file/azure.storage.blob/azure_blob_trigger_screenshots_01_new_integration_wizard.png'),
