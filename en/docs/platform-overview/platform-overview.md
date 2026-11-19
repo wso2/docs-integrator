@@ -41,9 +41,9 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Overview
 
-## What is Choreo Integration Platform?
+## What is Choreo Integration?
 
-Choreo Integration Platform is a platform for building, running, and managing integrations that connect applications, APIs, data, events, and AI agents across cloud, on-premises, and hybrid environments. It is built on open-source foundations and open standards, and is available both as a fully managed service and as a self-hosted deployment.
+Choreo Integration is a platform for building, running, and managing integrations that connect applications, APIs, data, events, and AI agents across cloud, on-premises, and hybrid environments. It is built on open-source foundations and open standards, and is available both as a fully managed service and as a self-hosted deployment.
 
 It supports the integration lifecycle, from development and testing through deployment, management, and observability. Visual design, source code, AI assistance, and enterprise connectivity work together in a consistent development experience.
 
@@ -116,7 +116,7 @@ Like Choreo Integrator, Choreo Agent Builder is powered by [Ballerina](https://b
 
 Choreo Agent Manager is where you deploy, run, and observe your agents. Agents built in Choreo Agent Builder can be deployed on Choreo Agent Manager, or registered there when they run on your own infrastructure, so their traces appear in one place.
 
-### Choreo Cloud (Choreo iPaaS)
+### Choreo Cloud
 
 [Choreo Cloud](https://console.devant.dev/) is a managed environment for building and running integrations. Choreo Labs operates the underlying infrastructure, allowing your team to focus on integration development.
 
