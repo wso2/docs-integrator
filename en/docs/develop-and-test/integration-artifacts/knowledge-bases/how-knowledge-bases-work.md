@@ -3,7 +3,7 @@ sidebar_position: 1
 sidebar_label: How Knowledge Bases Work
 title: How Knowledge Bases Work
 description: Ground agent responses in your own documents with knowledge bases. Ingest documents into a knowledge base, then let an agent retrieve the relevant content at query time using Retrieval-Augmented Generation (RAG).
-keywords: [wso2 integrator, knowledge base, rag, retrieval-augmented generation, ingestion, retrieval, agent tool]
+keywords: [choreo integrator, knowledge base, rag, retrieval-augmented generation, ingestion, retrieval, agent tool]
 slug: /develop-and-test/integration-artifacts/knowledge-bases/how-knowledge-bases-work
 ---
 
@@ -26,16 +26,16 @@ A knowledge base is used in two stages:
 <ThemedImage
     alt="Knowledge base stages. Ingestion, run once: Documents go to a Chunker, then an Embedding Provider, and are stored in the Vector Store that backs the knowledge base. Retrieval, run per request: a User question goes to an Embedding Provider, relevant chunks are retrieved from the Vector Store, the prompt is augmented with them, and the LLM returns a Response."
     sources={{
-        light: useBaseUrl('/img/genai/develop/knowledge-bases/how-knowledge-bases-work-v1.0.png'),
-        dark: useBaseUrl('/img/genai/develop/knowledge-bases/how-knowledge-bases-work-v1.0.png'),
+        light: useBaseUrl('/img/genai/develop/knowledge-bases/choreo-how-knowledge-bases-work-v1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/knowledge-bases/choreo-how-knowledge-bases-work-v1.0.png'),
     }}
 />
 
 1. **Ingestion**: Documents are split into chunks, converted into vector embeddings, and stored in the knowledge base.
 2. **Retrieval**: When a user asks a question, the most relevant chunks are retrieved by semantic similarity and injected into the prompt alongside the question. The model answers using only that retrieved context.
 
-## Knowledge bases in WSO2 Integrator
+## Knowledge bases in Choreo Integrator
 
-- **[Knowledge bases overview](knowledge-bases.md)**: Every supported provider, including the Vector, AWS Bedrock, Azure AI Search, and WSO2 Cloud knowledge bases.
+- **[Knowledge bases overview](knowledge-bases.md)**: Every supported provider, including the Vector, AWS Bedrock, Azure AI Search, and Choreo Cloud knowledge bases.
 - **[Use with an agent](use-with-an-agent.md)**: Give an agent the knowledge base's Retrieve action as a tool so it can search indexed content and generate a grounded response.
-- **[Ingest documents](ingest-documents.md)**: Load your documents into the knowledge base before the agent uses it. Ingestion happens in WSO2 Cloud or with your knowledge base provider, not in the agent.
+- **[Ingest documents](ingest-documents.md)**: Load your documents into the knowledge base before the agent uses it. Ingestion happens in Choreo Cloud or with your knowledge base provider, not in the agent.

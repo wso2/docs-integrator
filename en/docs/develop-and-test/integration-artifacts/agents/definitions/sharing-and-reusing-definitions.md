@@ -119,7 +119,7 @@ Use the search box to filter by name.
 
 ## Use a shared definition
 
-Select the definition under **Pre-built Agents**. WSO2 Agent Builder adds the package as a dependency and opens the **Configure Agent** step, where you supply its model provider, memory, and any [initialization parameters](definitions.md#initialization-parameters) it declares.
+Select the definition under **Pre-built Agents**. Choreo Agent Builder adds the package as a dependency and opens the **Configure Agent** step, where you supply its model provider, memory, and any [initialization parameters](definitions.md#initialization-parameters) it declares.
 
 The definition can be used in two places:
 

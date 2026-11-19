@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Integration View
 description: Work with the Integration view to build and manage individual agentic integrations.
-keywords: [wso2 agent builder, editor, integration view, agents, triggers, deployment]
+keywords: [choreo agent builder, editor, integration view, agents, triggers, deployment]
 slug: /editor/views/integration-view
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Integration View
 
-The Integration view is the primary development interface in WSO2 Agent Builder. Use it to build, test, and deploy a single agentic integration. It combines a project explorer, a visual overview canvas, and deployment options in one unified workspace.
+The Integration view is the primary development interface in Choreo Agent Builder. Use it to build, test, and deploy a single agentic integration. It combines a project explorer, a visual overview canvas, and deployment options in one unified workspace.
 
 <ThemedImage
     alt="Integration view overview"
@@ -58,7 +58,7 @@ Select **Find** at the top right of the canvas, or press **/**, to search for en
 
 ### Build with Copilot
 
-Describe what you want in natural language, and [WSO2 Agent Builder Copilot](../copilot/copilot.md) generates the agentic integration with the appropriate agents, triggers, and tools.
+Describe what you want in natural language, and [Choreo Agent Builder Copilot](../copilot/copilot.md) generates the agentic integration with the appropriate agents, triggers, and tools.
 
 - **New agentic integration**: The canvas shows the Copilot composer. Describe what you want your agent to do and send it, or pick one of the **Examples**. To build it yourself, select **Add Agent** or **Add MCP Server** under **Or start from scratch**.
 
@@ -73,7 +73,7 @@ Describe what you want in natural language, and [WSO2 Agent Builder Copilot](../
 - **Agentic integration with artifacts**: Select the Copilot orb in the bottom-left corner of the canvas to open Copilot.
 
   <ThemedImage
-      alt="The WSO2 Agent Builder Copilot orb on the integration overview."
+      alt="The Choreo Agent Builder Copilot orb on the integration overview."
       sources={{
           light: useBaseUrl('/img/editor/views/integration-view/copilot-orb-v1.0.png'),
           dark: useBaseUrl('/img/editor/views/integration-view/copilot-orb-v1.0.png'),
@@ -106,7 +106,7 @@ The toolbar sits at the top of the Integration view and provides quick access to
 | **Undo** / **Redo** | Reverses or reapplies recent changes. Works across both the visual designer and the code editor. |
 | **Configure** | Opens the configuration panel, equivalent to adding a configuration from the project explorer. |
 | **Tracing** | Turns tracing on or off for the agentic integration. The button shows the current state, for example **Tracing: Off**. |
-| **Run** | Builds and runs your agentic integration locally. WSO2 Agent Builder compiles the Ballerina code, starts the services, and displays the output in the terminal panel. |
+| **Run** | Builds and runs your agentic integration locally. Choreo Agent Builder compiles the Ballerina code, starts the services, and displays the output in the terminal panel. |
 | **Deploy** | Shows or hides the deploy panel on the right side of the view. |
 
 ## Deploy panel
@@ -131,8 +131,8 @@ Select **Deploy** in the toolbar to open the deploy panel on the right side of t
 
 | Option | Target |
 |---|---|
-| **WSO2 Agent Manager** | Deploy the agent on WSO2 Agent Manager. Select **Connect to Agent Manager** to sign in to your Agent Manager instance. |
-| [**WSO2 Cloud**](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) | Fully managed cloud platform for hosting and running agentic integrations. |
+| **Choreo Agent Manager** | Deploy the agent on Choreo Agent Manager. Select **Connect to Agent Manager** to sign in to your Agent Manager instance. |
+| [**Choreo Cloud**](../../deploy-and-run/deploy-to-choreo-cloud/deploy-to-choreo-cloud.md) | Fully managed cloud platform for hosting and running agentic integrations. |
 | [**Docker Image**](product://integrator/deploy-and-run/self-hosted/containerized-deployment) | Build Docker images to deploy on Docker, Kubernetes, or OpenShift. |
 | [**Virtual Machine**](product://integrator/deploy-and-run/self-hosted/vm-deployment) | Deploy agentic integrations as standalone JAR files on virtual machines. |
 
@@ -142,4 +142,4 @@ The panel also includes a **Management** section for monitoring and managing you
 
 - [Flow Canvas](../canvases/flow-canvas/flow-canvas.md) — Build logic using the visual designer.
 - [Integration artifacts](../../develop-and-test/develop-and-test.md) — Learn about artifact types and their configuration.
-- [Deploy to WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) — Deploy your agentic integration to the cloud.
+- [Deploy to Choreo Cloud](../../deploy-and-run/deploy-to-choreo-cloud/deploy-to-choreo-cloud.md) — Deploy your agentic integration to the cloud.

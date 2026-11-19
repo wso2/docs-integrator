@@ -1,14 +1,14 @@
 ---
 title: Containerized Deployment
-description: Deploy WSO2 Agent Builder projects to Docker, Kubernetes, and Red Hat OpenShift using the Ballerina Code to Cloud feature.
-keywords: [wso2 agent builder, docker, kubernetes, openshift, containerized deployment, code to cloud, bal build, cloud.toml]
+description: Deploy Choreo Agent Builder projects to Docker, Kubernetes, and Red Hat OpenShift using the Ballerina Code to Cloud feature.
+keywords: [choreo agent builder, docker, kubernetes, openshift, containerized deployment, code to cloud, bal build, cloud.toml]
 slug: /deploy-and-run/self-hosted/containerized-deployment
 sidebar_position: 1
 ---
 
 # Containerized Deployment
 
-WSO2 Agent Builder leverages the Ballerina Code to Cloud feature to generate containerized deployment artifacts directly from your source code. You can target Docker, Kubernetes, or Red Hat OpenShift without writing deployment descriptors by hand. The compiler derives images and manifests from your code and the optional `Cloud.toml` configuration file.
+Choreo Agent Builder leverages the Ballerina Code to Cloud feature to generate containerized deployment artifacts directly from your source code. You can target Docker, Kubernetes, or Red Hat OpenShift without writing deployment descriptors by hand. The compiler derives images and manifests from your code and the optional `Cloud.toml` configuration file.
 
 ## Supported platforms
 
@@ -25,7 +25,7 @@ The Code to Cloud feature supports the following containerized deployment platfo
 ## Prerequisites {#general-prerequisites}
 
 - [Docker](https://www.docker.com/) installed and running on your build machine
-- A WSO2 Agent Builder project based on Ballerina
+- A Choreo Agent Builder project based on Ballerina
 - For Kubernetes: [kubectl](https://kubernetes.io/docs/tasks/tools/) installed and configured against a Kubernetes cluster
 - For OpenShift: [OpenShift CLI (`oc`)](https://docs.openshift.com/container-platform/latest/cli_reference/openshift_cli/getting-started-cli.html) installed and logged in to your cluster
 
@@ -109,7 +109,7 @@ greeting = "Hello"
 
 ### Step 4: Build
 
-In WSO2 Agent Builder, open the agentic integration's overview, select **Deploy**, expand **Docker Image**, and select **Build Image**. WSO2 Agent Builder runs `bal build --cloud="docker"` in the terminal. On the project overview, the same option is **Build Docker Image** in the **Deploy** menu.
+In Choreo Agent Builder, open the agentic integration's overview, select **Deploy**, expand **Docker Image**, and select **Build Image**. Choreo Agent Builder runs `bal build --cloud="docker"` in the terminal. On the project overview, the same option is **Build Docker Image** in the **Deploy** menu.
 
 ![The Deploy panel on an agentic integration's overview, with Docker Image expanded and the Build Image button highlighted](/img/deploy-and-run/self-hosted/01-build-image-v1.0.png)
 
@@ -838,7 +838,7 @@ Create a log group for the container output:
 aws logs create-log-group --region <region> --log-group-name /ecs/my-integration
 ```
 
-Save the following as `task-definition.json`. The `secrets` block injects each value as a `BAL_CONFIG_VAR_<VARIABLE_NAME>` environment variable, which WSO2 Agent Builder reads into the matching `configurable` variable. The variable name after the prefix must be uppercase. See [Managing Configurations](../managing-configurations.md#environment-variable-overrides) for the naming rules.
+Save the following as `task-definition.json`. The `secrets` block injects each value as a `BAL_CONFIG_VAR_<VARIABLE_NAME>` environment variable, which Choreo Agent Builder reads into the matching `configurable` variable. The variable name after the prefix must be uppercase. See [Managing Configurations](../managing-configurations.md#environment-variable-overrides) for the naming rules.
 
 ```json
 {

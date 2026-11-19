@@ -12,7 +12,7 @@ Complete log aggregation and analytics using OpenSearch (open-source Elasticsear
 ## Architecture
 
 ```bash
-WSO2 Agent Builder agent
+Choreo Agent Builder agent
 ├── Logs (file) ───▶ Fluent Bit ──▶ OpenSearch ──▶ OpenSearch Dashboards
 │                                       (indexing)        (UI)
 │
@@ -117,7 +117,7 @@ services:
     networks:
       - opensearch
 
-  # WSO2 Agent Builder agent
+  # Choreo Agent Builder agent
   agent:
     image: eclipse-temurin:21-jre
     # Replace <agent-name> with the name of your JAR
@@ -337,7 +337,7 @@ docker-compose logs -f fluent-bit
 1. Go to **Dashboards** > **Create**
 2. Add all visualizations created above
 3. Arrange panels
-4. Save as "WSO2 Agent Builder Overview"
+4. Save as "Choreo Agent Builder Overview"
 
 ## Useful DQL (OpenSearch Query Language) Queries
 
@@ -421,7 +421,7 @@ Fluent Bit already writes one index per day. Configure automatic deletion of ind
 curl -X PUT "localhost:9200/_plugins/_ism/policies/logs-policy" -H 'Content-Type: application/json' -d'
 {
   "policy": {
-    "description": "Delete WSO2 Agent Builder agent log indices after 30 days",
+    "description": "Delete Choreo Agent Builder agent log indices after 30 days",
     "default_state": "hot",
     "states": [
       {

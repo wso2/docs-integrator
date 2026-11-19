@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Give Tools to Agent
-description: Reference for adding tools to a WSO2 Agent Builder AI agent, connections, functions, other agents, MCP servers, knowledge bases, and custom tools.
-keywords: [wso2 agent builder, ai agent, tools, connections, functions, mcp server, knowledge base, custom tool, toolkit]
+description: Reference for adding tools to a Choreo Agent Builder AI agent, connections, functions, other agents, MCP servers, knowledge bases, and custom tools.
+keywords: [choreo agent builder, ai agent, tools, connections, functions, mcp server, knowledge base, custom tool, toolkit]
 slug: /develop-and-test/integration-artifacts/agents/tools
 ---
 
@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 # Tools
 
-Tools enable AI agents to interact with external systems and perform actions during execution. WSO2 Agent Builder provides several ways to add and configure tools for an AI agent through a unified tool configuration experience.
+Tools enable AI agents to interact with external systems and perform actions during execution. Choreo Agent Builder provides several ways to add and configure tools for an AI agent through a unified tool configuration experience.
 
 This page describes the supported tool types, how to add them to an agent, and how each option works.
 
@@ -47,7 +47,7 @@ The following options are available:
 | **Use Connection** | Call an action on an HTTP client, database, message broker, or SaaS connector such as Salesforce or GitHub. Pick a connector, choose the action, then point it at a connection. |
 | **Use Function** | Turn a function from your agentic integration, or one from a library, into a tool. |
 | **Use Agent** | Delegate to another agent, wrapped as a tool, so this agent can hand off requests and use the response. |
-| **Use MCP Server** | Connect to tools hosted on an MCP server, either one your organization added to WSO2 Agent Manager or any server you connect to manually. |
+| **Use MCP Server** | Connect to tools hosted on an MCP server, either one your organization added to Choreo Agent Manager or any server you connect to manually. |
 | **Use Knowledge Base** | Search or add documents to a knowledge base, wrapped as a retrieve or ingest tool. |
 
 Each option opens a dedicated configuration panel for setting up the selected tool type.
@@ -78,7 +78,7 @@ The panel provides the following fields for creating a tool:
 | **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gate Tools for Approval](human-in-the-loop/gate-tools-for-approval.md). |
 | **Advanced Configurations** | No | Additional settings that depend on the tool type. See [Advanced configuration](#advanced-configuration). |
 
-After you select **Create Tool**, WSO2 Agent Builder generates a stub function annotated with `@ai:AgentTool`. Implement the tool logic inside the generated function.
+After you select **Create Tool**, Choreo Agent Builder generates a stub function annotated with `@ai:AgentTool`. Implement the tool logic inside the generated function.
 
 <Tabs>
 <TabItem value="code" label="Ballerina Code">
@@ -128,7 +128,7 @@ Choosing a category from the **All Categories** dropdown filters the list to sho
 
 ### 2.1 Select an action
 
-After selecting a connector, WSO2 Agent Builder lists its available actions:
+After selecting a connector, Choreo Agent Builder lists its available actions:
 
 <ThemedImage
     alt="The Add Tool - Use Connection panel showing the HTTP connector's actions, including Delete, Execute, Forward, and Get, each with a short description."
@@ -209,7 +209,7 @@ Use **Search functions** to find a function by name across all three sections. S
 | **OAuth Client Configuration** | No | OAuth client settings, when the function needs them (for example a connector-derived function that calls an OAuth-protected endpoint). |
 | **Result Type** | No | The Ballerina type the tool returns, derived from the function's return type. |
 
-Select **Save Tool** to add it. WSO2 Agent Builder generates a tool function annotated with `@ai:AgentTool` that calls the selected function, and adds it to the agent's tools.
+Select **Save Tool** to add it. Choreo Agent Builder generates a tool function annotated with `@ai:AgentTool` that calls the selected function, and adds it to the agent's tools.
 
 ## 4. Use agent
 
@@ -225,11 +225,11 @@ Selecting **Use MCP Server** offers two ways to add MCP tools:
 
 | Option | Description |
 |---|---|
-| **WSO2 Agent Manager** | MCP servers your organization added to Agent Manager, served through its AI Gateway. Requires you to be signed in to Agent Manager. |
+| **Choreo Agent Manager** | MCP servers your organization added to Agent Manager, served through its AI Gateway. Requires you to be signed in to Agent Manager. |
 | **Connect Manually** | Enter the server URL and authentication for any MCP server. |
 
 <ThemedImage
-    alt="The Add Tool - Use MCP Server panel with two options, WSO2 Agent Manager and Connect Manually."
+    alt="The Add Tool - Use MCP Server panel with two options, Choreo Agent Manager and Connect Manually."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/tools/10-use-mcp-server-options-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/agents/tools/10-use-mcp-server-options-v1.0.png'),
@@ -263,7 +263,7 @@ After saving, every tool exposed by the MCP server, or every tool selected in **
 Selecting **Use Knowledge Base** opens the **Add Tool - Use Knowledge Base** panel. Pick an existing knowledge base, or a knowledge base type to browse its actions.
 
 <ThemedImage
-    alt="The Add Tool - Use Knowledge Base panel listing the knowledge base types Vector Knowledge Base, Azure AI Search Knowledge Base, and WSO2 Cloud Knowledge Base."
+    alt="The Add Tool - Use Knowledge Base panel listing the knowledge base types Vector Knowledge Base, Azure AI Search Knowledge Base, and Choreo Cloud Knowledge Base."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/tools/12-use-knowledge-base-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/agents/tools/12-use-knowledge-base-v1.0.png'),
@@ -273,7 +273,7 @@ Selecting **Use Knowledge Base** opens the **Add Tool - Use Knowledge Base** pan
 Selecting a type lists its actions, such as **Retrieve**, which returns the chunks most relevant to a query. Select **New Knowledge Base** to create one of that type, then pick the action the agent should call.
 
 <ThemedImage
-    alt="The WSO2 Cloud Knowledge Base type with a New Knowledge Base option and the Retrieve action."
+    alt="The Choreo Cloud Knowledge Base type with a New Knowledge Base option and the Retrieve action."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/tools/13-knowledge-base-actions-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/agents/tools/13-knowledge-base-actions-v1.0.png'),
@@ -307,7 +307,7 @@ Write the description for the LLM, not for a developer:
 - **Mention side effects,** such as "Issues a real refund. It can't be undone." This also helps reviewers decide on [gated tools](human-in-the-loop/gate-tools-for-approval.md).
 - **Use a clear tool name,** such as `getOrderStatus` rather than `getTool`. The name is also sent to the LLM.
 
-**Edit prefilled descriptions.** For **Use Connection** and **Use Function**, WSO2 Agent Builder prefills **Tool Name** and **Description** from the connector or function documentation. That text describes the API, not your use case. For example, the HTTP connector's **get** action is prefilled with "Retrieve a representation of a specified resource from an HTTP endpoint.", which doesn't tell the agent when to call it. Replace it before you select **Save Tool**. To change an existing tool, select its node and then **Configure**.
+**Edit prefilled descriptions.** For **Use Connection** and **Use Function**, Choreo Agent Builder prefills **Tool Name** and **Description** from the connector or function documentation. That text describes the API, not your use case. For example, the HTTP connector's **get** action is prefilled with "Retrieve a representation of a specified resource from an HTTP endpoint.", which doesn't tell the agent when to call it. Replace it before you select **Save Tool**. To change an existing tool, select its node and then **Configure**.
 
 | | Description |
 |---|---|

@@ -2,8 +2,8 @@
 sidebar_position: 7
 sidebar_custom_props: { separatorBefore: "Visibility & Control" }
 title: Observe Agent Behavior
-description: Use the built-in dev-time trace server in WSO2 Agent Builder to observe LLM and tool calls as your agent runs.
-keywords: [wso2 agent builder, observability, tracing, ai agents, dev-time trace, traces]
+description: Use the built-in dev-time trace server in Choreo Agent Builder to observe LLM and tool calls as your agent runs.
+keywords: [choreo agent builder, observability, tracing, ai agents, dev-time trace, traces]
 slug: /develop-and-test/integration-artifacts/agents/observability
 ---
 
@@ -12,7 +12,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Observe Agent Behavior
 
-When you run an agent, you want to see exactly what it did. Which tools it picked, what it sent to the LLM, what came back, and how long each step took. WSO2 Agent Builder ships with a **dev-time trace server**, a built-in tracing backend that runs alongside the editor and collects spans as your agentic integration executes. With tracing on, the LLM's tool choices and interpretations of each result are visible in the spans, so you can debug agent behavior without adding print statements.
+When you run an agent, you want to see exactly what it did. Which tools it picked, what it sent to the LLM, what came back, and how long each step took. Choreo Agent Builder ships with a **dev-time trace server**, a built-in tracing backend that runs alongside the editor and collects spans as your agentic integration executes. With tracing on, the LLM's tool choices and interpretations of each result are visible in the spans, so you can debug agent behavior without adding print statements.
 
 ## Enable tracing
 
@@ -176,7 +176,7 @@ Click **Timeline** at the top of the sidebar to switch from the list view to a G
 Each span shows a row of quick info pills under its title, summarizing the metadata you care about most. The exact set depends on the span type.
 
 <ThemedImage
-    alt="A Chat - gpt-4o-mini span detail header with a row of pills: Latency 2.52s, Input Tokens 424, Output Tokens 50, Temperature 0.7, Provider WSO2, Model gpt-4o-mini, Start Time, and End Time."
+    alt="A Chat - gpt-4o-mini span detail header with a row of pills: Latency 2.52s, Input Tokens 424, Output Tokens 50, Temperature 0.7, Provider Choreo, Model gpt-4o-mini, Start Time, and End Time."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/observability/09-quick-info-pills-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/agents/observability/09-quick-info-pills-v1.0.png'),

@@ -1,7 +1,7 @@
 ---
 title: "Reviewing Changes"
 description: "Inspect what Copilot changed in a unified diff diagram, compare old and new versions, and revert a run's changes."
-keywords: [wso2 agent builder, copilot, review, diff, changes, diagram]
+keywords: [choreo agent builder, copilot, review, diff, changes, diagram]
 sidebar_position: 3.6
 slug: /editor/copilot/reviewing-changes
 ---

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 8
 title: Compliance Considerations
-description: Audit logging, data residency, and compliance configurations for WSO2 Agent Builder services.
-keywords: [wso2 agent builder, compliance, gdpr, hipaa, soc 2, audit logging, data residency, pii]
+description: Audit logging, data residency, and compliance configurations for Choreo Agent Builder services.
+keywords: [choreo agent builder, compliance, gdpr, hipaa, soc 2, audit logging, data residency, pii]
 slug: /deploy-and-run/secure/compliance-considerations
 ---
 

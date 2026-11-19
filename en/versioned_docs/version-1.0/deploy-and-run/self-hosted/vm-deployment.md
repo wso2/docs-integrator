@@ -1,24 +1,24 @@
 ---
 title: VM Deployment
-description: Deploy WSO2 Agent Builder projects as standalone JAR files on virtual machines for self-hosted production deployments.
-keywords: [wso2 agent builder, bal run, vm deployment, jar deployment, ballerina cli]
+description: Deploy Choreo Agent Builder projects as standalone JAR files on virtual machines for self-hosted production deployments.
+keywords: [choreo agent builder, bal run, vm deployment, jar deployment, ballerina cli]
 slug: /deploy-and-run/self-hosted/vm-deployment
 sidebar_position: 2
 ---
 
 # VM Deployment
 
-This page explains how to run WSO2 Agent Builder projects as standalone JAR files on virtual machines for self-hosted production deployments.
+This page explains how to run Choreo Agent Builder projects as standalone JAR files on virtual machines for self-hosted production deployments.
 
 :::info Prerequisites
 - [Ballerina installed](https://ballerina.io/downloads/) on any machine where you want to run the project
-- A WSO2 Agent Builder project based on Ballerina
+- A Choreo Agent Builder project based on Ballerina
 - For production VM deployments: Java Runtime (JDK 25 or later)
 :::
 
 ## Deploy with executable JAR
 
-For production VM deployments, WSO2 Agent Builder projects compile to executable JAR files that run on any JVM. This approach gives you full control over the runtime environment and is ideal for traditional VM-based infrastructure.
+For production VM deployments, Choreo Agent Builder projects compile to executable JAR files that run on any JVM. This approach gives you full control over the runtime environment and is ideal for traditional VM-based infrastructure.
 
 ### Prerequisites for JAR deployment
 
@@ -31,7 +31,7 @@ For production VM deployments, WSO2 Agent Builder projects compile to executable
 
 ### Build the executable JAR
 
-In WSO2 Agent Builder, open the agentic integration's overview, select **Deploy**, expand **Virtual Machine**, and select **Build JAR**. WSO2 Agent Builder runs `bal build` in the terminal. On the project overview, the same option is **Build Executable** in the **Deploy** menu.
+In Choreo Agent Builder, open the agentic integration's overview, select **Deploy**, expand **Virtual Machine**, and select **Build JAR**. Choreo Agent Builder runs `bal build` in the terminal. On the project overview, the same option is **Build Executable** in the **Deploy** menu.
 
 ![The Deploy panel on an agentic integration's overview, with Virtual Machine expanded and the Build JAR button highlighted](/img/deploy-and-run/self-hosted/02-build-jar-v1.0.png)
 

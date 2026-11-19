@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Canvas Basics
 title: Flow Canvas
-description: Visual canvas for designing the logic of an agentic integration in WSO2 Agent Builder.
-keywords: [wso2 agent builder, flow canvas, visual designer, node palette]
+description: Visual canvas for designing the logic of an agentic integration in Choreo Agent Builder.
+keywords: [choreo agent builder, flow canvas, visual designer, node palette]
 slug: /editor/canvases/flow-canvas
 ---
 

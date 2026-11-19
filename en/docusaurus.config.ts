@@ -18,7 +18,7 @@ import {
 } from './src/theme-shared/themeConfig';
 
 const config: Config = {
-  title: 'WSO2 Agent Builder',
+  title: 'Choreo Agent Builder',
   tagline: 'Build, evaluate, and deploy AI agents with Copilot — powered by your Agent Manager\'s LLMs and MCP tools',
   favicon: 'img/favicon.ico',
 
@@ -72,6 +72,27 @@ const config: Config = {
     // Now registered -- docs/guides/ has sample content for it to scan
     // (see docs/guides/guides.md and HOW_TO_WRITE_A_GUIDE.md).
     './src/plugins/guidesCatalogPlugin.js',
+    // The WSO2 -> Choreo rebrand renamed deploy-to-wso2-cloud, which is
+    // the one doc whose route carried the old brand. Two `from` entries,
+    // not one: `lastVersion: '1.0'` (see the docs preset below) serves
+    // version 1.0 unprefixed at the site root while `current` serves
+    // under /next, so the old URL existed at both. Paths are written
+    // without `baseUrl` -- the plugin prepends it, so these still
+    // resolve under /agent-builder/ in production.
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/deploy-and-run/deploy-to-choreo-cloud',
+            from: [
+              '/deploy-and-run/deploy-to-wso2-cloud',
+              '/next/deploy-and-run/deploy-to-wso2-cloud',
+            ],
+          },
+        ],
+      },
+    ],
   ],
 
   // Search is Algolia (themeConfig.algolia), shared across products.
@@ -173,7 +194,7 @@ const config: Config = {
           href: 'https://github.com/wso2/product-agent-builder/releases',
           position: 'right',
           className: 'navbar-download-btn',
-          'aria-label': 'Download WSO2 Agent Builder',
+          'aria-label': 'Download Choreo Agent Builder',
         },
       ],
     },

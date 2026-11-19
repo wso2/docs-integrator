@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: "Build a Customer Care Agent with MCP"
 description: Build an AI agent that connects to a live MCP server to answer product and order questions via natural language.
-keywords: [wso2 agent builder, mcp, ai agent, mcp toolkit, customer care, tutorial]
+keywords: [choreo agent builder, mcp, ai agent, mcp toolkit, customer care, tutorial]
 slug: /guides/business-use-cases/building-a-customer-care-agent-mcp
 card_icon: mcp
 card_summary: An agent backed by an MCP server
@@ -19,7 +19,7 @@ import TabItem from '@theme/TabItem';
 ## What you'll build
 
 <ThemedImage
-    alt="Architecture: a customer sends chat messages over HTTP to the Agent Chat trigger at /customer-care-agent, which runs CustomerCareAgent with the Default WSO2 Model Provider; the agent calls the ShopEasy MCP server at localhost:8080/mcp through an MCP toolkit, using the searchProducts, getOrderStatus, and submitReturnRequest tools"
+    alt="Architecture: a customer sends chat messages over HTTP to the Agent Chat trigger at /customer-care-agent, which runs CustomerCareAgent with the Default Choreo Model Provider; the agent calls the ShopEasy MCP server at localhost:8080/mcp through an MCP toolkit, using the searchProducts, getOrderStatus, and submitReturnRequest tools"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp-v5.1/architecture-v1.0.png'),
         dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp-v5.1/architecture-v1.0.png'),
@@ -35,7 +35,7 @@ The agent receives customer messages over HTTP, reasons about which tool to call
 
 
 :::info Prerequisites
-- A model provider for the agent. This tutorial uses the **Default WSO2 Model Provider**. For other options, see [Model providers for LLMs](../../develop-and-test/integration-artifacts/model-providers.md).
+- A model provider for the agent. This tutorial uses the **Default Choreo Model Provider**. For other options, see [Model providers for LLMs](../../develop-and-test/integration-artifacts/model-providers.md).
 - The **ShopEasy MCP server** running locally. Clone the repo and follow its README to start it: [github.com/wso2/integration-samples](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/samples/customer-care-agent/mcp).
 :::
 
@@ -44,7 +44,7 @@ The agent receives customer messages over HTTP, reasons about which tool to call
 
 ## Step 1: Create and configure the agent
 
-1. Open WSO2 Agent Builder and create or open your project.
+1. Open Choreo Agent Builder and create or open your project.
 2. On the project home page, under **Or start from scratch**, select **Add Agent**.
 3. In the **Add Agent** dialog, under **Create New**, select **Create Agent**.
 
@@ -67,10 +67,10 @@ Always use the available tools to look up accurate information. Never guess.
 Keep responses friendly and concise. Include relevant IDs (order ID, return ID) in your responses.
 ```
 
-   - **Model** to **Default WSO2 Model Provider**.
+   - **Model** to **Default Choreo Model Provider**.
 
 <ThemedImage
-    alt="The Create Agent form with Role set to Customer Support Agent, the ShopEasy instructions in Instructions, and Model set to Default WSO2 Model Provider"
+    alt="The Create Agent form with Role set to Customer Support Agent, the ShopEasy instructions in Instructions, and Model set to Default Choreo Model Provider"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp-v5.1/02-create-agent-2-v1.0.png'),
         dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp-v5.1/02-create-agent-2-v1.0.png'),
@@ -94,7 +94,7 @@ Keep responses friendly and concise. Include relevant IDs (order ID, return ID) 
     }}
 />
 
-WSO2 Agent Builder adds the `CustomerCareAgent` agent under **Agents** and opens the agent canvas, where the **AI Agent** node connects to the default WSO2 model provider.
+Choreo Agent Builder adds the `CustomerCareAgent` agent under **Agents** and opens the agent canvas, where the **AI Agent** node connects to the default Choreo model provider.
 
 8. Select **Add Trigger** to the left of the **AI Agent** node.
 9. In the **Add Trigger** dialog, under **Chat Channels**, select **Agent Chat**.
@@ -103,7 +103,7 @@ WSO2 Agent Builder adds the `CustomerCareAgent` agent under **Agents** and opens
 The **Agent Chat** trigger connects to the **AI Agent** node, and an **AI Agent Services - /customer-care-agent** entry point with a `chat` resource appears under **Entry Points**. The **AI Agent** node has a **+ Add Memory** button and an **Add Tool** button at its bottom-right corner.
 
 <ThemedImage
-    alt="The CustomerCareAgent canvas with the /customer-care-agent Agent Chat trigger connected to the AI Agent node, which connects to the Default WSO2 Model Provider and shows Add Memory, Add Trigger, and Add Tool. The sidebar lists AI Agent Services - /customer-care-agent with a chat resource under Entry Points."
+    alt="The CustomerCareAgent canvas with the /customer-care-agent Agent Chat trigger connected to the AI Agent node, which connects to the Default Choreo Model Provider and shows Add Memory, Add Trigger, and Add Tool. The sidebar lists AI Agent Services - /customer-care-agent with a chat resource under Entry Points."
     sources={{
         light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp-v5.1/04-create-agent-4-v1.0.png'),
         dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp-v5.1/04-create-agent-4-v1.0.png'),
@@ -126,7 +126,7 @@ Select **Add Tool** at the bottom-right corner of the **AI Agent** node. The **A
 
 ### 2.2 Configure the server URL
 
-1. Select **Connect Manually**. (The other option, **WSO2 Agent Manager**, lists MCP servers that your organization added to WSO2 Agent Manager.)
+1. Select **Connect Manually**. (The other option, **Choreo Agent Manager**, lists MCP servers that your organization added to Choreo Agent Manager.)
 2. Set **Server Url** to `http://localhost:8080/mcp`.
 3. Leave **Requires Authentication** off.
 
@@ -145,7 +145,7 @@ The panel also shows **Tools to Include** (defaults to **All**) and a collapsed 
 The MCP toolkit appears as `aiMcpbasetoolkit` attached to the agent node, connected by a dashed line, and a `McpToolKit` type is added under **Types** in the sidebar. The agent discovers the available tools from the server at startup.
 
 <ThemedImage
-    alt="The completed agent canvas with the Agent Chat trigger, the AI Agent node connected to the Default WSO2 Model Provider, and aiMcpbasetoolkit attached to the AI Agent node by a dashed line"
+    alt="The completed agent canvas with the Agent Chat trigger, the AI Agent node connected to the Default Choreo Model Provider, and aiMcpbasetoolkit attached to the AI Agent node by a dashed line"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp-v5.1/07-add-mcp-3-v1.0.png'),
         dark: useBaseUrl('/img/genai/tutorials/customer-care-agent-mcp-v5.1/07-add-mcp-3-v1.0.png'),
@@ -154,7 +154,7 @@ The MCP toolkit appears as `aiMcpbasetoolkit` attached to the agent node, connec
 
 ## Step 3: Run and test
 
-Make sure the ShopEasy MCP server is running, then select **Run**. WSO2 Agent Builder compiles and starts the service, with progress shown in the integrated terminal.
+Make sure the ShopEasy MCP server is running, then select **Run**. Choreo Agent Builder compiles and starts the service, with progress shown in the integrated terminal.
 
 <ThemedImage
     alt="The chat resource flow with Start, an agent:run node for CustomerCareAgent with an Open Agent button, and Return, above the integrated terminal showing bal run compiling customer_care and Running executable"
@@ -191,7 +191,7 @@ Try the following messages to exercise all three tools:
 final McpToolKit aiMcpbasetoolkit = check new ("http://localhost:8080/mcp");
 ```
 
-The model provider is initialized inline with `ai:getDefaultModelProvider()` in `agents.bal`, so no separate connection is needed for the default WSO2 model provider.
+The model provider is initialized inline with `ai:getDefaultModelProvider()` in `agents.bal`, so no separate connection is needed for the default Choreo model provider.
 
 **`agents.bal`** defines the agent and the toolkit class:
 

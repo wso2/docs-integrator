@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: "Building an IT Helpdesk AI Agent with Persistent Memory"
-description: Build an IT helpdesk AI agent in WSO2 Agent Builder that uses persistent MSSQL-backed memory to retain conversation history across requests and service restarts.
-keywords: [wso2 agent builder, ai agent, memory, mssql, helpdesk, agent chat]
+description: Build an IT helpdesk AI agent in Choreo Agent Builder that uses persistent MSSQL-backed memory to retain conversation history across requests and service restarts.
+keywords: [choreo agent builder, ai agent, memory, mssql, helpdesk, agent chat]
 slug: /guides/business-use-cases/it-helpdesk-chatbot
 card_icon: agents
 card_summary: A chatbot that remembers context across sessions and restarts
@@ -18,7 +18,7 @@ import TabItem from '@theme/TabItem';
 
 ## What you will build
 
-In this tutorial, you will build an IT helpdesk AI agent in WSO2 Agent Builder that assists employees with technical support issues and remembers conversations across service restarts using persistent MSSQL-backed memory.
+In this tutorial, you will build an IT helpdesk AI agent in Choreo Agent Builder that assists employees with technical support issues and remembers conversations across service restarts using persistent MSSQL-backed memory.
 
 The agent responds to employee questions through an **Agent Chat** trigger, searches an internal knowledge base for troubleshooting guidance, and keeps its conversation history in an MSSQL database using `ballerinax/ai.memory.mssql`.
 
@@ -28,7 +28,7 @@ Because the chat history is persisted in a database, employees can continue a co
 
 In this tutorial, you will learn how to:
 
-- Create an AI agent with a custom tool in WSO2 Agent Builder
+- Create an AI agent with a custom tool in Choreo Agent Builder
 - Store connection details as configurable values
 - Persist conversation history across service restarts using MSSQL-backed memory
 - Expose the agent through an **Agent Chat** trigger and keep employee-specific conversations using a session ID
@@ -37,7 +37,7 @@ In this tutorial, you will learn how to:
 
 Before getting started, ensure that the following requirements are met:
 
-- WSO2 Agent Builder is installed.
+- Choreo Agent Builder is installed.
 - An MSSQL database is reachable (host, port, user, password). Create the chat messages table ahead of time:
 
   ```sql
@@ -66,7 +66,7 @@ Then create a database (for example `helpdesk`) and the `ChatMessages` table in 
 ## Architecture
 
 <ThemedImage
-    alt="Architecture: an employee sends a message and session ID over HTTP to the Agent Chat trigger at /it-helpdesk/chat, which runs itHelpDeskAgent with the Default WSO2 Model Provider, the searchKnowledgeBase tool, and ShortTermMemory that stores conversation history in the MSSQL ChatMessages table"
+    alt="Architecture: an employee sends a message and session ID over HTTP to the Agent Chat trigger at /it-helpdesk/chat, which runs itHelpDeskAgent with the Default Choreo Model Provider, the searchKnowledgeBase tool, and ShortTermMemory that stores conversation history in the MSSQL ChatMessages table"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v5.1/architecture-v1.0.png'),
         dark: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v5.1/architecture-v1.0.png'),
@@ -79,7 +79,7 @@ In this section, you will create the agentic integration and configure the AI ag
 
 ### Step 1: Create the agentic integration
 
-1. Open WSO2 Agent Builder and select **Create** under **Start Building your Agent**.
+1. Open Choreo Agent Builder and select **Create** under **Start Building your Agent**.
 2. Set **Project name** to `IT-Helpdesk` and choose a **Location**.
 3. Under **What do you want to build?**, keep **Agentic Integration** selected.
 4. Set **Agentic integration name** to `ITHelpdesk`.
@@ -93,10 +93,10 @@ In this section, you will create the agentic integration and configure the AI ag
     }}
 />
 
-The integration opens with the WSO2 Agent Builder Copilot. Skip it for this tutorial and build the integration manually.
+The integration opens with the Choreo Agent Builder Copilot. Skip it for this tutorial and build the integration manually.
 
 <ThemedImage
-    alt="ITHelpdesk integration home page showing the WSO2 Agent Builder Copilot prompt and the Add Agent and Add MCP Server buttons under Or start from scratch"
+    alt="ITHelpdesk integration home page showing the Choreo Agent Builder Copilot prompt and the Add Agent and Add MCP Server buttons under Or start from scratch"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v1.0/02-integration-home-v1.0.png'),
         dark: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v1.0/02-integration-home-v1.0.png'),
@@ -173,10 +173,10 @@ The tool you add in Step 4 searches `kbArticles` by matching `tags` against the 
        - Remember previous conversations.
      ```
 
-   - **Model** as **Default WSO2 Model Provider**.
+   - **Model** as **Default Choreo Model Provider**.
 
 <ThemedImage
-    alt="Create Agent form with Role set to itHelpDesk, the helpdesk instructions filled in, and Model set to Default WSO2 Model Provider"
+    alt="Create Agent form with Role set to itHelpDesk, the helpdesk instructions filled in, and Model set to Default Choreo Model Provider"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v1.0/04-create-agent-v1.0.png'),
         dark: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v1.0/04-create-agent-v1.0.png'),
@@ -188,7 +188,7 @@ The tool you add in Step 4 searches `kbArticles` by matching `tags` against the 
 The agent canvas opens. The **AI Agent** node is connected to the model provider, with **Add Trigger** on its left, **+ Add Memory** inside it, and **Add Tool** at its bottom-right corner.
 
 <ThemedImage
-    alt="AI Agent canvas for itHelpDeskAgent connected to the Default WSO2 Model Provider, with Add Trigger, Add Memory, and Add Tool options"
+    alt="AI Agent canvas for itHelpDeskAgent connected to the Default Choreo Model Provider, with Add Trigger, Add Memory, and Add Tool options"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v1.0/05-ai-agent-canvas-v1.0.png'),
         dark: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v1.0/05-ai-agent-canvas-v1.0.png'),
@@ -317,7 +317,7 @@ isolated function searchKnowledgeBase(string query) returns string {
     }}
 />
 
-3. On the **Configurable Variables** page, enter the values for your MSSQL database. WSO2 Agent Builder saves them to `Config.toml`.
+3. On the **Configurable Variables** page, enter the values for your MSSQL database. Choreo Agent Builder saves them to `Config.toml`.
 
 <ThemedImage
     alt="Configurable Variables page listing host, user, password, database, and port with values entered"
@@ -477,7 +477,7 @@ final ai:ShortTermMemory aiShorttermmemory = check new (mssqlShorttermmemorystor
 This creates an **AI Agent Services - /it-helpdesk** entry point with a `chat` resource. The canvas shows the complete agent: the **/it-helpdesk Agent Chat** trigger, the memory, the model provider, and the `searchKnowledgeBase` tool.
 
 <ThemedImage
-    alt="Complete itHelpDeskAgent canvas with the /it-helpdesk Agent Chat trigger, ShortTermMemory, the Default WSO2 Model Provider, and the searchKnowledgeBase tool"
+    alt="Complete itHelpDeskAgent canvas with the /it-helpdesk Agent Chat trigger, ShortTermMemory, the Default Choreo Model Provider, and the searchKnowledgeBase tool"
     sources={{
         light: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v1.0/19-complete-agent-v1.0.png'),
         dark: useBaseUrl('/img/genai/tutorials/it-helpdesk-chatbot-v1.0/19-complete-agent-v1.0.png'),
@@ -511,7 +511,7 @@ service /it\-helpdesk on agentChatListener {
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Select **Run Integration**. WSO2 Agent Builder compiles and starts the integration, with progress shown in the integrated terminal.
+1. Select **Run Integration**. Choreo Agent Builder compiles and starts the integration, with progress shown in the integrated terminal.
 2. Under **Entry Points**, expand **AI Agent Services - /it-helpdesk**, select the `chat` resource, and then select **Chat** to open the **Agent Chat** panel. Try the conversation below to exercise the tool and confirm the agent remembers earlier turns in the same session:
 
 - *"My VPN is not working"*

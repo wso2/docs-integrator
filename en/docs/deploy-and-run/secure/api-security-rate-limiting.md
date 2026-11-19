@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: API Security and Rate Limiting
-description: Rate limiting, input validation, and request hardening for production APIs in WSO2 Agent Builder.
-keywords: [wso2 agent builder, api security, rate limiting, cors, input validation, security headers]
+description: Rate limiting, input validation, and request hardening for production APIs in Choreo Agent Builder.
+keywords: [choreo agent builder, api security, rate limiting, cors, input validation, security headers]
 slug: /deploy-and-run/secure/api-security-rate-limiting
 ---
 

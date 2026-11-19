@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Understand the Editor
-description: Take a tour of the WSO2 Agent Builder editor, its workspace, canvases, designers, panels, and Copilot.
-keywords: [wso2 agent builder, editor, editor window, views, canvases, designers, panels, copilot]
+description: Take a tour of the Choreo Agent Builder editor, its workspace, canvases, designers, panels, and Copilot.
+keywords: [choreo agent builder, editor, editor window, views, canvases, designers, panels, copilot]
 hide_table_of_contents: true
 wide_layout: true
 slug: /editor
@@ -13,13 +13,13 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Understand the Editor
 
-The **WSO2 Agent Builder editor** brings together everything you need to develop, build, test, debug and deploy your agents and agentic integrations in one place. This tour works outward from the window you see when you open it, to the surfaces you build on, to the tools available throughout. The map below gives you the shape of it before you go deeper into any one piece.
+The **Choreo Agent Builder editor** brings together everything you need to develop, build, test, debug and deploy your agents and agentic integrations in one place. This tour works outward from the window you see when you open it, to the surfaces you build on, to the tools available throughout. The map below gives you the shape of it before you go deeper into any one piece.
 
 <ThemedImage
-    alt="WSO2 Agent Builder Editor components: the Editor Window contains Views (Project, Integration, Library) and the surfaces you work on inside a view (Canvases, Panels, Designers), alongside WSO2 Agent Builder Copilot"
+    alt="Choreo Agent Builder Editor components: the Editor Window contains Views (Project, Integration, Library) and the surfaces you work on inside a view (Canvases, Panels, Designers), alongside Choreo Agent Builder Copilot"
     sources={{
-        light: useBaseUrl('/img/editor/editor-components-v1.0.png'),
-        dark: useBaseUrl('/img/editor/editor-components-v1.0.png'),
+        light: useBaseUrl('/img/editor/choreo-editor-components-v1.0.png'),
+        dark: useBaseUrl('/img/editor/choreo-editor-components-v1.0.png'),
     }}
 />
 
@@ -78,9 +78,9 @@ Explore each part of the editor below.
 
 <PaletteCard icon="ai" highlight>
   <h3 class="palette-card-title">AI Assistance</h3>
-  <p class="palette-card-desc">WSO2 Agent Builder Copilot is the AI assistant built into the editor, for generating, testing, and fixing agents and agentic integrations.</p>
+  <p class="palette-card-desc">Choreo Agent Builder Copilot is the AI assistant built into the editor, for generating, testing, and fixing agents and agentic integrations.</p>
   <div class="palette-chip-row">
-    <PaletteChip href="/editor/copilot">WSO2 Agent Builder Copilot</PaletteChip>
+    <PaletteChip href="/editor/copilot">Choreo Agent Builder Copilot</PaletteChip>
     <PaletteChip href="/editor/copilot/copilot-capabilities">Built-in Capabilities</PaletteChip>
     <PaletteChip href="/editor/copilot/customize-copilot">Customize Copilot</PaletteChip>
   </div>

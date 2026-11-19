@@ -1,14 +1,14 @@
 ---
 sidebar_position: 3
 title: Authentication
-description: Configure OAuth 2.0, JWT, and mTLS authentication for production services in WSO2 Agent Builder.
-keywords: [wso2 agent builder, authentication, oauth 2.0, jwt, mtls, security]
+description: Configure OAuth 2.0, JWT, and mTLS authentication for production services in Choreo Agent Builder.
+keywords: [choreo agent builder, authentication, oauth 2.0, jwt, mtls, security]
 slug: /deploy-and-run/secure/authentication
 ---
 
 # Authentication
 
-Secure your production services with industry-standard authentication mechanisms. WSO2 Agent Builder provides declarative auth configuration at the service level.
+Secure your production services with industry-standard authentication mechanisms. Choreo Agent Builder provides declarative auth configuration at the service level.
 
 ## JWT validation
 
@@ -112,7 +112,7 @@ listener http:Listener mtlsListener = new (9443, {
 
 ## Combining authentication methods
 
-Support multiple auth mechanisms on a single service. WSO2 Agent Builder tries each handler in order:
+Support multiple auth mechanisms on a single service. Choreo Agent Builder tries each handler in order:
 
 ```ballerina
 @http:ServiceConfig {

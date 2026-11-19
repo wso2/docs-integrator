@@ -12,7 +12,7 @@ A complete observability setup for development using Docker Compose. Includes me
 ## Architecture
 
 ```bash
-WSO2 Agent Builder agent
+Choreo Agent Builder agent
 ├── Metrics (9797) ──▶ Prometheus
 │                          ▲
 │                          │
@@ -32,7 +32,7 @@ Create `docker-compose.yml`. The `agent` service runs the executable JAR built f
 
 ```yaml
 services:
-  # WSO2 Agent Builder agent
+  # Choreo Agent Builder agent
   agent:
     image: eclipse-temurin:21-jre
     working_dir: /app

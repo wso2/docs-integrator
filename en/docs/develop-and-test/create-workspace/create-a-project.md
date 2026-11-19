@@ -16,12 +16,12 @@ A project is a workspace that organizes multiple agentic integrations and librar
 
 To start creating a new project:
 
-1. Open WSO2 Agent Builder.
+1. Open Choreo Agent Builder.
 2. Locate the **Start Building your Agent** card on the home page.
 3. Click **Create** to open the project creation form.
 
 <ThemedImage
-    alt="WSO2 Agent Builder home page"
+    alt="Choreo Agent Builder home page"
     sources={{
         light: useBaseUrl('/img/create-project/wso2-agent-builder-v1.0.png'),
         dark: useBaseUrl('/img/create-project/wso2-agent-builder-v1.0.png'),

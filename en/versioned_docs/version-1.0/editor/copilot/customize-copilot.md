@@ -1,7 +1,7 @@
 ---
 title: "Customize Copilot"
 description: "Give Copilot standing project instructions, reusable skills, and your own tools through MCP servers."
-keywords: [wso2 agent builder, copilot, agents.md, skills, mcp, model context protocol, customize copilot]
+keywords: [choreo agent builder, copilot, agents.md, skills, mcp, model context protocol, customize copilot]
 sidebar_position: 4
 slug: /editor/copilot/customize-copilot
 ---
@@ -118,7 +118,7 @@ When a skill is enabled and your request matches its trigger, Copilot applies th
 
 ## Copilot MCP tools
 
-WSO2 Agent Builder Copilot ships with a built-in set of tools for building agents. You can extend that toolset by connecting your own [Model Context Protocol](https://modelcontextprotocol.io) (MCP) servers. Once a server is connected and enabled, the tools it exposes become available to Copilot during a chat turn, and the agent can call them like any built-in tool.
+Choreo Agent Builder Copilot ships with a built-in set of tools for building agents. You can extend that toolset by connecting your own [Model Context Protocol](https://modelcontextprotocol.io) (MCP) servers. Once a server is connected and enabled, the tools it exposes become available to Copilot during a chat turn, and the agent can call them like any built-in tool.
 
 This lets you and your team extend Copilot with the tools your work needs, whether they run as a local process or a remote service.
 
@@ -186,11 +186,11 @@ A server is defined in one of the following scopes.
 |---|---|---|
 | **User** | `~/.ballerina/copilot/mcp.json` | Across all your projects |
 | **Project** | `<project>/.mcp.json`, committed with the repo | Only within that project, and shared with your team |
-| **Built-in** | Curated and maintained by WSO2 | Across all your projects |
+| **Built-in** | Curated and maintained by Choreo Labs | Across all your projects |
 
 The project file uses the bare filename `.mcp.json`, following a common convention, so the same file is portable across tools that support MCP. Commit it to share a consistent set of servers with your team.
 
-Built-in servers are provided by WSO2 and appear in their own group when available. You can turn them on or off from the manager; they are not defined in a config file.
+Built-in servers are provided by Choreo Labs and appear in their own group when available. You can turn them on or off from the manager; they are not defined in a config file.
 
 <ThemedImage
     alt="MCP servers manager grouping servers under Project and User scopes."

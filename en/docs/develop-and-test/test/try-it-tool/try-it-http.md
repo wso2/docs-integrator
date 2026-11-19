@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Test HTTP Service
-description: Test HTTP REST API endpoints interactively using the built-in Try-It tool or WSO2 Agent Builder Copilot during development.
-keywords: [wso2 agent builder, try-it, http service, test rest api, test endpoint, copilot]
+description: Test HTTP REST API endpoints interactively using the built-in Try-It tool or Choreo Agent Builder Copilot during development.
+keywords: [choreo agent builder, try-it, http service, test rest api, test endpoint, copilot]
 slug: /develop-and-test/test/try-it-tool/try-it-http
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Test HTTP Service
 
-The Try-It tool lets you test your HTTP REST API endpoints without leaving WSO2 Agent Builder. You can interact with the request form directly to explore and verify each endpoint, or describe what you want to test in natural language and let [WSO2 Agent Builder Copilot](../../../editor/copilot/capabilities.md) handle the execution for you.
+The Try-It tool lets you test your HTTP REST API endpoints without leaving Choreo Agent Builder. You can interact with the request form directly to explore and verify each endpoint, or describe what you want to test in natural language and let [Choreo Agent Builder Copilot](../../../editor/copilot/capabilities.md) handle the execution for you.
 
 ## Open the Try-It tool
 
@@ -53,7 +53,7 @@ Select the run icon next to the endpoint to dispatch the request.
 
 ## Try it with AI
 
-WSO2 Agent Builder Copilot can test your HTTP service for you. Open the Copilot panel and describe the endpoint you want to test in natural language. For example, tell Copilot which method you want to try and it compiles the service, sends the request, and presents the response directly in the chat.
+Choreo Agent Builder Copilot can test your HTTP service for you. Open the Copilot panel and describe the endpoint you want to test in natural language. For example, tell Copilot which method you want to try and it compiles the service, sends the request, and presents the response directly in the chat.
 
 <ThemedImage
     alt="Copilot testing a bookstore GET endpoint and displaying results in the chat"

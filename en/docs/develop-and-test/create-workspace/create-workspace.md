@@ -1,6 +1,6 @@
 ---
 title: The Integration Workspace
-description: Understand how WSO2 Agent Builder organizes your work into projects, agentic integrations, and libraries, then create a workspace and the agentic integrations and libraries that live inside it.
+description: Understand how Choreo Agent Builder organizes your work into projects, agentic integrations, and libraries, then create a workspace and the agentic integrations and libraries that live inside it.
 sidebar_label: Integration Workspace
 sidebar_position: 0
 slug: /develop-and-test/create-workspace
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # The Integration Workspace
 
-WSO2 Agent Builder organizes your work into three concepts that build on each other:
+Choreo Agent Builder organizes your work into three concepts that build on each other:
 
 - **Project** — a workspace that groups multiple agentic integrations and libraries together, sharing a single repository and dependencies.
 - **Agentic integration** — a deployable unit built from AI agents, the triggers that invoke them (chat channels, API endpoints, event sources, and file sources), and MCP servers. It can be built, tested, and deployed on its own.
@@ -20,7 +20,7 @@ WSO2 Agent Builder organizes your work into three concepts that build on each ot
 A project can hold any number of agentic integrations and libraries side by side.
 
 <ThemedImage
-    alt="How WSO2 Agent Builder organizes a project, its agentic integrations, and its libraries"
+    alt="How Choreo Agent Builder organizes a project, its agentic integrations, and its libraries"
     sources={{
         light: useBaseUrl('/img/develop/organize/agent-builder-work-organization-v1.0.png'),
         dark: useBaseUrl('/img/develop/organize/agent-builder-work-organization-v1.0.png'),
@@ -34,7 +34,7 @@ A project can hold any number of agentic integrations and libraries side by side
     - **[Create a new agentic integration](create-a-project.md#add-an-integration)** — Add a new agentic integration to your project.
     - **[Create a library](create-a-project.md#add-a-library)** — Add a library to your project to share common logic across its agentic integrations.
 
-- **[Open a project](open-a-project.md)** — Open an existing project from your local filesystem, or clone one from WSO2 Cloud.
+- **[Open a project](open-a-project.md)** — Open an existing project from your local filesystem, or clone one from Choreo Cloud.
 
 - **[Explore sample integrations](explore-sample-integrations.md)** — Start from a pre-built agent or sample instead of a blank agentic integration.
 

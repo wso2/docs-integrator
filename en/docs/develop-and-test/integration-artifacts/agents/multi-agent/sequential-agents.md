@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Sequential Agents
-description: Run AI agents one after another in WSO2 Agent Builder by chaining them in a trigger's flow, passing each agent's result to the next, then test the chain from a chat trigger.
+description: Run AI agents one after another in Choreo Agent Builder by chaining them in a trigger's flow, passing each agent's result to the next, then test the chain from a chat trigger.
 slug: /develop-and-test/integration-artifacts/agents/multi-agent/sequential-agents
 ---
 

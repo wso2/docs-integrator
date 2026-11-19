@@ -1,22 +1,22 @@
 ---
 title: Azure DevOps
-description: CI/CD pipeline with Azure DevOps for WSO2 Agent Builder.
+description: CI/CD pipeline with Azure DevOps for Choreo Agent Builder.
 slug: /deploy-and-run/cicd/azure-devops
 sidebar_position: 4
 ---
 
 # Azure DevOps
 
-Automate build and test of your WSO2 Agent Builder projects using Azure DevOps Pipelines.
+Automate build and test of your Choreo Agent Builder projects using Azure DevOps Pipelines.
 
 ## Overview
 
-Azure DevOps Pipelines provides a fully managed CI/CD service that integrates with Git repositories. For WSO2 Agent Builder projects built on Ballerina, a pipeline installs Ballerina on the Microsoft-hosted Ubuntu agent, then runs tests and builds the package.
+Azure DevOps Pipelines provides a fully managed CI/CD service that integrates with Git repositories. For Choreo Agent Builder projects built on Ballerina, a pipeline installs Ballerina on the Microsoft-hosted Ubuntu agent, then runs tests and builds the package.
 
 ## Prerequisites
 
 - An Azure DevOps organization and project
-- A Git repository containing your WSO2 Agent Builder (Ballerina) project
+- A Git repository containing your Choreo Agent Builder (Ballerina) project
 
 ## Pipeline configuration
 

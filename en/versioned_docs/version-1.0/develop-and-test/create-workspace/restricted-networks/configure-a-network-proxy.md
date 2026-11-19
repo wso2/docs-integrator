@@ -1,11 +1,11 @@
 ---
-title: Configure a Network Proxy for WSO2 Agent Builder
+title: Configure a Network Proxy for Choreo Agent Builder
 sidebar_label: Configure a Network Proxy
 sidebar_position: 1
 slug: /develop-and-test/create-workspace/restricted-networks/configure-a-network-proxy
 ---
 
-# Configure a Network Proxy for WSO2 Agent Builder
+# Configure a Network Proxy for Choreo Agent Builder
 
 ## Overview
 
@@ -41,7 +41,7 @@ If you encounter certificate validation errors like:
 
 Follow these steps:
 
-1. Navigate to the `dependencies/` directory in your WSO2 Agent Builder installation (where the JRE is located):
+1. Navigate to the `dependencies/` directory in your Choreo Agent Builder installation (where the JRE is located):
    - macOS: `/Applications/WSO2 Agent Builder.app/Contents/components/dependencies`
    - Linux: `/usr/share/wso2-agent-builder/components/dependencies`
    - Windows: `%USERPROFILE%\AppData\Local\Programs\WSO2\Agent Builder\components\dependencies`

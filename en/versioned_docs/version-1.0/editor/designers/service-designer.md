@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Service Designer
-description: Design the HTTP service behind an agent's HTTP trigger visually in WSO2 Agent Builder.
+description: Design the HTTP service behind an agent's HTTP trigger visually in Choreo Agent Builder.
 slug: /editor/designers/service-designer
 ---
 
@@ -10,9 +10,9 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Service Designer
 
-The Service Designer is the surface you open for a service entry point in WSO2 Agent Builder. It lists every resource or handler the service exposes and gives you one place to add, edit, remove, try out, and export them.
+The Service Designer is the surface you open for a service entry point in Choreo Agent Builder. It lists every resource or handler the service exposes and gives you one place to add, edit, remove, try out, and export them.
 
-In WSO2 Agent Builder, a service is created when you add a trigger to an agent. For example, **Add Trigger → HTTP** creates an HTTP service with one resource that calls the agent. The Service Designer is where you shape that service afterwards, for example by adding `GET`, `POST`, `PUT`, and `DELETE` resources.
+In Choreo Agent Builder, a service is created when you add a trigger to an agent. For example, **Add Trigger → HTTP** creates an HTTP service with one resource that calls the agent. The Service Designer is where you shape that service afterwards, for example by adding `GET`, `POST`, `PUT`, and `DELETE` resources.
 
 <ThemedImage
     alt="Service Designer for the /orders HTTP service, with the Listener and Base Path metadata, the + Resource button, and the POST summary, GET status, POST create, PUT update, and DELETE cancel resources highlighted."

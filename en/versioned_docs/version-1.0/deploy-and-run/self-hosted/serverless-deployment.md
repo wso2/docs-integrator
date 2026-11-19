@@ -7,7 +7,7 @@ slug: /deploy-and-run/self-hosted/serverless-deployment
 
 # Serverless Deployment
 
-WSO2 Agent Builder projects can be deployed as serverless functions, enabling event-driven scaling with zero infrastructure management. Ballerina supports AWS Lambda and Azure Functions as first-class deployment targets via compiler extensions that generate deployment artifacts automatically at build time.
+Choreo Agent Builder projects can be deployed as serverless functions, enabling event-driven scaling with zero infrastructure management. Ballerina supports AWS Lambda and Azure Functions as first-class deployment targets via compiler extensions that generate deployment artifacts automatically at build time.
 
 ## Azure Functions
 

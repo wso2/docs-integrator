@@ -1,13 +1,13 @@
 ---
 sidebar_position: 3
 title: Zipkin
-description: Set up Zipkin for distributed tracing of WSO2 Agent Builder agents.
+description: Set up Zipkin for distributed tracing of Choreo Agent Builder agents.
 slug: /observe/open-source/zipkin
 ---
 
 # Zipkin
 
-Zipkin is an open-source distributed tracing platform that helps troubleshoot latency problems in service architectures. WSO2 Agent Builder provides built-in Zipkin support, publishing tracing data in Zipkin format.
+Zipkin is an open-source distributed tracing platform that helps troubleshoot latency problems in service architectures. Choreo Agent Builder provides built-in Zipkin support, publishing tracing data in Zipkin format.
 
 ## Prerequisites
 
@@ -86,7 +86,7 @@ reporterBufferSize = 10000
 
 ## Step 4: Send Requests
 
-Run the service and send requests to it to generate trace data. The example requests below call this sample shop service (`main.bal`), which listens on port `8090`. The service hosts a shop assistant agent that answers customer questions and calls tools to list products, place orders, and look up orders. The sample uses the default WSO2 model provider.
+Run the service and send requests to it to generate trace data. The example requests below call this sample shop service (`main.bal`), which listens on port `8090`. The service hosts a shop assistant agent that answers customer questions and calls tools to list products, place orders, and look up orders. The sample uses the default Choreo model provider.
 
 ```ballerina
 import ballerina/ai;

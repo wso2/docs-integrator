@@ -1,17 +1,17 @@
 ---
 sidebar_position: 2
 title: Runtime Security
-description: Best practices for securing integrations in WSO2 Agent Builder at runtime, including JVM hardening, keystores, non-root execution, and network policies.
-keywords: [wso2 agent builder, runtime security, jvm hardening, non-root, container security, network policy]
+description: Best practices for securing integrations in Choreo Agent Builder at runtime, including JVM hardening, keystores, non-root execution, and network policies.
+keywords: [choreo agent builder, runtime security, jvm hardening, non-root, container security, network policy]
 slug: /deploy-and-run/secure/runtime-security
 ---
 
 # Runtime Security
 
-Securing integrations in WSO2 Agent Builder at runtime involves hardening the JVM, managing keystores and certificates, running as non-root, and applying network-level controls. This page covers production security best practices.
+Securing integrations in Choreo Agent Builder at runtime involves hardening the JVM, managing keystores and certificates, running as non-root, and applying network-level controls. This page covers production security best practices.
 
 :::info Prerequisites
-- WSO2 Agent Builder installed and a working integration
+- Choreo Agent Builder installed and a working integration
 - A target environment: Linux VM, Docker, or Kubernetes cluster
 :::
 

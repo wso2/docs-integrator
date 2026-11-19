@@ -2,14 +2,14 @@
 sidebar_position: 0
 sidebar_label: Overview
 title: Try-It Tool
-description: Test your work during development directly from WSO2 Agent Builder without an external client.
-keywords: [wso2 agent builder, try-it tool, test chat agent, test http service, test mcp]
+description: Test your work during development directly from Choreo Agent Builder without an external client.
+keywords: [choreo agent builder, try-it tool, test chat agent, test http service, test mcp]
 slug: /develop-and-test/test/try-it-tool
 ---
 
 # Try-It Tool
 
-The Try-It tool is a built-in development-time testing interface that lets you send requests to your service and inspect responses without leaving WSO2 Agent Builder. Use it as you write code to verify behavior immediately, before committing to automated tests. The tool starts your service automatically when you select **Try It**, so there is no separate run step required.
+The Try-It tool is a built-in development-time testing interface that lets you send requests to your service and inspect responses without leaving Choreo Agent Builder. Use it as you write code to verify behavior immediately, before committing to automated tests. The tool starts your service automatically when you select **Try It**, so there is no separate run step required.
 
 ## Try-It experiences
 

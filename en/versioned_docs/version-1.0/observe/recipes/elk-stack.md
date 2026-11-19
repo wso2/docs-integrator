@@ -12,7 +12,7 @@ Complete log aggregation, full-text search, and visualization using the Elastic 
 ## Architecture
 
 ```bash
-WSO2 Agent Builder agent
+Choreo Agent Builder agent
 ├── Logs (stderr) ──▶ Filebeat ──▶ Logstash ──▶ Elasticsearch ──▶ Kibana
 │                                   (optional)      (indexing)       (UI)
 │
@@ -85,7 +85,7 @@ services:
     networks:
       - elk
 
-  # WSO2 Agent Builder agent
+  # Choreo Agent Builder agent
   agent:
     image: eclipse-temurin:21-jre
     working_dir: /app

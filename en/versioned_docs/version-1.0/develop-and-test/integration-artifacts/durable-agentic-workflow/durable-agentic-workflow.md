@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Overview
 title: "Durable Agentic Workflow"
-description: How durable agents in WSO2 Agent Builder combine an AI agent's reasoning with long-running, crash-recoverable workflow execution, and when to use one.
-keywords: [wso2 agent builder, durable agentic workflow, durable agent, ai agent, long-running, crash recovery, human in the loop, hitl]
+description: How durable agents in Choreo Agent Builder combine an AI agent's reasoning with long-running, crash-recoverable workflow execution, and when to use one.
+keywords: [choreo agent builder, durable agentic workflow, durable agent, ai agent, long-running, crash recovery, human in the loop, hitl]
 slug: /develop-and-test/integration-artifacts/durable-agentic-workflow
 ---
 
@@ -12,7 +12,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Durable Agentic Workflow
 
-A durable agentic workflow is an [AI agent](../agents/agents.md) that runs as a [durable workflow](product://integrator/develop-and-test/integration-artifacts/workflow/durable-workflow). You describe the goal in natural language and the model decides the steps, adapting to each request at runtime. Because every step runs on the durable workflow runtime, the agent survives crashes and restarts, can wait days for a person or an event, and resumes exactly where it left off. In WSO2 Agent Builder, you build one as a **durable agent**.
+A durable agentic workflow is an [AI agent](../agents/agents.md) that runs as a [durable workflow](product://integrator/develop-and-test/integration-artifacts/workflow/durable-workflow). You describe the goal in natural language and the model decides the steps, adapting to each request at runtime. Because every step runs on the durable workflow runtime, the agent survives crashes and restarts, can wait days for a person or an event, and resumes exactly where it left off. In Choreo Agent Builder, you build one as a **durable agent**.
 
 <ThemedImage
     alt="The ClaimHandler overview with the /claim-agent HTTP service and its three resources wired to the claimAgent durable agent, including a dotted connector to the agent's chat data event."

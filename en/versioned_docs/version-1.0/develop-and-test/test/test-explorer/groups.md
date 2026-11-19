@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: Test Groups
-description: Assign tests to named groups and selectively run or exclude subsets without changing test code in WSO2 Agent Builder.
-keywords: [wso2 agent builder, test groups, run groups, disable groups, ballerina test]
+description: Assign tests to named groups and selectively run or exclude subsets without changing test code in Choreo Agent Builder.
+keywords: [choreo agent builder, test groups, run groups, disable groups, ballerina test]
 slug: /develop-and-test/test/test-explorer/groups
 ---
 

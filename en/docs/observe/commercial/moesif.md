@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Moesif
-description: Observe metrics, traces, and logs from WSO2 Agent Builder agents using Moesif API analytics.
+description: Observe metrics, traces, and logs from Choreo Agent Builder agents using Moesif API analytics.
 slug: /observe/commercial/moesif
 ---
 
@@ -27,7 +27,7 @@ After you log into Moesif Portal, get your `Moesif Application ID` during the on
    import ballerinax/moesif as _;
    ```
 
-   If you don't have an agent yet, you can use the following sample shop service, which listens on port `8090`. The service hosts a shop assistant agent that answers customer questions and calls tools to list products, place orders, and look up orders. The sample uses the default WSO2 model provider. The requests in **Step 5** call this service.
+   If you don't have an agent yet, you can use the following sample shop service, which listens on port `8090`. The service hosts a shop assistant agent that answers customer questions and calls tools to list products, place orders, and look up orders. The sample uses the default Choreo model provider. The requests in **Step 5** call this service.
 
    ```ballerina
    import ballerina/ai;

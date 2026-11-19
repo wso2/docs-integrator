@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: "Get a Data Event Result"
-description: Read a durable agent's answer to a sent data event in WSO2 Agent Builder by its correlation token, either waiting until the turn is answered or checking back later.
-keywords: [wso2 agent builder, durable agent, get data event result, agent reply, correlation token, agentbusyerror, durable agentic workflow]
+description: Read a durable agent's answer to a sent data event in Choreo Agent Builder by its correlation token, either waiting until the turn is answered or checking back later.
+keywords: [choreo agent builder, durable agent, get data event result, agent reply, correlation token, agentbusyerror, durable agentic workflow]
 slug: /develop-and-test/integration-artifacts/durable-agentic-workflow/get-data-event-result
 ---
 

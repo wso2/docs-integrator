@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Consuming MCP from an Agent
-description: Reference for using MCP servers as tool sources for WSO2 Agent Builder AI agents. Covers the Use MCP Server panel, tool filtering, and combining MCP tools with local tools.
+description: Reference for using MCP servers as tool sources for Choreo Agent Builder AI agents. Covers the Use MCP Server panel, tool filtering, and combining MCP tools with local tools.
 slug: /develop-and-test/integration-artifacts/mcp/consuming-mcp-from-agent
 ---
 
@@ -12,14 +12,14 @@ import TabItem from '@theme/TabItem';
 
 # Consuming MCP from an Agent
 
-An [AI agent](../agents/agents.md) in WSO2 Agent Builder can use any MCP server as a tool source. Add the server once, and the agent picks up every tool the server advertises (or only the ones you select) and treats them exactly like local function tools.
+An [AI agent](../agents/agents.md) in Choreo Agent Builder can use any MCP server as a tool source. Add the server once, and the agent picks up every tool the server advertises (or only the ones you select) and treats them exactly like local function tools.
 
 ## Adding an MCP server to an agent
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-On the agent canvas, select **Add Tool** at the bottom-right corner of the **AI Agent** node, then select **Use MCP Server**. In the **Add Tool - Use MCP Server** panel, select **Connect Manually** to enter a server URL. To use an MCP server that your organization added to WSO2 Agent Manager, select **WSO2 Agent Manager** instead. The manual connection form opens:
+On the agent canvas, select **Add Tool** at the bottom-right corner of the **AI Agent** node, then select **Use MCP Server**. In the **Add Tool - Use MCP Server** panel, select **Connect Manually** to enter a server URL. To use an MCP server that your organization added to Choreo Agent Manager, select **Choreo Agent Manager** instead. The manual connection form opens:
 
 <ThemedImage
     alt="The agent canvas with the Add Tool - Use MCP Server panel open, showing Server Url (http://localhost:8080/mcp), a Requires Authentication checkbox, Tools to Include set to Selected, the Available Tools list (3 of 3 selected: getTextStatistics, getReadabilityScore, and analyzeStructure, each with a Read more link) with a Deselect All button, a collapsed Advanced Configurations section, and Result (default aiMcpbasetoolkit)."
@@ -49,7 +49,7 @@ After you select **Save**, the toolkit appears on the canvas, connected to the *
 
 Saving the **Add Tool - Use MCP Server** panel generates a toolkit class named `McpToolKit` that implements `ai:McpBaseToolKit`, plus a module-level instance that connects at startup. The agent receives the toolkit through its `tools` list.
 
-In `agents.bal`, WSO2 Agent Builder generates the toolkit class and the agent declaration:
+In `agents.bal`, Choreo Agent Builder generates the toolkit class and the agent declaration:
 
 ```ballerina
 import ballerina/ai;
@@ -121,7 +121,7 @@ In the **Edit MCP Server** panel, set **Tools to Include** to **Selected** and s
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
-When you select tools in the panel, WSO2 Agent Builder adds one `@ai:AgentTool` function per selected tool to the toolkit class and registers them in a `map<ai:FunctionTool>`. The map is then passed to `ai:getPermittedMcpToolConfigs`, which filters the server's tool list to those keys.
+When you select tools in the panel, Choreo Agent Builder adds one `@ai:AgentTool` function per selected tool to the toolkit class and registers them in a `map<ai:FunctionTool>`. The map is then passed to `ai:getPermittedMcpToolConfigs`, which filters the server's tool list to those keys.
 
 ```ballerina
 public isolated function init(string serverUrl, mcp:Implementation info = {name: "MCP", version: "1.0.0"},

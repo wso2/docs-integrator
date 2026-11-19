@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Distributed Tracing
-description: Enable distributed tracing in WSO2 Agent Builder to follow a request across services, find latency bottlenecks, and debug failures, and choose where to send the traces.
+description: Enable distributed tracing in Choreo Agent Builder to follow a request across services, find latency bottlenecks, and debug failures, and choose where to send the traces.
 slug: /observe/tracing
 ---
 
@@ -9,7 +9,7 @@ slug: /observe/tracing
 
 Distributed tracing follows a single request end to end as it passes through your agent and the services it calls. Each step is recorded as a **span** with its duration and details, and the spans of one request are grouped into a **trace**. Use traces to see where time is spent, identify latency bottlenecks across service boundaries, and debug request failures.
 
-WSO2 Agent Builder produces traces using OpenTelemetry. You choose the backend that receives and displays them.
+Choreo Agent Builder produces traces using OpenTelemetry. You choose the backend that receives and displays them.
 
 ## Enable tracing with Jaeger or Zipkin
 

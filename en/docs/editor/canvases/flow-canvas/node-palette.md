@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Node Palette
-description: Every node you can add to a flow in WSO2 Agent Builder, organized by category, with the fields exposed on each node's configuration form.
-keywords: [wso2 agent builder, node palette, flow canvas, connections, statement, control, ai, error handling, concurrency, logging]
+description: Every node you can add to a flow in Choreo Agent Builder, organized by category, with the fields exposed on each node's configuration form.
+keywords: [choreo agent builder, node palette, flow canvas, connections, statement, control, ai, error handling, concurrency, logging]
 slug: /editor/canvases/flow-canvas/node-palette
 ---
 
@@ -390,7 +390,7 @@ The **AI** section of the node panel lets you build AI-powered integrations dire
 | **RAG** | Ground LLM responses in your own documents by retrieving relevant chunks at query time. | [How Knowledge Bases Work](../../../develop-and-test/integration-artifacts/knowledge-bases/how-knowledge-bases-work.md) |
 | **Agent** | Run multi-turn workflows where an LLM plans the next step, calls tools, and uses memory. | [AI agents](../../../develop-and-test/integration-artifacts/agents/agents.md) |
 
-For an end-to-end orientation to the AI building blocks in WSO2 Agent Builder, see the [AI Integrations overview](../../../develop-and-test/develop-and-test.md).
+For an end-to-end orientation to the AI building blocks in Choreo Agent Builder, see the [AI Integrations overview](../../../develop-and-test/develop-and-test.md).
 
 ### Model Provider
 
@@ -408,8 +408,8 @@ Selecting **Model Provider** lists the model providers already in the project. S
 
 | Provider | Description |
 |---|---|
-| **WSO2 Agent Manager** | Models your organization added to Agent Manager, served through its AI Gateway with platform-issued keys. Requires signing in. |
-| **Default Model Provider (WSO2)** | WSO2-managed model provider that supports chat completion. Useful when you don't have your own provider account. |
+| **Choreo Agent Manager** | Models your organization added to Agent Manager, served through its AI Gateway with platform-issued keys. Requires signing in. |
+| **Default Model Provider (Choreo)** | Choreo-managed model provider that supports chat completion. Useful when you don't have your own provider account. |
 | **Anthropic Model Provider** | Client for Anthropic Claude models. |
 | **Bedrock Model Providers** | Model providers from the `ballerinax/ai.aws.bedrock` module, grouped under one entry. |
 | **Azure OpenAI Model Provider** | Client for Azure-hosted OpenAI models. |
@@ -421,7 +421,7 @@ Selecting **Model Provider** lists the model providers already in the project. S
 | **OpenRouter Model Provider** | Client for interacting with LLMs via OpenRouter. |
 
 <ThemedImage
-    alt="Model providers list with WSO2 Agent Manager, Default, Anthropic, Bedrock, Azure OpenAI, Deepseek, Google Vertex, Mistral, Ollama, OpenAI, and OpenRouter providers"
+    alt="Model providers list with Choreo Agent Manager, Default, Anthropic, Bedrock, Azure OpenAI, Deepseek, Google Vertex, Mistral, Ollama, OpenAI, and OpenRouter providers"
     sources={{
         light: useBaseUrl('/img/editor/canvases/flow-canvas/model-providers-offered-v1.0.png'),
         dark: useBaseUrl('/img/editor/canvases/flow-canvas/model-providers-offered-v1.0.png'),
@@ -449,10 +449,10 @@ Select **Add Knowledge Base** to open the picker with the supported knowledge ba
 | **Vector Knowledge Base** | Generic vector knowledge base for managing chunk indexing and retrieval. Plug in any supported [Vector Store](../../../develop-and-test/integration-artifacts/knowledge-bases/vector-stores.md), [Embedding Provider](../../../develop-and-test/integration-artifacts/knowledge-bases/embedding-providers.md), and [Chunker](../../../develop-and-test/integration-artifacts/knowledge-bases/chunkers.md). |
 | **Bedrock Knowledge Bases** | Knowledge bases from the `ballerinax/ai.aws.bedrock` module, grouped under one entry. |
 | **Azure AI Search Knowledge Base** | Implementation backed by Azure AI Search. |
-| **WSO2 Cloud Knowledge Base** | Knowledge base hosted on WSO2 Cloud, used for retrieval. |
+| **Choreo Cloud Knowledge Base** | Knowledge base hosted on Choreo Cloud, used for retrieval. |
 
 <ThemedImage
-    alt="Knowledge bases list with Vector, Bedrock, Azure AI Search, and WSO2 Cloud knowledge bases"
+    alt="Knowledge bases list with Vector, Bedrock, Azure AI Search, and Choreo Cloud knowledge bases"
     sources={{
         light: useBaseUrl('/img/editor/canvases/flow-canvas/knowledge-bases-offered-v1.0.png'),
         dark: useBaseUrl('/img/editor/canvases/flow-canvas/knowledge-bases-offered-v1.0.png'),
@@ -614,10 +614,10 @@ An embedding provider turns text into vectors, for both the chunks you ingest an
     }}
 />
 
-Select **Add Embedding Provider** to open the picker with the supported embedding providers: **Default Embedding Provider (WSO2)**, **Bedrock Embedding Providers**, **Azure Embedding Provider**, **Google Vertex Embedding Provider**, **OpenAI Embedding Provider**, and **OpenRouter Embedding Provider**.
+Select **Add Embedding Provider** to open the picker with the supported embedding providers: **Default Embedding Provider (Choreo)**, **Bedrock Embedding Providers**, **Azure Embedding Provider**, **Google Vertex Embedding Provider**, **OpenAI Embedding Provider**, and **OpenRouter Embedding Provider**.
 
 <ThemedImage
-    alt="Embedding providers list with Default (WSO2), Bedrock, Azure, Google Vertex, OpenAI, and OpenRouter providers"
+    alt="Embedding providers list with Default (Choreo), Bedrock, Azure, Google Vertex, OpenAI, and OpenRouter providers"
     sources={{
         light: useBaseUrl('/img/editor/canvases/flow-canvas/embedding-providers-offered-v1.0.png'),
         dark: useBaseUrl('/img/editor/canvases/flow-canvas/embedding-providers-offered-v1.0.png'),

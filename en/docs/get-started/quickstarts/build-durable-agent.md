@@ -2,8 +2,8 @@
 sidebar_position: 7
 title: "Build a Claim Handling Durable Agent"
 sidebar_label: "Build a Durable Agent"
-description: Build your first durable agent in WSO2 Agent Builder, an AI agent that validates expense claims and pays them only after a Finance reviewer approves.
-keywords: [wso2 agent builder, durable agent, durable workflow, agentic workflow, claim workflow, human in the loop, approval]
+description: Build your first durable agent in Choreo Agent Builder, an AI agent that validates expense claims and pays them only after a Finance reviewer approves.
+keywords: [choreo agent builder, durable agent, durable workflow, agentic workflow, claim workflow, human in the loop, approval]
 slug: /get-started/quickstarts/build-durable-agent
 ---
 
@@ -23,19 +23,19 @@ The durable AI agent receives expense claims, validates them, and pays them out 
 
 ## Prerequisites
 
-A working WSO2 Agent Builder environment.
+A working Choreo Agent Builder environment.
 
 <PrereqCard icon="local" title="Local setup" href="/get-started/setup">
-  Install and launch WSO2 Integrator on your machine.
+  Install and launch Choreo Integrator on your machine.
 </PrereqCard>
-<PrereqCard icon="cloud" title="WSO2 Cloud Account" href="/get-started/setup" cloud>
-  For AI assisted development and WSO2 Cloud deployments.
+<PrereqCard icon="cloud" title="Choreo Cloud Account" href="/get-started/setup" cloud>
+  For AI assisted development and Choreo Cloud deployments.
 </PrereqCard>
 
 Also required:
 
-<PrereqCard icon="ai" title="WSO2 Integrator Copilot" href="/get-started/setup" cloud>
-  Signed in to WSO2 Integrator Copilot (provides the default AI model — no API key needed)
+<PrereqCard icon="ai" title="Choreo Integrator Copilot" href="/get-started/setup" cloud>
+  Signed in to Choreo Integrator Copilot (provides the default AI model — no API key needed)
 </PrereqCard>
 <PrereqCard icon="cloud" title="Docker" href="https://docs.docker.com/engine/install/">
   Docker installed, including Docker Compose. It runs the Temporal server that keeps the workflow's durable record.
@@ -47,9 +47,9 @@ Also required:
 
 ## Step 1: Create the project
 
-1. Open WSO2 Agent Builder. Under **Start Building your Agent**, click **Create**.
+1. Open Choreo Agent Builder. Under **Start Building your Agent**, click **Create**.
 
-   If you're not signed in, click **Sign In** first. The default WSO2 model provider used in this quick start needs you to be signed in before you run the agent.
+   If you're not signed in, click **Sign In** first. The default Choreo model provider used in this quick start needs you to be signed in before you run the agent.
 
 2. Set **Project name** to `ClaimHandling`.
 
@@ -85,7 +85,7 @@ Creating the agent is also where you describe it: the model it thinks with, its 
 
 3. Set **Name** to `claimAgent`.
 
-4. Leave **Model** on **Default WSO2 Model Provider**.
+4. Leave **Model** on **Default Choreo Model Provider**.
 
 5. Set **Role** to `Expense claim assistant`.
 
@@ -96,7 +96,7 @@ Creating the agent is also where you describe it: the model it thinks with, its 
    ```
 
    <ThemedImage
-      alt="The Create Durable Agent form with Name set to claimAgent, Model set to Default WSO2 Model Provider, Role set to Expense claim assistant, and the Instructions filled in."
+      alt="The Create Durable Agent form with Name set to claimAgent, Model set to Default Choreo Model Provider, Role set to Expense claim assistant, and the Instructions filled in."
       sources={{
          light: useBaseUrl('/img/get-started/build-durable-agent/create-durable-agent-form-1-v1.0.png'),
          dark: useBaseUrl('/img/get-started/build-durable-agent/create-durable-agent-form-1-v1.0.png'),
@@ -324,7 +324,7 @@ docker compose up
 
 Leave the containers running for the rest of this guide.
 
-To check that WSO2 Agent Builder can reach it, select **ClaimHandler** in the breadcrumb to open the integration overview, and in the right panel, under **Management**, expand **Workflow Management**. It reads **Workflow runtime reachable at localhost:7233.**
+To check that Choreo Agent Builder can reach it, select **ClaimHandler** in the breadcrumb to open the integration overview, and in the right panel, under **Management**, expand **Workflow Management**. It reads **Workflow runtime reachable at localhost:7233.**
 
 <ThemedImage
    alt="The ClaimHandler overview with Workflow Management expanded, reading Workflow runtime reachable at localhost:7233."

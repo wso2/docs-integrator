@@ -2,14 +2,14 @@
 sidebar_position: 0
 sidebar_label: Test Toolkit
 title: Test Toolkit
-description: Verify your work in WSO2 Agent Builder with the built-in Try-It tool, agent evaluations, and automated Ballerina tests.
-keywords: [wso2 agent builder, testing, try-it, agent evaluation, evalset, test explorer, code coverage]
+description: Verify your work in Choreo Agent Builder with the built-in Try-It tool, agent evaluations, and automated Ballerina tests.
+keywords: [choreo agent builder, testing, try-it, agent evaluation, evalset, test explorer, code coverage]
 slug: /develop-and-test/test
 ---
 
 # Test Toolkit
 
-WSO2 Agent Builder provides a full testing toolkit built into the editor. You do not need any external testing tool. Interactive verification, agent evaluation, automated test authoring, and coverage reporting are all available without leaving your development environment.
+Choreo Agent Builder provides a full testing toolkit built into the editor. You do not need any external testing tool. Interactive verification, agent evaluation, automated test authoring, and coverage reporting are all available without leaving your development environment.
 
 ## Testing approaches
 
@@ -18,11 +18,11 @@ WSO2 Agent Builder provides a full testing toolkit built into the editor. You do
 | **[Try-It tool](try-it-tool/try-it-tool.md)** | Sends live requests to a running integration and shows the response instantly. No test code required. Supports chat agents, HTTP services, and MCP servers. | While building. Verify behavior after every change before writing formal tests. |
 | **[Agent evaluations](../test/evaluations/evaluations.md)** | Capture agent session traces into evalsets, then score agent responses against expected behavior with LLM-as-judge and regression checks. | When testing AI agents. Validate response quality and tool use, and catch regressions over time. |
 | **[Test Explorer](test-explorer/test-explorer.md)** | Runs automated test cases written with the Ballerina test framework. Provides a visual view of pass/fail results, lets you re-run failures, and generates HTML and coverage reports. | When a feature is stable. Write repeatable tests that run in CI and catch regressions. |
-| **[Generate integration tests](../../editor/copilot/capabilities.md#generate-integration-tests)** | WSO2 Agent Builder Copilot writes Ballerina tests for your integration, such as tests for an agent's tools, and runs them with the built-in test runner. | When you want test coverage fast. Generate a first draft, then review and extend. |
+| **[Generate integration tests](../../editor/copilot/capabilities.md#generate-integration-tests)** | Choreo Agent Builder Copilot writes Ballerina tests for your integration, such as tests for an agent's tools, and runs them with the built-in test runner. | When you want test coverage fast. Generate a first draft, then review and extend. |
 
 ## Choosing the right approach
 
-Start with the **Try-It tool** during active development to verify behavior after every change. For AI agents, use **Agent evaluations** to score response quality and catch regressions as you iterate. Use **Test Explorer** to run Ballerina unit tests, check coverage, and integrate with your CI pipeline. To bootstrap a suite quickly, let [WSO2 Agent Builder Copilot generate integration tests](../../editor/copilot/capabilities.md#generate-integration-tests) and run them with the built-in test runner, then review and extend.
+Start with the **Try-It tool** during active development to verify behavior after every change. For AI agents, use **Agent evaluations** to score response quality and catch regressions as you iterate. Use **Test Explorer** to run Ballerina unit tests, check coverage, and integrate with your CI pipeline. To bootstrap a suite quickly, let [Choreo Agent Builder Copilot generate integration tests](../../editor/copilot/capabilities.md#generate-integration-tests) and run them with the built-in test runner, then review and extend.
 
 The approaches complement each other. Most projects use several of them at different points in the development lifecycle.
 

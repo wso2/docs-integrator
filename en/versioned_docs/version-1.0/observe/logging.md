@@ -1,13 +1,13 @@
 ---
 sidebar_position: 1
 title: Logging
-description: Configure logging, log levels, and log aggregation for WSO2 Agent Builder agents.
+description: Configure logging, log levels, and log aggregation for Choreo Agent Builder agents.
 slug: /observe/logging
 ---
 
 # Logging
 
-Configure logging for your WSO2 Agent Builder agents to capture operational data, debug issues, and feed log aggregation systems. Ballerina provides structured logging with full context propagation, making it easy to correlate logs with traces and metrics.
+Configure logging for your Choreo Agent Builder agents to capture operational data, debug issues, and feed log aggregation systems. Ballerina provides structured logging with full context propagation, making it easy to correlate logs with traces and metrics.
 
 ## Default Logging Behavior
 
