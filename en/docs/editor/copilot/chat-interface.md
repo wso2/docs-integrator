@@ -20,8 +20,8 @@ The chat input bar is where you type prompts and control how Copilot responds. I
 <ThemedImage
     alt="Copilot chat controls: the slash palette listing commands and built-in skills, the Edit/Plan mode toggle, web access, attach context, and send."
     sources={{
-        light: useBaseUrl('/img/editor/copilot/copilot-chat-controls-v1.0.png'),
-        dark: useBaseUrl('/img/editor/copilot/copilot-chat-controls-v1.0.png'),
+        light: useBaseUrl('/img/editor/copilot/choreo-copilot-chat-controls-v1.0.png'),
+        dark: useBaseUrl('/img/editor/copilot/choreo-copilot-chat-controls-v1.0.png'),
     }}
 />
 

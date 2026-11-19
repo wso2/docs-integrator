@@ -19,8 +19,8 @@ With a Choreo Cloud Knowledge Base, Choreo Cloud manages document ingestion, whi
 <ThemedImage
     alt="Documents flow into Choreo Cloud Ingestion, which stores them in a Choreo Cloud Knowledge Base. Both the ingestion step and the knowledge base are managed by Choreo Cloud."
     sources={{
-        light: useBaseUrl('/img/genai/develop/knowledge-bases/ingest-documents-wso2-cloud-v1.0.png'),
-        dark: useBaseUrl('/img/genai/develop/knowledge-bases/ingest-documents-wso2-cloud-v1.0.png'),
+        light: useBaseUrl('/img/genai/develop/knowledge-bases/choreo-ingest-documents-cloud-v1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/knowledge-bases/choreo-ingest-documents-cloud-v1.0.png'),
     }}
 />
 

@@ -18,8 +18,8 @@ The **Choreo Agent Builder editor** brings together everything you need to devel
 <ThemedImage
     alt="Choreo Agent Builder Editor components: the Editor Window contains Views (Project, Integration, Library) and the surfaces you work on inside a view (Canvases, Panels, Designers), alongside Choreo Agent Builder Copilot"
     sources={{
-        light: useBaseUrl('/img/editor/editor-components-v1.0.png'),
-        dark: useBaseUrl('/img/editor/editor-components-v1.0.png'),
+        light: useBaseUrl('/img/editor/choreo-editor-components-v1.0.png'),
+        dark: useBaseUrl('/img/editor/choreo-editor-components-v1.0.png'),
     }}
 />
 

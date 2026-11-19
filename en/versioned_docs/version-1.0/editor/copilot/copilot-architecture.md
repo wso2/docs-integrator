@@ -22,8 +22,8 @@ Choreo Agent Builder Copilot is integrated into the Choreo Agent Builder develop
 <ThemedImage
     alt="Choreo Agent Builder Copilot macro architecture"
     sources={{
-        light: useBaseUrl('/img/reference/ai-usage/macro-architecture-v1.0.png'),
-        dark: useBaseUrl('/img/reference/ai-usage/macro-architecture-v1.0.png'),
+        light: useBaseUrl('/img/reference/ai-usage/choreo-copilot-macro-architecture-v1.0.png'),
+        dark: useBaseUrl('/img/reference/ai-usage/choreo-copilot-macro-architecture-v1.0.png'),
     }}
 />
 
@@ -53,8 +53,8 @@ The movement of data through Copilot is designed for zero retention at the inter
 <ThemedImage
     alt="Choreo Agent Builder Copilot data flow"
     sources={{
-        light: useBaseUrl('/img/reference/ai-usage/ai-data-flow-v1.0.png'),
-        dark: useBaseUrl('/img/reference/ai-usage/ai-data-flow-v1.0.png'),
+        light: useBaseUrl('/img/reference/ai-usage/choreo-copilot-ai-data-flow-v1.0.png'),
+        dark: useBaseUrl('/img/reference/ai-usage/choreo-copilot-ai-data-flow-v1.0.png'),
     }}
 />
 

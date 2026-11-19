@@ -26,8 +26,8 @@ A knowledge base is used in two stages:
 <ThemedImage
     alt="Knowledge base stages. Ingestion, run once: Documents go to a Chunker, then an Embedding Provider, and are stored in the Vector Store that backs the knowledge base. Retrieval, run per request: a User question goes to an Embedding Provider, relevant chunks are retrieved from the Vector Store, the prompt is augmented with them, and the LLM returns a Response."
     sources={{
-        light: useBaseUrl('/img/genai/develop/knowledge-bases/how-knowledge-bases-work-v1.0.png'),
-        dark: useBaseUrl('/img/genai/develop/knowledge-bases/how-knowledge-bases-work-v1.0.png'),
+        light: useBaseUrl('/img/genai/develop/knowledge-bases/choreo-how-knowledge-bases-work-v1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/knowledge-bases/choreo-how-knowledge-bases-work-v1.0.png'),
     }}
 />
 

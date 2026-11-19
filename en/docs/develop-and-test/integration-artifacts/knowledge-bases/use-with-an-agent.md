@@ -21,8 +21,8 @@ This page uses a Choreo Cloud Knowledge Base as the example. The steps are the s
 <ThemedImage
     alt="Sequence of an agent retrieving from a knowledge base: 1. the User asks the AI Agent a question, 2. the agent sends a search query to the Retrieve tool, 3. the tool retrieves relevant content from the Knowledge Base, 4. the knowledge base returns matching chunks, 5. the tool returns the retrieved context to the agent, 6. the agent returns a grounded response to the user."
     sources={{
-        light: useBaseUrl('/img/genai/develop/knowledge-bases/agent-retrieve-from-knowledge-base-v1.0.png'),
-        dark: useBaseUrl('/img/genai/develop/knowledge-bases/agent-retrieve-from-knowledge-base-v1.0.png'),
+        light: useBaseUrl('/img/genai/develop/knowledge-bases/choreo-agent-retrieve-from-knowledge-base-v1.0.png'),
+        dark: useBaseUrl('/img/genai/develop/knowledge-bases/choreo-agent-retrieve-from-knowledge-base-v1.0.png'),
     }}
 />
 
