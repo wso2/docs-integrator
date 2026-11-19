@@ -955,7 +955,7 @@ aws ecr create-repository --region <region> --repository-name my-agent
 
 AgentCore Runtime starts your container and talks to it over a fixed contract. An agent runtime uses the `HTTP` protocol, and the container must serve `GET /ping` and `POST /invocations` on `0.0.0.0:8080`. The `ballerinax/ai.aws.bedrock.agentcore` module, part of `ballerinax/ai.aws.bedrock` 1.1.0 or later, serves that contract for you, so the service holds only the agent logic. Its `agentcore:Listener`:
 
-- Listens on port 8080 and waits up to 15 minutes for an answer, AgentCore's limit for a synchronous invocation. A plain `http:Listener` gives up after 60 seconds.
+- Listens on port 8080 and waits up to 15 minutes for an answer. A plain `http:Listener` gives up after 60 seconds.
 - Answers `GET /ping` with the status your `get ping` resource returns. It reports a new `time_of_last_update` only when that status changes, so an idle session still stops after 15 minutes instead of running, and billing, until its 8 hour limit.
 - Reads the AgentCore request headers into an `agentcore:Context`, converts the JSON body to the type you declare, and returns your result as JSON.
 
@@ -1000,7 +1000,7 @@ In WSO2 Agent Builder, the agent's canvas shows the service as the agent's trigg
 ![An agent's canvas in WSO2 Agent Builder, with the agentcore:InvocationService trigger highlighted on the left of the AI Agent node](/img/deploy-and-run/self-hosted/03-agentcore-agent-canvas-v1.0.png)
 
 :::caution Conversations last only as long as the microVM
-The agent keeps its conversation memory inside the container. By default, AgentCore Runtime stops a session's microVM after 15 minutes without an invocation or after 8 hours in total, and it also stops one that fails its health check. A later call with the same session id starts a new microVM, and the agent no longer remembers the conversation. It doesn't report an error.
+The agent keeps its conversation memory inside the container. By default, AgentCore Runtime stops a session's microVM after 15 minutes without an invocation or after 8 hours of compute lifetime, and it also stops one that fails its health check. A later call with the same session id starts a new microVM with a fresh lifetime, and the agent no longer remembers the conversation. It doesn't report an error.
 
 To keep a conversation beyond that, store it outside the container in a durable [memory store](../../develop-and-test/integration-artifacts/agents/memory.md#add-memory-store).
 :::
@@ -1010,7 +1010,7 @@ When the resource returns an error, the listener logs it with its cause, the req
 :::
 
 :::note
-AgentCore Runtime doesn't forward the user id that a caller passes with `--runtime-user-id`, or its own request id, to the container. `ctx.userId` is always `()`, and `ctx.requestId` is generated in practice. A caller can still set the request id header, so never use `ctx.requestId` as a memory key or for any trust decision. A call made with a user id arrives with a workload access token in `ctx.workloadAccessToken` instead.
+AgentCore Runtime doesn't populate `ctx.userId` from the `--runtime-user-id` value, and it doesn't pass its own request id to the container, so `ctx.requestId` is generated. A caller can still set the request id header, so never use `ctx.requestId` as a memory key or for any trust decision. Under inbound JWT authentication, the runtime delivers a workload access token, which arrives in `ctx.workloadAccessToken`.
 :::
 
 ### Step 2: Connect the agent to AgentCore Gateway
@@ -1121,6 +1121,8 @@ AgentCore Policy and guardrails apply only to calls that pass through the Gatewa
 
 ### Step 3: Configure the image
 
+`Ballerina.toml` and `Cloud.toml` apply to the terminal build. WSO2 Agent Builder's **Build Image** writes its own `Dockerfile` and `start.sh` instead and doesn't read `Cloud.toml`. The rules at the end of this step apply to both.
+
 Set the cloud target in `Ballerina.toml`:
 
 ```toml
@@ -1150,7 +1152,7 @@ Follow these rules for every image you deploy to AgentCore Runtime:
 
 ### Step 4: Build and test locally
 
-In WSO2 Agent Builder, open the agentic integration's overview, select **Deploy**, expand **Amazon Bedrock AgentCore**, and select **Build Image**. To send the agent's traces to AWS X-Ray and CloudWatch, keep **Export traces to AWS X-Ray and CloudWatch** selected.
+In WSO2 Agent Builder, open the agentic integration's overview, select **Deploy**, expand **Amazon Bedrock AgentCore**, and select **Build Image**. To send the agent's traces to AWS X-Ray and CloudWatch, keep **Export traces to AWS X-Ray and CloudWatch** selected. WSO2 Agent Builder generates a `Dockerfile`, a `.dockerignore`, and a `start.sh` in the project, then runs `bal build --observability-included` and `docker buildx build --platform linux/arm64 --provenance=false --load`, so the image already meets the first two rules above.
 
 ![The Deploy panel on an agentic integration's overview, with Amazon Bedrock AgentCore expanded and the Build Image button highlighted](/img/deploy-and-run/self-hosted/04-agentcore-build-image-v1.0.png)
 
