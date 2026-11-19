@@ -37,7 +37,7 @@ One flow creates the listener and the service together; the authentication metho
        }}
    />
 
-3. The **Create Azure Blob Storage Integration** form opens with the **Listener Configurations** box first. Name the listener and pick an entry under **Select the authentication method**. For **Shared Key**, fill in:
+3. The **Create Azure Blobs Integration** form opens with the **Listener Configurations** box first. Name the listener and pick an entry under **Select the authentication method**. For **Shared Key**, fill in:
 
    | Field | Description |
    |---|---|
@@ -62,7 +62,7 @@ One flow creates the listener and the service together; the authentication metho
 
    The selector's other options, SAS token, SAS URL, connection string, and Microsoft Entra ID, reveal the fields of the matching credential record shown on the Ballerina Code tab. The listener's advanced section holds **Relaxed Data Binding** and **Queue Service URL**.
 
-5. Click **Create**. WSO2 Integrator generates the listener and the service, and an **Azure Blob Storage Integration** entry appears in the sidebar under **Entry Points**; its page header names the listener and the queue it consumes.
+5. Click **Create**. WSO2 Integrator generates the listener and the service, and an **Azure Blobs Integration** entry appears in the sidebar under **Entry Points**; its page header names the listener and the queue it consumes.
 
 6. Click [**+ Add Handler**](#adding-a-blob-handler) in the service view to define how blob events are processed.
 
@@ -219,7 +219,7 @@ Creation and replacement are the same event, so overwriting an existing blob fir
    | **Format** | The format of incoming blobs: **JSON**, **XML**, **CSV**, **Text**, or **Raw Bytes**. Determines the handler function name and the type of the `content` parameter. **Raw Bytes** and **CSV** also offer **Stream (Large Blobs)**, which delivers the content as a stream instead of a value. See [Content types](#content-types). |
    | **Define Content Schema** | For **JSON**, **XML**, and **CSV**: pick a record type you created earlier (under **Types**) to receive typed content instead of `json`, `xml`, or string rows. |
    | **Routing** | Two optional regular expressions, **Blob Name Pattern** and **Content Type Pattern**, that route matching blobs to this handler instead of the extension routing. See [Routing](#routing). |
-   | **Advanced Configurations** | **Blob Event (event)** adds the `blob:BlobEvent` parameter, carrying the container, path, URL, and the rest of the event. **Azure Blob Storage Connection (caller)** adds the `blob:Caller` parameter, a client bound to the event's container. |
+   | **Advanced Configurations** | **Blob Event (event)** adds the `blob:BlobEvent` parameter, carrying the container, path, URL, and the rest of the event. **Azure Blobs Connection (caller)** adds the `blob:Caller` parameter, a client bound to the event's container. |
 
    <ThemedImage
        alt="On Create handler configuration with the JSON format"
@@ -239,7 +239,7 @@ Creation and replacement are the same event, so overwriting an existing blob fir
        }}
    />
 
-Add **On Delete** and **On Error** the same way. The **On Error** handler's optional **Blob Event (event)** and **Azure Blob Storage Connection (caller)** parameters are nilable, because a failed poll carries neither.
+Add **On Delete** and **On Error** the same way. The **On Error** handler's optional **Blob Event (event)** and **Azure Blobs Connection (caller)** parameters are nilable, because a failed poll carries neither.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
