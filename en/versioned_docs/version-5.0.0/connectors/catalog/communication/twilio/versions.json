@@ -1,6 +1,0 @@
-{
-  "connector_name": "twilio",
-  "versions": ["5.0.x","4.0.x"],
-  "latest": "5.0.x",
-  "shared": ["setup-guide"]
-}
