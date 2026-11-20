@@ -170,28 +170,46 @@ flowchart LR
 
 ### Step 1: Open the artifacts palette
 
-Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **Slack** card.
+Select **Add Artifact** to open the artifacts palette. Search for `slack.trigger` and find the **slack.trigger** card under **More on Ballerina Central**.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/communication/slack/slack_trigger_screenshots_01_artifact_palette.png: Artifacts palette showing the Event Integration category with the Slack card -->
+<ThemedImage
+    alt="Artifacts palette search results showing the slack.trigger package from Ballerina Central"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_01_artifact_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_01_artifact_palette.png'),
+    }}
+/>
 
 ### Configuring the Slack listener
 
 ### Step 2: Fill in the Slack Event Integration form
 
-Select the **Slack** card to open the **Slack Event Integration** form, and set:
+Select the **slack.trigger** card to open the **Slack Event Integration** form, and set:
 
 - **Event Channel**: `slack:MessageService`, the default.
 - **Listener**: **Create New Listener**, named `slackListener`.
 - **Webhook Listener Port**: `8090`, the default.
 - **Signing Secret**: bind it to a new configurable variable named `signingSecret`.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/communication/slack/slack_trigger_screenshots_02_trigger_config_form.png: Slack Event Integration form with Event Channel set to slack:MessageService and a new listener on port 8090 -->
+<ThemedImage
+    alt="Slack Event Integration form with Event Channel set to MessageService and a new listener on port 8090"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_02_trigger_config_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_02_trigger_config_form.png'),
+    }}
+/>
 
 ### Step 3: Set the configurable values
 
 In the left panel, select **Configurations** and set **signingSecret** to your Slack app's signing secret. The listener rejects every delivery until **signingSecret** is set.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/communication/slack/slack_trigger_screenshots_03_configurations_panel.png: Configurations panel showing the signingSecret configurable -->
+<ThemedImage
+    alt="Configurations panel showing the signingSecret configurable"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_03_configurations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_03_configurations_panel.png'),
+    }}
+/>
 
 ### Step 4: Create the trigger
 
@@ -203,7 +221,13 @@ Select **Create**. WSO2 Integrator adds the listener and a `slack:MessageService
 
 Open the **slack:MessageService** service. It lists all 4 of its event handlers, including `onMessage`, which receives a `slack:MessageEventWrapper`. Leave the other handlers empty.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/communication/slack/slack_trigger_screenshots_04_add_handler_panel.png: slack:MessageService view showing the onMessage event handler attached to slackListener -->
+<ThemedImage
+    alt="MessageService view showing the onMessage event handler attached to the listener"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_04_add_handler_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_04_add_handler_panel.png'),
+    }}
+/>
 
 ### Step 6: Log the event
 
@@ -216,7 +240,13 @@ remote function onMessage(slack:MessageEventWrapper payload) returns error? {
 }
 ```
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/communication/slack/slack_trigger_screenshots_06_handler_flow.png: onMessage handler flow with a log:printInfo node -->
+<ThemedImage
+    alt="onMessage handler flow with a log:printInfo node"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_06_handler_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_06_handler_flow.png'),
+    }}
+/>
 
 ### Running the integration
 

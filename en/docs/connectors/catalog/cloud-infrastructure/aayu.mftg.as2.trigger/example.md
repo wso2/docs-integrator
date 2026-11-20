@@ -35,28 +35,46 @@ flowchart LR
 
 ### Step 1: Open the artifacts palette
 
-Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **Aayu MFT Gateway** card.
+Select **Add Artifact** to open the artifacts palette. Search for `aayu.mftg.as2.trigger` and find the **aayu.mftg.as2.trigger** card under **More on Ballerina Central**.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_01_artifact_palette.png: Artifacts palette showing the Event Integration category with the Aayu MFT Gateway card -->
+<ThemedImage
+    alt="Artifacts palette search results showing the aayu.mftg.as2.trigger package from Ballerina Central"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_01_artifact_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_01_artifact_palette.png'),
+    }}
+/>
 
 ### Configuring the Aayu MFT Gateway listener
 
 ### Step 2: Fill in the Aayu MFTG AS2 Event Integration form
 
-Select the **Aayu MFT Gateway** card to open the **Aayu MFTG AS2 Event Integration** form, and set:
+Select the **aayu.mftg.as2.trigger** card to open the **Aayu MFTG AS2 Event Integration** form, and set:
 
 - **Event Channel**: `aayu:ReceivedMessageService`, the default.
 - **Listener**: **Create New Listener**, named `aayuListener`.
 - **Webhook Listener Port**: `8090`, the default.
 - **Webhook Public Key**: bind it to a new configurable variable named `webhookPublicKey`.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_02_trigger_config_form.png: Aayu MFTG AS2 Event Integration form with Event Channel set to aayu:ReceivedMessageService and a new listener on port 8090 -->
+<ThemedImage
+    alt="Aayu MFTG AS2 Event Integration form with Event Channel set to ReceivedMessageService and a new listener on port 8090"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_02_trigger_config_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_02_trigger_config_form.png'),
+    }}
+/>
 
 ### Step 3: Set the configurable values
 
 In the left panel, select **Configurations** and set **webhookPublicKey** to the whole webhook public key PEM from MFT Gateway. The listener rejects every delivery until **webhookPublicKey** is set.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_03_configurations_panel.png: Configurations panel showing the webhookPublicKey configurable -->
+<ThemedImage
+    alt="Configurations panel showing the webhookPublicKey configurable"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_03_configurations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_03_configurations_panel.png'),
+    }}
+/>
 
 ### Step 4: Create the trigger
 
@@ -68,7 +86,13 @@ Select **Create**. WSO2 Integrator adds the listener and an `aayu:ReceivedMessag
 
 Open the **aayu:ReceivedMessageService** service. It has one event handler, `onMessageReceivedSuccess`, which receives an `aayu:MessageReceivedEvent`.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_04_add_handler_panel.png: aayu:ReceivedMessageService view showing the onMessageReceivedSuccess event handler attached to aayuListener -->
+<ThemedImage
+    alt="ReceivedMessageService view showing the onMessageReceivedSuccess event handler attached to the listener"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_04_add_handler_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_04_add_handler_panel.png'),
+    }}
+/>
 
 ### Step 6: Log the event
 
@@ -82,7 +106,13 @@ remote function onMessageReceivedSuccess(aayu:MessageReceivedEvent payload) retu
 }
 ```
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_06_handler_flow.png: onMessageReceivedSuccess handler flow with a log:printInfo node -->
+<ThemedImage
+    alt="onMessageReceivedSuccess handler flow with a log:printInfo node"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_06_handler_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/cloud-infrastructure/aayu.mftg.as2.trigger/aayu_trigger_screenshots_06_handler_flow.png'),
+    }}
+/>
 
 ### Running the integration
 

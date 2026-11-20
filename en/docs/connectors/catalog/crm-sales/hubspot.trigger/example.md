@@ -35,29 +35,47 @@ flowchart LR
 
 ### Step 1: Open the artifacts palette
 
-Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **HubSpot** card.
+Select **Add Artifact** to open the artifacts palette. Search for `hubspot.trigger` and find the **hubspot.trigger** card under **More on Ballerina Central**. Don't use the built-in **HubSpot** card under **Event Integration**; it creates the older `trigger.hubspot` package.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_01_artifact_palette.png: Artifacts palette showing the Event Integration category with the HubSpot card -->
+<ThemedImage
+    alt="Artifacts palette search results showing the hubspot.trigger package from Ballerina Central"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_01_artifact_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_01_artifact_palette.png'),
+    }}
+/>
 
 ### Configuring the HubSpot listener
 
 ### Step 2: Fill in the HubSpot Event Integration form
 
-Select the **HubSpot** card to open the **HubSpot Event Integration** form, and set:
+Select the **hubspot.trigger** card to open the **HubSpot Event Integration** form, and set:
 
 - **Event Channel**: `hubspot:ContactService`, the default.
 - **Listener**: **Create New Listener**, named `hubspotListener`.
 - **Webhook Listener Port**: `8090`, the default.
 - **Webhook Secret**: bind it to a new configurable variable named `clientSecret`.
-- **Callback URL**: bind it to a new configurable variable named `callbackUrl`.
+- **Callback URL**: under **Advanced Configurations**, bind it to a new configurable variable named `callbackUrl`.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_02_trigger_config_form.png: HubSpot Event Integration form with Event Channel set to hubspot:ContactService and a new listener on port 8090 -->
+<ThemedImage
+    alt="HubSpot Event Integration form with Event Channel set to ContactService and a new listener on port 8090"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_02_trigger_config_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_02_trigger_config_form.png'),
+    }}
+/>
 
 ### Step 3: Set the configurable values
 
 In the left panel, select **Configurations** and set **clientSecret** to your HubSpot app's client secret, and **callbackUrl** to the target URL set on the app's webhooks, exactly as entered there. The listener rejects every delivery until **clientSecret** is set.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_03_configurations_panel.png: Configurations panel showing the clientSecret configurable -->
+<ThemedImage
+    alt="Configurations panel showing the clientSecret configurable"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_03_configurations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_03_configurations_panel.png'),
+    }}
+/>
 
 ### Step 4: Create the trigger
 
@@ -69,7 +87,13 @@ Select **Create**. WSO2 Integrator adds the listener and a `hubspot:ContactServi
 
 Open the **hubspot:ContactService** service. It lists all 7 of its event handlers, including `onContactCreation`, which receives a `hubspot:WebhookEvent`. Leave the other handlers empty.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_04_add_handler_panel.png: hubspot:ContactService view showing the onContactCreation event handler attached to hubspotListener -->
+<ThemedImage
+    alt="ContactService view showing the onContactCreation event handler attached to the listener"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_04_add_handler_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_04_add_handler_panel.png'),
+    }}
+/>
 
 ### Step 6: Log the event
 
@@ -81,7 +105,13 @@ remote function onContactCreation(hubspot:WebhookEvent payload) returns error? {
 }
 ```
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_06_handler_flow.png: onContactCreation handler flow with a log:printInfo node -->
+<ThemedImage
+    alt="onContactCreation handler flow with a log:printInfo node"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_06_handler_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/crm-sales/hubspot.trigger/hubspot_trigger_screenshots_06_handler_flow.png'),
+    }}
+/>
 
 ### Running the integration
 

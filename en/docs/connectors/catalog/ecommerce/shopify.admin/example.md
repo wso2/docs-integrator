@@ -177,10 +177,10 @@ flowchart LR
 
 ### Step 1: Open the artifacts palette
 
-Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **Shopify** card.
+Select **Add Artifact** to open the artifacts palette. Search for `shopify.trigger` and find the **shopify.trigger** card under **More on Ballerina Central**. Don't use the built-in **Shopify** card under **Event Integration**; it creates the older `trigger.shopify` package.
 
 <ThemedImage
-    alt="Artifacts palette showing the Event Integration category with the Shopify card"
+    alt="Artifacts palette search results showing the shopify.trigger package from Ballerina Central"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_01_artifact_palette.png'),
         dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_01_artifact_palette.png'),
@@ -191,7 +191,7 @@ Select **Add Artifact** to open the artifacts palette. Select the **Event Integr
 
 ### Step 2: Fill in the Shopify Event Integration form
 
-Select the **Shopify** card to open the **Shopify Event Integration** form, and set:
+Select the **shopify.trigger** card to open the **Shopify Event Integration** form, and set:
 
 - **Event Type**: `shopify:OrdersService`, the default.
 - **Listener**: **Create New Listener**, named `shopifyListener`.
@@ -199,7 +199,7 @@ Select the **Shopify** card to open the **Shopify Event Integration** form, and 
 - **Webhook Secret**: bind it to a new configurable variable named `webhookSecret`.
 
 <ThemedImage
-    alt="Shopify Event Integration form with Event Type set to shopify:OrdersService and a new listener on port 8090"
+    alt="Shopify Event Integration form with Event Type set to OrdersService and a new listener on port 8090"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_02_trigger_config_form.png'),
         dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_02_trigger_config_form.png'),
@@ -229,7 +229,7 @@ Select **Create**. WSO2 Integrator adds the listener and a `shopify:OrdersServic
 Open the **shopify:OrdersService** service. It lists all 6 of its event handlers, including `onOrdersCreate`, which receives a `shopify:OrderEvent`. Leave the other handlers empty.
 
 <ThemedImage
-    alt="shopify:OrdersService view showing the onOrdersCreate event handler attached to shopifyListener"
+    alt="OrdersService view showing the onOrdersCreate event handler attached to the listener"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_04_add_handler_panel.png'),
         dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_04_add_handler_panel.png'),

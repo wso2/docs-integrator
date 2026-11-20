@@ -35,7 +35,7 @@ flowchart LR
 
 ### Step 1: Open the artifacts palette
 
-Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **WSO2 Identity Server** card.
+Select **Add Artifact** to open the artifacts palette. Search for `identityserver.trigger` and find the **identityserver.trigger** card under **More on Ballerina Central**.
 
 <!-- TODO: Add visual designer screenshot img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_01_artifact_palette.png: Artifacts palette showing the Event Integration category with the WSO2 Identity Server card -->
 
@@ -43,7 +43,7 @@ Select **Add Artifact** to open the artifacts palette. Select the **Event Integr
 
 ### Step 2: Fill in the WSO2 Identity Server Event Integration form
 
-Select the **WSO2 Identity Server** card to open the **WSO2 Identity Server Event Integration** form, and set:
+Select the **identityserver.trigger** card to open the **WSO2 Identity Server Event Integration** form, and set:
 
 - **Event Channel**: `identityserver:LoginService`, the default.
 - **Listener**: **Create New Listener**, named `identityserverListener`.

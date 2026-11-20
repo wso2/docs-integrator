@@ -189,10 +189,10 @@ flowchart LR
 
 ### Step 1: Open the artifacts palette
 
-Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **GitHub** card.
+Select **Add Artifact** to open the artifacts palette. Search for `github.trigger` and find the **github.trigger** card under **More on Ballerina Central**. Don't use the built-in **GitHub** card under **Event Integration**; it creates the older `trigger.github` package.
 
 <ThemedImage
-    alt="Artifacts palette showing the Event Integration category with the GitHub card"
+    alt="Artifacts palette search results showing the github.trigger package from Ballerina Central"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_01_artifact_palette.png'),
         dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_01_artifact_palette.png'),
@@ -203,7 +203,7 @@ Select **Add Artifact** to open the artifacts palette. Select the **Event Integr
 
 ### Step 2: Fill in the GitHub Event Integration form
 
-Select the **GitHub** card to open the **GitHub Event Integration** form, and set:
+Select the **github.trigger** card to open the **GitHub Event Integration** form, and set:
 
 - **Event Channel**: `github:PushService`, the default.
 - **Listener**: **Create New Listener**, named `githubListener`.
@@ -211,7 +211,7 @@ Select the **GitHub** card to open the **GitHub Event Integration** form, and se
 - **Webhook Secret**: bind it to a new configurable variable named `webhookSecret`.
 
 <ThemedImage
-    alt="GitHub Event Integration form with Event Channel set to github:PushService, a new listener on port 8090, and Webhook Secret bound to the webhookSecret configurable"
+    alt="GitHub Event Integration form with Event Channel set to PushService, a new listener on port 8090, and Webhook Secret bound to the webhookSecret configurable"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_02_trigger_config_form.png'),
         dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_02_trigger_config_form.png'),
@@ -241,7 +241,7 @@ Select **Create**. WSO2 Integrator adds the listener and a `github:PushService` 
 Open the **github:PushService** service. It has one event handler, `onPush`, which receives a `github:PushPayload`.
 
 <ThemedImage
-    alt="github:PushService view showing the onPush event handler attached to githubListener"
+    alt="PushService view showing the onPush event handler attached to the listener"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_04_add_handler_panel.png'),
         dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_04_add_handler_panel.png'),

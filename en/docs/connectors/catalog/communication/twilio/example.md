@@ -197,10 +197,10 @@ flowchart LR
 
 ### Step 1: Open the artifacts palette
 
-Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **Twilio** card.
+Select **Add Artifact** to open the artifacts palette. Search for `twilio.trigger` and find the **twilio.trigger** card under **More on Ballerina Central**. Don't use the built-in **Twilio** card under **Event Integration**; it creates the older `trigger.twilio` package.
 
 <ThemedImage
-    alt="Artifacts palette showing the Event Integration category with the Twilio card"
+    alt="Artifacts palette search results showing the twilio.trigger package from Ballerina Central"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_01_artifact_palette.png'),
         dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_01_artifact_palette.png'),
@@ -211,7 +211,7 @@ Select **Add Artifact** to open the artifacts palette. Select the **Event Integr
 
 ### Step 2: Fill in the Twilio Event Integration form
 
-Select the **Twilio** card to open the **Twilio Event Integration** form, and set:
+Select the **twilio.trigger** card to open the **Twilio Event Integration** form, and set:
 
 - **Event Channel**: `twilio:SmsStatusService`, the default.
 - **Listener**: **Create New Listener**, named `twilioListener`.
@@ -220,7 +220,7 @@ Select the **Twilio** card to open the **Twilio Event Integration** form, and se
 - **Webhook Base URL**: bind it to a new configurable variable named `webhookBaseUrl`.
 
 <ThemedImage
-    alt="Twilio Event Integration form with Event Channel set to twilio:SmsStatusService and a new listener on port 8090"
+    alt="Twilio Event Integration form with Event Channel set to SmsStatusService and a new listener on port 8090"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_02_trigger_config_form.png'),
         dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_02_trigger_config_form.png'),
@@ -250,7 +250,7 @@ Select **Create**. WSO2 Integrator adds the listener and a `twilio:SmsStatusServ
 Open the **twilio:SmsStatusService** service. It lists all 13 of its event handlers, including `onDelivered`, which receives a `twilio:SmsStatusChangeEventWrapper`. Leave the other handlers empty.
 
 <ThemedImage
-    alt="twilio:SmsStatusService view showing the onDelivered event handler attached to twilioListener"
+    alt="SmsStatusService view showing the onDelivered event handler attached to the listener"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_04_add_handler_panel.png'),
         dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_04_add_handler_panel.png'),

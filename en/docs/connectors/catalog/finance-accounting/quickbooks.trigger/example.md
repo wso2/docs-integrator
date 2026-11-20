@@ -35,28 +35,46 @@ flowchart LR
 
 ### Step 1: Open the artifacts palette
 
-Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **QuickBooks** card.
+Select **Add Artifact** to open the artifacts palette. Search for `quickbooks.trigger` and find the **quickbooks.trigger** card under **More on Ballerina Central**.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_01_artifact_palette.png: Artifacts palette showing the Event Integration category with the QuickBooks card -->
+<ThemedImage
+    alt="Artifacts palette search results showing the quickbooks.trigger package from Ballerina Central"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_01_artifact_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_01_artifact_palette.png'),
+    }}
+/>
 
 ### Configuring the QuickBooks listener
 
 ### Step 2: Fill in the QuickBooks Event Integration form
 
-Select the **QuickBooks** card to open the **QuickBooks Event Integration** form, and set:
+Select the **quickbooks.trigger** card to open the **QuickBooks Event Integration** form, and set:
 
 - **Event Channel**: `quickbooks:CustomerService`, the default.
 - **Listener**: **Create New Listener**, named `quickbooksListener`.
 - **Webhook Listener Port**: `8090`, the default.
 - **Webhook Secret**: bind it to a new configurable variable named `verifierToken`.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_02_trigger_config_form.png: QuickBooks Event Integration form with Event Channel set to quickbooks:CustomerService and a new listener on port 8090 -->
+<ThemedImage
+    alt="QuickBooks Event Integration form with Event Channel set to CustomerService and a new listener on port 8090"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_02_trigger_config_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_02_trigger_config_form.png'),
+    }}
+/>
 
 ### Step 3: Set the configurable values
 
 In the left panel, select **Configurations** and set **verifierToken** to your Intuit app's webhook verifier token. The listener rejects every delivery until **verifierToken** is set.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_03_configurations_panel.png: Configurations panel showing the verifierToken configurable -->
+<ThemedImage
+    alt="Configurations panel showing the verifierToken configurable"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_03_configurations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_03_configurations_panel.png'),
+    }}
+/>
 
 ### Step 4: Create the trigger
 
@@ -68,7 +86,13 @@ Select **Create**. WSO2 Integrator adds the listener and a `quickbooks:CustomerS
 
 Open the **quickbooks:CustomerService** service. It lists all 4 of its event handlers, including `onCustomerCreated`, which receives a `quickbooks:QuickBookEvent`. Leave the other handlers empty.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_04_add_handler_panel.png: quickbooks:CustomerService view showing the onCustomerCreated event handler attached to quickbooksListener -->
+<ThemedImage
+    alt="CustomerService view showing the onCustomerCreated event handler attached to the listener"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_04_add_handler_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_04_add_handler_panel.png'),
+    }}
+/>
 
 ### Step 6: Log the event
 
@@ -80,7 +104,13 @@ remote function onCustomerCreated(quickbooks:QuickBookEvent payload) returns err
 }
 ```
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_06_handler_flow.png: onCustomerCreated handler flow with a log:printInfo node -->
+<ThemedImage
+    alt="onCustomerCreated handler flow with a log:printInfo node"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_06_handler_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/quickbooks.trigger/quickbooks_trigger_screenshots_06_handler_flow.png'),
+    }}
+/>
 
 ### Running the integration
 
