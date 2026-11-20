@@ -85,7 +85,13 @@ Save this as `main.bal`, set the configurable values in `Config.toml`, and run `
 
 In the **Service Designer**, click the **Configure** icon in the header to open the **WSO2 Identity Server Event Integration Configuration** panel.
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/wso2-identity-server/step-configuration.png: WSO2 Identity Server listener configuration view -->
+   <ThemedImage
+       alt="WSO2 Identity Server listener configuration view"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/wso2-identity-server/step-configuration.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/wso2-identity-server/step-configuration.png'),
+       }}
+   />
 
 | Field | Description | Default |
 |---|---|---|
