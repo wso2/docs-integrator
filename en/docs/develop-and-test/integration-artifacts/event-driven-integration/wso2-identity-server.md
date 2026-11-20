@@ -24,7 +24,7 @@ WSO2 Identity Server event integrations receive webhook deliveries from WSO2 Ide
 <TabItem value="ui" label="Visual Designer" default>
 
 1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **WSO2 Identity Server** under **Event Integration**.
+2. In the **Artifacts** panel, search for `identityserver.trigger` and select the **identityserver.trigger** card under **More on Ballerina Central**.
 3. In the **WSO2 Identity Server Event Integration** form, fill in the following fields:
 
    <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/wso2-identity-server/step-creation-form.png: WSO2 Identity Server Event Integration creation form -->

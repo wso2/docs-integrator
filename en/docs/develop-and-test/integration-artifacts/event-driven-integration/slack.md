@@ -24,10 +24,16 @@ Slack event integrations receive events from the Slack Events API and run a hand
 <TabItem value="ui" label="Visual Designer" default>
 
 1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **Slack** under **Event Integration**.
+2. In the **Artifacts** panel, search for `slack.trigger` and select the **slack.trigger** card under **More on Ballerina Central**.
 3. In the **Slack Event Integration** form, fill in the following fields:
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/slack/step-creation-form.png: Slack Event Integration creation form -->
+   <ThemedImage
+       alt="Slack Event Integration creation form"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/slack/step-creation-form.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/slack/step-creation-form.png'),
+       }}
+   />
 
    | Field | Description | Default |
    |---|---|---|
@@ -41,7 +47,13 @@ Slack event integrations receive events from the Slack Events API and run a hand
 
 5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener, the event channel, and the **Event Handlers** section with every handler of the selected channel added.
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/slack/step-service-designer.png: Slack Service Designer view -->
+   <ThemedImage
+       alt="Slack Service Designer view"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/slack/step-service-designer.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/slack/step-service-designer.png'),
+       }}
+   />
 
    A service must implement every handler of its channel, so all of them are added for you. Click a handler to open it in the flow diagram view and implement the logic; leave a handler empty for an event you don't act on.
 
@@ -89,7 +101,13 @@ Save this as `main.bal`, set the configurable values in `Config.toml`, and run `
 
 In the **Service Designer**, click the **Configure** icon in the header to open the **Slack Event Integration Configuration** panel.
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/slack/step-configuration.png: Slack listener configuration view -->
+   <ThemedImage
+       alt="Slack listener configuration view"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/slack/step-configuration.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/slack/step-configuration.png'),
+       }}
+   />
 
 | Field | Description | Default |
 |---|---|---|

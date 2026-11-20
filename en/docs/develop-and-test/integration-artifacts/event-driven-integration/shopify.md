@@ -24,10 +24,16 @@ Shopify event integrations receive webhook deliveries from a Shopify app and run
 <TabItem value="ui" label="Visual Designer" default>
 
 1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **Shopify** under **Event Integration**.
+2. In the **Artifacts** panel, search for `shopify.trigger` and select the **shopify.trigger** card under **More on Ballerina Central**. Don't use the built-in **Shopify** card under **Event Integration**; it creates the older `trigger.shopify` package.
 3. In the **Shopify Event Integration** form, fill in the following fields:
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/shopify/step-creation-form.png: Shopify Event Integration creation form -->
+   <ThemedImage
+       alt="Shopify Event Integration creation form"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/shopify/step-creation-form.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/shopify/step-creation-form.png'),
+       }}
+   />
 
    | Field | Description | Default |
    |---|---|---|
@@ -41,7 +47,13 @@ Shopify event integrations receive webhook deliveries from a Shopify app and run
 
 5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener, the event channel, and the **Event Handlers** section with every handler of the selected channel added.
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/shopify/step-service-designer.png: Shopify Service Designer view -->
+   <ThemedImage
+       alt="Shopify Service Designer view"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/shopify/step-service-designer.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/shopify/step-service-designer.png'),
+       }}
+   />
 
    A service must implement every handler of its channel, so all of them are added for you. Click a handler to open it in the flow diagram view and implement the logic; leave a handler empty for an event you don't act on.
 
@@ -95,7 +107,13 @@ Save this as `main.bal`, set the configurable values in `Config.toml`, and run `
 
 In the **Service Designer**, click the **Configure** icon in the header to open the **Shopify Event Integration Configuration** panel.
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/shopify/step-configuration.png: Shopify listener configuration view -->
+   <ThemedImage
+       alt="Shopify listener configuration view"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/shopify/step-configuration.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/shopify/step-configuration.png'),
+       }}
+   />
 
 | Field | Description | Default |
 |---|---|---|

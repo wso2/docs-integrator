@@ -24,7 +24,7 @@ GitHub event integrations receive webhook deliveries from GitHub and run a handl
 <TabItem value="ui" label="Visual Designer" default>
 
 1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **GitHub** under **Event Integration**.
+2. In the **Artifacts** panel, search for `github.trigger` and select the **github.trigger** card under **More on Ballerina Central**. Don't use the built-in **GitHub** card under **Event Integration**; it creates the older `trigger.github` package.
 3. In the **GitHub Event Integration** form, fill in the following fields:
 
    <ThemedImage

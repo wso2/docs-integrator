@@ -20,7 +20,7 @@ Twilio event integrations receive Twilio status callbacks and run a handler for 
 <TabItem value="ui" label="Visual Designer" default>
 
 1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **Twilio** under **Event Integration**.
+2. In the **Artifacts** panel, search for `twilio.trigger` and select the **twilio.trigger** card under **More on Ballerina Central**. Don't use the built-in **Twilio** card under **Event Integration**; it creates the older `trigger.twilio` package.
 3. In the **Twilio Event Integration** form, fill in the following fields:
 
    <ThemedImage

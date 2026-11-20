@@ -24,10 +24,16 @@ HubSpot event integrations receive webhook deliveries from a HubSpot app and run
 <TabItem value="ui" label="Visual Designer" default>
 
 1. Click **+ Add Artifact** in the canvas or click **+** next to **Entry Points** in the sidebar.
-2. In the **Artifacts** panel, select **HubSpot** under **Event Integration**.
+2. In the **Artifacts** panel, search for `hubspot.trigger` and select the **hubspot.trigger** card under **More on Ballerina Central**. Don't use the built-in **HubSpot** card under **Event Integration**; it creates the older `trigger.hubspot` package.
 3. In the **HubSpot Event Integration** form, fill in the following fields:
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/hubspot/step-creation-form.png: HubSpot Event Integration creation form -->
+   <ThemedImage
+       alt="HubSpot Event Integration creation form"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/hubspot/step-creation-form.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/hubspot/step-creation-form.png'),
+       }}
+   />
 
    | Field | Description | Default |
    |---|---|---|
@@ -36,13 +42,19 @@ HubSpot event integrations receive webhook deliveries from a HubSpot app and run
    | **Listener Name** | Identifier for a new listener. | `hubspotListener` |
    | **Webhook Listener Port** | The port the listener accepts webhook requests on. | `8090` |
    | **Webhook Secret** | The **Client secret** of your HubSpot app. The listener verifies every delivery with it, and rejects every delivery while it isn't set. Bind it to a configurable variable. | None |
-   | **Callback URL** | The target URL set on the app's webhooks, exactly as entered there. HubSpot signs it with every delivery, so a different value, even a missing or extra trailing slash, rejects every delivery. Bind it to a configurable variable. | None |
+   | **Callback URL** | The target URL set on the app's webhooks, exactly as entered there. HubSpot signs it with every delivery, so a different value, even a missing or extra trailing slash, rejects every delivery. It is under **Advanced Configurations**. Bind it to a configurable variable. | None |
 
 4. Click **Create**.
 
 5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener, the event channel, and the **Event Handlers** section with every handler of the selected channel added.
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/hubspot/step-service-designer.png: HubSpot Service Designer view -->
+   <ThemedImage
+       alt="HubSpot Service Designer view"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/hubspot/step-service-designer.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/hubspot/step-service-designer.png'),
+       }}
+   />
 
    A service must implement every handler of its channel, so all of them are added for you. Click a handler to open it in the flow diagram view and implement the logic; leave a handler empty for an event you don't act on.
 
@@ -101,7 +113,13 @@ Save this as `main.bal`, set the configurable values in `Config.toml`, and run `
 
 In the **Service Designer**, click the **Configure** icon in the header to open the **HubSpot Event Integration Configuration** panel.
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/hubspot/step-configuration.png: HubSpot listener configuration view -->
+   <ThemedImage
+       alt="HubSpot listener configuration view"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/hubspot/step-configuration.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/hubspot/step-configuration.png'),
+       }}
+   />
 
 | Field | Description | Default |
 |---|---|---|
