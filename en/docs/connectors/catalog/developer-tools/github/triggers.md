@@ -1,346 +1,257 @@
 ---
 title: Triggers
+description: "Reference for the GitHub webhook listener and service callbacks: receive push, pull request, issue, release, workflow and other repository events in Ballerina integrations."
+keywords: [github, webhook listener, github webhooks, event handler, ballerina]
+connector: true
+connector_name: "github"
 ---
+
 # Triggers
 
-The `ballerinax/trigger.github` package supports event-driven GitHub webhook processing through a listener. The listener receives webhook requests from GitHub and invokes your service callbacks when issues, pull requests, releases, pushes, labels, milestones, project cards, and related repository events occur.
+The `ballerinax/github.trigger` package receives GitHub webhooks. When something happens in a repository or organization, such as a push, a pull request, a release or a workflow run, GitHub sends an HTTP request to your integration, and the listener calls the callback for that event with a typed payload. It replaces the earlier `ballerinax/trigger.github` package.
 
-This reference covers `ballerinax/trigger.github` version 0.11.0. The following components work together:
+This reference covers `ballerinax/github.trigger` version 0.9.0. The following components work together:
 
 | Component | Role |
 |-----------|------|
-| `github:Listener` | Exposes the webhook endpoint and dispatches incoming GitHub events to attached services. |
-| `github:ListenerConfig` | Defines listener configuration such as the webhook secret used to validate incoming requests. |
-| `github:IssuesService` | Defines issue event callbacks such as `onOpened`, `onClosed`, and `onReopened`. |
-| `github:PullRequestService` | Defines pull request event callbacks such as `onOpened`, `onClosed`, and `onReviewRequested`. |
-| `github:ReleaseService` | Defines release event callbacks such as `onPublished`, `onCreated`, and `onDeleted`. |
-| `github:PushService` | Defines the `onPush` callback invoked when commits are pushed to a repository. |
-| `github:IssuesEvent` | The issue event payload passed to issue callbacks. |
-| `github:PushEvent` | The push event payload passed to the `onPush` callback. |
+| `github:Listener` | Receives webhook requests from GitHub, verifies each one, and calls the attached service for its event. |
+| `github:ListenerConfig` | Holds what the listener verifies deliveries with, the webhook secret. |
+| Service types | 75 service types, such as `github:PushService`. Each callback handles one event. |
+| Payload types | A typed record for each event, such as `github:PushPayload`, passed to its callback. |
 
-For action-based operations, see the [Action Reference](actions.md).
+To call the GitHub API from your integration, use the separate `ballerinax/github` connector. See the [Action Reference](actions.md).
 
----
+## Error handling
+
+The listener acknowledges a delivery to GitHub as soon as it is verified, and then calls your callback, so GitHub never waits on your code. What happens after that is logged:
+
+| Log entry | When |
+|-----------|------|
+| `WEBHOOK_SIGNATURE_REJECTED` (warning) | The delivery failed verification. It is answered with `401 Unauthorized` and never reaches a service. The entry gives the reason. |
+| `DISPATCH_FAILED` (error) | Your callback returned an error, or the payload didn't fit the callback's type. |
+| `NO_HANDLER_FOR_EVENT` (warning) | The event isn't one the package knows. |
+| `SERVICE_NOT_ATTACHED` (debug) | No service of the event's type is attached to the listener. |
 
 ## Listener
 
-The `github:Listener` receives GitHub webhook HTTP requests and routes events to the relevant service type. Configure the GitHub repository webhook to point to the public URL of the running listener, use `application/json` as the content type, and use the same secret value configured as `webhookSecret`.
+The `github:Listener` exposes an HTTP endpoint for GitHub to deliver webhooks to. Point a repository or organization webhook at its public URL, with the content type `application/json`. See the [Setup Guide](setup-guide.md#configuring-a-github-repository-webhook).
 
 ### Configuration
-
-The listener supports the following connection strategy:
 
 | Config Type | Description |
 |-------------|-------------|
 | `ListenerConfig` | Configuration for the GitHub webhook listener. |
 
-`ListenerConfig` fields:
+**`ListenerConfig` fields:**
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `webhookSecret` | `string` | `""` | Secret token used to validate GitHub webhook requests. Configure the same value in the GitHub repository webhook settings. |
+| `webhookSecret` | <code>string</code> | Optional | The secret set on the GitHub webhook. The listener verifies every delivery with it, and rejects every delivery while it isn't set. |
 
-The listener also accepts a port or an HTTP listener object to expose the webhook endpoint. If you do not provide a port, the listener uses the default port `8090`.
+The listener's second argument is the port to listen on, or an `http:Listener` to share. The default port is `8090`. A listener created on a port accepts request bodies up to 25 MB.
+
+### Verifying deliveries
+
+GitHub signs each delivery with the webhook's secret, in the `X-Hub-Signature-256` header (`sha256=` followed by the hex HMAC-SHA256 of the body). The listener computes the same signature with `webhookSecret` and compares the two in constant time. A delivery without the header, with a different signature, or arriving while `webhookSecret` isn't set gets `401 Unauthorized`, so set `webhookSecret` to exactly the secret you gave the webhook.
 
 ### Initializing the listener
 
-**Listener with a webhook secret and configurable port:**
-
 ```ballerina
-import ballerinax/trigger.github;
+import ballerinax/github.trigger as github;
 
 configurable string webhookSecret = ?;
-configurable int listenerPort = ?;
 
-configurable github:ListenerConfig listenerConfig = {
-    webhookSecret: webhookSecret
-};
-
-listener github:Listener githubListener = new (listenerConfig, listenerPort);
+listener github:Listener githubListener = new ({webhookSecret}, 8090);
 ```
 
-**Listener without a webhook secret:**
+Set the secret in `Config.toml`:
 
-Use this only when no secret is configured in the GitHub webhook settings.
-
-```ballerina
-import ballerinax/trigger.github;
-
-listener github:Listener githubListener = new (listenOn = 8090);
+```toml
+webhookSecret = "<the secret you set on the GitHub webhook>"
 ```
-
-**Listener with the default port:**
-
-```ballerina
-import ballerinax/trigger.github;
-
-listener github:Listener githubListener = new ();
-```
-
----
 
 ## Service
 
-A GitHub trigger service is a Ballerina service attached to a `github:Listener`. Select the service type that matches the GitHub webhook event channel you want to handle. The service implements callbacks that are invoked when matching GitHub webhook actions occur.
+Attach a service of one of the types below to the listener for each kind of event you need. Implement every callback of the type you attach; give a callback an empty body for an event you don't act on. Services of several types can share one listener. There are 265 callbacks in all.
+
+A service can also be attached on a path of its own, such as `service github:PushService /github on githubListener`, so several triggers and HTTP services can share one `http:Listener`.
 
 ### Callback signatures
 
-| Service Type | Callback | Signature | Description |
-|--------------|----------|-----------|-------------|
-| `github:IssuesService` | `onOpened`, `onClosed`, `onReopened`, `onAssigned`, `onUnassigned`, `onLabeled`, `onUnlabeled` | `remote function <callback>(github:IssuesEvent payload) returns error?` | Invoked when a GitHub issue event is received. |
-| `github:IssueCommentService` | `onCreated`, `onEdited`, `onDeleted` | `remote function <callback>(github:IssueCommentEvent payload) returns error?` | Invoked when a comment is added to, edited on, or deleted from an issue or pull request. |
-| `github:PullRequestService` | `onOpened`, `onClosed`, `onReopened`, `onAssigned`, `onUnassigned`, `onReviewRequested`, `onReviewRequestRemoved`, `onLabeled`, `onUnlabeled`, `onEdited` | `remote function <callback>(github:PullRequestEvent payload) returns error?` | Invoked when a GitHub pull request event is received. |
-| `github:PullRequestReviewService` | `onSubmitted`, `onEdited`, `onDismissed` | `remote function <callback>(github:PullRequestReviewEvent payload) returns error?` | Invoked when a pull request review event is received. |
-| `github:PullRequestReviewCommentService` | `onCreated`, `onEdited`, `onDeleted` | `remote function <callback>(github:PullRequestReviewCommentEvent payload) returns error?` | Invoked when a pull request review comment event is received. |
-| `github:ReleaseService` | `onPublished`, `onUnpublished`, `onCreated`, `onEdited`, `onDeleted`, `onPreReleased`, `onReleased` | `remote function <callback>(github:ReleaseEvent payload) returns error?` | Invoked when a GitHub release event is received. |
-| `github:LabelService` | `onCreated`, `onEdited`, `onDeleted` | `remote function <callback>(github:LabelEvent payload) returns error?` | Invoked when a repository label event is received. |
-| `github:MilestoneService` | `onCreated`, `onEdited`, `onDeleted`, `onClosed`, `onOpened` | `remote function <callback>(github:MilestoneEvent payload) returns error?` | Invoked when a repository milestone event is received. |
-| `github:PushService` | `onPush` | `remote function onPush(github:PushEvent payload) returns error?` | Invoked when commits are pushed to a repository. |
-| `github:ProjectCardService` | `onCreated`, `onEdited`, `onMoved`, `onConverted`, `onDeleted` | `remote function <callback>(github:ProjectCardEvent payload) returns error?` | Invoked when a GitHub project card event is received. |
+Every callback has the shape `remote function <callback>(github:<PayloadType> payload) returns error?`.
 
-:::note
-A service must implement every remote function defined by its service type. WSO2 Integrator generates all the handlers for you; leave the handlers you do not need with an empty body.
-:::
-
-:::info
-Version 0.12.0 of `ballerinax/trigger.github` adds more service types and callbacks, and renames some callbacks. For example, `onPreReleased` becomes `onPrereleased`, and the `ProjectCardService` callbacks become `onProjectCardCreated`, `onProjectCardEdited`, and so on. If your project uses 0.12.0, implement the callbacks defined by that version.
-:::
+| Service type | Callbacks | Payload type |
+|--------------|-----------|--------------|
+| `github:PingService` | `onPing` | <code>github:PingPayload</code> |
+| `github:PushService` | `onPush` | <code>github:PushPayload</code> |
+| `github:PullRequestService` | `onPullRequestAssigned`, `onPullRequestAutoMergeDisabled`, `onPullRequestAutoMergeEnabled`, `onPullRequestClosed`, `onPullRequestConvertedToDraft`, `onPullRequestDemilestoned`, `onPullRequestDequeued`, `onPullRequestEdited`, `onPullRequestEnqueued`, `onPullRequestLabeled`, `onPullRequestLocked`, `onPullRequestMilestoned`, `onPullRequestOpened`, `onPullRequestReadyForReview`, `onPullRequestReopened`, `onPullRequestReviewRequestRemoved`, `onPullRequestReviewRequested`, `onPullRequestSynchronize`, `onPullRequestUnassigned`, `onPullRequestUnlabeled`, `onPullRequestUnlocked` | <code>github:PullRequestPayload</code> |
+| `github:IssuesService` | `onIssuesAssigned`, `onIssuesClosed`, `onIssuesDeleted`, `onIssuesDemilestoned`, `onIssuesEdited`, `onIssuesLabeled`, `onIssuesLocked`, `onIssuesMilestoned`, `onIssuesOpened`, `onIssuesPinned`, `onIssuesReopened`, `onIssuesTransferred`, `onIssuesTyped`, `onIssuesUnassigned`, `onIssuesUnlabeled`, `onIssuesUnlocked`, `onIssuesUnpinned`, `onIssuesUntyped` | <code>github:IssuesPayload</code> |
+| `github:ReleaseService` | `onReleaseCreated`, `onReleaseDeleted`, `onReleaseEdited`, `onReleasePrereleased`, `onReleasePublished`, `onReleaseReleased`, `onReleaseUnpublished` | <code>github:ReleasePayload</code> |
+| `github:IssueCommentService` | `onIssueCommentCreated`, `onIssueCommentDeleted`, `onIssueCommentEdited`, `onIssueCommentPinned`, `onIssueCommentUnpinned` | <code>github:IssueCommentPayload</code> |
+| `github:PullRequestReviewService` | `onPullRequestReviewDismissed`, `onPullRequestReviewEdited`, `onPullRequestReviewSubmitted` | <code>github:PullRequestReviewPayload</code> |
+| `github:PullRequestReviewCommentService` | `onPullRequestReviewCommentCreated`, `onPullRequestReviewCommentDeleted`, `onPullRequestReviewCommentEdited` | <code>github:PullRequestReviewCommentPayload</code> |
+| `github:CreateService` | `onCreate` | <code>github:CreatePayload</code> |
+| `github:DeleteService` | `onDelete` | <code>github:DeletePayload</code> |
+| `github:ForkService` | `onFork` | <code>github:ForkPayload</code> |
+| `github:StarService` | `onStarCreated`, `onStarDeleted` | <code>github:StarPayload</code> |
+| `github:WatchService` | `onWatchStarted` | <code>github:WatchPayload</code> |
+| `github:CheckRunService` | `onCheckRunCompleted`, `onCheckRunCreated`, `onCheckRunRequestedAction`, `onCheckRunRerequested` | <code>github:CheckRunPayload</code> |
+| `github:CheckSuiteService` | `onCheckSuiteCompleted`, `onCheckSuiteRequested`, `onCheckSuiteRerequested` | <code>github:CheckSuitePayload</code> |
+| `github:DeploymentService` | `onDeploymentCreated` | <code>github:DeploymentPayload</code> |
+| `github:DeploymentStatusService` | `onDeploymentStatusCreated` | <code>github:DeploymentStatusPayload</code> |
+| `github:WorkflowRunService` | `onWorkflowRunCompleted`, `onWorkflowRunInProgress`, `onWorkflowRunRequested` | <code>github:WorkflowRunPayload</code> |
+| `github:WorkflowJobService` | `onWorkflowJobCompleted`, `onWorkflowJobInProgress`, `onWorkflowJobQueued`, `onWorkflowJobWaiting` | <code>github:WorkflowJobPayload</code> |
+| `github:RepositoryService` | `onRepositoryArchived`, `onRepositoryCreated`, `onRepositoryDeleted`, `onRepositoryEdited`, `onRepositoryPrivatized`, `onRepositoryPublicized`, `onRepositoryRenamed`, `onRepositoryTransferred`, `onRepositoryUnarchived` | <code>github:RepositoryPayload</code> |
+| `github:MemberService` | `onMemberAdded`, `onMemberEdited`, `onMemberRemoved` | <code>github:MemberPayload</code> |
+| `github:DiscussionService` | `onDiscussionAnswered`, `onDiscussionCategoryChanged`, `onDiscussionClosed`, `onDiscussionCreated`, `onDiscussionDeleted`, `onDiscussionEdited`, `onDiscussionLabeled`, `onDiscussionLocked`, `onDiscussionPinned`, `onDiscussionReopened`, `onDiscussionTransferred`, `onDiscussionUnanswered`, `onDiscussionUnlabeled`, `onDiscussionUnlocked`, `onDiscussionUnpinned` | <code>github:DiscussionPayload</code> |
+| `github:DiscussionCommentService` | `onDiscussionCommentCreated`, `onDiscussionCommentDeleted`, `onDiscussionCommentEdited` | <code>github:DiscussionCommentPayload</code> |
+| `github:LabelService` | `onLabelCreated`, `onLabelDeleted`, `onLabelEdited` | <code>github:LabelPayload</code> |
+| `github:MilestoneService` | `onMilestoneClosed`, `onMilestoneCreated`, `onMilestoneDeleted`, `onMilestoneEdited`, `onMilestoneOpened` | <code>github:MilestonePayload</code> |
+| `github:StatusService` | `onStatus` | <code>github:StatusPayload</code> |
+| `github:WorkflowDispatchService` | `onWorkflowDispatch` | <code>github:WorkflowDispatchPayload</code> |
+| `github:PullRequestReviewThreadService` | `onPullRequestReviewThreadResolved`, `onPullRequestReviewThreadUnresolved` | <code>github:PullRequestReviewThreadPayload</code> |
+| `github:TeamService` | `onTeamAddedToRepository`, `onTeamCreated`, `onTeamDeleted`, `onTeamEdited`, `onTeamRemovedFromRepository` | <code>github:TeamPayload</code> |
+| `github:OrganizationService` | `onOrganizationDeleted`, `onOrganizationMemberAdded`, `onOrganizationMemberInvited`, `onOrganizationMemberRemoved`, `onOrganizationRenamed` | <code>github:OrganizationPayload</code> |
+| `github:DeploymentProtectionRuleService` | `onDeploymentProtectionRule` | <code>github:DeploymentProtectionRulePayload</code> |
+| `github:DeploymentReviewService` | `onDeploymentReviewApproved`, `onDeploymentReviewRejected`, `onDeploymentReviewRequested` | <code>github:DeploymentReviewPayload</code> |
+| `github:InstallationTargetService` | `onInstallationTargetRenamed` | <code>github:InstallationTargetPayload</code> |
+| `github:IssueDependenciesService` | `onIssueDependenciesBlockedByAdded`, `onIssueDependenciesBlockedByRemoved`, `onIssueDependenciesBlockingAdded`, `onIssueDependenciesBlockingRemoved` | <code>github:IssueDependenciesPayload</code> |
+| `github:MarketplacePurchaseService` | `onMarketplacePurchaseCancelled`, `onMarketplacePurchaseChanged`, `onMarketplacePurchasePendingChange`, `onMarketplacePurchasePendingChangeCancelled`, `onMarketplacePurchasePurchased` | <code>github:MarketplacePurchasePayload</code> |
+| `github:PersonalAccessTokenRequestService` | `onPersonalAccessTokenRequestApproved`, `onPersonalAccessTokenRequestCancelled`, `onPersonalAccessTokenRequestCreated`, `onPersonalAccessTokenRequestDenied` | <code>github:PersonalAccessTokenRequestPayload</code> |
+| `github:ProjectService` | `onProjectClosed`, `onProjectCreated`, `onProjectDeleted`, `onProjectEdited`, `onProjectReopened` | <code>github:ProjectPayload</code> |
+| `github:ProjectCardService` | `onProjectCardConverted`, `onProjectCardCreated`, `onProjectCardDeleted`, `onProjectCardEdited`, `onProjectCardMoved` | <code>github:ProjectCardPayload</code> |
+| `github:ProjectColumnService` | `onProjectColumnCreated`, `onProjectColumnDeleted`, `onProjectColumnEdited`, `onProjectColumnMoved` | <code>github:ProjectColumnPayload</code> |
+| `github:RepositoryImportService` | `onRepositoryImport` | <code>github:RepositoryImportPayload</code> |
+| `github:SubIssuesService` | `onSubIssuesParentIssueAdded`, `onSubIssuesParentIssueRemoved`, `onSubIssuesSubIssueAdded`, `onSubIssuesSubIssueRemoved` | <code>github:SubIssuesPayload</code> |
+| `github:PageBuildService` | `onPageBuild` | <code>github:PageBuildPayload</code> |
+| `github:TeamAddService` | `onTeamAdd` | <code>github:TeamAddPayload</code> |
+| `github:SponsorshipService` | `onSponsorshipCancelled`, `onSponsorshipCreated`, `onSponsorshipEdited`, `onSponsorshipPendingCancellation`, `onSponsorshipPendingTierChange`, `onSponsorshipTierChanged` | <code>github:SponsorshipPayload</code> |
+| `github:SecurityAndAnalysisService` | `onSecurityAndAnalysis` | <code>github:SecurityAndAnalysisPayload</code> |
+| `github:BranchProtectionConfigurationService` | `onBranchProtectionConfigurationDisabled`, `onBranchProtectionConfigurationEnabled` | <code>github:BranchProtectionConfigurationPayload</code> |
+| `github:CustomPropertyService` | `onCustomPropertyCreated`, `onCustomPropertyDeleted`, `onCustomPropertyPromoteToEnterprise`, `onCustomPropertyUpdated` | <code>github:CustomPropertyPayload</code> |
+| `github:CustomPropertyValuesService` | `onCustomPropertyValuesUpdated` | <code>github:CustomPropertyValuesPayload</code> |
+| `github:ProjectsV2itemService` | `onProjectsV2ItemArchived`, `onProjectsV2ItemConverted`, `onProjectsV2ItemCreated`, `onProjectsV2ItemDeleted`, `onProjectsV2ItemEdited`, `onProjectsV2ItemReordered`, `onProjectsV2ItemRestored` | <code>github:ProjectsV2ItemPayload</code> |
+| `github:ProjectsV2statusUpdateService` | `onProjectsV2StatusUpdateCreated`, `onProjectsV2StatusUpdateDeleted`, `onProjectsV2StatusUpdateEdited` | <code>github:ProjectsV2StatusUpdatePayload</code> |
+| `github:RegistryPackageService` | `onRegistryPackagePublished`, `onRegistryPackageUpdated` | <code>github:RegistryPackagePayload</code> |
+| `github:RepositoryRulesetService` | `onRepositoryRulesetCreated`, `onRepositoryRulesetDeleted`, `onRepositoryRulesetEdited` | <code>github:RepositoryRulesetPayload</code> |
+| `github:RepositoryVulnerabilityAlertService` | `onRepositoryVulnerabilityAlertCreate`, `onRepositoryVulnerabilityAlertDismiss`, `onRepositoryVulnerabilityAlertReopen`, `onRepositoryVulnerabilityAlertResolve` | <code>github:RepositoryVulnerabilityAlertPayload</code> |
+| `github:SecretScanningAlertLocationService` | `onSecretScanningAlertLocation` | <code>github:SecretScanningAlertLocationPayload</code> |
+| `github:SecretScanningScanService` | `onSecretScanningScan` | <code>github:SecretScanningScanPayload</code> |
+| `github:BranchProtectionRuleService` | `onBranchProtectionRuleCreated`, `onBranchProtectionRuleDeleted`, `onBranchProtectionRuleEdited` | <code>github:BranchProtectionRulePayload</code> |
+| `github:CodeScanningAlertService` | `onCodeScanningAlertAppearedInBranch`, `onCodeScanningAlertClosedByUser`, `onCodeScanningAlertCreated`, `onCodeScanningAlertFixed`, `onCodeScanningAlertReopened`, `onCodeScanningAlertReopenedByUser`, `onCodeScanningAlertUpdatedAssignment` | <code>github:CodeScanningAlertPayload</code> |
+| `github:DeployKeyService` | `onDeployKeyCreated`, `onDeployKeyDeleted` | <code>github:DeployKeyPayload</code> |
+| `github:GithubAppAuthorizationService` | `onGithubAppAuthorizationRevoked` | <code>github:GithubAppAuthorizationPayload</code> |
+| `github:MetaService` | `onMetaDeleted` | <code>github:MetaPayload</code> |
+| `github:OrgBlockService` | `onOrgBlockBlocked`, `onOrgBlockUnblocked` | <code>github:OrgBlockPayload</code> |
+| `github:PackageService` | `onPackagePublished`, `onPackageUpdated` | <code>github:PackagePayload</code> |
+| `github:ProjectsV2Service` | `onProjectsV2Closed`, `onProjectsV2Created`, `onProjectsV2Deleted`, `onProjectsV2Edited`, `onProjectsV2Reopened` | <code>github:ProjectsV2Payload</code> |
+| `github:RepositoryAdvisoryService` | `onRepositoryAdvisoryPublished`, `onRepositoryAdvisoryReported` | <code>github:RepositoryAdvisoryPayload</code> |
+| `github:SecurityAdvisoryService` | `onSecurityAdvisoryPublished`, `onSecurityAdvisoryUpdated`, `onSecurityAdvisoryWithdrawn` | <code>github:SecurityAdvisoryPayload</code> |
+| `github:CommitCommentService` | `onCommitCommentCreated` | <code>github:CommitCommentPayload</code> |
+| `github:DependabotAlertService` | `onDependabotAlertAssigneesChanged`, `onDependabotAlertAutoDismissed`, `onDependabotAlertAutoReopened`, `onDependabotAlertCreated`, `onDependabotAlertDismissed`, `onDependabotAlertFixed`, `onDependabotAlertReintroduced`, `onDependabotAlertReopened` | <code>github:DependabotAlertPayload</code> |
+| `github:GollumService` | `onGollum` | <code>github:GollumPayload</code> |
+| `github:InstallationService` | `onInstallationCreated`, `onInstallationDeleted`, `onInstallationNewPermissionsAccepted`, `onInstallationSuspend`, `onInstallationUnsuspend` | <code>github:InstallationPayload</code> |
+| `github:InstallationRepositoriesService` | `onInstallationRepositoriesAdded`, `onInstallationRepositoriesRemoved` | <code>github:InstallationRepositoriesPayload</code> |
+| `github:MembershipService` | `onMembershipAdded`, `onMembershipRemoved` | <code>github:MembershipPayload</code> |
+| `github:MergeGroupService` | `onMergeGroupChecksRequested`, `onMergeGroupDestroyed` | <code>github:MergeGroupPayload</code> |
+| `github:PublicService` | `onPublic` | <code>github:PublicPayload</code> |
+| `github:RepositoryDispatchService` | `onRepositoryDispatch` | <code>github:RepositoryDispatchPayload</code> |
+| `github:SecretScanningAlertService` | `onSecretScanningAlertAssigned`, `onSecretScanningAlertCreated`, `onSecretScanningAlertPubliclyLeaked`, `onSecretScanningAlertReopened`, `onSecretScanningAlertResolved`, `onSecretScanningAlertUnassigned`, `onSecretScanningAlertValidated` | <code>github:SecretScanningAlertPayload</code> |
 
 ### Full usage example
 
+This is the [`push-event-logger`](https://github.com/ballerina-platform/module-ballerinax-github.trigger/tree/main/examples/push-event-logger) example from the package:
+
 ```ballerina
 import ballerina/log;
-import ballerinax/trigger.github;
+import ballerinax/github.trigger as github;
 
-configurable string webhookSecret = ?;
-configurable int listenerPort = ?;
-
-configurable github:ListenerConfig listenerConfig = {
-    webhookSecret: webhookSecret
+configurable github:ListenerConfig config = {
+    webhookSecret: "xxxxxx"
 };
 
-listener github:Listener githubListener = new (listenerConfig, listenerPort);
+listener github:Listener webhookListener = new (config, 8090);
 
-service github:IssuesService on githubListener {
-    remote function onOpened(github:IssuesEvent payload) returns error? {
-        log:printInfo("GitHub issue opened",
-            issue = payload.issue.title,
-            repository = payload.repository.full_name,
-            sender = payload.sender.login
-        );
-    }
+// The minimal, canonical use case: log every push to any branch or tag.
+service github:PushService on webhookListener {
 
-    remote function onClosed(github:IssuesEvent payload) returns error? {
-        log:printInfo("GitHub issue closed",
-            issue = payload.issue.title,
-            repository = payload.repository.full_name
-        );
-    }
+    remote function onPush(github:PushPayload payload) returns error? {
+        log:printInfo("Push received", pusher = payload.pusher.name ?: payload.sender.login,
+                commitCount = payload.commits.length(), ref = payload.ref,
+                repository = payload.repository.fullName);
 
-    remote function onReopened(github:IssuesEvent payload) returns error? {
-    }
-
-    remote function onAssigned(github:IssuesEvent payload) returns error? {
-    }
-
-    remote function onUnassigned(github:IssuesEvent payload) returns error? {
-    }
-
-    remote function onLabeled(github:IssuesEvent payload) returns error? {
-    }
-
-    remote function onUnlabeled(github:IssuesEvent payload) returns error? {
+        foreach github:Commit c in payload.commits {
+            log:printInfo("Commit", sha = c.id.substring(0, 7), commitMessage = c.message);
+        }
     }
 }
 ```
 
-:::note
-Each service type uses a different typed payload record. For example, `github:IssuesService` receives `github:IssuesEvent`, while `github:PushService` receives `github:PushEvent`.
-:::
+## Event payload types
 
-## Supporting types
+Each event's payload is a record named after the event, such as `PushPayload`, `PullRequestPayload` and `IssuesPayload`. Field names are camelCase; each field reads the matching snake_case key from GitHub's JSON. The types used by the example above:
 
-### `IssuesEvent`
+### `PushPayload`
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `action` | `IssuesActions` | Issue event action. |
-| `issue` | `Issue` | Issue associated with the event. |
-| `changes` | `Changes?` | Changes associated with the issue. |
-| `label` | `Label?` | Label associated with the issue event. |
-| `assignee` | `User?` | Assignee associated with the issue event. |
-| `milestone` | `Milestone?` | Milestone associated with the issue event. |
-| `repository` | `Repository` | Repository where the issue event occurred. |
-| `sender` | `User` | User that triggered the issue event. |
-| `organization` | `Organization?` | Organization associated with the event, when available. |
+| `ref` | <code>string</code> | The full git ref that was pushed (e.g. refs/heads/main or refs/tags/v3.14.1) |
+| `before` | <code>string</code> | The SHA of the most recent commit on ref before the push. |
+| `after` | <code>string</code> | The SHA of the most recent commit on ref after the push. |
+| `baseRef` | <code>string?</code> | The base ref for the push (if applicable) Optional. |
+| `created` | <code>boolean</code> | Whether this push created the ref. |
+| `deleted` | <code>boolean</code> | Whether this push deleted the ref. |
+| `forced` | <code>boolean</code> | Whether this push was a force push of the ref. |
+| `compare` | <code>string</code> | URL showing the changes in this ref update. |
+| `commits` | <code>Commit[]</code> | Array of commit objects (maximum 2048) |
+| `headCommit` | <code>Commit?</code> | A Git commit. Optional. |
+| `pusher` | <code>CommitAuthor</code> | Metaproperties for the Git author/committer. |
+| `sender` | <code>User</code> | A GitHub user. |
+| `repository` | <code>Repository</code> | A repository on GitHub. |
+| `organization` | <code>Organization</code> | A GitHub organization. Optional. |
+| `installation` | <code>Installation</code> | A GitHub App installation. Optional. |
+| `enterprise` | <code>Enterprise</code> | A GitHub Enterprise account. Optional. |
 
-### `IssueCommentEvent`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `action` | `IssueCommentActions` | Issue comment event action. |
-| `issue` | `Issue` | Issue or pull request associated with the comment. |
-| `changes` | `Changes?` | Changes associated with the issue comment. |
-| `comment` | `IssueComment` | Comment payload. |
-| `repository` | `Repository` | Repository where the comment event occurred. |
-| `sender` | `User` | User that triggered the comment event. |
-| `organization` | `Organization?` | Organization associated with the event, when available. |
-
-### `PullRequestEvent`
+### `Commit`
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `action` | `PullRequestActions` | Pull request event action. |
-| `number` | `int` | Pull request number. |
-| `changes` | `Changes?` | Changes associated with the pull request. |
-| `pull_request` | `PullRequest` | Pull request payload. |
-| `assignee` | `User?` | Assignee associated with the pull request event. |
-| `label` | `Label?` | Label associated with the pull request event. |
-| `requested_reviewer` | `User?` | Requested reviewer associated with the pull request event. |
-| `repository` | `Repository` | Repository where the pull request event occurred. |
-| `sender` | `User` | User that triggered the pull request event. |
-| `organization` | `Organization?` | Organization associated with the event, when available. |
+| `id` | <code>string</code> | The commit SHA. |
+| `treeId` | <code>string</code> | The SHA of the Git tree associated with this commit. Optional. |
+| `distinct` | <code>boolean</code> | Whether this commit is distinct from any that have been pushed before. Optional. |
+| `message` | <code>string</code> | The commit message. |
+| `timestamp` | <code>string</code> | The ISO 8601 timestamp of the commit. Optional. |
+| `url` | <code>string</code> | URL that points to the commit API resource. Optional. |
+| `author` | <code>CommitAuthor</code> | Git author/committer metadata. Optional. |
+| `committer` | <code>CommitAuthor</code> | Git author/committer metadata. Optional. |
+| `added` | <code>string[]</code> | Files added in this commit. Optional. |
+| `removed` | <code>string[]</code> | Files removed in this commit. Optional. |
+| `modified` | <code>string[]</code> | Files modified in this commit. Optional. |
 
-### `PullRequestReviewEvent`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `action` | `PullRequestReviewActions` | Pull request review event action. |
-| `review` | `Review` | Pull request review payload. |
-| `pull_request` | `PullRequest` | Pull request associated with the review. |
-| `changes` | `Changes?` | Changes associated with the review. |
-| `repository` | `Repository` | Repository where the review event occurred. |
-| `sender` | `User` | User that triggered the review event. |
-| `organization` | `Organization?` | Organization associated with the event, when available. |
-
-### `PullRequestReviewCommentEvent`
+### `CommitAuthor`
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `action` | `string` | Pull request review comment event action. |
-| `changes` | `Changes?` | Changes associated with the review comment. |
-| `pull_request` | `PullRequest` | Pull request associated with the review comment. |
-| `comment` | `PullRequestReviewComment` | Review comment payload. |
-| `repository` | `Repository` | Repository where the review comment event occurred. |
-| `sender` | `User` | User that triggered the review comment event. |
-| `organization` | `Organization?` | Organization associated with the event, when available. |
-
-### `ReleaseEvent`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `action` | `ReleaseActions` | Release event action. |
-| `release` | `Release` | Release payload. |
-| `repository` | `Repository` | Repository where the release event occurred. |
-| `sender` | `User` | User that triggered the release event. |
-| `changes` | `Changes?` | Changes associated with the release event. |
-| `organization` | `Organization?` | Organization associated with the event, when available. |
-
-### `PushEvent`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `ref` | `string` | Full Git ref that was pushed. |
-| `before` | `string` | SHA before the push. |
-| `after` | `string` | SHA after the push. |
-| `created` | `boolean` | Whether the push created the ref. |
-| `deleted` | `boolean` | Whether the push deleted the ref. |
-| `forced` | `boolean` | Whether the push was forced. |
-| `base_ref` | `string?` | Base Git ref, when available. |
-| `compare` | `string` | URL for comparing the before and after commits. |
-| `commits` | `Commit[]` | Commits included in the push. |
-| `head_commit` | `Commit?` | Head commit for the push. |
-| `repository` | `Repository` | Repository where the push occurred. |
-| `pusher` | `CommitAuthor` | User who pushed the commits. |
-| `sender` | `User` | User that triggered the push event. |
-| `organization` | `Organization?` | Organization associated with the event, when available. |
-
-### `LabelEvent`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `action` | `LabelActions` | Label event action. |
-| `label` | `Label` | Label payload. |
-| `issue` | `Issue?` | Issue associated with the label change, when available. |
-| `changes` | `Changes?` | Changes associated with the label. |
-| `repository` | `Repository` | Repository where the label event occurred. |
-| `sender` | `User` | User that triggered the label event. |
-| `organization` | `Organization?` | Organization associated with the event, when available. |
-
-### `MilestoneEvent`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `action` | `MilestoneActions` | Milestone event action. |
-| `milestone` | `Milestone` | Milestone payload. |
-| `changes` | `Changes?` | Changes associated with the milestone. |
-| `repository` | `Repository` | Repository where the milestone event occurred. |
-| `sender` | `User` | User that triggered the milestone event. |
-| `organization` | `Organization?` | Organization associated with the event, when available. |
-
-### `ProjectCardEvent`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `action` | `ProjectCardActions` | Project card event action. |
-| `project_card` | `ProjectCard` | Project card payload. |
-| `changes` | `Changes?` | Changes associated with the project card (on edited or converted events). |
-| `repository` | `Repository` | Repository where the project card event occurred. |
-| `sender` | `User` | User that triggered the project card event. |
-| `organization` | `Organization?` | Organization associated with the event, when available. |
-
-### `Repository`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | `int` | Repository ID. |
-| `name` | `string` | Repository name. |
-| `full_name` | `string` | Full repository name, including owner. |
-| `owner` | `User` | Repository owner. |
-| `html_url` | `string` | Repository HTML URL. |
-| `description` | `string?` | Repository description. |
-| `default_branch` | `string` | Default branch name. |
-
-### `Issue`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `number` | `int` | Issue number. |
-| `title` | `string` | Issue title. |
-| `user` | `User` | Author of the issue. |
-| `labels` | `Label[]` | Labels assigned to the issue. |
-| `state` | `string` | Issue state. |
-| `assignee` | `User?` | Assigned user, when available. |
-| `assignees` | `User[]` | Assigned users. |
-| `milestone` | `Milestone?` | Associated milestone. |
-| `comments` | `int` | Number of issue comments. |
-| `body` | `string?` | Issue description. |
-
-### `PullRequest`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `number` | `int` | Pull request number. |
-| `state` | `string` | Pull request state. |
-| `title` | `string` | Pull request title. |
-| `user` | `User` | Author of the pull request. |
-| `body` | `string?` | Pull request description. |
-| `created_at` | `string` | Creation timestamp. |
-| `updated_at` | `string` | Last update timestamp. |
-| `closed_at` | `string?` | Close timestamp, when available. |
-| `merged` | `boolean?` | Whether the pull request was merged. |
-| `head` | `Branch` | Head branch. |
-| `base` | `Branch` | Base branch. |
+| `name` | <code>string</code> | The git author's name. Optional. |
+| `email` | <code>string</code> | The git author's email address. Optional. |
+| `username` | <code>string</code> | The git author's GitHub username, if their email matched a GitHub account. Optional. |
 
 ### `User`
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `login` | `string` | GitHub username. |
-| `id` | `int` | User ID. |
-| `avatar_url` | `string` | Public avatar URL. |
-| `html_url` | `string` | GitHub profile URL. |
-| `type` | `string` | User type. |
-| `site_admin` | `boolean` | Whether the user is a site administrator. |
-| `name` | `string?` | Display name, when available. |
-| `email` | `string?` | Email address, when available. |
+| `login` | <code>string</code> | The user's GitHub username. |
+| `id` | <code>int</code> | The user's unique numeric identifier. |
+| `nodeId` | <code>string</code> | The GraphQL node ID. Optional. |
+| `avatarUrl` | <code>string</code> | The URL of the user's or organization's avatar image. Optional. |
+| `gravatarId` | <code>string?</code> | The user's Gravatar ID (legacy field, typically empty). Optional. |
+| `url` | <code>string</code> | The API URL of the resource. Optional. |
+| `htmlUrl` | <code>string</code> | The URL of the resource on GitHub.com. Optional. |
+| `type` | <code>string</code> | The account type: User, Organization, or Bot. Optional. |
+| `siteAdmin` | <code>boolean</code> | Whether the user is a GitHub site administrator. Optional. |
+
+## What's next
+
+- [Setup Guide](setup-guide.md#configuring-a-github-repository-webhook): create the webhook GitHub delivers events to.
+- [Example](example.md#github-trigger-example): build a GitHub trigger integration in WSO2 Integrator.
+- [Action Reference](actions.md): call the GitHub API with the `ballerinax/github` connector.

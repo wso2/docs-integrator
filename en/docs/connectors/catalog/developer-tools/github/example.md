@@ -160,25 +160,26 @@ The `GitHub` connector provides practical examples illustrating usage in various
 
 ### What you'll build
 
-This integration listens for GitHub issue events using the `ballerinax/trigger.github` package and the `IssuesService` event channel. When a GitHub user opens, closes, or modifies an issue, GitHub sends a webhook POST request to the listener, which routes the event to the appropriate handler. The `onOpened` handler receives the `github:IssuesEvent` payload and logs it as a JSON string using `log:printInfo`.
+This integration logs every push to a GitHub repository. When someone pushes commits, GitHub sends a webhook to the `github:Listener`, which verifies it and calls the `onPush` handler of a `github:PushService`. The handler logs the pusher, the branch and each commit.
 
 :::info
-This example uses the `ballerinax/trigger.github` package, which is separate from the `ballerinax/github` REST API connector. Use `ballerinax/github` for calling GitHub APIs; use `ballerinax/trigger.github` for receiving GitHub webhook events.
+This example uses the `ballerinax/github.trigger` package, which receives GitHub webhook events. It is separate from the `ballerinax/github` connector, which calls the GitHub API.
 :::
 
 ### Architecture
 
 ```mermaid
 flowchart LR
-    A((GitHub User)) --> B[Webhook URL]
-    B --> C[[GitHub Trigger Listener]]
-    C --> D[Handler: onOpened]
+    A((Developer)) -->|git push| B[GitHub]
+    B -->|webhook| C[[github:Listener]]
+    C --> D[Handler: onPush]
     D --> E[log:printInfo]
 ```
 
 ### Prerequisites
 
-- A GitHub repository with webhook configuration permissions
+- A GitHub repository you can add a webhook to. See the [Setup Guide](setup-guide.md#configuring-a-github-repository-webhook).
+- A public URL for the listener, such as one from ngrok, for GitHub to deliver to.
 
 ### Setting up the GitHub integration
 
@@ -188,10 +189,10 @@ flowchart LR
 
 ### Step 1: Open the artifacts palette
 
-Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **GitHub** trigger card.
+Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **GitHub** card.
 
 <ThemedImage
-    alt="Artifacts palette open showing the Event Integration category with the GitHub trigger card highlighted, before clicking the card"
+    alt="Artifacts palette showing the Event Integration category with the GitHub card"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_01_artifact_palette.png'),
         dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_01_artifact_palette.png'),
@@ -200,30 +201,29 @@ Select **Add Artifact** to open the artifacts palette. Select the **Event Integr
 
 ### Configuring the GitHub listener
 
-### Step 2: Bind listener parameters to configurable variables
+### Step 2: Fill in the GitHub Event Integration form
 
-Select the **GitHub** card to open the **Create GitHub Event Integration** form. The **Event Channel** dropdown is pre-set to `IssuesService`. Bind the two required fields to configurable variables:
+Select the **GitHub** card to open the **GitHub Event Integration** form, and set:
 
-- **webhookSecret** : Secret token used to validate incoming GitHub webhook requests
-- **listenerPort** : Port on which the webhook listener accepts incoming HTTP requests from GitHub
+- **Event Channel**: `github:PushService`, the default.
+- **Listener**: **Create New Listener**, named `githubListener`.
+- **Webhook Listener Port**: `8090`, the default.
+- **Webhook Secret**: bind it to a new configurable variable named `webhookSecret`.
 
 <ThemedImage
-    alt="GitHub trigger configuration form fully filled with Event Channel set to IssuesService, Webhook Secret bound to webhookSecret configurable variable, and Webhook Listener Port bound to listenerPort configurable variable, with Create enabled"
+    alt="GitHub Event Integration form with Event Channel set to github:PushService, a new listener on port 8090, and Webhook Secret bound to the webhookSecret configurable"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_02_trigger_config_form.png'),
         dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_02_trigger_config_form.png'),
     }}
 />
 
-### Step 3: Set actual values for your configurations
+### Step 3: Set the webhook secret
 
-In the left panel, select **Configurations** to open the Configurations panel. Set a value for each configuration listed below:
-
-- **webhookSecret** (string) : Secret token matching the value configured in your GitHub repository's webhook settings
-- **listenerPort** (int) : Port number on which the webhook listener will accept incoming requests from GitHub
+In the left panel, select **Configurations** and set **webhookSecret** to the secret you set on the GitHub webhook. The listener rejects every delivery until it is set.
 
 <ThemedImage
-    alt="Configurations panel open showing webhookSecret (string, Required) and listenerPort (int, Required) with empty value fields"
+    alt="Configurations panel showing the webhookSecret configurable"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_03_configurations_panel.png'),
         dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_03_configurations_panel.png'),
@@ -232,41 +232,35 @@ In the left panel, select **Configurations** to open the Configurations panel. S
 
 ### Step 4: Create the trigger
 
-Select **Create** to submit the trigger configuration and generate the `IssuesService` listener.
+Select **Create**. WSO2 Integrator adds the listener and a `github:PushService` attached to it.
 
 ### Handling GitHub events
 
-### Step 5: Review auto-registered event handlers
+### Step 5: Open the onPush handler
 
-Navigate to the **github:IssuesService** service view. GitHub's `IssuesService` auto-registers all handlers when the event channel is selected: there's no separate **Add Handler** side panel for this trigger. The **Event Handlers** list includes:
-
-- `onOpened`: triggered when an issue is opened
-- `onClosed`: triggered when an issue is closed
-- `onReopened`: triggered when an issue is reopened
-- `onAssigned`, `onUnassigned`, `onLabeled`, `onUnlabeled`
+Open the **github:PushService** service. It has one event handler, `onPush`, which receives a `github:PushPayload`.
 
 <ThemedImage
-    alt="GitHub IssuesService view showing all auto-registered event handlers with the Listener and Event Channel badges visible"
+    alt="github:PushService view showing the onPush event handler attached to githubListener"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_04_add_handler_panel.png'),
         dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_04_add_handler_panel.png'),
     }}
 />
 
-### Step 6: Inspect the onOpened handler flow
+### Step 6: Log the push
 
-Select the **onOpened** row to open its flow canvas. At this stage the handler body contains only the **Start** node and the **Error Handler** wrapper.
+Select **onPush** to open its flow. Select the **+** icon, choose **Log Info** from the **Logging** section, and log the branch and the number of commits. The handler's code is:
 
-:::info
-The `github:IssuesEvent` payload type is fixed by the `IssuesService` interface; you cannot change it. The type is provided by the `ballerinax/trigger.github` package and does not have a Define Value or Create Type Schema modal.
-:::
-
-### Step 7: Add the log statement
-
-Select the **+** icon in the flow chart, and in the side panel that opens, choose **Log Info** from the **Logging** section, then enter `payload.toJsonString()` as the message.
+```ballerina
+remote function onPush(github:PushPayload payload) returns error? {
+    log:printInfo("Push received", ref = payload.ref, commitCount = payload.commits.length(),
+            repository = payload.repository.fullName);
+}
+```
 
 <ThemedImage
-    alt="onOpened handler flow canvas showing the inserted log:printInfo node between Start and Error Handler"
+    alt="onPush handler flow with a log:printInfo node logging the ref and commit count"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_06_handler_flow.png'),
         dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/github_trigger_screenshots_06_handler_flow.png'),
@@ -275,25 +269,12 @@ Select the **+** icon in the flow chart, and in the side panel that opens, choos
 
 ### Running the integration
 
-Run the integration from WSO2 Integrator. Ensure your configurations are set before starting:
+1. Run the integration from WSO2 Integrator. The listener starts on port `8090`.
+2. Expose the port, for example with `ngrok http 8090`, and add a webhook to your repository with that URL as the **Payload URL**, content type `application/json`, the **Push** event, and the same secret as `webhookSecret`. See the [Setup Guide](setup-guide.md#configuring-a-github-repository-webhook).
+3. GitHub sends a `ping` when the webhook is saved. A green check under the webhook's **Recent Deliveries** shows that the listener verified it.
+4. Push a commit to the repository. The `onPush` handler logs the push in the WSO2 Integrator console.
 
-- **webhookSecret** : the same secret value configured in your GitHub repository's webhook settings
-- **listenerPort** : the port on which the listener will accept incoming requests
-
-To fire a test event, use one of the following approaches:
-
-1. **GitHub repository webhook** : In your GitHub repository, go to **Settings → Webhooks** and configure the webhook URL to point to your running listener with content type `application/json` and the matching secret. Open or modify an issue in the repository to trigger a live webhook POST request.
-2. **GitHub CLI** : Use `gh issue create` (with the GitHub CLI) against your repository to open a new issue, which causes GitHub to dispatch the `issues.opened` event to your configured webhook endpoint.
-
-When an issue is opened, GitHub sends a POST request to the webhook URL. The `onOpened` handler receives the `github:IssuesEvent` payload and logs it via `log:printInfo`. Check the WSO2 Integrator console output to see the JSON payload.
-
-### Try it yourself
-
-Try this sample in WSO2 Integration Platform.
-
-[![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/github_trigger_sample)
-
-[View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/github_trigger_sample)
+If a delivery shows `401` under **Recent Deliveries**, the secret on the webhook and `webhookSecret` don't match. The console logs `WEBHOOK_SIGNATURE_REJECTED` with the reason.
 
 ## What's next
 

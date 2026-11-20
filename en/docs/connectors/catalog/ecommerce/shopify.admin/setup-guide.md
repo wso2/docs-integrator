@@ -192,6 +192,117 @@ https://<your-store-name>.myshopify.com
 
 You can find it in the browser address bar when viewing your Shopify admin dashboard.
 
+## Configuring Shopify webhooks
+
+To receive Shopify events with the `ballerinax/shopify.trigger` package, create a Shopify app, subscribe it to webhook topics that point at your listener, and give the listener the app's client secret.
+
+### Prerequisites
+
+- A [Shopify Partner account](https://www.shopify.com/partners) and a development store. Create the store from the Partner Dashboard under **Stores**, then **Create store**. Turning on **Generate test data for store** preloads sample products, so you have data to trigger events against.
+- A public URL for your listener. Shopify must reach it over the internet. For local testing, a tunnel such as [ngrok](https://ngrok.com/) gives your machine a public URL:
+
+  ```bash
+  ngrok http 8090
+  ```
+
+  Use the **Forwarding** URL it prints as the webhook URL below.
+
+<ThemedImage
+    alt="ngrok forwarding a public URL to the listener on localhost:8090"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/trigger-ngrok-forwarding.png'),
+        dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/trigger-ngrok-forwarding.png'),
+    }}
+/>
+
+### Create the app
+
+1. In the Partner Dashboard, go to **Apps** and click **Create app**. Give it a name and leave the app URL as a placeholder such as `https://example.com`.
+
+<ThemedImage
+    alt="Shopify Dev Dashboard app development page"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/trigger-app-create-1.png'),
+        dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/trigger-app-create-1.png'),
+    }}
+/>
+
+2. Install the [Shopify CLI](https://shopify.dev/docs/api/shopify-cli) and link a local project to the app. `npx shopify` works without a global install:
+
+   ```bash
+   npx shopify app config link
+   ```
+
+   The CLI signs you in, asks for your organization and the app, and writes a `shopify.app.toml` file in the current directory.
+
+### Subscribe to webhook topics
+
+Add the topics your integration handles to `shopify.app.toml`, with your public URL as `uri`, and the access scope each topic needs. Keep the `[webhooks]` table and the `api_version` that `app config link` wrote:
+
+```toml
+[access_scopes]
+scopes = "read_orders"
+
+[webhooks]
+api_version = "<the version app config link wrote>"
+
+[[webhooks.subscriptions]]
+topics = ["orders/create", "orders/paid"]
+uri = "<your public URL, such as https://abc123.ngrok-free.app>"
+```
+
+Each service type handles a group of topics: `OrdersService` the `orders/*` topics, `CustomersService` the `customers/*` topics, `ProductsService` the `products/*` topics, and `FulfillmentsService` the `fulfillments/*` topics. See the [Trigger Reference](triggers.md#callback-signatures) for every callback.
+
+:::note
+Topics under `orders/*`, `customers/*` and `fulfillments/*` carry protected customer data. Shopify asks you to request [protected customer data access](https://shopify.dev/docs/apps/launch/protected-customer-data) before you can subscribe to them. `products/*` has no such restriction and is the simplest topic to test with.
+:::
+
+Deploy the configuration, then install the app on your development store from its page in the Dev Dashboard (**Install app**, then pick the store):
+
+```bash
+npx shopify app deploy
+```
+
+The app's **Versions** page shows the active subscriptions and the URL they deliver to.
+
+<ThemedImage
+    alt="A deployed app version with an active webhook subscription pointed at the public URL"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/trigger-webhook-endpoint-config.png'),
+        dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/trigger-webhook-endpoint-config.png'),
+    }}
+/>
+
+### Get the client secret
+
+Shopify signs every delivery with the app's **Client secret**. On the app's **Settings** page in the Dev Dashboard, reveal the **Client secret** and copy it. Set it as the listener's `webhookSecret`.
+
+<ThemedImage
+    alt="Shopify Dev Dashboard app settings with the client ID and the client secret"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/trigger-webhook-verifier-token.png'),
+        dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/trigger-webhook-verifier-token.png'),
+    }}
+/>
+
+### Test the webhook
+
+Run your integration and trigger an event in the development store, for example by creating a product or an order. Each delivery shows up in the ngrok console with `200 OK`, and your callback runs.
+
+<ThemedImage
+    alt="ngrok console showing Shopify deliveries answered with 200 OK"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/trigger-webhook-confirmed.png'),
+        dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/trigger-webhook-confirmed.png'),
+    }}
+/>
+
+:::warning
+Set the app's client secret as `webhookSecret`. The listener verifies the `X-Shopify-Hmac-Sha256` header on every delivery, and while `webhookSecret` isn't set it rejects every delivery with `401 Unauthorized`.
+:::
+
+For production, deploy your integration at a stable HTTPS URL, set it as the `uri` of each subscription, and run `npx shopify app deploy` again.
+
 ## What's next
 
 - [Action reference](actions.md): Available operations

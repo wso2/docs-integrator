@@ -166,24 +166,28 @@ The Twilio connector comes equipped with examples that demonstrate its usage acr
 
 
 ## Twilio Trigger Example
+
 ### What you'll build
 
-This integration reacts to SMS delivery status changes reported by Twilio. When Twilio posts a webhook for an outgoing or incoming SMS status update, the `twilio:Listener` receives the webhook and routes it to the `onReceived` handler in your `twilio:SmsStatusService`. The handler logs the full event payload as a JSON string for debugging and observability.
+This integration logs each message that Twilio reports as delivered. Twilio sends each event to the `twilio:Listener`, which verifies it and calls the `onDelivered` handler of a `twilio:SmsStatusService`. The handler logs the message SID and the recipient.
+
+:::info
+This example uses the `ballerinax/twilio.trigger` package, which receives Twilio events. It is separate from the `ballerinax/twilio` connector, which calls the Twilio API.
+:::
 
 ### Architecture
 
 ```mermaid
 flowchart LR
-    A((SMS Sender)) --> B[Twilio Platform]
-    B --> C[[Twilio Listener]]
-    C --> D[Handler: onReceived]
-    D --> E[log:printInfo]
+    A[Twilio] -->|webhook| B[[twilio:Listener]]
+    B --> C[Handler: onDelivered]
+    C --> D[log:printInfo]
 ```
 
 ### Prerequisites
 
-- A Twilio account with an active phone number
-- Your Twilio webhook URL configured to point to your listener endpoint as the status callback URL on your Twilio number or messaging service
+- A Twilio account with a phone number, and its Auth Token. See the [Setup Guide](setup-guide.md#configuring-twilio-status-callbacks).
+- A public URL for the listener, such as one from ngrok, for Twilio to call.
 
 ### Setting up the Twilio integration
 
@@ -191,12 +195,12 @@ flowchart LR
 
 ### Adding the Twilio trigger
 
-#### Step 1: Open the Artifacts palette
+### Step 1: Open the artifacts palette
 
-Select **Add Artifact** in the WSO2 Integrator panel to open the Artifacts palette. Scroll to the **Event Integration** category and locate the **Twilio** card.
+Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **Twilio** card.
 
 <ThemedImage
-    alt="Artifacts palette open showing the Twilio card under the Event Integration category, before selecting the card"
+    alt="Artifacts palette showing the Event Integration category with the Twilio card"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_01_artifact_palette.png'),
         dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_01_artifact_palette.png'),
@@ -205,81 +209,66 @@ Select **Add Artifact** in the WSO2 Integrator panel to open the Artifacts palet
 
 ### Configuring the Twilio listener
 
-#### Step 2: Fill in the trigger configuration form
+### Step 2: Fill in the Twilio Event Integration form
 
-Select the **Twilio** card to open the trigger configuration form, then configure the listener parameters:
+Select the **Twilio** card to open the **Twilio Event Integration** form, and set:
 
-- **Service Type**: The service type for this trigger: `SmsStatusService` is pre-selected
-- **Webhook Listener Port**: The port on which the Twilio webhook listener accepts incoming HTTP status callbacks from Twilio: bind this field to a `configurable int` variable named `listenerPort`
+- **Event Channel**: `twilio:SmsStatusService`, the default.
+- **Listener**: **Create New Listener**, named `twilioListener`.
+- **Webhook Listener Port**: `8090`, the default.
+- **Auth Token**: bind it to a new configurable variable named `authToken`.
+- **Webhook Base URL**: bind it to a new configurable variable named `webhookBaseUrl`.
 
 <ThemedImage
-    alt="Twilio trigger configuration form fully filled with all listener parameters before clicking Create"
+    alt="Twilio Event Integration form with Event Channel set to twilio:SmsStatusService and a new listener on port 8090"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_02_trigger_config_form.png'),
         dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_02_trigger_config_form.png'),
     }}
 />
 
-#### Step 3: Set actual values for your configurations
+### Step 3: Set the configurable values
 
-Select **Configurations** in the left panel of WSO2 Integrator. Set a value for each configuration listed below:
-
-- **listenerPort** (int) : The port on which the Twilio webhook listener will accept incoming HTTP status callbacks from Twilio
+In the left panel, select **Configurations** and set **authToken** to your Twilio Auth Token, and **webhookBaseUrl** to the public base URL Twilio calls, such as the ngrok forwarding URL, without a trailing slash. The listener rejects every delivery until **authToken** is set.
 
 <ThemedImage
-    alt="Configurations panel open showing the configurable variables listed with empty value fields"
+    alt="Configurations panel showing the authToken configurable"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_03_configurations_panel.png'),
         dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_03_configurations_panel.png'),
     }}
 />
 
-#### Step 4: Create the trigger
+### Step 4: Create the trigger
 
-Select **Create** to generate the integration.
+Select **Create**. WSO2 Integrator adds the listener and a `twilio:SmsStatusService` attached to it.
 
 ### Handling Twilio events
 
-#### Step 5: Inspect the pre-registered event handlers
+### Step 5: Open the onDelivered handler
 
-Select **twilio:SmsStatusService** in the left project tree to open the Twilio Event Integration service view.
-
-> **Note:** Unlike Kafka or RabbitMQ, the Twilio `SmsStatusService` pre-registers all nine SMS status handlers at service creation time. There's no **+ Add Handler** side panel for this trigger; all handlers are automatically wired.
-
-The service view shows the full set of pre-registered handlers bound to the `twilioListener`:
-
-- **onAccepted** : Twilio accepted the message for delivery
-- **onQueued** : Message is queued
-- **onSending** : Message is being sent
-- **onSent** : Message was sent to the carrier
-- **onFailed** : Message failed to send
-- **onDelivered** : Message confirmed delivered
-- **onUndelivered** : Message could not be delivered
-- **onReceiving** : Inbound message being received
-- **onReceived** : Inbound message fully received
+Open the **twilio:SmsStatusService** service. It lists all 13 of its event handlers, including `onDelivered`, which receives a `twilio:SmsStatusChangeEventWrapper`. Leave the other handlers empty.
 
 <ThemedImage
-    alt="Auto-registered SmsStatusService event handlers showing all nine callbacks pre-wired at service creation time"
+    alt="twilio:SmsStatusService view showing the onDelivered event handler attached to twilioListener"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_04_add_handler_panel.png'),
         dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_04_add_handler_panel.png'),
     }}
 />
 
-#### Step 6: Open the onReceived handler flow
+### Step 6: Log the event
 
-Select the **onReceived** row to navigate to its flow canvas.
+Select **onDelivered** to open its flow. Select the **+** icon, choose **Log Info** from the **Logging** section, and log the message SID and the recipient. The handler's code is:
 
-> **Note:** The `onReceived` handler uses the library-defined `twilio:SmsStatusChangeEventWrapper` payload type. There's no **Define Value** modal for this trigger; the payload type is provided by the `ballerinax/trigger.twilio` package and can't be customised via the UI.
-
-The initial flow canvas shows a minimal handler skeleton: **Start → + → Error Handler → End**.
-
-#### Step 7: Add a log step
-
-Select the **+** icon in the flow chart, and in the side panel that opens, choose **Log Info** from the **Logging** section, then enter `event.toJsonString()` as the message.
+```ballerina
+remote function onDelivered(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+    log:printInfo("Message delivered", messageSid = payload.MessageSid, to = payload.To);
+}
+```
 
 <ThemedImage
-    alt="onReceived flow canvas with the log:printInfo node showing event.toJsonString() as the message argument"
+    alt="onDelivered handler flow with a log:printInfo node"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_06_handler_flow.png'),
         dark: useBaseUrl('/img/connectors/catalog/communication/twilio/twilio_trigger_screenshots_06_handler_flow.png'),
@@ -288,18 +277,9 @@ Select the **+** icon in the flow chart, and in the side panel that opens, choos
 
 ### Running the integration
 
-Run the integration from WSO2 Integrator and then fire a test SMS status event to confirm the log output. Use any of the following methods:
+1. Run the integration from WSO2 Integrator. The listener starts on port `8090`.
+2. Expose the port, for example with `ngrok http 8090`, and point Twilio at it. See the [Setup Guide](setup-guide.md#configuring-twilio-status-callbacks).
+3. Send a message with `StatusCallback` set to `<public URL>/smsStatus`, as the [Setup Guide](setup-guide.md#configuring-twilio-status-callbacks) shows.
+4. The `onDelivered` handler logs the event in the WSO2 Integrator console.
 
-- **Twilio web console**: Navigate to your Twilio phone number settings, set the status callback URL to your listener endpoint, and send a test SMS from the Twilio console. Twilio posts a status webhook for each delivery stage (`queued`, `sent`, `delivered`, and so on).
-- **Twilio CLI**: Use the Twilio CLI (`twilio api:core:messages:create`) to send an SMS from your active Twilio number with `--status-callback` pointing to your listener endpoint. Each status transition triggers a separate webhook POST.
-- **Direct HTTP POST**: Use a tool such as `curl` or Postman to send a POST request that mimics a Twilio status callback to your listener endpoint, with form-encoded fields such as `MessageSid`, `MessageStatus`, `From`, and `To`.
-
-When the integration receives a webhook, the `onReceived` handler logs the full `twilio:SmsStatusChangeEventWrapper` payload as JSON. Verify that the log entry appears in the WSO2 Integrator console output.
-
-### Try it yourself
-
-Try this sample in WSO2 Integration Platform.
-
-[![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/twilio_trigger_sample)
-
-[View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/twilio_trigger_sample)
+If Twilio reports `401` for a delivery, the listener rejected its signature. The console logs `WEBHOOK_SIGNATURE_REJECTED` with the reason; check that **authToken** is your Twilio Auth Token.

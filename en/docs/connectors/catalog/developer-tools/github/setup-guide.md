@@ -101,18 +101,41 @@ GitHub rotates refresh tokens on every renewal. The connector stores the new tok
 
 ## Configuring a GitHub repository webhook
 
-If you are using event-driven integrations with GitHub webhooks, configure a webhook in your repository to forward events to your listener endpoint.
+To receive GitHub events with the `ballerinax/github.trigger` package, add a webhook to the repository (or organization) that sends events to your listener.
 
 ### Prerequisites
 
-- Admin access to the GitHub repository
-- Your WSO2 Integrator listener URL (for example, `https://your-host:8090`)
-- A webhook secret: a random string that must match the `webhookSecret` value in your integration
+- Admin access to the GitHub repository, or owner access to the organization for an organization webhook.
+- A public URL for your listener. GitHub must reach it over the internet. For local testing, a tunnel such as [ngrok](https://ngrok.com/) gives your machine a public URL:
+
+  ```bash
+  ngrok http 8090
+  ```
+
+  Use the **Forwarding** URL it prints as the payload URL below.
+
+<ThemedImage
+    alt="ngrok forwarding a public URL to the listener on localhost:8090"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/trigger-ngrok-forwarding.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/trigger-ngrok-forwarding.png'),
+    }}
+/>
+
+- A webhook secret: a random string you set both on the webhook and as the listener's `webhookSecret`.
 
 ### Open webhook settings
 
-1. Go to your GitHub repository.
-2. Click **Settings** → **Webhooks** → **Add webhook**.
+1. Go to your GitHub repository (or organization).
+2. Click **Settings**, select **Webhooks**, and click **Add webhook**.
+
+<ThemedImage
+    alt="GitHub repository Webhooks settings page"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/trigger-webhook-settings-page.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/trigger-webhook-settings-page.png'),
+    }}
+/>
 
 ### Configure the webhook
 
@@ -120,34 +143,59 @@ Fill in the following fields:
 
 | Field | Value |
 |---|---|
-| **Payload URL** | Your listener endpoint URL (for example, `https://your-host:8090`) |
+| **Payload URL** | Your listener's public URL, such as the ngrok forwarding URL |
 | **Content type** | `application/json` |
 | **Secret** | The same value you set as `webhookSecret` in your integration |
-| **SSL verification** | Enable if your listener uses HTTPS |
+| **SSL verification** | Enable when the payload URL uses HTTPS |
+
+<ThemedImage
+    alt="GitHub webhook form with the payload URL, content type and secret filled in"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/trigger-webhook-form-filled.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/trigger-webhook-form-filled.png'),
+    }}
+/>
 
 ### Select events
 
-Choose **Let me select individual events** and enable only the events that match your service type:
+Choose **Let me select individual events**, and enable the events for the service types your integration attaches. Each service type is named after the GitHub event it handles:
 
 | If you use | Enable GitHub event |
 |---|---|
-| `IssuesService` | **Issues** |
-| `IssueCommentService` | **Issue comments** |
+| `PushService` | **Pushes** |
 | `PullRequestService` | **Pull requests** |
 | `PullRequestReviewService` | **Pull request reviews** |
 | `PullRequestReviewCommentService` | **Pull request review comments** |
+| `IssuesService` | **Issues** |
+| `IssueCommentService` | **Issue comments** |
 | `ReleaseService` | **Releases** |
-| `LabelService` | **Labels** |
-| `MilestoneService` | **Milestones** |
-| `PushService` | **Pushes** |
-| `ProjectCardService` | **Project cards** |
+| `WorkflowRunService` | **Workflow runs** |
+| `CheckRunService` | **Check runs** |
+
+See the [Trigger Reference](triggers.md#callback-signatures) for all 75 service types.
+
+<ThemedImage
+    alt="GitHub webhook event selection with individual events checked"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/trigger-webhook-event-selection.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/trigger-webhook-event-selection.png'),
+    }}
+/>
 
 ### Save
 
-Click **Add webhook**. GitHub will send a ping event to your endpoint to verify connectivity.
+Click **Add webhook**. GitHub sends a `ping` event right away. A green check under **Recent Deliveries** shows that it reached your listener and passed verification. Attach a `PingService` to handle the ping; without one, the listener still acknowledges it.
+
+<ThemedImage
+    alt="GitHub webhook showing a successful delivery"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/developer-tools/github/trigger-webhook-confirmed.png'),
+        dark: useBaseUrl('/img/connectors/catalog/developer-tools/github/trigger-webhook-confirmed.png'),
+    }}
+/>
 
 :::warning
-Always set a webhook secret. Without it, your listener accepts requests from any source, not just GitHub. The secret is used to verify the `X-Hub-Signature-256` header on every incoming request.
+Set the same secret on the webhook and as `webhookSecret`. The listener verifies the `X-Hub-Signature-256` header on every delivery, and while `webhookSecret` isn't set it rejects every delivery with `401 Unauthorized`.
 :::
 
 ## What's next

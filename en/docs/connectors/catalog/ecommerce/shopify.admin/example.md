@@ -149,23 +149,25 @@ Try this sample in WSO2 Integration Platform.
 
 ### What you'll build
 
-This integration listens for incoming Shopify webhook events by configuring a Shopify webhook listener with a shared secret. When a matching Shopify Orders event is received, the registered handler, `onOrdersCreate`, is invoked with the event payload of type `shopify:OrderEvent`, and the payload is logged as a JSON string using `log:printInfo`. The overall flow is: Shopify Store → Shopify Listener → Handler → `log:printInfo`.
+This integration logs every new order in a Shopify store. Shopify sends each event to the `shopify:Listener`, which verifies it and calls the `onOrdersCreate` handler of a `shopify:OrdersService`. The handler logs the order's ID and name.
+
+:::info
+This example uses the `ballerinax/shopify.trigger` package, which receives Shopify events. It is separate from the `ballerinax/shopify.admin` connector, which calls the Shopify API.
+:::
 
 ### Architecture
 
 ```mermaid
 flowchart LR
-    A((Shopify Store)) --> B[Shopify Webhook]
-    B --> C[[Shopify Listener]]
-    C --> D[Handler: onOrdersCreate]
-    D --> E[log:printInfo]
+    A[Shopify] -->|webhook| B[[shopify:Listener]]
+    B --> C[Handler: onOrdersCreate]
+    C --> D[log:printInfo]
 ```
 
 ### Prerequisites
 
-- A Shopify store or Partner account with webhook configuration permissions.
-- A Shopify webhook shared secret (generated in the Shopify admin or Partner Dashboard under **Notifications → Webhooks**).
-- A publicly accessible Shopify webhook endpoint URL (use a tunneling tool such as ngrok if your environment is not publicly reachable).
+- A Shopify app subscribed to the `orders/create` topic. See the [Setup Guide](setup-guide.md#configuring-shopify-webhooks).
+- A public URL for the listener, such as one from ngrok, for Shopify to deliver to.
 
 ### Setting up the Shopify integration
 
@@ -173,13 +175,12 @@ flowchart LR
 
 ### Adding the Shopify trigger
 
-### Step 1: Open the artifacts palette and select the Shopify trigger
+### Step 1: Open the artifacts palette
 
-1. Select **+ Add Artifact** on the integration canvas to open the artifacts palette.
-2. In the **Event Integration** category, locate and select the **Shopify** card.
+Select **Add Artifact** to open the artifacts palette. Select the **Event Integration** category and locate the **Shopify** card.
 
 <ThemedImage
-    alt="Artifacts palette open showing the Event Integration category with the Shopify trigger card visible"
+    alt="Artifacts palette showing the Event Integration category with the Shopify card"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_01_artifact_palette.png'),
         dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_01_artifact_palette.png'),
@@ -188,102 +189,76 @@ flowchart LR
 
 ### Configuring the Shopify listener
 
-### Step 2: Bind Shopify listener parameters to configuration variables
+### Step 2: Fill in the Shopify Event Integration form
 
-For each required listener parameter, open the helper panel next to the field, select the **Configurables** tab, select **+ New Configurable**, enter a camelCase variable name and the appropriate type (`configurable string` for text or credential fields, `configurable int` for numeric fields), and select **Save**. The configuration is automatically injected into the field. Repeat for every required field:
+Select the **Shopify** card to open the **Shopify Event Integration** form, and set:
 
-- **API Secret Key** : The webhook API secret key used to verify that incoming requests originate from Shopify.
-- **Port** : The port on which the Shopify webhook listener accepts incoming HTTP requests.
+- **Event Type**: `shopify:OrdersService`, the default.
+- **Listener**: **Create New Listener**, named `shopifyListener`.
+- **Webhook Listener Port**: `8090`, the default.
+- **Webhook Secret**: bind it to a new configurable variable named `webhookSecret`.
 
 <ThemedImage
-    alt="Shopify trigger configuration form with all listener parameters bound to configuration variables, before clicking Create"
+    alt="Shopify Event Integration form with Event Type set to shopify:OrdersService and a new listener on port 8090"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_02_trigger_config_form.png'),
         dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_02_trigger_config_form.png'),
     }}
 />
 
-### Step 3: Set actual values for your configurations
+### Step 3: Set the configurable values
 
-Select **Configurations** in the left panel of WSO2 Integrator (at the bottom of the project tree, under Data Mappers) to open the Configurations panel, then set a value for each configuration listed below:
-
-- **shopifyApiSecretKey** (string) : Your Shopify webhook API secret key, copied from the Shopify admin or Partner Dashboard.
-- **shopifyListenerPort** (int) : The port number on which the listener should run.
+In the left panel, select **Configurations** and set **webhookSecret** to your Shopify app's client secret. The listener rejects every delivery until **webhookSecret** is set.
 
 <ThemedImage
-    alt="Configurations panel open showing the configurable variables listed with empty value fields"
+    alt="Configurations panel showing the webhookSecret configurable"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_03_configurations_panel.png'),
         dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_03_configurations_panel.png'),
     }}
 />
 
-### Step 4: Select Create to register the listener and open the Service view
+### Step 4: Create the trigger
 
-Select **Create** to submit the Shopify trigger listener configuration. Select the **Event Channel** type, for example, **Orders**, and provide a service name. The listener is created automatically and the Service view opens, showing the Shopify listener chip and the Event Handlers section with all available Orders event handlers pre-registered (`onOrdersCreate`, `onOrdersCancelled`, `onOrdersFulfilled`, `onOrdersPaid`, `onOrdersPartiallyFulfilled`, `onOrdersUpdated`).
+Select **Create**. WSO2 Integrator adds the listener and a `shopify:OrdersService` attached to it.
 
 ### Handling Shopify events
 
-### Step 5: Open the add handler side panel
+### Step 5: Open the onOrdersCreate handler
 
-1. In the Service view, review the **Event Handlers** section: for the **Orders** event channel, all six Orders handlers are pre-registered automatically when the service is created.
-2. Select any handler row (for example, **onOrdersCreate**) to open its flow canvas.
+Open the **shopify:OrdersService** service. It lists all 6 of its event handlers, including `onOrdersCreate`, which receives a `shopify:OrderEvent`. Leave the other handlers empty.
 
 <ThemedImage
-    alt="Service view showing the Event Handlers panel with all Orders event handlers listed"
+    alt="shopify:OrdersService view showing the onOrdersCreate event handler attached to shopifyListener"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_04_add_handler_panel.png'),
         dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_04_add_handler_panel.png'),
     }}
 />
 
-### Step 6: Select the onOrdersCreate handler and review the payload type
+### Step 6: Log the event
 
-1. In the project tree, select **onOrdersCreate** under `shopify:OrdersService` to open the handler's flow canvas.
-2. The handler function signature is `remote function onOrdersCreate(shopify:OrderEvent event) returns error?`; the event payload is already strongly typed as `shopify:OrderEvent`, so no custom type schema definition is required.
-3. The flow canvas opens showing **Start** → *(empty)* → **Error Handler**, ready for logic to be added.
+Select **onOrdersCreate** to open its flow. Select the **+** icon, choose **Log Info** from the **Logging** section, and log the order's ID and name. The handler's code is:
 
-### Step 7: Add a log statement to the handler flow
-
-1. In the flow canvas for `onOrdersCreate`, select **+** between **Start** and **Error Handler** to open the node panel.
-2. Expand the **Logging** category and select **Log Info**. The `log:printInfo` configuration form appears on the right.
-3. In the **Msg*** field, switch to **Expression** mode and enter `event.toJsonString()`.
-4. Select **Save**. The `log:printInfo` node now appears in the flow canvas between **Start** and **Error Handler**, displaying `event.toJsonString()` as its message.
+```ballerina
+remote function onOrdersCreate(shopify:OrderEvent payload) returns error? {
+    log:printInfo("Order created", id = payload.id, name = payload.name);
+}
+```
 
 <ThemedImage
-    alt="Handler flow canvas for onOrdersCreate showing the log:printInfo step added between Start and Error Handler"
+    alt="onOrdersCreate handler flow with a log:printInfo node"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_06_handler_flow.png'),
         dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_06_handler_flow.png'),
     }}
 />
 
-### Step 8: Confirm the handler is registered in the Service view
-
-Select the back arrow in the canvas header (or re-select `shopify:OrdersService` in the project tree) to return to the Service view. The Event Handlers list confirms all Orders handlers, including `onOrdersCreate`, are registered and ready.
-
-<ThemedImage
-    alt="Final Service view showing all registered Orders event handlers in the Event Handlers list"
-    sources={{
-        light: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_07_service_view_final.png'),
-        dark: useBaseUrl('/img/connectors/catalog/ecommerce/shopify.admin/shopify_screenshot_07_service_view_final.png'),
-    }}
-/>
-
 ### Running the integration
 
-### Step 9: Run the integration and trigger a test Shopify event
+1. Run the integration from WSO2 Integrator. The listener starts on port `8090`.
+2. Expose the port, for example with `ngrok http 8090`, and point Shopify at it. See the [Setup Guide](setup-guide.md#configuring-shopify-webhooks).
+3. Create an order in your development store, for example from **Orders**, then **Create order** in the Shopify admin.
+4. The `onOrdersCreate` handler logs the event in the WSO2 Integrator console.
 
-1. In the WSO2 Integrator panel, select **Run** to start the integration. The Shopify listener begins accepting webhook requests on the configured port.
-2. Trigger a test Shopify order-created event using one of the following methods:
-   - A WSO2 Integrator **HTTP Client** integration, assembled from the same low-code canvas (recommended), that sends a POST request to the listener endpoint with a valid `X-Shopify-Hmac-SHA256` header and a JSON body matching the `shopify:OrderEvent` structure.
-   - The **Shopify Partner Dashboard** or Shopify Admin → **Settings → Notifications → Webhooks → Send test notification** to fire a real webhook to a publicly accessible endpoint.
-3. Observe the log output in the integration console: the Shopify order event payload JSON appears printed by `log:printInfo` (for example: `{"id":1,"email":"customer@example.com","total_price":"99.00"}`).
-
-### Try it yourself
-
-Try this sample in WSO2 Integration Platform.
-
-[![Deploy to Devant](https://openindevant.choreoapps.dev/images/DeployDevant-White.svg)](https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/connectors/shopify_trigger_sample)
-
-[View source on GitHub](https://github.com/wso2/integration-samples/tree/main/integrator-default-profile/connectors/shopify_trigger_sample)
+If Shopify reports `401` for a delivery, the listener rejected its signature. The console logs `WEBHOOK_SIGNATURE_REJECTED` with the reason; check that **webhookSecret** is your Shopify app's client secret.
