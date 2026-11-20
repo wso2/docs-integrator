@@ -54,13 +54,13 @@ The cloud editor runs in WSO2 Cloud and cannot connect to a server running on `l
 
 ## Step 1: Create the integration
 
-1. On the project home page, click **Create on Cloud**.
+1. On the project overview page, click **Open Cloud Editor**.
 
    <ThemedImage
-       alt="WSO2 Cloud project home showing the Create on Cloud option"
+       alt="Project overview page with Open Cloud Editor highlighted under Create an integration on Cloud"
        sources={{
-           light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
-           dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+           light: useBaseUrl('/img/get-started/quickstarts/open-cloud-editor.png'),
+           dark: useBaseUrl('/img/get-started/quickstarts/open-cloud-editor.png'),
        }}
    />
 
