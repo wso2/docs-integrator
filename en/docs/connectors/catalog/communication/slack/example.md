@@ -137,3 +137,122 @@ The `Slack` connector provides practical examples illustrating usage in various 
 1. [Automated Summary Report](https://github.com/ballerina-platform/module-ballerinax-slack/tree/master/examples/automated-summary-report) - This use case demonstrates how the Slack API can be utilized to generate a summarized report of daily stand-up chats in the general channel.
 
 2. [Survey Feedback Analysis](https://github.com/ballerina-platform/module-ballerinax-slack/tree/master/examples/survey-feedback-analysis) - This use case demonstrates how the Slack API can be utilized to perform a company-wide survey by creating a dedicated channel to receive and track feedback replies.
+
+## Slack Trigger Example
+
+### What you'll build
+
+This integration logs every message posted in the Slack channels your app is in. Slack sends each event to the `slack:Listener`, which verifies it and calls the `onMessage` handler of a `slack:MessageService`. The handler logs the channel, the user and the text.
+
+:::info
+This example uses the `ballerinax/slack.trigger` package, which receives Slack events. It is separate from the `ballerinax/slack` connector, which calls the Slack API.
+:::
+
+### Architecture
+
+```mermaid
+flowchart LR
+    A[Slack] -->|webhook| B[[slack:Listener]]
+    B --> C[Handler: onMessage]
+    C --> D[log:printInfo]
+```
+
+### Prerequisites
+
+- A Slack app with event subscriptions turned on and the `message.channels` bot event added. See the [Setup Guide](setup-guide.md#configuring-slack-event-subscriptions).
+- A public URL for the listener, such as one from ngrok, for Slack to deliver to.
+
+### Setting up the Slack integration
+
+> **New to WSO2 Integrator?** Follow the [Create a New Integration](product://integrator/develop-and-test/create-workspace) guide to set up your integration first, then return here to add the trigger.
+
+### Adding the Slack trigger
+
+### Step 1: Open the artifacts palette
+
+Select **Add Artifact** to open the artifacts palette. Search for `slack.trigger` and find the **slack.trigger** card under **More on Ballerina Central**.
+
+<ThemedImage
+    alt="Artifacts palette search results showing the slack.trigger package from Ballerina Central"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_01_artifact_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_01_artifact_palette.png'),
+    }}
+/>
+
+### Configuring the Slack listener
+
+### Step 2: Fill in the Slack Event Integration form
+
+Select the **slack.trigger** card to open the **Slack Event Integration** form, and set:
+
+- **Event Channel**: `slack:MessageService`, the default.
+- **Listener**: **Create New Listener**, named `slackListener`.
+- **Webhook Listener Port**: `8090`, the default.
+- **Signing Secret**: bind it to a new configurable variable named `signingSecret`.
+
+<ThemedImage
+    alt="Slack Event Integration form with Event Channel set to MessageService and a new listener on port 8090"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_02_trigger_config_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_02_trigger_config_form.png'),
+    }}
+/>
+
+### Step 3: Set the configurable values
+
+In the left panel, select **Configurations** and set **signingSecret** to your Slack app's signing secret. The listener rejects every delivery until **signingSecret** is set.
+
+<ThemedImage
+    alt="Configurations panel showing the signingSecret configurable"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_03_configurations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_03_configurations_panel.png'),
+    }}
+/>
+
+### Step 4: Create the trigger
+
+Select **Create**. WSO2 Integrator adds the listener and a `slack:MessageService` attached to it.
+
+### Handling Slack events
+
+### Step 5: Open the onMessage handler
+
+Open the **slack:MessageService** service. It lists all 4 of its event handlers, including `onMessage`, which receives a `slack:MessageEventWrapper`. Leave the other handlers empty.
+
+<ThemedImage
+    alt="MessageService view showing the onMessage event handler attached to the listener"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_04_add_handler_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_04_add_handler_panel.png'),
+    }}
+/>
+
+### Step 6: Log the event
+
+Select **onMessage** to open its flow. Select the **+** icon, choose **Log Info** from the **Logging** section, and log the channel, the user and the text. The handler's code is:
+
+```ballerina
+remote function onMessage(slack:MessageEventWrapper payload) returns error? {
+    slack:MessageEvent message = payload.event;
+    log:printInfo("Message received", channel = message.'channel, user = message.user, text = message.text);
+}
+```
+
+<ThemedImage
+    alt="onMessage handler flow with a log:printInfo node"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_06_handler_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/communication/slack/slack_trigger_screenshots_06_handler_flow.png'),
+    }}
+/>
+
+### Running the integration
+
+1. Run the integration from WSO2 Integrator. The listener starts on port `8090`.
+2. Expose the port, for example with `ngrok http 8090`, and point Slack at it. See the [Setup Guide](setup-guide.md#configuring-slack-event-subscriptions).
+3. Invite the app to a channel with `/invite @<your app>` and post a message.
+4. The `onMessage` handler logs the event in the WSO2 Integrator console.
+
+If Slack reports `401` for a delivery, the listener rejected its signature. The console logs `WEBHOOK_SIGNATURE_REJECTED` with the reason; check that **signingSecret** is your Slack app's signing secret.

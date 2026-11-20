@@ -23,6 +23,16 @@ const sidebars: SidebarsConfig = {
         // ── Connector categories (alphabetical) ──
         {
           type: 'category',
+          label: 'Aayu MFT Gateway AS2 Trigger',
+          link: { type: 'doc', id: 'catalog/cloud-infrastructure/aayu.mftg.as2.trigger/connector-overview' },
+          items: [
+            'catalog/cloud-infrastructure/aayu.mftg.as2.trigger/setup-guide',
+            'catalog/cloud-infrastructure/aayu.mftg.as2.trigger/triggers',
+            'catalog/cloud-infrastructure/aayu.mftg.as2.trigger/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'AI',
           link: { type: 'doc', id: 'catalog/ai-ml/ai/ai-overview' },
           items: [
@@ -845,6 +855,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'HubSpot Trigger',
+          link: { type: 'doc', id: 'catalog/crm-sales/hubspot.trigger/connector-overview' },
+          items: [
+            'catalog/crm-sales/hubspot.trigger/setup-guide',
+            'catalog/crm-sales/hubspot.trigger/triggers',
+            'catalog/crm-sales/hubspot.trigger/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'IBM CTG',
           link: { type: 'doc', id: 'catalog/erp-business/ibm.ctg/ibm-ctg-connector-overview' },
           items: [
@@ -1169,6 +1189,16 @@ const sidebars: SidebarsConfig = {
             'catalog/database/postgresql/actions',
             'catalog/database/postgresql/triggers',
             'catalog/database/postgresql/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'QuickBooks Trigger',
+          link: { type: 'doc', id: 'catalog/finance-accounting/quickbooks.trigger/connector-overview' },
+          items: [
+            'catalog/finance-accounting/quickbooks.trigger/setup-guide',
+            'catalog/finance-accounting/quickbooks.trigger/triggers',
+            'catalog/finance-accounting/quickbooks.trigger/example',
           ],
         },
         {
@@ -1962,6 +1992,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'catalog/communication/slack/setup-guide',
             'catalog/communication/slack/actions',
+            'catalog/communication/slack/triggers',
             'catalog/communication/slack/example',
           ],
         },
@@ -2143,6 +2174,16 @@ const sidebars: SidebarsConfig = {
             'catalog/communication/whatsapp-business/actions',
             'catalog/communication/whatsapp-business/triggers',
             'catalog/communication/whatsapp-business/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'WSO2 Identity Server Trigger',
+          link: { type: 'doc', id: 'catalog/security-identity/identityserver.trigger/connector-overview' },
+          items: [
+            'catalog/security-identity/identityserver.trigger/setup-guide',
+            'catalog/security-identity/identityserver.trigger/triggers',
+            'catalog/security-identity/identityserver.trigger/example',
           ],
         },
         {

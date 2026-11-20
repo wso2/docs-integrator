@@ -1,164 +1,212 @@
 ---
 title: Triggers
-description: "Reference for the Twilio webhook listener and service callbacks: configure SMS and call status event handlers in Ballerina integrations."
-keywords: [twilio, webhook listener, sms status, call status, event handler, ballerina]
+description: "Reference for the Twilio status callback listener and service callbacks: receive call and message status changes in Ballerina integrations."
+keywords: [twilio, status callback, webhook listener, event handler, ballerina]
 connector: true
 connector_name: "twilio"
 connector_version: "5.0.x"
 ---
+
 # Triggers
 
-:::note
-Trigger functionality uses the **`ballerinax/trigger.twilio`** package: a separate package from the `ballerinax/twilio` REST API client. Use `import ballerinax/trigger.twilio;` for all listener, service, and event type references.
-:::
+The `ballerinax/twilio.trigger` package receives Twilio status callbacks. As a call or a message moves through its states, such as `ringing`, `completed`, `sent` or `delivered`, Twilio sends an HTTP request to your integration, and the listener calls the callback for that status with a typed payload. It replaces the earlier `ballerinax/trigger.twilio` package.
 
-The `ballerinax/trigger.twilio` package supports event-driven integration through Twilio webhooks. When SMS status changes or call status changes occur in Twilio, the listener receives the webhook request and dispatches it to the matching service callback automatically.
-
-Three components work together:
+This reference covers `ballerinax/twilio.trigger` version 0.9.0. The following components work together:
 
 | Component | Role |
 |-----------|------|
-| `twilio:Listener` | Exposes the webhook endpoint and dispatches incoming Twilio events to attached services. |
-| `twilio:SmsStatusService` | Defines SMS status callbacks such as `onAccepted`, `onDelivered`, `onFailed`, and `onReceived`. |
-| `twilio:CallStatusService` | Defines call status callbacks such as `onQueued`, `onRinging`, `onInProgress`, and `onCompleted`. |
-| `twilio:SmsStatusChangeEventWrapper` | The SMS status payload passed to SMS callbacks. |
-| `twilio:CallStatusEventWrapper` | The call status payload passed to call callbacks. |
+| `twilio:Listener` | Receives webhook requests from Twilio, verifies each one, and calls the attached service for its event. |
+| `twilio:ListenerConfig` | Holds what the listener verifies deliveries with, your account's Auth Token and the public base URL Twilio calls. |
+| Service types | 2 service types, such as `twilio:SmsStatusService`. Each callback handles one event. |
+| Payload types | A typed record for each event, such as `twilio:SmsStatusChangeEventWrapper`, passed to its callback. |
 
-For action-based operations, see the [Action Reference](actions.md).
+To call the Twilio API from your integration, use the `ballerinax/twilio` connector. See the [Action Reference](actions.md).
 
 ## Error handling
 
-Each service callback returns `error?`. If a callback returns an `error`, the listener logs the failure and returns an HTTP `500` response to Twilio. Twilio treats non-`2xx` responses as delivery failures and will retry the webhook according to its retry policy (up to 3 retries with exponential backoff). To prevent unintended retries, handle expected failure cases within the callback and return `()` (nil) to acknowledge the event without triggering a retry.
+The listener acknowledges a delivery to Twilio as soon as it is verified, and then calls your callback, so Twilio never waits on your code. What happens after that is logged:
+
+| Log entry | When |
+|-----------|------|
+| `WEBHOOK_SIGNATURE_REJECTED` (warning) | The delivery failed verification. It is answered with `401 Unauthorized` and never reaches a service. The entry gives the reason. |
+| `DISPATCH_FAILED` (error) | Your callback returned an error, or the payload didn't fit the callback's type. |
+| `NO_HANDLER_FOR_EVENT` (warning) | The event isn't one the package knows. |
+| `SERVICE_NOT_ATTACHED` (debug) | No service of the event's type is attached to the listener. |
 
 ## Listener
 
-The `twilio:Listener` receives webhook requests from Twilio and routes events to the attached service type. Configure your Twilio phone number or messaging service to send status callback webhooks to the public URL of the running listener using `HTTP POST`.
+The `twilio:Listener` exposes an HTTP endpoint for Twilio to deliver webhooks to. It serves call status callbacks at `/callStatus` and message status callbacks at `/smsStatus`, so the callback URLs you give Twilio are its public base URL followed by one of those paths. See the [Setup Guide](setup-guide.md#configuring-twilio-status-callbacks).
 
 ### Configuration
 
-The listener is initialized with the port used to expose the webhook endpoint.
-
 | Config Type | Description |
 |-------------|-------------|
-| `int` | Webhook listener port. |
+| `ListenerConfig` | Configuration for the Twilio webhook listener. |
+
+**`ListenerConfig` fields:**
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `webhookSecret` | <code>string</code> | Optional | Your Twilio account's **Auth Token**. The listener verifies every callback with it, and rejects every delivery while it isn't set. |
+| `webhookBaseUrl` | <code>string</code> | <code>""</code> | The scheme and host Twilio calls, such as `https://abc123.ngrok-free.app`, without a trailing slash. Twilio signs the full callback URL, so this must match it exactly. |
+
+The listener's second argument is the port to listen on, or an `http:Listener` to share. The default port is `8090`. A listener created on a port accepts request bodies up to 25 MB.
+
+### Verifying deliveries
+
+Twilio signs each callback with your Auth Token, in the `X-Twilio-Signature` header: the Base64 HMAC-SHA1 of the full callback URL followed by every POST parameter, sorted by name, each name followed directly by its value. The listener rebuilds the URL from `webhookBaseUrl` and the path and query string it received, computes the signature with `webhookSecret`, and compares the two in constant time. A callback without the header, with a different signature, or arriving while `webhookSecret` isn't set gets `401 Unauthorized`. A `401` for every callback usually means `webhookBaseUrl` doesn't match the URL Twilio calls.
+
+The listener calls the callback for the `CallStatus` parameter of a call status callback, or the `MessageStatus` parameter of a message status callback.
 
 ### Initializing the listener
 
-**Listener with a configurable port:**
-
 ```ballerina
-import ballerinax/trigger.twilio;
+import ballerinax/twilio.trigger as twilio;
 
-configurable int listenerPort = ?;
+configurable string authToken = ?;
+configurable string webhookBaseUrl = ?;
+configurable int port = 8090;
 
-listener twilio:Listener twilioListener = new (listenerPort);
+listener twilio:Listener twilioListener = new ({webhookSecret: authToken, webhookBaseUrl}, port);
 ```
 
-**Listener with a fixed port:**
+Set the secret in `Config.toml`:
 
-```ballerina
-import ballerinax/trigger.twilio;
-
-listener twilio:Listener twilioListener = new (8090);
+```toml
+webhookSecret = "<your Twilio Auth Token>"
+webhookBaseUrl = "https://<your public host>"
 ```
 
 ## Service
 
-A Twilio trigger service is a Ballerina service attached to a `twilio:Listener`. Select `twilio:SmsStatusService` for SMS status callbacks or `twilio:CallStatusService` for voice call status callbacks.
+Attach a service of one of the types below to the listener for each kind of event you need. Implement every callback of the type you attach; give a callback an empty body for an event you don't act on. Services of several types can share one listener. There are 22 callbacks in all.
+
+A service can also be attached on a path of its own, such as `service twilio:SmsStatusService /twilio on twilioListener`, so several triggers and HTTP services can share one `http:Listener`.
 
 ### Callback signatures
 
-| Service Type | Callback | Signature | Description |
-|--------------|----------|-----------|-------------|
-| `twilio:SmsStatusService` | `onAccepted` | `remote function onAccepted(twilio:SmsStatusChangeEventWrapper event) returns error?` | Invoked when Twilio has accepted the message request. |
-| `twilio:SmsStatusService` | `onQueued` | `remote function onQueued(twilio:SmsStatusChangeEventWrapper event) returns error?` | Invoked when the message is queued to be sent. |
-| `twilio:SmsStatusService` | `onSending` | `remote function onSending(twilio:SmsStatusChangeEventWrapper event) returns error?` | Invoked when Twilio is sending the message. |
-| `twilio:SmsStatusService` | `onSent` | `remote function onSent(twilio:SmsStatusChangeEventWrapper event) returns error?` | Invoked when the nearest upstream carrier accepted the message. |
-| `twilio:SmsStatusService` | `onFailed` | `remote function onFailed(twilio:SmsStatusChangeEventWrapper event) returns error?` | Invoked when the message could not be sent. |
-| `twilio:SmsStatusService` | `onDelivered` | `remote function onDelivered(twilio:SmsStatusChangeEventWrapper event) returns error?` | Invoked when Twilio receives delivery confirmation from the upstream carrier. |
-| `twilio:SmsStatusService` | `onUndelivered` | `remote function onUndelivered(twilio:SmsStatusChangeEventWrapper event) returns error?` | Invoked when Twilio receives a delivery receipt indicating the message was not delivered. |
-| `twilio:SmsStatusService` | `onReceiving` | `remote function onReceiving(twilio:SmsStatusChangeEventWrapper event) returns error?` | Invoked when an inbound message has been received by Twilio and is being processed. |
-| `twilio:SmsStatusService` | `onReceived` | `remote function onReceived(twilio:SmsStatusChangeEventWrapper event) returns error?` | Invoked when an inbound message was received by one of your Twilio numbers. |
-| `twilio:CallStatusService` | `onQueued` | `remote function onQueued(twilio:CallStatusEventWrapper event) returns error?` | Invoked when a call is ready and waiting in line before going out. |
-| `twilio:CallStatusService` | `onRinging` | `remote function onRinging(twilio:CallStatusEventWrapper event) returns error?` | Invoked when the call is ringing. |
-| `twilio:CallStatusService` | `onInProgress` | `remote function onInProgress(twilio:CallStatusEventWrapper event) returns error?` | Invoked when the call is answered and active. |
-| `twilio:CallStatusService` | `onCompleted` | `remote function onCompleted(twilio:CallStatusEventWrapper event) returns error?` | Invoked when the call has ended normally. |
-| `twilio:CallStatusService` | `onBusy` | `remote function onBusy(twilio:CallStatusEventWrapper event) returns error?` | Invoked when the caller receives a busy signal. |
-| `twilio:CallStatusService` | `onFailed` | `remote function onFailed(twilio:CallStatusEventWrapper event) returns error?` | Invoked when the call could not be completed. |
-| `twilio:CallStatusService` | `onNoAnswer` | `remote function onNoAnswer(twilio:CallStatusEventWrapper event) returns error?` | Invoked when the call ends without being answered. |
-| `twilio:CallStatusService` | `onCanceled` | `remote function onCanceled(twilio:CallStatusEventWrapper event) returns error?` | Invoked when a queued or ringing call is canceled. |
+Every callback has the shape `remote function <callback>(twilio:<PayloadType> payload) returns error?`.
 
-:::note
-Implement only the callbacks relevant to your use case. For example, SMS delivery tracking typically uses `twilio:SmsStatusService`, while voice call tracking uses `twilio:CallStatusService`.
-:::
+| Service type | Callbacks | Payload type |
+|--------------|-----------|--------------|
+| `twilio:CallStatusService` | `onInitiated`, `onQueued`, `onRinging`, `onInProgress`, `onCompleted`, `onBusy`, `onFailed`, `onNoAnswer`, `onCanceled` | <code>twilio:CallStatusEventWrapper</code> |
+| `twilio:SmsStatusService` | `onAccepted`, `onQueued`, `onSending`, `onSent`, `onFailed`, `onDelivered`, `onUndelivered`, `onReceiving`, `onReceived`, `onScheduled`, `onRead`, `onCanceled`, `onPartiallyDelivered` | <code>twilio:SmsStatusChangeEventWrapper</code> |
 
 ### Full usage example
 
+This is the [`sms-delivery-tracker`](https://github.com/ballerina-platform/module-ballerinax-twilio.trigger/tree/main/examples/sms-delivery-tracker) example from the package:
+
 ```ballerina
 import ballerina/log;
-import ballerinax/trigger.twilio;
+import ballerinax/twilio.trigger as twilio;
 
-configurable int listenerPort = ?;
+configurable twilio:ListenerConfig config = {
+    webhookSecret: "xxxxxx",
+    webhookBaseUrl: "https://xxxx.ngrok-free.app"
+};
 
-listener twilio:Listener twilioListener = new (listenerPort);
+listener twilio:Listener twilioListener = new (config, 8090);
 
+// Follows each outbound message to its final state: delivered, undelivered or failed.
 service twilio:SmsStatusService on twilioListener {
-    remote function onDelivered(twilio:SmsStatusChangeEventWrapper event) returns error? {
-        log:printInfo("SMS delivered",
-            messageSid = event.MessageSid,
-            status = event.MessageStatus,
-            to = event.To
-        );
+
+    remote function onAccepted(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+        logProgress(payload);
     }
 
-    remote function onFailed(twilio:SmsStatusChangeEventWrapper event) returns error? {
-        log:printInfo("SMS failed",
-            messageSid = event.MessageSid,
-            status = event.MessageStatus
-        );
+    remote function onQueued(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+        logProgress(payload);
     }
+
+    remote function onSending(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+        logProgress(payload);
+    }
+
+    remote function onSent(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+        logProgress(payload);
+    }
+
+    remote function onDelivered(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+        log:printInfo("Message delivered", messageSid = payload.MessageSid, to = payload.To);
+    }
+
+    remote function onUndelivered(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+        log:printWarn("Message undelivered", messageSid = payload.MessageSid, to = payload.To,
+                errorCode = payload.ErrorCode);
+    }
+
+    remote function onFailed(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+        log:printError("Message failed", messageSid = payload.MessageSid, to = payload.To,
+                errorCode = payload.ErrorCode);
+    }
+
+    remote function onPartiallyDelivered(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+        log:printWarn("Message partially delivered", messageSid = payload.MessageSid, to = payload.To);
+    }
+
+    remote function onRead(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+        log:printInfo("Message read", messageSid = payload.MessageSid, to = payload.To);
+    }
+
+    remote function onScheduled(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+        logProgress(payload);
+    }
+
+    remote function onCanceled(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+        log:printInfo("Scheduled message canceled", messageSid = payload.MessageSid);
+    }
+
+    remote function onReceiving(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+    }
+
+    remote function onReceived(twilio:SmsStatusChangeEventWrapper payload) returns error? {
+    }
+}
+
+function logProgress(twilio:SmsStatusChangeEventWrapper payload) {
+    log:printDebug("Message progress", messageSid = payload.MessageSid, status = payload.MessageStatus);
 }
 ```
 
 ## Event payload types
 
+Twilio posts the callback parameters as a form, and each service type has a record for them, with the parameter names Twilio uses. The type used by the example above:
+
 ### `SmsStatusChangeEventWrapper`
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `MessageSid` | `string?` | Unique identifier for the message. |
-| `SmsSid` | `string?` | Same value as `MessageSid`; included for backward compatibility. |
-| `SmsStatus` | `string?` | SMS status reported by Twilio. |
-| `MessageStatus` | `string?` | Message status reported by Twilio. |
-| `AccountSid` | `string?` | Twilio account ID associated with the message. |
-| `MessagingServiceSid` | `string?` | Messaging Service ID associated with the message. |
-| `From` | `string?` | Sender phone number or channel address. |
-| `To` | `string?` | Recipient phone number or channel address. |
-| `Body` | `string?` | Message body. |
-| `NumSegments` | `string?` | Number of SMS segments used for the message. |
-| `NumMedia` | `string?` | Number of media items associated with the message. |
-| `ApiVersion` | `string?` | Twilio API version used to handle the message. |
-
-### `CallStatusEventWrapper`
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `CallSid` | `string?` | Unique identifier for the call. |
-| `CallStatus` | `string?` | Descriptive status for the call. |
-| `AccountSid` | `string?` | Twilio account ID associated with the call. |
-| `From` | `string?` | Phone number or client identifier that initiated the call. |
-| `To` | `string?` | Phone number or client identifier of the called party. |
-| `Direction` | `string?` | Direction of the call. |
-| `Caller` | `string?` | Caller number. |
-| `Called` | `string?` | Called number. |
-| `CallDuration` | `string?` | Duration of the completed call in seconds. |
-| `RecordingUrl` | `string?` | URL of the recorded call audio, when available. |
-| `RecordingSid` | `string?` | Recording identifier, when available. |
-| `ApiVersion` | `string?` | Twilio API version used to handle the call. |
-
+| `MessageSid` | <code>string</code> | A 34 character unique identifier for the message. Optional. |
+| `SmsSid` | <code>string</code> | Same value as MessageSid. Deprecated and included for backward compatibility. Optional. |
+| `AccountSid` | <code>string</code> | The 34 character id of the Account this message is associated with. Optional. |
+| `MessagingServiceSid` | <code>string</code> | The 34 character id of the Messaging Service associated with the message. Optional. |
+| `From` | <code>string</code> | The phone number or Channel address that sent this message. Optional. |
+| `To` | <code>string</code> | The phone number or Channel address of the recipient. Optional. |
+| `Body` | <code>string</code> | The text body of the message. Up to 1600 characters long. Optional. |
+| `NumMedia` | <code>string</code> | The number of media items associated with your message. Optional. |
+| `ReferralNumMedia` | <code>string</code> | The number of media items associated with a "Click to WhatsApp" advertisement. Optional. |
+| `FromCity` | <code>string</code> | The city of the sender. Optional. |
+| `FromState` | <code>string</code> | The state or province of the sender. Optional. |
+| `SmsStatus` | <code>string</code> | The status of the message. Optional. |
+| `FromZip` | <code>string</code> | The postal code of the called sender. Optional. |
+| `FromCountry` | <code>string</code> | The country of the called sender. Optional. |
+| `ToCity` | <code>string</code> | The city of the recipient. Optional. |
+| `ToState` | <code>string</code> | The state or province of the recipient. Optional. |
+| `ToZip` | <code>string</code> | The postal code of the recipient. Optional. |
+| `ToCountry` | <code>string</code> | The country of the recipient. Optional. |
+| `MessageStatus` | <code>string</code> | The status of the message. Optional. |
+| `SmsMessageSid` | <code>string</code> | A unique identifier for this message, generated by Twilio. Optional. |
+| `NumSegments` | <code>string</code> | Number of SMS messages it took to deliver the body of the message. Optional. |
+| `ApiVersion` | <code>string</code> | The version of the Twilio API used to handle this message. Optional. |
+| `ErrorCode` | <code>string</code> | The error code when `MessageStatus` is `failed` or `undelivered`. Optional. |
+| `RawDlrDoneDate` | <code>string</code> | The carrier's delivery receipt Done Date, `YYMMDDhhmm`, for delivered or undelivered SMS and MMS. Optional. |
+| `ChannelInstallSid` | <code>string</code> | The channel installation SID, for WhatsApp, RCS and other channels. Optional. |
+| `ChannelStatusMessage` | <code>string</code> | The error message returned by the messaging channel when delivery failed. Optional. |
+| `ChannelPrefix` | <code>string</code> | The channel prefix, such as `whatsapp`, for non-SMS channels. Optional. |
+| `EventType` | <code>string</code> | Information about post-delivery events, for channels that report them. Optional. |
 
 ## What's next
 
-- [Action Reference](actions.md): REST API client operations for sending messages and making calls.
-- [Example](example.md): Complete example integrations for the Twilio connector and trigger.
-- [Setup Guide](setup-guide.md): Create a Twilio account and obtain credentials.
+- [Setup Guide](setup-guide.md#configuring-twilio-status-callbacks): point Twilio at your listener.
+- [Example](example.md#twilio-trigger-example): build a Twilio trigger integration in WSO2 Integrator.
+- [Action Reference](actions.md): call the Twilio API with the `ballerinax/twilio` connector.

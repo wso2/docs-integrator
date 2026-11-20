@@ -37,42 +37,16 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 ## Triggers
 
-Triggers allow your integration to react to Twilio SMS and call status changes in real time. The connector provides a webhook listener that receives Twilio callbacks and invokes your service callbacks automatically when message or call status events occur.
+Triggers allow your integration to react to Twilio activity in real time. The separate `ballerinax/twilio.trigger` package provides a webhook listener that verifies each delivery from Twilio with your account's Auth Token and calls your service callbacks. It covers 22 events through 2 service types.
 
-:::note
-Trigger functionality requires the **`ballerinax/trigger.twilio`** package, which is separate from the `ballerinax/twilio` REST API client. Use `import ballerinax/trigger.twilio;` in integrations that use the listener and service callbacks.
-:::
+Service types:
 
-Supported trigger events:
+| Service type | Callbacks |
+|--------------|-----------|
+| `CallStatusService` | `onInitiated`, `onQueued`, `onRinging`, `onInProgress`, `onCompleted`, `onBusy`, `onFailed`, `onNoAnswer`, `onCanceled` |
+| `SmsStatusService` | `onAccepted`, `onQueued`, `onSending`, `onSent`, `onFailed`, `onDelivered`, `onUndelivered`, `onReceiving`, `onReceived`, `onScheduled`, `onRead`, `onCanceled`, `onPartiallyDelivered` |
 
-**`twilio:SmsStatusService` callbacks:**
-
-| Callback | Description |
-|----------|-------------|
-| `onAccepted` | Twilio accepted the message request. |
-| `onQueued` | Message is queued to be sent. |
-| `onSending` | Twilio is sending the message. |
-| `onSent` | Message was sent to the nearest upstream carrier. |
-| `onFailed` | Message could not be sent. |
-| `onDelivered` | Twilio received delivery confirmation from the upstream carrier. |
-| `onUndelivered` | Carrier confirmed message was not delivered. |
-| `onReceiving` | Inbound message is being received and processed. |
-| `onReceived` | Inbound message fully received by your Twilio number. |
-
-**`twilio:CallStatusService` callbacks:**
-
-| Callback | Description |
-|----------|-------------|
-| `onQueued` | Call is ready and waiting in line. |
-| `onRinging` | Call is ringing. |
-| `onInProgress` | Call is answered and active. |
-| `onCompleted` | Call ended normally. |
-| `onBusy` | Caller received a busy signal. |
-| `onFailed` | Call could not be completed. |
-| `onNoAnswer` | Call ended without being answered. |
-| `onCanceled` | A queued or ringing call was canceled. |
-
-See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the event payload structure.
+See the **[Trigger Reference](triggers.md)** for listener configuration, every service type and callback, and the event payload structure, and the [Twilio](product://integrator/develop-and-test/integration-artifacts/event-driven-integration/twilio) guide to build a Twilio event integration in WSO2 Integrator.
 
 ## Documentation
 
