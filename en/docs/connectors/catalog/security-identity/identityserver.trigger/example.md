@@ -56,7 +56,13 @@ Select the **identityserver.trigger** card to open the **WSO2 Identity Server Ev
 
 In the left panel, select **Configurations** and set **webhookSecret** to the secret set on the webhook. The listener rejects every delivery until **webhookSecret** is set.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_03_configurations_panel.png: Configurations panel showing the webhookSecret configurable -->
+<ThemedImage
+    alt="Configurations panel showing the webhookSecret configurable"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_03_configurations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_03_configurations_panel.png'),
+    }}
+/>
 
 ### Step 4: Create the trigger
 
@@ -81,7 +87,13 @@ remote function onLoginSuccess(identityserver:LoginSuccessEvent payload) returns
 }
 ```
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_06_handler_flow.png: onLoginSuccess handler flow with a log:printInfo node -->
+<ThemedImage
+    alt="onLoginSuccess handler flow with a log:printInfo node"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_06_handler_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_06_handler_flow.png'),
+    }}
+/>
 
 ### Running the integration
 
