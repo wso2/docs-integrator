@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Integration Management
 title: Integration Management
-description: "View and manage the lifecycle of integrations deployed to WSO2 Cloud - Integration Platform, including scheduling, stopping, scaling, editing, and deleting."
-keywords: [wso2 integrator, wso2 cloud, deployed integrations, view integrations, integration lifecycle]
+description: "View and manage the lifecycle of integrations deployed to Choreo Integration, including scheduling, stopping, scaling, editing, and deleting."
+keywords: [choreo integrator, choreo cloud, deployed integrations, view integrations, integration lifecycle]
 slug: /manage/integrations
 ---
 
@@ -12,7 +12,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Integration Management
 
-After pushing your integrations to WSO2 Cloud - Integration Platform, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on WSO2 Cloud yet, see the [Deploy](../../deploy-and-run/deploy-and-run.md) section.
+After pushing your integrations to Choreo Integration, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on Choreo Cloud yet, see the [Deploy](../../deploy-and-run/deploy-and-run.md) section.
 
 If your integration is exposed as an API, see [API Management](api-management/api-management.md) for security and analytics.
 
@@ -20,7 +20,7 @@ If your integration is a workflow, see [Manage Workflows](workflows.md) to start
 
 ## View integrations
 
-1. Log in to [WSO2 Cloud](https://console.devant.dev). The default project opens automatically.
+1. Log in to [Choreo Cloud](https://console.devant.dev). The default project opens automatically.
 2. On the project home, all integrations within the project are listed.
     <ThemedImage
         alt="Project Overview"

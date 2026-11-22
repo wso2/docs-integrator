@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Email Generator with Direct LLM
-description: Step-by-step tutorial to build an HTTP service that generates professional emails with a single direct LLM call in WSO2 Integrator.
+description: Step-by-step tutorial to build an HTTP service that generates professional emails with a single direct LLM call in Choreo Integrator.
 slug: /guides/how-to-guides/email-generator-direct-llm
 card_icon: ai
 card_summary: Generate email drafts with a direct LLM call
@@ -31,7 +31,7 @@ By the end you will have a `POST /emails/generate` endpoint that takes recipient
 
 ### Step 1.1: Create an HTTP service
 
-1. On the **Design** tab, select **Add Artifact manually** below the WSO2 Integrator Copilot's quick-start cards.
+1. On the **Design** tab, select **Add Artifact manually** below the Choreo Integrator Copilot's quick-start cards.
 2. On the **Artifacts** page, under **Integration as API**, click **HTTP Service**.
 
 <ThemedImage
@@ -246,7 +246,7 @@ The completed flow now shows **Start**, `ai:generate` (bound to `generatedEmail`
 
 ### Step 4.1: Try it
 
-1. Select **Run**. WSO2 Integrator compiles and starts the integration, with progress shown in the integrated terminal.
+1. Select **Run**. Choreo Integrator compiles and starts the integration, with progress shown in the integrated terminal.
 2. Select **Try It**. A `TryIt.hurl` file opens in a new tab via the **Hurl Client Runner**, with a `POST` request to `/emails/generate` prefilled. The request includes a comment block describing the expected schema (`recipientName`, `senderName`, `timeSlots`, `intent`) and a JSON body with `{?}` placeholders for each field.
 
 <ThemedImage

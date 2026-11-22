@@ -1,6 +1,6 @@
 ---
 title: Content Based Routing
-description: "Implement the Content Based Routing pattern with WSO2 Integrator."
+description: "Implement the Content Based Routing pattern with Choreo Integrator."
 sidebar_position: 3
 slug: /develop-and-test/integration-patterns/content-based-routing
 ---

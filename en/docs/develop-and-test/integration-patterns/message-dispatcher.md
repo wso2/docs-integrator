@@ -1,6 +1,6 @@
 ---
 title: Message Dispatcher
-description: "Implement the Message Dispatcher pattern with WSO2 Integrator."
+description: "Implement the Message Dispatcher pattern with Choreo Integrator."
 sidebar_position: 5
 slug: /develop-and-test/integration-patterns/message-dispatcher
 ---

@@ -3,7 +3,7 @@ sidebar_position: 6
 title: "Connect to SAP S/4HANA and Check Stock Availability"
 sidebar_label: "Connect to SAP S/4HANA and Check Stock Availability"
 description: Build an HTTP service that reads unrestricted-use stock for a material and plant from SAP S/4HANA Cloud and returns the total quantity and the stock in each storage location as JSON, designed visually with the SAP Material Stock connector.
-keywords: [wso2 integrator, http service, rest api, sap s/4hana, material stock, inventory, stock availability, api_material_stock_srv, communication arrangement, low-code]
+keywords: [choreo integrator, http service, rest api, sap s/4hana, material stock, inventory, stock availability, api_material_stock_srv, communication arrangement, low-code]
 slug: /guides/how-to-guides/sap-s4hana-stock-availability-api
 card_icon: api
 card_summary: A low-code REST API that answers "how much of this material do we have?" with live SAP S/4HANA stock, broken down by storage location
@@ -24,7 +24,7 @@ Web shops, point-of-sale systems and warehouse apps all need the same answer bef
 ## How it works
 
 <ThemedImage
-    alt="Architecture diagram: a web shop, POS or warehouse app calls the WSO2 Integrator HTTP service GET /inventory/stock/{material} to check stock; the service uses the SAP S/4HANA Material Stock connector to read stock levels from SAP S/4HANA Cloud through the Material Stock Integration (SAP_COM_0164) scenario, and returns the stock as JSON"
+    alt="Architecture diagram: a web shop, POS or warehouse app calls the Choreo Integrator HTTP service GET /inventory/stock/{material} to check stock; the service uses the SAP S/4HANA Material Stock connector to read stock levels from SAP S/4HANA Cloud through the Material Stock Integration (SAP_COM_0164) scenario, and returns the stock as JSON"
     style={{border: 'none', boxShadow: 'none', borderRadius: 0}}
     sources={{
         light: useBaseUrl('/img/guides/usecases/sap-s4hana-stock-availability-api/architecture.png'),
@@ -43,7 +43,7 @@ Each request follows the same short flow:
 
 :::info Prerequisites
 
-- A working WSO2 Integrator environment. See [Setup](../../get-started/setup/setup.md).
+- A working Choreo Integrator environment. See [Setup](../../get-started/setup/setup.md).
 - Access to an SAP S/4HANA Cloud system, with a user that has the `SAP_BR_ADMINISTRATOR` role (or equivalent) to create communication users, systems and arrangements. You set up API access in [Set up access in SAP S/4HANA](#set-up-access-in-sap-s4hana).
 - A material that has stock in your system, and the plant it is stored in. The examples in this guide use material `RM019` in plant `1710`.
 
@@ -51,7 +51,7 @@ Each request follows the same short flow:
 
 ## Set up access in SAP S/4HANA
 
-SAP S/4HANA Cloud exposes each API through a **communication scenario**. Before the integration can read stock, you create a communication user for it, register WSO2 Integrator as a communication system, and activate the **Material Stock Integration** (`SAP_COM_0164`) scenario for that system with a communication arrangement. All the apps used below are in the **Communication Management** group of the SAP Fiori launchpad.
+SAP S/4HANA Cloud exposes each API through a **communication scenario**. Before the integration can read stock, you create a communication user for it, register Choreo Integrator as a communication system, and activate the **Material Stock Integration** (`SAP_COM_0164`) scenario for that system with a communication arrangement. All the apps used below are in the **Communication Management** group of the SAP Fiori launchpad.
 
 <ThemedImage
     alt="Communication Management group in the SAP Fiori launchpad with the Communication Arrangements, Communication Systems and Maintain Communication Users apps"
@@ -70,7 +70,7 @@ Note the user name and password. The integration uses them to call the API.
 
 ### Create a communication system
 
-A communication system represents the external system that calls SAP S/4HANA, here your WSO2 Integrator integration.
+A communication system represents the external system that calls SAP S/4HANA, here your Choreo Integrator integration.
 
 1. Open **Communication Systems** and select **New**.
 2. Enter a **System ID** and a **System Name**, then select **Create**.
@@ -218,7 +218,7 @@ The resource opens in the flow designer, with **Start**, an empty step and the *
     | API on api.sap.com | **Material Stock (A2X)** |
     | api.sap.com URL | `https://api.sap.com/api/`**`API_MATERIAL_STOCK_SRV`**`/overview` |
     | Ballerina package | `ballerinax/sap.s4hana.`**`api_material_stock_srv`** (`sap.s4hana.` plus the technical name in lower case) |
-    | Connector card in WSO2 Integrator | **Api_material_stock_srv** |
+    | Connector card in Choreo Integrator | **Api_material_stock_srv** |
 
     So, to find the connector for any other SAP S/4HANA API, open the API on api.sap.com, copy the technical name from its URL, and search for it in lower case. For example, **Outbound Delivery (A2X)** at `https://api.sap.com/api/API_OUTBOUND_DELIVERY_SRV_0002/overview` is the `sap.s4hana.api_outbound_delivery_srv_0002` connector.
     :::
@@ -445,7 +445,7 @@ The integration overview now shows the whole API: the HTTP listener, the `/inven
 
 Now that the API works, you can take it further:
 
-- **Deploy it.** Ship it to [WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md), and put it behind your API gateway.
+- **Deploy it.** Ship it to [Choreo Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md), and put it behind your API gateway.
 - **Check several materials at once.** Add a `POST /inventory/stock` resource that takes a list of materials and builds an OData filter such as `(Material eq 'RM019' or Material eq 'FG011') and Plant eq '1710'`, so a shopping cart needs a single call.
 - **Reserve the stock.** Once availability is confirmed, create a reservation with the [SAP Reservation Document connector](product://connectors/catalog/erp-business/sap.s4hana.api_reservation_document_srv/sap-reservation-document-connector-overview) so the quantity is held for the order.
 - **Explore the other operations.** The [Material Stock action reference](product://connectors/catalog/erp-business/sap.s4hana.api_material_stock_srv/actions) covers every operation, including reading serial numbers for serialized materials.

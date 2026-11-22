@@ -36,7 +36,7 @@ Create a service skeleton that matches an OpenAPI specification. The generated c
 4. Click **Select File** and choose your OpenAPI specification file (YAML or JSON).
 5. Enter a **Service Type Name**. Optionally, expand **Advanced Configurations** to choose between the **Shared Listener (Port 9090)** and a **Custom Listener**.
 6. Click **Create**.
-7. WSO2 Integrator generates the service with resource function stubs, request/response types, and validation constraints matching your OpenAPI specification.
+7. Choreo Integrator generates the service with resource function stubs, request/response types, and validation constraints matching your OpenAPI specification.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -174,7 +174,7 @@ Create a type-safe HTTP client that wraps all API operations defined in the spec
 
 5. Enter a **Connection Name** for the generated client (for example, `openapiClient`).
 6. Click **Save Connection**.
-7. WSO2 Integrator generates a type-safe client connector with methods matching each API operation.
+7. Choreo Integrator generates a type-safe client connector with methods matching each API operation.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">

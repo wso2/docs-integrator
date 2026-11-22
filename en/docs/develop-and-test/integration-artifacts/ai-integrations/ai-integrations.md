@@ -1,7 +1,7 @@
 ---
 title: AI Integrations Overview
-description: Build AI-powered integrations with WSO2 Integrator using direct LLM calls, AI agents, MCP servers, natural functions, and voice agents.
-keywords: [wso2 integrator, genai, ai, llm, agent, mcp, natural function, voice agent, model provider]
+description: Build AI-powered integrations with Choreo Integrator using direct LLM calls, AI agents, MCP servers, natural functions, and voice agents.
+keywords: [choreo integrator, genai, ai, llm, agent, mcp, natural function, voice agent, model provider]
 sidebar_label: AI Integration Basics
 sidebar_position: 0
 slug: /develop-and-test/integration-artifacts/ai-integrations
@@ -11,7 +11,7 @@ wide_layout: true
 
 # AI Integrations
 
-WSO2 Integrator lets you build AI-powered integrations, including direct LLM calls, AI agents, MCP servers, natural functions, and voice agents.
+Choreo Integrator lets you build AI-powered integrations, including direct LLM calls, AI agents, MCP servers, natural functions, and voice agents.
 
 <PaletteGrid>
 
@@ -42,7 +42,7 @@ WSO2 Integrator lets you build AI-powered integrations, including direct LLM cal
 
 <PaletteCard icon="agents" href="/develop-and-test/integration-artifacts/ai-integrations/voice-agent">
   <h3 class="palette-card-title">Voice Agent</h3>
-  <p class="palette-card-desc">Expose an AI agent over a voice channel. WSO2 Cloud handles speech-to-text and text-to-speech, so your service works only with text.</p>
+  <p class="palette-card-desc">Expose an AI agent over a voice channel. Choreo Cloud handles speech-to-text and text-to-speech, so your service works only with text.</p>
 </PaletteCard>
 
 </PaletteGrid>

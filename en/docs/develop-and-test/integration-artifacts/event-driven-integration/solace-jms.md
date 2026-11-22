@@ -1,7 +1,7 @@
 ---
 title: Solace (JMS)
 description: Connect to Solace through its standard JMS interface, as an alternative to the native PubSub+ protocol, for systems that speak JMS instead of JCSMP.
-keywords: [wso2 integrator, solace, jms, event integration, ballerina]
+keywords: [choreo integrator, solace, jms, event integration, ballerina]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/solace-jms
 ---
 
@@ -82,7 +82,7 @@ Solace (JMS) event integrations consume messages from a Solace PubSub+ queue or 
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill, the queue or topic name pill, and an empty **Event Handlers** section.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill, the queue or topic name pill, and an empty **Event Handlers** section.
 
    <ThemedImage
        alt="Service Designer showing the Solace (JMS) Event Integration canvas"

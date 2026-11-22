@@ -42,7 +42,7 @@ Salesforce event integrations subscribe to Change Data Capture (CDC) channels an
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section with all four handlers pre-added.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section with all four handlers pre-added.
 
    <ThemedImage
        alt="Service Designer showing the Salesforce Events service canvas"
@@ -184,7 +184,7 @@ All three grant configs additionally accept these optional fields: `scopes`, `de
 
 ## Event handlers
 
-When a Salesforce Events service is created, WSO2 Integrator adds all four handlers automatically. Click any handler in the **Service Designer** to open the flow diagram view and implement the processing logic.
+When a Salesforce Events service is created, Choreo Integrator adds all four handlers automatically. Click any handler in the **Service Designer** to open the flow diagram view and implement the processing logic.
 
 ### Handler types
 

@@ -2,7 +2,7 @@
 sidebar_position: 3
 title: Azure Files
 description: Process files from Azure file shares using polling, pattern matching, typed content retrieval, and automatic post-processing.
-keywords: [wso2 integrator, azure files, file integration, file share, polling, drop folder]
+keywords: [choreo integrator, azure files, file integration, file share, polling, drop folder]
 slug: /develop-and-test/integration-artifacts/file-driven-integration/azure-files
 ---
 
@@ -24,7 +24,7 @@ One flow creates the listener and the service together; the authentication metho
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Click **+** in the WSO2 Integrator side panel header to open the **New Integration** wizard (on an empty project, the **+ Add Integration or Library** button in the project view opens the same wizard), and continue to the **Type** step.
+1. Click **+** in the Choreo Integrator side panel header to open the **New Integration** wizard (on an empty project, the **+ Add Integration or Library** button in the project view opens the same wizard), and continue to the **Type** step.
 
 2. Scroll to the **File Integration** category, select the **Azure Files** card, and click **Next**.
 
@@ -61,7 +61,7 @@ One flow creates the listener and the service together; the authentication metho
 
    The selector's other options — SAS token, SAS URL, connection string, and Microsoft Entra ID — reveal the fields of the matching credential record shown on the Ballerina Code tab.
 
-5. Click **Create**. WSO2 Integrator generates the listener and the service, and a **files:Service** entry appears in the sidebar under **Entry Points**.
+5. Click **Create**. Choreo Integrator generates the listener and the service, and a **files:Service** entry appears in the sidebar under **Entry Points**.
 
 6. Click [**+ Add Handler**](#adding-a-file-handler) in the service view to define how incoming files are processed.
 
@@ -197,7 +197,7 @@ Entra ID also supports managed identities, service principals with client certif
 
 ## File handlers
 
-A file handler is a `remote function` that WSO2 Integrator calls for each file the listener's polling cycle finds on the watched path. A service declares one handler per content format it processes, plus an optional error handler:
+A file handler is a `remote function` that Choreo Integrator calls for each file the listener's polling cycle finds on the watched path. A service declares one handler per content format it processes, plus an optional error handler:
 
 | Handler | Trigger |
 |---|---|
@@ -254,7 +254,7 @@ An `onError` handler for poll, read, and content-binding failures is added in th
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
-File handlers are typed `remote function` declarations inside the service. WSO2 Integrator routes files to handlers by file extension; the content parameter type determines deserialization.
+File handlers are typed `remote function` declarations inside the service. Choreo Integrator routes files to handlers by file extension; the content parameter type determines deserialization.
 
 **Text file handler:**
 

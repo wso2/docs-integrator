@@ -3,7 +3,7 @@ sidebar_position: 9
 title: "Call RFC Functions and Receive IDocs with SAP ECC"
 sidebar_label: "Call RFC Functions and Receive IDocs with SAP ECC"
 description: Build one integration that reads material master data from SAP ECC by calling a BAPI over RFC, and receives MATMAS IDocs that SAP ECC sends to it through ALE, designed visually with the SAP JCo connector.
-keywords: [wso2 integrator, sap, sap ecc, sap erp, ecc 6.0, rfc, bapi, idoc, ale, matmas, sap jco, registered server program, low-code]
+keywords: [choreo integrator, sap, sap ecc, sap erp, ecc 6.0, rfc, bapi, idoc, ale, matmas, sap jco, registered server program, low-code]
 slug: /guides/how-to-guides/sap-ecc-rfc-and-idoc-integration
 card_icon: event
 card_summary: Read material data with a BAPI over RFC and receive MATMAS IDocs from SAP ECC in one low-code integration
@@ -24,7 +24,7 @@ This guide uses SAP ECC 6.0. For SAP S/4HANA Private Cloud, see [Call RFC Functi
 ## How it works
 
 <ThemedImage
-    alt="Architecture diagram: a web or mobile app calls the WSO2 Integrator HTTP service GET /materials/{material}, which uses the SAP JCo RFC client connection to call BAPI_MATERIAL_GET_DETAIL over RFC on SAP ECC and returns the material as JSON; SAP ECC sends MATMAS IDocs through ALE to the SAP JCo IDoc listener registered as a program at the gateway, which passes the IDoc as XML to the IDoc service, where onReceive maps it with the Data Mapper"
+    alt="Architecture diagram: a web or mobile app calls the Choreo Integrator HTTP service GET /materials/{material}, which uses the SAP JCo RFC client connection to call BAPI_MATERIAL_GET_DETAIL over RFC on SAP ECC and returns the material as JSON; SAP ECC sends MATMAS IDocs through ALE to the SAP JCo IDoc listener registered as a program at the gateway, which passes the IDoc as XML to the IDoc service, where onReceive maps it with the Data Mapper"
     style={{border: 'none', boxShadow: 'none', borderRadius: 0}}
     sources={{
         light: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/architecture.png'),
@@ -143,7 +143,7 @@ The SAP gateway only accepts registrations that its `reginfo` access control lis
 2. Let SAP generate the port name, enter a description, and set **RFC destination** to `WSO2_INTEGRATOR`. Keep **IDoc record types SAP Release 4.x**, then **Save**.
 
     <ThemedImage
-        alt="Transactional RFC port A000000066 in transaction WE21 with the description WSO2 Integrator and the RFC destination WSO2_INTEGRATOR"
+        alt="Transactional RFC port A000000066 in transaction WE21 with the description Choreo Integrator and the RFC destination WSO2_INTEGRATOR"
         sources={{
             light: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/sap-04-we21-port.png'),
             dark: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/sap-04-we21-port.png'),
@@ -157,7 +157,7 @@ SAP addresses IDocs to a partner. For an external system such as the integration
 1. Start transaction `BD54`, select **New Entries**, enter a logical system name for the integration, for example `WSO2INT`, and a description, then **Save**. Logical systems are cross-client, so SAP asks for a workbench request; create one or pick an existing one.
 
     <ThemedImage
-        alt="New logical system WSO2INT with the name WSO2 Integrator in transaction BD54, and the message Data was saved"
+        alt="New logical system WSO2INT with the name Choreo Integrator in transaction BD54, and the message Data was saved"
         sources={{
             light: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/sap-05a-bd54-logical-system.png'),
             dark: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/sap-05a-bd54-logical-system.png'),
@@ -185,7 +185,7 @@ SAP addresses IDocs to a partner. For an external system such as the integration
 4. **Save** the distribution model.
 
     <ThemedImage
-        alt="Distribution model in transaction BD64 with the model view WSO2 Integrator material distribution, sending message type MATMAS from IDES ALE Central system (client 800) (T90CLNT090) to WSO2 Integrator (WSO2INT), and the message Distribution model has been saved"
+        alt="Distribution model in transaction BD64 with the model view Choreo Integrator material distribution, sending message type MATMAS from IDES ALE Central system (client 800) (T90CLNT090) to Choreo Integrator (WSO2INT), and the message Distribution model has been saved"
         sources={{
             light: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/sap-06a-bd64-distribution-model.png'),
             dark: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/sap-06a-bd64-distribution-model.png'),
@@ -391,7 +391,7 @@ If SAP cannot be reached or rejects the logon, **execute** returns an error, the
         }}
     />
 
-4. Under **SAP Driver Libraries**, select `sapidoc3.jar` and `sapjco3.jar` with **Select File**. WSO2 Integrator copies them into the integration's `libs` folder and adds them to `Ballerina.toml` with `provided` scope, because SAP does not allow redistributing them. Copy the native JCo library into the same `libs` folder.
+4. Under **SAP Driver Libraries**, select `sapidoc3.jar` and `sapjco3.jar` with **Select File**. Choreo Integrator copies them into the integration's `libs` folder and adds them to `Ballerina.toml` with `provided` scope, because SAP does not allow redistributing them. Copy the native JCo library into the same `libs` folder.
 5. Keep **Service Type** as **IDoc Service** and select **Create**.
 
     <ThemedImage
@@ -402,7 +402,7 @@ If SAP cannot be reached or rejects the logon, **execute** returns an error, the
         }}
     />
 
-**SAP ECC (JCo) IDoc Service** appears under **Entry Points** in the project tree (select it there if WSO2 Integrator returns to the **Artifacts** page), with two event handlers: `onReceive` for incoming IDocs and `onError` for listener errors.
+**SAP ECC (JCo) IDoc Service** appears under **Entry Points** in the project tree (select it there if Choreo Integrator returns to the **Artifacts** page), with two event handlers: `onReceive` for incoming IDocs and `onError` for listener errors.
 
 <ThemedImage
     alt="SAP ECC (JCo) IDoc Service designer listing the onReceive and onError event handlers on sapListener"
@@ -454,7 +454,7 @@ If SAP cannot be reached or rejects the logon, **execute** returns an error, the
         }}
     />
 
-    WSO2 Integrator creates one record type per element: `MATMAS05`, `IDOC`, `EDI_DC40`, `E1MARAM` and `E1MAKTM`.
+    Choreo Integrator creates one record type per element: `MATMAS05`, `IDOC`, `EDI_DC40`, `E1MARAM` and `E1MAKTM`.
 
     :::tip Generate the IDoc types from the XSD
     To get types for every segment and field instead of a sample, download the IDoc's XML schema in SAP with transaction `WE60` (enter the basic type, then **Documentation > XML Schema**), and generate the types with the [XSD tool](../../develop-and-test/developer-tools/integration-tools/xsd-tool.md): `bal xsd MATMAS05.xsd`. The generated fields are all `string` and repeating segments are arrays, so no type fixes are needed, but the field paths differ from the ones in this guide.
@@ -745,7 +745,7 @@ scope = "provided"
     ```
 
     <ThemedImage
-        alt="WSO2 Integrator terminal with bal run on the left and curl http://localhost:9090/materials/P-100 on the right, returning the material P-100 with description Pump PRECISION 100, material type FERT, material group 001 and base unit ST"
+        alt="Choreo Integrator terminal with bal run on the left and curl http://localhost:9090/materials/P-100 on the right, returning the material P-100 with description Pump PRECISION 100, material type FERT, material group 001 and base unit ST"
         sources={{
             light: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/24-api-response.png'),
             dark: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/24-api-response.png'),
@@ -795,7 +795,7 @@ scope = "provided"
 6. The integration parses the IDoc, maps it, and logs the `MaterialUpdate` record in the console:
 
     <ThemedImage
-        alt="WSO2 Integrator terminal under the onError flow, with the log line IDoc 0000000003528747 mapped, followed by the MaterialUpdate JSON for material P-100"
+        alt="Choreo Integrator terminal under the onError flow, with the log line IDoc 0000000003528747 mapped, followed by the MaterialUpdate JSON for material P-100"
         sources={{
             light: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/26-console-idoc-received.png'),
             dark: useBaseUrl('/img/guides/usecases/sap-ecc-rfc-and-idoc-integration/26-console-idoc-received.png'),
@@ -832,7 +832,7 @@ The integration overview now shows both paths: the HTTP service that uses the SA
 
 ## What's next
 
-- **Deploy it.** Ship it to [WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md). The SAP gateway must allow the deployed host in `reginfo`, and the image or VM needs the SAP JCo libraries.
+- **Deploy it.** Ship it to [Choreo Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md). The SAP gateway must allow the deployed host in `reginfo`, and the image or VM needs the SAP JCo libraries.
 - **Handle BAPI messages.** BAPIs report business errors, such as an unknown material, in the `RETURN` structure instead of failing the call. Check `RETURN.TYPE` for `E` and return `404 Not Found`.
 - **Receive other IDocs.** Add outbound parameters for more message types in `WE20`, such as `DEBMAS` for customers or `ORDERS` for purchase orders, and route on `MESTYP` in `onReceive`.
 - **Let SAP call your logic.** Select **RFC Service** as the service type to answer function module calls from ABAP. See [SAP ECC](../../develop-and-test/integration-artifacts/event-driven-integration/sap-ecc-events.md).

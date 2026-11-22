@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Publish an Integration to the User Portal
-description: "Publish AI agents, automations, and workflows from WSO2 Cloud - Integration Platform to the User Portal so that external users can use them."
-keywords: [wso2 cloud, user portal, publish, ai agents, automations, workflows]
+description: "Publish AI agents, automations, and workflows from Choreo Integration to the User Portal so that external users can use them."
+keywords: [choreo cloud, user portal, publish, ai agents, automations, workflows]
 slug: /manage/users-and-access/user-portal/publish-integrations
 ---
 
@@ -33,7 +33,7 @@ For each automation, users can also see when it last ran and, if it is scheduled
 
 ## Publish an integration
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://console.devant.dev).
 2. Select the project that contains the integration.
 3. In the **Integrations** pane, click the integration that you want to publish.
 4. On the integration's overview page, turn on the **Publish to User Portal** toggle.
@@ -59,7 +59,7 @@ For each automation, users can also see when it last ran and, if it is scheduled
 When you confirm, the platform publishes the integration to the User Portal and makes the endpoints the User Portal needs available automatically:
 
 - **AI agents**: The endpoints that have a `/chat` resource.
-- **Workflows**: The management endpoint. WSO2 Cloud adds this endpoint to every workflow when it deploys the workflow.
+- **Workflows**: The management endpoint. Choreo Cloud adds this endpoint to every workflow when it deploys the workflow.
 - **Automations**: No endpoint is required.
 
 {/* TODO(v3): confirm how the User Portal reaches an integration's endpoints now that the Developer Portal is gone, and document the new mechanism here. */}

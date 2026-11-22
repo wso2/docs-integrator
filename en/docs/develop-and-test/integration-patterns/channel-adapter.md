@@ -1,6 +1,6 @@
 ---
 title: Channel Adapter
-description: "Implement the Channel Adapter pattern with WSO2 Integrator."
+description: "Implement the Channel Adapter pattern with Choreo Integrator."
 sidebar_position: 4
 slug: /develop-and-test/integration-patterns/channel-adapter
 ---

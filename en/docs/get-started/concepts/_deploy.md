@@ -9,16 +9,16 @@ The concepts that apply once an integration leaves the editor. Deployment target
 
 An integration can run in one of two models, which differ in who operates the control plane and where the data plane lives:
 
-- **WSO2-managed**: provisioned and operated by WSO2, as part of WSO2 Integration Cloud
-- **Self-hosted**: runs entirely on your own infrastructure, with no dependency on WSO2 Integration Cloud
+- **WSO2-managed**: provisioned and operated by WSO2, as part of Choreo Cloud
+- **Self-hosted**: runs entirely on your own infrastructure, with no dependency on Choreo Cloud
 
-The development experience does not change based on which model you choose. Most of the concepts below, resource hierarchy, environments, promotion, deployment tracks, describe how the WSO2-managed model works, since they're WSO2 Integration Cloud features. Self-hosted deployments use a simpler topology that maps to the same essential planes, managed through ICP or your own tooling and pipelines, rather than through these specific features.
+The development experience does not change based on which model you choose. Most of the concepts below, resource hierarchy, environments, promotion, deployment tracks, describe how the WSO2-managed model works, since they're Choreo Cloud features. Self-hosted deployments use a simpler topology that maps to the same essential planes, managed through ICP or your own tooling and pipelines, rather than through these specific features.
 
 ### Deployment targets
 
 Available deployment targets include:
 
-- **WSO2 Integration Cloud**: push directly from the editor to the managed platform, with no infrastructure setup required
+- **Choreo Cloud**: push directly from the editor to the managed platform, with no infrastructure setup required
 - **Virtual machines and bare metal**: deploy as a standalone JAR file
 - **Containers**: package as a container image and deploy to Docker, Kubernetes, or Red Hat OpenShift
 - **Serverless**: run integrations as serverless functions
@@ -30,10 +30,10 @@ The **control plane** is the operations brain of the platform: the place where t
 
 The **data plane** is the infrastructure your integrations actually run on. All runtime traffic is restricted to it, keeping user data contained within its boundary.
 
-Which system plays the control plane role depends on the deployment model. For WSO2-managed deployments, it's the SaaS control plane provided by WSO2 Integration Cloud, which also manages the cloud data plane. For self-hosted deployments, it's the [Integration Control Plane (ICP)](#integration-control-plane-icp), or your own tooling and pipelines if you choose not to use ICP.
+Which system plays the control plane role depends on the deployment model. For WSO2-managed deployments, it's the SaaS control plane provided by Choreo Cloud, which also manages the cloud data plane. For self-hosted deployments, it's the [Integration Control Plane (ICP)](#integration-control-plane-icp), or your own tooling and pipelines if you choose not to use ICP.
 
 <ThemedImage
-    alt="WSO2 Integration Cloud high-level view"
+    alt="Choreo Cloud high-level view"
     sources={{
         light: useBaseUrl('/img/get-started/concepts/ipaas-concepts/high-level-view.png'),
         dark: useBaseUrl('/img/get-started/concepts/ipaas-concepts/high-level-view.png'),
@@ -120,4 +120,4 @@ A deployment track is a structured pathway that links a Git branch to deployment
 
 Continuous integration and continuous deployment automate building and shipping an integration across environments.
 
-On WSO2 Integration Cloud, a build produces a container image from source, security and vulnerability scans run where applicable, and the image is pushed to a WSO2-managed container registry on the cloud data plane. Builds are reproducible, so multiple builds from the same Git commit produce images with the same behavior. Deployments use rolling updates with health checks, so a new build is verified before traffic switches to it, giving zero downtime between deployments and promotions.
+On Choreo Cloud, a build produces a container image from source, security and vulnerability scans run where applicable, and the image is pushed to a WSO2-managed container registry on the cloud data plane. Builds are reproducible, so multiple builds from the same Git commit produce images with the same behavior. Deployments use rolling updates with health checks, so a new build is verified before traffic switches to it, giving zero downtime between deployments and promotions.

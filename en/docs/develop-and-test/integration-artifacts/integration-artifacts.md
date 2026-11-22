@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Add Integration Artifacts
-description: Choose the right artifact type to expose APIs, react to events, process files, run scheduled jobs, or power AI agents in WSO2 Integrator.
-keywords: [wso2 integrator, integration artifacts, http service, event handler, automation, file integration]
+description: Choose the right artifact type to expose APIs, react to events, process files, run scheduled jobs, or power AI agents in Choreo Integrator.
+keywords: [choreo integrator, integration artifacts, http service, event handler, automation, file integration]
 slug: /develop-and-test/integration-artifacts
 hide_table_of_contents: true
 wide_layout: true

@@ -110,7 +110,7 @@ const CHANNELS: Channel[] = [
 
 export default function Community(): ReactNode {
   return (
-    <Layout title="Community" description="Where to ask questions, share feedback, and connect with the WSO2 Integration Platform community.">
+    <Layout title="Community" description="Where to ask questions, share feedback, and connect with the Choreo Integration Platform community.">
       <header className={styles.hero}>
         <div className={styles.heroInner}>
           <Heading as="h1">Community</Heading>

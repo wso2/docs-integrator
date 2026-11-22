@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Consuming MCP from an Agent
-description: Reference for using MCP servers as tool sources for WSO2 Integrator AI agents. Covers the Add MCP Server panel, filters, and combining with local tools.
+description: Reference for using MCP servers as tool sources for Choreo Integrator AI agents. Covers the Add MCP Server panel, filters, and combining with local tools.
 slug: /develop-and-test/integration-artifacts/ai-integrations/mcp/consuming-mcp-from-agent
 ---
 
@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 # Consuming MCP from an Agent
 
-An [AI Agent](../agents/agents.md) in WSO2 Integrator can use any MCP server as a tool source. Add the server once; the agent picks up every tool the server advertises (or only the ones you select) and treats them exactly like local function tools.
+An [AI Agent](../agents/agents.md) in Choreo Integrator can use any MCP server as a tool source. Add the server once; the agent picks up every tool the server advertises (or only the ones you select) and treats them exactly like local function tools.
 
 ## Adding an MCP server to an agent
 
@@ -49,7 +49,7 @@ After **Save**, every selected tool from the MCP server appears in the agent's t
 
 Saving the **Add MCP Server** panel generates a toolkit class named `McpToolKit` that implements `ai:McpBaseToolKit`, plus a module-level instance that connects at startup. The agent receives the toolkit through its `tools` list.
 
-In `agents.bal`, WSO2 Integrator generates the toolkit class and the agent declaration:
+In `agents.bal`, Choreo Integrator generates the toolkit class and the agent declaration:
 
 ```ballerina
 import ballerina/ai;

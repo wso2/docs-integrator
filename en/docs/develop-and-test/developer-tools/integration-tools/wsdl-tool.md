@@ -230,7 +230,7 @@ The following example shows how to generate a Calculator SOAP client from a WSDL
        }}
    />
 
-   WSO2 Integrator generates a type-safe SOAP client connector (for example, `calculatorCalculatorsoap12client`) with methods for each WSDL operation, along with request/response record types.
+   Choreo Integrator generates a type-safe SOAP client connector (for example, `calculatorCalculatorsoap12client`) with methods for each WSDL operation, along with request/response record types.
 
 #### Step 4: Add an automation and invoke an operation
 

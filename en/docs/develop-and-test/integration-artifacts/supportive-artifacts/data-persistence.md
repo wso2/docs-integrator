@@ -9,7 +9,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Data Persistence
 
-WSO2 Integrator lets you connect directly to a relational database, introspect its schema, and generate a type-safe client with ready-to-use CRUD methods — without writing any boilerplate. This walkthrough shows how to wire up a MySQL database connection and use it inside an automation.
+Choreo Integrator lets you connect directly to a relational database, introspect its schema, and generate a type-safe client with ready-to-use CRUD methods — without writing any boilerplate. This walkthrough shows how to wire up a MySQL database connection and use it inside an automation.
 
 The example uses an e-commerce order table. A scheduled automation picks up all newly placed orders and advances them to `PROCESSING` status, simulating the first step in warehouse fulfillment.
 
@@ -27,7 +27,7 @@ The example uses an e-commerce order table. A scheduled automation picks up all 
 
 ## Prerequisites
 
-- WSO2 Integrator is installed. Refer to [Install WSO2 Integrator](../../../get-started/setup/setup.md) for instructions.
+- Choreo Integrator is installed. Refer to [Install Choreo Integrator](../../../get-started/setup/setup.md) for instructions.
 - A running MySQL instance (version 8.0 or later) accessible on `localhost:3306`.
 
 ### Set up the database
@@ -262,7 +262,7 @@ Under **Advanced Configurations**, set the following **Additional Values**:
 
 ## Run the automation
 
-Select the **Run** button. WSO2 Integrator prompts you to create the necessary configuration. Select **Create `Config.toml`** and add the database password to the generated `Config.toml` file.
+Select the **Run** button. Choreo Integrator prompts you to create the necessary configuration. Select **Create `Config.toml`** and add the database password to the generated `Config.toml` file.
 
 <ThemedImage
     alt="Run the automation"

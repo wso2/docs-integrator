@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: "Build"
-description: "Configure build settings for integrations on WSO2 Cloud - Integration Platform, including unit test execution and submodule handling."
-keywords: [wso2 integrator, build configuration, wso2 cloud, unit tests, submodules]
+description: "Configure build settings for integrations on Choreo Integration, including unit test execution and submodule handling."
+keywords: [choreo integrator, build configuration, choreo cloud, unit tests, submodules]
 slug: /manage/configurations/build-configurations
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Build Configurations
 
-You can control how your integration is built on WSO2 Cloud - Integration Platform by configuring the build settings. Both settings are enabled by default.
+You can control how your integration is built on Choreo Integration by configuring the build settings. Both settings are enabled by default.
 
 ## Configure build settings
 

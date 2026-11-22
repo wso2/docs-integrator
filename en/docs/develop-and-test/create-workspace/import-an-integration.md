@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Import an Integration
-description: Import an integration from a Git repository into WSO2 Cloud and deploy it to the Development environment.
-keywords: [wso2 integrator, wso2 cloud, import, git, github, deploy]
+description: Import an integration from a Git repository into Choreo Cloud and deploy it to the Development environment.
+keywords: [choreo integrator, choreo cloud, import, git, github, azure devops, deploy]
 slug: /develop-and-test/create-workspace/import-an-integration
 ---
 
@@ -11,23 +11,23 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Import an Integration
 
-If your integration is already in a Git repository, you can import it directly into WSO2 Cloud without going through the WSO2 Integrator editor. WSO2 Cloud automatically builds and deploys the integration to the Development environment once the import is complete.
+If your integration is already in a Git repository, you can import it directly into Choreo Cloud without going through the Choreo Integrator editor. Choreo Cloud automatically builds and deploys the integration to the Development environment once the import is complete.
 
 :::info Prerequisites
-- An integration created with WSO2 Integrator editor pushed to a remote GitHub repository.
-- A WSO2 Cloud account. Sign up at [WSO2 Cloud](https://console.devant.dev) if you don't have one.
+- An integration created with Choreo Integrator editor pushed to a remote GitHub or Azure DevOps repository.
+- A Choreo Cloud account. Sign up at [Choreo Cloud](https://console.devant.dev) if you don't have one.
 :::
 
 ## Connect your Git provider
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://console.devant.dev).
 
-   When you sign up for the first time, WSO2 Cloud creates a default project for you. You land on the project home page.
+   When you sign up for the first time, Choreo Cloud creates a default project for you. You land on the project home page.
 
-2. On the project home page, click **Import an Integration** and select your Git provider. Alternatively, click your Git provider's icon directly on the home page to authorize it with WSO2 Cloud.
+2. On the project home page, click **Import an Integration** and select your Git provider. Alternatively, click your Git provider's icon directly on the home page to authorize it with Choreo Cloud.
 
     <ThemedImage
-        alt="Project Home in WSO2 Cloud"
+        alt="Project Home in Choreo Cloud"
         sources={{
             light: useBaseUrl('/img/create-project/create-project-saas-landing.png'),
             dark: useBaseUrl('/img/create-project/create-project-saas-landing.png'),
@@ -42,7 +42,11 @@ If your integration is already in a Git repository, you can import it directly i
         }}
     />
 
-3. Complete the authorization flow in the browser and return to WSO2 Cloud.
+3. Select your Git provider and complete the authorization flow in the browser, then return to Choreo Cloud.
+
+    :::note
+    One-click OAuth2 authorization is only available for GitHub. To use Azure DevOps, you must first add your credentials at the organization level. See [Connect a Git provider](../../deploy-and-run/deploy-to-wso2-cloud/connect-git-provider.md) for instructions.
+    :::
 
 ## Import the integration
 
@@ -50,7 +54,7 @@ If your integration is already in a Git repository, you can import it directly i
 2. Select the repository and the branch.
 3. Set the path to the folder where your integration lives within the repository.
 4. Optionally, add a description.
-5. Select the integration type. WSO2 Cloud detects the technology automatically.
+5. Select the integration type. Choreo Cloud detects the technology automatically.
 6. Click **Create**.
 
     <ThemedImage
@@ -69,11 +73,11 @@ If your integration is already in a Git repository, you can import it directly i
         }}
     />
 
-WSO2 Cloud starts the build immediately. Once the build completes, the integration is automatically deployed to the **Development** environment.
+Choreo Cloud starts the build immediately. Once the build completes, the integration is automatically deployed to the **Development** environment.
 
 ## What's next
 
-- [Import a project](import-a-project.md) — Bring a whole project, with several integrations, into WSO2 Cloud at once.
+- [Import a project](import-a-project.md) — Bring a whole project, with several integrations, into Choreo Cloud at once.
 
 - [View and manage integrations](../../manage/integrations/integrations.md) — Inspect build status, deployment status, and manage the lifecycle of your deployed integrations.
 - [Runtime configurations](../../manage/configurations/runtime-configurations.md) — Set configurable values per environment and manage reusable configuration groups.

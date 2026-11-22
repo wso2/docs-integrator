@@ -1,6 +1,6 @@
 ---
 title: Message
-description: "Implement the Message pattern with WSO2 Integrator."
+description: "Implement the Message pattern with Choreo Integrator."
 sidebar_position: 1
 slug: /develop-and-test/integration-patterns/message
 ---
@@ -24,7 +24,7 @@ Use a typed message envelope when the integration needs a stable application-lev
 <PatternImplementationTabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Create a new integration in WSO2 Integrator.
+1. Create a new integration in Choreo Integrator.
 2. Add the header, body, and envelope records in [Types](../integration-artifacts/supportive-artifacts/types.md).
 3. Open the flow and [add a step](../../editor/canvases/flow-canvas/flow-canvas.md#anatomy-of-the-canvas).
 4. Add a **Declare Variable** or **Map Data** step to construct the envelope.

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Sign In to the User Portal
-description: "Sign in to the User Portal of a WSO2 Cloud - Integration Platform organization with the account that your organization gave you or with an Integration Platform account."
-keywords: [wso2 cloud, user portal, sign in, single sign-on, external users, identity platform, ai agents, automations, workflows]
+description: "Sign in to the User Portal of a Choreo Integration organization with the account that your organization gave you or with an Integration Platform account."
+keywords: [choreo cloud, user portal, sign in, single sign-on, external users, identity platform, ai agents, automations, workflows]
 slug: /manage/users-and-access/user-portal/sign-in
 ---
 
@@ -20,13 +20,13 @@ The User Portal has two sign-in options:
 | Option | Who uses it | Credentials |
 |---|---|---|
 | **Sign In** | Anyone the organization gives User Portal access to, such as its customers, partners, or employees. | The User Portal account that the organization gave you. |
-| **Sign in with Integration Platform** | Members of the WSO2 Cloud organization, such as developers and administrators. | The account that you use to sign in to the WSO2 Cloud console, with Google, GitHub, Microsoft, or email. |
+| **Sign in with Integration Platform** | Members of the Choreo Cloud organization, such as developers and administrators. | The account that you use to sign in to the Choreo Cloud console, with Google, GitHub, Microsoft, or email. |
 
 :::info
 To sign in with **Sign In**, you need a User Portal account from the organization. If you do not have one, or you cannot sign in, contact the organization's administrator. To give someone an account, administrators can follow [Create a user](manage-users.md#create-a-user).
 :::
 
-What you can see and do after you sign in depends on your roles in the organization. If you sign in with **Sign in with Integration Platform** for the first time and you do not already have a role on the User Portal application, the platform gives you a role based on your permissions in the WSO2 Cloud organization. See [Default roles](manage-users.md#default-roles).
+What you can see and do after you sign in depends on your roles in the organization. If you sign in with **Sign in with Integration Platform** for the first time and you do not already have a role on the User Portal application, the platform gives you a role based on your permissions in the Choreo Cloud organization. See [Default roles](manage-users.md#default-roles).
 
 ## Sign in to the User Portal
 
@@ -37,7 +37,7 @@ What you can see and do after you sign in depends on your roles in the organizat
 
 2. Enter the organization handle in **Organization Handle**, then click **Continue**.
 
-    If you are a member of the WSO2 Cloud organization, you can click **Sign in with Integration Platform** instead, without entering the organization handle. See [Sign in with Integration Platform without an organization](#sign-in-with-integration-platform-without-an-organization).
+    If you are a member of the Choreo Cloud organization, you can click **Sign in with Integration Platform** instead, without entering the organization handle. See [Sign in with Integration Platform without an organization](#sign-in-with-integration-platform-without-an-organization).
 
     <ThemedImage
         alt="User Portal page to enter the organization handle, with the Sign in with Integration Platform option"
@@ -62,7 +62,7 @@ What you can see and do after you sign in depends on your roles in the organizat
 4. Select a sign-in option:
 
     - If your organization gave you an account for the User Portal, click **Sign In**, then sign in with that account.
-    - If you are a member of the WSO2 Cloud organization, click **Sign in with Integration Platform**, then click the option that you use to sign in to the WSO2 Cloud console: **Continue with Google**, **Continue with GitHub**, **Continue with Microsoft**, or **Continue with Email**. To go back, click **Back to sign-in options**.
+    - If you are a member of the Choreo Cloud organization, click **Sign in with Integration Platform**, then click the option that you use to sign in to the Choreo Cloud console: **Continue with Google**, **Continue with GitHub**, **Continue with Microsoft**, or **Continue with Email**. To go back, click **Back to sign-in options**.
 
     <ThemedImage
         alt="Sign in with Integration Platform options with Google, GitHub, Microsoft, and email"
@@ -78,11 +78,11 @@ If you sign in with **Sign in with Integration Platform** but your account is no
 
 ## Sign in with Integration Platform without an organization
 
-If you are a member of the WSO2 Cloud organization, you can sign in first and then choose the organization.
+If you are a member of the Choreo Cloud organization, you can sign in first and then choose the organization.
 
 1. Open the [User Portal sign-in page](https://userportal.devant.dev).
 2. Click **Sign in with Integration Platform**.
-3. Click the option that you use to sign in to the WSO2 Cloud console.
+3. Click the option that you use to sign in to the Choreo Cloud console.
 4. On the **Choose an organization** page, click the organization to continue to.
 
     <ThemedImage
@@ -97,7 +97,7 @@ If you are a member of the WSO2 Cloud organization, you can sign in first and th
 
 ## Automatic sign-in from the console
 
-When you click the **User Portal** button on a published integration's overview page in the WSO2 Cloud console, the User Portal opens in a new tab and signs you in with your Integration Platform account. If it cannot sign you in automatically, it shows the **Sign in to continue** page, where you can select a sign-in option.
+When you click the **User Portal** button on a published integration's overview page in the Choreo Cloud console, the User Portal opens in a new tab and signs you in with your Integration Platform account. If it cannot sign you in automatically, it shows the **Sign in to continue** page, where you can select a sign-in option.
 
 ## What's next
 

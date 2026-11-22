@@ -14,7 +14,7 @@ wide_layout: true
 <PaletteCard icon="faq" href="/reference/faq">
   <h3 class="palette-card-title">FAQ</h3>
   <ul class="palette-card-list">
-    <li>Frequently asked questions about WSO2 Integrator</li>
+    <li>Frequently asked questions about Choreo Integrator</li>
   </ul>
 </PaletteCard>
 

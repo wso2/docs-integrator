@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: "Security"
-description: "Configure API Key and OAuth2 security schemes for integrations deployed to the WSO2 Cloud - Integration Platform."
-keywords: [wso2 integrator, api security, api key, oauth2, integration as api, wso2 cloud]
+description: "Configure API Key and OAuth2 security schemes for integrations deployed to the Choreo Integration."
+keywords: [choreo integrator, api security, api key, oauth2, integration as api, choreo cloud]
 slug: /manage/configurations/security-configurations
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Security Configurations
 
-The WSO2 Integration Platform lets you configure authentication for integrations deployed as Integration as APIs or AI Agents. You can secure each endpoint with an API Key scheme, an OAuth2 scheme, or both at the same time.
+The Choreo Integration lets you configure authentication for integrations deployed as Integration as APIs or AI Agents. You can secure each endpoint with an API Key scheme, an OAuth2 scheme, or both at the same time.
 
 ## Supported security schemes
 

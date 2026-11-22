@@ -1,7 +1,7 @@
 ---
 title: Telegram
 description: React to Telegram bot events such as incoming messages and callback queries using a webhook listener and pre-built event handlers.
-keywords: [wso2 integrator, telegram, bot, event integration, ballerina]
+keywords: [choreo integrator, telegram, bot, event integration, ballerina]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/telegram
 ---
 
@@ -52,7 +52,7 @@ Create a bot and get a token by messaging [@BotFather](https://t.me/BotFather) o
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and an empty **Event Handlers** section.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and an empty **Event Handlers** section.
 
 6. Click **+ Add Handler** to define how incoming updates are processed.
 
@@ -164,7 +164,7 @@ service on telegramListener {
 
 ## Event handlers
 
-An event handler is a `remote function` that WSO2 Integrator calls for each Telegram Bot API update received.
+An event handler is a `remote function` that Choreo Integrator calls for each Telegram Bot API update received.
 
 ### Adding an event handler
 

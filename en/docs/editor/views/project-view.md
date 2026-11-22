@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Project View
-description: Manage projects with multiple integrations and libraries in WSO2 Integrator.
-keywords: [wso2 integrator, editor, project view, integrations, libraries]
+description: Manage projects with multiple integrations and libraries in Choreo Integrator.
+keywords: [choreo integrator, editor, project view, integrations, libraries]
 slug: /editor/views/project-view
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Project View
 
-The Project view is the top-level view in WSO2 Integrator. It appears when you open a project that contains multiple integrations or libraries, giving you an overview of everything in the project, deployment options, and project-level actions in one place.
+The Project view is the top-level view in Choreo Integrator. It appears when you open a project that contains multiple integrations or libraries, giving you an overview of everything in the project, deployment options, and project-level actions in one place.
 
 <ThemedImage
     alt="Project view overview"
@@ -60,7 +60,7 @@ The deployment options panel appears on the right sidebar and provides shortcuts
 
 | Option | Target |
 |---|---|
-| [**Deploy to WSO2 Cloud**](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) | Fully managed cloud platform for hosting and running integrations. |
+| [**Deploy to Choreo Cloud**](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) | Fully managed cloud platform for hosting and running integrations. |
 | [**Deploy with Docker**](../../deploy-and-run/self-hosted/containerized-deployment.md) | Build Docker images and deploy integrations to Docker, Kubernetes, or OpenShift. |
 | [**Deploy on a VM**](../../deploy-and-run/self-hosted/vm-deployment.md) | Deploy integrations as standalone JAR files on virtual machines. |
 | [**Integration Control Plane (ICP)**](../../icp/index.md) | Monitor and manage running integrations from a centralized dashboard. |

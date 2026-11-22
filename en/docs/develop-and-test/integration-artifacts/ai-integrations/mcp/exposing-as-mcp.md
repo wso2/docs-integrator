@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Exposing a Service as MCP
-description: Reference for the MCP Service artifact in WSO2 Integrator - listener, service, tools, transport parameters, and session modes.
+description: Reference for the MCP Service artifact in Choreo Integrator - listener, service, tools, transport parameters, and session modes.
 slug: /develop-and-test/integration-artifacts/ai-integrations/mcp/exposing-as-mcp
 ---
 
@@ -12,9 +12,9 @@ import TabItem from '@theme/TabItem';
 
 # Exposing a Service as MCP
 
-An **MCP service** is a WSO2 Integrator artifact that publishes a set of tools over the Model Context Protocol. Any MCP-compatible client (Claude Desktop, GitHub Copilot, or another AI agent) can connect, discover the tools, and call them. This page covers the configuration options for the listener, service, and tools, including how to read request metadata and HTTP request data, handle sessions, and define tools dynamically.
+An **MCP service** is a Choreo Integrator artifact that publishes a set of tools over the Model Context Protocol. Any MCP-compatible client (Claude Desktop, GitHub Copilot, or another AI agent) can connect, discover the tools, and call them. This page covers the configuration options for the listener, service, and tools, including how to read request metadata and HTTP request data, handle sessions, and define tools dynamically.
 
-WSO2 Integrator MCP services run over the **Streamable HTTP** transport. The generated code uses the `mcp:StreamableHttpListener` listener and the `mcp:StreamableHttpService` service type from the `ballerina/mcp` module.
+Choreo Integrator MCP services run over the **Streamable HTTP** transport. The generated code uses the `mcp:StreamableHttpListener` listener and the `mcp:StreamableHttpService` service type from the `ballerina/mcp` module.
 
 ## Creating an MCP service
 
@@ -51,7 +51,7 @@ WSO2 Integrator MCP services run over the **Streamable HTTP** transport. The gen
 | **Base Path** | URL prefix for the MCP service (for example, `/mcp`). |
 | **Advanced Configurations** | Expand to set the name of the listener that is created for the service. Defaults to `mcpListener`. |
 
-After clicking **Create**, WSO2 Integrator opens the service in the **MCP Service Editor**. The header shows the listener and base path, a **Tools** section, and **Configure** / **Try It** buttons in the top-right.
+After clicking **Create**, Choreo Integrator opens the service in the **MCP Service Editor**. The header shows the listener and base path, a **Tools** section, and **Configure** / **Try It** buttons in the top-right.
 
 <ThemedImage
     alt="The MCP Service editor showing the listener and base path chips, and the Tools section with 'No tools found. Add a new tool.' and a + Add Tool button."
@@ -108,7 +108,7 @@ In the **MCP Service Editor**, click **Configure** in the header to open the **M
 
 | Field | Description |
 |---|---|
-| **Streamable HTTP Service** | The service type. Read-only; WSO2 Integrator always creates an `mcp:StreamableHttpService`, which handles MCP tool calls over the Streamable HTTP transport. |
+| **Streamable HTTP Service** | The service type. Read-only; Choreo Integrator always creates an `mcp:StreamableHttpService`, which handles MCP tool calls over the Streamable HTTP transport. |
 | **Base Path** | URL prefix for the MCP endpoint (for example, `/mcp`). Required. |
 | **StreamableHttpServiceConfig** | The `@mcp:StreamableHttpServiceConfig` annotation record. Click the field to open the **Record Configuration** editor. |
 
@@ -299,7 +299,7 @@ Click **+ Add Tool** in the editor to open the **New Tool Configuration** panel.
 | **Return Type** | Yes | Ballerina type returned by the tool. |
 | **Advanced Configurations** | No | Bind request metadata and HTTP request data to the tool. See [Transport parameters and request metadata](#transport-parameters-and-request-metadata). |
 
-After clicking **Save**, WSO2 Integrator generates a `remote function` within the service and opens the tool's flow diagram, where you implement the tool logic. The tool also appears under the MCP service in the project sidebar and as a row under **Tools** in the MCP Service Editor.
+After clicking **Save**, Choreo Integrator generates a `remote function` within the service and opens the tool's flow diagram, where you implement the tool logic. The tool also appears under the MCP service in the project sidebar and as a row under **Tools** in the MCP Service Editor.
 
 <ThemedImage
     alt="The flow diagram of the add remote function, showing an empty flow with a Start node, with add listed under MCP Service in the project sidebar."
@@ -345,7 +345,7 @@ When you want explicit control over the description or input schema, use the `@m
 | Field | Description |
 |---|---|
 | **description** | Tool description sent to clients. Overrides the function's doc comment. |
-| **schema** | A `map<json>` JSON Schema for the tool's parameters. Overrides the schema WSO2 Integrator derives from parameter types. Use when you need richer schema metadata (enums, defaults, custom validation) than Ballerina types can express. |
+| **schema** | A `map<json>` JSON Schema for the tool's parameters. Overrides the schema Choreo Integrator derives from parameter types. Use when you need richer schema metadata (enums, defaults, custom validation) than Ballerina types can express. |
 
 ```ballerina
 @mcp:Tool {
@@ -603,7 +603,7 @@ service mcp:StreamableHttpAdvancedService /mcp on mcpListener {
 | Use `mcp:StreamableHttpService` when… | Use `mcp:StreamableHttpAdvancedService` when… |
 |---|---|
 | Tools map cleanly to compile-time `remote function`s. | Tools are dynamic (defined in configuration, a database, or another service). |
-| You want WSO2 Integrator to derive schemas automatically. | You want hand-crafted JSON schemas or extra validation. |
+| You want Choreo Integrator to derive schemas automatically. | You want hand-crafted JSON schemas or extra validation. |
 | You want to build the service in the visual designer. | You want a dispatch-table architecture. |
 
 :::info
@@ -666,7 +666,7 @@ Once your service is running, MCP clients connect by URL.
 }
 ```
 
-**Another agent inside WSO2 Integrator**: see [Consuming MCP from an Agent](consuming-mcp-from-agent.md).
+**Another agent inside Choreo Integrator**: see [Consuming MCP from an Agent](consuming-mcp-from-agent.md).
 
 ## Operational notes
 
@@ -682,7 +682,7 @@ Once your service is running, MCP clients connect by URL.
 Yes. These types still compile and run:
 
 - `mcp:Listener` is deprecated. Replace it with `mcp:StreamableHttpListener`, which takes the same arguments.
-- `mcp:Service` and `mcp:AdvancedService` are transport-agnostic service types and are not deprecated. Their tools can't bind HTTP request data (`@http:Header`, `http:Headers`, `http:Request`). Use `mcp:StreamableHttpService` and `mcp:StreamableHttpAdvancedService`, which WSO2 Integrator generates by default, when you need that data.
+- `mcp:Service` and `mcp:AdvancedService` are transport-agnostic service types and are not deprecated. Their tools can't bind HTTP request data (`@http:Header`, `http:Headers`, `http:Request`). Use `mcp:StreamableHttpService` and `mcp:StreamableHttpAdvancedService`, which Choreo Integrator generates by default, when you need that data.
 - The `httpConfig` and `sessionMode` fields of `@mcp:ServiceConfig` are deprecated. Set them in `@mcp:StreamableHttpServiceConfig` on an `mcp:StreamableHttpService` instead.
 
 ## What's next

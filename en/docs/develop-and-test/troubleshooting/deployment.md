@@ -12,7 +12,7 @@ Before you start digging into the deployment layer, confirm the integration runs
 
 ## Docker deployments
 
-WSO2 Integrator supports Code-to-Cloud (C2C) Docker generation through `cloud = "docker"` in `Ballerina.toml`. The generated Dockerfile uses the `ballerina/jvm-runtime` base image, which is Alpine-based. A custom base image can introduce native library compatibility issues, particularly around DNS resolution and TLS.
+Choreo Integrator supports Code-to-Cloud (C2C) Docker generation through `cloud = "docker"` in `Ballerina.toml`. The generated Dockerfile uses the `ballerina/jvm-runtime` base image, which is Alpine-based. A custom base image can introduce native library compatibility issues, particularly around DNS resolution and TLS.
 
 Build the image:
 
@@ -112,7 +112,7 @@ For the full `Cloud.toml` reference, see the [Code-to-Cloud specification](https
 
 ## GraalVM native image
 
-WSO2 Integrator supports GraalVM native executables for faster startup and a lower memory footprint.
+Choreo Integrator supports GraalVM native executables for faster startup and a lower memory footprint.
 
 Build with:
 
@@ -149,7 +149,7 @@ If a native image fails at runtime, reproduce the issue with `bal run` (without 
 
 ## Choreo deployments
 
-[Choreo](https://wso2.com/choreo/) is WSO2's integration platform, and it natively supports WSO2 Integrator services. When a service misbehaves on Choreo, start with one diagnostic question:
+[Choreo](https://wso2.com/choreo/) is WSO2's integration platform, and it natively supports Choreo Integrator services. When a service misbehaves on Choreo, start with one diagnostic question:
 
 **Does `bal build && bal run` work locally?**
 

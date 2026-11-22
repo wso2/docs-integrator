@@ -2,7 +2,7 @@
 sidebar_position: 0
 sidebar_label: Enterprise Integration Patterns (EIP)
 title: Enterprise Integration Patterns (EIP)
-description: Reusable enterprise integration patterns and how to implement them with WSO2 Integrator.
+description: Reusable enterprise integration patterns and how to implement them with Choreo Integrator.
 slug: /develop-and-test/integration-patterns
 ---
 

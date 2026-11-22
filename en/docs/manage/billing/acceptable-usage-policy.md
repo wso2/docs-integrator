@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: "Acceptable Usage Policy"
-description: "Entitlements, quotas, and limits for each WSO2 Integration Platform SaaS subscription plan - Free Trial, Growth, and Enterprise."
-keywords: [wso2 integrator, wso2 cloud, acceptable usage policy, subscription plans, free trial, growth, enterprise, quotas, limits, entitlements]
+description: "Entitlements, quotas, and limits for each Choreo Integration SaaS subscription plan - Free Trial, Growth, and Enterprise."
+keywords: [choreo integrator, choreo cloud, acceptable usage policy, subscription plans, free trial, growth, enterprise, quotas, limits, entitlements]
 slug: /manage/billing/acceptable-usage-policy
 ---
 
@@ -19,7 +19,7 @@ The tables on this page list what each subscription plan includes. A checkmark (
 | [Connect your Git repo](../../deploy-and-run/deploy-to-wso2-cloud/connect-git-provider.md) | ✓ | ✓ | ✓ |
 | [Continuous integration (CI) with build pipelines](../configurations/build-configurations.md) | 100 builds per month | 500 builds per month | Unlimited |
 | Continuous delivery (CD) | 100 deployments per month | 500 deployments per month | Unlimited |
-| Deployments to cloud platforms | <span class="cell-prose">WSO2 Integration Platform Cloud</span> | <span class="cell-prose">WSO2 Integration Platform Cloud, Azure, AWS, GCP, OpenShift, VMware Tanzu, and any Kubernetes cluster</span> | <span class="cell-prose">WSO2 Integration Platform Cloud, Azure, AWS, GCP, OpenShift, VMware Tanzu, and any Kubernetes cluster</span> |
+| Deployments to cloud platforms | <span class="cell-prose">Choreo Integration Cloud</span> | <span class="cell-prose">Choreo Integration Cloud, Azure, AWS, GCP, OpenShift, VMware Tanzu, and any Kubernetes cluster</span> | <span class="cell-prose">Choreo Integration Cloud, Azure, AWS, GCP, OpenShift, VMware Tanzu, and any Kubernetes cluster</span> |
 | Deployment tracks | 2 | 5 | Unlimited |
 | [Auto scaling](../configurations/scaling-resource-limits.md) | <span class="cell-prose">Scales up to 1 pod</span> | <span class="cell-prose">Scales up to 2 pods</span> | ✓ |
 | Health checks | ✓ | ✓ | ✓ |
@@ -67,7 +67,7 @@ The tables on this page list what each subscription plan includes. A checkmark (
 
 ## What's next
 
-- [Pricing and plans](./pricing-and-plans.md) — How WSO2 Cloud bills platform services, and how to upgrade a service plan.
+- [Pricing and plans](./pricing-and-plans.md) — How Choreo Cloud bills platform services, and how to upgrade a service plan.
 - [Usage dashboards](./usage-dashboards.md) — Analyze usage across your organization.
 - [Integration Runtime Updates and Upgrades](../../reference/runtime-updates-and-upgrades.md) — Runtime availability, optional upgrades, and supported runtime versions.
 - [FAQ: Billing and support](../../reference/faq.md) — Answers to common subscription and billing questions.

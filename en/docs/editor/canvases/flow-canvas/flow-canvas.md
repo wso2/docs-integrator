@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Canvas Basics
 title: Flow Canvas
-description: Visual canvas for designing the logic of an integration in WSO2 Integrator.
-keywords: [wso2 integrator, flow canvas, visual designer, node palette]
+description: Visual canvas for designing the logic of an integration in Choreo Integrator.
+keywords: [choreo integrator, flow canvas, visual designer, node palette]
 slug: /editor/canvases/flow-canvas
 ---
 

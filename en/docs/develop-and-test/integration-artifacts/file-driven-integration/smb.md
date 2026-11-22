@@ -61,7 +61,7 @@ The listener speaks SMB dialects 2.0.2 through 3.1.1 and authenticates with NTLM
 
 6. Enter the **Monitored Path** — the directory inside the share to poll (e.g., `/incoming`). Defaults to `/`.
 
-7. Select **Create**. WSO2 Integrator opens the service with its listener and monitored path shown at the top.
+7. Select **Create**. Choreo Integrator opens the service with its listener and monitored path shown at the top.
 
    <ThemedImage
        alt="Service designer for a new SMB service before any handler is added"

@@ -66,7 +66,7 @@ Use this flow for plain (unencrypted) FTP. Default port: `21`. Supports anonymou
 
 6. Enter the **Monitoring Path** — the directory on the remote server to poll for new files (e.g., `/uploads`). Defaults to `/`.
 
-7. Click **Create**. WSO2 Integrator opens the service in the **Service Designer** with the listener pill attached.
+7. Click **Create**. Choreo Integrator opens the service in the **Service Designer** with the listener pill attached.
 
    <ThemedImage
        alt="Service Designer showing the FTP service canvas"
@@ -356,7 +356,7 @@ listener ftp:Listener sftpListener = check new ({
 
 ## File handlers
 
-A file handler is a `remote function` that WSO2 Integrator calls each time the listener's polling cycle detects a file event in the monitored directory. A service can declare any combination of the three handler types:
+A file handler is a `remote function` that Choreo Integrator calls each time the listener's polling cycle detects a file event in the monitored directory. A service can declare any combination of the three handler types:
 
 | Handler | Trigger |
 |---|---|
@@ -404,7 +404,7 @@ Click **Save** to add the handler.
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
-File handlers are typed `remote function` declarations inside the service. WSO2 Integrator routes events to handlers by function name; the content parameter type determines deserialization.
+File handlers are typed `remote function` declarations inside the service. Choreo Integrator routes events to handlers by function name; the content parameter type determines deserialization.
 
 **Text file handler:**
 

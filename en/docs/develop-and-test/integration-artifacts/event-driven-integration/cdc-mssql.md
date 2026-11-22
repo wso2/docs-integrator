@@ -1,7 +1,7 @@
 ---
 title: CDC for Microsoft SQL Server
 description: Capture real-time data changes from Microsoft SQL Server tables using Change Data Capture, with handlers for insert, update, delete and read events.
-keywords: [wso2 integrator, cdc, microsoft sql server, mssql, change data capture, event integration, debezium]
+keywords: [choreo integrator, cdc, microsoft sql server, mssql, change data capture, event integration, debezium]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/cdc-mssql
 ---
 
@@ -60,7 +60,7 @@ CDC must be enabled on the SQL Server database and on each table you want to tra
 
 4. Click **Create**.
 
-5. WSO2 Integrator creates the empty service and opens it in the **Service Designer**. The canvas shows the attached listener pill and the table name pill. The service has no handlers yet.
+5. Choreo Integrator creates the empty service and opens it in the **Service Designer**. The canvas shows the attached listener pill and the table name pill. The service has no handlers yet.
 
    <ThemedImage
        alt="Service Designer showing the Microsoft SQL Server CDC service canvas"

@@ -81,7 +81,7 @@ Solace event integrations consume messages from a Solace PubSub+ queue or topic 
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill, the queue or topic name pill, and an empty **Event Handlers** section.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill, the queue or topic name pill, and an empty **Event Handlers** section.
 
    <ThemedImage
        alt="Service Designer showing the Solace Event Integration canvas"

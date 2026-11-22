@@ -3,7 +3,7 @@ sidebar_position: 7
 title: "Process Inbound EDI Purchase Orders from Trading Partners"
 sidebar_label: "Process Inbound EDI Purchase Orders"
 description: Build an SFTP-driven integration that picks up EDIFACT purchase orders from a trading partner, identifies the sender from the envelope headers, and parses each order into typed records while logging any message it could not read.
-keywords: [wso2 integrator, edi, edifact, x12, purchase order, orders, trading partner, envelope, interchange, sftp, b2b, use case, low-code]
+keywords: [choreo integrator, edi, edifact, x12, purchase order, orders, trading partner, envelope, interchange, sftp, b2b, use case, low-code]
 slug: /guides/business-use-cases/edi-purchase-order-processing
 card_icon: edi
 card_summary: An SFTP-driven integration that routes EDI purchase orders by trading partner and parses them into typed records
@@ -26,7 +26,7 @@ Trading partners send purchase orders as EDI files, usually by dropping them in 
 ## How it works
 
 <ThemedImage
-    alt="Architecture diagram: the trading partner SUPERMART uploads EDIFACT ORDERS files to an SFTP server; a WSO2 Integrator FTP integration picks up new .edi files with an SFTP listener, reads the envelope headers with the EDI module, rejects files from unknown partners, parses the orders with the EDIFACT D03A package, and moves each file when done"
+    alt="Architecture diagram: the trading partner SUPERMART uploads EDIFACT ORDERS files to an SFTP server; a Choreo Integrator FTP integration picks up new .edi files with an SFTP listener, reads the envelope headers with the EDI module, rejects files from unknown partners, parses the orders with the EDIFACT D03A package, and moves each file when done"
     sources={{
         light: useBaseUrl('/img/guides/usecases/edi-purchase-order-processing/architecture.png'),
         dark: useBaseUrl('/img/guides/usecases/edi-purchase-order-processing/architecture.png'),
@@ -46,7 +46,7 @@ An EDI file is an *interchange*: an envelope (`UNB`/`UNZ` in EDIFACT, `ISA`/`IEA
 
 :::info Prerequisites
 
-- A working WSO2 Integrator environment. See [Setup](../../get-started/setup/setup.md).
+- A working Choreo Integrator environment. See [Setup](../../get-started/setup/setup.md).
 - Docker, to run a local SFTP server that stands in for the partner's mailbox.
 
 :::
@@ -428,4 +428,4 @@ Trading partners usually expect a reply that lists the orders that were accepted
 
 - **Pick files up from other places.** The same handler works on a [local directory](../../develop-and-test/integration-artifacts/file-driven-integration/local-files.md), and the [FTP/SFTP service](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp.md) supports FTPS and key-based authentication for real partner mailboxes. For partners that post EDI over HTTP, the parsing logic is unchanged: read the request body into `ediText`.
 - **Support a partner's own variant.** When a partner's messages deviate from the standard, [generate a parser](../../develop-and-test/data-transformation/edi.md#generating-code-from-an-edifact-spec) from the specification, [adapt the schema](../../develop-and-test/data-transformation/edi.md#adapting-the-schema-to-a-trading-partner) to what they send, and swap it in for the prebuilt package. Bundle the schemas for every message type a partner sends into one package with [`libgen`](../../develop-and-test/data-transformation/edi.md#building-a-reusable-library-package).
-- **Deploy it.** Ship the integration to [WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md), and point the listener at the partner's real SFTP server through the configurables.
+- **Deploy it.** Ship the integration to [Choreo Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md), and point the listener at the partner's real SFTP server through the configurables.

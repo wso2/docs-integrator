@@ -1,7 +1,7 @@
 ---
 title: "Customize Copilot"
 description: "Give Copilot standing project instructions, reusable skills, and your own tools through MCP servers."
-keywords: [wso2 integrator, copilot, agents.md, skills, mcp, model context protocol, customize copilot]
+keywords: [choreo integrator, copilot, agents.md, skills, mcp, model context protocol, customize copilot]
 sidebar_position: 4
 slug: /editor/copilot/customize-copilot
 ---
@@ -118,7 +118,7 @@ When a skill is enabled and your request matches its trigger, Copilot applies th
 
 ## Copilot MCP tools
 
-WSO2 Integrator Copilot ships with a built-in set of tools for building integrations. You can extend that toolset by connecting your own [Model Context Protocol](https://modelcontextprotocol.io) (MCP) servers. Once a server is connected and enabled, the tools it exposes become available to Copilot during a chat turn, and the agent can call them like any built-in tool.
+Choreo Integrator Copilot ships with a built-in set of tools for building integrations. You can extend that toolset by connecting your own [Model Context Protocol](https://modelcontextprotocol.io) (MCP) servers. Once a server is connected and enabled, the tools it exposes become available to Copilot during a chat turn, and the agent can call them like any built-in tool.
 
 This lets you and your team extend Copilot with the tools your work needs, whether they run as a local process or a remote service.
 

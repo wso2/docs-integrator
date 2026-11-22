@@ -1,14 +1,14 @@
 ---
 sidebar_position: 2
 title: Access Control
-description: Learn how to manage access to projects and resources in the WSO2 Cloud - Integration Platform using roles and groups.
-keywords: [wso2 cloud, access control, roles, groups, permissions]
+description: Learn how to manage access to projects and resources in the Choreo Integration using roles and groups.
+keywords: [choreo cloud, access control, roles, groups, permissions]
 slug: /manage/users-and-access/access-control
 ---
 
 # Access Control
 
-The WSO2 Cloud - Integration Platform lets you manage access to projects and control the actions that users can perform within them. Administrators can restrict project access to specific user groups. This is useful when you need certain user groups to have access to particular projects or a set of projects.
+The Choreo Integration lets you manage access to projects and control the actions that users can perform within them. Administrators can restrict project access to specific user groups. This is useful when you need certain user groups to have access to particular projects or a set of projects.
 
 The platform uses **roles** and **groups** to control access:
 
@@ -29,7 +29,7 @@ Assume you are overseeing the Engineering Project within your organization and y
 
 ### Step 1: Create a project
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://console.devant.dev).
 2. In the top navigation, click the **Organization**.
 3. On the organization overview page, click **+ Create Project**.
 4. Enter a display name, unique name, and description for the project. Use the following values:

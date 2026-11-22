@@ -57,12 +57,12 @@ export default function MarkdownButton({ markdownUrl }: MarkdownButtonProps): Re
 
   const getPromptWithMarkdown = () => {
     const fullUrl = getFullMarkdownUrl();
-    return `Could you read this document about WSO2 Integrator ${fullUrl} so I can ask questions about it?`;
+    return `Could you read this document about Choreo Integrator ${fullUrl} so I can ask questions about it?`;
   };
 
   const getPromptWithHtml = () => {
     const fullUrl = getHtmlUrl();
-    return `Could you read this document about WSO2 Integrator ${fullUrl} so I can ask questions about it?`;
+    return `Could you read this document about Choreo Integrator ${fullUrl} so I can ask questions about it?`;
   };
 
   const handleOpenInClaude = () => {

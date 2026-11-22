@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: "Manage Projects"
-description: "View, edit, and delete projects on WSO2 Cloud - Integration Platform."
-keywords: [wso2 integrator, wso2 cloud, project, edit project, delete project, project lifecycle]
+description: "View, edit, and delete projects on Choreo Integration."
+keywords: [choreo integrator, choreo cloud, project, edit project, delete project, project lifecycle]
 slug: /manage/projects
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Manage Projects
 
-A project is the top-level container for your integrations on WSO2 Cloud - Integration Platform. This page explains how to view your projects, edit their details, and remove them when they are no longer needed. To create a project, see [Create a project](../develop-and-test/create-workspace/create-a-project.md). To bring one in from a Git repository, see [Import a project](../develop-and-test/create-workspace/import-a-project.md).
+A project is the top-level container for your integrations on Choreo Integration. This page explains how to view your projects, edit their details, and remove them when they are no longer needed. To create a project, see [Create a project](../develop-and-test/create-workspace/create-a-project.md). To bring one in from a Git repository, see [Import a project](../develop-and-test/create-workspace/import-a-project.md).
 
 ## View projects
 
@@ -68,5 +68,5 @@ The project and all its contents are permanently deleted.
 ## What's next
 
 - [Create a project](../develop-and-test/create-workspace/create-a-project.md) — Create a new project.
-- [Import a project](../develop-and-test/create-workspace/import-a-project.md) — Bring an existing WSO2 Integrator project from a Git repository into WSO2 Cloud.
+- [Import a project](../develop-and-test/create-workspace/import-a-project.md) — Bring an existing Choreo Integrator project from a Git repository into Choreo Cloud.
 - [Access control](./users-and-access/access-control.md) — Manage roles and permissions for members of your project.

@@ -2,14 +2,14 @@
 sidebar_position: 0
 sidebar_label: "Users, Roles, and Access"
 title: "Users, Roles, and Access"
-description: "Manage who can access the WSO2 Cloud - Integration Platform, what they can do, and how they sign in."
-keywords: [wso2 cloud, users, access control, roles, groups]
+description: "Manage who can access the Choreo Integration, what they can do, and how they sign in."
+keywords: [choreo cloud, users, access control, roles, groups]
 slug: /manage/users-and-access
 ---
 
 # Users, Roles, and Access
 
-WSO2 Cloud - Integration Platform gives you centralized control over who can access your organization and projects, what actions they can perform, and how they authenticate. You can define granular permissions using roles and groups and enforce organization-wide policies.
+Choreo Integration gives you centralized control over who can access your organization and projects, what actions they can perform, and how they authenticate. You can define granular permissions using roles and groups and enforce organization-wide policies.
 
 ## Access control
 
@@ -24,7 +24,7 @@ Authorization works by assigning one or more roles to a group.
 
 ## User Portal
 
-The User Portal is a separate portal that exposes your integrations to external users. After you enable it for your organization, you can publish AI agents, automations, and workflows to it. Users sign in through your WSO2 Identity Platform organization and can chat with agents and run automations and workflows without access to the WSO2 Cloud console. You manage User Portal users and roles, and the permissions of each role, from the WSO2 Cloud console.
+The User Portal is a separate portal that exposes your integrations to external users. After you enable it for your organization, you can publish AI agents, automations, and workflows to it. Users sign in through your Choreo Identity organization and can chat with agents and run automations and workflows without access to the Choreo Cloud console. You manage User Portal users and roles, and the permissions of each role, from the Choreo Cloud console.
 
 ## In this section
 

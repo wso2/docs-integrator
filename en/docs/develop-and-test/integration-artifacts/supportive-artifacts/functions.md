@@ -1,7 +1,7 @@
 ---
 title: Functions
 description: Encapsulate reusable logic in function artifacts for validation, transformation, and shared operations.
-keywords: [wso2 integrator, functions, function artifact, reusable logic, validation]
+keywords: [choreo integrator, functions, function artifact, reusable logic, validation]
 slug: /develop-and-test/integration-artifacts/supportive-artifacts/functions
 ---
 

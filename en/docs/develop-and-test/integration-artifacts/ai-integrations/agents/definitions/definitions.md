@@ -2,7 +2,7 @@
 sidebar_position: 0
 sidebar_label: Definitions and Instances
 title: Agent Definitions
-description: Reference for agent definitions in WSO2 Integrator, covering how to create a reusable agent template, the Agent Definition Designer, response types, and initialization parameters.
+description: Reference for agent definitions in Choreo Integrator, covering how to create a reusable agent template, the Agent Definition Designer, response types, and initialization parameters.
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -32,7 +32,7 @@ A definition is a template, not a running agent. Nothing executes until an insta
 
 ## Where a definition lives
 
-When you create a definition, you can choose where WSO2 Integrator saves it.
+When you create a definition, you can choose where Choreo Integrator saves it.
 
 | Option | Where it goes | Choose this when |
 |---|---|---|
@@ -47,7 +47,7 @@ Only a definition in a library package can be published and consumed by other pr
 
 ## Create an agent definition
 
-1. Open your integration project in WSO2 Integrator.
+1. Open your integration project in Choreo Integrator.
 2. Click **Add Artifact manually** from the bottom of the project view.
 3. Under **Other Artifacts**, select **Agent**.
 4. In the **Add Agent** dialog, select **Create Agent Definition**.
@@ -81,7 +81,7 @@ These fields apply only when **New library package** is selected.
 
 ## Agent Definition Designer
 
-After clicking **Create Agent Definition**, WSO2 Integrator generates the definition and opens the Agent Definition Designer. The designer is where you configure what the agent does. Unlike an agent created directly in an integration, a definition is configured through a form rather than the integration canvas since a definition has no flow of its own, because it runs wherever it is instantiated.
+After clicking **Create Agent Definition**, Choreo Integrator generates the definition and opens the Agent Definition Designer. The designer is where you configure what the agent does. Unlike an agent created directly in an integration, a definition is configured through a form rather than the integration canvas since a definition has no flow of its own, because it runs wherever it is instantiated.
 
 <ThemedImage
     alt="The Agent Definition Designer for CustomerSupportAgent, showing the name and description header, a Configuration card with Role and Instructions, a Tools section with an Add Tool button, a Response Type set to string, an Initialization Parameters section, and a collapsed Advanced section."

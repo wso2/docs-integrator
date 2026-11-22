@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Import a Project
-description: Import an existing WSO2 Integrator project from a Git repository into WSO2 Cloud.
-keywords: [wso2 integrator, wso2 cloud, import, project, git, github, deploy]
+description: Import an existing Choreo Integrator project from a Git repository into Choreo Cloud.
+keywords: [choreo integrator, choreo cloud, import, project, git, github, azure devops, deploy]
 slug: /develop-and-test/create-workspace/import-a-project
 ---
 
@@ -11,22 +11,22 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Import a Project
 
-If you already have a project created with the WSO2 Integrator editor in a Git repository, import it into WSO2 Cloud to continue working on it. During import, you configure each integration in the project and WSO2 Cloud creates them all at once.
+If you already have a project created with the Choreo Integrator editor in a Git repository, import it into Choreo Cloud to continue working on it. During import, you configure each integration in the project and Choreo Cloud creates them all at once.
 
 :::tip
 If you don't have an existing project and would like to get started on a new project, see [Create a project](create-a-project.md).
 :::
 
 :::info Prerequisites
-- A project created with the WSO2 Integrator editor and pushed to a remote GitHub repository.
-- A WSO2 Cloud account. Sign up at [WSO2 Cloud](https://console.devant.dev) if you don't have one.
+- A project created with the Choreo Integrator editor and pushed to a remote GitHub or Azure DevOps repository.
+- A Choreo Cloud account. Sign up at [Choreo Cloud](https://console.devant.dev) if you don't have one.
 :::
 
 ## Connect your Git provider
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://console.devant.dev).
 2. Navigate to the organization overview page by clicking the organization name at the top. The organization overview lists all your projects.
-3. Click **Import** to import an existing WSO2 Integrator project.
+3. Click **Import** to import an existing Choreo Integrator project.
 
     <ThemedImage
         alt="Import button on the organization overview page"
@@ -36,7 +36,11 @@ If you don't have an existing project and would like to get started on a new pro
         }}
     />
 
-4. Complete the GitHub authorization flow in the browser, then return to WSO2 Cloud.
+4. Select your Git provider and complete the authorization flow in the browser, then return to Choreo Cloud.
+
+    :::note
+    One-click OAuth2 authorization is only available for GitHub. To use Azure DevOps, you must first add your credentials at the organization level. See [Connect a Git provider](../../deploy-and-run/deploy-to-wso2-cloud/connect-git-provider.md) for instructions.
+    :::
 
 ## Configure and import the project
 
@@ -63,7 +67,7 @@ If you don't have an existing project and would like to get started on a new pro
     />
 8. After configuring all integrations, click **Import**.
 
-WSO2 Cloud creates all the integrations and navigates you to the newly created project home.
+Choreo Cloud creates all the integrations and navigates you to the newly created project home.
 
 <ThemedImage
     alt="Project Home"
@@ -77,7 +81,7 @@ WSO2 Cloud creates all the integrations and navigates you to the newly created p
 
 - [Import an integration](import-an-integration.md) — Add a single integration from a Git repository to a project.
 - [View and manage integrations](../../manage/integrations/integrations.md) — Inspect build status, deployment status, and manage the lifecycle of your deployed integrations.
-- [Manage projects](../../manage/projects.md) — View, edit, and delete projects on WSO2 Cloud.
+- [Manage projects](../../manage/projects.md) — View, edit, and delete projects on Choreo Cloud.
 - [Runtime configurations](../../manage/configurations/runtime-configurations.md) — Set configurable values per environment and manage reusable configuration groups.
 - [Security configurations](../../manage/configurations/security-configurations.md) — Secure your integration endpoints with API Key or OAuth2 authentication.
 - [Endpoint configurations](../../manage/configurations/endpoint-configurations.md) — Control endpoint visibility levels for integrations deployed as Integration as APIs.

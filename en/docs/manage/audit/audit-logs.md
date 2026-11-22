@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: "Audit Logs"
-description: "View, retain, and manage access to organization-level audit logs in WSO2 Cloud."
-keywords: [wso2 integrator, wso2 cloud, audit logs, security, compliance, access control, role, group]
+description: "View, retain, and manage access to organization-level audit logs in Choreo Cloud."
+keywords: [choreo integrator, choreo cloud, audit logs, security, compliance, access control, role, group]
 slug: /manage/audit/audit-logs
 ---
 
@@ -13,9 +13,9 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 Audit logs, also called audit trails, enhance security, ensure compliance, provide operational insights, and help manage risks.
 
-In WSO2 Cloud, an audit log records organization-level user-specific operations performed via the WSO2 Cloud Console. It also captures the timestamp and the outcome of the action.
+In Choreo Cloud, an audit log records organization-level user-specific operations performed via the Choreo Cloud Console. It also captures the timestamp and the outcome of the action.
 
-WSO2 Cloud captures the following user-specific operations as audit logs:
+Choreo Cloud captures the following user-specific operations as audit logs:
 
 - Project creation, update, and deletion.
 - Integration creation, update, and deletion.
@@ -34,20 +34,20 @@ Organization administrators are allowed to view audit logs by default. If other 
 
 To view audit logs, follow these steps:
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev/).
-2. In the WSO2 Cloud Console, go to the top navigation menu and click **Organization**.
+1. Sign in to [Choreo Cloud](https://console.devant.dev/).
+2. In the Choreo Cloud Console, go to the top navigation menu and click **Organization**.
 
     :::tip
     Currently, you can only view organization-level audit logs.
     :::
 
-3. If you're using WSO2 Cloud as a Developer, click **Admin**, then click **Audit Logs**. If you're using WSO2 Cloud as a Platform Engineer, click **Observability**, then click **Audit Logs**.
+3. If you're using Choreo Cloud as a Developer, click **Admin**, then click **Audit Logs**. If you're using Choreo Cloud as a Platform Engineer, click **Observability**, then click **Audit Logs**.
 
     To view audit logs based on a specific time range and other requirements, you can apply the necessary filter criteria.
 
 ## Audit log retention
 
-WSO2 Cloud retains audit logs for one year and archives them for an additional year. Therefore, the total retention period for audit logs is two years.
+Choreo Cloud retains audit logs for one year and archives them for an additional year. Therefore, the total retention period for audit logs is two years.
 
 ## Manage audit log access
 
@@ -59,7 +59,7 @@ You must be the organization administrator to perform this action.
 
 ### Step 1: Create a role with audit log access permissions
 
-1. In the WSO2 Cloud Console top navigation, click **Organization**.
+1. In the Choreo Cloud Console top navigation, click **Organization**.
 2. In the left navigation menu, click **Admin**, then click **Settings**.
 3. On the **Access Control** tab, click **Roles**, then click **+ Create Role**.
 4. Enter a name and description for the role.
@@ -131,4 +131,4 @@ You must be the organization administrator to perform this action.
 ## What's next
 
 - [Runtime logs](../../observe/runtime-logs.md) — Search, filter, and analyze runtime log output for your integrations.
-- [WSO2 Cloud overview](../manage.md) — How WSO2 Cloud manages your deployed integrations end to end.
+- [Choreo Cloud overview](../manage.md) — How Choreo Cloud manages your deployed integrations end to end.

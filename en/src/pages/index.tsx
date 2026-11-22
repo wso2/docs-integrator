@@ -18,7 +18,7 @@ const quickLinks = [
 
 const steps = [
   { title: 'Set up', sub: <Link to="/get-started/setup">
-            Create your WSO2 Cloud account <span aria-hidden="true">→</span>
+            Create your Choreo Cloud account <span aria-hidden="true">→</span>
           </Link> },
   { title: 'Pick a quickstart', sub: 'Choose a style below ↓', active: true },
   { title: 'Design the flow', sub: 'On the canvas or with Copilot' },
@@ -125,7 +125,7 @@ const lifecycle: LifecycleCard[] = [
   {
     n: '02',
     title: 'Deploy and Run',
-    description: 'Deploy integrations to WSO2 Cloud, configure Git-based delivery, and secure production environments.',
+    description: 'Deploy integrations to Choreo Cloud, configure Git-based delivery, and secure production environments.',
     to: '/deploy-and-run',
     tone: 'toneBlue',
     icon: (
@@ -199,10 +199,10 @@ const wideTiles: WideTile[] = [
 function HomepageHeader(): ReactNode {
   return (
     <LandingHero
-      windowTitle="WSO2 Cloud Console"
-      imageAlt="Integration Platform on WSO2 Cloud"
-      eyebrow="WSO2 Integration Platform · Docs"
-      title={<>Integration Platform on WSO2 Cloud <TitleSuffix>(SaaS)</TitleSuffix></>}
+      windowTitle="Choreo Cloud Console"
+      imageAlt="Choreo Integration on Choreo Cloud"
+      eyebrow="Choreo Integration · Docs"
+      title={<>Choreo Integration on Choreo Cloud <TitleSuffix>(SaaS)</TitleSuffix></>}
       subtitle="Build, connect, and run integrations, MCP servers, and AI agents with built-in governance, and architectural freedom at cloud speed."
       search={<HeroSearch quickLinks={quickLinks} />}
       cta={{ label: "Let's get started", to: '/get-started' }}
@@ -213,7 +213,7 @@ function HomepageHeader(): ReactNode {
 }
 
 /* ------------------------------------------------------------------ */
-/*  New to WSO2 Cloud? — step strip + quickstart tiles                 */
+/*  New to Choreo Cloud? — step strip + quickstart tiles                 */
 /* ------------------------------------------------------------------ */
 function GetStarted(): ReactNode {
   return (
@@ -221,7 +221,7 @@ function GetStarted(): ReactNode {
       <div className={styles.getStartedHead}>
         <div className={styles.getStartedHeadText}>
           <Heading as="h2" className={styles.h2Large}>
-            New to WSO2 Cloud?
+            New to Choreo Cloud?
           </Heading>
           <p className={styles.lead}>Build your first integration in four steps, starting with a quickstart.</p>
         </div>

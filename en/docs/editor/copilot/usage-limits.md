@@ -1,8 +1,8 @@
 ---
 sidebar_position: 6
 title: "Usage Limits"
-description: "See how much of your WSO2 Integrator Copilot usage remains, what happens when you reach the limit, and how to ask for more."
-keywords: [wso2 integrator, copilot, usage, usage limit, quota, fair usage]
+description: "See how much of your Choreo Integrator Copilot usage remains, what happens when you reach the limit, and how to ask for more."
+keywords: [choreo integrator, copilot, usage, usage limit, quota, fair usage]
 slug: /editor/copilot/usage-limits
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Usage Limits
 
-When you sign in to WSO2 Integrator Copilot with your WSO2 Cloud account, your usage is subject to a limit. Copilot shows how much you have used, lets you know when you reach the limit, and gives you a way to ask for more.
+When you sign in to Choreo Integrator Copilot with your Choreo Cloud account, your usage is subject to a limit. Copilot shows how much you have used, lets you know when you reach the limit, and gives you a way to ask for more.
 
 :::note
 If you signed in with your own AI provider credentials, Copilot shows your provider instead of a usage figure, for example **Anthropic (own key)**. Your provider account handles usage and billing, so this page does not apply to you.
@@ -81,5 +81,5 @@ If you need assistance while your request is being reviewed, the team is happy t
 
 ## See also
 
-- [WSO2 Integrator Copilot](copilot.md) — Sign in to WSO2 Integrator Copilot, including with your own AI provider credentials.
+- [Choreo Integrator Copilot](copilot.md) — Sign in to Choreo Integrator Copilot, including with your own AI provider credentials.
 - [Copilot Architecture and Data Handling](copilot-architecture.md) — How Copilot handles your data, and the bring your own key options.

@@ -1,7 +1,7 @@
 ---
 title: HubSpot
 description: React to HubSpot CRM webhook events using pre-built event handlers for object creation, deletion, property changes, associations, merges, and restores.
-keywords: [wso2 integrator, hubspot, event integration, ballerina]
+keywords: [choreo integrator, hubspot, event integration, ballerina]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/hubspot
 ---
 
@@ -85,7 +85,7 @@ service hubspot:CompanyService on hubspotWebhook {
 
 ## Event handlers
 
-WSO2 Integrator adds handlers for the selected HubSpot object service. Each remote function receives a `hubspot:WebhookEvent` record carrying fields such as `objectId`, `propertyName`, `propertyValue`, `subscriptionType`, `occurredAt`, and `portalId`, with the populated fields depending on the event.
+Choreo Integrator adds handlers for the selected HubSpot object service. Each remote function receives a `hubspot:WebhookEvent` record carrying fields such as `objectId`, `propertyName`, `propertyValue`, `subscriptionType`, `occurredAt`, and `portalId`, with the populated fields depending on the event.
 
 | Service | Handlers | Triggered when |
 |---|---|---|

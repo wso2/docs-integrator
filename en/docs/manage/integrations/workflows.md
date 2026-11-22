@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Manage Workflows
-description: "Start, monitor, and control workflow runs on WSO2 Cloud - Integration Platform, and act on human tasks and reviews."
-keywords: [wso2 cloud, workflows, temporal, workflow runs, human tasks, reviews, reset, terminate]
+description: "Start, monitor, and control workflow runs on Choreo Integration, and act on human tasks and reviews."
+keywords: [choreo cloud, workflows, temporal, workflow runs, human tasks, reviews, reset, terminate]
 slug: /manage/integrations/workflows
 ---
 
@@ -13,7 +13,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 A workflow executes long-running processes that are made of steps, called activities. A workflow can also wait for a person to complete a human task or review an activity before it continues.
 
-From the WSO2 Cloud console, you can start workflows, monitor their runs, control running workflows, and act on human tasks and reviews.
+From the Choreo Cloud console, you can start workflows, monitor their runs, control running workflows, and act on human tasks and reviews.
 
 ## Prerequisites
 

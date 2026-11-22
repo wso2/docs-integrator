@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Service Designer
 
-The Service Designer is the surface you open for any service entry point in WSO2 Integrator. It lists every resource or handler the service exposes and gives you one place to add, edit, remove, try out, and export them.
+The Service Designer is the surface you open for any service entry point in Choreo Integrator. It lists every resource or handler the service exposes and gives you one place to add, edit, remove, try out, and export them.
 
 <ThemedImage
     alt="Service Designer for an HTTP service"

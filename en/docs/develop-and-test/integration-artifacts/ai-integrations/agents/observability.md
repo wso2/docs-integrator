@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: Observe Agent Behavior
-description: Use the built-in dev-time trace server in the WSO2 Integrator to observe LLM and tool calls as your agent runs.
-keywords: [wso2 integrator, observability, tracing, ai agents, dev-time trace, traces]
+description: Use the built-in dev-time trace server in the Choreo Integrator to observe LLM and tool calls as your agent runs.
+keywords: [choreo integrator, observability, tracing, ai agents, dev-time trace, traces]
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/observability
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Observability
 
-When you run an agent, you want to see exactly what it did. Which tools it picked, what it sent to the LLM, what came back, and how long each step took. WSO2 Integrator ships with a **dev-time trace server**, a built-in tracing backend that runs alongside the editor and streams spans into a **Traces** panel as your integration executes. With tracing on, the LLM's tool choices and interpretations of each result are visible in the spans, so you can debug agent behavior without adding print statements.
+When you run an agent, you want to see exactly what it did. Which tools it picked, what it sent to the LLM, what came back, and how long each step took. Choreo Integrator ships with a **dev-time trace server**, a built-in tracing backend that runs alongside the editor and streams spans into a **Traces** panel as your integration executes. With tracing on, the LLM's tool choices and interpretations of each result are visible in the spans, so you can debug agent behavior without adding print statements.
 
 ## Enable tracing
 
@@ -49,7 +49,7 @@ Agents declared inline in source, anywhere outside the AI Chat Agent wizard, don
 2. Run **Ballerina: Enable Tracing**.
 
 <ThemedImage
-    alt="WSO2 Integrator command palette with 'Enable Tracing' typed. The top suggestion is 'Ballerina: Enable Tracing'."
+    alt="Choreo Integrator command palette with 'Enable Tracing' typed. The top suggestion is 'Ballerina: Enable Tracing'."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/observability/04-enable-tracing-command.png'),
         dark: useBaseUrl('/img/genai/develop/agents/observability/04-enable-tracing-command.png'),
@@ -59,7 +59,7 @@ Agents declared inline in source, anywhere outside the AI Chat Agent wizard, don
 To stop tracing, run **Ballerina: Disable Tracing** the same way.
 
 <ThemedImage
-    alt="WSO2 Integrator command palette with 'Disable Tracing' typed. The top suggestion is 'Ballerina: Disable Tracing'."
+    alt="Choreo Integrator command palette with 'Disable Tracing' typed. The top suggestion is 'Ballerina: Disable Tracing'."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/observability/05-disable-tracing-command.png'),
         dark: useBaseUrl('/img/genai/develop/agents/observability/05-disable-tracing-command.png'),

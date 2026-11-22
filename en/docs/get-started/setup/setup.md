@@ -1,7 +1,7 @@
 ---
 title: "Setup"
-description: "Sign up for WSO2 Cloud and launch WSO2 Integrator in the browser-based cloud editor to start building integrations."
-keywords: [wso2 integrator, wso2 cloud, cloud setup, sign up, sign in, account, organization, cloud editor]
+description: "Sign up for Choreo Cloud and launch Choreo Integrator in the browser-based cloud editor to start building integrations."
+keywords: [choreo integrator, choreo cloud, cloud setup, sign up, sign in, account, organization, cloud editor]
 sidebar_position: 0
 slug: /get-started/setup
 ---
@@ -9,23 +9,23 @@ slug: /get-started/setup
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# WSO2 Integration Cloud Setup
+# Choreo Cloud Setup
 
-WSO2 Integrator runs entirely in the browser on WSO2 Integration Cloud, no local installation required. Sign up for an account, then launch the cloud editor to start building integrations.
+Choreo Integrator runs entirely in the browser on Choreo Cloud, no local installation required. Sign up for an account, then launch the cloud editor to start building integrations.
 
-WSO2 Cloud is the identity and access layer for WSO2 Integration Platform. When you sign up, you create an organization and become its admin. An organization is a logical grouping of users and their associated resources. Users and resources in one organization are isolated from all others. Access across organizations is only possible when an admin explicitly invites a user as a member.
+Choreo Cloud is the identity and access layer for Choreo Integration. When you sign up, you create an organization and become its admin. An organization is a logical grouping of users and their associated resources. Users and resources in one organization are isolated from all others. Access across organizations is only possible when an admin explicitly invites a user as a member.
 
-A WSO2 Cloud account gives you access to:
+A Choreo Cloud account gives you access to:
 
 - **WSO2 IPaas**: Deploy and run integrations in a managed cloud environment with built-in CI/CD, environment promotion, observability, and access control.
-- **WSO2 Integrator Copilot features**: Use AI-assisted development in WSO2 Integrator to generate integrations, mappings, and configurations.
+- **Choreo Integrator Copilot features**: Use AI-assisted development in Choreo Integrator to generate integrations, mappings, and configurations.
 
 ## Step 1: Go to the sign-up page
 
-Go to [WSO2 Cloud](https://console.devant.dev/signup) and choose your preferred sign-up option.
+Go to [Choreo Cloud](https://console.devant.dev/signup) and choose your preferred sign-up option.
 
 <ThemedImage
-    alt="WSO2 Cloud sign-up page with available sign-up options"
+    alt="Choreo Cloud sign-up page with available sign-up options"
     sources={{
         light: useBaseUrl('/img/get-started/setup/sign-up-sign-in/sign-up.png'),
         dark: useBaseUrl('/img/get-started/setup/sign-up-sign-in/sign-up.png'),
@@ -74,7 +74,7 @@ To give teammates access, an organization admin can invite them from the organiz
 
 ## Step 5: Open the cloud editor
 
-On the project overview page, click **Create on Cloud**. WSO2 Integrator provisions a cloud editor instance for you, showing progress through each setup stage.
+On the project overview page, click **Create on Cloud**. Choreo Integrator provisions a cloud editor instance for you, showing progress through each setup stage.
 
 <ThemedImage
     alt="Cloud editor instance being created"
@@ -84,10 +84,10 @@ On the project overview page, click **Create on Cloud**. WSO2 Integrator provisi
     }}
 />
 
-Once the instance is ready, the WSO2 Integrator cloud editor opens in your browser, using the same visual designer and pro-code editor available in the desktop IDE. Add an artifact to your integration, then deploy it to WSO2 Cloud from the **Deploy to WSO2 Cloud** panel on the right.
+Once the instance is ready, the Choreo Integrator cloud editor opens in your browser, using the same visual designer and pro-code editor available in the desktop IDE. Add an artifact to your integration, then deploy it to Choreo Cloud from the **Deploy to Choreo Cloud** panel on the right.
 
 <ThemedImage
-    alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
+    alt="Choreo Integrator cloud editor landing page showing an empty integration and the Deploy to Choreo Cloud panel"
     sources={{
         light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
         dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),

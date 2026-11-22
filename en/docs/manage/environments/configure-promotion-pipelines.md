@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Configure Promotion Pipelines
-description: Learn how to create and manage promotion pipelines in WSO2 Cloud - Integration Platform to control how integrations move across environments.
-keywords: [wso2 cloud, deployment pipeline, promotion pipeline, cd pipeline, promotion, environments]
+description: Learn how to create and manage promotion pipelines in Choreo Integration to control how integrations move across environments.
+keywords: [choreo cloud, deployment pipeline, promotion pipeline, cd pipeline, promotion, environments]
 slug: /manage/environments/configure-promotion-pipelines
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Configure Promotion Pipelines
 
-A promotion pipeline defines the ordered sequence of environments through which an integration is promoted. WSO2 Cloud - Integration Platform provides a default pipeline and lets you create additional pipelines to match different promotion strategies across your projects.
+A promotion pipeline defines the ordered sequence of environments through which an integration is promoted. Choreo Integration provides a default pipeline and lets you create additional pipelines to match different promotion strategies across your projects.
 
 ## Default pipeline
 
@@ -21,7 +21,7 @@ Every organization starts with a **Default** pipeline containing two environment
 
 To view and manage promotion pipelines, navigate to the organization level.
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev/).
+1. Sign in to [Choreo Cloud](https://console.devant.dev/).
 2. In the top navigation menu, click the **Organization** list and select your organization.
 3. In the left navigation menu under **Admin**, click **CD Pipelines**.
 

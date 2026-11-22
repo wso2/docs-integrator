@@ -2,27 +2,27 @@
 sidebar_position: 1
 title: Moving to Ballerina 2201.14
 description: Resolve the Ballerina version and dependency screens and build warnings that appear when you open or build an older setup or integration after moving to Ballerina 2201.14.0 and Java 25.
-keywords: [wso2 integrator, migration, troubleshooting, ballerina 2201.14.0, swan lake update 14, java 25, dependencies, upgrade, downgrade, previous version, locking-mode, UnsupportedClassVersionError]
+keywords: [choreo integrator, migration, troubleshooting, ballerina 2201.14.0, swan lake update 14, java 25, dependencies, upgrade, downgrade, previous version, locking-mode, UnsupportedClassVersionError]
 slug: /editor/editor-troubleshooting/moving-to-ballerina-2201-14
 ---
 
 # Moving to Ballerina 2201.14
 
-WSO2 Integrator 5.1.0, the WSO2 Integrator extension 1.2.0, and the Ballerina extension 6.0.0 run on Ballerina 2201.14.0, which moves from Java 21 to Java 25. When you open an older setup or integration in these releases, the editor can show one of two screens instead of your integration. This page explains why each screen appears and the options you have.
+Choreo Integrator 5.1.0, the Choreo Integrator extension 1.2.0, and the Ballerina extension 6.0.0 run on Ballerina 2201.14.0, which moves from Java 21 to Java 25. When you open an older setup or integration in these releases, the editor can show one of two screens instead of your integration. This page explains why each screen appears and the options you have.
 
 | The editor shows | Why | To update | To stay on your current version |
 |---|---|---|---|
-| **WSO2 Integrator cannot start** or **Ballerina Visualizer cannot start** | Your Ballerina version is earlier than 2201.14.0. | [Update Ballerina](#update-ballerina) | [Keep your current Ballerina version](#keep-your-current-ballerina-version) |
+| **Choreo Integrator cannot start** or **Ballerina Visualizer cannot start** | Your Ballerina version is earlier than 2201.14.0. | [Update Ballerina](#update-ballerina) | [Keep your current Ballerina version](#keep-your-current-ballerina-version) |
 | **Your project dependencies need to be updated**, including when you click **Run** or **Debug** | Your integration's dependencies were set up with a Ballerina version earlier than 2201.14.0. | [Update the dependencies](#update-the-dependencies) | [Keep the current dependencies](#keep-the-current-dependencies) |
 
 If you build or run from a terminal or a CI/CD pipeline instead, see [Symptoms outside the editor](#symptoms-outside-the-editor).
 
 ## Ballerina version is incompatible
 
-The editor shows **WSO2 Integrator cannot start**, or **Ballerina Visualizer cannot start** if you use only the Ballerina extension, when your installed Ballerina version is earlier than 2201.14.0. The current extensions need Ballerina 2201.14.0 or later to start.
+The editor shows **Choreo Integrator cannot start**, or **Ballerina Visualizer cannot start** if you use only the Ballerina extension, when your installed Ballerina version is earlier than 2201.14.0. The current extensions need Ballerina 2201.14.0 or later to start.
 
 :::info
-The WSO2 Integrator app bundles its own Ballerina version, so this screen appears only in VS Code.
+The Choreo Integrator app bundles its own Ballerina version, so this screen appears only in VS Code.
 :::
 
 You can either update Ballerina, or keep your current Ballerina version and switch the extensions to their previous versions.
@@ -50,13 +50,13 @@ Switch each installed extension to the version in the following table. These are
 
 | Extension | Switch to |
 |---|---|
-| WSO2 Integrator | 1.0.1 |
+| Choreo Integrator | 1.0.1 |
 | Ballerina | 5.12.5 |
 
-If you use the WSO2 Integrator extension, switch both extensions, starting with the WSO2 Integrator extension. The WSO2 Integrator extension installs the Ballerina extension it needs, so switching the Ballerina extension first can prompt it to install a newer Ballerina extension again. If you use only the Ballerina extension, switch that one.
+If you use the Choreo Integrator extension, switch both extensions, starting with the Choreo Integrator extension. The Choreo Integrator extension installs the Ballerina extension it needs, so switching the Ballerina extension first can prompt it to install a newer Ballerina extension again. If you use only the Ballerina extension, switch that one.
 
 1. Open the **Extensions** view with `Cmd+Shift+X` on macOS, or `Ctrl+Shift+X` on Windows and Linux.
-2. Select the **WSO2 Integrator** extension, then open the dropdown next to **Uninstall** and select **Install Specific Version...**.
+2. Select the **Choreo Integrator** extension, then open the dropdown next to **Uninstall** and select **Install Specific Version...**.
 3. Select the version in the table.
 4. Repeat steps 2 and 3 for the **Ballerina** extension.
 5. Reload the VS Code window when prompted.
@@ -118,8 +118,8 @@ bal build --sticky=false
 
 These commands don't change `distribution` in `Ballerina.toml`. If the file has a `distribution` field, set it to `2201.14.1` by hand.
 
-:::note Running `bal` with the WSO2 Integrator app
-The WSO2 Integrator app bundles its own Ballerina distribution, which usually isn't on your `PATH`. Run the commands in the app's terminal (**Terminal** > **New Terminal**), which uses the bundled `bal`. Outside the app, use the `bal` in the `components/ballerina/bin` directory of the app installation, for example `/Applications/WSO2 Integrator.app/Contents/components/ballerina/bin/bal` on macOS.
+:::note Running `bal` with the Choreo Integrator app
+The Choreo Integrator app bundles its own Ballerina distribution, which usually isn't on your `PATH`. Run the commands in the app's terminal (**Terminal** > **New Terminal**), which uses the bundled `bal`. Outside the app, use the `bal` in the `components/ballerina/bin` directory of the app installation, for example `/Applications/WSO2 Integrator.app/Contents/components/ballerina/bin/bal` on macOS.
 :::
 
 #### If the update fails
@@ -136,7 +136,7 @@ If the update keeps failing, capture the output and report the issue as describe
 
 Commit the updated `Dependencies.toml` and `Ballerina.toml` files so that others working on the integration get the same versions. The integration now needs Ballerina 2201.14.0, so also update the following:
 
-- **Teammates' setups:** everyone working on the integration needs WSO2 Integrator 5.1.0, or VS Code with Ballerina 2201.14.0. A build on an earlier Ballerina version can still succeed, but it sets `distribution-version` in `Dependencies.toml` back to that version. If that change is committed, the editor shows **Your project dependencies need to be updated** again for everyone on 2201.14.0.
+- **Teammates' setups:** everyone working on the integration needs Choreo Integrator 5.1.0, or VS Code with Ballerina 2201.14.0. A build on an earlier Ballerina version can still succeed, but it sets `distribution-version` in `Dependencies.toml` back to that version. If that change is committed, the editor shows **Your project dependencies need to be updated** again for everyone on 2201.14.0.
 - **CI/CD pipelines and Docker images:** update any pipeline step or base image that installs or pins an earlier Ballerina version to 2201.14.1.
 - **Runtime:** executables built with Ballerina 2201.14.0 need Java 25 to run. Update the Java runtime or base image wherever you deploy them. On a Java version earlier than 25, the integration fails to start with an `UnsupportedClassVersionError`.
 
@@ -158,11 +158,11 @@ Switch to the latest Ballerina 2201.13.x version, then switch the extensions to 
 
 Until you finish step 2, the editor shows the **cannot start** screen. That's expected, because the current extensions need Ballerina 2201.14.0.
 
-#### WSO2 Integrator app
+#### Choreo Integrator app
 
-The WSO2 Integrator app bundles its own Ballerina version. Download WSO2 Integrator 5.0.x, which bundles Ballerina 2201.13.x, from the [WSO2 Integrator Downloads page](https://wso2.com/products/downloads/?product=wso2integrator) and install it. The integration opens unchanged, with no dependency update needed.
+The Choreo Integrator app bundles its own Ballerina version. Download Choreo Integrator 5.0.x, which bundles Ballerina 2201.13.x, from the [Choreo Integrator Downloads page](https://wso2.com/products/downloads/?product=wso2integrator) and install it. The integration opens unchanged, with no dependency update needed.
 
-WSO2 Integrator 5.0.x doesn't update itself, so it stays on that version until you install a newer one.
+Choreo Integrator 5.0.x doesn't update itself, so it stays on that version until you install a newer one.
 
 ## Symptoms outside the editor
 

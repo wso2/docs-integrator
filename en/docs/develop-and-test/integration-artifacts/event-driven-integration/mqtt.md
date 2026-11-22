@@ -44,7 +44,7 @@ MQTT event integrations subscribe to one or more MQTT topics and trigger an `onM
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section.
 
    <ThemedImage
        alt="Service Designer showing the MQTT service canvas"

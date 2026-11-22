@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Give Tools to Agent
-description: Reference for adding tools to a WSO2 Integrator AI agent, connections, functions, MCP servers, and custom tools.
+description: Reference for adding tools to a Choreo Integrator AI agent, connections, functions, MCP servers, and custom tools.
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/tools
 ---
 
@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 # Tools
 
-Tools enable AI agents to interact with external systems and perform actions during execution. WSO2 Integrator provides multiple ways to add and configure tools for an AI agent through a unified tool configuration experience.
+Tools enable AI agents to interact with external systems and perform actions during execution. Choreo Integrator provides multiple ways to add and configure tools for an AI agent through a unified tool configuration experience.
 
 This page describes the supported tool types, how to add them to an agent, and how each tool integration option works.
 
@@ -42,7 +42,7 @@ The following tool integration options are available:
 
 | Option | Description |
 |---|---|
-| **Use Connection** | Use an existing WSO2 Integrator connector such as Salesforce, Gmail, MySQL, or GitHub. Each connector operation becomes available as an agent tool. |
+| **Use Connection** | Use an existing Choreo Integrator connector such as Salesforce, Gmail, MySQL, or GitHub. Each connector operation becomes available as an agent tool. |
 | **Use Function** | Expose an existing project function or standard library function as an agent tool. |
 | **Use Agent** | Delegate to another agent, wrapped as a tool, so this agent can hand off requests and use the response. |
 | **Use MCP Server** | Connect to tools hosted on a remote MCP server, including custom, community, or SaaS MCP endpoints. |
@@ -84,7 +84,7 @@ Choosing a category from the **All Categories** dropdown filters the list to sho
 
 Select a connector from the **Popular** list, a category such as **AI & Machine Learning**, or a search result.
 
-After selecting a connector, WSO2 Integrator lists its available operations, searchable by name:
+After selecting a connector, Choreo Integrator lists its available operations, searchable by name:
 
 <ThemedImage
     alt="The Add Tool - Use Connection panel showing the HTTP connector's operations, with a Search 22 actions box and a list including Delete, Execute, Forward, Get, Get next promise, Get promised response, Get response, and Has promise, each with a short description."
@@ -199,7 +199,7 @@ The dialog provides the following configuration for selecting a tool:
 
 After saving, every tool exposed by the MCP server, or every tool selected in **Tools to Include**, becomes available to the agent. These tools appear alongside local function tools and are used transparently from the agent’s perspective.
 
-> **Tip:** A WSO2 Integrator project can also consume its own MCP service. See [Exposing a Service as MCP](../mcp/exposing-as-mcp.md).
+> **Tip:** A Choreo Integrator project can also consume its own MCP service. See [Exposing a Service as MCP](../mcp/exposing-as-mcp.md).
 
 ## 5. Create custom tool
 
@@ -227,7 +227,7 @@ The panel provides the following fields for creating a tool:
 | **Requires Approval** | No | Pauses the tool before it runs and waits for a person to approve the call. See [Gated Tools](gated-tools.md). |
 | **Advanced Configurations** | No | Additional settings such as visibility and Agent Identity client configuration. |
 
-After clicking **Create**, WSO2 Integrator generates a stub function annotated with `@ai:AgentTool`. You can then implement the tool logic inside the generated function.
+After clicking **Create**, Choreo Integrator generates a stub function annotated with `@ai:AgentTool`. You can then implement the tool logic inside the generated function.
 
 ## After adding a tool
 

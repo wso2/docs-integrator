@@ -3,10 +3,10 @@ id: platform-overview
 title: Platform Overview
 sidebar_label: Platform Overview
 sidebar_position: 1
-description: Understand the WSO2 Integration Platform, its development model, integration styles, deployment architecture, and operational lifecycle.
+description: Understand the Choreo Integration, its development model, integration styles, deployment architecture, and operational lifecycle.
 keywords:
-  - WSO2 Integration Platform
-  - WSO2 Integrator
+  - Choreo Integration
+  - Choreo Integrator
   - integration development
   - integrations as APIs
   - event-driven integration
@@ -24,16 +24,16 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Overview
 
-## What is WSO2 Integration Platform?
+## What is Choreo Integration?
 
-WSO2 Integration Platform is a platform for building, running, and managing integrations that connect applications, APIs, data, events, and AI agents across cloud, on-premises, and hybrid environments. It is built on open-source foundations and open standards, and is available both as a fully managed service and as a self-hosted deployment.
+Choreo Integration is a platform for building, running, and managing integrations that connect applications, APIs, data, events, and AI agents across cloud, on-premises, and hybrid environments. It is built on open-source foundations and open standards, and is available both as a fully managed service and as a self-hosted deployment.
 
 It supports the integration lifecycle, from development and testing through deployment, management, and observability. Visual design, source code, AI assistance, and enterprise connectivity work together in a consistent development experience.
 
 The platform separates how you develop an integration from where it runs and how it is operated, giving you flexibility to choose the deployment model that fits your organization.
 
 <ThemedImage
-    alt="WSO2 Integration Platform architecture: development tools, control plane, data plane and observability plane, connecting developers, operators, consumers and enterprise systems"
+    alt="Choreo Integration architecture: development tools, control plane, data plane and observability plane, connecting developers, operators, consumers and enterprise systems"
     sources={{
         light: useBaseUrl('/img/platform-overview/wso2-integration-platform-architecture-v5.1.png'),
         dark: useBaseUrl('/img/platform-overview/wso2-integration-platform-architecture-v5.1.png'),
@@ -42,7 +42,7 @@ The platform separates how you develop an integration from where it runs and how
 
 ## What can you build?
 
-WSO2 Integration Platform supports several integration styles using shared capabilities for connectivity, data transformation, orchestration, security, and error handling.
+Choreo Integration supports several integration styles using shared capabilities for connectivity, data transformation, orchestration, security, and error handling.
 
 | Integration Style | What you can do | 
 |---|---|
@@ -68,9 +68,9 @@ AI serves two roles in the platform: it assists developers in building integrati
 
 The platform brings together following core components.
 
-### WSO2 Integrator
+### Choreo Integrator
 
-WSO2 Integrator is the editor where integrations are built and tested. It is available as an installable desktop application and a browser-based editor through WSO2 Integration Cloud.
+Choreo Integrator is the editor where integrations are built and tested. It is available as an installable desktop application and a browser-based editor through Choreo Cloud.
 
 It combines:
 
@@ -80,11 +80,11 @@ It combines:
 - Testing and debugging to validate behavior before deployment.
 - Visual and code representations remain synchronized, allowing you to move between them as you develop.
 
-WSO2 Integrator is powered by [Ballerina](https://ballerina.io/), a programming language designed for integration. Prior knowledge of Ballerina is **not required** to begin: you can start with APIs, connectors, mappings, and workflows, then use the underlying code when needed.
+Choreo Integrator is powered by [Ballerina](https://ballerina.io/), a programming language designed for integration. Prior knowledge of Ballerina is **not required** to begin: you can start with APIs, connectors, mappings, and workflows, then use the underlying code when needed.
 
-### WSO2 Integration Cloud (WSO2 iPaaS)
+### Choreo Cloud (WSO2 iPaaS)
 
-[WSO2 Integration Cloud](https://console.devant.dev/) is a managed environment for building and running integrations. WSO2 operates the underlying infrastructure, allowing your team to focus on integration development.
+[Choreo Cloud](https://console.devant.dev/) is a managed environment for building and running integrations. WSO2 operates the underlying infrastructure, allowing your team to focus on integration development.
 
 You can develop in the cloud editor, import an existing integration from a source repository, or start with a pre-built sample. The managed service provides deployment, scaling, availability, management, and observability capabilities.
 
@@ -106,17 +106,17 @@ You can choose connectors from the WSO2 Connector Store or generate connectors f
 
 ## Choose your deployment model
 
-Integrations developed in WSO2 Integrator can run in managed or self-hosted environments. The development experience remains consistent; the deployment model determines where integrations execute and who operates the infrastructure.
+Integrations developed in Choreo Integrator can run in managed or self-hosted environments. The development experience remains consistent; the deployment model determines where integrations execute and who operates the infrastructure.
 
 | Deployment model | Where integrations run | Management and observability | Infrastructure responsibility |
 |---|---|---|---|
-| Fully managed iPaaS | WSO2-managed cloud infrastructure | Provided through WSO2 Integration Cloud | WSO2 operates the platform and runtime infrastructure.|
+| Fully managed iPaaS | WSO2-managed cloud infrastructure | Provided through Choreo Cloud | WSO2 operates the platform and runtime infrastructure.|
 | Fully self-hosted | Your infrastructure, including Kubernetes, OpenShift, containers, virtual machines, bare metal, or public/private cloud | Your team operates ICP and the observability infrastructure | Your organization operates the entire environment.| 
 
 {/* TODO(v3): this diagram still shows a private data plane, which is not in v3. Needs redrawing. */}
 
 <ThemedImage
-    alt="Deployment models: self-hosted, where you run both the control plane (ICP) and the data plane, and WSO2 Integration Cloud (iPaaS), where WSO2 manages the control plane and the cloud data plane"
+    alt="Deployment models: self-hosted, where you run both the control plane (ICP) and the data plane, and Choreo Cloud (iPaaS), where WSO2 manages the control plane and the cloud data plane"
     sources={{
         light: useBaseUrl('/img/platform-overview/deployment-models-v5.1.png'),
         dark: useBaseUrl('/img/platform-overview/deployment-models-v5.1.png'),
@@ -131,13 +131,13 @@ The platform supports a continuous integration lifecycle:
 
 | Phase | What happens | 
 |---|---|
-| Develop and test | Build integration logic in WSO2 Integrator using connectors, visual design, code, and AI assistance. Test and debug it before release. | 
+| Develop and test | Build integration logic in Choreo Integrator using connectors, visual design, code, and AI assistance. Test and debug it before release. | 
 | Build and deploy | Package the integration, run automated checks, and deploy it through your delivery pipeline. Validate and promote it across environments. | 
 | Manage | Operate integrations centrally through ICP or the managed cloud experience. | 
 | Observe | Use health information, logs, metrics, and distributed traces to monitor behavior and investigate failures. | 
 
 <ThemedImage
-    alt="Integration lifecycle with WSO2 Integration Platform"
+    alt="Integration lifecycle with Choreo Integration"
     sources={{
         light: useBaseUrl('/img/platform-overview/integration-lifecycle-v5.1.png'),
         dark: useBaseUrl('/img/platform-overview/integration-lifecycle-v5.1.png'),
@@ -158,6 +158,6 @@ The platform supports OpenTelemetry, allowing logs, metrics, and traces to feed 
 
 # Where to go next
 
-- [Concepts](../get-started/concepts/concepts.mdx): Learn the vocabulary used across WSO2 Integration Platform, from organizations and projects to deployment and observability.
+- [Concepts](../get-started/concepts/concepts.mdx): Learn the vocabulary used across Choreo Integration, from organizations and projects to deployment and observability.
 - [Setup](../get-started/setup/setup.md): Set up your development environment.
 - [Quickstarts](../get-started/quickstarts/build-integration-api.md): Build your first integration in under 10 minutes: an API, automation, AI agent, event-driven, or file-driven integration.

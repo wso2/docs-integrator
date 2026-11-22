@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Library View
-description: Build and manage reusable libraries in WSO2 Integrator.
-keywords: [wso2 integrator, editor, library view, reusable libraries, artifacts]
+description: Build and manage reusable libraries in Choreo Integrator.
+keywords: [choreo integrator, editor, library view, reusable libraries, artifacts]
 slug: /editor/views/library-view
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Library View
 
-The Library view is a dedicated view in WSO2 Integrator for creating utilities and shared resources that you can use across multiple integrations. Rather than building executable integrations, you use the Library view to bundle shared type definitions, utility functions, custom connections, and data mapper configurations into a centralized module that other integrations can depend on.
+The Library view is a dedicated view in Choreo Integrator for creating utilities and shared resources that you can use across multiple integrations. Rather than building executable integrations, you use the Library view to bundle shared type definitions, utility functions, custom connections, and data mapper configurations into a centralized module that other integrations can depend on.
 
 <ThemedImage
     alt="Library view overview"

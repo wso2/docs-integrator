@@ -1,6 +1,6 @@
 ---
 title: Message Mapper
-description: "Implement the Message Mapper pattern with WSO2 Integrator."
+description: "Implement the Message Mapper pattern with Choreo Integrator."
 sidebar_position: 6
 slug: /develop-and-test/integration-patterns/message-mapper
 ---

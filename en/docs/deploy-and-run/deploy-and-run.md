@@ -1,8 +1,8 @@
 ---
 sidebar_position: 0
 title: Deploy and Run
-description: Deploy WSO2 Integrator projects to WSO2 Cloud and secure integrations in production.
-keywords: [wso2 integrator, wso2 cloud, deploy, security, overview]
+description: Deploy Choreo Integrator projects to Choreo Cloud and secure integrations in production.
+keywords: [choreo integrator, choreo cloud, deploy, security, overview]
 slug: /deploy-and-run
 hide_table_of_contents: true
 wide_layout: true
@@ -10,9 +10,9 @@ wide_layout: true
 
 # Deploy and Run
 
-Once your integration is ready, this section covers how to ship it to WSO2 Cloud and secure it in production.
+Once your integration is ready, this section covers how to ship it to Choreo Cloud and secure it in production.
 
-WSO2 Cloud runs your integrations on the shared WSO2 Cloud data plane, operated by WSO2.
+Choreo Cloud runs your integrations on the shared Choreo Cloud data plane, operated by WSO2.
 
 <PaletteGrid>
 

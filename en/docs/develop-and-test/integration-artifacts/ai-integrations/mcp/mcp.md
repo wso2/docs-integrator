@@ -2,7 +2,7 @@
 sidebar_position: 0
 sidebar_label: MCP Integration
 title: MCP Integration
-description: Reference for MCP features in WSO2 Integrator. Covers exposing services as MCP servers and consuming MCP servers from AI agents.
+description: Reference for MCP features in Choreo Integrator. Covers exposing services as MCP servers and consuming MCP servers from AI agents.
 slug: /develop-and-test/integration-artifacts/ai-integrations/mcp
 ---
 
@@ -10,13 +10,13 @@ slug: /develop-and-test/integration-artifacts/ai-integrations/mcp
 
 The **Model Context Protocol** (MCP) is an open standard that lets AI assistants discover and call tools exposed by external servers. See the [MCP specification](https://modelcontextprotocol.io) for the protocol details.
 
-WSO2 Integrator can act as both an **MCP server** (exposing your integrations as standardized tools for AI assistants) and an **MCP client** (using tools published by other MCP servers from inside your own AI agents).
+Choreo Integrator can act as both an **MCP server** (exposing your integrations as standardized tools for AI assistants) and an **MCP client** (using tools published by other MCP servers from inside your own AI agents).
 
 ## Features at a glance
 
 | Feature | What it is | Where you find it |
 |---|---|---|
-| [Exposing a service as MCP](exposing-as-mcp.md) | Build an MCP service in WSO2 Integrator. Pick a listener, add tools, and configure each tool's name, description, and parameters. | **Artifacts** > **AI Integration** > **MCP Service**. |
+| [Exposing a service as MCP](exposing-as-mcp.md) | Build an MCP service in Choreo Integrator. Pick a listener, add tools, and configure each tool's name, description, and parameters. | **Artifacts** > **AI Integration** > **MCP Service**. |
 | [Consuming MCP from an agent](consuming-mcp-from-agent.md) | Add an MCP server as a tool source for an AI Agent, optionally filtered to specific tools. | Agent canvas > **+ Add Tool** > **Use MCP Server**. |
 
 ## When to use MCP
@@ -58,7 +58,7 @@ flowchart TB
 
 You can do both in the same project. A single integration might expose a few tools (your CRM lookups) over MCP for outside assistants while also consuming Slack and GitHub MCP servers from its own AI agents.
 
-## Where MCP lives in WSO2 Integrator
+## Where MCP lives in Choreo Integrator
 
 The MCP feature surface is split between the artifact catalogue and the agent's Add Tool dialog:
 
@@ -72,7 +72,7 @@ The MCP feature surface is split between the artifact catalogue and the agent's 
 
 ## Transport
 
-WSO2 Integrator's MCP support runs over **Streamable HTTP**, the modern web-friendly MCP transport. The listener exposes a single endpoint (for example, `http://localhost:8080/mcp`). Clients connect to it, and the protocol multiplexes tool listing and tool calls over the same connection.
+Choreo Integrator's MCP support runs over **Streamable HTTP**, the modern web-friendly MCP transport. The listener exposes a single endpoint (for example, `http://localhost:8080/mcp`). Clients connect to it, and the protocol multiplexes tool listing and tool calls over the same connection.
 
 Because the transport is HTTP, the listener accepts any `http:ListenerConfiguration` option, including TLS, request limits, and timeouts. See [Listener configuration](exposing-as-mcp.md#listener-configuration).
 

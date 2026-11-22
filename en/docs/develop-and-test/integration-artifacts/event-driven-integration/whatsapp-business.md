@@ -1,7 +1,7 @@
 ---
 title: WhatsApp Business
 description: Receive Meta WhatsApp Business Cloud API webhook notifications, such as inbound messages, delivery status updates, and account or template changes, using pre-built event handlers.
-keywords: [wso2 integrator, whatsapp business, event integration, ballerina]
+keywords: [choreo integrator, whatsapp business, event integration, ballerina]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/whatsapp-business
 ---
 
@@ -46,7 +46,7 @@ After starting the integration, configure the webhook in the **Meta App Dashboar
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and an empty **Event Handlers** section.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and an empty **Event Handlers** section.
 
 6. Click **+ Add Handler** to define how incoming events are processed.
 
@@ -165,7 +165,7 @@ Listener constructor parameters (`listenTo` followed by the `business:ListenerCo
 
 ## Event handlers
 
-An event handler is a `remote function` that WSO2 Integrator calls for each WhatsApp Business Cloud webhook event received.
+An event handler is a `remote function` that Choreo Integrator calls for each WhatsApp Business Cloud webhook event received.
 
 ### Adding an event handler
 

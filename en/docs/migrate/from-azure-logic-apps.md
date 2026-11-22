@@ -1,19 +1,19 @@
 ---
 sidebar_position: 3
 title: Migrate from Azure Logic Apps
-description: Migrate Azure Logic Apps workflows to WSO2 Integrator, and how Logic Apps concepts map to their WSO2 Integrator equivalents.
+description: Migrate Azure Logic Apps workflows to Choreo Integrator, and how Logic Apps concepts map to their Choreo Integrator equivalents.
 slug: /migrate/from-azure-logic-apps
 ---
 
 # Migrate from Azure Logic Apps
 
-Azure Logic Apps describes an integration as a declarative workflow definition assembled in JSON. WSO2 Integrator describes the same integration as real Ballerina code you can compile. An automated migration tool does most of that conversion for you. This page covers running it, and how Logic Apps concepts map to their WSO2 Integrator equivalents.
+Azure Logic Apps describes an integration as a declarative workflow definition assembled in JSON. Choreo Integrator describes the same integration as real Ballerina code you can compile. An automated migration tool does most of that conversion for you. This page covers running it, and how Logic Apps concepts map to their Choreo Integrator equivalents.
 
 **Prerequisites:**
 - Ballerina installed with `bal` on your PATH
 
 :::note
-Unlike MuleSoft and TIBCO BusinessWorks, Azure Logic Apps migration doesn't have a WSO2 Integrator wizard yet — it's CLI-only, and the tool's AI-powered conversion is mandatory rather than an optional enhancement.
+Unlike MuleSoft and TIBCO BusinessWorks, Azure Logic Apps migration doesn't have a Choreo Integrator wizard yet — it's CLI-only, and the tool's AI-powered conversion is mandatory rather than an optional enhancement.
 :::
 
 ## Overview
@@ -95,7 +95,7 @@ Run the migrated integration's tests, if the tool generated any from the workflo
 bal test
 ```
 
-Use the **Try-It** tool built into WSO2 Integrator to send requests to your HTTP service interactively without leaving the editor. Open the service file, click **Try it**, and test each endpoint against the responses returned by the original Logic Apps workflow.
+Use the **Try-It** tool built into Choreo Integrator to send requests to your HTTP service interactively without leaving the editor. Open the service file, click **Try it**, and test each endpoint against the responses returned by the original Logic Apps workflow.
 
 ## Deploy
 
@@ -115,7 +115,7 @@ See [Deploy](../deploy-and-run/deploy-and-run.md) for Docker, Kubernetes, and cl
 
 ## Concept and component mapping
 
-| Logic Apps | WSO2 Integrator | Notes |
+| Logic Apps | Choreo Integrator | Notes |
 |---|---|---|
 | Workflow | Service / Automation | HTTP-triggered workflows become **services**; recurrence-triggered workflows become **automations** |
 | HTTP Trigger (Request) | `http:Listener` + service resource | The trigger's method and relative path become the resource's method and path |
@@ -138,7 +138,7 @@ See [Deploy](../deploy-and-run/deploy-and-run.md) for Docker, Kubernetes, and cl
 
 ### Workflow definition vs. Ballerina service
 
-Logic Apps defines a workflow declaratively as JSON: triggers and actions connected by `runAfter` conditions. In WSO2 Integrator, a **service** is a collection of HTTP resources, and control flow is ordinary Ballerina code rather than a graph of steps.
+Logic Apps defines a workflow declaratively as JSON: triggers and actions connected by `runAfter` conditions. In Choreo Integrator, a **service** is a collection of HTTP resources, and control flow is ordinary Ballerina code rather than a graph of steps.
 
 **Logic Apps action (conceptual JSON):**
 ```json
@@ -151,7 +151,7 @@ Logic Apps defines a workflow declaratively as JSON: triggers and actions connec
 }
 ```
 
-**WSO2 Integrator equivalent:**
+**Choreo Integrator equivalent:**
 ```ballerina
 import ballerina/http;
 
@@ -185,7 +185,7 @@ Differences:
 }
 ```
 
-**WSO2 Integrator:**
+**Choreo Integrator:**
 ```ballerina
 do {
     json result = check backendClient->get("/orders/" + orderId);

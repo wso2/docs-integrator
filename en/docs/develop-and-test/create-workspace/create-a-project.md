@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Create a Project
-description: Create a project on WSO2 Cloud to organize your integrations.
+description: Create a project on Choreo Cloud to organize your integrations.
 slug: /develop-and-test/create-workspace/create-a-project
 ---
 
@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Create a Project
 
-A project is the top-level container for your integrations on WSO2 Cloud. Use projects to group related integrations and manage them together. WSO2 Cloud creates a project named **Default** when you first sign up, and you can create more at any time.
+A project is the top-level container for your integrations on Choreo Cloud. Use projects to group related integrations and manage them together. Choreo Cloud creates a project named **Default** when you first sign up, and you can create more at any time.
 
 :::tip
 If your project already exists in a Git repository, import it instead. See [Import a project](import-a-project.md).
@@ -18,7 +18,7 @@ If your project already exists in a Git repository, import it instead. See [Impo
 
 ## Create the project
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev) and click **Organization** in the top navigation to open the organization overview. It lists all the projects in your organization.
+1. Sign in to [Choreo Cloud](https://console.devant.dev) and click **Organization** in the top navigation to open the organization overview. It lists all the projects in your organization.
 2. Click **+ Create**.
 
     <ThemedImage
@@ -53,7 +53,7 @@ If your project already exists in a Git repository, import it instead. See [Impo
 
 5. Click **Create**.
 
-WSO2 Cloud creates the project and opens the project home.
+Choreo Cloud creates the project and opens the project home.
 
 ## Add integrations to the project
 

@@ -2,7 +2,7 @@
 sidebar_position: 1
 title: Customer Review Analyzer with Natural Function
 description: Step-by-step tutorial that builds an HTTP service using a Natural Function to analyze customer reviews and return structured feedback with sentiment, topics, churn risk, and a suggested action.
-keywords: [wso2 integrator, genai, natural functions, tutorial, customer review, sentiment analysis]
+keywords: [choreo integrator, genai, natural functions, tutorial, customer review, sentiment analysis]
 slug: /guides/business-use-cases/review-summarizer-natural-function
 card_icon: natural-functions
 card_summary: Summarize customer reviews with a natural function
@@ -21,11 +21,11 @@ This tutorial walks through building an **HTTP service that uses a Natural Funct
 By the end you will have a `POST /api/v1/analyze` endpoint that takes a single customer review and returns a typed `ReviewResponse` containing the overall sentiment, a concise summary, per-topic sentiment, a churn-risk flag, and a suggested follow-up action. All of it is produced by an LLM, using a Natural Function as the body.
 
 :::caution Experimental feature
-Natural functions are an experimental feature. Enable experimental features in WSO2 Integrator before using them: open **Settings**, expand **Extensions**, select the **Ballerina** extension, and tick **Experimental: Enable Experimental Feature**.
+Natural functions are an experimental feature. Enable experimental features in Choreo Integrator before using them: open **Settings**, expand **Extensions**, select the **Ballerina** extension, and tick **Experimental: Enable Experimental Feature**.
 :::
 
 :::info Default model provider
-Before you start, open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and run **Ballerina: Configure default WSO2 model provider**. Sign in with your WSO2 account when prompted. This is a one-time per-project setup; WSO2 Integrator writes the configuration values into the project automatically.
+Before you start, open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and run **Ballerina: Configure default WSO2 model provider**. Sign in with your WSO2 account when prompted. This is a one-time per-project setup; Choreo Integrator writes the configuration values into the project automatically.
 
 <ThemedImage
     alt={"Command Palette filtered to \"Configure default model provider\", showing matches \"Ballerina: Configure default WSO2 Model Provider\" and \"Ballerina: Configure default model for natural functions (Experimental)\"."}
@@ -61,7 +61,7 @@ From the project sidebar, hover the **Natural Functions** node and click the **+
     }}
 />
 
-(You can also reach the same form from the integration **Overview** page: select **Add Artifact manually** below the WSO2 Integrator Copilot's quick-start cards, then pick **Natural Function** under **Other Artifacts**.)
+(You can also reach the same form from the integration **Overview** page: select **Add Artifact manually** below the Choreo Integrator Copilot's quick-start cards, then pick **Natural Function** under **Other Artifacts**.)
 
 <ThemedImage
     alt="Artifacts page with Other Artifacts section showing Function, Natural Function (Beta) highlighted, Data Mapper, Type, Connection, Agent, and Configuration tiles."
@@ -140,7 +140,7 @@ Paste the following JSON sample into the textarea:
     }}
 />
 
-Click **Import**. WSO2 Integrator infers and registers three types, closes the dialog, and returns you to the completed function form: the parameter row now shows edit/delete icons, and **Return Type** is set to `ReviewResponse`.
+Click **Import**. Choreo Integrator infers and registers three types, closes the dialog, and returns you to the completed function form: the parameter row now shows edit/delete icons, and **Return Type** is set to `ReviewResponse`.
 
 <ThemedImage
     alt="Completed Create New Natural Function form with the customerReview parameter (edit/delete icons) and Return Type set to ReviewResponse, ready to select Create."
@@ -162,9 +162,9 @@ The three registered types appear under the **Types** node in the sidebar:
 
 ### Step 1.4: Create the function
 
-Click **Create**. WSO2 Integrator generates the Ballerina source and opens the function in the **Flow Designer**. The sidebar updates with three additions:
+Click **Create**. Choreo Integrator generates the Ballerina source and opens the function in the **Flow Designer**. The sidebar updates with three additions:
 
-- **Connections**: `_analyzeCustomerReviewsModel` (the model-provider connection WSO2 Integrator created for this function).
+- **Connections**: `_analyzeCustomerReviewsModel` (the model-provider connection Choreo Integrator created for this function).
 - **Types**: `ReviewResponse`, `Topics`, `TopicsItem`.
 - **Natural Functions**: `analyzeCustomerReviews`.
 
@@ -228,7 +228,7 @@ Type the following prompt, and use the **Insert** menu (or just type the paramet
     }}
 />
 
-Click **Save**. The natural function is complete; the Prompt node shows the saved body inline, and behind the scenes WSO2 Integrator generated the Ballerina source.
+Click **Save**. The natural function is complete; the Prompt node shows the saved body inline, and behind the scenes Choreo Integrator generated the Ballerina source.
 
 :::note
 Reopening a saved prompt (clicking the pencil icon again) opens a smaller floating editor with the same text but no formatting toolbar, and **Cancel**/**Save** buttons: a quick-edit view distinct from the full editor used the first time.
@@ -428,7 +428,7 @@ The completed flow, with a **Try It** button now available at the top right:
 
 ### Step 4.1: Run the service
 
-From the resource editor, select **Run**. WSO2 Integrator applies the `--experimental` flag and compiles and starts the service, with progress shown in the integrated terminal.
+From the resource editor, select **Run**. Choreo Integrator applies the `--experimental` flag and compiles and starts the service, with progress shown in the integrated terminal.
 
 ### Step 4.2: Send a test request
 

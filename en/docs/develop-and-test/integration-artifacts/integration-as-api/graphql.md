@@ -1,7 +1,7 @@
 ---
 title: GraphQL Service
 description: Build flexible GraphQL APIs with queries, mutations, and subscriptions using the visual designer or Ballerina code.
-keywords: [wso2 integrator, graphql service, schema, resolver, query, mutation, subscription]
+keywords: [choreo integrator, graphql service, schema, resolver, query, mutation, subscription]
 slug: /develop-and-test/integration-artifacts/integration-as-api/graphql
 ---
 
@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 # GraphQL Service
 
-GraphQL services let clients request exactly the data they need through a single endpoint. WSO2 Integrator supports both code-first and schema-first design, with a visual canvas for modeling types and implementing resolver logic.
+GraphQL services let clients request exactly the data they need through a single endpoint. Choreo Integrator supports both code-first and schema-first design, with a visual canvas for modeling types and implementing resolver logic.
 
 :::note Beta
 GraphQL service support is currently in beta.
@@ -60,7 +60,7 @@ GraphQL service support is currently in beta.
 
 4. Select **Create**.
 
-5. WSO2 Integrator opens the service in the **GraphQL diagram**, an interactive canvas where you define types, fields, and resolvers. The diagram shows the service card labeled with the base path (for example, `/graphql`) and a **+ Create Operations** button. Use the **Configure** button at the top right to edit service and listener settings, and the toolbar at the bottom left to zoom, fit, refresh, or export the diagram.
+5. Choreo Integrator opens the service in the **GraphQL diagram**, an interactive canvas where you define types, fields, and resolvers. The diagram shows the service card labeled with the base path (for example, `/graphql`) and a **+ Create Operations** button. Use the **Configure** button at the top right to edit service and listener settings, and the toolbar at the bottom left to zoom, fit, refresh, or export the diagram.
 
    <ThemedImage
        alt="GraphQL diagram canvas"
@@ -170,7 +170,7 @@ Fields of the `CorsConfig` record:
 
 ## Listener configuration
 
-The listener binds to a port and handles incoming GraphQL connections over HTTP. When you create a GraphQL service, WSO2 Integrator creates an inline listener. You can also declare a named listener or attach the service to an existing `http:Listener` to share a port with HTTP services.
+The listener binds to a port and handles incoming GraphQL connections over HTTP. When you create a GraphQL service, Choreo Integrator creates an inline listener. You can also declare a named listener or attach the service to an existing `http:Listener` to share a port with HTTP services.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>

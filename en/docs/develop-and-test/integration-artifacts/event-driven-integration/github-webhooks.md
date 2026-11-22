@@ -1,7 +1,7 @@
 ---
 title: GitHub Webhooks
 description: React to GitHub repository events — issues, pull requests, releases, pushes, and more — using pre-built event handlers for each event type.
-keywords: [wso2 integrator, github webhooks, github event integration, webhook listener, issues, pull requests, releases]
+keywords: [choreo integrator, github webhooks, github event integration, webhook listener, issues, pull requests, releases]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/github-webhooks
 ---
 
@@ -49,7 +49,7 @@ GitHub event integrations receive webhook callbacks from GitHub and trigger hand
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill, the active event channel pill, and the **Event Handlers** section with all handlers for the selected channel pre-added.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill, the active event channel pill, and the **Event Handlers** section with all handlers for the selected channel pre-added.
 
    <ThemedImage
        alt="Github Service Designer View"
@@ -187,7 +187,7 @@ Each event channel maps to a specific GitHub webhook event type. Select the chan
 
 ## Event handlers
 
-When a GitHub Events service is created, WSO2 Integrator adds all handlers for the selected channel automatically. Click any handler in the **Service Designer** to open the flow diagram view and implement the processing logic.
+When a GitHub Events service is created, Choreo Integrator adds all handlers for the selected channel automatically. Click any handler in the **Service Designer** to open the flow diagram view and implement the processing logic.
 
 ### IssuesService handlers
 

@@ -1,16 +1,16 @@
 ---
 sidebar_position: 0
-title: "WSO2 Cloud - Integration Platform"
-description: "Manage integrations deployed to WSO2 Cloud - Integration Platform, including lifecycle operations, environments, configuration, API management, and access control."
-keywords: [wso2 integrator, wso2 cloud, integration platform, manage, overview]
+title: "Choreo Integration"
+description: "Manage integrations deployed to Choreo Integration, including lifecycle operations, environments, configuration, API management, and access control."
+keywords: [choreo integrator, choreo cloud, integration platform, manage, overview]
 slug: /manage
 hide_table_of_contents: true
 wide_layout: true
 ---
 
-# WSO2 Cloud - Integration Platform
+# Choreo Integration
 
-WSO2 Cloud - Integration Platform is a managed cloud environment for running integrations developed with WSO2 Integrator. Once you push an integration to the cloud, the console gives you full control over how it runs: you can track build and deployment status, promote integrations across environments, configure runtime values and security, monitor runtime logs, and control who has access, all without managing infrastructure.
+Choreo Integration is a managed cloud environment for running integrations developed with Choreo Integrator. Once you push an integration to the cloud, the console gives you full control over how it runs: you can track build and deployment status, promote integrations across environments, configure runtime values and security, monitor runtime logs, and control who has access, all without managing infrastructure.
 
 ## Manage your integrations
 

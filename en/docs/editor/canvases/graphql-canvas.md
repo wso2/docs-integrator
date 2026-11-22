@@ -2,7 +2,7 @@
 sidebar_position: 8
 title: GraphQL Canvas
 description: Design GraphQL services visually, with queries, mutations, subscriptions, and their referenced types on one canvas.
-keywords: [wso2 integrator, graphql canvas, graphql diagram, graphql service, queries, mutations, subscriptions, type nodes]
+keywords: [choreo integrator, graphql canvas, graphql diagram, graphql service, queries, mutations, subscriptions, type nodes]
 slug: /editor/canvases/graphql-canvas
 ---
 

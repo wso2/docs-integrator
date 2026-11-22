@@ -1,7 +1,7 @@
 ---
 title: POP3/IMAP4
 description: Poll email inboxes for incoming messages and process them as integration events using POP3 or IMAP4 listeners.
-keywords: [wso2 integrator, pop3, imap4, email listener, event-driven integration, polling]
+keywords: [choreo integrator, pop3, imap4, email listener, event-driven integration, polling]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/pop3imap4
 ---
 
@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 # POP3/IMAP4
 
-Poll email inboxes for incoming messages and trigger integration logic when new emails arrive. WSO2 Integrator supports both the POP3 and IMAP4 protocols through polling-based listeners that check for new messages at a configurable interval.
+Poll email inboxes for incoming messages and trigger integration logic when new emails arrive. Choreo Integrator supports both the POP3 and IMAP4 protocols through polling-based listeners that check for new messages at a configurable interval.
 
 | Protocol | Description | Default port |
 |---|---|---|

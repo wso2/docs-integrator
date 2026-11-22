@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: "Runtime"
-description: "Configure integration settings per environment on WSO2 Cloud - Integration Platform, and manage reusable configuration groups at the organization level."
-keywords: [wso2 integrator, wso2 cloud, configuration, config groups, environment config]
+description: "Configure integration settings per environment on Choreo Integration, and manage reusable configuration groups at the organization level."
+keywords: [choreo integrator, choreo cloud, configuration, config groups, environment config]
 slug: /manage/configurations/runtime-configurations
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Runtime Configurations
 
-WSO2 Cloud - Integration Platform lets you configure each integration's runtime values per environment. For values shared across multiple integrations, you can define configuration groups at the organization level and link them directly to your integrations.
+Choreo Integration lets you configure each integration's runtime values per environment. For values shared across multiple integrations, you can define configuration groups at the organization level and link them directly to your integrations.
 
 ## Configure an integration
 
@@ -149,4 +149,4 @@ The integration now reads its configurable values from the configuration group. 
 ## What's next
 
 - [Endpoint configurations](./endpoint-configurations.md) — Configure endpoint visibility settings for integrations.
-- [Build configurations](./build-configurations.md) — Control how your integrations are built on WSO2 Cloud - Integration Platform.
+- [Build configurations](./build-configurations.md) — Control how your integrations are built on Choreo Integration.

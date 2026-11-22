@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: "Usage Dashboards"
-description: "Analyze API traffic, errors, latency, cache, and devices on WSO2 Cloud."
-keywords: [wso2 integrator, wso2 cloud, usage insights, dashboards, traffic, errors, latency, billing]
+description: "Analyze API traffic, errors, latency, cache, and devices on Choreo Cloud."
+keywords: [choreo integrator, choreo cloud, usage insights, dashboards, traffic, errors, latency, billing]
 slug: /manage/billing/usage-dashboards
 ---
 
@@ -11,9 +11,9 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Usage Dashboards
 
-WSO2 Cloud provides comprehensive insights into APIs created within WSO2 Cloud. Usage insights provide a range of metrics, including API traffic, error rates, and latency, allowing you to monitor and optimize API performance effectively.
+Choreo Cloud provides comprehensive insights into APIs created within Choreo Cloud. Usage insights provide a range of metrics, including API traffic, error rates, and latency, allowing you to monitor and optimize API performance effectively.
 
-With WSO2 Cloud usage insights, you can:
+With Choreo Cloud usage insights, you can:
 
 - **Analyze API traffic**: Monitor the volume of requests and responses to understand usage patterns.
 - **Track errors**: Identify and analyze errors to improve API reliability.
@@ -25,7 +25,7 @@ By leveraging these insights, businesses can make informed decisions to enhance 
 
 ## View insights
 
-To view usage insights, go to the [WSO2 Cloud Console](https://console.devant.dev/) and click **Insights**, then click **Usage** in the left navigation menu.
+To view usage insights, go to the [Choreo Cloud Console](https://console.devant.dev/) and click **Insights**, then click **Usage** in the left navigation menu.
 
 ## Analyze statistics
 
@@ -298,5 +298,5 @@ The information displayed is as follows:
 
 ## What's next
 
-- [Pricing and plans](./pricing-and-plans.md) — How WSO2 Cloud bills platform services and how to upgrade a service plan.
-- [WSO2 Cloud overview](../manage.md) — How WSO2 Cloud manages your deployed integrations end to end.
+- [Pricing and plans](./pricing-and-plans.md) — How Choreo Cloud bills platform services and how to upgrade a service plan.
+- [Choreo Cloud overview](../manage.md) — How Choreo Cloud manages your deployed integrations end to end.

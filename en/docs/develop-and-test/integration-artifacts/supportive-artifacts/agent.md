@@ -1,11 +1,11 @@
 ---
 title: Agent
 description: A reusable AI agent definition you can reference from a Chat Agent Service, an MCP Service, or a workflow, instead of defining the agent inline each time.
-keywords: [wso2 integrator, agent, ai agent, reusable, supporting artifact]
+keywords: [choreo integrator, agent, ai agent, reusable, supporting artifact]
 slug: /develop-and-test/integration-artifacts/supportive-artifacts/agent
 ---
 
-{/* NOTE: saas-owned copy -- this page is excluded from the wso2-integrator content sync (sync-content-to-saas.yaml, SAAS_OWNED_FILES). References to durable agentic workflows are removed here because durable workflow isn't available on WSO2 Cloud yet; restore them (and drop this page from SAAS_OWNED_FILES) when it ships. */}
+{/* NOTE: saas-owned copy -- this page is excluded from the wso2-integrator content sync (sync-content-to-saas.yaml, SAAS_OWNED_FILES). References to durable agentic workflows are removed here because durable workflow isn't available on Choreo Cloud yet; restore them (and drop this page from SAAS_OWNED_FILES) when it ships. */}
 
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 6
 title: Mocking
-description: Replace external clients and functions with controlled stubs to test integrations in isolation in WSO2 Integrator.
-keywords: [wso2 integrator, mocking, test double, stub, mock function, ballerina test]
+description: Replace external clients and functions with controlled stubs to test integrations in isolation in Choreo Integrator.
+keywords: [choreo integrator, mocking, test double, stub, mock function, ballerina test]
 slug: /develop-and-test/test/test-explorer/mocking
 ---
 

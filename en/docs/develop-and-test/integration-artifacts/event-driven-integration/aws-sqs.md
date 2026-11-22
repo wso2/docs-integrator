@@ -1,7 +1,7 @@
 ---
 title: AWS SQS
 description: Consume messages from an Amazon SQS queue using a polling listener that triggers a handler for each received message and reports listener-level errors.
-keywords: [wso2 integrator, aws sqs, event integration, ballerina]
+keywords: [choreo integrator, aws sqs, event integration, ballerina]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/aws-sqs
 ---
 

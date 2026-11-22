@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Model Providers for LLMs
-description: Reference for every model provider for LLM in WSO2 Integrator, covering create form fields, advanced configurations, defaults, and supported models for the Default WSO2 provider, OpenAI, Azure OpenAI, Anthropic, AWS Bedrock, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.
-keywords: [wso2 integrator, model provider, llm, large language model, ai, anthropic, aws bedrock, openai, azure openai, google vertex, mistral, deepseek, ollama, openrouter, gpt-5, responses api, reasoning effort]
+description: Reference for every model provider for LLM in Choreo Integrator, covering create form fields, advanced configurations, defaults, and supported models for the Default WSO2 provider, OpenAI, Azure OpenAI, Anthropic, AWS Bedrock, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.
+keywords: [choreo integrator, model provider, llm, large language model, ai, anthropic, aws bedrock, openai, azure openai, google vertex, mistral, deepseek, ollama, openrouter, gpt-5, responses api, reasoning effort]
 slug: /develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers
 ---
 
@@ -13,7 +13,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 A **Large Language Model (LLM)** is a neural network trained on large text corpora. You send it a prompt (a text instruction) and it generates a response. LLMs power natural language tasks such as answering questions, summarizing content, extracting structured data, and planning and executing tool calls.
 
-A **Model Provider** is WSO2 Integrator's unified abstraction over LLMs. It wraps the provider-specific API behind a consistent interface, so Direct LLM Calls, Natural Functions, and AI agents all work the same way regardless of which LLM you choose. Pick a provider, fill in the form, and click **Save**.
+A **Model Provider** is Choreo Integrator's unified abstraction over LLMs. It wraps the provider-specific API behind a consistent interface, so Direct LLM Calls, Natural Functions, and AI agents all work the same way regardless of which LLM you choose. Pick a provider, fill in the form, and click **Save**.
 
 Every model provider exposes the same two actions, so switching LLMs is a connection-level swap that leaves the rest of your flow unchanged.
 
@@ -144,7 +144,7 @@ Provided by the core `ballerina/ai` package. Routes through the WSO2 intelligenc
     }}
 />
 
-No provider-specific fields. Sign in with your WSO2 account and WSO2 Integrator handles the rest. There are no advanced configurations on this provider.
+No provider-specific fields. Sign in with your WSO2 account and Choreo Integrator handles the rest. There are no advanced configurations on this provider.
 
 :::tip
 When you click **Save**, the Command Palette opens with **Ballerina: Configure default WSO2 model provider**. Sign in once and the credentials are written to `Config.toml` automatically. You can re-run the command at any time to refresh.

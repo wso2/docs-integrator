@@ -160,7 +160,7 @@ export default function Footer(): ReactNode {
       <div className={styles.footerTop}>
         <div className={styles.footerBrandCol}>
           <div className={styles.footerBrand}>
-            <img className={styles.footerLogo} src={logoSrc} alt="WSO2 Integration Platform" />
+            <img className={styles.footerLogo} src={logoSrc} alt="Choreo Integration" />
             <p className={styles.footerTagline}>{siteConfig.tagline}</p>
           </div>
           <div className={styles.footerSocial}>

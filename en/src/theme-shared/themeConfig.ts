@@ -213,7 +213,7 @@ export const sharedDocsSidebar = {
  * the current site's own landing page (siteConfig.baseUrl), so each
  * product's logo goes to that product, not always to saas. */
 export const sharedNavbarLogo = {
-  alt: 'WSO2 Integration Platform',
+  alt: 'Choreo Integration',
   src: 'img/integration-platform-logo-black.png',
   srcDark: 'img/integration-platform-logo-white.png',
 };

@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Data Mapper
 
-The Data Mapper is the visual surface you open for any data transformation in WSO2 Integrator. It shows the source types on the left, the target type on the right, and the mapping area between them, so you can map fields by creating links or filling expressions instead of writing the conversion function manually. The data mapper is either a typed function with one or more inputs and a single output, or a variable declaration with a supported type. Every change you make here is reflected in the underlying source.
+The Data Mapper is the visual surface you open for any data transformation in Choreo Integrator. It shows the source types on the left, the target type on the right, and the mapping area between them, so you can map fields by creating links or filling expressions instead of writing the conversion function manually. The data mapper is either a typed function with one or more inputs and a single output, or a variable declaration with a supported type. Every change you make here is reflected in the underlying source.
 
 For end-to-end usage, including how to create a data mapper, work with arrays and nested records, and apply transformations, see [Data Mapper](../../develop-and-test/integration-artifacts/supportive-artifacts/data-mapper/data-mapper.md).
 
@@ -123,7 +123,7 @@ The mapping area is the central region between the input and output sides. Links
 
 ## Auto Map
 
-**Auto Map** in the header opens the WSO2 Integrator Copilot panel alongside the canvas with the `/data-map` skill preloaded. Submit it to let the Copilot read the project files and generate field mappings based on the input and output types. When complete, mapping lines appear on the canvas.
+**Auto Map** in the header opens the Choreo Integrator Copilot panel alongside the canvas with the `/data-map` skill preloaded. Submit it to let the Copilot read the project files and generate field mappings based on the input and output types. When complete, mapping lines appear on the canvas.
 
 For more, see [AI data mapping](/develop-and-test/integration-artifacts/supportive-artifacts/data-mapper/ai-mapping).
 

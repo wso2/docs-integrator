@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Debug Your Integration
 title: Debug Your Integration
-description: Set breakpoints, step through code, and inspect program state in a WSO2 Integrator debug session, including test and remote debugging.
-keywords: [wso2 integrator, editor debugging, breakpoints, debug session, remote debugging, test debugging, stepping, watch panel, debug console, expression evaluation]
+description: Set breakpoints, step through code, and inspect program state in a Choreo Integrator debug session, including test and remote debugging.
+keywords: [choreo integrator, editor debugging, breakpoints, debug session, remote debugging, test debugging, stepping, watch panel, debug console, expression evaluation]
 slug: /develop-and-test/debugging
 ---
 
@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 Editor debugging lets you pause an integration mid-run and inspect the values flowing through it. This page covers everything from the everyday quick start (set a breakpoint and launch a debug session) through the full set of features available once a session is running: stepping, inspection panels, advanced breakpoints, and test or remote debugging.
 
 :::info Prerequisites
-- Open the integration project in WSO2 Integrator.
+- Open the integration project in Choreo Integrator.
 - Confirm the integration has an executable entry point, such as a service or an automation.
 - Open the **Problems** panel at the bottom of the editor and make sure the workspace is free of compile errors.
 :::

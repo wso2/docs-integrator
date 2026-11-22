@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Configure Test Lifecycle
-description: Set up and tear down state at suite, group, and per-test levels, and control test execution order in WSO2 Integrator.
-keywords: [wso2 integrator, test lifecycle, BeforeSuite, AfterSuite, BeforeEach, AfterEach, test setup, teardown]
+description: Set up and tear down state at suite, group, and per-test levels, and control test execution order in Choreo Integrator.
+keywords: [choreo integrator, test lifecycle, BeforeSuite, AfterSuite, BeforeEach, AfterEach, test setup, teardown]
 slug: /develop-and-test/test/test-explorer/configure-tests
 ---
 

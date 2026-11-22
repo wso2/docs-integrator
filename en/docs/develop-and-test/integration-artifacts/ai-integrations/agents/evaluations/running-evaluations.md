@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: Run Evaluations
-description: Run AI agent evaluations in WSO2 Integrator and review per-run reports, score trends, and code changes that influenced each result.
-keywords: [wso2 integrator, ai agent, evaluation, report, run history, regression]
+description: Run AI agent evaluations in Choreo Integrator and review per-run reports, score trends, and code changes that influenced each result.
+keywords: [choreo integrator, ai agent, evaluation, report, run history, regression]
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/evaluations/running-evaluations
 ---
 

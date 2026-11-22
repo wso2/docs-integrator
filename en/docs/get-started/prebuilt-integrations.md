@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: "Pre-Built Integrations"
-description: Use prebuilt integrations to connect your applications and automate common use cases on WSO2 Cloud in minutes, without building an integration from scratch.
-keywords: [wso2 integrator, wso2 cloud, prebuilt integration, salesforce, google sheets, automation, quick start]
+description: Use prebuilt integrations to connect your applications and automate common use cases on Choreo Cloud in minutes, without building an integration from scratch.
+keywords: [choreo integrator, choreo cloud, prebuilt integration, salesforce, google sheets, automation, quick start]
 slug: /get-started/prebuilt-integrations
 ---
 
@@ -24,16 +24,16 @@ Building an integration from scratch means learning the platform's abstractions,
 [Sample integrations](../develop-and-test/create-workspace/start-with-sample-integrations.md) teach you the platform's abstractions. Prebuilt integrations are different: each one is a real, already-wired integration for an actual business use case.
 :::
 
-The prebuilt integrations catalog is available in WSO2 Cloud, and you can also browse it from the WSO2 Integrator home screen by selecting **Explore** and filtering by **Pre-built Integrations**. This guide follows the WSO2 Cloud path because it lets you pick a prebuilt integration, configure it, and deploy it in one go, without leaving WSO2 Cloud.
+The prebuilt integrations catalog is available in Choreo Cloud, and you can also browse it from the Choreo Integrator home screen by selecting **Explore** and filtering by **Pre-built Integrations**. This guide follows the Choreo Cloud path because it lets you pick a prebuilt integration, configure it, and deploy it in one go, without leaving Choreo Cloud.
 
 <Prerequisites>
 
 ## Prerequisites
 
-A working WSO2 Integrator environment.
+A working Choreo Integrator environment.
 
-<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">
-  Sign up and launch WSO2 Integrator in the browser-based cloud editor.
+<PrereqCard icon="cloud" title="Choreo Cloud setup" href="/get-started/setup">
+  Sign up and launch Choreo Integrator in the browser-based cloud editor.
 </PrereqCard>
 
 </Prerequisites>
@@ -42,10 +42,10 @@ A working WSO2 Integrator environment.
 
 ## Step 1: Go to the project-level view
 
-Log in to [WSO2 Cloud](https://console.devant.dev), then create a project and navigate to the project-level view. You'll see prebuilt integrations in the **Get Started Quickly** panel on the right. Click **Explore more prebuilt integrations** to see the full catalog.
+Log in to [Choreo Cloud](https://console.devant.dev), then create a project and navigate to the project-level view. You'll see prebuilt integrations in the **Get Started Quickly** panel on the right. Click **Explore more prebuilt integrations** to see the full catalog.
 
 <ThemedImage
-    alt="Project-level view in WSO2 Cloud showing the Get Started Quickly panel with prebuilt integrations"
+    alt="Project-level view in Choreo Cloud showing the Get Started Quickly panel with prebuilt integrations"
     sources={{
         light: useBaseUrl('/img/get-started/prebuilt-integrations/project-level-view.png'),
         dark: useBaseUrl('/img/get-started/prebuilt-integrations/project-level-view.png'),
@@ -134,7 +134,7 @@ After deployment, you land on the integration's overview page. Select **Test** o
 
 Once the execution completes, check the logs, then check your Google Sheet. You'll find a fresh spreadsheet already populated with your Salesforce data.
 
-From here, you can manage, deploy, and observe this integration just like any other integration on WSO2 Cloud.
+From here, you can manage, deploy, and observe this integration just like any other integration on Choreo Cloud.
 
 ## Step 7: Make it yours
 

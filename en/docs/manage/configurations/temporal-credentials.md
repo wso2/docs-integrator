@@ -1,8 +1,8 @@
 ---
 sidebar_position: 8
 title: Temporal Credentials
-description: "Connect workflows on WSO2 Cloud - Integration Platform to a Temporal Cloud namespace or a self-hosted Temporal server, per environment."
-keywords: [wso2 cloud, temporal, temporal cloud, workflows, credentials, mtls, api key, environments]
+description: "Connect workflows on Choreo Integration to a Temporal Cloud namespace or a self-hosted Temporal server, per environment."
+keywords: [choreo cloud, temporal, temporal cloud, workflows, credentials, mtls, api key, environments]
 slug: /manage/configurations/temporal-credentials
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Temporal Credentials
 
-Workflows run on a Temporal server. A Temporal credential tells WSO2 Cloud which Temporal server and namespace to connect to, and how to authenticate.
+Workflows run on a Temporal server. A Temporal credential tells Choreo Cloud which Temporal server and namespace to connect to, and how to authenticate.
 
 You assign each credential to one or more environments. Workflows deployed to an environment connect with that environment's credential. An environment can use only one credential.
 
@@ -22,12 +22,12 @@ Workflows pick up a new or changed credential the next time they are deployed.
 ## Prerequisites
 
 - Permission to manage configuration groups in your organization.
-- A Temporal Cloud namespace, or a self-hosted Temporal server that WSO2 Cloud can reach.
+- A Temporal Cloud namespace, or a self-hosted Temporal server that Choreo Cloud can reach.
 - The authentication details for the server: an API key, or a client certificate and private key in PEM format. A self-hosted server can also run without authentication.
 
 ## Add a Temporal credential
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://console.devant.dev).
 2. In the top navigation, click the **Organization** list and select your organization.
 3. In the left navigation menu, click **Settings** under **Admin**.
 4. Click the **Credentials** tab, then click **Temporal Credentials**.

@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 # Template Rendering
 
-Generate emails, configuration files, reports, API responses, and any other text output by combining templates with structured Ballerina data. WSO2 Integrator uses Apache FreeMarker as its template engine. This library exposes two functions: `render` for inline template strings and `renderFromFile` for `.ftl` files on disk.
+Generate emails, configuration files, reports, API responses, and any other text output by combining templates with structured Ballerina data. Choreo Integrator uses Apache FreeMarker as its template engine. This library exposes two functions: `render` for inline template strings and `renderFromFile` for `.ftl` files on disk.
 
 ## Rendering from a file
 

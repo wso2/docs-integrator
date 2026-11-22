@@ -42,13 +42,13 @@ export type ProductKey = 'cloud' | 'integrator' | 'agentBuilder' | 'connectors';
  * can't import that directly here, see this const's own docstring above). */
 const PRODUCTS: Record<ProductKey, { label: string; path: string; icon: () => ReactNode; tone: string }> = {
   cloud: {
-    label: 'WSO2 Cloud',
+    label: 'Choreo Cloud',
     path: 'saas/',
     icon: PulseIcon,
     tone: 'iconSaas',
   },
   integrator: {
-    label: 'WSO2 Integrator',
+    label: 'Choreo Integrator',
     path: 'integrator/',
     icon: PulseIcon,
     tone: 'iconIntegrator',

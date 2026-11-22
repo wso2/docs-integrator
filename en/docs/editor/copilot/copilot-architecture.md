@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: Copilot Architecture and Data Handling
-description: Understand how WSO2 Integrator Copilot handles prompts, responses, feedback, and authentication data, and the best practices to follow when using AI features.
-keywords: [wso2 integrator, copilot, ai, data handling, privacy, byok, anthropic, aws bedrock, google vertex ai, asgardeo, architecture, data residency, eu region, mcp, web access]
+description: Understand how Choreo Integrator Copilot handles prompts, responses, feedback, and authentication data, and the best practices to follow when using AI features.
+keywords: [choreo integrator, copilot, ai, data handling, privacy, byok, anthropic, aws bedrock, google vertex ai, asgardeo, architecture, data residency, eu region, mcp, web access]
 slug: /editor/copilot/copilot-architecture
 ---
 
@@ -11,30 +11,30 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Copilot Architecture and Data Handling
 
-WSO2 Integrator provides an AI-powered Copilot to enhance developer productivity. This page explains how [WSO2 Integrator Copilot](capabilities.md) works, how user data is handled, and what best practices organizations should follow when using AI features.
+Choreo Integrator provides an AI-powered Copilot to enhance developer productivity. This page explains how [Choreo Integrator Copilot](capabilities.md) works, how user data is handled, and what best practices organizations should follow when using AI features.
 
 These guidelines are designed to ensure transparency, security, and compliance when using AI-powered assistance in enterprise environments.
 
 ## Macro architecture
 
-WSO2 Integrator Copilot is integrated into the WSO2 Integrator developer experience. It works as follows:
+Choreo Integrator Copilot is integrated into the Choreo Integrator developer experience. It works as follows:
 
 <ThemedImage
-    alt="WSO2 Integrator Copilot macro architecture"
+    alt="Choreo Integrator Copilot macro architecture"
     sources={{
         light: useBaseUrl('/img/reference/ai-usage/macro-architecture.png'),
         dark: useBaseUrl('/img/reference/ai-usage/macro-architecture.png'),
     }}
 />
 
-- **WSO2 Integrator Copilot**: Provides in-editor assistance such as code completion, explanations, and suggestions.
+- **Choreo Integrator Copilot**: Provides in-editor assistance such as code completion, explanations, and suggestions.
 - **Language Server**: Powers intelligent features inside the editor, including syntax awareness and integration with Copilot services.
 - **WSO2 Intelligence endpoint**: A lightweight intermediary service that connects the editor to Anthropic or Amazon Bedrock models. This service does not retain data.
 - **Anthropic or Amazon Bedrock integration**: The endpoint forwards user prompts and context to the selected large language model (LLM) provider for processing.
 
 ## Authentication
 
-To maintain security, all WSO2 Integrator Copilot features require authentication:
+To maintain security, all Choreo Integrator Copilot features require authentication:
 
 - Users must [sign in](copilot.md) to enable Copilot functionality.
 - Social sign-in options are supported for ease of use.
@@ -43,7 +43,7 @@ To maintain security, all WSO2 Integrator Copilot features require authenticatio
 This ensures that only authorized users in your organization can access Copilot features.
 
 :::note Fair usage policy
-Access through the WSO2 Cloud sign-in is subject to a fair usage policy.
+Access through the Choreo Cloud sign-in is subject to a fair usage policy.
 :::
 
 ## Data flow
@@ -51,7 +51,7 @@ Access through the WSO2 Cloud sign-in is subject to a fair usage policy.
 The movement of data through Copilot is designed for zero retention at the intermediary layer:
 
 <ThemedImage
-    alt="WSO2 Integrator Copilot data flow"
+    alt="Choreo Integrator Copilot data flow"
     sources={{
         light: useBaseUrl('/img/reference/ai-usage/ai-data-flow.png'),
         dark: useBaseUrl('/img/reference/ai-usage/ai-data-flow.png'),
@@ -64,7 +64,7 @@ The movement of data through Copilot is designed for zero retention at the inter
 
 ### Where your requests go
 
-- **WSO2 Cloud sign-in**: Requests go through WSO2 Intelligence, which runs in the US and in the EU. Copilot uses the region of your WSO2 Cloud account, so an account in the EU region is served from the EU. You don't need to set anything.
+- **Choreo Cloud sign-in**: Requests go through WSO2 Intelligence, which runs in the US and in the EU. Copilot uses the region of your Choreo Cloud account, so an account in the EU region is served from the EU. You don't need to set anything.
 - **Your own AI provider**: Requests go directly from your machine to the provider you signed in with, and do not pass through WSO2 Intelligence. The `/ask` command is the exception: it sends your question to WSO2 Intelligence to look up the Ballerina documentation.
 
 ### What Copilot sends to the AI model
@@ -90,7 +90,7 @@ Your chat sessions are saved on your machine. WSO2 does not store them.
 
 ## Bring your own key (BYOK)
 
-Organizations can configure Copilot to run using their own model provider accounts. This ensures enterprise-level control over data governance and billing. See [WSO2 Integrator Copilot](copilot.md) for the available sign-in options.
+Organizations can configure Copilot to run using their own model provider accounts. This ensures enterprise-level control over data governance and billing. See [Choreo Integrator Copilot](copilot.md) for the available sign-in options.
 
 ### Anthropic deployment
 
@@ -112,7 +112,7 @@ Organizations can configure Copilot to run using their own model provider accoun
 
 ## Open source
 
-WSO2 Integrator Copilot is open source, enabling transparency and community contribution:
+Choreo Integrator Copilot is open source, enabling transparency and community contribution:
 
 - The full source code is available for inspection, download, and modification.
 - This allows organizations to validate the behavior of Copilot.
@@ -175,7 +175,7 @@ General Copilot best practices:
 
 | Data type | Retention period | Notes |
 |---|---|---|
-| Code prompts and responses | Not stored by WSO2 Intelligence | Forwarded to your AI provider: through WSO2 Intelligence with the WSO2 Cloud sign-in, or directly with your own provider. |
+| Code prompts and responses | Not stored by WSO2 Intelligence | Forwarded to your AI provider: through WSO2 Intelligence with the Choreo Cloud sign-in, or directly with your own provider. |
 | User feedback | One week | Retained only when explicitly provided by the user. Includes the current conversation. |
 | Chat sessions | Not stored by WSO2 | Saved on your machine. |
 | Authentication tokens | Session-based | Managed securely by Asgardeo. |
@@ -184,4 +184,4 @@ General Copilot best practices:
 ## See also
 
 - [Built-in Capabilities](capabilities.md) — What Copilot can do.
-- [WSO2 Integrator Copilot](copilot.md) — Sign in to Copilot.
+- [Choreo Integrator Copilot](copilot.md) — Sign in to Copilot.

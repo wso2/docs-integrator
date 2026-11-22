@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 Microsoft Excel files in the XLSX format are a common medium for reports, partner data exchange, and bulk import and export. Spreadsheets move tabular data between business users and systems, often with multiple sheets, typed columns such as dates and amounts, and structured Excel Tables.
 
-WSO2 Integrator provides built-in support for XLSX through the `ballerina/xlsx` module, which binds spreadsheet rows to strongly typed Ballerina records. It combines a one-shot functional API (`parseSheet`, `writeSheet`, `parseTable`, `writeTable`) for single-sheet and single-table work with an object-based Workbook API for multi-sheet operations, byte-array I/O, and cell-level control.
+Choreo Integrator provides built-in support for XLSX through the `ballerina/xlsx` module, which binds spreadsheet rows to strongly typed Ballerina records. It combines a one-shot functional API (`parseSheet`, `writeSheet`, `parseTable`, `writeTable`) for single-sheet and single-table work with an object-based Workbook API for multi-sheet operations, byte-array I/O, and cell-level control.
 
 All processing is local, with no external service dependency. The sections below progress from reading and writing a single sheet, through read options, Excel Tables, and typed columns such as dates and times, to less frequent needs: headerless and fail-safe reads, multi-sheet workbooks, large files, and edge cases.
 

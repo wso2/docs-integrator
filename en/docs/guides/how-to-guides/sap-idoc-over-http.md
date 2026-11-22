@@ -3,7 +3,7 @@ sidebar_position: 8
 title: "Receive IDocs over HTTP from SAP S/4HANA Private Cloud"
 sidebar_label: "Receive IDocs over HTTP from SAP S/4HANA Private Cloud"
 description: Build an HTTP service that receives IDocs that SAP S/4HANA Private Cloud (or SAP ECC) sends as XML through an XML HTTP port, with no SAP connector libraries on the integration side.
-keywords: [wso2 integrator, sap, sap s/4hana private cloud, sap private cloud, sap ecc, idoc, idoc xml, xml http port, ale, matmas, http service, low-code]
+keywords: [choreo integrator, sap, sap s/4hana private cloud, sap private cloud, sap ecc, idoc, idoc xml, xml http port, ale, matmas, http service, low-code]
 slug: /guides/how-to-guides/sap-idoc-over-http
 card_icon: api
 card_summary: Receive MATMAS IDocs from SAP S/4HANA Private Cloud as XML over HTTP in a plain HTTP service, with no SAP libraries
@@ -24,7 +24,7 @@ SAP usually sends IDocs to an external system over transactional RFC, which need
 ## How it works
 
 <ThemedImage
-    alt="Architecture diagram: SAP S/4HANA Private Cloud sends a MATMAS IDoc as XML through an XML HTTP port and an SM59 destination to the WSO2 Integrator HTTP service POST /sap/idocs, which returns 201 Created; the Data Mapper turns the IDoc XML into JSON, ready to send on to a target system such as an ERP, database or message broker"
+    alt="Architecture diagram: SAP S/4HANA Private Cloud sends a MATMAS IDoc as XML through an XML HTTP port and an SM59 destination to the Choreo Integrator HTTP service POST /sap/idocs, which returns 201 Created; the Data Mapper turns the IDoc XML into JSON, ready to send on to a target system such as an ERP, database or message broker"
     style={{border: 'none', boxShadow: 'none', borderRadius: 0}}
     sources={{
         light: useBaseUrl('/img/guides/usecases/sap-idoc-over-http/architecture.png'),
@@ -350,7 +350,7 @@ service /sap on httpDefaultListener {
 Select **Run**. The service starts on port `9090`, so the IDoc endpoint is `http://<integration-host>:9090/sap/idocs`.
 
 <ThemedImage
-    alt="WSO2 Integrator terminal showing bal run compiling sapidocreceiver and running the executable"
+    alt="Choreo Integrator terminal showing bal run compiling sapidocreceiver and running the executable"
     sources={{
         light: useBaseUrl('/img/guides/usecases/sap-idoc-over-http/14-run-console.png'),
         dark: useBaseUrl('/img/guides/usecases/sap-idoc-over-http/14-run-console.png'),
@@ -439,7 +439,7 @@ SAP needs three things: an HTTP destination that points at the integration, an X
 2. Select the new model view, then **Add Message Type**, with the logical system of your SAP client as **Sender**, `WSO2HTTP` as **Receiver**, and `MATMAS` as **Message Type**, then **Save**.
 
     <ThemedImage
-        alt="Distribution model in transaction BD64 with the model view WSO2 Integrator IDoc over HTTP, sending MATMAS from client 100 S/4HANA (S4HCLNT100) to WSO2HTTP, and the message Distribution model has been saved"
+        alt="Distribution model in transaction BD64 with the model view Choreo Integrator IDoc over HTTP, sending MATMAS from client 100 S/4HANA (S4HCLNT100) to WSO2HTTP, and the message Distribution model has been saved"
         sources={{
             light: useBaseUrl('/img/guides/usecases/sap-idoc-over-http/sap-07-bd64-distribution-model.png'),
             dark: useBaseUrl('/img/guides/usecases/sap-idoc-over-http/sap-07-bd64-distribution-model.png'),
@@ -471,7 +471,7 @@ SAP needs three things: an HTTP destination that points at the integration, an X
 2. The integration logs the IDoc and returns the mapped material to SAP. To see the response yourself, post a saved IDoc XML file to the service, for example with `curl -X POST -H "Content-Type: text/xml" --data-binary @matmas05.xml http://localhost:9090/sap/idocs`:
 
     <ThemedImage
-        alt="WSO2 Integrator terminal with the log line IDoc 0000000000057020 received over HTTP for material FG233, and the JSON response with idocNumber, materialNumber FG233, materialType FERT, materialGroup L004 and baseUnit ST"
+        alt="Choreo Integrator terminal with the log line IDoc 0000000000057020 received over HTTP for material FG233, and the JSON response with idocNumber, materialNumber FG233, materialType FERT, materialGroup L004 and baseUnit ST"
         sources={{
             light: useBaseUrl('/img/guides/usecases/sap-idoc-over-http/15-console-idoc-received.png'),
             dark: useBaseUrl('/img/guides/usecases/sap-idoc-over-http/15-console-idoc-received.png'),
@@ -512,6 +512,6 @@ SAP needs three things: an HTTP destination that points at the integration, an X
 ## What's next
 
 - **Secure the endpoint.** Put the service behind your API gateway, or add basic authentication to the HTTP service, and set the matching credentials in the SM59 destination.
-- **Deploy it.** Ship it to [WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md).
+- **Deploy it.** Ship it to [Choreo Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md).
 - **Receive other IDocs.** Add outbound parameters for more message types in `WE20`, such as `DEBMAS` for customers or `ORDERS` for purchase orders, and route on the `MESTYP` field of `EDI_DC40`.
 - **Use the RFC route instead.** To also call BAPIs or answer RFC calls from SAP, use the SAP JCo connector, as shown in [Call RFC Function Modules and Receive IDocs with SAP S/4HANA Private Cloud](sap-rfc-and-idoc-integration.md).

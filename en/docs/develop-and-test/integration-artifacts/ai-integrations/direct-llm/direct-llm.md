@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Direct LLM Calls
-description: Single-page reference for direct LLM calls in WSO2 Integrator, model providers, the generate node, prompts, and typed responses.
-keywords: [wso2 integrator, genai, direct llm, generate node, prompts, typed responses]
+description: Single-page reference for direct LLM calls in Choreo Integrator, model providers, the generate node, prompts, and typed responses.
+keywords: [choreo integrator, genai, direct llm, generate node, prompts, typed responses]
 slug: /develop-and-test/integration-artifacts/ai-integrations/direct-llm
 ---
 
@@ -11,9 +11,9 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Direct LLM Calls
 
-A **direct LLM call** is the simplest way to use AI in WSO2 Integrator. You add a node to a flow, write a prompt, and get a typed response back. No agent loop, no memory, no tools. One round-trip.
+A **direct LLM call** is the simplest way to use AI in Choreo Integrator. You add a node to a flow, write a prompt, and get a typed response back. No agent loop, no memory, no tools. One round-trip.
 
-This page is a single, end-to-end reference for everything you need to make that call work in WSO2 Integrator: adding a model provider, dropping a `generate` node, writing the prompt, and binding the response to a Ballerina type.
+This page is a single, end-to-end reference for everything you need to make that call work in Choreo Integrator: adding a model provider, dropping a `generate` node, writing the prompt, and binding the response to a Ballerina type.
 
 :::tip Looking for a hands-on walkthrough?
 See the **[Email Generator with Direct LLM](../../../../guides/how-to-guides/email-generator-direct-llm.md)** tutorial. It builds a `POST /emails/generate` service end-to-end using everything described on this page.
@@ -32,7 +32,7 @@ See the **[Email Generator with Direct LLM](../../../../guides/how-to-guides/ema
 A typical flow with a direct LLM call has a `generate` node sitting between your inputs and the next step, with a small wire to the model-provider connection on the right.
 
 <ThemedImage
-    alt="A WSO2 Integrator flow on the canvas showing Start, an ai:generate node bound to an aiWso2modelprovider connection on the right, then log:printInfo with template `string ${summary}`, then Return, then Error Handler."
+    alt="A Choreo Integrator flow on the canvas showing Start, an ai:generate node bound to an aiWso2modelprovider connection on the right, then log:printInfo with template `string ${summary}`, then Return, then Error Handler."
     sources={{
         light: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/01-complete-flow-with-direct-llm-v5.1.png'),
         dark: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/01-complete-flow-with-direct-llm-v5.1.png'),
@@ -143,7 +143,7 @@ Click **Save** and the node lands in the flow as `<provider>:generate` (for exam
 
 ## The prompt editor
 
-The **Prompt** is the instruction you send to the LLM. Click any **Prompt** field and WSO2 Integrator opens a rich-text editor in a dialog. The toolbar gives you the usual formatting tools (Insert, undo/redo, Bold, Italic, Link, headings, quote, lists, tables, magic-wand AI assist) and a **Preview / Source** toggle.
+The **Prompt** is the instruction you send to the LLM. Click any **Prompt** field and Choreo Integrator opens a rich-text editor in a dialog. The toolbar gives you the usual formatting tools (Insert, undo/redo, Bold, Italic, Link, headings, quote, lists, tables, magic-wand AI assist) and a **Preview / Source** toggle.
 
 <ThemedImage
     alt="The Prompt editor dialog opened with the toolbar at the top: Insert, undo/redo, Bold, Italic, Link, H1, quote, lists, table, and a magic-wand AI assist icon, plus a Preview/Source toggle."

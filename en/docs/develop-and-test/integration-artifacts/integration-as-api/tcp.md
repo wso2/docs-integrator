@@ -1,7 +1,7 @@
 ---
 title: TCP Service
-description: Handle raw TCP connections and implement custom binary or text-based protocols in WSO2 Integrator.
-keywords: [wso2 integrator, tcp service, tcp listener, connection service, onConnect, onBytes]
+description: Handle raw TCP connections and implement custom binary or text-based protocols in Choreo Integrator.
+keywords: [choreo integrator, tcp service, tcp listener, connection service, onConnect, onBytes]
 slug: /develop-and-test/integration-artifacts/integration-as-api/tcp
 ---
 
@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 # TCP Service
 
-TCP services handle raw TCP connections and are suitable for custom binary or text-based protocol implementations where HTTP overhead is not acceptable. WSO2 Integrator generates a service with a pre-defined `onConnect` handler that returns a connection service instance to manage per-connection lifecycle events.
+TCP services handle raw TCP connections and are suitable for custom binary or text-based protocol implementations where HTTP overhead is not acceptable. Choreo Integrator generates a service with a pre-defined `onConnect` handler that returns a connection service instance to manage per-connection lifecycle events.
 
 :::note
 TCP service support is currently in beta.
@@ -41,7 +41,7 @@ TCP service support is currently in beta.
 
 Expand **Advanced Configurations** to set the **Listener Name** (default: `tcpListener`).
 
-After selecting **Create**, WSO2 Integrator opens the service in the **TCP Service Designer** and generates the `onConnect` handler automatically.
+After selecting **Create**, Choreo Integrator opens the service in the **TCP Service Designer** and generates the `onConnect` handler automatically.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
@@ -85,7 +85,7 @@ Save this as `main.bal`, then run `bal run` from the project directory.
 
 ## TCP Service Designer
 
-After creating the service, WSO2 Integrator opens the **TCP Service Designer**. The designer shows:
+After creating the service, Choreo Integrator opens the **TCP Service Designer**. The designer shows:
 
 - **Listener pill**: the attached listener (for example, `tcpListener`).
 - **Event Handlers section**: the handlers that define how the service responds to connection events. The `onConnect` handler is pre-generated when the service is created.

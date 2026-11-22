@@ -1,6 +1,6 @@
 ---
 title: Service Activator
-description: "Implement the Service Activator pattern with WSO2 Integrator."
+description: "Implement the Service Activator pattern with Choreo Integrator."
 sidebar_position: 9
 slug: /develop-and-test/integration-patterns/service-activator
 ---

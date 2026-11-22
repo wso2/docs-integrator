@@ -3,7 +3,7 @@ sidebar_position: 5
 title: "Raise SAP Business One Purchase Requests for Low-Stock Items"
 sidebar_label: "Raise SAP Business One Purchase Requests for Low-Stock Items"
 description: Build a scheduled automation that finds low-stock items in SAP Business One, raises a purchase request for each, and emails the procurement team, designed visually with SAP Business One and email connections.
-keywords: [wso2 integrator, automation, sap business one, sap b1, inventory, purchasing, email, smtp, notification, low stock, reorder, use case, low-code]
+keywords: [choreo integrator, automation, sap business one, sap b1, inventory, purchasing, email, smtp, notification, low stock, reorder, use case, low-code]
 slug: /guides/business-use-cases/sap-b1-low-stock-purchase-automation
 card_icon: automation
 card_summary: A scheduled, no-code automation that watches inventory and raises purchase requests
@@ -24,14 +24,14 @@ Warehouses run out of stock quietly. Nobody notices a shortage until an order ca
 ## How it works
 
 <ThemedImage
-    alt="Architecture diagram: a scheduled WSO2 Integrator automation uses SAP Business One Inventory, Purchase, and SMTP connectors to read low-stocked items, create a purchase request in SAP Business One, and send an alert email to the procurement team"
+    alt="Architecture diagram: a scheduled Choreo Integrator automation uses SAP Business One Inventory, Purchase, and SMTP connectors to read low-stocked items, create a purchase request in SAP Business One, and send an alert email to the procurement team"
     sources={{
         light: useBaseUrl('/img/guides/usecases/sap-b1-low-stock-automation/architecture.png'),
         dark: useBaseUrl('/img/guides/usecases/sap-b1-low-stock-automation/architecture.png'),
     }}
 />
 
-The WSO2 Integrator Scheduler invokes the automation periodically, and each run follows the same short flow:
+The Choreo Integrator Scheduler invokes the automation periodically, and each run follows the same short flow:
 
 1. Read `Items` from the SAP Business One Service Layer, filtered to those below the reorder threshold.
 2. If nothing is low, log a note and stop.
@@ -42,7 +42,7 @@ The WSO2 Integrator Scheduler invokes the automation periodically, and each run 
 
 :::info Prerequisites
 
-- A working WSO2 Integrator environment. See [Setup](../../get-started/setup/setup.md).
+- A working Choreo Integrator environment. See [Setup](../../get-started/setup/setup.md).
 - Access to an SAP Business One system with the **Service Layer** component running (SAP Business One for SAP HANA, or SAP Business One on Microsoft SQL Server, version 9.3 PL10 or later). If you do not have one, ask your SAP administrator.
 - An SMTP-enabled email account to send the procurement alerts (for example, Gmail with an App Password).
 
@@ -384,5 +384,5 @@ The `inventory:Client` and `purchasing:Client` are generated when you add the co
 
 Now that the automation works, you can take it further:
 
-- **Deploy and schedule it.** Ship it to [WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md), then schedule periodic runs there (a `cron` entry, a Kubernetes `CronJob`, a host scheduler, or the WSO2 Integration Platform).
+- **Deploy and schedule it.** Ship it to [Choreo Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md), then schedule periodic runs there (a `cron` entry, a Kubernetes `CronJob`, a host scheduler, or the Choreo Integration).
 - **Richen the notification.** The [Email connector](product://connectors/catalog/communication/email/email) also supports HTML bodies, CC/BCC, and attachments, so procurement's plain note can become a formatted daily digest listing every item raised in that run.

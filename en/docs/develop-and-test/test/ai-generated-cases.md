@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Generate Tests with AI
-description: Use WSO2 Integrator Copilot to generate, review, and improve test cases during development.
-keywords: [wso2 integrator, ai test generation, copilot, generate tests, ballerina test]
+description: Use Choreo Integrator Copilot to generate, review, and improve test cases during development.
+keywords: [choreo integrator, ai test generation, copilot, generate tests, ballerina test]
 slug: /develop-and-test/test/ai-generated-cases
 ---
 
@@ -11,9 +11,9 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Generate Tests with AI
 
-Writing test cases with [WSO2 Integrator Copilot](../../editor/copilot/copilot.md) works the same way as writing them manually through the visual designer or in Ballerina code. Instead of building each test yourself, you describe what you want in the Copilot chat and it generates the code for you. Copilot generates `@test:Config` functions, data providers, mocks, and lifecycle hooks that slot directly into your existing `tests/` directory and run with `bal test`.
+Writing test cases with [Choreo Integrator Copilot](../../editor/copilot/copilot.md) works the same way as writing them manually through the visual designer or in Ballerina code. Instead of building each test yourself, you describe what you want in the Copilot chat and it generates the code for you. Copilot generates `@test:Config` functions, data providers, mocks, and lifecycle hooks that slot directly into your existing `tests/` directory and run with `bal test`.
 
-## Generate tests with WSO2 Integrator Copilot
+## Generate tests with Choreo Integrator Copilot
 
 Open the Copilot panel and describe the test you want. You can ask for a specific function, a whole service, or a particular scenario. Copilot reads your source code and generates matching Ballerina test code.
 

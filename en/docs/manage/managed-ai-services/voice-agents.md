@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Voice Agents
-description: Enable voice for an AI agent on WSO2 Cloud - Integration Platform by connecting it to LiveKit, a speech-to-text provider, and a text-to-speech provider.
-keywords: [wso2 integrator, wso2 cloud, voice agent, ai agent, livekit, speech to text, text to speech]
+description: Enable voice for an AI agent on Choreo Integration by connecting it to LiveKit, a speech-to-text provider, and a text-to-speech provider.
+keywords: [choreo integrator, choreo cloud, voice agent, ai agent, livekit, speech to text, text to speech]
 slug: /manage/managed-ai-services/voice-agents
 ---
 
@@ -11,24 +11,24 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Voice Agents
 
-A voice agent lets users talk to an AI agent instead of typing. WSO2 Cloud deploys a voice pipeline in front of your AI agent: it streams the user's audio through [LiveKit](https://livekit.io/), converts speech to text, sends the text to the AI agent over WebSocket, and speaks the agent's reply back using a text-to-speech provider.
+A voice agent lets users talk to an AI agent instead of typing. Choreo Cloud deploys a voice pipeline in front of your AI agent: it streams the user's audio through [LiveKit](https://livekit.io/), converts speech to text, sends the text to the AI agent over WebSocket, and speaks the agent's reply back using a text-to-speech provider.
 
 You don't write any extra code for the voice pipeline. It's created and deployed as a separate integration, either from the AI agent's overview page or from **AI Services** > **Voice Agents**.
 
-Voice agents are available to every organization under **AI Services** and don't need to be turned on as a feature preview. They're a paid feature: you need a paid WSO2 Cloud subscription to create one.
+Voice agents are available to every organization under **AI Services** and don't need to be turned on as a feature preview. They're a paid feature: you need a paid Choreo Cloud subscription to create one.
 
 :::tip Start here
-First, build the AI agent, expose it over WebSocket, and deploy it to WSO2 Cloud:
+First, build the AI agent, expose it over WebSocket, and deploy it to Choreo Cloud:
 
-- In **WSO2 Integrator**, add a **Voice Agent Service** to the project and call your agent from it. See [Voice Agent in WSO2 Integrator](https://wso2.com/integration-platform/docs/integrator/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
+- In **Choreo Integrator**, add a **Voice Agent Service** to the project and call your agent from it. See [Voice Agent in Choreo Integrator](https://wso2.com/integration-platform/docs/integrator/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
 - In **WSO2 Agent Builder**, add a **Voice Chat** trigger to the agent, next to its **Agent Chat** trigger. See [Voice Agent in WSO2 Agent Builder](https://wso2.com/integration-platform/docs/agent-builder/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
 
-This page then covers adding the voice pipeline to that agent in WSO2 Cloud.
+This page then covers adding the voice pipeline to that agent in Choreo Cloud.
 :::
 
 :::info Prerequisites
-- A paid WSO2 Cloud subscription. Voice agents are available to all organizations, but **Enable Voice Agents** is disabled on the free tier.
-- An AI agent integration deployed in WSO2 Cloud that exposes a **WebSocket** endpoint. Without one, **Enable Voice Agents** is disabled with the tooltip *Add a WebSocket endpoint to this AI Agent to enable voice.* See [Expose an AI agent over WebSocket](#expose-an-ai-agent-over-websocket).
+- A paid Choreo Cloud subscription. Voice agents are available to all organizations, but **Enable Voice Agents** is disabled on the free tier.
+- An AI agent integration deployed in Choreo Cloud that exposes a **WebSocket** endpoint. Without one, **Enable Voice Agents** is disabled with the tooltip *Add a WebSocket endpoint to this AI Agent to enable voice.* See [Expose an AI agent over WebSocket](#expose-an-ai-agent-over-websocket).
 - A LiveKit project: the LiveKit URL (for example, `wss://your-project.livekit.cloud`), an API key, and an API secret. See [LiveKit credentials](https://docs.livekit.io/deploy/agents/secrets/#livekit-credentials).
 - API keys for your speech-to-text and text-to-speech providers. For OpenAI, create a key on the [OpenAI API keys](https://platform.openai.com/api-keys) page.
 :::
@@ -37,7 +37,7 @@ This page then covers adding the voice pipeline to that agent in WSO2 Cloud.
 
 The voice pipeline sends each transcribed user utterance to the AI agent as a chat message and speaks the returned string. [Create the AI agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent.md), then expose it over WebSocket. You can reuse an agent that you already expose as a [chat agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent.md#create-a-chat-agent), so the same agent answers both chat and voice:
 
-- **WSO2 Integrator**: add a **Voice Agent Service** and call your agent from its `onChatMessage` handler. See [Voice Agent in WSO2 Integrator](https://wso2.com/integration-platform/docs/integrator/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
+- **Choreo Integrator**: add a **Voice Agent Service** and call your agent from its `onChatMessage` handler. See [Voice Agent in Choreo Integrator](https://wso2.com/integration-platform/docs/integrator/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
 - **WSO2 Agent Builder**: open the agent's canvas, click **Add Trigger**, and select **Voice Chat** under **Chat Channels**. Agent Builder wires the agent into the `onChatMessage` handler for you. See [Voice Agent in WSO2 Agent Builder](https://wso2.com/integration-platform/docs/agent-builder/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
 
 Both generate code similar to the following:
@@ -57,7 +57,7 @@ isolated service integration:VoiceService on voiceListener {
 
 In this example, `customerSupportAgent` is a customer support agent with tools to check order status, explain the return policy, and create support tickets, plus short-term memory. Passing `message.sessionId` to the agent keeps the conversation context for the duration of a voice session.
 
-Deploy the integration to WSO2 Cloud so its WebSocket endpoint is running.
+Deploy the integration to Choreo Cloud so its WebSocket endpoint is running.
 
 :::tip
 Write the agent's system prompt for speech: ask for short replies (one or two sentences) with no Markdown, lists, or code. Long or formatted replies take longer to synthesize and sound unnatural when read aloud.
@@ -67,8 +67,8 @@ Write the agent's system prompt for speech: ask for short replies (one or two se
 
 You can create a voice agent in two ways:
 
-- **[From the AI agent's overview page](#from-the-ai-agent-overview-page)**: the quickest option when the AI agent is deployed in WSO2 Cloud. The agent is preselected for you.
-- **[From AI Services > Voice Agents](#from-ai-services--voice-agents)**: lets you pick the project and the target agent yourself. The target can be an agent deployed in WSO2 Cloud (**Platform-Hosted Agent**) or any agent you host yourself that's reachable over WebSocket (**Externally-Hosted Agent**, for development and testing only).
+- **[From the AI agent's overview page](#from-the-ai-agent-overview-page)**: the quickest option when the AI agent is deployed in Choreo Cloud. The agent is preselected for you.
+- **[From AI Services > Voice Agents](#from-ai-services--voice-agents)**: lets you pick the project and the target agent yourself. The target can be an agent deployed in Choreo Cloud (**Platform-Hosted Agent**) or any agent you host yourself that's reachable over WebSocket (**Externally-Hosted Agent**, for development and testing only).
 
 Both options then continue through the same LiveKit, speech-to-text, text-to-speech, and deploy steps.
 
@@ -120,7 +120,7 @@ A four-step wizard opens. The current AI agent is preselected as the target, so 
 
 2. Under **Target Agent**, choose where the agent that answers the caller runs:
 
-    - **Platform-Hosted Agent**: an AI agent that's already deployed in WSO2 Cloud, in the selected project. Pick it from **Select Agent**. The list shows only agents with a deployed WebSocket endpoint. WSO2 Cloud resolves the agent's WebSocket URL for you when it deploys the voice agent. This gives the same result as clicking **Enable Voice Agents** on that agent's overview page.
+    - **Platform-Hosted Agent**: an AI agent that's already deployed in Choreo Cloud, in the selected project. Pick it from **Select Agent**. The list shows only agents with a deployed WebSocket endpoint. Choreo Cloud resolves the agent's WebSocket URL for you when it deploys the voice agent. This gives the same result as clicking **Enable Voice Agents** on that agent's overview page.
 
         <ThemedImage
             alt="Platform-Hosted Agent with voice_agent_integration selected and the display name defaulting to voice_agent_integration - Voice Agent"
@@ -130,7 +130,7 @@ A four-step wizard opens. The current AI agent is preselected as the target, so 
             }}
         />
 
-    - **Externally-Hosted Agent**: any agent you host yourself, outside WSO2 Cloud, that's reachable over WebSocket. Enter its **WebSocket URL**, which must start with `wss://` (or `ws://` for local setups), for example a public tunnel URL such as `wss://<your-host>/voice-agent`. The voice agent uses this URL as its **Target Agent WebSocket URL** configuration, so the agent must stay reachable at that URL while the voice agent is in use.
+    - **Externally-Hosted Agent**: any agent you host yourself, outside Choreo Cloud, that's reachable over WebSocket. Enter its **WebSocket URL**, which must start with `wss://` (or `ws://` for local setups), for example a public tunnel URL such as `wss://<your-host>/voice-agent`. The voice agent uses this URL as its **Target Agent WebSocket URL** configuration, so the agent must stay reachable at that URL while the voice agent is in use.
 
         <ThemedImage
             alt="Externally-Hosted Agent with a public tunnel WebSocket URL"
@@ -236,7 +236,7 @@ Click **Deploy Voice Agent**.
     }}
 />
 
-WSO2 Cloud creates a new integration of type **Voice Agent** in the project, named **`<agent-name> - Voice Agent`** by default, and deploys it to the Development environment. The voice agent connects to the target agent through its **Target Agent WebSocket URL** configuration.
+Choreo Cloud creates a new integration of type **Voice Agent** in the project, named **`<agent-name> - Voice Agent`** by default, and deploys it to the Development environment. The voice agent connects to the target agent through its **Target Agent WebSocket URL** configuration.
 
 <ThemedImage
     alt="Project overview listing voice_agent_integration - Voice Agent of type Voice Agent next to the voice_agent_integration AI agent"

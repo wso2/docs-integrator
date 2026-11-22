@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Create an Agent
-description: Reference for creating AI agents in WSO2 Integrator as Chat Agent Services or inline agents, including roles, instructions, query bindings, and response handling.
+description: Reference for creating AI agents in Choreo Integrator as Chat Agent Services or inline agents, including roles, instructions, query bindings, and response handling.
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent
 ---
 
@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 # Creating an Agent
 
-WSO2 Integrator supports the creation of AI agents as either **Chat agents** or **Inline agents**.
+Choreo Integrator supports the creation of AI agents as either **Chat agents** or **Inline agents**.
 
 ## Chat agents
 
@@ -24,11 +24,11 @@ Inline agents can be embedded directly within integration flows, such as automat
 
 ## Launching the Artifacts page
 
-1. Open your integration project in WSO2 Integrator.
+1. Open your integration project in Choreo Integrator.
 2. On the **Design** tab, select **+ Add Artifact** (or **Add Artifact manually** if the project is still empty).
 
 <ThemedImage
-    alt="Artifacts page in WSO2 Integrator showing all artifact categories: Automation, AI Integration (AI Chat Agent, MCP Service), Integration as API (HTTP Service, GraphQL Service Beta, TCP Service Beta), Event Integration (Kafka, RabbitMQ, MQTT, Azure Service Bus, Salesforce, Twilio, GitHub, Solace, CDC for Microsoft SQL Server, CDC for PostgreSQL)."
+    alt="Artifacts page in Choreo Integrator showing all artifact categories: Automation, AI Integration (AI Chat Agent, MCP Service), Integration as API (HTTP Service, GraphQL Service Beta, TCP Service Beta), Event Integration (Kafka, RabbitMQ, MQTT, Azure Service Bus, Salesforce, Twilio, GitHub, Solace, CDC for Microsoft SQL Server, CDC for PostgreSQL)."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents-v5.1/creating-an-agent/01-artifacts-page-full-v5.1.png'),
         dark: useBaseUrl('/img/genai/develop/agents-v5.1/creating-an-agent/01-artifacts-page-full-v5.1.png'),
@@ -86,9 +86,9 @@ Under **AI Integration**, select **Chat Agent Service**.
         }}
     />
 
-WSO2 Integrator generates the required integration artifacts and displays a progress indicator while configuring the service listener and related components.
+Choreo Integrator generates the required integration artifacts and displays a progress indicator while configuring the service listener and related components.
 
-When it completes, WSO2 Integrator automatically generates the following:
+When it completes, Choreo Integrator automatically generates the following:
 
 - An HTTP service with a `POST /chat` resource
 - A listener endpoint (`chatAgentListener`)
@@ -237,7 +237,7 @@ You can add an inline agent within integration flows, such as automations, REST 
         }}
     />
 
-    This adds the new agent under **Agents** in the sidebar. Immediately after, WSO2 Integrator opens the **AI Agent** node configuration panel to bind this specific invocation of the agent in the flow:
+    This adds the new agent under **Agents** in the sidebar. Immediately after, Choreo Integrator opens the **AI Agent** node configuration panel to bind this specific invocation of the agent in the flow:
 
     | Field | Required | Description |
     |---|---|---|

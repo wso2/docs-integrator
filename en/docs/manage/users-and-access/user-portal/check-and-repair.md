@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: Check and Repair the User Portal
-description: "Check the health of the User Portal in WSO2 Cloud - Integration Platform, repair missing resources, and resolve the blockers that prevent you from enabling or repairing it."
-keywords: [wso2 cloud, user portal, health check, repair, blockers, identity platform]
+description: "Check the health of the User Portal in Choreo Integration, repair missing resources, and resolve the blockers that prevent you from enabling or repairing it."
+keywords: [choreo cloud, user portal, health check, repair, blockers, identity platform]
 slug: /manage/users-and-access/user-portal/check-and-repair
 ---
 
@@ -15,7 +15,7 @@ After you enable the User Portal, the **User Portal** page works as a health che
 
 ## Check the status of the User Portal
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://console.devant.dev).
 2. In the top navigation, click the **Organization** list and select your organization.
 3. In the left navigation menu, click **Settings** under **Admin**.
 4. Click the **User Portal** tab.
@@ -29,7 +29,7 @@ To check the status again without reloading the page, click the **Refresh** icon
 
 ## Repair the User Portal
 
-If a resource is missing or changed, the page shows that the User Portal is enabled but that some items are no longer in place. For example, someone deleted the resource in WSO2 Identity Platform, or removed scopes from the User Portal API resource, its authorization, or one of the default roles. To fix this:
+If a resource is missing or changed, the page shows that the User Portal is enabled but that some items are no longer in place. For example, someone deleted the resource in Choreo Identity, or removed scopes from the User Portal API resource, its authorization, or one of the default roles. To fix this:
 
 1. In your organization, go to **Admin** > **Settings** > **User Portal**.
 2. Fix any blockers that need a manual change. See [Resolve blockers](#resolve-blockers).
@@ -57,6 +57,6 @@ The following table lists the blockers that the page can show:
 
 | Blocker | Common causes | How to fix |
 |---|---|---|
-| **Username Validation** | Your WSO2 Identity Platform organization does not validate usernames as email addresses. The platform does not change this setting, because the change can affect existing users whose usernames are not email addresses. | In WSO2 Identity Platform, go to **Login & Registration** > **Username Validation** and set usernames to be email addresses. Then click the **Refresh** icon. |
-| **Trusted Token Issuer**, **User Portal Application**, or **User Portal API Resource** | A resource with the same name already exists in WSO2 Identity Platform, and the User Portal did not create it. | Rename or remove the resource in WSO2 Identity Platform, then click the **Refresh** icon. |
+| **Username Validation** | Your Choreo Identity organization does not validate usernames as email addresses. The platform does not change this setting, because the change can affect existing users whose usernames are not email addresses. | In Choreo Identity, go to **Login & Registration** > **Username Validation** and set usernames to be email addresses. Then click the **Refresh** icon. |
+| **Trusted Token Issuer**, **User Portal Application**, or **User Portal API Resource** | A resource with the same name already exists in Choreo Identity, and the User Portal did not create it. | Rename or remove the resource in Choreo Identity, then click the **Refresh** icon. |
 | **User Portal API Authorization**, **WSO2 Cloud Admin Role**, or **WSO2 Cloud Reader Role** | The resource is missing, or it lacks some of the scopes that the User Portal needs. | Click **Repair User Portal**. |

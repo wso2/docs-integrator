@@ -1,7 +1,7 @@
 ---
 title: Kafka
 description: Listen to messages from Apache Kafka topics with consumer group management and offset control.
-keywords: [wso2 integrator, kafka, event integration, kafka listener, kafka consumer, offset management]
+keywords: [choreo integrator, kafka, event integration, kafka listener, kafka consumer, offset management]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/kafka
 ---
 
@@ -49,7 +49,7 @@ Listen to messages from Apache Kafka topics with consumer group management, offs
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the **Kafka Listener Designer**. The header shows the listener configuration pill and the **+ Add Handler** button.
+5. Choreo Integrator opens the **Kafka Listener Designer**. The header shows the listener configuration pill and the **+ Add Handler** button.
 
    <ThemedImage
        alt="Kafka Listener Designer showing the listener configuration"

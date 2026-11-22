@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: "Promote an Integration"
-description: "Promote an integration from one environment to the next in the WSO2 Integration Platform."
-keywords: [wso2 integrator, promote integration, environments, development, production, wso2 cloud]
+description: "Promote an integration from one environment to the next in the Choreo Integration."
+keywords: [choreo integrator, promote integration, environments, development, production, choreo cloud]
 slug: /manage/environments/promotion
 ---
 

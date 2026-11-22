@@ -2,9 +2,9 @@
 title: Build a Supplier Order Ingestion Hub
 sidebar_label: Build a Supplier Order Ingestion Hub
 sidebar_position: 2
-description: "Build a B2B file-integration hub with WSO2 Integrator: an FTP service that picks up supplier order files in two different formats (CSV and XML), normalizes both into one canonical model with the data mapper, stores them in MySQL, archives the files, and emails a daily summary from a scheduled automation. Designed end to end in the Visual Designer."
+description: "Build a B2B file-integration hub with Choreo Integrator: an FTP service that picks up supplier order files in two different formats (CSV and XML), normalizes both into one canonical model with the data mapper, stores them in MySQL, archives the files, and emails a daily summary from a scheduled automation. Designed end to end in the Visual Designer."
 slug: /guides/tutorials/file-order-hub
-keywords: [wso2 integrator, tutorial, ftp, sftp, csv, xml, data mapper, mysql, automation, email]
+keywords: [choreo integrator, tutorial, ftp, sftp, csv, xml, data mapper, mysql, automation, email]
 card_icon: file
 card_summary: An FTP hub that normalizes CSV and XML orders into MySQL and emails a daily summary
 card_keywords: [ftp, sftp, csv, xml, data mapper, b2b, automation, email]
@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 
 ## Overview
 
-In this tutorial you build a complete B2B **file ingestion hub** with [WSO2 Integrator](../../platform-overview/index.md), the low-code integration platform built on Ballerina. Suppliers drop order files onto a file server in different formats; your integration turns that mix into one clean, queryable order book, then reports on it daily. You design everything visually, and WSO2 Integrator generates clean Ballerina underneath. Most steps show both: the visual flow on one tab and the generated code on the other.
+In this tutorial you build a complete B2B **file ingestion hub** with [Choreo Integrator](../../platform-overview/index.md), the low-code integration platform built on Ballerina. Suppliers drop order files onto a file server in different formats; your integration turns that mix into one clean, queryable order book, then reports on it daily. You design everything visually, and Choreo Integrator generates clean Ballerina underneath. Most steps show both: the visual flow on one tab and the generated code on the other.
 
 By the end, a CSV file from one supplier and an XML file from another will flow through the same pipeline into a single canonical shape in MySQL, and a scheduled job will email the day's orders as a report.
 
@@ -73,7 +73,7 @@ This walkthrough uses plain **FTP** so the visual steps stay simple and reproduc
 :::info Prerequisites
 Before you start, make sure you have:
 
-- [WSO2 Integrator installed](../../get-started/setup/setup.md).
+- [Choreo Integrator installed](../../get-started/setup/setup.md).
 - A running **FTP server** with the directories `/greenfield`, `/harbor`, `/processed`, and `/errors`, plus a username and password. A Docker setup is below.
 - A running **MySQL** instance. A setup script for the `order_hub` database and its `orders` and `order_lines` tables is below.
 - An **SMTP server** to receive the summary email. A local mock such as [Mailpit](https://github.com/axllent/mailpit) works well for testing (SMTP on `1025`, web inbox on `8025`). A Docker setup is below.
@@ -185,7 +185,7 @@ You created the `order_hub` database and its tables in the Prerequisites; here y
 <details>
 <summary><b>Create the project, canonical model, and database connection</b></summary>
 
-1. Launch **WSO2 Integrator** and, on the **Create a Project** card, click **Create** to [create a project](../../develop-and-test/create-workspace/create-a-project.md#configure-the-project). Name the project `order-hub-freshmart` and choose where it lives on disk. This is the one project that will hold both the intake and the summary integrations from the [architecture](#architecture). Under **What do you want to build?**, select **Integration**, name it `order-intake`, and click **Create**.
+1. Launch **Choreo Integrator** and, on the **Create a Project** card, click **Create** to [create a project](../../develop-and-test/create-workspace/create-a-project.md#configure-the-project). Name the project `order-hub-freshmart` and choose where it lives on disk. This is the one project that will hold both the intake and the summary integrations from the [architecture](#architecture). Under **What do you want to build?**, select **Integration**, name it `order-intake`, and click **Create**.
 
    ![The Create a Project form, with the project named order-hub-freshmart and the integration named order-intake](/img/guides/tutorials/order-hub/create-integration.png)
 
@@ -845,7 +845,7 @@ An automation is a `main` function that runs once per invocation. Its periodic i
 - **Cron job:** schedule the automation from a cron entry on a Unix or Linux host.
 - **Kubernetes:** define a `CronJob` resource to run the automation on a recurring schedule.
 - **VM:** use a host scheduler such as Windows Task Scheduler or systemd timers.
-- **WSO2 Integration Platform:** configure the schedule in the WSO2 Integration Platform when the integration is pushed to the cloud.
+- **Choreo Integration:** configure the schedule in the Choreo Integration when the integration is pushed to the cloud.
 :::
 
 <Tabs>
@@ -862,7 +862,7 @@ An automation is a `main` function that runs once per invocation. Its periodic i
 
    ![The artifact palette with Automation highlighted at the top](/img/guides/tutorials/order-hub/summary-automation-artifact.png)
 
-3. Click **Create**. The automation is a `main` function you schedule externally (cron, Kubernetes, or WSO2 Cloud); see [Creating an automation](../../develop-and-test/integration-artifacts/automation.md#creating-an-automation).
+3. Click **Create**. The automation is a `main` function you schedule externally (cron, Kubernetes, or Choreo Cloud); see [Creating an automation](../../develop-and-test/integration-artifacts/automation.md#creating-an-automation).
 
    ![The Create New Automation screen explaining that periodic invocation is scheduled externally](/img/guides/tutorials/order-hub/summary-automation-create.png)
 
@@ -1184,7 +1184,7 @@ Because `orders` has a `UNIQUE (order_id, supplier_code)` constraint, re-droppin
 
 You have built a complete B2B ingestion hub as two integrations, designed in the Visual Designer: an FTP intake that picks up two file formats through one gated, shared listener, normalizes both into a single canonical `Order` with the data mapper, stores them in MySQL through the persist feature, archives every file, and emails a scheduled daily report.
 
-Explore more of what you can build with WSO2 Integrator:
+Explore more of what you can build with Choreo Integrator:
 
 - [Build an Event-Driven Social Media Backend with RabbitMQ](./social-media.md)
 - [Streaming large files](../../develop-and-test/integration-artifacts/file-driven-integration/ftp-sftp/ftp-sftp.md#streaming-large-files)

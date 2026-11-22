@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Errors and Stack Traces
 description: Read and interpret Ballerina compiler diagnostics, runtime errors, and stack traces.
-keywords: [wso2 integrator, troubleshooting, errors, stack traces, ballerina, compiler errors, runtime errors, panics]
+keywords: [choreo integrator, troubleshooting, errors, stack traces, ballerina, compiler errors, runtime errors, panics]
 slug: /develop-and-test/troubleshooting/errors-and-stack-traces
 ---
 

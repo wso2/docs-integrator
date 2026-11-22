@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Migrate from MuleSoft
-description: Migrate MuleSoft Anypoint integrations to WSO2 Integrator, and how MuleSoft concepts map to their WSO2 Integrator equivalents.
+description: Migrate MuleSoft Anypoint integrations to Choreo Integrator, and how MuleSoft concepts map to their Choreo Integrator equivalents.
 slug: /migrate/from-mulesoft
 ---
 
@@ -13,29 +13,29 @@ import TabAwareToc from '@site/src/components/TabAwareToc';
 
 # Migrate from MuleSoft
 
-MuleSoft configures an integration as a set of flows in Anypoint's XML dialect. WSO2 Integrator describes the same integration as real Ballerina code you can compile. An automated migration tool does most of that conversion for you. This page covers running it, and how MuleSoft concepts map to their WSO2 Integrator equivalents.
+MuleSoft configures an integration as a set of flows in Anypoint's XML dialect. Choreo Integrator describes the same integration as real Ballerina code you can compile. An automated migration tool does most of that conversion for you. This page covers running it, and how MuleSoft concepts map to their Choreo Integrator equivalents.
 
 **Prerequisites:**
-- WSO2 Integrator installed (wizard path), **or** Ballerina installed with `bal` on your PATH (CLI path)
+- Choreo Integrator installed (wizard path), **or** Ballerina installed with `bal` on your PATH (CLI path)
 
 ## Overview
 
-The migration tool converts MuleSoft Anypoint flows (XML configurations) to Ballerina code. It handles HTTP listeners, HTTP request connectors, DataWeave transformations, routers, error handling patterns, and more, using either the WSO2 Integrator migration wizard or the `bal migrate-mule` CLI command. Both paths produce a migration report; the wizard additionally offers an optional AI enhancement pass that resolves unmapped elements automatically.
+The migration tool converts MuleSoft Anypoint flows (XML configurations) to Ballerina code. It handles HTTP listeners, HTTP request connectors, DataWeave transformations, routers, error handling patterns, and more, using either the Choreo Integrator migration wizard or the `bal migrate-mule` CLI command. Both paths produce a migration report; the wizard additionally offers an optional AI enhancement pass that resolves unmapped elements automatically.
 
 ## Run the migration tool
 
 <TabAwareToc />
 <Tabs>
-<TabItem value="ui" label="WSO2 Integrator" default>
+<TabItem value="ui" label="Choreo Integrator" default>
 
-The migration wizard guides you through a 5-step process to convert your MuleSoft project(s) into a WSO2 Integrator project.
+The migration wizard guides you through a 5-step process to convert your MuleSoft project(s) into a Choreo Integrator project.
 
 ### Prerequisite
-- Ensure WSO2 Integrator is installed and available on your system.
+- Ensure Choreo Integrator is installed and available on your system.
 
 ### Step 1: Configure source
 
-1. Open WSO2 Integrator, click **More Actions**, and select **Migrate Integrations from Other Vendors**.
+1. Open Choreo Integrator, click **More Actions**, and select **Migrate Integrations from Other Vendors**.
 
    <ThemedImage
        alt="Migrate Integrations from Other Vendors option"
@@ -128,7 +128,7 @@ The wizard runs the automated rule-based migration and displays progress in the 
 After the migration completes successfully, the **AI Enhancement (Recommended)** section appears. Select one of the following:
 
 - **Enhance with AI** — AI automatically resolves unmapped elements, fixes build errors, and improves migration quality.
-- **Skip for Now – Enhance Later** — Keep the project as-is. You can trigger AI enhancement later from [WSO2 Integrator Copilot](../editor/copilot/copilot.md).
+- **Skip for Now – Enhance Later** — Keep the project as-is. You can trigger AI enhancement later from [Choreo Integrator Copilot](../editor/copilot/copilot.md).
 
 Click **Start AI Enhancement** to proceed to Step 5, or if you chose to skip, click **Open Project** to open the migrated project or **Done** to exit.
 
@@ -146,7 +146,7 @@ This step runs only if you selected **Enhance with AI** in Step 4.
 
 The wizard first checks whether you are signed in. If not, a sign-in panel appears:
 
-1. Click **Login using WSO2 Integration Platform** to sign in using SSO, or use one of the alternative options:
+1. Click **Login using Choreo Integration** to sign in using SSO, or use one of the alternative options:
    - **Enter your Anthropic API key**
    - **Enter your AWS Bedrock credentials**
    - **Enter your Google Vertex AI credentials**
@@ -221,7 +221,7 @@ bal migrate-mule /path/to/mule-project -o /path/to/output-dir -d
 
 For more CLI options and usage, see the [official migration tool documentation](https://central.ballerina.io/wso2/tool_migrate_mule/latest).
 
-> **Note:** AI enhancement is available only in the WSO2 Integrator wizard, not in the CLI.
+> **Note:** AI enhancement is available only in the Choreo Integrator wizard, not in the CLI.
 
 </TabItem>
 </Tabs>
@@ -257,7 +257,7 @@ If the source Mule project had tests, the migration tool converts them to Baller
 bal test
 ```
 
-You can also use the **Try-It** tool built into WSO2 Integrator to send requests to your HTTP service interactively without leaving the editor. Open the service file, click **Try it**, and test each endpoint against the responses returned by the original Mule application.
+You can also use the **Try-It** tool built into Choreo Integrator to send requests to your HTTP service interactively without leaving the editor. Open the service file, click **Try it**, and test each endpoint against the responses returned by the original Mule application.
 
 ## Deploy
 
@@ -277,7 +277,7 @@ See [Deploy](../deploy-and-run/deploy-and-run.md) for Docker, Kubernetes, and cl
 
 ## Concept and component mapping
 
-| MuleSoft | WSO2 Integrator | Notes |
+| MuleSoft | Choreo Integrator | Notes |
 |---|---|---|
 | Mule Flow | Service / Automation | HTTP-triggered flows become **services**; scheduler-triggered flows become **automations** |
 | Sub-flow / Flow Reference | Function | Reusable logic extracted as a Ballerina function; called with a direct function invocation |
@@ -306,7 +306,7 @@ See [Deploy](../deploy-and-run/deploy-and-run.md) for Docker, Kubernetes, and cl
 
 ### DataWeave vs. Ballerina
 
-MuleSoft's DataWeave is a domain-specific language for data transformation. In WSO2 Integrator, the equivalent is **Ballerina itself**. Ballerina is a general-purpose language with first-class support for data transformation.
+MuleSoft's DataWeave is a domain-specific language for data transformation. In Choreo Integrator, the equivalent is **Ballerina itself**. Ballerina is a general-purpose language with first-class support for data transformation.
 
 **DataWeave:**
 ```dataweave
@@ -348,7 +348,7 @@ Key differences:
 
 ### Mule flows vs. Ballerina services
 
-In MuleSoft, a flow is a pipeline of message processors triggered by an inbound endpoint. In WSO2 Integrator, a **service** is a collection of HTTP resources (similar to APIkit Router). Each resource is a function.
+In MuleSoft, a flow is a pipeline of message processors triggered by an inbound endpoint. In Choreo Integrator, a **service** is a collection of HTTP resources (similar to APIkit Router). Each resource is a function.
 
 **MuleSoft flow (conceptual XML):**
 ```xml
@@ -363,7 +363,7 @@ In MuleSoft, a flow is a pipeline of message processors triggered by an inbound 
 </flow>
 ```
 
-**WSO2 Integrator equivalent:**
+**Choreo Integrator equivalent:**
 ```ballerina
 import ballerina/http;
 import ballerinax/postgresql;
@@ -384,7 +384,7 @@ service /api on new http:Listener(8090) {
 ```
 
 Differences:
-- MuleSoft uses XML configuration. WSO2 Integrator uses either the visual designer or Ballerina code (bidirectionally synced).
+- MuleSoft uses XML configuration. Choreo Integrator uses either the visual designer or Ballerina code (bidirectionally synced).
 - MuleSoft passes data through a mutable `MuleEvent` (payload, attributes, variables). Ballerina uses typed function parameters and return values. There is no implicit state.
 - In MuleSoft, the flow pipeline processes one message at a time. In Ballerina, each resource function handles one request and returns a typed response.
 
@@ -402,7 +402,7 @@ Differences:
 </error-handler>
 ```
 
-**WSO2 Integrator:**
+**Choreo Integrator:**
 ```ballerina
 do {
     Order order = check db->queryRow(`SELECT * FROM orders WHERE id = ${orderId}`);
@@ -425,7 +425,7 @@ The key advantage is that Ballerina errors are typed. You handle `postgresql:Err
 ### 1. Flow inventory
 
 The tool categorizes each Mule flow:
-- **API flows** (HTTP Listener + APIkit) → WSO2 Integrator **services**
+- **API flows** (HTTP Listener + APIkit) → Choreo Integrator **services**
 - **Scheduler flows** → **automations**
 - **JMS/Kafka listener flows** → **event handlers**
 - **Batch jobs** → **automations** with streaming/query expressions
@@ -480,7 +480,7 @@ For each MuleSoft connector:
 - DataWeave to transform `{ "customerId": payload.id, "fullName": payload.first_name ++ " " ++ payload.last_name }`
 - Return JSON response
 
-**WSO2 Integrator**:
+**Choreo Integrator**:
 
 ```ballerina
 import ballerina/http;
@@ -522,7 +522,7 @@ service /api on new http:Listener(8090) {
 
 **MuleSoft**: Kafka Listener → DataWeave transform → HTTP POST to downstream service
 
-**WSO2 Integrator**:
+**Choreo Integrator**:
 
 ```ballerina
 import ballerinax/kafka;

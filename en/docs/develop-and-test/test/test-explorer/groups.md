@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: Test Groups
-description: Assign tests to named groups and selectively run or exclude subsets without changing test code in WSO2 Integrator.
-keywords: [wso2 integrator, test groups, run groups, disable groups, ballerina test]
+description: Assign tests to named groups and selectively run or exclude subsets without changing test code in Choreo Integrator.
+keywords: [choreo integrator, test groups, run groups, disable groups, ballerina test]
 slug: /develop-and-test/test/test-explorer/groups
 ---
 

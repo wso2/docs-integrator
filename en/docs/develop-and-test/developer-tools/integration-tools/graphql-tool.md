@@ -34,7 +34,7 @@ The `bal graphql` tool generates Ballerina service skeletons and client code fro
 4. Browse or enter the path to your GraphQL SDL file.
 5. Configure the **Service Base Path** and listener settings.
 6. Click **Create**.
-7. WSO2 Integrator generates the service with resolver stubs and types matching your GraphQL schema.
+7. Choreo Integrator generates the service with resolver stubs and types matching your GraphQL schema.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">

@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Integration View
 description: Work with the Integration view to build and manage individual integrations.
-keywords: [wso2 integrator, editor, integration view, design canvas, deployment]
+keywords: [choreo integrator, editor, integration view, design canvas, deployment]
 slug: /editor/views/integration-view
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Integration View
 
-The Integration view is the primary development interface in WSO2 Integrator. Use it to build, test, and deploy a single integration. It combines a project explorer, a visual design canvas, and deployment options in one unified workspace.
+The Integration view is the primary development interface in Choreo Integrator. Use it to build, test, and deploy a single integration. It combines a project explorer, a visual design canvas, and deployment options in one unified workspace.
 
 <ThemedImage
     alt="Integration view overview"
@@ -56,7 +56,7 @@ You can also scroll to zoom and drag to pan across the canvas.
 
 ### Build with Copilot
 
-Describe what you want in natural language, and [WSO2 Integrator Copilot](../copilot/copilot.md) generates the integration with the appropriate entry points, connections, and logic.
+Describe what you want in natural language, and [Choreo Integrator Copilot](../copilot/copilot.md) generates the integration with the appropriate entry points, connections, and logic.
 
 - **New integration**: The canvas shows the Copilot composer. Describe what you want to build and send it, or pick one of the examples under **Try one of these**.
 
@@ -71,7 +71,7 @@ Describe what you want in natural language, and [WSO2 Integrator Copilot](../cop
 - **Integration with artifacts**: Select the Copilot orb in the bottom-right corner of the canvas. Select it once for a quick chat, or double-click it to open the full Copilot panel.
 
   <ThemedImage
-      alt="The WSO2 Integrator Copilot orb on the integration overview."
+      alt="The Choreo Integrator Copilot orb on the integration overview."
       sources={{
           light: useBaseUrl('/img/editor/copilot/copilot-orb.png'),
           dark: useBaseUrl('/img/editor/copilot/copilot-orb.png'),
@@ -105,7 +105,7 @@ The toolbar sits at the top of the Integration view and provides quick access to
 |---|---|
 | **Undo** / **Redo** | Reverses or reapplies recent changes. Works across both the visual designer and the code editor. |
 | **Configure** | Opens the configuration panel, equivalent to adding a configuration from the project explorer. |
-| **Run** | Builds and runs your integration locally. WSO2 Integrator compiles the Ballerina code, starts the services, and displays the output in the terminal panel. |
+| **Run** | Builds and runs your integration locally. Choreo Integrator compiles the Ballerina code, starts the services, and displays the output in the terminal panel. |
 | **Debug** | Starts a debug session with the debugger attached. Set breakpoints, step through execution, inspect variables and payloads, and evaluate expressions at runtime. |
 | **Deployment** | Shows or hides the deployment options panel on the right side of the view. |
 
@@ -131,7 +131,7 @@ Select **Deployment** in the toolbar to open the deployment options panel on the
 
 | Option | Target |
 |---|---|
-| [**Deploy to WSO2 Cloud**](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) | Fully managed cloud platform for hosting and running integrations. Select **Deploy** to start. |
+| [**Deploy to Choreo Cloud**](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) | Fully managed cloud platform for hosting and running integrations. Select **Deploy** to start. |
 | [**Deploy with Docker**](../../deploy-and-run/self-hosted/containerized-deployment.md) | Build Docker images and deploy integrations to Docker, Kubernetes, or OpenShift. |
 | [**Deploy on a VM**](../../deploy-and-run/self-hosted/vm-deployment.md) | Deploy integrations as standalone JAR files on virtual machines. |
 
@@ -163,4 +163,4 @@ Click **Edit** to modify the README directly. On a new integration that has a RE
 
 - [Flow Canvas](../canvases/flow-canvas/flow-canvas.md) — Build logic using the visual designer.
 - [Integration artifacts](../../develop-and-test/integration-artifacts/integration-artifacts.md) — Learn about artifact types and their configuration.
-- [Deploy to WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) — Deploy your integration to the cloud.
+- [Deploy to Choreo Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) — Deploy your integration to the cloud.

@@ -1,7 +1,7 @@
 ---
 title: Google Chat
 description: React to messages, space membership changes, and card interactions from a Google Chat app using pre-built event handlers for each interaction type.
-keywords: [wso2 integrator, google chat, event integration, ballerina]
+keywords: [choreo integrator, google chat, event integration, ballerina]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/google-chat
 ---
 
@@ -46,7 +46,7 @@ After starting the integration, configure your Chat app in the **Google Cloud Co
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and an empty **Event Handlers** section.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and an empty **Event Handlers** section.
 
 6. Click **+ Add Handler** to define how incoming events are processed.
 
@@ -151,7 +151,7 @@ listener chat:Listener chatListener = new (listenerPort, {auth: authConfig});
 
 ## Event handlers
 
-An event handler is a `remote function` that WSO2 Integrator calls for each Google Chat interaction event received.
+An event handler is a `remote function` that Choreo Integrator calls for each Google Chat interaction event received.
 
 ### Adding an event handler
 

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Node Palette
-description: Every node you can add to a flow in WSO2 Integrator, organized by category, with the fields exposed on each node's configuration form.
-keywords: [wso2 integrator, node palette, flow canvas, connections, statement, control, ai, error handling, concurrency, logging]
+description: Every node you can add to a flow in Choreo Integrator, organized by category, with the fields exposed on each node's configuration form.
+keywords: [choreo integrator, node palette, flow canvas, connections, statement, control, ai, error handling, concurrency, logging]
 slug: /editor/canvases/flow-canvas/node-palette
 ---
 
@@ -382,7 +382,7 @@ The **AI** section of the node panel lets you build AI-powered integrations dire
 | **Direct LLM** | Send a prompt to an LLM and bind the response to a typed variable. | [Direct LLM calls](../../../develop-and-test/integration-artifacts/ai-integrations/direct-llm/direct-llm.md) |
 | **AI Agent** | Run multi-turn workflows where an LLM plans the next step, calls tools, and uses memory. | [AI agents](../../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md) |
 
-For an end-to-end orientation to the AI building blocks in WSO2 Integrator, see the [AI Integrations overview](../../../develop-and-test/integration-artifacts/ai-integrations/ai-integrations.md).
+For an end-to-end orientation to the AI building blocks in Choreo Integrator, see the [AI Integrations overview](../../../develop-and-test/integration-artifacts/ai-integrations/ai-integrations.md).
 
 ### Model Provider
 

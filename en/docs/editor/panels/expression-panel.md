@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Expression Panel
 
-The Expression Panel is the inline value-input surface used throughout the WSO2 Integrator wherever a field accepts an expression. It provides syntax highlighting, inline validation, and a UI that adapts to the type expected at the cursor, so you can supply values without remembering the full Ballerina syntax for each context.
+The Expression Panel is the inline value-input surface used throughout the Choreo Integrator wherever a field accepts an expression. It provides syntax highlighting, inline validation, and a UI that adapts to the type expected at the cursor, so you can supply values without remembering the full Ballerina syntax for each context.
 
 You can recognize the panel by the `fx` icon next to a field. Selecting it opens the inline panel. The expand control opens the same panel in a larger view for longer expressions.
 

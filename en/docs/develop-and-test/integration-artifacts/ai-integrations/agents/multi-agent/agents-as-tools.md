@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Agents as Tools
-description: Attach an agent as a tool of another AI agent in WSO2 Integrator by reusing an existing instance, creating a new agent, or instantiating a shared agent definition.
+description: Attach an agent as a tool of another AI agent in Choreo Integrator by reusing an existing instance, creating a new agent, or instantiating a shared agent definition.
 ---
 
 import ThemedImage from '@theme/ThemedImage';

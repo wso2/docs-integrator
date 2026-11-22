@@ -39,7 +39,7 @@ const STEPS = [
 
 export default function Contribute(): ReactNode {
   return (
-    <Layout title="Contribute" description="How to contribute to the WSO2 Integration Platform documentation.">
+    <Layout title="Contribute" description="How to contribute to the Choreo Integration documentation.">
       <header className={styles.hero}>
         <div className={styles.heroInner}>
           <Heading as="h1">Contribute</Heading>

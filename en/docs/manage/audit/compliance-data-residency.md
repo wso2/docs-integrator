@@ -1,14 +1,14 @@
 ---
 sidebar_position: 3
 title: "Data Residency and Compliance"
-description: "How WSO2 Cloud handles data residency, retention, encryption, and compliance for logs and metrics."
-keywords: [wso2 integrator, wso2 cloud, compliance, data residency, data retention, encryption, dsar, breach notification]
+description: "How Choreo Cloud handles data residency, retention, encryption, and compliance for logs and metrics."
+keywords: [choreo integrator, choreo cloud, compliance, data residency, data retention, encryption, dsar, breach notification]
 slug: /manage/audit/compliance-data-residency
 ---
 
 # Data Residency and Compliance
 
-WSO2 Cloud protects the confidentiality, integrity, and availability of the data collected through its logs and metrics solutions. This page describes how WSO2 Cloud handles data residency, security, and compliance to meet legal and organizational requirements.
+Choreo Cloud protects the confidentiality, integrity, and availability of the data collected through its logs and metrics solutions. This page describes how Choreo Cloud handles data residency, security, and compliance to meet legal and organizational requirements.
 
 ## Data privacy and sovereignty
 
@@ -33,7 +33,7 @@ The following attributes are classified and collected.
 
 ## Data retention and backups
 
-WSO2 Cloud uses a tiered retention policy to give fast access to operational data while providing safeguards for recovery.
+Choreo Cloud uses a tiered retention policy to give fast access to operational data while providing safeguards for recovery.
 
 - **Insights**. Retained for 6 months for storing and analyzing usage data.
 - **Log storage**. Logs are stored for 30 days for all users.

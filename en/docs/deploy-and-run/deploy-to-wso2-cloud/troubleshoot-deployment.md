@@ -1,19 +1,19 @@
 ---
 sidebar_position: 7
 title: Troubleshoot Deployment
-description: Troubleshoot issues that appear when running integrations on WSO2 Cloud.
+description: Troubleshoot issues that appear when running integrations on Choreo Cloud.
 slug: /deploy-and-run/deploy-to-wso2-cloud/troubleshoot-deployment
 ---
 
 # Troubleshoot Deployment
 
-This page covers issues that surface only after an integration leaves your machine and runs on WSO2 Cloud, including configuration injected at runtime.
+This page covers issues that surface only after an integration leaves your machine and runs on Choreo Cloud, including configuration injected at runtime.
 
 Before you start digging into the deployment layer, confirm the integration runs locally with `bal build && bal run`. If it fails locally, fix the integration first using the other pages in this section. If it works locally but breaks once deployed, the issue is in the deployment environment, and the section below helps you isolate it.
 
 ## Configuration in deployed environments
 
-On WSO2 Cloud, configurable values are not read from a `Config.toml` file in the repository. They are set per environment from the integration's **Configure** view and injected at runtime, so a value that works locally can still be missing or wrong once deployed.
+On Choreo Cloud, configurable values are not read from a `Config.toml` file in the repository. They are set per environment from the integration's **Configure** view and injected at runtime, so a value that works locally can still be missing or wrong once deployed.
 
 If a deployed integration fails to start with `value not provided for required configurable variable`, the configurable was declared in the integration but never given a value for that environment.
 

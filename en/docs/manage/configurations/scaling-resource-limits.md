@@ -1,8 +1,8 @@
 ---
 sidebar_position: 6
 title: "Scaling"
-description: "Configure autoscaling for integrations deployed on WSO2 Cloud - Integration Platform."
-keywords: [wso2 integrator, wso2 cloud, scaling, replicas, autoscale, hpa]
+description: "Configure autoscaling for integrations deployed on Choreo Integration."
+keywords: [choreo integrator, choreo cloud, scaling, replicas, autoscale, hpa]
 slug: /manage/configurations/scaling-resource-limits
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Scale Integrations
 
-WSO2 Cloud - Integration Platform scales integrations with horizontal autoscaling based on resource consumption. Autoscaling can be configured independently per environment.
+Choreo Integration scales integrations with horizontal autoscaling based on resource consumption. Autoscaling can be configured independently per environment.
 
 :::info
 Autoscaling is only available in paid plans. In the free tier, integrations run in single-replica, low-availability mode. You will see a view similar to below if you are on the free tier.

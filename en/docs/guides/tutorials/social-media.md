@@ -2,9 +2,9 @@
 title: Build an Event-Driven Social Media Backend
 sidebar_label: Build an Event-Driven Social Media Backend
 sidebar_position: 1
-description: "Build a Twitter-style social media backend with WSO2 Integrator: a REST API that screens every post for sentiment, stores it in MySQL, and announces it to Slack through a RabbitMQ event pipeline. Designed end to end in the Visual Designer, split across three integrations."
+description: "Build a Twitter-style social media backend with Choreo Integrator: a REST API that screens every post for sentiment, stores it in MySQL, and announces it to Slack through a RabbitMQ event pipeline. Designed end to end in the Visual Designer, split across three integrations."
 slug: /guides/tutorials/social-media
-keywords: [wso2 integrator, tutorial, http service, rabbitmq, slack, mysql, event-driven]
+keywords: [choreo integrator, tutorial, http service, rabbitmq, slack, mysql, event-driven]
 card_icon: event
 card_summary: A REST API that screens posts and announces them to Slack through RabbitMQ
 card_keywords: [twitter, sentiment, rabbitmq, slack, mysql, http, event-driven]
@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 
 ## Overview
 
-In this tutorial you build a complete, Twitter-style social media backend with [WSO2 Integrator](../../platform-overview/index.md), the low-code integration platform built on Ballerina. You design everything visually, and WSO2 Integrator generates clean Ballerina underneath. Most parts show both: the visual steps on one tab, and the exact code the platform produced on the other.
+In this tutorial you build a complete, Twitter-style social media backend with [Choreo Integrator](../../platform-overview/index.md), the low-code integration platform built on Ballerina. You design everything visually, and Choreo Integrator generates clean Ballerina underneath. Most parts show both: the visual steps on one tab, and the exact code the platform produced on the other.
 
 By the end, a single `POST` will flow from the API through a user check and sentiment screening into MySQL, and out to a Slack channel.
 
@@ -48,7 +48,7 @@ RabbitMQ is a first-class [event integration trigger](../../develop-and-test/int
 :::info Prerequisites
 Before you start, make sure you have:
 
-- [WSO2 Integrator installed](../../get-started/setup/setup.md).
+- [Choreo Integrator installed](../../get-started/setup/setup.md).
 - A running **MySQL** instance. A setup script for the `social_media` database is below. See also [Set up a MySQL database and user](pathname:///integration-platform/docs/connectors/catalog/database/mysql/setup-guide#create-a-mysql-database-and-user).
 - A running **RabbitMQ** broker. See the [RabbitMQ setup guide](pathname:///integration-platform/docs/connectors/catalog/messaging/rabbitmq/setup-guide).
 - A **Slack** app with a bot token. See [Create a Slack application](pathname:///integration-platform/docs/connectors/catalog/communication/slack/setup-guide#step-2-create-a-new-slack-application).
@@ -117,12 +117,12 @@ You now have a `social_media` database reachable with these credentials, which y
 
 ## Step 1: Set up the project
 
-Everything you build sits inside one project, so you set that up first. WSO2 Integrator creates the project and your first integration together, in a single form.
+Everything you build sits inside one project, so you set that up first. Choreo Integrator creates the project and your first integration together, in a single form.
 
 <details>
 <summary><b>Create the project and open the Design view</b></summary>
 
-1. Launch **WSO2 Integrator** and, on the **Create a Project** card, click **Create** to [create a project](../../develop-and-test/create-workspace/create-a-project.md#configure-the-project).
+1. Launch **Choreo Integrator** and, on the **Create a Project** card, click **Create** to [create a project](../../develop-and-test/create-workspace/create-a-project.md#configure-the-project).
 2. Name the project `social-media` and choose where it lives on disk. This is the one project that will hold all three integrations from the [architecture](#architecture).
 3. Under **What do you want to build?**, select **Integration**, name it `social-media`, and click **Create**.
 
@@ -593,7 +593,7 @@ Then exercise `post users/[id]/posts`: a normal post returns `201 Created` and p
 
 You have built a complete, event-driven backend as three integrations, designed entirely in the Visual Designer: a REST API that screens posts with a sentiment service, stores them in MySQL through the persist feature, and announces them to Slack over a RabbitMQ pipeline.
 
-Explore more of what you can build with WSO2 Integrator:
+Explore more of what you can build with Choreo Integrator:
 
 - [Build a Customer Care Agent with MCP](../business-use-cases/building-a-customer-care-agent-mcp.md)
 - [Building an IT Helpdesk AI Agent with Persistent Memory](../business-use-cases/it-helpdesk-chatbot.md)

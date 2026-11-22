@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: Data-Driven Tests
-description: Run the same test function against multiple input sets using Ballerina data providers in WSO2 Integrator.
-keywords: [wso2 integrator, data-driven tests, data provider, parameterized tests, ballerina test]
+description: Run the same test function against multiple input sets using Ballerina data providers in Choreo Integrator.
+keywords: [choreo integrator, data-driven tests, data provider, parameterized tests, ballerina test]
 slug: /develop-and-test/test/test-explorer/data-driven-tests
 ---
 

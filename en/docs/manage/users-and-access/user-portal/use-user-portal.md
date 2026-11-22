@@ -2,7 +2,7 @@
 sidebar_position: 4
 title: Use the User Portal
 description: "Find the integrations that your organization publishes to the User Portal, chat with AI agents, run automations, run and track workflows, and act on workflow tasks and approvals."
-keywords: [wso2 cloud, user portal, ai agents, chat, automations, runtime arguments, workflows, executions, human tasks, approvals]
+keywords: [choreo cloud, user portal, ai agents, chat, automations, runtime arguments, workflows, executions, human tasks, approvals]
 slug: /manage/users-and-access/user-portal/use
 ---
 
