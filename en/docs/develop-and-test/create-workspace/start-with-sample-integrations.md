@@ -34,10 +34,10 @@ Samples teach you the platform's abstractions. [Prebuilt integrations](../../get
     />
     :::
 
-2. On the **Create Integration** page, find the **Get Started Quickly** panel and select the **Samples** tab. It lists a few samples, each with **Deploy** and **Source** actions.
+2. On the project overview, find the **Start quickly** panel and select the **Samples** tab. It lists a few samples, each with a **Deploy** button and a link to the source.
 
     <ThemedImage
-        alt="Samples tab in the Get Started Quickly panel"
+        alt="Samples tab in the Start quickly panel"
         sources={{
             light: useBaseUrl('/img/explore-samples/sample-integration-saas-switch.png'),
             dark: useBaseUrl('/img/explore-samples/sample-integration-saas-switch.png'),
@@ -48,10 +48,10 @@ Samples teach you the platform's abstractions. [Prebuilt integrations](../../get
 
 ## Browse samples
 
-The **Try a Sample** page lists every available sample. Each card shows the sample name, its type and technology (for example, **Automation (Ballerina)** or **Automation (WSO2 MI)**), a short description, and the **Quick Deploy** and **Source** actions.
+The **Browse samples** page lists every available sample. Each card shows the sample name and technology (for example, **Choreo Integrator** or **Choreo Integrator: MI**), its type as a badge, a short description, tags, and the **Quick deploy** and source actions. Use the **Type**, **Technology** and **Tags** filters, or the search box, to narrow the list.
 
 <ThemedImage
-    alt="Try a Sample page listing automation samples"
+    alt="Browse samples page listing available samples with filters"
     sources={{
         light: useBaseUrl('/img/explore-samples/sample-integration-saas-list.png'),
         dark: useBaseUrl('/img/explore-samples/sample-integration-saas-list.png'),
@@ -69,7 +69,7 @@ Click **Source** on a card to read the sample's code in its GitHub repository be
 
 ## Deploy a sample
 
-Click **Quick Deploy** on the sample you want (or **Deploy** from the **Get Started Quickly** panel). Choreo Cloud starts creating the integration in your project and shows its progress.
+Click **Quick deploy** on the sample you want (or **Deploy** from the **Start quickly** panel). Choreo Cloud starts creating the integration in your project and shows its progress.
 
 <ThemedImage
     alt="Progress page shown while the sample integration is being created"

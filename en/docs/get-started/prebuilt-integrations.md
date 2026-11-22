@@ -42,10 +42,10 @@ A working Choreo Integrator environment.
 
 ## Step 1: Go to the project-level view
 
-Log in to [Choreo Cloud](https://console.devant.dev), then create a project and navigate to the project-level view. You'll see prebuilt integrations in the **Get Started Quickly** panel on the right. Click **Explore more prebuilt integrations** to see the full catalog.
+Log in to [Choreo Cloud](https://console.devant.dev), then create a project and navigate to the project-level view. You'll see prebuilt integrations in the **Start quickly** panel on the right. Click **Explore more prebuilt integrations** to see the full catalog.
 
 <ThemedImage
-    alt="Project-level view in Choreo Cloud showing the Get Started Quickly panel with prebuilt integrations"
+    alt="Project-level view in Choreo Cloud showing the Start quickly panel with prebuilt integrations"
     sources={{
         light: useBaseUrl('/img/get-started/prebuilt-integrations/project-level-view.png'),
         dark: useBaseUrl('/img/get-started/prebuilt-integrations/project-level-view.png'),
@@ -66,15 +66,7 @@ Choose the application you want to integrate from. The catalog currently include
 
 ## Step 3: Pick the second application
 
-The list narrows to the applications Salesforce can be paired with. Select **Google Sheets**.
-
-<ThemedImage
-    alt="Application selection screen with Google Sheets selected as the second application"
-    sources={{
-        light: useBaseUrl('/img/get-started/prebuilt-integrations/select-google-sheets.png'),
-        dark: useBaseUrl('/img/get-started/prebuilt-integrations/select-google-sheets.png'),
-    }}
-/>
+The list narrows to the applications Salesforce can be paired with. Select **Google Sheets**. The ready-made scenarios for that pair appear immediately.
 
 ## Step 4: Choose an integration scenario
 
@@ -100,7 +92,7 @@ A flowchart shows every step of the integration from start to finish, so you kno
 
 ## Step 5: Review the setup instructions and configure credentials
 
-The configuration page's left panel explains exactly what the integration does and what you need to gather to configure **Export Salesforce Leads to a Google Sheet**. You can fill in every field individually, or **import a configuration file** instead. None of this is final: configurations are bound to the environment, and you can change any value later.
+The configuration page's left panel explains exactly what the integration does and what you need to gather to configure **Export Salesforce Leads to a Google Sheet**. You can fill in every field individually, or click **Import Config.toml** instead. None of this is final: configurations are bound to the environment, and you can change any value later.
 
 <ThemedImage
     alt="Configuration page for the Export Salesforce Leads to a Google Sheet integration, showing credential and setup fields"
