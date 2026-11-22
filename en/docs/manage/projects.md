@@ -15,22 +15,22 @@ A project is the top-level container for your integrations on Choreo Integration
 
 ## View projects
 
-Click **Organization** in the top navigation to open the organization overview. The overview lists all projects in your organization. By default a project named **Default** is automatically created on first sign-up.
+Click the organization name in the top navigation to open the organization overview. The overview lists all projects in your organization. By default a project named **Default Project** is automatically created on first sign-up.
 
 ## Edit a project
 
-1. From the project home, go to **Admin** > **Settings**.
-2. Update the **Name** or **Description** as needed by clicking the respective fields.
+1. From the project home, click **Settings**.
+2. Update **Project name** or **Description (optional)** as needed.
 
     <ThemedImage
-        alt="Project Overview"
+        alt="Project settings page showing the Project details card"
         sources={{
             light: useBaseUrl('/img/manage/cloud/projects/manage-project.png'),
             dark: useBaseUrl('/img/manage/cloud/projects/manage-project.png'),
         }}
     />
 
-3. Save your changes.
+3. Click **Save changes**.
 
 ## Remove a project
 
@@ -42,18 +42,20 @@ A project cannot be deleted without deleting all its integrations first.
 Removing a project is permanent. All history within the project is deleted and cannot be recovered.
 :::
 
-1. From the project home, go to **Admin** > **Settings**.
-2. Click **Remove Project** on the right side of the page.
+1. From the project home, click **Settings**.
+2. Scroll to the **Delete project** card and click **Delete project**.
 
     <ThemedImage
-        alt="Remove Project button on the project settings page"
+        alt="Delete project card on the project settings page"
         sources={{
             light: useBaseUrl('/img/manage/cloud/projects/delete-project-button.png'),
             dark: useBaseUrl('/img/manage/cloud/projects/delete-project-button.png'),
         }}
     />
 
-3. Enter the project name to confirm, then click **Delete**.
+3. Enter the project name to confirm, then confirm the deletion.
+
+    {/* TODO(v3): confirmation dialog not re-captured - opening it risks deleting the project. Verify the button label and re-shoot. */}
 
     <ThemedImage
         alt="Confirmation dialog for removing a project"
