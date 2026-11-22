@@ -83,11 +83,12 @@ By explicitly defining these attributes, you provide a "source of truth" that en
 ### Q: How can I find my Organization ID and Organization Handle?
 To find your Organization ID and Organization Handle, follow these steps:
 - Navigate to your organization.
-- From the left navigation menu, select **Admin → Settings**.
-You can view and copy the **Organization ID** and **Organization Handle** from the Settings page.
+- Open **Settings**. The **General** page opens.
+
+You can view and copy the **Organization handle** and **Organization unit ID** from the **General** page using the copy icon next to each value.
 
 <ThemedImage
-  alt="Organization settings page with the Copy ID and Copy Handle buttons highlighted"
+  alt="Organization General settings page showing the organization name, handle, and unit ID with copy icons"
   sources={{
     light: useBaseUrl('/img/reference/ai-usage/organiztion-id.png'),
     dark: useBaseUrl('/img/reference/ai-usage/organiztion-id.png'),
