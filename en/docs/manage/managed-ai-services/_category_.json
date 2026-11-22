@@ -1,1 +1,1 @@
-{ "label": "Managed AI Services", "position": 8, "link": null, "customProps": { "landOnFirst": true } }
+{ "label": "Managed AI Services", "position": 8, "link": null, "customProps": { "separatorBefore": "Managed Platform Services", "landOnFirst": true } }

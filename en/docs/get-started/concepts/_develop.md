@@ -18,7 +18,7 @@ Every integration you build is one of the following types:
 - **Integration as API**: exposes one or more endpoints that consumers invoke over the network. The protocol determines the sub-type: HTTP services for REST, GraphQL services with typed schemas, or raw TCP services.
 - **Event integration**: triggered when an event arrives from an external system. Pre-built connectors are available for common sources including Kafka, RabbitMQ, MQTT, Azure Service Bus, Salesforce, Twilio, GitHub, Solace, Shopify, and Change Data Capture (CDC) for Microsoft SQL Server and PostgreSQL. Under the hood it uses a listener: a long-running component that listens for events and dispatches them to your handler logic.
 - **File integration**: triggered when files appear, change, or are removed in a watched location, such as a remote FTP or SFTP server, or a local or mounted filesystem.
-- **AI integration**: either an **AI Agent**, which exposes AI-powered functionality backed by an LLM including conversational agents with tools, memory, and prompts, RAG pipelines, and direct LLM calls; or an **MCP Server**, which exposes your integration as a tool that an external agent can invoke via the Model Context Protocol.
+- **AI integration**: either an **AI Agent**, which exposes AI-powered functionality backed by an LLM including conversational agents with tools, memory, and prompts, and direct LLM calls; or an **MCP Server**, which exposes your integration as a tool that an external agent can invoke via the Model Context Protocol.
 
 ### Endpoint
 

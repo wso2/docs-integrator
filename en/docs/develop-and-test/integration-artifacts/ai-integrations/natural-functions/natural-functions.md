@@ -166,7 +166,7 @@ When you create a natural function, WSO2 Integrator automatically binds it to th
 
 If a provider already exists in the project, pick it from the dropdown and click **Save**. If not, click **+ Create New Model Provider** and pick from the catalogue (OpenAI, Anthropic, Azure OpenAI, Default WSO2, …).
 
-Adding a provider, the per-provider form fields, the supported models, and the advanced HTTP knobs are all documented in **[AI Connections and Stores: Model Providers](../ai-building-blocks/model-providers.md)**. Every natural function, direct LLM call, RAG `generate` node, and AI Agent in the project shares the same provider connections.
+Adding a provider, the per-provider form fields, the supported models, and the advanced HTTP knobs are all documented in **[AI Connections and Stores: Model Providers](../ai-building-blocks/model-providers.md)**. Every natural function, direct LLM call, and AI Agent in the project shares the same provider connections.
 
 ---
 

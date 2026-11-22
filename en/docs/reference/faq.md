@@ -17,7 +17,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 Integration platform on WSO2 cloud is a powerful IPaaS with first-class AI support. Incorporate AI agents into the integrations you build in low-code and pro-code, and move away from siloed systems to intelligent digital experiences with WSO2 cloud—the AI iPaaS that your AI Agents can call “home”.
 
 ### Q: What is an organization in WSO2 cloud?
-An organization is a logical grouping of users and their resources. It may represent a company, community, or a single user. Users can belong to multiple organizations, and each organization can have different roles assigned to its users to control access to WSO2 cloud features.
+An organization is a logical grouping of users and their resources. It may represent a company, community, or a single user. Each organization can have different roles assigned to its users to control access to WSO2 cloud features.
 
 ### Q: What is a project in WSO2 cloud?
 A project is a logical grouping of related integrations to help you organize your work. Each project provides runtime isolation through namespaces when you deploy integrations.
@@ -28,10 +28,10 @@ An integration in WSO2 cloud is a solution that connects systems, automates proc
 ### Q: What is the difference between an internal and external API?
 In WSO2 cloud, you can publish an API as an internal or an external API. A user or an application can access an external API publicly over the internet, whereas an internal API is only accessible through other integrations within the same organization.
 
-### Q: What is a connector in WSO2 cloud Marketplace?
-A connector is a reusable WSO2 Integrator package that simplifies connecting to external or internal systems and APIs, such as Salesforce, SAP, GitHub, and Twilio. You can use the connectors available in the WSO2 cloud marketplace to implement your integration use cases. Connectors can be created and published by both WSO2 and WSO2 cloud users.
+### Q: What is a connector in WSO2 cloud?
+A connector is a reusable WSO2 Integrator package that simplifies connecting to external or internal systems and APIs, such as Salesforce, SAP, GitHub, and Twilio. You can use the available connectors to implement your integration use cases. Connectors can be created and published by both WSO2 and WSO2 cloud users.
 
-### Q: What is a trigger in WSO2 cloud Marketplace?
+### Q: What is a trigger in WSO2 cloud?
 A trigger is a construct that enables users to receive known event payloads from external systems, facilitating event-driven programming.
 
 ### Q: What is a sample/template in WSO2 cloud?
@@ -47,7 +47,7 @@ If you have a log monitoring product or service, such as Azure Monitor, you can 
 WSO2 cloud allows a maximum request payload size of 50 MB.
 
 ### Q: What source control software does WSO2 cloud support?
-WSO2 cloud now supports GitHub, Bitbucket and GitLab.
+WSO2 cloud supports GitHub.
 
 ### Q: Why don't I see the undeployed builds for my integration in WSO2 cloud?
 You are allowed to build your integration any number of times. However, WSO2 cloud has a limit on retaining undeployed builds. For users on the Free Trial plan, WSO2 cloud will retain **only one** undeployed build. For those on any other plan, WSO2 cloud will retain the **latest five** undeployed builds.
@@ -94,7 +94,6 @@ You can view and copy the **Organization ID** and **Organization Handle** from t
   }}
 />
 
-
 ## Security and data protection
 
 ### Q: How is data managed in WSO2 cloud?
@@ -125,16 +124,10 @@ To ensure this, the requests coming from the WSO2 cloud data plane must be allow
 The WSO2 cloud control plane is a centralized management component that oversees and coordinates the workloads deployed by customers. It provides a unified point of control and visibility for the organization, allowing administrators to manage, monitor, and orchestrate the organization’s resources efficiently.
 
 ### Q: What is a data plane?
-A data plane in WSO2 cloud is a computing environment designed for running customer workloads. These environments are hosted in either a dedicated cloud infrastructure owned by the customer (private data planes) or on public cloud infrastructure owned by WSO2, also known as the WSO2 cloud data plane.
+A data plane in WSO2 cloud is a computing environment designed for running customer workloads. It is hosted on public cloud infrastructure owned by WSO2, known as the WSO2 cloud data plane.
 
 ### Q: Which regions support the WSO2 cloud data plane(CDP)?
 The WSO2 cloud data plane is currently supported in the US East 2 and North Europe. However, WSO2 is planning to add support for additional regions as needed.
-
-### Q: Which regions support private data planes(PDPs)?
-Private data planes can be deployed in any region where Azure and AWS are available and meet the requirements for PDPs.
-
-### Q: If I want to use my Azure AKS instances as the private data plane, what are the minimum requirements I should meet?
-We recommend using a minimum of two (2) workload nodes to ensure high availability.
 
 ### Q: Are the WSO2 cloud control plane and data planes highly available? Are they running on multiple clusters?
 The WSO2 cloud control plane and data plane are designed for high availability using Azure components like AKS, MSSQL, ACR, KV, Service Bus, and so on, with a high availability of 99.99%, which allows at least three workload nodes. In the event of a node failure or upgrade, this setup provides reliable failover. WSO2 also has a backup and recovery strategy in place, including continuous restore drills. If you require AKS cluster-level redundancy, we can consider multiple zones. In this case, the cost will include an additional infrastructure cost.
@@ -147,14 +140,8 @@ You can create environments only if you have a paid subscription in WSO2 cloud. 
 ### Q: I am a Growth plan customer using the WSO2 cloud data plane. How many environments can I create?
 The Growth plan includes 2 environments at the organization level, which the default Development and Production environments already use. See the [Acceptable Usage Policy](../manage/billing/acceptable-usage-policy.md) for the environment entitlement on each plan.
 
-### Q: I am an Enterprise subscription customer using the WSO2 cloud private data plane. How many environments do I get?
-As an Enterprise subscription customer, the number of environments you can use is **not** limited.  However, the more environments you use, the more resources you will consume in the data plane for the workload you deploy. This may result in higher infrastructure costs for the private data plane.
-
 ### Q: As a WSO2 cloud data plane user, why don’t I see both US & EU data planes in the data plane selector when creating an environment?
 You will see both US & EU data planes only if you have a paid subscription and have created projects in both US & EU data planes.
-
-### Q: I am a customer who use WSO2 cloud in a private data plane. How many environments can I create?
-Initially, you will receive the requested number of environments when establishing your private data plane. Subsequently, you can create additional environments as needed.
 
 ## Billing and support
 
@@ -183,9 +170,6 @@ Your bill will detail the number of integrations used, infrastructure consumed, 
 
 ### Q: Is support included in the WSO2 cloud Enterprise plan?
 The WSO2 cloud Enterprise plan does not automatically include support; however, you can purchase support plans in addition to the Enterprise plan at any time. Find out more at https://wso2.com/saas-support-plans/.
-
-### Q: I am an Enterprise subscription customer who wants to use the WSO2 cloud private data plane. What costs will I incur in addition to the subscription and support plan?
-You can start by using a basic plan or contact us for an Enterprise support plan.
 
 ### Q: I want to upgrade from Growth to an Enterprise subscription. Will there be an outage during the upgrade?
 No, there are no outages when upgrading a plan.

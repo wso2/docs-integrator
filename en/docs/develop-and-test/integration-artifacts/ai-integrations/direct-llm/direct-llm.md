@@ -26,7 +26,6 @@ See the **[Email Generator with Direct LLM](../../../../guides/how-to-guides/ema
 | You need a single-shot LLM call inside a flow. | You want a typed function with an English body. Use [Natural Functions](../natural-functions/natural-functions.md). |
 | You want full control over the prompt at the point of use. | The same prompt is reused all over the codebase. Wrap it in a [natural function](../natural-functions/natural-functions.md) instead. |
 | The LLM doesn't need to call any tools or remember earlier turns. | The task needs tool calls, multi-step reasoning, or conversation history. Use an [AI Agent](../agents/agents.md). |
-| You need to ground answers in your own documents. | Add [RAG](../rag/rag.md) and pass the retrieved context into the prompt. |
 
 ## How a direct LLM call looks in a flow
 
@@ -57,7 +56,7 @@ A model provider is the connection that the `generate` node uses to reach the LL
 1. In the flow canvas, select the **+** icon where you want to add the LLM call. In the node palette that opens, under **AI** > **Direct LLM**, select **Model Provider**.
 
     <ThemedImage
-        alt="The node palette on the right side of the flow canvas, with the AI section expanded and Model Provider highlighted under Direct LLM. Knowledge Base, Data Loader, and Augment Query appear under RAG."
+        alt="The node palette on the right side of the flow canvas, with the AI section expanded and Model Provider highlighted under Direct LLM."
         sources={{
             light: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/05-add-model-provider-node-v5.1.png'),
             dark: useBaseUrl('/img/genai/develop/direct-llm-v5.1/direct-llm/05-add-model-provider-node-v5.1.png'),
@@ -154,11 +153,11 @@ The **Prompt** is the instruction you send to the LLM. Click any **Prompt** fiel
     }}
 />
 
-The **Insert** menu is the bridge between the prompt and the rest of your project. Select it to pull in values from anywhere in scope: request inputs, flow variables, configurables, project functions, or RAG documents. It opens a menu listing **Inputs**, **Variables**, **Configurables**, **Functions**, and **Documents**.
+The **Insert** menu is the bridge between the prompt and the rest of your project. Select it to pull in values from anywhere in scope: request inputs, flow variables, configurables, or project functions. It opens a menu listing **Inputs**, **Variables**, **Configurables**, and **Functions**.
 
 | Element | What it does |
 |---|---|
-| **Insert** | Pull a value into the prompt: **Inputs** (resource path/query/payload params), **Variables** (anything in scope in the flow), **Configurables** (`Config.toml` values), **Functions** (calls into project functions), **Documents** (RAG retrieval results). |
+| **Insert** | Pull a value into the prompt: **Inputs** (resource path/query/payload params), **Variables** (anything in scope in the flow), **Configurables** (`Config.toml` values), **Functions** (calls into project functions). |
 | **Bold / Italic / Link** | Standard text formatting (rendered as plain text in the prompt). |
 | **H1 / Quote / Lists / Tables** | Structure the prompt visually. Helpful for long prompts. |
 | **Magic-wand AI assist** | Suggests a prompt scaffold for you when you describe the task in one line. |
@@ -171,5 +170,4 @@ The **Insert** menu is the bridge between the prompt and the rest of your projec
 - **[Email Generator with Direct LLM (Tutorial)](../../../../guides/how-to-guides/email-generator-direct-llm.md)** — build a complete `POST /emails/generate` service from scratch using everything on this page.
 - **[Model Providers](../ai-building-blocks/model-providers.md)** — switch the LLM provider for production; tune temperature, max tokens, retries.
 - **[Natural Functions](../natural-functions/natural-functions.md)** — when the same prompt is used in many places, package it as a typed function.
-- **[RAG](../rag/rag.md)** — ground the model's answers in your own documents.
 - **[AI Agents](../agents/agents.md)** — if the task needs tools or multi-turn reasoning.

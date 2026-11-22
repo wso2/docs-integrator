@@ -14,7 +14,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 After pushing your integrations to WSO2 Cloud - Integration Platform, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on WSO2 Cloud yet, see the [Deploy](../../deploy-and-run/deploy-and-run.md) section.
 
-If your integration is exposed as an API, see [API Management](api-management/api-management.md) for lifecycle states, security, rate limiting, and the developer portal.
+If your integration is exposed as an API, see [API Management](api-management/api-management.md) for security and analytics.
 
 If your integration is a workflow, see [Manage Workflows](workflows.md) to start and monitor workflow runs and act on human tasks and reviews.
 
@@ -54,17 +54,13 @@ From the integration overview page, you can manage the schedule for each environ
 
 ### Integration as API
 
-The deployment status for each environment is visible from the overview page. Because scale to zero is enabled by default, you cannot manually stop a deployment.
+The deployment status for each environment is visible from the overview page, where you can stop and start the deployment for each environment.
 
-To manually stop or start a deployment:
-
-1. In the console, go to **Admin** > **Scaling**.
-2. Disable **Scale to zero** for the relevant environment.
-3. Return to the integration overview page. You can now stop and start the deployment for each environment.
+{/* TODO(v3): confirm the stop/start flow now that scale-to-zero is gone. */}
 
 ### AI agent
 
-Lifecycle management works the same as [Integration as API](#integration-as-api). Scale to zero is enabled by default, and you must disable it from **Admin** > **Scaling** before you can manually stop or start a deployment.
+Lifecycle management works the same as [Integration as API](#integration-as-api).
 
 ### Event integration
 
@@ -113,6 +109,6 @@ The integration is permanently deleted.
 
 ## What's next
 
-- [API Management](api-management/api-management.md) — Publish, secure, rate-limit, and govern integrations exposed as APIs.
+- [API Management](api-management/api-management.md) — Secure, monitor, and govern integrations exposed as APIs.
 - [Configuration Management](../configurations/configurations.md) — Configure integration settings, runtime configurations, build configurations, and scaling options.
 - [Manage Projects](../projects.md) — Create, edit, and remove projects in your organization.

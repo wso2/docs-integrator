@@ -37,7 +37,7 @@ If your project already exists in a Git repository, import it instead. See [Impo
     | **Name** | A unique identifier for the project. It is generated from the display name, and you can edit it. It must be unique within the organization. |
     | **Description** | An optional summary of the project's purpose. |
 
-4. Optionally, under **Connect Your Repository**, link a Git repository to the project. Choose **Authorize With GitHub**, **Authorize with Bitbucket**, **Authorize with GitLab**, or **Use Public GitHub Repository**. For Bitbucket and GitLab, select a saved credential. See [Connect a Git provider](../../deploy-and-run/deploy-to-wso2-cloud/connect-git-provider.md) to add one.
+4. Optionally, under **Connect Your Repository**, link a Git repository to the project. Choose **Authorize With GitHub** or **Use Public GitHub Repository**. See [Connect a Git provider](../../deploy-and-run/deploy-to-wso2-cloud/connect-git-provider.md).
 
     <ThemedImage
         alt="Create a Project form"

@@ -96,7 +96,6 @@ It provides visibility across projects and environments, helping teams deploy in
 
 ICP also surfaces health information, metrics, and aggregated logs. But for self-hosted deployments, you aren't limited to ICP, WSO2 Intgerator is designed to integrate seamlessly with your organization's existing observability stack.
 
-
 ### Connectors
 
 Connectors provide pre-built, typed connectivity to external systems, including SaaS applications, databases, APIs, cloud services, and message brokers.
@@ -113,10 +112,11 @@ Integrations developed in WSO2 Integrator can run in managed or self-hosted envi
 |---|---|---|---|
 | Fully managed iPaaS | WSO2-managed cloud infrastructure | Provided through WSO2 Integration Cloud | WSO2 operates the platform and runtime infrastructure.|
 | Fully self-hosted | Your infrastructure, including Kubernetes, OpenShift, containers, virtual machines, bare metal, or public/private cloud | Your team operates ICP and the observability infrastructure | Your organization operates the entire environment.| 
-| Private or hybrid | A private data plane or dedicated infrastructure | WSO2 manages control and observability capabilities centrally | Runtime infrastructure responsibility depends on the selected arrangement. |
+
+{/* TODO(v3): this diagram still shows a private data plane, which is not in v3. Needs redrawing. */}
 
 <ThemedImage
-    alt="Deployment models: self-hosted, where you run both the control plane (ICP) and the data plane, and WSO2 Integration Cloud (iPaaS), where WSO2 manages the control plane and you choose a cloud or private data plane"
+    alt="Deployment models: self-hosted, where you run both the control plane (ICP) and the data plane, and WSO2 Integration Cloud (iPaaS), where WSO2 manages the control plane and the cloud data plane"
     sources={{
         light: useBaseUrl('/img/platform-overview/deployment-models-v5.1.png'),
         dark: useBaseUrl('/img/platform-overview/deployment-models-v5.1.png'),

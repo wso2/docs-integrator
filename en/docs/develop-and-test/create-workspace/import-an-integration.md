@@ -2,7 +2,7 @@
 sidebar_position: 3
 title: Import an Integration
 description: Import an integration from a Git repository into WSO2 Cloud and deploy it to the Development environment.
-keywords: [wso2 integrator, wso2 cloud, import, git, github, gitlab, azure devops, deploy]
+keywords: [wso2 integrator, wso2 cloud, import, git, github, deploy]
 slug: /develop-and-test/create-workspace/import-an-integration
 ---
 
@@ -14,7 +14,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 If your integration is already in a Git repository, you can import it directly into WSO2 Cloud without going through the WSO2 Integrator editor. WSO2 Cloud automatically builds and deploys the integration to the Development environment once the import is complete.
 
 :::info Prerequisites
-- An integration created with WSO2 Integrator editor pushed to a remote Git repository (GitHub, GitLab, Bitbucket, or Azure DevOps).
+- An integration created with WSO2 Integrator editor pushed to a remote GitHub repository.
 - A WSO2 Cloud account. Sign up at [WSO2 Cloud](https://console.devant.dev) if you don't have one.
 :::
 
@@ -41,10 +41,6 @@ If your integration is already in a Git repository, you can import it directly i
             dark: useBaseUrl('/img/import-project/import-integration.png'),
         }}
     />
-
-    :::warning
-    One-click OAuth2 authorization is only available for GitHub. To use Bitbucket, GitLab, or Azure DevOps, you must first add your credentials at the organization level. See [Connect a Git provider](../../deploy-and-run/deploy-to-wso2-cloud/connect-git-provider.md) for instructions.
-    :::
 
 3. Complete the authorization flow in the browser and return to WSO2 Cloud.
 
@@ -74,7 +70,6 @@ If your integration is already in a Git repository, you can import it directly i
     />
 
 WSO2 Cloud starts the build immediately. Once the build completes, the integration is automatically deployed to the **Development** environment.
-
 
 ## What's next
 

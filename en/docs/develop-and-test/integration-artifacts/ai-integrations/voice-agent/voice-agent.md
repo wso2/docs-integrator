@@ -75,7 +75,7 @@ This example uses `customerSupportAgent`, a customer support agent that's alread
 1. On the `onChatMessage` flow, open the node panel and select **Agent** under the **AI** section.
 
 <ThemedImage
-    alt="Node panel on the onChatMessage flow with the AI section expanded, showing Direct LLM (Model Provider, Call Natural Function), RAG (Knowledge Base, Data Loader, Augment Query), and Agent, with a tooltip reading Create or reuse an Agent."
+    alt="Node panel on the onChatMessage flow with the AI section expanded, showing Direct LLM (Model Provider, Call Natural Function) and Agent, with a tooltip reading Create or reuse an Agent."
     sources={{
         light: useBaseUrl('/img/genai/develop/voice-agent-v5.1/04-node-panel-agent-v5.1.png'),
         dark: useBaseUrl('/img/genai/develop/voice-agent-v5.1/04-node-panel-agent-v5.1.png'),

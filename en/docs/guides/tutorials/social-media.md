@@ -597,5 +597,4 @@ Explore more of what you can build with WSO2 Integrator:
 
 - [Build a Customer Care Agent with MCP](../business-use-cases/building-a-customer-care-agent-mcp.md)
 - [Building an IT Helpdesk AI Agent with Persistent Memory](../business-use-cases/it-helpdesk-chatbot.md)
-- [Building an HR Knowledge Base with RAG](../business-use-cases/building-hr-knowledge-base-rag.md)
 - [Email Generator with Direct LLM](../how-to-guides/email-generator-direct-llm.md)

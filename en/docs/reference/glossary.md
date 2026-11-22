@@ -43,7 +43,6 @@ slug: /reference/glossary
 | **Pro-code** | The Ballerina source-editing mode in the WSO2 Integrator IDE. Stays in sync with the visual designer, with full auto-complete, type checking, and debugging. |
 | **Project** | A workspace containing integration code, dependencies, configuration, and deployment artifacts. Defined by `Ballerina.toml`. |
 | **Query Expression** | Ballerina's SQL-like syntax for filtering, transforming, and aggregating data within code. Supports `from`, `where`, `let`, `select`, `order by`, `limit`, and `join` clauses. |
-| **RAG** | Retrieval-Augmented Generation. A pattern that combines document retrieval from a vector database with LLM generation for knowledge-grounded AI responses. |
 | **Record** | A Ballerina structural type with named fields. The primary data structure for representing JSON-like data with compile-time type safety. Can be open (allows extra fields) or closed. |
 | **Resource Function** | A function in a Ballerina service that maps to an HTTP method and path. Example: `resource function get customers()` handles `GET /customers`. |
 | **Service** | A Ballerina construct that exposes endpoints over HTTP, GraphQL, gRPC, WebSocket, or TCP. The most common integration artifact in WSO2 Integrator. |

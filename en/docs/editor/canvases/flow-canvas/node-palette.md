@@ -59,12 +59,9 @@ Select a category below to jump to its nodes.
 
 <PaletteCard icon="ai">
   <h4 class="palette-card-title">AI</h4>
-  <p class="palette-card-desc">Call LLMs directly, build RAG pipelines, and run agents.</p>
+  <p class="palette-card-desc">Call LLMs directly and run agents.</p>
   <div class="palette-chip-row">
     <PaletteChip href="#model-provider">Model Provider</PaletteChip>
-    <PaletteChip href="#knowledge-base">Knowledge Base</PaletteChip>
-    <PaletteChip href="#data-loader">Data Loader</PaletteChip>
-    <PaletteChip href="#augment-query">Augment Query</PaletteChip>
     <PaletteChip href="#agent">Agent</PaletteChip>
   </div>
 </PaletteCard>
@@ -378,19 +375,18 @@ Ends the current function or service flow and produces a value to the caller. Th
 
 ## AI
 
-The **AI** section of the node panel lets you build AI-powered integrations directly in the flow. It is split into three sub-sections that map to the GenAI building blocks.
+The **AI** section of the node panel lets you build AI-powered integrations directly in the flow. It is split into two sub-sections that map to the GenAI building blocks.
 
 | Sub-category | Use it for | Reference |
 |---|---|---|
 | **Direct LLM** | Send a prompt to an LLM and bind the response to a typed variable. | [Direct LLM calls](../../../develop-and-test/integration-artifacts/ai-integrations/direct-llm/direct-llm.md) |
-| **RAG** | Ground LLM responses in your own documents by retrieving relevant chunks at query time. | [RAG](../../../develop-and-test/integration-artifacts/ai-integrations/rag/rag.md) |
 | **AI Agent** | Run multi-turn workflows where an LLM plans the next step, calls tools, and uses memory. | [AI agents](../../../develop-and-test/integration-artifacts/ai-integrations/agents/agents.md) |
 
 For an end-to-end orientation to the AI building blocks in WSO2 Integrator, see the [AI Integrations overview](../../../develop-and-test/integration-artifacts/ai-integrations/ai-integrations.md).
 
 ### Model Provider
 
-A model provider is the connection that abstracts a specific LLM behind a consistent API. Add a `Model Provider` once per project and reference it from any node that needs to call an LLM, such as `Augment Query`, `Agent`, or a `generate` action.
+A model provider is the connection that abstracts a specific LLM behind a consistent API. Add a `Model Provider` once per project and reference it from any node that needs to call an LLM, such as `Agent` or a `generate` action.
 
 <ThemedImage
     alt="Model Provider button under Direct LLM"
@@ -423,90 +419,6 @@ When you add a Model Provider, the picker lists the supported provider implement
 />
 
 For provider-specific configuration, model selection, and usage patterns, see [Model providers](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md).
-
-### Knowledge Base
-
-A knowledge base is the central abstraction for RAG. It owns three things: a **Vector Store** where embeddings live, an **Embedding Provider** that turns text into vectors, and a **Chunker** that splits documents before embedding. Build the knowledge base once per project, and any flow in the project can ingest into it or retrieve from it.
-
-<ThemedImage
-    alt="Knowledge Base button under RAG"
-    sources={{
-        light: useBaseUrl('/img/editor/canvases/flow-canvas/knowledge-base-node.png'),
-        dark: useBaseUrl('/img/editor/canvases/flow-canvas/knowledge-base-node.png'),
-    }}
-/>
-
-The picker lists the supported knowledge base implementations.
-
-| Knowledge base | Description |
-|---|---|
-| **Vector Knowledge Base** | Generic vector knowledge base for managing chunk indexing and retrieval. Plug in any supported [Vector Store](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/vector-stores.md), [Embedding Provider](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/embedding-providers.md), and [Chunker](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/chunkers.md). |
-| **Azure AI Search Knowledge Base** | Implementation backed by Azure AI Search. |
-
-<ThemedImage
-    alt="Knowledge bases list with Vector Knowledge Base and Azure AI Search Knowledge Base"
-    sources={{
-        light: useBaseUrl('/img/editor/canvases/flow-canvas/knowledge-bases-offered.png'),
-        dark: useBaseUrl('/img/editor/canvases/flow-canvas/knowledge-bases-offered.png'),
-    }}
-/>
-
-For the full reference, see [Knowledge bases](../../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/knowledge-bases.md).
-
-### Data Loader
-
-A data loader reads documents from disk into memory so the knowledge base can ingest them. Place a `Data Loader` at the start of an ingestion flow; the resulting documents are then handed to the knowledge base's `Ingest` action.
-
-<ThemedImage
-    alt="Data Loader button under RAG"
-    sources={{
-        light: useBaseUrl('/img/editor/canvases/flow-canvas/data-loader-node.png'),
-        dark: useBaseUrl('/img/editor/canvases/flow-canvas/data-loader-node.png'),
-    }}
-/>
-
-| Data loader | Description |
-|---|---|
-| **Text Data Loader** | Loads supported file types as `TextDocument` for indexing. |
-
-<ThemedImage
-    alt="Data loaders list with Text Data Loader"
-    sources={{
-        light: useBaseUrl('/img/editor/canvases/flow-canvas/data-loaders-offered.png'),
-        dark: useBaseUrl('/img/editor/canvases/flow-canvas/data-loaders-offered.png'),
-    }}
-/>
-
-For the ingestion flow, supported formats, and how to point the loader at a directory of documents, see the [RAG ingestion](../../../develop-and-test/integration-artifacts/ai-integrations/rag/rag-ingestion.md).
-
-### Augment Query
-
-`augmentUserQuery` is the bridge between RAG and the LLM. It takes the chunks already retrieved from a knowledge base and the user's original question, and produces a chat user message that bundles them in a format the LLM understands. Pass the result directly to a `generate` call or to an agent.
-
-<ThemedImage
-    alt="Augment Query button under RAG"
-    sources={{
-        light: useBaseUrl('/img/editor/canvases/flow-canvas/augment-query-node.png'),
-        dark: useBaseUrl('/img/editor/canvases/flow-canvas/augment-query-node.png'),
-    }}
-/>
-
-| Field | Description |
-|---|---|
-| **Context** | Array of matched chunks or documents to include as context. Typically the result of a `retrieve` action against a knowledge base. |
-| **Query** | The user's original question. |
-| **Result** | Name of the result variable. |
-| **Result Type** | Type of the result variable. |
-
-<ThemedImage
-    alt="Augment Query form with Context, Query, Result, and Result Type fields"
-    sources={{
-        light: useBaseUrl('/img/editor/canvases/flow-canvas/augment-query-form.png'),
-        dark: useBaseUrl('/img/editor/canvases/flow-canvas/augment-query-form.png'),
-    }}
-/>
-
-For the full RAG query flow (retrieve, augment, generate), see [RAG query](../../../develop-and-test/integration-artifacts/ai-integrations/rag/rag-query.md).
 
 ### Agent
 

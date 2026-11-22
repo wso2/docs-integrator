@@ -84,7 +84,7 @@ const quickstarts: Quickstart[] = [
   },
   {
     title: 'Build an AI Agent',
-    description: 'Agents, RAG and MCP servers.',
+    description: 'Agents and MCP servers.',
     to: '/get-started/quickstarts/build-ai-agent',
     icon: (
       <svg {...svgProps}>

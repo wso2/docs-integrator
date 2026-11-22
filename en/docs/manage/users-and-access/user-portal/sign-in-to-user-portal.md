@@ -49,7 +49,7 @@ What you can see and do after you sign in depends on your roles in the organizat
 
     Organization handles use lowercase letters, numbers, and hyphens. If the User Portal cannot find the organization, check the handle with your organization administrator. The organization might not have enabled the User Portal yet.
 
-3. On the **Sign in to continue** page, check that the organization name and handle are correct. To choose a different organization, click the change organization icon next to the organization name.
+3. On the **Sign in to continue** page, check that the organization name and handle are correct.
 
     <ThemedImage
         alt="User Portal Sign in to continue page with the Sign In and Sign in with Integration Platform options"
@@ -72,7 +72,6 @@ What you can see and do after you sign in depends on your roles in the organizat
         }}
     />
 
-
 After you sign in, the User Portal lists the integrations that the organization published and that your roles let you see.
 
 If you sign in with **Sign in with Integration Platform** but your account is not a member of the organization, the User Portal shows **You don't have access to this organization**. If you are a member of other organizations that enabled the User Portal, the page lists them, and you can choose one to continue.
@@ -93,7 +92,6 @@ If you are a member of the WSO2 Cloud organization, you can sign in first and th
             dark: useBaseUrl('/img/manage/cloud/user-portal/org-chooser.png'),
         }}
     />
-
 
     The page lists the organizations that you are a member of and that enabled the User Portal.
 

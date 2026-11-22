@@ -176,7 +176,7 @@ You can add an inline agent within integration flows, such as automations, REST 
 3. Under **AI**, select **Agent**. *"Create or reuse an Agent."*
 
     <ThemedImage
-        alt="Add Node panel with the AI section showing Direct LLM, RAG, and Agent options, with the Agent option highlighted and its tooltip visible."
+        alt="Add Node panel with the AI section showing Direct LLM and Agent options, with the Agent option highlighted and its tooltip visible."
         sources={{
             light: useBaseUrl('/img/genai/develop/agents-v5.1/creating-an-agent/07-automation-empty-flow-v5.1.png'),
             dark: useBaseUrl('/img/genai/develop/agents-v5.1/creating-an-agent/07-automation-empty-flow-v5.1.png'),

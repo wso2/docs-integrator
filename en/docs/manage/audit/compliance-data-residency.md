@@ -35,7 +35,7 @@ The following attributes are classified and collected.
 
 WSO2 Cloud uses a tiered retention policy to give fast access to operational data while providing safeguards for recovery.
 
-- **Insights and metrics**. Retained for 6 months for storing and analyzing metrics.
+- **Insights**. Retained for 6 months for storing and analyzing usage data.
 - **Log storage**. Logs are stored for 30 days for all users.
 - **Log visibility**:
     - Free users can view the last 7 days of logs.

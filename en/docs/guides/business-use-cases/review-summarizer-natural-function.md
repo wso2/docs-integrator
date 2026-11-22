@@ -347,7 +347,7 @@ Click **Save**. The resource flow opens with **Start**, a **+** placeholder on t
 Click the **+** placeholder between **Start** and **Error Handler**. The **Add Node** panel slides in. Expand the **AI** category and click **Call Natural Function** (tooltip: **Call a natural programming function**).
 
 <ThemedImage
-    alt="Add Node panel with AI category expanded, showing Direct LLM (Model Provider, Call Natural Function) and RAG nodes. The Call Natural Function tile is highlighted with a Call a natural programming function tooltip."
+    alt="Add Node panel with AI category expanded, showing Direct LLM (Model Provider, Call Natural Function) nodes. The Call Natural Function tile is highlighted with a Call a natural programming function tooltip."
     sources={{
         light: useBaseUrl('/img/genai/tutorials/review-summarizer-natural-function-v5.1/19-select-natural-function-in-add-new-v5.1.png'),
         dark: useBaseUrl('/img/genai/tutorials/review-summarizer-natural-function-v5.1/19-select-natural-function-in-add-new-v5.1.png'),

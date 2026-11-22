@@ -99,7 +99,7 @@ A four-step wizard opens. The current AI agent is preselected as the target, so 
 1. In the organization's left navigation, expand **AI Services** and click **Voice Agents**. A five-step wizard opens at **Configure Agent**.
 
     <ThemedImage
-        alt="Voice Agents under AI Services in the organization left navigation, next to Knowledge Base"
+        alt="Voice Agents under AI Services in the organization left navigation"
         sources={{
             light: useBaseUrl('/img/manage/cloud/voice-agents/ai-services-voice-agents.png'),
             dark: useBaseUrl('/img/manage/cloud/voice-agents/ai-services-voice-agents.png'),

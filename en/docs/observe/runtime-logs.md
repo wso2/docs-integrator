@@ -94,7 +94,3 @@ Type your search query in the search bar and press **Enter** to apply a content 
 WSO2 Cloud uses Lucene query syntax for regex search. For more information on Lucene syntax, see [Lucene Query Syntax Documentation](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html).
 :::
 
-## What's next
-
-- [Metrics](./metrics.md) — Monitor request throughput, latency, and resource usage over time.
-- [Anomaly detection and alerts](./anomaly-detection-alerts.md) — Configure alerts to get notified when metrics exceed defined thresholds.

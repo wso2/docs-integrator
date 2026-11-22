@@ -124,7 +124,7 @@ The loop body runs once per trace, ready for the agent call and any checks insid
 Inside the Foreach, add an **Agent** node from the **AI** group in the node panel.
 
 <ThemedImage
-    alt="Node panel scrolled to the AI category showing Direct LLM, RAG, and an Agent button."
+    alt="Node panel scrolled to the AI category showing Direct LLM and an Agent button."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/evaluations/agent-node-pick.png'),
         dark: useBaseUrl('/img/genai/develop/agents/evaluations/agent-node-pick.png'),

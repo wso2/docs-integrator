@@ -23,7 +23,6 @@ WSO2 Cloud captures the following user-specific operations as audit logs:
 - Integration version creation.
 - Integration deployment, redeployment, and undeployment initiation for all integrations.
 - Integration as API access mode update.
-- Enabling and disabling integration auto-deployment on commit.
 - Integration endpoint creation, update, and deletion.
 - Organization user management.
 - On-premises key management.

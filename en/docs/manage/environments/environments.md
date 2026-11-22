@@ -44,4 +44,3 @@ Promotion changes take effect after the integration restarts in the target envir
 - [Create an environment](./create.md) — Add a new environment to support additional stages in your deployment pipeline.
 - [Configure promotion pipelines](./configure-promotion-pipelines.md) — Define the ordered sequence of environments a commit is promoted through.
 - [Promote an integration](./promotion.md) — Step-by-step instructions for promoting an integration across environments.
-- [Promotion approvals](./promotion-approval.md) — Require approvals before an integration is promoted to a protected environment.

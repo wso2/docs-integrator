@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Import a Project
 description: Import an existing WSO2 Integrator project from a Git repository into WSO2 Cloud.
-keywords: [wso2 integrator, wso2 cloud, import, project, git, github, gitlab, azure devops, deploy]
+keywords: [wso2 integrator, wso2 cloud, import, project, git, github, deploy]
 slug: /develop-and-test/create-workspace/import-a-project
 ---
 
@@ -18,7 +18,7 @@ If you don't have an existing project and would like to get started on a new pro
 :::
 
 :::info Prerequisites
-- A project created with the WSO2 Integrator editor and pushed to a remote Git repository (GitHub, GitLab, Bitbucket, or Azure DevOps).
+- A project created with the WSO2 Integrator editor and pushed to a remote GitHub repository.
 - A WSO2 Cloud account. Sign up at [WSO2 Cloud](https://console.devant.dev) if you don't have one.
 :::
 
@@ -36,11 +36,7 @@ If you don't have an existing project and would like to get started on a new pro
         }}
     />
 
-4. Select your Git provider and complete the authorization flow in the browser, then return to WSO2 Cloud.
-
-    :::warning
-    One-click OAuth2 authorization is only available for GitHub. To use Bitbucket, GitLab, or Azure DevOps, you must first add your credentials at the organization level. See [Connect a Git provider](../../deploy-and-run/deploy-to-wso2-cloud/connect-git-provider.md) for instructions.
-    :::
+4. Complete the GitHub authorization flow in the browser, then return to WSO2 Cloud.
 
 ## Configure and import the project
 
