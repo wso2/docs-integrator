@@ -2,7 +2,7 @@
 sidebar_position: 3
 title: Sign In to the User Portal
 description: "Sign in to the User Portal of a Choreo Integration organization with the account that your organization gave you or with an Integration Platform account."
-keywords: [choreo cloud, user portal, sign in, single sign-on, external users, identity platform, ai agents, automations, workflows]
+keywords: [choreo cloud, user portal, sign in, single sign-on, external users, identity platform, ai agents, automations]
 slug: /manage/users-and-access/user-portal/sign-in
 ---
 
@@ -101,4 +101,4 @@ When you click the **User Portal** button on a published integration's overview 
 
 ## What's next
 
-- [Use the User Portal](use-user-portal.md) to chat with AI agents, run automations, and work with workflows.
+- [Use the User Portal](use-user-portal.md) to chat with AI agents and run automations.

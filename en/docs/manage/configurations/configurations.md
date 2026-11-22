@@ -22,4 +22,3 @@ All configuration options are available per environment, so you can use differen
 | [Endpoints](./endpoint-configurations.md) | Set the visibility level for each endpoint: project-only, organization-wide, or public. |
 | [Scaling](./scaling-resource-limits.md) | Configure autoscaling based on CPU and memory thresholds. |
 | [Security](./security-configurations.md) | Secure Integration as API and AI Agent endpoints with API Key authentication, OAuth2, or both. |
-| [Temporal credentials](./temporal-credentials.md) | Connect workflows to a Temporal Cloud namespace or a self-hosted Temporal server for each environment. |

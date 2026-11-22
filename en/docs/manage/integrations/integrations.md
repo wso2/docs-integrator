@@ -16,8 +16,6 @@ After pushing your integrations to Choreo Integration, you can view and manage t
 
 If your integration is exposed as an API, see [API Management](api-management/api-management.md) for security and analytics.
 
-If your integration is a workflow, see [Manage Workflows](workflows.md) to start and monitor workflow runs and act on human tasks and reviews.
-
 ## View integrations
 
 1. Log in to [Choreo Cloud](https://console.devant.dev). The default project opens automatically.

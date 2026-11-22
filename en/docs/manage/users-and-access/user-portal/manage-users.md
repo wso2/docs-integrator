@@ -35,15 +35,10 @@ When you [enable the User Portal](user-portal.md#enable-the-user-portal), the pl
 | `automation:trigger` | Run automations in the organization. | No |
 | `aiagent:view` | View AI agents in the organization. | Yes |
 | `aiagent:invoke` | Chat with AI agents in the organization. | No |
-| `workflow:view` | View workflows in the organization. | Yes |
-| `workflow_mgt:view_workflows` | View workflow executions in the organization. | Yes |
-| `workflow_mgt:manage_workflows` | Start, suspend, resume, cancel, and terminate workflow executions, and act on approvals in the organization. | No |
-| `workflow_mgt:view_human_tasks` | View the human tasks of workflows in the organization. | Yes |
-| `workflow_mgt:manage_human_tasks` | Complete the human tasks of workflows in the organization. | No |
 
 The User Portal uses these scopes as follows:
 
-- **To see an integration, a user needs the view scope for its type.** A user needs `automation:view` to see automations, `aiagent:view` to see AI agents, and `workflow:view` to see workflows. If a user has none of these scopes, the **Integrations** tab of the User Portal is empty.
+- **To see an integration, a user needs the view scope for its type.** A user needs `automation:view` to see automations and `aiagent:view` to see AI agents. If a user has none of these scopes, the **Integrations** tab of the User Portal is empty.
 - **To run an automation, a user needs `automation:trigger`.** Without this scope, the user can see the automation, but the **Execute** button is disabled.
 
 :::note
@@ -92,7 +87,6 @@ In your organization, go to **Admin** > **Settings** > **User Portal** > **Users
         dark: useBaseUrl('/img/manage/cloud/user-portal/users-list.png'),
     }}
 />
-
 
 The status of a user is one of the following:
 
@@ -161,7 +155,6 @@ In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles
     }}
 />
 
-
 ### Create a role
 
 1. In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles**.
@@ -183,7 +176,6 @@ In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles
             dark: useBaseUrl('/img/manage/cloud/user-portal/create-role.png'),
         }}
     />
-
 
 5. Click **Create**.
 
@@ -236,14 +228,6 @@ To remove a user from the role, click the **Unassign** icon next to the user, th
 ### Delete a role
 
 You cannot delete roles from the Choreo Cloud console. To do this, go to **User Management** > **Roles** in your Choreo Identity organization. The link on the **Admin** > **Settings** > **User Portal** > **Roles** tab opens this page. If you delete a system role, the **User Portal** page shows that the role is no longer in place. To recreate it, see [Repair the User Portal](check-and-repair.md#repair-the-user-portal). For more information, see [Choreo Identity documentation: Manage roles](https://wso2.com/identity-platform/docs/guides/users/manage-roles/).
-
-## Roles for workflow tasks
-
-Workflows can assign human tasks to a role. In the User Portal, only users who have that role can see and act on those tasks. To let a user act on a task, go to **Admin** > **Settings** > **User Portal** > **Roles** in your organization, [create the role](#create-a-role), and [assign it to the user](#assign-roles-to-a-user).
-
-:::note
-The role name must match the role that the workflow assigns the task to. The user also needs the scopes to see the workflow and its tasks, which are `workflow:view` and `workflow_mgt:view_human_tasks`. To complete tasks, the user also needs `workflow_mgt:manage_human_tasks`. To act on approvals, the user also needs `workflow_mgt:manage_workflows`.
-:::
 
 ## Add scopes from your own APIs
 

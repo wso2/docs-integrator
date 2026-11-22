@@ -24,7 +24,7 @@ Authorization works by assigning one or more roles to a group.
 
 ## User Portal
 
-The User Portal is a separate portal that exposes your integrations to external users. After you enable it for your organization, you can publish AI agents, automations, and workflows to it. Users sign in through your Choreo Identity organization and can chat with agents and run automations and workflows without access to the Choreo Cloud console. You manage User Portal users and roles, and the permissions of each role, from the Choreo Cloud console.
+The User Portal is a separate portal that exposes your integrations to external users. After you enable it for your organization, you can publish AI agents and automations to it. Users sign in through your Choreo Identity organization and can chat with agents and run automations without access to the Choreo Cloud console. You manage User Portal users and roles, and the permissions of each role, from the Choreo Cloud console.
 
 ## In this section
 

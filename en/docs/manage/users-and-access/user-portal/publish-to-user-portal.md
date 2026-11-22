@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Publish an Integration to the User Portal
-description: "Publish AI agents, automations, and workflows from Choreo Integration to the User Portal so that external users can use them."
-keywords: [choreo cloud, user portal, publish, ai agents, automations, workflows]
+description: "Publish AI agents and automations from Choreo Integration to the User Portal so that external users can use them."
+keywords: [choreo cloud, user portal, publish, ai agents, automations]
 slug: /manage/users-and-access/user-portal/publish-integrations
 ---
 
@@ -21,7 +21,6 @@ The User Portal supports the following integration types:
 |---|---|
 | **AI agent** | Chat with the agent. |
 | **Automation** | Run the automation. If the automation has runtime arguments, users first enter values in a form that the User Portal builds from those arguments. |
-| **Workflow** | Run and manage workflows, and act on assigned human tasks. |
 
 For each automation, users can also see when it last ran and, if it is scheduled, when it runs next.
 
@@ -59,7 +58,6 @@ For each automation, users can also see when it last ran and, if it is scheduled
 When you confirm, the platform publishes the integration to the User Portal and makes the endpoints the User Portal needs available automatically:
 
 - **AI agents**: The endpoints that have a `/chat` resource.
-- **Workflows**: The management endpoint. Choreo Cloud adds this endpoint to every workflow when it deploys the workflow.
 - **Automations**: No endpoint is required.
 
 {/* TODO(v3): confirm how the User Portal reaches an integration's endpoints now that the Developer Portal is gone, and document the new mechanism here. */}
@@ -105,4 +103,4 @@ The integration no longer appears in the User Portal.
 
 - [Manage users and roles](manage-users.md) so that users can sign in to the User Portal and see the integrations.
 - [Sign in to the User Portal](sign-in-to-user-portal.md).
-- [Use the User Portal](use-user-portal.md) to chat with AI agents, run automations, and work with workflows.
+- [Use the User Portal](use-user-portal.md) to chat with AI agents and run automations.

@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Overview
 title: User Portal
-description: "Enable the User Portal in Choreo Integration so that external users can sign in and use the AI agents, automations, and workflows that your organization publishes."
-keywords: [choreo cloud, user portal, external users, ai agents, automations, workflows, identity platform, developer portal, key manager]
+description: "Enable the User Portal in Choreo Integration so that external users can sign in and use the AI agents and automations that your organization publishes."
+keywords: [choreo cloud, user portal, external users, ai agents, automations, identity platform]
 slug: /manage/users-and-access/user-portal
 ---
 
@@ -12,11 +12,12 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # User Portal
 
+{/* TODO(v3): this page still describes the User Portal working through the Developer Portal, which is not in v3. Confirm the replacement mechanism and rewrite the prerequisites and resources table. */}
+
 The User Portal is a separate portal that exposes your integrations to external users. These users are the people your organization serves, not the developers who build integrations. In the User Portal, they can:
 
 - Chat with the AI agents that you publish.
 - Run the automations that you publish, with or without runtime arguments.
-- Run the workflows that you publish.
 
 Users sign in to the User Portal through your organization in Choreo Identity, which is the user store for the User Portal. Users do not need access to the Choreo Cloud console. You create users and roles, and assign permissions to roles, from the Choreo Cloud console. The roles of a user control which integrations the user can see and what the user can do with them. See [Manage users in the User Portal](manage-users.md).
 
@@ -28,7 +29,7 @@ Before you enable the User Portal, make sure of the following:
 
 - **You have the required permission.** Your role must include the **Manage Organization** permission under **Organization Management**, assigned at the organization level. For more information about roles and permissions, see [Access Control](../access-control.md).
 - **Your Choreo Identity organization validates usernames as email addresses.** The platform adds members of your Choreo Cloud organization to Choreo Identity with their email address as the username. You must change this setting yourself. See [Resolve blockers](check-and-repair.md#resolve-blockers).
-- **The Developer Portal uses your Choreo Identity organization as its key manager.** The User Portal calls your AI agents and workflows through the Developer Portal. It works only when the Developer Portal trusts the Choreo Identity organization that belongs to your Choreo Cloud organization as its key manager. Choreo Identity then issues the keys and tokens, and the Developer Portal accepts them. If this is not the case, the **User Portal** page shows a blocker. You can fix most key manager blockers from that page. See [Resolve blockers](check-and-repair.md#resolve-blockers).
+- **The Developer Portal uses your Choreo Identity organization as its key manager.** The User Portal calls your AI agents through the Developer Portal. It works only when the Developer Portal trusts the Choreo Identity organization that belongs to your Choreo Cloud organization as its key manager. Choreo Identity then issues the keys and tokens, and the Developer Portal accepts them. If this is not the case, the **User Portal** page shows a blocker. You can fix most key manager blockers from that page. See [Resolve blockers](check-and-repair.md#resolve-blockers).
 - **No other resources use the names that the User Portal needs.** If a resource with the same name already exists in Choreo Identity or in the Developer Portal, and the User Portal did not create it, the **User Portal** page shows a blocker. You must rename or remove that resource before you continue.
 
 :::info
@@ -47,7 +48,7 @@ When you enable the User Portal, the platform creates the following resources on
 | **API authorization** | `User Portal APIs` | Your Choreo Identity organization | Authorizes the User Portal application for every scope of the User Portal API resource. |
 | **WSO2 Cloud Admin role** | `WSO2 Cloud Admin` | Your Choreo Identity organization | A role on the User Portal application with all the scopes. |
 | **WSO2 Cloud Reader role** | `WSO2 Cloud Reader` | Your Choreo Identity organization | A role on the User Portal application with only the view scopes. |
-| **Developer Portal application** | `User Portal` | The Developer Portal | Subscribes to the APIs of the AI agents and workflows that you publish, so that the User Portal can call them. |
+| **Developer Portal application** | `User Portal` | The Developer Portal | Subscribes to the APIs of the AI agents that you publish, so that the User Portal can call them. |
 
 The **WSO2 Cloud Admin** and **WSO2 Cloud Reader** roles are system roles. The platform manages them, so you cannot rename them or change their permissions. For more information about how the platform assigns these roles, see [Default roles](manage-users.md#default-roles).
 
@@ -84,7 +85,6 @@ If the Developer Portal has no key manager, you can also let the platform config
             dark: useBaseUrl('/img/manage/cloud/user-portal/enable-confirm.png'),
         }}
     />
-
 
 6. In the dialog, click **Enable User Portal**.
 
