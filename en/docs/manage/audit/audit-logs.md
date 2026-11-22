@@ -34,7 +34,7 @@ Organization administrators are allowed to view audit logs by default. If other 
 
 To view audit logs, follow these steps:
 
-1. Sign in to [Choreo Cloud](https://console.devant.dev/).
+1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com/).
 2. In the Choreo Cloud Console, go to the top navigation menu and click **Organization**.
 
     :::tip

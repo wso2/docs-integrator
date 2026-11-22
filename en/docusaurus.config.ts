@@ -142,7 +142,7 @@ const config: Config = {
         // cloud-hosted, no download).
         {
           html: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.5c2.5 2.5 4 6 4 9.5 0 2-.5 3.5-1.5 5l-2.5 3-2.5-3c-1-1.5-1.5-3-1.5-5 0-3.5 1.5-7 4-9.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="11" r="1.8" stroke="currentColor" stroke-width="2"/><path d="M8.5 16 6 21l3-1.2M15.5 16 18 21l-3-1.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Launch Choreo Cloud',
-          href: 'https://console.devant.dev/signup',
+          href: 'https://cloud-console-development.gateway.dev.cloud.wso2.com',
           position: 'right',
           className: 'navbar-download-btn',
           'aria-label': 'Launch Choreo Cloud',

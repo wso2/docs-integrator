@@ -68,7 +68,7 @@ Changes to the permissions of a role can take up to 10 minutes to appear in User
 
 ## Open the users and roles tabs
 
-1. Sign in to [Choreo Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com).
 2. In the top navigation, click the **Organization** list and select your organization.
 3. In the left navigation menu, click **Settings** under **Admin**.
 4. Click the **User Portal** tab.

@@ -19,12 +19,12 @@ If you don't have an existing project and would like to get started on a new pro
 
 :::info Prerequisites
 - A project created with the Choreo Integrator editor and pushed to a remote GitHub or Azure DevOps repository.
-- A Choreo Cloud account. Sign up at [Choreo Cloud](https://console.devant.dev) if you don't have one.
+- A Choreo Cloud account. Sign up at [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com) if you don't have one.
 :::
 
 ## Connect your Git provider
 
-1. Sign in to [Choreo Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com).
 2. Navigate to the organization overview page by clicking the organization name at the top. The organization overview lists all your projects.
 3. Click **Import** to import an existing Choreo Integrator project.
 

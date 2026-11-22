@@ -29,7 +29,7 @@ OAuth2 is a robust and flexible authorization framework that allows third-party 
 
 Follow the steps given below.
 
-1. Sign in to the [Choreo Cloud](https://console.devant.dev).
+1. Sign in to the [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com).
 2. Select your project and navigate to the **Overview** page in the left navigation.
 3. Select the integration as API you want to configure security for.
 4. In the integration **Overview** page, on the right side, click **Configure Security**.

@@ -15,7 +15,7 @@ After you enable the User Portal, the **User Portal** page works as a health che
 
 ## Check the status of the User Portal
 
-1. Sign in to [Choreo Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com).
 2. In the top navigation, click the **Organization** list and select your organization.
 3. In the left navigation menu, click **Settings** under **Admin**.
 4. Click the **User Portal** tab.

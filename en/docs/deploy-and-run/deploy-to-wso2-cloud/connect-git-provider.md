@@ -19,7 +19,7 @@ The following authorization methods are supported for each Git provider:
 
 ## Connect a GitHub repository
 
-1. Sign in to [Choreo Cloud](https://console.devant.dev/).
+1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com/).
 2. When creating a new project or integration, select **Authorize with GitHub**.
 3. Follow the on-screen prompts to authorize the [Choreo Cloud App](https://github.com/marketplace/choreo-apps) with your GitHub account.
 
@@ -35,7 +35,7 @@ Authorizing the Choreo Cloud App grants the following permissions to perform act
 
 ## Connect an Azure DevOps repository
 
-1. Sign in to [Choreo Cloud](https://console.devant.dev/).
+1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com/).
 2. In the console header, click the **Organization** list and select your organization.
 3. In the left navigation menu under **Admin**, click **Settings**. This opens the organization-level settings page.
 4. Click the **Credentials** tab.

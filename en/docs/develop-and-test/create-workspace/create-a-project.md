@@ -18,7 +18,7 @@ If your project already exists in a Git repository, import it instead. See [Impo
 
 ## Create the project
 
-1. Sign in to [Choreo Cloud](https://console.devant.dev) and click the organization name in the top navigation to open the organization overview. It lists the projects in your organization.
+1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com) and click the organization name in the top navigation to open the organization overview. It lists the projects in your organization.
 2. Click **+ Create project**.
 
     <ThemedImage

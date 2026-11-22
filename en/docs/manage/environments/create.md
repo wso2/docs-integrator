@@ -23,7 +23,7 @@ Free-tier organizations can have a maximum of three environments.
 
 ## Create an environment
 
-1. Sign in to [Choreo Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com).
 2. In the top navigation menu, click the **Organization** list and select your organization. This opens the organization home page.
 3. In the left navigation menu under **Admin**, click **Environments**.
 4. Click **+ Create**. This opens the environment creation page.
