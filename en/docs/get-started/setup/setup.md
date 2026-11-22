@@ -20,9 +20,9 @@ A Choreo Cloud account gives you access to:
 - **Choreo Integration**: Deploy and run integrations in a managed cloud environment with built-in CI/CD, environment promotion, observability, and access control.
 - **Choreo Integrator Copilot features**: Use AI-assisted development in Choreo Integrator to generate integrations, mappings, and configurations.
 
-## Step 1: Go to the sign-up page
+## Step 1: Sign in
 
-Go to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com). Choose the region you want to sign up in from the **Region** list, then continue with Google, GitHub, or your organization's SSO.
+Go to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com). Choose the region you want to sign up in from the **Region** list, then continue with Google, GitHub, or your organization's SSO. Continuing signs you up if you do not have an account yet, and accepts the Terms of Service and Privacy Policy.
 
 <ThemedImage
     alt="Choreo Labs sign-in page with the Region list and the Continue with Google, GitHub, and SSO options"
@@ -32,48 +32,59 @@ Go to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.co
     }}
 />
 
-{/* TODO(v3): Steps 2 to 4 below still describe the v2 signup flow and are unverified against v3.
-    The v3 sign-in screen carries the region selector and accepts the terms implicitly on continue,
-    so "Accept the terms" and "Select a region" may no longer be separate steps. org-creation.png
-    is still the old WSO2-branded shot and can only be retaken while creating a brand-new
-    organization. The console URL above is a development host and must be swapped before
-    publication. */}
+## Step 2: Create your organization
 
-## Step 2: Create an organization
-
-Enter a unique name for your organization.
+Enter an **Organization Name** and an **Organization Handle**, then click **Create Organization**. The handle becomes part of every workspace URL and appears in invitations.
 
 <ThemedImage
-    alt="Creating an organization"
+    alt="Create Your Organization form with the Organization Name and Organization Handle fields"
     sources={{
         light: useBaseUrl('/img/get-started/setup/sign-up-sign-in/org-creation.png'),
         dark: useBaseUrl('/img/get-started/setup/sign-up-sign-in/org-creation.png'),
     }}
 />
 
-The name must:
+The handle must:
 
-- Be between 4 and 30 characters
-- Begin with a letter
-- Contain only uppercase letters, lowercase letters, hyphens, spaces, or underscores
+- Be between 3 and 30 characters
+- Contain only lowercase letters, numbers, and hyphens
+- Start and end with a letter or a number
 
-## Step 3: Accept the terms
+## Step 3: Choose your email preferences
 
-Read and accept the [Privacy Policy](https://wso2.com/privacy-policy) and [Terms of Use](https://wso2.com/integration-platform/terms-of-use), then click **Create**.
-
-## Step 4: Select a region
-
-Select the cloud region where you want to deploy your integrations and click **Confirm**.
-
-You land on the **Overview** page of the default project in your new organization.
+Choreo Cloud creates your organization with a **Default Project** and opens its overview. A welcome dialog asks whether you want product updates, resources, and event invites by email. Click **Subscribe** or **No thanks**. You can unsubscribe at any time.
 
 <ThemedImage
-    alt="Default Project overview page after creating an organization"
+    alt="Welcome to Choreo Cloud dialog with the Subscribe and No thanks options"
+    sources={{
+        light: useBaseUrl('/img/get-started/setup/sign-up-sign-in/welcome-choreo-cloud.png'),
+        dark: useBaseUrl('/img/get-started/setup/sign-up-sign-in/welcome-choreo-cloud.png'),
+    }}
+/>
+
+## Step 4: Open Integration
+
+The Choreo Cloud overview lists the products available to your organization: **Agent Management**, **API Management**, **Integration**, and **Identity & Access Management**. On the **Integration** card, click **Create an integration**.
+
+<ThemedImage
+    alt="Choreo Cloud overview with Create an integration highlighted on the Integration card"
+    sources={{
+        light: useBaseUrl('/img/get-started/setup/sign-up-sign-in/create-an-integration.png'),
+        dark: useBaseUrl('/img/get-started/setup/sign-up-sign-in/create-an-integration.png'),
+    }}
+/>
+
+You land on the **Overview** page of the **Default Project** in Choreo Integration. From here you can build an integration in the cloud editor, import your own repository, or start from a prebuilt integration or sample.
+
+<ThemedImage
+    alt="Default Project overview in Choreo Integration with the cloud editor, import, and Start quickly options"
     sources={{
         light: useBaseUrl('/img/get-started/setup/sign-up-sign-in/project-home.png'),
         dark: useBaseUrl('/img/get-started/setup/sign-up-sign-in/project-home.png'),
     }}
 />
+
+{/* TODO(v3): cloud-editor-setup.png below is still the old shot; the provisioning screen has not been re-captured. */}
 
 ## Step 5: Open the cloud editor
 
