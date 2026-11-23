@@ -45,7 +45,7 @@ A working Choreo Integrator environment.
 Log in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com), then create a project and navigate to the project-level view. You'll see prebuilt integrations in the **Start quickly** panel on the right. Click **Explore more prebuilt integrations** to see the full catalog.
 
 <ThemedImage
-    alt="Project-level view in Choreo Cloud showing the Start quickly panel with prebuilt integrations"
+    alt="Project overview in Choreo Integration with the Start quickly panel and Explore more prebuilt integrations highlighted"
     sources={{
         light: useBaseUrl('/img/get-started/prebuilt-integrations/project-level-view.png'),
         dark: useBaseUrl('/img/get-started/prebuilt-integrations/project-level-view.png'),
