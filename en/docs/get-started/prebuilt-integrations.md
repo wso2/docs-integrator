@@ -142,7 +142,31 @@ After deployment, you land on the integration's overview page. Select **Test** o
     }}
 />
 
-Once the execution completes, check the logs, then check your Google Sheet. You'll find a fresh spreadsheet already populated with your Salesforce data.
+To see what the execution did, go to **Operate** > **Runtime** and select the logs icon on the pod that ran it.
+
+<ThemedImage
+    alt="Runtime page listing the integration's pods, with the logs icon on the most recent one highlighted"
+    sources={{
+        light: useBaseUrl('/img/get-started/prebuilt-integrations/view-logs.png'),
+        dark: useBaseUrl('/img/get-started/prebuilt-integrations/view-logs.png'),
+    }}
+/>
+
+The real-time logs show the integration working through the run: the query it sent to Salesforce, how many leads it found, the spreadsheet it created, and the rows it synced.
+
+<ThemedImage
+    alt="Real-time pod logs showing the Salesforce query, the leads found, and the spreadsheet created and synced"
+    sources={{
+        light: useBaseUrl('/img/get-started/prebuilt-integrations/runtime-logs.png'),
+        dark: useBaseUrl('/img/get-started/prebuilt-integrations/runtime-logs.png'),
+    }}
+/>
+
+:::tip
+These are the logs of a single pod. For aggregated and historical logs across every running instance, go to **Observe** > **Runtime logs**.
+:::
+
+Now open your Google Sheet. You'll find a fresh spreadsheet already populated with your Salesforce data.
 
 From here, you can manage, deploy, and observe this integration just like any other integration on Choreo Cloud.
 
