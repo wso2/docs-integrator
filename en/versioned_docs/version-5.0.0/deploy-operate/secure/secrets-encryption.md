@@ -231,8 +231,6 @@ string dbPassword = check smClient->getSecretValue("prod/db/password");
 
 For a detailed guide on creating keystores and truststores, see [Keystores and truststores](keystore-truststore.md).
 
-To protect TLS connections against future quantum attacks, see [Post-quantum cryptography](post-quantum-cryptography.md).
-
 ### Server TLS
 
 ```ballerina

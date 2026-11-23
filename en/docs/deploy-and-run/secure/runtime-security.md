@@ -193,4 +193,4 @@ spec:
 - [Authentication](authentication.md) — Configure authentication for services
 - [API Security and Rate Limiting](api-security-rate-limiting.md) — Secure your API endpoints
 - [Secrets and Encryption](secrets-encryption.md) — Manage secrets and encryption
-- [Post-Quantum Cryptography](post-quantum-cryptography.md) — Use hybrid post-quantum TLS, ML-KEM, and ML-DSA
+- [Post-quantum cryptography](post-quantum-cryptography.md) — Use hybrid post-quantum TLS, ML-KEM, and ML-DSA

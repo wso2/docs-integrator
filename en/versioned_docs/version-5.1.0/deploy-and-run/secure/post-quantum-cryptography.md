@@ -1,12 +1,12 @@
 ---
 sidebar_position: 4
-title: Post-Quantum Cryptography
+title: Post-quantum cryptography
 description: Understand the post-quantum cryptography support in WSO2 Integrator, including hybrid post-quantum TLS, ML-KEM, and ML-DSA.
 keywords: [wso2 integrator, post-quantum, pqc, ml-kem, ml-dsa, x25519mlkem768, tls 1.3, quantum-safe]
 slug: /deploy-and-run/secure/post-quantum-cryptography
 ---
 
-# Post-Quantum Cryptography
+# Post-quantum cryptography
 
 Large-scale quantum computers are expected to break the public-key algorithms that most systems use today, such as RSA and elliptic-curve cryptography. An attacker can record encrypted traffic now and decrypt it later when a quantum computer is available. This is known as a *harvest now, decrypt later* attack.
 
@@ -16,13 +16,6 @@ WSO2 Integrator protects integrations against this risk with post-quantum algori
 - **ML-KEM-768** key encapsulation and **ML-DSA-65** digital signatures that you can use in your integration logic.
 
 The `http` package provides post-quantum TLS, and the `crypto` package provides the post-quantum algorithms. Both packages are part of WSO2 Integrator.
-
-## Availability by version
-
-| Capability | WSO2 Integrator 5.1.0 and later | WSO2 Integrator 5.0.0 |
-|---|---|---|
-| Hybrid post-quantum TLS (X25519MLKEM768) | Enabled by default | Supported. Requires a Java system property. See [Enable post-quantum TLS in WSO2 Integrator 5.0.0](#enable-post-quantum-tls-in-wso2-integrator-500). |
-| ML-KEM-768 and ML-DSA-65 in the `crypto` package | Available | Available |
 
 ## Supported algorithms
 
@@ -37,7 +30,7 @@ The `crypto` package uses the final NIST algorithm identifiers (OIDs) for ML-KEM
 
 ## Hybrid post-quantum TLS
 
-In WSO2 Integrator 5.1.0 and later, HTTP listeners and HTTP clients offer the X25519MLKEM768 key exchange group for TLS 1.3 by default. X25519MLKEM768 combines the post-quantum ML-KEM-768 algorithm with the classical X25519 algorithm. The connection stays secure as long as either algorithm remains unbroken.
+HTTP listeners and HTTP clients offer the X25519MLKEM768 key exchange group for TLS 1.3 by default. X25519MLKEM768 combines the post-quantum ML-KEM-768 algorithm with the classical X25519 algorithm. The connection stays secure as long as either algorithm remains unbroken.
 
 You don't need to change your integration code or configuration. WSO2 Integrator offers the following key exchange groups, in order of preference:
 
@@ -53,26 +46,8 @@ When the other side of the connection also supports X25519MLKEM768, the connecti
 Post-quantum protection applies only to connections that negotiate X25519MLKEM768. Both sides of the connection must support it, including any load balancer, API gateway, or proxy that terminates TLS. Current versions of Chrome, Firefox, Edge, and OpenSSL 3.5 or later support X25519MLKEM768.
 :::
 
-### Enable post-quantum TLS in WSO2 Integrator 5.0.0
-
-WSO2 Integrator 5.0.0 supports X25519MLKEM768, but HTTP listeners and HTTP clients don't offer it by default. To enable it, set the `jdk.tls.namedGroups` Java system property when you start the integration. The setting applies to all HTTP listeners and HTTP clients in the integration.
-
-```bash
-java -Djdk.tls.namedGroups=X25519MLKEM768,x25519,secp256r1,secp384r1,secp521r1 -jar my_integration.jar
-```
-
-If you run the integration in a container, pass the property to the container through the `JAVA_TOOL_OPTIONS` environment variable. For example, use the `-e` option of `docker run`.
-
-```bash
-docker run -e JAVA_TOOL_OPTIONS="-Djdk.tls.namedGroups=X25519MLKEM768,x25519,secp256r1,secp384r1,secp521r1" <image>
-```
-
-In a Dockerfile, use the `ENV` instruction instead.
-
-Keep `X25519MLKEM768` first in the list so that it's preferred, and keep the classical groups so that peers without post-quantum support can still connect. To get post-quantum TLS without this setting, upgrade to WSO2 Integrator 5.1.0 or later.
-
 :::warning
-In any version, the `jdk.tls.namedGroups` value replaces the default list of key exchange groups. If you set this property and leave out `X25519MLKEM768`, the integration doesn't use post-quantum TLS.
+If you set the `jdk.tls.namedGroups` Java system property, its value replaces the default list of key exchange groups. If you leave out `X25519MLKEM768`, the integration doesn't use post-quantum TLS.
 :::
 
 ### Verify X25519MLKEM768 support
@@ -107,56 +82,62 @@ ML-KEM-768 and ML-DSA-65 keys can be loaded from PKCS #12 keystores, private key
 
 ### Sign and verify data with ML-DSA-65
 
-Sign data with an ML-DSA-65 private key.
+The following integration signs data with an ML-DSA-65 private key and verifies the signature with the matching public key.
 
 ```ballerina
-crypto:KeyStore keyStore = {
-    path: "/path/to/mldsa-keystore.p12",
-    password: "keyStorePassword"
-};
-crypto:PrivateKey privateKey = check crypto:decodeMlDsa65PrivateKeyFromKeyStore(keyStore, "keyAlias", "keyPassword");
+import ballerina/crypto;
+import ballerina/io;
 
-byte[] data = "Hello WSO2 Integrator".toBytes();
-byte[] signature = check crypto:signMlDsa65(data, privateKey);
-```
+public function main() returns error? {
+    crypto:KeyStore keyStore = {
+        path: "/path/to/mldsa-keystore.p12",
+        password: "keyStorePassword"
+    };
+    crypto:PrivateKey privateKey = check crypto:decodeMlDsa65PrivateKeyFromKeyStore(keyStore, "keyAlias", "keyPassword");
 
-Verify the signature with the matching ML-DSA-65 public key.
+    byte[] data = "Hello WSO2 Integrator".toBytes();
+    byte[] signature = check crypto:signMlDsa65(data, privateKey);
 
-```ballerina
-crypto:TrustStore trustStore = {
-    path: "/path/to/mldsa-truststore.p12",
-    password: "trustStorePassword"
-};
-crypto:PublicKey publicKey = check crypto:decodeMlDsa65PublicKeyFromTrustStore(trustStore, "keyAlias");
+    crypto:TrustStore trustStore = {
+        path: "/path/to/mldsa-truststore.p12",
+        password: "trustStorePassword"
+    };
+    crypto:PublicKey publicKey = check crypto:decodeMlDsa65PublicKeyFromTrustStore(trustStore, "keyAlias");
 
-boolean isValid = check crypto:verifyMlDsa65Signature(data, signature, publicKey);
+    boolean isValid = check crypto:verifyMlDsa65Signature(data, signature, publicKey);
+    io:println("Signature valid: ", isValid);
+}
 ```
 
 ### Establish a shared key with ML-KEM-768
 
-ML-KEM-768 lets two parties agree on a shared secret. The sender creates the shared secret and an encapsulated copy of it with the receiver's public key, and then sends the encapsulated secret to the receiver.
+ML-KEM-768 lets two parties agree on a shared secret. The sender creates the shared secret and an encapsulated copy of it with the receiver's public key, and then sends the encapsulated secret to the receiver. The receiver recovers the same shared secret with its private key.
+
+The following integration shows both sides in one program. In a real exchange, the sender and the receiver run separately, and only the encapsulated secret travels between them.
 
 ```ballerina
-crypto:PublicKey receiverPublicKey = check crypto:decodeMlKem768PublicKeyFromCertFile("/path/to/receiver-mlkem.crt");
+import ballerina/crypto;
+import ballerina/io;
 
-crypto:EncapsulationResult result = check crypto:encapsulateMlKem768(receiverPublicKey);
-byte[] sharedSecret = result.sharedSecret;
-byte[] encapsulatedSecret = result.encapsulatedSecret;
+public function main() returns error? {
+    // Sender: create a shared secret with the receiver's public key.
+    crypto:PublicKey receiverPublicKey = check crypto:decodeMlKem768PublicKeyFromCertFile("/path/to/receiver-mlkem.crt");
+    crypto:EncapsulationResult result = check crypto:encapsulateMlKem768(receiverPublicKey);
+    byte[] senderSecret = result.sharedSecret;
+    byte[] encapsulatedSecret = result.encapsulatedSecret;
+
+    // Receiver: recover the shared secret with the private key.
+    crypto:PrivateKey receiverPrivateKey = check crypto:decodeMlKem768PrivateKeyFromKeyFile("/path/to/receiver-mlkem.key", "keyPassword");
+    byte[] receiverSecret = check crypto:decapsulateMlKem768(encapsulatedSecret, receiverPrivateKey);
+
+    // Both sides derive the same 256-bit key from the shared secret.
+    byte[] senderKey = check crypto:hkdfSha256(senderSecret, 32);
+    byte[] receiverKey = check crypto:hkdfSha256(receiverSecret, 32);
+    io:println("Keys match: ", senderKey == receiverKey);
+}
 ```
 
-The receiver recovers the same shared secret with its private key.
-
-```ballerina
-crypto:PrivateKey receiverPrivateKey = check crypto:decodeMlKem768PrivateKeyFromKeyFile("/path/to/receiver-mlkem.key", "keyPassword");
-
-byte[] sharedSecret = check crypto:decapsulateMlKem768(encapsulatedSecret, receiverPrivateKey);
-```
-
-Derive an encryption key from the shared secret with `crypto:hkdfSha256`, and then encrypt the payload with `crypto:encryptAesGcm`.
-
-```ballerina
-byte[] aesKey = check crypto:hkdfSha256(sharedSecret, 32);
-```
+Use the derived key with `crypto:encryptAesGcm` to encrypt the payload.
 
 To combine ML-KEM-768 with RSA in a single key exchange, use `crypto:encapsulateRsaKemMlKem768` and `crypto:decapsulateRsaKemMlKem768`.
 
