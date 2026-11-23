@@ -25,55 +25,99 @@ If you don't have an existing project and would like to get started on a new pro
 ## Connect your Git provider
 
 1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
-2. Navigate to the organization overview page by clicking the organization name at the top. The organization overview lists all your projects.
-3. Click **Import** to import an existing Choreo Integrator project.
+2. Click the organization name at the top to open the organization overview, then click **All projects**. You can also select **Projects** in the left navigation.
 
     <ThemedImage
-        alt="Import button on the organization overview page"
+        alt="Organization overview with the All projects link highlighted below the list of projects"
+        sources={{
+            light: useBaseUrl('/img/import-project/import-project-saas-all-projects.png'),
+            dark: useBaseUrl('/img/import-project/import-project-saas-all-projects.png'),
+        }}
+    />
+
+3. On the **All projects** page, click **Import project**.
+
+    <ThemedImage
+        alt="All projects page with the Import project button highlighted"
         sources={{
             light: useBaseUrl('/img/import-project/import-project-saas-button.png'),
             dark: useBaseUrl('/img/import-project/import-project-saas-button.png'),
         }}
     />
 
-4. Select your Git provider and complete the authorization flow in the browser, then return to Choreo Cloud.
+4. Choose how to reach your repository:
+
+    - **Connect a public GitHub repository** — Use a public repository without authorizing anything.
+    - **Authorize with GitHub** — Authorize Choreo Cloud with GitHub to reach your private repositories. Complete the flow in the browser, then return to Choreo Cloud.
+    - **Authorize with Azure DevOps** — Available once you add Azure DevOps credentials at the organization level. See [Connect a Git provider](../../deploy-and-run/deploy-to-wso2-cloud/connect-git-provider.md).
+
+    <ThemedImage
+        alt="Import a project page showing the options to connect a public GitHub repository or authorize with a Git provider"
+        sources={{
+            light: useBaseUrl('/img/import-project/import-project-saas-providers.png'),
+            dark: useBaseUrl('/img/import-project/import-project-saas-providers.png'),
+        }}
+    />
 
     :::note
-    One-click OAuth2 authorization is only available for GitHub. To use Azure DevOps, you must first add your credentials at the organization level. See [Connect a Git provider](../../deploy-and-run/deploy-to-wso2-cloud/connect-git-provider.md) for instructions.
+    Import currently supports **Choreo Integrator: Default** projects only. Bitbucket and GitLab appear in the list but aren't available yet.
     :::
+
+5. If you authorize with GitHub and the Choreo GitHub App isn't installed on the account that owns your repository, click **Install GitHub App**, install it on that account or organization, and authorize again.
+
+    <ThemedImage
+        alt="Prompt to install the GitHub App before the organization and repository can be selected"
+        sources={{
+            light: useBaseUrl('/img/import-project/import-project-saas-install-github-app.png'),
+            dark: useBaseUrl('/img/import-project/import-project-saas-install-github-app.png'),
+        }}
+    />
 
 ## Configure and import the project
 
-1. Select the organization that owns the repository.
-2. Select the repository and the branch.
-3. Set the path to the folder where your project lives within the repository.
-4. Optionally, give the project a name.
-5. Add the integrations you want to import. For each integration, click **+** next to each integration to add it individually, or click **+** next to the project name to add all integrations in the project at once.
+1. Select the **Organization** that owns the repository, then the **Repository** and the **Branch**.
+2. If the project doesn't live at the root of the repository, set **Repository sub path**. Choreo Cloud confirms the workspace it finds below the field.
+3. Under **Project details**, enter a **Project name**. The **Project ID** is generated from it and can be edited, and a **Description** is optional.
+4. Under **Configure integrations**, add the integrations you want to import from the **Workspace directories** tree. Click **+** next to a directory to add it on its own, or **+** next to the workspace root to add every integration at once.
+
     <ThemedImage
-        alt="Import Project"
+        alt="Import a project form with the repository selected and the plus button on the workspace root highlighted"
         sources={{
             light: useBaseUrl('/img/import-project/import-project-saas-form.png'),
             dark: useBaseUrl('/img/import-project/import-project-saas-form.png'),
         }}
     />
-6. For each integration, set the integration name, an optional description, and the integration type.
-7. Click **Save** for each integration once configured.
+
+5. Each integration you add appears under **Configured integrations**. Edit its display name, check the detected **Integration type**, and remove any you don't want. The path each one was found at is shown beside it.
+6. Click **Import project**.
+
     <ThemedImage
-        alt="Configure Integration"
+        alt="Configured integrations table with display names and integration types set, and the Import project button active"
         sources={{
             light: useBaseUrl('/img/import-project/import-project-saas-integration-config.png'),
             dark: useBaseUrl('/img/import-project/import-project-saas-integration-config.png'),
         }}
     />
-8. After configuring all integrations, click **Import**.
 
-Choreo Cloud creates all the integrations and navigates you to the newly created project home.
+Choreo Cloud creates all the integrations and opens the new project's overview, which lists them alongside the repository it imported them from.
 
 <ThemedImage
-    alt="Project Home"
+    alt="Overview of the imported project listing its integrations and linking to the source repository"
     sources={{
         light: useBaseUrl('/img/import-project/import-project-saas-project-home.png'),
         dark: useBaseUrl('/img/import-project/import-project-saas-project-home.png'),
+    }}
+/>
+
+## Continue developing the project
+
+To carry on working on the imported project, click **Open in Cloud Editor** on the project overview. The project opens in the browser-based cloud editor, where you can edit it in low-code or pro-code view and push your changes back to the repository.
+
+<ThemedImage
+    alt="Imported project overview with the Open in Cloud Editor button highlighted"
+    sources={{
+        light: useBaseUrl('/img/import-project/import-project-saas-cloud-editor.png'),
+        dark: useBaseUrl('/img/import-project/import-project-saas-cloud-editor.png'),
     }}
 />
 
