@@ -35,9 +35,15 @@ flowchart LR
 
 ### Step 1: Open the artifacts palette
 
-Select **Add Artifact** to open the artifacts palette. Search for `identityserver.trigger` and find the **identityserver.trigger** card under **More on Ballerina Central**.
+Select **Add Artifact** to open the artifacts palette. Search for `identityserver.trigger` and find the **identityserver.trigger** card under **More on Ballerina Central**. Don't use the **trigger.identityserver** card; it creates the older `trigger.identityserver` package.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_01_artifact_palette.png: Artifacts palette showing the Event Integration category with the WSO2 Identity Server card -->
+<ThemedImage
+    alt="Artifacts palette search results showing the identityserver.trigger package from Ballerina Central"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_01_artifact_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_01_artifact_palette.png'),
+    }}
+/>
 
 ### Configuring the WSO2 Identity Server listener
 
@@ -50,7 +56,13 @@ Select the **identityserver.trigger** card to open the **WSO2 Identity Server Ev
 - **Webhook Listener Port**: `8090`, the default.
 - **Webhook Secret**: bind it to a new configurable variable named `webhookSecret`.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_02_trigger_config_form.png: WSO2 Identity Server Event Integration form with Event Channel set to identityserver:LoginService and a new listener on port 8090 -->
+<ThemedImage
+    alt="WSO2 Identity Server Event Integration form with the webhook secret bound to a configurable and Event Channel set to Login"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_02_trigger_config_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_02_trigger_config_form.png'),
+    }}
+/>
 
 ### Step 3: Set the configurable values
 
@@ -74,7 +86,13 @@ Select **Create**. WSO2 Integrator adds the listener and an `identityserver:Logi
 
 Open the **identityserver:LoginService** service. It lists all 2 of its event handlers, including `onLoginSuccess`, which receives an `identityserver:LoginSuccessEvent`. Leave the other handlers empty.
 
-<!-- TODO: Add visual designer screenshot img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_04_add_handler_panel.png: identityserver:LoginService view showing the onLoginSuccess event handler attached to identityserverListener -->
+<ThemedImage
+    alt="trigger:LoginService view with the onLoginSuccess and onLoginFailed event handlers on the listener"
+    sources={{
+        light: useBaseUrl('/img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_04_add_handler_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/security-identity/identityserver.trigger/identityserver_trigger_screenshots_04_add_handler_panel.png'),
+    }}
+/>
 
 ### Step 6: Log the event
 
