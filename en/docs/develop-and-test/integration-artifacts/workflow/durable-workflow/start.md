@@ -68,8 +68,7 @@ So hand the ID back to whoever will need it:
 
 | Route | Use it for                                                                             |
 |---|----------------------------------------------------------------------------------------|
-| [Integration Control Plane](../../../../manage/integrations/workflows.md#start-a-workflow) | Starting a run by hand from a generated form, for testing, onboarding, and operations. |
-| [Management API](management-api.md) | `POST /workflows` for custom portals and automation of your own. |
+| [Cloud-managed control plane](../../../../manage/integrations/workflows.md#start-a-workflow) | Starting a run by hand from a generated form, for testing, onboarding, and operations. |
 
 ## Next steps
 
