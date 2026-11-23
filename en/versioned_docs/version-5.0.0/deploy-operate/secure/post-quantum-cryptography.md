@@ -47,7 +47,7 @@ You don't need to change your integration code or configuration. WSO2 Integrator
 4. `secp384r1`
 5. `secp521r1`
 
-When the other side of the connection also supports X25519MLKEM768, the connection uses it. Otherwise, the connection falls back to a classical group.
+When the other side of the connection also supports X25519MLKEM768, the connection can negotiate it. The server selects the key exchange group, so it can select a classical group instead. Check the group that each connection actually negotiates.
 
 :::note
 Post-quantum protection applies only to connections that negotiate X25519MLKEM768. Both sides of the connection must support it, including any load balancer, API gateway, or proxy that terminates TLS. Current versions of Chrome, Firefox, Edge, and OpenSSL 3.5 or later support X25519MLKEM768.
@@ -61,11 +61,13 @@ WSO2 Integrator 5.0.0 supports X25519MLKEM768, but HTTP listeners and HTTP clien
 java -Djdk.tls.namedGroups=X25519MLKEM768,x25519,secp256r1,secp384r1,secp521r1 -jar my_integration.jar
 ```
 
-If you run the integration in a container, set the property through the `JAVA_TOOL_OPTIONS` environment variable.
+If you run the integration in a container, pass the property to the container through the `JAVA_TOOL_OPTIONS` environment variable. For example, use the `-e` option of `docker run`.
 
 ```bash
-JAVA_TOOL_OPTIONS="-Djdk.tls.namedGroups=X25519MLKEM768,x25519,secp256r1,secp384r1,secp521r1"
+docker run -e JAVA_TOOL_OPTIONS="-Djdk.tls.namedGroups=X25519MLKEM768,x25519,secp256r1,secp384r1,secp521r1" <image>
 ```
+
+In a Dockerfile, use the `ENV` instruction instead.
 
 Keep `X25519MLKEM768` first in the list so that it's preferred, and keep the classical groups so that peers without post-quantum support can still connect. To get post-quantum TLS without this setting, upgrade to WSO2 Integrator 5.1.0 or later.
 
@@ -73,15 +75,25 @@ Keep `X25519MLKEM768` first in the list so that it's preferred, and keep the cla
 In any version, the `jdk.tls.namedGroups` value replaces the default list of key exchange groups. If you set this property and leave out `X25519MLKEM768`, the integration doesn't use post-quantum TLS.
 :::
 
-### Verify the negotiated key exchange
+### Verify X25519MLKEM768 support
 
-Use OpenSSL 3.5 or later to check whether a WSO2 Integrator service negotiates X25519MLKEM768.
+Use OpenSSL 3.5 or later to check whether a WSO2 Integrator service accepts X25519MLKEM768 when it's the only offered group.
 
 ```bash
 openssl s_client -connect localhost:9443 -tls1_3 -groups X25519MLKEM768 </dev/null 2>/dev/null | grep -i "group"
 ```
 
-The output shows `X25519MLKEM768` as the negotiated group when post-quantum TLS is active.
+The output shows `X25519MLKEM768` when the service supports it. This check doesn't show which group the service selects for a client that offers several groups.
+
+### Verify the negotiated key exchange
+
+To check which group the service selects, offer the same group list as a real client.
+
+```bash
+openssl s_client -connect localhost:9443 -tls1_3 -groups X25519MLKEM768:x25519:secp256r1:secp384r1:secp521r1 </dev/null 2>/dev/null | grep -i "group"
+```
+
+The output shows `X25519MLKEM768` as the negotiated group when the service selects the hybrid group.
 
 ## Use post-quantum algorithms in integrations
 
