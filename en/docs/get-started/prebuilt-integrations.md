@@ -166,7 +166,15 @@ The real-time logs show the integration working through the run: the query it se
 These are the logs of a single pod. For aggregated and historical logs across every running instance, go to **Observe** > **Runtime logs**.
 :::
 
-Now open your Google Sheet. You'll find a fresh spreadsheet already populated with your Salesforce data.
+Now open your Google Sheet. You'll find a fresh spreadsheet, named after the integration and the time it ran, already populated with your Salesforce leads and their fields as columns.
+
+<ThemedImage
+    alt="Google Sheet created by the integration, with Salesforce lead fields as columns and an exported lead in the first row"
+    sources={{
+        light: useBaseUrl('/img/get-started/prebuilt-integrations/google-sheet-result.png'),
+        dark: useBaseUrl('/img/get-started/prebuilt-integrations/google-sheet-result.png'),
+    }}
+/>
 
 From here, you can manage, deploy, and observe this integration just like any other integration on Choreo Cloud.
 
