@@ -1,12 +1,12 @@
 ---
 sidebar_position: 4
-title: Post-quantum cryptography
+title: Post-Quantum Cryptography
 description: Understand the post-quantum cryptography support in WSO2 Integrator, including hybrid post-quantum TLS, ML-KEM, and ML-DSA.
 keywords: [wso2 integrator, post-quantum, pqc, ml-kem, ml-dsa, x25519mlkem768, tls 1.3, quantum-safe]
 slug: /deploy-and-run/secure/post-quantum-cryptography
 ---
 
-# Post-quantum cryptography
+# Post-Quantum Cryptography
 
 Large-scale quantum computers are expected to break the public-key algorithms that most systems use today, such as RSA and elliptic-curve cryptography. An attacker can record encrypted traffic now and decrypt it later when a quantum computer is available. This is known as a *harvest now, decrypt later* attack.
 
