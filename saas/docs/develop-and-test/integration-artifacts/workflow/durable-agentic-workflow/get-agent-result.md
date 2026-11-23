@@ -49,7 +49,7 @@ The saved step is drawn as **Get Agent Result**, with or without **Wait for Resu
 - **Selected**, the default, waits until the instance finishes.
 - **Cleared** reads without waiting. While the instance is still working the step returns a `workflow:WorkflowInProgressError`, which the flow can handle and report as "still running". This is what a status endpoint usually wants, because the caller gets an answer immediately either way.
 
-A gated activity or a human task counts as still working: the instance is suspended waiting on a person, so a run that looks stalled is often one that needs a decision in the [Control Plane](../../../../manage/integrations/workflows.md#act-on-human-tasks-and-reviews).
+A gated activity or a human task counts as still working: the instance is suspended waiting on a person, so a run that looks stalled is often one that needs a decision in the [Control Plane](../../../../manage/integrations/workflows.md#complete-or-fail-a-human-task).
 
 ## Final result or one turn's answer?
 

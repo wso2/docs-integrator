@@ -50,7 +50,7 @@ Use a **data event** when a system or a person is submitting *content* the workf
 
 ## Watching a waiting workflow
 
-While the workflow waits, the execution graph in the [Integration Control Plane](../../../../manage/integrations/workflows.md#view-the-details-of-a-run) marks the halt point as a `DATA` node named after the event, with status `WAITING` — so anyone can see exactly what the process is blocked on rather than guessing that it is stuck. The same graph is available over the [Management API](management-api.md).
+While the workflow waits, the execution graph in the [cloud-managed control plane](../../../../manage/integrations/workflows.md#view-the-details-of-a-run) marks the halt point as a `DATA` node named after the event, with status `WAITING` — so anyone can see exactly what the process is blocked on rather than guessing that it is stuck.
 
 ## Next steps
 
