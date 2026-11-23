@@ -21,7 +21,7 @@ Every organization starts with a **default** pipeline containing the environment
 
 To view and manage promotion pipelines, navigate to the organization level.
 
-1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com/).
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com/).
 2. In the top navigation menu, click the organization name and select your organization.
 3. Open **Settings**, then under **Infrastructure** click **Deployment Pipelines**.
 

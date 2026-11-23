@@ -14,12 +14,12 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 Choreo Cloud includes a browser-based editor where you can create and develop integrations without installing anything locally. Once your integration is ready, you can deploy it to Choreo Cloud directly from the editor.
 
 :::info Prerequisites
-- A Choreo Cloud account and a project. Sign up at [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com) if you don't have one.
+- A Choreo Cloud account and a project. Sign up at [Choreo Cloud](https://console.cloud.choreolabs.com) if you don't have one.
 :::
 
 ## Open the cloud editor
 
-1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com) and open your project.
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com) and open your project.
 2. On the project home page, click **Create on Cloud**.
 
    <ThemedImage

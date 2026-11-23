@@ -22,7 +22,7 @@ A Choreo Cloud account gives you access to:
 
 ## Step 1: Sign in
 
-Go to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com). Choose the region you want to sign up in from the **Region** list, then continue with Google, GitHub, or your organization's SSO. Continuing signs you up if you do not have an account yet, and accepts the Terms of Service and Privacy Policy.
+Go to [Choreo Cloud](https://console.cloud.choreolabs.com). Choose the region you want to sign up in from the **Region** list, then continue with Google, GitHub, or your organization's SSO. Continuing signs you up if you do not have an account yet, and accepts the Terms of Service and Privacy Policy.
 
 <ThemedImage
     alt="Choreo Labs sign-in page with the Region list and the Continue with Google, GitHub, and SSO options"
@@ -62,7 +62,7 @@ Choreo Cloud creates your organization with a **Default Project** and opens its 
     }}
 />
 
-## Step 4: Open Integration
+## Step 4: Create an Integration
 
 The Choreo Cloud overview lists the products available to your organization: **Agent Management**, **API Management**, **Integration**, and **Identity & Access Management**. On the **Integration** card, click **Create an integration**.
 

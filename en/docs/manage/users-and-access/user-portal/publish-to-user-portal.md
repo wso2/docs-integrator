@@ -32,7 +32,7 @@ For each automation, users can also see when it last ran and, if it is scheduled
 
 ## Publish an integration
 
-1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com).
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
 2. Select the project that contains the integration.
 3. In the **Integrations** pane, click the integration that you want to publish.
 4. On the integration's overview page, turn on the **Publish to User Portal** toggle.

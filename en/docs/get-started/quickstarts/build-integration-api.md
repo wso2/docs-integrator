@@ -280,7 +280,7 @@ To deploy your integration to Choreo Cloud from the cloud editor, see [Save and 
   <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
   <p class="palette-card-desc">Rather not build it yourself? One-click deploy the HelloWorldAPI sample straight to Choreo Cloud.</p>
   <div class="palette-chip-row" style={{justifyContent: 'center'}}>
-    <a href="https://cloud-console-development.gateway.dev.cloud.wso2.com/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/helloworldapi" target="_blank" rel="noopener noreferrer">
+    <a href="https://console.cloud.choreolabs.com/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/helloworldapi" target="_blank" rel="noopener noreferrer">
       <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to Choreo Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
     </a>
   </div>

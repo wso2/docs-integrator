@@ -18,7 +18,7 @@ If your integration is exposed as an API, see [API Management](api-management/ap
 
 ## View integrations
 
-1. Log in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com). The default project opens automatically.
+1. Log in to [Choreo Cloud](https://console.cloud.choreolabs.com). The default project opens automatically.
 2. On the project home, all integrations within the project are listed.
     <ThemedImage
         alt="Project Overview"

@@ -29,7 +29,7 @@ Assume you are overseeing the Engineering Project within your organization and y
 
 ### Step 1: Create a project
 
-1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com).
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
 2. In the top navigation, click the **Organization**.
 3. On the organization overview page, click **+ Create Project**.
 4. Enter a display name, unique name, and description for the project. Use the following values:

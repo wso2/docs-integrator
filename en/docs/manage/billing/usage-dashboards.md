@@ -25,7 +25,7 @@ By leveraging these insights, businesses can make informed decisions to enhance 
 
 ## View insights
 
-To view usage insights, go to the [Choreo Cloud Console](https://cloud-console-development.gateway.dev.cloud.wso2.com/) and click **Insights**, then click **Usage** in the left navigation menu.
+To view usage insights, go to the [Choreo Cloud Console](https://console.cloud.choreolabs.com/) and click **Insights**, then click **Usage** in the left navigation menu.
 
 ## Analyze statistics
 

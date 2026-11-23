@@ -18,7 +18,7 @@ Samples teach you the platform's abstractions. [Prebuilt integrations](../../get
 
 ## Open the samples
 
-1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com) and open the project where you want to add the sample.
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com) and open the project where you want to add the sample.
 
     If the project has no integrations yet, you land on the **Create Integration** page by default. Continue to the next step.
 

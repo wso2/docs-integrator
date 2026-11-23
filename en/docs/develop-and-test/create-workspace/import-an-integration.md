@@ -15,12 +15,12 @@ If your integration is already in a Git repository, you can import it directly i
 
 :::info Prerequisites
 - An integration created with Choreo Integrator editor pushed to a remote GitHub or Azure DevOps repository.
-- A Choreo Cloud account. Sign up at [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com) if you don't have one.
+- A Choreo Cloud account. Sign up at [Choreo Cloud](https://console.cloud.choreolabs.com) if you don't have one.
 :::
 
 ## Connect your Git provider
 
-1. Sign in to [Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com).
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
 
    When you sign up for the first time, Choreo Cloud creates a default project for you. You land on the project home page.
 

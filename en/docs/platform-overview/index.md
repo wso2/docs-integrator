@@ -84,7 +84,7 @@ Choreo Integrator is powered by [Ballerina](https://ballerina.io/), a programmin
 
 ### Choreo Cloud (WSO2 iPaaS)
 
-[Choreo Cloud](https://cloud-console-development.gateway.dev.cloud.wso2.com/) is a managed environment for building and running integrations. WSO2 operates the underlying infrastructure, allowing your team to focus on integration development.
+[Choreo Cloud](https://console.cloud.choreolabs.com/) is a managed environment for building and running integrations. WSO2 operates the underlying infrastructure, allowing your team to focus on integration development.
 
 You can develop in the cloud editor, import an existing integration from a source repository, or start with a pre-built sample. The managed service provides deployment, scaling, availability, management, and observability capabilities.
 
