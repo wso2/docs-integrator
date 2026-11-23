@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Gate Tools for Approval
-description: Gate a tool so a WSO2 Agent Builder AI agent pauses for approval before it runs, then approve or reject and resume the run.
-keywords: [wso2 agent builder, gated tools, tool approval, approval gate, human in the loop, hitl, ai agents, tools]
+description: Gate a tool so a Choreo Agent Builder AI agent pauses for approval before it runs, then approve or reject and resume the run.
+keywords: [choreo agent builder, gated tools, tool approval, approval gate, human in the loop, hitl, ai agents, tools]
 slug: /develop-and-test/integration-artifacts/agents/human-in-the-loop/gate-tools-for-approval
 ---
 
@@ -101,7 +101,7 @@ Gating every call to a tool is often stricter than you need. A refund of 5 USD a
 1. Select **Requires Approval**.
 2. Set **Approval Function**. Pick a compatible function from your agentic integration, or type a new name to create one. A compatible function takes the same parameters as the tool it gates and returns `boolean`, and the picker lists only functions that match.
 
-    Typing a new name has WSO2 Agent Builder generate a function with the correct signature and a placeholder body that always requires approval.
+    Typing a new name has Choreo Agent Builder generate a function with the correct signature and a placeholder body that always requires approval.
 
     <ThemedImage
         alt="The Approval Function field with a new function name, refundNeedsReview, typed in."
@@ -198,7 +198,7 @@ When you chat with the agent through an **Agent Chat** trigger, pending approval
         }}
     />
 
-    WSO2 Agent Builder adds a `POST decision` resource next to `POST chat`.
+    Choreo Agent Builder adds a `POST decision` resource next to `POST chat`.
 
     <Tabs>
     <TabItem value="ui" label="Visual Designer" default>

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: "Create a Durable Agent"
-description: Create a durable agent in WSO2 Agent Builder and give it activities, data events, and human tasks as capabilities, so every reasoning step and wait survives crashes and restarts.
-keywords: [wso2 agent builder, durable agent, durable agentic workflow, ai agent, activities, data events, human task, human in the loop, hitl]
+description: Create a durable agent in Choreo Agent Builder and give it activities, data events, and human tasks as capabilities, so every reasoning step and wait survives crashes and restarts.
+keywords: [choreo agent builder, durable agent, durable agentic workflow, ai agent, activities, data events, human task, human in the loop, hitl]
 slug: /develop-and-test/integration-artifacts/durable-agentic-workflow/create-durable-agent
 ---
 
@@ -49,7 +49,7 @@ The steps below follow one example: a `claimAgent` that validates expense claims
     | Field | Required | Description |
     |---|---|---|
     | **Name** | Yes | The name the agent is referenced by, for example `claimAgent`. |
-    | **Model** | Yes | The model provider the agent uses for its LLM calls. Defaults to **Default WSO2 Model Provider**. Select **Create New Model Provider** to use another one. |
+    | **Model** | Yes | The model provider the agent uses for its LLM calls. Defaults to **Default Choreo Model Provider**. Select **Create New Model Provider** to use another one. |
     | **Role** | Yes | The agent's primary function, for example `Expense claim assistant`. |
     | **Instructions** | Yes | What the agent should do. See [Configure the agent](#configure-the-agent). |
     | **Input Data Type** | No | The structured payload a run starts with, for example an `ExpenseClaim` record. Leave it empty to start the agent with the query text alone. |

@@ -2,7 +2,7 @@
 sidebar_position: 4
 title: ICP Observability Setup
 description: View centralized logs and metrics for self-hosted agents in the Integration Control Plane console using Moesif or OpenSearch.
-keywords: [wso2 agent builder, observability, icp, integration control plane, fluent bit, opensearch, logs, metrics]
+keywords: [choreo agent builder, observability, icp, integration control plane, fluent bit, opensearch, logs, metrics]
 slug: /observe/icp-observability
 ---
 

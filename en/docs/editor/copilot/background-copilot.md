@@ -1,7 +1,7 @@
 ---
 title: "Copilot in the Background"
 description: "Follow a Copilot run while the panel is closed, using the status bar, the floating status orb, and the mini chat."
-keywords: [wso2 agent builder, copilot, background, status orb, mini chat, agent status]
+keywords: [choreo agent builder, copilot, background, status orb, mini chat, agent status]
 sidebar_position: 3.5
 slug: /editor/copilot/background-copilot
 ---
@@ -40,7 +40,7 @@ While Copilot is working, the status bar shows the current state at a glance.
 
 Select the status bar item to open the Copilot panel. The item appears only when the panel is closed and no other Copilot surface is already reporting the status, so it never duplicates something you can already see.
 
-<!-- TODO: capture asset then uncomment. ![The WSO2 Agent Builder Copilot status bar item showing a running step.](/img/editor/copilot/copilot-status-bar.png) -->
+<!-- TODO: capture asset then uncomment. ![The Choreo Agent Builder Copilot status bar item showing a running step.](/img/editor/copilot/copilot-status-bar.png) -->
 
 ## Status orb
 

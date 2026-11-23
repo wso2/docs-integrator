@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: "Datadog: End-to-End Setup"
-description: Observe metrics and distributed traces from WSO2 Agent Builder agents using Datadog.
+description: Observe metrics and distributed traces from Choreo Agent Builder agents using Datadog.
 slug: /observe/recipes/datadog-setup
 ---
 
@@ -122,7 +122,7 @@ Then follow the steps below to configure metrics and tracing data publishing to 
 ## Step 3: Import Prometheus and Jaeger Extensions
 
 To include the Prometheus and Jaeger extensions into the executable, the `ballerinax/prometheus` and `ballerinax/jaeger`
-modules need to be imported into your agent. Open the file explorer in WSO2 Agent Builder and add the following content to the `main.bal` file.
+modules need to be imported into your agent. Open the file explorer in Choreo Agent Builder and add the following content to the `main.bal` file.
 
 ```ballerina
 import ballerinax/prometheus as _;
@@ -183,7 +183,7 @@ The table below provides the descriptions of each configuration option and possi
 
 ## Step 5: Send Requests
 
-Run the service and send requests to it. The example requests below call this sample shop service (`main.bal`), which listens on port `8090`. The service hosts a shop assistant agent that answers customer questions and calls tools to list products, place orders, and look up orders. The sample uses the default WSO2 model provider.
+Run the service and send requests to it. The example requests below call this sample shop service (`main.bal`), which listens on port `8090`. The service hosts a shop assistant agent that answers customer questions and calls tools to list products, place orders, and look up orders. The sample uses the default Choreo model provider.
 
 ```ballerina
 import ballerina/ai;

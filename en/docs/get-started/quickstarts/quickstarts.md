@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Quickstarts
 title: Quickstarts
-description: Build your first AI agent or durable agent with WSO2 Agent Builder in under 10 minutes.
-keywords: [wso2 agent builder, quickstarts, ai agent, durable agent]
+description: Build your first AI agent or durable agent with Choreo Agent Builder in under 10 minutes.
+keywords: [choreo agent builder, quickstarts, ai agent, durable agent]
 hide_table_of_contents: true
 slug: /get-started/quickstarts
 ---
@@ -12,7 +12,7 @@ slug: /get-started/quickstarts
 
 Each quickstart walks you through building a working agent from an empty project, in under 10 minutes. Pick the one that matches what you're trying to build.
 
-Before you start, [set up WSO2 Agent Builder](../setup.md) and sign in.
+Before you start, [set up Choreo Agent Builder](../setup.md) and sign in.
 
 <PaletteGrid>
 

@@ -1,13 +1,13 @@
 ---
 sidebar_position: 5
 title: OpenSearch
-description: Connect WSO2 Agent Builder agents to OpenSearch for log aggregation and analytics.
+description: Connect Choreo Agent Builder agents to OpenSearch for log aggregation and analytics.
 slug: /observe/open-source/opensearch
 ---
 
 # OpenSearch
 
-OpenSearch is an open-source search and analytics suite derived from Elasticsearch. It provides log aggregation, full-text search, and visualization through OpenSearch Dashboards. WSO2 Agent Builder agent logs can be shipped to OpenSearch using Fluent Bit or Data Prepper.
+OpenSearch is an open-source search and analytics suite derived from Elasticsearch. It provides log aggregation, full-text search, and visualization through OpenSearch Dashboards. Choreo Agent Builder agent logs can be shipped to OpenSearch using Fluent Bit or Data Prepper.
 
 ## Prerequisites
 

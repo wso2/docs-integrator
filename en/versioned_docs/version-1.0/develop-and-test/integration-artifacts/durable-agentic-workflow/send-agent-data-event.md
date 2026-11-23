@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: "Send an Agent Data Event"
-description: Deliver a turn to a running durable agent in WSO2 Agent Builder on one of its data event channels, and keep the correlation token that identifies the answer.
-keywords: [wso2 agent builder, durable agent, send agent data event, data event, chat, instance id, correlation token, durable agentic workflow]
+description: Deliver a turn to a running durable agent in Choreo Agent Builder on one of its data event channels, and keep the correlation token that identifies the answer.
+keywords: [choreo agent builder, durable agent, send agent data event, data event, chat, instance id, correlation token, durable agentic workflow]
 slug: /develop-and-test/integration-artifacts/durable-agentic-workflow/send-agent-data-event
 ---
 

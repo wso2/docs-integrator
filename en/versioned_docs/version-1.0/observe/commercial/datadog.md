@@ -1,13 +1,13 @@
 ---
 sidebar_position: 1
 title: Datadog
-description: Send WSO2 Agent Builder agent metrics, traces, and logs to Datadog.
+description: Send Choreo Agent Builder agent metrics, traces, and logs to Datadog.
 slug: /observe/commercial/datadog
 ---
 
 # Datadog
 
-Datadog provides a full-stack observability platform for monitoring your WSO2 Agent Builder agents. You can forward metrics, distributed traces, and logs to Datadog using the Datadog Agent or direct API ingestion.
+Datadog provides a full-stack observability platform for monitoring your Choreo Agent Builder agents. You can forward metrics, distributed traces, and logs to Datadog using the Datadog Agent or direct API ingestion.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ Datadog provides a full-stack observability platform for monitoring your WSO2 Ag
 ## Architecture
 
 ```
-WSO2 Agent Builder AI agent
+Choreo Agent Builder AI agent
   ├── Prometheus metrics ──▶ Datadog Agent ──▶ Datadog Cloud
   ├── OpenTelemetry traces ──▶ Datadog Agent ──▶ Datadog Cloud
   └── Structured logs ──▶ Datadog Agent ──▶ Datadog Cloud

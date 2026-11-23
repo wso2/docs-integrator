@@ -1,8 +1,8 @@
 ---
 sidebar_position: 6
 title: OpenTelemetry
-description: Export traces and metrics from WSO2 Agent Builder agents to any OpenTelemetry-compatible backend over OTLP using the built-in OpenTelemetry extension.
-keywords: [wso2 agent builder, observability, opentelemetry, otel, otlp, tracing, metrics, opentelemetry collector]
+description: Export traces and metrics from Choreo Agent Builder agents to any OpenTelemetry-compatible backend over OTLP using the built-in OpenTelemetry extension.
+keywords: [choreo agent builder, observability, opentelemetry, otel, otlp, tracing, metrics, opentelemetry collector]
 slug: /observe/open-source/opentelemetry
 ---
 

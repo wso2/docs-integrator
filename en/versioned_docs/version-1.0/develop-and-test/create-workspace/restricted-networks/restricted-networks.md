@@ -2,14 +2,14 @@
 sidebar_position: 0
 sidebar_label: Restricted Networks
 title: Work in a Restricted Network
-description: Configure WSO2 Agent Builder to reach Ballerina Central and its other dependencies from behind a corporate proxy or in an environment with restricted internet access.
-keywords: [wso2 agent builder, proxy, restricted network, ballerina central, maven repository, truststore]
+description: Configure Choreo Agent Builder to reach Ballerina Central and its other dependencies from behind a corporate proxy or in an environment with restricted internet access.
+keywords: [choreo agent builder, proxy, restricted network, ballerina central, maven repository, truststore]
 slug: /develop-and-test/create-workspace/restricted-networks
 ---
 
 # Work in a Restricted Network
 
-WSO2 Agent Builder pulls packages from Ballerina Central when you create or open a project and when you build it, and it checks an update service for new releases. In many organizations, direct internet access is restricted and traffic goes through a proxy server. Use the guides below to set up WSO2 Agent Builder in such an environment.
+Choreo Agent Builder pulls packages from Ballerina Central when you create or open a project and when you build it, and it checks an update service for new releases. In many organizations, direct internet access is restricted and traffic goes through a proxy server. Use the guides below to set up Choreo Agent Builder in such an environment.
 
 | Approach | Use it when | Guide |
 |---|---|---|

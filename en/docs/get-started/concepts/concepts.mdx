@@ -2,15 +2,15 @@
 sidebar_position: 0
 sidebar_label: Concepts
 title: Concepts
-description: The vocabulary you need to build, test, deploy, and operate AI agents with WSO2 Agent Builder.
-keywords: [wso2 agent builder, concepts, project, agentic integration, agent, tool, trigger, model provider, memory]
+description: The vocabulary you need to build, test, deploy, and operate AI agents with Choreo Agent Builder.
+keywords: [choreo agent builder, concepts, project, agentic integration, agent, tool, trigger, model provider, memory]
 toc_max_heading_level: 3
 slug: /get-started/concepts
 ---
 
 # Concepts
 
-This page defines the vocabulary used across the WSO2 Agent Builder docs, grouped by the phase of the agent lifecycle where you first encounter each term. Each section links to the documentation that covers these topics in depth.
+This page defines the vocabulary used across the Choreo Agent Builder docs, grouped by the phase of the agent lifecycle where you first encounter each term. Each section links to the documentation that covers these topics in depth.
 
 <div class="palette-card palette-card--standalone">
   <PaletteIcon name="foundations" />
@@ -27,7 +27,7 @@ This page defines the vocabulary used across the WSO2 Agent Builder docs, groupe
 <div class="palette-card palette-card--standalone">
   <PaletteIcon name="develop-test" />
   <h3 class="palette-card-title">Build and Test</h3>
-  <p class="palette-card-desc">What you compose an agent from in WSO2 Agent Builder, and how you try it out.</p>
+  <p class="palette-card-desc">What you compose an agent from in Choreo Agent Builder, and how you try it out.</p>
   <div class="palette-chip-row">
     <PaletteChip href="#agent">Agent</PaletteChip>
     <PaletteChip href="#agent-definition">Agent definition</PaletteChip>
@@ -52,7 +52,7 @@ This page defines the vocabulary used across the WSO2 Agent Builder docs, groupe
 <div class="palette-card palette-card--standalone">
   <PaletteIcon name="deploy-run" />
   <h3 class="palette-card-title">Deploy and Run</h3>
-  <p class="palette-card-desc">Getting an agent running outside WSO2 Agent Builder, and moving it between environments.</p>
+  <p class="palette-card-desc">Getting an agent running outside Choreo Agent Builder, and moving it between environments.</p>
   <div class="palette-chip-row">
     <PaletteChip href="#deployment-options">Deployment options</PaletteChip>
     <PaletteChip href="#environment">Environment</PaletteChip>
@@ -79,19 +79,19 @@ These concepts apply at every phase of the lifecycle, independent of how or wher
 
 An organization is the top-level boundary that owns your projects and the users who work with them.
 
-In WSO2 Agent Builder, the organization is declared as the `org` field in each agentic integration's package descriptor (`Ballerina.toml`). You set it in **Organization Name** under **Advanced Configurations** when you create an agentic integration. It forms part of the fully qualified name of everything you build, for example `acme/support_agent:0.1.0`, where `acme` is the organization, `support_agent` is the package, and `0.1.0` is the version.
+In Choreo Agent Builder, the organization is declared as the `org` field in each agentic integration's package descriptor (`Ballerina.toml`). You set it in **Organization Name** under **Advanced Configurations** when you create an agentic integration. It forms part of the fully qualified name of everything you build, for example `acme/support_agent:0.1.0`, where `acme` is the organization, `support_agent` is the package, and `0.1.0` is the version.
 
-When you deploy to WSO2 Cloud, the organization name must correspond to an organization you are a member of in WSO2 Cloud.
+When you deploy to Choreo Cloud, the organization name must correspond to an organization you are a member of in Choreo Cloud.
 
 ### Project
 
 A project helps you organize your agentic integrations and libraries. It is a folder with its own `Ballerina.toml`, and each agentic integration or library inside it lives in its own subfolder.
 
-The integrations inside a project are versioned and developed together, but each one remains independently buildable and deployable. When you open a project, the **WSO2 Agent Builder** sidebar lists every agentic integration in it.
+The integrations inside a project are versioned and developed together, but each one remains independently buildable and deployable. When you open a project, the **Choreo Agent Builder** sidebar lists every agentic integration in it.
 
 ### Agentic integration
 
-An agentic integration is the unit you build and deploy in WSO2 Agent Builder. It holds one or more [agents](#agent), the [triggers](#trigger) that call them, and supporting pieces such as model providers, connections, types, functions, and configurations.
+An agentic integration is the unit you build and deploy in Choreo Agent Builder. It holds one or more [agents](#agent), the [triggers](#trigger) that call them, and supporting pieces such as model providers, connections, types, functions, and configurations.
 
 Each agentic integration is a Ballerina package: a self-contained folder with its own `Ballerina.toml`, its own dependencies, and its own version.
 
@@ -101,7 +101,7 @@ A library holds reusable components and utilities, such as functions, types, and
 
 ## Build and Test
 
-The concepts you work with while building an agent in WSO2 Agent Builder. These are covered in depth in [AI Agents](../../develop-and-test/integration-artifacts/agents/agents.md).
+The concepts you work with while building an agent in Choreo Agent Builder. These are covered in depth in [AI Agents](../../develop-and-test/integration-artifacts/agents/agents.md).
 
 ### Agent
 
@@ -128,7 +128,7 @@ A trigger connects an agent to the channel or event source that calls it. You ad
 
 ### Model provider
 
-A model provider connects an agent to an LLM. Each agent uses one model provider. New agents use the **Default WSO2 Model Provider**, which works after you [sign in](../setup.md#step-4-sign-in-to-wso2-agent-builder). You can also connect providers such as Anthropic, OpenAI, Azure OpenAI, AWS Bedrock, Google Vertex, Mistral, DeepSeek, OpenRouter, or Ollama. See [Model Providers](../../develop-and-test/integration-artifacts/model-providers.md).
+A model provider connects an agent to an LLM. Each agent uses one model provider. New agents use the **Default Choreo Model Provider**, which works after you [sign in](../setup.md#step-4-sign-in-to-choreo-agent-builder). You can also connect providers such as Anthropic, OpenAI, Azure OpenAI, AWS Bedrock, Google Vertex, Mistral, DeepSeek, OpenRouter, or Ollama. See [Model Providers](../../develop-and-test/integration-artifacts/model-providers.md).
 
 ### Tool
 
@@ -154,7 +154,7 @@ By externalizing connection settings through [configurables](#configurables-and-
 
 ### Types
 
-A type is a named data shape used in your agentic integration: a record, a union, an enum, or an alias. Types describe the data flowing through your agents and tools explicitly, which WSO2 Agent Builder uses to provide validation, autocomplete, and visual data mapping.
+A type is a named data shape used in your agentic integration: a record, a union, an enum, or an alias. Types describe the data flowing through your agents and tools explicitly, which Choreo Agent Builder uses to provide validation, autocomplete, and visual data mapping.
 
 ### Function
 
@@ -164,15 +164,15 @@ A function is a named, reusable unit of logic. You define a function once and ca
 
 A **configurable** is a variable whose value is supplied at runtime rather than hardcoded, such as an API key or a service URL.
 
-**`Config.toml`** holds those values for local development. For example, when you create an agent that uses the Default WSO2 Model Provider, WSO2 Agent Builder adds that provider's configuration values to `Config.toml`. When the agentic integration is deployed, values come from the environment's configuration instead. Together, these keep secrets and environment-specific values out of source code, so don't commit `Config.toml` to version control.
+**`Config.toml`** holds those values for local development. For example, when you create an agent that uses the Default Choreo Model Provider, Choreo Agent Builder adds that provider's configuration values to `Config.toml`. When the agentic integration is deployed, values come from the environment's configuration instead. Together, these keep secrets and environment-specific values out of source code, so don't commit `Config.toml` to version control.
 
 ### Copilot
 
-WSO2 Agent Builder Copilot is an AI assistant built into WSO2 Agent Builder. Describe what your agent should do, and Copilot can create the agent, add tools, knowledge, evaluations, human approval, and triggers, refine the instructions, or explain how an agentic integration works. See [Copilot](../../editor/copilot/copilot.md).
+Choreo Agent Builder Copilot is an AI assistant built into Choreo Agent Builder. Describe what your agent should do, and Copilot can create the agent, add tools, knowledge, evaluations, human approval, and triggers, refine the instructions, or explain how an agentic integration works. See [Copilot](../../editor/copilot/copilot.md).
 
 ### Agent Chat
 
-Agent Chat is the built-in chat panel you use to try an agent while you build it. Add an **Agent Chat** trigger to the agent, open the trigger, and click **Chat**. WSO2 Agent Builder runs the agentic integration and opens the chat panel next to the canvas.
+Agent Chat is the built-in chat panel you use to try an agent while you build it. Add an **Agent Chat** trigger to the agent, open the trigger, and click **Chat**. Choreo Agent Builder runs the agentic integration and opens the chat panel next to the canvas.
 
 ### Tracing
 
@@ -184,13 +184,13 @@ Evaluations check that an agent behaves as expected, by running it against a set
 
 ## Deploy and Run
 
-The concepts that apply once an agent leaves WSO2 Agent Builder. These are covered in [Deploy and Run](../../deploy-and-run/deploy-and-run.md).
+The concepts that apply once an agent leaves Choreo Agent Builder. These are covered in [Deploy and Run](../../deploy-and-run/deploy-and-run.md).
 
 ### Deployment options
 
 You can run an agentic integration in one of the following ways:
 
-- **Deploy to WSO2 Cloud**: push directly from WSO2 Agent Builder to the managed platform, with no infrastructure setup required.
+- **Deploy to Choreo Cloud**: push directly from Choreo Agent Builder to the managed platform, with no infrastructure setup required.
 - **Build Docker Image**: package the agentic integration as a container image and run it on Docker, Kubernetes, or Red Hat OpenShift.
 - **Build Executable**: build a standalone JAR file and run it on a virtual machine or bare metal.
 
@@ -202,7 +202,7 @@ An environment is an isolated deployment area, such as development or production
 
 Promotion is the act of moving a built agentic integration from one environment to the next, for example from development to production.
 
-WSO2 Cloud follows a **build once, deploy many** model: an agentic integration is built once and then promoted to higher environments unchanged. Because configuration is injected at runtime rather than baked in, values such as model provider keys can differ per environment while the build itself stays identical.
+Choreo Cloud follows a **build once, deploy many** model: an agentic integration is built once and then promoted to higher environments unchanged. Because configuration is injected at runtime rather than baked in, values such as model provider keys can differ per environment while the build itself stays identical.
 
 ### Configurations and secrets
 
@@ -216,7 +216,7 @@ The concepts that apply once an agent is live and handling real traffic. These a
 
 The Integration Control Plane (ICP) is a self-hosted server that provides deployment, management, and observability for agentic integrations you run on your own infrastructure. It provides a web dashboard and APIs for real-time visibility into running agentic integrations. See [Integration Control Plane (ICP) Support in Editor](../../editor/integration-control-plane.md).
 
-For agents deployed to WSO2 Cloud, equivalent capabilities are provided as part of the managed cloud experience.
+For agents deployed to Choreo Cloud, equivalent capabilities are provided as part of the managed cloud experience.
 
 ### Observability
 
@@ -227,11 +227,11 @@ Two distinct activities sit under this heading:
 - **Monitoring** answers *"is it behaving as expected?"* It watches known indicators, such as error rates and response times, and alerts when they fall outside expected ranges.
 - **Diagnosis** answers *"why is it behaving this way?"* It uses logs, metrics, and traces to explain what is actually happening inside an agent and the systems it calls.
 
-WSO2 Agent Builder emits telemetry through OpenTelemetry and integrates with established observability stacks, such as Prometheus and Grafana for metrics, Jaeger and Zipkin for distributed tracing, and Elastic Stack (ELK), OpenSearch, and Grafana Loki for logging.
+Choreo Agent Builder emits telemetry through OpenTelemetry and integrates with established observability stacks, such as Prometheus and Grafana for metrics, Jaeger and Zipkin for distributed tracing, and Elastic Stack (ELK), OpenSearch, and Grafana Loki for logging.
 
 ## What's next
 
-- [Setup](../setup.md): install WSO2 Agent Builder and sign in
+- [Setup](../setup.md): install Choreo Agent Builder and sign in
 - [Build an AI agent](../quickstarts/build-ai-agent.md): build your first AI agent in under 10 minutes
 - [Build a durable agent](../quickstarts/build-durable-agent.md): build an agent that waits for human approval
 - [AI Agents](../../develop-and-test/integration-artifacts/agents/agents.md): agents, tools, memory, and evaluations in depth

@@ -1,14 +1,14 @@
 ---
 sidebar_position: 0
 title: Overview
-description: Reference for AI agent evaluations in WSO2 Agent Builder. Capture session traces into evalsets, build evaluations in the visual designer, and review run reports and history.
-keywords: [wso2 agent builder, ai agent, evaluations, evalset, golden dataset, llm-as-judge, regression]
+description: Reference for AI agent evaluations in Choreo Agent Builder. Capture session traces into evalsets, build evaluations in the visual designer, and review run reports and history.
+keywords: [choreo agent builder, ai agent, evaluations, evalset, golden dataset, llm-as-judge, regression]
 slug: /develop-and-test/test/evaluations
 ---
 
 # Agent Evaluations
 
-**Evaluations** are how you keep an AI agent's quality from regressing. Unlike unit tests with deterministic outputs, agent behaviour has to be judged across several dimensions: correctness, tool selection, groundedness, safety, and tone. Evaluations in WSO2 Agent Builder give you a structured way to measure those dimensions, see why a run regressed, and watch the trend across builds.
+**Evaluations** are how you keep an AI agent's quality from regressing. Unlike unit tests with deterministic outputs, agent behaviour has to be judged across several dimensions: correctness, tool selection, groundedness, safety, and tone. Evaluations in Choreo Agent Builder give you a structured way to measure those dimensions, see why a run regressed, and watch the trend across builds.
 
 The feature is built around three stages.
 
@@ -26,7 +26,7 @@ The feature is built around three stages.
 
 ## Get help from Copilot
 
-WSO2 Agent Builder Copilot can do much of this work for you:
+Choreo Agent Builder Copilot can do much of this work for you:
 
 - **Write an evalset**: In the evaluation form, select **Generate with Copilot** next to **Create Empty Evalset**. It appears when you have no evalset yet, or after you pick one. Copilot writes an evalset for your agent in a new chat, and the form selects it once it is ready.
 - **Write test queries**: For templates that take queries instead of an evalset, select **Generate Queries** and Copilot suggests queries for your agent.

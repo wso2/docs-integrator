@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Create an Agent
-description: Reference for creating AI agents in WSO2 Agent Builder, connecting them to triggers such as Agent Chat, calling them inside a flow, and configuring their behavior.
-keywords: [wso2 agent builder, ai agent, create agent, agent chat, trigger, agent run, agent configuration]
+description: Reference for creating AI agents in Choreo Agent Builder, connecting them to triggers such as Agent Chat, calling them inside a flow, and configuring their behavior.
+keywords: [choreo agent builder, ai agent, create agent, agent chat, trigger, agent run, agent configuration]
 slug: /develop-and-test/integration-artifacts/agents/create-an-agent
 ---
 
@@ -13,14 +13,14 @@ import TabItem from '@theme/TabItem';
 
 # Creating an Agent
 
-In WSO2 Agent Builder, you first create an agent, then decide how it's called:
+In Choreo Agent Builder, you first create an agent, then decide how it's called:
 
 - **Connect it to a trigger**: A chat channel, an HTTP endpoint, an event source, or a file source calls the agent. For example, an **Agent Chat** trigger exposes the agent as a chat endpoint over HTTP.
 - **Call it inside a flow**: Add an **Agent** step to any flow, such as the resource flow of an HTTP trigger, and the flow runs the agent as one of its steps.
 
 ## Create an agent
 
-1. Open the **Add Agent** dialog. Select **Add Agent** on your agentic integration's overview, or select the **Add Agent** action on the **Agents** node in the WSO2 Agent Builder side bar.
+1. Open the **Add Agent** dialog. Select **Add Agent** on your agentic integration's overview, or select the **Add Agent** action on the **Agents** node in the Choreo Agent Builder side bar.
 2. Under **Create New**, select **Create Agent**.
 
     <ThemedImage
@@ -39,20 +39,20 @@ In WSO2 Agent Builder, you first create an agent, then decide how it's called:
     |---|---|---|
     | **Role** | Yes | Defines the agent's primary function, for example `Order Assistant`. |
     | **Instructions** | Yes | Detailed instructions for the agent. |
-    | **Model** | Yes | The model used by the agent. Keep **Default WSO2 Model Provider**, select another model provider, or select **Create New Model Provider**. |
+    | **Model** | Yes | The model used by the agent. Keep **Default Choreo Model Provider**, select another model provider, or select **Create New Model Provider**. |
 
     <ThemedImage
-        alt="The empty Create Agent form with Role, Instructions, Model set to Default WSO2 Model Provider, a collapsed Advanced Configurations section, and the Agent Name field."
+        alt="The empty Create Agent form with Role, Instructions, Model set to Default Choreo Model Provider, a collapsed Advanced Configurations section, and the Agent Name field."
         sources={{
             light: useBaseUrl('/img/genai/develop/agents/create-an-agent/02-create-agent-form-empty-v1.0.png'),
             dark: useBaseUrl('/img/genai/develop/agents/create-an-agent/02-create-agent-form-empty-v1.0.png'),
         }}
     />
 
-4. Fill in **Role** and **Instructions**, and leave **Model** as **Default WSO2 Model Provider**.
+4. Fill in **Role** and **Instructions**, and leave **Model** as **Default Choreo Model Provider**.
 
     <ThemedImage
-        alt="The Create Agent form with Role set to Order Assistant, Instructions filled in, and Model set to Default WSO2 Model Provider."
+        alt="The Create Agent form with Role set to Order Assistant, Instructions filled in, and Model set to Default Choreo Model Provider."
         sources={{
             light: useBaseUrl('/img/genai/develop/agents/create-an-agent/03-create-agent-form-filled-v1.0.png'),
             dark: useBaseUrl('/img/genai/develop/agents/create-an-agent/03-create-agent-form-filled-v1.0.png'),
@@ -79,7 +79,7 @@ The agent appears under **Agents** in the side bar, and its canvas opens.
 The canvas shows the **AI Agent** node with its name, an **+ Add Memory** button, and a preview of its role and instructions. The node connects to its model provider on the right. **Add Trigger** on the left and **Add Tool** below the model provider are where you connect the agent to callers and give it tools.
 
 <ThemedImage
-    alt="The orderAssistant agent canvas showing Add Trigger, the AI Agent node with an Add Memory button and the agent's role and instructions, the Default WSO2 Model Provider, and Add Tool."
+    alt="The orderAssistant agent canvas showing Add Trigger, the AI Agent node with an Add Memory button and the agent's role and instructions, the Default Choreo Model Provider, and Add Tool."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/create-an-agent/05-agent-canvas-new-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/agents/create-an-agent/05-agent-canvas-new-v1.0.png'),
@@ -90,7 +90,7 @@ The canvas shows the **AI Agent** node with its name, an **+ Add Memory** button
 
 <TabItem value="code" label="Ballerina Code">
 
-WSO2 Agent Builder adds the agent declaration to `agents.bal`:
+Choreo Agent Builder adds the agent declaration to `agents.bal`:
 
 ```ballerina
 import ballerina/ai;
@@ -111,7 +111,7 @@ final ai:Agent orderAssistant = check new (
 
 ## Expose the agent as a chat endpoint
 
-Connect the agent to an **Agent Chat** trigger to call it over HTTP and chat with it from WSO2 Agent Builder.
+Connect the agent to an **Agent Chat** trigger to call it over HTTP and chat with it from Choreo Agent Builder.
 
 1. On the agent canvas, select **Add Trigger**.
 2. Under **Chat Channels**, select **Agent Chat**.
@@ -137,7 +137,7 @@ Connect the agent to an **Agent Chat** trigger to call it over HTTP and chat wit
         }}
     />
 
-WSO2 Agent Builder generates the following:
+Choreo Agent Builder generates the following:
 
 - A listener (`agentChatListener`) on the shared HTTP listener
 - A chat service on the service path, with a `POST /chat` resource

@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Overview
 title: Knowledge Bases Overview
-description: Reference for every knowledge base provider WSO2 Integrator supports. Covers the Vector Knowledge Base, the AWS Bedrock knowledge bases, the Azure AI Search Knowledge Base, and the WSO2 Cloud Knowledge Base, including create form fields, advanced configurations, and the retrieve action.
-keywords: [wso2 integrator, knowledge base, rag, vector knowledge base, aws bedrock, bedrock knowledge base, azure ai search, wso2 cloud knowledge base, embedding, chunker]
+description: Reference for every knowledge base provider Choreo Integrator supports. Covers the Vector Knowledge Base, the AWS Bedrock knowledge bases, the Azure AI Search Knowledge Base, and the Choreo Cloud Knowledge Base, including create form fields, advanced configurations, and the retrieve action.
+keywords: [choreo integrator, knowledge base, rag, vector knowledge base, aws bedrock, bedrock knowledge base, azure ai search, choreo cloud knowledge base, embedding, chunker]
 slug: /develop-and-test/integration-artifacts/knowledge-bases
 ---
 
@@ -14,7 +14,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 A **Knowledge Base** is a managed store of documents that your integration can index and query. It provides a consistent interface for adding content, retrieving the most relevant chunks for a given query, and removing stale content, regardless of the underlying storage technology.
 
-In WSO2 Agent Builder, an agent uses a Knowledge Base as a tool to retrieve the most relevant chunks for a question. It uses three pluggable parts (a [Vector Store](../knowledge-bases/vector-stores.md), an [Embedding Provider](../knowledge-bases/embedding-providers.md), and a [Chunker](../knowledge-bases/chunkers.md)). To learn how a knowledge base grounds agent responses using Retrieval-Augmented Generation (RAG), see [How Knowledge Bases Work](how-knowledge-bases-work.md).
+In Choreo Agent Builder, an agent uses a Knowledge Base as a tool to retrieve the most relevant chunks for a question. It uses three pluggable parts (a [Vector Store](../knowledge-bases/vector-stores.md), an [Embedding Provider](../knowledge-bases/embedding-providers.md), and a [Chunker](../knowledge-bases/chunkers.md)). To learn how a knowledge base grounds agent responses using Retrieval-Augmented Generation (RAG), see [How Knowledge Bases Work](how-knowledge-bases-work.md).
 
 ## Available actions
 
@@ -43,7 +43,7 @@ The following animation shows how to open the **Add Tool** panel from an agent:
 This opens the **Select Knowledge Base** picker. It lists all five supported knowledge bases, with the two Bedrock options expanded under **Bedrock Knowledge Bases**:
 
 <ThemedImage
-    alt="Agent Builder Add Tool - Use Knowledge Base panel listing Vector Knowledge Base, Bedrock Managed Knowledge Base, Bedrock Self-Managed Knowledge Base, Azure AI Search Knowledge Base, and WSO2 Cloud Knowledge Base."
+    alt="Agent Builder Add Tool - Use Knowledge Base panel listing Vector Knowledge Base, Bedrock Managed Knowledge Base, Bedrock Self-Managed Knowledge Base, Azure AI Search Knowledge Base, and Choreo Cloud Knowledge Base."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/02-select-list-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/02-select-list-v1.0.png'),
@@ -57,7 +57,7 @@ This opens the **Select Knowledge Base** picker. It lists all five supported kno
 | **Vector Knowledge Base** | `ballerina/ai` | Any [Vector Store](../knowledge-bases/vector-stores.md) |
 | **AWS Bedrock** (Managed and Self-Managed) | [`ballerinax/ai.aws.bedrock`](https://central.ballerina.io/ballerinax/ai.aws.bedrock/latest) | An Amazon Bedrock knowledge base |
 | **Azure AI Search Knowledge Base** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Azure AI Search index |
-| **WSO2 Cloud Knowledge Base** | [`ballerinax/ai.wso2.integration`](https://central.ballerina.io/ballerinax/ai.wso2.integration/latest) | Knowledge base service in WSO2 Cloud |
+| **Choreo Cloud Knowledge Base** | [`ballerinax/ai.wso2.integration`](https://central.ballerina.io/ballerinax/ai.wso2.integration/latest) | Knowledge base service in Choreo Cloud |
 
 ---
 
@@ -292,26 +292,26 @@ Scrolling to the bottom shows **Knowledge Base Name** and **Result Type**:
 
 ---
 
-## WSO2 Cloud Knowledge Base
+## Choreo Cloud Knowledge Base
 
-A Knowledge Base that's deployed in WSO2 Cloud. If you don't already have a WSO2 Cloud Knowledge Base deployed in your organization, create the knowledge base and ingest documents in WSO2 Cloud first. It is provisioned and managed there. See [Knowledge bases in WSO2 Cloud](product://saas/manage/rag-ingestion/knowledge-bases).
+A Knowledge Base that's deployed in Choreo Cloud. If you don't already have a Choreo Cloud Knowledge Base deployed in your organization, create the knowledge base and ingest documents in Choreo Cloud first. It is provisioned and managed there. See [Knowledge bases in Choreo Cloud](product://saas/manage/rag-ingestion/knowledge-bases).
 
 ### Connect to an existing knowledge base
 
-After you select the **Retrieve** action, click **Create knowledge base** when the project does not already contain a WSO2 Cloud knowledge base:
+After you select the **Retrieve** action, click **Create knowledge base** when the project does not already contain a Choreo Cloud knowledge base:
 
 <ThemedImage
-    alt="Add Tool - Use Knowledge Base panel for WSO2 Cloud showing no knowledge bases in the project and a Create knowledge base button."
+    alt="Add Tool - Use Knowledge Base panel for Choreo Cloud showing no knowledge bases in the project and a Create knowledge base button."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/07-wso2-cloud-create-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/07-wso2-cloud-create-v1.0.png'),
     }}
 />
 
-Selecting **WSO2 Cloud Knowledge Base** lists the knowledge bases available in your WSO2 Cloud organization, above a **Manually Config WSO2 Cloud Knowledge Base** card. You need to be signed in to WSO2 Cloud with a project selected for the list to appear; if none exist yet, only the manual-config card is shown:
+Selecting **Choreo Cloud Knowledge Base** lists the knowledge bases available in your Choreo Cloud organization, above a **Manually Config Choreo Cloud Knowledge Base** card. You need to be signed in to Choreo Cloud with a project selected for the list to appear; if none exist yet, only the manual-config card is shown:
 
 <ThemedImage
-    alt="WSO2 Cloud Knowledge Bases picker with a search bar and a Manually Config WSO2 Cloud Knowledge Base card ('Add configurations for the Knowledge Base...'). No existing knowledge bases are listed in this organization."
+    alt="Choreo Cloud Knowledge Bases picker with a search bar and a Manually Config Choreo Cloud Knowledge Base card ('Add configurations for the Knowledge Base...'). No existing knowledge bases are listed in this organization."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/07-wso2-cloud-list-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/07-wso2-cloud-list-v1.0.png'),
@@ -321,7 +321,7 @@ Selecting **WSO2 Cloud Knowledge Base** lists the knowledge bases available in y
 Choosing an existing knowledge base opens the create form with its service URL and credentials already filled in; the credentials are supplied by the environment when the integration runs, so no secrets are stored in your project:
 
 <ThemedImage
-    alt="Create WSO2 Cloud Knowledge Base form with the Service URL and Knowledge Base Authentication Configuration fields already filled in from the selected knowledge base."
+    alt="Create Choreo Cloud Knowledge Base form with the Service URL and Knowledge Base Authentication Configuration fields already filled in from the selected knowledge base."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/08-wso2-cloud-prefilled-form-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/08-wso2-cloud-prefilled-form-v1.0.png'),
@@ -331,7 +331,7 @@ Choosing an existing knowledge base opens the create form with its service URL a
 The remaining retrieval and HTTP fields stay configurable. Scroll through the form to review **Minimum Similarity Threshold**, the Cohere reranker settings, and **HTTP Version**:
 
 <ThemedImage
-    alt="Create WSO2 Cloud Knowledge Base form for an existing cloud knowledge base showing Minimum Similarity Threshold, Cohere reranker settings, and the start of HTTP Version."
+    alt="Create Choreo Cloud Knowledge Base form for an existing cloud knowledge base showing Minimum Similarity Threshold, Cohere reranker settings, and the start of HTTP Version."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/12-wso2-cloud-advanced-3-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/12-wso2-cloud-advanced-3-v1.0.png'),
@@ -341,7 +341,7 @@ The remaining retrieval and HTTP fields stay configurable. Scroll through the fo
 At the bottom, confirm the generated **Knowledge Base Name** and the `integration:CloudKnowledgeBase` result type:
 
 <ThemedImage
-    alt="Bottom of the Create WSO2 Cloud Knowledge Base form for an existing cloud knowledge base showing Response Limit Configuration, Payload Validation, Advanced Configurations, the generated Knowledge Base Name, and Result Type."
+    alt="Bottom of the Create Choreo Cloud Knowledge Base form for an existing cloud knowledge base showing Response Limit Configuration, Payload Validation, Advanced Configurations, the generated Knowledge Base Name, and Result Type."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/12-wso2-cloud-advanced-4-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/12-wso2-cloud-advanced-4-v1.0.png'),
@@ -350,10 +350,10 @@ At the bottom, confirm the generated **Knowledge Base Name** and the `integratio
 
 ### Configure manually
 
-Choose **Manually Config WSO2 Cloud Knowledge Base** to open a blank form and enter the details yourself. The form opens with **Service URL**, **Knowledge Base Authentication Configuration**, **Minimum Similarity Threshold**, **Cohere Reranker API Key**, **Cohere Reranker Model**, **Reranker Top N**, and the start of **HTTP Version**:
+Choose **Manually Config Choreo Cloud Knowledge Base** to open a blank form and enter the details yourself. The form opens with **Service URL**, **Knowledge Base Authentication Configuration**, **Minimum Similarity Threshold**, **Cohere Reranker API Key**, **Cohere Reranker Model**, **Reranker Top N**, and the start of **HTTP Version**:
 
 <ThemedImage
-    alt="Create WSO2 Cloud Knowledge Base form showing Service URL, Knowledge Base Authentication Configuration (default {auth: {token: ''}}), Minimum Similarity Threshold (default 0.7), Cohere Reranker API Key, Cohere Reranker Model, Reranker Top N (default 5), and the start of HTTP Version (default 2.0)."
+    alt="Create Choreo Cloud Knowledge Base form showing Service URL, Knowledge Base Authentication Configuration (default {auth: {token: ''}}), Minimum Similarity Threshold (default 0.7), Cohere Reranker API Key, Cohere Reranker Model, Reranker Top N (default 5), and the start of HTTP Version (default 2.0)."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/09-wso2-cloud-manual-form-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/09-wso2-cloud-manual-form-v1.0.png'),
@@ -362,8 +362,8 @@ Choose **Manually Config WSO2 Cloud Knowledge Base** to open a blank form and en
 
 | Field | Required | Default | Available values |
 |---|---|---|---|
-| **Service URL** | Yes | N/A | The endpoint of the knowledge base service in WSO2 Cloud. |
-| **Knowledge Base Authentication Configuration** | Yes | N/A | A bearer token, or OAuth2 client credentials (**Token URL**, **Client ID**, **Client Secret**). Knowledge bases connected from WSO2 Cloud use OAuth2 client credentials. |
+| **Service URL** | Yes | N/A | The endpoint of the knowledge base service in Choreo Cloud. |
+| **Knowledge Base Authentication Configuration** | Yes | N/A | A bearer token, or OAuth2 client credentials (**Token URL**, **Client ID**, **Client Secret**). Knowledge bases connected from Choreo Cloud use OAuth2 client credentials. |
 | **Minimum Similarity Threshold** | No | `0.7` | Decimal `0`–`1`. The lowest similarity score a chunk can have and still be returned by `Retrieve`. |
 | **Cohere Reranker API Key** | No | `()` | String or empty. API key for the Cohere reranker. Leave empty to skip reranking. |
 | **Cohere Reranker Model** | No | `()` | String or empty. The Cohere reranker model to use when reranking is enabled. |
@@ -372,7 +372,7 @@ Choose **Manually Config WSO2 Cloud Knowledge Base** to open a blank form and en
 Scrolling further shows the standard HTTP inline fields: **HTTP1 Settings**, **HTTP2 Settings**, **Timeout**, **Forwarded**, **Cache Configuration**, and the start of **Compression**:
 
 <ThemedImage
-    alt="Middle of the Create WSO2 Cloud Knowledge Base form showing Cohere Reranker Model, Reranker Top N, HTTP Version, HTTP1 Settings, and the start of HTTP2 Settings."
+    alt="Middle of the Create Choreo Cloud Knowledge Base form showing Cohere Reranker Model, Reranker Top N, HTTP Version, HTTP1 Settings, and the start of HTTP2 Settings."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/09-wso2-cloud-manual-form-mid-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/09-wso2-cloud-manual-form-mid-v1.0.png'),
@@ -382,7 +382,7 @@ Scrolling further shows the standard HTTP inline fields: **HTTP1 Settings**, **H
 Continue scrolling to configure **Timeout**, **Forwarded**, **Cache Configuration**, **Compression**, and **Response Limit Configuration**:
 
 <ThemedImage
-    alt="Create WSO2 Cloud Knowledge Base form showing Timeout, Forwarded, Cache Configuration, Compression, and the start of Response Limit Configuration."
+    alt="Create Choreo Cloud Knowledge Base form showing Timeout, Forwarded, Cache Configuration, Compression, and the start of Response Limit Configuration."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/09-wso2-cloud-manual-form-mid-2-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/09-wso2-cloud-manual-form-mid-2-v1.0.png'),
@@ -392,7 +392,7 @@ Continue scrolling to configure **Timeout**, **Forwarded**, **Cache Configuratio
 Continuing the scroll shows **Response Limit Configuration** and **Payload Validation**, then the collapsed **Advanced Configurations** toggle, and finally **Knowledge Base Name** and **Result Type**:
 
 <ThemedImage
-    alt="Bottom of the Create WSO2 Cloud Knowledge Base form showing Response Limit Configuration (default {}), Payload Validation (default false), the collapsed Advanced Configurations toggle, Knowledge Base Name set to integrationCloudknowledgebase, and Result Type locked to integration:CloudKnowledgeBase."
+    alt="Bottom of the Create Choreo Cloud Knowledge Base form showing Response Limit Configuration (default {}), Payload Validation (default false), the collapsed Advanced Configurations toggle, Knowledge Base Name set to integrationCloudknowledgebase, and Result Type locked to integration:CloudKnowledgeBase."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/09-wso2-cloud-manual-form-bottom-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/09-wso2-cloud-manual-form-bottom-v1.0.png'),
@@ -404,7 +404,7 @@ Continuing the scroll shows **Response Limit Configuration** and **Payload Valid
 Expanding **Advanced Configurations** shows **Pool Configuration**, **Circuit Breaker Configuration**, **Retry Configuration**, **Secure Socket Configuration**, and **Proxy Configuration**, the same fields as the [Standard HTTP advanced configurations](../model-providers.md#standard-http-advanced-configurations) section on the Model Providers page:
 
 <ThemedImage
-    alt="Create WSO2 Cloud Knowledge Base form with Advanced Configurations expanded showing Pool Configuration, Circuit Breaker Configuration, Retry Configuration, and Secure Socket Configuration."
+    alt="Create Choreo Cloud Knowledge Base form with Advanced Configurations expanded showing Pool Configuration, Circuit Breaker Configuration, Retry Configuration, and Secure Socket Configuration."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/12-wso2-cloud-advanced-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/knowledge-bases/12-wso2-cloud-advanced-v1.0.png'),
@@ -429,7 +429,7 @@ At the bottom of the expanded section, configure **Proxy Configuration**, then c
 |---|---|
 | Most projects, especially new ones | **Vector Knowledge Base** with In-Memory (dev) or Pinecone / Pgvector / Weaviate / Milvus (prod). |
 | Already on AWS, or want AWS to handle chunking and embedding | **AWS Bedrock**: Managed if you don't want to run a vector store, Self-Managed if you already run one. |
-| Knowledge base provisioned and managed in WSO2 Cloud | **WSO2 Cloud Knowledge Base**. |
+| Knowledge base provisioned and managed in Choreo Cloud | **Choreo Cloud Knowledge Base**. |
 | Already running Azure AI Search; need keyword + vector + semantic ranker | **Azure AI Search Knowledge Base**. |
 | Need a custom retrieval source (search engine, graph DB, hand-rolled) | Implement the `ai:KnowledgeBase` contract yourself; the rest of the integration won't change. |
 

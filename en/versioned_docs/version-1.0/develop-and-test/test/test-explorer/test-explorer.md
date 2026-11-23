@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Overview
 title: Test Explorer
-description: Create, run, and manage automated test cases for your integrations using the Test Explorer panel in WSO2 Agent Builder.
-keywords: [wso2 agent builder, test explorer, create test, run tests, test report, unit testing]
+description: Create, run, and manage automated test cases for your integrations using the Test Explorer panel in Choreo Agent Builder.
+keywords: [choreo agent builder, test explorer, create test, run tests, test report, unit testing]
 slug: /develop-and-test/test/test-explorer
 ---
 
@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 # Test Explorer
 
-The Test Explorer is the built-in testing panel in WSO2 Agent Builder. It gives you a visual interface to create test cases, run them, and view results. Tests created here are backed by the Ballerina test framework and stored as standard `.bal` test files in your project.
+The Test Explorer is the built-in testing panel in Choreo Agent Builder. It gives you a visual interface to create test cases, run them, and view results. Tests created here are backed by the Ballerina test framework and stored as standard `.bal` test files in your project.
 
 ## Open Test Explorer
 
@@ -60,7 +60,7 @@ When a test belongs to one or more groups, it is nested under the group name rat
 | **Runs** | No | The number of times to execute this test function. Useful for stability checks or load-sensitive tests. |
 | **Data Provider** | No | A function that supplies the data sets for this test. When set, the test runs once for each data set returned by the provider. |
 
-WSO2 Agent Builder creates the test function in the `tests/` directory.
+Choreo Agent Builder creates the test function in the `tests/` directory.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">

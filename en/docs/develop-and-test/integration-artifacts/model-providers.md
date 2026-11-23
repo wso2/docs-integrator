@@ -3,8 +3,8 @@ sidebar_position: 5
 sidebar_custom_props: { separatorBefore: "Agent Resources" }
 sidebar_label: Model Providers
 title: Model Providers for LLMs
-description: Reference for every model provider for LLM in WSO2 Agent Builder, covering create form fields, advanced configurations, defaults, and supported models for the Default WSO2 provider, OpenAI, Azure OpenAI, Anthropic, AWS Bedrock, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.
-keywords: [wso2 agent builder, model provider, llm, large language model, ai, anthropic, aws bedrock, openai, azure openai, google vertex, mistral, deepseek, ollama, openrouter, gpt-5, responses api, reasoning effort]
+description: Reference for every model provider for LLM in Choreo Agent Builder, covering create form fields, advanced configurations, defaults, and supported models for the Default Choreo provider, OpenAI, Azure OpenAI, Anthropic, AWS Bedrock, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.
+keywords: [choreo agent builder, model provider, llm, large language model, ai, anthropic, aws bedrock, openai, azure openai, google vertex, mistral, deepseek, ollama, openrouter, gpt-5, responses api, reasoning effort]
 slug: /develop-and-test/integration-artifacts/model-providers
 ---
 
@@ -15,7 +15,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 A **Large Language Model (LLM)** is a neural network trained on large text corpora. You send it a prompt (a text instruction) and it generates a response. LLMs power natural language tasks such as answering questions, summarizing content, extracting structured data, and planning and executing tool calls.
 
-A **Model Provider** is WSO2 Agent Builder's unified abstraction over LLMs. It wraps the provider-specific API behind a consistent interface, so Direct LLM Calls, Natural Functions, the RAG `generate` node, and AI agents all work the same way regardless of which LLM you choose. Pick a provider, fill in the form, and click **Save**.
+A **Model Provider** is Choreo Agent Builder's unified abstraction over LLMs. It wraps the provider-specific API behind a consistent interface, so Direct LLM Calls, Natural Functions, the RAG `generate` node, and AI agents all work the same way regardless of which LLM you choose. Pick a provider, fill in the form, and click **Save**.
 
 Every model provider exposes the same two actions, so switching LLMs is a connection-level swap that leaves the rest of your flow unchanged.
 
@@ -37,7 +37,7 @@ Per-call overrides are not exposed in the form. Anything that varies per request
 - **Add Agent** > **Create Agent** > **Model**
 
 <ThemedImage
-    alt="Create Agent form with Role and Instructions fields, the Model field set to Default WSO2 Model Provider, and a + Create New Model Provider link below it."
+    alt="Create Agent form with Role and Instructions fields, the Model field set to Default Choreo Model Provider, and a + Create New Model Provider link below it."
     sources={{
         light: useBaseUrl('/img/genai/develop/components/model-providers/01-create-agent-model-field-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components/model-providers/01-create-agent-model-field-v1.0.png'),
@@ -47,7 +47,7 @@ Per-call overrides are not exposed in the form. Anything that varies per request
 - Click **+ Create New Model Provider** and the **Select Model Provider** picker opens with a card for each provider type:
 
 <ThemedImage
-    alt="Select Model Provider picker listing WSO2 Agent Manager, Anthropic Model Provider, Bedrock Model Providers (a group marked 8 options, available in ballerinax/ai.aws.bedrock), Azure OpenAI, Deepseek, and Google Vertex Model Provider, with one-line descriptions for each."
+    alt="Select Model Provider picker listing Choreo Agent Manager, Anthropic Model Provider, Bedrock Model Providers (a group marked 8 options, available in ballerinax/ai.aws.bedrock), Azure OpenAI, Deepseek, and Google Vertex Model Provider, with one-line descriptions for each."
     sources={{
         light: useBaseUrl('/img/genai/develop/components/model-providers/02-select-list-top-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components/model-providers/02-select-list-top-v1.0.png'),
@@ -68,7 +68,7 @@ Scroll to see the remaining options:
 
 | Provider | Module | API key required? | Has embedding provider? |
 |---|---|---|---|
-| **Default WSO2** | `ballerina/ai` | No (signed-in via WSO2) | Yes. See [Default WSO2 Embedding Provider](knowledge-bases/embedding-providers.md#default-wso2-embedding-provider) |
+| **Default Choreo** | `ballerina/ai` | No (signed-in via Choreo Labs) | Yes. See [Default Choreo Embedding Provider](knowledge-bases/embedding-providers.md#default-choreo-embedding-provider) |
 | **Anthropic** | [`ballerinax/ai.anthropic`](https://central.ballerina.io/ballerinax/ai.anthropic/latest) | Yes | No |
 | **AWS Bedrock** | [`ballerinax/ai.aws.bedrock`](https://central.ballerina.io/ballerinax/ai.aws.bedrock/latest) | AWS credentials or a Bedrock API key | Yes |
 | **Azure OpenAI** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Yes | Yes |
@@ -81,7 +81,7 @@ Scroll to see the remaining options:
 
 ## Standard HTTP advanced configurations
 
-Every provider with a hosted endpoint (all providers except the Default WSO2 provider, which is preconfigured) shares the **same** HTTP-level configurations. They tune the underlying HTTP client and apply to every request the provider makes. These are split across two parts of the Create form, and **this split and these exact fields are identical on every provider's form**. The per-provider sections below don't repeat the screenshots, they just note where the provider's own fields sit relative to this standard set.
+Every provider with a hosted endpoint (all providers except the Default Choreo provider, which is preconfigured) shares the **same** HTTP-level configurations. They tune the underlying HTTP client and apply to every request the provider makes. These are split across two parts of the Create form, and **this split and these exact fields are identical on every provider's form**. The per-provider sections below don't repeat the screenshots, they just note where the provider's own fields sit relative to this standard set.
 
 **Shown directly on the form**, below the provider-specific fields:
 
@@ -132,26 +132,26 @@ Scrolling further down the expanded section shows Retry Configuration, Response 
 This is the one Advanced Configurations screenshot in this page. Every provider's Create form shows this exact same panel. Where a provider section below says "see Standard HTTP advanced configurations," it means expanding **Advanced Configurations** on that provider's form looks exactly like the two screenshots above, with no provider-specific additions.
 :::
 
-## Default WSO2 model provider
+## Default Choreo model provider
 
-Provided by the core `ballerina/ai` package. Routes through the WSO2 intelligence service. **No API key in your source**. A one-time WSO2 sign-in writes the credentials into your project's `Config.toml`. The fastest way to get an LLM running while you're prototyping.
+Provided by the core `ballerina/ai` package. Routes through the Choreo Intelligence service. **No API key in your source**. A one-time Choreo Labs sign-in writes the credentials into your project's `Config.toml`. The fastest way to get an LLM running while you're prototyping.
 
 ### Create form
 
-The **Model** field on the **Create Agent** form is set to **Default WSO2 Model Provider** by default. On an existing agent, click the model node to open the **Configure Model Provider Connection** panel:
+The **Model** field on the **Create Agent** form is set to **Default Choreo Model Provider** by default. On an existing agent, click the model node to open the **Configure Model Provider Connection** panel:
 
 <ThemedImage
-    alt="Configure Model Provider Connection panel with Select Model Provider set to Default WSO2 Model Provider, a + Create New Model Provider link, a note to configure this model provider using the command palette command, and a Save button."
+    alt="Configure Model Provider Connection panel with Select Model Provider set to Default Choreo Model Provider, a + Create New Model Provider link, a note to configure this model provider using the command palette command, and a Save button."
     sources={{
         light: useBaseUrl('/img/genai/develop/components/model-providers/06-wso2-default-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components/model-providers/06-wso2-default-v1.0.png'),
     }}
 />
 
-No provider-specific fields. Sign in with your WSO2 account and WSO2 Agent Builder handles the rest. There are no advanced configurations on this provider.
+No provider-specific fields. Sign in with your Choreo Labs account and Choreo Agent Builder handles the rest. There are no advanced configurations on this provider.
 
 :::tip
-When you create the agent, the credentials are written to `Config.toml` automatically. You can run **Configure default WSO2 model provider** from the Command Palette at any time to refresh.
+When you create the agent, the credentials are written to `Config.toml` automatically. You can run **Configure default Choreo model provider** from the Command Palette at any time to refresh.
 :::
 
 ## Anthropic
@@ -763,7 +763,7 @@ Editing follows the same pattern for every component type. Embedding providers, 
 
 ## What's next
 
-- [Embedding providers](knowledge-bases/embedding-providers.md) — Vector embeddings for RAG. The OpenAI, Azure, AWS Bedrock, Vertex, OpenRouter, and Default WSO2 packages also ship embedding providers.
+- [Embedding providers](knowledge-bases/embedding-providers.md) — Vector embeddings for RAG. The OpenAI, Azure, AWS Bedrock, Vertex, OpenRouter, and Default Choreo packages also ship embedding providers.
 - [Vector stores](knowledge-bases/vector-stores.md) — Persist and query embeddings using Pinecone, Weaviate, Qdrant, pgvector, and other backends.
 - [Knowledge Bases](knowledge-bases/knowledge-bases.md) — Managed retrieval sources, including Azure AI Search, that plug directly into RAG flows.
 - [Chunkers](knowledge-bases/chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.

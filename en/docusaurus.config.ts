@@ -18,7 +18,7 @@ import {
 } from './src/theme-shared/themeConfig';
 
 const config: Config = {
-  title: 'WSO2 Agent Builder',
+  title: 'Choreo Agent Builder',
   tagline: 'Build, evaluate, and deploy AI agents with Copilot — powered by your Agent Manager\'s LLMs and MCP tools',
   favicon: 'img/favicon.ico',
 
@@ -72,6 +72,31 @@ const config: Config = {
     // Now registered -- docs/guides/ has sample content for it to scan
     // (see docs/guides/guides.md and HOW_TO_WRITE_A_GUIDE.md).
     './src/plugins/guidesCatalogPlugin.js',
+    // The WSO2 -> Choreo rebrand renamed deploy-to-wso2-cloud, which is
+    // the one doc whose route carried the old brand. Two separate
+    // entries, not one shared `from` list: `lastVersion: '1.0'` (see the
+    // docs preset below) serves version 1.0 unprefixed at the site root
+    // while `current` serves under /next, so the old URL existed at
+    // both -- and each has to land on its OWN version's new URL. A
+    // shared `from` would send /next visitors to the 1.0 page, silently
+    // downgrading the version they were reading. Paths are written
+    // without `baseUrl` -- the plugin prepends it, so these still
+    // resolve under /agent-builder/ in production.
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/deploy-and-run/deploy-to-choreo-cloud',
+            from: '/deploy-and-run/deploy-to-wso2-cloud',
+          },
+          {
+            to: '/next/deploy-and-run/deploy-to-choreo-cloud',
+            from: '/next/deploy-and-run/deploy-to-wso2-cloud',
+          },
+        ],
+      },
+    ],
   ],
 
   // Search is Algolia (themeConfig.algolia), shared across products.
@@ -98,29 +123,20 @@ const config: Config = {
               // for the same reason wso2-integrator's own config does.
               banner: 'unreleased',
             },
-            // The version ID itself stays `1.0` -- it's the literal
-            // `versioned_docs/version-1.0`/`versioned_sidebars/
-            // version-1.0-sidebars.json` folder/file name and
-            // `versions.json`'s own entry, same convention
-            // wso2-integrator's config uses for its own label overrides.
-            // `label` only overrides what's DISPLAYED (version dropdown,
-            // DocVersionBadge/Banner) to `1.0-beta` -- deliberately NOT
-            // overriding `path` too: this version is also `lastVersion`
-            // below, and Docusaurus only serves `lastVersion` unprefixed
-            // at the site root when it keeps its *default* path. Giving
-            // it an explicit `path: '1.0-beta'` un-aliases it from root,
-            // and this branch's navbar/footer (docusaurus.config.ts)
-            // hardcode absolute unprefixed links (`to: '/reference/faq'`,
+            // 1.0 deliberately has NO entry here -- it went GA, so the
+            // `label: '1.0-beta'` display override that used to live at
+            // this spot is gone and the version now shows as plain
+            // `1.0` in the dropdown, DocVersionBadge and DocVersionBanner.
+            //
+            // If you ever add an entry back, do NOT give it a `path`.
+            // 1.0 is `lastVersion` below, and Docusaurus only serves
+            // `lastVersion` unprefixed at the site root while it keeps
+            // its *default* path. An explicit `path` un-aliases it from
+            // root, and this branch's navbar/footer hardcode absolute
+            // unprefixed links (`to: '/reference/faq'`,
             // `/get-started/cloud-setup'`, etc., rendered on every page)
             // that depend on that root-aliasing -- confirmed by a real
             // build: that combination 404s all of them, on every page.
-            // Dropping `path` keeps the URL as plain `/1.0/`, matching
-            // wso2-integrator's own convention exactly. Going GA later
-            // is then just deleting this `label` -- no versioned_docs
-            // rename, no re-cut.
-            '1.0': {
-              label: '1.0-beta',
-            },
           },
         },
         blog: false,
@@ -173,7 +189,7 @@ const config: Config = {
           href: 'https://github.com/wso2/product-agent-builder/releases',
           position: 'right',
           className: 'navbar-download-btn',
-          'aria-label': 'Download WSO2 Agent Builder',
+          'aria-label': 'Download Choreo Agent Builder',
         },
       ],
     },

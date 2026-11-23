@@ -10,14 +10,14 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Explore Sample Integrations
 
-WSO2 Agent Builder includes a curated collection of pre-built agent samples that you can download and open as ready-to-use projects. Use these samples to learn common agent patterns or as starting points for your own projects.
+Choreo Agent Builder includes a curated collection of pre-built agent samples that you can download and open as ready-to-use projects. Use these samples to learn common agent patterns or as starting points for your own projects.
 
 ## Open the sample gallery
 
-On the WSO2 Agent Builder home screen, click **Explore** on the **Pre-built Agents and Samples** card.
+On the Choreo Agent Builder home screen, click **Explore** on the **Pre-built Agents and Samples** card.
 
 <ThemedImage
-    alt="WSO2 Agent Builder home screen"
+    alt="Choreo Agent Builder home screen"
     sources={{
         light: useBaseUrl('/img/explore-samples/home-screen-v1.0.png'),
         dark: useBaseUrl('/img/explore-samples/home-screen-v1.0.png'),
@@ -57,7 +57,7 @@ Click **Use this** on a sample card. A native file browser appears so you can ch
     }}
 />
 
-Select a folder and click **Select Folder**. WSO2 Agent Builder downloads the sample and opens it as an agentic integration.
+Select a folder and click **Select Folder**. Choreo Agent Builder downloads the sample and opens it as an agentic integration.
 
 What you do next depends on where you saved the sample.
 

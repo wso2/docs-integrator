@@ -155,10 +155,10 @@ function IconTools(): ReactNode {
 /*  Step strip -- "New to this scaffold?" section                      */
 /* ------------------------------------------------------------------ */
 const steps = [
-  { title: 'Set up', sub: <Link to="/get-started">Download WSO2 Agent Builder <span aria-hidden="true">→</span></Link> },
+  { title: 'Set up', sub: <Link to="/get-started">Download Choreo Agent Builder <span aria-hidden="true">→</span></Link> },
   { title: 'Pick a quickstart', sub: 'Choose a type below ↓', active: true },
   { title: 'Build with Copilot', sub: 'Generate, evaluate, and fix your agent' },
-  { title: 'Deploy and run', sub: 'Ship your agent to WSO2 Cloud' },
+  { title: 'Deploy and run', sub: 'Ship your agent to Choreo Cloud' },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -199,7 +199,7 @@ type SectionCard = {
 const sections: SectionCard[] = [
   {
     title: 'Platform Overview',
-    description: 'What WSO2 Agent Builder is and how it fits into the WSO2 Integration Platform.',
+    description: 'What Choreo Agent Builder is and how it fits into the Choreo Integration Platform.',
     link: '/platform-overview',
     icon: <IconManage />,
     iconColor: '#7C3AED',
@@ -221,7 +221,7 @@ const sections: SectionCard[] = [
   },
   {
     title: 'Deploy and Run',
-    description: 'Deploy agents built in WSO2 Agent Builder to WSO2 Cloud.',
+    description: 'Deploy agents built in Choreo Agent Builder to Choreo Cloud.',
     link: '/deploy-and-run',
     icon: <IconDeploy />,
     iconColor: '#C2410C',
@@ -269,9 +269,9 @@ function HomepageHeader(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
   return (
     <LandingHero
-      windowTitle="WSO2 Agent Builder"
-      imageAlt="WSO2 Agent Builder Copilot's agent creation screen"
-      eyebrow="WSO2 Integration Platform · Docs"
+      windowTitle="Choreo Agent Builder"
+      imageAlt="Choreo Agent Builder Copilot's agent creation screen"
+      eyebrow="Choreo Integration Platform · Docs"
       title={siteConfig.title}
       subtitle={siteConfig.tagline}
       search={<HeroSearch quickLinks={quickLinks} />}
@@ -291,7 +291,7 @@ function GetStarted(): ReactNode {
       <div className={styles.getStartedHead}>
         <div className={styles.getStartedHeadText}>
           <Heading as="h2" className={styles.h2Large}>
-            New to WSO2 Agent Builder?
+            New to Choreo Agent Builder?
           </Heading>
           <p className={styles.lead}>Four steps, starting with a quickstart.</p>
         </div>

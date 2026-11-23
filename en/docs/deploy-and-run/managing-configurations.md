@@ -8,7 +8,7 @@ sidebar_custom_props: { "separatorBefore": "Run in Production" }
 
 # Managing Configurations
 
-WSO2 Agent Builder uses Ballerina's configuration system to externalize runtime settings. This page covers strategies for managing configurations across development, testing, staging, and production environments.
+Choreo Agent Builder uses Ballerina's configuration system to externalize runtime settings. This page covers strategies for managing configurations across development, testing, staging, and production environments.
 
 ## Configuration sources
 

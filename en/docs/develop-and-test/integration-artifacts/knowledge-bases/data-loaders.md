@@ -2,8 +2,8 @@
 sidebar_position: 4
 sidebar_custom_props: { separatorBefore: "Pipeline Components" }
 title: Data Loaders
-description: Reference for the Data Loaders in WSO2 Agent Builder that read source documents into ai:Document values, including the Text Data Loader, the AWS S3 Text Data Loader, and the Microsoft SharePoint Text Data Loader with their create form fields and configuration reference.
-keywords: [wso2 agent builder, data loader, rag, ai document, aws s3, amazon s3, sharepoint, microsoft graph, knowledge base, ingestion]
+description: Reference for the Data Loaders in Choreo Agent Builder that read source documents into ai:Document values, including the Text Data Loader, the AWS S3 Text Data Loader, and the Microsoft SharePoint Text Data Loader with their create form fields and configuration reference.
+keywords: [choreo agent builder, data loader, rag, ai document, aws s3, amazon s3, sharepoint, microsoft graph, knowledge base, ingestion]
 slug: /develop-and-test/integration-artifacts/knowledge-bases/data-loaders
 ---
 
@@ -12,7 +12,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Data Loaders
 
-A **Data Loader** reads documents from a source and returns them as `ai:Document` values, ready to be chunked, embedded, and indexed by a [Knowledge Base](../knowledge-bases/knowledge-bases.md). Use a data loader when you build a custom ingestion flow in WSO2 Integrator. To ingest documents without building a flow, create a [knowledge base in WSO2 Cloud](product://saas/manage/rag-ingestion/knowledge-bases) instead.
+A **Data Loader** reads documents from a source and returns them as `ai:Document` values, ready to be chunked, embedded, and indexed by a [Knowledge Base](../knowledge-bases/knowledge-bases.md). Use a data loader when you build a custom ingestion flow in Choreo Integrator. To ingest documents without building a flow, create a [knowledge base in Choreo Cloud](product://saas/manage/rag-ingestion/knowledge-bases) instead.
 
 ## Available actions
 

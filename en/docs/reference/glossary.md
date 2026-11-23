@@ -1,6 +1,6 @@
 ---
 title: Glossary
-description: All WSO2 Agent Builder product-specific terms defined.
+description: All Choreo Agent Builder product-specific terms defined.
 sidebar_position: 10
 slug: /reference/glossary
 ---
@@ -10,11 +10,11 @@ slug: /reference/glossary
 | Term | Definition |
 |------|-----------|
 | **Agent** | An AI integration artifact backed by a large language model (LLM). Agents can reason, call tools, and maintain conversation memory. |
-| **Agent Manager** | WSO2 Agent Manager, the console where you deploy, run, and observe your agents. WSO2 Agent Builder Copilot can connect to it through the **Agents & Deployments** and **Observability** MCP servers. |
-| **Agentic Integration** | The top-level unit of work in WSO2 Agent Builder. A Ballerina package that holds your AI agents with their tools, memory, and the triggers that invoke them. |
+| **Agent Manager** | Choreo Agent Manager, the console where you deploy, run, and observe your agents. Choreo Agent Builder Copilot can connect to it through the **Agents & Deployments** and **Observability** MCP servers. |
+| **Agentic Integration** | The top-level unit of work in Choreo Agent Builder. A Ballerina package that holds your AI agents with their tools, memory, and the triggers that invoke them. |
 | **any** | A Ballerina type that represents any value except `error`. Used when the specific type is not known at compile time. |
 | **anydata** | A Ballerina type that represents any pure data value (no behavioral types). Includes `nil`, `boolean`, `int`, `float`, `decimal`, `string`, `xml`, and structured values composed of `anydata`. Fundamental for serialization. |
-| **Ballerina** | The cloud-native programming language powering WSO2 Agent Builder. Designed for network-distributed applications with built-in support for HTTP, data types, and concurrency. |
+| **Ballerina** | The cloud-native programming language powering Choreo Agent Builder. Designed for network-distributed applications with built-in support for HTTP, data types, and concurrency. |
 | **Ballerina Central** | The package registry at [central.ballerina.io](https://central.ballerina.io) where connectors and libraries are published and discovered. |
 | **Ballerina.toml** | The package manifest file that declares metadata, dependencies, and build options for a Ballerina package (an agentic integration or library). |
 | **CDC** | Change Data Capture. A pattern for streaming database changes (inserts, updates, deletes) in real time. Supported by MySQL, PostgreSQL, and MS SQL connectors. |
@@ -24,7 +24,7 @@ slug: /reference/glossary
 | **Config.toml** | Environment-specific runtime configuration file. Provides values for `configurable` variables. Should not be committed to version control when it contains secrets. |
 | **configurable** | A Ballerina keyword that marks a variable as externally configurable via `Config.toml`, environment variables, or CLI arguments. Use `= ?` for required values with no default. |
 | **Connector** | A pre-built `ballerinax` package for connecting to an external system (Salesforce, Kafka, MySQL, etc.). Handles authentication, serialization, and error mapping. |
-| **Data Mapper** | A visual data transformation tool in the WSO2 Agent Builder design view. Maps fields between source and target schemas, with AI-assisted suggestions. |
+| **Data Mapper** | A visual data transformation tool in the Choreo Agent Builder design view. Maps fields between source and target schemas, with AI-assisted suggestions. |
 | **Dependencies.toml** | Auto-generated lock file that records the exact resolved versions of all package dependencies. Should be committed to version control. |
 | **distinct error** | A Ballerina error type with a unique identity, allowing pattern matching on specific error categories. Used to define application-specific error hierarchies. |
 | **do/on fail** | Ballerina's error handling block. Code in `do` runs normally; `on fail` catches errors from `check` expressions. Also supported on `while`, `foreach`, `lock`, `transaction`, and `retry` blocks. |
@@ -44,7 +44,7 @@ slug: /reference/glossary
 | **Module** | A sub-unit of a Ballerina package. A package has a default module (root) and can contain multiple named modules under the `modules/` directory. |
 | **Natural Function** | An LLM call treated as a typed function call in Ballerina. You define input/output types and the platform handles the prompt, API call, and response parsing. |
 | **Package** | The unit of code distribution in Ballerina. Defined by `Ballerina.toml` and publishable to Ballerina Central. Contains one or more modules. At the product level, users typically speak of agentic integrations or libraries rather than packages. |
-| **Pro-code** | The Ballerina source-editing mode in WSO2 Agent Builder. Stays in sync with the visual designer, with full auto-complete, type checking, and debugging. |
+| **Pro-code** | The Ballerina source-editing mode in Choreo Agent Builder. Stays in sync with the visual designer, with full auto-complete, type checking, and debugging. |
 | **Project** | A workspace that organizes your agentic integrations and libraries, with their dependencies, configuration, and deployment artifacts. Defined by `Ballerina.toml`. |
 | **Query Expression** | Ballerina's SQL-like syntax for filtering, transforming, and aggregating data within code. Supports `from`, `where`, `let`, `select`, `order by`, `limit`, and `join` clauses. |
 | **RAG** | Retrieval-Augmented Generation. A pattern that combines document retrieval from a vector database with LLM generation for knowledge-grounded AI responses. |
@@ -55,11 +55,11 @@ slug: /reference/glossary
 | **Structural Typing** | Ballerina's type compatibility model. Types are compatible based on their structure (shape of values) rather than their declared names. |
 | **Tool calling** | The mechanism by which an LLM-backed agent invokes typed functions, including MCP tools, to act on external systems. |
 | **Transaction** | A Ballerina language construct for coordinating atomic operations across multiple resources. Supports distributed transactions with automatic rollback on failure. |
-| **Try It** | A built-in tool in WSO2 Agent Builder for sending test requests to running services and viewing responses inline. |
+| **Try It** | A built-in tool in Choreo Agent Builder for sending test requests to running services and viewing responses inline. |
 | **Union Type** | A Ballerina type that can hold values of multiple types. Written as `TypeA\|TypeB`. Used extensively for error handling (`string\|error`) and optional values (`T?` is `T\|()`). |
-| **Visual Designer** | The visual editor in WSO2 Agent Builder for building agents and their logic. Stays in sync with the Ballerina source. |
+| **Visual Designer** | The visual editor in Choreo Agent Builder for building agents and their logic. Stays in sync with the Ballerina source. |
 | **Worker** | A Ballerina concurrency primitive. Workers execute code in parallel within a function and can communicate via message passing using the `->` and `<-` operators. |
-| **WSO2 Agent Builder** | The editor for building AI agents. It provides a visual designer and a Ballerina source editor that stay in sync. |
-| **WSO2 Agent Builder Copilot** | The AI assistant built into WSO2 Agent Builder. It builds, changes, runs, tests, and evaluates your agents in a chat. |
-| **WSO2 Cloud** | The WSO2 cloud platform for deploying and managing your agents and MCP servers without managing infrastructure. |
+| **Choreo Agent Builder** | The editor for building AI agents. It provides a visual designer and a Ballerina source editor that stay in sync. |
+| **Choreo Agent Builder Copilot** | The AI assistant built into Choreo Agent Builder. It builds, changes, runs, tests, and evaluates your agents in a chat. |
+| **Choreo Cloud** | The Choreo Cloud platform for deploying and managing your agents and MCP servers without managing infrastructure. |
 | **xml** | A Ballerina built-in sequence type for XML data. Supports elements, text, comments, and processing instructions with XPath-like navigation syntax. |

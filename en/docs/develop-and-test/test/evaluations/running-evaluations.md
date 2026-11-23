@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: Run Evaluations
-description: Run AI agent evaluations in WSO2 Agent Builder and review per-run reports, score trends, and code changes that influenced each result.
-keywords: [wso2 agent builder, ai agent, evaluation, report, run history, regression, fix with copilot]
+description: Run AI agent evaluations in Choreo Agent Builder and review per-run reports, score trends, and code changes that influenced each result.
+keywords: [choreo agent builder, ai agent, evaluation, report, run history, regression, fix with copilot]
 slug: /develop-and-test/test/evaluations/running-evaluations
 ---
 
@@ -68,7 +68,7 @@ When an evaluation fails, its card in the **Evaluation Report** shows **Fix with
     }}
 />
 
-Click **Fix with Copilot**. WSO2 Agent Builder Copilot opens a chat for that evaluation with its failed cases already attached. Copilot replays the failing turns with your agent and tells you why the evaluation fails, for example a missing tool or unclear instructions in the agent, or an expected result that asks for more than the agent's instructions require. Copilot makes small fixes itself and asks you before larger ones. It does not lower the minimum pass rate or remove cases to hide a mistake unless you agree. Run the evaluation again to confirm the fix, or ask Copilot to run it. Review the changes in the **Changes made** card, and click **Revert** if you don't want to keep them.
+Click **Fix with Copilot**. Choreo Agent Builder Copilot opens a chat for that evaluation with its failed cases already attached. Copilot replays the failing turns with your agent and tells you why the evaluation fails, for example a missing tool or unclear instructions in the agent, or an expected result that asks for more than the agent's instructions require. Copilot makes small fixes itself and asks you before larger ones. It does not lower the minimum pass rate or remove cases to hide a mistake unless you agree. Run the evaluation again to confirm the fix, or ask Copilot to run it. Review the changes in the **Changes made** card, and click **Revert** if you don't want to keep them.
 
 :::note
 To replay the failing turns, Copilot runs your agent with its model and its real tools, once per turn. Make sure the agent's model provider is configured, and keep in mind that the tools really run.

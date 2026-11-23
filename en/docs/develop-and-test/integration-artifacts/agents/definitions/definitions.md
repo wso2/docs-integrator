@@ -2,7 +2,7 @@
 sidebar_position: 0
 sidebar_label: Create a Definition
 title: Create an Agent Definition
-description: Reference for agent definitions in WSO2 Agent Builder, covering how to create a reusable agent template, the Agent Definition Designer, response types, initialization parameters, and creating instances.
+description: Reference for agent definitions in Choreo Agent Builder, covering how to create a reusable agent template, the Agent Definition Designer, response types, initialization parameters, and creating instances.
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -32,7 +32,7 @@ A definition is a template, not a running agent. Nothing executes until an insta
 
 ## Where a definition lives
 
-When you create a definition, you can choose where WSO2 Agent Builder saves it.
+When you create a definition, you can choose where Choreo Agent Builder saves it.
 
 | Option | Where it goes | Choose this when |
 |---|---|---|
@@ -49,7 +49,7 @@ Only a definition in a library package can be published and consumed by other pr
 
 ## Create a definition
 
-1. Open your agentic integration in WSO2 Agent Builder.
+1. Open your agentic integration in Choreo Agent Builder.
 2. Click **Add Agent** on the integration's **Overview**. In an integration with no agents yet, **Add Agent** is under **Or start from scratch**.
 3. In the **Add Agent** dialog, select **Create Agent Definition**.
 
@@ -94,7 +94,7 @@ These fields apply only when **New library package** is selected.
 
 ## Agent Definition Designer
 
-After you click **Create Agent Definition**, WSO2 Agent Builder generates the definition and opens the Agent Definition Designer. The designer is where you configure what the agent does. Unlike an agent created directly in an integration, a definition is configured through a form rather than the agent canvas. A definition has no trigger of its own, because it runs wherever it is instantiated.
+After you click **Create Agent Definition**, Choreo Agent Builder generates the definition and opens the Agent Definition Designer. The designer is where you configure what the agent does. Unlike an agent created directly in an integration, a definition is configured through a form rather than the agent canvas. A definition has no trigger of its own, because it runs wherever it is instantiated.
 
 <ThemedImage
     alt="The Agent Definition Designer for ReturnsPolicyAgent, showing the name and description header, a Configuration card with Role and Instructions, a Tools section with a Tool button, a Response Type set to string, an Initialization Parameters section with a Parameter button, and a collapsed Advanced section."

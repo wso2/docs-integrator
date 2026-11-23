@@ -1,13 +1,13 @@
 ---
 sidebar_position: 2
 title: Metrics
-description: Enable and expose Prometheus metrics from WSO2 Agent Builder agents for monitoring health and performance.
+description: Enable and expose Prometheus metrics from Choreo Agent Builder agents for monitoring health and performance.
 slug: /observe/metrics
 ---
 
 # Metrics
 
-Monitor the health and performance of your WSO2 Agent Builder agents using Prometheus metrics. WSO2 Agent Builder provides built-in support for exposing metrics in Prometheus format, enabling you to collect quantitative data on request counts, latency, error rates, and custom business metrics.
+Monitor the health and performance of your Choreo Agent Builder agents using Prometheus metrics. Choreo Agent Builder provides built-in support for exposing metrics in Prometheus format, enabling you to collect quantitative data on request counts, latency, error rates, and custom business metrics.
 
 ## What are metrics?
 
@@ -31,7 +31,7 @@ Prometheus collects metrics using a **pull model** – your application exposes 
 
 ### Configure the agent for Prometheus
 
-Navigate to the file explorer of WSO2 Agent Builder and add the following to the `main.bal` file.
+Navigate to the file explorer of Choreo Agent Builder and add the following to the `main.bal` file.
 
 ```ballerina
 import ballerinax/prometheus as _;

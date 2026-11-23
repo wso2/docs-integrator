@@ -2,8 +2,8 @@
 sidebar_position: 6
 sidebar_label: Embedding Providers
 title: Embedding Providers for Embedding Models
-description: Reference for every embedding provider in WSO2 Agent Builder, covering create form fields, advanced configurations, defaults, and supported embedding models for the Default WSO2 provider, AWS Bedrock, OpenAI, Azure OpenAI, Google Vertex, and OpenRouter.
-keywords: [wso2 agent builder, embedding provider, embedding model, vector, knowledge base, aws bedrock, amazon titan, cohere, openai, azure openai, google vertex, openrouter]
+description: Reference for every embedding provider in Choreo Agent Builder, covering create form fields, advanced configurations, defaults, and supported embedding models for the Default Choreo provider, AWS Bedrock, OpenAI, Azure OpenAI, Google Vertex, and OpenRouter.
+keywords: [choreo agent builder, embedding provider, embedding model, vector, knowledge base, aws bedrock, amazon titan, cohere, openai, azure openai, google vertex, openrouter]
 slug: /develop-and-test/integration-artifacts/knowledge-bases/embedding-providers
 ---
 
@@ -12,7 +12,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Embedding Providers for Embedding Models
 
-An embedding model converts text into a dense numeric vector that captures semantic meaning. An **Embedding Provider** is WSO2 Agent Builder's abstraction over these models, giving every supported vendor a consistent interface.
+An embedding model converts text into a dense numeric vector that captures semantic meaning. An **Embedding Provider** is Choreo Agent Builder's abstraction over these models, giving every supported vendor a consistent interface.
 
 Knowledge Bases use the embedding provider on **ingest** to convert chunks into stored vectors, and again on **retrieve** to convert the user's query into a vector for similarity search.
 
@@ -35,7 +35,7 @@ You rarely call these directly. Knowledge Base `ingest` and `retrieve` operation
 - The **Select Embedding Provider** picker opens, listing the available providers with a search bar at the top:
 
 <ThemedImage
-    alt="Select Embedding Provider picker with a search bar and six cards: Default Embedding Provider (WSO2), the Bedrock Embedding Providers group (2 options, available in ballerinax/ai.aws.bedrock), Azure Embedding Provider, Google Vertex Embedding Provider, OpenAI Embedding Provider, and OpenRouter Embedding Provider, each with a one-line description."
+    alt="Select Embedding Provider picker with a search bar and six cards: Default Embedding Provider (Choreo), the Bedrock Embedding Providers group (2 options, available in ballerinax/ai.aws.bedrock), Azure Embedding Provider, Google Vertex Embedding Provider, OpenAI Embedding Provider, and OpenRouter Embedding Provider, each with a one-line description."
     sources={{
         light: useBaseUrl('/img/genai/develop/components/embedding-providers/01-select-embedding-provider-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components/embedding-providers/01-select-embedding-provider-v1.0.png'),
@@ -46,7 +46,7 @@ You rarely call these directly. Knowledge Base `ingest` and `retrieve` operation
 
 | Provider | Module | API key required? | Default model |
 |---|---|---|---|
-| **Default WSO2** | `ballerina/ai` | No (signed-in via WSO2) | WSO2-managed |
+| **Default Choreo** | `ballerina/ai` | No (signed-in via Choreo Labs) | Choreo-managed |
 | **AWS Bedrock** | [`ballerinax/ai.aws.bedrock`](https://central.ballerina.io/ballerinax/ai.aws.bedrock/latest) | AWS credentials or a Bedrock API key | None |
 | **Azure OpenAI** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Yes | None |
 | **Google Vertex** | [`ballerinax/ai.googleapis.vertex`](https://central.ballerina.io/ballerinax/ai.googleapis.vertex/latest) | OAuth2 / service account | `text-embedding-005` |
@@ -57,14 +57,14 @@ You rarely call these directly. Knowledge Base `ingest` and `retrieve` operation
 The HTTP-level advanced configurations on every external embedding provider use the same set of fields as model providers. For the full reference, see [Standard HTTP advanced configurations](../model-providers.md#standard-http-advanced-configurations).
 :::
 
-## Default WSO2 embedding provider
+## Default Choreo embedding provider
 
-Routes through the WSO2 intelligence service. The same WSO2 sign-in that unlocks the default model provider unlocks this. No separate key is required.
+Routes through the Choreo Intelligence service. The same Choreo Labs sign-in that unlocks the default model provider unlocks this. No separate key is required.
 
 ### Create form
 
 <ThemedImage
-    alt="Create Embedding Provider form for the Default WSO2 provider. Header reads 'Creates a default embedding provider based on the provided wso2ProviderConfig. The embedding vectors have a dimension of 1536.' Banner: 'This is a simple operation that requires no parameters. Specify where to store the result to finish.' Two fields: Embedding Provider Name (default aiWso2embeddingprovider) and Result Type (locked to ai:Wso2EmbeddingProvider). Save button."
+    alt="Create Embedding Provider form for the Default Choreo provider. Header reads 'Creates a default embedding provider based on the provided wso2ProviderConfig. The embedding vectors have a dimension of 1536.' Banner: 'This is a simple operation that requires no parameters. Specify where to store the result to finish.' Two fields: Embedding Provider Name (default aiWso2embeddingprovider) and Result Type (locked to ai:Wso2EmbeddingProvider). Save button."
     sources={{
         light: useBaseUrl('/img/genai/develop/components/embedding-providers/02-wso2-default-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/components/embedding-providers/02-wso2-default-v1.0.png'),
@@ -311,7 +311,7 @@ OpenRouter's embedding endpoint accepts text-only chunks. Image or audio chunks 
 
 | Situation | Recommended |
 |---|---|
-| Prototyping, no infra setup | **Default WSO2**: sign in once, no key needed. |
+| Prototyping, no infra setup | **Default Choreo**: sign in once, no key needed. |
 | Already on AWS | **AWS Bedrock**: IAM credentials, and requests stay in the AWS region you choose, unless you use a cross-region inference profile ID such as `us.cohere.embed-v4:0`. |
 | Already on Azure | **Azure OpenAI**: keep traffic inside your Azure tenant. |
 | Already on Google Cloud | **Vertex**: same auth as the rest of GCP. |
@@ -325,4 +325,4 @@ The provider selected at ingest time must remain consistent for the lifetime of 
 - [Vector Stores](vector-stores.md) — Where the embeddings live.
 - [Knowledge Bases](../knowledge-bases/knowledge-bases.md) — The object that ties an embedding provider, a vector store, and a chunker together.
 - [Chunkers](chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.
-- [How Knowledge Bases Work](../knowledge-bases/how-knowledge-bases-work.md) — WSO2 Agent Builder walkthrough for ingestion and query flows.
+- [How Knowledge Bases Work](../knowledge-bases/how-knowledge-bases-work.md) — Choreo Agent Builder walkthrough for ingestion and query flows.

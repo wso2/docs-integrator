@@ -1,21 +1,21 @@
 ---
 title: GitHub Actions
-description: CI/CD pipeline with GitHub Actions for WSO2 Agent Builder.
+description: CI/CD pipeline with GitHub Actions for Choreo Agent Builder.
 slug: /deploy-and-run/cicd/github-actions
 sidebar_position: 1
 ---
 
 # GitHub Actions
 
-Automate build and test of your WSO2 Agent Builder projects using GitHub Actions workflows.
+Automate build and test of your Choreo Agent Builder projects using GitHub Actions workflows.
 
 ## Overview
 
-GitHub Actions uses YAML workflow files stored in `.github/workflows/` to define CI/CD pipelines. For WSO2 Agent Builder projects, a workflow uses the [`setup-ballerina`](https://github.com/ballerina-platform/setup-ballerina/) action to install Ballerina, then runs tests and builds the project.
+GitHub Actions uses YAML workflow files stored in `.github/workflows/` to define CI/CD pipelines. For Choreo Agent Builder projects, a workflow uses the [`setup-ballerina`](https://github.com/ballerina-platform/setup-ballerina/) action to install Ballerina, then runs tests and builds the project.
 
 ## Prerequisites
 
-- A GitHub repository containing your WSO2 Agent Builder (Ballerina) project
+- A GitHub repository containing your Choreo Agent Builder (Ballerina) project
 - GitHub Actions enabled on the repository
 
 ## Workflow configuration

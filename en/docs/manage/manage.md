@@ -2,14 +2,14 @@
 sidebar_position: 0
 sidebar_label: Manage
 title: Manage agents
-description: Manage agents built in WSO2 Agent Builder with WSO2 Agent Manager, the control plane for deploying, promoting, governing, and observing AI agents.
-keywords: [wso2 agent builder, manage, control plane, wso2 agent manager, amp, agent lifecycle]
+description: Manage agents built in Choreo Agent Builder with Choreo Agent Manager, the control plane for deploying, promoting, governing, and observing AI agents.
+keywords: [choreo agent builder, manage, control plane, choreo agent manager, amp, agent lifecycle]
 slug: /manage
 ---
 
 # Manage agents
 
-Once your agent leaves your machine, you need a control plane to organize it into projects and environments, move it through its lifecycle, govern what it can access, and watch how it behaves. You manage agents built in WSO2 Agent Builder with **WSO2 Agent Manager**.
+Once your agent leaves your machine, you need a control plane to organize it into projects and environments, move it through its lifecycle, govern what it can access, and watch how it behaves. You manage agents built in Choreo Agent Builder with **Choreo Agent Manager**.
 
 :::info How you register the agent decides what Agent Manager manages
 Every agent in Agent Manager is either platform-hosted or externally hosted. You choose the type when you create the agent, and you can't change it later.
@@ -18,9 +18,9 @@ Every agent in Agent Manager is either platform-hosted or externally hosted. You
 - **Externally hosted:** The agent runs on infrastructure you manage. Agent Manager doesn't build or deploy it, but it still governs and observes it.
 :::
 
-## Manage with WSO2 Agent Manager
+## Manage with Choreo Agent Manager
 
-[WSO2 Agent Manager](https://wso2.com/agent-platform/docs/v1.0.0/get-started/what-is-amp/) is an open control plane for deploying, managing, and governing AI agents at scale. Platform-hosted agents run on Kubernetes, built on [OpenChoreo](https://github.com/openchoreo/openchoreo). Agent Manager is available as a managed cloud service and as a self-hosted installation.
+[Choreo Agent Manager](https://wso2.com/agent-platform/docs/v1.0.0/get-started/what-is-amp/) is an open control plane for deploying, managing, and governing AI agents at scale. Platform-hosted agents run on Kubernetes, built on [OpenChoreo](https://github.com/openchoreo/openchoreo). Agent Manager is available as a managed cloud service and as a self-hosted installation.
 
 **This is what you use when you:**
 
@@ -43,9 +43,9 @@ Every agent in Agent Manager is either platform-hosted or externally hosted. You
 
 For details, see [Internal and external agents](https://wso2.com/agent-platform/docs/v1.0.0/concepts/internal-and-external-agent/).
 
-### Deploy an agent from WSO2 Agent Builder
+### Deploy an agent from Choreo Agent Builder
 
-Agents built in WSO2 Agent Builder are Ballerina projects, so Agent Manager can build and host them with its Ballerina buildpack.
+Agents built in Choreo Agent Builder are Ballerina projects, so Agent Manager can build and host them with its Ballerina buildpack.
 
 1. Push your agent project to a Git repository.
 2. In your Agent Manager project, go to **Agents** and click **Add Agent**.
@@ -59,7 +59,7 @@ Agent Manager deploys the agent to the first environment in the project's deploy
 
 ### Choose where Agent Manager runs
 
-- **Managed cloud:** Sign up at the [WSO2 Agent Manager console](https://console.agent-manager.cloud.wso2.com/) and start managing agents without setting up any infrastructure.
+- **Managed cloud:** Sign up at the [Choreo Agent Manager console](https://console.agent-manager.cloud.wso2.com/) and start managing agents without setting up any infrastructure.
 - **Self-hosted:** Install Agent Manager on your own Kubernetes cluster, locally on k3d, or on a VM with Docker. See [Install on your environment](https://wso2.com/agent-platform/docs/v1.0.0/guides/on-your-environment/).
 
 ## What's next

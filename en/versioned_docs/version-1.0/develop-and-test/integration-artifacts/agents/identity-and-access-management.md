@@ -2,8 +2,8 @@
 sidebar_position: 8
 sidebar_label: Secure Agent Access
 title: Identity & Access Management
-description: Learn how to secure AI agents, tools, and integrations using identity and access control in WSO2 Agent Builder.
-keywords: [wso2 agent builder, ai agent, identity, access control, oauth2, authorization, authentication, agent security]
+description: Learn how to secure AI agents, tools, and integrations using identity and access control in Choreo Agent Builder.
+keywords: [choreo agent builder, ai agent, identity, access control, oauth2, authorization, authentication, agent security]
 slug: /develop-and-test/integration-artifacts/agents/identity-and-access-management
 ---
 
@@ -14,7 +14,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 AI agents interact with MCP servers, APIs, databases, and enterprise systems to perform tasks autonomously. As agents access enterprise resources and external services, it is important to secure and govern these interactions using proper identity and access control mechanisms.
 
-WSO2 Agent Builder provides built-in support for securing agents, tools, and service integrations using authentication and authorization standards such as OAuth 2.0. Agents are treated as first-class identities, allowing organizations to manage access in a secure, controlled, and traceable manner.
+Choreo Agent Builder provides built-in support for securing agents, tools, and service integrations using authentication and authorization standards such as OAuth 2.0. Agents are treated as first-class identities, allowing organizations to manage access in a secure, controlled, and traceable manner.
 
 The platform separates authentication and authorization to provide fine-grained access control.
 
@@ -34,7 +34,7 @@ Agents can securely authenticate to MCP servers, cloud resources, endpoints, and
 
 To configure agent identity, obtain the following details from your identity provider:
 
-If you plan to use [WSO2 Asgardeo](https://wso2.com/asgardeo/docs/get-started/create-asgardeo-account/), see the [Register and manage agents](https://is.docs.wso2.com/en/next/guides/agentic-ai/ai-agents/register-and-manage-agents/) guide to configure agents and obtain the above values.
+If you plan to use [Choreo IAM](https://wso2.com/asgardeo/docs/get-started/create-asgardeo-account/), see the [Register and manage agents](https://is.docs.wso2.com/en/next/guides/agentic-ai/ai-agents/register-and-manage-agents/) guide to configure agents and obtain the above values.
 
 | Field | Description |
 |---|---|
@@ -89,7 +89,7 @@ If you plan to use [WSO2 Asgardeo](https://wso2.com/asgardeo/docs/get-started/cr
 | **clientId** | Yes | The unique identifier of the application registered in the authorization server. This is used to identify the agent during authentication. |
 | **clientSecret** | No | The secret associated with the client ID. It is used to authenticate the client when requesting tokens.<br/><br/>Required only for confidential clients and not needed when PKCE is used with public clients. |
 | **redirectUri** | Yes | The callback URL to which the authorization server redirects after successful authentication. This must match the URL configured in the application. |
-| **isPkceEnabled** | Yes | Indicates whether PKCE (Proof Key for Code Exchange) is enabled.<br/><br/>- `true`: Recommended for public clients and should be enabled if PKCE is configured in the Asgardeo application.<br/>- `false`: Used with confidential clients that use a client secret. |
+| **isPkceEnabled** | Yes | Indicates whether PKCE (Proof Key for Code Exchange) is enabled.<br/><br/>- `true`: Recommended for public clients and should be enabled if PKCE is configured in the Choreo IAM application.<br/>- `false`: Used with confidential clients that use a client secret. |
 | **scopes** | Yes | A list of permissions requested by the agent. These define the resources the agent can access.<br/><br/>If the tool does not define specific scopes, these scopes are used when generating the access token. |
 | **secureSocket** | No | Configuration for SSL/TLS settings when communicating with secure endpoints. |
 
@@ -133,7 +133,7 @@ If you plan to use [WSO2 Asgardeo](https://wso2.com/asgardeo/docs/get-started/cr
 | **clientId** | Yes | The unique identifier of the application registered in the authorization server. This is used to identify the agent during authentication. |
 | **clientSecret** | No | The secret associated with the client ID. It is used to authenticate the client when requesting tokens.<br/><br/>Required only for confidential clients and not needed when PKCE is used with public clients. |
 | **redirectUri** | Yes | The callback URL to which the authorization server redirects after successful authentication. This must match the URL configured in the application. |
-| **isPkceEnabled** | Yes | Indicates whether PKCE (Proof Key for Code Exchange) is enabled.<br/><br/>- `true`: Recommended for public clients and should be enabled if PKCE is configured in the Asgardeo application.<br/>- `false`: Used with confidential clients that use a client secret. |
+| **isPkceEnabled** | Yes | Indicates whether PKCE (Proof Key for Code Exchange) is enabled.<br/><br/>- `true`: Recommended for public clients and should be enabled if PKCE is configured in the Choreo IAM application.<br/>- `false`: Used with confidential clients that use a client secret. |
 | **scopes** | Yes | A list of permissions requested by the agent. These define the resources the agent can access.<br/><br/>If the tool does not define specific scopes, these scopes are used when generating the access token. |
 | **secureSocket** | No | Configuration for SSL/TLS settings when communicating with secure endpoints. |
       

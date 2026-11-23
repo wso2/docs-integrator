@@ -2,7 +2,7 @@
 sidebar_position: 0
 sidebar_label: Overview
 title: MCP Integration
-description: Reference for MCP features in WSO2 Agent Builder. Covers exposing services as MCP servers and consuming MCP servers from AI agents.
+description: Reference for MCP features in Choreo Agent Builder. Covers exposing services as MCP servers and consuming MCP servers from AI agents.
 slug: /develop-and-test/integration-artifacts/mcp
 ---
 
@@ -13,13 +13,13 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 The **Model Context Protocol** (MCP) is an open standard that lets AI assistants discover and call tools exposed by external servers. See the [MCP specification](https://modelcontextprotocol.io) for the protocol details.
 
-With WSO2 Agent Builder, you can build both sides of MCP: an **MCP server** (an MCP service that exposes your tools to AI assistants) and an **MCP client** (an agent that uses tools from other MCP servers).
+With Choreo Agent Builder, you can build both sides of MCP: an **MCP server** (an MCP service that exposes your tools to AI assistants) and an **MCP client** (an agent that uses tools from other MCP servers).
 
 ## Features at a glance
 
 | Feature | What it is | Where you find it |
 |---|---|---|
-| [Exposing a service as MCP](exposing-as-mcp.md) | Build an MCP service in WSO2 Agent Builder. Set its port and base path, add tools, and configure each tool's name, description, and parameters. | Project home page > **Add MCP Server**. |
+| [Exposing a service as MCP](exposing-as-mcp.md) | Build an MCP service in Choreo Agent Builder. Set its port and base path, add tools, and configure each tool's name, description, and parameters. | Project home page > **Add MCP Server**. |
 | [Consuming MCP from an agent](consuming-mcp-from-agent.md) | Add an MCP server as a tool source for an AI agent, optionally limited to specific tools. | Agent canvas > **Add Tool** > **Use MCP Server** > **Connect Manually**. |
 
 ## When to use MCP
@@ -33,7 +33,7 @@ With WSO2 Agent Builder, you can build both sides of MCP: an **MCP server** (an 
 ## How the two sides fit together
 
 <ThemedImage
-    alt="Two sides of MCP. Exposing as MCP: an AI assistant or agent such as Claude Desktop, GitHub Copilot, or your own AI agent calls your WSO2 Agent Builder MCP service over MCP, where each function in the service is a tool. Consuming MCP from an agent: your WSO2 Agent Builder AI agent adds another MCP server as a tool through an MCP toolkit and calls another MCP server, such as Slack, GitHub, or a vendor server, over MCP"
+    alt="Two sides of MCP. Exposing as MCP: an AI assistant or agent such as Claude Desktop, GitHub Copilot, or your own AI agent calls your Choreo Agent Builder MCP service over MCP, where each function in the service is a tool. Consuming MCP from an agent: your Choreo Agent Builder AI agent adds another MCP server as a tool through an MCP toolkit and calls another MCP server, such as Slack, GitHub, or a vendor server, over MCP"
     sources={{
         light: useBaseUrl('/img/genai/develop/mcp-v5.1/mcp-overview-v1.0.png'),
         dark: useBaseUrl('/img/genai/develop/mcp-v5.1/mcp-overview-v1.0.png'),
@@ -42,7 +42,7 @@ With WSO2 Agent Builder, you can build both sides of MCP: an **MCP server** (an 
 
 You can do both in the same project. A single project might expose a few tools (your CRM lookups) over MCP for outside assistants while its agents use Slack and GitHub MCP servers.
 
-## Where to find MCP in WSO2 Agent Builder
+## Where to find MCP in Choreo Agent Builder
 
 MCP features appear in three places: the project home page, the MCP Service editor, and the agent canvas.
 
@@ -56,7 +56,7 @@ MCP features appear in three places: the project home page, the MCP Service edit
 
 ## Transport
 
-MCP services in WSO2 Agent Builder use the **Streamable HTTP** transport. The listener exposes a single endpoint (for example, `http://localhost:8080/mcp`), and clients send every request to it, including tool listings and tool calls.
+MCP services in Choreo Agent Builder use the **Streamable HTTP** transport. The listener exposes a single endpoint (for example, `http://localhost:8080/mcp`), and clients send every request to it, including tool listings and tool calls.
 
 Because the transport is HTTP, the listener accepts any `http:ListenerConfiguration` option, including TLS, request limits, and timeouts. See [Listener configuration](exposing-as-mcp.md#listener-configuration).
 

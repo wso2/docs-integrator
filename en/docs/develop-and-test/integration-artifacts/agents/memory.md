@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Configure Agent Memory
-description: Reference for configuring AI agent memory in WSO2 Agent Builder, short-term in-memory, MSSQL, Redis, PostgreSQL, SQLite, Amazon DynamoDB, custom stores, overflow strategy, and the state after memory is attached.
-keywords: [wso2 agent builder, ai agent, memory, short term memory, memory store, mssql, redis, postgresql, sqlite, dynamodb, session]
+description: Reference for configuring AI agent memory in Choreo Agent Builder, short-term in-memory, MSSQL, Redis, PostgreSQL, SQLite, Amazon DynamoDB, custom stores, overflow strategy, and the state after memory is attached.
+keywords: [choreo agent builder, ai agent, memory, short term memory, memory store, mssql, redis, postgresql, sqlite, dynamodb, session]
 slug: /develop-and-test/integration-artifacts/agents/memory
 ---
 

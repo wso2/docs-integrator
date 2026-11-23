@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Diagnose Issues
 
-Use this page when something in the WSO2 Agent Builder editor isn't behaving the way you expect: a feature doesn't respond, a diagram doesn't load, or an action errors out. Before you file an issue, capture verbose editor output so the team can act on the report.
+Use this page when something in the Choreo Agent Builder editor isn't behaving the way you expect: a feature doesn't respond, a diagram doesn't load, or an action errors out. Before you file an issue, capture verbose editor output so the team can act on the report.
 
 If the editor shows **Your project dependencies need to be updated** when you open a project that was created with an earlier Ballerina version, see [Moving to Ballerina 2201.14](moving-to-ballerina-2201-14.md).
 

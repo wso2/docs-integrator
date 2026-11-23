@@ -1,8 +1,8 @@
 ---
 sidebar_position: 6
 title: Mocking
-description: Replace external clients and functions with controlled stubs to test integrations in isolation in WSO2 Agent Builder.
-keywords: [wso2 agent builder, mocking, test double, stub, mock function, ballerina test]
+description: Replace external clients and functions with controlled stubs to test integrations in isolation in Choreo Agent Builder.
+keywords: [choreo agent builder, mocking, test double, stub, mock function, ballerina test]
 slug: /develop-and-test/test/test-explorer/mocking
 ---
 

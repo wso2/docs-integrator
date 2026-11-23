@@ -1,8 +1,8 @@
 ---
 sidebar_position: 0
 title: Editor Window
-description: The shared window that surrounds every view in the WSO2 Agent Builder editor.
-keywords: [wso2 agent builder, editor window, activity bar, editor toolbar, status bar]
+description: The shared window that surrounds every view in the Choreo Agent Builder editor.
+keywords: [choreo agent builder, editor window, activity bar, editor toolbar, status bar]
 slug: /editor/editor-window
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Editor Window
 
-Every view you open in WSO2 Agent Builder ([Project view](views/project-view.md), [Integration view](views/integration-view.md), [Library view](views/library-view.md), and so on) renders inside the same window with a top menu bar, an activity bar on the far-left edge, an editor tab area with editor toolbar, and the side panels for the project explorer and deployment options. This page describes the parts of that window that stay the same across views, so the view-specific pages do not need to repeat them.
+Every view you open in Choreo Agent Builder ([Project view](views/project-view.md), [Integration view](views/integration-view.md), [Library view](views/library-view.md), and so on) renders inside the same window with a top menu bar, an activity bar on the far-left edge, an editor tab area with editor toolbar, and the side panels for the project explorer and deployment options. This page describes the parts of that window that stay the same across views, so the view-specific pages do not need to repeat them.
 
 ## Top menu bar
 
@@ -27,7 +27,7 @@ The top menu bar runs across the top edge of the application window and groups t
 
 | Menu | Description |
 |---|---|
-| **WSO2 Agent Builder** | Application-level actions such as About, Preferences, and Quit. |
+| **Choreo Agent Builder** | Application-level actions such as About, Preferences, and Quit. |
 | **File** | Open, save, and close projects, files, and windows. |
 | **Edit** | Standard editing actions such as undo, redo, cut, copy, paste, and find. |
 | **Selection** | Selection and multi-cursor actions for the source editor. |
@@ -54,15 +54,15 @@ The activity bar is the narrow vertical strip on the far-left edge of the editor
 
 | Name | Description |
 |---|---|
-| **WSO2 Agent Builder** | Opens the project explorer for the current view. This is the main entry point back to your project. |
+| **Choreo Agent Builder** | Opens the project explorer for the current view. This is the main entry point back to your project. |
 | **Explorer** | Opens the file explorer to browse the raw project files on disk, such as `.bal` source files and `.toml` configuration files. |
 | **Source Control** | Opens the Git source control panel for staging, committing, and reviewing changes. |
 | **Run and Debug** | Opens the debug panel for setting breakpoints, launching the agentic integration with the debugger, and inspecting variables. |
 | **Testing** | Opens the test explorer to view, run, and debug the test cases defined for your agentic integration. |
-| **Accounts** | Shows the signed-in WSO2 Agent Builder account and provides actions to manage extension account preferences and language model access. |
+| **Accounts** | Shows the signed-in Choreo Agent Builder account and provides actions to manage extension account preferences and language model access. |
 | **Manage** | Opens the editor management menu with access to the Command Palette, Profiles, Settings, Keyboard Shortcuts, Snippets, Tasks, and Themes. |
 
-Select the **WSO2 Agent Builder** icon at any time to return to the project explorer and the current view.
+Select the **Choreo Agent Builder** icon at any time to return to the project explorer and the current view.
 
 ## Project explorer
 
@@ -105,7 +105,7 @@ The editor tab area sits above the canvas and shows one tab per open editor. The
     }}
 />
 
-The **WSO2 Agent Builder** tab represents the visual designer for the current view. Other tabs, such as a Ballerina source file opened from the explorer, appear alongside it.
+The **Choreo Agent Builder** tab represents the visual designer for the current view. Other tabs, such as a Ballerina source file opened from the explorer, appear alongside it.
 
 ### Editor toolbar
 
@@ -121,7 +121,7 @@ The editor toolbar appears on the right side of the editor tab bar and provides 
 
 | Action | Description |
 |---|---|
-| **Open Copilot** | Opens the [WSO2 Agent Builder Copilot](copilot/copilot.md) chat panel for AI-powered assistance with building and troubleshooting your agents. |
+| **Open Copilot** | Opens the [Choreo Agent Builder Copilot](copilot/copilot.md) chat panel for AI-powered assistance with building and troubleshooting your agents. |
 | **Run** | Builds and runs the agentic integration locally, starting all services and streaming output to the terminal. |
 | **Debug** | Launches the agentic integration with the debugger attached so you can set breakpoints and inspect variables. |
 | **Show Source** | Switches the editor from the visual designer to the Ballerina source for the current artifact. |

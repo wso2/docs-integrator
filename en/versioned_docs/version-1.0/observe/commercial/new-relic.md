@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: New Relic
-description: Observe metrics and distributed traces from WSO2 Agent Builder agents using New Relic.
+description: Observe metrics and distributed traces from Choreo Agent Builder agents using New Relic.
 slug: /observe/commercial/new-relic
 ---
 
@@ -11,7 +11,7 @@ slug: /observe/commercial/new-relic
 troubleshoot their applications, infrastructure, and digital experiences in real-time. Both metrics and tracing of an agent can
 be viewed with New Relic.
 
-This guide uses the following sample shop service (`main.bal`), which listens on port `8090`. The service hosts a shop assistant agent that answers customer questions and calls tools to list products, place orders, and look up orders. The sample uses the default WSO2 model provider. Follow the steps given below to observe tracing and metrics in New Relic.
+This guide uses the following sample shop service (`main.bal`), which listens on port `8090`. The service hosts a shop assistant agent that answers customer questions and calls tools to list products, place orders, and look up orders. The sample uses the default Choreo model provider. Follow the steps given below to observe tracing and metrics in New Relic.
 
 ```ballerina
 import ballerina/ai;
@@ -111,7 +111,7 @@ To configure the API key in New Relic:
 ## Step 2: Import the New Relic Extension
 
 To include the New Relic extension into the executable, the `ballerinax/newrelic` module needs to be imported into your
-agent's `main.bal` file. Navigate to File explorer view in WSO2 Agent Builder to do so.
+agent's `main.bal` file. Navigate to File explorer view in Choreo Agent Builder to do so.
 
 ```ballerina
 import ballerinax/newrelic as _;

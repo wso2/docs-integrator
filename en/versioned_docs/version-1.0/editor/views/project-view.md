@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Project View
-description: Manage projects with multiple agentic integrations and libraries in WSO2 Agent Builder.
-keywords: [wso2 agent builder, editor, project view, agentic integrations, libraries]
+description: Manage projects with multiple agentic integrations and libraries in Choreo Agent Builder.
+keywords: [choreo agent builder, editor, project view, agentic integrations, libraries]
 slug: /editor/views/project-view
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Project View
 
-The Project view is the top-level view in WSO2 Agent Builder. It appears when you open a project that contains multiple agentic integrations or libraries, giving you an overview of everything in the project and project-level deployment actions in one place.
+The Project view is the top-level view in Choreo Agent Builder. It appears when you open a project that contains multiple agentic integrations or libraries, giving you an overview of everything in the project and project-level deployment actions in one place.
 
 <ThemedImage
     alt="Project view overview"
@@ -60,7 +60,7 @@ Click **Deploy** at the top right of the Project view to deploy or package the a
 
 | Option | Target |
 |---|---|
-| [**Deploy to WSO2 Cloud**](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md) | Fully managed cloud platform for hosting and running agentic integrations. |
+| [**Deploy to Choreo Cloud**](../../deploy-and-run/deploy-to-choreo-cloud/deploy-to-choreo-cloud.md) | Fully managed cloud platform for hosting and running agentic integrations. |
 | [**Build Docker Image**](product://integrator/deploy-and-run/self-hosted/containerized-deployment) | Build Docker images to deploy on Docker, Kubernetes, or OpenShift. |
 | [**Build Executable**](product://integrator/deploy-and-run/self-hosted/vm-deployment) | Build standalone JAR files to run on virtual machines. |
 

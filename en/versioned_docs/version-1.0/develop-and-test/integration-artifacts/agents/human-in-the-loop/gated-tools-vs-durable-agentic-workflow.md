@@ -1,7 +1,7 @@
 ---
 title: Gated Tools vs Durable Agentic Workflow
-description: A quick, tick-and-cross comparison of gated tools and durable agentic workflows in WSO2 Agent Builder, covering capabilities and what each costs to set up.
-keywords: [wso2 agent builder, gated tools, durable agentic workflow, human task, approval gate, comparison, human in the loop, hitl]
+description: A quick, tick-and-cross comparison of gated tools and durable agentic workflows in Choreo Agent Builder, covering capabilities and what each costs to set up.
+keywords: [choreo agent builder, gated tools, durable agentic workflow, human task, approval gate, comparison, human in the loop, hitl]
 sidebar_position: 2
 slug: /develop-and-test/integration-artifacts/agents/human-in-the-loop/gated-tools-vs-durable-agentic-workflow
 ---
