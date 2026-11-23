@@ -2,7 +2,7 @@
 sidebar_position: 5
 title: Copilot Architecture and Data Handling
 description: Understand how Choreo Agent Builder Copilot handles prompts, responses, feedback, and authentication data, and the best practices to follow when using AI features.
-keywords: [choreo agent builder, copilot, ai, data handling, privacy, byok, anthropic, aws bedrock, google vertex ai, asgardeo, architecture, data residency, eu region, mcp, web access]
+keywords: [choreo agent builder, copilot, ai, data handling, privacy, byok, anthropic, aws bedrock, google vertex ai, choreo iam, architecture, data residency, eu region, mcp, web access]
 slug: /editor/copilot/copilot-architecture
 ---
 
@@ -38,7 +38,7 @@ To maintain security, all Choreo Agent Builder Copilot features require authenti
 
 - Users must [sign in](copilot.md) to enable Copilot functionality.
 - Social sign-in options are supported for ease of use.
-- Authentication and session management are handled by [Asgardeo](https://wso2.com/asgardeo/), the Choreo Labs identity provider.
+- Authentication and session management are handled by [Choreo IAM](https://wso2.com/asgardeo/), the Choreo Labs identity provider.
 
 This ensures that only authorized users in your organization can access Copilot features.
 
@@ -181,7 +181,7 @@ General Copilot best practices:
 | Code prompts and responses | Not stored by Choreo Intelligence | Forwarded to your AI provider: through Choreo Intelligence with the Choreo Cloud sign-in, or directly with your own provider. |
 | User feedback | One week | Retained only when explicitly provided by the user. Includes the current conversation. |
 | Chat sessions | Not stored by Choreo Labs | Saved on your machine. |
-| Authentication tokens | Session-based | Managed securely by Asgardeo. |
+| Authentication tokens | Session-based | Managed securely by Choreo IAM. |
 | Organizational data | Not stored | Zero-retention policy at Choreo Intelligence. |
 
 ## See also
