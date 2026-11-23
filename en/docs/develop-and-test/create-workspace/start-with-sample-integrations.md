@@ -105,7 +105,15 @@ Once the deployment is **Active**, the overview page shows the endpoint URL, the
 
 Every sample is deployed straight from a public GitHub repository. Follow the **Source** link on the overview page to read its code and see how the sample is built.
 
-:::note Editing a sample in the cloud editor isn't available yet
+<ThemedImage
+    alt="Source link to the sample's GitHub repository highlighted on the integration overview page"
+    sources={{
+        light: useBaseUrl('/img/explore-samples/sample-integration-saas-source.png'),
+        dark: useBaseUrl('/img/explore-samples/sample-integration-saas-source.png'),
+    }}
+/>
+
+:::note Editing a sample in the cloud editor isn't supported yet
 A deployed sample can't be opened in the cloud editor to view or change it. Support for this is planned for a future release.
 
 To build on a sample in the meantime, clone its source repository into a repository of your own, then [import it](import-an-integration.md) as your own integration. From that point on, you can edit it in the cloud editor like any other integration.
