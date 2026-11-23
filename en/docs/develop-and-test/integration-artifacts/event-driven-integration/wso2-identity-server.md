@@ -27,7 +27,13 @@ WSO2 Identity Server event integrations receive webhook deliveries from WSO2 Ide
 2. In the **Artifacts** panel, search for `identityserver.trigger` and select the **identityserver.trigger** card under **More on Ballerina Central**.
 3. In the **WSO2 Identity Server Event Integration** form, fill in the following fields:
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/wso2-identity-server/step-creation-form.png: WSO2 Identity Server Event Integration creation form -->
+   <ThemedImage
+       alt="WSO2 Identity Server Event Integration creation form"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/wso2-identity-server/step-creation-form.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/wso2-identity-server/step-creation-form.png'),
+       }}
+   />
 
    | Field | Description | Default |
    |---|---|---|
@@ -41,7 +47,13 @@ WSO2 Identity Server event integrations receive webhook deliveries from WSO2 Ide
 
 5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener, the event channel, and the **Event Handlers** section with every handler of the selected channel added.
 
-   <!-- TODO: Add visual designer screenshot img/develop/integration-artifacts/event/wso2-identity-server/step-service-designer.png: WSO2 Identity Server Service Designer view -->
+   <ThemedImage
+       alt="WSO2 Identity Server Service Designer view"
+       sources={{
+           light: useBaseUrl('/img/develop/integration-artifacts/event/wso2-identity-server/step-service-designer.png'),
+           dark: useBaseUrl('/img/develop/integration-artifacts/event/wso2-identity-server/step-service-designer.png'),
+       }}
+   />
 
    A service must implement every handler of its channel, so all of them are added for you. Click a handler to open it in the flow diagram view and implement the logic; leave a handler empty for an event you don't act on.
 
