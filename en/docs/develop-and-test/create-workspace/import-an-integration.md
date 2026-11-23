@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Import an Integration
 
-If your integration is already in a Git repository, you can import it directly into Choreo Cloud without going through the Choreo Integrator editor. Choreo Cloud automatically builds and deploys the integration to the Development environment once the import is complete.
+If your integration is already in a Git repository, you can import it directly into Choreo Cloud without going through the Choreo Integrator editor. Choreo Cloud builds it as soon as the import completes, and you deploy it to the **Development** environment from the integration's overview page.
 
 :::info Prerequisites
 - An integration created with Choreo Integrator editor pushed to a remote GitHub or Azure DevOps repository.
@@ -24,25 +24,15 @@ If your integration is already in a Git repository, you can import it directly i
 
    When you sign up for the first time, Choreo Cloud creates a default project for you. You land on the project home page.
 
-2. On the project home page, click **Import an Integration** and select your Git provider. Alternatively, click your Git provider's icon directly on the home page to authorize it with Choreo Cloud.
+2. Open the project you want to import into. On the **Create Integration** page, find **Import a repository from** and click your Git provider's icon. Complete the authorization flow in the browser, then return to Choreo Cloud.
 
     <ThemedImage
-        alt="Project Home in Choreo Cloud"
-        sources={{
-            light: useBaseUrl('/img/create-project/create-project-saas-landing.png'),
-            dark: useBaseUrl('/img/create-project/create-project-saas-landing.png'),
-        }}
-    />
-
-    <ThemedImage
-        alt="Click Import Integration"
+        alt="Create Integration page with the Git provider icons in the Import a repository from row highlighted"
         sources={{
             light: useBaseUrl('/img/import-project/import-integration.png'),
             dark: useBaseUrl('/img/import-project/import-integration.png'),
         }}
     />
-
-3. Select your Git provider and complete the authorization flow in the browser, then return to Choreo Cloud.
 
     :::note
     One-click OAuth2 authorization is only available for GitHub. To use Azure DevOps, you must first add your credentials at the organization level. See [Connect a Git provider](../../deploy-and-run/deploy-to-wso2-cloud/connect-git-provider.md) for instructions.
@@ -50,30 +40,58 @@ If your integration is already in a Git repository, you can import it directly i
 
 ## Import the integration
 
-1. Select the organization that owns the repository.
-2. Select the repository and the branch.
-3. Set the path to the folder where your integration lives within the repository.
-4. Optionally, add a description.
-5. Select the integration type. Choreo Cloud detects the technology automatically.
-6. Click **Create**.
+1. Select the **Organization** that owns the repository, then the **Repository** and the **Branch**.
+2. If the integration doesn't live at the root of the repository, set **Repository sub path**.
+3. Enter an **Integration name**. The **Integration ID** is generated from it, and a **Description** is optional.
+4. Under **Technology**, select the technology the integration is built with.
+5. Under **Integration type**, select how the integration runs: **Automation**, **AI Agent**, **Integration as API**, **MCP Server**, **Event Integration**, or **File Integration**.
+6. Click **Import integration**.
 
     <ThemedImage
-        alt="Import Integration"
+        alt="Import an integration form with the repository, integration details, technology, and integration type filled in"
         sources={{
             light: useBaseUrl('/img/import-project/import-integration-saas-form-new.png'),
             dark: useBaseUrl('/img/import-project/import-integration-saas-form-new.png'),
         }}
     />
 
-    <ThemedImage
-        alt="Build Integration"
-        sources={{
-            light: useBaseUrl('/img/import-project/build-completed.png'),
-            dark: useBaseUrl('/img/import-project/build-completed.png'),
-        }}
-    />
+    :::tip
+    If your integration depends on private packages, select **Add a Ballerina Central token** on the form before you import.
+    :::
 
-Choreo Cloud starts the build immediately. Once the build completes, the integration is automatically deployed to the **Development** environment.
+## Build and deploy
+
+Choreo Cloud opens the integration's overview page and starts the build immediately. Select **View logs** to follow it as it runs.
+
+<ThemedImage
+    alt="Integration overview page with the first build in progress and its live logs showing"
+    sources={{
+        light: useBaseUrl('/img/import-project/import-integration-saas-build.png'),
+        dark: useBaseUrl('/img/import-project/import-integration-saas-build.png'),
+    }}
+/>
+
+When the build reaches **Completed**, select **Deploy** on the **Development** environment. An imported integration isn't deployed automatically.
+
+<ThemedImage
+    alt="Integration overview page with a completed build and the Deploy button on the Development environment highlighted"
+    sources={{
+        light: useBaseUrl('/img/import-project/build-completed.png'),
+        dark: useBaseUrl('/img/import-project/build-completed.png'),
+    }}
+/>
+
+Once the deployment is **Active**, the overview page shows the endpoint URL, the exposed resources, and the security scheme. Select **Test** to call it, or **Generate API key** if it's secured with an API key.
+
+<ThemedImage
+    alt="Integration overview page with an active deployment, its endpoint URL, and the API keys panel"
+    sources={{
+        light: useBaseUrl('/img/import-project/import-integration-saas-deployed.png'),
+        dark: useBaseUrl('/img/import-project/import-integration-saas-deployed.png'),
+    }}
+/>
+
+To keep working on the integration, select **Open in Cloud Editor** at the top right.
 
 ## What's next
 
