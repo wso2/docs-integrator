@@ -292,3 +292,4 @@ truststorePassword = "<truststore-password>"
 - [Runtime security](runtime-security.md) — Apply additional runtime security settings
 - [Authentication](authentication.md) — Secure service endpoints with OAuth 2.0, JWT, and mTLS
 - [Secrets and encryption](secrets-encryption.md) — Manage secrets and configure encryption in your integration
+- [Post-quantum cryptography](post-quantum-cryptography.md) — Use hybrid post-quantum TLS, ML-KEM, and ML-DSA
