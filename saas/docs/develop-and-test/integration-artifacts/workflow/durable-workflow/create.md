@@ -29,7 +29,7 @@ A **durable workflow** is an artifact in your integration, the same as a service
    | **Workflow Input Data Type** | No | The type of the data the workflow starts with, usually a record. See [Types](../../supportive-artifacts/types.md). |
 
    :::tip Design it for the launcher
-   Whatever you put in this type is what every caller has to supply, including the form the [Integration Control Plane](../../../../manage/integrations/workflows.md#start-a-workflow) generates for starting a run by hand. Keep it to the data the process actually needs.
+   Whatever you put in this type is what every caller has to supply, including the form the [cloud-managed control plane](../../../../manage/integrations/workflows.md#start-a-workflow) generates for starting a run by hand. Keep it to the data the process actually needs.
    :::
 
    <ThemedImage

@@ -31,10 +31,7 @@ A working WSO2 Integrator environment.
 
 <PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">Sign up and launch WSO2 Integrator in the browser-based cloud editor.
 
-You also need an internet-accessible Temporal server, either through a managed provider such as [Temporal Cloud](https://temporal.io/cloud) or a publicly exposed self-hosted instance, along with its endpoint URL, namespace, and credentials. See [Temporal credentials](../../manage/configurations/temporal-credentials.md).
-
-:::info Note
-The cloud editor runs in WSO2 Cloud and cannot connect to a Temporal server running on `localhost` on your computer. Make sure the server is accessible over the internet.
+<PrereqCard icon="server" title="Temporal server">An internet-accessible Temporal server, such as Temporal Cloud or a publicly exposed self-hosted instance, with its endpoint URL, namespace, and credentials. See [Temporal credentials](../../manage/configurations/temporal-credentials.md).
 
 ## Step 1: Create the integration
 
@@ -327,7 +324,7 @@ The diagram gains a **Wait for payment** node, drawn with an incoming arrow from
 The workflow now suspends at this line, and only at this line. It holds no thread and no connection while it waits, and it survives a restart of the runtime.
 
 :::tip Data event or human task?
-Use a **data event** when a system or a person submits *content* the workflow processes, as here. Use a [human task](../../develop-and-test/integration-artifacts/workflow/durable-workflow/await-human-task.md) when a person makes a *decision* that the Integration Control Plane should render as a form in their inbox.
+Use a **data event** when a system or a person submits *content* the workflow processes, as here. Use a [human task](../../develop-and-test/integration-artifacts/workflow/durable-workflow/await-human-task.md) when a person makes a *decision* that the cloud-managed control plane should render as a form in their inbox.
 
 ## Step 5: Branch on the payment result
 

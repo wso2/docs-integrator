@@ -51,8 +51,6 @@ namespace = "default"
 taskQueue = "ORDER_WORKFLOW_TASK_QUEUE"
 ```
 
-The Management API is a separate module with its own table, `[ballerina.workflow.management.rest]`. See [Management API](management-api.md).
-
 ## Connection settings
 
 Both are ignored in `IN_MEMORY` mode.
@@ -90,5 +88,4 @@ Two integrations sharing a task queue will poll each other's tasks. Name the que
 
 - [Activities](activities.md) — the recorded units of work a workflow calls
 - [Error handling and review activities](review-activity-and-error-handling.md) — retry and review policies on an activity call
-- [Manage workflows](../../../../manage/integrations/workflows.md) — registering the integration with the Integration Control Plane
-- [Management API](management-api.md) — the REST surface served by the integration runtime
+- [Manage workflows](../../../../manage/integrations/workflows.md) — registering the integration with the cloud-managed control plane

@@ -19,7 +19,7 @@ A workflow is a step-by-step process that completes a larger task. WSO2 Integrat
 - **Survive crashes and restarts** — every completed step is recorded, and the workflow resumes exactly where it left off. A finished step is never re-executed.
 - **Wait for as long as it takes** — pause for hours, days, or months for a human decision or an external event, consuming no threads or connections while suspended.
 - **Recover from failures** — retry failed steps automatically, or hand the failure to a human who can fix the input and retry.
-- **Keep humans in the loop** — assign role-based tasks that people decide from the **Human Tasks** page of the [Integration Control Plane](../../../manage/integrations/workflows.md#act-on-human-tasks-and-reviews).
+- **Keep humans in the loop** — assign role-based tasks that people decide from the **Human Tasks** page of the [cloud-managed control plane](../../../manage/integrations/workflows.md#complete-or-fail-a-human-task).
 
 ## Two ways to build, one durable runtime
 
@@ -65,5 +65,4 @@ Both run on the same durable runtime, so an AI agent gets crash safety, human ta
 
 ## Reference
 
-- **[Management API](durable-workflow/management-api.md):** The REST API behind the Control Plane — list instances, read execution graphs, and complete tasks programmatically.
 - **[Deployment modes](durable-workflow/deployment-modes.md):** Choose the workflow engine a run records to, and configure its connection, authentication, and worker settings.
