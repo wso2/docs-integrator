@@ -68,6 +68,14 @@ Choose the application you want to integrate from. The catalog currently include
 
 The list narrows to the applications Salesforce can be paired with. Select **Google Sheets**. The ready-made scenarios for that pair appear immediately.
 
+<ThemedImage
+    alt="Second application selection screen narrowed to the applications Salesforce pairs with, with Google Sheets selected"
+    sources={{
+        light: useBaseUrl('/img/get-started/prebuilt-integrations/select-google-sheets.png'),
+        dark: useBaseUrl('/img/get-started/prebuilt-integrations/select-google-sheets.png'),
+    }}
+/>
+
 ## Step 4: Choose an integration scenario
 
 Every application pair has one or more ready-made scenarios, and the set available for a given pair grows as new use cases are added. Select the **Export Salesforce Leads to a Google Sheet** integration.
@@ -102,13 +110,23 @@ The configuration page's left panel explains exactly what the integration does a
     }}
 />
 
-Fill in your credentials and configuration, then select **Deploy**. The integration deploys within minutes.
+Fill in your credentials and configuration, then select **Deploy integration**.
 
 <ThemedImage
-    alt="Deploy button on the configuration page after credentials are filled in"
+    alt="Deploy integration button highlighted at the end of the configuration page"
     sources={{
         light: useBaseUrl('/img/get-started/prebuilt-integrations/deploy-integration.png'),
         dark: useBaseUrl('/img/get-started/prebuilt-integrations/deploy-integration.png'),
+    }}
+/>
+
+Choreo Cloud saves the configuration and deploys the integration. This takes a few minutes.
+
+<ThemedImage
+    alt="Deployment progress screen for the Export Salesforce Leads to a Google Sheet integration"
+    sources={{
+        light: useBaseUrl('/img/get-started/prebuilt-integrations/deploy-progress.png'),
+        dark: useBaseUrl('/img/get-started/prebuilt-integrations/deploy-progress.png'),
     }}
 />
 
@@ -117,7 +135,7 @@ Fill in your credentials and configuration, then select **Deploy**. The integrat
 After deployment, you land on the integration's overview page. Select **Test** on the **Development** environment to trigger an execution.
 
 <ThemedImage
-    alt="Integration overview page with the Test option for the Development environment"
+    alt="Integration overview page with the Test option highlighted for the Development environment"
     sources={{
         light: useBaseUrl('/img/get-started/prebuilt-integrations/test-integration.png'),
         dark: useBaseUrl('/img/get-started/prebuilt-integrations/test-integration.png'),
@@ -130,10 +148,10 @@ From here, you can manage, deploy, and observe this integration just like any ot
 
 ## Step 7: Make it yours
 
-To customize the integration, go to the overview page and select **Open in Cloud** to edit it in low-code or pro-code view, right in the cloud editor. Edit however you're most comfortable, then push the result to your own repository. At that point, it's fully yours, the same as any integration you built from scratch.
+To customize the integration, go to the overview page and select **Open in Cloud Editor** to edit it in low-code or pro-code view, right in the cloud editor. Edit however you're most comfortable, then push the result to your own repository. At that point, it's fully yours, the same as any integration you built from scratch.
 
 <ThemedImage
-    alt="Integration overview page with the Open in Cloud and Open in Integrator options"
+    alt="The prebuilt integration opened in the cloud editor, showing its design view and connections"
     sources={{
         light: useBaseUrl('/img/get-started/prebuilt-integrations/cloud-editor.png'),
         dark: useBaseUrl('/img/get-started/prebuilt-integrations/cloud-editor.png'),
