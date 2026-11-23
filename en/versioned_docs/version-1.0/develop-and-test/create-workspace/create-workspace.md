@@ -1,7 +1,7 @@
 ---
-title: The Integration Workspace
+title: The Agentic Integration Workspace
 description: Understand how Choreo Agent Builder organizes your work into projects, agentic integrations, and libraries, then create a workspace and the agentic integrations and libraries that live inside it.
-sidebar_label: Integration Workspace
+sidebar_label: Agentic Integration Workspace
 sidebar_position: 0
 slug: /develop-and-test/create-workspace
 ---
@@ -9,7 +9,7 @@ slug: /develop-and-test/create-workspace
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# The Integration Workspace
+# The Agentic Integration Workspace
 
 Choreo Agent Builder organizes your work into three concepts that build on each other:
 
