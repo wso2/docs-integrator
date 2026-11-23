@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Create a Project
 
-A project is the top-level container for your integrations on Choreo Cloud. Use projects to group related integrations and manage them together. Choreo Cloud creates a project named **Default** when you first sign up, and you can create more at any time.
+A project is the top-level container for your integrations on Choreo Cloud. Use projects to group related integrations and manage them together. Choreo Cloud creates a project named **Default Project** when you first sign up, and you can create more at any time.
 
 :::tip
 If your project already exists in a Git repository, import it instead. See [Import a project](import-a-project.md).
@@ -22,7 +22,7 @@ If your project already exists in a Git repository, import it instead. See [Impo
 2. Click **+ Create project**.
 
     <ThemedImage
-        alt="Organization overview with the Create project button"
+        alt="Organization overview with the Create project button highlighted above the list of projects"
         sources={{
             light: useBaseUrl('/img/create-project/create-project-saas-button.png'),
             dark: useBaseUrl('/img/create-project/create-project-saas-button.png'),
