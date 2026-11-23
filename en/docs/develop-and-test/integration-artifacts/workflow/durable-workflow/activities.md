@@ -127,7 +127,7 @@ A *completed* activity never runs twice, but a *failed* attempt may run again on
 
 ## Watching activities run
 
-Each activity call appears as an `ACTIVITY` node in the instance's execution graph in the [Integration Control Plane](../../../../manage/integrations/workflows.md#view-the-details-of-a-run), so you can see which step an instance is on, which activities have completed, and which one failed. The same graph is available over the [Management API](management-api.md).
+Each activity call appears as an `ACTIVITY` node in the instance's execution graph in the [cloud-managed control plane](../../../../manage/integrations/workflows.md#view-the-details-of-a-run), so you can see which step an instance is on, which activities have completed, and which one failed.
 
 ## Next steps
 

@@ -40,6 +40,9 @@ On the workflow overview page, each environment card shows the following:
 
 <ThemedImage
     alt="Workflow overview page with workflow definitions and figures on an environment card"
+    width={1920}
+    height={929}
+    style={{height: 'auto'}}
     sources={{
         light: useBaseUrl('/img/manage/cloud/integrations/workflows/overview-card.png'),
         dark: useBaseUrl('/img/manage/cloud/integrations/workflows/overview-card.png'),
@@ -58,6 +61,9 @@ While **Auto-refresh** is on, the list updates on its own. To update it manually
 
 <ThemedImage
     alt="Workflows page with the list of workflow runs, filters, and the Start New Workflow button"
+    width={1920}
+    height={929}
+    style={{height: 'auto'}}
     sources={{
         light: useBaseUrl('/img/manage/cloud/integrations/workflows/runs-list.png'),
         dark: useBaseUrl('/img/manage/cloud/integrations/workflows/runs-list.png'),
@@ -80,6 +86,9 @@ While **Auto-refresh** is on, the list updates on its own. To update it manually
 
 <ThemedImage
     alt="Start New Workflow dialog with a workflow definition selected and the input form"
+    width={1920}
+    height={929}
+    style={{height: 'auto'}}
     sources={{
         light: useBaseUrl('/img/manage/cloud/integrations/workflows/start-workflow.png'),
         dark: useBaseUrl('/img/manage/cloud/integrations/workflows/start-workflow.png'),
@@ -104,6 +113,9 @@ To see the workflow run raw event history, click the bug icon in the header.
 
 <ThemedImage
     alt="Execution Details of a running workflow with the summary, workflow input, flow diagram, and timeline"
+    width={1920}
+    height={1434}
+    style={{height: 'auto'}}
     sources={{
         light: useBaseUrl('/img/manage/cloud/integrations/workflows/run-details.png'),
         dark: useBaseUrl('/img/manage/cloud/integrations/workflows/run-details.png'),
@@ -149,6 +161,9 @@ To see them, open the workflow, then click **Operate** > **Human Tasks** in the 
 
 <ThemedImage
     alt="Human Tasks page with human tasks and reviews, filters, and the Select reviews button"
+    width={1920}
+    height={929}
+    style={{height: 'auto'}}
     sources={{
         light: useBaseUrl('/img/manage/cloud/integrations/workflows/human-tasks.png'),
         dark: useBaseUrl('/img/manage/cloud/integrations/workflows/human-tasks.png'),
@@ -164,6 +179,9 @@ You can act only on the items that you are eligible for. The details of each ite
 
     <ThemedImage
         alt="Task Details of a pending human task with its details, task input, and the Complete Task and Mark as Failed actions"
+        width={1920}
+        height={1313}
+        style={{height: 'auto'}}
         sources={{
             light: useBaseUrl('/img/manage/cloud/integrations/workflows/task-details.png'),
             dark: useBaseUrl('/img/manage/cloud/integrations/workflows/task-details.png'),
@@ -189,6 +207,9 @@ You can act only on the items that you are eligible for. The details of each ite
 
 <ThemedImage
     alt="Review Details of a pending approval with the activity, its arguments, and the Proceed, Proceed with Changes, and Reject decisions"
+    width={1920}
+    height={1263}
+    style={{height: 'auto'}}
     sources={{
         light: useBaseUrl('/img/manage/cloud/integrations/workflows/review-details.png'),
         dark: useBaseUrl('/img/manage/cloud/integrations/workflows/review-details.png'),

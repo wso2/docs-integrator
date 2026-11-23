@@ -55,7 +55,7 @@ The steps below follow one example: an onboarding workflow where an HR lead assi
     }}
 />
 
-The workflow suspends at this step, and the task appears in the [Integration Control Plane](../../../../manage/integrations/workflows.md#act-on-human-tasks-and-reviews) inbox for every user holding one of the roles you named.
+The workflow suspends at this step, and the task appears in the [cloud-managed control plane](../../../../manage/integrations/workflows.md#act-on-human-tasks-and-reviews) inbox for every user holding one of the roles you named.
 
 ## Show the decider what they need
 
@@ -96,8 +96,7 @@ Use a human task when a person is making a **decision** the Control Plane should
 
 A workflow never exposes its own endpoint for finishing a task. Completion happens outside the workflow:
 
-- **[Complete human tasks](../../../../manage/integrations/workflows.md#act-on-human-tasks-and-reviews)** in the Integration Control Plane, where the task appears in the inbox of everyone holding a matching role, rendered as a form built from the completion type with the task input shown beside it. This is the route for the people actually deciding.
-- **[Management API](management-api.md)**, whose `POST /human-tasks/{taskId}/complete` accepts the same decision as JSON, for building your own portal or automating a decision.
+- **[Complete human tasks](../../../../manage/integrations/workflows.md#act-on-human-tasks-and-reviews)** in the cloud-managed control plane, where the task appears in the inbox of everyone holding a matching role, rendered as a form built from the completion type with the task input shown beside it. This is the route for the people actually deciding.
 
 ## Next steps
 

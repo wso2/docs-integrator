@@ -28,7 +28,7 @@ Three are available today:
 3. In the **Activities** panel, under **Prebuilt Activities**, click the one you need.
 4. Choose the **Connection** to call through, fill in the call's fields, and click **Save**.
 
-The call appears on the diagram as an ordinary activity node, and it behaves like one: recorded on success, retryable on failure, and visible as an `ACTIVITY` node in the [Integration Control Plane](../../../../../manage/integrations/workflows.md#view-the-details-of-a-run) execution graph.
+The call appears on the diagram as an ordinary activity node, and it behaves like one: recorded on success, retryable on failure, and visible as an `ACTIVITY` node in the [cloud-managed control plane](../../../../../manage/integrations/workflows.md#view-the-details-of-a-run) execution graph.
 
 ## Fields shared by all three
 

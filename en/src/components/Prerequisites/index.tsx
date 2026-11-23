@@ -93,7 +93,20 @@ function AIIcon(): ReactNode {
   );
 }
 
-const PREREQ_ICONS = { cloud: CloudIcon, local: LocalIcon, ai: AIIcon } as const;
+// Stacked server racks -- for a PrereqCard about an external server the
+// integration connects to (e.g. a Temporal server).
+function ServerIcon(): ReactNode {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3.5" y="4" width="17" height="7" rx="1.5" />
+      <rect x="3.5" y="13" width="17" height="7" rx="1.5" />
+      <path d="M7 7.5h.01" />
+      <path d="M7 16.5h.01" />
+    </svg>
+  );
+}
+
+const PREREQ_ICONS = { cloud: CloudIcon, local: LocalIcon, ai: AIIcon, server: ServerIcon } as const;
 export type PrereqIconName = keyof typeof PREREQ_ICONS;
 
 export function PrereqCard({
@@ -105,7 +118,9 @@ export function PrereqCard({
 }: {
   icon: PrereqIconName;
   title: string;
-  href: string;
+  /** Leave out to render a plain (non-clickable) card, e.g. when only a
+   * link inside the card text should be clickable. */
+  href?: string;
   /** `href` is a route on the WSO2 Cloud (saas) docs site, not this
    * site -- resolved the same way CloudDocsLink does (each product is a
    * separate static build with its own baseUrl, so a plain internal
@@ -128,6 +143,10 @@ export function PrereqCard({
       </span>
     </>
   );
+
+  if (!href) {
+    return <div className={styles.card}>{content}</div>;
+  }
 
   if (cloud) {
     const base = (siteConfig.customFields?.crossProductBase as string) || DEFAULT_CROSS_PRODUCT_BASE;
