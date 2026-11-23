@@ -26,8 +26,6 @@ The `http` package provides post-quantum TLS, and the `crypto` package provides 
 | Hybrid key encapsulation | RSA-KEM combined with ML-KEM-768 | NIST FIPS 203 (ML-KEM part) | `crypto` |
 | Digital signatures | ML-DSA-65 | NIST FIPS 204 | `crypto` |
 
-The `crypto` package uses the final NIST algorithm identifiers (OIDs) for ML-KEM and ML-DSA.
-
 ## Hybrid post-quantum TLS
 
 HTTP listeners and HTTP clients offer the X25519MLKEM768 key exchange group for TLS 1.3 by default. X25519MLKEM768 combines the post-quantum ML-KEM-768 algorithm with the classical X25519 algorithm. The connection stays secure as long as either algorithm remains unbroken.
