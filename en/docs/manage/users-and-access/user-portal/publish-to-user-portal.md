@@ -26,19 +26,19 @@ For each automation, users can also see when it last ran and, if it is scheduled
 
 ## Prerequisites
 
-- The User Portal is enabled for your organization. See [Enable the User Portal](user-portal.md#enable-the-user-portal). Until then, the integration's overview page shows a **Publish to User Portal** button instead of the toggle. Click it, then click **Enable in Settings** to go to the **User Portal** page. If you do not have the permissions to enable the User Portal, ask an organization administrator to enable it.
-- The integration is deployed to the production environment. Until then, **Publish to User Portal** is disabled. See [Promote an integration](../../integrations/operate/promotion.md).
+- The User Portal is enabled for the environment. See [Enable the User Portal](user-portal.md#enable-the-user-portal). Until then, the integration's overview page shows a **Publish to User Portal** button instead of the toggle. Click it, then click **Enable in Settings** to go to the **User Portal** page. If you do not have the permissions to enable the User Portal, ask an organization administrator to enable it.
+- The integration is deployed to an environment that has the User Portal enabled. The **Publish to User Portal** toggle is on the card of that environment. See [Promote an integration](../../environments/promotion.md).
 - Your role includes the **Manage Organization** permission. Without it, **Publish to User Portal** is disabled. You need the same permission to choose the chat endpoints of an AI agent and to unpublish an integration.
 
 ## Publish an integration
 
 1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
 2. Select the project that contains the integration.
-3. In the **Integrations** pane, click the integration that you want to publish.
-4. On the integration's overview page, turn on the **Publish to User Portal** toggle.
+3. In the **Integrations** list, click the integration that you want to publish.
+4. On the integration's overview page, on the environment card, turn on the **Publish to User Portal** toggle.
 
     <ThemedImage
-        alt="Publish to User Portal toggle on the integration overview page"
+        alt="Publish to User Portal toggle on the Development environment card of the integration overview page"
         sources={{
             light: useBaseUrl('/img/manage/cloud/user-portal/publish-toggle.png'),
             dark: useBaseUrl('/img/manage/cloud/user-portal/publish-toggle.png'),
@@ -48,7 +48,7 @@ For each automation, users can also see when it last ran and, if it is scheduled
 5. In the confirmation dialog, click **Publish**.
 
     <ThemedImage
-        alt="Publish this agent confirmation dialog"
+        alt="Publish to the User Portal in Development confirmation dialog"
         sources={{
             light: useBaseUrl('/img/manage/cloud/user-portal/publish-confirm.png'),
             dark: useBaseUrl('/img/manage/cloud/user-portal/publish-confirm.png'),
@@ -64,10 +64,10 @@ When you confirm, the platform publishes the integration to the User Portal and 
 
 Publishing an integration does not give users access to it. To see the integration in the User Portal, a user needs a role with the view scope for the integration's type. See [Scopes](manage-users.md#scopes).
 
-After the integration is published, the platform shows a confirmation message, and a **User Portal** button appears on the overview page. Click it to open the User Portal for your organization in a new tab. The User Portal tries to sign you in automatically. See [Automatic sign-in from the console](sign-in-to-user-portal.md#automatic-sign-in-from-the-console).
+After the integration is published, the platform shows a confirmation message, and an **Open User Portal** link appears next to the toggle. Click it to open the User Portal in a new tab. See [Sign in to the User Portal](sign-in-to-user-portal.md).
 
 <ThemedImage
-    alt="User Portal button on the integration overview page after publishing"
+    alt="Published to User Portal toggle and the Open User Portal link on the integration overview page"
     sources={{
         light: useBaseUrl('/img/manage/cloud/user-portal/user-portal-button.png'),
         dark: useBaseUrl('/img/manage/cloud/user-portal/user-portal-button.png'),
