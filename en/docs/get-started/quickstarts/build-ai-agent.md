@@ -34,20 +34,20 @@ A working Choreo Integrator environment.
 
 ## Step 1: Create the integration
 
-1. On the project home page, click **Create on Cloud**.
+1. On the project overview page, click **Open Cloud Editor**.
 
    <ThemedImage
-       alt="Choreo Cloud project home showing the Create on Cloud option"
+       alt="How would you like to create your integration page with Open Cloud Editor highlighted under Create on Cloud"
        sources={{
-           light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
-           dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+           light: useBaseUrl('/img/get-started/quickstarts/open-cloud-editor.png'),
+           dark: useBaseUrl('/img/get-started/quickstarts/open-cloud-editor.png'),
        }}
    />
 
 2. The Choreo Integrator cloud editor opens in your browser.
 
    <ThemedImage
-    alt="Choreo Integrator cloud editor landing page showing an empty integration and the Deploy to Choreo Cloud panel"
+    alt="Cloud editor landing page with Choreo Integrator Copilot, the Add Artifact manually button, and the Deploy to Choreo Cloud panel"
     sources={{
         light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
         dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
@@ -80,12 +80,12 @@ The cloud editor creates a default integration for you, so you don't need to nam
        }}
    />
 
-3. The **Create Chat Agent Service** form opens. Set **Role** to `Wso2IntegratorAssistant`.
+3. The **Create Chat Agent Service** form opens. Set **Role** to `ChoreoIntegratorAssistant`.
 
 4. Set **Instructions** to:
 
    ```text
-   You are a highly skilled WSO2 Integration Architect. Your goal is to assist developers in building, debugging, and optimizing integration flows.
+   You are a highly skilled Choreo Integration Architect. Your goal is to assist developers in building, debugging, and optimizing integration flows.
    ```
 
    <ThemedImage
@@ -98,12 +98,12 @@ The cloud editor creates a default integration for you, so you don't need to nam
 
 5. Leave the remaining configuration fields at their default values.
 
-6. Scroll down to **Advanced Configurations** at the bottom of the form, and set **Agent Name** to `Wso2IntegratorAssistant`.
+6. Scroll down to **Advanced Configurations** at the bottom of the form, and set **Agent Name** to `ChoreoIntegratorAssistant`.
 
 7. Click **Create**.
 
    <ThemedImage
-       alt="Bottom of the Create Chat Agent Service form with Agent Name set to Wso2IntegratorAssistant"
+       alt="Bottom of the Create Chat Agent Service form with Agent Name set to ChoreoIntegratorAssistant"
        sources={{
            light: useBaseUrl('/img/get-started/build-ai-agent/chat-agent-service-form-2.png'),
            dark: useBaseUrl('/img/get-started/build-ai-agent/chat-agent-service-form-2.png'),
@@ -112,28 +112,30 @@ The cloud editor creates a default integration for you, so you don't need to nam
 
 :::tip Default model provider
 
-By default, the agent is configured to use the WSO2 model provider. If you want to use a different LLM, see [Model providers](../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md) for the full list of supported providers (OpenAI, Azure OpenAI, Anthropic, and others).
+By default, the agent is configured to use the **Default Choreo Model Provider**. If you want to use a different LLM, see [Model providers](../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md) for the full list of supported providers (OpenAI, Azure OpenAI, Anthropic, and others).
 
-If you are using the WSO2 model provider, the access token is obtained through [Choreo Integrator Copilot](../../editor/copilot/copilot.md). If you have not already signed in, you will be prompted to do so.
+If you are using the Default Choreo Model Provider, the access token is obtained through [Choreo Integrator Copilot](../../editor/copilot/copilot.md). If you have not already signed in, you will be prompted to do so.
 :::
 
 ## Step 3: Run and test
 
 1. Click **Run**.
 
-2. Click **Chat** in the Chat Agent Service title bar, or click **Test** in the pop-up.
+2. Click **Test** in the pop-up. The chat panel opens.
 
 3. Type `Hello` to check that the agent replies.
 
    <ThemedImage
-       alt="The built-in chat panel with a Hello message sent to the running agent"
+       alt="Running the agent, clicking Test in the pop-up, and chatting with the agent in the chat panel"
        sources={{
-           light: useBaseUrl('/img/get-started/build-ai-agent/06-run-and-test.png'),
-           dark: useBaseUrl('/img/get-started/build-ai-agent/06-run-and-test.png'),
+           light: useBaseUrl('/img/get-started/build-ai-agent/run-and-test.gif'),
+           dark: useBaseUrl('/img/get-started/build-ai-agent/run-and-test.gif'),
        }}
    />
 
 ## Step 4: Deploy to Choreo Cloud
+
+<br />
 
 To deploy your integration to Choreo Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 
@@ -141,12 +143,14 @@ To deploy your integration to Choreo Cloud from the cloud editor, see [Save and 
 
 <PaletteCard icon="ai" highlight>
   <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
-  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the AIAgent sample straight to Choreo Cloud.</p>
-  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
-    <a href="https://console.cloud.choreolabs.com/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/aiagent" target="_blank" rel="noopener noreferrer">
-      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to Choreo Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
-    </a>
-  </div>
+  <p class="palette-card-desc">Rather not build it yourself? Deploy the <strong>AI Chat Agent</strong> sample straight to Choreo Cloud. See <a href={useBaseUrl('/develop-and-test/create-workspace/start-with-sample-integrations')}>Start with sample integrations</a>.</p>
+  <ThemedImage
+      alt="Browse samples page filtered by AI Agent with the AI Chat Agent sample highlighted"
+      sources={{
+          light: useBaseUrl('/img/get-started/build-ai-agent/browse-samples-ai-chat-agent.png'),
+          dark: useBaseUrl('/img/get-started/build-ai-agent/browse-samples-ai-chat-agent.png'),
+      }}
+  />
 </PaletteCard>
 
 </div>
@@ -165,10 +169,10 @@ The steps above generate two files: `agents.bal` for the agent definition and `m
 ```ballerina
 import ballerina/ai;
 
-final ai:Agent wso2IntegratorAssistantAgent = check new (
+final ai:Agent choreoIntegratorAssistantAgent = check new (
     systemPrompt = {
-        role: string `Wso2IntegratorAssistant`,
-        instructions: string `You are a highly skilled WSO2 Integration Architect. Your goal is to assist developers in building, debugging, and optimizing integration flows.`
+        role: string `ChoreoIntegratorAssistant`,
+        instructions: string `You are a highly skilled Choreo Integration Architect. Your goal is to assist developers in building, debugging, and optimizing integration flows.`
     },
     model = wso2ModelProvider,
     tools = []
@@ -183,9 +187,9 @@ import ballerina/http;
 
 listener ai:Listener chatAgentListener = new (listenOn = check http:getDefaultListener());
 
-service /wso2IntegratorAssistant on chatAgentListener {
+service /choreoIntegratorAssistant on chatAgentListener {
     resource function post chat(@http:Payload ai:ChatReqMessage request) returns ai:ChatRespMessage|error {
-        string stringResult = check wso2IntegratorAssistantAgent.run(request.message, request.sessionId);
+        string stringResult = check choreoIntegratorAssistantAgent.run(request.message, request.sessionId);
         return {message: stringResult};
     }
 }

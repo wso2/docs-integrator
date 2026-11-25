@@ -36,20 +36,20 @@ A working Choreo Integrator environment.
 
 ## Step 1: Create the integration
 
-1. On the project home page, click **Create on Cloud**.
+1. On the project overview page, click **Open Cloud Editor**.
 
    <ThemedImage
-       alt="Choreo Cloud project home showing the Create on Cloud option"
+       alt="How would you like to create your integration page with Open Cloud Editor highlighted under Create on Cloud"
        sources={{
-           light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
-           dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+           light: useBaseUrl('/img/get-started/quickstarts/open-cloud-editor.png'),
+           dark: useBaseUrl('/img/get-started/quickstarts/open-cloud-editor.png'),
        }}
    />
 
 2. The Choreo Integrator cloud editor opens in your browser.
 
    <ThemedImage
-    alt="Choreo Integrator cloud editor landing page showing an empty integration and the Deploy to Choreo Cloud panel"
+    alt="Cloud editor landing page with Choreo Integrator Copilot, the Add Artifact manually button, and the Deploy to Choreo Cloud panel"
     sources={{
         light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
         dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
@@ -153,14 +153,16 @@ The cloud editor creates a default integration for you, so you don't need to nam
 2. Confirm the terminal output contains `Hello World`.
 
    <ThemedImage
-       alt="Running the automation and seeing the Hello World output in the terminal"
+       alt="Automation with the Run icon highlighted and Hello World in the Debug Console"
        sources={{
-           light: useBaseUrl('/img/get-started/build-automation/run-and-test-light.gif'),
-           dark: useBaseUrl('/img/get-started/build-automation/run-and-test-light.gif'),
+           light: useBaseUrl('/img/get-started/build-automation/run-and-test.png'),
+           dark: useBaseUrl('/img/get-started/build-automation/run-and-test.png'),
        }}
    />
 
 ## Step 5: Deploy to Choreo Cloud
+
+<br />
 
 To deploy your integration to Choreo Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 
@@ -168,12 +170,14 @@ To deploy your integration to Choreo Cloud from the cloud editor, see [Save and 
 
 <PaletteCard icon="ai" highlight>
   <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
-  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the HelloWorldAutomation sample straight to Choreo Cloud.</p>
-  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
-    <a href="https://console.cloud.choreolabs.com/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/automation" target="_blank" rel="noopener noreferrer">
-      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to Choreo Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
-    </a>
-  </div>
+  <p class="palette-card-desc">Rather not build it yourself? Deploy the <strong>Scheduled Logger</strong> sample straight to Choreo Cloud. See <a href={useBaseUrl('/develop-and-test/create-workspace/start-with-sample-integrations')}>Start with sample integrations</a>.</p>
+  <ThemedImage
+      alt="Browse samples page with the Scheduled Logger sample highlighted"
+      sources={{
+          light: useBaseUrl('/img/get-started/build-automation/browse-samples-scheduled-logger.png'),
+          dark: useBaseUrl('/img/get-started/build-automation/browse-samples-scheduled-logger.png'),
+      }}
+  />
 </PaletteCard>
 
 </div>

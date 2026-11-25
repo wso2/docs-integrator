@@ -51,20 +51,20 @@ The cloud editor runs in Choreo Cloud and cannot connect to a RabbitMQ instance 
 
 ## Step 1: Create the integration
 
-1. On the project home page, click **Create on Cloud**.
+1. On the project overview page, click **Open Cloud Editor**.
 
    <ThemedImage
-       alt="Choreo Cloud project home showing the Create on Cloud option"
+       alt="How would you like to create your integration page with Open Cloud Editor highlighted under Create on Cloud"
        sources={{
-           light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
-           dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+           light: useBaseUrl('/img/get-started/quickstarts/open-cloud-editor.png'),
+           dark: useBaseUrl('/img/get-started/quickstarts/open-cloud-editor.png'),
        }}
    />
 
 2. The Choreo Integrator cloud editor opens in your browser.
 
    <ThemedImage
-    alt="Choreo Integrator cloud editor landing page showing an empty integration and the Deploy to Choreo Cloud panel"
+    alt="Cloud editor landing page with Choreo Integrator Copilot, the Add Artifact manually button, and the Deploy to Choreo Cloud panel"
     sources={{
         light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
         dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
@@ -232,6 +232,8 @@ The cloud editor creates a default integration for you, so you don't need to nam
    />
 
 ## Step 6: Deploy to Choreo Cloud
+
+<br />
 
 To deploy your integration to Choreo Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 
