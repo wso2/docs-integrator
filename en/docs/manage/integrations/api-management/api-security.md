@@ -59,7 +59,7 @@ Follow the steps given below.
       | Field | Description |
       |---|---|
       | **Token prefix** | The prefix clients send before the token in the security header, for example `Bearer`. |
-      | **Key manager** | The environment's key manager that must have issued the token. |
+      | **Key manager** | The environment's key manager that must have issued the token. Currently, **ThunderKeyManager** is the only key manager supported by default. |
       | **Audiences** (optional) | One or more audience values. A token must carry at least one of these in its `aud` claim; leave empty to accept any audience. |
 
       <ThemedImage
