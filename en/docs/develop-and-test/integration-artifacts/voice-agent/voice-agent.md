@@ -190,7 +190,7 @@ Expand **Choreo Cloud** and select **Deploy to Choreo Cloud**. Pick the organiza
     }}
 />
 
-Once deployed, enable voice for the integration in Choreo Cloud. Choreo Cloud runs the voice pipeline for you: callers connect over WebRTC, their speech is transcribed and sent to `onChatMessage`, and the reply is converted back to speech. You choose the speech-to-text and text-to-speech providers when you set it up. See [Voice Agents](https://wso2.com/integration-platform/docs/saas/manage/voice-agents) in the Choreo Cloud documentation to configure and test the voice pipeline.
+Once deployed, enable voice for the integration in Choreo Cloud. Choreo Cloud runs the voice pipeline for you: callers connect over WebRTC, their speech is transcribed and sent to `onChatMessage`, and the reply is converted back to speech. You choose the speech-to-text and text-to-speech providers when you set it up. See [Voice Agents](https://docs.choreolabs.com/documentation/integration/cloud/manage/managed-ai-services/voice-agents/) in the Choreo Cloud documentation to configure and test the voice pipeline.
 
 :::note
 The voice pipeline is available only on Choreo Cloud. Deploying as a Docker image or on a virtual machine runs the service, but callers can't reach it by voice.
@@ -202,11 +202,11 @@ The voice pipeline is available only on Choreo Cloud. Deploying as a Docker imag
 |---|---|---|
 | Caller hears long or garbled replies. | The agent's instructions allow Markdown, lists, or long answers. | Ask for short, plain-text replies (one or two sentences, no Markdown) in the agent's **Instructions**. |
 | Agent forgets earlier turns in the same call. | No memory is attached to the agent, or the session ID isn't passed to `agent.run()`. | Attach a [memory store](../agents/memory.md) and keep **Session ID** bound to `message.sessionId`. |
-| Callers can't connect to the agent. | The integration isn't deployed to Choreo Cloud, or voice isn't enabled for it. | Deploy to Choreo Cloud and [enable voice for the integration](https://wso2.com/integration-platform/docs/saas/manage/voice-agents). |
+| Callers can't connect to the agent. | The integration isn't deployed to Choreo Cloud, or voice isn't enabled for it. | Deploy to Choreo Cloud and [enable voice for the integration](https://docs.choreolabs.com/documentation/integration/cloud/manage/managed-ai-services/voice-agents/). |
 
 ## What's next
 
-- **[Voice Agents on Choreo Cloud](https://wso2.com/integration-platform/docs/saas/manage/voice-agents)** — Configure the voice pipeline and test the agent with your voice.
+- **[Voice Agents on Choreo Cloud](https://docs.choreolabs.com/documentation/integration/cloud/manage/managed-ai-services/voice-agents/)** — Configure the voice pipeline and test the agent with your voice.
 - **[Creating an Agent](../agents/create-an-agent.md)** — System prompt, tools, and memory shared by every agent type.
 - **[Build a Hotel Finder Agent](../../../guides/how-to-guides/build-a-hotel-finder-agent.md)** — Build an agent with custom tools, step by step.
 - **[Build a Customer Care Agent with MCP](../../../guides/business-use-cases/building-a-customer-care-agent-mcp.md)** — Build an agent that uses an MCP server as a tool.
