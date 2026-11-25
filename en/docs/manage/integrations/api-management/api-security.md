@@ -34,7 +34,7 @@ Follow the steps given below.
 3. On the integration **Overview** page, click **Configure security**.
 
    <ThemedImage
-       alt="Integration overview page with the Configure security link highlighted"
+       alt="Integration overview page with the Configure security button highlighted"
        sources={{
            light: useBaseUrl('/img/manage/cloud/api-management/api-security-open.png'),
            dark: useBaseUrl('/img/manage/cloud/api-management/api-security-open.png'),
