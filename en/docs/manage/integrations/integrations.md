@@ -12,7 +12,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Integration Management
 
-After pushing your integrations to Choreo Integration, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on Choreo Cloud yet, see the [Deploy](../../deploy-and-run/deploy-and-run.md) section.
+After pushing your integrations to Choreo Cloud, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on Choreo Cloud yet, see the [Deploy](../../deploy-and-run/deploy-and-run.md) section.
 
 If your integration is exposed as an API, see [API Management](api-management/api-management.md) for security and analytics.
 
@@ -119,5 +119,6 @@ The integration is permanently deleted.
 ## What's next
 
 - [API Management](api-management/api-management.md) — Secure, monitor, and govern integrations exposed as APIs.
-- [Configuration Management](../configurations/configurations.md) — Configure integration settings, runtime configurations, build configurations, and scaling options.
+- [Configuration Management](../configurations/configurations.md) — Configure integration settings, runtime configurations, and build configurations.
+- [Operate Integration Runtime](./operate/operate.md) — Monitor pod status, configure autoscaling, health checks, deployment tracks, and promotion.
 - [Manage Projects](../projects.md) — Create, edit, and remove projects in your organization.

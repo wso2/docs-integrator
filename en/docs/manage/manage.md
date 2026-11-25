@@ -21,6 +21,7 @@ Choreo Integration is a managed cloud environment for running integrations devel
   <ul class="palette-card-list">
     <li>Track build and deployment status</li>
     <li>Redeploy, schedule, or stop integrations</li>
+    <li>Operate: pod status, containers, autoscaling, health checks</li>
     <li>API Management for integrations exposed as APIs</li>
   </ul>
 </PaletteCard>
@@ -35,8 +36,8 @@ Choreo Integration is a managed cloud environment for running integrations devel
 <PaletteCard icon="server" href="/manage/environments">
   <h3 class="palette-card-title">Manage Environments</h3>
   <ul class="palette-card-list">
+    <li>Create and manage environments</li>
     <li>Configure promotion pipelines</li>
-    <li>Override configuration per environment</li>
   </ul>
 </PaletteCard>
 
@@ -45,7 +46,7 @@ Choreo Integration is a managed cloud environment for running integrations devel
   <ul class="palette-card-list">
     <li>Runtime values and secrets</li>
     <li>Endpoint visibility and security</li>
-    <li>Build behavior and autoscaling</li>
+    <li>Build behavior</li>
   </ul>
 </PaletteCard>
 

@@ -1,9 +1,9 @@
 ---
-sidebar_position: 8
+sidebar_position: 4
 title: "Health Checks"
 description: "Configure liveness and readiness probes for integrations deployed on Choreo Integration."
 keywords: [choreo integrator, choreo cloud, health checks, liveness probe, readiness probe]
-slug: /manage/configurations/health-checks
+slug: /manage/integrations/operate/health-checks
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -32,8 +32,8 @@ By default, no health checks are configured.
     <ThemedImage
         alt="Configure liveness probe step with probe parameters and the HTTP GET request port and path fields"
         sources={{
-            light: useBaseUrl('/img/manage/cloud/configurations/health-checks/create-liveness-probe.png'),
-            dark: useBaseUrl('/img/manage/cloud/configurations/health-checks/create-liveness-probe.png'),
+            light: useBaseUrl('/img/manage/cloud/operate/health-checks/create-liveness-probe.png'),
+            dark: useBaseUrl('/img/manage/cloud/operate/health-checks/create-liveness-probe.png'),
         }}
     />
 
@@ -43,8 +43,8 @@ By default, no health checks are configured.
     <ThemedImage
         alt="Configure readiness probe step, marked Optional, with a Skip option alongside Save"
         sources={{
-            light: useBaseUrl('/img/manage/cloud/configurations/health-checks/create-readiness-probe.png'),
-            dark: useBaseUrl('/img/manage/cloud/configurations/health-checks/create-readiness-probe.png'),
+            light: useBaseUrl('/img/manage/cloud/operate/health-checks/create-readiness-probe.png'),
+            dark: useBaseUrl('/img/manage/cloud/operate/health-checks/create-readiness-probe.png'),
         }}
     />
 
@@ -55,8 +55,8 @@ The configured probe appears on the **Health checks** page, where you can edit o
 <ThemedImage
     alt="Health checks page showing a created liveness probe with its configured parameters"
     sources={{
-        light: useBaseUrl('/img/manage/cloud/configurations/health-checks/health-check-created.png'),
-        dark: useBaseUrl('/img/manage/cloud/configurations/health-checks/health-check-created.png'),
+        light: useBaseUrl('/img/manage/cloud/operate/health-checks/health-check-created.png'),
+        dark: useBaseUrl('/img/manage/cloud/operate/health-checks/health-check-created.png'),
     }}
 />
 
@@ -66,5 +66,5 @@ A liveness probe failure restarts the container. A readiness probe failure remov
 
 ## What's next
 
-- [Scaling](./scaling-resource-limits.md) — Configure autoscaling and container resource limits.
+- [Scaling](./scaling.md) — Configure autoscaling for this environment.
 - [Runtime Status](./runtime-operations.md) — View pod status and redeploy an integration's release.

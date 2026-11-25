@@ -1,9 +1,9 @@
 ---
-sidebar_position: 7
+sidebar_position: 1
 title: "Runtime Status"
 description: "View an integration's runtime status and redeploy its latest release on Choreo Integration."
 keywords: [choreo integrator, choreo cloud, runtime status, redeploy, pods, replicas]
-slug: /manage/configurations/runtime-operations
+slug: /manage/integrations/operate/runtime-operations
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -16,8 +16,8 @@ Each deployed integration has a **Runtime** page, at **Operate** > **Runtime**, 
 <ThemedImage
     alt="Runtime page showing component details, pod details, and CPU/Memory usage"
     sources={{
-        light: useBaseUrl('/img/manage/cloud/configurations/runtime-operations/runtime-status.png'),
-        dark: useBaseUrl('/img/manage/cloud/configurations/runtime-operations/runtime-status.png'),
+        light: useBaseUrl('/img/manage/cloud/operate/runtime-operations/runtime-status.png'),
+        dark: useBaseUrl('/img/manage/cloud/operate/runtime-operations/runtime-status.png'),
     }}
 />
 
@@ -38,5 +38,6 @@ Click **Redeploy release** to restart the integration's running pods on the same
 
 ## What's next
 
-- [Scaling](./scaling-resource-limits.md) — Configure autoscaling and container resource limits.
-- [Runtime configurations](./runtime-configurations.md) — Set configurable values and secrets your integration reads at runtime.
+- [Scaling](./scaling.md) — Configure autoscaling for this environment.
+- [Containers](./containers.md) — Set container CPU and memory request/limit.
+- [Runtime Configurations](../../configurations/runtime-configurations.md) — Set configurable values and secrets your integration reads at runtime.

@@ -20,9 +20,9 @@ The tables on this page list what each subscription plan includes. A checkmark (
 | [Continuous integration (CI) with build pipelines](../configurations/build-configurations.md) | 100 builds per month | 500 builds per month | Unlimited |
 | Continuous delivery (CD) | 100 deployments per month | 500 deployments per month | Unlimited |
 | Deployments to cloud platforms | <span class="cell-prose">Choreo Integration Cloud</span> | <span class="cell-prose">Choreo Integration Cloud, Azure, AWS, GCP, OpenShift, VMware Tanzu, and any Kubernetes cluster</span> | <span class="cell-prose">Choreo Integration Cloud, Azure, AWS, GCP, OpenShift, VMware Tanzu, and any Kubernetes cluster</span> |
-| Deployment tracks | 2 | 5 | Unlimited |
-| [Auto scaling](../configurations/scaling-resource-limits.md) | <span class="cell-prose">Scales up to 1 pod</span> | <span class="cell-prose">Scales up to 2 pods</span> | ✓ |
-| Health checks | ✓ | ✓ | ✓ |
+| [Deployment tracks](../integrations/operate/deployment-tracks.md) | 2 | 5 | Unlimited |
+| [Auto scaling](../integrations/operate/scaling.md) | <span class="cell-prose">Scales up to 1 pod</span> | <span class="cell-prose">Scales up to 2 pods</span> | ✓ |
+| [Health checks](../integrations/operate/health-checks.md) | ✓ | ✓ | ✓ |
 | Infrastructure quota (for all resources) | <span class="cell-prose">CPU — 5<br />RAM — 16 GB<br />Storage — 100 GB<br />Network — 100 GB</span> | <span class="cell-prose">CPU — 25<br />RAM — 128 GB<br />Storage — 500 GB<br />Network — 500 GB</span> | Unlimited |
 
 ## Integration

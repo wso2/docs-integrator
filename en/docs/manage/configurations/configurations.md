@@ -17,11 +17,9 @@ All configuration options are available per environment, so you can use differen
 
 | Area | Description |
 |---|---|
-| [Runtime](./runtime-configurations.md) | Set configurable values an integration reads at runtime, mark sensitive values as secrets, and manage environment variables and files per integration through Configs & secrets. |
+| [Runtime](./runtime-configurations.md) | Set configurable values an integration reads at runtime, and mark sensitive values as secrets. |
 | [Build](./build-configurations.md) | Control how an integration is built, including whether unit tests run and whether Git submodules are pulled on each build. |
 | [Endpoints](./endpoint-configurations.md) | Set the visibility level for each endpoint: project-only, organization-wide, or public. |
-| [Scaling](./scaling-resource-limits.md) | Configure autoscaling based on CPU and memory thresholds, and container resource limits. |
 | [Security](./security-configurations.md) | Secure Integration as API and AI Agent endpoints with API Key authentication or OAuth2. |
-| [Runtime Status](./runtime-operations.md) | View pod status, resource usage, and redeploy an integration's release. |
-| [Health Checks](./health-checks.md) | Configure liveness and readiness probes so unhealthy replicas self-heal. |
-| [Deployment Tracks](./deployment-tracks.md) | Manage multiple independently buildable and deployable versions of an integration. |
+
+For managing a deployed integration's runtime — pod status, container resources, configs and secrets, health checks, scaling, and deployment tracks — see [Operate Integration Runtime](../integrations/operate/operate.md).

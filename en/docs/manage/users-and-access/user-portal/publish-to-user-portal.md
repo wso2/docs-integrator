@@ -27,7 +27,7 @@ For each automation, users can also see when it last ran and, if it is scheduled
 ## Prerequisites
 
 - The User Portal is enabled for your organization. See [Enable the User Portal](user-portal.md#enable-the-user-portal). Until then, the integration's overview page shows a **Publish to User Portal** button instead of the toggle. Click it, then click **Enable in Settings** to go to the **User Portal** page. If you do not have the permissions to enable the User Portal, ask an organization administrator to enable it.
-- The integration is deployed to the production environment. Until then, **Publish to User Portal** is disabled. See [Promote an integration](../../environments/promotion.md).
+- The integration is deployed to the production environment. Until then, **Publish to User Portal** is disabled. See [Promote an integration](../../integrations/operate/promotion.md).
 - Your role includes the **Manage Organization** permission. Without it, **Publish to User Portal** is disabled. You need the same permission to choose the chat endpoints of an AI agent and to unpublish an integration.
 
 ## Publish an integration

@@ -95,4 +95,4 @@ The Developer Portal needs to be created and set up from Choreo APIM.
 ## What's next
 
 - [Endpoint configurations](./endpoint-configurations.md) — Configure endpoint visibility levels per environment.
-- [Scaling and resource limits](./scaling-resource-limits.md) — Configure CPU and memory limits, and scaling behavior for your integration.
+- [Scaling](../integrations/operate/scaling.md) — Configure autoscaling for your integration.

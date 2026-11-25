@@ -76,4 +76,4 @@ Enabling the **Organization** visibility level generates an additional internal 
 ## What's next
 
 - [Build configurations](./build-configurations.md) — Control how your integrations are built on the Choreo Integration.
-- [Scaling and resource limits](./scaling-resource-limits.md) — Configure CPU and memory limits for your integration.
+- [Containers](../integrations/operate/containers.md) — Configure CPU and memory limits for your integration.

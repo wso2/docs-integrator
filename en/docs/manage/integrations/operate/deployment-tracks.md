@@ -1,9 +1,9 @@
 ---
-sidebar_position: 9
+sidebar_position: 6
 title: "Deployment Tracks"
 description: "Manage multiple independently buildable and deployable versions of an integration on Choreo Integration."
 keywords: [choreo integrator, choreo cloud, deployment tracks, branches, api version]
-slug: /manage/configurations/deployment-tracks
+slug: /manage/integrations/operate/deployment-tracks
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -18,8 +18,8 @@ Every integration starts with a **Default** track on its main branch. Manage tra
 <ThemedImage
     alt="Deployment tracks page listing the Default track on the main branch"
     sources={{
-        light: useBaseUrl('/img/manage/cloud/configurations/deployment-tracks/deployment-tracks-list.png'),
-        dark: useBaseUrl('/img/manage/cloud/configurations/deployment-tracks/deployment-tracks-list.png'),
+        light: useBaseUrl('/img/manage/cloud/operate/deployment-tracks/deployment-tracks-list.png'),
+        dark: useBaseUrl('/img/manage/cloud/operate/deployment-tracks/deployment-tracks-list.png'),
     }}
 />
 
@@ -35,8 +35,8 @@ The **Deployment track** selector at the top of the **Build**, **Deploy**, and *
     <ThemedImage
         alt="Create deployment track form with a branch, API version, and description"
         sources={{
-            light: useBaseUrl('/img/manage/cloud/configurations/deployment-tracks/create-deployment-track.png'),
-            dark: useBaseUrl('/img/manage/cloud/configurations/deployment-tracks/create-deployment-track.png'),
+            light: useBaseUrl('/img/manage/cloud/operate/deployment-tracks/create-deployment-track.png'),
+            dark: useBaseUrl('/img/manage/cloud/operate/deployment-tracks/create-deployment-track.png'),
         }}
     />
 
@@ -47,8 +47,8 @@ Creating a track triggers an initial build automatically.
 <ThemedImage
     alt="Deployment tracks page listing both the Default track and the newly created track"
     sources={{
-        light: useBaseUrl('/img/manage/cloud/configurations/deployment-tracks/deployment-tracks-list-created.png'),
-        dark: useBaseUrl('/img/manage/cloud/configurations/deployment-tracks/deployment-tracks-list-created.png'),
+        light: useBaseUrl('/img/manage/cloud/operate/deployment-tracks/deployment-tracks-list-created.png'),
+        dark: useBaseUrl('/img/manage/cloud/operate/deployment-tracks/deployment-tracks-list-created.png'),
     }}
 />
 
@@ -64,5 +64,5 @@ The Default track can't be deleted.
 
 ## What's next
 
-- [Promote an Integration](../environments/promotion.md) — Move a deployment track's build from one environment to the next.
-- [Build Configurations](./build-configurations.md) — Control how each deployment track is built.
+- [Promote an Integration](./promotion.md) — Move a deployment track's build from one environment to the next.
+- [Build Configurations](../../configurations/build-configurations.md) — Control how each deployment track is built.
