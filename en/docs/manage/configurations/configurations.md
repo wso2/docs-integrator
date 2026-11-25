@@ -17,8 +17,8 @@ All configuration options are available per environment, so you can use differen
 
 | Area | Description |
 |---|---|
-| [Runtime](./runtime-configurations.md) | Set configurable values an integration reads at runtime. Manage reusable configuration groups at the organization level and mark sensitive values as secrets. |
+| [Runtime](./runtime-configurations.md) | Set configurable values an integration reads at runtime, mark sensitive values as secrets, and manage environment variables and files per integration through Configs & secrets. |
 | [Build](./build-configurations.md) | Control how an integration is built, including whether unit tests run and whether Git submodules are pulled on each build. |
 | [Endpoints](./endpoint-configurations.md) | Set the visibility level for each endpoint: project-only, organization-wide, or public. |
 | [Scaling](./scaling-resource-limits.md) | Configure autoscaling based on CPU and memory thresholds. |
-| [Security](./security-configurations.md) | Secure Integration as API and AI Agent endpoints with API Key authentication, OAuth2, or both. |
+| [Security](./security-configurations.md) | Secure Integration as API and AI Agent endpoints with API Key authentication or OAuth2. |
