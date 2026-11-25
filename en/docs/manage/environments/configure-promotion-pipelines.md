@@ -42,11 +42,11 @@ This page lists all existing pipelines in your organization.
 
     | Field | Description |
     |---|---|
-    | **Name** | A display name for the pipeline. |
-    | **Promotion flow** | The ordered sequence of environments deployments move through. Add at least one environment. If you need a new environment, [create one first](./create.md) before configuring the pipeline. |
+    | **Name** | A unique identifier for the pipeline, using lowercase letters, numbers, and hyphens. Cannot be changed after creation. |
+    | **Promotion flow** | The ordered sequence of environments deployments move through. Click **Add Environment** to add the first environment, then use the **+** after it to add the next. Add at least one. If you need a new environment, [create one first](./create.md) before configuring the pipeline. |
 
     <ThemedImage
-        alt="Pipeline editor showing the Name field and the Promotion flow environment list"
+        alt="Create Pipeline form with a three-stage promotion flow: development, staging, production"
         sources={{
             light: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/configure-pipeline.png'),
             dark: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/configure-pipeline.png'),
@@ -67,24 +67,29 @@ On the **Deployment Pipelines** page, click the delete icon on the pipeline you 
 
 ## Assign a pipeline to a project
 
-Once you create a pipeline, you can assign it to one or more projects. Multiple pipelines can be active in the same project at the same time.
+Each project uses exactly one pipeline at a time, shared by every integration in that project.
 
 1. In the top navigation menu, click the **Project** list and select the project you want to configure.
 2. From the project home, click **Settings**.
 3. Select the pipeline from the **Deployment pipeline** list, then click **Save changes**.
 
-## Select a pipeline for an integration
+<ThemedImage
+    alt="Project settings page with the Deployment pipeline field set to a three-stage pipeline"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/assign-pipeline.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/assign-pipeline.png'),
+    }}
+/>
 
-When multiple pipelines are assigned to a project, you can choose which pipeline to use for a specific integration.
+Every integration in the project now deploys through this pipeline's environments, in order.
 
-1. Open the integration and go to its **Deploy** page.
-2. Switch the active pipeline using the pipeline selector on the **Deploy** page.
-
-{/* TODO(v3): removed the stale v2 screenshot here (deploy-page-integration.png).
-    The pipeline selector only appears when a project has more than one pipeline
-    assigned, which needs a second environment. The trial org used for these docs
-    can't create one (Growth/Enterprise plan required). Re-shoot once a second
-    environment and pipeline are available. */}
+<ThemedImage
+    alt="Deploy page for an integration showing Development, Staging, and Production environment cards with Promote buttons between them"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/deploy-page-pipeline.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/deploy-page-pipeline.png'),
+    }}
+/>
 
 ## What's next
 
