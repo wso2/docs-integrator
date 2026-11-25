@@ -58,18 +58,39 @@ Changes apply immediately to the Development environment. To apply them to other
 
 You can test the secured endpoint by navigating to the **Test** > **Console** page in left navigation.
 
-To consume the API from an external client, include the credential for the enabled scheme in your request:
+To consume the API from an external client, first obtain a credential for the enabled scheme from the Developer Portal.
 
-```bash
-# API key (using the default header name)
-curl --request GET   --url <endpoint_url>   --header 'X-API-Key: <your_api_key>'
+:::info
+The Developer Portal needs to be created and set up from Choreo APIM.
+:::
 
-# OAuth
-curl --request GET   --url <endpoint_url>   --header 'Authorization: Bearer <access_token>'
-```
+### API Key
 
-{/* TODO(v3): document how a consumer obtains the API key / OAuth2 token.
-    The previous steps went through the Developer Portal, which is not in v3. */}
+1. In the integration overview, click **Developer Portal**.
+2. Subscribe to the API by selecting or creating an application.
+3. In your application, click **Generate Key** under the **API Key** column.
+4. Copy the generated key and include it in the configured security header of your requests:
+
+    ```bash
+    curl --request GET \
+      --url <endpoint_url> \
+      --header 'api-key: <your_api_key>'
+    ```
+
+### OAuth2
+
+1. In the integration overview, click **Developer Portal**.
+2. Subscribe to the API by selecting or creating an application.
+3. In your application, click **Generate Key** under the **OAuth2** section.
+4. Use the generated credentials to obtain an access token, then include it as a Bearer token:
+
+    ```bash
+    curl --request GET \
+      --url <endpoint_url> \
+      --header 'Authorization: Bearer <access_token>'
+    ```
+
+{/* TODO(v3): add links for Developer Portal / Choreo APIM once available. */}
 
 ## What's next
 
