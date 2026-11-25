@@ -60,7 +60,7 @@ A project must be empty before it can be deleted. Remove every item it holds fir
 Removing a project is permanent. All history within the project is deleted and cannot be recovered.
 :::
 
-1. From the project home, click **Settings**.
+1. From the project home, check the **Integrations** list. If it isn't empty, [delete every integration](./integrations/integrations.md#delete-an-integration) in the project first. Once the project is empty, click **Settings**.
 2. Scroll to the **Delete project** card and click **Delete project**.
 
     <ThemedImage
