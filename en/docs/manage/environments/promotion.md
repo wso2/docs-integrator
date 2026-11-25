@@ -45,6 +45,28 @@ Once a build is already deployed to an environment, **Promote** to that environm
 To set configurable values, environment variables, or files for the target environment, use its own **Configure** button or **Configs & secrets** page once it's deployed — promoting doesn't prompt for them.
 :::
 
+## Demote an environment
+
+There's no separate "demote" action. To take a deployment out of an environment, click **Stop** on that environment's card.
+
+<ThemedImage
+    alt="Deploy page with the Stop button highlighted on the Production environment card"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/promotion/stop-button.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/promotion/stop-button.png'),
+    }}
+/>
+
+The button shows **Stopping...** while it takes effect, then the card's status changes to **Suspended** and the button changes to **Start**, which you can click to redeploy the same build later.
+
+<ThemedImage
+    alt="Production environment card showing Suspended status after clicking Stop"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/promotion/suspended.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/promotion/suspended.png'),
+    }}
+/>
+
 ## What's next
 
 - [Runtime configurations](../configurations/runtime-configurations.md) — Update configuration values for a specific environment after promotion.
