@@ -7,18 +7,25 @@ slug: /develop-and-test/developer-tools/integration-tools/asyncapi-tool
 
 # AsyncAPI Tool
 
-The `bal asyncapi` tool generates Ballerina code from AsyncAPI definitions. It supports two protocols:
+An AsyncAPI definition describes an event-driven API: its channels, the messages on each, and who sends and receives them. The `bal asyncapi` tool turns such a definition into Ballerina code, and a Ballerina WebSocket service into a definition:
 
-- **HTTP (default):** Generates a listener that receives webhook events from an event source, such as a SaaS application, and dispatches each event to a remote function.
-- **WebSocket (experimental):** Generates a WebSocket client from an AsyncAPI definition, or exports an AsyncAPI definition from a Ballerina WebSocket service.
+- **Webhook listener:** From the definition of the events a SaaS application or other event source sends to your webhook, the tool generates a listener that verifies each request and calls a remote function for each event.
+- **WebSocket client:** From the definition of a WebSocket API, the tool generates a client with a function for each message it sends or receives.
+- **AsyncAPI definition:** From a Ballerina WebSocket service, the tool generates the definition that describes it.
 
 :::note
-The AsyncAPI tool is currently supported only through the Ballerina CLI (pro-code). Visual Designer support for AsyncAPI service generation is not yet available.
+The AsyncAPI tool runs from the command line (pro-code). You use the generated code in your integration like any other Ballerina code.
 :::
 
-:::info
-This page describes version 0.12.0 of the AsyncAPI tool, which is included in the Ballerina distribution that WSO2 Integrator uses.
-:::
+## Install the tool
+
+The tool requires Ballerina Swan Lake Update 13 (2201.13.0) or later. Pull it from Ballerina Central:
+
+```bash
+bal tool pull asyncapi
+```
+
+To check the installed version, run `bal asyncapi --version`. This page describes version 1.0.0.
 
 ## Generate a webhook listener
 
@@ -26,36 +33,55 @@ Use an AsyncAPI definition that describes the events an event source sends to yo
 
 ### Prepare the AsyncAPI definition
 
-The tool reads AsyncAPI 2.x definitions in YAML or JSON. Before you generate the listener, add the following extensions to the definition. The listener uses them to identify each incoming event and select the remote function that handles it.
+The tool reads AsyncAPI 2.x and 3.x definitions in YAML or JSON. Add the following extensions to the definition. The listener uses them to check each request and to call the remote function for its event.
 
-- `x-ballerina-event-identifier`: Add this at the root of the definition. It specifies where each request carries its event type.
-  - `type`: Set this to `body`. The tool supports reading the event type only from the request body.
-  - `path`: The JSON path of the field in the request body that contains the event type.
-- `x-ballerina-event-type`: Add this to every message. It specifies the value that the event type field has for that message.
+- `x-ballerina-event-identifier`: Add this at the root of the definition. It says where each request carries its event type.
+  - `type`: `body` when the event type is a field of the request body, or `header` when it is an HTTP header.
+  - `path`: The JSON path of the field, such as `type` or `event.type`, or the name of the header.
+- `x-ballerina-event-type`: Add this to every message. It is the value the event type has for that message.
+- `x-ballerina-auth` (optional): How the listener checks that a request comes from the event source, such as an HMAC signature in a header. The listener rejects every request that fails the check. For every signature scheme the extension supports, see the [webhook signature reference](https://github.com/ballerina-platform/asyncapi-tools/blob/main/docs/webhook-dsl-reference.md).
+- `x-ballerina-event-label` (optional): The name of the remote function, when the event type isn't a readable name. For example, `x-ballerina-event-label: AccountMerged` names the function `onAccountMerged` for the event type `qbo.account.merged.v1`.
 
-The following definition describes an event source that sends `order_created` and `order_cancelled` events. Each event carries its type in the `type` field of the request body.
+The following definition describes an online store that sends `order_created` and `order_cancelled` events. Each event carries its type in the `type` field of the request body. The store signs each request body with HMAC-SHA256 using a secret it shares with you, and sends the signature in the `X-Signature` header as `sha256=<hex digest>`.
 
-```yaml
-asyncapi: 2.6.0
+```yaml title="order-events.yaml"
+asyncapi: 3.0.0
 info:
-  title: Order Events API
+  title: Order Events
   version: 1.0.0
+  description: Events an online store sends when customers place or cancel orders.
 x-ballerina-event-identifier:
   type: body
   path: type
+x-ballerina-auth:
+  header: X-Signature
+  signature:
+    algorithm: sha256
+    encoding: hex
+    headerFormat: "sha256=${signature}"
+    input: "$body"
 channels:
   orders:
-    subscribe:
-      message:
-        oneOf:
-          - x-ballerina-event-type: order_created
-            summary: A customer placed an order.
-            payload:
-              $ref: '#/components/schemas/OrderEvent'
-          - x-ballerina-event-type: order_cancelled
-            summary: A customer cancelled an order.
-            payload:
-              $ref: '#/components/schemas/OrderEvent'
+    address: orders
+    messages:
+      orderCreated:
+        x-ballerina-event-type: order_created
+        summary: A customer placed an order.
+        payload:
+          $ref: "#/components/schemas/OrderEvent"
+      orderCancelled:
+        x-ballerina-event-type: order_cancelled
+        summary: A customer cancelled an order.
+        payload:
+          $ref: "#/components/schemas/OrderEvent"
+operations:
+  orders:
+    action: receive
+    channel:
+      $ref: "#/channels/orders"
+    messages:
+      - $ref: "#/channels/orders/messages/orderCreated"
+      - $ref: "#/channels/orders/messages/orderCancelled"
 components:
   schemas:
     OrderEvent:
@@ -66,7 +92,7 @@ components:
       properties:
         type:
           type: string
-          description: The event type, for example `order_created`.
+          description: The event type, such as order_created.
         orderId:
           type: string
         customerId:
@@ -77,35 +103,43 @@ components:
 
 ### Generate the listener
 
-Run the following command. The `-o` option specifies the output directory. If you don't specify it, the tool writes the files to the current directory.
+The tool writes the generated code into a Ballerina package. Create a package, go into it, and run the tool with the definition:
 
 ```bash
-bal asyncapi -i order-events.yaml -o order-listener
+bal new order_listener
+cd order_listener
+bal asyncapi ../order-events.yaml
 ```
 
 The tool generates the following files:
 
 | File | Contents |
 |---|---|
-| `data_types.bal` | The record types derived from the schemas in the definition. |
+| `types.bal` | The record types of the event payloads, and the `ListenerConfig` record. |
 | `service_types.bal` | A service type for each channel, with a remote function for each event. |
 | `listener.bal` | The `Listener` class, which receives the webhook requests over HTTP. |
-| `dispatcher_service.bal` | The logic that reads the event type from each request and calls the matching remote function. |
+| `dispatcher_service.bal` | The logic that checks each request, reads its event type, and calls the matching remote function. |
+| `lib/asyncapi-trigger-compiler-plugin.jar`, `CompilerPlugin.toml` | A compiler plugin that lists the listener's endpoints when you build with `bal build --export-endpoints`. Keep both files with the package. |
 
-For the example definition, `service_types.bal` contains a service type for the `orders` channel. The tool names each remote function after the event type, so `order_created` becomes `onOrderCreated`.
+For the example definition, `service_types.bal` contains a service type for the `orders` channel. The tool names each remote function after the event type, so `order_created` becomes `onOrderCreated`:
 
 ```ballerina
 public type OrdersService service object {
-    remote function onOrderCreated(OrderEvent event) returns error?;
-    remote function onOrderCancelled(OrderEvent event) returns error?;
+    remote function onOrderCreated(OrderEvent payload) returns error?;
+    remote function onOrderCancelled(OrderEvent payload) returns error?;
 };
 ```
 
-The `data_types.bal` file contains the payload type:
+The `types.bal` file contains the payload type, and the listener configuration with the secret the listener checks signatures with:
 
 ```ballerina
+public type ListenerConfig record {
+    # The secret used to verify incoming webhook signatures.
+    string webhookSecret?;
+};
+
 public type OrderEvent record {
-    # The event type, for example `order_created`.
+    # The event type, such as order_created.
     string 'type;
     string orderId;
     string customerId?;
@@ -113,21 +147,18 @@ public type OrderEvent record {
 };
 ```
 
+If the files already exist with different content, the tool lists them and asks before it replaces them. Add `--force` to replace them without asking, or `--dry-run` to see what the tool would write without writing anything.
+
 ### Implement the event handlers
 
-1. Go to the output directory and create a Ballerina package in it.
+1. Replace the content of `main.bal` with a service of the generated service type, attached to the generated listener. The service must implement all the remote functions of the service type.
 
-   ```bash
-   cd order-listener
-   bal init order_listener
-   ```
-
-2. Create a `main.bal` file that attaches a service of the generated service type to the generated listener. The service must implement all the remote functions of the service type.
-
-   ```ballerina
+   ```ballerina title="main.bal"
    import ballerina/log;
 
-   listener Listener orderListener = new (8090);
+   configurable string webhookSecret = ?;
+
+   listener Listener orderListener = new ({webhookSecret}, 8090);
 
    service OrdersService on orderListener {
        remote function onOrderCreated(OrderEvent event) returns error? {
@@ -140,7 +171,13 @@ public type OrderEvent record {
    }
    ```
 
-   The listener listens on port `8090` by default. To share a port with other services, pass an existing `http:Listener` instead of a port number.
+   The listener listens on port `8090`. To share a port with other services, pass an existing `http:Listener` instead of a port number. To receive the events on a path other than `/`, give the service a path, such as `service OrdersService /orders on orderListener`.
+
+2. Create a `Config.toml` file with the secret you share with the event source:
+
+   ```toml title="Config.toml"
+   webhookSecret = "my-shared-secret"
+   ```
 
 3. Run the package.
 
@@ -148,70 +185,204 @@ public type OrderEvent record {
    bal run
    ```
 
-4. Send a test event to the listener.
+4. Send a signed test event to the listener. The following commands sign the body the same way the event source does:
 
    ```bash
+   BODY='{"type": "order_created", "orderId": "A-1001", "customerId": "C-7", "total": 59.90}'
+   SIGNATURE=$(printf '%s' "$BODY" | openssl dgst -sha256 -hmac "my-shared-secret" | sed 's/^.* //')
    curl -X POST http://localhost:8090 \
        -H "Content-Type: application/json" \
-       -d '{"type": "order_created", "orderId": "A-1001", "customerId": "C-7", "total": 59.90}'
+       -H "X-Signature: sha256=$SIGNATURE" \
+       -d "$BODY"
    ```
 
-   The listener calls `onOrderCreated`, which logs the order:
+   The listener returns `200` and calls `onOrderCreated`, which logs the order:
 
    ```
    level=INFO module=<org>/order_listener message="Order created" orderId="A-1001" total=59.90
    ```
 
-The generated listener doesn't verify that requests come from the event source. To add verification, such as checking a signature header, update the resource function in `dispatcher_service.bal`, which receives every incoming request. To pass additional values to the listener, such as secrets, update the `init` function in `listener.bal`.
+   A request with a wrong signature, or without one, gets `401` and doesn't reach the service. The listener logs why:
+
+   ```
+   level=WARN module=<org>/order_listener message="WEBHOOK_SIGNATURE_REJECTED" reason="Unauthorized: Signature Mismatch" path="/"
+   ```
+
+### Test the listener
+
+To generate tests, add `--with-tests`. The tool writes `tests/dispatch_test.bal`, which sends a signed request for each event and checks that its remote function is called. Each test reads a sample payload from `tests/resources/trigger_payloads/<event type>.json`, such as:
+
+```json title="tests/resources/trigger_payloads/order_created.json"
+{"type": "order_created", "orderId": "A-1001", "total": 59.90}
+```
+
+Add a payload file for each event, and run `bal test`. If `main.bal` reads the secret from a configurable value, as above, also add a `tests/Config.toml` with a value for it.
+
+The tests sign their requests, so the definition needs `x-ballerina-auth` for the tool to generate them.
 
 ## Generate a WebSocket client
 
-:::caution
-WebSocket support in the AsyncAPI tool is experimental, and its behavior might change in future releases.
-:::
+Use an AsyncAPI definition of a WebSocket API. The tool generates a client for each channel, with a function for each message the client sends and each message it receives.
 
-The tool generates a WebSocket client from an AsyncAPI 2.5.0 definition. You can export such a definition from a Ballerina WebSocket service. For more information, see [Export an AsyncAPI definition from a WebSocket service](#export-an-asyncapi-definition-from-a-websocket-service).
+### Prepare the AsyncAPI definition
 
-Run the following command:
+The following definition describes an order service. The client sends `PlaceOrder` and gets `OrderAccepted` or `OrderRejected` back, and the server also sends `PriceUpdate` messages.
+
+```yaml title="orders.yaml"
+asyncapi: 3.0.0
+info:
+  title: Orders
+  version: 1.0.0
+servers:
+  production:
+    host: orders.example.com
+    protocol: wss
+x-dispatcherKey: type
+channels:
+  orders:
+    address: /orders
+    messages:
+      PlaceOrder:
+        $ref: "#/components/messages/PlaceOrder"
+      OrderAccepted:
+        $ref: "#/components/messages/OrderAccepted"
+      OrderRejected:
+        $ref: "#/components/messages/OrderRejected"
+      PriceUpdate:
+        $ref: "#/components/messages/PriceUpdate"
+operations:
+  placeOrder:
+    action: send
+    channel:
+      $ref: "#/channels/orders"
+    messages:
+      - $ref: "#/channels/orders/messages/PlaceOrder"
+    reply:
+      channel:
+        $ref: "#/channels/orders"
+      messages:
+        - $ref: "#/channels/orders/messages/OrderAccepted"
+        - $ref: "#/channels/orders/messages/OrderRejected"
+  onPriceUpdate:
+    action: receive
+    channel:
+      $ref: "#/channels/orders"
+    messages:
+      - $ref: "#/channels/orders/messages/PriceUpdate"
+components:
+  messages:
+    PlaceOrder:
+      payload:
+        type: object
+        required: [type, item]
+        properties:
+          type: {type: string, const: place_order}
+          item: {type: string}
+    OrderAccepted:
+      payload:
+        type: object
+        required: [type, orderId]
+        properties:
+          type: {type: string, const: order_accepted}
+          orderId: {type: string}
+    OrderRejected:
+      payload:
+        type: object
+        required: [type, reason]
+        properties:
+          type: {type: string, const: order_rejected}
+          reason: {type: string}
+    PriceUpdate:
+      payload:
+        type: object
+        required: [type, price]
+        properties:
+          type: {type: string, const: price_update}
+          price: {type: number}
+```
+
+All messages share one connection, so the client tells the ones it receives apart by a field with a different fixed value in each. Here that field is `type`, and `x-dispatcherKey` names it. Without `x-dispatcherKey`, the tool works the field out when it can, and says so in a warning.
+
+### Generate the client
+
+Create a package, go into it, and run the tool with the definition:
 
 ```bash
-bal asyncapi -i chat_asyncapi.yaml --protocol ws -o chat-client
+bal new orders_app
+cd orders_app
+bal asyncapi ../orders.yaml
 ```
+
+The tool reads the protocol from the definition's `wss` server. For a definition whose servers say `http` or `https`, add `--protocol ws`.
 
 The tool generates the following files:
 
 | File | Contents |
 |---|---|
-| `client.bal` | The client class, with a remote function for each message the client sends. |
-| `types.bal` | The record types derived from the schemas in the definition. |
-| `utils.bal` | Utility functions that the client uses. |
+| `client.bal` | A client class for each channel. |
+| `types.bal` | The record types of the messages. |
+| `utils.bal` | The helpers the client uses to route the messages it receives. |
 
-To also generate a test file in `tests/test.bal`, add the `--with-tests` option. To add a license header to the generated files, add the `--license` option with the path to a file that contains the header.
+To also generate a test file in `tests/test.bal`, add `--with-tests`. To add a license header to the generated files, add `--license` with the path to a file that contains the header.
 
-The tool names the client class after the `info.title` field of the definition, and each remote function after the message it sends. For a definition with the title `Chat` and a `Subscribe` message, the tool generates a `ChatClient` class with a `doSubscribe` remote function. The following code uses the generated client to send a `Subscribe` message and read the response:
+The tool names each client class after the definition's title and the channel, so the `orders` channel of the `Orders` definition gets `OrdersOrdersClient`. A channel at `/` is named after the title alone, such as `OrdersClient`. Each function is named after its message:
 
-```ballerina
+- A message the client sends gets a function, such as `doPlaceOrder`, that sends it. When the operation has a reply, the function waits for the reply and returns it.
+- A message the client receives outside a reply gets a function, such as `doPriceUpdate`, that waits for the next one.
+
+The last argument of each function is the time, in seconds, to wait.
+
+### Use the client
+
+Replace the content of `main.bal` with the following code, which places an order and waits for a price update:
+
+```ballerina title="main.bal"
 import ballerina/io;
 
 public function main() returns error? {
-    ChatClient chatClient = check new (serviceUrl = "ws://localhost:9090/chat");
-    Subscribed subscribed = check chatClient->doSubscribe({event: "Subscribe", room: "general"}, 5);
-    io:println("Subscribed to ", subscribed.room);
-    check chatClient->connectionClose();
+    OrdersOrdersClient orders = check new;
+
+    OrderAccepted|OrderRejected result = check orders->doPlaceOrder({'type: "place_order", item: "apple"}, 5);
+    if result is OrderAccepted {
+        io:println("Order placed: ", result.orderId);
+    } else if result is OrderRejected {
+        io:println("Order rejected: ", result.reason);
+    }
+
+    PriceUpdate update = check orders->doPriceUpdate(30);
+    io:println("Price: ", update.price);
+    check orders->connectionClose();
 }
 ```
 
-The second argument of `doSubscribe` is the time, in seconds, to wait for the response.
+The client connects to the server in the definition. To connect to another server, such as one running locally, pass its URL: `check new (serviceUrl = "ws://localhost:9090")`. The client adds the channel's address to the URL.
+
+### Supported WebSocket definitions
+
+WebSocket definitions are written in many styles. The tool handles them as follows:
+
+| The definition has | What the tool does |
+|---|---|
+| AsyncAPI 2.x or 3.x, with a `ws` or `wss` server | Generates a client |
+| JSON messages told apart by a field, named with `x-dispatcherKey` or worked out by the tool | Generates a client |
+| One kind of message received on a channel, including plain text | Generates a client, with no key needed |
+| Requests with replies, as a 3.0 operation `reply` or `x-response` | The request's function returns the reply |
+| Several channels, and channel parameters such as `/rooms/{roomId}` | A client for each channel, which takes the parameters when it connects |
+| `http`, `httpApiKey`, `oauth2`, `apiKey` or `userPassword` security | The client sends the credentials when it connects |
+| A definition written from the server's side | Generates a client with `--spec-side service` |
+| A message without a JSON Schema payload, with its payload in another file, or with binary content | Leaves the message out, with a warning |
+| Received messages that nothing tells apart | Stops, and shows the change to make |
+| A server for another protocol, such as `mqtt`, or a Socket.IO endpoint | Stops |
+
+The tool doesn't support binary frames, text framings over WebSocket such as STOMP or Socket.IO, or messages told apart by their position in a JSON array.
+
+Every warning and error names the place in the definition and the change that fixes it. For each case, with the message the tool prints and an example of the fix, see [Which WebSocket specs the tool generates a client for](https://github.com/ballerina-platform/asyncapi-tools/blob/main/docs/websocket-spec-support.md).
 
 ## Export an AsyncAPI definition from a WebSocket service
 
-:::caution
-WebSocket support in the AsyncAPI tool is experimental, and its behavior might change in future releases.
-:::
+The tool generates an AsyncAPI 3.0 definition from a Ballerina WebSocket service. The service needs a `dispatcherKey` in its `@websocket:ServiceConfig` annotation, which names the field that tells its messages apart. For example, consider the following service in a `service.bal` file:
 
-The tool generates an AsyncAPI 2.5.0 definition from a Ballerina WebSocket service. For example, consider the following service in a `service.bal` file:
-
-```ballerina
+```ballerina title="service.bal"
 import ballerina/websocket;
 
 type Subscribe record {|
@@ -243,32 +414,50 @@ service class ChatService {
 Run the following command to export the definition:
 
 ```bash
-bal asyncapi -i service.bal --protocol ws
+bal asyncapi service.bal
 ```
 
-The tool writes the definition to `chat_asyncapi.yaml`. It names the file after the base path of the service.
+The tool writes the definition to `chat_asyncapi.yaml`, named after the base path of the service. For a service in a package, pass the package directory instead of a file, such as `bal asyncapi .`.
 
 To customize the export, use the following options:
 
-- `--json`: Writes the definition in JSON format instead of YAML.
-- `--service <base-path>`: Exports only the service with the given base path, for example `--service /chat`. Use this option when the file contains more than one service.
+- `--spec-format json`: Writes the definition in JSON instead of YAML.
+- `--service <path>`: Exports only one service, given by its base path, such as `--service /chat`, or by the name of the service class it upgrades to, such as `--service ChatService`.
+- `--module <name>`: Exports the services of one module of the package.
 - `-o <directory>`: Writes the definition to the given directory instead of the current directory.
+
+You can generate a client from the exported definition. For the example service, the client class is `ChatClient`:
+
+```ballerina
+ChatClient chat = check new;
+Subscribed subscribed = check chat->doSubscribe({event: "Subscribe", room: "general"}, 5);
+```
 
 ## Command reference
 
 ```bash
-bal asyncapi -i <input-file> [options]
+bal asyncapi [options] <input>
 ```
 
-| Option | Applies to | Required | Default | Description |
-|---|---|---|---|---|
-| `-i`, `--input` | All | Yes | None | Path to the AsyncAPI definition (YAML or JSON), or to the Ballerina service file when you export a definition. |
-| `-o`, `--output` | All | No | Current directory | Directory to write the generated files to. |
-| `--protocol` | All | No | `http` | Protocol of the event API. Use `http` or `https` for webhooks, and `ws`, `wss`, or `websocket` for WebSocket. |
-| `--license` | WebSocket client | No | None | Path to a file that contains the license header to add to the generated files. |
-| `--with-tests` | WebSocket client | No | `false` | Generates a test file for the client. |
-| `--service` | WebSocket export | No | All services | Base path of the service to export. |
-| `--json` | WebSocket export | No | `false` | Writes the definition in JSON format instead of YAML. |
+The input decides what the tool generates: an AsyncAPI definition (`.yaml`, `.yml` or `.json`) generates Ballerina code, and a Ballerina package directory or `.bal` file generates an AsyncAPI definition.
+
+| Option | Applies to | Default | Description |
+|---|---|---|---|
+| `-o`, `--output <dir>` | All | Current directory | Directory to write the generated files to. Ballerina code must go into a package. |
+| `--protocol <http\|ws>` | Code generation | Read from the definition | Protocol to generate for. Needed only when the definition has neither `x-ballerina-event-identifier` nor a `ws` or `wss` server. |
+| `--force` | All | Off | Replaces existing files without asking. |
+| `-n`, `--dry-run` | All | Off | Lists the files the tool would write, without writing anything. |
+| `--module <name>` | All | Default module | Generates code into, or exports the services of, this module of the package. |
+| `--license <file>` | Code generation | None | File with the license header to add to the generated `.bal` files. |
+| `--with-tests` | Code generation | Off | Generates tests along with the code. For a webhook listener, the definition needs `x-ballerina-auth`. |
+| `--spec-side <client\|service>` | WebSocket client | `client` | Reads the definition as written from the client's or the server's side. |
+| `--service <path>` | Definition export | All services | Exports only this service, by base path or service class name. |
+| `--spec-format <yaml\|json>` | Definition export | `yaml` | Format of the exported definition. |
+| `--output-format <text\|json>` | All | `text` in a terminal, `json` otherwise | Prints results, warnings and errors as text, or as one JSON object per line. |
+| `-V`, `--version` | All | | Prints the tool's version. |
+| `-h`, `--help` | All | | Prints the help. |
+
+The tool exits with `0` on success, `1` when the input can't be generated from or a file can't be written, `2` for an invalid command line, `3` when the input or output isn't a valid package or file, and `4` when it would replace files and you declined or it couldn't ask.
 
 ## What's next
 
