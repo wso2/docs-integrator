@@ -29,10 +29,10 @@ Creating additional environments requires the **Growth** or **Enterprise** plan.
 4. Click **+ Create Environment**.
 
     <ThemedImage
-        alt="Environments page with the Create Environment button showing the plan-upgrade tooltip"
+        alt="Environments page with the Create Environment button highlighted"
         sources={{
-            light: useBaseUrl('/img/manage/cloud/environments/create-environment/create-environment-gated.png'),
-            dark: useBaseUrl('/img/manage/cloud/environments/create-environment/create-environment-gated.png'),
+            light: useBaseUrl('/img/manage/cloud/environments/create-environment/environments-list.png'),
+            dark: useBaseUrl('/img/manage/cloud/environments/create-environment/environments-list.png'),
         }}
     />
 
@@ -45,13 +45,11 @@ Creating additional environments requires the **Growth** or **Enterprise** plan.
     | **Description** | Optional. A short description of the environment's purpose. |
     | **Critical environment** | Turn this on if the environment is used for production-grade deployments and requires greater care. |
 
-    The following screenshot shows these fields on the **Edit Environment** form; the creation form uses the same fields.
-
     <ThemedImage
-        alt="Edit Environment form showing the Name, Display name, Description, and Critical environment fields"
+        alt="Create Environment form filled in for a new Staging environment"
         sources={{
-            light: useBaseUrl('/img/manage/cloud/environments/create-environment/environment-fields.png'),
-            dark: useBaseUrl('/img/manage/cloud/environments/create-environment/environment-fields.png'),
+            light: useBaseUrl('/img/manage/cloud/environments/create-environment/create-environment-form.png'),
+            dark: useBaseUrl('/img/manage/cloud/environments/create-environment/create-environment-form.png'),
         }}
     />
 
@@ -63,10 +61,13 @@ Creating additional environments requires the **Growth** or **Enterprise** plan.
 
 The new environment is created and available for use across projects in your organization.
 
-{/* TODO(v3): the actual Create Environment form (field order, validation, and the
-    post-create confirmation) is unverified — the trial org used for these docs is
-    gated behind the Growth/Enterprise plan and can't create a second environment.
-    Re-shoot the creation flow itself once verified against an org on that plan. */}
+<ThemedImage
+    alt="Staging environment overview page immediately after creation"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/create-environment/environment-created.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/create-environment/environment-created.png'),
+    }}
+/>
 
 ## What's next
 
