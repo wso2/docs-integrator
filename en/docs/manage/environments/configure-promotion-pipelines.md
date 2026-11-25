@@ -140,4 +140,4 @@ Every integration in the project now deploys through this pipeline's environment
 ## What's next
 
 - [Environments overview](./environments.md) — Understand how environments work and how integrations are isolated across them.
-- [Promote an integration](./promotion.md) — Move an integration from one environment to the next in your pipeline.
+- [Promote an integration](../integrations/operate/promotion.md) — Move an integration from one environment to the next in your pipeline.

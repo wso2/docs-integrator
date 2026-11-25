@@ -21,6 +21,7 @@ Choreo Integration is a managed cloud environment for running integrations devel
   <ul class="palette-card-list">
     <li>Track build and deployment status</li>
     <li>Redeploy, schedule, or stop integrations</li>
+    <li>Operate: pod status, containers, autoscaling, health checks</li>
     <li>API Management for integrations exposed as APIs</li>
   </ul>
 </PaletteCard>
@@ -35,8 +36,8 @@ Choreo Integration is a managed cloud environment for running integrations devel
 <PaletteCard icon="server" href="/manage/environments">
   <h3 class="palette-card-title">Manage Environments</h3>
   <ul class="palette-card-list">
+    <li>Create and manage environments</li>
     <li>Configure promotion pipelines</li>
-    <li>Override configuration per environment</li>
   </ul>
 </PaletteCard>
 
@@ -45,7 +46,7 @@ Choreo Integration is a managed cloud environment for running integrations devel
   <ul class="palette-card-list">
     <li>Runtime values and secrets</li>
     <li>Endpoint visibility and security</li>
-    <li>Build behavior and autoscaling</li>
+    <li>Build behavior</li>
   </ul>
 </PaletteCard>
 
@@ -61,16 +62,25 @@ Choreo Integration is a managed cloud environment for running integrations devel
 
 ## Managed platform services
 
-Managed AI services your integrations can use.
+Managed AI services your integrations and AI agents can use: retrieval-augmented generation and voice.
 
 <PaletteGrid>
+
+<PaletteCard icon="rag" href="/manage/managed-ai-services/knowledge-bases">
+  <h3 class="palette-card-title">Knowledge Bases</h3>
+  <ul class="palette-card-list">
+    <li>Index content from Google Drive or Amazon S3</li>
+    <li>Choose a vector store, embedding model, and chunking strategy</li>
+    <li>Test retrieval live</li>
+  </ul>
+</PaletteCard>
 
 <PaletteCard icon="agents" href="/manage/managed-ai-services/voice-agents">
   <h3 class="palette-card-title">Voice Agents</h3>
   <ul class="palette-card-list">
     <li>Add voice to a deployed AI agent</li>
     <li>Choose speech-to-text and text-to-speech providers</li>
-    <li>Test it live in the Voice Tester</li>
+    <li>Test it live in the Voice tester</li>
   </ul>
 </PaletteCard>
 

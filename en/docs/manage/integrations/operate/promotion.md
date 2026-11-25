@@ -1,9 +1,9 @@
 ---
-sidebar_position: 4
+sidebar_position: 7
 title: "Promote an Integration"
 description: "Promote an integration from one environment to the next in the Choreo Integration."
 keywords: [choreo integrator, promote integration, environments, development, production, choreo cloud]
-slug: /manage/environments/promotion
+slug: /manage/integrations/operate/promotion
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -15,7 +15,7 @@ Promoting an integration moves its current deployment to the next environment in
 
 ## Promote to the next environment
 
-A **Promote** button appears below an environment card once that environment has an active deployment, as long as the pipeline has a next environment to promote to. With only the default `development` environment, there's nothing to promote to; [create an additional environment](./create.md), [add it to a pipeline](./configure-promotion-pipelines.md), and assign that pipeline to the project first.
+A **Promote** button appears below an environment card once that environment has an active deployment, as long as the pipeline has a next environment to promote to. With only the default `development` environment, there's nothing to promote to; [create an additional environment](../../environments/create.md), [add it to a pipeline](../../environments/configure-promotion-pipelines.md), and assign that pipeline to the project first.
 
 1. Open your integration and go to its **Overview** or **Deploy** page.
 2. Locate the environment card you want to promote from.
@@ -42,7 +42,7 @@ The same build is deployed directly to the target environment — there's no int
 Once a build is already deployed to an environment, **Promote** to that environment is disabled ("Already deployed in target environment") until you deploy a newer build.
 
 :::info
-To set configurable values, environment variables, or files for the target environment, use its own [**Configure**](../configurations/runtime-configurations.md#configure-an-integration) button or [**Configs & secrets**](../configurations/runtime-configurations.md#configs--secrets) page once it's deployed — promoting doesn't prompt for them.
+To set configurable values, environment variables, or files for the target environment, use its own [**Configure**](../../configurations/runtime-configurations.md#configure-an-integration) button or [**Configs & secrets**](./configs-and-secrets.md) page once it's deployed — promoting doesn't prompt for them.
 :::
 
 Once a pipeline with more than one environment is configured, the same **Configure**, **Promote**, and **Stop** / **Start** controls shown above are also available directly on the integration's **Overview** page — scroll down to see every environment's card, not just the Deploy page's.
@@ -79,7 +79,8 @@ The button shows **Stopping...** while it takes effect, then the card's status c
 
 ## What's next
 
-- [Runtime configurations](../configurations/runtime-configurations.md) — Update configuration values for a specific environment after promotion.
+- [Runtime configurations](../../configurations/runtime-configurations.md) — Update configuration values for a specific environment after promotion.
+- [Deployment Tracks](./deployment-tracks.md) — Manage the version being promoted.
 
 {/* TODO(v3): this integration has no configurables (Configurables: 0), so it's
     unverified whether promoting one with configurable values prompts for them

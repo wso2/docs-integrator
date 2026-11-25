@@ -54,7 +54,7 @@ const PRODUCTS: Record<ProductKey, { label: string; path: string; icon: () => Re
     tone: 'iconIntegrator',
   },
   agentBuilder: {
-    label: 'WSO2 Agent Builder',
+    label: 'Choreo Agent Builder',
     path: 'agent-builder/',
     icon: PulseIcon,
     tone: 'iconAgent',

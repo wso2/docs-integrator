@@ -1,9 +1,9 @@
 ---
-sidebar_position: 6
+sidebar_position: 5
 title: "Scaling"
 description: "Configure autoscaling for integrations deployed on Choreo Integration."
 keywords: [choreo integrator, choreo cloud, scaling, replicas, autoscale, hpa]
-slug: /manage/configurations/scaling-resource-limits
+slug: /manage/integrations/operate/scaling
 ---
 
 import ThemedImage from '@theme/ThemedImage';
@@ -18,8 +18,8 @@ By default, an integration runs a fixed number of replicas (no autoscaling) in e
 <ThemedImage
     alt="Scaling page with HPA selected, showing Min/Max replicas, CPU and Memory thresholds, and the Replicas and usage tables"
     sources={{
-        light: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/scaling-configuration.png'),
-        dark: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/scaling-configuration.png'),
+        light: useBaseUrl('/img/manage/cloud/operate/scaling/scaling-configuration.png'),
+        dark: useBaseUrl('/img/manage/cloud/operate/scaling/scaling-configuration.png'),
     }}
 />
 
@@ -53,4 +53,5 @@ To run exactly `3` replicas at all times, turn on HPA and set both **Min replica
 
 ## What's next
 
-- [Environments](../environments/environments.md) — Organize your integration lifecycle with multiple environments.
+- [Containers](./containers.md) — Set container CPU and memory request/limit.
+- [Environments](../../environments/environments.md) — Organize your integration lifecycle with multiple environments.

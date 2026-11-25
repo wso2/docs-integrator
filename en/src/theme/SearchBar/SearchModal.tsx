@@ -38,7 +38,7 @@ const PRODUCTS: { key: string; label: string }[] = [
   { key: 'all', label: 'All products' },
   { key: 'saas', label: 'Choreo Cloud' },
   { key: 'integrator', label: 'Choreo Integrator' },
-  { key: 'agent-builder', label: 'Agent Builder' },
+  { key: 'agent-builder', label: 'Choreo Agent Builder' },
   { key: 'connectors', label: 'Connectors' },
 ];
 

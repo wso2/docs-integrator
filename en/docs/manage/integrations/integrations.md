@@ -12,7 +12,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Integration Management
 
-After pushing your integrations to Choreo Integration, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on Choreo Cloud yet, see the [Deploy](../../deploy-and-run/deploy-and-run.md) section.
+After pushing your integrations to Choreo Cloud, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on Choreo Cloud yet, see the [Deploy](../../deploy-and-run/deploy-and-run.md) section.
 
 If your integration is exposed as an API, see [API Management](api-management/api-management.md) for security and analytics.
 
@@ -47,16 +47,37 @@ Deployment lifecycle management options depend on the integration type.
 From the integration overview page, you can manage the schedule for each environment independently:
 
 - **Schedule**: Click **Schedule** on an environment card to set when the automation runs. Choose **By interval** (a number and a unit — minute, hour, day, week, or month) or **By cron** (a raw cron expression), then click **Update**.
-- **Edit schedule**: Modify the existing schedule.
-- **Stop schedule**: Disable the schedule without deleting the integration. You can still run the integration manually.
 
-{/* TODO(v3): the Edit schedule / Stop schedule controls are not verified against v3 - the
-    test organization's automation has no active schedule to inspect. Set one, confirm the
-    button labels, and re-shoot if they differ. */}
+    <ThemedImage
+        alt="Schedule form with the By Interval tab selected, repeating every 5 minutes"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/integrations/automation-schedule-form.png'),
+            dark: useBaseUrl('/img/manage/cloud/integrations/automation-schedule-form.png'),
+        }}
+    />
+
+- Once a schedule is active, the button becomes **Stop schedule**. Click its dropdown arrow and select **Edit schedule** to modify the existing schedule.
+- **Stop schedule**: Disable the schedule without deleting the integration. The button reverts to **Schedule**, and you can still run the integration manually with **Test**.
+
+<ThemedImage
+    alt="Development environment card with an active schedule, showing Stop schedule highlighted and its dropdown open with Edit schedule highlighted"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/integrations/automation-stop-edit-schedule.png'),
+        dark: useBaseUrl('/img/manage/cloud/integrations/automation-stop-edit-schedule.png'),
+    }}
+/>
 
 ### Integration as API
 
 Each environment card shows its status as **Active** or **Suspended**. Click **Stop** to suspend the deployment, or **Start** to bring a suspended one back. The status briefly shows **In progress** while the change applies.
+
+<ThemedImage
+    alt="Development environment card with the Active status and Stop button highlighted"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/integrations/integration-as-api-stop-start.png'),
+        dark: useBaseUrl('/img/manage/cloud/integrations/integration-as-api-stop-start.png'),
+    }}
+/>
 
 ### AI agent
 
@@ -119,5 +140,6 @@ The integration is permanently deleted.
 ## What's next
 
 - [API Management](api-management/api-management.md) — Secure, monitor, and govern integrations exposed as APIs.
-- [Configuration Management](../configurations/configurations.md) — Configure integration settings, runtime configurations, build configurations, and scaling options.
+- [Configuration Management](../configurations/configurations.md) — Configure integration settings, runtime configurations, and build configurations.
+- [Operate Integration Runtime](./operate/operate.md) — Monitor pod status, configure autoscaling, health checks, deployment tracks, and promotion.
 - [Manage Projects](../projects.md) — Create, edit, and remove projects in your organization.
