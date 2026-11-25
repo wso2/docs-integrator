@@ -34,20 +34,20 @@ A working Choreo Integrator environment.
 
 ## Step 1: Create the integration
 
-1. On the project home page, click **Create on Cloud**.
+1. On the project overview page, click **Open Cloud Editor**.
 
    <ThemedImage
-       alt="Choreo Cloud project home showing the Create on Cloud option"
+       alt="How would you like to create your integration page with Open Cloud Editor highlighted under Create on Cloud"
        sources={{
-           light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
-           dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
+           light: useBaseUrl('/img/get-started/quickstarts/open-cloud-editor.png'),
+           dark: useBaseUrl('/img/get-started/quickstarts/open-cloud-editor.png'),
        }}
    />
 
 2. The Choreo Integrator cloud editor opens in your browser.
 
    <ThemedImage
-       alt="Choreo Integrator cloud editor landing page showing an empty integration and the Deploy to Choreo Cloud panel"
+       alt="Cloud editor landing page with Choreo Integrator Copilot, the Add Artifact manually button, and the Deploy to Choreo Cloud panel"
        sources={{
            light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
            dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
@@ -278,12 +278,14 @@ To deploy your integration to Choreo Cloud from the cloud editor, see [Save and 
 
 <PaletteCard icon="ai" highlight>
   <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
-  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the HelloWorldAPI sample straight to Choreo Cloud.</p>
-  <div class="palette-chip-row" style={{justifyContent: 'center'}}>
-    <a href="https://console.cloud.choreolabs.com/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/helloworldapi" target="_blank" rel="noopener noreferrer">
-      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to Choreo Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
-    </a>
-  </div>
+  <p class="palette-card-desc">Rather not build it yourself? Deploy the <strong>Hello World Service</strong> sample straight to Choreo Cloud. See <a href={useBaseUrl('/develop-and-test/create-workspace/start-with-sample-integrations')}>Start with sample integrations</a>.</p>
+  <ThemedImage
+      alt="Browse samples page with the Hello World Service sample highlighted"
+      sources={{
+          light: useBaseUrl('/img/get-started/build-api-integration/browse-samples-hello-world.png'),
+          dark: useBaseUrl('/img/get-started/build-api-integration/browse-samples-hello-world.png'),
+      }}
+  />
 </PaletteCard>
 
 </div>
