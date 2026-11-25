@@ -22,7 +22,7 @@ All personally identifiable information (PII) is resolved at the frontend servic
 For all integration types, go to **Observability** > **Runtime Logs** in the left navigation. This unified view is available at both the project and integration levels, and supports filtering and search across all log entries.
 
 <ThemedImage
-    alt="Runtime logs"
+    alt="Runtime logs page listing application and gateway log entries, with search, time range, and log type filters"
     sources={{
         light: useBaseUrl('/img/observe/cloud/runtime-logs/runtime-logs.png'),
         dark: useBaseUrl('/img/observe/cloud/runtime-logs/runtime-logs.png'),
@@ -35,6 +35,16 @@ Depending on the integration type, you can also access runtime logs from the Int
 - **Event and file integrations** — Latest logs are visible directly on the environment card without navigating to the Observability section.
 - **Integration as APIs and AI Agents** - Each environment card has a **View Logs** button that opens logs filtered to that specific environment and integration version.
 
+Each log line shows its timestamp, level, environment, and a one-line summary; gateway log lines also carry a **GATEWAY** badge, the HTTP status, and the request duration. Click a line to expand it and see its full set of fields.
+
+<ThemedImage
+    alt="Expanded gateway log entry showing Method, Path, Status, Duration, Environment, Caller, Host, Pod, Container, and the raw log line"
+    sources={{
+        light: useBaseUrl('/img/observe/cloud/runtime-logs/log-entry-expanded.png'),
+        dark: useBaseUrl('/img/observe/cloud/runtime-logs/log-entry-expanded.png'),
+    }}
+/>
+
 ## Understand runtime logs
 
 Each log entry is either an application log or a gateway log.
@@ -43,11 +53,12 @@ Each log entry is either an application log or a gateway log.
 
 | Field | Description |
 |---|---|
-| `timestamp` | The time when the log entry was created. |
-| `environment` | The environment in which the integration is running (for example, Development). |
-| `logType` | The type of log entry (for example, Application, Gateway). |
-| `version` | The version or deployment track of the integration. |
-| `message` | The log message providing details about the event. |
+| **Timestamp** | The time when the log entry was created. |
+| **Level** | The log level: `INFO`, `WARN`, `ERROR`, or `DEBUG`. |
+| **Environment** | The environment in which the integration is running (for example, Development). |
+| **Integration** | The integration that produced the log entry. |
+| **Pod** / **Container** | The Kubernetes pod and container the log line came from. |
+| **Raw line** | The original, unparsed log message. |
 
 ### Gateway logs
 
@@ -55,42 +66,44 @@ Gateway logs capture inbound and outbound request details from the gateway's per
 
 | Field | Description |
 |---|---|
-| `timestamp` | The time when the request is received by the gateway. |
-| `logLine` | Details about the request, including `Method`, `RequestPath`, `ServicePath`, `UserAgent`, `CorrelationID`, `ServiceHost`, and `Duration`. |
-| `gatewayCode` | The state of the request from the gateway's perspective. See [Gateway codes](#gateway-codes). |
-| `statusCode` | The HTTP status code returned to the client. |
-| `integrationVersion` | The version of the invoked integration. |
-| `envName` | The environment of the inbound request (for example, Development, Production). |
-
-#### Gateway codes
-
-| Code | Description |
-|---|---|
-| `BACKEND_RESPONSE` | The request was successfully processed and the backend returned a response to the client. |
-| `CORS_RESPONSE` | The request was a CORS (Cross-Origin Resource Sharing) preflight request. |
-| `AUTH_FAILURE` | The request failed at the gateway due to an authentication or authorization issue, such as an invalid token. |
-| `NO_HEALTHY_BACKEND` | The request failed because no healthy backend instance was available. |
-| `RATE_LIMITED` | The request was rejected because it exceeded the rate limit configured for the integration. |
-| `RESOURCE_NOT_FOUND` | No matching API resource was found for the inbound request. This can result from a mismatch in the HTTP method, path, or host. |
-| `BACKEND_TIMEOUT` | The backend did not respond within the configured timeout period. |
-| `GATEWAY_ERROR` | The request failed due to an error in the gateway itself. |
+| **Method** | The HTTP method of the request. |
+| **Path** | The request path. |
+| **Status** | The HTTP status code returned to the client. |
+| **Duration** | How long the request took to complete. |
+| **Environment** | The environment the request was served from. |
+| **Caller** | The client's `User-Agent` string. |
+| **Host** / **Pod** / **Container** | The backend service, pod, and container (`gateway-runtime`) that handled the request. |
+| **Raw line** | The full gateway access log entry as JSON, including internal fields such as `respCd` (response code) and `respCdDtl` (response code detail, for example `via_upstream` for a normal backend response). |
 
 ## Filter runtime logs
 
-You can narrow log entries using the following filters:
+Click **Filters** to narrow log entries:
 
 | Filter | Description |
 |---|---|
-| **Type** | Filter by log level: `Error`, `Warn`, `Info`, or `Debug`. |
+| **Level** | Filter by log level: `INFO`, `WARN`, `ERROR`, or `DEBUG`. |
 | **Environment** | Filter by the environment in which the integration is running. |
-| **Deployment Track** | Filter by the deployment track of the integration. |
-| **Time Range** | Filter by a specific time window. |
-| **Content Search** | Search for specific keywords or phrases within log messages. |
-| **Regex Search** | Match log messages using regular expressions. |
+| **Auto refresh** | Toggle whether the log view keeps polling for new entries (on by default, refreshing every 10 seconds). |
 
-Type your search query in the search bar and press **Enter** to apply a content or regex search filter.
+<ThemedImage
+    alt="Filters panel with Level and Environment checkboxes and the Auto refresh toggle"
+    sources={{
+        light: useBaseUrl('/img/observe/cloud/runtime-logs/filters-panel.png'),
+        dark: useBaseUrl('/img/observe/cloud/runtime-logs/filters-panel.png'),
+    }}
+/>
 
-:::note
-Choreo Cloud uses Lucene query syntax for regex search. For more information on Lucene syntax, see [Lucene Query Syntax Documentation](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html).
-:::
+Outside the Filters panel, you can also:
+
+- Type a search query in the **Search logs** bar and press **Enter** to filter by keyword.
+- Choose a **Time Range** (Past 10 minutes up to Past 30 days, or a custom range).
+- Choose a log type: **All logs**, **Application logs**, or **Gateway logs**.
+- Click the download icon to export the current log view.
+
+{/* TODO(v3): the previous "Regex Search" / Lucene syntax claim and the gateway
+    codes reference table (BACKEND_RESPONSE, CORS_RESPONSE, AUTH_FAILURE, etc.)
+    are unverified against v3 - the search bar's exact query syntax wasn't
+    confirmed, and the named gateway codes aren't surfaced as a labeled field
+    in the UI (only respCdDtl inside the raw JSON line, which showed
+    "via_upstream" for a normal response). Re-verify both before restoring. */}
 
