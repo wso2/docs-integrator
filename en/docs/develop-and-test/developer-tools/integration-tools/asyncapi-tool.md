@@ -9,7 +9,7 @@ slug: /develop-and-test/developer-tools/integration-tools/asyncapi-tool
 
 An AsyncAPI definition describes an event-driven API: its channels, the messages on each, and who sends and receives them. The `bal asyncapi` tool turns such a definition into Ballerina code, and a Ballerina WebSocket service into a definition:
 
-- **Webhook listener:** From the definition of the events a SaaS application or other event source sends to your webhook, the tool generates a listener that verifies each request and calls a remote function for each event.
+- **Webhook listener:** From the definition of the events a SaaS application or other event source sends to your webhook, the tool generates a listener that calls a remote function for each event. When the definition says how requests are signed, the listener also verifies each one.
 - **WebSocket client:** From the definition of a WebSocket API, the tool generates a client with a function for each message it sends or receives.
 - **AsyncAPI definition:** From a Ballerina WebSocket service, the tool generates the definition that describes it.
 
@@ -118,7 +118,7 @@ The tool generates the following files:
 | `types.bal` | The record types of the event payloads, and the `ListenerConfig` record. |
 | `service_types.bal` | A service type for each channel, with a remote function for each event. |
 | `listener.bal` | The `Listener` class, which receives the webhook requests over HTTP. |
-| `dispatcher_service.bal` | The logic that checks each request, reads its event type, and calls the matching remote function. |
+| `dispatcher_service.bal` | The logic that verifies each request when the definition has `x-ballerina-auth`, reads its event type, and calls the matching remote function. |
 | `lib/asyncapi-trigger-compiler-plugin.jar`, `CompilerPlugin.toml` | A compiler plugin that lists the listener's endpoints when you build with `bal build --export-endpoints`. Keep both files with the package. |
 
 For the example definition, `service_types.bal` contains a service type for the `orders` channel. The tool names each remote function after the event type, so `order_created` becomes `onOrderCreated`:
@@ -417,7 +417,9 @@ Run the following command to export the definition:
 bal asyncapi service.bal
 ```
 
-The tool writes the definition to `chat_asyncapi.yaml`, named after the base path of the service. For a service in a package, pass the package directory instead of a file, such as `bal asyncapi .`.
+The tool writes the definition to `chat_asyncapi.yaml`, named after the base path of the service.
+
+Here `service.bal` is a standalone file. For services in a package, pass the package directory instead, such as `bal asyncapi .`, as a `.bal` file that belongs to a package is not accepted. The tool compiles the package with the dependency versions in its `Dependencies.toml`, so run `bal build` once first if the package doesn't have one.
 
 To customize the export, use the following options:
 
@@ -461,6 +463,8 @@ The tool exits with `0` on success, `1` when the input can't be generated from o
 
 ## What's next
 
+- [Receive Webhook Events with the AsyncAPI Tool](../../../guides/how-to-guides/receive-webhook-events-with-asyncapi.md) -- Step by step, from a definition to a webhook running on Choreo Cloud
+- [Use a WebSocket API with the AsyncAPI Tool](../../../guides/how-to-guides/use-a-websocket-api-with-asyncapi.md) -- Step by step, from a definition to a client running on Choreo Cloud
 - [gRPC Tool](grpc-tool.md) -- Generate gRPC services from Protocol Buffer definitions
 - [OpenAPI Tool](openapi-tool.md) -- Generate REST services and clients
 - [Error Handling](../../../editor/canvases/flow-canvas/node-palette.md#error-handling) -- Handle event processing failures gracefully
