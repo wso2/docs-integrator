@@ -60,7 +60,17 @@ A project must be empty before it can be deleted. Remove every item it holds fir
 Removing a project is permanent. All history within the project is deleted and cannot be recovered.
 :::
 
-1. From the project home, check the **Integrations** list. If it isn't empty, [delete every integration](./integrations/integrations.md#delete-an-integration) in the project first. Once the project is empty, click **Settings**.
+1. From the project home, check the **Integrations** list. If it isn't empty, [delete every integration](./integrations/integrations.md#delete-an-integration) in the project first.
+
+    <ThemedImage
+        alt="Project home page confirming the project is empty, with no integrations listed"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/projects/project-home-empty.png'),
+            dark: useBaseUrl('/img/manage/cloud/projects/project-home-empty.png'),
+        }}
+    />
+
+    Once the project is empty, click **Settings**.
 2. Scroll to the **Delete project** card and click **Delete project**.
 
     <ThemedImage
@@ -81,12 +91,15 @@ Removing a project is permanent. All history within the project is deleted and c
         }}
     />
 
-    {/* TODO(v3): the confirmation step for an empty project is not captured - every
-        project in the test organization still holds items, and emptying one to reach
-        that dialog would destroy real integrations. Verify whether it asks for the
-        project name and re-shoot. */}
+4. Once the project is empty, clicking **Delete project** instead opens a confirmation dialog. Type the project's **handle** (not its display name) to enable the **Delete** button, then click it.
 
-4. Once the project is empty, confirm the deletion.
+    <ThemedImage
+        alt="Delete project confirmation dialog for an empty project, with the project handle typed in to enable the Delete button"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/projects/delete-project-confirm-named.png'),
+            dark: useBaseUrl('/img/manage/cloud/projects/delete-project-confirm-named.png'),
+        }}
+    />
 
 The project and all its contents are permanently deleted.
 
