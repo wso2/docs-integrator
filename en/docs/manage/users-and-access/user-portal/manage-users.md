@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Manage Users in the User Portal
 description: "Create User Portal users and roles, assign permissions to roles, and assign roles to users from the Choreo Integration console."
-keywords: [choreo cloud, user portal, users, roles, permissions, scopes, external users, identity platform, choreo cloud admin, choreo cloud reader]
+keywords: [choreo cloud, user portal, users, roles, permissions, scopes, external users, identity and access management]
 slug: /manage/users-and-access/user-portal/manage-users
 ---
 
@@ -11,13 +11,9 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Manage Users in the User Portal
 
-Users sign in to the User Portal with an account in your Choreo Identity organization. That organization is the user store for the User Portal. You create users and roles, and assign permissions to roles, from the **Users** and **Roles** tabs in the Choreo Cloud console.
+When you [enable the User Portal](user-portal.md#enable-the-user-portal), the platform creates a project named **Integration User Portal** in **Identity & Access Management**. Users sign in to the User Portal with an account in that project. You create users and roles, and assign permissions to roles, in that project. Changes take effect in an environment after you [deploy them](#deploy-your-changes).
 
-:::tip
-The **Users** and **Roles** tabs are a convenience. They make changes in your Choreo Identity organization, so you can also manage User Portal users and roles directly in Choreo Identity. If you create a role there, under **Role Audience**, select **Application**, then select the **User Portal** application. The User Portal uses only the roles on this application. For more information, see [Choreo Identity documentation: Onboard users](https://wso2.com/identity-platform/docs/guides/users/onboard-users/) and [Choreo Identity documentation: Manage roles](https://wso2.com/identity-platform/docs/guides/users/manage-roles/).
-:::
-
-The roles of a user decide what the user can do in the User Portal. Each role holds a set of permissions, which are the scopes that Choreo Identity adds to the user's token. The User Portal shows an integration only if the user has the view scope for its type. See [Scopes](#scopes).
+The roles of a user decide what the user can do in the User Portal. Each role holds a set of permissions, which are the scopes that are added to the user's token. The User Portal shows an integration only if the user has the view scope for its type. See [Scopes](#scopes).
 
 :::info
 To manage User Portal users and roles in the Choreo Cloud console, your role must include the **Manage Organization** permission under **Organization Management**, assigned at the organization level. For more information about roles and permissions, see [Access Control](../access-control.md).
@@ -27,7 +23,7 @@ To manage User Portal users and roles in the Choreo Cloud console, your role mus
 
 ### Scopes
 
-When you [enable the User Portal](user-portal.md#enable-the-user-portal), the platform creates the **User Portal APIs** API resource in your Choreo Identity organization. This API resource defines the following scopes. To see them in the console, go to **Admin** > **Settings** > **User Portal** > **Roles**, click a role, then click **Permissions**.
+When you [enable the User Portal](user-portal.md#enable-the-user-portal), the platform adds the **User Portal API** to the **Integration User Portal** project. It defines the following scopes. To see them, [open the project](#open-the-integration-user-portal-project), click **Roles**, click a role, then click **Permissions**.
 
 | Scope | What it allows | View scope |
 |---|---|---|
@@ -38,8 +34,8 @@ When you [enable the User Portal](user-portal.md#enable-the-user-portal), the pl
 
 The User Portal uses these scopes as follows:
 
-- **To see an integration, a user needs the view scope for its type.** A user needs `automation:view` to see automations and `aiagent:view` to see AI agents. If a user has none of these scopes, the **Integrations** tab of the User Portal is empty.
-- **To run an automation, a user needs `automation:trigger`.** Without this scope, the user can see the automation, but the **Execute** button is disabled.
+- **To see an integration, a user needs the view scope for its type.** A user needs `automation:view` to see automations and `aiagent:view` to see AI agents. If a user has none of these scopes, the User Portal shows no integrations.
+- **To run an automation, a user needs `automation:trigger`.** Without this scope, the user can see the automation but cannot run it.
 
 :::note
 By default, an AI agent does not check the `aiagent:invoke` scope, so any user who can see the agent can chat with it. To make the agent require this scope, change the security settings of the agent's chat endpoint: select the **OAuth2** security scheme, then assign the `aiagent:invoke` scope as a permission to the `/chat` resource. See [Configure security for an integration as an API](../../integrations/api-management/api-security.md#configure-security-for-an-integration-as-an-api).
@@ -47,41 +43,38 @@ By default, an AI agent does not check the `aiagent:invoke` scope, so any user w
 
 You can also give users scopes that you define. See [Add scopes from your own APIs](#add-scopes-from-your-own-apis).
 
-### Default roles
+### Roles
 
-When you enable the User Portal, the platform creates two roles on the User Portal application. In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles** to see them.
-
-| Role | Scopes | Who gets it by default |
-|---|---|---|
-| **WSO2 Cloud Admin** | All the scopes of the User Portal API resource. | Members of your Choreo Cloud organization who have permission to manage components. |
-| **WSO2 Cloud Reader** | Only the view scopes of the User Portal API resource. | Every other member of your Choreo Cloud organization. |
-
-When a member of your Choreo Cloud organization signs in to the User Portal with **Sign in with Integration Platform** for the first time, the platform adds the member to your Choreo Identity organization and assigns one of these roles. The platform does not change the roles of a member who already has a role on the User Portal application.
-
-These are system roles. You can assign them to users and remove them from users, but you cannot rename them or change their permissions.
-
-The platform does not assign a role to users that you create. When you [create a user](#create-a-user), select the roles that the user needs. A user without a role cannot see any integrations in the User Portal.
+The platform does not assign a role to users that you create. After you [create a user](#create-a-user), [assign the roles that the user needs](#assign-roles-to-a-user). A user without a role cannot see any integrations in the User Portal.
 
 :::note
 Changes to the permissions of a role can take up to 10 minutes to appear in User Portal tokens. When you assign a role to a user or remove a role from a user, the change takes effect the next time the user signs in.
 :::
 
-## Open the users and roles tabs
+## Open the Integration User Portal project
 
 1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
-2. In the top navigation, click the **Organization** list and select your organization.
-3. In the left navigation menu, click **Settings** under **Admin**.
-4. Click the **User Portal** tab.
-5. Click the **Users** tab or the **Roles** tab.
+2. In the top navigation, click the organization list and select your organization.
+3. Click the app menu at the top left, then under **Categories**, click **Identity & Access Management**.
+4. Click the **Integration User Portal** project.
 
-The **Users** and **Roles** tabs appear only after you enable the User Portal. See [Enable the User Portal](user-portal.md#enable-the-user-portal).
+## Give a user access to the User Portal
+
+To let a new user sign in to the User Portal and use your integrations, do the following in the **Integration User Portal** project:
+
+1. [Create a role](#create-a-role) with the permissions that the user needs, or use an existing role.
+2. [Create the user](#create-a-user).
+3. [Assign the role to the user](#assign-roles-to-a-user).
+4. [Deploy your changes](#deploy-your-changes).
+
+The user can then [sign in to the User Portal](sign-in-to-user-portal.md) with their username and password.
 
 ## Manage users
 
-In your organization, go to **Admin** > **Settings** > **User Portal** > **Users**. The **Users** tab lists the users in your Choreo Identity organization. For each user, it shows the name, username, status, and the roles that the user has on the User Portal application. To search the list, click the search icon.
+In the **Integration User Portal** project, click **Users** in the left navigation menu. The **Users** page lists the users that you added. For each user, it shows the name, user ID, status, and organization unit.
 
 <ThemedImage
-    alt="Users tab of the User Portal settings with the list of users, their status, and roles"
+    alt="Users page of the Integration User Portal project with a user and the Add promotable user button"
     sources={{
         light: useBaseUrl('/img/manage/cloud/user-portal/users-list.png'),
         dark: useBaseUrl('/img/manage/cloud/user-portal/users-list.png'),
@@ -98,57 +91,103 @@ The status of a user is one of the following:
 
 ### Create a user
 
-1. In your organization, go to **Admin** > **Settings** > **User Portal** > **Users**.
-2. Click **Create User**.
-3. Enter the user's first name, last name, and email address. The email address is also the username.
-4. Optional: In **Roles**, select the roles to assign to the user. You can also assign roles after you create the user. See [Assign roles to a user](#assign-roles-to-a-user).
+1. In the **Integration User Portal** project, click **Users** in the left navigation menu.
+2. Click **Add promotable user**.
 
     <ThemedImage
-        alt="Create User dialog with the first name, last name, email, and roles fields filled in"
+        alt="Users page of the Integration User Portal project with the Add promotable user button highlighted"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/add-user-button.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/add-user-button.png'),
+        }}
+    />
+
+3. Enter a **Username** and an **Email**. Optionally, enter the user's first name, last name, mobile number, and password.
+
+    <ThemedImage
+        alt="Add user page with the username, first name, last name, email, mobile number, and password fields"
         sources={{
             light: useBaseUrl('/img/manage/cloud/user-portal/create-user.png'),
             dark: useBaseUrl('/img/manage/cloud/user-portal/create-user.png'),
         }}
     />
 
-5. Click **Create**.
+4. Click **Create user**.
 
-The platform creates the user in your Choreo Identity organization and assigns the roles that you selected. Choreo Identity sends the user an email with a link to set a password. After the user sets a password, the user can sign in to the User Portal with **Sign In**. Share the User Portal link for your organization, or the organization handle, with the user. See [Sign in to the User Portal](sign-in-to-user-portal.md).
+The user has no roles yet. [Assign roles to the user](#assign-roles-to-a-user), then [deploy your changes](#deploy-your-changes). The user can then sign in to the User Portal with their username and password. See [Sign in to the User Portal](sign-in-to-user-portal.md).
 
 ### Assign roles to a user
 
-1. In your organization, go to **Admin** > **Settings** > **User Portal** > **Users**.
-2. Click the user.
-3. Click **Assign Roles**.
+You assign a role to a user from the role.
+
+1. In the **Integration User Portal** project, click **Roles** in the left navigation menu.
+2. Click the role.
+3. Click **Assignments**.
+4. Click **Add**.
 
     <ThemedImage
-        alt="User details page with the roles of the user and the Assign Roles button"
+        alt="Assignments tab of the Finance role with the Add button highlighted"
         sources={{
-            light: useBaseUrl('/img/manage/cloud/user-portal/assign-roles.png'),
-            dark: useBaseUrl('/img/manage/cloud/user-portal/assign-roles.png'),
+            light: useBaseUrl('/img/manage/cloud/user-portal/role-assignments.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/role-assignments.png'),
         }}
     />
 
-4. In **Roles**, select the roles to assign to the user.
-5. Click **Assign**.
+5. On the **Users** tab of the **Add assignment** dialog, select the user.
+6. Click **Add selected**.
+
+    <ThemedImage
+        alt="Add assignment dialog with a user selected and the Add selected button highlighted"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/add-assignment.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/add-assignment.png'),
+        }}
+    />
+
+The user appears on the **Users** tab of **Assignments**.
+
+<ThemedImage
+    alt="Assignments tab of the Finance role with an assigned user"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/role-users.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/role-users.png'),
+    }}
+/>
 
 ### Remove a role from a user
 
-1. In your organization, go to **Admin** > **Settings** > **User Portal** > **Users**.
-2. Click the user.
-3. Next to the role, click the **Unassign** icon.
-4. In the confirmation dialog, click **Remove**.
+1. In the **Integration User Portal** project, click **Roles** in the left navigation menu.
+2. Click the role.
+3. Click **Assignments**.
+4. Next to the user, click the delete icon.
+
+    <ThemedImage
+        alt="Assignments tab of the Finance role with the delete icon next to an assigned user highlighted"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/remove-role-assignment.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/remove-role-assignment.png'),
+        }}
+    />
 
 ### Edit or delete a user
 
-You cannot edit or delete users from the Choreo Cloud console. To do this, go to **User Management** > **Users** in your Choreo Identity organization. The link on the **Admin** > **Settings** > **User Portal** > **Users** tab opens this page. For more information, see [Choreo Identity documentation: Manage users](https://wso2.com/identity-platform/docs/guides/users/manage-users/).
+1. In the **Integration User Portal** project, click **Users** in the left navigation menu.
+2. Next to the user, click the edit icon to edit the user, or the delete icon to delete the user.
+
+    <ThemedImage
+        alt="Users page with the edit and delete icons next to a user highlighted"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/edit-delete-user.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/edit-delete-user.png'),
+        }}
+    />
 
 ## Manage roles
 
-In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles**. The **Roles** tab lists the roles on the User Portal application, and the number of users that have each role. System roles have a **System** label. To search the list, click the search icon.
+In the **Integration User Portal** project, click **Roles** in the left navigation menu. The **Roles** page lists the roles in the project, with the description and organization unit of each role.
 
 <ThemedImage
-    alt="Roles tab of the User Portal settings with custom roles, the system roles, and the number of users assigned to each role"
+    alt="Roles page of the Integration User Portal project with the Finance role and the Add role button"
     sources={{
         light: useBaseUrl('/img/manage/cloud/user-portal/roles-list.png'),
         dark: useBaseUrl('/img/manage/cloud/user-portal/roles-list.png'),
@@ -157,38 +196,31 @@ In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles
 
 ### Create a role
 
-1. In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles**.
-2. Click **Create Role**.
-3. In **Role Name**, enter a name for the role.
-4. Under **Permissions**, select the permissions for the role.
+1. In the **Integration User Portal** project, click **Roles** in the left navigation menu.
+2. Click **Add role**.
+3. In **Role name**, enter a name for the role, then click **Continue**.
+4. Under **Assign permissions**, select the permissions for the role. The scopes of the User Portal are under **User Portal API**. See [Scopes](#scopes).
 
-    The permissions are grouped by API resource:
-
-    - **User Portal**: The scopes of the User Portal API resource. See [Scopes](#scopes).
-    - Your own API resources, labeled **Custom API**: The scopes of any other API resource that the User Portal application is authorized for. See [Add scopes from your own APIs](#add-scopes-from-your-own-apis).
-
-    To select all the permissions in a group, select the check box of the group. To select all the permissions, select **All permissions**.
+    To select all the permissions in a group, select the check box of the group.
 
     <ThemedImage
-        alt="Create Role page with the role name and the permissions grouped by API resource"
+        alt="Assign permissions step with all the User Portal API scopes selected"
         sources={{
             light: useBaseUrl('/img/manage/cloud/user-portal/create-role.png'),
             dark: useBaseUrl('/img/manage/cloud/user-portal/create-role.png'),
         }}
     />
 
-5. Click **Create**.
-
-The console opens the new role, where you can [assign users to it](#assign-users-to-a-role).
+5. Click **Continue**.
 
 ### Change the permissions of a role
 
-1. In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles**.
+1. In the **Integration User Portal** project, click **Roles** in the left navigation menu.
 2. Click the role.
 3. Click **Permissions**.
 
     <ThemedImage
-        alt="Permissions view of a role with the Reset and Update Permissions buttons"
+        alt="Permissions tab of the Finance role with the User Portal API scopes"
         sources={{
             light: useBaseUrl('/img/manage/cloud/user-portal/role-permissions.png'),
             dark: useBaseUrl('/img/manage/cloud/user-portal/role-permissions.png'),
@@ -196,45 +228,51 @@ The console opens the new role, where you can [assign users to it](#assign-users
     />
 
 4. Select or clear permissions. To undo your changes, click **Reset**.
-5. Click **Update Permissions**.
+5. Click **Save changes**.
 
 ### Rename a role
 
-1. In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles**.
+1. In the **Integration User Portal** project, click **Roles** in the left navigation menu.
 2. Click the role.
-3. Click the role name, then enter the new name.
-4. Press **Enter**, or click outside the field.
-
-### Assign users to a role
-
-1. In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles**.
-2. Click the role.
-3. Click **Users**.
-4. Click **Assign Users**.
-
-    <ThemedImage
-        alt="Users view of a role with the Assign Users button"
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/user-portal/role-users.png'),
-            dark: useBaseUrl('/img/manage/cloud/user-portal/role-users.png'),
-        }}
-    />
-
-5. In **Users**, select the users to assign the role to.
-6. Click **Assign**.
-
-To remove a user from the role, click the **Unassign** icon next to the user, then click **Remove** in the confirmation dialog.
+3. Click the edit icon next to the role name, then enter the new name.
 
 ### Delete a role
 
-You cannot delete roles from the Choreo Cloud console. To do this, go to **User Management** > **Roles** in your Choreo Identity organization. The link on the **Admin** > **Settings** > **User Portal** > **Roles** tab opens this page. If you delete a system role, the **User Portal** page shows that the role is no longer in place. To recreate it, see [Repair the User Portal](check-and-repair.md#repair-the-user-portal). For more information, see [Choreo Identity documentation: Manage roles](https://wso2.com/identity-platform/docs/guides/users/manage-roles/).
+1. In the **Integration User Portal** project, click **Roles** in the left navigation menu.
+2. Next to the role, click the delete icon.
+
+    <ThemedImage
+        alt="Roles page with the delete icon next to the Finance role highlighted"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/delete-role.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/delete-role.png'),
+        }}
+    />
+
+## Deploy your changes
+
+Users, roles, and role assignments take effect in an environment only after you deploy them. Until then, the **Integration User Portal** project shows **You have changes that aren't in Development yet**.
+
+1. In the **Integration User Portal** project, click **Deploy to Development**.
+2. In the **Deploy through pipeline** panel, review the changes. Clear the check box of any change that you do not want to deploy.
+
+    <ThemedImage
+        alt="Deploy through pipeline panel with the project changes, the changes they need, and shared resources"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/deploy-changes.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/deploy-changes.png'),
+        }}
+    />
+
+3. Click **Deploy changes to Development**.
+
+To see the deployed version of each environment, click **Deployment pipeline** in the left navigation menu.
 
 ## Add scopes from your own APIs
 
 You can give User Portal users the scopes of your own APIs. To do this:
 
-1. In your Choreo Identity organization, create an API resource with the scopes, and authorize the User Portal application for those scopes. See [Choreo Identity documentation: API authorization](https://wso2.com/identity-platform/docs/guides/authorization/api-authorization/api-authorization/).
-2. In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles**. Then [create a role](#create-a-role) or [change the permissions of a role](#change-the-permissions-of-a-role), and select the scopes under the **Custom API** group.
-3. [Assign the role to users](#assign-users-to-a-role).
+1. In your Choreo Identity Platform organization, create an API resource with the scopes, and authorize the User Portal application for those scopes. See [Choreo Identity Platform documentation: API authorization](https://wso2.com/identity-platform/docs/guides/authorization/api-authorization/api-authorization/).
+2. In the **Integration User Portal** project, [create a role](#create-a-role) or [change the permissions of a role](#change-the-permissions-of-a-role), and select the scopes under the **Custom API** group.
+3. [Assign the role to users](#assign-roles-to-a-user).
 
-You cannot add these scopes to the system roles.

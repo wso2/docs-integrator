@@ -18,10 +18,10 @@ After you [sign in to the User Portal](sign-in-to-user-portal.md), you see the i
 
 ## Find an integration
 
-The **Integrations** tab shows the integrations published to you. To narrow the list, search by name, description, or project, or click the filter icon to filter by type or project.
+The **Overview** page shows the integrations published to you under **Your Integrations**. To see the integrations of one type, in the left navigation menu, under **Integrations**, click **AI Agents** or **Automations**.
 
 <ThemedImage
-    alt="Integrations tab of the User Portal with an AI agent and an automation"
+    alt="Overview page of the User Portal with an automation under Your Integrations"
     sources={{
         light: useBaseUrl('/img/manage/cloud/user-portal/integration-list.png'),
         dark: useBaseUrl('/img/manage/cloud/user-portal/integration-list.png'),
@@ -42,14 +42,11 @@ On the **Integrations** tab, find the AI agent and click **Chat**. The chat pane
 
 ## Run an automation
 
-1. On the **Integrations** tab, find the automation and click **Execute**. For an automation that runs on a schedule, the button is **Execute Now**.
+1. Click the automation on the **Overview** page or the **Automations** page.
 
-    The automation panel opens on the right. It shows the following:
+    The automation page shows whether the automation runs on a schedule, and its **Runs**.
 
-    - **Last run**: When the automation last ran and whether it succeeded, failed, or is still running. If it never ran, the panel shows **No previous runs**.
-    - **Next run**: When the automation runs next and its schedule. If it does not run on a schedule, the panel shows **Not scheduled**.
-
-2. If the automation takes runtime arguments, the panel shows a form. Enter a value for each field. Required fields are marked with an asterisk (`*`).
+2. If the automation takes runtime arguments, the page shows a form. Enter a value for each field. Required fields are marked with an asterisk (`*`).
 
     <ThemedImage
         alt="Automation panel in the User Portal with a form for the automation's runtime arguments"
@@ -59,6 +56,14 @@ On the **Integrations** tab, find the AI agent and click **Chat**. The chat pane
         }}
     />
 
-3. Click **Execute**. The button is available after you fill in every required field. If you do not have permission to run the automation, the button is disabled.
+3. Click **Run**.
 
-The panel closes, and the automation runs on its latest deployment track.
+The run appears under **Runs**, with its status, start time, duration, and run ID.
+
+<ThemedImage
+    alt="Automation page in the User Portal with the Run button and a succeeded run under Runs"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/automation-run.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/automation-run.png'),
+    }}
+/>
