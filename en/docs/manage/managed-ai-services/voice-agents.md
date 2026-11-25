@@ -258,10 +258,10 @@ Choreo Cloud creates a new integration of type **Voice Agent** in the project, n
     }}
 />
 
-Open the voice agent and wait until the **Development** card on its overview page shows **Active**. The voice agent has **Development**, **Stage**, and **Production** cards. Each card has its own **Voice Tester**, and **How to Connect** shows how to connect a client to that environment.
+Open the voice agent and wait until the **Development** card on its overview page shows **Active**. The voice agent has **Development**, **Staging**, and **Production** cards. Each card has its own **Voice Tester**, and **How to Connect** shows how to connect a client to that environment.
 
 <ThemedImage
-    alt="Voice agent overview with the Development environment Active and its Voice Tester, and the Stage and Production cards"
+    alt="Voice agent overview with the Development environment Active and its Voice Tester, and the Staging and Production cards"
     sources={{
         light: useBaseUrl('/img/manage/cloud/voice-agents/voice-agent-development-active.png'),
         dark: useBaseUrl('/img/manage/cloud/voice-agents/voice-agent-development-active.png'),
@@ -270,7 +270,7 @@ Open the voice agent and wait until the **Development** card on its overview pag
 
 ## Test the voice agent
 
-Click **Start Session** in the **Voice Tester** on the **Development** card, or open the tester from **Test** > **Voice Agent** in the voice agent's left navigation. The **Test** page has an environment selector next to **Version**.
+Click **Start Session** in the **Voice Tester** on the **Development** card, or open the tester from **Test** > **Voice Agent** in the voice agent's left navigation. The **Test** page has an environment selector above the tester.
 
 <ThemedImage
     alt="Voice Agent Tester on the Test page with the Development environment selected"
@@ -283,6 +283,12 @@ Click **Start Session** in the **Voice Tester** on the **Development** card, or 
 1. Click **Start Session** and allow microphone access when the browser asks. The tester shows **LIVE** and **Conversation Active** with *Speak into your microphone. The agent is listening and responding.*
 2. Speak to the agent. The tester shows the transcript of what you say and the agent's replies, and you hear the agent's reply.
 3. Click **Stop Session** to end the conversation.
+
+{/* TODO(v3): steps 1-2 and the voice-tester-session.png screenshot are unverified
+    this pass - the browser session used to re-verify this page has no real
+    microphone, so it could reach "Connecting" (LiveKit connection confirmed
+    live via console logs: connecting -> connected) but not a live
+    conversation. Re-verify with a browser that has mic access. */}
 
 For the customer support example, try:
 
@@ -300,7 +306,7 @@ For the customer support example, try:
 
 ## Promote to production
 
-When you're ready to use the voice agent beyond Development, click **Promote** on the voice agent's overview page to promote it to the next environment (**Stage**, then **Production**). Wait until the target environment's card shows **Active**, then test it with that card's **Voice Tester**.
+When you're ready to use the voice agent beyond Development, click **Promote** on the voice agent's overview page to promote it to the next environment (**Staging**, then **Production**). Wait until the target environment's card shows **Active**, then test it with that card's **Voice Tester**.
 
 ## Troubleshooting
 
