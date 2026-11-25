@@ -51,6 +51,34 @@ Scaling parameter changes can take a few minutes to propagate, as the replicas a
 To run exactly `3` replicas at all times, turn on HPA and set both **Min replicas** and **Max replicas** to `3`.
 :::
 
+## Set container resource limits
+
+Each environment's **Operate** > **Containers** page shows the resource allocation for the integration's container.
+
+<ThemedImage
+    alt="Containers page showing the main container's image, CPU request/limit, and Memory request/limit"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/containers.png'),
+        dark: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/containers.png'),
+    }}
+/>
+
+To change it:
+
+1. Click **Edit**.
+2. Drag the **CPU request / limit** and **Memory request / limit** sliders to set each value. The request is the amount reserved for the container; the limit is the maximum it can use before being throttled (CPU) or restarted (memory).
+3. Choose an **Image pull policy**: **Always** re-pulls the image on every pod restart, and **If not present** only pulls it if it isn't already cached on the node.
+
+    <ThemedImage
+        alt="Edit container form with CPU and Memory request/limit sliders and the Image pull policy options"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/containers-edit.png'),
+            dark: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/containers-edit.png'),
+        }}
+    />
+
+4. Click **Save changes**.
+
 ## What's next
 
 - [Environments](../environments/environments.md) — Organize your integration lifecycle with multiple environments.
