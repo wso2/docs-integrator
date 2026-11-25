@@ -32,9 +32,9 @@ The prebuilt integrations catalog is available in Choreo Cloud, and you can also
 
 A working Choreo Integrator environment.
 
-<PrereqCard icon="cloud" title="Choreo Cloud setup" href="/get-started/setup">
-  Sign up and launch Choreo Integrator in the browser-based cloud editor.
-</PrereqCard>
+<div style={{gridColumn: '1 / -1', minWidth: 0}}>
+<PrereqCard icon="cloud" title="Choreo Cloud setup" href="/get-started/setup">Sign up and launch Choreo Integrator in the browser-based cloud editor.</PrereqCard>
+</div>
 
 </Prerequisites>
 

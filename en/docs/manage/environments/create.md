@@ -11,10 +11,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Create an Environment
 
-Choreo Integration provides **Development** and **Production** environments by default. You can create additional environments, such as a staging or regional environment, to match your release pipeline.
+Every organization starts with a single default environment, named **development**. You can create additional environments, such as a staging or production environment, to match your release pipeline.
 
 :::info
-Free-tier organizations can have a maximum of three environments.
+Creating additional environments requires the **Growth** or **Enterprise** plan.
 :::
 
 ## Prerequisites
@@ -24,15 +24,15 @@ Free-tier organizations can have a maximum of three environments.
 ## Create an environment
 
 1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
-2. In the top navigation menu, click the **Organization** list and select your organization. This opens the organization home page.
-3. In the left navigation menu under **Admin**, click **Environments**.
-4. Click **+ Create**. This opens the environment creation page.
+2. Open the 9-dot app switcher and click **Settings** under **Manage**.
+3. In the left navigation under **Infrastructure**, click **Environments**.
+4. Click **+ Create Environment**.
 
     <ThemedImage
-        alt="Create environment page"
+        alt="Environments page with the Create Environment button highlighted"
         sources={{
-            light: useBaseUrl('/img/manage/cloud/environments/create-environment/create-environment-page.png'),
-            dark: useBaseUrl('/img/manage/cloud/environments/create-environment/create-environment-page.png'),
+            light: useBaseUrl('/img/manage/cloud/environments/create-environment/environments-list.png'),
+            dark: useBaseUrl('/img/manage/cloud/environments/create-environment/environments-list.png'),
         }}
     />
 
@@ -40,26 +40,34 @@ Free-tier organizations can have a maximum of three environments.
 
     | Field | Description |
     |---|---|
-    | **Environment Name** | A display name for the environment. For example, `Staging` or `US East Production`. |
-    | **Data Plane** | The data plane on which this environment runs. Select from the available data planes configured for your organization. |
-    | **DNS Prefix** | A prefix used to construct endpoint URLs for integrations in this environment. |
-    | **Mark as Production** | Select this checkbox if the environment should be treated as a production environment. |
-
-    :::tip
-    You can mark multiple environments as production. This is useful for multi-region deployments where you maintain independent production environments in different regions.
-    :::
-
-6. Click **+ Create**.
+    | **Name** | A unique identifier for the environment. Cannot be changed after creation. |
+    | **Display name** | The name shown in the console. |
+    | **Description** | Optional. A short description of the environment's purpose. |
+    | **Critical environment** | Turn this on if the environment is used for production-grade deployments and requires greater care. |
 
     <ThemedImage
-        alt="Environment creating"
+        alt="Create Environment form filled in for a new Staging environment"
         sources={{
-            light: useBaseUrl('/img/manage/cloud/environments/create-environment/environment-creating.png'),
-            dark: useBaseUrl('/img/manage/cloud/environments/create-environment/environment-creating.png'),
+            light: useBaseUrl('/img/manage/cloud/environments/create-environment/create-environment-form.png'),
+            dark: useBaseUrl('/img/manage/cloud/environments/create-environment/create-environment-form.png'),
         }}
     />
 
+    :::tip
+    You can mark multiple environments as critical. This is useful for multi-region deployments where you maintain independent production environments in different regions.
+    :::
+
+6. Click **Create**.
+
 The new environment is created and available for use across projects in your organization.
+
+<ThemedImage
+    alt="Staging environment overview page immediately after creation"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/create-environment/environment-created.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/create-environment/environment-created.png'),
+    }}
+/>
 
 ## What's next
 

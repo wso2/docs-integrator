@@ -84,11 +84,9 @@ You land on the **Overview** page of the **Default Project** in Choreo Integrati
     }}
 />
 
-{/* TODO(v3): cloud-editor-setup.png below is still the old shot; the provisioning screen has not been re-captured. */}
-
 ## Step 5: Open the cloud editor
 
-On the project overview page, click **Open Cloud Editor**. Choreo Integrator provisions a cloud editor instance for you, showing progress through each setup stage.
+On the project overview page, click **Create integration**, then click **Open Cloud Editor** in the **Create on Cloud** panel. Choreo Integrator provisions a cloud editor instance for you, showing progress through several setup stages.
 
 <ThemedImage
     alt="Cloud editor instance being created"

@@ -11,54 +11,44 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Scale Integrations
 
-Choreo Integration scales integrations with horizontal autoscaling based on resource consumption. Autoscaling can be configured independently per environment.
+Choreo Integration scales integrations with horizontal autoscaling (HPA) based on CPU and, optionally, memory usage. Scaling is configured independently per environment, from the integration's **Operate** > **Scaling** page.
 
-:::info
-Autoscaling is only available in paid plans. In the free tier, integrations run in single-replica, low-availability mode. You will see a view similar to below if you are on the free tier.
+By default, an integration runs a fixed number of replicas (no autoscaling) in each environment. Turning on HPA opens the **Scaling configuration** section.
 
 <ThemedImage
-    alt="Scaling view in free tier"
+    alt="Scaling page with HPA selected, showing Min/Max replicas, CPU and Memory thresholds, and the Replicas and usage tables"
     sources={{
-        light: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/free-user-scaling-view.png'),
-        dark: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/free-user-scaling-view.png'),
+        light: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/scaling-configuration.png'),
+        dark: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/scaling-configuration.png'),
     }}
 />
 
+:::info
+The console also shows a **Scale to zero** option alongside HPA. It isn't available yet.
 :::
 
 ## Autoscale replicas
 
-Horizontal autoscaling adjusts the number of running replicas based on CPU and memory usage. The platform monitors resource consumption across all active replicas and scales up or down to keep usage within the thresholds you define.
+1. On the **Scaling** page, click the **HPA** card and confirm turning on autoscaling.
+2. Configure the following parameters:
 
-<!-- TODO: Add screenshot of the autoscaling configuration view -->
+    | Parameter | Description |
+    |---|---|
+    | **Min replicas** | The minimum number of replicas to keep running at all times. Can't go below `1`. |
+    | **Max replicas** | The maximum number of replicas to scale up to. Capped at `5`. |
+    | **CPU threshold** | Optional, independently toggleable. The average CPU utilization across all running replicas. When this threshold is reached, the platform scales up until utilization falls below it. |
+    | **Memory threshold** | Optional, independently toggleable. The average memory usage across all running replicas. The platform scales up when this threshold is reached, until usage falls below it. |
 
-Configure the following parameters to control autoscaling:
+3. Click **Update** to save your changes.
 
-| Parameter | Description |
-|---|---|
-| **Min replicas** | The minimum number of replicas to keep running at all times. A value of `2` or higher is recommended for high availability. |
-| **Max replicas** | The maximum number of replicas to scale up to. In the cloud data plane, this is capped at `5`. |
-| **CPU threshold** | The average CPU utilization across all running replicas. When this threshold is reached, the platform scales up until utilization falls below it. |
-| **Memory threshold** | The average memory usage across all running replicas. The platform scales up when this threshold is reached, until usage falls below it. |
-
-<ThemedImage
-    alt="Scaling view in paid tier"
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/paid-user-scaling-view.png'),
-        dark: useBaseUrl('/img/manage/cloud/configurations/scaling-resource-limits/paid-user-scaling-view.png'),
-    }}
-/>
+The **Replicas** table below shows each running pod's status, restarts, and last activity, and the **CPU usage** / **Memory usage** cards show current utilization against the integration's allocated resources.
 
 :::tip
-Scaling parameter changes can take some time to propagate. The console may not reflect updates immediately after saving.
+Scaling parameter changes can take a few minutes to propagate, as the replicas are replaced.
 :::
 
-:::info Run a fixed number of replicas
-To run exactly `3` replicas at all times, set both **Min replicas** and **Max replicas** to `3`.
-:::
-
-:::warning
-Setting both **Min replicas** and **Max replicas** to `0` suspends the deployment. Although setting only the minimum to `0` is allowed, the platform will not automatically scale below `1` replica during low usage.
+:::info Run a fixed number of replicas with HPA
+To run exactly `3` replicas at all times, turn on HPA and set both **Min replicas** and **Max replicas** to `3`.
 :::
 
 ## What's next

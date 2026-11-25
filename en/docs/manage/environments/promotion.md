@@ -6,32 +6,82 @@ keywords: [choreo integrator, promote integration, environments, development, pr
 slug: /manage/environments/promotion
 ---
 
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Promote an Integration
 
-Promoting an integration moves it from one environment to the next in your pipeline, for example from Development to Production. Each promotion lets you supply environment-specific configuration values so the integration runs correctly in the target environment.
+Promoting an integration moves its current deployment to the next environment in its project's pipeline, for example from Development to Staging.
 
 ## Promote to the next environment
 
-1. Open your integration from the project home.
-2. On the integration overview page, locate the environment card you want to promote from.
+A **Promote** button appears below an environment card once that environment has an active deployment, as long as the pipeline has a next environment to promote to. With only the default `development` environment, there's nothing to promote to; [create an additional environment](./create.md), [add it to a pipeline](./configure-promotion-pipelines.md), and assign that pipeline to the project first.
+
+1. Open your integration and go to its **Overview** or **Deploy** page.
+2. Locate the environment card you want to promote from.
 3. Click **Promote** below that environment card.
-4. If this is the first time you are promoting to the target environment, choose how to handle runtime configurations:
 
-    | Option | When to use |
-    |---|---|
-    | **Use development configurations** | The target environment can share the same configuration values as the source environment. |
-    | **Choose new configurations** | The target environment requires different values, such as a different database URL or credentials. |
+    <ThemedImage
+        alt="Deploy page with Development and Staging active, and Promote available on Staging to promote to Production"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/environments/promotion/deploy-promote-staging.png'),
+            dark: useBaseUrl('/img/manage/cloud/environments/promotion/deploy-promote-staging.png'),
+        }}
+    />
 
-5. Click **Next**.
-6. If you selected **Choose new configurations**, enter the values for the target environment.
-7. Click **Promote**.
+The same build is deployed directly to the target environment — there's no intermediate confirmation step. The target environment's card shows **In progress** while the deployment completes, then **Active** once it's live and serving its own endpoint URLs.
 
-The integration is deployed to the target environment. Once the deployment completes, the target environment card becomes active and displays the endpoint URLs for that environment.
+<ThemedImage
+    alt="Deploy page with Development, Staging, and Production all active after promoting through the full pipeline"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/promotion/deploy-fully-promoted.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/promotion/deploy-fully-promoted.png'),
+    }}
+/>
+
+Once a build is already deployed to an environment, **Promote** to that environment is disabled ("Already deployed in target environment") until you deploy a newer build.
 
 :::info
-After the first promotion, subsequent promotions to the same environment use the configuration values already set for that environment. You can update them at any time from the **Configure** button on the environment card.
+To set configurable values, environment variables, or files for the target environment, use its own [**Configure**](../configurations/runtime-configurations.md#configure-an-integration) button or [**Configs & secrets**](../configurations/runtime-configurations.md#configs--secrets) page once it's deployed — promoting doesn't prompt for them.
 :::
+
+Once a pipeline with more than one environment is configured, the same **Configure**, **Promote**, and **Stop** / **Start** controls shown above are also available directly on the integration's **Overview** page — scroll down to see every environment's card, not just the Deploy page's.
+
+<ThemedImage
+    alt="Integration overview page scrolled down to the Staging and Production cards, with their Configure, Stop/Start, and Promote buttons highlighted"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/promotion/overview-staging-production.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/promotion/overview-staging-production.png'),
+    }}
+/>
+
+## Demote an environment
+
+There's no separate "demote" action. To take a deployment out of an environment, click **Stop** on that environment's card.
+
+<ThemedImage
+    alt="Deploy page with the Stop button highlighted on the Production environment card"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/promotion/stop-button.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/promotion/stop-button.png'),
+    }}
+/>
+
+The button shows **Stopping...** while it takes effect, then the card's status changes to **Suspended** and the button changes to **Start**, which you can click to redeploy the same build later.
+
+<ThemedImage
+    alt="Production environment card showing Suspended status after clicking Stop"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/promotion/suspended.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/promotion/suspended.png'),
+    }}
+/>
 
 ## What's next
 
 - [Runtime configurations](../configurations/runtime-configurations.md) — Update configuration values for a specific environment after promotion.
+
+{/* TODO(v3): this integration has no configurables (Configurables: 0), so it's
+    unverified whether promoting one with configurable values prompts for them
+    before deploying, or always just carries the source values over silently.
+    Re-verify with an integration that has configurables. */}
