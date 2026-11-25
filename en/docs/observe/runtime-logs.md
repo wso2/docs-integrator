@@ -57,6 +57,16 @@ Depending on the integration type, you can also access runtime logs from the Int
 - **Event and file integrations** — Latest logs are visible directly on the environment card without navigating to the Observability section.
 - **Integration as APIs and AI Agents** - Each environment card has a **View Logs** button that opens logs filtered to that specific environment and integration version.
 
+Clicking **View logs** opens the same log viewer in a side panel, already scoped to that environment:
+
+<ThemedImage
+    alt="Runtime logs side panel opened from the Development environment card, scoped to that environment"
+    sources={{
+        light: useBaseUrl('/img/observe/cloud/runtime-logs/view-logs-panel.png'),
+        dark: useBaseUrl('/img/observe/cloud/runtime-logs/view-logs-panel.png'),
+    }}
+/>
+
 Each log line shows its timestamp, level, environment, and a one-line summary; gateway log lines also carry a **GATEWAY** badge, the HTTP status, and the request duration. Click a line to expand it and see its full set of fields.
 
 <ThemedImage
