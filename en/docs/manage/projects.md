@@ -71,6 +71,15 @@ Removing a project is permanent. All history within the project is deleted and c
     />
 
     Once the project is empty, click **Settings**.
+
+    <ThemedImage
+        alt="Empty project home page with the Settings button highlighted in the top right"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/projects/project-home-empty-settings.png'),
+            dark: useBaseUrl('/img/manage/cloud/projects/project-home-empty-settings.png'),
+        }}
+    />
+
 2. Scroll to the **Delete project** card and click **Delete project**.
 
     <ThemedImage
