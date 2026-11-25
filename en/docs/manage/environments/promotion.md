@@ -42,8 +42,18 @@ The same build is deployed directly to the target environment — there's no int
 Once a build is already deployed to an environment, **Promote** to that environment is disabled ("Already deployed in target environment") until you deploy a newer build.
 
 :::info
-To set configurable values, environment variables, or files for the target environment, use its own **Configure** button or **Configs & secrets** page once it's deployed — promoting doesn't prompt for them.
+To set configurable values, environment variables, or files for the target environment, use its own [**Configure**](../configurations/runtime-configurations.md#configure-an-integration) button or [**Configs & secrets**](../configurations/runtime-configurations.md#configs--secrets) page once it's deployed — promoting doesn't prompt for them.
 :::
+
+Once a pipeline with more than one environment is configured, the same **Configure**, **Promote**, and **Stop** / **Start** controls shown above are also available directly on the integration's **Overview** page — scroll down to see every environment's card, not just the Deploy page's.
+
+<ThemedImage
+    alt="Integration overview page scrolled down to the Staging and Production cards, with their Configure, Stop/Start, and Promote buttons highlighted"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/promotion/overview-staging-production.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/promotion/overview-staging-production.png'),
+    }}
+/>
 
 ## Demote an environment
 
