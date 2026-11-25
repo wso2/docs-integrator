@@ -21,7 +21,7 @@ If your integration is exposed as an API, see [API Management](api-management/ap
 1. Log in to [Choreo Cloud](https://console.cloud.choreolabs.com). The default project opens automatically.
 2. On the project home, all integrations within the project are listed.
     <ThemedImage
-        alt="Project Overview"
+        alt="Project home page listing its integrations with their type and last-updated time"
         sources={{
             light: useBaseUrl('/img/deploy/cloud/deploy-from-editor/project-page-wso2-cloud.png'),
             dark: useBaseUrl('/img/deploy/cloud/deploy-from-editor/project-page-wso2-cloud.png'),
@@ -29,7 +29,7 @@ If your integration is exposed as an API, see [API Management](api-management/ap
     />
 3. Click an integration to open its overview page, where you can view its build status, deployment status, and configuration options.
     <ThemedImage
-        alt="Integration Overview"
+        alt="Integration overview page showing its latest build, Development environment, endpoint, and security"
         sources={{
             light: useBaseUrl('/img/manage/cloud/integrations/integration-overview.png'),
             dark: useBaseUrl('/img/manage/cloud/integrations/integration-overview.png'),
@@ -46,15 +46,17 @@ Deployment lifecycle management options depend on the integration type.
 
 From the integration overview page, you can manage the schedule for each environment independently:
 
-- **Schedule**: Set a schedule to run the automation. You can use a cron expression or select from predefined options like hourly, daily, or weekly.
+- **Schedule**: Click **Schedule** on an environment card to set when the automation runs. Choose **By interval** (a number and a unit — minute, hour, day, week, or month) or **By cron** (a raw cron expression), then click **Update**.
 - **Edit schedule**: Modify the existing schedule.
 - **Stop schedule**: Disable the schedule without deleting the integration. You can still run the integration manually.
 
+{/* TODO(v3): the Edit schedule / Stop schedule controls are not verified against v3 - the
+    test organization's automation has no active schedule to inspect. Set one, confirm the
+    button labels, and re-shoot if they differ. */}
+
 ### Integration as API
 
-The deployment status for each environment is visible from the overview page, where you can stop and start the deployment for each environment.
-
-{/* TODO(v3): confirm the stop/start flow now that scale-to-zero is gone. */}
+Each environment card shows its status as **Active** or **Suspended**. Click **Stop** to suspend the deployment, or **Start** to bring a suspended one back. The status briefly shows **In progress** while the change applies.
 
 ### AI agent
 
@@ -74,7 +76,16 @@ From the integration overview page, you can update the integration's name, descr
 
 - **Name**: Click the integration name to edit it in place.
 - **Description**: Click the description text to edit it in place.
-- **Labels**: Click **+ Add Labels** to add one or more labels to the integration. You can filter by these labels in the project overview page.
+
+    <ThemedImage
+        alt="Integration overview page with the description field open for inline editing"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/integrations/edit-description.png'),
+            dark: useBaseUrl('/img/manage/cloud/integrations/edit-description.png'),
+        }}
+    />
+
+- **Labels**: Click **Add labels**, enter a label, and press Enter to add it. Click **Save** to apply your changes.
 
 ## Delete an integration
 
