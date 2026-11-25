@@ -41,7 +41,7 @@ Click the organization name in the top navigation to open the organization overv
     The **Project handle** and the **Created** date are shown for reference and cannot be changed.
 
     <ThemedImage
-        alt="Project settings page showing the Project details card with name, description, deployment pipeline, and handle"
+        alt="Project settings page showing the Project details card after saving an updated description, with a confirmation banner"
         sources={{
             light: useBaseUrl('/img/manage/cloud/projects/manage-project.png'),
             dark: useBaseUrl('/img/manage/cloud/projects/manage-project.png'),
