@@ -146,12 +146,20 @@ The cloud editor creates a default integration for you, so you don't need to nam
 
 3. Set **Format** to **Text**.
 
+   <ThemedImage
+       alt="Configure On Create Handler panel with Format set to Text highlighted"
+       sources={{
+           light: useBaseUrl('/img/get-started/build-file-driven-integration/set-format-text.png'),
+           dark: useBaseUrl('/img/get-started/build-file-driven-integration/set-format-text.png'),
+       }}
+   />
+
 4. Keep the default **File Handling Options**. After processing a file, the integration moves it to the `/home/processed` folder on your server to prevent it from being processed again.
 
 5. Click **Save**.
 
    <ThemedImage
-       alt="Configure On Create Handler panel with Format set to Text and the default File Handling Options"
+       alt="Configure On Create Handler panel with the default File Handling Options and the Save button highlighted"
        sources={{
            light: useBaseUrl('/img/get-started/build-file-driven-integration/configure-on-create.png'),
            dark: useBaseUrl('/img/get-started/build-file-driven-integration/configure-on-create.png'),
@@ -210,9 +218,7 @@ The cloud editor creates a default integration for you, so you don't need to nam
 
 2. Using your FTP or SFTP client, upload a text file, such as `test.txt`, to the monitored folder.
 
-3. Wait up to a minute. The integration checks the folder every 60 seconds by default.
-
-4. Confirm the **Debug Console** shows a log line that ends with `message="New file received"`.
+3. Confirm the **Debug Console** shows a log line that ends with `message="New file received"`.
 
    <ThemedImage
        alt="Debug Console showing the New file received log line after a file is uploaded"
@@ -223,6 +229,8 @@ The cloud editor creates a default integration for you, so you don't need to nam
    />
 
 ## Step 6: Deploy to Choreo Cloud
+
+<br />
 
 To deploy your integration to Choreo Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 

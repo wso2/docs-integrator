@@ -272,6 +272,8 @@ The cloud editor creates a default integration for you, so you don't need to nam
 
 ## Step 8: Deploy to Choreo Cloud
 
+<br />
+
 To deploy your integration to Choreo Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 
 <div class="skip-ahead-card">
