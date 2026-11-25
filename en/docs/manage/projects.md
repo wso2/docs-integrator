@@ -19,7 +19,17 @@ Click the organization name in the top navigation to open the organization overv
 
 ## Edit a project
 
-1. From the project home, click **Settings**. The **Project settings** page opens with the project's details, which are shared across every Choreo Labs platform.
+1. From the project home, click **Settings**.
+
+    <ThemedImage
+        alt="Project home page with the Settings button highlighted in the top right"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/projects/project-home-settings.png'),
+            dark: useBaseUrl('/img/manage/cloud/projects/project-home-settings.png'),
+        }}
+    />
+
+    The **Project settings** page opens with the project's details, which are shared across every Choreo Labs platform.
 2. Update any of the editable fields:
 
     | Field | Description |
