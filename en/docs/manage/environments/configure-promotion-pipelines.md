@@ -80,13 +80,11 @@ When multiple pipelines are assigned to a project, you can choose which pipeline
 1. Open the integration and go to its **Deploy** page.
 2. Switch the active pipeline using the pipeline selector on the **Deploy** page.
 
-<ThemedImage
-    alt="Switch pipeline"
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/deploy-page-integration.png'),
-        dark: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/deploy-page-integration.png'),
-    }}
-/>
+{/* TODO(v3): removed the stale v2 screenshot here (deploy-page-integration.png).
+    The pipeline selector only appears when a project has more than one pipeline
+    assigned, which needs a second environment. The trial org used for these docs
+    can't create one (Growth/Enterprise plan required). Re-shoot once a second
+    environment and pipeline are available. */}
 
 ## What's next
 

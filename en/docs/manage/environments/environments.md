@@ -13,7 +13,7 @@ The Choreo Integration runs integrations in isolated environments within a data 
 
 ## How environments work
 
-The Choreo Cloud data plane provides two environments by default: **Development** and **Production**. Your organization can add more environments, such as a staging environment, if your release process requires additional stages.
+Every organization starts with a single default environment, **development**. [Create additional environments](./create.md), such as staging or production, if your release process requires more stages; this requires the Growth or Enterprise plan. Each environment can optionally be marked **critical**, for one used for production-grade deployments.
 
 Each project in your organization is associated with a subset of the available environments. For example:
 

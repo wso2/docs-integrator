@@ -12,6 +12,8 @@ Promoting an integration moves it from one environment to the next in your pipel
 
 ## Promote to the next environment
 
+A **Promote** button only appears on an environment card when the integration's pipeline has a next environment to promote to. With only the default `development` environment, there's nothing to promote to; [create an additional environment](./create.md) and add it to the pipeline first.
+
 1. Open your integration from the project home.
 2. On the integration overview page, locate the environment card you want to promote from.
 3. Click **Promote** below that environment card.
@@ -35,3 +37,8 @@ After the first promotion, subsequent promotions to the same environment use the
 ## What's next
 
 - [Runtime configurations](../configurations/runtime-configurations.md) — Update configuration values for a specific environment after promotion.
+
+{/* TODO(v3): steps 4-7 (the runtime-configuration choice dialog and the Promote
+    dialog itself) are unverified against the v3 console — the trial org used for
+    these docs has only one environment, so there's no next environment to promote
+    to. Re-verify and screenshot once a second environment is available. */}
