@@ -81,7 +81,35 @@ Update the promotion flow and click **Save Changes**. A pipeline's name cannot b
 
 ### Delete a pipeline
 
-On the **Deployment Pipelines** page, click the delete icon on the pipeline you want to remove.
+A pipeline can only be deleted once **no** project uses it — even a single project assigned to it is enough to block deletion. The delete icon is disabled in that case, with a tooltip explaining why; reassign every project using the pipeline to a different one first.
+
+<ThemedImage
+    alt="Deployment Pipelines page with a disabled delete icon and a tooltip explaining the pipeline can't be deleted because a project is using it"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/delete-pipeline-blocked.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/delete-pipeline-blocked.png'),
+    }}
+/>
+
+Once a pipeline is unused, click its delete icon.
+
+<ThemedImage
+    alt="Deployment Pipelines page with the delete icon highlighted on an unused pipeline"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/delete-pipeline-button.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/delete-pipeline-button.png'),
+    }}
+/>
+
+Type the pipeline's name to confirm, then click **Delete**. This is permanent.
+
+<ThemedImage
+    alt="Delete pipeline confirmation dialog with the pipeline name typed in to enable the Delete button"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/delete-pipeline-confirm.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/delete-pipeline-confirm.png'),
+    }}
+/>
 
 ## Assign a pipeline to a project
 
