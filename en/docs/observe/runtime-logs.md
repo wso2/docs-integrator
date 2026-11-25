@@ -19,15 +19,29 @@ All personally identifiable information (PII) is resolved at the frontend servic
 
 ## Access runtime logs
 
-For all integration types, go to **Observability** > **Runtime Logs** in the left navigation. This unified view is available at both the project and integration levels, and supports filtering and search across all log entries.
+The path is **Observe** > **Runtime Logs** in the left navigation, available at two levels:
 
-<ThemedImage
-    alt="Runtime logs page listing application and gateway log entries, with search, time range, and log type filters"
-    sources={{
-        light: useBaseUrl('/img/observe/cloud/runtime-logs/runtime-logs.png'),
-        dark: useBaseUrl('/img/observe/cloud/runtime-logs/runtime-logs.png'),
-    }}
-/>
+- **Project level** — Open your project, then go to **Observe** > **Runtime Logs**. This shows log entries from every integration in the project combined. Use the **All integrations** list at the top to narrow the view to a single integration.
+
+    <ThemedImage
+        alt="Project-level Runtime logs page with the All integrations selector"
+        sources={{
+            light: useBaseUrl('/img/observe/cloud/runtime-logs/runtime-logs-project.png'),
+            dark: useBaseUrl('/img/observe/cloud/runtime-logs/runtime-logs-project.png'),
+        }}
+    />
+
+- **Integration level** — Open your integration, then go to **Observe** > **Runtime Logs**. This shows only that integration's log entries, across all of its environments.
+
+    <ThemedImage
+        alt="Integration-level Runtime logs page showing application and gateway log entries across all environments"
+        sources={{
+            light: useBaseUrl('/img/observe/cloud/runtime-logs/runtime-logs-integration.png'),
+            dark: useBaseUrl('/img/observe/cloud/runtime-logs/runtime-logs-integration.png'),
+        }}
+    />
+
+Both views support the same filtering and search described below.
 
 Depending on the integration type, you can also access runtime logs from the Integration Overview page:
 
