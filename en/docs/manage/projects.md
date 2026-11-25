@@ -19,23 +19,31 @@ Click the organization name in the top navigation to open the organization overv
 
 ## Edit a project
 
-1. From the project home, click **Settings**.
-2. Update **Project name** or **Description (optional)** as needed.
+1. From the project home, click **Settings**. The **Project settings** page opens with the project's details, which are shared across every Choreo Labs platform.
+2. Update any of the editable fields:
+
+    | Field | Description |
+    |---|---|
+    | **Project name** | The display name shown in the console. |
+    | **Description (optional)** | A short summary of the project's purpose. |
+    | **Deployment pipeline** | The pipeline the project's integrations are promoted through. See [Configure promotion pipelines](./environments/configure-promotion-pipelines.md). |
+
+    The **Project handle** and the **Created** date are shown for reference and cannot be changed.
 
     <ThemedImage
-        alt="Project settings page showing the Project details card"
+        alt="Project settings page showing the Project details card with name, description, deployment pipeline, and handle"
         sources={{
             light: useBaseUrl('/img/manage/cloud/projects/manage-project.png'),
             dark: useBaseUrl('/img/manage/cloud/projects/manage-project.png'),
         }}
     />
 
-3. Click **Save changes**.
+3. Click **Save changes**. To abandon your edits, click **Discard changes**.
 
 ## Remove a project
 
 :::warning
-A project cannot be deleted without deleting all its integrations first.
+A project must be empty before it can be deleted. Remove every item it holds first, including integrations and any APIs they exposed.
 :::
 
 :::danger
@@ -46,24 +54,29 @@ Removing a project is permanent. All history within the project is deleted and c
 2. Scroll to the **Delete project** card and click **Delete project**.
 
     <ThemedImage
-        alt="Delete project card on the project settings page"
+        alt="Delete project card at the bottom of the project settings page"
         sources={{
             light: useBaseUrl('/img/manage/cloud/projects/delete-project-button.png'),
             dark: useBaseUrl('/img/manage/cloud/projects/delete-project-button.png'),
         }}
     />
 
-3. Enter the project name to confirm, then confirm the deletion.
-
-    {/* TODO(v3): confirmation dialog not re-captured - opening it risks deleting the project. Verify the button label and re-shoot. */}
+3. If the project still holds anything, Choreo Cloud lists what remains and blocks the deletion. Close the dialog, remove each item listed, and start again.
 
     <ThemedImage
-        alt="Confirmation dialog for removing a project"
+        alt="Delete project dialog listing the integrations and APIs that must be removed before the project can be deleted"
         sources={{
             light: useBaseUrl('/img/manage/cloud/projects/delete-project-confirm.png'),
             dark: useBaseUrl('/img/manage/cloud/projects/delete-project-confirm.png'),
         }}
     />
+
+    {/* TODO(v3): the confirmation step for an empty project is not captured - every
+        project in the test organization still holds items, and emptying one to reach
+        that dialog would destroy real integrations. Verify whether it asks for the
+        project name and re-shoot. */}
+
+4. Once the project is empty, confirm the deletion.
 
 The project and all its contents are permanently deleted.
 
