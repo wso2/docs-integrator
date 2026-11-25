@@ -59,7 +59,25 @@ The new pipeline is added to the list on the **Deployment Pipelines** page.
 
 ### Edit a pipeline
 
-On the **Deployment Pipelines** page, click the edit icon on the pipeline you want to modify. Update the promotion flow and click **Save Changes**. A pipeline's name cannot be changed after creation.
+On the **Deployment Pipelines** page, click the edit icon on the pipeline you want to modify.
+
+<ThemedImage
+    alt="Deployment Pipelines page with the edit icon highlighted on the dev-staging-prod pipeline"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/edit-pipeline-button.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/edit-pipeline-button.png'),
+    }}
+/>
+
+Update the promotion flow and click **Save Changes**. A pipeline's name cannot be changed after creation.
+
+<ThemedImage
+    alt="Edit Pipeline form showing the Name field disabled and the three-stage promotion flow"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/edit-pipeline-form.png'),
+        dark: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/edit-pipeline-form.png'),
+    }}
+/>
 
 ### Delete a pipeline
 
