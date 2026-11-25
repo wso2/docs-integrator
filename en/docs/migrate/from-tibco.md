@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Migrate from TIBCO BusinessWorks
-description: Migrate TIBCO BusinessWorks integrations to WSO2 Integrator, and how TIBCO concepts map to their WSO2 Integrator equivalents.
+description: Migrate TIBCO BusinessWorks integrations to Choreo Integrator, and how TIBCO concepts map to their Choreo Integrator equivalents.
 slug: /migrate/from-tibco
 ---
 
@@ -13,29 +13,29 @@ import TabAwareToc from '@site/src/components/TabAwareToc';
 
 # Migrate from TIBCO BusinessWorks
 
-TIBCO BusinessWorks builds an integration as a process definition, assembled in Business Studio and stored as XML. WSO2 Integrator describes the same integration as real Ballerina code you can compile. An automated migration tool does most of that conversion for you. This page covers running it, and how TIBCO concepts map to their WSO2 Integrator equivalents.
+TIBCO BusinessWorks builds an integration as a process definition, assembled in Business Studio and stored as XML. Choreo Integrator describes the same integration as real Ballerina code you can compile. An automated migration tool does most of that conversion for you. This page covers running it, and how TIBCO concepts map to their Choreo Integrator equivalents.
 
 **Prerequisites:**
-- WSO2 Integrator installed (wizard path), **or** Ballerina installed with `bal` on your PATH (CLI path)
+- Choreo Integrator installed (wizard path), **or** Ballerina installed with `bal` on your PATH (CLI path)
 
 ## Overview
 
-The migration tool converts TIBCO BusinessWorks process definitions to Ballerina code. It handles process flows, activities, transitions, shared resources, error handling configurations, and more, using either the WSO2 Integrator migration wizard or the `bal migrate-tibco` CLI command. Both paths produce a migration report; the wizard additionally offers an optional AI enhancement pass that resolves unmapped elements automatically.
+The migration tool converts TIBCO BusinessWorks process definitions to Ballerina code. It handles process flows, activities, transitions, shared resources, error handling configurations, and more, using either the Choreo Integrator migration wizard or the `bal migrate-tibco` CLI command. Both paths produce a migration report; the wizard additionally offers an optional AI enhancement pass that resolves unmapped elements automatically.
 
 ## Run the migration tool
 
 <TabAwareToc />
 <Tabs>
-<TabItem value="ui" label="WSO2 Integrator" default>
+<TabItem value="ui" label="Choreo Integrator" default>
 
-The migration wizard guides you through a 5-step process to convert your TIBCO BusinessWorks project(s) into a WSO2 Integrator project.
+The migration wizard guides you through a 5-step process to convert your TIBCO BusinessWorks project(s) into a Choreo Integrator project.
 
 ### Prerequisite
-- Ensure WSO2 Integrator is installed and available on your system.
+- Ensure Choreo Integrator is installed and available on your system.
 
 ### Step 1: Configure source
 
-1. Open WSO2 Integrator, click **More Actions**, and select **Migrate Integrations from Other Vendors**.
+1. Open Choreo Integrator, click **More Actions**, and select **Migrate Integrations from Other Vendors**.
 
    <ThemedImage
        alt="Migrate Integrations from Other Vendors option"
@@ -125,7 +125,7 @@ The wizard runs the automated rule-based migration and displays progress in the 
 After the migration completes successfully, the **AI Enhancement (Recommended)** section appears. Select one of the following:
 
 - **Enhance with AI** — AI automatically resolves unmapped elements, fixes build errors, and improves migration quality.
-- **Skip for Now – Enhance Later** — Keep the project as-is. You can trigger AI enhancement later from [WSO2 Integrator Copilot](../editor/copilot/copilot.md).
+- **Skip for Now – Enhance Later** — Keep the project as-is. You can trigger AI enhancement later from [Choreo Integrator Copilot](../editor/copilot/copilot.md).
 
 Click **Start AI Enhancement** to proceed to Step 5, or if you chose to skip, click **Open Project** to open the migrated project or **Done** to exit.
 
@@ -143,7 +143,7 @@ This step runs only if you selected **Enhance with AI** in Step 4.
 
 The wizard first checks whether you are signed in. If not, a sign-in panel appears:
 
-1. Click **Login using WSO2 Integration Platform** to sign in using SSO, or use one of the alternative options:
+1. Click **Login using Choreo Integration** to sign in using SSO, or use one of the alternative options:
    - **Enter your Anthropic API key**
    - **Enter your AWS Bedrock credentials**
    - **Enter your Google Vertex AI credentials**
@@ -218,7 +218,7 @@ bal migrate-tibco /path/to/projects-directory -o /path/to/output-dir -m -d
 
 For more CLI options and usage, see the [official migration tool documentation](https://central.ballerina.io/wso2/tool_migrate_tibco/latest).
 
-> **Note:** AI enhancement is available only in the WSO2 Integrator wizard, not in the CLI.
+> **Note:** AI enhancement is available only in the Choreo Integrator wizard, not in the CLI.
 
 </TabItem>
 </Tabs>
@@ -234,7 +234,7 @@ Open `migration_report.html` and work through any non-migratable items. If you o
 
 1. **Unsupported activities**: Implement the equivalent Ballerina logic manually. Refer to the [concept mapping table](#concept-mapping) below.
 2. **Custom XSLT/XPath transformations**: Replace with Ballerina query expressions or use the Visual Data Mapper.
-3. **Complex Mapper Activity expressions**: Open the Visual Data Mapper in the WSO2 Integrator editor and redraw the mappings.
+3. **Complex Mapper Activity expressions**: Open the Visual Data Mapper in the Choreo Integrator editor and redraw the mappings.
 
 ### Configure credentials
 
@@ -256,7 +256,7 @@ If the source TIBCO project had tests, the migration tool converts them to Balle
 bal test
 ```
 
-You can also use the **Try-It** tool built into WSO2 Integrator to send requests to your HTTP service interactively without leaving the editor. Open the service file, click **Try it**, and test each endpoint against the responses returned by the original TIBCO application.
+You can also use the **Try-It** tool built into Choreo Integrator to send requests to your HTTP service interactively without leaving the editor. Open the service file, click **Try it**, and test each endpoint against the responses returned by the original TIBCO application.
 
 ## Deploy
 
@@ -276,7 +276,7 @@ See [Deploy](../deploy-and-run/deploy-and-run.md) for Docker, Kubernetes, and cl
 
 ## Concept mapping
 
-| In TIBCO BusinessWorks | In WSO2 Integrator | Notes |
+| In TIBCO BusinessWorks | In Choreo Integrator | Notes |
 |---|---|---|
 | Process Definition | Service / Automation | HTTP-triggered processes become **services**; timer-triggered processes become **automations** |
 | Activity | Node in flow designer | Visual flow nodes map to activities |
@@ -296,17 +296,17 @@ See [Deploy](../deploy-and-run/deploy-and-run.md) for Docker, Kubernetes, and cl
 | Timer | Automation with schedule | `task:Listener` with cron or interval configuration |
 | Log Activity | `log:printInfo` / `log:printError` | Structured logging |
 | Engine | Ballerina runtime | JVM-based runtime; distributable as a standalone JAR |
-| Administrator | WSO2 Integrator editor + ICP | Development editor + Integration Control Plane for monitoring |
+| Administrator | Choreo Integrator editor + ICP | Development editor + Integration Control Plane for monitoring |
 
 ## Key differences
 
 ### Development model
 
-TIBCO BusinessWorks uses Eclipse-based Business Studio with XML process definition files. WSO2 Integrator uses a visual designer that is bidirectionally synced with Ballerina code. You can switch between the visual canvas and the code editor at any time; changes in one are instantly reflected in the other, with no separate export or import step.
+TIBCO BusinessWorks uses Eclipse-based Business Studio with XML process definition files. Choreo Integrator uses a visual designer that is bidirectionally synced with Ballerina code. You can switch between the visual canvas and the code editor at any time; changes in one are instantly reflected in the other, with no separate export or import step.
 
-| Aspect | TIBCO BusinessWorks | WSO2 Integrator |
+| Aspect | TIBCO BusinessWorks | Choreo Integrator |
 |---|---|---|
-| **Editor** | TIBCO Business Studio (Eclipse) | WSO2 Integrator editor |
+| **Editor** | TIBCO Business Studio (Eclipse) | Choreo Integrator editor |
 | **Process definition** | XML files | Ballerina code (visual designer synced) |
 | **Deployment** | TIBCO Admin + AppNode | JAR, Docker, Kubernetes |
 | **Configuration** | Global variables + properties | Config.toml + environment variables |
@@ -315,14 +315,14 @@ TIBCO BusinessWorks uses Eclipse-based Business Studio with XML process definiti
 
 ### Process definitions vs. Ballerina services
 
-In TIBCO, a Process Definition is an XML file describing a sequence of activities. In WSO2 Integrator, the equivalent is a Ballerina **service** (for HTTP-triggered processes) or an **automation** (for timer-triggered processes). The logic is expressed in Ballerina code, not XML.
+In TIBCO, a Process Definition is an XML file describing a sequence of activities. In Choreo Integrator, the equivalent is a Ballerina **service** (for HTTP-triggered processes) or an **automation** (for timer-triggered processes). The logic is expressed in Ballerina code, not XML.
 
 **TIBCO (process overview):**
 ```
 HTTP Receiver → JDBC Query → Mapper Activity → Send HTTP Response
 ```
 
-**WSO2 Integrator (Ballerina):**
+**Choreo Integrator (Ballerina):**
 ```ballerina
 import ballerina/http;
 import ballerinax/mysql;
@@ -344,11 +344,11 @@ service /api on new http:Listener(8090) {
 
 ### Mapper Activity vs. Visual Data Mapper
 
-TIBCO's Mapper Activity uses an XML-based mapping editor to transform data between activities. WSO2 Integrator has the **Visual Data Mapper**, a drag-and-drop tool where you define typed source and target record types and draw field connections. Expressions and function calls can be added inline. For complex transformations, write Ballerina query expressions directly in the code editor.
+TIBCO's Mapper Activity uses an XML-based mapping editor to transform data between activities. Choreo Integrator has the **Visual Data Mapper**, a drag-and-drop tool where you define typed source and target record types and draw field connections. Expressions and function calls can be added inline. For complex transformations, write Ballerina query expressions directly in the code editor.
 
 ### Error handling
 
-TIBCO uses Catch Activities and Fault Handlers at the process level. WSO2 Integrator uses `do`/`on fail` blocks inline in the code. Ballerina errors are **typed**: each error type is handled separately, similar to how TIBCO lets you match specific fault types.
+TIBCO uses Catch Activities and Fault Handlers at the process level. Choreo Integrator uses `do`/`on fail` blocks inline in the code. Ballerina errors are **typed**: each error type is handled separately, similar to how TIBCO lets you match specific fault types.
 
 **TIBCO (Fault Handler concept):**
 ```
@@ -356,7 +356,7 @@ Catch (FaultType = DB_FAULT) → Log → SetOutput("Database unavailable")
 Catch (FaultType = *) → Log → SetOutput("Unexpected error")
 ```
 
-**WSO2 Integrator:**
+**Choreo Integrator:**
 ```ballerina
 do {
     record {|string orderId; string customer;|} result =
@@ -380,7 +380,7 @@ The key advantage is that Ballerina errors are typed. You handle `mysql:Database
 ### 1. Process inventory
 
 The tool categorizes each TIBCO process definition:
-- **HTTP Receiver processes** → WSO2 Integrator **services**
+- **HTTP Receiver processes** → Choreo Integrator **services**
 - **Timer-triggered processes** → **automations**
 - **JMS/Kafka listener processes** → **event handlers**
 - **Sub-processes** → Ballerina **functions**
@@ -437,7 +437,7 @@ The tool maps TIBCO's built-in activities to their Ballerina equivalents:
 HTTP Receiver → JDBC Query → Mapper Activity → Send HTTP Response
 ```
 
-**WSO2 Integrator (Ballerina):**
+**Choreo Integrator (Ballerina):**
 ```ballerina
 import ballerina/http;
 import ballerinax/mysql;
@@ -464,7 +464,7 @@ service /api on new http:Listener(8090) {
 Timer (every 5 min) → JDBC Query → JMS Send
 ```
 
-**WSO2 Integrator (Ballerina):**
+**Choreo Integrator (Ballerina):**
 ```ballerina
 import ballerina/task;
 import ballerinax/mysql;

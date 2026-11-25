@@ -39,7 +39,7 @@ RabbitMQ event integrations consume messages from a RabbitMQ queue and trigger e
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The header shows the attached listener pill and the queue name pill.
+5. Choreo Integrator opens the service in the **Service Designer**. The header shows the attached listener pill and the queue name pill.
 
    <ThemedImage
        alt="Service Designer showing the RabbitMQ service canvas"
@@ -198,7 +198,7 @@ listener rabbitmq:Listener rabbitmqListener = new (
 
 ## Event handlers
 
-An event handler is a `remote function` that WSO2 Integrator calls for each event received from the queue.
+An event handler is a `remote function` that Choreo Integrator calls for each event received from the queue.
 
 ### Adding an event handler
 

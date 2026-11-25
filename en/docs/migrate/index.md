@@ -1,19 +1,19 @@
 ---
 sidebar_position: 0
 sidebar_label: Overview
-title: Migrate to WSO2 Integrator
-description: Move existing MuleSoft, TIBCO BusinessWorks, and Azure Logic Apps integrations to WSO2 Integrator with automated migration tooling.
-keywords: [wso2 integrator, migrate, migration, mulesoft, tibco, businessworks, azure logic apps]
+title: Migrate to Choreo Integrator
+description: Move existing MuleSoft, TIBCO BusinessWorks, and Azure Logic Apps integrations to Choreo Integrator with automated migration tooling.
+keywords: [choreo integrator, migrate, migration, mulesoft, tibco, businessworks, azure logic apps]
 slug: /migrate
 hide_table_of_contents: true
 wide_layout: true
 ---
 
-# Migrate to WSO2 Integrator
+# Migrate to Choreo Integrator
 
-WSO2 Integrator provides migration tools to help you move existing integrations from other platforms to WSO2 Integrator. The tools analyze your integration artifacts, generate equivalent Ballerina code, and produce a migration report highlighting items that require manual attention.
+Choreo Integrator provides migration tools to help you move existing integrations from other platforms to Choreo Integrator. The tools analyze your integration artifacts, generate equivalent Ballerina code, and produce a migration report highlighting items that require manual attention.
 
-If you're moving an existing integration platform to WSO2 Integrator, start with the page for your current platform. Each page covers running the migration tool (every wizard screen and CLI flag), handling items that need manual attention, how platform concepts map to their WSO2 Integrator equivalents, and worked examples.
+If you're moving an existing integration platform to Choreo Integrator, start with the page for your current platform. Each page covers running the migration tool (every wizard screen and CLI flag), handling items that need manual attention, how platform concepts map to their Choreo Integrator equivalents, and worked examples.
 
 ## Choose your platform
 
@@ -47,21 +47,21 @@ If you're moving an existing integration platform to WSO2 Integrator, start with
 
 ## Supported platforms and features
 
-| Source platform | WSO2 Integrator wizard | CLI | Rule-based | AI-powered |
+| Source platform | Choreo Integrator wizard | CLI | Rule-based | AI-powered |
 |---|:---:|:---:|:---:|:---:|
 | MuleSoft | ✓ | ✓ | ✓ | ✓ (optional, currently not available in CLI) |
 | TIBCO BusinessWorks | ✓ | ✓ | ✓ | ✓ (optional, currently not available in CLI) |
 | Azure Logic Apps | ✗ | ✓ | ✗ | ✓ (mandatory) |
 
 **Legend:**
-- **WSO2 Integrator wizard:** Migration supported via the WSO2 Integrator migration wizard UI.
+- **Choreo Integrator wizard:** Migration supported via the Choreo Integrator migration wizard UI.
 - **CLI:** Migration supported via the Ballerina CLI tool.
 - **Rule-based:** Deterministic, rules-driven migration (non-AI). Available for MuleSoft and TIBCO only.
-- **AI-powered:** Migration uses AI. For MuleSoft and TIBCO, this is an optional enhancement (currently only available in the WSO2 Integrator wizard, not the CLI). For Logic Apps, migration is performed entirely by AI and is mandatory.
+- **AI-powered:** Migration uses AI. For MuleSoft and TIBCO, this is an optional enhancement (currently only available in the Choreo Integrator wizard, not the CLI). For Logic Apps, migration is performed entirely by AI and is mandatory.
 
 ## Migration workflow
 
-Migration can be initiated using either the WSO2 Integrator migration wizard (UI, where available) or the CLI tool. The table above shows the capabilities supported for each platform.
+Migration can be initiated using either the Choreo Integrator migration wizard (UI, where available) or the CLI tool. The table above shows the capabilities supported for each platform.
 
 After migration, complete the following post-migration steps:
 
@@ -69,7 +69,7 @@ After migration, complete the following post-migration steps:
 2. **Implement:** Complete any manually flagged items (custom logic, complex transformations, or unsupported elements).
 3. **Configure:** Set up `Config.toml` with connection details and environment-specific values.
 4. **Test:** Review any auto-migrated tests, and add or update tests as needed to ensure the migrated integration behaves as expected compared to the source system.
-5. **Deploy:** Deploy to WSO2 Integrator.
+5. **Deploy:** Deploy to Choreo Integrator.
 
 ## Command reference
 
@@ -86,5 +86,5 @@ After migration, complete the following post-migration steps:
 
 Don't see your platform listed? The same underlying concepts — services, connectors, data
 transformation, error handling — carry over regardless of where you're migrating from. [Get
-started](/get-started/setup) with WSO2 Integrator directly, or reach out on
+started](/get-started/setup) with Choreo Integrator directly, or reach out on
 [Discord](https://discord.com/invite/wso2) for migration guidance specific to your platform.

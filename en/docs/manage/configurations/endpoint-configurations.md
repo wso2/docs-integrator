@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: "Endpoints"
-description: "Configure endpoint visibility levels per environment for integrations deployed to the WSO2 Integration Platform."
-keywords: [wso2 integrator, endpoints, networking, endpoint visibility, wso2 cloud, integration as api]
+description: "Configure endpoint visibility levels per environment for integrations deployed to the Choreo Integration."
+keywords: [choreo integrator, endpoints, networking, endpoint visibility, choreo cloud, integration as api]
 slug: /manage/configurations/endpoint-configurations
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Endpoints and Networking Configuration
 
-When you deploy an Integration as API to the WSO2 Cloud - Integration Platform, each endpoint can be exposed at one or more visibility levels.
+When you deploy an Integration as API to the Choreo Integration, each endpoint can be exposed at one or more visibility levels.
 
 ## Endpoint visibility levels
 
@@ -76,5 +76,5 @@ Enabling the **Project** or **Organization** visibility levels generates additio
 
 ## What's next
 
-- [Build configurations](./build-configurations.md) — Control how your integrations are built on the WSO2 Integration Platform.
+- [Build configurations](./build-configurations.md) — Control how your integrations are built on the Choreo Integration.
 - [Scaling and resource limits](./scaling-resource-limits.md) — Configure CPU and memory limits for your integration.

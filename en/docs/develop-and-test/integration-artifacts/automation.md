@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Automation
-description: Build automations that run on a schedule or on demand using WSO2 Integrator.
-keywords: [wso2 integrator, automation, scheduled job, batch processing, main function]
+description: Build automations that run on a schedule or on demand using Choreo Integrator.
+keywords: [choreo integrator, automation, scheduled job, batch processing, main function]
 slug: /develop-and-test/integration-artifacts/automation
 ---
 
@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 # Automation
 
-An automation executes integration logic when started, without waiting for an incoming service request. Use it for periodic data synchronization, batch processing, report generation, and other recurring tasks that execute on a timer or on demand. Periodic invocation is scheduled in an external system such as a cron job, Kubernetes, or WSO2 Integration Platform.
+An automation executes integration logic when started, without waiting for an incoming service request. Use it for periodic data synchronization, batch processing, report generation, and other recurring tasks that execute on a timer or on demand. Periodic invocation is scheduled in an external system such as a cron job, Kubernetes, or Choreo Integration.
 
 :::note
 Only one automation can be configured per integration.
@@ -53,7 +53,7 @@ Only one automation can be configured per integration.
 
 4. Select **Create**.
 
-5. WSO2 Integrator opens the automation in the flow designer. The canvas shows a **Start** node, a **+** button to add steps, and an **Error Handler** node.
+5. Choreo Integrator opens the automation in the flow designer. The canvas shows a **Start** node, a **+** button to add steps, and an **Error Handler** node.
 
    <ThemedImage
        alt="Automation flow designer"
@@ -68,7 +68,7 @@ Only one automation can be configured per integration.
 </TabItem>
 <TabItem value="code" label="Ballerina Code">
 
-WSO2 Integrator generates an `automation.bal` file with the following starter structure:
+Choreo Integrator generates an `automation.bal` file with the following starter structure:
 
 ```ballerina
 import ballerina/log;

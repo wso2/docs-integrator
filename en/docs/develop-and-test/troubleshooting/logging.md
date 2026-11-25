@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 Logs are the everyday tool for tracing what an integration did and diagnosing what went wrong. Reach for them when you want a persistent record across runs, when the issue only reproduces in a long-running deployment, or when [editor debugging](../debugging/debugging.md) is too heavyweight for the question you have.
 
-WSO2 Integrator supports the four standard severities: **Info**, **Warn**, **Error**, and **Debug**. For the field-by-field reference of the Log nodes, see [Logging in the flow diagram editor](../../editor/canvases/flow-canvas/node-palette.md#logging). For runtime configuration (log level, output format, file rotation, aggregation), see [Logging & structured logs](/observe/logging).
+Choreo Integrator supports the four standard severities: **Info**, **Warn**, **Error**, and **Debug**. For the field-by-field reference of the Log nodes, see [Logging in the flow diagram editor](../../editor/canvases/flow-canvas/node-palette.md#logging). For runtime configuration (log level, output format, file rotation, aggregation), see [Logging & structured logs](/observe/logging).
 
 ## Add a log statement
 

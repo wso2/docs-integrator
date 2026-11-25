@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: "Build an Integration as API"
-description: Build an HTTP service in WSO2 Integrator that calls an external API and returns the response to the caller.
-keywords: [wso2 integrator, http service, api integration, rest api, quick start, ballerina http]
+description: Build an HTTP service in Choreo Integrator that calls an external API and returns the response to the caller.
+keywords: [choreo integrator, http service, api integration, rest api, quick start, ballerina http]
 slug: /get-started/quickstarts/build-integration-api
 ---
 
@@ -16,16 +16,16 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
   build={<>An HTTP service that listens on <code>/hello/greeting</code>, calls an external API, and returns the response to the caller.</>}
 />
 
-An HTTP service exposes your integration logic as a REST endpoint. This quick start shows the full cycle: create a service, add a resource, connect to an external API, and test it using the Try-It/Test panel in WSO2 Integrator.
+An HTTP service exposes your integration logic as a REST endpoint. This quick start shows the full cycle: create a service, add a resource, connect to an external API, and test it using the Try-It/Test panel in Choreo Integrator.
 
 <Prerequisites>
 
 ## Prerequisites
 
-A working WSO2 Integrator environment.
+A working Choreo Integrator environment.
 
 <div style={{gridColumn: '1 / -1', minWidth: 0}}>
-<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">Sign up and launch WSO2 Integrator in the browser-based cloud editor.</PrereqCard>
+<PrereqCard icon="cloud" title="Choreo Cloud setup" href="/get-started/setup">Sign up and launch Choreo Integrator in the browser-based cloud editor.</PrereqCard>
 </div>
 
 </Prerequisites>
@@ -37,17 +37,17 @@ A working WSO2 Integrator environment.
 1. On the project home page, click **Create on Cloud**.
 
    <ThemedImage
-       alt="WSO2 Cloud project home showing the Create on Cloud option"
+       alt="Choreo Cloud project home showing the Create on Cloud option"
        sources={{
            light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
            dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
        }}
    />
 
-2. The WSO2 Integrator cloud editor opens in your browser.
+2. The Choreo Integrator cloud editor opens in your browser.
 
    <ThemedImage
-       alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
+       alt="Choreo Integrator cloud editor landing page showing an empty integration and the Deploy to Choreo Cloud panel"
        sources={{
            light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
            dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
@@ -270,18 +270,18 @@ The cloud editor creates a default integration for you, so you don't need to nam
        }}
    />
 
-## Step 8: Deploy to WSO2 Cloud
+## Step 8: Deploy to Choreo Cloud
 
-To deploy your integration to WSO2 Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
+To deploy your integration to Choreo Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 
 <div class="skip-ahead-card">
 
 <PaletteCard icon="ai" highlight>
   <h3 class="palette-card-title">Skip ahead: deploy a ready-made sample</h3>
-  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the HelloWorldAPI sample straight to WSO2 Cloud.</p>
+  <p class="palette-card-desc">Rather not build it yourself? One-click deploy the HelloWorldAPI sample straight to Choreo Cloud.</p>
   <div class="palette-chip-row" style={{justifyContent: 'center'}}>
-    <a href="https://console.devant.dev/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/helloworldapi" target="_blank" rel="noopener noreferrer">
-      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to WSO2 Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
+    <a href="https://console.cloud.choreolabs.com/new?gh=wso2/integration-samples/tree/main/integrator-default-profile/quickstart/helloworldapi" target="_blank" rel="noopener noreferrer">
+      <img src="https://openindevant.choreoapps.dev/images/DeployDevant.svg" alt="Deploy to Choreo Cloud" style={{display: 'block', margin: '0', border: 'none', boxShadow: 'none'}} />
     </a>
   </div>
 </PaletteCard>

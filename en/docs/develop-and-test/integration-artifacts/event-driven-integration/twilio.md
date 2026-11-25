@@ -52,7 +52,7 @@ After starting the integration, configure the webhook URL in the **Twilio Consol
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section with all handlers for the selected channel pre-added.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section with all handlers for the selected channel pre-added.
 
    <ThemedImage
        alt="Service Designer showing the Twilio Event Integration canvas"
@@ -210,7 +210,7 @@ service twilio:SmsStatusService on twilioListener {
 
 ## Event handlers
 
-When a Twilio Events service is created, WSO2 Integrator adds all handlers for the selected channel automatically. Click any handler in the **Service Designer** to open the flow diagram view and implement the processing logic.
+When a Twilio Events service is created, Choreo Integrator adds all handlers for the selected channel automatically. Click any handler in the **Service Designer** to open the flow diagram view and implement the processing logic.
 
 ### CallStatusService handlers
 

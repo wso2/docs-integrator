@@ -1,7 +1,7 @@
 ---
 title: Shopify
 description: React to Shopify store webhook events such as order, customer, product, and fulfillment changes using pre-built event handlers.
-keywords: [wso2 integrator, shopify, webhook, event integration, ballerina]
+keywords: [choreo integrator, shopify, webhook, event integration, ballerina]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/shopify
 ---
 

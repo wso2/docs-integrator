@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: "Security"
-description: "Configure API Key and OAuth2 security schemes for integrations deployed to the WSO2 Cloud - Integration Platform."
-keywords: [wso2 integrator, api security, api key, oauth2, integration as api, wso2 cloud]
+description: "Configure API Key and OAuth2 security schemes for integrations deployed to the Choreo Integration."
+keywords: [choreo integrator, api security, api key, oauth2, integration as api, choreo cloud]
 slug: /manage/configurations/security-configurations
 ---
 
@@ -11,19 +11,16 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Security Configurations
 
-The WSO2 Integration Platform lets you configure authentication for integrations deployed as Integration as APIs or AI Agents. You can secure each endpoint with an API Key scheme, an OAuth2 scheme, or both at the same time.
+The Choreo Integration lets you configure authentication for integrations deployed as Integration as APIs or AI Agents. You can secure each endpoint with an API Key scheme, an OAuth2 scheme, or both at the same time.
 
 ## Supported security schemes
 
 | Scheme | Header | Description |
 |---|---|---|
 | **API Key** | `api-key` | Clients include a static key in a request header. Simple to set up and suitable for service-to-service calls. |
-| **OAuth2** | `Authorization` | Clients obtain an access token and include it as a Bearer token. Supports scoped access per resource. |
+| **OAuth2** | `Authorization` | Clients obtain an access token and include it as a Bearer token. |
 
-When both schemes are enabled:
-
-- Resources with no OAuth2 scope assigned accept either an API Key or an OAuth2 access token.
-- Resources with OAuth2 scopes assigned require an OAuth2 access token.
+When both schemes are enabled, clients can authenticate with either an API Key or an OAuth2 access token.
 
 ## Configure security
 
@@ -55,16 +52,7 @@ When both schemes are enabled:
 
 5. If you want the authenticated user's identity to be forwarded to your backend service, enable **Pass end-user attributes to upstream**.
 
-6. To assign OAuth2 scopes to specific resources:
-    1. In the **Permissions List** panel, click **Add Permission (Scope)**.
-    2. In the **Add Permission** dialog, select the required scope and click **+ Add New**.
-    3. In the **Resources** list, expand the resource you want to restrict.
-    4. Click **Permission (Scopes)** dropdown and select the desired scopes.
-    5. Add the required scopes and assign them to the resource.
-
-7. You can also disable security for specific resources by turning the **Security** toggle off for that resource.
-
-8. Once you have configured the security settings as needed, click **Apply** to save the changes. 
+6. Once you have configured the security settings as needed, click **Apply** to save the changes. 
 
 :::info
 Security configuration changes take effect after the integration is deployed. The change applies immediately to the Development environment. To apply it to other environments, promote the integration.
@@ -72,33 +60,20 @@ Security configuration changes take effect after the integration is deployed. Th
 
 ## Consume a secured API
 
-You can test the secured endpoint by navigating to the **Test** > **Console** page in left navigation. To consume the API from an external client, you need to obtain the required credentials based on the enabled security schemes.
+You can test the secured endpoint by navigating to the **Test** > **Console** page in left navigation.
 
-### API Key
+To consume the API from an external client, include the credential for the enabled scheme in your request:
 
-1. In the integration overview, click **Developer Portal**.
-2. Subscribe to the API by selecting or creating an application.
-3. In your application, click **Generate Key** under the **API Key** column.
-4. Copy the generated key and include it in the configured security header of your requests:
+```bash
+# API Key
+curl --request GET   --url <endpoint_url>   --header 'api-key: <your_api_key>'
 
-    ```bash
-    curl --request GET \
-      --url <endpoint_url> \
-      --header 'api-key: <your_api_key>'
-    ```
+# OAuth2
+curl --request GET   --url <endpoint_url>   --header 'Authorization: Bearer <access_token>'
+```
 
-### OAuth2
-
-1. In the integration overview, click **Developer Portal**.
-2. Subscribe to the API by selecting or creating an application.
-3. In your application, click **Generate Key** under the **OAuth2** section.
-4. Use the generated credentials to obtain an access token, then include it as a Bearer token:
-
-    ```bash
-    curl --request GET \
-      --url <endpoint_url> \
-      --header 'Authorization: Bearer <access_token>'
-    ```
+{/* TODO(v3): document how a consumer obtains the API key / OAuth2 token.
+    The previous steps went through the Developer Portal, which is not in v3. */}
 
 ## What's next
 

@@ -1,7 +1,7 @@
 ---
 title: "Copilot in the Background"
 description: "Follow a Copilot run while the panel is closed, using the status bar, the floating status orb, and the mini chat."
-keywords: [wso2 integrator, copilot, background, status orb, mini chat, agent status]
+keywords: [choreo integrator, copilot, background, status orb, mini chat, agent status]
 sidebar_position: 3.5
 slug: /editor/copilot/background-copilot
 ---
@@ -34,13 +34,13 @@ While Copilot is working, the status bar shows the current state at a glance.
 | State | What you see |
 |---|---|
 | Running | A spinner and the current step. |
-| Needs your input | **WSO2 Integrator Copilot needs your input**, highlighted in the warning color. |
-| Finished | **WSO2 Integrator Copilot finished**. |
-| Error | **WSO2 Integrator Copilot error**, highlighted in the error color. |
+| Needs your input | **Choreo Integrator Copilot needs your input**, highlighted in the warning color. |
+| Finished | **Choreo Integrator Copilot finished**. |
+| Error | **Choreo Integrator Copilot error**, highlighted in the error color. |
 
 Select the status bar item to open the Copilot panel. The item appears only when the panel is closed and no other Copilot surface is already reporting the status, so it never duplicates something you can already see.
 
-<!-- TODO: capture asset then uncomment. ![The WSO2 Integrator Copilot status bar item showing a running step.](/img/editor/copilot/copilot-status-bar.png) -->
+<!-- TODO: capture asset then uncomment. ![The Choreo Integrator Copilot status bar item showing a running step.](/img/editor/copilot/copilot-status-bar.png) -->
 
 ## Status orb
 

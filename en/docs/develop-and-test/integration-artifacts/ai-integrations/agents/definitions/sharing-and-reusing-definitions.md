@@ -94,7 +94,7 @@ Use the search box to filter by name.
 
 ## Use a shared definition
 
-Select the definition under **Pre-built Agents**. WSO2 Integrator adds the package as a dependency and guides you through supplying its model provider, memory, and any [initialization parameters](definitions.md#initialization-parameters) it declares.
+Select the definition under **Pre-built Agents**. Choreo Integrator adds the package as a dependency and guides you through supplying its model provider, memory, and any [initialization parameters](definitions.md#initialization-parameters) it declares.
 
 The definition can be used in two places:
 

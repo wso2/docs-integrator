@@ -2,7 +2,7 @@
 sidebar_position: 9
 title: AI Data Mapping
 description: Generate transformation code between data structures with AI-powered field mapping.
-keywords: [wso2 integrator, data mapper, ai data mapping, auto map, field mapping, transformation]
+keywords: [choreo integrator, data mapper, ai data mapping, auto map, field mapping, transformation]
 slug: /develop-and-test/integration-artifacts/supportive-artifacts/data-mapper/ai-mapping
 ---
 
@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 # AI Data Mapping
 
-The AI Data Mapper uses WSO2 Integrator Copilot to generate mappings between data structures, without manual field-by-field matching. It is especially useful for large or complex schemas with many fields, deeply nested records, or domain-specific formats.
+The AI Data Mapper uses Choreo Integrator Copilot to generate mappings between data structures, without manual field-by-field matching. It is especially useful for large or complex schemas with many fields, deeply nested records, or domain-specific formats.
 
 For the Data Mapper editor and manual mapping, see [Data Mapper editor](../../../../editor/designers/data-mapper.md).
 
@@ -53,14 +53,14 @@ For the Data Mapper editor and manual mapping, see [Data Mapper editor](../../..
         }}
     />
 
-4. In the top-right corner of the canvas, select **Auto Map**. The WSO2 Integrator Copilot panel opens alongside the canvas with a prompt already filled in. Before you send it, you can add your own business rules to the prompt or attach reference documents. See [Supporting documentation to improve accuracy](#supporting-documentation-to-improve-accuracy).
+4. In the top-right corner of the canvas, select **Auto Map**. The Choreo Integrator Copilot panel opens alongside the canvas with a prompt already filled in. Before you send it, you can add your own business rules to the prompt or attach reference documents. See [Supporting documentation to improve accuracy](#supporting-documentation-to-improve-accuracy).
 
     :::note
     **Auto Map** is disabled when an input or the output is a generic `json` or `xml` type whose structure isn't defined yet. Add a sample payload first, as described in [Generic type mappings](generic-type-mappings.md), and then select **Auto Map**.
     :::
 
     <ThemedImage
-        alt="WSO2 Integrator Copilot panel open alongside the Data Mapper canvas with the prompt /data-map generate mappings for the @transform function in the input field"
+        alt="Choreo Integrator Copilot panel open alongside the Data Mapper canvas with the prompt /data-map generate mappings for the @transform function in the input field"
         sources={{
             light: useBaseUrl('/img/develop/integration-artifacts/supporting/data-mapper/ai-data-mapper-copilot-command.png'),
             dark: useBaseUrl('/img/develop/integration-artifacts/supporting/data-mapper/ai-data-mapper-copilot-command.png'),

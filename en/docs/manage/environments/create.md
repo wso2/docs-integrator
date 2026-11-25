@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Create an Environment
-description: Learn how to create a new environment in your WSO2 Cloud - Integration Platform organization to support additional stages in your deployment pipeline.
-keywords: [wso2 cloud, create environment, production environment]
+description: Learn how to create a new environment in your Choreo Integration organization to support additional stages in your deployment pipeline.
+keywords: [choreo cloud, create environment, production environment]
 slug: /manage/environments/create
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Create an Environment
 
-WSO2 Cloud - Integration Platform provides **Development** and **Production** environments by default. You can create additional environments, such as a staging or regional environment, to match your release pipeline.
+Choreo Integration provides **Development** and **Production** environments by default. You can create additional environments, such as a staging or regional environment, to match your release pipeline.
 
 :::info
 Free-tier organizations can have a maximum of three environments.
@@ -23,7 +23,7 @@ Free-tier organizations can have a maximum of three environments.
 
 ## Create an environment
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
 2. In the top navigation menu, click the **Organization** list and select your organization. This opens the organization home page.
 3. In the left navigation menu under **Admin**, click **Environments**.
 4. Click **+ Create**. This opens the environment creation page.
@@ -65,4 +65,3 @@ The new environment is created and available for use across projects in your org
 
 - [Configure promotion pipelines](./configure-promotion-pipelines.md) — Define the promotion flow of integrations across environments in your organization
 - [Promote an integration](./promotion.md) — Move an integration from one environment to the next in your pipeline
-- [Promotion approvals](./promotion-approval.md) — Require approvals before an integration is promoted to a protected environment

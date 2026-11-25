@@ -1,6 +1,6 @@
 ---
 title: "Develop and Test"
-description: "Build, transform, test, and debug integrations with WSO2 Integrator."
+description: "Build, transform, test, and debug integrations with Choreo Integrator."
 sidebar_label: Overview
 sidebar_position: 0
 slug: /develop-and-test
@@ -10,10 +10,10 @@ wide_layout: true
 
 # Build Your Integration
 
-This section covers the Develop and Test phase of the [integration lifecycle](../platform-overview/index.md#from-development-to-production): building integrations in the WSO2 Integrator editor before anything ships. We assume you're already familiar with the editor's surfaces from the [Editor Tour](../editor/editor.md).
+This section covers the Develop and Test phase of the [integration lifecycle](../platform-overview/index.md#from-development-to-production): building integrations in the Choreo Integrator editor before anything ships. We assume you're already familiar with the editor's surfaces from the [Editor Tour](../editor/editor.md).
 
 :::tip
-Start building your integration by prompting [WSO2 Integrator Copilot](../editor/copilot/copilot.md) to generate a first working version of your integration flow, refine it on the visual designer, and drop into Ballerina pro-code only when you need more precise control; everything stays in sync throughout.
+Start building your integration by prompting [Choreo Integrator Copilot](../editor/copilot/copilot.md) to generate a first working version of your integration flow, refine it on the visual designer, and drop into Ballerina pro-code only when you need more precise control; everything stays in sync throughout.
 :::
 
 ## Create Integration Workspace
@@ -34,7 +34,7 @@ Start building your integration by prompting [WSO2 Integrator Copilot](../editor
   <ul class="palette-card-list">
     <li>Workspace and views</li>
     <li>Editors and canvases</li>
-    <li>WSO2 Integrator Copilot</li>
+    <li>Choreo Integrator Copilot</li>
   </ul>
 </PaletteCard>
 
@@ -147,6 +147,6 @@ Moving from another platform? See [Migrate](../migrate/index.md).
 
 ## What's next
 
-- [Create a new integration](create-workspace/create-a-project.md) — Start a project in the WSO2 Integrator or from the CLI
+- [Create a new integration](create-workspace/create-a-project.md) — Start a project in the Choreo Integrator or from the CLI
 - [Design integration logic](../editor/canvases/flow-canvas/flow-canvas.md) — Wire up the flow between request and response
 - [Deploy and operate](../deploy-and-run/deploy-and-run.md) — Ship your integration once it's ready

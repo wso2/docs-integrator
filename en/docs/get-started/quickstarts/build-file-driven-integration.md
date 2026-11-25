@@ -1,8 +1,8 @@
 ---
 sidebar_position: 5
 title: "Build a File-Driven Integration"
-description: Build an FTP integration in WSO2 Integrator that watches a folder on a remote server and logs each new file.
-keywords: [wso2 integrator, file integration, ftp, sftp, onFileText, quick start, ballerina ftp]
+description: Build an FTP integration in Choreo Integrator that watches a folder on a remote server and logs each new file.
+keywords: [choreo integrator, file integration, ftp, sftp, onFileText, quick start, ballerina ftp]
 slug: /get-started/quickstarts/build-file-driven-integration
 ---
 
@@ -22,10 +22,10 @@ File integrations are ideal for batch uploads, scheduled file processing, and ET
 
 ## Prerequisites
 
-A working WSO2 Integrator environment.
+A working Choreo Integrator environment.
 
 <div style={{gridColumn: '1 / -1', minWidth: 0}}>
-<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">Sign up and launch WSO2 Integrator in the browser-based cloud editor.</PrereqCard>
+<PrereqCard icon="cloud" title="Choreo Cloud setup" href="/get-started/setup">Sign up and launch Choreo Integrator in the browser-based cloud editor.</PrereqCard>
 </div>
 
 <div style={{gridColumn: '1 / -1', minWidth: 0}}>
@@ -43,7 +43,7 @@ If you don't have a server, create a free test server on [SFTPCloud](https://sft
 :::
 
 :::info Note
-The cloud editor runs in WSO2 Cloud and cannot connect to a server running on `localhost` on your computer. Make sure the server is accessible over the internet.
+The cloud editor runs in Choreo Cloud and cannot connect to a server running on `localhost` on your computer. Make sure the server is accessible over the internet.
 :::
 
 </div>
@@ -57,17 +57,17 @@ The cloud editor runs in WSO2 Cloud and cannot connect to a server running on `l
 1. On the project home page, click **Create on Cloud**.
 
    <ThemedImage
-       alt="WSO2 Cloud project home showing the Create on Cloud option"
+       alt="Choreo Cloud project home showing the Create on Cloud option"
        sources={{
            light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
            dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
        }}
    />
 
-2. The WSO2 Integrator cloud editor opens in your browser.
+2. The Choreo Integrator cloud editor opens in your browser.
 
    <ThemedImage
-    alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
+    alt="Choreo Integrator cloud editor landing page showing an empty integration and the Deploy to Choreo Cloud panel"
     sources={{
         light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
         dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
@@ -222,9 +222,9 @@ The cloud editor creates a default integration for you, so you don't need to nam
        }}
    />
 
-## Step 6: Deploy to WSO2 Cloud
+## Step 6: Deploy to Choreo Cloud
 
-To deploy your integration to WSO2 Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
+To deploy your integration to Choreo Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 
 </Steps>
 

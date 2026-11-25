@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Publish an Integration to the User Portal
-description: "Publish AI agents, automations, and workflows from WSO2 Cloud - Integration Platform to the User Portal so that external users can use them."
-keywords: [wso2 cloud, user portal, publish, ai agents, automations, workflows, developer portal, lifecycle]
+description: "Publish AI agents and automations from Choreo Integration to the User Portal so that external users can use them."
+keywords: [choreo cloud, user portal, publish, ai agents, automations]
 slug: /manage/users-and-access/user-portal/publish-integrations
 ---
 
@@ -21,7 +21,6 @@ The User Portal supports the following integration types:
 |---|---|
 | **AI agent** | Chat with the agent. |
 | **Automation** | Run the automation. If the automation has runtime arguments, users first enter values in a form that the User Portal builds from those arguments. |
-| **Workflow** | Run and manage workflows, and act on assigned human tasks. |
 
 For each automation, users can also see when it last ran and, if it is scheduled, when it runs next.
 
@@ -29,11 +28,11 @@ For each automation, users can also see when it last ran and, if it is scheduled
 
 - The User Portal is enabled for your organization. See [Enable the User Portal](user-portal.md#enable-the-user-portal). Until then, the integration's overview page shows a **Publish to User Portal** button instead of the toggle. Click it, then click **Enable in Settings** to go to the **User Portal** page. If you do not have the permissions to enable the User Portal, ask an organization administrator to enable it.
 - The integration is deployed to the production environment. Until then, **Publish to User Portal** is disabled. See [Promote an integration](../../environments/promotion.md).
-- Your role includes the **Manage Organization** permission and the permission to publish APIs to the Developer Portal. Without these permissions, **Publish to User Portal** is disabled. You need the same permissions to choose the chat endpoints of an AI agent and to unpublish an integration.
+- Your role includes the **Manage Organization** permission. Without it, **Publish to User Portal** is disabled. You need the same permission to choose the chat endpoints of an AI agent and to unpublish an integration.
 
 ## Publish an integration
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
 2. Select the project that contains the integration.
 3. In the **Integrations** pane, click the integration that you want to publish.
 4. On the integration's overview page, turn on the **Publish to User Portal** toggle.
@@ -56,16 +55,12 @@ For each automation, users can also see when it last ran and, if it is scheduled
         }}
     />
 
-When you confirm, the platform publishes the integration to the User Portal. For AI agents and workflows, the User Portal calls the integration through the Developer Portal, so the platform also does the following automatically:
+When you confirm, the platform publishes the integration to the User Portal and makes the endpoints the User Portal needs available automatically:
 
-1. Publishes the endpoints that the User Portal uses to the Developer Portal, by moving them to the `PUBLISHED` lifecycle state. The platform skips any endpoint that is already in that state.
+- **AI agents**: The endpoints that have a `/chat` resource.
+- **Automations**: No endpoint is required.
 
-    - **AI agents**: The endpoints that have a `/chat` resource.
-    - **Workflows**: The management endpoint. WSO2 Cloud adds this endpoint to every workflow when it deploys the workflow.
-
-2. Subscribes the User Portal's Developer Portal application to those endpoints.
-
-Automations are not called through the Developer Portal, so the platform skips these steps for them.
+{/* TODO(v3): confirm how the User Portal reaches an integration's endpoints now that the Developer Portal is gone, and document the new mechanism here. */}
 
 Publishing an integration does not give users access to it. To see the integration in the User Portal, a user needs a role with the view scope for the integration's type. See [Scopes](manage-users.md#scopes).
 
@@ -84,7 +79,6 @@ After the integration is published, the platform shows a confirmation message, a
 If the platform cannot publish the integration, it shows an error message. The following are common causes:
 
 - **The AI agent has no endpoint with a `/chat` resource in production.** Deploy an endpoint with a `/chat` resource to production, then try again.
-- **The platform cannot publish an endpoint to the Developer Portal.** This can happen when another API in the Developer Portal already uses the same name. To fix this, publish the endpoint to the Developer Portal manually. Open the integration, then in the left navigation menu, click **Develop** > **Lifecycle**. See [Lifecycle Management](../../integrations/api-management/lifecycle-management.md). Then go to the integration's **Overview** page and publish the integration to the User Portal again.
 
 ## Choose the chat endpoints of an AI agent
 
@@ -94,7 +88,7 @@ If a published AI agent has more than one endpoint with a chat resource, you can
 2. In the left navigation menu, click **Overview**.
 3. On the production environment card, next to each chat endpoint, turn the **User Portal** toggle on or off.
 
-When you turn on the toggle for an endpoint, the platform publishes that endpoint to the Developer Portal if needed, then makes it available in the User Portal.
+When you turn on the toggle for an endpoint, the platform makes it available in the User Portal.
 
 ## Unpublish an integration
 
@@ -103,14 +97,10 @@ When you turn on the toggle for an endpoint, the platform publishes that endpoin
 3. Turn off the **Publish to User Portal** toggle.
 4. In the confirmation dialog, click **Unpublish**.
 
-The integration no longer appears in the User Portal. For AI agents and workflows, the platform removes the User Portal's Developer Portal subscriptions to the endpoints.
-
-:::note
-Unpublishing from the User Portal does not change the lifecycle state of the endpoints in the Developer Portal. The endpoints stay in the `PUBLISHED` state. To change their state, see [Lifecycle Management](../../integrations/api-management/lifecycle-management.md).
-:::
+The integration no longer appears in the User Portal.
 
 ## What's next
 
 - [Manage users and roles](manage-users.md) so that users can sign in to the User Portal and see the integrations.
 - [Sign in to the User Portal](sign-in-to-user-portal.md).
-- [Use the User Portal](use-user-portal.md) to chat with AI agents, run automations, and work with workflows.
+- [Use the User Portal](use-user-portal.md) to chat with AI agents and run automations.

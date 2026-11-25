@@ -36,7 +36,7 @@ In this tutorial, you will learn how to:
 
 Before getting started, ensure that the following requirements are met:
 
-- Install the [WSO2 Integrator](../../get-started/setup/setup.md)
+- Install the [Choreo Integrator](../../get-started/setup/setup.md)
 - Have an MSSQL database reachable (host, port, user, password) for agent memory persistence. Have the chat messages table (and, if you plan to use human-in-the-loop, the checkpoint table) created ahead of time. See [Memory](../../develop-and-test/integration-artifacts/ai-integrations/agents/memory.md) for the required schemas.
 - Have a basic understanding of memory configuration concepts. For more information, refer to [Memory](../../develop-and-test/integration-artifacts/ai-integrations/agents/memory.md)
 
@@ -130,8 +130,8 @@ The tool you add in Step 4 searches `kbArticles` by matching `tags` against the 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Open WSO2 Integrator, create or select your project.
-2. On the **Design** tab, select **Add Artifact manually** (below the WSO2 Integrator Copilot's quick-start cards).
+1. Open Choreo Integrator, create or select your project.
+2. On the **Design** tab, select **Add Artifact manually** (below the Choreo Integrator Copilot's quick-start cards).
 3. On the Artifacts page, under **AI Integration**, select **Chat Agent Service**.
 
 <ThemedImage
@@ -427,7 +427,7 @@ final ai:ShortTermMemory aiShorttermmemory = check new (mssqlShorttermmemorystor
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Select **Run**. WSO2 Integrator applies the `--experimental` flag and compiles and starts the service, with progress shown in the integrated terminal.
+1. Select **Run**. Choreo Integrator applies the `--experimental` flag and compiles and starts the service, with progress shown in the integrated terminal.
 2. Open the `chat` resource and select **Chat** in the toolbar (next to **Tracing**) to open the **Agent Chat** panel. Try the conversation below to exercise the tool and confirm the agent remembers earlier turns in the same session:
 
 - *"My VPN is not working"*

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: Start with Sample Integrations
-description: Deploy a ready-made sample integration to your project on WSO2 Cloud to learn common integration patterns.
+description: Deploy a ready-made sample integration to your project on Choreo Cloud to learn common integration patterns.
 slug: /develop-and-test/create-workspace/start-with-sample-integrations
 ---
 
@@ -10,7 +10,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Start with Sample Integrations
 
-WSO2 Cloud includes a curated collection of sample integrations that you can add to a project with a single click. Use them to learn common integration patterns, or as a starting point for your own integration.
+Choreo Cloud includes a curated collection of sample integrations that you can add to a project with a single click. Use them to learn common integration patterns, or as a starting point for your own integration.
 
 :::note Sample integrations vs. prebuilt integrations
 Samples teach you the platform's abstractions. [Prebuilt integrations](../../get-started/prebuilt-integrations.md) are different: each one is a real, already-wired integration between two applications for an actual business use case.
@@ -18,15 +18,15 @@ Samples teach you the platform's abstractions. [Prebuilt integrations](../../get
 
 ## Open the samples
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev) and open the project where you want to add the sample.
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com) and open the project where you want to add the sample.
 
     If the project has no integrations yet, you land on the **Create Integration** page by default. Continue to the next step.
 
     :::info Project already has integrations
-    A project that already has integrations opens on its overview page instead, which lists them. Click **Create** to open the **Create Integration** page.
+    A project that already has integrations opens on its overview page instead, which lists them. Click **New integration** to open the **Create Integration** page.
 
     <ThemedImage
-        alt="Project overview page with the Create button highlighted"
+        alt="Project overview page with the New integration button highlighted"
         sources={{
             light: useBaseUrl('/img/explore-samples/sample-integration-saas-project-overview.png'),
             dark: useBaseUrl('/img/explore-samples/sample-integration-saas-project-overview.png'),
@@ -34,10 +34,10 @@ Samples teach you the platform's abstractions. [Prebuilt integrations](../../get
     />
     :::
 
-2. On the **Create Integration** page, find the **Get Started Quickly** panel and select the **Samples** tab. It lists a few samples, each with **Deploy** and **Source** actions.
+2. On the **Create Integration** page, find the **Start quickly** panel on the right and select the **Samples** tab. It lists a few samples, each with a **Deploy** button and a link to the source.
 
     <ThemedImage
-        alt="Samples tab in the Get Started Quickly panel"
+        alt="Create Integration page with the Samples tab selected in the Start quickly panel and Explore more samples highlighted"
         sources={{
             light: useBaseUrl('/img/explore-samples/sample-integration-saas-switch.png'),
             dark: useBaseUrl('/img/explore-samples/sample-integration-saas-switch.png'),
@@ -48,28 +48,38 @@ Samples teach you the platform's abstractions. [Prebuilt integrations](../../get
 
 ## Browse samples
 
-The **Try a Sample** page lists every available sample. Each card shows the sample name, its type and technology (for example, **Automation (Ballerina)** or **Automation (WSO2 MI)**), a short description, and the **Quick Deploy** and **Source** actions.
+The **Browse samples** page lists every available sample. Each card shows the sample name and technology (for example, **Choreo Integrator** or **Choreo Integrator: MI**), its type as a badge, a short description, tags, and the **Quick deploy** and source actions. Use the **Type**, **Technology** and **Tags** filters, or the search box, to narrow the list.
 
 <ThemedImage
-    alt="Try a Sample page listing automation samples"
+    alt="Browse samples page listing available samples with filters"
     sources={{
         light: useBaseUrl('/img/explore-samples/sample-integration-saas-list.png'),
         dark: useBaseUrl('/img/explore-samples/sample-integration-saas-list.png'),
     }}
 />
 
-Use the controls at the top of the page to find a sample:
+Use the panel on the left to narrow the list:
 
-- **Search** — Search samples by name or description.
-- **Technology** — Filter by the technology a sample is built with.
-- **Select Tags** — Filter by tag.
-- **Category tabs** — Switch between **Automations**, **AI Agents**, **Integrations as APIs**, **Event Integrations**, and **File Integrations**.
+- **Search samples** — Search by name or description.
+- **Type** — **Integration as API**, **Automation**, **AI Agent**, **File Integration**, or **Event Integration**.
+- **Technology** — The technology a sample is built with: **Choreo Integrator** or **Choreo Integrator: MI**.
+- **Tags** — Filter by one or more tags, such as **AI**, **AWS**, or **Automation**.
 
-Click **Source** on a card to read the sample's code in its GitHub repository before you deploy it.
+Filters combine, and the results are paged. Use the source icon on a card to read the sample's code in its GitHub repository before you deploy it.
 
 ## Deploy a sample
 
-Click **Quick Deploy** on the sample you want (or **Deploy** from the **Get Started Quickly** panel). WSO2 Cloud starts creating the integration in your project and shows its progress.
+Click **Quick deploy** on the sample you want (or **Deploy** from the **Start quickly** panel).
+
+<ThemedImage
+    alt="Quick deploy button on the Hello World Service sample card in the Browse samples page"
+    sources={{
+        light: useBaseUrl('/img/explore-samples/sample-integration-saas-quick-deploy.png'),
+        dark: useBaseUrl('/img/explore-samples/sample-integration-saas-quick-deploy.png'),
+    }}
+/>
+
+Choreo Cloud starts creating the integration in your project and shows its progress.
 
 <ThemedImage
     alt="Progress page shown while the sample integration is being created"
@@ -79,42 +89,35 @@ Click **Quick Deploy** on the sample you want (or **Deploy** from the **Get Star
     }}
 />
 
-When creation completes, WSO2 Cloud opens the integration's overview page. It shows the integration type, description, source repository, and latest commit, and starts the first build immediately.
+When creation completes, Choreo Cloud opens the integration's overview page. It shows the integration type, description, source repository, and latest commit, and builds and deploys the sample to the **Development** environment immediately.
 
-When the build finishes, the sample is deployed to the **Development** environment, like any other integration on WSO2 Cloud. The overview page then shows the build as **Completed**, the deployment as **Active**, and the endpoint URL. Select **Test** on the **Development** environment to try the sample out.
+Once the deployment is **Active**, the overview page shows the endpoint URL, the exposed resources, and the security scheme the sample uses. Select **Test** to try the sample out, **View logs** to see what it did, or **Stop** to shut it down. For a sample secured with an API key, select **Generate API key** before you call the endpoint.
 
 <ThemedImage
-    alt="Overview page of the Hello World Service sample after a successful build and deployment"
+    alt="Overview page of the Hello World Service sample with an active deployment, its endpoint URL, and the API keys panel"
     sources={{
         light: useBaseUrl('/img/explore-samples/sample-integration-saas-created.png'),
         dark: useBaseUrl('/img/explore-samples/sample-integration-saas-created.png'),
     }}
 />
 
-## Explore or edit the sample
+## Explore the sample's code
 
-To look inside the sample or change it, use the **Open in Cloud** button at the top right of the overview page. Open its dropdown to choose where to work:
-
-- **Open in Cloud** — Edit the sample in the browser-based cloud editor.
-- **Open in Integrator** — Continue in the WSO2 Integrator desktop app.
+Every sample is deployed straight from a public GitHub repository. Follow the **Source** link on the overview page to read its code and see how the sample is built.
 
 <ThemedImage
-    alt="Open in Cloud dropdown with the Open in Cloud and Open in Integrator options"
+    alt="Source link to the sample's GitHub repository highlighted on the integration overview page"
     sources={{
-        light: useBaseUrl('/img/explore-samples/sample-integration-saas-develop-choice.png'),
-        dark: useBaseUrl('/img/explore-samples/sample-integration-saas-develop-choice.png'),
+        light: useBaseUrl('/img/explore-samples/sample-integration-saas-source.png'),
+        dark: useBaseUrl('/img/explore-samples/sample-integration-saas-source.png'),
     }}
 />
 
-If you choose **Open in Cloud**, the sample opens in the cloud editor, where you can view its design, add artifacts, run and debug it, and push your changes back to WSO2 Cloud.
+:::note Editing a sample in the cloud editor isn't supported yet
+A deployed sample can't be opened in the cloud editor to view or change it. Support for this is planned for a future release.
 
-<ThemedImage
-    alt="Hello World Service sample open in the cloud editor"
-    sources={{
-        light: useBaseUrl('/img/explore-samples/sample-integration-saas-cloud-editor.png'),
-        dark: useBaseUrl('/img/explore-samples/sample-integration-saas-cloud-editor.png'),
-    }}
-/>
+To build on a sample in the meantime, clone its source repository into a repository of your own, then [import it](import-an-integration.md) as your own integration. From that point on, you can edit it in the cloud editor like any other integration.
+:::
 
 ## What's next
 

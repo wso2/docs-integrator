@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Test GraphQL Service
-description: Test GraphQL queries and mutations using the built-in GraphiQL editor in WSO2 Integrator.
-keywords: [wso2 integrator, try-it, graphql, graphiql, test graphql service]
+description: Test GraphQL queries and mutations using the built-in GraphiQL editor in Choreo Integrator.
+keywords: [choreo integrator, try-it, graphql, graphiql, test graphql service]
 slug: /develop-and-test/test/try-it-tool/try-it-graphql
 ---
 

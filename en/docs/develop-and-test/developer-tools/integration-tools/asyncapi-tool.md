@@ -17,7 +17,7 @@ The AsyncAPI tool is currently supported only through the Ballerina CLI (pro-cod
 :::
 
 :::info
-This page describes version 0.12.0 of the AsyncAPI tool, which is included in the Ballerina distribution that WSO2 Integrator uses.
+This page describes version 0.12.0 of the AsyncAPI tool, which is included in the Ballerina distribution that Choreo Integrator uses.
 :::
 
 ## Generate a webhook listener

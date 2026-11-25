@@ -53,7 +53,7 @@ Local file services monitor a directory on the local file system and trigger eve
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section.
 
    <ThemedImage
        alt="Service Designer showing the local file service canvas"
@@ -152,7 +152,7 @@ listener file:Listener fileListener = check new ({
 
 ## File handlers
 
-A file handler is a `remote function` that WSO2 Integrator calls each time a matching file system event occurs in the monitored directory.
+A file handler is a `remote function` that Choreo Integrator calls each time a matching file system event occurs in the monitored directory.
 
 ### Adding a file handler
 

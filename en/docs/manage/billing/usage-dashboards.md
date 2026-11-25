@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: "Usage Dashboards"
-description: "Analyze API traffic, errors, latency, cache, devices, and alerts on WSO2 Cloud, and generate standard or custom usage reports."
-keywords: [wso2 integrator, wso2 cloud, usage insights, dashboards, traffic, errors, latency, alerts, custom reports, billing]
+description: "Analyze API traffic, errors, latency, cache, and devices on Choreo Cloud."
+keywords: [choreo integrator, choreo cloud, usage insights, dashboards, traffic, errors, latency, billing]
 slug: /manage/billing/usage-dashboards
 ---
 
@@ -11,15 +11,13 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Usage Dashboards
 
-WSO2 Cloud provides comprehensive insights into APIs created within WSO2 Cloud. Usage insights provide a range of metrics, including API traffic, error rates, and latency, allowing you to monitor and optimize API performance effectively.
+Choreo Cloud provides comprehensive insights into APIs created within Choreo Cloud. Usage insights provide a range of metrics, including API traffic, error rates, and latency, allowing you to monitor and optimize API performance effectively.
 
-With WSO2 Cloud usage insights, you can:
+With Choreo Cloud usage insights, you can:
 
 - **Analyze API traffic**: Monitor the volume of requests and responses to understand usage patterns.
 - **Track errors**: Identify and analyze errors to improve API reliability.
 - **Monitor latency**: Measure and optimize the response times of your APIs.
-- **Generate reports**: Generate detailed reports to keep stakeholders informed and support data-driven decision-making.
-- **Configure alerts**: Set up alerts for specific events or thresholds to proactively manage API performance.
 - **Obtain granular insights**: Obtain detailed information on a per-application, per-API, and per-user basis for more targeted analysis.
 - **Drill down into data**: Dive deeper into data to perform root cause analysis.
 
@@ -27,17 +25,7 @@ By leveraging these insights, businesses can make informed decisions to enhance 
 
 ## View insights
 
-To view usage insights, go to the [WSO2 Cloud Console](https://console.devant.dev/) and click **Insights**, then click **Usage** in the left navigation menu.
-
-If you are viewing insights at the organization level, note the following:
-
-- **Permission-based access**: Signed-in users can only view insights for integrations or projects that they have permission to access.
-- **Data exclusion**: Insights exclude data from integrations you cannot access and data related to deleted integrations.
-- **Comprehensive view permission**: To view insights for all integrations (including deleted ones) across the organization regardless of project visibility, you must have the `View Organization Insights` permission under `OBSERVABILITY-MANAGEMENT` with the mapping level defined at the `Organization` level.
-- **Admin role**: Users with the admin role have the `View Organization Insights` permission by default and can view organization-wide insights.
-- **Configuring permissions**: For details on configuring permissions, see your organization's access control settings.
-
-By ensuring proper permissions are set, organizations can manage access to insights effectively while maintaining data security and relevance.
+To view usage insights, go to the [Choreo Cloud Console](https://console.cloud.choreolabs.com/) and click **Insights**, then click **Usage** in the left navigation menu.
 
 ## Analyze statistics
 
@@ -79,7 +67,7 @@ The information displayed is as follows:
         }}
     />
 
-    This widget displays the total number of requests that have resulted in errors in your selected environment during the selected time range. You can investigate errors by clicking the arrow on the bottom-right of the widget and opening the [Errors](#errors) page.
+    This widget displays the total number of requests that have resulted in errors in your selected environment during the selected time range.
 
 - **Average Error Rate**
 
@@ -91,7 +79,7 @@ The information displayed is as follows:
         }}
     />
 
-    This widget displays the average error rate (error count divided by total request count) of the selected environment for a given time interval. You can use this widget as an indicator of the health of the system. If the error rate is high, you can investigate further by clicking the arrow on the bottom-right of the widget and opening the [Errors](#errors) page.
+    This widget displays the average error rate (error count divided by total request count) of the selected environment for a given time interval. You can use this widget as an indicator of the health of the system. A high error rate indicates that the system needs attention.
 
 - **95th Percentile Latency**
 
@@ -183,107 +171,6 @@ You can view the following information for the APIs you have selected using the 
         sources={{
             light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/resource-usage.png'),
             dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/resource-usage.png'),
-        }}
-    />
-
-### Errors
-
-The **Errors** page shows information related to erroneous API calls received by your system. It allows you to analyze errors by both error categories and HTTP status codes.
-
-- **Error Category View**: An error category represents a type of faulty scenario identified at the API gateway level. In these cases, the API request may not reach the API target, and the user receives an error message and an HTTP error code. Errors are grouped into categories and subcategories based on their nature (such as authentication, connectivity, throttling, or other issues). The chart displays these categories and their subcategory errors, helping you quickly identify and analyze the types of errors occurring in your APIs.
-- **Status Code View**: Status code-based insights provide information based on the HTTP status codes received by the client, regardless of whether the error was generated by the API gateway or the backend target. This is different from the error category chart, which groups errors by the type of faulty scenario identified at the gateway level. For example, an authentication error category may result in different status codes like 401 or 403, depending on the specific issue. These errors may not reach the target and are sent to the client by the gateway. Conversely, a request might pass through the gateway but be rejected by the target (for example, a 403 due to a payload validation issue at the backend). In the status code chart, both errors would appear as 403 and 401, while in the category chart they would be grouped under authentication errors. Thus, the status code view shows the distribution of error codes received by the client, independent of the error category, while the category view groups errors by their underlying cause.
-
-Use this page as the starting point for debugging any API errors.
-
-<ThemedImage
-    alt="Errors page showing the error category and status code views with charts and tables."
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/error-page-full.png'),
-        dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/error-page-full.png'),
-    }}
-/>
-
-You can filter the information displayed in the widgets as follows:
-
-| Filtering option | Description |
-|---|---|
-| **By API** | In the **API** field, select the APIs for which you want to view analytics. By default, all APIs are selected. You can select one or multiple APIs from this selector and view the aggregated result. |
-| **By Category** | The **Category** field is displayed when you click **Category** in the upper-right corner of the page. In this field, you can select one or all of the following error categories:<br/>**Authentication**: Any kind of authentication error falls into this category, including expired, missing, or invalid credentials.<br/>**Target Connectivity**: Any kind of backend error falls into this category, including connection time-outs and other backend errors (for example, 4xx and 5xx status codes).<br/>**Throttling**: Any request that fails due to rate-limiting falls into this category, including application throttling and subscription throttling.<br/>**Other**: All other errors fall into this category, including mediation errors and resource-not-found errors. |
-| **By Status Code** | The **Status Code** field is displayed when you click **Status Code** in the upper-right corner of the page. In this field, you can select all or any available HTTP status code categories (4xx, 5xx, etc.). These status codes represent the response status of the API Gateway. |
-
-#### View errors by category
-
-The following widgets are available for monitoring errors when you have selected **Category** in the upper-right corner of the page.
-
-- This graph shows the error by category over time for the selected period. Apply the required filters as explained above to select the APIs and the error categories to which this content applies. When you select multiple APIs, the error count is grouped by category.
-
-    <ThemedImage
-        alt="Errors by category line graph."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/error-category-graph.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/error-category-graph.png'),
-        }}
-    />
-
-- This table provides further information about the errors, such as application details and the error reason. For some authentication errors, the application name is not available. You can use this table to get more concrete information about the errors related to your APIs and then start the problem identification.
-
-    <ThemedImage
-        alt="Errors by category table with application details and error reasons."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/error-category-table.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/error-category-table.png'),
-        }}
-    />
-
-#### View errors by status code
-
-The following widgets are available for monitoring errors when you select **Status Code** in the upper-right corner of the page.
-
-- **Errors by Status Code**
-
-    This graph shows the distribution of HTTP status codes received for errors over time for the selected period. Apply the required filters as explained above to select the APIs and status code groups to which this content applies. When you select multiple APIs, the error count is grouped by the status code.
-
-    <ThemedImage
-        alt="Errors by Status Code line graph."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/error-by-status-code.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/error-by-status-code.png'),
-        }}
-    />
-
-- **Target Errors by Status Code**
-
-    This graph shows the distribution of target errors that have occurred during the selected time interval by HTTP status code. Apply the required filters as explained in the table above to view the APIs and status code groups to which this content applies. If you select multiple APIs, the widget groups the target error count by the status code.
-
-    <ThemedImage
-        alt="Target Errors by Status Code line graph."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/target-error-by-status-code.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/target-error-by-status-code.png'),
-        }}
-    />
-
-- **Errors**
-
-    The Errors heat map shows the HTTP response codes of errors sent to the client by the API Gateway. Each row displays the number of times the system returned each status code for the selected APIs. The cell color is red for higher numbers and white for lower numbers. If required, you can further filter the results by the error code groups you identified with the **Errors by Status Code** graph.
-
-    <ThemedImage
-        alt="Errors heat map."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/error-heatmap.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/error-heatmap.png'),
-        }}
-    />
-
-- **Target Errors**
-
-    The Target Errors heat map shows the HTTP response codes of errors that the API Gateway received from the backend. Each row displays the number of times the system returned each status code for the selected APIs. The cell color is red for higher numbers and white for lower numbers. If required, you can further filter the results by the error code groups you identified with the **Target Errors by Status Code** graph.
-
-    <ThemedImage
-        alt="Target Errors heat map."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/target-error-heatmap.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/target-error-heatmap.png'),
         }}
     />
 
@@ -409,221 +296,7 @@ The information displayed is as follows:
         }}
     />
 
-### Alerts
-
-The **Alerts** page shows information related to business alerts issued by WSO2 Cloud for your currently selected environment and organization. You can use this page as a health monitoring dashboard and make it visible to your project team. On this page, you can drill down on each alert and discover possible anomalies in your published APIs. See the topics below for details of the available widgets and how to use them effectively.
-
-<ThemedImage
-    alt="Alerts page showing the alert summary table and the top APIs by alert count."
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/alerts-page-full.png'),
-        dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/alerts-page-full.png'),
-    }}
-/>
-
-**Prerequisites**
-
-To use this page, configure alerts and have API invocations that trigger alerts.
-
-:::note
-Alerts are retained only for one week.
-:::
-
-- **Alert Summary**
-
-    This table lists each alert generated during the selected time interval. You can view the message of the alert by expanding the arrow icon on the details column. The drop-downs can be used to filter alerts based on the alert type and API.
-
-    <ThemedImage
-        alt="Alert Summary table."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/alert-summary.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/alert-summary.png'),
-        }}
-    />
-
-- **Top APIs by Alert Count**
-
-    This shows a pie chart and a table to visualize the alert distribution during the selected time interval.
-
-    <ThemedImage
-        alt="Top APIs by Alert Count pie chart and table."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/top-apis-by-alert-count.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/top-apis-by-alert-count.png'),
-        }}
-    />
-
-### Reports
-
-The **Reports** page allows you to download monthly usage reports for your system. There are preconfigured reports with system-wide statistics, and a custom report generator to generate reports based on a subset of APIs and applications.
-
-<ThemedImage
-    alt="Reports page showing custom report download and pregenerated monthly reports."
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/report-page-full.png'),
-        dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/report-page-full.png'),
-    }}
-/>
-
-#### Download custom reports
-
-This widget allows you to generate a custom report for the statistics that have been generated up to now and download it.
-
-<ThemedImage
-    alt="Custom report download widget with API, Consumer, Year, Month, and Download controls."
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-report.png'),
-        dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-report.png'),
-    }}
-/>
-
-To generate a custom report, follow the steps below:
-
-1. In the **API** field, select one or more APIs for which you want to generate the report. If required, you can select all the APIs by selecting **All**.
-2. If you need to further filter the content printed in the report, select one or more applications in the **Consumer** field. By default, all applications that have subscribed to one or more of the selected APIs are selected.
-
-    :::tip
-    If you want to filter the report content by the API consumer instead of the application, click the toggle switch to the right of the **Consumer** field, then select the required consumer. Only consumers who have subscribed to one or more of the selected APIs are displayed in the list. You can either select one or all of them.
-    :::
-
-3. Select the required year and the month in the **Year** and **Month** fields to specify the time interval for which you want to generate the report.
-4. Click **Download** and select the required format.
-
-The report is downloaded in the specified format.
-
-The contents of the report are as follows:
-
-| Item | Description |
-|---|---|
-| **Generated Time** | The date and the time the report was generated. |
-| **Organization** | The organization to which the report applies. Each report always applies to a specific organization. |
-| **Environment** | The environment to which the report applies. Each report always applies to a specific environment. |
-| **Reporting period** | The time interval for which the report is generated. |
-| **Total request count** | The total request count received by all selected APIs during the report time interval. |
-| **Total successful requests** | The total count of successful requests received by all selected APIs during the report time interval. |
-| **Total failed requests** | The total count of failed requests received by all selected APIs during the report time interval. |
-
-The table in the report contains the following columns:
-
-| Item | Description |
-|---|---|
-| **#** | The sequential number of the row. |
-| **API** | The name of the API. |
-| **Application** | The name of the application. The name of the subscriber is also provided within brackets. |
-| **Total** | The total count of requests received by the API during the report time interval. |
-| **Successes** | The count of successful requests received by the API during the report time interval. |
-| **Failures** | The count of failed requests received by the API during the report time interval. |
-
-#### Download pregenerated reports
-
-The widgets shown below allow you to download monthly reports for the last three months.
-
-<ThemedImage
-    alt="Pregenerated monthly reports widget with download buttons for the last three months."
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/configured-report.png'),
-        dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/configured-report.png'),
-    }}
-/>
-
-To download a pregenerated report, click **Download** for the relevant month, then click the required format.
-
-### Custom reports
-
-WSO2 Cloud usage insights allow you to generate custom reports to view important information and make timely decisions for the betterment of your business. With custom reports, you can generate reports for a set of metrics of your choice and aggregate results by specific fields. Once generated, the metrics can be filtered using any selected group-by filters. Custom reports can be visualized as over-time charts, pie charts, or tables.
-
-#### Metrics
-
-WSO2 Cloud usage insights allow you to retrieve data for the following metrics:
-
-- Total Hit Count
-- Response Cache Hit Count
-- Request Mediation Latency
-- Response Mediation Latency
-- Backend Latency
-- Total Latency
-- API Error Count
-- Target Error Count
-
-#### Group-by
-
-**Group-by** fields specify how to group the metric data. For example, you can select **Total Hit Count** in the **Metrics** field and **API Name** under **Group-by** to retrieve the total hit count grouped by API name.
-
-WSO2 Cloud usage insights allow you to group metric data by the following fields:
-
-- API Name
-- API Version
-- API Resource Template
-- API Method
-- API Creator
-- Application
-- Application Owner
-- Destination
-- User Agent
-- Platform
-
-#### Generate a custom report
-
-To generate a custom report, follow the steps below:
-
-1. Navigate to the **Usage Insights** page under **Insights**, then **Usage** in the left navigation menu.
-2. In the left sub-navigation menu of **Usage Insights**, click **Custom Reports**.
-
-    <ThemedImage
-        alt="Custom Reports option in the Usage Insights left sub-navigation."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-reports/custom-reports-step-1.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-reports/custom-reports-step-1.png'),
-        }}
-    />
-
-3. Select metrics from the **Metrics** drop-down selector.
-
-    <ThemedImage
-        alt="Custom report builder with the Metrics selector open."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-reports/custom-reports-step-2-to-4.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-reports/custom-reports-step-2-to-4.png'),
-        }}
-    />
-
-4. Select between 1 and 3 group-by fields from the **Group By** drop-down selector.
-5. Set the order of the group-by filters by drag-and-drop to determine the grouping order of the selected metrics.
-6. Once you determine the order of the group-by fields, you can set values for each group-by field from the respective drop-down.
-
-    <ThemedImage
-        alt="Group-by field selection with values configured for each field."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-reports/custom-reports-step-5.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-reports/custom-reports-step-5.png'),
-        }}
-    />
-
-7. Click **Generate**.
-
-    <ThemedImage
-        alt="Generated custom report displayed as a chart."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-reports/custom-reports-step-6.png'),
-            dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-reports/custom-reports-step-6.png'),
-        }}
-    />
-
-#### Download reports
-
-WSO2 Cloud usage insights allow you to download report data for each chart as a **PDF** or a **CSV** file.
-
-To do this, click the **Download** icon on the top-right of the relevant chart and select the required file format.
-
-<ThemedImage
-    alt="Download icon on a custom report chart with PDF and CSV format options."
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-reports/custom-reports-step-7.png'),
-        dark: useBaseUrl('/img/manage/cloud/billing/usage-dashboards/custom-reports/custom-reports-step-7.png'),
-    }}
-/>
-
 ## What's next
 
-- [Pricing and plans](./pricing-and-plans.md) — How WSO2 Cloud bills platform services and how to upgrade a service plan.
-- [WSO2 Cloud overview](../manage.md) — How WSO2 Cloud manages your deployed integrations end to end.
+- [Pricing and plans](./pricing-and-plans.md) — How Choreo Cloud bills platform services and how to upgrade a service plan.
+- [Choreo Cloud overview](../manage.md) — How Choreo Cloud manages your deployed integrations end to end.

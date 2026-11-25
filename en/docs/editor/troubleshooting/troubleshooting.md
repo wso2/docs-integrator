@@ -11,9 +11,9 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Diagnose Issues
 
-Use this page when something in the WSO2 Integrator editor isn't behaving the way you expect: a feature doesn't respond, a diagram doesn't load, or an action errors out. Before you file an issue, capture verbose editor output so the team can act on the report.
+Use this page when something in the Choreo Integrator editor isn't behaving the way you expect: a feature doesn't respond, a diagram doesn't load, or an action errors out. Before you file an issue, capture verbose editor output so the team can act on the report.
 
-If the editor shows **WSO2 Integrator cannot start** or **Your project dependencies need to be updated** after you move to Ballerina 2201.14.0, see [Moving to Ballerina 2201.14](moving-to-ballerina-2201-14.md).
+If the editor shows **Choreo Integrator cannot start** or **Your project dependencies need to be updated** after you move to Ballerina 2201.14.0, see [Moving to Ballerina 2201.14](moving-to-ballerina-2201-14.md).
 
 ## Steps : Capture verbose editor output
 

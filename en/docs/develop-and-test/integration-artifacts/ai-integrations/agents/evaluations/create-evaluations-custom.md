@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: Create Custom Evaluations
-description: Create custom AI agent evaluations in WSO2 Integrator. Fill the AI Evaluation form, optionally pick an evalset to score against, and build the checks in the visual designer.
-keywords: [wso2 integrator, ai agent, evaluation, custom evaluation, visual designer]
+description: Create custom AI agent evaluations in Choreo Integrator. Fill the AI Evaluation form, optionally pick an evalset to score against, and build the checks in the visual designer.
+keywords: [choreo integrator, ai agent, evaluation, custom evaluation, visual designer]
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/evaluations/creating-evaluations
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Create Custom Evaluations
 
-A **custom evaluation** is an evaluation function whose logic you build yourself. You start by filling a short form, and WSO2 Integrator opens the rest of the configuration in the visual designer. Use a custom evaluation when none of the prebuilt [evaluation templates](create-evaluations-templates.md) fits the check you need.
+A **custom evaluation** is an evaluation function whose logic you build yourself. You start by filling a short form, and Choreo Integrator opens the rest of the configuration in the visual designer. Use a custom evaluation when none of the prebuilt [evaluation templates](create-evaluations-templates.md) fits the check you need.
 
 :::info Prerequisites
 The example on this page scores the agent against an evalset, so have at least one evalset in your project. See [Create evalsets](evalsets.md) to capture or import one. A custom evaluation with **No evalset** does not need one.
@@ -124,7 +124,7 @@ The loop body runs once per trace, ready for the agent call and any checks insid
 Inside the Foreach, add an **Agent** node from the **AI** group in the node panel.
 
 <ThemedImage
-    alt="Node panel scrolled to the AI category showing Direct LLM, RAG, and an Agent button."
+    alt="Node panel scrolled to the AI category showing Direct LLM and an Agent button."
     sources={{
         light: useBaseUrl('/img/genai/develop/agents/evaluations/agent-node-pick.png'),
         dark: useBaseUrl('/img/genai/develop/agents/evaluations/agent-node-pick.png'),

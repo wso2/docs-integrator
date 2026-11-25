@@ -1,12 +1,12 @@
 ---
 sidebar_position: 2.5
 title: Gate Tools for Approval
-description: Gate a tool so a WSO2 Integrator AI agent pauses for approval before it runs, then approve or reject and resume the run.
-keywords: [wso2 integrator, gated tools, tool approval, approval gate, ai agents, tools]
+description: Gate a tool so a Choreo Integrator AI agent pauses for approval before it runs, then approve or reject and resume the run.
+keywords: [choreo integrator, gated tools, tool approval, approval gate, ai agents, tools]
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/gated-tools
 ---
 
-{/* NOTE: saas-owned copy -- this page is excluded from the wso2-integrator content sync (sync-content-to-saas.yaml, SAAS_OWNED_FILES). The "Need more than an approval?" tip that links to the durable workflow pages is removed here because durable workflow isn't available on WSO2 Cloud yet; restore it (and drop this page from SAAS_OWNED_FILES) when it ships. */}
+{/* NOTE: saas-owned copy -- this page is excluded from the wso2-integrator content sync (sync-content-to-saas.yaml, SAAS_OWNED_FILES). The "Need more than an approval?" tip that links to the durable workflow pages is removed here because durable workflow isn't available on Choreo Cloud yet; restore it (and drop this page from SAAS_OWNED_FILES) when it ships. */}
 
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -104,7 +104,7 @@ Gating every call to a tool is often stricter than you need. A refund of 5 USD a
 The function you pick for **Approval Function** must take the same parameters as the tool it gates and return `boolean`. The picker lists every function in your project, not just ones that match.
 :::
 
-Typing a new name has WSO2 Integrator generate a function next to the tool with the correct signature and a placeholder body. Generating a function this way is only available while you are creating the tool. If you edit a tool that already exists, **Approval Function** offers only your project's functions to pick from, so create the function first, then select it.
+Typing a new name has Choreo Integrator generate a function next to the tool with the correct signature and a placeholder body. Generating a function this way is only available while you are creating the tool. If you edit a tool that already exists, **Approval Function** offers only your project's functions to pick from, so create the function first, then select it.
 
 <ThemedImage
     alt="Approval Function field with a new function name typed in"

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Natural Functions
-description: Single-page reference for Natural Functions in WSO2 Integrator, where function bodies are written in plain English and evaluated by an LLM at runtime.
+description: Single-page reference for Natural Functions in Choreo Integrator, where function bodies are written in plain English and evaluated by an LLM at runtime.
 slug: /develop-and-test/integration-artifacts/ai-integrations/natural-functions
 ---
 
@@ -10,14 +10,14 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Natural Functions
 
-A **natural function** is a function whose body is written in **English** instead of code. You declare the signature (typed parameters and a typed return) and write the instructions in the **Prompt** node in the visual designer. At runtime, WSO2 Integrator turns the return type into a JSON schema, sends both the prompt and the schema to a model provider, and gives you back a typed value.
+A **natural function** is a function whose body is written in **English** instead of code. You declare the signature (typed parameters and a typed return) and write the instructions in the **Prompt** node in the visual designer. At runtime, Choreo Integrator turns the return type into a JSON schema, sends both the prompt and the schema to a model provider, and gives you back a typed value.
 
 This page is a single, end-to-end reference covering the form that creates the function, the Prompt node, the return type, and how to call it from a flow.
 
 > **Looking for a hands-on walkthrough?** See the **[Customer Review Analyzer with Natural Function](../../../../guides/business-use-cases/review-summarizer-natural-function.md)** tutorial. It builds the example shown on this page from an empty project to a working `POST /api/v1/analyze` endpoint.
 
 :::caution Experimental feature
-Natural functions are an experimental feature. Enable experimental features in WSO2 Integrator before using them: open **Settings**, expand **Extensions**, select the **Ballerina** extension, and tick **Experimental: Enable Experimental Feature**.
+Natural functions are an experimental feature. Enable experimental features in Choreo Integrator before using them: open **Settings**, expand **Extensions**, select the **Ballerina** extension, and tick **Experimental: Enable Experimental Feature**.
 :::
 
 ## How a Natural Function Looks
@@ -38,7 +38,7 @@ What you do in the visual designer:
 - Bind a **Model Provider** to the Prompt node.
 - Write the **English instructions** in the Prompt node.
 
-What WSO2 Integrator handles for you:
+What Choreo Integrator handles for you:
 
 - Generating a JSON schema from the function's return type.
 - Sending the prompt and the schema to the bound model provider.
@@ -100,7 +100,7 @@ The form has three fields and a **Create** button.
 
 ### Adding a Parameter
 
-Click **+ Add Parameter**. The inline dialog asks for a type, a name, and a short description that is surfaced both to the LLM (as part of the schema) and to callers in WSO2 Integrator when they bind arguments.
+Click **+ Add Parameter**. The inline dialog asks for a type, a name, and a short description that is surfaced both to the LLM (as part of the schema) and to callers in Choreo Integrator when they bind arguments.
 
 <ThemedImage
     alt="Add Parameter dialog with Type, Name, and Description fields."
@@ -134,7 +134,7 @@ For most natural functions you want a **record** so each output field is named a
       }}
   />
 
-- **Import**: paste a JSON sample (or load a `.json` file) and WSO2 Integrator infers the record type, including nested records and arrays. This is the fastest path when you already have an example response.
+- **Import**: paste a JSON sample (or load a `.json` file) and Choreo Integrator infers the record type, including nested records and arrays. This is the fastest path when you already have an example response.
 
   <ThemedImage
       alt="Create New Type dialog on the Import tab with a JSON sample pasted into the textarea."
@@ -154,7 +154,7 @@ The new type is selected automatically as the function's return type. With at le
     }}
 />
 
-WSO2 Integrator generates the source and opens the function in the **Flow Designer** with three additions in the sidebar: a `_<functionName>Model` connection, the type(s) under **Types**, and the function under **Natural Functions**. The flow itself is just a single **Prompt** node between **Start** and the end.
+Choreo Integrator generates the source and opens the function in the **Flow Designer** with three additions in the sidebar: a `_<functionName>Model` connection, the type(s) under **Types**, and the function under **Natural Functions**. The flow itself is just a single **Prompt** node between **Start** and the end.
 
 The Prompt node has two controls: the **pencil** (top-right) edits the prompt body, and the **cog** (right of the node) configures the model provider.
 
@@ -162,11 +162,11 @@ The Prompt node has two controls: the **pencil** (top-right) edits the prompt bo
 
 ## Configuring the Model Provider {#configuring-the-model-provider}
 
-When you create a natural function, WSO2 Integrator automatically binds it to the **Default WSO2 Model Provider**, so the function can run as soon as it is created. To swap to a different model provider, hover the cog on the right of the Prompt node and click **Configure Model Provider**.
+When you create a natural function, Choreo Integrator automatically binds it to the **Default WSO2 Model Provider**, so the function can run as soon as it is created. To swap to a different model provider, hover the cog on the right of the Prompt node and click **Configure Model Provider**.
 
 If a provider already exists in the project, pick it from the dropdown and click **Save**. If not, click **+ Create New Model Provider** and pick from the catalogue (OpenAI, Anthropic, Azure OpenAI, Default WSO2, …).
 
-Adding a provider, the per-provider form fields, the supported models, and the advanced HTTP knobs are all documented in **[AI Connections and Stores: Model Providers](../ai-building-blocks/model-providers.md)**. Every natural function, direct LLM call, RAG `generate` node, and AI Agent in the project shares the same provider connections.
+Adding a provider, the per-provider form fields, the supported models, and the advanced HTTP knobs are all documented in **[AI Connections and Stores: Model Providers](../ai-building-blocks/model-providers.md)**. Every natural function, direct LLM call, and AI Agent in the project shares the same provider connections.
 
 ---
 

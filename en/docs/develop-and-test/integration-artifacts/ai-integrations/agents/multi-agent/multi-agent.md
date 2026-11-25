@@ -2,7 +2,7 @@
 sidebar_position: 0
 sidebar_label: Multi-Agent Concepts
 title: Multi-Agent Systems
-description: Why and when to split work across multiple AI agents in WSO2 Integrator, covering the orchestrator pattern, context and session isolation, and the cost of delegation.
+description: Why and when to split work across multiple AI agents in Choreo Integrator, covering the orchestrator pattern, context and session isolation, and the cost of delegation.
 ---
 
 # Multi-Agent Systems
@@ -11,7 +11,7 @@ A multi-agent system is an architecture in which a task is accomplished not by a
 
 The individual agents remain ordinary agents, an LLM in a loop with tools and instructions. What makes a system multi-agent is the coordination layer: how control flows between agents, what context each agent can see, and how results are aggregated.
 
-In WSO2 Integrator, coordination is expressed by attaching one agent as a tool of another. See [Agents as Tools](agents-as-tools.md) for the mechanics.
+In Choreo Integrator, coordination is expressed by attaching one agent as a tool of another. See [Agents as Tools](agents-as-tools.md) for the mechanics.
 
 ## Why use multiple agents
 
@@ -46,7 +46,7 @@ A single agent with five tools is usually better than two agents with three tool
 
 ## The orchestrator pattern
 
-WSO2 Integrator supports the **orchestrator** pattern, also called supervisor/worker. One agent owns the request, decomposes it into subtasks, delegates each to a specialist agent attached as a tool, and aggregates the results into a final answer.
+Choreo Integrator supports the **orchestrator** pattern, also called supervisor/worker. One agent owns the request, decomposes it into subtasks, delegates each to a specialist agent attached as a tool, and aggregates the results into a final answer.
 
 | Aspect | Behavior |
 |---|---|
@@ -60,7 +60,7 @@ WSO2 Integrator supports the **orchestrator** pattern, also called supervisor/wo
 
 This is the production default across the industry: it has the clearest delegation trace, the most natural place to insert human approval, and the most predictable cost profile.
 
-Other coordination patterns exist in the wider ecosystem, such as peer-to-peer handoff, shared group conversations, and multi-level hierarchies. They trade centralized control for lower per-hop latency or richer shared context, at the cost of debuggability and predictable spend. WSO2 Integrator does not model these directly.
+Other coordination patterns exist in the wider ecosystem, such as peer-to-peer handoff, shared group conversations, and multi-level hierarchies. They trade centralized control for lower per-hop latency or richer shared context, at the cost of debuggability and predictable spend. Choreo Integrator does not model these directly.
 
 ## Context and session isolation
 

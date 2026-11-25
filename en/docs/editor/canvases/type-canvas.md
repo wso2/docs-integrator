@@ -2,7 +2,7 @@
 sidebar_position: 5
 title: Type Canvas
 description: Visualize relationships between types in your integration on a single canvas.
-keywords: [wso2 integrator, type canvas, type diagram, types, records, enums, service classes, data model]
+keywords: [choreo integrator, type canvas, type diagram, types, records, enums, service classes, data model]
 slug: /editor/canvases/type-canvas
 ---
 

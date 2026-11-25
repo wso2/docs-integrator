@@ -1,7 +1,7 @@
 ---
 title: HTTP Service
-description: Build REST APIs, webhooks, and data services with HTTP in WSO2 Integrator.
-keywords: [wso2 integrator, http service, rest api, resource function]
+description: Build REST APIs, webhooks, and data services with HTTP in Choreo Integrator.
+keywords: [choreo integrator, http service, rest api, resource function]
 slug: /develop-and-test/integration-artifacts/integration-as-api/http
 ---
 
@@ -53,7 +53,7 @@ Expand **Advanced Configurations** to choose the HTTP listener:
 | **Shared Listener (Port 9090)** | Attaches the service to the project's shared HTTP listener on port 9090. Use this when multiple services share the same port. |
 | **Custom Listener** | Creates a dedicated listener for this service. Enter the port in the **Listener Port** field that appears. Use this when the service needs its own port or TLS configuration. |
 
-After selecting **Create**, WSO2 Integrator opens the service in the **Service Designer**. The header shows the attached listener pill and the service base path. Select **+ Add Resource** to add HTTP endpoints and then select any resource row to open it in the flow designer and build the integration logic.
+After selecting **Create**, Choreo Integrator opens the service in the **Service Designer**. The header shows the attached listener pill and the service base path. Select **+ Add Resource** to add HTTP endpoints and then select any resource row to open it in the flow designer and build the integration logic.
 
 </TabItem>
 <TabItem value="code" label="Ballerina Code">

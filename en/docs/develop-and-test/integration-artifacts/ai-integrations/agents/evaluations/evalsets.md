@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Create Evalsets
-description: Capture conversations with your AI agent in WSO2 Integrator and export the session traces into a golden dataset you can replay against future agent builds.
-keywords: [wso2 integrator, ai agent, evalset, golden dataset, session traces]
+description: Capture conversations with your AI agent in Choreo Integrator and export the session traces into a golden dataset you can replay against future agent builds.
+keywords: [choreo integrator, ai agent, evalset, golden dataset, session traces]
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/evaluations/evalsets
 ---
 

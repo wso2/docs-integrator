@@ -1,6 +1,6 @@
 ## Develop and Test
 
-The concepts you work with while building an integration in the WSO2 Integrator editor. These are covered in depth in [Develop](../../develop-and-test/develop-and-test.md).
+The concepts you work with while building an integration in the Choreo Integrator editor. These are covered in depth in [Develop](../../develop-and-test/develop-and-test.md).
 
 ### Integration
 
@@ -8,7 +8,7 @@ An integration is a single unit of work that connects systems, transforms data, 
 
 Each integration is its own package: a self-contained directory with its own `Ballerina.toml`, its own dependencies, and its own version. Every integration has a type, which determines how it is triggered and how it runs.
 
-When you push an integration to WSO2 Integration Cloud, it becomes a unit of deployment: a single pod in the data plane that can be scaled and managed independently.
+When you push an integration to Choreo Cloud, it becomes a unit of deployment: a single pod in the data plane that can be scaled and managed independently.
 
 ### Integration types
 
@@ -18,13 +18,13 @@ Every integration you build is one of the following types:
 - **Integration as API**: exposes one or more endpoints that consumers invoke over the network. The protocol determines the sub-type: HTTP services for REST, GraphQL services with typed schemas, or raw TCP services.
 - **Event integration**: triggered when an event arrives from an external system. Pre-built connectors are available for common sources including Kafka, RabbitMQ, MQTT, Azure Service Bus, Salesforce, Twilio, GitHub, Solace, Shopify, and Change Data Capture (CDC) for Microsoft SQL Server and PostgreSQL. Under the hood it uses a listener: a long-running component that listens for events and dispatches them to your handler logic.
 - **File integration**: triggered when files appear, change, or are removed in a watched location, such as a remote FTP or SFTP server, or a local or mounted filesystem.
-- **AI integration**: either an **AI Agent**, which exposes AI-powered functionality backed by an LLM including conversational agents with tools, memory, and prompts, RAG pipelines, and direct LLM calls; or an **MCP Server**, which exposes your integration as a tool that an external agent can invoke via the Model Context Protocol.
+- **AI integration**: either an **AI Agent**, which exposes AI-powered functionality backed by an LLM including conversational agents with tools, memory, and prompts, and direct LLM calls; or an **MCP Server**, which exposes your integration as a tool that an external agent can invoke via the Model Context Protocol.
 
 ### Endpoint
 
 An endpoint is a network-exposed entry point within an integration. You declare endpoints in integrations of type Integration as API. Each endpoint defines a path, the HTTP verbs (or equivalent for GraphQL and TCP) it accepts, an optional service contract such as OpenAPI or GraphQL SDL, and the handler logic that runs when it is invoked.
 
-A single integration can expose multiple endpoints. When deployed to WSO2 Integration Cloud, each endpoint is treated as an independently manageable API, so lifecycle, security, and exposure settings can differ from one endpoint to the next within the same integration.
+A single integration can expose multiple endpoints. When deployed to Choreo Cloud, each endpoint is treated as an independently manageable API, so lifecycle, security, and exposure settings can differ from one endpoint to the next within the same integration.
 
 ### Connection
 
@@ -32,7 +32,7 @@ A connection represents an integration's link to an external system: an HTTP cli
 
 You declare connections in source code, specifying the target, the protocol, and any required configuration, usually through a connector or a typed client. By externalizing configuration values through configurables, a single connection definition at design time can resolve to different systems at runtime, depending on the environment.
 
-At runtime, WSO2 Integration Cloud configures connections per environment, manages credentials centrally, and provides observability over outbound traffic.
+At runtime, Choreo Cloud configures connections per environment, manages credentials centrally, and provides observability over outbound traffic.
 
 ### Types
 

@@ -14,11 +14,11 @@ import TabItem from '@theme/TabItem';
 
 XML is a flexible, text-based format used to store, transport, and structure data in a way that is both human-readable and machine-readable.
 
-WSO2 Integrator provides built-in support for XML processing, making it easy to work with XML data in integration scenarios. You can create, read, query, modify, validate, and transform XML content without relying on external libraries. This native XML support simplifies integration development and helps efficiently process XML payloads exchanged between applications, services, and enterprise systems.
+Choreo Integrator provides built-in support for XML processing, making it easy to work with XML data in integration scenarios. You can create, read, query, modify, validate, and transform XML content without relying on external libraries. This native XML support simplifies integration development and helps efficiently process XML payloads exchanged between applications, services, and enterprise systems.
 
 ## XML literals and construction
 
-Create XML values directly in WSO2 Integrator using backtick templates. The `xml` type supports XML elements, text nodes, comments, and processing instructions, making it easy to construct structured XML payloads within integrations.
+Create XML values directly in Choreo Integrator using backtick templates. The `xml` type supports XML elements, text nodes, comments, and processing instructions, making it easy to construct structured XML payloads within integrations.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
@@ -147,7 +147,7 @@ public function main() {
 
 ## Navigating XML
 
-Access child elements, attributes, and text content using XML navigation expressions in WSO2 Integrator. XML navigation makes it easy to query and extract specific parts of XML payloads during integration flows.
+Access child elements, attributes, and text content using XML navigation expressions in Choreo Integrator. XML navigation makes it easy to query and extract specific parts of XML payloads during integration flows.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
@@ -302,7 +302,7 @@ public function main() {
 
 ## Iterating over XML
 
-Use `foreach` loops or query expressions to process XML sequences in WSO2 Integrator. XML iteration is useful for reading, filtering, and transforming repeating XML elements such as lists of items, records, or orders.
+Use `foreach` loops or query expressions to process XML sequences in Choreo Integrator. XML iteration is useful for reading, filtering, and transforming repeating XML elements such as lists of items, records, or orders.
 
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>

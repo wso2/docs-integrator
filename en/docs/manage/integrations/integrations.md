@@ -2,8 +2,8 @@
 sidebar_position: 0
 sidebar_label: Integration Management
 title: Integration Management
-description: "View and manage the lifecycle of integrations deployed to WSO2 Cloud - Integration Platform, including scheduling, stopping, scaling, editing, and deleting."
-keywords: [wso2 integrator, wso2 cloud, deployed integrations, view integrations, integration lifecycle]
+description: "View and manage the lifecycle of integrations deployed to Choreo Integration, including scheduling, stopping, scaling, editing, and deleting."
+keywords: [choreo integrator, choreo cloud, deployed integrations, view integrations, integration lifecycle]
 slug: /manage/integrations
 ---
 
@@ -12,18 +12,16 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Integration Management
 
-After pushing your integrations to WSO2 Cloud - Integration Platform, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on WSO2 Cloud yet, see the [Deploy](../../deploy-and-run/deploy-and-run.md) section.
+After pushing your integrations to Choreo Integration, you can view and manage them from the console. Each integration shows its build status, deployment status, and configuration options from its overview page. If you haven't created an integration on Choreo Cloud yet, see the [Deploy](../../deploy-and-run/deploy-and-run.md) section.
 
-If your integration is exposed as an API, see [API Management](api-management/api-management.md) for lifecycle states, security, rate limiting, and the developer portal.
-
-If your integration is a workflow, see [Manage Workflows](workflows.md) to start and monitor workflow runs and act on human tasks and reviews.
+If your integration is exposed as an API, see [API Management](api-management/api-management.md) for security and analytics.
 
 ## View integrations
 
-1. Log in to [WSO2 Cloud](https://console.devant.dev). The default project opens automatically.
+1. Log in to [Choreo Cloud](https://console.cloud.choreolabs.com). The default project opens automatically.
 2. On the project home, all integrations within the project are listed.
     <ThemedImage
-        alt="Project Overview"
+        alt="Project home page listing its integrations with their type and last-updated time"
         sources={{
             light: useBaseUrl('/img/deploy/cloud/deploy-from-editor/project-page-wso2-cloud.png'),
             dark: useBaseUrl('/img/deploy/cloud/deploy-from-editor/project-page-wso2-cloud.png'),
@@ -31,7 +29,7 @@ If your integration is a workflow, see [Manage Workflows](workflows.md) to start
     />
 3. Click an integration to open its overview page, where you can view its build status, deployment status, and configuration options.
     <ThemedImage
-        alt="Integration Overview"
+        alt="Integration overview page showing its latest build, Development environment, endpoint, and security"
         sources={{
             light: useBaseUrl('/img/manage/cloud/integrations/integration-overview.png'),
             dark: useBaseUrl('/img/manage/cloud/integrations/integration-overview.png'),
@@ -48,23 +46,21 @@ Deployment lifecycle management options depend on the integration type.
 
 From the integration overview page, you can manage the schedule for each environment independently:
 
-- **Schedule**: Set a schedule to run the automation. You can use a cron expression or select from predefined options like hourly, daily, or weekly.
+- **Schedule**: Click **Schedule** on an environment card to set when the automation runs. Choose **By interval** (a number and a unit — minute, hour, day, week, or month) or **By cron** (a raw cron expression), then click **Update**.
 - **Edit schedule**: Modify the existing schedule.
 - **Stop schedule**: Disable the schedule without deleting the integration. You can still run the integration manually.
 
+{/* TODO(v3): the Edit schedule / Stop schedule controls are not verified against v3 - the
+    test organization's automation has no active schedule to inspect. Set one, confirm the
+    button labels, and re-shoot if they differ. */}
+
 ### Integration as API
 
-The deployment status for each environment is visible from the overview page. Because scale to zero is enabled by default, you cannot manually stop a deployment.
-
-To manually stop or start a deployment:
-
-1. In the console, go to **Admin** > **Scaling**.
-2. Disable **Scale to zero** for the relevant environment.
-3. Return to the integration overview page. You can now stop and start the deployment for each environment.
+Each environment card shows its status as **Active** or **Suspended**. Click **Stop** to suspend the deployment, or **Start** to bring a suspended one back. The status briefly shows **In progress** while the change applies.
 
 ### AI agent
 
-Lifecycle management works the same as [Integration as API](#integration-as-api). Scale to zero is enabled by default, and you must disable it from **Admin** > **Scaling** before you can manually stop or start a deployment.
+Lifecycle management works the same as [Integration as API](#integration-as-api).
 
 ### Event integration
 
@@ -80,7 +76,16 @@ From the integration overview page, you can update the integration's name, descr
 
 - **Name**: Click the integration name to edit it in place.
 - **Description**: Click the description text to edit it in place.
-- **Labels**: Click **+ Add Labels** to add one or more labels to the integration. You can filter by these labels in the project overview page.
+
+    <ThemedImage
+        alt="Integration overview page with the description field open for inline editing"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/integrations/edit-description.png'),
+            dark: useBaseUrl('/img/manage/cloud/integrations/edit-description.png'),
+        }}
+    />
+
+- **Labels**: Click **Add labels**, enter a label, and press Enter to add it. Click **Save** to apply your changes.
 
 ## Delete an integration
 
@@ -113,6 +118,6 @@ The integration is permanently deleted.
 
 ## What's next
 
-- [API Management](api-management/api-management.md) — Publish, secure, rate-limit, and govern integrations exposed as APIs.
+- [API Management](api-management/api-management.md) — Secure, monitor, and govern integrations exposed as APIs.
 - [Configuration Management](../configurations/configurations.md) — Configure integration settings, runtime configurations, build configurations, and scaling options.
 - [Manage Projects](../projects.md) — Create, edit, and remove projects in your organization.

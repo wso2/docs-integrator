@@ -1,7 +1,7 @@
 ---
 title: "Built-in Capabilities"
-description: "Write, test, debug, and fix integrations with WSO2 Integrator Copilot."
-keywords: [wso2 integrator, copilot, ai, integration generation]
+description: "Write, test, debug, and fix integrations with Choreo Integrator Copilot."
+keywords: [choreo integrator, copilot, ai, integration generation]
 sidebar_position: 3
 slug: /editor/copilot/copilot-capabilities
 ---
@@ -11,10 +11,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Copilot Built-in Capabilities
 
-WSO2 Integrator Copilot builds integrations from natural language prompts. It produces ready-to-use artifacts in your project. Iterate through follow-up prompts to refine logic, add features, or modify behavior.
+Choreo Integrator Copilot builds integrations from natural language prompts. It produces ready-to-use artifacts in your project. Iterate through follow-up prompts to refine logic, add features, or modify behavior.
 
 <ThemedImage
-    alt="WSO2 Integrator Copilot panel open alongside an integration project in the editor."
+    alt="Choreo Integrator Copilot panel open alongside an integration project in the editor."
     sources={{
         light: useBaseUrl('/img/editor/copilot/copilot-overview.png'),
         dark: useBaseUrl('/img/editor/copilot/copilot-overview.png'),
@@ -169,7 +169,7 @@ To undo what Copilot changed, select **Restore Checkpoint**. It rolls your integ
 
 ## See also
 
-- [WSO2 Integrator Copilot](copilot.md) — Sign in to WSO2 Integrator Copilot.
+- [Choreo Integrator Copilot](copilot.md) — Sign in to Choreo Integrator Copilot.
 - [Copilot Chat Interface](chat-interface.md) — Chat controls, slash commands, and modes.
 - [Copilot in the Background](background-copilot.md) — Follow a run while the panel is closed.
 - [Reviewing Changes](reviewing-changes.md) — Inspect a run's changes in a unified diff.

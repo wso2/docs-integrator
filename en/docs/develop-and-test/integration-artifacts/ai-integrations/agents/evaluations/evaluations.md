@@ -1,14 +1,14 @@
 ---
 sidebar_position: 4
 title: Evaluate Agent Behavior
-description: Reference for AI agent evaluations in WSO2 Integrator. Capture session traces into evalsets, build evaluations in the visual designer, and review run reports and history.
-keywords: [wso2 integrator, ai agent, evaluations, evalset, golden dataset, llm-as-judge, regression]
+description: Reference for AI agent evaluations in Choreo Integrator. Capture session traces into evalsets, build evaluations in the visual designer, and review run reports and history.
+keywords: [choreo integrator, ai agent, evaluations, evalset, golden dataset, llm-as-judge, regression]
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/evaluations
 ---
 
 # Evaluations
 
-**Evaluations** are how you keep an AI agent's quality from regressing. Unlike unit tests with deterministic outputs, agent behaviour has to be judged across several dimensions: correctness, tool selection, groundedness, safety, and tone. Evaluations in WSO2 Integrator give you a structured way to measure those dimensions, see why a run regressed, and watch the trend across builds.
+**Evaluations** are how you keep an AI agent's quality from regressing. Unlike unit tests with deterministic outputs, agent behaviour has to be judged across several dimensions: correctness, tool selection, groundedness, safety, and tone. Evaluations in Choreo Integrator give you a structured way to measure those dimensions, see why a run regressed, and watch the trend across builds.
 
 The feature is built around three stages.
 

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: Understand the Editor
-description: Take a tour of the WSO2 Integrator editor, its workspace, canvases, designers, panels, and Copilot.
-keywords: [wso2 integrator, editor, editor window, views, canvases, designers, panels, copilot]
+description: Take a tour of the Choreo Integrator editor, its workspace, canvases, designers, panels, and Copilot.
+keywords: [choreo integrator, editor, editor window, views, canvases, designers, panels, copilot]
 hide_table_of_contents: true
 wide_layout: true
 slug: /editor
@@ -13,10 +13,10 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Understand the Editor
 
-The **WSO2 Integrator editor** brings together everything you need to develop, build, test, debug and deploy your integrations in one place. This tour works outward from the window you see when you open it, to the surfaces you build on, to the tools available throughout. The map below gives you the shape of it before you go deeper into any one piece.
+The **Choreo Integrator editor** brings together everything you need to develop, build, test, debug and deploy your integrations in one place. This tour works outward from the window you see when you open it, to the surfaces you build on, to the tools available throughout. The map below gives you the shape of it before you go deeper into any one piece.
 
 <ThemedImage
-    alt="WSO2 Integrator Editor components: the Editor Window contains Views (Project, Integration, Library) and the surfaces you work on inside a view (Canvases, Panels, Designers), alongside WSO2 Integrator Copilot"
+    alt="Choreo Integrator Editor components: the Editor Window contains Views (Project, Integration, Library) and the surfaces you work on inside a view (Canvases, Panels, Designers), alongside Choreo Integrator Copilot"
     sources={{
         light: useBaseUrl('/img/editor/editor-components.png'),
         dark: useBaseUrl('/img/editor/editor-components.png'),
@@ -79,9 +79,9 @@ Explore each part of the editor below.
 
 <PaletteCard icon="ai" highlight>
   <h3 class="palette-card-title">AI Assistance</h3>
-  <p class="palette-card-desc">WSO2 Integrator Copilot is the AI assistant built into the editor, for generating, testing, and fixing integrations.</p>
+  <p class="palette-card-desc">Choreo Integrator Copilot is the AI assistant built into the editor, for generating, testing, and fixing integrations.</p>
   <div class="palette-chip-row">
-    <PaletteChip href="/editor/copilot">WSO2 Integrator Copilot</PaletteChip>
+    <PaletteChip href="/editor/copilot">Choreo Integrator Copilot</PaletteChip>
     <PaletteChip href="/editor/copilot/copilot-capabilities">Built-in Capabilities</PaletteChip>
     <PaletteChip href="/editor/copilot/customize-copilot">Customize Copilot</PaletteChip>
   </div>

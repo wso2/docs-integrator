@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: "Build an Event-Driven Integration"
-description: Build an event-driven integration in WSO2 Integrator that consumes messages from a message broker.
-keywords: [wso2 integrator, rabbitmq service, event integration, quick start, ballerina, amqp]
+description: Build an event-driven integration in Choreo Integrator that consumes messages from a message broker.
+keywords: [choreo integrator, rabbitmq service, event integration, quick start, ballerina, amqp]
 slug: /get-started/quickstarts/build-event-driven-integration
 ---
 import ThemedImage from '@theme/ThemedImage';
@@ -21,10 +21,10 @@ Event integrations are designed for reactive workflows triggered by messages fro
 
 ## Prerequisites
 
-A working WSO2 Integrator environment.
+A working Choreo Integrator environment.
 
 <div style={{gridColumn: '1 / -1', minWidth: 0}}>
-<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">Sign up and launch WSO2 Integrator in the browser-based cloud editor.</PrereqCard>
+<PrereqCard icon="cloud" title="Choreo Cloud setup" href="/get-started/setup">Sign up and launch Choreo Integrator in the browser-based cloud editor.</PrereqCard>
 </div>
 
 <div style={{gridColumn: '1 / -1', minWidth: 0}}>
@@ -40,7 +40,7 @@ If you don't have a RabbitMQ instance, create a free one on [CloudAMQP](https://
 :::
 
 :::info Note
-The cloud editor runs in WSO2 Cloud and cannot connect to a RabbitMQ instance running on `localhost` on your computer.
+The cloud editor runs in Choreo Cloud and cannot connect to a RabbitMQ instance running on `localhost` on your computer.
 :::
 
 </div>
@@ -54,17 +54,17 @@ The cloud editor runs in WSO2 Cloud and cannot connect to a RabbitMQ instance ru
 1. On the project home page, click **Create on Cloud**.
 
    <ThemedImage
-       alt="WSO2 Cloud project home showing the Create on Cloud option"
+       alt="Choreo Cloud project home showing the Create on Cloud option"
        sources={{
            light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
            dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
        }}
    />
 
-2. The WSO2 Integrator cloud editor opens in your browser.
+2. The Choreo Integrator cloud editor opens in your browser.
 
    <ThemedImage
-    alt="WSO2 Integrator cloud editor landing page showing an empty integration and the Deploy to WSO2 Cloud panel"
+    alt="Choreo Integrator cloud editor landing page showing an empty integration and the Deploy to Choreo Cloud panel"
     sources={{
         light: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
         dark: useBaseUrl('/img/get-started/setup/cloud-editor-landing.png'),
@@ -231,9 +231,9 @@ The cloud editor creates a default integration for you, so you don't need to nam
        }}
    />
 
-## Step 6: Deploy to WSO2 Cloud
+## Step 6: Deploy to Choreo Cloud
 
-To deploy your integration to WSO2 Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
+To deploy your integration to Choreo Cloud from the cloud editor, see [Save and deploy](/deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor#save-and-deploy).
 
 </Steps>
 

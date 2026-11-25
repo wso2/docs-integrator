@@ -2,7 +2,7 @@
 sidebar_position: 0
 sidebar_label: Agent Basics
 title: AI Agents
-description: Reference for AI Agents in WSO2 Integrator — the AI Chat Agent Wizard, system prompt, tools, memory, observability, and evaluations.
+description: Reference for AI Agents in Choreo Integrator — the AI Chat Agent Wizard, system prompt, tools, memory, observability, and evaluations.
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents
 ---
 
@@ -26,7 +26,7 @@ An AI agent is composed of four core components that enable reasoning, action ex
 
 Without tools, the agent is limited to generating responses without interacting with external systems. Without memory, the agent cannot maintain context across multi-turn conversations.
 
-In WSO2 Integrator, AI agents can be visually designed, configured with tools and memory, connected to model providers, and exposed through APIs or listeners. An agent can also be attached as a tool of another agent, so one agent delegates part of its work to another. See [Multi-Agent Systems](multi-agent/multi-agent.md).
+In Choreo Integrator, AI agents can be visually designed, configured with tools and memory, connected to model providers, and exposed through APIs or listeners. An agent can also be attached as a tool of another agent, so one agent delegates part of its work to another. See [Multi-Agent Systems](multi-agent/multi-agent.md).
 
 ## Ways to create an agent
 
@@ -67,7 +67,7 @@ The **AI Agent** block allows you to configure the following components of the a
 
 ## Try it and run
 
-The top-right controls in the agent canvas allow you to interact with and test the agent directly within WSO2 Integrator.
+The top-right controls in the agent canvas allow you to interact with and test the agent directly within Choreo Integrator.
 
 | Button | Description |
 |---|---|

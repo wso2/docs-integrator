@@ -1,8 +1,8 @@
 ---
 sidebar_position: 30
 title: Capacity Planning
-description: Estimate CPU, memory, replica counts, and connection requirements for WSO2 Integrator deployments, based on measured performance data and benchmark results.
-keywords: [wso2 integrator, capacity planning, sizing, resource estimation, throughput, scaling, performance, benchmarks]
+description: Estimate CPU, memory, replica counts, and connection requirements for Choreo Integrator deployments, based on measured performance data and benchmark results.
+keywords: [choreo integrator, capacity planning, sizing, resource estimation, throughput, scaling, performance, benchmarks]
 slug: /deploy-and-run/capacity-planning
 ---
 
@@ -10,7 +10,7 @@ slug: /deploy-and-run/capacity-planning
 
 ## Overview and sizing guidelines
 
-Proper capacity planning ensures your integrations have sufficient resources to handle expected workloads while maintaining performance SLAs. This page provides sizing guidelines, resource configuration recommendations, and scaling guidance based on performance benchmarking of the WSO2 Integration Platform.
+Proper capacity planning ensures your integrations have sufficient resources to handle expected workloads while maintaining performance SLAs. This page provides sizing guidelines, resource configuration recommendations, and scaling guidance based on performance benchmarking of the Choreo Integration.
 
 :::note
 Capacity planning data on this page currently covers the **HTTP passthrough** scenario. Additional integration patterns will be added as benchmarks become available.
@@ -29,7 +29,7 @@ Before choosing a resource configuration, identify the following characteristics
 
 ### Resource configuration tiers
 
-The following tiers reflect configurations tested in WSO2 Integration Platform capacity planning. Start with the **S tier** as your baseline for most workloads.
+The following tiers reflect configurations tested in Choreo Integration capacity planning. Start with the **S tier** as your baseline for most workloads.
 
 | Tier | CPU | Memory | Recommended For |
 |------|-----|--------|-----------------|
@@ -117,7 +117,7 @@ Ensure your client connection pools are sized to maintain at least the minimum c
 
 ## Performance benchmarks
 
-This page presents performance benchmark results for WSO2 Integrator deployments on WSO2 Integration Platform PDP. Use these results as a baseline for your capacity planning decisions.
+This page presents performance benchmark results for Choreo Integrator deployments on Choreo Integration PDP. Use these results as a baseline for your capacity planning decisions.
 
 :::note
 Benchmarks currently cover the **HTTP passthrough** scenario. Results for additional integration patterns will be published as testing is completed.
@@ -127,9 +127,9 @@ Benchmarks currently cover the **HTTP passthrough** scenario. Results for additi
 
 | Component | Specification |
 |-----------|--------------|
-| Product | WSO2 Integrator 5.0.0 |
+| Product | Choreo Integrator 5.0.0 |
 | Ballerina Version | Ballerina 2201.13.4 (Swan Lake Update 13) |
-| Passthrough service | WSO2 Integration Platform PDP (Azure) |
+| Passthrough service | Choreo Integration PDP (Azure) |
 | Load generator | AWS EC2 m6a.xlarge (4 vCPU, 16 GiB RAM, up to 12.5 Gbps) |
 | Backend | Netty echo server on AWS EC2 c5.xlarge |
 | Scale-to-zero | Disabled (for consistent baseline measurements) |
@@ -144,7 +144,7 @@ Tests use a **stress testing** approach: the load generator targets a specific c
 - **Success criteria**: Error rate < 1% and achieved RPS within ±5% of target
 - **Resource configurations tested per replica**: 0.2 vCPU/512 MB, 0.5 vCPU/1 GB, 1.0 vCPU/1 GB, 2.0 vCPU/1 GB
 
-**N/A results** indicate that the target throughput cannot be achieved regardless of replica count, due to network latency constraints. When N/A results occur, CPU and memory on the replicas are not saturated — network round-trip time between the client, WSO2 Integration Platform PDP, and the backend is the limiting factor.
+**N/A results** indicate that the target throughput cannot be achieved regardless of replica count, due to network latency constraints. When N/A results occur, CPU and memory on the replicas are not saturated — network round-trip time between the client, Choreo Integration PDP, and the backend is the limiting factor.
 
 ### HTTP passthrough results
 

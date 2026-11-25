@@ -3,7 +3,7 @@ sidebar_position: 5
 title: "Track File Changes on an Azure Files Share"
 sidebar_label: "Track File Changes on an Azure Files Share"
 description: Build a scheduled change tracker that reports every created, modified, and deleted file on an Azure Files share by diffing entity tags against a snapshot kept on the share.
-keywords: [wso2 integrator, azure files, file share, change tracking, file events, created, modified, deleted, etag, snapshot, scheduled task, automation, use case, low-code]
+keywords: [choreo integrator, azure files, file share, change tracking, file events, created, modified, deleted, etag, snapshot, scheduled task, automation, use case, low-code]
 slug: /guides/how-to-guides/azure-files-change-tracker
 card_icon: file
 card_summary: A scheduled tracker that reports every created, modified, and deleted file on an Azure Files share
@@ -35,7 +35,7 @@ flowchart LR
     R -->|save new snapshot| A
 ```
 
-The WSO2 Integrator Scheduler invokes the automation periodically, and each run follows the same short flow:
+The Choreo Integrator Scheduler invokes the automation periodically, and each run follows the same short flow:
 
 1. Load the snapshot the previous run saved on the share. On the very first run there is none, so the run starts from an empty baseline.
 2. List the share with extended info, collecting each file's path and entity tag. The listing reads metadata only; no file content is transferred.
@@ -46,7 +46,7 @@ The WSO2 Integrator Scheduler invokes the automation periodically, and each run 
 
 :::info Prerequisites
 
-- A working WSO2 Integrator environment. See [Cloud setup](../../get-started/setup/setup.md).
+- A working Choreo Integrator environment. See [Cloud setup](../../get-started/setup/setup.md).
 - An Azure storage account with a file share, and its account name and access key. The [Azure Files connector setup guide](product://connectors/catalog/storage-file/azure.storage.files/setup-guide) walks through creating these.
 - The share must already exist. A tracker watches a share, it does not provision one.
 

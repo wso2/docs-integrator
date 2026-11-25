@@ -1,7 +1,7 @@
 ---
 title: CDC for PostgreSQL
 description: Capture real-time data changes from PostgreSQL tables using Change Data Capture, with handlers for insert, update, delete, truncate and read events.
-keywords: [wso2 integrator, cdc, postgresql, change data capture, event integration, debezium, logical replication]
+keywords: [choreo integrator, cdc, postgresql, change data capture, event integration, debezium, logical replication]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/cdc-postgresql
 ---
 
@@ -59,7 +59,7 @@ Logical replication must be enabled on the PostgreSQL server (`wal_level = logic
 
 4. Click **Create**.
 
-5. WSO2 Integrator creates the empty service and opens it in the **Service Designer**. The canvas shows the attached listener pill and the table name pill. The service has no handlers yet.
+5. Choreo Integrator creates the empty service and opens it in the **Service Designer**. The canvas shows the attached listener pill and the table name pill. The service has no handlers yet.
 
    <ThemedImage
        alt="Service Designer showing the PostgreSQL CDC service canvas"

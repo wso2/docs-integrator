@@ -51,7 +51,7 @@ function saveMessages(messages: AssistantMessage[]) {
 const SUGGESTIONS = [
   'How do I get started?',
   'Build an AI agent',
-  'Deploy to WSO2 Cloud',
+  'Deploy to Choreo Cloud',
 ];
 
 // Placeholder replies until the backend exists.
@@ -68,7 +68,7 @@ const PREVIEW_TOPICS: { keywords: string[]; reply: string; action: AssistantActi
   },
   {
     keywords: ['deploy', 'cloud', 'devant'],
-    reply: 'You can deploy your integration to WSO2 Cloud from the cloud editor or from WSO2 Integrator on your machine.',
+    reply: 'You can deploy your integration to Choreo Cloud from the cloud editor or from WSO2 Integrator on your machine.',
     action: { label: 'Cloud Setup', to: '/get-started/cloud-setup' },
   },
 ];
@@ -79,7 +79,7 @@ function getPreviewReply(question: string): AssistantMessage {
   if (topic) return { role: 'assistant', content: topic.reply, actions: [topic.action] };
   return {
     role: 'assistant',
-    content: 'Start with the Get Started guide to set up WSO2 Integrator and build your first integration.',
+    content: 'Start with the Get Started guide to set up Choreo Integrator and build your first integration.',
     actions: [{ label: 'Get Started', to: '/get-started' }],
   };
 }
@@ -207,7 +207,7 @@ export default function AssistantChat({ onClose }: Props): ReactNode {
       <div ref={listRef} className={styles.messages} aria-live="polite">
         {messages.length === 0 && (
           <div className={styles.empty}>
-            <p className={styles.emptyTitle}>How can I help you with WSO2 Integration Platform?</p>
+            <p className={styles.emptyTitle}>How can I help you with Choreo Integrationform?</p>
             <div className={styles.suggestions}>
               {SUGGESTIONS.map((s) => (
                 <button key={s} type="button" className={styles.suggestion} onClick={() => ask(s)}>
@@ -256,7 +256,7 @@ export default function AssistantChat({ onClose }: Props): ReactNode {
           ref={inputRef}
           type="text"
           className={styles.input}
-          placeholder="Ask anything about WSO2 Integration Platform..."
+          placeholder="Ask anything about Choreo Integration..."
           value={input}
           maxLength={2000}
           onChange={(e) => setInput(e.target.value)}

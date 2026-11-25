@@ -1,7 +1,7 @@
 ---
 title: Connections
 description: Centralize and reuse connection configurations for databases, HTTP clients, and message brokers.
-keywords: [wso2 integrator, connections, connector, database client, http client, kafka]
+keywords: [choreo integrator, connections, connector, database client, http client, kafka]
 slug: /develop-and-test/integration-artifacts/supportive-artifacts/connections
 ---
 
@@ -19,12 +19,12 @@ Connection artifacts centralize the configuration for external systems. Define c
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Open an integration/library in **WSO2 Integrator**.
+1. Open an integration/library in **Choreo Integrator**.
 
 2. Click **+** next to **Connections** in the sidebar. Alternatively, click **+ Add Artifact** in the **Design** panel, then click **Connection** under **Other Artifacts** or **Library Artifacts**.
 
    <ThemedImage
-       alt="WSO2 Integrator Add connection via sidebar"
+       alt="Choreo Integrator Add connection via sidebar"
        sources={{
            light: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/new-connection-sidebar-v5.1.png'),
            dark: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/new-connection-sidebar-v5.1.png'),
@@ -34,7 +34,7 @@ Connection artifacts centralize the configuration for external systems. Define c
 3. In the **Add Connection** panel, browse the available connectors. The panel groups them into **Create New Connector** and **Pre-built Connectors**. For details on each category and how to choose, see [Connection types](#connection-types).
 
    <ThemedImage
-       alt="WSO2 Integrator Add Connection panel"
+       alt="Choreo Integrator Add Connection panel"
        sources={{
            light: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/add-connection.png'),
            dark: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/add-connection.png'),
@@ -44,7 +44,7 @@ Connection artifacts centralize the configuration for external systems. Define c
 4. Select a connector. A configuration form appears with fields specific to that connector (for example, base URL and authentication for HTTP, host, port, and credentials for a database, or application/vendor-specific attributes).
 
    <ThemedImage
-       alt="WSO2 Integrator Connection initialization form"
+       alt="Choreo Integrator Connection initialization form"
        sources={{
            light: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/init-connection.png'),
            dark: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/init-connection.png'),
@@ -109,7 +109,7 @@ final kafka:Producer kafkaProducer = check new (kafkaBrokers, {
 To edit an existing connection, click its name in the sidebar under **Connections** to open its configuration form. Update the fields and click **Update Connection**.
 
 <ThemedImage
-    alt="WSO2 Integrator Connection edit form"
+    alt="Choreo Integrator Connection edit form"
     sources={{
         light: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/edit-connection.png'),
         dark: useBaseUrl('/img/develop/integration-artifacts/supporting/connections/edit-connection.png'),

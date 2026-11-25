@@ -2,14 +2,14 @@
 sidebar_position: 0
 sidebar_label: Try-It Experiences
 title: Try-It Tool
-description: Test your integrations during development directly from WSO2 Integrator without an external client.
-keywords: [wso2 integrator, try-it tool, test http service, test graphql, test chat agent, test mcp]
+description: Test your integrations during development directly from Choreo Integrator without an external client.
+keywords: [choreo integrator, try-it tool, test http service, test graphql, test chat agent, test mcp]
 slug: /develop-and-test/test/try-it-tool
 ---
 
 # Try-It Tool
 
-The Try-It tool is a built-in development-time testing interface that lets you send requests to your service and inspect responses without leaving WSO2 Integrator. Use it as you write code to verify behavior immediately, before committing to automated tests. The tool starts your service automatically when you select **Try It**, so there is no separate run step required.
+The Try-It tool is a built-in development-time testing interface that lets you send requests to your service and inspect responses without leaving Choreo Integrator. Use it as you write code to verify behavior immediately, before committing to automated tests. The tool starts your service automatically when you select **Try It**, so there is no separate run step required.
 
 ## Try-It experiences
 

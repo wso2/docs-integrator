@@ -1,16 +1,16 @@
 ---
 sidebar_position: 0
-title: "WSO2 Cloud - Integration Platform"
-description: "Manage integrations deployed to WSO2 Cloud - Integration Platform, including lifecycle operations, environments, configuration, API management, and access control."
-keywords: [wso2 integrator, wso2 cloud, integration platform, manage, overview]
+title: "Choreo Integration"
+description: "Manage integrations deployed to Choreo Integration, including lifecycle operations, environments, configuration, API management, and access control."
+keywords: [choreo integrator, choreo cloud, integration platform, manage, overview]
 slug: /manage
 hide_table_of_contents: true
 wide_layout: true
 ---
 
-# WSO2 Cloud - Integration Platform
+# Choreo Integration
 
-WSO2 Cloud - Integration Platform is a managed cloud environment for running integrations developed with WSO2 Integrator. Once you push an integration to the cloud, the console gives you full control over how it runs: you can track build and deployment status, promote integrations across environments, configure runtime values and security, monitor logs and metrics, and control who has access, all without managing infrastructure.
+Choreo Integration is a managed cloud environment for running integrations developed with Choreo Integrator. Once you push an integration to the cloud, the console gives you full control over how it runs: you can track build and deployment status, promote integrations across environments, configure runtime values and security, monitor runtime logs, and control who has access, all without managing infrastructure.
 
 ## Manage your integrations
 
@@ -36,7 +36,6 @@ WSO2 Cloud - Integration Platform is a managed cloud environment for running int
   <h3 class="palette-card-title">Manage Environments</h3>
   <ul class="palette-card-list">
     <li>Configure promotion pipelines</li>
-    <li>Promote with optional approval gates</li>
     <li>Override configuration per environment</li>
   </ul>
 </PaletteCard>
@@ -54,8 +53,6 @@ WSO2 Cloud - Integration Platform is a managed cloud environment for running int
   <h3 class="palette-card-title">Manage Access</h3>
   <ul class="palette-card-list">
     <li>User groups and roles</li>
-    <li>Organization- or project-level access</li>
-    <li>Enterprise login with an external identity provider</li>
     <li>User Portal for external users</li>
   </ul>
 </PaletteCard>
@@ -64,35 +61,9 @@ WSO2 Cloud - Integration Platform is a managed cloud environment for running int
 
 ## Managed platform services
 
-Managed backing services and resources your integrations can use.
+Managed AI services your integrations can use.
 
 <PaletteGrid>
-
-<PaletteCard icon="persist" href="/manage/managed-databases-and-caches">
-  <h3 class="palette-card-title">Managed Databases and Caches</h3>
-  <ul class="palette-card-list">
-    <li>PostgreSQL, MySQL, and cache services</li>
-    <li>Connect to your integrations</li>
-    <li>Plan for high availability</li>
-  </ul>
-</PaletteCard>
-
-<PaletteCard icon="connections" href="/manage/managed-message-brokers">
-  <h3 class="palette-card-title">Managed Message Brokers</h3>
-  <ul class="palette-card-list">
-    <li>Managed Kafka services</li>
-    <li>Use them from your integrations</li>
-  </ul>
-</PaletteCard>
-
-<PaletteCard icon="rag" href="/manage/managed-ai-services">
-  <h3 class="palette-card-title">Managed AI Services</h3>
-  <ul class="palette-card-list">
-    <li>Create and manage knowledge bases</li>
-    <li>Ingest and retrieve enterprise data</li>
-    <li>Connect integrations and AI agents</li>
-  </ul>
-</PaletteCard>
 
 <PaletteCard icon="agents" href="/manage/managed-ai-services/voice-agents">
   <h3 class="palette-card-title">Voice Agents</h3>
@@ -130,4 +101,4 @@ Organization-level governance, separate from day-to-day integration work.
 
 </PaletteGrid>
 
-Once an integration is live, see [Observe](../observe/observe.md) to monitor request throughput and resource usage, search runtime logs, and configure anomaly detection alerts. To run on dedicated infrastructure instead of the shared WSO2 Cloud data plane, see [Deploy on a Private Data Plane](../deploy-and-run/deploy-on-private-data-plane/deploy-on-private-data-plane.md).
+Once an integration is live, see [Observe](../observe/observe.md) to search and filter its runtime logs.

@@ -2,14 +2,14 @@
 sidebar_position: 0
 sidebar_label: Test Toolkit
 title: Test Toolkit
-description: Verify your integrations with the built-in Try-It tool, automated test cases, and AI-generated tests in WSO2 Integrator.
-keywords: [wso2 integrator, testing, try-it, test explorer, ai test generation, code coverage]
+description: Verify your integrations with the built-in Try-It tool, automated test cases, and AI-generated tests in Choreo Integrator.
+keywords: [choreo integrator, testing, try-it, test explorer, ai test generation, code coverage]
 slug: /develop-and-test/test
 ---
 
 # Test Toolkit
 
-WSO2 Integrator provides a full testing toolkit built into the editor. You do not need any external testing tool. Interactive verification, automated test authoring, AI-assisted generation, and coverage reporting are all available without leaving your development environment.
+Choreo Integrator provides a full testing toolkit built into the editor. You do not need any external testing tool. Interactive verification, automated test authoring, AI-assisted generation, and coverage reporting are all available without leaving your development environment.
 
 ## Testing approaches
 
@@ -17,7 +17,7 @@ WSO2 Integrator provides a full testing toolkit built into the editor. You do no
 |---|---|---|
 | **[Try-It tool](try-it-tool/try-it-tool.md)** | Sends live requests to a running integration and shows the response instantly. No test code required. Supports HTTP services, GraphQL services, chat agents, and MCP servers. | While building. Verify behavior after every change before writing formal tests. |
 | **[Test Explorer](test-explorer/test-explorer.md)** | Runs automated test cases written with the Ballerina test framework. Provides a visual view of pass/fail results, lets you re-run failures, and generates HTML and coverage reports. | When a feature is stable. Write repeatable tests that run in CI and catch regressions. |
-| **[Generate tests with AI](ai-generated-cases.md)** | Uses [WSO2 Integrator Copilot](../../editor/copilot/capabilities.md) to analyze your integration code and generate Ballerina test functions automatically, including mocks and edge cases. | When you need test coverage fast. Generate a first draft of the test suite and refine from there. |
+| **[Generate tests with AI](ai-generated-cases.md)** | Uses [Choreo Integrator Copilot](../../editor/copilot/capabilities.md) to analyze your integration code and generate Ballerina test functions automatically, including mocks and edge cases. | When you need test coverage fast. Generate a first draft of the test suite and refine from there. |
 
 ## Choosing the right approach
 

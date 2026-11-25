@@ -1,8 +1,8 @@
 ---
 sidebar_position: 6
 title: Identity & Access Management
-description: Learn how to secure AI agents, tools, and integrations using identity and access control in WSO2 Integrator.
-keywords: [wso2 integrator, ai agent, identity, access control, oauth2, authorization, authentication, agent security]
+description: Learn how to secure AI agents, tools, and integrations using identity and access control in Choreo Integrator.
+keywords: [choreo integrator, ai agent, identity, access control, oauth2, authorization, authentication, agent security]
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/identity-and-access-management
 ---
 
@@ -13,7 +13,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 AI agents interact with MCP servers, APIs, databases, and enterprise systems to perform tasks autonomously. As agents access enterprise resources and external services, it is important to secure and govern these interactions using proper identity and access control mechanisms.
 
-WSO2 Integrator provides built-in support for securing agents, tools, and service integrations using authentication and authorization standards such as OAuth 2.0. Agents are treated as first-class identities, allowing organizations to manage access in a secure, controlled, and traceable manner.
+Choreo Integrator provides built-in support for securing agents, tools, and service integrations using authentication and authorization standards such as OAuth 2.0. Agents are treated as first-class identities, allowing organizations to manage access in a secure, controlled, and traceable manner.
 
 The platform separates authentication and authorization to provide fine-grained access control.
 

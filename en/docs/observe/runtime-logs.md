@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: "Runtime Logs"
-description: "View and filter runtime logs for integrations deployed on WSO2 Cloud - Integration Platform."
-keywords: [wso2 integrator, wso2 cloud, runtime logs, observability, logs]
+description: "View and filter runtime logs for integrations deployed on Choreo Integration."
+keywords: [choreo integrator, choreo cloud, runtime logs, observability, logs]
 slug: /observe/runtime-logs
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Runtime Logs
 
-Runtime logs provide insights into application and gateway activity for integrations deployed on WSO2 Cloud - Integration Platform. They centralize diverse log sources to streamline debugging and troubleshooting across environments.
+Runtime logs provide insights into application and gateway activity for integrations deployed on Choreo Integration. They centralize diverse log sources to streamline debugging and troubleshooting across environments.
 
 :::note
 All personally identifiable information (PII) is resolved at the frontend service level. Only relevant UUIDs are stored in logs.
@@ -91,10 +91,6 @@ You can narrow log entries using the following filters:
 Type your search query in the search bar and press **Enter** to apply a content or regex search filter.
 
 :::note
-WSO2 Cloud uses Lucene query syntax for regex search. For more information on Lucene syntax, see [Lucene Query Syntax Documentation](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html).
+Choreo Cloud uses Lucene query syntax for regex search. For more information on Lucene syntax, see [Lucene Query Syntax Documentation](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html).
 :::
 
-## What's next
-
-- [Metrics](./metrics.md) — Monitor request throughput, latency, and resource usage over time.
-- [Anomaly detection and alerts](./anomaly-detection-alerts.md) — Configure alerts to get notified when metrics exceed defined thresholds.

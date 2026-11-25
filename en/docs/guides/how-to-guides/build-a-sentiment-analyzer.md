@@ -2,7 +2,7 @@
 sidebar_position: 1
 title: "Build a Sentiment Analyzer"
 description: Build your first AI integration. An HTTP service that uses a direct LLM call to classify customer reviews.
-keywords: [wso2 integrator, ai, llm, direct llm call, sentiment analysis, quick start, ballerina ai]
+keywords: [choreo integrator, ai, llm, direct llm call, sentiment analysis, quick start, ballerina ai]
 slug: /guides/how-to-guides/build-a-sentiment-analyzer
 card_icon: ai
 card_summary: Your first AI integration with a direct LLM call
@@ -32,7 +32,7 @@ A direct LLM call is the simplest way to use AI in an integration: you send a pr
 ## Step 1: Add an HTTP service
 
 1. Select your integration from the Project overview canvas.
-2. On the **Design** tab, select **Add Artifact manually** below the WSO2 Integrator Copilot's quick-start cards.
+2. On the **Design** tab, select **Add Artifact manually** below the Choreo Integrator Copilot's quick-start cards.
 3. On the Artifacts page, select **HTTP Service** under **Integration as API**.
 
 <ThemedImage
@@ -149,7 +149,7 @@ The flow now shows **Start**, **ai:generate**, **Return**, and the **Error Handl
 
 ## Step 6: Run and test
 
-1. Select **Run**. WSO2 Integrator compiles and starts the integration in the terminal.
+1. Select **Run**. Choreo Integrator compiles and starts the integration in the terminal.
 2. Select **Try It**. A `TryIt.hurl` request file opens, prefilled with a `POST` request to `/analyze` and an example JSON body.
 3. Update the JSON body if needed, for example `{"text": "Absolutely loved this product! Best purchase I made all year."}`.
 4. Select the run icon next to the request to send it.
@@ -220,7 +220,7 @@ service / on httpDefaultListener {
 
 Note that `generate` takes an expected type descriptor as an argument, but it is not explicitly passed here. Ballerina infers it from the type of the variable the result is assigned to (`SentimentResult`), so the call stays concise while still being fully type-checked. The resource itself returns `json|error`: the `do`/`on fail` block catches any error from the LLM call (the **Error Handler** node) and lets you customize the failure response, while the successful path still returns the fully typed `sentimentResult`.
 
-Run and test the integration from WSO2 Integrator using the **Try It** panel as shown in Step 6. The response returns `Status: 201 Created` with a body similar to `{"sentiment":"POSITIVE","confidence":0.98}`, with the actual sentiment and confidence score determined by the model.
+Run and test the integration from Choreo Integrator using the **Try It** panel as shown in Step 6. The response returns `Status: 201 Created` with a body similar to `{"sentiment":"POSITIVE","confidence":0.98}`, with the actual sentiment and confidence score determined by the model.
 
 </TabItem>
 </Tabs>

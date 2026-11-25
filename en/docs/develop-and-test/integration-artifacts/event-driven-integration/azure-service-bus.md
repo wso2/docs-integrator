@@ -43,7 +43,7 @@ Azure Service Bus event integrations consume messages from a queue or topic subs
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section.
 
    <ThemedImage
        alt="Service Designer showing the Azure Service Bus service canvas"

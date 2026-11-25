@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: Message Filter
-description: "Implement the Message Filter pattern with WSO2 Integrator."
+description: "Implement the Message Filter pattern with Choreo Integrator."
 slug: /develop-and-test/integration-patterns/message-filter
 ---
 

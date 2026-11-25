@@ -9,7 +9,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # gRPC Service
 
-gRPC services use Protocol Buffers (protobuf) to define strongly-typed contracts and support four communication patterns: unary, server streaming, client streaming, and bidirectional streaming. WSO2 Integrator generates Ballerina service stubs from your `.proto` files using the `bal grpc` tool, which you run from the integrated terminal in your project.
+gRPC services use Protocol Buffers (protobuf) to define strongly-typed contracts and support four communication patterns: unary, server streaming, client streaming, and bidirectional streaming. Choreo Integrator generates Ballerina service stubs from your `.proto` files using the `bal grpc` tool, which you run from the integrated terminal in your project.
 
 :::note
 gRPC service creation is not available through **+ Add Artifact** in the Visual Designer. Use the integrated terminal in your project to generate service stubs from a `.proto` file, then implement the remote functions in code. Once the service exists, you can open it in the visual designer to implement logic for individual remote functions.

@@ -15,7 +15,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 Accelerate integration development with Ballerina CLI tools that generate service stubs, client code, schemas, and data converters from industry-standard specifications. These tools eliminate boilerplate and ensure your integrations conform to API contracts, protocol definitions, and data standards.
 
-In WSO2 Integrator, most tools are accessible both from the command line and from the Visual Designer in VS Code.
+In Choreo Integrator, most tools are accessible both from the command line and from the Visual Designer in VS Code.
 
 <ThemedImage
     alt="VS Code command palette showing bal tool commands"
@@ -112,4 +112,4 @@ Tools that support code quality and data persistence, independent of any particu
 | Persist | `bal persist` | Record types | Data store client | CLI only |
 | Connector | `bal connector` | OpenAPI YAML/JSON | Full connector package (client, tests, examples, docs) | CLI only |
 
-Moving an existing integration from MuleSoft, TIBCO BusinessWorks, or Azure Logic Apps? See [Migrate to WSO2 Integrator](../../migrate/index.md).
+Moving an existing integration from MuleSoft, TIBCO BusinessWorks, or Azure Logic Apps? See [Migrate to Choreo Integrator](../../migrate/index.md).

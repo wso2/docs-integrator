@@ -1,6 +1,6 @@
 ---
 title: Polling Consumer
-description: "Implement the Polling Consumer pattern with WSO2 Integrator."
+description: "Implement the Polling Consumer pattern with Choreo Integrator."
 sidebar_position: 7
 slug: /develop-and-test/integration-patterns/polling-consumer
 ---

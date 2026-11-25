@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Model Providers for LLMs
-description: Reference for every model provider for LLM in WSO2 Integrator, covering create form fields, advanced configurations, defaults, and supported models for the Default WSO2 provider, OpenAI, Azure OpenAI, Anthropic, AWS Bedrock, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.
-keywords: [wso2 integrator, model provider, llm, large language model, ai, anthropic, aws bedrock, openai, azure openai, google vertex, mistral, deepseek, ollama, openrouter, gpt-5, responses api, reasoning effort]
+description: Reference for every model provider for LLM in Choreo Integrator, covering create form fields, advanced configurations, defaults, and supported models for the Default WSO2 provider, OpenAI, Azure OpenAI, Anthropic, AWS Bedrock, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.
+keywords: [choreo integrator, model provider, llm, large language model, ai, anthropic, aws bedrock, openai, azure openai, google vertex, mistral, deepseek, ollama, openrouter, gpt-5, responses api, reasoning effort]
 slug: /develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers
 ---
 
@@ -13,7 +13,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 A **Large Language Model (LLM)** is a neural network trained on large text corpora. You send it a prompt (a text instruction) and it generates a response. LLMs power natural language tasks such as answering questions, summarizing content, extracting structured data, and planning and executing tool calls.
 
-A **Model Provider** is WSO2 Integrator's unified abstraction over LLMs. It wraps the provider-specific API behind a consistent interface, so Direct LLM Calls, Natural Functions, the RAG `generate` node, and AI agents all work the same way regardless of which LLM you choose. Pick a provider, fill in the form, and click **Save**.
+A **Model Provider** is Choreo Integrator's unified abstraction over LLMs. It wraps the provider-specific API behind a consistent interface, so Direct LLM Calls, Natural Functions, and AI agents all work the same way regardless of which LLM you choose. Pick a provider, fill in the form, and click **Save**.
 
 Every model provider exposes the same two actions, so switching LLMs is a connection-level swap that leaves the rest of your flow unchanged.
 
@@ -23,7 +23,7 @@ Every model provider exposes the following actions.
 
 | Action | What it does | Required parameters | Optional parameters |
 |---|---|---|---|
-| **Generate** | Sends a prompt to the model and binds the response to a typed Ballerina value. The everyday action behind a `generate` node, a Natural Function, or RAG `ai:generate`. | **Prompt** (the instruction template), **Expected Type** (the type the response is parsed into) | None per call. Anything you want to tune (temperature, max tokens) lives on the connection. |
+| **Generate** | Sends a prompt to the model and binds the response to a typed Ballerina value. The everyday action behind a `generate` node or a Natural Function. | **Prompt** (the instruction template), **Expected Type** (the type the response is parsed into) | None per call. Anything you want to tune (temperature, max tokens) lives on the connection. |
 | **Chat** | Sends a list of chat messages and (optionally) tool definitions; returns the model's reply, including any tool calls. Used by Agents. | **Messages** (the conversation), **Tools** (tool definitions for tool calling) | **Stop** (a stop sequence). |
 
 :::note
@@ -64,18 +64,18 @@ Scroll to see the remaining options:
 
 ## Supported model providers
 
-| Provider | Module | API key required? | Has embedding provider? |
-|---|---|---|---|
-| **Default WSO2** | `ballerina/ai` | No (signed-in via WSO2) | Yes. See [Default WSO2 Embedding Provider](embedding-providers.md#default-wso2-embedding-provider) |
-| **Anthropic** | [`ballerinax/ai.anthropic`](https://central.ballerina.io/ballerinax/ai.anthropic/latest) | Yes | No |
-| **AWS Bedrock** | [`ballerinax/ai.aws.bedrock`](https://central.ballerina.io/ballerinax/ai.aws.bedrock/latest) | AWS credentials or a Bedrock API key | Yes |
-| **Azure OpenAI** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Yes | Yes |
-| **DeepSeek** | [`ballerinax/ai.deepseek`](https://central.ballerina.io/ballerinax/ai.deepseek/latest) | Yes | No |
-| **Google Vertex** | [`ballerinax/ai.googleapis.vertex`](https://central.ballerina.io/ballerinax/ai.googleapis.vertex/latest) | OAuth2 / service account | Yes |
-| **Mistral** | [`ballerinax/ai.mistral`](https://central.ballerina.io/ballerinax/ai.mistral/latest) | Yes | No |
-| **Ollama** | [`ballerinax/ai.ollama`](https://central.ballerina.io/ballerinax/ai.ollama/latest) | No (local) | No |
-| **OpenAI** | [`ballerinax/ai.openai`](https://central.ballerina.io/ballerinax/ai.openai/latest) | Yes | Yes |
-| **OpenRouter** | [`ballerinax/ai.openrouter`](https://central.ballerina.io/ballerinax/ai.openrouter/latest) | Yes | Yes |
+| Provider | Module | API key required? |
+|---|---|---|
+| **Default WSO2** | `ballerina/ai` | No (signed-in via WSO2) |
+| **Anthropic** | [`ballerinax/ai.anthropic`](https://central.ballerina.io/ballerinax/ai.anthropic/latest) | Yes |
+| **AWS Bedrock** | [`ballerinax/ai.aws.bedrock`](https://central.ballerina.io/ballerinax/ai.aws.bedrock/latest) | AWS credentials or a Bedrock API key |
+| **Azure OpenAI** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Yes |
+| **DeepSeek** | [`ballerinax/ai.deepseek`](https://central.ballerina.io/ballerinax/ai.deepseek/latest) | Yes |
+| **Google Vertex** | [`ballerinax/ai.googleapis.vertex`](https://central.ballerina.io/ballerinax/ai.googleapis.vertex/latest) | OAuth2 / service account |
+| **Mistral** | [`ballerinax/ai.mistral`](https://central.ballerina.io/ballerinax/ai.mistral/latest) | Yes |
+| **Ollama** | [`ballerinax/ai.ollama`](https://central.ballerina.io/ballerinax/ai.ollama/latest) | No (local) |
+| **OpenAI** | [`ballerinax/ai.openai`](https://central.ballerina.io/ballerinax/ai.openai/latest) | Yes |
+| **OpenRouter** | [`ballerinax/ai.openrouter`](https://central.ballerina.io/ballerinax/ai.openrouter/latest) | Yes |
 
 ## Standard HTTP advanced configurations
 
@@ -144,7 +144,7 @@ Provided by the core `ballerina/ai` package. Routes through the WSO2 intelligenc
     }}
 />
 
-No provider-specific fields. Sign in with your WSO2 account and WSO2 Integrator handles the rest. There are no advanced configurations on this provider.
+No provider-specific fields. Sign in with your WSO2 account and Choreo Integrator handles the rest. There are no advanced configurations on this provider.
 
 :::tip
 When you click **Save**, the Command Palette opens with **Ballerina: Configure default WSO2 model provider**. Sign in once and the credentials are written to `Config.toml` automatically. You can re-run the command at any time to refresh.
@@ -308,10 +308,6 @@ Provider-specific fields:
 **Chat** also accepts images (PNG, JPEG, GIF, and WebP) on the `CONVERSE` API, on the Anthropic provider's `MESSAGES` and `INVOKE` APIs, and on the Amazon provider's `INVOKE` API. On other APIs, a message with an image returns an error. Send images as bytes; an image URL returns an error.
 :::
 
-:::info
-The AWS Bedrock package also ships **Embedding Providers** (Titan and Cohere). See [Embedding providers](embedding-providers.md).
-:::
-
 ## Azure OpenAI
 
 Same family of models as OpenAI (including the GPT-5 family), hosted on Azure with per-resource deployments. Like the OpenAI provider, it can call either the **Chat Completions API** (the default) or the **Responses API**, and it supports both Azure's newer **v1** endpoint and the legacy date-based `api-version` endpoints. For details on the two API surfaces and their URL and `api-version` requirements, see the [Azure OpenAI API version lifecycle documentation](https://learn.microsoft.com/azure/ai-services/openai/api-version-lifecycle).
@@ -367,10 +363,6 @@ Scrolling further shows Timeout, Forwarded, Compression, Payload Validation, the
 ### Advanced configurations
 
 Expanding **Advanced Configurations** shows the exact same panel as the [Standard HTTP advanced configurations](#standard-http-advanced-configurations) section above. Azure OpenAI adds no further provider-specific fields here.
-
-:::info
-The Azure package also ships an **Embedding Provider** and the **Azure AI Search Knowledge Base**. See [Azure OpenAI](embedding-providers.md#azure-openai) and [Azure AI Search](knowledge-bases.md#azure-ai-search-knowledge-base).
-:::
 
 ## DeepSeek
 
@@ -471,10 +463,6 @@ Expanding **Advanced Configurations** shows the exact same panel as the [Standar
 | **OAuth2 refresh config** | `clientId`, `clientSecret`, `refreshToken`, optional `refreshUrl` | Already have OAuth2 refresh-token credentials. |
 | **Service account config** | `clientEmail`, `privateKey`, optional `scopes` | Want explicit credentials in source. |
 | **Service account JSON path** | A file path string | Easiest - point at the downloaded service-account JSON file from the Google Cloud console. The connector reads `client_email` and `private_key` automatically and refreshes the token. |
-
-:::info
-Vertex also ships an **Embedding Provider**. See [Google Vertex](embedding-providers.md#google-vertex).
-:::
 
 ## Mistral
 
@@ -664,10 +652,6 @@ Reasoning effort applies only to reasoning models. The chat-tuned variants (`gpt
 | `gpt-5.4`, `gpt-5.4-mini`, `gpt-5.4-nano`, `gpt-5.5`, and the `gpt-5.6` family | `none`, `low`, `medium`, `high`, `xhigh` |
 | o-series (`o1`, `o1-pro`, `o3`, `o3-mini`, `o3-pro`, `o4-mini`) and the Codex models | Accepted; the value is passed through without a per-model restriction list. |
 
-:::info
-The OpenAI package also ships an **Embedding Provider**. See [OpenAI](embedding-providers.md#openai).
-:::
-
 ## OpenRouter
 
 OpenRouter routes a single API across many model providers (OpenAI, Anthropic, Mistral, Meta, Cohere, and others). Use it when you want one key and the freedom to swap models by string.
@@ -717,10 +701,6 @@ Scrolling further shows Timeout, Forwarded, Compression, Payload Validation, the
 
 Expanding **Advanced Configurations** shows the exact same panel as the [Standard HTTP advanced configurations](#standard-http-advanced-configurations) section above. OpenRouter adds no provider-specific fields here.
 
-:::info
-The OpenRouter package also ships an **Embedding Provider**. See [OpenRouter](embedding-providers.md#openrouter).
-:::
-
 ## Model provider connections
 
 Once you **save** a model provider, it becomes a reusable project connection that can be accessed throughout your integration and AI flows.
@@ -768,12 +748,10 @@ To change a provider's API key, model name, or any other field after it's been c
 | **Update Connection** | Save the change. Existing nodes that referenced the connection continue to work. |
 
 :::tip
-Editing a connection follows the same pattern for every component type. Embedding providers, vector stores, knowledge bases, and chunkers all use the same Edit Connection modal.
+Editing a connection follows the same pattern for every component type, using the same Edit Connection modal.
 :::
 
 ## What's next
 
-- [Embedding providers](embedding-providers.md) — Vector embeddings for RAG. The OpenAI, Azure, AWS Bedrock, Vertex, OpenRouter, and Default WSO2 packages also ship embedding providers.
-- [Vector stores](vector-stores.md) — Persist and query embeddings using Pinecone, Weaviate, Qdrant, pgvector, and other backends.
-- [Knowledge bases](knowledge-bases.md) — Managed retrieval sources, including Azure AI Search, that plug directly into RAG flows.
-- [Chunkers](chunkers.md) — Split documents into chunks before embedding for ingestion into a vector store.
+- [AI Agents](../agents/agents.md) — Use a model provider to power an agent's reasoning.
+- [Direct LLMs](../direct-llm/direct-llm.md) — Use a model provider directly, with no agent loop.

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Manage Users in the User Portal
-description: "Create User Portal users and roles, assign permissions to roles, and assign roles to users from the WSO2 Cloud - Integration Platform console."
-keywords: [wso2 cloud, user portal, users, roles, permissions, scopes, external users, identity platform, wso2 cloud admin, wso2 cloud reader]
+description: "Create User Portal users and roles, assign permissions to roles, and assign roles to users from the Choreo Integration console."
+keywords: [choreo cloud, user portal, users, roles, permissions, scopes, external users, identity platform, choreo cloud admin, choreo cloud reader]
 slug: /manage/users-and-access/user-portal/manage-users
 ---
 
@@ -11,23 +11,23 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Manage Users in the User Portal
 
-Users sign in to the User Portal with an account in your WSO2 Identity Platform organization. That organization is the user store for the User Portal. You create users and roles, and assign permissions to roles, from the **Users** and **Roles** tabs in the WSO2 Cloud console.
+Users sign in to the User Portal with an account in your Choreo Identity organization. That organization is the user store for the User Portal. You create users and roles, and assign permissions to roles, from the **Users** and **Roles** tabs in the Choreo Cloud console.
 
 :::tip
-The **Users** and **Roles** tabs are a convenience. They make changes in your WSO2 Identity Platform organization, so you can also manage User Portal users and roles directly in WSO2 Identity Platform. If you create a role there, under **Role Audience**, select **Application**, then select the **User Portal** application. The User Portal uses only the roles on this application. For more information, see [WSO2 Identity Platform documentation: Onboard users](https://wso2.com/identity-platform/docs/guides/users/onboard-users/) and [WSO2 Identity Platform documentation: Manage roles](https://wso2.com/identity-platform/docs/guides/users/manage-roles/).
+The **Users** and **Roles** tabs are a convenience. They make changes in your Choreo Identity organization, so you can also manage User Portal users and roles directly in Choreo Identity. If you create a role there, under **Role Audience**, select **Application**, then select the **User Portal** application. The User Portal uses only the roles on this application. For more information, see [Choreo Identity documentation: Onboard users](https://wso2.com/identity-platform/docs/guides/users/onboard-users/) and [Choreo Identity documentation: Manage roles](https://wso2.com/identity-platform/docs/guides/users/manage-roles/).
 :::
 
-The roles of a user decide what the user can do in the User Portal. Each role holds a set of permissions, which are the scopes that WSO2 Identity Platform adds to the user's token. The User Portal shows an integration only if the user has the view scope for its type. See [Scopes](#scopes).
+The roles of a user decide what the user can do in the User Portal. Each role holds a set of permissions, which are the scopes that Choreo Identity adds to the user's token. The User Portal shows an integration only if the user has the view scope for its type. See [Scopes](#scopes).
 
 :::info
-To manage User Portal users and roles in the WSO2 Cloud console, your role must include the **Manage Organization** permission under **Organization Management**, assigned at the organization level. For more information about roles and permissions, see [Access Control](../access-control.md).
+To manage User Portal users and roles in the Choreo Cloud console, your role must include the **Manage Organization** permission under **Organization Management**, assigned at the organization level. For more information about roles and permissions, see [Access Control](../access-control.md).
 :::
 
 ## How access works
 
 ### Scopes
 
-When you [enable the User Portal](user-portal.md#enable-the-user-portal), the platform creates the **User Portal APIs** API resource in your WSO2 Identity Platform organization. This API resource defines the following scopes. To see them in the console, go to **Admin** > **Settings** > **User Portal** > **Roles**, click a role, then click **Permissions**.
+When you [enable the User Portal](user-portal.md#enable-the-user-portal), the platform creates the **User Portal APIs** API resource in your Choreo Identity organization. This API resource defines the following scopes. To see them in the console, go to **Admin** > **Settings** > **User Portal** > **Roles**, click a role, then click **Permissions**.
 
 | Scope | What it allows | View scope |
 |---|---|---|
@@ -35,15 +35,10 @@ When you [enable the User Portal](user-portal.md#enable-the-user-portal), the pl
 | `automation:trigger` | Run automations in the organization. | No |
 | `aiagent:view` | View AI agents in the organization. | Yes |
 | `aiagent:invoke` | Chat with AI agents in the organization. | No |
-| `workflow:view` | View workflows in the organization. | Yes |
-| `workflow_mgt:view_workflows` | View workflow executions in the organization. | Yes |
-| `workflow_mgt:manage_workflows` | Start, suspend, resume, cancel, and terminate workflow executions, and act on approvals in the organization. | No |
-| `workflow_mgt:view_human_tasks` | View the human tasks of workflows in the organization. | Yes |
-| `workflow_mgt:manage_human_tasks` | Complete the human tasks of workflows in the organization. | No |
 
 The User Portal uses these scopes as follows:
 
-- **To see an integration, a user needs the view scope for its type.** A user needs `automation:view` to see automations, `aiagent:view` to see AI agents, and `workflow:view` to see workflows. If a user has none of these scopes, the **Integrations** tab of the User Portal is empty.
+- **To see an integration, a user needs the view scope for its type.** A user needs `automation:view` to see automations and `aiagent:view` to see AI agents. If a user has none of these scopes, the **Integrations** tab of the User Portal is empty.
 - **To run an automation, a user needs `automation:trigger`.** Without this scope, the user can see the automation, but the **Execute** button is disabled.
 
 :::note
@@ -58,10 +53,10 @@ When you enable the User Portal, the platform creates two roles on the User Port
 
 | Role | Scopes | Who gets it by default |
 |---|---|---|
-| **WSO2 Cloud Admin** | All the scopes of the User Portal API resource. | Members of your WSO2 Cloud organization who have permission to manage components. |
-| **WSO2 Cloud Reader** | Only the view scopes of the User Portal API resource. | Every other member of your WSO2 Cloud organization. |
+| **WSO2 Cloud Admin** | All the scopes of the User Portal API resource. | Members of your Choreo Cloud organization who have permission to manage components. |
+| **WSO2 Cloud Reader** | Only the view scopes of the User Portal API resource. | Every other member of your Choreo Cloud organization. |
 
-When a member of your WSO2 Cloud organization signs in to the User Portal with **Sign in with Integration Platform** for the first time, the platform adds the member to your WSO2 Identity Platform organization and assigns one of these roles. The platform does not change the roles of a member who already has a role on the User Portal application.
+When a member of your Choreo Cloud organization signs in to the User Portal with **Sign in with Integration Platform** for the first time, the platform adds the member to your Choreo Identity organization and assigns one of these roles. The platform does not change the roles of a member who already has a role on the User Portal application.
 
 These are system roles. You can assign them to users and remove them from users, but you cannot rename them or change their permissions.
 
@@ -73,7 +68,7 @@ Changes to the permissions of a role can take up to 10 minutes to appear in User
 
 ## Open the users and roles tabs
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev).
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
 2. In the top navigation, click the **Organization** list and select your organization.
 3. In the left navigation menu, click **Settings** under **Admin**.
 4. Click the **User Portal** tab.
@@ -83,7 +78,7 @@ The **Users** and **Roles** tabs appear only after you enable the User Portal. S
 
 ## Manage users
 
-In your organization, go to **Admin** > **Settings** > **User Portal** > **Users**. The **Users** tab lists the users in your WSO2 Identity Platform organization. For each user, it shows the name, username, status, and the roles that the user has on the User Portal application. To search the list, click the search icon.
+In your organization, go to **Admin** > **Settings** > **User Portal** > **Users**. The **Users** tab lists the users in your Choreo Identity organization. For each user, it shows the name, username, status, and the roles that the user has on the User Portal application. To search the list, click the search icon.
 
 <ThemedImage
     alt="Users tab of the User Portal settings with the list of users, their status, and roles"
@@ -93,14 +88,13 @@ In your organization, go to **Admin** > **Settings** > **User Portal** > **Users
     }}
 />
 
-
 The status of a user is one of the following:
 
 | Status | Meaning |
 |---|---|
 | **Active** | The user can sign in. |
 | **Invited** | The user has not yet set a password from the invitation email. |
-| **Locked** | The account is locked, so the user cannot sign in. Unlock the account in your WSO2 Identity Platform organization. |
+| **Locked** | The account is locked, so the user cannot sign in. Unlock the account in your Choreo Identity organization. |
 
 ### Create a user
 
@@ -119,7 +113,7 @@ The status of a user is one of the following:
 
 5. Click **Create**.
 
-The platform creates the user in your WSO2 Identity Platform organization and assigns the roles that you selected. WSO2 Identity Platform sends the user an email with a link to set a password. After the user sets a password, the user can sign in to the User Portal with **Sign In**. Share the User Portal link for your organization, or the organization handle, with the user. See [Sign in to the User Portal](sign-in-to-user-portal.md).
+The platform creates the user in your Choreo Identity organization and assigns the roles that you selected. Choreo Identity sends the user an email with a link to set a password. After the user sets a password, the user can sign in to the User Portal with **Sign In**. Share the User Portal link for your organization, or the organization handle, with the user. See [Sign in to the User Portal](sign-in-to-user-portal.md).
 
 ### Assign roles to a user
 
@@ -147,7 +141,7 @@ The platform creates the user in your WSO2 Identity Platform organization and as
 
 ### Edit or delete a user
 
-You cannot edit or delete users from the WSO2 Cloud console. To do this, go to **User Management** > **Users** in your WSO2 Identity Platform organization. The link on the **Admin** > **Settings** > **User Portal** > **Users** tab opens this page. For more information, see [WSO2 Identity Platform documentation: Manage users](https://wso2.com/identity-platform/docs/guides/users/manage-users/).
+You cannot edit or delete users from the Choreo Cloud console. To do this, go to **User Management** > **Users** in your Choreo Identity organization. The link on the **Admin** > **Settings** > **User Portal** > **Users** tab opens this page. For more information, see [Choreo Identity documentation: Manage users](https://wso2.com/identity-platform/docs/guides/users/manage-users/).
 
 ## Manage roles
 
@@ -160,7 +154,6 @@ In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles
         dark: useBaseUrl('/img/manage/cloud/user-portal/roles-list.png'),
     }}
 />
-
 
 ### Create a role
 
@@ -183,7 +176,6 @@ In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles
             dark: useBaseUrl('/img/manage/cloud/user-portal/create-role.png'),
         }}
     />
-
 
 5. Click **Create**.
 
@@ -235,21 +227,13 @@ To remove a user from the role, click the **Unassign** icon next to the user, th
 
 ### Delete a role
 
-You cannot delete roles from the WSO2 Cloud console. To do this, go to **User Management** > **Roles** in your WSO2 Identity Platform organization. The link on the **Admin** > **Settings** > **User Portal** > **Roles** tab opens this page. If you delete a system role, the **User Portal** page shows that the role is no longer in place. To recreate it, see [Repair the User Portal](check-and-repair.md#repair-the-user-portal). For more information, see [WSO2 Identity Platform documentation: Manage roles](https://wso2.com/identity-platform/docs/guides/users/manage-roles/).
-
-## Roles for workflow tasks
-
-Workflows can assign human tasks to a role. In the User Portal, only users who have that role can see and act on those tasks. To let a user act on a task, go to **Admin** > **Settings** > **User Portal** > **Roles** in your organization, [create the role](#create-a-role), and [assign it to the user](#assign-roles-to-a-user).
-
-:::note
-The role name must match the role that the workflow assigns the task to. The user also needs the scopes to see the workflow and its tasks, which are `workflow:view` and `workflow_mgt:view_human_tasks`. To complete tasks, the user also needs `workflow_mgt:manage_human_tasks`. To act on approvals, the user also needs `workflow_mgt:manage_workflows`.
-:::
+You cannot delete roles from the Choreo Cloud console. To do this, go to **User Management** > **Roles** in your Choreo Identity organization. The link on the **Admin** > **Settings** > **User Portal** > **Roles** tab opens this page. If you delete a system role, the **User Portal** page shows that the role is no longer in place. To recreate it, see [Repair the User Portal](check-and-repair.md#repair-the-user-portal). For more information, see [Choreo Identity documentation: Manage roles](https://wso2.com/identity-platform/docs/guides/users/manage-roles/).
 
 ## Add scopes from your own APIs
 
 You can give User Portal users the scopes of your own APIs. To do this:
 
-1. In your WSO2 Identity Platform organization, create an API resource with the scopes, and authorize the User Portal application for those scopes. See [WSO2 Identity Platform documentation: API authorization](https://wso2.com/identity-platform/docs/guides/authorization/api-authorization/api-authorization/).
+1. In your Choreo Identity organization, create an API resource with the scopes, and authorize the User Portal application for those scopes. See [Choreo Identity documentation: API authorization](https://wso2.com/identity-platform/docs/guides/authorization/api-authorization/api-authorization/).
 2. In your organization, go to **Admin** > **Settings** > **User Portal** > **Roles**. Then [create a role](#create-a-role) or [change the permissions of a role](#change-the-permissions-of-a-role), and select the scopes under the **Custom API** group.
 3. [Assign the role to users](#assign-users-to-a-role).
 

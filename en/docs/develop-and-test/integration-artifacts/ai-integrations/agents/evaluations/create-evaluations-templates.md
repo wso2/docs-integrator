@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Create Evaluations from Templates
-description: Create AI agent evaluations in WSO2 Integrator from prebuilt templates. Pick a rule-based or LLM-as-judge template, configure it in a form, and save it without building a flow.
-keywords: [wso2 integrator, ai agent, evaluation, evaluation template, tool trajectory, llm-as-judge]
+description: Create AI agent evaluations in Choreo Integrator from prebuilt templates. Pick a rule-based or LLM-as-judge template, configure it in a form, and save it without building a flow.
+keywords: [choreo integrator, ai agent, evaluation, evaluation template, tool trajectory, llm-as-judge]
 slug: /develop-and-test/integration-artifacts/ai-integrations/agents/evaluations/create-evaluations-templates
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Create Evaluations from Templates
 
-An **evaluation template** is a prebuilt evaluator for a common AI evaluation pattern. You pick a template, fill a short form, and WSO2 Integrator generates the evaluation for you, with no flow to build.
+An **evaluation template** is a prebuilt evaluator for a common AI evaluation pattern. You pick a template, fill a short form, and Choreo Integrator generates the evaluation for you, with no flow to build.
 
 This page walks through the **Tool Trajectory** template, which checks that the agent calls the tools recorded in an evalset. To write your own evaluation logic instead, see [Create custom evaluations](create-evaluations-custom.md).
 

@@ -1,8 +1,8 @@
 ---
 sidebar_position: 4
 title: "Pre-Built Integrations"
-description: Use prebuilt integrations to connect your applications and automate common use cases on WSO2 Cloud in minutes, without building an integration from scratch.
-keywords: [wso2 integrator, wso2 cloud, prebuilt integration, salesforce, google sheets, automation, quick start]
+description: Use prebuilt integrations to connect your applications and automate common use cases on Choreo Cloud in minutes, without building an integration from scratch.
+keywords: [choreo integrator, choreo cloud, prebuilt integration, salesforce, google sheets, automation, quick start]
 slug: /get-started/prebuilt-integrations
 ---
 
@@ -24,16 +24,16 @@ Building an integration from scratch means learning the platform's abstractions,
 [Sample integrations](../develop-and-test/create-workspace/start-with-sample-integrations.md) teach you the platform's abstractions. Prebuilt integrations are different: each one is a real, already-wired integration for an actual business use case.
 :::
 
-The prebuilt integrations catalog is available in WSO2 Cloud, and you can also browse it from the WSO2 Integrator home screen by selecting **Explore** and filtering by **Pre-built Integrations**. This guide follows the WSO2 Cloud path because it lets you pick a prebuilt integration, configure it, and deploy it in one go, without leaving WSO2 Cloud.
+The prebuilt integrations catalog is available in Choreo Cloud, and you can also browse it from the Choreo Integrator home screen by selecting **Explore** and filtering by **Pre-built Integrations**. This guide follows the Choreo Cloud path because it lets you pick a prebuilt integration, configure it, and deploy it in one go, without leaving Choreo Cloud.
 
 <Prerequisites>
 
 ## Prerequisites
 
-A working WSO2 Integrator environment.
+A working Choreo Integrator environment.
 
-<PrereqCard icon="cloud" title="WSO2 Cloud setup" href="/get-started/setup">
-  Sign up and launch WSO2 Integrator in the browser-based cloud editor.
+<PrereqCard icon="cloud" title="Choreo Cloud setup" href="/get-started/setup">
+  Sign up and launch Choreo Integrator in the browser-based cloud editor.
 </PrereqCard>
 
 </Prerequisites>
@@ -42,10 +42,10 @@ A working WSO2 Integrator environment.
 
 ## Step 1: Go to the project-level view
 
-Log in to [WSO2 Cloud](https://console.devant.dev), then create a project and navigate to the project-level view. You'll see prebuilt integrations in the **Get Started Quickly** panel on the right. Click **Explore more prebuilt integrations** to see the full catalog.
+Log in to [Choreo Cloud](https://console.cloud.choreolabs.com), then create a project and navigate to the project-level view. You'll see prebuilt integrations in the **Start quickly** panel on the right. Click **Explore more prebuilt integrations** to see the full catalog.
 
 <ThemedImage
-    alt="Project-level view in WSO2 Cloud showing the Get Started Quickly panel with prebuilt integrations"
+    alt="Project overview in Choreo Integration with the Start quickly panel and Explore more prebuilt integrations highlighted"
     sources={{
         light: useBaseUrl('/img/get-started/prebuilt-integrations/project-level-view.png'),
         dark: useBaseUrl('/img/get-started/prebuilt-integrations/project-level-view.png'),
@@ -66,10 +66,10 @@ Choose the application you want to integrate from. The catalog currently include
 
 ## Step 3: Pick the second application
 
-The list narrows to the applications Salesforce can be paired with. Select **Google Sheets**.
+The list narrows to the applications Salesforce can be paired with. Select **Google Sheets**. The ready-made scenarios for that pair appear immediately.
 
 <ThemedImage
-    alt="Application selection screen with Google Sheets selected as the second application"
+    alt="Second application selection screen narrowed to the applications Salesforce pairs with, with Google Sheets selected"
     sources={{
         light: useBaseUrl('/img/get-started/prebuilt-integrations/select-google-sheets.png'),
         dark: useBaseUrl('/img/get-started/prebuilt-integrations/select-google-sheets.png'),
@@ -100,7 +100,7 @@ A flowchart shows every step of the integration from start to finish, so you kno
 
 ## Step 5: Review the setup instructions and configure credentials
 
-The configuration page's left panel explains exactly what the integration does and what you need to gather to configure **Export Salesforce Leads to a Google Sheet**. You can fill in every field individually, or **import a configuration file** instead. None of this is final: configurations are bound to the environment, and you can change any value later.
+The configuration page's left panel explains exactly what the integration does and what you need to gather to configure **Export Salesforce Leads to a Google Sheet**. You can fill in every field individually, or click **Import Config.toml** instead. None of this is final: configurations are bound to the environment, and you can change any value later.
 
 <ThemedImage
     alt="Configuration page for the Export Salesforce Leads to a Google Sheet integration, showing credential and setup fields"
@@ -110,13 +110,23 @@ The configuration page's left panel explains exactly what the integration does a
     }}
 />
 
-Fill in your credentials and configuration, then select **Deploy**. The integration deploys within minutes.
+Fill in your credentials and configuration, then select **Deploy integration**.
 
 <ThemedImage
-    alt="Deploy button on the configuration page after credentials are filled in"
+    alt="Deploy integration button highlighted at the end of the configuration page"
     sources={{
         light: useBaseUrl('/img/get-started/prebuilt-integrations/deploy-integration.png'),
         dark: useBaseUrl('/img/get-started/prebuilt-integrations/deploy-integration.png'),
+    }}
+/>
+
+Choreo Cloud saves the configuration and deploys the integration. This takes a few minutes.
+
+<ThemedImage
+    alt="Deployment progress screen for the Export Salesforce Leads to a Google Sheet integration"
+    sources={{
+        light: useBaseUrl('/img/get-started/prebuilt-integrations/deploy-progress.png'),
+        dark: useBaseUrl('/img/get-started/prebuilt-integrations/deploy-progress.png'),
     }}
 />
 
@@ -125,23 +135,55 @@ Fill in your credentials and configuration, then select **Deploy**. The integrat
 After deployment, you land on the integration's overview page. Select **Test** on the **Development** environment to trigger an execution.
 
 <ThemedImage
-    alt="Integration overview page with the Test option for the Development environment"
+    alt="Integration overview page with the Test option highlighted for the Development environment"
     sources={{
         light: useBaseUrl('/img/get-started/prebuilt-integrations/test-integration.png'),
         dark: useBaseUrl('/img/get-started/prebuilt-integrations/test-integration.png'),
     }}
 />
 
-Once the execution completes, check the logs, then check your Google Sheet. You'll find a fresh spreadsheet already populated with your Salesforce data.
+To see what the execution did, go to **Operate** > **Runtime** and select the logs icon on the pod that ran it.
 
-From here, you can manage, deploy, and observe this integration just like any other integration on WSO2 Cloud.
+<ThemedImage
+    alt="Runtime page listing the integration's pods, with the logs icon on the most recent one highlighted"
+    sources={{
+        light: useBaseUrl('/img/get-started/prebuilt-integrations/view-logs.png'),
+        dark: useBaseUrl('/img/get-started/prebuilt-integrations/view-logs.png'),
+    }}
+/>
+
+The real-time logs show the integration working through the run: the query it sent to Salesforce, how many leads it found, the spreadsheet it created, and the rows it synced.
+
+<ThemedImage
+    alt="Real-time pod logs showing the Salesforce query, the leads found, and the spreadsheet created and synced"
+    sources={{
+        light: useBaseUrl('/img/get-started/prebuilt-integrations/runtime-logs.png'),
+        dark: useBaseUrl('/img/get-started/prebuilt-integrations/runtime-logs.png'),
+    }}
+/>
+
+:::tip
+These are the logs of a single pod. For aggregated and historical logs across every running instance, go to **Observe** > **Runtime logs**.
+:::
+
+Now open your Google Sheet. You'll find a fresh spreadsheet, named after the integration and the time it ran, already populated with your Salesforce leads and their fields as columns.
+
+<ThemedImage
+    alt="Google Sheet created by the integration, with Salesforce lead fields as columns and an exported lead in the first row"
+    sources={{
+        light: useBaseUrl('/img/get-started/prebuilt-integrations/google-sheet-result.png'),
+        dark: useBaseUrl('/img/get-started/prebuilt-integrations/google-sheet-result.png'),
+    }}
+/>
+
+From here, you can manage, deploy, and observe this integration just like any other integration on Choreo Cloud.
 
 ## Step 7: Make it yours
 
-To customize the integration, go to the overview page and select **Open in Cloud** to edit it in low-code or pro-code view, right in the cloud editor. Edit however you're most comfortable, then push the result to your own repository. At that point, it's fully yours, the same as any integration you built from scratch.
+To customize the integration, go to the overview page and select **Open in Cloud Editor** to edit it in low-code or pro-code view, right in the cloud editor. Edit however you're most comfortable, then push the result to your own repository. At that point, it's fully yours, the same as any integration you built from scratch.
 
 <ThemedImage
-    alt="Integration overview page with the Open in Cloud and Open in Integrator options"
+    alt="The prebuilt integration opened in the cloud editor, showing its design view and connections"
     sources={{
         light: useBaseUrl('/img/get-started/prebuilt-integrations/cloud-editor.png'),
         dark: useBaseUrl('/img/get-started/prebuilt-integrations/cloud-editor.png'),

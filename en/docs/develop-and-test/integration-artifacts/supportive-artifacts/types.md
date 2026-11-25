@@ -1,7 +1,7 @@
 ---
 title: Types
 description: Define shared data structures with record, enum, service class, union, and array types for type-safe integrations.
-keywords: [wso2 integrator, types, record, enum, service class, union, array]
+keywords: [choreo integrator, types, record, enum, service class, union, array]
 slug: /develop-and-test/integration-artifacts/supportive-artifacts/types
 ---
 
@@ -21,12 +21,12 @@ The visual designer exposes five type kinds: **Record**, **Enum**, **Service Cla
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Open or create an integration/library in WSO2 Integrator.
+1. Open or create an integration/library in Choreo Integrator.
 
 2. Click **+** next to **Types** in the sidebar (or click **+ Add Type** from the Types canvas).
 
    <ThemedImage
-       alt="WSO2 Integrator sidebar showing the project structure with Types listed"
+       alt="Choreo Integrator sidebar showing the project structure with Types listed"
        sources={{
            light: useBaseUrl('/img/develop/integration-artifacts/supporting/types/step-1-v5.1.png'),
            dark: useBaseUrl('/img/develop/integration-artifacts/supporting/types/step-1-v5.1.png'),

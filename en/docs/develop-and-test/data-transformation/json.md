@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 JSON is a lightweight, text-based data exchange format derived from JavaScript. It is widely used in web services, APIs, microservices, and other connected applications, making it the most common data format in modern integration and API development.
 
-WSO2 Integrator provides built-in support for JSON processing, allowing developers to easily create, read, modify, validate, and transform JSON data without relying on external libraries. This native support simplifies integration development and enables efficient handling of JSON payloads across different systems and services.
+Choreo Integrator provides built-in support for JSON processing, allowing developers to easily create, read, modify, validate, and transform JSON data without relying on external libraries. This native support simplifies integration development and enables efficient handling of JSON payloads across different systems and services.
 
 ## Creating JSON values
 

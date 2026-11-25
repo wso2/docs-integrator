@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 # CSV and Flat File Processing
 
-CSV and other delimited flat files, such as TSV and pipe-delimited files, are a common way to exchange tabular data between spreadsheets, reporting tools, batch systems, and legacy applications. WSO2 Integrator parses delimited data into typed records with the `ballerina/data.csv` module and writes CSV output with the `ballerina/io` module. You can stream large files, handle custom delimiters and headerless input, and skip malformed rows without stopping the integration.
+CSV and other delimited flat files, such as TSV and pipe-delimited files, are a common way to exchange tabular data between spreadsheets, reporting tools, batch systems, and legacy applications. Choreo Integrator parses delimited data into typed records with the `ballerina/data.csv` module and writes CSV output with the `ballerina/io` module. You can stream large files, handle custom delimiters and headerless input, and skip malformed rows without stopping the integration.
 
 ## Mapping CSV columns to records
 
@@ -374,7 +374,7 @@ public function main() returns error? {
 
 ## Headerless CSV
 
-At its most general, a CSV file is just a grid of strings, and the universal representation of that grid is a 2D string array (`string[][]`): one inner array per row, one string per cell. WSO2 Integrator supports this raw form directly, but the preferred Ballerina representation is `record[]`, which gives you typed fields and named columns instead of positional indexing.
+At its most general, a CSV file is just a grid of strings, and the universal representation of that grid is a 2D string array (`string[][]`): one inner array per row, one string per cell. Choreo Integrator supports this raw form directly, but the preferred Ballerina representation is `record[]`, which gives you typed fields and named columns instead of positional indexing.
 
 When a file has no header row, you have two options:
 

@@ -3,7 +3,7 @@ sidebar_position: 6
 title: "Sync SAP SuccessFactors Employee Leave to Google Calendar"
 sidebar_label: "Sync SAP SuccessFactors Leave to Google Calendar"
 description: Build a scheduled automation that reads approved leave starting today or tomorrow from SAP SuccessFactors Employee Central and creates a matching out-of-office event on Google Calendar, designed visually with the Ectimeoff and Google Calendar connectors.
-keywords: [wso2 integrator, automation, sap successfactors, employee central, ectimeoff, google calendar, hr, leave, time off, out of office, use case, low-code]
+keywords: [choreo integrator, automation, sap successfactors, employee central, ectimeoff, google calendar, hr, leave, time off, out of office, use case, low-code]
 slug: /guides/business-use-cases/sf-ec-leave-to-google-calendar-sync
 card_icon: automation
 card_summary: A scheduled, no-code automation that mirrors approved SuccessFactors leave as out-of-office events on Google Calendar
@@ -24,14 +24,14 @@ HR systems know who is on leave; calendars are what everyone actually looks at. 
 ## How it works
 
 <ThemedImage
-    alt="Architecture diagram: a scheduled WSO2 Integrator automation uses the SAP SuccessFactors EC Time Off connector to list employee times from SAP SuccessFactors, and the Google Calendar connector to create a matching event on Google Calendar"
+    alt="Architecture diagram: a scheduled Choreo Integrator automation uses the SAP SuccessFactors EC Time Off connector to list employee times from SAP SuccessFactors, and the Google Calendar connector to create a matching event on Google Calendar"
     sources={{
         light: useBaseUrl('/img/guides/usecases/sf-ec-leave-to-google-calendar-sync/architecture.png'),
         dark: useBaseUrl('/img/guides/usecases/sf-ec-leave-to-google-calendar-sync/architecture.png'),
     }}
 />
 
-The WSO2 Integrator Scheduler invokes the automation periodically, and each run follows the same short flow:
+The Choreo Integrator Scheduler invokes the automation periodically, and each run follows the same short flow:
 
 1. List `EmployeeTime` records from Employee Central, filtered to those approved and starting today or tomorrow: a one-day look-ahead, so tomorrow's absences are already on the calendar.
 2. Unpack the OData response into a plain array.
@@ -42,7 +42,7 @@ The WSO2 Integrator Scheduler invokes the automation periodically, and each run 
 
 :::info Prerequisites
 
-- A working WSO2 Integrator environment. See [Setup](../../get-started/setup/setup.md).
+- A working Choreo Integrator environment. See [Setup](../../get-started/setup/setup.md).
 - Access to an SAP SuccessFactors Employee Central tenant, and credentials for the Time Off API:
     - Follow the [SAP SuccessFactors Employee Central Time Off connector setup guide](product://connectors/catalog/hrms/sap.successfactors.ectimeoff/setup-guide) to register an OAuth 2.0 SAML Bearer client (recommended) or set up a username and password.
     - It gives you the `apiKey`, `companyId`, `userName`, and `tokenUrl` values used in Step 2, the `private_key.pem` and `certificate.pem` files (supplied to the connector as file paths), and your API server hostname (for example `api12.successfactors.eu`).
@@ -525,6 +525,6 @@ public function main() returns error? {
 
 Now that the automation works, you can take it further:
 
-- **Deploy and schedule it.** Ship it to [WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md), then schedule it to run once a day.
+- **Deploy and schedule it.** Ship it to [Choreo Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment), or a [virtual machine](../../deploy-and-run/self-hosted/vm-deployment.md), then schedule it to run once a day.
 - **Avoid duplicate events.** The filter's one-day look-ahead means a leave starting tomorrow is seen by today's run *and* tomorrow's, so a daily schedule creates each event twice as built. Either narrow the window to a single day (`startDate lt datetime'${tommorrow()}T00:00:00'`), or before creating an event call **Get Events** for that date and skip it if one already carries the same SuccessFactors leave ID in its description.
 - **Sync updates and cancellations too.** SuccessFactors' `EmployeeTime` records can be modified or withdrawn after approval; extend the automation to look up the calendar event by the stored `eventId` and update or delete it when the underlying leave record changes.

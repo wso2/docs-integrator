@@ -1,7 +1,7 @@
 ---
 title: SAP ECC
 description: Receive IDocs and inbound RFC calls from SAP ECC in real time with an SAP JCo listener, using onReceive and onCall handlers.
-keywords: [wso2 integrator, sap ecc, sap jco, idoc, rfc, idoc listener, rfc server, event integration, ale]
+keywords: [choreo integrator, sap ecc, sap jco, idoc, rfc, idoc listener, rfc server, event integration, ale]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/sap-ecc-events
 ---
 
@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 # SAP ECC
 
-SAP ECC event integrations register WSO2 Integrator as an RFC server program with the SAP gateway. Once registered, the SAP system pushes events to the integration over the SAP Java Connector (JCo): outbound IDocs distributed through ALE, and calls to RFC function modules that are routed to the registered program. Use them to react to SAP business documents such as orders, deliveries, and material master changes as they are created, or to let ABAP programs call out to WSO2 Integrator synchronously, without polling SAP.
+SAP ECC event integrations register Choreo Integrator as an RFC server program with the SAP gateway. Once registered, the SAP system pushes events to the integration over the SAP Java Connector (JCo): outbound IDocs distributed through ALE, and calls to RFC function modules that are routed to the registered program. Use them to react to SAP business documents such as orders, deliveries, and material master changes as they are created, or to let ABAP programs call out to Choreo Integrator synchronously, without polling SAP.
 
 The SAP ECC event integration provides two services. Both run on the same listener, and you can create either one or both:
 
@@ -104,7 +104,7 @@ One listener can host one IDoc service and one RFC service. Create the IDoc serv
 
 4. Click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section with `onReceive` and `onError` pre-added.
+5. Choreo Integrator opens the service in the **Service Designer**. The canvas shows the attached listener pill and the **Event Handlers** section with `onReceive` and `onError` pre-added.
 
    <ThemedImage
        alt="Service Designer showing the SAP ECC (JCo) IDoc service canvas"
@@ -202,7 +202,7 @@ scope = "provided"
 
 4. Set **Service Type** to **RFC Service** and click **Create**.
 
-5. WSO2 Integrator opens the service in the **Service Designer** with `onCall` and `onError` pre-added. Both services share the listener pill and the program ID.
+5. Choreo Integrator opens the service in the **Service Designer** with `onCall` and `onError` pre-added. Both services share the listener pill and the program ID.
 
    <ThemedImage
        alt="Service Designer showing the SAP ECC (JCo) RFC service canvas"
@@ -362,7 +362,7 @@ The listener starts asynchronously. A successful start means the server has been
 
 ## Event handlers
 
-When an SAP ECC service is created, WSO2 Integrator adds the handlers for the selected service type automatically. Click a handler in the **Service Designer** or in the project tree to open it in the **Flow Designer** and implement the processing logic.
+When an SAP ECC service is created, Choreo Integrator adds the handlers for the selected service type automatically. Click a handler in the **Service Designer** or in the project tree to open it in the **Flow Designer** and implement the processing logic.
 
 ### IDoc Service handlers
 

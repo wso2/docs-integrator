@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: "Build a Hotel Finder Agent"
-description: Build a conversational hotel finder agent with two custom tools and a chat endpoint in WSO2 Integrator.
-keywords: [wso2 integrator, ai agent, hotel finder, custom tools, llm, ballerina ai, genai]
+description: Build a conversational hotel finder agent with two custom tools and a chat endpoint in Choreo Integrator.
+keywords: [choreo integrator, ai agent, hotel finder, custom tools, llm, ballerina ai, genai]
 slug: /guides/how-to-guides/build-a-hotel-finder-agent
 card_icon: agents
 card_summary: An agent with two custom tools and session-scoped memory
@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 
 :::info Prerequisites
 
-- [WSO2 Integrator installed](../../get-started/setup/setup.md)
+- [Choreo Integrator installed](../../get-started/setup/setup.md)
 
 :::
 
@@ -29,7 +29,7 @@ import TabItem from '@theme/TabItem';
 
 ## Step 1: Create the integration
 
-1. Open WSO2 Integrator and select **Create** under **Create a Project**.
+1. Open Choreo Integrator and select **Create** under **Create a Project**.
 2. Set **Project name** to `AI-Integrations` and choose a **Location**.
 3. Under **What do you want to build?**, keep **Integration** selected.
 4. Set **Integration name** to `HotelFinder`.
@@ -45,7 +45,7 @@ import TabItem from '@theme/TabItem';
 
 ## Step 2: Add and configure an AI chat agent
 
-The integration opens on the **Design** tab with the WSO2 Integrator Copilot. Bypass it for this quick start and create the artifact manually.
+The integration opens on the **Design** tab with the Choreo Integrator Copilot. Bypass it for this quick start and create the artifact manually.
 
 1. Select **Add Artifact manually**.
 2. On the Artifacts page, select **Chat Agent Service** under **AI Integration**.
@@ -79,7 +79,7 @@ The integration opens on the **Design** tab with the WSO2 Integrator Copilot. By
 
 :::tip Default model provider
 
-By default, the agent is created with the WSO2 model provider. If you have not [signed in to WSO2 Integrator Copilot](../../editor/copilot/copilot.md) yet, sign in when prompted. No third-party API key is required.
+By default, the agent is created with the WSO2 model provider. If you have not [signed in to Choreo Integrator Copilot](../../editor/copilot/copilot.md) yet, sign in when prompted. No third-party API key is required.
 
 To use a different LLM instead, see [Model providers](../../develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers.md) for the full list of supported providers (OpenAI, Anthropic, Azure OpenAI, and others).
 

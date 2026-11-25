@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: "Build a Customer Care Agent with MCP"
 description: Build an AI agent that connects to a live MCP server to answer product and order questions via natural language.
-keywords: [wso2 integrator, mcp, ai agent, mcp toolkit, customer care, tutorial]
+keywords: [choreo integrator, mcp, ai agent, mcp toolkit, customer care, tutorial]
 slug: /guides/business-use-cases/building-a-customer-care-agent-mcp
 card_icon: mcp
 card_summary: An agent backed by an MCP server
@@ -44,8 +44,8 @@ The agent receives customer messages over HTTP, reasons about which tool to call
 
 ## Step 1: Create and configure the agent
 
-1. Open WSO2 Integrator and create or select your project.
-2. On the **Design** tab, select **Add Artifact manually** (below the WSO2 Integrator Copilot's quick-start cards).
+1. Open Choreo Integrator and create or select your project.
+2. On the **Design** tab, select **Add Artifact manually** (below the Choreo Integrator Copilot's quick-start cards).
 3. On the Artifacts page, under **AI Integration**, select **Chat Agent Service**.
 
 <ThemedImage
@@ -148,7 +148,7 @@ The MCP toolkit appears as `aiMcpbasetoolkit` attached to the agent node, connec
 
 ## Step 3: Run and test
 
-Make sure the ShopEasy MCP server is running, then select **Run**. WSO2 Integrator applies the `--experimental` flag and compiles and starts the service, with progress shown in the integrated terminal.
+Make sure the ShopEasy MCP server is running, then select **Run**. Choreo Integrator applies the `--experimental` flag and compiles and starts the service, with progress shown in the integrated terminal.
 
 Once it's running, open the `chat` resource. Its flow shows **Start**, an `agent:run` node (with an **Open Agent** link back to the `CustomerCareAgent` canvas), and **Return**. Select **Chat** in the toolbar (next to **Tracing**) to open the **Agent Chat** panel. Type your message in the input field and press **Enter** to send it.
 

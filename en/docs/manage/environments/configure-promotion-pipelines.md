@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Configure Promotion Pipelines
-description: Learn how to create and manage promotion pipelines in WSO2 Cloud - Integration Platform to control how integrations move across environments.
-keywords: [wso2 cloud, deployment pipeline, promotion pipeline, cd pipeline, promotion, environments]
+description: Learn how to create and manage promotion pipelines in Choreo Integration to control how integrations move across environments.
+keywords: [choreo cloud, deployment pipeline, promotion pipeline, cd pipeline, promotion, environments]
 slug: /manage/environments/configure-promotion-pipelines
 ---
 
@@ -11,24 +11,24 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Configure Promotion Pipelines
 
-A promotion pipeline defines the ordered sequence of environments through which an integration is promoted. WSO2 Cloud - Integration Platform provides a default pipeline and lets you create additional pipelines to match different promotion strategies across your projects.
+A promotion pipeline defines the ordered sequence of environments through which an integration is promoted. Choreo Integration provides a default pipeline and lets you create additional pipelines to match different promotion strategies across your projects.
 
 ## Default pipeline
 
-Every organization starts with a **Default** pipeline containing two environments: **Development** and **Production**. The default pipeline cannot be deleted.
+Every organization starts with a **default** pipeline containing the environments available to your plan. The default pipeline cannot be deleted.
 
 ## Manage pipelines at the organization level
 
 To view and manage promotion pipelines, navigate to the organization level.
 
-1. Sign in to [WSO2 Cloud](https://console.devant.dev/).
-2. In the top navigation menu, click the **Organization** list and select your organization.
-3. In the left navigation menu under **Admin**, click **CD Pipelines**.
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com/).
+2. In the top navigation menu, click the organization name and select your organization.
+3. Open **Settings**, then under **Infrastructure** click **Deployment Pipelines**.
 
 This page lists all existing pipelines in your organization.
 
 <ThemedImage
-    alt="Deployment pipelines"
+    alt="Deployment Pipelines page listing the organization's pipelines"
     sources={{
         light: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/deployment-pipelines.png'),
         dark: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/deployment-pipelines.png'),
@@ -37,16 +37,16 @@ This page lists all existing pipelines in your organization.
 
 ### Create a pipeline
 
-1. On the **CD Pipelines** page, click **+ Create Pipeline**.
+1. On the **Deployment Pipelines** page, click **+ Create Pipeline**.
 2. In the pipeline creation page, configure the following:
 
     | Field | Description |
     |---|---|
     | **Name** | A display name for the pipeline. |
-    | **Promotion hierarchy** | The ordered sequence of environments through which integrations are promoted. Add environments and arrange them to define the promotion flow. If you need a new environment, [create one first](./create.md) before configuring the pipeline. |
+    | **Promotion flow** | The ordered sequence of environments deployments move through. Add at least one environment. If you need a new environment, [create one first](./create.md) before configuring the pipeline. |
 
     <ThemedImage
-        alt="Configure pipeline"
+        alt="Pipeline editor showing the Name field and the Promotion flow environment list"
         sources={{
             light: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/configure-pipeline.png'),
             dark: useBaseUrl('/img/manage/cloud/environments/pipeline-configuration/configure-pipeline.png'),
@@ -55,23 +55,23 @@ This page lists all existing pipelines in your organization.
 
 3. Click **Create**.
 
-The new pipeline is added to the list on the **CD Pipelines** page.
+The new pipeline is added to the list on the **Deployment Pipelines** page.
 
 ### Edit a pipeline
 
-On the **CD Pipelines** page, click the edit icon on the pipeline you want to modify. Update the name or promotion hierarchy and save your changes.
+On the **Deployment Pipelines** page, click the edit icon on the pipeline you want to modify. Update the promotion flow and click **Save Changes**. A pipeline's name cannot be changed after creation.
 
 ### Delete a pipeline
 
-On the **CD Pipelines** page, click the delete icon on the pipeline you want to remove.
+On the **Deployment Pipelines** page, click the delete icon on the pipeline you want to remove.
 
 ## Assign a pipeline to a project
 
 Once you create a pipeline, you can assign it to one or more projects. Multiple pipelines can be active in the same project at the same time.
 
 1. In the top navigation menu, click the **Project** list and select the project you want to configure.
-2. In the left navigation menu under **Admin**, click **CD Pipelines**.
-3. Add the pipeline to the project from the list of available pipelines.
+2. From the project home, click **Settings**.
+3. Select the pipeline from the **Deployment pipeline** list, then click **Save changes**.
 
 ## Select a pipeline for an integration
 

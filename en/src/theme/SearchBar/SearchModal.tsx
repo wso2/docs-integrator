@@ -36,8 +36,8 @@ const HEADING_LEVELS = ['lvl1', 'lvl2', 'lvl3', 'lvl4', 'lvl5', 'lvl6'] as const
  * returns zero results instead of erroring. */
 const PRODUCTS: { key: string; label: string }[] = [
   { key: 'all', label: 'All products' },
-  { key: 'saas', label: 'WSO2 Cloud' },
-  { key: 'integrator', label: 'WSO2 Integrator' },
+  { key: 'saas', label: 'Choreo Cloud' },
+  { key: 'integrator', label: 'Choreo Integrator' },
   { key: 'agent-builder', label: 'Agent Builder' },
   { key: 'connectors', label: 'Connectors' },
 ];
@@ -623,7 +623,7 @@ export default function SearchModal({
             to open
           </span>
           <span className={styles.footerSpacer} />
-          <span>Searching across every WSO2 Integration Platform product</span>
+          <span>Searching across every Choreo Integration product</span>
         </div>
       </div>
     </div>,

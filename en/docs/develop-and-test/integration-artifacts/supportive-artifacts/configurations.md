@@ -1,7 +1,7 @@
 ---
 title: Configurations
 description: Step-by-step guide for declaring configurable variables and supplying values through the visual designer.
-keywords: [wso2 integrator, configurations, configurable, config.toml, secrets, environment]
+keywords: [choreo integrator, configurations, configurable, config.toml, secrets, environment]
 slug: /develop-and-test/integration-artifacts/supportive-artifacts/configurations
 ---
 
@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 Because the values live outside the code, the same integration implementation runs unchanged in every environment.
 
 :::note
-WSO2 Integrator's configuration support is built on Ballerina's configurable variable model. For the complete configuration reference, see [Configuration management](../../../reference/configuration-reference.md#configuration-management).
+Choreo Integrator's configuration support is built on Ballerina's configurable variable model. For the complete configuration reference, see [Configuration management](../../../reference/configuration-reference.md#configuration-management).
 :::
 
 ## Adding a configuration
@@ -28,12 +28,12 @@ WSO2 Integrator's configuration support is built on Ballerina's configurable var
 <Tabs>
 <TabItem value="ui" label="Visual Designer" default>
 
-1. Open your integration project in **WSO2 Integrator**.
+1. Open your integration project in **Choreo Integrator**.
 
 2. Click **+** next to **Configurations** in the sidebar. Alternatively, click **+ Add Artifact** in the **Design** panel, then click **Configuration** under **Other Artifacts** or **Library Artifacts**.
 
    <ThemedImage
-       alt="WSO2 Integrator sidebar showing add Configuration"
+       alt="Choreo Integrator sidebar showing add Configuration"
        sources={{
            light: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/add-configuration.png'),
            dark: useBaseUrl('/img/develop/integration-artifacts/supporting/configurations/add-configuration.png'),

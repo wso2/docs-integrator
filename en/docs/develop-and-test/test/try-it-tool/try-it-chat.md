@@ -1,8 +1,8 @@
 ---
 sidebar_position: 3
 title: Test Chat Agent
-description: Test AI chat agents through the conversational chat panel in WSO2 Integrator.
-keywords: [wso2 integrator, try-it, chat agent, test ai agent, conversational testing, tracing]
+description: Test AI chat agents through the conversational chat panel in Choreo Integrator.
+keywords: [choreo integrator, try-it, chat agent, test ai agent, conversational testing, tracing]
 slug: /develop-and-test/test/try-it-tool/try-it-chat
 ---
 
@@ -11,7 +11,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Test Chat Agent
 
-AI chat agents respond to natural language rather than structured HTTP requests, so testing them requires a conversational interface. The **Chat** panel lets you send messages to your agent and inspect its responses directly from WSO2 Integrator, without deploying or setting up a separate client.
+AI chat agents respond to natural language rather than structured HTTP requests, so testing them requires a conversational interface. The **Chat** panel lets you send messages to your agent and inspect its responses directly from Choreo Integrator, without deploying or setting up a separate client.
 
 ## Open the Chat panel
 

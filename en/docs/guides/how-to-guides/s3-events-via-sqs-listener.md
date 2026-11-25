@@ -3,7 +3,7 @@ sidebar_position: 4
 title: "File Integrations on S3 File Events"
 sidebar_label: "File Integrations on S3 File Events"
 description: Configure AWS S3 to push object-created notifications to an SQS queue, then consume and parse those events in a Ballerina integration using the aws.sqs listener.
-keywords: [wso2 integrator, aws, s3, sqs, event-driven, csv, file processing, ballerina, listener, trigger, object notification, cloud]
+keywords: [choreo integrator, aws, s3, sqs, event-driven, csv, file processing, ballerina, listener, trigger, object notification, cloud]
 slug: /guides/how-to-guides/s3-events-via-sqs-listener
 card_icon: event
 card_summary: React to S3 uploads using an SQS listener
@@ -37,7 +37,7 @@ S3 Bucket  ──(ObjectCreated)──►  SQS Queue  ──(poll)──►  sqs
 :::info Prerequisites
 
 - An AWS account with permissions to manage S3, SQS, and IAM.
-- A working WSO2 Integrator environment. See [Setup](../../get-started/setup/setup.md).
+- A working Choreo Integrator environment. See [Setup](../../get-started/setup/setup.md).
 - AWS Access Key ID and Secret Access Key for an IAM user who has the necessary `sqs:ReceiveMessage`, `sqs:DeleteMessage`, and `sqs:GetQueueAttributes` permissions on your SQS queue. See the [AWS SQS Setup Guide](product://connectors/catalog/messaging/aws.sqs/setup-guide) if you need to create credentials.
 
 :::
@@ -107,7 +107,7 @@ Upload any `.csv` file to the bucket. Open the SQS console, select **Send and re
 
 ### Step 5: Create the integration
 
-Create a new integration project in WSO2 Integrator. Add the `Integration Name` as `s3-file-event-listener`.
+Create a new integration project in Choreo Integrator. Add the `Integration Name` as `s3-file-event-listener`.
 
 <ThemedImage
     alt="Create the s3-file-event-listener project"
@@ -426,7 +426,7 @@ service sqs:Service on sqsListener {
 
 ## Step 9: Run and verify
 
-1. Open **Configurations** in WSO2 Integrator and supply your AWS credentials and queue URL.
+1. Open **Configurations** in Choreo Integrator and supply your AWS credentials and queue URL.
 2. Run the integration.
 3. Upload a file to your S3 bucket.
 
@@ -452,4 +452,4 @@ Now that your listener is consuming S3 events, extend the integration further:
 - **Read the CSV from S3** — use the `ballerinax/aws.s3` connector's `getObject` action to download the file content inside `onMessage`, then parse it with `ballerina/data.csv`.
 - **Filter by prefix** — add a prefix filter (for example `uploads/`) to the S3 event notification configuration in Step 4 so only files under that path trigger events.
 - **Fan out to multiple consumers** — subscribe additional SQS queues to an SNS topic and have the S3 bucket notify the topic instead. Each downstream queue can run a separate Ballerina listener.
-- **Deploy the integration** — ship to [WSO2 Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), or [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment) for production use.
+- **Deploy the integration** — ship to [Choreo Cloud](../../deploy-and-run/deploy-to-wso2-cloud/deploy-to-wso2-cloud.md), a [Docker container](../../deploy-and-run/self-hosted/containerized-deployment.md#docker-deployment), or [Kubernetes](../../deploy-and-run/self-hosted/containerized-deployment.md#kubernetes-deployment) for production use.

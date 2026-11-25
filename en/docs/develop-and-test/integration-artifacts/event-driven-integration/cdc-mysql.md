@@ -1,7 +1,7 @@
 ---
 title: CDC for MySQL
 description: Capture real-time data changes from MySQL tables using Change Data Capture, with handlers for insert, update, delete and read events, based on MySQL binary log (binlog) streaming.
-keywords: [wso2 integrator, cdc, mysql, change data capture, event integration, debezium, binlog]
+keywords: [choreo integrator, cdc, mysql, change data capture, event integration, debezium, binlog]
 slug: /develop-and-test/integration-artifacts/event-driven-integration/cdc-mysql
 ---
 

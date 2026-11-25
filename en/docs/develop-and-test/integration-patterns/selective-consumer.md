@@ -1,6 +1,6 @@
 ---
 title: Selective Consumer
-description: "Implement the Selective Consumer pattern with WSO2 Integrator."
+description: "Implement the Selective Consumer pattern with Choreo Integrator."
 sidebar_position: 8
 slug: /develop-and-test/integration-patterns/selective-consumer
 ---

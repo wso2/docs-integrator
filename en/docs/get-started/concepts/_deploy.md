@@ -7,19 +7,18 @@ The concepts that apply once an integration leaves the editor. Deployment target
 
 ### Deployment models
 
-An integration can run in one of three models, which differ in who operates the control plane and where the data plane lives:
+An integration can run in one of two models, which differ in who operates the control plane and where the data plane lives:
 
-- **WSO2-managed**: provisioned and operated by WSO2, as part of WSO2 Integration Cloud
-- **Private (cloud)**: runs in your own AWS, Azure, GCP, OpenShift, or Kubernetes environment, but is still managed through WSO2 Integration Cloud's control plane
-- **Self-hosted**: runs entirely on your own infrastructure, with no dependency on WSO2 Integration Cloud
+- **WSO2-managed**: provisioned and operated by WSO2, as part of Choreo Cloud
+- **Self-hosted**: runs entirely on your own infrastructure, with no dependency on Choreo Cloud
 
-The development experience does not change based on which model you choose. Most of the concepts below, resource hierarchy, environments, promotion, deployment tracks, describe how the first two models work, since they're WSO2 Integration Cloud features. Self-hosted deployments use a simpler topology that maps to the same essential planes, managed through ICP or your own tooling and pipelines, rather than through these specific features.
+The development experience does not change based on which model you choose. Most of the concepts below, resource hierarchy, environments, promotion, deployment tracks, describe how the WSO2-managed model works, since they're Choreo Cloud features. Self-hosted deployments use a simpler topology that maps to the same essential planes, managed through ICP or your own tooling and pipelines, rather than through these specific features.
 
 ### Deployment targets
 
 Available deployment targets include:
 
-- **WSO2 Integration Cloud**: push directly from the editor to the managed platform, with no infrastructure setup required
+- **Choreo Cloud**: push directly from the editor to the managed platform, with no infrastructure setup required
 - **Virtual machines and bare metal**: deploy as a standalone JAR file
 - **Containers**: package as a container image and deploy to Docker, Kubernetes, or Red Hat OpenShift
 - **Serverless**: run integrations as serverless functions
@@ -31,10 +30,10 @@ The **control plane** is the operations brain of the platform: the place where t
 
 The **data plane** is the infrastructure your integrations actually run on. All runtime traffic is restricted to it, keeping user data contained within its boundary.
 
-Which system plays the control plane role depends on the deployment model. For WSO2-managed and private (cloud) deployments, it's the SaaS control plane provided by WSO2 Integration Cloud, which also manages all cloud and private data planes. For self-hosted deployments, it's the [Integration Control Plane (ICP)](#integration-control-plane-icp), or your own tooling and pipelines if you choose not to use ICP.
+Which system plays the control plane role depends on the deployment model. For WSO2-managed deployments, it's the SaaS control plane provided by Choreo Cloud, which also manages the cloud data plane. For self-hosted deployments, it's the [Integration Control Plane (ICP)](#integration-control-plane-icp), or your own tooling and pipelines if you choose not to use ICP.
 
 <ThemedImage
-    alt="WSO2 Integration Cloud high-level view"
+    alt="Choreo Cloud high-level view"
     sources={{
         light: useBaseUrl('/img/get-started/concepts/ipaas-concepts/high-level-view.png'),
         dark: useBaseUrl('/img/get-started/concepts/ipaas-concepts/high-level-view.png'),
@@ -60,7 +59,7 @@ Organizations, data planes, projects, environments, and integrations relate to e
 
 An environment is an isolated deployment area with restricted network and resource access. Integrations deployed in one environment cannot communicate with those in another.
 
-Environments are provisioned per project, and each project is associated with one or more of the environments available in the organization. Two projects in the same organization can use different sets: one might use development, staging, and production, while another uses only development and production. The cloud data plane provides development and production by default; private data plane organizations can define additional environments as needed.
+Environments are provisioned per project, and each project is associated with one or more of the environments available in the organization. Two projects in the same organization can use different sets: one might use development, staging, and production, while another uses only development and production. The cloud data plane provides development and production by default.
 
 <ThemedImage
     alt="Environments"
@@ -101,16 +100,16 @@ Two kinds exist:
 - **Environment-independent configurations** apply across all environments.
 - **Environment-specific configurations** apply to a single environment.
 
-All configurations and secrets are encrypted at rest and in transit and stored in a secure vault. In a private data plane organization, they can be stored in your own infrastructure. Once an integration is deployed with a given set of configurations, those values become immutable; changing them produces a new deployment.
+All configurations and secrets are encrypted at rest and in transit and stored in a secure vault. Once an integration is deployed with a given set of configurations, those values become immutable; changing them produces a new deployment.
 
 ### Deployment track
 
 A deployment track is a structured pathway that links a Git branch to deployments across environments, functioning like a CI/CD pipeline. Merging a pull request automatically triggers a deployment to the development environment.
 
-For Integration as APIs, a deployment track also carries the API version, following semantic versioning with major and minor versions prefixed by `v`, such as `v1.2`. Increment the major version for incompatible API changes, and the minor version for backward-compatible additions. Patch-level versioning, which consumers generally do not need to track, can be handled separately through Git tags or releases.
+{/* TODO(v3): this diagram still shows SemVer API versioning, which is not in v3. Needs redrawing. */}
 
 <ThemedImage
-    alt="Deployment tracks and API versioning"
+    alt="Deployment tracks"
     sources={{
         light: useBaseUrl('/img/get-started/concepts/ipaas-concepts/deployment-tracks-api-versioning.png'),
         dark: useBaseUrl('/img/get-started/concepts/ipaas-concepts/deployment-tracks-api-versioning.png'),
@@ -121,16 +120,4 @@ For Integration as APIs, a deployment track also carries the API version, follow
 
 Continuous integration and continuous deployment automate building and shipping an integration across environments.
 
-On WSO2 Integration Cloud, builds are automated per commit: a container image is built from source, security and vulnerability scans run where applicable, and the image is pushed to a container registry, either a WSO2-managed registry on the cloud data plane or your own registry in a private data plane organization. Builds are reproducible, so multiple builds from the same Git commit produce images with the same behavior. Deployments use rolling updates with health checks, so a new build is verified before traffic switches to it, giving zero downtime between deployments and promotions.
-
-### Private (cloud) hosting responsibility
-
-Within the Private (cloud) deployment model, a private data plane can run on major cloud providers including Azure, AWS, and GCP, and is compatible with on-premises infrastructure. Its essential requirements are upstream-compatible Kubernetes clusters, a container registry, a key vault for secrets, and a logging service or log storage.
-
-Three arrangements are available, covering different splits of infrastructure responsibility between WSO2 and your organization, all still managed through WSO2 Integration Cloud's control plane:
-
-- **WSO2 fully managed**, with infrastructure and the private data plane in a WSO2 subscription
-- **WSO2 fully managed**, with infrastructure and the private data plane in your own subscription
-- **Customer self-managed**, where WSO2 provides the installation script and updates
-
-For the full infrastructure requirements, system components, network connectivity, and security architecture of a private data plane, see [Set up a Private Data Plane](../../deploy-and-run/deploy-on-private-data-plane/deploy-on-private-data-plane.md).
+On Choreo Cloud, a build produces a container image from source, security and vulnerability scans run where applicable, and the image is pushed to a WSO2-managed container registry on the cloud data plane. Builds are reproducible, so multiple builds from the same Git commit produce images with the same behavior. Deployments use rolling updates with health checks, so a new build is verified before traffic switches to it, giving zero downtime between deployments and promotions.

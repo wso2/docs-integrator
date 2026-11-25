@@ -2,8 +2,8 @@
 sidebar_position: 1.5
 title: "Integration Runtime Updates and Upgrades"
 sidebar_label: "Runtime Updates"
-description: "Runtime availability, optional upgrades, and supported integration runtime versions for the WSO2 Integration Platform SaaS subscription."
-keywords: [wso2 integrator, wso2 cloud, integration runtime, runtime version, upgrade, supported versions, support matrix, subscription]
+description: "Runtime availability, optional upgrades, and supported integration runtime versions for the Choreo Integration SaaS subscription."
+keywords: [choreo integrator, choreo cloud, integration runtime, runtime version, upgrade, supported versions, support matrix, subscription]
 slug: /reference/runtime-updates-and-upgrades
 ---
 
@@ -27,4 +27,4 @@ WSO2 will provide information about currently supported integration runtime vers
 ## What's next
 
 - [Acceptable Usage Policy](../manage/billing/acceptable-usage-policy.md) — Entitlements and usage limits for the Free Trial, Growth, and Enterprise plans.
-- [Pricing and plans](../manage/billing/pricing-and-plans.md) — How WSO2 Cloud bills platform services, and how to upgrade a service plan.
+- [Pricing and plans](../manage/billing/pricing-and-plans.md) — How Choreo Cloud bills platform services, and how to upgrade a service plan.

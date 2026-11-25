@@ -2,18 +2,18 @@
 sidebar_position: 0
 sidebar_label: Environment Management
 title: Environment Management
-description: "Learn how environments work in the WSO2 Integration Platform and how to use them."
-keywords: [wso2 integrator, environments, promotion, development, production, wso2 cloud]
+description: "Learn how environments work in the Choreo Integration and how to use them."
+keywords: [choreo integrator, environments, promotion, development, production, choreo cloud]
 slug: /manage/environments
 ---
 
 # Environment Management
 
-The WSO2 Integration Platform runs integrations in isolated environments within a data plane. Environments let you develop and test integrations safely before exposing them to production.
+The Choreo Integration runs integrations in isolated environments within a data plane. Environments let you develop and test integrations safely before exposing them to production.
 
 ## How environments work
 
-The WSO2 Cloud data plane provides two environments by default: **Development** and **Production**. Your organization can add more environments, such as a staging environment, if your release process requires additional stages.
+The Choreo Cloud data plane provides two environments by default: **Development** and **Production**. Your organization can add more environments, such as a staging environment, if your release process requires additional stages.
 
 Each project in your organization is associated with a subset of the available environments. For example:
 
@@ -44,4 +44,3 @@ Promotion changes take effect after the integration restarts in the target envir
 - [Create an environment](./create.md) — Add a new environment to support additional stages in your deployment pipeline.
 - [Configure promotion pipelines](./configure-promotion-pipelines.md) — Define the ordered sequence of environments a commit is promoted through.
 - [Promote an integration](./promotion.md) — Step-by-step instructions for promoting an integration across environments.
-- [Promotion approvals](./promotion-approval.md) — Require approvals before an integration is promoted to a protected environment.
