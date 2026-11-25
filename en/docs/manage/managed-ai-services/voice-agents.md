@@ -96,13 +96,25 @@ A four-step wizard opens. The current AI agent is preselected as the target, so 
 
 ### From AI Services > Voice Agents
 
-1. In the organization's left navigation, expand **AI Services** and click **Voice Agents**. A five-step wizard opens at **Configure Agent**.
+1. In the organization's left navigation, expand **AI Services** and click **Voice Agents**.
 
     <ThemedImage
         alt="Voice Agents under AI Services in the organization left navigation"
         sources={{
             light: useBaseUrl('/img/manage/cloud/voice-agents/ai-services-voice-agents.png'),
             dark: useBaseUrl('/img/manage/cloud/voice-agents/ai-services-voice-agents.png'),
+        }}
+    />
+
+2. The **Voice agents** page opens. Click **Create voice agent** to start the five-step wizard at **Configure Agent**.
+
+    This page also lists ready-made samples under **Start from a sample**. Click **Quick deploy** on one to deploy both the sample AI agent and its voice pipeline into a project of your choice in one step, skipping the wizard below.
+
+    <ThemedImage
+        alt="Voice agents page with the Create voice agent button and a Start from a sample gallery of prebuilt voice agents"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/voice-agents/voice-agents-landing.png'),
+            dark: useBaseUrl('/img/manage/cloud/voice-agents/voice-agents-landing.png'),
         }}
     />
 
