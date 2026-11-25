@@ -45,6 +45,14 @@ Both views support the same filtering and search described below.
 
 Depending on the integration type, you can also access runtime logs from the Integration Overview page:
 
+<ThemedImage
+    alt="Integration Overview page with the View logs button highlighted on the Development environment card"
+    sources={{
+        light: useBaseUrl('/img/observe/cloud/runtime-logs/overview-view-logs.png'),
+        dark: useBaseUrl('/img/observe/cloud/runtime-logs/overview-view-logs.png'),
+    }}
+/>
+
 - **Automations** — Each execution in the environment card has a **View Logs** button that opens logs scoped to that specific run.
 - **Event and file integrations** — Latest logs are visible directly on the environment card without navigating to the Observability section.
 - **Integration as APIs and AI Agents** - Each environment card has a **View Logs** button that opens logs filtered to that specific environment and integration version.
