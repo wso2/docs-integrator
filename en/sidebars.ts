@@ -1211,6 +1211,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Plaid',
+          link: { type: 'doc', id: 'catalog/finance-accounting/plaid/overview' },
+          items: [
+            'catalog/finance-accounting/plaid/setup-guide',
+            'catalog/finance-accounting/plaid/action-reference',
+            'catalog/finance-accounting/plaid/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Pricefx',
           link: { type: 'doc', id: 'catalog/erp-business/pricefx/overview' },
           items: [
