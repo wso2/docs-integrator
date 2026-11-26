@@ -1,6 +1,6 @@
 ---
 sidebar_position: 0
-sidebar_label: "Access Control and User Portal"
+sidebar_label: Overview
 title: "Access Control and User Portal"
 description: "Manage access for your organization's own members, and publish integrations to external users through the User Portal."
 keywords: [choreo cloud, users, access control, roles, groups, user portal]
