@@ -1221,6 +1221,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Power Bi',
+          link: { type: 'doc', id: 'catalog/productivity-collaboration/power.bi/overview' },
+          items: [
+            'catalog/productivity-collaboration/power.bi/setup-guide',
+            'catalog/productivity-collaboration/power.bi/action-reference',
+            'catalog/productivity-collaboration/power.bi/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Pricefx',
           link: { type: 'doc', id: 'catalog/erp-business/pricefx/overview' },
           items: [
