@@ -1,102 +1,144 @@
 ---
 sidebar_position: 2
-title: Access Control
-description: Learn how to manage access to projects and resources in the Choreo Integration using roles and groups.
-keywords: [choreo cloud, access control, roles, groups, permissions]
+title: Members and Access Control
+description: Learn how to manage organization members, groups, roles, and assignments in Choreo Integration.
+keywords: [choreo cloud, access control, roles, groups, permissions, members, invitations, assignments]
 slug: /manage/users-and-access/access-control
 ---
 
-# Access Control
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
-The Choreo Integration lets you manage access to projects and control the actions that users can perform within them. Administrators can restrict project access to specific user groups. This is useful when you need certain user groups to have access to particular projects or a set of projects.
+# Members and Access Control
 
-The platform uses **roles** and **groups** to control access:
+The Choreo Integration lets you manage access to your organization and control the actions that members can perform. The platform uses **roles** and **groups** to control access:
 
-- **Role**: A role is a collection of permissions. The platform provides a predefined set of roles with permissions assigned to them.
-- **Group**: A group is a collection of users. A user group requires one or more roles to be assigned to it so that the users in those groups inherit the relevant permissions via the assigned roles.
+- **Role**: A collection of permissions. The platform ships with a predefined set of roles.
+- **Group**: A collection of members. A group grants one or more roles to every member in it.
 
-Authorization works by assigning one or more roles to a group.
+Authorization works by assigning a role to a group; a member gets that role's permissions by belonging to the group.
 
-{/* TODO(v3): org- and project-level role mapping is not in v3, so the sample scenario
-    below (project-scoped developer access) needs re-authoring against v3's actual
-    role/group model. The steps are kept here only as a starting point. */}
+Members and access control are managed from your organization's **Settings**. Open the apps grid next to the Choreo Cloud logo, then click **Settings** under **Manage**.
 
-## Sample scenario
+<ThemedImage
+    alt="Apps grid menu open with Settings highlighted under Manage"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/access-control/navigate-to-settings.png'),
+        dark: useBaseUrl('/img/manage/cloud/access-control/navigate-to-settings.png'),
+    }}
+/>
 
-This section walks through a sample scenario for managing access within a project.
+## Members
 
-Assume you are overseeing the Engineering Project within your organization and you need to grant development access to specific users solely within this project.
+**Settings** > **Members** lists everyone in your organization, their email, and the group they belong to.
 
-### Step 1: Create a project
+<ThemedImage
+    alt="Members tab listing organization members with their email and group"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/access-control/members-list.png'),
+        dark: useBaseUrl('/img/manage/cloud/access-control/members-list.png'),
+    }}
+/>
 
-1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
-2. In the top navigation, click the **Organization**.
-3. On the organization overview page, click **+ Create Project**.
-4. Enter a display name, unique name, and description for the project. Use the following values:
+### Invite a member
 
-    :::info
-    The **Name** field must uniquely identify your project in various contexts. The value is editable only at the time you create the project. You cannot change the name after creating the project.
-    :::
+1. Click **Invite user**.
+2. Enter one or more email addresses (up to 10, separated by a comma, space, or Enter).
+3. Select the **Group** the invitees will join.
+4. Click **Send invitation**.
 
-    | Field | Value |
-    |---|---|
-    | **Project Display Name** | `Engineering Project` |
-    | **Name** | `engineering-project` |
-    | **Project Description** | `My sample project` |
+<ThemedImage
+    alt="Invite users dialog with email addresses and a Group dropdown"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/access-control/invite-user-form.png'),
+        dark: useBaseUrl('/img/manage/cloud/access-control/invite-user-form.png'),
+    }}
+/>
 
-4. Click **Create**. This creates the project and opens the project home page.
+Each recipient must sign in with the exact email address they were invited with. Inviting an address that already has a pending invitation replaces it.
 
-### Step 2: Create a group
+### Pending invitations
 
-Follow these steps to create a group named `Engineering Project Developer`:
+The **Pending invitations** tab lists invitations that haven't been accepted yet, with the group offered, who sent it, when it was sent, and when it expires. An invitation past its expiry shows **Expired** instead of a countdown. Each invitation's **Actions** column has two icons: one to resend the invitation email, and one to delete the invitation.
 
-1. In the console, go to the top navigation menu, click the **Organization**.
-2. In the left navigation menu, click **Settings** under **Admin**.
-3. Click the **Access Control** tab and then click the **Groups** tab.
-4. Click **+ Create Group**.
-5. Enter a group name and description. Use the following values:
+<ThemedImage
+    alt="Pending invitations tab listing invited emails with their group, inviter, and expiry status, including both still-pending and expired invitations"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/access-control/pending-invitations.png'),
+        dark: useBaseUrl('/img/manage/cloud/access-control/pending-invitations.png'),
+    }}
+/>
 
-    | Field | Value |
-    |---|---|
-    | **Group Name** | `Engineering Project Developer` |
-    | **Group Description** | `Users with development access within the engineering project` |
+## Access control
 
-6. Click **Create**.
+**Settings** > **Access control** has three tabs: **Groups**, **Roles**, and **Assignments**.
 
-### Step 3: Assign roles to the group
+### Groups
 
-Follow these steps to assign the **Developer** role to the **Engineering Project Developer** group you created:
+Each group grants one or more roles. The platform ships with five predefined groups: **Admin**, **Platform Engineer**, **Developer**, **Viewer**, and **API Publisher**. Invite members into a group from **Members**.
 
-1. In the console, go to the top navigation menu, click the **Project** list, and select the **Engineering Project** you created.
-2. In the left navigation menu, click **Settings** under **Admin**.
-3. Click the **Access Control** tab and then click the **Groups** tab.
-4. On the **Groups** tab, search for the **Engineering Project Developer** group and click the corresponding edit icon.
-5. Click **+Add Roles**.
-6. In the **Add Roles to Group in Project** dialog, click the **Roles** list and select **Developer**.
-7. Click **Add**. This assigns the **Developer** role to the group.
+<ThemedImage
+    alt="Groups tab listing the predefined groups, the role each grants, and its member count"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/access-control/groups.png'),
+        dark: useBaseUrl('/img/manage/cloud/access-control/groups.png'),
+    }}
+/>
 
-This grants developer access to members of the Engineering Project Developer group, limited to the Engineering Project.
+Click a group to see its granted role, a summary of what it permits, and its members.
 
-### Step 4: Add users to the group
+<ThemedImage
+    alt="Admin group detail page showing its role, permission summary, and list of members"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/access-control/group-member-list.png'),
+        dark: useBaseUrl('/img/manage/cloud/access-control/group-member-list.png'),
+    }}
+/>
 
-Follow these steps to add an existing user to the group:
+### Roles
 
-1. In the console, go to the top navigation menu, click the **Organization** list, and select the organization where you created your project.
-2. In the left navigation menu, click **Settings** under **Admin**.
-3. Click the **Access Control** tab and then click the **Users** tab.
-4. Search for the existing user you want to add to the **Engineering Project Developer** group.
-5. Click the edit icon corresponding to the user.
-6. Click **+Assign Groups**.
-7. In the **Add Groups to User** dialog, click the **Groups** list and select **Engineering Project Developer**.
-8. Click **Add**.
+The **Roles** tab lists what each role allows, broken down by product area, and which group currently grants it.
 
-:::tip
-Remove the user from any other groups to avoid granting organization-level access unintentionally.
+<ThemedImage
+    alt="Roles tab listing each role's permission count by product area and the group it's granted to"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/access-control/roles.png'),
+        dark: useBaseUrl('/img/manage/cloud/access-control/roles.png'),
+    }}
+/>
+
+Click a role to see its exact permissions, grouped by product area (Choreo Cloud, API Management, Integration, AI & Agent Management, Identity & Access Management). Hover a permission to see the exact platform check it performs.
+
+<ThemedImage
+    alt="Admin role detail page with its permissions expanded under the Integration product area"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/access-control/role-permissions.png'),
+        dark: useBaseUrl('/img/manage/cloud/access-control/role-permissions.png'),
+    }}
+/>
+
+### Assignments
+
+Assignments say which group gets which role, and where it applies. Filter the list by **Organization level** or **Resource level**.
+
+<ThemedImage
+    alt="Assignments tab with the Organization level / Resource level filter dropdown open"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/access-control/assignment-scope-levels.png'),
+        dark: useBaseUrl('/img/manage/cloud/access-control/assignment-scope-levels.png'),
+    }}
+/>
+
+Click **New assignment** to grant a group an additional role. Pick the **Group** and **Role**, then choose where it applies: **The whole organization**, or **A specific resource** for a single resource instance.
+
+:::warning
+Only add a member to the groups they actually need. A member inherits every permission carried by the roles assigned to each group they belong to.
 :::
 
-:::note
-- Adding users to an existing group grants them every permission the group's roles carry.
-- You can add existing users to new groups and assign roles such as Developer or API Publisher based on their requirements.
-:::
-
-You have successfully set up access control within your project.
+<ThemedImage
+    alt="New assignment dialog with Group and Role dropdowns and a choice between the whole organization or a specific resource"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/access-control/new-assignment-form.png'),
+        dark: useBaseUrl('/img/manage/cloud/access-control/new-assignment-form.png'),
+    }}
+/>
