@@ -31,6 +31,15 @@ When you [enable the User Portal](user-portal.md#enable-the-user-portal), the pl
 | `automation:trigger` | Run automations in the organization. | No |
 | `aiagent:view` | View AI agents in the organization. | Yes |
 | `aiagent:invoke` | Chat with AI agents in the organization. | No |
+| `workflow:view` | View workflows in the organization. | Yes |
+| `workflow_mgt:view_workflows` | View workflow definitions. | No |
+| `workflow_mgt:view_human_tasks` | View human tasks raised by workflows. | No |
+| `workflow_mgt:manage_workflows` | Manage workflow definitions. | No |
+| `workflow_mgt:manage_human_tasks` | Act on human tasks raised by workflows. | No |
+
+Each group (`automation`, `aiagent`, `workflow`, `workflow_mgt`) is also itself a selectable, broader scope in addition to its individual sub-scopes above - that's why the console's own "Assign permissions" step shows 13 total scopes on the User Portal API (4 groups + 9 sub-scopes), not just the 9 listed here.
+
+{/* TODO(v3): the workflow and workflow_mgt scopes are confirmed to exist on the User Portal API resource server, matching the "act on workflow tasks" capability mentioned in the console's own enable dialog, but publishing a durable-workflow integration to the User Portal hasn't been verified live this pass - only automations and AI agents were tested end to end. What exactly the broader group-level scope (e.g. plain `aiagent` vs `aiagent:view`/`aiagent:invoke`) grants on its own is also unverified. */}
 
 The User Portal uses these scopes as follows:
 
@@ -38,7 +47,7 @@ The User Portal uses these scopes as follows:
 - **To run an automation, a user needs `automation:trigger`.** Without this scope, the user can see the automation but cannot run it.
 
 :::note
-By default, an AI agent does not check the `aiagent:invoke` scope, so any user who can see the agent can chat with it. To make the agent require this scope, change the security settings of the agent's chat endpoint: select the **OAuth2** security scheme, then assign the `aiagent:invoke` scope as a permission to the `/chat` resource. See [Configure security for an integration as an API](../../integrations/api-management/api-security.md#configure-security-for-an-integration-as-an-api).
+Publishing an AI agent to the User Portal requires OAuth2 security to be turned on for the agent first - see [Publish an Integration](publish-to-user-portal.md#prerequisites). The `aiagent:invoke` scope presumably gates chat access once that's in place, the same way `automation:trigger` gates running an automation, but this hasn't been verified live: every AI agent tested this pass was blocked before reaching that point. The previous version of this note linked to the Integration-as-API security configuration page, but that page's "Configure security" button doesn't appear anywhere on an AI Agent component - it's specific to Integration-as-API components.
 :::
 
 You can also give users scopes that you define. See [Add scopes from your own APIs](#add-scopes-from-your-own-apis).
