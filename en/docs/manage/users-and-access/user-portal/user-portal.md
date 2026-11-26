@@ -24,13 +24,21 @@ You enable the User Portal once per environment, for the whole organization. Aft
 ## Prerequisites
 
 - **You have the required permission.** Your role must include the **Manage Organization** permission under **Organization Management**, assigned at the organization level. For more information about roles and permissions, see [Member Access](../access-control.md).
-- **The project is on the organization's default deployment pipeline.** Only integrations in a project that uses the **default** promotion pipeline can be published to the User Portal. If your project uses a different pipeline, switch it from the project's **Settings** first.
+- **The project is on the organization's default deployment pipeline.** Only integrations in a project that uses the **default** promotion pipeline can be published to the User Portal. If your project uses a different pipeline, [switch it from the project's **Settings**](../../environments/configure-promotion-pipelines.md#assign-a-pipeline-to-a-project) first.
 
 {/* TODO(v3): the v2 prerequisites around Choreo Identity username validation, Developer Portal key manager trust, and resource-name collisions were tied to a Developer Portal-based mechanism that no longer exists. Re-verify whether any equivalent blocker still applies to the v3 flow below before restoring that content. */}
 
 ## What the platform provisions for you
 
 Enabling the User Portal for an environment creates an **Integration User Portal** project in Identity & Access Management, with a **User Portal API** resource server already defining the scopes that control what a user can do in the User Portal. See [Scopes](manage-users.md#scopes).
+
+<ThemedImage
+    alt="Integration User Portal project in Choreo Identity & Access Management"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/integration-user-portal-project.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/integration-user-portal-project.png'),
+    }}
+/>
 
 ## Enable the User Portal
 
@@ -39,11 +47,36 @@ The User Portal is enabled per environment (for example, Development), for the w
 1. Open any integration and wait until its environment card shows **Active**.
 2. On that card, click **Share with your users**.
 3. In the **About the User Portal** dialog, click **Enable User Portal**. This takes you to **Configure** > **User Portal**, scoped to that integration's environment.
+
+    <ThemedImage
+        alt="About the User Portal dialog with an Enable User Portal button"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/about-user-portal-dialog.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/about-user-portal-dialog.png'),
+        }}
+    />
+
 4. Click **Enable User Portal**, select the **Environment**, then click **Enable**.
+
+    <ThemedImage
+        alt="Enable User Portal dialog with an Environment dropdown set to Production"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/enable-confirm.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/enable-confirm.png'),
+        }}
+    />
 
 The **User Portal** page shows a card for the environment. While the platform sets up the User Portal, the card shows **Setting up**. When the platform finishes, the card shows **Active** with an **Open portal** button.
 
-{/* TODO(v3): re-shoot this section's screenshots end to end (About the User Portal dialog, the Configure > User Portal enable flow, and the resulting Active card) - the ones here are stale from the v2 Developer Portal-based flow. Capturing the "not yet enabled" dialog needs an environment where the User Portal hasn't been enabled yet for any integration, since enabling it is organization-wide per environment name. */}
+<ThemedImage
+    alt="Configure > User Portal page with a card for the Development environment showing Active status and an Open portal button"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/user-portal-status.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/user-portal-status.png'),
+    }}
+/>
+
+{/* TODO(v3): didn't observe a Setting up card live this pass - only confirmed the eventual Active state. */}
 
 You can now [add users](manage-users.md) and [publish integrations](publish-to-user-portal.md).
 
