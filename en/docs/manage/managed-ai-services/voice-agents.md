@@ -281,7 +281,15 @@ For the customer support example, try:
 
 ## Promote to production
 
-When you're ready to use the voice agent beyond Development, click **Promote** on the voice agent's overview page to promote it to the next environment (**Staging**, then **Production**). Wait until the target environment's card shows **Active**, then test it with that card's **Voice tester**.
+When you're ready to use the voice agent beyond Development, click **Promote** between the **Development** and **Staging** cards on the voice agent's overview page. Wait until the **Staging** card shows **Active**, then test it with that card's **Voice tester**. Click **Promote** again, between **Staging** and **Production**, to promote it the same way to **Production**.
+
+<ThemedImage
+    alt="Voice agent overview with the Promote button between the Development and Staging cards highlighted"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/voice-agents/promote-to-production.png'),
+        dark: useBaseUrl('/img/manage/cloud/voice-agents/promote-to-production.png'),
+    }}
+/>
 
 ## Troubleshooting
 
