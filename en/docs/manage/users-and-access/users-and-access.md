@@ -2,29 +2,22 @@
 sidebar_position: 0
 sidebar_label: "Users, Roles, and Access"
 title: "Users, Roles, and Access"
-description: "Manage who can access the Choreo Integration, what they can do, and how they sign in."
-keywords: [choreo cloud, users, access control, roles, groups]
+description: "Manage access for your organization's own members, and publish integrations to external users through the User Portal."
+keywords: [choreo cloud, users, access control, roles, groups, user portal]
 slug: /manage/users-and-access
 ---
 
 # Users, Roles, and Access
 
-Choreo Integration gives you centralized control over who can access your organization and projects, what actions they can perform, and how they authenticate. You can define granular permissions using roles and groups and enforce organization-wide policies.
+Choreo Integration separates two audiences, each with its own access model: the members of your own organization who build and manage integrations, APIs, and AI agents, and the external users who only interact with what you've already published.
 
 ## Access control
 
-The platform uses two building blocks to control access:
-
-| Concept | Description |
-|---|---|
-| **Role** | A collection of permissions. The platform ships with a predefined set of roles. |
-| **Group** | A collection of users. Assign one or more roles to a group so its members inherit the corresponding permissions. |
-
-Authorization works by assigning one or more roles to a group.
+For your organization's own members. Members, groups, and roles control what someone can see and do in the Choreo Cloud console — deploy integrations, manage environments, publish APIs, and more. See [Control access](./access-control.md).
 
 ## User Portal
 
-The User Portal is a separate portal that exposes your integrations to external users. After you enable it for your organization, you can publish AI agents and automations to it. Users sign in through your Choreo Identity organization and can chat with agents and run automations without access to the Choreo Cloud console. You manage User Portal users and roles, and the permissions of each role, from the Choreo Cloud console.
+For people outside your organization. The User Portal is a separate portal that exposes your integrations to external users: after you enable it, you can publish AI agents and automations to it, and users sign in through your Choreo Identity organization to chat with agents or run automations, without access to the Choreo Cloud console. See [User Portal](./user-portal/user-portal.md).
 
 ## In this section
 
