@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 3
 title: Check and Repair
 description: "Check the health of the User Portal in Choreo Integration, repair missing resources, and resolve the blockers that prevent you from enabling or repairing it."
 keywords: [choreo cloud, user portal, health check, repair, blockers, identity platform]

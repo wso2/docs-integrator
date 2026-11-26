@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+sidebar_custom_props:
+  separatorBefore: "Set Up"
 title: Publish an Integration
 description: "Publish AI agents and automations from Choreo Integration to the User Portal so that external users can use them."
 keywords: [choreo cloud, user portal, publish, ai agents, automations]

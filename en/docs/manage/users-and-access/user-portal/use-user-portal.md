@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: Run Available Integrations
 description: "Find the integrations that your organization publishes to the User Portal, chat with AI agents, and run automations."
 keywords: [choreo cloud, user portal, ai agents, chat, automations, runtime arguments]

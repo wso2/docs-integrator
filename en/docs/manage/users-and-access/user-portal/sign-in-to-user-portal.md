@@ -1,5 +1,7 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
+sidebar_custom_props:
+  separatorBefore: "Use the Portal"
 title: Sign In
 description: "Sign in to the User Portal of a Choreo Integration organization with the username and password that your organization gave you."
 keywords: [choreo cloud, user portal, sign in, external users, ai agents, automations]
