@@ -59,7 +59,7 @@ Each recipient must sign in with the exact email address they were invited with.
 
 ### Pending invitations
 
-The **Pending invitations** tab lists invitations that haven't been accepted yet, with the group offered, who sent it, when it was sent, and when it expires. An invitation past its expiry shows **Expired** instead of a countdown. Resend or revoke an invitation from the **Actions** column.
+The **Pending invitations** tab lists invitations that haven't been accepted yet, with the group offered, who sent it, when it was sent, and when it expires. An invitation past its expiry shows **Expired** instead of a countdown. Each invitation's **Actions** column has two icons: one to resend the invitation email, and one to delete the invitation.
 
 <ThemedImage
     alt="Pending invitations tab listing invited emails with their group, inviter, and expiry status, including both still-pending and expired invitations"
@@ -131,6 +131,10 @@ Assignments say which group gets which role, and where it applies. Filter the li
 
 Click **New assignment** to grant a group an additional role. Pick the **Group** and **Role**, then choose where it applies: **The whole organization**, or **A specific resource** for a single resource instance.
 
+:::warning
+Only add a member to the groups they actually need. A member inherits every permission carried by the roles assigned to each group they belong to.
+:::
+
 <ThemedImage
     alt="New assignment dialog with Group and Role dropdowns and a choice between the whole organization or a specific resource"
     sources={{
@@ -138,15 +142,3 @@ Click **New assignment** to grant a group an additional role. Pick the **Group**
         dark: useBaseUrl('/img/manage/cloud/access-control/new-assignment-form.png'),
     }}
 />
-
-<ThemedImage
-    alt="Assignments tab listing each group, the role it's granted, and an action to remove the assignment"
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/access-control/assignments.png'),
-        dark: useBaseUrl('/img/manage/cloud/access-control/assignments.png'),
-    }}
-/>
-
-:::tip
-Only add a member to the groups they actually need. A member inherits every permission carried by the roles assigned to each group they belong to.
-:::
