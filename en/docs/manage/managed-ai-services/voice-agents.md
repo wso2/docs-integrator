@@ -239,10 +239,10 @@ Choreo Cloud creates a new integration of type **Voice Agent** in the project, n
     }}
 />
 
-Open the voice agent and wait until the **Development** card on its overview page shows **Active**. The voice agent has **Development**, **Staging**, and **Production** cards. Each card has its own **Voice tester**, and **How to connect** shows how to connect a client to that environment.
+Open the voice agent and wait until the **Development** card on its overview page shows **Active**. The voice agent has **Development** and **Production** cards. Each card has its own **Voice tester**, and **How to connect** shows how to connect a client to that environment.
 
 <ThemedImage
-    alt="Voice agent overview with the Development environment Active and its Voice tester, and the Staging and Production cards"
+    alt="Voice agent overview with the Development environment Active and its Voice tester, and the Production card"
     sources={{
         light: useBaseUrl('/img/manage/cloud/voice-agents/voice-agent-development-active.png'),
         dark: useBaseUrl('/img/manage/cloud/voice-agents/voice-agent-development-active.png'),
@@ -281,10 +281,10 @@ For the customer support example, try:
 
 ## Promote to production
 
-When you're ready to use the voice agent beyond Development, click **Promote** between the **Development** and **Staging** cards on the voice agent's overview page. Wait until the **Staging** card shows **Active**, then test it with that card's **Voice tester**. Click **Promote** again, between **Staging** and **Production**, to promote it the same way to **Production**.
+When you're ready to use the voice agent beyond Development, click **Promote** between the **Development** and **Production** cards on the voice agent's overview page. Wait until the **Production** card shows **Active**, then test it with that card's **Voice tester**.
 
 <ThemedImage
-    alt="Voice agent overview with the Promote button between the Development and Staging cards highlighted"
+    alt="Voice agent overview with the Promote button between the Development and Production cards highlighted"
     sources={{
         light: useBaseUrl('/img/manage/cloud/voice-agents/promote-to-production.png'),
         dark: useBaseUrl('/img/manage/cloud/voice-agents/promote-to-production.png'),
