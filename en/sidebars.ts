@@ -335,10 +335,10 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'DocuSign Admin',
-          link: { type: 'doc', id: 'catalog/productivity-collaboration/docusign.dsadmin/docusign-admin-connector-overview' },
+          link: { type: 'doc', id: 'catalog/productivity-collaboration/docusign.dsadmin/overview' },
           items: [
             'catalog/productivity-collaboration/docusign.dsadmin/setup-guide',
-            'catalog/productivity-collaboration/docusign.dsadmin/actions',
+            'catalog/productivity-collaboration/docusign.dsadmin/action-reference',
             'catalog/productivity-collaboration/docusign.dsadmin/example',
           ],
         },
@@ -382,6 +382,16 @@ const sidebars: SidebarsConfig = {
             'catalog/developer-tools/github/actions',
             'catalog/developer-tools/github/triggers',
             'catalog/developer-tools/github/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Gitlab',
+          link: { type: 'doc', id: 'catalog/developer-tools/gitlab/overview' },
+          items: [
+            'catalog/developer-tools/gitlab/setup-guide',
+            'catalog/developer-tools/gitlab/action-reference',
+            'catalog/developer-tools/gitlab/example',
           ],
         },
         {
@@ -951,6 +961,16 @@ const sidebars: SidebarsConfig = {
           items: [
             'catalog/ai-ml/mcp/action-reference',
             'catalog/ai-ml/mcp/trigger-reference',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Microsoft Dynamics365 Bc',
+          link: { type: 'doc', id: 'catalog/erp-business/microsoft.dynamics365.bc/overview' },
+          items: [
+            'catalog/erp-business/microsoft.dynamics365.bc/setup-guide',
+            'catalog/erp-business/microsoft.dynamics365.bc/action-reference',
+            'catalog/erp-business/microsoft.dynamics365.bc/example',
           ],
         },
         {
@@ -2177,21 +2197,31 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Xero Bankfeeds',
+          link: { type: 'doc', id: 'catalog/finance-accounting/xero.bankfeeds/overview' },
+          items: [
+            'catalog/finance-accounting/xero.bankfeeds/setup-guide',
+            'catalog/finance-accounting/xero.bankfeeds/action-reference',
+            'catalog/finance-accounting/xero.bankfeeds/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Zoom Meetings',
-          link: { type: 'doc', id: 'catalog/communication/zoom.meetings/zoom-meetings-connector-overview' },
+          link: { type: 'doc', id: 'catalog/communication/zoom.meetings/overview' },
           items: [
             'catalog/communication/zoom.meetings/setup-guide',
-            'catalog/communication/zoom.meetings/actions',
+            'catalog/communication/zoom.meetings/action-reference',
             'catalog/communication/zoom.meetings/example',
           ],
         },
         {
           type: 'category',
           label: 'Zoom Scheduler',
-          link: { type: 'doc', id: 'catalog/communication/zoom.scheduler/zoom-scheduler-connector-overview' },
+          link: { type: 'doc', id: 'catalog/communication/zoom.scheduler/overview' },
           items: [
             'catalog/communication/zoom.scheduler/setup-guide',
-            'catalog/communication/zoom.scheduler/actions',
+            'catalog/communication/zoom.scheduler/action-reference',
             'catalog/communication/zoom.scheduler/example',
           ],
         },
