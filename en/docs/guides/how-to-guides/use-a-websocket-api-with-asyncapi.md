@@ -2,8 +2,8 @@
 sidebar_position: 11
 title: "Use a WebSocket API with the AsyncAPI Tool"
 sidebar_label: "Use a WebSocket API with AsyncAPI"
-description: Generate a WebSocket client from an AsyncAPI definition, use it in a WSO2 Integrator automation, and run the automation on Choreo Cloud.
-keywords: [wso2 integrator, asyncapi, websocket, client, automation, request reply, choreo cloud, deploy]
+description: Generate a WebSocket client from an AsyncAPI definition, use it in a WSO2 Integrator automation, and run the automation on WSO2 Cloud.
+keywords: [wso2 integrator, asyncapi, websocket, client, automation, request reply, wso2 cloud, deploy]
 slug: /guides/how-to-guides/use-a-websocket-api-with-asyncapi
 card_icon: event
 card_summary: Generate a WebSocket client from AsyncAPI and run it in the cloud
@@ -17,7 +17,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 A WebSocket API maintains a single open connection for bidirectional messaging, allowing you to send requests and receive replies while the server pushes real-time updates. Building a client manually requires correlating every incoming message with its corresponding request. This guide shows you how to avoid that boilerplate in WSO2 Integrator: define the API in an AsyncAPI definition, generate a client using the `bal asyncapi` tool with dedicated functions for each message, and focus solely on your integration logic.
 
-**What you'll build:** An automation that connects to an order service, places an order, waits for the reply, and then waits for a price update. The guide includes a small sample order service for the client to talk to. You run both on your computer first, then on Choreo Cloud.
+**What you'll build:** An automation that connects to an order service, places an order, waits for the reply, and then waits for a price update. The guide includes a small sample order service for the client to talk to. You run both on your computer first, then on WSO2 Cloud.
 
 ## How it works
 
@@ -40,7 +40,7 @@ Automation ──PlaceOrder──►  Order service
 - Ballerina Swan Lake Update 13 (2201.13.0) or later. WSO2 Integrator installs it for you.
 - The AsyncAPI tool. Install it with `bal tool pull asyncapi`.
 - A GitHub account, to hold the integration's source code.
-- A Choreo Cloud account, to run the integration.
+- A WSO2 Cloud account, to run the integration.
 
 :::
 
@@ -294,7 +294,7 @@ Your client needs something to talk to. In a real integration, that's the WebSoc
 
 Press **Ctrl+C** in the first terminal to stop the service.
 
-## Part 2: Run it on Choreo Cloud
+## Part 2: Run it on WSO2 Cloud
 
 ### Step 7: Tell the cloud about the service's endpoint
 
@@ -330,11 +330,11 @@ endpoints:
 
 ### Step 9: Deploy the sample service
 
-1. In the Choreo Cloud console, on the project home page, select **Import a repository from** and the **GitHub** icon.
+1. In the WSO2 Cloud console, on the project home page, select **Import a repository from** and the **GitHub** icon.
 2. Choose your account, the `order-client-integration` repository and the `main` branch. For **Path**, choose `order_service`.
 3. Under **Choose Integration Type**, select **Integration as API**, and select **Create**.
 
-Choreo Cloud builds the service and deploys it. When the **Development** environment shows **Active**, the **Overview** page shows the service's `wss://` URL. Copy it.
+WSO2 Cloud builds the service and deploys it. When the **Development** environment shows **Active**, the **Overview** page shows the service's `wss://` URL. Copy it.
 
 <ThemedImage
     alt="Overview of the order_service integration, active, with its wss URL"
@@ -344,7 +344,7 @@ Choreo Cloud builds the service and deploys it. When the **Development** environ
     }}
 />
 
-4. By default, Choreo Cloud asks every caller for an OAuth2 token. The sample service is only for this guide, so turn that off: select **Configure Security**, clear **OAuth2**, and select **Apply**.
+4. By default, WSO2 Cloud asks every caller for an OAuth2 token. The sample service is only for this guide, so turn that off: select **Configure Security**, clear **OAuth2**, and select **Apply**.
 
 <ThemedImage
     alt="Configure Security for the Orders endpoint with OAuth2 cleared"

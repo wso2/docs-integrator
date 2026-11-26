@@ -466,8 +466,8 @@ The tool exits with `0` on success, `1` when the input can't be generated from o
 
 ## What's next
 
-- [Receive Webhook Events with the AsyncAPI Tool](../../../guides/how-to-guides/receive-webhook-events-with-asyncapi.md) -- Step by step, from a definition to a webhook running on Choreo Cloud
-- [Use a WebSocket API with the AsyncAPI Tool](../../../guides/how-to-guides/use-a-websocket-api-with-asyncapi.md) -- Step by step, from a definition to a client running on Choreo Cloud
+- [Receive Webhook Events with the AsyncAPI Tool](../../../guides/how-to-guides/receive-webhook-events-with-asyncapi.md) -- Step by step, from a definition to a webhook running on WSO2 Cloud
+- [Use a WebSocket API with the AsyncAPI Tool](../../../guides/how-to-guides/use-a-websocket-api-with-asyncapi.md) -- Step by step, from a definition to a client running on WSO2 Cloud
 - [gRPC Tool](grpc-tool.md) -- Generate gRPC services from Protocol Buffer definitions
 - [OpenAPI Tool](openapi-tool.md) -- Generate REST services and clients
 - [Error Handling](../../../editor/canvases/flow-canvas/node-palette.md#error-handling) -- Handle event processing failures gracefully

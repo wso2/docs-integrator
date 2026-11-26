@@ -2,8 +2,8 @@
 sidebar_position: 10
 title: "Receive Webhook Events with the AsyncAPI Tool"
 sidebar_label: "Receive Webhook Events with AsyncAPI"
-description: Generate a webhook listener from an AsyncAPI definition, handle its events in a WSO2 Integrator integration, and deploy it to Choreo Cloud with a public URL.
-keywords: [wso2 integrator, asyncapi, webhook, listener, event-driven, signature, hmac, choreo cloud, deploy]
+description: Generate a webhook listener from an AsyncAPI definition, handle its events in a WSO2 Integrator integration, and deploy it to WSO2 Cloud with a public URL.
+keywords: [wso2 integrator, asyncapi, webhook, listener, event-driven, signature, hmac, wso2 cloud, deploy]
 slug: /guides/how-to-guides/receive-webhook-events-with-asyncapi
 card_icon: event
 card_summary: Generate a webhook listener from AsyncAPI and deploy it
@@ -17,12 +17,12 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 Many services notify you of events by calling your webhook, such as an online store sending an event when a customer places an order, or a payment service when a transaction succeeds. This guide shows you how to receive these events in WSO2 Integrator without writing the HTTP plumbing yourself: define the events in an AsyncAPI definition, generate a listener using the `bal asyncapi` tool, and focus solely on implementing your event-handling logic.
 
-**What you'll build:** An integration that receives `order_created` and `order_cancelled` events from an online store, checks that each request really comes from the store, and logs the order. You run it on your computer first, then deploy it to Choreo Cloud, where it gets a public URL the store can call.
+**What you'll build:** An integration that receives `order_created` and `order_cancelled` events from an online store, checks that each request really comes from the store, and logs the order. You run it on your computer first, then deploy it to WSO2 Cloud, where it gets a public URL the store can call.
 
 ## How it works
 
 ```text
-Online store ──(POST, signed)──► Choreo Cloud ──► Listener ──(checks signature)──► onOrderCreated / onOrderCancelled
+Online store ──(POST, signed)──► WSO2 Cloud ──► Listener ──(checks signature)──► onOrderCreated / onOrderCancelled
 ```
 
 1. The store sends each event as an HTTP `POST` with a JSON body, such as `{"type": "order_created", "orderId": "A-1001"}`.
@@ -37,7 +37,7 @@ Online store ──(POST, signed)──► Choreo Cloud ──► Listener ─�
 - WSO2 Integrator. See [Setup](../../get-started/setup/setup.md).
 - Ballerina Swan Lake Update 13 (2201.13.0) or later. WSO2 Integrator installs it for you.
 - A GitHub account, to hold the integration's source code.
-- A Choreo Cloud account, to deploy the integration.
+- A WSO2 Cloud account, to deploy the integration.
 - `curl` and `openssl`, to send test events. Both come with macOS, Linux and Git for Windows.
 
 :::
@@ -290,11 +290,11 @@ WSO2 Integrator shows the listener and the service on the design canvas:
 
 Press **Ctrl+C** in the first terminal to stop the integration.
 
-## Part 2: Deploy to Choreo Cloud
+## Part 2: Deploy to WSO2 Cloud
 
 ### Step 8: Tell the cloud about the webhook endpoint
 
-Choreo Cloud gives an integration a public URL for each endpoint it finds when it builds the integration. It doesn't find the generated listener on its own, so declare the endpoint in a file.
+WSO2 Cloud gives an integration a public URL for each endpoint it finds when it builds the integration. It doesn't find the generated listener on its own, so declare the endpoint in a file.
 
 Create a folder named `.choreo` inside `order_listener`, and in it a file named `component.yaml`:
 
@@ -331,7 +331,7 @@ You can also use the **Source Control** view of WSO2 Integrator to commit and pu
 
 ### Step 10: Import the integration
 
-1. Sign in to the Choreo Cloud console. On the project home page, under **Create it yourself**, select **Import a repository from** and the **GitHub** icon.
+1. Sign in to the WSO2 Cloud console. On the project home page, under **Create it yourself**, select **Import a repository from** and the **GitHub** icon.
 2. If this is the first time, authorize the GitHub app and give it access to your repository. To add your personal account, select **Add** in the **Organization** list.
 3. Fill in the form:
    - **Organization:** your GitHub account
@@ -358,7 +358,7 @@ You can also use the **Source Control** view of WSO2 Integrator to commit and pu
     }}
 />
 
-Choreo Cloud creates the integration and starts building it. Open **Build** in the left menu to follow it. Wait until the status is **Success**.
+WSO2 Cloud creates the integration and starts building it. Open **Build** in the left menu to follow it. Wait until the status is **Success**.
 
 <ThemedImage
     alt="Builds page with a successful build"
@@ -370,7 +370,7 @@ Choreo Cloud creates the integration and starts building it. Open **Build** in t
 
 ### Step 11: Let the store call the webhook
 
-By default, Choreo Cloud asks every caller of an endpoint for an OAuth2 token. A webhook sender, such as the store, can't send one, so turn that check off for `POST`. The listener still checks the signature of every request, so only the store can send events.
+By default, WSO2 Cloud asks every caller of an endpoint for an OAuth2 token. A webhook sender, such as the store, can't send one, so turn that check off for `POST`. The listener still checks the signature of every request, so only the store can send events.
 
 1. On the integration's **Overview** page, select **Configure Security**.
 2. Under **Resources**, expand **POST** `/*` and turn **Security** off. Leave the other methods as they are.
