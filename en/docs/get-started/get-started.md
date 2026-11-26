@@ -8,9 +8,9 @@ wide_layout: true
 slug: /get-started
 ---
 
-# Get Started with Integration Platform on Choreo Cloud
+# Get Started with Choreo Integration
 
-New to Integration Platform on Choreo Cloud? Start here: set up your Choreo Cloud account, learn the vocabulary used across the docs, then build your first integration with a quickstart that matches what you're trying to do.
+New to Choreo Integration? Start here: set up your Choreo Cloud account, learn the vocabulary used across the docs, then build your first integration with a quickstart that matches what you're trying to do.
 
 <PaletteGrid>
 
