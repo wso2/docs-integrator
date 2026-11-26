@@ -915,6 +915,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Jira Servicemanagement',
+          link: { type: 'doc', id: 'catalog/productivity-collaboration/jira.servicemanagement/overview' },
+          items: [
+            'catalog/productivity-collaboration/jira.servicemanagement/setup-guide',
+            'catalog/productivity-collaboration/jira.servicemanagement/action-reference',
+            'catalog/productivity-collaboration/jira.servicemanagement/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'JMS',
           link: { type: 'doc', id: 'catalog/messaging/java.jms/jms-connector-overview' },
           items: [
