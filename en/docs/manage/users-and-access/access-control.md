@@ -17,86 +17,18 @@ The platform uses **roles** and **groups** to control access:
 
 Authorization works by assigning one or more roles to a group.
 
-{/* TODO(v3): org- and project-level role mapping is not in v3, so the sample scenario
-    below (project-scoped developer access) needs re-authoring against v3's actual
-    role/group model. The steps are kept here only as a starting point. */}
+Your organization's members and its groups are managed in two separate places in the console:
 
-## Sample scenario
+- **Members**: the people who belong to your organization. Add or remove members here.
+- **Access Control**: the groups and roles that control what a member can do. Create a group, assign one or more roles to it, then add members to the group so they inherit its permissions.
 
-This section walks through a sample scenario for managing access within a project.
-
-Assume you are overseeing the Engineering Project within your organization and you need to grant development access to specific users solely within this project.
-
-### Step 1: Create a project
-
-1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
-2. In the top navigation, click the **Organization**.
-3. On the organization overview page, click **+ Create Project**.
-4. Enter a display name, unique name, and description for the project. Use the following values:
-
-    :::info
-    The **Name** field must uniquely identify your project in various contexts. The value is editable only at the time you create the project. You cannot change the name after creating the project.
-    :::
-
-    | Field | Value |
-    |---|---|
-    | **Project Display Name** | `Engineering Project` |
-    | **Name** | `engineering-project` |
-    | **Project Description** | `My sample project` |
-
-4. Click **Create**. This creates the project and opens the project home page.
-
-### Step 2: Create a group
-
-Follow these steps to create a group named `Engineering Project Developer`:
-
-1. In the console, go to the top navigation menu, click the **Organization**.
-2. In the left navigation menu, click **Settings** under **Admin**.
-3. Click the **Access Control** tab and then click the **Groups** tab.
-4. Click **+ Create Group**.
-5. Enter a group name and description. Use the following values:
-
-    | Field | Value |
-    |---|---|
-    | **Group Name** | `Engineering Project Developer` |
-    | **Group Description** | `Users with development access within the engineering project` |
-
-6. Click **Create**.
-
-### Step 3: Assign roles to the group
-
-Follow these steps to assign the **Developer** role to the **Engineering Project Developer** group you created:
-
-1. In the console, go to the top navigation menu, click the **Project** list, and select the **Engineering Project** you created.
-2. In the left navigation menu, click **Settings** under **Admin**.
-3. Click the **Access Control** tab and then click the **Groups** tab.
-4. On the **Groups** tab, search for the **Engineering Project Developer** group and click the corresponding edit icon.
-5. Click **+Add Roles**.
-6. In the **Add Roles to Group in Project** dialog, click the **Roles** list and select **Developer**.
-7. Click **Add**. This assigns the **Developer** role to the group.
-
-This grants developer access to members of the Engineering Project Developer group, limited to the Engineering Project.
-
-### Step 4: Add users to the group
-
-Follow these steps to add an existing user to the group:
-
-1. In the console, go to the top navigation menu, click the **Organization** list, and select the organization where you created your project.
-2. In the left navigation menu, click **Settings** under **Admin**.
-3. Click the **Access Control** tab and then click the **Users** tab.
-4. Search for the existing user you want to add to the **Engineering Project Developer** group.
-5. Click the edit icon corresponding to the user.
-6. Click **+Assign Groups**.
-7. In the **Add Groups to User** dialog, click the **Groups** list and select **Engineering Project Developer**.
-8. Click **Add**.
+{/* TODO(v3): the exact navigation path and step-by-step flow for both the Members
+    section and the Access Control section (create group / assign role / add member)
+    need to be re-verified live against the current v3 console before publishing a
+    numbered walkthrough here. The previous version of this page described a
+    project-scoped role-mapping scenario that doesn't match v3's model - removed
+    rather than left inaccurate. */}
 
 :::tip
-Remove the user from any other groups to avoid granting organization-level access unintentionally.
+Only add a member to the groups they actually need. A member inherits every permission carried by the roles assigned to each group they belong to.
 :::
-
-:::note
-- Adding users to an existing group grants them every permission the group's roles carry.
-- You can add existing users to new groups and assign roles such as Developer or API Publisher based on their requirements.
-:::
-
-You have successfully set up access control within your project.
