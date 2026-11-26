@@ -182,7 +182,7 @@ To route or filter messages without a schema, `x12HeadersFromEdiString` and `edi
 | `interchangeToEdiString` | `interchangeToEdiString(EdiInterchange msg, EdiSchema schema) returns string\|Error` | Serialize a full interchange back to EDI text (recomputes envelope counts). |
 | `getSchema` | `getSchema(string\|json schema) returns EdiSchema\|error` | Load and validate an EDI schema from a JSON string or object. |
 
-For full signatures, parameters, error types (`InvalidEnvelopeError`, `SchemaCompatibilityError`, `SerializationError`), and envelope processing semantics, see the [Module Specification](https://github.com/ballerina-platform/module-ballerina-edi/blob/main/docs/specs/ModuleSpecification.md).
+For full signatures, parameters, error types (`InvalidEnvelopeError`, `SchemaCompatibilityError`, `SerializationError`), and envelope processing semantics, see the [Module Specification](https://github.com/ballerina-platform/module-ballerina-edi/blob/main/docs/spec/spec.md).
 
 ## Custom EDI schemas
 

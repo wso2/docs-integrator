@@ -28,6 +28,6 @@ Reach for a Durable Workflow instead of a regular integration flow when the proc
 
 ## What's next
 
-- [Build an Order Processing Workflow](../../../../get-started/quickstarts/build-order-processing.md) — a worked example that fills this in end to end.
+- [Build an Order Processing Workflow](../../../../get-started/quickstarts/build-durable-workflow.md) — a worked example that fills this in end to end.
 - [Durable Agentic Workflow](../durable-agentic-workflow/durable-agentic-workflow.md) — the same durable execution model, with an AI agent driving the workflow's decisions.
 - [AI Agents](../../ai-integrations/agents/agents.md) — the AI agent building block, usable inside a workflow.
