@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Manage Users in the User Portal
+title: Manage Users
 description: "Create User Portal users and roles, assign permissions to roles, and assign roles to users from the Choreo Integration console."
 keywords: [choreo cloud, user portal, users, roles, permissions, scopes, external users, identity and access management]
 slug: /manage/users-and-access/user-portal/manage-users
@@ -9,7 +9,7 @@ slug: /manage/users-and-access/user-portal/manage-users
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Manage Users in the User Portal
+# Manage Users
 
 When you [enable the User Portal](user-portal.md#enable-the-user-portal), the platform creates a project named **Integration User Portal** in **Identity & Access Management**. Users sign in to the User Portal with an account in that project. You create users and roles, and assign permissions to roles, in that project. Changes take effect in an environment after you [deploy them](#deploy-your-changes).
 
@@ -67,7 +67,7 @@ To let a new user sign in to the User Portal and use your integrations, do the f
 3. [Assign the role to the user](#assign-roles-to-a-user).
 4. [Deploy your changes](#deploy-your-changes).
 
-The user can then [sign in to the User Portal](sign-in-to-user-portal.md) with their username and password.
+The user can then [sign in](sign-in-to-user-portal.md) with their username and password.
 
 ## Manage users
 
@@ -114,7 +114,7 @@ The status of a user is one of the following:
 
 4. Click **Create user**.
 
-The user has no roles yet. [Assign roles to the user](#assign-roles-to-a-user), then [deploy your changes](#deploy-your-changes). The user can then sign in to the User Portal with their username and password. See [Sign in to the User Portal](sign-in-to-user-portal.md).
+The user has no roles yet. [Assign roles to the user](#assign-roles-to-a-user), then [deploy your changes](#deploy-your-changes). The user can then sign in to the User Portal with their username and password. See [Sign In](sign-in-to-user-portal.md).
 
 ### Assign roles to a user
 

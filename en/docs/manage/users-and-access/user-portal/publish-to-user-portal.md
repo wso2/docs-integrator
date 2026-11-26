@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Publish an Integration to the User Portal
+title: Publish an Integration
 description: "Publish AI agents and automations from Choreo Integration to the User Portal so that external users can use them."
 keywords: [choreo cloud, user portal, publish, ai agents, automations]
 slug: /manage/users-and-access/user-portal/publish-integrations
@@ -9,7 +9,7 @@ slug: /manage/users-and-access/user-portal/publish-integrations
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Publish an Integration to the User Portal
+# Publish an Integration
 
 After you [enable the User Portal](user-portal.md), you choose which integrations appear in it. An integration appears in the User Portal only after you publish it there. You can unpublish it at any time.
 
@@ -64,7 +64,7 @@ When you confirm, the platform publishes the integration to the User Portal and 
 
 Publishing an integration does not give users access to it. To see the integration in the User Portal, a user needs a role with the view scope for the integration's type. See [Scopes](manage-users.md#scopes).
 
-After the integration is published, the platform shows a confirmation message, and an **Open User Portal** link appears next to the toggle. Click it to open the User Portal in a new tab. See [Sign in to the User Portal](sign-in-to-user-portal.md).
+After the integration is published, the platform shows a confirmation message, and an **Open User Portal** link appears next to the toggle. Click it to open the User Portal in a new tab. See [Sign In](sign-in-to-user-portal.md).
 
 <ThemedImage
     alt="Published to User Portal toggle and the Open User Portal link on the integration overview page"

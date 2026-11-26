@@ -19,9 +19,9 @@ The User Portal is a separate portal that exposes your integrations to external 
 - Chat with the AI agents that you publish.
 - Run the automations that you publish, with or without runtime arguments.
 
-Users sign in to the User Portal through your organization in Choreo Identity & Access Management, which is the user store for the User Portal. Users do not need access to the Choreo Cloud console. You create users and roles, and assign permissions to roles, from the Choreo Cloud console. The roles of a user control which integrations the user can see and what the user can do with them. See [Manage users in the User Portal](manage-users.md).
+Users sign in to the User Portal through your organization in Choreo Identity & Access Management, which is the user store for the User Portal. Users do not need access to the Choreo Cloud console. You create users and roles, and assign permissions to roles, from the Choreo Cloud console. The roles of a user control which integrations the user can see and what the user can do with them. See [Manage Users](manage-users.md).
 
-You enable the User Portal for each environment. After that, you choose which integrations to show in it. See [Publish an integration to the User Portal](publish-to-user-portal.md).
+You enable the User Portal for each environment. After that, you choose which integrations to show in it. See [Publish an Integration](publish-to-user-portal.md).
 
 ## Prerequisites
 
@@ -91,12 +91,12 @@ The **User Portal** tab shows a card for the environment. While the platform set
 
 To open the User Portal of the environment in a new tab, click **Open portal** on its card.
 
-You can now [add users](manage-users.md) and [publish integrations to the User Portal](publish-to-user-portal.md).
+You can now [add users](manage-users.md) and [publish integrations](publish-to-user-portal.md).
 
 ## What's next
 
-- [Publish an integration to the User Portal](publish-to-user-portal.md) — Choose which AI agents and automations appear in the User Portal.
-- [Manage users in the User Portal](manage-users.md) — Create users and roles, and assign permissions to roles.
-- [Sign in to the User Portal](sign-in-to-user-portal.md) — Sign in with a User Portal account to use the integrations published to you.
-- [Use the User Portal](use-user-portal.md) — Chat with AI agents and run automations.
-- [Check and repair the User Portal](check-and-repair.md) — Check the health of the User Portal and fix blockers.
+- [Publish an Integration](publish-to-user-portal.md) — Choose which AI agents and automations appear in the User Portal.
+- [Manage Users](manage-users.md) — Create users and roles, and assign permissions to roles.
+- [Sign In](sign-in-to-user-portal.md) — Sign in with a User Portal account to use the integrations published to you.
+- [Run Available Integrations](use-user-portal.md) — Chat with AI agents and run automations.
+- [Check and Repair](check-and-repair.md) — Check the health of the User Portal and fix blockers.

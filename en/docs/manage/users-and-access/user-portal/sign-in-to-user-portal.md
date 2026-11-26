@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: Sign In to the User Portal
+title: Sign In
 description: "Sign in to the User Portal of a Choreo Integration organization with the username and password that your organization gave you."
 keywords: [choreo cloud, user portal, sign in, external users, ai agents, automations]
 slug: /manage/users-and-access/user-portal/sign-in
@@ -9,7 +9,7 @@ slug: /manage/users-and-access/user-portal/sign-in
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Sign In to the User Portal
+# Sign In
 
 The User Portal shows the integrations that an organization [publishes to it](publish-to-user-portal.md). To use them, you sign in to the User Portal of that organization.
 
@@ -21,7 +21,7 @@ If you do not have a User Portal account, or you cannot sign in, contact the org
 
 What you can see and do after you sign in depends on your roles in the organization. See [Scopes](manage-users.md#scopes).
 
-## Sign in to the User Portal
+## Sign in
 
 1. Open the User Portal link that your organization gave you.
 
@@ -37,7 +37,7 @@ What you can see and do after you sign in depends on your roles in the organizat
         }}
     />
 
-After you sign in, the User Portal opens on the **Overview** page. It lists the integrations that the organization published and that your roles let you see. See [Use the User Portal](use-user-portal.md).
+After you sign in, the User Portal opens on the **Overview** page. It lists the integrations that the organization published and that your roles let you see. See [Run Available Integrations](use-user-portal.md).
 
 ## Open the User Portal from the console
 

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-title: Check and Repair the User Portal
+title: Check and Repair
 description: "Check the health of the User Portal in Choreo Integration, repair missing resources, and resolve the blockers that prevent you from enabling or repairing it."
 keywords: [choreo cloud, user portal, health check, repair, blockers, identity platform]
 slug: /manage/users-and-access/user-portal/check-and-repair
@@ -9,7 +9,7 @@ slug: /manage/users-and-access/user-portal/check-and-repair
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Check and Repair the User Portal
+# Check and Repair
 
 After you enable the User Portal, the **User Portal** page works as a health check. Each time you open the page, it checks every resource that the User Portal needs.
 
