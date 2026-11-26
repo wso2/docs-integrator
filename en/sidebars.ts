@@ -2247,6 +2247,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Xero Finance',
+          link: { type: 'doc', id: 'catalog/finance-accounting/xero.finance/overview' },
+          items: [
+            'catalog/finance-accounting/xero.finance/setup-guide',
+            'catalog/finance-accounting/xero.finance/action-reference',
+            'catalog/finance-accounting/xero.finance/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Zoom Meetings',
           link: { type: 'doc', id: 'catalog/communication/zoom.meetings/overview' },
           items: [
