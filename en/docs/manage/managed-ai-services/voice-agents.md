@@ -13,22 +13,21 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 A voice agent lets users talk to an AI agent instead of typing. Choreo Cloud deploys a voice pipeline in front of your AI agent: it streams the user's audio through [LiveKit](https://livekit.io/), converts speech to text, sends the text to the AI agent over WebSocket, and speaks the agent's reply back using a text-to-speech provider.
 
-You don't write any extra code for the voice pipeline. It's created and deployed as a separate integration, either from the AI agent's overview page or from **AI Services** > **Voice Agents**.
+You don't write any extra code for the voice pipeline. It's created and deployed as a separate integration, either from the AI agent's overview page or from **AI Services** > **Voice agents**.
 
-Voice agents are available to every organization under **AI Services** and don't need to be turned on as a feature preview. They're a paid feature: you need a paid Choreo Cloud subscription to create one.
+Voice agents are available to every organization under **AI Services** and don't need to be turned on as a feature preview.
 
 :::tip Start here
 First, build the AI agent, expose it over WebSocket, and deploy it to Choreo Cloud:
 
 - In **Choreo Integrator**, add a **Voice Agent Service** to the project and call your agent from it. See [Voice Agent in Choreo Integrator](https://wso2.com/integration-platform/docs/integrator/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
-- In **Choreo Agent Builder**, add a **Voice Chat** trigger to the agent, next to its **Agent Chat** trigger. See [Voice Agent in Choreo Agent Builder](https://wso2.com/integration-platform/docs/agent-builder/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
+- In **Choreo Agent Builder**, add a **Voice Chat** trigger to the agent, next to its **Agent Chat** trigger. See [Voice Agent in Choreo Agent Builder](https://wso2.com/integration-platform/docs/agent-builder/develop-and-test/integration-artifacts/voice-agent).
 
 This page then covers adding the voice pipeline to that agent in Choreo Cloud.
 :::
 
 :::info Prerequisites
-- A paid Choreo Cloud subscription. Voice agents are available to all organizations, but **Enable Voice Agents** is disabled on the free tier.
-- An AI agent integration deployed in Choreo Cloud that exposes a **WebSocket** endpoint. Without one, **Enable Voice Agents** is disabled with the tooltip *Add a WebSocket endpoint to this AI Agent to enable voice.* See [Expose an AI agent over WebSocket](#expose-an-ai-agent-over-websocket).
+- An AI agent integration deployed in Choreo Cloud that exposes a **WebSocket** endpoint. Without one, **Enable voice agent** is disabled with the tooltip *Add a WebSocket endpoint to this AI agent to enable its voice agent.* See [Expose an AI agent over WebSocket](#expose-an-ai-agent-over-websocket).
 - A LiveKit project: the LiveKit URL (for example, `wss://your-project.livekit.cloud`), an API key, and an API secret. See [LiveKit credentials](https://docs.livekit.io/deploy/agents/secrets/#livekit-credentials).
 - API keys for your speech-to-text and text-to-speech providers. For OpenAI, create a key on the [OpenAI API keys](https://platform.openai.com/api-keys) page.
 :::
@@ -74,24 +73,24 @@ Both options then continue through the same LiveKit, speech-to-text, text-to-spe
 
 ### From the AI agent overview page
 
-Open the AI agent integration's **Overview** page and click **Enable Voice Agents** (on the right, under **Lifecycle Status**).
+Open the AI agent integration's **Overview** page and click **Enable voice agent** at the top right of the page header.
 
 <ThemedImage
-    alt="AI agent overview page with Enable Voice Agents under Lifecycle Status"
+    alt="AI agent overview page with the Enable voice agent button at the top right and a successful chat with the agent"
     sources={{
         light: useBaseUrl('/img/manage/cloud/voice-agents/enable-voice-agents.png'),
         dark: useBaseUrl('/img/manage/cloud/voice-agents/enable-voice-agents.png'),
     }}
 />
 
-A four-step wizard opens. The current AI agent is preselected as the target, so there's no **Configure agent** step: the wizard starts at [Configure LiveKit](#configure-livekit).
+A four-step wizard opens: **Configure LiveKit**, **Configure speech to text**, **Configure text to speech**, and **Tune and deploy**. The current AI agent is preselected as the target, so there's no **Configure agent** step: the wizard starts at [Configure LiveKit](#configure-livekit).
 
-### From AI Services > Voice Agents
+### From AI Services > Voice agents
 
-1. In the organization's left navigation, expand **AI Services** and click **Voice Agents**.
+1. In the organization's left navigation, expand **AI Services** and click **Voice agents**.
 
     <ThemedImage
-        alt="Voice Agents under AI Services in the organization left navigation"
+        alt="Organization overview with AI Services expanded and Voice agents highlighted in the left navigation"
         sources={{
             light: useBaseUrl('/img/manage/cloud/voice-agents/ai-services-voice-agents.png'),
             dark: useBaseUrl('/img/manage/cloud/voice-agents/ai-services-voice-agents.png'),
@@ -108,6 +107,16 @@ A four-step wizard opens. The current AI agent is preselected as the target, so 
         }}
     />
 
+    **Quick deploy** asks which project to build and deploy the sample in, then creates the AI agent from the [integration-samples](https://github.com/wso2/integration-samples) repository. Enable voice on that agent from its overview page to continue.
+
+    <ThemedImage
+        alt="Choose a project dialog for Quick deploy of the Support Voice Agent sample, with Default Project selected"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/voice-agents/quick-deploy-dialog.png'),
+            dark: useBaseUrl('/img/manage/cloud/voice-agents/quick-deploy-dialog.png'),
+        }}
+    />
+
     Once you've created at least one voice agent, this page instead lists your existing voice agents (Name, Project, AI agent, Description, Last updated), with **Create voice agent** still available to make another.
 
     <ThemedImage
@@ -121,11 +130,11 @@ A four-step wizard opens. The current AI agent is preselected as the target, so 
 #### Configure agent
 
 1. Select the **Target project**. The voice agent is created in this project.
-2. Under **Agent**, select the AI agent that answers the caller. The dropdown lists agents deployed in that project with a WebSocket endpoint; an agent that already has a voice agent shows as disabled with **Already has a voice agent** — each AI agent can have only one. Choreo Cloud resolves the agent's WebSocket URL for you when it deploys the voice agent, the same as clicking **Enable Voice Agents** on that agent's overview page.
+2. Under **Agent**, select the AI agent that answers the caller. The dropdown (**Select a deployed agent to add voice to**) lists agents deployed in that project; an agent that already has a voice agent shows as disabled with **Already has a voice agent** — each AI agent can have only one. Choreo Cloud resolves the agent's WebSocket URL for you when it deploys the voice agent, the same as clicking **Enable voice agent** on that agent's overview page.
 
     The wizard summarizes the WebSocket contract the target agent must follow under **How your target agent should handle a message**:
 
-    - Accept the `sessionId` as a query parameter on the WebSocket connection URL (for example, `wss://your-agent-host/path?sessionId=<id>`). It stays the same for the whole conversation.
+    - Accept the `sessionId` as a query parameter on the WebSocket connection URL (for example, `ws://your-agent-host/path?sessionId=<id>`). It stays the same for the whole conversation.
     - Accept each caller message as a plain-text WebSocket message containing only the caller's latest utterance, and reply with a plain-text WebSocket message.
     - Signal failures by closing the WebSocket connection with an error close code and reason, instead of sending the error back as a regular message.
 
@@ -166,13 +175,13 @@ To find these values, see [LiveKit credentials](https://docs.livekit.io/deploy/a
 
 ### Configure speech to text
 
-1. Select a speech-to-text (STT) provider: **AssemblyAI**, **Cartesia**, **Deepgram**, **ElevenLabs**, or **OpenAI**.
-2. Check the **Model** and **Language**. When you select a provider, the wizard preselects a model and language, which you can change. For OpenAI, it preselects **GPT-4o Mini Transcribe** and **English**.
+1. Select a speech-to-text (STT) provider: **AssemblyAI**, **Cartesia**, **Deepgram**, **ElevenLabs**, or **OpenAI**. You can mix providers, for example Deepgram for speech to text and ElevenLabs for text to speech.
+2. Check the **Model** and **Language**. When you select a provider, the wizard preselects a model and language, which you can change. For OpenAI, it preselects **GPT-4o Mini Transcribe** and **English**. The available OpenAI models are **GPT-4o Mini Transcribe**, **GPT-4o Transcribe**, and **Whisper-1**. This page uses **GPT-4o Transcribe**.
 3. Enter the provider's API key. For OpenAI, create one on the [OpenAI API keys](https://platform.openai.com/api-keys) page. The wizard links to each provider's key page, for example **How to get your OpenAI API key?**
 4. Click **Next**.
 
 <ThemedImage
-    alt="Configure Speech to Text step with OpenAI, GPT-4o Mini Transcribe, and English selected"
+    alt="Configure speech to text step with OpenAI, GPT-4o Transcribe, and English selected, and the API key masked"
     sources={{
         light: useBaseUrl('/img/manage/cloud/voice-agents/configure-speech-to-text.png'),
         dark: useBaseUrl('/img/manage/cloud/voice-agents/configure-speech-to-text.png'),
@@ -186,10 +195,10 @@ To find these values, see [LiveKit credentials](https://docs.livekit.io/deploy/a
 3. Enter the provider's API key. You can reuse the same [OpenAI API key](https://platform.openai.com/api-keys) for both speech to text and text to speech.
 4. Click **Next**.
 
-As with speech to text, the wizard preselects a model, voice, and language for the provider you select. For OpenAI, it preselects **GPT-4o Mini TTS**, **Alloy**, and auto-detected language. The available OpenAI models are **GPT-4o Mini TTS**, **TTS-1**, and **TTS-1 HD**, and the available voices are Alloy, Ash, Ballad, Coral, Echo, Fable, Nova, Onyx, Sage, and Shimmer.
+As with speech to text, the wizard preselects a model, voice, and language for the provider you select. For OpenAI, it preselects **GPT-4o Mini TTS**, **Alloy**, and auto-detected language. The available OpenAI models are **GPT-4o Mini TTS**, **TTS-1**, and **TTS-1 HD**, and the available voices are Alloy, Ash, Ballad, Coral, Echo, Fable, Nova, Onyx, Sage, and Shimmer. This page uses **TTS-1**, which has lower latency than **TTS-1 HD** and **GPT-4o Mini TTS**, so replies start sooner.
 
 <ThemedImage
-    alt="Configure Text to Speech step with OpenAI, GPT-4o Mini TTS, the Alloy voice, and auto-detected language selected"
+    alt="Configure text to speech step with OpenAI, TTS-1, the Alloy voice, and auto-detected language selected"
     sources={{
         light: useBaseUrl('/img/manage/cloud/voice-agents/configure-text-to-speech.png'),
         dark: useBaseUrl('/img/manage/cloud/voice-agents/configure-text-to-speech.png'),
@@ -217,15 +226,31 @@ The defaults work for most agents. Adjust them if needed:
     }}
 />
 
-**Advanced settings** expose voice activity detection (VAD), noise cancellation, turn detection, barge-in (interrupting the agent while it speaks), and endpointing delay.
-
-Click **Deploy voice agent**.
+Scroll down and click **Advanced settings** to expand it. It exposes voice activity detection (VAD), noise cancellation, turn detection, barge-in (interrupting the agent while it speaks), and endpointing delay.
 
 <ThemedImage
-    alt="Advanced settings with turn detection, barge-in, and endpointing delay, and the Deploy voice agent button"
+    alt="Tune and deploy step scrolled down, with the Advanced settings section highlighted"
     sources={{
-        light: useBaseUrl('/img/manage/cloud/voice-agents/tune-and-deploy-advanced.png'),
-        dark: useBaseUrl('/img/manage/cloud/voice-agents/tune-and-deploy-advanced.png'),
+        light: useBaseUrl('/img/manage/cloud/voice-agents/tune-and-deploy-expand.png'),
+        dark: useBaseUrl('/img/manage/cloud/voice-agents/tune-and-deploy-expand.png'),
+    }}
+/>
+
+<ThemedImage
+    alt="Expanded Advanced settings with voice activity detection, noise cancellation, turn detection, and barge-in settings"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/voice-agents/tune-and-deploy-advanced-1.png'),
+        dark: useBaseUrl('/img/manage/cloud/voice-agents/tune-and-deploy-advanced-1.png'),
+    }}
+/>
+
+Scroll down to the end of the step and click **Deploy voice agent**.
+
+<ThemedImage
+    alt="End of the Advanced settings with the endpointing delay settings and the Deploy voice agent button highlighted"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/voice-agents/tune-and-deploy-advanced-2.png'),
+        dark: useBaseUrl('/img/manage/cloud/voice-agents/tune-and-deploy-advanced-2.png'),
     }}
 />
 
@@ -239,10 +264,16 @@ Choreo Cloud creates a new integration of type **Voice Agent** in the project, n
     }}
 />
 
-Open the voice agent and wait until the **Development** card on its overview page shows **Active**. The voice agent has **Development** and **Production** cards. Each card has its own **Voice tester**, and **How to connect** shows how to connect a client to that environment.
+Open the voice agent and wait until the **Development** card on its overview page shows **Active**. The overview has a card for each environment, starting with **Development**. Each card has its own **Voice tester**, and **How to connect** shows how to connect a client to that environment.
+
+**How to connect** opens **Connect your application**. Your application doesn't call the voice agent directly: your own backend requests a room token from the voice agent's token service on the API gateway and returns it to the application, which then joins the voice session. This keeps the token service's URL and API key out of the application. In the dialog:
+
+1. Click **Open Developer Portal** and generate an API key for the token service.
+2. Add the token service URL and the key to your backend's environment variables as `VOICE_AGENT_TOKEN_URL` and `VOICE_AGENT_API_KEY`.
+3. Use the Node.js example in the dialog to forward token requests from your backend. The token service responds with a room token, the LiveKit server URL, the room name, and an identity.
 
 <ThemedImage
-    alt="Voice agent overview with the Development environment Active and its Voice tester, and the Production card"
+    alt="Voice agent overview with the Development environment Active and its Voice tester"
     sources={{
         light: useBaseUrl('/img/manage/cloud/voice-agents/voice-agent-development-active.png'),
         dark: useBaseUrl('/img/manage/cloud/voice-agents/voice-agent-development-active.png'),
@@ -294,6 +325,12 @@ The environments and promotion order shown here depend on the [promotion pipelin
 />
 
 ## Troubleshooting
+
+### The first question gets no reply
+
+The voice agent waits a few seconds for the AI agent to answer each message. If the AI agent is slow on its first request, for example because it hasn't been called recently, the voice agent gives up on that turn and the **Voice agent tester** shows your question with no reply. The voice agent logs show `APITimeoutError: integrator agent sent nothing for 7s`. Later questions in the same session are answered normally, usually within a few seconds.
+
+Ask the question again, or send a message to the AI agent from its overview page before you start the session so the agent is ready.
 
 ### The reply text appears before the audio
 
