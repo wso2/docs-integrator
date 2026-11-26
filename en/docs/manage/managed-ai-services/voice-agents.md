@@ -21,7 +21,7 @@ Voice agents are available to every organization under **AI Services** and don't
 First, build the AI agent, expose it over WebSocket, and deploy it to WSO2 Cloud:
 
 - In **WSO2 Integrator**, add a **Voice Agent Service** to the project and call your agent from it. See [Voice Agent in WSO2 Integrator](https://wso2.com/integration-platform/docs/integrator/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
-- In **WSO2 Agent Builder**, add a **Voice Chat** trigger to the agent, next to its **Agent Chat** trigger. See [Voice Agent in WSO2 Agent Builder](https://wso2.com/integration-platform/docs/agent-builder/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
+- In **WSO2 Agent Builder**, add a **Voice Chat** trigger to the agent, next to its **Agent Chat** trigger. See [Voice Agent in WSO2 Agent Builder](https://docs.choreolabs.com/documentation/agent-builder/latest/develop-and-test/integration-artifacts/voice-agent/).
 
 This page then covers adding the voice pipeline to that agent in WSO2 Cloud.
 :::
@@ -38,7 +38,7 @@ This page then covers adding the voice pipeline to that agent in WSO2 Cloud.
 The voice pipeline sends each transcribed user utterance to the AI agent as a chat message and speaks the returned string. [Create the AI agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent.md), then expose it over WebSocket. You can reuse an agent that you already expose as a [chat agent](../../develop-and-test/integration-artifacts/ai-integrations/agents/create-an-agent.md#create-a-chat-agent), so the same agent answers both chat and voice:
 
 - **WSO2 Integrator**: add a **Voice Agent Service** and call your agent from its `onChatMessage` handler. See [Voice Agent in WSO2 Integrator](https://wso2.com/integration-platform/docs/integrator/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
-- **WSO2 Agent Builder**: open the agent's canvas, click **Add Trigger**, and select **Voice Chat** under **Chat Channels**. Agent Builder wires the agent into the `onChatMessage` handler for you. See [Voice Agent in WSO2 Agent Builder](https://wso2.com/integration-platform/docs/agent-builder/develop-and-test/integration-artifacts/ai-integrations/voice-agent).
+- **WSO2 Agent Builder**: open the agent's canvas, click **Add Trigger**, and select **Voice Chat** under **Chat Channels**. Agent Builder wires the agent into the `onChatMessage` handler for you. See [Voice Agent in WSO2 Agent Builder](https://docs.choreolabs.com/documentation/agent-builder/latest/develop-and-test/integration-artifacts/voice-agent/).
 
 Both generate code similar to the following:
 

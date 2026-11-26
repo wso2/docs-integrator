@@ -33,7 +33,7 @@ Before you proceed, make sure you have the following:
     Azure provides two versions of access tokens. By default, IdP applications use the v1 access token.
 
     - **For v1 tokens:** When entering the well-known URL, omit the `v2.0` path segment. For example, convert `https://login.microsoftonline.com/<tenant-id>/v2.0/.well-known/openid-configuration` to `https://login.microsoftonline.com/<tenant-id>/.well-known/openid-configuration`.
-    - **For v2.0 tokens:** Update the IdP application manifest as described in the [Azure access tokens documentation](https://learn.microsoft.com/en-us/azure/active-directory/develop-and-test/access-tokens#token-formats).
+    - **For v2.0 tokens:** Update the IdP application manifest as described in the [Azure access tokens documentation](https://learn.microsoft.com/en-us/azure/active-directory/develop/access-tokens#token-formats).
     :::
 
 8. Leave the **Apply to all environments** checkbox selected. This allows tokens generated via this IdP to invoke APIs across all environments.

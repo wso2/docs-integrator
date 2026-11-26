@@ -211,4 +211,4 @@ The table below maps throughput targets and payload sizes to the recommended res
 ## What's next
 
 - [Performance benchmarks](capacity-planning.md#performance-benchmarks) — Detailed benchmark results for the HTTP passthrough scenario
-- [Scaling and high availability](scaling-high-availability.md) — Configure horizontal scaling and HA deployments
+- [Scaling and high availability](../manage/configurations/scaling-resource-limits.md) — Configure horizontal scaling and HA deployments
