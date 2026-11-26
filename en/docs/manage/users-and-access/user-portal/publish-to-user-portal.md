@@ -98,9 +98,3 @@ When you turn on the toggle for an endpoint, the platform makes it available in 
 4. In the confirmation dialog, click **Unpublish**.
 
 The integration no longer appears in the User Portal.
-
-## What's next
-
-- [Manage users and roles](manage-users.md) so that users can sign in to the User Portal and see the integrations.
-- [Sign in to the User Portal](sign-in-to-user-portal.md).
-- [Use the User Portal](use-user-portal.md) to chat with AI agents and run automations.

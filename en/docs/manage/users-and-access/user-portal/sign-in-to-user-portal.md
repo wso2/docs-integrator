@@ -45,7 +45,3 @@ In the Choreo Cloud console, you can open the User Portal in a new tab in either
 
 - On the overview page of a published integration, click **Open User Portal**.
 - Under **Integration** > **Configure** > **User Portal**, click **Open portal** on the card of the environment.
-
-## What's next
-
-- [Use the User Portal](use-user-portal.md) to chat with AI agents and run automations.

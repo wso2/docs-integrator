@@ -95,8 +95,8 @@ You can now [add users](manage-users.md) and [publish integrations to the User P
 
 ## What's next
 
-- [Publish an integration to the User Portal](publish-to-user-portal.md)
-- [Manage users in the User Portal](manage-users.md)
-- [Sign in to the User Portal](sign-in-to-user-portal.md)
-- [Use the User Portal](use-user-portal.md)
-- [Check and repair the User Portal](check-and-repair.md)
+- [Publish an integration to the User Portal](publish-to-user-portal.md) — Choose which AI agents and automations appear in the User Portal.
+- [Manage users in the User Portal](manage-users.md) — Create users and roles, and assign permissions to roles.
+- [Sign in to the User Portal](sign-in-to-user-portal.md) — Sign in with a User Portal account to use the integrations published to you.
+- [Use the User Portal](use-user-portal.md) — Chat with AI agents and run automations.
+- [Check and repair the User Portal](check-and-repair.md) — Check the health of the User Portal and fix blockers.
