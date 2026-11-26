@@ -30,5 +30,5 @@ The User Portal is a separate portal that exposes your integrations to external 
 
 | Page | What it covers |
 |---|---|
-| [Control access](./access-control.md) | Create groups and assign roles to them. |
+| [Control access](./access-control.md) | Invite members, and manage the groups, roles, and assignments that control what they can do. |
 | [User Portal](./user-portal/user-portal.md) | Enable the User Portal for your organization, manage its users and roles, and publish integrations to it for external users. |
