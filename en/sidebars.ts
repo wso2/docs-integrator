@@ -975,6 +975,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Microsoft Excel',
+          link: { type: 'doc', id: 'catalog/productivity-collaboration/microsoft.excel/overview' },
+          items: [
+            'catalog/productivity-collaboration/microsoft.excel/setup-guide',
+            'catalog/productivity-collaboration/microsoft.excel/action-reference',
+            'catalog/productivity-collaboration/microsoft.excel/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Microsoft OneDrive',
           link: { type: 'doc', id: 'catalog/storage-file/microsoft.onedrive/microsoft-onedrive-connector-overview' },
           items: [
