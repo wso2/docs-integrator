@@ -51,7 +51,7 @@ Complete API documentation for all Ballerina standard library modules and extend
 | `ballerinax/nats` | NATS client and listener | [API Docs](https://central.ballerina.io/ballerinax/nats/latest) |
 | `ballerinax/stan` | NATS Streaming (STAN) client | [API Docs](https://central.ballerina.io/ballerinax/stan/latest) |
 | `ballerinax/java.jms` | JMS client support | [API Docs](https://central.ballerina.io/ballerinax/java.jms/latest) |
-| `ballerinax/mqtt` | MQTT client and listener | [API Docs](https://central.ballerina.io/ballerinax/mqtt/latest) |
+| `ballerinax/mqtt` | MQTT client and listener | [API Docs](https://central.ballerina.io/ballerina/mqtt/latest) |
 | `ballerinax/asb` | Azure Service Bus client | [API Docs](https://central.ballerina.io/ballerinax/asb/latest) |
 
 ### Database modules
@@ -132,7 +132,7 @@ Complete API documentation for all Ballerina standard library modules and extend
 | `ballerinax/ai.agent` | AI agent framework | [API Docs](https://central.ballerina.io/ballerinax/ai.agent/latest) |
 | `ballerinax/openai.chat` | OpenAI Chat API client | [API Docs](https://central.ballerina.io/ballerinax/openai.chat/latest) |
 | `ballerinax/openai.embeddings` | OpenAI Embeddings API client | [API Docs](https://central.ballerina.io/ballerinax/openai.embeddings/latest) |
-| `ballerinax/azure.openai` | Azure OpenAI client | [API Docs](https://central.ballerina.io/ballerinax/azure.openai/latest) |
+| `ballerinax/azure.openai` | Azure OpenAI client | [API Docs](https://central.ballerina.io/ballerinax/azure.openai.chat/latest) |
 
 ## Browsing API docs
 
