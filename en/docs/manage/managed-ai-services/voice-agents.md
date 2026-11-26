@@ -261,24 +261,18 @@ Click **Start session** in the **Voice tester** on the **Development** card, or 
     }}
 />
 
-1. Click **Start session** and allow microphone access when the browser asks. The tester shows **LIVE** and **Conversation Active** with *Speak into your microphone. The agent is listening and responding.*
+1. Click **Start session** and allow microphone access when the browser asks. The tester shows a **Live** badge next to **Voice agent tester**.
 2. Speak to the agent. The tester shows the transcript of what you say and the agent's replies, and you hear the agent's reply.
-3. Click **Stop session** to end the conversation.
-
-{/* TODO(v3): steps 1-2 and the voice-tester-session.png screenshot are unverified
-    this pass - the browser session used to re-verify this page has no real
-    microphone, so it could reach "Connecting" (LiveKit connection confirmed
-    live via console logs: connecting -> connected) but not a live
-    conversation. Re-verify with a browser that has mic access. */}
+3. Click **End session** to end the conversation.
 
 For the customer support example, try:
 
-- *"Hi, what can you help me with?"*
-- *"Where is my order ORD-1001?"*
-- *"Can I return my coffee maker from order ORD-1003?"*
+- *"Hi, I'm not happy with the product I purchased from you."*
+- *"Can you explain me the return policy for products?"*
+- *"What you mean by original packaging"*
 
 <ThemedImage
-    alt="Voice agent tester with a live session showing the three questions and the agent replies about order status and the return policy"
+    alt="Voice agent tester with a live session showing a customer asking about the return policy and what original packaging means"
     sources={{
         light: useBaseUrl('/img/manage/cloud/voice-agents/voice-tester-session.png'),
         dark: useBaseUrl('/img/manage/cloud/voice-agents/voice-tester-session.png'),
