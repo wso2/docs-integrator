@@ -1,126 +1,140 @@
+---
+title: Example
+---
+
 # Example
 
 ## What you'll build
 
-Build a WSO2 Integrator automation that connects to the DocuSign DS Admin API and retrieves a list of organizations for the authenticated user. The integration uses configurable variables to securely manage credentials and invokes the DS Admin connector's get operation via an Automation entry point.
+This integration connects to the DocuSign Admin API and lists the organizations that the authenticated user belongs to. An automation entry point runs the operation once and logs the returned organizations.
 
 **Operations used:**
-- **get** : Returns a list of organizations that the authenticated user belongs to
+- **Get Organizations** : Returns a list of organizations that the authenticated user belongs to
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    A((User)) --> B[Get Operation]
-    B --> C[DS Admin Connector]
-    C --> D((DocuSign DS Admin API))
+    A((User)) --> B[Get Organizations]
+    B --> C[DocuSign Admin Connector]
+    C --> D[(DocuSign Admin API)]
 ```
 
 ## Prerequisites
 
-- A DocuSign account with Admin API access
-- A valid OAuth 2.0 bearer token from the DocuSign Identity Provider
+- A DocuSign developer account with organization administration access.
+- An app (integration key) in the DocuSign Apps and Keys page, with a secret key and a redirect URI.
+- An OAuth 2.0 refresh token issued for that app with the `organization_read` scope.
 
-## Setting up the DS admin integration
+## Setting up the DocuSign Admin integration
 
 > **New to WSO2 Integrator?** Follow the [Create a New Integration](product://integrator/develop-and-test/create-workspace) guide to set up your integration first, then return here to add the connector.
 
-## Adding the DS admin connector
+## Adding the DocuSign Admin connector
 
 ### Step 1: Open the connector palette
 
-Select **+ Add Connection** in the **Connections** section to open the connector palette.
+Hover over **Connections** in the project tree and select **Add Connection** (**+**).
 
 <ThemedImage
-    alt="DS Admin connector palette open with search field before any selection"
+    alt="DocuSign Admin connector palette open before selection"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_01_palette.png'),
-        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_01_palette.png'),
+        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_01_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_01_palette.png'),
     }}
 />
 
-### Step 2: Search for and select the DS admin connector
+### Step 2: Select the DocuSign Admin connector
 
-1. Enter `docusign` in the search field.
-2. Select the **DS Admin** card (`ballerinax/docusign.dsadmin`) to open the connection form.
+1. Enter `docusign.dsadmin` in the search field.
+2. Select the **DS Admin** connector card.
 
-## Configuring the DS admin connection
+## Configuring the DocuSign Admin connection
 
-### Step 3: Fill in the connection parameters
+### Step 3: Bind the connection parameters to configurable variables
 
-Bind each connection parameter to a configurable variable so no secrets are hard-coded.
+Bind each connection field to a configurable variable. Use the **Configurables** tab of the field's helper panel to create each configurable.
 
-- **serviceUrl** : Enter the DocuSign Admin API base URL, bound to the `docusignServiceUrl` configurable variable
-- **auth** : Set to the bearer token expression referencing the `docusignBearerToken` configurable variable using `BearerTokenConfig`
-- **connectionName** : Pre-filled as `dsadminClient`; no change required
+- **Config** : Connection settings, with the OAuth 2.0 refresh token configuration for DocuSign set in the `auth` record. Switch the field to **Expression** and enter `{auth: {clientId: dsadminClientId, clientSecret: dsadminClientSecret, refreshToken: dsadminRefreshToken, refreshUrl: dsadminRefreshUrl}}`.
+- **Service Url** : Set it to the `dsadminServiceUrl` configurable.
 
 <ThemedImage
-    alt="DS Admin connection form fully filled with all parameters before saving"
+    alt="DocuSign Admin connection form with all parameters bound before saving"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_02_connection_form.png'),
-        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_02_connection_form.png'),
+        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_02_connection_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_02_connection_form.png'),
     }}
 />
 
 ### Step 4: Save the connection
 
-Select **Save Connection** to persist the connection. The `dsadminClient` node appears on the integration canvas.
+Select **Save Connection** and verify that **dsadminClient** appears under **Connections** in the project tree and on the design canvas.
 
 <ThemedImage
-    alt="DS Admin Connections panel showing dsadminClient entry after saving"
+    alt="DocuSign Admin connection visible after saving"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_03_connections_list.png'),
-        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_03_connections_list.png'),
+        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_03_connections_list.png'),
+        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_03_connections_list.png'),
     }}
 />
 
 ### Step 5: Set actual values for your configurables
 
-1. In the left panel, select **Configurations** (at the bottom of the project tree, under Data Mappers).
-2. Set a value for each configurable listed below.
+1. Select **Configurations** at the bottom of the project tree.
+2. Enter a value for each configurable listed below before you run the integration.
 
-- **docusignServiceUrl** (string) : The DocuSign Admin API base URL, for example `https://api.docusign.net/Management`
-- **docusignBearerToken** (string) : A valid OAuth 2.0 bearer token obtained from the DocuSign Identity Provider
+- **dsadminServiceUrl** (`string`) : DocuSign Admin API base URL. Defaults to `https://api.docusign.net/Management`.
+- **dsadminClientId** (`string`) : Integration key of the DocuSign app.
+- **dsadminClientSecret** (`string`) : Secret key of the DocuSign app.
+- **dsadminRefreshToken** (`string`) : OAuth 2.0 refresh token issued for the DocuSign app.
+- **dsadminRefreshUrl** (`string`) : DocuSign token endpoint. Defaults to `https://account-d.docusign.com/oauth/token`.
 
-## Configuring the DS admin get operation
+## Configuring the DocuSign Admin Get Organizations operation
 
 ### Step 6: Add an automation entry point
 
-1. Select **+ Add Artifact** on the canvas toolbar.
-2. Select **Automation** from the artifact type list.
-3. Leave the defaults as-is and select **Create**.
+1. Select **Add Artifact** on the design canvas.
+2. Select **Automation**.
+3. Select **Create** to accept the settings.
 
-### Step 7: Select and configure the get operation
+### Step 7: Expand the connection and configure the Get Organizations operation
 
-1. Select the **+** button between **Start** and **Error Handler** to open the step-addition panel.
-2. Under **Connections**, expand **dsadminClient** to see all available operations.
+1. Select the **+** between **Start** and **Error Handler** in the automation flow.
+2. Expand **dsadminClient** under **Connections** to display its operations.
 
 <ThemedImage
-    alt="DS Admin connection node expanded showing all available operations before selection"
+    alt="DocuSign Admin connection expanded to display operations before selection"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_04_operations_panel.png'),
-        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_04_operations_panel.png'),
+        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_04_operations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_04_operations_panel.png'),
     }}
 />
 
-3. Select **"Returns a list of organizations that the authenticated user belongs to."** (maps to `get()`).
-4. In the operation configuration panel, set the result variable to `dsAdminResult`. This operation requires no additional parameters.
+3. Select **Returns a list of organizations that the authenticated user belongs to.** The operation has no required parameters.
+
+- **Result** : Set it to `organizations`, the variable that stores the returned organizations.
 
 <ThemedImage
-    alt="DS Admin get operation configuration filled with all values"
+    alt="DocuSign Admin Get Organizations operation with all values entered before saving"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_05_operation_filled.png'),
-        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_05_operation_filled.png'),
+        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_05_operation_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_05_operation_form.png'),
     }}
 />
 
-5. Select **Save**.
+4. Select **Save**.
+
+### Step 8: Log the Get Organizations result
+
+1. Select the **+** below the **dsadmin : get** node.
+2. Under **Logging**, select **Log Info**.
+3. Switch **Msg** to **Expression**, enter `organizations.toString()`, and select **Save**.
 
 <ThemedImage
-    alt="Completed DS Admin automation flow"
+    alt="Completed DocuSign Admin flow with the configured operation"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_06_completed_canvas.png'),
-        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/docusign_dsadmin_screenshot_06_completed_canvas.png'),
+        light: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_06_completed_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/productivity-collaboration/docusign.dsadmin/ballerinax_docusign_dsadmin_screenshot_06_completed_flow.png'),
     }}
 />
 
@@ -134,10 +148,7 @@ Try this sample in WSO2 Integration Platform.
 
 ## More code examples
 
-The DocuSign Admin connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples).
+The DocuSign Admin connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples/), covering the following use cases:
 
-1. [Manage user information with DocuSign Admin](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples/manage-user-information)
-    This example shows how to use the DocuSign Admin API to create users and retrieve user information related to eSignature tasks.
-
-2. [Access permissions in user accounts](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples/permissions-in-organizations)
-    This example shows how to use the DocuSign Admin API to view permission details of user accounts.
+1. [Manage user information with DocuSign Admin](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples/manage-user-information) - This example shows how to use DocuSign Admin API to to create users and retrieve user informations related to eSignature tasks.
+2. [Access permissions in user accounts](https://github.com/ballerina-platform/module-ballerinax-docusign.dsadmin/tree/main/examples/permissions-in-organizations) - This example shows how to use DocuSign Admin API to to view permission details of the user accounts.

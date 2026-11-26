@@ -205,10 +205,10 @@ In the left panel, select **Configurations**. In the Configurable Variables pane
 #### Step 2: Select the Azure Blob Storage integration type
 
 1. Select the **+** button in the WSO2 Integrator side panel header to open the **New Integration** wizard (on an empty project, the **+ Add Integration or Library** button in the project view opens the same wizard), and continue to the **Type** step.
-2. Scroll to the **File Integration** category, select the **Azure Blob Storage** card, and select **Next**.
+2. Scroll to the **File Integration** category, select the **Azure Blobs** card, and select **Next**.
 
 <ThemedImage
-    alt="New Integration wizard with the Azure Blob Storage card selected"
+    alt="New Integration wizard with the Azure Blobs card selected"
     sources={{
         light: useBaseUrl('/img/connectors/catalog/storage-file/azure.storage.blob/azure_blob_trigger_screenshots_01_new_integration_wizard.png'),
         dark: useBaseUrl('/img/connectors/catalog/storage-file/azure.storage.blob/azure_blob_trigger_screenshots_01_new_integration_wizard.png'),
@@ -217,7 +217,7 @@ In the left panel, select **Configurations**. In the Configurable Variables pane
 
 #### Step 3: Configure the service and the listener
 
-The **Create Azure Blob Storage Integration** form opens. Its upper part, **Listener Configurations**, creates the listener the service attaches to; the lower part holds the service's own settings. Fill it referencing the configurables:
+The **Create Azure Blobs Integration** form opens. Its upper part, **Listener Configurations**, creates the listener the service attaches to; the lower part holds the service's own settings. Fill it referencing the configurables:
 
 - **Listener Name** : `blobListener`
 - **Select the authentication method** : **Shared Key**
@@ -237,7 +237,7 @@ The listener box has its own **Advanced Configurations** (relaxed data binding a
 
 #### Step 4: Create the trigger
 
-Select **Create** to generate the listener and the service. An **Azure Blob Storage Integration** entry appears in the sidebar under **Entry Points**, and its page header names the listener and the queue it consumes.
+Select **Create** to generate the listener and the service. An **Azure Blobs Integration** entry appears in the sidebar under **Entry Points**, and its page header names the listener and the queue it consumes.
 
 ### Setting configuration values
 
@@ -268,7 +268,7 @@ In the **Configure On Create Handler** panel, set:
 
 - **Format** : **JSON**, so the handler receives the parsed content as `json`. To receive a record instead, create the record type first (under **Types** in the sidebar) and pick it through **Define Content Schema**.
 - **Routing** : leave **Blob Name Pattern** and **Content Type Pattern** unticked, so the handler takes every `.json` blob. Ticking one writes a `@blob:FunctionConfig` annotation with that regular expression; see the [Trigger Reference](trigger-reference.md#functionconfiguration).
-- **Advanced Configurations** : tick **Blob Event (event)** to receive the event alongside the content. **Azure Blob Storage Connection (caller)** adds the `Caller` parameter; this example does not need it.
+- **Advanced Configurations** : tick **Blob Event (event)** to receive the event alongside the content. **Azure Blobs Connection (caller)** adds the `Caller` parameter; this example does not need it.
 
 <ThemedImage
     alt="On Create handler configuration with the JSON format and the event parameter"

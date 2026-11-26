@@ -125,4 +125,4 @@ Each activity call appears as an `ACTIVITY` node in the instance's execution gra
 - [Durable timers](durable-timers.md) — pause between activities without holding resources.
 - [Error handling and review activities](review-activity-and-error-handling.md) — retry policies and approval gates.
 - [Create a Durable Agent](../durable-agentic-workflow/create-durable-agent.md) — registering these same activities on an agent that picks which to call.
-- [Build an order processing workflow](../../../../get-started/quickstarts/build-order-processing.md) — activities wired into a complete flow.
+- [Build an order processing workflow](../../../../get-started/quickstarts/build-durable-workflow.md) — activities wired into a complete flow.

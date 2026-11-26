@@ -86,4 +86,4 @@ A pending timer appears as a `TIMER` node in the instance's execution graph in t
 
 - [Activities](activities.md) — the recorded steps a timer sits between.
 - [Await human task](await-human-task.md) — waiting on people and external events instead of the clock.
-- [Build an order processing workflow](../../../../get-started/quickstarts/build-order-processing.md) — a timer in a complete flow.
+- [Build an order processing workflow](../../../../get-started/quickstarts/build-durable-workflow.md) — a timer in a complete flow.
