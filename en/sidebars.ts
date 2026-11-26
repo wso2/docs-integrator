@@ -246,6 +246,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Azure Keyvault',
+          link: { type: 'doc', id: 'catalog/security-identity/azure.keyvault/overview' },
+          items: [
+            'catalog/security-identity/azure.keyvault/setup-guide',
+            'catalog/security-identity/azure.keyvault/action-reference',
+            'catalog/security-identity/azure.keyvault/example',
+          ],
+        },
+        {
+          type: 'category',
 
           label: 'Azure Service Bus',
           link: { type: 'doc', id: 'catalog/messaging/asb/azure-service-bus-connector-overview' },
@@ -951,6 +961,16 @@ const sidebars: SidebarsConfig = {
             'catalog/storage-file/microsoft.onedrive/setup-guide',
             'catalog/storage-file/microsoft.onedrive/actions',
             'catalog/storage-file/microsoft.onedrive/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Microsoft Outlook Mail',
+          link: { type: 'doc', id: 'catalog/communication/microsoft.outlook.mail/overview' },
+          items: [
+            'catalog/communication/microsoft.outlook.mail/setup-guide',
+            'catalog/communication/microsoft.outlook.mail/action-reference',
+            'catalog/communication/microsoft.outlook.mail/example',
           ],
         },
         {
@@ -2143,6 +2163,16 @@ const sidebars: SidebarsConfig = {
             'catalog/communication/whatsapp-business/actions',
             'catalog/communication/whatsapp-business/triggers',
             'catalog/communication/whatsapp-business/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Xero Accounts',
+          link: { type: 'doc', id: 'catalog/finance-accounting/xero.accounts/overview' },
+          items: [
+            'catalog/finance-accounting/xero.accounts/setup-guide',
+            'catalog/finance-accounting/xero.accounts/action-reference',
+            'catalog/finance-accounting/xero.accounts/example',
           ],
         },
         {
