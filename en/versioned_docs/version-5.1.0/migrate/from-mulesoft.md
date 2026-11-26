@@ -191,7 +191,7 @@ When the AI enhancement completes, the status shows **AI Enhancement completed**
    ```
 2. Run the migration command:
    ```bash
-   bal migrate-mule <source-project-directory-or-file> [-o|--out <output-directory>] [-f|--force-version <3|4>] [-k|--keep-structure] [-v|--verbose] [-d|--dry-run] [-m|--multi-root]
+   bal migrate-mule <source-project-directory-or-file> [-o|--out <output-directory>] [-f|--force-version <3|4>] [-k|--keep-structure] [-v|--verbose] [-d|--dry-run] [-c|--check-responses] [-m|--multi-root]
    ```
 
 #### Key parameters
@@ -204,6 +204,7 @@ When the AI enhancement completes, the status shows **AI Enhancement completed**
 | `-k, --keep-structure` | (Optional) Preserve original Mule project structure |
 | `-v, --verbose` | (Optional) Enable verbose output |
 | `-d, --dry-run` | (Optional) Analyze and generate a migration report without creating Ballerina code |
+| `-c, --check-responses` | (Optional) Check the success responses of migrated APIkit services against the project's RAML spec. A JSON body that doesn't match the spec fails with a 500 error |
 | `-m, --multi-root` | (Optional) Treat each child directory as a separate Mule project and convert all |
 
 ### Examples
@@ -295,7 +296,7 @@ See [Deploy](../deploy-and-run/deploy-and-run.md) for Docker, Kubernetes, and cl
 | Try Scope / Error Handler | `do`/`on fail` | Typed, structural error handling; catch and handle specific error types |
 | DataWeave (Transform Message) | Visual Data Mapper + query expressions | Drag-and-drop for field mappings; Ballerina query expressions for complex transforms |
 | DataWeave expression | Ballerina expression | Inline transformations; statically typed unlike DataWeave's dynamic typing |
-| RAML / OAS | OpenAPI / Ballerina service contract | Import an OAS spec to generate a service, or auto-export OAS from your Ballerina service |
+| RAML / OAS | OpenAPI / Ballerina service contract | The migration tool uses the RAML spec of an APIkit project to generate typed resources (see [APIkit projects with a RAML spec](#5-apikit-projects-with-a-raml-spec)). You can also import an OAS spec to generate a service, or auto-export OAS from your Ballerina service |
 | Connection Configuration / properties file | `Config.toml` | All credentials and environment-specific config in one file; override per environment with `BAL_CONFIG_FILES` |
 | Maven (`pom.xml`) | `Ballerina.toml` | Project metadata, dependencies, and build configuration |
 | MUnit | `bal test` | Built-in test framework with mocking and test isolation support |
@@ -460,6 +461,21 @@ For each MuleSoft connector:
 - **Set Variable** → local variable
 - **Set Payload** → function return value
 - **flow-ref** → direct function call
+
+### 5. APIkit projects with a RAML spec
+
+For Mule 4.x APIkit projects, the migration tool uses the project's RAML spec to generate the service, so the migrated service follows the same API contract:
+
+- Resource functions use the paths, parameters, and request body types defined in the spec.
+- Types in the spec become Ballerina record types, including their constraints.
+- Invalid requests, such as a missing header or a malformed body, get a 400 response.
+- Spec operations without a matching flow return a 501 Not Implemented response.
+
+The tool also generates tests that check the migrated service against the spec, and adds an **API Contracts** section to the migration report.
+
+If the spec isn't in the project, for example when it's referenced from Anypoint Exchange, the tool generates the resources from the flow names instead. To use the spec, add it to the location shown in the migration report and run the migration again.
+
+To also validate responses against the spec, use the `--check-responses` CLI option.
 
 ## Common gotchas
 
