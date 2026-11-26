@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Access Control
+title: Members and Access Control
 description: Learn how to manage organization members, groups, roles, and assignments in Choreo Integration.
 keywords: [choreo cloud, access control, roles, groups, permissions, members, invitations, assignments]
 slug: /manage/users-and-access/access-control
@@ -9,7 +9,7 @@ slug: /manage/users-and-access/access-control
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Access Control
+# Members and Access Control
 
 The Choreo Integration lets you manage access to your organization and control the actions that members can perform. The platform uses **roles** and **groups** to control access:
 
