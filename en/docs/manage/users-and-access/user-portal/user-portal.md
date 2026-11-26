@@ -53,4 +53,4 @@ You can now [add users](manage-users.md) and [publish integrations](publish-to-u
 - [Manage Users](manage-users.md) — Create users and roles, and assign permissions to roles.
 - [Sign In](sign-in-to-user-portal.md) — Sign in with a User Portal account to use the integrations published to you.
 - [Run Available Integrations](use-user-portal.md) — Chat with AI agents and run automations.
-- [Check and Repair](check-and-repair.md) — Check the health of the User Portal and fix blockers.
+- [Check Status](check-and-repair.md) — Check whether the User Portal is active for an environment.
