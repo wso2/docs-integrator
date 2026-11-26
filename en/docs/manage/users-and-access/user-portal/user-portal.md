@@ -55,6 +55,15 @@ If the Developer Portal has no key manager, you can also let the platform config
 1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
 2. In the top navigation, click the organization list and select your organization.
 3. Click the app menu at the top left, then under **Categories**, click **Integration**.
+
+    <ThemedImage
+        alt="App menu with Integration highlighted under Categories"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/select-integration.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/select-integration.png'),
+        }}
+    />
+
 4. In the left navigation menu, click **Configure**.
 5. Click the **User Portal** tab.
 
