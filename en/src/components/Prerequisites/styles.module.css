@@ -81,7 +81,7 @@
   color: var(--ifm-font-color-base);
 }
 
-.box .card {
+.box a.card {
   display: flex;
   gap: 12px;
   align-items: flex-start;
@@ -94,15 +94,9 @@
   transition: border-color 0.15s ease, transform 0.15s ease;
 }
 
-[data-theme='dark'] .box .card {
+[data-theme='dark'] .box a.card {
   background: var(--ifm-background-surface-color);
   border-color: rgba(29, 74, 115, 0.5);
-}
-
-/* Plain (non-link) card: only links inside its text are clickable. */
-.box div.card .cardText a {
-  color: var(--ifm-link-color);
-  text-decoration: underline;
 }
 
 .box a.card:hover {

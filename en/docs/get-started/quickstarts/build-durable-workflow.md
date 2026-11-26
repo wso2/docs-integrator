@@ -44,7 +44,7 @@ A working Choreo Integrator environment.
 </div>
 
 <div style={{gridColumn: '1 / -1', minWidth: 0}}>
-<PrereqCard icon="server" title="Temporal server">An internet-accessible Temporal server, such as Temporal Cloud or a publicly exposed self-hosted instance, with its endpoint URL, namespace, and credentials. See [Temporal credentials](../../manage/configurations/temporal-credentials.md).</PrereqCard>
+<PrereqCard icon="cloud" title="Temporal server" href="/manage/configurations/temporal-credentials" cloud>An internet-accessible Temporal server, such as Temporal Cloud or a publicly exposed self-hosted instance, with its endpoint URL, namespace, and credentials.</PrereqCard>
 </div>
 
 </Prerequisites>
