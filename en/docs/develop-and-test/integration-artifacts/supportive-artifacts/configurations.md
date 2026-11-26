@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 Because the values live outside the code, the same integration implementation runs unchanged in every environment.
 
 :::note
-WSO2 Integrator's configuration support is built on Ballerina's configurable variable model. For the complete configuration reference, see [Configuration management](../../../reference/configuration-reference.md#configuration-management).
+WSO2 Integrator's configuration support is built on Ballerina's configurable variable model. For the complete configuration reference, see [Configuration management](../../../manage/configurations/configurations.md).
 :::
 
 ## Adding a configuration
@@ -160,20 +160,20 @@ final http:Client weatherEP = check new ("http://localhost:8080", timeout = time
 </Tabs>
 
 :::tip Learn more
-For the complete configuration reference (supported types, value sources, resolution priority), see [Configuration management](../../../reference/configuration-reference.md#configuration-management).
+For the complete configuration reference (supported types, value sources, resolution priority), see [Configuration management](../../../manage/configurations/configurations.md).
 :::
 
 ## Best practices
 
 | Practice | Description |
 |---|---|
-| **Never commit the Config.toml file** | Keep the `Config.toml` file out of version control. See [Secrets and encryption](../../../deploy-and-run/secure/secrets-encryption.md). |
+| **Never commit the Config.toml file** | Keep the `Config.toml` file out of version control. See [Secrets and encryption](../../../manage/configurations/runtime-configurations.md#secrets). |
 | **Mark required values explicitly** | For configurations that must come from the environment (such as endpoints and credentials), leave **Default Value** empty in the Visual Designer and use `?` in code so that the value is mandated and absence causes startup to fail. |
 | **Group related settings** | Use record types to group settings that belong to the same subsystem (for example, database configuration or CRM settings). |
 | **Document defaults** | Use the **Documentation** field to explain the purpose and valid range of each setting. |
 
 ## What's next
 
-- [Configuration management](../../../reference/configuration-reference.md#configuration-management) — Complete configuration reference: value sources, precedence, and environment variables.
-- [Secrets and encryption](../../../deploy-and-run/secure/secrets-encryption.md) — Securely manage credentials and other sensitive values.
+- [Configuration management](../../../manage/configurations/configurations.md) — Complete configuration reference: value sources, precedence, and environment variables.
+- [Secrets and encryption](../../../manage/configurations/runtime-configurations.md#secrets) — Securely manage credentials and other sensitive values.
 - [Connections](connections.md) — Use configurable variables to parameterize connections.
