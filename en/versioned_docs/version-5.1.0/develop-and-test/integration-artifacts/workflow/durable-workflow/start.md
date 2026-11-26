@@ -75,4 +75,4 @@ So hand the ID back to whoever will need it:
 
 - [Await data events](data-events.md) — deliver data into a run using the ID you kept.
 - [Workflow executions](../../../../icp/manage-workflows/workflow-executions.md) — follow a started run through its timeline and execution graph.
-- [Build an order processing workflow](../../../../get-started/quickstarts/build-order-processing.md) — a service resource that starts a workflow, end to end.
+- [Build an order processing workflow](../../../../get-started/quickstarts/build-durable-workflow.md) — a service resource that starts a workflow, end to end.

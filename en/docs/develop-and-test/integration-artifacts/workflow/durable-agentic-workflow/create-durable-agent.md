@@ -164,7 +164,7 @@ Unlike an [Await Human Task](../durable-workflow/await-human-task.md) step, the 
 
 ## Traditional or agentic?
 
-Reach for an agentic workflow when the logic is branchy and judgment-heavy ("request whatever is missing, escalate the odd ones"); keep a hand-wired [durable workflow](../../../../get-started/quickstarts/build-order-processing.md) when the steps are fixed and auditable. The two share activities, tasks, and the runtime — a claim system can use both side by side.
+Reach for an agentic workflow when the logic is branchy and judgment-heavy ("request whatever is missing, escalate the odd ones"); keep a hand-wired [durable workflow](../../../../get-started/quickstarts/build-durable-workflow.md) when the steps are fixed and auditable. The two share activities, tasks, and the runtime — a claim system can use both side by side.
 
 ## Next steps
 

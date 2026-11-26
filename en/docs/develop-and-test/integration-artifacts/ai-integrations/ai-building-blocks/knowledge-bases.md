@@ -262,7 +262,7 @@ Scrolling to the bottom shows **Knowledge Base Name** and **Result Type**:
 
 ## WSO2 Cloud Knowledge Base
 
-A Knowledge Base that's deployed in WSO2 Cloud. If you don't already have a WSO2 Cloud Knowledge Base deployed in your organization, [create the knowledge base in WSO2 Cloud](https://wso2.com/integration-platform/docs/manage/cloud/rag-ingestion/ingestion) first. It is provisioned and managed there.
+A Knowledge Base that's deployed in WSO2 Cloud. If you don't already have a WSO2 Cloud Knowledge Base deployed in your organization, [create the knowledge base in WSO2 Cloud](https://choreolabs.com/integration-platform/docs/saas/manage/managed-ai-services/knowledge-bases/create-knowledge-base) first. It is provisioned and managed there.
 
 ### Connect to an existing knowledge base
 

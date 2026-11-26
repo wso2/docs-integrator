@@ -51,7 +51,7 @@ A **durable workflow** is an artifact in your integration, the same as a service
 
 The workflow opens on its own diagram with a single **Start** node and appears under **Workflows** in the sidebar.
 
-For a worked example that fills this in end to end, see [Build an order processing workflow](../../../../get-started/quickstarts/build-order-processing.md).
+For a worked example that fills this in end to end, see [Build an order processing workflow](../../../../get-started/quickstarts/build-durable-workflow.md).
 
 ## Design the steps
 
@@ -68,4 +68,4 @@ The workflow diagram is the same flow diagram used everywhere else in WSO2 Integ
 
 - [Start a workflow](start.md) — launch a run from a service, an automation, or the console.
 - [Activities](activities.md) — the recorded units of work a workflow calls.
-- [Build an order processing workflow](../../../../get-started/quickstarts/build-order-processing.md) — the whole flow, step by step.
+- [Build an order processing workflow](../../../../get-started/quickstarts/build-durable-workflow.md) — the whole flow, step by step.
