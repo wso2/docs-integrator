@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: FAQ
-description: Frequently asked questions about Integration platform on Choreo Cloud.
+description: Frequently asked questions about Choreo Integration.
 keywords: [choreo integrator, faq, frequently asked questions, troubleshooting]
 slug: /reference/faq
 ---
@@ -13,8 +13,8 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## General
 
-### Q: What is Integration platform on Choreo Cloud?
-Integration platform on Choreo Cloud is a powerful IPaaS with first-class AI support. Incorporate AI agents into the integrations you build in low-code and pro-code, and move away from siloed systems to intelligent digital experiences with Choreo Cloud—the AI iPaaS that your AI Agents can call “home”.
+### Q: What is Choreo Integration?
+Choreo Integration is a powerful IPaaS with first-class AI support. Incorporate AI agents into the integrations you build in low-code and pro-code, and move away from siloed systems to intelligent digital experiences with Choreo Cloud—the AI iPaaS that your AI Agents can call “home”.
 
 ### Q: What is an organization in Choreo Cloud?
 An organization is a logical grouping of users and their resources. It may represent a company, community, or a single user. Each organization can have different roles assigned to its users to control access to Choreo Cloud features.

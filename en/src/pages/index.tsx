@@ -200,9 +200,9 @@ function HomepageHeader(): ReactNode {
   return (
     <LandingHero
       windowTitle="Choreo Cloud Console"
-      imageAlt="Choreo Integration on Choreo Cloud"
-      eyebrow="Choreo Integration · Docs"
-      title={<>Choreo Integration on Choreo Cloud <TitleSuffix>(SaaS)</TitleSuffix></>}
+      imageAlt="Choreo Cloud Integration"
+      eyebrow="Choreo Cloud · Docs"
+      title={<>Choreo Integration</>}
       subtitle="Build, connect, and run integrations, MCP servers, and AI agents with built-in governance, and architectural freedom at cloud speed."
       search={<HeroSearch quickLinks={quickLinks} />}
       cta={{ label: "Let's get started", to: '/get-started' }}
