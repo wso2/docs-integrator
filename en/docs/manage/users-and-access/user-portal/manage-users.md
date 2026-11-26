@@ -16,7 +16,7 @@ When you [enable the User Portal](user-portal.md#enable-the-user-portal), the pl
 The roles of a user decide what the user can do in the User Portal. Each role holds a set of permissions, which are the scopes that are added to the user's token. The User Portal shows an integration only if the user has the view scope for its type. See [Scopes](#scopes).
 
 :::info
-To manage User Portal users and roles in the Choreo Cloud console, your role must include the **Manage Organization** permission under **Organization Management**, assigned at the organization level. For more information about roles and permissions, see [Members and Access Control](../access-control.md).
+To manage User Portal users and roles in the Choreo Cloud console, your role must include the **Manage Organization** permission under **Organization Management**, assigned at the organization level. For more information about roles and permissions, see [Member Access](../access-control.md).
 :::
 
 ## How access works

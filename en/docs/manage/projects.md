@@ -116,4 +116,4 @@ The project and all its contents are permanently deleted.
 
 - [Create a project](../develop-and-test/create-workspace/create-a-project.md) — Create a new project.
 - [Import a project](../develop-and-test/create-workspace/import-a-project.md) — Bring an existing Choreo Integrator project from a Git repository into Choreo Cloud.
-- [Members and Access Control](./users-and-access/access-control.md) — Manage roles and permissions for members of your project.
+- [Member Access](./users-and-access/access-control.md) — Manage roles and permissions for members of your project.

@@ -11,9 +11,9 @@ slug: /manage/users-and-access
 
 Choreo Integration separates two audiences, each with its own access model: the members of your own organization who build and manage integrations, APIs, and AI agents, and the external users who only interact with what you've already published.
 
-## Members and Access Control, for your organization's members
+## Member Access, for your organization's members
 
-Members, groups, and roles control what someone can see and do in the Choreo Cloud console — deploy integrations, manage environments, publish APIs, and more. See [Members and Access Control](./access-control.md).
+Members, groups, and roles control what someone can see and do in the Choreo Cloud console — deploy integrations, manage environments, publish APIs, and more. See [Member Access](./access-control.md).
 
 ## User Portal, for people outside your organization
 
