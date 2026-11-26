@@ -59,10 +59,10 @@ Each recipient must sign in with the exact email address they were invited with.
 
 ### Pending invitations
 
-The **Pending invitations** tab lists invitations that haven't been accepted yet, with the group offered, who sent it, when it was sent, and when it expires. Resend or revoke an invitation from the **Actions** column.
+The **Pending invitations** tab lists invitations that haven't been accepted yet, with the group offered, who sent it, when it was sent, and when it expires. An invitation past its expiry shows **Expired** instead of a countdown. Resend or revoke an invitation from the **Actions** column.
 
 <ThemedImage
-    alt="Pending invitations tab listing invited emails with their group, inviter, and expiry status"
+    alt="Pending invitations tab listing invited emails with their group, inviter, and expiry status, including both still-pending and expired invitations"
     sources={{
         light: useBaseUrl('/img/manage/cloud/access-control/pending-invitations.png'),
         dark: useBaseUrl('/img/manage/cloud/access-control/pending-invitations.png'),
