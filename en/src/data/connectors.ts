@@ -43,6 +43,7 @@ export const CATEGORIES: string[] = [
 ];
 
 export const VENDORS: string[] = [
+    "Adobe",
     "Alfresco",
     "Amazon",
     "Apache",
@@ -97,6 +98,7 @@ export const VENDORS: string[] = [
 ];
 
 export const CONNECTORS: Connector[] = [
+    { name: "Adobe Analytics", description: "Run reports and manage segments, calculated metrics, projects, date ranges, annotations, tags and shares in Adobe Analytics", operations: "Create, Read, Update, Delete, List", auth: "API Key", link: "marketing-social/adobe.analytics/overview", category: "Marketing & Social Media", vendor: "Adobe", icon: "https://bcentral-packageicons.azureedge.net/images/ballerinax_adobe.analytics_2.0.0.png", version: "2.0.0" },
     { name: "AI", description: "Build AI-powered applications using Large Language Models with direct LLM interaction, intelligent agents with tool use, and Retrieval-Augmented Generation", operations: "Multi-turn Chat, Structured Output, Agent Execution, RAG, Embedding, Retrieval", auth: "Provider-specific (OpenAI, Anthropic)", link: "ai-ml/ai/ai-overview", category: "AI & ML", icon: "https://bcentral-packageicons.azureedge.net/images/ballerina_ai_1.15.0.png", version: "1.15.0" },
     { name: "Alfresco", description: "Enterprise content management platform with document CRUD, versioning, shared links, and collaboration features", operations: "Create, Read, Update, Delete, Upload, Download, Copy, Move, Search", auth: "Basic Authentication", link: "storage-file/alfresco/connector-overview", category: "Storage & Files", icon: "https://bcentral-packageicons.azureedge.net/images/ballerinax_alfresco_2.0.2.png", vendor: "Alfresco", version: "2.0.2" },
     { name: "AMP", description: "Ballerina observability extension that exports OpenTelemetry traces to the WSO2 AI Agent Management Platform", operations: "Tracing", auth: "API Key", link: "developer-tools/amp/connector-overview", category: "Developer Tools", vendor: "WSO2" },

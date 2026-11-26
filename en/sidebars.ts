@@ -23,6 +23,16 @@ const sidebars: SidebarsConfig = {
         // ── Connector categories (alphabetical) ──
         {
           type: 'category',
+          label: 'Adobe Analytics',
+          link: { type: 'doc', id: 'catalog/marketing-social/adobe.analytics/overview' },
+          items: [
+            'catalog/marketing-social/adobe.analytics/setup-guide',
+            'catalog/marketing-social/adobe.analytics/action-reference',
+            'catalog/marketing-social/adobe.analytics/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'AI',
           link: { type: 'doc', id: 'catalog/ai-ml/ai/ai-overview' },
           items: [
