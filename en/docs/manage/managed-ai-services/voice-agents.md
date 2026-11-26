@@ -283,6 +283,8 @@ For the customer support example, try:
 
 When you're ready to use the voice agent beyond Development, click **Promote** between the **Development** and **Production** cards on the voice agent's overview page. Wait until the **Production** card shows **Active**, then test it with that card's **Voice tester**.
 
+The environments and promotion order shown here depend on the [promotion pipeline](../environments/configure-promotion-pipelines.md) configured for the project. A different pipeline may have more environments, such as **Staging**, between **Development** and **Production**. See [Configure Promotion Pipelines](../environments/configure-promotion-pipelines.md#create-a-pipeline) to add one.
+
 <ThemedImage
     alt="Voice agent overview with the Promote button between the Development and Production cards highlighted"
     sources={{
