@@ -15,7 +15,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Receive Webhook Events with the AsyncAPI Tool
 
-Many services tell you about changes by calling your webhook: a store sends an event when a customer places an order, a payment service when a payment succeeds. This guide shows how to receive such events in WSO2 Integrator without writing the HTTP plumbing yourself. You describe the events in an AsyncAPI definition, the `bal asyncapi` tool generates a listener for them, and you only write what happens for each event.
+Many services notify you of events by calling your webhook, such as an online store sending an event when a customer places an order, or a payment service when a transaction succeeds. This guide shows you how to receive these events in WSO2 Integrator without writing the HTTP plumbing yourself: define the events in an AsyncAPI definition, generate a listener using the `bal asyncapi` tool, and focus solely on implementing your event-handling logic.
 
 **What you'll build:** An integration that receives `order_created` and `order_cancelled` events from an online store, checks that each request really comes from the store, and logs the order. You run it on your computer first, then deploy it to Choreo Cloud, where it gets a public URL the store can call.
 

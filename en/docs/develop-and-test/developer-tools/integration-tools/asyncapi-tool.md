@@ -7,14 +7,14 @@ slug: /develop-and-test/developer-tools/integration-tools/asyncapi-tool
 
 # AsyncAPI Tool
 
-An AsyncAPI definition describes an event-driven API: its channels, the messages on each, and who sends and receives them. The `bal asyncapi` tool turns such a definition into Ballerina code, and a Ballerina WebSocket service into a definition:
+An AsyncAPI definition outlines the channels, messages, and participants of an event-driven API. The `bal asyncapi` tool converts these definitions into Ballerina code, or exports an AsyncAPI definition from an existing Ballerina WebSocket service. It generates:
 
-- **Webhook listener:** From the definition of the events a SaaS application or other event source sends to your webhook, the tool generates a listener that calls a remote function for each event. When the definition says how requests are signed, the listener also verifies each one.
-- **WebSocket client:** From the definition of a WebSocket API, the tool generates a client with a function for each message it sends or receives.
-- **AsyncAPI definition:** From a Ballerina WebSocket service, the tool generates the definition that describes it.
+- **Webhook listener:** Generates a listener from an event source's AsyncAPI definition (such as a SaaS application) that invokes a remote function for each incoming event and verifies request signatures when configured.
+- **WebSocket client:** Generates a client from a WebSocket API definition with dedicated functions for each message it sends or receives.
+- **AsyncAPI definition:** Exports an AsyncAPI definition describing an existing Ballerina WebSocket service.
 
 :::note
-The AsyncAPI tool runs from the command line (pro-code). You use the generated code in your integration like any other Ballerina code.
+The AsyncAPI tool runs from the command line (pro-code tool). You can use the generated code in your integration like any other Ballerina code.
 :::
 
 ## Install the tool
@@ -25,11 +25,11 @@ The tool requires Ballerina Swan Lake Update 13 (2201.13.0) or later. Pull it fr
 bal tool pull asyncapi
 ```
 
-To check the installed version, run `bal asyncapi --version`. This page describes version 1.0.0.
+Run `bal asyncapi --version` to verify the installed version. This documentation covers version 1.0.0.
 
 ## Generate a webhook listener
 
-Use an AsyncAPI definition that describes the events an event source sends to your webhook. The tool generates a listener and a service type for each channel, with a remote function for each event.
+Provide an AsyncAPI definition describing the events sent to your webhook. The tool generates a listener and a service type for each channel, with a remote function for each event.
 
 ### Prepare the AsyncAPI definition
 
@@ -39,10 +39,10 @@ The tool reads AsyncAPI 2.x and 3.x definitions in YAML or JSON. Add the followi
   - `type`: `body` when the event type is a field of the request body, or `header` when it is an HTTP header.
   - `path`: The JSON path of the field, such as `type` or `event.type`, or the name of the header.
 - `x-ballerina-event-type`: Add this to every message. It is the value the event type has for that message.
-- `x-ballerina-auth` (optional): How the listener checks that a request comes from the event source, such as an HMAC signature in a header. The listener rejects every request that fails the check. For every signature scheme the extension supports, see the [webhook signature reference](https://github.com/ballerina-platform/asyncapi-tools/blob/main/docs/webhook-dsl-reference.md).
+- `x-ballerina-auth` (optional): Configures how the listener verifies incoming requests (such as checking an HMAC signature in a header) and rejects any request that fails validation. For all supported signature schemes, see the [webhook signature reference](https://github.com/ballerina-platform/asyncapi-tools/blob/main/docs/webhook-dsl-reference.md).
 - `x-ballerina-event-label` (optional): The name of the remote function, when the event type isn't a readable name. For example, `x-ballerina-event-label: AccountMerged` names the function `onAccountMerged` for the event type `qbo.account.merged.v1`.
 
-The following definition describes an online store that sends `order_created` and `order_cancelled` events. Each event carries its type in the `type` field of the request body. The store signs each request body with HMAC-SHA256 using a secret it shares with you, and sends the signature in the `X-Signature` header as `sha256=<hex digest>`.
+Consider the following definition for an online store sending `order_created` and `order_cancelled` events. Each event carries its type in the `type` field of the request body. The store signs each request body with HMAC-SHA256 using a secret it shares with you, and sends the signature in the `X-Signature` header as `sha256=<hex digest>`:
 
 ```yaml title="order-events.yaml"
 asyncapi: 3.0.0
@@ -103,7 +103,7 @@ components:
 
 ### Generate the listener
 
-The tool writes the generated code into a Ballerina package. Create a package, go into it, and run the tool with the definition:
+The tool generates code inside a Ballerina package. Create a new package, navigate to its directory, and run the tool with your definition:
 
 ```bash
 bal new order_listener
@@ -222,7 +222,7 @@ The tests sign their requests, so the definition needs `x-ballerina-auth` for th
 
 ## Generate a WebSocket client
 
-Use an AsyncAPI definition of a WebSocket API. The tool generates a client for each channel, with a function for each message the client sends and each message it receives.
+Provide an AsyncAPI definition of a WebSocket API. The tool generates a client for each channel, with a function for each message it sends or receives.
 
 ### Prepare the AsyncAPI definition
 
@@ -323,14 +323,17 @@ The tool generates the following files:
 | `types.bal` | The record types of the messages. |
 | `utils.bal` | The helpers the client uses to route the messages it receives. |
 
-To also generate a test file in `tests/test.bal`, add `--with-tests`. To add a license header to the generated files, add `--license` with the path to a file that contains the header.
+You can also customize the output with the following flags:
+
+- `--with-tests`: Generates a test file in `tests/test.bal`.
+- `--license <path>`: Adds the specified file's content as a license header to the generated files.
 
 The tool names each client class after the definition's title and the channel, so the `orders` channel of the `Orders` definition gets `OrdersOrdersClient`. A channel at `/` is named after the title alone, such as `OrdersClient`. Each function is named after its message:
 
-- A message the client sends gets a function, such as `doPlaceOrder`, that sends it. When the operation has a reply, the function waits for the reply and returns it.
-- A message the client receives outside a reply gets a function, such as `doPriceUpdate`, that waits for the next one.
+- A message the client sends gets a function (such as `doPlaceOrder`) that sends it, waiting for and returning the reply if one is defined.
+- A standalone message the client receives gets a function (such as `doPriceUpdate`) that waits for the next incoming message.
 
-The last argument of each function is the time, in seconds, to wait.
+The final argument of each function specifies the wait timeout in seconds.
 
 ### Use the client
 
@@ -355,7 +358,7 @@ public function main() returns error? {
 }
 ```
 
-The client connects to the server in the definition. To connect to another server, such as one running locally, pass its URL: `check new (serviceUrl = "ws://localhost:9090")`. The client adds the channel's address to the URL.
+By default, the client connects to the server specified in the definition. To target a different server (such as a local instance), pass its base URL when initializing the client: `check new (serviceUrl = "ws://localhost:9090")`. The client automatically appends the channel's address to this URL.
 
 ### Supported WebSocket definitions
 
@@ -376,7 +379,7 @@ WebSocket definitions are written in many styles. The tool handles them as follo
 
 The tool doesn't support binary frames, text framings over WebSocket such as STOMP or Socket.IO, or messages told apart by their position in a JSON array.
 
-Every warning and error names the place in the definition and the change that fixes it. For each case, with the message the tool prints and an example of the fix, see [Which WebSocket specs the tool generates a client for](https://github.com/ballerina-platform/asyncapi-tools/blob/main/docs/websocket-spec-support.md).
+Every warning and error specifies the location in the definition and the change needed to fix it. For details on each case, including the printed message and an example fix, see [Which WebSocket specs the tool generates a client for](https://github.com/ballerina-platform/asyncapi-tools/blob/main/docs/websocket-spec-support.md).
 
 ## Export an AsyncAPI definition from a WebSocket service
 

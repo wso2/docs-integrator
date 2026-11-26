@@ -15,7 +15,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Use a WebSocket API with the AsyncAPI Tool
 
-A WebSocket API keeps one connection open and sends messages both ways: you send a request and get a reply, and the server also pushes updates whenever something changes. Writing a client for one by hand means matching every incoming message to the request that is waiting for it. This guide shows how the `bal asyncapi` tool does that for you: you describe the API in an AsyncAPI definition, and the tool generates a client with a function for each message.
+A WebSocket API maintains a single open connection for bidirectional messaging, allowing you to send requests and receive replies while the server pushes real-time updates. Building a client manually requires correlating every incoming message with its corresponding request. This guide shows you how to avoid that boilerplate in WSO2 Integrator: define the API in an AsyncAPI definition, generate a client using the `bal asyncapi` tool with dedicated functions for each message, and focus solely on your integration logic.
 
 **What you'll build:** An automation that connects to an order service, places an order, waits for the reply, and then waits for a price update. The guide includes a small sample order service for the client to talk to. You run both on your computer first, then on Choreo Cloud.
 
