@@ -239,10 +239,10 @@ Choreo Cloud creates a new integration of type **Voice Agent** in the project, n
     }}
 />
 
-Open the voice agent and wait until the **Development** card on its overview page shows **Active**. The voice agent has **Development**, **Staging**, and **Production** cards. Each card has its own **Voice tester**, and **How to connect** shows how to connect a client to that environment.
+Open the voice agent and wait until the **Development** card on its overview page shows **Active**. The voice agent has **Development** and **Production** cards. Each card has its own **Voice tester**, and **How to connect** shows how to connect a client to that environment.
 
 <ThemedImage
-    alt="Voice agent overview with the Development environment Active and its Voice tester, and the Staging and Production cards"
+    alt="Voice agent overview with the Development environment Active and its Voice tester, and the Production card"
     sources={{
         light: useBaseUrl('/img/manage/cloud/voice-agents/voice-agent-development-active.png'),
         dark: useBaseUrl('/img/manage/cloud/voice-agents/voice-agent-development-active.png'),
@@ -261,24 +261,18 @@ Click **Start session** in the **Voice tester** on the **Development** card, or 
     }}
 />
 
-1. Click **Start session** and allow microphone access when the browser asks. The tester shows **LIVE** and **Conversation Active** with *Speak into your microphone. The agent is listening and responding.*
+1. Click **Start session** and allow microphone access when the browser asks. The tester shows a **Live** badge next to **Voice agent tester**.
 2. Speak to the agent. The tester shows the transcript of what you say and the agent's replies, and you hear the agent's reply.
-3. Click **Stop session** to end the conversation.
-
-{/* TODO(v3): steps 1-2 and the voice-tester-session.png screenshot are unverified
-    this pass - the browser session used to re-verify this page has no real
-    microphone, so it could reach "Connecting" (LiveKit connection confirmed
-    live via console logs: connecting -> connected) but not a live
-    conversation. Re-verify with a browser that has mic access. */}
+3. Click **End session** to end the conversation.
 
 For the customer support example, try:
 
-- *"Hi, what can you help me with?"*
-- *"Where is my order ORD-1001?"*
-- *"Can I return my coffee maker from order ORD-1003?"*
+- *"Hi, I'm not happy with the product I purchased from you."*
+- *"Can you explain me the return policy for products?"*
+- *"What you mean by original packaging"*
 
 <ThemedImage
-    alt="Voice agent tester with a live session showing the three questions and the agent replies about order status and the return policy"
+    alt="Voice agent tester with a live session showing a customer asking about the return policy and what original packaging means"
     sources={{
         light: useBaseUrl('/img/manage/cloud/voice-agents/voice-tester-session.png'),
         dark: useBaseUrl('/img/manage/cloud/voice-agents/voice-tester-session.png'),
@@ -287,7 +281,17 @@ For the customer support example, try:
 
 ## Promote to production
 
-When you're ready to use the voice agent beyond Development, click **Promote** on the voice agent's overview page to promote it to the next environment (**Staging**, then **Production**). Wait until the target environment's card shows **Active**, then test it with that card's **Voice tester**.
+When you're ready to use the voice agent beyond Development, click **Promote** between the **Development** and **Production** cards on the voice agent's overview page. Wait until the **Production** card shows **Active**, then test it with that card's **Voice tester**.
+
+The environments and promotion order shown here depend on the [promotion pipeline](../environments/configure-promotion-pipelines.md) configured for the project. A different pipeline may have more environments, such as **Staging**, between **Development** and **Production**. See [Configure Promotion Pipelines](../environments/configure-promotion-pipelines.md#assign-a-pipeline-to-a-project) to add one.
+
+<ThemedImage
+    alt="Voice agent overview with the Promote button between the Development and Production cards highlighted"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/voice-agents/promote-to-production.png'),
+        dark: useBaseUrl('/img/manage/cloud/voice-agents/promote-to-production.png'),
+    }}
+/>
 
 ## Troubleshooting
 
