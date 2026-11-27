@@ -287,6 +287,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Bitbucket',
+          link: { type: 'doc', id: 'catalog/developer-tools/bitbucket/overview' },
+          items: [
+            'catalog/developer-tools/bitbucket/setup-guide',
+            'catalog/developer-tools/bitbucket/action-reference',
+            'catalog/developer-tools/bitbucket/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Candid',
           link: { type: 'doc', id: 'catalog/productivity-collaboration/candid/connector-overview' },
           items: [
