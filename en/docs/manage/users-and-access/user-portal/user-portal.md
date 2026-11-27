@@ -28,18 +28,6 @@ You enable the User Portal once per environment, for the whole organization. Aft
 
 {/* TODO(v3): the v2 prerequisites around Choreo Identity username validation, Developer Portal key manager trust, and resource-name collisions were tied to a Developer Portal-based mechanism that no longer exists. Re-verify whether any equivalent blocker still applies to the v3 flow below before restoring that content. */}
 
-## What the platform provisions for you
-
-Enabling the User Portal for an environment creates an **Integration User Portal** project in Identity & Access Management, with a **User Portal API** resource server already defining the scopes that control what a user can do in the User Portal. See [Scopes](manage-users.md#scopes).
-
-<ThemedImage
-    alt="Integration User Portal project in Choreo Identity & Access Management"
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/user-portal/integration-user-portal-project.png'),
-        dark: useBaseUrl('/img/manage/cloud/user-portal/integration-user-portal-project.png'),
-    }}
-/>
-
 ## Enable the User Portal
 
 The User Portal is enabled per environment (for example, Development), for the whole organization — not per integration. Every integration in that environment can then be individually published to it. Enabling it requires the **Manage Organization** permission, so this is an organization administrator's task.
@@ -86,6 +74,18 @@ If you have an unpublished integration open, you can reach the same **Configure*
     />
 
 You can now [add users](manage-users.md) and [publish integrations](publish-to-user-portal.md).
+
+## What the platform provisions for you
+
+Enabling the User Portal for an environment creates an **Integration User Portal** project in Identity & Access Management, with a **User Portal API** resource server already defining the scopes that control what a user can do in the User Portal. See [Scopes](manage-users.md#scopes).
+
+<ThemedImage
+    alt="Integration User Portal project in Choreo Identity & Access Management"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/integration-user-portal-project.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/integration-user-portal-project.png'),
+    }}
+/>
 
 ## What's next
 
