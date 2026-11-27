@@ -30,7 +30,25 @@ Choreo Cloud includes a browser-based editor where you can develop integrations 
        }}
    />
 
-Choreo Cloud pushes the integration to the repository you configured when you created it, builds it, and deploys it to the **Development** environment.
+3. In the **Create Integration in Choreo Cloud** form, select the Git provider, the organization, and the repository where the integration will be saved. When you pick the repository, if it is not empty, make sure you provide an empty path.
+
+   If you don't have a repository ready, click **Create New Repository** to create one.
+
+   If Choreo Cloud does not have access to the repository, click **Connect More Repositories** and grant access. This is required only if you have not already authorized Choreo Cloud to access all repositories in your organization.
+
+   <ThemedImage
+       alt="Create Integration in Choreo Cloud form with Git provider, organization, repository, branch, and path fields"
+       sources={{
+           light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/adding-source-control.png'),
+           dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/adding-source-control.png'),
+       }}
+   />
+
+4. Click **Create**.
+
+Choreo Cloud pushes the integration to the repository, builds it, and deploys it to the **Development** environment.
+
+{/* TODO(v3): didn't verify live whether this Create Integration in Choreo Cloud form appears only the first time you deploy an integration that isn't yet connected to a repository, or every time you click Save and Deploy. Also didn't verify "Connect More Repositories" is the exact live wording (previously documented as "Connect Newly Created Repository"). */}
 
 ## What's next
 
