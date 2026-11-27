@@ -28,10 +28,11 @@ The tables on this page list what each subscription plan includes. A checkmark (
 
 | Capability | Free Trial | Growth | Enterprise |
 |---|---|---|---|
-| Event handlers | ✓ | ✓ | ✓ |
-| Scheduled jobs | ✓ | ✓ | ✓ |
-| Webhooks | ✓ | ✓ | ✓ |
-| Services | ✓ | ✓ | ✓ |
+| Integration as API | ✓ | ✓ | ✓ |
+| Automation | ✓ | ✓ | ✓ |
+| File-driven integrations | ✓ | ✓ | ✓ |
+| Event-driven integrations | ✓ | ✓ | ✓ |
+| AI Agents | ✓ | ✓ | ✓ |
 
 ## Monitoring and observability
 
