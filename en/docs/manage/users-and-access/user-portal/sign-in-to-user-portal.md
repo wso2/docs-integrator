@@ -41,6 +41,14 @@ What you can see and do after you sign in depends on your roles in the organizat
 
 After you sign in, the User Portal opens on the **Overview** page. It lists the integrations that the organization published and that your roles let you see. See [Run Available Integrations](use-user-portal.md).
 
+<ThemedImage
+    alt="User Portal Overview page with the Waiting on You and Your Integrations sections"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/user-portal-overview.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/user-portal-overview.png'),
+    }}
+/>
+
 ## Open the User Portal from the console
 
 In the Choreo Cloud console, you can open the User Portal in a new tab in either of the following ways:
