@@ -1045,16 +1045,6 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Microsoft Outlook Calendar',
-          link: { type: 'doc', id: 'catalog/productivity-collaboration/microsoft.outlook.calendar/overview' },
-          items: [
-            'catalog/productivity-collaboration/microsoft.outlook.calendar/setup-guide',
-            'catalog/productivity-collaboration/microsoft.outlook.calendar/action-reference',
-            'catalog/productivity-collaboration/microsoft.outlook.calendar/example',
-          ],
-        },
-        {
-          type: 'category',
           label: 'Microsoft Outlook Mail',
           link: { type: 'doc', id: 'catalog/communication/microsoft.outlook.mail/overview' },
           items: [
@@ -2287,42 +2277,12 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Xero Appstore',
-          link: { type: 'doc', id: 'catalog/finance-accounting/xero.appstore/overview' },
-          items: [
-            'catalog/finance-accounting/xero.appstore/setup-guide',
-            'catalog/finance-accounting/xero.appstore/action-reference',
-            'catalog/finance-accounting/xero.appstore/example',
-          ],
-        },
-        {
-          type: 'category',
           label: 'Xero Bankfeeds',
           link: { type: 'doc', id: 'catalog/finance-accounting/xero.bankfeeds/overview' },
           items: [
             'catalog/finance-accounting/xero.bankfeeds/setup-guide',
             'catalog/finance-accounting/xero.bankfeeds/action-reference',
             'catalog/finance-accounting/xero.bankfeeds/example',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Xero Files',
-          link: { type: 'doc', id: 'catalog/storage-file/xero.files/overview' },
-          items: [
-            'catalog/storage-file/xero.files/setup-guide',
-            'catalog/storage-file/xero.files/action-reference',
-            'catalog/storage-file/xero.files/example',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Xero Finance',
-          link: { type: 'doc', id: 'catalog/finance-accounting/xero.finance/overview' },
-          items: [
-            'catalog/finance-accounting/xero.finance/setup-guide',
-            'catalog/finance-accounting/xero.finance/action-reference',
-            'catalog/finance-accounting/xero.finance/example',
           ],
         },
         {
