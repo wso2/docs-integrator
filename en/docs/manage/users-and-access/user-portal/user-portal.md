@@ -42,20 +42,11 @@ Enabling the User Portal for an environment creates an **Integration User Portal
 
 ## Enable the User Portal
 
-The User Portal is enabled per environment (for example, Development), for the whole organization — not per integration. Every integration in that environment can then be individually published to it.
+The User Portal is enabled per environment (for example, Development), for the whole organization — not per integration. Every integration in that environment can then be individually published to it. Enabling it requires the **Manage Organization** permission, so this is an organization administrator's task.
 
-1. Open any integration and wait until its environment card shows **Active**.
-2. On that card, click **Share with your users**.
-3. In the **About the User Portal** dialog, click **Enable User Portal**. This takes you to **Configure** > **User Portal**, scoped to that integration's environment.
-
-    <ThemedImage
-        alt="About the User Portal dialog with an Enable User Portal button"
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/user-portal/about-user-portal-dialog.png'),
-            dark: useBaseUrl('/img/manage/cloud/user-portal/about-user-portal-dialog.png'),
-        }}
-    />
-
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
+2. In the left navigation menu of the Integration app, click **Configure**.
+3. Click the **User Portal** tab.
 4. Click **Enable User Portal**, select the **Environment**, then click **Enable**.
 
     <ThemedImage
@@ -77,6 +68,22 @@ The **User Portal** page shows a card for the environment. While the platform se
 />
 
 {/* TODO(v3): didn't observe a Setting up card live this pass - only confirmed the eventual Active state. */}
+
+### Enable it from an integration instead
+
+If you have an unpublished integration open, you can reach the same **Configure** > **User Portal** page from there instead of navigating to **Configure** directly:
+
+1. Open the integration and wait until its environment card shows **Active**.
+2. On that card, click **Share with your users**.
+3. In the **About the User Portal** dialog, click **Enable User Portal**. This takes you to **Configure** > **User Portal**, scoped to that integration's environment. Continue from step 4 above.
+
+    <ThemedImage
+        alt="About the User Portal dialog with an Enable User Portal button"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/about-user-portal-dialog.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/about-user-portal-dialog.png'),
+        }}
+    />
 
 You can now [add users](manage-users.md) and [publish integrations](publish-to-user-portal.md).
 
