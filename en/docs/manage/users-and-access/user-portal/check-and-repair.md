@@ -18,8 +18,27 @@ The **Configure** > **User Portal** page shows the status of the User Portal for
 ## Check the status of the User Portal
 
 1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
-2. In the left navigation menu of the Integration app, click **Configure**.
-3. Click the **User Portal** tab.
+2. Open the apps grid at the top left, then under **Categories**, click **Integration**.
+
+    <ThemedImage
+        alt="App menu with Integration highlighted under Categories"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-integration-app.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-integration-app.png'),
+        }}
+    />
+
+3. In the left navigation menu, click **Configure**.
+
+    <ThemedImage
+        alt="Integration app overview page with Configure highlighted in the left navigation menu"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-configure.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-configure.png'),
+        }}
+    />
+
+4. Click the **User Portal** tab.
 
 The page shows a card for each environment that has the User Portal enabled:
 
@@ -41,6 +60,15 @@ The page shows a card for each environment that has the User Portal enabled:
 Deprovisioning removes the User Portal for an environment, for the whole organization.
 
 1. On the environment's card, click the **⋮** menu, then click **Deprovision**.
+
+    <ThemedImage
+        alt="Configure > User Portal page with the kebab menu open and Deprovision highlighted"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/deprovision-button.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/deprovision-button.png'),
+        }}
+    />
+
 2. Confirm the action.
 
 {/* TODO(v3): didn't trigger this live - don't know whether a confirmation dialog appears, what happens to integrations already published to that environment's User Portal, or whether existing User Portal users and their access are removed. */}
