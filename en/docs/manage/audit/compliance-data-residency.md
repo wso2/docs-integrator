@@ -31,16 +31,16 @@ The following attributes are classified and collected.
 | Error | Internal error codes, error messages, and error types (for example, authentication or throttle). |
 | End user | `User-Agent` header details and correlation ID. |
 
+{/* TODO(v3): this table describes exactly the telemetry a Usage Dashboards-style feature would surface, but that feature doesn't currently exist in v3 (removed from the Acceptable Usage Policy and API Management overview this pass - see commit b9f0d74d). Couldn't verify live whether this data is still captured internally with no UI to view it, or whether this section is now aspirational/stale. Confirm with the product team before trusting this table. */}
+
 ## Data retention and backups
 
 Choreo Cloud uses a tiered retention policy to give fast access to operational data while providing safeguards for recovery.
 
-- **Insights**. Retained for 6 months for storing and analyzing usage data.
-- **Log storage**. Logs are stored for 30 days for all users.
-- **Log visibility**:
-    - Free users can view the last 7 days of logs.
-    - Paid or PDP users have access to the full 30 days of logs.
+- **Logs**. Retention depends on your subscription plan. See [Acceptable Usage Policy](../billing/acceptable-usage-policy.md#monitoring-and-observability).
 - **Backups**. All data (metrics and logs) is backed up for 1 year.
+
+{/* TODO(v3): the v2 version of this page also had a 6-month "Insights" retention figure and a flat "Free users: 7 days, Paid/PDP users: 30 days" log-visibility split that duplicated (and partly conflicted with) the Acceptable Usage Policy's own Logs row, and referenced PDP (private data plane), which isn't a v3 concept. Replaced with a link to the AUP instead of restating numbers here. The "Backups" figure (1 year, for all plans) is unverified this pass - confirm it still applies, and whether it varies by plan like everything else on this page now does. */}
 
 ## Storage and encryption
 
