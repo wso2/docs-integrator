@@ -39,7 +39,7 @@ The tables on this page list what each subscription plan includes. A checkmark (
 | Capability | Free Trial | Growth | Enterprise |
 |---|---|---|---|
 | [Logs](../../observe/runtime-logs.md) | <span class="cell-prose">50 MB per day and logs are retained up to 7 days</span> | <span class="cell-prose">500 MB per day and logs are retained up to 30 days</span> | Unlimited |
-| Traces | <span class="cell-prose">Data retention of up to 7 days</span> | <span class="cell-prose">Data retention of up to 30 days</span> | ✓ |
+| [Traces](../../observe/traces.md) | <span class="cell-prose">Data retention of up to 7 days</span> | <span class="cell-prose">Data retention of up to 30 days</span> | ✓ |
 
 ## Security
 
@@ -56,7 +56,7 @@ The tables on this page list what each subscription plan includes. A checkmark (
 
 | Capability | Free Trial | Growth | Enterprise |
 |---|---|---|---|
-| Creating new user roles | Only default roles allowed | ✓ | ✓ |
+| [Creating new user roles](../users-and-access/user-portal/manage-users.md#create-a-role) | Only default roles allowed | ✓ | ✓ |
 | [Number of environments](../environments/environments.md) | 1 | 2 | Unlimited |
 
 ## What's next
