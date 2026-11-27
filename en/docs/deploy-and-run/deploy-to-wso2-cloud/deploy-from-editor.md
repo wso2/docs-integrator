@@ -72,10 +72,10 @@ You can deploy your integrations to Choreo Cloud directly from the Choreo Integr
 A browser opens showing your project on Choreo Cloud.
 
 <ThemedImage
-    alt="Choreo Cloud Project Home"
+    alt="Project overview listing the deployed integration alongside the integration count by type"
     sources={{
-        light: useBaseUrl('/img/deploy/cloud/deploy-from-editor/project-page-wso2-cloud.png'),
-        dark: useBaseUrl('/img/deploy/cloud/deploy-from-editor/project-page-wso2-cloud.png'),
+        light: useBaseUrl('/img/deploy/cloud/deploy-from-editor/integration-listing.png'),
+        dark: useBaseUrl('/img/deploy/cloud/deploy-from-editor/integration-listing.png'),
     }}
 />
 
