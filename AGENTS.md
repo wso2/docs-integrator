@@ -1,4 +1,4 @@
-- To host the docs site on localhost, run `npm install` once in `en`, then run `npm run start -- --host localhost` from `en` and open the localhost URL printed by Docusaurus.
+- To host the docs site on localhost, run `npm install` once at the repo root, then run `npm run start -- --host localhost` from the repo root and open the localhost URL printed by Docusaurus (the `start` script already targets `en`). `package.json` lives at the repo root, so running these inside `en/` fails and leaves a stray `en/package-lock.json`.
 
 ## Before touching `en/docs/`
 
