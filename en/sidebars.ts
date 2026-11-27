@@ -2257,6 +2257,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Xero Files',
+          link: { type: 'doc', id: 'catalog/storage-file/xero.files/overview' },
+          items: [
+            'catalog/storage-file/xero.files/setup-guide',
+            'catalog/storage-file/xero.files/action-reference',
+            'catalog/storage-file/xero.files/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Xero Finance',
           link: { type: 'doc', id: 'catalog/finance-accounting/xero.finance/overview' },
           items: [
