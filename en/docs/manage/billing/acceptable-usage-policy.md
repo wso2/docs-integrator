@@ -19,7 +19,6 @@ The tables on this page list what each subscription plan includes. A checkmark (
 | [Connect your Git repo](../../deploy-and-run/deploy-to-wso2-cloud/connect-git-provider.md) | ✓ | ✓ | ✓ |
 | [Continuous integration (CI) with build pipelines](../configurations/build-configurations.md) | 100 builds per month | 500 builds per month | Unlimited |
 | Continuous delivery (CD) | 100 deployments per month | 500 deployments per month | Unlimited |
-| Deployments to cloud platforms | <span class="cell-prose">Choreo Integration Cloud</span> | <span class="cell-prose">Choreo Integration Cloud, Azure, AWS, GCP, OpenShift, VMware Tanzu, and any Kubernetes cluster</span> | <span class="cell-prose">Choreo Integration Cloud, Azure, AWS, GCP, OpenShift, VMware Tanzu, and any Kubernetes cluster</span> |
 | [Deployment tracks](../integrations/operate/deployment-tracks.md) | 2 | 5 | Unlimited |
 | [Auto scaling](../integrations/operate/scaling.md) | <span class="cell-prose">Scales up to 1 pod</span> | <span class="cell-prose">Scales up to 2 pods</span> | ✓ |
 | [Health checks](../integrations/operate/health-checks.md) | ✓ | ✓ | ✓ |
@@ -33,12 +32,6 @@ The tables on this page list what each subscription plan includes. A checkmark (
 | Scheduled jobs | ✓ | ✓ | ✓ |
 | Webhooks | ✓ | ✓ | ✓ |
 | Services | ✓ | ✓ | ✓ |
-
-## API management
-
-| Capability | Free Trial | Growth | Enterprise |
-|---|---|---|---|
-| [API analytics and insights](./usage-dashboards.md) | <span class="cell-prose">Data retention of up to 7 days</span> | ✓ | ✓ |
 
 ## Monitoring and observability
 
@@ -68,6 +61,5 @@ The tables on this page list what each subscription plan includes. A checkmark (
 ## What's next
 
 - [Pricing and plans](./pricing-and-plans.md) — How Choreo Cloud bills platform services, and how to upgrade a service plan.
-- [Usage dashboards](./usage-dashboards.md) — Analyze usage across your organization.
 - [Integration Runtime Updates and Upgrades](../../reference/runtime-updates-and-upgrades.md) — Runtime availability, optional upgrades, and supported runtime versions.
 - [FAQ: Billing and support](../../reference/faq.md) — Answers to common subscription and billing questions.
