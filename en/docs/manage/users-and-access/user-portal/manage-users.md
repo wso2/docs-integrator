@@ -65,7 +65,24 @@ Changes to the permissions of a role can take up to 10 minutes to appear in User
 1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
 2. In the top navigation, click the organization list and select your organization.
 3. Click the app menu at the top left, then under **Categories**, click **Identity & Access Management**.
-4. Click the **Integration User Portal** project.
+
+    <ThemedImage
+        alt="App menu with Identity & Access Management highlighted under Categories"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-iam.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-iam.png'),
+        }}
+    />
+
+4. Click the project list at the top, then select the **Integration User Portal** project.
+
+    <ThemedImage
+        alt="Choreo Identity & Access Management overview page with the project list highlighted, set to Integration User Portal"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/iam-project-switcher.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/iam-project-switcher.png'),
+        }}
+    />
 
 ## Give a user access to the User Portal
 
@@ -206,14 +223,41 @@ In the **Integration User Portal** project, click **Roles** in the left navigati
 ### Create a role
 
 1. In the **Integration User Portal** project, click **Roles** in the left navigation menu.
+
+    <ThemedImage
+        alt="Integration User Portal project overview page with Roles highlighted in the left navigation menu"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-roles.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-roles.png'),
+        }}
+    />
+
 2. Click **Add role**.
+
+    <ThemedImage
+        alt="Roles page with no roles yet and the Add role button highlighted"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/add-role-button.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/add-role-button.png'),
+        }}
+    />
+
 3. In **Role name**, enter a name for the role, then click **Continue**.
+
+    <ThemedImage
+        alt="Role name step with the role name PortalUser entered"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/role-name-step.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/role-name-step.png'),
+        }}
+    />
+
 4. Under **Assign permissions**, select the permissions for the role. The scopes of the User Portal are under **User Portal API**. See [Scopes](#scopes).
 
     To select all the permissions in a group, select the check box of the group.
 
     <ThemedImage
-        alt="Assign permissions step with all the User Portal API scopes selected"
+        alt="Assign permissions step with the automation and aiagent groups selected under User Portal API"
         sources={{
             light: useBaseUrl('/img/manage/cloud/user-portal/create-role.png'),
             dark: useBaseUrl('/img/manage/cloud/user-portal/create-role.png'),
@@ -221,6 +265,16 @@ In the **Integration User Portal** project, click **Roles** in the left navigati
     />
 
 5. Click **Continue**.
+
+The role appears on the **Roles** page.
+
+<ThemedImage
+    alt="Roles page with the newly created PortalUser role"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/role-created.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/role-created.png'),
+    }}
+/>
 
 ### Change the permissions of a role
 
