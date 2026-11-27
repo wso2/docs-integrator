@@ -2267,6 +2267,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Xero Appstore',
+          link: { type: 'doc', id: 'catalog/finance-accounting/xero.appstore/overview' },
+          items: [
+            'catalog/finance-accounting/xero.appstore/setup-guide',
+            'catalog/finance-accounting/xero.appstore/action-reference',
+            'catalog/finance-accounting/xero.appstore/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Xero Bankfeeds',
           link: { type: 'doc', id: 'catalog/finance-accounting/xero.bankfeeds/overview' },
           items: [
