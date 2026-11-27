@@ -12,10 +12,6 @@ import TabItem from '@theme/TabItem';
 
 # Shopify
 
-:::warning
-Shopify event integration is currently in **Beta**. APIs and behavior may change in future releases.
-:::
-
 Shopify event integrations receive webhook deliveries from a Shopify app and run a handler for each order, customer, product or fulfillment topic. Use them to sync orders to an ERP, start fulfillment workflows, or keep customer records up to date in real time. They use the `ballerinax/shopify.trigger` package, which verifies every delivery with the app's client secret before a handler runs.
 
 ## Creating a Shopify events service

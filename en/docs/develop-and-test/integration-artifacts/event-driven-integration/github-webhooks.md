@@ -12,10 +12,6 @@ import TabItem from '@theme/TabItem';
 
 # GitHub Webhooks
 
-:::warning
-GitHub event integration is currently in **Beta**. APIs and behavior may change in future releases.
-:::
-
 GitHub event integrations receive webhook deliveries from GitHub and run a handler for each repository or organization event. Use them to automate CI/CD workflows, sync issue trackers, enforce code review policies, and react to repository activity in real time. They use the `ballerinax/github.trigger` package, which verifies every delivery with your webhook secret before a handler runs.
 
 ## Creating a GitHub Events service

@@ -12,10 +12,6 @@ import TabItem from '@theme/TabItem';
 
 # Slack
 
-:::warning
-Slack event integration is currently in **Beta**. APIs and behavior may change in future releases.
-:::
-
 Slack event integrations receive events from the Slack Events API and run a handler for each workspace event. Use them to build bots that answer mentions, route messages to other systems, or track reactions and channel changes in real time. They use the `ballerinax/slack.trigger` package, which verifies every delivery with the app's signing secret before a handler runs.
 
 ## Creating a Slack events service

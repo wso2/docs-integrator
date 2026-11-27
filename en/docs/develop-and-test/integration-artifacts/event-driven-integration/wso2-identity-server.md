@@ -12,10 +12,6 @@ import TabItem from '@theme/TabItem';
 
 # WSO2 Identity Server
 
-:::warning
-WSO2 Identity Server event integration is currently in **Beta**. APIs and behavior may change in future releases.
-:::
-
 WSO2 Identity Server event integrations receive webhook deliveries from WSO2 Identity Server or Asgardeo and run a handler for each identity event. Use them to monitor sign-ins, provision users into other systems, or audit role and organization changes. They use the `ballerinax/identityserver.trigger` package, which verifies every delivery with the webhook secret before a handler runs.
 
 ## Creating a WSO2 Identity Server events service

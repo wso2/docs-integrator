@@ -12,10 +12,6 @@ import TabItem from '@theme/TabItem';
 
 # HubSpot
 
-:::warning
-HubSpot event integration is currently in **Beta**. APIs and behavior may change in future releases.
-:::
-
 HubSpot event integrations receive webhook deliveries from a HubSpot app and run a handler for each CRM event. Use them to sync contacts and deals to other systems, notify a team when a deal moves stage, or react to new conversation messages. They use the `ballerinax/hubspot.trigger` package, which verifies every delivery with the app's client secret before a handler runs.
 
 ## Creating a HubSpot events service

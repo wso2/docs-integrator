@@ -12,10 +12,6 @@ import TabItem from '@theme/TabItem';
 
 # QuickBooks
 
-:::warning
-QuickBooks event integration is currently in **Beta**. APIs and behavior may change in future releases.
-:::
-
 QuickBooks event integrations receive webhook deliveries from QuickBooks Online and run a handler for each accounting entity event. Use them to sync customers to a CRM, start a workflow when an invoice is created, or alert when a payment is voided. They use the `ballerinax/quickbooks.trigger` package, which verifies every delivery with the webhook verifier token before a handler runs.
 
 ## Creating a QuickBooks events service

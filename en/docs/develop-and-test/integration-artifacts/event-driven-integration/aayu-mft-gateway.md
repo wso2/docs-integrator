@@ -12,10 +12,6 @@ import TabItem from '@theme/TabItem';
 
 # Aayu MFT Gateway
 
-:::warning
-Aayu MFT Gateway event integration is currently in **Beta**. APIs and behavior may change in future releases.
-:::
-
 Aayu MFT Gateway event integrations receive AS2 webhook deliveries from MFT Gateway and run a handler for each AS2 message event. Use them to process files that trading partners send, keep an audit trail of exchanges, or alert when a send fails. They use the `ballerinax/aayu.mftg.as2.trigger` package, which verifies every delivery with the webhook public key before a handler runs.
 
 ## Creating an Aayu MFT Gateway events service
