@@ -1,39 +1,64 @@
 ---
-title: Setup Guide
+connector: true
+connector_name: "stripe"
+title: "Setup Guide"
+description: "How to set up and configure the ballerinax/stripe connector."
 ---
+
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Setup Guide
 
-This guide walks you through creating a Stripe account and obtaining the API secret key required to use the Stripe connector.
+To use the Stripe connector, you must have a Stripe account and an API token for authentication. Follow the steps below to set up the connector with your Stripe account. If you don't have an account, you can create one by visiting [Stripe Sign Up page](https://dashboard.stripe.com/register) and completing the registration process.
 
 ## Prerequisites
 
-- A Stripe account. If you do not have one, [sign up for free](https://dashboard.stripe.com/register).
+- A Stripe account. If you do not have one, [sign up for free](https://dashboard.stripe.com/register)
 
-## Step 1: Log in to the Stripe dashboard
+## Step 1: Log in to Stripe
 
-Sign in to your [Stripe dashboard](https://dashboard.stripe.com/login).
+1. Sign in to your [Stripe dashboard](https://dashboard.stripe.com/login).
 
-## Step 2: Navigate to the developer portal
+## Step 2: Go to the developer portal
 
-Select **Developers** in the top-right corner of the Stripe dashboard.
+1. Click on the **Developers** button in the top-right corner.
 
-## Step 3: Get your secret key
+    <ThemedImage
+        alt="Stripe dashboard with the Developers button"
+        sources={{
+            light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/setup/stripe-dashboard.png'),
+            dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/setup/stripe-dashboard.png'),
+        }}
+    />
 
-1. Select **API keys** in the left sidebar.
-2. Copy the **Secret key** — this is the token used to authenticate the Stripe connector.
+## Step 3: Retrieve the secret key
+
+1. Go to **API keys** section in the nav-bar.
+
+    <ThemedImage
+        alt="Stripe developer portal with the API keys section"
+        sources={{
+            light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/setup/stripe-developer-portal.png'),
+            dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/setup/stripe-developer-portal.png'),
+        }}
+    />
+
+2. Retrieve the **Secret key**.
+
+    <ThemedImage
+        alt="Stripe API keys with the secret key"
+        sources={{
+            light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/setup/stripe-api-keys.png'),
+            dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/setup/stripe-api-keys.png'),
+        }}
+    />
 
 :::note
-For testing, use the test-mode secret key (prefixed with `sk_test_`). Switch to the live-mode key (prefixed with `sk_live_`) when ready for production.
+If you need to have more granular permissions for the keys, you could setup and use `Restricted keys`.
 :::
 
-:::note
-If you need more granular permissions, use **Restricted keys** instead of the full secret key. Restricted keys let you limit access to specific API resources.
-:::
+## Next steps
 
-:::tip
-Store your secret key securely. Do not commit it to source control. Use Ballerina's `configurable` feature and a `Config.toml` file to supply it at runtime.
-:::
-
-## What's next
-
-- [Action reference](actions.md): Available operations
+- [Action Reference](action-reference.md): Available operations
+- [Example](example.md): Build an integration with the connector

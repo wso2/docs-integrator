@@ -2122,10 +2122,10 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Stripe',
-          link: { type: 'doc', id: 'catalog/finance-accounting/stripe/connector-overview' },
+          link: { type: 'doc', id: 'catalog/finance-accounting/stripe/overview' },
           items: [
             'catalog/finance-accounting/stripe/setup-guide',
-            'catalog/finance-accounting/stripe/actions',
+            'catalog/finance-accounting/stripe/action-reference',
             'catalog/finance-accounting/stripe/example',
           ],
         },
