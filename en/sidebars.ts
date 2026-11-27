@@ -256,6 +256,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Azure Keyvault',
+          link: { type: 'doc', id: 'catalog/security-identity/azure.keyvault/overview' },
+          items: [
+            'catalog/security-identity/azure.keyvault/setup-guide',
+            'catalog/security-identity/azure.keyvault/action-reference',
+            'catalog/security-identity/azure.keyvault/example',
+          ],
+        },
+        {
+          type: 'category',
 
           label: 'Azure Service Bus',
           link: { type: 'doc', id: 'catalog/messaging/asb/azure-service-bus-connector-overview' },
@@ -335,10 +345,10 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'DocuSign Admin',
-          link: { type: 'doc', id: 'catalog/productivity-collaboration/docusign.dsadmin/docusign-admin-connector-overview' },
+          link: { type: 'doc', id: 'catalog/productivity-collaboration/docusign.dsadmin/overview' },
           items: [
             'catalog/productivity-collaboration/docusign.dsadmin/setup-guide',
-            'catalog/productivity-collaboration/docusign.dsadmin/actions',
+            'catalog/productivity-collaboration/docusign.dsadmin/action-reference',
             'catalog/productivity-collaboration/docusign.dsadmin/example',
           ],
         },
@@ -382,6 +392,16 @@ const sidebars: SidebarsConfig = {
             'catalog/developer-tools/github/actions',
             'catalog/developer-tools/github/triggers',
             'catalog/developer-tools/github/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Gitlab',
+          link: { type: 'doc', id: 'catalog/developer-tools/gitlab/overview' },
+          items: [
+            'catalog/developer-tools/gitlab/setup-guide',
+            'catalog/developer-tools/gitlab/action-reference',
+            'catalog/developer-tools/gitlab/example',
           ],
         },
         {
@@ -965,12 +985,42 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Microsoft Dynamics365 Bc',
+          link: { type: 'doc', id: 'catalog/erp-business/microsoft.dynamics365.bc/overview' },
+          items: [
+            'catalog/erp-business/microsoft.dynamics365.bc/setup-guide',
+            'catalog/erp-business/microsoft.dynamics365.bc/action-reference',
+            'catalog/erp-business/microsoft.dynamics365.bc/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Microsoft Excel',
+          link: { type: 'doc', id: 'catalog/productivity-collaboration/microsoft.excel/overview' },
+          items: [
+            'catalog/productivity-collaboration/microsoft.excel/setup-guide',
+            'catalog/productivity-collaboration/microsoft.excel/action-reference',
+            'catalog/productivity-collaboration/microsoft.excel/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Microsoft OneDrive',
           link: { type: 'doc', id: 'catalog/storage-file/microsoft.onedrive/microsoft-onedrive-connector-overview' },
           items: [
             'catalog/storage-file/microsoft.onedrive/setup-guide',
             'catalog/storage-file/microsoft.onedrive/actions',
             'catalog/storage-file/microsoft.onedrive/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Microsoft Outlook Mail',
+          link: { type: 'doc', id: 'catalog/communication/microsoft.outlook.mail/overview' },
+          items: [
+            'catalog/communication/microsoft.outlook.mail/setup-guide',
+            'catalog/communication/microsoft.outlook.mail/action-reference',
+            'catalog/communication/microsoft.outlook.mail/example',
           ],
         },
         {
@@ -2188,21 +2238,41 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Xero Accounts',
+          link: { type: 'doc', id: 'catalog/finance-accounting/xero.accounts/overview' },
+          items: [
+            'catalog/finance-accounting/xero.accounts/setup-guide',
+            'catalog/finance-accounting/xero.accounts/action-reference',
+            'catalog/finance-accounting/xero.accounts/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Xero Bankfeeds',
+          link: { type: 'doc', id: 'catalog/finance-accounting/xero.bankfeeds/overview' },
+          items: [
+            'catalog/finance-accounting/xero.bankfeeds/setup-guide',
+            'catalog/finance-accounting/xero.bankfeeds/action-reference',
+            'catalog/finance-accounting/xero.bankfeeds/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Zoom Meetings',
-          link: { type: 'doc', id: 'catalog/communication/zoom.meetings/zoom-meetings-connector-overview' },
+          link: { type: 'doc', id: 'catalog/communication/zoom.meetings/overview' },
           items: [
             'catalog/communication/zoom.meetings/setup-guide',
-            'catalog/communication/zoom.meetings/actions',
+            'catalog/communication/zoom.meetings/action-reference',
             'catalog/communication/zoom.meetings/example',
           ],
         },
         {
           type: 'category',
           label: 'Zoom Scheduler',
-          link: { type: 'doc', id: 'catalog/communication/zoom.scheduler/zoom-scheduler-connector-overview' },
+          link: { type: 'doc', id: 'catalog/communication/zoom.scheduler/overview' },
           items: [
             'catalog/communication/zoom.scheduler/setup-guide',
-            'catalog/communication/zoom.scheduler/actions',
+            'catalog/communication/zoom.scheduler/action-reference',
             'catalog/communication/zoom.scheduler/example',
           ],
         },
