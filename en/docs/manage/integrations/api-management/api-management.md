@@ -17,4 +17,3 @@ Choreo Integration's API management solution includes features such as:
 
 - **Deploying Integrations as APIs**: You can deploy your integrations as APIs, making them accessible to external applications and services.
 - **API Security**: Choreo Integration supports various security schemes, including `API Key` and `OAuth2`, to protect your APIs from unauthorized access. For more information, refer to the [API Security](./api-security.md) documentation.
-- **Analytics and Monitoring**: You can monitor API usage and performance, gaining insights into user behavior and identifying potential issues. You can refer to the [Usage Dashboards](../../billing/usage-dashboards.md) documentation for more details.
