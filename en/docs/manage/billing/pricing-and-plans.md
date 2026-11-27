@@ -18,7 +18,7 @@ Choreo Cloud bills the resources you use as part of your existing subscription. 
 
 ## Upgrade a plan
 
-To upgrade your subscription plan, contact [Choreo Cloud support](mailto:devant-support@wso2.com).
+To upgrade your subscription plan, contact [Choreo Cloud support](https://choreolabs.com/contact/).
 
 ## What's next
 
