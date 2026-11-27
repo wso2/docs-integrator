@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Deploy from the Cloud Editor
-description: Create and deploy an integration directly in the browser using the Choreo Cloud editor, without installing the Choreo Integrator editor locally.
+description: Deploy an integration to Choreo Cloud directly from the browser-based cloud editor.
 keywords: [choreo integrator, choreo cloud, cloud editor, deploy, browser, development environment]
 slug: /deploy-and-run/deploy-to-wso2-cloud/deploy-from-cloud-editor
 ---
@@ -11,30 +11,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Deploy from the Cloud Editor
 
-Choreo Cloud includes a browser-based editor where you can create and develop integrations without installing anything locally. Once your integration is ready, you can deploy it to Choreo Cloud directly from the editor.
+Choreo Cloud includes a browser-based editor where you can develop integrations without installing anything locally. Once your integration is ready, you can deploy it to Choreo Cloud directly from the editor.
 
 :::info Prerequisites
-- A Choreo Cloud account and a project. Sign up at [Choreo Cloud](https://console.cloud.choreolabs.com) if you don't have one.
+- A Choreo Cloud account, a project, and an integration open in the cloud editor. See [Create a Project](../../develop-and-test/create-workspace/create-a-project.md).
 :::
-
-## Open the cloud editor
-
-1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com) and open your project.
-2. On the project home page, click **Create on Cloud**.
-
-   <ThemedImage
-       alt="Choreo Cloud project home showing the Create on Cloud option"
-       sources={{
-           light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
-           dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/project-home.png'),
-       }}
-   />
-
-   The cloud editor opens in a new browser tab.
-
-## Develop your integration
-
-Develop your integration in the cloud editor as you would in the Choreo Integrator editor. You can add artifacts, configure connections, define data mappers, and more.
 
 ## Save and deploy
 
@@ -49,25 +30,33 @@ Develop your integration in the cloud editor as you would in the Choreo Integrat
        }}
    />
 
-   A **Deploy Integration** tab opens within Choreo Integrator.
-
-3. Select the Git provider, then the organization, and then the repository where the integration will be saved. When you pick the repository, if it is not empty, make sure you provide an empty path.
+3. In the **Create Integration in Choreo Cloud** form, select the Git provider, the organization, and the repository where the integration will be saved. When you pick the repository, if it is not empty, make sure you provide an empty path.
 
    If you don't have a repository ready, click **Create New Repository** to create one.
 
-   If Choreo Cloud does not have access to the repository, click **Connect Newly Created Repository** and grant access. This is required only if you have not already authorized Choreo Cloud to access all repositories in your organization.
+   If Choreo Cloud does not have access to the repository, click **Connect More Repositories** and grant access. This is required only if you have not already authorized Choreo Cloud to access all repositories in your organization.
 
    <ThemedImage
-       alt="Deploy Integration tab showing repository configuration"
+       alt="Create Integration in Choreo Cloud form with Git provider, organization, repository, branch, and path fields"
        sources={{
            light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/adding-source-control.png'),
            dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/adding-source-control.png'),
        }}
    />
 
-4. Click **Deploy**.
+4. Click **Create**.
 
-Choreo Cloud pushes the integration to the repository, builds it, and deploys it to the **Development** environment.
+Choreo Cloud pushes the integration to the repository, builds it, and deploys it to the **Development** environment. The integration now appears in the project's integration listing.
+
+<ThemedImage
+    alt="Project overview listing the deployed Integration as API alongside the integration count by type"
+    sources={{
+        light: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/integration-listing.png'),
+        dark: useBaseUrl('/img/deploy/cloud/deploy-from-cloud-editor/integration-listing.png'),
+    }}
+/>
+
+{/* TODO(v3): didn't verify live whether this Create Integration in Choreo Cloud form appears only the first time you deploy an integration that isn't yet connected to a repository, or every time you click Save and Deploy. Also didn't verify "Connect More Repositories" is the exact live wording (previously documented as "Connect Newly Created Repository"). */}
 
 ## What's next
 
