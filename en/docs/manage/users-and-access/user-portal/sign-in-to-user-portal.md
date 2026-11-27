@@ -47,3 +47,11 @@ In the Choreo Cloud console, you can open the User Portal in a new tab in either
 
 - On the overview page of a published integration, click **Open User Portal**.
 - Under **Integration** > **Configure** > **User Portal**, click **Open portal** on the card of the environment.
+
+    <ThemedImage
+        alt="Configure > User Portal page with the Open portal button highlighted on the Development environment card"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/open-portal-button.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/open-portal-button.png'),
+        }}
+    />

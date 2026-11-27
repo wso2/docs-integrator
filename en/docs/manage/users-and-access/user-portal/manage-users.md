@@ -317,6 +317,15 @@ The role appears on the **Roles** page.
 Users, roles, and role assignments take effect in an environment only after you deploy them. Until then, the **Integration User Portal** project shows **You have changes that aren't in Development yet**.
 
 1. In the **Integration User Portal** project, click **Deploy to Development**.
+
+    <ThemedImage
+        alt="Integration User Portal project overview page with a pending-changes banner and the Deploy to Development button highlighted"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/deploy-to-development-button.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/deploy-to-development-button.png'),
+        }}
+    />
+
 2. In the **Deploy through pipeline** panel, review the changes. Clear the check box of any change that you do not want to deploy.
 
     <ThemedImage
@@ -330,6 +339,24 @@ Users, roles, and role assignments take effect in an environment only after you 
 3. Click **Deploy changes to Development**.
 
 To see the deployed version of each environment, click **Deployment pipeline** in the left navigation menu.
+
+<ThemedImage
+    alt="Project deployment pipeline page with the Development, Production, and Staging environment cards"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/deployment-pipeline-nav.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/deployment-pipeline-nav.png'),
+    }}
+/>
+
+You can also deploy the latest version directly from this page: next to the version, click **Deploy**.
+
+<ThemedImage
+    alt="Project deployment pipeline page with the Deploy button for the latest project version highlighted"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/deploy-pipeline-version.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/deploy-pipeline-version.png'),
+    }}
+/>
 
 ## Add scopes from your own APIs
 
