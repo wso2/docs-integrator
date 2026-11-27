@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 title: "Audit Logs"
-description: "View, retain, and manage access to organization-level audit logs in Choreo Cloud."
+description: "View organization-level audit logs in Choreo Cloud, and control who can see them."
 keywords: [choreo integrator, choreo cloud, audit logs, security, compliance, access control, role, group]
 slug: /manage/audit/audit-logs
 ---
@@ -13,122 +13,63 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 Audit logs, also called audit trails, enhance security, ensure compliance, provide operational insights, and help manage risks.
 
-In Choreo Cloud, an audit log records organization-level user-specific operations performed via the Choreo Cloud Console. It also captures the timestamp and the outcome of the action.
+In Choreo Cloud, an audit log records organization-level operations performed through the console, across products such as the Integration platform and Agent Manager. Each entry shows the product, the user who performed the action, the action itself, its status, and the time it occurred.
 
-Choreo Cloud captures the following user-specific operations as audit logs:
-
-- Project creation, update, and deletion.
-- Integration creation, update, and deletion.
-- Integration promotion initiation.
-- Integration version creation.
-- Integration deployment, redeployment, and undeployment initiation for all integrations.
-- Integration as API access mode update.
-- Integration endpoint creation, update, and deletion.
-- Organization user management.
-- On-premises key management.
-- Project-level configuration management.
-
-Organization administrators are allowed to view audit logs by default. If other members need to access organization-specific audit logs, the administrator can create a role with the relevant permissions and assign it to members. For step-by-step instructions, see [Manage audit log access](#manage-audit-log-access).
+Only members of the **Admin** group can view audit logs. For more information about groups and roles, see [Member Access](../users-and-access/access-control.md).
 
 ## View audit logs
 
-To view audit logs, follow these steps:
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
+2. Open the apps grid at the top left, then under **Manage**, click **Settings**.
+3. In the left navigation menu, click **Audit logs**.
 
-1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com/).
-2. In the Choreo Cloud Console, go to the top navigation menu and click **Organization**.
+The page lists events for the selected time range, newest or oldest first.
 
-    :::tip
-    Currently, you can only view organization-level audit logs.
-    :::
+<ThemedImage
+    alt="Audit Logs page listing events with their time, status, product, user, and action"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/audit/audit-logs-list.png'),
+        dark: useBaseUrl('/img/manage/cloud/audit/audit-logs-list.png'),
+    }}
+/>
 
-3. If you're using Choreo Cloud as a Developer, click **Admin**, then click **Audit Logs**. If you're using Choreo Cloud as a Platform Engineer, click **Observability**, then click **Audit Logs**.
+- **Time range**: Choose **Last hour**, **Last 24 hours**, **Last 7 days**, **Last 30 days**, or a **Custom** range.
+- **Search**: Filter events by text.
+- **UTC** / **Local**: Switch the displayed timestamps between UTC and your browser's local time zone.
+- Click a row to expand its full detail, including the record ID, the user's name, email, and user ID, the exact resource acted on, and a JSON `info` object with action-specific fields.
 
-    To view audit logs based on a specific time range and other requirements, you can apply the necessary filter criteria.
+    <ThemedImage
+        alt="Expanded audit log entry showing recordId, user details, action, status, resource, info, and eventId"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/audit/audit-log-detail.png'),
+            dark: useBaseUrl('/img/manage/cloud/audit/audit-log-detail.png'),
+        }}
+    />
+
+- Click the download icon to export the currently loaded events. Older entries outside what's loaded are not included.
+- Click **Load older logs in this range** to fetch more events within the selected time range.
+
+{/* TODO(v3): didn't verify what "Product" values other than Integration Platform and Agent Manager can appear, or whether every org-level operation is captured - only confirmed the entries this org already had (endpoint test key issuance, API key issuance, and git integration changes). */}
 
 ## Audit log retention
 
-Choreo Cloud retains audit logs for one year and archives them for an additional year. Therefore, the total retention period for audit logs is two years.
+Audit log retention depends on your subscription plan. See [Acceptable Usage Policy](../billing/acceptable-usage-policy.md#security).
 
-## Manage audit log access
+## Give a member access to audit logs
 
-Follow the steps below to create a role with audit log access permissions and assign it to organization members who need access to audit logs.
+Viewing audit logs requires the **Admin** role, which the platform grants only to the **Admin** group. There is no way to grant audit log access on its own without granting every other Admin permission - the predefined groups and roles are fixed, and the console does not support creating a custom role.
 
-:::note
-You must be the organization administrator to perform this action.
-:::
+To give a member access to audit logs, add them to the **Admin** group:
 
-### Step 1: Create a role with audit log access permissions
+1. In **Settings**, click **Members**.
+2. Invite the member, or edit an existing member, and select the **Admin** group.
 
-1. In the Choreo Cloud Console top navigation, click **Organization**.
-2. In the left navigation menu, click **Admin**, then click **Settings**.
-3. On the **Access Control** tab, click **Roles**, then click **+ Create Role**.
-4. Enter a name and description for the role.
+For more information, see [Member Access](../users-and-access/access-control.md).
 
-    <ThemedImage
-        alt="Create Role dialog with name and description fields filled in."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/audit/create-role-to-view-audit-logs.png'),
-            dark: useBaseUrl('/img/manage/cloud/audit/create-role-to-view-audit-logs.png'),
-        }}
-    />
-
-5. Under the **Permissions** list, select **LOG-MANAGEMENT**.
-
-    <ThemedImage
-        alt="Permissions list with the LOG-MANAGEMENT permission selected."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/audit/log-management-permission.png'),
-            dark: useBaseUrl('/img/manage/cloud/audit/log-management-permission.png'),
-        }}
-    />
-
-6. Click **Create**.
-
-### Step 2: Create a group and assign the role and user to the group
-
-1. On the **Access Control** tab, click **Groups**, then click **+ Create Group**.
-2. Enter a name and description for the group, then click **Create**.
-
-    <ThemedImage
-        alt="Create Group dialog with name and description fields filled in."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/audit/create-user-group.png'),
-            dark: useBaseUrl('/img/manage/cloud/audit/create-user-group.png'),
-        }}
-    />
-
-3. On the **Groups** view, on the group you just created, click **Edit**.
-
-    <ThemedImage
-        alt="Groups list with the Edit option highlighted on the new group."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/audit/edit-user-group.png'),
-            dark: useBaseUrl('/img/manage/cloud/audit/edit-user-group.png'),
-        }}
-    />
-
-4. Add the user to the group by clicking **+ Add Users**.
-5. Assign the role you created in [Step 1](#step-1-create-a-role-with-audit-log-access-permissions) to the group.
-
-    <ThemedImage
-        alt="Edit Group panel showing assigned users and the audit log role attached to the group."
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/audit/assign-user-role-to-group.png'),
-            dark: useBaseUrl('/img/manage/cloud/audit/assign-user-role-to-group.png'),
-        }}
-    />
-
-    :::tip
-    If you want to invite one or more users and add them to the Auditor group, follow these steps:
-
-    1. Navigate to the **Users** tab under **Access Control**.
-    2. Click **+ Invite Users**.
-    3. In the **Emails** field, enter the email addresses of users you want to invite.
-    4. Click **Groups** to expand the groups list. Select the group you created.
-    5. Click **Invite**. This sends an invitation email to each address so the users can accept and obtain access to view audit logs.
-    :::
+{/* TODO(v3): didn't verify the exact Members page invite/edit steps live this pass - confirmed only that access-control.md's own Groups tab says "Invite members into a group from Members," and that Admin is the only one of the 5 predefined groups whose role includes the Audit log: View permission (checked Admin and Platform Engineer; Developer, Viewer, and API Publisher are smaller supersets of neither, so almost certainly also lack it, but not individually confirmed). */}
 
 ## What's next
 
+- [Member Access](../users-and-access/access-control.md) — Manage organization members, groups, roles, and assignments.
 - [Runtime logs](../../observe/runtime-logs.md) — Search, filter, and analyze runtime log output for your integrations.
 - [Choreo Cloud overview](../manage.md) — How Choreo Cloud manages your deployed integrations end to end.
