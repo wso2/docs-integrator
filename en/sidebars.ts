@@ -297,6 +297,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Box',
+          link: { type: 'doc', id: 'catalog/storage-file/box/overview' },
+          items: [
+            'catalog/storage-file/box/setup-guide',
+            'catalog/storage-file/box/action-reference',
+            'catalog/storage-file/box/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Candid',
           link: { type: 'doc', id: 'catalog/productivity-collaboration/candid/connector-overview' },
           items: [
