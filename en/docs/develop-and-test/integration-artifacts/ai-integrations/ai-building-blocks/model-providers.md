@@ -1,8 +1,8 @@
 ---
 sidebar_position: 2
 title: Model Providers for LLMs
-description: Reference for every model provider for LLM in WSO2 Integrator, covering create form fields, advanced configurations, defaults, and supported models for the Default WSO2 provider, OpenAI, Azure OpenAI, Anthropic, AWS Bedrock, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.
-keywords: [wso2 integrator, model provider, llm, large language model, ai, anthropic, aws bedrock, openai, azure openai, google vertex, mistral, deepseek, ollama, openrouter, gpt-5, responses api, reasoning effort]
+description: Reference for every model provider for LLM in WSO2 Integrator, covering create form fields, advanced configurations, defaults, and supported models for the Default WSO2 provider, OpenAI, Azure OpenAI, Anthropic, AWS Bedrock, Google Gemini, Google Vertex, Mistral, DeepSeek, Ollama, and OpenRouter.
+keywords: [wso2 integrator, model provider, llm, large language model, ai, anthropic, aws bedrock, openai, azure openai, google gemini, gemini, google vertex, mistral, deepseek, ollama, openrouter, gpt-5, responses api, reasoning effort]
 slug: /develop-and-test/integration-artifacts/ai-integrations/ai-building-blocks/model-providers
 ---
 
@@ -45,7 +45,7 @@ Per-call overrides are not exposed in the form. Anything that varies per request
 - Click **+ Add Model Provider** and the **Select Model Provider** picker opens with a card for each provider type:
 
 <ThemedImage
-    alt="Select Model Provider picker listing Default Model Provider (WSO2), Anthropic Model Provider, Bedrock Model Providers (a group marked 8 options, available in ballerinax/ai.aws.bedrock), Azure OpenAI, Deepseek, Google Vertex, Mistral, and Ollama Model Provider, with one-line descriptions for each."
+    alt="Select Model Provider picker listing Default Model Provider (WSO2), Anthropic Model Provider, Bedrock Model Providers (a group marked 8 options, available in ballerinax/ai.aws.bedrock), Azure OpenAI, Deepseek, Gemini Model Provider, and Google Vertex Model Provider, with one-line descriptions for each."
     sources={{
         light: useBaseUrl('/img/genai/develop/components-v5.1/model-providers/02-select-list-top-v5.1.png'),
         dark: useBaseUrl('/img/genai/develop/components-v5.1/model-providers/02-select-list-top-v5.1.png'),
@@ -71,6 +71,7 @@ Scroll to see the remaining options:
 | **AWS Bedrock** | [`ballerinax/ai.aws.bedrock`](https://central.ballerina.io/ballerinax/ai.aws.bedrock/latest) | AWS credentials or a Bedrock API key | Yes |
 | **Azure OpenAI** | [`ballerinax/ai.azure`](https://central.ballerina.io/ballerinax/ai.azure/latest) | Yes | Yes |
 | **DeepSeek** | [`ballerinax/ai.deepseek`](https://central.ballerina.io/ballerinax/ai.deepseek/latest) | Yes | No |
+| **Google Gemini** | [`ballerinax/ai.google.gemini`](https://central.ballerina.io/ballerinax/ai.google.gemini/latest) | Yes | Yes |
 | **Google Vertex** | [`ballerinax/ai.googleapis.vertex`](https://central.ballerina.io/ballerinax/ai.googleapis.vertex/latest) | OAuth2 / service account | Yes |
 | **Mistral** | [`ballerinax/ai.mistral`](https://central.ballerina.io/ballerinax/ai.mistral/latest) | Yes | No |
 | **Ollama** | [`ballerinax/ai.ollama`](https://central.ballerina.io/ballerinax/ai.ollama/latest) | No (local) | No |
@@ -408,6 +409,37 @@ Scrolling further shows Forwarded, Compression, and Payload Validation, then the
 ### Advanced configurations
 
 Expanding **Advanced Configurations** shows the exact same panel as the [Standard HTTP advanced configurations](#standard-http-advanced-configurations) section above. DeepSeek adds no provider-specific fields here.
+
+## Google Gemini
+
+Gemini is Google's family of multimodal models for text generation, served through the Gemini API (Google AI Studio keys). This provider calls the Gemini API directly with an API key. To reach Gemini models through Google Cloud with OAuth2 or a service account, use [Google Vertex AI](#google-vertex-ai) instead.
+
+Official website: [ai.google.dev](https://ai.google.dev/).
+
+### Create form
+
+The form opens with **API Key** and **Model Type**, followed by the standard inline fields (Service URL, Maximum Tokens, Temperature, HTTP Version, Timeout, Forwarded, Compression, Payload Validation):
+
+| Field | Required | Default | Available values |
+|---|---|---|---|
+| **API Key** | Yes | - | Gemini API key, sent in the `x-goog-api-key` header. Reference a `configurable` in production. |
+| **Model Type** | Yes | - | `gemini-3.6-flash` (recommended default for new integrations), `gemini-3.5-flash`, `gemini-3.5-flash-lite` (recommended low-cost tier), `gemini-3.1-flash-lite` (shutdown scheduled for 2027-05-07; migrate to `gemini-3.5-flash-lite`), `gemini-3.1-pro-preview` (preview; may change or be withdrawn at short notice), `gemini-3-flash-preview` (preview). |
+
+:::info
+The `gemini-2.5-pro`, `gemini-2.5-flash`, and `gemini-2.5-flash-lite` models are closed to new API keys and were scheduled to shut down on 2026-10-16. They are not listed here. Use the `gemini-3.*` models above.
+:::
+
+| Field | Default | Available values | What it controls |
+|---|---|---|---|
+| **Service URL** | `https://generativelanguage.googleapis.com/v1beta` | URL string | Gemini API base URL. Override only for a gateway or proxy that fronts the Gemini API. |
+| **Maximum Tokens** | `65536` | Any positive integer | Upper limit on tokens generated per request. The default is the Gemini 2.5+ output maximum. Thinking tokens count against this limit, so a low value can leave no room for the response. Billing follows the tokens actually produced. |
+| **Temperature** | `()` (omitted) | `0.0`-`2.0` or empty | Sampling temperature. Left unset, the model's own default applies. Google recommends leaving it unset for Gemini 3 models, because values below `1.0` can cause looping or degraded output on complex reasoning tasks. |
+
+Scrolling further shows Timeout, Forwarded, Compression, Payload Validation, then the collapsed **Advanced Configurations** toggle, and finally **Model Provider Name** and **Result Type** (`gemini:ModelProvider`).
+
+### Advanced configurations
+
+Expanding **Advanced Configurations** shows the exact same panel as the [Standard HTTP advanced configurations](#standard-http-advanced-configurations) section above. Gemini adds no provider-specific fields here.
 
 ## Google Vertex AI
 
