@@ -1,62 +1,74 @@
 ---
-sidebar_position: 5
-title: Check and Repair the User Portal
-description: "Check the health of the User Portal in Choreo Integration, repair missing resources, and resolve the blockers that prevent you from enabling or repairing it."
-keywords: [choreo cloud, user portal, health check, repair, blockers, identity platform]
-slug: /manage/users-and-access/user-portal/check-and-repair
+sidebar_position: 3
+title: Check Status
+description: "Check whether the User Portal is enabled and active for an environment in Choreo Integration, and deprovision it if you no longer need it."
+keywords: [choreo cloud, user portal, status, deprovision, identity platform]
+slug: /manage/users-and-access/user-portal/check-status
 ---
 
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Check and Repair the User Portal
+# Check Status
 
-After you enable the User Portal, the **User Portal** page works as a health check. Each time you open the page, it checks every resource that the User Portal needs.
+The **Configure** > **User Portal** page shows the status of the User Portal for each environment in your organization.
 
 ## Check the status of the User Portal
 
 1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
-2. In the top navigation, click the **Organization** list and select your organization.
-3. In the left navigation menu, click **Settings** under **Admin**.
-4. Click the **User Portal** tab.
-
-The page shows one of the following:
-
-- **Enabled, with everything in place**: The User Portal is working. You do not need to do anything.
-- **Enabled, with items no longer in place**: One or more resources are missing or changed. See [Repair the User Portal](#repair-the-user-portal).
-
-To check the status again without reloading the page, click the **Refresh** icon next to the status message.
-
-## Repair the User Portal
-
-If a resource is missing or changed, the page shows that the User Portal is enabled but that some items are no longer in place. For example, someone deleted the resource in Choreo Identity, or removed scopes from the User Portal API resource, its authorization, or one of the default roles. To fix this:
-
-1. In your organization, go to **Admin** > **Settings** > **User Portal**.
-2. Fix any blockers that need a manual change. See [Resolve blockers](#resolve-blockers).
-3. Click **Repair User Portal**.
+2. Open the apps grid at the top left, then under **Categories**, click **Integration**.
 
     <ThemedImage
-        alt="User Portal Overview tab showing a missing application, API authorization, and default roles, with the Repair User Portal button"
+        alt="App menu with Integration highlighted under Categories"
         sources={{
-            light: useBaseUrl('/img/manage/cloud/user-portal/repair.png'),
-            dark: useBaseUrl('/img/manage/cloud/user-portal/repair.png'),
+            light: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-integration-app.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-integration-app.png'),
         }}
     />
 
-The platform recreates the missing resources and adds the scopes that are missing. It does not remove scopes that you added.
+3. In the left navigation menu, click **Configure**.
 
-To enable or repair the User Portal, your role must include the **Manage Organization** permission under **Organization Management**.
+    <ThemedImage
+        alt="Integration app overview page with Configure highlighted in the left navigation menu"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-configure.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-configure.png'),
+        }}
+    />
 
-## Resolve blockers
+4. Click the **User Portal** tab.
 
-The **User Portal** page shows blockers in two cases: before you enable the User Portal, when something prevents the platform from setting it up, and after you enable it, when a resource needs a manual change before you can repair it.
+The page shows a card for each environment that has the User Portal enabled:
 
-To see the blockers, go to **Admin** > **Settings** > **User Portal** in your organization. Each blocker shows the item that the User Portal needs, the current problem, and how to fix it. Fix the blockers, then click the **Refresh** icon to refresh the status.
+- **Setting up** — the platform is still provisioning the User Portal for that environment.
+- **Active**, with an **Open portal** button — the User Portal is ready to use.
 
-The following table lists the blockers that the page can show:
+<ThemedImage
+    alt="Configure > User Portal page with a card for the Development environment showing Active status, Open portal button, and the kebab menu"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/user-portal-status.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/user-portal-status.png'),
+    }}
+/>
 
-| Blocker | Common causes | How to fix |
-|---|---|---|
-| **Username Validation** | Your Choreo Identity organization does not validate usernames as email addresses. The platform does not change this setting, because the change can affect existing users whose usernames are not email addresses. | In Choreo Identity, go to **Login & Registration** > **Username Validation** and set usernames to be email addresses. Then click the **Refresh** icon. |
-| **Trusted Token Issuer**, **User Portal Application**, or **User Portal API Resource** | A resource with the same name already exists in Choreo Identity, and the User Portal did not create it. | Rename or remove the resource in Choreo Identity, then click the **Refresh** icon. |
-| **User Portal API Authorization**, **WSO2 Cloud Admin Role**, or **WSO2 Cloud Reader Role** | The resource is missing, or it lacks some of the scopes that the User Portal needs. | Click **Repair User Portal**. |
+{/* TODO(v3): didn't observe a Setting up card or a failure/blocker state live this pass - only confirmed Active. Don't know whether a failed setup shows an error message or how to resolve one. */}
+
+## Deprovision the User Portal
+
+Deprovisioning removes the User Portal for an environment, for the whole organization.
+
+1. On the environment's card, click the **⋮** menu, then click **Deprovision**.
+
+    <ThemedImage
+        alt="Configure > User Portal page with the kebab menu open and Deprovision highlighted"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/deprovision-button.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/deprovision-button.png'),
+        }}
+    />
+
+2. Confirm the action.
+
+{/* TODO(v3): didn't trigger this live - don't know whether a confirmation dialog appears, what happens to integrations already published to that environment's User Portal, or whether existing User Portal users and their access are removed. */}
+
+{/* TODO(v3): the v2 version of this page described a "Repair User Portal" button and a table of blockers (Username Validation, Trusted Token Issuer, WSO2 Cloud Admin Role, and others) for fixing a User Portal whose resources had drifted. The live Configure > User Portal page's kebab menu has only Copy portal link and Deprovision - no Repair action or blocker list. That v2 mechanism appears to no longer exist in v3; re-check with the product team before assuming the User Portal has no equivalent recovery path. */}

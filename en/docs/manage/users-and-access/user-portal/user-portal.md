@@ -12,100 +12,85 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # User Portal
 
-{/* TODO(v3): this page still describes the User Portal working through the Developer Portal, which is not in v3. Confirm the replacement mechanism and rewrite the prerequisites and resources table. */}
-
 The User Portal is a separate portal that exposes your integrations to external users. These users are the people your organization serves, not the developers who build integrations. In the User Portal, they can:
 
 - Chat with the AI agents that you publish.
 - Run the automations that you publish, with or without runtime arguments.
 
-Users sign in to the User Portal through your organization in Choreo Identity & Access Management, which is the user store for the User Portal. Users do not need access to the Choreo Cloud console. You create users and roles, and assign permissions to roles, from the Choreo Cloud console. The roles of a user control which integrations the user can see and what the user can do with them. See [Manage users in the User Portal](manage-users.md).
+Users sign in to the User Portal through your organization in Choreo Identity & Access Management, which is the user store for the User Portal. Users do not need access to the Choreo Cloud console. You create users and roles, and assign permissions to roles, from the Choreo Cloud console. The roles of a user control which integrations the user can see and what the user can do with them. See [Manage Users](manage-users.md).
 
-You enable the User Portal for each environment. After that, you choose which integrations to show in it. See [Publish an integration to the User Portal](publish-to-user-portal.md).
+You enable the User Portal once per environment, for the whole organization. After that, you choose which integrations to show in it, on each integration's own overview page. See [Publish an Integration](publish-to-user-portal.md).
 
 ## Prerequisites
 
-Before you enable the User Portal, make sure of the following:
+- **You have the required permission.** Your role must include the **Manage Organization** permission under **Organization Management**, assigned at the organization level. For more information about roles and permissions, see [Member Access](../access-control.md).
+- **The project is on the organization's default deployment pipeline.** Only integrations in a project that uses the **default** promotion pipeline can be published to the User Portal. If your project uses a different pipeline, [switch it from the project's **Settings**](../../environments/configure-promotion-pipelines.md#assign-a-pipeline-to-a-project) first.
 
-- **You have the required permission.** Your role must include the **Manage Organization** permission under **Organization Management**, assigned at the organization level. For more information about roles and permissions, see [Members and Access Control](../access-control.md).
-- **Your Choreo Identity organization validates usernames as email addresses.** The platform adds members of your Choreo Cloud organization to Choreo Identity with their email address as the username. You must change this setting yourself. See [Resolve blockers](check-and-repair.md#resolve-blockers).
-- **The Developer Portal uses your Choreo Identity organization as its key manager.** The User Portal calls your AI agents through the Developer Portal. It works only when the Developer Portal trusts the Choreo Identity organization that belongs to your Choreo Cloud organization as its key manager. Choreo Identity then issues the keys and tokens, and the Developer Portal accepts them. If this is not the case, the **User Portal** page shows a blocker. You can fix most key manager blockers from that page. See [Resolve blockers](check-and-repair.md#resolve-blockers).
-- **No other resources use the names that the User Portal needs.** If a resource with the same name already exists in Choreo Identity or in the Developer Portal, and the User Portal did not create it, the **User Portal** page shows a blocker. You must rename or remove that resource before you continue.
-
-:::info
-When you create an organization in Choreo Cloud, the platform creates an organization with the same name in Choreo Identity. The User Portal uses that organization.
-:::
-
-## What the platform provisions for you
-
-When you enable the User Portal, the platform creates the following resources on your behalf. You do not need to create them manually.
-
-| Resource | Name | Where it is created | Purpose |
-|---|---|---|---|
-| **Trusted token issuer** | `Integration Platform STS` | Your Choreo Identity organization | Lets Choreo Identity trust tokens that the Integration Platform issues. |
-| **User Portal application** | `User Portal` | Your Choreo Identity organization | The application that users sign in to. |
-| **User Portal API resource** | `User Portal APIs` | Your Choreo Identity organization | Defines the scopes that control what a user can do in the User Portal. See [Scopes](manage-users.md#scopes). |
-| **API authorization** | `User Portal APIs` | Your Choreo Identity organization | Authorizes the User Portal application for every scope of the User Portal API resource. |
-| **Developer Portal application** | `User Portal` | The Developer Portal | Subscribes to the APIs of the AI agents that you publish, so that the User Portal can call them. |
-
-If the Developer Portal has no key manager, you can also let the platform configure your Choreo Identity organization as its key manager. The platform does this only after you confirm it. See [Resolve blockers](check-and-repair.md#resolve-blockers).
+{/* TODO(v3): the v2 prerequisites around Choreo Identity username validation, Developer Portal key manager trust, and resource-name collisions were tied to a Developer Portal-based mechanism that no longer exists. Re-verify whether any equivalent blocker still applies to the v3 flow below before restoring that content. */}
 
 ## Enable the User Portal
 
+The User Portal is enabled per environment (for example, Development), for the whole organization — not per integration. Every integration in that environment can then be individually published to it. Enabling it requires the **Manage Organization** permission, so this is an organization administrator's task.
+
 1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
-2. In the top navigation, click the organization list and select your organization.
-3. Click the app menu at the top left, then under **Categories**, click **Integration**.
+2. In the left navigation menu of the Integration app, click **Configure**.
+3. Click the **User Portal** tab.
+4. Click **Enable User Portal**, select the **Environment**, then click **Enable**.
 
     <ThemedImage
-        alt="App menu with Integration highlighted under Categories"
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/user-portal/select-integration.png'),
-            dark: useBaseUrl('/img/manage/cloud/user-portal/select-integration.png'),
-        }}
-    />
-
-4. In the left navigation menu, click **Configure**.
-5. Click the **User Portal** tab.
-
-    <ThemedImage
-        alt="User Portal tab with the Enable User Portal button"
-        sources={{
-            light: useBaseUrl('/img/manage/cloud/user-portal/enable-ready.png'),
-            dark: useBaseUrl('/img/manage/cloud/user-portal/enable-ready.png'),
-        }}
-    />
-
-6. Click **Enable User Portal**.
-7. In the **Enable User Portal** dialog, select an **Environment**.
-
-    <ThemedImage
-        alt="Enable User Portal dialog with the Environment list"
+        alt="Enable User Portal dialog with an Environment dropdown set to Production"
         sources={{
             light: useBaseUrl('/img/manage/cloud/user-portal/enable-confirm.png'),
             dark: useBaseUrl('/img/manage/cloud/user-portal/enable-confirm.png'),
         }}
     />
 
-8. Click **Enable**.
-
-The **User Portal** tab shows a card for the environment. While the platform sets up the User Portal, the card shows **Setting up**. When the platform finishes, the card shows **Active**.
+The **User Portal** page shows a card for the environment. While the platform sets up the User Portal, the card shows **Setting up**. When the platform finishes, the card shows **Active** with an **Open portal** button.
 
 <ThemedImage
-    alt="User Portal tab with an Active User Portal card for the Development environment and the Open portal button"
+    alt="Configure > User Portal page with a card for the Development environment showing Active status and an Open portal button"
     sources={{
-        light: useBaseUrl('/img/manage/cloud/user-portal/enabled-healthy.png'),
-        dark: useBaseUrl('/img/manage/cloud/user-portal/enabled-healthy.png'),
+        light: useBaseUrl('/img/manage/cloud/user-portal/user-portal-status.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/user-portal-status.png'),
     }}
 />
 
-To open the User Portal of the environment in a new tab, click **Open portal** on its card.
+{/* TODO(v3): didn't observe a Setting up card live this pass - only confirmed the eventual Active state. */}
 
-You can now [add users](manage-users.md) and [publish integrations to the User Portal](publish-to-user-portal.md).
+### Enable it from an integration instead
+
+If you have an unpublished integration open, you can reach the same **Configure** > **User Portal** page from there instead of navigating to **Configure** directly:
+
+1. Open the integration and wait until its environment card shows **Active**.
+2. On that card, click **Share with your users**.
+3. In the **About the User Portal** dialog, click **Enable User Portal**. This takes you to **Configure** > **User Portal**, scoped to that integration's environment. Continue from step 4 above.
+
+    <ThemedImage
+        alt="About the User Portal dialog with an Enable User Portal button"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/about-user-portal-dialog.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/about-user-portal-dialog.png'),
+        }}
+    />
+
+You can now [add users](manage-users.md) and [publish integrations](publish-to-user-portal.md).
+
+## What the platform provisions for you
+
+Enabling the User Portal for an environment creates an **Integration User Portal** project in Identity & Access Management, with a **User Portal API** resource server already defining the scopes that control what a user can do in the User Portal. See [Scopes](manage-users.md#scopes).
+
+<ThemedImage
+    alt="Integration User Portal project in Choreo Identity & Access Management"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/integration-user-portal-project.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/integration-user-portal-project.png'),
+    }}
+/>
 
 ## What's next
 
-- [Publish an integration to the User Portal](publish-to-user-portal.md)
-- [Manage users in the User Portal](manage-users.md)
-- [Sign in to the User Portal](sign-in-to-user-portal.md)
-- [Use the User Portal](use-user-portal.md)
-- [Check and repair the User Portal](check-and-repair.md)
+- [Publish an Integration](publish-to-user-portal.md) — Choose which AI agents and automations appear in the User Portal.
+- [Manage Users](manage-users.md) — Create users and roles, and assign permissions to roles.
+- [Sign In](sign-in-to-user-portal.md) — Sign in with a User Portal account to use the integrations published to you.
+- [Run Available Integrations](use-user-portal.md) — Chat with AI agents and run automations.
+- [Check Status](check-and-repair.md) — Check whether the User Portal is active for an environment.

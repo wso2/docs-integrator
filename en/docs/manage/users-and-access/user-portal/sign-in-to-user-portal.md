@@ -1,6 +1,8 @@
 ---
-sidebar_position: 3
-title: Sign In to the User Portal
+sidebar_position: 4
+sidebar_custom_props:
+  separatorBefore: "Use the Portal"
+title: Sign In
 description: "Sign in to the User Portal of a Choreo Integration organization with the username and password that your organization gave you."
 keywords: [choreo cloud, user portal, sign in, external users, ai agents, automations]
 slug: /manage/users-and-access/user-portal/sign-in
@@ -9,7 +11,7 @@ slug: /manage/users-and-access/user-portal/sign-in
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Sign In to the User Portal
+# Sign In
 
 The User Portal shows the integrations that an organization [publishes to it](publish-to-user-portal.md). To use them, you sign in to the User Portal of that organization.
 
@@ -21,7 +23,7 @@ If you do not have a User Portal account, or you cannot sign in, contact the org
 
 What you can see and do after you sign in depends on your roles in the organization. See [Scopes](manage-users.md#scopes).
 
-## Sign in to the User Portal
+## Sign in
 
 1. Open the User Portal link that your organization gave you.
 
@@ -37,7 +39,15 @@ What you can see and do after you sign in depends on your roles in the organizat
         }}
     />
 
-After you sign in, the User Portal opens on the **Overview** page. It lists the integrations that the organization published and that your roles let you see. See [Use the User Portal](use-user-portal.md).
+After you sign in, the User Portal opens on the **Overview** page. It lists the integrations that the organization published and that your roles let you see. See [Run Available Integrations](use-user-portal.md).
+
+<ThemedImage
+    alt="User Portal Overview page with the Waiting on You and Your Integrations sections"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/user-portal-overview.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/user-portal-overview.png'),
+    }}
+/>
 
 ## Open the User Portal from the console
 
@@ -46,6 +56,10 @@ In the Choreo Cloud console, you can open the User Portal in a new tab in either
 - On the overview page of a published integration, click **Open User Portal**.
 - Under **Integration** > **Configure** > **User Portal**, click **Open portal** on the card of the environment.
 
-## What's next
-
-- [Use the User Portal](use-user-portal.md) to chat with AI agents and run automations.
+    <ThemedImage
+        alt="Configure > User Portal page with the Open portal button highlighted on the Development environment card"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/open-portal-button.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/open-portal-button.png'),
+        }}
+    />

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Manage Users in the User Portal
+title: Manage Users
 description: "Create User Portal users and roles, assign permissions to roles, and assign roles to users from the Choreo Integration console."
 keywords: [choreo cloud, user portal, users, roles, permissions, scopes, external users, identity and access management]
 slug: /manage/users-and-access/user-portal/manage-users
@@ -9,14 +9,14 @@ slug: /manage/users-and-access/user-portal/manage-users
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Manage Users in the User Portal
+# Manage Users
 
 When you [enable the User Portal](user-portal.md#enable-the-user-portal), the platform creates a project named **Integration User Portal** in **Identity & Access Management**. Users sign in to the User Portal with an account in that project. You create users and roles, and assign permissions to roles, in that project. Changes take effect in an environment after you [deploy them](#deploy-your-changes).
 
 The roles of a user decide what the user can do in the User Portal. Each role holds a set of permissions, which are the scopes that are added to the user's token. The User Portal shows an integration only if the user has the view scope for its type. See [Scopes](#scopes).
 
 :::info
-To manage User Portal users and roles in the Choreo Cloud console, your role must include the **Manage Organization** permission under **Organization Management**, assigned at the organization level. For more information about roles and permissions, see [Members and Access Control](../access-control.md).
+To manage User Portal users and roles in the Choreo Cloud console, your role must include the **Manage Organization** permission under **Organization Management**, assigned at the organization level. For more information about roles and permissions, see [Member Access](../access-control.md).
 :::
 
 ## How access works
@@ -31,6 +31,15 @@ When you [enable the User Portal](user-portal.md#enable-the-user-portal), the pl
 | `automation:trigger` | Run automations in the organization. | No |
 | `aiagent:view` | View AI agents in the organization. | Yes |
 | `aiagent:invoke` | Chat with AI agents in the organization. | No |
+| `workflow:view` | View workflows in the organization. | Yes |
+| `workflow_mgt:view_workflows` | View workflow definitions. | No |
+| `workflow_mgt:view_human_tasks` | View human tasks raised by workflows. | No |
+| `workflow_mgt:manage_workflows` | Manage workflow definitions. | No |
+| `workflow_mgt:manage_human_tasks` | Act on human tasks raised by workflows. | No |
+
+Each group (`automation`, `aiagent`, `workflow`, `workflow_mgt`) is also itself a selectable, broader scope in addition to its individual sub-scopes above - that's why the console's own "Assign permissions" step shows 13 total scopes on the User Portal API (4 groups + 9 sub-scopes), not just the 9 listed here.
+
+{/* TODO(v3): the workflow and workflow_mgt scopes are confirmed to exist on the User Portal API resource server, matching the "act on workflow tasks" capability mentioned in the console's own enable dialog, but publishing a durable-workflow integration to the User Portal hasn't been verified live this pass - only automations and AI agents were tested end to end. What exactly the broader group-level scope (e.g. plain `aiagent` vs `aiagent:view`/`aiagent:invoke`) grants on its own is also unverified. */}
 
 The User Portal uses these scopes as follows:
 
@@ -38,7 +47,7 @@ The User Portal uses these scopes as follows:
 - **To run an automation, a user needs `automation:trigger`.** Without this scope, the user can see the automation but cannot run it.
 
 :::note
-By default, an AI agent does not check the `aiagent:invoke` scope, so any user who can see the agent can chat with it. To make the agent require this scope, change the security settings of the agent's chat endpoint: select the **OAuth2** security scheme, then assign the `aiagent:invoke` scope as a permission to the `/chat` resource. See [Configure security for an integration as an API](../../integrations/api-management/api-security.md#configure-security-for-an-integration-as-an-api).
+Publishing an AI agent to the User Portal requires OAuth2 security to be turned on for the agent first - see [Publish an Integration](publish-to-user-portal.md#prerequisites). The `aiagent:invoke` scope presumably gates chat access once that's in place, the same way `automation:trigger` gates running an automation, but this hasn't been verified live: every AI agent tested this pass was blocked before reaching that point. The previous version of this note linked to the Integration-as-API security configuration page, but that page's "Configure security" button doesn't appear anywhere on an AI Agent component - it's specific to Integration-as-API components.
 :::
 
 You can also give users scopes that you define. See [Add scopes from your own APIs](#add-scopes-from-your-own-apis).
@@ -56,7 +65,24 @@ Changes to the permissions of a role can take up to 10 minutes to appear in User
 1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
 2. In the top navigation, click the organization list and select your organization.
 3. Click the app menu at the top left, then under **Categories**, click **Identity & Access Management**.
-4. Click the **Integration User Portal** project.
+
+    <ThemedImage
+        alt="App menu with Identity & Access Management highlighted under Categories"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-iam.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-iam.png'),
+        }}
+    />
+
+4. Click the project list at the top, then select the **Integration User Portal** project.
+
+    <ThemedImage
+        alt="Choreo Identity & Access Management overview page with the project list highlighted, set to Integration User Portal"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/iam-project-switcher.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/iam-project-switcher.png'),
+        }}
+    />
 
 ## Give a user access to the User Portal
 
@@ -67,7 +93,7 @@ To let a new user sign in to the User Portal and use your integrations, do the f
 3. [Assign the role to the user](#assign-roles-to-a-user).
 4. [Deploy your changes](#deploy-your-changes).
 
-The user can then [sign in to the User Portal](sign-in-to-user-portal.md) with their username and password.
+The user can then [sign in](sign-in-to-user-portal.md) with their username and password.
 
 ## Manage users
 
@@ -114,7 +140,7 @@ The status of a user is one of the following:
 
 4. Click **Create user**.
 
-The user has no roles yet. [Assign roles to the user](#assign-roles-to-a-user), then [deploy your changes](#deploy-your-changes). The user can then sign in to the User Portal with their username and password. See [Sign in to the User Portal](sign-in-to-user-portal.md).
+The user has no roles yet. [Assign roles to the user](#assign-roles-to-a-user), then [deploy your changes](#deploy-your-changes). The user can then sign in to the User Portal with their username and password. See [Sign In](sign-in-to-user-portal.md).
 
 ### Assign roles to a user
 
@@ -197,14 +223,41 @@ In the **Integration User Portal** project, click **Roles** in the left navigati
 ### Create a role
 
 1. In the **Integration User Portal** project, click **Roles** in the left navigation menu.
+
+    <ThemedImage
+        alt="Integration User Portal project overview page with Roles highlighted in the left navigation menu"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-roles.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/navigate-to-roles.png'),
+        }}
+    />
+
 2. Click **Add role**.
+
+    <ThemedImage
+        alt="Roles page with no roles yet and the Add role button highlighted"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/add-role-button.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/add-role-button.png'),
+        }}
+    />
+
 3. In **Role name**, enter a name for the role, then click **Continue**.
+
+    <ThemedImage
+        alt="Role name step with the role name PortalUser entered"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/role-name-step.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/role-name-step.png'),
+        }}
+    />
+
 4. Under **Assign permissions**, select the permissions for the role. The scopes of the User Portal are under **User Portal API**. See [Scopes](#scopes).
 
     To select all the permissions in a group, select the check box of the group.
 
     <ThemedImage
-        alt="Assign permissions step with all the User Portal API scopes selected"
+        alt="Assign permissions step with the automation and aiagent groups selected under User Portal API"
         sources={{
             light: useBaseUrl('/img/manage/cloud/user-portal/create-role.png'),
             dark: useBaseUrl('/img/manage/cloud/user-portal/create-role.png'),
@@ -212,6 +265,16 @@ In the **Integration User Portal** project, click **Roles** in the left navigati
     />
 
 5. Click **Continue**.
+
+The role appears on the **Roles** page.
+
+<ThemedImage
+    alt="Roles page with the newly created PortalUser role"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/role-created.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/role-created.png'),
+    }}
+/>
 
 ### Change the permissions of a role
 
@@ -254,6 +317,15 @@ In the **Integration User Portal** project, click **Roles** in the left navigati
 Users, roles, and role assignments take effect in an environment only after you deploy them. Until then, the **Integration User Portal** project shows **You have changes that aren't in Development yet**.
 
 1. In the **Integration User Portal** project, click **Deploy to Development**.
+
+    <ThemedImage
+        alt="Integration User Portal project overview page with a pending-changes banner and the Deploy to Development button highlighted"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/user-portal/deploy-to-development-button.png'),
+            dark: useBaseUrl('/img/manage/cloud/user-portal/deploy-to-development-button.png'),
+        }}
+    />
+
 2. In the **Deploy through pipeline** panel, review the changes. Clear the check box of any change that you do not want to deploy.
 
     <ThemedImage
@@ -267,6 +339,24 @@ Users, roles, and role assignments take effect in an environment only after you 
 3. Click **Deploy changes to Development**.
 
 To see the deployed version of each environment, click **Deployment pipeline** in the left navigation menu.
+
+<ThemedImage
+    alt="Project deployment pipeline page with the Development, Production, and Staging environment cards"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/deployment-pipeline-nav.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/deployment-pipeline-nav.png'),
+    }}
+/>
+
+You can also deploy the latest version directly from this page: next to the version, click **Deploy**.
+
+<ThemedImage
+    alt="Project deployment pipeline page with the Deploy button for the latest project version highlighted"
+    sources={{
+        light: useBaseUrl('/img/manage/cloud/user-portal/deploy-pipeline-version.png'),
+        dark: useBaseUrl('/img/manage/cloud/user-portal/deploy-pipeline-version.png'),
+    }}
+/>
 
 ## Add scopes from your own APIs
 

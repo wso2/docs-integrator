@@ -1,6 +1,6 @@
 ---
-sidebar_position: 4
-title: Use the User Portal
+sidebar_position: 5
+title: Run Available Integrations
 description: "Find the integrations that your organization publishes to the User Portal, chat with AI agents, and run automations."
 keywords: [choreo cloud, user portal, ai agents, chat, automations, runtime arguments]
 slug: /manage/users-and-access/user-portal/use
@@ -9,9 +9,9 @@ slug: /manage/users-and-access/user-portal/use
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
-# Use the User Portal
+# Run Available Integrations
 
-After you [sign in to the User Portal](sign-in-to-user-portal.md), you see the integrations that your organization published to you. Your roles decide which integrations you see and what you can do with them. If you do not see an integration that you expect, or a button is disabled, contact your organization's administrator. See [Scopes](manage-users.md#scopes). This page explains how to find an integration and how to use each type:
+After you [sign in](sign-in-to-user-portal.md), you see the integrations that your organization published to you. Your roles decide which integrations you see and what you can do with them. If you do not see an integration that you expect, or a button is disabled, contact your organization's administrator. See [Scopes](manage-users.md#scopes). This page explains how to find an integration and how to use each type:
 
 - [Chat with an AI agent](#chat-with-an-ai-agent)
 - [Run an automation](#run-an-automation)
