@@ -23,6 +23,16 @@ const sidebars: SidebarsConfig = {
         // ── Connector categories (alphabetical) ──
         {
           type: 'category',
+          label: 'Adobe Analytics',
+          link: { type: 'doc', id: 'catalog/marketing-social/adobe.analytics/overview' },
+          items: [
+            'catalog/marketing-social/adobe.analytics/setup-guide',
+            'catalog/marketing-social/adobe.analytics/action-reference',
+            'catalog/marketing-social/adobe.analytics/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'AI',
           link: { type: 'doc', id: 'catalog/ai-ml/ai/ai-overview' },
           items: [
@@ -277,6 +287,26 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Bitbucket',
+          link: { type: 'doc', id: 'catalog/developer-tools/bitbucket/overview' },
+          items: [
+            'catalog/developer-tools/bitbucket/setup-guide',
+            'catalog/developer-tools/bitbucket/action-reference',
+            'catalog/developer-tools/bitbucket/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Box',
+          link: { type: 'doc', id: 'catalog/storage-file/box/overview' },
+          items: [
+            'catalog/storage-file/box/setup-guide',
+            'catalog/storage-file/box/action-reference',
+            'catalog/storage-file/box/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Candid',
           link: { type: 'doc', id: 'catalog/productivity-collaboration/candid/connector-overview' },
           items: [
@@ -340,6 +370,16 @@ const sidebars: SidebarsConfig = {
             'catalog/productivity-collaboration/docusign.dsadmin/setup-guide',
             'catalog/productivity-collaboration/docusign.dsadmin/action-reference',
             'catalog/productivity-collaboration/docusign.dsadmin/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'DocuSign Monitor',
+          link: { type: 'doc', id: 'catalog/productivity-collaboration/docusign.monitor/overview' },
+          items: [
+            'catalog/productivity-collaboration/docusign.monitor/setup-guide',
+            'catalog/productivity-collaboration/docusign.monitor/action-reference',
+            'catalog/productivity-collaboration/docusign.monitor/example',
           ],
         },
         {
@@ -915,6 +955,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Jira Servicemanagement',
+          link: { type: 'doc', id: 'catalog/productivity-collaboration/jira.servicemanagement/overview' },
+          items: [
+            'catalog/productivity-collaboration/jira.servicemanagement/setup-guide',
+            'catalog/productivity-collaboration/jira.servicemanagement/action-reference',
+            'catalog/productivity-collaboration/jira.servicemanagement/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'JMS',
           link: { type: 'doc', id: 'catalog/messaging/java.jms/jms-connector-overview' },
           items: [
@@ -1197,6 +1247,26 @@ const sidebars: SidebarsConfig = {
             'catalog/hrms/peoplehr/setup-guide',
             'catalog/hrms/peoplehr/actions',
             'catalog/hrms/peoplehr/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Plaid',
+          link: { type: 'doc', id: 'catalog/finance-accounting/plaid/overview' },
+          items: [
+            'catalog/finance-accounting/plaid/setup-guide',
+            'catalog/finance-accounting/plaid/action-reference',
+            'catalog/finance-accounting/plaid/example',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Power Bi',
+          link: { type: 'doc', id: 'catalog/productivity-collaboration/power.bi/overview' },
+          items: [
+            'catalog/productivity-collaboration/power.bi/setup-guide',
+            'catalog/productivity-collaboration/power.bi/action-reference',
+            'catalog/productivity-collaboration/power.bi/example',
           ],
         },
         {
@@ -2082,10 +2152,10 @@ const sidebars: SidebarsConfig = {
         {
           type: 'category',
           label: 'Stripe',
-          link: { type: 'doc', id: 'catalog/finance-accounting/stripe/connector-overview' },
+          link: { type: 'doc', id: 'catalog/finance-accounting/stripe/overview' },
           items: [
             'catalog/finance-accounting/stripe/setup-guide',
-            'catalog/finance-accounting/stripe/actions',
+            'catalog/finance-accounting/stripe/action-reference',
             'catalog/finance-accounting/stripe/example',
           ],
         },

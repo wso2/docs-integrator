@@ -1,3 +1,9 @@
+---
+connector: true
+connector_name: "stripe"
+title: "Example"
+---
+
 import ThemedImage from '@theme/ThemedImage';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 
@@ -5,24 +11,24 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 ## What you'll build
 
-Build a WSO2 Integrator automation that connects to Stripe, retrieves a list of customers using the Stripe API, and logs the result. This integration uses configurable variables to securely manage API credentials at runtime.
+This integration connects to Stripe and retrieves the balance of the Stripe account. An automation entry point runs the operation once and logs the returned balance.
 
 **Operations used:**
-- **get** : Retrieves a list of customers from your Stripe account, sorted by creation date with the most recent customers appearing first.
+- **Get Balance** : Retrieves the current account balance
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    A((User)) --> B[Get Operation]
+    A((User)) --> B[Get Balance]
     B --> C[Stripe Connector]
-    C --> D((Stripe API))
+    C --> D[(Stripe API)]
 ```
 
 ## Prerequisites
 
-- A Stripe account with API access
-- A Stripe API key (Bearer token)
+- A Stripe account. A test-mode account is enough.
+- The secret key from the Stripe dashboard (**Developers**, then **API keys**). Follow the [Setup Guide](setup-guide.md) to get it.
 
 ## Setting up the Stripe integration
 
@@ -30,96 +36,106 @@ flowchart LR
 
 ## Adding the Stripe connector
 
-### Step 1: Open the add connection panel
+### Step 1: Open the connector palette
 
-Open the WSO2 Integrator side panel and hover over the **Connections** tree item, then select the **+** button that appears to open the **Add Connection** palette.
+Hover over **Connections** in the project tree and select **Add Connection** (**+**).
 
 <ThemedImage
-    alt="Stripe connector palette open with search field before any selection"
+    alt="Stripe connector palette open before selection"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_01_palette.png'),
-        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_01_palette.png'),
+        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_01_palette.png'),
+        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_01_palette.png'),
     }}
 />
 
-### Step 2: Add an automation entry point
+### Step 2: Select the Stripe connector
 
-1. In the WSO2 Integrator side panel, select **Add Artifact**.
-2. Select **Automation** as the entry point type.
-3. Name the automation `main`.
+1. Enter `stripe` in the search field.
+2. Select the **Stripe** connector card.
 
 ## Configuring the Stripe connection
 
-### Step 3: Configure the connection form
+### Step 3: Bind the connection parameters to configurable variables
 
-In the connection form, bind each field to a configurable variable:
+Bind each connection field to a configurable variable. Use the **Configurables** tab of the field's helper panel to create each configurable.
 
-- **Connection Name** : The display name for this connection instance
-- **token** : The Stripe Bearer token, bound to the `stripeToken` configurable variable
+- **Config** : Connection settings, with the secret key set in the `auth` record. Switch the field to **Expression** and enter `{auth: {token: stripeSecretKey}}`.
+- **Service Url** : Set it to the `stripeServiceUrl` configurable.
 
 <ThemedImage
-    alt="Stripe connection form fully filled with all parameters before saving"
+    alt="Stripe connection form with all parameters bound before saving"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_02_connection_form.png'),
-        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_02_connection_form.png'),
+        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_02_connection_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_02_connection_form.png'),
     }}
 />
 
 ### Step 4: Save the connection
 
-Select **Save** to create the connection. The connection appears in the **Connections** section of the WSO2 Integrator side panel.
+Select **Save Connection** and verify that **stripeClient** appears under **Connections** in the project tree and on the design canvas.
 
 <ThemedImage
-    alt="Stripe Connections panel showing stripeClient entry after saving"
+    alt="Stripe connection visible after saving"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_03_connections_list.png'),
-        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_03_connections_list.png'),
+        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_03_connections_list.png'),
+        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_03_connections_list.png'),
     }}
 />
 
 ### Step 5: Set actual values for your configurables
 
-1. In the left panel, select **Configurations**.
-2. Set a value for each configurable listed below.
+1. Select **Configurations** at the bottom of the project tree.
+2. Enter a value for each configurable listed below before you run the integration.
 
-- **stripeToken** (string) : Your Stripe API key, obtainable from the Stripe Dashboard under **Developers > API keys**
+- **stripeServiceUrl** (`string`) : Stripe API base URL. Defaults to `https://api.stripe.com/v1`.
+- **stripeSecretKey** (`string`) : Your Stripe secret key. Use a test-mode key (starting with `sk_test_`) while you experiment.
 
-## Configuring the Stripe get operation
+## Configuring the Stripe Get Balance operation
 
-### Step 6: Expand the connection and select the operation
+### Step 6: Add an automation entry point
 
-1. Select the **+** button on the edge between the **Start** node and the **Error Handler** node.
-2. In the step selection panel, locate the **Connections** section.
-3. Expand the **stripeClient** connection to reveal all available Stripe operations.
+1. Select **Add Artifact** on the design canvas.
+2. Select **Automation**.
+3. Select **Create** to accept the settings.
+
+### Step 7: Expand the connection and configure the Get Balance operation
+
+1. Select the **+** between **Start** and **Error Handler** in the automation flow.
+2. Expand **stripeClient** under **Connections** to display its operations.
 
 <ThemedImage
-    alt="Stripe connection node expanded showing all available operations before selection"
+    alt="Stripe connection expanded to display operations before selection"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_04_operations_panel.png'),
-        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_04_operations_panel.png'),
+        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_04_operations_panel.png'),
+        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_04_operations_panel.png'),
     }}
 />
 
-4. Search for **customers** to filter the operations list.
-5. Select **Returns a list of your customers** (`get` operation) from the filtered results, then configure the following:
+3. Select **Get Balance**. The operation has no required parameters.
 
-- **Result** : Name of the variable to store the response; set to `customerList`
+- **Result** : Set it to `balance`, the variable that stores the returned balance.
 
 <ThemedImage
-    alt="Stripe get operation configuration filled with all values"
+    alt="Stripe Get Balance operation with all values entered before saving"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_05_operation_filled.png'),
-        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_05_operation_filled.png'),
+        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_05_operation_form.png'),
+        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_05_operation_form.png'),
     }}
 />
 
-Select **Save** to add the operation to the flow.
+4. Select **Save**.
+
+### Step 8: Log the Get Balance result
+
+1. Select the **+** below the **Get Balance** node.
+2. Under **Logging**, select **Log Info**.
+3. Switch **Msg** to **Expression**, enter `balance.toString()`, and select **Save**.
 
 <ThemedImage
-    alt="Completed Stripe automation flow"
+    alt="Completed Stripe flow with the configured operation"
     sources={{
-        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_06_completed_flow.png'),
-        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/stripe_screenshot_06_completed_flow.png'),
+        light: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_06_completed_flow.png'),
+        dark: useBaseUrl('/img/connectors/catalog/finance-accounting/stripe/ballerinax_stripe_screenshot_06_completed_flow.png'),
     }}
 />
 
@@ -133,8 +149,7 @@ Try this sample in WSO2 Integration Platform.
 
 ## More code examples
 
-The `ballerinax/stripe` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-stripe/tree/main/examples), covering various Stripe functionalities.
+The Stripe connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-stripe/tree/main/examples).
 
-1. [Manage Stripe payments](https://github.com/ballerina-platform/module-ballerinax-stripe/tree/main/examples/manage-payments): Manage business payments with Stripe.
-
-2. [Manage one-time charges](https://github.com/ballerina-platform/module-ballerinax-stripe/tree/main/examples/manage-one-time-charges): Manage one-time charges with Stripe.
+1. [Manage Stripe payments](https://github.com/ballerina-platform/module-ballerinax-stripe/tree/main/examples/manage_payments) - Create a customer, take a payment with a payment intent, confirm it and refund it.
+2. [Manage one-time charges](https://github.com/ballerina-platform/module-ballerinax-stripe/tree/main/examples/manage_one_time_charges) - Create, retrieve and refund a one-time charge.
