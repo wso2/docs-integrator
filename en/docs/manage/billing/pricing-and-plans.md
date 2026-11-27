@@ -26,40 +26,66 @@ Choreo Cloud bills the resources you use as part of your existing subscription. 
 3. In the left navigation menu, click **Billing**, then click the **Usage** tab.
 
 <ThemedImage
-    alt="Billing Usage tab for Choreo Integration showing Transactions, Automation Core Minutes, AI Agent Actions, and shared resource counts"
+    alt="Billing Usage tab for Choreo Integration showing Transactions, Automation Core Minutes, AI Agent Actions, Integrations, AI Agents, Connectors, and shared resource counts with their quotas and percentage used"
     sources={{
         light: useBaseUrl('/img/manage/cloud/billing/billing-usage.png'),
         dark: useBaseUrl('/img/manage/cloud/billing/billing-usage.png'),
     }}
 />
 
-{/* TODO(v3): the Usage tab has a product selector (set to Choreo Integration here) - didn't check what the other Choreo Cloud products (AI & Agent Management, API Management, Identity & Access Management) show under it, since this docs site covers Choreo Integration only. */}
+Each metric shows how much of your plan's quota you've used, and when it resets. A metric with no stated quota, like **Connectors** here, is unlimited on the current plan.
+
+{/* TODO(v3): the Usage tab has a product selector (set to Choreo Integration here) - didn't check what the other Choreo Cloud products (AI & Agent Management, API Management, Identity & Access Management) show under it, since this docs site covers Choreo Integration only. The quotas shown (Transactions 1,000,000, Automation Core Minutes 500, AI Agent Actions 1,000, Integrations 5, AI Agents 5, Developers 5) are from a Free Trial organization - the Acceptable Usage Policy doesn't currently list these as rows (only Integrations is implied, via the FAQ's "up to five free integrations"). Worth reconciling with the AUP in a follow-up pass. */}
 
 ## Upgrade a plan
 
-In **Settings** > **Billing**, the **Subscriptions** tab lists your organization's subscriptions, including Choreo Integration.
+1. Sign in to [Choreo Cloud](https://console.cloud.choreolabs.com).
+2. Open the apps grid at the top left, then under **Manage**, click **Settings**.
+3. In the left navigation menu, click **Billing**. The **Subscriptions** tab lists your organization's subscriptions, including Choreo Integration.
 
-<ThemedImage
-    alt="Billing Subscriptions tab listing Choreo AI & Agent Management, Choreo API Management, Choreo Identity & Access Management, and Choreo Integration, each with a Change plan button"
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/billing/billing-subscriptions.png'),
-        dark: useBaseUrl('/img/manage/cloud/billing/billing-subscriptions.png'),
-    }}
-/>
+    <ThemedImage
+        alt="Billing Subscriptions tab listing Choreo AI & Agent Management, Choreo API Management, Choreo Identity & Access Management, and Choreo Integration, each on a 30-Day Free Trial with a Change plan button"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/billing/billing-subscriptions.png'),
+            dark: useBaseUrl('/img/manage/cloud/billing/billing-subscriptions.png'),
+        }}
+    />
 
-Choreo Integration's plan is managed by Choreo Cloud: its **Change plan** button is disabled, and hovering it explains why.
+4. Next to Choreo Integration, click **Change plan**. The dialog shows your current plan and the available options.
 
-<ThemedImage
-    alt="Disabled Change plan button for Choreo Integration with a tooltip: This plan is managed by Choreo Cloud. Contact support to make changes."
-    sources={{
-        light: useBaseUrl('/img/manage/cloud/billing/change-plan-managed-tooltip.png'),
-        dark: useBaseUrl('/img/manage/cloud/billing/change-plan-managed-tooltip.png'),
-    }}
-/>
+    <ThemedImage
+        alt="Change plan dialog showing the current 30-Day Free Trial plan and the Extend my trial and Enterprise options, with neither selected yet"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/billing/change-plan-choose.png'),
+            dark: useBaseUrl('/img/manage/cloud/billing/change-plan-choose.png'),
+        }}
+    />
 
-To upgrade your subscription plan, contact [Choreo Cloud support](https://choreolabs.com/contact/).
+5. Select **Enterprise**, then click **Continue to contact details**.
 
-{/* TODO(v3): the other three subscriptions on this org's Billing page (AI & Agent Management, API Management, Identity & Access Management - separate Choreo Cloud products, out of scope for these Integration docs) DO have a working self-service Change plan dialog, but while on a 30-Day Free Trial it only offers "Extend my trial" (free, request-based, approved within 1 business day) or "Enterprise" (custom annual contract, a Choreo Cloud representative contacts you within 1 business day) - no instantly-selectable "Growth" plan appeared anywhere, despite the Acceptable Usage Policy documenting a 3-tier Free Trial/Growth/Enterprise structure. Didn't check what the dialog looks like from an active Growth or Enterprise plan, or whether Growth is only ever assigned by a sales conversation rather than chosen in this dialog. */}
+    <ThemedImage
+        alt="Change plan dialog with the Enterprise plan selected and a Continue to contact details button"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/billing/change-plan-enterprise-selected.png'),
+            dark: useBaseUrl('/img/manage/cloud/billing/change-plan-enterprise-selected.png'),
+        }}
+    />
+
+6. Fill in your contact details, then click **Send request to sales**.
+
+    <ThemedImage
+        alt="Contact details step of the Change plan dialog with name, work email, phone, job role, company, and country fields, and a summary of the Enterprise plan being requested"
+        sources={{
+            light: useBaseUrl('/img/manage/cloud/billing/change-plan-contact-details.png'),
+            dark: useBaseUrl('/img/manage/cloud/billing/change-plan-contact-details.png'),
+        }}
+    />
+
+A Choreo Cloud representative reviews your request and contacts you within 1 business day. Your trial continues as usual until it ends. You can also reach out directly to [Choreo Cloud support](https://choreolabs.com/contact/).
+
+Once your organization is on a plan that Choreo Cloud manages directly, **Change plan** may become disabled; contact support to make further changes.
+
+{/* TODO(v3): on the Choose a plan step, a Free Trial subscription only ever offered "Extend my trial" (free, request-based, approved within 1 business day) or "Enterprise" (the annual-contract request flow documented above) - no instantly-selectable "Growth" plan appeared anywhere, despite the Acceptable Usage Policy documenting a 3-tier Free Trial/Growth/Enterprise structure. Didn't check what the dialog looks like from an active Growth or Enterprise plan, or whether Growth is only ever assigned by a sales conversation rather than chosen in this dialog. Also didn't check the other three subscriptions' (AI & Agent Management, API Management, Identity & Access Management) own upgrade flows beyond this same Choose a plan step, since they're separate Choreo Cloud products out of scope for these Integration docs. */}
 
 ## What's next
 
