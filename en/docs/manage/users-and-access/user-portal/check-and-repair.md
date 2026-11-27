@@ -1,7 +1,5 @@
 ---
 sidebar_position: 3
-sidebar_custom_props:
-  separatorBefore: "Set Up"
 title: Check Status
 description: "Check whether the User Portal is enabled and active for an environment in Choreo Integration, and deprovision it if you no longer need it."
 keywords: [choreo cloud, user portal, status, deprovision, identity platform]
