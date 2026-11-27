@@ -108,3 +108,64 @@ Many countries require identity documentation for phone number compliance. See T
            dark: useBaseUrl('/img/connectors/catalog/communication/twilio/setup/get-credentails.png'),
        }}
    />
+
+## Configuring Twilio status callbacks
+
+To receive call and message status changes with the `ballerinax/twilio.trigger` package, ask Twilio to send status callbacks to your listener, and give the listener your Auth Token and its public base URL.
+
+The listener serves call status callbacks at `/callStatus` and message status callbacks at `/smsStatus`, so the URLs you give Twilio are the public base URL followed by one of those paths.
+
+### Prerequisites
+
+- A Twilio account with a phone number. See the steps above.
+- A public URL for your listener. Twilio must reach it over the internet. For local testing, a tunnel such as [ngrok](https://ngrok.com/) gives your machine a public URL:
+
+  ```bash
+  ngrok http 8090
+  ```
+
+  The **Forwarding** URL it prints, such as `https://abc123.ngrok-free.app`, is your public base URL.
+
+### Configure the listener
+
+1. In the [Twilio Console](https://console.twilio.com/), find **Account Info** on the home page and copy the **Auth Token**. Twilio signs every callback with it ([how Twilio signs requests](https://www.twilio.com/docs/usage/webhooks/webhooks-security)).
+2. Set the Auth Token as the listener's `webhookSecret`, and the public base URL as `webhookBaseUrl`. Use exactly the scheme and host Twilio calls, without a trailing slash, because Twilio signs the full URL. The listener adds the path and the query string it receives.
+
+### Receive message status callbacks
+
+Send a message with `StatusCallback` set to `<public base URL>/smsStatus`. On a trial account, `To` must be a number you have verified:
+
+```bash
+curl -X POST "https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID/Messages.json" \
+  --data-urlencode "From=<your Twilio number>" \
+  --data-urlencode "To=<your phone number>" \
+  --data-urlencode "Body=Hello from WSO2 Integrator" \
+  --data-urlencode "StatusCallback=<public base URL>/smsStatus" \
+  -u "$TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN"
+```
+
+For every message sent through a Messaging Service, set the service's **Delivery Status Callback** under **Integration** instead. See [Track the message status of outbound messages](https://www.twilio.com/docs/messaging/guides/track-outbound-message-status).
+
+### Receive call status callbacks
+
+Create a call with `StatusCallback` set to `<public base URL>/callStatus`. Without `StatusCallbackEvent`, Twilio sends only the final status:
+
+```bash
+curl -X POST "https://api.twilio.com/2010-04-01/Accounts/$TWILIO_ACCOUNT_SID/Calls.json" \
+  --data-urlencode "From=<your Twilio number>" \
+  --data-urlencode "To=<your phone number>" \
+  --data-urlencode "Url=http://demo.twilio.com/docs/voice.xml" \
+  --data-urlencode "StatusCallback=<public base URL>/callStatus" \
+  --data-urlencode "StatusCallbackEvent=initiated ringing answered completed" \
+  -u "$TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN"
+```
+
+For calls to your Twilio number, set **Call status changes** under **Voice Configuration** on the number's **Configure** tab to `<public base URL>/callStatus` instead. Twilio reports `answered` as `in-progress`. See [Voice webhooks](https://www.twilio.com/docs/usage/webhooks/voice-webhooks).
+
+### Check the callbacks
+
+Each callback shows up in the ngrok console as `POST /smsStatus` or `POST /callStatus` with `200 OK`, and your callback runs. ngrok's request inspector at `http://127.0.0.1:4040` shows each callback's parameters.
+
+:::warning
+A `401` for every callback means the signature check failed. Check that `webhookSecret` is your current Auth Token and that `webhookBaseUrl` matches the URL Twilio calls. If you rotate the Auth Token in the Twilio Console, update `webhookSecret` too.
+:::

@@ -32,21 +32,18 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 ## Triggers
 
-Triggers allow your integration to react to Shopify store activity in real time. The connector provides a webhook listener that receives Shopify notifications and invokes your service callbacks automatically when subscribed order, customer, product, or fulfillment events occur.
+Triggers allow your integration to react to Shopify activity in real time. The separate `ballerinax/shopify.trigger` package provides a webhook listener that verifies each delivery from Shopify with the app's client secret and calls your service callbacks. It covers 15 events through 4 service types.
 
-Supported trigger events:
+Service types:
 
-| Event | Callback | Description |
-|-------|----------|-------------|
-| Order created | `onOrdersCreate` | Fired when a Shopify order is created. |
-| Order paid | `onOrdersPaid` | Fired when a Shopify order is paid. |
-| Order updated | `onOrdersUpdated` | Fired when a Shopify order is updated. |
-| Customer created | `onCustomersCreate` | Fired when a Shopify customer is created. |
-| Customer updated | `onCustomersUpdate` | Fired when a Shopify customer is updated. |
-| Product created | `onProductsCreate` | Fired when a Shopify product is created. |
-| Fulfillment created | `onFulfillmentsCreate` | Fired when a Shopify fulfillment is created. |
+| Service type | Callbacks |
+|--------------|-----------|
+| `OrdersService` | `onOrdersCreate`, `onOrdersCancelled`, `onOrdersFulfilled`, `onOrdersPaid`, `onOrdersPartiallyFulfilled`, `onOrdersUpdated` |
+| `CustomersService` | `onCustomersCreate`, `onCustomersDisable`, `onCustomersEnable`, `onCustomersUpdate`, `onCustomersMarketingConsentUpdate` |
+| `ProductsService` | `onProductsCreate`, `onProductsUpdate` |
+| `FulfillmentsService` | `onFulfillmentsCreate`, `onFulfillmentsUpdate` |
 
-See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the event payload structure.
+See the **[Trigger Reference](triggers.md)** for listener configuration, every service type and callback, and the event payload structure, and the [Shopify](product://integrator/develop-and-test/integration-artifacts/event-driven-integration/shopify) guide to build a Shopify event integration in WSO2 Integrator.
 
 ## Documentation
 

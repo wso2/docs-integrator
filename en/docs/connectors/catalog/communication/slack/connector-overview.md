@@ -29,6 +29,24 @@ Actions are operations you invoke on Slack from your integration: posting messag
 
 See the **[Action Reference](actions.md)** for the full list of operations, parameters, and sample code for each client.
 
+## Triggers
+
+Triggers allow your integration to react to Slack activity in real time. The separate `ballerinax/slack.trigger` package provides a webhook listener that verifies each delivery from Slack with the app's signing secret and calls your service callbacks. It covers 84 events through 27 service types.
+
+Commonly used service types:
+
+| Service type | Callbacks |
+|--------------|-----------|
+| `AppService` | `onAppMention`, `onAppUninstalled`, `onAppContextChanged`, `onAppDeleted`, `onAppHomeOpened`, `onAppInstalled`, `onAppRequested`, `onAppUninstalledTeam` |
+| `ChannelService` | `onChannelArchive`, `onChannelCreated`, `onChannelDeleted`, `onChannelHistoryChanged`, `onChannelLeft`, `onChannelRename`, `onChannelIdChanged`, `onChannelShared`, `onChannelUnshared` |
+| `FileService` | `onFileChange`, `onFileCommentDeleted`, `onFileCreated`, `onFileDeleted`, `onFilePublic`, `onFileShared`, `onFileUnshared` |
+| `MemberService` | `onMemberJoinedChannel`, `onMemberLeftChannel` |
+| `MessageService` | `onMessage`, `onMessageMetadataDeleted`, `onMessageMetadataPosted`, `onMessageMetadataUpdated` |
+| `ReactionService` | `onReactionAdded`, `onReactionRemoved` |
+| `TeamService` | `onTeamDomainChange`, `onTeamJoin`, `onTeamRename`, `onTeamAccessGranted`, `onTeamAccessRevoked` |
+
+See the **[Trigger Reference](triggers.md)** for listener configuration, every service type and callback, and the event payload structure, and the [Slack](product://integrator/develop-and-test/integration-artifacts/event-driven-integration/slack) guide to build a Slack event integration in WSO2 Integrator.
+
 ## Documentation
 
 * **[Setup Guide](setup-guide.md)**: This guide walks you through creating a Slack App and obtaining the OAuth token required to use the Slack connector.

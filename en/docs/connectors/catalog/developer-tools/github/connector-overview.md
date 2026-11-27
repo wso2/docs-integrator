@@ -35,27 +35,27 @@ See the **[Action Reference](actions.md)** for the full list of operations, para
 
 ## Event-driven integration
 
-To receive GitHub webhook events (issues, pull requests, releases, pushes, and more), use the separate [`ballerinax/trigger.github`](https://github.com/ballerina-platform/module-ballerinax-trigger.github) package. It provides a `Listener` and service types (`IssuesService`, `PullRequestService`, and others) that route incoming GitHub webhook callbacks to typed event handlers.
+To receive GitHub webhook events (pushes, pull requests, issues, releases, workflow runs and more), use the separate [`ballerinax/github.trigger`](https://central.ballerina.io/ballerinax/github.trigger) package. It provides a `Listener` and a service type per GitHub event (`PushService`, `PullRequestService`, `IssuesService` and others) that route each webhook to a typed event handler.
 
 See the [GitHub Webhooks](product://integrator/develop-and-test/integration-artifacts/event-driven-integration/github-webhooks) guide for configuration and usage.
 
 ## Triggers
 
-Triggers allow your integration to react to GitHub repository activity in real time. The separate `ballerinax/trigger.github` package provides a webhook listener that receives GitHub events and invokes your service callbacks automatically when issues, pull requests, releases, pushes, and other repository events occur.
+Triggers allow your integration to react to GitHub repository and organization activity in real time. The separate `ballerinax/github.trigger` package provides a webhook listener that verifies each delivery from GitHub and invokes your service callbacks when pushes, pull requests, issues, releases, workflow runs and other events occur. It covers 75 GitHub events through 265 callbacks.
 
-Supported trigger events:
+Commonly used trigger events:
 
-| Event | Callback | Description |
-|-------|----------|-------------|
-| Issue opened | `onOpened` | Fired when a GitHub issue is opened. |
-| Issue closed | `onClosed` | Fired when a GitHub issue is closed. |
-| Issue comment created | `onCreated` | Fired when a comment is added to an issue or pull request. |
-| Pull request opened | `onOpened` | Fired when a pull request is opened. |
-| Pull request review submitted | `onSubmitted` | Fired when a pull request review is submitted. |
-| Release published | `onPublished` | Fired when a repository release is published. |
-| Push received | `onPush` | Fired when commits are pushed to a repository. |
+| Event | Service type | Callback | Description |
+|-------|--------------|----------|-------------|
+| Push | `PushService` | `onPush` | Fired when commits or tags are pushed to a repository. |
+| Pull request opened | `PullRequestService` | `onPullRequestOpened` | Fired when a pull request is opened. |
+| Pull request review submitted | `PullRequestReviewService` | `onPullRequestReviewSubmitted` | Fired when a pull request review is submitted. |
+| Issue opened | `IssuesService` | `onIssuesOpened` | Fired when an issue is opened. |
+| Issue comment created | `IssueCommentService` | `onIssueCommentCreated` | Fired when a comment is added to an issue or pull request. |
+| Release published | `ReleaseService` | `onReleasePublished` | Fired when a release is published. |
+| Workflow run completed | `WorkflowRunService` | `onWorkflowRunCompleted` | Fired when a GitHub Actions workflow run completes. |
 
-See the **[Trigger Reference](triggers.md)** for listener configuration, service callbacks, and the event payload structure.
+See the **[Trigger Reference](triggers.md)** for listener configuration, every service type and callback, and the event payload structure.
 
 ## Documentation
 
