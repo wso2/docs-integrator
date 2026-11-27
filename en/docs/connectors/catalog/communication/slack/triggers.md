@@ -10,7 +10,7 @@ connector_name: "slack"
 
 The `ballerinax/slack.trigger` package receives events from the Slack Events API. When something happens in a workspace your app is installed in, such as a message, a mention or a reaction, Slack sends an HTTP request to your integration, and the listener calls the callback for that event with a typed payload.
 
-This reference covers `ballerinax/slack.trigger` version 0.9.0. The following components work together:
+This reference covers `ballerinax/slack.trigger` version 1.0.0. The following components work together:
 
 | Component | Role |
 |-----------|------|

@@ -10,7 +10,7 @@ connector_name: "aayu.mftg.as2.trigger"
 
 The `ballerinax/aayu.mftg.as2.trigger` package receives the AS2 webhooks of Aayu MFT Gateway. When an AS2 message is received from a trading partner, sent to one, fails to send, or is sent without a delivery confirmation, MFT Gateway sends an HTTP request to your integration, and the listener calls the callback for that event with a typed payload.
 
-This reference covers `ballerinax/aayu.mftg.as2.trigger` version 0.9.0. The following components work together:
+This reference covers `ballerinax/aayu.mftg.as2.trigger` version 1.0.0. The following components work together:
 
 | Component | Role |
 |-----------|------|

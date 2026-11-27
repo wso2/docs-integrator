@@ -10,7 +10,7 @@ connector_name: "github"
 
 The `ballerinax/github.trigger` package receives GitHub webhooks. When something happens in a repository or organization, such as a push, a pull request, a release or a workflow run, GitHub sends an HTTP request to your integration, and the listener calls the callback for that event with a typed payload. It replaces the earlier `ballerinax/trigger.github` package.
 
-This reference covers `ballerinax/github.trigger` version 0.9.0. The following components work together:
+This reference covers `ballerinax/github.trigger` version 1.0.1. The following components work together:
 
 | Component | Role |
 |-----------|------|

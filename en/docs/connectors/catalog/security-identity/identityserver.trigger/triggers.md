@@ -10,7 +10,7 @@ connector_name: "identityserver.trigger"
 
 The `ballerinax/identityserver.trigger` package receives the webhooks of WSO2 Identity Server and Asgardeo. When a user signs in, registers, or is changed, or a token, session, credential, consent, role or organization changes, the server sends an HTTP request to your integration, and the listener calls the callback for that event with a typed payload.
 
-This reference covers `ballerinax/identityserver.trigger` version 1.0.0. The following components work together:
+This reference covers `ballerinax/identityserver.trigger` version 1.0.1. The following components work together:
 
 | Component | Role |
 |-----------|------|

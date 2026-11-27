@@ -10,7 +10,7 @@ connector_name: "quickbooks.trigger"
 
 The `ballerinax/quickbooks.trigger` package receives QuickBooks Online webhooks. When an accounting entity such as an invoice, a customer or a payment is created, updated, deleted, voided, emailed or merged, QuickBooks sends an HTTP request to your integration, and the listener calls the callback for that event with a typed payload.
 
-This reference covers `ballerinax/quickbooks.trigger` version 0.9.0. The following components work together:
+This reference covers `ballerinax/quickbooks.trigger` version 1.0.0. The following components work together:
 
 | Component | Role |
 |-----------|------|

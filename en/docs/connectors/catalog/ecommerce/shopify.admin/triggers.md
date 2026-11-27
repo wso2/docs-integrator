@@ -10,7 +10,7 @@ connector_name: "shopify.admin"
 
 The `ballerinax/shopify.trigger` package receives Shopify webhooks. When an order, customer, product or fulfillment changes in a store, Shopify sends an HTTP request to your integration, and the listener calls the callback for that topic with a typed payload. It replaces the earlier `ballerinax/trigger.shopify` package.
 
-This reference covers `ballerinax/shopify.trigger` version 0.9.0. The following components work together:
+This reference covers `ballerinax/shopify.trigger` version 1.0.0. The following components work together:
 
 | Component | Role |
 |-----------|------|

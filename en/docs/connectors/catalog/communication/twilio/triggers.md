@@ -11,7 +11,7 @@ connector_version: "5.0.x"
 
 The `ballerinax/twilio.trigger` package receives Twilio status callbacks. As a call or a message moves through its states, such as `ringing`, `completed`, `sent` or `delivered`, Twilio sends an HTTP request to your integration, and the listener calls the callback for that status with a typed payload. It replaces the earlier `ballerinax/trigger.twilio` package.
 
-This reference covers `ballerinax/twilio.trigger` version 0.9.0. The following components work together:
+This reference covers `ballerinax/twilio.trigger` version 1.0.0. The following components work together:
 
 | Component | Role |
 |-----------|------|

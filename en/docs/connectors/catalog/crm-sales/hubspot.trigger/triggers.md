@@ -10,7 +10,7 @@ connector_name: "hubspot.trigger"
 
 The `ballerinax/hubspot.trigger` package receives HubSpot webhooks. When a CRM object such as a contact, company or deal is created, changed or deleted, or a conversation gets a new message, HubSpot sends an HTTP request to your integration, and the listener calls the callback for that event with a typed payload. It replaces the earlier `ballerinax/trigger.hubspot` package.
 
-This reference covers `ballerinax/hubspot.trigger` version 0.13.0. The following components work together:
+This reference covers `ballerinax/hubspot.trigger` version 1.0.0. The following components work together:
 
 | Component | Role |
 |-----------|------|
