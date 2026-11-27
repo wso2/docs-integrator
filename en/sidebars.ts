@@ -374,6 +374,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'DocuSign Monitor',
+          link: { type: 'doc', id: 'catalog/productivity-collaboration/docusign.monitor/overview' },
+          items: [
+            'catalog/productivity-collaboration/docusign.monitor/setup-guide',
+            'catalog/productivity-collaboration/docusign.monitor/action-reference',
+            'catalog/productivity-collaboration/docusign.monitor/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Elastic Cloud',
           link: { type: 'doc', id: 'catalog/cloud-infrastructure/elastic.elasticcloud/elastic-cloud-connector-overview' },
           items: [
