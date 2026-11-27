@@ -1045,6 +1045,16 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
+          label: 'Microsoft Outlook Calendar',
+          link: { type: 'doc', id: 'catalog/productivity-collaboration/microsoft.outlook.calendar/overview' },
+          items: [
+            'catalog/productivity-collaboration/microsoft.outlook.calendar/setup-guide',
+            'catalog/productivity-collaboration/microsoft.outlook.calendar/action-reference',
+            'catalog/productivity-collaboration/microsoft.outlook.calendar/example',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Microsoft Outlook Mail',
           link: { type: 'doc', id: 'catalog/communication/microsoft.outlook.mail/overview' },
           items: [
